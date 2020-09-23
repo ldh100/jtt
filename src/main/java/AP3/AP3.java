@@ -5,14 +5,13 @@
  */
 package AP3;
 import A.A;
-import A.tools;
+import A.Func;
 import static A.A.*;
 import com.ullink.slack.simpleslackapi.SlackChannel;
 import com.ullink.slack.simpleslackapi.SlackMessageHandle;
 import com.ullink.slack.simpleslackapi.SlackSession;
 import com.ullink.slack.simpleslackapi.impl.SlackSessionFactory;
 import java.awt.Cursor;
-import java.beans.PropertyVetoException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -29,8 +28,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import org.apache.http.HttpEntity;
@@ -57,14 +54,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * @author Oleg.Spozito
  */
 public class AP3 extends javax.swing.JInternalFrame {
-
     /**
      * Creates new form AP3
      */
     public AP3() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -132,7 +127,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         cmbAPP = new javax.swing.JComboBox<>();
         btnLOG = new javax.swing.JButton();
         btnFAILS = new javax.swing.JButton();
-        btnAPI = new javax.swing.JButton();
+        btnEXCEL = new javax.swing.JButton();
         _headless = new javax.swing.JCheckBox();
         btnSAVE_OPT = new javax.swing.JButton();
         label8 = new java.awt.Label();
@@ -293,7 +288,6 @@ public class AP3 extends javax.swing.JInternalFrame {
 
         _login.setSelected(true);
         _login.setText("Login > Dashboard");
-        _login.setActionCommand("Login > Dashboard");
         _login.setEnabled(false);
         _login.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
@@ -585,15 +579,20 @@ public class AP3 extends javax.swing.JInternalFrame {
                 btnFAILSMouseClicked(evt);
             }
         });
-        jPanel3.add(btnFAILS, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 32, 92, -1));
-
-        btnAPI.setText("=====");
-        btnAPI.addActionListener(new java.awt.event.ActionListener() {
+        btnFAILS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAPIActionPerformed(evt);
+                btnFAILSActionPerformed(evt);
             }
         });
-        jPanel3.add(btnAPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 92, -1));
+        jPanel3.add(btnFAILS, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 32, 92, -1));
+
+        btnEXCEL.setText("Excel Rep");
+        btnEXCEL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEXCELActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnEXCEL, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 92, -1));
 
         _headless.setText("Headless >");
         _headless.setToolTipText("");
@@ -722,18 +721,81 @@ public class AP3 extends javax.swing.JInternalFrame {
             java.awt.Desktop.getDesktop().open(aLog);
         }
         catch (IOException ex) {
-            Logger.getLogger(AP3.class.getName()).log(Level.SEVERE, null, ex);
+            txtLOG.append("\r\n\r\n=== Show Log > ERROR: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnLOGActionPerformed
 
-    private void btnAPIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAPIActionPerformed
+    private void btnEXCELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEXCELActionPerformed
+//        try {
+//            Send_File_to_Slack("1", "2", "3");
+//        } catch (IOException ex) {
+//            txtLOG.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
+//        }
+        Report();
+    }//GEN-LAST:event_btnEXCELActionPerformed
+    private void Report(){
+        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        String EXX = "";
         try {
-            Send_File_to_Slack("1", "2", "3");
-        } catch (IOException ex) {
-            Logger.getLogger(AP3.class.getName()).log(Level.SEVERE, null, ex);
+            ResultSet rs = conn.createStatement().executeQuery("SELECT TOP 1 [Excel] FROM [dbo].[aw_result] WHERE [app] = 'AP3_" + env + "' ORDER By qID DESC");
+            rs.next();
+            EXX = rs.getString(1);
+        }catch (Exception ex){
+            txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
         }
-    }//GEN-LAST:event_btnAPIActionPerformed
+        if ("".equals(EXX.trim()) || "None".equals(EXX.trim())){
+            setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            txtLOG.append("\r\n\r\n=== Report > Not Excel");
+            return;
+        }   
+        try {
+            int col = 9; // 8 + 1 new JIRA = 9
+            String Top_Row = EXX.substring(0, EXX.indexOf("\r\n"));
+            EXX = EXX.substring(EXX.indexOf("\r\n") + 2);
+        
+            String[] lines = EXX.split(System.getProperty("line.separator"));
+            int l = lines.length;
+            String[][] Values = new String[l][col];
+            int n = 1;
+            for (int i = 0; i < l; i++)
+            {
+                String[] v = lines[i].split("\t");
+                System.arraycopy(v, 0, Values[i], 0, v.length); 
+//                for (int j = 0; j < v.length; j++){
+//                    Values[i][j] = v[j];
+//                } 
+            }
 
+            String Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+            Func.fExcel((l - 1), col, Values, "AP3_" + env + "_" + Date, Top_Row, 0, 0, null, " ", " ");
+
+
+//                Toolkit toolkit = Toolkit.getDefaultToolkit();
+//                Clipboard clipboard = null;
+//                try{
+//                    clipboard = toolkit.getSystemClipboard();
+//                    clipboard.setContents( new StringSelection(""), null); // 900009
+//                }catch (Exception ex){
+//                    Thread.sleep(20);
+//                    clipboard = toolkit.getSystemClipboard();
+//                    clipboard.setContents( new StringSelection(""), null);
+//                    //clipboard.setContents( DV1["app", DV1.SelectedCells[0].RowIndex].Value.ToString() + "_" + Date);  
+//                }
+
+//            File ExcelLog = new File("ExcelLog.txt");
+//            if (ExcelLog.createNewFile()) {
+//                txtLOG.append("\r\n\r\n=== Report > File created: " + ExcelLog.getName());
+//            } else {
+//                txtLOG.append("\r\n\r\n=== Report > File already exists.");
+//            }
+//            Files.write(Paths.get(ExcelLog.getPath()), EXX.getBytes());
+//            java.awt.Desktop.getDesktop().open(ExcelLog);
+        } catch (Exception ex) {
+            txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
+        }
+        Runtime.getRuntime().gc();
+        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
     private void btnFAILSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFAILSMouseClicked
         try {
             File aFailed = new File("aFailed.txt");
@@ -743,10 +805,9 @@ public class AP3 extends javax.swing.JInternalFrame {
                 System.out.println("File already exists.");
             }
             Files.write(Paths.get(aFailed.getPath()), F.getBytes());
-
             java.awt.Desktop.getDesktop().open(aFailed);
         } catch (IOException ex) {
-            Logger.getLogger(AP3.class.getName()).log(Level.SEVERE, null, ex);
+            txtLOG.append("\r\n\r\n=== Show Failed > ERROR: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnFAILSMouseClicked
 
@@ -757,7 +818,7 @@ public class AP3 extends javax.swing.JInternalFrame {
 //        try {
 //            this.setSelected(true);
 //        } catch (PropertyVetoException ex) {
-//            Logger.getLogger(AP3.class.getName()).log(Level.SEVERE, null, ex);
+//            txtLOG.append("\r\n\r\n=== Open AP3 form > ERROR: " + ex.getMessage());
 //        } 
         load = false;
 //        this.revalidate();
@@ -790,6 +851,10 @@ public class AP3 extends javax.swing.JInternalFrame {
         GetSites_API();
         GetGroups_API();
     }//GEN-LAST:event_cmbENVActionPerformed
+
+    private void btnFAILSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFAILSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFAILSActionPerformed
 
     private boolean Driver() {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -977,8 +1042,8 @@ public class AP3 extends javax.swing.JInternalFrame {
                             t_min = am0[0] / (double)1000;
                             t_avg = (total / am0.length) / (double)1000;
                             t_max = am0[am0.length - 1]  / (double)1000; 
-                            p_50 = tools.p50(am0) / (double)1000;
-                            p_90 = tools.p90(am0) / (double)1000;
+                            p_50 = Func.p50(am0) / (double)1000;
+                            p_90 = Func.p90(am0) / (double)1000;
                             
                             DecimalFormat df = new DecimalFormat("#.##");
                             t_rep += "=== Total Calls: " + t_calls + ", Response Times (sec) - Min: " + df.format(t_min) +
@@ -1732,7 +1797,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _site;
     private javax.swing.JCheckBox _site_new;
     private javax.swing.JCheckBox _users;
-    private javax.swing.JButton btnAPI;
+    private javax.swing.JButton btnEXCEL;
     private javax.swing.JButton btnFAILS;
     private javax.swing.JButton btnLOG;
     private javax.swing.JButton btnRUN;

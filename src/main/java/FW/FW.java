@@ -6,7 +6,7 @@
 package FW;
 import FW.*;
 import A.A;
-import A.tools;
+import A.Func;
 import static A.A.*;
 import com.ullink.slack.simpleslackapi.SlackChannel;
 import com.ullink.slack.simpleslackapi.SlackMessageHandle;
@@ -866,8 +866,8 @@ public class FW extends javax.swing.JInternalFrame {
                             t_min = am0[0] / (double)1000;
                             t_avg = (total / am0.length) / (double)1000;
                             t_max = am0[am0.length - 1]  / (double)1000; 
-                            p_50 = tools.p50(am0) / (double)1000;
-                            p_90 = tools.p90(am0) / (double)1000;
+                            p_50 = Func.p50(am0) / (double)1000;
+                            p_90 = Func.p90(am0) / (double)1000;
                             
                             DecimalFormat df = new DecimalFormat("#.##");
                             t_rep += "=== Total Calls: " + t_calls + ", Response Times (sec) - Min: " + df.format(t_min) +
