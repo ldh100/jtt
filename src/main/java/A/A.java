@@ -53,6 +53,7 @@ public class A extends javax.swing.JFrame {
         jMenu_FW = new javax.swing.JMenu();
         WO = new javax.swing.JMenu();
         ORDERS = new javax.swing.JMenu();
+        Reports = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JTT");
@@ -117,6 +118,16 @@ public class A extends javax.swing.JFrame {
             }
         });
         jMenuBar1.add(ORDERS);
+
+        Reports.setText("Reports");
+        Reports.setContentAreaFilled(false);
+        Reports.setName("FW"); // NOI18N
+        Reports.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ReportsMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(Reports);
 
         setJMenuBar(jMenuBar1);
 
@@ -238,6 +249,10 @@ public class A extends javax.swing.JFrame {
         F_COUNT++; 
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_WOMouseClicked
+
+    private void ReportsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReportsMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ReportsMouseClicked
     private void Get_Version() {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         Version =  "?"; 
@@ -438,6 +453,7 @@ public class A extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu ORDERS;
+    private javax.swing.JMenu Reports;
     private javax.swing.JMenu WO;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenuBar jMenuBar1;
