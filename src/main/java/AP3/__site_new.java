@@ -127,6 +127,8 @@ public class __site_new {
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.Element_Click("Payment Info Click", L0.get(i), "no_jira");
                         if (FAIL) { return;} 
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Payment ID' text", "Payment ID", true,"no_jira"); 
+                        if (FAIL) { return;}                        
                     _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Payment Type' text", "Payment Type", true,"no_jira"); 
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Payment Type Prompt", "css", "[aria-label='Payment Type']", "placeholder", "no_jira");
@@ -159,7 +161,7 @@ public class __site_new {
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Choose Prompt", "css", "[aria-label='Plan Type']", "placeholder", "no_jira");
                          if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Plan Dropdown Open", "css", "[aria-label='Plan Type']", "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open Meal Plan Dropdown", "css", "[aria-label='Plan Type']", "no_jira");
                          if (FAIL) { return;}  
                     _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Plan Types' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
                         if (FAIL) { return;}                          
@@ -189,7 +191,7 @@ public class __site_new {
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.Element_Click("Loyalty Info Click", L0.get(i), "no_jira");
                         if (FAIL) { return;} 
-                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Loyalty Info' text", "Loyalty Info", true,"no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Loyalty Program' text", "Loyalty Program", true,"no_jira"); 
                         if (FAIL) { return;}
                     _t++; T.Find_Text("Find 'not enabled' text", "Loyalty is not enabled for this brand", true,"no_jira"); 
                         if (FAIL) { return;}

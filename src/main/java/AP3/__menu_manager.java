@@ -128,7 +128,7 @@ public class __menu_manager {
         _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
             if (FAIL) { return;}
             T_Index = -1;
-            for (int i = 0; i < L2.size(); i++) { // ============ L2 ======================================================================
+            for (int i = 0; i < L2.size(); i++) { 
                 _t++; T.Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", "no_jira"); 
                 if(t.trim().startsWith(GL_MENU)){
                     T_Index = i;
@@ -144,7 +144,6 @@ public class __menu_manager {
                 for (int j = 0; j < L1.size(); j++) {    
                    _t++; T.Element_Attribute("Local Menu (Index " + j + ") Name", L1.get(j), "textContent", "no_jira"); 
                 }                  
-           
             _t++; Thread.sleep((long) sleep); T.List_Child_E1_By_Path("Find " + GL_MENU + " 'View Global Modifiers Groups' button", L2, T_Index, "xpath", ".//button[@type='button'][2]", "no_jira"); 
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_Click(" 'View Global Modifiers Groups' Click", e1, "no_jira"); 
@@ -239,7 +238,7 @@ public class __menu_manager {
             // ================ Add New Modifiesr(s) 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click  'Add MODIFIER'", "xpath", "//*[contains(text(), 'Add MODIFIER')]", "no_jira"); 
                 if (FAIL) { return;}  
-            _t++; Thread.sleep((long) sleep); T.To_Bottom(" Scroll to bottom"); 
+            _t++; Thread.sleep((long) sleep); T.To_Bottom("no_jira"); 
                 if (FAIL) { return;}   
                 
             _t++; Thread.sleep((long) sleep); T.List_L0("Modifier Name Count", "css", "[aria-label='Item Name']", "no_jira");             
@@ -553,7 +552,7 @@ public class __menu_manager {
         _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
             if (FAIL) { return;}
         T_Index = -1;
-        for (int i = 0; i < L2.size(); i++) { // ============ L2 ======================================================================
+        for (int i = 0; i < L2.size(); i++) { 
             _t++; T.Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", "no_jira"); 
             if(t.trim().startsWith(GL_MENU)){
                 T_Index = i;

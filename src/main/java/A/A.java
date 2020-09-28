@@ -283,6 +283,7 @@ public class A extends javax.swing.JFrame {
     private void Get_User() {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         UserID = System.getProperty("user.name");
+        //UserID = "theleepan.sivabalasi";
         WsOS = System.getProperty("os.name");
         try {
             InetAddress addr;
@@ -397,6 +398,7 @@ public class A extends javax.swing.JFrame {
     public static Stopwatch sw1 = Stopwatch.createUnstarted();;
     public static String r_time = "";
 
+    public static String Ver = "";
     public static String url = "";
     public static String appId = "";
     public static String New_ID = "";

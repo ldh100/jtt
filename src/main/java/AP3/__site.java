@@ -421,6 +421,8 @@ public class __site {
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.Element_Click("Payment Info Click", L0.get(i), "no_jira");
                         if (FAIL) { return;} 
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Payment ID' text", "Payment ID", true,"no_jira"); 
+                        if (FAIL) { return;}                        
                     _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Payment Type' text", "Payment Type", true,"no_jira"); 
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Refunds Accepted' text", "Refunds Accepted?", true,"no_jira"); 
@@ -431,7 +433,7 @@ public class __site {
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.Element_Click("Mealplan Info Click", L0.get(i), "no_jira");
                         if (FAIL) { return;} 
-                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Mealplan Info' text", "Mealplan Info", true,"no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Meal Plan' text", "Meal Plan", true,"no_jira"); 
                         if (FAIL) { return;}
                       break;
                 case 3:
@@ -439,7 +441,7 @@ public class __site {
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.Element_Click("Loyalty Info Click", L0.get(i), "no_jira");
                         if (FAIL) { return;} 
-                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Loyalty Info' text", "Loyalty Info", true,"no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Loyalty Program' text", "Loyalty Program", true,"no_jira"); 
                         if (FAIL) { return;}
                     _t++; T.Find_Text("Find 'not enabled' text", "Loyalty is not enabled for this brand", true,"no_jira"); 
                         if (FAIL) { return;}
@@ -573,6 +575,8 @@ public class __site {
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.Element_Click("Payment Info Click", L0.get(i), "no_jira");
                         if (FAIL) { return;} 
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Payment ID' text", "Payment ID", true,"no_jira"); 
+                        if (FAIL) { return;}                        
                     _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Payment Type' text", "Payment Type", true,"no_jira"); 
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Payment Type Prompt", "css", "[aria-label='Payment Type']", "placeholder", "no_jira");
@@ -585,8 +589,6 @@ public class __site {
                             _t++; T.Element_Text("Available Payment Type:", L1.get(j), "no_jira");             
                             if (FAIL) { return;}
                         }  
-//                      _t++; Thread.sleep((long) sleep); T.Click_out_of_Visible_Element("Payment Type Dropdown Close", "xpath", "/html/body/div/div[9]/div/div/div",  "Right",4, 0, "no_jira");
-//                             if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Select Payment Type", "xpath", "//*[contains(text(), '" + "FreedomPay" + "')]", "no_jira");
                         if (FAIL) { return;}  
                     _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter FP Store ID", "css", "[aria-label='Freedom Pay Store ID']", "1471190011", "no_jira");
@@ -601,18 +603,20 @@ public class __site {
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.Element_Click("Mealplan Info Click", L0.get(i), "no_jira");
                         if (FAIL) { return;} 
-                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Mealplan Info' text", "Mealplan Info", true,"no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Meal Plan' text", "Meal Plan", true,"no_jira"); 
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Choose Prompt", "css", "[aria-label='Plan Type']", "placeholder", "no_jira");
                          if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Plan Dropdown Open", "css", "[aria-label='Plan Type']", "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open Meal Plan Dropdown", "css", "[aria-label='Plan Type']", "no_jira");
                          if (FAIL) { return;} 
-                    _t++; Thread.sleep((long) sleep); T.List_L1("Plan Types Count", "xpath", "/html/body/div/div[8]/div/div/div", "no_jira");             
-                        if (FAIL) { return;} 
+                    _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Plan Types' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
+                        if (FAIL) { return;}    
+                    Thread.sleep(500);// 
+                    _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Plan Types Count", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");     
                         for (int j = 0; j < L1.size(); j++) {
                             _t++; T.Element_Text("Available Meal Plan:", L1.get(j), "no_jira");             
                             if (FAIL) { return;}
-                        }  
+                        }   
                      _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Select Meal Plan", "xpath", "//*[contains(text(), '" + "Blackboard" + "')]", "no_jira");
                         if (FAIL) { return;}  
                     _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Plan Name", "css", "[aria-label='Plan Name']", "BLACKBOARD", "no_jira");
@@ -634,7 +638,7 @@ public class __site {
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.Element_Click("Loyalty Info Click", L0.get(i), "no_jira");
                         if (FAIL) { return;} 
-                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Loyalty Info' text", "Loyalty Info", true,"no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Loyalty Program' text", "Loyalty Program", true,"no_jira"); 
                         if (FAIL) { return;}
                     _t++; T.Find_Text("Find 'not enabled' text", "Loyalty is not enabled for this brand", true,"no_jira"); 
                         if (FAIL) { return;}

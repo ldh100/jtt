@@ -701,7 +701,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRUNActionPerformed
 
     private void cmbAPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAPPActionPerformed
-        //        app = cmbAPP.getSelectedItem().toString();
+        app = cmbAPP.getSelectedItem().toString();
         //        app = app.substring(0, app.indexOf(" ")).trim();
         GetSites_API();
     }//GEN-LAST:event_cmbAPPActionPerformed
@@ -796,6 +796,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         Runtime.getRuntime().gc();
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
+
     private void btnFAILSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFAILSMouseClicked
         try {
             File aFailed = new File("aFailed.txt");
@@ -815,14 +816,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         if(load) {
             LOAD_DATA();
         }
-//        try {
-//            this.setSelected(true);
-//        } catch (PropertyVetoException ex) {
-//            txtLOG.append("\r\n\r\n=== Open AP3 form > ERROR: " + ex.getMessage());
-//        } 
         load = false;
-//        this.revalidate();
-//        this.repaint();
     }//GEN-LAST:event_AP3_AncestorAdded
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
@@ -926,7 +920,12 @@ public class AP3 extends javax.swing.JInternalFrame {
                 }
                 if (_menu_manager.isSelected()) {
                     EX += " - " + "\t" + " === Menu Manager" + "\t" + " ===== " + "\t" + " == Menu Manager Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-                    __menu_manager.run();
+                    if("DE".equals(env)){
+                        __menu_manager_dev.run(); 
+                    }else{
+                        __menu_manager.run();                        
+                    }
+
                     EX += " - " + "\t" + " === ^ Menu Manager" + "\t" + " ===== " + "\t" + " == ^ Menu Manager End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 }
                 if (_orders.isSelected()) {
@@ -999,10 +998,13 @@ public class AP3 extends javax.swing.JInternalFrame {
             @Override
             protected void done() { // this method is called when the background thread finishes execution  
                 try  { 
+                    String S = " Scope:";
+                    if(_orders.isSelected()) S += " Orders, ";
+                    S = S.substring(0, S.length() - 2); 
                     BW2.cancel(true); // =============================================
                     txtLOG.append("\r\n\r\n========   " + "Execution step-by-step..." + "   ========");                
-                    EX = url +
-                    " > Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + "\r\n" +
+                    EX = "AP3 v" + Ver + //url +
+                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + "\r\n" +
                      "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                      + EX;
                     txtLOG.append("\r\n" + EX.replaceAll("\t", " > "));
@@ -1116,41 +1118,40 @@ public class AP3 extends javax.swing.JInternalFrame {
     }
     private void LOAD_DATA(){
         load = true;        
-        LOAD_CONFIG();
-        if (CONFIG)
-        {
-            if("ST".equals(env)) {
-                cmbENV.setSelectedItem("Staging"); 
-                env = "ST";
-                url = "https://staging.adminpanel.compassdigital.org/";
-                BaseAPI = "https://api.compassdigital.org/staging";
-            } else if("DE".equals(env)) {
-                cmbENV.setSelectedItem("Development");
-                env = "DE";
-                url = "https://dev.adminpanel.compassdigital.org/";
-                BaseAPI = "https://api.compassdigital.org/dev";
-            } else {
-                cmbENV.setSelectedItem("Production");
-                env = "PR";
-                url = "https://adminpanel.compassdigital.org/";
-                BaseAPI = "https://api.compassdigital.org/v1";
-            }
-            for (int i = 0; i < cmbAPP.getItemCount(); i++) {
-                if (cmbAPP.getItemAt(i).startsWith(app))  {
-                    cmbAPP.setSelectedIndex(i);
-                    break;
-                }
-            }    
-            txtMENU.setText(GL_MENU);
-        } else {
+//        LOAD_CONFIG();
+//        if (CONFIG) {
+//            if("ST".equals(env)) {
+//                cmbENV.setSelectedItem("Staging"); 
+//                env = "ST";
+//                url = "https://staging.adminpanel.compassdigital.org/";
+//                BaseAPI = "https://api.compassdigital.org/staging";
+//            } else if("DE".equals(env)) {
+//                cmbENV.setSelectedItem("Development");
+//                env = "DE";
+//                url = "https://dev.adminpanel.compassdigital.org/";
+//                BaseAPI = "https://api.compassdigital.org/dev";
+//            } else {
+//                cmbENV.setSelectedItem("Production");
+//                env = "PR";
+//                url = "https://adminpanel.compassdigital.org/";
+//                BaseAPI = "https://api.compassdigital.org/v1";
+//            }
+//            for (int i = 0; i < cmbAPP.getItemCount(); i++) {
+//                if (cmbAPP.getItemAt(i).startsWith(app))  {
+//                    cmbAPP.setSelectedIndex(i);
+//                    break;
+//                }
+//            }    
+//            txtMENU.setText(GL_MENU);
+//        } else {
             cmbENV.setSelectedItem("Staging"); 
             cmbAPP.setSelectedIndex(0);
             env = "ST";
             url = "https://staging.adminpanel.compassdigital.org/";
             txtMENU.setText("TIM HORTONS");
-        }
-
-
+//        }
+        app = cmbAPP.getSelectedItem().toString();
+        //app = app.substring(0, app.indexOf(" ")).trim();
         load = false;
         Get_P2_TKN_and_Slack_IDs(); // ===================
         GetGroups_API();            // ===================
@@ -1450,11 +1451,10 @@ public class AP3 extends javax.swing.JInternalFrame {
             }
         } catch (IOException | JSONException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
-        }         
-        finally {
+        } finally {
             try {
                 httpclient.close();
-            } catch (Exception ex) {
+            } catch (IOException ex) {
                 txtLOG.append("\r\n- Exception: " + ex.getMessage());   
             }
         } 
@@ -1677,6 +1677,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 txtLOG.append("\r\n\r\n=== WEB / AP3, User: " + UserID + ", Env: " + env + " > No saved Configuration Found");
             }
         } catch (Exception ex) {
+            CONFIG = false;
             txtLOG.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
         }
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1694,7 +1695,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             }
             C = "";
             C += "env: " + env + "\r\n";
-            C += "app: " + app + "\r\n";
+            C += "app: " + cmbAPP.getSelectedItem().toString() + "\r\n";
             C += "cmbBROW: " + cmbBROW.getSelectedItem()+ "\r\n";
             C += "url: " + url + "\r\n";
             C += "GROUP: " + cmbGROUP.getSelectedItem() + "\r\n";

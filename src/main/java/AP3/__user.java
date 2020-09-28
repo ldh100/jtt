@@ -1000,8 +1000,7 @@ public class __user {
                         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Allow Renaming...' text", "Allow Renaming in Local Menus", false,"no_jira"); 
                         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Allow Local Descriptions...' text", "Allow Local Description Edits", false,"no_jira"); 
                         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Overwrite ... PLU' text", "Overwrite Local Menu PLU", false,"no_jira"); 
-                        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Station visibility status' text", "Station visibility status", false,"no_jira"); 
-                            
+                        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Station visibility status' text", "Station visibility status", false,"no_jira");     
                         break;
                     case "Site Permissions Please select at least 1 brand":  
                         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Choose Sites' text", "Choose Sites", true,"no_jira"); 

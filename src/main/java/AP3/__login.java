@@ -74,6 +74,9 @@ public class __login {
             for (int i = 0; i < L0.size(); i++) {
                 _t++; T.Element_Attribute("Drawer Items Text", L0.get(i), "textContent", "no_jira");   
                 if (FAIL) { return;}
+                if(i==(L0.size()-1)){
+                    Ver = t;
+                }
             } 
         _t++; T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");                    
     }
