@@ -271,7 +271,6 @@
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Login &gt; Dashboard"/>
-            <Property name="actionCommand" type="java.lang.String" value="Login &gt; Dashboard"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="11"/>

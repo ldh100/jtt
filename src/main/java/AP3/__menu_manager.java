@@ -570,7 +570,7 @@ public class __menu_manager {
                 }                  
             _t++; Thread.sleep((long) sleep); T.List_Child_E1_By_Path("Find " + GL_MENU + " 'View Global Menus' button", L2, T_Index, "xpath", ".//button[@type='button'][1]", "no_jira"); 
                 if (FAIL) { return;} 
-            _t++; Thread.sleep((long) sleep); T.Element_Click(GL_MENU + " 'View Global Menus' Click", e1, "no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'View Global Menus'", e1, "no_jira"); 
                 if (FAIL) { return;}   
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}  
@@ -857,7 +857,7 @@ public class __menu_manager {
         _t++; Thread.sleep((long) sleep); T.Text_Found("Find 'Leave...' question", "Leave without publishing?", "no_jira"); 
         if ("Found".equals(t)) {     
             _t++; _f++;
-            EX += " - " + "\t" + "Navigate Back after Publish OK" + "\t" + "MM 'Sector' page" + "\t" + "Dialog 'Leave without publishing?'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+            EX += _t + "\t" + "Navigate Back after Publish OK" + "\t" + "MM 'Sector' page" + "\t" + "Dialog 'Leave without publishing?'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
             _t++; FAIL = false; T.Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true,"no_jira"); 
                 if (FAIL) { return; }   
             _t++; FAIL = false; T.Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", "no_jira"); 
@@ -892,7 +892,7 @@ public class __menu_manager {
        
             _t++; Thread.sleep((long) sleep); T.List_Child_E1_By_Path("Find " + GL_MENU + " 'View Global Menus' button", L2, T_Index, "xpath", ".//button[@type='button'][1]", "no_jira"); 
                 if (FAIL) { return;} 
-            _t++; Thread.sleep((long) sleep); T.Element_Click(GL_MENU + " 'View Global Menus' Click", e1, "no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'View Global Menus'", e1, "no_jira"); 
                 if (FAIL) { return;}   
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}   

@@ -409,6 +409,21 @@ public class __user {
             if (FAIL) { return;} 
         _t++; FAIL = false; T.Element_By_Path_Text("Find 'Delete User' Text", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
             if (FAIL) { return; } 
+               
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin 'Allow refunds'", "Allow Refunds", true,"no_jira");  
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin 'Menu Access'", "Menu Access", false,"no_jira");   
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin 'Allow Menu Kick-Outs'", "Allow Menu Kick-Outs", true,"no_jira");                               
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin 'Allow Renaming...'", "Allow Renaming in Local Menus", false,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin 'Allow Local Descriptions...'", "Allow Local Description Edits", false,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin 'Overwrite ... PLU'", "Overwrite Local Menu PLU", false,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin 'Allow Local Menu Calories Edits'", "Allow Local Menu Calories Edits", false,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin 'Station visibility status'", "Station visibility status", false,"no_jira");     
+
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin 'Site Permissions'", "Site Permissions", false,"no_jira");  
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin 'Menu Scheduler'", "Menu Scheduler", false,"no_jira");  
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin 'Brand Config'", "Brand Config", false,"no_jira");  
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin 'Smart Analytics'", "Smart Analytics", true,"no_jira"); 
+        
         _t++; FAIL = false; T.Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
             if (FAIL) { return; }  
         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Delete' dialog", "xpath", "//div[@class='confirm-dialog v-card v-sheet v-sheet--tile theme--light']", "no_jira");
@@ -531,12 +546,12 @@ public class __user {
                             if (FAIL) { return;} 
                             
                         break;
-//                    case "Smart Analytics":  
-//                        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Has access to...' text", "Has access to Feature", true,"no_jira"); 
-//                            if (FAIL) { return;}             
-//                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Check 'Has access to...'", "css", "[aria-label='Has access to Feature']", "no_jira"); 
-//                            if (FAIL) { return;}  
-//                        break;
+                    case "Smart Analytics":  
+                        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Has access to...' text", "Has access to Feature", true,"no_jira"); 
+                            if (FAIL) { return;}             
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Check 'Has access to...'", "css", "[aria-label='Has access to Feature']", "no_jira"); 
+                            if (FAIL) { return;}  
+                        break;
                     case "Site Permissions Please select at least 1 brand":  
                         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Choose Sites' text", "Choose Sites", true,"no_jira"); 
                             if (FAIL) { return;}  
@@ -649,10 +664,25 @@ public class __user {
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
             if (FAIL) { return;} 
+               
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM 'Allow refunds'", "Allow Refunds", true,"no_jira");  
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM 'Menu Access'", "Menu Access", true,"no_jira");   
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM 'Allow Menu Kick-Outs'", "Allow Menu Kick-Outs", false,"no_jira");                               
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM 'Allow Renaming...'", "Allow Renaming in Local Menus", true,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM 'Allow Local Descriptions...'", "Allow Local Description Edits", true,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM 'Overwrite ... PLU'", "Overwrite Local Menu PLU", false,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM 'Allow Local Menu Calories Edits'", "Allow Local Menu Calories Edits", true,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM 'Station visibility status'", "Station visibility status", true,"no_jira");     
+
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM 'Site Permissions'", "Site Permissions", true,"no_jira");  
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM Assigned Site", SITE, true,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM 'Menu Scheduler'", "Menu Scheduler", true,"no_jira");  
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM 'Brand Config'", "Brand Config", false,"no_jira");  
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM 'Smart Analytics'", "Smart Analytics", true,"no_jira"); 
+        
         _t++; FAIL = false; T.Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
                 if (FAIL) { return; }  
-                
-         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Delete' dialog", "xpath", "//div[@class='confirm-dialog v-card v-sheet v-sheet--tile theme--light']", "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Delete' dialog", "xpath", "//div[@class='confirm-dialog v-card v-sheet v-sheet--tile theme--light']", "no_jira");
             if (FAIL) { return;}    // Find fragment              
             _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find 'Delete..' Title", e1, "xpath", "//*[@class='H4-Secondary-Center']", "no_jira"); 
                 if (FAIL) { return;}
@@ -774,12 +804,12 @@ public class __user {
                             if (FAIL) { return;} 
                             
                         break;
-//                    case "Smart Analytics":  
-//                        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Has access to...' text", "Has access to Feature", true,"no_jira"); 
-//                            if (FAIL) { return;}             
-//                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Check 'Has access to...'", "css", "[aria-label='Has access to Feature']", "no_jira"); 
-//                            if (FAIL) { return;}  
-//                        break;
+                    case "Smart Analytics":  
+                        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Has access to...' text", "Has access to Feature", true,"no_jira"); 
+                            if (FAIL) { return;}             
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Check 'Has access to...'", "css", "[aria-label='Has access to Feature']", "no_jira"); 
+                            if (FAIL) { return;}  
+                        break;
                     case "Site Permissions Please select at least 1 brand":  
                         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Choose Sites' text", "Choose Sites", true,"no_jira"); 
                             if (FAIL) { return;}  
@@ -901,9 +931,24 @@ public class __user {
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
             if (FAIL) { return;} 
-        _t++; FAIL = false; T.Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
-                if (FAIL) { return; }  
                 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("DM 'Allow refunds'", "Allow Refunds", true,"no_jira");  
+        _t++; Thread.sleep((long) sleep); T.Find_Text("DM 'Menu Access'", "Menu Access", true,"no_jira");   
+        _t++; Thread.sleep((long) sleep); T.Find_Text("DM 'Allow Menu Kick-Outs'", "Allow Menu Kick-Outs", false,"no_jira");                               
+        _t++; Thread.sleep((long) sleep); T.Find_Text("DM 'Allow Renaming...'", "Allow Renaming in Local Menus", true,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("DM 'Allow Local Descriptions...'", "Allow Local Description Edits", true,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("DM 'Overwrite ... PLU'", "Overwrite Local Menu PLU", true,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("DM 'Allow Local Menu Calories Edits'", "Allow Local Menu Calories Edits", true,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("DM 'Station visibility status'", "Station visibility status", true,"no_jira");     
+
+        _t++; Thread.sleep((long) sleep); T.Find_Text("DM 'Site Permissions'", "Site Permissions", true,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("DM Assigned Site", SITE, true,"no_jira");         
+        _t++; Thread.sleep((long) sleep); T.Find_Text("DM 'Menu Scheduler'", "Menu Scheduler", true,"no_jira");  
+        _t++; Thread.sleep((long) sleep); T.Find_Text("DM 'Brand Config'", "Brand Config", true,"no_jira");  
+        _t++; Thread.sleep((long) sleep); T.Find_Text("DM 'Smart Analytics'", "Smart Analytics", true,"no_jira"); 
+        
+        _t++; FAIL = false; T.Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
+                if (FAIL) { return; }    
          _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Delete' dialog", "xpath", "//div[@class='confirm-dialog v-card v-sheet v-sheet--tile theme--light']", "no_jira");
             if (FAIL) { return;}    // Find fragment              
             _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find 'Delete..' Title", e1, "xpath", "//*[@class='H4-Secondary-Center']", "no_jira"); 
@@ -994,13 +1039,6 @@ public class __user {
                             if (FAIL) { return;} 
                         _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Phone", "css", "[aria-label='Phone Number']", "4165551234", "no_jira");
                             if (FAIL) { return;}           
-                        _t++; Thread.sleep((long) sleep); T.Scroll_XY("Scroll to Card " + i + " bottom", 0, 200, "no_jira");
-                        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Allow refunds' text", "Allow Refunds", false,"no_jira");            
-                        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Allow Menu...' text", "Menu Access", false,"no_jira");                               
-                        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Allow Renaming...' text", "Allow Renaming in Local Menus", false,"no_jira"); 
-                        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Allow Local Descriptions...' text", "Allow Local Description Edits", false,"no_jira"); 
-                        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Overwrite ... PLU' text", "Overwrite Local Menu PLU", false,"no_jira"); 
-                        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Station visibility status' text", "Station visibility status", false,"no_jira");     
                         break;
                     case "Site Permissions Please select at least 1 brand":  
                         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Choose Sites' text", "Choose Sites", true,"no_jira"); 
@@ -1076,10 +1114,25 @@ public class __user {
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
             if (FAIL) { return;} 
+
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Runner 'Allow refunds'", "Allow Refunds", false,"no_jira");  
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Runner 'Menu Access'", "Menu Access", false,"no_jira");   
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Runner 'Allow Menu Kick-Outs'", "Allow Menu Kick-Outs", false,"no_jira");                               
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Runner 'Allow Renaming...'", "Allow Renaming in Local Menus", false,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Runner 'Allow Local Descriptions...'", "Allow Local Description Edits", false,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Runner 'Overwrite ... PLU'", "Overwrite Local Menu PLU", false,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Runner 'Allow Local Menu Calories Edits'", "Allow Local Menu Calories Edits", false,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Runner 'Station visibility status'", "Station visibility status", false,"no_jira");     
+
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Runner 'Site Permissions'", "Site Permissions", true,"no_jira");  
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Runner Assigned Site", SITE, true,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Runner 'Menu Scheduler'", "Menu Scheduler", false,"no_jira");  
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Runner 'Brand Config'", "Brand Config", false,"no_jira");  
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Runner 'Smart Analytics'", "Smart Analytics", false,"no_jira"); 
+        
         _t++; FAIL = false; T.Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
-                if (FAIL) { return; }  
-                
-         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Delete' dialog", "xpath", "//div[@class='confirm-dialog v-card v-sheet v-sheet--tile theme--light']", "no_jira");
+            if (FAIL) { return; }  
+            _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Delete' dialog", "xpath", "//div[@class='confirm-dialog v-card v-sheet v-sheet--tile theme--light']", "no_jira");
             if (FAIL) { return;}    // Find fragment              
             _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find 'Delete..' Title", e1, "xpath", "//*[@class='H4-Secondary-Center']", "no_jira"); 
                 if (FAIL) { return;}

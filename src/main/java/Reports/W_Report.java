@@ -4,13 +4,38 @@
  * and open the template in the editor.
  */
 package Reports;
-
+import static A.A.*;
+import A.Func;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.GridLayout;
+import java.beans.PropertyVetoException;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 /**
  *
  * @author Oleg.Spozito
  */
 public class W_Report extends javax.swing.JInternalFrame {
-
     /**
      * Creates new form W_Report
      */
@@ -27,31 +52,147 @@ public class W_Report extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        button1 = new java.awt.Button();
-        button2 = new java.awt.Button();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        choice1 = new java.awt.Choice();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtLOG = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        DV1 = new javax.swing.JTable();
+        dtpDEL = new com.toedter.calendar.JDateChooser();
+        label1 = new java.awt.Label();
+        cmbF = new java.awt.Choice();
+        btnDL_OLD = new java.awt.Button();
+        btnEXCEL = new java.awt.Button();
+        btnLOG = new java.awt.Button();
+        btnREF = new java.awt.Button();
+        btnDL_OLD1 = new java.awt.Button();
 
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        setClosable(true);
         setIconifiable(true);
+        setMaximizable(true);
         setResizable(true);
-
-        button1.setLabel("button1");
-        button1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+        setTitle("Reports");
+        setDoubleBuffered(true);
+        setMinimumSize(new java.awt.Dimension(847, 253));
+        setNextFocusableComponent(this);
+        addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                formAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
             }
         });
 
-        button2.setLabel("button1");
-        button2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button2ActionPerformed(evt);
-            }
-        });
+        txtLOG.setEditable(false);
+        txtLOG.setColumns(20);
+        txtLOG.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        txtLOG.setRows(5);
+        jScrollPane1.setViewportView(txtLOG);
 
-        choice1.addItemListener(new java.awt.event.ItemListener() {
+        DV1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV1.setName("DV1"); // NOI18N
+        DV1.setOpaque(false);
+        DV1.setRowHeight(18);
+        DV1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        DV1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(DV1);
+        DV1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+
+        dtpDEL.setDateFormatString("DD-MMM-yyyy");
+        dtpDEL.setFocusCycleRoot(true);
+        dtpDEL.setName("dtpFEL"); // NOI18N
+        dtpDEL.setPreferredSize(new java.awt.Dimension(103, 24));
+        dtpDEL.setRequestFocusEnabled(false);
+        dtpDEL.setVerifyInputWhenFocusTarget(false);
+
+        label1.setText("Filter by app:");
+
+        cmbF.setMinimumSize(new java.awt.Dimension(103, 24));
+        cmbF.setPreferredSize(new java.awt.Dimension(103, 24));
+        cmbF.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                choice1ItemStateChanged(evt);
+                cmbFItemStateChanged(evt);
+            }
+        });
+
+        btnDL_OLD.setEnabled(false);
+        btnDL_OLD.setLabel("Delete Selected");
+        btnDL_OLD.setMinimumSize(new java.awt.Dimension(103, 24));
+        btnDL_OLD.setPreferredSize(new java.awt.Dimension(103, 24));
+        btnDL_OLD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDL_OLDActionPerformed(evt);
+            }
+        });
+
+        btnEXCEL.setEnabled(false);
+        btnEXCEL.setLabel("Excel");
+        btnEXCEL.setMinimumSize(new java.awt.Dimension(103, 24));
+        btnEXCEL.setName(""); // NOI18N
+        btnEXCEL.setPreferredSize(new java.awt.Dimension(103, 24));
+        btnEXCEL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEXCELMouseClicked(evt);
+            }
+        });
+        btnEXCEL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEXCELActionPerformed(evt);
+            }
+        });
+
+        btnLOG.setLabel("Log");
+        btnLOG.setMinimumSize(new java.awt.Dimension(47, 24));
+        btnLOG.setPreferredSize(new java.awt.Dimension(47, 24));
+        btnLOG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLOGActionPerformed(evt);
+            }
+        });
+
+        btnREF.setLabel("Ref");
+        btnREF.setMinimumSize(new java.awt.Dimension(47, 24));
+        btnREF.setPreferredSize(new java.awt.Dimension(47, 24));
+        btnREF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnREFActionPerformed(evt);
+            }
+        });
+
+        btnDL_OLD1.setEnabled(false);
+        btnDL_OLD1.setLabel("Delete before:");
+        btnDL_OLD1.setMinimumSize(new java.awt.Dimension(103, 24));
+        btnDL_OLD1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDL_OLD1ActionPerformed(evt);
             }
         });
 
@@ -60,48 +201,311 @@ public class W_Report extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 567, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(choice1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(btnLOG, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnREF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(dtpDEL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEXCEL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmbF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDL_OLD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDL_OLD1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
+                    .addGap(110, 110, 110)))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 57, Short.MAX_VALUE)
-                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDL_OLD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(btnDL_OLD1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dtpDEL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(4, 4, 4)
+                .addComponent(cmbF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(btnEXCEL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnREF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnLOG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGap(0, 149, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
+
+        btnDL_OLD.getAccessibleContext().setAccessibleName("Delete Selected");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+    private void btnLOGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLOGActionPerformed
+        try {
+            File aLog = new File("aLog.txt");
+            if (aLog.createNewFile()) {
+                System.out.println("File created: " + aLog.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+            Files.write(Paths.get(aLog.getPath()), txtLOG.getText().getBytes());
+            java.awt.Desktop.getDesktop().open(aLog);
+        }
+        catch (IOException ex) {
+            txtLOG.append("\r\n\r\n=== Show Log > ERROR: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnLOGActionPerformed
+    private void btnREFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnREFActionPerformed
+        LoadDB();
+    }//GEN-LAST:event_btnREFActionPerformed
+    private void cmbFItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbFItemStateChanged
+        txtLOG.append("cmbFItemStateChanged" + "\r\n");
+        LoadDB();
+    }//GEN-LAST:event_cmbFItemStateChanged
+    private void btnDL_OLDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDL_OLDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_button1ActionPerformed
-
-    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+    }//GEN-LAST:event_btnDL_OLDActionPerformed
+    private void btnEXCELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEXCELActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_button2ActionPerformed
+    }//GEN-LAST:event_btnEXCELActionPerformed
 
-    private void choice1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choice1ItemStateChanged
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        txtLOG.append("formInternalFrameOpened" + "\r\n");
+//        LoadREP();
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        txtLOG.append("formInternalFrameActivated" + "\r\n");
+//        LoadREP();
+    }//GEN-LAST:event_formInternalFrameActivated
+
+    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
+        txtLOG.append("formAncestorAdded" + "\r\n");
+        try {
+            this.setSelected(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(W_Report.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        LoadREP();
+    }//GEN-LAST:event_formAncestorAdded
+    private void LoadREP() {                                      
+        dtpDEL.setDateFormatString("dd-MMM-yyy");
+        Date now = new Date();
+        dtpDEL.setMaxSelectableDate(now);
+        dtpDEL.setDate(new Date(now.getTime() - Duration.ofDays(14).toMillis()));
+        LoadF();
+        LoadDB();
+        this.title = "Reports - " + DV1.getRowCount() + " records";
+        if(DV1.getRowCount() > 0){
+            DV1.setRowSelectionInterval(0, 0);
+            btnEXCEL.setEnabled(true);
+            //SUM();
+        }
+    } 
+    private void btnEXCELMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEXCELMouseClicked
+        //txtLOG.append("btnEXCELMouseClicked" + "\r\n");
+        Report();
+    }                                        
+    private void SUM() {
+        if (DV1.getRowCount() < 1) return;
+        String utcTimeString = DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("cDATE").getModelIndex()).toString();
+        DateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        utcFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date utcTime = null;
+        try {
+            utcTime = utcFormat.parse(utcTimeString);
+        } catch (ParseException ex) {
+            Logger.getLogger(W_Report.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DateFormat localFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        localFormat.setTimeZone(TimeZone.getDefault());
+        txtLOG.setText("LogID:" + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("qID").getModelIndex())
+            + " @" + localFormat.format(utcTime) 
+            + " (" + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("test_type").getModelIndex()) + ") > "
+            + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()) + " - " 
+            + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("url").getModelIndex()) + " - " 
+            + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("env").getModelIndex()) + " - " 
+            + "User: " + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("user_id").getModelIndex()) + "\r\n"
+            + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("summary").getModelIndex())
+        );
+    }
+    private void Report(){
+        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        String EXX = "";
+        try {
+            ResultSet rs = conn.createStatement().executeQuery("SELECT TOP 1 [Excel] FROM [dbo].[aw_result] WHERE [qID] = '" +
+               DV1.getValueAt(DV1.getSelectedRow(), 0) + "'");
+            rs.next();
+            EXX = rs.getString(1);
+        }catch (Exception ex){
+            txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
+        }
+        if ("".equals(EXX.trim()) || "None".equals(EXX.trim())){
+            setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            txtLOG.append("\r\n\r\n=== Report > Not Excel");
+            return;
+        }   
+        try {
+            int col = 9; // 8 + 1 new JIRA = 9
+            String Top_Row = EXX.substring(0, EXX.indexOf("\r\n"));
+            EXX = EXX.substring(EXX.indexOf("\r\n") + 2);
+        
+            String[] lines = EXX.split(System.getProperty("line.separator"));
+            int l = lines.length;
+            String[][] Values = new String[l][col];
+            int n = 1;
+            for (int i = 0; i < l; i++)
+            {
+                String[] v = lines[i].split("\t");
+                System.arraycopy(v, 0, Values[i], 0, v.length); 
+//                for (int j = 0; j < v.length; j++){
+//                    Values[i][j] = v[j];
+//                } 
+            }
+
+            String Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+            Func.fExcel((l - 1), col, Values, "AP3_" + env + "_" + Date, Top_Row, 0, 0, null, " ", " ");
+
+
+//                Toolkit toolkit = Toolkit.getDefaultToolkit();
+//                Clipboard clipboard = null;
+//                try{
+//                    clipboard = toolkit.getSystemClipboard();
+//                    clipboard.setContents( new StringSelection(""), null); // 900009
+//                }catch (Exception ex){
+//                    Thread.sleep(20);
+//                    clipboard = toolkit.getSystemClipboard();
+//                    clipboard.setContents( new StringSelection(""), null);
+//                    //clipboard.setContents( DV1["app", DV1.SelectedCells[0].RowIndex].Value.ToString() + "_" + Date);  
+//                }
+
+//            File ExcelLog = new File("ExcelLog.txt");
+//            if (ExcelLog.createNewFile()) {
+//                txtLOG.append("\r\n\r\n=== Report > File created: " + ExcelLog.getName());
+//            } else {
+//                txtLOG.append("\r\n\r\n=== Report > File already exists.");
+//            }
+//            Files.write(Paths.get(ExcelLog.getPath()), EXX.getBytes());
+//            java.awt.Desktop.getDesktop().open(ExcelLog);
+        } catch (Exception ex) {
+            txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
+        }
+        Runtime.getRuntime().gc();
+        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_btnEXCELMouseClicked
+
+    private void btnDL_OLD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDL_OLD1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_choice1ItemStateChanged
+    }//GEN-LAST:event_btnDL_OLD1ActionPerformed
+    private void LoadF() {
+        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        cmbF.add("ALL");
+        try {
+            ResultSet rs = conn.createStatement().executeQuery("SELECT Distinct [app] FROM[dbo].[aw_result] ORDER BY [app]");
+            while (rs.next()) {
+               cmbF.add(rs.getString(1));
+            }           
+        } catch (Exception ex) {
+            txtLOG.append("\r\n\r\n=== Load APP Filter > ERROR: " + ex.getMessage());
+        }
+        cmbF.select(0);
+        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+    private void LoadDB(){
+        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        String pl = "";
+            if (cmbF.getSelectedItem() != "ALL") {
+                pl = " WHERE [app] = '" + cmbF.getSelectedItem() + "'";
+            }
+            SQL = "SELECT " + 
+                  "[qID] " +
+                  ",[Date] " +
+                  ",[Time] " +
+                  ",[app] " +
+                  ",[url] " +
+                  ",[summary] " +
+                  ",[t_calls] " +
+                  ",[t_min] " +
+                  ",[t_avg] " +
+                  ",[t_max] " +
+                  ",[p_50] " +
+                  ",[p_90] " +
+                  ",[test_type] " +
+                  ",[user_id] " +
+                  ",[user_ws] " +
+                  ",[env] " +
+                  ",[Status] " +
+                  ",[cDate] " +
+              "FROM[dbo].[aw_result] " + pl + " ORDER BY[qID] DESC";  
+        try {
+            ResultSet rs = conn.createStatement().executeQuery(SQL);
+            ResultSetMetaData rsmd =rs.getMetaData();
+            DefaultTableModel dm = new DefaultTableModel();
+            int cols = rsmd.getColumnCount();
+            String c[]=new String[cols];
+            for(int i = 0; i<cols; i++){
+                c[i] = rsmd.getColumnName(i+1);
+                dm.addColumn(c[i]);
+            }
+            Object row[]=new Object[cols];
+            while(rs.next()){
+                for(int i = 0; i<cols; i++){
+                    row[i] = rs.getString(i+1);
+                }
+                dm.addRow(row);
+            }
+            DV1.setModel(dm);  
+            for (int i = 0; i < DV1.getColumnCount(); i++) {
+                DefaultTableColumnModel colModel = (DefaultTableColumnModel) DV1.getColumnModel();
+                TableColumn col = colModel.getColumn(i);
+                int width = 0;
 
-
+                TableCellRenderer renderer = col.getHeaderRenderer();
+                for (int r = 0; r < DV1.getRowCount(); r++) {
+                  renderer = DV1.getCellRenderer(r, i);
+                  Component comp = renderer.getTableCellRendererComponent(DV1, DV1.getValueAt(r, i),
+                      false, false, r, i);
+                  width = Math.max(width, comp.getPreferredSize().width);
+                }
+                col.setPreferredWidth(width + 3);
+             }
+            //jScrollPane1.setLayout(new GridLayout(1,1)); 
+            //DV1.setAutoResizeMode(DV1.AUTO_RESIZE_ALL_COLUMNS); 
+            //DV1.getColumnModel().getColumn(0).setPreferredWidth(250);
+        } catch (Exception ex) {
+            txtLOG.append("\r\n\r\n=== Load Data > ERROR: " + ex.getMessage());
+        }
+        //DV1.repaint();
+        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Button button1;
-    private java.awt.Button button2;
-    private java.awt.Choice choice1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private javax.swing.JTable DV1;
+    private java.awt.Button btnDL_OLD;
+    private java.awt.Button btnDL_OLD1;
+    private java.awt.Button btnEXCEL;
+    private java.awt.Button btnLOG;
+    private java.awt.Button btnREF;
+    private java.awt.Choice cmbF;
+    private com.toedter.calendar.JDateChooser dtpDEL;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private java.awt.Label label1;
+    private javax.swing.JTextArea txtLOG;
     // End of variables declaration//GEN-END:variables
 }
