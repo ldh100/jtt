@@ -370,7 +370,7 @@ public class __site {
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Play Click", "className", "play-icon", "no_jira"); 
             if (FAIL) { return;}
             Thread.sleep(1000);
-        _t++; Thread.sleep((long) sleep); T.Swith_to_Frame("Back to Site page", "defaultContent", "N/A", "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Swith_to_Frame("Back to default frame", "defaultContent", "N/A", "no_jira");
             if (FAIL) { return;}      
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Video Player Close Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-close')]", "no_jira"); 
             if (FAIL) { return;} 

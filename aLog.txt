@@ -1,4 +1,466 @@
-formInternalFrameOpened
-formInternalFrameActivated
-formAncestorAdded
-formInternalFrameActivated
+Start >
+
+=== LOAD_CONFIG > OK
+-Load Groups/Sector from API...
+== 0.65 sec ==
+-Load Sites from API...
+== 0.24 sec ==
+-Load Brands from API...
+== 0.69 sec ==
+
+=== Ready >
+=== In not Headless mode Do Not interact with your Browser
+=== (no mouse hover!) during Automation run
+=== Good Luck...
+
+
+=== LOAD_CONFIG > OK
+-Load Sites from API...
+== 0.22 sec ==
+-Load Brands from API...
+== 0.34 sec ==
+-Load Groups/Sector from API...
+== 0.48 sec ==
+
+=== Execution started @02:09:21 PM
+=== Starting Web Driver...
+
+=== CWD: C:\Users\oleg.spozito\Documents\NetBeansProjects\JTT
+=== Web Driver Started in 2.17 sec
+
+========   Execution step-by-step...   ========
+AP3 v1.27.1-4 - Steps: 415, Passed: 411, Warnings: 0, Failed: 4
+# > TC > Target/Element/Input > Expected/Output > Result > Comment/Error > Resp > Time > JIRA
+ -  >  === Login, Dashboard >  =====  >  == Login, Dashboard Begin >> >  -  >  -  >  -  >  - 
+1 > Navigate to > AP3 URL > https://dev.adminpanel.compassdigital.org/ > PASS >  -  > 2.47 sec > 02:09:26 PM > no_jira
+2 > AP3 Login page > Page URL > https://dev.adminpanel.compassdigital.org/#/login/?redirect=%2F > PASS >  -  > 0.82 sec > 02:09:27 PM > no_jira
+3 > Welcome Prompt > //*[@id='operator']/div/main/div/div[2]/div[2]/div/div/form/div[1] > Welcome back to > PASS >  -  > 0.02 sec > 02:09:27 PM > no_jira
+4 > Welcome to > > //*[@id='operator']/div/main/div/div[2]/div[2]/div/div/form/div[2] > Admin Panel > PASS >  -  > 0.02 sec > 02:09:27 PM > no_jira
+5 > Email Text > //*[contains(text(), 'E-mail')] > E-mail > PASS >  -  > 0.02 sec > 02:09:27 PM > no_jira
+6 > Sign In Text > //*[contains(text(), 'Sign in')] > SIGN IN > PASS >  -  > 0.02 sec > 02:09:27 PM > no_jira
+7 > Forgot Password Text > //*[contains(text(), 'Forgot Password?')] > Forgot Password? > PASS >  -  > 0.02 sec > 02:09:28 PM > no_jira
+8 > Email Clear > .//input[@type='text'] > Cleared > PASS >  -  > 0.06 sec > 02:09:28 PM > no_jira
+9 > Password Clear > .//input[@type = 'password'] > Cleared > PASS >  -  > 0.06 sec > 02:09:28 PM > no_jira
+10 > Enter Valid Email > [aria-label='E-mail'] > oleg.spozito@compassdigital.io > PASS >  -  > 0.25 sec > 02:09:28 PM > no_jira
+11 > Enter Valid Password > [aria-label='Password'] > Password1 > PASS >  -  > 0.08 sec > 02:09:28 PM > no_jira
+12 > Sign In Click > //*[contains(text(), 'Sign in')] > Click successful > PASS >  -  > 0.07 sec > 02:09:28 PM > no_jira
+13 > Wait for 'AP3 Welcome...' text > //*[contains(text(), 'Welcome to the CDL Admin Panel')] > Done in 0.83 sec (timeout: 30.0 sec) > PASS >  -  > 0.83 sec > 02:09:29 PM > no_jira
+14 > AP3 Dashboard URL > Page URL > https://dev.adminpanel.compassdigital.org/#/ > PASS >  -  > 0.03 sec > 02:09:30 PM > no_jira
+15 > Home screen Buttons Count > //button[@type='button'] > 3 item(s) (L0) > PASS >  -  > 0.02 sec > 02:09:30 PM > no_jira
+16 > Home screen Button 0 Text > Passed Element > 7 > PASS >  -  > 0.02 sec > 02:09:30 PM > no_jira
+17 > Home screen Button 1 Text > Passed Element > OLEG SPOZITO > PASS >  -  > 0.01 sec > 02:09:30 PM > no_jira
+18 > Home screen Button 2 Text > Passed Element >  7  > PASS >  -  > 0.02 sec > 02:09:30 PM > no_jira
+19 > Open Dashboard Drawer > //aside[contains(@class, 'navigation-drawer')] > Move successful > PASS >  -  > 0.06 sec > 02:09:30 PM > no_jira
+20 > Drawer Items Count > [role='listitem'] > 15 item(s) (L0) > PASS >  -  > 0.01 sec > 02:09:30 PM > no_jira
+21 > Drawer Items Text > textContent > Logout > PASS >  -  > 0.00 sec > 02:09:30 PM > no_jira
+22 > Drawer Items Text > textContent > Admin Panel > PASS >  -  > 0.01 sec > 02:09:30 PM > no_jira
+23 > Drawer Items Text > textContent >  > PASS >  -  > 0.01 sec > 02:09:30 PM > no_jira
+24 > Drawer Items Text > textContent > Dashboard > PASS >  -  > 0.00 sec > 02:09:30 PM > no_jira
+25 > Drawer Items Text > textContent > Sites > PASS >  -  > 0.00 sec > 02:09:30 PM > no_jira
+26 > Drawer Items Text > textContent > Group Management > PASS >  -  > 0.01 sec > 02:09:30 PM > no_jira
+27 > Drawer Items Text > textContent > Menu Manager > PASS >  -  > 0.00 sec > 02:09:30 PM > no_jira
+28 > Drawer Items Text > textContent > Orders > PASS >  -  > 0.00 sec > 02:09:30 PM > no_jira
+29 > Drawer Items Text > textContent > Sales Reporting > PASS >  -  > 0.00 sec > 02:09:30 PM > no_jira
+30 > Drawer Items Text > textContent > Sales Analytics > PASS >  -  > 0.01 sec > 02:09:30 PM > no_jira
+31 > Drawer Items Text > textContent > Users > PASS >  -  > 0.00 sec > 02:09:30 PM > no_jira
+32 > Drawer Items Text > textContent > Announcements > PASS >  -  > 0.00 sec > 02:09:30 PM > no_jira
+33 > Drawer Items Text > textContent > Promo Management > PASS >  -  > 0.00 sec > 02:09:30 PM > no_jira
+34 > Drawer Items Text > textContent > Smart Analytics > PASS >  -  > 0.01 sec > 02:09:30 PM > no_jira
+35 > Drawer Items Text > textContent > 1.27.1-4 > PASS >  -  > 0.00 sec > 02:09:30 PM > no_jira
+36 > Close Dashboard Drawer > //aside[contains(@class, 'navigation-drawer')] > Move 'Right' of element successful > PASS >  -  > 0.05 sec > 02:09:30 PM > no_jira
+ -  >  === ^ Login, Dashboard >  =====  >  == ^ Login, Dashboard End >  -  >  -  >  -  >  - 
+ -  >  === Menu Manager >  =====  >  == Menu Manager Begin >> >  -  >  -  >  - >  - 
+37 > Open Dashboard Drawer > //aside[contains(@class, 'navigation-drawer')] > Move successful > PASS >  -  > 0.96 sec > 02:09:31 PM > no_jira
+38 > Drawer > 'Menu Manager' Click > //*[contains(text(), 'Menu Manager')] > Click successful > PASS >  -  > 0.06 sec > 02:09:32 PM > no_jira
+39 > Close Dashboard Drawer > //aside[contains(@class, 'navigation-drawer')] > Move 'Right' of element successful > PASS >  -  > 0.06 sec > 02:09:32 PM > no_jira
+ -  >  === MM Sector Selection  >  =====  >  == Sector Selection Begin >> >  -  >  -  >  - >  - 
+40 > Wait for 'progress'... > //*[contains(@class, 'progress')] > Done in 1.33 sec (timeout: 30.0 sec) > PASS >  -  > 1.33 sec > 02:09:33 PM > no_jira
+41 > Menu Manager page URL > Page URL > https://dev.adminpanel.compassdigital.org/#/menu > PASS >  -  > 0.00 sec > 02:09:34 PM > no_jira
+42 > Page Title > textContent > Menu Manager > PASS >  -  > 0.02 sec > 02:09:34 PM > no_jira
+43 > Button 'Go to Menu' text > Text Found > GO TO MENUS > PASS >  -  > 0.02 sec > 02:09:34 PM > no_jira
+44 > Button 'Go to Menu' state > disabled > true > PASS >  -  > 1.04 sec > 02:09:35 PM > no_jira
+45 > Open 'Group' dropdown > [role='combobox'] > Click successful > PASS >  -  > 0.05 sec > 02:09:36 PM > no_jira
+46 > Enter Sector Name > [role='combobox'] > Chartwells/US > PASS >  -  > 0.12 sec > 02:09:36 PM > no_jira
+47 > Sector Name Click > //*[contains(text(), 'Chartwells/US')] > Click successful > PASS >  -  > 0.06 sec > 02:09:36 PM > no_jira
+48 > Button 'Go to Menu' Click > //button[contains(@class, 'v-btn theme--light primary')] > Click successful > PASS >  -  > 0.08 sec > 02:09:36 PM > no_jira
+49 > Wait for 'progress'... > //*[contains(@class, 'progress')] > Done in 0.97 sec (timeout: 30.0 sec) > PASS >  -  > 0.97 sec > 02:09:37 PM > no_jira
+50 > Wait for MM > Group page load > //ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light'] > Done in 0.02 sec (timeout: 30.0 sec) > PASS >  -  > 0.02 sec > 02:09:38 PM > no_jira
+51 > Page Title > textContent > Chartwells/US > PASS >  -  > 0.01 sec > 02:09:38 PM > no_jira
+52 > Menu > Chartwells/US page URL > Page URL > https://dev.adminpanel.compassdigital.org/#/menu/sector/11J3gKPg8BC5r9k3mlyzu8y1qZjG3aFoj0ZNw03OspJ2woX2okSjryOBX5ZGHaO0XOwaNQcAdR66/ > PASS >  -  > 0.00 sec > 02:09:38 PM > no_jira
+53 > Button 'Add Global Menu' text > Text Found > ADD GLOBAL MENU > PASS >  -  > 0.02 sec > 02:09:38 PM > no_jira
+54 > Page SubTitle > textContent > Menu Manager>Chartwells/US > PASS >  -  > 0.01 sec > 02:09:38 PM > no_jira
+55 > Fund 'Search...' text > Text Found > Search Menus > PASS >  -  > 0.02 sec > 02:09:38 PM > no_jira
+ -  >  === MM Sector Selection  >  =====  >  == Sector Selection End ^^ >  -  >  -  >  - >  - 
+56 > Trainig Video Icon Click > //i[contains(@class, 'v-icon mdi mdi-help-circle')] > Click successful > PASS >  -  > 1.10 sec > 02:09:40 PM > no_jira
+57 > Wait for 'progress'... > //*[contains(@class, 'progress')] > Done in 0.02 sec (timeout: 30.0 sec) > PASS >  -  > 0.03 sec > 02:09:40 PM > no_jira
+58 > Swith to Video Player > tagName > iframe > PASS >  -  > 0.03 sec > 02:09:40 PM > no_jira
+59 > Wait for Player load > play-icon > Done in 0.01 sec (timeout: 30.0 sec) > PASS >  -  > 0.01 sec > 02:09:40 PM > no_jira
+60 > Video Title > textContent >  MENU MANAGER GLOBAL MENUS from Digital Learning Academy  > PASS >  -  > 1.01 sec > 02:09:42 PM > no_jira
+61 > Play Click > play-icon > Click successful > PASS >  -  > 0.05 sec > 02:09:42 PM > no_jira
+62 > Back to Site page > defaultContent > N/A > PASS >  -  > 0.59 sec > 02:09:44 PM > no_jira
+63 > Video Player Close Click > //i[contains(@class, 'v-icon mdi mdi-close')] > Click successful > PASS >  -  > 0.05 sec > 02:09:44 PM > no_jira
+ -  >  === MM Global Modifiers  > New ID:  >  == Global Modifiers Begin >> >  -  >  -  >  -  >  - 
+64 > Menus Count > //div[@class='layout hover align-baseline'] > 4 item(s) (L2) > PASS >  -  > 0.01 sec > 02:09:44 PM > no_jira
+65 > Menu (Index 0) Name > textContent > Al Forno  Last Published: 6/15/2020 at 8:39 AM by sagar patelView GLobal MenusView GLobal Modifier GroupsView Local Brands > PASS >  -  > 0.00 sec > 02:09:44 PM > no_jira
+66 > Menu (Index 1) Name > textContent > Austin Grill  Last Published: 6/15/2020 at 7:50 AM by sagar patelView GLobal MenusView GLobal Modifier GroupsView Local Brands > PASS >  -  > 0.01 sec > 02:09:44 PM > no_jira
+67 > Menu (Index 2) Name > textContent > BOOSTER JUICE  Last Published: 9/10/2020 at 4:16 PMView GLobal MenusView GLobal Modifier GroupsView Local Brands > PASS >  -  > 0.00 sec > 02:09:44 PM > no_jira
+68 > Menu (Index 3) Name > textContent > TIM HORTONS  You are editing this menuView GLobal MenusView GLobal Modifier GroupsView Local Brands > PASS >  -  > 0.00 sec > 02:09:44 PM > no_jira
+69 > Scroll to Menu TIM HORTONS > Passed Element > Move OK > PASS >  -  > 0.01 sec > 02:09:44 PM > no_jira
+70 > Click Menu TIM HORTONS > Passed Element > Click successful > PASS >  -  > 0.02 sec > 02:09:44 PM > no_jira
+71 > Find TIM HORTONS 'View Global Modifiers Groups' button > List index 3 > .//button[@type='button'][2] > element found > PASS >  -  > 0.92 sec > 02:09:46 PM > no_jira
+72 >  'View Global Modifiers Groups' Click > Passed Element > Click successful > PASS >  -  > 0.02 sec > 02:09:46 PM > no_jira
+73 > Wait for 'progress'... > //*[contains(@class, 'progress')] > Done in 0.03 sec (timeout: 30.0 sec) > PASS >  -  > 0.03 sec > 02:09:46 PM > no_jira
+74 > Wait for page load > table > Done in 0.01 sec (timeout: 30.0 sec) > PASS >  -  > 0.01 sec > 02:09:46 PM > no_jira
+75 > Current page URL > Page URL > https://dev.adminpanel.compassdigital.org/#/menu/sector/11J3gKPg8BC5r9k3mlyzu8y1qZjG3aFoj0ZNw03OspJ2woX2okSjryOBX5ZGHaO0XOwaNQcAdR66/company/LWg8oK2ovJFrepmNN6WJHL091o1D6jTRYMwqeDwKH4OOo7wd5XfD6kX6GD4gCRJDN6dWz6tOdpZLr/globalmods > PASS >  -  > 0.66 sec > 02:09:48 PM > no_jira
+76 > Page Title > textContent > Chartwells/US > PASS >  -  > 0.01 sec > 02:09:48 PM > no_jira
+77 > Paging - Rows per page > [aria-label='Rows per page:'] > Move OK > PASS >  -  > 0.02 sec > 02:09:48 PM > no_jira
+78 > Pagination > //div[contains(@class, 'v-datatable__actions__pagination')] > 1-2 of 2 > PASS >  -  > 0.02 sec > 02:09:48 PM > no_jira
+79 > Rows per page Click > //input[@aria-label='Rows per page:'] > Click successful > PASS >  -  > 0.04 sec > 02:09:48 PM > no_jira
+80 > Find 'Rows per page' list > //div[contains(@class, 'v-menu__content theme--light v-menu__content--auto menuable__content__active')] > Element Found > PASS >  -  > 0.01 sec > 02:09:49 PM > no_jira
+81 > List 'Rows per page' values Count > .//div[@class='v-list__tile__title'] > 4 item(s) (L1) > PASS >  -  > 0.92 sec > 02:09:50 PM > no_jira
+82 > Rows per page Value (index 0) > Passed Element > 5 > PASS >  -  > 0.01 sec > 02:09:50 PM > no_jira
+83 > Rows per page Value (index 1) > Passed Element > 10 > PASS >  -  > 0.01 sec > 02:09:50 PM > no_jira
+84 > Rows per page Value (index 2) > Passed Element > 25 > PASS >  -  > 0.01 sec > 02:09:50 PM > no_jira
+85 > Rows per page Value (index 3) > Passed Element > All > PASS >  -  > 0.01 sec > 02:09:50 PM > no_jira
+86 > Click 'All' > Passed Element > Click successful > PASS >  -  > 0.03 sec > 02:09:50 PM > no_jira
+87 > Wait for 'progress'... > //*[contains(@class, 'progress')] > Done in 0.03 sec (timeout: 30.0 sec) > PASS >  -  > 0.03 sec > 02:09:50 PM > no_jira
+88 > Pagination > //div[contains(@class, 'v-datatable__actions__pagination')] > 1-2 of 2 > PASS >  -  > 0.01 sec > 02:09:50 PM > no_jira
+89 > Move to page Top > Current page > Scroll bar at top > PASS >  -  > 0.01 sec > 02:09:51 PM > no_jira
+90 > Groups Count > tr > 4 item(s) (L0) > PASS >  -  > 0.92 sec > 02:09:52 PM > no_jira
+91 > Modifier Group Row Header > Passed Element > Chit # Modifier Group Name Label in App Enabled > PASS >  -  > 0.01 sec > 02:09:52 PM > no_jira
+92 > Modifier Group Row Data > Index 2: td(s) >> > 1 > Copied Group 909301437 > Label 909181440 >  > true > PASS >  -  > 0.05 sec > 02:09:52 PM > no_jira
+93 > Modifier Group Row Data > Index 3: td(s) >> > 1 > Copied Group 910081406 > Label 909181440 >  > true > PASS >  -  > 0.04 sec > 02:09:52 PM > no_jira
+94 > Click 'NEW GROUP' > //*[contains(text(), 'new group')] > Click successful > PASS >  -  > 0.12 sec > 02:09:52 PM > no_jira
+95 > Enter Group Name > [aria-label='Modifier Group Name'] > New Group 910081409 > PASS >  -  > 0.25 sec > 02:09:53 PM > no_jira
+96 > Enter Label In App > [aria-label='Label In App'] > Label 910081409 > PASS >  -  > 1.11 sec > 02:09:54 PM > no_jira
+97 > Find Rules fragment > //div[@class='layout size-line row wrap align-baseline'] > Element Found > PASS >  -  > 0.01 sec > 02:09:54 PM > no_jira
+98 > Find 'Rules' drop-down > .//div[@class='v-input__icon v-input__icon--append'] > Element (e2) found > PASS >  -  > 0.01 sec > 02:09:54 PM > no_jira
+99 >  'Rules' combo-box open Click > Passed Element > Click successful > PASS >  -  > 0.04 sec > 02:09:55 PM > no_jira
+100 > Find Rules list > //div[@class='v-menu__content theme--light menuable__content__active'] > Element Found > PASS >  -  > 1.01 sec > 02:09:56 PM > no_jira
+101 > Rules Count > .//div[@class='v-list__tile__title'] > 5 item(s) (L1) > PASS >  -  > 0.01 sec > 02:09:56 PM > no_jira
+102 > Tax Tag (index 0) > Passed Element > Range > PASS >  -  > 0.01 sec > 02:09:56 PM > no_jira
+103 > Tax Tag (index 1) > Passed Element > Minimum > PASS >  -  > 0.01 sec > 02:09:56 PM > no_jira
+104 > Tax Tag (index 2) > Passed Element > Maximum > PASS >  -  > 0.01 sec > 02:09:56 PM > no_jira
+105 > Tax Tag (index 3) > Passed Element > No limit > PASS >  -  > 0.01 sec > 02:09:56 PM > no_jira
+106 > Tax Tag (index 4) > Passed Element > Exactly > PASS >  -  > 0.01 sec > 02:09:56 PM > no_jira
+107 > Click 'Maximum' > Passed Element > Click successful > PASS >  -  > 0.03 sec > 02:09:56 PM > no_jira
+108 > Find 'number' input > .//input[@type='number'] > Element (e2) found > PASS >  -  > 0.01 sec > 02:09:56 PM > no_jira
+109 > Enter 'Max' 12 > Passed Element > 12 > PASS >  -  > 0.05 sec > 02:09:57 PM > no_jira
+110 > Fund 'Error...' text > Text Found > There must be at least 12 modifiers > PASS >  -  > 0.03 sec > 02:09:57 PM > no_jira
+111 >  'Max' 12 Clear > Passed Element > Text cleared > PASS >  -  > 0.05 sec > 02:09:57 PM > no_jira
+112 > Enter 'Max' 1 > Passed Element > 1 > PASS >  -  > 0.85 sec > 02:09:58 PM > no_jira
+113 > Click  'Add MODIFIER' > //*[contains(text(), 'Add MODIFIER')] > Click successful > PASS >  -  > 0.09 sec > 02:09:58 PM > no_jira
+114 > Move to page Bottom > Current page > Scroll bar at Bottom > PASS >  -  > 0.01 sec > 02:09:58 PM > no_jira
+115 > Modifier Name Count > [aria-label='Item Name'] > 2 item(s) (L0) > PASS >  -  > 0.01 sec > 02:09:58 PM > no_jira
+116 > Modifier Name (0) Enter > Passed Element > Mod 0 910081409 > PASS >  -  > 0.14 sec > 02:09:59 PM > no_jira
+117 > Modifier Name (1) Enter > Passed Element > Mod 1 910081409 > PASS >  -  > 0.12 sec > 02:09:59 PM > no_jira
+118 > Price Count > [aria-label='Price'] > 2 item(s) (L0) > PASS >  -  > 0.83 sec > 02:10:00 PM > no_jira
+119 > Price (0) Enter > Passed Element > 2.25 > PASS >  -  > 0.07 sec > 02:10:00 PM > no_jira
+120 > Price (1) Enter > Passed Element > 3.25 > PASS >  -  > 0.07 sec > 02:10:00 PM > no_jira
+121 > Calories Count > [aria-label='Calories'] > 2 item(s) (L0) > PASS >  -  > 0.01 sec > 02:10:00 PM > no_jira
+122 > Calories (0) Enter > Passed Element > 100 > PASS >  -  > 0.06 sec > 02:10:00 PM > no_jira
+123 > Calories (1) Enter > Passed Element > 102 > PASS >  -  > 0.07 sec > 02:10:00 PM > no_jira
+124 > PLU: Count > [aria-label='PLU:'] > 2 item(s) (L0) > PASS >  -  > 0.01 sec > 02:10:00 PM > no_jira
+125 > PLU: (0) Enter > Passed Element > 600100 > PASS >  -  > 0.10 sec > 02:10:01 PM > no_jira
+126 > PLU: (1) Enter > Passed Element > 600102 > PASS >  -  > 0.10 sec > 02:10:01 PM > no_jira
+127 > Chit # Count > [min='0'] > 3 item(s) (L0) > PASS >  -  > 0.93 sec > 02:10:02 PM > no_jira
+128 > Chit # (0) Click > Passed Element > Click successful > PASS >  -  > 0.05 sec > 02:10:02 PM > no_jira
+129 > Chit # (0) Enter > Passed Element > 1 > PASS >  -  > 0.04 sec > 02:10:02 PM > no_jira
+130 > Chit # (1) Click > Passed Element > Click successful > PASS >  -  > 0.05 sec > 02:10:02 PM > no_jira
+131 > Chit # (1) Enter > Passed Element > 2 > PASS >  -  > 0.04 sec > 02:10:02 PM > no_jira
+132 > Chit # (2) Click > Passed Element > Click successful > PASS >  -  > 0.05 sec > 02:10:02 PM > no_jira
+133 > Chit # (2) Enter > Passed Element > 3 > PASS >  -  > 0.03 sec > 02:10:02 PM > no_jira
+134 > Tax Tags dropdown Click Open > [aria-label='Tax Tags'] > Click successful > PASS >  -  > 0.07 sec > 02:10:02 PM > no_jira
+135 > Find Tax Tags list > //div[contains(@class, 'v-menu__content theme--light menuable__content__active')] > Element Found > PASS >  -  > 0.01 sec > 02:10:03 PM > no_jira
+136 > Tax Tags list Count > .//div[@class='v-list__tile__title'] > 1 item(s) (L1) > PASS >  -  > 0.01 sec > 02:10:03 PM > no_jira
+137 > Tax Tag (index 0) > Passed Element > Prepared > PASS >  -  > 0.01 sec > 02:10:03 PM > no_jira
+138 > Click 'Prepared' > Passed Element > Click successful > PASS >  -  > 0.89 sec > 02:10:04 PM > no_jira
+139 > Tax Tags dropdown Close > //div[contains(@class, 'v-menu__content theme--light menuable__content__active')] > Click out of element successful > PASS >  -  > 0.06 sec > 02:10:04 PM > no_jira
+140 > Click 'APPLY Changes' > //*[contains(text(), 'Apply Changes')] > Click successful > PASS >  -  > 0.07 sec > 02:10:04 PM > no_jira
+141 > Scroll to 'PUBLISH' button > //*[contains(text(), 'publish')] > Move OK > PASS >  -  > 0.05 sec > 02:10:04 PM > no_jira
+142 >  === Snackbar Toast Msg > [role='alert'] >  Global modifier group has been updated   > PASS >  -  >  -  > 02:10:05 PM >  - 
+143 > Click 'PUBLISH' > //*[contains(text(), 'publish')] > Click successful > PASS >  -  > 0.03 sec > 02:10:05 PM > no_jira
+144 > Wait for 'progress'... > //*[contains(@class, 'progress')] > Done in 0.61 sec (timeout: 30.0 sec) > PASS >  -  > 0.61 sec > 02:10:06 PM > no_jira
+145 > Refresh after PUBLISH >  -  >  -  > PASS >  -  > 0.35 sec > 02:10:07 PM > no_jira
+146 > Wait for page load > //*[@class='H4-Secondary-Center'] > Done in 0.62 sec (timeout: 30.0 sec) > PASS >  -  > 0.62 sec > 02:10:07 PM > no_jira
+147 > Paging - Rows per page > [aria-label='Rows per page:'] > Move OK > PASS >  -  > 0.03 sec > 02:10:07 PM > no_jira
+148 > Pagination > //div[contains(@class, 'v-datatable__actions__pagination')] > 1-3 of 3 > PASS >  -  > 0.04 sec > 02:10:08 PM > no_jira
+149 > Rows per page Click > //input[@aria-label='Rows per page:'] > Click successful > PASS >  -  > 0.04 sec > 02:10:08 PM > no_jira
+150 > Find 'Rows per page' list > //div[contains(@class, 'v-menu__content theme--light v-menu__content--auto menuable__content__active')] > Element Found > PASS >  -  > 0.01 sec > 02:10:08 PM > no_jira
+151 > List 'Rows per page' values Count > .//div[@class='v-list__tile__title'] > 4 item(s) (L1) > PASS >  -  > 0.09 sec > 02:10:08 PM > no_jira
+152 > Rows per page Value (index 0) > Passed Element > 5 > PASS >  -  > 0.01 sec > 02:10:08 PM > no_jira
+153 > Rows per page Value (index 1) > Passed Element > 10 > PASS >  -  > 0.01 sec > 02:10:08 PM > no_jira
+154 > Rows per page Value (index 2) > Passed Element > 25 > PASS >  -  > 0.01 sec > 02:10:08 PM > no_jira
+155 > Rows per page Value (index 3) > Passed Element > All > PASS >  -  > 0.01 sec > 02:10:08 PM > no_jira
+156 > Click 'All' > Passed Element > Click successful > PASS >  -  > 0.03 sec > 02:10:09 PM > no_jira
+157 > Wait for 'progress'... > //*[contains(@class, 'progress')] > Done in 1.06 sec (timeout: 30.0 sec) > PASS >  -  > 1.06 sec > 02:10:10 PM > no_jira
+158 > Pagination > //div[contains(@class, 'v-datatable__actions__pagination')] > 1-3 of 3 > PASS >  -  > 0.01 sec > 02:10:10 PM > no_jira
+159 > Groups Count after Add Group > tr > 5 item(s) (L0) > PASS >  -  > 0.01 sec > 02:10:10 PM > no_jira
+160 > Modifier Group Row Header > Passed Element > Chit # Modifier Group Name Label in App Enabled > PASS >  -  > 0.01 sec > 02:10:10 PM > no_jira
+161 > Modifier Group Row Data > Index 2: td(s) >> > 1 > Copied Group 909301437 > Label 909181440 >  > true > PASS >  -  > 0.05 sec > 02:10:10 PM > no_jira
+162 > Modifier Group Row Data > Index 3: td(s) >> > 1 > Copied Group 910081406 > Label 909181440 >  > true > PASS >  -  > 0.04 sec > 02:10:10 PM > no_jira
+163 > Modifier Group Row Data > Index 4: td(s) >> > 1 > New Group 910081409 > Label 910081409 >  > true > PASS >  -  > 0.04 sec > 02:10:10 PM > no_jira
+164 > Select New Group > Passed Element > Click successful > PASS >  -  > 0.03 sec > 02:10:11 PM > no_jira
+165 > Click 'Cancel' > //div[contains(text(), 'Cancel')] > Click successful > PASS >  -  > 0.58 sec > 02:10:12 PM > no_jira
+166 > Select New Group Again > Passed Element > Click successful > PASS >  -  > 0.03 sec > 02:10:12 PM > no_jira
+167 > Mofifiers Count > //div[@class='layout modifier row wrap align-center'] > 2 item(s) (L2) > PASS >  -  > 0.01 sec > 02:10:12 PM > no_jira
+168 > Last Mofifier Hover > Passed Element > Move OK > PASS >  -  > 0.02 sec > 02:10:13 PM > no_jira
+169 > Find 'Delete' Mofifier icon > List index 1 > .//i[@class='v-icon mdi mdi-delete theme--light'] > element found > PASS >  -  > 0.01 sec > 02:10:13 PM > no_jira
+170 >  'Delete' Last Mofifier Click > Passed Element > Click successful > PASS >  -  > 0.92 sec > 02:10:14 PM > no_jira
+171 > Click  'APPLY Changes' > //*[contains(text(), 'Apply Changes')] > Click successful > PASS >  -  > 0.06 sec > 02:10:14 PM > no_jira
+172 > Find 'Delete' New Group 910081409 > List index 4 > .//i[@class='v-icon mdi mdi-delete theme--light'] > element found > PASS >  -  > 0.02 sec > 02:10:14 PM > no_jira
+173 > New Group 910081409 'Delete' Click > Passed Element > Click successful > PASS >  -  > 0.04 sec > 02:10:15 PM > no_jira
+174 > Scroll to 'PUBLISH' button > //*[contains(text(), 'publish')] > Move OK > PASS >  -  > 0.03 sec > 02:10:15 PM > no_jira
+175 >  === Snackbar Toast Msg > [role='alert'] >  Global modifier group has been updated   > PASS >  -  >  -  > 02:10:15 PM >  - 
+176 > Click 'PUBLISH' > //*[contains(text(), 'publish')] > Click successful > PASS >  -  > 0.03 sec > 02:10:15 PM > no_jira
+177 > Wait 'PUBLISH' result... > //*[contains(@class, 'progress')] > Done in 0.61 sec (timeout: 30.0 sec) > PASS >  -  > 0.61 sec > 02:10:16 PM > no_jira
+178 > Groups Count after Delete - Publish > tr > 4 item(s) (L0) > PASS >  -  > 0.01 sec > 02:10:17 PM > no_jira
+179 > Modifier Group Row Header > Passed Element > Chit # Modifier Group Name Label in App Enabled > PASS >  -  > 0.01 sec > 02:10:17 PM > no_jira
+180 > Modifier Group Row Data > Index 2: td(s) >> > 1 > Copied Group 909301437 > Label 909181440 >  > true > PASS >  -  > 0.03 sec > 02:10:17 PM > no_jira
+181 > Modifier Group Row Data > Index 3: td(s) >> > 1 > Copied Group 910081406 > Label 909181440 >  > true > PASS >  -  > 0.03 sec > 02:10:17 PM > no_jira
+182 > Paging - Rows per page > [aria-label='Rows per page:'] > Move OK > PASS >  -  > 0.02 sec > 02:10:17 PM > no_jira
+183 > Pagination > //div[contains(@class, 'v-datatable__actions__pagination')] > 1-2 of 2 > PASS >  -  > 0.01 sec > 02:10:17 PM > no_jira
+184 > Rows per page Click > //input[@aria-label='Rows per page:'] > Click successful > PASS >  -  > 0.03 sec > 02:10:17 PM > no_jira
+185 > Find 'Rows per page' list > //div[contains(@class, 'v-menu__content theme--light v-menu__content--auto menuable__content__active')] > Element Found > PASS >  -  > 0.01 sec > 02:10:18 PM > no_jira
+186 > List 'Rows per page' values Count > .//div[@class='v-list__tile__title'] > 4 item(s) (L1) > PASS >  -  > 0.01 sec > 02:10:18 PM > no_jira
+187 > Rows per page Value (index 0) > Passed Element > 5 > PASS >  -  > 0.01 sec > 02:10:18 PM > no_jira
+188 > Rows per page Value (index 1) > Passed Element > 10 > PASS >  -  > 0.01 sec > 02:10:18 PM > no_jira
+189 > Rows per page Value (index 2) > Passed Element > 25 > PASS >  -  > 0.01 sec > 02:10:18 PM > no_jira
+190 > Rows per page Value (index 3) > Passed Element > All > PASS >  -  > 0.01 sec > 02:10:18 PM > no_jira
+191 > Click 'All' > Passed Element > Click successful > PASS >  -  > 0.02 sec > 02:10:18 PM > no_jira
+192 > Wait for 'progress'... > //*[contains(@class, 'progress')] > Done in 0.03 sec (timeout: 30.0 sec) > PASS >  -  > 0.03 sec > 02:10:18 PM > no_jira
+193 > Pagination > //div[contains(@class, 'v-datatable__actions__pagination')] > 1-2 of 2 > PASS >  -  > 0.01 sec > 02:10:19 PM > no_jira
+194 > Groups Count > tr > 4 item(s) (L0) > PASS >  -  > 0.01 sec > 02:10:19 PM > no_jira
+195 > Modifier Group Row Header > Passed Element > Chit # Modifier Group Name Label in App Enabled > PASS >  -  > 0.01 sec > 02:10:19 PM > no_jira
+196 > Modifier Group Row Data > Index 2: td(s) >> > 1 > Copied Group 909301437 > Label 909181440 >  > true > PASS >  -  > 0.03 sec > 02:10:19 PM > no_jira
+197 > Modifier Group Row Data > Index 3: td(s) >> > 1 > Copied Group 910081406 > Label 909181440 >  > true > PASS >  -  > 0.03 sec > 02:10:19 PM > no_jira
+199 >  === Snackbar Toast Msg > [role='alert'] >  Global Modifier Groups successfully published   > PASS >  -  >  -  > 02:10:19 PM >  - 
+199 > Find 'Copy' Last Group > List index 3 > .//i[@class='v-icon mdi mdi-content-copy theme--light'] > element found > PASS >  -  > 0.01 sec > 02:10:19 PM > no_jira
+200 > Click 'Copy' Last Group > Passed Element > Click successful > PASS >  -  > 0.03 sec > 02:10:19 PM > no_jira
+201 > Groups Count after Copy > tr > 5 item(s) (L0) > PASS >  -  > 0.01 sec > 02:10:20 PM > no_jira
+202 > Modifier Group Row Header > Passed Element > Chit # Modifier Group Name Label in App Enabled > PASS >  -  > 0.01 sec > 02:10:21 PM > no_jira
+203 > Modifier Group Row Data > Index 2: td(s) >> > 1 > Copied Group 909301437 > Label 909181440 >  > true > PASS >  -  > 0.03 sec > 02:10:21 PM > no_jira
+204 > Modifier Group Row Data > Index 3: td(s) >> > 1 > Copied Group 910081406 > Label 909181440 >  > true > PASS >  -  > 0.03 sec > 02:10:21 PM > no_jira
+205 > Modifier Group Row Data > Index 4: td(s) >> > 1 > Copied Group 910081406 copy > Label 909181440 >  > true > PASS >  -  > 0.04 sec > 02:10:21 PM > no_jira
+206 > Select Copied Group > Passed Element > Click successful > PASS >  -  > 0.07 sec > 02:10:21 PM > no_jira
+207 > Copied Group Name Clear > [aria-label='Modifier Group Name'] > Cleared > PASS >  -  > 0.08 sec > 02:10:21 PM > no_jira
+208 > Enter New Copied Group Name > [aria-label='Modifier Group Name'] > Copied Group 910081409 > PASS >  -  > 0.25 sec > 02:10:22 PM > no_jira
+209 > Click  'APPLY Changes' > //*[contains(text(), 'Apply Changes')] > Click successful > PASS >  -  > 0.04 sec > 02:10:22 PM > no_jira
+210 > Scroll to 'PUBLISH' button > //*[contains(text(), 'publish')] > Move OK > PASS >  -  > 0.03 sec > 02:10:22 PM > no_jira
+211 > Click 'PUBLISH' > //*[contains(text(), 'publish')] > Click successful > PASS >  -  > 0.03 sec > 02:10:23 PM > no_jira
+212 >  === Snackbar Toast Msg > [role='alert'] >  Global modifier group has been updated   > PASS >  -  >  -  > 02:10:23 PM >  - 
+213 > Wait 'PUBLISH' result... > //*[contains(@class, 'progress')] > Done in 0.03 sec (timeout: 30.0 sec) > PASS >  -  > 0.03 sec > 02:10:24 PM > no_jira
+214 > Groups Count after Copy - Publish > tr > 5 item(s) (L0) > PASS >  -  > 0.01 sec > 02:10:24 PM > no_jira
+215 > Modifier Group Row Header > Passed Element > Chit # Modifier Group Name Label in App Enabled > PASS >  -  > 0.01 sec > 02:10:24 PM > no_jira
+216 > Modifier Group Row Data > Index 2: td(s) >> > 1 > Copied Group 909301437 > Label 909181440 >  > true > PASS >  -  > 0.04 sec > 02:10:24 PM > no_jira
+217 > Modifier Group Row Data > Index 3: td(s) >> > 1 > Copied Group 910081406 > Label 909181440 >  > true > PASS >  -  > 0.04 sec > 02:10:24 PM > no_jira
+218 > Modifier Group Row Data > Index 4: td(s) >> > 1 > Copied Group 910081409 > Label 909181440 >  > true > PASS >  -  > 0.04 sec > 02:10:24 PM > no_jira
+219 > Find 'Delete' Copied Group > List index 4 > .//i[@class='v-icon mdi mdi-delete theme--light'] > element found > PASS >  -  > 0.01 sec > 02:10:25 PM > no_jira
+220 >  'Delete' Copied Group Click > Passed Element > Click successful > PASS >  -  > 0.03 sec > 02:10:25 PM > no_jira
+221 > Scroll to 'PUBLISH' button > //*[contains(text(), 'publish')] > Move OK > PASS >  -  > 0.03 sec > 02:10:25 PM > no_jira
+222 > Click 'PUBLISH' > //*[contains(text(), 'publish')] > Click successful > PASS >  -  > 0.03 sec > 02:10:26 PM > no_jira
+223 > Wait 'PUBLISH' result... > //*[contains(@class, 'progress')] > Done in 0.62 sec (timeout: 30.0 sec) > PASS >  -  > 0.62 sec > 02:10:26 PM > no_jira
+225 >  === Snackbar Toast Msg > [role='alert'] >  Global Modifier Groups successfully published   > PASS >  -  >  -  > 02:10:27 PM >  - 
+225 > Groups Count after Copied Delete - Publish > tr > 4 item(s) (L0) > PASS >  -  > 0.01 sec > 02:10:27 PM > no_jira
+226 > Modifier Group Row Header > Passed Element > Chit # Modifier Group Name Label in App Enabled > PASS >  -  > 0.01 sec > 02:10:27 PM > no_jira
+227 > Modifier Group Row Data > Index 2: td(s) >> > 1 > Copied Group 909301437 > Label 909181440 >  > true > PASS >  -  > 0.03 sec > 02:10:27 PM > no_jira
+228 > Modifier Group Row Data > Index 3: td(s) >> > 1 > Copied Group 910081406 > Label 909181440 >  > true > PASS >  -  > 0.03 sec > 02:10:27 PM > no_jira
+229 > Select 1st Group to modify > Passed Element > Click successful > PASS >  -  > 0.02 sec > 02:10:27 PM > no_jira
+230 > Label In App > css [aria-label='Label In App'] > Label 909181440 > PASS >  -  > 0.14 sec > 02:10:28 PM > no_jira
+231 > Group Chit # > css [min='0'] > 1 > PASS >  -  > 0.08 sec > 02:10:28 PM > no_jira
+232 > Modifiers Count > //*[@class='layout modifier row wrap align-center'] > 1 item(s) (L2) > PASS >  -  > 0.01 sec > 02:10:28 PM > no_jira
+233 > 1st Mofifier Hover > Passed Element > Move OK > PASS >  -  > 0.03 sec > 02:10:29 PM > no_jira
+234 > Find 1st Mofifier Name input > List index 0 > .//span[@class='Body-1-Black-Medium-Emphasis-Left'] > element found > PASS >  -  > 0.01 sec > 02:10:29 PM > no_jira
+235 > 1st Mofifier Name Click > Passed Element > Click successful > PASS >  -  > 0.04 sec > 02:10:29 PM > no_jira
+236 > 1st Mod Name > css [aria-label='Item Name'] > Mod 0 909181440 > PASS >  -  > 0.09 sec > 02:10:29 PM > no_jira
+237 > 1st Mod Price > css [aria-label='Price'] > 2.25 > PASS >  -  > 0.10 sec > 02:10:29 PM > no_jira
+238 > 1st Mod Calories > css [aria-label='Calories'] > 100 > PASS >  -  > 0.10 sec > 02:10:29 PM > no_jira
+239 > 1st Mod PLU > css [aria-label='PLU:'] > 600100 > PASS >  -  > 0.10 sec > 02:10:29 PM > no_jira
+240 > Click 'Cancel' > //*[contains(text(), 'Cancel')] > Click successful > PASS >  -  > 0.05 sec > 02:10:30 PM > no_jira
+241 > Navigate Back >  'globalmods' page >  'menu' page > PASS >  -  > 0.21 sec > 02:10:30 PM > no_jira
+242 > Wait for page load... > //*[contains(@class, 'progress')] > Done in 0.57 sec (timeout: 30.0 sec) > PASS >  -  > 0.57 sec > 02:10:31 PM > no_jira
+244 >  === Snackbar Toast Msg > [role='alert'] >  Global Modifier Groups successfully published   > PASS >  -  >  -  > 02:10:31 PM >  - 
+244 > Wait for Menu page load > //div[@class='layout hover align-baseline'] > Done in 0.01 sec (timeout: 30.0 sec) > PASS >  -  > 0.01 sec > 02:10:31 PM > no_jira
+ -  >  === MM Global Modifiers  >  =====  >  == Global Modifiers End ^^ >  -  >  -  >  -  >  - 
+ -  >  === MM Global Menus Add Menu Set >  =====  >  == Add Menu Sets Begin >> >  -  >  -  >  - >  - 
+245 > Menus Count > //div[@class='layout hover align-baseline'] > 4 item(s) (L2) > PASS >  -  > 0.01 sec > 02:10:31 PM > no_jira
+246 > Menu (Index 0) Name > textContent > Al Forno  Last Published: 6/15/2020 at 8:39 AM by sagar patelView GLobal MenusView GLobal Modifier GroupsView Local Brands > PASS >  -  > 0.00 sec > 02:10:31 PM > no_jira
+247 > Menu (Index 1) Name > textContent > Austin Grill  Last Published: 6/15/2020 at 7:50 AM by sagar patelView GLobal MenusView GLobal Modifier GroupsView Local Brands > PASS >  -  > 0.00 sec > 02:10:31 PM > no_jira
+248 > Menu (Index 2) Name > textContent > BOOSTER JUICE  Last Published: 9/10/2020 at 4:16 PMView GLobal MenusView GLobal Modifier GroupsView Local Brands > PASS >  -  > 0.00 sec > 02:10:31 PM > no_jira
+249 > Menu (Index 3) Name > textContent > TIM HORTONS  You are editing this menuView GLobal MenusView GLobal Modifier GroupsView Local Brands > PASS >  -  > 0.00 sec > 02:10:31 PM > no_jira
+250 > Scroll to Menu TIM HORTONS > Passed Element > Move OK > PASS >  -  > 0.03 sec > 02:10:32 PM > no_jira
+251 > Click Menu TIM HORTONS > Passed Element > Click successful > PASS >  -  > 0.02 sec > 02:10:32 PM > no_jira
+252 > Find TIM HORTONS 'View Global Menus' button > List index 3 > .//button[@type='button'][1] > element found > PASS >  -  > 0.01 sec > 02:10:32 PM > no_jira
+253 > Click 'View Global Menus' > Passed Element > Click successful > PASS >  -  > 0.02 sec > 02:10:32 PM > no_jira
+254 > Wait for 'progress'... > //*[contains(@class, 'progress')] > Done in 1.04 sec (timeout: 30.0 sec) > PASS >  -  > 1.04 sec > 02:10:33 PM > no_jira
+255 > Page Title > textContent > Chartwells/US > PASS >  -  > 0.01 sec > 02:10:34 PM > no_jira
+256 > Scroll to 'EDIT MENU' button > //*[contains(text(), 'EDIT MENU')] > Move OK > PASS >  -  > 0.02 sec > 02:10:34 PM > no_jira
+257 > Click 'EDIT MENU' > //*[contains(text(), 'EDIT MENU')] > Click successful > PASS >  -  > 0.04 sec > 02:10:35 PM > no_jira
+258 > Wait for 'progress'... > //*[contains(@class, 'progress')] > Done in 0.94 sec (timeout: 30.0 sec) > PASS >  -  > 0.94 sec > 02:10:36 PM > no_jira
+259 > Click 'ADD MENU SET' > //*[contains(text(), 'add menu set')] > Click successful > PASS >  -  > 0.08 sec > 02:10:43 PM > no_jira
+260 > Menus + 1 Added Count > //div[@class='flex xs12 list-item list-item-large'] > 2 item(s) (L0) > PASS >  -  > 0.01 sec > 02:10:46 PM > no_jira
+261 > Find New Menu Set Name input > List index 1 > .//input[@type='text'] > element found > PASS >  -  > 0.01 sec > 02:10:55 PM > no_jira
+262 > Enter Added Menu Set Name > Passed Element > Added 910081409 > PASS >  -  > 0.19 sec > 02:10:59 PM > no_jira
+263 > Scroll to 'PUBLISH' button > //*[contains(text(), 'publish')] > Move OK > PASS >  -  > 0.02 sec > 02:10:59 PM > no_jira
+264 > Click 'PUBLISH' > //*[contains(text(), 'publish')] > Click successful > PASS >  -  > 0.79 sec > 02:11:00 PM > no_jira
+265 > Wait for 'PUBLISH' result... > //*[contains(@class, 'progress')] > Done in 0.11 sec (timeout: 30.0 sec) > PASS >  -  > 0.11 sec > 02:11:01 PM > no_jira
+266 >  === Snackbar Toast Msg > [role='alert'] >  Menu successfully published   > PASS >  -  >  -  > 02:11:02 PM >  - 
+267 > Find 'Last/Editing...' text > textContent > Last Published: Today at 2:11 PM by you > PASS >  -  > 0.01 sec > 02:11:02 PM > no_jira
+268 > Added Menu Set Name Click > //*[contains(text(), 'Added 910081409')] > Click successful > PASS >  -  > 0.08 sec > 02:11:03 PM > no_jira
+269 > Wait for 'progress'... > //*[contains(@class, 'progress')] > Done in 0.02 sec (timeout: 30.0 sec) > PASS >  -  > 0.02 sec > 02:11:03 PM > no_jira
+270 > Find 'No Categories...' > textContent >  No categories found  > PASS >  -  > 0.01 sec > 02:11:05 PM > no_jira
+271 > Scroll to 'EDIT MENU' button > //*[contains(text(), 'EDIT MENU')] > Move OK > PASS >  -  > 0.02 sec > 02:11:05 PM > no_jira
+272 > Click 'EDIT MENU' > //*[contains(text(), 'EDIT MENU')] > Click successful > PASS >  -  > 0.03 sec > 02:11:05 PM > no_jira
+273 > Wait for 'EDIT'... > //*[contains(@class, 'progress')] > Done in 0.12 sec (timeout: 30.0 sec) > PASS >  -  > 0.12 sec > 02:11:06 PM > no_jira
+274 > Wait for Menu List page > [menu-id] > Done in 0.01 sec (timeout: 30.0 sec) > PASS >  -  > 0.01 sec > 02:11:06 PM > no_jira
+276 >  === Snackbar Toast Msg > [role='alert'] >  Menu successfully published   > PASS >  -  >  -  > 02:11:06 PM >  - 
+276 > Published Menus ID Count > [menu-id] > 2 item(s) (L2) > PASS >  -  > 0.01 sec > 02:11:06 PM > no_jira
+277 > Published Menus Count > //div[@class='flex xs12 list-item list-item-large'] > 2 item(s) (L0) > PASS >  -  > 0.01 sec > 02:11:06 PM > no_jira
+278 > Menu (Index 0) Name > textContent >  Added 909301458  > PASS >  -  > 0.00 sec > 02:11:06 PM > no_jira
+279 > Menu (Index 0) ID > menu-id > w03AkBXemaFWvN2wW6jrIoAzAgrzB7tW21lPQGKOC9z4RJq0OjuZ6ok9D1W9SygDzl2 > PASS >  -  > 0.01 sec > 02:11:06 PM > no_jira
+280 > Menu (Index 1) Name > textContent >  Added 910081409  > PASS >  -  > 0.00 sec > 02:11:06 PM > no_jira
+281 > Menu (Index 1) ID > menu-id > 03zelm6MwOfQ03aYPl7ZcLy3Qr53DPu9dr35GvBmsG0pDk72koUjgaawkwP5hg6939p > PASS >  -  > 0.00 sec > 02:11:06 PM > no_jira
+282 > Find 'Last/Editing...' text > textContent > You are editing this menu > PASS >  -  > 0.01 sec > 02:11:06 PM > no_jira
+283 > Find last 'Added...' > '+' > List index 1 > .//i[@class='v-icon mdi mdi-plus theme--light'] > element found > PASS >  -  > 0.01 sec > 02:11:07 PM > no_jira
+284 > Last Added Set > '+' Click > Passed Element > Click successful > PASS >  -  > 0.08 sec > 02:11:07 PM > no_jira
+285 > Wait for Category Name field > //*[contains(@class, 'progress')] > Done in 0.03 sec (timeout: 30.0 sec) > PASS >  -  > 0.03 sec > 02:11:08 PM > no_jira
+286 > Move to page Bottom > Current page > Scroll bar at Bottom > PASS >  -  > 0.01 sec > 02:11:08 PM > no_jira
+287 > New Category Chit # Click > [aria-label='Chit #'] > Click successful > PASS >  -  > 0.04 sec > 02:11:09 PM > no_jira
+288 > Enter Category Chit # > [aria-label='Chit #'] > 3 > PASS >  -  > 0.03 sec > 02:11:09 PM > no_jira
+289 > New Category Name Click > [aria-label='Enter Category Name'] > Click successful > PASS >  -  > 0.06 sec > 02:11:10 PM > no_jira
+290 > Enter Category Name > [aria-label='Enter Category Name'] > Category 910081409 > PASS >  -  > 0.31 sec > 02:11:10 PM > no_jira
+291 > Scroll to 'NEW ITEM' button > //*[contains(text(), 'new item')] > Move OK > PASS >  -  > 0.54 sec > 02:11:11 PM > no_jira
+292 >  'NEW ITEM' Click > //*[contains(text(), 'new item')] > Click successful > PASS >  -  > 0.12 sec > 02:11:12 PM > no_jira
+293 > New Item Name Click > [aria-label='Item Name'] > Click successful > PASS >  -  > 1.03 sec > 02:11:13 PM > no_jira
+294 > Enter Item Name > [aria-label='Item Name'] > Item 910081409 > PASS >  -  > 0.25 sec > 02:11:14 PM > no_jira
+295 > Price Click > [aria-label='Price'] > Click successful > PASS >  -  > 0.03 sec > 02:11:14 PM > no_jira
+296 > Enter Price > [aria-label='Price'] > 1.05 > PASS >  -  > 0.07 sec > 02:11:14 PM > no_jira
+297 > Calories Click > [aria-label='Calories'] > Click successful > PASS >  -  > 0.87 sec > 02:11:15 PM > no_jira
+298 > Enter Calories > [aria-label='Calories'] > 280 > PASS >  -  > 0.06 sec > 02:11:16 PM > no_jira
+299 > Units Click > [aria-label='Units'] > Click successful > PASS >  -  > 0.03 sec > 02:11:16 PM > no_jira
+300 > Enter Units > [aria-label='Units'] > 8 > PASS >  -  > 0.04 sec > 02:11:16 PM > no_jira
+301 > PLU Click > [aria-label='PLU ID'] > Click successful > PASS >  -  > 0.03 sec > 02:11:16 PM > no_jira
+302 > Enter PLU ID > [aria-label='PLU ID'] > 900019 > PASS >  -  > 0.93 sec > 02:11:17 PM > no_jira
+303 > Description Click > [aria-label='Description'] > Click successful > PASS >  -  > 0.03 sec > 02:11:18 PM > no_jira
+304 > Enter Description > [aria-label='Description'] > Description 910081409 > PASS >  -  > 0.26 sec > 02:11:18 PM > no_jira
+305 > Tax Tags dropdown Click Open > [aria-label='Tax Tags'] > Click successful > PASS >  -  > 1.08 sec > 02:11:19 PM > no_jira
+306 > Find Tax Tags list > //div[contains(@class, 'v-menu__content theme--light menuable__content__active')] > Element Found > PASS >  -  > 0.01 sec > 02:11:20 PM > no_jira
+307 > Tax Tags list Count > .//div[@class='v-list__tile__title'] > 8 item(s) (L1) > PASS >  -  > 0.01 sec > 02:11:20 PM > no_jira
+308 > Tax Tag (index 0) > Passed Element > Alcohol > PASS >  -  > 0.01 sec > 02:11:20 PM > no_jira
+309 > Tax Tag (index 1) > Passed Element > Baked Goods > PASS >  -  > 0.01 sec > 02:11:20 PM > no_jira
+310 > Tax Tag (index 2) > Passed Element > Candy > PASS >  -  > 0.01 sec > 02:11:20 PM > no_jira
+311 > Tax Tag (index 3) > Passed Element > Tax Exempt > PASS >  -  > 0.01 sec > 02:11:20 PM > no_jira
+312 > Tax Tag (index 4) > Passed Element > Pop > PASS >  -  > 0.01 sec > 02:11:20 PM > no_jira
+313 > Tax Tag (index 5) > Passed Element > Prepared > PASS >  -  > 0.01 sec > 02:11:20 PM > no_jira
+314 > Tax Tag (index 6) > Passed Element > Unprepared > PASS >  -  > 0.01 sec > 02:11:20 PM > no_jira
+315 > Tax Tag (index 7) > Passed Element > Water > PASS >  -  > 0.01 sec > 02:11:20 PM > no_jira
+316 > Click 'Prepared' > Passed Element > Click successful > PASS >  -  > 0.04 sec > 02:11:20 PM > no_jira
+317 > Tax Tags dropdown Close > //div[contains(@class, 'v-menu__content theme--light menuable__content__active')] > Click out of element successful > PASS >  -  > 0.05 sec > 02:11:20 PM > no_jira
+318 > Modifiers 'Add Group' Click > //*[contains(text(), 'Add modifier group')] > Click successful > PASS >  -  > 0.92 sec > 02:11:21 PM > no_jira
+319 > Modifier Name Input Click > //div[@class='v-input v-text-field v-select v-input--is-focused theme--light primary--text'] > Click successful > PASS >  -  > 0.05 sec > 02:11:22 PM > no_jira
+320 > Find 'Modifier Groups list > //div[contains(@class, 'v-menu__content theme--light menuable__content__active')] > Element Found > PASS >  -  > 0.88 sec > 02:11:23 PM > no_jira
+321 > Available Modifier Groups Count > .//div[@class='v-list__tile__title'] > 2 item(s) (L1) > PASS >  -  > 0.01 sec > 02:11:24 PM > no_jira
+322 > Modifier Group (index 0) > Passed Element > Copied Group 909301437 > PASS >  -  > 0.01 sec > 02:11:24 PM > no_jira
+323 > Modifier Group (index 1) > Passed Element > Copied Group 910081406 > PASS >  -  > 0.01 sec > 02:11:24 PM > no_jira
+324 > Select 1st Group > Passed Element > Click successful > PASS >  -  > 0.02 sec > 02:11:24 PM > no_jira
+325 > Updated Modifier Group Count > //div[@class='modifier-group'] > 1 item(s) (L0) > PASS >  -  > 0.01 sec > 02:11:24 PM > no_jira
+326 > Modifier Group (Index 0) Text Content > textContent > Copied Group 909301437 Label in App:  > PASS >  -  > 0.00 sec > 02:11:24 PM > no_jira
+327 > Click 'APPLY Changes' > //*[contains(text(), 'Apply Changes')] > Click successful > PASS >  -  > 0.13 sec > 02:11:24 PM > no_jira
+329 >  === Snackbar Toast Msg > [role='alert'] >  Item configuration has been updated   > PASS >  -  >  -  > 02:11:24 PM >  - 
+329 > Scroll to 'PUBLISH' button > //*[contains(text(), 'publish')] > Move OK > PASS >  -  > 0.03 sec > 02:11:24 PM > no_jira
+330 > Click 'PUBLISH' > //*[contains(text(), 'publish')] > Click successful > PASS >  -  > 0.05 sec > 02:11:25 PM > no_jira
+331 > Wait for 'PUBLISH' result... > //*[contains(@class, 'progress')] > Done in 0.09 sec (timeout: 30.0 sec) > PASS >  -  > 0.09 sec > 02:11:25 PM > no_jira
+332 > Find 'Last/Editing...' text > textContent > Last Published: Today at 2:11 PM by you > PASS >  -  > 0.01 sec > 02:11:27 PM > no_jira
+333 >  'EDIT MENU' Click > //*[contains(text(), 'EDIT MENU')] > Click successful > PASS >  -  > 0.04 sec > 02:11:27 PM > no_jira
+334 > Wait for 'progress'... > //*[contains(@class, 'progress')] > Done in 0.13 sec (timeout: 30.0 sec) > PASS >  -  > 0.13 sec > 02:11:27 PM > no_jira
+336 >  === Snackbar Toast Msg > [role='alert'] >  Item configuration has been updated   > PASS >  -  >  -  > 02:11:28 PM >  - 
+336 > Find 'Last/Editing...' text > textContent > You are editing this menu > PASS >  -  > 0.01 sec > 02:11:28 PM > no_jira
+337 > Added Menu Set Hover > //*[contains(text(), 'Added 910081409')] > Move OK > PASS >  -  > 0.03 sec > 02:11:29 PM > no_jira
+338 > Published Menus Count > //div[@class='flex xs12 list-item list-item-large'] > 2 item(s) (L0) > PASS >  -  > 0.01 sec > 02:11:29 PM > no_jira
+339 > Menu (Index 0) Name > textContent >  Added 909301458  > PASS >  -  > 0.00 sec > 02:11:29 PM > no_jira
+340 > Menu (Index 1) Name > textContent >  Added 910081409  > PASS >  -  > 0.00 sec > 02:11:29 PM > no_jira
+341 > Find Added Menu Set - dots > button > 2 item(s) (L1) > PASS >  -  > 0.01 sec > 02:11:29 PM > no_jira
+342 > Added Menu Set 'dots' Click > Passed Element > Click successful > PASS >  -  > 0.03 sec > 02:11:30 PM > no_jira
+343 > Wait for Options list > //div[contains(@class, 'v-menu__content theme--light menuable__content__active')] > Done in 0.01 sec (timeout: 30.0 sec) > PASS >  -  > 0.01 sec > 02:11:32 PM > no_jira
+344 > Find Menu Edit Options list > //div[contains(@class, 'v-menu__content theme--light menuable__content__active')] > Element Found > PASS >  -  > 0.01 sec > 02:11:32 PM > no_jira
+345 > Menu Edit Options list Count > .//div[@class='v-list__tile__title'] > 4 item(s) (L1) > PASS >  -  > 0.01 sec > 02:11:32 PM > no_jira
+346 > Menu Edit Option (index 0) > Passed Element > Rename > PASS >  -  > 0.01 sec > 02:11:32 PM > no_jira
+347 > Menu Edit Option (index 1) > Passed Element > Duplicate > PASS >  -  > 0.01 sec > 02:11:32 PM > no_jira
+348 > Menu Edit Option (index 2) > Passed Element > Disable > PASS >  -  > 0.01 sec > 02:11:32 PM > no_jira
+349 > Menu Edit Option (index 3) > Passed Element > Delete > PASS >  -  > 0.01 sec > 02:11:32 PM > no_jira
+350 > Click 'Delete' > Passed Element > Click successful > PASS >  -  > 0.04 sec > 02:11:32 PM > no_jira
+351 > Scroll to 'PUBLISH' button > //*[contains(text(), 'publish')] > Move OK > PASS >  -  > 0.02 sec > 02:11:32 PM > no_jira
+352 >  === Snackbar Toast Msg > [role='alert'] >  Menu successfully published   > PASS >  -  >  -  > 02:11:32 PM >  - 
+353 > Click 'PUBLISH' > //*[contains(text(), 'publish')] > Click successful > PASS >  -  > 0.03 sec > 02:11:33 PM > no_jira
+354 > Wait for 'PUBLISH' result... > //*[contains(@class, 'progress')] > Done in 0.08 sec (timeout: 30.0 sec) > PASS >  -  > 0.08 sec > 02:11:33 PM > no_jira
+355 > Wait for Menu list > [menu-id] > Done in 0.01 sec (timeout: 30.0 sec) > PASS >  -  > 0.01 sec > 02:11:33 PM > no_jira
+356 > Published Menus ID Count > [menu-id] > 1 item(s) (L2) > PASS >  -  > 0.01 sec > 02:11:34 PM > no_jira
+357 > Re-Published Menus Count > //div[@class='flex xs12 list-item list-item-large'] > 1 item(s) (L0) > PASS >  -  > 0.01 sec > 02:11:34 PM > no_jira
+358 > Menu (Index 0) Name > textContent >  Added 909301458  > PASS >  -  > 0.00 sec > 02:11:34 PM > no_jira
+359 > Menu (Index 0) ID > menu-id > w03AkBXemaFWvN2wW6jrIoAzAgrzB7tW21lPQGKOC9z4RJq0OjuZ6ok9D1W9SygDzl2 > PASS >  -  > 0.00 sec > 02:11:34 PM > no_jira
+360 > Find 'Last/Editing...' text > textContent > Last Published: 10/5/2020 at 10:10 AM by you > PASS >  -  > 0.02 sec > 02:11:34 PM > no_jira
+361 > Navigate Back > MM 'Menu' page > MM 'Sector' page > PASS >  -  > 0.02 sec > 02:11:34 PM > no_jira
+362 > Wait for page load... > //*[contains(@class, 'progress')] > Done in 0.03 sec (timeout: 30.0 sec) > PASS >  -  > 0.03 sec > 02:11:35 PM > no_jira
+363 > Find 'Leave...' question > Leave without publishing? > Found > PASS >  -  > 0.01 sec > 02:11:35 PM > no_jira
+364 > Navigate Back after Publish OK > MM 'Sector' page > Dialog 'Leave without publishing?' > FAIL >  -  >  - 
+365 > Find 'Leave...' note > Text Found > Changes will be lost if you do not publish. > PASS >  -  > 0.02 sec > 02:11:35 PM > no_jira
+366 > Find 'CANCEL' > //button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')] > CANCEL > PASS >  -  > 0.02 sec > 02:11:35 PM > no_jira
+367 > Find 'LEAVE' > //button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1] > LEAVE > PASS >  -  > 0.02 sec > 02:11:35 PM > no_jira
+368 >  'LEAVE' Click > //button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1] > Click successful > PASS >  -  > 0.22 sec > 02:11:35 PM > no_jira
+369 > Wait for MM 'Sector' page > //div[@class='layout hover align-baseline'] > Done in 0.01 sec (timeout: 30.0 sec) > PASS >  -  > 0.01 sec > 02:11:35 PM > no_jira
+ -  >  === MM Global Menus Add Menu Set >  =====  >  == Add Menu Sets End ^^ >  -  >  -  >  - >  - 
+ -  >  === MM Global Menus Import >  =====  >  == Global Menus Import Begin >> >  -  >  -  >  - >  - 
+370 > Menus Count > //div[@class='layout hover align-baseline'] > 4 item(s) (L2) > PASS >  -  > 0.01 sec > 02:11:36 PM > no_jira
+371 > Menu (Index 0) Name > textContent > Al Forno  Last Published: 6/15/2020 at 8:39 AM by sagar patelView GLobal MenusView GLobal Modifier GroupsView Local Brands > PASS >  -  > 0.00 sec > 02:11:36 PM > no_jira
+372 > Menu (Index 1) Name > textContent > Austin Grill  Last Published: 6/15/2020 at 7:50 AM by sagar patelView GLobal MenusView GLobal Modifier GroupsView Local Brands > PASS >  -  > 0.00 sec > 02:11:36 PM > no_jira
+373 > Menu (Index 2) Name > textContent > BOOSTER JUICE  Last Published: 9/10/2020 at 4:16 PMView GLobal MenusView GLobal Modifier GroupsView Local Brands > PASS >  -  > 0.00 sec > 02:11:36 PM > no_jira
+374 > Menu (Index 3) Name > textContent > TIM HORTONS  Last Published: 10/5/2020 at 10:10 AM by youView GLobal MenusView GLobal Modifier GroupsView Local Brands > PASS >  -  > 0.01 sec > 02:11:36 PM > no_jira
+375 > Scroll to Menu TIM HORTONS > Passed Element > Move OK > PASS >  -  > 0.03 sec > 02:11:36 PM > no_jira
+376 > Click Menu TIM HORTONS > Passed Element > Click successful > PASS >  -  > 0.03 sec > 02:11:36 PM > no_jira
+377 > Find TIM HORTONS 'View Global Menus' button > List index 3 > .//button[@type='button'][1] > element found > PASS >  -  > 0.01 sec > 02:11:36 PM > no_jira
+379 >  === Snackbar Toast Msg > [role='alert'] >  Menu successfully published   > PASS >  -  >  -  > 02:11:36 PM >  - 
+379 > Click 'View Global Menus' > Passed Element > Click successful > PASS >  -  > 0.11 sec > 02:11:37 PM > no_jira
+380 > Page Title > textContent > Chartwells/US > PASS >  -  > 0.01 sec > 02:11:37 PM > no_jira
+381 > Scroll to 'EDIT MENU' button > //*[contains(text(), 'EDIT MENU')] > Move OK > PASS >  -  > 0.02 sec > 02:11:37 PM > no_jira
+382 > Wait for 'progress'... > //*[contains(@class, 'progress')] > Done in 0.03 sec (timeout: 30.0 sec) > PASS >  -  > 0.03 sec > 02:11:38 PM > no_jira
+383 > Current page URL > Page URL > https://dev.adminpanel.compassdigital.org/#/menu/sector/11J3gKPg8BC5r9k3mlyzu8y1qZjG3aFoj0ZNw03OspJ2woX2okSjryOBX5ZGHaO0XOwaNQcAdR66/company/LWg8oK2ovJFrepmNN6WJHL091o1D6jTRYMwqeDwKH4OOo7wd5XfD6kX6GD4gCRJDN6dWz6tOdpZLr > PASS >  -  > 0.00 sec > 02:11:39 PM > no_jira
+384 > Find 'Last/Editing...' text > textContent > Last Published: 10/5/2020 at 10:10 AM by you > PASS >  -  > 0.01 sec > 02:11:39 PM > no_jira
+385 > Click 'EDIT MENU' > //*[contains(text(), 'EDIT MENU')] > Click successful > PASS >  -  > 0.03 sec > 02:11:39 PM > no_jira
+386 > Wait for 'progress'... > //*[contains(@class, 'progress')] > Done in 0.07 sec (timeout: 30.0 sec) > PASS >  -  > 0.07 sec > 02:11:39 PM > no_jira
+387 > TIM HORTONS Global Menus ID Count > [menu-id] > 1 item(s) (L2) > PASS >  -  > 1.00 sec > 02:11:41 PM > no_jira
+388 > TIM HORTONS Global Menus Count > //div[@class='flex xs12 list-item list-item-large'] > 1 item(s) (L0) > PASS >  -  > 0.01 sec > 02:11:42 PM > no_jira
+389 > Menu (Index 0) Name > textContent >  Added 909301458  > PASS >  -  > 0.00 sec > 02:11:42 PM > no_jira
+390 > Menu (Index 0) ID > menu-id > w03AkBXemaFWvN2wW6jrIoAzAgrzB7tW21lPQGKOC9z4RJq0OjuZ6ok9D1W9SygDzl2 > PASS >  -  > 0.00 sec > 02:11:42 PM > no_jira
+391 > Find 'Last/Editing...' text > textContent > You are editing this menu > PASS >  -  > 0.01 sec > 02:11:42 PM > no_jira
+392 > Move to page Bottom > Current page > Scroll bar at Bottom > PASS >  -  > 0.01 sec > 02:11:42 PM > no_jira
+393 > IMPORT > 'Menu ID' Click > [aria-label='Menu ID'] > Click successful > PASS >  -  > 0.21 sec > 02:11:43 PM > no_jira
+394 > Enter Menu ID > [aria-label='Menu ID'] > NWEJgN87Q3Sw46JaQ1Q > PASS >  -  > 0.13 sec > 02:11:44 PM > no_jira
+395 > Click 'IMPORT' > //*[contains(text(), 'IMPORT')] > Click successful > PASS >  -  > 0.99 sec > 02:11:45 PM > no_jira
+397 >  === Snackbar Toast Msg > [role='alert'] >  Could not import this menu   > FAIL >  -  >  -  > 02:11:48 PM >  - 
+397 > Wait for 'IMPORT' result... > //i[@class='v-icon v-icon--link mdi mdi-delete-forever theme--light'] > Timeout 30.0 sec > FAIL > Expected condition failed: waiting for presence of element located by: By.xpath: //i[@class='v-icon v-icon--link mdi mdi-delete-forever theme--light'] (tried for 30 second(s) with 500 milliseconds interval) > 31.72 sec > 02:12:17 PM > no_jira
+398 > Navigate Back > MM 'Menu' page > MM 'Sector' page > PASS >  -  > 1.09 sec > 02:12:19 PM > no_jira
+399 > Wait for page load... > //*[contains(@class, 'progress')] > Done in 0.03 sec (timeout: 30.0 sec) > PASS >  -  > 0.03 sec > 02:12:19 PM > no_jira
+400 > Wait for MM 'Sector' page > //div[@class='layout hover align-baseline'] > Done in 0.01 sec (timeout: 30.0 sec) > PASS >  -  > 0.01 sec > 02:12:19 PM > no_jira
+ -  >  === MM Global Menus Import >  =====  >  == Global Menus Import End ^^ >  -  >  -  >  - >  - 
+ -  >  === MM Local Brands >  =====  >  == Local Brandst Begin >> >  -  >  -  >  - >  - 
+401 > Menus Count > //div[@class='layout hover align-baseline'] > 4 item(s) (L2) > PASS >  -  > 0.01 sec > 02:12:19 PM > no_jira
+402 > Menu (Index 0) Name > textContent > Al Forno  Last Published: 6/15/2020 at 8:39 AM by sagar patelView GLobal MenusView GLobal Modifier GroupsView Local Brands > PASS >  -  > 0.00 sec > 02:12:19 PM > no_jira
+403 > Menu (Index 1) Name > textContent > Austin Grill  Last Published: 6/15/2020 at 7:50 AM by sagar patelView GLobal MenusView GLobal Modifier GroupsView Local Brands > PASS >  -  > 0.00 sec > 02:12:19 PM > no_jira
+404 > Menu (Index 2) Name > textContent > BOOSTER JUICE  Last Published: 9/10/2020 at 4:16 PMView GLobal MenusView GLobal Modifier GroupsView Local Brands > PASS >  -  > 0.00 sec > 02:12:19 PM > no_jira
+405 > Menu (Index 3) Name > textContent > TIM HORTONS  You are editing this menuView GLobal MenusView GLobal Modifier GroupsView Local Brands > PASS >  -  > 0.00 sec > 02:12:19 PM > no_jira
+406 > Scroll to Menu TIM HORTONS > Passed Element > Move OK > PASS >  -  > 0.88 sec > 02:12:20 PM > no_jira
+407 > Find 'View Local Brands' button > List index 3 > .//button[@type='button'][3] > element found > PASS >  -  > 0.01 sec > 02:12:21 PM > no_jira
+408 > Click 'View Local Brands' > Passed Element > Click successful > PASS >  -  > 0.03 sec > 02:12:21 PM > no_jira
+409 > Wait for 'progress'... > //*[contains(@class, 'progress')] > Done in 0.04 sec (timeout: 30.0 sec) > PASS >  -  > 0.04 sec > 02:12:21 PM > no_jira
+410 > Current page URL > Page URL > https://dev.adminpanel.compassdigital.org/#/menu/sector/11J3gKPg8BC5r9k3mlyzu8y1qZjG3aFoj0ZNw03OspJ2woX2okSjryOBX5ZGHaO0XOwaNQcAdR66/company/LWg8oK2ovJFrepmNN6WJHL091o1D6jTRYMwqeDwKH4OOo7wd5XfD6kX6GD4gCRJDN6dWz6tOdpZLr/brands > PASS >  -  > 0.69 sec > 02:12:23 PM > no_jira
+411 > Page Title > textContent > TIM HORTONS (Local Brands) > PASS >  -  > 0.01 sec > 02:12:23 PM > no_jira
+412 > Fund 'Search...' text > Text Found > Search Menus > PASS >  -  > 0.02 sec > 02:12:23 PM > no_jira
+413 > Search Menus Click > //label[contains(text(), 'Search Menus')] > Click successful > PASS >  -  > 0.03 sec > 02:12:23 PM > no_jira
+414 > Enter Local Menu Search > [aria-label='Search Menus'] > Station for DEV Automation > PASS >  -  > 0.13 sec > 02:12:58 PM > no_jira
+415 > Click 'VIEW LOCAL MENUS' > xpath > //span[contains(text(), 'VIEW LOCAL MENUS')] > FAIL > no such element: Unable to locate element: {"method":"xpath","selector":"//span[contains(text(), 'VIEW LOCAL MENUS')]"} > 1.98 sec > 02:13:00 PM > no_jira
+ -  >  === ^ Menu Manager >  =====  >  == ^ Menu Manager End >  -  >  -  >  -  >  - 
+
+=== Execution finished @02:13:00 PM with 4 FAIL(s)
+=== Total Calls: 40, Response Times (sec) - Min: 0.01, Avg: 0.26, Max: 1.32, p50: 0.05, p90: 0.94
+=== Duration: 0h, 3m, 38s
+=== Steps: 415, Passed: 411, Failed: 4, Warnings: 0

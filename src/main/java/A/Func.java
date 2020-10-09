@@ -4,11 +4,15 @@
  * and open the template in the editor.
  */
 package A;
+import java.awt.Color;
+import java.awt.Component;
 import java.util.Arrays;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
@@ -24,6 +28,16 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Oleg.Spozito
  */
 public class Func {
+    public static class ColorRenderer extends DefaultTableCellRenderer{
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            if (value.toString().toLowerCase().contains("fail")) {
+                setBackground( Color.YELLOW);
+            }
+            return this;
+    }
+}
     public static double p90(double[] l){
         if (l.length < 2) {
             return Math.round(l[0]);

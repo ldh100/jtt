@@ -120,7 +120,7 @@ public class __menu_manager_dev {
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Play Click", "className", "play-icon", "no_jira"); 
             if (FAIL) { return;}
             Thread.sleep(1000);
-        _t++; Thread.sleep((long) sleep); T.Swith_to_Frame("Back to Site page", "defaultContent", "N/A", "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Swith_to_Frame("Back to default frame", "defaultContent", "N/A", "no_jira");
             if (FAIL) { return;}      
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Video Player Close Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-close')]", "no_jira"); 
             if (FAIL) { return;} 
@@ -588,13 +588,13 @@ public class __menu_manager_dev {
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}    
-            Thread.sleep(1000);        
+            Thread.sleep(2000);        
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'ADD MENU SET'", "xpath", "//*[contains(text(), 'add menu set')]", "no_jira"); 
                 if (FAIL) { return;} 
-            Thread.sleep(1000); 
+            Thread.sleep(2000); 
             _t++; Thread.sleep((long) sleep); T.List_L0("Menus + 1 Added Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", "no_jira");             
                 if (FAIL) { return;} 
-            Thread.sleep(1000);
+            //Thread.sleep(1000);
             _t++; Thread.sleep((long) sleep); T.List_Child_E1_By_Path("Find New Menu Set Name input", L0, (L0.size() - 1), "xpath", ".//input[@type='text']", "no_jira"); 
                 if (FAIL) { return;}     
             _t++; Thread.sleep((long) sleep); T.Element_Text_Enter("Enter Added Menu Set Name", e1, "Added " + New_ID, "no_jira"); 
@@ -1205,7 +1205,7 @@ public class __menu_manager_dev {
         EX += " - " + "\t" + " === MM Global Menus Import" + "\t" + " ===== " + "\t" + " == Global Menus Import End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         // </editor-fold>   
         
-        // <editor-fold defaultstate="collapsed" desc="Local Brands">  
+       // <editor-fold defaultstate="collapsed" desc="Local Brands">  
         EX += " - " + "\t" + " === MM Local Brands" + "\t" + " ===== " + "\t" + " == Local Brandst Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
             if (FAIL) { return;}
@@ -1240,12 +1240,12 @@ public class __menu_manager_dev {
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;} 
-                Thread.sleep(500);                 
+            Thread.sleep(500);                 
         } else {
            _t++; _f++;
            EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
         } 
-        _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back","MM 'Local Brans' page","MM 'Sector' page", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back","MM 'Local Brands' page","MM 'Sector' page", "no_jira"); 
             //if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for page load...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}               
@@ -1254,6 +1254,6 @@ public class __menu_manager_dev {
             if (FAIL) { return;}         
         EX += " - " + "\t" + " === MM Local Brands" + "\t" + " ===== " + "\t" + " == Local Brands End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
 
-        // </editor-fold>   
+        // </editor-fold>    
     }   
 }

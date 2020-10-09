@@ -70,21 +70,9 @@ public class AP3 extends javax.swing.JInternalFrame {
 
         lblSITES = new javax.swing.JLabel();
         lblBRANDS = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        DV1 = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        DV2 = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
-        nWaitElement = new javax.swing.JSpinner();
-        nShowPage = new javax.swing.JSpinner();
-        nWaitLoad = new javax.swing.JSpinner();
-        label10 = new java.awt.Label();
-        label11 = new java.awt.Label();
-        label12 = new java.awt.Label();
         jPanel1 = new javax.swing.JPanel();
         _login = new javax.swing.JCheckBox();
         _all_data = new javax.swing.JCheckBox();
-        cmbGROUP = new javax.swing.JComboBox<>();
         _site_new = new javax.swing.JCheckBox();
         _site = new javax.swing.JCheckBox();
         _brand = new javax.swing.JCheckBox();
@@ -101,9 +89,21 @@ public class AP3 extends javax.swing.JInternalFrame {
         _roles = new javax.swing.JCheckBox();
         _brand_new = new javax.swing.JCheckBox();
         txtMENU = new javax.swing.JTextField();
+        cmbGROUP = new java.awt.Choice();
+        _sales_analytics = new javax.swing.JCheckBox();
         label13 = new java.awt.Label();
         label14 = new java.awt.Label();
-        _sales_analytics = new javax.swing.JCheckBox();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        DV1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        DV2 = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        nWaitElement = new javax.swing.JSpinner();
+        nShowPage = new javax.swing.JSpinner();
+        nWaitLoad = new javax.swing.JSpinner();
+        label10 = new java.awt.Label();
+        label11 = new java.awt.Label();
+        label12 = new java.awt.Label();
         jPanel2 = new javax.swing.JPanel();
         txtSM_PW = new javax.swing.JTextField();
         txtIM_PW = new javax.swing.JTextField();
@@ -120,18 +120,18 @@ public class AP3 extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtLOG = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
-        cmbENV = new javax.swing.JComboBox<>();
         cmbBROW = new javax.swing.JComboBox<>();
         btnRUN = new javax.swing.JButton();
-        cmbAPP = new javax.swing.JComboBox<>();
         btnLOG = new javax.swing.JButton();
         btnFAILS = new javax.swing.JButton();
         btnEXCEL = new javax.swing.JButton();
         _headless = new javax.swing.JCheckBox();
         btnSAVE_OPT = new javax.swing.JButton();
-        label8 = new java.awt.Label();
         label5 = new java.awt.Label();
+        label8 = new java.awt.Label();
         label9 = new java.awt.Label();
+        cmbAPP = new java.awt.Choice();
+        cmbENV = new java.awt.Choice();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -152,24 +152,6 @@ public class AP3 extends javax.swing.JInternalFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameClosed(evt);
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameOpened(evt);
-            }
-        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblSITES.setText("Sites");
@@ -179,6 +161,148 @@ public class AP3 extends javax.swing.JInternalFrame {
         lblBRANDS.setText("Selected Site - Brands");
         lblBRANDS.setName("lblBRANDS"); // NOI18N
         getContentPane().add(lblBRANDS, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 4, 216, -1));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Scope"));
+        jPanel1.setToolTipText("");
+        jPanel1.setDoubleBuffered(false);
+        jPanel1.setName(""); // NOI18N
+        jPanel1.setRequestFocusEnabled(false);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        _login.setSelected(true);
+        _login.setText("Login > Dashboard");
+        _login.setEnabled(false);
+        _login.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _login.setRequestFocusEnabled(false);
+        jPanel1.add(_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 23, 132, 14));
+
+        _all_data.setText("Show all data rows");
+        _all_data.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _all_data.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _all_data.setRequestFocusEnabled(false);
+        jPanel1.add(_all_data, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 23, 132, 14));
+
+        _site_new.setText("New Site (not in Prod)");
+        _site_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _site_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _site_new.setRequestFocusEnabled(false);
+        jPanel1.add(_site_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 41, 157, 14));
+
+        _site.setText("Sites");
+        _site.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _site.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _site.setRequestFocusEnabled(false);
+        jPanel1.add(_site, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 41, 132, 14));
+
+        _brand.setText("Brand");
+        _brand.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _brand.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _brand.setRequestFocusEnabled(false);
+        jPanel1.add(_brand, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 59, 132, 14));
+
+        _orders.setText("Orders");
+        _orders.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _orders.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _orders.setRequestFocusEnabled(false);
+        jPanel1.add(_orders, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 77, 132, 14));
+
+        _resent_updates.setText("Recent Updates");
+        _resent_updates.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _resent_updates.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _resent_updates.setRequestFocusEnabled(false);
+        jPanel1.add(_resent_updates, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 95, 132, 14));
+
+        _announcements.setText("Announcements");
+        _announcements.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _announcements.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _announcements.setRequestFocusEnabled(false);
+        jPanel1.add(_announcements, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 113, 132, 14));
+
+        _promo.setText("Promo Management");
+        _promo.setEnabled(false);
+        _promo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _promo.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _promo.setRequestFocusEnabled(false);
+        jPanel1.add(_promo, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 131, 132, 14));
+
+        _sales_reporting.setText("Sales Reporting");
+        _sales_reporting.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _sales_reporting.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _sales_reporting.setRequestFocusEnabled(false);
+        jPanel1.add(_sales_reporting, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 149, 132, 14));
+
+        _menu_manager.setText("Menu Manager");
+        _menu_manager.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _menu_manager.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _menu_manager.setRequestFocusEnabled(false);
+        jPanel1.add(_menu_manager, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 131, 100, 14));
+
+        _group_management.setText("Group Management");
+        _group_management.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _group_management.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _group_management.setRequestFocusEnabled(false);
+        jPanel1.add(_group_management, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 200, 132, 14));
+
+        _users.setSelected(true);
+        _users.setText("Users");
+        _users.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _users.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _users.setRequestFocusEnabled(false);
+        jPanel1.add(_users, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 95, 132, 14));
+
+        _password.setText("Forgot Password");
+        _password.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _password.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _password.setRequestFocusEnabled(false);
+        jPanel1.add(_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 113, 132, 14));
+
+        _logout.setText("User Logout");
+        _logout.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _logout.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _logout.setRequestFocusEnabled(false);
+        jPanel1.add(_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 131, 132, 14));
+
+        _roles.setText("Roles Permissions");
+        _roles.setEnabled(false);
+        _roles.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _roles.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _roles.setRequestFocusEnabled(false);
+        jPanel1.add(_roles, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 149, 132, 14));
+
+        _brand_new.setText("Add Brand (not in Prod)");
+        _brand_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _brand_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _brand_new.setRequestFocusEnabled(false);
+        jPanel1.add(_brand_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 59, 157, 14));
+
+        txtMENU.setText("TIM HORTONS");
+        jPanel1.add(txtMENU, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 128, -1));
+
+        cmbGROUP.setMinimumSize(new java.awt.Dimension(103, 24));
+        cmbGROUP.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbGROUPItemStateChanged(evt);
+            }
+        });
+        jPanel1.add(cmbGROUP, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 220, 260, -1));
+
+        _sales_analytics.setText("Sales Analytics");
+        _sales_analytics.setEnabled(false);
+        _sales_analytics.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _sales_analytics.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _sales_analytics.setRequestFocusEnabled(false);
+        jPanel1.add(_sales_analytics, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 149, 100, 14));
+
+        label13.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        label13.setText("Sector Brand");
+        jPanel1.add(label13, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 204, -1, 12));
+
+        label14.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        label14.setText("Group (Sector)");
+        jPanel1.add(label14, new org.netbeans.lib.awtextra.AbsoluteConstraints(192, 204, -1, 12));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 168, 424, 248));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -280,148 +404,6 @@ public class AP3 extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 122, 424, 44));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Scope"));
-        jPanel1.setToolTipText("");
-        jPanel1.setDoubleBuffered(false);
-        jPanel1.setName(""); // NOI18N
-        jPanel1.setRequestFocusEnabled(false);
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        _login.setSelected(true);
-        _login.setText("Login > Dashboard");
-        _login.setEnabled(false);
-        _login.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _login.setRequestFocusEnabled(false);
-        jPanel1.add(_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 23, 132, 14));
-
-        _all_data.setText("Show all data rows");
-        _all_data.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _all_data.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _all_data.setRequestFocusEnabled(false);
-        jPanel1.add(_all_data, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 23, 132, 14));
-
-        cmbGROUP.setName(""); // NOI18N
-        cmbGROUP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbGROUPActionPerformed(evt);
-            }
-        });
-        jPanel1.add(cmbGROUP, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 220, 256, -1));
-
-        _site_new.setText("New Site (not in Prod)");
-        _site_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _site_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _site_new.setRequestFocusEnabled(false);
-        jPanel1.add(_site_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 41, 157, 14));
-
-        _site.setText("Sites");
-        _site.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _site.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _site.setRequestFocusEnabled(false);
-        jPanel1.add(_site, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 41, 132, 14));
-
-        _brand.setText("Brand");
-        _brand.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _brand.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _brand.setRequestFocusEnabled(false);
-        jPanel1.add(_brand, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 59, 132, 14));
-
-        _orders.setText("Orders");
-        _orders.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _orders.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _orders.setRequestFocusEnabled(false);
-        jPanel1.add(_orders, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 77, 132, 14));
-
-        _resent_updates.setText("Recent Updates");
-        _resent_updates.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _resent_updates.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _resent_updates.setRequestFocusEnabled(false);
-        jPanel1.add(_resent_updates, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 95, 132, 14));
-
-        _announcements.setText("Announcements");
-        _announcements.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _announcements.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _announcements.setRequestFocusEnabled(false);
-        jPanel1.add(_announcements, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 113, 132, 14));
-
-        _promo.setText("Promo Management");
-        _promo.setEnabled(false);
-        _promo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _promo.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _promo.setRequestFocusEnabled(false);
-        jPanel1.add(_promo, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 131, 132, 14));
-
-        _sales_reporting.setText("Sales Reporting");
-        _sales_reporting.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _sales_reporting.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _sales_reporting.setRequestFocusEnabled(false);
-        jPanel1.add(_sales_reporting, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 149, 132, 14));
-
-        _menu_manager.setText("Menu Manager");
-        _menu_manager.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _menu_manager.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _menu_manager.setRequestFocusEnabled(false);
-        jPanel1.add(_menu_manager, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 131, 100, 14));
-
-        _group_management.setText("Group Management");
-        _group_management.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _group_management.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _group_management.setRequestFocusEnabled(false);
-        jPanel1.add(_group_management, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 200, 132, 14));
-
-        _users.setSelected(true);
-        _users.setText("Users");
-        _users.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _users.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _users.setRequestFocusEnabled(false);
-        jPanel1.add(_users, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 95, 132, 14));
-
-        _password.setText("Forgot Password");
-        _password.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _password.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _password.setRequestFocusEnabled(false);
-        jPanel1.add(_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 113, 132, 14));
-
-        _logout.setText("User Logout");
-        _logout.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _logout.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _logout.setRequestFocusEnabled(false);
-        jPanel1.add(_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 131, 132, 14));
-
-        _roles.setText("Roles Permissions");
-        _roles.setEnabled(false);
-        _roles.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _roles.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _roles.setRequestFocusEnabled(false);
-        jPanel1.add(_roles, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 149, 132, 14));
-
-        _brand_new.setText("Add Brand (not in Prod)");
-        _brand_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _brand_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _brand_new.setRequestFocusEnabled(false);
-        jPanel1.add(_brand_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 59, 157, 14));
-
-        txtMENU.setText("TIM HORTONS");
-        jPanel1.add(txtMENU, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 128, -1));
-
-        label13.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        label13.setText("Sector Brand");
-        jPanel1.add(label13, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 204, -1, 12));
-
-        label14.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        label14.setText("Group (Sector)");
-        jPanel1.add(label14, new org.netbeans.lib.awtextra.AbsoluteConstraints(188, 200, -1, -1));
-
-        _sales_analytics.setText("Sales Analytics");
-        _sales_analytics.setEnabled(false);
-        _sales_analytics.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _sales_analytics.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _sales_analytics.setRequestFocusEnabled(false);
-        jPanel1.add(_sales_analytics, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 149, 100, 14));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 168, 424, 248));
-
         jPanel2.setFocusable(false);
 
         txtSM_PW.setText("Password1");
@@ -490,35 +472,29 @@ public class AP3 extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtADMIN_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtADMIN_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtADMIN_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(4, 4, 4)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSM_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtSM_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(4, 4, 4)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIM_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtIM_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtADMIN_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(4, 4, 4)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSM_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(4, 4, 4)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIM_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(19, 19, 19))
+                        .addGap(54, 54, 54)
+                        .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 284, 420, 80));
@@ -534,18 +510,9 @@ public class AP3 extends javax.swing.JInternalFrame {
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cmbENV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Staging", "Production", "Development" }));
-        cmbENV.setName("cmbENV"); // NOI18N
-        cmbENV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbENVActionPerformed(evt);
-            }
-        });
-        jPanel3.add(cmbENV, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 24, 104, -1));
-
         cmbBROW.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chrome", "Firefox", "Edge", "IE" }));
         cmbBROW.setEnabled(false);
-        jPanel3.add(cmbBROW, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 24, 78, -1));
+        jPanel3.add(cmbBROW, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 32, 78, -1));
 
         btnRUN.setForeground(new java.awt.Color(204, 0, 0));
         btnRUN.setText("Run");
@@ -556,15 +523,6 @@ public class AP3 extends javax.swing.JInternalFrame {
             }
         });
         jPanel3.add(btnRUN, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, 78, -1));
-
-        cmbAPP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boost", "Canteen", "JJKitchen", "Nourish", "Rogers", "StandardCognition", "Tacit", "Thrive" }));
-        cmbAPP.setName("cmbAPP"); // NOI18N
-        cmbAPP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbAPPActionPerformed(evt);
-            }
-        });
-        jPanel3.add(cmbAPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 24, 99, -1));
 
         btnLOG.setText(" < Log");
         btnLOG.addActionListener(new java.awt.event.ActionListener() {
@@ -578,11 +536,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         btnFAILS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnFAILSMouseClicked(evt);
-            }
-        });
-        btnFAILS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFAILSActionPerformed(evt);
             }
         });
         jPanel3.add(btnFAILS, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 32, 92, -1));
@@ -610,17 +563,33 @@ public class AP3 extends javax.swing.JInternalFrame {
         });
         jPanel3.add(btnSAVE_OPT, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 60, 124, -1));
 
-        label8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        label8.setText("Application");
-        jPanel3.add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 8, -1, 12));
-
         label5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         label5.setText("Environment");
-        jPanel3.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 8, -1, 12));
+        jPanel3.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 16, -1, 12));
+
+        label8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        label8.setText("Application");
+        jPanel3.add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 16, -1, 12));
 
         label9.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         label9.setText("Browser");
-        jPanel3.add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 8, -1, 12));
+        jPanel3.add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 16, -1, 12));
+
+        cmbAPP.setMinimumSize(new java.awt.Dimension(103, 24));
+        cmbAPP.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbAPPItemStateChanged(evt);
+            }
+        });
+        jPanel3.add(cmbAPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 32, 100, -1));
+
+        cmbENV.setMinimumSize(new java.awt.Dimension(103, 24));
+        cmbENV.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbENVItemStateChanged(evt);
+            }
+        });
+        jPanel3.add(cmbENV, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 32, 108, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 417, 424, 88));
 
@@ -630,11 +599,6 @@ public class AP3 extends javax.swing.JInternalFrame {
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
         GetBrands_API();
     }//GEN-LAST:event_DV1MouseClicked
-
-    private void cmbGROUPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGROUPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbGROUPActionPerformed
-
     private void btnSAVE_OPTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSAVE_OPTActionPerformed
         SAVE_CONFIG();
     }//GEN-LAST:event_btnSAVE_OPTActionPerformed
@@ -687,9 +651,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         
         if(Driver()){
             txtLOG.append("\r\n=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec");
-            txtLOG.setCaretPosition(txtLOG.getDocument().getLength()); 
-//            txtLOG.append("\r\n=== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
-//            txtLOG.setCaretPosition(txtLOG.getDocument().getLength());  
+            txtLOG.setCaretPosition(txtLOG.getDocument().getLength());   
             sw1.reset();
             LOG_START(); // ========================================================
             BW1_DoWork(
@@ -700,12 +662,6 @@ public class AP3 extends javax.swing.JInternalFrame {
             );
         }
     }//GEN-LAST:event_btnRUNActionPerformed
-
-    private void cmbAPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAPPActionPerformed
-        app = cmbAPP.getSelectedItem().toString();
-        //        app = app.substring(0, app.indexOf(" ")).trim();
-        GetSites_API();
-    }//GEN-LAST:event_cmbAPPActionPerformed
 
     private void btnLOGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLOGActionPerformed
         //        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -814,19 +770,40 @@ public class AP3 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFAILSMouseClicked
 
     private void AP3_AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_AP3_AncestorAdded
-        if(load) {
+        cmbAPP.add("Boost");
+        cmbAPP.add("Canteen");
+        cmbAPP.add("JJKitchen");
+        cmbAPP.add("Rogers");
+        cmbAPP.add("StandardCognition");
+        cmbAPP.add("Tacit");
+        cmbAPP.add("Thrive");
+        
+        cmbENV.add("Staging");
+        cmbENV.add("Production");
+        cmbENV.add("Development");
+        
+        cmbENV.select("Staging"); 
+        cmbAPP.select("Boost");
+//        if(load) {
+            LOAD_ENV();
             LOAD_DATA();
-        }
-        load = false;
+//        }
+//        load = false;
     }//GEN-LAST:event_AP3_AncestorAdded
 
-    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        F_COUNT--;
-        if(BW1 != null && !BW1.isCancelled()) BW1.cancel(true);
-        if(BW2 != null && !BW2.isCancelled()) BW2.cancel(true);
-    }//GEN-LAST:event_formInternalFrameClosed
+    private void cmbAPPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAPPItemStateChanged
+        app = cmbAPP.getSelectedItem().toString();
+        GetSites_API();
+    }//GEN-LAST:event_cmbAPPItemStateChanged
 
-    private void cmbENVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbENVActionPerformed
+    private void cmbENVItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbENVItemStateChanged
+        LOAD_ENV();
+    }//GEN-LAST:event_cmbENVItemStateChanged
+
+    private void cmbGROUPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbGROUPItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbGROUPItemStateChanged
+    private void LOAD_ENV(){
         if(cmbENV.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
@@ -843,21 +820,8 @@ public class AP3 extends javax.swing.JInternalFrame {
         Get_P2_TKN_and_Slack_IDs();
         LOAD_CONFIG();
         GetSites_API();
-        GetGroups_API();
-    }//GEN-LAST:event_cmbENVActionPerformed
-
-    private void btnFAILSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFAILSActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnFAILSActionPerformed
-
-    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-//        if(load) {
-//            LOAD_DATA();
-//        }
-//        load = false;
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formInternalFrameOpened
-
+        GetGroups_API();        
+    }
     private boolean Driver() {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
@@ -1135,19 +1099,17 @@ public class AP3 extends javax.swing.JInternalFrame {
         BW2.execute();  // executes the swingworker on worker thread          
     }
     private void LOAD_DATA(){
-        load = true;        
-        cmbENV.setSelectedItem("Staging"); 
-        cmbAPP.setSelectedIndex(0);
-        env = "ST";
-        url = "https://staging.adminpanel.compassdigital.org/";
+//        load = true;        
+//        env = "ST";
+//        url = "https://staging.adminpanel.compassdigital.org/";
         txtMENU.setText("TIM HORTONS");
 
         app = cmbAPP.getSelectedItem().toString();
         //app = app.substring(0, app.indexOf(" ")).trim();
-        load = false;
-        Get_P2_TKN_and_Slack_IDs(); // ===================
-        GetGroups_API();            // ===================
-        GetSites_API();
+//        load = false;
+//        Get_P2_TKN_and_Slack_IDs(); // ===================
+//        GetGroups_API();            // ===================
+//        GetSites_API();
         CONFIG = false;
         txtLOG.append("\r\n\r\n=== Ready >");
         txtLOG.append("\r\n=== In not Headless mode Do Not interact with your Browser");
@@ -1155,9 +1117,9 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLOG.append("\r\n=== Good Luck...\r\n");  
     }
     private void Get_P2_TKN_and_Slack_IDs(){
-        if(load){
-            return;
-        }
+//        if(load){
+//            return;
+//        }
         try {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_OAuth_TKN'");
             rs.next();
@@ -1203,24 +1165,18 @@ public class AP3 extends javax.swing.JInternalFrame {
         }
     }
     private void GetSites_API() {
-        if(load){
-            return;
-        }
         d1LastRow = -1;
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n-Load Sites from API...");
         sw1.start();
         try {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbAPP.getSelectedItem().toString() + 
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbAPP.getSelectedItem() + 
                     "' AND [env] LIKE '" + cmbENV.getSelectedItem().toString() + "%'");
             rs.next();
             appId = rs.getString(1);
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get S_OAuth_TKN > ERROR: " + ex.getMessage());
         }
-//        appId = cmbAPP.getSelectedItem().toString();
-//        appId = appId.substring(appId.lastIndexOf(" ")).trim();
-        
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
         SitesModel.setColumnIdentifiers(SitesColumnsName);
@@ -1297,8 +1253,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         
         if (DV1.getRowCount() > 0) {
             DV1.changeSelection(0, 0, false, false);
-            if (CONFIG && !"".equals(SITE.trim()))
-            {
+            if (CONFIG && !"".equals(SITE.trim())) {
                 for(int row = 0; row < DV1.getRowCount(); row++) {
                     if(DV1.getValueAt(row, 0).equals(SITE)){
                         DV1.changeSelection(row, 0, false, false);
@@ -1409,12 +1364,10 @@ public class AP3 extends javax.swing.JInternalFrame {
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetGroups_API() {
-        if(load){
-            return;
-        }        
+       
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n-Load Groups/Sector from API...");
-        cmbGROUP.removeAllItems();
+        cmbGROUP.removeAll();
         sw1.start();     
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
@@ -1454,10 +1407,10 @@ public class AP3 extends javax.swing.JInternalFrame {
             }
         } 
         if(T_Index != -1){
-            cmbGROUP.setSelectedIndex(T_Index);
+            cmbGROUP.select(T_Index);
         }else{
             if(cmbGROUP.getItemCount() > 0){
-                cmbGROUP.setSelectedIndex(0);
+                cmbGROUP.select(0);
             }
         }
         txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -1798,10 +1751,10 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLOG;
     private javax.swing.JButton btnRUN;
     private javax.swing.JButton btnSAVE_OPT;
-    private javax.swing.JComboBox<String> cmbAPP;
+    private java.awt.Choice cmbAPP;
     private javax.swing.JComboBox<String> cmbBROW;
-    private javax.swing.JComboBox<String> cmbENV;
-    private javax.swing.JComboBox<String> cmbGROUP;
+    private java.awt.Choice cmbENV;
+    private java.awt.Choice cmbGROUP;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

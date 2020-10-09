@@ -348,9 +348,11 @@ public class __brand_new {
                 case "Assign Menus":
                     _t++; Thread.sleep((long) sleep); T.List_L3("Menu 'Button' Count", "xpath", "//button[@class='ml-0 pl-0 v-btn v-btn--flat theme--light']", "no_jira"); 
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); T.Element_Click("IMPORT MENU Click", L3.get(1), "no_jira"); // index 1 > 2nd button - Import
+                    _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'IMPORT MENU'", L3.get(1), "no_jira"); // index 1 > 2nd button - Import
                         if (FAIL) { return;} 
-                        Thread.sleep(500);
+                    //Thread.sleep(1000);
+                    _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for Import options...", "css", "[aria-label='Location Stations']", "no_jira"); 
+                        if (FAIL) { return;}                        
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open Location Station drop-down", "css", "[aria-label='Location Stations']", "no_jira"); 
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Location Station' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
@@ -565,7 +567,6 @@ public class __brand_new {
         
         // <editor-fold defaultstate="collapsed" desc="MM - activate New Local Menus">
         _t++; Thread.sleep((long) sleep); T.Open_Switch_to_2nd_Tab("Open Menu Manager in New Tab", "https://staging.adminpanel.compassdigital.org/#/menu","no_jira");             
-            //if (FAIL) { return;} 
         EX += " - " + "\t" + " === MM New Local Menu " + "\t" + " ===== " + "\t" + " == Activate Local Menu Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -598,16 +599,41 @@ public class __brand_new {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Page SubTitle", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "textContent", "no_jira"); 
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Find_Text("Fund 'Search...' text", "Search Menus", true,"no_jira");   
-            if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Local Menu Search (like)", "css", "[aria-label='Search Menus']", "Penthouse " + New_ID, "no_jira");
-            if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Local Menu Click", "xpath", "//span[contains(text(), '" + New_ID + "')]", "no_jira"); 
-            if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
-            if (FAIL) { return;} 
+        T_Index = -1;
+        for (int i = 0; i < L2.size(); i++) { 
+            _t++; T.Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", "no_jira"); 
+            if(t.trim().startsWith(GL_MENU)){
+                T_Index = i;
+            }                
+        }
+        if(T_Index > -1){
+            _t++; Thread.sleep((long) sleep); T.Scroll_to_Element("Scroll to Menu " + GL_MENU, L2.get(T_Index), "no_jira");
+                if (FAIL) { return;}             
+            _t++; Thread.sleep((long) sleep); T.List_Child_E1_By_Path("Find 'View Local Brands' button", L2, T_Index, "xpath", ".//button[@type='button'][3]", "no_jira"); 
+                if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'View Local Brands'", e1, "no_jira"); 
+                if (FAIL) { return;}   
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+                if (FAIL) { return;}  
+             Thread.sleep(500);  
+            _t++; Thread.sleep((long) sleep); T.Page_URL("Current page URL", "no_jira");             
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", "no_jira"); 
+                if (FAIL) { return;}                  
+            _t++; T.Find_Text("Fund 'Search...' text", "Search Menus", true,"no_jira");   
+                if (FAIL) { return;}             
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", "no_jira"); 
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Local Menu Search", "css", "[aria-label='Search Menus']", New_ID, "no_jira");
+                if (FAIL) { return;} 
+                
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'VIEW LOCAL MENUS'", "xpath", "//span[contains(text(), '" + "VIEW LOCAL MENUS" + "')]", "no_jira"); 
+                if (FAIL) { return;} 
+
+            
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+                if (FAIL) { return;} 
             Thread.sleep(500);      
             _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Scroll to 'EDIT MENU' button", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira");        
                 if (FAIL) { return;}   
@@ -635,7 +661,12 @@ public class __brand_new {
                 for (int i = 2; i < L1.size(); i++) {
                     _t++; T.List_TR_TDs("Item Row Data", L1, i, "no_jira");   
                         if (FAIL) { return;}                
-                }
+                }            
+        } else {
+           _t++; _f++;
+           EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        }  
+
         EX += " - " + "\t" + " === MM New Local Menu " + "\t" + " ===== " + "\t" + " == Activate Local Menu End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
 
             

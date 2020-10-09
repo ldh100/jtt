@@ -286,6 +286,7 @@ public class T {
             EX += _t + "\t" + NAME  + "\t" + PATH + "\t" + "Timeout " + Timeout + " sec" + "\t" + "FAIL" + "\t" + err;  F += _t + " > " + err + "\r\n";
         }
         EX += "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        sw1.reset();
     }
     public static void Wait_For_Element_By_Path_Presence(String NAME, String BY, String PATH, String JIRA ){
         sw1.start(); FAIL = false;
@@ -324,6 +325,7 @@ public class T {
             EX += _t + "\t" + NAME  + "\t" + PATH + "\t" + "Timeout " + Timeout + " sec" + "\t" + "FAIL" + "\t" + err;  F += _t + " > " + err + "\r\n";
         }
         EX += "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        sw1.reset();
     }
     public static void Wait_For_All_Elements_InVisibility(String NAME, String BY, String PATH, String JIRA ){
         sw1.start(); FAIL = false;
@@ -365,6 +367,7 @@ public class T {
             EX += _t + "\t" + NAME  + "\t" + PATH + "\t" + "Timeout " + Timeout + " sec" + "\t" + "FAIL" + "\t" + err;  F += _t + " > " + err + "\r\n";
         }
         EX += "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        sw1.reset();
     }
     public static void Wait_For_Element_By_Path_InVisibility(String NAME, String BY, String PATH, String JIRA ){
         sw1.start(); FAIL = false;
@@ -403,6 +406,7 @@ public class T {
             EX += _t + "\t" + NAME  + "\t" + PATH + "\t" + "Timeout " + Timeout + " sec" + "\t" + "FAIL" + "\t" + err;  F += _t + " > " + err + "\r\n";
         }
         EX += "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        sw1.reset();
     }
 
     public static void Text_Found(String NAME, String VAL, String JIRA ){
@@ -416,8 +420,8 @@ public class T {
             t = "Not Found";
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Not Found" + "\t" + "PASS" + "\t" + " - ";
         }
-        EX += "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         _p++;
+        EX += "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         sw1.reset();
     }
     public static void Find_Text(String NAME, String VAL, Boolean EXPECTED,String JIRA ){

@@ -650,9 +650,11 @@ public class __site_new {
                 case "Assign Menus":
                     _t++; Thread.sleep((long) sleep); T.List_L3("Menu 'Button' Count", "xpath", "//button[@class='ml-0 pl-0 v-btn v-btn--flat theme--light']", "no_jira"); 
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); T.Element_Click("IMPORT MENU Click", L3.get(1), "no_jira"); // index 1 > 2nd button - Import
+                    _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'IMPORT MENU'", L3.get(1), "no_jira"); // index 1 > 2nd button - Import
                         if (FAIL) { return;} 
-                        Thread.sleep(500);
+                    //Thread.sleep(1000);
+                    _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for Import options...", "css", "[aria-label='Location Stations']", "no_jira"); 
+                        if (FAIL) { return;}                        
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open Location Station drop-down", "css", "[aria-label='Location Stations']", "no_jira"); 
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Location Station' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
