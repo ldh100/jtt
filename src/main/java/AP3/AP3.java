@@ -264,7 +264,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         jPanel1.add(_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 131, 132, 14));
 
         _roles.setText("Roles Permissions");
-        _roles.setEnabled(false);
         _roles.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _roles.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _roles.setRequestFocusEnabled(false);
@@ -605,7 +604,8 @@ public class AP3 extends javax.swing.JInternalFrame {
 
     private void btnRUNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRUNActionPerformed
         btnRUN.setEnabled(false);
-        txtLOG.append("\r\n\r\n=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
+        //txtLOG.setText("");
+        txtLOG.append("=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
         Wait = (double)nWaitElement.getValue();
         Timeout = (double)nWaitLoad.getValue();
         sleep = (double)nShowPage.getValue() *1000;
@@ -784,11 +784,8 @@ public class AP3 extends javax.swing.JInternalFrame {
         
         cmbENV.select("Staging"); 
         cmbAPP.select("Boost");
-//        if(load) {
             LOAD_ENV();
             LOAD_DATA();
-//        }
-//        load = false;
     }//GEN-LAST:event_AP3_AncestorAdded
 
     private void cmbAPPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAPPItemStateChanged
@@ -857,13 +854,11 @@ public class AP3 extends javax.swing.JInternalFrame {
             timeout = new WebDriverWait(d1, (long) Timeout);  // wait for load
             wait_msg = new WebDriverWait(d1, 100);  // wait for alert
             setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-//            txtLOG.repaint(); 
             return true;
         }
         catch (Exception ex) {
             txtLOG.append("\r\n\r\n=== Web Driver > ERROR: " + ex.getMessage());
             setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-//            txtLOG.repaint(); 
             return false;
         }   
 
@@ -932,11 +927,6 @@ public class AP3 extends javax.swing.JInternalFrame {
                     __promo.run();
                     EX += " - " + "\t" + " === ^ Promo Management" + "\t" + " ===== " + "\t" + " == ^ Promo Management End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                 }                    
-                if (_roles.isSelected()) {
-                    EX += " - " + "\t" + " === User Role Permissions" + "\t" + " ===== " + "\t" + " == User Role Permissions >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-                    __user_permission.run();
-                    EX += " - " + "\t" + " === ^ User Role Permissions" + "\t" + " ===== " + "\t" + " == ^ User Role Permissions" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                }
                 if (_resent_updates.isSelected()) {
                     EX += " - " + "\t" + " === Recent Updates" + "\t" + " ===== " + "\t" + " == Recent Updates Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __resent_updates.run();
@@ -965,7 +955,15 @@ public class AP3 extends javax.swing.JInternalFrame {
                     __password.run();
                     EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                 }
-                    
+                if (_roles.isSelected())
+                {   
+                    EX += " - " + "\t" + " === User Permissions" + "\t" + " ===== " + "\t" + " == User Permissions Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    if (!_logout.isSelected()){
+                       __logout.run();
+                    }
+                    __user_permission.run();
+                    EX += " - " + "\t" + " === ^ User Permissions" + "\t" + " ===== " + "\t" + " == ^ User Permissions End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                }                    
                 if(_f > 0) {
                     return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
                 }else{
@@ -1073,7 +1071,8 @@ public class AP3 extends javax.swing.JInternalFrame {
                             _t++;
                             _p++;
                             EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                            
-                        } else if(Toast_Msg.toLowerCase().contains("could not")) {
+                        } else if(Toast_Msg.toLowerCase().contains("could not")||
+                                Toast_Msg.toLowerCase().contains("fail")) {
                             _t++;
                             _f++;
                             F += _t + " > FAIL - " + Toast_Msg + "\r\n";
@@ -1081,7 +1080,6 @@ public class AP3 extends javax.swing.JInternalFrame {
                         } else if(Toast_Msg.toLowerCase().contains("fix") || Toast_Msg.toLowerCase().contains("error")) {
                             _t++;
                             _w++;
-                            //F += _t + " > WARN - " + tt + "\r\n";
                             EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
                         } else {
                             _t++;
@@ -1099,17 +1097,9 @@ public class AP3 extends javax.swing.JInternalFrame {
         BW2.execute();  // executes the swingworker on worker thread          
     }
     private void LOAD_DATA(){
-//        load = true;        
-//        env = "ST";
-//        url = "https://staging.adminpanel.compassdigital.org/";
         txtMENU.setText("TIM HORTONS");
-
         app = cmbAPP.getSelectedItem().toString();
-        //app = app.substring(0, app.indexOf(" ")).trim();
-//        load = false;
-//        Get_P2_TKN_and_Slack_IDs(); // ===================
-//        GetGroups_API();            // ===================
-//        GetSites_API();
+
         CONFIG = false;
         txtLOG.append("\r\n\r\n=== Ready >");
         txtLOG.append("\r\n=== In not Headless mode Do Not interact with your Browser");
@@ -1117,9 +1107,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLOG.append("\r\n=== Good Luck...\r\n");  
     }
     private void Get_P2_TKN_and_Slack_IDs(){
-//        if(load){
-//            return;
-//        }
         try {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_OAuth_TKN'");
             rs.next();
@@ -1718,7 +1705,6 @@ public class AP3 extends javax.swing.JInternalFrame {
     private static Duration DD;
     private static SwingWorker BW1;  
     private static SwingWorker BW2; 
-    private boolean load = true;
     private boolean CONFIG = false;
     private String C = "";
     private int d1LastRow = -1; 

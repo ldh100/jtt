@@ -68,7 +68,7 @@ public class __brand {
                 if (FAIL) { return;}
             } 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Site Name Click", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
-            if (FAIL) { return;}                                                                                               // v-datatable__progress << 'v-progress-circular'
+            if (FAIL) { return;}                                                                                               
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//div[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//div[contains(@class, 'timezone-address')]", "no_jira"); 
@@ -191,7 +191,7 @@ public class __brand {
                         _t++; T.Find_Text("Find 'ASAP pickup' text", "ASAP Pickup", true,"no_jira");
                             if (FAIL) { return; }
                         _t++; T.Element_By_Path_Attribute("Find 'DISABLE' text", "xpath", "//i[contains(@class, 'v-icon icon mdi mdi-cellphone-off theme--light')]/parent::div", "textContent", "no_jira");
-                            if (FAIL) { return; }                                                             // old > 'v-icon mdi mdi-delete-outline theme--light'
+                            if (FAIL) { return; }                                                             
 //                        _t++; T.Element_By_Path_Click("Click 'DISABLE'", "xpath", "//i[contains(@class, 'v-icon icon mdi mdi-cellphone-off theme--light')]/parent::div", "no_jira");
 //                            if (!FAIL) { return; }
 //                        _t++; FAIL = false; T.Element_By_Path_Text("Find 'CANCEL'", "xpath", "//*[contains(text(), 'cancel')]", "no_jira");
@@ -200,7 +200,7 @@ public class __brand {
 //                            if (FAIL) { return; }
 //                        _t++; T.Clickable_Element_By_Path_Click("Click 'Cancel'", "xpath", "//*[contains(text(), 'cancel')]","no_jira");
 //                            if (FAIL) { return;}    
-                    }else {
+                    } else {
                         _t++; FAIL = false; T.Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true,"no_jira" );
                         _t++; T.Brand_API_Is("Brand API Pickup Supported", "pickup_supported", false, "no_jira" );
                         _t++; Thread.sleep((long) sleep); T.Find_Text("Find '...enable Pickup' text", "to enable Pickup", true,"no_jira");
@@ -392,15 +392,17 @@ public class __brand {
                 mR = String.format("%02d",(int)(Math.random()*59));
                 New_From = hR + ":" + mR + "AM";    
                 _t++; Thread.sleep((long) sleep); T.Time_Enter("Enter Sunday Opens Time", L1, 0, "css", "[aria-label='Opens']", New_From,"no_jira");             
-                    if (FAIL) { return;}                                // ^^^ Enter Text within 8:00-11:59 AM
+                    if (FAIL) { return;}                               // ^^^ Enter Text within 8:00-11:59 AM
                 hR = String.format("%02d",(int)(Math.random()*3 + 1));
                 mR = String.format("%02d",(int)(Math.random()*59));
                 New_To = hR + ":" + mR + "PM";
                 _t++; Thread.sleep((long) sleep); T.Time_Enter("Enter Sunday Closes Time", L1, 0, "css", "[aria-label^='Closes']", New_To,"no_jira");             
                     if (FAIL) { return;}                                // ^^^ Enter Text within 1:00-4:59 PM
+                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Sunday'  - activate 'Save'", "xpath", "//p[text()='Sunday']", "no_jira"); 
+                    if (FAIL) { return;}    //  Save not visible after time enter/not selection    - DEBUG                                                                                       
 
                     
-                _t++; FAIL = false; T.Element_By_Path_Click("SAVE Click", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
+                _t++; FAIL = false; T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                     if (FAIL) { return; } // Save
                 _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                     if (FAIL) { return;}
@@ -488,6 +490,10 @@ public class __brand {
                 New_To = hR + ":" + mR + "PM";
                 _t++; Thread.sleep((long) sleep); T.Time_Enter("Enter Sunday Delivery Closes Time", L1, 0, "css", "[aria-label^='Closes']", New_To,"no_jira");             
                     if (FAIL) { return;}                                // ^^^ Enter Text within 1:00-4:59 PM
+                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Sunday'  - activate 'Save'", "xpath", "//p[text()='Sunday']", "no_jira"); 
+                    if (FAIL) { return;}    //  Save not visible after time enter/not selection    - DEBUG                                                                                       
+                    
+                    
                 _t++; FAIL = false; T.Element_By_Path_Click("SAVE Click", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                     if (FAIL) { return; } // Save
                 _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");

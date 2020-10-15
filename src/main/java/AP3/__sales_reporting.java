@@ -325,7 +325,7 @@ public class __sales_reporting {
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Search...' ", "Search Emails", true, "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.List_L0("Recipients count", "xpath", "//div[contains(@class, 'layout pa-1 justify-space-between')]", "no_jira");             
-            if (FAIL) { return;}
+            //if (FAIL) { return;}
             for (int i = 0; i < L0.size(); i++) {
                 _t++; T.Element_Attribute("Recipient (index " + i + ")", L0.get(i), "textContent", "no_jira");        
                 if (FAIL) { return;}      
@@ -366,14 +366,12 @@ public class __sales_reporting {
         _t++; T.Clickable_Element_By_Path_Click("Add... 'Save' click", "xpath", "//*[contains(text(), 'save')]","no_jira");
             if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); T.List_L0("Recipients count", "xpath", "//div[contains(@class, 'layout pa-1 justify-space-between')]", "no_jira");             
-            if (FAIL) { return;}
+            //if (FAIL) { return;}
             int EMAILS_COUNT = L0.size();
             for (int i = 0; i < EMAILS_COUNT; i++) {
                 _t++; T.Element_Attribute("Recipient (index " + i + ")", L0.get(i), "textContent", "no_jira");        
                 if (FAIL) { return;}      
             }            
-//        _t++; T.Clickable_Element_By_Path_Click("Click 'Cancel'", "xpath", "//*[contains(text(), 'CANCEL')]","no_jira");
-//            if (FAIL) { return;}   
 
         _t++; T.Clickable_Element_By_Path_Click("Configuration 'Save' click", "xpath", "//*[contains(text(), 'Save')]","no_jira");
             if (FAIL) { return;}  // ========== Save All

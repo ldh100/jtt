@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
@@ -27,17 +28,29 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Oleg.Spozito
  */
+
 public class Func {
     public static class ColorRenderer extends DefaultTableCellRenderer{
+        private static final TableCellRenderer TCR = new DefaultTableCellRenderer();
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            if (value.toString().toLowerCase().contains("fail")) {
+            if (value.toString().toLowerCase().contains("fail") && !value.toString().toLowerCase().contains("failed: 0")) {
+                setBackground( Color.decode("#FFA38C"));
+            } else if(value.toString().toLowerCase().contains("warnings") && !value.toString().toLowerCase().contains("warnings: 0")) {
                 setBackground( Color.YELLOW);
+            } else if(value.toString().toLowerCase().contains("fail") && value.toString().toLowerCase().contains("failed: 0")) {
+                setBackground( Color.decode("#B1F694")); 
+            } else if(value.toString().toLowerCase().contains("started") && value.toString().toLowerCase().contains("started: 0")) {
+                setBackground( Color.decode("#FAFACA")); 
+            } else if(value.toString().toLowerCase().contains("running")) {
+                setBackground( Color.decode("#C2F5FD"));
+            }else{
+                setBackground( Color.WHITE);
             }
+            setValue(table.getValueAt(row, column));
             return this;
+        }
     }
-}
     public static double p90(double[] l){
         if (l.length < 2) {
             return Math.round(l[0]);

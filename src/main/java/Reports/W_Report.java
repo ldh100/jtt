@@ -60,7 +60,11 @@ public class W_Report extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtLOG = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        DV1 = new javax.swing.JTable();
+        DV1 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;   //Disallow the editing of any cell
+            }
+        };
         dtpDEL = new com.toedter.calendar.JDateChooser();
         label1 = new java.awt.Label();
         cmbF = new java.awt.Choice();
@@ -145,7 +149,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         });
 
         btnEXCEL.setEnabled(false);
-        btnEXCEL.setLabel("Excel");
+        btnEXCEL.setLabel("Excel Report");
         btnEXCEL.setMinimumSize(new java.awt.Dimension(103, 24));
         btnEXCEL.setName(""); // NOI18N
         btnEXCEL.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -167,7 +171,6 @@ public class W_Report extends javax.swing.JInternalFrame {
         btnLOG.setLabel("Log");
         btnLOG.setMinimumSize(new java.awt.Dimension(48, 24));
         btnLOG.setName(""); // NOI18N
-        btnLOG.setPreferredSize(new java.awt.Dimension(48, 24));
         btnLOG.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLOGMouseClicked(evt);
@@ -177,7 +180,6 @@ public class W_Report extends javax.swing.JInternalFrame {
         btnREF.setLabel("Ref");
         btnREF.setMinimumSize(new java.awt.Dimension(48, 24));
         btnREF.setName(""); // NOI18N
-        btnREF.setPreferredSize(new java.awt.Dimension(48, 24));
         btnREF.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnREFMouseClicked(evt);
@@ -205,9 +207,9 @@ public class W_Report extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnLOG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLOG, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8)
-                        .addComponent(btnREF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnREF, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(2, 2, 2))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -234,8 +236,8 @@ public class W_Report extends javax.swing.JInternalFrame {
                 .addComponent(btnEXCEL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLOG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnREF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnLOG, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnREF, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -267,7 +269,7 @@ public class W_Report extends javax.swing.JInternalFrame {
     private void SUM() {
         if (DV1.getRowCount() < 1) return;
         btnLOG.setEnabled(true);
-                    btnDL_OLD.setEnabled(true); 
+        btnDL_OLD.setEnabled(true); 
         if (UserID.toLowerCase().startsWith("oleg")){
             btnDL_OLD.setEnabled(true);
         }  else{
@@ -410,7 +412,6 @@ public class W_Report extends javax.swing.JInternalFrame {
         if (reply == 1){
             return;
         }
-
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
             conn.createStatement().execute("DELETE FROM [dbo].[aw_result] WHERE qID = '" + DV1.getValueAt(DV1.getSelectedRow(), 0) + "'");        
@@ -495,14 +496,14 @@ public class W_Report extends javax.swing.JInternalFrame {
             ResultSetMetaData rsmd =rs.getMetaData();
             DefaultTableModel dm = new DefaultTableModel();
             int cols = rsmd.getColumnCount();
-            String c[]=new String[cols];
-            for(int i = 0; i<cols; i++){
+            String c[] = new String[cols];
+            for(int i = 0; i < cols; i++){
                 c[i] = rsmd.getColumnName(i+1);
                 dm.addColumn(c[i]);
             }
-            Object row[]=new Object[cols];
+            Object row[] = new Object[cols];
             while(rs.next()){
-                for(int i = 0; i<cols; i++){
+                for(int i = 0; i < cols; i++){
                     row[i] = rs.getString(i+1);
                 }
                 dm.addRow(row);
@@ -523,14 +524,12 @@ public class W_Report extends javax.swing.JInternalFrame {
                 col.setPreferredWidth(width + 4);
              }
     
-//            for (int i = DV1.getRowCount() - 1; i >= 0; i--){
-//                Object value = DV1.getValueAt(i, 5); 
-//                TableCellRenderer cr = new Func.ColorRenderer();
-//                Component cell = cr.getTableCellRendererComponent(DV1, value, false, false, i, 5);
-//                if (value.toString().toLowerCase().contains("fail")) {
-//                    cell.setBackground( Color.YELLOW);
-//                }
-//            }
+            for (int i = DV1.getRowCount() - 1; i >= 0; i--){
+                Object value = DV1.getValueAt(i, 5); 
+                TableCellRenderer cr = new Func.ColorRenderer();
+                Component cell = cr.getTableCellRendererComponent(DV1, value, false, false, i, 5);
+                DV1.getColumnModel().getColumn(5).setCellRenderer(cr);
+            }
         } catch (Exception ex) {
             txtLOG.append("\r\n\r\n=== Load Data > ERROR: " + ex.getMessage());
         }

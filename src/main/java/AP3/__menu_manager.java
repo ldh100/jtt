@@ -126,7 +126,7 @@ public class __menu_manager {
             if (FAIL) { return;} 
         // </editor-fold>        
         // <editor-fold defaultstate="collapsed" desc="Global Modifiers">  
-        EX += " - " + "\t" + " === MM Global Modifiers " + "\t" + "New ID: " + "\t" + " == Global Modifiers Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === MM Global Modifiers " + "\t" + " ===== " + "\t" + " == Global Modifiers Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
             if (FAIL) { return;}
             T_Index = -1;
@@ -148,11 +148,14 @@ public class __menu_manager {
 //                }                  
             _t++; Thread.sleep((long) sleep); T.List_Child_E1_By_Path("Find " + GL_MENU + " 'View Global Modifiers Groups' button", L2, T_Index, "xpath", ".//button[@type='button'][2]", "no_jira"); 
                 if (FAIL) { return;} 
-            _t++; Thread.sleep((long) sleep); T.Element_Click(" 'View Global Modifiers Groups' Click", e1, "no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'View Global Modifiers Groups'", e1, "no_jira"); 
                 if (FAIL) { return;}   
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;} 
-            //Thread.sleep(500);
+        _t++; Thread.sleep((long) sleep); T.To_Top("no_jira"); // Temp fix for BUG
+            if (FAIL) { return;}
+        Thread.sleep(500);
+            
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load", "tagName", "table", "no_jira"); 
                 if (FAIL) { return;}    
             Thread.sleep(500);       
@@ -392,12 +395,12 @@ public class __menu_manager {
             } else{   
                 _t++; T.Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]", "no_jira");        
                     if (FAIL) { return;} 
-                    Thread.sleep(500);
+                Thread.sleep(1000);
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", "no_jira"); 
                     if (FAIL) { return;}                                                                           
                 _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                     if (FAIL) { return;} 
-                    Thread.sleep(500);
+                Thread.sleep(1000);
 //                _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for MM > Group page load", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "no_jira"); 
 //                        if (FAIL) { return;}                    
             }
@@ -1210,7 +1213,7 @@ public class __menu_manager {
         _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
             if (FAIL) { return;}
         T_Index = -1;
-        for (int i = 0; i < L2.size(); i++) { 
+        for (int i = 0; i < L2.size(); i++) { // ============ L2 ======================================================================
             _t++; T.Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", "no_jira"); 
             if(t.trim().startsWith(GL_MENU)){
                 T_Index = i;
@@ -1225,7 +1228,7 @@ public class __menu_manager {
                 if (FAIL) { return;}   
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}  
-             Thread.sleep(500);  
+            Thread.sleep(500);  
             _t++; Thread.sleep((long) sleep); T.Page_URL("Current page URL", "no_jira");             
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", "no_jira"); 
                 if (FAIL) { return;}                  
@@ -1236,7 +1239,7 @@ public class __menu_manager {
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Local Menu Search", "css", "[aria-label='Search Menus']", BRAND, "no_jira");
                 if (FAIL) { return;} 
                 
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'VIEW LOCAL MENUS'", "xpath", "//span[contains(text(), '" + "VIEW LOCAL MENUS" + "')]", "no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'VIEW LOCAL MENUS'", "xpath", "//div[contains(text(), '" + "View Local Menus" + "')]", "no_jira"); 
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;} 
@@ -1254,6 +1257,6 @@ public class __menu_manager {
             if (FAIL) { return;}         
         EX += " - " + "\t" + " === MM Local Brands" + "\t" + " ===== " + "\t" + " == Local Brands End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
 
-        // </editor-fold>   
+        // </editor-fold>    
     }   
 }
