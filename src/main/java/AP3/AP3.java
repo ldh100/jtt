@@ -1574,7 +1574,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("GROUP:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GROUP = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("GL_MENU:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GL_MENU = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("GL_MENU:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMENU.setText(c.substring(c.indexOf(" ")).trim());
                 c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("CAN:")); c = c.substring(0, c.indexOf("\r\n")).trim(); CAN = c.substring(c.indexOf(" ")).trim();
@@ -1708,6 +1708,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private boolean CONFIG = false;
     private String C = "";
     private int d1LastRow = -1; 
+    private String SCOPE;
    
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables

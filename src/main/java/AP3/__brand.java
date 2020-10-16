@@ -6,11 +6,13 @@
 package AP3;
 import A.T;
 import static A.A.*;
+import java.util.Collections;
 /**
  *
  * @author Oleg.Spozito
  */
 public class __brand {
+    @SuppressWarnings("empty-statement")
     public static void run() throws InterruptedException { 
         _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
@@ -96,38 +98,39 @@ public class __brand {
                     if (FAIL) { return;}
                 _t++; T.Element_Child_List_L1("Unit Stations Count", L0.get(i), "tagName", "tr", "no_jira");             
                     if (FAIL) { return;}
-                for (int j = 2; j < L1.size(); j++) {   // L1 > L0 inner table >>>>>>>>>>>>   0 > 2 skip empty rows 
+                for (int j = 2; j < L1.size(); j++) {  
                     _t++; T.List_TR_TDs("Station " + (j - 1), L1, j, "no_jira");      
                         if (FAIL) { continue;}
                     if(t.trim().startsWith(BRAND)){
                         T_Index = j;
+                        _t++; T.Element_Child_List_L2("Save Target Stations List", L0.get(i), "tagName", "tr", "no_jira"); // remember Brand List wheere BRAND found
                     }
                 }
             }     
         _t++; T.Move_to_Element_By_Path("Scroll to Brand data row", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira");        
             if (FAIL) { return;} 
-        _t++; T.Brand_Status("Get Brand Status in App", L1, T_Index,"no_jira");        
+        _t++; T.Brand_Status("Get Brand Status in App", L2, T_Index,"no_jira");    // was L1, last Unit > Brand List - wrong     
             if (FAIL) { return;}  
             if(t.equals("Hidden in App")){ 
                 _t++; FAIL = false; T.Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,"no_jira" );
                 _t++; T.API_Body_Contains("Location Group API - find Hidden Brand", BrandID,false, "no_jira");        
                     if (FAIL) { return;} 
-                _t++; Thread.sleep((long) sleep); T.Brand_Status_Click("Status Click to 'Display'",L1, T_Index,"no_jira");  
+                _t++; Thread.sleep((long) sleep); T.Brand_Status_Click("Status Click to 'Display'",L2, T_Index,"no_jira");  // was L1 ^^^
                     if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "*div[contains(@class, 'progress')]", "no_jira");
+                _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                     if (FAIL) { return;}
                 _t++; FAIL = false; T.Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,"no_jira" ); 
                 _t++; T.API_Body_Contains("Location Group API - find Displayed Brand", BrandID,true, "no_jira");        
                     if (FAIL) { return;}     
             } else {
-                _t++; Thread.sleep((long) sleep); T.Brand_Status_Click("Status Click to 'Hide'",L1, T_Index,"no_jira");  
+                _t++; Thread.sleep((long) sleep); T.Brand_Status_Click("Status Click to 'Hide'",L2, T_Index,"no_jira");  
                     if (FAIL) { return;}                                                                                                             // 'v-progress-circular'
                 _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                     if (FAIL) { return;}
                 _t++; FAIL = false; T.Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,"no_jira" );      
                 _t++; T.API_Body_Contains("Location Group API - find Hidden Brand", BrandID,false, "no_jira");        
                     if (FAIL) { return;}   
-                _t++; Thread.sleep((long) sleep); T.Brand_Status_Click("Status Click to 'Display'", L1, T_Index,"no_jira");  
+                _t++; Thread.sleep((long) sleep); T.Brand_Status_Click("Status Click to 'Display'", L2, T_Index,"no_jira");  
                     if (FAIL) { return;}
                 _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                     if (FAIL) { return;}
@@ -337,9 +340,6 @@ public class __brand {
                             _t++; T.Element_Text("Menu Data Row Text", L1.get(j), "no_jira");             
                                 if (FAIL) { return;}
                         }
-                    // select / click menu
-                    //_t++; Thread.Sleep(sleep); FAIL = false; Text_Find("Delete", "no_jira"); if (FAIL) return;
-                    //_t++; Thread.Sleep(sleep); FAIL = false; Text_Find("The following ", "no_jira"); if (FAIL) return;
                     _t++; Thread.sleep((long) sleep); T.To_Top("no_jira");             
                         if (FAIL) { return;}
                     Thread.sleep(1000);    

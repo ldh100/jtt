@@ -1890,7 +1890,8 @@ public class T {
                 t = t.substring(0, t.length() - 3); //   =========================   DEBUG
             } 
 
-                if(NAME.startsWith("Station")){ //   check status 
+                if(NAME.startsWith("Station") && !t.toLowerCase().contains("no data")){
+                    //   check status 
                     STAT = X.get(X.size() - 1).findElement(By.xpath(".//i[contains(@class, 'icon mdi mdi-eye')]")).getAttribute("class").trim();
                     if(STAT != "" && STAT.contains("mdi-eye-off")){
                         STAT = "Hidden in App";         //   v-icon mdi mdi-eye-off theme--light none--text
@@ -1903,8 +1904,6 @@ public class T {
                     STAT = X.get(X.size() - 1).findElement(By.xpath("//input[@role='checkbox']")).getAttribute("aria-checked").trim();
                     t = t + STAT;
                 }   
-
-            
             EX += _t + "\t" + NAME + "\t" + "Index " + I + ": td(s) >>" + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             _p++; 
@@ -2072,19 +2071,19 @@ public class T {
         t ="?";
         try {
             List<WebElement> X = L.get(I).findElements(By.tagName("td"));
-            t = X.get(X.size() -1).findElement(By.xpath(".//i[contains(@class, 'icon mdi mdi-eye')]")).getAttribute("class").trim();
+            t = X.get(X.size() - 1).findElement(By.xpath(".//i[contains(@class, 'icon mdi mdi-eye')]")).getAttribute("class").trim();
             if(t != "" && t.contains("mdi-eye-off")){
                 t = "Hidden in App";         //   v-icon mdi mdi-eye-off theme--light none--text
             } else {
                 t = "Display in App";        //   v-icon mdi mdi-eye theme--light
             }
             _p++; 
-            EX += _t + "\t" + NAME + "\t" + "mdi-eye/mdi-eye-off"  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + "mdi-eye/mdi-eye"  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             _f++; FAIL = false; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "mdi-eye/mdi-eye-off" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "mdi-eye/mdi-eye" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         }
@@ -2270,29 +2269,34 @@ public class T {
                     }                  
                 }                
             }
+            if(from_to.length() == 11){
+                String _From = from_to.substring(0,5);
+                String _To = from_to.substring(6);
 
-            String _From = from_to.substring(0,5);
-            String _To = from_to.substring(6);
-            
-            ZoneOffset _offset = OffsetDateTime.now( ZoneId.of(TZone)).getOffset();           
-            Duration z_From = Duration.parse("PT" + _From.replace(":", "H") +"M").plusSeconds(_offset.getTotalSeconds());
-            Duration z_To = Duration.parse("PT" + _To.replace(":", "H") +"M").plusSeconds(_offset.getTotalSeconds());
+                ZoneOffset _offset = OffsetDateTime.now( ZoneId.of(TZone)).getOffset();           
+                Duration z_From = Duration.parse("PT" + _From.replace(":", "H") +"M").plusSeconds(_offset.getTotalSeconds());
+                Duration z_To = Duration.parse("PT" + _To.replace(":", "H") +"M").plusSeconds(_offset.getTotalSeconds());
 
-            String Z_From = String.format("%02d:%02d", z_From.toHours(), z_From.minusHours(z_From.toHours()).toMinutes());
-            String Z_To = String.format("%02d:%02d", z_To.toHours(), z_To.minusHours(z_To.toHours()).toMinutes());
-            Date CF = new SimpleDateFormat("hh:mm a", Locale.US).parse(From.replace("AM", " AM").replace("PM", " PM"));  
-            Date DF = new SimpleDateFormat("hh:mm", Locale.US).parse(Z_From);
-            Date CT = new SimpleDateFormat("hh:mm a", Locale.US).parse(To.replace("AM", " AM").replace("PM", " PM"));
-            Date DT = new SimpleDateFormat("hh:mm", Locale.US).parse(Z_To);
-            
-            if(CF.compareTo(DF) == 0 && CT.compareTo(DT) == 0){                
-                _p++; 
-                EX += _t + "\t == " + NAME + "\t" + "AP3 change: " + From + "-" + To + "\t" + Z_From + "-" + Z_To + " TZone: " + TZone + " > UTC: " + _From + "-" + _To + " s:" + _start + ", e:" + _end + "\t" + "PASS" + "\t" + " - " +
-                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                     
-            } else{
+                String Z_From = String.format("%02d:%02d", z_From.toHours(), z_From.minusHours(z_From.toHours()).toMinutes());
+                String Z_To = String.format("%02d:%02d", z_To.toHours(), z_To.minusHours(z_To.toHours()).toMinutes());
+                Date CF = new SimpleDateFormat("hh:mm a", Locale.US).parse(From.replace("AM", " AM").replace("PM", " PM"));  
+                Date DF = new SimpleDateFormat("hh:mm", Locale.US).parse(Z_From);
+                Date CT = new SimpleDateFormat("hh:mm a", Locale.US).parse(To.replace("AM", " AM").replace("PM", " PM"));
+                Date DT = new SimpleDateFormat("hh:mm", Locale.US).parse(Z_To);
+
+                if(CF.compareTo(DF) == 0 && CT.compareTo(DT) == 0){                
+                    _p++; 
+                    EX += _t + "\t == " + NAME + "\t" + "AP3 change: " + From + "-" + To + "\t" + Z_From + "-" + Z_To + " TZone: " + TZone + " > UTC: " + _From + "-" + _To + " s:" + _start + ", e:" + _end + "\t" + "PASS" + "\t" + " - " +
+                    "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                     
+                } else{
+                    _f++; 
+                    EX += _t + "\t == " + NAME + "\t" + "AP3 change: " + From + "-" + To + "\t" + Z_From + "-" + Z_To + " TZone: " + TZone + " > UTC: " + _From + "-" + _To + " s:" + _start + ", e:" + _end + "\t" + "FAIL" + "\t" + "Expected " + From + "-" + To +
+                    "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                                    
+                }
+            }else{
                 _f++; 
-                EX += _t + "\t == " + NAME + "\t" + "AP3 change: " + From + "-" + To + "\t" + Z_From + "-" + Z_To + " TZone: " + TZone + " > UTC: " + _From + "-" + _To + " s:" + _start + ", e:" + _end + "\t" + "FAIL" + "\t" + "Expected " + From + "-" + To +
-                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                                    
+                EX += _t + "\t == " + NAME + "\t" + "Wrong From - To Format" + "\t" + from_to + "\t" + "FAIL" + "\t" + "Expected " + From + "-" + To +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                                                    
             }
         } catch(Exception ex){
             _f++; err = ex.getMessage().trim();

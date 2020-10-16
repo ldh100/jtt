@@ -17,7 +17,8 @@ public class __menu_manager {
 //        A3lvmE18ORC7zv1GkPG - Brand: PIZZA PIZZA, Site: Sheridan College Davis B & C Wing, Unit: Sheridan College Davis C-Wing
 //        z03ykAm5JNszPA7Ne3X - Brand: Tim Hortons, Site: Sheridan College Davis B & C Wing, Unit: Sheridan College Davis C-Wing
 //        NWEJgN87Q3Sw46JaQ1Q - Brand: PARAMOUNT,   Site: Fennel, Unit: Mohawk College
-        String Menu_ID = "";        
+        String Menu_ID = "";      
+        int PAGES;
         _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > 'Menu Manager' Click", "xpath", "//*[contains(text(), 'Menu Manager')]", "no_jira"); 
@@ -106,6 +107,7 @@ public class __menu_manager {
             if (FAIL) { return;}  
         EX += " - " + "\t" + " === MM Sector Selection " + "\t" + " ===== " + "\t" + " == Sector Selection End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         // </editor-fold>           
+
         // <editor-fold defaultstate="collapsed" desc="Training Video">
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Trainig Video Icon Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-help-circle')]", "no_jira"); 
             if (FAIL) { return;}             
@@ -125,9 +127,13 @@ public class __menu_manager {
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Video Player Close Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-close')]", "no_jira"); 
             if (FAIL) { return;} 
         // </editor-fold>        
+
         // <editor-fold defaultstate="collapsed" desc="Global Modifiers">  
         EX += " - " + "\t" + " === MM Global Modifiers " + "\t" + " ===== " + "\t" + " == Global Modifiers Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-        _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
+        _t++; Thread.sleep((long) sleep); T.List_L3("Menus Pages Count", "xpath", "//button[contains(@class, 'v-pagination__item')]", "no_jira"); 
+        PAGES = L3.size();
+        
+        _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count on the Page 1", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
             if (FAIL) { return;}
             T_Index = -1;
             for (int i = 0; i < L2.size(); i++) { 
@@ -135,6 +141,36 @@ public class __menu_manager {
                 if(t.trim().startsWith(GL_MENU)){
                     T_Index = i;
                 } 
+            }
+            if(T_Index == -1 && PAGES > 1){
+                _t++; Thread.sleep((long) sleep); T.Scroll_to_Element("Scroll to Pagination", L3.get(1), "no_jira");
+                    if (FAIL) { return;}    
+                _t++; Thread.sleep((long) sleep); T.Element_Click("Click Navigation Page 2", L3.get(1), "no_jira");
+                    if (FAIL) { return;}                
+                _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count on the Page 2", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
+                if (FAIL) { return;}
+                T_Index = -1;
+                for (int i = 0; i < L2.size(); i++) { 
+                    _t++; T.Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", "no_jira"); 
+                    if(t.trim().startsWith(GL_MENU)){
+                        T_Index = i;
+                    } 
+                } 
+                if(T_Index == -1 && PAGES > 2){
+                    _t++; Thread.sleep((long) sleep); T.Scroll_to_Element("Scroll to Pagination", L3.get(2), "no_jira");
+                        if (FAIL) { return;}    
+                    _t++; Thread.sleep((long) sleep); T.Element_Click("Click Navigation Page 3", L3.get(2), "no_jira");
+                        if (FAIL) { return;}                
+                    _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count on the Page 3", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
+                    if (FAIL) { return;}
+                    T_Index = -1;
+                    for (int i = 0; i < L2.size(); i++) { 
+                        _t++; T.Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", "no_jira"); 
+                        if(t.trim().startsWith(GL_MENU)){
+                            T_Index = i;
+                        } 
+                    } 
+                }            
             }
         if(T_Index > -1){
             _t++; Thread.sleep((long) sleep); T.Scroll_to_Element("Scroll to Menu " + GL_MENU, L2.get(T_Index), "no_jira");
@@ -549,22 +585,58 @@ public class __menu_manager {
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for Menu page load", "xpath", "//div[@class='layout hover align-baseline']", "no_jira"); 
                     if (FAIL) { return;}                
         } else {
-           _t++; _f++;
+           _t++; 
+           _f++;
            EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+           return;
         }
         EX += " - " + "\t" + " === MM Global Modifiers " + "\t" + " ===== " + "\t" + " == Global Modifiers End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold>       
+
         // <editor-fold defaultstate="collapsed" desc="Global Menus Add Menu Set">  
         EX += " - " + "\t" + " === MM Global Menus Add Menu Set" + "\t" + " ===== " + "\t" + " == Add Menu Sets Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-        _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
+        _t++; Thread.sleep((long) sleep); T.List_L3("Menus Pages Count", "xpath", "//button[contains(@class, 'v-pagination__item')]", "no_jira"); 
+        PAGES = L3.size();
+        
+        _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count on the Page 1", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
             if (FAIL) { return;}
-        T_Index = -1;
-        for (int i = 0; i < L2.size(); i++) { 
-            _t++; T.Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", "no_jira"); 
-            if(t.trim().startsWith(GL_MENU)){
-                T_Index = i;
-            }                
-        }
+            T_Index = -1;
+            for (int i = 0; i < L2.size(); i++) { 
+                _t++; T.Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", "no_jira"); 
+                if(t.trim().startsWith(GL_MENU)){
+                    T_Index = i;
+                } 
+            }
+            if(T_Index == -1 && PAGES > 1){
+                _t++; Thread.sleep((long) sleep); T.Scroll_to_Element("Scroll to Pagination", L3.get(1), "no_jira");
+                    if (FAIL) { return;}    
+                _t++; Thread.sleep((long) sleep); T.Element_Click("Click Navigation Page 2", L3.get(1), "no_jira");
+                    if (FAIL) { return;}                
+                _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count on the Page 2", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
+                if (FAIL) { return;}
+                T_Index = -1;
+                for (int i = 0; i < L2.size(); i++) { 
+                    _t++; T.Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", "no_jira"); 
+                    if(t.trim().startsWith(GL_MENU)){
+                        T_Index = i;
+                    } 
+                } 
+                if(T_Index == -1 && PAGES > 2){
+                    _t++; Thread.sleep((long) sleep); T.Scroll_to_Element("Scroll to Pagination", L3.get(2), "no_jira");
+                        if (FAIL) { return;}    
+                    _t++; Thread.sleep((long) sleep); T.Element_Click("Click Navigation Page 3", L3.get(2), "no_jira");
+                        if (FAIL) { return;}                
+                    _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count on the Page 3", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
+                    if (FAIL) { return;}
+                    T_Index = -1;
+                    for (int i = 0; i < L2.size(); i++) { 
+                        _t++; T.Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", "no_jira"); 
+                        if(t.trim().startsWith(GL_MENU)){
+                            T_Index = i;
+                        } 
+                    } 
+                }            
+            }
         if(T_Index > -1){
             _t++; Thread.sleep((long) sleep); T.Scroll_to_Element("Scroll to Menu " + GL_MENU, L2.get(T_Index), "no_jira");
                 if (FAIL) { return;}
@@ -853,8 +925,10 @@ public class __menu_manager {
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent","no_jira"); 
              if (FAIL) { return;} 
         } else {
-           _t++; _f++;
-           EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+            _t++; 
+            _f++;
+            EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+            return;
         }
         _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back","MM 'Menu' page","MM 'Sector' page", "no_jira"); 
             //if (FAIL) { return;}
@@ -883,15 +957,48 @@ public class __menu_manager {
         
         // <editor-fold defaultstate="collapsed" desc="Global Menus Import">  
         EX += " - " + "\t" + " === MM Global Menus Import" + "\t" + " ===== " + "\t" + " == Global Menus Import Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-        _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
+        _t++; Thread.sleep((long) sleep); T.List_L3("Menus Pages Count", "xpath", "//button[contains(@class, 'v-pagination__item')]", "no_jira"); 
+        PAGES = L3.size();
+        
+        _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count on the Page 1", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
             if (FAIL) { return;}
-        T_Index = -1;
-        for (int i = 0; i < L2.size(); i++) { // ============ L2 ======================================================================
-            _t++; T.Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", "no_jira"); 
-            if(t.trim().startsWith(GL_MENU)){
-                T_Index = i;
-            }                
-        }
+            T_Index = -1;
+            for (int i = 0; i < L2.size(); i++) { 
+                _t++; T.Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", "no_jira"); 
+                if(t.trim().startsWith(GL_MENU)){
+                    T_Index = i;
+                } 
+            }
+            if(T_Index == -1 && PAGES > 1){
+                _t++; Thread.sleep((long) sleep); T.Scroll_to_Element("Scroll to Pagination", L3.get(1), "no_jira");
+                    if (FAIL) { return;}    
+                _t++; Thread.sleep((long) sleep); T.Element_Click("Click Navigation Page 2", L3.get(1), "no_jira");
+                    if (FAIL) { return;}                
+                _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count on the Page 2", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
+                if (FAIL) { return;}
+                T_Index = -1;
+                for (int i = 0; i < L2.size(); i++) { 
+                    _t++; T.Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", "no_jira"); 
+                    if(t.trim().startsWith(GL_MENU)){
+                        T_Index = i;
+                    } 
+                } 
+                if(T_Index == -1 && PAGES > 2){
+                    _t++; Thread.sleep((long) sleep); T.Scroll_to_Element("Scroll to Pagination", L3.get(2), "no_jira");
+                        if (FAIL) { return;}    
+                    _t++; Thread.sleep((long) sleep); T.Element_Click("Click Navigation Page 3", L3.get(2), "no_jira");
+                        if (FAIL) { return;}                
+                    _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count on the Page 3", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
+                    if (FAIL) { return;}
+                    T_Index = -1;
+                    for (int i = 0; i < L2.size(); i++) { 
+                        _t++; T.Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", "no_jira"); 
+                        if(t.trim().startsWith(GL_MENU)){
+                            T_Index = i;
+                        } 
+                    } 
+                }            
+            }
         if(T_Index > -1){
             _t++; Thread.sleep((long) sleep); T.Scroll_to_Element("Scroll to Menu " + GL_MENU, L2.get(T_Index), "no_jira");
                 if (FAIL) { return;}
@@ -1208,17 +1315,50 @@ public class __menu_manager {
         EX += " - " + "\t" + " === MM Global Menus Import" + "\t" + " ===== " + "\t" + " == Global Menus Import End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         // </editor-fold>    
 
-       // <editor-fold defaultstate="collapsed" desc="Local Brands">  
+        // <editor-fold defaultstate="collapsed" desc="Local Brands">  
         EX += " - " + "\t" + " === MM Local Brands" + "\t" + " ===== " + "\t" + " == Local Brandst Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-        _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
+        _t++; Thread.sleep((long) sleep); T.List_L3("Menus Pages Count", "xpath", "//button[contains(@class, 'v-pagination__item')]", "no_jira"); 
+        PAGES = L3.size();
+        
+        _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count on the Page 1", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
             if (FAIL) { return;}
-        T_Index = -1;
-        for (int i = 0; i < L2.size(); i++) { // ============ L2 ======================================================================
-            _t++; T.Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", "no_jira"); 
-            if(t.trim().startsWith(GL_MENU)){
-                T_Index = i;
-            }                
-        }
+            T_Index = -1;
+            for (int i = 0; i < L2.size(); i++) { 
+                _t++; T.Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", "no_jira"); 
+                if(t.trim().startsWith(GL_MENU)){
+                    T_Index = i;
+                } 
+            }
+            if(T_Index == -1 && PAGES > 1){
+                _t++; Thread.sleep((long) sleep); T.Scroll_to_Element("Scroll to Pagination", L3.get(1), "no_jira");
+                    if (FAIL) { return;}    
+                _t++; Thread.sleep((long) sleep); T.Element_Click("Click Navigation Page 2", L3.get(1), "no_jira");
+                    if (FAIL) { return;}                
+                _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count on the Page 2", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
+                if (FAIL) { return;}
+                T_Index = -1;
+                for (int i = 0; i < L2.size(); i++) { 
+                    _t++; T.Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", "no_jira"); 
+                    if(t.trim().startsWith(GL_MENU)){
+                        T_Index = i;
+                    } 
+                } 
+                if(T_Index == -1 && PAGES > 2){
+                    _t++; Thread.sleep((long) sleep); T.Scroll_to_Element("Scroll to Pagination", L3.get(2), "no_jira");
+                        if (FAIL) { return;}    
+                    _t++; Thread.sleep((long) sleep); T.Element_Click("Click Navigation Page 3", L3.get(2), "no_jira");
+                        if (FAIL) { return;}                
+                    _t++; Thread.sleep((long) sleep); T.List_L2("Menus Count on the Page 3", "xpath", "//div[@class='layout hover align-baseline']", "no_jira");             
+                    if (FAIL) { return;}
+                    T_Index = -1;
+                    for (int i = 0; i < L2.size(); i++) { 
+                        _t++; T.Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", "no_jira"); 
+                        if(t.trim().startsWith(GL_MENU)){
+                            T_Index = i;
+                        } 
+                    } 
+                }            
+            }
         if(T_Index > -1){
             _t++; Thread.sleep((long) sleep); T.Scroll_to_Element("Scroll to Menu " + GL_MENU, L2.get(T_Index), "no_jira");
                 if (FAIL) { return;}             
@@ -1245,8 +1385,10 @@ public class __menu_manager {
                 if (FAIL) { return;} 
             Thread.sleep(500);                 
         } else {
-           _t++; _f++;
-           EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+            _t++; 
+            _f++;
+            EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+            return;
         } 
         _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back","MM 'Local Brands' page","MM 'Sector' page", "no_jira"); 
             //if (FAIL) { return;}
