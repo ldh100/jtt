@@ -940,11 +940,11 @@ public class __menu_manager_dev {
         if ("Found".equals(t)) {     
             _t++; _f++;
             EX += _t + "\t" + "Navigate Back after Publish OK" + "\t" + "MM 'Sector' page" + "\t" + "Dialog 'Leave without publishing?'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-            _t++; FAIL = false; T.Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true,"no_jira"); 
                 if (FAIL) { return; }   
-            _t++; FAIL = false; T.Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", "no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", "no_jira"); 
                 if (FAIL) { return; }         
-            _t++; FAIL = false; T.Element_By_Path_Text("Find 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", "no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", "no_jira"); 
                 if (FAIL) { return; }     
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click(" 'LEAVE' Click", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", "no_jira"); 
                 if (FAIL) { return;}  
@@ -1235,7 +1235,7 @@ public class __menu_manager_dev {
                             EX += " - " + "\t" + "Global Menus" + "\t" + "Menu Names / Menu ID(s)" + "\t" + "Not Equial ^^^" + "\t" + "FAIL" + "\t" + "Unexpected";
                             EX += "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n"; 
                         }      
-        //            _t++; FAIL = false; T.Call_API("Call 'menu' API", BaseAPI + "/menu/" + Menu_ID + "?extended=true&nocache=1", true,"no_jira" );
+        //            _t++; Thread.sleep((long) sleep); T.Call_API("Call 'menu' API", BaseAPI + "/menu/" + Menu_ID + "?extended=true&nocache=1", true,"no_jira" );
         //                if (FAIL) { return;}          
 
                     _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Imported Menu Set Hover", "xpath", "//*[contains(text(), 'Imported " + New_ID + "')]", "no_jira"); 
@@ -1297,7 +1297,7 @@ public class __menu_manager_dev {
                         EX += " - " + "\t" + "Global Menus" + "\t" + "Menu Names / Menu ID(s)" + "\t" + "Not Equial ^^^" + "\t" + "FAIL" + "\t" + "Unexpected";
                         EX += "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n"; 
                     } 
-//                _t++; FAIL = false; T.Call_API("Call 'menu' API", BaseAPI + "/menu/" + Menu_ID + "?extended=true&nocache=1", true,"no_jira" );
+//                _t++; Thread.sleep((long) sleep); T.Call_API("Call 'menu' API", BaseAPI + "/menu/" + Menu_ID + "?extended=true&nocache=1", true,"no_jira" );
 //                    if (FAIL) { return;}     
 
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent","no_jira"); 

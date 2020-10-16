@@ -6,13 +6,9 @@
 package Reports;
 import static A.A.*;
 import A.Func;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
-import java.awt.GridLayout;
-import java.beans.PropertyVetoException;
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.ResultSet;
@@ -23,14 +19,12 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
@@ -95,9 +89,8 @@ public class W_Report extends javax.swing.JInternalFrame {
 
         txtLOG.setEditable(false);
         txtLOG.setColumns(20);
-        txtLOG.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        txtLOG.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         txtLOG.setRows(5);
-        txtLOG.setWrapStyleWord(true);
         txtLOG.setMargin(new java.awt.Insets(2, 2, 1, 1));
         jScrollPane1.setViewportView(txtLOG);
 
@@ -193,7 +186,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
@@ -213,7 +206,7 @@ public class W_Report extends javax.swing.JInternalFrame {
                 .addGap(2, 2, 2))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE)
                     .addGap(110, 110, 110)))
         );
         layout.setVerticalGroup(
@@ -307,8 +300,10 @@ public class W_Report extends javax.swing.JInternalFrame {
             + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()) + " - " 
             + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("url").getModelIndex()) + " - " 
             + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("env").getModelIndex()) + "\r\n" 
-            + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("summary").getModelIndex()).toString().trim()
+            + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("summary").getModelIndex()).toString().trim() + "\r\n" 
+            + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("Status").getModelIndex()).toString().trim()                
         );
+        txtLOG.setCaretPosition(0);
     }
     private void EXCEL(){
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));

@@ -340,7 +340,7 @@ public class __brand_new {
                         if (FAIL) { return;}    
                      break;
                 case "Scan & Go Setup":  
-                    _t++; FAIL = false; T.Find_Text("Find 'Enable Scan & ...'", "Enable Scan & Go?", true,"no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Enable Scan & ...'", "Enable Scan & Go?", true,"no_jira"); 
                         if (!FAIL) { 
                             //
                         }                    
@@ -429,27 +429,27 @@ public class __brand_new {
                                     if (FAIL) { return;}                                                           
                                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Message On Receipt", "css", "[aria-label='Message On Receipt (Thanks for Ordering) ']", "Thanks for Auto Ordering", "no_jira"); 
                                     if (FAIL) { return;}
-                                _t++; FAIL = false; T.Find_Text("Find 'Allow ... Refunds'", "Allow for KDS Refunds", true,"no_jira");     
+                                _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Allow ... Refunds'", "Allow for KDS Refunds", true,"no_jira");     
                                     if (FAIL) { return;}
                             }
                         }
                     break;
                 case "Third Party Integration":
-                    _t++; FAIL = false; T.Find_Text("Find 'Request Phone...'", "Request Customer Phone Number at Checkout", true,"no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Request Phone...'", "Request Customer Phone Number at Checkout", true,"no_jira"); 
                         if (!FAIL) { 
                             //
                         }                                     
                     break;
                 case "Menu Information":
-                    _t++; FAIL = false; T.Find_Text("Find '...Requires Promo Exemptions...'", "Menu Requires Item Promo Exemptions:", true,"no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find '...Requires Promo Exemptions...'", "Menu Requires Item Promo Exemptions:", true,"no_jira"); 
                         if (!FAIL) { 
-                            _t++; FAIL = false; T.Find_Text("Find '...Requires Item PLU's...'", "Menu Requires Item PLU's:", true,"no_jira"); 
+                            _t++; Thread.sleep((long) sleep); T.Find_Text("Find '...Requires Item PLU's...'", "Menu Requires Item PLU's:", true,"no_jira"); 
                                 if (FAIL) { return; } 
-                            _t++; FAIL = false; T.Find_Text("Find 'Showcase ...'", "Showcase Items:", true,"no_jira"); 
+                            _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Showcase ...'", "Showcase Items:", true,"no_jira"); 
                                 if (FAIL) { return; } 
-                            _t++; FAIL = false; T.Find_Text("Find 'Allow Description Edits'", "Allow Local Item Description Edits:", true,"no_jira"); 
+                            _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Allow Description Edits'", "Allow Local Item Description Edits:", true,"no_jira"); 
                                 if (FAIL) { return; } 
-                            _t++; FAIL = false; T.Find_Text("Find 'Allow Images'", "Allow Local Menu Images:", true,"no_jira"); 
+                            _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Allow Images'", "Allow Local Menu Images:", true,"no_jira"); 
                                 if (FAIL) { return; }
                         }
                     break;                      
@@ -506,9 +506,9 @@ public class __brand_new {
          _t++; T.Element_Click("Click 'Menu' Tab", L0.get(0), "no_jira");
             if (FAIL) { return;} 
             Thread.sleep(500);           
-        _t++; FAIL = false; T.Find_Text("Find 'Please assign...'", "Please assign Service or Delivery hours", true,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Please assign...'", "Please assign Service or Delivery hours", true,"no_jira"); 
             if (FAIL) { return; }
-        _t++; FAIL = false; T.Find_Text("Find 'Go to...'", "Go to operation hours", true,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Go to...'", "Go to operation hours", true,"no_jira"); 
             if (FAIL) { return; }            
         _t++; T.Element_By_Path_Click("Click 'Go to...'", "xpath", "//div[text()='Go to operation hours']","no_jira");
             if (FAIL) { return;}    
@@ -531,7 +531,7 @@ public class __brand_new {
                 _t++; T.Element_Click("Check '24 Hour Service'", L1.get(j), "no_jira");             
                     if (FAIL) { return;}
             }  
-        _t++; FAIL = false; T.Element_By_Path_Click("SAVE Click", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("SAVE Click", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
             if (FAIL) { return; } 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
             if (FAIL) { return;} 
@@ -558,7 +558,7 @@ public class __brand_new {
                 _t++; T.Element_Click("Check '24 Hour Service'", L1.get(j), "no_jira");             
                     if (FAIL) { return;}
             }  
-        _t++; FAIL = false; T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
             if (FAIL) { return; } // Save
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;} 
@@ -681,7 +681,7 @@ public class __brand_new {
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Tab 'Menu' Click", "xpath", "//*[text()='Menu']", "no_jira"); 
             if (FAIL) { return;} 
             Thread.sleep(500); 
-//        _t++; FAIL = false; T.Find_Text("Find 'No Menu...'", "No menus for this brand exist in Menu Manager", true, "no_jira"); 
+//        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'No Menu...'", "No menus for this brand exist in Menu Manager", true, "no_jira"); 
 //            if (FAIL) { return; }
 
         _t++; Thread.sleep((long) sleep); T.List_L1("Menu Rows Count", "tagName", "tr", "no_jira");             
@@ -690,7 +690,7 @@ public class __brand_new {
                 _t++; T.Element_Text("Menu Data Row Text", L1.get(i), "no_jira");             
                 if (FAIL) { return;}
             } 
-        _t++; FAIL = false; T.Find_Text("Finf 'Schedule Your ...'", "Schedule Your Menus", true,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Finf 'Schedule Your ...'", "Schedule Your Menus", true,"no_jira"); 
             if (FAIL) { return; } 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Schedule menu'", "xpath", "//*[contains(text(), 'Schedule menu')]", "no_jira"); 
             if (FAIL) { return;}   

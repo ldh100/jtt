@@ -365,11 +365,11 @@ public class __user {
 //        _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back","Add New User page","App User page", "no_jira"); 
 //        _t++; Thread.sleep((long) sleep); T.Text_Found("Find 'Leave...' question", "Leave without saving?", "no_jira"); 
 //        if ("Found".equals(t)) {       
-//            _t++; FAIL = false; T.Find_Text("Find 'Leave...' note", "Changes will be lost if you do not save.", true,"no_jira"); 
+//            _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Leave...' note", "Changes will be lost if you do not save.", true,"no_jira"); 
 //                if (FAIL) { return; }   
-//            _t++; FAIL = false; T.Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", "no_jira"); 
+//            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", "no_jira"); 
 //                if (FAIL) { return; }         
-//            _t++; FAIL = false; T.Element_By_Path_Text("Find 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", "no_jira"); 
+//            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", "no_jira"); 
 //                if (FAIL) { return; }     
 //            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", "no_jira"); 
 //                if (FAIL) { return;}  
@@ -408,7 +408,7 @@ public class __user {
 //            if (FAIL) { return;} 
 //        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
 //            if (FAIL) { return;} 
-//        _t++; FAIL = false; T.Element_By_Path_Text("Find 'Delete User' Text", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
+//        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'Delete User' Text", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
 //            if (FAIL) { return; } 
 //               
 //        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin 'Allow refunds'", "Allow Refunds", true,"no_jira");  
@@ -425,7 +425,7 @@ public class __user {
 //        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin 'Brand Config'", "Brand Config", false,"no_jira");  
 //        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin 'Smart Analytics'", "Smart Analytics", true,"no_jira"); 
 //        
-//        _t++; FAIL = false; T.Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
+//        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
 //            if (FAIL) { return; }  
 //        _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Delete' dialog", "xpath", "//div[@class='confirm-dialog v-card v-sheet v-sheet--tile theme--light']", "no_jira");
 //            if (FAIL) { return;}    // Find fragment              
@@ -681,7 +681,7 @@ public class __user {
 //            _t++; Thread.sleep((long) sleep); T.Find_Text("SM 'Brand Config'", "Brand Config", false,"no_jira");  
 //            _t++; Thread.sleep((long) sleep); T.Find_Text("SM 'Smart Analytics'", "Smart Analytics", true,"no_jira"); 
 //        
-//        _t++; FAIL = false; T.Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
+//        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
 //                if (FAIL) { return; }  
 //        _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Delete' dialog", "xpath", "//div[@class='confirm-dialog v-card v-sheet v-sheet--tile theme--light']", "no_jira");
 //            if (FAIL) { return;}    // Find fragment              
@@ -948,7 +948,7 @@ public class __user {
 //        _t++; Thread.sleep((long) sleep); T.Find_Text("DM 'Brand Config'", "Brand Config", true,"no_jira");  
 //        _t++; Thread.sleep((long) sleep); T.Find_Text("DM 'Smart Analytics'", "Smart Analytics", true,"no_jira"); 
 //        
-//        _t++; FAIL = false; T.Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
+//        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
 //                if (FAIL) { return; }    
 //         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Delete' dialog", "xpath", "//div[@class='confirm-dialog v-card v-sheet v-sheet--tile theme--light']", "no_jira");
 //            if (FAIL) { return;}    // Find fragment              
@@ -1108,13 +1108,13 @@ public class __user {
 //            if (FAIL) { return;}  
 //        _t++; T.Visible_Element_By_Path_Text_Enter("Enter 'Email or phone'", "id", "identifierId", "cdl.test.xtt@gmail.com", "no_jira"); 
 //            if (FAIL) { return;}  
-//        _t++; FAIL = false; T.Element_By_Path_Click("Click 'ID Next'", "id", "identifierNext", "no_jira"); 
+//        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'ID Next'", "id", "identifierNext", "no_jira"); 
 //            if (FAIL) { return; }   
 //        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "css", "[role='progressbar']", "no_jira"); 
 //            if (FAIL) { return;}            
 //        _t++; T.Visible_Element_By_Path_Text_Enter("Enter 'Password'", "css", "[type='password']", "AnnaL0g0", "no_jira"); 
 //            if (FAIL) { return;}   
-//        _t++; FAIL = false; T.Element_By_Path_Click("Click 'PW Next'", "id", "passwordNext", "no_jira"); 
+//        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PW Next'", "id", "passwordNext", "no_jira"); 
 //            if (FAIL) { return; } 
 //        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "css", "[role='progressbar']", "no_jira"); 
 //            if (FAIL) { return;}   
@@ -1158,7 +1158,7 @@ public class __user {
         _t++; Thread.sleep((long) sleep); T.Find_Text("Runner 'Brand Config'", "Brand Config", false,"no_jira");  
         _t++; Thread.sleep((long) sleep); T.Find_Text("Runner 'Smart Analytics'", "Smart Analytics", false,"no_jira"); 
         
-        _t++; FAIL = false; T.Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
             if (FAIL) { return; }  
             _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Delete' dialog", "xpath", "//div[@class='confirm-dialog v-card v-sheet v-sheet--tile theme--light']", "no_jira");
             if (FAIL) { return;}    // Find fragment              

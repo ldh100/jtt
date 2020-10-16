@@ -444,7 +444,7 @@ public class __announcements {
             String A_ID = "";
             if(t.contains("/")){
                 A_ID = t.substring(t.lastIndexOf("/")+1);
-                _t++; FAIL = false; T.Call_API("Call /announcemen/ API", BaseAPI + "/announcement/" + A_ID, true,"no_jira" );
+                _t++; Thread.sleep((long) sleep); T.Call_API("Call /announcemen/ API", BaseAPI + "/announcement/" + A_ID, true,"no_jira" );
                 _t++; T.API_Body_Contains("Announcemen API - find Site ID", SiteID,true, "no_jira");    
                 _t++; T.API_Body_Contains("Announcemen API - find App", app,true, "no_jira"); 
                 _t++; T.API_Body_Contains("Announcemen API - find Name", "Auto Announcement " + New_ID,true, "no_jira");
@@ -546,6 +546,6 @@ public class __announcements {
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Find_Text("Confirm Deleted", "Auto Announcement " + New_ID, false, "no_jira"); 
                 if (FAIL) { return;}
-            _t++; FAIL = false; T.Call_API("Call /announcemen/ API", BaseAPI + "/announcement/" + A_ID, false,"no_jira" );    
+            _t++; Thread.sleep((long) sleep); T.Call_API("Call /announcemen/ API", BaseAPI + "/announcement/" + A_ID, false,"no_jira" );    
     }
 }

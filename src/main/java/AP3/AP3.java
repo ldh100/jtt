@@ -629,6 +629,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         IM_ID = txtADMIN_ID.getText();
         IM_PW = txtADMIN_ID.getText();
         ALL_DATA = _all_data.isSelected();
+        SCOPE = "";
         if(DV1.getRowCount() > 0) {
             SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();            
             platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform
@@ -638,7 +639,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
         }
         
-        GROUP = cmbGROUP.getSelectedItem().toString();
+        GROUP = cmbGROUP.getSelectedItem();
         GL_MENU = txtMENU.getText();
 
         if(_headless.isSelected()) {
@@ -870,93 +871,88 @@ public class AP3 extends javax.swing.JInternalFrame {
             @Override
             protected String doInBackground() throws Exception   { // define what thread will do here 
                 New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
-                if (_login.isSelected()) {
+                if (_login.isSelected()) { SCOPE += "Login";
                     EX += " - " + "\t" + " === Login, Dashboard" + "\t" + " ===== " + "\t" + " == Login, Dashboard Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                     __login.run(_users.isSelected());
                     EX += " - " + "\t" + " === ^ Login, Dashboard" + "\t" + " ===== " + "\t" + " == ^ Login, Dashboard End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 }
-                if (_site.isSelected()) {
+                if (_site.isSelected()) { SCOPE += ", Site";
                     EX += " - " + "\t" + " === Sites" + "\t" + " ===== " + "\t" + " == Sites Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __site.run();
                     EX += " - " + "\t" + " === ^ Sites" + "\t" + " ===== " + "\t" + " == ^ Sites End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                 }
-                if (_brand.isSelected()) {
+                if (_brand.isSelected()) { SCOPE += ", Brand";
                     EX += " - " + "\t" + " === Brand" + "\t" + " ===== " + "\t" + " == Brand Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __brand.run();
                     EX += " - " + "\t" + " === ^ Brand" + "\t" + " ===== " + "\t" + " == ^ Brand End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                 }
-                if (_group_management.isSelected()) {
+                if (_group_management.isSelected()) { SCOPE += ", Group Mgm";
                     EX += " - " + "\t" + " === Group Management" + "\t" + " ===== " + "\t" + " == Group Management Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __group_management.run();
                     EX += " - " + "\t" + " === ^ Group Management" + "\t" + " ===== " + "\t" + " == ^ Group Management End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                 }
-                if (_menu_manager.isSelected()) {
+                if (_menu_manager.isSelected()) { SCOPE += ", Menu Mgm";
                     EX += " - " + "\t" + " === Menu Manager" + "\t" + " ===== " + "\t" + " == Menu Manager Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     if("DE".equals(env)){
                         __menu_manager_dev.run(); 
                     }else{
                         __menu_manager.run();                        
                     }
-
                     EX += " - " + "\t" + " === ^ Menu Manager" + "\t" + " ===== " + "\t" + " == ^ Menu Manager End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 }
-                if (_orders.isSelected()) {
+                if (_orders.isSelected()) { SCOPE += ", Orders";
                     EX += " - " + "\t" + " === Orders" + "\t" + " ===== " + "\t" + " == Orders Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __orders.run();
                     EX += " - " + "\t" + " === ^ Orders" + "\t" + " ===== " + "\t" + " == ^ Orders End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 }
-                if (_users.isSelected()) {
+                if (_users.isSelected()) {  SCOPE += ", Users";
                     EX += " - " + "\t" + " === Users" + "\t" + " ===== " + "\t" + " == Users Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __user.run();
                     EX += " - " + "\t" + " === ^ Users" + "\t" + " ===== " + "\t" + " == ^ Users End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                 }
-                if (_sales_reporting.isSelected()) {
+                if (_sales_reporting.isSelected()) { SCOPE += ", Sales Rep";
                     EX += " - " + "\t" + " === Sales Reporting" + "\t" + " ===== " + "\t" + " == Sales Reporting Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __sales_reporting.run();
                     EX += " - " + "\t" + " === ^ Sales Reporting" + "\t" + " ===== " + "\t" + " == ^ Sales Reporting End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 }
-                if (_announcements.isSelected())
-                {
+                if (_announcements.isSelected()) { SCOPE += ", Announ";
                     EX += " - " + "\t" + " === Announcements" + "\t" + " ===== " + "\t" + " == Announcements Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __announcements.run();
                     EX += " - " + "\t" + " === ^ Announcements" + "\t" + " ===== " + "\t" + " == ^ Announcements End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                 }                    
-                if (_promo.isSelected())
-                {
+                if (_promo.isSelected()) { SCOPE += ", Promos";
                     EX += " - " + "\t" + " === Promo Management" + "\t" + " ===== " + "\t" + " == Promo Management Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __promo.run();
                     EX += " - " + "\t" + " === ^ Promo Management" + "\t" + " ===== " + "\t" + " == ^ Promo Management End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                 }                    
-                if (_resent_updates.isSelected()) {
+                if (_resent_updates.isSelected()) { SCOPE += ", Resent Updates";
                     EX += " - " + "\t" + " === Recent Updates" + "\t" + " ===== " + "\t" + " == Recent Updates Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __resent_updates.run();
                     EX += " - " + "\t" + " === ^ Recent Updates" + "\t" + " ===== " + "\t" + " == ^ Recent Updates End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 }
-                if (_brand_new.isSelected() && !"PR".equals(env)) {
+                if (_brand_new.isSelected() && !"PR".equals(env)) { SCOPE += ", Add Brand";
                     EX += " - " + "\t" + " === Site > Add Brand" + "\t" + " ===== " + "\t" + " == Add Brand Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __brand_new.run(_site_new.isSelected());
                     EX += " - " + "\t" + " === ^ Site > Add Brand" + "\t" + " ===== " + "\t" + " == ^ Add Brand End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                 }
-                if (_site_new.isSelected() && !"PR".equals(env)) {
+                if (_site_new.isSelected() && !"PR".equals(env)) { SCOPE += ", New Site";
                     EX += " - " + "\t" + " === New Site" + "\t" + " ===== " + "\t" + " == New Site Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __site_new.run();
                     EX += " - " + "\t" + " === ^ New Site" + "\t" + " ===== " + "\t" + " == ^ New Site End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                 }
 
                 // ============================== Last Blocks
-                if (_logout.isSelected()) {
+                if (_logout.isSelected()) { SCOPE += ", LogOut";
                     EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __logout.run();
                     EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                 }
-                if (_password.isSelected())
-                {   
+                if (_password.isSelected()) { SCOPE += ", Forgot PW";  
                     EX += " - " + "\t" + " === Forgot PW" + "\t" + " ===== " + "\t" + " == Forgot PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __password.run();
                     EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                 }
-                if (_roles.isSelected())
-                {   
+                if (_roles.isSelected()) { SCOPE += ", Roles";   
                     EX += " - " + "\t" + " === User Permissions" + "\t" + " ===== " + "\t" + " == User Permissions Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     if (!_logout.isSelected()){
                        __logout.run();
@@ -973,13 +969,10 @@ public class AP3 extends javax.swing.JInternalFrame {
             @Override
             protected void done() { // this method is called when the background thread finishes execution  
                 try  { 
-                    String S = " Scope:";
-                    if(_orders.isSelected()) S += " Orders, ";
-                    S = S.substring(0, S.length() - 2); 
                     BW2.cancel(true); // =============================================
                     txtLOG.append("\r\n\r\n========   " + "Execution step-by-step..." + "   ========");                
                     EX = "AP3 v" + Ver + //url +
-                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + "\r\n" +
+                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                      "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                      + EX;
                     txtLOG.append("\r\n" + EX.replaceAll("\t", " > "));
@@ -994,7 +987,6 @@ public class AP3 extends javax.swing.JInternalFrame {
                     if(d1 != null) {
                         d1.quit(); 
                     }
-
                 }  
                 catch (InterruptedException | ExecutionException ex)  { 
                     txtLOG.append("\r\n- Exception: " + ex.getMessage()); 
@@ -1444,7 +1436,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             _update.setString(14, WsID);    
             _update.setString(15, cmbBROW.getSelectedItem().toString());    
             _update.setString(16, txtLOG.getText());    
-            _update.setString(17, "Done");    
+            _update.setString(17, "Scope: " + SCOPE);    
             _update.setString(18, EX);    
             int row = _update.executeUpdate();
 //            txtLOG.append("\r\n\r\n=== LOG_UPDATE > OK (" + row + " row)");
