@@ -970,7 +970,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             protected void done() { // this method is called when the background thread finishes execution  
                 try  { 
                     BW2.cancel(true); // =============================================
-                    txtLOG.append("\r\n\r\n========   " + "Execution step-by-step..." + "   ========");                
+                    txtLOG.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");                
                     EX = "AP3 v" + Ver + //url +
                     " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                      "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"

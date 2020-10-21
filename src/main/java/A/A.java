@@ -68,7 +68,8 @@ public class A extends javax.swing.JFrame {
         jDesktopPane1.setBackground(new java.awt.Color(204, 204, 204));
         jDesktopPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jDesktopPane1.setFocusCycleRoot(false);
-        jDesktopPane1.setName(""); // NOI18N
+        jDesktopPane1.setInheritsPopupMenu(true);
+        jDesktopPane1.setName("A"); // NOI18N
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);

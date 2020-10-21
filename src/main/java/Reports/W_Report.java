@@ -292,6 +292,10 @@ public class W_Report extends javax.swing.JInternalFrame {
         }
         DateFormat localFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         localFormat.setTimeZone(TimeZone.getDefault());
+        String Status = DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("Status").getModelIndex()).toString().trim();
+        if(!Status.contains("Scope")){
+            Status = "";
+        }
         txtLOG.setText("LogID: " + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("qID").getModelIndex())
             + " @" + localFormat.format(utcTime) 
             + " (" + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("test_type").getModelIndex()) + ") > "
@@ -301,7 +305,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("url").getModelIndex()) + " - " 
             + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("env").getModelIndex()) + "\r\n" 
             + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("summary").getModelIndex()).toString().trim() + "\r\n" 
-            + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("Status").getModelIndex()).toString().trim()                
+            + Status               
         );
         txtLOG.setCaretPosition(0);
     }

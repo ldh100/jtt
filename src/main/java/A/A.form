@@ -116,7 +116,8 @@
           <Color id="Default Cursor"/>
         </Property>
         <Property name="focusCycleRoot" type="boolean" value="false"/>
-        <Property name="name" type="java.lang.String" value="" noResource="true"/>
+        <Property name="inheritsPopupMenu" type="boolean" value="true"/>
+        <Property name="name" type="java.lang.String" value="A" noResource="true"/>
       </Properties>
 
       <Layout>
