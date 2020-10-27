@@ -263,15 +263,16 @@ public class W_Report extends javax.swing.JInternalFrame {
         if (DV1.getRowCount() < 1) return;
         btnLOG.setEnabled(true);
         btnDL_OLD.setEnabled(true); 
-        if (UserID.toLowerCase().startsWith("oleg")){
+        if (UserID.toLowerCase().contains("oleg")){
             btnDL_OLD.setEnabled(true);
         }  else{
             btnDL_OLD.setEnabled(false);
-        }                     
-        if (DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("user_id").getModelIndex()).toString().equals(UserID)){
+        }   
+        String AUTOR = DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("user_id").getModelIndex()).toString();
+        if (AUTOR.equals(UserID) || UserID.toLowerCase().contains("oleg")){
             btnDEL.setEnabled(true);
         }  else{
-            btnDEL.setEnabled(true);
+            btnDEL.setEnabled(false);
         }          
         if (DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("AP3") || 
                 DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("Food")|| 
@@ -539,7 +540,8 @@ public class W_Report extends javax.swing.JInternalFrame {
             SUM();
         }
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }    
+    }  
+    // <editor-fold defaultstate="collapsed" desc="Public & Private Variables">    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private java.awt.Button btnDEL;
@@ -554,4 +556,5 @@ public class W_Report extends javax.swing.JInternalFrame {
     private java.awt.Label label1;
     private javax.swing.JTextArea txtLOG;
     // End of variables declaration//GEN-END:variables
+    // </editor-fold> 
 }

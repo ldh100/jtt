@@ -8,6 +8,7 @@ import AP3.AP3;
 import FW.FW;
 import Reports.W_Report;
 import WO.WO;
+//import com.tomtessier.scrollabledesktop.*;
 import com.google.common.base.Stopwatch;
 import java.awt.Cursor;
 import java.beans.PropertyVetoException;
@@ -15,9 +16,15 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.List;
+import java.util.TimerTask;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
@@ -224,9 +231,30 @@ public class A extends javax.swing.JFrame {
             this.setTitle("JTT - no connection to QA DB");
         }else{
             this.setTitle("JTT v1.0.1" + " - " + "User: " + UserID + ", Machine: " + WsID + ", OS: " + WsOS);
+            Keep_DB_Connection();
         }
         Open_AP3();
     }//GEN-LAST:event_formWindowOpened
+
+    private void Keep_DB_Connection() {  
+        Timer ti = new Timer();  
+        TimerTask tt = new TimerTask() {  
+            @Override  
+            public void run() {  
+                try {
+                    ResultSet rs = conn.createStatement().executeQuery("SELECT TOP 1 [qID] FROM [dbo].[users]");
+//                    rs.next();
+//                    System.out.println("Keep_DB_Connection " + rs.getString(1) + " @" + LocalDateTime.now().format(Time_12_formatter)); 
+                    System.out.println("Keep_DB_Connection - OK @" + LocalDateTime.now().format(Time_12_formatter)); 
+                }catch (Exception ex){
+                    System.out.println("Keep_DB_Connection " + ex.getMessage());
+                }
+ 
+            };  
+        };  // 29*60*1000=1,740,000
+        ti.schedule(tt, 1740000, 1740000);  
+    }  
+
 
     private void jMenuORDERSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuORDERSMouseClicked
         //OpenREPORT();
@@ -287,7 +315,7 @@ public class A extends javax.swing.JFrame {
             Version = s.getClass().getPackage().getImplementationVersion(); 
             String path = getClass().getResource("").getPath();
             Manifest m = new JarFile(path).getManifest();
-            s = "1";
+            //s = "1";
 
             Attributes attributes = m.getMainAttributes();
             if (attributes!=null){
@@ -323,7 +351,7 @@ public class A extends javax.swing.JFrame {
     private  boolean ConnectDB() {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         boolean OK = false;
-        sw1.start();
+        //sw1.start();
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection("jdbc:sqlserver://dev-digitalhospitality-sql.database.windows.net:1433;database=cdlqadb;user=xttadmin;password=Sp515s10#a;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"); 
@@ -334,7 +362,7 @@ public class A extends javax.swing.JFrame {
         }
         //txtLOG.append("\r\n- NotFoundException: " + ex.getMessage());
         //txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
-        sw1.reset();
+        //sw1.reset();
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         return OK;
     }

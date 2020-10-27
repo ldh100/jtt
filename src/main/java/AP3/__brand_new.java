@@ -60,7 +60,7 @@ public class __brand_new {
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", ADD_TO_SITE, "no_jira");
             if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Site Name Click", "xpath", "//td[text()='" + ADD_TO_SITE + "']", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + ADD_TO_SITE + "']", "no_jira"); 
             if (FAIL) { return;} 
             Thread.sleep(500);           
         // </editor-fold> 

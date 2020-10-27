@@ -181,13 +181,13 @@ public class AP3 extends javax.swing.JInternalFrame {
         _all_data.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _all_data.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _all_data.setRequestFocusEnabled(false);
-        jPanel1.add(_all_data, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 23, 132, 14));
+        jPanel1.add(_all_data, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 23, 172, 14));
 
         _site_new.setText("New Site (not in Prod)");
         _site_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _site_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _site_new.setRequestFocusEnabled(false);
-        jPanel1.add(_site_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 41, 157, 14));
+        jPanel1.add(_site_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 41, 176, 14));
 
         _site.setText("Sites");
         _site.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -273,7 +273,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         _brand_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _brand_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _brand_new.setRequestFocusEnabled(false);
-        jPanel1.add(_brand_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 59, 157, 14));
+        jPanel1.add(_brand_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 59, 168, 14));
 
         txtMENU.setText("TIM HORTONS");
         jPanel1.add(txtMENU, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 128, -1));
@@ -301,7 +301,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         label14.setText("Group (Sector)");
         jPanel1.add(label14, new org.netbeans.lib.awtextra.AbsoluteConstraints(192, 204, -1, 12));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 168, 424, 248));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 168, 420, 248));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -347,7 +347,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         DV2.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(DV2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 20, 416, 99));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 20, 412, 99));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
 
@@ -374,7 +374,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+                .addContainerGap(41, Short.MAX_VALUE)
                 .addComponent(label10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(nShowPage, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -401,7 +401,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 .addGap(2, 2, 2))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 122, 424, 44));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 122, 420, 44));
 
         jPanel2.setFocusable(false);
 
@@ -997,8 +997,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 
                 try {
                     String t_rep = "";
-                    if (!"".equals(r_time.trim()))
-                    {
+                    if (!"".equals(r_time.trim())) {
                         double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
                         if (am0.length > 0)
                         {
@@ -1021,7 +1020,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                                                                         ", p50: " + df.format(p_50) +
                                                                         ", p90: " + df.format(p_90);
                         }
-                    txtLOG.append("\r\n" + t_rep);
+                        txtLOG.append("\r\n" + t_rep);
                     }
                 } catch(Exception ex){
                     txtLOG.append("\r\n\r\n=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage());

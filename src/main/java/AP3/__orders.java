@@ -63,7 +63,7 @@ public class __orders {
                 _t++; T.Element_Text("Sites Data Row Text", L0.get(i), "no_jira");             
                 if (FAIL) { return;}
             } 
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Site Name Click", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
             if (FAIL) { return;}                                                                                         // v-datatable__progress << 'v-progress-circular'
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//div[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}

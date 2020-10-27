@@ -29,7 +29,7 @@ public class __user_permission {
         _t++; T.Visible_Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']", "no_jira"); 
             if (FAIL) { return;}      
 
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter ==== Rnner Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+rn@gmail.com", "no_jira"); 
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter ==== Runner Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+rn@gmail.com", "no_jira"); 
             if (FAIL) { return;}
         _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", "no_jira"); 
             if (FAIL) { return;}
@@ -66,9 +66,61 @@ public class __user_permission {
             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Dashboard 'Sales Analytics'", "Sales Analytics", true,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Dashboard 'Users'", "Users", true,"no_jira");     
             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Dashboard 'Announcements'", "Announcements", true,"no_jira"); 
-            _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Dashboard 'Promo Management'", "Promo Management", true,"no_jira");              
-            _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
-
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Dashboard 'Promo Management'", "Promo Management", true,"no_jira");
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Dashboard 'Smart Analytics'", "Smart Analytics", false,"no_jira");            
+            
+            // Admin N Sites permissions
+            _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
+                if (FAIL) { return;}    
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open App combobox", "css", "[role='combobox']", "no_jira"); 
+                if (FAIL) { return;}     
+            _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'App' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
+                if (FAIL) { return;}                                                                                     
+            _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Application list Count", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");                                     
+                if (FAIL) { return;}
+                for (int i = 0; i < L1.size(); i++) {
+                    _t++; T.Element_Text("Application Name (index " + i + ")", L1.get(i),  "no_jira");             
+                    if (FAIL) { return;}
+                if(t.contains("All")){ T_Index = i; }
+            }
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Select 'All'", L1.get(T_Index), "no_jira");
+                if (FAIL) { return;}  
+            Thread.sleep(1000);
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Admin N Sites (Pagination)", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
+               if (FAIL) { return;} 
+               
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'ADD NEW SITE'", "ADD NEW SITE", true,"no_jira"); 
+            
+            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, "no_jira");
+                if (FAIL) { return;} 
+            Thread.sleep(500);     
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
+               if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+               if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//div[contains(@class, 'timezone-address')]", "no_jira"); 
+               if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Configuration'", "Configuration", true,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Add Business Unit'", "Add Business Unit", true,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Add Station'", "ADD STATION", true,"no_jira"); 
+//            _t++; Thread.sleep((long) sleep); T.List_L0("Sites Data Rows Count", "tagName", "tr", "no_jira");             
+//                if (FAIL) { return;}
+//                for (int i = 0; i < L0.size(); i++) {
+//                    _t++; T.Element_Text("Sites Data Row Text", L0.get(i), "no_jira");             
+//                    if (FAIL) { return;}
+//                }            
+            _t++; Thread.sleep((long) sleep); T.List_L0("Station Status icons Count", "xpath", "//i[contains(@class, 'v-icon mdi mdi-eye')]", "no_jira");                       
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.List_L1("Station Status Disabled Count", "xpath", "//div[contains(@class, 'v-input--is-disabled theme--light')]", "no_jira");             
+                if (FAIL) { return;}
+            _t++;
+            if(L1.isEmpty()){
+                _p++;
+                EX += " - " + "\t" + "Admin No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+            }else{
+                _f++;
+                EX += " - " + "\t" + "Admin No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+            }
             
             // logout >>>>>>>>>>>    
             _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
@@ -111,8 +163,54 @@ public class __user_permission {
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y Dashboard 'Users'", "Users", false,"no_jira");     
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y Dashboard 'Announcements'", "Announcements", false,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y Dashboard 'Promo Management'", "Promo Management", false,"no_jira");              
-            _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y Dashboard 'Smart Analytics'", "Smart Analytics", true,"no_jira"); 
             
+            // SM Y Sites permissions
+            _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
+                if (FAIL) { return;}    
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open App combobox", "css", "[role='combobox']", "no_jira"); 
+                if (FAIL) { return;}     
+            _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'App' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
+                if (FAIL) { return;}                                                                                     
+            _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Application list Count", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");                                     
+                if (FAIL) { return;}
+                for (int i = 0; i < L1.size(); i++) {
+                    _t++; T.Element_Text("Application Name (index " + i + ")", L1.get(i),  "no_jira");             
+                    if (FAIL) { return;}
+                if(t.contains("All")){ T_Index = i; }
+            }
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Select 'All'", L1.get(T_Index), "no_jira");
+                if (FAIL) { return;}   
+            Thread.sleep(1000);
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("SM Y Sites (Pagination)", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
+               if (FAIL) { return;}            
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y 'ADD NEW SITE'", "ADD NEW SITE", false,"no_jira"); 
+            
+            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, "no_jira");
+                if (FAIL) { return;} 
+            Thread.sleep(500);                 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
+               if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+               if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//div[contains(@class, 'timezone-address')]", "no_jira"); 
+               if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y 'Configuration'", "Configuration", false,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y 'Add Business Unit'", "Add Business Unit", false,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y 'Add Station'", "ADD STATION", false,"no_jira"); 
+            
+            _t++; Thread.sleep((long) sleep); T.List_L0("Station Status icons Count", "xpath", "//i[contains(@class, 'v-icon mdi mdi-eye')]", "no_jira");                       
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.List_L1("Station Status Disabled Count", "xpath", "//div[contains(@class, 'v-input--is-disabled theme--light')]", "no_jira");             
+                if (FAIL) { return;}
+            _t++;
+            if(L1.isEmpty()){
+                _p++;
+                EX += " - " + "\t" + "SM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+            }else{
+                _f++;
+                EX += " - " + "\t" + "SM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+            }           
             // logout >>>>>>>>>>>    
             _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
                 if (FAIL) { return;}
@@ -153,9 +251,65 @@ public class __user_permission {
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM N Dashboard 'Sales Analytics'", "Sales Analytics", true,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM N Dashboard 'Users'", "Users", false,"no_jira");     
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM N Dashboard 'Announcements'", "Announcements", false,"no_jira"); 
-            _t++; Thread.sleep((long) sleep); T.Find_Text("SM N Dashboard 'Promo Management'", "Promo Management", false,"no_jira");                    
-            _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM N Dashboard 'Promo Management'", "Promo Management", false,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM N Dashboard 'Smart Analytics'", "Smart Analytics", false,"no_jira");
+
+            // SM N Sites permissions
+            _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
+                if (FAIL) { return;}    
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open App combobox", "css", "[role='combobox']", "no_jira"); 
+                if (FAIL) { return;}     
+            _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'App' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
+                if (FAIL) { return;}                                                                                     
+            _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Application list Count", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");                                     
+                if (FAIL) { return;}
+                for (int i = 0; i < L1.size(); i++) {
+                    _t++; T.Element_Text("Application Name (index " + i + ")", L1.get(i),  "no_jira");             
+                    if (FAIL) { return;}
+                if(t.contains("All")){ T_Index = i; }
+            }
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Select 'All'", L1.get(T_Index), "no_jira");
+                if (FAIL) { return;} 
+            Thread.sleep(1000);
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("SM N Sites (Pagination)", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
+               if (FAIL) { return;}            
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM N 'ADD NEW SITE'", "ADD NEW SITE", false,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, "no_jira");
+                if (FAIL) { return;} 
+            Thread.sleep(500);                 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
+               if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+               if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//div[contains(@class, 'timezone-address')]", "no_jira"); 
+               if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM N 'Configuration'", "Configuration", false,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM N 'Add Business Unit'", "Add Business Unit", false,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM N 'Add Station'", "ADD STATION", false,"no_jira"); 
             
+            _t++; Thread.sleep((long) sleep); T.List_L0("Station Status icons Count", "xpath", "//i[contains(@class, 'v-icon mdi mdi-eye')]", "no_jira");                       
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.List_L1("Station Status Disabled Count", "xpath", "//div[contains(@class, 'v-input--is-disabled theme--light')]", "no_jira");             
+                if (FAIL) { return;}
+            _t++;
+            if(L0.size() == L1.size()){
+                _p++;
+                EX += " - " + "\t" + "DM No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+            }else{
+                _f++;
+                EX += " - " + "\t" + "DM No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                
+            } 
+            _t++; T.Move_to_Element_By_Path("Scroll to Brand data row", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira");        
+                if (FAIL) { return;} 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Brand Name Click", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira"); 
+            if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
+            if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
+            if (FAIL) { return;} 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Configuration Click", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
+            if (FAIL) { return;}                 
+                
             // logout >>>>>>>>>>>    
             _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
                 if (FAIL) { return;}
@@ -197,8 +351,54 @@ public class __user_permission {
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y Dashboard 'Users'", "Users", true,"no_jira");     
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y Dashboard 'Announcements'", "Announcements", false,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y Dashboard 'Promo Management'", "Promo Management", false,"no_jira");                     
-            _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+            _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y Dashboard 'Smart Analytics'", "Smart Analytics", true,"no_jira");
             
+            // DM Y Sites permissions
+            _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
+                if (FAIL) { return;}    
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open App combobox", "css", "[role='combobox']", "no_jira"); 
+                if (FAIL) { return;}     
+            _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'App' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
+                if (FAIL) { return;}                                                                                     
+            _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Application list Count", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");                                     
+                if (FAIL) { return;}
+                for (int i = 0; i < L1.size(); i++) {
+                    _t++; T.Element_Text("Application Name (index " + i + ")", L1.get(i),  "no_jira");             
+                    if (FAIL) { return;}
+                if(t.contains("All")){ T_Index = i; }
+            }
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Select 'All'", L1.get(T_Index), "no_jira");
+                if (FAIL) { return;}
+            Thread.sleep(1000);                
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("DM Y Sites (Pagination)", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
+               if (FAIL) { return;}            
+            _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y 'ADD NEW SITE'", "ADD NEW SITE", false,"no_jira"); 
+            
+            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, "no_jira");
+                if (FAIL) { return;} 
+            Thread.sleep(500);                 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
+               if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+               if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//div[contains(@class, 'timezone-address')]", "no_jira"); 
+               if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y 'Configuration'", "Configuration", false,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y 'Add Business Unit'", "Add Business Unit", false,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y 'Add Station'", "ADD STATION", false,"no_jira"); 
+            
+            _t++; Thread.sleep((long) sleep); T.List_L0("Station Status icons Count", "xpath", "//i[contains(@class, 'v-icon mdi mdi-eye')]", "no_jira");                       
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.List_L1("Station Status Disabled Count", "xpath", "//div[contains(@class, 'v-input--is-disabled theme--light')]", "no_jira");             
+                if (FAIL) { return;}
+            _t++;
+            if(L1.isEmpty()){
+                _p++;
+                EX += " - " + "\t" + "DM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+            }else{
+                _f++;
+                EX += " - " + "\t" + "DM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+            }
             // logout >>>>>>>>>>>    
             _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
                 if (FAIL) { return;}
@@ -239,9 +439,58 @@ public class __user_permission {
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM N Dashboard 'Sales Analytics'", "Sales Analytics", true,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM N Dashboard 'Users'", "Users", true,"no_jira");     
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM N Dashboard 'Announcements'", "Announcements", false,"no_jira"); 
-            _t++; Thread.sleep((long) sleep); T.Find_Text("DM N Dashboard 'Promo Management'", "Promo Management", false,"no_jira");                     
-            _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
-                        
+            _t++; Thread.sleep((long) sleep); T.Find_Text("DM N Dashboard 'Promo Management'", "Promo Management", false,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("DM N Dashboard 'Smart Analytics'", "Smart Analytics", false,"no_jira");
+            
+            // DM N Sites permissions
+            _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
+                if (FAIL) { return;}    
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open App combobox", "css", "[role='combobox']", "no_jira"); 
+                if (FAIL) { return;}     
+            _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'App' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
+                if (FAIL) { return;}                                                                                     
+            _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Application list Count", e1, "xpath", ".//div[@class='v-list__tile__title']", "no_jira");                                     
+                if (FAIL) { return;}
+                for (int i = 0; i < L1.size(); i++) {
+                    _t++; T.Element_Text("Application Name (index " + i + ")", L1.get(i),  "no_jira");             
+                    if (FAIL) { return;}
+                if(t.contains("All")){ T_Index = i; }
+            }
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Select 'All'", L1.get(T_Index), "no_jira");
+                if (FAIL) { return;} 
+            Thread.sleep(1000);
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("DM N Sites (Pagination)", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
+               if (FAIL) { return;}            
+            _t++; Thread.sleep((long) sleep); T.Find_Text("DM N 'ADD NEW SITE'", "ADD NEW SITE", false,"no_jira"); 
+            
+            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, "no_jira");
+                if (FAIL) { return;}
+            Thread.sleep(500);                 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
+               if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+               if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//div[contains(@class, 'timezone-address')]", "no_jira"); 
+               if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Find_Text("DM N 'Configuration'", "Configuration", false,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("DM N 'Add Business Unit'", "Add Business Unit", false,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("DM N 'Add Station'", "ADD STATION", false,"no_jira"); 
+            
+            // v-input v-input--selection-controls v-input--checkbox v-input--hide-details v-input--is-disabled theme--light
+            _t++; Thread.sleep((long) sleep); T.List_L0("Station Status icons Count", "xpath", "//i[contains(@class, 'v-icon mdi mdi-eye')]", "no_jira");                       
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.List_L1("Station Status Disabled Count", "xpath", "//div[contains(@class, 'v-input--is-disabled theme--light')]", "no_jira");             
+                if (FAIL) { return;}
+            _t++;
+            if(L0.size() == L1.size()){
+                _p++;
+                EX += " - " + "\t" + "DM No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+            }else{
+                _f++;
+                EX += " - " + "\t" + "DM No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                
+            }
+//            _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+           
             // logout >>>>>>>>>>>    
             _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
                 if (FAIL) { return;}
