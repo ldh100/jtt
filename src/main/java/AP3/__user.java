@@ -280,7 +280,7 @@ public class __user {
         // <editor-fold defaultstate="collapsed" desc="New Admin Y User">
         _t++; T.To_Top("no_jira");
             if (FAIL) { return;}            
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Add New User Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Add New Click 'User Name'", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
@@ -455,7 +455,7 @@ public class __user {
         // <editor-fold defaultstate="collapsed" desc="New Site Manager Y User">
         _t++; T.To_Top("no_jira");
             if (FAIL) { return;}            
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Add New User Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Add New Click 'User Name'", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
@@ -712,7 +712,7 @@ public class __user {
         // <editor-fold defaultstate="collapsed" desc="New CDL Delivery Manager Y User">
         _t++; T.To_Top("no_jira");
             if (FAIL) { return;}            
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Add New User Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Add New Click 'User Name'", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
@@ -980,7 +980,7 @@ public class __user {
         // <editor-fold defaultstate="collapsed" desc="New Runner User">
         _t++; T.To_Top("no_jira");
             if (FAIL) { return;}            
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Add New User Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Add New Click 'User Name'", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}

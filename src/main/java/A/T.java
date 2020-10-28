@@ -73,7 +73,7 @@ public class T {
         try {
             t = d1.getCurrentUrl();
             d1.close();
-            ArrayList<String> tabs = new ArrayList<String>(d1.getWindowHandles());
+            ArrayList<String> tabs = new ArrayList<>(d1.getWindowHandles());
             d1.switchTo().window(tabs.get(0));
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Page URL"  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
@@ -1361,8 +1361,8 @@ public class T {
                     break;
             }
             if(L1.isEmpty()){
-                _w++; 
-                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "WARN" + "\t" + " - " +
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L1.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
             }else{
                 _p++; 
@@ -1411,8 +1411,8 @@ public class T {
                     break;
             }
             if(L2.isEmpty()){
-                _w++; 
-                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "WARN" + "\t" + " - " +
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L2.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
             }else{
                 _p++; 
@@ -1658,8 +1658,8 @@ public class T {
                     break;
             }
             if(L0.isEmpty()){
-                _w++; 
-                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + " item(s) (L0)" + "\t" + "WARN" + "\t" + "L0.isEmpty()" +
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L0.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
             }else{
                 _p++; 
@@ -1708,8 +1708,8 @@ public class T {
                     break;
             }
             if(L1.isEmpty()){
-                _w++; 
-                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "WARN" + "\t" + "L1.isEmpty()" +
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L1.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
             }else{
                 _p++; 
@@ -1758,8 +1758,8 @@ public class T {
                     break;
             }
             if(L2.isEmpty()){
-                _w++; 
-                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "WARN" + "\t" + "L2.isEmpty()" +
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L2.isEmpty()" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
             }else{
                 _p++; 
@@ -1808,8 +1808,8 @@ public class T {
                     break;
             }
             if(L3.isEmpty()){
-                _w++; 
-                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "WARN" + "\t" + "L3.isEmpty()" +
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L3.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
             }else{
                 _p++; 

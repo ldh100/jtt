@@ -540,18 +540,20 @@ public class AP3 extends javax.swing.JInternalFrame {
         jPanel3.add(btnFAILS, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 32, 92, -1));
 
         btnEXCEL.setText("Excel Rep");
-        btnEXCEL.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEXCELActionPerformed(evt);
+        btnEXCEL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEXCELMouseClicked(evt);
             }
         });
         jPanel3.add(btnEXCEL, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 92, -1));
 
-        _headless.setText("Headless >");
+        _headless.setText("Headless <");
         _headless.setToolTipText("");
+        _headless.setActionCommand("Headless <");
         _headless.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _headless.setRequestFocusEnabled(false);
         jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 64, 88, 14));
+        _headless.getAccessibleContext().setAccessibleName("Headless <");
 
         btnSAVE_OPT.setText("Save Run Options");
         btnSAVE_OPT.setName("btnSAVE"); // NOI18N
@@ -682,15 +684,6 @@ public class AP3 extends javax.swing.JInternalFrame {
             txtLOG.append("\r\n\r\n=== Show Log > ERROR: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnLOGActionPerformed
-
-    private void btnEXCELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEXCELActionPerformed
-//        try {
-//            Send_File_to_Slack("1", "2", "3");
-//        } catch (IOException ex) {
-//            txtLOG.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
-//        }
-        Report();
-    }//GEN-LAST:event_btnEXCELActionPerformed
     private void Report(){
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String EXX = "";
@@ -790,7 +783,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_AP3_AncestorAdded
 
     private void cmbAPPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAPPItemStateChanged
-        app = cmbAPP.getSelectedItem().toString();
+        app = cmbAPP.getSelectedItem();
         GetSites_API();
     }//GEN-LAST:event_cmbAPPItemStateChanged
 
@@ -801,12 +794,23 @@ public class AP3 extends javax.swing.JInternalFrame {
     private void cmbGROUPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbGROUPItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbGROUPItemStateChanged
+
+    private void btnEXCELMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEXCELMouseClicked
+//        try {
+//            Send_File_to_Slack("1", "2", "3");
+//        } catch (IOException ex) {
+//            txtLOG.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
+//        }
+        btnEXCEL.setEnabled(false);
+        Report();
+        btnEXCEL.setEnabled(true);        
+    }//GEN-LAST:event_btnEXCELMouseClicked
     private void LOAD_ENV(){
-        if(cmbENV.getSelectedItem().toString().contains("Staging")){
+        if(cmbENV.getSelectedItem().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
             url = "https://staging.adminpanel.compassdigital.org/";
-        } else if (cmbENV.getSelectedItem().toString().contains("Dev")){
+        } else if (cmbENV.getSelectedItem().contains("Dev")){
             BaseAPI = "https://api.compassdigital.org/dev";
             env = "DE";
             url = "https://dev.adminpanel.compassdigital.org/";
@@ -1341,8 +1345,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         lblBRANDS.setText("Selected Site Brands (" + DV2.getRowCount() + " found)");
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    private void GetGroups_API() {
-       
+    private void GetGroups_API() {     
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n-Load Groups/Sector from API...");
         cmbGROUP.removeAll();
@@ -1517,7 +1520,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     }
     private void Send_File_to_Slack(String Slack_File_Name, String File_Path, String Channel_Name) throws IOException {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        String RES = "?";
+        String RES;
         try{
             //File file = new File(File_Path); // "C:\xTT_Data\TAX_Upload\JJKitchen_Android_Staging_P2_Func_27_Apr_2020_03_48PM.xlsx"
             //File file = new File("C:\\xTT_Data\\TAX_Upload\\JJKitchen_Android_Staging_P2_Func_27_Apr_2020_03_48PM.xlsx"); 

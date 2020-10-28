@@ -831,7 +831,7 @@ public class __site_new {
                 _t++; T.Element_Click("Check '24 Hour Service'", L1.get(j), "no_jira");             
                     if (FAIL) { return;}
             }  
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("SAVE Click", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
             if (FAIL) { return; } 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
             if (FAIL) { return;} 

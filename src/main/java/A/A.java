@@ -174,7 +174,6 @@ public class A extends javax.swing.JFrame {
         ap3.hide();
 
         this.jDesktopPane1.add(ap3);
-        //Thread.sleep(500);
         int Y;
         int X;
         if(F_COUNT > 4) {

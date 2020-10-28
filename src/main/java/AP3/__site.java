@@ -377,7 +377,7 @@ public class __site {
         // </editor-fold> 
 
         // <editor-fold defaultstate="collapsed" desc="Site Congiguration">
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Configuration Click", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
             if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}  

@@ -18,7 +18,7 @@ public class __logout {
             if (FAIL) { return;} 
         _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
  
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("User Click", "xpath", "//button[@type='button'][2]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'User Name'", "xpath", "//button[@type='button'][2]", "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Logout Click", "xpath", "//*[contains(text(), 'Logout')]", "no_jira"); 
             if (FAIL) { return;}
