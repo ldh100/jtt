@@ -56,7 +56,7 @@ public class __brand {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Not Found' notification", "No matching records found", true, "no_jira"); 
             if (FAIL) { return;}
-        _t++; T.Visible_Element_By_Path_Input_Select_Clear("Site Search Clear", "xpath", "//input[contains(@aria-label, 'Search ')]",  "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Input_Select_Clear("Site Search Clear", "xpath", "//input[contains(@aria-label, 'Search ')]",  "no_jira"); 
             if (FAIL) { return;}            
         _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, "no_jira");
             if (FAIL) { return;}   
@@ -84,7 +84,7 @@ public class __brand {
                 TZone = "NotFound";
             }
             
-        _t++; Thread.sleep((long) sleep);  T.Element_By_Path_Text("Site 'Station List' text", "xpath", "//div[contains(@class, 'H6-Selected')]", "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Site 'Station List' text", "xpath", "//div[contains(@class, 'H6-Selected')]", "no_jira");
             if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Site Configuration", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
             if (FAIL) { return;}     
@@ -152,11 +152,6 @@ public class __brand {
         _t++; Thread.sleep((long) sleep); T.List_L1("Brand Configuration Group Count", "xpath", "//div[starts-with(@id, 'toc-')]", "no_jira");             
             if (FAIL) { return;}  
         
-//        boolean S_FEE_Check = false;
-//        boolean D_FEE_Check = false;
-//        String S_FEE  = "";
-//        String D_FEE = "";
-//        boolean D_SUPPORTED = false;
         for (int i = 0; i < L0.size(); i++) { // ========================================================================================
             _t++; T.Element_Attribute("Brand Configuration Navigation >>>>>>", L0.get(i), "textContent", "no_jira");
                 if (FAIL) return;

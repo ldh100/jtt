@@ -11,8 +11,8 @@ import A.T;
  * @author Oleg.Spozito
  */
 public class __user_permission {
-    // cdl.test.xtt+an@gmail.com - Admin no Allow refunds, no Allow Menu Kick-Outs
     // cdl.test.xtt+rn@gmail.com - Runner
+    // cdl.test.xtt+an@gmail.com - Admin no Allow refunds, no Allow Menu Kick-Outs
     // cdl.test.xtt+sy@gmail.com - SM All Optins
     // cdl.test.xtt+sn@gmail.com - SM No Options
     // cdl.test.xtt+dy@gmail.com - DM All Optins
@@ -23,24 +23,24 @@ public class __user_permission {
         _t++; Thread.sleep((long) sleep); T.Page_URL("AP3 Login page", "no_jira");             
             if (FAIL) { return;}
 
-        // <editor-fold defaultstate="collapsed" desc="Runner Login" >
-        _t++; T.Visible_Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",  "no_jira"); 
-            if (FAIL) { return;}
-        _t++; T.Visible_Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']", "no_jira"); 
-            if (FAIL) { return;}      
-
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter ==== Runner Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+rn@gmail.com", "no_jira"); 
-            if (FAIL) { return;}
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", "no_jira"); 
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
-            if (FAIL) { return;}   
-        _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Visibility("Wait for 'Cannot login...' text", "xpath", "//*[contains(text(), 'Cannot log into')]", "no_jira");             
-            if (FAIL) { return;}            
-        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Cannot login...' Text", "Cannot log into Admin Panel as a Runner",true,"no_jira");             
-            if (FAIL) { return;}           
-        // </editor-fold>     
-
+//        // <editor-fold defaultstate="collapsed" desc="Runner Login" >
+//        _t++; T.Visible_Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",  "no_jira"); 
+//            if (FAIL) { return;}
+//        _t++; T.Visible_Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']", "no_jira"); 
+//            if (FAIL) { return;}      
+//
+//        _t++; T.Visible_Element_By_Path_Text_Enter("Enter ==== Runner Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+rn@gmail.com", "no_jira"); 
+//            if (FAIL) { return;}
+//        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", "no_jira"); 
+//            if (FAIL) { return;}
+//        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
+//            if (FAIL) { return;}   
+//        _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Visibility("Wait for 'Cannot login...' text", "xpath", "//*[contains(text(), 'Cannot log into')]", "no_jira");             
+//            if (FAIL) { return;}            
+//        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Cannot login...' Text", "Cannot log into Admin Panel as a Runner",true,"no_jira");             
+//            if (FAIL) { return;}           
+//        // </editor-fold>     
+//
         // <editor-fold defaultstate="collapsed" desc="Admin N" >
         _t++; T.Visible_Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",  "no_jira"); 
             if (FAIL) { return;}
@@ -131,6 +131,7 @@ public class __user_permission {
                 _t++; T.Element_Text("Brand Setup Tab >>>>", L3.get(i), "no_jira");
                 Tab_Name = t;  
                 if (Tab_Name.toLowerCase().contains("menu")) { // Menu > Menu Scheduler 
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Schedule menu'", "Schedule menu", false,"no_jira");  
                     _t++; Thread.sleep((long) sleep); T.List_L0("Menu Status icons Count", "xpath", "//i[contains(@class, 'v-icon mdi mdi-eye')]", "no_jira");                       
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); T.List_L1("Menu Status Disabled Count", "xpath", "//div[contains(@class, 'v-input--is-disabled theme--light')]", "no_jira");             
@@ -175,11 +176,25 @@ public class __user_permission {
                     _t++; Thread.sleep(500);    
                 }
             }   
-            // </editor-fold> 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
                 if (FAIL) { return;}  
             _t++; Thread.sleep(500);   
-            
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+                if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Station Name'", "css", "[aria-label='Station Name']", "no_jira"); 
+                if (FAIL) { return;}                    
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Edit 'Station Name'", "css", "[aria-label='Station Name']", "Edit", "no_jira"); 
+                if (!FAIL) {
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Save Changes' text", "Save Changes", true,"no_jira"); 
+                    _t++; T.Element_By_Path_Click("Click 'CANCEL'", "xpath", "//*[text()='Cancel']","no_jira");
+                        if (FAIL) { return;} 
+                } else {
+                    _t++; 
+                    _f++;
+                    EX += _t + "\t" + "Adnim All Options " + "\t" + "Station Configuration" + "\t" + "Unable to Edit 'Station Name'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                }            
+            // </editor-fold> 
+
             // logout >>>>>>>>>>>    
             _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
                 if (FAIL) { return;}
@@ -284,7 +299,8 @@ public class __user_permission {
             for (int i = 0; i < L3.size(); i++) {        
                 _t++; T.Element_Text("Brand Setup Tab >>>>", L3.get(i), "no_jira");
                 Tab_Name = t;  
-                if (Tab_Name.toLowerCase().contains("menu")) { // Menu > Menu Scheduler       
+                if (Tab_Name.toLowerCase().contains("menu")) { // Menu > Menu Scheduler    
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y 'Schedule menu'", "Schedule menu", false,"no_jira");                     
                     _t++; Thread.sleep((long) sleep); T.List_L0("Menu Status icons Count", "xpath", "//i[contains(@class, 'v-icon mdi mdi-eye')]", "no_jira");                       
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); T.List_L1("Menu Status Disabled Count", "xpath", "//div[contains(@class, 'v-input--is-disabled theme--light')]", "no_jira");             
@@ -329,10 +345,24 @@ public class __user_permission {
                     _t++; Thread.sleep(500);    
                 }
             }   
-            // </editor-fold> 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
                 if (FAIL) { return;}  
             _t++; Thread.sleep(500);   
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+                if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Station Name'", "css", "[aria-label='Station Name']", "no_jira"); 
+                if (FAIL) { return;}                    
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Edit 'Station Name'", "css", "[aria-label='Station Name']", "Edit", "no_jira"); 
+                if (!FAIL) {
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Save Changes' text", "Save Changes", true,"no_jira"); 
+                    _t++; T.Element_By_Path_Click("Click 'CANCEL'", "xpath", "//*[text()='Cancel']","no_jira");
+                        if (FAIL) { return;} 
+                } else {
+                    _t++; 
+                    _f++;
+                    EX += _t + "\t" + "SM All Options " + "\t" + "Station Configuration" + "\t" + "Unable to Edit 'Station Name'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                }            
+            // </editor-fold>   
             
             // logout >>>>>>>>>>>    
             _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
@@ -438,7 +468,7 @@ public class __user_permission {
                 _t++; T.Element_Text("Brand Setup Tab >>>>", L3.get(i), "no_jira");
                 Tab_Name = t;  
                 if (Tab_Name.toLowerCase().contains("menu")) { // Menu > Menu Scheduler
-                    // v-input--selection-controls__ripple none--text YES / v-input--selection-controls__ripple NO // Menu Status enabled
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("SM N 'Schedule menu'", "Schedule menu", false,"no_jira"); 
                     _t++; Thread.sleep((long) sleep); T.List_L0("Menu Status icons Count", "xpath", "//i[contains(@class, 'v-icon mdi mdi-eye')]", "no_jira");                       
                         if (FAIL) { return;}          // v-input v-input--selection-controls v-input--checkbox v-input--hide-details v-input--is-disabled theme--light
                     _t++; Thread.sleep((long) sleep); T.List_L1("Menu Status Disabled Count", "xpath", "//div[contains(@class, 'v-input--is-disabled theme--light')]", "no_jira");             
@@ -482,12 +512,35 @@ public class __user_permission {
                         if (FAIL) { return; }   
                     _t++; Thread.sleep(500);    
                 }
+
             }   
-            // </editor-fold> 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
                 if (FAIL) { return;}  
             _t++; Thread.sleep(500);   
-            
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+                if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Edit 'Station Name'?", "css", "[aria-label='Station Name']", "disabled","no_jira"); 
+                if (FAIL) { return;} 
+                _t++;
+                if (t.equals("true")) {
+                    _p++;
+                    EX += _t + "\t" + "SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                } else {
+                    _f++;
+                    EX += _t + "\t" + "SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                }                    
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Enable 'ASAP Pick-up'?", "css", "[aria-label='ASAP Pickup']", "disabled","no_jira"); 
+                if (FAIL) { return;}                     
+                _t++;
+                if (t.equals("true")) {
+                    _p++;
+                    EX += _t + "\t" + "SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                } else {
+                    _f++;
+                    EX += _t + "\t" + "SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                    }            
+            // </editor-fold> 
+
             // logout >>>>>>>>>>>    
             _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
                 if (FAIL) { return;}
@@ -593,6 +646,7 @@ public class __user_permission {
                 _t++; T.Element_Text("Brand Setup Tab >>>>", L3.get(i), "no_jira");
                 Tab_Name = t;  
                 if (Tab_Name.toLowerCase().contains("menu")) { // Menu > Menu Scheduler
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y 'Schedule menu'", "Schedule menu", false,"no_jira");                     
                     _t++; Thread.sleep((long) sleep); T.List_L0("Menu Status icons Count", "xpath", "//i[contains(@class, 'v-icon mdi mdi-eye')]", "no_jira");                       
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); T.List_L1("Menu Status Disabled Count", "xpath", "//div[contains(@class, 'v-input--is-disabled theme--light')]", "no_jira");             
@@ -635,12 +689,26 @@ public class __user_permission {
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]", "no_jira"); 
                         if (FAIL) { return; }   
                     _t++; Thread.sleep(500);    
-                }
+                }             
             }   
-            // </editor-fold> 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
                 if (FAIL) { return;}  
             _t++; Thread.sleep(500);   
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+                if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Station Name'", "css", "[aria-label='Station Name']", "no_jira"); 
+                if (FAIL) { return;}                    
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Edit 'Station Name'", "css", "[aria-label='Station Name']", "Edit", "no_jira"); 
+                if (!FAIL) {
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Save Changes' text", "Save Changes", true,"no_jira"); 
+                    _t++; T.Element_By_Path_Click("Click 'CANCEL'", "xpath", "//*[text()='Cancel']","no_jira");
+                        if (FAIL) { return;} 
+                } else {
+                    _t++; 
+                    _f++;
+                    EX += _t + "\t" + "DM All Options " + "\t" + "Station Configuration" + "\t" + "Unable to Edit 'Station Name'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                }            
+            // </editor-fold>   
             
             // logout >>>>>>>>>>>    
             _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
@@ -742,13 +810,14 @@ public class __user_permission {
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
                 if (FAIL) { return;} 
+  
             _t++; Thread.sleep((long) sleep); T.List_L3("Tabs Count", "xpath", "//div[contains(@class, 'v-tabs__div')]", "no_jira");             
                 if (FAIL) { return;} 
             for (int i = 0; i < L3.size(); i++) {        
                 _t++; T.Element_Text("Brand Setup Tab >>>>", L3.get(i), "no_jira");
                 Tab_Name = t;  
                 if (Tab_Name.toLowerCase().contains("menu")) { // Menu > Menu Scheduler
-                    // v-input--selection-controls__ripple none--text YES / v-input--selection-controls__ripple NO // Menu Status enabled
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("DM N 'Schedule menu'", "Schedule menu", false,"no_jira");  
                     _t++; Thread.sleep((long) sleep); T.List_L0("Menu Status icons Count", "xpath", "//i[contains(@class, 'v-icon mdi mdi-eye')]", "no_jira");                       
                         if (FAIL) { return;}          // v-input v-input--selection-controls v-input--checkbox v-input--hide-details v-input--is-disabled theme--light
                     _t++; Thread.sleep((long) sleep); T.List_L1("Menu Status Disabled Count", "xpath", "//div[contains(@class, 'v-input--is-disabled theme--light')]", "no_jira");             
@@ -791,13 +860,36 @@ public class __user_permission {
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]", "no_jira"); 
                         if (FAIL) { return; }   
                     _t++; Thread.sleep(500);    
-                }
+                }                                    
             }   
-            // </editor-fold> 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
                 if (FAIL) { return;}  
             _t++; Thread.sleep(500);   
-            
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+                if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Edit 'Station Name'?", "css", "[aria-label='Station Name']", "disabled","no_jira"); 
+                if (FAIL) { return;} 
+                _t++;
+                if (t.equals("true")) {
+                    _p++;
+                    EX += _t + "\t" + "DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                } else {
+                    _f++;
+                    EX += _t + "\t" + "DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                }                    
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Enable 'ASAP Pick-up'?", "css", "[aria-label='ASAP Pickup']", "disabled","no_jira"); 
+                if (FAIL) { return;}                     
+                _t++;
+                if (t.equals("true")) {
+                    _p++;
+                    EX += _t + "\t" + "DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                } else {
+                    _f++;
+                    EX += _t + "\t" + "DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                }
+            // </editor-fold> 
+  
+
             // logout >>>>>>>>>>>    
             _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
                 if (FAIL) { return;}

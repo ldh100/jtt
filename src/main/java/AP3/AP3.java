@@ -1061,7 +1061,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                                 Toast_Msg.toLowerCase().contains("has been updated") || 
                                 Toast_Msg.toLowerCase().contains("has been added") || 
                                 Toast_Msg.toLowerCase().contains("has been removed") ||
-                                Toast_Msg.toLowerCase().endsWith(" have been reset") ||
+                                Toast_Msg.toLowerCase().contains(" have been reset") ||
                                 Toast_Msg.toLowerCase().contains(" saved")) {
                             _t++;
                             _p++;

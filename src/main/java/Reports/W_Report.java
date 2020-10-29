@@ -299,8 +299,8 @@ public class W_Report extends javax.swing.JInternalFrame {
         txtLOG.setText("LogID: " + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("qID").getModelIndex())
             + " @" + localFormat.format(utcTime) 
             + " (" + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("test_type").getModelIndex()) + ") > "
-            + "User: " + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("user_id").getModelIndex()) + ", " 
-            + "WS: " + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("user_ws").getModelIndex()) + "\r\n" 
+            + "WS: " + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("user_ws").getModelIndex())+ ", " 
+            + "User: " + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("user_id").getModelIndex()) + "\r\n" 
             + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()) + " - " 
             + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("url").getModelIndex()) + " - " 
             + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("env").getModelIndex()) + "\r\n" 

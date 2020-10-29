@@ -53,7 +53,7 @@ public class T {
         t ="?";
         try {
             ((JavascriptExecutor) d1).executeScript("window.open(arguments[0])", LINK);
-            ArrayList<String> tabs = new ArrayList<String>(d1.getWindowHandles());
+            ArrayList<String> tabs = new ArrayList<>(d1.getWindowHandles());
             d1.switchTo().window(tabs.get(1));
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Target URL" + "\t" + LINK + "\t" + "PASS" + "\t" + " - " +
