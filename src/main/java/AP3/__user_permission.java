@@ -11,12 +11,14 @@ import A.T;
  * @author Oleg.Spozito
  */
 public class __user_permission {
+    // in each Env:
     // cdl.test.xtt+rn@gmail.com - Runner
     // cdl.test.xtt+an@gmail.com - Admin no Allow refunds, no Allow Menu Kick-Outs
     // cdl.test.xtt+sy@gmail.com - SM All Optins
     // cdl.test.xtt+sn@gmail.com - SM No Options
     // cdl.test.xtt+dy@gmail.com - DM All Optins
     // cdl.test.xtt+dn@gmail.com - DM No Optins
+    
     public static void run() throws InterruptedException { 
         _t++; Thread.sleep((long) sleep); T.Navigate_to_URL("Navigate to", url,"no_jira");             
             if (FAIL) { return;}
