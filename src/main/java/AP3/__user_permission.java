@@ -905,7 +905,6 @@ public class __user_permission {
                 }
             // </editor-fold> 
   
-
             // logout >>>>>>>>>>>    
             _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
                 if (FAIL) { return;}
