@@ -975,7 +975,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 try  { 
                     BW2.cancel(true); // =============================================
                     txtLOG.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");                
-                    EX = "AP3 v" + Ver + //url +
+                    EX = "AP3 - " + env + " v" + Ver + //url +
                     " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                      "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                      + EX;
@@ -1442,9 +1442,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             _update.setString(18, EX);    
             int row = _update.executeUpdate();
 //            txtLOG.append("\r\n\r\n=== LOG_UPDATE > OK (" + row + " row)");
-        }
-        catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== LOG_UPDATE > SQL ERROR: " + ex.getMessage());
         }
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1511,9 +1509,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             _insert.setString(18, "None");    
             int row = _insert.executeUpdate();
 //            txtLOG.append("\r\n\r\n=== LOG_START > OK (" + row + " row)");
-        }
-        catch (SQLException ex)
-        {
+        }  catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== LOG_START > SQL ERROR: " + ex.getMessage());
         }
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));

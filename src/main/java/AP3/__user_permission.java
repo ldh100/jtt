@@ -23,24 +23,24 @@ public class __user_permission {
         _t++; Thread.sleep((long) sleep); T.Page_URL("AP3 Login page", "no_jira");             
             if (FAIL) { return;}
 
-//        // <editor-fold defaultstate="collapsed" desc="Runner Login" >
-//        _t++; T.Visible_Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",  "no_jira"); 
-//            if (FAIL) { return;}
-//        _t++; T.Visible_Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']", "no_jira"); 
-//            if (FAIL) { return;}      
-//
-//        _t++; T.Visible_Element_By_Path_Text_Enter("Enter ==== Runner Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+rn@gmail.com", "no_jira"); 
-//            if (FAIL) { return;}
-//        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", "no_jira"); 
-//            if (FAIL) { return;}
-//        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
-//            if (FAIL) { return;}   
-//        _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Visibility("Wait for 'Cannot login...' text", "xpath", "//*[contains(text(), 'Cannot log into')]", "no_jira");             
-//            if (FAIL) { return;}            
-//        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Cannot login...' Text", "Cannot log into Admin Panel as a Runner",true,"no_jira");             
-//            if (FAIL) { return;}           
-//        // </editor-fold>     
-//
+        // <editor-fold defaultstate="collapsed" desc="Runner Login" >
+        _t++; T.Visible_Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",  "no_jira"); 
+            if (FAIL) { return;}
+        _t++; T.Visible_Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']", "no_jira"); 
+            if (FAIL) { return;}      
+
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter ==== Runner Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+rn@gmail.com", "no_jira"); 
+            if (FAIL) { return;}
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", "no_jira"); 
+            if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
+            if (FAIL) { return;}   
+        _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Visibility("Wait for 'Cannot login...' text", "xpath", "//*[contains(text(), 'Cannot log into')]", "no_jira");             
+            if (FAIL) { return;}            
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Cannot login...' Text", "Cannot log into Admin Panel as a Runner",true,"no_jira");             
+            if (FAIL) { return;}           
+        // </editor-fold>     
+
         // <editor-fold defaultstate="collapsed" desc="Admin N" >
         _t++; T.Visible_Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",  "no_jira"); 
             if (FAIL) { return;}
@@ -111,10 +111,10 @@ public class __user_permission {
             _t++;
             if(L1.isEmpty()){
                 _p++;
-                EX += " - " + "\t" + "Admin No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                EX += _t + "\t" + "Admin No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
             }else{
                 _f++;
-                EX += " - " + "\t" + "Admin No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+                EX += _t + "\t" + "Admin No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";
             }
             // <editor-fold defaultstate="collapsed" desc="Admin N Brand Permissions" >               
             _t++; T.Move_to_Element_By_Path("Scroll to Brand data row", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira");        
@@ -139,10 +139,10 @@ public class __user_permission {
                     _t++;
                     if(L1.isEmpty()){
                         _p++;
-                        EX += " - " + "\t" + "Admin No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                        EX += _t + "\t" + "Admin No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
                     }else{
                         _f++;
-                        EX += " - " + "\t" + "Admin No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+                        EX += _t + "\t" + "Admin No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";
                     }                    
                 } else if (Tab_Name.toLowerCase().contains("service")) { 
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
@@ -173,12 +173,12 @@ public class __user_permission {
                         if (FAIL) { return; }    
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]", "no_jira"); 
                         if (FAIL) { return; }   
-                    _t++; Thread.sleep(500);    
+                    Thread.sleep(500);    
                 }
             }   
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
                 if (FAIL) { return;}  
-            _t++; Thread.sleep(500);   
+            Thread.sleep(500);   
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Station Name'", "css", "[aria-label='Station Name']", "no_jira"); 
@@ -191,7 +191,7 @@ public class __user_permission {
                 } else {
                     _t++; 
                     _f++;
-                    EX += _t + "\t" + "Adnim All Options " + "\t" + "Station Configuration" + "\t" + "Unable to Edit 'Station Name'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                    EX += _t + "\t" + " === Adnim No Options " + "\t" + "Station Configuration" + "\t" + "Unable to Edit 'Station Name'" + "\t" + "FAIL" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";                        
                 }            
             // </editor-fold> 
 
@@ -280,10 +280,10 @@ public class __user_permission {
             _t++;
             if(L1.isEmpty()){
                 _p++;
-                EX += _t + "\t" + "SM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                EX += _t + "\t" + " === SM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
             }else{
                 _f++;
-                EX += _t + "\t" + "SM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+                EX += _t + "\t" + " === SM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";
             } 
             // <editor-fold defaultstate="collapsed" desc="SN Y Brand Permissions" >               
             _t++; T.Move_to_Element_By_Path("Scroll to Brand data row", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira");        
@@ -308,10 +308,10 @@ public class __user_permission {
                     _t++;
                     if(L1.isEmpty()){
                         _p++;
-                        EX += _t + "\t" + "SM All Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                        EX += _t + "\t" + " === SM All Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
                     }else{
                         _f++;
-                        EX += _t + "\t" + "SM All Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+                        EX += _t + "\t" + " === SM All Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";
                     }                                      
                 } else if (Tab_Name.toLowerCase().contains("service")) { 
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
@@ -342,25 +342,33 @@ public class __user_permission {
                         if (FAIL) { return; }    
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]", "no_jira"); 
                         if (FAIL) { return; }   
-                    _t++; Thread.sleep(500);    
+                    Thread.sleep(500);    
                 }
             }   
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
                 if (FAIL) { return;}  
-            _t++; Thread.sleep(500);   
+            Thread.sleep(500);   
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                 if (FAIL) { return;} 
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Station Name'", "css", "[aria-label='Station Name']", "no_jira"); 
-                if (FAIL) { return;}                    
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Edit 'Station Name'", "css", "[aria-label='Station Name']", "Edit", "no_jira"); 
-                if (!FAIL) {
-                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Save Changes' text", "Save Changes", true,"no_jira"); 
-                    _t++; T.Element_By_Path_Click("Click 'CANCEL'", "xpath", "//*[text()='Cancel']","no_jira");
-                        if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Edit 'Station Name'?", "css", "[aria-label='Station Name']", "disabled","no_jira"); 
+                if (FAIL) { return;} 
+                _t++;
+                if (t.equals("true")) {
+                    _p++;
+                    EX += _t + "\t" + " === SM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
                 } else {
-                    _t++; 
                     _f++;
-                    EX += _t + "\t" + "SM All Options " + "\t" + "Station Configuration" + "\t" + "Unable to Edit 'Station Name'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                    EX += _t + "\t" + " === SM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' enabled" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                        
+                }                    
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Enable 'ASAP Pick-up'?", "css", "[aria-label='ASAP Pickup']", "disabled","no_jira"); 
+                if (FAIL) { return;}                     
+                _t++;
+                if (t.equals("true")) {
+                    _f++;
+                    EX += _t + "\t" + " === SM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";                        
+                } else {
+                    _p++;
+                    EX += _t + "\t" + " === SM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
                 }            
             // </editor-fold>   
             
@@ -448,10 +456,10 @@ public class __user_permission {
             _t++;
             if(L0.size() == L1.size()){
                 _p++;
-                EX += _t + "\t" + "SM No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                EX += _t + "\t" + " === SM No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
             }else{
                 _f++;
-                EX += _t + "\t" + "SM No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                
+                EX += _t + "\t" + " === SM No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                
             } 
             // <editor-fold defaultstate="collapsed" desc="SM N Brand Permissions" >               
             _t++; T.Move_to_Element_By_Path("Scroll to Brand data row", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira");        
@@ -476,10 +484,10 @@ public class __user_permission {
                     _t++;
                     if(L0.size() == L1.size()){
                         _p++;
-                        EX += _t + "\t" + "SM No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                        EX += _t + "\t" + " === SM No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
                     }else{
                         _f++;
-                        EX += _t + "\t" + "SM No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Enabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                
+                        EX += _t + "\t" + " === SM No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Enabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                
                     }                    
                 } else if (Tab_Name.toLowerCase().contains("service")) { 
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
@@ -510,13 +518,13 @@ public class __user_permission {
                         if (FAIL) { return; }    
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]", "no_jira"); 
                         if (FAIL) { return; }   
-                    _t++; Thread.sleep(500);    
+                    Thread.sleep(500);    
                 }
 
             }   
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
                 if (FAIL) { return;}  
-            _t++; Thread.sleep(500);   
+            Thread.sleep(500);   
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Edit 'Station Name'?", "css", "[aria-label='Station Name']", "disabled","no_jira"); 
@@ -524,20 +532,20 @@ public class __user_permission {
                 _t++;
                 if (t.equals("true")) {
                     _p++;
-                    EX += _t + "\t" + "SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                    EX += _t + "\t" + " === SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
                 } else {
                     _f++;
-                    EX += _t + "\t" + "SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                    EX += _t + "\t" + " === SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' enabled" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                        
                 }                    
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Enable 'ASAP Pick-up'?", "css", "[aria-label='ASAP Pickup']", "disabled","no_jira"); 
                 if (FAIL) { return;}                     
                 _t++;
                 if (t.equals("true")) {
                     _p++;
-                    EX += _t + "\t" + "SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                    EX += _t + "\t" + " === SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
                 } else {
                     _f++;
-                    EX += _t + "\t" + "SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                    EX += _t + "\t" + " === SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                        
                     }            
             // </editor-fold> 
 
@@ -626,10 +634,10 @@ public class __user_permission {
             _t++;
             if(L1.isEmpty()){
                 _p++;
-                EX += _t + "\t" + "DM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                EX += _t + "\t" + " === DM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
             }else{
                 _f++;
-                EX += _t + "\t" + "DM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+                EX += _t + "\t" + " === DM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";
             }
             // <editor-fold defaultstate="collapsed" desc="DM Y Brand Permissions" >               
             _t++; T.Move_to_Element_By_Path("Scroll to Brand data row", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira");        
@@ -654,10 +662,10 @@ public class __user_permission {
                     _t++;
                     if(L1.isEmpty()){
                         _p++;
-                        EX += _t + "\t" + "DM All Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                        EX += _t + "\t" + " === DM All Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
                     }else{
                         _f++;
-                        EX += _t + "\t" + "DM All Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+                        EX += _t + "\t" + " === DM All Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";
                     }                     
                 } else if (Tab_Name.toLowerCase().contains("service")) { 
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
@@ -688,26 +696,34 @@ public class __user_permission {
                         if (FAIL) { return; }    
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]", "no_jira"); 
                         if (FAIL) { return; }   
-                    _t++; Thread.sleep(500);    
+                    Thread.sleep(500);    
                 }             
             }   
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
                 if (FAIL) { return;}  
-            _t++; Thread.sleep(500);   
+            Thread.sleep(500);   
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                 if (FAIL) { return;} 
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Station Name'", "css", "[aria-label='Station Name']", "no_jira"); 
-                if (FAIL) { return;}                    
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Edit 'Station Name'", "css", "[aria-label='Station Name']", "Edit", "no_jira"); 
-                if (!FAIL) {
-                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Save Changes' text", "Save Changes", true,"no_jira"); 
-                    _t++; T.Element_By_Path_Click("Click 'CANCEL'", "xpath", "//*[text()='Cancel']","no_jira");
-                        if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Edit 'Station Name'?", "css", "[aria-label='Station Name']", "disabled","no_jira"); 
+                if (FAIL) { return;} 
+                _t++;
+                if (t.equals("true")) {
+                    _p++;
+                    EX += _t + "\t" + " === DM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
                 } else {
-                    _t++; 
                     _f++;
-                    EX += _t + "\t" + "DM All Options " + "\t" + "Station Configuration" + "\t" + "Unable to Edit 'Station Name'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                        
-                }            
+                    EX += _t + "\t" + " === DM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' enabled" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                        
+                }                    
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Enable 'ASAP Pick-up'?", "css", "[aria-label='ASAP Pickup']", "disabled","no_jira"); 
+                if (FAIL) { return;}                     
+                _t++;
+                if (t.equals("true")) {
+                    _f++;
+                    EX += _t + "\t" + " === DM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";                        
+                } else {
+                    _p++;
+                    EX += _t + "\t" + " === DM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                }           
             // </editor-fold>   
             
             // logout >>>>>>>>>>>    
@@ -796,10 +812,10 @@ public class __user_permission {
             _t++;
             if(L0.size() == L1.size()){
                 _p++;
-                EX += _t + "\t" + "DM No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                EX += _t + "\t" + " === DM No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
             }else{
                 _f++;
-                EX += _t + "\t" + "DM No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                
+                EX += _t + "\t" + " === DM No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                
             }
             // <editor-fold defaultstate="collapsed" desc="DM N Brand Permissions" >               
             _t++; T.Move_to_Element_By_Path("Scroll to Brand data row", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira");        
@@ -825,10 +841,10 @@ public class __user_permission {
                     _t++;
                     if(L0.size() == L1.size()){
                         _p++;
-                        EX += _t + "\t" + "DM No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                        EX += _t + "\t" + " === DM No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
                     }else{
                         _f++;
-                        EX += _t + "\t" + "DM No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Enabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                
+                        EX += _t + "\t" + " === DM No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Enabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                
                     }                    
                 } else if (Tab_Name.toLowerCase().contains("service")) { 
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
@@ -859,12 +875,12 @@ public class __user_permission {
                         if (FAIL) { return; }    
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]", "no_jira"); 
                         if (FAIL) { return; }   
-                    _t++; Thread.sleep(500);    
+                    Thread.sleep(500);    
                 }                                    
             }   
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
                 if (FAIL) { return;}  
-            _t++; Thread.sleep(500);   
+            Thread.sleep(500);   
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Edit 'Station Name'?", "css", "[aria-label='Station Name']", "disabled","no_jira"); 
@@ -872,20 +888,20 @@ public class __user_permission {
                 _t++;
                 if (t.equals("true")) {
                     _p++;
-                    EX += _t + "\t" + "DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                    EX += _t + "\t" + " === DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
                 } else {
                     _f++;
-                    EX += _t + "\t" + "DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                    EX += _t + "\t" + " === DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + "Expected disabled" + "\r\n";                        
                 }                    
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Enable 'ASAP Pick-up'?", "css", "[aria-label='ASAP Pickup']", "disabled","no_jira"); 
                 if (FAIL) { return;}                     
                 _t++;
                 if (t.equals("true")) {
                     _p++;
-                    EX += _t + "\t" + "DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                    EX += _t + "\t" + " === DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
                 } else {
                     _f++;
-                    EX += _t + "\t" + "DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                    EX += _t + "\t" + " === DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                        
                 }
             // </editor-fold> 
   
