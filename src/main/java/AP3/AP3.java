@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package AP3;
-import A.A;
+
 import A.Func;
 import static A.A.*;
 import com.ullink.slack.simpleslackapi.SlackChannel;
@@ -975,7 +975,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 try  { 
                     BW2.cancel(true); // =============================================
                     txtLOG.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");                
-                    EX = "AP3 " + env + " - v" + Ver + //url +
+                    EX = "AP3 " + env + " - v" + Ver + 
                     " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                      "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                      + EX;
@@ -1536,7 +1536,7 @@ public class AP3 extends javax.swing.JInternalFrame {
 //            HttpResponse response = httpclient.execute(httpPost);
 //            RES = response.toString().replace("{", "{\r\n").replace("}", "\r\n}").replace(",", ",\r\n");
             byte[] data = Files.readAllBytes(Paths.get(Path));
-            SlackSession session = SlackSessionFactory.createWebSocketSlackSession(A.S_OAuth_TKN);
+            SlackSession session = SlackSessionFactory.createWebSocketSlackSession(A.A.S_OAuth_TKN);
             session.connect();
             SlackChannel channel = session.findChannelByName("xtt_reports");
             SlackMessageHandle sendMessage = session.sendFile(channel, data, "File_Name_On_Slack");

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package WO;
-import A.A;
 import A.Func;
 import static A.A.*;
 import com.ullink.slack.simpleslackapi.SlackChannel;
@@ -1405,7 +1404,7 @@ public class WO extends javax.swing.JInternalFrame {
 //            HttpResponse response = httpclient.execute(httpPost);
 //            RES = response.toString().replace("{", "{\r\n").replace("}", "\r\n}").replace(",", ",\r\n");
             byte[] data = Files.readAllBytes(Paths.get(Path));
-            SlackSession session = SlackSessionFactory.createWebSocketSlackSession(A.S_OAuth_TKN);
+            SlackSession session = SlackSessionFactory.createWebSocketSlackSession(A.A.S_OAuth_TKN);
             session.connect();
             SlackChannel channel = session.findChannelByName("xtt_reports");
             SlackMessageHandle sendMessage = session.sendFile(channel, data, "File_Name_On_Slack");
