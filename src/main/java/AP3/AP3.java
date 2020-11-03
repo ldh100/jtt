@@ -104,19 +104,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         label10 = new java.awt.Label();
         label11 = new java.awt.Label();
         label12 = new java.awt.Label();
-        jPanel2 = new javax.swing.JPanel();
-        label1 = new java.awt.Label();
-        label6 = new java.awt.Label();
-        label3 = new java.awt.Label();
-        txtSM_PW = new javax.swing.JTextField();
-        txtIM_PW = new javax.swing.JTextField();
-        txtADMIN_PW = new javax.swing.JTextField();
-        label2 = new java.awt.Label();
-        label4 = new java.awt.Label();
-        label7 = new java.awt.Label();
-        txtSM_ID = new javax.swing.JTextField();
-        txtADMIN_ID = new javax.swing.JTextField();
-        txtIM_ID = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtLOG = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
@@ -132,6 +119,18 @@ public class AP3 extends javax.swing.JInternalFrame {
         label9 = new java.awt.Label();
         cmbAPP = new java.awt.Choice();
         cmbENV = new java.awt.Choice();
+        label27 = new java.awt.Label();
+        label28 = new java.awt.Label();
+        label29 = new java.awt.Label();
+        txtADMIN_ID3 = new javax.swing.JTextField();
+        txtSM_ID3 = new javax.swing.JTextField();
+        txtIM_ID3 = new javax.swing.JTextField();
+        label30 = new java.awt.Label();
+        label31 = new java.awt.Label();
+        label32 = new java.awt.Label();
+        txtADMIN_PW3 = new javax.swing.JTextField();
+        txtSM_PW3 = new javax.swing.JTextField();
+        txtIM_PW3 = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -429,97 +428,6 @@ public class AP3 extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 124, 424, -1));
 
-        jPanel2.setFocusable(false);
-
-        label1.setAlignment(java.awt.Label.RIGHT);
-        label1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        label1.setText("PW");
-
-        label6.setAlignment(java.awt.Label.RIGHT);
-        label6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        label6.setText("Delivery Manager");
-
-        label3.setAlignment(java.awt.Label.RIGHT);
-        label3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        label3.setText("Site Manager");
-
-        txtSM_PW.setText("Password1");
-
-        txtIM_PW.setText("Password1");
-
-        txtADMIN_PW.setText("Password1");
-
-        label2.setAlignment(java.awt.Label.RIGHT);
-        label2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        label2.setText("PW");
-
-        label4.setAlignment(java.awt.Label.RIGHT);
-        label4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        label4.setText("PW");
-
-        label7.setAlignment(java.awt.Label.RIGHT);
-        label7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        label7.setText("Admin");
-
-        txtSM_ID.setText("cdl.test.xtt+SM@gmail.com");
-
-        txtADMIN_ID.setText("oleg.spozito@compassdigital.io");
-
-        txtIM_ID.setText("cdl.test.xtt+DM@gmail.com");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtADMIN_ID)
-                    .addComponent(txtSM_ID)
-                    .addComponent(txtIM_ID))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtSM_PW, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                    .addComponent(txtADMIN_PW, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtIM_PW))
-                .addGap(22, 22, 22))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtADMIN_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtADMIN_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSM_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSM_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIM_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIM_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 286, 424, 80));
-
         txtLOG.setEditable(false);
         txtLOG.setColumns(20);
         txtLOG.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
@@ -530,7 +438,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLOG.setPreferredSize(null);
         jScrollPane1.setViewportView(txtLOG);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 370, 428, 136));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 366, 428, 140));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -622,6 +530,54 @@ public class AP3 extends javax.swing.JInternalFrame {
         jPanel3.add(cmbENV, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 32, 108, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 420, 424, 88));
+
+        label27.setAlignment(java.awt.Label.RIGHT);
+        label27.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        label27.setText("Admin");
+        getContentPane().add(label27, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 292, -1, -1));
+
+        label28.setAlignment(java.awt.Label.RIGHT);
+        label28.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        label28.setText("Site Manager");
+        getContentPane().add(label28, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 316, -1, -1));
+
+        label29.setAlignment(java.awt.Label.RIGHT);
+        label29.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        label29.setText("Delivery Manager");
+        getContentPane().add(label29, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 340, -1, -1));
+
+        txtADMIN_ID3.setText("oleg.spozito@compassdigital.io");
+        getContentPane().add(txtADMIN_ID3, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 292, 188, -1));
+
+        txtSM_ID3.setText("cdl.test.xtt+SM@gmail.com");
+        getContentPane().add(txtSM_ID3, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 316, 188, -1));
+
+        txtIM_ID3.setText("cdl.test.xtt+DM@gmail.com");
+        getContentPane().add(txtIM_ID3, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 340, 188, -1));
+
+        label30.setAlignment(java.awt.Label.RIGHT);
+        label30.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        label30.setText("PW");
+        getContentPane().add(label30, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 292, -1, -1));
+
+        label31.setAlignment(java.awt.Label.RIGHT);
+        label31.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        label31.setText("PW");
+        getContentPane().add(label31, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 316, -1, -1));
+
+        label32.setAlignment(java.awt.Label.RIGHT);
+        label32.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        label32.setText("PW");
+        getContentPane().add(label32, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 344, -1, -1));
+
+        txtADMIN_PW3.setText("Password1");
+        getContentPane().add(txtADMIN_PW3, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 292, 92, -1));
+
+        txtSM_PW3.setText("Password1");
+        getContentPane().add(txtSM_PW3, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 316, 92, -1));
+
+        txtIM_PW3.setText("Password1");
+        getContentPane().add(txtIM_PW3, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 340, 92, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1771,6 +1727,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1780,8 +1737,20 @@ public class AP3 extends javax.swing.JInternalFrame {
     private java.awt.Label label12;
     private java.awt.Label label13;
     private java.awt.Label label14;
+    private java.awt.Label label15;
+    private java.awt.Label label16;
+    private java.awt.Label label17;
+    private java.awt.Label label18;
+    private java.awt.Label label19;
     private java.awt.Label label2;
+    private java.awt.Label label20;
+    private java.awt.Label label27;
+    private java.awt.Label label28;
+    private java.awt.Label label29;
     private java.awt.Label label3;
+    private java.awt.Label label30;
+    private java.awt.Label label31;
+    private java.awt.Label label32;
     private java.awt.Label label4;
     private java.awt.Label label5;
     private java.awt.Label label6;
@@ -1794,13 +1763,25 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JSpinner nWaitElement;
     private javax.swing.JSpinner nWaitLoad;
     private javax.swing.JTextField txtADMIN_ID;
+    private javax.swing.JTextField txtADMIN_ID1;
+    private javax.swing.JTextField txtADMIN_ID3;
     private javax.swing.JTextField txtADMIN_PW;
+    private javax.swing.JTextField txtADMIN_PW1;
+    private javax.swing.JTextField txtADMIN_PW3;
     private javax.swing.JTextField txtIM_ID;
+    private javax.swing.JTextField txtIM_ID1;
+    private javax.swing.JTextField txtIM_ID3;
     private javax.swing.JTextField txtIM_PW;
+    private javax.swing.JTextField txtIM_PW1;
+    private javax.swing.JTextField txtIM_PW3;
     private javax.swing.JTextArea txtLOG;
     private javax.swing.JTextField txtMENU;
     private javax.swing.JTextField txtSM_ID;
+    private javax.swing.JTextField txtSM_ID1;
+    private javax.swing.JTextField txtSM_ID3;
     private javax.swing.JTextField txtSM_PW;
+    private javax.swing.JTextField txtSM_PW1;
+    private javax.swing.JTextField txtSM_PW3;
     // End of variables declaration//GEN-END:variables
 // </editor-fold>
 }
