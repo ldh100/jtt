@@ -6,6 +6,7 @@
 package A;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.util.Arrays;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -47,6 +48,7 @@ public class Func {
             }else{
                 setBackground( Color.WHITE);
             }
+            setFont(new Font("Dialog", Font.PLAIN, 11));
             setValue(table.getValueAt(row, column));
             return this;
         }

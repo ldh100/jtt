@@ -84,7 +84,7 @@ public class A extends javax.swing.JFrame {
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 662, Short.MAX_VALUE)
+            .addGap(0, 666, Short.MAX_VALUE)
         );
 
         jMenu_AP3.setBorder(null);
@@ -252,7 +252,6 @@ public class A extends javax.swing.JFrame {
         ti.schedule(tt, 1740000, 1740000);  
     }  
 
-
     private void jMenuORDERSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuORDERSMouseClicked
         //OpenREPORT();
     }//GEN-LAST:event_jMenuORDERSMouseClicked
@@ -331,8 +330,8 @@ public class A extends javax.swing.JFrame {
         }
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     } 
-    private void Get_User() {
-        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+    private static void Get_User() {
+        //setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         UserID = System.getProperty("user.name");
         //UserID = "theleepan.sivabalasi";
         WsOS = System.getProperty("os.name");
@@ -343,7 +342,7 @@ public class A extends javax.swing.JFrame {
         } catch (UnknownHostException ex) { 
             WsID = "Unknown - " + ex.getMessage();
         }
-        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        //setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     } 
     private  boolean ConnectDB() {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -367,23 +366,22 @@ public class A extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        Get_User();
         try {
-//            for (UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 //                if ("Nimbus".equals(info.getName())) {
 //                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
 //                    break;
 //                }
-//            }
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"); // ==========  Fix to show Windows like c#
+                if ("Metal".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AP3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             final A F = new A();

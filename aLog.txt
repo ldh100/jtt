@@ -1,9 +1,1 @@
-=== P2 Production Promos / Vouchers ===
-Boost > 200 Codes,  Failed 0 (0m, 1s)  09:23:18
-Nourish > 49 Codes,  Failed 0 (0m, 0s)  09:23:18
-Thrive > 200 Codes,  Failed 0 (0m, 1s)  09:23:20
-Rogers > 200 Codes,  Failed 0 (0m, 0s)  09:23:21
-Staging > 18 Codes,  Failed 0 (0m, 0s)  09:23:21
-Cache Update: p2_promo ('Boost','Rogers','Nourish','Thrive','Staging') > 667 rows (00:00.19)
-
-=== Errors ===
+=== Job is running... ===

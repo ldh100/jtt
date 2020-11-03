@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.6" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+<Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -15,9 +15,6 @@
       <Dimension value="[860, 532]"/>
     </Property>
     <Property name="name" type="java.lang.String" value="AP3" noResource="true"/>
-    <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-      <ComponentRef name="Form"/>
-    </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[860, 532]"/>
     </Property>
@@ -39,7 +36,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,19,0,0,3,87"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,21,0,0,3,92"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
@@ -82,7 +79,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="432" y="168" width="420" height="248"/>
+          <AbsoluteConstraints x="432" y="172" width="424" height="248"/>
         </Constraint>
       </Constraints>
 
@@ -92,6 +89,9 @@
       <SubComponents>
         <Component class="javax.swing.JCheckBox" name="_login">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Login &gt; Dashboard"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -101,12 +101,15 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="34" y="23" width="132" height="14"/>
+              <AbsoluteConstraints x="24" y="24" width="132" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JCheckBox" name="_all_data">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Show all data rows"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
@@ -120,6 +123,9 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="_site_new">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="New Site (not in Prod)"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
@@ -133,19 +139,28 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="_site">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Sites"/>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="_siteActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="34" y="41" width="132" height="14"/>
+              <AbsoluteConstraints x="24" y="40" width="132" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JCheckBox" name="_brand">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Brand"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
@@ -153,12 +168,15 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="34" y="59" width="132" height="14"/>
+              <AbsoluteConstraints x="24" y="60" width="132" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JCheckBox" name="_orders">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Orders"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
@@ -166,12 +184,15 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="34" y="77" width="132" height="14"/>
+              <AbsoluteConstraints x="24" y="76" width="132" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JCheckBox" name="_resent_updates">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Recent Updates"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
@@ -179,12 +200,15 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="34" y="95" width="132" height="14"/>
+              <AbsoluteConstraints x="24" y="94" width="132" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JCheckBox" name="_announcements">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Announcements"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
@@ -192,12 +216,15 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="34" y="113" width="132" height="14"/>
+              <AbsoluteConstraints x="24" y="112" width="132" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JCheckBox" name="_promo">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Promo Management"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
@@ -206,12 +233,15 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="34" y="131" width="132" height="14"/>
+              <AbsoluteConstraints x="12" y="130" width="144" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JCheckBox" name="_sales_reporting">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Sales Reporting"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
@@ -219,12 +249,15 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="34" y="149" width="132" height="14"/>
+              <AbsoluteConstraints x="24" y="148" width="132" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JCheckBox" name="_menu_manager">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Menu Manager"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
@@ -232,25 +265,15 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="172" y="131" width="100" height="14"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="_group_management">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Group Management"/>
-            <Property name="horizontalAlignment" type="int" value="11"/>
-            <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="requestFocusEnabled" type="boolean" value="false"/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="34" y="200" width="132" height="14"/>
+              <AbsoluteConstraints x="160" y="130" width="112" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JCheckBox" name="_users">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Users"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
@@ -265,6 +288,9 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="_password">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Forgot Password"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
@@ -278,6 +304,9 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="_logout">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="User Logout"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
@@ -291,6 +320,9 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="_roles">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Roles Permissions"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
@@ -304,6 +336,9 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="_brand_new">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Add Brand (not in Prod)"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
@@ -315,13 +350,36 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtMENU">
+        <Component class="javax.swing.JCheckBox" name="_sales_analytics">
           <Properties>
-            <Property name="text" type="java.lang.String" value="TIM HORTONS"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Sales Analytics"/>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="horizontalAlignment" type="int" value="11"/>
+            <Property name="horizontalTextPosition" type="int" value="10"/>
+            <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="280" y="220" width="128" height="-1"/>
+              <AbsoluteConstraints x="156" y="149" width="116" height="14"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="_group_management">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Group Management"/>
+            <Property name="horizontalAlignment" type="int" value="11"/>
+            <Property name="horizontalTextPosition" type="int" value="10"/>
+            <Property name="requestFocusEnabled" type="boolean" value="false"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="12" y="200" width="144" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -340,24 +398,10 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="_sales_analytics">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Sales Analytics"/>
-            <Property name="enabled" type="boolean" value="false"/>
-            <Property name="horizontalAlignment" type="int" value="11"/>
-            <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="requestFocusEnabled" type="boolean" value="false"/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="172" y="149" width="100" height="14"/>
-            </Constraint>
-          </Constraints>
-        </Component>
         <Component class="java.awt.Label" name="label13">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Sector Brand"/>
           </Properties>
@@ -367,16 +411,26 @@
             </Constraint>
           </Constraints>
         </Component>
+        <Component class="javax.swing.JTextField" name="txtMENU">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="TIM HORTONS"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="280" y="220" width="128" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
         <Component class="java.awt.Label" name="label14">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Group (Sector)"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="192" y="204" width="-1" height="12"/>
+              <AbsoluteConstraints x="180" y="204" width="-1" height="12"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -388,7 +442,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="4" y="20" width="424" height="260"/>
+          <AbsoluteConstraints x="4" y="22" width="428" height="260"/>
         </Constraint>
       </Constraints>
 
@@ -431,7 +485,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="435" y="20" width="412" height="99"/>
+          <AbsoluteConstraints x="435" y="22" width="420" height="99"/>
         </Constraint>
       </Constraints>
 
@@ -470,7 +524,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="432" y="122" width="420" height="44"/>
+          <AbsoluteConstraints x="432" y="124" width="424" height="-1"/>
         </Constraint>
       </Constraints>
 
@@ -478,17 +532,17 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="41" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="label10" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                   <Component id="nShowPage" min="-2" pref="51" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Component id="label11" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                   <Component id="nWaitElement" min="-2" pref="44" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Component id="label12" min="-2" pref="42" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                   <Component id="nWaitLoad" min="-2" pref="43" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -511,24 +565,34 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
+        <Component class="javax.swing.JSpinner" name="nShowPage">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="12" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.2" maximum="2.0" minimum="0.2" numberType="java.lang.Double" stepSize="0.2" type="number"/>
+            </Property>
+            <Property name="autoscrolls" type="boolean" value="true"/>
+            <Property name="name" type="java.lang.String" value="nShowPage" noResource="true"/>
+          </Properties>
+        </Component>
         <Component class="javax.swing.JSpinner" name="nWaitElement">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="12" style="0"/>
+            </Property>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="1" maximum="5" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
             </Property>
             <Property name="name" type="java.lang.String" value="nWaitElement" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="nShowPage">
-          <Properties>
-            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="0.2" maximum="2.0" minimum="0.2" numberType="java.lang.Double" stepSize="0.2" type="number"/>
-            </Property>
-            <Property name="name" type="java.lang.String" value="nShowPage" noResource="true"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JSpinner" name="nWaitLoad">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="12" style="0"/>
+            </Property>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="30" maximum="60" minimum="0" numberType="java.lang.Integer" stepSize="5" type="number"/>
             </Property>
@@ -567,7 +631,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="4" y="284" width="420" height="80"/>
+          <AbsoluteConstraints x="4" y="286" width="424" height="80"/>
         </Constraint>
       </Constraints>
 
@@ -583,56 +647,49 @@
                   </Group>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtADMIN_ID" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
-                      <Component id="txtIM_ID" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
-                      <Component id="txtSM_ID" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
+                      <Component id="txtADMIN_ID" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtSM_ID" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtIM_ID" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="label4" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="label1" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="label2" min="-2" max="-2" attributes="0"/>
-                      <Component id="label1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="label4" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="txtSM_PW" alignment="1" pref="96" max="32767" attributes="0"/>
-                      <Component id="txtIM_PW" alignment="1" max="32767" attributes="0"/>
+                      <Component id="txtSM_PW" alignment="0" pref="86" max="32767" attributes="0"/>
                       <Component id="txtADMIN_PW" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtIM_PW" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="label7" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtADMIN_ID" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="label1" alignment="2" min="-2" pref="16" max="-2" attributes="0"/>
-                              <Component id="txtADMIN_PW" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="label3" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtSM_ID" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtSM_PW" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="label2" alignment="2" min="-2" pref="12" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="label6" alignment="2" min="-2" pref="12" max="-2" attributes="0"/>
-                              <Component id="txtIM_ID" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtIM_PW" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="54" pref="54" max="-2" attributes="0"/>
-                          <Component id="label4" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="2" attributes="0">
+                      <Component id="label7" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtADMIN_ID" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="label1" alignment="2" min="-2" pref="16" max="-2" attributes="0"/>
+                      <Component id="txtADMIN_PW" alignment="2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="2" attributes="0">
+                      <Component id="label3" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtSM_ID" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtSM_PW" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="label2" alignment="2" min="-2" pref="12" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="2" attributes="0">
+                      <Component id="label6" alignment="2" min="-2" pref="12" max="-2" attributes="0"/>
+                      <Component id="txtIM_ID" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="label4" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtIM_PW" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -640,36 +697,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="txtSM_PW">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Password1"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtIM_PW">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Password1"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtADMIN_PW">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Password1"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtSM_ID">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="cdl.test.xtt+SM@gmail.com"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtADMIN_ID">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="oleg.spozito@compassdigital.io"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtIM_ID">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="cdl.test.xtt+DM@gmail.com"/>
-          </Properties>
-        </Component>
         <Component class="java.awt.Label" name="label1">
           <Properties>
             <Property name="alignment" type="int" value="2"/>
@@ -695,6 +722,21 @@
               <Font name="Tahoma" size="11" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Site Manager"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtSM_PW">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Password1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtIM_PW">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Password1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtADMIN_PW">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Password1"/>
           </Properties>
         </Component>
         <Component class="java.awt.Label" name="label2">
@@ -724,6 +766,21 @@
             <Property name="text" type="java.lang.String" value="Admin"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JTextField" name="txtSM_ID">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="cdl.test.xtt+SM@gmail.com"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtADMIN_ID">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="oleg.spozito@compassdigital.io"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtIM_ID">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="cdl.test.xtt+DM@gmail.com"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -732,7 +789,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="4" y="368" width="424" height="132"/>
+          <AbsoluteConstraints x="4" y="370" width="428" height="136"/>
         </Constraint>
       </Constraints>
 
@@ -747,6 +804,15 @@
             </Property>
             <Property name="rows" type="int" value="5"/>
             <Property name="text" type="java.lang.String" value="Start &gt;"/>
+            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="[1, 1, 1, 1]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[50, 19]"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="null"/>
+            </Property>
           </Properties>
         </Component>
       </SubComponents>
@@ -754,7 +820,7 @@
     <Container class="javax.swing.JPanel" name="jPanel3">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="428" y="417" width="424" height="88"/>
+          <AbsoluteConstraints x="428" y="420" width="424" height="88"/>
         </Constraint>
       </Constraints>
 
@@ -779,12 +845,15 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="340" y="32" width="78" height="-1"/>
+              <AbsoluteConstraints x="344" y="32" width="78" height="20"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnRUN">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="12" style="0"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="cc" type="rgb"/>
             </Property>
@@ -796,12 +865,15 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="340" y="60" width="78" height="-1"/>
+              <AbsoluteConstraints x="344" y="60" width="78" height="24"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnLOG">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value=" &lt; Log"/>
           </Properties>
           <Events>
@@ -809,12 +881,15 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="8" y="60" width="92" height="-1"/>
+              <AbsoluteConstraints x="8" y="60" width="96" height="24"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnFAILS">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Show Fails"/>
           </Properties>
           <Events>
@@ -822,12 +897,15 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="8" y="32" width="92" height="-1"/>
+              <AbsoluteConstraints x="8" y="32" width="96" height="24"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnEXCEL">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Excel Rep"/>
           </Properties>
           <Events>
@@ -835,29 +913,31 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="8" y="4" width="92" height="-1"/>
+              <AbsoluteConstraints x="8" y="4" width="96" height="24"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JCheckBox" name="_headless">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="10" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Headless &lt;"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
-            <Property name="actionCommand" type="java.lang.String" value="Headless &lt;"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
-          <AccessibilityProperties>
-            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Headless &lt;"/>
-          </AccessibilityProperties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="248" y="64" width="88" height="14"/>
+              <AbsoluteConstraints x="256" y="64" width="80" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnSAVE_OPT">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="12" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Save Run Options"/>
             <Property name="name" type="java.lang.String" value="btnSAVE" noResource="true"/>
           </Properties>
@@ -866,14 +946,14 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="116" y="60" width="124" height="-1"/>
+              <AbsoluteConstraints x="116" y="60" width="136" height="24"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="java.awt.Label" name="label5">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Environment"/>
           </Properties>
@@ -886,7 +966,7 @@
         <Component class="java.awt.Label" name="label8">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Application"/>
           </Properties>
@@ -899,13 +979,13 @@
         <Component class="java.awt.Label" name="label9">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="0"/>
+              <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Browser"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="340" y="16" width="-1" height="12"/>
+              <AbsoluteConstraints x="344" y="16" width="-1" height="12"/>
             </Constraint>
           </Constraints>
         </Component>

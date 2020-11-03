@@ -16,9 +16,6 @@
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[847, 253]"/>
     </Property>
-    <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-      <ComponentRef name="Form"/>
-    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -44,36 +41,37 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jScrollPane2" pref="818" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="809" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnEXCEL" alignment="1" min="-2" pref="104" max="-2" attributes="0"/>
-                                  <Component id="btnDEL" alignment="1" min="-2" pref="103" max="-2" attributes="0"/>
-                                  <Component id="btnDL_OLD" alignment="1" min="-2" pref="103" max="-2" attributes="0"/>
-                                  <Component id="dtpDEL" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cmbF" alignment="1" min="-2" pref="103" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="label1" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="dtpDEL" alignment="1" pref="113" max="32767" attributes="0"/>
+                          <Component id="btnDL_OLD" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnDEL" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="btnLOG" min="-2" pref="48" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                      <Component id="btnREF" min="-2" pref="48" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="btnLOG" min="-2" pref="48" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                              <Component id="btnREF" min="-2" pref="48" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="cmbF" max="32767" attributes="0"/>
+                          <Component id="btnEXCEL" alignment="1" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="818" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="808" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="120" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -146,6 +144,9 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="DV1">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="0" rowCount="0"/>
             </Property>

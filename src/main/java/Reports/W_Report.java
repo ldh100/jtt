@@ -75,7 +75,6 @@ public class W_Report extends javax.swing.JInternalFrame {
         setTitle("Reports");
         setDoubleBuffered(true);
         setMinimumSize(new java.awt.Dimension(847, 253));
-        setNextFocusableComponent(this);
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -93,6 +92,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         txtLOG.setMargin(new java.awt.Insets(2, 2, 1, 1));
         jScrollPane1.setViewportView(txtLOG);
 
+        DV1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         DV1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -185,28 +185,29 @@ public class W_Report extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 809, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnEXCEL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnDEL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnDL_OLD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dtpDEL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmbF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dtpDEL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                            .addComponent(btnDL_OLD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDEL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnLOG, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addComponent(btnREF, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnLOG, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16)
+                                .addComponent(btnREF, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEXCEL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(2, 2, 2))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE)
-                    .addGap(110, 110, 110)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 120, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -268,7 +269,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             btnDL_OLD.setEnabled(false);
         }   
         String AUTOR = DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("user_id").getModelIndex()).toString();
-        if (AUTOR.equals(UserID) || UserID.toLowerCase().contains("oleg")){
+        if (AUTOR.equals(UserID)|| UserID.toLowerCase().contains("oleg")){ 
             btnDEL.setEnabled(true);
         }  else{
             btnDEL.setEnabled(false);
@@ -395,7 +396,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         LoadDB();
     }//GEN-LAST:event_btnREFMouseClicked
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
-        DV1.changeSelection(DV1.getSelectedRow(), 0, false, false);
+        //DV1.changeSelection(DV1.getSelectedRow(), 0, false, false);
         SUM();
     }//GEN-LAST:event_DV1MouseClicked
     private void btnDELMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDELMouseClicked
@@ -514,7 +515,7 @@ public class W_Report extends javax.swing.JInternalFrame {
                 TableColumn col = colModel.getColumn(i);
                 int width = 0;
 
-                TableCellRenderer cr = col.getHeaderRenderer();
+                TableCellRenderer cr;
                 for (int r = 0; r < DV1.getRowCount(); r++) {
                   cr = DV1.getCellRenderer(r, i);
                   Component comp = cr.getTableCellRendererComponent(DV1, DV1.getValueAt(r, i), false, false, r, i);
