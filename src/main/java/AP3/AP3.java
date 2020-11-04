@@ -561,29 +561,29 @@ public class AP3 extends javax.swing.JInternalFrame {
         label24.setAlignment(java.awt.Label.RIGHT);
         label24.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         label24.setText("PW");
-        getContentPane().add(label24, new org.netbeans.lib.awtextra.AbsoluteConstraints(316, 292, -1, -1));
+        getContentPane().add(label24, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 284, -1, -1));
 
         label25.setAlignment(java.awt.Label.RIGHT);
         label25.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         label25.setText("PW");
-        getContentPane().add(label25, new org.netbeans.lib.awtextra.AbsoluteConstraints(316, 316, -1, -1));
+        getContentPane().add(label25, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 308, -1, -1));
 
         label26.setAlignment(java.awt.Label.RIGHT);
         label26.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         label26.setText("PW");
-        getContentPane().add(label26, new org.netbeans.lib.awtextra.AbsoluteConstraints(316, 336, -1, -1));
+        getContentPane().add(label26, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 332, -1, -1));
 
         txtADMIN_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtADMIN_PW.setText("Password1");
-        getContentPane().add(txtADMIN_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 284, 64, -1));
+        getContentPane().add(txtADMIN_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 284, 72, -1));
 
         txtSM_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtSM_PW.setText("Password1");
-        getContentPane().add(txtSM_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 332, 64, -1));
+        getContentPane().add(txtSM_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 332, 72, -1));
 
         txtIM_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtIM_PW.setText("Password1");
-        getContentPane().add(txtIM_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 308, 64, -1));
+        getContentPane().add(txtIM_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 308, 72, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
