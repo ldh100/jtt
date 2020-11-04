@@ -1,1 +1,14 @@
-=== Job is running... ===
+Start >
+
+=== LOAD_CONFIG > OK
+-Load Sites from API...
+== 0.48 sec ==
+-Load Brands from API...
+== 0.52 sec ==
+-Load Groups/Sector from API...
+== 0.47 sec ==
+
+=== Ready >
+=== In not Headless mode Do Not interact with your Browser
+=== (no mouse hover!) during Automation run
+=== Good Luck...

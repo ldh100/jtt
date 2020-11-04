@@ -72,8 +72,6 @@ public class A extends javax.swing.JFrame {
 
         jDesktopPane1.setBackground(new java.awt.Color(204, 204, 204));
         jDesktopPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jDesktopPane1.setFocusCycleRoot(false);
-        jDesktopPane1.setInheritsPopupMenu(true);
         jDesktopPane1.setName("A"); // NOI18N
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
@@ -169,7 +167,7 @@ public class A extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu_AP3MouseClicked
     private void Open_AP3(){
         AP3 ap3 = new AP3();
-        ap3.hide();
+        //ap3.hide();
 
         this.jDesktopPane1.add(ap3);
         int Y;
