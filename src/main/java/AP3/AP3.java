@@ -119,18 +119,18 @@ public class AP3 extends javax.swing.JInternalFrame {
         label9 = new java.awt.Label();
         cmbAPP = new java.awt.Choice();
         cmbENV = new java.awt.Choice();
-        label27 = new java.awt.Label();
-        label28 = new java.awt.Label();
-        label29 = new java.awt.Label();
-        txtADMIN_ID3 = new javax.swing.JTextField();
-        txtSM_ID3 = new javax.swing.JTextField();
-        txtIM_ID3 = new javax.swing.JTextField();
-        label30 = new java.awt.Label();
-        label31 = new java.awt.Label();
-        label32 = new java.awt.Label();
-        txtADMIN_PW3 = new javax.swing.JTextField();
-        txtSM_PW3 = new javax.swing.JTextField();
-        txtIM_PW3 = new javax.swing.JTextField();
+        label21 = new java.awt.Label();
+        label22 = new java.awt.Label();
+        label23 = new java.awt.Label();
+        txtADMIN_ID = new javax.swing.JTextField();
+        txtSM_ID = new javax.swing.JTextField();
+        txtIM_ID = new javax.swing.JTextField();
+        label24 = new java.awt.Label();
+        label25 = new java.awt.Label();
+        label26 = new java.awt.Label();
+        txtADMIN_PW = new javax.swing.JTextField();
+        txtSM_PW = new javax.swing.JTextField();
+        txtIM_PW = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -154,7 +154,7 @@ public class AP3 extends javax.swing.JInternalFrame {
 
         lblSITES.setText("Sites");
         lblSITES.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 4, 254, -1));
+        getContentPane().add(lblSITES, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 254, -1));
 
         lblBRANDS.setText("Selected Site - Brands");
         lblBRANDS.setName("lblBRANDS"); // NOI18N
@@ -438,7 +438,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLOG.setPreferredSize(null);
         jScrollPane1.setViewportView(txtLOG);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 366, 428, 140));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 358, 428, 148));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -531,53 +531,59 @@ public class AP3 extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 420, 424, 88));
 
-        label27.setAlignment(java.awt.Label.RIGHT);
-        label27.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        label27.setText("Admin");
-        getContentPane().add(label27, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 292, -1, -1));
+        label21.setAlignment(java.awt.Label.RIGHT);
+        label21.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        label21.setText("Admin");
+        getContentPane().add(label21, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 284, -1, -1));
 
-        label28.setAlignment(java.awt.Label.RIGHT);
-        label28.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        label28.setText("Site Manager");
-        getContentPane().add(label28, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 316, -1, -1));
+        label22.setAlignment(java.awt.Label.RIGHT);
+        label22.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        label22.setText("Site Manager");
+        getContentPane().add(label22, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 308, -1, -1));
 
-        label29.setAlignment(java.awt.Label.RIGHT);
-        label29.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        label29.setText("Delivery Manager");
-        getContentPane().add(label29, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 340, -1, -1));
+        label23.setAlignment(java.awt.Label.RIGHT);
+        label23.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        label23.setText("Delivery Manager");
+        getContentPane().add(label23, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 332, -1, -1));
 
-        txtADMIN_ID3.setText("oleg.spozito@compassdigital.io");
-        getContentPane().add(txtADMIN_ID3, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 292, 188, -1));
+        txtADMIN_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtADMIN_ID.setText("oleg.spozito@compassdigital.io");
+        getContentPane().add(txtADMIN_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 284, 184, -1));
 
-        txtSM_ID3.setText("cdl.test.xtt+SM@gmail.com");
-        getContentPane().add(txtSM_ID3, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 316, 188, -1));
+        txtSM_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtSM_ID.setText("cdl.test.xtt+SM@gmail.com");
+        getContentPane().add(txtSM_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 308, 184, -1));
 
-        txtIM_ID3.setText("cdl.test.xtt+DM@gmail.com");
-        getContentPane().add(txtIM_ID3, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 340, 188, -1));
+        txtIM_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtIM_ID.setText("cdl.test.xtt+DM@gmail.com");
+        getContentPane().add(txtIM_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 332, 184, -1));
 
-        label30.setAlignment(java.awt.Label.RIGHT);
-        label30.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        label30.setText("PW");
-        getContentPane().add(label30, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 292, -1, -1));
+        label24.setAlignment(java.awt.Label.RIGHT);
+        label24.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        label24.setText("PW");
+        getContentPane().add(label24, new org.netbeans.lib.awtextra.AbsoluteConstraints(316, 292, -1, -1));
 
-        label31.setAlignment(java.awt.Label.RIGHT);
-        label31.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        label31.setText("PW");
-        getContentPane().add(label31, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 316, -1, -1));
+        label25.setAlignment(java.awt.Label.RIGHT);
+        label25.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        label25.setText("PW");
+        getContentPane().add(label25, new org.netbeans.lib.awtextra.AbsoluteConstraints(316, 316, -1, -1));
 
-        label32.setAlignment(java.awt.Label.RIGHT);
-        label32.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        label32.setText("PW");
-        getContentPane().add(label32, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 344, -1, -1));
+        label26.setAlignment(java.awt.Label.RIGHT);
+        label26.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        label26.setText("PW");
+        getContentPane().add(label26, new org.netbeans.lib.awtextra.AbsoluteConstraints(316, 336, -1, -1));
 
-        txtADMIN_PW3.setText("Password1");
-        getContentPane().add(txtADMIN_PW3, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 292, 92, -1));
+        txtADMIN_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtADMIN_PW.setText("Password1");
+        getContentPane().add(txtADMIN_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 284, 64, -1));
 
-        txtSM_PW3.setText("Password1");
-        getContentPane().add(txtSM_PW3, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 316, 92, -1));
+        txtSM_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtSM_PW.setText("Password1");
+        getContentPane().add(txtSM_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 332, 64, -1));
 
-        txtIM_PW3.setText("Password1");
-        getContentPane().add(txtIM_PW3, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 340, 92, -1));
+        txtIM_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtIM_PW.setText("Password1");
+        getContentPane().add(txtIM_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 308, 64, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1724,37 +1730,23 @@ public class AP3 extends javax.swing.JInternalFrame {
     private java.awt.Choice cmbENV;
     private java.awt.Choice cmbGROUP;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private java.awt.Label label1;
     private java.awt.Label label10;
     private java.awt.Label label11;
     private java.awt.Label label12;
     private java.awt.Label label13;
     private java.awt.Label label14;
-    private java.awt.Label label15;
-    private java.awt.Label label16;
-    private java.awt.Label label17;
-    private java.awt.Label label18;
-    private java.awt.Label label19;
-    private java.awt.Label label2;
-    private java.awt.Label label20;
-    private java.awt.Label label27;
-    private java.awt.Label label28;
-    private java.awt.Label label29;
-    private java.awt.Label label3;
-    private java.awt.Label label30;
-    private java.awt.Label label31;
-    private java.awt.Label label32;
-    private java.awt.Label label4;
+    private java.awt.Label label21;
+    private java.awt.Label label22;
+    private java.awt.Label label23;
+    private java.awt.Label label24;
+    private java.awt.Label label25;
+    private java.awt.Label label26;
     private java.awt.Label label5;
-    private java.awt.Label label6;
-    private java.awt.Label label7;
     private java.awt.Label label8;
     private java.awt.Label label9;
     private javax.swing.JLabel lblBRANDS;
@@ -1763,25 +1755,13 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JSpinner nWaitElement;
     private javax.swing.JSpinner nWaitLoad;
     private javax.swing.JTextField txtADMIN_ID;
-    private javax.swing.JTextField txtADMIN_ID1;
-    private javax.swing.JTextField txtADMIN_ID3;
     private javax.swing.JTextField txtADMIN_PW;
-    private javax.swing.JTextField txtADMIN_PW1;
-    private javax.swing.JTextField txtADMIN_PW3;
     private javax.swing.JTextField txtIM_ID;
-    private javax.swing.JTextField txtIM_ID1;
-    private javax.swing.JTextField txtIM_ID3;
     private javax.swing.JTextField txtIM_PW;
-    private javax.swing.JTextField txtIM_PW1;
-    private javax.swing.JTextField txtIM_PW3;
     private javax.swing.JTextArea txtLOG;
     private javax.swing.JTextField txtMENU;
     private javax.swing.JTextField txtSM_ID;
-    private javax.swing.JTextField txtSM_ID1;
-    private javax.swing.JTextField txtSM_ID3;
     private javax.swing.JTextField txtSM_PW;
-    private javax.swing.JTextField txtSM_PW1;
-    private javax.swing.JTextField txtSM_PW3;
     // End of variables declaration//GEN-END:variables
 // </editor-fold>
 }
