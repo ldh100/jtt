@@ -830,24 +830,22 @@ public class AP3 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEXCELMouseClicked
 
     private void cmbENVItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbENVItemStateChanged
-//        if(evt.getStateChange() == 2){
-//            //
-//        }
-        if(!Load) {
+        if(!Load&& evt.getStateChange() == 1) {
             LOAD_ENV();
         }
     }//GEN-LAST:event_cmbENVItemStateChanged
 
     private void cmbAPPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAPPItemStateChanged
-        if(!Load) {
+        if(!Load && evt.getStateChange() == 1) {
+            int X = evt.getStateChange();
             app = cmbAPP.getSelectedItem().toString();
             GetSites_API();
         }
     }//GEN-LAST:event_cmbAPPItemStateChanged
 
     private void cmbGROUPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbGROUPItemStateChanged
-        if(!Load) {
-            GetCompany_API();;
+        if(!Load&& evt.getStateChange() == 1) {
+            GetCompany_API();
         }        
     }//GEN-LAST:event_cmbGROUPItemStateChanged
 
@@ -1145,7 +1143,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         BW2.execute();  // executes the swingworker on worker thread          
     }
     private void LOAD_DATA(){
-        //txtMENU.setText("TIM HORTONS");
         app = cmbAPP.getSelectedItem().toString();
 
         CONFIG = false;
@@ -1405,6 +1402,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLOG.append("\r\n-Load Groups/Sector from API...");
         cmbGROUP.removeAllItems();
         GROUP_IDS = new ArrayList<>();
+        
         Load = true;
         sw1.start();     
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -1465,12 +1463,16 @@ public class AP3 extends javax.swing.JInternalFrame {
         
         // https://api.compassdigital.org/staging/location/sector/yy9mGPrGD0H64PQGWpmEHaN8lWMlr6cY5qYAD9YBTpMJq0w3rWcZklQgmDPycwYm9JMl4YI2W2dM/
         // https://api.compassdigital.org/staging/location/sector/yy9mGPrGD0H64PQGWpmEHaN8lWMlr6cY5qYAD9YBTpMJq0w3rWcZklQgmDPycwYm9JMl4YI2W2dM?expanded=false
-        
+        int I = cmbGROUP.getSelectedIndex();
+        if(I < 0){ // =========== DEBUG
+            txtLOG.append("\r\n-Load Sector/Companies(Menus) ERROR: cmbGROUP.getSelectedIndex() < 0");
+            return;
+        }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n-Load Sector/Companies(Menus) from API...");
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            int I = cmbGROUP.getSelectedIndex();
+            
             cmbMENU.removeAllItems();
             sw1.start();     
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 

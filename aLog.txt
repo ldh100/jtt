@@ -2,13 +2,41 @@ Start >
 
 === LOAD_CONFIG > OK
 -Load Sites from API...
-== 0.48 sec ==
+== 0.49 sec ==
 -Load Brands from API...
-== 0.52 sec ==
+== 0.64 sec ==
 -Load Groups/Sector from API...
-== 0.47 sec ==
+== Group: Chartwel/US, Id: yy9mGPrGD0H64PQGWpmEHaN8lWMlr6cY5qYAD9YBTpMJq0w3rWcZklQgmDPycwYm9JMl4YI2W2dM
+== 0.73 sec ==
+-Load Sector/Companies(Menus) from API...
+== 0.82 sec ==
 
 === Ready >
 === In not Headless mode Do Not interact with your Browser
 === (no mouse hover!) during Automation run
 === Good Luck...
+
+
+=== LOAD_CONFIG > OK
+-Load Sites from API...
+== 0.28 sec ==
+-Load Brands from API...
+== 1.51 sec ==
+-Load Groups/Sector from API...
+- Load Sector/Companies(Menus) ERROR: cmbGROUP.getSelectedIndex() < 0
+== Group: Pilot Sector/US, Id: AXqLKdPK53uozRZKgkjOh0GOOXoBJAH1klp4QymZUvBPDBkarLSEqeewez5Kf3D1O1D2vBh83EXQ
+== 0.41 sec ==
+-Load Sector/Companies(Menus) from API...
+== 1.66 sec ==
+
+=== LOAD_CONFIG > OK
+-Load Sites from API...
+== 1.44 sec ==
+-Load Brands from API...
+== 0.51 sec ==
+-Load Groups/Sector from API...
+- Load Sector/Companies(Menus) ERROR: cmbGROUP.getSelectedIndex() < 0
+== Group: Pilot Sector/US, Id: AXqLKdPK53uozRZKgkjOh0GOOXoBJAH1klp4QymZUvBPDBkarLSEqeewez5Kf3D1O1D2vBh83EXQ
+== 0.45 sec ==
+-Load Sector/Companies(Menus) from API...
+== 1.32 sec ==
