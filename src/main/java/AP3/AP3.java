@@ -25,7 +25,9 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import javax.swing.SwingWorker;
@@ -92,7 +94,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         lblSITES8 = new javax.swing.JLabel();
         cmbGROUP = new javax.swing.JComboBox<>();
         lblSITES12 = new javax.swing.JLabel();
-        txtMENU = new javax.swing.JTextField();
+        cmbMENU = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         DV1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -320,22 +322,22 @@ public class AP3 extends javax.swing.JInternalFrame {
         lblSITES8.setAlignmentX(0.5F);
         jPanel1.add(lblSITES8, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 204, 76, 16));
 
-        cmbGROUP.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmbGROUP.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         cmbGROUP.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbGROUPItemStateChanged(evt);
             }
         });
-        jPanel1.add(cmbGROUP, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 220, 248, 20));
+        jPanel1.add(cmbGROUP, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 220, 212, 20));
 
         lblSITES12.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES12.setText("Global Menu:");
+        lblSITES12.setText("Company/Global Menu:");
         lblSITES12.setAlignmentX(0.5F);
-        jPanel1.add(lblSITES12, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 204, 88, 16));
+        jPanel1.add(lblSITES12, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 204, 148, 16));
 
-        txtMENU.setText("TIM HORTONS");
-        jPanel1.add(txtMENU, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 220, 144, -1));
+        cmbMENU.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jPanel1.add(cmbMENU, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 220, 184, 20));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 172, 424, 248));
 
@@ -671,7 +673,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         }
         
         GROUP = cmbGROUP.getSelectedItem().toString();
-        GL_MENU = txtMENU.getText();
+        GL_MENU = cmbMENU.getSelectedItem().toString();
 
         if(_headless.isSelected()) {
             txtLOG.append("\r\n=== Headless mode is selected - Browser is hidden");
@@ -715,7 +717,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnLOGActionPerformed
 
     private void Report(){
-        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String EXX = "";
         try {
             ResultSet rs = conn.createStatement().executeQuery("SELECT TOP 1 [Excel] FROM [dbo].[aw_result] WHERE [app] = 'AP3_" + env + "' ORDER By qID DESC");
@@ -725,7 +727,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
         }
         if ("".equals(EXX.trim()) || "None".equals(EXX.trim())){
-            setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             txtLOG.append("\r\n\r\n=== Report > Not Excel");
             return;
         }   
@@ -775,7 +777,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
         }
         Runtime.getRuntime().gc();
-        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
 
     private void btnFAILSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFAILSMouseClicked
@@ -844,7 +846,9 @@ public class AP3 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbAPPItemStateChanged
 
     private void cmbGROUPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbGROUPItemStateChanged
-        // TODO add your handling code here:
+        if(!Load) {
+            GetCompany_API();;
+        }        
     }//GEN-LAST:event_cmbGROUPItemStateChanged
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
@@ -873,7 +877,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         GetGroups_API();        
     }
     private boolean Driver() {
-        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
             String cwd = System.getProperty("user.dir");
             txtLOG.append("\r\n\r\n=== CWD: " + cwd);
@@ -906,12 +910,12 @@ public class AP3 extends javax.swing.JInternalFrame {
 			.ignoring(NoSuchElementException.class); // wait for Visible / Clickable   
             timeout = new WebDriverWait(d1, (long) Timeout);  // wait for load
             wait_msg = new WebDriverWait(d1, 100);  // wait for alert
-            setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
         }
         catch (Exception ex) {
             txtLOG.append("\r\n\r\n=== Web Driver > ERROR: " + ex.getMessage());
-            setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return false;
         }   
 
@@ -1080,7 +1084,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 btnRUN.setEnabled(true);
                 txtLOG.append("\r\n=== Duration: " + (DD.toHours()) + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
                 txtLOG.append("\r\n=== " + Summary); // shown in EX top
-                setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));   
+                //this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));   
                         if(F.trim() != ""){
                             btnFAILS.setEnabled(true);
                         } else{
@@ -1089,6 +1093,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 LOG_UPDATE(); // ========================================================
             } 
         }; 
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         BW1.execute();  // executes the swingworker on worker thread 
     }
     private void BW2_DoWork(){
@@ -1131,7 +1136,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                             EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
                         }
                         Thread.sleep(3000);
-                    } catch (Exception ex){
+                    } catch (InterruptedException ex){
                         // =======
                     }
                 }
@@ -1140,7 +1145,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         BW2.execute();  // executes the swingworker on worker thread          
     }
     private void LOAD_DATA(){
-        txtMENU.setText("TIM HORTONS");
+        //txtMENU.setText("TIM HORTONS");
         app = cmbAPP.getSelectedItem().toString();
 
         CONFIG = false;
@@ -1150,7 +1155,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLOG.append("\r\n=== Good Luck...\r\n");  
     }
     private void Get_P2_TKN_and_Slack_IDs(){
-        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_OAuth_TKN'");
             rs.next();
@@ -1194,11 +1199,11 @@ public class AP3 extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== P2_TKN > ERROR: " + ex.getMessage());
         }
-        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetSites_API() {
         d1LastRow = -1;
-        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n-Load Sites from API...");
         sw1.start();
         try {
@@ -1297,14 +1302,14 @@ public class AP3 extends javax.swing.JInternalFrame {
             GetBrands_API();
         }
         lblSITES.setText(app + " Sites (" + DV1.getRowCount() + " found)");
-        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetBrands_API() {
         if (d1LastRow == DV1.getSelectedRow()) {
            return;
         }
         d1LastRow = DV1.getSelectedRow();
-        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n-Load Brands from API...");
         sw1.start();     
         
@@ -1324,7 +1329,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                     HttpEntity entity = response.getEntity();
                     return entity != null ? EntityUtils.toString(entity) : null;
                 } else {
-                    setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
                     throw new ClientProtocolException("Response: " + status + " - " + Msg);
 
                 }
@@ -1393,12 +1398,14 @@ public class AP3 extends javax.swing.JInternalFrame {
 
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
         lblBRANDS.setText("Selected Site Brands (" + DV2.getRowCount() + " found)");
-        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    private void GetGroups_API() {     
-        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+    private void GetGroups_API() {  
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n-Load Groups/Sector from API...");
-        //cmbGROUP.removeAll();
+        cmbGROUP.removeAllItems();
+        GROUP_IDS = new ArrayList<>();
+        Load = true;
         sw1.start();     
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
@@ -1422,19 +1429,20 @@ public class AP3 extends javax.swing.JInternalFrame {
             for (int i = 0; i < Sectors.length(); i++) {
                 S_NAME = Sectors.getJSONObject(i).getString("name");
                 cmbGROUP.addItem(S_NAME);
+                GROUP_IDS.add(Sectors.getJSONObject(i).getString("id"));
                 if(S_NAME.equals(GROUP)){
                     T_Index = i;
                 }
             }
         } catch (IOException | JSONException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());  
-            setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
                 txtLOG.append("\r\n- Exception: " + ex.getMessage());   
-                setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             }
         } 
         if(T_Index != -1){
@@ -1444,13 +1452,76 @@ public class AP3 extends javax.swing.JInternalFrame {
                 cmbGROUP.setSelectedIndex(0);
             }
         }
+        txtLOG.append("\r\n== Group: " + cmbGROUP.getItemAt(T_Index) + ", Id: " + GROUP_IDS.get(T_Index)); 
         txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
-        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        Load = false;   
+        GetCompany_API();
     }
-    
+    private void GetCompany_API() {  
+        // https://api.compassdigital.org/staging/#/menu/sector/yy9mGPrGD0H64PQGWpmEHaN8lWMlr6cY5qYAD9YBTpMJq0w3rWcZklQgmDPycwYm9JMl4YI2W2dM/
+        // https://api.compassdigital.org/staging/menu/sector/yy9mGPrGD0H64PQGWpmEHaN8lWMlr6cY5qYAD9YBTpMJq0w3rWcZklQgmDPycwYm9JMl4YI2W2dM/
+        
+        // https://api.compassdigital.org/staging/location/sector/yy9mGPrGD0H64PQGWpmEHaN8lWMlr6cY5qYAD9YBTpMJq0w3rWcZklQgmDPycwYm9JMl4YI2W2dM/
+        // https://api.compassdigital.org/staging/location/sector/yy9mGPrGD0H64PQGWpmEHaN8lWMlr6cY5qYAD9YBTpMJq0w3rWcZklQgmDPycwYm9JMl4YI2W2dM?expanded=false
+        
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLOG.append("\r\n-Load Sector/Companies(Menus) from API...");
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        try {
+            int I = cmbGROUP.getSelectedIndex();
+            cmbMENU.removeAllItems();
+            sw1.start();     
+            HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 
+            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                String Msg = response.getStatusLine().getReasonPhrase();
+                if (status >= 200 && status < 300) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
+                }
+            };
+            String responseBody = httpclient.execute(httpget, responseHandler);
+            JSONObject json = new JSONObject(responseBody);
+            JSONArray Sectors = json.getJSONArray("companies");           
+            String S_NAME = "";
+            T_Index = -1;
+            for (int i = 0; i < Sectors.length(); i++) {
+                S_NAME = Sectors.getJSONObject(i).getString("name");
+                cmbMENU.addItem(S_NAME);
+                if(S_NAME.equals(GL_MENU)){
+                    T_Index = i;
+                }
+            }
+        } catch (IOException | JSONException ex) {
+            txtLOG.append("\r\n- Exception: " + ex.getMessage());  
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        } finally {
+            try {
+                httpclient.close();
+            } catch (IOException ex) {
+                txtLOG.append("\r\n- Exception: " + ex.getMessage());   
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            }
+        } 
+        if(T_Index != -1){
+            cmbMENU.setSelectedIndex(T_Index);
+        }else{
+            if(cmbMENU.getItemCount() > 0){
+                cmbMENU.setSelectedIndex(0);
+            }
+        }
+        txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        sw1.reset();
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+       
     private void LOG_UPDATE(){  
-        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
             PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET " +
                           " [Date] = ?" +       // 1
@@ -1495,10 +1566,10 @@ public class AP3 extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== LOG_UPDATE > SQL ERROR: " + ex.getMessage());
         }
-        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void LOG_START(){
-        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
             PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] (" +
                           "[Date]" +   // 1
@@ -1562,10 +1633,10 @@ public class AP3 extends javax.swing.JInternalFrame {
         }  catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== LOG_START > SQL ERROR: " + ex.getMessage());
         }
-        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void Send_File_to_Slack(String Slack_File_Name, String File_Path, String Channel_Name) throws IOException {
-        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String RES;
         try{
             //File file = new File(File_Path); // "C:\xTT_Data\TAX_Upload\JJKitchen_Android_Staging_P2_Func_27_Apr_2020_03_48PM.xlsx"
@@ -1597,10 +1668,10 @@ public class AP3 extends javax.swing.JInternalFrame {
         }catch(Exception ex) {
             txtLOG.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
         }
-        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void LOAD_CONFIG(){
-        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
             SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'AP3' AND [env] = '" + env + "'";
             Statement statement = conn.createStatement();
@@ -1614,7 +1685,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("GROUP:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GROUP = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("GL_MENU:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMENU.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("GL_MENU:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GL_MENU = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("CAN:")); c = c.substring(0, c.indexOf("\r\n")).trim(); CAN = c.substring(c.indexOf(" ")).trim();
@@ -1655,10 +1726,10 @@ public class AP3 extends javax.swing.JInternalFrame {
             CONFIG = false;
             txtLOG.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
         }
-        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void SAVE_CONFIG() {
-        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String _S = "n/a";
         String _B = "n/a";
         try {
@@ -1671,10 +1742,10 @@ public class AP3 extends javax.swing.JInternalFrame {
             C = "";
             C += "env: " + env + "\r\n";
             C += "app: " + cmbAPP.getSelectedItem().toString() + "\r\n";
-            C += "cmbBROW: " + cmbBROW.getSelectedItem()+ "\r\n";
+            C += "cmbBROW: " + cmbBROW.getSelectedItem().toString() + "\r\n";
             C += "url: " + url + "\r\n";
-            C += "GROUP: " + cmbGROUP.getSelectedItem() + "\r\n";
-            C += "GL_MENU: " + txtMENU.getText() + "\r\n";
+            C += "GROUP: " + cmbGROUP.getSelectedItem().toString() + "\r\n";
+            C += "GL_MENU: " + cmbMENU.getSelectedItem().toString() + "\r\n";
             C += "SITE: " + _S + "\r\n";
             C += "BRAND: " + _B + "\r\n";
             C += "CAN: " + CAN + "\r\n";
@@ -1739,7 +1810,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
         }
-        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
 
     private boolean Load;
@@ -1749,6 +1820,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private boolean CONFIG = false;
     private String C = "";
     private int d1LastRow = -1; 
+    private List<String> GROUP_IDS;
     private String SCOPE;
    
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
@@ -1783,6 +1855,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cmbBROW;
     private javax.swing.JComboBox<String> cmbENV;
     private javax.swing.JComboBox<String> cmbGROUP;
+    private javax.swing.JComboBox<String> cmbMENU;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1813,7 +1886,6 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtIM_ID;
     private javax.swing.JTextField txtIM_PW;
     private javax.swing.JTextArea txtLOG;
-    private javax.swing.JTextField txtMENU;
     private javax.swing.JTextField txtSM_ID;
     private javax.swing.JTextField txtSM_PW;
     // End of variables declaration//GEN-END:variables

@@ -340,8 +340,6 @@ public class __site {
             if (FAIL) { return;}                                                                                         
         _t++; Thread.sleep((long) sleep); T.List_L0("Sites Unit(s) Count", "xpath", "//div[contains(@class, 'v-card-custom v-card v-sheet theme--light')]", "no_jira");             
             if (FAIL) { return;}
-//        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
-//            if (FAIL) { return;} 
             for (int i = 0; i < L0.size(); i++) {
                 _t++; T.Element_Child_Attribute("Brand Name", L0.get(i), "xpath", ".//h3[contains(@class, 'brand-name')]", "textContent", "no_jira");   
                     if (FAIL) { return;}
@@ -351,7 +349,6 @@ public class __site {
                     if (FAIL) { return;}
                     for (int j = 2; j < L1.size(); j++) {  // L1 > L0 inner table >>>>>>>>>>>>   0 > 2 skip empty rows
                         _t++; T.List_TR_TDs("Station " + (j -1), L1, j, "no_jira");      
-                        //if (FAIL) { continue;}
                     }
             } 
         // </editor-fold> 
