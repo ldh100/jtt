@@ -342,7 +342,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 172, 424, 248));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        DV1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -368,7 +368,7 @@ public class AP3 extends javax.swing.JInternalFrame {
 
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 22, 428, 260));
 
-        DV2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        DV2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -441,12 +441,12 @@ public class AP3 extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(nShowPage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nWaitElement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nWaitLoad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSITES7, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSITES9, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSITES10, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblSITES10, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nShowPage, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(2, 2, 2))
         );
 
@@ -462,7 +462,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLOG.setPreferredSize(null);
         jScrollPane1.setViewportView(txtLOG);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 358, 428, 148));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 354, 428, 152));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -482,7 +482,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         });
         jPanel3.add(btnRUN, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 60, 78, 22));
 
-        btnLOG.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        btnLOG.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLOG.setText(" < Log");
         btnLOG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -491,7 +491,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         });
         jPanel3.add(btnLOG, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 60, 100, 22));
 
-        btnFAILS.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        btnFAILS.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnFAILS.setText("Show Fails");
         btnFAILS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -516,7 +516,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         _headless.setRequestFocusEnabled(false);
         jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 64, 80, 14));
 
-        btnSAVE_OPT.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        btnSAVE_OPT.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSAVE_OPT.setText("Save Run Options");
         btnSAVE_OPT.setName("btnSAVE"); // NOI18N
         btnSAVE_OPT.addActionListener(new java.awt.event.ActionListener() {
