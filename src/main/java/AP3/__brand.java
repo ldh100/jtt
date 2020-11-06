@@ -6,7 +6,6 @@
 package AP3;
 import A.T;
 import static A.A.*;
-import java.util.Collections;
 /**
  *
  * @author Oleg.Spozito
@@ -90,6 +89,7 @@ public class __brand {
             if (FAIL) { return;}     
         _t++; Thread.sleep((long) sleep); T.List_L0("Sites Unit(s) Count", "xpath", "//div[contains(@class, 'v-card-custom v-card v-sheet theme--light')]", "no_jira");             
             if (FAIL) { return;}
+        int SITE_LIST_COL_COUNT = 0;    
             for (int i = 0; i < L0.size(); i++) {
                 _t++; T.Element_Child_Attribute("Brand Name", L0.get(i), "xpath", ".//h3[contains(@class, 'brand-name')]", "textContent", "no_jira");   
                     if (FAIL) { return;}
@@ -102,41 +102,46 @@ public class __brand {
                         if (FAIL) { continue;}
                     if(t.trim().startsWith(BRAND)){
                         T_Index = j;
+                        _t++; T.Element_Child_List_L2("Stations List Column Cout", L1.get(j), "tagName", "td", "no_jira"); // remember Brand List wheere BRAND found
+                        SITE_LIST_COL_COUNT = L2.size();
                         _t++; T.Element_Child_List_L2("Save Target Stations List", L0.get(i), "tagName", "tr", "no_jira"); // remember Brand List wheere BRAND found
                     }
                 }
             }     
         _t++; T.Move_to_Element_By_Path("Scroll to Brand data row", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira");        
             if (FAIL) { return;} 
-        _t++; T.Brand_Status("Get Brand Status in App", L2, T_Index,"no_jira");    // was L1, last Unit > Brand List - wrong     
-            if (FAIL) { return;}  
-            if(t.equals("Hidden in App")){ 
-                _t++; Thread.sleep((long) sleep); T.Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,"no_jira" );
-                _t++; T.API_Body_Contains("Location Group API - find Hidden Brand", BrandID,false, "no_jira");        
-                    if (FAIL) { return;} 
-                _t++; Thread.sleep((long) sleep); T.Brand_Status_Click("Status Click to 'Display'",L2, T_Index,"no_jira");  // was L1 ^^^
-                    if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
-                    if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); T.Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,"no_jira" ); 
-                _t++; T.API_Body_Contains("Location Group API - find Displayed Brand", BrandID,true, "no_jira");        
-                    if (FAIL) { return;}     
-            } else {
-                _t++; Thread.sleep((long) sleep); T.Brand_Status_Click("Status Click to 'Hide'",L2, T_Index,"no_jira");  
-                    if (FAIL) { return;}                                                                                                             // 'v-progress-circular'
-                _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
-                    if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); T.Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,"no_jira" );      
-                _t++; T.API_Body_Contains("Location Group API - find Hidden Brand", BrandID,false, "no_jira");        
-                    if (FAIL) { return;}   
-                _t++; Thread.sleep((long) sleep); T.Brand_Status_Click("Status Click to 'Display'", L2, T_Index,"no_jira");  
-                    if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
-                    if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); T.Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,"no_jira" );
-                _t++; T.API_Body_Contains("Location Group API - find Displayed Brand", BrandID,true, "no_jira");        
-                    if (FAIL) { return;}     
-            }
+            
+        if(SITE_LIST_COL_COUNT == 5){
+            _t++; T.Brand_Status("Get Brand Status in App", L2, T_Index,"no_jira");        
+                if (FAIL) { return;}  
+                if(t.equals("Hidden in App")){ 
+                    _t++; Thread.sleep((long) sleep); T.Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,"no_jira" );
+                    _t++; T.API_Body_Contains("Location Group API - find Hidden Brand", BrandID,false, "no_jira");        
+                        if (FAIL) { return;} 
+                    _t++; Thread.sleep((long) sleep); T.Brand_Status_Click("Status Click to 'Display'",L2, T_Index,"no_jira");  // was L1 ^^^
+                        if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
+                        if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); T.Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,"no_jira" ); 
+                    _t++; T.API_Body_Contains("Location Group API - find Displayed Brand", BrandID,true, "no_jira");        
+                        if (FAIL) { return;}     
+                } else {
+                    _t++; Thread.sleep((long) sleep); T.Brand_Status_Click("Status Click to 'Hide'",L2, T_Index,"no_jira");  
+                        if (FAIL) { return;}                                                                                                             // 'v-progress-circular'
+                    _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
+                        if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); T.Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,"no_jira" );      
+                    _t++; T.API_Body_Contains("Location Group API - find Hidden Brand", BrandID,false, "no_jira");        
+                        if (FAIL) { return;}   
+                    _t++; Thread.sleep((long) sleep); T.Brand_Status_Click("Status Click to 'Display'", L2, T_Index,"no_jira");  
+                        if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+                        if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); T.Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,"no_jira" );
+                    _t++; T.API_Body_Contains("Location Group API - find Displayed Brand", BrandID,true, "no_jira");        
+                        if (FAIL) { return;}     
+                }
+        }            
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Brand Name Click", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
@@ -311,31 +316,34 @@ public class __brand {
                     if (FAIL) { return;}   
                 if (platform.startsWith("DH")){
                     _t++; Thread.sleep((long) sleep); T.Find_Text("Menu > Unable.. for DH", "Unable", true,"no_jira"); 
-                    if (FAIL) { return; }
+                    //if (FAIL) { return; }
                 } else {
-                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'Schedule your...'", "xpath", "//div[contains(@class, 'H6-Selected')]", "no_jira"); 
-                        if (FAIL) { return; }
-                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'Schedule menu'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
-                        if (FAIL) return;   
-                     _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Input_Select_Clear("Menu Search Clear", "xpath", "//input[contains(@repeatlabel, 'Search ')]",  "no_jira"); 
-                        if (FAIL) { return;}            
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Menu Name", "css", "[repeatlabel='Search Menus in " + BRAND + "']", "xxx_yyy", "no_jira");
-                        if (FAIL) { return;}   
-//                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Not Found' notification", "No matching records found", true,"no_jira"); 
-//                        if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'Not Found' notification", "tagName", "td", "no_jira");
-                        if (FAIL) { return; }
-                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Clear Search 'X' Click", "xpath", "//i[contains(@class, 'v-icon v-icon--link mdi mdi-close theme--light')]", "no_jira"); 
-                        if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); T.List_L1("Menus Count", "tagName", "tr", "no_jira");             
-                        if (FAIL) { return;} 
-                        for (int j = 0; j < L1.size(); j++) {
-                            _t++; T.Element_Text("Menu Data Row Text", L1.get(j), "no_jira");             
-                                if (FAIL) { return;}
-                        }
-                    _t++; Thread.sleep((long) sleep); T.To_Top("no_jira");             
-                        if (FAIL) { return;}
-                    Thread.sleep(1000);    
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Schedule your...'", "Schedule Your Menus", true, "no_jira"); 
+                    if(t.equals("Not Found")) { 
+                        _t++;
+                        _w++;
+                        EX += _t + "\t" + " === " + platform + " Site: " + SITE + "\t" + "Brand: " + BRAND + "\t" + "Unable to schedule menus for " + platform + " locations" + "\t" + "WARN" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";                            
+                    } else{
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'Schedule menu' button", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
+                            if (FAIL) return;   
+                         _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Input_Select_Clear("Menu Search Clear", "xpath", "//input[contains(@repeatlabel, 'Search ')]",  "no_jira"); 
+                            if (FAIL) { return;}            
+                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Menu Name", "css", "[repeatlabel='Search Menus in " + BRAND + "']", "xxx_yyy", "no_jira");
+                            if (FAIL) { return;}   
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'Not Found' notification", "tagName", "td", "no_jira");
+                            if (FAIL) { return; }
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Clear Search 'X' Click", "xpath", "//i[contains(@class, 'v-icon v-icon--link mdi mdi-close theme--light')]", "no_jira"); 
+                            if (FAIL) { return;}
+                        _t++; Thread.sleep((long) sleep); T.List_L1("Menus Count", "tagName", "tr", "no_jira");             
+                            if (FAIL) { return;} 
+                            for (int j = 0; j < L1.size(); j++) {
+                                _t++; T.Element_Text("Menu Data Row Text", L1.get(j), "no_jira");             
+                                    if (FAIL) { return;}
+                            }
+                        _t++; Thread.sleep((long) sleep); T.To_Top("no_jira");             
+                            if (FAIL) { return;}
+                        Thread.sleep(1000);  
+                    }
                 }
             } else if (Tab_Name.toLowerCase().contains("service")) { 
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
@@ -344,90 +352,94 @@ public class __brand {
                     if (FAIL) { return;}   
                 _t++; Thread.sleep((long) sleep); T.List_L1("Service Week Days count", "xpath", "//div[contains(@class, 'layout FormStyle row align-baseline')]", "no_jira");             
                     if (FAIL) { return;} 
-                for (int j = 0; j < L1.size(); j++) { 
-                    _t++; T.Scroll_to_Day("Scroll to Day " + j, L1, j, "no_jira");             
-                        if (FAIL) { return;}                        
-                    _t++; T.Element_Text("Service Week Day Labels", L1.get(j), "no_jira");             
+                if(L1.isEmpty()){ // Pickup is not enabled for this brand
+                       _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'not enabled...'", "Pickup is not enabled for this brand", true, "no_jira");                  
+                }else{                     
+                    for (int j = 0; j < L1.size(); j++) { 
+                        _t++; T.Scroll_to_Day("Scroll to Day " + j, L1, j, "no_jira");             
+                            if (FAIL) { return;}                        
+                        _t++; T.Element_Text("Service Week Day Labels", L1.get(j), "no_jira");             
+                            if (FAIL) { return;}
+                        _t++; T.Day_Snedule("Service Week Day Schedule", L1, j, "no_jira");             
+                            if (FAIL) { return;}
+                    }                    
+                    _t++; Thread.sleep((long) sleep); T.To_Top("no_jira");             
+                        if (FAIL) { return;}  
+                    Thread.sleep(1000);
+
+                    // Check Sunday 24 hours / Closed All Day > uncheck  
+                    _t++; T.Element_Child_Attribute("Sunday '24 Hour Service' state", L1.get(0), "css", "[aria-label='24 Hour Service']", "aria-checked", "no_jira");   
                         if (FAIL) { return;}
-                    _t++; T.Day_Snedule("Service Week Day Schedule", L1, j, "no_jira");             
-                        if (FAIL) { return;}
-                }                    
-                _t++; Thread.sleep((long) sleep); T.To_Top("no_jira");             
-                    if (FAIL) { return;}  
-                Thread.sleep(1000);
-                
-                // Check Sunday 24 hours / Closed All Day > uncheck  
-                _t++; T.Element_Child_Attribute("Sunday '24 Hour Service' state", L1.get(0), "css", "[aria-label='24 Hour Service']", "aria-checked", "no_jira");   
-                    if (FAIL) { return;}
-                    if("true".equals(t)){
-                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("UnCheck '24h Service'", "css", "[aria-label='24 Hour Service']", "no_jira"); 
-                            if (FAIL) { return; } 
-                    } else {
-                       _t++; T.Element_Child_Attribute("Sunday 'Closed All Day' state", L1.get(0), "css", "[aria-label='Closed All Day']", "aria-checked", "no_jira");   
-                           if (FAIL) { return;}
-                        if("true".equals(t)){  
-                            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("UnCheck 'Closed All Day'", "css", "[aria-label='Closed All Day']", "no_jira"); 
-                            if (FAIL) { return; } 
+                        if("true".equals(t)){
+                            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("UnCheck '24h Service'", "css", "[aria-label='24 Hour Service']", "no_jira"); 
+                                if (FAIL) { return; } 
                         } else {
-                            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Check '24h Service' - activate 'Save'", "css", "[aria-label='24 Hour Service']", "no_jira"); 
-                               if (FAIL) { return; } 
-                            _t++; T.Element_Child_Attribute("Sunday '24 Hour Service' state", L1.get(0), "css", "[aria-label='24 Hour Service']", "aria-checked", "no_jira");   
-                                if (FAIL) { return;}
-                            if("true".equals(t)){
+                           _t++; T.Element_Child_Attribute("Sunday 'Closed All Day' state", L1.get(0), "css", "[aria-label='Closed All Day']", "aria-checked", "no_jira");   
+                               if (FAIL) { return;}
+                            if("true".equals(t)){  
+                                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("UnCheck 'Closed All Day'", "css", "[aria-label='Closed All Day']", "no_jira"); 
+                                if (FAIL) { return; } 
+                            } else {
                                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Check '24h Service' - activate 'Save'", "css", "[aria-label='24 Hour Service']", "no_jira"); 
                                    if (FAIL) { return; } 
-                            }
-                        }                  
-                    }
-                String hR;
-                String mR;
-                hR = String.format("%02d",(int)(Math.random()*3 + 8));
-                mR = String.format("%02d",(int)(Math.random()*59));
-                New_From = hR + ":" + mR + "AM";    
-                _t++; Thread.sleep((long) sleep); T.Time_Enter("Enter Sunday Opens Time", L1, 0, "css", "[aria-label='Opens']", New_From,"no_jira");             
-                    if (FAIL) { return;}                               // ^^^ Enter Text within 8:00-11:59 AM
-                hR = String.format("%02d",(int)(Math.random()*3 + 1));
-                mR = String.format("%02d",(int)(Math.random()*59));
-                New_To = hR + ":" + mR + "PM";
-                _t++; Thread.sleep((long) sleep); T.Time_Enter("Enter Sunday Closes Time", L1, 0, "css", "[aria-label^='Closes']", New_To,"no_jira");             
-                    if (FAIL) { return;}                                // ^^^ Enter Text within 1:00-4:59 PM
-                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Sunday'  - activate 'Save'", "xpath", "//p[text()='Sunday']", "no_jira"); 
-                    if (FAIL) { return;}    //  Save not visible after time enter/not selection    - DEBUG                                                                                       
+                                _t++; T.Element_Child_Attribute("Sunday '24 Hour Service' state", L1.get(0), "css", "[aria-label='24 Hour Service']", "aria-checked", "no_jira");   
+                                    if (FAIL) { return;}
+                                if("true".equals(t)){
+                                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Check '24h Service' - activate 'Save'", "css", "[aria-label='24 Hour Service']", "no_jira"); 
+                                       if (FAIL) { return; } 
+                                }
+                            }                  
+                        }
+                    String hR;
+                    String mR;
+                    hR = String.format("%02d",(int)(Math.random()*3 + 8));
+                    mR = String.format("%02d",(int)(Math.random()*59));
+                    New_From = hR + ":" + mR + "AM";    
+                    _t++; Thread.sleep((long) sleep); T.Time_Enter("Enter Sunday Opens Time", L1, 0, "css", "[aria-label='Opens']", New_From,"no_jira");             
+                        if (FAIL) { return;}                               // ^^^ Enter Text within 8:00-11:59 AM
+                    hR = String.format("%02d",(int)(Math.random()*3 + 1));
+                    mR = String.format("%02d",(int)(Math.random()*59));
+                    New_To = hR + ":" + mR + "PM";
+                    _t++; Thread.sleep((long) sleep); T.Time_Enter("Enter Sunday Closes Time", L1, 0, "css", "[aria-label^='Closes']", New_To,"no_jira");             
+                        if (FAIL) { return;}                                // ^^^ Enter Text within 1:00-4:59 PM
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Sunday'  - activate 'Save'", "xpath", "//p[text()='Sunday']", "no_jira"); 
+                        if (FAIL) { return;}    //  Save not visible after time enter/not selection    - DEBUG                                                                                       
 
-                    
-                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
-                    if (FAIL) { return; } // Save
-                _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
-                    if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); T.Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true,"no_jira" );
-                    if (FAIL) { return;}                
-                _t++; Thread.sleep((long) sleep); T.Brand_API_Hours("Brand API - new Service Hours", "Pickup - day 0", New_From, New_To,true, "no_jira");
-                    if (FAIL) { return;} // ^^ Check Brand API > Pickup / Delivery / others?                         ^^ "Delivery - day X"
-                // Click Sunday Opens >
-                // Enter Text 11:45 AM
-                // Click Sunday Closes >
-                // Enter Text 3:00 PM 
-                // Save
-                // Check API
-                
-                // =================   Refresh Page after Save and Select Service Tab
-                _t++; Thread.sleep((long) sleep); T.List_L0("Tabs Count - refresh after save", "xpath", "//div[contains(@class, 'v-tabs__div')]", "no_jira");             
+
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
+                        if (FAIL) { return; } // Save
+                    _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); T.List_L1("Week Days - refresh after save", "xpath", "//div[contains(@class, 'layout FormStyle row align-baseline')]", "no_jira");             
-                        if (FAIL) { return;} 
-                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
-                    if (FAIL) { return;}        
-                for (int j = 0; j < L1.size(); j++) { 
-                    _t++; T.Scroll_to_Day("Scroll to Day " + j, L1, j, "no_jira");             
-                        if (FAIL) { return;}                        
-                    _t++; T.Element_Text("Service Week Day Labels", L1.get(j), "no_jira");             
+                    _t++; Thread.sleep((long) sleep); T.Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true,"no_jira" );
+                        if (FAIL) { return;}                
+                    _t++; Thread.sleep((long) sleep); T.Brand_API_Hours("Brand API - new Service Hours", "Pickup - day 0", New_From, New_To,true, "no_jira");
+                        if (FAIL) { return;} // ^^ Check Brand API > Pickup / Delivery / others?                         ^^ "Delivery - day X"
+                    // Click Sunday Opens >
+                    // Enter Text 11:45 AM
+                    // Click Sunday Closes >
+                    // Enter Text 3:00 PM 
+                    // Save
+                    // Check API
+
+                    // =================   Refresh Page after Save and Select Service Tab
+                    _t++; Thread.sleep((long) sleep); T.List_L0("Tabs Count - refresh after save", "xpath", "//div[contains(@class, 'v-tabs__div')]", "no_jira");             
+                            if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); T.List_L1("Week Days - refresh after save", "xpath", "//div[contains(@class, 'layout FormStyle row align-baseline')]", "no_jira");             
+                            if (FAIL) { return;} 
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
+                        if (FAIL) { return;}        
+                    for (int j = 0; j < L1.size(); j++) { 
+                        _t++; T.Scroll_to_Day("Scroll to Day " + j, L1, j, "no_jira");             
+                            if (FAIL) { return;}                        
+                        _t++; T.Element_Text("Service Week Day Labels", L1.get(j), "no_jira");             
+                            if (FAIL) { return;}
+                        _t++; T.Day_Snedule("Service Week Day Schedule", L1, j, "no_jira");             
+                            if (FAIL) { return;}
+                    }  
+                    _t++; Thread.sleep((long) sleep); T.To_Top("no_jira");             
                         if (FAIL) { return;}
-                    _t++; T.Day_Snedule("Service Week Day Schedule", L1, j, "no_jira");             
-                        if (FAIL) { return;}
-                }  
-                _t++; Thread.sleep((long) sleep); T.To_Top("no_jira");             
-                    if (FAIL) { return;}
-                Thread.sleep(1000);    
+                    Thread.sleep(1000);    
+                }
             } else if (Tab_Name.toLowerCase().contains("delivery")) { 
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Delivery Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
                     if (FAIL) { return;}
@@ -435,85 +447,88 @@ public class __brand {
                     if (FAIL) { return;}   
                 _t++; Thread.sleep((long) sleep); T.List_L1("Delivery Week Days count", "xpath", "//div[contains(@class, 'layout FormStyle row align-baseline')]", "no_jira");             
                     if (FAIL) { return;} 
-                for (int j = 0; j < L1.size(); j++) {
-                    _t++; T.Scroll_to_Day("Scroll to Day " + j, L1, j, "no_jira");             
-                        if (FAIL) { return;} 
-                    _t++; T.Element_Text("Delivery Week Day Labels", L1.get(j), "no_jira");             
+                if(L1.isEmpty()){ // Delivery is not enabled for this station.
+                       _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'not enabled...'", "Delivery is not enabled for this station", true, "no_jira");                  
+                }else{                   
+                    for (int j = 0; j < L1.size(); j++) {
+                        _t++; T.Scroll_to_Day("Scroll to Day " + j, L1, j, "no_jira");             
+                            if (FAIL) { return;} 
+                        _t++; T.Element_Text("Delivery Week Day Labels", L1.get(j), "no_jira");             
+                            if (FAIL) { return;}
+                        _t++; T.Day_Snedule("Delivery Week Day Schedule", L1, j, "no_jira");             
+                            if (FAIL) { return;}                           
+                    }
+                    // ===================================================================================================
+                    _t++; Thread.sleep((long) sleep); T.To_Top("no_jira");             
+                        if (FAIL) { return;}  
+                    Thread.sleep(1000);
+
+                    // Check Sunday 24 hours / Closed All Day > unchek  
+                    _t++; T.Element_Child_Attribute("Sunday '24 Hour Service' state", L1.get(0), "css", "[aria-label='24 Hour Service']", "aria-checked", "no_jira");   
                         if (FAIL) { return;}
-                    _t++; T.Day_Snedule("Delivery Week Day Schedule", L1, j, "no_jira");             
-                        if (FAIL) { return;}                           
-                }
-                // ===================================================================================================
-                _t++; Thread.sleep((long) sleep); T.To_Top("no_jira");             
-                    if (FAIL) { return;}  
-                Thread.sleep(1000);
-                
-                // Check Sunday 24 hours / Closed All Day > unchek  
-                _t++; T.Element_Child_Attribute("Sunday '24 Hour Service' state", L1.get(0), "css", "[aria-label='24 Hour Service']", "aria-checked", "no_jira");   
-                    if (FAIL) { return;}
-                    if("true".equals(t)){
-                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("UnCheck '24h Service'", "css", "[aria-label='24 Hour Service']", "no_jira"); 
-                            if (FAIL) { return; } 
-                    } else {
-                       _t++; T.Element_Child_Attribute("Sunday 'Closed All Day' state", L1.get(0), "css", "[aria-label='Closed All Day']", "aria-checked", "no_jira");   
-                           if (FAIL) { return;}
-                        if("true".equals(t)){  
-                            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("UnCheck 'Closed All Day'", "css", "[aria-label='Closed All Day']", "no_jira"); 
-                            if (FAIL) { return; } 
+                        if("true".equals(t)){
+                            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("UnCheck '24h Service'", "css", "[aria-label='24 Hour Service']", "no_jira"); 
+                                if (FAIL) { return; } 
                         } else {
-                            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Check '24h Service' - activate 'Save'", "css", "[aria-label='24 Hour Service']", "no_jira"); 
-                               if (FAIL) { return; } 
-                            _t++; T.Element_Child_Attribute("Sunday '24 Hour Service' state", L1.get(0), "css", "[aria-label='24 Hour Service']", "aria-checked", "no_jira");   
-                                if (FAIL) { return;}
-                            if("true".equals(t)){
+                           _t++; T.Element_Child_Attribute("Sunday 'Closed All Day' state", L1.get(0), "css", "[aria-label='Closed All Day']", "aria-checked", "no_jira");   
+                               if (FAIL) { return;}
+                            if("true".equals(t)){  
+                                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("UnCheck 'Closed All Day'", "css", "[aria-label='Closed All Day']", "no_jira"); 
+                                if (FAIL) { return; } 
+                            } else {
                                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Check '24h Service' - activate 'Save'", "css", "[aria-label='24 Hour Service']", "no_jira"); 
                                    if (FAIL) { return; } 
-                            }
-                        }                  
-                    }
-                String hR;
-                String mR;
-                hR = String.format("%02d",(int)(Math.random()*3 + 8));
-                mR = String.format("%02d",(int)(Math.random()*59));
-                New_From = hR + ":" + mR + "AM";    
-                _t++; Thread.sleep((long) sleep); T.Time_Enter("Enter Sunday Delivery Opens Time", L1, 0, "css", "[aria-label='Opens']", New_From,"no_jira");             
-                    if (FAIL) { return;}                                // ^^^ Enter Text within 8:00-11:59 AM
-                hR = String.format("%02d",(int)(Math.random()*3 + 1));
-                mR = String.format("%02d",(int)(Math.random()*59));
-                New_To = hR + ":" + mR + "PM";
-                _t++; Thread.sleep((long) sleep); T.Time_Enter("Enter Sunday Delivery Closes Time", L1, 0, "css", "[aria-label^='Closes']", New_To,"no_jira");             
-                    if (FAIL) { return;}                                // ^^^ Enter Text within 1:00-4:59 PM
-                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Sunday'  - activate 'Save'", "xpath", "//p[text()='Sunday']", "no_jira"); 
-                    if (FAIL) { return;}    //  Save not visible after time enter/not selection    - DEBUG                                                                                       
-                    
-                    
-                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
-                    if (FAIL) { return; } // Save
-                _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
-                    if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); T.Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true,"no_jira" );
-                    if (FAIL) { return;}                  
-                _t++; Thread.sleep((long) sleep); T.Brand_API_Hours("Brand API - new Delivery Hours", "Delivery - day 0", New_From, New_To,true, "no_jira");
-                    if (FAIL) { return;} // ^^ Check Brand API > Pickup / Delivery / others?                         ^^ "Delivery - day X"
-                
-                // =================   Refresh Page after Save and Select Service Tab
-                _t++; Thread.sleep((long) sleep); T.List_L0("Tabs Count - refresh after save", "xpath", "//div[contains(@class, 'v-tabs__div')]", "no_jira");             
+                                _t++; T.Element_Child_Attribute("Sunday '24 Hour Service' state", L1.get(0), "css", "[aria-label='24 Hour Service']", "aria-checked", "no_jira");   
+                                    if (FAIL) { return;}
+                                if("true".equals(t)){
+                                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Check '24h Service' - activate 'Save'", "css", "[aria-label='24 Hour Service']", "no_jira"); 
+                                       if (FAIL) { return; } 
+                                }
+                            }                  
+                        }
+                    String hR;
+                    String mR;
+                    hR = String.format("%02d",(int)(Math.random()*3 + 8));
+                    mR = String.format("%02d",(int)(Math.random()*59));
+                    New_From = hR + ":" + mR + "AM";    
+                    _t++; Thread.sleep((long) sleep); T.Time_Enter("Enter Sunday Delivery Opens Time", L1, 0, "css", "[aria-label='Opens']", New_From,"no_jira");             
+                        if (FAIL) { return;}                                // ^^^ Enter Text within 8:00-11:59 AM
+                    hR = String.format("%02d",(int)(Math.random()*3 + 1));
+                    mR = String.format("%02d",(int)(Math.random()*59));
+                    New_To = hR + ":" + mR + "PM";
+                    _t++; Thread.sleep((long) sleep); T.Time_Enter("Enter Sunday Delivery Closes Time", L1, 0, "css", "[aria-label^='Closes']", New_To,"no_jira");             
+                        if (FAIL) { return;}                                // ^^^ Enter Text within 1:00-4:59 PM
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Sunday'  - activate 'Save'", "xpath", "//p[text()='Sunday']", "no_jira"); 
+                        if (FAIL) { return;}    //  Save not visible after time enter/not selection    - DEBUG                                                                                       
+
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
+                        if (FAIL) { return; } // Save
+                    _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); T.List_L1("Week Days - refresh after save", "xpath", "//div[contains(@class, 'layout FormStyle row align-baseline')]", "no_jira");             
-                        if (FAIL) { return;} 
-                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Delivery Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
-                    if (FAIL) { return;}        
-                for (int j = 0; j < L1.size(); j++) { 
-                    _t++; T.Scroll_to_Day("Scroll to Day " + j, L1, j, "no_jira");             
-                        if (FAIL) { return;}                        
-                    _t++; T.Element_Text("Delivery Week Day Labels", L1.get(j), "no_jira");             
+                    _t++; Thread.sleep((long) sleep); T.Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true,"no_jira" );
+                        if (FAIL) { return;}                  
+                    _t++; Thread.sleep((long) sleep); T.Brand_API_Hours("Brand API - new Delivery Hours", "Delivery - day 0", New_From, New_To,true, "no_jira");
+                        if (FAIL) { return;} // ^^ Check Brand API > Pickup / Delivery / others?                         ^^ "Delivery - day X"
+
+                    // =================   Refresh Page after Save and Select Service Tab
+                    _t++; Thread.sleep((long) sleep); T.List_L0("Tabs Count - refresh after save", "xpath", "//div[contains(@class, 'v-tabs__div')]", "no_jira");             
+                            if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); T.List_L1("Week Days - refresh after save", "xpath", "//div[contains(@class, 'layout FormStyle row align-baseline')]", "no_jira");             
+                            if (FAIL) { return;} 
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Delivery Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
+                        if (FAIL) { return;}        
+                    for (int j = 0; j < L1.size(); j++) { 
+                        _t++; T.Scroll_to_Day("Scroll to Day " + j, L1, j, "no_jira");             
+                            if (FAIL) { return;}                        
+                        _t++; T.Element_Text("Delivery Week Day Labels", L1.get(j), "no_jira");             
+                            if (FAIL) { return;}
+                        _t++; T.Day_Snedule("Delivery Week Day Schedule", L1, j, "no_jira");             
+                            if (FAIL) { return;}
+                    }    
+                    _t++; Thread.sleep((long) sleep); T.To_Top("no_jira");             
                         if (FAIL) { return;}
-                    _t++; T.Day_Snedule("Delivery Week Day Schedule", L1, j, "no_jira");             
-                        if (FAIL) { return;}
-                }    
-                _t++; Thread.sleep((long) sleep); T.To_Top("no_jira");             
-                    if (FAIL) { return;}
-                Thread.sleep(1000);
+                    Thread.sleep(1000);
+                }   
             } else if (Tab_Name.toLowerCase().contains("closure")) {
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Brand Closure'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
                     if (FAIL) { return;}

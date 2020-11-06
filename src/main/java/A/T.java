@@ -1876,7 +1876,8 @@ public class T {
         String STAT = "Status: ?";
         try {
             List<WebElement> X = L.get(I).findElements(By.tagName("td"));
-            for (int k = 0; k < X.size(); k++) {
+            int TDS = X.size();
+            for (int k = 0; k < TDS; k++) {
                 dt = X.get(k).getAttribute("textContent");
                 if(dt != null){
                     dt = dt.replace("\r\n", " ").replace("\n", " ");
@@ -1890,20 +1891,22 @@ public class T {
                 t = t.substring(0, t.length() - 3); //   =========================   DEBUG
             } 
 
-                if(NAME.startsWith("Station") && !t.toLowerCase().contains("no data")){
-                    //   check status 
-                    STAT = X.get(X.size() - 1).findElement(By.xpath(".//i[contains(@class, 'icon mdi mdi-eye')]")).getAttribute("class").trim();
-                    if(STAT != "" && STAT.contains("mdi-eye-off")){
-                        STAT = "Hidden in App";         //   v-icon mdi mdi-eye-off theme--light none--text
-                    } else {
-                        STAT = "Display in App";        //   v-icon mdi mdi-eye theme--light
-                    }
-                    t = t + STAT;
+            if(NAME.startsWith("Station") && !t.toLowerCase().contains("no data") && TDS == 5 ){ // <<< td[5] - Status
+                //   check status 
+                STAT = X.get(X.size() - 1).findElement(By.xpath(".//i[contains(@class, 'icon mdi mdi-eye')]")).getAttribute("class").trim();
+                if(STAT != "" && STAT.contains("mdi-eye-off")){
+                    STAT = "Hidden in App";         //   v-icon mdi mdi-eye-off theme--light none--text
+                } else {
+                    STAT = "Display in App";        //   v-icon mdi mdi-eye theme--light
                 }
-                if(NAME.startsWith("Modifier Group") && !t.toLowerCase().contains("no data")){ //   check status 
-                    STAT = X.get(X.size() - 1).findElement(By.xpath("//input[@role='checkbox']")).getAttribute("aria-checked").trim();
-                    t = t + STAT;
-                }   
+                t = t + STAT;
+            }
+            
+            if(NAME.startsWith("Modifier Group") && !t.toLowerCase().contains("no data")){ //   check status 
+                STAT = X.get(X.size() - 1).findElement(By.xpath("//input[@role='checkbox']")).getAttribute("aria-checked").trim();
+                t = t + STAT;
+            }   
+                
             EX += _t + "\t" + NAME + "\t" + "Index " + I + ": td(s) >>" + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             _p++; 
