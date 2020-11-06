@@ -830,7 +830,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEXCELMouseClicked
 
     private void cmbENVItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbENVItemStateChanged
-        if(!Load&& evt.getStateChange() == 1) {
+        if(!Load && evt.getStateChange() == 1) {
             LOAD_ENV();
         }
     }//GEN-LAST:event_cmbENVItemStateChanged
@@ -844,7 +844,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbAPPItemStateChanged
 
     private void cmbGROUPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbGROUPItemStateChanged
-        if(!Load&& evt.getStateChange() == 1) {
+        if(!Load && evt.getStateChange() == 1) {
             GetCompany_API();
         }        
     }//GEN-LAST:event_cmbGROUPItemStateChanged

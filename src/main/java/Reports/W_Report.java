@@ -343,7 +343,9 @@ public class W_Report extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnREFMouseClicked
 
     private void cmbFItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbFItemStateChanged
-        LoadDB();
+        if(evt.getStateChange() == 1) {
+            LoadDB();
+        }
     }//GEN-LAST:event_cmbFItemStateChanged
     private void SUM() {
         if (DV1.getRowCount() < 1) return;
@@ -457,7 +459,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         }
         Runtime.getRuntime().gc();
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_btnEXCELMouseClicked
+    }                                     
 
     private void LoadF() {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));

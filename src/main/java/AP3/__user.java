@@ -36,7 +36,7 @@ public class __user {
         String TOT_USER = "0";
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
             if (FAIL) { return;}     
-            TOT_USER = t.substring(t.lastIndexOf(" ")+ 1).trim();
+            TOT_USER = t.substring(t.lastIndexOf(" ") + 1).trim().replace(",", "");
         _t++; Thread.sleep((long) sleep); T.List_L0("Users Data Rows Count", "tagName", "tr", "no_jira");             
             if (FAIL) { return;}
             for (int i = 0; i < L0.size(); i++) {
@@ -271,9 +271,9 @@ public class __user {
         if (FAIL) { return;}
         if(!"".equals(t)){
             _t++; Thread.sleep((long) sleep); T.File_Read("Read File - User Count", System.getProperty("user.home") + File.separator + "Downloads", "site-operators.csv", "User_Count", TOT_USER, "no_jira");
-            if (FAIL) { return;}
+            //if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.File_Delete("Delete User List File", System.getProperty("user.home") + File.separator + "Downloads", "site-operators.csv", "no_jira");
-            if (FAIL) { return;}
+            //if (FAIL) { return;}
         }
         //</editor-fold>
         
