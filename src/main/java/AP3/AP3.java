@@ -480,6 +480,11 @@ public class AP3 extends javax.swing.JInternalFrame {
         DV2.setOpaque(false);
         DV2.setRowHeight(18);
         DV2.getTableHeader().setReorderingAllowed(false);
+        DV2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DV2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(DV2);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 22, 420, 100));
@@ -950,6 +955,10 @@ public class AP3 extends javax.swing.JInternalFrame {
         if(!BW1.isCancelled()) BW1.cancel(true);
         if(!BW2.isCancelled()) BW2.cancel(true);
     }//GEN-LAST:event_formInternalFrameClosed
+
+    private void DV2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV2MouseClicked
+        BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
+    }//GEN-LAST:event_DV2MouseClicked
 
     private void LOAD_ENV(){
         if(cmbENV.getSelectedItem().toString().contains("Staging")){

@@ -405,7 +405,6 @@ public class __brand {
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Sunday'  - activate 'Save'", "xpath", "//p[text()='Sunday']", "no_jira"); 
                         if (FAIL) { return;}    //  Save not visible after time enter/not selection    - DEBUG                                                                                       
 
-
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
@@ -413,7 +412,7 @@ public class __brand {
                     _t++; Thread.sleep((long) sleep); T.Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true,"no_jira" );
                         if (FAIL) { return;}                
                     _t++; Thread.sleep((long) sleep); T.Brand_API_Hours("Brand API - new Service Hours", "Pickup - day 0", New_From, New_To,true, "no_jira");
-                        if (FAIL) { return;} // ^^ Check Brand API > Pickup / Delivery / others?                         ^^ "Delivery - day X"
+                        if (FAIL) { return;} // ^^ Check Brand API > Pickup / Delivery / others?                 ^^ "Delivery - day X"
                     // Click Sunday Opens >
                     // Enter Text 11:45 AM
                     // Click Sunday Closes >

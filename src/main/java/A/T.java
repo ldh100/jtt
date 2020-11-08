@@ -2276,9 +2276,11 @@ public class T {
                 String _From = from_to.substring(0,5);
                 String _To = from_to.substring(6);
 
-                ZoneOffset _offset = OffsetDateTime.now( ZoneId.of(TZone)).getOffset();           
-                Duration z_From = Duration.parse("PT" + _From.replace(":", "H") +"M").plusSeconds(_offset.getTotalSeconds());
-                Duration z_To = Duration.parse("PT" + _To.replace(":", "H") +"M").plusSeconds(_offset.getTotalSeconds());
+                ZoneOffset _offset = OffsetDateTime.now( ZoneId.of(TZone)).getOffset();  
+                Duration z_From = Duration.parse("PT" + _From.replace(":", "H") + "M");
+                z_From = z_From.plusSeconds(_offset.getTotalSeconds());
+                Duration z_To = Duration.parse("PT" + _To.replace(":", "H") + "M");
+                z_To = z_To.plusSeconds(_offset.getTotalSeconds());
 
                 String Z_From = String.format("%02d:%02d", z_From.toHours(), z_From.minusHours(z_From.toHours()).toMinutes());
                 String Z_To = String.format("%02d:%02d", z_To.toHours(), z_To.minusHours(z_To.toHours()).toMinutes());
@@ -2289,11 +2291,11 @@ public class T {
 
                 if(CF.compareTo(DF) == 0 && CT.compareTo(DT) == 0){                
                     _p++; 
-                    EX += _t + "\t == " + NAME + "\t" + "AP3 change: " + From + "-" + To + "\t" + Z_From + "-" + Z_To + " TZone: " + TZone + " > UTC: " + _From + "-" + _To + " s:" + _start + ", e:" + _end + "\t" + "PASS" + "\t" + " - " +
+                    EX += _t + "\t == " + NAME + "\t" + "AP3 change: " + From + "-" + To + "\t" + Z_From + "-" + Z_To + " TZone: " + TZone + " > UTC: " + _From + "-" + _To + " start:" + _start + ", end:" + _end + "\t" + "PASS" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                     
                 } else{
                     _f++; 
-                    EX += _t + "\t == " + NAME + "\t" + "AP3 change: " + From + "-" + To + "\t" + Z_From + "-" + Z_To + " TZone: " + TZone + " > UTC: " + _From + "-" + _To + " s:" + _start + ", e:" + _end + "\t" + "FAIL" + "\t" + "Expected " + From + "-" + To +
+                    EX += _t + "\t == " + NAME + "\t" + "AP3 change: " + From + "-" + To + "\t" + Z_From + "-" + Z_To + " TZone: " + TZone + " > UTC: " + _From + "-" + _To + " start:" + _start + ", end:" + _end + "\t" + "FAIL" + "\t" + "Expected " + From + "-" + To +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                                    
                 }
             }else{
