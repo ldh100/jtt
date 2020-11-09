@@ -12,6 +12,7 @@ import com.ullink.slack.simpleslackapi.SlackMessageHandle;
 import com.ullink.slack.simpleslackapi.SlackSession;
 import com.ullink.slack.simpleslackapi.impl.SlackSessionFactory;
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -890,7 +891,10 @@ public class AP3 extends javax.swing.JInternalFrame {
                 System.out.println("File already exists.");
             }
             Files.write(Paths.get(aFailed.getPath()), F.getBytes());
-            java.awt.Desktop.getDesktop().open(aFailed);
+            Desktop.getDesktop().open(aFailed);
+            
+//            Desktop desktop = Desktop.getDesktop();
+//            desktop.browse(new URI("https://dev.adminpanel.compassdigital.org/#/login/"));
         } catch (IOException ex) {
             txtLOG.append("\r\n\r\n=== Show Failed > ERROR: " + ex.getMessage());
         }
@@ -1337,37 +1341,42 @@ public class AP3 extends javax.swing.JInternalFrame {
             String responseBody = httpclient.execute(httpget, responseHandler);
             JSONObject json = new JSONObject(responseBody);
             
-            String site = "";
-            String country = "null";
-            String id = "null";
+            String site;
+            String country;
+            String id;
+            JSONObject addresses;
+            JSONObject meta;
 
-            JSONObject addresses = null;
-            JSONObject meta = null;
             JSONArray Groups = json.getJSONArray("groups");
             for (int i = 0; i < Groups.length(); i++) {
+                site = "";
+                country = "null";
+                id = "null";
+                addresses = null;
+                meta = null;
+                platform = "DH";
                 JSONObject object = Groups.getJSONObject(i);
-                if(object.has("address")){
-                    addresses = object.getJSONObject("address");
-                }
-                if(object.has("meta")){
-                    meta = object.getJSONObject("meta");
-                }                
                 if(object.has("name")){
                     site = object.getString("name");   
-                }
-                if(addresses != null && addresses.has("country")){
-                    country = addresses.getString("country");   
-                }
+                } 
                 if(object.has("id")){
                     id = object.getString("id");
-                }
-                platform = "DH";
-                if (meta != null && meta.has("migrated") && meta.getBoolean("migrated"))
-                {
-                    platform = "CDL migrated";
-                }
+                } 
+                if(object.has("meta")){
+                    meta = object.getJSONObject("meta");
+                    if (meta.has("migrated") && meta.getBoolean("migrated")){
+                        platform = "CDL migrated";
+                    }
+                }              
                 if (id.length() > 50) {
                     platform = "CDL";
+                } 
+
+                if(object.has("address")){
+                    addresses = object.getJSONObject("address");
+                }  
+                if(addresses != null && addresses.has("country")){
+                    country = addresses.getString("country");   
                 }
                 SitesModel.addRow(new Object[]{site, platform, country, id});
             }
@@ -1443,15 +1452,16 @@ public class AP3 extends javax.swing.JInternalFrame {
             JSONArray brands = null;
             
             String brand;
-            String location = "";
+            String location;
             String id;
             if (Location != null) {
                 for (Object l : Location) {
+                    brand = "";
+                    location = "";
+                    id = "";
                     JSONObject loc = (JSONObject) l;
                     if (loc.has("brands")) {
                         brands = loc.getJSONArray("brands");
-                    }
-                    if (brands != null) {
                         for (Object b : brands) {
                             JSONObject br = (JSONObject) b;
                             brand = br.getString("name");
