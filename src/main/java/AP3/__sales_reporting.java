@@ -330,9 +330,9 @@ public class __sales_reporting {
                 _t++; T.Element_Attribute("Recipient (index " + i + ")", L0.get(i), "textContent", "no_jira");        
                 if (FAIL) { return;}      
             }            
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Find 'Add recipient' Text", "xpath", "//i[contains(@class, 'v-icon mdi mdi-plus theme--light')]", "textContent", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Find 'Add E-mail' Text", "xpath", "//i[contains(@class, 'v-icon mdi mdi-plus theme--light')]", "textContent", "no_jira"); 
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Add recipient'", "xpath", "//i[contains(@class, 'v-icon mdi mdi-plus theme--light')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Add E-Mail'", "xpath", "//i[contains(@class, 'v-icon mdi mdi-plus theme--light')]", "no_jira"); 
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'Add recipient' Title", "xpath", "//div[contains(@class, 'v-card__title H4-Secondary-Center')]", "no_jira"); 
             if (FAIL) { return;}
@@ -347,8 +347,6 @@ public class __sales_reporting {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Input_Select_Clear("Clear 'E-mail", "css", "[aria-label='E-mail']", "no_jira");
             if (FAIL) { return;}              
-//        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'E-mail' text", "xpath", "//label[contains(@class, 'v-label theme--light error--text')]", "no_jira"); 
-//            if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'Required' text", "xpath", "//div[contains(@class, 'v-messages__message')]", "no_jira"); 
             if (FAIL) { return;}
 
@@ -366,12 +364,11 @@ public class __sales_reporting {
         _t++; T.Clickable_Element_By_Path_Click("Add... 'Save' click", "xpath", "//*[contains(text(), 'save')]","no_jira");
             if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); T.List_L0("Recipients count", "xpath", "//div[contains(@class, 'layout pa-1 justify-space-between')]", "no_jira");             
-            //if (FAIL) { return;}
             int EMAILS_COUNT = L0.size();
             for (int i = 0; i < EMAILS_COUNT; i++) {
                 _t++; T.Element_Attribute("Recipient (index " + i + ")", L0.get(i), "textContent", "no_jira");        
                 if (FAIL) { return;}      
-            }            
+            }       
 
         _t++; T.Clickable_Element_By_Path_Click("Configuration 'Save' click", "xpath", "//*[contains(text(), 'Save')]","no_jira");
             if (FAIL) { return;}  // ========== Save All
@@ -401,7 +398,33 @@ public class __sales_reporting {
             EX += "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";            
         }
         // Sales Distribusion entries:
-         _t++; Thread.sleep((long) sleep); T.List_L0("Sales Distribution Items count", "xpath", "//div[contains(@class, 'layout align-content-center')]", "no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Sales Distribution' title", "Sales Distribution", true, "no_jira");   
+            if (FAIL) { return;}  
+        _t++; Thread.sleep((long) sleep); T.List_L0("Meal Periods count", "xpath", "//span[contains(@class, 'Subtitle-2-Black-High-Emphasis-Left')]", "no_jira");             
+            if (FAIL) { return;}  
+            for (int i = 0; i < L0.size(); i++) {
+                _t++; T.Element_Attribute("Meal Period (index " + i + ")", L0.get(i), "textContent", "no_jira");        
+                if (FAIL) { return;}      
+            } // ^^^^ Defined in Site Private config    >>>> 
+            //https://api.compassdigital.org/staging/config/E2KQEqpAwecJ7zD6aa7oCZLDEl9djMFDP  >>
+            //  "meal_periods": [
+            //    {
+            //      "label": "Breakfast",
+            //      "start": "00:00",
+            //      "end": "10:59"
+            //    },
+            //    {
+            //      "label": "Lunch",
+            //      "start": "11:00",
+            //      "end": "14:59"
+            //    },
+            //    {
+            //      "label": "Dinner",
+            //      "start": "15:00",
+            //      "end": "23:59"
+            //    }
+            //  ]            
+         _t++; Thread.sleep((long) sleep); T.List_L0("Sales Distribution Rows count", "xpath", "//div[contains(@class, 'layout align-content-center')]", "no_jira");             
             if (FAIL) { return;}  
             for (int i = 0; i < L0.size(); i++) {
                 _t++; T.Element_Attribute("Item (index " + i + ")", L0.get(i), "textContent", "no_jira");        

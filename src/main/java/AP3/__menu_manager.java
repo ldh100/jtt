@@ -1396,9 +1396,9 @@ public class __menu_manager {
             if (FAIL) { return;}               
         //Thread.sleep(1000);
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for 'Local Brands' page", "xpath", "//div[@class='layout hover align-baseline']", "no_jira"); 
-            if (FAIL) { return;}         
+            if (FAIL) { return;}      
+            
         EX += " - " + "\t" + " === MM Local Brands" + "\t" + " ===== " + "\t" + " == Local Brands End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-
         // </editor-fold>    
     }   
 }

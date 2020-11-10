@@ -214,9 +214,14 @@ public class __brand {
                     if(t.equals("Not Found")){
                         _t++; Thread.sleep((long) sleep); T.Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true,"no_jira" );
                         _t++; T.Brand_API_Is("Brand API Delivery Supported", "delivery_supported", true, "no_jira" );
-                        
-                        _t++; T.Find_Text("Find 'Timeslot Type' text", "Timeslot Type", true,"no_jira");
-                            if (FAIL) { return; }
+                        if("DH".equals(platform)){
+                            _t++; T.Find_Text("Find 'Timeslot Type' text", "Timeslot Type", true,"no_jira");
+                        }else{
+                            _t++;
+                            _p++;
+                            EX += _t + "\t" + " === " + platform + " Site: " + SITE + "\t" + "Brand: " + BRAND + "\t" + "No 'Delivery Timeslot Type' feature" + "\t" + "PASS" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";                            
+                        }
+                            
                         _t++;  T.Find_Text("Find 'Avg Prep Time' text", "Average Prep Time", true,"no_jira");
                             if (FAIL) { return; }
                         _t++; T.Find_Text("Find 'Cust per Slot' text", "Customers Per Slot", true,"no_jira");
