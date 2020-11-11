@@ -324,14 +324,17 @@ public class W_Report extends javax.swing.JInternalFrame {
                DV1.getValueAt(DV1.getSelectedRow(), 0) + "'");
             rs.next();
             String EXX = rs.getString(1);
-            File aLog = new File("aLog.txt");
+            if(!Func.SHOW_FILE(EXX, "txt")){
+                txtLOG.append("\r\n\r\n=== Cannot show 'txt' output");
+            }
+//            File aLog = new File("aLog.txt");
 //            if (aLog.createNewFile()) {
 //                txtLOG.append("\r\n\r\n=== Report > File created: " + aLog.getName());
 //            } else {
 //                txtLOG.append("\r\n\r\n=== Report > File already exists");
 //            }
-            Files.write(Paths.get(aLog.getPath()), EXX.getBytes());
-            java.awt.Desktop.getDesktop().open(aLog);        
+//            Files.write(Paths.get(aLog.getPath()), EXX.getBytes());
+//            java.awt.Desktop.getDesktop().open(aLog);        
         }catch (Exception ex){
             txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
         }

@@ -10,7 +10,6 @@
               <Border info="null"/>
             </Property>
             <Property name="text" type="java.lang.String" value="AP3"/>
-            <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="AP3" noResource="true"/>
             <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
           </Properties>
@@ -21,6 +20,7 @@
         <Menu class="javax.swing.JMenu" name="jMenu_FW">
           <Properties>
             <Property name="text" type="java.lang.String" value="FW"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="FW" noResource="true"/>
           </Properties>
           <Events>
@@ -30,6 +30,7 @@
         <Menu class="javax.swing.JMenu" name="jMenuWO">
           <Properties>
             <Property name="text" type="java.lang.String" value="WebOrdering"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="FW" noResource="true"/>
           </Properties>
           <Events>
@@ -39,11 +40,24 @@
         <Menu class="javax.swing.JMenu" name="jMenuORDERS">
           <Properties>
             <Property name="text" type="java.lang.String" value="Orders"/>
-            <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="FW" noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuORDERSMouseClicked"/>
+          </Events>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu_API">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="API(s)"/>
+            <Property name="name" type="java.lang.String" value="AP3" noResource="true"/>
+            <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu_APIMouseClicked"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuReports">
@@ -52,12 +66,10 @@
               <Border info="null"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Reports"/>
-            <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="FW" noResource="true"/>
             <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="jMenuReportsMenuSelected"/>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuReportsMouseClicked"/>
           </Events>
         </Menu>

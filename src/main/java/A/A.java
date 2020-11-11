@@ -5,6 +5,7 @@
  */
 package A;
 import AP3.AP3;
+import API.API;
 import FW.FW;
 import Reports.W_Report;
 import WO.WO;
@@ -58,6 +59,7 @@ public class A extends javax.swing.JFrame {
         jMenu_FW = new javax.swing.JMenu();
         jMenuWO = new javax.swing.JMenu();
         jMenuORDERS = new javax.swing.JMenu();
+        jMenu_API = new javax.swing.JMenu();
         jMenuReports = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -87,7 +89,6 @@ public class A extends javax.swing.JFrame {
 
         jMenu_AP3.setBorder(null);
         jMenu_AP3.setText("AP3");
-        jMenu_AP3.setContentAreaFilled(false);
         jMenu_AP3.setName("AP3"); // NOI18N
         jMenu_AP3.setVerifyInputWhenFocusTarget(false);
         jMenu_AP3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -98,6 +99,7 @@ public class A extends javax.swing.JFrame {
         jMenuBar1.add(jMenu_AP3);
 
         jMenu_FW.setText("FW");
+        jMenu_FW.setEnabled(false);
         jMenu_FW.setName("FW"); // NOI18N
         jMenu_FW.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -107,6 +109,7 @@ public class A extends javax.swing.JFrame {
         jMenuBar1.add(jMenu_FW);
 
         jMenuWO.setText("WebOrdering");
+        jMenuWO.setEnabled(false);
         jMenuWO.setName("FW"); // NOI18N
         jMenuWO.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -116,7 +119,7 @@ public class A extends javax.swing.JFrame {
         jMenuBar1.add(jMenuWO);
 
         jMenuORDERS.setText("Orders");
-        jMenuORDERS.setContentAreaFilled(false);
+        jMenuORDERS.setEnabled(false);
         jMenuORDERS.setName("FW"); // NOI18N
         jMenuORDERS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -125,20 +128,21 @@ public class A extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenuORDERS);
 
-        jMenuReports.setBorder(null);
-        jMenuReports.setText("Reports");
-        jMenuReports.setContentAreaFilled(false);
-        jMenuReports.setName("FW"); // NOI18N
-        jMenuReports.setVerifyInputWhenFocusTarget(false);
-        jMenuReports.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jMenuReportsMenuSelected(evt);
+        jMenu_API.setBorder(null);
+        jMenu_API.setText("API(s)");
+        jMenu_API.setName("AP3"); // NOI18N
+        jMenu_API.setVerifyInputWhenFocusTarget(false);
+        jMenu_API.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu_APIMouseClicked(evt);
             }
         });
+        jMenuBar1.add(jMenu_API);
+
+        jMenuReports.setBorder(null);
+        jMenuReports.setText("Reports");
+        jMenuReports.setName("FW"); // NOI18N
+        jMenuReports.setVerifyInputWhenFocusTarget(false);
         jMenuReports.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenuReportsMouseClicked(evt);
@@ -163,12 +167,12 @@ public class A extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenu_AP3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_AP3MouseClicked
-        Open_AP3();
+        if(jMenu_AP3.isEnabled()){
+            Open_AP3();
+        }
     }//GEN-LAST:event_jMenu_AP3MouseClicked
     private void Open_AP3(){
         AP3 ap3 = new AP3();
-        //ap3.hide();
-
         this.jDesktopPane1.add(ap3);
         int Y;
         int X;
@@ -185,11 +189,32 @@ public class A extends javax.swing.JFrame {
             Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         } 
         ap3.show();
-        //ap3.setEnabled(true);
         F_COUNT++;     
     }
+    private void Open_API(){
+        API api = new API();
+        this.jDesktopPane1.add(api);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        api.setLocation(X*20, Y*20);
+        try {
+            api.setSelected(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        api.show();
+        F_COUNT++;     
+    }    
     private void jMenu_FWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_FWMouseClicked
-        OpenFM();
+        if(jMenu_FW.isEnabled()){
+            OpenFM();
+        }
     }//GEN-LAST:event_jMenu_FWMouseClicked
     private void OpenFM() {                                      
         FW fw = new FW();
@@ -254,7 +279,9 @@ public class A extends javax.swing.JFrame {
         //OpenREPORT();
     }//GEN-LAST:event_jMenuORDERSMouseClicked
     private void jMenuWOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuWOMouseClicked
-        OpenWO();
+        if(jMenuWO.isEnabled()){
+            OpenWO();
+        }
     }//GEN-LAST:event_jMenuWOMouseClicked
     private void OpenWO() {                                   
         WO wo = new WO();
@@ -280,12 +307,16 @@ public class A extends javax.swing.JFrame {
         F_COUNT++;                      
     }
     private void jMenuReportsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuReportsMouseClicked
-        //OpenREPORT();   
+        if(jMenuReports.isEnabled()){
+            OpenREPORT();
+        }   
     }//GEN-LAST:event_jMenuReportsMouseClicked
 
-    private void jMenuReportsMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenuReportsMenuSelected
-        OpenREPORT();  
-    }//GEN-LAST:event_jMenuReportsMenuSelected
+    private void jMenu_APIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_APIMouseClicked
+        if(jMenu_API.isEnabled()){
+            Open_API();
+        }
+    }//GEN-LAST:event_jMenu_APIMouseClicked
     private void OpenREPORT() {                                    
         W_Report wr = new W_Report();
         this.jDesktopPane1.add(wr);
@@ -507,6 +538,7 @@ public class A extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuReports;
     private javax.swing.JMenu jMenuWO;
     private javax.swing.JMenu jMenu_AP3;
+    private javax.swing.JMenu jMenu_API;
     private javax.swing.JMenu jMenu_FW;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>   

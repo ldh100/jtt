@@ -413,8 +413,7 @@ public class __announcements {
                 _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Fr...' version text", "French Version", true, "no_jira"); 
                     if (FAIL) { return;}
                     
-                _t++; T.Element_Child_List_L1("Images Count", e1, "tagName", "img", "no_jira");             
-                    //if (FAIL) { return;} 
+                _t++; T.Element_Child_List_L1("Images Count", e1, "tagName", "img", "no_jira");              
                     for (int j = 0; j < L1.size(); j++) {        
                         _t++; T.Element_Attribute("Image " + j + " src", L1.get(j), "src", "no_jira");             
                         if (FAIL) { return;}  
@@ -440,10 +439,9 @@ public class __announcements {
          _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", "no_jira"); 
            if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Page_URL("Created Announcements page URL", "no_jira"); 
-            //if (FAIL) { return;} 
             String A_ID = "";
             if(t.contains("/")){
-                A_ID = t.substring(t.lastIndexOf("/")+1);
+                A_ID = t.substring(t.lastIndexOf("/") + 1);
                 _t++; Thread.sleep((long) sleep); T.Call_API("Call /announcemen/ API", BaseAPI + "/announcement/" + A_ID, true,"no_jira" );
                 _t++; T.API_Body_Contains("Announcemen API - find Site ID", SiteID,true, "no_jira");    
                 _t++; T.API_Body_Contains("Announcemen API - find App", app,true, "no_jira"); 

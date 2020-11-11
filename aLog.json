@@ -1,0 +1,8 @@
+========= User API:
+https://api.compassdigital.org/staging/user/auth?realm=
+{
+  "map": {
+    "code": 400.6,
+    "error": "Invalid realm: ec65915647e84bcd83f536ad29c694d2"
+  }
+}

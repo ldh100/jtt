@@ -7,13 +7,13 @@ package AP3;
 
 import A.Func;
 import static A.A.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.ullink.slack.simpleslackapi.SlackChannel;
 import com.ullink.slack.simpleslackapi.SlackMessageHandle;
 import com.ullink.slack.simpleslackapi.SlackSession;
 import com.ullink.slack.simpleslackapi.impl.SlackSessionFactory;
 import java.awt.Cursor;
-import java.awt.Desktop;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -96,13 +96,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         cmbGROUP = new javax.swing.JComboBox<>();
         lblSITES12 = new javax.swing.JLabel();
         cmbMENU = new javax.swing.JComboBox<>();
-        jPanel5 = new javax.swing.JPanel();
-        btnAPP = new javax.swing.JButton();
-        btnSITE = new javax.swing.JButton();
-        btnUNIT = new javax.swing.JButton();
-        btnMENU = new javax.swing.JButton();
-        btnBRAND = new javax.swing.JButton();
-        btnCAL = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         DV1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -118,12 +111,12 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLOG = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         cmbBROW = new javax.swing.JComboBox<>();
-        btnRUN = new javax.swing.JButton();
-        btnLOG = new javax.swing.JButton();
-        btnFAILS = new javax.swing.JButton();
-        btnEXCEL = new javax.swing.JButton();
+        btnRun = new javax.swing.JButton();
+        btnLog = new javax.swing.JButton();
+        btnFails = new javax.swing.JButton();
+        btnExel = new javax.swing.JButton();
         _headless = new javax.swing.JCheckBox();
-        btnSAVE_OPT = new javax.swing.JButton();
+        btnSave_Opt = new javax.swing.JButton();
         lblSITES11 = new javax.swing.JLabel();
         lblSITES13 = new javax.swing.JLabel();
         lblSITES14 = new javax.swing.JLabel();
@@ -146,7 +139,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("AP3 Automation Manager");
-        setDoubleBuffered(true);
         setMinimumSize(new java.awt.Dimension(860, 532));
         setName("AP3"); // NOI18N
         setPreferredSize(new java.awt.Dimension(860, 532));
@@ -328,46 +320,44 @@ public class AP3 extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_brand, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_resent_updates, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_sales_reporting, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_sales_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(4, 4, 4)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(_menu_manager, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_promo)
-                            .addComponent(_group_management, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(_users, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(_site_new, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(_brand_new, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(_roles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cmbGROUP, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(158, 158, 158)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(cmbGROUP, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_brand, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_resent_updates, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_sales_reporting, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_sales_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(_menu_manager, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_promo)
+                    .addComponent(_group_management, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(_users, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_site_new, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_brand_new, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_roles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -415,7 +405,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                         .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -426,80 +416,7 @@ public class AP3 extends javax.swing.JInternalFrame {
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {_announcements, _brand, _group_management, _login, _orders, _promo, _resent_updates, _sales_reporting, _site});
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 172, 424, 212));
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Configurations/API (s):", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11))); // NOI18N
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnAPP.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnAPP.setText("App");
-        btnAPP.setEnabled(false);
-        btnAPP.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        btnAPP.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAPPMouseClicked(evt);
-            }
-        });
-        jPanel5.add(btnAPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 20, 40, 22));
-
-        btnSITE.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnSITE.setText("Site");
-        btnSITE.setEnabled(false);
-        btnSITE.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        btnSITE.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSITEMouseClicked(evt);
-            }
-        });
-        jPanel5.add(btnSITE, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 20, 36, 22));
-
-        btnUNIT.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnUNIT.setText("Unit");
-        btnUNIT.setActionCommand("Unit");
-        btnUNIT.setEnabled(false);
-        btnUNIT.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        btnUNIT.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnUNITMouseClicked(evt);
-            }
-        });
-        jPanel5.add(btnUNIT, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 20, 36, 22));
-
-        btnMENU.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnMENU.setText("Menu");
-        btnMENU.setEnabled(false);
-        btnMENU.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        btnMENU.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMENUMouseClicked(evt);
-            }
-        });
-        jPanel5.add(btnMENU, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 20, 44, 22));
-
-        btnBRAND.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnBRAND.setText("Brand");
-        btnBRAND.setEnabled(false);
-        btnBRAND.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        btnBRAND.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBRANDMouseClicked(evt);
-            }
-        });
-        jPanel5.add(btnBRAND, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 20, 48, 22));
-
-        btnCAL.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnCAL.setText("Calendar");
-        btnCAL.setEnabled(false);
-        btnCAL.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        btnCAL.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCALMouseClicked(evt);
-            }
-        });
-        jPanel5.add(btnCAL, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 76, 22));
-
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 384, 424, 48));
-        jPanel5.getAccessibleContext().setAccessibleName("API(s):");
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 188, 424, 232));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -537,8 +454,7 @@ public class AP3 extends javax.swing.JInternalFrame {
 
             }
         ));
-        DV2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        DV2.setColumnSelectionAllowed(true);
+        DV2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV2.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV2.setName("DV2"); // NOI18N
         DV2.setOpaque(false);
@@ -551,7 +467,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 22, 420, 104));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 22, 420, 116));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
 
@@ -615,7 +531,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 .addGap(2, 2, 2))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 128, 424, -1));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 140, 424, -1));
 
         txtLOG.setEditable(false);
         txtLOG.setColumns(20);
@@ -627,7 +543,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLOG.setPreferredSize(null);
         jScrollPane1.setViewportView(txtLOG);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 354, 428, 152));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 354, 428, 148));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -639,84 +555,86 @@ public class AP3 extends javax.swing.JInternalFrame {
                 cmbBROWActionPerformed(evt);
             }
         });
-        jPanel3.add(cmbBROW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 28, 78, 20));
+        jPanel3.add(cmbBROW, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 28, 78, 20));
 
-        btnRUN.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        btnRUN.setForeground(new java.awt.Color(204, 0, 0));
-        btnRUN.setText("Run");
-        btnRUN.setName("btnRUN"); // NOI18N
-        btnRUN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRUNActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnRUN, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 52, 78, 22));
-
-        btnLOG.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnLOG.setText(" < Log");
-        btnLOG.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        btnLOG.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLOGActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnLOG, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 52, 84, 22));
-
-        btnFAILS.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnFAILS.setText("Show Fails");
-        btnFAILS.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        btnFAILS.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnRun.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        btnRun.setForeground(new java.awt.Color(204, 0, 0));
+        btnRun.setText("Run");
+        btnRun.setName("btnRun"); // NOI18N
+        btnRun.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnFAILSMouseClicked(evt);
+                btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnFAILS, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 28, 84, 22));
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 52, 78, 22));
 
-        btnEXCEL.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnEXCEL.setText("Excel Rep");
-        btnEXCEL.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        btnEXCEL.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnLog.setText(" < Log");
+        btnLog.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        btnLog.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEXCELMouseClicked(evt);
+                btnLogMouseClicked(evt);
             }
         });
-        jPanel3.add(btnEXCEL, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 4, 84, 22));
+        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 52, 84, 22));
+
+        btnFails.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnFails.setText("Show Fails");
+        btnFails.setEnabled(false);
+        btnFails.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        btnFails.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFailsMouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnFails, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 28, 84, 22));
+
+        btnExel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnExel.setText("Excel Rep");
+        btnExel.setEnabled(false);
+        btnExel.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        btnExel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExelMouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnExel, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 84, 22));
 
         _headless.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         _headless.setText("Headless <");
         _headless.setToolTipText("");
         _headless.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _headless.setRequestFocusEnabled(false);
-        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 56, 80, 14));
+        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 56, 80, 14));
 
-        btnSAVE_OPT.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnSAVE_OPT.setText("Save Run Options");
-        btnSAVE_OPT.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        btnSAVE_OPT.setName("btnSAVE"); // NOI18N
-        btnSAVE_OPT.addActionListener(new java.awt.event.ActionListener() {
+        btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnSave_Opt.setText("Save Run Options");
+        btnSave_Opt.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        btnSave_Opt.setName("btnSAVE"); // NOI18N
+        btnSave_Opt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSAVE_OPTActionPerformed(evt);
+                btnSave_OptActionPerformed(evt);
             }
         });
-        jPanel3.add(btnSAVE_OPT, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 52, 108, 22));
+        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 52, 108, 22));
 
         lblSITES11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES11.setText("Browser:");
         lblSITES11.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES11, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 12, 72, 16));
+        jPanel3.add(lblSITES11, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 12, 72, 16));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES13.setText("Environment:");
         lblSITES13.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 12, 92, 16));
+        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 12, 92, 16));
 
         lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES14.setText("Application:");
         lblSITES14.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 12, 92, 16));
+        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 12, 92, 16));
 
         cmbENV.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbENV.addItemListener(new java.awt.event.ItemListener() {
@@ -724,7 +642,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 cmbENVItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbENV, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 28, 116, 20));
+        jPanel3.add(cmbENV, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 28, 116, 20));
 
         cmbAPP.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbAPP.addItemListener(new java.awt.event.ItemListener() {
@@ -732,9 +650,9 @@ public class AP3 extends javax.swing.JInternalFrame {
                 cmbAPPItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbAPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 28, 108, 20));
+        jPanel3.add(cmbAPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 28, 108, 20));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 428, 424, 76));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 424, 416, 76));
 
         txtADMIN_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtADMIN_ID.setText("oleg.spozito@compassdigital.io");
@@ -766,7 +684,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         lblSITES1.setText("Runner:");
         lblSITES1.setToolTipText("");
         lblSITES1.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 332, 72, -1));
+        getContentPane().add(lblSITES1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 332, 72, 16));
 
         lblSITES2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -806,12 +724,135 @@ public class AP3 extends javax.swing.JInternalFrame {
         GetBrands_API();
     }//GEN-LAST:event_DV1MouseClicked
 
-    private void btnSAVE_OPTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSAVE_OPTActionPerformed
+    private void btnSave_OptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave_OptActionPerformed
         SAVE_CONFIG();
-    }//GEN-LAST:event_btnSAVE_OPTActionPerformed
+    }//GEN-LAST:event_btnSave_OptActionPerformed
 
-    private void btnRUNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRUNActionPerformed
-        btnRUN.setEnabled(false);
+    private void Report(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        String EXX = "";
+        try {
+            ResultSet rs = conn.createStatement().executeQuery("SELECT TOP 1 [Excel] FROM [dbo].[aw_result] WHERE [app] = 'AP3_" + env + "' ORDER By qID DESC");
+            rs.next();
+            EXX = rs.getString(1);
+        }catch (SQLException ex){
+            txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
+        }
+        if ("".equals(EXX.trim()) || "None".equals(EXX.trim())){
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            txtLOG.append("\r\n\r\n=== Report > Not Excel");
+            return;
+        }   
+        try {
+            int col = 9; // 8 + 1 new JIRA = 9
+            String Top_Row = EXX.substring(0, EXX.indexOf("\r\n"));
+            EXX = EXX.substring(EXX.indexOf("\r\n") + 2);
+        
+            String[] lines = EXX.split(System.getProperty("line.separator"));
+            int l = lines.length;
+            String[][] Values = new String[l][col];
+            int n = 1;
+            for (int i = 0; i < l; i++)
+            {
+                String[] v = lines[i].split("\t");
+                System.arraycopy(v, 0, Values[i], 0, v.length); 
+//                for (int j = 0; j < v.length; j++){
+//                    Values[i][j] = v[j];
+//                } 
+            }
+
+            String Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+            Func.fExcel((l - 1), col, Values, "AP3_" + env + "_" + Date, Top_Row, 0, 0, null, " ", " ");
+        } catch (Exception ex) {
+            txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
+        }
+        Runtime.getRuntime().gc();
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+
+    private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
+        if(!Func.SHOW_FILE(F, "txt")){
+            txtLOG.append("\r\n\r\n=== Cannot show 'txt' output");
+        }
+    }//GEN-LAST:event_btnFailsMouseClicked
+
+    private void AP3_AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_AP3_AncestorAdded
+        Load = true;
+        cmbAPP.addItem("Boost");
+        cmbAPP.addItem("Canteen");
+        cmbAPP.addItem("JJKitchen");
+        cmbAPP.addItem("Rogers");
+        cmbAPP.addItem("StandardCognition");
+        cmbAPP.addItem("Tacit");
+        cmbAPP.addItem("Thrive");
+        
+        cmbENV.addItem("Staging");
+        cmbENV.addItem("Production");
+        cmbENV.addItem("Development");
+     
+        
+        cmbENV.setSelectedIndex(0);
+        cmbAPP.setSelectedIndex(0);
+        
+        Load = false;
+        LOAD_ENV();
+        LOAD_DATA();
+    }//GEN-LAST:event_AP3_AncestorAdded
+
+    private void btnExelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExelMouseClicked
+//        try {
+//            Send_File_to_Slack("1", "2", "3");
+//        } catch (IOException ex) {
+//            txtLOG.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
+//        }
+        btnExel.setEnabled(false);
+        Report();
+        btnExel.setEnabled(true);        
+    }//GEN-LAST:event_btnExelMouseClicked
+
+    private void cmbENVItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbENVItemStateChanged
+        if(!Load && evt.getStateChange() == 1) {
+            LOAD_ENV();
+        }
+    }//GEN-LAST:event_cmbENVItemStateChanged
+
+    private void cmbAPPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAPPItemStateChanged
+        if(!Load && evt.getStateChange() == 1) {
+            int X = evt.getStateChange();
+            app = cmbAPP.getSelectedItem().toString();
+            GetSites_API();
+        }
+    }//GEN-LAST:event_cmbAPPItemStateChanged
+
+    private void cmbGROUPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbGROUPItemStateChanged
+        if(!Load && evt.getStateChange() == 1) {
+            GetCompany_API();
+        }        
+    }//GEN-LAST:event_cmbGROUPItemStateChanged
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        F_COUNT--;
+        if(!BW1.isCancelled()) BW1.cancel(true);
+        if(!BW2.isCancelled()) BW2.cancel(true);
+    }//GEN-LAST:event_formInternalFrameClosed
+
+    private void DV2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV2MouseClicked
+        BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
+    }//GEN-LAST:event_DV2MouseClicked
+
+    private void cmbBROWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBROWActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbBROWActionPerformed
+
+    private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
+        if(!Func.SHOW_FILE(txtLOG.getText(), "txt")){
+            txtLOG.append("\r\n\r\n=== Cannot show 'txt' output");
+        }
+    }//GEN-LAST:event_btnLogMouseClicked
+    private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
+        btnRun.setEnabled(false);
+        btnFails.setEnabled(false);
+        btnExel.setEnabled(false);
         //txtLOG.setText("");
         txtLOG.append("=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
         Wait = (double)nWaitElement.getValue();
@@ -870,234 +911,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 // parameters?  
             );
         }
-    }//GEN-LAST:event_btnRUNActionPerformed
-
-    private void btnLOGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLOGActionPerformed
-        //        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        //        StringSelection stringSelection = new StringSelection(txtLOG.getText());
-        //        clipboard.setContents(stringSelection, null);
-        try {
-            File aLog = new File("aLog.txt");
-            if (aLog.createNewFile()) {
-                System.out.println("File created: " + aLog.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
-            Files.write(Paths.get(aLog.getPath()), txtLOG.getText().getBytes());
-            java.awt.Desktop.getDesktop().open(aLog);
-        }
-        catch (IOException ex) {
-            txtLOG.append("\r\n\r\n=== Show Log > ERROR: " + ex.getMessage());
-        }
-    }//GEN-LAST:event_btnLOGActionPerformed
-
-    private void Report(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        String EXX = "";
-        try {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT TOP 1 [Excel] FROM [dbo].[aw_result] WHERE [app] = 'AP3_" + env + "' ORDER By qID DESC");
-            rs.next();
-            EXX = rs.getString(1);
-        }catch (Exception ex){
-            txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
-        }
-        if ("".equals(EXX.trim()) || "None".equals(EXX.trim())){
-            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            txtLOG.append("\r\n\r\n=== Report > Not Excel");
-            return;
-        }   
-        try {
-            int col = 9; // 8 + 1 new JIRA = 9
-            String Top_Row = EXX.substring(0, EXX.indexOf("\r\n"));
-            EXX = EXX.substring(EXX.indexOf("\r\n") + 2);
-        
-            String[] lines = EXX.split(System.getProperty("line.separator"));
-            int l = lines.length;
-            String[][] Values = new String[l][col];
-            int n = 1;
-            for (int i = 0; i < l; i++)
-            {
-                String[] v = lines[i].split("\t");
-                System.arraycopy(v, 0, Values[i], 0, v.length); 
-//                for (int j = 0; j < v.length; j++){
-//                    Values[i][j] = v[j];
-//                } 
-            }
-
-            String Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
-            Func.fExcel((l - 1), col, Values, "AP3_" + env + "_" + Date, Top_Row, 0, 0, null, " ", " ");
-
-
-//                Toolkit toolkit = Toolkit.getDefaultToolkit();
-//                Clipboard clipboard = null;
-//                try{
-//                    clipboard = toolkit.getSystemClipboard();
-//                    clipboard.setContents( new StringSelection(""), null); // 900009
-//                }catch (Exception ex){
-//                    Thread.sleep(20);
-//                    clipboard = toolkit.getSystemClipboard();
-//                    clipboard.setContents( new StringSelection(""), null);
-//                    //clipboard.setContents( DV1["app", DV1.SelectedCells[0].RowIndex].Value.ToString() + "_" + Date);  
-//                }
-
-//            File ExcelLog = new File("ExcelLog.txt");
-//            if (ExcelLog.createNewFile()) {
-//                txtLOG.append("\r\n\r\n=== Report > File created: " + ExcelLog.getName());
-//            } else {
-//                txtLOG.append("\r\n\r\n=== Report > File already exists.");
-//            }
-//            Files.write(Paths.get(ExcelLog.getPath()), EXX.getBytes());
-//            java.awt.Desktop.getDesktop().open(ExcelLog);
-        } catch (Exception ex) {
-            txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
-        }
-        Runtime.getRuntime().gc();
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }
-
-    private void btnFAILSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFAILSMouseClicked
-        try {
-            File aFailed = new File("aFailed.txt");
-            if (aFailed.createNewFile()) {
-                System.out.println("File created: " + aFailed.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
-            Files.write(Paths.get(aFailed.getPath()), F.getBytes());
-            Desktop.getDesktop().open(aFailed);
-            
-//            Desktop desktop = Desktop.getDesktop();
-//            desktop.browse(new URI("https://dev.adminpanel.compassdigital.org/#/login/"));
-        } catch (IOException ex) {
-            txtLOG.append("\r\n\r\n=== Show Failed > ERROR: " + ex.getMessage());
-        }
-    }//GEN-LAST:event_btnFAILSMouseClicked
-
-    private void AP3_AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_AP3_AncestorAdded
-        Load = true;
-        cmbAPP.addItem("Boost");
-        cmbAPP.addItem("Canteen");
-        cmbAPP.addItem("JJKitchen");
-        cmbAPP.addItem("Rogers");
-        cmbAPP.addItem("StandardCognition");
-        cmbAPP.addItem("Tacit");
-        cmbAPP.addItem("Thrive");
-        
-        cmbENV.addItem("Staging");
-        cmbENV.addItem("Production");
-        cmbENV.addItem("Development");
-     
-        
-        cmbENV.setSelectedIndex(0);
-        cmbAPP.setSelectedIndex(0);
-        
-        Load = false;
-        LOAD_ENV();
-        LOAD_DATA();
-    }//GEN-LAST:event_AP3_AncestorAdded
-
-    private void btnEXCELMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEXCELMouseClicked
-//        try {
-//            Send_File_to_Slack("1", "2", "3");
-//        } catch (IOException ex) {
-//            txtLOG.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
-//        }
-        btnEXCEL.setEnabled(false);
-        Report();
-        btnEXCEL.setEnabled(true);        
-    }//GEN-LAST:event_btnEXCELMouseClicked
-
-    private void cmbENVItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbENVItemStateChanged
-        if(!Load && evt.getStateChange() == 1) {
-            LOAD_ENV();
-        }
-    }//GEN-LAST:event_cmbENVItemStateChanged
-
-    private void cmbAPPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAPPItemStateChanged
-        if(!Load && evt.getStateChange() == 1) {
-            int X = evt.getStateChange();
-            app = cmbAPP.getSelectedItem().toString();
-            GetSites_API();
-        }
-    }//GEN-LAST:event_cmbAPPItemStateChanged
-
-    private void cmbGROUPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbGROUPItemStateChanged
-        if(!Load && evt.getStateChange() == 1) {
-            GetCompany_API();
-        }        
-    }//GEN-LAST:event_cmbGROUPItemStateChanged
-
-    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        F_COUNT--;
-        if(!BW1.isCancelled()) BW1.cancel(true);
-        if(!BW2.isCancelled()) BW2.cancel(true);
-    }//GEN-LAST:event_formInternalFrameClosed
-
-    private void DV2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV2MouseClicked
-        BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
-    }//GEN-LAST:event_DV2MouseClicked
-
-    private void cmbBROWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBROWActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbBROWActionPerformed
-
-    private void btnAPPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAPPMouseClicked
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLOG.append("\r\n-Load Application/multigroup API...");
-        sw1.start();     
-        String responseBody = "";
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/multigroup/" + appId + "?extended=true&nocache=1"); 
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                }
-            };
-            responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
-
-        } catch (IOException | JSONException ex) {
-            txtLOG.append("\r\n- Exception: " + ex.getMessage());     
-        }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (Exception ex) {
-                txtLOG.append("\r\n- Exception: " + ex.getMessage());   
-            }
-        } 
-        txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
-        sw1.reset();
-
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_btnAPPMouseClicked
-
-    private void btnSITEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSITEMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSITEMouseClicked
-
-    private void btnUNITMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUNITMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUNITMouseClicked
-
-    private void btnMENUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMENUMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMENUMouseClicked
-
-    private void btnBRANDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBRANDMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBRANDMouseClicked
-
-    private void btnCALMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCALMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCALMouseClicked
+    }//GEN-LAST:event_btnRunMouseClicked
 
     private void LOAD_ENV(){
         if(cmbENV.getSelectedItem().toString().contains("Staging")){
@@ -1323,16 +1137,17 @@ public class AP3 extends javax.swing.JInternalFrame {
                 } catch(Exception ex){
                     txtLOG.append("\r\n\r\n=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage());
                 }  
-                btnRUN.setEnabled(true);
+                btnRun.setEnabled(true);
                 txtLOG.append("\r\n=== Duration: " + (DD.toHours()) + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
                 txtLOG.append("\r\n=== " + Summary); // Summary shown in EX top
                 txtLOG.append("\r\n=== Scope: " + SCOPE); // SCOPE shown in EX top
                 //this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));   
-                        if(F.trim() != ""){
-                            btnFAILS.setEnabled(true);
-                        } else{
-                            btnFAILS.setEnabled(false);
-                        }
+                if(!"".equals(F.trim())){
+                    btnFails.setEnabled(true);
+                } else{
+                    btnFails.setEnabled(false);
+                }
+                btnExel.setEnabled(true);
                 LOG_UPDATE(); // ========================================================
             } 
         }; 
@@ -1558,10 +1373,9 @@ public class AP3 extends javax.swing.JInternalFrame {
         d1LastRow = DV1.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n-Load Brands from API...");
-        //CDL_SITE = DV1.getValueAt(DV1.getSelectedRow(), 1).toString().equals("CDL");
         sw1.start();     
         
-        String[] BrandsColumnsName = {"Station","Location","Id"}; 
+        String[] BrandsColumnsName = {"Station","Location","Brand Id", "Unit ID"}; 
         DefaultTableModel BrandssModel = new DefaultTableModel();
         BrandssModel.setColumnIdentifiers(BrandsColumnsName);
         DV2.setModel(BrandssModel);
@@ -1589,38 +1403,41 @@ public class AP3 extends javax.swing.JInternalFrame {
             String brand;
             String location;
             String id;
+            String unit_id;
             if (Location != null) {
                 for (Object l : Location) {
                     brand = "";
                     location = "";
                     id = "";
+                    unit_id = "";
                     JSONObject loc = (JSONObject) l;
                     if (loc.has("brands")) {
                         brands = loc.getJSONArray("brands");
                         for (Object b : brands) {
                             JSONObject br = (JSONObject) b;
-                            brand = br.getString("name");
+                            brand = br.getString("name");                            
                             if (!br.isNull("location_description")) {
                                 location = br.getString("location_description");
                             }
                             id = br.getString("id");
-                            BrandssModel.addRow(new Object[]{brand, location, id});
+                            unit_id = loc.getString("id");
+                            BrandssModel.addRow(new Object[]{brand, location, id, unit_id});
                         }
                     }
                 }
             }
             DV2.setModel(BrandssModel);    
             DV2.setDefaultEditor(Object.class, null);
-            DV2.getColumnModel().getColumn(0).setPreferredWidth(150);
-            DV2.getColumnModel().getColumn(1).setPreferredWidth(70);
-            DV2.getColumnModel().getColumn(2).setPreferredWidth(50);
+            DV2.getColumnModel().getColumn(0).setPreferredWidth(140);
+            DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
+            DV2.getColumnModel().getColumn(2).setPreferredWidth(80);
         } catch (IOException | JSONException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }         
         finally {
             try {
                 httpclient.close();
-            } catch (Exception ex) {
+            } catch (IOException ex) {
                 txtLOG.append("\r\n- Exception: " + ex.getMessage());   
             }
         } 
@@ -1709,11 +1526,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         GetCompany_API();
     }
     private void GetCompany_API() {  
-        // https://api.compassdigital.org/staging/#/menu/sector/yy9mGPrGD0H64PQGWpmEHaN8lWMlr6cY5qYAD9YBTpMJq0w3rWcZklQgmDPycwYm9JMl4YI2W2dM/
-        // https://api.compassdigital.org/staging/menu/sector/yy9mGPrGD0H64PQGWpmEHaN8lWMlr6cY5qYAD9YBTpMJq0w3rWcZklQgmDPycwYm9JMl4YI2W2dM/
-        
-        // https://api.compassdigital.org/staging/location/sector/yy9mGPrGD0H64PQGWpmEHaN8lWMlr6cY5qYAD9YBTpMJq0w3rWcZklQgmDPycwYm9JMl4YI2W2dM/
-        // https://api.compassdigital.org/staging/location/sector/yy9mGPrGD0H64PQGWpmEHaN8lWMlr6cY5qYAD9YBTpMJq0w3rWcZklQgmDPycwYm9JMl4YI2W2dM?expanded=false
         int I = cmbGROUP.getSelectedIndex();
         if(I < 0){ // =========== DEBUG
             txtLOG.append("\r\n-Load Sector/Companies(Menus) ERROR: cmbGROUP.getSelectedIndex() < 0");
@@ -2099,17 +1911,11 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _site;
     private javax.swing.JCheckBox _site_new;
     private javax.swing.JCheckBox _users;
-    private javax.swing.JButton btnAPP;
-    private javax.swing.JButton btnBRAND;
-    private javax.swing.JButton btnCAL;
-    private javax.swing.JButton btnEXCEL;
-    private javax.swing.JButton btnFAILS;
-    private javax.swing.JButton btnLOG;
-    private javax.swing.JButton btnMENU;
-    private javax.swing.JButton btnRUN;
-    private javax.swing.JButton btnSAVE_OPT;
-    private javax.swing.JButton btnSITE;
-    private javax.swing.JButton btnUNIT;
+    private javax.swing.JButton btnExel;
+    private javax.swing.JButton btnFails;
+    private javax.swing.JButton btnLog;
+    private javax.swing.JButton btnRun;
+    private javax.swing.JButton btnSave_Opt;
     private javax.swing.JComboBox<String> cmbAPP;
     private javax.swing.JComboBox<String> cmbBROW;
     private javax.swing.JComboBox<String> cmbENV;
@@ -2118,7 +1924,6 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

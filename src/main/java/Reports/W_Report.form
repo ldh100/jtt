@@ -43,35 +43,22 @@
                   <Component id="jScrollPane2" pref="790" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                          <Component id="dtpDEL" min="-2" pref="113" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                          <Component id="btnDEL" min="-2" pref="113" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                          <Component id="btnDEL_OLD" min="-2" pref="113" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="dtpDEL" min="-2" pref="113" max="-2" attributes="0"/>
+                      <Component id="btnDEL" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
+                      <Component id="btnDEL_OLD" alignment="1" min="-2" pref="113" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lblSITES" min="-2" pref="74" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="btnLOG" min="-2" pref="56" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="btnREF" min="-2" pref="51" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="btnEXCEL" min="-2" pref="113" max="-2" attributes="0"/>
-                              <Component id="cmbF" min="-2" pref="113" max="-2" attributes="0"/>
-                          </Group>
+                  <Component id="lblSITES" alignment="1" min="-2" pref="74" max="-2" attributes="0"/>
+                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="btnLOG" min="-2" pref="56" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btnREF" min="-2" pref="51" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="btnEXCEL" min="-2" pref="113" max="-2" attributes="0"/>
+                      <Component id="cmbF" min="-2" pref="113" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="4" pref="4" max="-2" attributes="0"/>

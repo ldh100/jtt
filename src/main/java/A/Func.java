@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
@@ -31,6 +33,23 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 
 public class Func {
+    public static boolean SHOW_FILE(String BODY, String EXT){
+        try {
+            File aLog = new File("aLog." + EXT);
+//            if (aLog.createNewFile()) {
+//                System.out.println("File created: " + aLog.getName());
+//            } else {
+//                System.out.println("File already exists.");
+//            }
+            Files.write(Paths.get(aLog.getPath()), BODY.getBytes());
+            java.awt.Desktop.getDesktop().open(aLog);
+            return true;
+        }
+        catch (IOException ex) {
+            System.out.println("\r\n\r\n=== Show Log > ERROR: " + ex.getMessage());
+            return false;
+        }
+    }
     public static class ColorRenderer extends DefaultTableCellRenderer{
         private static final TableCellRenderer TCR = new DefaultTableCellRenderer();
         @Override
