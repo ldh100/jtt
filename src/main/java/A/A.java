@@ -129,7 +129,7 @@ public class A extends javax.swing.JFrame {
         jMenuBar1.add(jMenuORDERS);
 
         jMenu_API.setBorder(null);
-        jMenu_API.setText("API(s)");
+        jMenu_API.setText("APIs");
         jMenu_API.setName("AP3"); // NOI18N
         jMenu_API.setVerifyInputWhenFocusTarget(false);
         jMenu_API.addMouseListener(new java.awt.event.MouseAdapter() {

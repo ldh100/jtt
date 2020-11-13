@@ -11,8 +11,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.awt.Cursor;
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -54,13 +56,16 @@ public class API extends javax.swing.JInternalFrame {
         btnApp = new javax.swing.JButton();
         btnSite = new javax.swing.JButton();
         btnUnit = new javax.swing.JButton();
-        btnMenu = new javax.swing.JButton();
+        btnComp = new javax.swing.JButton();
         btnBrand = new javax.swing.JButton();
         btnGroup = new javax.swing.JButton();
         btnCal = new javax.swing.JButton();
-        btnLoc_Menus = new javax.swing.JButton();
+        btnOrders = new javax.swing.JButton();
         btnAn = new javax.swing.JButton();
-        btnUser = new javax.swing.JButton();
+        btnMenu = new javax.swing.JButton();
+        btnUpdates = new javax.swing.JButton();
+        btnPromo = new javax.swing.JButton();
+        btnLoc_Menus = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         DV1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -71,19 +76,26 @@ public class API extends javax.swing.JInternalFrame {
         btnLog = new javax.swing.JButton();
         lblSITES13 = new javax.swing.JLabel();
         lblSITES14 = new javax.swing.JLabel();
-        cmbENV = new javax.swing.JComboBox<>();
-        cmbAPP = new javax.swing.JComboBox<>();
+        cmbEnv = new javax.swing.JComboBox<>();
+        cmbApp = new javax.swing.JComboBox<>();
+        btnSave_Opt = new javax.swing.JButton();
         txtAPI = new javax.swing.JTextField();
-        txtMobile_PW = new javax.swing.JTextField();
-        lblSITES3 = new javax.swing.JLabel();
-        lblSITES6 = new javax.swing.JLabel();
-        cmbGROUP = new javax.swing.JComboBox<>();
+        cmbGroup = new javax.swing.JComboBox<>();
         lblSITES8 = new javax.swing.JLabel();
-        cmbMENU = new javax.swing.JComboBox<>();
+        cmbComp = new javax.swing.JComboBox<>();
         lblSITES12 = new javax.swing.JLabel();
-        txtMobile_ID = new javax.swing.JTextField();
         btnRun = new javax.swing.JButton();
         lblSITES7 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        btnUser = new javax.swing.JButton();
+        lblSITES3 = new javax.swing.JLabel();
+        txtMobile_ID = new javax.swing.JTextField();
+        lblSITES6 = new javax.swing.JLabel();
+        txtMobile_PW = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        lblSITES4 = new javax.swing.JLabel();
+        btnScard = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -141,7 +153,7 @@ public class API extends javax.swing.JInternalFrame {
                 btnAppMouseClicked(evt);
             }
         });
-        jPanel5.add(btnApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 20, 112, 22));
+        jPanel5.add(btnApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 20, 112, 20));
 
         btnSite.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSite.setText("Site");
@@ -151,7 +163,7 @@ public class API extends javax.swing.JInternalFrame {
                 btnSiteMouseClicked(evt);
             }
         });
-        jPanel5.add(btnSite, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 48, 112, 22));
+        jPanel5.add(btnSite, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 48, 112, 20));
 
         btnUnit.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnUnit.setText("Unit");
@@ -161,17 +173,17 @@ public class API extends javax.swing.JInternalFrame {
                 btnUnitMouseClicked(evt);
             }
         });
-        jPanel5.add(btnUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 76, 112, 22));
+        jPanel5.add(btnUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 76, 112, 20));
 
-        btnMenu.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnMenu.setText("Companies/Global Menus");
-        btnMenu.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        btnMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnComp.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnComp.setText("Sector > Companies");
+        btnComp.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnComp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMenuMouseClicked(evt);
+                btnCompMouseClicked(evt);
             }
         });
-        jPanel5.add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 148, 133, 22));
+        jPanel5.add(btnComp, new org.netbeans.lib.awtextra.AbsoluteConstraints(292, 100, 112, 20));
 
         btnBrand.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnBrand.setText("Brand");
@@ -181,7 +193,7 @@ public class API extends javax.swing.JInternalFrame {
                 btnBrandMouseClicked(evt);
             }
         });
-        jPanel5.add(btnBrand, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 104, 112, 22));
+        jPanel5.add(btnBrand, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 104, 112, 20));
 
         btnGroup.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnGroup.setText("Groups/Sectors");
@@ -191,7 +203,7 @@ public class API extends javax.swing.JInternalFrame {
                 btnGroupMouseClicked(evt);
             }
         });
-        jPanel5.add(btnGroup, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 148, 140, 22));
+        jPanel5.add(btnGroup, new org.netbeans.lib.awtextra.AbsoluteConstraints(292, 72, 112, 20));
 
         btnCal.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnCal.setText("Calendar");
@@ -201,17 +213,17 @@ public class API extends javax.swing.JInternalFrame {
                 btnCalMouseClicked(evt);
             }
         });
-        jPanel5.add(btnCal, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 104, 133, 22));
+        jPanel5.add(btnCal, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 132, 112, 20));
 
-        btnLoc_Menus.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnLoc_Menus.setText("Menus");
-        btnLoc_Menus.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        btnLoc_Menus.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnOrders.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnOrders.setText("Orders");
+        btnOrders.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnOrders.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLoc_MenusMouseClicked(evt);
+                btnOrdersMouseClicked(evt);
             }
         });
-        jPanel5.add(btnLoc_Menus, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 104, 140, 22));
+        jPanel5.add(btnOrders, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 104, 112, 20));
 
         btnAn.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnAn.setText("Announcements");
@@ -221,19 +233,50 @@ public class API extends javax.swing.JInternalFrame {
                 btnAnMouseClicked(evt);
             }
         });
-        jPanel5.add(btnAn, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 48, 140, 22));
+        jPanel5.add(btnAn, new org.netbeans.lib.awtextra.AbsoluteConstraints(292, 16, 112, 20));
 
-        btnUser.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnUser.setText("User");
-        btnUser.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        btnUser.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnMenu.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnMenu.setText("Company > Menus");
+        btnMenu.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnUserMouseClicked(evt);
+                btnMenuMouseClicked(evt);
             }
         });
-        jPanel5.add(btnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 136, 22));
+        jPanel5.add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(292, 128, 112, 20));
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 152, 424, 180));
+        btnUpdates.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnUpdates.setText("Resent Updates");
+        btnUpdates.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnUpdates.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUpdatesMouseClicked(evt);
+            }
+        });
+        jPanel5.add(btnUpdates, new org.netbeans.lib.awtextra.AbsoluteConstraints(292, 44, 112, 20));
+
+        btnPromo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnPromo.setText("Promos");
+        btnPromo.setEnabled(false);
+        btnPromo.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnPromo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPromoMouseClicked(evt);
+            }
+        });
+        jPanel5.add(btnPromo, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 132, 112, 20));
+
+        btnLoc_Menus.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnLoc_Menus.setText("Menus");
+        btnLoc_Menus.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnLoc_Menus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLoc_MenusMouseClicked(evt);
+            }
+        });
+        jPanel5.add(btnLoc_Menus, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 76, 112, 20));
+
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 124, 416, 160));
         jPanel5.getAccessibleContext().setAccessibleName("API(s):");
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -261,7 +304,7 @@ public class API extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 22, 428, 312));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 22, 428, 260));
 
         DV2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV2.setModel(new javax.swing.table.DefaultTableModel(
@@ -273,10 +316,12 @@ public class API extends javax.swing.JInternalFrame {
             }
         ));
         DV2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        DV2.setCellSelectionEnabled(true);
         DV2.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV2.setName("DV2"); // NOI18N
         DV2.setOpaque(false);
         DV2.setRowHeight(18);
+        DV2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         DV2.getTableHeader().setReorderingAllowed(false);
         DV2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -285,7 +330,7 @@ public class API extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 22, 420, 124));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 22, 416, 100));
 
         txtLOG.setEditable(false);
         txtLOG.setColumns(20);
@@ -297,7 +342,7 @@ public class API extends javax.swing.JInternalFrame {
         txtLOG.setPreferredSize(null);
         jScrollPane1.setViewportView(txtLOG);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 388, 428, 124));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 416, 428, 88));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -309,7 +354,7 @@ public class API extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
-        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 16, 52, 22));
+        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 20, 52, 20));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -321,63 +366,58 @@ public class API extends javax.swing.JInternalFrame {
         lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES14.setText("Application:");
         lblSITES14.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 4, 92, 16));
+        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 4, 92, 16));
 
-        cmbENV.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbENV.addItemListener(new java.awt.event.ItemListener() {
+        cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmbEnv.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbENVItemStateChanged(evt);
+                cmbEnvItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbENV, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 20, 116, 20));
+        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 20, 116, 20));
 
-        cmbAPP.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbAPP.addItemListener(new java.awt.event.ItemListener() {
+        cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmbApp.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbAPPItemStateChanged(evt);
+                cmbAppItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbAPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 20, 108, 20));
+        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 20, 108, 20));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 464, 416, 44));
+        btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnSave_Opt.setText("Save Setup");
+        btnSave_Opt.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        btnSave_Opt.setName("btnSAVE"); // NOI18N
+        btnSave_Opt.setPreferredSize(new java.awt.Dimension(70, 20));
+        btnSave_Opt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSave_OptMouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 20, 100, 20));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 460, 416, 44));
 
         txtAPI.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtAPI.setText("cdl.test.xtt@gmail.com");
-        getContentPane().add(txtAPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 360, 844, -1));
+        txtAPI.setText("https://api.compassdigital.org/");
+        getContentPane().add(txtAPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 396, 836, -1));
 
-        txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtMobile_PW.setText("AnnaL0g0");
-        getContentPane().add(txtMobile_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 436, 184, -1));
-
-        lblSITES3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        lblSITES3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES3.setText("Mobile User E-mail:");
-        lblSITES3.setToolTipText("");
-        lblSITES3.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES3, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 384, 120, -1));
-
-        lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES6.setText("Mobile User Password");
-        lblSITES6.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 420, -1, -1));
-
-        cmbGROUP.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        cmbGROUP.addItemListener(new java.awt.event.ItemListener() {
+        cmbGroup.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        cmbGroup.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbGROUPItemStateChanged(evt);
+                cmbGroupItemStateChanged(evt);
             }
         });
-        getContentPane().add(cmbGROUP, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 396, 188, 20));
+        getContentPane().add(cmbGroup, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 436, 188, 20));
 
         lblSITES8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES8.setText("Group/Sector:");
         lblSITES8.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES8, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 380, -1, -1));
+        getContentPane().add(lblSITES8, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 420, -1, -1));
 
-        cmbMENU.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        getContentPane().add(cmbMENU, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 436, 188, 20));
+        cmbComp.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        getContentPane().add(cmbComp, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 436, 188, 20));
 
         lblSITES12.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -385,25 +425,95 @@ public class API extends javax.swing.JInternalFrame {
         lblSITES12.setAlignmentX(0.5F);
         getContentPane().add(lblSITES12, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 420, -1, -1));
 
-        txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtMobile_ID.setText("cdl.test.xtt@gmail.com");
-        getContentPane().add(txtMobile_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 400, 184, -1));
-
         btnRun.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnRun.setText(" < Run Custom API");
+        btnRun.setText(" < Custom API");
         btnRun.setMargin(new java.awt.Insets(2, 4, 2, 4));
         btnRun.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRunMouseClicked(evt);
             }
         });
-        getContentPane().add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(716, 336, 132, 20));
+        getContentPane().add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 372, 112, 20));
 
         lblSITES7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES7.setForeground(new java.awt.Color(153, 0, 0));
         lblSITES7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES7.setText("Custom API URL:");
         lblSITES7.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 344, -1, -1));
+        getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 380, -1, -1));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnUser.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnUser.setText("Mobile/App User");
+        btnUser.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUserMouseClicked(evt);
+            }
+        });
+        jPanel1.add(btnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 20, 112, 20));
+
+        lblSITES3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES3.setText("User's Orders");
+        lblSITES3.setToolTipText("");
+        lblSITES3.setAlignmentX(0.5F);
+        jPanel1.add(lblSITES3, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 4, 120, -1));
+
+        txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMobile_ID.setText("cdl.test.xtt@gmail.com");
+        jPanel1.add(txtMobile_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 20, 184, -1));
+
+        lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES6.setText("Mobile User Password");
+        lblSITES6.setAlignmentX(0.5F);
+        jPanel1.add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 40, -1, -1));
+
+        txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMobile_PW.setText("AnnaL0g0");
+        jPanel1.add(txtMobile_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 56, 184, -1));
+
+        jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane4.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+
+        jList1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jList1);
+
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 20, 500, 56));
+
+        lblSITES4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES4.setText("Mobile User E-mail:");
+        lblSITES4.setToolTipText("");
+        lblSITES4.setAlignmentX(0.5F);
+        jPanel1.add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 120, -1));
+
+        btnScard.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnScard.setText("< Shopping Card");
+        btnScard.setEnabled(false);
+        btnScard.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnScard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnScardMouseClicked(evt);
+            }
+        });
+        jPanel1.add(btnScard, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 52, 112, 20));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 284, 848, 80));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -412,44 +522,135 @@ public class API extends javax.swing.JInternalFrame {
         GetBrands_API();
     }//GEN-LAST:event_DV1MouseClicked
 
-
     private void AP3_AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_AP3_AncestorAdded
         Load = true;
-        cmbAPP.addItem("Boost");
-        cmbAPP.addItem("Canteen");
-        cmbAPP.addItem("JJKitchen");
-        cmbAPP.addItem("Rogers");
-        cmbAPP.addItem("StandardCognition");
-        cmbAPP.addItem("Tacit");
-        cmbAPP.addItem("Thrive");
+        cmbApp.addItem("Boost");
+        cmbApp.addItem("Canteen");
+        cmbApp.addItem("JJKitchen");
+        cmbApp.addItem("Rogers");
+        cmbApp.addItem("StandardCognition");
+        cmbApp.addItem("Tacit");
+        cmbApp.addItem("Thrive");
         
-        cmbENV.addItem("Staging");
-        cmbENV.addItem("Production");
-        cmbENV.addItem("Development");
+        cmbEnv.addItem("Staging");
+        cmbEnv.addItem("Production");
+        cmbEnv.addItem("Development");
      
         
-        cmbENV.setSelectedIndex(0);
-        cmbAPP.setSelectedIndex(0);
+        cmbEnv.setSelectedIndex(0);
+        cmbApp.setSelectedIndex(0);
         
         Load = false;
         LOAD_ENV();
         LOAD_DATA();
     }//GEN-LAST:event_AP3_AncestorAdded
+    private void LOAD_CONFIG(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        try {
+            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'API' AND [env] = '" + env + "'";
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(SQL);
+            rs.next();
+            C = rs.getString(1);
+            if (C.contains(": ")) {
+                String c;
+                c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("GROUP:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GROUP = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("GL_MENU:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GL_MENU = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("CAN:")); c = c.substring(0, c.indexOf("\r\n")).trim(); CAN = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("txtEMail:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtPW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
 
-    private void cmbENVItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbENVItemStateChanged
+                CONFIG = true;
+                txtLOG.append("\r\n\r\n=== LOAD_CONFIG > OK");
+            } else {
+                CONFIG = false;
+                txtLOG.append("\r\n\r\n=== WEB / AP3, User: " + UserID + ", Env: " + env + " > No saved Configuration Found");
+            }
+        } catch (Exception ex) {
+            CONFIG = false;
+            txtLOG.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+    private void SAVE_CONFIG() {
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        String _S = "n/a";
+        String _B = "n/a";
+        try {
+            if(DV1.getRowCount() > 0){
+                _S = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
+            }
+            if(DV2.getRowCount() > 0){
+                _B = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
+            }
+            C = "";
+            C += "env: " + env + "\r\n";
+            C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
+            C += "url: " + url + "\r\n";
+            C += "GROUP: " + cmbGroup.getSelectedItem().toString() + "\r\n";
+            C += "GL_MENU: " + cmbComp.getSelectedItem().toString() + "\r\n";
+            C += "SITE: " + _S + "\r\n";
+            C += "BRAND: " + _B + "\r\n";
+            C += "CAN: " + CAN + "\r\n";
+            
+            C += "txtEMail: " + txtMobile_ID.getText() + "\r\n";
+            C += "txtPW: " + txtMobile_PW.getText()  + "\r\n";
+
+        } catch (Exception ex)  {
+            txtLOG.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
+            return;
+        }
+        
+        try {
+            SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'API' AND [env] = '" + env + "'";
+            Statement _del = conn.createStatement();
+            _del.execute(SQL);
+            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
+                       "([user_id]" +   // 1
+                       ",[env]" +       // 2
+                       ",[platform]" +  // 3
+                       ",[app]" +       // 4
+                       ",[_conf]" +     // 5
+                    ") VALUES (" +
+                       "?" +
+                       ",?" +
+                       ",?" +
+                       ",?" +
+                       ",?" +
+                      ")");
+            _insert.setString(1, UserID);
+            _insert.setString(2, env);
+            _insert.setString(3, "WEB");
+            _insert.setString(4, "API");
+            _insert.setString(5, C);           
+            int row = _insert.executeUpdate();
+            txtLOG.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
+            //txtLOG.append("\r\n\r\n=== " + C);
+        } catch (SQLException ex) {
+            txtLOG.append("\r\n\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+
+    private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
             LOAD_ENV();
         }
         txtAPI.setText(BaseAPI + "/");
-    }//GEN-LAST:event_cmbENVItemStateChanged
+    }//GEN-LAST:event_cmbEnvItemStateChanged
 
-    private void cmbAPPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAPPItemStateChanged
+    private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
             int X = evt.getStateChange();
-            app = cmbAPP.getSelectedItem().toString();
+            app = cmbApp.getSelectedItem().toString();
             GetSites_API();
         }
-    }//GEN-LAST:event_cmbAPPItemStateChanged
+    }//GEN-LAST:event_cmbAppItemStateChanged
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         F_COUNT--;
@@ -482,11 +683,11 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             J += BaseAPI + "/config/public/" + appId + "\r\n" + gson.toJson(json);
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             J += "- Exception: " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
-        txtLOG.append("\r\n== /config/public/ > " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== /config/public/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
         
         J += "\r\n=========  Private Configuration:" + "\r\n";
@@ -507,11 +708,11 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             J += BaseAPI + "/config/" + appId + "\r\n" + gson.toJson(json);
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             J += "- Exception: " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
-        txtLOG.append("\r\n== /config/ > " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== /config/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
         
         J += "\r\n========= Multigroup API" + "\r\n";
@@ -531,11 +732,11 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             J += BaseAPI + "/location/multigroup/" + appId + "\r\n" + gson.toJson(json);
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             J += "- Exception: " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");   
         }         
-        txtLOG.append("\r\n== /location/multigroup/ > " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== /location/multigroup/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
         
         try {
@@ -571,11 +772,11 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             J += BaseAPI + "/config/public/" + SiteID + "\r\n" + gson.toJson(json);
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             J += "- Exception: " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
-        txtLOG.append("\r\n== /config/public/ > " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== /config/public/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
         
         J += "\r\n=========  Private Configuration:" + "\r\n";
@@ -596,11 +797,11 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             J += BaseAPI + "/config/" + appId + "\r\n" + gson.toJson(json);
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             J += "- Exception: " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
-        txtLOG.append("\r\n== /config/ > " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== /config/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();        
 
         J += "========= Location/Group API" + "\r\n";
@@ -620,7 +821,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             J += BaseAPI + "/location/group/" + SiteID + "\r\n" + gson.toJson(json);
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -629,7 +830,7 @@ public class API extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
-        txtLOG.append("\r\n== /location/group/ > " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== /location/group/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -661,11 +862,11 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             J += BaseAPI + "/config/public/" + appId + "\r\n" + gson.toJson(json);
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             J += "- Exception: " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
-        txtLOG.append("\r\n== /config/public/ > " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== /config/public/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
         
         J += "\r\n=========  Private Configuration:" + "\r\n";
@@ -686,11 +887,11 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             J += BaseAPI + "/config/" + appId + "\r\n" + gson.toJson(json);
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             J += "- Exception: " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
-        txtLOG.append("\r\n== /config/ > " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== /config/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();        
 
         J += "========= Location API" + "\r\n";
@@ -710,7 +911,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             J += BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1" + "\r\n" + gson.toJson(json);
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -719,7 +920,7 @@ public class API extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
-        txtLOG.append("\r\n== /location/> " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== /location/> " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -728,8 +929,8 @@ public class API extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_btnUnitMouseClicked
-    private void btnMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMouseClicked
-        int I = cmbGROUP.getSelectedIndex();
+    private void btnCompMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCompMouseClicked
+        int I = cmbGroup.getSelectedIndex();
         if(I < 0){ // =========== DEBUG
             txtLOG.append("\r\n-Load Sector/Companies(Menus) ERROR: cmbGROUP.getSelectedIndex() < 0");
             return;
@@ -756,7 +957,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             J += BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "\r\n" + gson.toJson(json);
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -765,14 +966,14 @@ public class API extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
-        txtLOG.append("\r\n== /location/sector/<ID> > " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== /location/sector/<ID> > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         if(!Func.SHOW_FILE(J, "json")){
             txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
         }  
-    }//GEN-LAST:event_btnMenuMouseClicked
+    }//GEN-LAST:event_btnCompMouseClicked
     private void btnBrandMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBrandMouseClicked
        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n-Load " + BRAND + " brand API...");
@@ -796,11 +997,11 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             J += BaseAPI + "/config/public/" + BrandID + "\r\n" + gson.toJson(json);
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             J += "- Exception: " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
-        txtLOG.append("\r\n== /config/public/ > " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== /config/public/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
         
         J += "\r\n=========  Private Configuration:" + "\r\n";
@@ -821,11 +1022,11 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             J += BaseAPI + "/config/" + BrandID + "\r\n" + gson.toJson(json);
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             J += "- Exception: " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
-        txtLOG.append("\r\n== /config/ > " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== /config/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();        
 
         J += "========= Group API" + "\r\n";
@@ -845,7 +1046,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             J += BaseAPI + "/location/brand/" + BrandID + "\r\n" + gson.toJson(json);
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -854,7 +1055,7 @@ public class API extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
-        txtLOG.append("\r\n== /location/brand/ > " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== /location/brand/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -885,7 +1086,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             J += BaseAPI + "/location/sector?_provider=cdl" + "\r\n" + gson.toJson(json);
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -894,7 +1095,7 @@ public class API extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
-        txtLOG.append("\r\n== /location/sector?_provider=cdl > " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== /location/sector?_provider=cdl > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -932,7 +1133,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             J += BaseAPI + "/calendar/"  + BrandID + "\r\n" + gson.toJson(json);
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -941,7 +1142,7 @@ public class API extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
-        txtLOG.append("\r\n== /calendar/ > " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== /calendar/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -950,27 +1151,98 @@ public class API extends javax.swing.JInternalFrame {
         }        
     }//GEN-LAST:event_btnCalMouseClicked
 
-    private void btnLoc_MenusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoc_MenusMouseClicked
-        // OwrEMjgG5zUeoXRvKoe3cZy8R8WqPBt9rj2dwv5eUazpZOKPNzcyWAyRG10vCWQg9Oz < in assigned
-        // eBLlmjy9NwfXNdoqJ6Gyu58ZEOjgWlH4BMjE1G3Ru2r3OjOq9Qtm97024RLzSeyXQrp < in menus
-    }//GEN-LAST:event_btnLoc_MenusMouseClicked
+    private void btnOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrdersMouseClicked
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLOG.append("\r\n\r\n-Brand > Orders API..."); 
+        String J = "========= Brand > Orders API:" + "\r\n";
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        sw1.start();
+        try {
+            HttpGet httpget = new HttpGet(BaseAPI + "/order/location/brand/" + BrandID); 
+            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 500) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            J += BaseAPI + "/order/location/brand/" + BrandID + "\r\n" + gson.toJson(json);
+        } catch (Exception ex) {
+            txtLOG.append("\r\n- Exception: " + ex.getMessage());     
+        }   
+        
+        try {
+            httpclient.close();
+        } catch (IOException ex) {
+            txtLOG.append("\r\n- Exception: " + ex.getMessage());   
+        }
+        txtLOG.append("\r\n== " + BaseAPI + "order/location/brand/" + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        sw1.reset();
+
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        if(!Func.SHOW_FILE(J, "json")){
+            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
+        }         
+    }//GEN-LAST:event_btnOrdersMouseClicked
 
     private void btnAnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnMouseClicked
-        // TODO add your handling code here:
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLOG.append("\r\n\r\n-Announcements API..."); 
+        String J = "========= Announcements API:" + "\r\n";
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        sw1.start();
+        try {
+            HttpGet httpget = new HttpGet("https://api.compassdigital.org/staging/announcement/resource"); 
+            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 500) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            J += "https://api.compassdigital.org/staging/announcement/resource" + "\r\n" + gson.toJson(json);
+        } catch (Exception ex) {
+            txtLOG.append("\r\n- Exception: " + ex.getMessage());     
+        }   
+        
+        try {
+            httpclient.close();
+        } catch (IOException ex) {
+            txtLOG.append("\r\n- Exception: " + ex.getMessage());   
+        }
+        txtLOG.append("\r\n== " + "https://api.compassdigital.org/staging/announcement/resource" + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        sw1.reset();
+
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        if(!Func.SHOW_FILE(J, "json")){
+            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
+        }        
     }//GEN-LAST:event_btnAnMouseClicked
 
-    private void cmbGROUPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbGROUPItemStateChanged
+    private void cmbGroupItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbGroupItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
             GetCompany_API();
         }
-    }//GEN-LAST:event_cmbGROUPItemStateChanged
+    }//GEN-LAST:event_cmbGroupItemStateChanged
 
     private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLOG.append("\r\n\r\n-Load Group/Sector API..."); 
-        String J = "========= Group/Sector API:" + "\r\n";
+        txtLOG.append("\r\n\r\n-Custom API..."); 
+        String J = "========= Custom API:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        String URL = txtAPI.getText();
+        String URL = txtAPI.getText().trim();
         sw1.start();
         try {
             HttpGet httpget = new HttpGet(URL); 
@@ -988,7 +1260,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             J += URL + "\r\n" + gson.toJson(json);
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -997,7 +1269,7 @@ public class API extends javax.swing.JInternalFrame {
         } catch (IOException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
-        txtLOG.append("\r\n== " + URL + " > " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== " + URL + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1010,12 +1282,22 @@ public class API extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n-Load User API..."); 
         String J = "========= User API:" + "\r\n";
+
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String authAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
-
-        sw1.start();
+        String Realm = "";
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + appId); 
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + cmbApp.getSelectedItem() + 
+                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
+            rs.next();
+            Realm = rs.getString(1);
+        } catch (SQLException ex) {
+            txtLOG.append("\r\n\r\n=== Get P2 Realm ID > ERROR: " + ex.getMessage());
+        } 
+        sw1.start();
+        try { 
+            //HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + "D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe");  // < Boost
+            HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm); 
             httpget.setHeader("Authorization",  "Basic " + authAuth);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
@@ -1029,8 +1311,8 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/user/auth?realm=" + "\r\n" + gson.toJson(json);
-        } catch (IOException | JSONException ex) {
+            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + gson.toJson(json);
+        } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -1039,7 +1321,7 @@ public class API extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
-        txtLOG.append("\r\n== " + "/user/auth?realm=" + " > " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== " + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1048,12 +1330,121 @@ public class API extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnUserMouseClicked
 
+    private void btnMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMouseClicked
+        int I = cmbComp.getSelectedIndex();
+        if(I < 0){ // =========== DEBUG
+            txtLOG.append("\r\n-Load Company/Menus ERROR: cmbCOMP.getSelectedIndex() < 0");
+            return;
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLOG.append("\r\n\r\n-Company > Menus API..."); 
+        String J = "========= Company > Menus API:" + "\r\n";
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        sw1.start();
+        try {// https://api.compassdigital.org/staging/menu/company/llq08WB8epuLD4eggydKTq3LaRPL2gUNJky8XQLGcXDYjO1mymu4YzyWyDd2IBE99Xmp9GSd3L4Ql
+            HttpGet httpget = new HttpGet(BaseAPI + "/menu/company/" + COMP_IDS.get(I)); 
+            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 500) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            J += BaseAPI + "/menu/company/"  + COMP_IDS.get(I) + "\r\n" + gson.toJson(json);
+        } catch (Exception ex) {
+            txtLOG.append("\r\n- Exception: " + ex.getMessage());     
+        }   
+        
+        try {
+            httpclient.close();
+        } catch (IOException ex) {
+            txtLOG.append("\r\n- Exception: " + ex.getMessage());   
+        }
+        txtLOG.append("\r\n== " + "https://api.compassdigital.org/staging/menu/company/" + COMP_IDS.get(I) + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        sw1.reset();
+
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        if(!Func.SHOW_FILE(J, "json")){
+            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
+        }  
+    }//GEN-LAST:event_btnMenuMouseClicked
+
+    private void btnUpdatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdatesMouseClicked
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLOG.append("\r\n\r\n-AP3 Resent Updates/Notifications API..."); 
+        String J = "========= AP3 Resent Updates/Notifications API:" + "\r\n";
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        sw1.start();
+        try {
+            HttpGet httpget = new HttpGet("https://api.compassdigital.org/staging/notification?realm=cdl&target=admin_panel"); 
+            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 500) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            J += "https://api.compassdigital.org/staging/notification?realm=cdl&target=admin_panel" + "\r\n" + gson.toJson(json);
+        } catch (Exception ex) {
+            txtLOG.append("\r\n- Exception: " + ex.getMessage());     
+        }   
+        
+        try {
+            httpclient.close();
+        } catch (IOException ex) {
+            txtLOG.append("\r\n- Exception: " + ex.getMessage());   
+        }
+        txtLOG.append("\r\n== " + "https://api.compassdigital.org/staging/notification?realm=cdl&target=admin_panel" + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        sw1.reset();
+
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        if(!Func.SHOW_FILE(J, "json")){
+            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
+        } 
+    }//GEN-LAST:event_btnUpdatesMouseClicked
+
+    private void btnPromoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPromoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPromoMouseClicked
+
+    private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
+        SAVE_CONFIG();
+    }//GEN-LAST:event_btnSave_OptMouseClicked
+
+    private void btnLoc_MenusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoc_MenusMouseClicked
+        // OwrEMjgG5zUeoXRvKoe3cZy8R8WqPBt9rj2dwv5eUazpZOKPNzcyWAyRG10vCWQg9Oz < in assigned
+        // eBLlmjy9NwfXNdoqJ6Gyu58ZEOjgWlH4BMjE1G3Ru2r3OjOq9Qtm97024RLzSeyXQrp < in menus
+    }//GEN-LAST:event_btnLoc_MenusMouseClicked
+
+    private void btnScardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnScardMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_btnScardMouseClicked
+
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        if(!evt.getValueIsAdjusting()) {
+            txtLOG.append("\r\n=== Order List Value changed");
+        }
+    }//GEN-LAST:event_jList1ValueChanged
+
     private void LOAD_ENV(){
-        if(cmbENV.getSelectedItem().toString().contains("Staging")){
+        if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
             url = "https://staging.adminpanel.compassdigital.org/";
-        } else if (cmbENV.getSelectedItem().toString().contains("Dev")){
+        } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
             BaseAPI = "https://api.compassdigital.org/dev";
             env = "DE";
             url = "https://dev.adminpanel.compassdigital.org/";
@@ -1063,18 +1454,19 @@ public class API extends javax.swing.JInternalFrame {
             url = "https://adminpanel.compassdigital.org/";
         }     
         Get_P2_TKN_and_Slack_IDs();
+        LOAD_CONFIG();
         GetSites_API();
         GetGroups_API();        
     }
     private void LOAD_DATA(){
-        app = cmbAPP.getSelectedItem().toString();
+        app = cmbApp.getSelectedItem().toString();
         txtLOG.append("\r\n\r\n=== Ready >");
     }
     private void Get_P2_TKN_and_Slack_IDs(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         
         try {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbENV.getSelectedItem() + "'");
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
             rs.next();
             P2_TKN = rs.getString(1);
         } catch (SQLException ex) {
@@ -1088,8 +1480,8 @@ public class API extends javax.swing.JInternalFrame {
         txtLOG.append("\r\n-Load Sites from API...");
         sw1.start();
         try {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbAPP.getSelectedItem() + 
-                    "' AND [env] LIKE '" + cmbENV.getSelectedItem().toString() + "%'");
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() + 
+                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
             rs.next();
             appId = rs.getString(1);
         } catch (SQLException ex) {
@@ -1101,8 +1493,8 @@ public class API extends javax.swing.JInternalFrame {
         DV1.setModel(SitesModel);
         
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + appId);
+        try { 
+            HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + appId);         
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 300) {
@@ -1161,7 +1553,7 @@ public class API extends javax.swing.JInternalFrame {
             DV1.getColumnModel().getColumn(2).setPreferredWidth(50);
             DV1.getColumnModel().getColumn(3).setPreferredWidth(400);
    
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }         
         finally {
@@ -1176,6 +1568,14 @@ public class API extends javax.swing.JInternalFrame {
         
         if (DV1.getRowCount() > 0) {
             DV1.changeSelection(0, 0, false, false);
+            if (CONFIG && !"".equals(SITE.trim())) {
+                for(int row = 0; row < DV1.getRowCount(); row++) {
+                    if(DV1.getValueAt(row, 0).equals(SITE)){
+                        DV1.changeSelection(row, 0, false, false);
+                        break;
+                    }
+                }
+            }
             DV1.repaint();
             GetBrands_API();
         }
@@ -1247,7 +1647,7 @@ public class API extends javax.swing.JInternalFrame {
             DV2.getColumnModel().getColumn(0).setPreferredWidth(140);
             DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
             DV2.getColumnModel().getColumn(2).setPreferredWidth(80);
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }         
         finally {
@@ -1262,6 +1662,16 @@ public class API extends javax.swing.JInternalFrame {
    
         if (DV2.getRowCount() > 0) {
             DV2.changeSelection(0, 0, false, false);
+            if (CONFIG && !"".equals(BRAND.trim()))
+            {
+                for(int row = 0; row < DV2.getRowCount(); row++) {
+                    if(DV2.getValueAt(row, 0).equals(BRAND)){
+                        DV2.changeSelection(row, 0, false, false);
+                        //DV1.scrollRectToVisible(DV1.getCellRect(row, 0, true));
+                        break;
+                    } 
+                }
+            }
             BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
         } else {
             BrandID = "null";
@@ -1274,7 +1684,7 @@ public class API extends javax.swing.JInternalFrame {
     private void GetGroups_API() {  
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n-Load Groups/Sector from API...");
-        cmbGROUP.removeAllItems();
+        cmbGroup.removeAllItems();
         GROUP_IDS = new ArrayList<>();
         
         Load = true;
@@ -1300,13 +1710,13 @@ public class API extends javax.swing.JInternalFrame {
             T_Index = -1;
             for (int i = 0; i < Sectors.length(); i++) {
                 S_NAME = Sectors.getJSONObject(i).getString("name");
-                cmbGROUP.addItem(S_NAME);
+                cmbGroup.addItem(S_NAME);
                 GROUP_IDS.add(Sectors.getJSONObject(i).getString("id"));
                 if(S_NAME.equals(GROUP)){
                     T_Index = i;
                 }
             }
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());  
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } finally {
@@ -1318,31 +1728,34 @@ public class API extends javax.swing.JInternalFrame {
             }
         } 
         if(T_Index != -1){
-            cmbGROUP.setSelectedIndex(T_Index);
+            cmbGroup.setSelectedIndex(T_Index);
+            txtLOG.append("\r\n== Group: " + cmbGroup.getItemAt(T_Index) + ", Id: " + GROUP_IDS.get(T_Index));
         }else{
-            if(cmbGROUP.getItemCount() > 0){
-                cmbGROUP.setSelectedIndex(0);
+            if(cmbGroup.getItemCount() > 0){
+                cmbGroup.setSelectedIndex(0);
+                txtLOG.append("\r\n== Group: " + cmbGroup.getItemAt(0) + ", Id: " + GROUP_IDS.get(0)); 
             }
         }
-        txtLOG.append("\r\n== Group: " + cmbGROUP.getItemAt(T_Index) + ", Id: " + GROUP_IDS.get(T_Index)); 
+         
         txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
+        
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         Load = false;   
         GetCompany_API();
     }
     private void GetCompany_API() {  
-        int I = cmbGROUP.getSelectedIndex();
+        int I = cmbGroup.getSelectedIndex();
         if(I < 0){ // =========== DEBUG
             txtLOG.append("\r\n-Load Sector/Companies(Menus) ERROR: cmbGROUP.getSelectedIndex() < 0");
             return;
         }
+        cmbComp.removeAllItems();
+        COMP_IDS = new ArrayList<>();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n-Load Sector/Companies(Menus) from API...");
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            
-            cmbMENU.removeAllItems();
             sw1.start();     
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 
             httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
@@ -1363,12 +1776,21 @@ public class API extends javax.swing.JInternalFrame {
             T_Index = -1;
             for (int i = 0; i < Sectors.length(); i++) {
                 S_NAME = Sectors.getJSONObject(i).getString("name");
-                cmbMENU.addItem(S_NAME);
+                cmbComp.addItem(S_NAME);
+                COMP_IDS.add(Sectors.getJSONObject(i).getString("id"));
                 if(S_NAME.equals(GL_MENU)){
                     T_Index = i;
                 }
             }
-        } catch (IOException | JSONException ex) {
+                        for (int i = 0; i < Sectors.length(); i++) {
+                S_NAME = Sectors.getJSONObject(i).getString("name");
+                cmbGroup.addItem(S_NAME);
+                GROUP_IDS.add(Sectors.getJSONObject(i).getString("id"));
+                if(S_NAME.equals(GROUP)){
+                    T_Index = i;
+                }
+            }
+        } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());  
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } finally {
@@ -1380,10 +1802,10 @@ public class API extends javax.swing.JInternalFrame {
             }
         } 
         if(T_Index != -1){
-            cmbMENU.setSelectedIndex(T_Index);
+            cmbComp.setSelectedIndex(T_Index);
         }else{
-            if(cmbMENU.getItemCount() > 0){
-                cmbMENU.setSelectedIndex(0);
+            if(cmbComp.getItemCount() > 0){
+                cmbComp.setSelectedIndex(0);
             }
         }
         txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -1395,7 +1817,10 @@ public class API extends javax.swing.JInternalFrame {
     private boolean Load;
     private int d1LastRow = -1; 
     private List<String> GROUP_IDS;
-   
+    private List<String> COMP_IDS; 
+    private List<String> MENU_IDS;  
+    private boolean CONFIG = false;
+    private String C = "";
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
@@ -1404,29 +1829,39 @@ public class API extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnApp;
     private javax.swing.JButton btnBrand;
     private javax.swing.JButton btnCal;
+    private javax.swing.JButton btnComp;
     private javax.swing.JButton btnGroup;
     private javax.swing.JButton btnLoc_Menus;
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnMenu;
+    private javax.swing.JButton btnOrders;
+    private javax.swing.JButton btnPromo;
     private javax.swing.JButton btnRun;
+    private javax.swing.JButton btnSave_Opt;
+    private javax.swing.JButton btnScard;
     private javax.swing.JButton btnSite;
     private javax.swing.JButton btnUnit;
+    private javax.swing.JButton btnUpdates;
     private javax.swing.JButton btnUser;
-    private javax.swing.JComboBox<String> cmbAPP;
-    private javax.swing.JComboBox<String> cmbENV;
-    private javax.swing.JComboBox<String> cmbGROUP;
-    private javax.swing.JComboBox<String> cmbMENU;
+    private javax.swing.JComboBox<String> cmbApp;
+    private javax.swing.JComboBox<String> cmbComp;
+    private javax.swing.JComboBox<String> cmbEnv;
+    private javax.swing.JComboBox<String> cmbGroup;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lblBRANDS;
     private javax.swing.JLabel lblSITES;
     private javax.swing.JLabel lblSITES12;
     private javax.swing.JLabel lblSITES13;
     private javax.swing.JLabel lblSITES14;
     private javax.swing.JLabel lblSITES3;
+    private javax.swing.JLabel lblSITES4;
     private javax.swing.JLabel lblSITES6;
     private javax.swing.JLabel lblSITES7;
     private javax.swing.JLabel lblSITES8;

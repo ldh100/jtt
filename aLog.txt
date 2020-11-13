@@ -2,17 +2,37 @@ Start >
 
 === LOAD_CONFIG > OK
 -Load Sites from API...
-== 0.50 sec ==
+== 0.19 sec ==
 -Load Brands from API...
-- Exception: JSONObject["id"] is not a number.
-== 0.98 sec ==
+== 0.51 sec ==
 -Load Groups/Sector from API...
 == Group: Chartwel/US, Id: yy9mGPrGD0H64PQGWpmEHaN8lWMlr6cY5qYAD9YBTpMJq0w3rWcZklQgmDPycwYm9JMl4YI2W2dM
-== 0.66 sec ==
+== 0.43 sec ==
 -Load Sector/Companies(Menus) from API...
-== 1.34 sec ==
+== 0.67 sec ==
 
 === Ready >
-=== In not Headless mode Do Not interact with your Browser
-=== (no mouse hover!) during Automation run
-=== Good Luck...
+
+-Brand > Orders API...
+== https://api.compassdigital.org/stagingorder/location/brand/ > 
+== 0.33 sec ==
+
+-Custom API...
+== https://api.compassdigital.org/stagingorder/location/brand/rjEZyoky4rUZ1ZqEyP8RFAEqOzg2RQcwqQlBX0vaF8XBo3RlkdsKg0aL9Dw2FZ9QKRAGk6S761K > 
+== 1.16 sec ==
+
+-Custom API...
+== https://api.compassdigital.org/staging/order/location/brand/rjEZyoky4rUZ1ZqEyP8RFAEqOzg2RQcwqQlBX0vaF8XBo3RlkdsKg0aL9Dw2FZ9QKRAGk6S761K > 
+== 0.46 sec ==
+
+-Custom API...
+== https://api.compassdigital.org/staging/calendar/51oe9EP9KwCeveAD9ql0uN6B4er1krTOqD5rGDLziJEO81w5dEs9wa5zjP8eS5QdOD7JZOhMM5 > 
+== 3.88 sec ==
+
+-Load User API...
+== /user/auth?realm= > 
+== 0.44 sec ==
+
+-Load User API...
+== /user/auth?realm= > 
+== 3.38 sec ==

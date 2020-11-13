@@ -1,8 +1,519 @@
-========= User API:
-https://api.compassdigital.org/staging/user/auth?realm=
+========= Brand Delete calendar API:
+https://api.compassdigital.org/staging/calendar/rjEZyoky4rUZ1ZqEyP8RFAEqOzg2RQcwqQlBX0vaF8XBo3RlkdsKg0aL9Dw2FZ9QKRAGk6S761K
 {
   "map": {
-    "code": 400.6,
-    "error": "Invalid realm: ec65915647e84bcd83f536ad29c694d2"
+    "date": {
+      "map": {
+        "last_sync": 1605229007941,
+        "last_sync_error": 0
+      }
+    },
+    "timezone": "America/Los_Angeles",
+    "id": "rjEZyoky4rUZ1ZqEyP8RFAEqOzg2RQcwqQlBX0vaF8XBo3RlkdsKg0aL9Dw2FZ9QKRAGk6S761K",
+    "events": {
+      "myArrayList": [
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 6.216666666666667,
+                "times": {
+                  "myArrayList": [
+                    "09:01"
+                  ]
+                },
+                "dayOfWeek": {
+                  "myArrayList": [
+                    0
+                  ]
+                }
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "delivery",
+                "color": "#ff8c84",
+                "id": "okAgZdpZGKC5JKRl46ePU47Owk2GA1U8lEEr50qJHw5KmjNgB7UYjDR8lZM0fqKa4BDWv4TlB89kgj9Dcv8QJ56Q85UP9",
+                "title": "Delivery Hours"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 1,
+                "dayOfWeek": {
+                  "myArrayList": [
+                    1
+                  ]
+                }
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "delivery",
+                "color": "#ff8c84",
+                "id": "Wo4jJqNJvrUkQy3Zl54zUmozY0AjBNu031YN3v3pSKZvaaemNafRB2N6P9mPu9KwyA23r7tWzemY24eKhZmg9A96l1u5Z",
+                "title": "Delivery Hours"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 1,
+                "dayOfWeek": {
+                  "myArrayList": [
+                    2
+                  ]
+                }
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "delivery",
+                "color": "#ff8c84",
+                "id": "qDqdy9kyKJfBXeGpLZ1wC3mNlOQaZwiJNqkN9zW7CNYZJdM13ASq77eaZeY6s97kBvXaK2uXawg2QNvET7OMk9lP2JTrL",
+                "title": "Delivery Hours"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 1,
+                "dayOfWeek": {
+                  "myArrayList": [
+                    3
+                  ]
+                }
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "delivery",
+                "color": "#ff8c84",
+                "id": "romN8L38RJUZwMW90mrlId4Qo3MPwzfqplyaJOOmCY0l5Pm09luz8jwe57e7FZqKzwEpD3UvLB4Kr45MsGz4rLyE0QHd9",
+                "title": "Delivery Hours"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 1,
+                "dayOfWeek": {
+                  "myArrayList": [
+                    4
+                  ]
+                }
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "delivery",
+                "color": "#ff8c84",
+                "id": "AdgEQkmQaJF5oaj7RW0rU0jW6vYyPdt1gYWXjNA2iA7mye7MqWH7leG7Qp1wulAZoe5Mvrc1pdgmY683fag3mJAAR1S5N",
+                "title": "Delivery Hours"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 1,
+                "dayOfWeek": {
+                  "myArrayList": [
+                    5
+                  ]
+                }
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "delivery",
+                "color": "#ff8c84",
+                "id": "romN8L38RJUZwMW90mrlId4Qo3MPwzfqply7e54wH8qAJE58OPHR2pvRKEmNFmqPwd0NYGcvLdQwj6X8tBmDOXEP9vFd9",
+                "title": "Delivery Hours"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 1,
+                "dayOfWeek": {
+                  "myArrayList": [
+                    6
+                  ]
+                }
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "delivery",
+                "color": "#ff8c84",
+                "id": "XlBOEmwE9af5RA0waj9kUdj4g9v6YRfvZKGjvJ6KHJEkkmKJl9UM9LX0q3LgTz7NMWJ5NBUlWNoMG8YzTDQ7E4WZdofwN",
+                "title": "Delivery Hours"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 3.783333333333333,
+                "times": {
+                  "myArrayList": [
+                    "10:01"
+                  ]
+                },
+                "dayOfWeek": {
+                  "myArrayList": [
+                    0
+                  ]
+                }
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "business",
+                "color": "#ff8c84",
+                "id": "RwG02A92DZFrlADOGKNkUDXQlrE3wJH4r7MAOGW6cyQep0mL8MuoRe04zMZ1FeGy9GBwlQtX9gmOd03kId8P5vL5wMCWK",
+                "title": "Pickup Hours"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 1,
+                "dayOfWeek": {
+                  "myArrayList": [
+                    1
+                  ]
+                }
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "business",
+                "color": "#ff8c84",
+                "id": "BNrWap3a1JfoljReBDwdUXROdgNoavUjP8rLgG0DH3lyydmyA2uXNrd1BrwRCDNm9LLAw7c67wyPKg3mHGKMlJg4lRuO0",
+                "title": "Pickup Hours"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 4.5,
+                "times": {
+                  "myArrayList": [
+                    "11:15"
+                  ]
+                },
+                "dayOfWeek": {
+                  "myArrayList": [
+                    2
+                  ]
+                }
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "business",
+                "color": "#ff8c84",
+                "id": "G5YDygRyr7FvNy2Eo5OzUK2YEWw5l4HoD3LPGRZQhQyZ68eYeXCGk1KY5aaLcwrZPGwN1NcRjBdvNQjRuOEJgApX0ZtWR",
+                "title": "Pickup Hours"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 12.5,
+                "times": {
+                  "myArrayList": [
+                    "06:00"
+                  ]
+                },
+                "dayOfWeek": {
+                  "myArrayList": [
+                    3
+                  ]
+                }
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "business",
+                "color": "#ff8c84",
+                "id": "8eW5gRmgkzFLBParpJzwI5aM08ykpWSJeLRjoP8wTjrZEj64qMT2wo4w0Em7IX2mdqeMWrHeYarOwY6Wtkgd9aG9kyfNl",
+                "title": "Pickup Hours"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 1,
+                "dayOfWeek": {
+                  "myArrayList": [
+                    4
+                  ]
+                }
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "business",
+                "color": "#ff8c84",
+                "id": "M4O3mYgmNJtL5lKjwed0IjWmL14kvqH0vjq93D1DhLdvMNglqdS1vvd7NJP2uD2BpvkPwPfK9zMmAQdDUO7dWo22DQhjY",
+                "title": "Pickup Hours"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 1,
+                "dayOfWeek": {
+                  "myArrayList": [
+                    5
+                  ]
+                }
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "business",
+                "color": "#ff8c84",
+                "id": "Y6JqWXYWg8tMPk120GQOfo6qd5we2DhvQzjyZWQ9TqLz7NjYEOtzAwdQraONuLaj144PWES19GWadZLNuoEBlj4NWMUG6",
+                "title": "Pickup Hours"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 1,
+                "dayOfWeek": {
+                  "myArrayList": [
+                    6
+                  ]
+                }
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "business",
+                "color": "#ff8c84",
+                "id": "gKNwLk5LqvFRqDQXoL21tdyXo9rzl8fK8ryd8gEgsy6lD66BdNURjM4YPMw6TlX30YOrqAsq86eQ7Lo8S6JLBX9RBYt3y",
+                "title": "Pickup Hours"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 1,
+                "start": 1598425200000
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "menu",
+                "color": "#ff8c84",
+                "is": {
+                  "map": {
+                    "delivery": true,
+                    "pickup": true
+                  }
+                },
+                "id": "8eW5gRmgkzFLBParpJzwI5aM08ykpWSJ3e6846q9fAdvPLPPaguKXYzvMz2ltlJgvW1NBdCeYadAMzZ5fwevZNmJwoIWK",
+                "menu": "eBLlmjy9NwfXNdoqJ6Gyu58ZEOjgWlH4BMjE1G3Ru2r3OjOq9Qtm97024RLzSeyXQrp",
+                "title": "Breakfast updated"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 1,
+                "start": 1598338800000
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "menu",
+                "color": "#ff8c84",
+                "is": {
+                  "map": {
+                    "delivery": true,
+                    "pickup": true,
+                    "disabled": true
+                  }
+                },
+                "id": "zP4AGZkGg2H6oaXzDYvjHPRzk2mQ6OHQKDvW1LGaHev2kW6RA4fY75qrKOlLhvM73m9eqEhW7wz1lEryt7qBkzezowtoZ",
+                "menu": "eBLlmjy9NwfXNdoqJ6Gyu58ZEOjgWlH4BMjE1G3Ru2r3OjOq9Qtm97024RLzSeyXQrp",
+                "title": "Breakfast updated"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 1,
+                "start": 1598338800000
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "menu",
+                "color": "#ff8c84",
+                "is": {
+                  "map": {
+                    "delivery": true,
+                    "pickup": true
+                  }
+                },
+                "id": "PEXLGQgG92URPWXqMeB1tg3rz47Am6HRQGoZ3EWriwjppXgGomulpAWKpBv5HQPP9D3RRNCDKOo61KkZfLMzrG1go3INw",
+                "title": "Breakfast updated",
+                "menu": "eBLlmjy9NwfXNdoqJ6Gyu58ZEOjgWlH4BMjE1G3Ru2r3OjOq9Qtm97024RLzSeyXQrp"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 1,
+                "dayOfWeek": {
+                  "myArrayList": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                  ]
+                },
+                "start": 1598338800000,
+                "every": {
+                  "map": {
+                    "week": 1
+                  }
+                }
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "menu",
+                "color": "#ff8c84",
+                "is": {
+                  "map": {
+                    "delivery": true,
+                    "pickup": true
+                  }
+                },
+                "id": "ppOrMNEMG9FRKmyME7PqteEgrqJPRjF38eD357MMH3v9oMdON3FARljGMZyktBOLBP1LRvSdWwpRYE9ocAeXA0MR5dhXK",
+                "menu": "eBLlmjy9NwfXNdoqJ6Gyu58ZEOjgWlH4BMjE1G3Ru2r3OjOq9Qtm97024RLzSeyXQrp",
+                "title": "Breakfast updated"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 1140,
+                "times": {
+                  "myArrayList": [
+                    "08:00"
+                  ]
+                },
+                "start": 1573545600000,
+                "durationUnit": "minutes"
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "menu",
+                "color": "#ff8c84",
+                "is": {
+                  "map": {
+                    "delivery": true,
+                    "pickup": true
+                  }
+                },
+                "id": "Wo4jJqNJvrUkQy3Zl54zUmozY0AjBNu0qjJoRvveI18qqorNdaFkweNpOLoYc9KwyA2MlZFWzljNyvzytO4R6NyvakT5z",
+                "menu": "eBLlmjy9NwfXNdoqJ6Gyu58ZEOjgWlH4BMjE1G3Ru2r3OjOq9Qtm97024RLzSeyXQrp",
+                "title": "Breakfast updated"
+              }
+            }
+          }
+        },
+        {
+          "map": {
+            "schedule": {
+              "map": {
+                "duration": 1,
+                "start": 1588230000000,
+                "end": 1589007600000
+              }
+            },
+            "data": {
+              "map": {
+                "calendar": "menu",
+                "color": "#ff8c84",
+                "is": {
+                  "map": {
+                    "delivery": true,
+                    "pickup": false,
+                    "disabled": false
+                  }
+                },
+                "id": "e2rENwmNRaFE24v8yLAaULEmPy90BWuY5rqM31A5I8lQpB330DUNPGY7wowOU9yqW1R94jC4Waze544Yfoj1wgJ1Bqu34",
+                "title": "Breakfast updated",
+                "menu": "eBLlmjy9NwfXNdoqJ6Gyu58ZEOjgWlH4BMjE1G3Ru2r3OjOq9Qtm97024RLzSeyXQrp"
+              }
+            }
+          }
+        }
+      ]
+    }
   }
 }

@@ -110,7 +110,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtLOG = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
-        cmbBROW = new javax.swing.JComboBox<>();
+        cmbBrow = new javax.swing.JComboBox<>();
         btnRun = new javax.swing.JButton();
         btnLog = new javax.swing.JButton();
         btnFails = new javax.swing.JButton();
@@ -120,8 +120,8 @@ public class AP3 extends javax.swing.JInternalFrame {
         lblSITES11 = new javax.swing.JLabel();
         lblSITES13 = new javax.swing.JLabel();
         lblSITES14 = new javax.swing.JLabel();
-        cmbENV = new javax.swing.JComboBox<>();
-        cmbAPP = new javax.swing.JComboBox<>();
+        cmbEnv = new javax.swing.JComboBox<>();
+        cmbApp = new javax.swing.JComboBox<>();
         txtADMIN_ID = new javax.swing.JTextField();
         txtSM_ID = new javax.swing.JTextField();
         txtIM_ID = new javax.swing.JTextField();
@@ -547,15 +547,15 @@ public class AP3 extends javax.swing.JInternalFrame {
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cmbBROW.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbBROW.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chrome", "Firefox", "Edge", "IE" }));
-        cmbBROW.setEnabled(false);
-        cmbBROW.addActionListener(new java.awt.event.ActionListener() {
+        cmbBrow.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmbBrow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chrome", "Firefox", "Edge", "IE" }));
+        cmbBrow.setEnabled(false);
+        cmbBrow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbBROWActionPerformed(evt);
+                cmbBrowActionPerformed(evt);
             }
         });
-        jPanel3.add(cmbBROW, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 28, 78, 20));
+        jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 28, 78, 20));
 
         btnRun.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         btnRun.setForeground(new java.awt.Color(204, 0, 0));
@@ -608,12 +608,12 @@ public class AP3 extends javax.swing.JInternalFrame {
         jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 56, 80, 14));
 
         btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnSave_Opt.setText("Save Run Options");
+        btnSave_Opt.setText("Save Setup");
         btnSave_Opt.setMargin(new java.awt.Insets(2, 4, 2, 4));
         btnSave_Opt.setName("btnSAVE"); // NOI18N
-        btnSave_Opt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSave_OptActionPerformed(evt);
+        btnSave_Opt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSave_OptMouseClicked(evt);
             }
         });
         jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 52, 108, 22));
@@ -636,21 +636,21 @@ public class AP3 extends javax.swing.JInternalFrame {
         lblSITES14.setAlignmentX(0.5F);
         jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 12, 92, 16));
 
-        cmbENV.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbENV.addItemListener(new java.awt.event.ItemListener() {
+        cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmbEnv.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbENVItemStateChanged(evt);
+                cmbEnvItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbENV, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 28, 116, 20));
+        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 28, 116, 20));
 
-        cmbAPP.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbAPP.addItemListener(new java.awt.event.ItemListener() {
+        cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmbApp.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbAPPItemStateChanged(evt);
+                cmbAppItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbAPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 28, 108, 20));
+        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 28, 108, 20));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 424, 416, 76));
 
@@ -724,10 +724,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         GetBrands_API();
     }//GEN-LAST:event_DV1MouseClicked
 
-    private void btnSave_OptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave_OptActionPerformed
-        SAVE_CONFIG();
-    }//GEN-LAST:event_btnSave_OptActionPerformed
-
     private void Report(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String EXX = "";
@@ -778,21 +774,21 @@ public class AP3 extends javax.swing.JInternalFrame {
 
     private void AP3_AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_AP3_AncestorAdded
         Load = true;
-        cmbAPP.addItem("Boost");
-        cmbAPP.addItem("Canteen");
-        cmbAPP.addItem("JJKitchen");
-        cmbAPP.addItem("Rogers");
-        cmbAPP.addItem("StandardCognition");
-        cmbAPP.addItem("Tacit");
-        cmbAPP.addItem("Thrive");
+        cmbApp.addItem("Boost");
+        cmbApp.addItem("Canteen");
+        cmbApp.addItem("JJKitchen");
+        cmbApp.addItem("Rogers");
+        cmbApp.addItem("StandardCognition");
+        cmbApp.addItem("Tacit");
+        cmbApp.addItem("Thrive");
         
-        cmbENV.addItem("Staging");
-        cmbENV.addItem("Production");
-        cmbENV.addItem("Development");
+        cmbEnv.addItem("Staging");
+        cmbEnv.addItem("Production");
+        cmbEnv.addItem("Development");
      
         
-        cmbENV.setSelectedIndex(0);
-        cmbAPP.setSelectedIndex(0);
+        cmbEnv.setSelectedIndex(0);
+        cmbApp.setSelectedIndex(0);
         
         Load = false;
         LOAD_ENV();
@@ -810,19 +806,18 @@ public class AP3 extends javax.swing.JInternalFrame {
         btnExel.setEnabled(true);        
     }//GEN-LAST:event_btnExelMouseClicked
 
-    private void cmbENVItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbENVItemStateChanged
+    private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
             LOAD_ENV();
         }
-    }//GEN-LAST:event_cmbENVItemStateChanged
+    }//GEN-LAST:event_cmbEnvItemStateChanged
 
-    private void cmbAPPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAPPItemStateChanged
+    private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
-            int X = evt.getStateChange();
-            app = cmbAPP.getSelectedItem().toString();
+            app = cmbApp.getSelectedItem().toString();
             GetSites_API();
         }
-    }//GEN-LAST:event_cmbAPPItemStateChanged
+    }//GEN-LAST:event_cmbAppItemStateChanged
 
     private void cmbGROUPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbGROUPItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
@@ -840,9 +835,9 @@ public class AP3 extends javax.swing.JInternalFrame {
         BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
     }//GEN-LAST:event_DV2MouseClicked
 
-    private void cmbBROWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBROWActionPerformed
+    private void cmbBrowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBrowActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmbBROWActionPerformed
+    }//GEN-LAST:event_cmbBrowActionPerformed
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
         if(!Func.SHOW_FILE(txtLOG.getText(), "txt")){
@@ -913,12 +908,16 @@ public class AP3 extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnRunMouseClicked
 
+    private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
+         SAVE_CONFIG();
+    }//GEN-LAST:event_btnSave_OptMouseClicked
+
     private void LOAD_ENV(){
-        if(cmbENV.getSelectedItem().toString().contains("Staging")){
+        if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
             url = "https://staging.adminpanel.compassdigital.org/";
-        } else if (cmbENV.getSelectedItem().toString().contains("Dev")){
+        } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
             BaseAPI = "https://api.compassdigital.org/dev";
             env = "DE";
             url = "https://dev.adminpanel.compassdigital.org/";
@@ -1203,7 +1202,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         BW2.execute();  // executes the swingworker on worker thread          
     }
     private void LOAD_DATA(){
-        app = cmbAPP.getSelectedItem().toString();
+        app = cmbApp.getSelectedItem().toString();
 
         CONFIG = false;
         txtLOG.append("\r\n\r\n=== Ready >");
@@ -1250,7 +1249,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         }
         
         try {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbENV.getSelectedItem() + "'");
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
             rs.next();
             P2_TKN = rs.getString(1);
         } catch (SQLException ex) {
@@ -1264,12 +1263,12 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLOG.append("\r\n-Load Sites from API...");
         sw1.start();
         try {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbAPP.getSelectedItem() + 
-                    "' AND [env] LIKE '" + cmbENV.getSelectedItem().toString() + "%'");
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() + 
+                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
             rs.next();
             appId = rs.getString(1);
         } catch (SQLException ex) {
-            txtLOG.append("\r\n\r\n=== Get S_OAuth_TKN > ERROR: " + ex.getMessage());
+            txtLOG.append("\r\n\r\n=== Get P2 App_ID > ERROR: " + ex.getMessage());
         }
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
@@ -1337,7 +1336,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             DV1.getColumnModel().getColumn(2).setPreferredWidth(50);
             DV1.getColumnModel().getColumn(3).setPreferredWidth(400);
    
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }         
         finally {
@@ -1431,7 +1430,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             DV2.getColumnModel().getColumn(0).setPreferredWidth(140);
             DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
             DV2.getColumnModel().getColumn(2).setPreferredWidth(80);
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }         
         finally {
@@ -1500,7 +1499,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                     T_Index = i;
                 }
             }
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());  
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } finally {
@@ -1513,12 +1512,13 @@ public class AP3 extends javax.swing.JInternalFrame {
         } 
         if(T_Index != -1){
             cmbGROUP.setSelectedIndex(T_Index);
-        }else{
+            txtLOG.append("\r\n== Group: " + cmbGROUP.getItemAt(T_Index) + ", Id: " + GROUP_IDS.get(T_Index));
+        } else {
             if(cmbGROUP.getItemCount() > 0){
                 cmbGROUP.setSelectedIndex(0);
+                txtLOG.append("\r\n== Group: " + cmbGROUP.getItemAt(0) + ", Id: " + GROUP_IDS.get(0)); 
             }
         }
-        txtLOG.append("\r\n== Group: " + cmbGROUP.getItemAt(T_Index) + ", Id: " + GROUP_IDS.get(T_Index)); 
         txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1562,7 +1562,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                     T_Index = i;
                 }
             }
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());  
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } finally {
@@ -1622,7 +1622,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             _update.setString(12, r_type);    
             _update.setString(13, UserID);    
             _update.setString(14, WsID);    
-            _update.setString(15, cmbBROW.getSelectedItem().toString());    
+            _update.setString(15, cmbBrow.getSelectedItem().toString());    
             _update.setString(16, txtLOG.getText());    
             _update.setString(17, "Scope: " + SCOPE);    
             _update.setString(18, EX);    
@@ -1689,7 +1689,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             _insert.setString(12, r_type);    
             _insert.setString(13, UserID);    
             _insert.setString(14, WsID);    
-            _insert.setString(15, cmbBROW.getSelectedItem().toString());    
+            _insert.setString(15, cmbBrow.getSelectedItem().toString());    
             _insert.setString(16, "=== Job is running... ===\r\n" + "");    
             _insert.setString(17, "Running");    
             _insert.setString(18, "None");    
@@ -1745,7 +1745,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             C = rs.getString(1);
             if (C.contains(": ")) {
                 String c;
-                c = C.substring(C.indexOf("cmbBROW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); cmbBROW.setSelectedItem(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("cmbBROW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); cmbBrow.setSelectedItem(c.substring(c.indexOf(" ")).trim());
                 c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
@@ -1806,8 +1806,8 @@ public class AP3 extends javax.swing.JInternalFrame {
             }
             C = "";
             C += "env: " + env + "\r\n";
-            C += "app: " + cmbAPP.getSelectedItem().toString() + "\r\n";
-            C += "cmbBROW: " + cmbBROW.getSelectedItem().toString() + "\r\n";
+            C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
+            C += "cmbBROW: " + cmbBrow.getSelectedItem().toString() + "\r\n";
             C += "url: " + url + "\r\n";
             C += "GROUP: " + cmbGROUP.getSelectedItem().toString() + "\r\n";
             C += "GL_MENU: " + cmbMENU.getSelectedItem().toString() + "\r\n";
@@ -1916,9 +1916,9 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;
     private javax.swing.JButton btnSave_Opt;
-    private javax.swing.JComboBox<String> cmbAPP;
-    private javax.swing.JComboBox<String> cmbBROW;
-    private javax.swing.JComboBox<String> cmbENV;
+    private javax.swing.JComboBox<String> cmbApp;
+    private javax.swing.JComboBox<String> cmbBrow;
+    private javax.swing.JComboBox<String> cmbEnv;
     private javax.swing.JComboBox<String> cmbGROUP;
     private javax.swing.JComboBox<String> cmbMENU;
     private javax.swing.JPanel jPanel1;
