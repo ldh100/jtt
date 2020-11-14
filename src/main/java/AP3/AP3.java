@@ -787,7 +787,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         cmbEnv.addItem("Development");
      
         
-        cmbEnv.setSelectedIndex(0);
+        cmbEnv.setSelectedIndex(0); // 2 Select Development
         cmbApp.setSelectedIndex(0);
         
         Load = false;

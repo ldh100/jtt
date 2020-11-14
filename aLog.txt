@@ -2,37 +2,37 @@ Start >
 
 === LOAD_CONFIG > OK
 -Load Sites from API...
-== 0.19 sec ==
--Load Brands from API...
 == 0.51 sec ==
+-Load Brands from API...
+== 3.02 sec ==
 -Load Groups/Sector from API...
-== Group: Chartwel/US, Id: yy9mGPrGD0H64PQGWpmEHaN8lWMlr6cY5qYAD9YBTpMJq0w3rWcZklQgmDPycwYm9JMl4YI2W2dM
-== 0.43 sec ==
+== Group: Alberta/CA, Id: wjgOXd6Xl0UGZqwW9JOzuozJ36p0OXf0XwX9MG1wfEQ7QoRggKHZXyG6ZZY9f4BOd91gYOiy2gvK
+== 0.41 sec ==
 -Load Sector/Companies(Menus) from API...
-== 0.67 sec ==
+== 0.44 sec ==
 
 === Ready >
 
+-Load User API(s)...
+== /user/auth?realm=D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe > 
+== 0.41 sec ==
+== /payment/method?user_id=P7wDdew43EURw7JkM4mpTNk0NYPYd5iQ7DqE5XvjhwzM0qpPm9HlL4LJrA49UDEX9EggYBFD9gdzzWeYHkDlyY3 > 
+== 2.87 sec ==
+== /order/customer/P7wDdew43EURw7JkM4mpTNk0NYPYd5iQ7DqE5XvjhwzM0qpPm9HlL4LJrA49UDEX9EggYBFD9gdzzWeYHkDlyY3?start=1604705096045;end=1605309896045 > 
+== 0.29 sec ==
+
+-Shopping Cart API...
+== https://api.compassdigital.org/dev/shoppingcart/71lp6EeK6BT92LRBoeXzF3XkyKG7qDUQmYWkdApASBwJRDeGvPFdzpLX1DkkHO8DdM7 > 
+== 0.30 sec ==
+
+-Shopping Cart API...
+== https://api.compassdigital.org/dev/shoppingcart/JJyM1Q8L1vFlQYMKERJEuP1Y9e1qErUk02NQWqr3u30L5GQ9YZh6aovl0Oo3HPlWBAB > 
+== 0.41 sec ==
+-Load Sector/Companies(Menus) from API...
+== 1.02 sec ==
+
+=== SAVE_CONFIG > OK (1 row)
+
 -Brand > Orders API...
 == https://api.compassdigital.org/stagingorder/location/brand/ > 
-== 0.33 sec ==
-
--Custom API...
-== https://api.compassdigital.org/stagingorder/location/brand/rjEZyoky4rUZ1ZqEyP8RFAEqOzg2RQcwqQlBX0vaF8XBo3RlkdsKg0aL9Dw2FZ9QKRAGk6S761K > 
-== 1.16 sec ==
-
--Custom API...
-== https://api.compassdigital.org/staging/order/location/brand/rjEZyoky4rUZ1ZqEyP8RFAEqOzg2RQcwqQlBX0vaF8XBo3RlkdsKg0aL9Dw2FZ9QKRAGk6S761K > 
-== 0.46 sec ==
-
--Custom API...
-== https://api.compassdigital.org/staging/calendar/51oe9EP9KwCeveAD9ql0uN6B4er1krTOqD5rGDLziJEO81w5dEs9wa5zjP8eS5QdOD7JZOhMM5 > 
-== 3.88 sec ==
-
--Load User API...
-== /user/auth?realm= > 
-== 0.44 sec ==
-
--Load User API...
-== /user/auth?realm= > 
-== 3.38 sec ==
+== 0.38 sec ==

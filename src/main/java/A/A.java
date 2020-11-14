@@ -6,9 +6,7 @@
 package A;
 import AP3.AP3;
 import API.API;
-import FW.FW;
 import Reports.W_Report;
-import WO.WO;
 //import com.tomtessier.scrollabledesktop.*;
 import com.google.common.base.Stopwatch;
 import java.awt.Cursor;
@@ -213,36 +211,10 @@ public class A extends javax.swing.JFrame {
     }    
     private void jMenu_FWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_FWMouseClicked
         if(jMenu_FW.isEnabled()){
-            OpenFM();
+            //OpenFM();
         }
     }//GEN-LAST:event_jMenu_FWMouseClicked
-    private void OpenFM() {                                      
-        FW fw = new FW();
-        fw.hide();
-//        try {
-//            ap3.setSelected(true);
-//        } catch (PropertyVetoException ex) {
-//            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        this.jDesktopPane1.add(fw);
-        //Thread.sleep(500);
-        int Y = 0;
-        int X = 0;
-        if(F_COUNT > 4) {
-            Y = F_COUNT;
-            X = F_COUNT - 5;
-        }else{
-            Y = X = F_COUNT;
-        }
-        fw.setLocation(X*20, Y*20);
-        try {
-            fw.setSelected(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        fw.show();      
-        F_COUNT++; 
-    }   
+ 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         //Get_Version();
         Get_User();
@@ -253,7 +225,8 @@ public class A extends javax.swing.JFrame {
             this.setTitle("JTT v1.0.1" + " - " + "User: " + UserID + ", Machine: " + WsID + ", OS: " + WsOS);
             Keep_DB_Connection();
         }
-        Open_AP3();
+        //Open_AP3();
+        Open_API();
     }//GEN-LAST:event_formWindowOpened
 
     private void Keep_DB_Connection() {  
@@ -280,32 +253,9 @@ public class A extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuORDERSMouseClicked
     private void jMenuWOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuWOMouseClicked
         if(jMenuWO.isEnabled()){
-            OpenWO();
+            //OpenWO();
         }
     }//GEN-LAST:event_jMenuWOMouseClicked
-    private void OpenWO() {                                   
-        WO wo = new WO();
-        wo.hide();
-
-        this.jDesktopPane1.add(wo);
-        //Thread.sleep(500);
-        int Y = 0;
-        int X = 0;
-        if(F_COUNT > 4) {
-            Y = F_COUNT;
-            X = F_COUNT - 5;
-        }else{
-            Y = X = F_COUNT;
-        }
-        wo.setLocation(X*20, Y*20);
-        try {
-            wo.setSelected(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        wo.show();      
-        F_COUNT++;                      
-    }
     private void jMenuReportsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuReportsMouseClicked
         if(jMenuReports.isEnabled()){
             OpenREPORT();
@@ -431,6 +381,7 @@ public class A extends javax.swing.JFrame {
     }
     // <editor-fold defaultstate="collapsed" desc="Public & Private Variables">
     public static int F_COUNT;
+    
     public static String API_Response_Body = "";
     public static int T_Index;
     public static WebDriver d1;
@@ -451,7 +402,7 @@ public class A extends javax.swing.JFrame {
     public static double sleep = 0.5;
     public static double Timeout = 15;
     public static double Wait = 3;
-    public static DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
+
     
     public static String t;
     public static String err;
@@ -504,6 +455,13 @@ public class A extends javax.swing.JFrame {
     public static String Summary;
     public static String r_type;  
     
+    public static int t_calls = 0;
+    public static double t_min = 0;
+    public static double t_max = 0;
+    public static double t_avg = 0;
+    public static double p_50 = 0;
+    public static double p_90 = 0;
+    
     public static String P2_TKN = "";
     public static String S_OAuth_TKN = "";
     public static String S_Client_ID = "";
@@ -513,22 +471,19 @@ public class A extends javax.swing.JFrame {
 
     public static Connection conn = null;
 
+    public static DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
     public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    public static final DateTimeFormatter File_Date_formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+
     
     public static String Version = "";
     public static String UserID = "";
     public static String WsID = "";    
     public static String WsOS = "";  
 
-    public static String SQL = "";   
-    public static int t_calls = 0;
-    public static double t_min = 0;
-    public static double t_max = 0;
-    public static double t_avg = 0;
-    public static double p_50 = 0;
-    public static double p_90 = 0;
+    public static String SQL = "";  
+    
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
