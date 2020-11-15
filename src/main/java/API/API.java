@@ -7,8 +7,6 @@ package API;
 
 import A.Func;
 import static A.A.*;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import java.awt.Cursor;
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -17,14 +15,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -44,10 +38,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 /**
  *
@@ -102,7 +93,6 @@ public class API extends javax.swing.JInternalFrame {
         cmbEnv = new javax.swing.JComboBox<>();
         cmbApp = new javax.swing.JComboBox<>();
         btnSave_Opt = new javax.swing.JButton();
-        txtApi = new javax.swing.JTextField();
         cmbGroup = new javax.swing.JComboBox<>();
         lblSITES8 = new javax.swing.JLabel();
         cmbComp = new javax.swing.JComboBox<>();
@@ -118,7 +108,9 @@ public class API extends javax.swing.JInternalFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jList_Orders = new javax.swing.JList<>();
         lblSITES4 = new javax.swing.JLabel();
-        btnScart = new javax.swing.JButton();
+        btnSCart = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txtApi = new javax.swing.JTextArea();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -219,7 +211,7 @@ public class API extends javax.swing.JInternalFrame {
         jPanel5.add(btnCal, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 124, 112, 20));
 
         btnLoc_Menus.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnLoc_Menus.setText("Brand Menus");
+        btnLoc_Menus.setText(" < Brand Menus");
         btnLoc_Menus.setEnabled(false);
         btnLoc_Menus.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnLoc_Menus.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -227,7 +219,7 @@ public class API extends javax.swing.JInternalFrame {
                 btnLoc_MenusMouseClicked(evt);
             }
         });
-        jPanel5.add(btnLoc_Menus, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 124, 156, 20));
+        jPanel5.add(btnLoc_Menus, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 100, 160, 20));
 
         btnOrders.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnOrders.setText("Brand Orders on >");
@@ -248,7 +240,7 @@ public class API extends javax.swing.JInternalFrame {
                 btnPromoMouseClicked(evt);
             }
         });
-        jPanel5.add(btnPromo, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 100, 156, 20));
+        jPanel5.add(btnPromo, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 76, 160, 20));
 
         btnAn.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnAn.setText("Announcements");
@@ -307,34 +299,30 @@ public class API extends javax.swing.JInternalFrame {
         dtpDate.setPreferredSize(new java.awt.Dimension(103, 24));
         dtpDate.setRequestFocusEnabled(false);
         dtpDate.setVerifyInputWhenFocusTarget(false);
-        jPanel5.add(dtpDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 148, 156, 20));
+        jPanel5.add(dtpDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 148, 160, 20));
 
         btnUserPermissions.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnUserPermissions.setText("AP3 User ^ Permissions");
-        btnUserPermissions.setEnabled(false);
         btnUserPermissions.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnUserPermissions.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnUserPermissionsMouseClicked(evt);
             }
         });
-        jPanel5.add(btnUserPermissions, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 52, 156, 20));
+        jPanel5.add(btnUserPermissions, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 52, 160, 20));
 
         txtAP3_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtAP3_ID.setText("oleg.spozito@compassdigital.io");
-        txtAP3_ID.setEnabled(false);
-        jPanel5.add(txtAP3_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 28, 156, -1));
+        jPanel5.add(txtAP3_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 28, 160, -1));
 
         txtAP3_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtAP3_PW.setText("Password1");
-        txtAP3_PW.setEnabled(false);
         jPanel5.add(txtAP3_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(292, 28, 116, -1));
 
         lblSITES9.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES9.setText("AP3 User Email / Password");
+        lblSITES9.setText("AP3 User Email  -  Password");
         lblSITES9.setAlignmentX(0.5F);
-        lblSITES9.setEnabled(false);
         jPanel5.add(lblSITES9, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 12, 172, -1));
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 104, 416, 176));
@@ -400,10 +388,9 @@ public class API extends javax.swing.JInternalFrame {
         txtLOG.setText("Start >");
         txtLOG.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtLOG.setMinimumSize(new java.awt.Dimension(50, 19));
-        txtLOG.setPreferredSize(null);
         jScrollPane1.setViewportView(txtLOG);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 416, 428, 88));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 420, 428, 84));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -459,10 +446,6 @@ public class API extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 460, 416, 44));
 
-        txtApi.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtApi.setText("https://api.compassdigital.org/");
-        getContentPane().add(txtApi, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 396, 836, -1));
-
         cmbGroup.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         cmbGroup.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -487,21 +470,21 @@ public class API extends javax.swing.JInternalFrame {
         getContentPane().add(lblSITES12, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 420, -1, -1));
 
         btnRun.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnRun.setText(" < Custom API");
+        btnRun.setText(" Run ^^^");
         btnRun.setMargin(new java.awt.Insets(2, 4, 2, 4));
         btnRun.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRunMouseClicked(evt);
             }
         });
-        getContentPane().add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 372, 112, 20));
+        getContentPane().add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 392, 112, 20));
 
         lblSITES7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES7.setForeground(new java.awt.Color(153, 0, 0));
         lblSITES7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES7.setText("Custom API URL:");
+        lblSITES7.setText("   <   Custom API URL");
         lblSITES7.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 380, -1, -1));
+        getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 376, 112, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -558,18 +541,29 @@ public class API extends javax.swing.JInternalFrame {
         lblSITES4.setAlignmentX(0.5F);
         jPanel1.add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 120, -1));
 
-        btnScart.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnScart.setText("< Shopping Card");
-        btnScart.setEnabled(false);
-        btnScart.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        btnScart.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnSCart.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnSCart.setText("< Shopping Card");
+        btnSCart.setEnabled(false);
+        btnSCart.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnSCart.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnScartMouseClicked(evt);
+                btnSCartMouseClicked(evt);
             }
         });
-        jPanel1.add(btnScart, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 52, 112, 20));
+        jPanel1.add(btnSCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 52, 112, 20));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 284, 848, 80));
+
+        txtApi.setColumns(20);
+        txtApi.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        txtApi.setLineWrap(true);
+        txtApi.setRows(5);
+        txtApi.setText("https://compassdidital.org/");
+        txtApi.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        txtApi.setMinimumSize(new java.awt.Dimension(50, 19));
+        jScrollPane5.setViewportView(txtApi);
+
+        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 368, 716, 52));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -600,6 +594,7 @@ public class API extends javax.swing.JInternalFrame {
         dtpDate.setDateFormatString("EEE, dd-MMM-yyyy");
         dtpDate.setMaxSelectableDate(now);
         dtpDate.setDate(now);
+        MENU_IDS = new ArrayList<>();
         
         Load = false;
 
@@ -701,14 +696,14 @@ public class API extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    private void Get_P2_TKN_and_Slack_IDs(){
+    private void Get_AP3_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
         try {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
             rs.next();
-            P2_TKN = rs.getString(1);
+            AP3_TKN = rs.getString(1);
         } catch (SQLException ex) {
-            txtLOG.append("\r\n\r\n=== P2_TKN > ERROR: " + ex.getMessage());
+            txtLOG.append("\r\n\r\n=== AP3_TKN > ERROR: " + ex.getMessage());
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -732,7 +727,12 @@ public class API extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void DV2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV2MouseClicked
+        if (d2LastRow == DV2.getSelectedRow()) {
+           return;
+        }
+        d2LastRow = DV2.getSelectedRow();        
         BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
+        btnLoc_Menus.setEnabled(false);
     }//GEN-LAST:event_DV2MouseClicked
 
     private void btnAppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAppMouseClicked
@@ -756,8 +756,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/config/public/" + appId + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/config/public/" + appId + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             J += "- Exception: " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
@@ -769,7 +768,7 @@ public class API extends javax.swing.JInternalFrame {
         sw1.start(); 
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/config/" + appId); 
-            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -781,8 +780,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/config/" + appId + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/config/" + appId + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             J += "- Exception: " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
@@ -805,8 +803,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/location/multigroup/" + appId + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/location/multigroup/" + appId + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             J += "- Exception: " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");   
@@ -845,8 +842,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/config/public/" + SiteID + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/config/public/" + SiteID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             J += "- Exception: " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
@@ -858,7 +854,7 @@ public class API extends javax.swing.JInternalFrame {
         sw1.start(); 
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/config/" + SiteID); 
-            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -870,8 +866,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/config/" + SiteID + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/config/" + SiteID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             J += "- Exception: " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
@@ -879,7 +874,7 @@ public class API extends javax.swing.JInternalFrame {
         txtLOG.append("\r\n== /config/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();        
 
-        J += "========= Location/Group API" + "\r\n";
+        J += "\r\n========= Location/Group API" + "\r\n";
         sw1.start();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + SiteID); 
@@ -894,8 +889,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/location/group/" + SiteID + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/location/group/" + SiteID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -935,8 +929,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/config/public/" + UNIT_ID + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/config/public/" + UNIT_ID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             J += "- Exception: " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
@@ -948,7 +941,7 @@ public class API extends javax.swing.JInternalFrame {
         sw1.start(); 
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/config/" + UNIT_ID); 
-            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -960,8 +953,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/config/" + UNIT_ID + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/config/" + UNIT_ID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             J += "- Exception: " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
@@ -969,7 +961,7 @@ public class API extends javax.swing.JInternalFrame {
         txtLOG.append("\r\n== /config/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();        
 
-        J += "========= Location API" + "\r\n";
+        J += "\r\n========= Location API" + "\r\n";
         sw1.start();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1"); 
@@ -984,8 +976,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1" + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1" + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1018,7 +1009,7 @@ public class API extends javax.swing.JInternalFrame {
         sw1.start();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 
-            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -1030,8 +1021,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1054,7 +1044,6 @@ public class API extends javax.swing.JInternalFrame {
         txtLOG.append("\r\n\r\n-Load " + BRAND + " brand API...");
         String J = "Brand: " + BRAND + " - configuration API(s):" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        
         J += "\r\n========= Public Configuration:" + "\r\n";
         sw1.start(); 
         try {
@@ -1069,9 +1058,8 @@ public class API extends javax.swing.JInternalFrame {
                     throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
                 }
             };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/config/public/" + BrandID + "\r\n" + gson.toJson(json);
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));               
+            J += BaseAPI + "/config/public/" + BrandID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             J += "- Exception: " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
@@ -1083,7 +1071,7 @@ public class API extends javax.swing.JInternalFrame {
         sw1.start(); 
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/config/" + BrandID); 
-            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -1095,8 +1083,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/config/" + BrandID + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/config/" + BrandID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             J += "- Exception: " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
@@ -1104,7 +1091,8 @@ public class API extends javax.swing.JInternalFrame {
         txtLOG.append("\r\n== /config/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();        
 
-        J += "========= Group API" + "\r\n";
+        J += "\r\n========= Brand API" + "\r\n";
+        MENU_IDS.clear();
         sw1.start();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/brand/" + BrandID + "?extended=true"); // ?extended=true
@@ -1119,8 +1107,12 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/location/brand/" + BrandID + "\r\n" + gson.toJson(json);
+            JSONArray MENUS = json.getJSONArray("menus");
+            for (int i = 0; i < MENUS.length(); i++) {
+                JSONObject menu = MENUS.getJSONObject(i);
+                    MENU_IDS.add(menu.getString("id"));
+            }             
+            J += BaseAPI + "/location/brand/" + BrandID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1132,6 +1124,11 @@ public class API extends javax.swing.JInternalFrame {
         }
         txtLOG.append("\r\n== /location/brand/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
+        if(MENU_IDS.isEmpty()){
+            btnLoc_Menus.setEnabled(false);
+        }else{
+            btnLoc_Menus.setEnabled(true);
+        }
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         if(!Func.SHOW_FILE(J, "json")){
@@ -1147,7 +1144,7 @@ public class API extends javax.swing.JInternalFrame {
         sw1.start();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector?_provider=cdl"); 
-            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -1159,8 +1156,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/location/sector?_provider=cdl" + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/location/sector?_provider=cdl" + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1178,7 +1174,6 @@ public class API extends javax.swing.JInternalFrame {
             txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
         }
     }//GEN-LAST:event_btnGroupMouseClicked
-
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
         if(!Func.SHOW_FILE(txtLOG.getText(), "txt")){
             txtLOG.append("\r\n\r\n=== Cannot show 'txt' output");
@@ -1193,7 +1188,7 @@ public class API extends javax.swing.JInternalFrame {
         sw1.start();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/calendar/" + BrandID); 
-            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -1205,8 +1200,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/calendar/"  + BrandID + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/calendar/"  + BrandID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1245,7 +1239,7 @@ public class API extends javax.swing.JInternalFrame {
         sw1.start();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/order/location/brand/" + BrandID + "?pickup_start=" + from + "&pickup_end=" + to); 
-            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -1257,8 +1251,8 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/order/location/brand/" + BrandID + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/order/location/brand/" + BrandID + "\r\n" + json.toString(4);  
+            
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1284,7 +1278,7 @@ public class API extends javax.swing.JInternalFrame {
         sw1.start();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/announcement/resource"); 
-            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -1296,8 +1290,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/announcement/resource" + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/announcement/resource" + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1329,7 +1322,7 @@ public class API extends javax.swing.JInternalFrame {
         sw1.start();
         try {
             HttpGet httpget = new HttpGet(URL); 
-            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -1341,8 +1334,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += URL + "\r\n" + gson.toJson(json);
+            J += URL + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1367,7 +1359,7 @@ public class API extends javax.swing.JInternalFrame {
         userID = "";
         userTKN = "";
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        String authAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
+        String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
         String Realm = "";
         try {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + cmbApp.getSelectedItem() + 
@@ -1380,7 +1372,7 @@ public class API extends javax.swing.JInternalFrame {
         sw1.start(); // ============ User
         try { 
             HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm); 
-            httpget.setHeader("Authorization",  "Basic " + authAuth);
+            httpget.setHeader("Authorization",  "Basic " + UserAuth);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -1394,9 +1386,8 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             userID = json.getString("user");
             userTKN = json.getString("token");
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            //J += "\r\n";
-            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + gson.toJson(json);
+
+            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1418,9 +1409,8 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
             J += "\r\n";
-            J += BaseAPI + "/payment/method" + "?user_id=" + userID + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/payment/method" + "?user_id=" + userID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1476,9 +1466,8 @@ public class API extends javax.swing.JInternalFrame {
                 }    
             }
             jList_Orders.setModel(model);  
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
             J += "\r\n";
-            J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1507,7 +1496,7 @@ public class API extends javax.swing.JInternalFrame {
         sw1.start();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/menu/company/" + COMP_IDS.get(I)); 
-            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -1519,8 +1508,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/menu/company/"  + COMP_IDS.get(I) + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/menu/company/"  + COMP_IDS.get(I) + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1546,7 +1534,7 @@ public class API extends javax.swing.JInternalFrame {
         sw1.start();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/notification?realm=cdl&target=admin_panel"); 
-            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -1558,8 +1546,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/notification?realm=cdl&target=admin_panel" + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/notification?realm=cdl&target=admin_panel" + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1586,8 +1573,73 @@ public class API extends javax.swing.JInternalFrame {
     private void btnLoc_MenusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoc_MenusMouseClicked
         // OwrEMjgG5zUeoXRvKoe3cZy8R8WqPBt9rj2dwv5eUazpZOKPNzcyWAyRG10vCWQg9Oz < in assigned
         // eBLlmjy9NwfXNdoqJ6Gyu58ZEOjgWlH4BMjE1G3Ru2r3OjOq9Qtm97024RLzSeyXQrp < in menus
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLOG.append("\r\n\r\n-Menu(s) API..."); 
+        String J = "========= Menu(s)  API:" + "\r\n";
+        boolean DH = false;
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        for(int i = 0; i < MENU_IDS.size(); i++){
+            sw1.start();
+            try {
+                HttpGet httpget = new HttpGet(BaseAPI + "/menu/" + MENU_IDS.get(i) + "?extended=true&nocache=1"); 
+                ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                    int status = response.getStatusLine().getStatusCode();
+                    if (status >= 200 && status < 500) {
+                        HttpEntity entity = response.getEntity();
+                        return entity != null ? EntityUtils.toString(entity) : null;
+                    } else {
+                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                        throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
+                    }
+                };
+                JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+                J += BaseAPI + "/menu/" + MENU_IDS.get(i) + "?extended=true&nocache=1" + "\r\n" + json.toString(4);
+            } catch (Exception ex) {
+                DH = true;
+                J += BaseAPI + "/menu/" + MENU_IDS.get(i) + "?extended=true&nocache=1" + " > " + ex.getMessage() + "\r\n";
+                txtLOG.append("\r\n- Exception: " + ex.getMessage());     
+            }   
+            txtLOG.append("\r\n== " + BaseAPI + "/menu/" + MENU_IDS.get(i) + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+            sw1.reset(); 
+            
+            if(DH){
+                sw1.start();
+                try {
+                    HttpGet httpget = new HttpGet(BaseAPI + "/menu/" + MENU_IDS.get(i)); 
+                    ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                        int status = response.getStatusLine().getStatusCode();
+                        if (status >= 200 && status < 500) {
+                            HttpEntity entity = response.getEntity();
+                            return entity != null ? EntityUtils.toString(entity) : null;
+                        } else {
+                            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                            throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
+                        }
+                    };
+                    JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+                    J += BaseAPI + "/menu/" + MENU_IDS.get(i) + "\r\n" + json.toString(4);
+                } catch (Exception ex) {
+                    J += BaseAPI + "/menu/" + MENU_IDS.get(i) + " > " + ex.getMessage() + "\r\n";
+                    txtLOG.append("\r\n- Exception: " + ex.getMessage());     
+                }   
+                txtLOG.append("\r\n== " + BaseAPI + "/menu/" + MENU_IDS.get(i) + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+                sw1.reset();   
+            }
+        }   
+        
+        try {
+            httpclient.close();
+        } catch (IOException ex) {
+            txtLOG.append("\r\n- Exception: " + ex.getMessage());   
+        }
+
+
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        if(!Func.SHOW_FILE(J, "json")){
+            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
+        }         
     }//GEN-LAST:event_btnLoc_MenusMouseClicked
-    private void btnScartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnScartMouseClicked
+    private void btnSCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSCartMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n-Shopping Cart API..."); 
         String J = "========= Shopping Cart API:" + "\r\n";
@@ -1597,7 +1649,7 @@ public class API extends javax.swing.JInternalFrame {
         sw1.start();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/shoppingcart/" + CartID); 
-            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -1609,8 +1661,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            J += BaseAPI + "/shoppingcart/" + CartID + "\r\n" + gson.toJson(json);
+            J += BaseAPI + "/shoppingcart/" + CartID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1627,16 +1678,84 @@ public class API extends javax.swing.JInternalFrame {
         if(!Func.SHOW_FILE(J, "json")){
             txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
         } 
-    }//GEN-LAST:event_btnScartMouseClicked
+    }//GEN-LAST:event_btnSCartMouseClicked
 
     private void jList_OrdersValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList_OrdersValueChanged
         if(!evt.getValueIsAdjusting() && jList_Orders.getSelectedValue().contains("Cart")) {
-            btnScart.setEnabled(true);
+            btnSCart.setEnabled(true);
         }
     }//GEN-LAST:event_jList_OrdersValueChanged
 
     private void btnUserPermissionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserPermissionsMouseClicked
-        // TODO add your handling code here:
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLOG.append("\r\n\r\n-User, Permissions API..."); 
+        String J = "========= User API:" + "\r\n";
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+//        String UserAuth = Base64.getEncoder().encodeToString((txtAP3_ID.getText().trim() + ":" + txtAP3_PW.getText().trim()).getBytes());
+//        String User_ID = ""; //9MpYODpNRkSZDzX3P2LrT2jk2yDEgeCG3vjNr651IqwERY0eY6u5vglWwND2u0qZDyeqm4Fo01MQ4w2jHzPr";
+//        String Realm = "";
+
+//        try {
+//            ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + cmbApp.getSelectedItem() + 
+//                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
+//            rs.next();
+//            Realm = rs.getString(1);
+//        } catch (SQLException ex) {
+//            txtLOG.append("\r\n\r\n=== Get P2 Realm ID > ERROR: " + ex.getMessage());
+//        } 
+//        sw1.start(); // ============ User
+//        try { 
+//            HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm); 
+//            httpget.setHeader("Authorization",  "Basic " + UserAuth);
+//            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+//                int status = response.getStatusLine().getStatusCode();
+//                if (status >= 200 && status < 500) {
+//                    HttpEntity entity = response.getEntity();
+//                    return entity != null ? EntityUtils.toString(entity) : null;
+//                } else {
+//                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+//                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
+//                }
+//            };
+//            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+//            User_ID = json.getString("user");
+//            userTKN = json.getString("token");
+//            //J += "\r\n";
+//            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
+//        } catch (Exception ex) {
+//            txtLOG.append("\r\n- Exception: " + ex.getMessage());     
+//        }   
+//        txtLOG.append("\r\n== " + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+//        sw1.reset();        
+        
+        sw1.start(); // ============ User Permissions
+        String User_ID = "9MpYODpNRkSZDzX3P2LrT2jk2yDEgeCG3vjNr651IqwERY0eY6u5vglWwND2u0qZDyeqm4Fo01MQ4w2jHzPr";
+        try { 
+            HttpGet httpget = new HttpGet(BaseAPI + "/user/" + User_ID + "/permissions"); 
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN); // UserAuth // userTKN
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 500) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            J += "\r\n\r\n";
+            J += BaseAPI + "/user/" + User_ID + "/permissions" + "\r\n" + json.toString(4);
+        } catch (Exception ex) {
+            txtLOG.append("\r\n- Exception: " + ex.getMessage());     
+        }   
+        txtLOG.append("\r\n== " + "/user" + User_ID + "/permissions"  + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        sw1.reset();
+
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        if(!Func.SHOW_FILE(J, "json")){
+            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
+        } 
     }//GEN-LAST:event_btnUserPermissionsMouseClicked
 
     private void LOAD_ENV(){
@@ -1660,7 +1779,7 @@ public class API extends javax.swing.JInternalFrame {
         model.clear();
         jList_Orders.setModel(model);
         
-        Get_P2_TKN_and_Slack_IDs();
+        Get_AP3_TKN();
         LOAD_CONFIG();
         if (CONFIG) {
             cmbApp.setSelectedItem(app);
@@ -1871,8 +1990,9 @@ public class API extends javax.swing.JInternalFrame {
         } else {
             BrandID = "null";
         }
+        //SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
 
-        SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
+        d2LastRow = DV2.getSelectedRow();        
         lblBRANDS.setText("Selected Site Brands (" + DV2.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1887,7 +2007,7 @@ public class API extends javax.swing.JInternalFrame {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector?_provider=cdl"); 
-            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 String Msg = response.getStatusLine().getReasonPhrase();
@@ -1953,7 +2073,7 @@ public class API extends javax.swing.JInternalFrame {
         try {
             sw1.start();     
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 
-            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 String Msg = response.getStatusLine().getReasonPhrase();
@@ -2011,6 +2131,7 @@ public class API extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
     private boolean Load;
     private int d1LastRow = -1; 
+    private int d2LastRow = -1; 
     private List<String> GROUP_IDS;
     private List<String> COMP_IDS; 
     private List<String> MENU_IDS;  
@@ -2019,7 +2140,7 @@ public class API extends javax.swing.JInternalFrame {
     private String userID;
     private String userTKN;
     
-    public static String P2_TKN = "";    
+    public static String AP3_TKN = "";    
     public static String url = "";
     public static String app = "";
     public static String appId = "";
@@ -2051,8 +2172,8 @@ public class API extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnOrders;
     private javax.swing.JButton btnPromo;
     private javax.swing.JButton btnRun;
+    private javax.swing.JButton btnSCart;
     private javax.swing.JButton btnSave_Opt;
-    private javax.swing.JButton btnScart;
     private javax.swing.JButton btnSite;
     private javax.swing.JButton btnUnit;
     private javax.swing.JButton btnUpdates;
@@ -2071,6 +2192,7 @@ public class API extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lblBRANDS;
     private javax.swing.JLabel lblSITES;
     private javax.swing.JLabel lblSITES12;
@@ -2084,7 +2206,7 @@ public class API extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblSITES9;
     private javax.swing.JTextField txtAP3_ID;
     private javax.swing.JTextField txtAP3_PW;
-    private javax.swing.JTextField txtApi;
+    private javax.swing.JTextArea txtApi;
     private javax.swing.JTextArea txtLOG;
     private javax.swing.JTextField txtMobile_ID;
     private javax.swing.JTextField txtMobile_PW;

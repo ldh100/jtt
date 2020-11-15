@@ -923,7 +923,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             env = "PR";
             url = "https://adminpanel.compassdigital.org/";
         }     
-        Get_P2_TKN_and_Slack_IDs();
+        Get_AP3_TKN_and_Slack_IDs();
         LOAD_CONFIG();
         if (CONFIG) {
             cmbApp.setSelectedItem(app);
@@ -1211,7 +1211,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLOG.append("\r\n=== (no mouse hover!) during Automation run");
         txtLOG.append("\r\n=== Good Luck...\r\n");  
     }
-    private void Get_P2_TKN_and_Slack_IDs(){
+    private void Get_AP3_TKN_and_Slack_IDs(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_OAuth_TKN'");
@@ -1252,9 +1252,9 @@ public class AP3 extends javax.swing.JInternalFrame {
         try {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
             rs.next();
-            P2_TKN = rs.getString(1);
+            AP3_TKN = rs.getString(1);
         } catch (SQLException ex) {
-            txtLOG.append("\r\n\r\n=== P2_TKN > ERROR: " + ex.getMessage());
+            txtLOG.append("\r\n\r\n=== AP3_TKN > ERROR: " + ex.getMessage());
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1476,7 +1476,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector?_provider=cdl"); 
-            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 String Msg = response.getStatusLine().getReasonPhrase();
@@ -1540,7 +1540,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             cmbMENU.removeAllItems();
             sw1.start();     
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 
-            httpget.setHeader("Authorization",  "Bearer " + P2_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 String Msg = response.getStatusLine().getReasonPhrase();
@@ -1889,7 +1889,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private List<String> GROUP_IDS;
     private String SCOPE;
     
-    public static String P2_TKN = "";    
+    public static String AP3_TKN = "";    
     public static String url = "";
     public static String app = "";
     public static String appId = "";

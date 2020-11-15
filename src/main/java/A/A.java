@@ -225,8 +225,8 @@ public class A extends javax.swing.JFrame {
             this.setTitle("JTT v1.0.1" + " - " + "User: " + UserID + ", Machine: " + WsID + ", OS: " + WsOS);
             Keep_DB_Connection();
         }
-        Open_AP3();
-        //Open_API();
+        //Open_AP3();
+        Open_API();
     }//GEN-LAST:event_formWindowOpened
 
     private void Keep_DB_Connection() {  
