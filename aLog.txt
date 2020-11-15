@@ -2,37 +2,11 @@ Start >
 
 === LOAD_CONFIG > OK
 -Load Sites from API...
-== 0.51 sec ==
+== 0.32 sec ==
 -Load Brands from API...
-== 3.02 sec ==
+== 0.48 sec ==
 -Load Groups/Sector from API...
-== Group: Alberta/CA, Id: wjgOXd6Xl0UGZqwW9JOzuozJ36p0OXf0XwX9MG1wfEQ7QoRggKHZXyG6ZZY9f4BOd91gYOiy2gvK
-== 0.41 sec ==
--Load Sector/Companies(Menus) from API...
+== Group: Chartwells/US, Id: 11J3gKPg8BC5r9k3mlyzu8y1qZjG3aFoj0ZNw03OspJ2woX2okSjryOBX5ZGHaO0XOwaNQcAdR66
 == 0.44 sec ==
-
-=== Ready >
-
--Load User API(s)...
-== /user/auth?realm=D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe > 
-== 0.41 sec ==
-== /payment/method?user_id=P7wDdew43EURw7JkM4mpTNk0NYPYd5iQ7DqE5XvjhwzM0qpPm9HlL4LJrA49UDEX9EggYBFD9gdzzWeYHkDlyY3 > 
-== 2.87 sec ==
-== /order/customer/P7wDdew43EURw7JkM4mpTNk0NYPYd5iQ7DqE5XvjhwzM0qpPm9HlL4LJrA49UDEX9EggYBFD9gdzzWeYHkDlyY3?start=1604705096045;end=1605309896045 > 
-== 0.29 sec ==
-
--Shopping Cart API...
-== https://api.compassdigital.org/dev/shoppingcart/71lp6EeK6BT92LRBoeXzF3XkyKG7qDUQmYWkdApASBwJRDeGvPFdzpLX1DkkHO8DdM7 > 
-== 0.30 sec ==
-
--Shopping Cart API...
-== https://api.compassdigital.org/dev/shoppingcart/JJyM1Q8L1vFlQYMKERJEuP1Y9e1qErUk02NQWqr3u30L5GQ9YZh6aovl0Oo3HPlWBAB > 
-== 0.41 sec ==
 -Load Sector/Companies(Menus) from API...
-== 1.02 sec ==
-
-=== SAVE_CONFIG > OK (1 row)
-
--Brand > Orders API...
-== https://api.compassdigital.org/stagingorder/location/brand/ > 
-== 0.38 sec ==
+== 0.76 sec ==

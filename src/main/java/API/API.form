@@ -380,7 +380,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtMobile_ID1">
+        <Component class="javax.swing.JTextField" name="txtAP3_ID">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="0"/>
@@ -394,7 +394,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtMobile_PW1">
+        <Component class="javax.swing.JTextField" name="txtAP3_PW">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="0"/>

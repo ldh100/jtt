@@ -86,8 +86,8 @@ public class API extends javax.swing.JInternalFrame {
         btnMenu = new javax.swing.JButton();
         dtpDate = new com.toedter.calendar.JDateChooser();
         btnUserPermissions = new javax.swing.JButton();
-        txtMobile_ID1 = new javax.swing.JTextField();
-        txtMobile_PW1 = new javax.swing.JTextField();
+        txtAP3_ID = new javax.swing.JTextField();
+        txtAP3_PW = new javax.swing.JTextField();
         lblSITES9 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         DV1 = new javax.swing.JTable();
@@ -320,15 +320,15 @@ public class API extends javax.swing.JInternalFrame {
         });
         jPanel5.add(btnUserPermissions, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 52, 156, 20));
 
-        txtMobile_ID1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtMobile_ID1.setText("oleg.spozito@compassdigital.io");
-        txtMobile_ID1.setEnabled(false);
-        jPanel5.add(txtMobile_ID1, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 28, 156, -1));
+        txtAP3_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtAP3_ID.setText("oleg.spozito@compassdigital.io");
+        txtAP3_ID.setEnabled(false);
+        jPanel5.add(txtAP3_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 28, 156, -1));
 
-        txtMobile_PW1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtMobile_PW1.setText("Password1");
-        txtMobile_PW1.setEnabled(false);
-        jPanel5.add(txtMobile_PW1, new org.netbeans.lib.awtextra.AbsoluteConstraints(292, 28, 116, -1));
+        txtAP3_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtAP3_PW.setText("Password1");
+        txtAP3_PW.setEnabled(false);
+        jPanel5.add(txtAP3_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(292, 28, 116, -1));
 
         lblSITES9.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -623,8 +623,10 @@ public class API extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("CAN:")); c = c.substring(0, c.indexOf("\r\n")).trim(); CAN = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("txtEMail:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtPW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtMobile_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtMobile_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtAP3_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAP3_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtAP3_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAP3_PW.setText(c.substring(c.indexOf(" ")).trim());
 
                 CONFIG = true;
                 txtLOG.append("\r\n\r\n=== LOAD_CONFIG > OK");
@@ -659,8 +661,10 @@ public class API extends javax.swing.JInternalFrame {
             C += "BRAND: " + _B + "\r\n";
             C += "CAN: " + CAN + "\r\n";
             
-            C += "txtEMail: " + txtMobile_ID.getText() + "\r\n";
-            C += "txtPW: " + txtMobile_PW.getText()  + "\r\n";
+            C += "txtMobile_ID: " + txtMobile_ID.getText() + "\r\n";
+            C += "txtMobile_PW: " + txtMobile_PW.getText()  + "\r\n";
+            C += "txtAP3_ID: " + txtAP3_ID.getText()  + "\r\n";
+            C += "txtAP3_PW: " + txtAP3_PW.getText() + "\r\n";            
 
         } catch (Exception ex)  {
             txtLOG.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
@@ -1665,7 +1669,6 @@ public class API extends javax.swing.JInternalFrame {
         GetSites_API();
         GetGroups_API();        
     }
-
     private void GetSites_API() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -2079,12 +2082,12 @@ public class API extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblSITES7;
     private javax.swing.JLabel lblSITES8;
     private javax.swing.JLabel lblSITES9;
+    private javax.swing.JTextField txtAP3_ID;
+    private javax.swing.JTextField txtAP3_PW;
     private javax.swing.JTextField txtApi;
     private javax.swing.JTextArea txtLOG;
     private javax.swing.JTextField txtMobile_ID;
-    private javax.swing.JTextField txtMobile_ID1;
     private javax.swing.JTextField txtMobile_PW;
-    private javax.swing.JTextField txtMobile_PW1;
     // End of variables declaration//GEN-END:variables
 // </editor-fold>
 }

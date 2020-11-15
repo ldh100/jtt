@@ -236,8 +236,6 @@ public class A extends javax.swing.JFrame {
             public void run() {  
                 try {
                     ResultSet rs = conn.createStatement().executeQuery("SELECT TOP 1 [qID] FROM [dbo].[users]");
-//                    rs.next();
-//                    System.out.println("Keep_DB_Connection " + rs.getString(1) + " @" + LocalDateTime.now().format(Time_12_formatter)); 
                     System.out.println("Keep_DB_Connection - OK @" + LocalDateTime.now().format(Time_12_formatter)); 
                 }catch (Exception ex){
                     System.out.println("Keep_DB_Connection " + ex.getMessage());
@@ -326,18 +324,14 @@ public class A extends javax.swing.JFrame {
     private  boolean ConnectDB() {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         boolean OK = false;
-        //sw1.start();
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection("jdbc:sqlserver://dev-digitalhospitality-sql.database.windows.net:1433;database=cdlqadb;user=xttadmin;password=Sp515s10#a;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"); 
             OK = true;
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException  ex) {
             //txtLOG.append("\r\n- ConnectDB" + ex.getMessage());  
             Logger.getLogger(AP3.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //txtLOG.append("\r\n- NotFoundException: " + ex.getMessage());
-        //txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
-        //sw1.reset();
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         return OK;
     }
