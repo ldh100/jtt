@@ -380,7 +380,6 @@ public class A extends javax.swing.JFrame {
         });
     }
     // <editor-fold defaultstate="collapsed" desc="Public & Private Variables">
-    public static int F_COUNT;
     
     public static String API_Response_Body = "";
     public static int T_Index;
@@ -426,24 +425,12 @@ public class A extends javax.swing.JFrame {
     
     public static Stopwatch sw1 = Stopwatch.createUnstarted();;
     public static String r_time = "";
-
     public static String Ver = "";
-    public static String url = "";
-    public static String appId = "";
+    public static String TZone;   
+    
     public static String New_ID = "";
     public static String Toast_Msg = "";        
-    public static String env = "";
-    public static String SITE = "";
-    public static String GROUP = "";
-    public static String BRAND = "";
-    public static String CAN = "CAN";
-    public static String GL_MENU = "TIM HORTONS";
-    public static String app = "";
-    public static String platform = "CDL";
-    public static String BrandID = "";
-    public static String SiteID = "";
-    public static String BaseAPI;
-    public static String TZone;
+
     
     public static String Tab_Name;
     public static String Day;
@@ -462,7 +449,7 @@ public class A extends javax.swing.JFrame {
     public static double p_50 = 0;
     public static double p_90 = 0;
     
-    public static String P2_TKN = "";
+
     public static String S_OAuth_TKN = "";
     public static String S_Client_ID = "";
     public static String S_Client_Secret  = "";
@@ -475,15 +462,13 @@ public class A extends javax.swing.JFrame {
     public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
-    
+    public static int F_COUNT;    
     public static String Version = "";
     public static String UserID = "";
     public static String WsID = "";    
     public static String WsOS = "";  
 
     public static String SQL = "";  
-    
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

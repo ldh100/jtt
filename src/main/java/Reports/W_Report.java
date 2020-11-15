@@ -48,20 +48,20 @@ public class W_Report extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtLOG = new javax.swing.JTextArea();
+        txtLog = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         DV1 = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;   //Disallow the editing of any cell
             }
         };
-        dtpDEL = new com.toedter.calendar.JDateChooser();
+        dtpDel = new com.toedter.calendar.JDateChooser();
         lblSITES = new javax.swing.JLabel();
-        btnDEL = new javax.swing.JButton();
-        btnDEL_OLD = new javax.swing.JButton();
-        btnEXCEL = new javax.swing.JButton();
-        btnLOG = new javax.swing.JButton();
-        btnREF = new javax.swing.JButton();
+        btnDel = new javax.swing.JButton();
+        btnDelOld = new javax.swing.JButton();
+        btnExcel = new javax.swing.JButton();
+        btnLog = new javax.swing.JButton();
+        btnRef = new javax.swing.JButton();
         cmbF = new javax.swing.JComboBox<>();
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -82,12 +82,12 @@ public class W_Report extends javax.swing.JInternalFrame {
             }
         });
 
-        txtLOG.setEditable(false);
-        txtLOG.setColumns(20);
-        txtLOG.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
-        txtLOG.setRows(5);
-        txtLOG.setMargin(new java.awt.Insets(2, 2, 1, 1));
-        jScrollPane1.setViewportView(txtLOG);
+        txtLog.setEditable(false);
+        txtLog.setColumns(20);
+        txtLog.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        txtLog.setRows(5);
+        txtLog.setMargin(new java.awt.Insets(2, 2, 1, 1));
+        jScrollPane1.setViewportView(txtLog);
 
         DV1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         DV1.setModel(new javax.swing.table.DefaultTableModel(
@@ -113,55 +113,56 @@ public class W_Report extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(DV1);
         DV1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        dtpDEL.setDateFormatString("DD-MMM-yyyy");
-        dtpDEL.setFocusCycleRoot(true);
-        dtpDEL.setName("dtpFEL"); // NOI18N
-        dtpDEL.setPreferredSize(new java.awt.Dimension(103, 24));
-        dtpDEL.setRequestFocusEnabled(false);
-        dtpDEL.setVerifyInputWhenFocusTarget(false);
+        dtpDel.setDateFormatString("DD-MMM-yyyy");
+        dtpDel.setFocusCycleRoot(true);
+        dtpDel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        dtpDel.setName("dtpDel"); // NOI18N
+        dtpDel.setPreferredSize(new java.awt.Dimension(103, 24));
+        dtpDel.setRequestFocusEnabled(false);
+        dtpDel.setVerifyInputWhenFocusTarget(false);
 
         lblSITES.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblSITES.setText("Filter by App:");
         lblSITES.setAlignmentX(0.5F);
 
-        btnDEL.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnDEL.setText("Delete Selected");
-        btnDEL.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnDel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnDel.setText("Delete Selected");
+        btnDel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDELMouseClicked(evt);
+                btnDelMouseClicked(evt);
             }
         });
 
-        btnDEL_OLD.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnDEL_OLD.setText("Delete Before:");
-        btnDEL_OLD.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnDelOld.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnDelOld.setText("Delete Before:");
+        btnDelOld.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDEL_OLDMouseClicked(evt);
+                btnDelOldMouseClicked(evt);
             }
         });
 
-        btnEXCEL.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnEXCEL.setText("Excel Report");
-        btnEXCEL.setPreferredSize(new java.awt.Dimension(113, 25));
-        btnEXCEL.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnExcel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnExcel.setText("Excel Report");
+        btnExcel.setPreferredSize(new java.awt.Dimension(113, 25));
+        btnExcel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEXCELMouseClicked(evt);
+                btnExcelMouseClicked(evt);
             }
         });
 
-        btnLOG.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnLOG.setText("Log");
-        btnLOG.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnLog.setText("Log");
+        btnLog.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLOGMouseClicked(evt);
+                btnLogMouseClicked(evt);
             }
         });
 
-        btnREF.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnREF.setText("Ref");
-        btnREF.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnRef.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnRef.setText("Ref");
+        btnRef.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnREFMouseClicked(evt);
+                btnRefMouseClicked(evt);
             }
         });
 
@@ -182,28 +183,20 @@ public class W_Report extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(dtpDel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDelOld, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblSITES, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(4, 4, 4)
-                            .addComponent(dtpDEL, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(4, 4, 4)
-                            .addComponent(btnDEL, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(4, 4, 4)
-                            .addComponent(btnDEL_OLD, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblSITES, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnLOG, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnREF, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(btnEXCEL, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cmbF, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRef, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbF, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(4, 4, 4))
         );
         layout.setVerticalGroup(
@@ -212,11 +205,11 @@ public class W_Report extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnDEL, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDEL_OLD, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDelOld, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11)
-                        .addComponent(dtpDEL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dtpDel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                         .addComponent(lblSITES))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -225,11 +218,11 @@ public class W_Report extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cmbF, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEXCEL, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnLOG, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnREF, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRef, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(2, 2, 2))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2))
@@ -242,10 +235,10 @@ public class W_Report extends javax.swing.JInternalFrame {
         LoadREP();
     }//GEN-LAST:event_formAncestorAdded
     private void LoadREP() {                                      
-        dtpDEL.setDateFormatString("dd-MMM-yyy");
+        dtpDel.setDateFormatString("dd-MMM-yyy");
         Date now = new Date();
-        dtpDEL.setMaxSelectableDate(now);
-        dtpDEL.setDate(new Date(now.getTime() - Duration.ofDays(14).toMillis()));
+        dtpDel.setMaxSelectableDate(now);
+        dtpDel.setDate(new Date(now.getTime() - Duration.ofDays(14).toMillis()));
         LoadF();
         LoadDB();
     } 
@@ -256,7 +249,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         SUM();
     }//GEN-LAST:event_DV1MouseClicked
 
-    private void btnDELMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDELMouseClicked
+    private void btnDelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelMouseClicked
         Object[] options = {"Yes", "No"};
         int reply = JOptionPane.showOptionDialog(this,
             "Are you sure you want to delete selected report?",
@@ -273,19 +266,19 @@ public class W_Report extends javax.swing.JInternalFrame {
         try {
             conn.createStatement().execute("DELETE FROM [dbo].[aw_result] WHERE qID = '" + DV1.getValueAt(DV1.getSelectedRow(), 0) + "'");        
         } catch (SQLException ex) {
-            txtLOG.append("\r\n\r\n=== Delete report > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== Delete report > ERROR: " + ex.getMessage());
         }
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
 
         LoadF();
         LoadDB();
-    }//GEN-LAST:event_btnDELMouseClicked
+    }//GEN-LAST:event_btnDelMouseClicked
 
-    private void btnDEL_OLDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDEL_OLDMouseClicked
+    private void btnDelOldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelOldMouseClicked
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat( "yyyy-MM-dd");
         Object[] options = {"Yes", "No"};
         int reply = JOptionPane.showOptionDialog(this,
-            "Are you sure you want to delete all recodrs logged before " + simpleDateFormat.format(dtpDEL.getDate()) + "?",
+            "Are you sure you want to delete all recodrs logged before " + simpleDateFormat.format(dtpDel.getDate()) + "?",
             "Delete Old Automation Reports",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE,
@@ -299,30 +292,30 @@ public class W_Report extends javax.swing.JInternalFrame {
         try {
             
             Statement st = conn.createStatement();
-            int d = st.executeUpdate("DELETE FROM [dbo].[aw_result] WHERE [Date] < '" + simpleDateFormat.format(dtpDEL.getDate()) + "'");
-            txtLOG.append("\r\n\r\n=== Old Reports > " + d + " record(s) deleted");       
+            int d = st.executeUpdate("DELETE FROM [dbo].[aw_result] WHERE [Date] < '" + simpleDateFormat.format(dtpDel.getDate()) + "'");
+            txtLog.append("\r\n\r\n=== Old Reports > " + d + " record(s) deleted");       
         } catch (SQLException ex) {
-            txtLOG.append("\r\n\r\n=== Delete Old Reports > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== Delete Old Reports > ERROR: " + ex.getMessage());
         }
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         LoadF();
         LoadDB();
-    }//GEN-LAST:event_btnDEL_OLDMouseClicked
+    }//GEN-LAST:event_btnDelOldMouseClicked
 
-    private void btnEXCELMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEXCELMouseClicked
-        btnEXCEL.setEnabled(false);
+    private void btnExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcelMouseClicked
+        btnExcel.setEnabled(false);
         EXCEL();
-        btnEXCEL.setEnabled(true);
-    }//GEN-LAST:event_btnEXCELMouseClicked
+        btnExcel.setEnabled(true);
+    }//GEN-LAST:event_btnExcelMouseClicked
 
-    private void btnLOGMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLOGMouseClicked
+    private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
         try {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [Result] FROM [dbo].[aw_result] WHERE [qID] = '" +
                DV1.getValueAt(DV1.getSelectedRow(), 0) + "'");
             rs.next();
             String EXX = rs.getString(1);
             if(!Func.SHOW_FILE(EXX, "txt")){
-                txtLOG.append("\r\n\r\n=== Cannot show 'txt' output");
+                txtLog.append("\r\n\r\n=== Cannot show 'txt' output");
             }
 //            File aLog = new File("aLog.txt");
 //            if (aLog.createNewFile()) {
@@ -333,14 +326,14 @@ public class W_Report extends javax.swing.JInternalFrame {
 //            Files.write(Paths.get(aLog.getPath()), EXX.getBytes());
 //            java.awt.Desktop.getDesktop().open(aLog);        
         }catch (Exception ex){
-            txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
         }
-    }//GEN-LAST:event_btnLOGMouseClicked
+    }//GEN-LAST:event_btnLogMouseClicked
 
-    private void btnREFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnREFMouseClicked
+    private void btnRefMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefMouseClicked
         LoadF();
         LoadDB();
-    }//GEN-LAST:event_btnREFMouseClicked
+    }//GEN-LAST:event_btnRefMouseClicked
 
     private void cmbFItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbFItemStateChanged
         if(evt.getStateChange() == 1) {
@@ -349,26 +342,26 @@ public class W_Report extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbFItemStateChanged
     private void SUM() {
         if (DV1.getRowCount() < 1) return;
-        btnLOG.setEnabled(true);
-        btnDEL_OLD.setEnabled(true); 
+        btnLog.setEnabled(true);
+        btnDelOld.setEnabled(true); 
         if (UserID.toLowerCase().contains("oleg")){
-            btnDEL_OLD.setEnabled(true);
+            btnDelOld.setEnabled(true);
         }  else{
-            btnDEL_OLD.setEnabled(false);
+            btnDelOld.setEnabled(false);
         }   
         String AUTOR = DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("user_id").getModelIndex()).toString();
         if (AUTOR.equals(UserID)|| UserID.toLowerCase().contains("oleg")){ 
-            btnDEL.setEnabled(true);
+            btnDel.setEnabled(true);
         }  else{
-            btnDEL.setEnabled(false);
+            btnDel.setEnabled(false);
         }          
         if (DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("AP3") || 
                 DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("Food")|| 
                 DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("WO"))
         {
-            btnEXCEL.setEnabled(true);
+            btnExcel.setEnabled(true);
         } else {
-            btnEXCEL.setEnabled(false);
+            btnExcel.setEnabled(false);
         }        
         String utcTimeString = DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("cDate").getModelIndex()).toString();
         DateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -385,7 +378,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         if(!Status.contains("Scope")){
             Status = "";
         }
-        txtLOG.setText("LogID: " + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("qID").getModelIndex())
+        txtLog.setText("LogID: " + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("qID").getModelIndex())
             + " @" + localFormat.format(utcTime) 
             + " (" + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("test_type").getModelIndex()) + ") > "
             + "WS: " + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("user_ws").getModelIndex())+ ", " 
@@ -396,7 +389,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("summary").getModelIndex()).toString().trim() + "\r\n" 
             + Status               
         );
-        txtLOG.setCaretPosition(0);
+        txtLog.setCaretPosition(0);
     }
     private void EXCEL(){
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -407,11 +400,11 @@ public class W_Report extends javax.swing.JInternalFrame {
             rs.next();
             EXX = rs.getString(1);
         }catch (Exception ex){
-            txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
         }
         if ("".equals(EXX.trim()) || "None".equals(EXX.trim())){
             setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            txtLOG.append("\r\n\r\n=== Report > Not Excel");
+            txtLog.append("\r\n\r\n=== Report > Not Excel");
             return;
         }   
         try {
@@ -431,7 +424,7 @@ public class W_Report extends javax.swing.JInternalFrame {
 //                } 
             }
             String Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
-            Func.fExcel((l - 1), col, Values, "AP3_" + env + "_" + Date, Top_Row, 0, 0, null, " ", " ");
+            Func.fExcel((l - 1), col, Values, DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()) + "_" +Date, Top_Row, 0, 0, null, " ", " ");
 
 
 //                Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -455,7 +448,7 @@ public class W_Report extends javax.swing.JInternalFrame {
 //            Files.write(Paths.get(ExcelLog.getPath()), EXX.getBytes());
 //            java.awt.Desktop.getDesktop().open(ExcelLog);
         } catch (Exception ex) {
-            txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
         }
         Runtime.getRuntime().gc();
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -470,7 +463,7 @@ public class W_Report extends javax.swing.JInternalFrame {
                cmbF.addItem(rs.getString(1));
             }           
         } catch (SQLException ex) {
-            txtLOG.append("\r\n\r\n=== Load APP Filter > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== Load APP Filter > ERROR: " + ex.getMessage());
         }
         cmbF.setSelectedIndex(0);
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -541,7 +534,7 @@ public class W_Report extends javax.swing.JInternalFrame {
                 DV1.getColumnModel().getColumn(5).setCellRenderer(cr);
             }
         } catch (Exception ex) {
-            txtLOG.append("\r\n\r\n=== Load Data > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== Load Data > ERROR: " + ex.getMessage());
         }
         DV1.repaint();
         this.title = "Reports - " + DV1.getRowCount() + " records";
@@ -554,17 +547,17 @@ public class W_Report extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Public & Private Variables">    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
-    private javax.swing.JButton btnDEL;
-    private javax.swing.JButton btnDEL_OLD;
-    private javax.swing.JButton btnEXCEL;
-    private javax.swing.JButton btnLOG;
-    private javax.swing.JButton btnREF;
+    private javax.swing.JButton btnDel;
+    private javax.swing.JButton btnDelOld;
+    private javax.swing.JButton btnExcel;
+    private javax.swing.JButton btnLog;
+    private javax.swing.JButton btnRef;
     private javax.swing.JComboBox<String> cmbF;
-    private com.toedter.calendar.JDateChooser dtpDEL;
+    private com.toedter.calendar.JDateChooser dtpDel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblSITES;
-    private javax.swing.JTextArea txtLOG;
+    private javax.swing.JTextArea txtLog;
     // End of variables declaration//GEN-END:variables
     // </editor-fold> 
 }

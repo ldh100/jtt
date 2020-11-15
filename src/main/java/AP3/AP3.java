@@ -7,8 +7,6 @@ package AP3;
 
 import A.Func;
 import static A.A.*;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.ullink.slack.simpleslackapi.SlackChannel;
 import com.ullink.slack.simpleslackapi.SlackMessageHandle;
 import com.ullink.slack.simpleslackapi.SlackSession;
@@ -42,7 +40,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -928,6 +925,10 @@ public class AP3 extends javax.swing.JInternalFrame {
         }     
         Get_P2_TKN_and_Slack_IDs();
         LOAD_CONFIG();
+        if (CONFIG) {
+            cmbApp.setSelectedItem(app);
+        }
+        app = cmbApp.getSelectedItem().toString();
         GetSites_API();
         GetGroups_API();        
     }
@@ -1887,6 +1888,22 @@ public class AP3 extends javax.swing.JInternalFrame {
     private int d1LastRow = -1; 
     private List<String> GROUP_IDS;
     private String SCOPE;
+    
+    public static String P2_TKN = "";    
+    public static String url = "";
+    public static String app = "";
+    public static String appId = "";
+    public static String env = "";
+    public static String SITE = "";
+    public static String SiteID = "";
+    public static String GROUP = "";
+    public static String BRAND = "";
+    public static String BrandID = "";
+    public static String CAN = "CAN";
+    public static String GL_MENU = "TIM HORTONS";
+    public static String platform = "CDL";
+    public static String BaseAPI;
+  
    
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables

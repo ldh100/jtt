@@ -46,18 +46,18 @@
               <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="dtpDEL" min="-2" pref="113" max="-2" attributes="0"/>
-                      <Component id="btnDEL" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
-                      <Component id="btnDEL_OLD" alignment="1" min="-2" pref="113" max="-2" attributes="0"/>
+                      <Component id="dtpDel" min="-2" pref="113" max="-2" attributes="0"/>
+                      <Component id="btnDel" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
+                      <Component id="btnDelOld" alignment="1" min="-2" pref="113" max="-2" attributes="0"/>
                   </Group>
                   <Component id="lblSITES" alignment="1" min="-2" pref="74" max="-2" attributes="0"/>
                   <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="btnLOG" min="-2" pref="56" max="-2" attributes="0"/>
+                          <Component id="btnLog" min="-2" pref="56" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnREF" min="-2" pref="51" max="-2" attributes="0"/>
+                          <Component id="btnRef" min="-2" pref="51" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="btnEXCEL" min="-2" pref="113" max="-2" attributes="0"/>
+                      <Component id="btnExcel" min="-2" pref="113" max="-2" attributes="0"/>
                       <Component id="cmbF" min="-2" pref="113" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -71,11 +71,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnDEL" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="btnDel" min="-2" pref="22" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnDEL_OLD" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="btnDelOld" min="-2" pref="22" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                      <Component id="dtpDEL" min="-2" max="-2" attributes="0"/>
+                      <Component id="dtpDel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="31" max="32767" attributes="0"/>
                       <Component id="lblSITES" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -86,11 +86,11 @@
                   <Group type="102" attributes="0">
                       <Component id="cmbF" min="-2" pref="20" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnEXCEL" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="btnExcel" min="-2" pref="22" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnLOG" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                          <Component id="btnREF" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="btnLog" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="btnRef" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                   </Group>
@@ -109,7 +109,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="txtLOG">
+        <Component class="javax.swing.JTextArea" name="txtLog">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="columns" type="int" value="20"/>
@@ -165,11 +165,14 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="com.toedter.calendar.JDateChooser" name="dtpDEL">
+    <Component class="com.toedter.calendar.JDateChooser" name="dtpDel">
       <Properties>
         <Property name="dateFormatString" type="java.lang.String" value="DD-MMM-yyyy"/>
         <Property name="focusCycleRoot" type="boolean" value="true"/>
-        <Property name="name" type="java.lang.String" value="dtpFEL" noResource="true"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="11" style="0"/>
+        </Property>
+        <Property name="name" type="java.lang.String" value="dtpDel" noResource="true"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[103, 24]"/>
         </Property>
@@ -186,7 +189,7 @@
         <Property name="alignmentX" type="float" value="0.5"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnDEL">
+    <Component class="javax.swing.JButton" name="btnDel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="11" style="0"/>
@@ -194,10 +197,10 @@
         <Property name="text" type="java.lang.String" value="Delete Selected"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnDELMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnDelMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnDEL_OLD">
+    <Component class="javax.swing.JButton" name="btnDelOld">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="11" style="0"/>
@@ -205,10 +208,10 @@
         <Property name="text" type="java.lang.String" value="Delete Before:"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnDEL_OLDMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnDelOldMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnEXCEL">
+    <Component class="javax.swing.JButton" name="btnExcel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="11" style="0"/>
@@ -219,10 +222,10 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnEXCELMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnExcelMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnLOG">
+    <Component class="javax.swing.JButton" name="btnLog">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="11" style="0"/>
@@ -230,10 +233,10 @@
         <Property name="text" type="java.lang.String" value="Log"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnLOGMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnLogMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnREF">
+    <Component class="javax.swing.JButton" name="btnRef">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="11" style="0"/>
@@ -241,7 +244,7 @@
         <Property name="text" type="java.lang.String" value="Ref"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnREFMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnRefMouseClicked"/>
       </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="cmbF">
