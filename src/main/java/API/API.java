@@ -1970,11 +1970,11 @@ public class API extends javax.swing.JInternalFrame {
         } 
         if(T_Index != -1){
             cmbGroup.setSelectedIndex(T_Index);
-            txtLOG.append("\r\n== Group: " + cmbGroup.getItemAt(T_Index) + ", Id: " + GROUP_IDS.get(T_Index));
+            //txtLOG.append("\r\n== Group: " + cmbGroup.getItemAt(T_Index) + ", Id: " + GROUP_IDS.get(T_Index));
         }else{
             if(cmbGroup.getItemCount() > 0){
                 cmbGroup.setSelectedIndex(0);
-                txtLOG.append("\r\n== Group: " + cmbGroup.getItemAt(0) + ", Id: " + GROUP_IDS.get(0)); 
+                //txtLOG.append("\r\n== Group: " + cmbGroup.getItemAt(0) + ", Id: " + GROUP_IDS.get(0)); 
             }
         }
          
@@ -2023,14 +2023,7 @@ public class API extends javax.swing.JInternalFrame {
                     T_Index = i;
                 }
             }
-           for (int i = 0; i < Sectors.length(); i++) {
-                S_NAME = Sectors.getJSONObject(i).getString("name");
-                cmbGroup.addItem(S_NAME);
-                GROUP_IDS.add(Sectors.getJSONObject(i).getString("id"));
-                if(S_NAME.equals(GROUP)){
-                    T_Index = i;
-                }
-            }
+
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());  
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
