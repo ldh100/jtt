@@ -52,7 +52,7 @@ public class A extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuBar = new javax.swing.JMenuBar();
         jMenu_AP3 = new javax.swing.JMenu();
         jMenu_FW = new javax.swing.JMenu();
         jMenuWO = new javax.swing.JMenu();
@@ -94,7 +94,7 @@ public class A extends javax.swing.JFrame {
                 jMenu_AP3MouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu_AP3);
+        jMenuBar.add(jMenu_AP3);
 
         jMenu_FW.setText("FW");
         jMenu_FW.setEnabled(false);
@@ -104,7 +104,7 @@ public class A extends javax.swing.JFrame {
                 jMenu_FWMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu_FW);
+        jMenuBar.add(jMenu_FW);
 
         jMenuWO.setText("WebOrdering");
         jMenuWO.setEnabled(false);
@@ -114,7 +114,7 @@ public class A extends javax.swing.JFrame {
                 jMenuWOMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenuWO);
+        jMenuBar.add(jMenuWO);
 
         jMenuORDERS.setText("Orders");
         jMenuORDERS.setEnabled(false);
@@ -124,7 +124,7 @@ public class A extends javax.swing.JFrame {
                 jMenuORDERSMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenuORDERS);
+        jMenuBar.add(jMenuORDERS);
 
         jMenu_API.setBorder(null);
         jMenu_API.setText("APIs");
@@ -135,7 +135,7 @@ public class A extends javax.swing.JFrame {
                 jMenu_APIMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu_API);
+        jMenuBar.add(jMenu_API);
 
         jMenuReports.setBorder(null);
         jMenuReports.setText("Reports");
@@ -146,9 +146,9 @@ public class A extends javax.swing.JFrame {
                 jMenuReportsMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenuReports);
+        jMenuBar.add(jMenuReports);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(jMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,7 +166,11 @@ public class A extends javax.swing.JFrame {
 
     private void jMenu_AP3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_AP3MouseClicked
         if(jMenu_AP3.isEnabled()){
+            jMenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            jDesktopPane1.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             Open_AP3();
+            jDesktopPane1.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            jMenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_jMenu_AP3MouseClicked
     private void Open_AP3(){
@@ -181,12 +185,13 @@ public class A extends javax.swing.JFrame {
             Y = X = F_COUNT;
         }
         ap3.setLocation(X*20, Y*20);
+        ap3.show();
         try {
             ap3.setSelected(true);
         } catch (PropertyVetoException ex) {
             Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         } 
-        ap3.show();
+        //ap3.show();
         F_COUNT++;     
     }
     private void Open_API(){
@@ -206,20 +211,25 @@ public class A extends javax.swing.JFrame {
         } catch (PropertyVetoException ex) {
             Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         } 
-        api.show();
+        //api.show();
         F_COUNT++;     
     }    
     private void jMenu_FWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_FWMouseClicked
         if(jMenu_FW.isEnabled()){
+            jMenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            jDesktopPane1.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             //OpenFM();
+            jDesktopPane1.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            jMenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
         }
+        
     }//GEN-LAST:event_jMenu_FWMouseClicked
  
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         //Get_Version();
         Get_User();
         if(!ConnectDB()){
-            jMenuBar1.setVisible(false);
+            jMenuBar.setVisible(false);
             this.setTitle("JTT - no connection to QA DB");
         }else{
             this.setTitle("JTT v1.0.1" + " - " + "User: " + UserID + ", Machine: " + WsID + ", OS: " + WsOS);
@@ -251,18 +261,32 @@ public class A extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuORDERSMouseClicked
     private void jMenuWOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuWOMouseClicked
         if(jMenuWO.isEnabled()){
+            jMenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            jDesktopPane1.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             //OpenWO();
+            jDesktopPane1.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            jMenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));             
         }
     }//GEN-LAST:event_jMenuWOMouseClicked
     private void jMenuReportsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuReportsMouseClicked
         if(jMenuReports.isEnabled()){
-            OpenREPORT();
+            jMenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            jDesktopPane1.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            OpenREPORT(); 
+            jDesktopPane1.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            jMenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));             
+
         }   
     }//GEN-LAST:event_jMenuReportsMouseClicked
 
     private void jMenu_APIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_APIMouseClicked
         if(jMenu_API.isEnabled()){
-            Open_API();
+            jMenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            jDesktopPane1.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            Open_API(); 
+            jDesktopPane1.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            jMenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));             
+
         }
     }//GEN-LAST:event_jMenu_APIMouseClicked
     private void OpenREPORT() {                                    
@@ -467,7 +491,7 @@ public class A extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuORDERS;
     private javax.swing.JMenu jMenuReports;
     private javax.swing.JMenu jMenuWO;
