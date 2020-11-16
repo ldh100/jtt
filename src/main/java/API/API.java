@@ -572,8 +572,10 @@ public class API extends javax.swing.JInternalFrame {
         if (d1LastRow == DV1.getSelectedRow()) {
            return;
         }
-        d1LastRow = DV1.getSelectedRow(); 
         GetBrands_API();
+        SITE = String.valueOf(DV1.getValueAt(DV2.getSelectedRow(), 0));
+        SiteID = String.valueOf(DV1.getValueAt(DV2.getSelectedRow(), 3));
+        d1LastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
 
     private void AP3_AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_AP3_AncestorAdded
@@ -628,7 +630,8 @@ public class API extends javax.swing.JInternalFrame {
         if (d2LastRow == DV2.getSelectedRow()) {
            return;
         }
-        d2LastRow = DV2.getSelectedRow();        
+        d2LastRow = DV2.getSelectedRow();   
+        BRAND = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 0));
         BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
         btnLoc_Menus.setEnabled(false);
     }//GEN-LAST:event_DV2MouseClicked
@@ -636,7 +639,7 @@ public class API extends javax.swing.JInternalFrame {
     private void btnAppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAppMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n-Load " + app + " configurations, API(s)...");
-        String J = "Application: " + app + " - configuration API(s):" + "\r\n";
+        String J = "==== Application: " + app + " - configuration API(s):" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         
         J += "\r\n========= Public Configuration:" + "\r\n";
@@ -689,7 +692,7 @@ public class API extends javax.swing.JInternalFrame {
         J += "\r\n========= Multigroup API" + "\r\n";
         sw1.start(); 
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + appId); 
+            HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + appId + "?nocache=true&extended=true"); // ?nocache=true&extended=true
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -701,9 +704,9 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/location/multigroup/" + appId + "\r\n" + json.toString(4);
+            J += BaseAPI + "/location/multigroup/" + appId  + "?nocache=true&extended=true"+ "\r\n" + json.toString(4);
         } catch (Exception ex) {
-            J += BaseAPI + "/location/multigroup/" + appId + " > " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/location/multigroup/" + appId  + "?nocache=true&extended=true"+ " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");   
         }         
         txtLOG.append("\r\n== /location/multigroup/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -722,7 +725,7 @@ public class API extends javax.swing.JInternalFrame {
     private void btnSiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSiteMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n-Load " + SITE + " group API...");
-        String J = "Site: " + SITE + " - configuration API(s):" + "\r\n";
+        String J = "==== Site: " + SITE + " - configuration API(s):" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         
         J += "\r\n========= Public Configuration:" + "\r\n";
@@ -810,7 +813,7 @@ public class API extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n-Load " + "Utit" + " location API...");
         String UNIT_ID = DV2.getValueAt(DV2.getSelectedRow(), 3).toString();
-        String J = "Unit ID: " + UNIT_ID + " - configuration API(s):" + "\r\n";
+        String J = "==== Unit ID: " + UNIT_ID + " - configuration API(s):" + "\r\n";
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
         J += "\r\n========= Public Configuration:" + "\r\n";
@@ -903,7 +906,7 @@ public class API extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n-Load Sector/Companies(Menus) API..."); 
-        String J = "========= Sector/Companies(Menus) API:" + "\r\n";
+        String J = "==== Sector/Companies(Menus) API:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
         sw1.start();
@@ -943,12 +946,12 @@ public class API extends javax.swing.JInternalFrame {
     private void btnBrandMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBrandMouseClicked
        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n-Load " + BRAND + " brand API...");
-        String J = "Brand: " + BRAND + " - configuration API(s):" + "\r\n";
+        String J = "==== Site: " + SITE + ", Brand: " + BRAND + " - configuration API(s):" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         J += "\r\n========= Public Configuration:" + "\r\n";
         sw1.start(); 
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/config/public/" + BrandID); 
+            HttpGet httpget = new HttpGet(BaseAPI + "/config/public/" + BrandID); // ?nocache=true&extended=true
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -960,7 +963,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));               
-            J += BaseAPI + "/config/public/" + BrandID + "\r\n" + json.toString(4);
+            J += BaseAPI + "/config/public/" + BrandID  + "\r\n" + json.toString(4);
         } catch (Exception ex) {
             J += BaseAPI + "/config/public/" + BrandID  + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
@@ -996,7 +999,7 @@ public class API extends javax.swing.JInternalFrame {
         MENU_IDS.clear();
         sw1.start();
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/brand/" + BrandID + "?extended=true"); // ?extended=true
+            HttpGet httpget = new HttpGet(BaseAPI + "/location/brand/" + BrandID + "?nocache=true&extended=true"); // ?extended=true
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -1013,9 +1016,9 @@ public class API extends javax.swing.JInternalFrame {
                 JSONObject menu = MENUS.getJSONObject(i);
                     MENU_IDS.add(menu.getString("id"));
             }             
-            J += BaseAPI + "/location/brand/" + BrandID + "\r\n" + json.toString(4);
+            J += BaseAPI + "/location/brand/" + BrandID + "?nocache=true&extended=true" + "\r\n" + json.toString(4);
         } catch (Exception ex) {
-            J += BaseAPI + "/location/brand/" + BrandID  + " > " + ex.getMessage() + "\r\n";            
+            J += BaseAPI + "/location/brand/" + BrandID + "?nocache=true&extended=true" + " > " + ex.getMessage() + "\r\n";            
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -1040,7 +1043,7 @@ public class API extends javax.swing.JInternalFrame {
     private void btnGroupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGroupMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n-Load Group/Sector API..."); 
-        String J = "========= Group/Sector API:" + "\r\n";
+        String J = "==== Group/Sector API:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
         sw1.start();
@@ -1085,7 +1088,7 @@ public class API extends javax.swing.JInternalFrame {
     private void btnCalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCalMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n-Load Group/Sector API..."); 
-        String J = "========= Brand " + BRAND + " calendar API:" + "\r\n";
+        String J = "==== Site: " + SITE + ", Brand: " + BRAND + " > Calendar  API:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
         sw1.start();
@@ -1125,7 +1128,7 @@ public class API extends javax.swing.JInternalFrame {
     private void btnOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrdersMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n-Brand > Orders API..."); 
-        String J = "========= Brand > Orders API:" + "\r\n";
+        String J = "==== Site: " + SITE + ", Brand: " + BRAND + " > Order API:" + "\r\n";
         
         String From = new SimpleDateFormat( "yyyy-MM-dd 00:00:01").format(dtpDate.getDate());
         SimpleDateFormat StartFormat = new SimpleDateFormat( "yyyy-MM-dd 00:00:01");
@@ -1222,7 +1225,7 @@ public class API extends javax.swing.JInternalFrame {
     private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n-Custom API..."); 
-        String J = "========= Custom API:" + "\r\n";
+        String J = "==== Custom API:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String URL = txtApi.getText().trim();
         sw1.start();
@@ -1261,7 +1264,7 @@ public class API extends javax.swing.JInternalFrame {
     private void btnUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n-Load User API(s)..."); 
-        String J = "========= User API(s):" + "\r\n";
+        String J = "==== User API(s):" + "\r\n";
         userID = "";
         userTKN = "";
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -1400,7 +1403,7 @@ public class API extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n-Company > Menus API..."); 
-        String J = "========= Company > Menus API:" + "\r\n";
+        String J = "==== Company " + cmbComp.getSelectedItem() + " > Menus API:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         sw1.start();
         try {
@@ -1439,7 +1442,7 @@ public class API extends javax.swing.JInternalFrame {
     private void btnUpdatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdatesMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n-AP3 Resent Updates/Notifications API..."); 
-        String J = "========= AP3 Resent Updates/Notifications API:" + "\r\n";
+        String J = "==== AP3 Resent Updates/Notifications API:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         sw1.start();
         try {
@@ -1486,7 +1489,7 @@ public class API extends javax.swing.JInternalFrame {
         // eBLlmjy9NwfXNdoqJ6Gyu58ZEOjgWlH4BMjE1G3Ru2r3OjOq9Qtm97024RLzSeyXQrp < in menus
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n-Menu(s) API..."); 
-        String J = "========= Menu(s)  API:" + "\r\n";
+        String J = "==== Site: " + SITE + ", Brand: " + BRAND + " > Menu(s)  API:" + "\r\n";
         boolean DH = false;
         CloseableHttpClient httpclient = HttpClients.createDefault();
         for(int i = 0; i < MENU_IDS.size(); i++){
@@ -1553,7 +1556,7 @@ public class API extends javax.swing.JInternalFrame {
     private void btnSCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSCartMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n-Shopping Cart API..."); 
-        String J = "========= Shopping Cart API:" + "\r\n";
+        String J = "==== Shopping Cart API:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String CartID = jList_Orders.getSelectedValue();
         CartID = CartID.substring(CartID.lastIndexOf(" ")).trim();
