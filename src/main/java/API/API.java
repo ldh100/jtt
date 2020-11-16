@@ -157,7 +157,7 @@ public class API extends javax.swing.JInternalFrame {
         lblBRANDS.setName("lblBRANDS"); // NOI18N
         getContentPane().add(lblBRANDS, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 4, 268, -1));
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Standard Configurations/API (s):", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "AP3 Configurations/API (s):", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11))); // NOI18N
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnApp.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
@@ -312,11 +312,11 @@ public class API extends javax.swing.JInternalFrame {
         jPanel5.add(btnUserPermissions, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 52, 160, 20));
 
         txtAP3_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtAP3_ID.setText("?@?.?");
+        txtAP3_ID.setText("Ap3_User@?.?");
         jPanel5.add(txtAP3_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 28, 160, -1));
 
         txtAP3_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtAP3_PW.setText("Password1");
+        txtAP3_PW.setText("password");
         jPanel5.add(txtAP3_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(292, 28, 116, -1));
 
         lblSITES9.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -507,7 +507,7 @@ public class API extends javax.swing.JInternalFrame {
         jPanel1.add(lblSITES3, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 4, 152, -1));
 
         txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtMobile_ID.setText("cdl.test.xtt@gmail.com");
+        txtMobile_ID.setText("App_User@?.?");
         jPanel1.add(txtMobile_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 20, 184, -1));
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -517,7 +517,7 @@ public class API extends javax.swing.JInternalFrame {
         jPanel1.add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 40, -1, -1));
 
         txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtMobile_PW.setText("AnnaL0g0");
+        txtMobile_PW.setText("password");
         jPanel1.add(txtMobile_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 56, 184, -1));
 
         jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -569,6 +569,10 @@ public class API extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
+        if (d1LastRow == DV1.getSelectedRow()) {
+           return;
+        }
+        d1LastRow = DV1.getSelectedRow(); 
         GetBrands_API();
     }//GEN-LAST:event_DV1MouseClicked
 
@@ -597,116 +601,10 @@ public class API extends javax.swing.JInternalFrame {
         MENU_IDS = new ArrayList<>();
         
         Load = false;
-
         LOAD_ENV();
+        app = cmbApp.getSelectedItem().toString();
+        CONFIG = false;
     }//GEN-LAST:event_AP3_AncestorAdded
-    private void LOAD_CONFIG(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        try {
-            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'API' AND [env] = '" + env + "'";
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery(SQL);
-            rs.next();
-            C = rs.getString(1);
-            if (C.contains(": ")) {
-                String c;
-                c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("GROUP:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GROUP = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("GL_MENU:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GL_MENU = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("CAN:")); c = c.substring(0, c.indexOf("\r\n")).trim(); CAN = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("txtMobile_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtMobile_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtAP3_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAP3_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtAP3_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAP3_PW.setText(c.substring(c.indexOf(" ")).trim());
-
-                CONFIG = true;
-                txtLOG.append("\r\n\r\n=== LOAD_CONFIG > OK");
-            } else {
-                CONFIG = false;
-                txtLOG.append("\r\n\r\n=== WEB / AP3, User: " + UserID + ", Env: " + env + " > No saved Configuration Found");
-            }
-        } catch (Exception ex) {
-            CONFIG = false;
-            txtLOG.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }
-    private void SAVE_CONFIG() {
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        String _S = "n/a";
-        String _B = "n/a";
-        try {
-            if(DV1.getRowCount() > 0){
-                _S = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
-            }
-            if(DV2.getRowCount() > 0){
-                _B = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
-            }
-            C = "";
-            C += "env: " + env + "\r\n";
-            C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
-            C += "url: " + url + "\r\n";
-            C += "GROUP: " + cmbGroup.getSelectedItem().toString() + "\r\n";
-            C += "GL_MENU: " + cmbComp.getSelectedItem().toString() + "\r\n";
-            C += "SITE: " + _S + "\r\n";
-            C += "BRAND: " + _B + "\r\n";
-            C += "CAN: " + CAN + "\r\n";
-            
-            C += "txtMobile_ID: " + txtMobile_ID.getText() + "\r\n";
-            C += "txtMobile_PW: " + txtMobile_PW.getText()  + "\r\n";
-            C += "txtAP3_ID: " + txtAP3_ID.getText()  + "\r\n";
-            C += "txtAP3_PW: " + txtAP3_PW.getText() + "\r\n";            
-
-        } catch (Exception ex)  {
-            txtLOG.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
-            return;
-        }
-        
-        try {
-            SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'API' AND [env] = '" + env + "'";
-            Statement _del = conn.createStatement();
-            _del.execute(SQL);
-            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
-                       "([user_id]" +   // 1
-                       ",[env]" +       // 2
-                       ",[platform]" +  // 3
-                       ",[app]" +       // 4
-                       ",[_conf]" +     // 5
-                    ") VALUES (" +
-                       "?" +
-                       ",?" +
-                       ",?" +
-                       ",?" +
-                       ",?" +
-                      ")");
-            _insert.setString(1, UserID);
-            _insert.setString(2, env);
-            _insert.setString(3, "WEB");
-            _insert.setString(4, "API");
-            _insert.setString(5, C);           
-            int row = _insert.executeUpdate();
-            txtLOG.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
-            //txtLOG.append("\r\n\r\n=== " + C);
-        } catch (SQLException ex) {
-            txtLOG.append("\r\n\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }
-    private void Get_AP3_TKN(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
-        try {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
-            rs.next();
-            AP3_TKN = rs.getString(1);
-        } catch (SQLException ex) {
-            txtLOG.append("\r\n\r\n=== AP3_TKN > ERROR: " + ex.getMessage());
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }
 
     private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
@@ -1764,7 +1662,7 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/user/" + User_ID + "/permissions" + " > " + ex.getMessage() + "\r\n";  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
-        txtLOG.append("\r\n== " + "/user" + User_ID + "/permissions"  + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== " + "/user/" + User_ID + "/permissions"  + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1788,7 +1686,6 @@ public class API extends javax.swing.JInternalFrame {
             url = "https://adminpanel.compassdigital.org/";
         }     
 
-        
         txtApi.setText(BaseAPI + "/");
         DefaultListModel model = new DefaultListModel();
         model.clear();
@@ -1797,11 +1694,24 @@ public class API extends javax.swing.JInternalFrame {
         Get_AP3_TKN();
         LOAD_CONFIG();
         if (CONFIG) {
+            Load = true;
             cmbApp.setSelectedItem(app);
+            Load = false;
         }
         app = cmbApp.getSelectedItem().toString();
         GetSites_API();
         GetGroups_API();        
+    }
+    private void Get_AP3_TKN(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
+        try {
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
+            rs.next();
+            AP3_TKN = rs.getString(1);
+        } catch (SQLException ex) {
+            txtLOG.append("\r\n\r\n=== AP3_TKN > ERROR: " + ex.getMessage());
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetSites_API() {
         d1LastRow = -1;
@@ -1915,6 +1825,7 @@ public class API extends javax.swing.JInternalFrame {
         if (d1LastRow == DV1.getSelectedRow()) {
            return;
         }
+        d2LastRow = -1;
         d1LastRow = DV1.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n-Load Brands from API...");
@@ -2142,6 +2053,103 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
+    private void LOAD_CONFIG(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        try {
+            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'API' AND [env] = '" + env + "'";
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(SQL);
+            rs.next();
+            C = rs.getString(1);
+            if (C.contains(": ")) {
+                String c;
+                c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("GROUP:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GROUP = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("GL_MENU:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GL_MENU = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("CAN:")); c = c.substring(0, c.indexOf("\r\n")).trim(); CAN = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("txtMobile_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtMobile_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtAP3_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAP3_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtAP3_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAP3_PW.setText(c.substring(c.indexOf(" ")).trim());
+
+                CONFIG = true;
+                txtLOG.append("\r\n\r\n=== LOAD_CONFIG > OK");
+            } else {
+                CONFIG = false;
+                txtLOG.append("\r\n\r\n=== WEB / AP3, User: " + UserID + ", Env: " + env + " > No saved Configuration Found");
+            }
+        } catch (Exception ex) {
+            CONFIG = false;
+            txtLOG.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+    private void SAVE_CONFIG() {
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        String _S = "n/a";
+        String _B = "n/a";
+        try {
+            if(DV1.getRowCount() > 0){
+                _S = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
+            }
+            if(DV2.getRowCount() > 0){
+                _B = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
+            }
+            C = "";
+            C += "env: " + env + "\r\n";
+            C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
+            C += "url: " + url + "\r\n";
+            C += "GROUP: " + cmbGroup.getSelectedItem().toString() + "\r\n";
+            C += "GL_MENU: " + cmbComp.getSelectedItem().toString() + "\r\n";
+            C += "SITE: " + _S + "\r\n";
+            C += "BRAND: " + _B + "\r\n";
+            C += "CAN: " + CAN + "\r\n";
+            
+            C += "txtMobile_ID: " + txtMobile_ID.getText() + "\r\n";
+            C += "txtMobile_PW: " + txtMobile_PW.getText()  + "\r\n";
+            C += "txtAP3_ID: " + txtAP3_ID.getText()  + "\r\n";
+            C += "txtAP3_PW: " + txtAP3_PW.getText() + "\r\n";            
+
+        } catch (Exception ex)  {
+            txtLOG.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
+            return;
+        }
+        
+        try {
+            SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'API' AND [env] = '" + env + "'";
+            Statement _del = conn.createStatement();
+            _del.execute(SQL);
+            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
+                       "([user_id]" +   // 1
+                       ",[env]" +       // 2
+                       ",[platform]" +  // 3
+                       ",[app]" +       // 4
+                       ",[_conf]" +     // 5
+                    ") VALUES (" +
+                       "?" +
+                       ",?" +
+                       ",?" +
+                       ",?" +
+                       ",?" +
+                      ")");
+            _insert.setString(1, UserID);
+            _insert.setString(2, env);
+            _insert.setString(3, "WEB");
+            _insert.setString(4, "API");
+            _insert.setString(5, C);           
+            int row = _insert.executeUpdate();
+            txtLOG.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
+            //txtLOG.append("\r\n\r\n=== " + C);
+        } catch (SQLException ex) {
+            txtLOG.append("\r\n\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+
        
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
     private boolean Load;
