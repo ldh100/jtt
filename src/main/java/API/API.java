@@ -312,7 +312,7 @@ public class API extends javax.swing.JInternalFrame {
         jPanel5.add(btnUserPermissions, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 52, 160, 20));
 
         txtAP3_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtAP3_ID.setText("oleg.spozito@compassdigital.io");
+        txtAP3_ID.setText("?@?.?");
         jPanel5.add(txtAP3_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 28, 160, -1));
 
         txtAP3_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
@@ -758,7 +758,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/config/public/" + appId + "\r\n" + json.toString(4);
         } catch (Exception ex) {
-            J += "- Exception: " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/config/public/" + appId + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
         txtLOG.append("\r\n== /config/public/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -782,7 +782,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/config/" + appId + "\r\n" + json.toString(4);
         } catch (Exception ex) {
-            J += "- Exception: " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/config/" + appId + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
         txtLOG.append("\r\n== /config/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -805,7 +805,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/location/multigroup/" + appId + "\r\n" + json.toString(4);
         } catch (Exception ex) {
-            J += "- Exception: " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/location/multigroup/" + appId + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");   
         }         
         txtLOG.append("\r\n== /location/multigroup/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -844,7 +844,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/config/public/" + SiteID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
-            J += "- Exception: " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/config/public/" + SiteID + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
         txtLOG.append("\r\n== /config/public/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -868,7 +868,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/config/" + SiteID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
-            J += "- Exception: " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/config/" + SiteID + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
         txtLOG.append("\r\n== /config/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -891,6 +891,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/location/group/" + SiteID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
+            J += BaseAPI + "/location/group/" + SiteID + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -931,7 +932,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/config/public/" + UNIT_ID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
-            J += "- Exception: " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/config/public/" + UNIT_ID + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
         txtLOG.append("\r\n== /config/public/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -955,7 +956,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/config/" + UNIT_ID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
-            J += "- Exception: " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/config/" + UNIT_ID + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
         txtLOG.append("\r\n== /config/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -978,6 +979,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1" + "\r\n" + json.toString(4);
         } catch (Exception ex) {
+            J += BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1" + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -1023,6 +1025,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "\r\n" + json.toString(4);
         } catch (Exception ex) {
+            J += BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -1061,7 +1064,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));               
             J += BaseAPI + "/config/public/" + BrandID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
-            J += "- Exception: " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/config/public/" + BrandID  + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
         txtLOG.append("\r\n== /config/public/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -1085,7 +1088,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/config/" + BrandID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
-            J += "- Exception: " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/config/" + BrandID  + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
         txtLOG.append("\r\n== /config/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -1114,6 +1117,7 @@ public class API extends javax.swing.JInternalFrame {
             }             
             J += BaseAPI + "/location/brand/" + BrandID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
+            J += BaseAPI + "/location/brand/" + BrandID  + " > " + ex.getMessage() + "\r\n";            
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -1158,6 +1162,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/location/sector?_provider=cdl" + "\r\n" + json.toString(4);
         } catch (Exception ex) {
+            J += BaseAPI + "/location/sector?_provider=cdl" + " > " + ex.getMessage() + "\r\n";  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -1202,6 +1207,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/calendar/"  + BrandID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
+            J += BaseAPI + "/calendar/" + " > " + ex.getMessage() + "\r\n";              
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -1254,6 +1260,7 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/order/location/brand/" + BrandID + "\r\n" + json.toString(4);  
             
         } catch (Exception ex) {
+            J += BaseAPI + "/order/location/brand/" + BrandID + " > " + ex.getMessage() + "\r\n";                  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -1292,6 +1299,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/announcement/resource" + "\r\n" + json.toString(4);
         } catch (Exception ex) {
+            J += BaseAPI + "/announcement/resource" + " > " + ex.getMessage() + "\r\n";     
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -1389,6 +1397,7 @@ public class API extends javax.swing.JInternalFrame {
 
             J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
         } catch (Exception ex) {
+            J += BaseAPI + "/user/auth?realm=" + Realm + " > " + ex.getMessage() + "\r\n";     
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         txtLOG.append("\r\n== " + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -1412,6 +1421,7 @@ public class API extends javax.swing.JInternalFrame {
             J += "\r\n";
             J += BaseAPI + "/payment/method" + "?user_id=" + userID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
+            J += BaseAPI + "/payment/method" + "?user_id=" + userID + " > " + ex.getMessage() + "\r\n";  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         txtLOG.append("\r\n== " + "/payment/method" + "?user_id=" + userID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -1469,6 +1479,7 @@ public class API extends javax.swing.JInternalFrame {
             J += "\r\n";
             J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + "\r\n" + json.toString(4);
         } catch (Exception ex) {
+            J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + " > " + ex.getMessage() + "\r\n";  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         txtLOG.append("\r\n== " + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -1510,6 +1521,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/menu/company/"  + COMP_IDS.get(I) + "\r\n" + json.toString(4);
         } catch (Exception ex) {
+            J += BaseAPI + "/menu/company/"  + COMP_IDS.get(I) + " > " + ex.getMessage() + "\r\n";  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -1548,6 +1560,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/notification?realm=cdl&target=admin_panel" + "\r\n" + json.toString(4);
         } catch (Exception ex) {
+            J += BaseAPI + "/notification?realm=cdl&target=admin_panel" + " > " + ex.getMessage() + "\r\n";  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -1663,6 +1676,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/shoppingcart/" + CartID + "\r\n" + json.toString(4);
         } catch (Exception ex) {
+            J += BaseAPI + "/shoppingcart/" + CartID + " > " + ex.getMessage() + "\r\n";  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -1691,45 +1705,45 @@ public class API extends javax.swing.JInternalFrame {
         txtLOG.append("\r\n\r\n-User, Permissions API..."); 
         String J = "========= User API:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
-//        String UserAuth = Base64.getEncoder().encodeToString((txtAP3_ID.getText().trim() + ":" + txtAP3_PW.getText().trim()).getBytes());
-//        String User_ID = ""; //9MpYODpNRkSZDzX3P2LrT2jk2yDEgeCG3vjNr651IqwERY0eY6u5vglWwND2u0qZDyeqm4Fo01MQ4w2jHzPr";
-//        String Realm = "";
+        String UserAuth = Base64.getEncoder().encodeToString((txtAP3_ID.getText().trim() + ":" + txtAP3_PW.getText().trim()).getBytes());
+        String User_ID = ""; //9MpYODpNRkSZDzX3P2LrT2jk2yDEgeCG3vjNr651IqwERY0eY6u5vglWwND2u0qZDyeqm4Fo01MQ4w2jHzPr";
+        String Realm = "6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5";
 
-//        try {
-//            ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + cmbApp.getSelectedItem() + 
-//                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-//            rs.next();
-//            Realm = rs.getString(1);
-//        } catch (SQLException ex) {
-//            txtLOG.append("\r\n\r\n=== Get P2 Realm ID > ERROR: " + ex.getMessage());
-//        } 
-//        sw1.start(); // ============ User
-//        try { 
-//            HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm); 
-//            httpget.setHeader("Authorization",  "Basic " + UserAuth);
-//            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-//                int status = response.getStatusLine().getStatusCode();
-//                if (status >= 200 && status < 500) {
-//                    HttpEntity entity = response.getEntity();
-//                    return entity != null ? EntityUtils.toString(entity) : null;
-//                } else {
-//                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-//                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-//                }
-//            };
-//            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-//            User_ID = json.getString("user");
-//            userTKN = json.getString("token");
-//            //J += "\r\n";
-//            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
-//        } catch (Exception ex) {
-//            txtLOG.append("\r\n- Exception: " + ex.getMessage());     
-//        }   
-//        txtLOG.append("\r\n== " + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
-//        sw1.reset();        
+        try {
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + "AP3" + 
+                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
+            rs.next();
+            Realm = rs.getString(1);
+        } catch (SQLException ex) {
+            txtLOG.append("\r\n\r\n=== Get P2 Realm ID > ERROR: " + ex.getMessage());
+        } 
+        sw1.start(); // ============ User
+        try { 
+            HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm); 
+            httpget.setHeader("Authorization",  "Basic " + UserAuth);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 500) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());  
+                }
+            };
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            User_ID = json.getString("user");
+            userTKN = json.getString("token");
+            //J += "\r\n";
+            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
+        } catch (Exception ex) {
+            J += BaseAPI + "/user/auth?realm=" + Realm + " > " + ex.getMessage();            
+            txtLOG.append("\r\n- Exception: " + ex.getMessage());     
+        }   
+        txtLOG.append("\r\n== " + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        sw1.reset();        
         
         sw1.start(); // ============ User Permissions
-        String User_ID = "9MpYODpNRkSZDzX3P2LrT2jk2yDEgeCG3vjNr651IqwERY0eY6u5vglWwND2u0qZDyeqm4Fo01MQ4w2jHzPr";
         try { 
             HttpGet httpget = new HttpGet(BaseAPI + "/user/" + User_ID + "/permissions"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN); // UserAuth // userTKN
@@ -1747,6 +1761,7 @@ public class API extends javax.swing.JInternalFrame {
             J += "\r\n\r\n";
             J += BaseAPI + "/user/" + User_ID + "/permissions" + "\r\n" + json.toString(4);
         } catch (Exception ex) {
+            J += BaseAPI + "/user/" + User_ID + "/permissions" + " > " + ex.getMessage() + "\r\n";  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         txtLOG.append("\r\n== " + "/user" + User_ID + "/permissions"  + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");

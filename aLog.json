@@ -1,8 +1,60 @@
 ========= User API:
-
-
-https://api.compassdigital.org/staging/user//permissions
+https://api.compassdigital.org/v1/user/auth?realm=6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5
 {
-    "code": 400,
-    "error": "No valid CDL ID was passed in the request"
+    "access": {
+        "expires": "2021-02-14T00:30:10.457Z",
+        "token": "eyJhbGciOiJLTVMiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiJwM20xUjZtWFlwZlIxdjZKRTVqOFRBeWtBbGdCTDhpM04zWEJqMHJ5aTNrYTQ2N0wwTlRBTTlSZ1BkZDF0Z1czOW8za3dMczE2OWpPT05yWXNkam05Iiwic2NvcGVzIjoiIyIsImlhdCI6MTYwNTQ4NjYxMCwiZXhwIjoxNjEzMjYyNjExfQ.AQICAHg3B+yaImOx8iePCmKXjUT1mJ+gyTV+zezNpAJjOkZbFgGdmPTXOqBBkiBfAVLbjmMSAAABSDCCAUQGCSqGSIb3DQEHBqCCATUwggExAgEAMIIBKgYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAwxBVliEPcIyY9LRTwCARCAgfzGB2Fd4v7LxEUVpLEekp6fE2DBZrFjkyCB5ETDD0KgrESx6NC/6hgz4fpU22OdlkhQ5se3WwTc0cmu6cvWty5LK2gH0379d8Plfa76iXPfUsXvV93cZG9cjkOnp7iYjK3ggrtBHzg1m0ZAc7xnW7iYidtXzNz6AtB6RvxSpHE8saFiW5WG8msdF9hvzzL/YVTRRrTN5cGkFsLaLDBq10WhGwLug2sL3YgOyZklKZmUWlOGr2bGXne/ytSBwF2PKGZe4VrpSosZFzESd7g5s+GWCT/b1gNeBaSoSQPYnF6304XggtUwS8yOl/gtX1LQ11XzoAH3cycEvsQOYok="
+    },
+    "profile": {
+        "date": {
+            "created": "2018-07-23T20:36:00.550Z",
+            "modified": "2020-11-16T00:30:10.499Z"
+        },
+        "phone": 4161111111,
+        "name": {
+            "last": "S.",
+            "first": "Oleg"
+        },
+        "id": "p3m1R6mXYpfR1v6JE5j8TAykAlgBL8i3N3XBj0ryi3ka467L0NTAM9RgPdd1tgW39o3kwLs169jOONrYsdjm9",
+        "email": "oleg.spozito@compassdigital.io"
+    },
+    "refresh": {
+        "expires": "2021-05-15T00:30:10.507Z",
+        "token": "AQICAHg3B+yaImOx8iePCmKXjUT1mJ+gyTV+zezNpAJjOkZbFgGP6cElI3VM3doOAXJJaeVvAAAAoDCBnQYJKoZIhvcNAQcGoIGPMIGMAgEAMIGGBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDEqkvism4+VqjfqbwwIBEIBZTGCwOGFcoECqOURqt23SLNktaOCK15RzNyzUPaoUmSGwUOTwBIP7a/70LlgCgm4p4noearspq6CtzK8bP6iriAKUNGkqW9WOUXCH4t/kNRFEEK5NjSqvtQs="
+    },
+    "user": "p3m1R6mXYpfR1v6JE5j8TAykAlgBL8i3N3XBj0ryi3ka467L0NTAM9RgPdd1tgW39o3kwLs169jOONrYsdjm9",
+    "token": "eyJhbGciOiJLTVMiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiJwM20xUjZtWFlwZlIxdjZKRTVqOFRBeWtBbGdCTDhpM04zWEJqMHJ5aTNrYTQ2N0wwTlRBTTlSZ1BkZDF0Z1czOW8za3dMczE2OWpPT05yWXNkam05Iiwic2NvcGVzIjoiIyIsImlhdCI6MTYwNTQ4NjYxMCwiZXhwIjoxNjEzMjYyNjExfQ.AQICAHg3B+yaImOx8iePCmKXjUT1mJ+gyTV+zezNpAJjOkZbFgGdmPTXOqBBkiBfAVLbjmMSAAABSDCCAUQGCSqGSIb3DQEHBqCCATUwggExAgEAMIIBKgYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAwxBVliEPcIyY9LRTwCARCAgfzGB2Fd4v7LxEUVpLEekp6fE2DBZrFjkyCB5ETDD0KgrESx6NC/6hgz4fpU22OdlkhQ5se3WwTc0cmu6cvWty5LK2gH0379d8Plfa76iXPfUsXvV93cZG9cjkOnp7iYjK3ggrtBHzg1m0ZAc7xnW7iYidtXzNz6AtB6RvxSpHE8saFiW5WG8msdF9hvzzL/YVTRRrTN5cGkFsLaLDBq10WhGwLug2sL3YgOyZklKZmUWlOGr2bGXne/ytSBwF2PKGZe4VrpSosZFzESd7g5s+GWCT/b1gNeBaSoSQPYnF6304XggtUwS8yOl/gtX1LQ11XzoAH3cycEvsQOYok="
+}
+
+https://api.compassdigital.org/v1/user/p3m1R6mXYpfR1v6JE5j8TAykAlgBL8i3N3XBj0ryi3ka467L0NTAM9RgPdd1tgW39o3kwLs169jOONrYsdjm9/permissions
+{
+    "date": {
+        "created": "2018-07-23T20:36:00.550Z",
+        "modified": "2020-11-16T00:30:10.499Z"
+    },
+    "phone": 4161111111,
+    "permissions": {"scopes": [
+        "*:*",
+        "*:user",
+        "*:user:4Mry8WrlXJSDdk97LY41cY60Y2EJjkC6DjAN2kLjcKNJvj0ParCJo3wYXMWaIXDWEjkyjmFZ7rDZlvAot2oX",
+        "*:user:7MeN9ke37wSprJzyQ80PH8dX8WDL3KSWD776E7NAie180gGQZAtdyadO1dQpC9BpQyKX4mtarQjBooKkudEPK",
+        "*:user:WEW9lgWk5oTkA98Pl07di9O69Ez7GJu05RBzWpwRFm02vdkA87Sv7pLKAGJqC3De3dPj1AuOXapGg5DNHmvMd",
+        "admin_role:*:*",
+        "write:order:*",
+        "kick:menu:*",
+        "*:user:8M93Xp9d2eSL15qEpGMWTG2JGOMdNoCjm5l2WOOoh1KvlgNoR7iJepqKAXrjTXB54kmGaJU5qzREzY2aC3Xm",
+        "*:user:OG8r7w8K0JSdMNjRGzDyI9Bw9QL4ZWuJEerdNz8OsaPQpkNkNeiB0qqr593ZHqp4kKRgqGCgLRoyLe12HJDr",
+        "*:user:ZeDrkODo2gu0qJ1rda98f9K39oeOwmu25J5Bgd26uLX0DKA5jPH5BRz5wyG5FYj3JWjgRmHr2eo0WEADi51Y",
+        "*:user:WEW9lgWk5oTkA98Pl07di9O69Ez7GJuL131MWpOJcKlzqmgEPNTvJEawwmdrs9Ka2vXk9vhWR6rgeKq7imvkK",
+        "*:user:MX85pE82L4sLvrXkw3A2TyaYyemGXQiR0lXljz6Lc594jXGjkQS10A1JGw5rtD2QzQlG7mCJ867kjX1WHXNpM",
+        "*:user:jXEOGeEZgJs9plkedD1PiPYOPgBepDi1855eB71Df7kyzBNZpEuqDaw6kweatBjeP3R4vBIA550o1A18Sldv",
+        "*:user:m7ev3DeONwUP29W3vJXET4DM4d3JBRCqEeEJZ0rXCjpz6adYErI1WD71YMDNtO8roE9NN0iRkE0w15k9HDzPv",
+        "*:user:vwRgE1RKvrS9kOpWyZGviyeJyAaWXGioj1lyW1rOUP8gZwGgeat8rOOgKrOeiz1e5qoRdZtgeDpAZBaNTL7N"
+    ]},
+    "name": {
+        "last": "S.",
+        "first": "Oleg"
+    },
+    "id": "p3m1R6mXYpfR1v6JE5j8TAykAlgBL8i3N3XBj0ryi3ka467L0NTAM9RgPdd1tgW39o3kwLs169jOONrYsdjm9",
+    "email": "oleg.spozito@compassdigital.io"
 }

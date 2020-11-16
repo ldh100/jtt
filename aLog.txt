@@ -2,51 +2,28 @@ Start >
 
 === LOAD_CONFIG > OK
 -Load Sites from API...
-== 0.47 sec ==
+== 0.28 sec ==
 -Load Brands from API...
-== 6.49 sec ==
+== 5.81 sec ==
 -Load Sites from API...
-== 0.35 sec ==
+== 0.37 sec ==
 -Load Brands from API...
-== 3.80 sec ==
+== 2.69 sec ==
 -Load Groups/Sector from API...
 == Group: Chartwells/US, Id: 11J3gKPg8BC5r9k3mlyzu8y1qZjG3aFoj0ZNw03OspJ2woX2okSjryOBX5ZGHaO0XOwaNQcAdR66
-== 0.41 sec ==
+== 0.45 sec ==
 -Load Sector/Companies(Menus) from API...
-== 0.67 sec ==
+== 0.74 sec ==
 
 -User, Permissions API...
-- Exception: JSONObject["user"] not found.
-== /user/auth?realm=Roj5NWl4mXtl2dZ8yJLKF9Rq5Eow59FJaNGB6 > 
+== /user/auth?realm=6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5 > 
 == 0.47 sec ==
-== /user/permissions > 
-== 0.12 sec ==
-
-=== LOAD_CONFIG > OK
--Load Sites from API...
-== 1.32 sec ==
--Load Brands from API...
-== 0.63 sec ==
--Load Sites from API...
-== 0.24 sec ==
--Load Brands from API...
-== 0.55 sec ==
--Load Groups/Sector from API...
-== Group: Chartwel/US, Id: yy9mGPrGD0H64PQGWpmEHaN8lWMlr6cY5qYAD9YBTpMJq0w3rWcZklQgmDPycwYm9JMl4YI2W2dM
-== 0.54 sec ==
--Load Sector/Companies(Menus) from API...
-== 0.81 sec ==
+== /userJO8qr485d2f0K541Xza2f1Yv1qegP9Svm9O5jJepte2gZ8ZO68hGZzNRMl1EurYMXmvzjpH1Jo5oXKPYCWdQ/permissions > 
+== 0.42 sec ==
 
 -User, Permissions API...
 - Exception: JSONObject["user"] not found.
-== /user/auth?realm=D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe > 
-== 0.54 sec ==
-== /user/permissions > 
-== 0.16 sec ==
-
--User, Permissions API...
-- Exception: JSONObject["user"] not found.
-== /user/auth?realm=D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe > 
-== 0.35 sec ==
+== /user/auth?realm=6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5 > 
+== 0.31 sec ==
 == /user/permissions > 
 == 0.12 sec ==
