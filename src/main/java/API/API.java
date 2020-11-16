@@ -161,7 +161,7 @@ public class API extends javax.swing.JInternalFrame {
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnApp.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnApp.setText("App");
+        btnApp.setText("App - multigroup");
         btnApp.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnApp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -171,7 +171,7 @@ public class API extends javax.swing.JInternalFrame {
         jPanel5.add(btnApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 28, 112, 20));
 
         btnSite.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnSite.setText("Site");
+        btnSite.setText("Site - group");
         btnSite.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnSite.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -181,7 +181,7 @@ public class API extends javax.swing.JInternalFrame {
         jPanel5.add(btnSite, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 52, 112, 20));
 
         btnUnit.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnUnit.setText("Unit");
+        btnUnit.setText("Unit - location");
         btnUnit.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnUnit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
