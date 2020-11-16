@@ -92,7 +92,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         lblSITES8 = new javax.swing.JLabel();
         cmbGROUP = new javax.swing.JComboBox<>();
         lblSITES12 = new javax.swing.JLabel();
-        cmbMENU = new javax.swing.JComboBox<>();
+        cmbComp = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         DV1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -311,7 +311,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         lblSITES12.setText("Company/Global Menu:");
         lblSITES12.setAlignmentX(0.5F);
 
-        cmbMENU.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        cmbComp.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -327,7 +327,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                         .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbComp, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -407,7 +407,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                     .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbComp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbGROUP, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -547,11 +547,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         cmbBrow.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbBrow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chrome", "Firefox", "Edge", "IE" }));
         cmbBrow.setEnabled(false);
-        cmbBrow.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbBrowActionPerformed(evt);
-            }
-        });
         jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 28, 78, 20));
 
         btnRun.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -718,7 +713,11 @@ public class AP3 extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
+        if (d1LastRow == DV1.getSelectedRow()) {
+           return;
+        }
         GetBrands_API();
+        d1LastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
 
     private void Report(){
@@ -770,6 +769,8 @@ public class AP3 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFailsMouseClicked
 
     private void AP3_AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_AP3_AncestorAdded
+        //this.show(); doesn't work
+        //this.setVisible(true);
         Load = true;
         cmbApp.addItem("Boost");
         cmbApp.addItem("Canteen");
@@ -789,7 +790,8 @@ public class AP3 extends javax.swing.JInternalFrame {
         
         Load = false;
         LOAD_ENV();
-        LOAD_DATA();
+        app = cmbApp.getSelectedItem().toString();
+        CONFIG = false;
     }//GEN-LAST:event_AP3_AncestorAdded
 
     private void btnExelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExelMouseClicked
@@ -824,17 +826,17 @@ public class AP3 extends javax.swing.JInternalFrame {
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         F_COUNT--;
-        if(!BW1.isCancelled()) BW1.cancel(true);
-        if(!BW2.isCancelled()) BW2.cancel(true);
+        if(BW1 != null && !BW1.isCancelled()) BW1.cancel(true);
+        if(BW2 != null && !BW2.isCancelled()) BW2.cancel(true);
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void DV2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV2MouseClicked
+        if (d2LastRow == DV2.getSelectedRow()) {
+           return;
+        }
+        d2LastRow = DV2.getSelectedRow(); 
         BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
     }//GEN-LAST:event_DV2MouseClicked
-
-    private void cmbBrowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBrowActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbBrowActionPerformed
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
         if(!Func.SHOW_FILE(txtLOG.getText(), "txt")){
@@ -881,7 +883,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         }
         
         GROUP = cmbGROUP.getSelectedItem().toString();
-        GL_MENU = cmbMENU.getSelectedItem().toString();
+        GL_MENU = cmbComp.getSelectedItem().toString();
 
         if(_headless.isSelected()) {
             txtLOG.append("\r\n=== Headless mode is selected - Browser is hidden");
@@ -926,7 +928,9 @@ public class AP3 extends javax.swing.JInternalFrame {
         Get_AP3_TKN_and_Slack_IDs();
         LOAD_CONFIG();
         if (CONFIG) {
+            Load = true;
             cmbApp.setSelectedItem(app);
+            Load = false;
         }
         app = cmbApp.getSelectedItem().toString();
         GetSites_API();
@@ -1202,15 +1206,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         }; 
         BW2.execute();  // executes the swingworker on worker thread          
     }
-    private void LOAD_DATA(){
-        app = cmbApp.getSelectedItem().toString();
-
-        CONFIG = false;
-        txtLOG.append("\r\n\r\n=== Ready >");
-        txtLOG.append("\r\n=== In not Headless mode Do Not interact with your Browser");
-        txtLOG.append("\r\n=== (no mouse hover!) during Automation run");
-        txtLOG.append("\r\n=== Good Luck...\r\n");  
-    }
     private void Get_AP3_TKN_and_Slack_IDs(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
@@ -1359,7 +1354,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                         break;
                     }
                 }
-            }
+            } //
             DV1.repaint();
             GetBrands_API();
         }
@@ -1370,6 +1365,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         if (d1LastRow == DV1.getSelectedRow()) {
            return;
         }
+        d2LastRow = -1;
         d1LastRow = DV1.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n-Load Brands from API...");
@@ -1513,11 +1509,11 @@ public class AP3 extends javax.swing.JInternalFrame {
         } 
         if(T_Index != -1){
             cmbGROUP.setSelectedIndex(T_Index);
-            txtLOG.append("\r\n== Group: " + cmbGROUP.getItemAt(T_Index) + ", Id: " + GROUP_IDS.get(T_Index));
+            //txtLOG.append("\r\n== Group: " + cmbGROUP.getItemAt(T_Index) + ", Id: " + GROUP_IDS.get(T_Index));
         } else {
             if(cmbGROUP.getItemCount() > 0){
                 cmbGROUP.setSelectedIndex(0);
-                txtLOG.append("\r\n== Group: " + cmbGROUP.getItemAt(0) + ", Id: " + GROUP_IDS.get(0)); 
+                //txtLOG.append("\r\n== Group: " + cmbGROUP.getItemAt(0) + ", Id: " + GROUP_IDS.get(0)); 
             }
         }
         txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -1537,7 +1533,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
             
-            cmbMENU.removeAllItems();
+            cmbComp.removeAllItems();
             sw1.start();     
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
@@ -1558,7 +1554,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             T_Index = -1;
             for (int i = 0; i < Sectors.length(); i++) {
                 S_NAME = Sectors.getJSONObject(i).getString("name");
-                cmbMENU.addItem(S_NAME);
+                cmbComp.addItem(S_NAME);
                 if(S_NAME.equals(GL_MENU)){
                     T_Index = i;
                 }
@@ -1575,10 +1571,10 @@ public class AP3 extends javax.swing.JInternalFrame {
             }
         } 
         if(T_Index != -1){
-            cmbMENU.setSelectedIndex(T_Index);
+            cmbComp.setSelectedIndex(T_Index);
         }else{
-            if(cmbMENU.getItemCount() > 0){
-                cmbMENU.setSelectedIndex(0);
+            if(cmbComp.getItemCount() > 0){
+                cmbComp.setSelectedIndex(0);
             }
         }
         txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -1811,7 +1807,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             C += "cmbBROW: " + cmbBrow.getSelectedItem().toString() + "\r\n";
             C += "url: " + url + "\r\n";
             C += "GROUP: " + cmbGROUP.getSelectedItem().toString() + "\r\n";
-            C += "GL_MENU: " + cmbMENU.getSelectedItem().toString() + "\r\n";
+            C += "GL_MENU: " + cmbComp.getSelectedItem().toString() + "\r\n";
             C += "SITE: " + _S + "\r\n";
             C += "BRAND: " + _B + "\r\n";
             C += "CAN: " + CAN + "\r\n";
@@ -1886,6 +1882,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private boolean CONFIG = false;
     private String C = "";
     private int d1LastRow = -1; 
+    private int d2LastRow = -1; 
     private List<String> GROUP_IDS;
     private String SCOPE;
     
@@ -1935,9 +1932,9 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSave_Opt;
     private javax.swing.JComboBox<String> cmbApp;
     private javax.swing.JComboBox<String> cmbBrow;
+    private javax.swing.JComboBox<String> cmbComp;
     private javax.swing.JComboBox<String> cmbEnv;
     private javax.swing.JComboBox<String> cmbGROUP;
-    private javax.swing.JComboBox<String> cmbMENU;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
