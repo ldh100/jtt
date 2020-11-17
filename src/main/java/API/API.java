@@ -1618,10 +1618,10 @@ public class API extends javax.swing.JInternalFrame {
     private void btnUserPermissionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserPermissionsMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n- User, Permissions API..."); 
-        String J = "========= User API:" + "\r\n";
+        String J = "==== User API:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String UserAuth = Base64.getEncoder().encodeToString((txtAP3_ID.getText().trim() + ":" + txtAP3_PW.getText().trim()).getBytes());
-        String User_ID = ""; //9MpYODpNRkSZDzX3P2LrT2jk2yDEgeCG3vjNr651IqwERY0eY6u5vglWwND2u0qZDyeqm4Fo01MQ4w2jHzPr";
+        String User_ID = ""; 
         String Realm = "6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5";
 
         try {
@@ -1632,7 +1632,7 @@ public class API extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get P2 Realm ID > ERROR: " + ex.getMessage());
         } 
-        sw1.start(); // ============ User
+        sw1.start(); // ============ AP3 User
         try { 
             HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm); 
             httpget.setHeader("Authorization",  "Basic " + UserAuth);
@@ -1658,9 +1658,9 @@ public class API extends javax.swing.JInternalFrame {
         txtLOG.append("\r\n== " + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();        
         
-        sw1.start(); // ============ User Permissions
+        sw1.start(); // ============ AP3 User Permissions
         try { 
-            HttpGet httpget = new HttpGet(BaseAPI + "/user/" + User_ID + "/permissions"); 
+            HttpGet httpget = new HttpGet(BaseAPI + "/user/" + User_ID + "/permissions" + "?nocache=1"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN); // UserAuth // userTKN
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
@@ -1674,13 +1674,37 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += "\r\n\r\n";
-            J += BaseAPI + "/user/" + User_ID + "/permissions" + "\r\n" + json.toString(4);
+            J += BaseAPI + "/user/" + User_ID + "/permissions" + "?nocache=1" + "\r\n" + json.toString(4);
         } catch (Exception ex) {
-            J += BaseAPI + "/user/" + User_ID + "/permissions" + " > " + ex.getMessage() + "\r\n";  
+            J += BaseAPI + "/user/" + User_ID + "/permissions" + "?nocache=1" + " > " + ex.getMessage() + "\r\n";  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
-        txtLOG.append("\r\n== " + "/user/" + User_ID + "/permissions"  + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLOG.append("\r\n== " + "/user/" + User_ID + "/permissions" + "?nocache=1" + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
+        
+        sw1.start(); // ============ AP3 User Permissions
+        try { 
+            HttpGet httpget = new HttpGet(BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000"); 
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN); // UserAuth // userTKN
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 500) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            J += "\r\n\r\n";
+            J += BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000" + "\r\n" + json.toString(4);
+        } catch (Exception ex) {
+            J += BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000" + " > " + ex.getMessage() + "\r\n";  
+            txtLOG.append("\r\n- Exception: " + ex.getMessage());     
+        }   
+        txtLOG.append("\r\n== " + "/user/realm/" + Realm + "?nocache=1&max=2000"+ " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        sw1.reset();        
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         if(!Func.SHOW_FILE(J, "json")){
