@@ -120,7 +120,7 @@ public class __user_permission {
                 _f++;
                 EX += _t + "\t" + " === Admin No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";
             }            
-            // </editor-fold> 
+        // </editor-fold> 
 
         // <editor-fold defaultstate="collapsed" desc="Admin N Brand Permissions" >               
         _t++; T.Move_to_Element_By_Path("Scroll to Brand data row", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira");        

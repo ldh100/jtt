@@ -1256,7 +1256,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private void GetSites_API() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLOG.append("\r\n-Load Sites from API...");
+        txtLOG.append("\r\n-Load Sites ...");
         sw1.start();
         try {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() + 
@@ -1368,7 +1368,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         d2LastRow = -1;
         d1LastRow = DV1.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLOG.append("\r\n-Load Brands from API...");
+        txtLOG.append("\r\n-Load Brands ...");
         sw1.start();     
         
         String[] BrandsColumnsName = {"Station","Location","Brand Id", "Unit ID"}; 
@@ -1463,7 +1463,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     }
     private void GetGroups_API() {  
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLOG.append("\r\n-Load Groups/Sector from API...");
+        txtLOG.append("\r\n-Load Groups/Sector ...");
         cmbGROUP.removeAllItems();
         GROUP_IDS = new ArrayList<>();
         
@@ -1529,7 +1529,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             return;
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLOG.append("\r\n-Load Sector/Companies(Menus) from API...");
+        txtLOG.append("\r\n-Load Sector/Companies(Menus) ...");
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
             

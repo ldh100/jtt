@@ -5,8 +5,6 @@
  */
 package A;
 import static A.A.*;
-//import static AP3.AP3.*;
-//import static API.API.*;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
