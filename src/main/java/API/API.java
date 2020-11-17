@@ -1617,8 +1617,8 @@ public class API extends javax.swing.JInternalFrame {
 
     private void btnUserPermissionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserPermissionsMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLOG.append("\r\n\r\n- User, Permissions API..."); 
-        String J = "==== User API:" + "\r\n";
+        txtLOG.append("\r\n\r\n- AP3 User, Permissions API..."); 
+        String J = "==== AP3 User API:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String UserAuth = Base64.getEncoder().encodeToString((txtAP3_ID.getText().trim() + ":" + txtAP3_PW.getText().trim()).getBytes());
         String User_ID = ""; 
