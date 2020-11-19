@@ -729,9 +729,10 @@ public class API extends javax.swing.JInternalFrame {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        if(!Func.SHOW_FILE(J, "json")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
-        }
+            String R = Func.SHOW_FILE(J, "json");
+            if(!R.equals("OK")){
+                txtLOG.append(R);
+            } 
     }//GEN-LAST:event_btnAppMouseClicked
     private void btnSiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSiteMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -816,9 +817,10 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        if(!Func.SHOW_FILE(J, "json")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
-        }
+            String R = Func.SHOW_FILE(J, "json");
+            if(!R.equals("OK")){
+                txtLOG.append(R);
+            } 
     }//GEN-LAST:event_btnSiteMouseClicked
     private void btnUnitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnitMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -904,10 +906,10 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        if(!Func.SHOW_FILE(J, "json")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
-        }
-        
+            String R = Func.SHOW_FILE(J, "json");
+            if(!R.equals("OK")){
+                txtLOG.append(R);
+            }  
     }//GEN-LAST:event_btnUnitMouseClicked
     private void btnCompMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCompMouseClicked
         int I = cmbGroup.getSelectedIndex();
@@ -950,9 +952,10 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        if(!Func.SHOW_FILE(J, "json")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
-        }  
+        String R = Func.SHOW_FILE(J, "json");
+        if(!R.equals("OK")){
+            txtLOG.append(R);
+        } 
     }//GEN-LAST:event_btnCompMouseClicked
     private void btnBrandMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBrandMouseClicked
        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -1047,9 +1050,10 @@ public class API extends javax.swing.JInternalFrame {
         }
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        if(!Func.SHOW_FILE(J, "json")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
-        }
+        String R = Func.SHOW_FILE(J, "json");
+        if(!R.equals("OK")){
+            txtLOG.append(R);
+        } 
     }//GEN-LAST:event_btnBrandMouseClicked
     private void btnGroupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGroupMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -1087,14 +1091,16 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        if(!Func.SHOW_FILE(J, "json")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
-        }
+        String R = Func.SHOW_FILE(J, "json");
+        if(!R.equals("OK")){
+            txtLOG.append(R);
+        } 
     }//GEN-LAST:event_btnGroupMouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        if(!Func.SHOW_FILE(txtLOG.getText(), "txt")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'txt' output");
-        }
+        String R = Func.SHOW_FILE(txtLOG.getText(), "json");
+        if(!R.equals("OK")){
+            txtLOG.append(R);
+        } 
     }//GEN-LAST:event_btnLogMouseClicked
     private void btnCalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCalMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -1132,8 +1138,9 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        if(!Func.SHOW_FILE(J, "json")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
+        String R = Func.SHOW_FILE(J, "json");
+        if(!R.equals("OK")){
+            txtLOG.append(R);
         }        
     }//GEN-LAST:event_btnCalMouseClicked
     private void btnOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrdersMouseClicked
@@ -1185,8 +1192,9 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        if(!Func.SHOW_FILE(J, "json")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
+        String R = Func.SHOW_FILE(J, "json");
+        if(!R.equals("OK")){
+            txtLOG.append(R);
         }         
     }//GEN-LAST:event_btnOrdersMouseClicked
     private void btnAnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnMouseClicked
@@ -1224,8 +1232,9 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        if(!Func.SHOW_FILE(J, "json")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
+        String R = Func.SHOW_FILE(J, "json");
+        if(!R.equals("OK")){
+            txtLOG.append(R);
         }        
     }//GEN-LAST:event_btnAnMouseClicked
     private void cmbGroupItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbGroupItemStateChanged
@@ -1268,9 +1277,10 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        if(!Func.SHOW_FILE(J, "json")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
-        }
+        String R = Func.SHOW_FILE(J, "json");
+        if(!R.equals("OK")){
+            txtLOG.append(R);
+        } 
     }//GEN-LAST:event_btnRunMouseClicked
     private void btnUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -1402,9 +1412,10 @@ public class API extends javax.swing.JInternalFrame {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        if(!Func.SHOW_FILE(J, "json")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
-        }
+        String R = Func.SHOW_FILE(J, "json");
+        if(!R.equals("OK")){
+            txtLOG.append(R);
+        } 
     }//GEN-LAST:event_btnUserMouseClicked
     private void btnMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMouseClicked
         int I = cmbComp.getSelectedIndex();
@@ -1446,9 +1457,10 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        if(!Func.SHOW_FILE(J, "json")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
-        }  
+        String R = Func.SHOW_FILE(J, "json");
+        if(!R.equals("OK")){
+            txtLOG.append(R);
+        } 
     }//GEN-LAST:event_btnMenuMouseClicked
     private void btnUpdatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdatesMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -1485,9 +1497,10 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        if(!Func.SHOW_FILE(J, "json")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
-        } 
+        String R = Func.SHOW_FILE(J, "json");
+        if(!R.equals("OK")){
+            txtLOG.append(R);
+        }  
     }//GEN-LAST:event_btnUpdatesMouseClicked
     private void btnPromoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPromoMouseClicked
         // TODO add your handling code here:
@@ -1561,10 +1574,10 @@ public class API extends javax.swing.JInternalFrame {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
 
-
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        if(!Func.SHOW_FILE(J, "json")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
+        String R = Func.SHOW_FILE(J, "json");
+        if(!R.equals("OK")){
+            txtLOG.append(R);
         }         
     }//GEN-LAST:event_btnLoc_MenusMouseClicked
     private void btnSCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSCartMouseClicked
@@ -1604,8 +1617,9 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        if(!Func.SHOW_FILE(J, "json")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
+        String R = Func.SHOW_FILE(J, "json");
+        if(!R.equals("OK")){
+            txtLOG.append(R);
         } 
     }//GEN-LAST:event_btnSCartMouseClicked
 
@@ -1707,8 +1721,9 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();        
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        if(!Func.SHOW_FILE(J, "json")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
+        String R = Func.SHOW_FILE(J, "json");
+        if(!R.equals("OK")){
+            txtLOG.append(R);
         } 
     }//GEN-LAST:event_btnUserPermissionsMouseClicked
 
@@ -1750,9 +1765,10 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        if(!Func.SHOW_FILE(J, "json")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'json' output");
-        } 
+            String R = Func.SHOW_FILE(J, "json");
+            if(!R.equals("OK")){
+                txtLOG.append(R);
+            }    
     }//GEN-LAST:event_btnEodMouseClicked
 
     private void LOAD_ENV(){
@@ -2107,7 +2123,6 @@ public class API extends javax.swing.JInternalFrame {
                     T_Index = i;
                 }
             }
-
         } catch (Exception ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());  
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
