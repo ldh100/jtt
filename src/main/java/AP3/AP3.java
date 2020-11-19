@@ -763,8 +763,10 @@ public class AP3 extends javax.swing.JInternalFrame {
     }
 
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
-        if(!Func.SHOW_FILE(F, "txt")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'txt' output");
+        if(!btnFails.isEnabled()) {return;}
+        String R = Func.SHOW_FILE(F, "txt");
+        if(!R.equals("OK")){
+            txtLOG.append(R);
         }
     }//GEN-LAST:event_btnFailsMouseClicked
 
@@ -795,6 +797,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_AP3_AncestorAdded
 
     private void btnExelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExelMouseClicked
+        if(!btnExel.isEnabled()) {return;}
 //        try {
 //            Send_File_to_Slack("1", "2", "3");
 //        } catch (IOException ex) {
@@ -839,9 +842,10 @@ public class AP3 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_DV2MouseClicked
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        if(!Func.SHOW_FILE(txtLOG.getText(), "txt")){
-            txtLOG.append("\r\n\r\n=== Cannot show 'txt' output");
-        }
+        String R = Func.SHOW_FILE(txtLOG.getText(), "txt");
+        if(!R.equals("OK")){
+            txtLOG.append(R);
+        }         
     }//GEN-LAST:event_btnLogMouseClicked
     private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
         btnRun.setEnabled(false);
