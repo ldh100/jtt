@@ -307,7 +307,7 @@ public class __site {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Not Found' notification", "No matching records found", true,"no_jira"); 
             if (FAIL) { return;}
-        _t++; T.Visible_Element_By_Path_Input_Select_Clear("Site Search Clear", "xpath", "//input[contains(@aria-label, 'Search ')]",  "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Input_Select_Clear("Site Search Clear", "xpath", "//input[contains(@aria-label, 'Search ')]",  "no_jira"); 
             if (FAIL) { return;}            
         _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, "no_jira");
             if (FAIL) { return;}   
@@ -317,7 +317,7 @@ public class __site {
             if (FAIL) { return;}
             for (int i = 0; i < L0.size(); i++) {
                 _t++; T.Element_Text("Sites Data Row Text", L0.get(i), "no_jira");             
-                if (FAIL) { return;}
+                //if (FAIL) { return;}
             } 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
             if (FAIL) { return;} 
@@ -453,7 +453,7 @@ public class __site {
                 case 4:
                     _t++; T.Element_Text("Promotion section", L0.get(i), "no_jira");             
                         if (FAIL) { return;} 
-                    _t++; Thread.sleep((long) sleep); T.Element_Click("Promotion Info Click", L0.get(i), "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'Promotion Info'", L0.get(i), "no_jira");
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Promotions' text", "Promotions", true,"no_jira"); 
                         if (FAIL) { return;}
@@ -650,7 +650,7 @@ public class __site {
                 case 4:
                     _t++; T.Element_Text("Promotion section", L0.get(i), "no_jira");             
                         if (FAIL) { return;} 
-                    _t++; Thread.sleep((long) sleep); T.Element_Click("Promotion Info Click", L0.get(i), "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'Promotion Info'", L0.get(i), "no_jira");
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Promotions' text", "Promotions", true,"no_jira"); 
                         if (FAIL) { return;}

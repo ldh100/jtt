@@ -45,7 +45,7 @@ public class __user_permission {
         // </editor-fold>     
 
         // <editor-fold defaultstate="collapsed" desc="Admin N" >  
-        // <editor-fold defaultstate="collapsed" desc="Admin N - Login, Dashboard, Sites" >
+            // <editor-fold defaultstate="collapsed" desc="Admin N - Login, Dashboard, Sites" >
         _t++; T.Visible_Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",  "no_jira"); 
             if (FAIL) { return;}
         _t++; T.Visible_Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']", "no_jira"); 
@@ -120,173 +120,171 @@ public class __user_permission {
                 _f++;
                 EX += _t + "\t" + " === Admin No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";
             }            
-        // </editor-fold> 
+            // </editor-fold> 
 
-        // <editor-fold defaultstate="collapsed" desc="Admin N Brand Permissions" >               
-        _t++; T.Move_to_Element_By_Path("Scroll to Brand data row", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira");        
-            if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Brand Name Click", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira"); 
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
-            if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); T.List_L3("Tabs Count", "xpath", "//div[contains(@class, 'v-tabs__div')]", "no_jira");             
-            if (FAIL) { return;} 
-        for (int i = 0; i < L3.size(); i++) {        
-            _t++; T.Element_Text("Brand Setup Tab >>>>", L3.get(i), "no_jira");
-            Tab_Name = t;  
-            if (Tab_Name.toLowerCase().contains("menu")) { // Menu > Menu Scheduler 
-                _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Schedule menu'", "Schedule menu", false,"no_jira");  
-                _t++; Thread.sleep((long) sleep); T.List_L0("Menu Status icons Count", "xpath", "//i[contains(@class, 'v-icon mdi mdi-eye')]", "no_jira");                       
-                    if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); T.List_L1("Menu Status Disabled Count", "xpath", "//div[contains(@class, 'v-input--is-disabled theme--light')]", "no_jira");             
-                    if (FAIL) { return;}
-                _t++;
-                if(L1.isEmpty()){
-                    _p++;
-                    EX += _t + "\t" + " === Admin No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
-                }else{
+            // <editor-fold defaultstate="collapsed" desc="Admin N Brand Permissions" >               
+            _t++; T.Move_to_Element_By_Path("Scroll to Brand data row", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira");        
+                if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Brand Name Click", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira"); 
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
+                if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.List_L3("Tabs Count", "xpath", "//div[contains(@class, 'v-tabs__div')]", "no_jira");             
+                if (FAIL) { return;} 
+            for (int i = 0; i < L3.size(); i++) {        
+                _t++; T.Element_Text("Brand Setup Tab >>>>", L3.get(i), "no_jira");
+                Tab_Name = t;  
+                if (Tab_Name.toLowerCase().contains("menu")) { // Menu > Menu Scheduler 
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Schedule menu'", "Schedule menu", false,"no_jira");  
+                    _t++; Thread.sleep((long) sleep); T.List_L0("Menu Status icons Count", "xpath", "//i[contains(@class, 'v-icon mdi mdi-eye')]", "no_jira");                       
+                        if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); T.List_L1("Menu Status Disabled Count", "xpath", "//div[contains(@class, 'v-input--is-disabled theme--light')]", "no_jira");             
+                        if (FAIL) { return;}
+                    _t++;
+                    if(L1.isEmpty()){
+                        _p++;
+                        EX += _t + "\t" + " === Admin No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                    }else{
+                        _f++;
+                        EX += _t + "\t" + " === Admin No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";
+                    }                    
+                } else if (Tab_Name.toLowerCase().contains("service")) { 
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
+                        if (FAIL) { return;}    
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 1st '24h Service'", "css", "[aria-label='24 Hour Service']", "no_jira"); 
+                        if (FAIL) { return; }  
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
+                        if (FAIL) { return; } // Save
+                    _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+                        if (FAIL) { return;} 
+                    Thread.sleep(500);                         
+                } else if (Tab_Name.toLowerCase().contains("delivery")) { 
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Delivery Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
+                        if (FAIL) { return;}   
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 1st '24h Service'", "css", "[aria-label='24 Hour Service']", "no_jira"); 
+                        if (FAIL) { return; }  
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
+                        if (FAIL) { return; } // Save
+                    _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+                        if (FAIL) { return;}   
+                    Thread.sleep(500);                        
+                } else if (Tab_Name.toLowerCase().contains("closure")) {    
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Brand Closure'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
+                        if (FAIL) { return;}   
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Add closure'", "xpath", "//button[contains(@class, 'ml-0 pl-0 v-btn v-btn--flat theme--light')]", "no_jira"); 
+                        if (FAIL) { return; }                         
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Save' text", "Save", true,"no_jira"); 
+                        if (FAIL) { return; }    
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]", "no_jira"); 
+                        if (FAIL) { return; }   
+                    Thread.sleep(500);    
+                }
+            }   
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
+                if (FAIL) { return;}  
+            Thread.sleep(500);   
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+                if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Station Name'", "css", "[aria-label='Station Name']", "no_jira"); 
+                if (FAIL) { return;}                    
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Edit 'Station Name'", "css", "[aria-label='Station Name']", "Edit", "no_jira"); 
+                if (!FAIL) {
+                    _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Save Changes' text", "Save Changes", true,"no_jira"); 
+                    _t++; T.Element_By_Path_Click("Click 'CANCEL'", "xpath", "//*[text()='Cancel']","no_jira");
+                        if (FAIL) { return;} 
+                } else {
+                    _t++; 
                     _f++;
-                    EX += _t + "\t" + " === Admin No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";
-                }                    
-            } else if (Tab_Name.toLowerCase().contains("service")) { 
-                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
-                    if (FAIL) { return;}    
-                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 1st '24h Service'", "css", "[aria-label='24 Hour Service']", "no_jira"); 
-                    if (FAIL) { return; }  
-                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
-                    if (FAIL) { return; } // Save
-                _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
-                    if (FAIL) { return;} 
-                Thread.sleep(500);                         
-            } else if (Tab_Name.toLowerCase().contains("delivery")) { 
-                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Delivery Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
-                    if (FAIL) { return;}   
-                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 1st '24h Service'", "css", "[aria-label='24 Hour Service']", "no_jira"); 
-                    if (FAIL) { return; }  
-                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
-                    if (FAIL) { return; } // Save
-                _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
-                    if (FAIL) { return;}   
-                Thread.sleep(500);                        
-            } else if (Tab_Name.toLowerCase().contains("closure")) {    
-                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Brand Closure'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
-                    if (FAIL) { return;}   
-                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Add closure'", "xpath", "//button[contains(@class, 'ml-0 pl-0 v-btn v-btn--flat theme--light')]", "no_jira"); 
-                    if (FAIL) { return; }                         
-                _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Save' text", "Save", true,"no_jira"); 
-                    if (FAIL) { return; }    
-                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]", "no_jira"); 
-                    if (FAIL) { return; }   
-                Thread.sleep(500);    
-            }
-        }   
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
-            if (FAIL) { return;}  
-        Thread.sleep(500);   
-        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
-            if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Station Name'", "css", "[aria-label='Station Name']", "no_jira"); 
-            if (FAIL) { return;}                    
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Edit 'Station Name'", "css", "[aria-label='Station Name']", "Edit", "no_jira"); 
-            if (!FAIL) {
-                _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Save Changes' text", "Save Changes", true,"no_jira"); 
-                _t++; T.Element_By_Path_Click("Click 'CANCEL'", "xpath", "//*[text()='Cancel']","no_jira");
-                    if (FAIL) { return;} 
-            } else {
-                _t++; 
-                _f++;
-                EX += _t + "\t" + " === Adnim No Options " + "\t" + "Station Configuration" + "\t" + "Unable to Edit 'Station Name'" + "\t" + "FAIL" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";                        
-            }      
-        // </editor-fold> 
+                    EX += _t + "\t" + " === Adnim No Options " + "\t" + "Station Configuration" + "\t" + "Unable to Edit 'Station Name'" + "\t" + "FAIL" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";                        
+                }      
+            // </editor-fold> 
 
-        // <editor-fold defaultstate="collapsed" desc="Admin N Group Management" >   
-        _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Click Group Management", "xpath", "//*[contains(text(), 'Group Management')]", "no_jira"); 
-            if (FAIL) { return;} 
-        _t++; Thread.sleep(500); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
-        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
-            if (FAIL) { return;}
-
-        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Add New Group'", "add new group", true,"no_jira");     
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Add New Group'", "xpath", "//*[contains(text(), 'add new group')]", "no_jira"); 
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Create New Group'", "Create New Group", true,"no_jira");   
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Add New Group' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]", "no_jira"); 
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Admin N Groups (Pagination)", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
-           if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Select/Click 1st Group", "tagName", "td", "no_jira"); 
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
-            if (FAIL) { return;}                
-//             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Group 'Configuration'", "Configuration", true,"no_jira");  
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Edit Group' text", "Edit Group", true,"no_jira");   
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Edit Group' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]", "no_jira"); 
-            if (FAIL) { return;}    
-         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click '+ GLOBAL MENU'", "xpath", "//*[contains(text(), 'Global Menu')]", "no_jira"); 
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Enter Menu ... Name'", "Enter Global Menu Brand Name", true,"no_jira");   
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'New Global Menu' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]", "no_jira"); 
-            if (FAIL) { return;}    
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 1st Group 'Edit' icon", "xpath", "//button[contains(@class, 'v-btn v-btn--flat v-btn--icon theme--light grey--text')]", "no_jira"); 
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Edit Menu ... Name'", "Edit Global Menu Brand Name", true,"no_jira");   
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Edit Menu ... Name' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]", "no_jira"); 
-            if (FAIL) { return;}                 
-        // </editor-fold> 
-
-        // <editor-fold defaultstate="collapsed" desc="Admin N Menu Management" >   
-        _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Click Menu Manager", "xpath", "//*[contains(text(), 'Menu Manager')]", "no_jira"); 
-            if (FAIL) { return;} 
-        _t++; Thread.sleep(500); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
-        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
-            if (FAIL) { return;}
-
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open 'Group' dropdown", "css", "[role='combobox']", "no_jira");
-            if (FAIL) return;   
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Sector Name", "css", "[role='combobox']", GROUP, "no_jira");
-                if (FAIL) { return;}    
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Sector Name Click", "xpath", "//*[contains(text(), '" + GROUP + "')]", "no_jira"); 
-            if (FAIL) { return;}                  
-        _t++; T.Clickable_Element_By_Path_Click("Button 'Go to Menu' Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
-            if (FAIL) { return;} 
-            //Thread.sleep(1000);
-        _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for MM > Group page load", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "no_jira"); 
+            // <editor-fold defaultstate="collapsed" desc="Admin N Group Management" >   
+            _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Click Group Management", "xpath", "//*[contains(text(), 'Group Management')]", "no_jira"); 
+                if (FAIL) { return;} 
+            _t++; Thread.sleep(500); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                 if (FAIL) { return;}
 
-        _t++; T.Find_Text("Button 'Add Global Menu' text", "ADD GLOBAL MENU", true,"no_jira");   
-            if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Add New Group'", "add new group", true,"no_jira");     
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Add New Group'", "xpath", "//*[contains(text(), 'add new group')]", "no_jira"); 
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Create New Group'", "Create New Group", true,"no_jira");   
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Add New Group' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]", "no_jira"); 
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Admin N Groups (Pagination)", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
+               if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Select/Click 1st Group", "tagName", "td", "no_jira"); 
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+                if (FAIL) { return;}                
+    //             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Group 'Configuration'", "Configuration", true,"no_jira");  
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Edit Group' text", "Edit Group", true,"no_jira");   
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Edit Group' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]", "no_jira"); 
+                if (FAIL) { return;}    
+             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click '+ GLOBAL MENU'", "xpath", "//*[contains(text(), 'Global Menu')]", "no_jira"); 
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Enter Menu ... Name'", "Enter Global Menu Brand Name", true,"no_jira");   
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'New Global Menu' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]", "no_jira"); 
+                if (FAIL) { return;}    
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 1st Group 'Edit' icon", "xpath", "//button[contains(@class, 'v-btn v-btn--flat v-btn--icon theme--light grey--text')]", "no_jira"); 
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Edit Menu ... Name'", "Edit Global Menu Brand Name", true,"no_jira");   
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Edit Menu ... Name' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]", "no_jira"); 
+                if (FAIL) { return;}                 
+            // </editor-fold> 
 
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", "no_jira"); 
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, "no_jira");
-            if (FAIL) { return;} 
+            // <editor-fold defaultstate="collapsed" desc="Admin N Menu Management" >   
+            _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Click Menu Manager", "xpath", "//*[contains(text(), 'Menu Manager')]", "no_jira"); 
+                if (FAIL) { return;} 
+            _t++; Thread.sleep(500); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+                if (FAIL) { return;}
+
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open 'Group' dropdown", "css", "[role='combobox']", "no_jira");
+                if (FAIL) return;   
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Sector Name", "css", "[role='combobox']", GROUP, "no_jira");
+                    if (FAIL) { return;}    
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Sector Name Click", "xpath", "//*[contains(text(), '" + GROUP + "')]", "no_jira"); 
+                if (FAIL) { return;}                  
+            _t++; T.Clickable_Element_By_Path_Click("Button 'Go to Menu' Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+                if (FAIL) { return;} 
+                //Thread.sleep(1000);
+            _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for MM > Group page load", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "no_jira"); 
+                    if (FAIL) { return;}
+            _t++; T.Find_Text("Button 'Add Global Menu' text", "ADD GLOBAL MENU", true,"no_jira");   
+                if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", "no_jira"); 
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, "no_jira");
+                if (FAIL) { return;} 
 
 
-        // logout >>>>>>>>>>>    
-        _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Dashboard Click", "xpath", "//*[contains(text(), 'Dashboard')]", "no_jira"); 
-            if (FAIL) { return;} 
-        _t++; Thread.sleep(500); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
-        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'User Name'", "xpath", "//button[@type='button'][2]", "no_jira"); 
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(), 'Logout')]", "no_jira"); 
-            if (FAIL) { return;}  
-    }  
-    }
-    // </editor-fold>
+            // logout >>>>>>>>>>>    
+            _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Dashboard Click", "xpath", "//*[contains(text(), 'Dashboard')]", "no_jira"); 
+                if (FAIL) { return;} 
+            _t++; Thread.sleep(500); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'User Name'", "xpath", "//button[@type='button'][2]", "no_jira"); 
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(), 'Logout')]", "no_jira"); 
+                if (FAIL) { return;}  
+            }  
+        }
+        // </editor-fold>
         // </editor-fold>
         
         // <editor-fold defaultstate="collapsed" desc="SM Y" >

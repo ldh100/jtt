@@ -250,6 +250,7 @@ public class W_Report extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_DV1MouseClicked
 
     private void btnDelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelMouseClicked
+        String LAST_APP = cmbF.getSelectedItem().toString();
         Object[] options = {"Yes", "No"};
         int reply = JOptionPane.showOptionDialog(this,
             "Are you sure you want to delete selected report?",
@@ -270,8 +271,13 @@ public class W_Report extends javax.swing.JInternalFrame {
         }
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
 
-        LoadF();
-        LoadDB();
+        LoadF(); //=============
+        try{
+            cmbF.setSelectedItem(LAST_APP);
+        } catch (Exception ex) {
+            txtLog.append("\r\n\r\n=== Delete Old Reports > ERROR: " + ex.getMessage());
+        }
+        LoadDB(); //============
     }//GEN-LAST:event_btnDelMouseClicked
 
     private void btnDelOldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelOldMouseClicked
@@ -314,9 +320,10 @@ public class W_Report extends javax.swing.JInternalFrame {
                DV1.getValueAt(DV1.getSelectedRow(), 0) + "'");
             rs.next();
             String EXX = rs.getString(1);
-            if(!Func.SHOW_FILE(EXX, "txt")){
-                txtLog.append("\r\n\r\n=== Cannot show 'txt' output");
-            }
+            String R = Func.SHOW_FILE(EXX, "txt");
+            if(!R.equals("OK")){
+                txtLog.append(R);
+            }             
 //            File aLog = new File("aLog.txt");
 //            if (aLog.createNewFile()) {
 //                txtLOG.append("\r\n\r\n=== Report > File created: " + aLog.getName());

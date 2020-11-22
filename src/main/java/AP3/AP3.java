@@ -1013,11 +1013,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 }
                 if (_menu_manager.isSelected()) { SCOPE += ", Menu Mgm";
                     EX += " - " + "\t" + " === Menu Manager" + "\t" + " ===== " + "\t" + " == Menu Manager Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-                    if("DE".equals(env)){
-                        __menu_manager_dev.run(); 
-                    }else{
-                        __menu_manager.run();                        
-                    }
+                    __menu_manager.run();                        
                     EX += " - " + "\t" + " === ^ Menu Manager" + "\t" + " ===== " + "\t" + " == ^ Menu Manager End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 }
                 if (_orders.isSelected()) { SCOPE += ", Orders";

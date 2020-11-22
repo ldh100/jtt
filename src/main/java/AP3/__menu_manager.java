@@ -785,6 +785,10 @@ public class __menu_manager {
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter PLU ID", "css", "[aria-label='PLU ID']", "900019", "no_jira");
                 if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Barcode Click", "css", "[aria-label='Barcode']", "no_jira");
+                if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Barcode", "css", "[aria-label='Barcode']", "BC900019", "no_jira");
+                if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Description Click", "css", "[aria-label='Description']", "no_jira");
                 if (FAIL) { return;}    
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Description", "css", "[aria-label='Description']", "Description " + New_ID, "no_jira");

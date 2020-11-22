@@ -1097,7 +1097,7 @@ public class API extends javax.swing.JInternalFrame {
         } 
     }//GEN-LAST:event_btnGroupMouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = Func.SHOW_FILE(txtLOG.getText(), "json");
+        String R = Func.SHOW_FILE(txtLOG.getText(), "txt");
         if(!R.equals("OK")){
             txtLOG.append(R);
         } 

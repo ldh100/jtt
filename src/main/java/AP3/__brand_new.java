@@ -10,15 +10,12 @@ import static AP3.AP3.*;
 
 import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.List;
-import org.openqa.selenium.WebElement;
 /**
  *
  * @author Oleg.Spozito
  */
 public class __brand_new {
     public static void run(boolean NEW_SITE) throws InterruptedException { 
-        List<WebElement> TEMP = null;
         _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Dashboard Click", "xpath", "//*[contains(text(), 'Dashboard')]", "no_jira"); 
@@ -242,7 +239,7 @@ public class __brand_new {
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Pickup 'DISABLE' Click", "xpath", "//div[contains(text(), 'DISABLE')]", "no_jira");
                         if (FAIL) { return;}    
                     _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'DISABLE' dialog", "xpath", "//div[@class='v-dialog v-dialog--active']", "no_jira");
-                        if (FAIL) { return;}    // Find fragment                     
+                        if (FAIL) { return;}                       
                     _t++; Thread.sleep((long) sleep); T.Element_Child_E2("Find 'DISABLE' dialog Title", e1, "xpath", ".//div[@class='v-card__title H4-Secondary-Center dropoff-title']", "no_jira");
                         if (FAIL) { return;}   
                     _t++; Thread.sleep((long) sleep); T.Element_Text(" 'DISABLE' dialog Title", e2, "no_jira");
@@ -269,9 +266,9 @@ public class __brand_new {
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.Element_Child_E2("Find 'DISABLE' dialog Cancel", e1, "xpath", ".//div[text()='cancel']", "no_jira");
                         if (FAIL) { return;}   
-                    _t++; Thread.sleep((long) sleep); T.Element_Text(" 'DISABLE' Cancel text", e2, "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_Text("Cancel 'DISABLE' text", e2, "no_jira");
                         if (FAIL) { return;}                         
-                    _t++; Thread.sleep((long) sleep); T.Element_Click(" 'DISABLE' Cancel Click", e2, "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'DISABLE' Cancel", e2, "no_jira");
                         if (FAIL) { return;} 
                         
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Timeslot Length Click", "xpath", "//label[contains(text(), 'Timeslot Length')]", "no_jira"); 
@@ -567,9 +564,9 @@ public class __brand_new {
             Thread.sleep(500);
         // </editor-fold>    
         
-        // <editor-fold defaultstate="collapsed" desc="MM - activate New Local Menus">
+        // <editor-fold defaultstate="collapsed" desc="MM - Activate/Set Visible in App New Local Menu">
         _t++; Thread.sleep((long) sleep); T.Open_Switch_to_2nd_Tab("Open Menu Manager in New Tab", "https://staging.adminpanel.compassdigital.org/#/menu","no_jira");             
-        EX += " - " + "\t" + " === MM New Local Menu " + "\t" + " ===== " + "\t" + " == Activate Local Menu Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === MM New Local Menu " + "\t" + " ===== " + "\t" + " == Activate New Local Menu Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}    
@@ -630,7 +627,7 @@ public class __brand_new {
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Local Menu Search", "css", "[aria-label='Search Menus']", New_ID, "no_jira");
                 if (FAIL) { return;} 
                 
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'VIEW LOCAL MENUS'", "xpath", "//span[contains(text(), '" + "VIEW LOCAL MENUS" + "')]", "no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'VIEW LOCAL MENUS'", "xpath", "//div[contains(text(), 'View Local Menus')]", "no_jira"); 
                 if (FAIL) { return;} 
 
             
@@ -651,19 +648,89 @@ public class __brand_new {
                     _t++; T.Element_Attribute("Menu Set (Index " + i + ")", L1.get(i), "textContent", "no_jira");  
                 }               
 
-            _t++; Thread.sleep((long) sleep); T.Element_Click("Expand 1st Menu Set", L1.get(0), "no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Click 1st Menu Set", L1.get(0), "no_jira"); 
                 if (FAIL) { return;}                                                                                
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}    
-                Thread.sleep(500);                 
-            _t++; Thread.sleep((long) sleep); T.List_L1("Items Rows Count", "tagName", "tr", "no_jira");             
+            Thread.sleep(500); 
+                
+            _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Edit Menu Set name' dialog", "xpath", "//div[@class='v-dialog v-dialog--active']", "no_jira");
+                if (FAIL) { return;}                       
+            _t++; Thread.sleep((long) sleep); T.Element_Child_E2("Find 'Edit...' dialog Title", e1, "xpath", ".//div[@class='v-card__title H4-Secondary-Center v-card__title--primary']", "no_jira");
+                if (FAIL) { return;}   
+            _t++; Thread.sleep((long) sleep); T.Element_Text("Dialog 'Edit..' Title text", e2, "no_jira");
                 if (FAIL) { return;}  
-                _t++; T.List_TR_TDs("Item Table Header", L1, 0, "no_jira"); 
-                    if (FAIL) { return;} 
-                for (int i = 2; i < L1.size(); i++) {
-                    _t++; T.List_TR_TDs("Item Row Data", L1, i, "no_jira");   
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Use original..' Text", "Use original name",true,"no_jira");             
+                //if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Menu Set Name..' label", "Menu Set Name",true,"no_jira");             
+                //if (FAIL) { return;}                
+//            _t++; Thread.sleep((long) sleep); T.Find_Text("Find Original Set Name..' label", "Menu Set Name",true,"no_jira");             
+//                //if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_Child_E2("Find 'Use original' check-box", e1, "xpath", ".//i[@class='v-icon mdi mdi-checkbox-marked theme--light secondary--text']", "no_jira");
+                if (FAIL) { return;}   
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Uncheck 'Use original' check-box", e2, "no_jira");
+                if (FAIL) { return;}                     
+                 
+            _t++; Thread.sleep((long) sleep); T.Element_Child_E2("Find 'Menu Set Name' text input", e1, "xpath", ".//input[@aria-label='Menu Set Name']", "no_jira");
+                if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_Text_Clear("Clear 'Menu Set Name' input", e2, "no_jira");
+                if (FAIL) { return;}                 
+             _t++; Thread.sleep((long) sleep); T.Element_Text_Enter("Enter new Menu Set Name", e2, "New Auto Menu " + New_ID, "no_jira");
+                if (FAIL) { return;}      
+            _t++; Thread.sleep((long) sleep); T.Element_Child_E2("Find dialog 'Cancel' button", e1, "xpath", ".//div[text()='Cancel']", "no_jira");
+                if (FAIL) { return;}   
+            _t++; Thread.sleep((long) sleep); T.Element_Text("Button 'Cancel' Text", e2, "no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Element_Child_E2("Find dialog 'Save' button", e1, "xpath", ".//div[text()='Save']", "no_jira");
+                if (FAIL) { return;}   
+            _t++; Thread.sleep((long) sleep); T.Element_Text("Button 'Save' Text", e2, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'Save'", e2, "no_jira"); 
+                if (FAIL) { return;}   
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Click 1st Menu Set/expand", L1.get(0), "no_jira"); 
+                if (FAIL) { return;}                                                                                
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+                if (FAIL) { return;}    
+            Thread.sleep(500);                 
+            _t++; Thread.sleep((long) sleep); T.List_L1("Updated Menu Sets Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", "no_jira");             
+                if (FAIL) { return;}
+                for (int i = 0; i < L1.size(); i++) {
+                    _t++; T.Element_Attribute("Menu Set (Index " + i + ")", L1.get(i), "textContent", "no_jira");  
+                }               
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Click 1st Menu Set", L1.get(0), "no_jira"); 
+                if (FAIL) { return;}             
+            _t++; Thread.sleep((long) sleep); T.Element_Child_List_L2("Categories Count", L1.get(0), "xpath", ".//div[@class='layout align-center']", "no_jira");             
+                for (int i = 0; i < L1.size(); i++) {
+                    _t++; T.List_TR_TDs("Categories Row Data", L2, i, "no_jira");   
                         if (FAIL) { return;}                
-                }            
+                }                 
+            _t++; Thread.sleep((long) sleep); T.List_L3("Item Rows Count", "tagName", "tr", "no_jira");             
+                if (FAIL) { return;}  
+                _t++; T.List_TR_THs("Item Table Header", L3, 0, "no_jira"); 
+                    if (FAIL) { return;} 
+                for (int i = 2; i < L3.size(); i++) {
+                    _t++; T.List_TR_TDs("Item Row Data", L3, i, "no_jira");   
+                        if (FAIL) { return;}                
+                }  
+            // Click EDIT MENU - already ^^^^            
+            _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Bulk' container", "xpath", "//div[@class='layout justify-left align-center']", "no_jira");             
+                if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find 'Bulk' default prompt", e1,"xpath", ".//span[@class='Button-Primary-Center']", "no_jira");             
+                //if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Check 'Bulk' select All", e1,"xpath", ".//input[@role='checkbox']", "no_jira");             
+                if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find 'Bulk' updated prompt", e1,"xpath", ".//span[@class='Button-Primary-Center']", "no_jira");             
+                //if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Click 'Update X Items' prompt", e1,"xpath", ".//span[@class='Button-Primary-Center']", "no_jira");             
+                if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'In Stock'", "css", "[aria-label='In Stock']", "no_jira"); 
+                if (FAIL) { return;}  
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Visible In App'", "css", "[aria-label='Visible In App']", "no_jira"); 
+                if (FAIL) { return;}  
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'APPLY Changes'", "xpath", "//div[contains(text(), 'Apply Changes')]", "no_jira"); 
+                if (FAIL) { return;}  
+            _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Check 'Bulk' select All", L2.get(0),"xpath", ".//div[@class='v-icon mdi mdi-eye-off theme--light red--text']", "no_jira");             
+                if (FAIL) { return;}                 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", "no_jira"); 
+                if (FAIL) { return;}  
         } else {
            _t++; _f++;
            EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";

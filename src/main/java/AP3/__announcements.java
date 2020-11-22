@@ -202,7 +202,6 @@ public class __announcements {
                         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Announcement Types' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
                             if (FAIL) { return;}                          
                         _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Announcement Types' Count", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");                                     
-                            if (FAIL) { return;} 
                             for (int j = 0; j < L1.size(); j++) {
                                 _t++; T.Element_Text("Available Announcement Type:", L1.get(j), "no_jira");             
                                 if (FAIL) { return;}                            
@@ -223,7 +222,6 @@ public class __announcements {
                         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Announcement App' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
                             if (FAIL) { return;}                          
                         _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Announcement App' Count", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");                                     
-                            if (FAIL) { return;} 
                             for (int j = 0; j < L1.size(); j++) {
                                 _t++; T.Element_Text("Available Application:", L1.get(j), "no_jira");             
                                 if (FAIL) { return;}                            
@@ -242,8 +240,7 @@ public class __announcements {
                             if (FAIL) { return;} 
                         _t++; Thread.sleep((long) sleep); T.List_Child_E1_By_Path("Find 'Sites...' list", L2, i, "xpath", ".//div[@class='v-list list-panel theme--light']", "no_jira");
                             if (FAIL) { return;}                           
-                        _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Sites' Count", e1, "xpath", ".//label[@class='v-label theme--light']", "no_jira");             
-                           if (FAIL) { return;}  
+                        _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Sites' Count", e1, "xpath", ".//label[@class='v-label theme--light']", "no_jira");              
                            T_Index = -1;
                             for (int j = 0; j < L1.size(); j++) {
                                 _t++; T.Element_Text("Selection " + (j+1) + " Name", L1.get(j), "no_jira");             
@@ -266,7 +263,6 @@ public class __announcements {
                                 _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Position' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
                                     if (FAIL) { return;}                          
                                 _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Positions' Count", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");                                     
-                                    if (FAIL) { return;} 
                                     for (int j = 0; j < L1.size(); j++) {
                                         _t++; T.Element_Text("Available Position:", L1.get(j), "no_jira");             
                                         if (FAIL) { return;}                            
@@ -466,7 +462,6 @@ public class __announcements {
                 _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Position' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
                     if (FAIL) { return;}                          
                 _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Positions' Count", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");                                     
-                    if (FAIL) { return;} 
                     for (int j = 0; j < L1.size(); j++) {
                         _t++; T.Element_Text("Available Position:", L1.get(j), "no_jira");             
                         if (FAIL) { return;}                            
@@ -486,7 +481,6 @@ public class __announcements {
                     _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Status' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
                         if (FAIL) { return;}                          
                     _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Announcement Status' Count", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");                                     
-                        if (FAIL) { return;} 
                         T_Index = -1;
                         for (int j = 0; j < L1.size(); j++) {
                             _t++; T.Element_Text("Available Status:", L1.get(j), "no_jira");             
@@ -503,7 +497,6 @@ public class __announcements {
                             _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Position' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
                                 if (FAIL) { return;}                          
                             _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Announcement App' Count", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");                                     
-                                if (FAIL) { return;} 
                                 for (int j = 0; j < L1.size(); j++) {
                                     _t++; T.Element_Text("Available Position:", L1.get(j), "no_jira");             
                                     if (FAIL) { return;}                            

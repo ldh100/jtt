@@ -33,9 +33,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 
 public class Func {
-    public static boolean SHOW_FILE(String BODY, String EXT){
+    public static String SHOW_FILE(String BODY, String EXT){
+        File aLog = null;
         try {
-            File aLog = new File("aLog." + EXT);
+            String userHomeFolder = System.getProperty("user.home") + "/Desktop"; 
+            aLog = new File(userHomeFolder + File.separator + "aLog." + EXT);
 //            if (aLog.createNewFile()) {
 //                System.out.println("File created: " + aLog.getName());
 //            } else {
@@ -43,11 +45,11 @@ public class Func {
 //            }
             Files.write(Paths.get(aLog.getPath()), BODY.getBytes());
             java.awt.Desktop.getDesktop().open(aLog);
-            return true;
+            return "OK";
         }
         catch (IOException ex) {
-            System.out.println("\r\n\r\n=== Show Log > ERROR: " + ex.getMessage());
-            return false;
+            System.out.println("\r\n\r\n=== Show " + aLog + " > ERROR: " + ex.getMessage());
+            return "\r\n\r\n=== Show " + aLog + " > ERROR: " + ex.getMessage();
         }
     }
     public static class ColorRenderer extends DefaultTableCellRenderer{
