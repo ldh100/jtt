@@ -612,7 +612,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 btnSave_OptMouseClicked(evt);
             }
         });
-        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 52, 108, 22));
+        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 52, 116, 22));
 
         lblSITES11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -1213,15 +1213,16 @@ public class AP3 extends javax.swing.JInternalFrame {
                             //Toast_Msg = d1.findElement(By.cssSelector("[role='alert']")).getText();
                             Toast_Msg = ALERTS.get(0).getAttribute("textContent");
                             if(     Toast_Msg.toLowerCase().contains("successfully") || 
-                                    Toast_Msg.toLowerCase().contains("has been updated") || 
-                                    Toast_Msg.toLowerCase().contains("has been added") || 
-                                    Toast_Msg.toLowerCase().contains("has been removed") ||
-                                    Toast_Msg.toLowerCase().contains(" have been reset") ||
+                                    Toast_Msg.toLowerCase().contains(" been updated") || 
+                                    Toast_Msg.toLowerCase().contains(" been added") || 
+                                    Toast_Msg.toLowerCase().contains(" been removed") ||
+                                    Toast_Msg.toLowerCase().contains(" been reset") ||
                                     Toast_Msg.toLowerCase().contains(" saved")) {
                                 _t++;
                                 _p++;
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                            
-                            } else if(Toast_Msg.toLowerCase().contains("could not")||
+                            } else if(Toast_Msg.toLowerCase().contains("could not")|| 
+                                    Toast_Msg.toLowerCase().contains("unable to save")|| 
                                     Toast_Msg.toLowerCase().contains("fail")) {
                                 _t++;
                                 _f++;
