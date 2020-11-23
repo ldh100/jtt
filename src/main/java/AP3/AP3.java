@@ -7,6 +7,7 @@ package AP3;
 
 import A.Func;
 import static A.A.*;
+import com.google.common.base.Stopwatch;
 import com.ullink.slack.simpleslackapi.SlackChannel;
 import com.ullink.slack.simpleslackapi.SlackMessageHandle;
 import com.ullink.slack.simpleslackapi.SlackSession;
@@ -15,6 +16,8 @@ import java.awt.Cursor;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -725,9 +728,12 @@ public class AP3 extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String EXX = "";
         try {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT TOP 1 [Excel] FROM [dbo].[aw_result] WHERE [app] = 'AP3_" + env + "' ORDER By qID DESC");
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING); 
+            ResultSet rs = conn.createStatement().executeQuery("SELECT TOP 1 [Excel] FROM [dbo].[aw_result] WHERE [app] = 'AP3_" 
+                    + env + "' AND [user_id] = '" + UserID + "' ORDER By qID DESC");
             rs.next();
             EXX = rs.getString(1);
+            conn.close();
         }catch (SQLException ex){
             txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
         }
@@ -992,90 +998,122 @@ public class AP3 extends javax.swing.JInternalFrame {
             @Override
             protected String doInBackground() throws Exception   { // define what thread will do here 
                 New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
-                if (_login.isSelected()) { SCOPE += "Login";
+                if (_login.isSelected()) { 
+                    SCOPE += "Login";
                     EX += " - " + "\t" + " === Login, Dashboard" + "\t" + " ===== " + "\t" + " == Login, Dashboard Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                     __login.run(_users.isSelected());
                     EX += " - " + "\t" + " === ^ Login, Dashboard" + "\t" + " ===== " + "\t" + " == ^ Login, Dashboard End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
                 }
-                if (_site.isSelected()) { SCOPE += ", Site";
+                if (_site.isSelected()) { 
+                    SCOPE += ", Site";
                     EX += " - " + "\t" + " === Sites" + "\t" + " ===== " + "\t" + " == Sites Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __site.run();
                     EX += " - " + "\t" + " === ^ Sites" + "\t" + " ===== " + "\t" + " == ^ Sites End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
                 }
-                if (_brand.isSelected()) { SCOPE += ", Brand";
+                if (_brand.isSelected()) { 
+                    SCOPE += ", Brand";
                     EX += " - " + "\t" + " === Brand" + "\t" + " ===== " + "\t" + " == Brand Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __brand.run();
                     EX += " - " + "\t" + " === ^ Brand" + "\t" + " ===== " + "\t" + " == ^ Brand End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
                 }
-                if (_group_management.isSelected()) { SCOPE += ", Group Mgm";
+                if (_group_management.isSelected()) { 
+                    SCOPE += ", Group Mgm";
                     EX += " - " + "\t" + " === Group Management" + "\t" + " ===== " + "\t" + " == Group Management Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __group_management.run();
                     EX += " - " + "\t" + " === ^ Group Management" + "\t" + " ===== " + "\t" + " == ^ Group Management End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
                 }
-                if (_menu_manager.isSelected()) { SCOPE += ", Menu Mgm";
+                if (_menu_manager.isSelected()) { 
+                    SCOPE += ", Menu Mgm";
                     EX += " - " + "\t" + " === Menu Manager" + "\t" + " ===== " + "\t" + " == Menu Manager Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __menu_manager.run();                        
                     EX += " - " + "\t" + " === ^ Menu Manager" + "\t" + " ===== " + "\t" + " == ^ Menu Manager End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
                 }
-                if (_orders.isSelected()) { SCOPE += ", Orders";
+                if (_orders.isSelected()) { 
+                    SCOPE += ", Orders";
                     EX += " - " + "\t" + " === Orders" + "\t" + " ===== " + "\t" + " == Orders Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __orders.run();
                     EX += " - " + "\t" + " === ^ Orders" + "\t" + " ===== " + "\t" + " == ^ Orders End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
                 }
-                if (_users.isSelected()) {  SCOPE += ", Users";
+                if (_users.isSelected()) {  
+                    SCOPE += ", Users";
                     EX += " - " + "\t" + " === Users" + "\t" + " ===== " + "\t" + " == Users Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __user.run();
                     EX += " - " + "\t" + " === ^ Users" + "\t" + " ===== " + "\t" + " == ^ Users End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
                 }
-                if (_sales_reporting.isSelected()) { SCOPE += ", Sales Rep";
+                if (_sales_reporting.isSelected()) { 
+                    SCOPE += ", Sales Rep";
                     EX += " - " + "\t" + " === Sales Reporting" + "\t" + " ===== " + "\t" + " == Sales Reporting Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __sales_reporting.run();
                     EX += " - " + "\t" + " === ^ Sales Reporting" + "\t" + " ===== " + "\t" + " == ^ Sales Reporting End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
                 }
-                if (_announcements.isSelected()) { SCOPE += ", Announ";
+                if (_announcements.isSelected()) { 
+                    SCOPE += ", Announ";
                     EX += " - " + "\t" + " === Announcements" + "\t" + " ===== " + "\t" + " == Announcements Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __announcements.run();
                     EX += " - " + "\t" + " === ^ Announcements" + "\t" + " ===== " + "\t" + " == ^ Announcements End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
                 }                    
-                if (_promo.isSelected()) { SCOPE += ", Promos";
+                if (_promo.isSelected()) { 
+                    SCOPE += ", Promos";
                     EX += " - " + "\t" + " === Promo Management" + "\t" + " ===== " + "\t" + " == Promo Management Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __promo.run();
                     EX += " - " + "\t" + " === ^ Promo Management" + "\t" + " ===== " + "\t" + " == ^ Promo Management End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
                 }                    
-                if (_resent_updates.isSelected()) { SCOPE += ", Resent Updates";
+                if (_resent_updates.isSelected()) { 
+                    SCOPE += ", Resent Updates";
                     EX += " - " + "\t" + " === Recent Updates" + "\t" + " ===== " + "\t" + " == Recent Updates Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __resent_updates.run();
                     EX += " - " + "\t" + " === ^ Recent Updates" + "\t" + " ===== " + "\t" + " == ^ Recent Updates End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
                 }
-                if (_brand_new.isSelected() && !"PR".equals(env)) { SCOPE += ", Add Brand";
+                if (_brand_new.isSelected() && !"PR".equals(env)) { 
+                    SCOPE += ", Add Brand";
                     EX += " - " + "\t" + " === Site > Add Brand" + "\t" + " ===== " + "\t" + " == Add Brand Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __brand_new.run(_site_new.isSelected());
                     EX += " - " + "\t" + " === ^ Site > Add Brand" + "\t" + " ===== " + "\t" + " == ^ Add Brand End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
                 }
-                if (_site_new.isSelected() && !"PR".equals(env)) { SCOPE += ", New Site";
+                if (_site_new.isSelected() && !"PR".equals(env)) { 
+                    SCOPE += ", New Site";
                     EX += " - " + "\t" + " === New Site" + "\t" + " ===== " + "\t" + " == New Site Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __site_new.run();
                     EX += " - " + "\t" + " === ^ New Site" + "\t" + " ===== " + "\t" + " == ^ New Site End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
                 }
 
                 // ============================== Last Blocks
-                if (_logout.isSelected()) { SCOPE += ", LogOut";
+                if (_logout.isSelected()) { 
+                    SCOPE += ", LogOut";
                     EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __logout.run();
                     EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
                 }
-                if (_password.isSelected()) { SCOPE += ", Forgot PW";  
+                if (_password.isSelected()) { 
+                    SCOPE += ", Forgot PW";  
                     EX += " - " + "\t" + " === Forgot PW" + "\t" + " ===== " + "\t" + " == Forgot PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __password.run();
                     EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
                 }
-                if (_roles.isSelected()) { SCOPE += ", Roles";   
+                if (_roles.isSelected()) { 
+                    SCOPE += ", Roles";   
                     EX += " - " + "\t" + " === User Permissions" + "\t" + " ===== " + "\t" + " == User Permissions Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     if (!_logout.isSelected()){
                        __logout.run();
                     }
                     __user_permission.run();
                     EX += " - " + "\t" + " === ^ User Permissions" + "\t" + " ===== " + "\t" + " == ^ User Permissions End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
                 }                    
                 if(_f > 0) {
                     return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
@@ -1166,38 +1204,42 @@ public class AP3 extends javax.swing.JInternalFrame {
             protected String doInBackground() throws Exception { 
                 while (true){
                     Toast_Msg = "";
-                    System.out.println("BW2: " + "Message()");
+                    //System.out.println("BW2: " + "Message()");
                     Thread.sleep(1000);
-                    try{
-                        //Toast_Msg = d1.findElement(By.cssSelector("[role='alert']")).getAttribute("textContent");
-                        Toast_Msg = d1.findElement(By.cssSelector("[role='alert']")).getText();
-                        if(     Toast_Msg.toLowerCase().contains("successfully") || 
-                                Toast_Msg.toLowerCase().contains("has been updated") || 
-                                Toast_Msg.toLowerCase().contains("has been added") || 
-                                Toast_Msg.toLowerCase().contains("has been removed") ||
-                                Toast_Msg.toLowerCase().contains(" have been reset") ||
-                                Toast_Msg.toLowerCase().contains(" saved")) {
-                            _t++;
-                            _p++;
-                            EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                            
-                        } else if(Toast_Msg.toLowerCase().contains("could not")||
-                                Toast_Msg.toLowerCase().contains("fail")) {
-                            _t++;
-                            _f++;
-                            F += _t + " > FAIL - " + Toast_Msg + "\r\n";
-                            EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
-                        } else if(Toast_Msg.toLowerCase().contains("fix") || Toast_Msg.toLowerCase().contains("error")) {
-                            _t++;
-                            _w++;
-                            EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
-                        } else {
-                            _t++;
-                            _w++;
-                            //F += _t + " > WARN - " + tt + "\r\n";
-                            EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                    try {
+                        List<WebElement> ALERTS = d1.findElements(By.cssSelector("[role='alert']"));
+                        if(ALERTS.size() > 0){
+                            //Toast_Msg = d1.findElement(By.cssSelector("[role='alert']")).getAttribute("textContent");
+                            //Toast_Msg = d1.findElement(By.cssSelector("[role='alert']")).getText();
+                            Toast_Msg = ALERTS.get(0).getAttribute("textContent");
+                            if(     Toast_Msg.toLowerCase().contains("successfully") || 
+                                    Toast_Msg.toLowerCase().contains("has been updated") || 
+                                    Toast_Msg.toLowerCase().contains("has been added") || 
+                                    Toast_Msg.toLowerCase().contains("has been removed") ||
+                                    Toast_Msg.toLowerCase().contains(" have been reset") ||
+                                    Toast_Msg.toLowerCase().contains(" saved")) {
+                                _t++;
+                                _p++;
+                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                            
+                            } else if(Toast_Msg.toLowerCase().contains("could not")||
+                                    Toast_Msg.toLowerCase().contains("fail")) {
+                                _t++;
+                                _f++;
+                                F += _t + " > FAIL - " + Toast_Msg + "\r\n";
+                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                            } else if(Toast_Msg.toLowerCase().contains("fix") || Toast_Msg.toLowerCase().contains("error")) {
+                                _t++;
+                                _w++;
+                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                            } else {
+                                _t++;
+                                _w++;
+                                //F += _t + " > WARN - " + tt + "\r\n";
+                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                            }
+                            Thread.sleep(4000); //  pause till new alert expected ???? 
                         }
-                        Thread.sleep(3000);
-                    } catch (Exception ex){ // Exception ex
+                    } catch (InterruptedException ex){ // Exception ex
                         //System.out.println("BW2: " + "ex.getMessage()");
                     }
                 }
@@ -1206,50 +1248,63 @@ public class AP3 extends javax.swing.JInternalFrame {
         BW2.execute();  // executes the swingworker on worker thread   
     }
     private void Get_AP3_TKN_and_Slack_IDs(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));         
         try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
             ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_OAuth_TKN'");
             rs.next();
             S_OAuth_TKN = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get S_OAuth_TKN > ERROR: " + ex.getMessage());
         }
         try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
             ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Client_ID'");
             rs.next();
             S_Client_ID = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get S_Client_ID > ERROR: " + ex.getMessage());
         }
         try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
             ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Client_Secret'");
             rs.next();
             S_Client_Secret = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get S_Client_Secret > ERROR: " + ex.getMessage());
         }
         try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
             ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Signing_Secret'");
             rs.next();
             S_Signing_Secret = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get S_Signing_Secret > ERROR: " + ex.getMessage());
         }
         try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
             ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Hook'");
             rs.next();
             S_Hook = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get S_Hook > ERROR: " + ex.getMessage());
         }
         
         try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
             ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
             rs.next();
             AP3_TKN = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== AP3_TKN > ERROR: " + ex.getMessage());
         }
+
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetSites_API() {
@@ -1258,10 +1313,12 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLOG.append("\r\n-Load Sites ...");
         sw1.start();
         try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
             ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() + 
                     "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
             rs.next();
             appId = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get P2 App_ID > ERROR: " + ex.getMessage());
         }
@@ -1584,6 +1641,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private void LOG_UPDATE(){  
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
             PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET " +
                           " [Date] = ?" +       // 1
                           ", [Time] = ?" +      // 2
@@ -1624,6 +1682,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             _update.setString(18, EX);    
             int row = _update.executeUpdate();
 //            txtLOG.append("\r\n\r\n=== LOG_UPDATE > OK (" + row + " row)");
+            conn.close();
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== LOG_UPDATE > SQL ERROR: " + ex.getMessage());
         }
@@ -1632,6 +1691,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private void LOG_START(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
             PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] (" +
                           "[Date]" +   // 1
                           ", [Time]" +   // 2
@@ -1691,6 +1751,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             _insert.setString(18, "None");    
             int row = _insert.executeUpdate();
 //            txtLOG.append("\r\n\r\n=== LOG_START > OK (" + row + " row)");
+            conn.close();
         }  catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== LOG_START > SQL ERROR: " + ex.getMessage());
         }
@@ -1718,7 +1779,7 @@ public class AP3 extends javax.swing.JInternalFrame {
 //            HttpResponse response = httpclient.execute(httpPost);
 //            RES = response.toString().replace("{", "{\r\n").replace("}", "\r\n}").replace(",", ",\r\n");
             byte[] data = Files.readAllBytes(Paths.get(Path));
-            SlackSession session = SlackSessionFactory.createWebSocketSlackSession(A.A.S_OAuth_TKN);
+            SlackSession session = SlackSessionFactory.createWebSocketSlackSession(S_OAuth_TKN);
             session.connect();
             SlackChannel channel = session.findChannelByName("xtt_reports");
             SlackMessageHandle sendMessage = session.sendFile(channel, data, "File_Name_On_Slack");
@@ -1734,11 +1795,14 @@ public class AP3 extends javax.swing.JInternalFrame {
     private void LOAD_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
             SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'AP3' AND [env] = '" + env + "'";
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(SQL);
             rs.next();
             C = rs.getString(1);
+            conn.close();
+            
             if (C.contains(": ")) {
                 String c;
                 c = C.substring(C.indexOf("cmbBROW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); cmbBrow.setSelectedItem(c.substring(c.indexOf(" ")).trim());
@@ -1844,6 +1908,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         }
         
         try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
             SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'AP3' AND [env] = '" + env + "'";
             Statement _del = conn.createStatement();
             _del.execute(SQL);
@@ -1868,12 +1933,14 @@ public class AP3 extends javax.swing.JInternalFrame {
             int row = _insert.executeUpdate();
             txtLOG.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
             //txtLOG.append("\r\n\r\n=== " + C);
+            conn.close();
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
 
+    private static Stopwatch sw1 = Stopwatch.createUnstarted();
     private boolean Load;
     private static Duration DD;
     private static SwingWorker BW1;  
@@ -1884,6 +1951,30 @@ public class AP3 extends javax.swing.JInternalFrame {
     private int d2LastRow = -1; 
     private List<String> GROUP_IDS;
     private String SCOPE;
+    
+    public static String New_ID = "";
+    public static String Toast_Msg = "";   
+    public static String Tab_Name;
+    
+    public static String Day;
+    public static String Open;
+    public static String Close;
+    public static String New_From;
+    public static String New_To;
+    public static String _24;    
+    
+    public static String ADMIN_ID;
+    public static String ADMIN_PW;
+    public static String SM_ID; 
+    public static String SM_PW;
+    public static String IM_ID; 
+    public static String IM_PW;
+    
+    public static String S_OAuth_TKN = "";
+    public static String S_Client_ID = "";
+    public static String S_Client_Secret  = "";
+    public static String S_Signing_Secret = "";
+    public static String S_Hook = "";
     
     public static String AP3_TKN = "";    
     public static String url = "";
