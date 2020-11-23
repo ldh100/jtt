@@ -45,6 +45,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -1086,6 +1087,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             protected void done() { // this method is called when the background thread finishes execution  
                 try  { 
                     BW2.cancel(true); // =============================================
+                    
                     txtLOG.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");                
                     EX = "AP3 " + env + " - v" + Ver + 
                     " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
@@ -1159,20 +1161,17 @@ public class AP3 extends javax.swing.JInternalFrame {
         BW1.execute();  // executes the swingworker on worker thread 
     }
     private void BW2_DoWork(){
-        // class="vts__snackbar__message" // v-snack__content
-        // _this.overlay.className += ' v-overlay--active';
-        // v-snack v-application vts__snackbar v-snack--active v-snack--top ap-toast  
-        // v-snack__wrapper error
         BW2 = new SwingWorker() {             
             @Override
-            protected String doInBackground() throws Exception   { 
+            protected String doInBackground() throws Exception { 
                 while (true){
                     Toast_Msg = "";
+                    System.out.println("BW2: " + "Message()");
                     Thread.sleep(1000);
                     try{
-                        //wait_msg.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[role='alert']"))); 
-                        Toast_Msg = d1.findElement(By.cssSelector("[role='alert']")).getAttribute("textContent");
-                        if(Toast_Msg.toLowerCase().contains("successfully") || 
+                        //Toast_Msg = d1.findElement(By.cssSelector("[role='alert']")).getAttribute("textContent");
+                        Toast_Msg = d1.findElement(By.cssSelector("[role='alert']")).getText();
+                        if(     Toast_Msg.toLowerCase().contains("successfully") || 
                                 Toast_Msg.toLowerCase().contains("has been updated") || 
                                 Toast_Msg.toLowerCase().contains("has been added") || 
                                 Toast_Msg.toLowerCase().contains("has been removed") ||
@@ -1198,13 +1197,13 @@ public class AP3 extends javax.swing.JInternalFrame {
                             EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
                         }
                         Thread.sleep(3000);
-                    } catch (InterruptedException ex){
-                        // =======
+                    } catch (Exception ex){ // Exception ex
+                        //System.out.println("BW2: " + "ex.getMessage()");
                     }
                 }
             }
         }; 
-        BW2.execute();  // executes the swingworker on worker thread          
+        BW2.execute();  // executes the swingworker on worker thread   
     }
     private void Get_AP3_TKN_and_Slack_IDs(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
