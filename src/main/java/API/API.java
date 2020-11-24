@@ -7,8 +7,11 @@ package API;
 
 import A.Func;
 import static A.A.*;
+import com.google.common.base.Stopwatch;
 import java.awt.Cursor;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -158,7 +161,7 @@ public class API extends javax.swing.JInternalFrame {
         lblBRANDS.setName("lblBRANDS"); // NOI18N
         getContentPane().add(lblBRANDS, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 4, 268, -1));
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "AP3 Configurations/API (s):", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Basic AP3 Configurations/API (s):", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11))); // NOI18N
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnApp.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
@@ -1292,10 +1295,12 @@ public class API extends javax.swing.JInternalFrame {
         String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
         String Realm = "";
         try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
             ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + cmbApp.getSelectedItem() + 
                     "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
             rs.next();
             Realm = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get P2 Realm ID > ERROR: " + ex.getMessage());
         } 
@@ -1503,7 +1508,9 @@ public class API extends javax.swing.JInternalFrame {
         }  
     }//GEN-LAST:event_btnUpdatesMouseClicked
     private void btnPromoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPromoMouseClicked
-        // TODO add your handling code here:
+        if(!btnPromo.isEnabled()){
+            return;
+        }
     }//GEN-LAST:event_btnPromoMouseClicked
     private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
         SAVE_CONFIG();
@@ -1581,14 +1588,18 @@ public class API extends javax.swing.JInternalFrame {
         }         
     }//GEN-LAST:event_btnLoc_MenusMouseClicked
     private void btnSCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSCartMouseClicked
+        if(!btnSCart.isEnabled()){
+            return;
+        }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n\r\n- Shopping Cart API..."); 
         String J = "==== Shopping Cart API:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        String CartID = jList_Orders.getSelectedValue();
-        CartID = CartID.substring(CartID.lastIndexOf(" ")).trim();
+        String CartID = "";     
         sw1.start();
         try {
+            CartID = jList_Orders.getSelectedValue();
+            CartID = CartID.substring(CartID.lastIndexOf(" ")).trim();
             HttpGet httpget = new HttpGet(BaseAPI + "/shoppingcart/" + CartID); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -1624,6 +1635,7 @@ public class API extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSCartMouseClicked
 
     private void jList_OrdersValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList_OrdersValueChanged
+        btnSCart.setEnabled(false);
         if(!evt.getValueIsAdjusting() && jList_Orders.getSelectedValue().contains("Cart")) {
             btnSCart.setEnabled(true);
         }
@@ -1639,10 +1651,12 @@ public class API extends javax.swing.JInternalFrame {
         String Realm = "6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5";
 
         try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
             ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + "AP3" + 
                     "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
             rs.next();
             Realm = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get P2 Realm ID > ERROR: " + ex.getMessage());
         } 
@@ -1790,6 +1804,7 @@ public class API extends javax.swing.JInternalFrame {
         DefaultListModel model = new DefaultListModel();
         model.clear();
         jList_Orders.setModel(model);
+        btnSCart.setEnabled(false);
         
         Get_AP3_TKN();
         LOAD_CONFIG();
@@ -1805,9 +1820,11 @@ public class API extends javax.swing.JInternalFrame {
     private void Get_AP3_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
         try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
             ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
             rs.next();
             AP3_TKN = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== AP3_TKN > ERROR: " + ex.getMessage());
         }
@@ -1819,10 +1836,12 @@ public class API extends javax.swing.JInternalFrame {
         txtLOG.append("\r\n-Load Sites ...");
         sw1.start();
         try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
             ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() + 
                     "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
             rs.next();
             appId = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get S_OAuth_TKN > ERROR: " + ex.getMessage());
         }
@@ -2148,11 +2167,14 @@ public class API extends javax.swing.JInternalFrame {
     private void LOAD_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
             SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'API' AND [env] = '" + env + "'";
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(SQL);
             rs.next();
             C = rs.getString(1);
+            conn.close();
+            
             if (C.contains(": ")) {
                 String c;
                 c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
@@ -2212,6 +2234,7 @@ public class API extends javax.swing.JInternalFrame {
         }
         
         try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
             SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'API' AND [env] = '" + env + "'";
             Statement _del = conn.createStatement();
             _del.execute(SQL);
@@ -2236,6 +2259,7 @@ public class API extends javax.swing.JInternalFrame {
             int row = _insert.executeUpdate();
             txtLOG.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
             //txtLOG.append("\r\n\r\n=== " + C);
+            conn.close();
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
         }
@@ -2254,6 +2278,13 @@ public class API extends javax.swing.JInternalFrame {
     private String C = "";
     private String userID;
     private String userTKN;
+    public static int T_Index;
+    
+    public static Stopwatch sw1 = Stopwatch.createUnstarted();
+    public static DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
+    public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    public static String SQL = ""; 
     
     public static String AP3_TKN = "";    
     public static String url = "";

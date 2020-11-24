@@ -72,7 +72,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="AP3 Configurations/API (s):">
+            <TitledBorder title="Basic AP3 Configurations/API (s):">
               <Font PropertyName="font" name="Dialog" size="11" style="0"/>
             </TitledBorder>
           </Border>
