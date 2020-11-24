@@ -344,6 +344,7 @@ public class __menu_manager {
                 Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", "no_jira"); 
                 if (FAIL) { return;}                                                                           
+            Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Refresh("Refresh after PUBLISH", "no_jira"); 
@@ -418,6 +419,7 @@ public class __menu_manager {
                     Thread.sleep(500);
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", "no_jira"); 
                     if (FAIL) { return;}                                                                            
+                Thread.sleep(500);
                 _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                     if (FAIL) { return;} 
                     Thread.sleep(500);
@@ -435,6 +437,7 @@ public class __menu_manager {
                 Thread.sleep(1000);
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", "no_jira"); 
                     if (FAIL) { return;}                                                                           
+                Thread.sleep(500);
                 _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                     if (FAIL) { return;} 
                 Thread.sleep(1000);
@@ -529,6 +532,7 @@ public class __menu_manager {
                     Thread.sleep(500);
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", "no_jira"); 
                     if (FAIL) { return;}                                                                            
+                Thread.sleep(500);
                 _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                     if (FAIL) { return;} 
                     Thread.sleep(500);
@@ -843,9 +847,10 @@ public class __menu_manager {
                 Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", "no_jira"); 
                 if (FAIL) { return;} 
+            Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}  
-                Thread.sleep(1000);
+            Thread.sleep(1000);
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent","no_jira"); 
                 if (FAIL) { return;}            
 
@@ -890,6 +895,7 @@ public class __menu_manager {
                 Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", "no_jira"); 
                 if (FAIL) { return;} 
+            Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;} 
             //Thread.sleep(2000);
@@ -1091,6 +1097,7 @@ public class __menu_manager {
                         Thread.sleep(500);
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", "no_jira"); 
                         if (FAIL) { return;}                       
+                    Thread.sleep(500);
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                         if (FAIL) { return;}  
                     Thread.sleep(1000);       
@@ -1191,6 +1198,7 @@ public class __menu_manager {
                         Thread.sleep(500);
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", "no_jira"); 
                         if (FAIL) { return;} 
+                    Thread.sleep(500);
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                         if (FAIL) { return;}  
                      Thread.sleep(1000);
@@ -1264,12 +1272,13 @@ public class __menu_manager {
                         if (FAIL) { return;} 
                     _t++; T.Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]", "no_jira");        
                         if (FAIL) { return;}  
-                        Thread.sleep(500);
+                    Thread.sleep(500);
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", "no_jira"); 
                         if (FAIL) { return;} 
+                    Thread.sleep(500);
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                         if (FAIL) { return;} 
-                        Thread.sleep(2000);
+                    Thread.sleep(2000);
 
                     _t++; Thread.sleep((long) sleep); T.List_L2("Re-Published Menus ID Count", "css", "[menu-id]", "no_jira");      
                     _t++; Thread.sleep((long) sleep); T.List_L0("Re-Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", "no_jira"); 

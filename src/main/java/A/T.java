@@ -5,6 +5,7 @@
  */
 package A;
 import static A.A.*;
+import com.google.common.base.Stopwatch;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -48,6 +49,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  */
 
 public class T {
+    private static Stopwatch sw1 = Stopwatch.createUnstarted();
     public static void Open_Switch_to_2nd_Tab(String NAME, String LINK, String JIRA ){
         sw1.start(); FAIL = false;
         t ="?";
@@ -1972,10 +1974,10 @@ public class T {
     public static void Day_Snedule(String NAME, List<WebElement> L, int I, String JIRA ){
         sw1.start(); FAIL = false;
         t = "";
-        Day = "";
-        Open = " -- ";
-        Close = " -- ";
-        _24 = "false";
+        String Day = "";
+        String Open = " -- ";
+        String Close = " -- ";
+        String _24 = "false";
         try {
             Day = L.get(I).findElement(By.xpath(".//p[contains(@class, 'WeekdayLabel')]")).getText();
             String X1 = L.get(I).findElement(By.cssSelector("[aria-label='24 Hour Service']")).getAttribute("aria-checked");

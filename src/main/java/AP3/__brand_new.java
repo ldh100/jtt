@@ -63,7 +63,7 @@ public class __brand_new {
         // </editor-fold> 
 
         // <editor-fold defaultstate="collapsed" desc="Add Station">    
-        Thread.sleep(1000); // wait when too many brands
+        Thread.sleep(1000); 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Button 'Add Station' click", "xpath", "//*[contains(text(), 'ADD STATION')]","no_jira");             
             if (FAIL) { return;} 
         Thread.sleep(500);            
@@ -766,8 +766,7 @@ public class __brand_new {
         EX += " - " + "\t" + " === MM New Local Menu " + "\t" + " ===== " + "\t" + " == Activate Local Menu End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
 
             
-        _t++; Thread.sleep((long) sleep); T.Close_Current_Tab_switch_To_1st("Close Menu Managar tab","no_jira"); 
-            //if (FAIL) { return;}  
+        _t++; Thread.sleep((long) sleep); T.Close_Current_Tab_switch_To_1st("Close Menu Managar tab","no_jira");  
         // </editor-fold> 
 
         // <editor-fold defaultstate="collapsed" desc="Add Station > Schedule Menu">               
@@ -776,9 +775,7 @@ public class __brand_new {
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Tab 'Menu' Click", "xpath", "//*[text()='Menu']", "no_jira"); 
             if (FAIL) { return;} 
-            Thread.sleep(500); 
-//        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'No Menu...'", "No menus for this brand exist in Menu Manager", true, "no_jira"); 
-//            if (FAIL) { return; }
+        Thread.sleep(500); 
 
         _t++; Thread.sleep((long) sleep); T.List_L1("Menu Rows Count", "tagName", "tr", "no_jira");             
             if (FAIL) { return;}

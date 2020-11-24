@@ -8,20 +8,12 @@ import AP3.AP3;
 import API.API;
 import Reports.W_Report;
 //import com.tomtessier.scrollabledesktop.*;
-import com.google.common.base.Stopwatch;
 import java.awt.Cursor;
 import java.beans.PropertyVetoException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Timer;
 import java.util.List;
-import java.util.TimerTask;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
@@ -231,33 +223,28 @@ public class A extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         //Get_Version();
         Get_User();
-        if(!ConnectDB()){
-            MenuBar.setVisible(false);
-            this.setTitle("JTT - no connection to QA DB");
-        }else{
-            this.setTitle("JTT v1.0.1" + " - " + "User: " + UserID + ", Machine: " + WsID + ", OS: " + WsOS);
-            Keep_DB_Connection();
-        }
+        this.setTitle("JTT v1.0.1" + " - " + "User: " + UserID + ", Machine: " + WsID + ", OS: " + WsOS);
+
         Open_AP3();
         //Open_API();
     }//GEN-LAST:event_formWindowOpened
 
-    private void Keep_DB_Connection() {  
-        Timer ti = new Timer();  
-        TimerTask tt = new TimerTask() {  
-            @Override  
-            public void run() {  
-                try {
-                    ResultSet rs = conn.createStatement().executeQuery("SELECT TOP 1 [qID] FROM [dbo].[users]");
-                    System.out.println("Keep_DB_Connection - OK @" + LocalDateTime.now().format(Time_12_formatter)); 
-                }catch (Exception ex){
-                    System.out.println("Keep_DB_Connection " + ex.getMessage());
-                }
- 
-            };  
-        };  // 29*60*1000=1,740,000
-        ti.schedule(tt, 1740000, 1740000);  
-    }  
+//    private void Keep_DB_Connection() {  
+//        Timer ti = new Timer();  
+//        TimerTask tt = new TimerTask() {  
+//            @Override  
+//            public void run() {  
+//                try {
+//                    ResultSet rs = conn.createStatement().executeQuery("SELECT TOP 1 [qID] FROM [dbo].[users]");
+//                    System.out.println("Keep_DB_Connection - OK @" + LocalDateTime.now().format(Time_12_formatter)); 
+//                }catch (Exception ex){
+//                    System.out.println("Keep_DB_Connection " + ex.getMessage());
+//                }
+// 
+//            };  
+//        };  // 29*60*1000=1,740,000
+//        ti.schedule(tt, 1740000, 1740000);  
+//    }  
 
     private void MenuORDERSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuORDERSMouseClicked
         if(MenuORDERS.isEnabled()){
@@ -360,20 +347,19 @@ public class A extends javax.swing.JFrame {
         }
         //setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     } 
-    private  boolean ConnectDB() {
-        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        boolean OK = false;
-        try {
-            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            conn = DriverManager.getConnection("jdbc:sqlserver://dev-digitalhospitality-sql.database.windows.net:1433;database=cdlqadb;user=xttadmin;password=Sp515s10#a;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"); 
-            OK = true;
-        } catch (SQLException  ex) {
-            //txtLOG.append("\r\n- ConnectDB" + ex.getMessage());  
-            Logger.getLogger(AP3.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-        return OK;
-    }
+//    private  boolean ConnectDB() {
+//        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+//        boolean OK = false;
+//        try {
+//            conn = DriverManager.getConnection(QA_BD_CON_STRING); 
+//            OK = true;
+//        } catch (SQLException  ex) {
+//            //txtLOG.append("\r\n- ConnectDB" + ex.getMessage());  
+//            Logger.getLogger(AP3.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+//        return OK;
+//    }
     /**
      * @param args the command line arguments
      */
@@ -400,12 +386,12 @@ public class A extends javax.swing.JFrame {
             F.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
-                    try {
-                        if(conn != null && !conn.isClosed()){ conn.close(); }
-                    }
-                    catch (SQLException ex) {
-                        Logger.getLogger(AP3.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+//                    try {
+//                        if(conn != null && !conn.isClosed()){ conn.close(); }
+//                    }
+//                    catch (SQLException ex) {
+//                        Logger.getLogger(AP3.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
                 }
             });
             F.setLocationRelativeTo(null);
@@ -413,11 +399,10 @@ public class A extends javax.swing.JFrame {
         });
     }
     // <editor-fold defaultstate="collapsed" desc="Public & Private Variables">
-    
+    public static final String QA_BD_CON_STRING = "jdbc:sqlserver://dev-digitalhospitality-sql.database.windows.net:1433;database=cdlqadb;user=xttadmin;password=Sp515s10#a;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
     public static String API_Response_Body = "";
     public static int T_Index;
     public static WebDriver d1;
-    public static WebDriver d2;
     public static WebElement e;
     public static WebElement e1;
     public static WebElement e2;
@@ -435,19 +420,11 @@ public class A extends javax.swing.JFrame {
     public static double Timeout = 15;
     public static double Wait = 3;
 
-    
     public static String t;
     public static String err;
     public static String F; 
     public static String EX; 
-    
-    public static String ADMIN_ID;
-    public static String ADMIN_PW;
-    public static String SM_ID; 
-    public static String SM_PW;
-    public static String IM_ID; 
-    public static String IM_PW;
-    
+     
     public static int _t = 0; // Total
     public static int _p = 0; // Passed
     public static int _f = 0; // Failed
@@ -456,22 +433,10 @@ public class A extends javax.swing.JFrame {
     public static boolean ALL_DATA = false;
     public static boolean NO_DATA = false;
     
-    public static Stopwatch sw1 = Stopwatch.createUnstarted();;
+
     public static String r_time = "";
     public static String Ver = "";
-    public static String TZone;   
-    
-    public static String New_ID = "";
-    public static String Toast_Msg = "";        
-
-    
-    public static String Tab_Name;
-    public static String Day;
-    public static String Open;
-    public static String Close;
-    public static String New_From;
-    public static String New_To;
-    public static String _24;
+    public static String TZone;      
     public static String Summary;
     public static String r_type;  
     
@@ -482,15 +447,6 @@ public class A extends javax.swing.JFrame {
     public static double p_50 = 0;
     public static double p_90 = 0;
     
-
-    public static String S_OAuth_TKN = "";
-    public static String S_Client_ID = "";
-    public static String S_Client_Secret  = "";
-    public static String S_Signing_Secret = "";
-    public static String S_Hook = "";
-
-    public static Connection conn = null;
-
     public static DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
     public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");

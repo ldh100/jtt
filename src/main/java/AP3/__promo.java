@@ -6,6 +6,7 @@
 package AP3;
 import A.T;
 import static A.A.*;
+import static AP3.AP3.*;
 /**
  *
  * @author Oleg.Spozito

@@ -1209,9 +1209,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                     try {
                         List<WebElement> ALERTS = d1.findElements(By.cssSelector("[role='alert']"));
                         if(ALERTS.size() > 0){
-                            //Toast_Msg = d1.findElement(By.cssSelector("[role='alert']")).getAttribute("textContent");
-                            //Toast_Msg = d1.findElement(By.cssSelector("[role='alert']")).getText();
-                            Toast_Msg = ALERTS.get(0).getAttribute("textContent");
+                            Toast_Msg = ALERTS.get(0).getAttribute("textContent");// .getText();
                             if(     Toast_Msg.toLowerCase().contains("successfully") || 
                                     Toast_Msg.toLowerCase().contains(" been updated") || 
                                     Toast_Msg.toLowerCase().contains(" been added") || 
