@@ -7,11 +7,15 @@ package A;
 import AP3.AP3;
 import API.API;
 import Reports.W_Report;
-//import com.tomtessier.scrollabledesktop.*;
 import java.awt.Cursor;
 import java.beans.PropertyVetoException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.jar.Attributes;
@@ -28,6 +32,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * @author Oleg.Spozito
  */
+
 public class A extends javax.swing.JFrame {
     /**
      * Creates new form A
@@ -203,7 +208,7 @@ public class A extends javax.swing.JFrame {
         try {
             api.setSelected(true);
         } catch (PropertyVetoException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         } 
         //api.show();
         F_COUNT++;     
@@ -224,27 +229,33 @@ public class A extends javax.swing.JFrame {
         //Get_Version();
         Get_User();
         this.setTitle("JTT v1.0.1" + " - " + "User: " + UserID + ", Machine: " + WsID + ", OS: " + WsOS);
+        if (!UserID.toLowerCase().contains("oleg")){
+            Register_Login();            
+        }
 
-        Open_AP3();
+        //Open_AP3();
         //Open_API();
     }//GEN-LAST:event_formWindowOpened
 
-//    private void Keep_DB_Connection() {  
-//        Timer ti = new Timer();  
-//        TimerTask tt = new TimerTask() {  
-//            @Override  
-//            public void run() {  
-//                try {
-//                    ResultSet rs = conn.createStatement().executeQuery("SELECT TOP 1 [qID] FROM [dbo].[users]");
-//                    System.out.println("Keep_DB_Connection - OK @" + LocalDateTime.now().format(Time_12_formatter)); 
-//                }catch (Exception ex){
-//                    System.out.println("Keep_DB_Connection " + ex.getMessage());
-//                }
-// 
-//            };  
-//        };  // 29*60*1000=1,740,000
-//        ti.schedule(tt, 1740000, 1740000);  
-//    }  
+    private void Register_Login() {     
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                    PreparedStatement _update = conn.prepareStatement("UPDATE users SET " +
+                            "LogIN = 'JTT', " +
+                            "LastL = '" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yy hh:mm a")) + "', " +
+                            "USER_MACHINE = '" + WsID + "', " +
+                            "IP = '" + "Not used" + "' " +
+                            "WHERE User_ID = '" + UserID + "'");
+                    int row = _update.executeUpdate();
+                    //Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Register_Login: " + row + " row updated");
+                } catch (SQLException ex) {                  
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Register_Login > SQL ERROR: " + ex.getMessage(), ex);
+                }
+            }
+        }).start();
+    } 
 
     private void MenuORDERSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuORDERSMouseClicked
         if(MenuORDERS.isEnabled()){
@@ -302,7 +313,7 @@ public class A extends javax.swing.JFrame {
 //        try {
 //            wr.setSelected(true);
 //        } catch (PropertyVetoException ex) {
-//            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(A.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 //        }
         wr.show();                           
     }
@@ -347,19 +358,7 @@ public class A extends javax.swing.JFrame {
         }
         //setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     } 
-//    private  boolean ConnectDB() {
-//        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-//        boolean OK = false;
-//        try {
-//            conn = DriverManager.getConnection(QA_BD_CON_STRING); 
-//            OK = true;
-//        } catch (SQLException  ex) {
-//            //txtLOG.append("\r\n- ConnectDB" + ex.getMessage());  
-//            Logger.getLogger(AP3.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-//        return OK;
-//    }
+    
     /**
      * @param args the command line arguments
      */
@@ -377,7 +376,7 @@ public class A extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AP3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AP3.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
         }
 
         /* Create and display the form */
@@ -390,7 +389,7 @@ public class A extends javax.swing.JFrame {
 //                        if(conn != null && !conn.isClosed()){ conn.close(); }
 //                    }
 //                    catch (SQLException ex) {
-//                        Logger.getLogger(AP3.class.getName()).log(Level.SEVERE, null, ex);
+//                        Logger.getLogger(AP3.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
 //                    }
                 }
             });
