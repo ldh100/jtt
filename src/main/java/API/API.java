@@ -2209,7 +2209,7 @@ public class API extends javax.swing.JInternalFrame {
     }
     private void GetBrandSector() {                                 
         BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
-        txtLOG.append("\r\n-GetBrandSector");
+        txtLOG.append("\r\n-Get Brand's Sector and Company");
         GroupID = "";
         CompanyID = "";
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
