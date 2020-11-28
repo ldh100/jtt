@@ -411,7 +411,7 @@ public class A extends javax.swing.JFrame {
         Menu_DL.setToolTipText("Distiller Automation");
         Menu_API.setToolTipText("Configutation / AP3 API(s)"); 
         MenuReports.setToolTipText("All xTT and JTT reports"); 
-        MenuOrders.setToolTipText("Create Oders - API > direct insertion into DB"); 
+        MenuOrders.setToolTipText("Place Orders - API > direct insertion into DB"); 
 
         //Open_AP3();
         //Open_API();
