@@ -75,6 +75,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         setTitle("Reports");
         setDoubleBuffered(true);
         setMinimumSize(new java.awt.Dimension(847, 253));
+        setName("Report"); // NOI18N
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }

@@ -191,7 +191,7 @@ public class A extends javax.swing.JFrame {
     private void Open_REPORT() { 
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
         for (JInternalFrame frame : frames) {
-            if (frame.getTitle().contains("Report")) {
+            if (frame.getName().equals("Report")) {
                 try {
                     frame.setSelected(true);
                     if (frame.isIcon()) {
@@ -219,7 +219,7 @@ public class A extends javax.swing.JFrame {
     private void Open_AP3() throws PropertyVetoException{
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
         for (JInternalFrame frame : frames) {
-            if (frame.getTitle().contains("AP3")) {
+            if (frame.getName().equals("AP3")) {
                 try {
                     frame.setSelected(true);
                     if (frame.isIcon()) {
@@ -252,7 +252,7 @@ public class A extends javax.swing.JFrame {
     private void Open_API() throws PropertyVetoException{
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
         for (JInternalFrame frame : frames) {
-            if (frame.getTitle().contains("API")) {
+            if (frame.getName().equals("API")) {
                 try {
                     frame.setSelected(true);
                     if (frame.isIcon()) {
@@ -285,7 +285,7 @@ public class A extends javax.swing.JFrame {
     private void Open_WO() throws PropertyVetoException {                                    
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
         for (JInternalFrame frame : frames) {
-            if (frame.getTitle().contains("Web Ordering")) {
+            if (frame.getName().equals("WO")) {
                 try {
                     frame.setSelected(true);
                     if (frame.isIcon()) {
@@ -318,7 +318,7 @@ public class A extends javax.swing.JFrame {
     private void Open_FW() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
         for (JInternalFrame frame : frames) {
-            if (frame.getTitle().contains("Food Works")) {
+            if (frame.getName().equals("FW")) {
                 try {
                     frame.setSelected(true);
                     if (frame.isIcon()) {
@@ -351,7 +351,7 @@ public class A extends javax.swing.JFrame {
     private void Open_DL() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
         for (JInternalFrame frame : frames) {
-            if (frame.getTitle().contains("Distiller")) {
+            if (frame.getName().equals("DL")) {
                 try {
                     frame.setSelected(true);
                     if (frame.isIcon()) {
