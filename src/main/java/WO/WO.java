@@ -123,7 +123,7 @@ public class WO extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Web Ordering >>> loading, please wait ... ... ... ...");
         setMinimumSize(new java.awt.Dimension(860, 532));
-        setName("AP3"); // NOI18N
+        setName("WO"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
         setPreferredSize(new java.awt.Dimension(860, 532));
         setVisible(true);

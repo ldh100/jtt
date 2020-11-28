@@ -60,7 +60,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class DL extends javax.swing.JInternalFrame {
     /**
-     * Creates new form WO
+     * Creates new form DL
      */
     public DL() {
         initComponents();
@@ -121,9 +121,9 @@ public class DL extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
-        setTitle("Web Ordering >>> loading, please wait ... ... ... ...");
+        setTitle("Distiller Automatio Manager >>> loading, please wait ... ... ... ...");
         setMinimumSize(new java.awt.Dimension(860, 532));
-        setName("AP3"); // NOI18N
+        setName("DL"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
         setPreferredSize(new java.awt.Dimension(860, 532));
         setVisible(true);
@@ -723,7 +723,7 @@ public class DL extends javax.swing.JInternalFrame {
         LOAD_ENV();
         app = cmbApp.getSelectedItem().toString();
         CONFIG = false;   
-        this.setTitle("Web Ordering Automation Manager");
+        this.setTitle("Ditiller Automation Manager");
     }
 
     private boolean Driver() {
@@ -822,7 +822,7 @@ public class DL extends javax.swing.JInternalFrame {
             protected void done() { 
 
                 txtLOG.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");                
-                EX = "WO " + env + " - v" + Ver + 
+                EX = "DL " + env + " - v" + Ver + 
                 " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                  "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                  + EX;
@@ -909,7 +909,7 @@ public class DL extends javax.swing.JInternalFrame {
             env = "PR";
             url = "https://dev.thriveapp.io/";
         }
-        Get_WO_TKN();
+        Get_DL_TKN();
         LOAD_CONFIG();
         if (CONFIG) {
             Load = true;
@@ -919,16 +919,16 @@ public class DL extends javax.swing.JInternalFrame {
         app = cmbApp.getSelectedItem().toString();
         GetSites();       
     }
-    private void Get_WO_TKN(){
+    private void Get_DL_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
         try {
             try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
                 ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
                 rs.next();
-                WO_TKN = rs.getString(1);
+                DL_TKN = rs.getString(1);
             }
         } catch (SQLException ex) {
-            txtLOG.append("\r\n\r\n=== WO_TKN > ERROR: " + ex.getMessage());
+            txtLOG.append("\r\n\r\n=== DL_TKN > ERROR: " + ex.getMessage());
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1146,7 +1146,7 @@ public class DL extends javax.swing.JInternalFrame {
     private void LOAD_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'WO' AND [env] = '" + env + "'";
+            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'DL' AND [env] = '" + env + "'";
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(SQL);
             rs.next();
@@ -1189,7 +1189,7 @@ public class DL extends javax.swing.JInternalFrame {
                 txtLOG.append("\r\n\r\n=== LOAD_CONFIG > OK");
             } else {
                 CONFIG = false;
-                txtLOG.append("\r\n\r\n=== WEB / WO, User: " + UserID + ", Env: " + env + " > No saved Configuration Found");
+                txtLOG.append("\r\n\r\n=== WEB / DL, User: " + UserID + ", Env: " + env + " > No saved Configuration Found");
             }
         } catch (Exception ex) {
             CONFIG = false;
@@ -1242,7 +1242,7 @@ public class DL extends javax.swing.JInternalFrame {
         
         try {
             try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'WO' AND [env] = '" + env + "'";
+                SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'DL' AND [env] = '" + env + "'";
                 Statement _del = conn.createStatement();
                 _del.execute(SQL);
                 PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
@@ -1261,7 +1261,7 @@ public class DL extends javax.swing.JInternalFrame {
                 _insert.setString(1, UserID);
                 _insert.setString(2, env);
                 _insert.setString(3, "WEB");
-                _insert.setString(4, "WO");
+                _insert.setString(4, "DL");
                 _insert.setString(5, C);
                 int row = _insert.executeUpdate();
                 txtLOG.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
@@ -1295,10 +1295,10 @@ public class DL extends javax.swing.JInternalFrame {
                         ", [Result] = ?" +    // 16
                         ", [Status] = ?" +    // 17
                         ", [Excel] = ?" +     // 18
-                        " WHERE [app] = 'WO_" + env + "' AND [Status] = 'Running'");
+                        " WHERE [app] = 'DL_" + env + "' AND [Status] = 'Running'");
                 _update.setString(1, LocalDateTime.now().format(Date_formatter));
                 _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
-                _update.setString(3, "WO_" + env);
+                _update.setString(3, "DL_" + env);
                 _update.setString(4, url);
                 _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
                 _update.setInt(6, t_calls);
@@ -1366,7 +1366,7 @@ public class DL extends javax.swing.JInternalFrame {
                         ")");
                 _insert.setString(1, LocalDateTime.now().format(Date_formatter));
                 _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
-                _insert.setString(3, "WO_" + env);
+                _insert.setString(3, "DL_" + env);
                 _insert.setString(4, url);
                 _insert.setString(5, "Running...");
                 _insert.setString(6, "0");
@@ -1399,7 +1399,7 @@ public class DL extends javax.swing.JInternalFrame {
             String Path = "C:\\xTT_Data\\TAX_Upload\\JJKitchen_Android_Staging_P2_Func_27_Apr_2020_03_48PM.xlsx";
 
 //            MultipartEntityBuilder builder = MultipartEntityBuilder.create(); 
-//            builder.addTextBody("token", WO.S_OAuth_TKN);
+//            builder.addTextBody("token", DL.S_OAuth_TKN);
 //            builder.addTextBody("channels", "xtt_test"); // Channel_Name
 //            builder.addTextBody("initial_comment", "Test Message");
 //            builder.addBinaryBody(File_Path, file);
@@ -1451,7 +1451,7 @@ public class DL extends javax.swing.JInternalFrame {
             }
 
             String Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
-            Func.fExcel((l - 1), col, Values, "WO_" + env + "_" + Date, Top_Row, 0, 0, null, " ", " ");
+            Func.fExcel((l - 1), col, Values, "DL_" + env + "_" + Date, Top_Row, 0, 0, null, " ", " ");
         } catch (IOException ex) {
             txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
         }
@@ -1481,7 +1481,7 @@ public class DL extends javax.swing.JInternalFrame {
     public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     public static String SQL = ""; 
     private String SCOPE;
-    public static String WO_TKN = "";    
+    public static String DL_TKN = "";    
     public static String url = "";
     public static String app = "";
     public static String appId = "";

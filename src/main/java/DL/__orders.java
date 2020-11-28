@@ -5,10 +5,10 @@
  */
 package DL;
 import FW.*;
-import WO.*;
+import DL.*;
 import A.T;
 import static A.A.*;
-import static WO.WO.*;
+import static DL.DL.*;
 /**
  *
  * @author Oleg.Spozito
