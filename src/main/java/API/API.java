@@ -2302,7 +2302,13 @@ public class API extends javax.swing.JInternalFrame {
             rs.next();
             C = rs.getString(1);
             conn.close();
+        } catch (Exception ex) {
+            CONFIG = false;
+            txtLOG.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            return;
+        }
             
+        try{            
             if (C.contains(": ")) {
                 String c;
                 c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();

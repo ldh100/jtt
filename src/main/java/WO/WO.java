@@ -8,20 +8,33 @@ package WO;
 import A.Func;
 import static A.A.*;
 import com.google.common.base.Stopwatch;
+import com.ullink.slack.simpleslackapi.SlackChannel;
+import com.ullink.slack.simpleslackapi.SlackMessageHandle;
+import com.ullink.slack.simpleslackapi.SlackSession;
+import com.ullink.slack.simpleslackapi.impl.SlackSessionFactory;
 import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -34,13 +47,20 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  *
  * @author Oleg.Spozito
  */
 public class WO extends javax.swing.JInternalFrame {
     /**
-     * Creates new form AP3
+     * Creates new form WO
      */
     public WO() {
         initComponents();
@@ -61,13 +81,6 @@ public class WO extends javax.swing.JInternalFrame {
         DV2 = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtLOG = new javax.swing.JTextArea();
-        jPanel3 = new javax.swing.JPanel();
-        btnLog = new javax.swing.JButton();
-        lblSITES13 = new javax.swing.JLabel();
-        lblSITES14 = new javax.swing.JLabel();
-        cmbEnv = new javax.swing.JComboBox<>();
-        cmbApp = new javax.swing.JComboBox<>();
-        btnSave_Opt = new javax.swing.JButton();
         lblSITES4 = new javax.swing.JLabel();
         txtMobile_ID = new javax.swing.JTextField();
         lblSITES6 = new javax.swing.JLabel();
@@ -82,20 +95,35 @@ public class WO extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         _login = new javax.swing.JCheckBox();
         _all_data = new javax.swing.JCheckBox();
-        _site = new javax.swing.JCheckBox();
-        _brand = new javax.swing.JCheckBox();
+        _1 = new javax.swing.JCheckBox();
+        _2 = new javax.swing.JCheckBox();
         _orders = new javax.swing.JCheckBox();
-        _resent_updates = new javax.swing.JCheckBox();
-        _announcements = new javax.swing.JCheckBox();
+        _3 = new javax.swing.JCheckBox();
+        _4 = new javax.swing.JCheckBox();
         _password = new javax.swing.JCheckBox();
         _logout = new javax.swing.JCheckBox();
+        cmbPromo = new javax.swing.JComboBox<>();
+        lblSITES8 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        cmbBrow = new javax.swing.JComboBox<>();
+        btnRun = new javax.swing.JButton();
+        btnLog = new javax.swing.JButton();
+        btnFails = new javax.swing.JButton();
+        btnExel = new javax.swing.JButton();
+        _headless = new javax.swing.JCheckBox();
+        btnSave_Opt = new javax.swing.JButton();
+        lblSITES11 = new javax.swing.JLabel();
+        lblSITES13 = new javax.swing.JLabel();
+        lblSITES14 = new javax.swing.JLabel();
+        cmbEnv = new javax.swing.JComboBox<>();
+        cmbApp = new javax.swing.JComboBox<>();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
         setTitle("Web Ordering >>> loading, please wait ... ... ... ...");
         setMinimumSize(new java.awt.Dimension(860, 532));
-        setName("AP3"); // NOI18N
+        setName("WO"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
         setPreferredSize(new java.awt.Dimension(860, 532));
         setVisible(true);
@@ -198,60 +226,6 @@ public class WO extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(txtLOG);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 420, 428, 84));
-
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnLog.setText(" < Log");
-        btnLog.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        btnLog.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLogMouseClicked(evt);
-            }
-        });
-        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 20, 52, 20));
-
-        lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES13.setText("Environment:");
-        lblSITES13.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 4, 92, 16));
-
-        lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES14.setText("Application:");
-        lblSITES14.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 4, 92, 16));
-
-        cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbEnv.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbEnvItemStateChanged(evt);
-            }
-        });
-        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 20, 116, 20));
-
-        cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbApp.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbAppItemStateChanged(evt);
-            }
-        });
-        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 20, 108, 20));
-
-        btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnSave_Opt.setText("Save Setup");
-        btnSave_Opt.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        btnSave_Opt.setName("btnSAVE"); // NOI18N
-        btnSave_Opt.setPreferredSize(new java.awt.Dimension(70, 20));
-        btnSave_Opt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSave_OptMouseClicked(evt);
-            }
-        });
-        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 20, 100, 20));
-
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 460, 416, 44));
 
         lblSITES4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -357,35 +331,35 @@ public class WO extends javax.swing.JInternalFrame {
         _all_data.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _all_data.setRequestFocusEnabled(false);
 
-        _site.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _site.setText("Sites");
-        _site.setContentAreaFilled(false);
-        _site.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _site.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _1.setText("op1");
+        _1.setContentAreaFilled(false);
+        _1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
-        _brand.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _brand.setText("Brand");
-        _brand.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _brand.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _brand.setRequestFocusEnabled(false);
+        _2.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _2.setText("op2");
+        _2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _2.setRequestFocusEnabled(false);
 
         _orders.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _orders.setText("Orders");
+        _orders.setText("Place Order");
         _orders.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _orders.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _orders.setRequestFocusEnabled(false);
 
-        _resent_updates.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _resent_updates.setText("Recent Updates");
-        _resent_updates.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _resent_updates.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _resent_updates.setRequestFocusEnabled(false);
+        _3.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _3.setText("op3");
+        _3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _3.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _3.setRequestFocusEnabled(false);
 
-        _announcements.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _announcements.setText("Announcements");
-        _announcements.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _announcements.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _announcements.setRequestFocusEnabled(false);
+        _4.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _4.setText("op4");
+        _4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _4.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _4.setRequestFocusEnabled(false);
 
         _password.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _password.setText("Forgot Password");
@@ -399,6 +373,19 @@ public class WO extends javax.swing.JInternalFrame {
         _logout.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _logout.setRequestFocusEnabled(false);
 
+        cmbPromo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        cmbPromo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None" }));
+        cmbPromo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbPromoItemStateChanged(evt);
+            }
+        });
+
+        lblSITES8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES8.setText("Promo Code");
+        lblSITES8.setAlignmentX(0.5F);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -406,17 +393,21 @@ public class WO extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_brand, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_resent_updates, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 80, 80)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                    .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(62, 62, 62)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                        .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblSITES8)
+                        .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -426,30 +417,135 @@ public class WO extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
-                .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(_brand, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(2, 2, 2)
-                        .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)
+                        .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(20, 20, 20)
                         .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(2, 2, 2)
-                .addComponent(_resent_updates, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(_2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(_3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSITES8)
+                    .addComponent(_4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 120, 412, 176));
+
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        cmbBrow.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmbBrow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chrome", "Firefox", "Edge", "IE" }));
+        cmbBrow.setEnabled(false);
+        jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 28, 78, 20));
+
+        btnRun.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        btnRun.setForeground(new java.awt.Color(204, 0, 0));
+        btnRun.setText("Run");
+        btnRun.setName("btnRun"); // NOI18N
+        btnRun.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRunMouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 52, 78, 22));
+
+        btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnLog.setText(" < Log");
+        btnLog.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        btnLog.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLogMouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 52, 84, 22));
+
+        btnFails.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnFails.setText("Show Fails");
+        btnFails.setEnabled(false);
+        btnFails.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        btnFails.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFailsMouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnFails, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 28, 84, 22));
+
+        btnExel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnExel.setText("Excel Rep");
+        btnExel.setEnabled(false);
+        btnExel.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        btnExel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExelMouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnExel, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 84, 22));
+
+        _headless.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        _headless.setText("Headless <");
+        _headless.setToolTipText("");
+        _headless.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _headless.setRequestFocusEnabled(false);
+        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 56, 80, 14));
+
+        btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnSave_Opt.setText("Save Setup");
+        btnSave_Opt.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        btnSave_Opt.setName("btnSAVE"); // NOI18N
+        btnSave_Opt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSave_OptMouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 52, 116, 22));
+
+        lblSITES11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblSITES11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES11.setText("Browser:");
+        lblSITES11.setAlignmentX(0.5F);
+        jPanel3.add(lblSITES11, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 12, 72, 16));
+
+        lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES13.setText("Environment:");
+        lblSITES13.setAlignmentX(0.5F);
+        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 12, 92, 16));
+
+        lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES14.setText("Application:");
+        lblSITES14.setAlignmentX(0.5F);
+        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 12, 92, 16));
+
+        cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmbEnv.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbEnvItemStateChanged(evt);
+            }
+        });
+        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 28, 116, 20));
+
+        cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmbApp.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbAppItemStateChanged(evt);
+            }
+        });
+        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 28, 108, 20));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 424, 416, 76));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -464,21 +560,6 @@ public class WO extends javax.swing.JInternalFrame {
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
         d1LastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
-    private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
-        if(!Load && evt.getStateChange() == 1) {
-            cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-            LOAD_ENV();
-            cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        }
-    }//GEN-LAST:event_cmbEnvItemStateChanged
-    private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
-        if(!Load && evt.getStateChange() == 1) {
-            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-            app = cmbApp.getSelectedItem().toString();
-            GetSites();
-            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        }
-    }//GEN-LAST:event_cmbAppItemStateChanged
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         F_COUNT--;
@@ -492,16 +573,6 @@ public class WO extends javax.swing.JInternalFrame {
         BRAND = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 0));
         BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
     }//GEN-LAST:event_DV2MouseClicked
-
-    private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = Func.SHOW_FILE(txtLOG.getText(), "txt");
-        if(!R.equals("OK")){
-            txtLOG.append(R);
-        } 
-    }//GEN-LAST:event_btnLogMouseClicked
-    private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
-        SAVE_CONFIG();
-    }//GEN-LAST:event_btnSave_OptMouseClicked
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
         jPanel3.addComponentListener(new ComponentListener() {
@@ -523,6 +594,112 @@ public class WO extends javax.swing.JInternalFrame {
             }
         });
     }//GEN-LAST:event_formAncestorAdded
+
+    private void cmbPromoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPromoItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbPromoItemStateChanged
+
+    private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
+        btnRun.setEnabled(false);
+        btnFails.setEnabled(false);
+        btnExel.setEnabled(false);
+        //txtLOG.setText("");
+        txtLOG.append("=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
+        Wait = (double)nWaitElement.getValue();
+        Timeout = (double)nWaitLoad.getValue();
+        sleep = (double)nShowPage.getValue() *1000;
+        EX = "";
+        F = "";
+        t_calls = 0;
+        t_min =  0;
+        t_avg = 0;
+        t_max =  0;
+        p_50 = 0;
+        p_90 = 0;
+        _t = 0; // Total
+        _p = 0; // Passed
+        _f = 0; // Failed
+        _w = 0; // Warn
+        r_time = "";
+
+        ALL_DATA = _all_data.isSelected();
+        SCOPE = "";
+        if(DV1.getRowCount() > 0) {
+            SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
+            platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform
+            CAN = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
+        }
+        if(DV2.getRowCount() > 0) {
+            BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
+        }
+
+
+        if(_headless.isSelected()) {
+            txtLOG.append("\r\n=== Headless mode is selected - Browser is hidden");
+            txtLOG.append("\r\n=== Please wait for report...\r\n");
+        }
+        txtLOG.append("\r\n=== Starting Web Driver...");
+        sw1.start();
+        r_type = "ad-hoc";
+
+        if(Driver()){
+            txtLOG.append("\r\n=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec");
+            txtLOG.setCaretPosition(txtLOG.getDocument().getLength());
+            sw1.reset();
+            LOG_START(); // ========================================================
+            BW1_DoWork(
+                // parameters?
+            );
+        }
+    }//GEN-LAST:event_btnRunMouseClicked
+
+    private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
+        String R = Func.SHOW_FILE(txtLOG.getText(), "txt");
+        if(!R.equals("OK")){
+            txtLOG.append(R);
+        }
+    }//GEN-LAST:event_btnLogMouseClicked
+
+    private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
+        if(!btnFails.isEnabled()) {return;}
+        String R = Func.SHOW_FILE(F, "txt");
+        if(!R.equals("OK")){
+            txtLOG.append(R);
+        }
+    }//GEN-LAST:event_btnFailsMouseClicked
+
+    private void btnExelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExelMouseClicked
+        if(!btnExel.isEnabled()) {return;}
+        //        try {
+            //            Send_File_to_Slack("1", "2", "3");
+            //        } catch (IOException ex) {
+            //            txtLOG.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
+            //        }
+        btnExel.setEnabled(false);
+        Report();
+        btnExel.setEnabled(true);
+    }//GEN-LAST:event_btnExelMouseClicked
+
+    private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
+        SAVE_CONFIG();
+    }//GEN-LAST:event_btnSave_OptMouseClicked
+
+    private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
+        if(!Load && evt.getStateChange() == 1) {
+            cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            LOAD_ENV();
+            cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        }
+    }//GEN-LAST:event_cmbEnvItemStateChanged
+
+    private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
+        if(!Load && evt.getStateChange() == 1) {
+            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            app = cmbApp.getSelectedItem().toString();
+            GetSites();
+            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        }
+    }//GEN-LAST:event_cmbAppItemStateChanged
     private void Load_Form(){
         Load = true;
 //        cmbApp.addItem("Boost");
@@ -548,6 +725,175 @@ public class WO extends javax.swing.JInternalFrame {
         this.setTitle("Web Ordering Automation Manager");
     }
 
+    private boolean Driver() {
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        try {
+            String cwd = System.getProperty("user.dir");
+            txtLOG.append("\r\n\r\n=== CWD: " + cwd);
+            if(WsOS.toLowerCase().contains("windows")){
+                System.setProperty("webdriver.chrome.driver", cwd + "/chromedriver.exe");                
+            }
+            if(WsOS.toLowerCase().contains("mac")){
+                System.setProperty("webdriver.chrome.driver", cwd + "/chromedriver");                
+            }
+            ChromeOptions op = new ChromeOptions();
+             //op.addExtensions(new File("/path/to/extension.crx"));
+            op.addArguments("disable-infobars");
+            op.addArguments("--start-maximized");
+//            op.addArguments("--start-minimized");
+//            op.addArguments("enable-automation");
+//            op.addArguments("--no-sandbox");
+//            op.addArguments("--disable-extensions");
+//            op.addArguments("--dns-prefetch-disable");
+//            op.addArguments("--disable-gpu");
+            if(_headless.isSelected()){
+                op.addArguments("--headless");
+            }
+
+            op.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+
+            d1 = new ChromeDriver(op);
+            WebDriver.Timeouts implicitlyWait = d1.manage().timeouts().implicitlyWait((long) Wait, TimeUnit.SECONDS);
+            wait = new FluentWait(d1).withTimeout(Duration.ofSeconds((long)Wait))			
+			.pollingEvery(Duration.ofSeconds((long)200)) 			
+			.ignoring(NoSuchElementException.class); // wait for Visible / Clickable   
+            timeout = new WebDriverWait(d1, (long) Timeout);  // wait for load
+            wait_msg = new WebDriverWait(d1, 100);  // wait for alert
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            return true;
+        }
+        catch (Exception ex) {
+            txtLOG.append("\r\n\r\n=== Web Driver > ERROR: " + ex.getMessage());
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            return false;
+        }   
+
+    }
+    private void BW1_DoWork() { 
+        BW1 = new SwingWorker() {             
+            Instant dw_start = Instant.now();
+
+            @Override
+            protected String doInBackground() throws Exception   { // define what thread will do here 
+                New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
+                if (_login.isSelected()) { 
+                    SCOPE += "Login";
+                    EX += " - " + "\t" + " === Login, Dashboard" + "\t" + " ===== " + "\t" + " == Login >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    __login.run();
+                    EX += " - " + "\t" + " === ^ Login, Dashboard" + "\t" + " ===== " + "\t" + " == ^ Login " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
+                }
+
+                if (_orders.isSelected()) { 
+                    SCOPE += ", Orders";
+                    EX += " - " + "\t" + " === Orders" + "\t" + " ===== " + "\t" + " == Orders Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    __orders.run();
+                    EX += " - " + "\t" + " === ^ Orders" + "\t" + " ===== " + "\t" + " == ^ Orders End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
+                }
+                  
+                
+
+
+                // ============================== Last Blocks
+                if (_logout.isSelected()) { 
+                    SCOPE += ", LogOut";
+                    EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    __logout.run();
+                    EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
+                }
+                if (_password.isSelected()) { 
+                    SCOPE += ", Forgot PW";  
+                    EX += " - " + "\t" + " === Forgot PW" + "\t" + " ===== " + "\t" + " == Forgot PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    __password.run();
+                    EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
+                
+                }                    
+                if(_f > 0) {
+                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
+                }else{
+                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter);  
+                } 
+            }  
+            @Override
+            protected void done() { 
+
+                txtLOG.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");                
+                EX = "WO " + env + " - v" + Ver + 
+                " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
+                 "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
+                 + EX;
+                txtLOG.append("\r\n" + EX.replaceAll("\t", " > ")); 
+                Last_EX = EX;
+                try  { 
+
+                    String statusMsg = (String) get(); 
+                    txtLOG.append("\r\n" + statusMsg);   
+                    txtLOG.setCaretPosition(txtLOG.getDocument().getLength()); 
+                    
+
+                    BW1 = null;
+                    
+                    if(d1 != null) {
+                        d1.quit(); 
+                    }
+                }  
+                catch (InterruptedException | ExecutionException ex)  { 
+                    txtLOG.append("\r\n- Exception: " + ex.getMessage()); 
+                    txtLOG.setCaretPosition(txtLOG.getDocument().getLength()); 
+                } 
+                DD = Duration.between(dw_start, Instant.now());
+                Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
+                
+                try {
+                    String t_rep = "";
+                    if (!"".equals(r_time.trim())) {
+                        double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
+                        if (am0.length > 0)
+                        {
+                            Arrays.sort(am0);
+                            double total = 0;
+                            for(int i=0; i < am0.length; i++){
+                                total = total + am0[i];
+                            }
+                            t_calls = am0.length;
+                            t_min = am0[0] / (double)1000;
+                            t_avg = (total / am0.length) / (double)1000;
+                            t_max = am0[am0.length - 1]  / (double)1000; 
+                            p_50 = Func.p50(am0) / (double)1000;
+                            p_90 = Func.p90(am0) / (double)1000;
+                            
+                            DecimalFormat df = new DecimalFormat("#.##");
+                            t_rep += "=== Total Calls: " + t_calls + ", Response Times (sec) - Min: " + df.format(t_min) +
+                                                                        ", Avg: " + df.format(t_avg) +
+                                                                        ", Max: " + df.format(t_max) +
+                                                                        ", p50: " + df.format(p_50) +
+                                                                        ", p90: " + df.format(p_90);
+                        }
+                        txtLOG.append("\r\n" + t_rep);
+                    }
+                } catch(Exception ex){
+                    txtLOG.append("\r\n\r\n=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage());
+                }  
+                btnRun.setEnabled(true);
+                txtLOG.append("\r\n=== Duration: " + (DD.toHours()) + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
+                txtLOG.append("\r\n=== " + Summary); // Summary shown in EX top
+                txtLOG.append("\r\n=== Scope: " + SCOPE); // SCOPE shown in EX top
+                //this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));   
+                if(!"".equals(F.trim())){
+                    btnFails.setEnabled(true);
+                } else{
+                    btnFails.setEnabled(false);
+                }
+                btnExel.setEnabled(true);
+                LOG_UPDATE(); // ========================================================
+            } 
+        }; 
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        BW1.execute();  // executes the swingworker on worker thread 
+    }
     private void LOAD_ENV(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
@@ -562,7 +908,7 @@ public class WO extends javax.swing.JInternalFrame {
             env = "PR";
             url = "https://dev.thriveapp.io/";
         }
-        Get_AP3_TKN();
+        Get_WO_TKN();
         LOAD_CONFIG();
         if (CONFIG) {
             Load = true;
@@ -572,16 +918,16 @@ public class WO extends javax.swing.JInternalFrame {
         app = cmbApp.getSelectedItem().toString();
         GetSites();       
     }
-    private void Get_AP3_TKN(){
+    private void Get_WO_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
         try {
             try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
                 ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
                 rs.next();
-                AP3_TKN = rs.getString(1);
+                WO_TKN = rs.getString(1);
             }
         } catch (SQLException ex) {
-            txtLOG.append("\r\n\r\n=== AP3_TKN > ERROR: " + ex.getMessage());
+            txtLOG.append("\r\n\r\n=== WO_TKN > ERROR: " + ex.getMessage());
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -798,37 +1144,48 @@ public class WO extends javax.swing.JInternalFrame {
 
     private void LOAD_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'WO' AND [env] = '" + env + "'";
-                Statement statement = conn.createStatement();
-                ResultSet rs = statement.executeQuery(SQL);
-                rs.next();
-                C = rs.getString(1);
-            }
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'WO' AND [env] = '" + env + "'";
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(SQL);
+            rs.next();
+            C = rs.getString(1);
+            conn.close();
+        } catch (Exception ex) {
+            CONFIG = false;
+            txtLOG.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            return;
+        }
             
+        try{            
             if (C.contains(": ")) {
                 String c;
                 c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("GROUP:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GROUP = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("GL_MENU:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GL_MENU = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("CAN:")); c = c.substring(0, c.indexOf("\r\n")).trim(); CAN = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("txtMobile_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_ID.setText(c.substring(c.indexOf(" ")).trim());
                 c = C.substring(C.indexOf("txtMobile_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtAP3_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtAP3_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
 
+                c = C.substring(C.indexOf("nShowPage:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nShowPage.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("nWaitElement:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitElement.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("nWaitLoad:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitLoad.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
+
+                c = C.substring(C.indexOf("_1:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _1.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_2:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _2.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_3:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _3.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_4:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _4.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_orders:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _orders.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_promo:")); c = c.substring(0, c.indexOf("\r\n")).trim(); PROMO = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("_password:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _password.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_all_data")); c = c.substring(0, c.indexOf("\r\n")).trim(); _all_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_logout")); c = c.substring(0, c.indexOf("\r\n")).trim(); _logout.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 CONFIG = true;
                 txtLOG.append("\r\n\r\n=== LOAD_CONFIG > OK");
             } else {
                 CONFIG = false;
-                txtLOG.append("\r\n\r\n=== WEB / AP3, User: " + UserID + ", Env: " + env + " > No saved Configuration Found");
+                txtLOG.append("\r\n\r\n=== WEB / WO, User: " + UserID + ", Env: " + env + " > No saved Configuration Found");
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             CONFIG = false;
             txtLOG.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
         }
@@ -849,16 +1206,23 @@ public class WO extends javax.swing.JInternalFrame {
             C += "env: " + env + "\r\n";
             C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
             C += "url: " + url + "\r\n";
-            C += "GROUP: " + "N/A" + "\r\n";
-            C += "GL_MENU: " + "N/A" + "\r\n";
-            C += "SITE: " + _S + "\r\n";
-            C += "BRAND: " + _B + "\r\n";
-            C += "CAN: " + CAN + "\r\n";
             
             C += "txtMobile_ID: " + txtMobile_ID.getText() + "\r\n";
             C += "txtMobile_PW: " + txtMobile_PW.getText()  + "\r\n";
-            C += "txtAP3_ID: " + txtMobile_ID.getText()  + "\r\n";
-            C += "txtAP3_PW: " + txtMobile_PW.getText() + "\r\n";            
+            C += "nShowPage: " + nShowPage.getValue() + "\r\n";
+            C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
+            C += "nWaitLoad: " + nWaitLoad.getValue()+ "\r\n";
+
+            C += "_1: " + _1.isSelected() + "\r\n";
+            C += "_2: " + _2.isSelected() + "\r\n";
+            C += "_3: " + _3.isSelected() + "\r\n";
+            C += "_4: " + _4.isSelected() + "\r\n";
+            C += "_orders: " + _orders.isSelected() + "\r\n";
+            C += "_password: " + _password.isSelected() + "\r\n";         
+            C += "_all_data: " + _all_data.isSelected() + "\r\n";
+            C += "_logout: " + _logout.isSelected() + "\r\n";
+            C += "cmbPromo: " + PROMO + "\r\n";            
+
 
         } catch (Exception ex)  {
             txtLOG.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
@@ -897,10 +1261,208 @@ public class WO extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
+    private void LOG_UPDATE(){  
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
+            PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET " +
+                          " [Date] = ?" +       // 1
+                          ", [Time] = ?" +      // 2
+                          ", [app] = ?" +       // 3
+                          ", [url] = ?" +       // 4
+                          ", [summary] = ?" +   // 5
+                              ", [t_calls] = ?" +   // 6
+                              ", [t_min] = ?" +     // 7
+                              ", [t_avg] = ?" +     // 8
+                              ", [t_max] = ?" +     // 9
+                              ", [p_50] = ?" +      // 10
+                              ", [p_90] = ?" +      // 11
+                          ", [test_type] = ?" +     // 12
+                          ", [user_id] = ?" +       // 13
+                          ", [user_ws] = ?" +       // 14
+                          ", [env] = ?" +       // 15
+                          ", [Result] = ?" +    // 16
+                          ", [Status] = ?" +    // 17
+                          ", [Excel] = ?" +     // 18     
+                      " WHERE [app] = 'WO_" + env + "' AND [Status] = 'Running'");
+            _update.setString(1, LocalDateTime.now().format(Date_formatter));
+            _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
+            _update.setString(3, "WO_" + env);
+            _update.setString(4, url);
+            _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");         
+            _update.setInt(6, t_calls);   
+            _update.setDouble(7, t_min);    
+            _update.setDouble(8, t_avg);     
+            _update.setDouble(9, t_max);    
+            _update.setDouble(10, p_50);    
+            _update.setDouble(11, p_90);    
+            _update.setString(12, r_type);    
+            _update.setString(13, UserID);    
+            _update.setString(14, WsID);    
+            _update.setString(15, cmbBrow.getSelectedItem().toString());    
+            _update.setString(16, txtLOG.getText());    
+            _update.setString(17, "Scope: " + SCOPE);    
+            _update.setString(18, EX);    
+            int row = _update.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            txtLOG.append("\r\n\r\n=== LOG_UPDATE > SQL ERROR: " + ex.getMessage());
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+    private void LOG_START(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        try {
+            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
+            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] (" +
+                          "[Date]" +   // 1
+                          ", [Time]" +   // 2
+                          ", [app]" +   // 3
+                          ", [url]" +   // 4
+                          ", [summary]" +   // 5
+                              ", [t_calls]" +   // 6
+                              ", [t_min]" +   // 7
+                              ", [t_avg]" +   // 8
+                              ", [t_max]" +   // 9
+                              ", [p_50]" +   // 10
+                              ", [p_90]" +   // 11
+                          ", [test_type]" +   // 12
+                          ", [user_id]" +   // 13
+                          ", [user_ws]" +   // 14
+                          ", [env]" +   // 15
+                          ", [Result]" +   // 16
+                          ", [Status]" +   // 17
+                          ", [Excel]" +     // 18
+                    ") VALUES (" +
+                        "?" +     // 1
+                        ",?" +    // 2
+                        ",?" +    // 3
+                        ",?" +    // 4
+                        ",?" +    // 5
+                        ",?" +    // 6
+                        ",?" +    // 7
+                        ",?" +    // 8
+                        ",?" +    // 9
+                        ",?" +    // 10
+                        ",?" +    // 11
+                        ",?" +    // 12
+                        ",?" +    // 13
+                        ",?" +    // 14
+                        ",?" +    // 15
+                        ",?" +    // 16
+                        ",?" +    // 17
+                        ",?" +    // 18
+                    ")");
+            _insert.setString(1, LocalDateTime.now().format(Date_formatter));
+            _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
+            _insert.setString(3, "WO_" + env);
+            _insert.setString(4, url);
+            _insert.setString(5, "Running...");         
+            _insert.setString(6, "0");   
+            _insert.setString(7, "0");    
+            _insert.setString(8, "0");     
+            _insert.setString(9, "0");    
+            _insert.setString(10, "0");    
+            _insert.setString(11, "0");    
+            _insert.setString(12, r_type);    
+            _insert.setString(13, UserID);    
+            _insert.setString(14, WsID);    
+            _insert.setString(15, cmbBrow.getSelectedItem().toString());    
+            _insert.setString(16, "=== Job is running... ===\r\n" + "");    
+            _insert.setString(17, "Running");    
+            _insert.setString(18, "None");    
+            int row = _insert.executeUpdate();
+//            txtLOG.append("\r\n\r\n=== LOG_START > OK (" + row + " row)");
+            conn.close();
+        }  catch (SQLException ex) {
+            txtLOG.append("\r\n\r\n=== LOG_START > SQL ERROR: " + ex.getMessage());
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+    private void Send_File_to_Slack(String Slack_File_Name, String File_Path, String Channel_Name) throws IOException {
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        String RES;
+        try{
+            //File file = new File(File_Path); // "C:\xTT_Data\TAX_Upload\JJKitchen_Android_Staging_P2_Func_27_Apr_2020_03_48PM.xlsx"
+            //File file = new File("C:\\xTT_Data\\TAX_Upload\\JJKitchen_Android_Staging_P2_Func_27_Apr_2020_03_48PM.xlsx"); 
+            String Path = "C:\\xTT_Data\\TAX_Upload\\JJKitchen_Android_Staging_P2_Func_27_Apr_2020_03_48PM.xlsx";
 
-       
+//            MultipartEntityBuilder builder = MultipartEntityBuilder.create(); 
+//            builder.addTextBody("token", WO.S_OAuth_TKN);
+//            builder.addTextBody("channels", "xtt_test"); // Channel_Name
+//            builder.addTextBody("initial_comment", "Test Message");
+//            builder.addBinaryBody(File_Path, file);
+//            HttpEntity multiPartEntity = builder.build();
+//
+//            CloseableHttpClient httpclient = HttpClients.createDefault();
+//            HttpPost httpPost = new HttpPost("https://slack.com/api/files.upload");
+//            httpPost.setEntity(multiPartEntity); 
+//
+//            HttpResponse response = httpclient.execute(httpPost);
+//            RES = response.toString().replace("{", "{\r\n").replace("}", "\r\n}").replace(",", ",\r\n");
+            byte[] data = Files.readAllBytes(Paths.get(Path));
+            SlackSession session = SlackSessionFactory.createWebSocketSlackSession(S_OAuth_TKN);
+            session.connect();
+            SlackChannel channel = session.findChannelByName("xtt_reports");
+            SlackMessageHandle sendMessage = session.sendFile(channel, data, "File_Name_On_Slack");
+            RES = sendMessage.getReply().toString(); 
+
+            
+            txtLOG.append("\r\n\r\n=== Send_File_to_Slack >  No error" + "\r\n" + RES);
+        }catch(Exception ex) {
+            txtLOG.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+     private void Report(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+//        try {
+//            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING); 
+//            ResultSet rs = conn.createStatement().executeQuery("SELECT TOP 1 [Excel] FROM [dbo].[aw_result] WHERE [app] = 'WO_" 
+//                    + env + "' AND [user_id] = '" + UserID + "' ORDER By qID DESC");
+//            rs.next();
+//            EXX = rs.getString(1);
+//            conn.close();
+//        }catch (SQLException ex){
+//            txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
+//        }
+        if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            txtLOG.append("\r\n\r\n=== Report > Not Excel");
+            return;
+        }   
+        try {
+            int col = 9; // 8 + 1 new JIRA = 9
+            String Top_Row = Last_EX.substring(0, Last_EX.indexOf("\r\n"));
+            Last_EX = Last_EX.substring(Last_EX.indexOf("\r\n") + 2);
+        
+            String[] lines = Last_EX.split(System.getProperty("line.separator"));
+            int l = lines.length;
+            String[][] Values = new String[l][col];
+            int n = 1;
+            for (int i = 0; i < l; i++)
+            {
+                String[] v = lines[i].split("\t");
+                System.arraycopy(v, 0, Values[i], 0, v.length); 
+//                for (int j = 0; j < v.length; j++){
+//                    Values[i][j] = v[j];
+//                } 
+            }
+
+            String Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+            Func.fExcel((l - 1), col, Values, "WO_" + env + "_" + Date, Top_Row, 0, 0, null, " ", " ");
+        } catch (Exception ex) {
+            txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
+        }
+        Runtime.getRuntime().gc();
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+      
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
     private boolean Load;
+    private static Duration DD;
+    private static SwingWorker BW1;  
+  
     private int d1LastRow = -1; 
     private int d2LastRow = -1; 
     private List<String> GROUP_IDS;
@@ -911,14 +1473,14 @@ public class WO extends javax.swing.JInternalFrame {
     private String userID;
     private String userTKN;
     public static int T_Index;
-    
+    private String Last_EX;    
     public static Stopwatch sw1 = Stopwatch.createUnstarted();
     public static DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
     public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     public static String SQL = ""; 
-    
-    public static String AP3_TKN = "";    
+    private String SCOPE;
+    public static String WO_TKN = "";    
     public static String url = "";
     public static String app = "";
     public static String appId = "";
@@ -935,24 +1497,36 @@ public class WO extends javax.swing.JInternalFrame {
     public static String platform = "CDL";
     public static String BaseAPI;
     public static String TZone; 
+    public static String PROMO; 
+    public static String New_ID = "";
     
-
+    public static String S_OAuth_TKN = "";
+    public static String S_Client_ID = "";
+    public static String S_Client_Secret  = "";
+    public static String S_Signing_Secret = "";
+    public static String S_Hook = "";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;
+    private javax.swing.JCheckBox _1;
+    private javax.swing.JCheckBox _2;
+    private javax.swing.JCheckBox _3;
+    private javax.swing.JCheckBox _4;
     private javax.swing.JCheckBox _all_data;
-    private javax.swing.JCheckBox _announcements;
-    private javax.swing.JCheckBox _brand;
+    private javax.swing.JCheckBox _headless;
     private javax.swing.JCheckBox _login;
     private javax.swing.JCheckBox _logout;
     private javax.swing.JCheckBox _orders;
     private javax.swing.JCheckBox _password;
-    private javax.swing.JCheckBox _resent_updates;
-    private javax.swing.JCheckBox _site;
+    private javax.swing.JButton btnExel;
+    private javax.swing.JButton btnFails;
     private javax.swing.JButton btnLog;
+    private javax.swing.JButton btnRun;
     private javax.swing.JButton btnSave_Opt;
     private javax.swing.JComboBox<String> cmbApp;
+    private javax.swing.JComboBox<String> cmbBrow;
     private javax.swing.JComboBox<String> cmbEnv;
+    private javax.swing.JComboBox<String> cmbPromo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -962,11 +1536,13 @@ public class WO extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblBRANDS;
     private javax.swing.JLabel lblSITES;
     private javax.swing.JLabel lblSITES10;
+    private javax.swing.JLabel lblSITES11;
     private javax.swing.JLabel lblSITES13;
     private javax.swing.JLabel lblSITES14;
     private javax.swing.JLabel lblSITES4;
     private javax.swing.JLabel lblSITES6;
     private javax.swing.JLabel lblSITES7;
+    private javax.swing.JLabel lblSITES8;
     private javax.swing.JLabel lblSITES9;
     private javax.swing.JSpinner nShowPage;
     private javax.swing.JSpinner nWaitElement;

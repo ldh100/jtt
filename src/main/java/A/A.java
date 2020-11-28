@@ -18,12 +18,14 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JInternalFrame;
 import javax.swing.UIManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -178,19 +180,54 @@ public class A extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Menu_AP3MouseClicked
  
-    private void Open_REPORT() {                                    
+    private void Open_REPORT() { 
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getTitle().contains("Report")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        }
         W_Report wr = new W_Report();
-        this.DesktopPane.add(wr);
+        DesktopPane.add(wr);
         int X = this.DesktopPane.getWidth();
         int X1 = wr.getWidth();
         int Y = this.DesktopPane.getHeight();
         int Y1 = wr.getHeight();
         wr.setLocation(X - X1, Y - Y1);
-        wr.show();                           
+        wr.setVisible(true);
+        wr.show();
     }
     private void Open_AP3() throws PropertyVetoException{
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getTitle().contains("AP3")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
         AP3 ap3 = new AP3();
-        this.DesktopPane.add(ap3);
+        DesktopPane.add(ap3);
         int Y;
         int X;
         if(F_COUNT > 4) {
@@ -205,8 +242,25 @@ public class A extends javax.swing.JFrame {
         F_COUNT++;     
     }
     private void Open_API() throws PropertyVetoException{
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getTitle().contains("API")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
         API api = new API();
-        this.DesktopPane.add(api);
+        DesktopPane.add(api);
         int Y;
         int X;
         if(F_COUNT > 4) {
@@ -221,6 +275,23 @@ public class A extends javax.swing.JFrame {
         F_COUNT++;     
     }    
     private void Open_WO() throws PropertyVetoException {                                    
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getTitle().contains("Web Ordering")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
         WO wo = new WO();
         this.DesktopPane.add(wo);
         int Y;
