@@ -13,12 +13,8 @@ import com.ullink.slack.simpleslackapi.SlackMessageHandle;
 import com.ullink.slack.simpleslackapi.SlackSession;
 import com.ullink.slack.simpleslackapi.impl.SlackSessionFactory;
 import java.awt.Cursor;
-import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -38,11 +34,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.SwingWorker;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -53,6 +45,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -489,11 +482,11 @@ public class AP3 extends javax.swing.JInternalFrame {
         nShowPage.setName("nShowPage"); // NOI18N
 
         nWaitElement.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nWaitElement.setModel(new javax.swing.SpinnerNumberModel(1, 0, 5, 1));
+        nWaitElement.setModel(new javax.swing.SpinnerNumberModel(1.0d, 0.0d, 5.0d, 1.0d));
         nWaitElement.setName("nWaitElement"); // NOI18N
 
         nWaitLoad.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nWaitLoad.setModel(new javax.swing.SpinnerNumberModel(30, 0, 60, 5));
+        nWaitLoad.setModel(new javax.swing.SpinnerNumberModel(30.0d, 0.0d, 60.0d, 5.0d));
         nWaitLoad.setName("nWaitLoad"); // NOI18N
 
         lblSITES7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -776,7 +769,7 @@ public class AP3 extends javax.swing.JInternalFrame {
 
             String Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
             Func.fExcel((l - 1), col, Values, "AP3_" + env + "_" + Date, Top_Row, 0, 0, null, " ", " ");
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
         }
         Runtime.getRuntime().gc();
@@ -1285,57 +1278,57 @@ public class AP3 extends javax.swing.JInternalFrame {
     private void Get_AP3_TKN_and_Slack_IDs(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));         
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_OAuth_TKN'");
-            rs.next();
-            S_OAuth_TKN = rs.getString(1);
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_OAuth_TKN'");
+                rs.next();
+                S_OAuth_TKN = rs.getString(1);
+            }
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get S_OAuth_TKN > ERROR: " + ex.getMessage());
         }
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Client_ID'");
-            rs.next();
-            S_Client_ID = rs.getString(1);
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Client_ID'");
+                rs.next();
+                S_Client_ID = rs.getString(1);
+            }
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get S_Client_ID > ERROR: " + ex.getMessage());
         }
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Client_Secret'");
-            rs.next();
-            S_Client_Secret = rs.getString(1);
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Client_Secret'");
+                rs.next();
+                S_Client_Secret = rs.getString(1);
+            }
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get S_Client_Secret > ERROR: " + ex.getMessage());
         }
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Signing_Secret'");
-            rs.next();
-            S_Signing_Secret = rs.getString(1);
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Signing_Secret'");
+                rs.next();
+                S_Signing_Secret = rs.getString(1);
+            }
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get S_Signing_Secret > ERROR: " + ex.getMessage());
         }
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Hook'");
-            rs.next();
-            S_Hook = rs.getString(1);
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Hook'");
+                rs.next();
+                S_Hook = rs.getString(1);
+            }
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get S_Hook > ERROR: " + ex.getMessage());
         }
         
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
-            rs.next();
-            AP3_TKN = rs.getString(1);
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
+                rs.next();
+                AP3_TKN = rs.getString(1);
+            }
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== AP3_TKN > ERROR: " + ex.getMessage());
         }
@@ -1348,12 +1341,12 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLOG.append("\r\n-Load Sites ...");
         sw1.start();
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() + 
-                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-            rs.next();
-            appId = rs.getString(1);
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() +
+                        "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
+                rs.next();
+                appId = rs.getString(1);
+            }
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get P2 App_ID > ERROR: " + ex.getMessage());
         }
@@ -1423,7 +1416,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             DV1.getColumnModel().getColumn(2).setPreferredWidth(50);
             DV1.getColumnModel().getColumn(3).setPreferredWidth(400);
    
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }         
         finally {
@@ -1520,7 +1513,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             DV2.getColumnModel().getColumn(0).setPreferredWidth(140);
             DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
             DV2.getColumnModel().getColumn(2).setPreferredWidth(80);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }         
         finally {
@@ -1591,7 +1584,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                     T_Index = i;
                 }
             }
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());  
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } finally {
@@ -1654,7 +1647,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                     T_Index = i;
                 }
             }
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());  
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } finally {
@@ -1721,7 +1714,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             } else{
                 txtLOG.append("\r\n- Company ID not Found in this Brand API");
             }
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());  
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } finally {
@@ -1749,47 +1742,47 @@ public class AP3 extends javax.swing.JInternalFrame {
     private void LOG_UPDATE(){  
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET " +
-                          " [Date] = ?" +       // 1
-                          ", [Time] = ?" +      // 2
-                          ", [app] = ?" +       // 3
-                          ", [url] = ?" +       // 4
-                          ", [summary] = ?" +   // 5
-                              ", [t_calls] = ?" +   // 6
-                              ", [t_min] = ?" +     // 7
-                              ", [t_avg] = ?" +     // 8
-                              ", [t_max] = ?" +     // 9
-                              ", [p_50] = ?" +      // 10
-                              ", [p_90] = ?" +      // 11
-                          ", [test_type] = ?" +     // 12
-                          ", [user_id] = ?" +       // 13
-                          ", [user_ws] = ?" +       // 14
-                          ", [env] = ?" +       // 15
-                          ", [Result] = ?" +    // 16
-                          ", [Status] = ?" +    // 17
-                          ", [Excel] = ?" +     // 18     
-                      " WHERE [app] = 'AP3_" + env + "' AND [Status] = 'Running'");
-            _update.setString(1, LocalDateTime.now().format(Date_formatter));
-            _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _update.setString(3, "AP3_" + env);
-            _update.setString(4, url);
-            _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");         
-            _update.setInt(6, t_calls);   
-            _update.setDouble(7, t_min);    
-            _update.setDouble(8, t_avg);     
-            _update.setDouble(9, t_max);    
-            _update.setDouble(10, p_50);    
-            _update.setDouble(11, p_90);    
-            _update.setString(12, r_type);    
-            _update.setString(13, UserID);    
-            _update.setString(14, WsID);    
-            _update.setString(15, cmbBrow.getSelectedItem().toString());    
-            _update.setString(16, txtLOG.getText());    
-            _update.setString(17, "Scope: " + SCOPE);    
-            _update.setString(18, EX);    
-            int row = _update.executeUpdate();
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET " +
+                        " [Date] = ?" +       // 1
+                        ", [Time] = ?" +      // 2
+                        ", [app] = ?" +       // 3
+                        ", [url] = ?" +       // 4
+                        ", [summary] = ?" +   // 5
+                        ", [t_calls] = ?" +   // 6
+                        ", [t_min] = ?" +     // 7
+                        ", [t_avg] = ?" +     // 8
+                        ", [t_max] = ?" +     // 9
+                        ", [p_50] = ?" +      // 10
+                        ", [p_90] = ?" +      // 11
+                        ", [test_type] = ?" +     // 12
+                        ", [user_id] = ?" +       // 13
+                        ", [user_ws] = ?" +       // 14
+                        ", [env] = ?" +       // 15
+                        ", [Result] = ?" +    // 16
+                        ", [Status] = ?" +    // 17
+                        ", [Excel] = ?" +     // 18
+                        " WHERE [app] = 'AP3_" + env + "' AND [Status] = 'Running'");
+                _update.setString(1, LocalDateTime.now().format(Date_formatter));
+                _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
+                _update.setString(3, "AP3_" + env);
+                _update.setString(4, url);
+                _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
+                _update.setInt(6, t_calls);
+                _update.setDouble(7, t_min);
+                _update.setDouble(8, t_avg);
+                _update.setDouble(9, t_max);
+                _update.setDouble(10, p_50);
+                _update.setDouble(11, p_90);
+                _update.setString(12, r_type);
+                _update.setString(13, UserID);
+                _update.setString(14, WsID);
+                _update.setString(15, cmbBrow.getSelectedItem().toString());
+                _update.setString(16, txtLOG.getText());
+                _update.setString(17, "Scope: " + SCOPE);
+                _update.setString(18, EX);
+                int row = _update.executeUpdate();
+            }
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== LOG_UPDATE > SQL ERROR: " + ex.getMessage());
         }
@@ -1798,27 +1791,27 @@ public class AP3 extends javax.swing.JInternalFrame {
     private void LOG_START(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] (" +
-                          "[Date]" +   // 1
-                          ", [Time]" +   // 2
-                          ", [app]" +   // 3
-                          ", [url]" +   // 4
-                          ", [summary]" +   // 5
-                              ", [t_calls]" +   // 6
-                              ", [t_min]" +   // 7
-                              ", [t_avg]" +   // 8
-                              ", [t_max]" +   // 9
-                              ", [p_50]" +   // 10
-                              ", [p_90]" +   // 11
-                          ", [test_type]" +   // 12
-                          ", [user_id]" +   // 13
-                          ", [user_ws]" +   // 14
-                          ", [env]" +   // 15
-                          ", [Result]" +   // 16
-                          ", [Status]" +   // 17
-                          ", [Excel]" +     // 18
-                    ") VALUES (" +
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] (" +
+                        "[Date]" +   // 1
+                        ", [Time]" +   // 2
+                        ", [app]" +   // 3
+                        ", [url]" +   // 4
+                        ", [summary]" +   // 5
+                        ", [t_calls]" +   // 6
+                        ", [t_min]" +   // 7
+                        ", [t_avg]" +   // 8
+                        ", [t_max]" +   // 9
+                        ", [p_50]" +   // 10
+                        ", [p_90]" +   // 11
+                        ", [test_type]" +   // 12
+                        ", [user_id]" +   // 13
+                        ", [user_ws]" +   // 14
+                        ", [env]" +   // 15
+                        ", [Result]" +   // 16
+                        ", [Status]" +   // 17
+                        ", [Excel]" +     // 18
+                        ") VALUES (" +
                         "?" +     // 1
                         ",?" +    // 2
                         ",?" +    // 3
@@ -1837,28 +1830,28 @@ public class AP3 extends javax.swing.JInternalFrame {
                         ",?" +    // 16
                         ",?" +    // 17
                         ",?" +    // 18
-                    ")");
-            _insert.setString(1, LocalDateTime.now().format(Date_formatter));
-            _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _insert.setString(3, "AP3_" + env);
-            _insert.setString(4, url);
-            _insert.setString(5, "Running...");         
-            _insert.setString(6, "0");   
-            _insert.setString(7, "0");    
-            _insert.setString(8, "0");     
-            _insert.setString(9, "0");    
-            _insert.setString(10, "0");    
-            _insert.setString(11, "0");    
-            _insert.setString(12, r_type);    
-            _insert.setString(13, UserID);    
-            _insert.setString(14, WsID);    
-            _insert.setString(15, cmbBrow.getSelectedItem().toString());    
-            _insert.setString(16, "=== Job is running... ===\r\n" + "");    
-            _insert.setString(17, "Running");    
-            _insert.setString(18, "None");    
-            int row = _insert.executeUpdate();
+                        ")");
+                _insert.setString(1, LocalDateTime.now().format(Date_formatter));
+                _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
+                _insert.setString(3, "AP3_" + env);
+                _insert.setString(4, url);
+                _insert.setString(5, "Running...");
+                _insert.setString(6, "0");
+                _insert.setString(7, "0");
+                _insert.setString(8, "0");
+                _insert.setString(9, "0");
+                _insert.setString(10, "0");
+                _insert.setString(11, "0");
+                _insert.setString(12, r_type);
+                _insert.setString(13, UserID);
+                _insert.setString(14, WsID);
+                _insert.setString(15, cmbBrow.getSelectedItem().toString());
+                _insert.setString(16, "=== Job is running... ===\r\n" + "");
+                _insert.setString(17, "Running");
+                _insert.setString(18, "None");
+                int row = _insert.executeUpdate();
 //            txtLOG.append("\r\n\r\n=== LOG_START > OK (" + row + " row)");
-            conn.close();
+            }
         }  catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== LOG_START > SQL ERROR: " + ex.getMessage());
         }
@@ -1894,7 +1887,7 @@ public class AP3 extends javax.swing.JInternalFrame {
 
             
             txtLOG.append("\r\n\r\n=== Send_File_to_Slack >  No error" + "\r\n" + RES);
-        }catch(Exception ex) {
+        }catch(IOException ex) {
             txtLOG.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1902,14 +1895,14 @@ public class AP3 extends javax.swing.JInternalFrame {
     private void LOAD_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'AP3' AND [env] = '" + env + "'";
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery(SQL);
-            rs.next();
-            C = rs.getString(1);
-            conn.close();
-        } catch (Exception ex) {
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'AP3' AND [env] = '" + env + "'";
+                Statement statement = conn.createStatement();
+                ResultSet rs = statement.executeQuery(SQL);
+                rs.next();
+                C = rs.getString(1);
+            }
+        } catch (SQLException ex) {
             CONFIG = false;
             txtLOG.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
             return;
@@ -1980,6 +1973,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             C = "";
             C += "env: " + env + "\r\n";
             C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
+            
             C += "cmbBROW: " + cmbBrow.getSelectedItem().toString() + "\r\n";
             C += "url: " + url + "\r\n";
             C += "GROUP: " + cmbGroup.getSelectedItem().toString() + "\r\n";
@@ -2021,32 +2015,32 @@ public class AP3 extends javax.swing.JInternalFrame {
         }
         
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'AP3' AND [env] = '" + env + "'";
-            Statement _del = conn.createStatement();
-            _del.execute(SQL);
-            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
-                       "([user_id]" +   // 1
-                       ",[env]" +       // 2
-                       ",[platform]" +  // 3
-                       ",[app]" +       // 4
-                       ",[_conf]" +     // 5
-                    ") VALUES (" +
-                       "?" +
-                       ",?" +
-                       ",?" +
-                       ",?" +
-                       ",?" +
-                      ")");
-            _insert.setString(1, UserID);
-            _insert.setString(2, env);
-            _insert.setString(3, "WEB");
-            _insert.setString(4, "AP3");
-            _insert.setString(5, C);           
-            int row = _insert.executeUpdate();
-            txtLOG.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
-            //txtLOG.append("\r\n\r\n=== " + C);
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'AP3' AND [env] = '" + env + "'";
+                Statement _del = conn.createStatement();
+                _del.execute(SQL);
+                PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
+                        "([user_id]" +   // 1
+                        ",[env]" +       // 2
+                        ",[platform]" +  // 3
+                        ",[app]" +       // 4
+                        ",[_conf]" +     // 5
+                        ") VALUES (" +
+                        "?" +
+                        ",?" +
+                        ",?" +
+                        ",?" +
+                        ",?" +
+                        ")");
+                _insert.setString(1, UserID);
+                _insert.setString(2, env);
+                _insert.setString(3, "WEB");
+                _insert.setString(4, "AP3");
+                _insert.setString(5, C);
+                int row = _insert.executeUpdate();
+                txtLOG.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
+                //txtLOG.append("\r\n\r\n=== " + C);
+            }
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
         }
@@ -2055,7 +2049,7 @@ public class AP3 extends javax.swing.JInternalFrame {
 
     // <editor-fold defaultstate="collapsed" desc="Form Local Variables">
     private String Last_EX;
-    private static Stopwatch sw1 = Stopwatch.createUnstarted();
+    private static final Stopwatch sw1 = Stopwatch.createUnstarted();
     private boolean Load;
     private static Duration DD;
     private static SwingWorker BW1;  

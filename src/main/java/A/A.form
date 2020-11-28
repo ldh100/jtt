@@ -11,20 +11,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="AP3"/>
             <Property name="name" type="java.lang.String" value="AP3" noResource="true"/>
-            <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_AP3MouseClicked"/>
-          </Events>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="Menu_FW">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="FW"/>
-            <Property name="enabled" type="boolean" value="false"/>
-            <Property name="name" type="java.lang.String" value="FW" noResource="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_FWMouseClicked"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="MenuWO">
@@ -34,6 +23,24 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MenuWOMouseClicked"/>
+          </Events>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="Menu_FW">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="FW"/>
+            <Property name="name" type="java.lang.String" value="FW" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_FWMouseClicked"/>
+          </Events>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="Menu_DL">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="DL"/>
+            <Property name="name" type="java.lang.String" value="FW" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_DLMouseClicked"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="MenuOrders">
@@ -53,7 +60,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="APIs"/>
             <Property name="name" type="java.lang.String" value="AP3" noResource="true"/>
-            <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_APIMouseClicked"/>
@@ -66,7 +72,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Reports"/>
             <Property name="name" type="java.lang.String" value="FW" noResource="true"/>
-            <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MenuReportsMouseClicked"/>
@@ -137,7 +142,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="666" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="668" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

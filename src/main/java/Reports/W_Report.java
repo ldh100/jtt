@@ -8,6 +8,7 @@ import static A.A.*;
 import A.Func;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -267,9 +268,9 @@ public class W_Report extends javax.swing.JInternalFrame {
         }
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            conn.createStatement().execute("DELETE FROM [dbo].[aw_result] WHERE qID = '" + DV1.getValueAt(DV1.getSelectedRow(), 0) + "'"); 
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                conn.createStatement().execute("DELETE FROM [dbo].[aw_result] WHERE qID = '" + DV1.getValueAt(DV1.getSelectedRow(), 0) + "'");
+            }
         } catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== Delete report > ERROR: " + ex.getMessage());
         }
@@ -300,11 +301,11 @@ public class W_Report extends javax.swing.JInternalFrame {
         }
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            Statement st = conn.createStatement();
-            int d = st.executeUpdate("DELETE FROM [dbo].[aw_result] WHERE [Date] < '" + simpleDateFormat.format(dtpDel.getDate()) + "'");
-            txtLog.append("\r\n\r\n=== Old Reports > " + d + " record(s) deleted"); 
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                Statement st = conn.createStatement();
+                int d = st.executeUpdate("DELETE FROM [dbo].[aw_result] WHERE [Date] < '" + simpleDateFormat.format(dtpDel.getDate()) + "'");
+                txtLog.append("\r\n\r\n=== Old Reports > " + d + " record(s) deleted");
+            }
         } catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== Delete Old Reports > ERROR: " + ex.getMessage());
         }
@@ -321,12 +322,13 @@ public class W_Report extends javax.swing.JInternalFrame {
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [Result] FROM [dbo].[aw_result] WHERE [qID] = '" +
-               DV1.getValueAt(DV1.getSelectedRow(), 0) + "'");
-            rs.next();
-            String EXX = rs.getString(1);
-            conn.close();
+            String EXX;
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                ResultSet rs = conn.createStatement().executeQuery("SELECT [Result] FROM [dbo].[aw_result] WHERE [qID] = '" +
+                        DV1.getValueAt(DV1.getSelectedRow(), 0) + "'");
+                rs.next();
+                EXX = rs.getString(1);
+            }
             
             String R = Func.SHOW_FILE(EXX, "txt");
             if(!R.equals("OK")){
@@ -340,7 +342,7 @@ public class W_Report extends javax.swing.JInternalFrame {
 //            }
 //            Files.write(Paths.get(aLog.getPath()), EXX.getBytes());
 //            java.awt.Desktop.getDesktop().open(aLog);        
-        }catch (Exception ex){
+        }catch (SQLException ex){
             txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnLogMouseClicked
@@ -410,13 +412,13 @@ public class W_Report extends javax.swing.JInternalFrame {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String EXX = "";
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            ResultSet rs = conn.createStatement().executeQuery("SELECT TOP 1 [Excel] FROM [dbo].[aw_result] WHERE [qID] = '" +
-               DV1.getValueAt(DV1.getSelectedRow(), 0) + "'");
-            rs.next();
-            EXX = rs.getString(1);
-            conn.close();
-        }catch (Exception ex){
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                ResultSet rs = conn.createStatement().executeQuery("SELECT TOP 1 [Excel] FROM [dbo].[aw_result] WHERE [qID] = '" +
+                        DV1.getValueAt(DV1.getSelectedRow(), 0) + "'");
+                rs.next();
+                EXX = rs.getString(1);
+            }
+        }catch (SQLException ex){
             txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
         }
         if ("".equals(EXX.trim()) || "None".equals(EXX.trim())){
@@ -464,7 +466,7 @@ public class W_Report extends javax.swing.JInternalFrame {
 //            }
 //            Files.write(Paths.get(ExcelLog.getPath()), EXX.getBytes());
 //            java.awt.Desktop.getDesktop().open(ExcelLog);
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
         }
         Runtime.getRuntime().gc();
@@ -475,12 +477,12 @@ public class W_Report extends javax.swing.JInternalFrame {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         cmbF.addItem("ALL");
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            ResultSet rs = conn.createStatement().executeQuery("SELECT Distinct [app] FROM[dbo].[aw_result] ORDER BY [app]");
-            while (rs.next()) {
-               cmbF.addItem(rs.getString(1));
-            }   
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                ResultSet rs = conn.createStatement().executeQuery("SELECT Distinct [app] FROM[dbo].[aw_result] ORDER BY [app]");
+                while (rs.next()) {
+                    cmbF.addItem(rs.getString(1));
+                }
+            }
         } catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== Load APP Filter > ERROR: " + ex.getMessage());
         }
@@ -514,27 +516,27 @@ public class W_Report extends javax.swing.JInternalFrame {
                   ",[cDate] " +
               "FROM[dbo].[aw_result] " + pl + " ORDER BY[qID] DESC";  
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            ResultSet rs = conn.createStatement().executeQuery(SQL);
-            ResultSetMetaData rsmd = rs.getMetaData();
-
-            
-            DefaultTableModel dm = new DefaultTableModel();
-            int cols = rsmd.getColumnCount();
-            String c[] = new String[cols];
-            for(int i = 0; i < cols; i++){
-                c[i] = rsmd.getColumnName(i+1);
-                dm.addColumn(c[i]);
-            }
-            Object row[] = new Object[cols];
-            while(rs.next()){
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                ResultSet rs = conn.createStatement().executeQuery(SQL);
+                ResultSetMetaData rsmd = rs.getMetaData();
+                
+                
+                DefaultTableModel dm = new DefaultTableModel();
+                int cols = rsmd.getColumnCount();
+                String c[] = new String[cols];
                 for(int i = 0; i < cols; i++){
-                    row[i] = rs.getString(i+1);
+                    c[i] = rsmd.getColumnName(i+1);
+                    dm.addColumn(c[i]);
                 }
-                dm.addRow(row);
+                Object row[] = new Object[cols];
+                while(rs.next()){
+                    for(int i = 0; i < cols; i++){
+                        row[i] = rs.getString(i+1);
+                    }
+                    dm.addRow(row);
+                }
+                DV1.setModel(dm);
             }
-            DV1.setModel(dm); 
-            conn.close();        
             
             for (int i = 0; i < DV1.getColumnCount(); i++) {
                 DefaultTableColumnModel colModel = (DefaultTableColumnModel) DV1.getColumnModel();
@@ -556,7 +558,7 @@ public class W_Report extends javax.swing.JInternalFrame {
                 Component cell = cr.getTableCellRendererComponent(DV1, value, false, false, i, 5);
                 DV1.getColumnModel().getColumn(5).setCellRenderer(cr);
             }
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== Load Data > ERROR: " + ex.getMessage());
         }
         //DV1.repaint();

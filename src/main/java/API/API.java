@@ -11,7 +11,6 @@ import com.google.common.base.Stopwatch;
 import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -45,6 +44,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 /**
  *
@@ -647,7 +647,7 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/config/public/" + appId + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/public/" + appId + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
@@ -671,7 +671,7 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/config/" + appId + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/" + appId + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
@@ -694,7 +694,7 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/location/multigroup/" + appId  + "?nocache=true&extended=true"+ "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/multigroup/" + appId  + "?nocache=true&extended=true"+ " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");   
         }         
@@ -703,7 +703,7 @@ public class API extends javax.swing.JInternalFrame {
         
         try {
             httpclient.close();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -734,7 +734,7 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/config/public/" + SiteID + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/public/" + SiteID + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
@@ -758,7 +758,7 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/config/" + SiteID + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/" + SiteID + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
@@ -781,14 +781,14 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/location/group/" + SiteID + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/group/" + SiteID + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
         try {
             httpclient.close();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
         txtLOG.append("\r\n== /location/group/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -823,7 +823,7 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/config/public/" + UNIT_ID + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/public/" + UNIT_ID + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
@@ -847,7 +847,7 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/config/" + UNIT_ID + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/" + UNIT_ID + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
@@ -870,14 +870,14 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1" + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1" + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
         try {
             httpclient.close();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
         txtLOG.append("\r\n== /location/> " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -916,14 +916,14 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
         try {
             httpclient.close();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
         txtLOG.append("\r\n== /location/sector/<ID> > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -956,7 +956,7 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));               
             J += BaseAPI + "/config/public/" + BrandID  + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/public/" + BrandID  + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
@@ -980,7 +980,7 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/config/" + BrandID + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/" + BrandID  + " > " + ex.getMessage() + "\r\n";
             txtLOG.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
         }         
@@ -1009,14 +1009,14 @@ public class API extends javax.swing.JInternalFrame {
                     MENU_IDS.add(menu.getString("id"));
             }             
             J += BaseAPI + "/location/brand/" + BrandID + "?nocache=true&extended=true" + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/brand/" + BrandID + "?nocache=true&extended=true" + " > " + ex.getMessage() + "\r\n";            
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
         try {
             httpclient.close();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
         txtLOG.append("\r\n== /location/brand/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -1056,14 +1056,14 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/location/sector?_provider=cdl" + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/sector?_provider=cdl" + " > " + ex.getMessage() + "\r\n";  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
         try {
             httpclient.close();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
         txtLOG.append("\r\n== /location/sector?_provider=cdl > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -1103,14 +1103,14 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/calendar/"  + BrandID + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/calendar/" + " > " + ex.getMessage() + "\r\n";              
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
         try {
             httpclient.close();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
         txtLOG.append("\r\n== /calendar/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -1157,7 +1157,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/order/location/brand/" + BrandID + "\r\n" + json.toString(4);  
             
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/order/location/brand/" + BrandID + " > " + ex.getMessage() + "\r\n";                  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1197,7 +1197,7 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/announcement/resource" + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/announcement/resource" + " > " + ex.getMessage() + "\r\n";     
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1243,7 +1243,7 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += URL + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
@@ -1271,12 +1271,12 @@ public class API extends javax.swing.JInternalFrame {
         String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
         String Realm = "";
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + cmbApp.getSelectedItem() + 
-                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-            rs.next();
-            Realm = rs.getString(1);
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + cmbApp.getSelectedItem() +
+                        "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
+                rs.next();
+                Realm = rs.getString(1);
+            }
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get P2 Realm ID > ERROR: " + ex.getMessage());
         } 
@@ -1299,7 +1299,7 @@ public class API extends javax.swing.JInternalFrame {
             userTKN = json.getString("token");
 
             J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/user/auth?realm=" + Realm + " > " + ex.getMessage() + "\r\n";     
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1323,7 +1323,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += "\r\n";
             J += BaseAPI + "/payment/method" + "?user_id=" + userID + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/payment/method" + "?user_id=" + userID + " > " + ex.getMessage() + "\r\n";  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1370,7 +1370,7 @@ public class API extends javax.swing.JInternalFrame {
                     if (is.getBoolean("ready")) A = "  Ready ";
                     
                     LOC = LocalDateTime.parse(or.getString("requested_date"), UTC_formatter).plusSeconds(offset.getTotalSeconds());
-                    D = LOC.format(LOC_formatter).toString();
+                    D = LOC.format(LOC_formatter);
                     model.addElement(D + " " + A + 
                         " - " + or.getJSONObject("details").getString("order_type") +
                         ", ID: " + or.getJSONObject("details").getString("display_id") +
@@ -1381,7 +1381,7 @@ public class API extends javax.swing.JInternalFrame {
             jList_Orders.setModel(model);  
             J += "\r\n";
             J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + " > " + ex.getMessage() + "\r\n";  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1389,7 +1389,7 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();          
         try {
             httpclient.close();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1424,7 +1424,7 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/menu/company/"  + COMP_IDS.get(I) + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/menu/company/"  + COMP_IDS.get(I) + " > " + ex.getMessage() + "\r\n";  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1464,7 +1464,7 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/notification?realm=cdl&target=admin_panel" + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/notification?realm=cdl&target=admin_panel" + " > " + ex.getMessage() + "\r\n";  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1509,14 +1509,14 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/promo/company/" + COMP_IDS.get(cmbComp.getSelectedIndex()) + "/location/group/" + SiteID + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/promo/company/" + COMP_IDS.get(cmbComp.getSelectedIndex()) + "/location/group/" + SiteID + " > " + ex.getMessage() + "\r\n";              
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
         
         try {
             httpclient.close();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
         }
         txtLOG.append("\r\n== /promo/company/<Id>/location/group/<Id> > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
@@ -1556,7 +1556,7 @@ public class API extends javax.swing.JInternalFrame {
                 };
                 JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
                 J += BaseAPI + "/menu/" + MENU_IDS.get(i) + "?extended=true&nocache=1" + "\r\n" + json.toString(4);
-            } catch (Exception ex) {
+            } catch (IOException | JSONException ex) {
                 DH = true;
                 J += BaseAPI + "/menu/" + MENU_IDS.get(i) + "?extended=true&nocache=1" + " > " + ex.getMessage() + "\r\n";
                 txtLOG.append("\r\n- Exception: " + ex.getMessage());     
@@ -1580,7 +1580,7 @@ public class API extends javax.swing.JInternalFrame {
                     };
                     JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
                     J += BaseAPI + "/menu/" + MENU_IDS.get(i) + "\r\n" + json.toString(4);
-                } catch (Exception ex) {
+                } catch (IOException | JSONException ex) {
                     J += BaseAPI + "/menu/" + MENU_IDS.get(i) + " > " + ex.getMessage() + "\r\n";
                     txtLOG.append("\r\n- Exception: " + ex.getMessage());     
                 }   
@@ -1628,7 +1628,7 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/shoppingcart/" + CartID + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/shoppingcart/" + CartID + " > " + ex.getMessage() + "\r\n";  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1665,12 +1665,12 @@ public class API extends javax.swing.JInternalFrame {
         String Realm = "6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5";
 
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + "AP3" + 
-                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-            rs.next();
-            Realm = rs.getString(1);
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + "AP3" +
+                        "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
+                rs.next();
+                Realm = rs.getString(1);
+            }
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get P2 Realm ID > ERROR: " + ex.getMessage());
         } 
@@ -1693,7 +1693,7 @@ public class API extends javax.swing.JInternalFrame {
             userTKN = json.getString("token");
             //J += "\r\n";
             J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/user/auth?realm=" + Realm + " > " + ex.getMessage();            
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1717,7 +1717,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += "\r\n\r\n";
             J += BaseAPI + "/user/" + User_ID + "/permissions" + "?nocache=1" + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/user/" + User_ID + "/permissions" + "?nocache=1" + " > " + ex.getMessage() + "\r\n";  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1741,7 +1741,7 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += "\r\n\r\n";
             J += BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000" + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000" + " > " + ex.getMessage() + "\r\n";  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1779,7 +1779,7 @@ public class API extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To + "\r\n" + json.toString(4);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To + " > " + ex.getMessage() + "\r\n";  
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }   
@@ -1884,11 +1884,11 @@ public class API extends javax.swing.JInternalFrame {
     private void Get_AP3_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
-            rs.next();
-            AP3_TKN = rs.getString(1);
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
+                rs.next();
+                AP3_TKN = rs.getString(1);
+            }
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== AP3_TKN > ERROR: " + ex.getMessage());
         }
@@ -1900,12 +1900,12 @@ public class API extends javax.swing.JInternalFrame {
         txtLOG.append("\r\n-Load Sites ...");
         sw1.start();
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() + 
-                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-            rs.next();
-            appId = rs.getString(1);
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() +
+                        "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
+                rs.next();
+                appId = rs.getString(1);
+            }
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== Get S_OAuth_TKN > ERROR: " + ex.getMessage());
         }
@@ -1975,7 +1975,7 @@ public class API extends javax.swing.JInternalFrame {
             DV1.getColumnModel().getColumn(2).setPreferredWidth(50);
             DV1.getColumnModel().getColumn(3).setPreferredWidth(400);
    
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }         
         finally {
@@ -2070,7 +2070,7 @@ public class API extends javax.swing.JInternalFrame {
             DV2.getColumnModel().getColumn(0).setPreferredWidth(140);
             DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
             DV2.getColumnModel().getColumn(2).setPreferredWidth(80);
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }         
         finally {
@@ -2140,7 +2140,7 @@ public class API extends javax.swing.JInternalFrame {
                     T_Index = i;
                 }
             }
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());  
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } finally {
@@ -2203,7 +2203,7 @@ public class API extends javax.swing.JInternalFrame {
                     T_Index = i;
                 }
             }
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());  
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } finally {
@@ -2271,7 +2271,7 @@ public class API extends javax.swing.JInternalFrame {
             } else{
                 txtLOG.append("\r\n- Company ID not Found in this Brand API");
             }
-        } catch (Exception ex) {
+        } catch (IOException | JSONException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());  
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } finally {
@@ -2295,14 +2295,14 @@ public class API extends javax.swing.JInternalFrame {
     private void LOAD_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'API' AND [env] = '" + env + "'";
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery(SQL);
-            rs.next();
-            C = rs.getString(1);
-            conn.close();
-        } catch (Exception ex) {
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'API' AND [env] = '" + env + "'";
+                Statement statement = conn.createStatement();
+                ResultSet rs = statement.executeQuery(SQL);
+                rs.next();
+                C = rs.getString(1);
+            }
+        } catch (SQLException ex) {
             CONFIG = false;
             txtLOG.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
             return;
@@ -2368,32 +2368,32 @@ public class API extends javax.swing.JInternalFrame {
         }
         
         try {
-            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING);
-            SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'API' AND [env] = '" + env + "'";
-            Statement _del = conn.createStatement();
-            _del.execute(SQL);
-            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
-                       "([user_id]" +   // 1
-                       ",[env]" +       // 2
-                       ",[platform]" +  // 3
-                       ",[app]" +       // 4
-                       ",[_conf]" +     // 5
-                    ") VALUES (" +
-                       "?" +
-                       ",?" +
-                       ",?" +
-                       ",?" +
-                       ",?" +
-                      ")");
-            _insert.setString(1, UserID);
-            _insert.setString(2, env);
-            _insert.setString(3, "WEB");
-            _insert.setString(4, "API");
-            _insert.setString(5, C);           
-            int row = _insert.executeUpdate();
-            txtLOG.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
-            //txtLOG.append("\r\n\r\n=== " + C);
-            conn.close();
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'API' AND [env] = '" + env + "'";
+                Statement _del = conn.createStatement();
+                _del.execute(SQL);
+                PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
+                        "([user_id]" +   // 1
+                        ",[env]" +       // 2
+                        ",[platform]" +  // 3
+                        ",[app]" +       // 4
+                        ",[_conf]" +     // 5
+                        ") VALUES (" +
+                        "?" +
+                        ",?" +
+                        ",?" +
+                        ",?" +
+                        ",?" +
+                        ")");
+                _insert.setString(1, UserID);
+                _insert.setString(2, env);
+                _insert.setString(3, "WEB");
+                _insert.setString(4, "API");
+                _insert.setString(5, C);
+                int row = _insert.executeUpdate();
+                txtLOG.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
+                //txtLOG.append("\r\n\r\n=== " + C);
+            }
         } catch (SQLException ex) {
             txtLOG.append("\r\n\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
         }

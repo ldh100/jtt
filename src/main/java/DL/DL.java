@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package WO;
+package DL;
 
 import A.Func;
 import static A.A.*;
@@ -58,11 +58,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  *
  * @author Oleg.Spozito
  */
-public class WO extends javax.swing.JInternalFrame {
+public class DL extends javax.swing.JInternalFrame {
     /**
      * Creates new form WO
      */
-    public WO() {
+    public DL() {
         initComponents();
     }
     /**
