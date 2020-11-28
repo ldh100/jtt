@@ -385,7 +385,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         try {
             utcTime = utcFormat.parse(utcTimeString);
         } catch (ParseException ex) {
-            Logger.getLogger(W_Report.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(W_Report.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
         DateFormat localFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         localFormat.setTimeZone(TimeZone.getDefault());
@@ -559,7 +559,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             txtLog.append("\r\n\r\n=== Load Data > ERROR: " + ex.getMessage());
         }
-        DV1.repaint();
+        //DV1.repaint();
         this.title = "Reports - " + DV1.getRowCount() + " records";
         if(DV1.getRowCount() > 0){
             DV1.changeSelection(0, 0, false, false);

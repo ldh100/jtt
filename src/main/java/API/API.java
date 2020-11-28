@@ -9,6 +9,9 @@ import A.Func;
 import static A.A.*;
 import com.google.common.base.Stopwatch;
 import java.awt.Cursor;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -119,19 +122,19 @@ public class API extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
-        setTitle("Configurations / APIs");
+        setTitle("Configurations / APIs >>> loading, please wait ... ... ... ...");
         setMinimumSize(new java.awt.Dimension(860, 532));
         setName("AP3"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
         setPreferredSize(new java.awt.Dimension(860, 532));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                AP3_AncestorAdded(evt);
+                formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -590,48 +593,20 @@ public class API extends javax.swing.JInternalFrame {
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
         d1LastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
-
-    private void AP3_AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_AP3_AncestorAdded
-        Load = true;
-        cmbApp.addItem("Boost");
-        cmbApp.addItem("Canteen");
-        cmbApp.addItem("JJKitchen");
-        cmbApp.addItem("Rogers");
-        cmbApp.addItem("StandardCognition");
-        cmbApp.addItem("Tacit");
-        cmbApp.addItem("Thrive");
-        
-        cmbEnv.addItem("Staging");
-        cmbEnv.addItem("Production");
-        cmbEnv.addItem("Development");
-     
-        
-        cmbEnv.setSelectedIndex(2); // delevopment
-        cmbApp.setSelectedIndex(0);
-        
-        Date now = new Date();
-        dtpDate.setDateFormatString("EEE, dd-MMM-yyyy");
-        dtpDate.setMaxSelectableDate(now);
-        dtpDate.setDate(now);
-        MENU_IDS = new ArrayList<>();
-        
-        Load = false;
-        LOAD_ENV();
-        app = cmbApp.getSelectedItem().toString();
-        CONFIG = false;
-    }//GEN-LAST:event_AP3_AncestorAdded
-
     private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
+            cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             LOAD_ENV();
             txtApi.setText(BaseAPI + "/");
+            cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
-
     private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
+            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             app = cmbApp.getSelectedItem().toString();
             GetSites();
+            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbAppItemStateChanged
 
@@ -1046,6 +1021,7 @@ public class API extends javax.swing.JInternalFrame {
         }
         txtLOG.append("\r\n== /location/brand/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
+        
         if(MENU_IDS.isEmpty()){
             btnLoc_Menus.setEnabled(false);
         }else{
@@ -1556,8 +1532,6 @@ public class API extends javax.swing.JInternalFrame {
         SAVE_CONFIG();
     }//GEN-LAST:event_btnSave_OptMouseClicked
     private void btnLoc_MenusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoc_MenusMouseClicked
-        // OwrEMjgG5zUeoXRvKoe3cZy8R8WqPBt9rj2dwv5eUazpZOKPNzcyWAyRG10vCWQg9Oz < in assigned
-        // eBLlmjy9NwfXNdoqJ6Gyu58ZEOjgWlH4BMjE1G3Ru2r3OjOq9Qtm97024RLzSeyXQrp < in menus
         if(!btnLoc_Menus.isEnabled()){
             return;
         }
@@ -1825,6 +1799,56 @@ public class API extends javax.swing.JInternalFrame {
             }    
     }//GEN-LAST:event_btnEodMouseClicked
 
+    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
+        jPanel1.addComponentListener(new ComponentListener() {
+            @Override
+            public void componentResized(ComponentEvent arg0) {
+                Load_Form();
+            }
+            @Override
+            public void componentMoved(ComponentEvent arg0) {
+                //System.err.println("componentMoved");
+            }
+            @Override
+            public void componentShown(ComponentEvent arg0) {
+                //System.err.println("componentShown");
+            }
+            @Override
+            public void componentHidden(ComponentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+    }//GEN-LAST:event_formAncestorAdded
+    private void Load_Form(){
+        Load = true;
+        cmbApp.addItem("Boost");
+        cmbApp.addItem("Canteen");
+        cmbApp.addItem("JJKitchen");
+        cmbApp.addItem("Rogers");
+        cmbApp.addItem("StandardCognition");
+        cmbApp.addItem("Tacit");
+        cmbApp.addItem("Thrive");
+        
+        cmbEnv.addItem("Staging");
+        cmbEnv.addItem("Production");
+        cmbEnv.addItem("Development");
+     
+        cmbEnv.setSelectedIndex(2); // delevopment
+        cmbApp.setSelectedIndex(0);
+        
+        Date now = new Date();
+        dtpDate.setDateFormatString("EEE, dd-MMM-yyyy");
+        dtpDate.setMaxSelectableDate(now);
+        dtpDate.setDate(now);
+        MENU_IDS = new ArrayList<>();
+        
+        Load = false;
+        LOAD_ENV();
+        app = cmbApp.getSelectedItem().toString();
+        CONFIG = false;   
+        this.setTitle("Configurations / APIs");
+    }
+
     private void LOAD_ENV(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
@@ -1974,7 +1998,8 @@ public class API extends javax.swing.JInternalFrame {
                     }
                 }
             }
-            DV1.repaint();
+            SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
+            SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
             GetBrands();
         }
         lblSITES.setText(app + " Sites (" + DV1.getRowCount() + " found)");
@@ -2257,8 +2282,9 @@ public class API extends javax.swing.JInternalFrame {
                 this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             }
         } 
-        sw1.reset();
+
         txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        sw1.reset(); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));       
         
         if(!GroupID.equals("")){

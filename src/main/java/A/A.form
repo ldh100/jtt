@@ -29,22 +29,21 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="MenuWO">
           <Properties>
-            <Property name="text" type="java.lang.String" value="WebOrdering"/>
-            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" value="WO"/>
             <Property name="name" type="java.lang.String" value="FW" noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MenuWOMouseClicked"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="MenuORDERS">
+        <Menu class="javax.swing.JMenu" name="MenuOrders">
           <Properties>
             <Property name="text" type="java.lang.String" value="Orders"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="FW" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MenuORDERSMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="MenuOrdersMouseClicked"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="Menu_API">
