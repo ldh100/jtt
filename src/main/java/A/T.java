@@ -111,7 +111,7 @@ public class T {
         try {
             d1.navigate().to(URL);
             _p++; 
-            EX += _t + "\t" + NAME + "\t" + "AP3 URL" + "\t" + URL + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + "URL" + "\t" + URL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             _f++; err = ex.getMessage().trim(); err = ex.getMessage().trim();

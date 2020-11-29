@@ -180,7 +180,7 @@ public class Func {
         cellStyle.setBorderTop(BorderStyle.THIN);  
         cellStyle.setTopBorderColor(IndexedColors.BLACK.getIndex());         
         
-        for(int i = 2; i < row1; i++) {
+        for(int i = 1; i <= row1; i++) {
             Row = SH1.createRow(i);
             for(int j = 0; j < col1; j++) {
                 cell = Row.createCell(j);
@@ -188,6 +188,7 @@ public class Func {
                 cell.setCellStyle(cellStyle);
             }	
         }
+        
         for(int i = 0; i < col1; i++) { // Resize all columns to fit the content size
             SH1.autoSizeColumn(i);
         }

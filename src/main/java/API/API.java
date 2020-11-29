@@ -124,7 +124,7 @@ public class API extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Configurations / APIs >>> loading, please wait ... ... ... ...");
         setMinimumSize(new java.awt.Dimension(860, 532));
-        setName("AP3"); // NOI18N
+        setName("API"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
         setPreferredSize(new java.awt.Dimension(860, 532));
         setVisible(true);
@@ -2305,6 +2305,7 @@ public class API extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             CONFIG = false;
             txtLOG.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
             

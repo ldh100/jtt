@@ -4,10 +4,9 @@
  * and open the template in the editor.
  */
 package FW;
-import WO.*;
 import A.T;
 import static A.A.*;
-import static WO.WO.*;
+import static FW.FW.*;
 /**
  *
  * @author Oleg.Spozito

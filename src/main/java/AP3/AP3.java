@@ -1905,6 +1905,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             CONFIG = false;
             txtLOG.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
             

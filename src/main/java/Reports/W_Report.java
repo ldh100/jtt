@@ -374,7 +374,8 @@ public class W_Report extends javax.swing.JInternalFrame {
             btnDel.setEnabled(false);
         }          
         if (DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("AP3") || 
-                DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("Food")|| 
+                DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("FW")|| 
+                DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("DL")|| 
                 DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("WO"))
         {
             btnExcel.setEnabled(true);
@@ -435,7 +436,6 @@ public class W_Report extends javax.swing.JInternalFrame {
             String[] lines = EXX.split(System.getProperty("line.separator"));
             int l = lines.length;
             String[][] Values = new String[l][col];
-            int n = 1;
             for (int i = 0; i < l; i++) {
                 String[] v = lines[i].split("\t");
                 System.arraycopy(v, 0, Values[i], 0, v.length); 

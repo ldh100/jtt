@@ -34,18 +34,6 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import javax.swing.SwingWorker;
-import javax.swing.table.DefaultTableModel;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
@@ -64,6 +52,8 @@ public class FW extends javax.swing.JInternalFrame {
     public FW() {
         initComponents();
     }
+    // foodworkscdl@mailsac.com <<<<< staging only
+    // Test1234
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -81,9 +71,9 @@ public class FW extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtLOG = new javax.swing.JTextArea();
         lblSITES4 = new javax.swing.JLabel();
-        txtMobile_ID = new javax.swing.JTextField();
+        txtAdmin_ID = new javax.swing.JTextField();
         lblSITES6 = new javax.swing.JLabel();
-        txtMobile_PW = new javax.swing.JTextField();
+        txtAdmin_PW = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         nShowPage = new javax.swing.JSpinner();
         nWaitElement = new javax.swing.JSpinner();
@@ -113,9 +103,7 @@ public class FW extends javax.swing.JInternalFrame {
         btnSave_Opt = new javax.swing.JButton();
         lblSITES11 = new javax.swing.JLabel();
         lblSITES13 = new javax.swing.JLabel();
-        lblSITES14 = new javax.swing.JLabel();
         cmbEnv = new javax.swing.JComboBox<>();
-        cmbApp = new javax.swing.JComboBox<>();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -154,11 +142,11 @@ public class FW extends javax.swing.JInternalFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblSITES.setText("Sites");
+        lblSITES.setText("Restaurants");
         lblSITES.setAlignmentX(0.5F);
         getContentPane().add(lblSITES, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 360, -1));
 
-        lblBRANDS.setText("Selected Site - Brands");
+        lblBRANDS.setText("Units");
         lblBRANDS.setName("lblBRANDS"); // NOI18N
         getContentPane().add(lblBRANDS, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 296, 280, -1));
 
@@ -228,24 +216,24 @@ public class FW extends javax.swing.JInternalFrame {
 
         lblSITES4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES4.setText("Mobile/Web User E-mail:");
+        lblSITES4.setText("Admin E-mail:");
         lblSITES4.setToolTipText("");
         lblSITES4.setAlignmentX(0.5F);
         getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 380, 120, -1));
 
-        txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtMobile_ID.setText("App_User@?.?");
-        getContentPane().add(txtMobile_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 396, 212, -1));
+        txtAdmin_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtAdmin_ID.setText("App_User@?.?");
+        getContentPane().add(txtAdmin_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 396, 212, -1));
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES6.setText("Mobile/Web User Password");
+        lblSITES6.setText("Admin Password");
         lblSITES6.setAlignmentX(0.5F);
         getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(664, 380, -1, -1));
 
-        txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtMobile_PW.setText("password");
-        getContentPane().add(txtMobile_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(664, 396, 184, -1));
+        txtAdmin_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtAdmin_PW.setText("password");
+        getContentPane().add(txtAdmin_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(664, 396, 184, -1));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
 
@@ -522,12 +510,6 @@ public class FW extends javax.swing.JInternalFrame {
         lblSITES13.setAlignmentX(0.5F);
         jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 12, 92, 16));
 
-        lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES14.setText("Application:");
-        lblSITES14.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 12, 92, 16));
-
         cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbEnv.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -536,27 +518,18 @@ public class FW extends javax.swing.JInternalFrame {
         });
         jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 28, 116, 20));
 
-        cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbApp.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbAppItemStateChanged(evt);
-            }
-        });
-        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 28, 108, 20));
-
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 424, 416, 76));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // https://api.compassdigital.org/dev/location/multigroup/91LoqkPqyDCeGj4JllPRS2e0pWRRj5UZwMWR5E01FwGwORg7kyI0kwpjakyGfK7geXm602UXkg7XzlNDI0k?web=true&expanded=true
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
         if (d1LastRow == DV1.getSelectedRow()) {
            return;
         }
-        GetBrands();
-        SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
-        SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
+        //GetBrands();
+        RESTORAUNT = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
+        RestID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
         d1LastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
 
@@ -569,8 +542,8 @@ public class FW extends javax.swing.JInternalFrame {
            return;
         }
         d2LastRow = DV2.getSelectedRow();   
-        BRAND = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 0));
-        BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
+        UNIT = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 0));
+        UnitID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
     }//GEN-LAST:event_DV2MouseClicked
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
@@ -625,12 +598,11 @@ public class FW extends javax.swing.JInternalFrame {
         SCOPE = "";
         
         if(DV1.getRowCount() > 0) {
-            SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
-            platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform
+            RESTORAUNT = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
             CAN = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
         }
         if(DV2.getRowCount() > 0) {
-            BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
+            UNIT = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
         }
 
 
@@ -692,35 +664,20 @@ public class FW extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
 
-    private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
-        if(!Load && evt.getStateChange() == 1) {
-            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-            app = cmbApp.getSelectedItem().toString();
-            GetSites();
-            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        }
-    }//GEN-LAST:event_cmbAppItemStateChanged
     private void Load_Form(){
         Load = true;
-//        cmbApp.addItem("Boost");
-//        cmbApp.addItem("Canteen");
-//        cmbApp.addItem("JJKitchen");
-//        cmbApp.addItem("Rogers");
-//        cmbApp.addItem("Tacit");
-        cmbApp.addItem("Thrive");
+
         
         cmbEnv.addItem("Staging");
-
         cmbEnv.addItem("Development");
-        //cmbEnv.addItem("Production");         
-        cmbEnv.setSelectedIndex(1); // delevopment
-        cmbApp.setSelectedIndex(0);
+        cmbEnv.addItem("Production");         
+        cmbEnv.setSelectedIndex(0); // ================
+
         
         MENU_IDS = new ArrayList<>();
         
         Load = false;
         LOAD_ENV();
-        app = cmbApp.getSelectedItem().toString();
         CONFIG = false;   
         this.setTitle("Food Works Automation Manager");
     }
@@ -778,9 +735,9 @@ public class FW extends javax.swing.JInternalFrame {
                 New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
                 if (_login.isSelected()) { 
                     SCOPE += "Login";
-                    EX += " - " + "\t" + " === Login, Dashboard" + "\t" + " ===== " + "\t" + " == Login >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    EX += " - " + "\t" + " === FW Login " + "\t" + " ===== " + "\t" + " == Login >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                     __login.run();
-                    EX += " - " + "\t" + " === ^ Login, Dashboard" + "\t" + " ===== " + "\t" + " == ^ Login " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    EX += " - " + "\t" + " === ^ FW Login" + "\t" + " ===== " + "\t" + " == ^ Login " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                     Thread.sleep(1500);
                 }
 
@@ -792,8 +749,6 @@ public class FW extends javax.swing.JInternalFrame {
                     Thread.sleep(1500);
                 }
                   
-                
-
 
                 // ============================== Last Blocks
                 if (_logout.isSelected()) { 
@@ -819,7 +774,6 @@ public class FW extends javax.swing.JInternalFrame {
             }  
             @Override
             protected void done() { 
-
                 txtLOG.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");                
                 EX = "FW " + env + " - v" + Ver + 
                 " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
@@ -898,25 +852,20 @@ public class FW extends javax.swing.JInternalFrame {
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
-            url = "https://dev.thriveapp.io/"; // ============================== Thrive only for now === DEBUG
+            url = "https://staging.app.foodworks.org/"; 
         } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
             BaseAPI = "https://api.compassdigital.org/dev";
             env = "DE";
-            url = "https://dev.thriveapp.io/";
+            url = "https://dev.app.foodworks.org/";
         } else{
             BaseAPI = "https://api.compassdigital.org/v1";
             env = "PR";
-            url = "https://dev.thriveapp.io/";
+            url = "https://app.foodworks.org/";
         }
         Get_FW_TKN();
         LOAD_CONFIG();
-        if (CONFIG) {
-            Load = true;
-            cmbApp.setSelectedItem(app);
-            Load = false;
-        }
-        app = cmbApp.getSelectedItem().toString();
-        GetSites();       
+
+        //GetRestorans();       
     }
     private void Get_FW_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
@@ -931,219 +880,9 @@ public class FW extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    private void GetSites() {
-        d1LastRow = -1;
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLOG.append("\r\n-Load Sites ...");
-        sw1.start();
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() +
-                        "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-                rs.next();
-                appId = rs.getString(1);
-            }
-        } catch (SQLException ex) {
-            txtLOG.append("\r\n\r\n=== Get S_OAuth_TKN > ERROR: " + ex.getMessage());
-        }
-        String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
-        DefaultTableModel SitesModel = new DefaultTableModel();
-        SitesModel.setColumnIdentifiers(SitesColumnsName);
-        DV1.setModel(SitesModel);
-        
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        try { 
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + appId + "?web=true&expanded=true");         
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    throw new ClientProtocolException("Response: " + response.getStatusLine().getStatusCode() + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            String responseBody = httpclient.execute(httpget, responseHandler);  
-                JSONObject json = new JSONObject(responseBody);
-            String site;
-            String country;
-            String id;
-            JSONObject addresses;
-            JSONObject meta;
-
-            JSONArray Groups = json.getJSONArray("groups");
-            for (int i = 0; i < Groups.length(); i++) {
-                site = "";
-                country = "null";
-                id = "null";
-                addresses = null;
-                meta = null;
-                platform = "DH";
-                JSONObject sites = Groups.getJSONObject(i);
-                    if(sites.has("name")){
-                        site = sites.getString("name");   
-                    } 
-                    if(sites.has("id")){
-                        id = sites.getString("id");
-                    } 
-                    if(sites.has("meta")){
-                        meta = sites.getJSONObject("meta");
-                        if (meta.has("migrated") && meta.getBoolean("migrated")){
-                            platform = "CDL migrated";
-                        }
-                    }              
-                    if (id.length() > 50) {
-                        platform = "CDL";
-                    } 
-
-                    if(sites.has("address")){
-                        addresses = sites.getJSONObject("address");
-                    }  
-                    if(addresses != null && addresses.has("country")){
-                        country = addresses.getString("country");   
-                    }
-                    SitesModel.addRow(new Object[]{site, platform, country, id});                   
-                }
-            DV1.setModel(SitesModel);
-            DV1.setDefaultEditor(Object.class, null);
-            DV1.getColumnModel().getColumn(0).setPreferredWidth(250);
-            DV1.getColumnModel().getColumn(1).setPreferredWidth(70);
-            DV1.getColumnModel().getColumn(2).setPreferredWidth(50);
-            DV1.getColumnModel().getColumn(3).setPreferredWidth(400);
-   
-        } catch (IOException | JSONException ex) {
-            txtLOG.append("\r\n- Exception: " + ex.getMessage());     
-        }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-            txtLOG.append("\r\n- Exception: " + ex.getMessage());   
-            }
-        }
-        txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
-        sw1.reset();
-        
-        if (DV1.getRowCount() > 0) {
-            DV1.changeSelection(0, 0, false, false);
-            if (CONFIG && !"".equals(SITE.trim())) {
-                for(int row = 0; row < DV1.getRowCount(); row++) {
-                    if(DV1.getValueAt(row, 0).equals(SITE)){
-                        DV1.changeSelection(row, 0, false, false);
-                        break;
-                    }
-                }
-            }
-            SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
-            SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
-            GetBrands();
-        }
-        lblSITES.setText(app + " Sites (" + DV1.getRowCount() + " found)");
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }
-    private void GetBrands() {
-        if (d1LastRow == DV1.getSelectedRow()) {
-           return;
-        }
-        d2LastRow = -1;
-        d1LastRow = DV1.getSelectedRow();
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLOG.append("\r\n-Load Brands ...");
-        sw1.start();     
-        
-        String[] BrandsColumnsName = {"Station","Location","Brand Id", "Unit ID"}; 
-        DefaultTableModel BrandssModel = new DefaultTableModel();
-        BrandssModel.setColumnIdentifiers(BrandsColumnsName);
-        DV2.setModel(BrandssModel);
-        
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + DV1.getValueAt(DV1.getSelectedRow(), 3) + "?extended=true&nocache=1"); 
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                }
-            };
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
-            JSONArray Location = json.getJSONArray("locations");
-            JSONArray brands = null;
-            
-            String brand;
-            String location;
-            String id;
-            String unit_id;
-            if (Location != null) {
-                for (Object l : Location) {
-                    brand = "";
-                    location = "";
-                    id = "";
-                    unit_id = "";
-                    JSONObject loc = (JSONObject) l;
-                    if (loc.has("brands")) {
-                        brands = loc.getJSONArray("brands");
-                        for (Object b : brands) {
-                            JSONObject br = (JSONObject) b;
-                            brand = br.getString("name");                            
-                            if (!br.isNull("location_description")) {
-                                location = br.getString("location_description");
-                            }
-                            id = br.getString("id");
-                            unit_id = loc.getString("id");
-                            BrandssModel.addRow(new Object[]{brand, location, id, unit_id});
-                        }
-                    }
-                }
-            }
-            DV2.setModel(BrandssModel);    
-            DV2.setDefaultEditor(Object.class, null);
-            DV2.getColumnModel().getColumn(0).setPreferredWidth(140);
-            DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
-            DV2.getColumnModel().getColumn(2).setPreferredWidth(80);
-        } catch (IOException | JSONException ex) {
-            txtLOG.append("\r\n- Exception: " + ex.getMessage());     
-        }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLOG.append("\r\n- Exception: " + ex.getMessage());   
-            }
-        } 
-        txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
-        sw1.reset();
-   
-        if (DV2.getRowCount() > 0) {
-            DV2.changeSelection(0, 0, false, false);
-            if (CONFIG && !"".equals(BRAND.trim()))
-            {
-                for(int row = 0; row < DV2.getRowCount(); row++) {
-                    if(DV2.getValueAt(row, 0).equals(BRAND)){
-                        DV2.changeSelection(row, 0, false, false);
-                        break;
-                    } 
-                }
-            }
-            BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
-        } else {
-            BrandID = "null";
-        }
-
-        d2LastRow = DV2.getSelectedRow();        
-        lblBRANDS.setText("Selected Site Brands (" + DV2.getRowCount() + " found)");
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        
-
-    }
 
     private void LOAD_CONFIG(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
             SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'FW' AND [env] = '" + env + "'";
             Statement statement = conn.createStatement();
@@ -1154,6 +893,7 @@ public class FW extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             CONFIG = false;
             txtLOG.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
             
@@ -1161,15 +901,14 @@ public class FW extends javax.swing.JInternalFrame {
             if (C.contains(": ")) {
                 String c;
                 c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
 
-                c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("RESTORAUNT:")); c = c.substring(0, c.indexOf("\r\n")).trim(); RESTORAUNT = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("UNIT:")); c = c.substring(0, c.indexOf("\r\n")).trim(); UNIT = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("CAN:")); c = c.substring(0, c.indexOf("\r\n")).trim(); CAN = c.substring(c.indexOf(" ")).trim();
 
-                c = C.substring(C.indexOf("txtMobile_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtMobile_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtAdmin_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtAdmin_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_PW.setText(c.substring(c.indexOf(" ")).trim());
 
                 c = C.substring(C.indexOf("nShowPage:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nShowPage.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("nWaitElement:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitElement.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
@@ -1183,7 +922,6 @@ public class FW extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("_password:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _password.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_all_data:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _all_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_logout:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _logout.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("cmbPromo:")); c = c.substring(0, c.indexOf("\r\n")).trim(); PROMO = c.substring(c.indexOf(" ")).trim();
                 CONFIG = true;
                 txtLOG.append("\r\n\r\n=== LOAD_CONFIG > OK");
             } else {
@@ -1209,15 +947,14 @@ public class FW extends javax.swing.JInternalFrame {
             }
             C = "";
             C += "env: " + env + "\r\n";
-            C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
             C += "url: " + url + "\r\n";
             
-            C += "SITE: " + _S + "\r\n";
-            C += "BRAND: " + _B + "\r\n";
+            C += "RESTORAUNT: " + _S + "\r\n";
+            C += "UNIT: " + _B + "\r\n";
             C += "CAN: " + CAN + "\r\n";            
             
-            C += "txtMobile_ID: " + txtMobile_ID.getText() + "\r\n";
-            C += "txtMobile_PW: " + txtMobile_PW.getText()  + "\r\n";
+            C += "txtAdmin_ID: " + txtAdmin_ID.getText() + "\r\n";
+            C += "txtAdmin_PW: " + txtAdmin_PW.getText()  + "\r\n";
             
             C += "nShowPage: " + nShowPage.getValue() + "\r\n";
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
@@ -1230,9 +967,7 @@ public class FW extends javax.swing.JInternalFrame {
             C += "_orders: " + _orders.isSelected() + "\r\n";
             C += "_password: " + _password.isSelected() + "\r\n";         
             C += "_all_data: " + _all_data.isSelected() + "\r\n";
-            C += "_logout: " + _logout.isSelected() + "\r\n";
-            C += "cmbPromo: " + PROMO + "\r\n";            
-
+            C += "_logout: " + _logout.isSelected() + "\r\n";       
 
         } catch (Exception ex)  {
             txtLOG.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
@@ -1434,7 +1169,7 @@ public class FW extends javax.swing.JInternalFrame {
         try {
             int col = 9; // 8 + 1 new JIRA = 9
             String Top_Row = Last_EX.substring(0, Last_EX.indexOf("\r\n"));
-            Last_EX = Last_EX.substring(Last_EX.indexOf("\r\n") + 2);
+            //Last_EX = Last_EX.substring(Last_EX.indexOf("\r\n") + 2);
         
             String[] lines = Last_EX.split(System.getProperty("line.separator"));
             int l = lines.length;
@@ -1482,22 +1217,17 @@ public class FW extends javax.swing.JInternalFrame {
     private String SCOPE;
     public static String FW_TKN = "";    
     public static String url = "";
-    public static String app = "";
-    public static String appId = "";
+
     public static String env = "";
-    public static String SITE = "";
-    public static String SiteID = "";
-    public static String GROUP = "";
-    public static String BRAND = "";
-    public static String BrandID = "";
-    public static String CompanyID = "";
-    public static String GroupID = "";
+    public static String RESTORAUNT = "";
+    public static String RestID = "";
+
+    public static String UNIT = "";
+    public static String UnitID = "";
+
     public static String CAN = "CAN";
-    public static String GL_MENU = "TIM HORTONS";
-    public static String platform = "CDL";
     public static String BaseAPI;
     public static String TZone; 
-    public static String PROMO; 
     public static String New_ID = "";
     
     public static String S_OAuth_TKN = "";
@@ -1523,7 +1253,6 @@ public class FW extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;
     private javax.swing.JButton btnSave_Opt;
-    private javax.swing.JComboBox<String> cmbApp;
     private javax.swing.JComboBox<String> cmbBrow;
     private javax.swing.JComboBox<String> cmbEnv;
     private javax.swing.JComboBox<String> cmbPromo;
@@ -1538,7 +1267,6 @@ public class FW extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblSITES10;
     private javax.swing.JLabel lblSITES11;
     private javax.swing.JLabel lblSITES13;
-    private javax.swing.JLabel lblSITES14;
     private javax.swing.JLabel lblSITES4;
     private javax.swing.JLabel lblSITES6;
     private javax.swing.JLabel lblSITES7;
@@ -1547,9 +1275,9 @@ public class FW extends javax.swing.JInternalFrame {
     private javax.swing.JSpinner nShowPage;
     private javax.swing.JSpinner nWaitElement;
     private javax.swing.JSpinner nWaitLoad;
+    private javax.swing.JTextField txtAdmin_ID;
+    private javax.swing.JTextField txtAdmin_PW;
     private javax.swing.JTextArea txtLOG;
-    private javax.swing.JTextField txtMobile_ID;
-    private javax.swing.JTextField txtMobile_PW;
     // End of variables declaration//GEN-END:variables
 // </editor-fold>
 }

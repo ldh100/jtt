@@ -779,9 +779,9 @@ public class WO extends javax.swing.JInternalFrame {
                 New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
                 if (_login.isSelected()) { 
                     SCOPE += "Login";
-                    EX += " - " + "\t" + " === Login, Dashboard" + "\t" + " ===== " + "\t" + " == Login >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    EX += " - " + "\t" + " === Login " + "\t" + " ===== " + "\t" + " == Login >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                     __login.run();
-                    EX += " - " + "\t" + " === ^ Login, Dashboard" + "\t" + " ===== " + "\t" + " == ^ Login " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    EX += " - " + "\t" + " === ^ Login " + "\t" + " ===== " + "\t" + " == ^ Login " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                     Thread.sleep(1500);
                 }
 
@@ -793,7 +793,6 @@ public class WO extends javax.swing.JInternalFrame {
                     Thread.sleep(1500);
                 }
                   
-                
 
 
                 // ============================== Last Blocks
@@ -899,7 +898,7 @@ public class WO extends javax.swing.JInternalFrame {
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
-            url = "https://dev.thriveapp.io/"; // ============================== Thrive only for now === DEBUG
+            url = "https://dev.thriveapp.io/"; 
         } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
             BaseAPI = "https://api.compassdigital.org/dev";
             env = "DE";
@@ -1155,6 +1154,7 @@ public class WO extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             CONFIG = false;
             txtLOG.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
             

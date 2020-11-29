@@ -82,9 +82,9 @@ public class DL extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtLOG = new javax.swing.JTextArea();
         lblSITES4 = new javax.swing.JLabel();
-        txtMobile_ID = new javax.swing.JTextField();
+        txtAdmin_ID = new javax.swing.JTextField();
         lblSITES6 = new javax.swing.JLabel();
-        txtMobile_PW = new javax.swing.JTextField();
+        txtAdmin_PW = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         nShowPage = new javax.swing.JSpinner();
         nWaitElement = new javax.swing.JSpinner();
@@ -97,7 +97,6 @@ public class DL extends javax.swing.JInternalFrame {
         _all_data = new javax.swing.JCheckBox();
         _1 = new javax.swing.JCheckBox();
         _2 = new javax.swing.JCheckBox();
-        _orders = new javax.swing.JCheckBox();
         _3 = new javax.swing.JCheckBox();
         _4 = new javax.swing.JCheckBox();
         _password = new javax.swing.JCheckBox();
@@ -114,9 +113,7 @@ public class DL extends javax.swing.JInternalFrame {
         btnSave_Opt = new javax.swing.JButton();
         lblSITES11 = new javax.swing.JLabel();
         lblSITES13 = new javax.swing.JLabel();
-        lblSITES14 = new javax.swing.JLabel();
         cmbEnv = new javax.swing.JComboBox<>();
-        cmbApp = new javax.swing.JComboBox<>();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -155,13 +152,13 @@ public class DL extends javax.swing.JInternalFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblSITES.setText("Sites");
+        lblSITES.setText("Manufactures");
         lblSITES.setAlignmentX(0.5F);
         getContentPane().add(lblSITES, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 360, -1));
 
-        lblBRANDS.setText("Selected Site - Brands");
+        lblBRANDS.setText("Categories");
         lblBRANDS.setName("lblBRANDS"); // NOI18N
-        getContentPane().add(lblBRANDS, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 296, 280, -1));
+        getContentPane().add(lblBRANDS, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 296, 280, -1));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -229,24 +226,24 @@ public class DL extends javax.swing.JInternalFrame {
 
         lblSITES4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES4.setText("Mobile/Web User E-mail:");
+        lblSITES4.setText("Adnin E-mail:");
         lblSITES4.setToolTipText("");
         lblSITES4.setAlignmentX(0.5F);
         getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 380, 120, -1));
 
-        txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtMobile_ID.setText("App_User@?.?");
-        getContentPane().add(txtMobile_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 396, 212, -1));
+        txtAdmin_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtAdmin_ID.setText("App_User@?.?");
+        getContentPane().add(txtAdmin_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 396, 212, -1));
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES6.setText("Mobile/Web User Password");
+        lblSITES6.setText("Admin Password");
         lblSITES6.setAlignmentX(0.5F);
         getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(664, 380, -1, -1));
 
-        txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtMobile_PW.setText("password");
-        getContentPane().add(txtMobile_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(664, 396, 184, -1));
+        txtAdmin_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtAdmin_PW.setText("password");
+        getContentPane().add(txtAdmin_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(664, 396, 184, -1));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
 
@@ -343,12 +340,6 @@ public class DL extends javax.swing.JInternalFrame {
         _2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _2.setRequestFocusEnabled(false);
 
-        _orders.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _orders.setText("Place Order");
-        _orders.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _orders.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _orders.setRequestFocusEnabled(false);
-
         _3.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _3.setText("op3");
         _3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -395,7 +386,6 @@ public class DL extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(_1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -419,9 +409,7 @@ public class DL extends javax.swing.JInternalFrame {
                     .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16)
+                        .addGap(34, 34, 34)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(_1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -523,12 +511,6 @@ public class DL extends javax.swing.JInternalFrame {
         lblSITES13.setAlignmentX(0.5F);
         jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 12, 92, 16));
 
-        lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES14.setText("Application:");
-        lblSITES14.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 12, 92, 16));
-
         cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbEnv.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -536,14 +518,6 @@ public class DL extends javax.swing.JInternalFrame {
             }
         });
         jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 28, 116, 20));
-
-        cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbApp.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbAppItemStateChanged(evt);
-            }
-        });
-        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 28, 108, 20));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 424, 416, 76));
 
@@ -555,9 +529,9 @@ public class DL extends javax.swing.JInternalFrame {
         if (d1LastRow == DV1.getSelectedRow()) {
            return;
         }
-        GetBrands();
-        SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
-        SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
+        GetCategories();
+        MANUF = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
+        ManID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
         d1LastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
 
@@ -570,8 +544,8 @@ public class DL extends javax.swing.JInternalFrame {
            return;
         }
         d2LastRow = DV2.getSelectedRow();   
-        BRAND = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 0));
-        BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
+        CATEGORY = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 0));
+        CatID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
     }//GEN-LAST:event_DV2MouseClicked
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
@@ -626,12 +600,11 @@ public class DL extends javax.swing.JInternalFrame {
         SCOPE = "";
         
         if(DV1.getRowCount() > 0) {
-            SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
-            platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform
+            MANUF = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
             CAN = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
         }
         if(DV2.getRowCount() > 0) {
-            BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
+            CATEGORY = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
         }
 
 
@@ -692,36 +665,24 @@ public class DL extends javax.swing.JInternalFrame {
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
-
-    private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
-        if(!Load && evt.getStateChange() == 1) {
-            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-            app = cmbApp.getSelectedItem().toString();
-            GetSites();
-            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        }
-    }//GEN-LAST:event_cmbAppItemStateChanged
     private void Load_Form(){
+        // admin@distilr.io
+        // PW MortyEscapedOntario
         Load = true;
 //        cmbApp.addItem("Boost");
 //        cmbApp.addItem("Canteen");
 //        cmbApp.addItem("JJKitchen");
 //        cmbApp.addItem("Rogers");
 //        cmbApp.addItem("Tacit");
-        cmbApp.addItem("Thrive");
+
         
         cmbEnv.addItem("Staging");
-
         cmbEnv.addItem("Development");
-        //cmbEnv.addItem("Production");         
-        cmbEnv.setSelectedIndex(1); // delevopment
-        cmbApp.setSelectedIndex(0);
-        
-        MENU_IDS = new ArrayList<>();
-        
+        cmbEnv.addItem("Production");         
+        cmbEnv.setSelectedIndex(2); // delevopment only for now
+
         Load = false;
         LOAD_ENV();
-        app = cmbApp.getSelectedItem().toString();
         CONFIG = false;   
         this.setTitle("Ditiller Automation Manager");
     }
@@ -776,24 +737,14 @@ public class DL extends javax.swing.JInternalFrame {
 
             @Override
             protected String doInBackground() throws Exception   { // define what thread will do here 
-                New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
+
                 if (_login.isSelected()) { 
                     SCOPE += "Login";
-                    EX += " - " + "\t" + " === Login, Dashboard" + "\t" + " ===== " + "\t" + " == Login >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    EX += " - " + "\t" + " === Login " + "\t" + " ===== " + "\t" + " == Login >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                     __login.run();
-                    EX += " - " + "\t" + " === ^ Login, Dashboard" + "\t" + " ===== " + "\t" + " == ^ Login " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    EX += " - " + "\t" + " === ^ Login " + "\t" + " ===== " + "\t" + " == ^ Login " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                     Thread.sleep(1500);
                 }
-
-                if (_orders.isSelected()) { 
-                    SCOPE += ", Orders";
-                    EX += " - " + "\t" + " === Orders" + "\t" + " ===== " + "\t" + " == Orders Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-                    __orders.run();
-                    EX += " - " + "\t" + " === ^ Orders" + "\t" + " ===== " + "\t" + " == ^ Orders End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                    Thread.sleep(1500);
-                }
-                  
-                
 
 
                 // ============================== Last Blocks
@@ -899,25 +850,20 @@ public class DL extends javax.swing.JInternalFrame {
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
-            url = "https://dev.thriveapp.io/"; // ============================== Thrive only for now === DEBUG
+            url = "https://staging.app.distilr.io/";
         } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
             BaseAPI = "https://api.compassdigital.org/dev";
             env = "DE";
-            url = "https://dev.thriveapp.io/";
+            url = "https://dev.app.distilr.io/";
         } else{
             BaseAPI = "https://api.compassdigital.org/v1";
             env = "PR";
-            url = "https://dev.thriveapp.io/";
+            url = "https://app.distilr.io/";
         }
         Get_DL_TKN();
         LOAD_CONFIG();
-        if (CONFIG) {
-            Load = true;
-            cmbApp.setSelectedItem(app);
-            Load = false;
-        }
-        app = cmbApp.getSelectedItem().toString();
-        GetSites();       
+
+        //GetManufacturers();       
     }
     private void Get_DL_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
@@ -932,29 +878,20 @@ public class DL extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    private void GetSites() {
+    private void GetManufacturers() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLOG.append("\r\n-Load Sites ...");
+        txtLOG.append("\r\n-Load Manufacturers ...");
         sw1.start();
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() +
-                        "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-                rs.next();
-                appId = rs.getString(1);
-            }
-        } catch (SQLException ex) {
-            txtLOG.append("\r\n\r\n=== Get S_OAuth_TKN > ERROR: " + ex.getMessage());
-        }
-        String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
+
+        String[] SitesColumnsName = {"MAnufacturer","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
         SitesModel.setColumnIdentifiers(SitesColumnsName);
         DV1.setModel(SitesModel);
         
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try { 
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + appId + "?web=true&expanded=true");         
+            HttpGet httpget = new HttpGet(BaseAPI + "???");         
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 300) {
@@ -966,51 +903,12 @@ public class DL extends javax.swing.JInternalFrame {
             };
             String responseBody = httpclient.execute(httpget, responseHandler);  
                 JSONObject json = new JSONObject(responseBody);
-            String site;
-            String country;
-            String id;
-            JSONObject addresses;
-            JSONObject meta;
 
-            JSONArray Groups = json.getJSONArray("groups");
-            for (int i = 0; i < Groups.length(); i++) {
-                site = "";
-                country = "null";
-                id = "null";
-                addresses = null;
-                meta = null;
-                platform = "DH";
-                JSONObject sites = Groups.getJSONObject(i);
-                    if(sites.has("name")){
-                        site = sites.getString("name");   
-                    } 
-                    if(sites.has("id")){
-                        id = sites.getString("id");
-                    } 
-                    if(sites.has("meta")){
-                        meta = sites.getJSONObject("meta");
-                        if (meta.has("migrated") && meta.getBoolean("migrated")){
-                            platform = "CDL migrated";
-                        }
-                    }              
-                    if (id.length() > 50) {
-                        platform = "CDL";
-                    } 
-
-                    if(sites.has("address")){
-                        addresses = sites.getJSONObject("address");
-                    }  
-                    if(addresses != null && addresses.has("country")){
-                        country = addresses.getString("country");   
-                    }
-                    SitesModel.addRow(new Object[]{site, platform, country, id});                   
-                }
-            DV1.setModel(SitesModel);
             DV1.setDefaultEditor(Object.class, null);
-            DV1.getColumnModel().getColumn(0).setPreferredWidth(250);
-            DV1.getColumnModel().getColumn(1).setPreferredWidth(70);
-            DV1.getColumnModel().getColumn(2).setPreferredWidth(50);
-            DV1.getColumnModel().getColumn(3).setPreferredWidth(400);
+//            DV1.getColumnModel().getColumn(0).setPreferredWidth(250);
+//            DV1.getColumnModel().getColumn(1).setPreferredWidth(70);
+//            DV1.getColumnModel().getColumn(2).setPreferredWidth(50);
+//            DV1.getColumnModel().getColumn(3).setPreferredWidth(400);
    
         } catch (IOException | JSONException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
@@ -1022,27 +920,28 @@ public class DL extends javax.swing.JInternalFrame {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());   
             }
         }
+        DV1.setModel(SitesModel);
         txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
         
         if (DV1.getRowCount() > 0) {
             DV1.changeSelection(0, 0, false, false);
-            if (CONFIG && !"".equals(SITE.trim())) {
+            if (CONFIG && !"".equals(MANUF.trim())) {
                 for(int row = 0; row < DV1.getRowCount(); row++) {
-                    if(DV1.getValueAt(row, 0).equals(SITE)){
+                    if(DV1.getValueAt(row, 0).equals(MANUF)){
                         DV1.changeSelection(row, 0, false, false);
                         break;
                     }
                 }
             }
-            SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
-            SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
-            GetBrands();
+            MANUF = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
+            ManID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
+            GetCategories();
         }
-        lblSITES.setText(app + " Sites (" + DV1.getRowCount() + " found)");
+        lblSITES.setText(" Manufacturesr (" + DV1.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    private void GetBrands() {
+    private void GetCategories() {
         if (d1LastRow == DV1.getSelectedRow()) {
            return;
         }
@@ -1052,7 +951,7 @@ public class DL extends javax.swing.JInternalFrame {
         txtLOG.append("\r\n-Load Brands ...");
         sw1.start();     
         
-        String[] BrandsColumnsName = {"Station","Location","Brand Id", "Unit ID"}; 
+        String[] BrandsColumnsName = {"Category"}; 
         DefaultTableModel BrandssModel = new DefaultTableModel();
         BrandssModel.setColumnIdentifiers(BrandsColumnsName);
         DV2.setModel(BrandssModel);
@@ -1104,9 +1003,9 @@ public class DL extends javax.swing.JInternalFrame {
             }
             DV2.setModel(BrandssModel);    
             DV2.setDefaultEditor(Object.class, null);
-            DV2.getColumnModel().getColumn(0).setPreferredWidth(140);
-            DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
-            DV2.getColumnModel().getColumn(2).setPreferredWidth(80);
+//            DV2.getColumnModel().getColumn(0).setPreferredWidth(140);
+//            DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
+//            DV2.getColumnModel().getColumn(2).setPreferredWidth(80);
         } catch (IOException | JSONException ex) {
             txtLOG.append("\r\n- Exception: " + ex.getMessage());     
         }         
@@ -1122,18 +1021,18 @@ public class DL extends javax.swing.JInternalFrame {
    
         if (DV2.getRowCount() > 0) {
             DV2.changeSelection(0, 0, false, false);
-            if (CONFIG && !"".equals(BRAND.trim()))
+            if (CONFIG && !"".equals(CATEGORY.trim()))
             {
                 for(int row = 0; row < DV2.getRowCount(); row++) {
-                    if(DV2.getValueAt(row, 0).equals(BRAND)){
+                    if(DV2.getValueAt(row, 0).equals(CATEGORY)){
                         DV2.changeSelection(row, 0, false, false);
                         break;
                     } 
                 }
             }
-            BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
+            CatID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
         } else {
-            BrandID = "null";
+            CatID = "null";
         }
 
         d2LastRow = DV2.getSelectedRow();        
@@ -1155,6 +1054,7 @@ public class DL extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             CONFIG = false;
             txtLOG.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
             
@@ -1162,15 +1062,14 @@ public class DL extends javax.swing.JInternalFrame {
             if (C.contains(": ")) {
                 String c;
                 c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
 
-                c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("MANUF:")); c = c.substring(0, c.indexOf("\r\n")).trim(); MANUF = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("CATEGORY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); CATEGORY = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("CAN:")); c = c.substring(0, c.indexOf("\r\n")).trim(); CAN = c.substring(c.indexOf(" ")).trim();
 
-                c = C.substring(C.indexOf("txtMobile_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtMobile_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtAdmin_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtAdmin_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_PW.setText(c.substring(c.indexOf(" ")).trim());
 
                 c = C.substring(C.indexOf("nShowPage:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nShowPage.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("nWaitElement:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitElement.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
@@ -1180,11 +1079,9 @@ public class DL extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("_2:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _2.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_3:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _3.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_4:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _4.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_orders:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _orders.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_password:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _password.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_all_data:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _all_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_logout:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _logout.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("cmbPromo:")); c = c.substring(0, c.indexOf("\r\n")).trim(); PROMO = c.substring(c.indexOf(" ")).trim();
                 CONFIG = true;
                 txtLOG.append("\r\n\r\n=== LOAD_CONFIG > OK");
             } else {
@@ -1210,15 +1107,15 @@ public class DL extends javax.swing.JInternalFrame {
             }
             C = "";
             C += "env: " + env + "\r\n";
-            C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
+            C += "app: " + "N/A" + "\r\n";
             C += "url: " + url + "\r\n";
             
-            C += "SITE: " + _S + "\r\n";
-            C += "BRAND: " + _B + "\r\n";
+            C += "MANUF: " + _S + "\r\n";
+            C += "CATEGORY: " + _B + "\r\n";
             C += "CAN: " + CAN + "\r\n";            
             
-            C += "txtMobile_ID: " + txtMobile_ID.getText() + "\r\n";
-            C += "txtMobile_PW: " + txtMobile_PW.getText()  + "\r\n";
+            C += "txtAdmin_ID: " + txtAdmin_ID.getText() + "\r\n";
+            C += "txtAdmin_PW: " + txtAdmin_PW.getText()  + "\r\n";
             
             C += "nShowPage: " + nShowPage.getValue() + "\r\n";
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
@@ -1228,11 +1125,9 @@ public class DL extends javax.swing.JInternalFrame {
             C += "_2: " + _2.isSelected() + "\r\n";
             C += "_3: " + _3.isSelected() + "\r\n";
             C += "_4: " + _4.isSelected() + "\r\n";
-            C += "_orders: " + _orders.isSelected() + "\r\n";
             C += "_password: " + _password.isSelected() + "\r\n";         
             C += "_all_data: " + _all_data.isSelected() + "\r\n";
-            C += "_logout: " + _logout.isSelected() + "\r\n";
-            C += "cmbPromo: " + PROMO + "\r\n";            
+            C += "_logout: " + _logout.isSelected() + "\r\n";          
 
 
         } catch (Exception ex)  {
@@ -1483,23 +1378,14 @@ public class DL extends javax.swing.JInternalFrame {
     private String SCOPE;
     public static String DL_TKN = "";    
     public static String url = "";
-    public static String app = "";
-    public static String appId = "";
     public static String env = "";
-    public static String SITE = "";
-    public static String SiteID = "";
-    public static String GROUP = "";
-    public static String BRAND = "";
-    public static String BrandID = "";
-    public static String CompanyID = "";
-    public static String GroupID = "";
-    public static String CAN = "CAN";
-    public static String GL_MENU = "TIM HORTONS";
-    public static String platform = "CDL";
-    public static String BaseAPI;
-    public static String TZone; 
-    public static String PROMO; 
-    public static String New_ID = "";
+    public static String MANUF = "";
+    public static String ManID = "";
+    public static String CATEGORY = "";
+    public static String CatID = "";
+    public static String BaseAPI = "";
+    public static String CAN = "Canada";
+
     
     public static String S_OAuth_TKN = "";
     public static String S_Client_ID = "";
@@ -1517,14 +1403,12 @@ public class DL extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _headless;
     private javax.swing.JCheckBox _login;
     private javax.swing.JCheckBox _logout;
-    private javax.swing.JCheckBox _orders;
     private javax.swing.JCheckBox _password;
     private javax.swing.JButton btnExel;
     private javax.swing.JButton btnFails;
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;
     private javax.swing.JButton btnSave_Opt;
-    private javax.swing.JComboBox<String> cmbApp;
     private javax.swing.JComboBox<String> cmbBrow;
     private javax.swing.JComboBox<String> cmbEnv;
     private javax.swing.JComboBox<String> cmbPromo;
@@ -1539,7 +1423,6 @@ public class DL extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblSITES10;
     private javax.swing.JLabel lblSITES11;
     private javax.swing.JLabel lblSITES13;
-    private javax.swing.JLabel lblSITES14;
     private javax.swing.JLabel lblSITES4;
     private javax.swing.JLabel lblSITES6;
     private javax.swing.JLabel lblSITES7;
@@ -1548,9 +1431,9 @@ public class DL extends javax.swing.JInternalFrame {
     private javax.swing.JSpinner nShowPage;
     private javax.swing.JSpinner nWaitElement;
     private javax.swing.JSpinner nWaitLoad;
+    private javax.swing.JTextField txtAdmin_ID;
+    private javax.swing.JTextField txtAdmin_PW;
     private javax.swing.JTextArea txtLOG;
-    private javax.swing.JTextField txtMobile_ID;
-    private javax.swing.JTextField txtMobile_PW;
     // End of variables declaration//GEN-END:variables
 // </editor-fold>
 }
