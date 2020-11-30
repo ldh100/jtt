@@ -1038,8 +1038,6 @@ public class DL extends javax.swing.JInternalFrame {
         d2LastRow = DV2.getSelectedRow();        
         lblBRANDS.setText("Selected Site Brands (" + DV2.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        
-
     }
 
     private void LOAD_CONFIG(){
