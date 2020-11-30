@@ -595,9 +595,13 @@ public class API extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_DV1MouseClicked
     private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
+//            this.setTitle("Configurations / APIs >>> re-loading, please wait ... ... ... ...");
+//            this.repaint();
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             LOAD_ENV();
             txtApi.setText(BaseAPI + "/");
+//            setTitle("Configurations / APIs");
+//            this.repaint();
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
