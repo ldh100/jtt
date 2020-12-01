@@ -10,6 +10,7 @@ import Reports.W_Report;
 import DL.DL;
 import FW.FW;
 import WO.WO;
+import OR.OR;
 import java.awt.Cursor;
 import java.beans.PropertyVetoException;
 import java.net.InetAddress;
@@ -126,8 +127,7 @@ public class A extends javax.swing.JFrame {
         MenuBar.add(Menu_DL);
 
         MenuOrders.setText("Orders");
-        MenuOrders.setEnabled(false);
-        MenuOrders.setName("FW"); // NOI18N
+        MenuOrders.setName("OR"); // NOI18N
         MenuOrders.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 MenuOrdersMouseClicked(evt);
@@ -381,6 +381,39 @@ public class A extends javax.swing.JFrame {
         dl.setSelected(true);
         F_COUNT++;  
     }
+    private void Open_OR() throws PropertyVetoException {
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("OR")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
+        OR dl = new OR();
+        this.DesktopPane.add(dl);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        dl.setLocation(X*20, Y*20);
+        dl.show();
+        dl.setSelected(true);
+        F_COUNT++;  
+    }
 
     private void Menu_FWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_FWMouseClicked
         if(Menu_FW.isVisible()){
@@ -444,7 +477,12 @@ public class A extends javax.swing.JFrame {
         MenuOrders.setEnabled(false);
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        //Open_Order();
+        try {
+            Open_OR();
+        }
+        catch (PropertyVetoException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         MenuOrders.setEnabled(true);

@@ -1533,7 +1533,6 @@ public class AP3 extends javax.swing.JInternalFrame {
                 for(int row = 0; row < DV2.getRowCount(); row++) {
                     if(DV2.getValueAt(row, 0).equals(BRAND)){
                         DV2.changeSelection(row, 0, false, false);
-                        //DV1.scrollRectToVisible(DV1.getCellRect(row, 0, true));
                         break;
                     } 
                 }
