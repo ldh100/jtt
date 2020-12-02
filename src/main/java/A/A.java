@@ -280,7 +280,7 @@ public class A extends javax.swing.JFrame {
         api.setLocation(X*20, Y*20);
         api.show();
         api.setSelected(true);
-        F_COUNT++;     
+        F_COUNT++;     //
     }    
     private void Open_WO() throws PropertyVetoException {                                    
         final JInternalFrame[] frames = DesktopPane.getAllFrames();

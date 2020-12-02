@@ -684,7 +684,7 @@ public class DL extends javax.swing.JInternalFrame {
         Load = false;
         LOAD_ENV();
         CONFIG = false;   
-        this.setTitle("Ditiller Automation Manager");
+        this.setTitle("Distiller Automation Manager");
     }
 
     private boolean Driver() {
