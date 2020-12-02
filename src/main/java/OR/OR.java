@@ -1045,7 +1045,7 @@ public class OR extends javax.swing.JInternalFrame {
     }
     private void GetMods(){
         if (ItemsLastRow == DV_Items.getSelectedRow()) {
-           return;
+            return;
         }else{
             txtLog.append("\r\n- GetMods: "); 
         }
