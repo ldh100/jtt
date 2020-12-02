@@ -89,7 +89,7 @@ public class OR extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Place Order >>> loading, please wait ... ... ... ...");
         setMinimumSize(new java.awt.Dimension(860, 532));
-        setName("WO"); // NOI18N
+        setName("OR"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
         setPreferredSize(new java.awt.Dimension(860, 532));
         setVisible(true);
