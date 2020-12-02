@@ -337,9 +337,9 @@ public class W_Report extends javax.swing.JInternalFrame {
             }             
 //            File aLog = new File("aLog.txt");
 //            if (aLog.createNewFile()) {
-//                txtLOG.append("\r\n\r\n=== Report > File created: " + aLog.getName());
+//                txtLog.append("\r\n\r\n=== Report > File created: " + aLog.getName());
 //            } else {
-//                txtLOG.append("\r\n\r\n=== Report > File already exists");
+//                txtLog.append("\r\n\r\n=== Report > File already exists");
 //            }
 //            Files.write(Paths.get(aLog.getPath()), EXX.getBytes());
 //            java.awt.Desktop.getDesktop().open(aLog);        
@@ -461,9 +461,9 @@ public class W_Report extends javax.swing.JInternalFrame {
 
 //            File ExcelLog = new File("ExcelLog.txt");
 //            if (ExcelLog.createNewFile()) {
-//                txtLOG.append("\r\n\r\n=== Report > File created: " + ExcelLog.getName());
+//                txtLog.append("\r\n\r\n=== Report > File created: " + ExcelLog.getName());
 //            } else {
-//                txtLOG.append("\r\n\r\n=== Report > File already exists.");
+//                txtLog.append("\r\n\r\n=== Report > File already exists.");
 //            }
 //            Files.write(Paths.get(ExcelLog.getPath()), EXX.getBytes());
 //            java.awt.Desktop.getDesktop().open(ExcelLog);

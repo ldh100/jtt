@@ -80,7 +80,7 @@ public class DL extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         DV2 = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtLOG = new javax.swing.JTextArea();
+        txtLog = new javax.swing.JTextArea();
         lblSITES4 = new javax.swing.JLabel();
         txtAdmin_ID = new javax.swing.JTextField();
         lblSITES6 = new javax.swing.JLabel();
@@ -213,14 +213,14 @@ public class DL extends javax.swing.JInternalFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 316, 428, 100));
 
-        txtLOG.setEditable(false);
-        txtLOG.setColumns(20);
-        txtLOG.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        txtLOG.setRows(5);
-        txtLOG.setText("Start >");
-        txtLOG.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        txtLOG.setMinimumSize(new java.awt.Dimension(50, 19));
-        jScrollPane1.setViewportView(txtLOG);
+        txtLog.setEditable(false);
+        txtLog.setColumns(20);
+        txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        txtLog.setRows(5);
+        txtLog.setText("Start >");
+        txtLog.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
+        jScrollPane1.setViewportView(txtLog);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 420, 428, 84));
 
@@ -577,8 +577,8 @@ public class DL extends javax.swing.JInternalFrame {
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
-        //txtLOG.setText("");
-        txtLOG.append("=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
+        //txtLog.setText("");
+        txtLog.append("=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
         Wait = (double)nWaitElement.getValue();
         Timeout = (double)nWaitLoad.getValue();
         sleep = (double)nShowPage.getValue() *1000;
@@ -609,16 +609,16 @@ public class DL extends javax.swing.JInternalFrame {
 
 
         if(_headless.isSelected()) {
-            txtLOG.append("\r\n=== Headless mode is selected - Browser is hidden");
-            txtLOG.append("\r\n=== Please wait for report...\r\n");
+            txtLog.append("\r\n=== Headless mode is selected - Browser is hidden");
+            txtLog.append("\r\n=== Please wait for report...\r\n");
         }
-        txtLOG.append("\r\n=== Starting Web Driver...");
+        txtLog.append("\r\n=== Starting Web Driver...");
         sw1.start();
         r_type = "ad-hoc";
 
         if(Driver()){
-            txtLOG.append("\r\n=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec");
-            txtLOG.setCaretPosition(txtLOG.getDocument().getLength());
+            txtLog.append("\r\n=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
             sw1.reset();
             LOG_START(); // ========================================================
             BW1_DoWork(
@@ -628,9 +628,9 @@ public class DL extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRunMouseClicked
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = Func.SHOW_FILE(txtLOG.getText(), "txt");
+        String R = Func.SHOW_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
-            txtLOG.append(R);
+            txtLog.append(R);
         }
     }//GEN-LAST:event_btnLogMouseClicked
 
@@ -638,7 +638,7 @@ public class DL extends javax.swing.JInternalFrame {
         if(!btnFails.isEnabled()) {return;}
         String R = Func.SHOW_FILE(F, "txt");
         if(!R.equals("OK")){
-            txtLOG.append(R);
+            txtLog.append(R);
         }
     }//GEN-LAST:event_btnFailsMouseClicked
 
@@ -647,7 +647,7 @@ public class DL extends javax.swing.JInternalFrame {
         //        try {
             //            Send_File_to_Slack("1", "2", "3");
             //        } catch (IOException ex) {
-            //            txtLOG.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
+            //            txtLog.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
             //        }
         btnExel.setEnabled(false);
         Report();
@@ -691,7 +691,7 @@ public class DL extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
             String cwd = System.getProperty("user.dir");
-            txtLOG.append("\r\n\r\n=== CWD: " + cwd);
+            txtLog.append("\r\n\r\n=== CWD: " + cwd);
             if(WsOS.toLowerCase().contains("windows")){
                 System.setProperty("webdriver.chrome.driver", cwd + "/chromedriver.exe");                
             }
@@ -725,7 +725,7 @@ public class DL extends javax.swing.JInternalFrame {
             return true;
         }
         catch (Exception ex) {
-            txtLOG.append("\r\n\r\n=== Web Driver > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== Web Driver > ERROR: " + ex.getMessage());
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return false;
         }   
@@ -772,18 +772,18 @@ public class DL extends javax.swing.JInternalFrame {
             @Override
             protected void done() { 
 
-                txtLOG.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");                
+                txtLog.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");                
                 EX = "DL " + env + " - v" + Ver + 
                 " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                  "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                  + EX;
-                txtLOG.append("\r\n" + EX.replaceAll("\t", " > ")); 
+                txtLog.append("\r\n" + EX.replaceAll("\t", " > ")); 
                 Last_EX = EX;
                 try  { 
 
                     String statusMsg = (String) get(); 
-                    txtLOG.append("\r\n" + statusMsg);   
-                    txtLOG.setCaretPosition(txtLOG.getDocument().getLength()); 
+                    txtLog.append("\r\n" + statusMsg);   
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                     
 
                     BW1 = null;
@@ -793,8 +793,8 @@ public class DL extends javax.swing.JInternalFrame {
                     }
                 }  
                 catch (InterruptedException | ExecutionException ex)  { 
-                    txtLOG.append("\r\n- Exception: " + ex.getMessage()); 
-                    txtLOG.setCaretPosition(txtLOG.getDocument().getLength()); 
+                    txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                 } 
                 DD = Duration.between(dw_start, Instant.now());
                 Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
@@ -824,15 +824,15 @@ public class DL extends javax.swing.JInternalFrame {
                                                                         ", p50: " + df.format(p_50) +
                                                                         ", p90: " + df.format(p_90);
                         }
-                        txtLOG.append("\r\n" + t_rep);
+                        txtLog.append("\r\n" + t_rep);
                     }
                 } catch(Exception ex){
-                    txtLOG.append("\r\n\r\n=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage());
+                    txtLog.append("\r\n\r\n=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage());
                 }  
                 btnRun.setEnabled(true);
-                txtLOG.append("\r\n=== Duration: " + (DD.toHours()) + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
-                txtLOG.append("\r\n=== " + Summary); // Summary shown in EX top
-                txtLOG.append("\r\n=== Scope: " + SCOPE); // SCOPE shown in EX top
+                txtLog.append("\r\n=== Duration: " + (DD.toHours()) + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
+                txtLog.append("\r\n=== " + Summary); // Summary shown in EX top
+                txtLog.append("\r\n=== Scope: " + SCOPE); // SCOPE shown in EX top
                 //this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));   
                 if(!"".equals(F.trim())){
                     btnFails.setEnabled(true);
@@ -874,14 +874,14 @@ public class DL extends javax.swing.JInternalFrame {
                 DL_TKN = rs.getString(1);
             }
         } catch (SQLException ex) {
-            txtLOG.append("\r\n\r\n=== DL_TKN > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== DL_TKN > ERROR: " + ex.getMessage());
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetManufacturers() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLOG.append("\r\n-Load Manufacturers ...");
+        txtLog.append("\r\n-Load Manufacturers ...");
         sw1.start();
 
         String[] SitesColumnsName = {"MAnufacturer","Id"}; 
@@ -911,17 +911,17 @@ public class DL extends javax.swing.JInternalFrame {
 //            DV1.getColumnModel().getColumn(3).setPreferredWidth(400);
    
         } catch (IOException | JSONException ex) {
-            txtLOG.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage());     
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-            txtLOG.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.append("\r\n- Exception: " + ex.getMessage());   
             }
         }
         DV1.setModel(SitesModel);
-        txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
         
         if (DV1.getRowCount() > 0) {
@@ -948,7 +948,7 @@ public class DL extends javax.swing.JInternalFrame {
         d2LastRow = -1;
         d1LastRow = DV1.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLOG.append("\r\n-Load Brands ...");
+        txtLog.append("\r\n-Load Brands ...");
         sw1.start();     
         
         String[] BrandsColumnsName = {"Category"}; 
@@ -1007,16 +1007,16 @@ public class DL extends javax.swing.JInternalFrame {
 //            DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
 //            DV2.getColumnModel().getColumn(2).setPreferredWidth(80);
         } catch (IOException | JSONException ex) {
-            txtLOG.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage());     
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLOG.append("\r\n- Exception: " + ex.getMessage());   
+                txtLog.append("\r\n- Exception: " + ex.getMessage());   
             }
         } 
-        txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
    
         if (DV2.getRowCount() > 0) {
@@ -1051,7 +1051,7 @@ public class DL extends javax.swing.JInternalFrame {
             conn.close();
         } catch (Exception ex) {
             CONFIG = false;
-            txtLOG.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
@@ -1081,14 +1081,14 @@ public class DL extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("_all_data:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _all_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_logout:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _logout.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 CONFIG = true;
-                txtLOG.append("\r\n\r\n=== LOAD_CONFIG > OK");
+                txtLog.append("\r\n\r\n=== LOAD_CONFIG > OK");
             } else {
                 CONFIG = false;
-                txtLOG.append("\r\n\r\n=== WEB / DL, User: " + UserID + ", Env: " + env + " > No saved Configuration Found");
+                txtLog.append("\r\n\r\n=== WEB / DL, User: " + UserID + ", Env: " + env + " > No saved Configuration Found");
             }
         } catch (Exception ex) {
             CONFIG = false;
-            txtLOG.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1129,7 +1129,7 @@ public class DL extends javax.swing.JInternalFrame {
 
 
         } catch (Exception ex)  {
-            txtLOG.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
             return;
         }
         
@@ -1157,11 +1157,11 @@ public class DL extends javax.swing.JInternalFrame {
                 _insert.setString(4, "DL");
                 _insert.setString(5, C);
                 int row = _insert.executeUpdate();
-                txtLOG.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
-                //txtLOG.append("\r\n\r\n=== " + C);
+                txtLog.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
+                //txtLog.append("\r\n\r\n=== " + C);
             }
         } catch (SQLException ex) {
-            txtLOG.append("\r\n\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1204,13 +1204,13 @@ public class DL extends javax.swing.JInternalFrame {
                 _update.setString(13, UserID);
                 _update.setString(14, WsID);
                 _update.setString(15, cmbBrow.getSelectedItem().toString());
-                _update.setString(16, txtLOG.getText());
+                _update.setString(16, txtLog.getText());
                 _update.setString(17, "Scope: " + SCOPE);
                 _update.setString(18, EX);
                 int row = _update.executeUpdate();
             }
         } catch (SQLException ex) {
-            txtLOG.append("\r\n\r\n=== LOG_UPDATE > SQL ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== LOG_UPDATE > SQL ERROR: " + ex.getMessage());
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1276,10 +1276,10 @@ public class DL extends javax.swing.JInternalFrame {
                 _insert.setString(17, "Running");
                 _insert.setString(18, "None");
                 int row = _insert.executeUpdate();
-//            txtLOG.append("\r\n\r\n=== LOG_START > OK (" + row + " row)");
+//            txtLog.append("\r\n\r\n=== LOG_START > OK (" + row + " row)");
             }
         }  catch (SQLException ex) {
-            txtLOG.append("\r\n\r\n=== LOG_START > SQL ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== LOG_START > SQL ERROR: " + ex.getMessage());
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1312,9 +1312,9 @@ public class DL extends javax.swing.JInternalFrame {
             RES = sendMessage.getReply().toString(); 
 
             
-            txtLOG.append("\r\n\r\n=== Send_File_to_Slack >  No error" + "\r\n" + RES);
+            txtLog.append("\r\n\r\n=== Send_File_to_Slack >  No error" + "\r\n" + RES);
         }catch(IOException ex) {
-            txtLOG.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1322,7 +1322,7 @@ public class DL extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            txtLOG.append("\r\n\r\n=== Report > Not Excel");
+            txtLog.append("\r\n\r\n=== Report > Not Excel");
             return;
         }   
         try {
@@ -1346,7 +1346,7 @@ public class DL extends javax.swing.JInternalFrame {
             String Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
             Func.fExcel((l - 1), col, Values, "DL_" + env + "_" + Date, Top_Row, 0, 0, null, " ", " ");
         } catch (IOException ex) {
-            txtLOG.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
         }
         Runtime.getRuntime().gc();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1431,7 +1431,7 @@ public class DL extends javax.swing.JInternalFrame {
     private javax.swing.JSpinner nWaitLoad;
     private javax.swing.JTextField txtAdmin_ID;
     private javax.swing.JTextField txtAdmin_PW;
-    private javax.swing.JTextArea txtLOG;
+    private javax.swing.JTextArea txtLog;
     // End of variables declaration//GEN-END:variables
 // </editor-fold>
 }
