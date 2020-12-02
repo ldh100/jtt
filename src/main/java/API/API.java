@@ -2020,9 +2020,9 @@ public class API extends javax.swing.JInternalFrame {
         sw1.start();     
         
         String[] BrandsColumnsName = {"Station","Location","Brand Id", "Unit ID"}; 
-        DefaultTableModel BrandssModel = new DefaultTableModel();
-        BrandssModel.setColumnIdentifiers(BrandsColumnsName);
-        DV2.setModel(BrandssModel);
+        DefaultTableModel BrandsModel = new DefaultTableModel();
+        BrandsModel.setColumnIdentifiers(BrandsColumnsName);
+        DV2.setModel(BrandsModel);
         
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
@@ -2064,12 +2064,12 @@ public class API extends javax.swing.JInternalFrame {
                             }
                             id = br.getString("id");
                             unit_id = loc.getString("id");
-                            BrandssModel.addRow(new Object[]{brand, location, id, unit_id});
+                            BrandsModel.addRow(new Object[]{brand, location, id, unit_id});
                         }
                     }
                 }
             }
-            DV2.setModel(BrandssModel);    
+            DV2.setModel(BrandsModel);    
             DV2.setDefaultEditor(Object.class, null);
             DV2.getColumnModel().getColumn(0).setPreferredWidth(140);
             DV2.getColumnModel().getColumn(1).setPreferredWidth(140);

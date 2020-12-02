@@ -56,17 +56,12 @@ public class OR extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         lblSITES = new javax.swing.JLabel();
-        lblBRANDS = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         DV1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         DV2 = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtLOG = new javax.swing.JTextArea();
-        lblSITES4 = new javax.swing.JLabel();
-        txtMobile_ID = new javax.swing.JTextField();
-        lblSITES6 = new javax.swing.JLabel();
-        txtMobile_PW = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         btnRun = new javax.swing.JButton();
         btnLog = new javax.swing.JButton();
@@ -75,9 +70,19 @@ public class OR extends javax.swing.JInternalFrame {
         lblSITES14 = new javax.swing.JLabel();
         cmbEnv = new javax.swing.JComboBox<>();
         cmbApp = new javax.swing.JComboBox<>();
+        txtMobile_ID = new javax.swing.JTextField();
+        txtMobile_PW = new javax.swing.JTextField();
+        lblSITES6 = new javax.swing.JLabel();
+        lblSITES4 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         DV3 = new javax.swing.JTable();
         lblMenus = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        DV4 = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        DV5 = new javax.swing.JTable();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        DV6 = new javax.swing.JTable();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -114,12 +119,11 @@ public class OR extends javax.swing.JInternalFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblSITES.setText("Sites");
         lblSITES.setAlignmentX(0.5F);
-
-        lblBRANDS.setText("Selected Site - Brands");
-        lblBRANDS.setName("lblBRANDS"); // NOI18N
+        getContentPane().add(lblSITES, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 4, 360, -1));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -145,6 +149,8 @@ public class OR extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV1);
 
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 22, 428, 276));
+
         DV2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -169,6 +175,8 @@ public class OR extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV2);
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 298, 428, 120));
+
         txtLOG.setEditable(false);
         txtLOG.setColumns(20);
         txtLOG.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
@@ -178,28 +186,9 @@ public class OR extends javax.swing.JInternalFrame {
         txtLOG.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLOG);
 
-        lblSITES4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        lblSITES4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES4.setText("App User E-mail:");
-        lblSITES4.setToolTipText("");
-        lblSITES4.setAlignmentX(0.5F);
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 420, 428, 84));
 
-        txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtMobile_ID.setText("App_User@?.?");
-
-        lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES6.setText("App User Password");
-        lblSITES6.setAlignmentX(0.5F);
-
-        txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtMobile_PW.setText("password");
-        txtMobile_PW.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMobile_PWActionPerformed(evt);
-            }
-        });
-
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnRun.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -212,7 +201,7 @@ public class OR extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 52, 120, 22));
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 56, 100, 22));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -222,7 +211,7 @@ public class OR extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
-        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 52, 84, 22));
+        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 56, 52, 22));
 
         btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSave_Opt.setText("Save Setup");
@@ -233,19 +222,19 @@ public class OR extends javax.swing.JInternalFrame {
                 btnSave_OptMouseClicked(evt);
             }
         });
-        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 52, 116, 22));
+        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 56, 76, 22));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES13.setText("Environment:");
         lblSITES13.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 12, 92, 16));
+        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 4, 92, 16));
 
         lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES14.setText("Application:");
         lblSITES14.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 12, 92, 16));
+        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 4, 92, 16));
 
         cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbEnv.addItemListener(new java.awt.event.ItemListener() {
@@ -253,7 +242,7 @@ public class OR extends javax.swing.JInternalFrame {
                 cmbEnvItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 28, 116, 20));
+        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 20, 132, 20));
 
         cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbApp.addItemListener(new java.awt.event.ItemListener() {
@@ -261,7 +250,30 @@ public class OR extends javax.swing.JInternalFrame {
                 cmbAppItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 28, 120, 20));
+        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 20, 100, 20));
+
+        txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMobile_ID.setText("App_User@?.?");
+        jPanel3.add(txtMobile_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 167, 20));
+
+        txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMobile_PW.setText("password");
+        jPanel3.add(txtMobile_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 59, 164, 20));
+
+        lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES6.setText("App User Password");
+        lblSITES6.setAlignmentX(0.5F);
+        jPanel3.add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 44, -1, -1));
+
+        lblSITES4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES4.setText("App User E-mail:");
+        lblSITES4.setToolTipText("");
+        lblSITES4.setAlignmentX(0.5F);
+        jPanel3.add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 120, -1));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 420, 418, 83));
 
         DV3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV3.setModel(new javax.swing.table.DefaultTableModel(
@@ -287,81 +299,89 @@ public class OR extends javax.swing.JInternalFrame {
         });
         jScrollPane4.setViewportView(DV3);
 
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 20, 418, 80));
+
         lblMenus.setText("Click Brand to get Menu(s) ...");
         lblMenus.setAlignmentX(0.5F);
+        getContentPane().add(lblMenus, new org.netbeans.lib.awtextra.AbsoluteConstraints(442, 4, 360, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(lblSITES, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(4, 4, 4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblMenus, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblBRANDS, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblSITES4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblSITES6))
-                                    .addGap(6, 6, 6))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(4, 4, 4)
-                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(4, 4, 4))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSITES)
-                    .addComponent(lblMenus))
-                .addGap(2, 2, 2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
-                .addComponent(lblBRANDS)
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblSITES6)
-                            .addComponent(lblSITES4))
-                        .addGap(4, 4, 4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        );
+        DV4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        DV4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        DV4.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        DV4.setCellSelectionEnabled(true);
+        DV4.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV4.setName("DV4"); // NOI18N
+        DV4.setOpaque(false);
+        DV4.setRowHeight(18);
+        DV4.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        DV4.getTableHeader().setReorderingAllowed(false);
+        DV4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DV4MouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(DV4);
+
+        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 100, 418, 76));
+
+        DV5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        DV5.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        DV5.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        DV5.setCellSelectionEnabled(true);
+        DV5.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV5.setName("DV5"); // NOI18N
+        DV5.setOpaque(false);
+        DV5.setRowHeight(18);
+        DV5.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        DV5.getTableHeader().setReorderingAllowed(false);
+        DV5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DV5MouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(DV5);
+
+        getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 176, 418, 120));
+
+        DV6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        DV6.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        DV6.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        DV6.setCellSelectionEnabled(true);
+        DV6.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV6.setName("DV6"); // NOI18N
+        DV6.setOpaque(false);
+        DV6.setRowHeight(18);
+        DV6.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        DV6.getTableHeader().setReorderingAllowed(false);
+        DV6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DV6MouseClicked(evt);
+            }
+        });
+        jScrollPane7.setViewportView(DV6);
+
+        getContentPane().add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 296, 418, 120));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -373,9 +393,6 @@ public class OR extends javax.swing.JInternalFrame {
         SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
                 
-//        DV2.removeAll(); DV2.repaint();
-//        DV3.removeAll(); DV3.repaint();
-        
         GetBrands(); // ================================
         d1LastRow = DV1.getSelectedRow();  
     }//GEN-LAST:event_DV1MouseClicked
@@ -385,12 +402,6 @@ public class OR extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void DV2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV2MouseClicked
-//        if (d2LastRow == DV2.getSelectedRow()) {
-//           return;
-//        }
-            
-        DV3.removeAll(); DV3.repaint();
-        
         BRAND = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 0));
 //        lblMenus.setText(BRAND + " - loading Menu(s), please wait ... ... ...");
 //        lblMenus.repaint();
@@ -437,7 +448,6 @@ public class OR extends javax.swing.JInternalFrame {
         _w = 0; // Warn
         r_time = "";
 
-        
         if(DV1.getRowCount() > 0) {
             SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
             platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform
@@ -469,6 +479,7 @@ public class OR extends javax.swing.JInternalFrame {
             LOAD_ENV();
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
+        this.setTitle("Place Order");
     }//GEN-LAST:event_cmbEnvItemStateChanged
 
     private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
@@ -484,9 +495,17 @@ public class OR extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_DV3MouseClicked
 
-    private void txtMobile_PWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMobile_PWActionPerformed
+    private void DV4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV4MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtMobile_PWActionPerformed
+    }//GEN-LAST:event_DV4MouseClicked
+
+    private void DV5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV5MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DV5MouseClicked
+
+    private void DV6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV6MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DV6MouseClicked
 
     private void Load_Form(){
         Load = true;
@@ -550,11 +569,7 @@ public class OR extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    private void GetSites() {
-        
-        DV2.removeAll(); DV2.repaint();
-        DV3.removeAll(); DV3.repaint();
-        
+    private void GetSites() {   
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n-Load Sites ...");
@@ -672,12 +687,20 @@ public class OR extends javax.swing.JInternalFrame {
         d1LastRow = DV1.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLOG.append("\r\n-Load Brands ...");
-        sw1.start();     
+        String[] ColumnsName = {}; 
+        DefaultTableModel Model = new DefaultTableModel();
+        Model.setColumnIdentifiers(ColumnsName);
+        DV3.setModel(Model);
+        DV4.setModel(Model);
+        DV5.setModel(Model);
+        DV6.setModel(Model);
+        lblMenus.setText("Click Brand to get Menu(s) ...");
         
-        String[] BrandsColumnsName = {"Station","Location","menu_ids", "Brand Id", "Unit ID"}; 
-        DefaultTableModel BrandssModel = new DefaultTableModel();
-        BrandssModel.setColumnIdentifiers(BrandsColumnsName);
-        DV2.setModel(BrandssModel);
+        sw1.start();     
+        String[] BrandsColumnsName = {"Brand / Station","Location","menu_ids", "Brand Id", "Unit ID"}; 
+        DefaultTableModel BrandsModel = new DefaultTableModel();
+        BrandsModel.setColumnIdentifiers(BrandsColumnsName);
+        DV2.setModel(BrandsModel);
         
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
@@ -729,12 +752,12 @@ public class OR extends javax.swing.JInternalFrame {
                                     menu_ids += menu.getString("id") + ","; 
                                 }  
                             }
-                            BrandssModel.addRow(new Object[]{brand, location, menu_ids, id, unit_id});
+                            BrandsModel.addRow(new Object[]{brand, location, menu_ids, id, unit_id});
                         }
                     }
                 }
             }
-            DV2.setModel(BrandssModel);    
+            DV2.setModel(BrandsModel);    
             DV2.setDefaultEditor(Object.class, null);
             DV2.getColumnModel().getColumn(0).setPreferredWidth(140);
             DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
@@ -763,27 +786,31 @@ public class OR extends javax.swing.JInternalFrame {
                 }
             }
             BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));           
-            //GetMenus(); // ========================
+            //GetMenus(); // ======================== force only after Brand selection
         } else {
             BrandID = "null";
         }
 
         d2LastRow = -1; //DV2.getSelectedRow();        
-        lblBRANDS.setText("Selected Site Brands (" + DV2.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetMenus(){
-//        if (d2LastRow == DV2.getSelectedRow()) {
-//           return;
-//        }
         txtLOG.append("\r\n-Load Menus ...");
-        String[] ColumnsName = {"Label (en)", "Response", "Id"}; 
+        String[] cName = {}; 
+        DefaultTableModel M = new DefaultTableModel();
+        M.setColumnIdentifiers(cName);
+        DV4.setModel(M);
+        DV5.setModel(M);
+        DV6.setModel(M);
+        d3LastRow = -1;
+        String[] ColumnsName = {"Menu Label (en)", "Response", "Id"}; 
         DefaultTableModel Model = new DefaultTableModel();
         Model.setColumnIdentifiers(ColumnsName);
         DV3.setModel(Model);
+        
         String IDS = DV2.getValueAt(DV2.getSelectedRow(), 2).toString(); // ================== col 2
         if(IDS.trim().isEmpty()){
-            lblMenus.setText("Selected Brand > Menus (" + DV3.getRowCount() + " found)");
+            lblMenus.setText("Brand " + BRAND + " Menus (" + DV3.getRowCount() + " found)");
             return;
         }
         
@@ -792,6 +819,7 @@ public class OR extends javax.swing.JInternalFrame {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String label = "<empty> 'en'";
         String resp;
+        Object_MENUS = new JSONArray();
         try {
             String[] Menu_IDs = IDS.split(",");
             for (String id : Menu_IDs) {
@@ -811,10 +839,16 @@ public class OR extends javax.swing.JInternalFrame {
                 Object_MENUS.put(new JSONObject(responseBody));
                 JSONObject menu = new JSONObject(responseBody);
                 resp = "OK " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
-                label = menu.getJSONObject("label").getString("en"); 
-                if(label.trim().equals("")){
-                    label = "<empty> (en)";
+                if(menu.has("label")){                    
+                    if(menu.getJSONObject("label").has("en"))
+                        label = menu.getJSONObject("label").getString("en");
+                        if(label.trim().equals("")){
+                            label = "label 'en' Empty";
+                        }           
+                }else{
+                    label = "'label' Not Found";
                 }
+
                 Model.addRow(new Object[]{label, resp, id});
             }
         } catch (IOException | JSONException ex) {
@@ -833,92 +867,161 @@ public class OR extends javax.swing.JInternalFrame {
         DV3.getColumnModel().getColumn(0).setPreferredWidth(140);
         DV3.getColumnModel().getColumn(1).setPreferredWidth(140);
         DV3.getColumnModel().getColumn(2).setPreferredWidth(80);
+        DV3.changeSelection(0, 0, false, false);
+        
         txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         sw1.reset();
  
         lblMenus.setText("Menus (" + DV3.getRowCount() + " found) - Brand: " + BRAND);
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         
-        //GetCategories();
+        GetCategories();
         d3LastRow = DV3.getSelectedRow();     
     }
 
-    private void GetGategories(){
+    private void GetCategories(){
         if (d3LastRow == DV3.getSelectedRow()) {
            return;
         }
-        txtLOG.append("\r\n-Load Menus ...");
-    
-        String[] ColumnsName = {"Name", "Resp", "Id"}; 
-        DefaultTableModel Model = new DefaultTableModel();
-        Model.setColumnIdentifiers(ColumnsName);
-        DV3.setModel(Model);
-        String IDS = DV2.getValueAt(DV2.getSelectedRow(), 4).toString();
-        if(IDS.trim().isEmpty()){
-            lblMenus.setText("Selected Brand > Menus (" + DV3.getRowCount() + " found)");
-            return;
-        }
-        
-        sw1.start();         
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-            String name;
-            String resp;
         try {
-            String[] Menu_IDs = IDS.split(",");
-            for(String id : Menu_IDs){
-
-                HttpGet httpget = new HttpGet(BaseAPI + "/menu/" + id); // + "?extended=true&nocache=1"
-                ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                    int status = response.getStatusLine().getStatusCode();
-                    String Msg = response.getStatusLine().getReasonPhrase();
-                    if (status >= 200 && status < 500) {
-                        HttpEntity entity = response.getEntity();
-                        return entity != null ? EntityUtils.toString(entity) : null;
-                    } else {
-                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                        throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                    }
-                };
-                String responseBody = httpclient.execute(httpget, responseHandler);
-                JSONObject json = new JSONObject(responseBody);
-                JSONArray Menus = json.getJSONArray("groups");
-
-
-                if (!Menus.isEmpty()) {
-                    for (Object m : Menus) {
-                        name = "";
-                        resp = "OK " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
-                        JSONObject menu = (JSONObject) m;
-                        name = menu.getString("name"); 
-                        Model.addRow(new Object[]{name, resp, id});
-                    }
+            String name = "";
+            String hidden = "?";  
+            String linked = "?"; 
+            String id = "?"; 
+            String[] ColumnsName = {"Category (group) Name", "Hidden", "Linked", "id"}; 
+            DefaultTableModel Model = new DefaultTableModel();
+            Model.setColumnIdentifiers(ColumnsName);
+            DV4.setModel(Model);
+            d4LastRow = -1; 
+            JSONObject menu = (JSONObject) Object_MENUS.get(DV3.getSelectedRow());             
+            if (menu.has("groups")) {
+                    JSONArray goups = menu.getJSONArray("groups");
+                    for (Object g : goups) {
+                        JSONObject gr = (JSONObject) g;
+                        name = gr.getString("name");
+                        id = gr.getString("id");
+                        if(gr.has("is")){
+                           JSONObject is =  gr.getJSONObject("is");
+                           if(is.has("hidden") && is.getBoolean("hidden")){
+                               hidden = "true";
+                           }else{
+                               hidden = "false";
+                           }
+                           if(is.has("linked") && is.getBoolean("linked")){
+                               linked = "true";
+                           }else{
+                               hidden = "false";
+                           } 
+                        }
+                        Model.addRow(new Object[]{name, hidden, hidden, id});            
+                    DV4.setModel(Model);    
+                    DV4.setDefaultEditor(Object.class, null);
+                    DV4.getColumnModel().getColumn(0).setPreferredWidth(240);
+                    DV4.getColumnModel().getColumn(1).setPreferredWidth(80);
+                    DV4.getColumnModel().getColumn(2).setPreferredWidth(80);
+                    DV4.changeSelection(0, 0, false, false);
                 }
             }
-        } catch (IOException | JSONException ex) {
-            resp = "OK " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
-            txtLOG.append("\r\n- Exception: " + ex.getMessage());     
-        }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLOG.append("\r\n- Exception: " + ex.getMessage());   
+        }
+        catch(Exception ex){
+            txtLOG.append("\r\n- Exception: " + ex.getMessage());  
+        }
+        GetItems();
+        d4LastRow = DV4.getSelectedRow(); 
+    }
+    private void GetItems(){
+        if (d4LastRow == DV4.getSelectedRow()) {
+           return;
+        }else{
+            txtLOG.append("\r\n- GetItems: "); 
+
+        }
+        try {
+
+            String name = "";
+            String hidden = "?";  
+            String linked = "?"; 
+            String[] ColumnsName = {"Category (group)", "Hidden", "Linked"}; 
+            DefaultTableModel Model = new DefaultTableModel();
+            Model.setColumnIdentifiers(ColumnsName);
+            DV4.setModel(Model);
+            JSONObject menu = (JSONObject) Object_MENUS.get(DV3.getSelectedRow());             
+            if (menu.has("groups")) {
+                    JSONArray goups = menu.getJSONArray("groups");
+                    for (Object g : goups) {
+                        JSONObject gr = (JSONObject) g;
+                        name = gr.getString("name");
+                        if(gr.has("is")){
+                           JSONObject is =  gr.getJSONObject("is");
+                           if(is.has("hidden") && is.getBoolean("hidden")){
+                               hidden = "true";
+                           }else{
+                               hidden = "false";
+                           }
+                           if(is.has("linked") && is.getBoolean("linked")){
+                               linked = "true";
+                           }else{
+                               hidden = "false";
+                           }                        }
+
+                        Model.addRow(new Object[]{name, hidden, hidden});            
+                    DV4.setModel(Model);    
+                    DV4.setDefaultEditor(Object.class, null);
+                    DV4.getColumnModel().getColumn(0).setPreferredWidth(240);
+                    DV4.getColumnModel().getColumn(1).setPreferredWidth(80);
+                    DV4.getColumnModel().getColumn(2).setPreferredWidth(80);
+                    DV4.changeSelection(0, 0, false, false);
+                }
             }
-        } 
-        DV3.setModel(Model);    
-        DV3.setDefaultEditor(Object.class, null);
-        DV3.getColumnModel().getColumn(0).setPreferredWidth(140);
-        DV3.getColumnModel().getColumn(1).setPreferredWidth(140);
-        DV3.getColumnModel().getColumn(2).setPreferredWidth(80);
-        txtLOG.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
-        sw1.reset();
- 
-        lblMenus.setText("Selected Brand > Menus (" + DV3.getRowCount() + " found)");
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-        
-        //GetCategories();
-        d3LastRow = DV3.getSelectedRow();     
+        }
+        catch(Exception ex){
+            txtLOG.append("\r\n- Exception: " + ex.getMessage());  
+        }
+    }
+    private void GetMods(){
+        if (d3LastRow == DV3.getSelectedRow()) {
+           return;
+        }
+        try {
+            String name = "";
+            String hidden = "?";  
+            String linked = "?"; 
+            String[] ColumnsName = {"Category (group)", "Hidden", "Linked"}; 
+            DefaultTableModel Model = new DefaultTableModel();
+            Model.setColumnIdentifiers(ColumnsName);
+            DV4.setModel(Model);
+            JSONObject menu = (JSONObject) Object_MENUS.get(DV3.getSelectedRow());             
+            if (menu.has("groups")) {
+                    JSONArray goups = menu.getJSONArray("groups");
+                    for (Object g : goups) {
+                        JSONObject gr = (JSONObject) g;
+                        name = gr.getString("name");
+                        if(gr.has("is")){
+                           JSONObject is =  gr.getJSONObject("is");
+                           if(is.has("hidden") && is.getBoolean("hidden")){
+                               hidden = "true";
+                           }else{
+                               hidden = "false";
+                           }
+                           if(is.has("linked") && is.getBoolean("linked")){
+                               linked = "true";
+                           }else{
+                               hidden = "false";
+                           }                        }
+
+                        Model.addRow(new Object[]{name, hidden, hidden});            
+                    DV4.setModel(Model);    
+                    DV4.setDefaultEditor(Object.class, null);
+                    DV4.getColumnModel().getColumn(0).setPreferredWidth(240);
+                    DV4.getColumnModel().getColumn(1).setPreferredWidth(80);
+                    DV4.getColumnModel().getColumn(2).setPreferredWidth(80);
+                    DV4.changeSelection(0, 0, false, false);
+                }
+            }
+        }
+        catch(Exception ex){
+            txtLOG.append("\r\n- Exception: " + ex.getMessage());  
+        }
     }
 
     private void LOAD_CONFIG(){
@@ -1028,7 +1131,7 @@ public class OR extends javax.swing.JInternalFrame {
     }
   
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
-    JSONArray Object_MENUS = new JSONArray();
+    JSONArray Object_MENUS;
     private boolean Load;
     private static Duration DD;
     private static SwingWorker BW1;  
@@ -1036,6 +1139,8 @@ public class OR extends javax.swing.JInternalFrame {
     private int d1LastRow = -1; 
     private int d2LastRow = -1; 
     private int d3LastRow = -1;  
+    private int d4LastRow = -1; 
+    private int d5LastRow = -1;  
     private List<String> MENU_IDS;  
     private boolean CONFIG = false;
     private String C = "";
@@ -1074,6 +1179,9 @@ public class OR extends javax.swing.JInternalFrame {
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;
     private javax.swing.JTable DV3;
+    private javax.swing.JTable DV4;
+    private javax.swing.JTable DV5;
+    private javax.swing.JTable DV6;
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;
     private javax.swing.JButton btnSave_Opt;
@@ -1084,7 +1192,9 @@ public class OR extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JLabel lblBRANDS;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JLabel lblMenus;
     private javax.swing.JLabel lblSITES;
     private javax.swing.JLabel lblSITES13;
