@@ -10,7 +10,7 @@ import Reports.W_Report;
 import DL.DL;
 import FW.FW;
 import WO.WO;
-import OR.OR;
+import Station.Station;
 import java.awt.Cursor;
 import java.beans.PropertyVetoException;
 import java.net.InetAddress;
@@ -21,7 +21,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
@@ -60,8 +59,8 @@ public class A extends javax.swing.JFrame {
         MenuWO = new javax.swing.JMenu();
         Menu_FW = new javax.swing.JMenu();
         Menu_DL = new javax.swing.JMenu();
-        MenuOrders = new javax.swing.JMenu();
         Menu_API = new javax.swing.JMenu();
+        MenuStation = new javax.swing.JMenu();
         MenuReports = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -86,7 +85,7 @@ public class A extends javax.swing.JFrame {
         );
         DesktopPaneLayout.setVerticalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 668, Short.MAX_VALUE)
+            .addGap(0, 670, Short.MAX_VALUE)
         );
 
         Menu_AP3.setBorder(null);
@@ -126,15 +125,6 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_DL);
 
-        MenuOrders.setText("Orders");
-        MenuOrders.setName("OR"); // NOI18N
-        MenuOrders.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MenuOrdersMouseClicked(evt);
-            }
-        });
-        MenuBar.add(MenuOrders);
-
         Menu_API.setBorder(null);
         Menu_API.setText("APIs");
         Menu_API.setName("AP3"); // NOI18N
@@ -144,6 +134,15 @@ public class A extends javax.swing.JFrame {
             }
         });
         MenuBar.add(Menu_API);
+
+        MenuStation.setText("Station");
+        MenuStation.setName("Station"); // NOI18N
+        MenuStation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuStationMouseClicked(evt);
+            }
+        });
+        MenuBar.add(MenuStation);
 
         MenuReports.setBorder(null);
         MenuReports.setText("Reports");
@@ -381,10 +380,10 @@ public class A extends javax.swing.JFrame {
         dl.setSelected(true);
         F_COUNT++;  
     }
-    private void Open_OR() throws PropertyVetoException {
+    private void Open_Station() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
         for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("OR")) {
+            if (frame.getName().equals("Station")) {
                 try {
                     frame.setSelected(true);
                     if (frame.isIcon()) {
@@ -399,7 +398,7 @@ public class A extends javax.swing.JFrame {
                 return;
             }
         } 
-        OR dl = new OR();
+        Station dl = new Station();
         this.DesktopPane.add(dl);
         int Y;
         int X;
@@ -444,8 +443,7 @@ public class A extends javax.swing.JFrame {
         Menu_DL.setToolTipText("Distiller Automation");
         Menu_API.setToolTipText("Configutation / AP3 API(s)"); 
         MenuReports.setToolTipText("All xTT and JTT reports"); 
-        MenuOrders.setToolTipText("Place Orders - API > direct insertion into DB"); 
-
+        MenuStation.setToolTipText("Site > Brand > Menus(s) difinitions"); 
         //Open_AP3();
         //Open_API();
     }//GEN-LAST:event_formWindowOpened
@@ -470,23 +468,23 @@ public class A extends javax.swing.JFrame {
         }).start();
     } 
 
-    private void MenuOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuOrdersMouseClicked
-        if(!MenuOrders.isEnabled()){
+    private void MenuStationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuStationMouseClicked
+        if(!MenuStation.isEnabled()){
             return;
         }
-        MenuOrders.setEnabled(false);
+        MenuStation.setEnabled(false);
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
-            Open_OR();
+            Open_Station();
         }
         catch (PropertyVetoException ex) {
             Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-        MenuOrders.setEnabled(true);
-    }//GEN-LAST:event_MenuOrdersMouseClicked
+        MenuStation.setEnabled(true);
+    }//GEN-LAST:event_MenuStationMouseClicked
     private void MenuWOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuWOMouseClicked
         if(!MenuWO.isEnabled()){
             return;
@@ -698,8 +696,8 @@ public class A extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane DesktopPane;
     private javax.swing.JMenuBar MenuBar;
-    private javax.swing.JMenu MenuOrders;
     private javax.swing.JMenu MenuReports;
+    private javax.swing.JMenu MenuStation;
     private javax.swing.JMenu MenuWO;
     private javax.swing.JMenu Menu_AP3;
     private javax.swing.JMenu Menu_API;
