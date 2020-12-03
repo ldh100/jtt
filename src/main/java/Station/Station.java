@@ -514,7 +514,7 @@ public class Station extends javax.swing.JInternalFrame {
         LOAD_ENV();
         app = cmbApp.getSelectedItem().toString();
         CONFIG = false;   
-        this.setTitle("Place Order");
+        this.setTitle("Site > Station(Brand) > Menu(s)");
     }
 
     private void LOAD_ENV(){
@@ -1010,6 +1010,8 @@ public class Station extends javax.swing.JInternalFrame {
         }else{
             txtLog.append("\r\n- GetMods: "); 
         }
+            int mGR = 0;
+            int mIT = 0;
         try {
             String label = "";
             String hidden = "?";  
@@ -1017,6 +1019,7 @@ public class Station extends javax.swing.JInternalFrame {
             String price = "?";
             String cal = "?";
             String id = "?";
+
             String[] ColumnsName = {"Modifires - Label (en)" , "Price", "Cal", "Hidden", "Disabled", "id"}; 
             DefaultTableModel Model = new DefaultTableModel();
             Model.setColumnIdentifiers(ColumnsName);
@@ -1026,6 +1029,7 @@ public class Station extends javax.swing.JInternalFrame {
             if (item.has("options")) {
                 JSONArray options = item.getJSONArray("options");
                 for (Object ops : options) {
+                    mGR++;
                     JSONObject oGroup = (JSONObject) ops;
                     if(oGroup.has("label")){                    
                        if(oGroup.getJSONObject("label").has("en")) {
@@ -1050,6 +1054,7 @@ public class Station extends javax.swing.JInternalFrame {
                     if (oGroup.has("items")) {
                         JSONArray Oitems = oGroup.getJSONArray("items");
                         for (Object Oitem : Oitems) {
+                            mIT++;
                             JSONObject OItem = (JSONObject) Oitem;
                             if(OItem.has("label")){                    
                                 if(OItem.getJSONObject("label").has("en")) {
@@ -1104,7 +1109,7 @@ public class Station extends javax.swing.JInternalFrame {
         catch(Exception ex){
             txtLog.append("\r\n- Exception: " + ex.getMessage());  
         }
-        txtLog.append("\r\nSelected Item > " + DV_Mods.getRowCount() + " Mods found");
+        txtLog.append("\r\nSelected Item > " + mGR + " Mofifier Group(s), " + mIT + " total Mods");
     }
 
     private void LOAD_CONFIG(){
