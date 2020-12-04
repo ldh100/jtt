@@ -101,6 +101,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         lblSITES12 = new javax.swing.JLabel();
         cmbComp = new javax.swing.JComboBox<>();
         _sales_analytics = new javax.swing.JCheckBox();
+        _notifications = new javax.swing.JCheckBox();
         jScrollPane3 = new javax.swing.JScrollPane();
         DV1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -329,6 +330,13 @@ public class AP3 extends javax.swing.JInternalFrame {
         _sales_analytics.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _sales_analytics.setRequestFocusEnabled(false);
 
+        _notifications.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _notifications.setText("Notifications");
+        _notifications.setEnabled(false);
+        _notifications.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _notifications.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _notifications.setRequestFocusEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -371,7 +379,8 @@ public class AP3 extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(_menu_manager, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(_promo)
-                            .addComponent(_group_management, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(_group_management, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_notifications))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(_users, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -420,7 +429,8 @@ public class AP3 extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(_sales_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_notifications, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(_smart_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1114,13 +1124,21 @@ public class AP3 extends javax.swing.JInternalFrame {
                     __smart_analytics.run();
                     EX += " - " + "\t" + " === ^ Smart Analytics" + "\t" + " ===== " + "\t" + " == ^ Sales Reporting End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                     Thread.sleep(1500);
-                }                if (_announcements.isSelected()) { 
+                } 
+                if (_announcements.isSelected()) { 
                     SCOPE += ", Announ";
                     EX += " - " + "\t" + " === Announcements" + "\t" + " ===== " + "\t" + " == Announcements Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     __announcements.run();
                     EX += " - " + "\t" + " === ^ Announcements" + "\t" + " ===== " + "\t" + " == ^ Announcements End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     Thread.sleep(1500);
                 }                    
+                if (_notifications.isSelected()) { 
+                    SCOPE += ", Notifications";
+                    EX += " - " + "\t" + " === Notifications" + "\t" + " ===== " + "\t" + " == Notifications Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    __notifications.run();
+                    EX += " - " + "\t" + " === ^ Notifications" + "\t" + " ===== " + "\t" + " == ^ Notifications End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
+                }
                 if (_promo.isSelected()) { 
                     SCOPE += ", Promos";
                     EX += " - " + "\t" + " === Promo Management" + "\t" + " ===== " + "\t" + " == Promo Management Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
@@ -2151,6 +2169,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _login;
     private javax.swing.JCheckBox _logout;
     private javax.swing.JCheckBox _menu_manager;
+    private javax.swing.JCheckBox _notifications;
     private javax.swing.JCheckBox _orders;
     private javax.swing.JCheckBox _password;
     private javax.swing.JCheckBox _promo;

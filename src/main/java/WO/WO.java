@@ -550,7 +550,6 @@ public class WO extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // https://api.compassdigital.org/dev/location/multigroup/91LoqkPqyDCeGj4JllPRS2e0pWRRj5UZwMWR5E01FwGwORg7kyI0kwpjakyGfK7geXm602UXkg7XzlNDI0k?web=true&expanded=true
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
         if (d1LastRow == DV1.getSelectedRow()) {
            return;
@@ -1058,7 +1057,7 @@ public class WO extends javax.swing.JInternalFrame {
         
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + DV1.getValueAt(DV1.getSelectedRow(), 3) + "?extended=true&nocache=1"); 
+            HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + DV1.getValueAt(DV1.getSelectedRow(), 3) + "?web=true&extended=true&nocache=1"); 
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 String Msg = response.getStatusLine().getReasonPhrase();

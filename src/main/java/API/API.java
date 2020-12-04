@@ -901,7 +901,7 @@ public class API extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Load Sector/Companies(Menus) API..."); 
-        String J = "==== Sector/Companies(Menus) API:" + "\r\n";
+        String J = "==== Sector/Companies(Menus):" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
         sw1.start();
@@ -940,7 +940,7 @@ public class API extends javax.swing.JInternalFrame {
         } 
     }//GEN-LAST:event_btnCompMouseClicked
     private void btnBrandMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBrandMouseClicked
-       this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Load " + BRAND + " brand API...");
         String J = "==== Site: " + SITE + ", Brand: " + BRAND + " - configuration API(s):" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -1041,7 +1041,7 @@ public class API extends javax.swing.JInternalFrame {
     private void btnGroupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGroupMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Load Group/Sector API..."); 
-        String J = "==== Group/Sector API:" + "\r\n";
+        String J = "==== Group/Sector:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
         sw1.start();
@@ -1088,7 +1088,7 @@ public class API extends javax.swing.JInternalFrame {
     private void btnCalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCalMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Load Group/Sector API..."); 
-        String J = "==== Site: " + SITE + ", Brand: " + BRAND + " > Calendar  API:" + "\r\n";
+        String J = "==== Site: " + SITE + ", Brand: " + BRAND + " > Calendar:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
         sw1.start();
@@ -1129,7 +1129,7 @@ public class API extends javax.swing.JInternalFrame {
     private void btnOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrdersMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Brand > Orders API..."); 
-        String J = "==== Site: " + SITE + ", Brand: " + BRAND + " > Order API:" + "\r\n";
+        String J = "==== Site: " + SITE + ", Brand: " + BRAND + " > Order:" + "\r\n";
         
         String From = new SimpleDateFormat( "yyyy-MM-dd 00:00:01").format(dtpDate.getDate());
         SimpleDateFormat StartFormat = new SimpleDateFormat( "yyyy-MM-dd 00:00:01");
@@ -1183,7 +1183,7 @@ public class API extends javax.swing.JInternalFrame {
     private void btnAnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Announcements API..."); 
-        String J = "========= Announcements API:" + "\r\n";
+        String J = "========= Announcements:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         sw1.start();
         try {
@@ -1410,7 +1410,7 @@ public class API extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Company > Menus API..."); 
-        String J = "==== Company " + cmbComp.getSelectedItem() + " > Menus API:" + "\r\n";
+        String J = "==== Company " + cmbComp.getSelectedItem() + " > Menus:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         sw1.start();
         try {
@@ -1450,7 +1450,7 @@ public class API extends javax.swing.JInternalFrame {
     private void btnUpdatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdatesMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- AP3 Resent Updates/Notifications API..."); 
-        String J = "==== AP3 Resent Updates/Notifications API:" + "\r\n";
+        String J = "==== AP3 Resent Updates/Notifications:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         sw1.start();
         try {
@@ -1494,7 +1494,7 @@ public class API extends javax.swing.JInternalFrame {
         //https://api.compassdigital.org/dev/promo/company/KElyDR7DvBFgX64AA5eMF6jBEM66XwcW8jzYReGGsLzJBLd0MDiNB0MqaQBvs27AEYrZDef8JMR3Y/location/group/LWg8oK2ovJFvg0EqOgEkfw7k3AdLzZFRDAyrOD2AF4oO0G8kmOHdMdmAwmdKFWeXQAOLQyUeZw?status=active
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Load Promo API..."); 
-        String J = "==== Company: " + cmbComp.getSelectedItem().toString() + ", Site: " + SITE + " > Promo API:" + "\r\n";
+        String J = "==== Company: " + cmbComp.getSelectedItem().toString() + ", Site: " + SITE + " > Promo:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
         sw1.start();
@@ -1541,7 +1541,7 @@ public class API extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Menu(s) API..."); 
-        String J = "==== Site: " + SITE + ", Brand: " + BRAND + " > Menu(s)  API:" + "\r\n";
+        String J = "==== Site: " + SITE + ", Brand: " + BRAND + " > Menu(s):" + "\r\n";
         boolean DH = false;
         CloseableHttpClient httpclient = HttpClients.createDefault();
         for(int i = 0; i < MENU_IDS.size(); i++){
@@ -1611,7 +1611,7 @@ public class API extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Shopping Cart API..."); 
-        String J = "==== Shopping Cart API:" + "\r\n";
+        String J = "==== Shopping Cart" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String CartID = "";     
         sw1.start();
@@ -1662,7 +1662,7 @@ public class API extends javax.swing.JInternalFrame {
     private void btnUserPermissionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserPermissionsMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- AP3 User, Permissions API..."); 
-        String J = "==== AP3 User API:" + "\r\n";
+        String J = "==== AP3 User:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String UserAuth = Base64.getEncoder().encodeToString((txtAP3_ID.getText().trim() + ":" + txtAP3_PW.getText().trim()).getBytes());
         String User_ID = ""; 
@@ -1762,7 +1762,7 @@ public class API extends javax.swing.JInternalFrame {
     private void btnEodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEodMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Shopping Cart API..."); 
-        String J = "==== Site: " + SITE + " Sales Reporting - EOD API:" + "\r\n";
+        String J = "==== Site: " + SITE + " Sales Reporting - EOD:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String From = new SimpleDateFormat( "yyyy-MM-dd").format(dtpDate.getDate()); //"2020-11-15";
         String To = From;
@@ -2098,9 +2098,11 @@ public class API extends javax.swing.JInternalFrame {
                     } 
                 }
             }
+            BRAND = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 0));
             BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
         } else {
             BrandID = "null";
+            BRAND = "?";
         }
 
         d2LastRow = DV2.getSelectedRow();        
