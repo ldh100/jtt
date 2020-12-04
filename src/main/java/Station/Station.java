@@ -76,6 +76,8 @@ public class Station extends javax.swing.JInternalFrame {
         DV_Items = new javax.swing.JTable();
         jScrollPane7 = new javax.swing.JScrollPane();
         DV_Mods = new javax.swing.JTable();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        DV_Conf = new javax.swing.JTable();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -141,6 +143,7 @@ public class Station extends javax.swing.JInternalFrame {
         jScrollPane3.setViewportView(DV_Sites);
 
         DV_Brands.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        DV_Brands.setForeground(new java.awt.Color(51, 51, 255));
         DV_Brands.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -174,8 +177,8 @@ public class Station extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(txtLog);
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnLog.setText(" Log ^");
         btnLog.setActionCommand("Log");
-        btnLog.setLabel("Log");
         btnLog.setMargin(new java.awt.Insets(2, 4, 2, 4));
         btnLog.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -222,23 +225,22 @@ public class Station extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
-                .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
-                .addComponent(cmbApp, 0, 112, Short.MAX_VALUE))
+                .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(2, 2, 2)
+                .addGap(1, 1, 1)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -274,7 +276,7 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane4.setViewportView(DV_Menus);
 
-        lblMenus.setText("Click Brand to get Menu(s) ...");
+        lblMenus.setText("Click Brand get Config and Menu(s) ...");
         lblMenus.setAlignmentX(0.5F);
 
         DV_Categories.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -344,35 +346,55 @@ public class Station extends javax.swing.JInternalFrame {
         DV_Mods.getTableHeader().setReorderingAllowed(false);
         jScrollPane7.setViewportView(DV_Mods);
 
+        DV_Conf.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        DV_Conf.setForeground(new java.awt.Color(51, 51, 255));
+        DV_Conf.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        DV_Conf.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        DV_Conf.setCellSelectionEnabled(true);
+        DV_Conf.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Conf.setName("DV_Brands"); // NOI18N
+        DV_Conf.setOpaque(false);
+        DV_Conf.setRowHeight(18);
+        DV_Conf.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        DV_Conf.getTableHeader().setReorderingAllowed(false);
+        jScrollPane8.setViewportView(DV_Conf);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(lblSITES, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
+                .addComponent(lblMenus, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(lblSITES, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
-                        .addComponent(lblMenus, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(2, 2, 2))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(436, 436, 436)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,16 +413,14 @@ public class Station extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(2, 2, 2))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         pack();
@@ -424,6 +444,7 @@ public class Station extends javax.swing.JInternalFrame {
     private void DV_BrandsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_BrandsMouseClicked
         BRAND = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 0));
         BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 2));
+        GetConfig(); // ===================================
         GetMenus(); // ===================================
         BrandsLastRow = DV_Brands.getSelectedRow();   
 
@@ -680,7 +701,7 @@ public class Station extends javax.swing.JInternalFrame {
         DV_Categories.setModel(Model);
         DV_Items.setModel(Model);
         DV_Mods.setModel(Model);
-        lblMenus.setText("Click Brand to get Menu(s) ...");
+        lblMenus.setText("Click Brand to get Config and Menu(s) ...");
         
         sw1.start();     
         String[] BrandsColumnsName = {"Brand / Station","Location","menu_ids", "Brand Id", "Unit ID"}; 
@@ -777,7 +798,7 @@ public class Station extends javax.swing.JInternalFrame {
             BrandID = "null";
         }
         txtLog.append("\r\n" + SITE + " > " + DV_Brands.getRowCount() + " Station(s) found");
-        BrandsLastRow = -1; //DV2.getSelectedRow();        
+        BrandsLastRow = -1;         
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetMenus(){
@@ -864,6 +885,48 @@ public class Station extends javax.swing.JInternalFrame {
         
         GetCategories();
         MenusLastRow = DV_Menus.getSelectedRow();     
+    }
+    private void GetConfig(){
+        txtLog.append("\r\n-Load Brand Cofiguration ...");
+        String[] cName = {}; 
+        DefaultTableModel M = new DefaultTableModel();
+        M.setColumnIdentifiers(cName);
+        DV_Conf.setModel(M);
+
+
+        String[] ColumnsName = {"Brand Parameter", "Value"}; 
+        DefaultTableModel Model = new DefaultTableModel();
+        Model.setColumnIdentifiers(ColumnsName);
+        DV_Menus.setModel(Model);
+        
+        
+        sw1.start();         
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        String Parameter;
+        String value;
+        try {
+
+        } catch (Exception ex) {
+            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+        }         
+        finally {
+            try {
+                httpclient.close();
+            } catch (IOException ex) {
+                txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            }
+        } 
+        DV_Conf.setModel(Model);    
+        DV_Conf.setDefaultEditor(Object.class, null);
+        DV_Conf.getColumnModel().getColumn(0).setPreferredWidth(110);
+        DV_Conf.getColumnModel().getColumn(1).setPreferredWidth(80);
+        DV_Conf.changeSelection(0, 0, false, false);
+        
+        txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        sw1.reset();
+        txtLog.append("\r\nBrand/Station '" + BRAND + "' > " + DV_Conf.getRowCount() + " parameters shown");
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));    
     }
 
     private void GetCategories(){
@@ -1258,6 +1321,7 @@ public class Station extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV_Brands;
     private javax.swing.JTable DV_Categories;
+    private javax.swing.JTable DV_Conf;
     private javax.swing.JTable DV_Items;
     private javax.swing.JTable DV_Menus;
     private javax.swing.JTable DV_Mods;
@@ -1274,6 +1338,7 @@ public class Station extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JLabel lblMenus;
     private javax.swing.JLabel lblSITES;
     private javax.swing.JLabel lblSITES13;
