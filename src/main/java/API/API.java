@@ -632,6 +632,7 @@ public class API extends javax.swing.JInternalFrame {
     private void btnAppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAppMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Load " + app + " configurations, API(s)...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== Application: " + app + " - configuration API(s):" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         
@@ -653,9 +654,11 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/config/public/" + appId + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/public/" + appId + " > " + ex.getMessage() + "\r\n";
-            txtLog.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
+            txtLog.append("\r\n-Exception: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());      
         }         
         txtLog.append("\r\n== /config/public/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
         J += "\r\n=========  Private Configuration:" + "\r\n";
@@ -677,9 +680,11 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/config/" + appId + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/" + appId + " > " + ex.getMessage() + "\r\n";
-            txtLog.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
+            txtLog.append("\r\n-Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
         txtLog.append("\r\n== /config/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
         J += "\r\n========= Multigroup API" + "\r\n";
@@ -700,25 +705,30 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/location/multigroup/" + appId  + "?nocache=true&extended=true"+ "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/multigroup/" + appId  + "?nocache=true&extended=true"+ " > " + ex.getMessage() + "\r\n";
-            txtLog.append("\r\n-Exception: " + ex.getMessage() + "\r\n");   
+            txtLog.append("\r\n-Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }         
         txtLog.append("\r\n== /location/multigroup/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
         try {
             httpclient.close();
         } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             String R = Func.SHOW_FILE(J, "json");
             if(!R.equals("OK")){
                 txtLog.append(R);
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             } 
     }//GEN-LAST:event_btnAppMouseClicked
     private void btnSiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSiteMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Load " + SITE + " group API...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== Site: " + SITE + " - configuration API(s):" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         
@@ -740,9 +750,11 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/config/public/" + SiteID + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/public/" + SiteID + " > " + ex.getMessage() + "\r\n";
-            txtLog.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
+            txtLog.append("\r\n-Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
         txtLog.append("\r\n== /config/public/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
         J += "\r\n=========  Private Configuration:" + "\r\n";
@@ -764,9 +776,11 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/config/" + SiteID + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/" + SiteID + " > " + ex.getMessage() + "\r\n";
-            txtLog.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
+            txtLog.append("\r\n-Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
         txtLog.append("\r\n== /config/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();        
 
         J += "\r\n========= Location/Group API" + "\r\n";
@@ -787,26 +801,31 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/location/group/" + SiteID + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/group/" + SiteID + " > " + ex.getMessage() + "\r\n";
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
         
         try {
             httpclient.close();
         } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
         txtLog.append("\r\n== /location/group/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             String R = Func.SHOW_FILE(J, "json");
             if(!R.equals("OK")){
                 txtLog.append(R);
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             } 
     }//GEN-LAST:event_btnSiteMouseClicked
     private void btnUnitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnitMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Load " + "Utit" + " location API...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String UNIT_ID = DV2.getValueAt(DV2.getSelectedRow(), 3).toString();
         String J = "==== Unit ID: " + UNIT_ID + " - configuration API(s):" + "\r\n";
 
@@ -829,9 +848,11 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/config/public/" + UNIT_ID + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/public/" + UNIT_ID + " > " + ex.getMessage() + "\r\n";
-            txtLog.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
+            txtLog.append("\r\n-Exception: " + ex.getMessage() + "\r\n");  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }         
         txtLog.append("\r\n== /config/public/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
         J += "\r\n=========  Private Configuration:" + "\r\n";
@@ -853,9 +874,11 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/config/" + UNIT_ID + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/" + UNIT_ID + " > " + ex.getMessage() + "\r\n";
-            txtLog.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
+            txtLog.append("\r\n-Exception: " + ex.getMessage() + "\r\n");  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }         
         txtLog.append("\r\n== /config/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();        
 
         J += "\r\n========= Location API" + "\r\n";
@@ -876,31 +899,37 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1" + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1" + " > " + ex.getMessage() + "\r\n";
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }   
         
         try {
             httpclient.close();
         } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.append("\r\n- Exception: " + ex.getMessage());  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         }
         txtLog.append("\r\n== /location/> " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            String R = Func.SHOW_FILE(J, "json");
-            if(!R.equals("OK")){
-                txtLog.append(R);
-            }  
+        String R = Func.SHOW_FILE(J, "json");
+        if(!R.equals("OK")){
+            txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        }  
     }//GEN-LAST:event_btnUnitMouseClicked
     private void btnCompMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCompMouseClicked
         int I = cmbGroup.getSelectedIndex();
         if(I < 0){ // =========== DEBUG
             txtLog.append("\r\n-Load Sector/Companies(Menus) ERROR: cmbGROUP.getSelectedIndex() < 0");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Load Sector/Companies(Menus) API..."); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== Sector/Companies(Menus):" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
@@ -922,26 +951,31 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + " > " + ex.getMessage() + "\r\n";
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
         
         try {
             httpclient.close();
         } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
         txtLog.append("\r\n== /location/sector/<ID> > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         String R = Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
     }//GEN-LAST:event_btnCompMouseClicked
     private void btnBrandMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBrandMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Load " + BRAND + " brand API...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== Site: " + SITE + ", Brand: " + BRAND + " - configuration API(s):" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         J += "\r\n========= Public Configuration:" + "\r\n";
@@ -962,9 +996,11 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/config/public/" + BrandID  + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/public/" + BrandID  + " > " + ex.getMessage() + "\r\n";
-            txtLog.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
+            txtLog.append("\r\n-Exception: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());      
         }         
         txtLog.append("\r\n== /config/public/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
         J += "\r\n=========  Private Configuration:" + "\r\n";
@@ -986,9 +1022,11 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/config/" + BrandID + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/" + BrandID  + " > " + ex.getMessage() + "\r\n";
-            txtLog.append("\r\n-Exception: " + ex.getMessage() + "\r\n");     
+            txtLog.append("\r\n-Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
         txtLog.append("\r\n== /config/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();        
 
         J += "\r\n========= Brand API" + "\r\n";
@@ -1015,15 +1053,18 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/location/brand/" + BrandID + "?nocache=true&extended=true" + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/brand/" + BrandID + "?nocache=true&extended=true" + " > " + ex.getMessage() + "\r\n";            
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }   
         
         try {
             httpclient.close();
         } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
         txtLog.append("\r\n== /location/brand/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
         if(MENU_IDS.isEmpty()){
@@ -1036,11 +1077,13 @@ public class API extends javax.swing.JInternalFrame {
         String R = Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
     }//GEN-LAST:event_btnBrandMouseClicked
     private void btnGroupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGroupMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Load Group/Sector API..."); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== Group/Sector:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
@@ -1062,32 +1105,38 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/location/sector?_provider=cdl" + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/sector?_provider=cdl" + " > " + ex.getMessage() + "\r\n";  
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
         
         try {
             httpclient.close();
         } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }
         txtLog.append("\r\n== /location/sector?_provider=cdl > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         String R = Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
     }//GEN-LAST:event_btnGroupMouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
         String R = Func.SHOW_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
     }//GEN-LAST:event_btnLogMouseClicked
     private void btnCalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCalMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n\r\n- Load Group/Sector API..."); 
+        txtLog.append("\r\n\r\n- Load Group/Sector API...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         String J = "==== Site: " + SITE + ", Brand: " + BRAND + " > Calendar:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
@@ -1109,26 +1158,32 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/calendar/"  + BrandID + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/calendar/" + " > " + ex.getMessage() + "\r\n";              
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
         
         try {
             httpclient.close();
         } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.append("\r\n- Exception: " + ex.getMessage());  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         }
         txtLog.append("\r\n== /calendar/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         String R = Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+ 
         }        
     }//GEN-LAST:event_btnCalMouseClicked
     private void btnOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrdersMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Brand > Orders API..."); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== Site: " + SITE + ", Brand: " + BRAND + " > Order:" + "\r\n";
         
         String From = new SimpleDateFormat( "yyyy-MM-dd 00:00:01").format(dtpDate.getDate());
@@ -1163,26 +1218,31 @@ public class API extends javax.swing.JInternalFrame {
             
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/order/location/brand/" + BrandID + " > " + ex.getMessage() + "\r\n";                  
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
         
         try {
             httpclient.close();
         } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
         txtLog.append("\r\n== " + BaseAPI + "order/location/brand/" + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         String R = Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }         
     }//GEN-LAST:event_btnOrdersMouseClicked
     private void btnAnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Announcements API..."); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "========= Announcements:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         sw1.start();
@@ -1203,21 +1263,25 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/announcement/resource" + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/announcement/resource" + " > " + ex.getMessage() + "\r\n";     
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
         
         try {
             httpclient.close();
         } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
         txtLog.append("\r\n== " + BaseAPI + "/announcement/resource" + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         String R = Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }        
     }//GEN-LAST:event_btnAnMouseClicked
     private void cmbGroupItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbGroupItemStateChanged
@@ -1227,7 +1291,8 @@ public class API extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbGroupItemStateChanged
     private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n\r\n- Custom API..."); 
+        txtLog.append("\r\n\r\n- Custom API...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         String J = "==== Custom API:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String URL = txtApi.getText().trim();
@@ -1248,41 +1313,46 @@ public class API extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += URL + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }   
         
         try {
             httpclient.close();
         } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
         txtLog.append("\r\n== " + URL + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         String R = Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
     }//GEN-LAST:event_btnRunMouseClicked
     private void btnUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Load User API(s)..."); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== User API(s):" + "\r\n";
         userID = "";
         userTKN = "";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
         String Realm = "";
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + cmbApp.getSelectedItem() +
-                        "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-                rs.next();
-                Realm = rs.getString(1);
-            }
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + cmbApp.getSelectedItem() +
+                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
+            rs.next();
+            Realm = rs.getString(1);
+        conn.close();
         } catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== Get P2 Realm ID > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
         sw1.start(); // ============ User
         try { 
@@ -1305,9 +1375,11 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/user/auth?realm=" + Realm + " > " + ex.getMessage() + "\r\n";     
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
         txtLog.append("\r\n== " + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
         sw1.start();  // ============ Payment
@@ -1329,9 +1401,11 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/payment/method" + "?user_id=" + userID + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/payment/method" + "?user_id=" + userID + " > " + ex.getMessage() + "\r\n";  
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }   
         txtLog.append("\r\n== " + "/payment/method" + "?user_id=" + userID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();        
 
         sw1.start();  // ============ Orders
@@ -1387,29 +1461,35 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + " > " + ex.getMessage() + "\r\n";  
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage());  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }   
         txtLog.append("\r\n== " + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();          
         try {
             httpclient.close();
         } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         String R = Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
     }//GEN-LAST:event_btnUserMouseClicked
     private void btnMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMouseClicked
         int I = cmbComp.getSelectedIndex();
         if(I < 0){ // =========== DEBUG
             txtLog.append("\r\n-Load Company/Menus ERROR: cmbCOMP.getSelectedIndex() < 0");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Company > Menus API..."); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== Company " + cmbComp.getSelectedItem() + " > Menus:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         sw1.start();
@@ -1430,26 +1510,31 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/menu/company/"  + COMP_IDS.get(I) + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/menu/company/"  + COMP_IDS.get(I) + " > " + ex.getMessage() + "\r\n";  
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage());  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }   
         
         try {
             httpclient.close();
         } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
         txtLog.append("\r\n== " + BaseAPI + "/menu/company/" + COMP_IDS.get(I) + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         String R = Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
     }//GEN-LAST:event_btnMenuMouseClicked
     private void btnUpdatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdatesMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- AP3 Resent Updates/Notifications API..."); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== AP3 Resent Updates/Notifications:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         sw1.start();
@@ -1470,21 +1555,25 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/notification?realm=cdl&target=admin_panel" + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/notification?realm=cdl&target=admin_panel" + " > " + ex.getMessage() + "\r\n";  
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage());  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }   
         
         try {
             httpclient.close();
         } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
         txtLog.append("\r\n== " + BaseAPI + "/notification?realm=cdl&target=admin_panel" + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         String R = Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }  
     }//GEN-LAST:event_btnUpdatesMouseClicked
     private void btnPromoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPromoMouseClicked
@@ -1494,6 +1583,7 @@ public class API extends javax.swing.JInternalFrame {
         //https://api.compassdigital.org/dev/promo/company/KElyDR7DvBFgX64AA5eMF6jBEM66XwcW8jzYReGGsLzJBLd0MDiNB0MqaQBvs27AEYrZDef8JMR3Y/location/group/LWg8oK2ovJFvg0EqOgEkfw7k3AdLzZFRDAyrOD2AF4oO0G8kmOHdMdmAwmdKFWeXQAOLQyUeZw?status=active
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Load Promo API..."); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== Company: " + cmbComp.getSelectedItem().toString() + ", Site: " + SITE + " > Promo:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
@@ -1515,21 +1605,25 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/promo/company/" + COMP_IDS.get(cmbComp.getSelectedIndex()) + "/location/group/" + SiteID + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/promo/company/" + COMP_IDS.get(cmbComp.getSelectedIndex()) + "/location/group/" + SiteID + " > " + ex.getMessage() + "\r\n";              
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }   
         
         try {
             httpclient.close();
         } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
         txtLog.append("\r\n== /promo/company/<Id>/location/group/<Id> > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         String R = Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
     }//GEN-LAST:event_btnPromoMouseClicked
     private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
@@ -1540,7 +1634,8 @@ public class API extends javax.swing.JInternalFrame {
             return;
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n\r\n- Menu(s) API..."); 
+        txtLog.append("\r\n\r\n- Menu(s) API...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         String J = "==== Site: " + SITE + ", Brand: " + BRAND + " > Menu(s):" + "\r\n";
         boolean DH = false;
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -1563,9 +1658,11 @@ public class API extends javax.swing.JInternalFrame {
             } catch (IOException | JSONException ex) {
                 DH = true;
                 J += BaseAPI + "/menu/" + MENU_IDS.get(i) + "?extended=true&nocache=1" + " > " + ex.getMessage() + "\r\n";
-                txtLog.append("\r\n- Exception: " + ex.getMessage());     
+                txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());     
             }   
             txtLog.append("\r\n== " + BaseAPI + "/menu/" + MENU_IDS.get(i) + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             sw1.reset(); 
             
             if(DH){
@@ -1586,9 +1683,11 @@ public class API extends javax.swing.JInternalFrame {
                     J += BaseAPI + "/menu/" + MENU_IDS.get(i) + "\r\n" + json.toString(4);
                 } catch (IOException | JSONException ex) {
                     J += BaseAPI + "/menu/" + MENU_IDS.get(i) + " > " + ex.getMessage() + "\r\n";
-                    txtLog.append("\r\n- Exception: " + ex.getMessage());     
+                    txtLog.append("\r\n- Exception: " + ex.getMessage());   
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());   
                 }   
                 txtLog.append("\r\n== " + BaseAPI + "/menu/" + MENU_IDS.get(i) + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                 sw1.reset();   
             }
         }   
@@ -1597,12 +1696,14 @@ public class API extends javax.swing.JInternalFrame {
             httpclient.close();
         } catch (IOException ex) {
             txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         String R = Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }         
     }//GEN-LAST:event_btnLoc_MenusMouseClicked
     private void btnSCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSCartMouseClicked
@@ -1611,6 +1712,7 @@ public class API extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Shopping Cart API..."); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== Shopping Cart" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String CartID = "";     
@@ -1634,21 +1736,25 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/shoppingcart/" + CartID + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/shoppingcart/" + CartID + " > " + ex.getMessage() + "\r\n";  
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage());  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }   
         
         try {
             httpclient.close();
         } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
         txtLog.append("\r\n== " + BaseAPI + "/shoppingcart/" + CartID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         String R = Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
     }//GEN-LAST:event_btnSCartMouseClicked
 
@@ -1661,22 +1767,23 @@ public class API extends javax.swing.JInternalFrame {
 
     private void btnUserPermissionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserPermissionsMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n\r\n- AP3 User, Permissions API..."); 
+        txtLog.append("\r\n\r\n- AP3 User, Permissions API...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         String J = "==== AP3 User:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String UserAuth = Base64.getEncoder().encodeToString((txtAP3_ID.getText().trim() + ":" + txtAP3_PW.getText().trim()).getBytes());
         String User_ID = ""; 
         String Realm = "6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5";
-
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + "AP3" +
-                        "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-                rs.next();
-                Realm = rs.getString(1);
-            }
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + "AP3" +
+                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
+            rs.next();
+            Realm = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== Get P2 Realm ID > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
         sw1.start(); // ============ AP3 User
         try { 
@@ -1699,9 +1806,11 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/user/auth?realm=" + Realm + " > " + ex.getMessage();            
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage());  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }   
         txtLog.append("\r\n== " + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();        
         
         sw1.start(); // ============ AP3 User Permissions
@@ -1723,9 +1832,11 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/user/" + User_ID + "/permissions" + "?nocache=1" + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/user/" + User_ID + "/permissions" + "?nocache=1" + " > " + ex.getMessage() + "\r\n";  
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
         txtLog.append("\r\n== " + "/user/" + User_ID + "/permissions" + "?nocache=1" + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
         sw1.start(); // ============ AP3 User Permissions
@@ -1747,21 +1858,25 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000" + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000" + " > " + ex.getMessage() + "\r\n";  
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
         txtLog.append("\r\n== " + "/user/realm/" + Realm + "?nocache=1&max=2000"+ " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();        
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         String R = Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
     }//GEN-LAST:event_btnUserPermissionsMouseClicked
 
     private void btnEodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEodMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n\r\n- Shopping Cart API..."); 
+        txtLog.append("\r\n\r\n- Shopping Cart API...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         String J = "==== Site: " + SITE + " Sales Reporting - EOD:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String From = new SimpleDateFormat( "yyyy-MM-dd").format(dtpDate.getDate()); //"2020-11-15";
@@ -1785,22 +1900,26 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To + " > " + ex.getMessage() + "\r\n";  
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }   
         
         try {
             httpclient.close();
         } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
         txtLog.append("\r\n== " + BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            String R = Func.SHOW_FILE(J, "json");
-            if(!R.equals("OK")){
-                txtLog.append(R);
-            }    
+        String R = Func.SHOW_FILE(J, "json");
+        if(!R.equals("OK")){
+            txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        }    
     }//GEN-LAST:event_btnEodMouseClicked
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
@@ -1887,14 +2006,14 @@ public class API extends javax.swing.JInternalFrame {
     }
     private void Get_AP3_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
-                rs.next();
-                AP3_TKN = rs.getString(1);
-            }
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
+            rs.next();
+            AP3_TKN = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== AP3_TKN > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1902,16 +2021,17 @@ public class API extends javax.swing.JInternalFrame {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Sites ...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.start();
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() +
-                        "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-                rs.next();
-                appId = rs.getString(1);
-            }
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() +
+                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
+            rs.next();
+            appId = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== Get S_OAuth_TKN > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
@@ -1980,16 +2100,19 @@ public class API extends javax.swing.JInternalFrame {
             DV1.getColumnModel().getColumn(3).setPreferredWidth(400);
    
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+                txtLog.append("\r\n- Exception: " + ex.getMessage());   
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         }
         txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
         if (DV1.getRowCount() > 0) {
@@ -2017,6 +2140,7 @@ public class API extends javax.swing.JInternalFrame {
         d1LastRow = DV1.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Brands ...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.start();     
         
         String[] BrandsColumnsName = {"Station","Location","Brand Id", "Unit ID"}; 
@@ -2075,16 +2199,19 @@ public class API extends javax.swing.JInternalFrame {
             DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
             DV2.getColumnModel().getColumn(2).setPreferredWidth(80);
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
                 txtLog.append("\r\n- Exception: " + ex.getMessage());   
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } 
         txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
    
         if (DV2.getRowCount() > 0) {
@@ -2114,6 +2241,7 @@ public class API extends javax.swing.JInternalFrame {
     private void GetGroups() {  
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Groups/Sector ...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         cmbGroup.removeAllItems();
         GROUP_IDS = new ArrayList<>();
         
@@ -2148,16 +2276,19 @@ public class API extends javax.swing.JInternalFrame {
             }
         } catch (IOException | JSONException ex) {
             txtLog.append("\r\n- Exception: " + ex.getMessage());  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage());   
+                txtLog.append("\r\n- Exception: " + ex.getMessage());  
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                 this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             }
         } 
         txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         
@@ -2175,10 +2306,12 @@ public class API extends javax.swing.JInternalFrame {
         int I = cmbGroup.getSelectedIndex();
         if(I < 0){ // =========== DEBUG
             txtLog.append("\r\n-Load Sector/Companies(Menus) ERROR: cmbGROUP.getSelectedIndex() < 0");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Sector/Companies(Menus) ...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try { 
             cmbComp.removeAllItems();
@@ -2211,16 +2344,19 @@ public class API extends javax.swing.JInternalFrame {
             }
         } catch (IOException | JSONException ex) {
             txtLog.append("\r\n- Exception: " + ex.getMessage());  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage());   
+                txtLog.append("\r\n- Exception: " + ex.getMessage());
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());    
                 this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             }
         } 
         txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         
@@ -2241,6 +2377,7 @@ public class API extends javax.swing.JInternalFrame {
     private void GetBrandSector() {                                 
         BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
         txtLog.append("\r\n-Get Brand's Sector and Company");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         GroupID = "";
         CompanyID = "";
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -2271,25 +2408,30 @@ public class API extends javax.swing.JInternalFrame {
                 }   
             } else{
                 txtLog.append("\r\n- Sector ID not Found in this Brand API");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
             if(json.has("company")){
                 CompanyID = json.getString("company");
             } else{
                 txtLog.append("\r\n- Company ID not Found in this Brand API");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } catch (IOException | JSONException ex) {
             txtLog.append("\r\n- Exception: " + ex.getMessage());  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage());   
+                txtLog.append("\r\n- Exception: " + ex.getMessage());  
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                 this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             }
         } 
 
         txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset(); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));       
         
@@ -2300,17 +2442,17 @@ public class API extends javax.swing.JInternalFrame {
 
     private void LOAD_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'API' AND [env] = '" + env + "'";
-                Statement statement = conn.createStatement();
-                ResultSet rs = statement.executeQuery(SQL);
-                rs.next();
-                C = rs.getString(1);
-            }
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'API' AND [env] = '" + env + "'";
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(SQL);
+            rs.next();
+            C = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             CONFIG = false;
             txtLog.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
@@ -2333,13 +2475,16 @@ public class API extends javax.swing.JInternalFrame {
 
                 CONFIG = true;
                 txtLog.append("\r\n\r\n=== LOAD_CONFIG > OK");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             } else {
                 CONFIG = false;
                 txtLog.append("\r\n\r\n=== WEB / AP3, User: " + UserID + ", Env: " + env + " > No saved Configuration Found");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } catch (Exception ex) {
             CONFIG = false;
             txtLog.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -2371,38 +2516,39 @@ public class API extends javax.swing.JInternalFrame {
 
         } catch (Exception ex)  {
             txtLog.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }
         
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'API' AND [env] = '" + env + "'";
-                Statement _del = conn.createStatement();
-                _del.execute(SQL);
-                PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
-                        "([user_id]" +   // 1
-                        ",[env]" +       // 2
-                        ",[platform]" +  // 3
-                        ",[app]" +       // 4
-                        ",[_conf]" +     // 5
-                        ") VALUES (" +
-                        "?" +
-                        ",?" +
-                        ",?" +
-                        ",?" +
-                        ",?" +
-                        ")");
-                _insert.setString(1, UserID);
-                _insert.setString(2, env);
-                _insert.setString(3, "WEB");
-                _insert.setString(4, "API");
-                _insert.setString(5, C);
-                int row = _insert.executeUpdate();
-                txtLog.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
-                //txtLog.append("\r\n\r\n=== " + C);
-            }
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'API' AND [env] = '" + env + "'";
+            Statement _del = conn.createStatement();
+            _del.execute(SQL);
+            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
+                    "([user_id]" +   // 1
+                    ",[env]" +       // 2
+                    ",[platform]" +  // 3
+                    ",[app]" +       // 4
+                    ",[_conf]" +     // 5
+                    ") VALUES (" +
+                    "?" +
+                    ",?" +
+                    ",?" +
+                    ",?" +
+                    ",?" +
+                    ")");
+            _insert.setString(1, UserID);
+            _insert.setString(2, env);
+            _insert.setString(3, "WEB");
+            _insert.setString(4, "API");
+            _insert.setString(5, C);
+            int row = _insert.executeUpdate();
+            txtLog.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            conn.close();
         } catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }

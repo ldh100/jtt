@@ -412,6 +412,7 @@ public class Station extends javax.swing.JInternalFrame {
         String R = Func.SHOW_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R);
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
     }//GEN-LAST:event_btnLogMouseClicked
 
@@ -501,14 +502,14 @@ public class Station extends javax.swing.JInternalFrame {
     }
     private void Get_WO_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
-                rs.next();
-                WO_TKN = rs.getString(1);
-            }
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
+            rs.next();
+            WO_TKN = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== WO_TKN > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -516,16 +517,17 @@ public class Station extends javax.swing.JInternalFrame {
         SitesLastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Sites ...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.start();
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() +
-                        "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-                rs.next();
-                appId = rs.getString(1);
-            }
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() +
+                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
+            rs.next();
+            appId = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== Get S_OAuth_TKN > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
@@ -593,16 +595,19 @@ public class Station extends javax.swing.JInternalFrame {
             DV_Sites.getColumnModel().getColumn(3).setPreferredWidth(400);
    
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
                 txtLog.append("\r\n- Exception: " + ex.getMessage());   
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         }
         txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
         if (DV_Sites.getRowCount() > 0) {
@@ -621,6 +626,7 @@ public class Station extends javax.swing.JInternalFrame {
         }
         lblSITES.setText(app + " Sites (" + DV_Sites.getRowCount() + " found)");
         txtLog.append("\r\n" + app + " > " + DV_Sites.getRowCount() + " Site(s) found");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetBrands() {
@@ -631,6 +637,7 @@ public class Station extends javax.swing.JInternalFrame {
         SitesLastRow = DV_Sites.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Brands ...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String[] ColumnsName = {}; 
         DefaultTableModel Model = new DefaultTableModel();
         Model.setColumnIdentifiers(ColumnsName);
@@ -707,16 +714,19 @@ public class Station extends javax.swing.JInternalFrame {
             DV_Brands.getColumnModel().getColumn(1).setPreferredWidth(140);
             DV_Brands.getColumnModel().getColumn(2).setPreferredWidth(80);
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
                 txtLog.append("\r\n- Exception: " + ex.getMessage());   
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } 
         txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
    
         if (DV_Brands.getRowCount() > 0) {
@@ -735,11 +745,13 @@ public class Station extends javax.swing.JInternalFrame {
             BrandID = "null";
         }
         txtLog.append("\r\n" + SITE + " > " + DV_Brands.getRowCount() + " Station(s) found");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         BrandsLastRow = -1;         
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetMenus(){
         txtLog.append("\r\n-Load Menus ...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String[] cName = {}; 
         DefaultTableModel M = new DefaultTableModel();
         M.setColumnIdentifiers(cName);
@@ -797,13 +809,15 @@ public class Station extends javax.swing.JInternalFrame {
             }
         } catch (IOException | JSONException ex) {
             resp = "OK " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage());   
+                txtLog.append("\r\n- Exception: " + ex.getMessage());  
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());  
             }
         } 
         DV_Menus.setModel(Model);    
@@ -814,10 +828,12 @@ public class Station extends javax.swing.JInternalFrame {
         DV_Menus.changeSelection(0, 0, false, false);
         
         txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
  
         lblMenus.setText("Brand/Station '" + BRAND + "' > " + DV_Menus.getRowCount() + " Menu(s) found");
         txtLog.append("\r\nBrand/Station '" + BRAND + "' > " + DV_Menus.getRowCount() + " Menu(s) found");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         
         GetCategories();
@@ -876,9 +892,11 @@ public class Station extends javax.swing.JInternalFrame {
             }
         }
         catch(Exception ex){
-            txtLog.append("\r\n- Exception: " + ex.getMessage());  
+            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
         txtLog.append("\r\nSelected Menu > " + DV_Categories.getRowCount() + " Categories found");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         GetItems();
         CategoriesLastRow = DV_Categories.getSelectedRow(); 
     }
@@ -887,6 +905,7 @@ public class Station extends javax.swing.JInternalFrame {
            return;
         }else{
             txtLog.append("\r\n- GetItems: "); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         try {
             String label = "";
@@ -957,9 +976,11 @@ public class Station extends javax.swing.JInternalFrame {
             }
         }
         catch(JSONException ex){
-            txtLog.append("\r\n- Exception: " + ex.getMessage());  
+            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
         txtLog.append("\r\nSelected Category > " + DV_Items.getRowCount() + " Items found");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         GetMods();
         ItemsLastRow = DV_Items.getSelectedRow(); 
     }
@@ -968,6 +989,7 @@ public class Station extends javax.swing.JInternalFrame {
             return;
         }else{
             txtLog.append("\r\n- GetMods: "); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
             int mGR = 0;
             int mIT = 0;
@@ -1066,9 +1088,11 @@ public class Station extends javax.swing.JInternalFrame {
             DV_Mods.changeSelection(0, 0, false, false);    
         }
         catch(Exception ex){
-            txtLog.append("\r\n- Exception: " + ex.getMessage());  
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         }
         txtLog.append("\r\nSelected Item > " + mGR + " Mofifier Group(s), " + mIT + " total Mods");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
     }
 
     private void LOAD_CONFIG(){
@@ -1083,6 +1107,7 @@ public class Station extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             CONFIG = false;
             txtLog.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
@@ -1099,13 +1124,16 @@ public class Station extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("CAN:")); c = c.substring(0, c.indexOf("\r\n")).trim(); CAN = c.substring(c.indexOf(" ")).trim();
                 CONFIG = true;
                 txtLog.append("\r\n\r\n=== LOAD_CONFIG > OK");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             } else {
                 CONFIG = false;
                 txtLog.append("\r\n\r\n=== Station, User: " + UserID + ", Env: " + env + " > No saved Configuration Found");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } catch (Exception ex) {
             CONFIG = false;
             txtLog.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1131,38 +1159,41 @@ public class Station extends javax.swing.JInternalFrame {
 
         } catch (Exception ex)  {
             txtLog.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }
         
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'OR' AND [env] = '" + env + "'";
-                Statement _del = conn.createStatement();
-                _del.execute(SQL);
-                PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
-                        "([user_id]" +   // 1
-                        ",[env]" +       // 2
-                        ",[platform]" +  // 3
-                        ",[app]" +       // 4
-                        ",[_conf]" +     // 5
-                        ") VALUES (" +
-                        "?" +
-                        ",?" +
-                        ",?" +
-                        ",?" +
-                        ",?" +
-                        ")");
-                _insert.setString(1, UserID);
-                _insert.setString(2, env);
-                _insert.setString(3, "WEB");
-                _insert.setString(4, "OR");
-                _insert.setString(5, C);
-                int row = _insert.executeUpdate();
-                txtLog.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
-                //txtLog.append("\r\n\r\n=== " + C);
-            }
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'OR' AND [env] = '" + env + "'";
+            Statement _del = conn.createStatement();
+            _del.execute(SQL);
+            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
+                    "([user_id]" +   // 1
+                    ",[env]" +       // 2
+                    ",[platform]" +  // 3
+                    ",[app]" +       // 4
+                    ",[_conf]" +     // 5
+                    ") VALUES (" +
+                    "?" +
+                    ",?" +
+                    ",?" +
+                    ",?" +
+                    ",?" +
+                    ")");
+            _insert.setString(1, UserID);
+            _insert.setString(2, env);
+            _insert.setString(3, "WEB");
+            _insert.setString(4, "Station");
+            _insert.setString(5, C);
+            int row = _insert.executeUpdate();
+            conn.close(); 
+            
+            txtLog.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+
         } catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1173,7 +1204,6 @@ public class Station extends javax.swing.JInternalFrame {
     JSONArray JArray_ITEMS;
     private boolean Load;
     private static Duration DD;
-    private static SwingWorker BW1;  
   
     private int SitesLastRow = -1; 
     private int BrandsLastRow = -1; 

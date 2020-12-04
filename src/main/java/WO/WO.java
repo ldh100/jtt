@@ -603,7 +603,8 @@ public class WO extends javax.swing.JInternalFrame {
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
         //txtLog.setText("");
-        txtLog.append("=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
+        txtLog.append("\r\n=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         Wait = (double)nWaitElement.getValue();
         Timeout = (double)nWaitLoad.getValue();
         sleep = (double)nShowPage.getValue() *1000;
@@ -637,13 +638,16 @@ public class WO extends javax.swing.JInternalFrame {
         if(_headless.isSelected()) {
             txtLog.append("\r\n=== Headless mode is selected - Browser is hidden");
             txtLog.append("\r\n=== Please wait for report...\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         txtLog.append("\r\n=== Starting Web Driver...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.start();
         r_type = "ad-hoc";
 
         if(Driver()){
             txtLog.append("\r\n=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             sw1.reset();
             LOG_START(); // ========================================================
@@ -652,65 +656,65 @@ public class WO extends javax.swing.JInternalFrame {
             }
             catch (InterruptedException ex) {
                 txtLog.append("Execute WO  " + ex.getMessage());
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         }
     }//GEN-LAST:event_btnRunMouseClicked
     private void Execute() throws InterruptedException{
         Instant dw_start = Instant.now();
-                New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
-                if (_login.isSelected()) { 
-                    SCOPE += "Login";
-                    EX += " - " + "\t" + " === Login " + "\t" + " ===== " + "\t" + " == Login Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                    __login.run();
-                    EX += " - " + "\t" + " === ^ Login " + "\t" + " ===== " + "\t" + " == ^ Login End " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                    Thread.sleep(1500);
-                }
+        New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
+        if (_login.isSelected()) { 
+            SCOPE += "Login";
+            EX += " - " + "\t" + " === Login " + "\t" + " ===== " + "\t" + " == Login Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            __login.run();
+            EX += " - " + "\t" + " === ^ Login " + "\t" + " ===== " + "\t" + " == ^ Login End " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }
 
-                if (_orders.isSelected()) { 
-                    SCOPE += ", Orders";
-                    EX += " - " + "\t" + " === Orders" + "\t" + " ===== " + "\t" + " == Orders Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-                    __orders.run();
-                    EX += " - " + "\t" + " === ^ Orders" + "\t" + " ===== " + "\t" + " == ^ Orders End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                    Thread.sleep(1500);
-                }
-                  
+        if (_orders.isSelected()) { 
+            SCOPE += ", Orders";
+            EX += " - " + "\t" + " === Orders" + "\t" + " ===== " + "\t" + " == Orders Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            __orders.run();
+            EX += " - " + "\t" + " === ^ Orders" + "\t" + " ===== " + "\t" + " == ^ Orders End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }
 
 
-                // ============================== Last Blocks
-                if (_logout.isSelected()) { 
-                    SCOPE += ", LogOut";
-                    EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-                    __logout.run();
-                    EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-                    Thread.sleep(1500);
-                }
-                if (_password.isSelected()) { 
-                    SCOPE += ", Forgot PW";  
-                    EX += " - " + "\t" + " === Forgot PW" + "\t" + " ===== " + "\t" + " == Forgot PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-                    __password.run();
-                    EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-                    Thread.sleep(1500);
-                
-                }                    
-                if(_f > 0) {
-                    txtLog.append("=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)");
-                }else{
-                    txtLog.append("=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter));  
-                }                     
+
+        // ============================== Last Blocks
+        if (_logout.isSelected()) { 
+            SCOPE += ", LogOut";
+            EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            __logout.run();
+            EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }
+        if (_password.isSelected()) { 
+            SCOPE += ", Forgot PW";  
+            EX += " - " + "\t" + " === Forgot PW" + "\t" + " ===== " + "\t" + " == Forgot PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            __password.run();
+            EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+
+        }                                    
         if(_f > 0) {
-            txtLog.append("=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)");
+            txtLog.append("\r\n=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }else{
-            txtLog.append("=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter));  
+            txtLog.append("\r\n=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter));  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }         
         Done(dw_start);
     }
     private void Done(Instant dw_start){
-        txtLog.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");                
+        txtLog.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());                 
         EX = "WO " + env + " - v" + Ver + 
         " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
          "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
          + EX;
         txtLog.append("\r\n" + EX.replaceAll("\t", " > ")); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         Last_EX = EX;
         try  { 
             if(d1 != null) {
@@ -750,14 +754,17 @@ public class WO extends javax.swing.JInternalFrame {
                                                                 ", p90: " + df.format(p_90);
                 }
                 txtLog.append("\r\n" + t_rep);
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } catch(Exception ex){
             txtLog.append("\r\n\r\n=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }  
         btnRun.setEnabled(true);
         txtLog.append("\r\n=== Duration: " + (DD.toHours()) + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
         txtLog.append("\r\n=== " + Summary); // Summary shown in EX top
         txtLog.append("\r\n=== Scope: " + SCOPE); // SCOPE shown in EX top
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         //this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));   
         if(!"".equals(F.trim())){
             btnFails.setEnabled(true);
@@ -772,6 +779,7 @@ public class WO extends javax.swing.JInternalFrame {
         String R = Func.SHOW_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
     }//GEN-LAST:event_btnLogMouseClicked
 
@@ -780,6 +788,7 @@ public class WO extends javax.swing.JInternalFrame {
         String R = Func.SHOW_FILE(F, "txt");
         if(!R.equals("OK")){
             txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
     }//GEN-LAST:event_btnFailsMouseClicked
 
@@ -789,6 +798,7 @@ public class WO extends javax.swing.JInternalFrame {
             //            Send_File_to_Slack("1", "2", "3");
             //        } catch (IOException ex) {
             //            txtLog.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
+//                        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             //        }
         btnExel.setEnabled(false);
         Report();
@@ -845,6 +855,7 @@ public class WO extends javax.swing.JInternalFrame {
         try {
             String cwd = System.getProperty("user.dir");
             txtLog.append("\r\n\r\n=== CWD: " + cwd);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             if(WsOS.toLowerCase().contains("windows")){
                 System.setProperty("webdriver.chrome.driver", cwd + "/chromedriver.exe");                
             }
@@ -879,6 +890,7 @@ public class WO extends javax.swing.JInternalFrame {
         }
         catch (Exception ex) {
             txtLog.append("\r\n\r\n=== Web Driver > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return false;
         }   
@@ -910,14 +922,14 @@ public class WO extends javax.swing.JInternalFrame {
     }
     private void Get_WO_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
-                rs.next();
-                WO_TKN = rs.getString(1);
-            }
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
+            rs.next();
+            WO_TKN = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== WO_TKN > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -925,16 +937,17 @@ public class WO extends javax.swing.JInternalFrame {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Sites ...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.start();
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() +
-                        "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-                rs.next();
-                appId = rs.getString(1);
-            }
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() +
+                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
+            rs.next();
+            appId = rs.getString(1);
+            conn.close();
         } catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== Get S_OAuth_TKN > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
@@ -1002,16 +1015,19 @@ public class WO extends javax.swing.JInternalFrame {
             DV1.getColumnModel().getColumn(3).setPreferredWidth(400);
    
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage());    
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+                txtLog.append("\r\n- Exception: " + ex.getMessage());   
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         }
         txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
         if (DV1.getRowCount() > 0) {
@@ -1039,6 +1055,7 @@ public class WO extends javax.swing.JInternalFrame {
         d1LastRow = DV1.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Brands ...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.start();     
         
         String[] BrandsColumnsName = {"Station","Location","Brand Id", "Unit ID"}; 
@@ -1097,16 +1114,19 @@ public class WO extends javax.swing.JInternalFrame {
             DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
             DV2.getColumnModel().getColumn(2).setPreferredWidth(80);
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());     
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage());   
+                txtLog.append("\r\n- Exception: " + ex.getMessage());  
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());  
             }
         } 
         txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
    
         if (DV2.getRowCount() > 0) {
@@ -1144,6 +1164,7 @@ public class WO extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             CONFIG = false;
             txtLog.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
@@ -1177,13 +1198,16 @@ public class WO extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("cmbPromo:")); c = c.substring(0, c.indexOf("\r\n")).trim(); PROMO = c.substring(c.indexOf(" ")).trim();
                 CONFIG = true;
                 txtLog.append("\r\n\r\n=== LOAD_CONFIG > OK");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             } else {
                 CONFIG = false;
                 txtLog.append("\r\n\r\n=== WEB / WO, User: " + UserID + ", Env: " + env + " > No saved Configuration Found");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } catch (Exception ex) {
             CONFIG = false;
             txtLog.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1227,156 +1251,158 @@ public class WO extends javax.swing.JInternalFrame {
 
         } catch (Exception ex)  {
             txtLog.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }
         
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'WO' AND [env] = '" + env + "'";
-                Statement _del = conn.createStatement();
-                _del.execute(SQL);
-                PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
-                        "([user_id]" +   // 1
-                        ",[env]" +       // 2
-                        ",[platform]" +  // 3
-                        ",[app]" +       // 4
-                        ",[_conf]" +     // 5
-                        ") VALUES (" +
-                        "?" +
-                        ",?" +
-                        ",?" +
-                        ",?" +
-                        ",?" +
-                        ")");
-                _insert.setString(1, UserID);
-                _insert.setString(2, env);
-                _insert.setString(3, "WEB");
-                _insert.setString(4, "WO");
-                _insert.setString(5, C);
-                int row = _insert.executeUpdate();
-                txtLog.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
-                //txtLog.append("\r\n\r\n=== " + C);
-            }
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'WO' AND [env] = '" + env + "'";
+            Statement _del = conn.createStatement();
+            _del.execute(SQL);
+            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
+                    "([user_id]" +   // 1
+                    ",[env]" +       // 2
+                    ",[platform]" +  // 3
+                    ",[app]" +       // 4
+                    ",[_conf]" +     // 5
+                    ") VALUES (" +
+                    "?" +
+                    ",?" +
+                    ",?" +
+                    ",?" +
+                    ",?" +
+                    ")");
+            _insert.setString(1, UserID);
+            _insert.setString(2, env);
+            _insert.setString(3, "WEB");
+            _insert.setString(4, "WO");
+            _insert.setString(5, C);
+            int row = _insert.executeUpdate();
+            conn.close(); 
+            
+            txtLog.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+
         } catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void LOG_UPDATE(){  
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET " +
-                        " [Date] = ?" +       // 1
-                        ", [Time] = ?" +      // 2
-                        ", [app] = ?" +       // 3
-                        ", [url] = ?" +       // 4
-                        ", [summary] = ?" +   // 5
-                        ", [t_calls] = ?" +   // 6
-                        ", [t_min] = ?" +     // 7
-                        ", [t_avg] = ?" +     // 8
-                        ", [t_max] = ?" +     // 9
-                        ", [p_50] = ?" +      // 10
-                        ", [p_90] = ?" +      // 11
-                        ", [test_type] = ?" +     // 12
-                        ", [user_id] = ?" +       // 13
-                        ", [user_ws] = ?" +       // 14
-                        ", [env] = ?" +       // 15
-                        ", [Result] = ?" +    // 16
-                        ", [Status] = ?" +    // 17
-                        ", [Excel] = ?" +     // 18
-                        " WHERE [app] = 'WO_" + env + "' AND [Status] = 'Running'");
-                _update.setString(1, LocalDateTime.now().format(Date_formatter));
-                _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
-                _update.setString(3, "WO_" + env);
-                _update.setString(4, url);
-                _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
-                _update.setInt(6, t_calls);
-                _update.setDouble(7, t_min);
-                _update.setDouble(8, t_avg);
-                _update.setDouble(9, t_max);
-                _update.setDouble(10, p_50);
-                _update.setDouble(11, p_90);
-                _update.setString(12, r_type);
-                _update.setString(13, UserID);
-                _update.setString(14, WsID);
-                _update.setString(15, cmbBrow.getSelectedItem().toString());
-                _update.setString(16, txtLog.getText());
-                _update.setString(17, "Scope: " + SCOPE);
-                _update.setString(18, EX);
-                int row = _update.executeUpdate();
-            }
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET " +
+                    " [Date] = ?" +       // 1
+                    ", [Time] = ?" +      // 2
+                    ", [app] = ?" +       // 3
+                    ", [url] = ?" +       // 4
+                    ", [summary] = ?" +   // 5
+                    ", [t_calls] = ?" +   // 6
+                    ", [t_min] = ?" +     // 7
+                    ", [t_avg] = ?" +     // 8
+                    ", [t_max] = ?" +     // 9
+                    ", [p_50] = ?" +      // 10
+                    ", [p_90] = ?" +      // 11
+                    ", [test_type] = ?" +     // 12
+                    ", [user_id] = ?" +       // 13
+                    ", [user_ws] = ?" +       // 14
+                    ", [env] = ?" +       // 15
+                    ", [Result] = ?" +    // 16
+                    ", [Status] = ?" +    // 17
+                    ", [Excel] = ?" +     // 18
+                    " WHERE [app] = 'WO_" + env + "' AND [Status] = 'Running'");
+            _update.setString(1, LocalDateTime.now().format(Date_formatter));
+            _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
+            _update.setString(3, "WO_" + env);
+            _update.setString(4, url);
+            _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
+            _update.setInt(6, t_calls);
+            _update.setDouble(7, t_min);
+            _update.setDouble(8, t_avg);
+            _update.setDouble(9, t_max);
+            _update.setDouble(10, p_50);
+            _update.setDouble(11, p_90);
+            _update.setString(12, r_type);
+            _update.setString(13, UserID);
+            _update.setString(14, WsID);
+            _update.setString(15, cmbBrow.getSelectedItem().toString());
+            _update.setString(16, txtLog.getText());
+            _update.setString(17, "Scope: " + SCOPE);
+            _update.setString(18, EX);
+            int row = _update.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== LOG_UPDATE > SQL ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void LOG_START(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] (" +
-                        "[Date]" +   // 1
-                        ", [Time]" +   // 2
-                        ", [app]" +   // 3
-                        ", [url]" +   // 4
-                        ", [summary]" +   // 5
-                        ", [t_calls]" +   // 6
-                        ", [t_min]" +   // 7
-                        ", [t_avg]" +   // 8
-                        ", [t_max]" +   // 9
-                        ", [p_50]" +   // 10
-                        ", [p_90]" +   // 11
-                        ", [test_type]" +   // 12
-                        ", [user_id]" +   // 13
-                        ", [user_ws]" +   // 14
-                        ", [env]" +   // 15
-                        ", [Result]" +   // 16
-                        ", [Status]" +   // 17
-                        ", [Excel]" +     // 18
-                        ") VALUES (" +
-                        "?" +     // 1
-                        ",?" +    // 2
-                        ",?" +    // 3
-                        ",?" +    // 4
-                        ",?" +    // 5
-                        ",?" +    // 6
-                        ",?" +    // 7
-                        ",?" +    // 8
-                        ",?" +    // 9
-                        ",?" +    // 10
-                        ",?" +    // 11
-                        ",?" +    // 12
-                        ",?" +    // 13
-                        ",?" +    // 14
-                        ",?" +    // 15
-                        ",?" +    // 16
-                        ",?" +    // 17
-                        ",?" +    // 18
-                        ")");
-                _insert.setString(1, LocalDateTime.now().format(Date_formatter));
-                _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
-                _insert.setString(3, "WO_" + env);
-                _insert.setString(4, url);
-                _insert.setString(5, "Running...");
-                _insert.setString(6, "0");
-                _insert.setString(7, "0");
-                _insert.setString(8, "0");
-                _insert.setString(9, "0");
-                _insert.setString(10, "0");
-                _insert.setString(11, "0");
-                _insert.setString(12, r_type);
-                _insert.setString(13, UserID);
-                _insert.setString(14, WsID);
-                _insert.setString(15, cmbBrow.getSelectedItem().toString());
-                _insert.setString(16, "=== Job is running... ===\r\n" + "");
-                _insert.setString(17, "Running");
-                _insert.setString(18, "None");
-                int row = _insert.executeUpdate();
-//            txtLog.append("\r\n\r\n=== LOG_START > OK (" + row + " row)");
-            }
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] (" +
+                    "[Date]" +   // 1
+                    ", [Time]" +   // 2
+                    ", [app]" +   // 3
+                    ", [url]" +   // 4
+                    ", [summary]" +   // 5
+                    ", [t_calls]" +   // 6
+                    ", [t_min]" +   // 7
+                    ", [t_avg]" +   // 8
+                    ", [t_max]" +   // 9
+                    ", [p_50]" +   // 10
+                    ", [p_90]" +   // 11
+                    ", [test_type]" +   // 12
+                    ", [user_id]" +   // 13
+                    ", [user_ws]" +   // 14
+                    ", [env]" +   // 15
+                    ", [Result]" +   // 16
+                    ", [Status]" +   // 17
+                    ", [Excel]" +     // 18
+                    ") VALUES (" +
+                    "?" +     // 1
+                    ",?" +    // 2
+                    ",?" +    // 3
+                    ",?" +    // 4
+                    ",?" +    // 5
+                    ",?" +    // 6
+                    ",?" +    // 7
+                    ",?" +    // 8
+                    ",?" +    // 9
+                    ",?" +    // 10
+                    ",?" +    // 11
+                    ",?" +    // 12
+                    ",?" +    // 13
+                    ",?" +    // 14
+                    ",?" +    // 15
+                    ",?" +    // 16
+                    ",?" +    // 17
+                    ",?" +    // 18
+                    ")");
+            _insert.setString(1, LocalDateTime.now().format(Date_formatter));
+            _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
+            _insert.setString(3, "WO_" + env);
+            _insert.setString(4, url);
+            _insert.setString(5, "Running...");
+            _insert.setString(6, "0");
+            _insert.setString(7, "0");
+            _insert.setString(8, "0");
+            _insert.setString(9, "0");
+            _insert.setString(10, "0");
+            _insert.setString(11, "0");
+            _insert.setString(12, r_type);
+            _insert.setString(13, UserID);
+            _insert.setString(14, WsID);
+            _insert.setString(15, cmbBrow.getSelectedItem().toString());
+            _insert.setString(16, "=== Job is running... ===\r\n" + "");
+            _insert.setString(17, "Running");
+            _insert.setString(18, "None");
+            int row = _insert.executeUpdate();
+            conn.close();
         }  catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== LOG_START > SQL ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1410,8 +1436,10 @@ public class WO extends javax.swing.JInternalFrame {
 
             
             txtLog.append("\r\n\r\n=== Send_File_to_Slack >  No error" + "\r\n" + RES);
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }catch(IOException ex) {
             txtLog.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1420,6 +1448,7 @@ public class WO extends javax.swing.JInternalFrame {
         if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             txtLog.append("\r\n\r\n=== Report > Not Excel");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }   
         try {
@@ -1444,6 +1473,7 @@ public class WO extends javax.swing.JInternalFrame {
             Func.fExcel((l - 1), col, Values, "WO_" + env + "_" + Date, Top_Row, 0, 0, null, " ", " ");
         } catch (IOException ex) {
             txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         Runtime.getRuntime().gc();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1452,7 +1482,6 @@ public class WO extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
     private boolean Load;
     private static Duration DD;
-    private static SwingWorker BW1;  
   
     private int d1LastRow = -1; 
     private int d2LastRow = -1; 

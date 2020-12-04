@@ -10,6 +10,7 @@ import Reports.W_Report;
 import DL.DL;
 import FW.FW;
 import WO.WO;
+import Orders.Orders;
 import Station.Station;
 import java.awt.Cursor;
 import java.beans.PropertyVetoException;
@@ -61,6 +62,7 @@ public class A extends javax.swing.JFrame {
         Menu_DL = new javax.swing.JMenu();
         Menu_API = new javax.swing.JMenu();
         MenuStation = new javax.swing.JMenu();
+        Menu_OR = new javax.swing.JMenu();
         MenuReports = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -143,6 +145,15 @@ public class A extends javax.swing.JFrame {
             }
         });
         MenuBar.add(MenuStation);
+
+        Menu_OR.setText("Orders");
+        Menu_OR.setName("Station"); // NOI18N
+        Menu_OR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_ORMouseClicked(evt);
+            }
+        });
+        MenuBar.add(Menu_OR);
 
         MenuReports.setBorder(null);
         MenuReports.setText("Reports");
@@ -413,6 +424,39 @@ public class A extends javax.swing.JFrame {
         dl.setSelected(true);
         F_COUNT++;  
     }
+    private void Open_OR() throws PropertyVetoException {
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("OR")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
+        Orders or = new Orders();
+        this.DesktopPane.add(or);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        or.setLocation(X*20, Y*20);
+        or.show();
+        or.setSelected(true);
+        F_COUNT++;  
+    }
 
     private void Menu_FWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_FWMouseClicked
         if(Menu_FW.isVisible()){
@@ -551,6 +595,24 @@ public class A extends javax.swing.JFrame {
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         Menu_DL.setEnabled(true); 
     }//GEN-LAST:event_Menu_DLMouseClicked
+
+    private void Menu_ORMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_ORMouseClicked
+        if(!Menu_OR.isEnabled()){
+            return;
+        }
+        Menu_OR.setEnabled(false);
+        MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        try {
+            Open_OR();
+        }
+        catch (PropertyVetoException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+        Menu_OR.setEnabled(true); 
+    }//GEN-LAST:event_Menu_ORMouseClicked
     private void Get_Version() {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         Version =  "?"; 
@@ -703,6 +765,7 @@ public class A extends javax.swing.JFrame {
     private javax.swing.JMenu Menu_API;
     private javax.swing.JMenu Menu_DL;
     private javax.swing.JMenu Menu_FW;
+    private javax.swing.JMenu Menu_OR;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>   
 }
