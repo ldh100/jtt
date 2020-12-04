@@ -647,11 +647,126 @@ public class WO extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             sw1.reset();
             LOG_START(); // ========================================================
-            BW1_DoWork(
-                // parameters?
-            );
+            try {
+                Execute();
+            }
+            catch (InterruptedException ex) {
+                txtLog.append("Execute WO  " + ex.getMessage());
+            }
         }
     }//GEN-LAST:event_btnRunMouseClicked
+    private void Execute() throws InterruptedException{
+        Instant dw_start = Instant.now();
+                New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
+                if (_login.isSelected()) { 
+                    SCOPE += "Login";
+                    EX += " - " + "\t" + " === Login " + "\t" + " ===== " + "\t" + " == Login Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    __login.run();
+                    EX += " - " + "\t" + " === ^ Login " + "\t" + " ===== " + "\t" + " == ^ Login End " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
+                }
+
+                if (_orders.isSelected()) { 
+                    SCOPE += ", Orders";
+                    EX += " - " + "\t" + " === Orders" + "\t" + " ===== " + "\t" + " == Orders Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    __orders.run();
+                    EX += " - " + "\t" + " === ^ Orders" + "\t" + " ===== " + "\t" + " == ^ Orders End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
+                }
+                  
+
+
+                // ============================== Last Blocks
+                if (_logout.isSelected()) { 
+                    SCOPE += ", LogOut";
+                    EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    __logout.run();
+                    EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
+                }
+                if (_password.isSelected()) { 
+                    SCOPE += ", Forgot PW";  
+                    EX += " - " + "\t" + " === Forgot PW" + "\t" + " ===== " + "\t" + " == Forgot PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    __password.run();
+                    EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
+                
+                }                    
+                if(_f > 0) {
+                    txtLog.append("=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)");
+                }else{
+                    txtLog.append("=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter));  
+                }                     
+        if(_f > 0) {
+            txtLog.append("=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)");
+        }else{
+            txtLog.append("=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter));  
+        }         
+        Done(dw_start);
+    }
+    private void Done(Instant dw_start){
+        txtLog.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");                
+        EX = "WO " + env + " - v" + Ver + 
+        " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
+         "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
+         + EX;
+        txtLog.append("\r\n" + EX.replaceAll("\t", " > ")); 
+        Last_EX = EX;
+        try  { 
+            if(d1 != null) {
+                d1.quit(); 
+            }
+        }  
+        catch (Exception ex)  { 
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        } 
+        DD = Duration.between(dw_start, Instant.now());
+        Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
+
+        try {
+            String t_rep = "";
+            if (!"".equals(r_time.trim())) {
+                double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
+                if (am0.length > 0)
+                {
+                    Arrays.sort(am0);
+                    double total = 0;
+                    for(int i=0; i < am0.length; i++){
+                        total = total + am0[i];
+                    }
+                    t_calls = am0.length;
+                    t_min = am0[0] / (double)1000;
+                    t_avg = (total / am0.length) / (double)1000;
+                    t_max = am0[am0.length - 1]  / (double)1000; 
+                    p_50 = Func.p50(am0) / (double)1000;
+                    p_90 = Func.p90(am0) / (double)1000;
+
+                    DecimalFormat df = new DecimalFormat("#.##");
+                    t_rep += "=== Total Calls: " + t_calls + ", Response Times (sec) - Min: " + df.format(t_min) +
+                                                                ", Avg: " + df.format(t_avg) +
+                                                                ", Max: " + df.format(t_max) +
+                                                                ", p50: " + df.format(p_50) +
+                                                                ", p90: " + df.format(p_90);
+                }
+                txtLog.append("\r\n" + t_rep);
+            }
+        } catch(Exception ex){
+            txtLog.append("\r\n\r\n=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage());
+        }  
+        btnRun.setEnabled(true);
+        txtLog.append("\r\n=== Duration: " + (DD.toHours()) + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
+        txtLog.append("\r\n=== " + Summary); // Summary shown in EX top
+        txtLog.append("\r\n=== Scope: " + SCOPE); // SCOPE shown in EX top
+        //this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));   
+        if(!"".equals(F.trim())){
+            btnFails.setEnabled(true);
+        } else{
+            btnFails.setEnabled(false);
+        }
+        btnExel.setEnabled(true);
+        LOG_UPDATE(); // ========================================================
+    }
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
         String R = Func.SHOW_FILE(txtLog.getText(), "txt");
@@ -768,130 +883,6 @@ public class WO extends javax.swing.JInternalFrame {
             return false;
         }   
 
-    }
-    private void BW1_DoWork() { 
-        BW1 = new SwingWorker() {             
-            Instant dw_start = Instant.now();
-
-            @Override
-            protected String doInBackground() throws Exception   { // define what thread will do here 
-                New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
-                if (_login.isSelected()) { 
-                    SCOPE += "Login";
-                    EX += " - " + "\t" + " === Login " + "\t" + " ===== " + "\t" + " == Login >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                    __login.run();
-                    EX += " - " + "\t" + " === ^ Login " + "\t" + " ===== " + "\t" + " == ^ Login " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                    Thread.sleep(1500);
-                }
-
-                if (_orders.isSelected()) { 
-                    SCOPE += ", Orders";
-                    EX += " - " + "\t" + " === Orders" + "\t" + " ===== " + "\t" + " == Orders Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-                    __orders.run();
-                    EX += " - " + "\t" + " === ^ Orders" + "\t" + " ===== " + "\t" + " == ^ Orders End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                    Thread.sleep(1500);
-                }
-                  
-
-
-                // ============================== Last Blocks
-                if (_logout.isSelected()) { 
-                    SCOPE += ", LogOut";
-                    EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-                    __logout.run();
-                    EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-                    Thread.sleep(1500);
-                }
-                if (_password.isSelected()) { 
-                    SCOPE += ", Forgot PW";  
-                    EX += " - " + "\t" + " === Forgot PW" + "\t" + " ===== " + "\t" + " == Forgot PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-                    __password.run();
-                    EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-                    Thread.sleep(1500);
-                
-                }                    
-                if(_f > 0) {
-                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
-                }else{
-                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter);  
-                } 
-            }  
-            @Override
-            protected void done() { 
-
-                txtLog.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");                
-                EX = "WO " + env + " - v" + Ver + 
-                " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
-                 "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
-                 + EX;
-                txtLog.append("\r\n" + EX.replaceAll("\t", " > ")); 
-                Last_EX = EX;
-                try  { 
-
-                    String statusMsg = (String) get(); 
-                    txtLog.append("\r\n" + statusMsg);   
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-                    
-
-                    BW1 = null;
-                    
-                    if(d1 != null) {
-                        d1.quit(); 
-                    }
-                }  
-                catch (InterruptedException | ExecutionException ex)  { 
-                    txtLog.append("\r\n- Exception: " + ex.getMessage()); 
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-                } 
-                DD = Duration.between(dw_start, Instant.now());
-                Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
-                
-                try {
-                    String t_rep = "";
-                    if (!"".equals(r_time.trim())) {
-                        double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
-                        if (am0.length > 0)
-                        {
-                            Arrays.sort(am0);
-                            double total = 0;
-                            for(int i=0; i < am0.length; i++){
-                                total = total + am0[i];
-                            }
-                            t_calls = am0.length;
-                            t_min = am0[0] / (double)1000;
-                            t_avg = (total / am0.length) / (double)1000;
-                            t_max = am0[am0.length - 1]  / (double)1000; 
-                            p_50 = Func.p50(am0) / (double)1000;
-                            p_90 = Func.p90(am0) / (double)1000;
-                            
-                            DecimalFormat df = new DecimalFormat("#.##");
-                            t_rep += "=== Total Calls: " + t_calls + ", Response Times (sec) - Min: " + df.format(t_min) +
-                                                                        ", Avg: " + df.format(t_avg) +
-                                                                        ", Max: " + df.format(t_max) +
-                                                                        ", p50: " + df.format(p_50) +
-                                                                        ", p90: " + df.format(p_90);
-                        }
-                        txtLog.append("\r\n" + t_rep);
-                    }
-                } catch(Exception ex){
-                    txtLog.append("\r\n\r\n=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage());
-                }  
-                btnRun.setEnabled(true);
-                txtLog.append("\r\n=== Duration: " + (DD.toHours()) + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
-                txtLog.append("\r\n=== " + Summary); // Summary shown in EX top
-                txtLog.append("\r\n=== Scope: " + SCOPE); // SCOPE shown in EX top
-                //this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));   
-                if(!"".equals(F.trim())){
-                    btnFails.setEnabled(true);
-                } else{
-                    btnFails.setEnabled(false);
-                }
-                btnExel.setEnabled(true);
-                LOG_UPDATE(); // ========================================================
-            } 
-        }; 
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        BW1.execute();  // executes the swingworker on worker thread 
     }
     private void LOAD_ENV(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
