@@ -1373,9 +1373,11 @@ public class DL extends javax.swing.JInternalFrame {
     }
       
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
+    public static String url = "";
+    public static String env = "";
+
     private boolean Load;
     private static Duration DD;
-  
     private int d1LastRow = -1; 
     private int d2LastRow = -1; 
     private List<String> GROUP_IDS;
@@ -1387,21 +1389,20 @@ public class DL extends javax.swing.JInternalFrame {
     private String userTKN;
     public static int T_Index;
     private String Last_EX;    
-    public static Stopwatch sw1 = Stopwatch.createUnstarted();
-    public static DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
-    public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-    public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    public static String SQL = ""; 
+    private static final Stopwatch sw1 = Stopwatch.createUnstarted();
+    private static final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
+    private static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    private static String SQL = ""; 
     private String SCOPE;
-    public static String DL_TKN = "";    
-    public static String url = "";
-    public static String env = "";
-    public static String MANUF = "";
-    public static String ManID = "";
-    public static String CATEGORY = "";
-    public static String CatID = "";
-    public static String BaseAPI = "";
-    public static String CAN = "Canada";
+    private static String DL_TKN = "";    
+
+    private static String MANUF = "";
+    private static String ManID = "";
+    private static String CATEGORY = "";
+    private static String CatID = "";
+    private static String BaseAPI = "";
+    private static String CAN = "Canada";
 
     
     public static String S_OAuth_TKN = "";

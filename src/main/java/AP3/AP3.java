@@ -2156,7 +2156,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private String SCOPE;
     
     public static String New_ID = "";
-    public static String Toast_Msg = "";   
+    private static String Toast_Msg = "";   
     public static String Tab_Name;
     
     public static String Day;
@@ -2173,16 +2173,16 @@ public class AP3 extends javax.swing.JInternalFrame {
     public static String IM_ID; 
     public static String IM_PW;
     
-    public static String S_OAuth_TKN = "";
-    public static String S_Client_ID = "";
-    public static String S_Client_Secret  = "";
-    public static String S_Signing_Secret = "";
-    public static String S_Hook = "";
+    private static String S_OAuth_TKN = "";
+    private static String S_Client_ID = "";
+    private static String S_Client_Secret  = "";
+    private static String S_Signing_Secret = "";
+    private static String S_Hook = "";
     
-    public static String AP3_TKN = "";    
+    private static String AP3_TKN = "";    
     public static String url = "";
     public static String app = "";
-    public static String appId = "";
+    private static String appId = "";
     public static String env = "";
     public static String platform = "CDL";
     public static String BaseAPI;

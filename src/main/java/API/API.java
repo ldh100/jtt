@@ -558,7 +558,7 @@ public class API extends javax.swing.JInternalFrame {
         jPanel1.add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 120, -1));
 
         btnSCart.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnSCart.setText("< Shopping Card");
+        btnSCart.setText("< SCart & Order");
         btnSCart.setEnabled(false);
         btnSCart.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnSCart.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1349,7 +1349,7 @@ public class API extends javax.swing.JInternalFrame {
                     "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
             rs.next();
             Realm = rs.getString(1);
-        conn.close();
+            conn.close();
         } catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== Get P2 Realm ID > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1431,8 +1431,9 @@ public class API extends javax.swing.JInternalFrame {
             ZoneOffset offset = OffsetDateTime.now( ZoneId.of(TimeZone.getDefault().getID())).getOffset();
             DateTimeFormatter UTC_formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
             DateTimeFormatter LOC_formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy hh:mm a");
-            LocalDateTime LOC;
-
+            LocalDateTime LocDate;
+            SCART_IDS = new ArrayList<>();
+            ORDER_IDS = new ArrayList<>();
             DefaultListModel<String> model = new DefaultListModel<>();
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             JSONArray OR = json.getJSONArray("orders");
@@ -1446,14 +1447,14 @@ public class API extends javax.swing.JInternalFrame {
                     if (is.getBoolean("accepted")) A = "  Accepted ";
                     if (is.getBoolean("in_progress")) A = "  In_Progress ";
                     if (is.getBoolean("ready")) A = "  Ready ";
-                    
-                    LOC = LocalDateTime.parse(or.getString("requested_date"), UTC_formatter).plusSeconds(offset.getTotalSeconds());
-                    D = LOC.format(LOC_formatter);
+                    SCART_IDS.add(or.getString("shoppingcart"));
+                    ORDER_IDS.add(or.getString("id"));
+                    LocDate = LocalDateTime.parse(or.getString("requested_date"), UTC_formatter).plusSeconds(offset.getTotalSeconds());
+                    D = LocDate.format(LOC_formatter);
                     model.addElement(D + " " + A + 
                         " - " + or.getJSONObject("details").getString("order_type") +
                         ", ID: " + or.getJSONObject("details").getString("display_id") +
-                        ", Destination: '" + or.getJSONObject("details").getString("destination") +
-                        "',  === Shopping Cart: " + or.getString("shoppingcart"));
+                        ", Destination: '" + or.getJSONObject("details").getString("destination") + "'");
                 }    
             }
             jList_Orders.setModel(model);  
@@ -1707,19 +1708,22 @@ public class API extends javax.swing.JInternalFrame {
         }         
     }//GEN-LAST:event_btnLoc_MenusMouseClicked
     private void btnSCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSCartMouseClicked
-        if(!btnSCart.isEnabled()){
-            return;
+        if(btnSCart.isEnabled()){
+            GetShoppingCartAndOrder();
         }
+    }
+   
+    private void GetShoppingCartAndOrder(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n\r\n- Shopping Cart API..."); 
+        txtLog.append("\r\n\r\n- Shopping Cart..."); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        String J = "==== Shopping Cart" + "\r\n";
+        String J = "==== Shopping Cart and Order" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
+        
         String CartID = "";     
         sw1.start();
         try {
-            CartID = jList_Orders.getSelectedValue();
-            CartID = CartID.substring(CartID.lastIndexOf(" ")).trim();
+            CartID = SCART_IDS.get(jList_Orders.getSelectedIndex());
             HttpGet httpget = new HttpGet(BaseAPI + "/shoppingcart/" + CartID); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -1738,6 +1742,83 @@ public class API extends javax.swing.JInternalFrame {
             J += BaseAPI + "/shoppingcart/" + CartID + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("\r\n- Exception: " + ex.getMessage());  
             txtLog.setCaretPosition(txtLog.getDocument().getLength());    
+        }           
+        txtLog.append("\r\n== " + BaseAPI + "/shoppingcart/" + CartID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();
+        
+        J += "\r\n==== Order" + "\r\n";
+        txtLog.append("\r\n- Order..."); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        String OrderID = "";     
+        sw1.start();
+        try {
+            OrderID = ORDER_IDS.get(jList_Orders.getSelectedIndex());
+            HttpGet httpget = new HttpGet(BaseAPI + "/order/" + OrderID); 
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 500) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            J += BaseAPI + "/order/" + OrderID + "\r\n" + json.toString(4);
+        } catch (IOException | JSONException ex) {
+            J += BaseAPI + "/order/" + OrderID + " > " + ex.getMessage() + "\r\n";  
+            txtLog.append("\r\n- Exception: " + ex.getMessage());  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
+        }  
+        txtLog.append("\r\n== " + BaseAPI + "/order/" + OrderID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();
+
+        try {
+            httpclient.close();
+        } catch (IOException ex) {
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
+        } 
+        
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        String R = Func.SHOW_FILE(J, "json");
+        if(!R.equals("OK")){
+            txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        } 
+    }//GEN-LAST:event_btnSCartMouseClicked
+    private void GetOrder(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("\r\n\r\n- Order API..."); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        String J = "==== Order" + "\r\n";
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        String OrderID = "";     
+        sw1.start();
+        try {
+            OrderID = SCART_IDS.get(jList_Orders.getSelectedIndex());
+            HttpGet httpget = new HttpGet(BaseAPI + "/order/" + OrderID); 
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 500) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            J += BaseAPI + "/order/" + OrderID + "\r\n" + json.toString(4);
+        } catch (IOException | JSONException ex) {
+            J += BaseAPI + "/order/" + OrderID + " > " + ex.getMessage() + "\r\n";  
+            txtLog.append("\r\n- Exception: " + ex.getMessage());  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }   
         
         try {
@@ -1746,7 +1827,7 @@ public class API extends javax.swing.JInternalFrame {
             txtLog.append("\r\n- Exception: " + ex.getMessage()); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
-        txtLog.append("\r\n== " + BaseAPI + "/shoppingcart/" + CartID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("\r\n== " + BaseAPI + "/order/" + OrderID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
 
@@ -1756,11 +1837,11 @@ public class API extends javax.swing.JInternalFrame {
             txtLog.append(R);
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
-    }//GEN-LAST:event_btnSCartMouseClicked
+    }                                     
 
     private void jList_OrdersValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList_OrdersValueChanged
         btnSCart.setEnabled(false);
-        if(!evt.getValueIsAdjusting() && jList_Orders.getSelectedValue().contains("Cart")) {
+        if(!evt.getValueIsAdjusting()) {
             btnSCart.setEnabled(true);
         }
     }//GEN-LAST:event_jList_OrdersValueChanged
@@ -2552,44 +2633,45 @@ public class API extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-
-       
+     
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
     private boolean Load;
     private int d1LastRow = -1; 
     private int d2LastRow = -1; 
     private List<String> GROUP_IDS;
     private List<String> COMP_IDS; 
-    private List<String> MENU_IDS;  
+    private List<String> MENU_IDS;
+    private List<String> ORDER_IDS; 
+    private List<String> SCART_IDS; 
     private boolean CONFIG = false;
     private String C = "";
     private String userID;
     private String userTKN;
-    public static int T_Index;
+    private static int T_Index;
     
-    public static Stopwatch sw1 = Stopwatch.createUnstarted();
-    public static DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
-    public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-    public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    public static String SQL = ""; 
+    private static final Stopwatch sw1 = Stopwatch.createUnstarted();
+    private static final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
+    private static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    private static String SQL = ""; 
     
-    public static String AP3_TKN = "";    
-    public static String url = "";
+    private static String AP3_TKN = "";    
+    private static String url = "";
     public static String app = "";
-    public static String appId = "";
-    public static String env = "";
-    public static String SITE = "";
-    public static String SiteID = "";
-    public static String GROUP = "";
-    public static String BRAND = "";
-    public static String BrandID = "";
-    public static String CompanyID = "";
-    public static String GroupID = "";
-    public static String CAN = "CAN";
-    public static String GL_MENU = "TIM HORTONS";
-    public static String platform = "CDL";
-    public static String BaseAPI;
-    public static String TZone; 
+    private static String appId = "";
+    private static String env = "";
+    private static String SITE = "";
+    private static String SiteID = "";
+    private static String GROUP = "";
+    private static String BRAND = "";
+    private static String BrandID = "";
+    private static String CompanyID = "";
+    private static String GroupID = "";
+    private static String CAN = "CAN";
+    private static String GL_MENU = "TIM HORTONS";
+    private static String platform = "CDL";
+    private static String BaseAPI;
+    private static String TZone; 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

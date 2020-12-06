@@ -1222,32 +1222,32 @@ public class FW extends javax.swing.JInternalFrame {
     private String userTKN;
     public static int T_Index;
     private String Last_EX;    
-    public static Stopwatch sw1 = Stopwatch.createUnstarted();
-    public static DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
-    public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-    public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    public static String SQL = ""; 
+    private static final Stopwatch sw1 = Stopwatch.createUnstarted();
+    private static final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
+    private static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    private static String SQL = ""; 
     private String SCOPE;
-    public static String FW_TKN = "";    
+    private static String FW_TKN = "";    
     public static String url = "";
 
-    public static String env = "";
-    public static String RESTORAUNT = "";
-    public static String RestID = "";
+    private static String env = "";
+    private static String RESTORAUNT = "";
+    private static String RestID = "";
 
-    public static String UNIT = "";
-    public static String UnitID = "";
+    private static String UNIT = "";
+    private static String UnitID = "";
 
-    public static String CAN = "CAN";
-    public static String BaseAPI;
-    public static String TZone; 
-    public static String New_ID = "";
+    private static String CAN = "CAN";
+    private static String BaseAPI;
+    private static String TZone; 
+    private static String New_ID = "";
     
-    public static String S_OAuth_TKN = "";
-    public static String S_Client_ID = "";
-    public static String S_Client_Secret  = "";
-    public static String S_Signing_Secret = "";
-    public static String S_Hook = "";
+    private static final String S_OAuth_TKN = "";
+    private static String S_Client_ID = "";
+    private static String S_Client_Secret  = "";
+    private static String S_Signing_Secret = "";
+    private static String S_Hook = "";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;
