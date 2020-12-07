@@ -52,7 +52,8 @@ public class __site {
                 if(t.contains("All")){ T_Index = i; }
             }
         _t++; Thread.sleep((long) sleep); T.Element_Click("Select 'All'", L1.get(T_Index), "no_jira");
-            if (FAIL) { return;}             
+            if (FAIL) { return;}   
+        Thread.sleep(500);           
 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}              
@@ -270,7 +271,8 @@ public class __site {
                 if(t.trim().startsWith("All")){ T_Index = i; }
             }
         _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'All'", L1.get(T_Index), "no_jira");
-            if (FAIL) { return;}               
+            if (FAIL) { return;}         
+        Thread.sleep(500);       
             
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}   
@@ -356,11 +358,13 @@ public class __site {
             
         // <editor-fold defaultstate="collapsed" desc="Training Video">
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Trainig Video Icon Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-help-circle')]", "no_jira"); 
-            if (FAIL) { return;}             
+            if (FAIL) { return;}     
+        Thread.sleep(500);               
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); T.Swith_to_Frame("Swith to Video Player", "tagName", "iframe", "no_jira");// iframe src="https://player.vimeo.com/video/412472158"
             if (FAIL) { return;} 
+        Thread.sleep(500);   
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for Player load", "className", "play-icon", "no_jira"); 
             if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Video Title", "xpath", "//header[contains(@class, 'vp-title-header')]", "textContent","no_jira");
@@ -376,7 +380,8 @@ public class __site {
 
         // <editor-fold defaultstate="collapsed" desc="Site Congiguration">
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
-            if (FAIL) { return;}  
+            if (FAIL) { return;} 
+        Thread.sleep(500);  
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); T.List_L0("Site Configuration sections Count", "xpath", "//div[contains(@class, 'SelectedLeft')]", "no_jira");             
@@ -469,11 +474,13 @@ public class __site {
         }  
         _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back", SITE + "Site Configuration","Station List", "no_jira");
             //if (FAIL) { return;}
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}               
             Thread.sleep(1000);
         _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back", SITE + "Station List","App Sites page", "no_jira");
             //if (FAIL) { return;}
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}               
             Thread.sleep(1000);
@@ -484,6 +491,7 @@ public class __site {
             if (FAIL) { return;}            
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Add New Site Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
             if (FAIL) { return;}
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
         Thread.sleep(500);    
@@ -772,6 +780,7 @@ public class __site {
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("New Site 'Cancel' Click", "xpath", "//*[contains(text(), 'Cancel')]","no_jira");             
             if (FAIL) { return;}         
         _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back","Add New Site page","App Site page", "no_jira"); 
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}           
         Thread.sleep(1000);

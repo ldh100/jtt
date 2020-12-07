@@ -47,7 +47,8 @@ public class __sales_reporting {
                 if(t.contains("All")){ T_Index = i; }
             }
         _t++; Thread.sleep((long) sleep); T.Element_Click("Select 'All'", L1.get(T_Index), "no_jira");
-            if (FAIL) { return;}             
+            if (FAIL) { return;} 
+        Thread.sleep(500);             
 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}              
@@ -88,7 +89,8 @@ public class __sales_reporting {
                 if(t.trim().startsWith("All")){ T_Index = i; }
             }
         _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'All'", L1.get(T_Index), "no_jira");
-            if (FAIL) { return;}               
+            if (FAIL) { return;}    
+        Thread.sleep(500);            
             
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}   
@@ -164,7 +166,8 @@ public class __sales_reporting {
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Default Report Date", "xpath", "//div[contains(@class, 'v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active')]", "no_jira"); 
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Report Date' close", "xpath", "//input[@aria-label='Report Date']", "no_jira"); 
-            if (FAIL) { return;}              
+            if (FAIL) { return;}     
+        Thread.sleep(500);          
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for Date(s) update..", "xpath", "//div[contains(@class, 'v-tabs__div')]", "no_jira");
@@ -205,7 +208,8 @@ public class __sales_reporting {
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Filters...", "xpath", "//i[contains(@class, 'v-icon mdi mdi-filter-variant')]", "no_jira"); 
             if (FAIL) { return;}            
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Export'", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira"); 
-            if (FAIL) { return;}             
+            if (FAIL) { return;}    
+        Thread.sleep(500);          
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}         
         //Thread.sleep(500); 
@@ -230,6 +234,7 @@ public class __sales_reporting {
             if (FAIL) { return;}                 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Report Date' close", "xpath", "//input[@aria-label='Report Date']", "no_jira"); 
             if (FAIL) { return;}  
+        Thread.sleep(500); 
 //            _t++; Thread.sleep((long) sleep); T.Move_out_of_Visible_Element("Close Date Picker", "xpath", "//div[contains(@class, 'v-picker v-card v-picker--date theme--light')]", "Right", 2, 0,"no_jira");             
 //                if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
@@ -300,7 +305,8 @@ public class __sales_reporting {
             }
             
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Export'", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira"); 
-            if (FAIL) { return;}             
+            if (FAIL) { return;}       
+        Thread.sleep(500);       
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}         
         //Thread.sleep(500); 
@@ -314,6 +320,7 @@ public class __sales_reporting {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//button[contains(@type, 'submit')]", "no_jira"); 
             if (FAIL) { return;} 
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); T.Page_URL("Sales Config URL", "no_jira"); 
@@ -373,12 +380,15 @@ public class __sales_reporting {
             }       
 
         _t++; T.Clickable_Element_By_Path_Click("Configuration 'Save' click", "xpath", "//*[contains(text(), 'Save')]","no_jira");
-            if (FAIL) { return;}  // ========== Save All
+            if (FAIL) { return;}  
+        Thread.sleep(500); 
             
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}            
         _t++; T.Refresh("Refresh after Add E-mail", "no_jira");
             if (FAIL) { return;} 
+        Thread.sleep(500); 
+            
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}            
 

@@ -19,7 +19,7 @@ public class __announcements {
             if (FAIL) { return;} 
         _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
             if (FAIL) { return;}
-          
+        Thread.sleep(500);          
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}        
         _t++; Thread.sleep((long) sleep); T.Page_URL("Announcements page URL", "no_jira"); 
@@ -141,7 +141,7 @@ public class __announcements {
             }
         _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'All'", L1.get(T_Index), "no_jira");
             if (FAIL) { return;}               
-            
+        Thread.sleep(500);             
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
@@ -174,6 +174,7 @@ public class __announcements {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Button 'New Announcement' click", "css", "[type='submit']", "no_jira");             
             if (FAIL) { return;}
+        Thread.sleep(500);             
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
          _t++; Thread.sleep((long) sleep); T.Page_URL("New Announcement page URL","no_jira");
@@ -328,7 +329,8 @@ public class __announcements {
                 }
             }     
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Create Announcement Click", "xpath", "//*[contains(text(), 'Create Announcement')]", "no_jira"); 
-            if (FAIL) { return;}   
+            if (FAIL) { return;}  
+        Thread.sleep(500);           
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}   
             
@@ -353,7 +355,8 @@ public class __announcements {
                 }
             }
         _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'All'", L1.get(T_Index), "no_jira");
-            if (FAIL) { return;}                
+            if (FAIL) { return;}  
+        Thread.sleep(500);              
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); T.To_Bottom("no_jira");
@@ -429,6 +432,8 @@ public class __announcements {
         //    
         _t++; Thread.sleep((long) sleep); T.Element_Click("Select Created Announcement", L2.get(1), "no_jira");
             if (FAIL) { return;}
+        Thread.sleep(500);  
+            
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'DELETE ANNOUNCEMENT')]", "no_jira"); 
@@ -512,6 +517,7 @@ public class __announcements {
         Thread.sleep(1000);            
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Delete Announcement Click", "xpath", "//*[contains(text(), 'DELETE ANNOUNCEMENT')]", "no_jira"); 
             if (FAIL) { return;} 
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Delete' dialog", "xpath", "//div[@class='v-dialog v-dialog--active']", "no_jira");
@@ -519,6 +525,7 @@ public class __announcements {
                 Thread.sleep(2000); // DEBUG - wait for page reload bug
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Delete Announcement Click again", "xpath", "//*[contains(text(), 'DELETE ANNOUNCEMENT')]", "no_jira"); 
                     if (FAIL) { return;}  
+                Thread.sleep(500); 
                 _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                     if (FAIL) { return;}
                 _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Delete' dialog again", "xpath", "//div[@class='v-dialog v-dialog--active']", "no_jira");
@@ -533,7 +540,8 @@ public class __announcements {
             _t++; Thread.sleep((long) sleep); T.Element_Child_E2("Find dialog 'Cancel' button", e1, "xpath", ".//*[text()='DELETE']", "no_jira");
                 if (FAIL) { return;}    
             _t++; Thread.sleep((long) sleep); T.Element_Click("Click dialog 'Delete' ", e2, "no_jira");
-                if (FAIL) { return;}                 
+                if (FAIL) { return;}
+            Thread.sleep(500);                  
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Find_Text("Confirm Deleted", "Auto Announcement " + New_ID, false, "no_jira"); 

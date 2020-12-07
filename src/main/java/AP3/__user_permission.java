@@ -55,7 +55,8 @@ public class __user_permission {
         _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
-            if (FAIL) { return;}   
+            if (FAIL) { return;} 
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Visibility("Wait for 'AP3 Welcome...' text", "xpath", "//*[contains(text(), 'Welcome to the CDL Admin Panel')]", "no_jira");             
         if (!FAIL) {  
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -127,6 +128,7 @@ public class __user_permission {
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Brand Name Click", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira"); 
                 if (FAIL) { return;}
+            Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
@@ -298,7 +300,8 @@ public class __user_permission {
         _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
-            if (FAIL) { return;}   
+            if (FAIL) { return;}  
+        Thread.sleep(500);  
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Visibility("Wait for 'Hey There...' text", "xpath", "//*[contains(text(), 'Hey There ')]", "no_jira");             
         if (!FAIL) {  
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -367,6 +370,7 @@ public class __user_permission {
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Brand Name Click", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira"); 
                 if (FAIL) { return;}
+            Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
@@ -475,7 +479,8 @@ public class __user_permission {
         _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
-            if (FAIL) { return;}   
+            if (FAIL) { return;}  
+        Thread.sleep(500);  
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Visibility("Wait for 'Hey There...' text", "xpath", "//*[contains(text(), 'Hey There ')]", "no_jira");             
         if (!FAIL) {  
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -543,6 +548,7 @@ public class __user_permission {
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Brand Name Click", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira"); 
                 if (FAIL) { return;}
+            Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
@@ -653,6 +659,7 @@ public class __user_permission {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
             if (FAIL) { return;}   
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Visibility("Wait for 'Hey There...' text", "xpath", "//*[contains(text(), 'Hey There ')]", "no_jira");             
         if (!FAIL) {  
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -721,6 +728,7 @@ public class __user_permission {
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Brand Name Click", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira"); 
                 if (FAIL) { return;}
+            Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
@@ -830,6 +838,7 @@ public class __user_permission {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
             if (FAIL) { return;}   
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Visibility("Wait for 'Hey There..' text", "xpath", "//*[contains(text(), 'Hey There ')]", "no_jira");             
         if (!FAIL) {  
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -899,6 +908,7 @@ public class __user_permission {
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Brand Name Click", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira"); 
                 if (FAIL) { return;}
+            Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 

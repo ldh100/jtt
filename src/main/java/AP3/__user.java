@@ -230,7 +230,8 @@ public class __user {
                 if(t.trim().startsWith("All")){ T_Index = i; }
             }
         _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'All'", L1.get(T_Index), "no_jira");
-            if (FAIL) { return;}               
+            if (FAIL) { return;}   
+        Thread.sleep(500);             
             
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}   
@@ -264,7 +265,8 @@ public class __user {
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Button 'Export...' Text ", "xpath", "//button[@class='button-radius v-btn theme--light primary']", "no_jira"); 
             if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Export'", "xpath", "//button[@class='button-radius v-btn theme--light primary']", "no_jira"); 
-            if (FAIL) { return;}             
+            if (FAIL) { return;}   
+        Thread.sleep(500);           
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}         
         //Thread.sleep(500); 
@@ -283,6 +285,7 @@ public class __user {
             if (FAIL) { return;}            
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Add New Click 'User Name'", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
             if (FAIL) { return;}
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
          _t++; Thread.sleep((long) sleep); T.Page_URL("New User page URL","no_jira");
@@ -379,7 +382,8 @@ public class __user {
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}    
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
-            if (FAIL) { return;}    
+            if (FAIL) { return;}   
+        Thread.sleep(500);  
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}             
         // </editor-fold>              
@@ -430,20 +434,20 @@ public class __user {
             if (FAIL) { return; }  
         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Delete' dialog", "xpath", "//div[@class='confirm-dialog v-card v-sheet v-sheet--tile theme--light']", "no_jira");
             if (FAIL) { return;}    // Find fragment              
-            _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find 'Delete..' Title", e1, "xpath", "//*[@class='H4-Secondary-Center']", "no_jira"); 
-                if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find 'Delete..' message", e1, "xpath", "//*[@class='Body-1-Black-High-Emphasis-Left']", "no_jira"); 
-                if (FAIL) { return;} 
+        _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find 'Delete..' Title", e1, "xpath", "//*[@class='H4-Secondary-Center']", "no_jira"); 
+            if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find 'Delete..' message", e1, "xpath", "//*[@class='Body-1-Black-High-Emphasis-Left']", "no_jira"); 
+            if (FAIL) { return;} 
 
-            _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find dialog 'Edit' button", e1, "xpath", ".//*[text()='CANCEL']", "no_jira");
-                if (FAIL) { return;} 
-            _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find dialog 'Cancel' button", e1, "xpath", ".//*[text()='DELETE']", "no_jira");
-                if (FAIL) { return;}    
-            _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click dialog 'Delete'", e1, "xpath", ".//*[text()='DELETE']", "no_jira");
-                if (FAIL) { return;}    
-                Thread.sleep(1000);
-            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
-                if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find dialog 'Edit' button", e1, "xpath", ".//*[text()='CANCEL']", "no_jira");
+            if (FAIL) { return;} 
+        _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find dialog 'Cancel' button", e1, "xpath", ".//*[text()='DELETE']", "no_jira");
+            if (FAIL) { return;}    
+        _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click dialog 'Delete'", e1, "xpath", ".//*[text()='DELETE']", "no_jira");
+            if (FAIL) { return;}    
+        Thread.sleep(1000);
+        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
+            if (FAIL) { return;}
         Thread.sleep(500);
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "css", "[aria-label='Search Users']", "no_jira"); 
             if (FAIL) { return;}
@@ -458,6 +462,7 @@ public class __user {
             if (FAIL) { return;}            
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Add New Click 'User Name'", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
             if (FAIL) { return;}
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
          _t++; Thread.sleep((long) sleep); T.Page_URL("New User page URL","no_jira");
@@ -644,7 +649,8 @@ public class __user {
                 }
             }                     
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
-            if (FAIL) { return;}    
+            if (FAIL) { return;} 
+        Thread.sleep(500);    
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
             Thread.sleep(500);
@@ -715,6 +721,7 @@ public class __user {
             if (FAIL) { return;}            
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Add New Click 'User Name'", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
             if (FAIL) { return;}
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
          _t++; Thread.sleep((long) sleep); T.Page_URL("New User page URL","no_jira");
@@ -910,6 +917,7 @@ public class __user {
             }                     
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
             if (FAIL) { return;}    
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
             Thread.sleep(500);
@@ -962,7 +970,7 @@ public class __user {
                 if (FAIL) { return;}    
             _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click dialog 'Delete'", e1, "xpath", ".//*[text()='DELETE']", "no_jira");
                 if (FAIL) { return;}                 
-                Thread.sleep(1000);
+            Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(500);
@@ -983,6 +991,7 @@ public class __user {
             if (FAIL) { return;}            
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Add New Click 'User Name'", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
             if (FAIL) { return;}
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
          _t++; Thread.sleep((long) sleep); T.Page_URL("New User page URL","no_jira");
@@ -1093,6 +1102,7 @@ public class __user {
             }                     
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
             if (FAIL) { return;}    
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
             Thread.sleep(500);
@@ -1179,7 +1189,7 @@ public class __user {
                 if (FAIL) { return;}    
             _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click dialog 'Delete'", e1, "xpath", ".//*[text()='DELETE']", "no_jira");
                 if (FAIL) { return;}                 
-                Thread.sleep(1000);
+                Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(500);

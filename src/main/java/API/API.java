@@ -1351,7 +1351,7 @@ public class API extends javax.swing.JInternalFrame {
             Realm = rs.getString(1);
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Get P2 Realm ID > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== Get Realm ID > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
         sw1.start(); // ============ User
@@ -1863,7 +1863,7 @@ public class API extends javax.swing.JInternalFrame {
             Realm = rs.getString(1);
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Get P2 Realm ID > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== Get Realm ID > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
         sw1.start(); // ============ AP3 User

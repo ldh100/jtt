@@ -25,6 +25,7 @@ public class __brand {
             if (FAIL) { return;} 
         _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
             if (FAIL) { return;}
+        Thread.sleep(500); 
                        
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;} 
@@ -49,7 +50,8 @@ public class __brand {
             if (FAIL) { return;} 
  
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
-            if (FAIL) { return;}    
+            if (FAIL) { return;}  
+        Thread.sleep(500);   
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Search Prompt", "xpath", "//*[contains(text(), 'Search Sites')]", "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", "Not Existing Site", "no_jira");
@@ -121,6 +123,7 @@ public class __brand {
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.Brand_Status_Click("Status Click to 'Display'",L2, T_Index,"no_jira");  // was L1 ^^^
                         if (FAIL) { return;}
+                    Thread.sleep(500); 
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); T.Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,"no_jira" ); 
@@ -128,7 +131,8 @@ public class __brand {
                         if (FAIL) { return;}     
                 } else {
                     _t++; Thread.sleep((long) sleep); T.Brand_Status_Click("Status Click to 'Hide'",L2, T_Index,"no_jira");  
-                        if (FAIL) { return;}                                                                                                             // 'v-progress-circular'
+                        if (FAIL) { return;} 
+                    Thread.sleep(500); 
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); T.Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,"no_jira" );      
@@ -145,12 +149,14 @@ public class __brand {
         }            
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Brand Name Click", "xpath", "//td[contains(text(), '" + BRAND + "')]", "no_jira"); 
             if (FAIL) { return;}
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
             if (FAIL) { return;}  
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");                                                                                     
             if (FAIL) { return;}                                                              
         _t++; Thread.sleep((long) sleep); T.List_L0("Brand Configuration Navigation Count", "xpath", "//div[contains(@class, 'SelectedLeft')]", "no_jira");             
@@ -297,6 +303,7 @@ public class __brand {
 //            if (FAIL) { return;}                                                          
 
         _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back", "Brand Configuration","Brand Site", "no_jira");
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}   
          Thread.sleep(1000);
@@ -569,6 +576,7 @@ public class __brand {
                     if (FAIL) { return;}
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                     if (FAIL) { return; } 
+                Thread.sleep(500); 
                 _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                     if (FAIL) { return;}
                 _t++; Thread.sleep((long) sleep); T.List_L1("Closure rows Count", "xpath", "//div[contains(@class, 'layout flex xs12 nowrap align-center')]", "no_jira");             

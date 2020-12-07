@@ -89,6 +89,7 @@ public class __menu_manager {
 //        } 
         _t++; T.Clickable_Element_By_Path_Click("Button 'Go to Menu' Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
             if (FAIL) { return;}
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;} 
             //Thread.sleep(1000);
@@ -111,11 +112,13 @@ public class __menu_manager {
 
         // <editor-fold defaultstate="collapsed" desc="Training Video">
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Trainig Video Icon Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-help-circle')]", "no_jira"); 
-            if (FAIL) { return;}             
+            if (FAIL) { return;}  
+        Thread.sleep(500);            
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); T.Swith_to_Frame("Swith to Video Player", "tagName", "iframe", "no_jira");
             if (FAIL) { return;} 
+        Thread.sleep(500);               
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for Player load", "className", "play-icon", "no_jira"); 
             if (FAIL) { return;}              
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Video Title", "xpath", "//header[contains(@class, 'vp-title-header')]", "textContent","no_jira");
@@ -186,7 +189,8 @@ public class __menu_manager {
             _t++; Thread.sleep((long) sleep); T.List_Child_E1_By_Path("Find " + GL_MENU + " 'View Global Modifiers Groups' button", L2, T_Index, "xpath", ".//button[@type='button'][2]", "no_jira"); 
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'View Global Modifiers Groups'", e1, "no_jira"); 
-                if (FAIL) { return;}   
+                if (FAIL) { return;} 
+            Thread.sleep(500);   
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.To_Top("no_jira"); // Temp fix for BUG
@@ -218,6 +222,7 @@ public class __menu_manager {
             }
             _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'All'", L1.get(T_Index), "no_jira");
                 if (FAIL) { return;}
+            Thread.sleep(500); 
 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                 if (FAIL) { return;}
@@ -371,6 +376,7 @@ public class __menu_manager {
             }
             _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'All'", L1.get(T_Index), "no_jira");
             if (FAIL) { return;}
+            Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira");
@@ -465,6 +471,7 @@ public class __menu_manager {
             }
             _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'All'", L1.get(T_Index), "no_jira");
             if (FAIL) { return;}
+            Thread.sleep(500); 
 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}
@@ -584,6 +591,7 @@ public class __menu_manager {
             // ===============================================================================================================================  
             _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back"," 'globalmods' page"," 'menu' page", "no_jira"); 
                     //if (FAIL) { return;}
+            Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for page load...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}               
                 //Thread.sleep(1000);
@@ -651,14 +659,16 @@ public class __menu_manager {
 //                if (FAIL) { return;}       
 //                for (int j = 0; j < L1.size(); j++) {    
 //                   _t++; T.Element_Attribute("Local Menu (Index " + j + ") Name", L1.get(j), "textContent", "no_jira"); 
-//                }                  
+//                }  
+            Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.List_Child_E1_By_Path("Find " + GL_MENU + " 'View Global Menus' button", L2, T_Index, "xpath", ".//button[@type='button'][1]", "no_jira"); 
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'View Global Menus'", e1, "no_jira"); 
                 if (FAIL) { return;}   
+            Thread.sleep(500);                  
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}  
-             Thread.sleep(500);                   
+            Thread.sleep(500);                   
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", "no_jira"); 
                 if (FAIL) { return;}  
             _t++; T.Move_to_Element_By_Path("Scroll to 'EDIT MENU' button", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira");        
@@ -666,6 +676,7 @@ public class __menu_manager {
             Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira"); 
                 if (FAIL) { return;} 
+            Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}    
             Thread.sleep(2000);        
@@ -704,6 +715,7 @@ public class __menu_manager {
             Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira"); 
                 if (FAIL) { return;} 
+            Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'EDIT'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}    
             //Thread.sleep(2000);
@@ -748,7 +760,8 @@ public class __menu_manager {
                 if (FAIL) { return;}  
                 Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Element_Click("Last Added Set > '+' Click", e1, "no_jira"); 
-                if (FAIL) { return;}     
+                if (FAIL) { return;}   
+            Thread.sleep(500);   
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for Category Name field", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}    
                 Thread.sleep(500); 
@@ -856,7 +869,8 @@ public class __menu_manager {
 
             // ======== Delete Last Added
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click(" 'EDIT MENU' Click", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira"); 
-                if (FAIL) { return;}   
+                if (FAIL) { return;} 
+            Thread.sleep(500);  
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}   
             Thread.sleep(1000);
@@ -943,6 +957,7 @@ public class __menu_manager {
         }
         _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back","MM 'Menu' page","MM 'Sector' page", "no_jira"); 
             //if (FAIL) { return;}
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for page load...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}  
             
@@ -1015,12 +1030,12 @@ public class __menu_manager {
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Element_Click("Click Menu " + GL_MENU, L2.get(T_Index), "no_jira");
                 if (FAIL) { return;}         
-       
+            Thread.sleep(500);       
             _t++; Thread.sleep((long) sleep); T.List_Child_E1_By_Path("Find " + GL_MENU + " 'View Global Menus' button", L2, T_Index, "xpath", ".//button[@type='button'][1]", "no_jira"); 
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'View Global Menus'", e1, "no_jira"); 
                 if (FAIL) { return;}   
- 
+            Thread.sleep(500);  
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", "no_jira"); 
                 if (FAIL) { return;}   
             _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Scroll to 'EDIT MENU' button", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira");        
@@ -1034,6 +1049,7 @@ public class __menu_manager {
                 if (FAIL) { return;}    
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira"); 
                 if (FAIL) { return;} 
+            Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;} 
             Thread.sleep(1000);
@@ -1105,9 +1121,10 @@ public class __menu_manager {
                         if (FAIL) { return;}             
                     _t++; T.Move_to_Element_By_Path("Scroll to 'EDIT MENU' button", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira");        
                         if (FAIL) { return;}   
-                        Thread.sleep(500);
+                    Thread.sleep(500);
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira"); 
                         if (FAIL) { return;} 
+                    Thread.sleep(500); 
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                         if (FAIL) { return;}    
                     Thread.sleep(1000);
@@ -1116,6 +1133,7 @@ public class __menu_manager {
 
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Imported Menu Set Name Click", "xpath", "//*[contains(text(), 'Imported " + New_ID + "')]", "no_jira"); 
                         if (FAIL) { return;} 
+                    Thread.sleep(500); 
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                         if (FAIL) { return;}    
                     //Thread.sleep(1000);
@@ -1208,6 +1226,7 @@ public class __menu_manager {
                     // ======== Delete Last Imported
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click(" 'EDIT MENU' Click", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira"); 
                         if (FAIL) { return;}   
+                    Thread.sleep(500); 
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                         if (FAIL) { return;}   
                     Thread.sleep(1000);
@@ -1320,6 +1339,7 @@ public class __menu_manager {
         } 
         _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back","MM 'Menu' page","MM 'Sector' page", "no_jira"); 
             //if (FAIL) { return;}
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for page load...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}               
         //Thread.sleep(1000);
@@ -1379,7 +1399,8 @@ public class __menu_manager {
             _t++; Thread.sleep((long) sleep); T.List_Child_E1_By_Path("Find 'View Local Brands' button", L2, T_Index, "xpath", ".//button[@type='button'][3]", "no_jira"); 
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'View Local Brands'", e1, "no_jira"); 
-                if (FAIL) { return;}   
+                if (FAIL) { return;}  
+            Thread.sleep(500);  
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}  
             Thread.sleep(500);  
@@ -1392,9 +1413,10 @@ public class __menu_manager {
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Local Menu Search", "css", "[aria-label='Search Menus']", BRAND, "no_jira");
                 if (FAIL) { return;} 
-                
+            Thread.sleep(500);                 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'VIEW LOCAL MENUS'", "xpath", "//div[contains(text(), '" + "View Local Menus" + "')]", "no_jira"); 
                 if (FAIL) { return;} 
+            Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;} 
             Thread.sleep(500);                 
@@ -1406,6 +1428,7 @@ public class __menu_manager {
         } 
         _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back","MM 'Local Brands' page","MM 'Sector' page", "no_jira"); 
             //if (FAIL) { return;}
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for page load...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}               
         //Thread.sleep(1000);

@@ -115,10 +115,8 @@ public class Func {
     public static void fExcel(int row1, int col1, String[][] Values1, String SheetName1, String Top_Row1, 
                               int row2, int col2, String[][] Values2, String SheetName2, String Top_Row2) 
         throws FileNotFoundException, IOException    {
-
         File ExcelFile;
-        try (XSSFWorkbook WB = new XSSFWorkbook() //Create blank workbook
-        ) {
+        try (XSSFWorkbook WB = new XSSFWorkbook()) { //Create blank workbook
             XSSFSheet  SH1 = WB.createSheet(SheetName1);  //Create a blank sheet 1
             XSSFSheet  SH2 = WB.createSheet(SheetName2);  //Create a blank sheet 2
             XSSFRow Row;                                          //Create row object
@@ -142,6 +140,7 @@ public class Func {
             cell.setCellStyle(SummaryStyle);
             SH1.addMergedRegion(new CellRangeAddress(0, 0, 0, col1-1));
             SH1.createFreezePane(2, 2);
+            
             XSSFFont HeaderFont = WB.createFont();
             HeaderFont.setFontHeight((short) (10*20));
             HeaderFont.setBold(true);
@@ -160,7 +159,8 @@ public class Func {
                 cell = headerRow.createCell(i);
                 cell.setCellValue(Values1[0][i]);
                 cell.setCellStyle(HeaderStyle);
-            }   XSSFFont CellFont = WB.createFont();
+            }   
+            XSSFFont CellFont = WB.createFont();
             CellFont.setFontHeight((short) (10*20));
             CellStyle cellStyle = WB.createCellStyle();
             CellFont.setBold(false);
@@ -172,16 +172,18 @@ public class Func {
             cellStyle.setRightBorderColor(IndexedColors.BLUE.getIndex());
             cellStyle.setBorderTop(BorderStyle.THIN);
             cellStyle.setTopBorderColor(IndexedColors.BLACK.getIndex());
-            for(int i = 1; i <= row1; i++) {
+            for(int i = 2; i <= row1; i++) { // 1st(0) - summary, 2nd(1) - header, Values start from (2)
                 Row = SH1.createRow(i);
                 for(int j = 0; j < col1; j++) {
                     cell = Row.createCell(j);
-                    cell.setCellValue(Values1[i][j]);
+                    cell.setCellValue(Values1[i-1][j]); // Values (i=0) > header
                     cell.setCellStyle(cellStyle);
                 }
-            }   for(int i = 0; i < col1; i++) { // Resize all columns to fit the content size
+            }   
+            for(int i = 0; i < col1; i++) { // Resize all columns to fit the content size
                 SH1.autoSizeColumn(i);
-            }   SH1.setColumnWidth(1,8500);
+            }   
+            SH1.setColumnWidth(1,8500);
             SH1.setColumnWidth(2,7500);
             SH1.setColumnWidth(3,12000);
             SH1.setColumnWidth(5,5000);

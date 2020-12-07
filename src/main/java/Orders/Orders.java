@@ -12,6 +12,7 @@ import com.ullink.slack.simpleslackapi.SlackChannel;
 import com.ullink.slack.simpleslackapi.SlackMessageHandle;
 import com.ullink.slack.simpleslackapi.SlackSession;
 import com.ullink.slack.simpleslackapi.impl.SlackSessionFactory;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -45,6 +46,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.HttpEntity;
@@ -55,6 +57,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -105,6 +108,13 @@ public class Orders extends javax.swing.JInternalFrame {
         cmbEnv = new javax.swing.JComboBox<>();
         lblSITES14 = new javax.swing.JLabel();
         cmbApp = new javax.swing.JComboBox<>();
+        chkKeep = new javax.swing.JCheckBox();
+        chkAll = new javax.swing.JCheckBox();
+        chkLoop = new javax.swing.JCheckBox();
+        nLoop = new javax.swing.JSpinner();
+        lblSITES5 = new javax.swing.JLabel();
+        nWaitLoad = new javax.swing.JSpinner();
+        lblSITES7 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btnUser = new javax.swing.JButton();
         lblSITES3 = new javax.swing.JLabel();
@@ -115,6 +125,7 @@ public class Orders extends javax.swing.JInternalFrame {
         jList_Orders = new javax.swing.JList<>();
         lblSITES4 = new javax.swing.JLabel();
         btnSCart = new javax.swing.JButton();
+        btnCart = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -153,9 +164,9 @@ public class Orders extends javax.swing.JInternalFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblOrders.setText("Saved Order templates ");
+        lblOrders.setText("Saved Shopping Cart templates ");
         lblOrders.setAlignmentX(0.5F);
-        getContentPane().add(lblOrders, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 360, -1));
+        getContentPane().add(lblOrders, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 8, 496, -1));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -168,7 +179,6 @@ public class Orders extends javax.swing.JInternalFrame {
             }
         ));
         DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV1.setCellSelectionEnabled(true);
         DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV1.setName("DV1"); // NOI18N
         DV1.setRequestFocusEnabled(false);
@@ -182,7 +192,7 @@ public class Orders extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 848, 292));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 28, 848, 268));
 
         txtLog.setEditable(false);
         txtLog.setColumns(20);
@@ -193,7 +203,7 @@ public class Orders extends javax.swing.JInternalFrame {
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLog);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 416, 428, 88));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 392, 428, 112));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -252,35 +262,109 @@ public class Orders extends javax.swing.JInternalFrame {
             }
         });
 
+        chkKeep.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        chkKeep.setSelected(true);
+        chkKeep.setText("Keep Payment Method");
+        chkKeep.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+
+        chkAll.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        chkAll.setText("Generate All");
+        chkAll.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        chkAll.setRequestFocusEnabled(false);
+        chkAll.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                chkAllStateChanged(evt);
+            }
+        });
+
+        chkLoop.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        chkLoop.setText("Repeat / Loop >");
+        chkLoop.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        chkLoop.setRequestFocusEnabled(false);
+
+        nLoop.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        nLoop.setModel(new javax.swing.SpinnerNumberModel(2, 2, 100, 1));
+        nLoop.setName("nLoop"); // NOI18N
+
+        lblSITES5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES5.setText(" times   Wait between loops:");
+        lblSITES5.setToolTipText("");
+        lblSITES5.setAlignmentX(0.5F);
+
+        nWaitLoad.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        nWaitLoad.setModel(new javax.swing.SpinnerNumberModel(30.0d, 0.0d, 60.0d, 5.0d));
+        nWaitLoad.setName("nWaitLoad"); // NOI18N
+
+        lblSITES7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES7.setText("sec");
+        lblSITES7.setToolTipText("");
+        lblSITES7.setAlignmentX(0.5F);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
+                        .addGap(2, 2, 2)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(chkKeep)
+                                        .addComponent(chkAll))
+                                    .addGap(168, 168, 168))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                    .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(8, 8, 8)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(12, 12, 12)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(chkLoop)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(nLoop, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(3, 3, 3)
+                                .addComponent(lblSITES5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(nWaitLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(3, 3, 3)
+                                .addComponent(lblSITES7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(302, 302, 302)
+                        .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(chkKeep, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(chkAll, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(chkLoop, javax.swing.GroupLayout.PREFERRED_SIZE, 21, Short.MAX_VALUE)
+                    .addComponent(nLoop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSITES5)
+                    .addComponent(nWaitLoad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSITES7))
+                .addGap(4, 4, 4)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -291,10 +375,10 @@ public class Orders extends javax.swing.JInternalFrame {
                             .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(7, 7, 7))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 416, 416, 88));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 392, 416, 112));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -307,7 +391,7 @@ public class Orders extends javax.swing.JInternalFrame {
                 btnUserMouseClicked(evt);
             }
         });
-        jPanel1.add(btnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(732, 20, 108, 20));
+        jPanel1.add(btnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(736, 20, 108, 20));
 
         lblSITES3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -360,22 +444,31 @@ public class Orders extends javax.swing.JInternalFrame {
                 btnSCartMouseClicked(evt);
             }
         });
-        jPanel1.add(btnSCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(732, 52, 108, 20));
+        jPanel1.add(btnSCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(736, 52, 108, 20));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 332, 848, 80));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 304, 848, 80));
+
+        btnCart.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnCart.setText("Selected Cart & Order");
+        btnCart.setEnabled(false);
+        btnCart.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnCart.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCartMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 4, 172, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
         if (d1LastRow == DV1.getSelectedRow()) {
-            btnRun.setEnabled(false);
             d1LastRow = -1;
         }else{
-            btnRun.setEnabled(true);
             d1LastRow = DV1.getSelectedRow();             
         }
-
+        ValidateRun();
     }//GEN-LAST:event_DV1MouseClicked
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
@@ -420,184 +513,15 @@ public class Orders extends javax.swing.JInternalFrame {
         cmbApp.setSelectedIndex(0);        
         Load = false;
         LOAD_ENV();
-        Load_User();
+        Get_User();
         this.setTitle("Orders");
     }
 
-    private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
-        if(DV1.getSelectedRowCount() > 0) {
-            btnRun.setEnabled(false);
-            txtLog.append("\r\n=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            //LOG_START(); // ========================================================
-            try {
-                Execute(); // ======================================================
-            }
-            catch (InterruptedException ex) {
-                txtLog.append("Execute OR " + ex.getMessage());
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-        }else{
-            txtLog.append("\r\n=== No Order Template Selected");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-
-    }//GEN-LAST:event_btnRunMouseClicked
-    private void Execute() throws InterruptedException{
-        try{          
-            NewScartID = RandomStringUtils.randomAlphanumeric(67); // lenght > 68
-            JSCart = new JSONObject(String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 8)));
-            LocalDateTime Created = LocalDateTime.now();
-            LocalDateTime Modified = LocalDateTime.now().minusMinutes(1);
-
-            JSCart.getJSONObject("date").remove("ordered");
-            JSCart.getJSONObject("date").remove("created");
-            JSCart.getJSONObject("date").put("created", Created); // "2020-12-03T22:32:14.049Z",
-            JSCart.getJSONObject("date").remove("modified");
-            JSCart.getJSONObject("date").put("modified", Modified);
-
-            JSCart.remove("id");
-            JSCart.put("id", NewScartID);
-            JSCart.remove("order");
-            /*
-                "payment_method": {"payment_methods": [{
-                    "date": {
-                        "created": "2020-11-12T21:48:13Z",
-                        "modified": "2020-12-03T22:32:13Z"
-                    },
-                    "last4": "1111",
-                    "image": "https://assets.braintreegateway.com/payment_method_logo/visa.png?environment=sandbox",
-                    "expiration": {
-                        "expired": false,
-                        "month": 12,
-                        "year": 2021
-                    },
-                    "type": "CreditCard",
-                    "card_type": "Visa",
-                    "token": "3PjEj8D8pXf7l11p97roujDzPJ0AqKFYEZ45B7yzTGjBD"
-                }]}
-            */       
-            //JSCart.remove("payment_method");
-            if(JSCart.toString().contains("credit_card") && PaymetMethod.toString().contains("card_type")){
-                JSONArray PaymetMethods = PaymetMethod.getJSONArray("payment_methods");
-                JSONObject PMethod = PaymetMethods.getJSONObject(0);
-                    JSCart.getJSONObject("payment_method").getJSONObject("credit_card").remove("last4");
-                    JSCart.getJSONObject("payment_method").getJSONObject("credit_card").put("last4", PMethod.get("last4"));
-                    JSCart.getJSONObject("payment_method").getJSONObject("credit_card").remove("card_type");
-                    JSCart.getJSONObject("payment_method").getJSONObject("credit_card").put("credit_card", PMethod.get("card_type")); 
-                    
-            } else if((JSCart.toString().contains("mealplan") && PaymetMethod.toString().contains("mealplan"))){
-                txtLog.append("\r\n\r\n=== Selected Shopping Cart 'mealplan' Method - To Do");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-                return;                    
-            } else if((JSCart.toString().contains("meal_swipes") && PaymetMethod.toString().contains("meal_swipes"))){
-                txtLog.append("\r\n\r\n=== Selected Shopping Cart 'meal_swipes' Method - To Do");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-                return;                    
-            } else if((JSCart.toString().contains("digital_wallet_pay") && PaymetMethod.toString().contains("digital_wallet_pay"))){
-                txtLog.append("\r\n\r\n=== Selected Shopping Cart 'digital_wallet_pay' Method - To Do");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-                return;                    
-                               
-            }else{
-                txtLog.append("\r\n\r\n=== Selected Shopping Cart/User Payment Methods - match Not Found");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-                return;                
-            }
-
-
-String R = Func.SHOW_FILE(JSCart.toString(4), "json");
-if(!R.equals("OK")){
-    txtLog.append(R);
-    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-}
-        }catch(Exception ex){
-            txtLog.append("\r\n\r\n=== Refactor Shopping Cart ERROR: " + ex.getMessage());
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            return;
-        }
-
-        F = "";
-        t_calls = 0;
-        t_min =  0;
-        t_avg = 0;
-        t_max =  0;
-        p_50 = 0;
-        p_90 = 0;
-        _t = 0; // Total
-        _p = 0; // Passed
-        _f = 0; // Failed
-        _w = 0; // Warn
-        r_time = "";        
-        
-        
-        Instant dw_start = Instant.now();
-        if(_f > 0) {
-            txtLog.append("\r\n=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }else{
-            txtLog.append("\r\n=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter)); 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
-        }         
-        Done(dw_start); // ===============================
-    }
-    private void Done(Instant dw_start){
-        txtLog.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");  
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());               
-        DD = Duration.between(dw_start, Instant.now());
-        Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
-
-        try {
-            String t_rep = "";
-            if (!"".equals(r_time.trim())) {
-                double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
-                if (am0.length > 0){
-                    Arrays.sort(am0);
-                    double total = 0;
-                    for(int i=0; i < am0.length; i++){
-                        total = total + am0[i];
-                    }
-                    t_calls = am0.length;
-                    t_min = am0[0] / (double)1000;
-                    t_avg = (total / am0.length) / (double)1000;
-                    t_max = am0[am0.length - 1]  / (double)1000; 
-                    p_50 = Func.p50(am0) / (double)1000;
-                    p_90 = Func.p90(am0) / (double)1000;
-
-                    DecimalFormat df = new DecimalFormat("#.##");
-                    t_rep += "=== Total Calls: " + t_calls + ", Response Times (sec) - Min: " + df.format(t_min) +
-                                                                ", Avg: " + df.format(t_avg) +
-                                                                ", Max: " + df.format(t_max) +
-                                                                ", p50: " + df.format(p_50) +
-                                                                ", p90: " + df.format(p_90);
-                }
-                txtLog.append("\r\n" + t_rep);
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-        } catch(Exception ex){
-            txtLog.append("\r\n\r\n=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage());
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }  
-        btnRun.setEnabled(true);
-        txtLog.append("\r\n=== Duration: " + (DD.toHours()) + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
-        txtLog.append("\r\n=== " + Summary);
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());  
-
-        LOG_UPDATE(); // ========================================================
-    }
-
-    private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = Func.SHOW_FILE(txtLog.getText(), "txt");
-        if(!R.equals("OK")){
-            txtLog.append(R);
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-    }//GEN-LAST:event_btnLogMouseClicked
 
     private void btnUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserMouseClicked
-        Load_User();
+        Get_User();
     }
-    private void Load_User(){
+    private void Get_User(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n\r\n- Load User...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -615,7 +539,7 @@ if(!R.equals("OK")){
             Realm = rs.getString(1);
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Get P2 Realm ID > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== Get Realm ID > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
         sw1.start(); // ============ User
@@ -833,9 +757,13 @@ if(!R.equals("OK")){
         }
     }//GEN-LAST:event_btnSCartMouseClicked
 
-    private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
-        SAVE_CONFIG();
-    }//GEN-LAST:event_btnSave_OptMouseClicked
+    private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
+        if(!Load && evt.getStateChange() == 1) {
+            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            app = cmbApp.getSelectedItem().toString();
+            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        }
+    }//GEN-LAST:event_cmbAppItemStateChanged
 
     private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
@@ -845,13 +773,198 @@ if(!R.equals("OK")){
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
 
-    private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
-        if(!Load && evt.getStateChange() == 1) {
-            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-            app = cmbApp.getSelectedItem().toString();
-            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
+        SAVE_CONFIG();
+    }//GEN-LAST:event_btnSave_OptMouseClicked
+
+    private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
+        String R = Func.SHOW_FILE(txtLog.getText(), "txt");
+        if(!R.equals("OK")){
+            txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
-    }//GEN-LAST:event_cmbAppItemStateChanged
+    }//GEN-LAST:event_btnLogMouseClicked
+
+    private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
+        if(!btnRun.isEnabled()){
+            return;
+        }
+        btnRun.setEnabled(false);
+
+        t_calls = 0;
+        t_min =  0;
+        t_avg = 0;
+        t_max =  0;
+        p_50 = 0;
+        p_90 = 0;
+        _t = 0; // Total
+        _p = 0; // Passed
+        _f = 0; // Failed
+        _w = 0; // Warn
+        r_time = "";        
+
+        
+        Instant dw_start = Instant.now();        
+        txtLog.append("\r\n=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        //LOG_START(); // ========================================================
+        try {
+            Execute(String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 7))); // ======================================================
+        }
+        catch (InterruptedException ex) {
+            txtLog.append("Execute ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        }
+        if(_f > 0) {
+            txtLog.append("\r\n=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        }else{
+            txtLog.append("\r\n=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter)); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+        }         
+        Done(dw_start); // ===============================        
+    }//GEN-LAST:event_btnRunMouseClicked
+    private void Execute(String JCart) throws InterruptedException{
+        try{          
+            NewScartID = RandomStringUtils.randomAlphanumeric(67); // lenght > 68
+            JSCart = new JSONObject(JCart); //String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 7));
+            Instant Created = Instant.now();
+            Instant Modified = Instant.now().minusSeconds(60);
+
+            //JSCart.remove("date"); // ============================ ???? 
+            JSCart.getJSONObject("date").remove("ordered");
+            JSCart.getJSONObject("date").remove("created");
+            JSCart.getJSONObject("date").put("created", Created); // "2020-12-03T22:32:14.049Z",
+            JSCart.getJSONObject("date").remove("modified");
+            JSCart.getJSONObject("date").put("modified", Modified);
+
+            JSCart.remove("id"); 
+            JSCart.put("id", NewScartID); // ============================ ???? 
+            JSCart.remove("order");
+            
+            /*
+                "payment_method": {"payment_methods": [{
+                    "date": {
+                        "created": "2020-11-12T21:48:13Z",
+                        "modified": "2020-12-03T22:32:13Z"
+                    },
+                    "last4": "1111",
+                    "image": "https://assets.braintreegateway.com/payment_method_logo/visa.png?environment=sandbox",
+                    "expiration": {
+                        "expired": false,
+                        "month": 12,
+                        "year": 2021
+                    },
+                    "type": "CreditCard",
+                    "card_type": "Visa",
+                    "token": "3PjEj8D8pXf7l11p97roujDzPJ0AqKFYEZ45B7yzTGjBD"
+                }]}
+            */  
+            if(!chkKeep.isSelected()){
+                //JSCart.remove("payment_method");
+                if(JSCart.toString().contains("credit_card") && PaymetMethod.toString().contains("card_type")){
+                    JSONArray PaymetMethods = PaymetMethod.getJSONArray("payment_methods");
+                    JSONObject PMethod = PaymetMethods.getJSONObject(0);
+                        JSCart.getJSONObject("payment_method").getJSONObject("credit_card").remove("last4");
+                        JSCart.getJSONObject("payment_method").getJSONObject("credit_card").put("last4", PMethod.get("last4"));
+                        JSCart.getJSONObject("payment_method").getJSONObject("credit_card").remove("card_type");
+                        JSCart.getJSONObject("payment_method").getJSONObject("credit_card").put("credit_card", PMethod.get("card_type")); 
+
+                } else if((JSCart.toString().contains("mealplan") && PaymetMethod.toString().contains("mealplan"))){
+                    txtLog.append("\r\n\r\n=== Selected Shopping Cart 'mealplan' Method - To Do");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                    //return; 
+                    
+                } else if((JSCart.toString().contains("meal_swipes") && PaymetMethod.toString().contains("meal_swipes"))){
+                    txtLog.append("\r\n\r\n=== Selected Shopping Cart 'meal_swipes' Method - To Do");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                    //return;  
+                    
+                } else if((JSCart.toString().contains("digital_wallet_pay") && PaymetMethod.toString().contains("digital_wallet_pay"))){
+                    txtLog.append("\r\n\r\n=== Selected Shopping Cart 'digital_wallet_pay' Method - To Do");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                    //return;  
+                    
+                }else{
+                    txtLog.append("\r\n\r\n=== Selected Shopping Cart/User Payment Methods - match Not Found");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                    //return;                
+                }
+            }
+
+String R = Func.SHOW_FILE(JSCart.toString(4), "json");
+if(!R.equals("OK")){
+    txtLog.append(R);
+    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+}
+        }catch(Exception ex){
+            txtLog.append("\r\n\r\n=== Refactor Shopping Cart ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            return;
+        }
+        // Put Scard + Order // ==================================
+    }
+    private void Done(Instant dw_start){
+        txtLog.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");  
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());               
+        DD = Duration.between(dw_start, Instant.now());
+        Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
+
+        try {
+            String t_rep = "";
+            if (!"".equals(r_time.trim())) {
+                double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
+                if (am0.length > 0){
+                    Arrays.sort(am0);
+                    double total = 0;
+                    for(int i=0; i < am0.length; i++){
+                        total = total + am0[i];
+                    }
+                    t_calls = am0.length;
+                    t_min = am0[0] / (double)1000;
+                    t_avg = (total / am0.length) / (double)1000;
+                    t_max = am0[am0.length - 1]  / (double)1000; 
+                    p_50 = Func.p50(am0) / (double)1000;
+                    p_90 = Func.p90(am0) / (double)1000;
+
+                    DecimalFormat df = new DecimalFormat("#.##");
+                    t_rep += "=== Total Calls: " + t_calls + ", Response Times (sec) - Min: " + df.format(t_min) +
+                                                                ", Avg: " + df.format(t_avg) +
+                                                                ", Max: " + df.format(t_max) +
+                                                                ", p50: " + df.format(p_50) +
+                                                                ", p90: " + df.format(p_90);
+                }
+                txtLog.append("\r\n" + t_rep);
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            }
+        } catch(Exception ex){
+            txtLog.append("\r\n\r\n=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        }  
+        btnRun.setEnabled(true);
+        txtLog.append("\r\n=== Duration: " + (DD.toHours()) + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
+        txtLog.append("\r\n=== " + Summary);
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+
+        LOG_UPDATE(); // ========================================================
+    }
+    
+    private void chkAllStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkAllStateChanged
+        ValidateRun();
+    }//GEN-LAST:event_chkAllStateChanged
+
+    private void btnCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCartMouseClicked
+        if(btnCart.isEnabled() && DV1.getSelectedRowCount() > 0){
+            String R = Func.SHOW_FILE(
+                    "==== Shopping Cart:\r\n" + DV1.getValueAt(DV1.getSelectedRow(), 7).toString() +
+                    "\r\n\r\n" +
+                    "==== Order:\r\n" + DV1.getValueAt(DV1.getSelectedRow(), 8).toString(), "json");
+            if(!R.equals("OK")){
+                txtLog.append(R);
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            }
+        }
+    }//GEN-LAST:event_btnCartMouseClicked
 
     private void LOAD_ENV(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
@@ -891,10 +1004,19 @@ if(!R.equals("OK")){
     private void LoadOrders() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n-Load Prepared Orders ...");
+        txtLog.append("\r\n-Load Shopping Card Templates ...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        
-        SQL = "SELECT * FROM[dbo].[orders] WHERE [Env] = '" + env + "' ORDER BY[qID] DESC";  
+        SQL = "SELECT " + 
+                "[Env] " +
+                ",[App] " +
+                ",[Site] " +
+                ",[Brand] " +
+                ",[Service] " +
+                ",[Promo] " +
+                ",[Payment] " +
+                ",[JCart] " +
+                ",[JOrder] " +
+            "FROM[dbo].[orders] WHERE [Env] = '" + env + "' AND [app] = '" + app + "' ORDER BY[qID] DESC";  
         sw1.start();  
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery(SQL);
@@ -921,20 +1043,43 @@ if(!R.equals("OK")){
                 DefaultTableColumnModel colModel = (DefaultTableColumnModel) DV1.getColumnModel();
                 TableColumn col = colModel.getColumn(i);
             }
+            DV1.setDefaultEditor(Object.class, null);
+            DV1.getColumnModel().getColumn(0).setPreferredWidth(40);
+            DV1.getColumnModel().getColumn(1).setPreferredWidth(80);
+            DV1.getColumnModel().getColumn(2).setPreferredWidth(160);
+            DV1.getColumnModel().getColumn(3).setPreferredWidth(160);        
+            DV1.getColumnModel().getColumn(4).setPreferredWidth(75);
+            DV1.getColumnModel().getColumn(5).setPreferredWidth(80);            
+            DV1.getColumnModel().getColumn(6).setPreferredWidth(75);
+            DV1.getColumnModel().getColumn(7).setPreferredWidth(200); 
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Load Data > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== Load Shopping Card Templates > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }        
         txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
-        lblOrders.setText("Saved Order templates - " + DV1.getRowCount() + " found");
-        txtLog.append("\r\nOrder templates - Env: " + cmbEnv.getSelectedItem().toString() + " - " + DV1.getRowCount() + " found");
+        lblOrders.setText("Shopping Card templates - " + DV1.getRowCount() + " found");
+        txtLog.append("\r\nShopping Card templates - Env: " + cmbEnv.getSelectedItem().toString() + " - " + DV1.getRowCount() + " found");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-
+    private void ValidateRun(){
+        if(chkAll.isSelected() ){
+            DV1.getSelectionModel().clearSelection();
+        }
+        if(DV1.getSelectedRowCount() > 0 ){
+            btnCart.setEnabled(true);
+        }else{
+            btnCart.setEnabled(false);
+        }
+        if (DV1.getRowCount() > 0 &&  (DV1.getSelectedRowCount() > 0 && !chkAll.isSelected()) || chkAll.isSelected() ) {
+            btnRun.setEnabled(true);
+        }else{
+            btnRun.setEnabled(false);           
+        }
+    }
     private void LOAD_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
@@ -1174,11 +1319,15 @@ if(!R.equals("OK")){
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
+    private javax.swing.JButton btnCart;
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;
     private javax.swing.JButton btnSCart;
     private javax.swing.JButton btnSave_Opt;
     private javax.swing.JButton btnUser;
+    private javax.swing.JCheckBox chkAll;
+    private javax.swing.JCheckBox chkKeep;
+    private javax.swing.JCheckBox chkLoop;
     private javax.swing.JComboBox<String> cmbApp;
     private javax.swing.JComboBox<String> cmbEnv;
     private javax.swing.JList<String> jList_Orders;
@@ -1192,7 +1341,11 @@ if(!R.equals("OK")){
     private javax.swing.JLabel lblSITES14;
     private javax.swing.JLabel lblSITES3;
     private javax.swing.JLabel lblSITES4;
+    private javax.swing.JLabel lblSITES5;
     private javax.swing.JLabel lblSITES6;
+    private javax.swing.JLabel lblSITES7;
+    private javax.swing.JSpinner nLoop;
+    private javax.swing.JSpinner nWaitLoad;
     private javax.swing.JTextArea txtLog;
     private javax.swing.JTextField txtMobile_ID;
     private javax.swing.JTextField txtMobile_PW;

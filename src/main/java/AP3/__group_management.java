@@ -158,7 +158,8 @@ public class __group_management {
                 if(t.trim().startsWith("All")){ T_Index = i; }
             }
         _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'All'", L1.get(T_Index), "no_jira");
-            if (FAIL) { return;}               
+            if (FAIL) { return;}  
+        Thread.sleep(500);              
             
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}   
@@ -232,7 +233,8 @@ public class __group_management {
                 if("US".equals(C) && t.contains("United States") && t.contains(G)) { T_Index = i;}
             } 
         _t++; Thread.sleep((long) sleep); T.Element_Click("Click " + GROUP , L0.get(T_Index), "no_jira");
-            if (FAIL) { return;}           
+            if (FAIL) { return;}  
+        Thread.sleep(500);          
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;} 
             

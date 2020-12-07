@@ -414,6 +414,7 @@ public class __site_new {
         // <editor-fold defaultstate="collapsed" desc="Add Station">  
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Button 'Add Station' click", "xpath", "//*[contains(text(), 'ADD STATION')]","no_jira");             
             if (FAIL) { return;} 
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait 'Add a new Station' page", "xpath", "//div[starts-with(@id, 'toc-')]", "no_jira");
@@ -843,6 +844,7 @@ public class __site_new {
             if (FAIL) { return;} 
         _t++; T.Element_By_Path_Click("Click 'New Brand' Name", "xpath", "//*[contains(text(), 'New Station " + New_ID + "')]","no_jira");
             if (FAIL) { return;} 
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}  
             Thread.sleep(500);  
@@ -907,7 +909,8 @@ public class __site_new {
                     if (FAIL) { return;}
             }  
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
-            if (FAIL) { return; } // Save
+            if (FAIL) { return; }
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;} 
             Thread.sleep(500);
@@ -936,6 +939,7 @@ public class __site_new {
             if (FAIL) { return;}             
         _t++; T.Clickable_Element_By_Path_Click("Button 'Go to Menu' Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
             if (FAIL) { return;}
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;} 
             Thread.sleep(1000);
@@ -964,6 +968,7 @@ public class __site_new {
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'View Local Brands'", e1, "no_jira"); 
                 if (FAIL) { return;}   
+            Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}  
              Thread.sleep(500);  
@@ -979,6 +984,7 @@ public class __site_new {
              Thread.sleep(500);                
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'VIEW LOCAL MENUS'", "xpath", "//div[contains(text(), 'View Local Menus')]", "no_jira"); 
                 if (FAIL) { return;} 
+            Thread.sleep(500);  
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;} 
             Thread.sleep(500);      
@@ -987,6 +993,7 @@ public class __site_new {
             Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira"); 
                 if (FAIL) { return;} 
+            Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}    
             Thread.sleep(500); 
@@ -1124,6 +1131,7 @@ public class __site_new {
             if (FAIL) { return; } 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Schedule menu'", "xpath", "//*[contains(text(), 'Schedule menu')]", "no_jira"); 
             if (FAIL) { return;}   
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait 'Schedule menu' page", "css", "[aria-label='Menu']", "no_jira");
