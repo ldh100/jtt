@@ -791,9 +791,9 @@ public class AP3 extends javax.swing.JInternalFrame {
         try {
             int col = 9; // 8 + 1 new JIRA = 9
             String Top_Row = Last_EX.substring(0, Last_EX.indexOf("\r\n"));
-            Last_EX = Last_EX.substring(Last_EX.indexOf("\r\n") + 2);
+            //Last_EX = Last_EX.substring(Last_EX.indexOf("\r\n") + 2);
         
-            String[] lines = Last_EX.split(System.getProperty("line.separator"));
+            String[] lines = Last_EX.substring(Last_EX.indexOf("\r\n") + 2).split(System.getProperty("line.separator"));
             int l = lines.length;
             String[][] Values = new String[l][col];
             int n = 1;
@@ -1650,7 +1650,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 300) {
+                if (status >= 200 && status < 400) {
                     HttpEntity entity = response.getEntity();
                     return entity != null ? EntityUtils.toString(entity) : null;
                 } else {

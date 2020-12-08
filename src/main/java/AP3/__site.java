@@ -364,7 +364,7 @@ public class __site {
             if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); T.Swith_to_Frame("Swith to Video Player", "tagName", "iframe", "no_jira");// iframe src="https://player.vimeo.com/video/412472158"
             if (FAIL) { return;} 
-        Thread.sleep(500);   
+        Thread.sleep(1000);   
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for Player load", "className", "play-icon", "no_jira"); 
             if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Video Title", "xpath", "//header[contains(@class, 'vp-title-header')]", "textContent","no_jira");
