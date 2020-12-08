@@ -501,6 +501,7 @@ public class Orders extends javax.swing.JInternalFrame {
 //        cmbApp.addItem("Canteen");
         cmbApp.addItem("JJKitchen");
         cmbApp.addItem("Rogers");
+        cmbApp.addItem("Nourish");
 //        cmbApp.addItem("StandardCognition");
 //        cmbApp.addItem("Tacit");
         cmbApp.addItem("Thrive");
@@ -516,7 +517,6 @@ public class Orders extends javax.swing.JInternalFrame {
         Get_User();
         this.setTitle("Orders");
     }
-
 
     private void btnUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserMouseClicked
         Get_User();
@@ -557,19 +557,24 @@ public class Orders extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
+
             userID = json.getString("user");
             userTKN = json.getString("token");
-            
-            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
+
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/user/auth?realm=" + Realm + " > " + ex.getMessage() + "\r\n";
-            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.append("\r\n > " + J); 
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
         txtLog.append("\r\n== " + BaseAPI + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         sw1.reset();
-
+        
+        if(userID.isEmpty()){
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            return;
+        }
         sw1.start();  // ============ Payment
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/payment/method" + "?user_id=" + userID);
@@ -625,9 +630,7 @@ public class Orders extends javax.swing.JInternalFrame {
             DefaultListModel<String> model = new DefaultListModel<>();
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             JSONArray OR = json.getJSONArray("orders");
-            if(OR.isEmpty()){
-                model.addElement("Not Found");
-            }else{
+            if(!OR.isEmpty()){
                 for (int i = 0; i < OR.length(); i++) {
                     JSONObject or = OR.getJSONObject(i);
                     JSONObject is = or.getJSONObject("is");
@@ -759,9 +762,15 @@ public class Orders extends javax.swing.JInternalFrame {
 
     private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
+            DefaultListModel model = new DefaultListModel();
+            model.clear();
+            jList_Orders.setModel(model);
+            
+            btnSCart.setEnabled(false);
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             app = cmbApp.getSelectedItem().toString();
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            LoadOrders(); // ================================
         }
     }//GEN-LAST:event_cmbAppItemStateChanged
 
@@ -979,6 +988,11 @@ if(!R.equals("OK")){
             BaseAPI = "https://api.compassdigital.org/v1";
             env = "PR";
         }
+        DefaultListModel model = new DefaultListModel();
+        model.clear();
+        jList_Orders.setModel(model);
+        btnSCart.setEnabled(false);
+        
         Get_AP3_TKN(); // ===============================
         LOAD_CONFIG();
         if (CONFIG) {
@@ -1017,6 +1031,7 @@ if(!R.equals("OK")){
                 ",[JCart] " +
                 ",[JOrder] " +
             "FROM[dbo].[orders] WHERE [Env] = '" + env + "' AND [app] = '" + app + "' ORDER BY[qID] DESC";  
+        
         sw1.start();  
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery(SQL);

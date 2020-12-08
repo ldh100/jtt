@@ -607,6 +607,11 @@ public class API extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbEnvItemStateChanged
     private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
+            DefaultListModel model = new DefaultListModel();
+            model.clear();
+            jList_Orders.setModel(model);
+            btnSCart.setEnabled(false);
+        
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             app = cmbApp.getSelectedItem().toString();
             GetSites();
@@ -1351,7 +1356,7 @@ public class API extends javax.swing.JInternalFrame {
             Realm = rs.getString(1);
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Get Realm ID > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== Get Realm ID > ERROR: " + ex.getMessage());            
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
         sw1.start(); // ============ User
@@ -1369,18 +1374,24 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
+            
             userID = json.getString("user");
             userTKN = json.getString("token");
-
-            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
+            
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/user/auth?realm=" + Realm + " > " + ex.getMessage() + "\r\n";     
+            txtLog.append("\r\n > " + J); 
             txtLog.append("\r\n- Exception: " + ex.getMessage()); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
-        txtLog.append("\r\n== " + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("\r\n== " + BaseAPI + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
+        
+        if(userID.isEmpty()){
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            return;
+        }
         
         sw1.start();  // ============ Payment
         try { 
@@ -1437,9 +1448,7 @@ public class API extends javax.swing.JInternalFrame {
             DefaultListModel<String> model = new DefaultListModel<>();
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             JSONArray OR = json.getJSONArray("orders");
-            if(OR.isEmpty()){
-               model.addElement("Not Found"); 
-            }else{
+            if(!OR.isEmpty()){
                 for (int i = 0; i < OR.length(); i++) {
                     JSONObject or = OR.getJSONObject(i);
                     JSONObject is = or.getJSONObject("is");
@@ -1881,10 +1890,10 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
+            //J += "\r\n";            
             User_ID = json.getString("user");
             userTKN = json.getString("token");
-            //J += "\r\n";
-            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/user/auth?realm=" + Realm + " > " + ex.getMessage();            
             txtLog.append("\r\n- Exception: " + ex.getMessage());  
@@ -2029,6 +2038,7 @@ public class API extends javax.swing.JInternalFrame {
         cmbApp.addItem("Canteen");
         cmbApp.addItem("JJKitchen");
         cmbApp.addItem("Rogers");
+        cmbApp.addItem("Nourish");
         cmbApp.addItem("StandardCognition");
         cmbApp.addItem("Tacit");
         cmbApp.addItem("Thrive");

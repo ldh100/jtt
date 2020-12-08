@@ -458,6 +458,7 @@ public class Station extends javax.swing.JInternalFrame {
         cmbApp.addItem("Boost");
         cmbApp.addItem("Canteen");
         cmbApp.addItem("JJKitchen");
+        cmbApp.addItem("Nourish");
         cmbApp.addItem("Rogers");
         cmbApp.addItem("Tacit");
         cmbApp.addItem("Thrive");
@@ -467,7 +468,7 @@ public class Station extends javax.swing.JInternalFrame {
         cmbEnv.addItem("Production");         
         cmbEnv.setSelectedIndex(0); // Staging
         
-        cmbApp.setSelectedIndex(5);
+        cmbApp.setSelectedIndex(6);
 
         Load = false;
         LOAD_ENV();
