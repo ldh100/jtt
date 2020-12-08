@@ -2037,8 +2037,8 @@ public class API extends javax.swing.JInternalFrame {
         cmbApp.addItem("Boost");
         cmbApp.addItem("Canteen");
         cmbApp.addItem("JJKitchen");
-        cmbApp.addItem("Rogers");
         cmbApp.addItem("Nourish");
+        cmbApp.addItem("Rogers");
         cmbApp.addItem("StandardCognition");
         cmbApp.addItem("Tacit");
         cmbApp.addItem("Thrive");
