@@ -49,9 +49,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  */
 
 public class T {
-    private static Stopwatch sw1 = Stopwatch.createUnstarted();
+    private static final Stopwatch sw1 = Stopwatch.createUnstarted();
     public static void Open_Switch_to_2nd_Tab(String NAME, String LINK, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         t ="?";
         try {
             ((JavascriptExecutor) d1).executeScript("window.open(arguments[0])", LINK);
@@ -70,7 +75,12 @@ public class T {
         sw1.reset();
     }    
     public static void Close_Current_Tab_switch_To_1st(String NAME, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         t ="?";
         try {
             t = d1.getCurrentUrl();
@@ -90,7 +100,12 @@ public class T {
         sw1.reset();
     }
     public static void Page_URL(String NAME, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         t ="?";
         try {
             t = d1.getCurrentUrl();
@@ -107,7 +122,12 @@ public class T {
         sw1.reset();
     }    
     public static void Navigate_to_URL(String NAME, String URL, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             d1.navigate().to(URL);
             _p++; 
@@ -123,7 +143,12 @@ public class T {
         sw1.reset();
     }
     public static void Navigate_Back(String NAME, String FROM, String TO, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             d1.navigate().back();
             _p++; 
@@ -139,7 +164,12 @@ public class T {
         sw1.reset();
     }
     public static void Navigate_Forward(String NAME, String FROM, String TO, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             d1.navigate().forward();
             _p++; 
@@ -155,7 +185,12 @@ public class T {
         sw1.reset();
     }
     public static void Refresh(String NAME, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             d1.navigate().refresh();
             _p++; 
@@ -171,7 +206,8 @@ public class T {
         sw1.reset();
     }
     public static void To_Top(String JIRA ){
-       sw1.start(); FAIL = false;
+       sw1.start();
+       FAIL = false;
         try {
             Actions action = new Actions(d1);
             action.sendKeys(Keys.HOME).perform();
@@ -188,7 +224,12 @@ public class T {
         sw1.reset();
     }
     public static void To_Bottom(String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             Actions action = new Actions(d1);
             action.sendKeys(Keys.END).perform();
@@ -206,7 +247,11 @@ public class T {
     }
     public static void Swith_to_Frame(String NAME, String BY, String PATH, String JIRA ){
         t = "empty"; FAIL = false;
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             switch (BY) {
                 case "defaultContent":
@@ -253,7 +298,12 @@ public class T {
         sw1.reset();
     }
     public static void Scroll_XY(String NAME, int X, int Y, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             ((JavascriptExecutor)d1).executeScript("window.scrollBy(" + X + "," + Y + ")", "");
             _p++; 
@@ -269,7 +319,12 @@ public class T {
         sw1.reset();
     }    
     public static void Wait_For_Element_By_Path_Visibility(String NAME, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             switch (BY) {
                 case "xpath":
@@ -310,7 +365,12 @@ public class T {
         sw1.reset();
     }
     public static void Wait_For_Element_By_Path_Presence(String NAME, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             switch (BY) {
                 case "xpath":
@@ -351,7 +411,12 @@ public class T {
         sw1.reset();
     }
     public static void Wait_For_All_Elements_InVisibility(String NAME, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {          
             switch (BY) {
                 case "xpath":
@@ -395,7 +460,12 @@ public class T {
         sw1.reset();
     }
     public static void Wait_For_Element_By_Path_InVisibility(String NAME, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             switch (BY) {
                 case "xpath":
@@ -437,7 +507,12 @@ public class T {
     }
 
     public static void Text_Found(String NAME, String VAL, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         t ="?";
         try {
             e = d1.findElement(By.xpath("//*[contains(text(), \"" + VAL + "\")]"));
@@ -453,7 +528,12 @@ public class T {
         sw1.reset();
     }
     public static void Find_Text(String NAME, String VAL, Boolean EXPECTED,String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         t = "Not Found";
         try {
             e = d1.findElement(By.xpath("//*[contains(text(), \"" + VAL + "\")]"));
@@ -487,7 +567,11 @@ public class T {
     }    
     public static void Element_E1_Find(String NAME, String BY, String PATH, String JIRA ){
         FAIL = false;
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             switch (BY) {
                 case "xpath":
@@ -530,7 +614,11 @@ public class T {
     }
     public static void Element_E2_Find(String NAME, String BY, String PATH, String JIRA ){
         FAIL = false;
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             switch (BY) {
                 case "xpath":
@@ -573,7 +661,11 @@ public class T {
     }
     public static void Element_By_Path_Text(String NAME, String BY, String PATH, String JIRA ){
         t = "empty"; FAIL = false;
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             switch (BY) {
                 case "xpath":
@@ -617,7 +709,11 @@ public class T {
     }
     public static void Element_By_Path_Attribute(String NAME, String BY, String PATH, String VAL, String JIRA ){
         t = ""; FAIL = false;
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             switch (BY) {
                 case "xpath":
@@ -666,7 +762,12 @@ public class T {
         sw1.reset();
     }
     public static void Element_By_Path_Text_Select_Copy(String NAME, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         t = "not found!";
         try {
             Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -706,7 +807,12 @@ public class T {
         sw1.reset();
     }
     public static void Element_By_Path_Text_DblClick_Copy(String NAME, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         t = "not found!";
         try {
             Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -746,7 +852,12 @@ public class T {
         sw1.reset();
     }
     public static void Element_By_Path_Text_DblClick_Paste(String NAME, String BY, String PATH, String VAL,  String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         t = "not found!";
         try {
             Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -787,7 +898,12 @@ public class T {
         sw1.reset();
     }
     public static void Visible_Element_By_Path_Input_Select_Clear(String NAME, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             switch (BY) {
                 case "xpath":
@@ -814,7 +930,12 @@ public class T {
         sw1.reset();
     }
     public static void Visible_Element_By_Path_Text_Enter(String NAME, String BY, String PATH, String VAL, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             if(null != BY) switch (BY) {
                 case "xpath":
@@ -858,7 +979,12 @@ public class T {
         sw1.reset();
     }
     public static void Element_By_Path_Text_Enter(String NAME, String BY, String PATH, String VAL, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             switch (BY) {
                 case "xpath":
@@ -903,7 +1029,12 @@ public class T {
     }
 
     public static void Move_to_Element_By_Path(String NAME, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             switch (BY) {
                 case "xpath":
@@ -948,7 +1079,12 @@ public class T {
         sw1.reset();
     }
     public static void Move_to_Visible_Element(String NAME, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             switch (BY) {
                 case "xpath":
@@ -993,7 +1129,12 @@ public class T {
         sw1.reset();
     }
     public static void Move_out_of_Visible_Element(String NAME, String BY, String PATH, String VAL, int X, int Y, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             switch (BY) {
                 case "xpath":
@@ -1046,7 +1187,12 @@ public class T {
         sw1.reset();
     }
     public static void Click_out_of_Visible_Element(String NAME, String BY, String PATH, String VAL, int X, int Y, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             switch (BY) {
                 case "xpath":
@@ -1100,7 +1246,12 @@ public class T {
         sw1.reset();
     }
     public static void Clickable_Element_By_Path_Click(String NAME, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             switch (BY) {
                 case "xpath":
@@ -1145,7 +1296,12 @@ public class T {
         sw1.reset();
     }
     public static void Element_By_Path_Click(String NAME, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             switch (BY) {
                 case "xpath":
@@ -1191,7 +1347,12 @@ public class T {
     }
 
     public static void Scroll_to_Element(String NAME, WebElement E, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             ((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", E);
             _p++; 
@@ -1207,7 +1368,12 @@ public class T {
         sw1.reset();
     }
     public static void Move_to_Element(String NAME, WebElement E, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             Actions action = new Actions(d1);
             action.moveToElement(E).perform();
@@ -1224,7 +1390,12 @@ public class T {
         sw1.reset();
     } 
     public static void Element_Text(String NAME, WebElement E, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         t = "?";
         try {
             t = E.getText();
@@ -1250,7 +1421,12 @@ public class T {
         sw1.reset();
     }
     public static void Element_Text_Clear(String NAME, WebElement E, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             E.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
             E.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it  
@@ -1267,7 +1443,12 @@ public class T {
         sw1.reset();
     }
     public static void Element_Text_Enter(String NAME, WebElement E, String VAL, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             E.sendKeys(VAL);
             _p++; 
@@ -1284,7 +1465,12 @@ public class T {
     }
     public static void Element_Attribute(String NAME, WebElement E, String VAL, String JIRA ){       
         t = "empty";
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             t = E.getAttribute(VAL);
             if(t != null){
@@ -1313,7 +1499,12 @@ public class T {
         sw1.reset();
     }
     public static void Element_Click(String NAME, WebElement E, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             Actions action = new Actions(d1);
             action.moveToElement(E).click().perform();
@@ -1331,7 +1522,12 @@ public class T {
     }
 
     public static void Element_Child_List_L1(String NAME, WebElement E, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         if(L1 != null) {L1.clear();}
         try {
             switch (BY) {
@@ -1381,7 +1577,12 @@ public class T {
         sw1.reset();
     }    
     public static void Element_Child_List_L2(String NAME, WebElement E, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         if(L1 != null) {L1.clear();}
         try {
             switch (BY) {
@@ -1431,7 +1632,12 @@ public class T {
         sw1.reset();
     }    
     public static void Element_Child_E2(String NAME, WebElement E, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             switch (BY) {
                 case "xpath":
@@ -1474,7 +1680,12 @@ public class T {
         sw1.reset();
     }    
     public static void Element_Child_Text(String NAME, WebElement E, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         t = "?";
         try {
             switch (BY) {
@@ -1527,7 +1738,12 @@ public class T {
         sw1.reset();
     }    
     public static void Element_Child_Click(String NAME, WebElement E, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             switch (BY) {
                 case "xpath":
@@ -1571,7 +1787,12 @@ public class T {
     }    
     public static void Element_Child_Attribute(String NAME, WebElement E, String BY, String PATH, String VAL, String JIRA ){
         t = "";
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             switch (BY) {
                 case "xpath":
@@ -1628,7 +1849,12 @@ public class T {
     }
 
     public static void List_L0(String NAME, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         if(L0 != null) {L0.clear();}
         try {
             switch (BY) {
@@ -1678,7 +1904,12 @@ public class T {
         sw1.reset();
     }
     public static void List_L1(String NAME, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         if(L1 != null) {L1.clear();}
         try {
             switch (BY) {
@@ -1728,7 +1959,12 @@ public class T {
         sw1.reset();
     }
     public static void List_L2(String NAME, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         if(L2 != null) {L2.clear();}
         try {
             switch (BY) {
@@ -1778,7 +2014,12 @@ public class T {
         sw1.reset();
     }
     public static void List_L3(String NAME, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         if(L3 != null) {L3.clear();}
         try {
             switch (BY) {
@@ -1828,7 +2069,12 @@ public class T {
         sw1.reset();
     }
     public static void List_Child_E1_By_Path(String NAME, List<WebElement> L, int I, String BY, String PATH, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             switch (BY) {
                 case "xpath":
@@ -1872,7 +2118,12 @@ public class T {
     }
 
     public static void List_TR_TDs(String NAME, List<WebElement> L, int I, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         t = "";
         String dt;
         String STAT = "Status: ?";
@@ -1922,7 +2173,12 @@ public class T {
         sw1.reset();
     }
     public static void List_TR_THs(String NAME, List<WebElement> L, int I, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         t = "";
         String dt;
         try {
@@ -1954,7 +2210,12 @@ public class T {
     }
 
     public static void Scroll_to_Day(String NAME, List<WebElement> L, int I, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             e = L.get(I);
             Actions action = new Actions(d1);
@@ -1972,7 +2233,12 @@ public class T {
         sw1.reset();
     }
     public static void Day_Snedule(String NAME, List<WebElement> L, int I, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         t = "";
         String Day = "";
         String Open = " -- ";
@@ -2044,7 +2310,12 @@ public class T {
         sw1.reset();
     }
     public static void Time_Enter(String NAME, List<WebElement> L, int I,String BY, String PATH, String VAL, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             switch (BY) {
                 case "xpath":
@@ -2072,7 +2343,12 @@ public class T {
     }
 
     public static void Brand_Status(String NAME, List<WebElement> L, int I, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         t ="?";
         try {
             List<WebElement> X = L.get(I).findElements(By.tagName("td"));
@@ -2095,7 +2371,12 @@ public class T {
         sw1.reset();
     }     
     public static void Brand_Status_Click(String NAME, List<WebElement> L, int I,  String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             List<WebElement> X = L.get(I).findElements(By.tagName("td"));
             e = X.get(X.size() - 1).findElement(By.xpath(".//i[contains(@class, 'icon mdi mdi-eye')]"));
@@ -2114,7 +2395,12 @@ public class T {
         sw1.reset();
     }     
     public static void Menu_Snedule(String NAME, List<WebElement> L, int I, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         t = "";
         String dt;
         try {
@@ -2143,7 +2429,12 @@ public class T {
     }
 
     public static void Call_API(String NAME, String URL, boolean EXPECT_OK, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         String RR = "";
         CloseableHttpClient httpclient = HttpClients.createDefault(); 
         try {
@@ -2180,7 +2471,12 @@ public class T {
         sw1.reset();
     }
     public static void Calendar_API_Closure(String NAME, String C_Name, boolean EXPECTED, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         CloseableHttpClient httpclient = HttpClients.createDefault();
         long _start = 0;
         long _end = 0; 
@@ -2235,7 +2531,12 @@ public class T {
         sw1.reset();
     }
     public static void Brand_API_Hours(String NAME, String TARGET, String From, String To, boolean EXPECTED, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String DAY = TARGET.substring(TARGET.length() - 1).trim();
         String from_to = "";
@@ -2315,7 +2616,12 @@ public class T {
         sw1.reset();
     }
     public static void Brand_API_Is(String NAME, String TARGET, boolean EXPECTED, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         CloseableHttpClient httpclient = HttpClients.createDefault();
         boolean IS_YES = false;
         try {
@@ -2360,7 +2666,12 @@ public class T {
         sw1.reset();
     }
     public static void API_Body_Contains(String NAME, String VAL, boolean EXPECTED, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         CloseableHttpClient httpclient = HttpClients.createDefault(); 
         boolean FOUND;
         try {
@@ -2397,7 +2708,12 @@ public class T {
     }
     
     public static void Calendar_API_Pickup(String NAME, String DAY, boolean EXPECTED, String JIRA ){
-       sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
+        FAIL = false;
         CloseableHttpClient httpclient = HttpClients.createDefault();
         long _start = 0;
         long _end = 0; 
@@ -2453,7 +2769,12 @@ public class T {
         sw1.reset();
     }
     public static void Calendar_API_Delivey(String NAME, String DAY, boolean EXPECTED, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         CloseableHttpClient httpclient = HttpClients.createDefault();
         long _start = 0;
         long _end = 0; 
@@ -2510,7 +2831,12 @@ public class T {
     }
 
     public static void File_Find(String NAME, String DIR, String F_NAME, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         t = "";
         try {
             File folder = new File(DIR); 
@@ -2540,7 +2866,12 @@ public class T {
         sw1.reset();
     }
     public static void File_Read(String NAME, String DIR, String F_NAME, String CHECK, String VAL, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         t = "";
         try {
             File folder = new File(DIR); 
@@ -2583,7 +2914,12 @@ public class T {
         sw1.reset();
     }
     public static void File_Delete(String NAME, String DIR, String F_NAME, String JIRA ){
-        sw1.start(); FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
         try {
             File xx = new File(DIR + File.separator + F_NAME);
             if (xx.exists()) {

@@ -1373,7 +1373,7 @@ public class __menu_manager {
         // </editor-fold>    
 
         // <editor-fold defaultstate="collapsed" desc="Local Brands">  
-        EX += " - " + "\t" + " === MM Local Brands" + "\t" + " ===== " + "\t" + " == Local Brandst Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === MM Local Brands" + "\t" + " ===== " + "\t" + " == Local Brands Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); T.List_L3("Menus Pages Count", "xpath", "//button[contains(@class, 'v-pagination__item')]", "no_jira"); 
         PAGES = L3.size();
         
@@ -1442,9 +1442,17 @@ public class __menu_manager {
                 if (FAIL) { return;}             
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", "no_jira"); 
                 if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Local Menu Search", "css", "[aria-label='Search Menus']", BRAND, "no_jira");
+//            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Local Menu Search", "css", "[aria-label='Search Menus']", BRAND, "no_jira");
+//                if (FAIL) { return;} 
+            if(Location.isEmpty()){
+                _t++; 
+                _f++;
+                EX += " - " + "\t" + "Find Local Menu by Brand Location" + "\t" + BRAND + "\t" + "Location is Blank - Cannot locate Local Menu" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+                return;
+            }
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Local Menu Search", "css", "[aria-label='Search Menus']", Location, "no_jira");
                 if (FAIL) { return;} 
-            Thread.sleep(500);                 
+                Thread.sleep(500);                 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'VIEW LOCAL MENUS'", "xpath", "//div[contains(text(), '" + "View Local Menus" + "')]", "no_jira"); 
                 if (FAIL) { return;} 
             Thread.sleep(500); 

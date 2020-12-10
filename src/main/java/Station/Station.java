@@ -519,7 +519,12 @@ public class Station extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Sites ...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.start();
+        
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() +
                     "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
@@ -648,7 +653,11 @@ public class Station extends javax.swing.JInternalFrame {
         DV_Mods.setModel(Model);
         lblMenus.setText("Click Brand to get Menu(s) ...");
         
-        sw1.start();     
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+     
         String[] BrandsColumnsName = {"Brand / Station","Location","menu_ids", "Brand Id", "Unit ID"}; 
         DefaultTableModel BrandsModel = new DefaultTableModel();
         BrandsModel.setColumnIdentifiers(BrandsColumnsName);
@@ -771,7 +780,11 @@ public class Station extends javax.swing.JInternalFrame {
             return;
         }
         
-        sw1.start();         
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+         
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String label = "<empty> 'en'";

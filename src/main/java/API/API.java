@@ -642,7 +642,11 @@ public class API extends javax.swing.JInternalFrame {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         
         J += "\r\n========= Public Configuration:" + "\r\n";
-        sw1.start(); 
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/config/public/" + appId); 
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -667,7 +671,11 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();
         
         J += "\r\n=========  Private Configuration:" + "\r\n";
-        sw1.start(); 
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/config/" + appId); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
@@ -693,7 +701,11 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();
         
         J += "\r\n========= Multigroup API" + "\r\n";
-        sw1.start(); 
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + appId + "?nocache=true&extended=true"); // ?nocache=true&extended=true
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -738,7 +750,11 @@ public class API extends javax.swing.JInternalFrame {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         
         J += "\r\n========= Public Configuration:" + "\r\n";
-        sw1.start(); 
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/config/public/" + SiteID); 
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -763,7 +779,11 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();
         
         J += "\r\n=========  Private Configuration:" + "\r\n";
-        sw1.start(); 
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/config/" + SiteID); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
@@ -789,7 +809,11 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();        
 
         J += "\r\n========= Location/Group API" + "\r\n";
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + SiteID); 
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -836,7 +860,11 @@ public class API extends javax.swing.JInternalFrame {
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
         J += "\r\n========= Public Configuration:" + "\r\n";
-        sw1.start(); 
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/config/public/" + UNIT_ID); 
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -861,7 +889,11 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();
         
         J += "\r\n=========  Private Configuration:" + "\r\n";
-        sw1.start(); 
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/config/" + UNIT_ID); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
@@ -887,7 +919,11 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();        
 
         J += "\r\n========= Location API" + "\r\n";
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1"); 
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -938,7 +974,11 @@ public class API extends javax.swing.JInternalFrame {
         String J = "==== Sector/Companies(Menus):" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
@@ -984,7 +1024,11 @@ public class API extends javax.swing.JInternalFrame {
         String J = "==== Site: " + SITE + ", Brand: " + BRAND + " - configuration API(s):" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         J += "\r\n========= Public Configuration:" + "\r\n";
-        sw1.start(); 
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/config/public/" + BrandID); // ?nocache=true&extended=true
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -1009,7 +1053,11 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset();
         
         J += "\r\n=========  Private Configuration:" + "\r\n";
-        sw1.start(); 
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/config/" + BrandID); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
@@ -1036,7 +1084,11 @@ public class API extends javax.swing.JInternalFrame {
 
         J += "\r\n========= Brand API" + "\r\n";
         MENU_IDS.clear();
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/brand/" + BrandID + "?nocache=true&extended=true"); // ?extended=true
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -1092,7 +1144,11 @@ public class API extends javax.swing.JInternalFrame {
         String J = "==== Group/Sector:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector?_provider=cdl"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
@@ -1145,7 +1201,11 @@ public class API extends javax.swing.JInternalFrame {
         String J = "==== Site: " + SITE + ", Brand: " + BRAND + " > Calendar:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/calendar/" + BrandID); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
@@ -1204,7 +1264,11 @@ public class API extends javax.swing.JInternalFrame {
         }
             
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/order/location/brand/" + BrandID + "?pickup_start=" + from + "&pickup_end=" + to); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
@@ -1250,7 +1314,11 @@ public class API extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "========= Announcements:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/announcement/resource"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
@@ -1301,7 +1369,11 @@ public class API extends javax.swing.JInternalFrame {
         String J = "==== Custom API:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String URL = txtApi.getText().trim();
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             HttpGet httpget = new HttpGet(URL); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
@@ -1359,7 +1431,10 @@ public class API extends javax.swing.JInternalFrame {
             txtLog.append("\r\n\r\n=== Get Realm ID > ERROR: " + ex.getMessage());            
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
-        sw1.start(); // ============ User
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();         // ============ User
         try { 
             HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm); 
             httpget.setHeader("Authorization",  "Basic " + UserAuth);
@@ -1393,7 +1468,10 @@ public class API extends javax.swing.JInternalFrame {
             return;
         }
         
-        sw1.start();  // ============ Payment
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        // ============ Payment
         try { 
             HttpGet httpget = new HttpGet(BaseAPI + "/payment/method" + "?user_id=" + userID); 
             httpget.setHeader("Authorization",  "Bearer " + userTKN);
@@ -1419,7 +1497,10 @@ public class API extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();        
 
-        sw1.start();  // ============ Orders
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        // ============ Orders
         long m1 = System.currentTimeMillis();                     // 1605286535799
         long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // 1604681735799
 
@@ -1502,7 +1583,11 @@ public class API extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== Company " + cmbComp.getSelectedItem() + " > Menus:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/menu/company/" + COMP_IDS.get(I)); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
@@ -1547,7 +1632,11 @@ public class API extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== AP3 Resent Updates/Notifications:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/notification?realm=cdl&target=admin_panel"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
@@ -1597,7 +1686,11 @@ public class API extends javax.swing.JInternalFrame {
         String J = "==== Company: " + cmbComp.getSelectedItem().toString() + ", Site: " + SITE + " > Promo:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/promo/company/" + COMP_IDS.get(cmbComp.getSelectedIndex()) + "/location/group/" + SiteID); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
@@ -1625,7 +1718,7 @@ public class API extends javax.swing.JInternalFrame {
             txtLog.append("\r\n- Exception: " + ex.getMessage()); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
-        txtLog.append("\r\n== /promo/company/<Id>/location/group/<Id> > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("\r\n== " + BaseAPI + "/promo/company/" + COMP_IDS.get(cmbComp.getSelectedIndex()) + "/location/group/" + SiteID + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
 
@@ -1650,7 +1743,11 @@ public class API extends javax.swing.JInternalFrame {
         boolean DH = false;
         CloseableHttpClient httpclient = HttpClients.createDefault();
         for(int i = 0; i < MENU_IDS.size(); i++){
-            sw1.start();
+            if(sw1.isRunning()){
+                sw1.reset();
+            }
+            sw1.start();        
+
             try {
                 HttpGet httpget = new HttpGet(BaseAPI + "/menu/" + MENU_IDS.get(i) + "?extended=true&nocache=1"); 
                 ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -1676,7 +1773,11 @@ public class API extends javax.swing.JInternalFrame {
             sw1.reset(); 
             
             if(DH){
-                sw1.start();
+                if(sw1.isRunning()){
+                    sw1.reset();
+                }
+                sw1.start();        
+
                 try {
                     HttpGet httpget = new HttpGet(BaseAPI + "/menu/" + MENU_IDS.get(i)); 
                     ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -1730,7 +1831,11 @@ public class API extends javax.swing.JInternalFrame {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         
         String CartID = "";     
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             CartID = SCART_IDS.get(jList_Orders.getSelectedIndex());
             HttpGet httpget = new HttpGet(BaseAPI + "/shoppingcart/" + CartID); 
@@ -1760,7 +1865,11 @@ public class API extends javax.swing.JInternalFrame {
         txtLog.append("\r\n- Order..."); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String OrderID = "";     
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             OrderID = ORDER_IDS.get(jList_Orders.getSelectedIndex());
             HttpGet httpget = new HttpGet(BaseAPI + "/order/" + OrderID); 
@@ -1807,7 +1916,11 @@ public class API extends javax.swing.JInternalFrame {
         String J = "==== Order" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String OrderID = "";     
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             OrderID = SCART_IDS.get(jList_Orders.getSelectedIndex());
             HttpGet httpget = new HttpGet(BaseAPI + "/order/" + OrderID); 
@@ -1867,7 +1980,7 @@ public class API extends javax.swing.JInternalFrame {
         String Realm = "6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5";
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + "AP3" +
-                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
+                "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
             rs.next();
             Realm = rs.getString(1);
             conn.close();
@@ -1875,7 +1988,10 @@ public class API extends javax.swing.JInternalFrame {
             txtLog.append("\r\n\r\n=== Get Realm ID > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
-        sw1.start(); // ============ AP3 User
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();         // ============ AP3 User
         try { 
             HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm); 
             httpget.setHeader("Authorization",  "Basic " + UserAuth);
@@ -1903,7 +2019,10 @@ public class API extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();        
         
-        sw1.start(); // ============ AP3 User Permissions
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();         // ============ AP3 User Permissions
         try { 
             HttpGet httpget = new HttpGet(BaseAPI + "/user/" + User_ID + "/permissions" + "?nocache=1"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN); // UserAuth // userTKN
@@ -1929,7 +2048,10 @@ public class API extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
-        sw1.start(); // ============ AP3 User Permissions
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();       // ============ AP3 User
         try { 
             HttpGet httpget = new HttpGet(BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN); // UserAuth // userTKN
@@ -1972,7 +2094,11 @@ public class API extends javax.swing.JInternalFrame {
         String From = new SimpleDateFormat( "yyyy-MM-dd").format(dtpDate.getDate()); //"2020-11-15";
         String To = From;
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To); 
             //httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
@@ -2113,7 +2239,11 @@ public class API extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Sites ...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() +
                     "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
@@ -2232,7 +2362,10 @@ public class API extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Brands ...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.start();     
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();         
         
         String[] BrandsColumnsName = {"Station","Location","Brand Id", "Unit ID"}; 
         DefaultTableModel BrandsModel = new DefaultTableModel();
@@ -2337,7 +2470,11 @@ public class API extends javax.swing.JInternalFrame {
         GROUP_IDS = new ArrayList<>();
         
         Load = true;
-        sw1.start();     
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+     
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector?_provider=cdl"); 
@@ -2407,7 +2544,11 @@ public class API extends javax.swing.JInternalFrame {
         try { 
             cmbComp.removeAllItems();
             COMP_IDS = new ArrayList<>();
-            sw1.start();     
+            if(sw1.isRunning()){
+                sw1.reset();
+            }
+            sw1.start();        
+     
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -2474,7 +2615,11 @@ public class API extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try { 
-            sw1.start();     
+            if(sw1.isRunning()){
+            sw1.reset();
+            }
+            sw1.start();        
+     
             HttpGet httpget = new HttpGet(BaseAPI + "/location/brand/" + BrandID + "?extended=true&nocache=1"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -2600,8 +2745,8 @@ public class API extends javax.swing.JInternalFrame {
             C += "BRAND: " + _B + "\r\n";
             C += "CAN: " + CAN + "\r\n";
             
-            C += "txtMobile_ID: " + txtMobile_ID.getText() + "\r\n";
-            C += "txtMobile_PW: " + txtMobile_PW.getText()  + "\r\n";
+            C += "txtMobile_ID: " + txtMobile_ID.getText().trim() + "\r\n";
+            C += "txtMobile_PW: " + txtMobile_PW.getText().trim()  + "\r\n";
             C += "txtAP3_ID: " + txtAP3_ID.getText()  + "\r\n";
             C += "txtAP3_PW: " + txtAP3_PW.getText() + "\r\n";            
 

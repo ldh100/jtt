@@ -576,6 +576,9 @@ public class DL extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbPromoItemStateChanged
 
     private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
+        if(!btnRun.isEnabled()){
+            return;
+        }
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
@@ -617,7 +620,11 @@ public class DL extends javax.swing.JInternalFrame {
         }
         txtLog.append("\r\n=== Starting Web Driver...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         r_type = "ad-hoc";
 
         if(Driver()){
@@ -884,7 +891,11 @@ public class DL extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Manufacturers ...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
 
         String[] SitesColumnsName = {"MAnufacturer","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
@@ -955,7 +966,11 @@ public class DL extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Brands ...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.start();     
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+     
         
         String[] BrandsColumnsName = {"Category"}; 
         DefaultTableModel BrandsModel = new DefaultTableModel();

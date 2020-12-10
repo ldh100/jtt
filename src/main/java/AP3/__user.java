@@ -307,7 +307,7 @@ public class __user {
             }
         _t++; Thread.sleep((long) sleep); T.Element_Click("Select 'Admin'", L1.get(T_Index), "no_jira");
             if (FAIL) { return;}  // ^^^ select Role to show buttons and Definitioms sectoions update 
-            
+        Thread.sleep(500);
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Cancel' text", "Cancel", true,"no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Create User' text", "Create User", true,"no_jira"); 
@@ -378,7 +378,7 @@ public class __user {
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", "no_jira"); 
                 if (FAIL) { return;}  
         }         
-
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}    
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
@@ -485,7 +485,7 @@ public class __user {
             }
         _t++; Thread.sleep((long) sleep); T.Element_Click("Select 'Site Manager'", L1.get(T_Index), "no_jira");
             if (FAIL) { return;}  // ^^^ select Role to show buttons and Definitioms sectoions update 
-            
+        Thread.sleep(500);    
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Cancel' text", "Cancel", true,"no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Create User' text", "Create User", true,"no_jira"); 
@@ -647,7 +647,8 @@ public class __user {
                     default:
                         break;
                 }
-            }                     
+            }   
+        Thread.sleep(500);              
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
             if (FAIL) { return;} 
         Thread.sleep(500);    
@@ -744,7 +745,7 @@ public class __user {
             }
         _t++; Thread.sleep((long) sleep); T.Element_Click("Select 'CDL Delivery Manager'", L1.get(T_Index), "no_jira");
             if (FAIL) { return;}  // ^^^ select Role to show buttons and Definitioms sectoions update 
-            
+        Thread.sleep(500);              
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Cancel' text", "Cancel", true,"no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Create User' text", "Create User", true,"no_jira"); 
@@ -914,7 +915,8 @@ public class __user {
                     default:
                         break;
                 }
-            }                     
+            }      
+        Thread.sleep(500);              
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
             if (FAIL) { return;}    
         Thread.sleep(500); 
@@ -1014,7 +1016,7 @@ public class __user {
             }
         _t++; Thread.sleep((long) sleep); T.Element_Click("Select 'Runner'", L1.get(T_Index), "no_jira");
             if (FAIL) { return;}  // ^^^ select Role to show buttons and Definitioms sectoions update 
-            
+        Thread.sleep(500);              
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Cancel' text", "Cancel", true,"no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Create User' text", "Create User", true,"no_jira"); 
@@ -1099,7 +1101,8 @@ public class __user {
                     default:
                         break;
                 }
-            }                     
+            } 
+        Thread.sleep(500);              
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
             if (FAIL) { return;}    
         Thread.sleep(500); 

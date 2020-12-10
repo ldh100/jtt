@@ -917,6 +917,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         }
         d2LastRow = DV2.getSelectedRow(); 
         BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
+        Location = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 1));
         GetBrandSector();
     }//GEN-LAST:event_DV2MouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
@@ -927,6 +928,9 @@ public class AP3 extends javax.swing.JInternalFrame {
         }         
     }//GEN-LAST:event_btnLogMouseClicked
     private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
+        if(!btnRun.isEnabled()){
+            return;
+        }
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
@@ -976,8 +980,13 @@ public class AP3 extends javax.swing.JInternalFrame {
         }
         txtLog.append("\r\n=== Starting Web Driver...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        sw1.start();
+
         r_type = "ad-hoc";
+        
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
         
         if(Driver()){
             txtLog.append("\r\n=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec");
@@ -1418,7 +1427,11 @@ public class AP3 extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Sites ...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() +
                     "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
@@ -1538,7 +1551,11 @@ public class AP3 extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Brands ...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.start();     
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+     
         
         String[] BrandsColumnsName = {"Station","Location","Brand Id", "Unit ID"}; 
         DefaultTableModel BrandsModel = new DefaultTableModel();
@@ -1624,8 +1641,10 @@ public class AP3 extends javax.swing.JInternalFrame {
                 }
             }
             BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
+            Location = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 1));
         } else {
             BrandID = "null";
+            Location = "";
         }
         d2LastRow = DV2.getSelectedRow();
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
@@ -1642,7 +1661,11 @@ public class AP3 extends javax.swing.JInternalFrame {
         GROUP_IDS = new ArrayList<>();
         
         Load = true;
-        sw1.start();     
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+     
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector?_provider=cdl"); 
@@ -1712,7 +1735,11 @@ public class AP3 extends javax.swing.JInternalFrame {
         try { 
             cmbComp.removeAllItems();
             COMP_IDS = new ArrayList<>();
-            sw1.start();     
+            if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+     
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -1779,7 +1806,11 @@ public class AP3 extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try { 
-            sw1.start();     
+            if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+     
             HttpGet httpget = new HttpGet(BaseAPI + "/location/brand/" + BrandID + "?extended=true&nocache=1"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -2206,6 +2237,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     public static String GROUP = "";
     public static String BRAND = "";
     public static String BrandID = "";
+    public static String Location = "";
     public static String GroupID = "";
     public static String CompanyID = "";
     

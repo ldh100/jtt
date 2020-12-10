@@ -599,6 +599,9 @@ public class WO extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbPromoItemStateChanged
 
     private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
+        if(!btnRun.isEnabled()){
+            return;
+        }
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
@@ -642,7 +645,11 @@ public class WO extends javax.swing.JInternalFrame {
         }
         txtLog.append("\r\n=== Starting Web Driver...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         r_type = "ad-hoc";
 
         if(Driver()){
@@ -938,7 +945,11 @@ public class WO extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Sites ...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() +
                     "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
@@ -1056,7 +1067,11 @@ public class WO extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Brands ...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.start();     
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+     
         
         String[] BrandsColumnsName = {"Station","Location","Brand Id", "Unit ID"}; 
         DefaultTableModel BrandsModel = new DefaultTableModel();
@@ -1231,8 +1246,8 @@ public class WO extends javax.swing.JInternalFrame {
             C += "BRAND: " + _B + "\r\n";
             C += "CAN: " + CAN + "\r\n";            
             
-            C += "txtMobile_ID: " + txtMobile_ID.getText() + "\r\n";
-            C += "txtMobile_PW: " + txtMobile_PW.getText()  + "\r\n";
+            C += "txtMobile_ID: " + txtMobile_ID.getText().trim() + "\r\n";
+            C += "txtMobile_PW: " + txtMobile_PW.getText().trim()  + "\r\n";
             
             C += "nShowPage: " + nShowPage.getValue() + "\r\n";
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";

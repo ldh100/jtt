@@ -265,6 +265,7 @@ public class Orders extends javax.swing.JInternalFrame {
         chkKeep.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         chkKeep.setSelected(true);
         chkKeep.setText("Keep Payment Method");
+        chkKeep.setEnabled(false);
         chkKeep.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         chkAll.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
@@ -542,7 +543,11 @@ public class Orders extends javax.swing.JInternalFrame {
             txtLog.append("\r\n\r\n=== Get Realm ID > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
-        sw1.start(); // ============ User
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ // ============ User
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm);
             httpget.setHeader("Authorization",  "Basic " + UserAuth);
@@ -575,7 +580,11 @@ public class Orders extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
-        sw1.start();  // ============ Payment
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+  // ============ Payment
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/payment/method" + "?user_id=" + userID);
             httpget.setHeader("Authorization",  "Bearer " + userTKN);
@@ -601,7 +610,11 @@ public class Orders extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         sw1.reset();
 
-        sw1.start();  // ============ Orders
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+  // ============ Orders
         long m1 = System.currentTimeMillis();                     // 1605286535799
         long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // 1604681735799
 
@@ -689,7 +702,11 @@ public class Orders extends javax.swing.JInternalFrame {
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
         String CartID = "";
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             CartID = SCART_IDS.get(jList_Orders.getSelectedIndex());
             HttpGet httpget = new HttpGet(BaseAPI + "/shoppingcart/" + CartID);
@@ -719,7 +736,11 @@ public class Orders extends javax.swing.JInternalFrame {
         txtLog.append("\r\n\r\n- Order...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         String OrderID = "";
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         try {
             OrderID = ORDER_IDS.get(jList_Orders.getSelectedIndex());
             HttpGet httpget = new HttpGet(BaseAPI + "/order/" + OrderID);
@@ -1030,9 +1051,15 @@ if(!R.equals("OK")){
                 ",[Payment] " +
                 ",[JCart] " +
                 ",[JOrder] " +
+                ",[UserID] " +
+                ",[UserPW] " +
             "FROM[dbo].[orders] WHERE [Env] = '" + env + "' AND [app] = '" + app + "' ORDER BY[qID] DESC";  
         
-        sw1.start();  
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+  
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery(SQL);
             ResultSetMetaData rsmd = rs.getMetaData();
@@ -1143,7 +1170,7 @@ if(!R.equals("OK")){
             C = "";
             C += "env: " + env + "\r\n";
             C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
-            C += "txtMobile_ID: " + txtMobile_ID.getText() + "\r\n";
+            C += "txtMobile_ID: " + txtMobile_ID.getText().trim() + "\r\n";
             C += "txtMobile_PW: " + txtMobile_PW.getText()  + "\r\n";            
 
         } catch (Exception ex)  {

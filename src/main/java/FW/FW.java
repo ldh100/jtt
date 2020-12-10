@@ -572,6 +572,9 @@ public class FW extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbPromoItemStateChanged
 
     private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
+        if(!btnRun.isEnabled()){
+            return;
+        }
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
@@ -614,7 +617,11 @@ public class FW extends javax.swing.JInternalFrame {
         }
         txtLog.append("\r\n=== Starting Web Driver...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.start();
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
         r_type = "ad-hoc";
 
         if(Driver()){
