@@ -17,6 +17,7 @@ public class __sales_reporting {
     public static void run() throws InterruptedException { 
         _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
+        Thread.sleep(500);          
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > 'Sales Reporting' Click", "xpath", "//*[contains(text(), 'Sales Reporting')]", "no_jira"); 
             if (FAIL) { return;} 
         _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
@@ -26,6 +27,7 @@ public class __sales_reporting {
 //            if (FAIL) { return;}                    
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}   
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Page_URL("Sales Reporting page URL", "no_jira"); 
             if (FAIL) { return;} 
             
@@ -52,6 +54,7 @@ public class __sales_reporting {
 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}              
+        Thread.sleep(500); 
          _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", "no_jira"); 
            if (FAIL) { return;}          
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
@@ -94,6 +97,7 @@ public class __sales_reporting {
             
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}   
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
             if (FAIL) { return;}   
             
@@ -157,6 +161,7 @@ public class __sales_reporting {
         Thread.sleep(500);     
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}   
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", "no_jira"); 
             if (FAIL) { return;}    
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Report Date' open", "xpath", "//input[@aria-label='Report Date']", "no_jira"); 
@@ -170,6 +175,7 @@ public class __sales_reporting {
         Thread.sleep(500);          
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;} 
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for Date(s) update..", "xpath", "//div[contains(@class, 'v-tabs__div')]", "no_jira");
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Tab 1 Text", "xpath", "//div[contains(@class, 'v-tabs__div')][1]", "textContent", "no_jira"); 
@@ -212,7 +218,7 @@ public class __sales_reporting {
         Thread.sleep(500);          
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}         
-        //Thread.sleep(500); 
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.File_Find("Find Report File", System.getProperty("user.home") + File.separator + "Downloads", SITE, "no_jira");
             if (FAIL) { return;} 
             if(!"".equals(t)){
@@ -239,6 +245,7 @@ public class __sales_reporting {
 //                if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}   
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for Date(s) update..", "xpath", "//div[contains(@class, 'v-tabs__div')]", "no_jira");
             if (FAIL) { return;}    
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Tab 1 Text", "xpath", "//div[contains(@class, 'v-tabs__div')][1]", "textContent", "no_jira"); 
@@ -309,7 +316,7 @@ public class __sales_reporting {
         Thread.sleep(500);       
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}         
-        //Thread.sleep(500); 
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.File_Find("Find Report File", System.getProperty("user.home") + File.separator + "Downloads", SITE, "no_jira");
             if (FAIL) { return;} 
             if(!"".equals(t)){
@@ -323,6 +330,7 @@ public class __sales_reporting {
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}  
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Page_URL("Sales Config URL", "no_jira"); 
             if (FAIL) { return;}              
         _t++; Thread.sleep((long) sleep); T.List_L0("Config Sections count", "xpath", "//span[contains(@class, 'H5-Primary-Left')]", "no_jira");             
@@ -385,12 +393,14 @@ public class __sales_reporting {
             
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}            
+        Thread.sleep(500); 
         _t++; T.Refresh("Refresh after Add E-mail", "no_jira");
             if (FAIL) { return;} 
         Thread.sleep(500); 
             
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}            
+        Thread.sleep(500); 
 
         _t++; Thread.sleep((long) sleep); T.List_L0("Recipients count", "xpath", "//div[contains(@class, 'layout pa-1 justify-space-between')]", "no_jira");             
             if (FAIL) { return;}  

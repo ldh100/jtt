@@ -1255,7 +1255,7 @@ public class Station extends javax.swing.JInternalFrame {
     public static String PROMO; 
     public static String New_ID = "";
     
-    public static String S_OAuth_TKN = "";
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV_Brands;

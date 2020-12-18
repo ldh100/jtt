@@ -537,7 +537,7 @@ public class Orders extends javax.swing.JInternalFrame {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + cmbApp.getSelectedItem() +
                 "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
             rs.next();
-            Realm = rs.getString(1);
+            Realm = rs.getString(1);      
             conn.close();
         } catch (SQLException ex) {
             txtLog.append("\r\n\r\n=== Get Realm ID > ERROR: " + ex.getMessage());
@@ -972,11 +972,12 @@ if(!R.equals("OK")){
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }  
         btnRun.setEnabled(true);
-        txtLog.append("\r\n=== Duration: " + (DD.toHours()) + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
+        txtLog.append("\r\n=== Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
         txtLog.append("\r\n=== " + Summary);
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
 
         LOG_UPDATE(); // ========================================================
+               
     }
     
     private void chkAllStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkAllStateChanged
@@ -1353,11 +1354,7 @@ if(!R.equals("OK")){
     private static String app = "";
     private static String env;
     private static String BaseAPI;
-    private static String S_OAuth_TKN;
-    private static String S_Client_ID;
-    private static String S_Client_Secret;
-    private static String S_Signing_Secret;
-    private static String S_Hook;
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;

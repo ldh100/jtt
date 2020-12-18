@@ -1909,57 +1909,6 @@ public class API extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
     }//GEN-LAST:event_btnSCartMouseClicked
-    private void GetOrder(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n\r\n- Order API..."); 
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        String J = "==== Order" + "\r\n";
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        String OrderID = "";     
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        sw1.start();        
-
-        try {
-            OrderID = SCART_IDS.get(jList_Orders.getSelectedIndex());
-            HttpGet httpget = new HttpGet(BaseAPI + "/order/" + OrderID); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/order/" + OrderID + "\r\n" + json.toString(4);
-        } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/order/" + OrderID + " > " + ex.getMessage() + "\r\n";  
-            txtLog.append("\r\n- Exception: " + ex.getMessage());  
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
-        }   
-        
-        try {
-            httpclient.close();
-        } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
-        }
-        txtLog.append("\r\n== " + BaseAPI + "/order/" + OrderID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset();
-
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_FILE(J, "json");
-        if(!R.equals("OK")){
-            txtLog.append(R);
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        } 
-    }                                     
 
     private void jList_OrdersValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList_OrdersValueChanged
         btnSCart.setEnabled(false);
@@ -2251,7 +2200,7 @@ public class API extends javax.swing.JInternalFrame {
             appId = rs.getString(1);
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Get S_OAuth_TKN > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== Get appId > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 

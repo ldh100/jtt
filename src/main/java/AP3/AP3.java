@@ -8,16 +8,12 @@ package AP3;
 import A.Func;
 import static A.A.*;
 import com.google.common.base.Stopwatch;
-import com.ullink.slack.simpleslackapi.SlackChannel;
-import com.ullink.slack.simpleslackapi.SlackMessageHandle;
-import com.ullink.slack.simpleslackapi.SlackSession;
-import com.ullink.slack.simpleslackapi.impl.SlackSessionFactory;
 import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -41,6 +37,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -331,11 +330,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         _sales_analytics.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _sales_analytics.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _sales_analytics.setRequestFocusEnabled(false);
-        _sales_analytics.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                _sales_analyticsActionPerformed(evt);
-            }
-        });
 
         _notifications.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _notifications.setText("Notifications");
@@ -356,42 +350,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(_login, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_site, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_brand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_orders, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_sales_reporting, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_sales_analytics, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_smart_analytics, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_menu_manager, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(_notifications, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(_promo, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(_group_management, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(_announcements, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                        .addComponent(_resent_updates, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(_brand_new, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(_users, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_roles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(_site_new, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(22, 22, 22))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(138, 138, 138)
-                .addComponent(lblSITES15)
-                .addGap(1, 1, 1)
-                .addComponent(txtDH_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -405,6 +363,43 @@ public class AP3 extends javax.swing.JInternalFrame {
                     .addComponent(cmbComp, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_login, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_site, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_brand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_orders, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_sales_reporting, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_sales_analytics, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_smart_analytics, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_menu_manager, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_notifications, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(_promo, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(_group_management, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(_announcements, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                                .addComponent(_resent_updates, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_brand_new, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(_users, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_roles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(_site_new, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(lblSITES15)
+                        .addGap(1, 1, 1)
+                        .addComponent(txtDH_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -772,51 +767,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         d1LastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
 
-    private void Report(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-//        try {
-//            Connection conn = DriverManager.getConnection(QA_BD_CON_STRING); 
-//            ResultSet rs = conn.createStatement().executeQuery("SELECT TOP 1 [Excel] FROM [dbo].[aw_result] WHERE [app] = 'AP3_" 
-//                    + env + "' AND [user_id] = '" + UserID + "' ORDER By qID DESC");
-//            rs.next();
-//            EXX = rs.getString(1);
-//            conn.close();
-//        }catch (SQLException ex){
-//            txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-//        }
-        if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
-            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            txtLog.append("\r\n\r\n=== Report > Not Excel");
-            return;
-        }   
-        try {
-            int col = 9; // 8 + 1 new JIRA = 9
-            String Top_Row = Last_EX.substring(0, Last_EX.indexOf("\r\n"));
-            //Last_EX = Last_EX.substring(Last_EX.indexOf("\r\n") + 2);
-        
-            String[] lines = Last_EX.substring(Last_EX.indexOf("\r\n") + 2).split(System.getProperty("line.separator"));
-            int l = lines.length;
-            String[][] Values = new String[l][col];
-            int n = 1;
-            for (int i = 0; i < l; i++)
-            {
-                String[] v = lines[i].split("\t");
-                System.arraycopy(v, 0, Values[i], 0, v.length); 
-//                for (int j = 0; j < v.length; j++){
-//                    Values[i][j] = v[j];
-//                } 
-            }
-
-            String Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
-            Func.fExcel((l - 1), col, Values, "AP3_" + env + "_" + Date, Top_Row, 0, 0, null, " ", " ");
-        } catch (IOException ex) {
-            txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        }
-        Runtime.getRuntime().gc();
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }
 
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
@@ -874,14 +824,8 @@ public class AP3 extends javax.swing.JInternalFrame {
 
     private void btnExelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExelMouseClicked
         if(!btnExel.isEnabled()) {return;}
-//        try {
-//            Send_File_to_Slack("1", "2", "3");
-//        } catch (IOException ex) {
-//            txtLog.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-//        }
         btnExel.setEnabled(false);
-        Report();
+        Report(true);
         btnExel.setEnabled(true);        
     }//GEN-LAST:event_btnExelMouseClicked
 
@@ -927,7 +871,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         if(!R.equals("OK")){
             txtLog.append(R);
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        }         
+        }   
     }//GEN-LAST:event_btnLogMouseClicked
     private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
         if(!btnRun.isEnabled()){
@@ -1012,10 +956,6 @@ public class AP3 extends javax.swing.JInternalFrame {
          SAVE_CONFIG();
     }//GEN-LAST:event_btnSave_OptMouseClicked
 
-    private void _sales_analyticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__sales_analyticsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event__sales_analyticsActionPerformed
-
     private void LOAD_ENV(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
@@ -1030,7 +970,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             env = "PR";
             url = "https://adminpanel.compassdigital.org/";
         }     
-        Get_AP3_TKN_and_Slack_IDs();
+        Get_AP3_TKN();
         LOAD_CONFIG();
         if (CONFIG) {
             Load = true;
@@ -1241,6 +1181,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             @Override
             protected void done() { 
                 BW2.cancel(true); // ================================================
+                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
                 txtLog.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");  
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 EX = "AP3 " + env + " - v" + Ver + 
@@ -1304,18 +1245,33 @@ public class AP3 extends javax.swing.JInternalFrame {
                     txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                 }  
                 btnRun.setEnabled(true);
-                txtLog.append("\r\n=== Duration: " + (DD.toHours()) + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
+                txtLog.append("\r\n=== Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
                 txtLog.append("\r\n=== " + Summary); // Summary shown in EX top
                 txtLog.append("\r\n=== Scope: " + SCOPE); // SCOPE shown in EX top
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-                //this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));   
+  
                 if(!"".equals(F.trim())){
                     btnFails.setEnabled(true);
                 } else{
                     btnFails.setEnabled(false);
                 }
                 btnExel.setEnabled(true);
+                
                 LOG_UPDATE(); // ========================================================
+                
+                Report(false);
+                
+                String MSG = "AP3_" + env + " Automation report - " + Report_Date +  
+                "\r\n Machine: " + WsID + " OS: " + WsOS + ", User: *" + UserID + "*\r\n" +
+                "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
+                "Scope: " + SCOPE + "\r\n" +
+                "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w;
+                
+                txtLog.append(Func.Send_File_to_Slack(Report_File, "ap3automation", MSG));
+                File f = new File(Report_File);
+                if(f.exists() && !f.isDirectory()) { 
+                    f.delete();
+                }
             } 
         }; 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1369,53 +1325,9 @@ public class AP3 extends javax.swing.JInternalFrame {
         }; 
         BW2.execute();  // executes the swingworker on worker thread   
     }
-    private void Get_AP3_TKN_and_Slack_IDs(){
+
+    private void Get_AP3_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));         
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_OAuth_TKN'");
-            rs.next();
-            S_OAuth_TKN = rs.getString(1);
-            conn.close();
-        } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Get S_OAuth_TKN > ERROR: " + ex.getMessage());
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Client_ID'");
-            rs.next();
-            S_Client_ID = rs.getString(1);
-            conn.close();
-        } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Get S_Client_ID > ERROR: " + ex.getMessage());
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Client_Secret'");
-            rs.next();
-            S_Client_Secret = rs.getString(1);
-            conn.close();
-        } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Get S_Client_Secret > ERROR: " + ex.getMessage());
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Signing_Secret'");
-            rs.next();
-            S_Signing_Secret = rs.getString(1);
-            conn.close();
-        } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Get S_Signing_Secret > ERROR: " + ex.getMessage());
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Hook'");
-            rs.next();
-            S_Hook = rs.getString(1);
-            conn.close();
-        } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Get S_Hook > ERROR: " + ex.getMessage());
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
             rs.next();
@@ -1425,7 +1337,6 @@ public class AP3 extends javax.swing.JInternalFrame {
             txtLog.append("\r\n\r\n=== AP3_TKN > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
-
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetSites() {
@@ -1876,6 +1787,34 @@ public class AP3 extends javax.swing.JInternalFrame {
         }
     } 
        
+    private void Report(boolean Open_File){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        Report_File = "";
+        if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            txtLog.append("\r\n\r\n=== Report > Not Excel");
+            return;
+        }   
+        try {
+            int col = 9; // 8 + 1 new JIRA = 9
+            String Top_Row = Last_EX.substring(0, Last_EX.indexOf("\r\n"));        
+            String[] lines = Last_EX.substring(Last_EX.indexOf("\r\n") + 2).split(System.getProperty("line.separator"));
+            int l = lines.length;
+            String[][] Values = new String[l][col];
+            int n = 1;
+            for (int i = 0; i < l; i++) {
+                String[] v = lines[i].split("\t");
+                System.arraycopy(v, 0, Values[i], 0, v.length); 
+            }
+            Report_File = Func.fExcel((l - 1), col, Values, "AP3_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
+            txtLog.append("\r\n\r\n=== Report Excel file:\r\n" + Report_File + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        } catch (IOException ex) {
+            txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
     private void LOG_UPDATE(){  
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
@@ -1993,43 +1932,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    private void Send_File_to_Slack(String Slack_File_Name, String File_Path, String Channel_Name) throws IOException {
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        String RES;
-        try{
-            //File file = new File(File_Path); // "C:\xTT_Data\TAX_Upload\JJKitchen_Android_Staging_P2_Func_27_Apr_2020_03_48PM.xlsx"
-            //File file = new File("C:\\xTT_Data\\TAX_Upload\\JJKitchen_Android_Staging_P2_Func_27_Apr_2020_03_48PM.xlsx"); 
-            String Path = "C:\\xTT_Data\\TAX_Upload\\JJKitchen_Android_Staging_P2_Func_27_Apr_2020_03_48PM.xlsx";
 
-//            MultipartEntityBuilder builder = MultipartEntityBuilder.create(); 
-//            builder.addTextBody("token", AP3.S_OAuth_TKN);
-//            builder.addTextBody("channels", "xtt_test"); // Channel_Name
-//            builder.addTextBody("initial_comment", "Test Message");
-//            builder.addBinaryBody(File_Path, file);
-//            HttpEntity multiPartEntity = builder.build();
-//
-//            CloseableHttpClient httpclient = HttpClients.createDefault();
-//            HttpPost httpPost = new HttpPost("https://slack.com/api/files.upload");
-//            httpPost.setEntity(multiPartEntity); 
-//
-//            HttpResponse response = httpclient.execute(httpPost);
-//            RES = response.toString().replace("{", "{\r\n").replace("}", "\r\n}").replace(",", ",\r\n");
-            byte[] data = Files.readAllBytes(Paths.get(Path));
-            SlackSession session = SlackSessionFactory.createWebSocketSlackSession(S_OAuth_TKN);
-            session.connect();
-            SlackChannel channel = session.findChannelByName("xtt_reports");
-            SlackMessageHandle sendMessage = session.sendFile(channel, data, "File_Name_On_Slack");
-            RES = sendMessage.getReply().toString(); 
-
-            
-            txtLog.append("\r\n\r\n=== Send_File_to_Slack >  No error" + "\r\n" + RES);         
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }catch(IOException ex) {
-            txtLog.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }
     private void LOAD_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
@@ -2196,6 +2099,8 @@ public class AP3 extends javax.swing.JInternalFrame {
     private String Last_EX;
     private static final Stopwatch sw1 = Stopwatch.createUnstarted();
     private boolean Load;
+    private String Report_Date;
+    private String Report_File;
     private static Duration DD;
     private static SwingWorker BW1;  
     private static SwingWorker BW2; 
@@ -2226,7 +2131,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     public static String IM_ID; 
     public static String IM_PW;
     
-    private static String S_OAuth_TKN = "";
+    
     private static String S_Client_ID = "";
     private static String S_Client_Secret  = "";
     private static String S_Signing_Secret = "";

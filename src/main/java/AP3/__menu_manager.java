@@ -22,6 +22,7 @@ public class __menu_manager {
         int PAGES;
         _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
+        Thread.sleep(500);          
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > 'Menu Manager' Click", "xpath", "//*[contains(text(), 'Menu Manager')]", "no_jira"); 
             if (FAIL) { return;} 
         _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
@@ -1000,7 +1001,7 @@ public class __menu_manager {
 
         // <editor-fold defaultstate="collapsed" desc="Global Menus Import">  
         EX += " - " + "\t" + " === MM Global Menus Import" + "\t" + " ===== " + "\t" + " == Global Menus Import Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-        if(!DH_Menu_ID.contains(" ") && DH_Menu_ID.length() > 19){ // check for valid ID
+        if(!DH_Menu_ID.contains(" ") && DH_Menu_ID.length() > 18){ // check for valid ID
             _t++; Thread.sleep((long) sleep); T.List_L3("Menus Pages Count", "xpath", "//button[contains(@class, 'v-pagination__item')]", "no_jira"); 
             PAGES = L3.size();
 

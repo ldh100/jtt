@@ -70,6 +70,7 @@ public class __login {
             } 
         _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
+        Thread.sleep(500);          
         _t++; Thread.sleep((long) sleep); T.List_L0("Drawer Items Count", "css", "[role='listitem']", "no_jira");             
             if (FAIL) { return;}
             for (int i = 0; i < L0.size(); i++) {

@@ -320,7 +320,7 @@ public class W_Report extends javax.swing.JInternalFrame {
 
     private void btnExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcelMouseClicked
         btnExcel.setEnabled(false);
-        EXCEL();
+        Report(true);
         btnExcel.setEnabled(true);
     }//GEN-LAST:event_btnExcelMouseClicked
 
@@ -339,7 +339,7 @@ public class W_Report extends javax.swing.JInternalFrame {
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }                   
         }catch (SQLException ex){
-            txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
     }//GEN-LAST:event_btnLogMouseClicked
@@ -406,7 +406,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         );
         txtLog.setCaretPosition(0);
     }
-    private void EXCEL(){
+    private void Report(boolean Open_File){
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String EXX = "";
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
@@ -416,7 +416,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             EXX = rs.getString(1);
             conn.close();
         }catch (SQLException ex){
-            txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
+            txtLog.append("\r\n\r\n=== " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         if ("".equals(EXX.trim()) || "None".equals(EXX.trim())){
@@ -436,40 +436,25 @@ public class W_Report extends javax.swing.JInternalFrame {
             for (int i = 0; i < l; i++) {
                 String[] v = lines[i].split("\t");
                 System.arraycopy(v, 0, Values[i], 0, v.length); 
-//                for (int j = 0; j < v.length; j++){
-//                    Values[i][j] = v[j];
-//                } 
             }
-            String Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
-            Func.fExcel((l - 1), col, Values, DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()) + "_" +Date, Top_Row, 0, 0, null, " ", " ");
-//                Toolkit toolkit = Toolkit.getDefaultToolkit();
-//                Clipboard clipboard = null;
-//                try{
-//                    clipboard = toolkit.getSystemClipboard();
-//                    clipboard.setContents( new StringSelection(""), null); // 900009
-//                }catch (Exception ex){
-//                    Thread.sleep(20);
-//                    clipboard = toolkit.getSystemClipboard();
-//                    clipboard.setContents( new StringSelection(""), null);
-//                    //clipboard.setContents( DV1["app", DV1.SelectedCells[0].RowIndex].Value.ToString() + "_" + Date);  
-//                }
-
-//            File ExcelLog = new File("ExcelLog.txt");
-//            if (ExcelLog.createNewFile()) {
-//                txtLog.append("\r\n\r\n=== Report > File created: " + ExcelLog.getName());
-//                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-
-//            } else {
-//                txtLog.append("\r\n\r\n=== Report > File already exists.");
-//                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-//            }
-//            Files.write(Paths.get(ExcelLog.getPath()), EXX.getBytes());
-//            java.awt.Desktop.getDesktop().open(ExcelLog);
+            String Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+            try{
+                Report_Date = DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("Date").getModelIndex()).toString() +
+                    " " + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("Time").getModelIndex()).toString();
+                DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                Date R_Date = formatter.parse(Report_Date); 
+                formatter = new SimpleDateFormat("dd_MMM_yyyy_hh_mma");
+                Report_Date = formatter.format(R_Date);
+            } catch (Exception ex){
+                txtLog.append("\r\n\r\n=== Report Excel Error: " + ex.getMessage()+ "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+            txtLog.append("\r\n\r\n=== Report Excel file:\r\n" + Func.fExcel((l - 1), col, Values, DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()) + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File) + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch (IOException ex) {
             txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
-        Runtime.getRuntime().gc();
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }                                     
 

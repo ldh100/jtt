@@ -15,6 +15,7 @@ import com.ullink.slack.simpleslackapi.impl.SlackSessionFactory;
 import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -678,6 +679,7 @@ public class DL extends javax.swing.JInternalFrame {
         Done(dw_start);
     }
     private void Done(Instant dw_start){
+        Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
         txtLog.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");  
         txtLog.setCaretPosition(txtLog.getDocument().getLength());               
         EX = "DL " + env + " - v" + Ver + 
@@ -732,7 +734,7 @@ public class DL extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }  
         btnRun.setEnabled(true);
-        txtLog.append("\r\n=== Duration: " + (DD.toHours()) + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
+        txtLog.append("\r\n=== Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
         txtLog.append("\r\n=== " + Summary); // Summary shown in EX top
         txtLog.append("\r\n=== Scope: " + SCOPE); // SCOPE shown in EX top
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -743,7 +745,22 @@ public class DL extends javax.swing.JInternalFrame {
             btnFails.setEnabled(false);
         }
         btnExel.setEnabled(true);
+        
         LOG_UPDATE(); // ========================================================
+        
+        Report(false);
+                
+        String MSG = "DL_" + env + " Automation report - " + Report_Date  +  
+                "\r\n Machine: " + WsID + " OS: " + WsOS + ", User: *" + UserID + "*\r\n" +
+                "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
+                "Scope: " + SCOPE + "\r\n" +
+                "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w;
+        
+        txtLog.append(Func.Send_File_to_Slack(Report_File, "dl_automation", MSG));
+        File f = new File(Report_File);
+        if(f.exists() && !f.isDirectory()) { 
+            f.delete();
+        }
     }
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
         String R = Func.SHOW_FILE(txtLog.getText(), "txt");
@@ -764,14 +781,8 @@ public class DL extends javax.swing.JInternalFrame {
 
     private void btnExelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExelMouseClicked
         if(!btnExel.isEnabled()) {return;}
-        //        try {
-            //            Send_File_to_Slack("1", "2", "3");
-            //        } catch (IOException ex) {
-            //            txtLog.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
-            //            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            //        }
         btnExel.setEnabled(false);
-        Report();
+        Report(true);
         btnExel.setEnabled(true);
     }//GEN-LAST:event_btnExelMouseClicked
 
@@ -1314,45 +1325,10 @@ public class DL extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    private void Send_File_to_Slack(String Slack_File_Name, String File_Path, String Channel_Name) throws IOException {
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        String RES;
-        try{
-            //File file = new File(File_Path); // "C:\xTT_Data\TAX_Upload\JJKitchen_Android_Staging_P2_Func_27_Apr_2020_03_48PM.xlsx"
-            //File file = new File("C:\\xTT_Data\\TAX_Upload\\JJKitchen_Android_Staging_P2_Func_27_Apr_2020_03_48PM.xlsx"); 
-            String Path = "C:\\xTT_Data\\TAX_Upload\\JJKitchen_Android_Staging_P2_Func_27_Apr_2020_03_48PM.xlsx";
 
-//            MultipartEntityBuilder builder = MultipartEntityBuilder.create(); 
-//            builder.addTextBody("token", DL.S_OAuth_TKN);
-//            builder.addTextBody("channels", "xtt_test"); // Channel_Name
-//            builder.addTextBody("initial_comment", "Test Message");
-//            builder.addBinaryBody(File_Path, file);
-//            HttpEntity multiPartEntity = builder.build();
-//
-//            CloseableHttpClient httpclient = HttpClients.createDefault();
-//            HttpPost httpPost = new HttpPost("https://slack.com/api/files.upload");
-//            httpPost.setEntity(multiPartEntity); 
-//
-//            HttpResponse response = httpclient.execute(httpPost);
-//            RES = response.toString().replace("{", "{\r\n").replace("}", "\r\n}").replace(",", ",\r\n");
-            byte[] data = Files.readAllBytes(Paths.get(Path));
-            SlackSession session = SlackSessionFactory.createWebSocketSlackSession(S_OAuth_TKN);
-            session.connect();
-            SlackChannel channel = session.findChannelByName("xtt_reports");
-            SlackMessageHandle sendMessage = session.sendFile(channel, data, "File_Name_On_Slack");
-            RES = sendMessage.getReply().toString(); 
-
-            
-            txtLog.append("\r\n\r\n=== Send_File_to_Slack >  No error" + "\r\n" + RES);  
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }catch(IOException ex) {
-            txtLog.append("\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage());
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }
-    private void Report(){
+    private void Report(boolean Open_File){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        Report_File = "";
         if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             txtLog.append("\r\n\r\n=== Report > Not Excel");
@@ -1368,22 +1344,19 @@ public class DL extends javax.swing.JInternalFrame {
             int l = lines.length;
             String[][] Values = new String[l][col];
             int n = 1;
-            for (int i = 0; i < l; i++)
-            {
+            for (int i = 0; i < l; i++) {
                 String[] v = lines[i].split("\t");
                 System.arraycopy(v, 0, Values[i], 0, v.length); 
-//                for (int j = 0; j < v.length; j++){
-//                    Values[i][j] = v[j];
-//                } 
             }
 
-            String Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
-            Func.fExcel((l - 1), col, Values, "DL_" + env + "_" + Date, Top_Row, 0, 0, null, " ", " ");
+            Report_File = Func.fExcel((l - 1), col, Values, "DL_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
+            txtLog.append("\r\n\r\n=== Report Excel file:\r\n" + Report_File + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+;
         } catch (IOException ex) {
             txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
-        Runtime.getRuntime().gc();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
       
@@ -1392,6 +1365,8 @@ public class DL extends javax.swing.JInternalFrame {
     public static String env = "";
 
     private boolean Load;
+    private String Report_Date;
+    private String Report_File;
     private static Duration DD;
     private int d1LastRow = -1; 
     private int d2LastRow = -1; 
@@ -1420,11 +1395,7 @@ public class DL extends javax.swing.JInternalFrame {
     private static String CAN = "Canada";
 
     
-    public static String S_OAuth_TKN = "";
-    public static String S_Client_ID = "";
-    public static String S_Client_Secret  = "";
-    public static String S_Signing_Secret = "";
-    public static String S_Hook = "";
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;

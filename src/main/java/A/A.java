@@ -13,12 +13,16 @@ import WO.WO;
 import Orders.Orders;
 import Station.Station;
 import java.awt.Cursor;
+import java.awt.Image;
 import java.beans.PropertyVetoException;
 import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -28,6 +32,7 @@ import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.UIManager;
 import org.openqa.selenium.WebDriver;
@@ -475,12 +480,13 @@ public class A extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Menu_FWMouseClicked
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        //Get_Version();
         Get_User();
         this.setTitle("JTT v1.0.1" + " - " + "User: " + UserID + ", Machine: " + WsID + ", OS: " + WsOS);
         if (!UserID.toLowerCase().contains("oleg")){
             Register_Login();            
         }
+        Get_AP3_TKN_and_Slack_IDs();
+        
         Menu_AP3.setToolTipText("Ap3 Automation Manager");
         MenuWO.setToolTipText("Web Ordering Automation"); 
         Menu_FW.setToolTipText("Food Works Automation"); 
@@ -654,12 +660,70 @@ public class A extends javax.swing.JFrame {
         }
         //setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     } 
+    private void Get_AP3_TKN_and_Slack_IDs(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));         
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_OAuth_TKN'");
+            rs.next();
+            S_OAuth_TKN = rs.getString(1);
+            conn.close();
+        } catch (SQLException ex) {
+            S_OAuth_TKN = ex.getMessage();
+
+        }
+//        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+//            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Client_ID'");
+//            rs.next();
+//            S_Client_ID = rs.getString(1);
+//            conn.close();
+//        } catch (SQLException ex) {
+//            txtLog.append("\r\n\r\n=== Get S_Client_ID > ERROR: " + ex.getMessage());
+//            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+//        }
+//        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+//            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Client_Secret'");
+//            rs.next();
+//            S_Client_Secret = rs.getString(1);
+//            conn.close();
+//        } catch (SQLException ex) {
+//            txtLog.append("\r\n\r\n=== Get S_Client_Secret > ERROR: " + ex.getMessage());
+//            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+//        }
+//        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+//            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Signing_Secret'");
+//            rs.next();
+//            S_Signing_Secret = rs.getString(1);
+//            conn.close();
+//        } catch (SQLException ex) {
+//            txtLog.append("\r\n\r\n=== Get S_Signing_Secret > ERROR: " + ex.getMessage());
+//            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+//        }
+//        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+//            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Hook'");
+//            rs.next();
+//            S_Hook = rs.getString(1);
+//            conn.close();
+//        } catch (SQLException ex) {
+//            txtLog.append("\r\n\r\n=== Get S_Hook > ERROR: " + ex.getMessage());
+//            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+//        }
+//        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+//            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
+//            rs.next();
+//            AP3_TKN = rs.getString(1);
+//            conn.close();
+//        } catch (SQLException ex) {
+//            txtLog.append("\r\n\r\n=== AP3_TKN > ERROR: " + ex.getMessage());
+//            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+//        }
+
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
     
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        Get_User();
         try {
             for (UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 //                if ("Nimbus".equals(info.getName())) {
@@ -681,20 +745,28 @@ public class A extends javax.swing.JFrame {
             F.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
-//                    try {
-//                        if(conn != null && !conn.isClosed()){ conn.close(); }
-//                    }
-//                    catch (SQLException ex) {
-//                        Logger.getLogger(AP3.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-//                    }
+                    //
                 }
             });
+
+//            try{
+//                //Image i = (new ImageIcon(ClassLoader.getResource("/images/jTTi32.png"))).getImage(); // .png
+//                //ImageIcon ii = new ImageIcon("jTTi32.png", "JTT");               
+//
+//                ImageIcon ii = new ImageIcon(new URL("images/jTTi32.png"));
+//                Image i = ii.getImage();// .png
+//                F.setIconImage(i);
+//            }catch(MalformedURLException ex){
+//                java.util.logging.Logger.getLogger(AP3.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
+//            }
             F.setLocationRelativeTo(null);
             F.setVisible(true);
         });
     }
+
     // <editor-fold defaultstate="collapsed" desc="Public & Private Variables">
     public static final String QA_BD_CON_STRING = "jdbc:sqlserver://dev-digitalhospitality-sql.database.windows.net:1433;database=cdlqadb;user=xttadmin;password=Sp515s10#a;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+    public static String S_OAuth_TKN = "";
     public static String API_Response_Body = "";
     public static int T_Index;
     public static WebDriver d1;
@@ -753,7 +825,7 @@ public class A extends javax.swing.JFrame {
     public static String WsOS = "";  
 
     public static String SQL = "";  
-
+    private ImageIcon II;  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane DesktopPane;

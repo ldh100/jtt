@@ -4,11 +4,16 @@
  * and open the template in the editor.
  */
 package A;
+import com.ullink.slack.simpleslackapi.SlackChannel;
+import com.ullink.slack.simpleslackapi.SlackMessageHandle;
+import com.ullink.slack.simpleslackapi.SlackSession;
+import com.ullink.slack.simpleslackapi.impl.SlackSessionFactory;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.util.Arrays;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,6 +22,13 @@ import java.nio.file.Paths;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
@@ -112,8 +124,8 @@ public class Func {
             double part = n - Math.floor(n); return Math.round(leftNumber + part * (rightNumber - leftNumber));
         }
     }
-    public static void fExcel(int row1, int col1, String[][] Values1, String SheetName1, String Top_Row1, 
-                              int row2, int col2, String[][] Values2, String SheetName2, String Top_Row2) 
+    public static String fExcel(int row1, int col1, String[][] Values1, String SheetName1, String Top_Row1, 
+                              int row2, int col2, String[][] Values2, String SheetName2, String Top_Row2, boolean Open_File) 
         throws FileNotFoundException, IOException    {
         File ExcelFile;
         try (XSSFWorkbook WB = new XSSFWorkbook()) { //Create blank workbook
@@ -188,13 +200,53 @@ public class Func {
             SH1.setColumnWidth(3,12000);
             SH1.setColumnWidth(5,5000);
             //Write the workbook in file system
-            String userHomeFolder = System.getProperty("user.home") + "/Desktop";
-            ExcelFile = new File(userHomeFolder, SheetName1 + ".xlsx");
+            String UserDesktop = System.getProperty("user.home") + "/Desktop";
+            ExcelFile = new File(UserDesktop, SheetName1 + ".xlsx");
             try (FileOutputStream out = new FileOutputStream(ExcelFile)) {
                 WB.write(out);
             }
-        } //Create a blank sheet 1 //Create a blank sheet 1
-        System.out.println(ExcelFile + " written successfully");
-        java.awt.Desktop.getDesktop().open(ExcelFile);
+        } 
+        if(Open_File){
+            java.awt.Desktop.getDesktop().open(ExcelFile);
+        }
+        return ExcelFile.getAbsolutePath();
+    }
+
+    public static String Send_File_to_Slack(String Path, String Channel, String MSG) {
+        try{           
+            File file = new File(Path); 
+            MultipartEntityBuilder builder = MultipartEntityBuilder.create(); 
+            builder.addTextBody("token", A.S_OAuth_TKN); 
+            builder.addTextBody("channels", Channel); 
+            builder.addTextBody("initial_comment", MSG); 
+            //builder.addPart(Path, contentBody);
+            builder.addBinaryBody(
+                "file", // File_Name
+                new FileInputStream(file), 
+                ContentType.APPLICATION_OCTET_STREAM,
+                file.getName()
+             );
+
+            HttpEntity multiPartEntity = builder.build();
+
+            CloseableHttpClient httpclient = HttpClients.createDefault();
+            HttpPost httpPost = new HttpPost("https://slack.com/api/files.upload");
+            httpPost.setEntity(multiPartEntity); 
+
+            HttpResponse response = httpclient.execute(httpPost);
+            return "\r\n\r\n=== Send_File_to_Slack - " + response.getStatusLine() + "\r\n"; 
+
+//            byte[] data = Files.readAllBytes(Paths.get(Path));   
+//            SlackSession session = SlackSessionFactory.createWebSocketSlackSession(A.S_OAuth_TKN);
+//            //SlackSession session = SlackSessionFactory.getSlackSessionBuilder(A.S_OAuth_TKN);
+//            session.connect();
+//            SlackChannel channel = session.findChannelByName(Channel);
+//            SlackMessageHandle sendMessage = session.sendFile(channel, data, File_Name, "File_Upload_with Message", MSG); //sendFile(channel, data, "File_Name_On_Slack");
+//            String RES = sendMessage.getReply().toString(); 
+//            return "\r\n\r\n=== Send_File_to_Slack - " + RES + "\r\n";         
+
+        }catch(IOException ex) {
+            return "\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage() + "\r\n";
+        }
     }
 }
