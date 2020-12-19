@@ -190,8 +190,7 @@ public class A extends javax.swing.JFrame {
             DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             try {
                 Open_AP3();
-            }
-            catch (PropertyVetoException ex) {
+            } catch (PropertyVetoException ex) {
                 Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
             }
             DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -524,8 +523,7 @@ public class A extends javax.swing.JFrame {
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
             Open_Station();
-        }
-        catch (PropertyVetoException ex) {
+        } catch (PropertyVetoException ex) {
             Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -541,8 +539,7 @@ public class A extends javax.swing.JFrame {
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
             Open_WO();
-        }
-        catch (PropertyVetoException ex) {
+        } catch (PropertyVetoException ex) {
             Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -572,8 +569,7 @@ public class A extends javax.swing.JFrame {
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
             Open_API();
-        }
-        catch (PropertyVetoException ex) {
+        } catch (PropertyVetoException ex) {
             Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -590,8 +586,7 @@ public class A extends javax.swing.JFrame {
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
             Open_DL();
-        }
-        catch (PropertyVetoException ex) {
+        } catch (PropertyVetoException ex) {
             Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -713,7 +708,6 @@ public class A extends javax.swing.JFrame {
 //            txtLog.append("\r\n\r\n=== AP3_TKN > ERROR: " + ex.getMessage());
 //            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
 //        }
-
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     

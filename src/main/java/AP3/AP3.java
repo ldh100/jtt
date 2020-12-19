@@ -122,13 +122,14 @@ public class AP3 extends javax.swing.JInternalFrame {
         btnLog = new javax.swing.JButton();
         btnFails = new javax.swing.JButton();
         btnExel = new javax.swing.JButton();
-        _headless = new javax.swing.JCheckBox();
         btnSave_Opt = new javax.swing.JButton();
         lblSITES11 = new javax.swing.JLabel();
         lblSITES13 = new javax.swing.JLabel();
         lblSITES14 = new javax.swing.JLabel();
         cmbEnv = new javax.swing.JComboBox<>();
         cmbApp = new javax.swing.JComboBox<>();
+        _slack = new javax.swing.JCheckBox();
+        _headless = new javax.swing.JCheckBox();
         txtADMIN_ID = new javax.swing.JTextField();
         txtSM_ID = new javax.swing.JTextField();
         txtIM_ID = new javax.swing.JTextField();
@@ -146,9 +147,9 @@ public class AP3 extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("AP3 Automation Manager >>> loading, please wait ... ... ... ...");
-        setMinimumSize(new java.awt.Dimension(860, 532));
+        setMinimumSize(new java.awt.Dimension(854, 529));
         setName("AP3"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(860, 532));
+        setPreferredSize(new java.awt.Dimension(854, 529));
         setVerifyInputWhenFocusTarget(false);
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -456,7 +457,7 @@ public class AP3 extends javax.swing.JInternalFrame {
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {_announcements, _brand, _group_management, _login, _orders, _promo, _resent_updates, _sales_reporting, _site});
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 188, 424, 232));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 184, 424, 232));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -601,7 +602,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 52, 78, 22));
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 52, 78, 32));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -611,7 +612,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
-        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 52, 84, 22));
+        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 60, 84, 22));
 
         btnFails.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnFails.setText("Show Fails");
@@ -635,13 +636,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         });
         jPanel3.add(btnExel, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 84, 22));
 
-        _headless.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
-        _headless.setText("Headless <");
-        _headless.setToolTipText("");
-        _headless.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _headless.setRequestFocusEnabled(false);
-        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 56, 80, 14));
-
         btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSave_Opt.setText("Save Setup");
         btnSave_Opt.setMargin(new java.awt.Insets(2, 4, 2, 4));
@@ -651,7 +645,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 btnSave_OptMouseClicked(evt);
             }
         });
-        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 52, 116, 22));
+        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 116, 22));
 
         lblSITES11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -687,7 +681,19 @@ public class AP3 extends javax.swing.JInternalFrame {
         });
         jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 28, 108, 20));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 424, 416, 76));
+        _slack.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        _slack.setText("Report to Slack");
+        _slack.setToolTipText("");
+        _slack.setRequestFocusEnabled(false);
+        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 52, 100, 14));
+
+        _headless.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        _headless.setText("Headless <<<<");
+        _headless.setToolTipText("");
+        _headless.setRequestFocusEnabled(false);
+        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 68, 100, 14));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 416, 416, 84));
 
         txtADMIN_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtADMIN_ID.setText("oleg.spozito@compassdigital.io");
@@ -768,15 +774,6 @@ public class AP3 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_DV1MouseClicked
 
 
-    private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
-        if(!btnFails.isEnabled()) {return;}
-        String R = Func.SHOW_FILE(F, "txt");
-        if(!R.equals("OK")){
-            txtLog.append(R);
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        }
-    }//GEN-LAST:event_btnFailsMouseClicked
-
     private void AP3_AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_AP3_AncestorAdded
         jPanel1.addComponentListener(new ComponentListener() {
             @Override
@@ -822,29 +819,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         this.setTitle("AP3 Automation Manager");
     }
 
-    private void btnExelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExelMouseClicked
-        if(!btnExel.isEnabled()) {return;}
-        btnExel.setEnabled(false);
-        Report(true);
-        btnExel.setEnabled(true);        
-    }//GEN-LAST:event_btnExelMouseClicked
-
-    private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
-        if(!Load && evt.getStateChange() == 1) {
-            cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-            LOAD_ENV();
-            cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        }
-    }//GEN-LAST:event_cmbEnvItemStateChanged
-    private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
-        if(!Load && evt.getStateChange() == 1) {
-            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-            app = cmbApp.getSelectedItem().toString();
-            GetSites();
-            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        }
-    }//GEN-LAST:event_cmbAppItemStateChanged
-
     private void cmbGroupItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbGroupItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
             GetCompanies();
@@ -866,13 +840,52 @@ public class AP3 extends javax.swing.JInternalFrame {
         Location = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 1));
         GetBrandSector();
     }//GEN-LAST:event_DV2MouseClicked
+
+    private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
+        if(!Load && evt.getStateChange() == 1) {
+            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            app = cmbApp.getSelectedItem().toString();
+            GetSites();
+            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        }
+    }//GEN-LAST:event_cmbAppItemStateChanged
+
+    private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
+        if(!Load && evt.getStateChange() == 1) {
+            cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            LOAD_ENV();
+            cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        }
+    }//GEN-LAST:event_cmbEnvItemStateChanged
+
+    private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
+        SAVE_CONFIG();
+    }//GEN-LAST:event_btnSave_OptMouseClicked
+
+    private void btnExelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExelMouseClicked
+        if(!btnExel.isEnabled()) {return;}
+        btnExel.setEnabled(false);
+        Report(true);
+        btnExel.setEnabled(true);
+    }//GEN-LAST:event_btnExelMouseClicked
+
+    private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
+        if(!btnFails.isEnabled()) {return;}
+        String R = Func.SHOW_FILE(F, "txt");
+        if(!R.equals("OK")){
+            txtLog.append(R);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        }
+    }//GEN-LAST:event_btnFailsMouseClicked
+
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
         String R = Func.SHOW_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R);
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        }   
+        }
     }//GEN-LAST:event_btnLogMouseClicked
+
     private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
         if(!btnRun.isEnabled()){
             return;
@@ -886,7 +899,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         Wait = (double)nWaitElement.getValue();
         Timeout = (double)nWaitLoad.getValue();
         sleep = (double)nShowPage.getValue() *1000;
-        
+
         EX = "";
         F = "";
         t_calls = 0;
@@ -900,7 +913,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         _f = 0; // Failed
         _w = 0; // Warn
         r_time = "";
-        
+
         ADMIN_ID = txtADMIN_ID.getText();
         ADMIN_PW = txtADMIN_PW.getText();
         SM_ID = txtADMIN_ID.getText();
@@ -910,16 +923,16 @@ public class AP3 extends javax.swing.JInternalFrame {
         ALL_DATA = _all_data.isSelected();
         DH_Menu_ID = txtDH_Id.getText();
         SCOPE = "";
-        
+
         if(DV1.getRowCount() > 0) {
-            SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();            
+            SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
             platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform
-            CAN = DV1.getValueAt(DV1.getSelectedRow(), 2).toString(); 
+            CAN = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
         }
         if(DV2.getRowCount() > 0) {
             BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
         }
-        
+
         GROUP = cmbGroup.getSelectedItem().toString();
         GL_MENU = cmbComp.getSelectedItem().toString();
 
@@ -932,29 +945,25 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
         r_type = "ad-hoc";
-        
+
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
-        
+        sw1.start();
+
         if(Driver()){
             txtLog.append("\r\n=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
             sw1.reset();
             LOG_START(); // ========================================================
             BW1_DoWork(
-                // parameters?    
+                // parameters?
             );
             BW2_DoWork(
-                // parameters?  
+                // parameters?
             );
         }
     }//GEN-LAST:event_btnRunMouseClicked
-
-    private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
-         SAVE_CONFIG();
-    }//GEN-LAST:event_btnSave_OptMouseClicked
 
     private void LOAD_ENV(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
@@ -1957,6 +1966,10 @@ public class AP3 extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
+             
+                c = C.substring(C.indexOf("_slack:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _slack.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_headless:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _headless.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+
                 c = C.substring(C.indexOf("GROUP:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GROUP = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("GL_MENU:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GL_MENU = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
@@ -2029,6 +2042,9 @@ public class AP3 extends javax.swing.JInternalFrame {
             C += "CAN: " + CAN + "\r\n";
             C += "DH_MENU_ID: " + txtDH_Id.getText() + "\r\n";
             
+            C += "_slack: " + _slack.isSelected() + "\r\n";
+            C += "_headless: " + _headless.isSelected() + "\r\n";  
+           
             C += "txtEMail: " + txtADMIN_ID.getText() + "\r\n";
             C += "txtPW: " + txtADMIN_PW.getText()  + "\r\n";
             C += "txtSM: " + txtSM_ID.getText()  + "\r\n";
@@ -2181,6 +2197,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _sales_reporting;
     private javax.swing.JCheckBox _site;
     private javax.swing.JCheckBox _site_new;
+    private javax.swing.JCheckBox _slack;
     private javax.swing.JCheckBox _smart_analytics;
     private javax.swing.JCheckBox _users;
     private javax.swing.JButton btnExel;

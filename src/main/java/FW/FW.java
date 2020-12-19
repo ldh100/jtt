@@ -7,17 +7,11 @@ package FW;
 import A.Func;
 import static A.A.*;
 import com.google.common.base.Stopwatch;
-import com.ullink.slack.simpleslackapi.SlackChannel;
-import com.ullink.slack.simpleslackapi.SlackMessageHandle;
-import com.ullink.slack.simpleslackapi.SlackSession;
-import com.ullink.slack.simpleslackapi.impl.SlackSessionFactory;
 import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -32,9 +26,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-import javax.swing.SwingWorker;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
@@ -100,11 +92,12 @@ public class FW extends javax.swing.JInternalFrame {
         btnLog = new javax.swing.JButton();
         btnFails = new javax.swing.JButton();
         btnExel = new javax.swing.JButton();
-        _headless = new javax.swing.JCheckBox();
         btnSave_Opt = new javax.swing.JButton();
         lblSITES11 = new javax.swing.JLabel();
         lblSITES13 = new javax.swing.JLabel();
         cmbEnv = new javax.swing.JComboBox<>();
+        _slack = new javax.swing.JCheckBox();
+        _headless = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -447,7 +440,7 @@ public class FW extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 52, 78, 22));
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 52, 78, 36));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -457,7 +450,7 @@ public class FW extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
-        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 52, 84, 22));
+        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 64, 84, 22));
 
         btnFails.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnFails.setText("Show Fails");
@@ -481,13 +474,6 @@ public class FW extends javax.swing.JInternalFrame {
         });
         jPanel3.add(btnExel, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 84, 22));
 
-        _headless.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
-        _headless.setText("Headless <");
-        _headless.setToolTipText("");
-        _headless.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _headless.setRequestFocusEnabled(false);
-        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 56, 80, 14));
-
         btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSave_Opt.setText("Save Setup");
         btnSave_Opt.setMargin(new java.awt.Insets(2, 4, 2, 4));
@@ -497,7 +483,7 @@ public class FW extends javax.swing.JInternalFrame {
                 btnSave_OptMouseClicked(evt);
             }
         });
-        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 52, 116, 22));
+        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 64, 116, 22));
 
         lblSITES11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -519,7 +505,19 @@ public class FW extends javax.swing.JInternalFrame {
         });
         jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 28, 116, 20));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 424, 416, 76));
+        _slack.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        _slack.setText("Report to Slack");
+        _slack.setToolTipText("");
+        _slack.setRequestFocusEnabled(false);
+        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 56, 100, 14));
+
+        _headless.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        _headless.setText("Headless <<<<");
+        _headless.setToolTipText("");
+        _headless.setRequestFocusEnabled(false);
+        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 72, 100, 14));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 416, 416, 88));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -924,6 +922,9 @@ public class FW extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
 
+                c = C.substring(C.indexOf("_slack:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _slack.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_headless:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _headless.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+
                 c = C.substring(C.indexOf("RESTORAUNT:")); c = c.substring(0, c.indexOf("\r\n")).trim(); RESTORAUNT = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("UNIT:")); c = c.substring(0, c.indexOf("\r\n")).trim(); UNIT = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("CAN:")); c = c.substring(0, c.indexOf("\r\n")).trim(); CAN = c.substring(c.indexOf(" ")).trim();
@@ -973,6 +974,9 @@ public class FW extends javax.swing.JInternalFrame {
             C += "env: " + env + "\r\n";
             C += "url: " + url + "\r\n";
             
+            C += "_slack: " + _slack.isSelected() + "\r\n";
+            C += "_headless: " + _headless.isSelected() + "\r\n";  
+ 
             C += "RESTORAUNT: " + _S + "\r\n";
             C += "UNIT: " + _B + "\r\n";
             C += "CAN: " + CAN + "\r\n";            
@@ -1033,6 +1037,7 @@ public class FW extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
+
     private void LOG_UPDATE(){  
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
 
@@ -1237,6 +1242,7 @@ public class FW extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _logout;
     private javax.swing.JCheckBox _orders;
     private javax.swing.JCheckBox _password;
+    private javax.swing.JCheckBox _slack;
     private javax.swing.JButton btnExel;
     private javax.swing.JButton btnFails;
     private javax.swing.JButton btnLog;

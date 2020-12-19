@@ -468,22 +468,22 @@ public class API extends javax.swing.JInternalFrame {
                 cmbGroupItemStateChanged(evt);
             }
         });
-        getContentPane().add(cmbGroup, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 436, 188, 20));
+        getContentPane().add(cmbGroup, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 440, 188, 20));
 
         lblSITES8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES8.setText("Group/Sector:");
         lblSITES8.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES8, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 420, -1, -1));
+        getContentPane().add(lblSITES8, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 424, -1, -1));
 
         cmbComp.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        getContentPane().add(cmbComp, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 436, 188, 20));
+        getContentPane().add(cmbComp, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 440, 188, 20));
 
         lblSITES12.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES12.setText("Company/Global Menu:");
         lblSITES12.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES12, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 420, -1, -1));
+        getContentPane().add(lblSITES12, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 424, -1, -1));
 
         btnRun.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnRun.setText(" Run ^^^");
