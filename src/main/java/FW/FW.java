@@ -751,19 +751,20 @@ public class FW extends javax.swing.JInternalFrame {
         
         LOG_UPDATE(); // ========================================================
         
-        Report(false);
-                
-        String MSG = "FW_" + env + " Automation report - " + Report_Date  +  
-                "\r\n Machine: " + WsID + " OS: " + WsOS + ", User: *" + UserID + "*\r\n" +
-                "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
-                "Scope: " + SCOPE + "\r\n" +
-                "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w;
-        
-        txtLog.append(Func.Send_File_to_Slack(Report_File, "fw_automation", MSG));
-        File f = new File(Report_File);
-        if(f.exists() && !f.isDirectory()) { 
-            f.delete();
-        }        
+        if(_slack.isSelected()){
+            Report(false);
+            String MSG = "FW_" + env + " Automation report - " + Report_Date  +  
+                    "\r\n Machine: " + WsID + " OS: " + WsOS + ", User: *" + UserID + "*\r\n" +
+                    "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
+                    "Scope: " + SCOPE + "\r\n" +
+                    "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w;
+
+            txtLog.append(Func.Send_File_to_Slack(Report_File, "fw_automation", MSG));
+            File f = new File(Report_File);
+            if(f.exists() && !f.isDirectory()) { 
+                f.delete();
+            }  
+        }
     }
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
