@@ -1737,6 +1737,56 @@ public class T {
         } 
         sw1.reset();
     }    
+    public static void Element_Child_Text_Enter(String NAME, WebElement E, String BY, String PATH, String VAL, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        WebElement _e = null;
+        try {
+            switch (BY) {
+                case "xpath":
+                    _e = E.findElement(By.xpath(PATH));
+                    break;
+                case "css":
+                    _e = E.findElement(By.cssSelector(PATH));
+                    break;
+                case "className":
+                    _e = E.findElement(By.className(PATH));
+                    break;
+                case "id":
+                    _e = E.findElement(By.id(PATH));
+                    break;
+                case "tagName":
+                    _e = E.findElement(By.tagName(PATH));
+                    break;
+                case "name":
+                    _e = E.findElement(By.name(PATH));
+                    break;
+                case "linkText":
+                    _e = E.findElement(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    _e = E.findElement(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            _e.sendKeys(VAL);
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true;  err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        } 
+        sw1.reset();
+    }
     public static void Element_Child_Click(String NAME, WebElement E, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
@@ -2317,16 +2367,16 @@ public class T {
  
         FAIL = false;
         try {
-            switch (BY) {
-                case "xpath":
-                    t = L.get(I).findElement(By.xpath(PATH)).getAttribute(VAL); 
-                    break;
-                case "css":
-                    t = L.get(I).findElement(By.cssSelector(PATH)).getAttribute(VAL); 
-                    break;
-                default:
-                    break;
-            }
+//            switch (BY) {
+//                case "xpath":
+//                    t = L.get(I).findElement(By.xpath(PATH)).getAttribute(VAL); 
+//                    break;
+//                case "css":
+//                    t = L.get(I).findElement(By.cssSelector(PATH)).getAttribute(VAL); 
+//                    break;
+//                default:
+//                    break;
+//            }
             e = L.get(I).findElement(By.cssSelector(PATH));
             e.sendKeys(VAL);
             _p++; 
