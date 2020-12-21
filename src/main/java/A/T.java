@@ -1245,6 +1245,44 @@ public class T {
         }
         sw1.reset();
     }
+    public static void Click_out_of_Element(String NAME, WebElement E,String VAL, int X, int Y, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+
+            int XX = E.getLocation().x;
+            int YY = E.getLocation().y;
+            if("Right".equals(VAL)){ 
+                XX = XX + e.getSize().width + X;
+            } else if ("Left".equals(VAL)){ 
+                XX = XX + X; 
+            }
+            
+            if("Bottom".equals(VAL)){ 
+                YY = YY + e.getSize().height + Y;
+            } else if ("Top".equals(VAL)){ 
+                YY = YY + Y; 
+            }
+            
+            Actions action = new Actions(d1);
+            action.moveToElement(E, XX, YY).click().perform();
+            //Thread.sleep(500);
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Click out of element successful" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true;  err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + VAL + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
     public static void Clickable_Element_By_Path_Click(String NAME, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();

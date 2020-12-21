@@ -93,15 +93,19 @@ public class WO extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         _login = new javax.swing.JCheckBox();
         _all_data = new javax.swing.JCheckBox();
-        _1 = new javax.swing.JCheckBox();
-        _2 = new javax.swing.JCheckBox();
-        _orders = new javax.swing.JCheckBox();
-        _3 = new javax.swing.JCheckBox();
-        _4 = new javax.swing.JCheckBox();
+        _account_settings = new javax.swing.JCheckBox();
+        _pending_orders = new javax.swing.JCheckBox();
+        _edit_item = new javax.swing.JCheckBox();
+        _order_history = new javax.swing.JCheckBox();
+        _place_delivery_order = new javax.swing.JCheckBox();
         _password = new javax.swing.JCheckBox();
         _logout = new javax.swing.JCheckBox();
         cmbPromo = new javax.swing.JComboBox<>();
         lblSITES8 = new javax.swing.JLabel();
+        _place_pickup_order = new javax.swing.JCheckBox();
+        _new_user = new javax.swing.JCheckBox();
+        _order_email = new javax.swing.JCheckBox();
+        _expore_brand_menu = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         cmbBrow = new javax.swing.JComboBox<>();
         btnRun = new javax.swing.JButton();
@@ -227,24 +231,24 @@ public class WO extends javax.swing.JInternalFrame {
 
         lblSITES4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES4.setText("Mobile/Web User E-mail:");
+        lblSITES4.setText("Existing Mobile/Web User Email");
         lblSITES4.setToolTipText("");
         lblSITES4.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 380, 120, -1));
+        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 356, 180, -1));
 
         txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_ID.setText("App_User@?.?");
-        getContentPane().add(txtMobile_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 396, 212, -1));
+        getContentPane().add(txtMobile_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 372, 212, -1));
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES6.setText("Mobile/Web User Password");
+        lblSITES6.setText("< Password");
         lblSITES6.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(664, 380, -1, -1));
+        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 356, -1, -1));
 
         txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_PW.setText("password");
-        getContentPane().add(txtMobile_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(664, 396, 184, -1));
+        getContentPane().add(txtMobile_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 372, 164, -1));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
 
@@ -317,7 +321,7 @@ public class WO extends javax.swing.JInternalFrame {
 
         _login.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _login.setSelected(true);
-        _login.setText("Login ");
+        _login.setText("Existing User (EU) Login ");
         _login.setEnabled(false);
         _login.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
@@ -325,42 +329,43 @@ public class WO extends javax.swing.JInternalFrame {
 
         _all_data.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _all_data.setText("Show all data rows");
+        _all_data.setEnabled(false);
         _all_data.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _all_data.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _all_data.setRequestFocusEnabled(false);
 
-        _1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _1.setText("op1");
-        _1.setContentAreaFilled(false);
-        _1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _account_settings.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _account_settings.setText("Account Settings");
+        _account_settings.setContentAreaFilled(false);
+        _account_settings.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _account_settings.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
-        _2.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _2.setText("op2");
-        _2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _2.setRequestFocusEnabled(false);
+        _pending_orders.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _pending_orders.setText("Pending_orders");
+        _pending_orders.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _pending_orders.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _pending_orders.setRequestFocusEnabled(false);
 
-        _orders.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _orders.setText("Place Order");
-        _orders.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _orders.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _orders.setRequestFocusEnabled(false);
+        _edit_item.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _edit_item.setText("Edit / Remove Item");
+        _edit_item.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _edit_item.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _edit_item.setRequestFocusEnabled(false);
 
-        _3.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _3.setText("op3");
-        _3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _3.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _3.setRequestFocusEnabled(false);
+        _order_history.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _order_history.setText("Order History");
+        _order_history.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _order_history.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _order_history.setRequestFocusEnabled(false);
 
-        _4.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _4.setText("op4");
-        _4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _4.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _4.setRequestFocusEnabled(false);
+        _place_delivery_order.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _place_delivery_order.setText("Place Delivery Order");
+        _place_delivery_order.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _place_delivery_order.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _place_delivery_order.setRequestFocusEnabled(false);
 
         _password.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _password.setText("Forgot Password");
+        _password.setText("Reset Password");
         _password.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _password.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _password.setRequestFocusEnabled(false);
@@ -385,59 +390,100 @@ public class WO extends javax.swing.JInternalFrame {
         lblSITES8.setText("Promo Code");
         lblSITES8.setAlignmentX(0.5F);
 
+        _place_pickup_order.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _place_pickup_order.setText("Place Pickup Order");
+        _place_pickup_order.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _place_pickup_order.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _place_pickup_order.setRequestFocusEnabled(false);
+
+        _new_user.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _new_user.setText("New User (NU)");
+        _new_user.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _new_user.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _new_user.setRequestFocusEnabled(false);
+
+        _order_email.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _order_email.setText("Order Email Confirmation");
+        _order_email.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _order_email.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _order_email.setRequestFocusEnabled(false);
+
+        _expore_brand_menu.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _expore_brand_menu.setSelected(true);
+        _expore_brand_menu.setText("Explore Brand Menu");
+        _expore_brand_menu.setEnabled(false);
+        _expore_brand_menu.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _expore_brand_menu.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _expore_brand_menu.setRequestFocusEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(_1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                        .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_expore_brand_menu)
+                    .addComponent(_pending_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_edit_item, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_place_delivery_order, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_place_pickup_order, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_login)
+                    .addComponent(_order_email, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(56, 56, 56)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lblSITES8)
-                        .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                        .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_order_history, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_account_settings, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_new_user, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
-                .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(_1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(_2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(_3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblSITES8)
-                    .addComponent(_4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(_new_user, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(108, 108, 108))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(_account_settings, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(_order_history, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblSITES8)
+                        .addGap(2, 2, 2)
+                        .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(_pending_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(_expore_brand_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(_edit_item, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(_place_pickup_order, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(_place_delivery_order, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(_order_email, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 120, 412, 172));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 64, 412, 232));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -493,7 +539,7 @@ public class WO extends javax.swing.JInternalFrame {
         _headless.setText("Headless <<<<");
         _headless.setToolTipText("");
         _headless.setRequestFocusEnabled(false);
-        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 68, 100, 14));
+        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 68, 104, 14));
 
         btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSave_Opt.setText("Save Setup");
@@ -544,7 +590,7 @@ public class WO extends javax.swing.JInternalFrame {
         _slack.setText("Report to Slack");
         _slack.setToolTipText("");
         _slack.setRequestFocusEnabled(false);
-        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 52, 100, 14));
+        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 52, 108, 14));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 416, 416, 88));
 
@@ -594,10 +640,6 @@ public class WO extends javax.swing.JInternalFrame {
             }
         });
     }//GEN-LAST:event_formAncestorAdded
-
-    private void cmbPromoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPromoItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbPromoItemStateChanged
 
     private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
         if(!btnRun.isEnabled()){
@@ -679,18 +721,31 @@ public class WO extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === Login " + "\t" + " ===== " + "\t" + " == Login Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             __login.run();
             EX += " - " + "\t" + " === ^ Login " + "\t" + " ===== " + "\t" + " == ^ Login End " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            //Thread.sleep(1500);
+        }
+
+        if (_expore_brand_menu.isSelected()) { 
+            SCOPE += ", Explore Brand Menu";
+            EX += " - " + "\t" + " === Explore Brand Menu" + "\t" + " ===== " + "\t" + " == Explore Brand Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            __explore_brand_menu.run(_edit_item.isSelected());
+            EX += " - " + "\t" + " === ^ Explore Brand Menu" + "\t" + " ===== " + "\t" + " == ^ Explore Brand Menu" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
 
-        if (_orders.isSelected()) { 
-            SCOPE += ", Place Order";
-            EX += " - " + "\t" + " === Place Order" + "\t" + " ===== " + "\t" + " == Place Order >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            __orders.run();
-            EX += " - " + "\t" + " === ^ Place Order" + "\t" + " ===== " + "\t" + " == ^ Place Order End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        if (_place_pickup_order.isSelected()) { 
+            SCOPE += ", Place Pickup Order";
+            EX += " - " + "\t" + " === Place Pickup Order" + "\t" + " ===== " + "\t" + " == Place Pickup Order >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            __place_order.run(false);
+            EX += " - " + "\t" + " === ^ Place Pickup Order" + "\t" + " ===== " + "\t" + " == ^ Place Pickup Order" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
-
-
+        if (_place_delivery_order.isSelected()) { 
+            SCOPE += ", Place Pickup Order";
+            EX += " - " + "\t" + " === Place Delivery Order" + "\t" + " ===== " + "\t" + " == Place Delivery Order >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            __place_order.run(true);
+            EX += " - " + "\t" + " === ^ Place Delivery Order" + "\t" + " ===== " + "\t" + " == ^ Place Delivery Order" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }
         // ============================== Last Blocks
         if (_logout.isSelected()) { 
             SCOPE += ", LogOut";
@@ -720,7 +775,7 @@ public class WO extends javax.swing.JInternalFrame {
         txtLog.append("\r\n" + EX.replaceAll("\t", " > ")); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         Last_EX = EX;
-        try  { 
+        try { 
             if(d1 != null) {
                 d1.quit(); 
             }
@@ -839,6 +894,10 @@ public class WO extends javax.swing.JInternalFrame {
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbAppItemStateChanged
+
+    private void cmbPromoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPromoItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbPromoItemStateChanged
     private void Load_Form(){
         Load = true;
 //        cmbApp.addItem("Boost");
@@ -849,7 +908,6 @@ public class WO extends javax.swing.JInternalFrame {
         cmbApp.addItem("Thrive");
         
         cmbEnv.addItem("Staging");
-
         cmbEnv.addItem("Development");
         //cmbEnv.addItem("Production");         
         cmbEnv.setSelectedIndex(1); // delevopment
@@ -889,7 +947,6 @@ public class WO extends javax.swing.JInternalFrame {
             if(_headless.isSelected()){
                 op.addArguments("--headless");
             }
-
             op.setPageLoadStrategy(PageLoadStrategy.NORMAL);
 
             d1 = new ChromeDriver(op);
@@ -1212,11 +1269,14 @@ public class WO extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("nWaitElement:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitElement.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("nWaitLoad:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitLoad.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
 
-                c = C.substring(C.indexOf("_1:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _1.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_2:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _2.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_3:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _3.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_4:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _4.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_orders:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _orders.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_new_user:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _new_user.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_account_settings:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _account_settings.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_pending_orders:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _pending_orders.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_order_history:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _order_history.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_edit_item:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _edit_item.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_place_pickup_order:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _place_pickup_order.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_place_delivery_order:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _place_delivery_order.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_order_email:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _order_email.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_password:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _password.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_all_data:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _all_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_logout:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _logout.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
@@ -1266,11 +1326,15 @@ public class WO extends javax.swing.JInternalFrame {
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
             C += "nWaitLoad: " + nWaitLoad.getValue()+ "\r\n";
 
-            C += "_1: " + _1.isSelected() + "\r\n";
-            C += "_2: " + _2.isSelected() + "\r\n";
-            C += "_3: " + _3.isSelected() + "\r\n";
-            C += "_4: " + _4.isSelected() + "\r\n";
-            C += "_orders: " + _orders.isSelected() + "\r\n";
+            C += "_new_user: " + _new_user.isSelected() + "\r\n";
+            C += "_account_settings: " + _account_settings.isSelected() + "\r\n";
+            C += "_pending_orders: " + _pending_orders.isSelected() + "\r\n";
+            C += "_order_history: " + _order_history.isSelected() + "\r\n";
+            C += "_edit_item: " + _edit_item.isSelected() + "\r\n";
+            C += "_place_pickup_order: " + _place_pickup_order.isSelected() + "\r\n";
+            C += "_place_delivery_order: " + _place_delivery_order.isSelected() + "\r\n";
+            C += "_order_email: " + _order_email.isSelected() + "\r\n";
+
             C += "_password: " + _password.isSelected() + "\r\n";         
             C += "_all_data: " + _all_data.isSelected() + "\r\n";
             C += "_logout: " + _logout.isSelected() + "\r\n";
@@ -1517,16 +1581,20 @@ public class WO extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;
-    private javax.swing.JCheckBox _1;
-    private javax.swing.JCheckBox _2;
-    private javax.swing.JCheckBox _3;
-    private javax.swing.JCheckBox _4;
+    private javax.swing.JCheckBox _account_settings;
     private javax.swing.JCheckBox _all_data;
+    private javax.swing.JCheckBox _edit_item;
+    private javax.swing.JCheckBox _expore_brand_menu;
     private javax.swing.JCheckBox _headless;
     private javax.swing.JCheckBox _login;
     private javax.swing.JCheckBox _logout;
-    private javax.swing.JCheckBox _orders;
+    private javax.swing.JCheckBox _new_user;
+    private javax.swing.JCheckBox _order_email;
+    private javax.swing.JCheckBox _order_history;
     private javax.swing.JCheckBox _password;
+    private javax.swing.JCheckBox _pending_orders;
+    private javax.swing.JCheckBox _place_delivery_order;
+    private javax.swing.JCheckBox _place_pickup_order;
     private javax.swing.JCheckBox _slack;
     private javax.swing.JButton btnExel;
     private javax.swing.JButton btnFails;

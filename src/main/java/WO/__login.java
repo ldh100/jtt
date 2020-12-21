@@ -3,16 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
-
-
-
-
-//Comment by Larry
-
-
-
 package WO;
 import A.T;
 import static A.A.*;
@@ -73,8 +63,8 @@ public class __login {
             if (FAIL) { return;}  
         _t++; T.Element_Child_Text_Enter("Enter Valid Pssword", L1.get(1), "tagName" , "input",USER_PW, "no_jira"); 
             if (FAIL) { return;} 
-            
-        _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click LOGIN", e1,"xpath", ".//*[@class='row align-end switch-form no-gutters']", "no_jira");             
+        Thread.sleep(500);             
+        _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click LOGIN", e1,"xpath", ".//button[@class='v-btn v-btn--contained theme--light v-size--default turquoise']", "no_jira");             
             if (FAIL) { return;} 
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");                                                                                     

@@ -11,8 +11,9 @@ import static WO.WO.*;
  *
  * @author Oleg.Spozito
  */
-public class __logout {
-    public static void run() throws InterruptedException {   
-         
-    }
+public class __place_order {
+    public static void run(boolean DELIVERY) throws InterruptedException { 
+
+        
+    }  
 }
