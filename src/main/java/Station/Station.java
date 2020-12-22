@@ -1135,7 +1135,7 @@ public class Station extends javax.swing.JInternalFrame {
 
                 c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("CAN:")); c = c.substring(0, c.indexOf("\r\n")).trim(); CAN = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("COUNTRY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); COUNTRY = c.substring(c.indexOf(" ")).trim();
                 CONFIG = true;
                 txtLog.append("\r\n\r\n=== LOAD_CONFIG > OK");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1169,7 +1169,7 @@ public class Station extends javax.swing.JInternalFrame {
             
             C += "SITE: " + _S + "\r\n";
             C += "BRAND: " + _B + "\r\n";
-            C += "CAN: " + CAN + "\r\n";            
+            C += "COUNTRY: " + COUNTRY + "\r\n";            
 
         } catch (Exception ex)  {
             txtLog.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
@@ -1247,7 +1247,7 @@ public class Station extends javax.swing.JInternalFrame {
     public static String BRAND = "";
     public static String BrandID = "";
 
-    public static String CAN = "CAN";
+    public static String COUNTRY = "COUNTRY";
 
     public static String platform = "CDL";
     public static String BaseAPI;

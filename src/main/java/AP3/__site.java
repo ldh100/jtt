@@ -405,7 +405,7 @@ public class __site {
                         if (FAIL) { return;}
                     _t++; T.Find_Text("Find 'Country' text", "Country", true,"no_jira"); 
                         if (FAIL) { return;}
-                    if(CAN.toLowerCase().contains("can")){
+                    if(COUNTRY.toLowerCase().contains("can")){
                         _t++; T.Find_Text("Find 'Province' text", "Province", true,"no_jira"); 
                             if (FAIL) { return;} 
                         _t++; T.Find_Text("Find 'Postal Code' text", "Postal Code", true,"no_jira"); 

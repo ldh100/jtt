@@ -763,10 +763,11 @@ public class AP3 extends javax.swing.JInternalFrame {
         if (d1LastRow == DV1.getSelectedRow()) {
            return;
         }
-        GetBrands();
         SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
+        COUNTRY = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 2));
         d1LastRow = DV1.getSelectedRow(); 
+        GetBrands();
     }//GEN-LAST:event_DV1MouseClicked
 
 
@@ -923,7 +924,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         if(DV1.getRowCount() > 0) {
             SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
             platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform
-            CAN = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
+            COUNTRY = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
         }
         if(DV2.getRowCount() > 0) {
             BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
@@ -2037,7 +2038,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             C += "GL_MENU: " + cmbComp.getSelectedItem().toString() + "\r\n";
             C += "SITE: " + _S + "\r\n";
             C += "BRAND: " + _B + "\r\n";
-            C += "CAN: " + CAN + "\r\n";
+            C += "COUNTRY: " + COUNTRY + "\r\n";
             C += "DH_MENU_ID: " + txtDH_Id.getText() + "\r\n";
             
             C += "_slack: " + _slack.isSelected() + "\r\n";
@@ -2158,7 +2159,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     public static String env = "";
     public static String platform = "CDL";
     public static String BaseAPI;
-    public static String CAN = "CAN";
+    public static String COUNTRY = "COUNTRY";
     public static String SITE = "";
     public static String SiteID = "";
     public static String GROUP = "";

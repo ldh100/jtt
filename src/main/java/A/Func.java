@@ -4,10 +4,6 @@
  * and open the template in the editor.
  */
 package A;
-import com.ullink.slack.simpleslackapi.SlackChannel;
-import com.ullink.slack.simpleslackapi.SlackMessageHandle;
-import com.ullink.slack.simpleslackapi.SlackSession;
-import com.ullink.slack.simpleslackapi.impl.SlackSessionFactory;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;

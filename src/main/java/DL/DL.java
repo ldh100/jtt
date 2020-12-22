@@ -33,6 +33,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -107,6 +110,7 @@ public class DL extends javax.swing.JInternalFrame {
         cmbEnv = new javax.swing.JComboBox<>();
         _slack = new javax.swing.JCheckBox();
         _headless = new javax.swing.JCheckBox();
+        btnGet_User = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -519,10 +523,28 @@ public class DL extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 416, 416, 88));
 
+        btnGet_User.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnGet_User.setText(" < Get User");
+        btnGet_User.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        btnGet_User.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGet_UserMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnGet_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 348, 84, 22));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    // https://api.compassdigital.org/dev/location/multigroup/91LoqkPqyDCeGj4JllPRS2e0pWRRj5UZwMWR5E01FwGwORg7kyI0kwpjakyGfK7geXm602UXkg7XzlNDI0k?web=true&expanded=true
+    // admin@distilr.io MortyEscapedOntario >> https://app.distilr.io/
+    // distilr.test@place.com Compass1 >> https://dev.member.distilr.io/
+    
+    // https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBTMCuLvll2eQq5BLiBQxtzo-PqYZLluaI
+    // Payload:
+    // {"email":"admin@distilr.io","password":"MortyEscapedOntario","returnSecureToken":true}
+    
+    // https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyBTMCuLvll2eQq5BLiBQxtzo-PqYZLluaI
+    // Payload
+    // {"idToken":"eyJhbGciOiJSUzI1NiIsImtpZCI6IjNjYmM4ZjIyMDJmNjZkMWIxZTEwMTY1OTFhZTIxNTZiZTM5NWM2ZDciLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRGlzdGlsciBBZG1pbiIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9jZGwtLS1kYXJ3aW4tMTUyOTYxMTk3MTE0MSIsImF1ZCI6ImNkbC0tLWRhcndpbi0xNTI5NjExOTcxMTQxIiwiYXV0aF90aW1lIjoxNjA4NTkxNTY2LCJ1c2VyX2lkIjoiTUpLY3RpeWNVeE9NcXFXZWFaQkZOWDZrb280MiIsInN1YiI6Ik1KS2N0aXljVXhPTXFxV2VhWkJGTlg2a29vNDIiLCJpYXQiOjE2MDg1OTE1NjYsImV4cCI6MTYwODU5NTE2NiwiZW1haWwiOiJhZG1pbkBkaXN0aWxyLmlvIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImFkbWluQGRpc3RpbHIuaW8iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.UxorccVXwbfrE43KutPXClyGeQs30749stdeCPBhEtaoMsLd9FVj-lwgTkAc_EWjJfpgSEpImaDBYeoKcR1lUIEm9QI8FqRaocQ7nc4UZvlfYOXZ4wEsrgFDki6hUlGeI3_s49FgIIfEBQa04iFVrez7IYb_GLbFZShNy9xhUXMtM5_G7YykiKC7H21gWSF55dso03dDYxAHG6V0oJCwcl03iXewhksC2pN_XEWAcLD40ltpn8wi82Ue4jqYMr_HAErITAdZoot1K9Fd7Wg9EoY54wTWwVEwA8URFLoBK4V6BF5dItvEre6zOVnta5f0Ts0qRytSAe9fBQ6vGSKE-A"}
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
         if (d1LastRow == DV1.getSelectedRow()) {
            return;
@@ -603,7 +625,7 @@ public class DL extends javax.swing.JInternalFrame {
         
         if(DV1.getRowCount() > 0) {
             MANUF = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
-            CAN = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
+            COUNTRY = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
         }
         if(DV2.getRowCount() > 0) {
             CATEGORY = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
@@ -793,17 +815,12 @@ public class DL extends javax.swing.JInternalFrame {
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
-    private void Load_Form(){
-        // admin@distilr.io
-        // PW MortyEscapedOntario
-        Load = true;
-//        cmbApp.addItem("Boost");
-//        cmbApp.addItem("Canteen");
-//        cmbApp.addItem("JJKitchen");
-//        cmbApp.addItem("Rogers");
-//        cmbApp.addItem("Tacit");
 
-        
+    private void btnGet_UserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGet_UserMouseClicked
+        GET_DL_USER_TOKEN(true);
+    }//GEN-LAST:event_btnGet_UserMouseClicked
+    private void Load_Form(){
+        Load = true;      
         cmbEnv.addItem("Staging");
         cmbEnv.addItem("Development");
         cmbEnv.addItem("Production");         
@@ -875,24 +892,92 @@ public class DL extends javax.swing.JInternalFrame {
             env = "PR";
             url = "https://app.distilr.io/";
         }
-        Get_DL_TKN();
         LOAD_CONFIG();
-
+        GET_DL_USER_TOKEN(false);
         //GetManufacturers();       
     }
-    private void Get_DL_TKN(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
-            rs.next();
-            DL_TKN = rs.getString(1);
-            conn.close();
-        } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== DL_TKN > ERROR: " + ex.getMessage());
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+    private void GET_DL_USER_TOKEN(boolean ShowResilt) {                                                
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("\r\n\r\n- DL User...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+    // client_id=FMP+Distilr+DEV  
+    // admin@distilr.io MortyEscapedOntario >> https://app.distilr.io/
+    // distilr.test@place.com Compass1 >> https://dev.member.distilr.io/
+    
+        String J = "==== DL User:" + "\r\n";
+
+        if(sw1.isRunning()){
+            sw1.reset();
         }
+        sw1.start();         // ============ DL User verify Password
+        try { 
+            CloseableHttpClient httpclient = HttpClients.createDefault();
+            String json = "{\"email\":\"" + txtAdmin_ID.getText().trim() + "\",\"password\":\"" + txtAdmin_PW.getText().trim() + "\",\"returnSecureToken\":true}";
+            StringEntity entity = new StringEntity(json);  
+            HttpPost httpPost = new HttpPost("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBTMCuLvll2eQq5BLiBQxtzo-PqYZLluaI");
+            httpPost.setEntity(entity); 
+            httpPost.setHeader("Accept", "application/json");
+            httpPost.setHeader("Content-type", "application/json");
+    
+            HttpResponse response = httpclient.execute(httpPost);
+            String jsonString = EntityUtils.toString(response.getEntity());
+            JSONObject Json = new JSONObject(jsonString);
+            ID_TKN = Json.getString("idToken");
+            REFRESH_TKN = Json.getString("refreshToken");
+            
+            J += "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBTMCuLvll2eQq5BLiBQxtzo-PqYZLluaI" + "\r\n" 
+            + Json.toString(4) + "\r\n";
+//            + response.getStatusLine() + "\r\n"; 
+            J += "\r\n";            
+
+        } catch (IOException | JSONException ex) {
+            J += "Error: " + ex.getMessage();            
+            txtLog.append("\r\n- verifyPassword Error: " + ex.getMessage());  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
+        }   
+        txtLog.append("\r\n== verifyPassword > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();   
+
+        sw1.start();         // ============ DL User verify Password
+        try { 
+            CloseableHttpClient httpclient = HttpClients.createDefault();
+            String json = "{\"idToken\":\"" + ID_TKN + "\"}";
+            StringEntity entity = new StringEntity(json);  
+            HttpPost httpPost = new HttpPost("https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyBTMCuLvll2eQq5BLiBQxtzo-PqYZLluaI");
+            httpPost.setEntity(entity); 
+            httpPost.setHeader("Accept", "application/json");
+            httpPost.setHeader("Content-type", "application/json");
+    
+            HttpResponse response = httpclient.execute(httpPost);
+            String jsonString = EntityUtils.toString(response.getEntity());
+            JSONObject Json = new JSONObject(jsonString);
+            //DL_TKN = Json.getString("idToken");
+            
+            J += "https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyBTMCuLvll2eQq5BLiBQxtzo-PqYZLluaI" + "\r\n" 
+            + Json.toString(4) + "\r\n";
+//            + response.getStatusLine() + "\r\n"; 
+            //J += "\r\n";            
+
+        } catch (IOException | JSONException ex) {
+            J += "Error: " + ex.getMessage();            
+            txtLog.append("\r\n- getAccountInfo Error: " + ex.getMessage());  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
+        }   
+        txtLog.append("\r\n== getAccountInfo= > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();         
+        
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }
+        
+        if(ShowResilt){
+            String R = Func.SHOW_FILE(J, "json");
+            if(!R.equals("OK")){
+                txtLog.append(R);
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            } 
+        }
+    }                                               
     private void GetManufacturers() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -903,8 +988,7 @@ public class DL extends javax.swing.JInternalFrame {
         }
         sw1.start();        
 
-
-        String[] SitesColumnsName = {"MAnufacturer","Id"}; 
+        String[] SitesColumnsName = {"Manufacturer","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
         SitesModel.setColumnIdentifiers(SitesColumnsName);
         DV1.setModel(SitesModel);
@@ -914,7 +998,7 @@ public class DL extends javax.swing.JInternalFrame {
             HttpGet httpget = new HttpGet(BaseAPI + "???");         
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 300) {
+                if (status >= 200 && status < 500) {
                     HttpEntity entity = response.getEntity();
                     return entity != null ? EntityUtils.toString(entity) : null;
                 } else {
@@ -922,7 +1006,7 @@ public class DL extends javax.swing.JInternalFrame {
                 }
             };
             String responseBody = httpclient.execute(httpget, responseHandler);  
-                JSONObject json = new JSONObject(responseBody);
+            JSONObject json = new JSONObject(responseBody);
 
             DV1.setDefaultEditor(Object.class, null);
 //            DV1.getColumnModel().getColumn(0).setPreferredWidth(250);
@@ -943,6 +1027,7 @@ public class DL extends javax.swing.JInternalFrame {
             }
         }
         DV1.setModel(SitesModel);
+        
         txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
@@ -1099,7 +1184,7 @@ public class DL extends javax.swing.JInternalFrame {
 
                 c = C.substring(C.indexOf("MANUF:")); c = c.substring(0, c.indexOf("\r\n")).trim(); MANUF = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("CATEGORY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); CATEGORY = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("CAN:")); c = c.substring(0, c.indexOf("\r\n")).trim(); CAN = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("COUNTRY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); COUNTRY = c.substring(c.indexOf(" ")).trim();
 
                 c = C.substring(C.indexOf("txtAdmin_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_ID.setText(c.substring(c.indexOf(" ")).trim());
                 c = C.substring(C.indexOf("txtAdmin_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_PW.setText(c.substring(c.indexOf(" ")).trim());
@@ -1151,7 +1236,7 @@ public class DL extends javax.swing.JInternalFrame {
            
             C += "MANUF: " + _S + "\r\n";
             C += "CATEGORY: " + _B + "\r\n";
-            C += "CAN: " + CAN + "\r\n";            
+            C += "COUNTRY: " + COUNTRY + "\r\n";            
             
             C += "txtAdmin_ID: " + txtAdmin_ID.getText() + "\r\n";
             C += "txtAdmin_PW: " + txtAdmin_PW.getText()  + "\r\n";
@@ -1351,11 +1436,9 @@ public class DL extends javax.swing.JInternalFrame {
                 String[] v = lines[i].split("\t");
                 System.arraycopy(v, 0, Values[i], 0, v.length); 
             }
-
             Report_File = Func.fExcel((l - 1), col, Values, "DL_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
             txtLog.append("\r\n\r\n=== Report Excel file:\r\n" + Report_File + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
-;
         } catch (IOException ex) {
             txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1378,8 +1461,7 @@ public class DL extends javax.swing.JInternalFrame {
     private List<String> MENU_IDS;  
     private boolean CONFIG = false;
     private String C = "";
-    private String userID;
-    private String userTKN;
+
     public static int T_Index;
     private String Last_EX;    
     private static final Stopwatch sw1 = Stopwatch.createUnstarted();
@@ -1388,14 +1470,17 @@ public class DL extends javax.swing.JInternalFrame {
     private static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     private static String SQL = ""; 
     private String SCOPE;
-    private static String DL_TKN = "";    
-
+    
+    private static String ID_TKN = "";    
+    private static String DL_TKN = ""; 
+    private static String REFRESH_TKN = "";  
+    
     private static String MANUF = "";
     private static String ManID = "";
     private static String CATEGORY = "";
     private static String CatID = "";
     private static String BaseAPI = "";
-    private static String CAN = "Canada";
+    private static String COUNTRY = "Canada";
 
     
 
@@ -1414,6 +1499,7 @@ public class DL extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _slack;
     private javax.swing.JButton btnExel;
     private javax.swing.JButton btnFails;
+    private javax.swing.JButton btnGet_User;
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;
     private javax.swing.JButton btnSave_Opt;

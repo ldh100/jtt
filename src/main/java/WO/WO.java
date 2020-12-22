@@ -603,6 +603,8 @@ public class WO extends javax.swing.JInternalFrame {
         }
         GetBrands();
         SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
+        platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform        
+        COUNTRY = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 2));
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
         d1LastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
@@ -677,12 +679,11 @@ public class WO extends javax.swing.JInternalFrame {
         if(DV1.getRowCount() > 0) {
             SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
             platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform
-            CAN = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
+            COUNTRY = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
         }
         if(DV2.getRowCount() > 0) {
             BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
         }
-
 
         if(_headless.isSelected()) {
             txtLog.append("\r\n=== Headless mode is selected - Browser is hidden");
@@ -1044,7 +1045,6 @@ public class WO extends javax.swing.JInternalFrame {
             String responseBody = httpclient.execute(httpget, responseHandler);  
                 JSONObject json = new JSONObject(responseBody);
             String site;
-            String country;
             String id;
             JSONObject addresses;
             JSONObject meta;
@@ -1052,7 +1052,7 @@ public class WO extends javax.swing.JInternalFrame {
             JSONArray Groups = json.getJSONArray("groups");
             for (int i = 0; i < Groups.length(); i++) {
                 site = "";
-                country = "null";
+                COUNTRY = "null";
                 id = "null";
                 addresses = null;
                 meta = null;
@@ -1078,9 +1078,9 @@ public class WO extends javax.swing.JInternalFrame {
                         addresses = sites.getJSONObject("address");
                     }  
                     if(addresses != null && addresses.has("country")){
-                        country = addresses.getString("country");   
+                        COUNTRY = addresses.getString("country");   
                     }
-                    SitesModel.addRow(new Object[]{site, platform, country, id});                   
+                    SitesModel.addRow(new Object[]{site, platform, COUNTRY, id});                   
                 }
             DV1.setModel(SitesModel);
             DV1.setDefaultEditor(Object.class, null);
@@ -1135,8 +1135,6 @@ public class WO extends javax.swing.JInternalFrame {
             sw1.reset();
         }
         sw1.start();        
-     
-        
         String[] BrandsColumnsName = {"Station","Location","Brand Id", "Unit ID"}; 
         DefaultTableModel BrandsModel = new DefaultTableModel();
         BrandsModel.setColumnIdentifiers(BrandsColumnsName);
@@ -1227,8 +1225,6 @@ public class WO extends javax.swing.JInternalFrame {
         d2LastRow = DV2.getSelectedRow();        
         lblBRANDS.setText("Selected Site Brands (" + DV2.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        
-
     }
 
     private void LOAD_CONFIG(){
@@ -1260,7 +1256,7 @@ public class WO extends javax.swing.JInternalFrame {
 
                 c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("CAN:")); c = c.substring(0, c.indexOf("\r\n")).trim(); CAN = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("COUNTRY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); COUNTRY = c.substring(c.indexOf(" ")).trim();
 
                 c = C.substring(C.indexOf("txtMobile_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_ID.setText(c.substring(c.indexOf(" ")).trim());
                 c = C.substring(C.indexOf("txtMobile_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
@@ -1317,7 +1313,7 @@ public class WO extends javax.swing.JInternalFrame {
             
             C += "SITE: " + _S + "\r\n";
             C += "BRAND: " + _B + "\r\n";
-            C += "CAN: " + CAN + "\r\n";            
+            C += "COUNTRY: " + COUNTRY + "\r\n";            
             
             C += "txtMobile_ID: " + txtMobile_ID.getText().trim() + "\r\n";
             C += "txtMobile_PW: " + txtMobile_PW.getText().trim()  + "\r\n";
@@ -1569,7 +1565,7 @@ public class WO extends javax.swing.JInternalFrame {
     public static String BrandID = "";
     public static String CompanyID = "";
     public static String GroupID = "";
-    public static String CAN = "CAN";
+    public static String COUNTRY = "COUNTRY";
     public static String GL_MENU = "TIM HORTONS";
     public static String platform = "CDL";
     public static String BaseAPI;

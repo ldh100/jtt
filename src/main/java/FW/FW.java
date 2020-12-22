@@ -575,7 +575,7 @@ public class FW extends javax.swing.JInternalFrame {
         
         if(DV1.getRowCount() > 0) {
             RESTORAUNT = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
-            CAN = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
+            COUNTRY = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
         }
         if(DV2.getRowCount() > 0) {
             UNIT = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
@@ -901,7 +901,7 @@ public class FW extends javax.swing.JInternalFrame {
 
                 c = C.substring(C.indexOf("RESTORAUNT:")); c = c.substring(0, c.indexOf("\r\n")).trim(); RESTORAUNT = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("UNIT:")); c = c.substring(0, c.indexOf("\r\n")).trim(); UNIT = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("CAN:")); c = c.substring(0, c.indexOf("\r\n")).trim(); CAN = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("COUNTRY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); COUNTRY = c.substring(c.indexOf(" ")).trim();
 
                 c = C.substring(C.indexOf("txtAdmin_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_ID.setText(c.substring(c.indexOf(" ")).trim());
                 c = C.substring(C.indexOf("txtAdmin_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_PW.setText(c.substring(c.indexOf(" ")).trim());
@@ -953,7 +953,7 @@ public class FW extends javax.swing.JInternalFrame {
  
             C += "RESTORAUNT: " + _S + "\r\n";
             C += "UNIT: " + _B + "\r\n";
-            C += "CAN: " + CAN + "\r\n";            
+            C += "COUNTRY: " + COUNTRY + "\r\n";            
             
             C += "txtAdmin_ID: " + txtAdmin_ID.getText() + "\r\n";
             C += "txtAdmin_PW: " + txtAdmin_PW.getText()  + "\r\n";
@@ -1197,7 +1197,7 @@ public class FW extends javax.swing.JInternalFrame {
     private static String UNIT = "";
     private static String UnitID = "";
 
-    private static String CAN = "CAN";
+    private static String COUNTRY = "COUNTRY";
     private static String BaseAPI;
     private static String TZone; 
     private static String New_ID = "";

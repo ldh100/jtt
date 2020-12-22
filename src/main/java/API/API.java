@@ -2652,7 +2652,7 @@ public class API extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("GL_MENU:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GL_MENU = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("CAN:")); c = c.substring(0, c.indexOf("\r\n")).trim(); CAN = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("COUNTRY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); COUNTRY = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("txtMobile_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_ID.setText(c.substring(c.indexOf(" ")).trim());
                 c = C.substring(C.indexOf("txtMobile_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
                 c = C.substring(C.indexOf("txtAP3_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAP3_ID.setText(c.substring(c.indexOf(" ")).trim());
@@ -2692,7 +2692,7 @@ public class API extends javax.swing.JInternalFrame {
             C += "GL_MENU: " + cmbComp.getSelectedItem().toString() + "\r\n";
             C += "SITE: " + _S + "\r\n";
             C += "BRAND: " + _B + "\r\n";
-            C += "CAN: " + CAN + "\r\n";
+            C += "COUNTRY: " + COUNTRY + "\r\n";
             
             C += "txtMobile_ID: " + txtMobile_ID.getText().trim() + "\r\n";
             C += "txtMobile_PW: " + txtMobile_PW.getText().trim()  + "\r\n";
@@ -2771,7 +2771,7 @@ public class API extends javax.swing.JInternalFrame {
     private static String BrandID = "";
     private static String CompanyID = "";
     private static String GroupID = "";
-    private static String CAN = "CAN";
+    private static String COUNTRY = "COUNTRY";
     private static String GL_MENU = "TIM HORTONS";
     private static String platform = "CDL";
     private static String BaseAPI;
