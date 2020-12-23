@@ -64,6 +64,7 @@ public class __login {
                 }
             } 
         // continue - 
+        // drower empty after hide > open
         // no logout ????
     }
 }
