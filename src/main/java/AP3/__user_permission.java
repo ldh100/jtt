@@ -32,9 +32,9 @@ public class __user_permission {
         _t++; T.Visible_Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']", "no_jira"); 
             if (FAIL) { return;}      
 
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter ==== Runner Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+rn@gmail.com", "no_jira"); 
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter ==== Runner Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+rn@gmail.com", false, "no_jira"); 
             if (FAIL) { return;}
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", "no_jira"); 
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", false, "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
             if (FAIL) { return;}   
@@ -50,9 +50,9 @@ public class __user_permission {
             if (FAIL) { return;}
         _t++; T.Visible_Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']", "no_jira"); 
             if (FAIL) { return;}      
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter ==== Admin N Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+an@gmail.com", "no_jira"); 
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter ==== Admin N Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+an@gmail.com", false, "no_jira"); 
             if (FAIL) { return;}
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", "no_jira"); 
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", false, "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
             if (FAIL) { return;} 
@@ -98,7 +98,7 @@ public class __user_permission {
 
             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'ADD NEW SITE'", "ADD NEW SITE", true,"no_jira"); 
 
-            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, "no_jira");
                 if (FAIL) { return;} 
             Thread.sleep(500);     
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
@@ -197,7 +197,7 @@ public class __user_permission {
             Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Station Name'", "css", "[aria-label='Station Name']", "no_jira"); 
                 if (FAIL) { return;}                    
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Edit 'Station Name'", "css", "[aria-label='Station Name']", "Edit", "no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Edit 'Station Name'", "css", "[aria-label='Station Name']", "Edit", false, "no_jira"); 
                 if (!FAIL) {
                     _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Save Changes' text", "Save Changes", true,"no_jira"); 
                     _t++; T.Element_By_Path_Click("Click 'CANCEL'", "xpath", "//*[text()='Cancel']","no_jira");
@@ -262,7 +262,7 @@ public class __user_permission {
 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open 'Group' dropdown", "css", "[role='combobox']", "no_jira");
                 if (FAIL) return;   
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Sector Name", "css", "[role='combobox']", GROUP, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Sector Name", "css", "[role='combobox']", GROUP, false, "no_jira");
                     if (FAIL) { return;}    
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Sector Name Click", "xpath", "//*[contains(text(), '" + GROUP + "')]", "no_jira"); 
                 if (FAIL) { return;}                  
@@ -278,7 +278,7 @@ public class __user_permission {
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", "no_jira"); 
                 if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, "no_jira");
                 if (FAIL) { return;} 
 
 
@@ -306,9 +306,9 @@ public class __user_permission {
             if (FAIL) { return;}
         _t++; T.Visible_Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']", "no_jira"); 
             if (FAIL) { return;}      
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter ==== SM Y Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+sy@gmail.com", "no_jira"); 
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter ==== SM Y Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+sy@gmail.com", false, "no_jira"); 
             if (FAIL) { return;}
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", "no_jira"); 
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", false, "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
             if (FAIL) { return;}  
@@ -352,7 +352,7 @@ public class __user_permission {
                if (FAIL) { return;}            
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y 'ADD NEW SITE'", "ADD NEW SITE", false,"no_jira"); 
             
-            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, "no_jira");
                 if (FAIL) { return;} 
             Thread.sleep(500);                 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
@@ -491,9 +491,9 @@ public class __user_permission {
             if (FAIL) { return;}
         _t++; T.Visible_Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']", "no_jira"); 
             if (FAIL) { return;}      
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter ==== SM N Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+sn@gmail.com", "no_jira"); 
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter ==== SM N Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+sn@gmail.com", false, "no_jira"); 
             if (FAIL) { return;}
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", "no_jira"); 
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", false, "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
             if (FAIL) { return;}  
@@ -536,7 +536,7 @@ public class __user_permission {
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("SM N Sites (Pagination)", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
                if (FAIL) { return;}            
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM N 'ADD NEW SITE'", "ADD NEW SITE", false,"no_jira"); 
-            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, "no_jira");
                 if (FAIL) { return;} 
             Thread.sleep(500);                 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
@@ -676,9 +676,9 @@ public class __user_permission {
             if (FAIL) { return;}
         _t++; T.Visible_Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']", "no_jira"); 
             if (FAIL) { return;}      
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter ==== DM Y Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+dy@gmail.com", "no_jira"); 
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter ==== DM Y Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+dy@gmail.com", false, "no_jira"); 
             if (FAIL) { return;}
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", "no_jira"); 
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", false, "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
             if (FAIL) { return;}   
@@ -722,7 +722,7 @@ public class __user_permission {
                if (FAIL) { return;}            
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y 'ADD NEW SITE'", "ADD NEW SITE", false,"no_jira"); 
             
-            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, "no_jira");
                 if (FAIL) { return;} 
             Thread.sleep(500);                 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
@@ -861,9 +861,9 @@ public class __user_permission {
             if (FAIL) { return;}
         _t++; T.Visible_Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']", "no_jira"); 
             if (FAIL) { return;}      
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter ==== DM N Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+dn@gmail.com", "no_jira"); 
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter ==== DM N Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+dn@gmail.com", false, "no_jira"); 
             if (FAIL) { return;}
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", "no_jira"); 
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", false, "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
             if (FAIL) { return;}   
@@ -908,7 +908,7 @@ public class __user_permission {
                if (FAIL) { return;}            
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM N 'ADD NEW SITE'", "ADD NEW SITE", false,"no_jira"); 
             
-            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(500);                 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 

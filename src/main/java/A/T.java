@@ -929,7 +929,7 @@ public class T {
         }
         sw1.reset();
     }
-    public static void Visible_Element_By_Path_Text_Enter(String NAME, String BY, String PATH, String VAL, String JIRA ){
+    public static void Visible_Element_By_Path_Text_Enter(String NAME, String BY, String PATH, String VAL, boolean HIDE,String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -967,6 +967,9 @@ public class T {
             }
             e.sendKeys(VAL);
             _p++; 
+            if(HIDE){
+                VAL = "*****";
+            }
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
@@ -978,7 +981,7 @@ public class T {
         } 
         sw1.reset();
     }
-    public static void Element_By_Path_Text_Enter(String NAME, String BY, String PATH, String VAL, String JIRA ){
+    public static void Element_By_Path_Text_Enter(String NAME, String BY, String PATH, String VAL, boolean HIDE,String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1016,6 +1019,9 @@ public class T {
             }
             e.sendKeys(VAL);
             _p++; 
+            if(HIDE){
+                VAL = "*****";
+            }            
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
@@ -1775,7 +1781,7 @@ public class T {
         } 
         sw1.reset();
     }    
-    public static void Element_Child_Text_Enter(String NAME, WebElement E, String BY, String PATH, String VAL, String JIRA ){
+    public static void Element_Child_Text_Enter(String NAME, WebElement E, String BY, String PATH, String VAL, boolean HIDE, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1814,6 +1820,9 @@ public class T {
             }
             _e.sendKeys(VAL);
             _p++; 
+            if(HIDE){
+                VAL = "*****";
+            }            
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){

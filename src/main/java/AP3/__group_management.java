@@ -196,7 +196,7 @@ public class __group_management {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Input 'Group Name' click", "css", "[aria-label='Group Name']", "no_jira");             
             if (FAIL) { return;}            
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter new Group Name", "css", "[aria-label='Group Name']", "New Group " + New_ID, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter new Group Name", "css", "[aria-label='Group Name']", "New Group " + New_ID, false, "no_jira");
             if (FAIL) { return;} 
         _t++;  T.Element_By_Path_Click("Open Country combobox", "css", "[role='combobox']", "no_jira"); 
             if (FAIL) { return;} 
@@ -221,7 +221,7 @@ public class __group_management {
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Groups Click", "xpath", "//label[contains(text(), 'Search all Groups')]", "no_jira"); 
             if (FAIL) { return;}            
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Group Search", "css", "[aria-label='Search all Groups']", G, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Group Search", "css", "[aria-label='Search all Groups']", G, false, "no_jira");
             if (FAIL) { return;} 
             
         _t++; Thread.sleep((long) sleep); T.List_L0("Filteres Groups Count", "tagName", "tr", "no_jira");             
@@ -294,7 +294,7 @@ public class __group_management {
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Brands Click", "xpath", "//label[contains(text(), 'Search all Brands')]", "no_jira"); 
             if (FAIL) { return;}            
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Brand Menu Search", "css", "[aria-label='Search all Brands']", GL_MENU, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Brand Menu Search", "css", "[aria-label='Search all Brands']", GL_MENU, false, "no_jira");
             if (FAIL) { return;} 
             
         _t++; Thread.sleep((long) sleep); T.List_L0("Search Brands Count", "tagName", "tr", "no_jira");             

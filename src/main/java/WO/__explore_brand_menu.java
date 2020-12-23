@@ -19,7 +19,7 @@ public class __explore_brand_menu {
             if (FAIL) { return;}             
         _t++; T.Element_Child_Click("Click 'Select Location' Slot", L0.get(1), "tagName", "input", "no_jira");             
             if (FAIL) { return;}                   
-        _t++; T.Element_Child_Text_Enter("Enter Site Name", L0.get(1), "tagName", "input", SITE,"no_jira");             
+        _t++; T.Element_Child_Text_Enter("Enter Site Name", L0.get(1), "tagName", "input", SITE, false, "no_jira");             
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find Location list", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active v-autocomplete__content']", "no_jira");
             if (FAIL) { return;}  

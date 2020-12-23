@@ -25,10 +25,12 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.swing.table.DefaultTableModel;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
@@ -525,6 +527,7 @@ public class DL extends javax.swing.JInternalFrame {
 
         btnGet_User.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnGet_User.setText(" < Get User");
+        btnGet_User.setEnabled(false);
         btnGet_User.setMargin(new java.awt.Insets(2, 4, 2, 4));
         btnGet_User.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -537,14 +540,6 @@ public class DL extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
     // admin@distilr.io MortyEscapedOntario >> https://app.distilr.io/
     // distilr.test@place.com Compass1 >> https://dev.member.distilr.io/
-    
-    // https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBTMCuLvll2eQq5BLiBQxtzo-PqYZLluaI
-    // Payload:
-    // {"email":"admin@distilr.io","password":"MortyEscapedOntario","returnSecureToken":true}
-    
-    // https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyBTMCuLvll2eQq5BLiBQxtzo-PqYZLluaI
-    // Payload
-    // {"idToken":"eyJhbGciOiJSUzI1NiIsImtpZCI6IjNjYmM4ZjIyMDJmNjZkMWIxZTEwMTY1OTFhZTIxNTZiZTM5NWM2ZDciLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRGlzdGlsciBBZG1pbiIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9jZGwtLS1kYXJ3aW4tMTUyOTYxMTk3MTE0MSIsImF1ZCI6ImNkbC0tLWRhcndpbi0xNTI5NjExOTcxMTQxIiwiYXV0aF90aW1lIjoxNjA4NTkxNTY2LCJ1c2VyX2lkIjoiTUpLY3RpeWNVeE9NcXFXZWFaQkZOWDZrb280MiIsInN1YiI6Ik1KS2N0aXljVXhPTXFxV2VhWkJGTlg2a29vNDIiLCJpYXQiOjE2MDg1OTE1NjYsImV4cCI6MTYwODU5NTE2NiwiZW1haWwiOiJhZG1pbkBkaXN0aWxyLmlvIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImFkbWluQGRpc3RpbHIuaW8iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.UxorccVXwbfrE43KutPXClyGeQs30749stdeCPBhEtaoMsLd9FVj-lwgTkAc_EWjJfpgSEpImaDBYeoKcR1lUIEm9QI8FqRaocQ7nc4UZvlfYOXZ4wEsrgFDki6hUlGeI3_s49FgIIfEBQa04iFVrez7IYb_GLbFZShNy9xhUXMtM5_G7YykiKC7H21gWSF55dso03dDYxAHG6V0oJCwcl03iXewhksC2pN_XEWAcLD40ltpn8wi82Ue4jqYMr_HAErITAdZoot1K9Fd7Wg9EoY54wTWwVEwA8URFLoBK4V6BF5dItvEre6zOVnta5f0Ts0qRytSAe9fBQ6vGSKE-A"}
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
         if (d1LastRow == DV1.getSelectedRow()) {
            return;
@@ -622,6 +617,8 @@ public class DL extends javax.swing.JInternalFrame {
 
         ALL_DATA = _all_data.isSelected();
         SCOPE = "";
+        DL_UserID = txtAdmin_ID.getText();
+        DL_UserPW = txtAdmin_PW.getText();
         
         if(DV1.getRowCount() > 0) {
             MANUF = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
@@ -817,17 +814,19 @@ public class DL extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbEnvItemStateChanged
 
     private void btnGet_UserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGet_UserMouseClicked
-        GET_DL_USER_TOKEN(true);
+        if(btnGet_User.isEnabled()){
+            GET_DL_USER_TOKEN(true);            
+        }
     }//GEN-LAST:event_btnGet_UserMouseClicked
     private void Load_Form(){
         Load = true;      
-        cmbEnv.addItem("Staging");
         cmbEnv.addItem("Development");
-        cmbEnv.addItem("Production");         
-        cmbEnv.setSelectedIndex(2); // delevopment only for now
+//        cmbEnv.addItem("Staging");
+//        cmbEnv.addItem("Production");         
+        cmbEnv.setSelectedIndex(0); // delevopment only for now
 
-        Load = false;
         LOAD_ENV();
+        Load = false;
         CONFIG = false;   
         this.setTitle("Distiller Automation Manager");
     }
@@ -882,18 +881,19 @@ public class DL extends javax.swing.JInternalFrame {
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
-            url = "https://staging.app.distilr.io/";
+            url = "https://staging.member.distilr.io";
         } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
             BaseAPI = "https://api.compassdigital.org/dev";
             env = "DE";
-            url = "https://dev.app.distilr.io/";
+            url = "https://dev.member.distilr.io";
         } else{
             BaseAPI = "https://api.compassdigital.org/v1";
             env = "PR";
             url = "https://app.distilr.io/";
         }
+        
         LOAD_CONFIG();
-        GET_DL_USER_TOKEN(false);
+        //GET_DL_USER_TOKEN(false);
         //GetManufacturers();       
     }
     private void GET_DL_USER_TOKEN(boolean ShowResilt) {                                                
@@ -903,6 +903,9 @@ public class DL extends javax.swing.JInternalFrame {
     // client_id=FMP+Distilr+DEV  
     // admin@distilr.io MortyEscapedOntario >> https://app.distilr.io/
     // distilr.test@place.com Compass1 >> https://dev.member.distilr.io/
+    
+//URL: [GET] api.member.distilr.io/testing/metrics
+// --header {auth-header: my_access_token}
     
         String J = "==== DL User:" + "\r\n";
 
@@ -993,15 +996,24 @@ public class DL extends javax.swing.JInternalFrame {
         SitesModel.setColumnIdentifiers(SitesColumnsName);
         DV1.setModel(SitesModel);
         
+        String authheader = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNjYmM4ZjIyMDJmNjZkMWIxZTEwMTY1OTFhZTIxNTZiZTM5NWM2ZDciLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRGlzdGlsciBBZG1pbiIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9jZGwtLS1kYXJ3aW4tMTUyOTYxMTk3MTE0MSIsImF1ZCI6ImNkbC0tLWRhcndpbi0xNTI5NjExOTcxMTQxIiwiYXV0aF90aW1lIjoxNjA4NjU4MTk1LCJ1c2VyX2lkIjoiTUpLY3RpeWNVeE9NcXFXZWFaQkZOWDZrb280MiIsInN1YiI6Ik1KS2N0aXljVXhPTXFxV2VhWkJGTlg2a29vNDIiLCJpYXQiOjE2MDg2NTgxOTUsImV4cCI6MTYwODY2MTc5NSwiZW1haWwiOiJhZG1pbkBkaXN0aWxyLmlvIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImFkbWluQGRpc3RpbHIuaW8iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.STqy_wCGUZwtbQPG4xa-sP_ytqEPmAtOMnEg45BC6kusNp3RMSzfPwFTIJoZxQYxNUckRfcxvfIHMSx0YerAqFL9GNaILFDMyL35KkgOvyBoe06awIbk9impE27rPKQNjIQtWahGCVHxwAp79m3ykXx49h74yC9Q6ey1Q4h-miz9eGsuyUVxvjzTTQn-sZGhajOrT77D2GVy1WdRcBxxp693lUL0PrqCxoHWCQF06KfPRGSh_CF21ApsKrWgC6Xi_l7L4E0SgYYLHeKlsJG-VoojP3CH0o-ZMBWGQCbTk6rutopjq0MmI3aWGNHyGH2BQkM5QpRRXlSgRl9RXdM9dA";
+        //String UserAuth = Base64.getEncoder().encodeToString((txtAdmin_ID.getText().trim() + ":" + txtAdmin_PW.getText().trim()).getBytes());
+        //String UserAuth = Base64.getEncoder().encodeToString((REFRESH_TKN).getBytes());
+// https://teamideaworks.atlassian.net/browse/DIS-885
+        
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try { 
-            HttpGet httpget = new HttpGet(BaseAPI + "???");         
+            HttpGet httpget = new HttpGet("https://bnfawn1xw3.execute-api.us-east-2.amazonaws.com/PROD/dropdown/items-dropdown");  
+            httpget.setHeader("Accept", "application/json, text/plain, */*");
+            httpget.setHeader("auth-header", authheader); 
+            //httpget.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + authheader); 
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
+                if (status >= 200 && status < 300) {
                     HttpEntity entity = response.getEntity();
                     return entity != null ? EntityUtils.toString(entity) : null;
                 } else {
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
                     throw new ClientProtocolException("Response: " + response.getStatusLine().getStatusCode() + " - " + response.getStatusLine().getReasonPhrase());
                 }
             };
@@ -1471,6 +1483,9 @@ public class DL extends javax.swing.JInternalFrame {
     private static String SQL = ""; 
     private String SCOPE;
     
+    public static String DL_UserID = "";    
+    public static String DL_UserPW = "";
+
     private static String ID_TKN = "";    
     private static String DL_TKN = ""; 
     private static String REFRESH_TKN = "";  

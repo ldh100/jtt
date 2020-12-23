@@ -580,11 +580,12 @@ public class Orders extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
+        
+        
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
-  // ============ Payment
+        sw1.start();         // ============ Payment 
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/payment/method" + "?user_id=" + userID);
             httpget.setHeader("Authorization",  "Bearer " + userTKN);
@@ -613,8 +614,7 @@ public class Orders extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
-  // ============ Orders
+        sw1.start();        // ============ Orders  
         long m1 = System.currentTimeMillis();                     // 1605286535799
         long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // 1604681735799
 

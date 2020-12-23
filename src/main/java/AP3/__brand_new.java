@@ -58,7 +58,7 @@ public class __brand_new {
         }
         _t++; Thread.sleep((long) sleep); T.Element_Click("Select 'All'", L1.get(T_Index), "no_jira");
             if (FAIL) { return;}   
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", ADD_TO_SITE, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", ADD_TO_SITE, false, "no_jira");
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + ADD_TO_SITE + "']", "no_jira"); 
             if (FAIL) { return;} 
@@ -193,11 +193,11 @@ public class __brand_new {
                         
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Station Name'", "xpath", "//label[contains(text(), 'Station Name')]", "no_jira"); 
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Station Name", "css", "[aria-label='Station Name']", "Add Station " + New_ID, "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Station Name", "css", "[aria-label='Station Name']", "Add Station " + New_ID, false, "no_jira"); 
                         if (FAIL) { return;}    
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Station Location Description Click", "xpath", "//label[contains(text(), 'Location Description')]", "no_jira"); 
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Station Location Description", "css", "[aria-label='Station Location Description']", "Penthouse " + New_ID, "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Station Location Description", "css", "[aria-label='Station Location Description']", "Penthouse " + New_ID, false, "no_jira"); 
                         if (FAIL) { return;}      
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Location [Cost Centre] Click", "xpath", "//*[contains(text(), 'Location [Cost Centre]')]", "no_jira"); 
                         if (FAIL) { return;}  
@@ -215,7 +215,7 @@ public class __brand_new {
                         
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Tax Rate Click", "xpath", "//label[contains(text(), 'Tax Rate')]", "no_jira"); 
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Tax Rate", "css", "[aria-label='Tax Rate']", "1.5", "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Tax Rate", "css", "[aria-label='Tax Rate']", "1.5", false, "no_jira"); 
                         //if (FAIL) { return;}                         
                     break;
                 case "Fee Setup":                   
@@ -275,15 +275,15 @@ public class __brand_new {
                         
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Timeslot Length Click", "xpath", "//label[contains(text(), 'Timeslot Length')]", "no_jira"); 
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Timeslot Length", "css", "[aria-label='Timeslot Length (minutes)']", "12", "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Timeslot Length", "css", "[aria-label='Timeslot Length (minutes)']", "12", false, "no_jira"); 
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Average Prep Length Click", "xpath", "//label[contains(text(), 'Average Prep Length')]", "no_jira"); 
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Average Prep Length", "css", "[aria-label='Average Prep Length (minutes)']", "14", "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Average Prep Length", "css", "[aria-label='Average Prep Length (minutes)']", "14", false, "no_jira"); 
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Customers Per Slot Click", "xpath", "//label[contains(text(), 'Customers Per Slot')]", "no_jira"); 
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Customers Per Slot", "css", "[aria-label='Customers Per Slot']", "2", "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Customers Per Slot", "css", "[aria-label='Customers Per Slot']", "2", false, "no_jira"); 
                         if (FAIL) { return;}                     
                         
                     _t++; Thread.sleep((long) sleep); T.List_Child_E1_By_Path("Find 'ASAP Pickup' checkbox", L2, i, "xpath", ".//input[@role='checkbox']", "no_jira"); 
@@ -292,7 +292,7 @@ public class __brand_new {
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Input 'ASAP Pickup theshold' Click", "xpath", "//label[contains(text(), 'ASAP time threshold')]", "no_jira"); 
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter ASAP time threshold", "css", "[aria-label='ASAP time threshold']", "2", "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter ASAP time threshold", "css", "[aria-label='ASAP time threshold']", "2", false, "no_jira"); 
                         if (FAIL) { return;}                    
                     break;
                 case "Delivery Details":     
@@ -331,7 +331,7 @@ public class __brand_new {
                     
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Enter Drop Off Locations'", "css", "[aria-label='Enter Drop Off Locations']", "no_jira"); 
                         if (FAIL) { return;}                        
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Drop Off Locations", "css", "[aria-label='Enter Drop Off Locations']", "Penthouse " + New_ID, "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Drop Off Locations", "css", "[aria-label='Enter Drop Off Locations']", "Penthouse " + New_ID, false, "no_jira"); 
                         if (FAIL) { return;}    
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click '+'", "xpath", "//button[@class='location-btn v-btn v-btn--depressed theme--light primary']", "no_jira"); 
                         if (FAIL) { return;}                                                              
@@ -412,22 +412,22 @@ public class __brand_new {
                             Thread.sleep(1000);
                             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'KDS Device Email'", "xpath", "//*[contains(text(), 'KDS Device Email')]", "no_jira"); 
                             if (!FAIL) {                        
-                                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter KDS Device Email", "css", "[aria-label='KDS Device Email']", ADMIN_ID, "no_jira"); 
+                                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter KDS Device Email", "css", "[aria-label='KDS Device Email']", ADMIN_ID, false, "no_jira"); 
                                     if (FAIL) { return;} 
 
                                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'KDS Admin Passcode'", "xpath", "//*[contains(text(), 'KDS Admin Passcode')]", "no_jira"); 
                                     if (FAIL) { return;}                        
-                                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter KDS Admin Passcode", "css", "[aria-label='KDS Admin Passcode']", "1459", "no_jira"); 
+                                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter KDS Admin Passcode", "css", "[aria-label='KDS Admin Passcode']", "1459", false, "no_jira"); 
                                     if (FAIL) { return;}
 
                                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Station Phone Number'", "xpath", "//label[contains(text(), 'Station Phone Number')]", "no_jira"); 
                                     if (FAIL) { return;}                                     
-                                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Station Phone Number", "css", "[aria-label='Station Phone Number']", "9025550321", "no_jira"); 
+                                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Station Phone Number", "css", "[aria-label='Station Phone Number']", "9025550321", false, "no_jira"); 
                                     if (FAIL) { return;}
 
                                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Message On...'", "xpath", "//*[contains(text(), 'Message On Receipt')]", "no_jira"); 
                                     if (FAIL) { return;}                                                           
-                                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Message On Receipt", "css", "[aria-label='Message On Receipt (Thanks for Ordering) ']", "Thanks for Auto Ordering", "no_jira"); 
+                                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Message On Receipt", "css", "[aria-label='Message On Receipt (Thanks for Ordering) ']", "Thanks for Auto Ordering", false, "no_jira"); 
                                     if (FAIL) { return;}
                                 _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Allow ... Refunds'", "Allow for KDS Refunds", true,"no_jira");     
                                     if (FAIL) { return;}
@@ -601,7 +601,7 @@ public class __brand_new {
             
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open 'Group' dropdown", "css", "[role='combobox']", "no_jira");
             if (FAIL) return;   
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Sector Name", "css", "[role='combobox']", GROUP, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Sector Name", "css", "[role='combobox']", GROUP, false, "no_jira");
                 if (FAIL) { return;}    
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Sector Name Click", "xpath", "//*[contains(text(), '" + GROUP + "')]", "no_jira"); 
             if (FAIL) { return;}             
@@ -636,7 +636,7 @@ public class __brand_new {
                 if (FAIL) { return;}             
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", "no_jira"); 
                 if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, "no_jira");
                 if (FAIL) { return;} 
              Thread.sleep(500);
              
@@ -655,7 +655,7 @@ public class __brand_new {
                 if (FAIL) { return;}             
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", "no_jira"); 
                 if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Local Menu Search", "css", "[aria-label='Search Menus']", New_ID, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Local Menu Search", "css", "[aria-label='Search Menus']", New_ID, false, "no_jira");
                 if (FAIL) { return;} 
              Thread.sleep(500);                
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'VIEW LOCAL MENUS'", "xpath", "//div[contains(text(), 'View Local Menus')]", "no_jira"); 

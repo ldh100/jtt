@@ -45,7 +45,7 @@ public class __menu_manager {
         // =========================================== Group Selection
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open 'Group' dropdown", "css", "[role='combobox']", "no_jira");
             if (FAIL) return;   
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Sector Name", "css", "[role='combobox']", GROUP, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Sector Name", "css", "[role='combobox']", GROUP, false, "no_jira");
                 if (FAIL) { return;}    
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Sector Name Click", "xpath", "//*[contains(text(), '" + GROUP + "')]", "no_jira"); 
                 if (FAIL) { return;}             
@@ -184,7 +184,7 @@ public class __menu_manager {
                 if (FAIL) { return;}             
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", "no_jira"); 
                 if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, "no_jira");
                 if (FAIL) { return;} 
              Thread.sleep(500);                
             _t++; Thread.sleep((long) sleep); T.Element_Click("Click Menu " + GL_MENU, L2.get(T_Index), "no_jira");
@@ -255,9 +255,9 @@ public class __menu_manager {
             // ================ New Group
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'NEW GROUP'", "xpath", "//*[contains(text(), 'new group')]", "no_jira"); 
                 if (FAIL) { return;}     
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Group Name", "css", "[aria-label='Modifier Group Name']", "New Group " + New_ID, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Group Name", "css", "[aria-label='Modifier Group Name']", "New Group " + New_ID, false, "no_jira");
                 if (FAIL) { return;}  
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Label In App", "css", "[aria-label='Label In App']", "Label " + New_ID , "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Label In App", "css", "[aria-label='Label In App']", "Label " + New_ID , false, "no_jira");
                 if (FAIL) { return;}  
                 
             _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find Rules fragment", "xpath", "//div[@class='layout size-line row wrap align-baseline']", "no_jira");
@@ -513,7 +513,7 @@ public class __menu_manager {
                 if (FAIL) { return;}   
             _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Input_Select_Clear("Copied Group Name Clear", "css", "[aria-label='Modifier Group Name']", "no_jira");
                 if (FAIL) { return;}    
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter New Copied Group Name", "css", "[aria-label='Modifier Group Name']", "Copied Group " + New_ID, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter New Copied Group Name", "css", "[aria-label='Modifier Group Name']", "Copied Group " + New_ID, false, "no_jira");
                 if (FAIL) { return;}    
                 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click  'APPLY Changes'", "xpath", "//*[contains(text(), 'Apply Changes')]", "no_jira"); 
@@ -665,7 +665,7 @@ public class __menu_manager {
                 if (FAIL) { return;}             
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", "no_jira"); 
                 if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, "no_jira");
                 if (FAIL) { return;} 
              Thread.sleep(500);
              
@@ -785,11 +785,11 @@ public class __menu_manager {
                 Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("New Category Chit # Click", "css", "[aria-label='Chit #']", "no_jira");
                 if (FAIL) { return;}            
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Category Chit #", "css", "[aria-label='Chit #']", "3", "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Category Chit #", "css", "[aria-label='Chit #']", "3", false, "no_jira");
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("New Category Name Click", "css", "[aria-label='Enter Category Name']", "no_jira");
                 if (FAIL) { return;}            
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Category Name", "css", "[aria-label='Enter Category Name']", "Category " + New_ID, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Category Name", "css", "[aria-label='Enter Category Name']", "Category " + New_ID, false, "no_jira");
                 if (FAIL) { return;}          
             Thread.sleep(500); 
             // ======== New Item
@@ -800,31 +800,31 @@ public class __menu_manager {
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("New Item Name Click", "css", "[aria-label='Item Name']", "no_jira");
                 if (FAIL) { return;}             
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Item Name", "css", "[aria-label='Item Name']", "Item " + New_ID, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Item Name", "css", "[aria-label='Item Name']", "Item " + New_ID, false, "no_jira");
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Price Click", "css", "[aria-label='Price']", "no_jira");
                 if (FAIL) { return;}                 
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Price", "css", "[aria-label='Price']", "1.05", "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Price", "css", "[aria-label='Price']", "1.05", false, "no_jira");
                 if (FAIL) { return;}    
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Calories Click", "css", "[aria-label='Calories']", "no_jira");
                 if (FAIL) { return;}    
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Calories", "css", "[aria-label='Calories']", "280", "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Calories", "css", "[aria-label='Calories']", "280", false, "no_jira");
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Units Click", "css", "[aria-label='Units']", "no_jira");
                 if (FAIL) { return;}    
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Units", "css", "[aria-label='Units']", "8", "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Units", "css", "[aria-label='Units']", "8", false, "no_jira");
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("PLU Click", "css", "[aria-label='PLU ID']", "no_jira");
                 if (FAIL) { return;} 
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter PLU ID", "css", "[aria-label='PLU ID']", "900019", "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter PLU ID", "css", "[aria-label='PLU ID']", "900019", false, "no_jira");
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Barcode Click", "css", "[aria-label='Barcode']", "no_jira");
                 if (FAIL) { return;} 
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Barcode", "css", "[aria-label='Barcode']", "BC900019", "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Barcode", "css", "[aria-label='Barcode']", "BC900019", false, "no_jira");
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Description Click", "css", "[aria-label='Description']", "no_jira");
                 if (FAIL) { return;}    
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Description", "css", "[aria-label='Description']", "Description " + New_ID, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Description", "css", "[aria-label='Description']", "Description " + New_ID, false, "no_jira");
                 if (FAIL) { return;}                
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Tax Tags dropdown Click Open", "css", "[aria-label='Tax Tags']", "no_jira");
                 if (FAIL) { return;}    
@@ -1051,7 +1051,7 @@ public class __menu_manager {
                     if (FAIL) { return;}             
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", "no_jira"); 
                     if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, "no_jira");
+                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, "no_jira");
                     if (FAIL) { return;} 
                  Thread.sleep(500);
 
@@ -1119,7 +1119,7 @@ public class __menu_manager {
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("IMPORT > 'Menu ID' Click", "css", "[aria-label='Menu ID']", "no_jira"); 
                     if (FAIL) { return;} 
                 Thread.sleep(500); 
-                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter DH Menu ID", "css", "[aria-label='Menu ID']", DH_Menu_ID, "no_jira");
+                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter DH Menu ID", "css", "[aria-label='Menu ID']", DH_Menu_ID, false, "no_jira");
                     if (FAIL) { return;}           //z03ykAm5JNszPA7Ne3X ? >> NWEJgN87Q3Sw46JaQ1Q ===================================================================
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'IMPORT'", "xpath", "//*[contains(text(), 'IMPORT')]", "no_jira"); 
                     if (FAIL) { return;}  
@@ -1430,7 +1430,7 @@ public class __menu_manager {
                 if (FAIL) { return;}             
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", "no_jira"); 
                 if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, "no_jira");
                 if (FAIL) { return;} 
              Thread.sleep(500);
              
@@ -1457,7 +1457,7 @@ public class __menu_manager {
                 EX += " - " + "\t" + "Find Local Menu by Brand Location" + "\t" + BRAND + "\t" + "Location is Blank - Cannot locate Local Menu" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
                 return;
             }
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Local Menu Search", "css", "[aria-label='Search Menus']", Location, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Local Menu Search", "css", "[aria-label='Search Menus']", Location, false, "no_jira");
                 if (FAIL) { return;} 
                 Thread.sleep(500);                 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'VIEW LOCAL MENUS'", "xpath", "//div[contains(text(), '" + "View Local Menus" + "')]", "no_jira"); 

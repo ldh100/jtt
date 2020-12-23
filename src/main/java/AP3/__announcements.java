@@ -191,7 +191,7 @@ public class __announcements {
                             if (FAIL) { return;}
                         _t++; T.Element_Child_Attribute("Sub-title " + i, L2.get(i), "xpath", ".//div[@class='H5-Primary-Left']", "textContent", "no_jira");         
                             if (FAIL) { return;}                        
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter new Announcement Name", "css", "[aria-label='Announcement Name']", "Auto Announcement " + New_ID, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter new Announcement Name", "css", "[aria-label='Announcement Name']", "Auto Announcement " + New_ID, false, "no_jira");
                             if (FAIL) { return;} 
                             
                         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Cancel' text", "Cancel", true,"no_jira"); 
@@ -214,7 +214,7 @@ public class __announcements {
                              if (FAIL) { return;}                           
                         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Other Type text input Click", "css", "[aria-label='Type']", "no_jira");
                              if (FAIL) { return;}                             
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Other Type", "css", "[aria-label='Type']", "Auto_Other_Type", "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Other Type", "css", "[aria-label='Type']", "Auto_Other_Type", false, "no_jira");
                             if (FAIL) { return;}
                             
 //                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Announcement App Prompt", "css", "[aria-label='Select App']", "placeholder", "no_jira");
@@ -238,7 +238,7 @@ public class __announcements {
                             if (FAIL) { return;}                            
                         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Search Sites...'", "css", "[aria-label='" + s + "']", "no_jira");
                              if (FAIL) { return;} 
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter 'Search Sites...'", "css", "[aria-label='" + s + "']", SITE, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter 'Search Sites...'", "css", "[aria-label='" + s + "']", SITE, false, "no_jira");
                             if (FAIL) { return;} 
                         _t++; Thread.sleep((long) sleep); T.List_Child_E1_By_Path("Find 'Sites...' list", L2, i, "xpath", ".//div[@class='v-list list-panel theme--light']", "no_jira");
                             if (FAIL) { return;}                           

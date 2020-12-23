@@ -1020,8 +1020,8 @@ public class AP3 extends javax.swing.JInternalFrame {
             wait = new FluentWait(d1).withTimeout(Duration.ofSeconds((long)Wait))			
 			.pollingEvery(Duration.ofSeconds((long)200)) 			
 			.ignoring(NoSuchElementException.class); // wait for Visible / Clickable   
-            timeout = new WebDriverWait(d1, (long) Timeout);  // wait for load
-            wait_msg = new WebDriverWait(d1, 100);  // wait for alert
+            timeout = new WebDriverWait(d1, (long) Timeout);      // wait for load
+            wait_msg = new WebDriverWait(d1, 100);   // wait for alert
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
         }
@@ -1031,7 +1031,6 @@ public class AP3 extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return false;
         }   
-
     }
     private void BW1_DoWork() { 
         BW1 = new SwingWorker() {             

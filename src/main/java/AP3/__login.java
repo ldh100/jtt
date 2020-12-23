@@ -32,17 +32,17 @@ public class __login {
         _t++; T.Visible_Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type = 'password']", "no_jira"); 
             if (FAIL) { return;}      
         if(users) {    
-            _t++; T.Visible_Element_By_Path_Text_Enter("Enter Invalid Email", "css", "[aria-label='E-mail']", "x.y@compassdigitalio", "no_jira"); 
+            _t++; T.Visible_Element_By_Path_Text_Enter("Enter Invalid Email", "css", "[aria-label='E-mail']", "x.y@compassdigitalio", false, "no_jira"); 
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Inavalid Email Message", "xpath", "//*[contains(text(), 'Please enter a valid email')]", "no_jira"); 
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']", "no_jira"); 
                 if (FAIL) { return;}
         }
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Email", "css", "[aria-label='E-mail']", ADMIN_ID, "no_jira"); 
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Email", "css", "[aria-label='E-mail']", ADMIN_ID, false, "no_jira"); 
             if (FAIL) { return;}
 //        if(users) {   
-//            _t++; T.Visible_Element_By_Path_Text_Enter("Enter Invalid Password", "css", "[aria-label='Password']", ADMIN_PW + "_X", "no_jira"); 
+//            _t++; T.Visible_Element_By_Path_Text_Enter("Enter Invalid Password", "css", "[aria-label='Password']", ADMIN_PW + "_X", false, "no_jira"); 
 //                if (FAIL) { return;}
 //            _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Unmask Password Click", "xpath", "/html/body/div[1]/div/main/div/div[2]/div[2]/div/div/form/div[4]/div/div[1]/div[2]/div/i", "no_jira"); 
 //            _t++; T.Clickable_Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
@@ -54,7 +54,7 @@ public class __login {
 //            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']", "no_jira"); // .//input
 //                if (FAIL) { return;}                                                                             //   "xpath", ".//input[@type='password']" ".//input[@area-label='Password']"
 //        }    
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", ADMIN_PW, "no_jira"); 
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", ADMIN_PW, true, "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Sign In'", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
             if (FAIL) { return;} 
