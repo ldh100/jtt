@@ -720,7 +720,7 @@ public class WO extends javax.swing.JInternalFrame {
         if (_login.isSelected()) { 
             SCOPE += "Login";
             EX += " - " + "\t" + " === Login " + "\t" + " ===== " + "\t" + " == Login Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            __login.run();
+            WO_login.run();
             EX += " - " + "\t" + " === ^ Login " + "\t" + " ===== " + "\t" + " == ^ Login End " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             //Thread.sleep(1500);
         }
@@ -728,7 +728,7 @@ public class WO extends javax.swing.JInternalFrame {
         if (_expore_brand_menu.isSelected()) { 
             SCOPE += ", Explore Brand Menu";
             EX += " - " + "\t" + " === Explore Brand Menu" + "\t" + " ===== " + "\t" + " == Explore Brand Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            __explore_brand_menu.run(_edit_item.isSelected());
+            WO_explore_brand_menu.run(_edit_item.isSelected());
             EX += " - " + "\t" + " === ^ Explore Brand Menu" + "\t" + " ===== " + "\t" + " == ^ Explore Brand Menu" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
@@ -736,14 +736,14 @@ public class WO extends javax.swing.JInternalFrame {
         if (_place_pickup_order.isSelected()) { 
             SCOPE += ", Place Pickup Order";
             EX += " - " + "\t" + " === Place Pickup Order" + "\t" + " ===== " + "\t" + " == Place Pickup Order >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            __place_order.run(false);
+            WO_place_order.run(false);
             EX += " - " + "\t" + " === ^ Place Pickup Order" + "\t" + " ===== " + "\t" + " == ^ Place Pickup Order" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
         if (_place_delivery_order.isSelected()) { 
             SCOPE += ", Place Pickup Order";
             EX += " - " + "\t" + " === Place Delivery Order" + "\t" + " ===== " + "\t" + " == Place Delivery Order >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            __place_order.run(true);
+            WO_place_order.run(true);
             EX += " - " + "\t" + " === ^ Place Delivery Order" + "\t" + " ===== " + "\t" + " == ^ Place Delivery Order" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
@@ -751,7 +751,7 @@ public class WO extends javax.swing.JInternalFrame {
         if (_logout.isSelected()) { 
             SCOPE += ", LogOut";
             EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            __logout.run();
+            WO_logout.run();
             EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
@@ -912,9 +912,7 @@ public class WO extends javax.swing.JInternalFrame {
         cmbEnv.addItem("Development");
         //cmbEnv.addItem("Production");         
         cmbEnv.setSelectedIndex(1); // delevopment
-        cmbApp.setSelectedIndex(0);
-        
-        MENU_IDS = new ArrayList<>();
+        cmbApp.setSelectedIndex(0);       
         
         Load = false;
         LOAD_ENV();
@@ -1505,10 +1503,8 @@ public class WO extends javax.swing.JInternalFrame {
         }   
         try {
             int col = 9; // 8 + 1 new JIRA = 9
-            String Top_Row = Last_EX.substring(0, Last_EX.indexOf("\r\n"));
-            Last_EX = Last_EX.substring(Last_EX.indexOf("\r\n") + 2);
-        
-            String[] lines = Last_EX.split(System.getProperty("line.separator"));
+            String Top_Row = Last_EX.substring(0, Last_EX.indexOf("\r\n"));        
+            String[] lines = Last_EX.substring(Last_EX.indexOf("\r\n") + 2).split(System.getProperty("line.separator"));
             int l = lines.length;
             String[][] Values = new String[l][col];
             int n = 1;
@@ -1516,7 +1512,7 @@ public class WO extends javax.swing.JInternalFrame {
                 String[] v = lines[i].split("\t");
                 System.arraycopy(v, 0, Values[i], 0, v.length); 
             }
-            Report_File = Func.fExcel((l - 1), col, Values, "WO_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
+            Report_File = Func.fExcel(l, col, Values, "WO_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
             txtLog.append("\r\n\r\n=== Report Excel file:\r\n" + Report_File + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
@@ -1533,18 +1529,19 @@ public class WO extends javax.swing.JInternalFrame {
     private String Report_Date;   
     private String Report_File;
     
+    
     public static String USER_ID;
     public static String USER_PW;
-  
+    
+    public static boolean PICKUP;
+    public static boolean DELIVERY;    
+    
     private int d1LastRow = -1; 
     private int d2LastRow = -1; 
-    private List<String> GROUP_IDS;
-    private List<String> COMP_IDS; 
-    private List<String> MENU_IDS;  
+;  
     private boolean CONFIG = false;
     private String C = "";
-    private String userID;
-    private String userTKN;
+
     public static int T_Index;
     private String Last_EX;    
     public static Stopwatch sw1 = Stopwatch.createUnstarted();

@@ -616,7 +616,7 @@ public class FW extends javax.swing.JInternalFrame {
         if (_login.isSelected()) { 
             SCOPE += "Login";
             EX += " - " + "\t" + " === FW Login " + "\t" + " ===== " + "\t" + " == Login Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            __login.run();
+            FW_login.run();
             EX += " - " + "\t" + " === ^ FW Login" + "\t" + " ===== " + "\t" + " == ^ Login End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
@@ -624,7 +624,7 @@ public class FW extends javax.swing.JInternalFrame {
         if (_orders.isSelected()) { 
             SCOPE += ", Orders";
             EX += " - " + "\t" + " === Orders" + "\t" + " ===== " + "\t" + " == Orders Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            __orders.run();
+            FW_orders.run();
             EX += " - " + "\t" + " === ^ Orders" + "\t" + " ===== " + "\t" + " == ^ Orders End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
@@ -634,14 +634,14 @@ public class FW extends javax.swing.JInternalFrame {
         if (_logout.isSelected()) { 
             SCOPE += ", LogOut";
             EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            __logout.run();
+            FW_logout.run();
             EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
         if (_password.isSelected()) { 
             SCOPE += ", Forgot PW";  
             EX += " - " + "\t" + " === Forgot PW" + "\t" + " ===== " + "\t" + " == Forgot PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            __password.run();
+            FW_password.run();
             EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
 
@@ -1141,10 +1141,8 @@ public class FW extends javax.swing.JInternalFrame {
         }   
         try {
             int col = 9; // 8 + 1 new JIRA = 9
-            String Top_Row = Last_EX.substring(0, Last_EX.indexOf("\r\n"));
-            //Last_EX = Last_EX.substring(Last_EX.indexOf("\r\n") + 2);
-        
-            String[] lines = Last_EX.split(System.getProperty("line.separator"));
+            String Top_Row = Last_EX.substring(0, Last_EX.indexOf("\r\n"));        
+            String[] lines = Last_EX.substring(Last_EX.indexOf("\r\n") + 2).split(System.getProperty("line.separator"));
             int l = lines.length;
             String[][] Values = new String[l][col];
             int n = 1;
@@ -1153,7 +1151,7 @@ public class FW extends javax.swing.JInternalFrame {
                 System.arraycopy(v, 0, Values[i], 0, v.length); 
 
             }
-            Report_File = Func.fExcel((l - 1), col, Values, "FW_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
+            Report_File = Func.fExcel(l, col, Values, "FW_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
             txtLog.append("\r\n\r\n=== Report Excel file:\r\n" + Report_File + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
 

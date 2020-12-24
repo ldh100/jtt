@@ -449,7 +449,9 @@ public class W_Report extends javax.swing.JInternalFrame {
                 txtLog.append("\r\n\r\n=== Report Excel Error: " + ex.getMessage()+ "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
-            txtLog.append("\r\n\r\n=== Report Excel file:\r\n" + Func.fExcel((l - 1), col, Values, DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()) + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File) + "\r\n");
+            // ===============================================================
+            txtLog.append("\r\n\r\n=== Report Excel file:\r\n" + Func.fExcel(l, col, Values, DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()) + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File) + "\r\n");
+            // ===============================================================
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch (IOException ex) {
             txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
