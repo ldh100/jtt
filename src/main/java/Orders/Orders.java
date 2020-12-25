@@ -1104,7 +1104,7 @@ if(!R.equals("OK")){
         sw1.reset();
         
         lblOrders.setText("Shopping Card templates - " + DV1.getRowCount() + " found");
-        txtLog.append("\r\nShopping Card templates - Env: " + cmbEnv.getSelectedItem().toString() + " - " + DV1.getRowCount() + " found");
+        txtLog.append("\r\nSCard templates: " + cmbApp.getSelectedItem().toString() + ", " + cmbEnv.getSelectedItem().toString() + " - " + DV1.getRowCount() + " found");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }

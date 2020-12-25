@@ -58,11 +58,13 @@ public class A extends javax.swing.JFrame {
 
         DesktopPane = new javax.swing.JDesktopPane();
         MenuBar = new javax.swing.JMenuBar();
+        Android = new javax.swing.JMenu();
+        iOS = new javax.swing.JMenu();
         Menu_AP3 = new javax.swing.JMenu();
+        Menu_API = new javax.swing.JMenu();
         MenuWO = new javax.swing.JMenu();
         Menu_FW = new javax.swing.JMenu();
         Menu_DL = new javax.swing.JMenu();
-        Menu_API = new javax.swing.JMenu();
         MenuStation = new javax.swing.JMenu();
         Menu_OR = new javax.swing.JMenu();
         MenuReports = new javax.swing.JMenu();
@@ -78,19 +80,39 @@ public class A extends javax.swing.JFrame {
         });
 
         DesktopPane.setBackground(new java.awt.Color(204, 204, 204));
+        DesktopPane.setAutoscrolls(true);
         DesktopPane.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        DesktopPane.setName("A"); // NOI18N
+        DesktopPane.setName("A_Panel"); // NOI18N
+        DesktopPane.setPreferredSize(new java.awt.Dimension(99600, 97000));
 
         javax.swing.GroupLayout DesktopPaneLayout = new javax.swing.GroupLayout(DesktopPane);
         DesktopPane.setLayout(DesktopPaneLayout);
         DesktopPaneLayout.setHorizontalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 996, Short.MAX_VALUE)
+            .addGap(0, 1058, Short.MAX_VALUE)
         );
         DesktopPaneLayout.setVerticalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
+            .addGap(0, 697, Short.MAX_VALUE)
         );
+
+        Android.setText("Android");
+        Android.setName("Station"); // NOI18N
+        Android.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AndroidMouseClicked(evt);
+            }
+        });
+        MenuBar.add(Android);
+
+        iOS.setText("iOS");
+        iOS.setName("Station"); // NOI18N
+        iOS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                iOSMouseClicked(evt);
+            }
+        });
+        MenuBar.add(iOS);
 
         Menu_AP3.setBorder(null);
         Menu_AP3.setText("AP3");
@@ -101,6 +123,16 @@ public class A extends javax.swing.JFrame {
             }
         });
         MenuBar.add(Menu_AP3);
+
+        Menu_API.setBorder(null);
+        Menu_API.setText("APIs");
+        Menu_API.setName("AP3"); // NOI18N
+        Menu_API.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_APIMouseClicked(evt);
+            }
+        });
+        MenuBar.add(Menu_API);
 
         MenuWO.setText("WO");
         MenuWO.setName("FW"); // NOI18N
@@ -128,16 +160,6 @@ public class A extends javax.swing.JFrame {
             }
         });
         MenuBar.add(Menu_DL);
-
-        Menu_API.setBorder(null);
-        Menu_API.setText("APIs");
-        Menu_API.setName("AP3"); // NOI18N
-        Menu_API.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Menu_APIMouseClicked(evt);
-            }
-        });
-        MenuBar.add(Menu_API);
 
         MenuStation.setText("Station");
         MenuStation.setName("Station"); // NOI18N
@@ -173,11 +195,13 @@ public class A extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(DesktopPane)
+            .addComponent(DesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1058, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(DesktopPane, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(DesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -611,6 +635,14 @@ public class A extends javax.swing.JFrame {
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         Menu_OR.setEnabled(true); 
     }//GEN-LAST:event_Menu_ORMouseClicked
+
+    private void AndroidMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AndroidMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AndroidMouseClicked
+
+    private void iOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iOSMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_iOSMouseClicked
     private void Get_Version() {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         Version =  "?"; 
@@ -819,6 +851,7 @@ public class A extends javax.swing.JFrame {
     private ImageIcon II;  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu Android;
     private javax.swing.JDesktopPane DesktopPane;
     private javax.swing.JMenuBar MenuBar;
     private javax.swing.JMenu MenuReports;
@@ -829,6 +862,7 @@ public class A extends javax.swing.JFrame {
     private javax.swing.JMenu Menu_DL;
     private javax.swing.JMenu Menu_FW;
     private javax.swing.JMenu Menu_OR;
+    private javax.swing.JMenu iOS;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>   
 }

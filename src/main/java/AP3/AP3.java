@@ -953,6 +953,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             sw1.reset();
             LOG_START(); // ========================================================
+            
             BW1_DoWork(
                 // parameters?
             );
@@ -2116,8 +2117,11 @@ public class AP3 extends javax.swing.JInternalFrame {
     private String Report_Date;
     private String Report_File;
     private static Duration DD;
+    
     private static SwingWorker BW1;  
     private static SwingWorker BW2; 
+    private static String Toast_Msg = ""; 
+
     private boolean CONFIG = false;
     private String C = "";
     private int d1LastRow = -1; 
@@ -2128,7 +2132,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private String SCOPE;
     
     public static String New_ID = "";
-    private static String Toast_Msg = "";   
+  
     public static String Tab_Name;
     
     public static String Day;

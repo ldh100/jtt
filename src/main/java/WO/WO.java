@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -40,9 +41,11 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -94,7 +97,7 @@ public class WO extends javax.swing.JInternalFrame {
         _login = new javax.swing.JCheckBox();
         _all_data = new javax.swing.JCheckBox();
         _account_settings = new javax.swing.JCheckBox();
-        _pending_orders = new javax.swing.JCheckBox();
+        _order_status = new javax.swing.JCheckBox();
         _edit_item = new javax.swing.JCheckBox();
         _order_history = new javax.swing.JCheckBox();
         _place_delivery_order = new javax.swing.JCheckBox();
@@ -179,7 +182,7 @@ public class WO extends javax.swing.JInternalFrame {
         DV1.setCellSelectionEnabled(true);
         DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV1.setName("DV1"); // NOI18N
-        DV1.setRequestFocusEnabled(false);
+        DV1.setOpaque(false);
         DV1.setRowHeight(18);
         DV1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         DV1.getTableHeader().setReorderingAllowed(false);
@@ -340,11 +343,11 @@ public class WO extends javax.swing.JInternalFrame {
         _account_settings.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _account_settings.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
-        _pending_orders.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _pending_orders.setText("Pending_orders");
-        _pending_orders.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _pending_orders.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _pending_orders.setRequestFocusEnabled(false);
+        _order_status.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _order_status.setText("Order Status");
+        _order_status.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _order_status.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _order_status.setRequestFocusEnabled(false);
 
         _edit_item.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _edit_item.setText("Edit / Remove Item");
@@ -425,7 +428,7 @@ public class WO extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_expore_brand_menu)
-                    .addComponent(_pending_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_order_status, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_edit_item, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_place_delivery_order, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_place_pickup_order, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -468,7 +471,7 @@ public class WO extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_pending_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_order_status, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
                         .addComponent(_expore_brand_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
@@ -610,6 +613,7 @@ public class WO extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_DV1MouseClicked
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        if(BW2 != null && !BW2.isCancelled()) BW2.cancel(true);
         F_COUNT--;
     }//GEN-LAST:event_formInternalFrameClosed
 
@@ -705,6 +709,10 @@ public class WO extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             sw1.reset();
             LOG_START(); // ========================================================
+            
+            BW2_DoWork(
+                // parameters?
+            );
             try {
                 Execute();
             }
@@ -730,7 +738,7 @@ public class WO extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === Explore Brand Menu" + "\t" + " ===== " + "\t" + " == Explore Brand Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             WO_explore_brand_menu.run(_edit_item.isSelected());
             EX += " - " + "\t" + " === ^ Explore Brand Menu" + "\t" + " ===== " + "\t" + " == ^ Explore Brand Menu" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            Thread.sleep(1500);
+            //Thread.sleep(1500);
         }
 
         if (_place_pickup_order.isSelected()) { 
@@ -738,22 +746,36 @@ public class WO extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === Place Pickup Order" + "\t" + " ===== " + "\t" + " == Place Pickup Order >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             WO_place_order.run(false);
             EX += " - " + "\t" + " === ^ Place Pickup Order" + "\t" + " ===== " + "\t" + " == ^ Place Pickup Order" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            Thread.sleep(1500);
+            //Thread.sleep(1500);
         }
         if (_place_delivery_order.isSelected()) { 
             SCOPE += ", Place Pickup Order";
             EX += " - " + "\t" + " === Place Delivery Order" + "\t" + " ===== " + "\t" + " == Place Delivery Order >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             WO_place_order.run(true);
             EX += " - " + "\t" + " === ^ Place Delivery Order" + "\t" + " ===== " + "\t" + " == ^ Place Delivery Order" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            Thread.sleep(1500);
+            //Thread.sleep(1500);
         }
         // ============================== Last Blocks
+        if (_order_status.isSelected()) { 
+            SCOPE += ", Order Status";
+            EX += " - " + "\t" + " === Order Status" + "\t" + " ===== " + "\t" + " == Order Status Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            WO_order_status.run();
+            EX += " - " + "\t" + " === ^ Order Status" + "\t" + " ===== " + "\t" + " == ^ Order Status End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            //Thread.sleep(1500);
+        }
+        if (_account_settings.isSelected()) { 
+            SCOPE += ", Account Settings";
+            EX += " - " + "\t" + " === Account Settings" + "\t" + " ===== " + "\t" + " == Account Settings Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            WO_account_settings.run();
+            EX += " - " + "\t" + " === ^ Account Settings" + "\t" + " ===== " + "\t" + " == ^ Account Settings End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            //Thread.sleep(1500);
+        }
         if (_logout.isSelected()) { 
             SCOPE += ", LogOut";
             EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             WO_logout.run();
             EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            Thread.sleep(1500);
+            //Thread.sleep(1500);
         }
                                    
         if(_f > 0) {
@@ -765,7 +787,56 @@ public class WO extends javax.swing.JInternalFrame {
         }         
         Done(dw_start);
     }
+    private void BW2_DoWork(){
+        BW2 = new SwingWorker() {             
+            @Override
+            protected String doInBackground() throws Exception { 
+                while (true){
+                    Toast_Msg = "";
+                    //System.out.println("BW2: " + "Message()");
+                    Thread.sleep(1000);
+                    try {
+                        List<WebElement> ALERTS = d1.findElements(By.cssSelector("[role='alert']"));
+                        if(ALERTS.size() > 0){
+                            Toast_Msg = ALERTS.get(0).getAttribute("textContent");// .getText();
+                            if(     Toast_Msg.toLowerCase().contains("successfully") || 
+                                    Toast_Msg.toLowerCase().contains(" been updated") || 
+                                    Toast_Msg.toLowerCase().contains(" been added") || 
+                                    Toast_Msg.toLowerCase().contains(" been removed") ||
+                                    Toast_Msg.toLowerCase().contains(" been reset") ||
+                                    Toast_Msg.toLowerCase().contains(" saved")) {
+                                _t++;
+                                _p++;
+                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                            
+                            } else if(Toast_Msg.toLowerCase().contains("could not")|| 
+                                    Toast_Msg.toLowerCase().contains("unable to save")|| 
+                                    Toast_Msg.toLowerCase().contains("fail")) {
+                                _t++;
+                                _f++;
+                                F += _t + " > FAIL - " + Toast_Msg + "\r\n";
+                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                            } else if(Toast_Msg.toLowerCase().contains("fix") || Toast_Msg.toLowerCase().contains("error")) {
+                                _t++;
+                                _w++;
+                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                            } else {
+                                _t++;
+                                _w++;
+                                //F += _t + " > WARN - " + tt + "\r\n";
+                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                            }
+                            Thread.sleep(4000); //  pause till new alert expected ???? 
+                        }
+                    } catch (InterruptedException ex){ // Exception ex
+                        //System.out.println("BW2: " + "ex.getMessage()");
+                    }
+                }
+            }
+        }; 
+        BW2.execute();  // executes the swingworker on worker thread   
+    }
     private void Done(Instant dw_start){
+        BW2.cancel(true); // ================================================        
         Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
         txtLog.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());                 
@@ -776,6 +847,8 @@ public class WO extends javax.swing.JInternalFrame {
         txtLog.append("\r\n" + EX.replaceAll("\t", " > ")); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         Last_EX = EX;
+        
+        BW2 = null;
         try { 
             if(d1 != null) {
                 d1.quit(); 
@@ -1265,7 +1338,7 @@ public class WO extends javax.swing.JInternalFrame {
 
                 c = C.substring(C.indexOf("_new_user:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _new_user.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_account_settings:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _account_settings.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_pending_orders:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _pending_orders.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_pending_orders:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _order_status.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_order_history:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _order_history.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_edit_item:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _edit_item.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_place_pickup_order:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _place_pickup_order.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
@@ -1322,7 +1395,7 @@ public class WO extends javax.swing.JInternalFrame {
 
             C += "_new_user: " + _new_user.isSelected() + "\r\n";
             C += "_account_settings: " + _account_settings.isSelected() + "\r\n";
-            C += "_pending_orders: " + _pending_orders.isSelected() + "\r\n";
+            C += "_pending_orders: " + _order_status.isSelected() + "\r\n";
             C += "_order_history: " + _order_history.isSelected() + "\r\n";
             C += "_edit_item: " + _edit_item.isSelected() + "\r\n";
             C += "_place_pickup_order: " + _place_pickup_order.isSelected() + "\r\n";
@@ -1529,6 +1602,8 @@ public class WO extends javax.swing.JInternalFrame {
     private String Report_Date;   
     private String Report_File;
     
+    private static SwingWorker BW2;   
+    private static String Toast_Msg = ""; 
     
     public static String USER_ID;
     public static String USER_PW;
@@ -1584,8 +1659,8 @@ public class WO extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _new_user;
     private javax.swing.JCheckBox _order_email;
     private javax.swing.JCheckBox _order_history;
+    private javax.swing.JCheckBox _order_status;
     private javax.swing.JCheckBox _password;
-    private javax.swing.JCheckBox _pending_orders;
     private javax.swing.JCheckBox _place_delivery_order;
     private javax.swing.JCheckBox _place_pickup_order;
     private javax.swing.JCheckBox _slack;

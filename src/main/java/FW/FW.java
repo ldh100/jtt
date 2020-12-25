@@ -27,9 +27,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import javax.swing.SwingWorker;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -510,6 +513,7 @@ public class FW extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_DV1MouseClicked
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        if(BW2 != null && !BW2.isCancelled()) BW2.cancel(true);
         F_COUNT--;
     }//GEN-LAST:event_formInternalFrameClosed
 
@@ -600,7 +604,11 @@ public class FW extends javax.swing.JInternalFrame {
             txtLog.append("\r\n=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             sw1.reset();
-            LOG_START(); // ========================================================
+            LOG_START(); // ======================================================
+            
+            BW2_DoWork(
+                // parameters?
+            );
             try {
                 Execute();
             }
@@ -610,6 +618,54 @@ public class FW extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_btnRunMouseClicked
+    private void BW2_DoWork(){
+        BW2 = new SwingWorker() {             
+            @Override
+            protected String doInBackground() throws Exception { 
+                while (true){
+                    Toast_Msg = "";
+                    //System.out.println("BW2: " + "Message()");
+                    Thread.sleep(1000);
+                    try {
+                        List<WebElement> ALERTS = d1.findElements(By.cssSelector("[role='alert']"));
+                        if(ALERTS.size() > 0){
+                            Toast_Msg = ALERTS.get(0).getAttribute("textContent");// .getText();
+                            if(     Toast_Msg.toLowerCase().contains("successfully") || 
+                                    Toast_Msg.toLowerCase().contains(" been updated") || 
+                                    Toast_Msg.toLowerCase().contains(" been added") || 
+                                    Toast_Msg.toLowerCase().contains(" been removed") ||
+                                    Toast_Msg.toLowerCase().contains(" been reset") ||
+                                    Toast_Msg.toLowerCase().contains(" saved")) {
+                                _t++;
+                                _p++;
+                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                            
+                            } else if(Toast_Msg.toLowerCase().contains("could not")|| 
+                                    Toast_Msg.toLowerCase().contains("unable to save")|| 
+                                    Toast_Msg.toLowerCase().contains("fail")) {
+                                _t++;
+                                _f++;
+                                F += _t + " > FAIL - " + Toast_Msg + "\r\n";
+                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                            } else if(Toast_Msg.toLowerCase().contains("fix") || Toast_Msg.toLowerCase().contains("error")) {
+                                _t++;
+                                _w++;
+                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                            } else {
+                                _t++;
+                                _w++;
+                                //F += _t + " > WARN - " + tt + "\r\n";
+                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                            }
+                            Thread.sleep(4000); //  pause till new alert expected ???? 
+                        }
+                    } catch (InterruptedException ex){ // Exception ex
+                        //System.out.println("BW2: " + "ex.getMessage()");
+                    }
+                }
+            }
+        }; 
+        BW2.execute();  // executes the swingworker on worker thread   
+    }
     private void Execute() throws InterruptedException{
         Instant dw_start = Instant.now();
         New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
@@ -656,6 +712,7 @@ public class FW extends javax.swing.JInternalFrame {
         Done(dw_start);
     }
     private void Done(Instant dw_start){
+        BW2.cancel(true); // ================================================
         Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
         txtLog.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========"); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength());                
@@ -666,6 +723,8 @@ public class FW extends javax.swing.JInternalFrame {
         txtLog.append("\r\n" + EX.replaceAll("\t", " > ")); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         Last_EX = EX;
+        
+        BW2 = null;
         try  { 
             if(d1 != null) {
                 d1.quit(); 
@@ -1167,7 +1226,9 @@ public class FW extends javax.swing.JInternalFrame {
     private String Report_Date;
     private static Duration DD;
     private String Report_File;
-  
+    private static SwingWorker BW2;   
+    private static String Toast_Msg = ""; 
+    
     private int d1LastRow = -1; 
     private int d2LastRow = -1; 
     private List<String> GROUP_IDS;
