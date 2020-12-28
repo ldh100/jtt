@@ -17,9 +17,11 @@ public class WO_account_settings {
             if (FAIL) { return;}           
         _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click 'Account' Button", e1, "xpath", ".//i[@class='v-icon notranslate mdi mdi-account-circle theme--light']", "no_jira");                                     
             if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Account Settings'", "xpath", ".//*[text()='Logout']", "no_jira");                                     
-            if (FAIL) { return;}     
-        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Login' after logout", "Login", true, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Account Settings'", "xpath", ".//*[text()='Account Settings']", "no_jira");                                     
+            if (FAIL) { return;}   
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Title text", "xpath", ".//h1[@class='header']", "no_jira");
+            if (FAIL) { return;}              
+        _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back", SITE + "Account Settings","Previous page (???)", "no_jira");
             if (FAIL) { return;}       
     }  
 }

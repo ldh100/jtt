@@ -972,8 +972,8 @@ if(!R.equals("OK")){
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }  
         btnRun.setEnabled(true);
-        txtLog.append("\r\n=== Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
         txtLog.append("\r\n=== " + Summary);
+        txtLog.append("\r\n=== Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
 
         LOG_UPDATE(); // ========================================================

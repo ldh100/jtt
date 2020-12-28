@@ -624,7 +624,6 @@ public class FW extends javax.swing.JInternalFrame {
             protected String doInBackground() throws Exception { 
                 while (true){
                     Toast_Msg = "";
-                    //System.out.println("BW2: " + "Message()");
                     Thread.sleep(1000);
                     try {
                         List<WebElement> ALERTS = d1.findElements(By.cssSelector("[role='alert']"));
@@ -659,7 +658,7 @@ public class FW extends javax.swing.JInternalFrame {
                             Thread.sleep(4000); //  pause till new alert expected ???? 
                         }
                     } catch (InterruptedException ex){ // Exception ex
-                        //System.out.println("BW2: " + "ex.getMessage()");
+                        System.out.println("BW2: " + "ex.getMessage()");
                     }
                 }
             }
@@ -770,9 +769,9 @@ public class FW extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }  
         btnRun.setEnabled(true);
-        txtLog.append("\r\n=== Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
         txtLog.append("\r\n=== " + Summary); // Summary shown in EX top
         txtLog.append("\r\n=== Scope: " + SCOPE); // SCOPE shown in EX top
+        txtLog.append("\r\n=== Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         if(!"".equals(F.trim())){
             btnFails.setEnabled(true);

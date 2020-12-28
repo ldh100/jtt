@@ -42,15 +42,52 @@ public class WO_explore_brand_menu {
         _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Header lines count", e1,"xpath", ".//div[contains(@class, 'v-card__')]", "no_jira");                                     
             for (int i = 0; i < L1.size(); i++) {
                 _t++; T.Element_Text("Header (" + i + ") line:", L1.get(i),  "no_jira");             
-                if (FAIL) { return;}
             }    
         PICKUP = false;
         DELIVERY = false;
-        _t++; Thread.sleep((long) sleep); T.List_L1("Find Service tabs", "css", "[role='tab']", "no_jira");
-            if (FAIL) { return;} 
-            for (int i = 0; i < L1.size(); i++) {
-                _t++; T.Element_Text("Service tab (" + i + ") name:", L1.get(i),  "no_jira");             
-                if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); T.List_L0("Find Service tabs", "css", "[role='tab']", "no_jira");
+        if (L0.isEmpty()) {
+            _t++; T.Element_By_Path_Text("Single Available Service:", "xpath", "//div[@class='pickup-or-delivery']",  "no_jira"); 
+            if (t.toLowerCase().equals("pickup")) { 
+                PICKUP = true; 
+                _t++; T.List_L1("Pickup Brands Count", "xpath", "//div[@class='v-card v-card--hover v-card--link v-sheet v-sheet--tile theme--light brand']", "no_jira");
+                for (int j = 0; j < L1.size(); j++) {
+                    _t++; T.Element_Text("Pickup Brand (" + j + "):", L1.get(j),  "no_jira");     
+                }
+            }
+            if (t.toLowerCase().equals("delivery")) { 
+                DELIVERY = true;
+                for (int j = 0; j < L1.size(); j++) {
+                    _t++; T.Element_Text("Delivery Brand (" + j + ") name:", L1.get(j),  "no_jira");     
+                } 
+                _t++; T.List_L1("Delivery Brands Count", "xpath", "//div[@class='v-card v-card--hover v-card--link v-sheet v-sheet--tile theme--light brand']", "no_jira"); 
+                for (int j = 0; j < L1.size(); j++) {
+                    _t++; T.Element_Text("Delivery Brand (" + j + "):", L1.get(j),  "no_jira");     
+                } 
             } 
+        } else { 
+            for (int i = 0; i < L0.size(); i++) {
+                _t++; T.Element_Text("Service tab (" + i + ") name:", L0.get(i),  "no_jira");             
+                if (t.toLowerCase().equals("pickup")) { 
+                    PICKUP = true; 
+                    _t++; T.Element_Click("Click 'Pickup' tab", L0.get(i),"no_jira"); 
+                        if (FAIL) { return; } 
+                    _t++; T.List_L1("Pickup Brands Count", "xpath", "//div[@class='v-card v-card--hover v-card--link v-sheet v-sheet--tile theme--light brand']", "no_jira");
+                    for (int j = 0; j < L1.size(); j++) {
+                        _t++; T.Element_Text("Pickup Brand (" + j + "):", L1.get(j),  "no_jira");     
+                    }
+                }
+                if (t.toLowerCase().equals("delivery")) { 
+                    DELIVERY = true;
+                    _t++; T.Element_Click("Click 'Delivery' tab", L0.get(i),"no_jira"); 
+                        if (FAIL) { return; } 
+                    _t++; T.List_L1("Delivery Brands Count", "xpath", "//div[@class='v-card v-card--hover v-card--link v-sheet v-sheet--tile theme--light brand']", "no_jira"); 
+                    for (int j = 0; j < L1.size(); j++) {
+                        _t++; T.Element_Text("Delivery Brand (" + j + "):", L1.get(j),  "no_jira");     
+                    } 
+                } 
+            } 
+            
+        }    
     }  
 }

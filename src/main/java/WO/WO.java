@@ -749,7 +749,7 @@ public class WO extends javax.swing.JInternalFrame {
             //Thread.sleep(1500);
         }
         if (_place_delivery_order.isSelected()) { 
-            SCOPE += ", Place Pickup Order";
+            SCOPE += ", Place Delivery Order";
             EX += " - " + "\t" + " === Place Delivery Order" + "\t" + " ===== " + "\t" + " == Place Delivery Order >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             WO_place_order.run(true);
             EX += " - " + "\t" + " === ^ Place Delivery Order" + "\t" + " ===== " + "\t" + " == ^ Place Delivery Order" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -768,6 +768,13 @@ public class WO extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === Account Settings" + "\t" + " ===== " + "\t" + " == Account Settings Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             WO_account_settings.run();
             EX += " - " + "\t" + " === ^ Account Settings" + "\t" + " ===== " + "\t" + " == ^ Account Settings End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            //Thread.sleep(1500);
+        }
+        if (_order_history.isSelected()) { 
+            SCOPE += ", Order History";
+            EX += " - " + "\t" + " === Order History" + "\t" + " ===== " + "\t" + " == Order History Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            WO_order_history.run();
+            EX += " - " + "\t" + " === ^ Order History" + "\t" + " ===== " + "\t" + " == ^ Order History End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             //Thread.sleep(1500);
         }
         if (_logout.isSelected()) { 
@@ -793,7 +800,6 @@ public class WO extends javax.swing.JInternalFrame {
             protected String doInBackground() throws Exception { 
                 while (true){
                     Toast_Msg = "";
-                    //System.out.println("BW2: " + "Message()");
                     Thread.sleep(1000);
                     try {
                         List<WebElement> ALERTS = d1.findElements(By.cssSelector("[role='alert']"));
@@ -828,7 +834,7 @@ public class WO extends javax.swing.JInternalFrame {
                             Thread.sleep(4000); //  pause till new alert expected ???? 
                         }
                     } catch (InterruptedException ex){ // Exception ex
-                        //System.out.println("BW2: " + "ex.getMessage()");
+                        System.out.println("BW2: " + "ex.getMessage()");
                     }
                 }
             }
@@ -894,9 +900,9 @@ public class WO extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }  
         btnRun.setEnabled(true);
-        txtLog.append("\r\n=== Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
         txtLog.append("\r\n=== " + Summary); // Summary shown in EX top
         txtLog.append("\r\n=== Scope: " + SCOPE); // SCOPE shown in EX top
+        txtLog.append("\r\n=== Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         //this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));   
         if(!"".equals(F.trim())){
