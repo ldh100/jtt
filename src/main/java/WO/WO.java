@@ -491,7 +491,7 @@ public class WO extends javax.swing.JInternalFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmbBrow.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbBrow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chrome", "Firefox", "Edge", "IE" }));
+        cmbBrow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chrome", "Firefox", "Edge", "IE11" }));
         cmbBrow.setEnabled(false);
         jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 28, 78, 20));
 
@@ -919,7 +919,7 @@ public class WO extends javax.swing.JInternalFrame {
             Report(false);
             String MSG = "WO_" + env + " Automation report - " + Report_Date + 
             "\r\n Machine: " + WsID + " OS: " + WsOS + ", User: *" + UserID + "*\r\n" +
-            "Browser: + " + cmbBrow.getSelectedItem().toString() + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
+            "Browser: *" + cmbBrow.getSelectedItem().toString() + "*, Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
             "Scope: " + SCOPE + "\r\n" +
             "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w;
 
@@ -1030,7 +1030,7 @@ public class WO extends javax.swing.JInternalFrame {
 
             d1 = new ChromeDriver(op);
             d1.manage().deleteAllCookies(); // =================================
-            WebDriver.Timeouts implicitlyWait = d1.manage().timeouts().implicitlyWait((long) Wait, TimeUnit.SECONDS);
+            //WebDriver.Timeouts implicitlyWait = d1.manage().timeouts().implicitlyWait(Wait, TimeUnit.SECONDS);
             wait = new FluentWait(d1).withTimeout(Duration.ofSeconds((long)Wait))			
 			.pollingEvery(Duration.ofSeconds((long)200)) 			
 			.ignoring(NoSuchElementException.class); // wait for Visible / Clickable   

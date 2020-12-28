@@ -183,7 +183,6 @@ public class Station extends javax.swing.JInternalFrame {
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setActionCommand("Log");
-        btnLog.setLabel("Log");
         btnLog.setMargin(new java.awt.Insets(2, 4, 2, 4));
         btnLog.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

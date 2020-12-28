@@ -27,6 +27,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -328,25 +329,25 @@ public class T {
         try {
             switch (BY) {
                 case "xpath":
-                    timeout.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(PATH)));
+                    timeout.until((Function) ExpectedConditions.visibilityOfElementLocated(By.xpath(PATH)));
                     break;
                 case "css":
-                    timeout.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PATH)));
+                    timeout.until((Function) ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PATH)));
                     break;
                 case "className":
-                    timeout.until(ExpectedConditions.visibilityOfElementLocated(By.className(PATH)));
+                    timeout.until((Function) ExpectedConditions.visibilityOfElementLocated(By.className(PATH)));
                     break;
                 case "id":
-                    timeout.until(ExpectedConditions.visibilityOfElementLocated(By.id(PATH)));
+                    timeout.until((Function) ExpectedConditions.visibilityOfElementLocated(By.id(PATH)));
                     break;
                 case "tagName":
-                    timeout.until(ExpectedConditions.visibilityOfElementLocated(By.tagName(PATH)));
+                    timeout.until((Function) ExpectedConditions.visibilityOfElementLocated(By.tagName(PATH)));
                     break;                     
                 case "linkText":
-                    timeout.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(PATH)));
+                    timeout.until((Function) ExpectedConditions.visibilityOfElementLocated(By.linkText(PATH)));
                     break;
                 case "partialLinkText":
-                    timeout.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(PATH)));
+                    timeout.until((Function) ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(PATH)));
                     break;
                 default:
                     break;
@@ -374,25 +375,25 @@ public class T {
         try {
             switch (BY) {
                 case "xpath":
-                    timeout.until(ExpectedConditions.presenceOfElementLocated(By.xpath(PATH)));
+                    timeout.until((Function) ExpectedConditions.presenceOfElementLocated(By.xpath(PATH)));
                     break;
                 case "css":
-                    timeout.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(PATH)));
+                    timeout.until((Function) ExpectedConditions.presenceOfElementLocated(By.cssSelector(PATH)));
                     break;
                 case "className":
-                    timeout.until(ExpectedConditions.presenceOfElementLocated(By.className(PATH)));
+                    timeout.until((Function) ExpectedConditions.presenceOfElementLocated(By.className(PATH)));
                     break;
                 case "id":
-                    timeout.until(ExpectedConditions.presenceOfElementLocated(By.id(PATH)));
+                    timeout.until((Function) ExpectedConditions.presenceOfElementLocated(By.id(PATH)));
                     break;
                 case "tagName":
-                    timeout.until(ExpectedConditions.presenceOfElementLocated(By.tagName(PATH)));
+                    timeout.until((Function) ExpectedConditions.presenceOfElementLocated(By.tagName(PATH)));
                     break;                     
                 case "linkText":
-                    timeout.until(ExpectedConditions.presenceOfElementLocated(By.linkText(PATH)));
+                    timeout.until((Function) ExpectedConditions.presenceOfElementLocated(By.linkText(PATH)));
                     break;
                 case "partialLinkText":
-                    timeout.until(ExpectedConditions.presenceOfElementLocated(By.partialLinkText(PATH)));
+                    timeout.until((Function) ExpectedConditions.presenceOfElementLocated(By.partialLinkText(PATH)));
                     break;
                 default:
                     break;
@@ -420,28 +421,28 @@ public class T {
         try {          
             switch (BY) {
                 case "xpath":
-                    timeout.until(ExpectedConditions.invisibilityOfAllElements(d1.findElements(By.xpath(PATH))));
+                    timeout.until((Function) ExpectedConditions.invisibilityOfAllElements(d1.findElements(By.xpath(PATH))));
                     break;
                 case "css":
-                    timeout.until(ExpectedConditions.invisibilityOfAllElements(d1.findElements(By.cssSelector(PATH))));
+                    timeout.until((Function) ExpectedConditions.invisibilityOfAllElements(d1.findElements(By.cssSelector(PATH))));
                     break;
                 case "className":
-                    timeout.until(ExpectedConditions.invisibilityOfAllElements(d1.findElements(By.className(PATH))));
+                    timeout.until((Function) ExpectedConditions.invisibilityOfAllElements(d1.findElements(By.className(PATH))));
                     break;
                 case "id":
-                    timeout.until(ExpectedConditions.invisibilityOfAllElements(d1.findElements(By.id(PATH))));
+                    timeout.until((Function) ExpectedConditions.invisibilityOfAllElements(d1.findElements(By.id(PATH))));
                     break;
                 case "tagName":
-                    timeout.until(ExpectedConditions.invisibilityOfAllElements(d1.findElements(By.tagName(PATH))));
+                    timeout.until((Function) ExpectedConditions.invisibilityOfAllElements(d1.findElements(By.tagName(PATH))));
                     break;
                 case "name":
-                    timeout.until(ExpectedConditions.invisibilityOfAllElements(d1.findElements(By.name(PATH))));
+                    timeout.until((Function) ExpectedConditions.invisibilityOfAllElements(d1.findElements(By.name(PATH))));
                     break;                   
                 case "linkText":
-                    timeout.until(ExpectedConditions.invisibilityOfAllElements(d1.findElements(By.linkText(PATH))));
+                    timeout.until((Function) ExpectedConditions.invisibilityOfAllElements(d1.findElements(By.linkText(PATH))));
                     break;
                 case "partialLinkText":
-                    timeout.until(ExpectedConditions.invisibilityOfAllElements(d1.findElements(By.partialLinkText(PATH))));
+                    timeout.until((Function) ExpectedConditions.invisibilityOfAllElements(d1.findElements(By.partialLinkText(PATH))));
                     break;
                 default:
                     break;
@@ -469,25 +470,25 @@ public class T {
         try {
             switch (BY) {
                 case "xpath":
-                    timeout.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(PATH)));
+                    timeout.until((Function) ExpectedConditions.invisibilityOfElementLocated(By.xpath(PATH)));
                     break;
                 case "css":
-                    timeout.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(PATH)));
+                    timeout.until((Function) ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(PATH)));
                     break;
                 case "className":
-                    timeout.until(ExpectedConditions.invisibilityOfElementLocated(By.className(PATH)));
+                    timeout.until((Function) ExpectedConditions.invisibilityOfElementLocated(By.className(PATH)));
                     break;
                 case "id":
-                    timeout.until(ExpectedConditions.invisibilityOfElementLocated(By.id(PATH)));
+                    timeout.until((Function) ExpectedConditions.invisibilityOfElementLocated(By.id(PATH)));
                     break;
                 case "tagName":
-                    timeout.until(ExpectedConditions.invisibilityOfElementLocated(By.tagName(PATH)));
+                    timeout.until((Function) ExpectedConditions.invisibilityOfElementLocated(By.tagName(PATH)));
                     break;
                 case "linkText":
-                    timeout.until(ExpectedConditions.invisibilityOfElementLocated(By.linkText(PATH)));
+                    timeout.until((Function) ExpectedConditions.invisibilityOfElementLocated(By.linkText(PATH)));
                     break;
                 case "partialLinkText":
-                    timeout.until(ExpectedConditions.invisibilityOfElementLocated(By.partialLinkText(PATH)));
+                    timeout.until((Function) ExpectedConditions.invisibilityOfElementLocated(By.partialLinkText(PATH)));
                     break;
                 default:
                     break;
@@ -907,10 +908,10 @@ public class T {
         try {
             switch (BY) {
                 case "xpath":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.xpath(PATH)));
                     break;
                 case "css":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PATH)));
                     break;
                 default:
                     break;
@@ -939,28 +940,28 @@ public class T {
         try {
             if(null != BY) switch (BY) {
                 case "xpath":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.xpath(PATH)));
                     break;
                 case "css":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PATH))); 
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PATH))); 
                     break;
                 case "className":
-                    e = (WebElement) timeout.until(ExpectedConditions.visibilityOfElementLocated(By.className(PATH))); 
+                    e = (WebElement) timeout.until((Function) ExpectedConditions.visibilityOfElementLocated(By.className(PATH))); 
                     break;
                 case "id":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.id(PATH)));
                     break;
                 case "tagName":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.tagName(PATH)));
                     break;
                 case "name":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.name(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.name(PATH)));
                     break;
                 case "linkText":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.linkText(PATH)));
                     break;
                 case "partialLinkText":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(PATH)));
                     break;
                 default:
                     break;
@@ -1094,28 +1095,28 @@ public class T {
         try {
             switch (BY) {
                 case "xpath":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.xpath(PATH)));
                     break;
                 case "css":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PATH)));
                     break;
                 case "className":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.className(PATH)));
                     break;
                 case "id":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.id(PATH)));
                     break;
                 case "tagName":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.tagName(PATH)));
                     break;
                 case "name":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.name(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.name(PATH)));
                     break;
                 case "linkText":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.linkText(PATH)));
                     break;
                 case "partialLinkText":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(PATH)));
                     break;
                 default:
                     break;
@@ -1144,28 +1145,28 @@ public class T {
         try {
             switch (BY) {
                 case "xpath":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.xpath(PATH)));
                     break;
                 case "css":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PATH)));
                     break;
                 case "className":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.className(PATH)));
                     break;
                 case "id":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.id(PATH)));
                     break;
                 case "tagName":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.tagName(PATH)));
                     break;
                 case "name":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.name(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.name(PATH)));
                     break;
                 case "linkText":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.linkText(PATH)));
                     break;
                 case "partialLinkText":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(PATH)));
                     break;
                 default:
                     break;
@@ -1202,28 +1203,28 @@ public class T {
         try {
             switch (BY) {
                 case "xpath":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.xpath(PATH)));
                     break;
                 case "css":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PATH)));
                     break;
                 case "className":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.className(PATH)));
                     break;
                 case "id":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.id(PATH)));
                     break;
                 case "tagName":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.tagName(PATH)));
                     break;
                 case "name":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.name(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.name(PATH)));
                     break;
                  case "linkText":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.linkText(PATH)));
                     break;
                 case "partialLinkText":
-                    e = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(PATH)));
                     break;
                 default:
                     break;
@@ -1262,28 +1263,28 @@ public class T {
         try {
             switch (BY) {
                 case "xpath":
-                    e = (WebElement) wait.until(ExpectedConditions.elementToBeClickable(By.xpath(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.elementToBeClickable(By.xpath(PATH)));
                     break;
                 case "css":
-                    e = (WebElement) wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.elementToBeClickable(By.cssSelector(PATH)));
                     break;
                 case "className":
-                    e = (WebElement) wait.until(ExpectedConditions.elementToBeClickable(By.className(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.elementToBeClickable(By.className(PATH)));
                     break;
                 case "id":
-                    e = (WebElement) wait.until(ExpectedConditions.elementToBeClickable(By.id(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.elementToBeClickable(By.id(PATH)));
                     break;
                 case "tagName":
-                    e = (WebElement) wait.until(ExpectedConditions.elementToBeClickable(By.tagName(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.elementToBeClickable(By.tagName(PATH)));
                     break;
                 case "name":
-                    e = (WebElement) wait.until(ExpectedConditions.elementToBeClickable(By.name(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.elementToBeClickable(By.name(PATH)));
                     break;
                  case "linkText":
-                    e = (WebElement) wait.until(ExpectedConditions.elementToBeClickable(By.linkText(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.elementToBeClickable(By.linkText(PATH)));
                     break;   
                 case "partialLinkText":
-                    e = (WebElement) wait.until(ExpectedConditions.elementToBeClickable(By.partialLinkText(PATH)));
+                    e = (WebElement) wait.until((Function) ExpectedConditions.elementToBeClickable(By.partialLinkText(PATH)));
                     break;
                 default:
                     break;

@@ -835,7 +835,7 @@ public class DL extends javax.swing.JInternalFrame {
             Report(false);
             String MSG = "DL_" + env + " Automation report - " + Report_Date  +  
                     "\r\n Machine: " + WsID + " OS: " + WsOS + ", User: *" + UserID + "*\r\n" +
-                    "Browser: + " + cmbBrow.getSelectedItem().toString() + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
+                    "Browser: *" + cmbBrow.getSelectedItem().toString() + "*, Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
                     "Scope: " + SCOPE + "\r\n" +
                     "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w;
 
@@ -894,11 +894,11 @@ public class DL extends javax.swing.JInternalFrame {
 //        cmbEnv.addItem("Production");         
         cmbEnv.setSelectedIndex(0); // delevopment only for now
         
-        cmbBrow.addItem("Chrome");        // Chrome, Firefox, Edge, IE
+        cmbBrow.addItem("Chrome");        // Chrome, Firefox, Edge, IE11
         cmbBrow.addItem("Firefox"); 
         cmbBrow.addItem("Edge"); 
         if(WsOS.toLowerCase().contains("windows")){
-            cmbBrow.addItem("IE");             
+            cmbBrow.addItem("IE11");             
         }
         cmbBrow.setSelectedIndex(0); // Chrome
         
@@ -929,7 +929,7 @@ public class DL extends javax.swing.JInternalFrame {
             switch (cmbBrow.getSelectedItem().toString()) {
                 case "Chrome":
                         ChromeOptions chrome_op = new ChromeOptions();
-                         //chrome_op.addExtensions(new File("/path/to/extension.crx"));
+                        //chrome_op.addExtensions(new File("/path/to/extension.crx"));
                         chrome_op.addArguments("--disable-infobars");
                         chrome_op.addArguments("--start-maximized");
             //            chrome_op.addArguments("--start-minimized");
@@ -952,7 +952,7 @@ public class DL extends javax.swing.JInternalFrame {
 //                        service.seVerboseLogging = false;
 //                        service.UseSpecCompliantProtocol = false;
                         EdgeOptions edge_op = new EdgeOptions();
-                        edge_op.setPageLoadStrategy("normal");
+                       //edge_op.setPageLoadStrategy("normal");
                         edge_op.setCapability( "disable-infobars", true);
                         edge_op.setCapability( "disable-gpu", true);
                         edge_op.setCapability("useAutomationExtension", false);
@@ -969,22 +969,23 @@ public class DL extends javax.swing.JInternalFrame {
                         profile.setPreference("network.proxy.no_proxies_on", "localhost");
                         profile.setPreference("javascript.enabled", true);
 
-                        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-                        capabilities.setCapability("marionette", true);
-                        capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+//                        DesiredCapabilities capabilities = DesiredCapabilities.;
+//                        capabilities.setCapability("marionette", true);
+//                        capabilities.setCapability(FirefoxDriver.PROFILE, profile);
 
                         FirefoxOptions ff_op = new FirefoxOptions();
-                        ff_op.merge(capabilities);
+                        //ff_op.merge(capabilities);
                         //ff_op.addPreference("browser.link.open_newwindow", 3);
                         //ff_op.addPreference("browser.link.open_newwindow.restriction", 0);
 
                         d1 = new FirefoxDriver(ff_op);
                     break;
-                case "IE":
+                case "IE11":
                         InternetExplorerOptions ie_op = new InternetExplorerOptions();
                         ie_op.ignoreZoomSettings(); // Not necessarily in case 100% zoom.
                         ie_op.introduceFlakinessByIgnoringSecurityDomains(); // Necessary to skip protected  mode setup
                         ie_op.elementScrollTo(ElementScrollBehavior.BOTTOM);
+                        ie_op.disableNativeEvents();
 //                        var options = new InternetExplorerOptions
 //                        {
 //                                IgnoreZoomLevel = true,
@@ -995,7 +996,7 @@ public class DL extends javax.swing.JInternalFrame {
 //                                //AcceptInsecureCertificates = true,
 //                                EnablePersistentHover = true,
 //                                UnhandledPromptBehavior = UnhandledPromptBehavior.Accept,
-//                                EnableNativeEvents = false //  with true click problem
+//                                EnableNativeEvents = false //  with true > click problem
 //                        };
                         d1 = new InternetExplorerDriver(ie_op);
                     break;
@@ -1003,7 +1004,6 @@ public class DL extends javax.swing.JInternalFrame {
 
             d1.manage().window().maximize();
             d1.manage().deleteAllCookies(); // =================================
-            WebDriver.Timeouts implicitlyWait = d1.manage().timeouts().implicitlyWait((long) Wait, TimeUnit.SECONDS);
             wait = new FluentWait(d1).withTimeout(Duration.ofSeconds((long)Wait))			
 			.pollingEvery(Duration.ofSeconds((long)200)) 			
 			.ignoring(NoSuchElementException.class);  // wait for Visible / Clickable   

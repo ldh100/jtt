@@ -223,7 +223,6 @@
               <Font name="Dialog" size="11" style="0"/>
             </Property>
             <Property name="actionCommand" type="java.lang.String" value="Log"/>
-            <Property name="label" type="java.lang.String" value="Log"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[2, 4, 2, 4]"/>
             </Property>
