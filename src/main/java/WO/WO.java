@@ -843,10 +843,11 @@ public class WO extends javax.swing.JInternalFrame {
     }
     private void Done(Instant dw_start){
         BW2.cancel(true); // ================================================        
+        Ver = "?";
         Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
         txtLog.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());                 
-        EX = "WO " + env + " - v" + Ver + 
+        EX = "WO " + env + " - v" + Ver + ", Browser: " + cmbBrow.getSelectedItem().toString() +
         " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
          "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
          + EX;
@@ -902,7 +903,7 @@ public class WO extends javax.swing.JInternalFrame {
         btnRun.setEnabled(true);
         txtLog.append("\r\n=== " + Summary); // Summary shown in EX top
         txtLog.append("\r\n=== Scope: " + SCOPE); // SCOPE shown in EX top
-        txtLog.append("\r\n=== Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
+        txtLog.append("\r\n=== Browser: " + cmbBrow.getSelectedItem().toString() + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         //this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));   
         if(!"".equals(F.trim())){
@@ -918,7 +919,7 @@ public class WO extends javax.swing.JInternalFrame {
             Report(false);
             String MSG = "WO_" + env + " Automation report - " + Report_Date + 
             "\r\n Machine: " + WsID + " OS: " + WsOS + ", User: *" + UserID + "*\r\n" +
-            "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
+            "Browser: + " + cmbBrow.getSelectedItem().toString() + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
             "Scope: " + SCOPE + "\r\n" +
             "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w;
 
@@ -1028,6 +1029,7 @@ public class WO extends javax.swing.JInternalFrame {
             op.setPageLoadStrategy(PageLoadStrategy.NORMAL);
 
             d1 = new ChromeDriver(op);
+            d1.manage().deleteAllCookies(); // =================================
             WebDriver.Timeouts implicitlyWait = d1.manage().timeouts().implicitlyWait((long) Wait, TimeUnit.SECONDS);
             wait = new FluentWait(d1).withTimeout(Duration.ofSeconds((long)Wait))			
 			.pollingEvery(Duration.ofSeconds((long)200)) 			
