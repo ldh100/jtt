@@ -900,6 +900,9 @@ public class DL extends javax.swing.JInternalFrame {
         if(WsOS.toLowerCase().contains("windows")){
             cmbBrow.addItem("IE11");             
         }
+        if(WsOS.toLowerCase().contains("mac")){
+            cmbBrow.addItem("Safari");             
+        }
         cmbBrow.setSelectedIndex(0); // Chrome
         
         LOAD_ENV();
@@ -925,6 +928,7 @@ public class DL extends javax.swing.JInternalFrame {
                 System.setProperty("webdriver.chrome.driver", cwd + "/chromedriver");                
                 System.setProperty("webdriver.edge.driver", cwd + "/msedgedriver");  
                 System.setProperty("webdriver.gecko.driver", cwd + "/geckodriver");
+                System.setProperty("webdriver.safari.driver", cwd + "/safaridriver");
             }
             switch (cmbBrow.getSelectedItem().toString()) {
                 case "Chrome":
@@ -999,6 +1003,10 @@ public class DL extends javax.swing.JInternalFrame {
 //                                EnableNativeEvents = false //  with true > click problem
 //                        };
                         d1 = new InternetExplorerDriver(ie_op);
+                    break;
+                case "Safari":
+                        //To do on MAC machine // =====================================
+                        //d1 = new ?????        // ==================================== 
                     break;
             }
 
