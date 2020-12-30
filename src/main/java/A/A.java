@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 
-// local jtt_oleg push to remote jtt_oleg
-// test pull request: jtt_oleg to master
+// Test Pull request Branch permission 2nd:
+// Check for at least 1 approval from default reviewers > 
+// chnged to  >
+// Check for at least 1 approval
 package A;
 import AP3.AP3;
 import API.API;
