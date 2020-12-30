@@ -39,18 +39,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Oleg.Spozito
  */
-
 public class Func {
     public static String SHOW_FILE(String BODY, String EXT){
         File aLog = null;
         try {
             String userHomeFolder = System.getProperty("user.home") + "/Desktop"; 
             aLog = new File(userHomeFolder + File.separator + "aLog." + EXT);
-//            if (aLog.createNewFile()) {
-//                System.out.println("File created: " + aLog.getName());
-//            } else {
-//                System.out.println("File already exists.");
-//            }
             Files.write(Paths.get(aLog.getPath()), BODY.getBytes());
             java.awt.Desktop.getDesktop().open(aLog);
             return "OK";
