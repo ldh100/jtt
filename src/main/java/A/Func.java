@@ -222,25 +222,12 @@ public class Func {
                 ContentType.APPLICATION_OCTET_STREAM,
                 file.getName()
              );
-
             HttpEntity multiPartEntity = builder.build();
-
             CloseableHttpClient httpclient = HttpClients.createDefault();
             HttpPost httpPost = new HttpPost("https://slack.com/api/files.upload");
             httpPost.setEntity(multiPartEntity); 
-
             HttpResponse response = httpclient.execute(httpPost);
             return "\r\n\r\n=== Send_File_to_Slack - " + response.getStatusLine() + "\r\n"; 
-
-//            byte[] data = Files.readAllBytes(Paths.get(Path));   
-//            SlackSession session = SlackSessionFactory.createWebSocketSlackSession(A.S_OAuth_TKN);
-//            //SlackSession session = SlackSessionFactory.getSlackSessionBuilder(A.S_OAuth_TKN);
-//            session.connect();
-//            SlackChannel channel = session.findChannelByName(Channel);
-//            SlackMessageHandle sendMessage = session.sendFile(channel, data, File_Name, "File_Upload_with Message", MSG); //sendFile(channel, data, "File_Name_On_Slack");
-//            String RES = sendMessage.getReply().toString(); 
-//            return "\r\n\r\n=== Send_File_to_Slack - " + RES + "\r\n";         
-
         }catch(IOException ex) {
             return "\r\n\r\n=== Send_File_to_Slack > ERROR: " + ex.getMessage() + "\r\n";
         }
