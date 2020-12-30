@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-// Test Pull request Branch permission:
+// Test Pull request Branch permission 2nd:
 // Check for at least 1 approval from default reviewers > 
 // chnged to  >
 // Check for at least 1 approval
