@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 
-// local jtt_oleg push to remote jtt_oleg
-// test pull request: jtt_oleg to master
+// Test Pull request Branch permission 2nd:
+// Check for at least 1 approval from default reviewers > 
+// chnged to  >
+// Check for at least 1 approval
 package A;
 import AP3.AP3;
 import API.API;
@@ -811,7 +813,7 @@ public class A extends javax.swing.JFrame {
     
     public static double sleep = 0.5;
     public static double Timeout = 15;
-    public static double Wait = 3;
+    public static long Wait = 3;
 
     public static String t;
     public static String err;
