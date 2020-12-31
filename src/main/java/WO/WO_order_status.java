@@ -18,8 +18,9 @@ public class WO_order_status {
             if (FAIL) { return;}           
         _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click 'Pending Orders' Button", e1,"xpath", ".//i[@class='v-icon notranslate mdi mdi-text-box-check-outline theme--light']", "no_jira");                                     
             if (FAIL) { return;}  
+        Thread.sleep(500);    
         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'order-status-dialog'", "xpath", "//div[@class='v-dialog order-status-dialog v-dialog--active']", "no_jira");                                     
-            if (FAIL) { return;}    
+            if (FAIL) { return;} 
         //_t++; Thread.sleep((long) sleep); T.Element_Child_Text("Order Status message", e1, "xpath", ".//h2[@class='text-center']", "no_jira");                                     
         _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Order Status message", e1, "tagName", "h2", "no_jira"); 
             if (FAIL) { return;} 
