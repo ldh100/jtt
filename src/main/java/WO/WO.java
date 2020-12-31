@@ -678,6 +678,8 @@ public class WO extends javax.swing.JInternalFrame {
         USER_PW = txtMobile_PW.getText();
 
         ALL_DATA = _all_data.isSelected();
+        NEW_USER = _new_user.isSelected();
+        
         SCOPE = "";
         
         if(DV1.getRowCount() > 0) {
@@ -1606,6 +1608,7 @@ public class WO extends javax.swing.JInternalFrame {
       
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
     private boolean Load;
+
     private static Duration DD;
     private String Report_Date;   
     private String Report_File;
@@ -1613,6 +1616,7 @@ public class WO extends javax.swing.JInternalFrame {
     private static SwingWorker BW2;   
     private static String Toast_Msg = ""; 
     
+    public static boolean NEW_USER;
     public static String USER_ID;
     public static String USER_PW;
     
