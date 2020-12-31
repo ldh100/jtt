@@ -657,7 +657,7 @@ public class WO extends javax.swing.JInternalFrame {
         //txtLog.setText("");
         txtLog.append("\r\n=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        Wait = (double)nWaitElement.getValue();
+        Wait = (long)nWaitElement.getValue();
         Timeout = (double)nWaitLoad.getValue();
         sleep = (double)nShowPage.getValue() *1000;
         EX = "";
@@ -1032,12 +1032,12 @@ public class WO extends javax.swing.JInternalFrame {
 
             d1 = new ChromeDriver(op);
             d1.manage().deleteAllCookies(); // =================================
-            //WebDriver.Timeouts implicitlyWait = d1.manage().timeouts().implicitlyWait(Wait, TimeUnit.SECONDS);
+            d1.manage().timeouts().implicitlyWait(Wait, TimeUnit.SECONDS);
             wait = new FluentWait(d1).withTimeout(Duration.ofSeconds((long)Wait))			
 			.pollingEvery(Duration.ofSeconds((long)200)) 			
 			.ignoring(NoSuchElementException.class); // wait for Visible / Clickable   
-            timeout = new WebDriverWait(d1, (long) Timeout);  // wait for load
-            wait_msg = new WebDriverWait(d1, 100);  // wait for alert
+            timeout = new WebDriverWait(d1, (long) Timeout);          // wait for load
+            wait_msg = new WebDriverWait(d1, 100);       // wait for alert
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
         }

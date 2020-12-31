@@ -813,7 +813,7 @@ public class A extends javax.swing.JFrame {
     
     public static double sleep = 0.5;
     public static double Timeout = 15;
-    public static double Wait = 3;
+    public static long Wait = 3;
 
     public static String t;
     public static String err;
