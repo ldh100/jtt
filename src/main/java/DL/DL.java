@@ -610,7 +610,7 @@ public class DL extends javax.swing.JInternalFrame {
         //txtLog.setText("");
         txtLog.append("\r\n=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        Wait = (double)nWaitElement.getValue();
+        Wait = (long)nWaitElement.getValue();
         Timeout = (double)nWaitLoad.getValue();
         sleep = (double)nShowPage.getValue() *1000;
         EX = "";
@@ -1012,6 +1012,7 @@ public class DL extends javax.swing.JInternalFrame {
 
             d1.manage().window().maximize();
             d1.manage().deleteAllCookies(); // =================================
+            d1.manage().timeouts().implicitlyWait(Wait, TimeUnit.SECONDS);
             wait = new FluentWait(d1).withTimeout(Duration.ofSeconds((long)Wait))			
 			.pollingEvery(Duration.ofSeconds((long)200)) 			
 			.ignoring(NoSuchElementException.class);  // wait for Visible / Clickable   
