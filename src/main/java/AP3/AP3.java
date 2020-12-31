@@ -893,7 +893,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         //txtLog.setText("");
         txtLog.append("=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        Wait = (double)nWaitElement.getValue();
+        Wait = (long)nWaitElement.getValue();
         Timeout = (double)nWaitLoad.getValue();
         sleep = (double)nShowPage.getValue() *1000;
 
@@ -1018,6 +1018,7 @@ public class AP3 extends javax.swing.JInternalFrame {
 
             d1 = new ChromeDriver(op);
             d1.manage().deleteAllCookies(); // =================================
+            d1.manage().timeouts().implicitlyWait(Wait, TimeUnit.SECONDS);
             wait = new FluentWait(d1).withTimeout(Duration.ofSeconds((long)Wait))			
 			.pollingEvery(Duration.ofSeconds((long)200)) 			
 			.ignoring(NoSuchElementException.class); // wait for Visible / Clickable   
