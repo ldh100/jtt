@@ -24,7 +24,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -44,7 +43,6 @@ import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -114,7 +112,7 @@ public class WO extends javax.swing.JInternalFrame {
         btnRun = new javax.swing.JButton();
         btnLog = new javax.swing.JButton();
         btnFails = new javax.swing.JButton();
-        btnExel = new javax.swing.JButton();
+        btnExcel = new javax.swing.JButton();
         _headless = new javax.swing.JCheckBox();
         btnSave_Opt = new javax.swing.JButton();
         lblSITES11 = new javax.swing.JLabel();
@@ -261,11 +259,11 @@ public class WO extends javax.swing.JInternalFrame {
         nShowPage.setName("nShowPage"); // NOI18N
 
         nWaitElement.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nWaitElement.setModel(new javax.swing.SpinnerNumberModel(1.0d, 0.0d, 5.0d, 1.0d));
+        nWaitElement.setModel(new javax.swing.SpinnerNumberModel(1.0d, 0.0d, 5.0d, 0.5d));
         nWaitElement.setName("nWaitElement"); // NOI18N
 
         nWaitLoad.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nWaitLoad.setModel(new javax.swing.SpinnerNumberModel(30.0d, 0.0d, 60.0d, 5.0d));
+        nWaitLoad.setModel(new javax.swing.SpinnerNumberModel(30.0d, 5.0d, 60.0d, 5.0d));
         nWaitLoad.setName("nWaitLoad"); // NOI18N
 
         lblSITES7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -491,7 +489,7 @@ public class WO extends javax.swing.JInternalFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmbBrow.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbBrow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chrome", "Firefox", "Edge", "IE11" }));
+        cmbBrow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chrome", "Firefox", "Edge", "IE" }));
         cmbBrow.setEnabled(false);
         jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 28, 78, 20));
 
@@ -527,16 +525,16 @@ public class WO extends javax.swing.JInternalFrame {
         });
         jPanel3.add(btnFails, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 28, 84, 22));
 
-        btnExel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnExel.setText("Excel Rep");
-        btnExel.setEnabled(false);
-        btnExel.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        btnExel.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnExcel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnExcel.setText("Excel Rep");
+        btnExcel.setEnabled(false);
+        btnExcel.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        btnExcel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnExelMouseClicked(evt);
+                btnExcelMouseClicked(evt);
             }
         });
-        jPanel3.add(btnExel, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 84, 22));
+        jPanel3.add(btnExcel, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 84, 22));
 
         _headless.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         _headless.setText("Headless <<<<");
@@ -653,12 +651,13 @@ public class WO extends javax.swing.JInternalFrame {
         }
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
-        btnExel.setEnabled(false);
+        btnExcel.setEnabled(false);
         //txtLog.setText("");
         txtLog.append("\r\n=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        Wait = (long)nWaitElement.getValue();
-        Timeout = (double)nWaitLoad.getValue();
+        
+        WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
+        LoadTimeOut = (double)nWaitLoad.getValue();
         sleep = (double)nShowPage.getValue() *1000;
         EX = "";
         F = "";
@@ -913,7 +912,7 @@ public class WO extends javax.swing.JInternalFrame {
         } else{
             btnFails.setEnabled(false);
         }
-        btnExel.setEnabled(true);
+        btnExcel.setEnabled(true);
         
         LOG_UPDATE(); // ========================================================
         
@@ -950,12 +949,14 @@ public class WO extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnFailsMouseClicked
 
-    private void btnExelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExelMouseClicked
-        if(!btnExel.isEnabled()) {return;}
-        btnExel.setEnabled(false);
+    private void btnExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcelMouseClicked
+        if(!btnExcel.isEnabled()) {
+            return;
+        }
+        btnExcel.setEnabled(false);
         Report(true);
-        btnExel.setEnabled(true);
-    }//GEN-LAST:event_btnExelMouseClicked
+        btnExcel.setEnabled(true);
+    }//GEN-LAST:event_btnExcelMouseClicked
 
     private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
         SAVE_CONFIG();
@@ -1032,12 +1033,11 @@ public class WO extends javax.swing.JInternalFrame {
 
             d1 = new ChromeDriver(op);
             d1.manage().deleteAllCookies(); // =================================
-            d1.manage().timeouts().implicitlyWait(Wait, TimeUnit.SECONDS);
-            wait = new FluentWait(d1).withTimeout(Duration.ofSeconds((long)Wait))			
-			.pollingEvery(Duration.ofSeconds((long)200)) 			
-			.ignoring(NoSuchElementException.class); // wait for Visible / Clickable   
-            timeout = new WebDriverWait(d1, (long) Timeout);          // wait for load
-            wait_msg = new WebDriverWait(d1, 100);       // wait for alert
+            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
+            fluentWait = new FluentWait(d1).withTimeout(Duration.ofMillis(WaitForElement))			
+			.pollingEvery(Duration.ofMillis(200))  			
+			.ignoring(NoSuchElementException.class);     // fluentWait for Visible / Clickable   
+            loadTimeout = new WebDriverWait(d1, (long) LoadTimeOut);      // fluentWait for load > progress         
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
         }
@@ -1625,7 +1625,7 @@ public class WO extends javax.swing.JInternalFrame {
     
     private int d1LastRow = -1; 
     private int d2LastRow = -1; 
-;  
+
     private boolean CONFIG = false;
     private String C = "";
 
@@ -1650,7 +1650,6 @@ public class WO extends javax.swing.JInternalFrame {
     public static String CompanyID = "";
     public static String GroupID = "";
     public static String COUNTRY = "COUNTRY";
-    public static String GL_MENU = "TIM HORTONS";
     public static String platform = "CDL";
     public static String BaseAPI;
     public static String TZone; 
@@ -1676,7 +1675,7 @@ public class WO extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _place_delivery_order;
     private javax.swing.JCheckBox _place_pickup_order;
     private javax.swing.JCheckBox _slack;
-    private javax.swing.JButton btnExel;
+    private javax.swing.JButton btnExcel;
     private javax.swing.JButton btnFails;
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;

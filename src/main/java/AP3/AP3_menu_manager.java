@@ -405,7 +405,7 @@ public class AP3_menu_manager {
             _t++; Thread.sleep((long) sleep); T.Element_Click("Select New Group", L0.get(T_Index), "no_jira");
                 if (FAIL) { return;} 
             Thread.sleep(500);
-//            _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait Selected Group page", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "no_jira"); 
+//            _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("WaitForElement Selected Group page", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "no_jira"); 
 //                if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Cancel'", "xpath", "//div[contains(text(), 'Cancel')]", "no_jira"); 
                 if (FAIL) { return;}  
@@ -455,7 +455,7 @@ public class AP3_menu_manager {
                 _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                     if (FAIL) { return;} 
                 Thread.sleep(1000);
-//                _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for MM > Group page load", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "no_jira"); 
+//                _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("WaitForElement for MM > Group page load", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "no_jira"); 
 //                        if (FAIL) { return;}                    
             }
                 
