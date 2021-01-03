@@ -514,7 +514,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         nShowPage.setName("nShowPage"); // NOI18N
 
         nWaitElement.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nWaitElement.setModel(new javax.swing.SpinnerNumberModel(1.0d, 0.0d, 5.0d, 1.0d));
+        nWaitElement.setModel(new javax.swing.SpinnerNumberModel(1.0d, 0.0d, 5.0d, 0.5d));
         nWaitElement.setName("nWaitElement"); // NOI18N
 
         nWaitLoad.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -585,7 +585,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmbBrow.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbBrow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chrome", "Firefox", "Edge", "IE11" }));
+        cmbBrow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chrome", "Firefox", "Edge", "IE" }));
         cmbBrow.setEnabled(false);
         jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 28, 78, 20));
 
@@ -893,8 +893,8 @@ public class AP3 extends javax.swing.JInternalFrame {
         //txtLog.setText("");
         txtLog.append("=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        Wait = (long)nWaitElement.getValue();
-        Timeout = (double)nWaitLoad.getValue();
+        WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
+        LoadTimeOut = (double)nWaitLoad.getValue();
         sleep = (double)nShowPage.getValue() *1000;
 
         EX = "";
@@ -1018,12 +1018,11 @@ public class AP3 extends javax.swing.JInternalFrame {
 
             d1 = new ChromeDriver(op);
             d1.manage().deleteAllCookies(); // =================================
-            d1.manage().timeouts().implicitlyWait(Wait, TimeUnit.SECONDS);
-            wait = new FluentWait(d1).withTimeout(Duration.ofSeconds((long)Wait))			
-			.pollingEvery(Duration.ofSeconds((long)200)) 			
-			.ignoring(NoSuchElementException.class); // wait for Visible / Clickable   
-            timeout = new WebDriverWait(d1, (long) Timeout);      // wait for load
-            wait_msg = new WebDriverWait(d1, 100);   // wait for alert
+            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
+            fluentWait = new FluentWait(d1).withTimeout(Duration.ofMillis(WaitForElement))			
+			.pollingEvery(Duration.ofMillis(200))  			
+			.ignoring(NoSuchElementException.class);     // fluentWait for Visible / Clickable   
+            loadTimeout = new WebDriverWait(d1, (long) LoadTimeOut);      // fluentWait for load > progress 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
         }
