@@ -309,7 +309,7 @@ public class AP3_group_management {
             } 
 //        _t++; Thread.sleep((long) sleep); T.Element_Click("Click " + GL_MENU , L0, "L1", T_Index, "no_jira");
 //            if (FAIL) { return;}           
-//        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+//        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("WaitForElement for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
 //            if (FAIL) { return;}             
     } 
 }

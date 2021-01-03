@@ -63,8 +63,8 @@ public class A extends javax.swing.JFrame {
 
         DesktopPane = new javax.swing.JDesktopPane();
         MenuBar = new javax.swing.JMenuBar();
-        Android = new javax.swing.JMenu();
-        iOS = new javax.swing.JMenu();
+        Menu_Android = new javax.swing.JMenu();
+        Menu_iOS = new javax.swing.JMenu();
         Menu_AP3 = new javax.swing.JMenu();
         Menu_API = new javax.swing.JMenu();
         MenuWO = new javax.swing.JMenu();
@@ -101,23 +101,23 @@ public class A extends javax.swing.JFrame {
             .addGap(0, 697, Short.MAX_VALUE)
         );
 
-        Android.setText("Android");
-        Android.setName("Station"); // NOI18N
-        Android.addMouseListener(new java.awt.event.MouseAdapter() {
+        Menu_Android.setText("Android");
+        Menu_Android.setName("Station"); // NOI18N
+        Menu_Android.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AndroidMouseClicked(evt);
+                Menu_AndroidMouseClicked(evt);
             }
         });
-        MenuBar.add(Android);
+        MenuBar.add(Menu_Android);
 
-        iOS.setText("iOS");
-        iOS.setName("Station"); // NOI18N
-        iOS.addMouseListener(new java.awt.event.MouseAdapter() {
+        Menu_iOS.setText("iOS");
+        Menu_iOS.setName("Station"); // NOI18N
+        Menu_iOS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                iOSMouseClicked(evt);
+                Menu_iOSMouseClicked(evt);
             }
         });
-        MenuBar.add(iOS);
+        MenuBar.add(Menu_iOS);
 
         Menu_AP3.setBorder(null);
         Menu_AP3.setText("AP3");
@@ -512,6 +512,9 @@ public class A extends javax.swing.JFrame {
         }
         Get_AP3_TKN_and_Slack_IDs();
         
+        Menu_Android.setToolTipText("Android Mobile Automation Manager - in Development");
+        Menu_iOS.setToolTipText("iOS Mobile Automation Manager - in Development");
+        MenuWO.setToolTipText("Web Ordering Automation"); 
         Menu_AP3.setToolTipText("Ap3 Automation Manager");
         MenuWO.setToolTipText("Web Ordering Automation"); 
         Menu_FW.setToolTipText("Food Works Automation"); 
@@ -641,13 +644,13 @@ public class A extends javax.swing.JFrame {
         Menu_OR.setEnabled(true); 
     }//GEN-LAST:event_Menu_ORMouseClicked
 
-    private void AndroidMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AndroidMouseClicked
+    private void Menu_AndroidMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_AndroidMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_AndroidMouseClicked
+    }//GEN-LAST:event_Menu_AndroidMouseClicked
 
-    private void iOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iOSMouseClicked
+    private void Menu_iOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_iOSMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_iOSMouseClicked
+    }//GEN-LAST:event_Menu_iOSMouseClicked
     private void Get_Version() {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         Version =  "?"; 
@@ -700,51 +703,6 @@ public class A extends javax.swing.JFrame {
             S_OAuth_TKN = ex.getMessage();
 
         }
-//        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-//            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Client_ID'");
-//            rs.next();
-//            S_Client_ID = rs.getString(1);
-//            conn.close();
-//        } catch (SQLException ex) {
-//            txtLog.append("\r\n\r\n=== Get S_Client_ID > ERROR: " + ex.getMessage());
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-//        }
-//        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-//            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Client_Secret'");
-//            rs.next();
-//            S_Client_Secret = rs.getString(1);
-//            conn.close();
-//        } catch (SQLException ex) {
-//            txtLog.append("\r\n\r\n=== Get S_Client_Secret > ERROR: " + ex.getMessage());
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-//        }
-//        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-//            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Signing_Secret'");
-//            rs.next();
-//            S_Signing_Secret = rs.getString(1);
-//            conn.close();
-//        } catch (SQLException ex) {
-//            txtLog.append("\r\n\r\n=== Get S_Signing_Secret > ERROR: " + ex.getMessage());
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-//        }
-//        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-//            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_Hook'");
-//            rs.next();
-//            S_Hook = rs.getString(1);
-//            conn.close();
-//        } catch (SQLException ex) {
-//            txtLog.append("\r\n\r\n=== Get S_Hook > ERROR: " + ex.getMessage());
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-//        }
-//        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-//            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
-//            rs.next();
-//            AP3_TKN = rs.getString(1);
-//            conn.close();
-//        } catch (SQLException ex) {
-//            txtLog.append("\r\n\r\n=== AP3_TKN > ERROR: " + ex.getMessage());
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-//        }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     
@@ -801,9 +759,8 @@ public class A extends javax.swing.JFrame {
     public static WebElement e;
     public static WebElement e1;
     public static WebElement e2;
-    public static FluentWait wait;
-    public static WebDriverWait wait_msg;
-    public static WebDriverWait timeout;
+    public static FluentWait fluentWait;
+    public static WebDriverWait loadTimeout;
     public static List<WebElement> L0 = null;
     public static List<WebElement> L1 = null;
     public static List<WebElement> L2 = null;
@@ -811,9 +768,9 @@ public class A extends javax.swing.JFrame {
     public static List<WebElement> Opens = null;
     public static List<WebElement> Closes = null;
     
-    public static double sleep = 0.5;
-    public static double Timeout = 15;
-    public static long Wait = 3;
+    public static double sleep = 500; // milisec
+    public static double LoadTimeOut = 15; // sec
+    public static long WaitForElement = 3000; // milisec
 
     public static String t;
     public static String err;
@@ -856,7 +813,6 @@ public class A extends javax.swing.JFrame {
     private ImageIcon II;  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu Android;
     private javax.swing.JDesktopPane DesktopPane;
     private javax.swing.JMenuBar MenuBar;
     private javax.swing.JMenu MenuReports;
@@ -864,10 +820,11 @@ public class A extends javax.swing.JFrame {
     private javax.swing.JMenu MenuWO;
     private javax.swing.JMenu Menu_AP3;
     private javax.swing.JMenu Menu_API;
+    private javax.swing.JMenu Menu_Android;
     private javax.swing.JMenu Menu_DL;
     private javax.swing.JMenu Menu_FW;
     private javax.swing.JMenu Menu_OR;
-    private javax.swing.JMenu iOS;
+    private javax.swing.JMenu Menu_iOS;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>   
 }
