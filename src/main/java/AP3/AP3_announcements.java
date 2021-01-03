@@ -523,7 +523,7 @@ public class AP3_announcements {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Delete' dialog", "xpath", "//div[@class='v-dialog v-dialog--active']", "no_jira");
             if (FAIL) {    
-                Thread.sleep(2000); // DEBUG - wait for page reload bug
+                Thread.sleep(2000); // DEBUG - fluentWait for page reload bug
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Delete Announcement Click again", "xpath", "//*[contains(text(), 'DELETE ANNOUNCEMENT')]", "no_jira"); 
                     if (FAIL) { return;}  
                 Thread.sleep(500); 
