@@ -309,7 +309,7 @@
               <Font name="Dialog" size="12" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="1.0" maximum="5.0" minimum="0.0" numberType="java.lang.Double" stepSize="1.0" type="number"/>
+              <SpinnerModel initial="1.0" maximum="5.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.5" type="number"/>
             </Property>
             <Property name="name" type="java.lang.String" value="nWaitElement" noResource="true"/>
           </Properties>
@@ -320,7 +320,7 @@
               <Font name="Dialog" size="12" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="30.0" maximum="60.0" minimum="0.0" numberType="java.lang.Double" stepSize="5.0" type="number"/>
+              <SpinnerModel initial="30.0" maximum="60.0" minimum="5.0" numberType="java.lang.Double" stepSize="5.0" type="number"/>
             </Property>
             <Property name="name" type="java.lang.String" value="nWaitLoad" noResource="true"/>
           </Properties>
@@ -727,7 +727,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JButton" name="btnExel">
+        <Component class="javax.swing.JButton" name="btnExcel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="0"/>
@@ -739,7 +739,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnExelMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnExcelMouseClicked"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
