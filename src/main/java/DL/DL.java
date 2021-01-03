@@ -279,7 +279,7 @@ public class DL extends javax.swing.JInternalFrame {
 
         lblSITES9.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblSITES9.setText("Timeout:");
+        lblSITES9.setText("LoadTimeOut:");
         lblSITES9.setAlignmentX(0.5F);
 
         lblSITES10.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -610,8 +610,8 @@ public class DL extends javax.swing.JInternalFrame {
         //txtLog.setText("");
         txtLog.append("\r\n=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        Wait = (long)nWaitElement.getValue();
-        Timeout = (double)nWaitLoad.getValue();
+        WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
+        LoadTimeOut = (double)nWaitLoad.getValue();
         sleep = (double)nShowPage.getValue() *1000;
         EX = "";
         F = "";
@@ -1012,12 +1012,11 @@ public class DL extends javax.swing.JInternalFrame {
 
             d1.manage().window().maximize();
             d1.manage().deleteAllCookies(); // =================================
-            d1.manage().timeouts().implicitlyWait(Wait, TimeUnit.SECONDS);
-            wait = new FluentWait(d1).withTimeout(Duration.ofSeconds((long)Wait))			
-			.pollingEvery(Duration.ofSeconds((long)200)) 			
-			.ignoring(NoSuchElementException.class);  // wait for Visible / Clickable   
-            timeout = new WebDriverWait(d1, (long) Timeout);           // wait for load
-            wait_msg = new WebDriverWait(d1, 100);       // wait for alert
+            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
+            fluentWait = new FluentWait(d1).withTimeout(Duration.ofMillis(WaitForElement))			
+			.pollingEvery(Duration.ofMillis(200))  			
+			.ignoring(NoSuchElementException.class);     // fluentWait for Visible / Clickable   
+            loadTimeout = new WebDriverWait(d1, (long) LoadTimeOut);      // fluentWait for load > progress 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
         } catch (Exception ex) {
