@@ -977,7 +977,7 @@ public class AP3_user {
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(500);
-//        _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Search Users')]", "no_jira"); 
+//        _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("WaitForElement for page load...", "xpath", "//*[contains(text(), 'Search Users')]", "no_jira"); 
 //            if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "css", "[aria-label='Search Users']", "no_jira"); 
             if (FAIL) { return;}            
@@ -1115,7 +1115,7 @@ public class AP3_user {
 // <editor-fold defaultstate="collapsed" desc="New Runner Set PW > Login">
 //        _t++; Thread.sleep((long) sleep); T.Open_Switch_to_2nd_Tab("Open Google in New Tab", "https://mail.google.com/mail/u/0/#inbox","no_jira");             
 //        EX += " - " + "\t" + " === User Permissions " + "\t" + " ===== " + "\t" + " == New Runner Set PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";           
-//        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+//        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("WaitForElement for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
 //            if (FAIL) { return;}    
 //        _t++; Thread.sleep((long) sleep); T.Page_URL("Open Google URL", "no_jira"); 
 //            if (FAIL) { return;}  
@@ -1130,13 +1130,13 @@ public class AP3_user {
 //            if (FAIL) { return;}  
 //        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'ID Next'", "id", "identifierNext", "no_jira"); 
 //            if (FAIL) { return; }   
-//        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "css", "[role='progressbar']", "no_jira"); 
+//        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("WaitForElement for 'progress'...", "css", "[role='progressbar']", "no_jira"); 
 //            if (FAIL) { return;}            
 //        _t++; T.Visible_Element_By_Path_Text_Enter("Enter 'Password'", "css", "[type='password']", "AnnaL0g0", "no_jira"); 
 //            if (FAIL) { return;}   
 //        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PW Next'", "id", "passwordNext", "no_jira"); 
 //            if (FAIL) { return; } 
-//        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "css", "[role='progressbar']", "no_jira"); 
+//        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("WaitForElement for 'progress'...", "css", "[role='progressbar']", "no_jira"); 
 //            if (FAIL) { return;}   
 //        //"cdl.test.xtt+" + "R_" + New_ID + "@gmail.com" >>> AnnaL0g0 //identifierId
 //        //Runner Login rejected  
@@ -1197,7 +1197,7 @@ public class AP3_user {
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(500);
-//        _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Search Users')]", "no_jira"); 
+//        _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("WaitForElement for page load...", "xpath", "//*[contains(text(), 'Search Users')]", "no_jira"); 
 //            if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "css", "[aria-label='Search Users']", "no_jira"); 
             if (FAIL) { return;}            

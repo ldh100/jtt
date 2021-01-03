@@ -301,7 +301,7 @@ public class AP3_brand {
         }
 //        _t++; T.Clickable_Element_By_Path_Click("Click 'Save Changes'", "xpath", "//*[contains(text(), 'Save Changes')]","no_jira");
 //            if (FAIL) { return;}
-//        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
+//        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("WaitForElement for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
 //            if (FAIL) { return;}                                                          
 
         _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back", "Brand Configuration","Brand Site", "no_jira");
