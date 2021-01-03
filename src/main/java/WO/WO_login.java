@@ -24,23 +24,23 @@ public class WO_login {
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Enter Location' text", "Enter Your Thrive Location", true,"no_jira"); 
             //if (FAIL) { return;}            
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Login' text", "Login", true,"no_jira"); 
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Login'", "xpath", "//*[text()='Login']", "no_jira"); 
-                if (FAIL) { return;}             
-            Thread.sleep(500);   
-            _t++; T.Element_E1_Find("Find 'Login' dialog", "xpath", "//div[@class='v-dialog v-dialog--active']", "no_jira");
-                if (FAIL) { return;} 
-            _t++; T.Element_Child_Text("Find 'Login' dialog Title", e1, "xpath", ".//div[@class='v-card__title form-title']", "no_jira");               
-            _t++; T.Element_Child_Text("Find 'Login' dialog Text", e1, "xpath", ".//div[@class='v-card__text']", "no_jira"); 
-            _t++; T.Find_Text("Find 'Need ..?' text", "Need an account?", true,"no_jira");                
-            _t++; T.Element_By_Path_Text("Find 'switch-form-text > Sign-in' text", "xpath", "//p[@class='switch-form-text']", "no_jira"); 
-            _t++; T.Find_Text("Find 'Forgot password..' text", "Forgot you password?", true, "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Login'", "xpath", "//*[text()='Login']", "no_jira"); 
+            if (FAIL) { return;}             
+        Thread.sleep(500);   
+        _t++; T.Element_E1_Find("Find 'Login' dialog", "xpath", "//div[@class='v-dialog v-dialog--active']", "no_jira");
+            if (FAIL) { return;} 
+        _t++; T.Element_Child_Text("Find 'Login' dialog Title", e1, "xpath", ".//div[@class='v-card__title form-title']", "no_jira");               
+        _t++; T.Element_Child_Text("Find 'Login' dialog Text", e1, "xpath", ".//div[@class='v-card__text']", "no_jira"); 
+        _t++; T.Find_Text("Find 'Need ..?' text", "Need an account?", true,"no_jira");                
+        _t++; T.Element_By_Path_Text("Find 'switch-form-text > Sign-in' text", "xpath", "//p[@class='switch-form-text']", "no_jira"); 
+        _t++; T.Find_Text("Find 'Forgot password..' text", "Forgot you password?", true, "no_jira"); 
 
-            _t++; T.Element_Child_List_L1("Login Text Slot(s) Count", e1,"xpath", ".//div[@class='v-text-field__slot']", "no_jira");             
-                if (FAIL) { return;}          
-            _t++; T.Element_Child_Text("Input 'Email' label", L1.get(0), "tagName" , "label", "no_jira"); 
-                //if (FAIL) { return;}
-            _t++; T.Element_Child_Text("Input 'Pssword' label", L1.get(1), "tagName" , "label", "no_jira"); 
-                //if (FAIL) { return;}
+        _t++; T.Element_Child_List_L1("Login Text Slot(s) Count", e1,"xpath", ".//div[@class='v-text-field__slot']", "no_jira");             
+            if (FAIL) { return;}          
+        _t++; T.Element_Child_Text("Input 'Email' label", L1.get(0), "tagName" , "label", "no_jira"); 
+            //if (FAIL) { return;}
+        _t++; T.Element_Child_Text("Input 'Pssword' label", L1.get(1), "tagName" , "label", "no_jira"); 
+            //if (FAIL) { return;}
 
         if(NEW_USER) {
             
@@ -49,9 +49,7 @@ public class WO_login {
         }else{
             _t++; T.Element_Child_Click("Click 'Email' input", L1.get(0), "tagName" , "input", "no_jira"); 
                 if (FAIL) { return;}  
-                
-            // Add Invalid Email/PW testing flow
-            
+            // Add Invalid Email/PW testing flow   // =================================
             _t++; T.Element_Child_Text_Enter("Enter Valid Email", L1.get(0), "tagName" , "input", USER_ID, false, "no_jira"); 
                 if (FAIL) { return;}            
             _t++; T.Element_Child_Click("Click 'Pssword' input", L1.get(1), "tagName" , "input", "no_jira"); 
