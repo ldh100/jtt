@@ -66,12 +66,12 @@ public class A extends javax.swing.JFrame {
         Menu_Android = new javax.swing.JMenu();
         Menu_iOS = new javax.swing.JMenu();
         Menu_AP3 = new javax.swing.JMenu();
-        Menu_API = new javax.swing.JMenu();
         MenuWO = new javax.swing.JMenu();
         Menu_FW = new javax.swing.JMenu();
         Menu_DL = new javax.swing.JMenu();
         MenuStation = new javax.swing.JMenu();
         Menu_OR = new javax.swing.JMenu();
+        Menu_API = new javax.swing.JMenu();
         MenuReports = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -98,7 +98,7 @@ public class A extends javax.swing.JFrame {
         );
         DesktopPaneLayout.setVerticalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 697, Short.MAX_VALUE)
+            .addGap(0, 699, Short.MAX_VALUE)
         );
 
         Menu_Android.setText("Android");
@@ -128,16 +128,6 @@ public class A extends javax.swing.JFrame {
             }
         });
         MenuBar.add(Menu_AP3);
-
-        Menu_API.setBorder(null);
-        Menu_API.setText("APIs");
-        Menu_API.setName("AP3"); // NOI18N
-        Menu_API.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Menu_APIMouseClicked(evt);
-            }
-        });
-        MenuBar.add(Menu_API);
 
         MenuWO.setText("WO");
         MenuWO.setName("FW"); // NOI18N
@@ -184,6 +174,16 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_OR);
 
+        Menu_API.setBorder(null);
+        Menu_API.setText("APIs");
+        Menu_API.setName("AP3"); // NOI18N
+        Menu_API.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_APIMouseClicked(evt);
+            }
+        });
+        MenuBar.add(Menu_API);
+
         MenuReports.setBorder(null);
         MenuReports.setText("Reports");
         MenuReports.setName("FW"); // NOI18N
@@ -205,7 +205,7 @@ public class A extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(DesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
+                .addComponent(DesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 

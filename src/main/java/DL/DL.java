@@ -279,7 +279,7 @@ public class DL extends javax.swing.JInternalFrame {
 
         lblSITES9.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblSITES9.setText("LoadTimeOut:");
+        lblSITES9.setText("Timeout:");
         lblSITES9.setAlignmentX(0.5F);
 
         lblSITES10.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
