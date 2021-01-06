@@ -98,7 +98,7 @@ public class A extends javax.swing.JFrame {
         );
         DesktopPaneLayout.setVerticalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 699, Short.MAX_VALUE)
+            .addGap(0, 697, Short.MAX_VALUE)
         );
 
         Menu_Android.setText("Android");
@@ -119,7 +119,7 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_iOS);
 
-        Menu_AP3.setBorder(null);
+        Menu_AP3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_AP3.setText("AP3");
         Menu_AP3.setName("AP3"); // NOI18N
         Menu_AP3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -129,6 +129,7 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_AP3);
 
+        MenuWO.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         MenuWO.setText("WO");
         MenuWO.setName("FW"); // NOI18N
         MenuWO.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -138,6 +139,7 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(MenuWO);
 
+        Menu_FW.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_FW.setText("FW");
         Menu_FW.setName("FW"); // NOI18N
         Menu_FW.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -147,6 +149,7 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_FW);
 
+        Menu_DL.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_DL.setText("DL");
         Menu_DL.setName("FW"); // NOI18N
         Menu_DL.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -156,6 +159,7 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_DL);
 
+        MenuStation.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         MenuStation.setText("Station");
         MenuStation.setName("Station"); // NOI18N
         MenuStation.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -165,6 +169,7 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(MenuStation);
 
+        Menu_OR.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_OR.setText("Orders");
         Menu_OR.setName("Station"); // NOI18N
         Menu_OR.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -174,7 +179,7 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_OR);
 
-        Menu_API.setBorder(null);
+        Menu_API.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_API.setText("APIs");
         Menu_API.setName("AP3"); // NOI18N
         Menu_API.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -184,7 +189,7 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_API);
 
-        MenuReports.setBorder(null);
+        MenuReports.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         MenuReports.setText("Reports");
         MenuReports.setName("FW"); // NOI18N
         MenuReports.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -205,7 +210,7 @@ public class A extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(DesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
+                .addComponent(DesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
