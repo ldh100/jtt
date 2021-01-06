@@ -66,12 +66,12 @@ public class A extends javax.swing.JFrame {
         Menu_Android = new javax.swing.JMenu();
         Menu_iOS = new javax.swing.JMenu();
         Menu_AP3 = new javax.swing.JMenu();
-        Menu_API = new javax.swing.JMenu();
         MenuWO = new javax.swing.JMenu();
         Menu_FW = new javax.swing.JMenu();
         Menu_DL = new javax.swing.JMenu();
         MenuStation = new javax.swing.JMenu();
         Menu_OR = new javax.swing.JMenu();
+        Menu_API = new javax.swing.JMenu();
         MenuReports = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -119,7 +119,7 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_iOS);
 
-        Menu_AP3.setBorder(null);
+        Menu_AP3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_AP3.setText("AP3");
         Menu_AP3.setName("AP3"); // NOI18N
         Menu_AP3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -129,16 +129,7 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_AP3);
 
-        Menu_API.setBorder(null);
-        Menu_API.setText("APIs");
-        Menu_API.setName("AP3"); // NOI18N
-        Menu_API.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Menu_APIMouseClicked(evt);
-            }
-        });
-        MenuBar.add(Menu_API);
-
+        MenuWO.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         MenuWO.setText("WO");
         MenuWO.setName("FW"); // NOI18N
         MenuWO.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -148,6 +139,7 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(MenuWO);
 
+        Menu_FW.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_FW.setText("FW");
         Menu_FW.setName("FW"); // NOI18N
         Menu_FW.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -157,6 +149,7 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_FW);
 
+        Menu_DL.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_DL.setText("DL");
         Menu_DL.setName("FW"); // NOI18N
         Menu_DL.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -166,6 +159,7 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_DL);
 
+        MenuStation.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         MenuStation.setText("Station");
         MenuStation.setName("Station"); // NOI18N
         MenuStation.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -175,6 +169,7 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(MenuStation);
 
+        Menu_OR.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_OR.setText("Orders");
         Menu_OR.setName("Station"); // NOI18N
         Menu_OR.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -184,7 +179,17 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_OR);
 
-        MenuReports.setBorder(null);
+        Menu_API.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Menu_API.setText("APIs");
+        Menu_API.setName("AP3"); // NOI18N
+        Menu_API.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_APIMouseClicked(evt);
+            }
+        });
+        MenuBar.add(Menu_API);
+
+        MenuReports.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         MenuReports.setText("Reports");
         MenuReports.setName("FW"); // NOI18N
         MenuReports.addMouseListener(new java.awt.event.MouseAdapter() {
