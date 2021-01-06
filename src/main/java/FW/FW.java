@@ -882,6 +882,10 @@ public class FW extends javax.swing.JInternalFrame {
 
             d1 = new ChromeDriver(op);
             d1.manage().deleteAllCookies(); // =================================
+            
+            d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.SECONDS);
+            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.SECONDS);
+                        
             d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
             fluentWait = new FluentWait(d1).withTimeout(Duration.ofMillis(WaitForElement))			
 			.pollingEvery(Duration.ofMillis(200))  			
