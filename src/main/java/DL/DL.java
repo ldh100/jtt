@@ -25,20 +25,17 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -48,7 +45,7 @@ import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.safari.SafariDriver; 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -61,7 +58,6 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.ElementScrollBehavior;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 /**
@@ -279,7 +275,7 @@ public class DL extends javax.swing.JInternalFrame {
 
         lblSITES9.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblSITES9.setText("LoadTimeOut:");
+        lblSITES9.setText("Timeout:");
         lblSITES9.setAlignmentX(0.5F);
 
         lblSITES10.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1006,17 +1002,22 @@ public class DL extends javax.swing.JInternalFrame {
                     break;
                 case "Safari":
                         //To do on MAC machine // =====================================
-                        //d1 = new ?????        // ==================================== 
+                        d1 = new SafariDriver();     
                     break;
             }
 
             d1.manage().window().maximize();
             d1.manage().deleteAllCookies(); // =================================
+            
+            d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.SECONDS);
+            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.SECONDS);
+            
             d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
+            
             fluentWait = new FluentWait(d1).withTimeout(Duration.ofMillis(WaitForElement))			
 			.pollingEvery(Duration.ofMillis(200))  			
 			.ignoring(NoSuchElementException.class);     // fluentWait for Visible / Clickable   
-            loadTimeout = new WebDriverWait(d1, (long) LoadTimeOut);      // fluentWait for load > progress 
+            loadTimeout = new WebDriverWait(d1, (long) LoadTimeOut);      // for load > progress 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
         } catch (Exception ex) {
