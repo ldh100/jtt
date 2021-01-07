@@ -28,9 +28,65 @@ public class DL_login {
         _t++; T.Element_By_Path_Text("Button 'Sign in' Text", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'USERNAME' input", "id", "username", "no_jira"); 
-            if (FAIL) { return;}  
-        // insert Invalid Email / invalid PW cases/steps    
-            
+            if (FAIL) { return;}
+        // TestCase o1 with Invalid Username/Valid Password
+
+          _t++; T.Visible_Element_By_Path_Text_Enter("Enter Invalid Username", "id", "username", "test.test@place.com", false, "no_jira"); 
+            if (FAIL) { return;}            
+
+
+            _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "id", "password", "Compass1", true, "no_jira"); 
+                 if (FAIL) { return;}
+
+
+            _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Sign In'", "name", "login", "no_jira"); 
+                 if (FAIL) { return;}  
+
+              Thread.sleep(500);
+
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Invalid credentials'", "Invalid credentials.", true,"no_jira"); 
+            if (FAIL) { return;}
+          	
+          	
+          //TestCase 02  with Valid Username/Invalid Password	
+          	
+         _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Username", "id", "username", "distilr.test@place.com", false, "no_jira"); 
+             if (FAIL) { return;}            
+
+
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Invalid  password", "id", "password", "Compass011", true, "no_jira"); 
+             if (FAIL) { return;}
+
+
+        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Sign In'", "name", "login", "no_jira"); 
+             if (FAIL) { return;}  
+
+          Thread.sleep(500);
+
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Invalid credentials'", "Invalid credentials.", true,"no_jira"); 
+        if (FAIL) { return;}
+          	
+          	
+         //TestCase 03  with Invalid Username/Invalid Password	
+          	
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Invalid Username", "id", "username", "test.test@place.com", false, "no_jira"); 
+        if (FAIL) { return;}            
+
+
+         _t++; T.Visible_Element_By_Path_Text_Enter("Enter Invalid Password", "id", "password", "Compass011", true, "no_jira"); 
+             if (FAIL) { return;}
+
+
+        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Sign In'", "name", "login", "no_jira"); 
+             if (FAIL) { return;}  
+
+          Thread.sleep(500);
+
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Invalid credentials'", "Invalid credentials.", true,"no_jira"); 
+        if (FAIL) { return;}
+
+        //TestCase 04  with Valid Username/Valid Password
+
         _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid User Name", "id", "username", DL_UserID, false, "no_jira"); 
             if (FAIL) { return;}            
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'PASSWORD' input", "id", "password", "no_jira"); 
@@ -61,17 +117,15 @@ public class DL_login {
                 _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1(t + " > Metrics count", L0.get(i),"xpath", ".//span[contains(@class, 'MuiTypography-displayBlock')]", "no_jira");                          
                     if (FAIL) { return;}
                 for (int j = 0; j < L1.size(); j++) {
-                    _t++; Thread.sleep((long) sleep); T.Element_Text(t + " > Metrics " + j + " name", L1.get(j),"no_jira");                          
+                _t++; Thread.sleep((long) sleep); T.Element_Text(t + " > Metrics " + j + " name", L1.get(j),"no_jira");                          
                     if (FAIL) { return;}
-                }
+                //_t++; Thread.sleep((long) sleep); T.Element_Child_Click(t + " > Metrics " + j + " name", L1.get(j), "xpath", "//input[@type='checkbox']", "no_jira");                          
+                //if (FAIL) { return;}
+ 
+                 // _t++; Thread.sleep((long) sleep); T.Element_Child_E2("select All checkbox", L1.get(j) ,"xpath", "//input[@type='checkbox']","no_jira");            
+                 //  if (FAIL) { return;}
+
+               }
+                 }    
+                  }
             } 
-        _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Metrics Subheader Title", L0.get(0),"xpath", ".//p[contains(@class, 'MuiTypography-body1')]", "no_jira");                          
-             
-        // continue - 
-        // current issues:
-        // do data returned yet
-        // data restriction by user ?
-        // drower empty after hide > open
-        // no logout ????
-    }
-}

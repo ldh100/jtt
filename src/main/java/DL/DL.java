@@ -921,8 +921,10 @@ public class DL extends javax.swing.JInternalFrame {
                 System.setProperty("webdriver.ie.driver", cwd + "\\IEDriverServer.exe"); 
             }
             if(WsOS.toLowerCase().contains("mac")){
-                System.setProperty("webdriver.chrome.driver", cwd + "/chromedriver");                
-                System.setProperty("webdriver.edge.driver", cwd + "/msedgedriver");  
+                System.out.println("******** "+cwd+"/chromedriver.exe");
+                //System.setProperty("webdriver.chrome.driver", cwd + "/chromedriver");  
+                System.setProperty("webdriver.chrome.driver", "/Users/prathyusha.deshpande/distilr/BrowserDriver/87/chromedriver");            
+                System.setProperty("webdriver.edge.driver",  cwd + "/msedgedriver");  
                 System.setProperty("webdriver.gecko.driver", cwd + "/geckodriver");
                 System.setProperty("webdriver.safari.driver", cwd + "/safaridriver");
             }
