@@ -13,8 +13,17 @@ import static AP3.AP3.*;
  */
 public class AP3_logout {
     public static void run() throws InterruptedException {   
-
-
+        
+        /* insert Feedback test cases/steps here  >>> Roya <<<
+        find text 'Feedback'
+        if found{
+            click button by id='container' ------ check if only one like that
+            find "Feedback" iframe > T.Swith_to_Frame by selector/path
+            find/operate on frame elements......
+            close frame by click on 'X' - visible while mouse on the frame
+            switch back to T.Swith_to_Frame default 
+        }
+        */
         _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
