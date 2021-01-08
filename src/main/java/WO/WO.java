@@ -53,10 +53,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * @author Oleg.Spozito
  */
 
-//Comment by Larry
-
-
-
 public class WO extends javax.swing.JInternalFrame {
     /**
      * Creates new form WO
