@@ -17,8 +17,7 @@ public class AP3_resent_updates {
             if (FAIL) { return;}
         Thread.sleep(500);            
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "css", "[role='progressbar']", "no_jira"); 
-        Thread.sleep(500); // without that next > not executed"
-            
+        Thread.sleep(500); // without that next > not executed"            
         _t++; Thread.sleep((long) sleep); T.List_L0("Resent Updates List Count", "xpath", "//div[contains(@class, 'flex card-text-box')]", "no_jira");             
             if (FAIL) { return;}
             for (int i = 0; i < L0.size(); i++) {

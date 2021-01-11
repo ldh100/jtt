@@ -20,8 +20,7 @@ public class AP3_user {
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > 'Users' Click", "xpath", "//*[contains(text(), 'Users')]", "no_jira"); 
             if (FAIL) { return;} 
         _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
-            if (FAIL) { return;}
-             
+            if (FAIL) { return;}             
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); T.Page_URL("Users page URL", "no_jira"); 
@@ -270,7 +269,6 @@ public class AP3_user {
         Thread.sleep(500);           
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}         
-        //Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.File_Find("Find User List File", System.getProperty("user.home") + File.separator + "Downloads", "site-operators.csv", "no_jira");
         if (FAIL) { return;}
         if(!"".equals(t)){
@@ -412,6 +410,7 @@ public class AP3_user {
             } 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("User Email Click", "xpath", "//div[text()='" + "a_" + New_ID + "@gmail.com" + "']", "no_jira"); 
             if (FAIL) { return;} 
+        Thread.sleep(500);            
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'Delete User' Text", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
@@ -446,10 +445,9 @@ public class AP3_user {
             if (FAIL) { return;}    
         _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click dialog 'Delete'", e1, "xpath", ".//*[text()='DELETE']", "no_jira");
             if (FAIL) { return;}    
-        Thread.sleep(1000);
+        Thread.sleep(500);
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(500);
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "css", "[aria-label='Search Users']", "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "A_" + New_ID + "@gmail.com", false, "no_jira");
@@ -466,12 +464,9 @@ public class AP3_user {
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
-         _t++; Thread.sleep((long) sleep); T.Page_URL("New User page URL","no_jira");
-            if (FAIL) { return;}   
-
-            
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Role selection Prompt", "css", "[aria-label='Role']", "placeholder", "no_jira");
              if (FAIL) { return;}        
+         _t++; Thread.sleep((long) sleep); T.Page_URL("New User page URL","no_jira");
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open Role combobox", "css", "[role='combobox']", "no_jira"); 
             if (FAIL) { return;}     
         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Role' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
@@ -648,14 +643,12 @@ public class AP3_user {
                     default:
                         break;
                 }
-            }   
-        Thread.sleep(500);              
+            }                
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
             if (FAIL) { return;} 
         Thread.sleep(500);    
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
-            Thread.sleep(500);
         // </editor-fold>              
         // <editor-fold defaultstate="collapsed" desc="Site User Search > Delete">
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Search Users')]", "no_jira"); 
@@ -705,10 +698,9 @@ public class AP3_user {
                 if (FAIL) { return;}    
             _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click dialog 'Delete'", e1, "xpath", ".//*[text()='DELETE']", "no_jira");
                 if (FAIL) { return;}                 
-            Thread.sleep(1000);
+            Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                 if (FAIL) { return;}
-            Thread.sleep(500);
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "css", "[aria-label='Search Users']", "no_jira"); 
             if (FAIL) { return;}            
  
@@ -726,12 +718,9 @@ public class AP3_user {
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
-         _t++; Thread.sleep((long) sleep); T.Page_URL("New User page URL","no_jira");
-            if (FAIL) { return;}   
-
-            
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Role selection Prompt", "css", "[aria-label='Role']", "placeholder", "no_jira");
              if (FAIL) { return;}        
+        _t++; Thread.sleep((long) sleep); T.Page_URL("New User page URL","no_jira");
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open Role combobox", "css", "[role='combobox']", "no_jira"); 
             if (FAIL) { return;}     
         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Role' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
@@ -923,7 +912,6 @@ public class AP3_user {
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
-            Thread.sleep(500);
         // </editor-fold>              
         // <editor-fold defaultstate="collapsed" desc="CDL Delivery Manager Search > Delete">
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Search Users')]", "no_jira"); 
@@ -940,6 +928,7 @@ public class AP3_user {
             } 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("User Email Click", "xpath", "//div[text()='" + "d_" + New_ID + "@gmail.com" + "']", "no_jira"); 
             if (FAIL) { return;} 
+        Thread.sleep(500);            
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
             if (FAIL) { return;} 
                 
@@ -962,23 +951,20 @@ public class AP3_user {
                 if (FAIL) { return; }    
          _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Delete' dialog", "xpath", "//div[@class='confirm-dialog v-card v-sheet v-sheet--tile theme--light']", "no_jira");
             if (FAIL) { return;}    // Find fragment              
-            _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find 'Delete..' Title", e1, "xpath", "//*[@class='H4-Secondary-Center']", "no_jira"); 
-                if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find 'Delete..' message", e1, "xpath", "//*[@class='Body-1-Black-High-Emphasis-Left']", "no_jira"); 
-                if (FAIL) { return;} 
+        _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find 'Delete..' Title", e1, "xpath", "//*[@class='H4-Secondary-Center']", "no_jira"); 
+            if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find 'Delete..' message", e1, "xpath", "//*[@class='Body-1-Black-High-Emphasis-Left']", "no_jira"); 
+            if (FAIL) { return;} 
 
-            _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find dialog 'Edit' button", e1, "xpath", ".//*[text()='CANCEL']", "no_jira");
-                if (FAIL) { return;} 
-            _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find dialog 'Cancel' button", e1, "xpath", ".//*[text()='DELETE']", "no_jira");
-                if (FAIL) { return;}    
-            _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click dialog 'Delete'", e1, "xpath", ".//*[text()='DELETE']", "no_jira");
-                if (FAIL) { return;}                 
-            Thread.sleep(500);
-            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
-                if (FAIL) { return;}
-            Thread.sleep(500);
-//        _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("WaitForElement for page load...", "xpath", "//*[contains(text(), 'Search Users')]", "no_jira"); 
-//            if (FAIL) { return;} 
+        _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find dialog 'Edit' button", e1, "xpath", ".//*[text()='CANCEL']", "no_jira");
+            if (FAIL) { return;} 
+        _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find dialog 'Cancel' button", e1, "xpath", ".//*[text()='DELETE']", "no_jira");
+            if (FAIL) { return;}    
+        _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click dialog 'Delete'", e1, "xpath", ".//*[text()='DELETE']", "no_jira");
+            if (FAIL) { return;}                 
+        Thread.sleep(500);
+        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
+            if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "css", "[aria-label='Search Users']", "no_jira"); 
             if (FAIL) { return;}            
  
@@ -997,12 +983,9 @@ public class AP3_user {
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
-         _t++; Thread.sleep((long) sleep); T.Page_URL("New User page URL","no_jira");
-            if (FAIL) { return;}   
-
-            
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Role selection Prompt", "css", "[aria-label='Role']", "placeholder", "no_jira");
              if (FAIL) { return;}        
+        _t++; Thread.sleep((long) sleep); T.Page_URL("New User page URL","no_jira");
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open Role combobox", "css", "[role='combobox']", "no_jira"); 
             if (FAIL) { return;}     
         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Role' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
@@ -1109,12 +1092,12 @@ public class AP3_user {
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
-            Thread.sleep(500);
         // </editor-fold>   
         
 // <editor-fold defaultstate="collapsed" desc="New Runner Set PW > Login">
 //        _t++; Thread.sleep((long) sleep); T.Open_Switch_to_2nd_Tab("Open Google in New Tab", "https://mail.google.com/mail/u/0/#inbox","no_jira");             
 //        EX += " - " + "\t" + " === User Permissions " + "\t" + " ===== " + "\t" + " == New Runner Set PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";           
+//        Thread.sleep(500);
 //        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("WaitForElement for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
 //            if (FAIL) { return;}    
 //        _t++; Thread.sleep((long) sleep); T.Page_URL("Open Google URL", "no_jira"); 
@@ -1129,13 +1112,15 @@ public class AP3_user {
 //        _t++; T.Visible_Element_By_Path_Text_Enter("Enter 'Email or phone'", "id", "identifierId", "cdl.test.xtt@gmail.com", "no_jira"); 
 //            if (FAIL) { return;}  
 //        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'ID Next'", "id", "identifierNext", "no_jira"); 
-//            if (FAIL) { return; }   
+//            if (FAIL) { return; } 
+//        Thread.sleep(500);
 //        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("WaitForElement for 'progress'...", "css", "[role='progressbar']", "no_jira"); 
 //            if (FAIL) { return;}            
 //        _t++; T.Visible_Element_By_Path_Text_Enter("Enter 'Password'", "css", "[type='password']", "AnnaL0g0", "no_jira"); 
 //            if (FAIL) { return;}   
 //        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PW Next'", "id", "passwordNext", "no_jira"); 
 //            if (FAIL) { return; } 
+//        Thread.sleep(500);
 //        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("WaitForElement for 'progress'...", "css", "[role='progressbar']", "no_jira"); 
 //            if (FAIL) { return;}   
 //        //"cdl.test.xtt+" + "R_" + New_ID + "@gmail.com" >>> AnnaL0g0 //identifierId
@@ -1160,6 +1145,7 @@ public class AP3_user {
             } 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("User Email Click", "xpath", "//div[text()='" + "cdl.test.xtt+" + "r_" + New_ID + "@gmail.com" + "']", "no_jira"); 
             if (FAIL) { return;} 
+         Thread.sleep(500);           
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
             if (FAIL) { return;} 
 
@@ -1193,12 +1179,9 @@ public class AP3_user {
                 if (FAIL) { return;}    
             _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click dialog 'Delete'", e1, "xpath", ".//*[text()='DELETE']", "no_jira");
                 if (FAIL) { return;}                 
-                Thread.sleep(500);
-            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
-                if (FAIL) { return;}
             Thread.sleep(500);
-//        _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("WaitForElement for page load...", "xpath", "//*[contains(text(), 'Search Users')]", "no_jira"); 
-//            if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
+                if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "css", "[aria-label='Search Users']", "no_jira"); 
             if (FAIL) { return;}            
  

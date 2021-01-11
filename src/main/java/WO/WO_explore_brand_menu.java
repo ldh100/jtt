@@ -24,8 +24,7 @@ public class WO_explore_brand_menu {
             if (FAIL) { return;} 
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'fetch-sites-loader'...", "xpath", "//*[contains(@class, 'fetch-sites-loader')]", "no_jira");                                                                                     
-            if (FAIL) { return;}
-        Thread.sleep(500);             
+            if (FAIL) { return;}           
         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find Location list", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active v-autocomplete__content']", "no_jira");
             if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Matching Locations Count", e1,"xpath", ".//div[@class='v-list-item__title']", "no_jira");                                     

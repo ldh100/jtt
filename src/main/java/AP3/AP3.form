@@ -784,14 +784,8 @@
               <Font name="Dialog" size="12" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Chrome"/>
-                <StringItem index="1" value="Firefox"/>
-                <StringItem index="2" value="Edge"/>
-                <StringItem index="3" value="IE"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
