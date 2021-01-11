@@ -551,9 +551,10 @@ public class DL extends javax.swing.JInternalFrame {
         if (d1LastRow == DV1.getSelectedRow()) {
            return;
         }
-        GetCategories();
+
         MANUF = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
         ManID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
+        GetCategories(); 
         d1LastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
 
@@ -884,13 +885,9 @@ public class DL extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnGet_UserMouseClicked
     private void Load_Form(){
-        Load = true;      
-        cmbEnv.addItem("Development");
-//        cmbEnv.addItem("Staging");
-//        cmbEnv.addItem("Production");         
-        cmbEnv.setSelectedIndex(0); // delevopment only for now
+        Load = true;   
         
-        cmbBrow.addItem("Chrome");        // Chrome, Firefox, Edge, IE11
+        cmbBrow.addItem("Chrome");  
         cmbBrow.addItem("Firefox"); 
         cmbBrow.addItem("Edge"); 
         if(WsOS.toLowerCase().contains("windows")){
@@ -901,6 +898,12 @@ public class DL extends javax.swing.JInternalFrame {
         }
         cmbBrow.setSelectedIndex(0); // Chrome
         
+        cmbEnv.addItem("Development");
+//        cmbEnv.addItem("Staging");
+//        cmbEnv.addItem("Production");         
+        cmbEnv.setSelectedIndex(0); // delevopment only for now
+        
+
         LOAD_ENV();
         Load = false;
         CONFIG = false;   
@@ -1214,11 +1217,7 @@ public class DL extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetCategories() {
-        if (d1LastRow == DV1.getSelectedRow()) {
-           return;
-        }
         d2LastRow = -1;
-        d1LastRow = DV1.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Brands ...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 

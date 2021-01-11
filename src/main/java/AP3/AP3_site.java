@@ -26,8 +26,7 @@ public class AP3_site {
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
             if (FAIL) { return;} 
         _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
-            if (FAIL) { return;}
-    
+            if (FAIL) { return;}    
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Page_URL("Sites page URL", "no_jira"); 
@@ -274,8 +273,7 @@ public class AP3_site {
             }
         _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'All'", L1.get(T_Index), "no_jira");
             if (FAIL) { return;}         
-        Thread.sleep(500);       
-            
+        Thread.sleep(500);                  
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
@@ -325,6 +323,7 @@ public class AP3_site {
             } 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
             if (FAIL) { return;} 
+        Thread.sleep(500);
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//div[contains(@class, 'timezone-address')]", "no_jira"); 
@@ -366,7 +365,6 @@ public class AP3_site {
             if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); T.Swith_to_Frame("Swith to Video Player", "tagName", "iframe", "no_jira");// iframe src="https://player.vimeo.com/video/412472158"
             if (FAIL) { return;} 
-        Thread.sleep(1000);   
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for Player load", "className", "play-icon", "no_jira"); 
             if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Video Title", "xpath", "//header[contains(@class, 'vp-title-header')]", "textContent","no_jira");
@@ -479,13 +477,11 @@ public class AP3_site {
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}               
-            Thread.sleep(1000);
         _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back", SITE + "Station List","App Sites page", "no_jira");
             //if (FAIL) { return;}
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}               
-            Thread.sleep(1000);
         // </editor-fold> 
         
         // <editor-fold defaultstate="collapsed" desc="New Sites > Cancel">
@@ -498,8 +494,7 @@ public class AP3_site {
             if (FAIL) { return;}
         Thread.sleep(500);    
          _t++; Thread.sleep((long) sleep); T.Page_URL("New Site page URL","no_jira");
-            if (FAIL) { return;}   
-            
+            if (FAIL) { return;}               
         _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter new Site Name", "css", "[aria-label='Location Name']", "New Auto Site " + New_ID, false, "no_jira");
             if (FAIL) { return;} // ^^^ enter name to show buttons
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Cancel' text", "Cancel", true,"no_jira"); 
@@ -785,7 +780,6 @@ public class AP3_site {
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}           
-        Thread.sleep(1000);
         // </editor-fold> 
     }
 }

@@ -46,16 +46,22 @@ import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeDriverService;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.ie.ElementScrollBehavior;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  *
  * @author Oleg.Spozito
  */
-
-//Comment by Larry
-
-
 
 public class WO extends javax.swing.JInternalFrame {
     /**
@@ -489,8 +495,6 @@ public class WO extends javax.swing.JInternalFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmbBrow.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbBrow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chrome", "Firefox", "Edge", "IE" }));
-        cmbBrow.setEnabled(false);
         jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 28, 78, 20));
 
         btnRun.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -602,11 +606,12 @@ public class WO extends javax.swing.JInternalFrame {
         if (d1LastRow == DV1.getSelectedRow()) {
            return;
         }
-        GetBrands();
+
         SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
         platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform        
         COUNTRY = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 2));
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
+        GetBrands(); 
         d1LastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
 
@@ -984,6 +989,18 @@ public class WO extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbPromoItemStateChanged
     private void Load_Form(){
         Load = true;
+        
+        cmbBrow.addItem("Chrome");  
+        cmbBrow.addItem("Firefox"); 
+        cmbBrow.addItem("Edge"); 
+        if(WsOS.toLowerCase().contains("windows")){
+            cmbBrow.addItem("IE11");             
+        }
+        if(WsOS.toLowerCase().contains("mac")){
+            cmbBrow.addItem("Safari");             
+        }
+        cmbBrow.setSelectedIndex(0); // Chrome
+         
 //        cmbApp.addItem("Boost");
 //        cmbApp.addItem("Canteen");
 //        cmbApp.addItem("JJKitchen");
@@ -1010,48 +1027,119 @@ public class WO extends javax.swing.JInternalFrame {
             String cwd = System.getProperty("user.dir");
             txtLog.append("\r\n\r\n=== CWD: " + cwd);
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            
             if(WsOS.toLowerCase().contains("windows")){
-                System.setProperty("webdriver.chrome.driver", cwd + "/chromedriver.exe");                
+                System.setProperty("webdriver.chrome.driver", cwd + "\\chromedriver.exe");                
+                System.setProperty("webdriver.edge.driver", cwd + "\\msedgedriver.exe");  
+                System.setProperty("webdriver.gecko.driver", cwd + "\\geckodriver.exe"); 
+                System.setProperty("webdriver.ie.driver", cwd + "\\IEDriverServer.exe"); 
             }
             if(WsOS.toLowerCase().contains("mac")){
                 System.setProperty("webdriver.chrome.driver", cwd + "/chromedriver");                
+                System.setProperty("webdriver.edge.driver", cwd + "/msedgedriver");  
+                System.setProperty("webdriver.gecko.driver", cwd + "/geckodriver");
+                System.setProperty("webdriver.safari.driver", cwd + "/safaridriver");
             }
-            ChromeOptions op = new ChromeOptions();
-             //op.addExtensions(new File("/path/to/extension.crx"));
-            op.addArguments("disable-infobars");
-            op.addArguments("--start-maximized");
-//            op.addArguments("--start-minimized");
-//            op.addArguments("enable-automation");
-//            op.addArguments("--no-sandbox");
-//            op.addArguments("--disable-extensions");
-//            op.addArguments("--dns-prefetch-disable");
-//            op.addArguments("--disable-gpu");
-            if(_headless.isSelected()){
-                op.addArguments("--headless");
-            }
-            op.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+            switch (cmbBrow.getSelectedItem().toString()) {
+                case "Chrome":
+                        ChromeOptions chrome_op = new ChromeOptions();
+                        //chrome_op.addExtensions(new File("/path/to/extension.crx"));
+                        chrome_op.addArguments("--disable-infobars");
+                        chrome_op.addArguments("--start-maximized");
+            //            chrome_op.addArguments("--start-minimized");
+            //            chrome_op.addArguments("enable-automation");
+            //            chrome_op.addArguments("--no-sandbox");
+            //            chrome_op.addArguments("--disable-extensions");
+            //            chrome_op.addArguments("--dns-prefetch-disable");
+            //            chrome_op.addArguments("--disable-gpu");
+                        if(_headless.isSelected()){
+                            chrome_op.addArguments("--headless");
+                        }
+                        chrome_op.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+                        d1 = new ChromeDriver(chrome_op);
+                    break;
+                case "Edge":
+//                    txtLog.append("\r\n\r\n=== Edge Driver:" + System.getProperty("webdriver.edge.driver"));
+//                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                        EdgeDriverService edgeServise = EdgeDriverService.createDefaultService();
+                        //edgeServise.SuppressInitialDiagnosticInformation = true;
+//                        service.seVerboseLogging = false;
+//                        service.UseSpecCompliantProtocol = false;
+                        EdgeOptions edge_op = new EdgeOptions();
+                       //edge_op.setPageLoadStrategy("normal");
+                        edge_op.setCapability( "disable-infobars", true);
+                        edge_op.setCapability( "disable-gpu", true);
+                        edge_op.setCapability("useAutomationExtension", false);
+//                                PageLoadStrategy = PageLoadStrategy.Default,
+//                                UnhandledPromptBehavior = UnhandledPromptBehavior.Dismiss
+                        if(_headless.isSelected()){
+                            edge_op.setCapability( "headless", true);
+                        }
+                        
+                        d1 = new EdgeDriver(edgeServise, edge_op);
+                    break;
+                case "Firefox":
+                        FirefoxProfile profile = new FirefoxProfile();
+                        profile.setPreference("network.proxy.no_proxies_on", "localhost");
+                        profile.setPreference("javascript.enabled", true);
 
-            d1 = new ChromeDriver(op);
+//                        DesiredCapabilities capabilities = DesiredCapabilities.;
+//                        capabilities.setCapability("marionette", true);
+//                        capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+
+                        FirefoxOptions ff_op = new FirefoxOptions();
+                        //ff_op.merge(capabilities);
+                        //ff_op.addPreference("browser.link.open_newwindow", 3);
+                        //ff_op.addPreference("browser.link.open_newwindow.restriction", 0);
+
+                        d1 = new FirefoxDriver(ff_op);
+                    break;
+                case "IE11":
+                        InternetExplorerOptions ie_op = new InternetExplorerOptions();
+                        ie_op.ignoreZoomSettings(); // Not necessarily in case 100% zoom.
+                        ie_op.introduceFlakinessByIgnoringSecurityDomains(); // Necessary to skip protected  mode setup
+                        ie_op.elementScrollTo(ElementScrollBehavior.BOTTOM);
+                        ie_op.disableNativeEvents();
+//                        var options = new InternetExplorerOptions
+//                        {
+//                                IgnoreZoomLevel = true,
+//                                IntroduceInstabilityByIgnoringProtectedModeSettings = true,
+//                                RequireWindowFocus = false,
+//                                ElementScrollBehavior = InternetExplorerElementScrollBehavior.Top, // with botton click doesn't work
+//                                EnsureCleanSession = true,
+//                                //AcceptInsecureCertificates = true,
+//                                EnablePersistentHover = true,
+//                                UnhandledPromptBehavior = UnhandledPromptBehavior.Accept,
+//                                EnableNativeEvents = false //  with true > click problem
+//                        };
+                        d1 = new InternetExplorerDriver(ie_op);
+                    break;
+                case "Safari":
+                        //To do on MAC machine // =====================================
+                        d1 = new SafariDriver();     
+                    break;
+            }
+
+            d1.manage().window().maximize();
             d1.manage().deleteAllCookies(); // =================================
             
             d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.SECONDS);
             d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.SECONDS);
-                        
+            
             d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
+            
             fluentWait = new FluentWait(d1).withTimeout(Duration.ofMillis(WaitForElement))			
 			.pollingEvery(Duration.ofMillis(200))  			
 			.ignoring(NoSuchElementException.class);     // fluentWait for Visible / Clickable   
-            loadTimeout = new WebDriverWait(d1, (long) LoadTimeOut);      // fluentWait for load > progress         
+            loadTimeout = new WebDriverWait(d1, (long) LoadTimeOut);      // for load > progress 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             txtLog.append("\r\n\r\n=== Web Driver > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return false;
         }   
-
     }
     private void LOAD_ENV(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
@@ -1208,11 +1296,7 @@ public class WO extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetBrands() {
-        if (d1LastRow == DV1.getSelectedRow()) {
-           return;
-        }
         d2LastRow = -1;
-        d1LastRow = DV1.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Brands ...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
