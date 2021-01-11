@@ -429,12 +429,10 @@ public class AP3_announcements {
                     if (FAIL) { return;}                    
                 _t++; Thread.sleep((long) sleep); T.Element_Click("Click dialog 'Cancel' ", e2, "no_jira");
                     if (FAIL) { return;}                    
-            }     
-        //    
+            }        
         _t++; Thread.sleep((long) sleep); T.Element_Click("Select Created Announcement", L2.get(1), "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(500);  
-            
+        Thread.sleep(500);              
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'DELETE ANNOUNCEMENT')]", "no_jira"); 

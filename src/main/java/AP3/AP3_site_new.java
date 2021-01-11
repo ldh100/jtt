@@ -837,8 +837,7 @@ public class AP3_site_new {
             if (FAIL) { return;}
         Thread.sleep(500);       
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'Create Brand'", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
-            if (FAIL) { return;}  
-        Thread.sleep(500);            
+            if (FAIL) { return;}            
         // </editor-fold>     
 
         // <editor-fold defaultstate="collapsed" desc="Add Station > Hours">   
@@ -849,7 +848,7 @@ public class AP3_site_new {
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}  
-            Thread.sleep(500);  
+        Thread.sleep(500);  
         _t++; Thread.sleep((long) sleep); T.List_L0("Tabs Count", "xpath", "//div[contains(@class, 'v-tabs__div')]", "no_jira");             
             if (FAIL) { return;}  // ====================== L0 ^^^ =============================================================================  
          for (int i = 0; i < L0.size(); i++) {     
@@ -886,12 +885,10 @@ public class AP3_site_new {
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
             if (FAIL) { return; } 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
-            if (FAIL) { return;} 
-            Thread.sleep(500); 
-            
+            if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.To_Top("no_jira");
             if (FAIL) { return;}
-            Thread.sleep(500); 
+        Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Tab 'Delivery Hours' Click", "xpath", "//*[text()='Delivery Hours']", "no_jira"); 
             if (FAIL) { return;}              
             Thread.sleep(500); 
@@ -915,7 +912,6 @@ public class AP3_site_new {
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;} 
-            Thread.sleep(500);
         // </editor-fold>    
         
         // <editor-fold defaultstate="collapsed" desc="MM - Activate/Set Visible in App New Local Menu">
@@ -923,8 +919,7 @@ public class AP3_site_new {
         EX += " - " + "\t" + " === MM New Local Menu " + "\t" + " ===== " + "\t" + " == Activate New Local Menu Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         Thread.sleep(500);              
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
-            if (FAIL) { return;} 
-        Thread.sleep(500);      
+            if (FAIL) { return;}       
         _t++; Thread.sleep((long) sleep); T.Page_URL("Menu Manager page URL", "no_jira"); 
             if (FAIL) { return;}   
             
@@ -944,7 +939,6 @@ public class AP3_site_new {
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;} 
-            Thread.sleep(1000);
         // ========================================= Group Selection ^^^^
    
         
@@ -981,10 +975,9 @@ public class AP3_site_new {
             Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}  
-             Thread.sleep(500);  
-            _t++; Thread.sleep((long) sleep); T.Page_URL("Current page URL", "no_jira");             
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", "no_jira"); 
                 if (FAIL) { return;}                  
+            _t++; Thread.sleep((long) sleep); T.Page_URL("Current page URL", "no_jira");             
             _t++; T.Find_Text("Fund 'Search...' text", "Search Menus", true,"no_jira");   
                 if (FAIL) { return;}             
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", "no_jira"); 
@@ -996,8 +989,7 @@ public class AP3_site_new {
                 if (FAIL) { return;} 
             Thread.sleep(500);  
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
-                if (FAIL) { return;} 
-            Thread.sleep(500);      
+                if (FAIL) { return;}   
 //            _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Scroll to 'EDIT MENU' button", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira");        
 //                if (FAIL) { return;}   
             _t++; Thread.sleep((long) sleep); T.To_Top("no_jira");        
@@ -1019,8 +1011,6 @@ public class AP3_site_new {
             Thread.sleep(500);                 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}    
-            Thread.sleep(500); 
-
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'Edit Menu Set Name' dialog", "xpath", "//div[@class='v-card__title H4-Secondary-Center v-card__title--primary']", "no_jira");
                 if (t.contains("Edit")){                              
                     _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Edit Menu Set name' container", "xpath", "//div[@class='v-dialog v-dialog--active']", "no_jira");
@@ -1065,7 +1055,6 @@ public class AP3_site_new {
                     Thread.sleep(500);                         
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                         if (FAIL) { return;}    
-                    Thread.sleep(500); 
                 }             
   
             _t++; Thread.sleep((long) sleep); T.Element_Child_List_L2("Categories Count", L1.get(0), "xpath", ".//div[@class='layout align-center']", "no_jira");             
@@ -1109,8 +1098,7 @@ public class AP3_site_new {
                 if (FAIL) { return;}  
             Thread.sleep(500);  
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
-                if (FAIL) { return;}    
-            Thread.sleep(3500);    // 500             
+                if (FAIL) { return;}               
         } else {
            _t++; _f++;
            EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";

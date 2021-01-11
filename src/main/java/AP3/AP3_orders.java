@@ -21,9 +21,7 @@ public class AP3_orders {
             if (FAIL) { return;} 
         _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
             if (FAIL) { return;}
-//            
-//        _t++; Thread.sleep((long) sleep); T.Navigate_to_URL("Navigate to 'Orders'", url + "/#/orders","no_jira");             
-//            if (FAIL) { return;}              
+             
         _t++; Thread.sleep((long) sleep); T.Page_URL("Orders page URL", "no_jira"); 
             if (FAIL) { return;}            
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -68,6 +66,7 @@ public class AP3_orders {
             } 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
             if (FAIL) { return;}                                                                                         // v-datatable__progress << 'v-progress-circular'
+        Thread.sleep(500);
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//div[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for Brands load", "xpath", "//*[@class='H6-Selected-On-Surface-Medium-Emphasis-Left']", "no_jira"); 
@@ -90,6 +89,7 @@ public class AP3_orders {
             }
         _t++; T.Element_Click("Click Brand", L0.get(T_Index),"no_jira");  
             if (FAIL) { return;}    
+        Thread.sleep(500);
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//div[contains(@class, 'v-datatable__progress')]", "no_jira");
             if (FAIL) { return;}
             
