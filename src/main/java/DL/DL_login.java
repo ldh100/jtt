@@ -21,10 +21,9 @@ public class DL_login {
         Thread.sleep(500);  
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}         
-        Thread.sleep(500);
-        _t++; Thread.sleep((long) sleep); T.Page_URL("Foodbuy Login page URL", "no_jira");        
         _t++; T.Element_By_Path_Text("Forgot Password Text", "xpath", "//*[contains(text(), 'Forgot your Password?')]", "no_jira"); 
             if (FAIL) { return;}             
+        _t++; Thread.sleep((long) sleep); T.Page_URL("Foodbuy Login page URL", "no_jira");        
         _t++; T.Element_By_Path_Text("Button 'Sign in' Text", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'USERNAME' input", "id", "username", "no_jira"); 
