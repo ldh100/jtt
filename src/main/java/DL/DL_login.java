@@ -29,7 +29,26 @@ public class DL_login {
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'USERNAME' input", "id", "username", "no_jira"); 
             if (FAIL) { return;}  
             
-        // insert Invalid Email / invalid PW cases/steps    
+        // TestCase o1 with Invalid Username/Valid Password by Prathyusha Deshpande
+          _t++; T.Visible_Element_By_Path_Text_Enter("Enter Invalid Username", "id", "username", "test.invalid@place.com", false, "no_jira"); 
+            if (FAIL) { return;}            
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "id", "password", "Compass1", true, "no_jira"); 
+            if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Sign In'", "name", "login", "no_jira"); 
+            if (FAIL) { return;}  
+        Thread.sleep(500);             
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Invalid credentials'", "Invalid credentials.", true,"no_jira"); 
+        if (FAIL) { return;}
+        //TestCase 02  with Valid Username/Invalid Password by Prathyusha Deshpande		
+         _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Username", "id", "username", "distilr.test@place.com", false, "no_jira"); 
+             if (FAIL) { return;}            
+        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Invalid  password", "id", "password", "Compass011", true, "no_jira"); 
+             if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Sign In'", "name", "login", "no_jira"); 
+             if (FAIL) { return;}  
+        Thread.sleep(500);
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Invalid credentials'", "Invalid credentials.", true,"no_jira"); 
+ 
             
         _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid User Name", "id", "username", DL_UserID, false, "no_jira"); 
             if (FAIL) { return;}            
