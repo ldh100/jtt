@@ -60,7 +60,6 @@ public class AP3_user_permission {
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Visibility("Wait for 'AP3 Welcome...' text", "xpath", "//*[contains(text(), 'Welcome to the CDL Admin Panel')]", "no_jira");             
         if (!FAIL) {  
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
-        Thread.sleep(500); 
         if (!FAIL) {   
             _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             Thread.sleep(500);          
@@ -105,8 +104,6 @@ public class AP3_user_permission {
                if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                if (FAIL) { return;} 
-            Thread.sleep(500); 
-               
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//div[contains(@class, 'timezone-address')]", "no_jira"); 
                if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Site 'Configuration'", "Configuration", true,"no_jira"); 
@@ -164,9 +161,10 @@ public class AP3_user_permission {
                         if (FAIL) { return; }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
+                    Thread.sleep(500);  
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;} 
-                    Thread.sleep(500);                         
+                        
                 } else if (Tab_Name.toLowerCase().contains("delivery")) { 
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Delivery Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
                         if (FAIL) { return;}   
@@ -174,9 +172,10 @@ public class AP3_user_permission {
                         if (FAIL) { return; }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
+                    Thread.sleep(500);  
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;}   
-                    Thread.sleep(500);                        
+                       
                 } else if (Tab_Name.toLowerCase().contains("closure")) {    
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Brand Closure'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
                         if (FAIL) { return;}   
@@ -194,7 +193,6 @@ public class AP3_user_permission {
             Thread.sleep(500);   
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                 if (FAIL) { return;} 
-            Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Station Name'", "css", "[aria-label='Station Name']", "no_jira"); 
                 if (FAIL) { return;}                    
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Edit 'Station Name'", "css", "[aria-label='Station Name']", "Edit", false, "no_jira"); 
@@ -215,10 +213,10 @@ public class AP3_user_permission {
             Thread.sleep(500);          
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Click Group Management", "xpath", "//*[contains(text(), 'Group Management')]", "no_jira"); 
                 if (FAIL) { return;} 
-            _t++; Thread.sleep(500); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+            _t++; Thread.sleep(500);  T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+            Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                 if (FAIL) { return;}
-            Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Add New Group'", "add new group", true,"no_jira");     
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Add New Group'", "xpath", "//*[contains(text(), 'add new group')]", "no_jira"); 
                 if (FAIL) { return;}
@@ -229,9 +227,10 @@ public class AP3_user_permission {
                if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Select/Click 1st Group", "tagName", "td", "no_jira"); 
                 if (FAIL) { return;}
+            Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                 if (FAIL) { return;}                
-            Thread.sleep(500);
+
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Edit Group' text", "Edit Group", true,"no_jira");   
@@ -256,9 +255,10 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Click Menu Manager", "xpath", "//*[contains(text(), 'Menu Manager')]", "no_jira"); 
                 if (FAIL) { return;} 
             _t++; Thread.sleep(500); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+            Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                 if (FAIL) { return;}
-            Thread.sleep(500);
+
 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open 'Group' dropdown", "css", "[role='combobox']", "no_jira");
                 if (FAIL) return;   
@@ -271,7 +271,6 @@ public class AP3_user_permission {
             Thread.sleep(500);                
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;} 
-            Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for MM > Group page load", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "no_jira"); 
                     if (FAIL) { return;}
             _t++; T.Find_Text("Button 'Add Global Menu' text", "ADD GLOBAL MENU", true,"no_jira");   
@@ -289,9 +288,10 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Dashboard Click", "xpath", "//*[contains(text(), 'Dashboard')]", "no_jira"); 
                 if (FAIL) { return;} 
             _t++; Thread.sleep(500); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+            Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                 if (FAIL) { return;}
-            Thread.sleep(500);
+
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'User Name'", "xpath", "//button[@type='button'][2]", "no_jira"); 
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(), 'Logout')]", "no_jira"); 
@@ -357,9 +357,10 @@ public class AP3_user_permission {
             Thread.sleep(500);                 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
                if (FAIL) { return;} 
+            Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                if (FAIL) { return;} 
-            Thread.sleep(500);
+
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//div[contains(@class, 'timezone-address')]", "no_jira"); 
                if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y Site 'Configuration'", "Configuration", false,"no_jira"); 
@@ -386,7 +387,6 @@ public class AP3_user_permission {
             Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                 if (FAIL) { return;}
-            Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.List_L3("Tabs Count", "xpath", "//div[contains(@class, 'v-tabs__div')]", "no_jira");             
@@ -415,9 +415,10 @@ public class AP3_user_permission {
                         if (FAIL) { return; }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
+                    Thread.sleep(500);  
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;} 
-                    Thread.sleep(500);                         
+                       
                 } else if (Tab_Name.toLowerCase().contains("delivery")) { 
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Delivery Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
                         if (FAIL) { return;}   
@@ -425,9 +426,10 @@ public class AP3_user_permission {
                         if (FAIL) { return; }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
+                    Thread.sleep(500);  
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;}   
-                    Thread.sleep(500);                        
+                        
                 } else if (Tab_Name.toLowerCase().contains("closure")) {    
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Brand Closure'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
                         if (FAIL) { return;}   
@@ -445,7 +447,6 @@ public class AP3_user_permission {
             Thread.sleep(500);   
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                 if (FAIL) { return;} 
-            Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Edit 'Station Name'?", "css", "[aria-label='Station Name']", "disabled","no_jira"); 
                 if (FAIL) { return;} 
                 _t++;
@@ -475,9 +476,10 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Dashboard Click", "xpath", "//*[contains(text(), 'Dashboard')]", "no_jira"); 
                 if (FAIL) { return;} 
             _t++; Thread.sleep(500); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+            Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                 if (FAIL) { return;}
-            Thread.sleep(500);
+
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'User Name'", "xpath", "//button[@type='button'][2]", "no_jira"); 
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(), 'Logout')]", "no_jira"); 
@@ -534,7 +536,7 @@ public class AP3_user_permission {
                 if (FAIL) { return;} 
             Thread.sleep(1000);
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("SM N Sites (Pagination)", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
-               if (FAIL) { return;}            
+                if (FAIL) { return;}            
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM N 'ADD NEW SITE'", "ADD NEW SITE", false,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, "no_jira");
                 if (FAIL) { return;} 
@@ -542,8 +544,7 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
                if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
-               if (FAIL) { return;} 
-            Thread.sleep(500);                 
+               if (FAIL) { return;}                 
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//div[contains(@class, 'timezone-address')]", "no_jira"); 
                if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM N Site 'Configuration'", "Configuration", false,"no_jira"); 
@@ -569,8 +570,7 @@ public class AP3_user_permission {
                 if (FAIL) { return;}
             Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
-                if (FAIL) { return;}
-            Thread.sleep(500);                 
+                if (FAIL) { return;}              
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.List_L3("Tabs Count", "xpath", "//div[contains(@class, 'v-tabs__div')]", "no_jira");             
@@ -599,9 +599,10 @@ public class AP3_user_permission {
                         if (FAIL) { return; }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
+                    Thread.sleep(500);     
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;} 
-                    Thread.sleep(500);                         
+                    
                 } else if (Tab_Name.toLowerCase().contains("delivery")) { 
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Delivery Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
                         if (FAIL) { return;}   
@@ -609,9 +610,10 @@ public class AP3_user_permission {
                         if (FAIL) { return; }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
+                    Thread.sleep(500);     
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;}   
-                    Thread.sleep(500);                        
+                    
                 } else if (Tab_Name.toLowerCase().contains("closure")) {    
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Brand Closure'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
                         if (FAIL) { return;}   
@@ -629,8 +631,7 @@ public class AP3_user_permission {
                 if (FAIL) { return;}  
             Thread.sleep(500);   
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
-                if (FAIL) { return;} 
-            Thread.sleep(500);                 
+                if (FAIL) { return;}                 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Edit 'Station Name'?", "css", "[aria-label='Station Name']", "disabled","no_jira"); 
                 if (FAIL) { return;} 
                 _t++;
@@ -661,8 +662,7 @@ public class AP3_user_permission {
                 if (FAIL) { return;} 
             _t++; Thread.sleep(500); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
-                if (FAIL) { return;}
-            Thread.sleep(500);                 
+                if (FAIL) { return;}                
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'User Name'", "xpath", "//button[@type='button'][2]", "no_jira"); 
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(), 'Logout')]", "no_jira"); 
@@ -727,9 +727,10 @@ public class AP3_user_permission {
             Thread.sleep(500);                 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
                if (FAIL) { return;} 
+            Thread.sleep(500);   
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                if (FAIL) { return;} 
-            Thread.sleep(500);                 
+              
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//div[contains(@class, 'timezone-address')]", "no_jira"); 
                if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y Site 'Configuration'", "Configuration", false,"no_jira"); 
@@ -755,8 +756,7 @@ public class AP3_user_permission {
                 if (FAIL) { return;}
             Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
-                if (FAIL) { return;}
-            Thread.sleep(500);                 
+                if (FAIL) { return;}               
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.List_L3("Tabs Count", "xpath", "//div[contains(@class, 'v-tabs__div')]", "no_jira");             
@@ -785,9 +785,10 @@ public class AP3_user_permission {
                         if (FAIL) { return; }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
+                    Thread.sleep(500);    
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;} 
-                    Thread.sleep(500);                         
+                      
                 } else if (Tab_Name.toLowerCase().contains("delivery")) { 
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Delivery Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
                         if (FAIL) { return;}   
@@ -795,9 +796,10 @@ public class AP3_user_permission {
                         if (FAIL) { return; }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
+                    Thread.sleep(500);    
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;}   
-                    Thread.sleep(500);                        
+                     
                 } else if (Tab_Name.toLowerCase().contains("closure")) {    
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Brand Closure'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
                         if (FAIL) { return;}   
@@ -814,8 +816,7 @@ public class AP3_user_permission {
                 if (FAIL) { return;}  
             Thread.sleep(500);   
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
-                if (FAIL) { return;} 
-            Thread.sleep(500);                 
+                if (FAIL) { return;}             
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Edit 'Station Name'?", "css", "[aria-label='Station Name']", "disabled","no_jira"); 
                 if (FAIL) { return;} 
                 _t++;
@@ -845,9 +846,10 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Dashboard Click", "xpath", "//*[contains(text(), 'Dashboard')]", "no_jira"); 
                 if (FAIL) { return;} 
             _t++; Thread.sleep(500); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+            Thread.sleep(500);  
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                 if (FAIL) { return;}
-            Thread.sleep(500);                 
+               
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'User Name'", "xpath", "//button[@type='button'][2]", "no_jira"); 
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(), 'Logout')]", "no_jira"); 
@@ -913,9 +915,10 @@ public class AP3_user_permission {
             Thread.sleep(500);                 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", "no_jira"); 
                if (FAIL) { return;} 
-            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+            Thread.sleep(500);     
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
                if (FAIL) { return;} 
-            Thread.sleep(500);                 
+              
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//div[contains(@class, 'timezone-address')]", "no_jira"); 
                if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM N Site 'Configuration'", "Configuration", false,"no_jira"); 
@@ -942,8 +945,7 @@ public class AP3_user_permission {
                 if (FAIL) { return;}
             Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
-                if (FAIL) { return;}
-            Thread.sleep(500);                 
+                if (FAIL) { return;}              
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira"); 
                 if (FAIL) { return;} 
   
@@ -973,9 +975,10 @@ public class AP3_user_permission {
                         if (FAIL) { return; }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
+                    Thread.sleep(500);    
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;} 
-                    Thread.sleep(500);                         
+                     
                 } else if (Tab_Name.toLowerCase().contains("delivery")) { 
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Delivery Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
                         if (FAIL) { return;}   
@@ -983,9 +986,10 @@ public class AP3_user_permission {
                         if (FAIL) { return; }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
+                    Thread.sleep(500);   
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;}   
-                    Thread.sleep(500);                        
+                      
                 } else if (Tab_Name.toLowerCase().contains("closure")) {    
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Brand Closure'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", "no_jira"); 
                         if (FAIL) { return;}   
@@ -1002,8 +1006,7 @@ public class AP3_user_permission {
                 if (FAIL) { return;}  
             Thread.sleep(500);   
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
-                if (FAIL) { return;} 
-            Thread.sleep(500);                 
+                if (FAIL) { return;}             
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Edit 'Station Name'?", "css", "[aria-label='Station Name']", "disabled","no_jira"); 
                 if (FAIL) { return;} 
                 _t++;
@@ -1033,9 +1036,10 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Dashboard Click", "xpath", "//*[contains(text(), 'Dashboard')]", "no_jira"); 
                 if (FAIL) { return;} 
             _t++; Thread.sleep(500); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+            Thread.sleep(500);  
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                 if (FAIL) { return;}
-            Thread.sleep(500);                 
+                
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'User Name'", "xpath", "//button[@type='button'][2]", "no_jira"); 
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(), 'Logout')]", "no_jira"); 

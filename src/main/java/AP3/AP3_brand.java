@@ -27,8 +27,7 @@ public class AP3_brand {
             if (FAIL) { return;} 
         _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
             if (FAIL) { return;}
-        Thread.sleep(500); 
-                       
+        Thread.sleep(500);                        
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Page_URL("Sites page URL", "no_jira"); 
@@ -52,8 +51,7 @@ public class AP3_brand {
             if (FAIL) { return;} 
  
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
-            if (FAIL) { return;}  
-        Thread.sleep(500);   
+            if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Search Prompt", "xpath", "//*[contains(text(), 'Search Sites')]", "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", "Not Existing Site", false, "no_jira");
@@ -308,7 +306,6 @@ public class AP3_brand {
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}   
-         Thread.sleep(1000);
         _t++; Thread.sleep((long) sleep); T.Text_Found("Find 'Leave...' question", "Leave without saving?", "no_jira"); 
         if ("Found".equals(t)) {    // Leave asked om CDL Site and not on DH Site (!?)      
             _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Leave...' note", "Changes will be lost if you do not save.", true,"no_jira"); 
@@ -600,6 +597,7 @@ public class AP3_brand {
                     if (FAIL) { return; } 
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                     if (FAIL) { return; } 
+                 Thread.sleep(500);                    
                 _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                     if (FAIL) { return;}
 //                _t++; Thread.sleep((long) sleep); T.List_L1("Closure rows Count", "xpath", "//div[contains(@class, 'layout flex xs12 nowrap align-center')]", "no_jira");             

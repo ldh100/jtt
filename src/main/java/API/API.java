@@ -588,9 +588,9 @@ public class API extends javax.swing.JInternalFrame {
         if (d1LastRow == DV1.getSelectedRow()) {
            return;
         }
-        GetBrands();
         SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
+        GetBrands();
         d1LastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
     private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
@@ -2303,9 +2303,6 @@ public class API extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetBrands() {
-        if (d1LastRow == DV1.getSelectedRow()) {
-           return;
-        }
         d2LastRow = -1;
         d1LastRow = DV1.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));

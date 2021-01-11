@@ -31,12 +31,11 @@ public class AP3_menu_manager {
         // <editor-fold defaultstate="collapsed" desc="Group Selection">  
         EX += " - " + "\t" + " === MM Sector Selection " + "\t" + " ===== " + "\t" + " == Sector Selection Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";  
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
-            if (FAIL) { return;}  
-        Thread.sleep(500);       
-        _t++; Thread.sleep((long) sleep); T.Page_URL("Menu Manager page URL", "no_jira"); 
-            if (FAIL) { return;}   
+            if (FAIL) { return;}         
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", "no_jira"); 
             if (FAIL) { return;}              
+        _t++; Thread.sleep((long) sleep); T.Page_URL("Menu Manager page URL", "no_jira"); 
+            if (FAIL) { return;}   
         _t++; T.Find_Text("Button 'Go to Menu' text", "Go to menus", true,"no_jira");   
             if (FAIL) { return;}
         _t++; T.Element_By_Path_Attribute("Button 'Go to Menu' state", "xpath", "//button[contains(@class, 'v-btn v-btn--disabled theme--light primary--text')]", "disabled","no_jira");
@@ -93,7 +92,6 @@ public class AP3_menu_manager {
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;} 
-            //Thread.sleep(1000);
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for MM > Group page load", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "no_jira"); 
                 if (FAIL) { return;}
         // ========================================= Group Selection ^^^^
@@ -201,10 +199,8 @@ public class AP3_menu_manager {
             Thread.sleep(500);   
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); T.To_Top("no_jira"); // Temp fix for BUG
-            if (FAIL) { return;}
-        Thread.sleep(500);
-            
+            _t++; Thread.sleep((long) sleep); T.To_Top("no_jira"); // Temp fix for BUG
+                if (FAIL) { return;}            
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load", "tagName", "table", "no_jira"); 
                 if (FAIL) { return;}    
             Thread.sleep(500);       
@@ -354,7 +350,6 @@ public class AP3_menu_manager {
               if (FAIL) { return;}     
             _t++; T.Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]", "no_jira");        
                 if (FAIL) { return;} 
-                Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", "no_jira"); 
                 if (FAIL) { return;}                                                                           
             Thread.sleep(500);
@@ -430,7 +425,6 @@ public class AP3_menu_manager {
                     if (FAIL) { return;} 
                 _t++; T.Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]", "no_jira");        
                     if (FAIL) { return;} 
-                    Thread.sleep(500);
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", "no_jira"); 
                     if (FAIL) { return;}                                                                            
                 Thread.sleep(500);
@@ -448,13 +442,11 @@ public class AP3_menu_manager {
             } else{   
                 _t++; T.Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]", "no_jira");        
                     if (FAIL) { return;} 
-                Thread.sleep(1000);
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", "no_jira"); 
                     if (FAIL) { return;}                                                                           
                 Thread.sleep(500);
                 _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                     if (FAIL) { return;} 
-                Thread.sleep(1000);
 //                _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("WaitForElement for MM > Group page load", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "no_jira"); 
 //                        if (FAIL) { return;}                    
             }
@@ -527,7 +519,6 @@ public class AP3_menu_manager {
             Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;} 
-            Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.List_L0("Groups Count after Copy - Publish", "tagName", "tr", "no_jira");             
                 if (FAIL) { return;}
                 _t++; T.Element_Text("Modifier Group Row Header", L0.get(0), "no_jira"); 
@@ -550,7 +541,6 @@ public class AP3_menu_manager {
                 Thread.sleep(500);
                 _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                     if (FAIL) { return;} 
-                    Thread.sleep(500);
                 _t++; Thread.sleep((long) sleep); T.List_L0("Groups Count after Copied Delete - Publish", "tagName", "tr", "no_jira");             
                     if (FAIL) { return;}
                 _t++; T.Element_Text("Modifier Group Row Header", L0.get(0), "no_jira"); 
@@ -598,11 +588,9 @@ public class AP3_menu_manager {
                 
             // ===============================================================================================================================  
             _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back"," 'globalmods' page"," 'menu' page", "no_jira"); 
-                    //if (FAIL) { return;}
             Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for page load...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}               
-                //Thread.sleep(1000);
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for Menu page load", "xpath", "//div[@class='layout hover align-baseline']", "no_jira"); 
                     if (FAIL) { return;}                
         } else {
@@ -694,8 +682,7 @@ public class AP3_menu_manager {
                 if (FAIL) { return;} 
             Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
-                if (FAIL) { return;}    
-            Thread.sleep(2000);        
+                if (FAIL) { return;}          
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'ADD MENU SET'", "xpath", "//*[contains(text(), 'add menu set')]", "no_jira"); 
                 if (FAIL) { return;} 
             Thread.sleep(2000); 
