@@ -80,9 +80,14 @@ public class DL_login {
                 for (int j = 0; j < L1.size(); j++) {
                     _t++; Thread.sleep((long) sleep); T.Element_Text(t + " > Metrics " + j + " name", L1.get(j),"no_jira");                          
                     if (FAIL) { return;}
+                    
                 }
             } 
-        _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Metrics Subheader Title", L0.get(0),"xpath", ".//p[contains(@class, 'MuiTypography-body1')]", "no_jira");                          
+ 
+            // _t++; Thread.sleep((long) sleep); T.Element_Child_E2("select All checkbox", L1.get(j) ,"xpath", "//input[@type='checkbox']","no_jira");            
+            //  if (FAIL) { return;}
+
+
              
         // continue - 
         // current issues:
