@@ -45,6 +45,66 @@ public class WO_login {
         if(NEW_USER) {
             
             // Larry's code goes here
+             //test Create new user
+    //  Open modal        
+       // _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Login'", "xpath", "//*[text()='Login']", "no_jira"); 
+        //    if (FAIL) { return;}             
+       // _t++; T.Element_E1_Find("Find 'Login' dialog", "xpath", "//html/body/div/div/div[3]/div/div/div", "no_jira");
+         //   if (FAIL) { return;} 
+          //  Thread.sleep(500);      
+        _t++; T.Element_By_Path_Text("Find 'switch-form-text > Sign-in' text", "xpath", "//p[@class='switch-form-text']", "no_jira");
+        
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Sign up btn click  ", "xpath", "//p[text()='Sign Up']", "no_jira");
+            if (FAIL) { return;}
+        _t++; T.Element_E1_Find("Find 'sign up' dialog", "xpath", "(//div[contains(@class,'pa-5 v-card')])[2]", "no_jira");
+            if (FAIL) { return;} 
+    //  verify modal 
+        _t++; T.Element_Child_Text("Find 'Sign Up ' dialog Title", e1, "xpath", ".//div[@class='v-card__title form-title']", "no_jira");               
+        _t++; T.Element_Child_Text("Find 'Sign UP ' dialog Sub Title Text", e1, "xpath", ".//div[@class='v-card__text']", "no_jira"); 
+        _t++; T.Find_Text("Find 'Subscription '  Title ", "Get the most", true, "no_jira"); 
+        _t++; T.Find_Text("Find 'Subscription '  Text  ", "We're like that friend who ", true, "no_jira");
+        _t++; T.Find_Text("Find 'Already have.....' text","Already have a", true, "no_jira");//div[contains(@class,'row mt-8')]//p
+        _t++; T.Element_By_Path_Text("Find 'switch-form-text > Sign-in' text", "xpath", "//p[@class='mt-1 switch-form-text']", "no_jira");
+    //  Verify input Label 
+        _t++; T.Element_Child_List_L1("Login Text Slot(s) Count", e1,"xpath", ".//div[@class='v-text-field__slot']", "no_jira");             
+            if (FAIL) { return;}  
+        _t++; T.Element_Child_Text("Input 'First Name' label", L1.get(0), "tagName" , "label", "no_jira");          
+        _t++; T.Element_Child_Text("Input 'Last Name ' label", L1.get(1), "tagName" , "label", "no_jira"); 
+        _t++; T.Element_Child_Text("Input 'Email' label", L1.get(2), "tagName" , "label", "no_jira");          
+        _t++; T.Element_Child_Text("Input 'Phone Number' label", L1.get(3), "tagName" , "label", "no_jira"); 
+        _t++; T.Element_Child_Text("Input 'Password' label", L1.get(4), "tagName" , "label", "no_jira");   
+    //  Verify all input field
+        _t++; T.Element_Child_Click("Click 'First Name' input", L1.get(0), "id" , "input-94", "no_jira"); 
+        _t++; T.Element_Child_Text_Enter("Enter Valid First Name", L1.get(0), "id" , "input-94", "WebTest", false, "no_jira");
+            if (FAIL) { return;} 
+        _t++; T.Element_Child_Click("Click 'Last Name' input", L1.get(1), "id" , "input-97", "no_jira"); 
+        _t++; T.Element_Child_Text_Enter("Enter Valid Last Name", L1.get(1), "id" , "input-97", "Automation", false, "no_jira");
+            if (FAIL) { return;} 
+        _t++; T.Element_Child_Click("Click 'Email' input", L1.get(2), "id" , "input-100", "no_jira"); 
+        String emailAassembly = "W.A."+New_ID+"@mailsac.com"; 
+        _t++; T.Element_Child_Text_Enter("Enter Valid Email", L1.get(2), "id" , "input-100", emailAassembly, false, "no_jira");
+            if (FAIL) { return;}     
+        _t++; T.Element_Child_Click("Click 'Phone Number' input", L1.get(3), "id" , "input-103", "no_jira"); 
+        _t++; T.Element_Child_Text_Enter("Enter Valid Phone Number", L1.get(3), "id" , "input-103", "6470009999", false, "no_jira");
+            if (FAIL) { return;} 
+        _t++; T.Element_Child_Click("Click 'Passsword' input", L1.get(4), "id" , "input-106", "no_jira"); 
+        String password = "Abcd1234";
+        _t++; T.Element_Child_Text_Enter("Enter Valid Password", L1.get(4), "id" , "input-106", password, true, "no_jira");
+            if (FAIL) { return;} 
+            
+        _t++; T.Clickable_Element_By_Path_Click("Click BTN 'Create Account'", "xpath", "(//button[@type='button'])[11]", "No Jira");
+             if (FAIL) { return;} 
+        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");                                                                                     
+            if (FAIL) { return;}
+        Thread.sleep(500);         
+           CredentialResposistory crt = new CredentialResposistory();
+           crt.insertRows(emailAassembly,password); 
+           
+        
+            
+    
+            
+            //Larry's code complete
             
         }else{
             _t++; T.Element_Child_Click("Click 'Email' input", L1.get(0), "tagName" , "input", "no_jira"); 
