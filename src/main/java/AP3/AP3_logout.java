@@ -24,6 +24,11 @@ public class AP3_logout {
             switch back to T.Swith_to_Frame default 
         }
         */
+        if(!env.equals("PR")){
+            
+        }else{
+            
+        }
         _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
