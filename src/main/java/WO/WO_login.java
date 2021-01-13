@@ -100,10 +100,6 @@ public class WO_login {
            CredentialResposistory crt = new CredentialResposistory();
            crt.insertRows(emailAassembly,password); 
            
-        
-            
-    
-            
             //Larry's code complete
             
         }else{
@@ -133,11 +129,20 @@ public class WO_login {
             if (FAIL) { return;}           
         _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click 'Account' Button", e1, "xpath", ".//i[@class='v-icon notranslate mdi mdi-account-circle theme--light']", "no_jira");                                     
             if (FAIL) { return;} 
+            
+            
+            
+            
+            
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Account Settings'", "xpath", ".//*[text()='Account Settings']", "no_jira");                                     
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Title text", "xpath", ".//h1[@class='header']", "no_jira");
             if (FAIL) { return;}  
-        //try to get User Email    
+        //try to get User Email   
+        
+        
+        
+        
         _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back", SITE + "Account Settings","Previous page (???)", "no_jira");
             if (FAIL) { return;}              
             
