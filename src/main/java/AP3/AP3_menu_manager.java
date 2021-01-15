@@ -985,7 +985,6 @@ public class AP3_menu_manager {
         EX += " - " + "\t" + " === MM Global Menus Add Menu Set" + "\t" + " ===== " + "\t" + " == Add Menu Sets End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         // </editor-fold>  
         
-
         // <editor-fold defaultstate="collapsed" desc="Global Menus Import">  
         EX += " - " + "\t" + " === MM Global Menus Import" + "\t" + " ===== " + "\t" + " == Global Menus Import Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         if(!DH_Menu_ID.contains(" ") && DH_Menu_ID.length() > 18){ // check for valid ID
@@ -1181,14 +1180,15 @@ public class AP3_menu_manager {
                             if (FAIL) { return;}     
                         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Items' table", "xpath", "//div[@class='v-table__overflow']", "no_jira");
                             if (FAIL) { return;}
-                        _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Items Count", e1,"tagName", "tr", "no_jira");                                     
+                        _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Active Items Count", e1,"tagName", "tr", "no_jira");                                     
                             if (FAIL) { return;}
                             for (int i = 0; i < L0.size(); i++) {
                                _t++; T.Element_Text("Item Row Text", L1.get(i), "no_jira");  
                                     if (FAIL) { return;}
-                            }  
+                            }                                                    
+                            
                         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent","no_jira"); 
-                            if (FAIL) { return;}   
+                            if (FAIL) { return;}  
                         // ======== Delete 2nd Item
                         if(L1.size() > 3){
                             _t++; Thread.sleep((long) sleep); T.List_Child_E1_By_Path("Find 2nd Item 'Delete' icon", L1, 3, "xpath", ".//i[@class='v-icon mdi mdi-delete theme--light']", "no_jira"); 
@@ -1365,7 +1365,8 @@ public class AP3_menu_manager {
         } else{
             EX += " - " + "\t" + " === MM Global Menus Import" + "\t" + " ===== " + "\t" + " == Skipped (" + DH_Menu_ID + ") ^^" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         }
-        // </editor-fold>         
+        // </editor-fold>  
+        
         // <editor-fold defaultstate="collapsed" desc="Local Brands">  
         EX += " - " + "\t" + " === MM Local Brands" + "\t" + " ===== " + "\t" + " == Local Brands Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); T.List_L3("Menus Pages Count", "xpath", "//button[contains(@class, 'v-pagination__item')]", "no_jira"); 
@@ -1410,9 +1411,7 @@ public class AP3_menu_manager {
                     } 
                 }            
             }
-        if(T_Index > -1){
-//            _t++; Thread.sleep((long) sleep); T.Scroll_to_Element("Scroll to Menu " + GL_MENU, L2.get(T_Index), "no_jira");
-//                if (FAIL) { return;}    
+        if(T_Index > -1){ 
             _t++; T.Find_Text("Fund 'Search...' text", "Search Menus", true,"no_jira");   
                 if (FAIL) { return;}             
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", "no_jira"); 
@@ -1453,7 +1452,45 @@ public class AP3_menu_manager {
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;} 
             Thread.sleep(500);   
-       // nexr local ......
+            
+            
+            // nexr local ......
+            /*            
+            // Bulk update  DEBUG
+
+            _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Bulk' container", "xpath", "//div[@class='layout justify-left align-center']", "no_jira");
+            if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find 'Bulk' default prompt", e1,"xpath", ".//span[@class='Button-Primary-Center']", "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_Child_E2("Find 'Bulk' select All checkbox", e1,"xpath", ".//input[@role='checkbox']", "no_jira");
+            if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Check 'Bulk' select All", e2,"no_jira");
+            if (FAIL) { return;}
+
+            _t++; Thread.sleep((long) sleep); T.Element_Child_E2("Find 'Bulk' updated prompt", e1,"xpath", ".//span[@class='Button-Primary-Center']", "no_jira");
+            if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Element_Text("Find 'Bulk' updated prompt text", e2,"no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'Update X Items' prompt", e2, "no_jira");
+            if (FAIL) { return;}
+
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'In Stock'", "css", "[aria-label='In Stock']", "no_jira");
+            if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Visible In App'", "css", "[aria-label='Visible In App']", "no_jira");
+            if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'APPLY Changes'", "xpath", "//div[contains(text(), 'Apply Changes')]", "no_jira");
+            if (FAIL) { return;}
+
+            // Hide inactive test steps
+            _t++; Thread.sleep((long) sleep); T.Element_E2_Find("Find 'Hide Inactive' container", "xpath", "//div[@class='flex offset-xs10'']", "no_jira");
+            if (FAIL) { return;}       //class ='flex offset-xs10'
+            _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Active Items Count", e1,"tagName", "tr", "no_jira");
+            if (FAIL) { return;}
+            for (int i = 0; i < L0.size(); i++) {
+            _t++; T.Element_Text("Item Row Text", L1.get(i), "no_jira");
+            if (FAIL) { return;}
+            }
+            int Item_count  = L1.size();
+
+            */       
             
         } else {
             _t++; 
