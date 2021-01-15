@@ -165,7 +165,7 @@ public class AP3_user_permission {
                         if (FAIL) { return; }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
-                    Thread.sleep(1000);  
+                    Thread.sleep(1000);    
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;} 
                         
