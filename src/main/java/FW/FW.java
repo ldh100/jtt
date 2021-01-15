@@ -25,13 +25,30 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.SwingWorker;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -69,7 +86,7 @@ public class FW extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         lblSITES = new javax.swing.JLabel();
-        lblBRANDS = new javax.swing.JLabel();
+        lblUNITS = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         DV1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -109,6 +126,18 @@ public class FW extends javax.swing.JInternalFrame {
         cmbEnv = new javax.swing.JComboBox<>();
         _slack = new javax.swing.JCheckBox();
         _headless = new javax.swing.JCheckBox();
+        lblSITES5 = new javax.swing.JLabel();
+        txtPartner_ID = new javax.swing.JTextField();
+        lblSITES8 = new javax.swing.JLabel();
+        txtPartner_PW = new javax.swing.JTextField();
+        lblSITES12 = new javax.swing.JLabel();
+        txtUManager_ID = new javax.swing.JTextField();
+        lblSITES14 = new javax.swing.JLabel();
+        txtUManager_PW = new javax.swing.JTextField();
+        lblSITES15 = new javax.swing.JLabel();
+        txtFWManager_PW = new javax.swing.JTextField();
+        lblSITES16 = new javax.swing.JLabel();
+        txtFWManager_ID = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -151,9 +180,9 @@ public class FW extends javax.swing.JInternalFrame {
         lblSITES.setAlignmentX(0.5F);
         getContentPane().add(lblSITES, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 360, -1));
 
-        lblBRANDS.setText("Units");
-        lblBRANDS.setName("lblBRANDS"); // NOI18N
-        getContentPane().add(lblBRANDS, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 296, 280, -1));
+        lblUNITS.setText("Units");
+        lblUNITS.setName("lblUNITS"); // NOI18N
+        getContentPane().add(lblUNITS, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 260, 280, -1));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -180,7 +209,7 @@ public class FW extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 22, 428, 272));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 22, 428, 232));
 
         DV2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV2.setModel(new javax.swing.table.DefaultTableModel(
@@ -206,7 +235,7 @@ public class FW extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 316, 428, 100));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 276, 428, 140));
 
         txtLog.setEditable(false);
         txtLog.setColumns(20);
@@ -224,21 +253,21 @@ public class FW extends javax.swing.JInternalFrame {
         lblSITES4.setText("Admin E-mail:");
         lblSITES4.setToolTipText("");
         lblSITES4.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 380, 120, -1));
+        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 260, 120, -1));
 
         txtAdmin_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtAdmin_ID.setText("App_User@?.?");
-        getContentPane().add(txtAdmin_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 396, 212, -1));
+        getContentPane().add(txtAdmin_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 276, 212, -1));
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES6.setText("Admin Password");
         lblSITES6.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(664, 380, -1, -1));
+        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 260, -1, -1));
 
         txtAdmin_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtAdmin_PW.setText("password");
-        getContentPane().add(txtAdmin_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(664, 396, 184, -1));
+        getContentPane().add(txtAdmin_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 276, 184, -1));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
 
@@ -412,12 +441,12 @@ public class FW extends javax.swing.JInternalFrame {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 120, 412, 176));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 80, 412, 176));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmbBrow.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 28, 78, 20));
+        jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 32, 78, 20));
 
         btnRun.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         btnRun.setForeground(new java.awt.Color(204, 0, 0));
@@ -428,7 +457,7 @@ public class FW extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 52, 78, 36));
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 56, 78, 32));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -449,7 +478,7 @@ public class FW extends javax.swing.JInternalFrame {
                 btnFailsMouseClicked(evt);
             }
         });
-        jPanel3.add(btnFails, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 28, 84, 22));
+        jPanel3.add(btnFails, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 32, 84, 22));
 
         btnExel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnExel.setText("Excel Rep");
@@ -483,7 +512,7 @@ public class FW extends javax.swing.JInternalFrame {
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES13.setText("Environment:");
         lblSITES13.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 12, 92, 16));
+        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 16, 92, 16));
 
         cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbEnv.addItemListener(new java.awt.event.ItemListener() {
@@ -491,7 +520,7 @@ public class FW extends javax.swing.JInternalFrame {
                 cmbEnvItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 28, 116, 20));
+        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 32, 116, 20));
 
         _slack.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         _slack.setText("Report to Slack");
@@ -506,6 +535,69 @@ public class FW extends javax.swing.JInternalFrame {
         jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 72, 100, 14));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 416, 416, 88));
+
+        lblSITES5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES5.setText("Partner E-mail:");
+        lblSITES5.setToolTipText("");
+        lblSITES5.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, 120, -1));
+
+        txtPartner_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtPartner_ID.setText("App_User@?.?");
+        getContentPane().add(txtPartner_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 316, 212, -1));
+
+        lblSITES8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES8.setText("Partner Password");
+        lblSITES8.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES8, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 300, -1, -1));
+
+        txtPartner_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtPartner_PW.setText("password");
+        getContentPane().add(txtPartner_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 316, 184, -1));
+
+        lblSITES12.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES12.setText("Unit Manager E-mail:");
+        lblSITES12.setToolTipText("");
+        lblSITES12.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES12, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 340, 120, -1));
+
+        txtUManager_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtUManager_ID.setText("App_User@?.?");
+        getContentPane().add(txtUManager_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 356, 212, -1));
+
+        lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES14.setText("Unit Manager Password");
+        lblSITES14.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 340, -1, -1));
+
+        txtUManager_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtUManager_PW.setText("password");
+        getContentPane().add(txtUManager_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 356, 184, -1));
+
+        lblSITES15.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES15.setText("FW Manager E-mail:");
+        lblSITES15.setToolTipText("");
+        lblSITES15.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES15, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 380, 120, -1));
+
+        txtFWManager_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtFWManager_PW.setText("password");
+        getContentPane().add(txtFWManager_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 396, 184, -1));
+
+        lblSITES16.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES16.setText("FW Manager Password");
+        lblSITES16.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES16, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 380, -1, -1));
+
+        txtFWManager_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtFWManager_ID.setText("App_User@?.?");
+        getContentPane().add(txtFWManager_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 396, 212, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -749,8 +841,7 @@ public class FW extends javax.swing.JInternalFrame {
             String t_rep = "";
             if (!"".equals(r_time.trim())) {
                 double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
-                if (am0.length > 0)
-                {
+                if (am0.length > 0) {
                     Arrays.sort(am0);
                     double total = 0;
                     for(int i=0; i < am0.length; i++){
@@ -992,38 +1083,297 @@ public class FW extends javax.swing.JInternalFrame {
     }
     private void LOAD_ENV(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
-            BaseAPI = "https://api.compassdigital.org/staging";
+            BaseAPI = "https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/";
             env = "ST";
             url = "https://staging.app.foodworks.org/"; 
         } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
-            BaseAPI = "https://api.compassdigital.org/dev";
+            BaseAPI = "https://czb8fru7ij.execute-api.us-east-1.amazonaws.com/dev/";
             env = "DE";
             url = "https://dev.app.foodworks.org/";
         } else{
-            BaseAPI = "https://api.compassdigital.org/v1";
+            BaseAPI = "https://fg74jjx1x7.execute-api.us-east-1.amazonaws.com/v1/";
             env = "PR";
             url = "https://app.foodworks.org/";
         }
-        Get_FW_TKN();
-        LOAD_CONFIG();
 
-        //GetRestorans();       
+        LOAD_CONFIG();
+        
+        Get_FW_TKN();
+        
+        GetRestorants(); 
+        GetUnits();
     }
     private void Get_FW_TKN(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
-                rs.next();
-                FW_TKN = rs.getString(1);
-            }
-        } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== FW_TKN > ERROR: " + ex.getMessage());
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("\r\n\r\n- Get Admin User Token ..."); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        String J = "==== User API(s):" + "\r\n";
+        userID = "";
+        userTKN = "";
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        String UserAuth = Base64.getEncoder().encodeToString((txtAdmin_ID.getText().trim() + ":" + txtAdmin_PW.getText().trim()).getBytes());
+        if(sw1.isRunning()){
+            sw1.reset();
         }
+        sw1.start();         // ============ User
+        try { 
+            HttpGet httpget = new HttpGet(BaseAPI + "auth"); /// base API ???
+            httpget.setHeader("Authorization",  "Basic " + UserAuth);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 500) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            
+            userTKN = json.getString("token");   
+            userID = json.getJSONObject("user").getString("id");
+        } catch (IOException | JSONException ex) {
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
+        }   
+        txtLog.append("\r\n== " + BaseAPI + "/user/auth" + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        FW_TKN = "eyJhbGciOiJLTVMiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiIzNzNlNDI0Nzk4Yzg0OWQ4ODc4YWMyMzA4MTU3ZWIzYSIsInNjb3BlcyI6ImZ3X2FkbWluIiwiZXhwIjozMjI5MDU5NjcxNTc2LCJpYXQiOjE2MTA2NDE4MzV9.AQICAHiBfb4VzGsFjR/lWEg3l+aEpBYOMnEN/6K12FCw0mwumgGTFYAKpKygG6SZpdBuqdXjAAABCzCCAQcGCSqGSIb3DQEHBqCB+TCB9gIBADCB8AYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAxgZF+0NzDVdOxA6AoCARCAgcKF51SBRmsH28Wxnug0tc7XMlC0dsZh8iEpiiMV3XKUuhs0JR8UxLzI5G2X50D+JE1WlNcNg6LYoaAuFcFc4a48MiP/5ZLy+a9orNtCkqFA32Ww7/zH8z3nKO3b89vAKi/iuxTRqWnHRqKac1zfpxFgepRkRUWEhmNHuwgJupjgJCSX2pO9oRUjoWEUBMcmBG0xhjqVITGeeViBufSz+GlHp7+vFTU7IaeHhE2YTRokORHrP3VHN13mSzE72xaXmlvcXw==";
+    }
+    
+    private void GetRestorants() {
+        d1LastRow = -1;
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("\r\n-Load Restaurants ...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
+        String[] SitesColumnsName = {"Restaurant", "Status", "Market", "id"}; 
+        DefaultTableModel SitesModel = new DefaultTableModel();
+        SitesModel.setColumnIdentifiers(SitesColumnsName);
+        DV1.setModel(SitesModel);
+        
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV1.getModel());
+        DV1.setRowSorter(sorter);
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);  
+        sorter.setSortable(0, false); 
+
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        try {
+            HttpGet httpget = new HttpGet(BaseAPI + "/partners"); 
+            httpget.setHeader("Authorization",  "Bearer " + userTKN); //FW_TKN);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 300) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    throw new ClientProtocolException("Response: " + response.getStatusLine().getStatusCode() + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+
+            String responseRest = httpclient.execute(httpget, responseHandler);
+            String Restaurant;
+            String Market;
+            //String Employee;
+            String Status;
+            String id;
+            
+            JSONArray RESTS = new JSONArray(responseRest);
+            for (int i = 0; i < RESTS.length(); i++) {
+                Restaurant = "?";
+                Market = "?";
+                //Employee = "?";
+                Status = "?";
+                id = "?";                
+                JSONObject Rest = RESTS.getJSONObject(i);
+                if(Rest.has("name")){
+                    Restaurant = Rest.getString("name");   
+                } 
+                if(Rest.has("marketId")){
+                    Market = Rest.getString("marketId");
+                } 
+//                if(Rest.has("Employee")){
+//                    Employee = Rest.getString("Employee");
+//                }  
+                if(Rest.has("onboarding")){
+                    Status = Rest.getJSONObject("onboarding").getString("status");
+                }  
+                if(Rest.has("id")){
+                    id = Rest.getString("id");
+                } 
+                SitesModel.addRow(new Object[]{Restaurant, Status, Market, id});
+            }
+            DV1.setModel(SitesModel);
+            DV1.setDefaultEditor(Object.class, null);
+            DV1.getColumnModel().getColumn(0).setPreferredWidth(150);
+            DV1.getColumnModel().getColumn(1).setPreferredWidth(70);
+            DV1.getColumnModel().getColumn(2).setPreferredWidth(70);
+            DV1.getColumnModel().getColumn(3).setPreferredWidth(120);
+            
+            sorter.setSortable(0, true); 
+            sorter.sort();            
+   
+        } catch (IOException | JSONException ex) {
+            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());      
+        }         
+        finally {
+            try {
+                httpclient.close();
+            } catch (IOException ex) {
+                txtLog.append("\r\n- Exception: " + ex.getMessage());
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());    
+            }
+        }
+        txtLog.append("\r\n== " + BaseAPI + "/partners  > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();
+        
+        if (DV1.getRowCount() > 0) {
+            DV1.changeSelection(0, 0, false, false);
+            if (CONFIG && !"".equals(RESTORAUNT.trim())) {
+                for(int row = 0; row < DV1.getRowCount(); row++) {
+                    // update Market id > Name
+                    if(DV1.getValueAt(row, 0).equals(RESTORAUNT)){
+                        DV1.changeSelection(row, 0, false, false);
+                        break;
+                    }
+                }
+            } //
+            RESTORAUNT = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
+            RestID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
+            //GetBrands();
+        }
+        lblSITES.setText("Restorants (" + DV1.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
+    
+    private void GetUnits() {
+        d2LastRow = -1;
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("\r\n-Load Units ...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
 
+        String[] SitesColumnsName = {"Unit", "Status", "Market", "id"}; 
+        DefaultTableModel SitesModel = new DefaultTableModel();
+        SitesModel.setColumnIdentifiers(SitesColumnsName);
+        DV2.setModel(SitesModel);
+        
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV2.getModel());
+        DV2.setRowSorter(sorter);
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);  
+        sorter.setSortable(0, false); 
+
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        try {
+            HttpGet httpget = new HttpGet(BaseAPI + "/units"); 
+            httpget.setHeader("Authorization",  "Bearer " + userTKN); //FW_TKN);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 300) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    throw new ClientProtocolException("Response: " + response.getStatusLine().getStatusCode() + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+
+            String responseRest = httpclient.execute(httpget, responseHandler);
+            String Unit;
+            String Market;
+            //String Employee;
+            String Status;
+            String id;
+            
+            JSONArray RESTS = new JSONArray(responseRest);
+            for (int i = 0; i < RESTS.length(); i++) {
+                Unit = "?";
+                Market = "?";
+                //Employee = "?";
+                Status = "?";
+                id = "?";                
+                JSONObject Rest = RESTS.getJSONObject(i);
+                if(Rest.has("name")){
+                    Unit = Rest.getString("name");   
+                } 
+                if(Rest.has("marketId")){
+                    Market = Rest.getString("marketId");
+                } 
+//                if(Rest.has("Employee")){
+//                    Employee = Rest.getString("Employee");
+//                }  
+                if(Rest.has("active")){
+                    if(Rest.getBoolean("active")){
+                        Status = "Active";
+                    }else{
+                        Status = "Inactive";
+                    }
+                }  
+                if(Rest.has("id")){
+                    id = Rest.getString("id");
+                } 
+                SitesModel.addRow(new Object[]{Unit, Status, Market, id});
+            }
+            DV2.setModel(SitesModel);
+            DV2.setDefaultEditor(Object.class, null);
+            DV2.getColumnModel().getColumn(0).setPreferredWidth(150);
+            DV2.getColumnModel().getColumn(1).setPreferredWidth(70);
+            DV2.getColumnModel().getColumn(2).setPreferredWidth(70);
+            DV2.getColumnModel().getColumn(3).setPreferredWidth(120);
+            
+            sorter.setSortable(0, true); 
+            sorter.sort();            
+   
+        } catch (IOException | JSONException ex) {
+            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());      
+        }         
+        finally {
+            try {
+                httpclient.close();
+            } catch (IOException ex) {
+                txtLog.append("\r\n- Exception: " + ex.getMessage());
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());    
+            }
+        }
+        txtLog.append("\r\n== " + BaseAPI + "/units  > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();
+        
+        if (DV2.getRowCount() > 0) {
+            DV2.changeSelection(0, 0, false, false);
+            if (CONFIG && !"".equals(UNIT.trim())) {
+                for(int row = 0; row < DV2.getRowCount(); row++) {
+                    // update Market id > Name
+                    if(DV2.getValueAt(row, 0).equals(UNIT)){
+                        DV2.changeSelection(row, 0, false, false);
+                        break;
+                    }
+                }
+            } //
+            UNIT = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 0));
+            UnitID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 3));
+            //GetBrands();
+        }
+        lblUNITS.setText("Units(" + DV2.getRowCount() + " found)");
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+    
     private void LOAD_CONFIG(){
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
@@ -1056,6 +1406,12 @@ public class FW extends javax.swing.JInternalFrame {
 
                 c = C.substring(C.indexOf("txtAdmin_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_ID.setText(c.substring(c.indexOf(" ")).trim());
                 c = C.substring(C.indexOf("txtAdmin_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_PW.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtPartner_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtPartner_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtPartner_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtPartner_PW.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtUManager_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtUManager_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtUManager_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtUManager_PW.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtFWManager_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtFWManager_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtFWManager_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtFWManager_PW.setText(c.substring(c.indexOf(" ")).trim());
 
                 c = C.substring(C.indexOf("nShowPage:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nShowPage.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("nWaitElement:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitElement.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
@@ -1108,6 +1464,12 @@ public class FW extends javax.swing.JInternalFrame {
             
             C += "txtAdmin_ID: " + txtAdmin_ID.getText() + "\r\n";
             C += "txtAdmin_PW: " + txtAdmin_PW.getText()  + "\r\n";
+            C += "txtPartner_ID: " + txtPartner_ID.getText() + "\r\n";
+            C += "txtPartner_PW: " + txtPartner_PW.getText()  + "\r\n";
+            C += "txtUManager_ID: " + txtUManager_ID.getText() + "\r\n";
+            C += "txtUManager_PW: " + txtUManager_PW.getText()  + "\r\n";
+            C += "txtFWManager_ID: " + txtFWManager_ID.getText() + "\r\n";
+            C += "txtFWManager_PW: " + txtFWManager_PW.getText()  + "\r\n";
             
             C += "nShowPage: " + nShowPage.getValue() + "\r\n";
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
@@ -1381,21 +1743,33 @@ public class FW extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblBRANDS;
     private javax.swing.JLabel lblSITES;
     private javax.swing.JLabel lblSITES10;
     private javax.swing.JLabel lblSITES11;
+    private javax.swing.JLabel lblSITES12;
     private javax.swing.JLabel lblSITES13;
+    private javax.swing.JLabel lblSITES14;
+    private javax.swing.JLabel lblSITES15;
+    private javax.swing.JLabel lblSITES16;
     private javax.swing.JLabel lblSITES4;
+    private javax.swing.JLabel lblSITES5;
     private javax.swing.JLabel lblSITES6;
     private javax.swing.JLabel lblSITES7;
+    private javax.swing.JLabel lblSITES8;
     private javax.swing.JLabel lblSITES9;
+    private javax.swing.JLabel lblUNITS;
     private javax.swing.JSpinner nShowPage;
     private javax.swing.JSpinner nWaitElement;
     private javax.swing.JSpinner nWaitLoad;
     private javax.swing.JTextField txtAdmin_ID;
     private javax.swing.JTextField txtAdmin_PW;
+    private javax.swing.JTextField txtFWManager_ID;
+    private javax.swing.JTextField txtFWManager_PW;
     private javax.swing.JTextArea txtLog;
+    private javax.swing.JTextField txtPartner_ID;
+    private javax.swing.JTextField txtPartner_PW;
+    private javax.swing.JTextField txtUManager_ID;
+    private javax.swing.JTextField txtUManager_PW;
     // End of variables declaration//GEN-END:variables
 // </editor-fold>
 }

@@ -24,11 +24,16 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -878,8 +883,7 @@ public class WO extends javax.swing.JInternalFrame {
             String t_rep = "";
             if (!"".equals(r_time.trim())) {
                 double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
-                if (am0.length > 0)
-                {
+                if (am0.length > 0) {
                     Arrays.sort(am0);
                     double total = 0;
                     for(int i=0; i < am0.length; i++){
@@ -1203,6 +1207,13 @@ public class WO extends javax.swing.JInternalFrame {
         SitesModel.setColumnIdentifiers(SitesColumnsName);
         DV1.setModel(SitesModel);
         
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV1.getModel());
+        DV1.setRowSorter(sorter);
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);  
+        sorter.setSortable(0, false);         
+       
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try { 
             HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + appId + "?web=true&expanded=true");         
@@ -1262,6 +1273,9 @@ public class WO extends javax.swing.JInternalFrame {
             DV1.getColumnModel().getColumn(2).setPreferredWidth(50);
             DV1.getColumnModel().getColumn(3).setPreferredWidth(400);
    
+            sorter.setSortable(0, true); 
+            sorter.sort();        
+            
         } catch (IOException | JSONException ex) {
             txtLog.append("\r\n- Exception: " + ex.getMessage());    
             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
@@ -1309,6 +1323,13 @@ public class WO extends javax.swing.JInternalFrame {
         BrandsModel.setColumnIdentifiers(BrandsColumnsName);
         DV2.setModel(BrandsModel);
         
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV2.getModel());
+        DV2.setRowSorter(sorter);
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);  
+        sorter.setSortable(0, false);         
+         
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + DV1.getValueAt(DV1.getSelectedRow(), 3) + "?web=true&extended=true&nocache=1"); 
@@ -1359,6 +1380,10 @@ public class WO extends javax.swing.JInternalFrame {
             DV2.getColumnModel().getColumn(0).setPreferredWidth(140);
             DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
             DV2.getColumnModel().getColumn(2).setPreferredWidth(80);
+            
+            sorter.setSortable(0, true); 
+            sorter.sort();            
+               
         } catch (IOException | JSONException ex) {
             txtLog.append("\r\n- Exception: " + ex.getMessage()); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     

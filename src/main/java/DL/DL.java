@@ -24,11 +24,16 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -785,8 +790,7 @@ public class DL extends javax.swing.JInternalFrame {
             String t_rep = "";
             if (!"".equals(r_time.trim())) {
                 double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
-                if (am0.length > 0)
-                {
+                if (am0.length > 0) {
                     Arrays.sort(am0);
                     double total = 0;
                     for(int i=0; i < am0.length; i++){
@@ -1149,6 +1153,14 @@ public class DL extends javax.swing.JInternalFrame {
         SitesModel.setColumnIdentifiers(SitesColumnsName);
         DV1.setModel(SitesModel);
         
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV2.getModel());
+        DV2.setRowSorter(sorter);
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);  
+        sorter.setSortable(0, false);         
+               
+        
         String authheader = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNjYmM4ZjIyMDJmNjZkMWIxZTEwMTY1OTFhZTIxNTZiZTM5NWM2ZDciLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRGlzdGlsciBBZG1pbiIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9jZGwtLS1kYXJ3aW4tMTUyOTYxMTk3MTE0MSIsImF1ZCI6ImNkbC0tLWRhcndpbi0xNTI5NjExOTcxMTQxIiwiYXV0aF90aW1lIjoxNjA4NjU4MTk1LCJ1c2VyX2lkIjoiTUpLY3RpeWNVeE9NcXFXZWFaQkZOWDZrb280MiIsInN1YiI6Ik1KS2N0aXljVXhPTXFxV2VhWkJGTlg2a29vNDIiLCJpYXQiOjE2MDg2NTgxOTUsImV4cCI6MTYwODY2MTc5NSwiZW1haWwiOiJhZG1pbkBkaXN0aWxyLmlvIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImFkbWluQGRpc3RpbHIuaW8iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.STqy_wCGUZwtbQPG4xa-sP_ytqEPmAtOMnEg45BC6kusNp3RMSzfPwFTIJoZxQYxNUckRfcxvfIHMSx0YerAqFL9GNaILFDMyL35KkgOvyBoe06awIbk9impE27rPKQNjIQtWahGCVHxwAp79m3ykXx49h74yC9Q6ey1Q4h-miz9eGsuyUVxvjzTTQn-sZGhajOrT77D2GVy1WdRcBxxp693lUL0PrqCxoHWCQF06KfPRGSh_CF21ApsKrWgC6Xi_l7L4E0SgYYLHeKlsJG-VoojP3CH0o-ZMBWGQCbTk6rutopjq0MmI3aWGNHyGH2BQkM5QpRRXlSgRl9RXdM9dA";
         //String UserAuth = Base64.getEncoder().encodeToString((txtAdmin_ID.getText().trim() + ":" + txtAdmin_PW.getText().trim()).getBytes());
         //String UserAuth = Base64.getEncoder().encodeToString((REFRESH_TKN).getBytes());
@@ -1178,7 +1190,10 @@ public class DL extends javax.swing.JInternalFrame {
 //            DV1.getColumnModel().getColumn(1).setPreferredWidth(70);
 //            DV1.getColumnModel().getColumn(2).setPreferredWidth(50);
 //            DV1.getColumnModel().getColumn(3).setPreferredWidth(400);
-   
+
+            sorter.setSortable(0, true); 
+            sorter.sort();            
+
         } catch (IOException | JSONException ex) {
             txtLog.append("\r\n- Exception: " + ex.getMessage()); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
@@ -1230,6 +1245,13 @@ public class DL extends javax.swing.JInternalFrame {
         BrandsModel.setColumnIdentifiers(BrandsColumnsName);
         DV2.setModel(BrandsModel);
         
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV2.getModel());
+        DV2.setRowSorter(sorter);
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);  
+        sorter.setSortable(0, false);         
+       
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + DV1.getValueAt(DV1.getSelectedRow(), 3) + "?extended=true&nocache=1"); 
@@ -1280,6 +1302,10 @@ public class DL extends javax.swing.JInternalFrame {
 //            DV2.getColumnModel().getColumn(0).setPreferredWidth(140);
 //            DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
 //            DV2.getColumnModel().getColumn(2).setPreferredWidth(80);
+
+            sorter.setSortable(0, true); 
+            sorter.sort();            
+   
         } catch (IOException | JSONException ex) {
             txtLog.append("\r\n- Exception: " + ex.getMessage());  
             txtLog.setCaretPosition(txtLog.getDocument().getLength());    
