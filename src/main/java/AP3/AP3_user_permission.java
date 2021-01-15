@@ -76,7 +76,8 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Dashboard 'Users'", "Users", true,"no_jira");     
             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Dashboard 'Announcements'", "Announcements", true,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Dashboard 'Promo Management'", "Promo Management", true,"no_jira");
-            _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Dashboard 'Smart Analytics'", "Smart Analytics", false,"no_jira");            
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Dashboard 'Smart Analytics'", "Smart Analytics", false,"no_jira");
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Dashboard 'Ap3 Notification'", "Ap3 Notification", true,"no_jira");             
 
             // Admin N Sites permissions
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
@@ -333,6 +334,7 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y Dashboard 'Announcements'", "Announcements", true,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y Dashboard 'Promo Management'", "Promo Management", false,"no_jira");              
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y Dashboard 'Smart Analytics'", "Smart Analytics", true,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y Dashboard 'Ap3 Notification'", "AP3 Notification", false,"no_jira"); 
             
              //SM Y Sites permissions
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
@@ -520,6 +522,7 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM N Dashboard 'Announcements'", "Announcements", false,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM N Dashboard 'Promo Management'", "Promo Management", false,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM N Dashboard 'Smart Analytics'", "Smart Analytics", false,"no_jira");
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM N Dashboard 'Ap3 Notification'", "AP3 Notification", false,"no_jira"); 
 
             //SM N Sites permissions
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
@@ -703,6 +706,7 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y Dashboard 'Announcements'", "Announcements", true,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y Dashboard 'Promo Management'", "Promo Management", false,"no_jira");                     
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y Dashboard 'Smart Analytics'", "Smart Analytics", true,"no_jira");
+            _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y Dashboard 'Ap3 Notification'", "AP3 Notification", false,"no_jira"); 
             
             // DM Y Sites permissions
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
@@ -891,6 +895,7 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM N Dashboard 'Announcements'", "Announcements", false,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM N Dashboard 'Promo Management'", "Promo Management", false,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM N Dashboard 'Smart Analytics'", "Smart Analytics", false,"no_jira");
+            _t++; Thread.sleep((long) sleep); T.Find_Text("DM N Dashboard 'Ap3 Notification'", "AP3 Notification", false,"no_jira"); 
             
             // DM N Sites permissions
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
