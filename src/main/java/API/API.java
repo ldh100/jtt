@@ -589,7 +589,7 @@ public class API extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
-        if (d1LastRow == DV1.getSelectedRow()) {
+        if (d1LastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
            return;
         }
         SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
@@ -628,7 +628,7 @@ public class API extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void DV2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV2MouseClicked
-        if (d2LastRow == DV2.getSelectedRow()) {
+        if (d2LastRow == DV2.getSelectedRow() || DV2.getRowCount() == 0) {
            return;
         }
         d2LastRow = DV2.getSelectedRow();   

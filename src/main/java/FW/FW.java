@@ -107,13 +107,14 @@ public class FW extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         _login = new javax.swing.JCheckBox();
         _all_data = new javax.swing.JCheckBox();
-        _1 = new javax.swing.JCheckBox();
-        _2 = new javax.swing.JCheckBox();
-        _orders = new javax.swing.JCheckBox();
-        _3 = new javax.swing.JCheckBox();
-        _4 = new javax.swing.JCheckBox();
+        _restaurants = new javax.swing.JCheckBox();
+        _units = new javax.swing.JCheckBox();
+        _config = new javax.swing.JCheckBox();
+        _calendar = new javax.swing.JCheckBox();
+        _users = new javax.swing.JCheckBox();
         _password = new javax.swing.JCheckBox();
         _logout = new javax.swing.JCheckBox();
+        _roles = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         cmbBrow = new javax.swing.JComboBox<>();
         btnRun = new javax.swing.JButton();
@@ -352,35 +353,35 @@ public class FW extends javax.swing.JInternalFrame {
         _all_data.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _all_data.setRequestFocusEnabled(false);
 
-        _1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _1.setText("op1");
-        _1.setContentAreaFilled(false);
-        _1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _restaurants.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _restaurants.setText("Restaurants");
+        _restaurants.setContentAreaFilled(false);
+        _restaurants.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _restaurants.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
-        _2.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _2.setText("op2");
-        _2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _2.setRequestFocusEnabled(false);
+        _units.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _units.setText("Units");
+        _units.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _units.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _units.setRequestFocusEnabled(false);
 
-        _orders.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _orders.setText("Place Order");
-        _orders.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _orders.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _orders.setRequestFocusEnabled(false);
+        _config.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _config.setText("Configuration");
+        _config.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _config.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _config.setRequestFocusEnabled(false);
 
-        _3.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _3.setText("op3");
-        _3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _3.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _3.setRequestFocusEnabled(false);
+        _calendar.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _calendar.setText("Calendar");
+        _calendar.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _calendar.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _calendar.setRequestFocusEnabled(false);
 
-        _4.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _4.setText("op4");
-        _4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _4.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _4.setRequestFocusEnabled(false);
+        _users.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _users.setText("Users");
+        _users.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _users.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _users.setRequestFocusEnabled(false);
 
         _password.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _password.setText("Forgot Password");
@@ -394,6 +395,12 @@ public class FW extends javax.swing.JInternalFrame {
         _logout.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _logout.setRequestFocusEnabled(false);
 
+        _roles.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _roles.setText("Roles Permissions");
+        _roles.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _roles.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _roles.setRequestFocusEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -401,17 +408,19 @@ public class FW extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(_1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_restaurants, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_units, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_config, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_calendar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(80, 80, 80)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                    .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                        .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -421,24 +430,23 @@ public class FW extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(16, 16, 16)
+                .addComponent(_config, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(_2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(_restaurants, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(_3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(_4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(_units, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(_calendar, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 80, 412, 176));
@@ -603,7 +611,7 @@ public class FW extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
-        if (d1LastRow == DV1.getSelectedRow()) {
+        if (d1LastRow == DV1.getSelectedRow() || DV2.getRowCount() == 0) {
            return;
         }
         //GetBrands();
@@ -776,16 +784,41 @@ public class FW extends javax.swing.JInternalFrame {
             Thread.sleep(1500);
         }
 
-        if (_orders.isSelected()) { 
-            SCOPE += ", Orders";
-            EX += " - " + "\t" + " === Orders" + "\t" + " ===== " + "\t" + " == Orders Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        if (_config.isSelected()) { 
+            SCOPE += ", Configuration";
+            EX += " - " + "\t" + " === Configuration" + "\t" + " ===== " + "\t" + " == Configuration Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             FW_orders.run();
-            EX += " - " + "\t" + " === ^ Orders" + "\t" + " ===== " + "\t" + " == ^ Orders End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === ^ Configuration" + "\t" + " ===== " + "\t" + " == ^ Configuration End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
-
-
-        // ============================== Last Blocks
+        if (_restaurants.isSelected()) { 
+            SCOPE += ", Restaurants";
+            EX += " - " + "\t" + " === Restaurants" + "\t" + " ===== " + "\t" + " == Restaurants Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            FW_orders.run();
+            EX += " - " + "\t" + " === ^ Restaurants" + "\t" + " ===== " + "\t" + " == ^ Restaurants End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }
+        if (_units.isSelected()) { 
+            SCOPE += ", Units";
+            EX += " - " + "\t" + " === Units" + "\t" + " ===== " + "\t" + " == Units Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            FW_orders.run();
+            EX += " - " + "\t" + " === ^ Units" + "\t" + " ===== " + "\t" + " == ^ Units End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }
+        if (_calendar.isSelected()) { 
+            SCOPE += ", Calendar";
+            EX += " - " + "\t" + " === Calendar" + "\t" + " ===== " + "\t" + " == Calendar Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            FW_orders.run();
+            EX += " - " + "\t" + " === ^ Calendar" + "\t" + " ===== " + "\t" + " == ^ Calendar End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }        // ============================== Last Blocks
+        if (_users.isSelected()) { 
+            SCOPE += ", Users";
+            EX += " - " + "\t" + " === Users" + "\t" + " ===== " + "\t" + " == Users Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            FW_orders.run();
+            EX += " - " + "\t" + " === ^ Users" + "\t" + " ===== " + "\t" + " == ^ Users End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }
         if (_logout.isSelected()) { 
             SCOPE += ", LogOut";
             EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
@@ -952,8 +985,6 @@ public class FW extends javax.swing.JInternalFrame {
         cmbEnv.addItem("Development");
         cmbEnv.addItem("Production");         
         cmbEnv.setSelectedIndex(0); // ================
-   
-        MENU_IDS = new ArrayList<>();
         
         Load = false;
         LOAD_ENV();
@@ -1099,7 +1130,7 @@ public class FW extends javax.swing.JInternalFrame {
         LOAD_CONFIG();
         
         Get_FW_TKN();
-        
+        GetMarkets(); 
         GetRestorants(); 
         GetUnits();
     }
@@ -1144,6 +1175,54 @@ public class FW extends javax.swing.JInternalFrame {
         FW_TKN = "eyJhbGciOiJLTVMiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiIzNzNlNDI0Nzk4Yzg0OWQ4ODc4YWMyMzA4MTU3ZWIzYSIsInNjb3BlcyI6ImZ3X2FkbWluIiwiZXhwIjozMjI5MDU5NjcxNTc2LCJpYXQiOjE2MTA2NDE4MzV9.AQICAHiBfb4VzGsFjR/lWEg3l+aEpBYOMnEN/6K12FCw0mwumgGTFYAKpKygG6SZpdBuqdXjAAABCzCCAQcGCSqGSIb3DQEHBqCB+TCB9gIBADCB8AYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAxgZF+0NzDVdOxA6AoCARCAgcKF51SBRmsH28Wxnug0tc7XMlC0dsZh8iEpiiMV3XKUuhs0JR8UxLzI5G2X50D+JE1WlNcNg6LYoaAuFcFc4a48MiP/5ZLy+a9orNtCkqFA32Ww7/zH8z3nKO3b89vAKi/iuxTRqWnHRqKac1zfpxFgepRkRUWEhmNHuwgJupjgJCSX2pO9oRUjoWEUBMcmBG0xhjqVITGeeViBufSz+GlHp7+vFTU7IaeHhE2YTRokORHrP3VHN13mSzE72xaXmlvcXw==";
     }
     
+    private void GetMarkets() {
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("\r\n-Load Markets ...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        MARKETS = "";
+        try {
+            HttpGet httpget = new HttpGet(BaseAPI + "/markets"); 
+            httpget.setHeader("Authorization",  "Bearer " + userTKN); //FW_TKN);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 300) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    throw new ClientProtocolException("Response: " + response.getStatusLine().getStatusCode() + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+
+            String responseRest = httpclient.execute(httpget, responseHandler);   
+            JSONArray Markets = new JSONArray(responseRest);
+            for (int i = 0; i < Markets.length(); i++) {             
+                JSONObject Market = Markets.getJSONObject(i);
+                MARKETS += Market.getString("id") + ":" + Market.getString("name") + "\r\n";   
+            }
+        } catch (IOException | JSONException ex) {
+            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());      
+        }         
+        finally {
+            try {
+                httpclient.close();
+            } catch (IOException ex) {
+                txtLog.append("\r\n- Exception: " + ex.getMessage());
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());    
+            }
+        }
+        txtLog.append("\r\n== " + BaseAPI + "/markets  > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();
+        
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
     private void GetRestorants() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -1191,7 +1270,6 @@ public class FW extends javax.swing.JInternalFrame {
             for (int i = 0; i < RESTS.length(); i++) {
                 Restaurant = "?";
                 Market = "?";
-                //Employee = "?";
                 Status = "?";
                 id = "?";                
                 JSONObject Rest = RESTS.getJSONObject(i);
@@ -1200,6 +1278,10 @@ public class FW extends javax.swing.JInternalFrame {
                 } 
                 if(Rest.has("marketId")){
                     Market = Rest.getString("marketId");
+                    if(MARKETS.contains(Market)){
+                       Market =  MARKETS.substring(MARKETS.indexOf(Market) + Market.length() + 1);
+                       Market = Market.substring(0, Market.indexOf("\r\n")).trim();
+                    }
                 } 
 //                if(Rest.has("Employee")){
 //                    Employee = Rest.getString("Employee");
@@ -1214,10 +1296,10 @@ public class FW extends javax.swing.JInternalFrame {
             }
             DV1.setModel(SitesModel);
             DV1.setDefaultEditor(Object.class, null);
-            DV1.getColumnModel().getColumn(0).setPreferredWidth(150);
-            DV1.getColumnModel().getColumn(1).setPreferredWidth(70);
-            DV1.getColumnModel().getColumn(2).setPreferredWidth(70);
-            DV1.getColumnModel().getColumn(3).setPreferredWidth(120);
+            DV1.getColumnModel().getColumn(0).setPreferredWidth(170);
+            DV1.getColumnModel().getColumn(1).setPreferredWidth(80);
+            DV1.getColumnModel().getColumn(2).setPreferredWidth(100);
+            DV1.getColumnModel().getColumn(3).setPreferredWidth(160);
             
             sorter.setSortable(0, true); 
             sorter.sort();            
@@ -1255,8 +1337,7 @@ public class FW extends javax.swing.JInternalFrame {
         }
         lblSITES.setText("Restorants (" + DV1.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }
-    
+    }   
     private void GetUnits() {
         d2LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -1303,8 +1384,7 @@ public class FW extends javax.swing.JInternalFrame {
             JSONArray RESTS = new JSONArray(responseRest);
             for (int i = 0; i < RESTS.length(); i++) {
                 Unit = "?";
-                Market = "?";
-                //Employee = "?";
+                Market = "?";;
                 Status = "?";
                 id = "?";                
                 JSONObject Rest = RESTS.getJSONObject(i);
@@ -1313,10 +1393,11 @@ public class FW extends javax.swing.JInternalFrame {
                 } 
                 if(Rest.has("marketId")){
                     Market = Rest.getString("marketId");
-                } 
-//                if(Rest.has("Employee")){
-//                    Employee = Rest.getString("Employee");
-//                }  
+                    if(MARKETS.contains(Market)){
+                       Market =  MARKETS.substring(MARKETS.indexOf(Market) + Market.length() + 1);
+                       Market = Market.substring(0, Market.indexOf("\r\n")).trim();
+                    }                    
+                }  
                 if(Rest.has("active")){
                     if(Rest.getBoolean("active")){
                         Status = "Active";
@@ -1331,10 +1412,10 @@ public class FW extends javax.swing.JInternalFrame {
             }
             DV2.setModel(SitesModel);
             DV2.setDefaultEditor(Object.class, null);
-            DV2.getColumnModel().getColumn(0).setPreferredWidth(150);
-            DV2.getColumnModel().getColumn(1).setPreferredWidth(70);
-            DV2.getColumnModel().getColumn(2).setPreferredWidth(70);
-            DV2.getColumnModel().getColumn(3).setPreferredWidth(120);
+            DV2.getColumnModel().getColumn(0).setPreferredWidth(170);
+            DV2.getColumnModel().getColumn(1).setPreferredWidth(80);
+            DV2.getColumnModel().getColumn(2).setPreferredWidth(100);
+            DV2.getColumnModel().getColumn(3).setPreferredWidth(160);
             
             sorter.setSortable(0, true); 
             sorter.sort();            
@@ -1417,14 +1498,15 @@ public class FW extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("nWaitElement:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitElement.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("nWaitLoad:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitLoad.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
 
-                c = C.substring(C.indexOf("_1:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _1.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_2:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _2.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_3:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _3.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_4:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _4.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_orders:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _orders.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_password:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _password.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_config:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _config.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_restaurants:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _restaurants.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_units:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _units.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_calendar:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _calendar.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_users:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _users.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_all_data:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _all_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_password:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _password.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_logout:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _logout.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_roles:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _roles.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 CONFIG = true;
                 txtLog.append("\r\n\r\n=== LOAD_CONFIG > OK");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1475,14 +1557,15 @@ public class FW extends javax.swing.JInternalFrame {
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
             C += "nWaitLoad: " + nWaitLoad.getValue()+ "\r\n";
 
-            C += "_1: " + _1.isSelected() + "\r\n";
-            C += "_2: " + _2.isSelected() + "\r\n";
-            C += "_3: " + _3.isSelected() + "\r\n";
-            C += "_4: " + _4.isSelected() + "\r\n";
-            C += "_orders: " + _orders.isSelected() + "\r\n";
-            C += "_password: " + _password.isSelected() + "\r\n";         
+            C += "_restaurants: " + _restaurants.isSelected() + "\r\n";
+            C += "_units: " + _units.isSelected() + "\r\n";
+            C += "_calendar: " + _calendar.isSelected() + "\r\n";
+            C += "_users: " + _users.isSelected() + "\r\n";
+            C += "_config: " + _config.isSelected() + "\r\n";
             C += "_all_data: " + _all_data.isSelected() + "\r\n";
+            C += "_password: " + _password.isSelected() + "\r\n";         
             C += "_logout: " + _logout.isSelected() + "\r\n";       
+            C += "_roles: " + _roles.isSelected() + "\r\n";       
 
         } catch (Exception ex)  {
             txtLog.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
@@ -1685,9 +1768,7 @@ public class FW extends javax.swing.JInternalFrame {
     
     private int d1LastRow = -1; 
     private int d2LastRow = -1; 
-    private List<String> GROUP_IDS;
-    private List<String> COMP_IDS; 
-    private List<String> MENU_IDS;  
+  
     private boolean CONFIG = false;
     private String C = "";
     private String userID;
@@ -1709,6 +1790,7 @@ public class FW extends javax.swing.JInternalFrame {
 
     private static String UNIT = "";
     private static String UnitID = "";
+    private String MARKETS;
 
     private static String COUNTRY = "COUNTRY";
     private static String BaseAPI;
@@ -1719,17 +1801,18 @@ public class FW extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;
-    private javax.swing.JCheckBox _1;
-    private javax.swing.JCheckBox _2;
-    private javax.swing.JCheckBox _3;
-    private javax.swing.JCheckBox _4;
     private javax.swing.JCheckBox _all_data;
+    private javax.swing.JCheckBox _calendar;
+    private javax.swing.JCheckBox _config;
     private javax.swing.JCheckBox _headless;
     private javax.swing.JCheckBox _login;
     private javax.swing.JCheckBox _logout;
-    private javax.swing.JCheckBox _orders;
     private javax.swing.JCheckBox _password;
+    private javax.swing.JCheckBox _restaurants;
+    private javax.swing.JCheckBox _roles;
     private javax.swing.JCheckBox _slack;
+    private javax.swing.JCheckBox _units;
+    private javax.swing.JCheckBox _users;
     private javax.swing.JButton btnExel;
     private javax.swing.JButton btnFails;
     private javax.swing.JButton btnLog;

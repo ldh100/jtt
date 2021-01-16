@@ -383,18 +383,21 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="_1" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_2" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_orders" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_3" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_4" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="_restaurants" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="_units" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="_config" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="_calendar" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="_users" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
                       <Component id="_login" alignment="1" min="-2" pref="124" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="_logout" alignment="1" min="-2" pref="114" max="-2" attributes="0"/>
-                      <Component id="_all_data" alignment="1" pref="139" max="32767" attributes="0"/>
-                      <Component id="_password" alignment="1" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="_logout" alignment="1" min="-2" pref="114" max="-2" attributes="0"/>
+                          <Component id="_all_data" alignment="1" pref="139" max="32767" attributes="0"/>
+                          <Component id="_password" alignment="1" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="_roles" min="-2" pref="131" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="27" max="32767" attributes="0"/>
               </Group>
@@ -408,28 +411,26 @@
                       <Component id="_login" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
                       <Component id="_all_data" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                          <Component id="_orders" min="-2" pref="14" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="_logout" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                              <Component id="_1" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="_password" min="-2" pref="14" max="-2" attributes="0"/>
-                      </Group>
+                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                  <Component id="_config" min="-2" pref="14" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="_restaurants" min="-2" pref="14" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="_units" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="_password" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="_2" min="-2" pref="14" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="_calendar" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="_logout" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="_3" min="-2" pref="14" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="_4" min="-2" pref="14" max="-2" attributes="0"/>
-                  <EmptySpace pref="41" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="_users" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="_roles" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="37" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -459,56 +460,56 @@
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="_1">
+        <Component class="javax.swing.JCheckBox" name="_restaurants">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="op1"/>
+            <Property name="text" type="java.lang.String" value="Restaurants"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="_2">
+        <Component class="javax.swing.JCheckBox" name="_units">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="op2"/>
+            <Property name="text" type="java.lang.String" value="Units"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="_orders">
+        <Component class="javax.swing.JCheckBox" name="_config">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Place Order"/>
+            <Property name="text" type="java.lang.String" value="Configuration"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="_3">
+        <Component class="javax.swing.JCheckBox" name="_calendar">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="op3"/>
+            <Property name="text" type="java.lang.String" value="Calendar"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="_4">
+        <Component class="javax.swing.JCheckBox" name="_users">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="op4"/>
+            <Property name="text" type="java.lang.String" value="Users"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
@@ -531,6 +532,17 @@
               <Font name="Dialog" size="11" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="User Logout"/>
+            <Property name="horizontalAlignment" type="int" value="11"/>
+            <Property name="horizontalTextPosition" type="int" value="10"/>
+            <Property name="requestFocusEnabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="_roles">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Roles Permissions"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>

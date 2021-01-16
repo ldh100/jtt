@@ -781,7 +781,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
-        if (d1LastRow == DV1.getSelectedRow()) {
+        if (d1LastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
            return;
         }
         SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
@@ -861,7 +861,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void DV2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV2MouseClicked
-        if (d2LastRow == DV2.getSelectedRow()) {
+        if (d2LastRow == DV2.getSelectedRow() || DV2.getRowCount() == 0) {
            return;
         }
         d2LastRow = DV2.getSelectedRow(); 
@@ -1779,13 +1779,13 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLog.append("\r\n-Load Sector/Companies(Menus) ...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         CloseableHttpClient httpclient = HttpClients.createDefault();
+        if(sw1.isRunning()){
+            sw1.reset();
+        } 
         try { 
             cmbComp.removeAllItems();
             COMP_IDS = new ArrayList<>();
-            if(sw1.isRunning()){
-            sw1.reset();
-        }
-        sw1.start();        
+            sw1.start();        
      
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
@@ -1852,11 +1852,11 @@ public class AP3 extends javax.swing.JInternalFrame {
         CompanyID = "";
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        try { 
-            if(sw1.isRunning()){
+        if(sw1.isRunning()){
             sw1.reset();
-        }
-        sw1.start();        
+        }  
+        try { 
+            sw1.start();        
      
             HttpGet httpget = new HttpGet(BaseAPI + "/location/brand/" + BrandID + "?extended=true&nocache=1"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);

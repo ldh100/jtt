@@ -12,7 +12,7 @@ import static DL.DL.*;
  *
  * @author Oleg.Spozito
  */
-public class DL_logout {
+public class DL_metric_data {
     public static void run() throws InterruptedException {   
          
     }
