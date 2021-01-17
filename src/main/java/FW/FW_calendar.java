@@ -12,7 +12,7 @@ import static WO.WO.*;
  *
  * @author Oleg.Spozito
  */
-public class FW_orders {
+public class FW_calendar {
     public static void run() throws InterruptedException { 
 
         

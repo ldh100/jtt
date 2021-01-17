@@ -176,8 +176,6 @@ public class AP3_menu_manager {
                 }            
             }
         if(T_Index > -1){
-//            _t++; Thread.sleep((long) sleep); T.Scroll_to_Element("Scroll to Menu " + GL_MENU, L2.get(T_Index), "no_jira");
-//                if (FAIL) { return;}
             _t++; T.Find_Text("Fund 'Search...' text", "Search Menus", true,"no_jira");   
                 if (FAIL) { return;}             
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", "no_jira"); 
@@ -250,7 +248,8 @@ public class AP3_menu_manager {
 
             // ================ New Group
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'NEW GROUP'", "xpath", "//*[contains(text(), 'new group')]", "no_jira"); 
-                if (FAIL) { return;}     
+                if (FAIL) { return;}   
+            Thread.sleep(500);     
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Group Name", "css", "[aria-label='Modifier Group Name']", "New Group " + New_ID, false, "no_jira");
                 if (FAIL) { return;}  
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Label In App", "css", "[aria-label='Label In App']", "Label " + New_ID , false, "no_jira");
@@ -558,9 +557,7 @@ public class AP3_menu_manager {
             // ======================== Modify Group / Modifiers
             _t++; Thread.sleep((long) sleep); T.Element_Click("Select 1st Group to modify", L0.get(2), "no_jira"); // 1st > index 2
                 if (FAIL) { return;} 
-                Thread.sleep(500);
-//            _t++; T.Element_By_Path_Text_Select_Copy("Name", "xpath", "//input[@aria-label='Modifier Group Name']", "no_jira"); 
-//                if (FAIL) { return;}    
+            Thread.sleep(500); 
             _t++; T.Element_By_Path_Text_Select_Copy("Label In App", "css", "[aria-label='Label In App']", "no_jira"); 
                 if (FAIL) { return;}          
             _t++; T.Element_By_Path_Text_Select_Copy("Group Chit #", "css", "[min='0']", "no_jira"); 
@@ -866,7 +863,7 @@ public class AP3_menu_manager {
             Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}  
-            Thread.sleep(1000);
+            Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent","no_jira"); 
                 if (FAIL) { return;}            
 
@@ -893,7 +890,7 @@ public class AP3_menu_manager {
             Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Element_Click("Added Menu Set 'dots' Click", L2.get(1), "no_jira");
                 if (FAIL) { return;}   
-            Thread.sleep(500);
+            Thread.sleep(1000);
             _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira"); 
                     if (FAIL) { return;}                
             _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find Menu Edit Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
@@ -970,6 +967,7 @@ public class AP3_menu_manager {
         if ("Found".equals(t)) {     
             _t++; _f++;
             EX += _t + "\t" + "Navigate Back after Publish OK" + "\t" + "MM 'Sector' page" + "\t" + "Dialog 'Leave without publishing?'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+            F += _t + " > " + "Dialog 'Leave without publishing?' after Published OK" + "\r\n";
             _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true,"no_jira"); 
                 if (FAIL) { return; }   
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", "no_jira"); 
@@ -1031,8 +1029,6 @@ public class AP3_menu_manager {
                     }            
                 }
             if(T_Index > -1){
-    //            _t++; Thread.sleep((long) sleep); T.Scroll_to_Element("Scroll to Menu " + GL_MENU, L2.get(T_Index), "no_jira");
-    //                if (FAIL) { return;}
                 _t++; T.Find_Text("Fund 'Search...' text", "Search Menus", true,"no_jira");   
                     if (FAIL) { return;}             
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", "no_jira"); 
@@ -1053,7 +1049,7 @@ public class AP3_menu_manager {
                     if (FAIL) { return;}   
                 _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Scroll to 'EDIT MENU' button", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira");        
                     if (FAIL) { return;}  
-                 Thread.sleep(1000);
+                 Thread.sleep(500);
                 _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                     if (FAIL) { return;}  
                 _t++; Thread.sleep((long) sleep); T.Page_URL("Current page URL", "no_jira");
@@ -1065,7 +1061,7 @@ public class AP3_menu_manager {
                 Thread.sleep(500); 
                 _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                     if (FAIL) { return;} 
-                Thread.sleep(1000);
+                Thread.sleep(500);
                 _t++; Thread.sleep((long) sleep); T.List_L2(GL_MENU + " Global Menus ID Count", "css", "[menu-id]", "no_jira");      
                 _t++; Thread.sleep((long) sleep); T.List_L0(GL_MENU + " Global Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", "no_jira");              
                     if(L0.size() == L2.size()){
@@ -1109,8 +1105,7 @@ public class AP3_menu_manager {
                     if (FAIL) { return;}           //z03ykAm5JNszPA7Ne3X ? >> NWEJgN87Q3Sw46JaQ1Q ===================================================================
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'IMPORT'", "xpath", "//*[contains(text(), 'IMPORT')]", "no_jira"); 
                     if (FAIL) { return;}  
-                _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for 'IMPORT' result...", "xpath", "//i[@class='v-icon v-icon--link mdi mdi-delete-forever theme--light']", "no_jira"); 
-                    //if (FAIL) {  return; }     
+                _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for 'IMPORT' result...", "xpath", "//i[@class='v-icon v-icon--link mdi mdi-delete-forever theme--light']", "no_jira");     
                     if (!FAIL) {               
                         Thread.sleep(500); 
                         _t++; Thread.sleep((long) sleep); T.List_L0("Menus + 1 Imported Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", "no_jira");             
@@ -1139,7 +1134,7 @@ public class AP3_menu_manager {
                         Thread.sleep(500); 
                         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                             if (FAIL) { return;}    
-                        Thread.sleep(1000);
+                        Thread.sleep(500);
                         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent","no_jira"); 
                             if (FAIL) { return;}  
 
@@ -1435,8 +1430,6 @@ public class AP3_menu_manager {
                 if (FAIL) { return;}             
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", "no_jira"); 
                 if (FAIL) { return;}
-//            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Local Menu Search", "css", "[aria-label='Search Menus']", BRAND, "no_jira");
-//                if (FAIL) { return;} 
             if(Location.isEmpty()){
                 _t++; 
                 _f++;
@@ -1451,46 +1444,87 @@ public class AP3_menu_manager {
             Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;} 
-            Thread.sleep(500);   
-            
-            
-            // nexr local ......
-            /*            
-            // Bulk update  DEBUG
+            Thread.sleep(500);        
+            _t++; Thread.sleep((long) sleep); T.To_Top("no_jira");        
+             Thread.sleep(500);
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira"); 
+                if (FAIL) { return;} 
+            Thread.sleep(500); 
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+                if (FAIL) { return;}    
+            Thread.sleep(500); 
+            _t++; Thread.sleep((long) sleep); T.List_L1("Menu Sets Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", "no_jira");             
+                if (FAIL) { return;}
+                for (int i = 0; i < L1.size(); i++) {
+                    _t++; T.Element_Attribute("Menu Set (Index " + i + ")", L1.get(i), "textContent", "no_jira");  
+                }               
 
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Click 1st Menu Set", L1.get(0), "no_jira"); 
+                if (FAIL) { return;}    
+            Thread.sleep(500);                 
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+                if (FAIL) { return;}                         
+          
+            // Bulk update  DEBUG, Hide inactive test steps 
             _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Bulk' container", "xpath", "//div[@class='layout justify-left align-center']", "no_jira");
-            if (FAIL) { return;}
+                if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find 'Bulk' default prompt", e1,"xpath", ".//span[@class='Button-Primary-Center']", "no_jira");
             _t++; Thread.sleep((long) sleep); T.Element_Child_E2("Find 'Bulk' select All checkbox", e1,"xpath", ".//input[@role='checkbox']", "no_jira");
-            if (FAIL) { return;}
+                if (FAIL) { return;}           
             _t++; Thread.sleep((long) sleep); T.Element_Click("Check 'Bulk' select All", e2,"no_jira");
-            if (FAIL) { return;}
-
+                if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Element_Child_E2("Find 'Bulk' updated prompt", e1,"xpath", ".//span[@class='Button-Primary-Center']", "no_jira");
-            if (FAIL) { return;}
+                if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Element_Text("Find 'Bulk' updated prompt text", e2,"no_jira");
             _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'Update X Items' prompt", e2, "no_jira");
-            if (FAIL) { return;}
-
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'In Stock'", "css", "[aria-label='In Stock']", "no_jira");
-            if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Visible In App'", "css", "[aria-label='Visible In App']", "no_jira");
-            if (FAIL) { return;}
+                if (FAIL) { return;}
+            
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Hide In App'", "css", "[aria-label='Hide In App']", "no_jira");
+                if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'APPLY Changes'", "xpath", "//div[contains(text(), 'Apply Changes')]", "no_jira");
-            if (FAIL) { return;}
-
-            // Hide inactive test steps
-            _t++; Thread.sleep((long) sleep); T.Element_E2_Find("Find 'Hide Inactive' container", "xpath", "//div[@class='flex offset-xs10'']", "no_jira");
-            if (FAIL) { return;}       //class ='flex offset-xs10'
-            _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Active Items Count", e1,"tagName", "tr", "no_jira");
-            if (FAIL) { return;}
-            for (int i = 0; i < L0.size(); i++) {
-            _t++; T.Element_Text("Item Row Text", L1.get(i), "no_jira");
-            if (FAIL) { return;}
-            }
-            int Item_count  = L1.size();
-
-            */       
+                if (FAIL) { return;}
+            
+            _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Hide Inactive' container", "xpath", "//div[@class='flex offset-xs10']", "no_jira");
+                if (FAIL) { return;}             
+            _t++; Thread.sleep((long) sleep); T.Element_Child_E2("Find 'Hide Inactive' checkbox", e1, "xpath", ".//input[@role='checkbox']", "no_jira");
+                if (FAIL) { return;}   
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Check 'Hide Inactive'", e2,"no_jira");
+                if (FAIL) { return;}  // =============================               
+            _t++; Thread.sleep((long) sleep); T.List_L1("Hidden Items Rows Count", "tagName", "tr", "no_jira");             
+            _t++; T.Element_Text("Items Row Header", L1.get(0), "no_jira"); 
+                if (FAIL) { return;} 
+                for (int i = 2; i < L1.size(); i++) {
+                    _t++; T.List_TR_TDs("Items Row Data", L1, i, "no_jira");   
+                        if (FAIL) { return;}  
+                }  
+            _t++; Thread.sleep((long) sleep); T.Element_Click("UnCheck 'Hide Inactive'", e2,"no_jira");
+                if (FAIL) { return;}  // =============================        
+            _t++; Thread.sleep((long) sleep); T.List_L1("Visible Items Rows Count", "tagName", "tr", "no_jira"); 
+            _t++; T.Element_Text("Items Row Header", L1.get(0), "no_jira"); 
+                if (FAIL) { return;} 
+                for (int i = 2; i < L1.size(); i++) {
+                    _t++; T.List_TR_TDs("Items Row Data", L1, i, "no_jira");   
+                        if (FAIL) { return;}  
+                }             
+            _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Bulk' container", "xpath", "//div[@class='layout justify-left align-center']", "no_jira");
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find 'Bulk' default prompt", e1,"xpath", ".//span[@class='Button-Primary-Center']", "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_Child_E2("Find 'Bulk' select All checkbox", e1,"xpath", ".//input[@role='checkbox']", "no_jira");
+                if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Check 'Bulk' select All", e2,"no_jira");
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Element_Child_E2("Find 'Bulk' updated prompt", e1,"xpath", ".//span[@class='Button-Primary-Center']", "no_jira");
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Element_Text("Find 'Bulk' updated prompt text", e2,"no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'Update X Items' prompt", e2, "no_jira");
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'In Stock'", "css", "[aria-label='In Stock']", "no_jira");
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Visible In App'", "css", "[aria-label='Visible In App']", "no_jira");
+                if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'APPLY Changes'", "xpath", "//div[contains(text(), 'Apply Changes')]", "no_jira");
+                if (FAIL) { return;}  
+            _t++; Thread.sleep((long) sleep); T.List_L1("Visible Item Rows Count", "tagName", "tr", "no_jira");                     
             
         } else {
             _t++; 
@@ -1499,7 +1533,15 @@ public class AP3_menu_manager {
             return;
         } 
         _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back","MM 'Local Brands' page","MM 'Sector' page", "no_jira"); 
-            //if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true,"no_jira"); 
+            if (FAIL) { return; }   
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", "no_jira"); 
+            if (FAIL) { return; }         
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", "no_jira"); 
+            if (FAIL) { return; }     
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", "no_jira"); 
+            if (FAIL) { return;}          
+        
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for page load...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}               

@@ -156,9 +156,9 @@ public class AP3 extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("AP3 Automation Manager >>> loading, please wait ... ... ... ...");
-        setMinimumSize(new java.awt.Dimension(854, 529));
+        setMinimumSize(new java.awt.Dimension(860, 532));
         setName("AP3"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(854, 529));
+        setPreferredSize(new java.awt.Dimension(860, 532));
         setVerifyInputWhenFocusTarget(false);
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -345,7 +345,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         _notifications.setRequestFocusEnabled(false);
 
         txtDH_Id.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtDH_Id.setText("NWEJgN87Q3Sw46JaQ1Q");
+        txtDH_Id.setText("Fails, no test");
 
         lblSITES15.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -950,7 +950,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         IM_ID = txtADMIN_ID.getText();
         IM_PW = txtADMIN_ID.getText();
         ALL_DATA = _all_data.isSelected();
-        DH_Menu_ID = txtDH_Id.getText();
+        DH_Menu_ID = txtDH_Id.getText(); // like NWEJgN87Q3Sw46JaQ1Q, length > 18
         SCOPE = "";
 
         if(DV1.getRowCount() > 0) {

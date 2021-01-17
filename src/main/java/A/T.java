@@ -2271,7 +2271,7 @@ public class T {
             if(NAME.startsWith("Station") && !t.toLowerCase().contains("no data") && TDS == 5 ){ // <<< td[5] - Status
                 //   check status 
                 STAT = X.get(X.size() - 1).findElement(By.xpath(".//i[contains(@class, 'icon mdi mdi-eye')]")).getAttribute("class").trim();
-                if(STAT != "" && STAT.contains("mdi-eye-off")){
+                if(!STAT.equals("") && STAT.contains("mdi-eye-off")){
                     STAT = "Hidden in App";         //   v-icon mdi mdi-eye-off theme--light none--text
                 } else {
                     STAT = "Display in App";        //   v-icon mdi mdi-eye theme--light

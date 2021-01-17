@@ -341,7 +341,7 @@ public class FW extends javax.swing.JInternalFrame {
 
         _login.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _login.setSelected(true);
-        _login.setText("Login ");
+        _login.setText("Admin Login ");
         _login.setEnabled(false);
         _login.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
@@ -681,6 +681,15 @@ public class FW extends javax.swing.JInternalFrame {
         _f = 0; // Failed
         _w = 0; // Warn
         r_time = "";
+        
+        ADMIN_ID = txtAdmin_ID.getText();
+        ADMIN_PW = txtAdmin_PW.getText();
+        PARTNER_ID = txtPartner_ID.getText();
+        PARTNER_PW = txtPartner_PW.getText();
+        UM_ID = txtUManager_ID.getText();
+        UM_PW = txtUManager_PW.getText(); 
+        FM_ID = txtFWManager_ID.getText();
+        FM_PW = txtFWManager_PW.getText();       
 
         ALL_DATA = _all_data.isSelected();
         SCOPE = "";
@@ -787,35 +796,43 @@ public class FW extends javax.swing.JInternalFrame {
         if (_config.isSelected()) { 
             SCOPE += ", Configuration";
             EX += " - " + "\t" + " === Configuration" + "\t" + " ===== " + "\t" + " == Configuration Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            FW_orders.run();
+            FW_config.run();
             EX += " - " + "\t" + " === ^ Configuration" + "\t" + " ===== " + "\t" + " == ^ Configuration End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
         if (_restaurants.isSelected()) { 
             SCOPE += ", Restaurants";
             EX += " - " + "\t" + " === Restaurants" + "\t" + " ===== " + "\t" + " == Restaurants Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            FW_orders.run();
+            FW_restaurants.run();
             EX += " - " + "\t" + " === ^ Restaurants" + "\t" + " ===== " + "\t" + " == ^ Restaurants End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
         if (_units.isSelected()) { 
             SCOPE += ", Units";
             EX += " - " + "\t" + " === Units" + "\t" + " ===== " + "\t" + " == Units Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            FW_orders.run();
+            FW_units.run();
             EX += " - " + "\t" + " === ^ Units" + "\t" + " ===== " + "\t" + " == ^ Units End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
         if (_calendar.isSelected()) { 
             SCOPE += ", Calendar";
             EX += " - " + "\t" + " === Calendar" + "\t" + " ===== " + "\t" + " == Calendar Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            FW_orders.run();
+            FW_calendar.run();
             EX += " - " + "\t" + " === ^ Calendar" + "\t" + " ===== " + "\t" + " == ^ Calendar End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
-        }        // ============================== Last Blocks
+        }        
+        if (_roles.isSelected()) { 
+            SCOPE += ", User Permission";
+            EX += " - " + "\t" + " === User Permission" + "\t" + " ===== " + "\t" + " == User Permission Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            FW_user_permission.run();
+            EX += " - " + "\t" + " === ^ User Permission" + "\t" + " ===== " + "\t" + " == ^ User Permission End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }  
+        // ============================== Last Blocks
         if (_users.isSelected()) { 
             SCOPE += ", Users";
             EX += " - " + "\t" + " === Users" + "\t" + " ===== " + "\t" + " == Users Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            FW_orders.run();
+            FW_users.run();
             EX += " - " + "\t" + " === ^ Users" + "\t" + " ===== " + "\t" + " == ^ Users End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
@@ -912,6 +929,7 @@ public class FW extends javax.swing.JInternalFrame {
             btnFails.setEnabled(false);
         }
         btnExel.setEnabled(true);
+        
         
         LOG_UPDATE(); // ========================================================
         
@@ -1795,6 +1813,15 @@ public class FW extends javax.swing.JInternalFrame {
     private static String COUNTRY = "COUNTRY";
     private static String BaseAPI;
     private static String TZone; 
+    
+    public static String ADMIN_ID;
+    public static String ADMIN_PW;
+    public static String PARTNER_ID; 
+    public static String PARTNER_PW;
+    public static String UM_ID; 
+    public static String UM_PW;  
+    public static String FM_ID; 
+    public static String FM_PW; 
     private static String New_ID = "";
     
 
