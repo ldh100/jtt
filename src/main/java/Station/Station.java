@@ -20,9 +20,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.Duration;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -539,6 +544,13 @@ public class Station extends javax.swing.JInternalFrame {
         SitesModel.setColumnIdentifiers(SitesColumnsName);
         DV_Sites.setModel(SitesModel);
         
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV_Sites.getModel());
+        DV_Sites.setRowSorter(sorter);
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);  
+        sorter.setSortable(0, false);         
+                 
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try { 
             HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + appId);   //  + "?web=true&expanded=true"    
@@ -598,7 +610,10 @@ public class Station extends javax.swing.JInternalFrame {
             DV_Sites.getColumnModel().getColumn(1).setPreferredWidth(70);
             DV_Sites.getColumnModel().getColumn(2).setPreferredWidth(50);
             DV_Sites.getColumnModel().getColumn(3).setPreferredWidth(400);
-   
+            
+            sorter.setSortable(0, true); 
+            sorter.sort();            
+      
         } catch (IOException | JSONException ex) {
             txtLog.append("\r\n- Exception: " + ex.getMessage());   
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
@@ -662,6 +677,13 @@ public class Station extends javax.swing.JInternalFrame {
         BrandsModel.setColumnIdentifiers(BrandsColumnsName);
         DV_Brands.setModel(BrandsModel);
         
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV_Brands.getModel());
+        DV_Brands.setRowSorter(sorter);
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);  
+        sorter.setSortable(0, false);                  
+        
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 3) + "?extended=true&nocache=1"); 
@@ -722,6 +744,10 @@ public class Station extends javax.swing.JInternalFrame {
             DV_Brands.getColumnModel().getColumn(0).setPreferredWidth(140);
             DV_Brands.getColumnModel().getColumn(1).setPreferredWidth(140);
             DV_Brands.getColumnModel().getColumn(2).setPreferredWidth(80);
+            
+            sorter.setSortable(0, true); 
+            sorter.sort();            
+               
         } catch (IOException | JSONException ex) {
             txtLog.append("\r\n- Exception: " + ex.getMessage()); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     

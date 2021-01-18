@@ -944,7 +944,7 @@ if(!R.equals("OK")){
             String t_rep = "";
             if (!"".equals(r_time.trim())) {
                 double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
-                if (am0.length > 0){
+                if (am0.length > 0) {
                     Arrays.sort(am0);
                     double total = 0;
                     for(int i=0; i < am0.length; i++){

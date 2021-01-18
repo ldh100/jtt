@@ -34,7 +34,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -585,7 +589,7 @@ public class API extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
-        if (d1LastRow == DV1.getSelectedRow()) {
+        if (d1LastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
            return;
         }
         SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
@@ -624,7 +628,7 @@ public class API extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void DV2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV2MouseClicked
-        if (d2LastRow == DV2.getSelectedRow()) {
+        if (d2LastRow == DV2.getSelectedRow() || DV2.getRowCount() == 0) {
            return;
         }
         d2LastRow = DV2.getSelectedRow();   
@@ -2208,6 +2212,13 @@ public class API extends javax.swing.JInternalFrame {
         SitesModel.setColumnIdentifiers(SitesColumnsName);
         DV1.setModel(SitesModel);
         
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV1.getModel());
+        DV1.setRowSorter(sorter);
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);  
+        sorter.setSortable(0, false);         
+                  
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try { 
             HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + appId);         
@@ -2268,6 +2279,9 @@ public class API extends javax.swing.JInternalFrame {
             DV1.getColumnModel().getColumn(1).setPreferredWidth(70);
             DV1.getColumnModel().getColumn(2).setPreferredWidth(50);
             DV1.getColumnModel().getColumn(3).setPreferredWidth(400);
+            
+            sorter.setSortable(0, true); 
+            sorter.sort();            
    
         } catch (IOException | JSONException ex) {
             txtLog.append("\r\n- Exception: " + ex.getMessage());   
@@ -2318,6 +2332,13 @@ public class API extends javax.swing.JInternalFrame {
         BrandsModel.setColumnIdentifiers(BrandsColumnsName);
         DV2.setModel(BrandsModel);
         
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV2.getModel());
+        DV2.setRowSorter(sorter);
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);  
+        sorter.setSortable(0, false);         
+       
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + DV1.getValueAt(DV1.getSelectedRow(), 3) + "?extended=true&nocache=1"); 
@@ -2368,6 +2389,10 @@ public class API extends javax.swing.JInternalFrame {
             DV2.getColumnModel().getColumn(0).setPreferredWidth(140);
             DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
             DV2.getColumnModel().getColumn(2).setPreferredWidth(80);
+            
+            sorter.setSortable(0, true); 
+            sorter.sort();            
+               
         } catch (IOException | JSONException ex) {
             txtLog.append("\r\n- Exception: " + ex.getMessage());   
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   

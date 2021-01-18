@@ -25,13 +25,30 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.SwingWorker;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -69,7 +86,7 @@ public class FW extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         lblSITES = new javax.swing.JLabel();
-        lblBRANDS = new javax.swing.JLabel();
+        lblUNITS = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         DV1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -90,13 +107,14 @@ public class FW extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         _login = new javax.swing.JCheckBox();
         _all_data = new javax.swing.JCheckBox();
-        _1 = new javax.swing.JCheckBox();
-        _2 = new javax.swing.JCheckBox();
-        _orders = new javax.swing.JCheckBox();
-        _3 = new javax.swing.JCheckBox();
-        _4 = new javax.swing.JCheckBox();
+        _restaurants = new javax.swing.JCheckBox();
+        _units = new javax.swing.JCheckBox();
+        _config = new javax.swing.JCheckBox();
+        _calendar = new javax.swing.JCheckBox();
+        _users = new javax.swing.JCheckBox();
         _password = new javax.swing.JCheckBox();
         _logout = new javax.swing.JCheckBox();
+        _roles = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         cmbBrow = new javax.swing.JComboBox<>();
         btnRun = new javax.swing.JButton();
@@ -109,6 +127,18 @@ public class FW extends javax.swing.JInternalFrame {
         cmbEnv = new javax.swing.JComboBox<>();
         _slack = new javax.swing.JCheckBox();
         _headless = new javax.swing.JCheckBox();
+        lblSITES5 = new javax.swing.JLabel();
+        txtPartner_ID = new javax.swing.JTextField();
+        lblSITES8 = new javax.swing.JLabel();
+        txtPartner_PW = new javax.swing.JTextField();
+        lblSITES12 = new javax.swing.JLabel();
+        txtUManager_ID = new javax.swing.JTextField();
+        lblSITES14 = new javax.swing.JLabel();
+        txtUManager_PW = new javax.swing.JTextField();
+        lblSITES15 = new javax.swing.JLabel();
+        txtFWManager_PW = new javax.swing.JTextField();
+        lblSITES16 = new javax.swing.JLabel();
+        txtFWManager_ID = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -151,9 +181,9 @@ public class FW extends javax.swing.JInternalFrame {
         lblSITES.setAlignmentX(0.5F);
         getContentPane().add(lblSITES, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 360, -1));
 
-        lblBRANDS.setText("Units");
-        lblBRANDS.setName("lblBRANDS"); // NOI18N
-        getContentPane().add(lblBRANDS, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 296, 280, -1));
+        lblUNITS.setText("Units");
+        lblUNITS.setName("lblUNITS"); // NOI18N
+        getContentPane().add(lblUNITS, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 260, 280, -1));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -180,7 +210,7 @@ public class FW extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 22, 428, 272));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 22, 428, 232));
 
         DV2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV2.setModel(new javax.swing.table.DefaultTableModel(
@@ -206,7 +236,7 @@ public class FW extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 316, 428, 100));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 276, 428, 140));
 
         txtLog.setEditable(false);
         txtLog.setColumns(20);
@@ -224,21 +254,21 @@ public class FW extends javax.swing.JInternalFrame {
         lblSITES4.setText("Admin E-mail:");
         lblSITES4.setToolTipText("");
         lblSITES4.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 380, 120, -1));
+        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 260, 120, -1));
 
         txtAdmin_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtAdmin_ID.setText("App_User@?.?");
-        getContentPane().add(txtAdmin_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 396, 212, -1));
+        getContentPane().add(txtAdmin_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 276, 212, -1));
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES6.setText("Admin Password");
         lblSITES6.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(664, 380, -1, -1));
+        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 260, -1, -1));
 
         txtAdmin_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtAdmin_PW.setText("password");
-        getContentPane().add(txtAdmin_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(664, 396, 184, -1));
+        getContentPane().add(txtAdmin_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 276, 184, -1));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
 
@@ -311,7 +341,7 @@ public class FW extends javax.swing.JInternalFrame {
 
         _login.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _login.setSelected(true);
-        _login.setText("Login ");
+        _login.setText("Admin Login ");
         _login.setEnabled(false);
         _login.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
@@ -323,35 +353,35 @@ public class FW extends javax.swing.JInternalFrame {
         _all_data.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _all_data.setRequestFocusEnabled(false);
 
-        _1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _1.setText("op1");
-        _1.setContentAreaFilled(false);
-        _1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _restaurants.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _restaurants.setText("Restaurants");
+        _restaurants.setContentAreaFilled(false);
+        _restaurants.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _restaurants.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
-        _2.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _2.setText("op2");
-        _2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _2.setRequestFocusEnabled(false);
+        _units.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _units.setText("Units");
+        _units.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _units.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _units.setRequestFocusEnabled(false);
 
-        _orders.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _orders.setText("Place Order");
-        _orders.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _orders.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _orders.setRequestFocusEnabled(false);
+        _config.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _config.setText("Configuration");
+        _config.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _config.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _config.setRequestFocusEnabled(false);
 
-        _3.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _3.setText("op3");
-        _3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _3.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _3.setRequestFocusEnabled(false);
+        _calendar.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _calendar.setText("Calendar");
+        _calendar.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _calendar.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _calendar.setRequestFocusEnabled(false);
 
-        _4.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _4.setText("op4");
-        _4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _4.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _4.setRequestFocusEnabled(false);
+        _users.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _users.setText("Users");
+        _users.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _users.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _users.setRequestFocusEnabled(false);
 
         _password.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _password.setText("Forgot Password");
@@ -365,6 +395,12 @@ public class FW extends javax.swing.JInternalFrame {
         _logout.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _logout.setRequestFocusEnabled(false);
 
+        _roles.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _roles.setText("Roles Permissions");
+        _roles.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _roles.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _roles.setRequestFocusEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -372,17 +408,19 @@ public class FW extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(_1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_restaurants, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_units, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_config, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_calendar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(80, 80, 80)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                    .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                        .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -392,32 +430,31 @@ public class FW extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(16, 16, 16)
+                .addComponent(_config, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(_2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(_restaurants, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(_3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(_4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(_units, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(_calendar, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 120, 412, 176));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 80, 412, 176));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmbBrow.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 28, 78, 20));
+        jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 32, 78, 20));
 
         btnRun.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         btnRun.setForeground(new java.awt.Color(204, 0, 0));
@@ -428,7 +465,7 @@ public class FW extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 52, 78, 36));
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 56, 78, 32));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -449,7 +486,7 @@ public class FW extends javax.swing.JInternalFrame {
                 btnFailsMouseClicked(evt);
             }
         });
-        jPanel3.add(btnFails, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 28, 84, 22));
+        jPanel3.add(btnFails, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 32, 84, 22));
 
         btnExel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnExel.setText("Excel Rep");
@@ -483,7 +520,7 @@ public class FW extends javax.swing.JInternalFrame {
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES13.setText("Environment:");
         lblSITES13.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 12, 92, 16));
+        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 16, 92, 16));
 
         cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbEnv.addItemListener(new java.awt.event.ItemListener() {
@@ -491,7 +528,7 @@ public class FW extends javax.swing.JInternalFrame {
                 cmbEnvItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 28, 116, 20));
+        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 32, 116, 20));
 
         _slack.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         _slack.setText("Report to Slack");
@@ -507,11 +544,74 @@ public class FW extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 416, 416, 88));
 
+        lblSITES5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES5.setText("Partner E-mail:");
+        lblSITES5.setToolTipText("");
+        lblSITES5.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, 120, -1));
+
+        txtPartner_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtPartner_ID.setText("App_User@?.?");
+        getContentPane().add(txtPartner_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 316, 212, -1));
+
+        lblSITES8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES8.setText("Partner Password");
+        lblSITES8.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES8, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 300, -1, -1));
+
+        txtPartner_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtPartner_PW.setText("password");
+        getContentPane().add(txtPartner_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 316, 184, -1));
+
+        lblSITES12.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES12.setText("Unit Manager E-mail:");
+        lblSITES12.setToolTipText("");
+        lblSITES12.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES12, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 340, 120, -1));
+
+        txtUManager_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtUManager_ID.setText("App_User@?.?");
+        getContentPane().add(txtUManager_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 356, 212, -1));
+
+        lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES14.setText("Unit Manager Password");
+        lblSITES14.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 340, -1, -1));
+
+        txtUManager_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtUManager_PW.setText("password");
+        getContentPane().add(txtUManager_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 356, 184, -1));
+
+        lblSITES15.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES15.setText("FW Manager E-mail:");
+        lblSITES15.setToolTipText("");
+        lblSITES15.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES15, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 380, 120, -1));
+
+        txtFWManager_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtFWManager_PW.setText("password");
+        getContentPane().add(txtFWManager_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 396, 184, -1));
+
+        lblSITES16.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES16.setText("FW Manager Password");
+        lblSITES16.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES16, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 380, -1, -1));
+
+        txtFWManager_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtFWManager_ID.setText("App_User@?.?");
+        getContentPane().add(txtFWManager_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 396, 212, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
-        if (d1LastRow == DV1.getSelectedRow()) {
+        if (d1LastRow == DV1.getSelectedRow() || DV2.getRowCount() == 0) {
            return;
         }
         //GetBrands();
@@ -581,6 +681,15 @@ public class FW extends javax.swing.JInternalFrame {
         _f = 0; // Failed
         _w = 0; // Warn
         r_time = "";
+        
+        ADMIN_ID = txtAdmin_ID.getText();
+        ADMIN_PW = txtAdmin_PW.getText();
+        PARTNER_ID = txtPartner_ID.getText();
+        PARTNER_PW = txtPartner_PW.getText();
+        UM_ID = txtUManager_ID.getText();
+        UM_PW = txtUManager_PW.getText(); 
+        FM_ID = txtFWManager_ID.getText();
+        FM_PW = txtFWManager_PW.getText();       
 
         ALL_DATA = _all_data.isSelected();
         SCOPE = "";
@@ -684,16 +793,49 @@ public class FW extends javax.swing.JInternalFrame {
             Thread.sleep(1500);
         }
 
-        if (_orders.isSelected()) { 
-            SCOPE += ", Orders";
-            EX += " - " + "\t" + " === Orders" + "\t" + " ===== " + "\t" + " == Orders Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            FW_orders.run();
-            EX += " - " + "\t" + " === ^ Orders" + "\t" + " ===== " + "\t" + " == ^ Orders End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        if (_config.isSelected()) { 
+            SCOPE += ", Configuration";
+            EX += " - " + "\t" + " === Configuration" + "\t" + " ===== " + "\t" + " == Configuration Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            FW_config.run();
+            EX += " - " + "\t" + " === ^ Configuration" + "\t" + " ===== " + "\t" + " == ^ Configuration End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
-
-
+        if (_restaurants.isSelected()) { 
+            SCOPE += ", Restaurants";
+            EX += " - " + "\t" + " === Restaurants" + "\t" + " ===== " + "\t" + " == Restaurants Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            FW_restaurants.run();
+            EX += " - " + "\t" + " === ^ Restaurants" + "\t" + " ===== " + "\t" + " == ^ Restaurants End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }
+        if (_units.isSelected()) { 
+            SCOPE += ", Units";
+            EX += " - " + "\t" + " === Units" + "\t" + " ===== " + "\t" + " == Units Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            FW_units.run();
+            EX += " - " + "\t" + " === ^ Units" + "\t" + " ===== " + "\t" + " == ^ Units End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }
+        if (_calendar.isSelected()) { 
+            SCOPE += ", Calendar";
+            EX += " - " + "\t" + " === Calendar" + "\t" + " ===== " + "\t" + " == Calendar Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            FW_calendar.run();
+            EX += " - " + "\t" + " === ^ Calendar" + "\t" + " ===== " + "\t" + " == ^ Calendar End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }        
+        if (_roles.isSelected()) { 
+            SCOPE += ", User Permission";
+            EX += " - " + "\t" + " === User Permission" + "\t" + " ===== " + "\t" + " == User Permission Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            FW_user_permission.run();
+            EX += " - " + "\t" + " === ^ User Permission" + "\t" + " ===== " + "\t" + " == ^ User Permission End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }  
         // ============================== Last Blocks
+        if (_users.isSelected()) { 
+            SCOPE += ", Users";
+            EX += " - " + "\t" + " === Users" + "\t" + " ===== " + "\t" + " == Users Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            FW_users.run();
+            EX += " - " + "\t" + " === ^ Users" + "\t" + " ===== " + "\t" + " == ^ Users End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }
         if (_logout.isSelected()) { 
             SCOPE += ", LogOut";
             EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
@@ -749,8 +891,7 @@ public class FW extends javax.swing.JInternalFrame {
             String t_rep = "";
             if (!"".equals(r_time.trim())) {
                 double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
-                if (am0.length > 0)
-                {
+                if (am0.length > 0) {
                     Arrays.sort(am0);
                     double total = 0;
                     for(int i=0; i < am0.length; i++){
@@ -788,6 +929,7 @@ public class FW extends javax.swing.JInternalFrame {
             btnFails.setEnabled(false);
         }
         btnExel.setEnabled(true);
+        
         
         LOG_UPDATE(); // ========================================================
         
@@ -861,8 +1003,6 @@ public class FW extends javax.swing.JInternalFrame {
         cmbEnv.addItem("Development");
         cmbEnv.addItem("Production");         
         cmbEnv.setSelectedIndex(0); // ================
-   
-        MENU_IDS = new ArrayList<>();
         
         Load = false;
         LOAD_ENV();
@@ -992,38 +1132,347 @@ public class FW extends javax.swing.JInternalFrame {
     }
     private void LOAD_ENV(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
-            BaseAPI = "https://api.compassdigital.org/staging";
+            BaseAPI = "https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/";
             env = "ST";
             url = "https://staging.app.foodworks.org/"; 
         } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
-            BaseAPI = "https://api.compassdigital.org/dev";
+            BaseAPI = "https://czb8fru7ij.execute-api.us-east-1.amazonaws.com/dev/";
             env = "DE";
             url = "https://dev.app.foodworks.org/";
         } else{
-            BaseAPI = "https://api.compassdigital.org/v1";
+            BaseAPI = "https://fg74jjx1x7.execute-api.us-east-1.amazonaws.com/v1/";
             env = "PR";
             url = "https://app.foodworks.org/";
         }
-        Get_FW_TKN();
-        LOAD_CONFIG();
 
-        //GetRestorans();       
+        LOAD_CONFIG();
+        
+        Get_FW_TKN();
+        GetMarkets(); 
+        GetRestorants(); 
+        GetUnits();
     }
     private void Get_FW_TKN(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
-        try {
-            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
-                rs.next();
-                FW_TKN = rs.getString(1);
-            }
-        } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== FW_TKN > ERROR: " + ex.getMessage());
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("\r\n\r\n- Get Admin User Token ..."); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        String J = "==== User API(s):" + "\r\n";
+        userID = "";
+        userTKN = "";
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        String UserAuth = Base64.getEncoder().encodeToString((txtAdmin_ID.getText().trim() + ":" + txtAdmin_PW.getText().trim()).getBytes());
+        if(sw1.isRunning()){
+            sw1.reset();
         }
+        sw1.start();         // ============ User
+        try { 
+            HttpGet httpget = new HttpGet(BaseAPI + "auth"); /// base API ???
+            httpget.setHeader("Authorization",  "Basic " + UserAuth);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 500) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            
+            userTKN = json.getString("token");   
+            userID = json.getJSONObject("user").getString("id");
+        } catch (IOException | JSONException ex) {
+            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
+        }   
+        txtLog.append("\r\n== " + BaseAPI + "/user/auth" + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        FW_TKN = "eyJhbGciOiJLTVMiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiIzNzNlNDI0Nzk4Yzg0OWQ4ODc4YWMyMzA4MTU3ZWIzYSIsInNjb3BlcyI6ImZ3X2FkbWluIiwiZXhwIjozMjI5MDU5NjcxNTc2LCJpYXQiOjE2MTA2NDE4MzV9.AQICAHiBfb4VzGsFjR/lWEg3l+aEpBYOMnEN/6K12FCw0mwumgGTFYAKpKygG6SZpdBuqdXjAAABCzCCAQcGCSqGSIb3DQEHBqCB+TCB9gIBADCB8AYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAxgZF+0NzDVdOxA6AoCARCAgcKF51SBRmsH28Wxnug0tc7XMlC0dsZh8iEpiiMV3XKUuhs0JR8UxLzI5G2X50D+JE1WlNcNg6LYoaAuFcFc4a48MiP/5ZLy+a9orNtCkqFA32Ww7/zH8z3nKO3b89vAKi/iuxTRqWnHRqKac1zfpxFgepRkRUWEhmNHuwgJupjgJCSX2pO9oRUjoWEUBMcmBG0xhjqVITGeeViBufSz+GlHp7+vFTU7IaeHhE2YTRokORHrP3VHN13mSzE72xaXmlvcXw==";
+    }
+    
+    private void GetMarkets() {
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("\r\n-Load Markets ...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        MARKETS = "";
+        try {
+            HttpGet httpget = new HttpGet(BaseAPI + "/markets"); 
+            httpget.setHeader("Authorization",  "Bearer " + userTKN); //FW_TKN);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 300) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    throw new ClientProtocolException("Response: " + response.getStatusLine().getStatusCode() + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+
+            String responseRest = httpclient.execute(httpget, responseHandler);   
+            JSONArray Markets = new JSONArray(responseRest);
+            for (int i = 0; i < Markets.length(); i++) {             
+                JSONObject Market = Markets.getJSONObject(i);
+                MARKETS += Market.getString("id") + ":" + Market.getString("name") + "\r\n";   
+            }
+        } catch (IOException | JSONException ex) {
+            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());      
+        }         
+        finally {
+            try {
+                httpclient.close();
+            } catch (IOException ex) {
+                txtLog.append("\r\n- Exception: " + ex.getMessage());
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());    
+            }
+        }
+        txtLog.append("\r\n== " + BaseAPI + "/markets  > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();
+        
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
+    private void GetRestorants() {
+        d1LastRow = -1;
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("\r\n-Load Restaurants ...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
 
+        String[] SitesColumnsName = {"Restaurant", "Status", "Market", "id"}; 
+        DefaultTableModel SitesModel = new DefaultTableModel();
+        SitesModel.setColumnIdentifiers(SitesColumnsName);
+        DV1.setModel(SitesModel);
+        
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV1.getModel());
+        DV1.setRowSorter(sorter);
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);  
+        sorter.setSortable(0, false); 
+
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        try {
+            HttpGet httpget = new HttpGet(BaseAPI + "/partners"); 
+            httpget.setHeader("Authorization",  "Bearer " + userTKN); //FW_TKN);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 300) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    throw new ClientProtocolException("Response: " + response.getStatusLine().getStatusCode() + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+
+            String responseRest = httpclient.execute(httpget, responseHandler);
+            String Restaurant;
+            String Market;
+            //String Employee;
+            String Status;
+            String id;
+            
+            JSONArray RESTS = new JSONArray(responseRest);
+            for (int i = 0; i < RESTS.length(); i++) {
+                Restaurant = "?";
+                Market = "?";
+                Status = "?";
+                id = "?";                
+                JSONObject Rest = RESTS.getJSONObject(i);
+                if(Rest.has("name")){
+                    Restaurant = Rest.getString("name");   
+                } 
+                if(Rest.has("marketId")){
+                    Market = Rest.getString("marketId");
+                    if(MARKETS.contains(Market)){
+                       Market =  MARKETS.substring(MARKETS.indexOf(Market) + Market.length() + 1);
+                       Market = Market.substring(0, Market.indexOf("\r\n")).trim();
+                    }
+                } 
+//                if(Rest.has("Employee")){
+//                    Employee = Rest.getString("Employee");
+//                }  
+                if(Rest.has("onboarding")){
+                    Status = Rest.getJSONObject("onboarding").getString("status");
+                }  
+                if(Rest.has("id")){
+                    id = Rest.getString("id");
+                } 
+                SitesModel.addRow(new Object[]{Restaurant, Status, Market, id});
+            }
+            DV1.setModel(SitesModel);
+            DV1.setDefaultEditor(Object.class, null);
+            DV1.getColumnModel().getColumn(0).setPreferredWidth(170);
+            DV1.getColumnModel().getColumn(1).setPreferredWidth(80);
+            DV1.getColumnModel().getColumn(2).setPreferredWidth(100);
+            DV1.getColumnModel().getColumn(3).setPreferredWidth(160);
+            
+            sorter.setSortable(0, true); 
+            sorter.sort();            
+   
+        } catch (IOException | JSONException ex) {
+            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());      
+        }         
+        finally {
+            try {
+                httpclient.close();
+            } catch (IOException ex) {
+                txtLog.append("\r\n- Exception: " + ex.getMessage());
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());    
+            }
+        }
+        txtLog.append("\r\n== " + BaseAPI + "/partners  > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();
+        
+        if (DV1.getRowCount() > 0) {
+            DV1.changeSelection(0, 0, false, false);
+            if (CONFIG && !"".equals(RESTORAUNT.trim())) {
+                for(int row = 0; row < DV1.getRowCount(); row++) {
+                    // update Market id > Name
+                    if(DV1.getValueAt(row, 0).equals(RESTORAUNT)){
+                        DV1.changeSelection(row, 0, false, false);
+                        break;
+                    }
+                }
+            } //
+            RESTORAUNT = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
+            RestID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
+            //GetBrands();
+        }
+        lblSITES.setText("Restorants (" + DV1.getRowCount() + " found)");
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }   
+    private void GetUnits() {
+        d2LastRow = -1;
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("\r\n-Load Units ...");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
+        String[] SitesColumnsName = {"Unit", "Status", "Market", "id"}; 
+        DefaultTableModel SitesModel = new DefaultTableModel();
+        SitesModel.setColumnIdentifiers(SitesColumnsName);
+        DV2.setModel(SitesModel);
+        
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV2.getModel());
+        DV2.setRowSorter(sorter);
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);  
+        sorter.setSortable(0, false); 
+
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        try {
+            HttpGet httpget = new HttpGet(BaseAPI + "/units"); 
+            httpget.setHeader("Authorization",  "Bearer " + userTKN); //FW_TKN);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 300) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    throw new ClientProtocolException("Response: " + response.getStatusLine().getStatusCode() + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+
+            String responseRest = httpclient.execute(httpget, responseHandler);
+            String Unit;
+            String Market;
+            //String Employee;
+            String Status;
+            String id;
+            
+            JSONArray RESTS = new JSONArray(responseRest);
+            for (int i = 0; i < RESTS.length(); i++) {
+                Unit = "?";
+                Market = "?";;
+                Status = "?";
+                id = "?";                
+                JSONObject Rest = RESTS.getJSONObject(i);
+                if(Rest.has("name")){
+                    Unit = Rest.getString("name");   
+                } 
+                if(Rest.has("marketId")){
+                    Market = Rest.getString("marketId");
+                    if(MARKETS.contains(Market)){
+                       Market =  MARKETS.substring(MARKETS.indexOf(Market) + Market.length() + 1);
+                       Market = Market.substring(0, Market.indexOf("\r\n")).trim();
+                    }                    
+                }  
+                if(Rest.has("active")){
+                    if(Rest.getBoolean("active")){
+                        Status = "Active";
+                    }else{
+                        Status = "Inactive";
+                    }
+                }  
+                if(Rest.has("id")){
+                    id = Rest.getString("id");
+                } 
+                SitesModel.addRow(new Object[]{Unit, Status, Market, id});
+            }
+            DV2.setModel(SitesModel);
+            DV2.setDefaultEditor(Object.class, null);
+            DV2.getColumnModel().getColumn(0).setPreferredWidth(170);
+            DV2.getColumnModel().getColumn(1).setPreferredWidth(80);
+            DV2.getColumnModel().getColumn(2).setPreferredWidth(100);
+            DV2.getColumnModel().getColumn(3).setPreferredWidth(160);
+            
+            sorter.setSortable(0, true); 
+            sorter.sort();            
+   
+        } catch (IOException | JSONException ex) {
+            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());      
+        }         
+        finally {
+            try {
+                httpclient.close();
+            } catch (IOException ex) {
+                txtLog.append("\r\n- Exception: " + ex.getMessage());
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());    
+            }
+        }
+        txtLog.append("\r\n== " + BaseAPI + "/units  > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();
+        
+        if (DV2.getRowCount() > 0) {
+            DV2.changeSelection(0, 0, false, false);
+            if (CONFIG && !"".equals(UNIT.trim())) {
+                for(int row = 0; row < DV2.getRowCount(); row++) {
+                    // update Market id > Name
+                    if(DV2.getValueAt(row, 0).equals(UNIT)){
+                        DV2.changeSelection(row, 0, false, false);
+                        break;
+                    }
+                }
+            } //
+            UNIT = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 0));
+            UnitID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 3));
+            //GetBrands();
+        }
+        lblUNITS.setText("Units(" + DV2.getRowCount() + " found)");
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+    
     private void LOAD_CONFIG(){
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
@@ -1056,19 +1505,26 @@ public class FW extends javax.swing.JInternalFrame {
 
                 c = C.substring(C.indexOf("txtAdmin_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_ID.setText(c.substring(c.indexOf(" ")).trim());
                 c = C.substring(C.indexOf("txtAdmin_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_PW.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtPartner_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtPartner_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtPartner_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtPartner_PW.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtUManager_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtUManager_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtUManager_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtUManager_PW.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtFWManager_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtFWManager_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtFWManager_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtFWManager_PW.setText(c.substring(c.indexOf(" ")).trim());
 
                 c = C.substring(C.indexOf("nShowPage:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nShowPage.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("nWaitElement:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitElement.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("nWaitLoad:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitLoad.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
 
-                c = C.substring(C.indexOf("_1:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _1.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_2:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _2.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_3:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _3.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_4:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _4.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_orders:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _orders.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_password:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _password.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_config:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _config.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_restaurants:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _restaurants.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_units:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _units.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_calendar:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _calendar.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_users:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _users.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_all_data:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _all_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_password:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _password.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_logout:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _logout.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_roles:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _roles.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 CONFIG = true;
                 txtLog.append("\r\n\r\n=== LOAD_CONFIG > OK");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1108,19 +1564,26 @@ public class FW extends javax.swing.JInternalFrame {
             
             C += "txtAdmin_ID: " + txtAdmin_ID.getText() + "\r\n";
             C += "txtAdmin_PW: " + txtAdmin_PW.getText()  + "\r\n";
+            C += "txtPartner_ID: " + txtPartner_ID.getText() + "\r\n";
+            C += "txtPartner_PW: " + txtPartner_PW.getText()  + "\r\n";
+            C += "txtUManager_ID: " + txtUManager_ID.getText() + "\r\n";
+            C += "txtUManager_PW: " + txtUManager_PW.getText()  + "\r\n";
+            C += "txtFWManager_ID: " + txtFWManager_ID.getText() + "\r\n";
+            C += "txtFWManager_PW: " + txtFWManager_PW.getText()  + "\r\n";
             
             C += "nShowPage: " + nShowPage.getValue() + "\r\n";
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
             C += "nWaitLoad: " + nWaitLoad.getValue()+ "\r\n";
 
-            C += "_1: " + _1.isSelected() + "\r\n";
-            C += "_2: " + _2.isSelected() + "\r\n";
-            C += "_3: " + _3.isSelected() + "\r\n";
-            C += "_4: " + _4.isSelected() + "\r\n";
-            C += "_orders: " + _orders.isSelected() + "\r\n";
-            C += "_password: " + _password.isSelected() + "\r\n";         
+            C += "_restaurants: " + _restaurants.isSelected() + "\r\n";
+            C += "_units: " + _units.isSelected() + "\r\n";
+            C += "_calendar: " + _calendar.isSelected() + "\r\n";
+            C += "_users: " + _users.isSelected() + "\r\n";
+            C += "_config: " + _config.isSelected() + "\r\n";
             C += "_all_data: " + _all_data.isSelected() + "\r\n";
+            C += "_password: " + _password.isSelected() + "\r\n";         
             C += "_logout: " + _logout.isSelected() + "\r\n";       
+            C += "_roles: " + _roles.isSelected() + "\r\n";       
 
         } catch (Exception ex)  {
             txtLog.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
@@ -1323,9 +1786,7 @@ public class FW extends javax.swing.JInternalFrame {
     
     private int d1LastRow = -1; 
     private int d2LastRow = -1; 
-    private List<String> GROUP_IDS;
-    private List<String> COMP_IDS; 
-    private List<String> MENU_IDS;  
+  
     private boolean CONFIG = false;
     private String C = "";
     private String userID;
@@ -1347,27 +1808,38 @@ public class FW extends javax.swing.JInternalFrame {
 
     private static String UNIT = "";
     private static String UnitID = "";
+    private String MARKETS;
 
     private static String COUNTRY = "COUNTRY";
     private static String BaseAPI;
     private static String TZone; 
+    
+    public static String ADMIN_ID;
+    public static String ADMIN_PW;
+    public static String PARTNER_ID; 
+    public static String PARTNER_PW;
+    public static String UM_ID; 
+    public static String UM_PW;  
+    public static String FM_ID; 
+    public static String FM_PW; 
     private static String New_ID = "";
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;
-    private javax.swing.JCheckBox _1;
-    private javax.swing.JCheckBox _2;
-    private javax.swing.JCheckBox _3;
-    private javax.swing.JCheckBox _4;
     private javax.swing.JCheckBox _all_data;
+    private javax.swing.JCheckBox _calendar;
+    private javax.swing.JCheckBox _config;
     private javax.swing.JCheckBox _headless;
     private javax.swing.JCheckBox _login;
     private javax.swing.JCheckBox _logout;
-    private javax.swing.JCheckBox _orders;
     private javax.swing.JCheckBox _password;
+    private javax.swing.JCheckBox _restaurants;
+    private javax.swing.JCheckBox _roles;
     private javax.swing.JCheckBox _slack;
+    private javax.swing.JCheckBox _units;
+    private javax.swing.JCheckBox _users;
     private javax.swing.JButton btnExel;
     private javax.swing.JButton btnFails;
     private javax.swing.JButton btnLog;
@@ -1381,21 +1853,33 @@ public class FW extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblBRANDS;
     private javax.swing.JLabel lblSITES;
     private javax.swing.JLabel lblSITES10;
     private javax.swing.JLabel lblSITES11;
+    private javax.swing.JLabel lblSITES12;
     private javax.swing.JLabel lblSITES13;
+    private javax.swing.JLabel lblSITES14;
+    private javax.swing.JLabel lblSITES15;
+    private javax.swing.JLabel lblSITES16;
     private javax.swing.JLabel lblSITES4;
+    private javax.swing.JLabel lblSITES5;
     private javax.swing.JLabel lblSITES6;
     private javax.swing.JLabel lblSITES7;
+    private javax.swing.JLabel lblSITES8;
     private javax.swing.JLabel lblSITES9;
+    private javax.swing.JLabel lblUNITS;
     private javax.swing.JSpinner nShowPage;
     private javax.swing.JSpinner nWaitElement;
     private javax.swing.JSpinner nWaitLoad;
     private javax.swing.JTextField txtAdmin_ID;
     private javax.swing.JTextField txtAdmin_PW;
+    private javax.swing.JTextField txtFWManager_ID;
+    private javax.swing.JTextField txtFWManager_PW;
     private javax.swing.JTextArea txtLog;
+    private javax.swing.JTextField txtPartner_ID;
+    private javax.swing.JTextField txtPartner_PW;
+    private javax.swing.JTextField txtUManager_ID;
+    private javax.swing.JTextField txtUManager_PW;
     // End of variables declaration//GEN-END:variables
 // </editor-fold>
 }
