@@ -34,7 +34,7 @@ public class AP3_login {
         if(users) {    
             _t++; T.Visible_Element_By_Path_Text_Enter("Enter Invalid Email", "css", "[aria-label='E-mail']", "x.y@compassdigitalio", false, "no_jira"); 
                 if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Inavalid Email Message", "xpath", "//*[contains(text(), 'Please enter a valid email')]", "no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Invalid Email Message", "xpath", "//*[contains(text(), 'Please enter a valid email')]", "no_jira"); 
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']", "no_jira"); 
                 if (FAIL) { return;}

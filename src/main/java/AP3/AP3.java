@@ -29,8 +29,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -152,9 +156,9 @@ public class AP3 extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("AP3 Automation Manager >>> loading, please wait ... ... ... ...");
-        setMinimumSize(new java.awt.Dimension(854, 529));
+        setMinimumSize(new java.awt.Dimension(860, 532));
         setName("AP3"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(854, 529));
+        setPreferredSize(new java.awt.Dimension(860, 532));
         setVerifyInputWhenFocusTarget(false);
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -341,7 +345,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         _notifications.setRequestFocusEnabled(false);
 
         txtDH_Id.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtDH_Id.setText("NWEJgN87Q3Sw46JaQ1Q");
+        txtDH_Id.setText("Fails, no test");
 
         lblSITES15.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -777,7 +781,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
-        if (d1LastRow == DV1.getSelectedRow()) {
+        if (d1LastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
            return;
         }
         SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
@@ -857,7 +861,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void DV2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV2MouseClicked
-        if (d2LastRow == DV2.getSelectedRow()) {
+        if (d2LastRow == DV2.getSelectedRow() || DV2.getRowCount() == 0) {
            return;
         }
         d2LastRow = DV2.getSelectedRow(); 
@@ -946,7 +950,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         IM_ID = txtADMIN_ID.getText();
         IM_PW = txtADMIN_ID.getText();
         ALL_DATA = _all_data.isSelected();
-        DH_Menu_ID = txtDH_Id.getText();
+        DH_Menu_ID = txtDH_Id.getText(); // like NWEJgN87Q3Sw46JaQ1Q, length > 18
         SCOPE = "";
 
         if(DV1.getRowCount() > 0) {
@@ -1325,8 +1329,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                     String t_rep = "";
                     if (!"".equals(r_time.trim())) {
                         double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
-                        if (am0.length > 0)
-                        {
+                        if (am0.length > 0) {
                             Arrays.sort(am0);
                             double total = 0;
                             for(int i=0; i < am0.length; i++){
@@ -1475,6 +1478,13 @@ public class AP3 extends javax.swing.JInternalFrame {
         SitesModel.setColumnIdentifiers(SitesColumnsName);
         DV1.setModel(SitesModel);
         
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV1.getModel());
+        DV1.setRowSorter(sorter);
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);  
+        sorter.setSortable(0, false); 
+               
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + appId);
@@ -1535,6 +1545,9 @@ public class AP3 extends javax.swing.JInternalFrame {
             DV1.getColumnModel().getColumn(1).setPreferredWidth(70);
             DV1.getColumnModel().getColumn(2).setPreferredWidth(50);
             DV1.getColumnModel().getColumn(3).setPreferredWidth(400);
+            
+            sorter.setSortable(0, true); 
+            sorter.sort(); 
    
         } catch (IOException | JSONException ex) {
             txtLog.append("\r\n- Exception: " + ex.getMessage());
@@ -1580,11 +1593,17 @@ public class AP3 extends javax.swing.JInternalFrame {
         }
         sw1.start();        
      
-        
         String[] BrandsColumnsName = {"Station","Location","Brand Id", "Unit ID"}; 
         DefaultTableModel BrandsModel = new DefaultTableModel();
         BrandsModel.setColumnIdentifiers(BrandsColumnsName);
         DV2.setModel(BrandsModel);
+        
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV2.getModel());
+        DV2.setRowSorter(sorter);
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);  
+        sorter.setSortable(0, false);         
         
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
@@ -1637,6 +1656,10 @@ public class AP3 extends javax.swing.JInternalFrame {
             DV2.getColumnModel().getColumn(0).setPreferredWidth(140);
             DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
             DV2.getColumnModel().getColumn(2).setPreferredWidth(80);
+            
+            sorter.setSortable(0, true); 
+            sorter.sort(); 
+            
         } catch (IOException | JSONException ex) {
             txtLog.append("\r\n- Exception: " + ex.getMessage()); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
@@ -1756,13 +1779,13 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLog.append("\r\n-Load Sector/Companies(Menus) ...");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         CloseableHttpClient httpclient = HttpClients.createDefault();
+        if(sw1.isRunning()){
+            sw1.reset();
+        } 
         try { 
             cmbComp.removeAllItems();
             COMP_IDS = new ArrayList<>();
-            if(sw1.isRunning()){
-            sw1.reset();
-        }
-        sw1.start();        
+            sw1.start();        
      
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
@@ -1829,11 +1852,11 @@ public class AP3 extends javax.swing.JInternalFrame {
         CompanyID = "";
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        try { 
-            if(sw1.isRunning()){
+        if(sw1.isRunning()){
             sw1.reset();
-        }
-        sw1.start();        
+        }  
+        try { 
+            sw1.start();        
      
             HttpGet httpget = new HttpGet(BaseAPI + "/location/brand/" + BrandID + "?extended=true&nocache=1"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);

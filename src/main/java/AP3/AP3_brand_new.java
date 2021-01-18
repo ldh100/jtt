@@ -728,7 +728,7 @@ public class AP3_brand_new {
                         if (FAIL) { return;}                
                 }                 
             _t++; Thread.sleep((long) sleep); T.List_L3("Item Rows Count", "tagName", "tr", "no_jira");             
-                _t++; T.List_TR_THs("Item Table Header", L3, 0, "no_jira"); 
+            _t++; T.List_TR_THs("Item Table Header", L3, 0, "no_jira"); 
                 for (int i = 2; i < L3.size(); i++) {
                     _t++; T.List_TR_TDs("Item Row Data", L3, i, "no_jira");   
                         if (FAIL) { return;}                
@@ -757,7 +757,7 @@ public class AP3_brand_new {
                 if (FAIL) { return;}  
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'APPLY Changes'", "xpath", "//div[contains(text(), 'Apply Changes')]", "no_jira"); 
                 if (FAIL) { return;}  
-            //Thread.sleep(3500);
+
                            
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", "no_jira"); 
                 if (FAIL) { return;}  

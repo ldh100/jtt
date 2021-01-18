@@ -791,8 +791,13 @@ public class T {
                     break;
             }
             
-            e.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
-            e.sendKeys(Keys.chord(Keys.CONTROL, "c")); //copy
+            if(WsOS.toLowerCase().contains("windows")){
+                e.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
+                e.sendKeys(Keys.chord(Keys.CONTROL, "c")); //copy                 
+            }else{
+                e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+                e.sendKeys(Keys.chord(Keys.COMMAND, "c")); //copy                   
+            }
             t = (String) clipboard.getData(DataFlavor.stringFlavor);
             _p++; 
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
@@ -837,7 +842,12 @@ public class T {
             }
             Actions action = new Actions(d1);
             action.doubleClick(e).perform();
-            e.sendKeys(Keys.chord(Keys.CONTROL, "c")); //copy
+            if(WsOS.toLowerCase().contains("windows")){
+                e.sendKeys(Keys.chord(Keys.CONTROL, "c")); //copy             
+            }else{
+                e.sendKeys(Keys.chord(Keys.COMMAND, "c")); //copy                   
+            }            
+
             t = (String) clipboard.getData(DataFlavor.stringFlavor);
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
@@ -882,9 +892,16 @@ public class T {
             }
             Actions action = new Actions(d1);
             action.doubleClick(e).perform();
-            e.sendKeys(Keys.chord(Keys.CONTROL, "c")); //copy
-            t = (String) clipboard.getData(DataFlavor.stringFlavor);
-            e.sendKeys(Keys.chord(Keys.CONTROL, "v")); //paste
+            
+            if(WsOS.toLowerCase().contains("windows")){
+                e.sendKeys(Keys.chord(Keys.CONTROL, "c")); //copy
+                t = (String) clipboard.getData(DataFlavor.stringFlavor);
+                e.sendKeys(Keys.chord(Keys.CONTROL, "v")); //paste       
+            }else{
+                e.sendKeys(Keys.chord(Keys.COMMAND, "c")); //copy
+                t = (String) clipboard.getData(DataFlavor.stringFlavor);
+                e.sendKeys(Keys.chord(Keys.COMMAND, "v")); //paste                
+            }               
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + " > " + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -915,8 +932,14 @@ public class T {
                 default:
                     break;
             }
-            e.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
-            e.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it  
+            if(WsOS.toLowerCase().contains("windows")){
+                e.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
+                e.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it                  
+            }else{
+                e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+                e.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
+            }
+
             _p++; 
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Cleared" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -1472,9 +1495,14 @@ public class T {
         sw1.start();        
  
         FAIL = false;
-        try {
-            E.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
-            E.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it  
+        try {      
+            if(WsOS.toLowerCase().contains("windows")){
+                E.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
+                E.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it              
+            }else{
+                e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+                e.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
+            }   
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Text cleared"+ "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -2245,7 +2273,7 @@ public class T {
             if(NAME.startsWith("Station") && !t.toLowerCase().contains("no data") && TDS == 5 ){ // <<< td[5] - Status
                 //   check status 
                 STAT = X.get(X.size() - 1).findElement(By.xpath(".//i[contains(@class, 'icon mdi mdi-eye')]")).getAttribute("class").trim();
-                if(STAT != "" && STAT.contains("mdi-eye-off")){
+                if(!STAT.equals("") && STAT.contains("mdi-eye-off")){
                     STAT = "Hidden in App";         //   v-icon mdi mdi-eye-off theme--light none--text
                 } else {
                     STAT = "Display in App";        //   v-icon mdi mdi-eye theme--light
