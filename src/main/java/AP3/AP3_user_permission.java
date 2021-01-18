@@ -26,6 +26,8 @@ public class AP3_user_permission {
         _t++; Thread.sleep((long) sleep); T.Page_URL("AP3 Login page", "no_jira");             
             if (FAIL) { return;}
 
+        // @ST - Hiding this "Runner Login" code for me to run unit test   
+        /*    
         // <editor-fold defaultstate="collapsed" desc="Runner Login" >
         _t++; T.Visible_Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",  "no_jira"); 
             if (FAIL) { return;}
@@ -43,7 +45,8 @@ public class AP3_user_permission {
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Cannot login...' Text", "Cannot log into Admin Panel as a Runner",true,"no_jira");             
             if (FAIL) { return;}           
         // </editor-fold>     
-
+        */
+        
         // <editor-fold defaultstate="collapsed" desc="Admin N" >  
             // <editor-fold defaultstate="collapsed" desc="Admin N - Login, Dashboard, Sites" >
         _t++; T.Visible_Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",  "no_jira"); 
@@ -73,7 +76,8 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Dashboard 'Users'", "Users", true,"no_jira");     
             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Dashboard 'Announcements'", "Announcements", true,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Dashboard 'Promo Management'", "Promo Management", true,"no_jira");
-            _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Dashboard 'Smart Analytics'", "Smart Analytics", false,"no_jira");            
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Dashboard 'Smart Analytics'", "Smart Analytics", false,"no_jira");
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N Dashboard 'Ap3 Notification'", "Ap3 Notification", true,"no_jira");             
 
             // Admin N Sites permissions
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
@@ -161,7 +165,7 @@ public class AP3_user_permission {
                         if (FAIL) { return; }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
-                    Thread.sleep(500);  
+                    Thread.sleep(1000);    
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;} 
                         
@@ -172,7 +176,7 @@ public class AP3_user_permission {
                         if (FAIL) { return; }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
-                    Thread.sleep(500);  
+                    Thread.sleep(1000);  
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;}   
                        
@@ -327,9 +331,10 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y Dashboard 'Sales Reporting'", "Sales Reporting", true,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y Dashboard 'Sales Analytics'", "Sales Analytics", true,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y Dashboard 'Users'", "Users", false,"no_jira");     
-            _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y Dashboard 'Announcements'", "Announcements", false,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y Dashboard 'Announcements'", "Announcements", true,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y Dashboard 'Promo Management'", "Promo Management", false,"no_jira");              
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y Dashboard 'Smart Analytics'", "Smart Analytics", true,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM Y Dashboard 'Ap3 Notification'", "AP3 Notification", false,"no_jira"); 
             
              //SM Y Sites permissions
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
@@ -415,7 +420,7 @@ public class AP3_user_permission {
                         if (FAIL) { return; }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
-                    Thread.sleep(500);  
+                    Thread.sleep(1000);  
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;} 
                        
@@ -517,6 +522,7 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM N Dashboard 'Announcements'", "Announcements", false,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM N Dashboard 'Promo Management'", "Promo Management", false,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("SM N Dashboard 'Smart Analytics'", "Smart Analytics", false,"no_jira");
+            _t++; Thread.sleep((long) sleep); T.Find_Text("SM N Dashboard 'Ap3 Notification'", "AP3 Notification", false,"no_jira"); 
 
             //SM N Sites permissions
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
@@ -610,7 +616,7 @@ public class AP3_user_permission {
                         if (FAIL) { return; }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
-                    Thread.sleep(500);     
+                    Thread.sleep(1000);     
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;}   
                     
@@ -697,9 +703,10 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y Dashboard 'Sales Reporting'", "Sales Reporting", true,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y Dashboard 'Sales Analytics'", "Sales Analytics", true,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y Dashboard 'Users'", "Users", true,"no_jira");     
-            _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y Dashboard 'Announcements'", "Announcements", false,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y Dashboard 'Announcements'", "Announcements", true,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y Dashboard 'Promo Management'", "Promo Management", false,"no_jira");                     
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y Dashboard 'Smart Analytics'", "Smart Analytics", true,"no_jira");
+            _t++; Thread.sleep((long) sleep); T.Find_Text("DM Y Dashboard 'Ap3 Notification'", "AP3 Notification", false,"no_jira"); 
             
             // DM Y Sites permissions
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
@@ -796,7 +803,7 @@ public class AP3_user_permission {
                         if (FAIL) { return; }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
-                    Thread.sleep(500);    
+                    Thread.sleep(1000);    
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;}   
                      
@@ -888,6 +895,7 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM N Dashboard 'Announcements'", "Announcements", false,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM N Dashboard 'Promo Management'", "Promo Management", false,"no_jira"); 
             _t++; Thread.sleep((long) sleep); T.Find_Text("DM N Dashboard 'Smart Analytics'", "Smart Analytics", false,"no_jira");
+            _t++; Thread.sleep((long) sleep); T.Find_Text("DM N Dashboard 'Ap3 Notification'", "AP3 Notification", false,"no_jira"); 
             
             // DM N Sites permissions
             _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
@@ -975,7 +983,7 @@ public class AP3_user_permission {
                         if (FAIL) { return; }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
-                    Thread.sleep(500);    
+                    Thread.sleep(1000);    
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;} 
                      
@@ -986,7 +994,7 @@ public class AP3_user_permission {
                         if (FAIL) { return; }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                         if (FAIL) { return; } // Save
-                    Thread.sleep(500);   
+                    Thread.sleep(1000);   
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                         if (FAIL) { return;}   
                       
