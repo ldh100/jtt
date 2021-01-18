@@ -6,7 +6,9 @@
 package WO;
 import A.T;
 import static A.A.*;
+
 import static WO.WO.*;
+
 /**
  *
  * @author Oleg.Spozito
@@ -17,6 +19,45 @@ public class WO_login {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Page_URL("Login page", "no_jira");             
             if (FAIL) { return;}
+            
+    
+//
+//        String URL = "https://api.compassdigital.org/dev/config/eW0gy25y3BFaYvgPlYgmf5X3mJ9qZKulk9Q5jya2c2gw4W4JZZC126B0q82EsA81Mw0MoNURYeq?nocache=1";
+//        String token = "eyJhbGciOiJLTVMiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiJxNFhBTmdYNTBESUJKakRZTEVBT2ZvREttNzNLNVFJQWdHN1FOME9nSU5HakIxUlBKWnRxUUVPRW93UVBoOThSN1gwUnFOSVlYd0xHV3pEZ1RNb29vZEtLOSIsInNjb3BlcyI6Iio6KiIsImlhdCI6MTYxMDA0MjY0NywiZXhwIjoxNjE3ODE4NjQ4fQ.AQICAHg3B+yaImOx8iePCmKXjUT1mJ+gyTV+zezNpAJjOkZbFgHuyPYtfRmCUpemQkSDZPKuAAABUTCCAU0GCSqGSIb3DQEHBqCCAT4wggE6AgEAMIIBMwYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAz0IDjTCq2Y1MTDNfsCARCAggEEBuQmA4MZgFyxT4ESzFWpD8vHnZl/TCsCRQVEaHjOzN1q3tmKA6rLj0/qItaz4P9KJkssf/D6JfQjbAmGTYQ6kK21LxDkSiYnPfBk2CYXIruFyzpXtTlZF04bCEN7MLtnT7dTqnC0upg4dGnQDWG90RcGATYIJzexk7Jr11V7wCQCEvUWiZEPcwbyObOSW7+pPIfIZAnnUBhLoo6nKB+z24jl1sKX6IYrlPp0b54Jg7Rc6njh0dlNXpvWXx7OZhaBAM+JUzePBwWwWLYxQ+83QzXyzGUw8vr/P2MgZ7/Iudv5GHzziwYWYc3i2zku8CLH/h8tFXtLQr8aicGGaM1pahsZMMs=";     
+//        CloseableHttpClient httpclient = HttpClients.createDefault();
+//
+//        HttpGet httpGet = new HttpGet(URL);
+//        CloseableHttpResponse response = null;
+//
+//        httpGet.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
+//        httpGet.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + token);
+//
+//        try {
+//            response = httpclient.execute(httpGet);
+//            if (response.getStatusLine().getStatusCode() == 200) {
+//                //请求体内容
+//                String content = EntityUtils.toString(response.getEntity(), "UTF-8");
+//                //内容写入文件
+//
+//                System.out.println("内容长度：" + content.length());
+//                System.out.println(content);
+//                response.close(); 
+//                    httpclient.close();
+//            }
+//        }
+//        
+//        catch (IOException ex) {
+//            Logger.getLogger(WO_login.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//        
+//        
+//       
+//
+//        
+
+
+            
         _t++; T.Element_By_Path_Attribute("Thrive Image URL", "xpath", "//div[@class='v-image__image v-image__image--cover']", "style", "no_jira");
             //if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'card-header' text", "xpath", "//p[@class='card-header']", "no_jira"); 
