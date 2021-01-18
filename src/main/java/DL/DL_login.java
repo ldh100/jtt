@@ -82,41 +82,41 @@ public class DL_login {
             } 
             
  
-          //To Select 8 Check boxes & Verify Metric Card values
+          //To Select 8 Check boxes & Verify Metric Card values by Prathyusha Deshpande
             for (int k = 1; k < 9; k++) {
             	_t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Select checkbox whose index is set to - "+k, "xpath", "(//div[@class='MuiListItemIcon-root']/span/span/input)[position()="+k+"]", "no_jira"); 
             if (FAIL) { return;} 
           
-           /*
+           
             
             Thread.sleep(4000);
             if(k==1) {
-            	_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'BP-VA' metric", "BP-VA-", true,"no_jira");
+            	_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'CS' metric", "CS", true,"no_jira");
             }else if (k==2) {
-            	_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'D-VA-CBPVAS' metric", "D-VA-CBPVAS", true,"no_jira");
+            	_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'CUR' metric", "CUR", true,"no_jira");
 			}else if (k==3) {
-				_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'M-VA-CBPVAS' metric", "M-VA-CBPVAS", true,"no_jira");
+				_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'TS' metric", "TS", true,"no_jira");
 			}else if (k==4) {
-				_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'D-VA-BPVA' metric", "D-VA-BPVA", true,"no_jira");
+				_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'CER' metric", "CER", true,"no_jira");
 			}else if (k==5) {
-				_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'D-MER-' metric", "D-MER-", true,"no_jira");
+				_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'CROR' metric", "CROR", true,"no_jira");
 			}else if (k==6) {
-				_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'D-VA-MVAS' metric", "D-VA-MVAS", true,"no_jira");
+				_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'CSOP' metric", "CSOP", true,"no_jira");
 			}else if (k==7) {
-				_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'M-VA-BPVA' metric", "M-VA-BPVA", true,"no_jira");
+				_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'MER' metric", "MER", true,"no_jira");
 			}else if (k==8) {
-				_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'M-MER-' metric", "M-MER-", true,"no_jira");
+				_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'MROR' metric", "MROR", true,"no_jira");
 			}
 			
-			*/
+			
 		}
         
-        //Verify whether 9th Check box is disabled or not
+        //Verify whether 9th Check box is disabled or not by Prathyusha Deshpande
         _t++; T.Element_By_Path_Attribute("Checkbox should be disabled when metric exceeds 8", "xpath", "(//div[@class='MuiListItemIcon-root']/span/span/input)[position()=9]", "disabled","no_jira");
         	if (FAIL) { return;}
         	
         
-       //To  Verify whether the Preset buttons are displayed and Clicking on them 	
+       //To  Verify whether the Preset buttons are displayed and Clicking on them by Prathyusha Deshpande	
         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find Date selection container", "xpath", "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3']", "no_jira"); 
              if (FAIL) { return;}        
         _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Date Items count", e1,"xpath", ".//div[contains(@class, 'MuiGrid-root MuiGrid-item')]", "no_jira");             
