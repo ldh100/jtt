@@ -616,7 +616,6 @@ public class DL extends javax.swing.JInternalFrame {
         
         if(DV1.getRowCount() > 0) {
             METRIC = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
-            COUNTRY = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
         }
         if(DV2.getRowCount() > 0) {
             DATE_RANGE = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
@@ -712,7 +711,20 @@ public class DL extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === ^ Login " + "\t" + " ===== " + "\t" + " == ^ Login End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
-
+        if (_metrics_selection.isSelected()) { 
+            SCOPE += ", Metrics Selection";  
+            EX += " - " + "\t" + " === Metrics Selection" + "\t" + " ===== " + "\t" + " == Metrics Selection Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            DL_metrics_selection.run();
+            EX += " - " + "\t" + " === ^ Metrics Selection" + "\t" + " ===== " + "\t" + " == ^ Metrics Selection End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }  
+        if (_metric_data.isSelected()) { 
+            SCOPE += ", Metrics Data";  
+            EX += " - " + "\t" + " === Metrics Data" + "\t" + " ===== " + "\t" + " == Metrics Data Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            DL_metric_data.run();
+            EX += " - " + "\t" + " === ^ Metrics Data" + "\t" + " ===== " + "\t" + " == ^ Metrics Data End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }
 
         // ============================== Last Blocks
         if (_logout.isSelected()) { 
@@ -729,20 +741,7 @@ public class DL extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }  
-        if (_metrics_selection.isSelected()) { 
-            SCOPE += ", Metrics Selection";  
-            EX += " - " + "\t" + " === Metrics Selection" + "\t" + " ===== " + "\t" + " == Metrics Selection Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            DL_metrics_selection.run();
-            EX += " - " + "\t" + " === ^ Metrics Selection" + "\t" + " ===== " + "\t" + " == ^ Metrics Selection End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            Thread.sleep(1500);
-        }  
-        if (_metric_data.isSelected()) { 
-            SCOPE += ", Metrics Data";  
-            EX += " - " + "\t" + " === Metrics Data" + "\t" + " ===== " + "\t" + " == Metrics Data Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            DL_metric_data.run();
-            EX += " - " + "\t" + " === ^ Metrics Data" + "\t" + " ===== " + "\t" + " == ^ Metrics Data End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            Thread.sleep(1500);
-        }                    
+                    
         if(_f > 0) {
             txtLog.append("\r\n=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 

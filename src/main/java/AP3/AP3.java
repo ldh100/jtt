@@ -204,7 +204,7 @@ public class AP3 extends javax.swing.JInternalFrame {
 
         _login.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _login.setSelected(true);
-        _login.setText("Login > Dashboard");
+        _login.setText("Admin Login");
         _login.setEnabled(false);
         _login.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
@@ -734,7 +734,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         getContentPane().add(txtSM_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 332, 72, -1));
 
         txtIM_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtIM_PW.setText("AnnaL0g0");
+        txtIM_PW.setText("Password1");
         getContentPane().add(txtIM_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 308, 72, -1));
 
         lblSITES1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
