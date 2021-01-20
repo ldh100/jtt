@@ -29,7 +29,7 @@ public class AP3_logout {
 
                 _t++;
                 Thread.sleep((long) sleep);
-                T.Swith_to_Frame("Switching to Feedback frame", "css", "iframe[src='https://w.appzi.io/w-e8kcbv.html?portalId=oQyah&configId=6fbf7081-7c37-4e10-8ad9-5ea2901193c0&hostOriginUrl=https%3A%2F%2Fdev.adminpanel.compassdigital.org%2F%23%2F']", "no_jira");
+                T.Swith_to_Frame("Switching to Feedback frame", "xpath", "//iframe[contains(@src,'https://w.appzi.io/w-e8kcbv.html?portalId=oQyah&configId')]", "no_jira");
                 if (FAIL) {
                     return;
                 }
