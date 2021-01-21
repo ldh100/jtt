@@ -87,7 +87,7 @@ public class WO_account_settings {
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click First row of list "+ n, "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]", "no_jira");               
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click Deletc betton   "+ n, "xpath", "//span[text()=' Delete ']" , "no_jira");
             T.Wait_For_Element_By_Path_Presence("wait for alert present","className", "vts__message", "no_jira");
-            Thread.sleep(5000);
+            //Thread.sleep(5000);
             if (FAIL) { return;} 
             n++;
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'My Account' Tab", "xpath", "//a[@href='/account-settings/my-account']", "no_jira");
@@ -133,10 +133,12 @@ public class WO_account_settings {
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']", "no_jira");
                 if (FAIL) { return;} 
                 Thread.sleep(5000); 
-                //BW2_DoWork();
+              
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click First row of list "+ n, "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]", "no_jira");               
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click Delete betton   "+ n, "xpath", "//span[text()=' Delete ']" , "no_jira");
-                // Thread.sleep(5000); 
+               // T.Wait_For_Element_By_Path_Presence("wait for alert present","className", "vts__message", "no_jira");
+            
+                Thread.sleep(5000); 
                 if (FAIL) { return;}    
                 break;
             
@@ -152,18 +154,13 @@ public class WO_account_settings {
                 
                  }
                     
-                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']", "no_jira");
+                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']", "no_jira");
                 if (FAIL) { return;} 
                 Thread.sleep(5000); 
-                //BW2_DoWork();
+               
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click First row of list "+ n, "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]", "no_jira");               
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click Delete betton   "+ n, "xpath", "//span[text()=' Delete ']" , "no_jira");
-                // Thread.sleep(5000); 
-                 
-                 
-                 
-                 
-                 
+                // Thread.sleep(5000);                  
                 break;                
             default: 
                 break;
@@ -172,7 +169,6 @@ public class WO_account_settings {
     
     public static void AddCC_FreedomPay(PaymentInfo pi) throws InterruptedException  {
     //Verfiy the Name input 
-      //  _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Add card form---Name Label",          "css", "div#app>div>main>div>div>div:nth-of-type(3)>div>div>div>div:nth-of-type(2)>div>div>label", "no_jira");
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Add card form---Name Label","css", "div#app>div>main>div>div>div:nth-of-type(3)>div>div>div>div:nth-of-type(2)>div>div>label","textContent", "no_jira");
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("click ---Name field",           "className", "iframe-input", "no_jira");
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Input Name ",              "className", "iframe-input", pi.name,false,"no_jira");
@@ -202,12 +198,12 @@ public class WO_account_settings {
             Thread.sleep(5000);  
     //Determine page redirect        
        
-           if (!d1.findElements(By.tagName("h3")).isEmpty()){
+        if (!d1.findElements(By.tagName("h3")).isEmpty()){  
             _t++; EX += _t + "\t" + "Add CC successful " + "\t" + " ===== " + "\t" + pi.name + "\t" + " PASS " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n"; 
          //   _t++; Thread.sleep((long) sleep); T.Swith_to_Frame("switch to orginal webdriver",          "defaultContent", null, "no_jira");
-         d1.switchTo().parentFrame();
-         return;
-           }
+         //d1.switchTo().parentFrame();
+            return;
+        }
     //Determine the error message
         String  errormessages =new String();
         for (String str : ERRMESSAGE){
@@ -216,8 +212,9 @@ public class WO_account_settings {
             
         }
         _t++;_f++; EX += _t + "\t" + "Add CC FAIL " + "\t" + " ===== " + "\t" + errormessages + "\t" + " FAIL " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-        //_t++; Thread.sleep((long) sleep); T.Swith_to_Frame("switch to orginal webdriver",          "defaultContent", null, "no_jira");
-        d1.switchTo().parentFrame();
+        
+   
+        _t++; Thread.sleep((long) sleep); T.Swith_to_Frame("switch to orginal webdriver",          "defaultContent", null, "no_jira");
         _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back", SITE + "Account Settings","Previous page (???)", "no_jira");
             if (FAIL) { return;}       
  
@@ -276,41 +273,36 @@ public class WO_account_settings {
     }
     
     public static void AddCC_Exact(PaymentInfo pi) throws InterruptedException  {
-        //Verify all element on Add card  form 
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Add card form---Title", "xpath", "//h1[@class='mb-5 text-center']", "no_jira");
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Add card form---Name input", "xpath", "(//div[@class='v-input__slot']//div)[12]", "no_jira");
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Add card form---Card number input", "xpath", "(//div[@class='v-input__slot']//div)[13]", "no_jira");  
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Add card form---Expire Month input ", "xpath", "(//div[@class='v-input__slot']//div)[14]", "no_jira");  
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Add card form---Expire Year input", "xpath", "(//div[@class='v-input__slot']//div)[15]", "no_jira");  
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Add card form---CVV input", "xpath", "(//div[@class='v-input__slot']//div)[16]", "no_jira");
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Add card form---Submit button", "xpath", "//span[@class='v-btn__content']//span[1]", "no_jira");
-         if (FAIL) { return;} 
-         
+                 
     //input CC info
-
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Add card form---Name input field", "xpath", "(//div[@class='v-input__slot']//div)[12]", "no_jira");       
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("cursor locate to---Name input", "xpath", "(//div[@class='v-input__slot']//div)[12]", "no_jira");
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Input card NAME ", "xpath", "//label[text()='Name on Card']/following::input", pi.name, false, "no_jira");
-       
+        
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Add card form---Card number input field", "xpath", "(//div[@class='v-input__slot']//div)[13]", "no_jira");  
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("cursor locate to ---Card number input","xpath", "(//div[@class='v-input__slot']//div)[13]", "no_jira");  
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Input card NUMBER ", "xpath", "//label[text()='Card Number']/following::input", pi.card_num, false, "no_jira");
         
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Add card form---Expire Month input Field ", "xpath", "(//div[@class='v-input__slot']//div)[14]", "no_jira");  
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("cursor locate to---Expire Month input ", "xpath", "(//div[@class='v-input__slot']//div)[14]", "no_jira");
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Input card MONTH ", "xpath", "//label[text()='Expiry Month']/following::input", pi.expire_month, false, "no_jira");
         
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Add card form---Expire Year input field", "xpath", "(//div[@class='v-input__slot']//div)[15]", "no_jira");  
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("cursor locate to---Expire Year input", "xpath", "(//div[@class='v-input__slot']//div)[15]", "no_jira");       
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Input card YEAR ", "xpath", "//label[text()='Expiry Year']/following::input", pi.expire_year, false, "no_jira");
         
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Add card form---CVV input field", "xpath", "(//div[@class='v-input__slot']//div)[16]", "no_jira");
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("cursor locate to---CVV input", "xpath", "(//div[@class='v-input__slot']//div)[16]", "no_jira");        
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Input card CVV ", "xpath", "//label[text()='CVV']/following::input", pi.cvv, false, "no_jira");
         
+        
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Add card form---Submit button", "xpath", "//span[@class='v-btn__content']//span[1]", "no_jira");
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("click Submit button", "xpath", "//span[@class='v-btn__content']//span[1]", "no_jira");
           if (FAIL) { return;} 
-         Thread.sleep(5000); 
+        // Thread.sleep(5000); 
          
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("find submit button", "xpath", "//span[text()=' Submit ']", "no_jira");
-        System.out.println(t);
-                                               
-        // d1.findElements(By.xpath("/html/body/div/div/div/main/div/div/div[3]/div/div/div/div[2]"));
+            
+    //Determine the page redirect    
         String attr = d1.findElement(By.xpath("/html/body/div/div/div/main/div/div/div[3]/div/div/div/div[2]")).getAttribute("style");
       //  d1.findElement(By.xpath("//span[text()=' Submit ']")).getAttribute(Style);
         System.out.println(attr);         
@@ -319,22 +311,17 @@ public class WO_account_settings {
             return;
         }
         T.List_L0("looking for error message", "css", "[role='alert']", "no_jira");
+        String  errormessages ="";
         if (!L0.isEmpty()){
-            System.out.println("find alert");
-            String  errormessages ="";
-            
+            System.out.println("find alert");           
             for (int i =0; i< L0.size() ; i++){
                 L0.get(i).getText()    ;
+                //errormessages = L0.get(i)+ ", "+errormessages;                
                 errormessages = "".equals(errormessages)? L0.get(i).getText(): errormessages +",  "+L0.get(i).getText();
             }
             _t++;_f++; EX += _t + "\t" + "Add CC FAIL " + "\t" + " ===== " + "\t" + "mandatory field requires: " + errormessages+ "\t" + " FAIL " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
            
         }
-        
-        //_t++; Thread.sleep((long) sleep); T.Swith_to_Frame("switch to orginal webdriver",          "defaultContent", null, "no_jira");
-        //d1.switchTo().parentFrame(); 
-         
-         
         _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back", SITE + "Account Settings","Previous page (???)", "no_jira");
             if (FAIL) { return;}       
     }

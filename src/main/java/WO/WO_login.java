@@ -49,12 +49,7 @@ public class WO_login {
 //        catch (IOException ex) {
 //            Logger.getLogger(WO_login.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-//        
-//        
-//        
-//       
-//
-//        
+    
 
 
             
@@ -85,7 +80,7 @@ public class WO_login {
 
         if(NEW_USER) {
             
-    // Larry's code goes here
+// Larry's code goes here
     //test Create new user
     //  Open modal        
         // _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Login'", "xpath", "//*[text()='Login']", "no_jira"); 
@@ -141,7 +136,7 @@ public class WO_login {
            CredentialResposistory crt = new CredentialResposistory();
            crt.insertRows(emailAassembly,password); 
            
-            //Larry's code complete
+//Larry's code complete
             
         }else{
             _t++; T.Element_Child_Click("Click 'Email' input", L1.get(0), "tagName" , "input", "no_jira"); 
