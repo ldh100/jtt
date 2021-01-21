@@ -7,62 +7,12 @@ package WO;
 import A.T;
 import static A.A.*;
 import static WO.WO.*;
-import static java.lang.System.exit;
-import java.util.*;
-import org.openqa.selenium.By;
-
 /**
  *
  * @author Oleg.Spozito
  */
-
-
 public class WO_account_settings {
-    static String[] NAME =new String[]{"Visa Larry", "Master Mickey Mouse", "AMEX Donald Duck","Discovery snoopy "}  ;
-    static String[] CARD_NUM =new String[]{"4111111111111111", "5500000000000004","340000000000009" ,"6011000000000004"};
-    static String[] EXPIRE_MON =new String[]{"01","04","07","12"};
-    static String[] EXPIRE_YEAR =new String[]{"2023","2025","2030", "2027"};
-    static String[] CVV = new String[]{"444","444", "6960", "145"};
-    static String[] POSTAL = new String[]{"l1l2l3","12345", "", "a1b2c3"};
-    static String[] ERRMESSAGE = {"Card Number is incomplete","Expiration Date is incomplete","Security Code is incomplete","Postal Code is incomplete"};
-    static String[] PAYMENT_TYPE = {"exact","freedompay"};
-   
-    static class PaymentInfo{
-        String name,card_num,expire_month,expire_year,cvv,postalcode;
-        PaymentInfo(){};
-        PaymentInfo(String name,String card_num ,String expire_month ,String expire_year ,String cvv,String postalcode ){
-            this.name = name;
-            this.card_num = card_num;
-            this.expire_month = expire_month;
-            this.expire_year = expire_year;
-            this.cvv = cvv;     
-            this.postalcode = postalcode;
-        }
-        
-        
-    }
-    
-
-    
-    public static void run() throws InterruptedException{ 
-    
-//        _t++; Thread.sleep((long) sleep); T.Call_API("Call /location/private config API", BaseAPI + "/config/" + SiteID + "?nocache=1", true,"no_jira" );
-//        
-//        System.out.println( API_Response_Body);      
-        //String paymentType ="" ;
-//        for(String str : PAYMENT_TYPE)
-//        if (API_Response_Body.contains(str)){          
-//           paymentType = str;
-//           System.out.println(paymentType);
-//           _t++; T.API_Body_Contains("Identify the Payment Type of site", paymentType,true, "no_jira");
-//           break;
-//        }
-//         if ("".equals(paymentType)) 
-//         { //_t++; EX += _t + "no payment type setting "  + "\t" +"=====" + "\t" + "could not find the payment type" + "\t" + "PASS" + "\t" + " - " +"";
-//             System.out.println("Payment  not found");
-//             return;
-//         } 
-         
+    public static void run() throws InterruptedException { 
         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find Toolbar element", "xpath", "//div[@class='v-toolbar__content']", "no_jira");
             if (FAIL) { return;}           
         _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click 'Account' Button", e1, "xpath", ".//i[@class='v-icon notranslate mdi mdi-account-circle theme--light']", "no_jira");                                     
@@ -72,17 +22,16 @@ public class WO_account_settings {
         Thread.sleep((long) sleep);
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Title text", "xpath", ".//h1[@class='header']", "no_jira");
             if (FAIL) { return;}   
-    //Test add Credit Card 
-    //1. open Payment  Tab
+          
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Payment tab  text", "xpath", "//a[@href='/account-settings/payment-options']", "no_jira");  
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']", "no_jira");
           if (FAIL) { return;} 
-          Thread.sleep(5000);  
-    //verify CC ---- delete  existed
-    
+          Thread.sleep(5000);        
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Detect First row of list ", "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]", "no_jira");
+         
         int n=1;
         while(t.toLowerCase().contains("card ending"))
+<<<<<<< HEAD
         {
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click First row of list "+ n, "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]", "no_jira");               
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click Deletc betton   "+ n, "xpath", "//span[text()=' Delete ']" , "no_jira");
@@ -322,7 +271,29 @@ public class WO_account_settings {
             _t++;_f++; EX += _t + "\t" + "Add CC FAIL " + "\t" + " ===== " + "\t" + "mandatory field requires: " + errormessages+ "\t" + " FAIL " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
            
         }
+=======
+                {
+                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click First row of list "+ n, "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]", "no_jira");               
+                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("delete first row  "+ n, "xpath", "//span[text()=' Delete ']" , "no_jira");
+                Thread.sleep(1000);
+                //System.out.println ("delete line  " + n);
+                 if (FAIL) { return;} 
+                n++;
+                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'My Account' Tab", "xpath", "//a[@href='/account-settings/my-account']", "no_jira");
+                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']", "no_jira");
+                if (FAIL) { return;} 
+                Thread.sleep(5000);
+                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Detect First row of list " + n, "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]", "no_jira");
+                }
+          
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'Add New Card' ROW", "xpath", "//h4[text()='Add a new card']", "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Add New Card' ROW", "xpath", "//h4[text()='Add a new card']", "no_jira"); 
+          if (FAIL) { return;}  
+          
+        
+                     
+>>>>>>> master
         _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back", SITE + "Account Settings","Previous page (???)", "no_jira");
             if (FAIL) { return;}       
-    }
+    }  
 }

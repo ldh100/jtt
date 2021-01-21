@@ -6,9 +6,7 @@
 package WO;
 import A.T;
 import static A.A.*;
-
 import static WO.WO.*;
-
 /**
  *
  * @author Oleg.Spozito
@@ -19,6 +17,7 @@ public class WO_login {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Page_URL("Login page", "no_jira");             
             if (FAIL) { return;}
+<<<<<<< HEAD
             
     
 //
@@ -53,6 +52,8 @@ public class WO_login {
 
 
             
+=======
+>>>>>>> master
         _t++; T.Element_By_Path_Attribute("Thrive Image URL", "xpath", "//div[@class='v-image__image v-image__image--cover']", "style", "no_jira");
             //if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'card-header' text", "xpath", "//p[@class='card-header']", "no_jira"); 
@@ -80,14 +81,19 @@ public class WO_login {
 
         if(NEW_USER) {
             
+<<<<<<< HEAD
 // Larry's code goes here
     //test Create new user
+=======
+            // Larry's code goes here
+             //test Create new user
+>>>>>>> master
     //  Open modal        
-        // _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Login'", "xpath", "//*[text()='Login']", "no_jira"); 
+       // _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Login'", "xpath", "//*[text()='Login']", "no_jira"); 
         //    if (FAIL) { return;}             
-        // _t++; T.Element_E1_Find("Find 'Login' dialog", "xpath", "//html/body/div/div/div[3]/div/div/div", "no_jira");
-        //   if (FAIL) { return;} 
-        //  Thread.sleep(500);      
+       // _t++; T.Element_E1_Find("Find 'Login' dialog", "xpath", "//html/body/div/div/div[3]/div/div/div", "no_jira");
+         //   if (FAIL) { return;} 
+          //  Thread.sleep(500);      
         _t++; T.Element_By_Path_Text("Find 'switch-form-text > Sign-in' text", "xpath", "//p[@class='switch-form-text']", "no_jira");
         
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Sign up btn click  ", "xpath", "//p[text()='Sign Up']", "no_jira");
