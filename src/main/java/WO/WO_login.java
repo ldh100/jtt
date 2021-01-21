@@ -19,6 +19,10 @@ public class WO_login {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Page_URL("Login page", "no_jira");             
             if (FAIL) { return;}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> eb1c55aa8c6dfaf56b6ab36781ef708d40bb55eb
             
     
 //
@@ -53,6 +57,11 @@ public class WO_login {
 
 
             
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> master
+>>>>>>> eb1c55aa8c6dfaf56b6ab36781ef708d40bb55eb
         _t++; T.Element_By_Path_Attribute("Thrive Image URL", "xpath", "//div[@class='v-image__image v-image__image--cover']", "style", "no_jira");
             //if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'card-header' text", "xpath", "//p[@class='card-header']", "no_jira"); 
@@ -80,8 +89,18 @@ public class WO_login {
 
         if(NEW_USER) {
             
+<<<<<<< HEAD
 // Larry's code goes here
     //test Create new user
+=======
+<<<<<<< HEAD
+// Larry's code goes here
+    //test Create new user
+=======
+            // Larry's code goes here
+             //test Create new user
+>>>>>>> master
+>>>>>>> eb1c55aa8c6dfaf56b6ab36781ef708d40bb55eb
     //  Open modal        
         // _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Login'", "xpath", "//*[text()='Login']", "no_jira"); 
         //    if (FAIL) { return;}             

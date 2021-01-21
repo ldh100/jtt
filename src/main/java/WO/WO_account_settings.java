@@ -83,6 +83,10 @@ public class WO_account_settings {
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Detect First row of list ", "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]", "no_jira");
         int n=1;
         while(t.toLowerCase().contains("card ending"))
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> eb1c55aa8c6dfaf56b6ab36781ef708d40bb55eb
         {
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click First row of list "+ n, "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]", "no_jira");               
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click Deletc betton   "+ n, "xpath", "//span[text()=' Delete ']" , "no_jira");
@@ -322,6 +326,31 @@ public class WO_account_settings {
             _t++;_f++; EX += _t + "\t" + "Add CC FAIL " + "\t" + " ===== " + "\t" + "mandatory field requires: " + errormessages+ "\t" + " FAIL " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
            
         }
+<<<<<<< HEAD
+=======
+=======
+                {
+                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click First row of list "+ n, "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]", "no_jira");               
+                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("delete first row  "+ n, "xpath", "//span[text()=' Delete ']" , "no_jira");
+                Thread.sleep(1000);
+                //System.out.println ("delete line  " + n);
+                 if (FAIL) { return;} 
+                n++;
+                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'My Account' Tab", "xpath", "//a[@href='/account-settings/my-account']", "no_jira");
+                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']", "no_jira");
+                if (FAIL) { return;} 
+                Thread.sleep(5000);
+                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Detect First row of list " + n, "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]", "no_jira");
+                }
+          
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'Add New Card' ROW", "xpath", "//h4[text()='Add a new card']", "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Add New Card' ROW", "xpath", "//h4[text()='Add a new card']", "no_jira"); 
+          if (FAIL) { return;}  
+          
+        
+                     
+>>>>>>> master
+>>>>>>> eb1c55aa8c6dfaf56b6ab36781ef708d40bb55eb
         _t++; Thread.sleep((long) sleep); T.Navigate_Back("Navigate Back", SITE + "Account Settings","Previous page (???)", "no_jira");
             if (FAIL) { return;}       
     }
