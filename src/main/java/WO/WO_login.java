@@ -19,10 +19,6 @@ public class WO_login {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Page_URL("Login page", "no_jira");             
             if (FAIL) { return;}
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> eb1c55aa8c6dfaf56b6ab36781ef708d40bb55eb
             
     
 //
@@ -53,15 +49,15 @@ public class WO_login {
 //        catch (IOException ex) {
 //            Logger.getLogger(WO_login.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-    
+//        
+//        
+//        
+//       
+//
+//        
 
 
             
-<<<<<<< HEAD
-=======
-=======
->>>>>>> master
->>>>>>> eb1c55aa8c6dfaf56b6ab36781ef708d40bb55eb
         _t++; T.Element_By_Path_Attribute("Thrive Image URL", "xpath", "//div[@class='v-image__image v-image__image--cover']", "style", "no_jira");
             //if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'card-header' text", "xpath", "//p[@class='card-header']", "no_jira"); 
@@ -89,18 +85,8 @@ public class WO_login {
 
         if(NEW_USER) {
             
-<<<<<<< HEAD
-// Larry's code goes here
+    // Larry's code goes here
     //test Create new user
-=======
-<<<<<<< HEAD
-// Larry's code goes here
-    //test Create new user
-=======
-            // Larry's code goes here
-             //test Create new user
->>>>>>> master
->>>>>>> eb1c55aa8c6dfaf56b6ab36781ef708d40bb55eb
     //  Open modal        
         // _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Login'", "xpath", "//*[text()='Login']", "no_jira"); 
         //    if (FAIL) { return;}             
@@ -155,7 +141,7 @@ public class WO_login {
            CredentialResposistory crt = new CredentialResposistory();
            crt.insertRows(emailAassembly,password); 
            
-//Larry's code complete
+            //Larry's code complete
             
         }else{
             _t++; T.Element_Child_Click("Click 'Email' input", L1.get(0), "tagName" , "input", "no_jira"); 
