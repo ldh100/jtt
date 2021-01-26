@@ -1261,6 +1261,7 @@ public class T {
             
             Actions action = new Actions(d1);
             action.moveToElement(e, XX, YY).click().perform();
+            //Thread.sleep(500);
             _p++; 
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Click out of element successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -1443,6 +1444,7 @@ public class T {
             
             Actions action = new Actions(d1);
             action.moveToElement(E, XX, YY).click().perform();
+            //Thread.sleep(500);
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Click " + DIRECTION + " of element successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
