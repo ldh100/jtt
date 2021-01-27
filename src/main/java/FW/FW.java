@@ -614,8 +614,8 @@ public class FW extends javax.swing.JInternalFrame {
         if (d1LastRow == DV1.getSelectedRow() || DV2.getRowCount() == 0) {
            return;
         }
-        //GetBrands();
-        RESTORAUNT = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
+        //GetRestaurants();
+        Restaurants= String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
         RestID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
         d1LastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
@@ -695,7 +695,7 @@ public class FW extends javax.swing.JInternalFrame {
         SCOPE = "";
         
         if(DV1.getRowCount() > 0) {
-            RESTORAUNT = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
+            Restaurants= DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
             COUNTRY = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
         }
         if(DV2.getRowCount() > 0) {
@@ -1149,7 +1149,7 @@ public class FW extends javax.swing.JInternalFrame {
         
         Get_FW_TKN();
         GetMarkets(); 
-        GetRestorants(); 
+        GetRestaurants(); 
         GetUnits();
     }
     private void Get_FW_TKN(){
@@ -1241,7 +1241,7 @@ public class FW extends javax.swing.JInternalFrame {
         
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    private void GetRestorants() {
+    private void GetRestaurants() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n-Load Restaurants ...");
@@ -1251,13 +1251,14 @@ public class FW extends javax.swing.JInternalFrame {
         }
         sw1.start();        
 
-        String[] SitesColumnsName = {"Restaurant", "Status", "Market", "id"}; 
+        String[] SitesColumnsName = {"Restaurants", "Status", "Market", "id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
         SitesModel.setColumnIdentifiers(SitesColumnsName);
         DV1.setModel(SitesModel);
         
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV1.getModel());
         DV1.setRowSorter(sorter);
+        
         ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
         sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
         sorter.setSortKeys(sortKeys);  
@@ -1278,7 +1279,7 @@ public class FW extends javax.swing.JInternalFrame {
             };
 
             String responseRest = httpclient.execute(httpget, responseHandler);
-            String Restaurant;
+            String Restaurants;
             String Market;
             //String Employee;
             String Status;
@@ -1286,13 +1287,13 @@ public class FW extends javax.swing.JInternalFrame {
             
             JSONArray RESTS = new JSONArray(responseRest);
             for (int i = 0; i < RESTS.length(); i++) {
-                Restaurant = "?";
+                Restaurants = "?";
                 Market = "?";
                 Status = "?";
                 id = "?";                
                 JSONObject Rest = RESTS.getJSONObject(i);
                 if(Rest.has("name")){
-                    Restaurant = Rest.getString("name");   
+                    Restaurants = Rest.getString("name");   
                 } 
                 if(Rest.has("marketId")){
                     Market = Rest.getString("marketId");
@@ -1310,7 +1311,7 @@ public class FW extends javax.swing.JInternalFrame {
                 if(Rest.has("id")){
                     id = Rest.getString("id");
                 } 
-                SitesModel.addRow(new Object[]{Restaurant, Status, Market, id});
+                SitesModel.addRow(new Object[]{Restaurants, Status, Market, id});
             }
             DV1.setModel(SitesModel);
             DV1.setDefaultEditor(Object.class, null);
@@ -1340,20 +1341,21 @@ public class FW extends javax.swing.JInternalFrame {
         
         if (DV1.getRowCount() > 0) {
             DV1.changeSelection(0, 0, false, false);
-            if (CONFIG && !"".equals(RESTORAUNT.trim())) {
+            if (CONFIG && !"".equals(Restaurants.trim())) {
                 for(int row = 0; row < DV1.getRowCount(); row++) {
                     // update Market id > Name
-                    if(DV1.getValueAt(row, 0).equals(RESTORAUNT)){
+                    if(DV1.getValueAt(row, 0).equals(Restaurants)){
                         DV1.changeSelection(row, 0, false, false);
                         break;
                     }
                 }
             } //
-            RESTORAUNT = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
+            Restaurants= String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
+            //DV1.setRowSelectionInterval(7, 8);
             RestID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
             //GetBrands();
         }
-        lblSITES.setText("Restorants (" + DV1.getRowCount() + " found)");
+        lblSITES.setText("Restaurants (" + DV1.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }   
     private void GetUnits() {
@@ -1499,7 +1501,7 @@ public class FW extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("_slack:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _slack.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_headless:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _headless.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
 
-                c = C.substring(C.indexOf("RESTORAUNT:")); c = c.substring(0, c.indexOf("\r\n")).trim(); RESTORAUNT = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("Restaurants:")); c = c.substring(0, c.indexOf("\r\n")).trim(); Restaurants= c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("UNIT:")); c = c.substring(0, c.indexOf("\r\n")).trim(); UNIT = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("COUNTRY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); COUNTRY = c.substring(c.indexOf(" ")).trim();
 
@@ -1558,7 +1560,7 @@ public class FW extends javax.swing.JInternalFrame {
             C += "_slack: " + _slack.isSelected() + "\r\n";
             C += "_headless: " + _headless.isSelected() + "\r\n";  
  
-            C += "RESTORAUNT: " + _S + "\r\n";
+            C += "Restaurants: " + _S + "\r\n";
             C += "UNIT: " + _B + "\r\n";
             C += "COUNTRY: " + COUNTRY + "\r\n";            
             
@@ -1803,10 +1805,10 @@ public class FW extends javax.swing.JInternalFrame {
     public static String url = "";
 
     private static String env = "";
-    private static String RESTORAUNT = "";
+    public static String Restaurants = "";
     private static String RestID = "";
 
-    private static String UNIT = "";
+    public static String UNIT = "";
     private static String UnitID = "";
     private String MARKETS;
 
@@ -1881,5 +1883,8 @@ public class FW extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtUManager_ID;
     private javax.swing.JTextField txtUManager_PW;
     // End of variables declaration//GEN-END:variables
+
+     
+    }
 // </editor-fold>
-}
+

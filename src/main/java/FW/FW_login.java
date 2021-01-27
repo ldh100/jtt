@@ -49,7 +49,7 @@ public class FW_login {
   
         _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "xpath", "//input[@type='password']", ADMIN_PW, true, "no_jira"); 
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Unmask Password Click", "css", "[aria-label='append icon']", "no_jira"); 
+       // _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Unmask Password Click", "css", "[aria-label='append icon']", "no_jira"); 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Sign In' button", "xpath", "//span[contains(text(), 'Sign In')]", "no_jira"); 
             if (FAIL) { return;} 
         // loading="true"    
@@ -64,14 +64,15 @@ public class FW_login {
                 _t++; T.Element_Attribute("Drawer Menu (" + i + ") Text", L0.get(i), "textContent", "no_jira");   
                 if (FAIL) { return;}
             } 
-            for (int i = 0; i < L0.size(); i++) {
-                _t++; T.Element_Attribute("Drawer Menu (" + i + ") Text", L0.get(i), "textContent", "no_jira");   
-                if (FAIL) { return;}
+           // for (int i = 0; i < L0.size(); i++) {
+           //     _t++; T.Element_Attribute("Drawer Menu (" + i + ") Text", L0.get(i), "textContent", "no_jira");   
+           //     if (FAIL) { return;}
 //                if(i == (L0.size()-1)){
 //                    Ver = t;
 //                }
-            }             
-        _t++; T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//nav[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");                    
+      _t++; T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//nav[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");        
+}             
+                          
             
     }
-}
+
