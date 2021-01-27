@@ -142,10 +142,10 @@ public class WO extends javax.swing.JInternalFrame {
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -179,14 +179,6 @@ public class WO extends javax.swing.JInternalFrame {
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        DV1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
         DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV1.setCellSelectionEnabled(true);
         DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
@@ -201,6 +193,7 @@ public class WO extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane3.setViewportView(DV1);
+        DV1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 22, 428, 272));
 
@@ -842,7 +835,7 @@ public class WO extends javax.swing.JInternalFrame {
                                 //F += _t + " > WARN - " + tt + "\r\n";
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
                             }
-                            Thread.sleep(4000); //  pause till new alert expected ???? 
+                            Thread.sleep(100); //  pause till new alert expected ???? 
                         }
                     } catch (InterruptedException ex){ // Exception ex
                         System.out.println("BW2: " + "ex.getMessage()");
