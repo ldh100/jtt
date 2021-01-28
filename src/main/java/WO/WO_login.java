@@ -92,7 +92,7 @@ public class WO_login {
         _t++; T.Element_Child_Text_Enter("Enter Valid Password", L1.get(4), "id" , "input-106", password, true, "no_jira");
             if (FAIL) { return;} 
             
-        _t++; T.Clickable_Element_By_Path_Click("Click BTN 'Create Account'", "xpath", "(//button[@type='button'])[11]", "No Jira");
+        _t++; T.Element_By_Path_Click("Click BTN 'Create Account'", "xpath", "(//button[@type='button'])[11]", "No Jira");
              if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");                                                                                     
             if (FAIL) { return;}
@@ -113,7 +113,7 @@ public class WO_login {
             _t++; T.Element_Child_Text_Enter("Enter Valid Pssword", L1.get(1), "tagName" , "input",USER_PW, true,"no_jira"); 
                 if (FAIL) { return;} 
             Thread.sleep(500); 
-            _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Un-hide Password'", "css", "[aria-label='append icon']", "no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Un-hide Password'", "css", "[aria-label='append icon']", "no_jira"); 
                 if (FAIL) { return;}        
 
     //        _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click LOGIN", e1,"xpath", ".//button[@class='v-btn v-btn--contained theme--light v-size--default turquoise']", "no_jira");             
@@ -134,7 +134,7 @@ public class WO_login {
             
             
             
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Account Settings'", "xpath", ".//*[text()='Account Settings']", "no_jira");                                     
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Account Settings'", "xpath", ".//*[text()='Account Settings']", "no_jira");                                     
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Title text", "xpath", ".//h1[@class='header']", "no_jira");
             if (FAIL) { return;}  

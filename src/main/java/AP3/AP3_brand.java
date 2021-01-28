@@ -13,19 +13,19 @@ import static AP3.AP3.*;
  */
 public class AP3_brand {
     public static void run() throws InterruptedException { 
-        _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Dashboard Click", "xpath", "//*[contains(text(), 'Dashboard')]", "no_jira"); 
             if (FAIL) { return;} 
-        _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+        _t++; Thread.sleep(200); T.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
             if (FAIL) { return;} 
-        _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+        _t++; Thread.sleep(200); T.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);                        
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -54,13 +54,13 @@ public class AP3_brand {
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Search Prompt", "xpath", "//*[contains(text(), 'Search Sites')]", "no_jira"); 
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", "Not Existing Site", false, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", "Not Existing Site", false, "no_jira");
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Not Found' notification", "No matching records found", true, "no_jira"); 
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Input_Select_Clear("Site Search Clear", "xpath", "//input[contains(@aria-label, 'Search ')]",  "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Input_Select_Clear("Site Search Clear", "xpath", "//input[contains(@aria-label, 'Search ')]",  "no_jira"); 
             if (FAIL) { return;}            
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, "no_jira");
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
             if (FAIL) { return;} 
@@ -207,7 +207,7 @@ public class AP3_brand {
 //                            if (FAIL) { return; }
 //                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'Save..'", "xpath", "//*[contains(text(), 'save')]", "no_jira");
 //                            if (FAIL) { return; }
-//                        _t++; T.Clickable_Element_By_Path_Click("Click 'Cancel'", "xpath", "//*[contains(text(), 'cancel')]","no_jira");
+//                        _t++; T.Element_By_Path_Click("Click 'Cancel'", "xpath", "//*[contains(text(), 'cancel')]","no_jira");
 //                            if (FAIL) { return;}    
                     } else {
                         _t++; Thread.sleep((long) sleep); T.Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true,"no_jira" );
@@ -243,7 +243,7 @@ public class AP3_brand {
 //                        _t++; T.Element_By_Path_Click("Click 'Manage Drop-off Locations'", "xpath", "//*[contains(text(), 'Manage Drop-off Locations')]", "no_jira");
 //                            if (!FAIL) { return; }
 //                        // list ???    
-//                        _t++; T.Clickable_Element_By_Path_Click("Click 'Cancel'", "xpath", "//*[contains(text(), 'cancel')]","no_jira");
+//                        _t++; T.Element_By_Path_Click("Click 'Cancel'", "xpath", "//*[contains(text(), 'cancel')]","no_jira");
 //                            if (FAIL) { return;}
 
                         _t++; T.Element_By_Path_Attribute("Find 'DISABLE' text", "xpath", "//i[contains(@class, 'v-icon icon mdi mdi-cellphone-off theme--light')]/parent::div", "textContent", "no_jira");
@@ -254,7 +254,7 @@ public class AP3_brand {
 //                            if (FAIL) { return; }
 //                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'Save..'", "xpath", "//*[contains(text(), 'save')]", "no_jira");
 //                            if (FAIL) { return; }
-//                        _t++; T.Clickable_Element_By_Path_Click("Click 'Cancel'", "xpath", "//*[contains(text(), 'cancel')]","no_jira");
+//                        _t++; T.Element_By_Path_Click("Click 'Cancel'", "xpath", "//*[contains(text(), 'cancel')]","no_jira");
                             if (FAIL) { return;}
                     } else {
                         _t++; Thread.sleep((long) sleep); T.Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true,"no_jira" );
@@ -297,7 +297,7 @@ public class AP3_brand {
                 break;
             }
         }
-//        _t++; T.Clickable_Element_By_Path_Click("Click 'Save Changes'", "xpath", "//*[contains(text(), 'Save Changes')]","no_jira");
+//        _t++; T.Element_By_Path_Click("Click 'Save Changes'", "xpath", "//*[contains(text(), 'Save Changes')]","no_jira");
 //            if (FAIL) { return;}
 //        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("WaitForElement for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
 //            if (FAIL) { return;}                                                          
@@ -338,9 +338,9 @@ public class AP3_brand {
                     } else{
                         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'Schedule menu' button", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                             if (FAIL) return;   
-                         _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Input_Select_Clear("Menu Search Clear", "xpath", "//input[contains(@repeatlabel, 'Search ')]",  "no_jira"); 
+                         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Input_Select_Clear("Menu Search Clear", "xpath", "//input[contains(@repeatlabel, 'Search ')]",  "no_jira"); 
                             if (FAIL) { return;}            
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Menu Name", "css", "[repeatlabel='Search Menus in " + BRAND + "']", "xxx_yyy", false, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Menu Name", "css", "[repeatlabel='Search Menus in " + BRAND + "']", "xxx_yyy", false, "no_jira");
                             if (FAIL) { return;}   
                         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'Not Found' notification", "tagName", "td", "no_jira");
                             if (FAIL) { return; }
@@ -568,10 +568,10 @@ public class AP3_brand {
                     if (FAIL) { return; } 
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'required' text", "xpath", "//div[contains(@class,'v-messages__message')]","no_jira"); 
                     if (FAIL) { return; }                    
-                _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Input_Select_Clear("Clear Closure Reason", "css", "[aria-label='Closure Reason']", "no_jira");
+                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Input_Select_Clear("Clear Closure Reason", "css", "[aria-label='Closure Reason']", "no_jira");
                     if (FAIL) { return;}
 
-                _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Closure Reason", "css", "[aria-label='Closure Reason']", "Auto Closure " + New_ID, false, "no_jira");
+                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Closure Reason", "css", "[aria-label='Closure Reason']", "Auto Closure " + New_ID, false, "no_jira");
                     if (FAIL) { return;}
                 _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", "no_jira"); 
                     if (FAIL) { return; } 

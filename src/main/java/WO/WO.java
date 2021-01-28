@@ -659,11 +659,16 @@ public class WO extends javax.swing.JInternalFrame {
         if(!btnRun.isEnabled()){
             return;
         }
+        if(_headless.isSelected()){
+            HeadLess = " (Headless)";
+        }else{
+            HeadLess = "";
+        }
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExcel.setEnabled(false);
-        //txtLog.setText("");
-        txtLog.append("\r\n=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
+
+        txtLog.append("\r\n=== Execution" + HeadLess + " started @" + LocalDateTime.now().format(Time_12_formatter));
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         
         WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
@@ -854,11 +859,11 @@ public class WO extends javax.swing.JInternalFrame {
     }
     private void Done(Instant dw_start){
         BW2.cancel(true); // ================================================        
-        Ver = "?";
         Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
         txtLog.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());                 
-        EX = "WO " + env + " - v" + Ver + ", Browser: " + cmbBrow.getSelectedItem().toString() +
+
+        EX = "WO " + env + ", v" + Ver + ", Browser: " + cmbBrow.getSelectedItem().toString() + HeadLess +
         " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
          "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
          + EX;
@@ -913,7 +918,7 @@ public class WO extends javax.swing.JInternalFrame {
         btnRun.setEnabled(true);
         txtLog.append("\r\n=== " + Summary); // Summary shown in EX top
         txtLog.append("\r\n=== Scope: " + SCOPE); // SCOPE shown in EX top
-        txtLog.append("\r\n=== Browser: " + cmbBrow.getSelectedItem().toString() + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
+        txtLog.append("\r\n=== Browser: " + cmbBrow.getSelectedItem().toString() + HeadLess + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         //this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));   
         if(!"".equals(F.trim())){
@@ -1628,7 +1633,7 @@ public class WO extends javax.swing.JInternalFrame {
             _insert.setString(12, r_type);
             _insert.setString(13, UserID);
             _insert.setString(14, WsID);
-            _insert.setString(15, cmbBrow.getSelectedItem().toString());
+            _insert.setString(15, cmbBrow.getSelectedItem().toString() + HeadLess);
             _insert.setString(16, "=== Job is running... ===\r\n" + "");
             _insert.setString(17, "Running");
             _insert.setString(18, "None");
@@ -1662,7 +1667,7 @@ public class WO extends javax.swing.JInternalFrame {
                     ", [Result] = ?" +    // 16
                     ", [Status] = ?" +    // 17
                     ", [Excel] = ?" +     // 18
-                    " WHERE [app] = 'WO_" + env + "' AND [Status] = 'Running'");
+                    " WHERE [app] = 'WO_" + env + "' AND [Status] = 'Running' AND [user_id] = '" + UserID + "'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
             _update.setString(3, "WO_" + env);
@@ -1677,7 +1682,7 @@ public class WO extends javax.swing.JInternalFrame {
             _update.setString(12, r_type);
             _update.setString(13, UserID);
             _update.setString(14, WsID);
-            _update.setString(15, cmbBrow.getSelectedItem().toString());
+            _update.setString(15, cmbBrow.getSelectedItem().toString() + HeadLess);
             _update.setString(16, txtLog.getText());
             _update.setString(17, "Scope: " + SCOPE);
             _update.setString(18, EX);

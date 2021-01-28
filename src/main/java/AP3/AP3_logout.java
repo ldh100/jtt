@@ -22,13 +22,13 @@ public class AP3_logout {
             for (int i = 0; i < 3; i++) {
                 _t++;
                 Thread.sleep((long) sleep);
-                T.Clickable_Element_By_Path_Click("Click 'Feedback'", "xpath", "//div[contains(@id,'appzi-launch-button')]", "no_jira");
+                T.Element_By_Path_Click("Click 'Feedback'", "xpath", "//div[contains(@id,'appzi-launch-button')]", "no_jira");
                 if (FAIL) {
                     return;
                 }
 
                 _t++;
-                Thread.sleep((long) sleep);
+                Thread.sleep((long) sleep);                                                               // https://w.appzi.io/les-e8kcbv 
                 T.Swith_to_Frame("Switching to Feedback frame", "xpath", "//iframe[contains(@src,'https://w.appzi.io/w-e8kcbv.html?portalId=oQyah&configId')]", "no_jira");
                 if (FAIL) {
                     return;
@@ -52,11 +52,11 @@ public class AP3_logout {
                     Thread.sleep((long) sleep);
                     Thread.sleep((long) sleep);
                     if (i == 0) {
-                        T.Clickable_Element_By_Path_Click("Click 'I like something'", "xpath", "//li[contains(@class, '_3wnKwSe20Sm3u906jQvuAb')]", "no_jira");
+                        T.Element_By_Path_Click("Click 'I like something'", "xpath", "//li[contains(@class, '_3wnKwSe20Sm3u906jQvuAb')]", "no_jira");
                     } else if (i == 1) {
-                        T.Clickable_Element_By_Path_Click("Click 'I don't like something'", "xpath", "//li[contains(@class, '_3Y8W2qMaYxcAFzSu2E4sFt')]", "no_jira");
+                        T.Element_By_Path_Click("Click 'I don't like something'", "xpath", "//li[contains(@class, '_3Y8W2qMaYxcAFzSu2E4sFt')]", "no_jira");
                     } else if (i == 2) {
-                        T.Clickable_Element_By_Path_Click("Click 'I have an idea'", "xpath", "//li[contains(@class, '_23vBriWSFOV5VCo-SvibiZ')]", "no_jira");
+                        T.Element_By_Path_Click("Click 'I have an idea'", "xpath", "//li[contains(@class, '_23vBriWSFOV5VCo-SvibiZ')]", "no_jira");
                     }
                     if (FAIL) {
                         return;
@@ -64,63 +64,63 @@ public class AP3_logout {
 
                     _t++;
                     Thread.sleep((long) sleep);
-                    T.Clickable_Element_By_Path_Click("Click on Feedback text box", "css", ".nw8mJWf1EFE69gYiOR6RX", "no_jira");
+                    T.Element_By_Path_Click("Click on Feedback text box", "css", ".nw8mJWf1EFE69gYiOR6RX", "no_jira");
                     if (FAIL) {
                         return;
                     }
 
                     _t++;
                     Thread.sleep((long) sleep);
-                    T.Visible_Element_By_Path_Input_Select_Clear("Clear Comments textbox", "css", ".nw8mJWf1EFE69gYiOR6RX", "no_jira");
+                    T.Element_By_Path_Input_Select_Clear("Clear Comments textbox", "css", ".nw8mJWf1EFE69gYiOR6RX", "no_jira");
                     if (FAIL) {
                         return;
                     }
 
                     _t++;
                     Thread.sleep((long) sleep);
-                    T.Visible_Element_By_Path_Text_Enter("Enter Text in Feedback", "css", ".nw8mJWf1EFE69gYiOR6RX", "Automation test feedback", false, "no_jira");
+                    T.Element_By_Path_Text_Enter("Enter Text in Feedback", "css", ".nw8mJWf1EFE69gYiOR6RX", "Automation test feedback", false, "no_jira");
                     if (FAIL) {
                         return;
                     }
 
                     _t++;
                     Thread.sleep((long) sleep);
-                    T.Clickable_Element_By_Path_Click("Click on Next button", "css", "._3qQNvjn_6YEcXTu3PLPl77", "no_jira");
+                    T.Element_By_Path_Click("Click on Next button", "css", "._3qQNvjn_6YEcXTu3PLPl77", "no_jira");
                     if (FAIL) {
                         return;
                     }
 
                     _t++;
                     Thread.sleep((long) sleep);
-                    T.Clickable_Element_By_Path_Click("Click on Email text box", "css", "input[class='_1o19MEJFmyDwNY8XQVOILe']", "no_jira");
+                    T.Element_By_Path_Click("Click on Email text box", "css", "input[class='_1o19MEJFmyDwNY8XQVOILe']", "no_jira");
                     if (FAIL) {
                         return;
                     }
 
                     _t++;
                     Thread.sleep((long) sleep);
-                    T.Visible_Element_By_Path_Input_Select_Clear("Clear Email textbox", "css", "input[class='_1o19MEJFmyDwNY8XQVOILe']", "no_jira");
+                    T.Element_By_Path_Input_Select_Clear("Clear Email textbox", "css", "input[class='_1o19MEJFmyDwNY8XQVOILe']", "no_jira");
                     if (FAIL) {
                         return;
                     }
 
                     _t++;
                     Thread.sleep((long) sleep);
-                    T.Visible_Element_By_Path_Text_Enter("Enter Email in Feedback", "css", "input[class='_1o19MEJFmyDwNY8XQVOILe']", ADMIN_ID, false, "no_jira");
+                    T.Element_By_Path_Text_Enter("Enter Email in Feedback", "css", "input[class='_1o19MEJFmyDwNY8XQVOILe']", ADMIN_ID, false, "no_jira");
                     if (FAIL) {
                         return;
                     }
 
                     _t++;
                     Thread.sleep((long) sleep);
-                    T.Clickable_Element_By_Path_Click("Click on SEND button", "xpath", "//div[text()='SEND']", "no_jira");
+                    T.Element_By_Path_Click("Click on SEND button", "xpath", "//div[text()='SEND']", "no_jira");
                     if (FAIL) {
                         return;
                     }
 
                     _t++;
                     Thread.sleep((long) sleep);
-                    T.Clickable_Element_By_Path_Click("Click on DONE button", "css", ".color-accent-background", "no_jira");
+                    T.Element_By_Path_Click("Click on DONE button", "css", ".color-accent-background", "no_jira");
                     if (FAIL) {
                         return;
                     }
@@ -137,7 +137,7 @@ public class AP3_logout {
 //        Logout tests
             _t++;
             Thread.sleep((long) sleep);
-            T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");
+            T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");
             if (FAIL) {
                 return;
             }
@@ -150,17 +150,17 @@ public class AP3_logout {
             }
             _t++;
             Thread.sleep(200);
-            T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0, "no_jira");
+            T.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0, "no_jira");
 
             _t++;
             Thread.sleep((long) sleep);
-            T.Clickable_Element_By_Path_Click("Click 'User Name'", "xpath", "//button[@type='button'][2]", "no_jira");
+            T.Element_By_Path_Click("Click 'User Name'", "xpath", "//button[@type='button'][2]", "no_jira");
             if (FAIL) {
                 return;
             }
             _t++;
             Thread.sleep((long) sleep);
-            T.Clickable_Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(), 'Logout')]", "no_jira");
+            T.Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(), 'Logout')]", "no_jira");
             if (FAIL) {
                 return;
             }

@@ -17,19 +17,19 @@ import org.openqa.selenium.WebElement;
  */
 public class AP3_site_new {
     public static void run() throws InterruptedException { 
-        _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Dashboard Click", "xpath", "//*[contains(text(), 'Dashboard')]", "no_jira"); 
             if (FAIL) { return;} 
-        _t++; Thread.sleep(500); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+        _t++; Thread.sleep(500); T.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
             if (FAIL) { return;} 
-        _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+        _t++; Thread.sleep(200); T.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
             if (FAIL) { return;}
              
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -46,7 +46,7 @@ public class AP3_site_new {
         _t++; Thread.sleep((long) sleep); T.Page_URL("New Site page URL","no_jira");
             if (FAIL) { return;}   
 
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter new Site Name", "css", "[aria-label='Location Name']", "New Auto Site " + New_ID, false, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter new Site Name", "css", "[aria-label='Location Name']", "New Auto Site " + New_ID, false, "no_jira");
             if (FAIL) { return;} // ^^^ enter name to show buttons
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Cancel' text", "Cancel", true,"no_jira"); 
             if (FAIL) { return;}
@@ -78,7 +78,7 @@ public class AP3_site_new {
                     _t++; T.Find_Text("Products Title", "On Site Product", true,"no_jira"); 
                         if (FAIL) { return;}
 
-                    _t++; T.Clickable_Element_By_Path_Click("Create Site", "xpath", "//*[contains(text(), 'Create Site')]", "no_jira");
+                    _t++; T.Element_By_Path_Click("Create Site", "xpath", "//*[contains(text(), 'Create Site')]", "no_jira");
                          if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.List_L1(" 'Required' missing Count", "xpath", ".//div[contains(@class,'v-messages__message')]", "no_jira");             
                         if (FAIL) { return;} 
@@ -88,7 +88,7 @@ public class AP3_site_new {
                         }  
                     //String ADDR = "87 Bordeaux Drive, Logan Township, NJ, USA";
                     //String ADDR_Short = "87 Bordeaux Dr"; 
-                     _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter new Site Address", "css", "[aria-label='Address']", "87 Bordeaux Drive, Logan Township", false, "no_jira");
+                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter new Site Address", "css", "[aria-label='Address']", "87 Bordeaux Drive, Logan Township", false, "no_jira");
                         if (FAIL) { return;}  
                         Thread.sleep(1000); 
                      _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Select new Site Address", "xpath", "//*[contains(text(), '" + "Bordeaux Drive" + "')]", "no_jira");
@@ -145,9 +145,9 @@ public class AP3_site_new {
                         }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Select Payment Type", "xpath", "//*[contains(text(), '" + "FreedomPay" + "')]", "no_jira");
                         if (FAIL) { return;}  
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter FP Store ID", "css", "[aria-label='Freedom Pay Store ID']", "1471190011", false, "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter FP Store ID", "css", "[aria-label='Freedom Pay Store ID']", "1471190011", false, "no_jira");
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter FP Terminal ID", "css", "[aria-label='Freedom Pay Terminal ID']", "2479168011", false, "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter FP Terminal ID", "css", "[aria-label='Freedom Pay Terminal ID']", "2479168011", false, "no_jira");
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Refunds Accepted?' text", "Refunds Accepted?", true,"no_jira"); 
                         if (FAIL) { return;}
@@ -172,23 +172,23 @@ public class AP3_site_new {
                         }  
                      _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Select Meal Plan", "xpath", "//*[contains(text(), '" + "Blackboard" + "')]", "no_jira");
                         if (FAIL) { return;}  
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Plan Name", "css", "[aria-label='Plan Name']", "BLACKBOARD", false, "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Plan Name", "css", "[aria-label='Plan Name']", "BLACKBOARD", false, "no_jira");
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Plan ID", "css", "[aria-label='Plan ID']", "O4wNDAle2lFdWRLpOwWRTZwBmMljADh97Lk2G2qXUy9pOvJlMoFEgQDOYmX2tA8Q", false, "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Plan ID", "css", "[aria-label='Plan ID']", "O4wNDAle2lFdWRLpOwWRTZwBmMljADh97Lk2G2qXUy9pOvJlMoFEgQDOYmX2tA8Q", false, "no_jira");
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter EN Additional Instructions", "css", "[aria-label='Additional Instructions (en)']", "Do not use - test auto generated", false, "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter EN Additional Instructions", "css", "[aria-label='Additional Instructions (en)']", "Do not use - test auto generated", false, "no_jira");
                         if (FAIL) { return;} // ma-0 v-btn v-btn--flat v-btn--small theme--light
                      _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'EN>FR'", "xpath", "//button[@class='ma-0 v-btn v-btn--flat v-btn--small theme--light']", "no_jira");
                         if (FAIL) { return;}                         
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter FR Additional Instructions", "css", "[aria-label='Additional Instructions (fr)']", "Ne pas utiliser - test généré automatiquement", false, "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter FR Additional Instructions", "css", "[aria-label='Additional Instructions (fr)']", "Ne pas utiliser - test généré automatiquement", false, "no_jira");
                         if (FAIL) { return;}           
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Terminal ID", "css", "[aria-label='Meal Plan Terminal ID']", "401001", false, "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Terminal ID", "css", "[aria-label='Meal Plan Terminal ID']", "401001", false, "no_jira");
                         if (FAIL) { return;}
-//                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Tender type", "css", "[aria-label='Tender Type']", "401", "no_jira");
+//                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Tender type", "css", "[aria-label='Tender Type']", "401", "no_jira");
 //                        if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter 'Name of Tender'", "css", "[aria-label='Name of Tender']", "Tender 401001", false, "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter 'Name of Tender'", "css", "[aria-label='Name of Tender']", "Tender 401001", false, "no_jira");
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter 'Tender ID'", "css", "[aria-label='Tender ID']", "401", false, "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter 'Tender ID'", "css", "[aria-label='Tender ID']", "401", false, "no_jira");
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Tax Exempt?' text", "Is this plan Tax Exempt?", true,"no_jira"); 
                         if (FAIL) { return;}
@@ -199,11 +199,11 @@ public class AP3_site_new {
                         if (FAIL) { return;}      
                     _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Domains' card", "xpath", "//div[@class='v-dialog v-dialog--active']", "no_jira");
                         if (FAIL) { return;}    
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter invalid Domain", "css", "[aria-label='Email Domain']", "auto_com", false, "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter invalid Domain", "css", "[aria-label='Email Domain']", "auto_com", false, "no_jira"); 
                         if (FAIL) { return;}                         
                     _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'invalid Domain' text", "Invalid Email Domain", true,"no_jira"); 
                         if (FAIL) { return;} 
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Input_Select_Clear("Clear invalid Domain", "css", "[aria-label='Email Domain']","no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Input_Select_Clear("Clear invalid Domain", "css", "[aria-label='Email Domain']","no_jira"); 
                         if (FAIL) { return;}                       
                     _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click 'CANCEL'", e1, "xpath", ".//div[text()='cancel']", "no_jira"); 
                         if (FAIL) { return; }                           
@@ -211,7 +211,7 @@ public class AP3_site_new {
                         if (FAIL) { return;}  
                     _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Domains' card", "xpath", "//div[@class='v-dialog v-dialog--active']", "no_jira");
                         if (FAIL) { return;}                          
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter valid Domain", "css", "[aria-label='Email Domain']", "auto.com", false, "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter valid Domain", "css", "[aria-label='Email Domain']", "auto.com", false, "no_jira"); 
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click 'ADD'", e1, "xpath", ".//div[text()='ADD']", "no_jira"); 
                         if (FAIL) { return; } 
@@ -262,7 +262,7 @@ public class AP3_site_new {
                             _t++; T.Element_Text("Required:", L1.get(j), "no_jira");             
                             if (FAIL) { return;}
                         }
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter new Promo Name", "css", "[aria-label='Promotion Name']", "New Auto Site " + New_ID + " Promo%%" , false, "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter new Promo Name", "css", "[aria-label='Promotion Name']", "New Auto Site " + New_ID + " Promo%%" , false, "no_jira");
                         if (FAIL) { return;} 
 
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Promo Type Dropdown Open", "css", "[aria-label='Promotion Type']", "no_jira");
@@ -276,7 +276,7 @@ public class AP3_site_new {
                         }                       
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Select Promo Type %%", "xpath", "//*[contains(text(), '" + "Percentage off" + "')]", "no_jira");
                         if (FAIL) { return;}  
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Percentage off 50%", "css", "[aria-label='Value ($ or %)']", "50", false, "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Percentage off 50%", "css", "[aria-label='Value ($ or %)']", "50", false, "no_jira");
                         if (FAIL) { return;}  
 
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Promo State Dropdown Open", "css", "[aria-label='Promotion State']", "no_jira");
@@ -305,7 +305,7 @@ public class AP3_site_new {
                         }     
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Create promo Click", "xpath", "//*[contains(text(), 'CREATE PROMO')]", "no_jira"); 
                         if (FAIL) { return;}                                                     
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter new Promo Name", "css", "[aria-label='Promotion Name']", "New Auto Site " + New_ID + " Promo$$" , false, "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter new Promo Name", "css", "[aria-label='Promotion Name']", "New Auto Site " + New_ID + " Promo$$" , false, "no_jira");
                         if (FAIL) { return;} 
 
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Promo Type Dropdown Open", "css", "[aria-label='Promotion Type']", "no_jira");
@@ -319,7 +319,7 @@ public class AP3_site_new {
                             }  
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Select Promo Type $$", "xpath", "//*[contains(text(), '" + "Amount off" + "')]", "no_jira");
                         if (FAIL) { return;}  
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Ammount off 2$", "css", "[aria-label='Value ($ or %)']", "2", false, "no_jira");
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Ammount off 2$", "css", "[aria-label='Value ($ or %)']", "2", false, "no_jira");
                         if (FAIL) { return;}  
 
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Promo State Dropdown Open", "css", "[aria-label='Promotion State']", "no_jira");
@@ -366,7 +366,7 @@ public class AP3_site_new {
                         break;
                 }
             }   
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Button 'Create Site' click", "xpath", "//*[contains(text(), 'Create Site')]","no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Button 'Create Site' click", "xpath", "//*[contains(text(), 'Create Site')]","no_jira");             
             if (FAIL) { return;} 
         Thread.sleep(500);    
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -384,13 +384,13 @@ public class AP3_site_new {
         Thread.sleep(1000);
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Convert to...' Text", "Convert to Marketplace",true,"no_jira");             
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter new Unit Name", "css", "[aria-label='Business Unit Name']", "New Auto Unit " + New_ID, false, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter new Unit Name", "css", "[aria-label='Business Unit Name']", "New Auto Unit " + New_ID, false, "no_jira");
             if (FAIL) { return;} 
         //Thread.sleep(1000);
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter new Unit Number", "css", "[aria-label='Business Unit Number']", New_ID, false, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter new Unit Number", "css", "[aria-label='Business Unit Number']", New_ID, false, "no_jira");
             if (FAIL) { return;}     
         //Thread.sleep(1000);
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Button 'Save unit' Click", "xpath", "//div[contains(text(), 'Save Business Unit')]","no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Button 'Save unit' Click", "xpath", "//div[contains(text(), 'Save Business Unit')]","no_jira");             
             if (FAIL) { return;}   
         Thread.sleep(500);    
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -682,7 +682,7 @@ public class AP3_site_new {
                     
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Enter Drop Off Locations'", "css", "[aria-label='Enter Drop Off Locations']", "no_jira"); 
                         if (FAIL) { return;}                        
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Drop Off Locations", "css", "[aria-label='Enter Drop Off Locations']", "Attic " + New_ID, false, "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Drop Off Locations", "css", "[aria-label='Enter Drop Off Locations']", "Attic " + New_ID, false, "no_jira"); 
                         if (FAIL) { return;}    
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click '+'", "xpath", "//button[@class='location-btn v-btn v-btn--depressed theme--light primary']", "no_jira"); 
                         if (FAIL) { return;}                                                              
@@ -829,7 +829,7 @@ public class AP3_site_new {
                     break;
             }
         }           
-//        _t++; T.Clickable_Element_By_Path_Click("Click 'Cancel'", "xpath", "//*[contains(text(), 'Cancel')]","no_jira");
+//        _t++; T.Element_By_Path_Click("Click 'Cancel'", "xpath", "//*[contains(text(), 'Cancel')]","no_jira");
 //            if (FAIL) { return;}
         // Leave without saving..
         
@@ -934,7 +934,7 @@ public class AP3_site_new {
                 if (FAIL) { return;}    
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Sector Name Click", "xpath", "//*[contains(text(), '" + GROUP + "')]", "no_jira"); 
             if (FAIL) { return;}             
-        _t++; T.Clickable_Element_By_Path_Click("Button 'Go to Menu' Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
+        _t++; T.Element_By_Path_Click("Button 'Go to Menu' Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
