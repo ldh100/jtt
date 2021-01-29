@@ -273,6 +273,7 @@ public class AP3_promo {
         if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, "no_jira");
             if (FAIL) { return;}
+            T.
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Remove All'", "xpath", "//i[@class='v-icon v-icon--link mdi mdi-close-circle theme--light']", "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Sites Selected (num)' text", "Sites Selected", true,"no_jira"); 
