@@ -173,7 +173,7 @@ public class AP3_brand {
                 Thread.sleep(1000);
             switch (CHOICE) { 
                 case "Station Information":   
-                    _t++; T.Element_By_Path_Attribute(" = Phone Preview Image", "tagName", "img", "src",  "no_jira");
+                    _t++; T.Element_By_Path_Attribute(" = Phone Preview Image", "tagName", "img", "src", "no_jira");
                         if (FAIL) { return;}
                     _t++; T.Element_By_Path_Attribute(" = Phone Preview Brand Name", "xpath", "//span[contains(@class,'H5-Black-High-Emphasis-Left')]", "textContent",  "no_jira");
                         if (FAIL) { return;}

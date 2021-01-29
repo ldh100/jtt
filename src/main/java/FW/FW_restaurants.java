@@ -38,7 +38,8 @@ public class FW_restaurants {
             }
         if(T_Index == -1) {
            _t++; _f++;
-           EX += " - " + "\t" + "Find Restaurant" + "\t" + RESTAURANT + "/" + RestMarket + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";            return;
+           EX += " - " + "\t" + "Find Restaurant" + "\t" + RESTAURANT + "/" + RestMarket + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n"; 
+           return;
         }   
         _t++; Thread.sleep((long) sleep); T.Element_Click("Click target Restaurant/Market", L0.get(T_Index), "no_jira");
             if (FAIL) { return;}         
