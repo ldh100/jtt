@@ -131,6 +131,42 @@ public class AP3_promo {
         _t++; Thread.sleep((long) sleep); T.To_Top("no_jira");
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click New Promotion", "xpath", "//div[contains(text(),'New Promotion')]", "no_jira"); 
             if (FAIL) { return;}   
+            
+            
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Promotion Name' text", "Promotion Name", true, "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Promotion Locations' text", "Promotion Locations", true, "no_jira");
+        if (FAIL) { return;} 
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Select App' text", "Select App", true, "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Select Brand (Global Menu)' text", "Select Brand (Global Menu)", true, "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Filter by Location' text", "Filter by Location", true, "no_jira");
+        if (FAIL) { return;}   
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Select Sites' text", "Select Sites", true, "no_jira");
+        if (FAIL) { return;}    
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'All Sites' text", "All Sites", true, "no_jira");
+        if (FAIL) { return;}   
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Sites Selected' text", "Sites Selected (0)", true, "no_jira");
+        if (FAIL) { return;}  
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Promotion Schedule' text", "Promotion Schedule", true, "no_jira");
+        if (FAIL) { return;}    
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Select Dates' text", "Select Dates", true, "no_jira");
+        if (FAIL) { return;}   
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Select Times' text", "Select Times", true, "no_jira");
+        if (FAIL) { return;}  
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Repeat' text", "Repeat", true, "no_jira");
+        if (FAIL) { return;}    
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Select Days' text", "Select Days", true, "no_jira");
+        if (FAIL) { return;}   
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Promotion Details' text", "Promotion Details", true, "no_jira");
+        if (FAIL) { return;}  
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Promotion Type' text", "Promotion Type", true, "no_jira");
+        if (FAIL) { return;}   
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Promotion Text' text", "Promotion Text", true, "no_jira");
+        if (FAIL) { return;}  
+             
+        
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click Promotion name textbox", "xpath", "//input[@aria-label='Promotion Name']", "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click Promotion Description textbox", "xpath", "//textarea[@aria-label='Promotion Description']", "no_jira"); 
@@ -192,11 +228,11 @@ public class AP3_promo {
          if (FAIL) { return;}
         
         //Select Brand (Global Menu)
-        Thread.sleep(5000);
+////////        Thread.sleep(2000);
 //        T.Element_By_Path_Text("Brand dropdown element", "xpath", "//div[@class='v-select__selections']/input[@aria-label='Brands']", "no_jira");
 //         //body/div[@id='operator']/div[@class='application--wrap']/main[@class='v-content admin_content']/div[@class='v-content__wrap']/div[@class='container grid-list-md']/form[@class='v-form settings']/div[@class='layout wrap']/div[@class='flex xs12']/div[@class='layout row wrap mt-4 mb-4']/div[@class='w100 v-card v-sheet theme--light']/div[@class='v-card-content']/div[@class='layout']/div[@class='flex xs12']/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/i[1]
        
-         _t++; Thread.sleep((long) sleep);T.Scroll_XY("Scroll to brand", 0, 500, "no_jira");
+        _t++; Thread.sleep((long) sleep);T.Scroll_XY("Scroll to brand", 0, 500, "no_jira");
         _t++; Thread.sleep((long) sleep);T.Clickable_Element_By_Path_Click("Open Brand Dropdown", "xpath","//body/div[@id='operator']/div/main[@data-booted='true']/div/div/form[@novalidate='novalidate']/div/div/div/div/div/div/div/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]", "no_jira");
         if (FAIL) { return;}      
         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Brand' list", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']", "no_jira");
@@ -231,8 +267,47 @@ public class AP3_promo {
         //Select Sites
         
      //  _t++;T.Element_By_Path_Click("Click Select All Sites", "xpath", "//div[@class='v-input--selection-controls__input']", "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Select All'", "xpath", "//i[@class='v-icon mdi mdi-checkbox-blank-outline theme--light']", "no_jira"); 
+        if (FAIL) { return;}  
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Sites Selected (num)' text", "Sites Selected", true,"no_jira"); 
+        if (FAIL) { return;} 
+        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, "no_jira");
+            if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Remove All'", "xpath", "//i[@class='v-icon v-icon--link mdi mdi-close-circle theme--light']", "no_jira"); 
+            if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Sites Selected (num)' text", "Sites Selected", true,"no_jira"); 
+            if (FAIL) { return;}
+            
+       _t++;Thread.sleep((long) sleep);T.Element_By_Path_Click("Click SITE", "xpath", "//i[@class='v-icon mdi mdi-checkbox-blank-outline theme--light']/following::i[@class='v-icon mdi mdi-checkbox-blank-outline theme--light']", "no_jira");
+        if (FAIL) { return;}
+     
+        _t++; Thread.sleep((long) sleep);T.Scroll_XY("Scroll to brand", 0, 800, "no_jira");
         
-       
+        _t++;Thread.sleep((long) sleep);T.Element_By_Path_Click("Click Start date", "xpath", "//input[@aria-label='Start Date']", "no_jira");
+        if (FAIL) { return;}
+        
+        
+        
+        _t++;Thread.sleep((long) sleep);T.Element_E1_Find("Find Calendar element","xpath" , "//div[@class='v-menu__content theme--light menuable__content__active']", "no_jira");
+        if (FAIL) { return;}
+        
+        
+        
+//        _t++;Thread.sleep((long) sleep);T.Element_Child_List_L1("Find Days", e1, "", Day, url);
+//        if (FAIL) { return;}
+//        //div[@class='v-menu__content theme--light menuable__content__active']//button[@class='v-btn v-btn--flat v-btn--floating v-btn--outline theme--light accent--text']
+        
+        _t++;Thread.sleep((long) sleep);T.Element_Child_Click("Click Current date", e1, "xpath", "//button[@class='v-btn v-btn--flat v-btn--floating v-btn--outline theme--light accent--text']", "no_jira");
+        if (FAIL) { return;}
+        
+//        _t++;Thread.sleep((long) sleep);T;
+//        if (FAIL) { return;}
+//        
+//        _t++;Thread.sleep((long) sleep);T;
+//        if (FAIL) { return;}
+//        
+        
+//       Thread.sleep(15000);
         
     }
 }
