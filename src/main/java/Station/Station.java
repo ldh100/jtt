@@ -187,7 +187,6 @@ public class Station extends javax.swing.JInternalFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 420, 428, 84));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnLog.setText("Log");
         btnLog.setActionCommand("Log");
         btnLog.setMargin(new java.awt.Insets(2, 4, 2, 4));
         btnLog.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -795,7 +794,7 @@ public class Station extends javax.swing.JInternalFrame {
         DV_Items.setModel(M);
         DV_Mods.setModel(M);
         MenusLastRow = -1;
-        String[] ColumnsName = {"Menu Label (en)", "Ver", "Response", "Id"}; 
+        String[] ColumnsName = {"Menu Label (en)", "Response", "Id"}; 
         DefaultTableModel Model = new DefaultTableModel();
         Model.setColumnIdentifiers(ColumnsName);
         DV_Menus.setModel(Model);
@@ -814,13 +813,11 @@ public class Station extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String label = "<empty> 'en'";
-        String resp= "Fail";
-        String Ver;
+        String resp;
         JArray_MENUS = new JSONArray();
         try {
             String[] Menu_IDs = IDS.split(",");
             for (String id : Menu_IDs) {
-                Ver =" v1";
                 HttpGet httpget = new HttpGet(BaseAPI + "/menu/" + id); // + "?extended=true&nocache=1"
                 ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                     int status = response.getStatusLine().getStatusCode();
@@ -847,12 +844,7 @@ public class Station extends javax.swing.JInternalFrame {
                 }else{
                     label = "label 'en' Not Found";
                 }
-                if(menu.has("meta") && menu.getJSONObject("meta").has("version")){                    
-                    if(menu.getJSONObject("meta").getNumber("version").equals(2) ) {
-                        Ver = " v2";
-                    }
-                }
-                Model.addRow(new Object[]{label, Ver, resp, id});
+                Model.addRow(new Object[]{label, resp, id});
             }
         } catch (IOException | JSONException ex) {
             resp = "OK " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
@@ -869,10 +861,9 @@ public class Station extends javax.swing.JInternalFrame {
         } 
         DV_Menus.setModel(Model);    
         DV_Menus.setDefaultEditor(Object.class, null);
-        DV_Menus.getColumnModel().getColumn(0).setPreferredWidth(180);
-        DV_Menus.getColumnModel().getColumn(1).setPreferredWidth(40);
-        DV_Menus.getColumnModel().getColumn(2).setPreferredWidth(100);
-        DV_Menus.getColumnModel().getColumn(3).setPreferredWidth(100);
+        DV_Menus.getColumnModel().getColumn(0).setPreferredWidth(140);
+        DV_Menus.getColumnModel().getColumn(1).setPreferredWidth(140);
+        DV_Menus.getColumnModel().getColumn(2).setPreferredWidth(80);
         DV_Menus.changeSelection(0, 0, false, false);
         
         txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");

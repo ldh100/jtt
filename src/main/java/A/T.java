@@ -839,9 +839,8 @@ public class T {
                 case "tagName":
                     e1 = d1.findElement(By.tagName(PATH));
                     break;
-                case "name":
-                    e1 = d1.findElement(By.name(PATH));                 
-                    break;
+                 case "name":
+                    e1 = (WebElement) (By.name(PATH));                   
                 case "linkText":
                     e1 = d1.findElement(By.linkText(PATH));
                     break;

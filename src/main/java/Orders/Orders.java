@@ -835,7 +835,7 @@ public class Orders extends javax.swing.JInternalFrame {
 
         
         Instant dw_start = Instant.now();        
-        txtLog.append("\r\n=== Execution" + HeadLess + " started @" + LocalDateTime.now().format(Time_12_formatter));
+        txtLog.append("\r\n=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         //LOG_START(); // ========================================================
         try {
@@ -1235,7 +1235,7 @@ if(!R.equals("OK")){
                     ", [Result] = ?" +    // 16
                     ", [Status] = ?" +    // 17
                     ", [Excel] = ?" +     // 18
-                    " WHERE [app] = 'OR_" + env + "' AND [Status] = 'Running' AND [user_id] = '" + UserID + "'");
+                    " WHERE [app] = 'OR_" + env + "' AND [Status] = 'Running'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
             _update.setString(3, "OR_" + env);
