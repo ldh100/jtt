@@ -24,6 +24,6 @@ public class AP3_resent_updates {
                 _t++; T.Element_Text("Notification Text", L0.get(i), "no_jira");             
                 if (FAIL) { return;}
             }
-        _t++; Thread.sleep((long) sleep); T.Click_out_of_Visible_Element("Resent Updates Close", "xpath", "//span[contains(text(), 'Recent Updates')]", "Left", -40, 10, "no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Click_out_of_Element_By_Path("Resent Updates Close", "xpath", "//span[contains(text(), 'Recent Updates')]", "Left", -40, 10, "no_jira");             
     }
 }

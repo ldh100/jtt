@@ -764,6 +764,7 @@ public class A extends javax.swing.JFrame {
     public static WebElement e;
     public static WebElement e1;
     public static WebElement e2;
+    public static String HeadLess = "";
     public static FluentWait fluentWait;
     public static WebDriverWait loadTimeout;
     public static List<WebElement> L0 = null;

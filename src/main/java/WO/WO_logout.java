@@ -18,7 +18,7 @@ public class WO_logout {
             if (FAIL) { return;}           
         _t++; Thread.sleep((long) sleep); T.Element_Child_Click("Click 'Account' Button", e1, "xpath", ".//i[@class='v-icon notranslate mdi mdi-account-circle theme--light']", "no_jira");                                     
             if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Logout'", "xpath", ".//*[text()='Logout']", "no_jira");                                     
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Logout'", "xpath", ".//*[text()='Logout']", "no_jira");                                     
             if (FAIL) { return;}    
         Thread.sleep(500);    
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Login' after logout", "Login", true, "no_jira");

@@ -27,36 +27,36 @@ public class AP3_login {
             if (FAIL) { return;}  
         _t++; T.Element_By_Path_Text("Forgot Password Text", "xpath", "//*[contains(text(), 'Forgot Password?')]", "no_jira"); 
             if (FAIL) { return;}    
-        _t++; T.Visible_Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",  "no_jira"); 
+        _t++; T.Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",  "no_jira"); 
             if (FAIL) { return;}
-        _t++; T.Visible_Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type = 'password']", "no_jira"); 
+        _t++; T.Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type = 'password']", "no_jira"); 
             if (FAIL) { return;}      
         if(users) {    
-            _t++; T.Visible_Element_By_Path_Text_Enter("Enter Invalid Email", "css", "[aria-label='E-mail']", "x.y@compassdigitalio", false, "no_jira"); 
+            _t++; T.Element_By_Path_Text_Enter("Enter Invalid Email", "css", "[aria-label='E-mail']", "x.y@compassdigitalio", false, "no_jira"); 
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Invalid Email Message", "xpath", "//*[contains(text(), 'Please enter a valid email')]", "no_jira"); 
                 if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']", "no_jira"); 
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']", "no_jira"); 
                 if (FAIL) { return;}
         }
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Email", "css", "[aria-label='E-mail']", ADMIN_ID, false, "no_jira"); 
+        _t++; T.Element_By_Path_Text_Enter("Enter Valid Email", "css", "[aria-label='E-mail']", ADMIN_ID, false, "no_jira"); 
             if (FAIL) { return;}
 //        if(users) {   
-//            _t++; T.Visible_Element_By_Path_Text_Enter("Enter Invalid Password", "css", "[aria-label='Password']", ADMIN_PW + "_X", false, "no_jira"); 
+//            _t++; T.Element_By_Path_Text_Enter("Enter Invalid Password", "css", "[aria-label='Password']", ADMIN_PW + "_X", false, "no_jira"); 
 //                if (FAIL) { return;}
-//            _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Unmask Password Click", "xpath", "/html/body/div[1]/div/main/div/div[2]/div[2]/div/div/form/div[4]/div/div[1]/div[2]/div/i", "no_jira"); 
-//            _t++; T.Clickable_Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
+//            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Unmask Password Click", "xpath", "/html/body/div[1]/div/main/div/div[2]/div[2]/div/div/form/div[4]/div/div[1]/div[2]/div/i", "no_jira"); 
+//            _t++; T.Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
 //                if (FAIL) { return;} 
 //            _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("WaitForElement for Error...", "xpath", "//*[contains(@class, 'v-messages theme--light error--text')]", "no_jira"); 
 //                if (FAIL) { return;}   
 //            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Inavalid Credentials Message", "xpath", "//*[contains(text(), 'Your username or credentials')]", "no_jira"); 
 //                if (FAIL) { return;}
-//            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']", "no_jira"); // .//input
+//            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']", "no_jira"); // .//input
 //                if (FAIL) { return;}                                                                             //   "xpath", ".//input[@type='password']" ".//input[@area-label='Password']"
 //        }    
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", ADMIN_PW, true, "no_jira"); 
+        _t++; T.Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", ADMIN_PW, true, "no_jira"); 
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Sign In'", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Sign In'", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Visibility("Wait for 'AP3 Welcome...' text", "xpath", "//*[contains(text(), 'Welcome to the CDL Admin Panel')]", "no_jira");             
             if (FAIL) { return;}
@@ -68,7 +68,7 @@ public class AP3_login {
                 _t++; T.Element_Text("Home screen Button " + i + " Text", L0.get(i), "no_jira");             
                 if (FAIL) { return;}
             } 
-        _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
         _t++; Thread.sleep((long) sleep); T.List_L0("Drawer Items Count", "css", "[role='listitem']", "no_jira");             
@@ -80,6 +80,6 @@ public class AP3_login {
                     Ver = t;
                 }
             } 
-        _t++; T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");                    
+        _t++; T.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");                    
     }
 }

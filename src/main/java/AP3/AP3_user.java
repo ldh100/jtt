@@ -14,12 +14,12 @@ import java.io.File;
  */
 public class AP3_user {
     public static void run() throws InterruptedException { 
-        _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > 'Users' Click", "xpath", "//*[contains(text(), 'Users')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > 'Users' Click", "xpath", "//*[contains(text(), 'Users')]", "no_jira"); 
             if (FAIL) { return;} 
-        _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+        _t++; Thread.sleep(200); T.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
             if (FAIL) { return;}             
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}  
@@ -311,7 +311,7 @@ public class AP3_user {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Create User' text", "Create User", true,"no_jira"); 
             if (FAIL) { return;}  
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
             if (FAIL) { return;}     
         _t++; Thread.sleep((long) sleep); T.List_L1("Error Message Count", "xpath", ".//div[@class='v-messages__message']", "no_jira");                                     
             if (FAIL) { return;}
@@ -331,19 +331,19 @@ public class AP3_user {
                     Thread.sleep(500); 
                 switch (CHOICE) { 
                     case "User Details": 
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Eirst Name", "css", "[aria-label='First Name']", "Admin", false, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Eirst Name", "css", "[aria-label='First Name']", "Admin", false, "no_jira");
                             if (FAIL) { return;} 
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Last Name", "css", "[aria-label='Last Name']", "Automation", false, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Last Name", "css", "[aria-label='Last Name']", "Automation", false, "no_jira");
                             if (FAIL) { return;}            
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "A_" + New_ID + "@gmail", false, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "A_" + New_ID + "@gmail", false, "no_jira");
                             if (FAIL) { return;} 
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Phone", "css", "[aria-label='Phone Number']", "4165551234", false, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Phone", "css", "[aria-label='Phone Number']", "4165551234", false, "no_jira");
                             if (FAIL) { return;}           
                         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Invalid email' Text", "Invalid Email",true,"no_jira");             
                             if (FAIL) { return;}
-                        _t++; T.Visible_Element_By_Path_Input_Select_Clear("Email Clear", "css", "[aria-label='E-mail']",  "no_jira"); 
+                        _t++; T.Element_By_Path_Input_Select_Clear("Email Clear", "css", "[aria-label='E-mail']",  "no_jira"); 
                             if (FAIL) { return;}  
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "A_" + New_ID + "@gmail.com", false, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "A_" + New_ID + "@gmail.com", false, "no_jira");
                             if (FAIL) { return;} 
 
                         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Allow refunds' text", "Allow Refunds", true,"no_jira"); 
@@ -380,7 +380,7 @@ public class AP3_user {
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}    
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
             if (FAIL) { return;}   
         Thread.sleep(500);  
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -392,13 +392,13 @@ public class AP3_user {
             Thread.sleep(500);
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Search Prompt", "xpath", "//*[contains(text(), 'Search Users')]", "no_jira"); 
             if (FAIL) { return;}         
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "Not Existing User", false, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "Not Existing User", false, "no_jira");
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Not Found' notification", "No matching records found", true,"no_jira"); 
             if (FAIL) { return;}
-        _t++; T.Visible_Element_By_Path_Input_Select_Clear("User Search Clear", "xpath", "//input[contains(@aria-label, 'Search ')]",  "no_jira"); 
+        _t++; T.Element_By_Path_Input_Select_Clear("User Search Clear", "xpath", "//input[contains(@aria-label, 'Search ')]",  "no_jira"); 
             if (FAIL) { return;}            
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "A_" + New_ID + "@gmail.com", false, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "A_" + New_ID + "@gmail.com", false, "no_jira");
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
             if (FAIL) { return;} 
@@ -450,7 +450,7 @@ public class AP3_user {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "css", "[aria-label='Search Users']", "no_jira"); 
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "A_" + New_ID + "@gmail.com", false, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "A_" + New_ID + "@gmail.com", false, "no_jira");
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Find_Text("Deleted Admin 'Not Found' notification", "No matching records found", true,"no_jira"); 
             if (FAIL) { return;}             
@@ -486,7 +486,7 @@ public class AP3_user {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Create User' text", "Create User", true,"no_jira"); 
             if (FAIL) { return;}  
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
             if (FAIL) { return;}     
         _t++; Thread.sleep((long) sleep); T.List_L1("Error Message Count", "xpath", ".//div[@class='v-messages__message']", "no_jira");                                     
             if (FAIL) { return;}
@@ -508,13 +508,13 @@ public class AP3_user {
                     Thread.sleep(500); 
                 switch (CHOICE) { 
                     case "User Details": 
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Eirst Name", "css", "[aria-label='First Name']", "SITE", false, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Eirst Name", "css", "[aria-label='First Name']", "SITE", false, "no_jira");
                             if (FAIL) { return;} 
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Last Name", "css", "[aria-label='Last Name']", "Automation", false, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Last Name", "css", "[aria-label='Last Name']", "Automation", false, "no_jira");
                             if (FAIL) { return;}            
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "S_" + New_ID + "@gmail.com", false, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "S_" + New_ID + "@gmail.com", false, "no_jira");
                             if (FAIL) { return;} 
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Phone", "css", "[aria-label='Phone Number']", "4165551234", false, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Phone", "css", "[aria-label='Phone Number']", "4165551234", false, "no_jira");
                             if (FAIL) { return;}           
 
                         _t++; Thread.sleep((long) sleep); T.Scroll_XY("Scroll to Card " + i + " bottom", 0, 200, "no_jira");
@@ -587,7 +587,7 @@ public class AP3_user {
                                 _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Sites Selected (num)' text", "Sites Selected", true,"no_jira"); 
                                     if (FAIL) { return;} 
                                 if(!ALL_DATA){
-                                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, "no_jira");
+                                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, "no_jira");
                                         if (FAIL) { return;}
                                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Remove All'", "xpath", ".//*[text()='Remove All']", "no_jira"); 
                                         if (FAIL) { return;}
@@ -644,7 +644,7 @@ public class AP3_user {
                         break;
                 }
             }                
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
             if (FAIL) { return;} 
         Thread.sleep(500);    
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -653,7 +653,7 @@ public class AP3_user {
         // <editor-fold defaultstate="collapsed" desc="Site User Search > Delete">
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Search Users')]", "no_jira"); 
             if (FAIL) { return;}         
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "S_" + New_ID + "@gmail.com", false, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "S_" + New_ID + "@gmail.com", false, "no_jira");
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
             if (FAIL) { return;} 
@@ -704,7 +704,7 @@ public class AP3_user {
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "css", "[aria-label='Search Users']", "no_jira"); 
             if (FAIL) { return;}            
  
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "s_" + New_ID + "@gmail.com", false, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "s_" + New_ID + "@gmail.com", false, "no_jira");
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Find_Text("Deleted Site Manager 'Not Found' notification", "No matching records found", true,"no_jira"); 
             if (FAIL) { return;}            
@@ -740,7 +740,7 @@ public class AP3_user {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Create User' text", "Create User", true,"no_jira"); 
             if (FAIL) { return;}  
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
             if (FAIL) { return;}     
         _t++; Thread.sleep((long) sleep); T.List_L1("Error Message Count", "xpath", ".//div[@class='v-messages__message']", "no_jira");                                     
             if (FAIL) { return;}
@@ -761,13 +761,13 @@ public class AP3_user {
                     Thread.sleep(500); 
                 switch (CHOICE) { 
                     case "User Details": 
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Eirst Name", "css", "[aria-label='First Name']", "Delivery", false, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Eirst Name", "css", "[aria-label='First Name']", "Delivery", false, "no_jira");
                             if (FAIL) { return;} 
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Last Name", "css", "[aria-label='Last Name']", "Automation", false, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Last Name", "css", "[aria-label='Last Name']", "Automation", false, "no_jira");
                             if (FAIL) { return;}            
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "D_" + New_ID + "@gmail.com", false, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "D_" + New_ID + "@gmail.com", false, "no_jira");
                             if (FAIL) { return;} 
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Phone", "css", "[aria-label='Phone Number']", "4165551234", false, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Phone", "css", "[aria-label='Phone Number']", "4165551234", false, "no_jira");
                             if (FAIL) { return;}           
 
                         _t++; Thread.sleep((long) sleep); T.Scroll_XY("Scroll to Card " + i + " bottom", 0, 200, "no_jira");
@@ -839,7 +839,7 @@ public class AP3_user {
                                 _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Sites Selected (num)' text", "Sites Selected", true,"no_jira"); 
                                     if (FAIL) { return;} 
 //                              if(!ALL_DATA){
-                                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, "no_jira");
+                                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, "no_jira");
                                         if (FAIL) { return;}
                                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Remove All'", "xpath", ".//*[text()='Remove All']", "no_jira"); 
                                         if (FAIL) { return;}
@@ -907,7 +907,7 @@ public class AP3_user {
                 }
             }      
         Thread.sleep(500);              
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
             if (FAIL) { return;}    
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -916,7 +916,7 @@ public class AP3_user {
         // <editor-fold defaultstate="collapsed" desc="CDL Delivery Manager Search > Delete">
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Search Users')]", "no_jira"); 
             if (FAIL) { return;}         
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "D_" + New_ID + "@gmail.com", false, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "D_" + New_ID + "@gmail.com", false, "no_jira");
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
             if (FAIL) { return;} 
@@ -968,7 +968,7 @@ public class AP3_user {
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "css", "[aria-label='Search Users']", "no_jira"); 
             if (FAIL) { return;}            
  
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "d_" + New_ID + "@gmail.com", false, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "d_" + New_ID + "@gmail.com", false, "no_jira");
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Find_Text("Deleted Site Manager 'Not Found' notification", "No matching records found", true,"no_jira"); 
             if (FAIL) { return;}            
@@ -1005,7 +1005,7 @@ public class AP3_user {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Create User' text", "Create User", true,"no_jira"); 
             if (FAIL) { return;}  
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
             if (FAIL) { return;}     
         _t++; Thread.sleep((long) sleep); T.List_L1("Error Message Count", "xpath", ".//div[@class='v-messages__message']", "no_jira");                                     
             if (FAIL) { return;}
@@ -1026,13 +1026,13 @@ public class AP3_user {
                     Thread.sleep(500); 
                 switch (CHOICE) { 
                     case "User Details": 
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Eirst Name", "css", "[aria-label='First Name']", "Runner", false, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Eirst Name", "css", "[aria-label='First Name']", "Runner", false, "no_jira");
                             if (FAIL) { return;} 
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Last Name", "css", "[aria-label='Last Name']", "Automation", false, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Last Name", "css", "[aria-label='Last Name']", "Automation", false, "no_jira");
                             if (FAIL) { return;}            
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+" + "R_" + New_ID + "@gmail.com", false, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+" + "R_" + New_ID + "@gmail.com", false, "no_jira");
                             if (FAIL) { return;} 
-                        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Phone", "css", "[aria-label='Phone Number']", "4165554321", false, "no_jira");
+                        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Phone", "css", "[aria-label='Phone Number']", "4165554321", false, "no_jira");
                             if (FAIL) { return;}           
                         break;
                     case "Site Permissions Please select at least 1 brand":  
@@ -1055,7 +1055,7 @@ public class AP3_user {
                                 _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find 'Cancel' text", e1, "xpath", ".//*[text()='Cancel']", "no_jira"); 
                                     if (FAIL) { return;}   
 
-                                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, "no_jira");
+                                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, "no_jira");
                                         if (FAIL) { return;}
                                     _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Found Sites count", e1, "xpath", ".//i[@class='v-icon mdi mdi-radiobox-blank theme--light']", "no_jira");             
                                         if (FAIL) { return;}
@@ -1087,7 +1087,7 @@ public class AP3_user {
                 }
             } 
         Thread.sleep(500);              
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
             if (FAIL) { return;}    
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -1109,14 +1109,14 @@ public class AP3_user {
 ////driver.find_element_by_css_selector("input[type=password]").send_keys(password)
 ////driver.find_element_by_id('passwordNext').click()
 
-//        _t++; T.Visible_Element_By_Path_Text_Enter("Enter 'Email or phone'", "id", "identifierId", "cdl.test.xtt@gmail.com", "no_jira"); 
+//        _t++; T.Element_By_Path_Text_Enter("Enter 'Email or phone'", "id", "identifierId", "cdl.test.xtt@gmail.com", "no_jira"); 
 //            if (FAIL) { return;}  
 //        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'ID Next'", "id", "identifierNext", "no_jira"); 
 //            if (FAIL) { return; } 
 //        Thread.sleep(500);
 //        _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("WaitForElement for 'progress'...", "css", "[role='progressbar']", "no_jira"); 
 //            if (FAIL) { return;}            
-//        _t++; T.Visible_Element_By_Path_Text_Enter("Enter 'Password'", "css", "[type='password']", "AnnaL0g0", "no_jira"); 
+//        _t++; T.Element_By_Path_Text_Enter("Enter 'Password'", "css", "[type='password']", "AnnaL0g0", "no_jira"); 
 //            if (FAIL) { return;}   
 //        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'PW Next'", "id", "passwordNext", "no_jira"); 
 //            if (FAIL) { return; } 
@@ -1133,7 +1133,7 @@ public class AP3_user {
         // <editor-fold defaultstate="collapsed" desc="Runner Search > Delete">
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Search Users')]", "no_jira"); 
             if (FAIL) { return;}         
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "cdl.test.xtt+" + "R_" + New_ID + "@gmail.com", false, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "cdl.test.xtt+" + "R_" + New_ID + "@gmail.com", false, "no_jira");
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
             if (FAIL) { return;} 
@@ -1185,7 +1185,7 @@ public class AP3_user {
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for page load...", "css", "[aria-label='Search Users']", "no_jira"); 
             if (FAIL) { return;}            
  
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "r_" + New_ID + "@gmail.com", false, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "r_" + New_ID + "@gmail.com", false, "no_jira");
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Find_Text("Deleted Site Manager 'Not Found' notification", "No matching records found", true,"no_jira"); 
             if (FAIL) { return;}            
