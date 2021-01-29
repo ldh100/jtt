@@ -38,10 +38,24 @@ public class DL_metrics_selection {
            
             
             Thread.sleep(4000);
+    Thread.sleep(4000);
             if(k==1) {
-            	_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Total Spend' metric", "Total Spend", true,"no_jira");
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Total Spend' metric", "Total Spend", true,"no_jira");
+            Thread.sleep(5000);
+            _t++; T.Element_By_Path_Text("Total Spend Dollar Amount", "xpath", "(//p[@class='MuiTypography-root MuiTypography-body1'])[2]", "no_jira"); 
+            if (FAIL) { return;} 
+            Thread.sleep(10000);
+            _t++; T.Element_By_Path_Text("Total Spend Absolute %", "xpath", "//p[@class='MuiTypography-root jss67 jss71 MuiTypography-body1']", "no_jira"); 
+            if (FAIL) { return;} 
+            
             }else if (k==2) {
-            	_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Contracted Spend' metric", "Contracted Spend", true,"no_jira");
+            _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Contracted Spend' metric", "Contracted Spend", true,"no_jira");
+            Thread.sleep(5000);
+            _t++; T.Element_By_Path_Text("Total Contracted Spend Dollar Amount", "xpath", "(//p[@class='MuiTypography-root MuiTypography-body1'])[4]", "no_jira"); 
+            if (FAIL) { return;} 
+            Thread.sleep(10000);
+                _t++; T.Element_By_Path_Text("Total Contracted Spend Absolute %", "xpath", "//p[@class='MuiTypography-root jss67 jss90 MuiTypography-body1']", "no_jira"); 
+            if (FAIL) { return;} 
 			}else if (k==3) {
 				_t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Contracted Utilization Rate' metric", "Contracted Utilization Rate", true,"no_jira");
 			}else if (k==4) {
@@ -65,16 +79,16 @@ public class DL_metrics_selection {
         	
         
        //To  Verify whether the Preset buttons are displayed and Clicking on them by Prathyusha Deshpande	
-        _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find Date selection container", "xpath", "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3']", "no_jira"); 
-             if (FAIL) { return;}        
-        _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Date Items count", e1,"xpath", ".//div[contains(@class, 'MuiGrid-root MuiGrid-item')]", "no_jira");             
-             if (FAIL) { return;}                              
-             for (int i = 0; i < L1.size(); i++) {
-                 _t++; Thread.sleep((long) sleep); T.Element_Text("Date Items", L1.get(i), "no_jira");                          
-                     if (FAIL) { return;}
-                 _t++; Thread.sleep((long) sleep); T.Element_Click(t + " > DateItem " + i + " name",L1.get(i) , "no_jira" );
-                     if (FAIL) { return;}
-             }      
+//        _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find Date selection container", "xpath", "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3']", "no_jira"); 
+//             if (FAIL) { return;}        
+//        _t++; Thread.sleep((long) sleep); T.Element_Child_List_L1("Date Items count", e1,"xpath", ".//div[contains(@class, 'MuiGrid-root MuiGrid-item')]", "no_jira");             
+//             if (FAIL) { return;}                              
+//             for (int i = 0; i < L1.size(); i++) {
+//                 _t++; Thread.sleep((long) sleep); T.Element_Text("Date Items", L1.get(i), "no_jira");                          
+//                     if (FAIL) { return;}
+//                 _t++; Thread.sleep((long) sleep); T.Element_Click(t + " > DateItem " + i + " name",L1.get(i) , "no_jira" );
+//                     if (FAIL) { return;}
+//             }      
             
     }
 }
