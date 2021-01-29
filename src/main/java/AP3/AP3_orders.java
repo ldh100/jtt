@@ -14,12 +14,12 @@ import java.time.LocalDateTime;
  */
 public class AP3_orders {
     public static void run() throws InterruptedException { 
-        _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > 'Orders' Click", "xpath", "//*[contains(text(), 'Orders')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > 'Orders' Click", "xpath", "//*[contains(text(), 'Orders')]", "no_jira"); 
             if (FAIL) { return;} 
-        _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+        _t++; Thread.sleep(200); T.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
             if (FAIL) { return;}
              
         _t++; Thread.sleep((long) sleep); T.Page_URL("Orders page URL", "no_jira"); 
@@ -48,13 +48,13 @@ public class AP3_orders {
             if (FAIL) { return;}    
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Search Prompt", "xpath", "//*[contains(text(), 'Search Sites')]", "no_jira"); 
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", "Not Existing Site", false, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", "Not Existing Site", false, "no_jira");
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Not Found' notification", "No matching records found", true,"no_jira"); 
             if (FAIL) { return;}
-        _t++; T.Visible_Element_By_Path_Input_Select_Clear("Site Search Clear", "xpath", "//input[contains(@aria-label, 'Search ')]",  "no_jira"); 
+        _t++; T.Element_By_Path_Input_Select_Clear("Site Search Clear", "xpath", "//input[contains(@aria-label, 'Search ')]",  "no_jira"); 
             if (FAIL) { return;}            
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, "no_jira");
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
             if (FAIL) { return;} 
@@ -115,7 +115,7 @@ public class AP3_orders {
                 _t++; T.Element_By_Path_Text("Order Type (index " + i + ")", "xpath", "/html/body/div/div[3]/div/div/div[" + i + "]/a/div/div",  "no_jira");             
                 if (FAIL) { return;}
             }
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Select 'All'", "xpath", "/html/body/div/div[3]/div/div/div[" + 1 + "]/a/div/div", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Select 'All'", "xpath", "/html/body/div/div[3]/div/div/div[" + 1 + "]/a/div/div", "no_jira"); 
             if (FAIL) { return;} 
             
             //<editor-fold defaultstate="collapsed" desc="Pagination">   
@@ -162,7 +162,7 @@ public class AP3_orders {
                     if (FAIL) { return;} 
                 _t++; T.Element_Click("Click top Order",e1, "no_jira");  
                     if (FAIL) { return;} 
-//                _t++; T.Clickable_Element_By_Path_Click("Click top Order", "className", "clickable", "no_jira");  // ====== index 8 ===  OPENS Resent Updates ~???
+//                _t++; T.Element_By_Path_Click("Click top Order", "className", "clickable", "no_jira");  // ====== index 8 ===  OPENS Resent Updates ~???
 //                    if (FAIL) { return;} 
 //                _t++; T.Element_Click("Click top Order",L0, "L0", 8,"no_jira");  // ====== index 8 ===  OPENS Resent Updates ~???
 //                    if (FAIL) { return;}

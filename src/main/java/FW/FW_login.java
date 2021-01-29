@@ -44,35 +44,37 @@ public class FW_login {
 //            if (FAIL) { return;}
 //        _t++; T.Element_By_Path_Click("Click 'Password' input", "xpath", "//span[contains(text()," + ADMIN_PW + "_X)]",  "no_jira"); 
 //            if (FAIL) { return;}
-//        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Input_Select_Clear("Password Clear", "xpath", "//input[@type='password']", "no_jira"); // .//input
+//        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Input_Select_Clear("Password Clear", "xpath", "//input[@type='password']", "no_jira"); // .//input
 //            if (FAIL) { return;}                                                                            
   
-        _t++; T.Visible_Element_By_Path_Text_Enter("Enter Valid Password", "xpath", "//input[@type='password']", ADMIN_PW, true, "no_jira"); 
+        _t++; T.Element_By_Path_Text_Enter("Enter Valid Password", "xpath", "//input[@type='password']", ADMIN_PW, true, "no_jira"); 
             if (FAIL) { return;}
-       // _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Unmask Password Click", "css", "[aria-label='append icon']", "no_jira"); 
+       // _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Unmask Password Click", "css", "[aria-label='append icon']", "no_jira"); 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Sign In' button", "xpath", "//span[contains(text(), 'Sign In')]", "no_jira"); 
             if (FAIL) { return;} 
         // loading="true"    
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Visibility("Wait for 'Welcome...' text", "xpath", "//*[contains(text(), 'Welcome to the ')]", "no_jira");             
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//nav[contains(@class, 'navigation-drawer')]", "no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//nav[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Find 'Version'", "xpath", "//div[@class='version']", "no_jira");
+            if (FAIL) { return;}             
+            Ver = t.trim().replace("v ", ""); // '  v 4.0.8 ' 
+            
         _t++; Thread.sleep((long) sleep); T.List_L0("Drawer Menu Count", "xpath", "//div[@class='menu-name']", "no_jira");             
             if (FAIL) { return;}
             for (int i = 0; i < L0.size(); i++) {
                 _t++; T.Element_Attribute("Drawer Menu (" + i + ") Text", L0.get(i), "textContent", "no_jira");   
                 if (FAIL) { return;}
             } 
-           // for (int i = 0; i < L0.size(); i++) {
-           //     _t++; T.Element_Attribute("Drawer Menu (" + i + ") Text", L0.get(i), "textContent", "no_jira");   
-           //     if (FAIL) { return;}
-//                if(i == (L0.size()-1)){
-//                    Ver = t;
-//                }
-      _t++; T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//nav[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");        
-}             
-                          
-            
-    }
+        _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Notifications' Text", "Notifications", true,"no_jira");  
+        _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find User Avatar", "xpath", "//div[@class='nav-avatar v-list-item theme--light']", "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find User Avatar Name", e1, "xpath", ".//div[@class='v-list-item__title text-capitalize']", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Find User Avatar Role", e1, "xpath", ".//div[@class='v-list-item__subtitle']", "no_jira");        
+        _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find 'Logout'", "xpath", "//div[@class='nav-logout']", "no_jira");    
+
+        _t++; T.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//nav[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");        
+    }                    
+}
 

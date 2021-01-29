@@ -238,7 +238,7 @@ public class DL extends javax.swing.JInternalFrame {
 
         lblSITES4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES4.setText("Admin E-mail:");
+        lblSITES4.setText("Admin ID:");
         lblSITES4.setToolTipText("");
         lblSITES4.setAlignmentX(0.5F);
         getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 380, 120, -1));

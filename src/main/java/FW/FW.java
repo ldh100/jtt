@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
@@ -614,8 +613,7 @@ public class FW extends javax.swing.JInternalFrame {
         if (d1LastRow == DV1.getSelectedRow() || DV2.getRowCount() == 0) {
            return;
         }
-        //GetRestaurants();
-        Restaurants= String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
+        RESTAURANT = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
         RestID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
         d1LastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
@@ -659,11 +657,16 @@ public class FW extends javax.swing.JInternalFrame {
         if(!btnRun.isEnabled()){
             return;
         }
+        if(_headless.isSelected()){
+            HeadLess = " (Headless)";
+        }else{
+            HeadLess = "";
+        }
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
         //txtLog.setText("");
-        txtLog.append("\r\n=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
+        txtLog.append("\r\n=== Execution" + HeadLess + " started @" + LocalDateTime.now().format(Time_12_formatter));
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
         LoadTimeOut = (double)nWaitLoad.getValue();
@@ -695,11 +698,14 @@ public class FW extends javax.swing.JInternalFrame {
         SCOPE = "";
         
         if(DV1.getRowCount() > 0) {
-            Restaurants= DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
-            COUNTRY = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
+            RESTAURANT = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
+            RestMarket = DV1.getValueAt(DV1.getSelectedRow(), 2).toString(); 
+            RestID = DV1.getValueAt(DV1.getSelectedRow(), 3).toString();
         }
         if(DV2.getRowCount() > 0) {
             UNIT = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
+            UnitMarket = DV2.getValueAt(DV2.getSelectedRow(), 2).toString();             
+            UnitID = DV2.getValueAt(DV2.getSelectedRow(), 3).toString();
         }
 
 
@@ -862,11 +868,11 @@ public class FW extends javax.swing.JInternalFrame {
     }
     private void Done(Instant dw_start){
         BW2.cancel(true); // ================================================
-        Ver = "?";
         Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
         txtLog.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========"); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength());                
-        EX = "FW " + env + " - v" + Ver + ", Browser: " + cmbBrow.getSelectedItem().toString() +
+
+        EX = "FW " + env + ", v" + Ver + ", Browser: " + cmbBrow.getSelectedItem().toString() + HeadLess +
         " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
          "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
          + EX;
@@ -921,7 +927,7 @@ public class FW extends javax.swing.JInternalFrame {
         btnRun.setEnabled(true);
         txtLog.append("\r\n=== " + Summary); // Summary shown in EX top
         txtLog.append("\r\n=== Scope: " + SCOPE); // SCOPE shown in EX top
-        txtLog.append("\r\n=== Browser: " + cmbBrow.getSelectedItem().toString() + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
+        txtLog.append("\r\n=== Browser: " + cmbBrow.getSelectedItem().toString() + HeadLess + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         if(!"".equals(F.trim())){
             btnFails.setEnabled(true);
@@ -1166,7 +1172,7 @@ public class FW extends javax.swing.JInternalFrame {
         }
         sw1.start();         // ============ User
         try { 
-            HttpGet httpget = new HttpGet(BaseAPI + "auth"); /// base API ???
+            HttpGet httpget = new HttpGet(BaseAPI + "/auth"); 
             httpget.setHeader("Authorization",  "Basic " + UserAuth);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
@@ -1341,19 +1347,17 @@ public class FW extends javax.swing.JInternalFrame {
         
         if (DV1.getRowCount() > 0) {
             DV1.changeSelection(0, 0, false, false);
-            if (CONFIG && !"".equals(Restaurants.trim())) {
+            if (CONFIG && !"".equals(RestID.trim())) {
                 for(int row = 0; row < DV1.getRowCount(); row++) {
                     // update Market id > Name
-                    if(DV1.getValueAt(row, 0).equals(Restaurants)){
+                    if(DV1.getValueAt(row, 3).equals(RestID)){
                         DV1.changeSelection(row, 0, false, false);
                         break;
                     }
                 }
             } //
-            Restaurants= String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
-            //DV1.setRowSelectionInterval(7, 8);
+            RESTAURANT = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
             RestID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
-            //GetBrands();
         }
         lblSITES.setText("Restaurants (" + DV1.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1458,10 +1462,10 @@ public class FW extends javax.swing.JInternalFrame {
         
         if (DV2.getRowCount() > 0) {
             DV2.changeSelection(0, 0, false, false);
-            if (CONFIG && !"".equals(UNIT.trim())) {
+            if (CONFIG && !"".equals(UnitID.trim())) {
                 for(int row = 0; row < DV2.getRowCount(); row++) {
                     // update Market id > Name
-                    if(DV2.getValueAt(row, 0).equals(UNIT)){
+                    if(DV2.getValueAt(row, 3).equals(UnitID)){
                         DV2.changeSelection(row, 0, false, false);
                         break;
                     }
@@ -1471,7 +1475,7 @@ public class FW extends javax.swing.JInternalFrame {
             UnitID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 3));
             //GetBrands();
         }
-        lblUNITS.setText("Units(" + DV2.getRowCount() + " found)");
+        lblUNITS.setText("Units (" + DV2.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     
@@ -1501,8 +1505,10 @@ public class FW extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("_slack:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _slack.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_headless:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _headless.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
 
-                c = C.substring(C.indexOf("Restaurants:")); c = c.substring(0, c.indexOf("\r\n")).trim(); Restaurants= c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("RESTAURANT:")); c = c.substring(0, c.indexOf("\r\n")).trim(); RESTAURANT = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("REST_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); RestID = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("UNIT:")); c = c.substring(0, c.indexOf("\r\n")).trim(); UNIT = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("UNIT_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); UnitID = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("COUNTRY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); COUNTRY = c.substring(c.indexOf(" ")).trim();
 
                 c = C.substring(C.indexOf("txtAdmin_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_ID.setText(c.substring(c.indexOf(" ")).trim());
@@ -1544,14 +1550,18 @@ public class FW extends javax.swing.JInternalFrame {
     }
     private void SAVE_CONFIG() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        String _S = "n/a";
-        String _B = "n/a";
+        String _R = "n/a";
+        String _U = "n/a";
+        String _RiD = "n/a";
+        String _UiD = "n/a";
         try {
             if(DV1.getRowCount() > 0){
-                _S = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
+                _R = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
+                _RiD = DV1.getValueAt(DV1.getSelectedRow(), 3).toString();
             }
             if(DV2.getRowCount() > 0){
-                _B = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
+                _U = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
+                _UiD = DV2.getValueAt(DV2.getSelectedRow(), 3).toString();
             }
             C = "";
             C += "env: " + env + "\r\n";
@@ -1560,8 +1570,10 @@ public class FW extends javax.swing.JInternalFrame {
             C += "_slack: " + _slack.isSelected() + "\r\n";
             C += "_headless: " + _headless.isSelected() + "\r\n";  
  
-            C += "Restaurants: " + _S + "\r\n";
-            C += "UNIT: " + _B + "\r\n";
+            C += "RESTAURANT: " + _R + "\r\n";
+            C += "REST_ID: " + _RiD + "\r\n";
+            C += "UNIT: " + _U + "\r\n";
+            C += "UNIT_ID: " + _UiD + "\r\n";
             C += "COUNTRY: " + COUNTRY + "\r\n";            
             
             C += "txtAdmin_ID: " + txtAdmin_ID.getText() + "\r\n";
@@ -1630,7 +1642,6 @@ public class FW extends javax.swing.JInternalFrame {
 
     private void LOG_UPDATE(){  
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
             PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET " +
                     " [Date] = ?" +       // 1
@@ -1651,7 +1662,7 @@ public class FW extends javax.swing.JInternalFrame {
                     ", [Result] = ?" +    // 16
                     ", [Status] = ?" +    // 17
                     ", [Excel] = ?" +     // 18
-                    " WHERE [app] = 'FW_" + env + "' AND [Status] = 'Running'");
+                    " WHERE [app] = 'FW_" + env + "' AND [Status] = 'Running' AND [user_id] = '" + UserID + "'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
             _update.setString(3, "FW_" + env);
@@ -1666,7 +1677,7 @@ public class FW extends javax.swing.JInternalFrame {
             _update.setString(12, r_type);
             _update.setString(13, UserID);
             _update.setString(14, WsID);
-            _update.setString(15, cmbBrow.getSelectedItem().toString());
+            _update.setString(15, cmbBrow.getSelectedItem().toString() + HeadLess);
             _update.setString(16, txtLog.getText());
             _update.setString(17, "Scope: " + SCOPE);
             _update.setString(18, EX);
@@ -1734,7 +1745,7 @@ public class FW extends javax.swing.JInternalFrame {
             _insert.setString(12, r_type);
             _insert.setString(13, UserID);
             _insert.setString(14, WsID);
-            _insert.setString(15, cmbBrow.getSelectedItem().toString());
+            _insert.setString(15, cmbBrow.getSelectedItem().toString() + HeadLess);
             _insert.setString(16, "=== Job is running... ===\r\n" + "");
             _insert.setString(17, "Running");
             _insert.setString(18, "None");
@@ -1793,7 +1804,7 @@ public class FW extends javax.swing.JInternalFrame {
     private String C = "";
     private String userID;
     private String userTKN;
-    public static int T_Index;
+
     private String Last_EX;    
     private static final Stopwatch sw1 = Stopwatch.createUnstarted();
     private static final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
@@ -1805,17 +1816,18 @@ public class FW extends javax.swing.JInternalFrame {
     public static String url = "";
 
     private static String env = "";
-    public static String Restaurants = "";
-    private static String RestID = "";
-
-    public static String UNIT = "";
-    private static String UnitID = "";
     private String MARKETS;
-
-    private static String COUNTRY = "COUNTRY";
+    private static String COUNTRY = "?";
     private static String BaseAPI;
-    private static String TZone; 
     
+    public static String RESTAURANT = "";
+    public static String RestMarket = "";
+    private static String RestID = ""; 
+    
+    public static String UNIT = "";
+    public static String UnitMarket = ""; 
+    private static String UnitID = "";
+
     public static String ADMIN_ID;
     public static String ADMIN_PW;
     public static String PARTNER_ID; 
@@ -1824,7 +1836,7 @@ public class FW extends javax.swing.JInternalFrame {
     public static String UM_PW;  
     public static String FM_ID; 
     public static String FM_PW; 
-    private static String New_ID = "";
+    public static String New_ID = "";
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

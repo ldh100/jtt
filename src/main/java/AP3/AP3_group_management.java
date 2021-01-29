@@ -13,12 +13,12 @@ import static AP3.AP3.*;
  */
 public class AP3_group_management {
     public static void run() throws InterruptedException { 
-        _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > 'Group Management' Click", "xpath", "//*[contains(text(), 'Group Management')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > 'Group Management' Click", "xpath", "//*[contains(text(), 'Group Management')]", "no_jira"); 
             if (FAIL) { return;} 
-        _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+        _t++; Thread.sleep(200); T.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);            
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -195,7 +195,7 @@ public class AP3_group_management {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Input 'Group Name' click", "css", "[aria-label='Group Name']", "no_jira");             
             if (FAIL) { return;}            
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter new Group Name", "css", "[aria-label='Group Name']", "New Group " + New_ID, false, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter new Group Name", "css", "[aria-label='Group Name']", "New Group " + New_ID, false, "no_jira");
             if (FAIL) { return;} 
         _t++;  T.Element_By_Path_Click("Open Country combobox", "css", "[role='combobox']", "no_jira"); 
             if (FAIL) { return;} 
@@ -210,7 +210,7 @@ public class AP3_group_management {
         }
         _t++; Thread.sleep((long) sleep); T.Element_Click("Select 'United States'", L1.get(T_Index), "no_jira");
             if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Button 'Cancel' Click", "xpath", "//*[contains(text(), 'Cancel')]","no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Button 'Cancel' Click", "xpath", "//*[contains(text(), 'Cancel')]","no_jira");             
             if (FAIL) { return;} 
             
         // Search >>>

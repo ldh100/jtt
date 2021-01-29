@@ -16,19 +16,19 @@ import java.util.Calendar;
  */
 public class AP3_brand_new {
     public static void run(boolean NEW_SITE) throws InterruptedException { 
-        _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Dashboard Click", "xpath", "//*[contains(text(), 'Dashboard')]", "no_jira"); 
             if (FAIL) { return;} 
-        _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+        _t++; Thread.sleep(200); T.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", "no_jira"); 
             if (FAIL) { return;} 
-        _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+        _t++; Thread.sleep(200); T.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);                  
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -57,7 +57,7 @@ public class AP3_brand_new {
         }
         _t++; Thread.sleep((long) sleep); T.Element_Click("Select 'All'", L1.get(T_Index), "no_jira");
             if (FAIL) { return;}   
-        _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", ADD_TO_SITE, false, "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", ADD_TO_SITE, false, "no_jira");
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + ADD_TO_SITE + "']", "no_jira"); 
             if (FAIL) { return;} 
@@ -330,7 +330,7 @@ public class AP3_brand_new {
                     
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Enter Drop Off Locations'", "css", "[aria-label='Enter Drop Off Locations']", "no_jira"); 
                         if (FAIL) { return;}                        
-                    _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Text_Enter("Enter Drop Off Locations", "css", "[aria-label='Enter Drop Off Locations']", "Penthouse " + New_ID, false, "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Drop Off Locations", "css", "[aria-label='Enter Drop Off Locations']", "Penthouse " + New_ID, false, "no_jira"); 
                         if (FAIL) { return;}    
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click '+'", "xpath", "//button[@class='location-btn v-btn v-btn--depressed theme--light primary']", "no_jira"); 
                         if (FAIL) { return;}                                                              
@@ -492,7 +492,7 @@ public class AP3_brand_new {
                     break;
             }
         }           
-//        _t++; T.Clickable_Element_By_Path_Click("Click 'Cancel'", "xpath", "//*[contains(text(), 'Cancel')]","no_jira");
+//        _t++; T.Element_By_Path_Click("Click 'Cancel'", "xpath", "//*[contains(text(), 'Cancel')]","no_jira");
 //            if (FAIL) { return;}
         // Leave without saving..
         
@@ -601,7 +601,7 @@ public class AP3_brand_new {
                 if (FAIL) { return;}    
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Sector Name Click", "xpath", "//*[contains(text(), '" + GROUP + "')]", "no_jira"); 
             if (FAIL) { return;}             
-        _t++; T.Clickable_Element_By_Path_Click("Button 'Go to Menu' Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
+        _t++; T.Element_By_Path_Click("Button 'Go to Menu' Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -839,21 +839,21 @@ public class AP3_brand_new {
                                 T_Index = i;
                             } 
                     }
-                    _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'Custom'", L1.get(T_Index), "no_jira");
-                        if (FAIL) { return;}    
-                    _t++; Thread.sleep((long) sleep); T.Find_Text("Dialog Title", "Custom Recurrence", true,"no_jira"); // v-card__title H4-Secondary-Center
-                        if (FAIL) { return;}    
-                    _t++; Thread.sleep((long) sleep); T.Find_Text("Repeat every Text", "Repeat every", true,"no_jira"); // layout mt-4 H6-Selected-On-Surface-High-Emphasis-Left
-                        if (FAIL) { return;} 
-                    _t++; Thread.sleep((long) sleep); T.Find_Text("Repeat on Text", "Repeat on", true,"no_jira"); // layout mt-4 H6-Selected-On-Surface-High-Emphasis-Left
-                        if (FAIL) { return;} 
-                    _t++; Thread.sleep((long) sleep); T.List_L1("WeekDays Count", "xpath", "//div[contains(@class, 'Weekday')]", "no_jira");             
-                        if (FAIL) { return;}                         
-                        for (int i = 1; i < (L1.size() - 1); i++) {
-                            _t++; T.Element_Click("Select Weekday (index " + i + ")", L1.get(i),  "no_jira");             
-                        }   
-                    _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click  'CONTINUE'", "xpath", "//*[contains(text(), 'CONTINUE')]", "no_jira"); 
-                      if (FAIL) { return;}  
+                _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'Custom'", L1.get(T_Index), "no_jira");
+                    if (FAIL) { return;}    
+                _t++; Thread.sleep((long) sleep); T.Find_Text("Dialog Title", "Custom Recurrence", true,"no_jira"); // v-card__title H4-Secondary-Center
+                    if (FAIL) { return;}    
+                _t++; Thread.sleep((long) sleep); T.Find_Text("Repeat every Text", "Repeat every", true,"no_jira"); // layout mt-4 H6-Selected-On-Surface-High-Emphasis-Left
+                    if (FAIL) { return;} 
+                _t++; Thread.sleep((long) sleep); T.Find_Text("Repeat on Text", "Repeat on", true,"no_jira"); // layout mt-4 H6-Selected-On-Surface-High-Emphasis-Left
+                    if (FAIL) { return;} 
+                _t++; Thread.sleep((long) sleep); T.List_L1("WeekDays Count", "xpath", "//div[contains(@class, 'Weekday')]", "no_jira");             
+                    if (FAIL) { return;}                         
+                    for (int i = 1; i < (L1.size() - 1); i++) {
+                        _t++; T.Element_Click("Select Weekday (index " + i + ")", L1.get(i),  "no_jira");             
+                    }   
+                _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click  'CONTINUE'", "xpath", "//*[contains(text(), 'CONTINUE')]", "no_jira"); 
+                  if (FAIL) { return;}  
                       
                 _t++; Thread.sleep((long) sleep); T.Element_Click("Check 'No End'", L2.get(1), "no_jira");
                     if (FAIL) { return;}                      

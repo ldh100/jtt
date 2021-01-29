@@ -20,12 +20,12 @@ public class AP3_menu_manager {
 //        NWEJgN87Q3Sw46JaQ1Q - Brand: PARAMOUNT,   Site: Fennel, Unit: Mohawk College
         String Menu_ID = "";      
         int PAGES;
-        _t++; Thread.sleep((long) sleep); T.Move_to_Visible_Element("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
+        _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
-        _t++; Thread.sleep((long) sleep); T.Clickable_Element_By_Path_Click("Drawer > 'Menu Manager' Click", "xpath", "//*[contains(text(), 'Menu Manager')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > 'Menu Manager' Click", "xpath", "//*[contains(text(), 'Menu Manager')]", "no_jira"); 
             if (FAIL) { return;} 
-        _t++; Thread.sleep(200); T.Move_out_of_Visible_Element("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+        _t++; Thread.sleep(200); T.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
             if (FAIL) { return;}
              
         // <editor-fold defaultstate="collapsed" desc="Group Selection">  
@@ -87,7 +87,7 @@ public class AP3_menu_manager {
 //        } else{
 //            return;
 //        } 
-        _t++; T.Clickable_Element_By_Path_Click("Button 'Go to Menu' Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
+        _t++; T.Element_By_Path_Click("Button 'Go to Menu' Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -342,7 +342,7 @@ public class AP3_menu_manager {
                     _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'Prepared'", L1.get(T_Index), "no_jira");
                         if (FAIL) { return;}   
                 } 
-            _t++; Thread.sleep((long) sleep); T.Click_out_of_Visible_Element("Tax Tags dropdown Close", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",  "Top",4, 4, "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Click_out_of_Element_By_Path("Tax Tags dropdown Close", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",  "Top",4, 4, "no_jira");
                 if (FAIL) { return;}
                     
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'APPLY Changes'", "xpath", "//*[contains(text(), 'Apply Changes')]", "no_jira"); 
@@ -502,7 +502,7 @@ public class AP3_menu_manager {
             int S = L0.size(); 
             _t++; Thread.sleep((long) sleep); T.Element_Click("Select Copied Group", L0.get(S-1), "no_jira");
                 if (FAIL) { return;}   
-            _t++; Thread.sleep((long) sleep); T.Visible_Element_By_Path_Input_Select_Clear("Copied Group Name Clear", "css", "[aria-label='Modifier Group Name']", "no_jira");
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Input_Select_Clear("Copied Group Name Clear", "css", "[aria-label='Modifier Group Name']", "no_jira");
                 if (FAIL) { return;}    
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter New Copied Group Name", "css", "[aria-label='Modifier Group Name']", "Copied Group " + New_ID, false, "no_jira");
                 if (FAIL) { return;}    
@@ -644,8 +644,6 @@ public class AP3_menu_manager {
                 }            
             }
         if(T_Index > -1){
-//            _t++; Thread.sleep((long) sleep); T.Scroll_to_Element("Scroll to Menu " + GL_MENU, L2.get(T_Index), "no_jira");
-//                if (FAIL) { return;}
             _t++; T.Find_Text("Fund 'Search...' text", "Search Menus", true,"no_jira");   
                 if (FAIL) { return;}             
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", "no_jira"); 
@@ -827,7 +825,7 @@ public class AP3_menu_manager {
                     _t++; Thread.sleep((long) sleep); T.Element_Click("Click 'Prepared'", L1.get(T_Index), "no_jira");
                         if (FAIL) { return;}   
                 } 
-                _t++; Thread.sleep((long) sleep); T.Click_out_of_Visible_Element("Tax Tags dropdown Close", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",  "Top",4, 4, "no_jira");
+                _t++; Thread.sleep((long) sleep); T.Click_out_of_Element_By_Path("Tax Tags dropdown Close", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",  "Top",4, 4, "no_jira");
                     if (FAIL) { return;} 
    
             // ======= Add Modifier >>>
