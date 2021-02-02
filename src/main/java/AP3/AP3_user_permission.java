@@ -256,7 +256,11 @@ Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'New Global Menu' > C
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 1st Group 'Edit' icon", "xpath", "//button[contains(@class, 'v-btn v-btn--flat v-btn--icon theme--light grey--text')]", "no_jira"); 
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Edit Menu ... Name'", "Edit Global Menu Brand Name", true,"no_jira");   
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Edit Menu ... Name' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]", "no_jira"); 
+            _t++; 
+//Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Edit Menu ... Name' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]", "no_jira"); 
+Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Edit Menu ... Name' > Cancel", "xpath", "//*[@id='operator']/div[4]/div[1]/div[1]/div[3]/button[1]/div[1]", "no_jira"); 
+
+////body/div[@id='operator']/div[4]/div[1]/div[1]/div[3]/button[1]/div[1]
                 if (FAIL) { return;}                 
             // </editor-fold> 
 
@@ -492,8 +496,9 @@ Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'New Global Menu' > C
             Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                 if (FAIL) { return;}
-
-
+           //Site Manager has no permission to Global menus 
+            
+          /*
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open 'Group' dropdown", "css", "[role='combobox']", "no_jira");
                 if (FAIL) return;   
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Sector Name", "css", "[role='combobox']", GROUP, false, "no_jira");
@@ -513,6 +518,7 @@ Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'New Global Menu' > C
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, "no_jira");
                 if (FAIL) { return;} 
+           */
 ////
 
             // logout >>>>>>>>>>>    
@@ -704,6 +710,8 @@ Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'New Global Menu' > C
             // </editor-fold> 
 ////
             // <editor-fold defaultstate="collapsed" desc="SN N Menu Management" >   
+             /// Limited Site Manager has no permission to Menu management
+ /*
             _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
                 if (FAIL) { return;}
             Thread.sleep(500);          
@@ -734,7 +742,7 @@ Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'New Global Menu' > C
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, "no_jira");
                 if (FAIL) { return;} 
-
+*/
 ////
             // logout >>>>>>>>>>>    
             _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
@@ -935,8 +943,8 @@ Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'New Global Menu' > C
             Thread.sleep(500); 
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                 if (FAIL) { return;}
-
-
+            // CDL delivery Manager has no permission to Global menus 
+/*
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open 'Group' dropdown", "css", "[role='combobox']", "no_jira");
                 if (FAIL) return;   
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Sector Name", "css", "[role='combobox']", GROUP, false, "no_jira");
@@ -956,7 +964,7 @@ Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'New Global Menu' > C
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, "no_jira");
                 if (FAIL) { return;} 
-
+*/
 ////
             // logout >>>>>>>>>>>    
             _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
@@ -1152,6 +1160,8 @@ Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'New Global Menu' > C
   
 ////
             // <editor-fold defaultstate="collapsed" desc=“DM N Menu Management" >   
+            /// Limited CDL Delivery Manager has no permission to Menu management
+/*         
             _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
                 if (FAIL) { return;}
             Thread.sleep(500);          
@@ -1182,7 +1192,7 @@ Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'New Global Menu' > C
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, "no_jira");
                 if (FAIL) { return;} 
-
+*/
 ////
             // logout >>>>>>>>>>>    
             _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
