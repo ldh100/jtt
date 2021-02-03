@@ -241,20 +241,35 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Edit Group' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]", "no_jira"); 
                 if (FAIL) { return;}    
              _t++; 
-///Thread.sleep((long) sleep); T.Element_By_Path_Click("Click '+ GLOBAL MENU'", "xpath", "//*[contains(text(), 'Global Menu')]", "no_jira"); 
+//Thread.sleep((long) sleep); T.Element_By_Path_Click("Click '+ GLOBAL MENU'", "xpath", "//*[contains(text(), 'Global Menu')]", "no_jira"); 
+Thread.sleep(1000);
+//div[@class='v-btn__content'][normalize-space()='Global Menu']
+//body/div[@id='operator']/div[126]/main[1]/div[1]/div[2]/div[1]/div[3]/div[1]/button[1]/div[1]
+//i[@class='v-icon v-icon--left mdi mdi-plus theme--dark']
+//div[@class='v-btn__content'][normalize-space()='Global Menu']
+//div[contains(@class, ''v-btn__content'')]
+//body/div[@id='operator']/div[126]/main[1]/div[1]/div[2]/div[1]/div[3]/div[1]/button[1]/div[1]/i[1]
 Thread.sleep((long) sleep); T.Element_By_Path_Click("Click '+ GLOBAL MENU'", "xpath", "//*[@id='operator']/div[126]/main[1]/div[1]/div[2]/div[1]/div[3]/div[1]/button[1]/div[1]", "no_jira"); 
-        
+ //Thread.sleep((long) sleep); T.Element_By_Path_Click("Click '+ GLOBAL MENU'", "xpath", "//div[contains(@class, ''v-btn__content'')]", "no_jira"); 
+  
+  Thread.sleep(1000);   
 ///body/div[@id='operator']/div[126]/main[1]/div[1]/div[2]/div[1]/div[3]/div[1]/button[1]/div[1]        
 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Enter Menu ... Name'", "Enter Global Menu Brand Name", true,"no_jira");   
             _t++; 
 //Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'New Global Menu' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]", "no_jira"); 
-Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'New Global Menu' > Cancel", "xpath", "//*[@id='operator']/div[4]/div[1]/div[1]/div[3]/button[1]", "no_jira"); 
 
+Thread.sleep(1000); 
+//Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'New Global Menu' > Cancel", "xpath", "//*[@id='operator']/div[4]/div[1]/div[1]/div[3]/button[1]", "no_jira"); 
+Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'New Global Menu' > Cancel", "xpath", "//button[@type=‘submit’]//div[contains(text(),‘Global Menu’)]", "no_jira"); 
 ////body/div[@id='operator']/div[4]/div[1]/div[1]/div[3]/button[1]
                 if (FAIL) { return;}    
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 1st Group 'Edit' icon", "xpath", "//button[contains(@class, 'v-btn v-btn--flat v-btn--icon theme--light grey--text')]", "no_jira"); 
+            _t++;             
+   Thread.sleep(1000); //
+Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 1st Group 'Edit' icon", "xpath", "//button[contains(@class, 'v-btn v-btn--flat v-btn--icon theme--light grey--text')]", "no_jira"); 
+   Thread.sleep(1000); //
                 if (FAIL) { return;}
+
             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Edit Menu ... Name'", "Edit Global Menu Brand Name", true,"no_jira");   
             _t++; 
 //Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Edit Menu ... Name' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]", "no_jira"); 
@@ -310,7 +325,11 @@ Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Edit Menu ... Name' 
 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'User Name'", "xpath", "//button[@type='button'][2]", "no_jira"); 
                 if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(), 'Logout')]", "no_jira"); 
+            _t++; 
+//Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(), 'Logout')]", "no_jira"); 
+Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(),'Logout')]", "no_jira"); 
+
+////div[contains(text(),'Logout')]
                 if (FAIL) { return;}  
             }  
         }
