@@ -777,6 +777,9 @@ public class A extends javax.swing.JFrame {
     public static double sleep = 500; // milisec
     public static double LoadTimeOut = 15; // sec
     public static long WaitForElement = 3000; // milisec
+    public static int var1;
+    public static int var2;
+    public static double var3;//0.42//0.05
 
     public static String t;
     public static String err;
