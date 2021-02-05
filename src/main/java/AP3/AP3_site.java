@@ -31,7 +31,7 @@ public class AP3_site {
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); T.Page_URL("Sites page URL", "no_jira"); 
             if (FAIL) { return;}      
-            
+           
         // <editor-fold defaultstate="collapsed" desc="SITEs List > Sorts">    
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", "no_jira");
             if (FAIL) { return;}          
@@ -253,8 +253,8 @@ public class AP3_site {
             } else {
                     _t++; T.Element_Text("Sites Data Row Text", L0.get(L0.size()- 1), "no_jira");             
                     if (FAIL) { return;}        
-            }              
-        // ============ All Sites
+            }                          
+         // ============ All Sites
         _t++; T.Move_to_Element_By_Path("Paging - Rows per page", "css", "[aria-label='Rows per page:']", "no_jira");        
                 if (FAIL) { return;}        
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
@@ -301,7 +301,8 @@ public class AP3_site {
                 if (FAIL) { return;}
             } 
         // </editor-fold>        
-        
+ 
+         
         // <editor-fold defaultstate="collapsed" desc="SITE Search > Brand List">
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text("Search Prompt", "xpath", "//*[contains(text(), 'Search Sites')]", "no_jira"); 
             if (FAIL) { return;}
@@ -356,14 +357,14 @@ public class AP3_site {
                     }
             } 
         // </editor-fold> 
-            
+          
         // <editor-fold defaultstate="collapsed" desc="Training Video">
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Trainig Video Icon Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-help-circle')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Training Video Icon Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-help-circle')]", "no_jira"); 
             if (FAIL) { return;}     
         Thread.sleep(500);               
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}  
-        _t++; Thread.sleep((long) sleep); T.Swith_to_Frame("Swith to Video Player", "tagName", "iframe", "no_jira");// iframe src="https://player.vimeo.com/video/412472158"
+        _t++; Thread.sleep((long) sleep); T.Swith_to_Frame("Switch to Video Player", "tagName", "iframe", "no_jira");// iframe src="https://player.vimeo.com/video/412472158"
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); T.Wait_For_Element_By_Path_Presence("Wait for Player load", "className", "play-icon", "no_jira"); 
             if (FAIL) { return;}  
@@ -403,14 +404,15 @@ public class AP3_site {
                         if (FAIL) { return;}
                     _t++; T.Find_Text("Find 'Country' text", "Country", true,"no_jira"); 
                         if (FAIL) { return;}
-                    if(COUNTRY.toLowerCase().contains("can")){
-                        _t++; T.Find_Text("Find 'Province' text", "Province", true,"no_jira"); 
-                            if (FAIL) { return;} 
+                   
+                    _t++; T.Find_Text("Find 'State' text", "State", true,"no_jira"); 
+                            if (FAIL) { return;}                         
+                        if(COUNTRY.toLowerCase().contains("ca")){
+//                        _t++; T.Find_Text("Find 'Province' text", "Province", true,"no_jira"); 
+//                            if (FAIL) { return;} 
                         _t++; T.Find_Text("Find 'Postal Code' text", "Postal Code", true,"no_jira"); 
                             if (FAIL) { return;} 
                     } else {
-                        _t++; T.Find_Text("Find 'State' text", "State", true,"no_jira"); 
-                            if (FAIL) { return;} 
                         _t++; T.Find_Text("Find 'Zip Code' text", "Zip Code", true,"no_jira"); 
                             if (FAIL) { return;} 
                         }  
@@ -487,7 +489,7 @@ public class AP3_site {
         // <editor-fold defaultstate="collapsed" desc="New Sites > Cancel">
         _t++; T.To_Top("no_jira");
             if (FAIL) { return;}            
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Add New Site Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Add New Site Click", "xpath", "//div[@class='v-btn__content' and contains(text(),'ADD NEW SITE')]", "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -574,7 +576,7 @@ public class AP3_site {
 //                            if (FAIL) { return;}     
                     break;
                 case 1:
-                    _t++; T.Element_Text("Payment section", L0.get(i), "no_jira");             
+                   _t++; T.Element_Text("Payment section", L0.get(i), "no_jira");             
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.Element_Click("Payment Info Click", L0.get(i), "no_jira");
                         if (FAIL) { return;} 
@@ -585,9 +587,14 @@ public class AP3_site {
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Payment Type Prompt", "css", "[aria-label='Payment Type']", "placeholder", "no_jira");
                          if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Payment Type Dropdown Open", "css", "[aria-label='Payment Type']", "no_jira");
-                         if (FAIL) { return;} 
+                    if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.List_L1("Payment Types Count", "xpath", "/html/body/div/div[9]/div/div/div", "no_jira");             
                         if (FAIL) { return;} 
+                 
+                        // This List L1 return pagination list.  But realized the dropdown doesnt get clicked. 
+                        // Tried using  xpath //div[@class='v-list__tile__title']
+                        //Similar issue in Mealplan. 
+                        
                         for (int j = 0; j < L1.size(); j++) {
                             _t++; T.Element_Text("Available Payment Type:", L1.get(j), "no_jira");             
                             if (FAIL) { return;}
@@ -599,8 +606,8 @@ public class AP3_site {
                     _t++; Thread.sleep((long) sleep); T.Element_By_Path_Text_Enter("Enter FP Terminal ID", "css", "[aria-label='Freedom Pay Terminal ID']", "2479168011", false, "no_jira");
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Refunds Accepted?' text", "Refunds Accepted?", true,"no_jira"); 
-                        if (FAIL) { return;}
-                    break;
+                        if (FAIL) { return;}   
+                   break;
                 case 2:
                     _t++; T.Element_Text("Mealplan section", L0.get(i), "no_jira");             
                         if (FAIL) { return;} 
@@ -769,8 +776,8 @@ public class AP3_site {
                             _t++; T.Element_Text("Promotion Data Row", L1.get(j), "no_jira");             
                             if (FAIL) { return;}
                         }                              
-                        break;
-                    default:
+                        break;          
+                default:
                         break;
                 }
             }   
