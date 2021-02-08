@@ -547,8 +547,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             txtLog.append("\r\n\r\n=== Load Data > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
-
-        this.title = "Reports - " + DV1.getRowCount() + " records";
+        this.setTitle("Reports - " + DV1.getRowCount() + " found");
         if(DV1.getRowCount() > 0){
             DV1.changeSelection(0, 0, false, false);
             SUM();

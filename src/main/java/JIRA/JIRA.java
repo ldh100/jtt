@@ -7,52 +7,34 @@ package JIRA;
 
 import A.Func;
 import static A.A.*;
+
+import javax.crypto.spec.SecretKeySpec;
+import javax.xml.bind.DatatypeConverter;
+import java.security.Key;
+import io.jsonwebtoken.*;
+import java.util.Date; 
+
 import com.google.common.base.Stopwatch;
 import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DecimalFormat;
 import java.time.Duration;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
-import javax.swing.RowSorter;
-import javax.swing.SortOrder;
-import javax.swing.SwingWorker;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.safari.SafariDriver; 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -105,6 +87,10 @@ public class JIRA extends javax.swing.JInternalFrame {
         cmbEnv = new javax.swing.JComboBox<>();
         _JWeb = new javax.swing.JCheckBox();
         _ZApi = new javax.swing.JCheckBox();
+        lblSITES5 = new javax.swing.JLabel();
+        txtProjct = new javax.swing.JTextField();
+        lblSITES7 = new javax.swing.JLabel();
+        txtCycle = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -172,7 +158,7 @@ public class JIRA extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 22, 428, 272));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 22, 428, 76));
 
         txtLog.setEditable(false);
         txtLog.setColumns(20);
@@ -281,6 +267,27 @@ public class JIRA extends javax.swing.JInternalFrame {
         _ZApi.setRequestFocusEnabled(false);
         getContentPane().add(_ZApi, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 320, 172, -1));
 
+        lblSITES5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES5.setText("Project Key / ID");
+        lblSITES5.setToolTipText("");
+        lblSITES5.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES5, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 64, 120, -1));
+
+        txtProjct.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtProjct.setText("QA / 10001");
+        getContentPane().add(txtProjct, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, 404, -1));
+
+        lblSITES7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES7.setText("Cycle /ID");
+        lblSITES7.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 108, -1, -1));
+
+        txtCycle.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtCycle.setText("password");
+        getContentPane().add(txtCycle, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 124, 404, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // admin@distilr.io MortyEscapedOntario >> https://app.distilr.io/
@@ -322,33 +329,91 @@ public class JIRA extends javax.swing.JInternalFrame {
         if(!btnRun.isEnabled()){
             return;
         }
-
-        if(Driver()){
-            txtLog.append("\r\n=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            sw1.reset();
-            if(_JWeb.isSelected()){
+        if(_JWeb.isSelected()){
+            if(Driver()){
+                txtLog.append("\r\n=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                sw1.reset();
                 UPDATE_JIRA("Report", "JIRA_QA");                
             }
-            if(_ZApi.isSelected()){
-                Z_JWT();                
-            }
+            try  { 
+                if(d1 != null) {
+                    d1.quit(); 
+                }
+            }    
+            catch (Exception ex)  { 
+                txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            }    
         }
-        
-        try  { 
-            if(d1 != null) {
-                d1.quit(); 
-            }
-        }    
-        catch (Exception ex)  { 
-            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }         
+        if(_ZApi.isSelected()){
+            Z_JWT();                
+        }        
     }//GEN-LAST:event_btnRunMouseClicked
     private void Z_JWT(){
-        
-    }
+        try{
+            SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+            long nowMillis = System.currentTimeMillis();
+            Date now = new Date(nowMillis);
+            String Z_Base_URL = "https://prod-api.zephyr4jiracloud.com/connect/"; 
+            String id = "5a68ac8fd57c332a76e1a9c9"; // oleg.spozito@compassdigital.io
+            String A_Key = "amlyYTo4YWU2N2I0MC0xNThhLTQzYWQtYjEyMi0wMGMwMTc2MjZiMjMgNWE2OGFjOGZkNTdjMzMyYTc2ZTFhOWM5IFVTRVJfREVGQVVMVF9OQU1F";
+            String S_Key = "bl-AwwkFeqRNcbPrL91ypPsNj-whyXxdwOeBcJRBlRc";
 
+            
+            String subject = "subject";
+            String issuer = "issuer";
+            
+
+            
+            //We will sign our JWT with our ApiKey secret
+            byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(S_Key);
+            Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
+
+            //Let's set the JWT Claims
+            JwtBuilder builder = Jwts.builder().setId(id)
+                                        .setIssuedAt(now)
+                                        .setSubject(subject)
+                                        .setIssuer(issuer)
+                                        .signWith(signatureAlgorithm, signingKey);
+            long expMillis = nowMillis + 600000;
+            Date exp = new Date(expMillis);
+            builder.setExpiration(exp);
+
+            //Builds the JWT and serializes it to a compact, URL-safe string
+            String JWT = builder.compact();  
+            ParseJWT(JWT);
+        } catch(Exception ex){
+            txtLog.append("\r\nZ_JWT: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());               
+        }
+    }
+    private void ParseJWT(String jwt) {
+        //This line will throw an exception if it is not a signed JWS (as expected)
+        try {
+            Claims claims = Jwts.parser()         
+                .setSigningKey(DatatypeConverter.parseBase64Binary("QH827PyS_3vJ25hK6YhKCx3OKOCXEtc3B9F6wP_x1Pc"))
+                .parseClaimsJws(jwt).getBody();
+             System.out.println("ID: " + claims.getId());
+             System.out.println("Subject: " + claims.getSubject());
+             System.out.println("Issuer: " + claims.getIssuer());
+             System.out.println("Expiration: " + claims.getExpiration());
+        } catch(Exception ex){
+            txtLog.append("\r\nParseJWT: " + ex.getMessage()); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());             
+        }         
+     }    
+//    static String getQSH(String qstring)
+//    {
+//        System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
+//        StringBuilder hash = new StringBuilder();
+//        byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(qstring), 0, Encoding.UTF8.GetByteCount(qstring));
+//        foreach (byte theByte in crypto)
+//        {
+//            hash.Append(theByte.ToString("x2"));
+//        }
+//        return hash.ToString();
+//    }
     private void UPDATE_JIRA(String Report, String JIRA_QA){
         String SUM = "";
         Stopwatch sw1 = Stopwatch.createUnstarted();
@@ -880,10 +945,14 @@ public class JIRA extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblSITES11;
     private javax.swing.JLabel lblSITES13;
     private javax.swing.JLabel lblSITES4;
+    private javax.swing.JLabel lblSITES5;
     private javax.swing.JLabel lblSITES6;
+    private javax.swing.JLabel lblSITES7;
     private javax.swing.JTextField txtAdmin_ID;
     private javax.swing.JTextField txtAdmin_PW;
+    private javax.swing.JTextField txtCycle;
     private javax.swing.JTextArea txtLog;
+    private javax.swing.JTextField txtProjct;
     // End of variables declaration//GEN-END:variables
 // </editor-fold>
 }
