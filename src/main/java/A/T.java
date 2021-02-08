@@ -6,7 +6,6 @@
 package A;
 import static A.A.*;
 import com.google.common.base.Stopwatch;
-
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
@@ -16,7 +15,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
@@ -2907,56 +2905,6 @@ public class T {
         sw1.reset();
     }
     
-       public static String get_Text(String str) {
-    	for (int i = 0; i < str.length(); i++) {
-			if (str.charAt(i) == '$')
-				str = str.replace(String.valueOf(str.charAt(i)), "");
-			if (str.charAt(i) == ',')
-				str = str.replace(String.valueOf(str.charAt(i)), "");
-			if (str.charAt(i) == '(')
-				str = str.replace(String.valueOf(str.charAt(i)), "");
-			if (str.charAt(i) == ')')
-				str = str.replace(String.valueOf(str.charAt(i)), "");
-			if (str.charAt(i) == '%')
-				str = str.replace(String.valueOf(str.charAt(i)), "");
-		}
-    	//System.out.println("final str "+str);
-    	return str;
-    }
- 
- 
-    public static void calculation(String NAME, String JIRA) {
-		String status;
-		if(sw1.isRunning()){
-            sw1.reset();
-        }
-        sw1.start();
-        
-		try {
-			double val = (double) var1 / var2 * 100;
-			double actVal = Math.round(val * 100.0) / 100.0;
-
-			if (actVal == (double) var3) {
-				t = "Actual value - "+actVal+" is matching with expected value - "+(double) var3+"";
-				status= "PASS";
-			} else {
-				t = "Actual value - "+actVal+" is not matching with expected value - "+(double) var3+"";
-				status = "FAIL";
-			}
-			_p++;
-			EX += _t + "\t" + NAME + "\t" + " - " + "\t" + ""+t+"" + "\t" + ""+status+"" + "\t" + " - " +
-            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-			
-		} catch (Exception ex) {
-			_f++; err = ex.getMessage().trim(); err = ex.getMessage().trim();
-            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
-            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
-		}
-		sw1.reset();
-    }
-    
     public static void File_Delete(String NAME, String DIR, String F_NAME, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
@@ -2984,7 +2932,6 @@ public class T {
             F += _t + " > " + err + "\r\n";
         } 
         sw1.reset();
-        
-     
-    }
+    } 
+
 }

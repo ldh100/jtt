@@ -44,7 +44,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -443,7 +442,7 @@ public class DL extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 56, 84, 28));
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 56, 84, 28));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -639,6 +638,7 @@ public class DL extends javax.swing.JInternalFrame {
             txtLog.append("\r\n=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             sw1.reset();
+
             LOG_START(); // ========================================================
             
             BW2_DoWork(
@@ -651,7 +651,6 @@ public class DL extends javax.swing.JInternalFrame {
                 txtLog.append("Execute DL  " + ex.getMessage());
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
-            
         }
     }//GEN-LAST:event_btnRunMouseClicked
     private void BW2_DoWork(){
@@ -1644,7 +1643,11 @@ public class DL extends javax.swing.JInternalFrame {
     public static String url = "";
     public static String env = "";
     private static SwingWorker BW2; 
-    private static String Toast_Msg = "";     
+    private static String Toast_Msg = "";   
+    
+    public static int var1;
+    public static int var2;
+    public static double var3;//0.42//0.05
     
     private boolean Load;
     private String Report_Date;
