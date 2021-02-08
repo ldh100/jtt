@@ -13,10 +13,10 @@ import static A.A.*;
  */
 public class DL_metrics_selection {
     public static void run() throws InterruptedException { 
+        Thread.sleep(500);     
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Filters' label", "Filters", true,"no_jira"); 
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Configure Filters' button label", " Configure Filters", true,"no_jira"); 
-        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Find 'Add metrics...'", "tagName", "img", "alt", "no_jira"); 
-            //if (FAIL) { return;}           
+        _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Find 'Add metrics...'", "tagName", "img", "alt", "no_jira");        
 
         _t++; Thread.sleep((long) sleep); T.Element_E1_Find("Find Date selection container", "xpath", "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3']", "no_jira"); 
              if (FAIL) { return;}        
@@ -25,7 +25,7 @@ public class DL_metrics_selection {
         for (int i = 0; i < L1.size(); i++) {
             _t++; Thread.sleep((long) sleep); T.Element_Text("Date Items", L1.get(i), "no_jira");                          
                 if (FAIL) { return;}
-//                 _t++; Thread.sleep((long) sleep); T.Element_Click(t + " > DateItem " + i + " name", L1.get(i) , "no_jira" );
+//                 _t++; Thread.sleep((long) sleep); T.Element_Click(t + " > DataItem " + i + " name", L1.get(i) , "no_jira" );
 //                     if (FAIL) { return;}
         }        
         
@@ -51,9 +51,9 @@ public class DL_metrics_selection {
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for Selected Metric " + (j+1) + " load...", "xpath", "//div[@role='progressbar']", "no_jira"); 
                         if (FAIL) { return;}  
+                    Thread.sleep(500);     
                     _t++; Thread.sleep((long) sleep); T.List_L1("Loaded Metrics Cards Count", "xpath", "//div[contains(@class, 'MuiPaper-root MuiCard-root')]", "no_jira");             
                         if (FAIL) { return;} 
-                    Thread.sleep(500);     
                     _t++; Thread.sleep((long) sleep); T.Element_Child_List_L2("Loaded Metric Card '-body1' Count", L1.get(j), "xpath", ".//p[contains(@class,'-body1')]", "no_jira");             
                         if (FAIL) { return;} 
                     if(L2.size() > 0) {   
@@ -79,14 +79,14 @@ public class DL_metrics_selection {
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}                 
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Find 'Add metrics...'", "tagName", "img", "alt", "no_jira");  
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Close Metrics Drawer - click 'arrow_left'", "xpath", ".//span[text()='arrow_left']", "no_jira"); 
-                if (FAIL) { return;}              
-            Thread.sleep(500);
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open Metrics Drawer - click 'arrow_right'", "xpath", ".//span[text()='arrow_right']", "no_jira"); 
-                if (FAIL) { return;}
-            Thread.sleep(500);                
-        _t++; Thread.sleep((long) sleep); T.List_L0("Metrics Subheader Count", "xpath", "//ul[contains(@class, 'MuiList-subheader')]", "no_jira");             
-            if (FAIL) { return;}  
+//            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Close Metrics Drawer - click 'arrow_left'", "xpath", ".//span[text()='arrow_left']", "no_jira"); 
+//                if (FAIL) { return;}              
+//            Thread.sleep(500);
+//            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Open Metrics Drawer - click 'arrow_right'", "xpath", ".//span[text()='arrow_right']", "no_jira"); 
+//                if (FAIL) { return;}   // ===================== BUG - Empty list after re-open - to be FIXED  A.S.A.P ^^^^^   ==============
+//            Thread.sleep(500);                
+            _t++; Thread.sleep((long) sleep); T.List_L0("Metrics Subheader Count", "xpath", "//ul[contains(@class, 'MuiList-subheader')]", "no_jira");             
+                if (FAIL) { return;}  
             for (int i = 0; i < L0.size(); i++) {
                 _t++; Thread.sleep((long) sleep); T.Element_Child_Text("Metrics Subheader Title", L0.get(i),"xpath", ".//p[contains(@class, 'MuiTypography-body1')]", "no_jira");                          
                     if (FAIL) { return;}

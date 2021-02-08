@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package A;
+import static A.A.*;
+import com.google.common.base.Stopwatch;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -15,6 +17,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
@@ -35,6 +40,10 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 /**
  *
  * @author Oleg.Spozito
@@ -201,7 +210,6 @@ public class Func {
         }
         return ExcelFile.getAbsolutePath();
     }
-
     public static String Send_File_to_Slack(String Path, String Channel, String MSG) {
         try{           
             File file = new File(Path); 

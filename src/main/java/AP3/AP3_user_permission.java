@@ -212,7 +212,7 @@ public class AP3_user_permission {
             // </editor-fold> 
 
             // <editor-fold defaultstate="collapsed" desc="Admin N Group Management" >   
-            _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
+             _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
                 if (FAIL) { return;}
             Thread.sleep(500);          
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Click Group Management", "xpath", "//*[contains(text(), 'Group Management')]", "no_jira"); 
@@ -242,14 +242,23 @@ public class AP3_user_permission {
                 if (FAIL) { return;}    
              _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click '+ GLOBAL MENU'", "xpath", "//*[contains(text(), 'Global Menu')]", "no_jira"); 
                 if (FAIL) { return;}
+            // ST 
+            //Thread.sleep((long) sleep); T.Element_By_Path_Click("Click '+ GLOBAL MENU'", "xpath", "//*[@id='operator']/div[126]/main[1]/div[1]/div[2]/div[1]/div[3]/div[1]/button[1]/div[1]", "no_jira"); 
+            //Thread.sleep((long) sleep); T.Element_By_Path_Click("Click '+ GLOBAL MENU'", "xpath", "//button[@type=‘submit’]//div[contains(text(),‘Global Menu’)]", "no_jira"); 
+            //Thread.sleep((long) sleep); T.Element_By_Path_Click("Click '+ GLOBAL MENU'", "xpath", "//button[@class=‘v-btn theme--light primary’]", "no_jira"); ///button[@class=‘v-btn theme--light primary’]
+            // end ST
+
             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Enter Menu ... Name'", "Enter Global Menu Brand Name", true,"no_jira");   
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'New Global Menu' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]", "no_jira"); 
                 if (FAIL) { return;}    
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 1st Group 'Edit' icon", "xpath", "//button[contains(@class, 'v-btn v-btn--flat v-btn--icon theme--light grey--text')]", "no_jira"); 
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); T.Find_Text("Admin N 'Edit Menu ... Name'", "Edit Global Menu Brand Name", true,"no_jira");   
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Edit Menu ... Name' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]", "no_jira"); 
-                if (FAIL) { return;}                 
+            _t++; 
+            //Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Edit Menu ... Name' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]", "no_jira"); 
+            Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Edit Menu ... Name' > Cancel", "xpath", "//*[@id='operator']/div[4]/div[1]/div[1]/div[3]/button[1]/div[1]", "no_jira"); 
+            if (FAIL) { return;}  
+        
             // </editor-fold> 
 
             // <editor-fold defaultstate="collapsed" desc="Admin N Menu Management" >   
@@ -295,10 +304,10 @@ public class AP3_user_permission {
             Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
                 if (FAIL) { return;}
-
             _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'User Name'", "xpath", "//button[@type='button'][2]", "no_jira"); 
                 if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(), 'Logout')]", "no_jira"); 
+            _t++; 
+            Thread.sleep((long) sleep); T.Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(),'Logout')]", "no_jira"); 
                 if (FAIL) { return;}  
             }  
         }
@@ -473,8 +482,19 @@ public class AP3_user_permission {
                     EX += _t + "\t" + " === SM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
                 }            
             //</editor-fold>   
-            
-            /// SN Y MAne Managhe
+
+            // <editor-fold defaultstate="collapsed" desc="SN Y Menu Management" >   
+            _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
+                if (FAIL) { return;}
+            Thread.sleep(500);          
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Click Menu Manager", "xpath", "//*[contains(text(), 'Menu Manager')]", "no_jira"); 
+                if (FAIL) { return;} 
+            _t++; Thread.sleep(500); T.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+            Thread.sleep(500); 
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+                if (FAIL) { return;}
+           //Site Manager has no permission to Global menus 
+        
             // logout >>>>>>>>>>>    
             _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
                 if (FAIL) { return;}
@@ -493,6 +513,8 @@ public class AP3_user_permission {
         }  
         }
         //</editor-fold>   
+        // </editor-fold>
+       
 
         // <editor-fold defaultstate="collapsed" desc="SM N" >
         _t++; T.Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",  "no_jira"); 
@@ -660,7 +682,10 @@ public class AP3_user_permission {
                     EX += _t + "\t" + " === SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                        
                     }            
             // </editor-fold> 
-
+////
+            // <editor-fold defaultstate="collapsed" desc="SN N Menu Management" >   
+             /// Limited Site Manager has no permission to Menu management
+ 
             // logout >>>>>>>>>>>    
             _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
                 if (FAIL) { return;}
@@ -677,6 +702,8 @@ public class AP3_user_permission {
         }  
         }
         // </editor-fold> 
+// </editor-fold>
+       
 
         // <editor-fold defaultstate="collapsed" desc="DM Y" >
         _t++; T.Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",  "no_jira"); 
@@ -847,6 +874,19 @@ public class AP3_user_permission {
                 }           
             // </editor-fold>   
             
+////
+            // <editor-fold defaultstate="collapsed" desc=“DM Y Menu Management" >   
+            _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
+                if (FAIL) { return;}
+            Thread.sleep(500);          
+            _t++; Thread.sleep((long) sleep); T.Element_By_Path_Click("Drawer > Click Menu Manager", "xpath", "//*[contains(text(), 'Menu Manager')]", "no_jira"); 
+                if (FAIL) { return;} 
+            _t++; Thread.sleep(500); T.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
+            Thread.sleep(500); 
+            _t++; Thread.sleep((long) sleep); T.Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
+                if (FAIL) { return;}
+            // CDL delivery Manager has no permission to Global menus 
+
             // logout >>>>>>>>>>>    
             _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
                 if (FAIL) { return;}
@@ -865,6 +905,7 @@ public class AP3_user_permission {
         }
         }
         // </editor-fold>  
+   
 
         // <editor-fold defaultstate="collapsed" desc="DM N" >
         _t++; T.Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",  "no_jira"); 
@@ -1038,6 +1079,10 @@ public class AP3_user_permission {
                 }
             // </editor-fold> 
   
+
+            // <editor-fold defaultstate="collapsed" desc=“DM N Menu Management" >   
+            /// Limited CDL Delivery Manager has no permission to Menu management
+
             // logout >>>>>>>>>>>    
             _t++; Thread.sleep((long) sleep); T.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
                 if (FAIL) { return;}
@@ -1056,5 +1101,6 @@ public class AP3_user_permission {
         }
         }
         // </editor-fold>    
+        
     }   
 }

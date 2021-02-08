@@ -9,12 +9,14 @@
 // chnged to  >
 // Check for at least 1 approval
 package A;
+import Android.Android;
 import AP3.AP3;
 import API.API;
 import Reports.W_Report;
 import DL.DL;
 import FW.FW;
 import WO.WO;
+import JIRA.JIRA;
 import Orders.Orders;
 import Station.Station;
 import java.awt.Cursor;
@@ -73,6 +75,7 @@ public class A extends javax.swing.JFrame {
         Menu_OR = new javax.swing.JMenu();
         Menu_API = new javax.swing.JMenu();
         MenuReports = new javax.swing.JMenu();
+        Menu_JIRA = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JTT");
@@ -198,6 +201,16 @@ public class A extends javax.swing.JFrame {
             }
         });
         MenuBar.add(MenuReports);
+
+        Menu_JIRA.setBorder(null);
+        Menu_JIRA.setText("JIRA");
+        Menu_JIRA.setName("FW"); // NOI18N
+        Menu_JIRA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_JIRAMouseClicked(evt);
+            }
+        });
+        MenuBar.add(Menu_JIRA);
 
         setJMenuBar(MenuBar);
 
@@ -492,6 +505,72 @@ public class A extends javax.swing.JFrame {
         or.setSelected(true);
         F_COUNT++;  
     }
+    private void Open_JIRA() throws PropertyVetoException {
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("JIRA")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
+        JIRA jira = new JIRA();
+        this.DesktopPane.add(jira);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        jira.setLocation(X*20, Y*20);
+        jira.show();
+        jira.setSelected(true);
+        F_COUNT++;  
+    }
+    private void Open_Android() throws PropertyVetoException {
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("JIRA")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
+        Android an = new Android();
+        this.DesktopPane.add(an);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        an.setLocation(X*20, Y*20);
+        an.show();
+        an.setSelected(true);
+        F_COUNT++;  
+    }
 
     private void Menu_FWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_FWMouseClicked
         if(Menu_FW.isVisible()){
@@ -596,7 +675,6 @@ public class A extends javax.swing.JFrame {
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         MenuReports.setEnabled(true);
     }//GEN-LAST:event_MenuReportsMouseClicked
-
     private void Menu_APIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_APIMouseClicked
         if(!Menu_API.isEnabled()){
             return;
@@ -613,7 +691,6 @@ public class A extends javax.swing.JFrame {
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         Menu_API.setEnabled(true); 
     }//GEN-LAST:event_Menu_APIMouseClicked
-
     private void Menu_DLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_DLMouseClicked
         if(!Menu_DL.isEnabled()){
             return;
@@ -630,7 +707,6 @@ public class A extends javax.swing.JFrame {
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         Menu_DL.setEnabled(true); 
     }//GEN-LAST:event_Menu_DLMouseClicked
-
     private void Menu_ORMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_ORMouseClicked
         if(!Menu_OR.isEnabled()){
             return;
@@ -648,14 +724,45 @@ public class A extends javax.swing.JFrame {
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         Menu_OR.setEnabled(true); 
     }//GEN-LAST:event_Menu_ORMouseClicked
-
-    private void Menu_AndroidMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_AndroidMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Menu_AndroidMouseClicked
-
     private void Menu_iOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_iOSMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_Menu_iOSMouseClicked
+    private void Menu_JIRAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_JIRAMouseClicked
+        if(!Menu_JIRA.isEnabled()){
+            return;
+        }
+        Menu_JIRA.setEnabled(false);
+        MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        try {
+            Open_JIRA();
+        }
+        catch (PropertyVetoException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+        Menu_JIRA.setEnabled(true); 
+    }//GEN-LAST:event_Menu_JIRAMouseClicked
+
+    private void Menu_AndroidMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_AndroidMouseClicked
+        if(!Menu_Android.isEnabled()){
+            return;
+        }
+        Menu_Android.setEnabled(false);
+        MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        try {
+            Open_Android();
+        }
+        catch (PropertyVetoException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+        Menu_Android.setEnabled(true);
+    }//GEN-LAST:event_Menu_AndroidMouseClicked
+
     private void Get_Version() {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         Version =  "?"; 
@@ -829,6 +936,7 @@ public class A extends javax.swing.JFrame {
     private javax.swing.JMenu Menu_Android;
     private javax.swing.JMenu Menu_DL;
     private javax.swing.JMenu Menu_FW;
+    private javax.swing.JMenu Menu_JIRA;
     private javax.swing.JMenu Menu_OR;
     private javax.swing.JMenu Menu_iOS;
     // End of variables declaration//GEN-END:variables
