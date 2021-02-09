@@ -331,7 +331,7 @@ public class JIRA extends javax.swing.JInternalFrame {
         }
         if(_JWeb.isSelected()){
             if(Driver()){
-                txtLog.append("\r\n=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec");
+                txtLog.append("=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 sw1.reset();
                 UPDATE_JIRA("Report", "JIRA_QA");                
@@ -342,7 +342,7 @@ public class JIRA extends javax.swing.JInternalFrame {
                 }
             }    
             catch (Exception ex)  { 
-                txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }    
         }
@@ -384,7 +384,7 @@ public class JIRA extends javax.swing.JInternalFrame {
             String JWT = builder.compact();  
             ParseJWT(JWT);
         } catch(Exception ex){
-            txtLog.append("\r\nZ_JWT: " + ex.getMessage()); 
+            txtLog.append("Z_JWT: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());               
         }
     }
@@ -399,7 +399,7 @@ public class JIRA extends javax.swing.JInternalFrame {
              System.out.println("Issuer: " + claims.getIssuer());
              System.out.println("Expiration: " + claims.getExpiration());
         } catch(Exception ex){
-            txtLog.append("\r\nParseJWT: " + ex.getMessage()); 
+            txtLog.append("ParseJWT: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());             
         }         
      }    
@@ -491,14 +491,14 @@ public class JIRA extends javax.swing.JInternalFrame {
             }
             sw1.reset();
         }
-        txtLog.append("\r\n\r\n=== UPDATE_JIRA" + "\r\n" + SUM);
+        txtLog.append("=== UPDATE_JIRA" + "\r\n" + SUM + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
     }
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = Func.SHOW_FILE(txtLog.getText(), "txt");
+        String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
-            txtLog.append(R);
+            txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
     }//GEN-LAST:event_btnLogMouseClicked
@@ -544,7 +544,7 @@ public class JIRA extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
             String cwd = System.getProperty("user.dir");
-            txtLog.append("\r\n\r\n=== CWD: " + cwd);
+            txtLog.append("=== CWD: " + cwd + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             
             if(WsOS.toLowerCase().contains("windows")){
@@ -578,7 +578,7 @@ public class JIRA extends javax.swing.JInternalFrame {
                         d1 = new ChromeDriver(chrome_op);
                     break;
                 case "Edge":
-//                    txtLog.append("\r\n\r\n=== Edge Driver:" + System.getProperty("webdriver.edge.driver"));
+//                    txtLog.append("=== Edge Driver:" + System.getProperty("webdriver.edge.driver" + "\r\n"));
 //                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                         EdgeDriverService edgeServise = EdgeDriverService.createDefaultService();
                         //edgeServise.SuppressInitialDiagnosticInformation = true;
@@ -651,7 +651,7 @@ public class JIRA extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
         } catch (Exception ex) {
-            txtLog.append("\r\n\r\n=== Web Driver > ERROR: " + ex.getMessage());
+            txtLog.append("=== Web Driver > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return false;
@@ -688,7 +688,7 @@ public class JIRA extends javax.swing.JInternalFrame {
             conn.close();
         } catch (Exception ex) {
             CONFIG = false;
-            txtLog.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
@@ -706,16 +706,16 @@ public class JIRA extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("txtAdmin_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_PW.setText(c.substring(c.indexOf(" ")).trim());
 
                 CONFIG = true;
-                txtLog.append("\r\n\r\n=== LOAD_CONFIG > OK");
+                txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             } else {
                 CONFIG = false;
-                txtLog.append("\r\n\r\n=== WEB / JIRA, User: " + UserID + ", Env: " + env + " > No saved Configuration Found");
+                txtLog.append("=== WEB / JIRA, User: " + UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } catch (Exception ex) {
             CONFIG = false;
-            txtLog.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -736,7 +736,7 @@ public class JIRA extends javax.swing.JInternalFrame {
             
 
         } catch (Exception ex)  {
-            txtLog.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }
@@ -766,10 +766,10 @@ public class JIRA extends javax.swing.JInternalFrame {
             int row = _insert.executeUpdate();
             conn.close();
             
-            txtLog.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
+            txtLog.append("=== SAVE_CONFIG > OK (" + row + " row)" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());            
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
+            txtLog.append("=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -820,7 +820,7 @@ public class JIRA extends javax.swing.JInternalFrame {
             int row = _update.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== LOG_UPDATE > SQL ERROR: " + ex.getMessage());
+            txtLog.append("=== LOG_UPDATE > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -889,7 +889,7 @@ public class JIRA extends javax.swing.JInternalFrame {
             int row = _insert.executeUpdate();
             conn.close();
         }  catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== LOG_START > SQL ERROR: " + ex.getMessage());
+            txtLog.append("=== LOG_START > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));

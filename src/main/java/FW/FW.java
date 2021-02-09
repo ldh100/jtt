@@ -666,7 +666,7 @@ public class FW extends javax.swing.JInternalFrame {
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
         //txtLog.setText("");
-        txtLog.append("\r\n=== Execution" + HeadLess + " started @" + LocalDateTime.now().format(Time_12_formatter));
+        txtLog.append("=== Execution" + HeadLess + " started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
         LoadTimeOut = (double)nWaitLoad.getValue();
@@ -710,11 +710,11 @@ public class FW extends javax.swing.JInternalFrame {
 
 
         if(_headless.isSelected()) {
-            txtLog.append("\r\n=== Headless mode is selected - Browser is hidden");
-            txtLog.append("\r\n=== Please wait for report...\r\n");
+            txtLog.append("=== Headless mode is selected - Browser is hidden");
+            txtLog.append("=== Please wait for report...\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
-        txtLog.append("\r\n=== Starting Web Driver...");
+        txtLog.append("=== Starting Web Driver..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -724,7 +724,7 @@ public class FW extends javax.swing.JInternalFrame {
         r_type = "ad-hoc";
 
         if(Driver()){
-            txtLog.append("\r\n=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec");
+            txtLog.append("=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             sw1.reset();
             LOG_START(); // ======================================================
@@ -736,7 +736,7 @@ public class FW extends javax.swing.JInternalFrame {
                 Execute();
             }
             catch (InterruptedException ex) {
-                txtLog.append("Execute FW  " + ex.getMessage());
+                txtLog.append("Execute FW  " + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         }
@@ -858,10 +858,10 @@ public class FW extends javax.swing.JInternalFrame {
 
         }                                          
         if(_f > 0) {
-            txtLog.append("\r\n=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)");
+            txtLog.append("=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }else{
-            txtLog.append("\r\n=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter));  
+            txtLog.append("=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");  
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }         
         Done(dw_start);
@@ -869,14 +869,14 @@ public class FW extends javax.swing.JInternalFrame {
     private void Done(Instant dw_start){
         BW2.cancel(true); // ================================================
         Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
-        txtLog.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========"); 
+        txtLog.append("========   " + "Execution step-by-step log..." + "   ========" + "\r\n"); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength());                
 
         EX = "FW " + env + ", v" + Ver + ", Browser: " + cmbBrow.getSelectedItem().toString() + HeadLess +
         " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
          "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
          + EX;
-        txtLog.append("\r\n" + EX.replaceAll("\t", " > ")); 
+        txtLog.append("" + EX.replaceAll("\t", " > ") + "\r\n"); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         Last_EX = EX;
         
@@ -887,7 +887,7 @@ public class FW extends javax.swing.JInternalFrame {
             }
         }  
         catch (Exception ex)  { 
-            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
         DD = Duration.between(dw_start, Instant.now());
@@ -917,17 +917,17 @@ public class FW extends javax.swing.JInternalFrame {
                                                                 ", p50: " + df.format(p_50) +
                                                                 ", p90: " + df.format(p_90);
                 }
-                txtLog.append("\r\n" + t_rep);
+                txtLog.append("" + t_rep + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } catch(Exception ex){
-            txtLog.append("\r\n\r\n=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage());
+            txtLog.append("=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }  
         btnRun.setEnabled(true);
-        txtLog.append("\r\n=== " + Summary); // Summary shown in EX top
-        txtLog.append("\r\n=== Scope: " + SCOPE); // SCOPE shown in EX top
-        txtLog.append("\r\n=== Browser: " + cmbBrow.getSelectedItem().toString() + HeadLess + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
+        txtLog.append("=== " + Summary); // Summary shown in EX top
+        txtLog.append("=== Scope: " + SCOPE); // SCOPE shown in EX top
+        txtLog.append("=== Browser: " + cmbBrow.getSelectedItem().toString() + HeadLess + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         if(!"".equals(F.trim())){
             btnFails.setEnabled(true);
@@ -956,18 +956,18 @@ public class FW extends javax.swing.JInternalFrame {
     }
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = Func.SHOW_FILE(txtLog.getText(), "txt");
+        String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
-            txtLog.append(R);
+            txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
     }//GEN-LAST:event_btnLogMouseClicked
 
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
-        String R = Func.SHOW_FILE(F, "txt");
+        String R = Func.SHOW_LOG_FILE(F, "txt");
         if(!R.equals("OK")){
-            txtLog.append(R);
+            txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
     }//GEN-LAST:event_btnFailsMouseClicked
@@ -1020,7 +1020,7 @@ public class FW extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
             String cwd = System.getProperty("user.dir");
-            txtLog.append("\r\n\r\n=== CWD: " + cwd);
+            txtLog.append("=== CWD: " + cwd + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             
             if(WsOS.toLowerCase().contains("windows")){
@@ -1054,7 +1054,7 @@ public class FW extends javax.swing.JInternalFrame {
                         d1 = new ChromeDriver(chrome_op);
                     break;
                 case "Edge":
-//                    txtLog.append("\r\n\r\n=== Edge Driver:" + System.getProperty("webdriver.edge.driver"));
+//                    txtLog.append("=== Edge Driver:" + System.getProperty("webdriver.edge.driver" + "\r\n"));
 //                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                         EdgeDriverService edgeServise = EdgeDriverService.createDefaultService();
                         //edgeServise.SuppressInitialDiagnosticInformation = true;
@@ -1130,7 +1130,7 @@ public class FW extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
         } catch (Exception ex) {
-            txtLog.append("\r\n\r\n=== Web Driver > ERROR: " + ex.getMessage());
+            txtLog.append("=== Web Driver > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return false;
@@ -1160,7 +1160,7 @@ public class FW extends javax.swing.JInternalFrame {
     }
     private void Get_FW_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n\r\n- Get Admin User Token ..."); 
+        txtLog.append("- Get Admin User Token ..." + "\r\n"); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== User API(s):" + "\r\n";
         userID = "";
@@ -1189,10 +1189,10 @@ public class FW extends javax.swing.JInternalFrame {
             userTKN = json.getString("token");   
             userID = json.getJSONObject("user").getString("id");
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
-        txtLog.append("\r\n== " + BaseAPI + "/user/auth" + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("== " + BaseAPI + "/user/auth" + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1201,7 +1201,7 @@ public class FW extends javax.swing.JInternalFrame {
     
     private void GetMarkets() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n-Load Markets ...");
+        txtLog.append("-Load Markets ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -1230,18 +1230,18 @@ public class FW extends javax.swing.JInternalFrame {
                 MARKETS += Market.getString("id") + ":" + Market.getString("name") + "\r\n";   
             }
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());      
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage());
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());    
             }
         }
-        txtLog.append("\r\n== " + BaseAPI + "/markets  > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("== " + BaseAPI + "/markets  > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
@@ -1250,7 +1250,7 @@ public class FW extends javax.swing.JInternalFrame {
     private void GetRestaurants() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n-Load Restaurants ...");
+        txtLog.append("-Load Restaurants ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -1330,18 +1330,18 @@ public class FW extends javax.swing.JInternalFrame {
             sorter.sort();            
    
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());      
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage());
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());    
             }
         }
-        txtLog.append("\r\n== " + BaseAPI + "/partners  > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("== " + BaseAPI + "/partners  > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
@@ -1365,7 +1365,7 @@ public class FW extends javax.swing.JInternalFrame {
     private void GetUnits() {
         d2LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n-Load Units ...");
+        txtLog.append("-Load Units ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -1445,18 +1445,18 @@ public class FW extends javax.swing.JInternalFrame {
             sorter.sort();            
    
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());      
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage());
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());    
             }
         }
-        txtLog.append("\r\n== " + BaseAPI + "/units  > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("== " + BaseAPI + "/units  > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
@@ -1490,7 +1490,7 @@ public class FW extends javax.swing.JInternalFrame {
             conn.close();
         } catch (Exception ex) {
             CONFIG = false;
-            txtLog.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
@@ -1534,16 +1534,16 @@ public class FW extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("_logout:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _logout.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_roles:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _roles.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 CONFIG = true;
-                txtLog.append("\r\n\r\n=== LOAD_CONFIG > OK");
+                txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             } else {
                 CONFIG = false;
-                txtLog.append("\r\n\r\n=== WEB / FW, User: " + UserID + ", Env: " + env + " > No saved Configuration Found");
+                txtLog.append("=== WEB / FW, User: " + UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } catch (Exception ex) {
             CONFIG = false;
-            txtLog.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1600,7 +1600,7 @@ public class FW extends javax.swing.JInternalFrame {
             C += "_roles: " + _roles.isSelected() + "\r\n";       
 
         } catch (Exception ex)  {
-            txtLog.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }
@@ -1630,11 +1630,11 @@ public class FW extends javax.swing.JInternalFrame {
             int row = _insert.executeUpdate();
             conn.close();
 
-            txtLog.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
+            txtLog.append("=== SAVE_CONFIG > OK (" + row + " row)" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
 
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
+            txtLog.append("=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1684,7 +1684,7 @@ public class FW extends javax.swing.JInternalFrame {
             int row = _update.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== LOG_UPDATE > SQL ERROR: " + ex.getMessage());
+            txtLog.append("=== LOG_UPDATE > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1752,7 +1752,7 @@ public class FW extends javax.swing.JInternalFrame {
             int row = _insert.executeUpdate();
             conn.close();
         }  catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== LOG_START > SQL ERROR: " + ex.getMessage());
+            txtLog.append("=== LOG_START > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1762,7 +1762,7 @@ public class FW extends javax.swing.JInternalFrame {
         Report_File = "";
         if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            txtLog.append("\r\n\r\n=== Report > Not Excel");
+            txtLog.append("=== Report > Not Excel" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }   
@@ -1779,11 +1779,11 @@ public class FW extends javax.swing.JInternalFrame {
 
             }
             Report_File = Func.fExcel(l, col, Values, "FW_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
-            txtLog.append("\r\n\r\n=== Report Excel file:\r\n" + Report_File + "\r\n");
+            txtLog.append("=== Report Excel file:\r\n" + Report_File + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
         } catch (IOException ex) {
-            txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
+            txtLog.append("=== Report > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
