@@ -414,9 +414,9 @@ public class Station extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formAncestorAdded
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = Func.SHOW_FILE(txtLog.getText(), "txt");
+        String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
-            txtLog.append(R);
+            txtLog.append(R + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
     }//GEN-LAST:event_btnLogMouseClicked
@@ -514,7 +514,7 @@ public class Station extends javax.swing.JInternalFrame {
             WO_TKN = rs.getString(1);
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== WO_TKN > ERROR: " + ex.getMessage());
+            txtLog.append("=== WO_TKN > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -522,7 +522,7 @@ public class Station extends javax.swing.JInternalFrame {
     private void GetSites() {   
         SitesLastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n-Load Sites ...");
+        txtLog.append("-Load Sites ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         
         if(sw1.isRunning()){
@@ -537,7 +537,7 @@ public class Station extends javax.swing.JInternalFrame {
             appId = rs.getString(1);
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Get S_OAuth_TKN > ERROR: " + ex.getMessage());
+            txtLog.append("=== Get S_OAuth_TKN > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
@@ -616,18 +616,18 @@ public class Station extends javax.swing.JInternalFrame {
             sorter.sort();            
       
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());   
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage());   
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         }
-        txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
@@ -646,7 +646,7 @@ public class Station extends javax.swing.JInternalFrame {
             GetBrands();
         }
         lblSITES.setText(app + " Sites (" + DV_Sites.getRowCount() + " found)");
-        txtLog.append("\r\n" + app + " > " + DV_Sites.getRowCount() + " Site(s) found");
+        txtLog.append("" + app + " > " + DV_Sites.getRowCount() + " Site(s) found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -657,7 +657,7 @@ public class Station extends javax.swing.JInternalFrame {
         BrandsLastRow = -1;
         SitesLastRow = DV_Sites.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n-Load Brands ...");
+        txtLog.append("-Load Brands ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String[] ColumnsName = {}; 
         DefaultTableModel Model = new DefaultTableModel();
@@ -750,18 +750,18 @@ public class Station extends javax.swing.JInternalFrame {
             sorter.sort();            
                
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage());   
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } 
-        txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
    
@@ -780,13 +780,13 @@ public class Station extends javax.swing.JInternalFrame {
         } else {
             BrandID = "null";
         }
-        txtLog.append("\r\n" + SITE + " > " + DV_Brands.getRowCount() + " Station(s) found");
+        txtLog.append("" + SITE + " > " + DV_Brands.getRowCount() + " Station(s) found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         BrandsLastRow = -1;         
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetMenus(){
-        txtLog.append("\r\n-Load Menus ...");
+        txtLog.append("-Load Menus ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String[] cName = {}; 
         DefaultTableModel M = new DefaultTableModel();
@@ -849,14 +849,14 @@ public class Station extends javax.swing.JInternalFrame {
             }
         } catch (IOException | JSONException ex) {
             resp = "OK " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
-            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage());  
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());  
             }
         } 
@@ -867,12 +867,12 @@ public class Station extends javax.swing.JInternalFrame {
         DV_Menus.getColumnModel().getColumn(2).setPreferredWidth(80);
         DV_Menus.changeSelection(0, 0, false, false);
         
-        txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
  
         lblMenus.setText("Brand/Station '" + BRAND + "' > " + DV_Menus.getRowCount() + " Menu(s) found");
-        txtLog.append("\r\nBrand/Station '" + BRAND + "' > " + DV_Menus.getRowCount() + " Menu(s) found");
+        txtLog.append("Brand/Station '" + BRAND + "' > " + DV_Menus.getRowCount() + " Menu(s) found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         
@@ -932,10 +932,10 @@ public class Station extends javax.swing.JInternalFrame {
             }
         }
         catch(Exception ex){
-            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
-        txtLog.append("\r\nSelected Menu > " + DV_Categories.getRowCount() + " Categories found");
+        txtLog.append("Selected Menu > " + DV_Categories.getRowCount() + " Categories found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         GetItems();
         CategoriesLastRow = DV_Categories.getSelectedRow(); 
@@ -944,7 +944,7 @@ public class Station extends javax.swing.JInternalFrame {
         if (CategoriesLastRow == DV_Categories.getSelectedRow()) {
            return;
         }else{
-            txtLog.append("\r\n- GetItems: "); 
+            txtLog.append("- GetItems: " + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         try {
@@ -1016,10 +1016,10 @@ public class Station extends javax.swing.JInternalFrame {
             }
         }
         catch(JSONException ex){
-            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
-        txtLog.append("\r\nSelected Category > " + DV_Items.getRowCount() + " Items found");
+        txtLog.append("Selected Category > " + DV_Items.getRowCount() + " Items found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         GetMods();
         ItemsLastRow = DV_Items.getSelectedRow(); 
@@ -1028,7 +1028,7 @@ public class Station extends javax.swing.JInternalFrame {
         if (ItemsLastRow == DV_Items.getSelectedRow()) {
             return;
         }else{
-            txtLog.append("\r\n- GetMods: "); 
+            txtLog.append("- GetMods: " + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
             int mGR = 0;
@@ -1128,10 +1128,10 @@ public class Station extends javax.swing.JInternalFrame {
             DV_Mods.changeSelection(0, 0, false, false);    
         }
         catch(Exception ex){
-            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         }
-        txtLog.append("\r\nSelected Item > " + mGR + " Mofifier Group(s), " + mIT + " total Mods");
+        txtLog.append("Selected Item > " + mGR + " Mofifier Group(s), " + mIT + " total Mods" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
     }
 
@@ -1146,7 +1146,7 @@ public class Station extends javax.swing.JInternalFrame {
             conn.close();
         } catch (Exception ex) {
             CONFIG = false;
-            txtLog.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
@@ -1163,16 +1163,16 @@ public class Station extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("COUNTRY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); COUNTRY = c.substring(c.indexOf(" ")).trim();
                 CONFIG = true;
-                txtLog.append("\r\n\r\n=== LOAD_CONFIG > OK");
+                txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             } else {
                 CONFIG = false;
-                txtLog.append("\r\n\r\n=== Station, User: " + UserID + ", Env: " + env + " > No saved Configuration Found");
+                txtLog.append("=== Station, User: " + UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } catch (Exception ex) {
             CONFIG = false;
-            txtLog.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1198,7 +1198,7 @@ public class Station extends javax.swing.JInternalFrame {
             C += "COUNTRY: " + COUNTRY + "\r\n";            
 
         } catch (Exception ex)  {
-            txtLog.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }
@@ -1228,11 +1228,11 @@ public class Station extends javax.swing.JInternalFrame {
             int row = _insert.executeUpdate();
             conn.close(); 
             
-            txtLog.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
+            txtLog.append("=== SAVE_CONFIG > OK (" + row + " row)" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
 
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
+            txtLog.append("=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
