@@ -42,7 +42,21 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Oleg.Spozito
  */
 public class Func {
-    public static String ExecuteCmd(String cmd){
+    public static String ExecuteCmdRuntime(String cmd){
+        String output = null;
+        try {
+            Process p = Runtime.getRuntime().exec(cmd);
+            BufferedReader b = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line;
+            while(( line = b.readLine())!= null){
+                output += line + "\r\n";
+            }
+         } catch(IOException ex){
+             output = ex.getMessage();
+         }
+       return output;   
+    }
+    public static String ExecuteCmdProcessBuilder(String cmd){
         String output = null;
         try {
             Process p = Runtime.getRuntime().exec(cmd);

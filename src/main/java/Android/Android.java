@@ -927,7 +927,7 @@ public class Android extends javax.swing.JInternalFrame {
                 String cwd = System.getProperty("user.home") + File.separator + "Desktop"; 
                 String file = cwd + File.separator + "Screen_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMdd_hhmmss")) + ".png";
                 SCREEN = new File(file);
-                String SS = Func.ExecuteCmd("adb exec-out screencap -p > " + file).trim();
+                String SS = Func.ExecuteCmdRuntime("adb exec-out screencap -p > " + file).trim();
                 txtLog.append("= ScreenShot >  " + file + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
@@ -953,7 +953,7 @@ public class Android extends javax.swing.JInternalFrame {
         cmbDevice.removeAllItems();
         txtLog.append("-Find Attached Android Devices ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        String Dev = Func.ExecuteCmd("adb devices -l").trim();
+        String Dev = Func.ExecuteCmdRuntime("adb devices -l").trim();
         String[] dev = Dev.split("\r\n");
         if (dev.length > 1) {
             for (int i = 1; i < dev.length; i++) {
