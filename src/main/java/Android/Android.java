@@ -15,6 +15,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ListObjectsV2Result;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
+import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.google.common.base.Stopwatch;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
@@ -37,6 +38,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -137,8 +139,9 @@ public class Android extends javax.swing.JInternalFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         DV3 = new javax.swing.JTable();
         lblAPK = new javax.swing.JLabel();
-        lblSITES11 = new javax.swing.JLabel();
         cmbDevice = new javax.swing.JComboBox<>();
+        btnGetScreenshot = new javax.swing.JButton();
+        btnFindDevice = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -430,7 +433,7 @@ public class Android extends javax.swing.JInternalFrame {
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {_announcements, _brand, _group_management, _login, _orders, _promo, _resent_updates, _sales_reporting, _site});
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 184, 424, 196));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 184, 424, 196));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -554,7 +557,7 @@ public class Android extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 58, 78, 24));
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 52, 78, 24));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -564,7 +567,7 @@ public class Android extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
-        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 60, 84, 22));
+        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 52, 84, 22));
 
         btnFails.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnFails.setText("Show Fails");
@@ -597,7 +600,7 @@ public class Android extends javax.swing.JInternalFrame {
                 btnSave_OptMouseClicked(evt);
             }
         });
-        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 116, 22));
+        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 52, 116, 22));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -631,30 +634,30 @@ public class Android extends javax.swing.JInternalFrame {
         _slack.setText("Report to Slack");
         _slack.setToolTipText("");
         _slack.setRequestFocusEnabled(false);
-        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 64, 100, 14));
+        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 56, 100, 14));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 416, 416, 84));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 424, 416, -1));
 
         txtMobile_Id.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_Id.setText("cdl.test.xtt@gmail.com");
-        getContentPane().add(txtMobile_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 392, 184, -1));
+        getContentPane().add(txtMobile_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 392, 188, -1));
 
         txtIMobile_Pw.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtIMobile_Pw.setText("Password1");
-        getContentPane().add(txtIMobile_Pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(768, 392, 72, -1));
+        getContentPane().add(txtIMobile_Pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(756, 392, 84, -1));
 
         lblSITES3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSITES3.setText("Mobile User:");
         lblSITES3.setToolTipText("");
         lblSITES3.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES3, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 396, 76, -1));
+        getContentPane().add(lblSITES3, new org.netbeans.lib.awtextra.AbsoluteConstraints(456, 392, 76, -1));
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSITES6.setText("PW:");
         lblSITES6.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(736, 396, -1, -1));
+        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(732, 396, -1, -1));
 
         DV3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV3.setModel(new javax.swing.table.DefaultTableModel(
@@ -678,20 +681,35 @@ public class Android extends javax.swing.JInternalFrame {
         });
         jScrollPane4.setViewportView(DV3);
 
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 192, 428, 120));
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 192, 428, 92));
 
         lblAPK.setText("Builds / APK");
         lblAPK.setAlignmentX(0.5F);
         getContentPane().add(lblAPK, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 172, 360, -1));
 
-        lblSITES11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lblSITES11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES11.setText("Device:");
-        lblSITES11.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES11, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 328, 44, 16));
+        cmbDevice.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        cmbDevice.setForeground(new java.awt.Color(204, 0, 51));
+        getContentPane().add(cmbDevice, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 332, 224, 20));
 
-        cmbDevice.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        getContentPane().add(cmbDevice, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 328, 140, 20));
+        btnGetScreenshot.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnGetScreenshot.setText("Take SreenShot");
+        btnGetScreenshot.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        btnGetScreenshot.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGetScreenshotMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnGetScreenshot, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 304, -1, 20));
+
+        btnFindDevice.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnFindDevice.setText("Find Connected Device(s) >");
+        btnFindDevice.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        btnFindDevice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFindDeviceMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnFindDevice, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 332, 192, 20));
 
         getAccessibleContext().setAccessibleName("Android");
 
@@ -765,6 +783,7 @@ public class Android extends javax.swing.JInternalFrame {
         LOAD_ENV();
         app = cmbApp.getSelectedItem().toString();
         CONFIG = false;  
+        FindConnectedDevices();
         this.setTitle("Android Automation Manager");
     }
 
@@ -817,17 +836,17 @@ public class Android extends javax.swing.JInternalFrame {
 
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
-        String R = Func.SHOW_FILE(F, "txt");
+        String R = Func.SHOW_LOG_FILE(F, "txt");
         if(!R.equals("OK")){
-            txtLog.append(R);
+            txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }//GEN-LAST:event_btnFailsMouseClicked
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = Func.SHOW_FILE(txtLog.getText(), "txt");
+        String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
-            txtLog.append(R);
+            txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }//GEN-LAST:event_btnLogMouseClicked
@@ -875,7 +894,7 @@ public class Android extends javax.swing.JInternalFrame {
         }
 
 
-        txtLog.append("\r\n=== Starting MOB Driver...");
+        txtLog.append("=== Starting MOB Driver..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
         r_type = "ad-hoc";
@@ -886,7 +905,7 @@ public class Android extends javax.swing.JInternalFrame {
         sw1.start();
 
         if(AndroidDriver()){
-            txtLog.append("\r\n=== MOB Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec");
+            txtLog.append("=== MOB Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             sw1.reset();
             LOG_START(); // ========================================================
@@ -900,11 +919,274 @@ public class Android extends javax.swing.JInternalFrame {
     private void DV3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV3MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_DV3MouseClicked
+
+    private void btnGetScreenshotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGetScreenshotMouseClicked
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            File SCREEN = null;
+            try {
+                String cwd = System.getProperty("user.home") + File.separator + "Desktop"; 
+                String file = cwd + File.separator + "Screen_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMdd_hhmmss")) + ".png";
+                SCREEN = new File(file);
+                String SS = Func.ExecuteCmd("adb exec-out screencap -p > " + file).trim();
+                txtLog.append("= ScreenShot >  " + file + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+            catch (Exception ex) {
+                txtLog.append("= ScreenShot >  " + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+            try {
+                java.awt.Desktop.getDesktop().open(SCREEN);
+            }
+            catch (Exception ex) {
+                txtLog.append("= Show last ScreenShot >  " + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_btnGetScreenshotMouseClicked
+
+    private void btnFindDeviceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFindDeviceMouseClicked
+        FindConnectedDevices();
+    }//GEN-LAST:event_btnFindDeviceMouseClicked
+    private void FindConnectedDevices(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));  
+        cmbDevice.removeAllItems();
+        txtLog.append("-Find Attached Android Devices ..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        String Dev = Func.ExecuteCmd("adb devices -l").trim();
+        String[] dev = Dev.split("\r\n");
+        if (dev.length > 1) {
+            for (int i = 1; i < dev.length; i++) {
+                cmbDevice.addItem(dev[i].substring(0, dev[i].indexOf(" ")).trim());
+            }
+            txtLog.append("=== " + Dev + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());                
+                btnRun.setEnabled(true);
+                if(cmbDevice.getItemCount() == 1){
+                   btnGetScreenshot.setEnabled(true); 
+                } else{
+                   btnGetScreenshot.setEnabled(false); 
+                }
+//                btnAPK.Enabled = true;
+//                btnAPK_IN.Enabled = true;
+        } else {
+            cmbDevice.addItem("noDevice");
+            txtLog.append("" + "=== No Attached Device(s) found" + "\r\n" + "Return from 'adb devices -l' > '" + Dev + "'" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                btnRun.setEnabled(false);
+                btnGetScreenshot.setEnabled(false);
+//                btnAPK.Enabled = false;
+//                btnAPK_IN.Enabled = false;
+        }
+        cmbDevice.setSelectedIndex(0);
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));     
+    }
+    /*        private void btnAPK_Click(object sender, EventArgs e)
+    {
+    DialogResult res = MessageBox.Show("Pull " + app + " " + ver + " APK file from " + cmbDEV.Text + " device to your desktop?" +
+    "\r\nIf " + app + " " + ver + " file already exists it will be replaced", "Pull APK file", MessageBoxButtons.YesNo);
+    if (res == DialogResult.No)
+    {
+    return;
+    }
+    Cursor = Cursors.WaitCursor;
+    btnAPK.Enabled = false;
+    btnAPK_IN.Enabled = false;
+    btnRUN.Enabled = false;
+    btnDEV.Enabled = false;
+    try
+    {
+    string C = "";
+    string R = "";
+    C = "adb shell pm path " + appPackage;
+    R = new WinCmd().ExecuteWinCmd(@"", C, true, false, true);
+    txtLOG.AppendText("\r\n= " + R.Trim());
+    C = "adb pull " + R.Trim().Substring(R.IndexOf(":") + 1) + " " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\";
+    R = new WinCmd().ExecuteWinCmd(@"", C, true, false, true);
+    txtLOG.AppendText("\r\n= " + R + "\r\n");
+    
+    File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + app + v1 + "(" + v2 + ").apk");
+    File.Move(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\base.apk", Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + app + v1 + "(" + v2 + ").apk");
+    txtLOG.AppendText("\r\n= File saved: " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + app + v1 + "(" + v2 + ").apk" + "\r\n");
+    }
+    catch (Exception ex)
+    {
+    txtLOG.AppendText("\r\n= Pull APK: " + ex.Message);
+    }
+    
+    btnAPK.Enabled = true;
+    btnAPK_IN.Enabled = true;
+    btnRUN.Enabled = true;
+    btnDEV.Enabled = true;
+    Cursor = Cursors.Default;
+    }
+    private void btnAPK_IN_Click(object sender, EventArgs ea)
+    {
+    //DialogResult res = MessageBox.Show("Select and Install APK file on " + cmbDEV.Text + " device?", "Install APK", MessageBoxButtons.YesNo);
+    //if (res == DialogResult.No)
+    //{
+    //    return;
+    //}
+    //string APK = "";
+    //OpenFileDialog opf = new OpenFileDialog();
+    //opf.InitialDirectory = @"C:\xTT\NewSites";
+    //opf.Filter = "APK Files(*.apk)|*.apk";
+    //opf.DefaultExt = ".apk";
+    //DialogResult result = opf.ShowDialog(); // Show the dialog.
+    //if (result == DialogResult.Cancel) // Test result.
+    //{
+    //    return;
+    //}
+    
+    //APK = opf.FileName;
+    
+    Cursor = Cursors.WaitCursor;
+    btnAPK.Enabled = false;
+    btnAPK_IN.Enabled = false;
+    btnRUN.Enabled = false;
+    btnDEV.Enabled = false;
+    txtLOG.AppendText("\r\n\r\n=== Starting App Tester...");
+    
+    waitElement = Convert.ToInt32(nWaitElement.Value); // sec
+    waitLoad = Convert.ToInt32(nWaitLoad.Value); // sec
+    waitAction = Convert.ToInt32(nTIMEOUT.Value); // sec
+    devID = cmbDEV.Text;
+    ID = txtEMail.Text;
+    PW = txtPW.Text;
+    
+    Swipe_WakeUp(); // ===================
+    StartAppium();  // ===================
+    
+    try
+    {
+    AppiumOptions c = new AppiumOptions();
+    c.PlatformName = "Android";
+    c.AddAdditionalCapability("platformVersion", OS_Ver);
+    c.AddAdditionalCapability("deviceName", "Test Device");
+    //c.AddAdditionalCapability("clearSystemFiles", true);
+    c.AddAdditionalCapability("appPackage", "dev.firebase.appdistribution"); // dev.firebase.appdistribution:id/row
+    c.AddAdditionalCapability("appActivity", "dev.firebase.appdistribution.main.MainActivity");
+    c.AddAdditionalCapability("udid", cmbDEV.Text);
+    c.AddAdditionalCapability("autoGrantPermissions", false); // false- always get prompt
+    c.AddAdditionalCapability("unicodeKeyboard", false);
+    c.AddAdditionalCapability("resetKeyboard", false);
+    c.AddAdditionalCapability("systemPort", systemPort);
+    c.AddAdditionalCapability("automationName", Automator);  // ============ UiAutomator2 / Appium ===========
+    d = new AndroidDriver<AndroidElement>(new Uri(appium_url), c, TimeSpan.FromSeconds(waitAction));
+    d.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3); // waitElement <<<<<<<<<<<<<<<<<<
+    wait = new WebDriverWait(d, new TimeSpan(0, 0, 15)); // waitLoad)
+    
+    try
+    {
+    txtLOG.AppendText("\r\n" + "Check 'Sign In...' required");
+    txtLOG.Refresh();
+    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("signInButton")));
+    d.FindElement(By.Id("signInButton")).Click();
+    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("com.google.android.gms:id/account_name")));
+    txtLOG.AppendText("\r\n" + "'Sign In...' required - Click...");
+    txtLOG.Refresh();
+    d.FindElement(By.Id("com.google.android.gms:id/account_name")).Click();
+    txtLOG.AppendText("\r\n" + "'account_name' click");
+    txtLOG.Refresh();
+    }
+    catch (Exception ex)
+    {
+    txtLOG.AppendText("\r\n" + "=== 'Sign In...' ERROR - " + ex.Message);
+    txtLOG.Refresh();
+    }
+    
+    
+    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("app_name")));
+    Thread.Sleep(1000);
+    DT = d.FindElements(By.Id("app_name"));
+    int app_count = DT.Count;
+    if (app_count > 0)
+    {
+    txtLOG.AppendText("\r\n   Found Applications- total " + DT.Count + ": ");
+    for (int i = 0; i < app_count; i++)
+    {
+    txtLOG.AppendText("\r\n   - " + (i+1)  + ": " + DT[i].Text);
+    txtLOG.Refresh();
+    }
+    for (int i = 0; i < app_count; i++)
+    {
+    e = d.FindElements(By.Id("app_name"))[i]; // [i+1];
+    string app = e.Text;
+    e.Click();
+    string t = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("version_info"))).Text;
+    txtLOG.AppendText("\r\n=====  Processing App " + (i + 1) + " - " + app + " v:" + t + " ...");
+    txtLOG.Refresh();
+    try
+    {
+    d.FindElement(By.Id("download_button")).Click();
+    try
+    {
+    //txtLOG.AppendText("\r\n- " + "download_button" + " Found - start Download, wait 'progress_bar'...");
+    //txtLOG.Refresh();
+    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementLocated(By.Id("progress_bar")));
+    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("com.android.packageinstaller:id/ok_button")));
+    //txtLOG.AppendText("\r\n- " + "com.android.packageinstaller:id/ok_button" + " Found - start Install, wait 'progress_bar'...");
+    //txtLOG.Refresh();
+    d.FindElement(By.Id("com.android.packageinstaller:id/ok_button")).Click();
+    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementLocated(By.Id("progress_bar")));
+    t = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("installed_version_info"))).Text;
+    txtLOG.AppendText("\r\n- " + t );//"installed_version_info > " +
+    txtLOG.Refresh();
+    
+    d.FindElement(By.Id("back_arrow")).Click();
+    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("app_name")));
+    }
+    catch(Exception ex)
+    {
+    txtLOG.AppendText("\r\nDownload/Install failed: " + ex.Message);
+    txtLOG.Refresh();
+    }
+    }
+    catch
+    {
+    txtLOG.AppendText("\r\nNo Download button found");
+    d.FindElement(By.Id("back_arrow")).Click();
+    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("app_name")));
+    }
+    }
+    }
+    else
+    {
+    txtLOG.AppendText("\r\n\r\n=== " + "No Applications found");
+    txtLOG.Refresh();
+    }
+    }
+    catch (Exception ex)
+    {
+    txtLOG.AppendText("\r\n\r\n=== " + ex.Message);
+    txtLOG.Refresh();
+    }
+    
+    //string C = "";
+    //string R = "";
+    //C = "adb -s " + cmbDEV.Text + " install -r " + APK;
+    //txtLOG.AppendText("\r\n= Running '" + C + "'...");
+    //R = new WinCmd().ExecuteWinCmd(@"", C, true, false, true);
+    //txtLOG.AppendText("\r\n= " + R.Trim());
+    
+    if (d != null)
+    {
+    d.Quit();
+    }
+    txtLOG.AppendText("\r\n\r\n=== App Tester Finished @" + DateTime.Now.ToString("dd-MMM hh:mmtt"));
+    txtLOG.Refresh();
+    
+    btnAPK.Enabled = true;
+    btnAPK_IN.Enabled = true;
+    btnRUN.Enabled = true;
+    btnDEV.Enabled = true;
+    Cursor = Cursors.Default;
+    }*/
     private boolean AndroidDriver() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
             String cwd = System.getProperty("user.dir");
-            txtLog.append("\r\n\r\n=== CWD: " + cwd);
+            txtLog.append("=== CWD: " + cwd + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             
             if(WsOS.toLowerCase().contains("windows")){
@@ -939,7 +1221,7 @@ public class Android extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
         } catch (Exception ex) {
-            txtLog.append("\r\n\r\n=== MOB Driver > ERROR: " + ex.getMessage());
+            txtLog.append("=== MOB Driver > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return false;
@@ -953,7 +1235,6 @@ public class Android extends javax.swing.JInternalFrame {
             protected String doInBackground() throws Exception   { // define what thread will do here 
                 New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
 
-
                 if(_f > 0) {
                     return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
                 }else{
@@ -963,23 +1244,21 @@ public class Android extends javax.swing.JInternalFrame {
             @Override
             protected void done() { 
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
-                txtLog.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");  
+                txtLog.append("========   " + "Execution step-by-step log..." + "   ========" + "\r\n");  
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 EX = "Android " + env + ", v" + Ver + ", Browser: " + cmbDevice.getSelectedItem().toString() +
                 " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                  "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                  + EX;
-                txtLog.append("\r\n" + EX.replaceAll("\t", " > ")); 
+                txtLog.append("" + EX.replaceAll("\t", " > ") + "\r\n"); 
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 Last_EX = EX;
                 try  { 
 
                     String statusMsg = (String) get(); 
-                    txtLog.append("\r\n" + statusMsg);
+                    txtLog.append("" + statusMsg + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                     
-
                     BW1 = null;
                     
                     if(ad != null) {
@@ -987,7 +1266,7 @@ public class Android extends javax.swing.JInternalFrame {
                     }
                 }  
                 catch (InterruptedException | ExecutionException ex)  { 
-                    txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+                    txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
                     txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                 } 
                 DD = Duration.between(dw_start, Instant.now());
@@ -1017,18 +1296,18 @@ public class Android extends javax.swing.JInternalFrame {
                                                                         ", p50: " + df.format(p_50) +
                                                                         ", p90: " + df.format(p_90);
                         }
-                        txtLog.append("\r\n" + t_rep);
+                        txtLog.append("" + t_rep + "\r\n");
                         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                     }
                 } catch(Exception ex){
-                    txtLog.append("\r\n\r\n=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage());
+                    txtLog.append("=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                 }  
                 btnRun.setEnabled(true);
 
-                txtLog.append("\r\n=== " + Summary); // Summary shown in EX top
-                txtLog.append("\r\n=== Scope: " + SCOPE); // SCOPE shown in EX top
-                txtLog.append("\r\n=== Browser: " + cmbDevice.getSelectedItem().toString() + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s"); 
+                txtLog.append("=== " + Summary); // Summary shown in EX top
+                txtLog.append("=== Scope: " + SCOPE); // SCOPE shown in EX top
+                txtLog.append("=== Browser: " + cmbDevice.getSelectedItem().toString() + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
   
                 if(!"".equals(F.trim())){
@@ -1087,8 +1366,9 @@ public class Android extends javax.swing.JInternalFrame {
         GetPackages(AWS_credentials);
     }
     private void GetSites() {
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         d1LastRow = -1;
-        txtLog.append("\r\n-Load Sites ...");
+        txtLog.append("-Load Sites ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -1102,7 +1382,7 @@ public class Android extends javax.swing.JInternalFrame {
             appId = rs.getString(1);
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Get P2 App_ID > ERROR: " + ex.getMessage());
+            txtLog.append("=== Get P2 App_ID > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
@@ -1182,18 +1462,18 @@ public class Android extends javax.swing.JInternalFrame {
             sorter.sort(); 
    
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());      
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage());
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());    
             }
         }
-        txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
@@ -1212,10 +1492,12 @@ public class Android extends javax.swing.JInternalFrame {
             GetBrands();
         }
         lblSITES.setText(app + " Sites (" + DV1.getRowCount() + " found)");
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetBrands() {
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         d2LastRow = -1;
-        txtLog.append("\r\n-Load Brands ...");
+        txtLog.append("-Load Brands ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -1290,18 +1572,18 @@ public class Android extends javax.swing.JInternalFrame {
             sorter.sort(); 
             
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage());   
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } 
-        txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
    
@@ -1325,9 +1607,11 @@ public class Android extends javax.swing.JInternalFrame {
         d2LastRow = DV2.getSelectedRow();
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
         lblBRANDS.setText("Selected Site Brands (" + DV2.getRowCount() + " found)");
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetPackages(AWSCredentials credentials ){
-        txtLog.append("\r\n-Load Andoid Packages list ...");
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("-Load Andoid Packages list ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         
         String[] SitesColumnsName = {"APK name","Date"}; 
@@ -1335,19 +1619,23 @@ public class Android extends javax.swing.JInternalFrame {
         PModel.setColumnIdentifiers(SitesColumnsName);
         DV3.setModel(PModel);
         
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV3.getModel());
-        DV3.setRowSorter(sorter);
-        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
-        sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
-        sorter.setSortKeys(sortKeys);  
-        sorter.setSortable(1, false);  
-        
         if(sw1.isRunning()){
             sw1.reset();
         }
         sw1.start();
         String BucketName = "";
         String AppPath = "";
+            //Android app S3 bucket path
+    String mobile_repo_name = "mobile-app-repos";
+    String android_app_path_S3_bucket = "automation/android-coreapp/staging/";
+    String Dev_android_app_path_S3_bucket = "automation/android-coreapp/daily/";
+
+    //iOS app S3 bucket path
+    String Dev_iOS_app_path_S3_bucket = "automation/novus/";
+    String Staging_iOS_app_path_S3_bucket = "automation/novus/regression/";
+    String Staging_iOS_app_path_S3_bucket_bolter = "automation/bolter/";
+    String Prod_iOS_app_path_S3_bucket = "automation/novus/production/";
+    
         switch (env) {
                 case "PR":
                     BucketName = "";
@@ -1379,9 +1667,11 @@ public class Android extends javax.swing.JInternalFrame {
                     AppPath = "";
                     break; 
         }  
-        BucketName =  "mobile-app-repos";
+        BucketName =  "mobile-app-repos";//automation
+        
         String PName = "";
         Date PDate = new Date();
+        String X = "";
         try {
             AmazonS3 s3client = AmazonS3ClientBuilder
                     .standard()
@@ -1389,28 +1679,33 @@ public class Android extends javax.swing.JInternalFrame {
                     .withRegion(Regions.US_EAST_1)
                     .build();
             ListObjectsV2Result PACK_List = s3client.listObjectsV2(BucketName);
-            for(int i = 0; i < PACK_List.getObjectSummaries().size(); i++){
+            PACK_List.getObjectSummaries().sort(Comparator.comparing(S3ObjectSummary::getLastModified));
+            for(int i = PACK_List.getObjectSummaries().size() -1 ; i > 0; i--){  // sort desc, default acs  
+
                 PName = PACK_List.getObjectSummaries().get(i).getKey();
                 PDate = PACK_List.getObjectSummaries().get(i).getLastModified();
                 PModel.addRow(new Object[]{PName, PDate});
+                X +=  PName + "  -  " + PDate + "\r\n";
             }
             
             DV3.setModel(PModel);
             DV3.setDefaultEditor(Object.class, null);
-            DV3.getColumnModel().getColumn(0).setPreferredWidth(320);
-            DV3.getColumnModel().getColumn(1).setPreferredWidth(120);
+            DV3.getColumnModel().getColumn(0).setPreferredWidth(280);
+            DV3.getColumnModel().getColumn(1).setPreferredWidth(170);
             
-            txtLog.append("\r\n- BucketName: " + PACK_List.getBucketName() + ", Size: " + PACK_List.getObjectSummaries().size());
+            txtLog.append("- BucketName: " + PACK_List.getBucketName() + ", Size: " + PACK_List.getObjectSummaries().size() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } catch (Exception ex) {
-            txtLog.append("\r\n== " + "GetPackages: " + ex.getMessage());
+            txtLog.append("== " + "GetPackages: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }  
-        txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();        
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     } 
     private void Download_Build(AWSCredentials credentials, String repo_name, String App_Name, String S3_path_to_app, String local_path, String platform, String Environment) throws Exception {
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {                        
             AmazonS3 s3client = AmazonS3ClientBuilder
                     .standard()
@@ -1420,18 +1715,20 @@ public class Android extends javax.swing.JInternalFrame {
             S3Object s3object = s3client.getObject(repo_name, S3_path_to_app + App_Name + ".zip");
             S3ObjectInputStream inputStream = s3object.getObjectContent();
             FileUtils.copyInputStreamToFile(inputStream, new File(local_path + App_Name + "/" + App_Name + ".zip"));
-            System.out.println(platform + ": Build successfully download app name = " + App_Name + "(" + Environment + ")");
+            txtLog.append("== " + platform + ": Build successfully download app name = " + App_Name + "(" + Environment + ")" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());            
         } catch (Exception ex) {
-            txtLog.append("\r\n== " + "Download_Build: " + ex.getMessage());
+            txtLog.append("== " + "Download_Build: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }    
     private void Report(boolean Open_File){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         Report_File = "";
         if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            txtLog.append("\r\n\r\n=== Report > Not Excel");
+            txtLog.append("=== Report > Not Excel");
             return;
         }   
         try {
@@ -1446,10 +1743,10 @@ public class Android extends javax.swing.JInternalFrame {
                 System.arraycopy(v, 0, Values[i], 0, v.length); 
             }
             Report_File = Func.fExcel(l, col, Values, "Android_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
-            txtLog.append("\r\n\r\n=== Report Excel file:\r\n" + Report_File + "\r\n");
+            txtLog.append("=== Report Excel file:\r\n" + Report_File + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch (IOException ex) {
-            txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
+            txtLog.append("=== Report > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1498,7 +1795,7 @@ public class Android extends javax.swing.JInternalFrame {
             int row = _update.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== LOG_UPDATE > SQL ERROR: " + ex.getMessage());
+            txtLog.append("=== LOG_UPDATE > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1566,7 +1863,7 @@ public class Android extends javax.swing.JInternalFrame {
             int row = _insert.executeUpdate();
             conn.close();
         }  catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== LOG_START > SQL ERROR: " + ex.getMessage());
+            txtLog.append("=== LOG_START > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1575,7 +1872,7 @@ public class Android extends javax.swing.JInternalFrame {
     private void LOAD_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'MOB' AND [app] = 'Android' AND [env] = '" + env + "'";
+            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'MOB' AND [app] = 'Android' AND [env] = '" + env + "'" + "\r\n";
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(SQL);
             rs.next();
@@ -1583,7 +1880,7 @@ public class Android extends javax.swing.JInternalFrame {
             conn.close();
         } catch (SQLException ex) {
             CONFIG = false;
-            txtLog.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
@@ -1622,16 +1919,16 @@ public class Android extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("_all_data")); c = c.substring(0, c.indexOf("\r\n")).trim(); _all_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_logout")); c = c.substring(0, c.indexOf("\r\n")).trim(); _logout.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 CONFIG = true;
-                txtLog.append("\r\n\r\n=== LOAD_CONFIG > OK");
+                txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             } else {
                 CONFIG = false;
-                txtLog.append("\r\n\r\n=== MOB / Android, User: " + UserID + ", Env: " + env + " > No saved Configuration Found");
+                txtLog.append("=== MOB / Android, User: " + UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } catch (Exception ex) {
             CONFIG = false;
-            txtLog.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1678,7 +1975,7 @@ public class Android extends javax.swing.JInternalFrame {
             C += "_logout: " + _logout.isSelected() + "\r\n";
            
         } catch (Exception ex)  {
-            txtLog.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }
@@ -1706,11 +2003,11 @@ public class Android extends javax.swing.JInternalFrame {
             _insert.setString(4, "Android");
             _insert.setString(5, C);
             int row = _insert.executeUpdate();
-            txtLog.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
+            txtLog.append("=== SAVE_CONFIG > OK (" + row + " row)" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
+            txtLog.append("=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1822,6 +2119,8 @@ public class Android extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _users;
     private javax.swing.JButton btnExel;
     private javax.swing.JButton btnFails;
+    private javax.swing.JButton btnFindDevice;
+    private javax.swing.JButton btnGetScreenshot;
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;
     private javax.swing.JButton btnSave_Opt;
@@ -1841,7 +2140,6 @@ public class Android extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblBRANDS;
     private javax.swing.JLabel lblSITES;
     private javax.swing.JLabel lblSITES10;
-    private javax.swing.JLabel lblSITES11;
     private javax.swing.JLabel lblSITES12;
     private javax.swing.JLabel lblSITES13;
     private javax.swing.JLabel lblSITES14;
