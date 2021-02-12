@@ -1100,8 +1100,8 @@ public class Android extends javax.swing.JInternalFrame {
             if(D.contains("id:")){
                 devModel = D.substring(0,D.indexOf(" ")).trim(); 
                 devID = D.substring(D.indexOf("id:") + 3).trim();        
+                Get_Device_OS();  
             } 
-            Get_Device_OS();
         }
     }//GEN-LAST:event_cmbDeviceItemStateChanged
     private void Get_Device_OS(){
