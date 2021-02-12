@@ -813,7 +813,6 @@ public class A extends javax.swing.JFrame {
             conn.close();
         } catch (SQLException ex) {
             S_OAuth_TKN = ex.getMessage();
-
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
