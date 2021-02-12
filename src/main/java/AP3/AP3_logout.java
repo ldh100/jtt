@@ -28,8 +28,8 @@ public class AP3_logout {
                 }
 
                 _t++;
-                Thread.sleep((long) sleep);                                                               // https://w.appzi.io/les-e8kcbv 
-                T.Swith_to_Frame("Switching to Feedback frame", "xpath", "//iframe[contains(@src,'https://w.appzi.io/w-e8kcbv.html?portalId=oQyah&configId')]", "no_jira");
+                Thread.sleep((long) sleep);                                                              
+                T.Swith_to_Frame("Switching to Feedback frame", "xpath", "//iframe[contains(@src,'https://w.appzi.io/w-')]", "no_jira");
                 if (FAIL) {
                     return;
                 }
@@ -47,7 +47,7 @@ public class AP3_logout {
                     if (FAIL) {
                         return;
                     }
-
+                }
                     _t++;
                     Thread.sleep((long) sleep);
                     Thread.sleep((long) sleep);
@@ -117,7 +117,7 @@ public class AP3_logout {
                     if (FAIL) {
                         return;
                     }
-
+                    Thread.sleep((long)sleep);
                     _t++;
                     Thread.sleep((long) sleep);
                     T.Element_By_Path_Click("Click on DONE button", "css", ".color-accent-background", "no_jira");
@@ -185,6 +185,6 @@ public class AP3_logout {
             _t++;
             Thread.sleep((long) sleep);
             T.Page_URL("AP3 Welcome page URL", "no_jira");
-        }
+        
     }
 }
