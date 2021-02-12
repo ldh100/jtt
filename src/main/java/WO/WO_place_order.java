@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package WO;
-import A.T;
+import A.TWeb;
 import static A.A.*;
 import static WO.WO.*;
 import java.util.List;
@@ -25,31 +25,31 @@ public class WO_place_order {
             _t++; EX += _t + "\t" + "Delivery service is not available for "+SITE + "\t" + " ===== " + "\t" + "Jump out Delivery order" + "\t" + " PASS " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
               return;
             }
-            _t++; T.Element_By_Path_Click("Enter Selected Pickup Brand:   "+ BRAND ,"xpath", "//strong[text()=' "+BRAND+" ']",  "no_jira"); 
+            _t++; TWeb.Element_By_Path_Click("Enter Selected Pickup Brand:   "+ BRAND ,"xpath", "//strong[text()=' "+BRAND+" ']",  "no_jira"); 
         //Menu screen
-            _t++; T.List_L2("Menu Category count ", "css", "[role='tab']", "no_jira");
+            _t++; TWeb.List_L2("Menu Category count ", "css", "[role='tab']", "no_jira");
            
             for ( WebElement we : L2){          //(int i=0; i< L2.size()  ; i++){
-                _t++; T.Element_Text("Menu Category : ", we ,  "no_jira");
-                _t++; T.Element_Click("Click Category",we , "no_jira");
+                _t++; TWeb.Element_Text("Menu Category : ", we ,  "no_jira");
+                _t++; TWeb.Element_Click("Click Category",we , "no_jira");
                 
             }
-            _t++; T.List_L3("Menu Category in the middle pannel  ", "xpath", "//div[@class='pb-6']", "no-jira");
-          //  T.Element_Child_List_L1("items under category",L2, "css","[class='row mb-5 bold no-gutters']", "no_jira");
+            _t++; TWeb.List_L3("Menu Category in the middle pannel  ", "xpath", "//div[@class='pb-6']", "no-jira");
+          //  TWeb.Element_Child_List_L1("items under category",L2, "css","[class='row mb-5 bold no-gutters']", "no_jira");
             for(WebElement we: L3) {
-               // _t++; T.Element_By_Path_Text("Category Name:+++++++++  ", "xpath", "//div[@class='pb-6']//h2", "no_jira");
+               // _t++; TWeb.Element_By_Path_Text("Category Name:+++++++++  ", "xpath", "//div[@class='pb-6']//h2", "no_jira");
                 //_t++;
                 String cat = we.findElement(By.cssSelector("[class='pb-4']")).getText();
                 System.out.println("----------------------------");
                 System.out.println(cat);
-                _t++; T.Element_Child_Text("Category Name:  ", we, "css"  , "[class='pb-4']", "no_jira");
+                _t++; TWeb.Element_Child_Text("Category Name:  ", we, "css"  , "[class='pb-4']", "no_jira");
                 
-                _t++; T.Element_Child_List_L1("Items count in Category --- ",we, "css","[class='row mb-5 bold no-gutters']", "no_jira");
+                _t++; TWeb.Element_Child_List_L1("Items count in Category --- ",we, "css","[class='row mb-5 bold no-gutters']", "no_jira");
                 System.out.println ("first item in the catgory " +we.getText());
-                _t++; T.Element_Text("First item ",L1.get(0),"no_jira");
-                _t++; T.Element_Click("Click to open first item modal --- "+L1.get(0).getText(),L1.get(0) , "no_jira");
+                _t++; TWeb.Element_Text("First item ",L1.get(0),"no_jira");
+                _t++; TWeb.Element_Click("Click to open first item modal --- "+L1.get(0).getText(),L1.get(0) , "no_jira");
             //switch to opened modal
-                _t++; T.Element_E1_Find("Switch to modal","css" , "[role='document']", "no_jira");
+                _t++; TWeb.Element_E1_Find("Switch to modal","css" , "[role='document']", "no_jira");
                     if (FAIL) { return;}  
                     
                     
@@ -64,9 +64,9 @@ public class WO_place_order {
                  
                  
 //                e=d1.findElement(By.cssSelector("[role='document']"));
-//               // T.Element_By_Path_Text(cat, t, cat, url);
+//               // TWeb.Element_By_Path_Text(cat, t, cat, url);
 //                
-//                _t++; T.Element_E1_Find("Switch to modal","css" , "[role='document']", "no_jira");
+//                _t++; TWeb.Element_E1_Find("Switch to modal","css" , "[role='document']", "no_jira");
 //                num = e1.findElements(By.cssSelector("[class='v-input__slot']")).size();
 //                
 //              //  e1.findElements(By.cssSelector("[class='v-input__slot']")).get(1).click();
@@ -123,7 +123,7 @@ public class WO_place_order {
 //                 System.out.println(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
 //                
 //                
-//                T.Element_Child_E2("find category", e1, "xpath", "//div[@class='pa-0 col']", "no_jira");
+//                TWeb.Element_Child_E2("find category", e1, "xpath", "//div[@class='pa-0 col']", "no_jira");
 //                  // System.out.println(e2.);
 //                
 //                
@@ -162,7 +162,7 @@ public class WO_place_order {
 //         _t++; 
 //         
 //         if(ItemModal.findElement(By.xpath("//button[contains(@class,'add-to-cart v-btn')]")).isEnabled()){
-//             T.Element_Child_Click("Add item to basket", ItemModal, "xpath", "//button[contains(@class,'add-to-cart v-btn')]", "no-jira");
+//             TWeb.Element_Child_Click("Add item to basket", ItemModal, "xpath", "//button[contains(@class,'add-to-cart v-btn')]", "no-jira");
 //             
 //             return;
 //             //ItemModal.findElement(By.xpath("//button[contains(@class,'add-to-cart v-btn')]")).click();
@@ -200,12 +200,12 @@ public class WO_place_order {
 //          
 //          
 //          
-//         _t++; T.Element_Child_List_L2("List Modifiers Category", e1, "css", "//div[@class='pa-0 col']", "no-jira");
+//         _t++; TWeb.Element_Child_List_L2("List Modifiers Category", e1, "css", "//div[@class='pa-0 col']", "no-jira");
 //         System.out.println("*********"+L2.size()+"************");
 //         
 //         for(WebElement we1:L2){
 //             System.out.println(we1.getText());
-//             _t++;  T.Element_Child_Text("Find REQUIRED items", we1, "xpath", "//div[contains(@class,'pa-0 text-right')]", "no-jira");
+//             _t++;  TWeb.Element_Child_Text("Find REQUIRED items", we1, "xpath", "//div[contains(@class,'pa-0 text-right')]", "no-jira");
 //             //if (t.equalsIgnoreCase("optional")){
 //               //  continue;
 //            // }
@@ -217,9 +217,9 @@ public class WO_place_order {
 //             
 //             
 //         }
-//         //_t++; T.Element_E2_Find(app, t, app, url);
+//         //_t++; TWeb.Element_E2_Find(app, t, app, url);
 ////        while (!ItemModal.findElement(By.xpath("//button[contains(@class,'add-to-cart v-btn')]")).isEnabled()) {
-////             T.Element_Child_List_L2("Find REQUIRED items", ItemModal, "xpath", "//div[contains(@class,'pa-0 text-right')]", "no-jira");
+////             TWeb.Element_Child_List_L2("Find REQUIRED items", ItemModal, "xpath", "//div[contains(@class,'pa-0 text-right')]", "no-jira");
 ////             for(WebElement we1:L2){
 ////                 if (we1.getText().equalsIgnoreCase("optional")){
 ////                     continue;
