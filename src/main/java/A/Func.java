@@ -7,12 +7,14 @@ package A;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.io.BufferedReader;
 import java.util.Arrays;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import javax.swing.JTable;
@@ -40,10 +42,24 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Oleg.Spozito
  */
 public class Func {
-    public static String SHOW_FILE(String BODY, String EXT){
+    public static String ExecuteCmd(String cmd){
+        String output = null;
+        try {
+            Process p = Runtime.getRuntime().exec(cmd);
+            BufferedReader b = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line;
+            while(( line = b.readLine())!= null){
+                output += line + "\r\n";
+            }
+         } catch(IOException ex){
+             output = ex.getMessage();
+         }
+       return output;   
+    }
+    public static String SHOW_LOG_FILE(String BODY, String EXT){
         File aLog = null;
         try {
-            String userHomeFolder = System.getProperty("user.home") + "/Desktop"; 
+            String userHomeFolder = System.getProperty("user.home") + File.separator + "Desktop"; 
             aLog = new File(userHomeFolder + File.separator + "aLog." + EXT);
             Files.write(Paths.get(aLog.getPath()), BODY.getBytes());
             java.awt.Desktop.getDesktop().open(aLog);
@@ -201,7 +217,6 @@ public class Func {
         }
         return ExcelFile.getAbsolutePath();
     }
-
     public static String Send_File_to_Slack(String Path, String Channel, String MSG) {
         try{           
             File file = new File(Path); 
