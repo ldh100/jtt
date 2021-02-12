@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package A;
+import static A.A.WsOS;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -51,21 +52,32 @@ public class Func {
             while(( line = b.readLine())!= null){
                 output += line + "\r\n";
             }
-         } catch(IOException ex){
-             output = ex.getMessage();
-         }
+        } catch(Exception ex){
+            output = ex.getMessage();
+        }
        return output;   
     }
-    public static String ExecuteCmdProcessBuilder(String cmd){
+    public static String ExecuteCmdProcessBuilder(String cmd, String WorkingDirectory, boolean NoWindow, boolean useShellExecute, boolean ReturnOutput){
         String output = null;
         try {
-            Process p = Runtime.getRuntime().exec(cmd);
-            BufferedReader b = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            String line;
-            while(( line = b.readLine())!= null){
-                output += line + "\r\n";
+            ProcessBuilder builder = new ProcessBuilder();
+            builder.directory(new File(System.getProperty("user.home")));
+            if(WsOS.toLowerCase().contains("windows")){
+                builder.command("cmd.exe", "/c", cmd);            
             }
-         } catch(IOException ex){
+            if(WsOS.toLowerCase().contains("mac")){
+                builder.command(cmd);            
+            }
+
+            Process p = builder.start();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+            int exitCode = p.waitFor();
+            System.out.println("\nExited with error code : " + exitCode);            
+         } catch(IOException | InterruptedException ex){
              output = ex.getMessage();
          }
        return output;   
