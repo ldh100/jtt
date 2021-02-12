@@ -8,17 +8,10 @@ package Orders;
 import A.Func;
 import static A.A.*;
 import com.google.common.base.Stopwatch;
-import com.ullink.slack.simpleslackapi.SlackChannel;
-import com.ullink.slack.simpleslackapi.SlackMessageHandle;
-import com.ullink.slack.simpleslackapi.SlackSession;
-import com.ullink.slack.simpleslackapi.impl.SlackSessionFactory;
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -37,16 +30,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
-import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import javax.swing.DefaultListModel;
-import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.HttpEntity;
@@ -57,17 +46,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  *
  * @author Oleg.Spozito
@@ -524,7 +505,7 @@ public class Orders extends javax.swing.JInternalFrame {
     }
     private void Get_User(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n\r\n- Load User...");
+        txtLog.append("- Load User..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         String J = "==== User API(s):" + "\r\n";
         userID = "";
@@ -540,7 +521,7 @@ public class Orders extends javax.swing.JInternalFrame {
             Realm = rs.getString(1);      
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Get Realm ID > ERROR: " + ex.getMessage());
+            txtLog.append("=== Get Realm ID > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
         if(sw1.isRunning()){
@@ -568,11 +549,11 @@ public class Orders extends javax.swing.JInternalFrame {
             userTKN = json.getString("token");
 
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n > " + J); 
-            txtLog.append("\r\n- Exception: " + ex.getMessage()); 
+            txtLog.append(" > " + J); 
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
-        txtLog.append("\r\n== " + BaseAPI + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("== " + BaseAPI + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         sw1.reset();
         
@@ -604,10 +585,10 @@ public class Orders extends javax.swing.JInternalFrame {
             J += BaseAPI + "/payment/method" + "?user_id=" + userID + "\r\n" + PaymetMethod.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/payment/method" + "?user_id=" + userID + " > " + ex.getMessage() + "\r\n";
-            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
-        txtLog.append("\r\n== " + BaseAPI + "/payment/method" + "?user_id=" + userID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("== " + BaseAPI + "/payment/method" + "?user_id=" + userID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         sw1.reset();
 
@@ -666,16 +647,16 @@ public class Orders extends javax.swing.JInternalFrame {
             J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + " > " + ex.getMessage() + "\r\n";
-            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
-        txtLog.append("\r\n== " + BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("== " + BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         sw1.reset();
         try {
             httpclient.close();
         } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -696,7 +677,7 @@ public class Orders extends javax.swing.JInternalFrame {
 
     private void GetShoppingCartAndOrder(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n\r\n- Shopping Cart...");
+        txtLog.append("- Shopping Cart..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         String J = "==== Shopping Cart" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -725,15 +706,15 @@ public class Orders extends javax.swing.JInternalFrame {
             J += BaseAPI + "/shoppingcart/" + CartID + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/shoppingcart/" + CartID + " > " + ex.getMessage() + "\r\n";
-            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
-        txtLog.append("\r\n== " + BaseAPI + "/shoppingcart/" + CartID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("== " + BaseAPI + "/shoppingcart/" + CartID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         sw1.reset();
 
         J += "\r\n==== Order" + "\r\n";
-        txtLog.append("\r\n\r\n- Order...");
+        txtLog.append("- Order..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         String OrderID = "";
         if(sw1.isRunning()){
@@ -759,24 +740,24 @@ public class Orders extends javax.swing.JInternalFrame {
             J += BaseAPI + "/order/" + OrderID + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/order/" + OrderID + " > " + ex.getMessage() + "\r\n";
-            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
-        txtLog.append("\r\n== " + BaseAPI + "/order/" + OrderID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("== " + BaseAPI + "/order/" + OrderID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         sw1.reset();
 
         try {
             httpclient.close();
         } catch (IOException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage());
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_FILE(J, "json");
+        String R = Func.SHOW_LOG_FILE(J, "json");
         if(!R.equals("OK")){
-            txtLog.append(R);
+            txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }//GEN-LAST:event_btnSCartMouseClicked
@@ -808,9 +789,9 @@ public class Orders extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSave_OptMouseClicked
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = Func.SHOW_FILE(txtLog.getText(), "txt");
+        String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
-            txtLog.append(R);
+            txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }//GEN-LAST:event_btnLogMouseClicked
@@ -835,21 +816,21 @@ public class Orders extends javax.swing.JInternalFrame {
 
         
         Instant dw_start = Instant.now();        
-        txtLog.append("\r\n=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
+        txtLog.append("=== Execution started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         //LOG_START(); // ========================================================
         try {
             Execute(String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 7))); // ======================================================
         }
         catch (InterruptedException ex) {
-            txtLog.append("Execute ERROR: " + ex.getMessage());
+            txtLog.append("Execute ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
         if(_f > 0) {
-            txtLog.append("\r\n=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)");
+            txtLog.append("=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }else{
-            txtLog.append("\r\n=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter)); 
+            txtLog.append("=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         }         
         Done(dw_start); // ===============================        
@@ -901,41 +882,41 @@ public class Orders extends javax.swing.JInternalFrame {
                         JSCart.getJSONObject("payment_method").getJSONObject("credit_card").put("credit_card", PMethod.get("card_type")); 
 
                 } else if((JSCart.toString().contains("mealplan") && PaymetMethod.toString().contains("mealplan"))){
-                    txtLog.append("\r\n\r\n=== Selected Shopping Cart 'mealplan' Method - To Do");
+                    txtLog.append("=== Selected Shopping Cart 'mealplan' Method - To Do" + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                     //return; 
                     
                 } else if((JSCart.toString().contains("meal_swipes") && PaymetMethod.toString().contains("meal_swipes"))){
-                    txtLog.append("\r\n\r\n=== Selected Shopping Cart 'meal_swipes' Method - To Do");
+                    txtLog.append("=== Selected Shopping Cart 'meal_swipes' Method - To Do" + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                     //return;  
                     
                 } else if((JSCart.toString().contains("digital_wallet_pay") && PaymetMethod.toString().contains("digital_wallet_pay"))){
-                    txtLog.append("\r\n\r\n=== Selected Shopping Cart 'digital_wallet_pay' Method - To Do");
+                    txtLog.append("=== Selected Shopping Cart 'digital_wallet_pay' Method - To Do" + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                     //return;  
                     
                 }else{
-                    txtLog.append("\r\n\r\n=== Selected Shopping Cart/User Payment Methods - match Not Found");
+                    txtLog.append("=== Selected Shopping Cart/User Payment Methods - match Not Found" + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                     //return;                
                 }
             }
 
-String R = Func.SHOW_FILE(JSCart.toString(4), "json");
+String R = Func.SHOW_LOG_FILE(JSCart.toString(4), "json");
 if(!R.equals("OK")){
-    txtLog.append(R);
+    txtLog.append(R + "\r\n");
     txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
 }
         }catch(Exception ex){
-            txtLog.append("\r\n\r\n=== Refactor Shopping Cart ERROR: " + ex.getMessage());
+            txtLog.append("=== Refactor Shopping Cart ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }
         // Put Scard + Order // ==================================
     }
     private void Done(Instant dw_start){
-        txtLog.append("\r\n\r\n========   " + "Execution step-by-step log..." + "   ========");  
+        txtLog.append("========   " + "Execution step-by-step log..." + "   ========" + "\r\n");  
         txtLog.setCaretPosition(txtLog.getDocument().getLength());               
         DD = Duration.between(dw_start, Instant.now());
         Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
@@ -964,16 +945,16 @@ if(!R.equals("OK")){
                                                                 ", p50: " + df.format(p_50) +
                                                                 ", p90: " + df.format(p_90);
                 }
-                txtLog.append("\r\n" + t_rep);
+                txtLog.append("" + t_rep + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } catch(Exception ex){
-            txtLog.append("\r\n\r\n=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage());
+            txtLog.append("=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }  
         btnRun.setEnabled(true);
-        txtLog.append("\r\n=== " + Summary);
-        txtLog.append("\r\n=== Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
+        txtLog.append("=== " + Summary);
+        txtLog.append("=== Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
 
         LOG_UPDATE(); // ========================================================
@@ -986,12 +967,12 @@ if(!R.equals("OK")){
 
     private void btnCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCartMouseClicked
         if(btnCart.isEnabled() && DV1.getSelectedRowCount() > 0){
-            String R = Func.SHOW_FILE(
+            String R = Func.SHOW_LOG_FILE(
                     "==== Shopping Cart:\r\n" + DV1.getValueAt(DV1.getSelectedRow(), 7).toString() +
                     "\r\n\r\n" +
                     "==== Order:\r\n" + DV1.getValueAt(DV1.getSelectedRow(), 8).toString(), "json");
             if(!R.equals("OK")){
-                txtLog.append(R);
+                txtLog.append(R + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         }
@@ -1032,7 +1013,7 @@ if(!R.equals("OK")){
             AP3_TKN = rs.getString(1);
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== AP3_TKN > ERROR: " + ex.getMessage());
+            txtLog.append("=== AP3_TKN > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1040,7 +1021,7 @@ if(!R.equals("OK")){
     private void LoadOrders() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n-Load Shopping Card Templates ...");
+        txtLog.append("-Load Shopping Card Templates ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         SQL = "SELECT " + 
                 "[Env] " +
@@ -1096,15 +1077,15 @@ if(!R.equals("OK")){
             DV1.getColumnModel().getColumn(6).setPreferredWidth(75);
             DV1.getColumnModel().getColumn(7).setPreferredWidth(200); 
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Load Shopping Card Templates > ERROR: " + ex.getMessage());
+            txtLog.append("=== Load Shopping Card Templates > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }        
-        txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==");
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
         lblOrders.setText("Shopping Card templates - " + DV1.getRowCount() + " found");
-        txtLog.append("\r\nSCard templates: " + cmbApp.getSelectedItem().toString() + ", " + cmbEnv.getSelectedItem().toString() + " - " + DV1.getRowCount() + " found");
+        txtLog.append("SCard templates: " + cmbApp.getSelectedItem().toString() + ", " + cmbEnv.getSelectedItem().toString() + " - " + DV1.getRowCount() + " found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1134,7 +1115,7 @@ if(!R.equals("OK")){
             conn.close();
         } catch (SQLException ex) {
             CONFIG = false;
-            txtLog.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
@@ -1149,16 +1130,16 @@ if(!R.equals("OK")){
                 c = C.substring(C.indexOf("txtMobile_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
 
                 CONFIG = true;
-                txtLog.append("\r\n\r\n=== LOAD_CONFIG > OK");
+                txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             } else {
                 CONFIG = false;
-                txtLog.append("\r\n\r\n=== WEB / AP3, User: " + UserID + ", Env: " + env + " > No saved Configuration Found");
+                txtLog.append("=== WEB / AP3, User: " + UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } catch (Exception ex) {
             CONFIG = false;
-            txtLog.append("\r\n\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1175,7 +1156,7 @@ if(!R.equals("OK")){
             C += "txtMobile_PW: " + txtMobile_PW.getText()  + "\r\n";            
 
         } catch (Exception ex)  {
-            txtLog.append("\r\n\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }
@@ -1203,11 +1184,11 @@ if(!R.equals("OK")){
             _insert.setString(4, "OR");
             _insert.setString(5, C);
             int row = _insert.executeUpdate();
-            txtLog.append("\r\n\r\n=== SAVE_CONFIG > OK (" + row + " row)");
+            txtLog.append("=== SAVE_CONFIG > OK (" + row + " row)" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
+            txtLog.append("=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1257,7 +1238,7 @@ if(!R.equals("OK")){
             int row = _update.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== LOG_UPDATE > SQL ERROR: " + ex.getMessage());
+            txtLog.append("=== LOG_UPDATE > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1325,7 +1306,7 @@ if(!R.equals("OK")){
             int row = _insert.executeUpdate();
             conn.close();
         }  catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== LOG_START > SQL ERROR: " + ex.getMessage());
+            txtLog.append("=== LOG_START > SQL ERROR: " + ex.getMessage() + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));

@@ -272,7 +272,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             conn.createStatement().execute("DELETE FROM [dbo].[aw_result] WHERE qID = '" + DV1.getValueAt(DV1.getSelectedRow(), 0) + "'");
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Delete report > ERROR: " + ex.getMessage());
+            txtLog.append("=== Delete report > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -281,7 +281,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         try{
             cmbF.setSelectedItem(LAST_APP);
         } catch (Exception ex) {
-            txtLog.append("\r\n\r\n=== Delete Old Reports > ERROR: " + ex.getMessage());
+            txtLog.append("=== Delete Old Reports > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         LoadDB(); //============
@@ -306,11 +306,11 @@ public class W_Report extends javax.swing.JInternalFrame {
             Statement st = conn.createStatement();
             int d = st.executeUpdate("DELETE FROM [dbo].[aw_result] WHERE [Date] < '" + simpleDateFormat.format(dtpDel.getDate()) + "'");
             conn.close(); 
-            txtLog.append("\r\n\r\n=== Old Reports > " + d + " record(s) deleted");
+            txtLog.append("=== Old Reports > " + d + " record(s) deleted" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
 
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Delete Old Reports > ERROR: " + ex.getMessage());
+            txtLog.append("=== Delete Old Reports > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -333,13 +333,13 @@ public class W_Report extends javax.swing.JInternalFrame {
             EXX = rs.getString(1);
             conn.close();
 
-            String R = Func.SHOW_FILE(EXX, "txt");
+            String R = Func.SHOW_LOG_FILE(EXX, "txt");
             if(!R.equals("OK")){
-                txtLog.append(R);
+                txtLog.append(R + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }                   
         }catch (SQLException ex){
-            txtLog.append("\r\n\r\n=== " + ex.getMessage());
+            txtLog.append("=== " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
     }//GEN-LAST:event_btnLogMouseClicked
@@ -416,12 +416,12 @@ public class W_Report extends javax.swing.JInternalFrame {
             EXX = rs.getString(1);
             conn.close();
         }catch (SQLException ex){
-            txtLog.append("\r\n\r\n=== " + ex.getMessage());
+            txtLog.append("=== " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         if ("".equals(EXX.trim()) || "None".equals(EXX.trim())){
             setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            txtLog.append("\r\n\r\n=== Report > Not Excel");
+            txtLog.append("=== Report > Not Excel" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }   
@@ -446,15 +446,15 @@ public class W_Report extends javax.swing.JInternalFrame {
                 formatter = new SimpleDateFormat("dd_MMM_yyyy_hh_mma");
                 Report_Date = formatter.format(R_Date);
             } catch (Exception ex){
-                txtLog.append("\r\n\r\n=== Report Excel Error: " + ex.getMessage()+ "\r\n");
+                txtLog.append("=== Report Excel Error: " + ex.getMessage()+ "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
             // ===============================================================
-            txtLog.append("\r\n\r\n=== Report Excel file:\r\n" + Func.fExcel(l, col, Values, DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()) + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File) + "\r\n");
+            txtLog.append("=== Report Excel file:\r\n" + Func.fExcel(l, col, Values, DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()) + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File) + "\r\n");
             // ===============================================================
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch (IOException ex) {
-            txtLog.append("\r\n\r\n=== Report > ERROR: " + ex.getMessage());
+            txtLog.append("=== Report > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -470,7 +470,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             }
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Load APP Filter > ERROR: " + ex.getMessage());
+            txtLog.append("=== Load APP Filter > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         cmbF.setSelectedIndex(0);
@@ -544,11 +544,10 @@ public class W_Report extends javax.swing.JInternalFrame {
                 DV1.getColumnModel().getColumn(5).setCellRenderer(cr);
             }
         } catch (SQLException ex) {
-            txtLog.append("\r\n\r\n=== Load Data > ERROR: " + ex.getMessage());
+            txtLog.append("=== Load Data > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
-
-        this.title = "Reports - " + DV1.getRowCount() + " records";
+        this.setTitle("Reports - " + DV1.getRowCount() + " found");
         if(DV1.getRowCount() > 0){
             DV1.changeSelection(0, 0, false, false);
             SUM();

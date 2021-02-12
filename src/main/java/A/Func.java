@@ -4,22 +4,19 @@
  * and open the template in the editor.
  */
 package A;
-import static A.A.*;
-import com.google.common.base.Stopwatch;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.io.BufferedReader;
 import java.util.Arrays;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
@@ -40,19 +37,43 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 /**
  *
  * @author Oleg.Spozito
  */
 public class Func {
-    public static String SHOW_FILE(String BODY, String EXT){
+    public static String ExecuteCmdRuntime(String cmd){
+        String output = null;
+        try {
+            Process p = Runtime.getRuntime().exec(cmd);
+            BufferedReader b = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line;
+            while(( line = b.readLine())!= null){
+                output += line + "\r\n";
+            }
+         } catch(IOException ex){
+             output = ex.getMessage();
+         }
+       return output;   
+    }
+    public static String ExecuteCmdProcessBuilder(String cmd){
+        String output = null;
+        try {
+            Process p = Runtime.getRuntime().exec(cmd);
+            BufferedReader b = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line;
+            while(( line = b.readLine())!= null){
+                output += line + "\r\n";
+            }
+         } catch(IOException ex){
+             output = ex.getMessage();
+         }
+       return output;   
+    }
+    public static String SHOW_LOG_FILE(String BODY, String EXT){
         File aLog = null;
         try {
-            String userHomeFolder = System.getProperty("user.home") + "/Desktop"; 
+            String userHomeFolder = System.getProperty("user.home") + File.separator + "Desktop"; 
             aLog = new File(userHomeFolder + File.separator + "aLog." + EXT);
             Files.write(Paths.get(aLog.getPath()), BODY.getBytes());
             java.awt.Desktop.getDesktop().open(aLog);
