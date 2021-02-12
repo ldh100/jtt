@@ -894,7 +894,7 @@ public class DL extends javax.swing.JInternalFrame {
         cmbBrow.setSelectedIndex(0); // Chrome
         
         cmbEnv.addItem("Development");
-//        cmbEnv.addItem("Staging");
+        cmbEnv.addItem("Staging");
 //        cmbEnv.addItem("Production");         
         cmbEnv.setSelectedIndex(0); // delevopment only for now
         

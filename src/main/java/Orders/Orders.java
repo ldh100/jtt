@@ -515,7 +515,7 @@ public class Orders extends javax.swing.JInternalFrame {
         String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
         String Realm = "";
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + cmbApp.getSelectedItem() +
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + cmbApp.getSelectedItem().toString() +
                 "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
             rs.next();
             Realm = rs.getString(1);      

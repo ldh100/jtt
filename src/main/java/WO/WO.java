@@ -1186,7 +1186,7 @@ public class WO extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() +
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem().toString() +
                     "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
             rs.next();
             appId = rs.getString(1);

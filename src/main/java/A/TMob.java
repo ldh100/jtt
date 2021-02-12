@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AP3;
-import A.TWeb;
-import static A.A.*;
+package A;
+
+import com.google.common.base.Stopwatch;
 
 /**
  *
  * @author oleg.spozito
  */
-public class AP3_smart_analytics {
-    public static void run() throws InterruptedException { 
+public class TMob {
+    private static final Stopwatch sw1 = Stopwatch.createUnstarted(); 
 
-    }
 }

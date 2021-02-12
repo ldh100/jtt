@@ -47,7 +47,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  * @author Oleg.Spozito
  */
 
-public class T {
+public class TWeb {
     private static final Stopwatch sw1 = Stopwatch.createUnstarted();
     public static void Open_Switch_to_2nd_Tab(String NAME, String LINK, String JIRA ){
         if(sw1.isRunning()){
