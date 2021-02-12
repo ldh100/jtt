@@ -13,7 +13,7 @@ import static A.A.*;
  */
 public class DL_metrics_selection {
     public static void run() throws InterruptedException { 
-        Thread.sleep(500);     
+        Thread.sleep(6000);     
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Filters' label", "Filters", true,"no_jira"); 
         _t++; Thread.sleep((long) sleep); T.Find_Text("Find 'Configure Filters' button label", " Configure Filters", true,"no_jira"); 
         _t++; Thread.sleep((long) sleep); T.Element_By_Path_Attribute("Find 'Add metrics...'", "tagName", "img", "alt", "no_jira");        
