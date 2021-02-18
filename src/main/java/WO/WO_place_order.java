@@ -9,32 +9,41 @@ import static A.A.*;
 import static WO.WO.*;
 import java.util.List;
 import org.openqa.selenium.By;
-import static org.openqa.selenium.By.xpath;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+
 /**
  *
  * @author Oleg.Spozito
  */
 public class WO_place_order {
+    public static int  ORDERCOUNT = 15;
     public static void run(boolean ISDELIVERYORDER) throws InterruptedException { 
     //delivery order work flow
+      
+        
         if (ISDELIVERYORDER){
             if (!DELIVERY) {
-            _t++; EX += _t + "\t" + "Delivery service is not available for "+SITE + "\t" + " ===== " + "\t" + "Jump out Delivery order" + "\t" + " PASS " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-              return;
+                _t++; EX += _t + "\t" + "Delivery service is not available for "+SITE + "\t" + " ===== " + "\t" + "Jump out Delivery order" + "\t" + " PASS " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                return;
             }
-            _t++; TWeb.Element_By_Path_Click("Enter Selected Pickup Brand:   "+ BRAND ,"xpath", "//strong[text()=' "+BRAND+" ']",  "no_jira"); 
-        //Menu screen
-            _t++; TWeb.List_L2("Menu Category count ", "css", "[role='tab']", "no_jira");
+            _t++; Thread.sleep((long) sleep);  TWeb.Element_By_Path_Click("Enter Selected  Brand:   "+ BRAND ,"xpath", "//strong[text()=' "+BRAND+" ']",  "no_jira"); 
+            _t++; Thread.sleep((long) sleep);  TWeb.List_L2("Menu Category count ", "css", "[role='tab']", "no_jira");
  //L0:       L1:         L2:Left pannel category         L3:                 
-            for ( WebElement we : L2){          //(int i=0; i< L2.size()  ; i++){
+            for ( WebElement we : L2){         
                 _t++; TWeb.Element_Text("Menu Category : ", we ,  "no_jira");
-                _t++; TWeb.Element_Click("Click Category",we , "no_jira");
-                
+                _t++; TWeb.Element_Click("Click Category",we , "no_jira");                
             }
-            _t++; TWeb.Element_Click("return to top category ",L2.get(0) , "no_jira");
+        
+            _t++; Thread.sleep((long) sleep);  TWeb.Element_Click("return to top category ",L2.get(0) , "no_jira");
+            
+            
+            for (int ordersCount=0; ordersCount< ORDERCOUNT; ordersCount++ ){
+                System.out.println("+++++++++++++++++++++++++++++++++++ " + ordersCount + " +++++++++++++++++++++++++++++++++++");
+            
+        //Menu screen
+            
+          //  _t++; TWeb.Element_Click("return to top category ",L2.get(0) , "no_jira");
             _t++; TWeb.List_L3("Menu Category in the middle pannel  ", "xpath", "//div[@class='pb-6']", "no-jira");
   //L0:       L1:         L2:Left pannel category         L3:   Middle Pannel catgory 
         //iterate each category's first item
@@ -42,13 +51,13 @@ public class WO_place_order {
                // _t++; TWeb.Element_By_Path_Text("Category Name:+++++++++  ", "xpath", "//div[@class='pb-6']//h2", "no_jira");
                 //_t++;
                 String cat = we.findElement(By.cssSelector("[class='pb-4']")).getText();
-                System.out.println("----------------------------");
-                System.out.println(cat);
+               // System.out.println("----------------------------");
+               // System.out.println(cat);
                 _t++; TWeb.Element_Child_Text("Category Name:  ", we, "css"  , "[class='pb-4']", "no_jira");
                 _t++; TWeb.Element_Child_List_L1("Items count in Category --- ",we, "css","[class='row mb-5 bold no-gutters']", "no_jira");
    //L0:       L1:items of each catgory         L2:Left pannel category         L3:   Middle Pannel catgory           
-                System.out.println ("first item in the catgory " +we.getText());
-                System.out.println ("first item in the catgory " +L1.get(0).getText());
+                //System.out.println ("first item in the catgory " +we.getText());
+                //System.out.println ("first item in the catgory " +L1.get(0).getText());
                
                 _t++; TWeb.Element_Text("First item ",L1.get(0),"no_jira");
                 _t++; TWeb.Element_Click("Click to open first item modal --- "+L1.get(0).getText(),L1.get(0) , "no_jira");
@@ -56,15 +65,15 @@ public class WO_place_order {
                 _t++; TWeb.Element_E1_Find("Switch to modal","css" , "[role='document']", "no_jira");
                     if (FAIL) { return;}  
                     
-                _t++; TWeb.Element_By_Path_Text("Button Text" , "xpath","(//span[@class='v-btn__content'])[5]" , "no_jira");//[class='v-btn__content']
-                    System.out.println(t);
-                    if (t.trim().equalsIgnoreCase(" Add to Cart ".trim().toLowerCase())){
-                        _t++; TWeb.Element_By_Path_Click("Click 'add to basket' button " , "xpath","//button[contains(@class,'add-to-cart v-btn')]", "no_jira");
-                        continue;
+                _t++; TWeb.Element_By_Path_Text("Button Text" , "xpath","(//span[@class='v-btn__content'])[5]" , "no_jira"); //verify button 
+                    // System.out.println(t);
+                if (t.trim().equalsIgnoreCase(" Add to Cart ".trim().toLowerCase())){
+                    _t++; TWeb.Element_By_Path_Click("Click 'add to basket' button " , "xpath","//button[contains(@class,'add-to-cart v-btn')]", "no_jira");
+                    continue;
                     }
                 _t++; TWeb.Element_By_Path_Text("Verify Item Name in Title", "css", "[class='my-0']", "no_jira");
                     if (FAIL) { return;}   
-                   System.out.println ("Verify Item Name in Title: " +t); 
+                //   System.out.println ("Verify Item Name in Title: " +t); 
                    
                    
   //L0:       L1:items of each catgory         L2:modifier catgory list        L3:   Middle Pannel catgory                   
@@ -72,20 +81,19 @@ public class WO_place_order {
  //L0:       L1:items of each catgory         L2:modifier catgory list        L3:   Middle Pannel catgory     		
                 _t++;  TWeb.List_L0("Number of required odifier's categories ", "css", "[class='v-input--radio-group__input']", "no_jira");
 		
-                System.out.println ("Number of Modifier's categories " +L2.size()); 
-                System.out.println ("Number of required Modifier's categories " +L0.size()); 
+               // System.out.println ("Number of Modifier's categories " +L2.size()); 
+               // System.out.println ("Number of required Modifier's categories " +L0.size()); 
                 
                
-                JavascriptExecutor js = (JavascriptExecutor) d1; 
-                
-                for (int i=0; i<L2.size();i++){
-                    
+                JavascriptExecutor js = (JavascriptExecutor) d1;                 
+                for (int i=0; i<L2.size();i++){                    
                     _t++; TWeb.Element_Child_Text("Modifier Category " + i + " name ",L2.get(i), "css", "[class='pa-0 col']", "no_jira");
-                        System.out.println (t);
+                      //  System.out.println (t);
                     _t++; TWeb.Element_Child_Text("Modifier Category " + i + " options ",L2.get(i), "css", "[class='pa-0 text-capitalize col']", "no_jira");
-                        System.out.println (t);
+                      //  System.out.println (t);
                     _t++; TWeb.Element_Child_Text("Modifier Category " + i + " Required/Optional",L2.get(i), "css", "[class='pa-0 text-right col']", "no_jira");
-                        System.out.println (t);  
+                      //  System.out.println (t); 
+                      String req = t.substring(0, t.indexOf( ' ' ) ) ;
                     if (t.toLowerCase().contains("required")){
                         List<WebElement> radios = L0.get(i).findElements(By.cssSelector("[type='radio']"));
                         for (WebElement radio :radios){
@@ -96,19 +104,55 @@ public class WO_place_order {
                 _t++; TWeb.Element_By_Path_Click("Click 'add to basket' button " , "xpath","//button[contains(@class,'add-to-cart v-btn')]", "no_jira");
             }
             
+            
+            
             _t++; TWeb.Element_By_Path_Click("Click CHECKOUT Button", "xpath", "//p[text()='Checkout']", "no_jira");
             _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");
+            Thread.sleep(3000); 
             _t++; TWeb.Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");       
 //
-
-
-            String Time_Droplist = d1.findElement(By.cssSelector("[placeholder='Select Delivery Time']")).getCssValue("disabled");
             
+
+
+
+            String Time_Droplist ;// = d1.findElement(By.cssSelector("[placeholder='Select Delivery Time']")).getAttribute("id");
+//            Time_Droplist = d1.findElement(By.cssSelector("[placeholder='Select Delivery Time']")).getCssValue("readonly");
+//            Time_Droplist = d1.findElement(By.cssSelector("[placeholder='Select Delivery Time']")).getCssValue("disabled");
+            
+            
+            
+            Time_Droplist = d1.findElement(By.cssSelector("[placeholder='Select Delivery Time']")).getAttribute("disabled");
             while ("true".equalsIgnoreCase(Time_Droplist)) {
                 _t++; TWeb.Refresh("Refresh Page", "no-jira");
-                Time_Droplist = d1.findElement(By.xpath("[placeholder='Select Delivery Time']")).getCssValue("disabled");
+                
+                _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");
+                Thread.sleep(3000); 
+                //_t++; TWeb.Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");  
+                _t++; TWeb.Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", "no_jira"); 
+                _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for checkout screen", "css", "[placeholder='Select Delivery Time']", "no_jira");
+                Time_Droplist = d1.findElement(By.cssSelector("[placeholder='Select Delivery Time']")).getAttribute("disabled");
             }
-            //_t++; TWeb.Element_By_Path_Attribute("Verify Time droplist","css", "[placeholder='Select Delivery Time']","disabled", "no_jira");
+            Thread.sleep(1000);
+            _t++; TWeb.Element_By_Path_Click("click 'Delivery time'  dropdown", "css", "[placeholder='Select Delivery Time']", "no_jira");
+            _t++; TWeb.Element_E1_Find(app, "xpath", "(//div[@role='listbox'])", url);
+            _t++ ;TWeb.Element_Child_List_L1(app, e1, "css", "[role='option']", url);
+            _t++; TWeb.Element_Click("select 'Delivery Time' from dropdown", L1.get(L1.size()>3?3:(L1.size()-1)), url);
+            _t++; TWeb.Refresh("Refresh Page", "no-jira");
+            _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");
+            _t++; TWeb.Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", "no_jira"); 
+            
+            Time_Droplist = d1.findElement(By.cssSelector("[placeholder='Select Delivery Time']")).getAttribute("disabled");
+            while ("true".equalsIgnoreCase(Time_Droplist)) {
+                _t++; TWeb.Refresh("Refresh Page", "no-jira");
+                _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");
+                Thread.sleep(3000);
+                //_t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");
+                _t++; TWeb.Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");
+                _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for checkout screen", "css", "[placeholder='Select Delivery Time']", "no_jira");
+                Time_Droplist = d1.findElement(By.cssSelector("[placeholder='Select Delivery Time']")).getAttribute("disabled");
+            }
+
+//_t++; TWeb.Element_By_Path_Attribute("Verify Time droplist","css", "[placeholder='Select Delivery Time']","disabled", "no_jira");
              //= t;
 //            System.out.println(" Time droplist disable =   "+t+"-------------------------"+Time_Droplist);
 //            _t++; TWeb.Element_By_Path_Attribute("Verify location droplist","css", "[placeholder='Select Delivery Location']","disabled", "no_jira");
@@ -154,26 +198,8 @@ public class WO_place_order {
             System.out.println("numbers of Timeslot " + L1.size());
             _t++; TWeb.Element_Click("select 'Delivery Time' from dropdown", L1.get(L1.size()>3?3:(L1.size()-1)), url);
             
-            _t++; TWeb.Refresh("Refresh Page", "no-jira");
-            _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");            
-            _t++; TWeb.Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", "no_jira"); 
-             Time_Droplist = d1.findElement(By.cssSelector("[placeholder='Select Delivery Time']")).getCssValue("disabled");
             
-            while ("true".equalsIgnoreCase(Time_Droplist)) {
-                _t++; TWeb.Refresh("Refresh Page", "no-jira");
-                Time_Droplist = d1.findElement(By.xpath("[placeholder='Select Delivery Time']")).getCssValue("disabled");
-            }
-            _t++; TWeb.Element_By_Path_Click("Click 'Delivery location' dropdown", "css", "[placeholder='Select Delivery Location']", "no_jira");
-            TWeb.List_L0("", "css", "[role='option']", url);
-            System.out.println(" ListBox   "+L0.size());
-            _t++; TWeb.Element_By_Path_Click("Select 'Delivert location' from Dropdown", "xpath", "(//div[@role='option'])["+(L0.size())+"]", "no_jira");
-            _t++; TWeb.Element_By_Path_Click("Select 'Delivery time' from dropdown", "css", "[placeholder='Select Delivery Time']", "no_jira");
-            TWeb.List_L0("", "css", "[role='listbox']", url);
-            System.out.println(" ListBox   "+L0.size());
-            _t++; TWeb.Element_E1_Find(app, "xpath", "(//div[@role='listbox'])[2]", url);
-            _t++ ;TWeb.Element_Child_List_L1(app, e1, "css", "[role='option']", url);
-            System.out.println("numbers of Timeslot " + L1.size());
-            _t++; TWeb.Element_Click("select 'Delivery Time' from dropdown", L1.get(L1.size()>3?3:(L1.size()-1)), url);
+           
         //Select Payment    
             _t++; TWeb.Element_By_Path_Click("Click  'Payment' dropdown", "xpath", "(//div[@class='v-select__slot'])[5]", "no_jira");
            
@@ -187,7 +213,30 @@ public class WO_place_order {
                 _t++; TWeb.Element_Click("Select 'Payment' from dropdown", L1.get(L1.size()>3?3:(L1.size()-1)), "no_jira");
             
             _t++; TWeb.Element_By_Path_Click("Click 'PLACE ORDR' button ", "xpath", "(//div[@class='v-window-item v-window-item--active']//button)[2]", "no_jira");//(//div[@class='v-window-item v-window-item--active']//button)[2]
+            _t++; TWeb.Wait_For_Element_By_Path_InVisibility("Wait for checkout complete and direct to past order screen", "css", "[role='document']", "no_jira");    
+            
+            
+            _t++; TWeb.Element_By_Path_Click("click search bar ", "xpath", "//label[text()='Enter Your Thrive Location']/following::input","no_jira");
+            _t++; TWeb.Element_By_Path_Text_Enter("Type in search bar", "xpath", "//label[text()='Enter Your Thrive Location']/following::input", SITE, FAIL, "no_jira");
+            _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find Location list", "xpath", "//div[@role='listbox']", "no_jira");
+            if (FAIL) { return;}  
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Matching Locations Count", e1,"xpath", ".//div[@class='v-list-item__title']", "no_jira");                                     
+            for (int i = 0; i < L1.size(); i++) {
+                _t++; TWeb.Element_Text("Location (" + i + ") Name:", L1.get(i),  "no_jira");             
+                if (FAIL) { return;}
+            }
+              
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select 1st Location in the list", L1.get(0),"no_jira"); 
+            if (FAIL) { return; } Thread.sleep(1000);
+//            _t++; TWeb.Element_By_Path_Click("Click title to return to location page ", "xpath", "//div[text()=' "+SITE +" ']", url);
+            _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for location screen rendering", "xpath","//strong[text()=' Delivery ']", "no_jira");   
+            _t++; TWeb.Element_By_Path_Click("Click 'Delivery' tab", "xpath","//strong[text()=' Delivery ']","no_jira"); 
+            Thread.sleep( 3000);
+            _t++; TWeb.Element_By_Path_Click("Enter Selected  Brand:   "+ BRAND ,"xpath", "//strong[text()=' "+BRAND+" ']",  "no_jira"); 
+            Thread.sleep( 300000);
         }
+        }
+    
                 
                 
                  
