@@ -21,9 +21,9 @@ public class DL_metric_data {
 	    	 System.out.println("count "+i);
 	    	 count = i;
 	    	 if(i==1) 
-	    		 metricRef="Compared to last month";
+	    		 metricRef="Compared to Last Month";
 	    	 if(i==2) 
-	    		 metricRef="Compared to last week";	 
+	    		 metricRef="Compared to Last Week";	 
 	    	 
 	    	 MetricCardsSelection();
 	     }
