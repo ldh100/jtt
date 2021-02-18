@@ -7,6 +7,7 @@
 package DL;
 import A.TWeb;
 import static A.A.*;
+import static DL.DL.*;
 /**
  *
  * @author Oleg.Spozito
