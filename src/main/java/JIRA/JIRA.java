@@ -320,7 +320,7 @@ public class JIRA extends javax.swing.JInternalFrame {
             }
             @Override
             public void componentHidden(ComponentEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
     }//GEN-LAST:event_formAncestorAdded
