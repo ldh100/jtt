@@ -56,8 +56,8 @@ public class WO_place_order {
                 _t++; TWeb.Element_Child_Text("Category Name:  ", we, "css"  , "[class='pb-4']", "no_jira");
                 _t++; TWeb.Element_Child_List_L1("Items count in Category --- ",we, "css","[class='row mb-5 bold no-gutters']", "no_jira");
    //L0:       L1:items of each catgory         L2:Left pannel category         L3:   Middle Pannel catgory           
-                //System.out.println ("first item in the catgory " +we.getText());
-                //System.out.println ("first item in the catgory " +L1.get(0).getText());
+                System.out.println ("first item in the catgory " +we.getText());
+                System.out.println ("first item in the catgory " +L1.get(0).getText());
                
                 _t++; TWeb.Element_Text("First item ",L1.get(0),"no_jira");
                 _t++; TWeb.Element_Click("Click to open first item modal --- "+L1.get(0).getText(),L1.get(0) , "no_jira");
@@ -80,10 +80,6 @@ public class WO_place_order {
                 _t++;  TWeb.List_L2("Number of Modifier's categories ", "css", "[class='pl-5 pr-6 modGroup-title d-flex align-center v-card v-sheet v-sheet--tile theme--light']", "no_jira");
  //L0:       L1:items of each catgory         L2:modifier catgory list        L3:   Middle Pannel catgory     		
                 _t++;  TWeb.List_L0("Number of required odifier's categories ", "css", "[class='v-input--radio-group__input']", "no_jira");
-		
-               // System.out.println ("Number of Modifier's categories " +L2.size()); 
-               // System.out.println ("Number of required Modifier's categories " +L0.size()); 
-                
                
                 JavascriptExecutor js = (JavascriptExecutor) d1;                 
                 for (int i=0; i<L2.size();i++){                    
@@ -93,13 +89,141 @@ public class WO_place_order {
                       //  System.out.println (t);
                     _t++; TWeb.Element_Child_Text("Modifier Category " + i + " Required/Optional",L2.get(i), "css", "[class='pa-0 text-right col']", "no_jira");
                       //  System.out.println (t); 
-                      String req = t.substring(0, t.indexOf( ' ' ) ) ;
-                    if (t.toLowerCase().contains("required")){
-                        List<WebElement> radios = L0.get(i).findElements(By.cssSelector("[type='radio']"));
-                        for (WebElement radio :radios){
-                            js.executeScript("arguments[0].click();",radio );
-                        }                        
+                    int req = Integer.parseInt(t.contains(" ")?t.substring(0, t.indexOf( ' ' ) ):"0" ) ;
+                    boolean required = (t.toLowerCase().contains("required") ? true : false); 
+                    boolean is_checkbox= true;
+                    WebElement ModifierGroupPannel =   L2.get(i).findElement(By.xpath("./.."));
+                    
+                    try{
+                        ModifierGroupPannel.findElement(By.cssSelector("[role='radiogroup']"));
+                         is_checkbox= false;
+                         
+                    }catch (Exception e){
+                        
                     }
+                    
+                    System.out.println  ("requirement ------- "+req );
+                    System.out.println  ("required ------- "+required );
+                    System.out.println("is_checkbox --------"+is_checkbox );
+                    
+                    
+                    if (!is_checkbox){
+                        List<WebElement> charges  = ModifierGroupPannel.findElements(By.cssSelector("[class='d-flex justify-end mr-2 col']"));
+                        boolean clicked = false;
+                        for (WebElement charge : charges ){
+                           
+                            if (!charge.getAttribute("innerText").isEmpty()){
+                               //charge.findElement(By.xpath("./.."))
+                                WebElement radiobtn = charge.findElement(By.xpath("./..")).findElement(By.cssSelector("[type='radio']"));
+                                js.executeScript("arguments[0].click();",radiobtn );
+                                clicked = true;
+                                break;
+                            }
+                        }
+                        if (!clicked ){
+                            WebElement radiobtn = charges.get(charges.size()-1).findElement(By.xpath("./..")).findElement(By.cssSelector("[type='radio']")) ;
+                            js.executeScript("arguments[0].click();",radiobtn );
+                        }
+                    }else{
+                        int clicked = 0;
+                        List<WebElement> charges  = ModifierGroupPannel.findElements(By.cssSelector("[class='d-flex align-center justify-end mr-2 col']"));
+                        System.out.println(charges.size());
+                        for (int r=0;r<charges.size() ; r++){                         
+                            if (clicked>= req) {break;}
+                            
+                           
+                            if (!charges.get(r).getAttribute("innerText").isEmpty()){
+                               //charge.findElement(By.xpath("./.."))
+                                WebElement checkbtn = charges.get(r).findElement(By.xpath("./..")).findElement(By.cssSelector("[type='checkbox']"));
+                                js.executeScript("arguments[0].click();",checkbtn );
+                                clicked ++;
+                            }
+                        
+                            
+                        
+                        }
+                        if(clicked < req) {
+                            List< WebElement> checkbtns = ModifierGroupPannel.findElements(By.cssSelector("[type='checkbox']"));
+                            for (WebElement checkbtn:checkbtns){
+                                System.out.println(checkbtn.getAttribute("value"));
+                                if (checkbtn.getAttribute("value").equalsIgnoreCase("false")){
+                                   js.executeScript("arguments[0].click();",checkbtn );
+                                    clicked++;     
+                                    
+                                }
+                                if (clicked >=req) {break;}
+                            }
+                        }
+                    }
+                
+                            
+                           
+                    
+                    
+                      
+                      
+                      
+                      
+                      
+                      
+//                     System.out.println  ( ModifierGroupPannel.getTagName());
+//                     System.out.println  ( ModifierGroupPannel.getAttribute("class"));
+//                     // ModifierGroupPannel.findElement(By.cssSelector("[type='radio']"));
+//                      _t++; TWeb.Element_Child_List_L1("",ModifierGroupPannel,"css","[role='radiogroup']","no-jira");
+//                      System.out.println ("number of radiosgroup " + L1.size());
+//                      _t++; TWeb.Element_Child_List_L1("",ModifierGroupPannel,"css","[role='radio']","no-jira");
+//                         System.out.println ("number of radios " + L1.size());
+//                      _t++; TWeb.Element_Child_List_L1("",ModifierGroupPannel,"css","[class='d-flex justify-end mr-2 col']","no-jira");
+//                      
+//                      
+                      
+                      
+//                         System.out.println ("number of charge " + L1.size() + "   Text: "+L1.get(0).getText()+"=-=-=-=-=-=-=-=-=-=-=-"+L1.get(1).getText());   
+//                         System.out.println ("number of charge " + L1.size() + "   Text: "+L1.get(0).getAttribute("class")+"=-=-=-=-=-=-=-=-=-=-=-"+L1.get(1).getAttribute("innerText"));   
+//                         System.out.println ("xxxxxxxxxxxx .   "+ L1.get(1).findElement(By.xpath("./..")).getText());
+//                         
+//                         System.out.println(d1.findElement(By.xpath("(//div[contains(@class,'d-flex justify-end')])[2]")).getAttribute("innerText"));
+//                         System.out.println(d1.findElement(By.xpath("(//div[contains(@class,'pa-0 d-flex')])")).getRect());
+//                         System.out.println(d1.findElement(By.xpath("(//div[contains(@class,'pa-0 d-flex')])[2]")).getAttribute("innerText"));
+//                         System.out.println(d1.findElement(By.xpath("(//div[contains(@class,'pa-0 d-flex')])[3]")).getAttribute("innerText"));
+//                         System.out.println(d1.findElement(By.cssSelector("[class='my-0']")).getText());
+                         
+ //                  if (t.toLowerCase().contains("required")){
+                         
+                         
+//                         for (int r = 0; r < req; r++) {
+//                        
+//                        if (!L1.get(1).getAttribute("innerText").isEmpty()) {
+//                            WebElement radiobtn = L1.get(1).findElement(By.xpath("./..")).findElement(By.cssSelector("[type='radio']"));
+//                            js.executeScript("arguments[0].click();", radiobtn);
+//                        }
+//                    }
+//
+//                         
+                         
+//                         for (int r=0;r<req; r++ ){
+//                             
+//                                                          
+//                             if (L1.get(i)){
+//                                 
+//                                 WebElement radiobtn = charge.findElement(By.xpath("./..")).findElement(By.cssSelector("[type='radio']"));
+//                                 js.executeScript("arguments[0].click();",radiobtn );
+//                                 break;
+//                             }
+//                         }
+                         
+                        
+                     
+                      
+//                      if (t.toLowerCase().contains("required")){
+//                      }
+                       
+                    
+                      //  List<WebElement> radios = L0.get(i).findElements(By.cssSelector("[type='radio']"));
+//                        for (WebElement radio :radios){
+//                            js.executeScript("arguments[0].click();",radio );
+//                        }                        
+                    
                 }
                 _t++; TWeb.Element_By_Path_Click("Click 'add to basket' button " , "xpath","//button[contains(@class,'add-to-cart v-btn')]", "no_jira");
             }
@@ -212,29 +336,29 @@ public class WO_place_order {
             
                 _t++; TWeb.Element_Click("Select 'Payment' from dropdown", L1.get(L1.size()>3?3:(L1.size()-1)), "no_jira");
             
-            _t++; TWeb.Element_By_Path_Click("Click 'PLACE ORDR' button ", "xpath", "(//div[@class='v-window-item v-window-item--active']//button)[2]", "no_jira");//(//div[@class='v-window-item v-window-item--active']//button)[2]
-            _t++; TWeb.Wait_For_Element_By_Path_InVisibility("Wait for checkout complete and direct to past order screen", "css", "[role='document']", "no_jira");    
-            
-            
-            _t++; TWeb.Element_By_Path_Click("click search bar ", "xpath", "//label[text()='Enter Your Thrive Location']/following::input","no_jira");
-            _t++; TWeb.Element_By_Path_Text_Enter("Type in search bar", "xpath", "//label[text()='Enter Your Thrive Location']/following::input", SITE, FAIL, "no_jira");
-            _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find Location list", "xpath", "//div[@role='listbox']", "no_jira");
-            if (FAIL) { return;}  
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Matching Locations Count", e1,"xpath", ".//div[@class='v-list-item__title']", "no_jira");                                     
-            for (int i = 0; i < L1.size(); i++) {
-                _t++; TWeb.Element_Text("Location (" + i + ") Name:", L1.get(i),  "no_jira");             
-                if (FAIL) { return;}
-            }
+                _t++; TWeb.Element_By_Path_Click("Click 'PLACE ORDR' button ", "xpath", "(//div[@class='v-window-item v-window-item--active']//button)[2]", "no_jira");//(//div[@class='v-window-item v-window-item--active']//button)[2]
+                _t++; TWeb.Wait_For_Element_By_Path_InVisibility("Wait for checkout complete and direct to past order screen", "css", "[role='document']", "no_jira");    
+
+
+                _t++; TWeb.Element_By_Path_Click("click search bar ", "xpath", "//label[text()='Enter Your Thrive Location']/following::input","no_jira");
+                _t++; TWeb.Element_By_Path_Text_Enter("Type in search bar", "xpath", "//label[text()='Enter Your Thrive Location']/following::input", SITE, FAIL, "no_jira");
+                _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find Location list", "xpath", "//div[@role='listbox']", "no_jira");
+                if (FAIL) { return;}  
+                _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Matching Locations Count", e1,"xpath", ".//div[@class='v-list-item__title']", "no_jira");                                     
+                for (int i = 0; i < L1.size(); i++) {
+                    _t++; TWeb.Element_Text("Location (" + i + ") Name:", L1.get(i),  "no_jira");             
+                    if (FAIL) { return;}
+                }
               
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select 1st Location in the list", L1.get(0),"no_jira"); 
-            if (FAIL) { return; } Thread.sleep(1000);
-//            _t++; TWeb.Element_By_Path_Click("Click title to return to location page ", "xpath", "//div[text()=' "+SITE +" ']", url);
-            _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for location screen rendering", "xpath","//strong[text()=' Delivery ']", "no_jira");   
-            _t++; TWeb.Element_By_Path_Click("Click 'Delivery' tab", "xpath","//strong[text()=' Delivery ']","no_jira"); 
-            Thread.sleep( 3000);
-            _t++; TWeb.Element_By_Path_Click("Enter Selected  Brand:   "+ BRAND ,"xpath", "//strong[text()=' "+BRAND+" ']",  "no_jira"); 
-            Thread.sleep( 300000);
-        }
+                _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select 1st Location in the list", L1.get(0),"no_jira"); 
+                if (FAIL) { return; } Thread.sleep(1000);
+    //            _t++; TWeb.Element_By_Path_Click("Click title to return to location page ", "xpath", "//div[text()=' "+SITE +" ']", url);
+                _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for location screen rendering", "xpath","//strong[text()=' Delivery ']", "no_jira");   
+                _t++; TWeb.Element_By_Path_Click("Click 'Delivery' tab", "xpath","//strong[text()=' Delivery ']","no_jira"); 
+                Thread.sleep( 3000);
+                _t++; TWeb.Element_By_Path_Click("Enter Selected  Brand:   "+ BRAND ,"xpath", "//strong[text()=' "+BRAND+" ']",  "no_jira"); 
+                Thread.sleep( 3000);
+            }
         }
     
                 
@@ -344,6 +468,8 @@ public class WO_place_order {
         
     }  
      public static void addItemToBasket(WebElement ItemModal ) {
+         
+     }
         
 //         
 //         _t++; 
@@ -432,5 +558,5 @@ public class WO_place_order {
 //         //while ()
              
          
-     }
+     
 }
