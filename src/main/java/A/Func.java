@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
@@ -42,7 +44,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Oleg.Spozito
  */
-public class Func {
+public class Func { 
     public static String ExecuteCmdRuntime(String cmd){
         String output = null;
         try {
@@ -52,31 +54,35 @@ public class Func {
             while(( line = b.readLine())!= null){
                 output += line + "\r\n";
             }
-        } catch(Exception ex){
+        } catch(IOException ex){
             output = ex.getMessage();
         }
        return output;   
     }
-    public static String ExecuteCmdProcessBuilder(String cmd, String WorkingDirectory, boolean NoWindow, boolean useShellExecute, boolean ReturnOutput){
-        String output = null;
+    public static String ExecuteCmdProcessBuilder(String cmd, String cwd, boolean waitFor, boolean ReturnOutput){
+        String output = "";
         try {
-            ProcessBuilder builder = new ProcessBuilder();
-            builder.directory(new File(System.getProperty("user.home")));
+            ProcessBuilder b = new ProcessBuilder();
+            b.directory(new File(cwd));
             if(WsOS.toLowerCase().contains("windows")){
-                builder.command("cmd.exe", "/c", cmd);            
+                b.command("cmd.exe", "/c", cmd);            
             }
             if(WsOS.toLowerCase().contains("mac")){
-                builder.command(cmd);            
+                b.command(cmd);            
             }
 
-            Process p = builder.start();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+            Process p = b.start();
+            if(ReturnOutput){
+                BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    output += line + "\r\n";
+                }                
             }
-            int exitCode = p.waitFor();
-            System.out.println("\nExited with error code : " + exitCode);            
+            if(waitFor){
+                int exitCode = p.waitFor();
+                output += "\nExited with error code : " + exitCode;                   
+            }        
          } catch(IOException | InterruptedException ex){
              output = ex.getMessage();
          }
