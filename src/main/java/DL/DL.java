@@ -576,7 +576,7 @@ public class DL extends javax.swing.JInternalFrame {
             }
             @Override
             public void componentHidden(ComponentEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
     }//GEN-LAST:event_formAncestorAdded
@@ -1491,7 +1491,6 @@ public class DL extends javax.swing.JInternalFrame {
 
     private void LOG_UPDATE(){  
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
             PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET " +
                     " [Date] = ?" +       // 1

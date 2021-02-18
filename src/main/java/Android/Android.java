@@ -6,6 +6,7 @@
 package Android;
 import A.Func;
 import static A.A.*;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -19,11 +20,19 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.google.common.base.Stopwatch;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -43,6 +52,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.SwingWorker;
@@ -62,7 +75,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.NoSuchElementException;
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -144,12 +159,14 @@ public class Android extends javax.swing.JInternalFrame {
         btnGetScreenshot = new javax.swing.JButton();
         btnFindDevice = new javax.swing.JButton();
         btnInstallAll = new javax.swing.JButton();
-        btnInstall = new javax.swing.JButton();
+        btnS3Install = new javax.swing.JButton();
         btnGetAPK = new javax.swing.JButton();
         lblSITES4 = new javax.swing.JLabel();
         txtBolter_Id = new javax.swing.JTextField();
         lblSITES7 = new javax.swing.JLabel();
         txtBolter_Pw = new javax.swing.JTextField();
+        btnScreenshotFolder = new javax.swing.JButton();
+        btnInstallAPK = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -469,7 +486,7 @@ public class Android extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 24, 428, 160));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 428, 164));
 
         DV2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV2.setModel(new javax.swing.table.DefaultTableModel(
@@ -493,7 +510,7 @@ public class Android extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 24, 416, 116));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 20, 416, 120));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
 
@@ -553,7 +570,7 @@ public class Android extends javax.swing.JInternalFrame {
         txtLog.setPreferredSize(null);
         jScrollPane1.setViewportView(txtLog);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 350, 428, 152));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 360, 428, 140));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -566,7 +583,7 @@ public class Android extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 52, 78, 24));
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 52, 78, 20));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -624,6 +641,7 @@ public class Android extends javax.swing.JInternalFrame {
         jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 12, 92, 16));
 
         cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmbEnv.setForeground(new java.awt.Color(0, 0, 204));
         cmbEnv.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbEnvItemStateChanged(evt);
@@ -632,6 +650,7 @@ public class Android extends javax.swing.JInternalFrame {
         jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 28, 116, 20));
 
         cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmbApp.setForeground(new java.awt.Color(0, 0, 204));
         cmbApp.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbAppItemStateChanged(evt);
@@ -645,7 +664,7 @@ public class Android extends javax.swing.JInternalFrame {
         _slack.setRequestFocusEnabled(false);
         jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 56, 100, 14));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 423, 416, -1));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 424, 416, -1));
 
         txtMobile_Id.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_Id.setText("cdl.test.xtt@gmail.com");
@@ -685,20 +704,20 @@ public class Android extends javax.swing.JInternalFrame {
         DV3.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(DV3);
 
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 208, 428, 64));
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 204, 428, 80));
 
         lblAPK.setText("Builds / APK");
         lblAPK.setAlignmentX(0.5F);
         getContentPane().add(lblAPK, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 188, 360, -1));
 
         cmbDevice.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        cmbDevice.setForeground(new java.awt.Color(204, 0, 51));
+        cmbDevice.setForeground(new java.awt.Color(0, 51, 204));
         cmbDevice.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbDeviceItemStateChanged(evt);
             }
         });
-        getContentPane().add(cmbDevice, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 276, 224, 20));
+        getContentPane().add(cmbDevice, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 336, 256, 20));
 
         btnGetScreenshot.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnGetScreenshot.setText("Take SreenShot");
@@ -708,7 +727,7 @@ public class Android extends javax.swing.JInternalFrame {
                 btnGetScreenshotMouseClicked(evt);
             }
         });
-        getContentPane().add(btnGetScreenshot, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 300, -1, 20));
+        getContentPane().add(btnGetScreenshot, new org.netbeans.lib.awtextra.AbsoluteConstraints(324, 312, 104, 20));
 
         btnFindDevice.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnFindDevice.setText("Find Connected Device(s) >");
@@ -718,27 +737,27 @@ public class Android extends javax.swing.JInternalFrame {
                 btnFindDeviceMouseClicked(evt);
             }
         });
-        getContentPane().add(btnFindDevice, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 276, 192, 20));
+        getContentPane().add(btnFindDevice, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 336, 156, 20));
 
         btnInstallAll.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnInstallAll.setText("Install All App Builds - App Tester ");
+        btnInstallAll.setText("Install All from App Tester ");
         btnInstallAll.setMargin(new java.awt.Insets(2, 4, 2, 4));
         btnInstallAll.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnInstallAllMouseClicked(evt);
             }
         });
-        getContentPane().add(btnInstallAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 324, 220, 20));
+        getContentPane().add(btnInstallAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 288, 148, 20));
 
-        btnInstall.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnInstall.setText("Install Selected Build");
-        btnInstall.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        btnInstall.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnS3Install.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnS3Install.setText("Install Selected S3 Build ^");
+        btnS3Install.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        btnS3Install.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnInstallMouseClicked(evt);
+                btnS3InstallMouseClicked(evt);
             }
         });
-        getContentPane().add(btnInstall, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 324, 192, 20));
+        getContentPane().add(btnS3Install, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 288, 156, 20));
 
         btnGetAPK.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnGetAPK.setText("Get Build from Device");
@@ -748,7 +767,7 @@ public class Android extends javax.swing.JInternalFrame {
                 btnGetAPKMouseClicked(evt);
             }
         });
-        getContentPane().add(btnGetAPK, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 300, 192, 20));
+        getContentPane().add(btnGetAPK, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 312, 156, 20));
 
         lblSITES4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -770,6 +789,26 @@ public class Android extends javax.swing.JInternalFrame {
         txtBolter_Pw.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtBolter_Pw.setText("Password1");
         getContentPane().add(txtBolter_Pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(756, 401, 92, -1));
+
+        btnScreenshotFolder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnScreenshotFolder.setText("SreenShots Folder");
+        btnScreenshotFolder.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        btnScreenshotFolder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnScreenshotFolderMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnScreenshotFolder, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 312, 148, 20));
+
+        btnInstallAPK.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnInstallAPK.setText("Install Build file...");
+        btnInstallAPK.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        btnInstallAPK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnInstallAPKMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnInstallAPK, new org.netbeans.lib.awtextra.AbsoluteConstraints(324, 288, 104, 20));
 
         getAccessibleContext().setAccessibleName("Android");
 
@@ -803,7 +842,7 @@ public class Android extends javax.swing.JInternalFrame {
             }
             @Override
             public void componentHidden(ComponentEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
     }//GEN-LAST:event_Android_AncestorAdded
@@ -832,36 +871,17 @@ public class Android extends javax.swing.JInternalFrame {
         app = cmbApp.getSelectedItem().toString();
         CONFIG = false;  
         FindConnectedDevices();
-        GetAppVersion(); // ========   Check selected app version
+        CheckDevice();
+        CheckAppPackage(); // ========   Check selected app version
         this.setTitle("Android Automation Manager");
     }
-
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         F_COUNT--;
         if(BW1 != null && !BW1.isCancelled()) {
             BW1.cancel(true);
         }
     }//GEN-LAST:event_formInternalFrameClosed
-    private void Get_S3_MOB_Credentials(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));         
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs1 = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S3_A_Key_MOB'");
-            rs1.next();
-            access_key = rs1.getString(1);
-            ResultSet rs2 = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S3_S_Key_MOB'");
-            rs2.next();
-            secret_key = rs2.getString(1);
-            conn.close();
-            AWS_credentials = new BasicAWSCredentials(
-                new String(Base64.getDecoder().decode(access_key)),
-                new String(Base64.getDecoder().decode(secret_key))
-            );  
-        } catch (SQLException ex) {
-            txtLog.append("= Get_S3_MOB_Credentials > " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }
+
     private void DV2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV2MouseClicked
         if (d2LastRow == DV2.getSelectedRow() || DV2.getRowCount() == 0) {
            return;
@@ -870,7 +890,6 @@ public class Android extends javax.swing.JInternalFrame {
         BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
         Location = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 1));
     }//GEN-LAST:event_DV2MouseClicked
-
     private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -880,7 +899,7 @@ public class Android extends javax.swing.JInternalFrame {
             GetSites();
             GetPackages(AWS_credentials);
             Set_Mobile_Package_Name();
-            GetAppVersion(); // ========   Check selected app version
+            CheckAppPackage(); // ========   Check selected app version
 
             this.setTitle("Android Automation Manager");
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -891,7 +910,6 @@ public class Android extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_cmbAppItemStateChanged
-
     private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -901,18 +919,15 @@ public class Android extends javax.swing.JInternalFrame {
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
-
     private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
         SAVE_CONFIG();
     }//GEN-LAST:event_btnSave_OptMouseClicked
-
     private void btnExelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExelMouseClicked
         if(!btnExel.isEnabled()) {return;}
         btnExel.setEnabled(false);
         Report(true);
         btnExel.setEnabled(true);
     }//GEN-LAST:event_btnExelMouseClicked
-
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
         String R = Func.SHOW_LOG_FILE(F, "txt");
@@ -921,7 +936,6 @@ public class Android extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }//GEN-LAST:event_btnFailsMouseClicked
-
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
         String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
@@ -929,7 +943,6 @@ public class Android extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }//GEN-LAST:event_btnLogMouseClicked
-
     private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
         if(!btnRun.isEnabled()){
             return;
@@ -957,8 +970,10 @@ public class Android extends javax.swing.JInternalFrame {
         _w = 0; // Warn
         r_time = "";
 
-        Mobile_PW = txtMobile_Id.getText();
-        ADMIN_PW = txtMobile_Pw.getText();
+        Mobile_ID = txtMobile_Id.getText();
+        Mobile_PW = txtMobile_Pw.getText();
+        Bolter_ID = txtBolter_Id.getText();
+        Bolter_PW = txtBolter_Pw.getText();
         ALL_DATA = _all_data.isSelected();
 
         SCOPE = "";
@@ -994,7 +1009,6 @@ public class Android extends javax.swing.JInternalFrame {
             );
         }
     }//GEN-LAST:event_btnRunMouseClicked
-
     private void btnGetScreenshotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGetScreenshotMouseClicked
         if(!btnGetScreenshot.isEnabled()){
             return;
@@ -1002,12 +1016,11 @@ public class Android extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         File SCREEN = null;
         try {
-            String cwd = System.getProperty("user.home") + File.separator + "Desktop"; 
-            String file = cwd + File.separator + "Mobile_Screen_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMdd_hhmmss")) + ".png";
+            String cwd = System.getProperty("user.dir");        
+            String file = cwd + File.separator + "ScreenShots" + File.separator + "Mobile_Screen_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMdd_hhmmss")) + ".png";
             SCREEN = new File(file);
-            //String SS = Func.ExecuteCmdRuntime("adb exec-out screencap -d " + devID + " -p > " + file).trim();
-            String SS = Func.ExecuteCmdProcessBuilder(("adb exec-out screencap -d " + devID + " -p > " + file).trim(), cwd, false, false, false);
-            
+            String SS = Func.ExecuteCmdProcessBuilder(("adb exec-out screencap -d " + devID + " -p > " + file).trim(), cwd, false, false).trim();
+            Thread.sleep(3000);
             txtLog.append(SS + "\r\n");
             txtLog.append("= ScreenShot > " + file + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1025,37 +1038,117 @@ public class Android extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnGetScreenshotMouseClicked
-
     private void btnFindDeviceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFindDeviceMouseClicked
         FindConnectedDevices();
-        GetAppVersion(); // ========   Check selected app version
+        CheckDevice();
+        CheckAppPackage(); // ========   Check selected app version
     }//GEN-LAST:event_btnFindDeviceMouseClicked
-
     private void btnInstallAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInstallAllMouseClicked
         if(!btnInstallAll.isEnabled()){
             return;
         }
         InstallAllAppTester();
     }//GEN-LAST:event_btnInstallAllMouseClicked
-
-    private void btnInstallMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInstallMouseClicked
-        if(!btnInstall.isEnabled()){
+    private void btnS3InstallMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnS3InstallMouseClicked
+        if(!btnS3Install.isEnabled()){
             return;
         }
-        InstallBuild();
-    }//GEN-LAST:event_btnInstallMouseClicked
-
+        InstallBuild_S3();
+    }//GEN-LAST:event_btnS3InstallMouseClicked
     private void btnGetAPKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGetAPKMouseClicked
         if(!btnGetAPK.isEnabled()){
             return;
         }
+         Object[] options = {"Yes", "No"};
+        int reply = JOptionPane.showOptionDialog(this,
+            "Pull " + app + " " + appVersion + " APK file from " + devModel + " device to your desktop?" + "\r\n" +
+            "Existing " + app + " " + appVersion + " file will be replaced",
+            "Pull APK file",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            options,
+            "No"); // options[1]
+        if (reply == 1){
+            return;
+        }       
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
+        btnRun.setEnabled(false);
+        btnGetScreenshot.setEnabled(false);
+        btnGetAPK.setEnabled(false);
+        btnS3Install.setEnabled(false);
+        btnInstallAll.setEnabled(false); 
+        txtLog.append("\r\n" + "-Get APK..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+       
+        try {
+            String R = "";
+            R = Func.ExecuteCmdRuntime("adb -s " + devID + " shell pm path " + appPackage);
+            txtLog.append(R.trim() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            
+            String cwd = System.getProperty("user.home") + File.separator + "Desktop";
+            R = Func.ExecuteCmdRuntime("adb -s " + devID + " pull " + R.trim().substring(R.indexOf(":") + 1) + " " + cwd);
+            txtLog.append(R.trim() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+
+            Files.move(Paths.get(cwd + File.separator + "base.apk"), Paths.get(cwd + File.separator + app + "_" + appVersion + ".apk"), java.nio.file.StandardCopyOption.REPLACE_EXISTING );
+            
+            txtLog.append("File Saved: " + cwd + File.separator + app + "_" + appVersion + ".apk" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());            
+        } catch (IOException ex) {
+            txtLog.append("=== Get APK > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        }
+        btnRun.setEnabled(true);
+        btnGetScreenshot.setEnabled(true);
+        btnGetAPK.setEnabled(true);
+        btnS3Install.setEnabled(true);
+        btnInstallAll.setEnabled(true); 
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));         
     }//GEN-LAST:event_btnGetAPKMouseClicked
+    private void cmbDeviceItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDeviceItemStateChanged
+        if(!Load && evt.getStateChange() == 1) {
+            CheckDevice();
+        }
+    }//GEN-LAST:event_cmbDeviceItemStateChanged
+    private void btnScreenshotFolderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnScreenshotFolderMouseClicked
+        try{
+            String cwd = System.getProperty("user.dir");        
+            String dir = cwd + File.separator + "ScreenShots"; 
+            Desktop.getDesktop().open(new File(dir));            
+        } catch (IOException ex) {
+            txtLog.append("=== Open ScreenShots Folder > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        } 
+    }//GEN-LAST:event_btnScreenshotFolderMouseClicked
+    private void btnInstallAPKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInstallAPKMouseClicked
+
+        File selectedFile = null;
+        JFileChooser fileChooser = new JFileChooser();
+        String cwd = System.getProperty("user.dir"); 
+        fileChooser.setCurrentDirectory(new File(cwd + File.separator + "MobileBuilds"));
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
+            selectedFile = fileChooser.getSelectedFile();
+            InstallBuild(selectedFile.getAbsolutePath());
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+        }
+    }//GEN-LAST:event_btnInstallAPKMouseClicked
 
     private void FindConnectedDevices(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
+        btnRun.setEnabled(false);
+        btnGetScreenshot.setEnabled(false);
+        btnGetAPK.setEnabled(false);
+        btnS3Install.setEnabled(false);
+        btnInstallAll.setEnabled(false); 
+
         Load = true;  
         cmbDevice.removeAllItems();
-        Load = false;  
+ 
         txtLog.append("-Find Attached Android Devices ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         String Dev = Func.ExecuteCmdRuntime("adb devices -l").trim();
@@ -1076,347 +1169,364 @@ public class Android extends javax.swing.JInternalFrame {
                 } else{
                     btnGetScreenshot.setEnabled(false); 
                 }
+            btnRun.setEnabled(true);
+            btnGetScreenshot.setEnabled(true);
             btnGetAPK.setEnabled(true);
-            btnInstall.setEnabled(true);
+            btnS3Install.setEnabled(true);
             btnInstallAll.setEnabled(true); 
         } else {
             cmbDevice.addItem("noDevice");
             txtLog.append("" + "=== No Attached Device(s) found" + "\r\n" + "Return from 'adb devices -l' > '" + Dev + "'" + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            btnRun.setEnabled(false);
-            btnGetScreenshot.setEnabled(false);
-            btnGetAPK.setEnabled(false);
-            btnInstall.setEnabled(false);
-            btnInstallAll.setEnabled(false); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());             
         }
+        Load = false; 
         cmbDevice.setSelectedIndex(0);
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));     
-    }
-    private void cmbDeviceItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDeviceItemStateChanged
-        if(!Load && evt.getStateChange() == 1) {
-            devID = "";
-            devModel = "";
-            String D = cmbDevice.getSelectedItem().toString();
-            if(D.contains("id:")){
-                devModel = D.substring(0,D.indexOf(" ")).trim(); 
-                devID = D.substring(D.indexOf("id:") + 3).trim();        
-                Get_Device_OS();  
-            } 
-        }
-    }//GEN-LAST:event_cmbDeviceItemStateChanged
-    private void Get_Device_OS(){
-        devOS = Func.ExecuteCmdRuntime("adb -s " + devID + " shell getprop ro.build.version.release").trim();
-        devOS = devOS.replace("null", "");
-    }
-    private void InstallBuild(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));  
-        txtLog.append("-Install APK ..." + "\r\n");
+    } 
+    private void CheckDevice(){
+        devID = "";
+        devModel = "";
+        txtLog.append("-Check Selected Device..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        String D = cmbDevice.getSelectedItem().toString();
+        if(D.contains("id:")){
+            devModel = D.substring(0,D.indexOf(" ")).trim(); 
+            devID = D.substring(D.indexOf("id:") + 3).trim();        
+            devOS = Func.ExecuteCmdRuntime("adb -s " + devID + " shell getprop ro.build.version.release").trim();
+            devOS = devOS.replace("null", "");
+            //Get_Device_OS();
+            //CheckAppPackage();
+            txtLog.append("=== Model: " + devModel + ", OS version: " + devOS + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        }         
+    }
+    private void CheckAppPackage(){
+        if(Load){
+            return;
+        }
+        String D = cmbDevice.getSelectedItem().toString();
+        if(!D.contains("id:")){
+            return;
+        } 
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
+        txtLog.append("-Check AppPackage: " + appPackage + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        //String Hash = "Not Found";
+        String v1 = "?";
+        String v2 = "?";
+        appVersion = "Not Found";
         try{
-            
-
+            String v = Func.ExecuteCmdRuntime("adb -s " + devID + " shell dumpsys package " + appPackage).trim();
+            if ("".equals(v.trim())) {
+                txtLog.append("=== appPackage  " + appPackage + " - no information\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+                return;
+            }
+//            if(v.contains("pkg=Package{")){
+//                Hash = v.substring(v.indexOf("pkg=Package{") + 12); // // pkg=Package{f2241b0 com.compass_canada.boost}  <<<< hash ??
+//                Hash = Hash.substring(0, Hash.indexOf(" ")).trim();                
+//            }
+            if(v.contains("versionName") && v.contains("versionCode")) {
+                v1 = v.substring(v.indexOf("versionName"));
+                v1 = v1.substring(0, v1.indexOf("\r\n"));
+                v1 = v1.substring(v1.indexOf("=") + 1).trim();
+                v2 = v.substring(v.indexOf("versionCode"));
+                v2 = v2.substring(0, v2.indexOf("\r\n"));
+                v2 = v2.substring(v2.indexOf("=") + 1);
+                v2 = v2.substring(0, v2.indexOf(" "));
+                appVersion = "v" + v1 + "(" + v2 + ")"; // Git Hash: " + Hash;
+            }
+            txtLog.append("=== appPackage: " + appPackage + " > " + appVersion + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         } catch (Exception ex) {
-            txtLog.append("=== Install APK > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        }  
+            txtLog.append("-GetAppVersion: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());      
+        } 
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));          
+    }
+
+    private void InstallBuild_S3(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));  
+        txtLog.append("-S3 Download, Unzip, Install APK ..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        
+        if(Download_Build()){
+            if(Unzip_Build()){
+                UnInstaPackage(appPackage);
+                String BuildPath = System.getProperty("user.dir") + File.separator + "MobileBuilds" + File.separator + appBuldFile;
+                InstallBuild(BuildPath);
+            }
+        }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));     
     }
-  
-    private void InstallAllAppTester() {
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));  
-        txtLog.append("-Install All APK(s) - App Tester ..." + "\r\n");
+    private boolean Download_Build(){
+        txtLog.append("== Download_Build > " + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        try{
-            
-
-        } catch (Exception ex) {
-            txtLog.append("=== Install All APK(s) - App Tester > ERROR: " + ex.getMessage() + "\r\n");
+        String cwd = System.getProperty("user.dir");        
+        String dir = cwd + File.separator + "MobileBuilds"; 
+        String S = String.valueOf(DV3.getValueAt(DV3.getSelectedRow(), 0));
+        try {                        
+            AmazonS3 s3client = AmazonS3ClientBuilder
+                    .standard()
+                    .withCredentials(new AWSStaticCredentialsProvider(AWS_credentials))
+                    .withRegion(Regions.US_EAST_1)
+                    .build();
+            S3Object s3object = s3client.getObject("mobile-app-repos", S);
+            S3ObjectInputStream inputStream = s3object.getObjectContent();
+            FileUtils.copyInputStreamToFile(inputStream, new File(dir + File.separator + "x.zip"));
+            txtLog.append("== Build " + S + "\r\n" + "downloaded in " + dir + " as x.zip" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        }  
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));         
-    }
-    // <editor-fold defaultstate="collapsed" desc="btnAPK_Click > App Tester" >
-    /*    DialogResult res = MessageBox.Show("Pull " + app + " " + ver + " APK file from " + cmbDEV.Text + " device to your desktop?" +
-    "\r\nIf " + app + " " + ver + " file already exists it will be replaced", "Pull APK file", MessageBoxButtons.YesNo);
-    if (res == DialogResult.No) {
-     return;
-    }
-    Cursor = Cursors.WaitCursor;
-    btnAPK.Enabled = false;
-    btnAPK_IN.Enabled = false;
-    btnRUN.Enabled = false;
-    btnDEV.Enabled = false;
-    try
-    {
-    string C = "";
-    string R = "";
-    C = "adb shell pm path " + appPackage;
-    R = new WinCmd().ExecuteWinCmd(@"", C, true, false, true);
-    txtLOG.AppendText("\r\n= " + R.Trim());
-    C = "adb pull " + R.Trim().Substring(R.IndexOf(":") + 1) + " " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\";
-    R = new WinCmd().ExecuteWinCmd(@"", C, true, false, true);
-    txtLOG.AppendText("\r\n= " + R + "\r\n");
-    
-    File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + app + v1 + "(" + v2 + ").apk");
-    File.Move(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\base.apk", Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + app + v1 + "(" + v2 + ").apk");
-    txtLOG.AppendText("\r\n= File saved: " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + app + v1 + "(" + v2 + ").apk" + "\r\n");
-    }
-    catch (Exception ex)
-    {
-    txtLOG.AppendText("\r\n= Pull APK: " + ex.Message);
-    }
-    
-    btnAPK.Enabled = true;
-    btnAPK_IN.Enabled = true;
-    btnRUN.Enabled = true;
-    btnDEV.Enabled = true;
-    Cursor = Cursors.Default;
-    }
-    private void btnAPK_IN_Click(object sender, EventArgs ea)
-    {
-    //DialogResult res = MessageBox.Show("Select and Install APK file on " + cmbDEV.Text + " device?", "Install APK", MessageBoxButtons.YesNo);
-    //if (res == DialogResult.No)
-    //{
-    //    return;
-    //}
-    //string APK = "";
-    //OpenFileDialog opf = new OpenFileDialog();
-    //opf.InitialDirectory = @"C:\xTT\NewSites";
-    //opf.Filter = "APK Files(*.apk)|*.apk";
-    //opf.DefaultExt = ".apk";
-    //DialogResult result = opf.ShowDialog(); // Show the dialog.
-    //if (result == DialogResult.Cancel) // Test result.
-    //{
-    //    return;
-    //}
-    
-    //APK = opf.FileName;
-    
-    Cursor = Cursors.WaitCursor;
-    btnAPK.Enabled = false;
-    btnAPK_IN.Enabled = false;
-    btnRUN.Enabled = false;
-    btnDEV.Enabled = false;
-    txtLOG.AppendText("\r\n\r\n=== Starting App Tester...");
-    
-    waitElement = Convert.ToInt32(nWaitElement.Value); // sec
-    waitLoad = Convert.ToInt32(nWaitLoad.Value); // sec
-    waitAction = Convert.ToInt32(nTIMEOUT.Value); // sec
-    devID = cmbDEV.Text;
-    ID = txtEMail.Text;
-    PW = txtPW.Text;
-    
-    Swipe_WakeUp(); // ===================
-    StartAppium();  // ===================
-    
-    try
-    {
-    AppiumOptions c = new AppiumOptions();
-    c.PlatformName = "Android";
-    c.AddAdditionalCapability("platformVersion", OS_Ver);
-    c.AddAdditionalCapability("deviceName", "Test Device");
-    //c.AddAdditionalCapability("clearSystemFiles", true);
-    c.AddAdditionalCapability("appPackage", "dev.firebase.appdistribution"); // dev.firebase.appdistribution:id/row
-    c.AddAdditionalCapability("appActivity", "dev.firebase.appdistribution.main.MainActivity");
-    c.AddAdditionalCapability("udid", cmbDEV.Text);
-    c.AddAdditionalCapability("autoGrantPermissions", false); // false- always get prompt
-    c.AddAdditionalCapability("unicodeKeyboard", false);
-    c.AddAdditionalCapability("resetKeyboard", false);
-    c.AddAdditionalCapability("systemPort", systemPort);
-    c.AddAdditionalCapability("automationName", Automator);  // ============ UiAutomator2 / Appium ===========
-    d = new AndroidDriver<AndroidElement>(new Uri(appium_url), c, TimeSpan.FromSeconds(waitAction));
-    d.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3); // waitElement <<<<<<<<<<<<<<<<<<
-    wait = new WebDriverWait(d, new TimeSpan(0, 0, 15)); // waitLoad)
-    
-    try
-    {
-    txtLOG.AppendText("\r\n" + "Check 'Sign In...' required");
-    txtLOG.Refresh();
-    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("signInButton")));
-    d.FindElement(By.Id("signInButton")).Click();
-    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("com.google.android.gms:id/account_name")));
-    txtLOG.AppendText("\r\n" + "'Sign In...' required - Click...");
-    txtLOG.Refresh();
-    d.FindElement(By.Id("com.google.android.gms:id/account_name")).Click();
-    txtLOG.AppendText("\r\n" + "'account_name' click");
-    txtLOG.Refresh();
-    }
-    catch (Exception ex)
-    {
-    txtLOG.AppendText("\r\n" + "=== 'Sign In...' ERROR - " + ex.Message);
-    txtLOG.Refresh();
-    }
-    
-    
-    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("app_name")));
-    Thread.Sleep(1000);
-    DT = d.FindElements(By.Id("app_name"));
-    int app_count = DT.Count;
-    if (app_count > 0)
-    {
-    txtLOG.AppendText("\r\n   Found Applications- total " + DT.Count + ": ");
-    for (int i = 0; i < app_count; i++)
-    {
-    txtLOG.AppendText("\r\n   - " + (i+1)  + ": " + DT[i].Text);
-    txtLOG.Refresh();
-    }
-    for (int i = 0; i < app_count; i++)
-    {
-    e = d.FindElements(By.Id("app_name"))[i]; // [i+1];
-    string app = e.Text;
-    e.Click();
-    string t = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("version_info"))).Text;
-    txtLOG.AppendText("\r\n=====  Processing App " + (i + 1) + " - " + app + " v:" + t + " ...");
-    txtLOG.Refresh();
-    try
-    {
-    d.FindElement(By.Id("download_button")).Click();
-    try
-    {
-    //txtLOG.AppendText("\r\n- " + "download_button" + " Found - start Download, wait 'progress_bar'...");
-    //txtLOG.Refresh();
-    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementLocated(By.Id("progress_bar")));
-    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("com.android.packageinstaller:id/ok_button")));
-    //txtLOG.AppendText("\r\n- " + "com.android.packageinstaller:id/ok_button" + " Found - start Install, wait 'progress_bar'...");
-    //txtLOG.Refresh();
-    d.FindElement(By.Id("com.android.packageinstaller:id/ok_button")).Click();
-    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementLocated(By.Id("progress_bar")));
-    t = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("installed_version_info"))).Text;
-    txtLOG.AppendText("\r\n- " + t );//"installed_version_info > " +
-    txtLOG.Refresh();
-    
-    d.FindElement(By.Id("back_arrow")).Click();
-    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("app_name")));
-    }
-    catch(Exception ex)
-    {
-    txtLOG.AppendText("\r\nDownload/Install failed: " + ex.Message);
-    txtLOG.Refresh();
-    }
-    }
-    catch
-    {
-    txtLOG.AppendText("\r\nNo Download button found");
-    d.FindElement(By.Id("back_arrow")).Click();
-    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("app_name")));
-    }
-    }
-    }
-    else
-    {
-    txtLOG.AppendText("\r\n\r\n=== " + "No Applications found");
-    txtLOG.Refresh();
-    }
-    }
-    catch (Exception ex)
-    {
-    txtLOG.AppendText("\r\n\r\n=== " + ex.Message);
-    txtLOG.Refresh();
-    }
-    
-    //string C = "";
-    //string R = "";
-    //C = "adb -s " + cmbDEV.Text + " install -r " + APK;
-    //txtLOG.AppendText("\r\n= Running '" + C + "'...");
-    //R = new WinCmd().ExecuteWinCmd(@"", C, true, false, true);
-    //txtLOG.AppendText("\r\n= " + R.Trim());
-    
-    if (d != null)
-    {
-    d.Quit();
-    }
-    txtLOG.AppendText("\r\n\r\n=== App Tester Finished @" + DateTime.Now.ToString("dd-MMM hh:mmtt"));
-    txtLOG.Refresh();
-    
-    btnAPK.Enabled = true;
-    btnAPK_IN.Enabled = true;
-    btnRUN.Enabled = true;
-    btnDEV.Enabled = true;
-    Cursor = Cursors.Default;
-    }*/
-    // </editor-fold>   
-
-
-    private void StartAppium(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
-        txtLog.append("-Starting Appium server (" + appium_url + "\r\n");
+            return true;
+        } catch (SdkClientException | IOException ex) {
+            txtLog.append("== " + "Download_Build: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            return false;
+        }
+    }    
+    private boolean Unzip_Build (){
+        txtLog.append("== Unzip_Build > " + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());        
-        String v = Func.ExecuteCmdRuntime("appium -a 127.0.0.1 -p " + appium_port).trim();
-        String rp = "";
-//        for (int j = 0; j < 21; j++) {
-//            try
-//            {
-//                HttpWebRequest req = (HttpWebRequest)WebRequest.Create("http://localhost:" + appium_port + "/wd/hub/status");
-//                req.Method = "GET";
-//                using (HttpWebResponse r = (HttpWebResponse)req.GetResponse())
-//                {
-//                    StreamReader readStream = new StreamReader(r.GetResponseStream(), System.Text.Encoding.UTF8);
-//                    rp = "\r\n" + readStream.ReadToEnd().Replace("\n", "\r\n");
-//                    r.Close();
-//                    readStream.Close();
-//                }
-//            }
-//            catch (Exception ex) {}
-//            Thread.sleep(500);
-//            if (j == 19)
-//            {
-//                txtLog.append("Cannot start Appium - 20*500ms attempts\r\n");
-//                break;
-//            }
-//            else if (rp.contains("\"version\":"))
-//            {
-//                break;
-//            }
-//        }
-
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));        
-    }
-    private boolean AndroidDriver() {
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        String cwd = System.getProperty("user.dir");        
+        String dir = cwd + File.separator + "MobileBuilds"; 
+        File zip_source = new File(dir + File.separator + "x.zip");
+        File destDir = new File(dir);
+        byte[] buffer = new byte[1024];
         try {
-            String cwd = System.getProperty("user.dir");
-            txtLog.append("=== CWD: " + cwd + "\r\n");
+            try (ZipInputStream zis = new ZipInputStream(new FileInputStream(zip_source))) {
+                ZipEntry zipEntry = zis.getNextEntry();
+                appBuldFile = zipEntry.getName();
+                while (zipEntry != null) {
+                    File newFile = newUnzipFile(destDir, zipEntry);
+                    if (zipEntry.isDirectory()) {
+//                        txtLog.append("== " + newFile + " is directory" + "\r\n");
+//                        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                    } else { // fix for Windows-created archives
+                        File zipParent = newFile.getParentFile(); 
+//                        txtLog.append("== " + zipParent + " is Directory" + "\r\n");
+//                        txtLog.setCaretPosition(txtLog.getDocument().getLength());   
+
+                        if (!zipParent.isDirectory() && !zipParent.mkdirs()) {
+                            txtLog.append("== " + "Failed to create directory " + zipParent + "\r\n");
+                            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                        }
+
+                        FileOutputStream fos = new FileOutputStream(newFile);
+                        int len;
+                        while ((len = zis.read(buffer)) > 0) {
+                            fos.write(buffer, 0, len);
+                        }
+                        fos.close();
+                    }
+                    zipEntry = zis.getNextEntry();
+                }
+                zis.closeEntry();
+                zis.close();
+            }
+
+            txtLog.append("== " + "Unzipped Build: " + appBuldFile + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            
-            if(WsOS.toLowerCase().contains("windows")){
-                //
+            return true; 
+        } catch (IOException ex) {
+            txtLog.append("== " + "Unzip_Build: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            return false;
+        }
+    }      
+    private static File newUnzipFile(File destinationDir, ZipEntry zipEntry) throws IOException {
+        File destFile = new File(destinationDir, zipEntry.getName());
+
+        String destDirPath = destinationDir.getCanonicalPath();
+        String destFilePath = destFile.getCanonicalPath();
+
+        if (!destFilePath.startsWith(destDirPath + File.separator)) {
+            throw new IOException("Entry is outside of the target dir: " + zipEntry.getName());
+        }
+        return destFile;
+    }
+
+    private void UnInstaPackage(String PKG) {
+        txtLog.append("== UnInstall Package " + PKG + " > " + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        String cwd = System.getProperty("user.dir");  
+        String I = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " uninstall " + PKG, cwd, true, true).trim();
+        txtLog.append(I + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+    } 
+    private void InstallBuild(String BuildFile) {
+        txtLog.append("== Install Build: " + BuildFile + " > " + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        String cwd = System.getProperty("user.dir");  
+        String I = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " install " + BuildFile, cwd, true, true).trim();
+        txtLog.append(I + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        CheckAppPackage();
+    }  
+
+    private void InstallAllAppTester() {
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
+        btnRun.setEnabled(false);
+        btnGetScreenshot.setEnabled(false);
+        btnGetAPK.setEnabled(false);
+        btnS3Install.setEnabled(false);
+        btnInstallAll.setEnabled(false); 
+        
+        txtLog.append("\r\n-Install All APK(s) - App Tester ..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        
+        Swipe_WakeUp(); // ===================  
+        
+        try {
+            if(sw1.isRunning()){
+                sw1.reset();
             }
-            if(WsOS.toLowerCase().contains("mac")){
-                //
-            }
-//                DesiredCapabilities  c = new DesiredCapabilities ();
-//                c.setPlatform("Android");
-//                c.AddAdditionalCapability("platformVersion", OS_Ver);
-//                c.AddAdditionalCapability("deviceName", "Test Device");
-//                //c.AddAdditionalCapability("clearSystemFiles", true);
-//                c.AddAdditionalCapability("appPackage", "dev.firebase.appdistribution"); // dev.firebase.appdistribution:id/row
-//                c.AddAdditionalCapability("appActivity", "dev.firebase.appdistribution.main.MainActivity");
-//                c.AddAdditionalCapability("udid", devID);
-//                c.AddAdditionalCapability("autoGrantPermissions", false); // false- always get prompt
-//                c.AddAdditionalCapability("unicodeKeyboard", false);
-//                c.AddAdditionalCapability("resetKeyboard", false);
-//                c.AddAdditionalCapability("systemPort", systemPort);
-//                c.AddAdditionalCapability("automationName", Automator);  // ============ UiAutomator2 / Appium ===========
-//                ad = new AndroidDriver<AndroidElement>(new Uri(appium_url), c, TimeSpan.FromSeconds(waitAction));  
-                
-            ad.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.SECONDS);
-            ad.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.SECONDS);
+            sw1.start();  
+
+            DesiredCapabilities  cap = new DesiredCapabilities ();
+            cap.setCapability("platformName", "Android");
+            cap.setCapability("deviceName", devModel);
+            cap.setCapability("platformVersion", devOS);
+            cap.setCapability("clearSystemFiles", true);
+            cap.setCapability("appPackage", "dev.firebase.appdistribution");
+            cap.setCapability("appActivity", "dev.firebase.appdistribution.main.MainActivity");
+            cap.setCapability("udid", devID);
+            cap.setCapability("autoGrantPermissions", false); // false- always get prompt
+            cap.setCapability("unicodeKeyboard", false);
+            cap.setCapability("resetKeyboard", false);
+            cap.setCapability("automationName", Automator);  // ============ UiAutomator2 / Appium ===========
+            cap.setCapability("systemPort", systemPort);
             
+            appiumService = AppiumDriverLocalService.buildDefaultService();
+            appiumService.start();
+            ad = new AndroidDriver(new URL(appium_url), cap);             
             ad.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
+            
             fluentWait = new FluentWait(ad).withTimeout(Duration.ofMillis(WaitForElement))			
 			.pollingEvery(Duration.ofMillis(200))  			
 			.ignoring(NoSuchElementException.class);        // fluentWait for Visible / Clickable   
             wait = new WebDriverWait(ad, (long) LoadTimeOut);                // for load > progress 
+            
+            txtLog.append("=== Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            sw1.reset();
+            
+            try{
+                wait.until(ExpectedConditions.presenceOfElementLocated(By.id("signInButton")));
+                ad.findElement(By.id("signInButton")).click();
+                wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.google.android.gms:id/account_name")));
+                ad.findElement(By.id("com.google.android.gms:id/account_name")).click();
+            } catch (Exception ex) {
+                txtLog.append("=== 'Sign In...' ERROR - " + ex.getMessage()  + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.id("app_name")));
+            Thread.sleep(1000);
+            L0 = ad.findElements(By.id("app_name"));
+            int app_count = L0.size();
+            if (app_count > 0) {
+                txtLog.append("Found Applications - total " + app_count + ": " + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                for (int i = 0; i < L0.size(); i++) {
+                    txtLog.append("   - " + (i+1)  + ": " + L0.get(i).getText() + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                }
+                for (int i = 0; i < app_count; i++) {
+                    e = ad.findElements(By.id("app_name")).get(i); 
+                    String appName = e.getText();
+                    e.click();
+                    String t = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("version_info"))).getText();
+                    txtLog.append("=====  Processing App " + (i + 1) + " - " + appName + " v:" + t + " ..." + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                    try {
+                        ad.findElement(By.id("download_button")).click();
+                        try {
+
+                            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("progress_bar")));
+                            wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.android.packageinstaller:id/ok_button")));
+                            ad.findElement(By.id("com.android.packageinstaller:id/ok_button")).click();
+                            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("progress_bar")));
+                            t = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("installed_version_info"))).getText();
+                            txtLog.append("- " + t  + "\r\n");
+                            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                            ad.findElement(By.id("back_arrow")).click(); 
+                            wait.until(ExpectedConditions.presenceOfElementLocated(By.id("app_name")));
+                        } catch(Exception ex) {
+                            txtLog.append("Download/Install failed: " + ex.getMessage() + "\r\n");
+                            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                        }
+                    } catch (Exception ex){
+                        txtLog.append("No Download button found" + "\r\n");
+                        ad.findElement(By.id("back_arrow")).click();
+                        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("app_name")));
+                    }
+                }
+            } else {
+                txtLog.append("=== " + "No Applications found" + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            } 
+        } catch (Exception ex) {
+            txtLog.append("=== App Tester ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        }            
+        if(ad != null) {
+            ad.quit(); 
+        }
+        if(appiumService != null && appiumService.isRunning()){
+            appiumService.stop();                    
+        }
+        
+        btnRun.setEnabled(true);
+        btnGetScreenshot.setEnabled(true);
+        btnGetAPK.setEnabled(true);
+        btnS3Install.setEnabled(true);
+        btnInstallAll.setEnabled(true); 
+        
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));         
+    }       
+
+    private boolean AndroidDriver() {
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        try {
+            DesiredCapabilities  cap = new DesiredCapabilities ();
+            cap.setCapability("platformName", "Android");
+            cap.setCapability("deviceName", devModel);
+            cap.setCapability("platformVersion", devOS);
+            cap.setCapability("clearSystemFiles", true);
+            cap.setCapability("appPackage", appPackage);
+            cap.setCapability("appActivity", appActivity);
+            cap.setCapability("udid", devID);
+            cap.setCapability("autoGrantPermissions", false); // false- always get prompt
+            cap.setCapability("unicodeKeyboard", false);
+            cap.setCapability("resetKeyboard", true);
+            cap.setCapability("sendKeyStrategy", "oneByOne");
+            cap.setCapability("automationName", Automator);  // ============ UiAutomator2 / Appium ===========
+            cap.setCapability("systemPort", systemPort);
+
+            appiumService = AppiumDriverLocalService.buildDefaultService();
+            appiumService.start();
+            ad = new AndroidDriver(new URL(appium_url), cap);             
+            ad.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
+            
+            fluentWait = new FluentWait(ad).withTimeout(Duration.ofMillis(WaitForElement))			
+			.pollingEvery(Duration.ofMillis(200))  			
+			.ignoring(NoSuchElementException.class);        // fluentWait for Visible / Clickable   
+            wait = new WebDriverWait(ad, (long) LoadTimeOut);                // for load > progress 
+            
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
         } catch (Exception ex) {
-            txtLog.append("=== MOB Driver > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.append("=== Android Driver > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return false;
         }   
+    }
+    private void Swipe_WakeUp(){       
+        txtLog.append("-Swipe_WakeUp " + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+        String cwd = System.getProperty("user.dir");
+        String v = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " shell input touchscreen swipe 800 400 400 400 100", cwd, false, false);    
     }
     private void BW1_DoWork() { 
         BW1 = new SwingWorker() {             
@@ -1424,8 +1534,14 @@ public class Android extends javax.swing.JInternalFrame {
 
             @Override
             protected String doInBackground() throws Exception   { // define what thread will do here 
-                New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
-
+            New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
+                
+                if (app.equals("Bolter")) { 
+                    Android_bolter.run();
+                }else{
+                    Android_coreapp.run();
+                }
+               
                 if(_f > 0) {
                     return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
                 }else{
@@ -1437,7 +1553,7 @@ public class Android extends javax.swing.JInternalFrame {
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
                 txtLog.append("========   " + "Execution step-by-step log..." + "   ========" + "\r\n");  
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
-                EX = "Android " + env + ", v" + Ver + ", Device: " + devModel + " OSv: " + devOS +
+                EX = "Android " + app + " " + env + ", vervion: " + appVersion + ", Device: " + devModel + " OS version: " + devOS +
                 " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                  "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                  + EX;
@@ -1451,15 +1567,19 @@ public class Android extends javax.swing.JInternalFrame {
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
                     
                     BW1 = null;
-                    
-                    if(ad != null) {
-                        ad.quit(); 
-                    }
+                 
                 }  
                 catch (InterruptedException | ExecutionException ex)  { 
                     txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
                     txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                 } 
+                if(ad != null) {
+                    ad.quit(); 
+                }
+                if(appiumService != null && appiumService.isRunning()){
+                    appiumService.stop();                    
+                }
+
                 DD = Duration.between(dw_start, Instant.now());
                 Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
                 
@@ -1498,7 +1618,7 @@ public class Android extends javax.swing.JInternalFrame {
 
                 txtLog.append("=== " + Summary); // Summary shown in EX top
                 txtLog.append("=== Scope: " + SCOPE); // SCOPE shown in EX top
-                txtLog.append("=== Device: " + devModel + " OSv: " + devOS + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
+                txtLog.append("=== Android_" + app + "_" + env + ", vervion: " + appVersion + ", Device: " + devModel + " OS version: " + devOS + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
   
                 if(!"".equals(F.trim())){
@@ -1512,7 +1632,7 @@ public class Android extends javax.swing.JInternalFrame {
                 
                 if(_slack.isSelected()){
                     Report(false); 
-                    String MSG = "Android_" + env + " Automation report - " + Report_Date +  
+                    String MSG = "Android_" + app + "_" + env + " Automation report - " + Report_Date +  
                     "\r\n Machine: " + WsID + " OS: " + WsOS + ", User: *" + UserID + "*\r\n" +
                     "Device: *" + devModel + "*, Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
                     "Scope: " + SCOPE + "\r\n" +
@@ -1529,8 +1649,7 @@ public class Android extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         BW1.execute();  // executes the swingworker on worker thread 
     }
-  
-    
+     
     private void LOAD_ENV(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
@@ -1557,6 +1676,25 @@ public class Android extends javax.swing.JInternalFrame {
         Set_Mobile_Package_Name();
         GetPackages(AWS_credentials);
     }
+    private void Get_S3_MOB_Credentials(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));         
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            ResultSet rs1 = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S3_A_Key_MOB'");
+            rs1.next();
+            access_key = rs1.getString(1);
+            ResultSet rs2 = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S3_S_Key_MOB'");
+            rs2.next();
+            secret_key = rs2.getString(1);
+            conn.close();
+            AWS_credentials = new BasicAWSCredentials(
+                new String(Base64.getDecoder().decode(access_key)),
+                new String(Base64.getDecoder().decode(secret_key))
+            );  
+        } catch (SQLException ex) {
+            txtLog.append("= Get_S3_MOB_Credentials > " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        }
+    }
     private void GetPackages(AWSCredentials credentials ){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("-Load Android Packages list ..." + "\r\n");
@@ -1567,53 +1705,49 @@ public class Android extends javax.swing.JInternalFrame {
         PModel.setColumnIdentifiers(SitesColumnsName);
         DV3.setModel(PModel);
         
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        sw1.start();
         String BucketName = "";
         String AppPath = "";
-            //Android app S3 bucket path
-    String mobile_repo_name = "mobile-app-repos";
-    String android_app_path_S3_bucket = "automation/android-coreapp/staging/";
-    String Dev_android_app_path_S3_bucket = "automation/android-coreapp/daily/";
+        //Android app S3 bucket path
+        String mobile_repo_name = "mobile-app-repos";
+        String android_app_path_S3_bucket = "automation/android-coreapp/staging/";
+        String Dev_android_app_path_S3_bucket = "automation/android-coreapp/daily/";
 
-    //iOS app S3 bucket path
-    String Dev_iOS_app_path_S3_bucket = "automation/novus/";
-    String Staging_iOS_app_path_S3_bucket = "automation/novus/regression/";
-    String Staging_iOS_app_path_S3_bucket_bolter = "automation/bolter/";
-    String Prod_iOS_app_path_S3_bucket = "automation/novus/production/";
+        //iOS app S3 bucket path
+        String Dev_iOS_app_path_S3_bucket = "automation/novus/";
+        String Staging_iOS_app_path_S3_bucket = "automation/novus/regression/";
+        String Staging_iOS_app_path_S3_bucket_bolter = "automation/bolter/";
+        String Prod_iOS_app_path_S3_bucket = "automation/novus/production/";
     
         switch (env) {
-                case "PR":
-                    BucketName = "";
-                    break;
-                case "ST":
-                    BucketName = "";
-                    break;
-                case "DE":
-                    BucketName = "";
-                    break;            
+            case "PR":
+                BucketName = "";
+                break;
+            case "ST":
+                BucketName = "";
+                break;
+            case "DE":
+                BucketName = "";
+                break;            
         }
         switch (app) {
-                case "Boost":
-                    AppPath = "";
-                    break;
-                case "Bolter":
-                    AppPath = "";
-                    break;
-                case "JJKitchen":
-                    AppPath = "";
-                    break;            
-                case "Nourish":
-                    AppPath = "";
-                    break;
-                case "Rogers":
-                    AppPath = "";
-                    break;
-                case "Thrive":
-                    AppPath = "";
-                    break; 
+            case "Boost":
+                AppPath = "";
+                break;
+            case "Bolter":
+                AppPath = "";
+                break;
+            case "JJKitchen":
+                AppPath = "";
+                break;            
+            case "Nourish":
+                AppPath = "";
+                break;
+            case "Rogers":
+                AppPath = "";
+                break;
+            case "Thrive":
+                AppPath = "";
+                break; 
         }  
         BucketName =  "mobile-app-repos";//automation
         
@@ -1652,33 +1786,11 @@ public class Android extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             txtLog.append("== " + "GetPackages: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }  
-        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset();        
+        }     
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     } 
-    private void Download_Build(AWSCredentials credentials, String repo_name, String App_Name, String S3_path_to_app, String local_path, String platform, String Environment) throws Exception {
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        try {                        
-            AmazonS3 s3client = AmazonS3ClientBuilder
-                    .standard()
-                    .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                    .withRegion(Regions.US_EAST_1)
-                    .build();
-            S3Object s3object = s3client.getObject(repo_name, S3_path_to_app + App_Name + ".zip");
-            S3ObjectInputStream inputStream = s3object.getObjectContent();
-            FileUtils.copyInputStreamToFile(inputStream, new File(local_path + App_Name + "/" + App_Name + ".zip"));
-            txtLog.append("== " + platform + ": Build successfully download app name = " + App_Name + "(" + Environment + ")" + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());            
-        } catch (Exception ex) {
-            txtLog.append("== " + "Download_Build: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }    
-
     private void Set_Mobile_Package_Name(){
+        appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity"; 
         if ("Boost".equals(app)) {
             appPackage = "com.compass_canada.boost";
         }
@@ -1697,51 +1809,6 @@ public class Android extends javax.swing.JInternalFrame {
         if ("Bolter".equals(app)) {
             appPackage = "io.compassdigital.delivery";
         }
-        
-        loading_ID = "android:id/progress";
-        appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity"; 
-    }
-    private void GetAppVersion(){
-        String D = cmbDevice.getSelectedItem().toString();
-        if(!D.contains("id:")){
-            return;
-        } 
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
-        txtLog.append("-Check device: " + devModel + "  > " + appPackage + " package..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        //String Hash = "Not Found";
-        String v1 = "?";
-        String v2 = "?";
-        appVersion = "Not Found";
-        try{
-            String v = Func.ExecuteCmdRuntime("adb -s " + devID + " shell dumpsys package " + appPackage).trim();
-            if ("".equals(v.trim())) {
-                txtLog.append("=== appPackage  " + appPackage + " - no information\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());
-                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-                return;
-            }
-//            if(v.contains("pkg=Package{")){
-//                Hash = v.substring(v.indexOf("pkg=Package{") + 12); // // pkg=Package{f2241b0 com.compass_canada.boost}  <<<< hash ??
-//                Hash = Hash.substring(0, Hash.indexOf(" ")).trim();                
-//            }
-            if(v.contains("versionName") && v.contains("versionCode")) {
-                v1 = v.substring(v.indexOf("versionName"));
-                v1 = v1.substring(0, v1.indexOf("\r\n"));
-                v1 = v1.substring(v1.indexOf("=") + 1).trim();
-                v2 = v.substring(v.indexOf("versionCode"));
-                v2 = v2.substring(0, v2.indexOf("\r\n"));
-                v2 = v2.substring(v2.indexOf("=") + 1);
-                v2 = v2.substring(0, v2.indexOf(" "));
-                appVersion = "v" + v1 + "(" + v2 + ")"; // Git Hash: " + Hash;
-            }
-            txtLog.append("=== appPackage: " + appPackage + " > " + appVersion + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
-        } catch (Exception ex) {
-            txtLog.append("- GetAppVersion: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());      
-        } 
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));          
     }
     private void GetSites() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -2038,10 +2105,10 @@ public class Android extends javax.swing.JInternalFrame {
                     ", [Result] = ?" +    // 16
                     ", [Status] = ?" +    // 17
                     ", [Excel] = ?" +     // 18
-                    " WHERE [app] = 'Android_" + env + "' AND [Status] = 'Running'");
+                    " WHERE [app] = 'Android_" + app + "_" + env + "' AND [Status] = 'Running'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _update.setString(3, "Android_" + env);
+            _update.setString(3, "Android_" + app + "_" + env);
             _update.setString(4, url);
             _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
             _update.setInt(6, t_calls);
@@ -2109,7 +2176,7 @@ public class Android extends javax.swing.JInternalFrame {
                     ")");
             _insert.setString(1, LocalDateTime.now().format(Date_formatter));
             _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _insert.setString(3, "Android_" + env);
+            _insert.setString(3, "Android_" + app + "_" + env);
             _insert.setString(4, url);
             _insert.setString(5, "Running...");
             _insert.setString(6, "0");
@@ -2287,7 +2354,10 @@ public class Android extends javax.swing.JInternalFrame {
     private static String secret_key;
     private static AWSCredentials AWS_credentials; 
     
-    private AndroidDriver<AndroidElement> ad;
+    private AndroidDriver<AndroidElement> ad = null;
+    private AppiumDriverLocalService appiumService = null;
+    private List<AndroidElement> L0 = null;
+    private List<AndroidElement> L1 = null;
     private AndroidElement e = null;
     private AndroidElement e1 = null;
     private AndroidElement e2 = null;
@@ -2297,13 +2367,13 @@ public class Android extends javax.swing.JInternalFrame {
     private final String appium_url = "http://127.0.0.1:4723/wd/hub";
     private String appPackage = "";
     private String appActivity = "";
-    private String loading_ID = "";
+    private String appBuldFile = "";
     private String appVersion = "";
     private String devID = "";
     private String devModel = "";
     private String devOS = "";
     
-    private final String Automator = "Appium"; // UiAutomator2
+    private final String Automator = "UiAutomator2"; //Appium UiAutomator2
     private final int systemPort = 8290; // UiAutomator2    
     
     private String Last_EX;
@@ -2319,17 +2389,15 @@ public class Android extends javax.swing.JInternalFrame {
     private String C = "";
     private int d1LastRow = -1; 
     private int d2LastRow = -1; 
-    private List<String> GROUP_IDS;
-    private List<String> COMP_IDS;
 
     private String SCOPE;
     
     public static String New_ID = "";
   
+    public static String Mobile_ID;
     public static String Mobile_PW;
-    public static String ADMIN_PW;
-
-    
+    public static String Bolter_ID;
+    public static String Bolter_PW;  
     
     private static String S_Client_ID = "";
     private static String S_Client_Secret  = "";
@@ -2382,11 +2450,13 @@ public class Android extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnFindDevice;
     private javax.swing.JButton btnGetAPK;
     private javax.swing.JButton btnGetScreenshot;
-    private javax.swing.JButton btnInstall;
+    private javax.swing.JButton btnInstallAPK;
     private javax.swing.JButton btnInstallAll;
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;
+    private javax.swing.JButton btnS3Install;
     private javax.swing.JButton btnSave_Opt;
+    private javax.swing.JButton btnScreenshotFolder;
     private javax.swing.JComboBox<String> cmbApp;
     private javax.swing.JComboBox<String> cmbDevice;
     private javax.swing.JComboBox<String> cmbEnv;
