@@ -576,7 +576,7 @@ public class DL extends javax.swing.JInternalFrame {
             }
             @Override
             public void componentHidden(ComponentEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
     }//GEN-LAST:event_formAncestorAdded
@@ -920,8 +920,8 @@ public class DL extends javax.swing.JInternalFrame {
             }
             if(WsOS.toLowerCase().contains("mac")){
                 System.out.println("******** "+cwd+"/chromedriver.exe");
-                //System.setProperty("webdriver.chrome.driver", cwd + "/chromedriver");  
-                System.setProperty("webdriver.chrome.driver", "/Users/prathyusha.deshpande/distilr/BrowserDriver/87/chromedriver");            
+                System.setProperty("webdriver.chrome.driver", cwd + "/chromedriver");  
+               // System.setProperty("webdriver.chrome.driver", "/Users/prathyusha.deshpande/distilr/BrowserDriver/87/chromedriver");            
                 System.setProperty("webdriver.edge.driver",  cwd + "/msedgedriver");  
                 System.setProperty("webdriver.gecko.driver", cwd + "/geckodriver");
                 System.setProperty("webdriver.safari.driver", cwd + "/safaridriver");
@@ -1491,7 +1491,6 @@ public class DL extends javax.swing.JInternalFrame {
 
     private void LOG_UPDATE(){  
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
             PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET " +
                     " [Date] = ?" +       // 1
@@ -1644,7 +1643,8 @@ public class DL extends javax.swing.JInternalFrame {
     public static String env = "";
     private static SwingWorker BW2; 
     private static String Toast_Msg = "";   
-    
+    public static String metricRef=null;
+    public static int count;
     public static int var1;
     public static int var2;
     public static double var3;//0.42//0.05
