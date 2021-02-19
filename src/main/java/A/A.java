@@ -4,10 +4,6 @@
  * and open the template in the editor.
  */
 
-// Test Pull request Branch permission 2nd:
-// Check for at least 1 approval from default reviewers > 
-// chnged to  >
-// Check for at least 1 approval
 package A;
 import Android.Android;
 import AP3.AP3;
@@ -21,8 +17,12 @@ import Orders.Orders;
 import Station.Station;
 import java.awt.Cursor;
 import java.beans.PropertyVetoException;
+import java.io.File;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -590,6 +590,14 @@ public class A extends javax.swing.JFrame {
     }//GEN-LAST:event_Menu_FWMouseClicked
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         Get_User();
+        String cwd = System.getProperty("user.dir");
+        try{
+            Files.createDirectories(Paths.get(cwd + File.separator + "ScreenShots"));           
+            Files.createDirectories(Paths.get(cwd + File.separator + "MobileBuilds"));  
+        } catch(IOException ex){
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Create Directories ERROR: " + ex.getMessage(), ex);
+        }
+
         this.setTitle("JTT v1.0.1" + " - " + "User: " + UserID + ", Machine: " + WsID + ", OS: " + WsOS);
         if (!UserID.toLowerCase().contains("oleg")){
             Register_Login();            
@@ -606,8 +614,6 @@ public class A extends javax.swing.JFrame {
         Menu_API.setToolTipText("Configutation / AP3 API(s)"); 
         MenuReports.setToolTipText("All xTT and JTT reports"); 
         MenuStation.setToolTipText("Site > Brand > Menus(s) difinitions"); 
-        //Open_AP3();
-        //Open_API();
     }//GEN-LAST:event_formWindowOpened
 
     private void Register_Login() {     
