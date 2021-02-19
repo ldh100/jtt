@@ -592,7 +592,7 @@ public class AP3_site {
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Payment Type Dropdown Open", "xpath", "//input[@placeholder='Select Payment Type']/parent::div[@class='v-select__selections']/following-sibling::div", "no_jira");
                     if (FAIL) { return;} 
                     Thread.sleep(500);
-                    _t++; Thread.sleep((long) sleep); TWeb.List_L1("Payment Types Count", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']/descendant::div[@class='v-list__tile__title']", "no_jira");             
+                    _t++; Thread.sleep((long) sleep); TWeb.List_L1("Find 'Payment Types' list", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']/descendant::div[@class='v-list__tile__title']", "no_jira");             
                         if (FAIL) { return;} 
                         
                         for (int j = 0; j < L1.size(); j++) {
@@ -608,7 +608,7 @@ public class AP3_site {
                     _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Refunds Accepted?' text", "Refunds Accepted?", true,"no_jira"); 
                         if (FAIL) { return;}   
                    break;
-                case 2:
+                case 2:     
                     _t++; TWeb.Element_Text("Mealplan section", L0.get(i), "no_jira");             
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Mealplan Info Click", L0.get(i), "no_jira");
