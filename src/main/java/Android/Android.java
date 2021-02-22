@@ -185,20 +185,20 @@ public class Android extends javax.swing.JInternalFrame {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameClosed(evt);
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -559,6 +559,7 @@ public class Android extends javax.swing.JInternalFrame {
         txtLog.setColumns(20);
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         txtLog.setRows(5);
+        txtLog.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtLog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         txtLog.setPreferredSize(null);
@@ -950,7 +951,7 @@ public class Android extends javax.swing.JInternalFrame {
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
         //txtLog.setText("");
-        txtLog.append("=== Execution started @" + LocalDateTime.now().format(Time_12_formatter));
+        txtLog.append("=== Execution started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
         LoadTimeOut = (double)nWaitLoad.getValue();
@@ -987,7 +988,7 @@ public class Android extends javax.swing.JInternalFrame {
         }
 
 
-        txtLog.append("=== Starting MOB Driver..." + "\r\n");
+        txtLog.append("=== Starting Android Driver..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
         r_type = "ad-hoc";
@@ -998,7 +999,7 @@ public class Android extends javax.swing.JInternalFrame {
         sw1.start();
 
         if(AndroidDriver()){
-            txtLog.append("=== MOB Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
+            txtLog.append("=== Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             sw1.reset();
             LOG_START(); // ========================================================
@@ -1013,17 +1014,20 @@ public class Android extends javax.swing.JInternalFrame {
             return;
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("-Take Screenshot..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
         File SCREEN = null;
+        String SS = "";
         try {  
             String file = CWD + File.separator + "ScreenShots" + File.separator + "Mobile_Screen_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMdd_hhmmss")) + ".png";
-            SCREEN = new File(file);
-            String SS = Func.ExecuteCmdProcessBuilder(("adb exec-out screencap -d " + devID + " -p > " + file).trim(), CWD, false, false).trim();
+            SCREEN = new File(file);                      // -d " + devID
+            SS = Func.ExecuteCmdProcessBuilder(("adb exec-out screencap -p > " + file).trim(), CWD, true, true).trim();
             Thread.sleep(3000);
             txtLog.append(SS + "\r\n");
             txtLog.append("= ScreenShot > " + file + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
-        catch (Exception ex) {
+        catch (InterruptedException ex) {
             txtLog.append("= ScreenShot > " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
@@ -1087,13 +1091,13 @@ public class Android extends javax.swing.JInternalFrame {
             
             String where = System.getProperty("user.home") + File.separator + "Desktop";
             //R = Func.ExecuteCmdRuntime("adb -s " + devID + " pull " + R.trim().substring(R.indexOf(":") + 1) + " " + where);
-            R = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " pull " + R.trim().substring(R.indexOf(":") + 1) + " " + where, CWD, true, true).trim();
+            R = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " pull " + R.trim().substring(R.indexOf(":") + 1) + " " + where, where, true, true).trim();
             txtLog.append(R.trim() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
-            Files.move(Paths.get(CWD + File.separator + "base.apk"), Paths.get(CWD + File.separator + app + "_" + appVersion + ".apk"), java.nio.file.StandardCopyOption.REPLACE_EXISTING );
+            Files.move(Paths.get(where + File.separator + "base.apk"), Paths.get(where + File.separator + app + "_" + appVersion + ".apk"), java.nio.file.StandardCopyOption.REPLACE_EXISTING );
             
-            txtLog.append("File Saved: " + CWD + File.separator + app + "_" + appVersion + ".apk" + "\r\n");
+            txtLog.append("File Saved: " + where + File.separator + app + "_" + appVersion + ".apk" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());            
         } catch (IOException ex) {
             txtLog.append("=== Get APK > ERROR: " + ex.getMessage() + "\r\n");
@@ -1153,10 +1157,12 @@ public class Android extends javax.swing.JInternalFrame {
         if (dev.length > 1) {
             for (int i = 1; i < dev.length; i++) {
                 String D = dev[i];
-                String ID = D.substring(0, dev[i].indexOf(" ")).trim();
-                D = D.substring(D.indexOf("model:") + 6);
-                D = D.substring(0, D.indexOf(" ")).trim();
-                cmbDevice.addItem(D + "  id:" + ID);
+                if(D.contains("model")){
+                    String ID = D.substring(0, dev[i].indexOf(" ")).trim();
+                    D = D.substring(D.indexOf("model:") + 6);
+                    D = D.substring(0, D.indexOf(" ")).trim();
+                    cmbDevice.addItem(D + "  id:" + ID);
+                }
             }
             txtLog.append("=== " + Dev + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());                
@@ -1167,7 +1173,6 @@ public class Android extends javax.swing.JInternalFrame {
                     btnGetScreenshot.setEnabled(false); 
                 }
             btnRun.setEnabled(true);
-            btnGetScreenshot.setEnabled(true);
             btnGetAPK.setEnabled(true);
             btnS3Install.setEnabled(true);
             btnInstallAll.setEnabled(true); 
@@ -1353,7 +1358,7 @@ public class Android extends javax.swing.JInternalFrame {
     private void InstallBuild(String BuildFile) {
         txtLog.append("== Install Build: " + BuildFile + " > " + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        String I = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " install " + BuildFile, CWD, true, true).trim();
+        String I = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " install -r " + BuildFile, CWD, true, true).trim();
         txtLog.append(I + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         CheckAppPackage();
@@ -1526,11 +1531,9 @@ public class Android extends javax.swing.JInternalFrame {
     private void BW1_DoWork() { 
         BW1 = new SwingWorker() {             
             Instant dw_start = Instant.now();
-
             @Override
             protected String doInBackground() throws Exception   { // define what thread will do here 
-            New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
-                
+            New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));          
                 if (app.equals("Bolter")) { 
                     Android_bolter.run();
                 }else{

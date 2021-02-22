@@ -142,10 +142,10 @@ public class WO extends javax.swing.JInternalFrame {
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -228,6 +228,7 @@ public class WO extends javax.swing.JInternalFrame {
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         txtLog.setRows(5);
         txtLog.setText("Start >");
+        txtLog.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtLog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLog);

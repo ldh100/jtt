@@ -133,7 +133,6 @@ public class DL extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(860, 532));
         setName("DL"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
-        setPreferredSize(new java.awt.Dimension(860, 532));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -229,6 +228,7 @@ public class DL extends javax.swing.JInternalFrame {
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         txtLog.setRows(5);
         txtLog.setText("Start >");
+        txtLog.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtLog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLog);

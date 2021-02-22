@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
@@ -61,6 +59,7 @@ public class Func {
     }
     public static String ExecuteCmdProcessBuilder(String cmd, String Cwd, boolean waitFor, boolean ReturnOutput){
         String output = "";
+        Process p = null;
         try {
             ProcessBuilder b = new ProcessBuilder();           
             b.directory(new File(Cwd));  
@@ -72,7 +71,7 @@ public class Func {
                 b.command(ios_cmd);    
             }
 
-            Process p = b.start();
+            p = b.start();
             if(ReturnOutput){
                 BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 String line;
@@ -83,10 +82,12 @@ public class Func {
             if(waitFor){
                 int exitCode = p.waitFor();
                 output += "\nExited with error code : " + exitCode;                   
-            }        
-         } catch(IOException | InterruptedException ex){
-             output = ex.getMessage();
-         }
+            }   
+        } catch(IOException | InterruptedException ex){
+            output = ex.getMessage();
+        } finally{
+            p.destroyForcibly();
+        }
        return output;   
     }
     public static String SHOW_LOG_FILE(String BODY, String EXT){
