@@ -59,16 +59,17 @@ public class Func {
         }
        return output;   
     }
-    public static String ExecuteCmdProcessBuilder(String cmd, String cwd, boolean waitFor, boolean ReturnOutput){
+    public static String ExecuteCmdProcessBuilder(String cmd, String Cwd, boolean waitFor, boolean ReturnOutput){
         String output = "";
         try {
-            ProcessBuilder b = new ProcessBuilder();
-            b.directory(new File(cwd));
+            ProcessBuilder b = new ProcessBuilder();           
+            b.directory(new File(Cwd));  
             if(WsOS.toLowerCase().contains("windows")){
                 b.command("cmd.exe", "/c", cmd);            
             }
             if(WsOS.toLowerCase().contains("mac")){
-                b.command(cmd);            
+                String[] ios_cmd = cmd.split(" ");
+                b.command(ios_cmd);    
             }
 
             Process p = b.start();
@@ -91,8 +92,8 @@ public class Func {
     public static String SHOW_LOG_FILE(String BODY, String EXT){
         File aLog = null;
         try {
-            String userHomeFolder = System.getProperty("user.home") + File.separator + "Desktop"; 
-            aLog = new File(userHomeFolder + File.separator + "aLog." + EXT);
+            String userDesktop = System.getProperty("user.home") + File.separator + "Desktop"; 
+            aLog = new File(userDesktop + File.separator + "aLog." + EXT);
             Files.write(Paths.get(aLog.getPath()), BODY.getBytes());
             java.awt.Desktop.getDesktop().open(aLog);
             return "OK";

@@ -1021,21 +1021,20 @@ public class WO extends javax.swing.JInternalFrame {
     private boolean Driver() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
-            String cwd = System.getProperty("user.dir");
-            txtLog.append("=== CWD: " + cwd + "\r\n");
+            txtLog.append("=== CWD: " + CWD + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             
             if(WsOS.toLowerCase().contains("windows")){
-                System.setProperty("webdriver.chrome.driver", cwd + "\\chromedriver.exe");                
-                System.setProperty("webdriver.edge.driver", cwd + "\\msedgedriver.exe");  
-                System.setProperty("webdriver.gecko.driver", cwd + "\\geckodriver.exe"); 
-                System.setProperty("webdriver.ie.driver", cwd + "\\IEDriverServer.exe"); 
+                System.setProperty("webdriver.chrome.driver", CWD + "\\chromedriver.exe");                
+                System.setProperty("webdriver.edge.driver", CWD + "\\msedgedriver.exe");  
+                System.setProperty("webdriver.gecko.driver", CWD + "\\geckodriver.exe"); 
+                System.setProperty("webdriver.ie.driver", CWD + "\\IEDriverServer.exe"); 
             }
             if(WsOS.toLowerCase().contains("mac")){
-                System.setProperty("webdriver.chrome.driver", cwd + "/chromedriver");                
-                System.setProperty("webdriver.edge.driver", cwd + "/msedgedriver");  
-                System.setProperty("webdriver.gecko.driver", cwd + "/geckodriver");
-                System.setProperty("webdriver.safari.driver", cwd + "/safaridriver");
+                System.setProperty("webdriver.chrome.driver", CWD + "/chromedriver");                
+                System.setProperty("webdriver.edge.driver", CWD + "/msedgedriver");  
+                System.setProperty("webdriver.gecko.driver", CWD + "/geckodriver");
+                System.setProperty("webdriver.safari.driver", CWD + "/safaridriver");
             }
             switch (cmbBrow.getSelectedItem().toString()) {
                 case "Chrome":
