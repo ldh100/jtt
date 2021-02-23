@@ -180,6 +180,7 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         txtLog.setRows(5);
         txtLog.setText("Start >");
+        txtLog.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtLog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLog);
@@ -188,7 +189,6 @@ public class Station extends javax.swing.JInternalFrame {
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText("Log");
-        btnLog.setActionCommand("Log");
         btnLog.setMargin(new java.awt.Insets(2, 4, 2, 4));
         btnLog.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
