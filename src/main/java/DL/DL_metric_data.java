@@ -8,6 +8,8 @@ package DL;
 import A.TWeb;
 import static A.A.*;
 import static DL.DL.*;
+import java.time.LocalDateTime;
+import java.util.concurrent.TimeUnit;
 /**
  *
  * @author Oleg.Spozito
@@ -19,9 +21,9 @@ public class DL_metric_data {
 	    	 System.out.println("count "+i);
 	    	 count = i;
 	    	 if(i==1) 
-	    		 metricRef="Compared to Last Month";
+	    		 metricRef="Compared to last month";
 	    	 if(i==2) 
-	    		 metricRef="Compared to Last Week";	 
+	    		 metricRef="Compared to last week";	 
 	    	 
 	    	 MetricCardsSelection();
 	     }
@@ -134,4 +136,4 @@ public class DL_metric_data {
     }
 
     }
-  
+
