@@ -165,6 +165,7 @@ public class JIRA extends javax.swing.JInternalFrame {
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         txtLog.setRows(5);
         txtLog.setText("Start >");
+        txtLog.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtLog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLog);
@@ -543,23 +544,22 @@ public class JIRA extends javax.swing.JInternalFrame {
     private boolean Driver() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
-            String cwd = System.getProperty("user.dir");
-            txtLog.append("=== CWD: " + cwd + "\r\n");
+            txtLog.append("=== CWD: " + CWD + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             
             if(WsOS.toLowerCase().contains("windows")){
-                System.setProperty("webdriver.chrome.driver", cwd + "\\chromedriver.exe");                
-                System.setProperty("webdriver.edge.driver", cwd + "\\msedgedriver.exe");  
-                System.setProperty("webdriver.gecko.driver", cwd + "\\geckodriver.exe"); 
-                System.setProperty("webdriver.ie.driver", cwd + "\\IEDriverServer.exe"); 
+                System.setProperty("webdriver.chrome.driver", CWD + "\\chromedriver.exe");                
+                System.setProperty("webdriver.edge.driver", CWD + "\\msedgedriver.exe");  
+                System.setProperty("webdriver.gecko.driver", CWD + "\\geckodriver.exe"); 
+                System.setProperty("webdriver.ie.driver", CWD + "\\IEDriverServer.exe"); 
             }
             if(WsOS.toLowerCase().contains("mac")){
-                System.out.println("******** "+cwd+"/chromedriver.exe");
-                //System.setProperty("webdriver.chrome.driver", cwd + "/chromedriver");  
+                System.out.println("******** "+CWD+"/chromedriver.exe");
+                //System.setProperty("webdriver.chrome.driver", CWD + "/chromedriver");  
                 System.setProperty("webdriver.chrome.driver", "/Users/prathyusha.deshpande/distilr/BrowserDriver/87/chromedriver");            
-                System.setProperty("webdriver.edge.driver",  cwd + "/msedgedriver");  
-                System.setProperty("webdriver.gecko.driver", cwd + "/geckodriver");
-                System.setProperty("webdriver.safari.driver", cwd + "/safaridriver");
+                System.setProperty("webdriver.edge.driver",  CWD + "/msedgedriver");  
+                System.setProperty("webdriver.gecko.driver", CWD + "/geckodriver");
+                System.setProperty("webdriver.safari.driver", CWD + "/safaridriver");
             }
             switch (cmbBrow.getSelectedItem().toString()) {
                 case "Chrome":

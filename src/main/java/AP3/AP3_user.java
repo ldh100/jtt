@@ -428,7 +428,7 @@ public class AP3_user {
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Admin 'Site Permissions'", "Site Permissions", false,"no_jira");  
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Admin 'Menu Scheduler'", "Menu Scheduler", false,"no_jira");  
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Admin 'Brand Config'", "Brand Config", false,"no_jira");  
-        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Admin 'Smart Analytics'", "Smart Analytics", true,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Admin 'Smart Analytics'", "Smart Analytics", false,"no_jira"); 
         
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
             if (FAIL) { return; }  
@@ -681,7 +681,7 @@ public class AP3_user {
             _t++; Thread.sleep((long) sleep); TWeb.Find_Text("SM Assigned Site", SITE, true,"no_jira"); 
             _t++; Thread.sleep((long) sleep); TWeb.Find_Text("SM 'Menu Scheduler'", "Menu Scheduler", true,"no_jira");  
             _t++; Thread.sleep((long) sleep); TWeb.Find_Text("SM 'Brand Config'", "Brand Config", false,"no_jira");  
-            _t++; Thread.sleep((long) sleep); TWeb.Find_Text("SM 'Smart Analytics'", "Smart Analytics", true,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); TWeb.Find_Text("SM 'Smart Analytics'", "Smart Analytics", false,"no_jira"); 
         
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
                 if (FAIL) { return; }  
@@ -945,7 +945,7 @@ public class AP3_user {
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("DM Assigned Site", SITE, true,"no_jira");         
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("DM 'Menu Scheduler'", "Menu Scheduler", true,"no_jira");  
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("DM 'Brand Config'", "Brand Config", true,"no_jira");  
-        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("DM 'Smart Analytics'", "Smart Analytics", true,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("DM 'Smart Analytics'", "Smart Analytics", false,"no_jira"); 
         
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
                 if (FAIL) { return; }    
