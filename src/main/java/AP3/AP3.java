@@ -971,11 +971,11 @@ public class AP3 extends javax.swing.JInternalFrame {
         GL_MENU = cmbComp.getSelectedItem().toString();
 
         if(_headless.isSelected()) {
-            txtLog.append("\r\n=== Headless mode is selected - Browser is hidden");
-            txtLog.append("\r\n=== Please wait for report...\r\n");
+            txtLog.append("=== Headless mode is selected - Browser is hidden");
+            txtLog.append("=== Please wait for report...\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
-        txtLog.append("\r\n=== Starting Web Driver..." + "\r\n");
+        txtLog.append("=== Starting Web Driver..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
         r_type = "ad-hoc";
@@ -986,7 +986,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         sw1.start();
 
         if(Driver()){
-            txtLog.append("\r\n=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
+            txtLog.append("=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             sw1.reset();
             LOG_START(); // ========================================================
@@ -1029,7 +1029,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
 
-            txtLog.append("\r\n=== CWD: " + CWD + "\r\n");
+            txtLog.append("=== CWD: " + CWD + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             
             if(WsOS.toLowerCase().contains("windows")){
@@ -1063,7 +1063,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                         d1 = new ChromeDriver(chrome_op);
                     break;
                 case "Edge":
-//                    txtLog.append("\r\n=== Edge Driver:" + System.getProperty("webdriver.edge.driver") + "\r\n");
+//                    txtLog.append("=== Edge Driver:" + System.getProperty("webdriver.edge.driver") + "\r\n");
 //                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                         EdgeDriverService edgeServise = EdgeDriverService.createDefaultService();
                         //edgeServise.SuppressInitialDiagnosticInformation = true;
@@ -1139,7 +1139,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
         } catch (Exception ex) {
-            txtLog.append("\r\n=== Web Driver > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.append("=== Web Driver > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return false;
@@ -1300,18 +1300,18 @@ public class AP3 extends javax.swing.JInternalFrame {
             protected void done() { 
                 BW2.cancel(true); // ================================================
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
-                txtLog.append("\r\n========   " + "Execution step-by-step log..." + "   ========" + "\r\n");  
+                txtLog.append("========   " + "Execution step-by-step log..." + "   ========" + "\r\n");  
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 EX = "AP3 " + env + ", v" + Ver + ", Browser: " + cmbBrow.getSelectedItem().toString() +
                 " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                  "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                  + EX;
-                txtLog.append("\r\n" + EX.replaceAll("\t", " > ") + "\r\n"); 
+                txtLog.append("" + EX.replaceAll("\t", " > ") + "\r\n"); 
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 Last_EX = EX;
                 try  { 
                     String statusMsg = (String) get(); 
-                    txtLog.append("\r\n" + statusMsg + "\r\n");
+                    txtLog.append("" + statusMsg + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
                     
                     BW2 = null;
@@ -1322,7 +1322,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                     }
                 }  
                 catch (InterruptedException | ExecutionException ex)  { 
-                    txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
+                    txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
                     txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                 } 
                 DD = Duration.between(dw_start, Instant.now());
@@ -1352,18 +1352,18 @@ public class AP3 extends javax.swing.JInternalFrame {
                                                                         ", p50: " + df.format(p_50) +
                                                                         ", p90: " + df.format(p_90);
                         }
-                        txtLog.append("\r\n" + t_rep + "\r\n");
+                        txtLog.append("" + t_rep + "\r\n");
                         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                     }
                 } catch(Exception ex){
-                    txtLog.append("\r\n=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
+                    txtLog.append("=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                 }  
                 btnRun.setEnabled(true);
 
-                txtLog.append("\r\n=== " + Summary); // Summary shown in EX top
-                txtLog.append("\r\n=== Scope: " + SCOPE); // SCOPE shown in EX top
-                txtLog.append("\r\n=== Browser: " + cmbBrow.getSelectedItem().toString() + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
+                txtLog.append("=== " + Summary); // Summary shown in EX top
+                txtLog.append("=== Scope: " + SCOPE); // SCOPE shown in EX top
+                txtLog.append("=== Browser: " + cmbBrow.getSelectedItem().toString() + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
   
                 if(!"".equals(F.trim())){
@@ -1435,7 +1435,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                             Thread.sleep(4000); //  pause till new alert expected ???? 
                         }
                     } catch (InterruptedException ex){ // Exception ex
-                        txtLog.append("\r\n=== BW2: " + ex.getMessage() + "\r\n");
+                        txtLog.append("=== BW2: " + ex.getMessage() + "\r\n");
                         txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
                     }
                 }
@@ -1452,7 +1452,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             AP3_TKN = rs.getString(1);
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n=== AP3_TKN > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.append("=== AP3_TKN > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1460,7 +1460,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private void GetSites() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n-Load Sites ..." + "\r\n");
+        txtLog.append("-Load Sites ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -1474,7 +1474,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             appId = rs.getString(1);
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n=== Get P2 App_ID > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.append("=== Get P2 App_ID > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
@@ -1554,18 +1554,18 @@ public class AP3 extends javax.swing.JInternalFrame {
             sorter.sort(); 
    
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n");
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());      
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n");
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());    
             }
         }
-        txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
@@ -1590,7 +1590,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private void GetBrands() {
         d2LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n-Load Brands ..." + "\r\n");
+        txtLog.append("-Load Brands ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -1665,18 +1665,18 @@ public class AP3 extends javax.swing.JInternalFrame {
             sorter.sort(); 
             
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n");   
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } 
-        txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
    
@@ -1708,7 +1708,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     }
     private void GetGroups() {  
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n-Load Groups/Sector ..." + "\r\n");
+        txtLog.append("-Load Groups/Sector ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         cmbGroup.removeAllItems();
         GROUP_IDS = new ArrayList<>();
@@ -1747,19 +1747,19 @@ public class AP3 extends javax.swing.JInternalFrame {
                 }
             }
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n");  
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                 this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             }
         } 
-        txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1777,12 +1777,12 @@ public class AP3 extends javax.swing.JInternalFrame {
     private void GetCompanies() {  
         int I = cmbGroup.getSelectedIndex();
         if(I < 0){ // =========== DEBUG
-            txtLog.append("\r\n-Load Sector/Companies(Menus) ERROR: cmbGROUP.getSelectedIndex() < 0" + "\r\n");
+            txtLog.append("-Load Sector/Companies(Menus) ERROR: cmbGROUP.getSelectedIndex() < 0" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n-Load Sector/Companies(Menus) ..." + "\r\n");
+        txtLog.append("-Load Sector/Companies(Menus) ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         CloseableHttpClient httpclient = HttpClients.createDefault();
         if(sw1.isRunning()){
@@ -1819,19 +1819,19 @@ public class AP3 extends javax.swing.JInternalFrame {
                 }
             }
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n");  
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());   
                 this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             }
         } 
-        txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
@@ -1852,7 +1852,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     }
     private void GetBrandSector() {                                 
 
-        txtLog.append("\r\n-GetBrand Sector/Company ..." + "\r\n");
+        txtLog.append("-GetBrand Sector/Company ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         GroupID = "";
         CompanyID = "";
@@ -1886,30 +1886,30 @@ public class AP3 extends javax.swing.JInternalFrame {
                     }
                 }   
             } else{
-                txtLog.append("\r\n- Sector ID not Found in this Brand API" + "\r\n");
+                txtLog.append("- Sector ID not Found in this Brand API" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
             if(json.has("company")){
                 CompanyID = json.getString("company");
             } else{
-                txtLog.append("\r\n- Company ID not Found in this Brand API" + "\r\n");
+                txtLog.append("- Company ID not Found in this Brand API" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } catch (IOException | JSONException ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n");  
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());   
                 this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             }
         } 
 
-        txtLog.append("\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));       
@@ -1928,7 +1928,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         Report_File = "";
         if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            txtLog.append("\r\n=== Report > Not Excel");
+            txtLog.append("=== Report > Not Excel");
             return;
         }   
         try {
@@ -1943,10 +1943,10 @@ public class AP3 extends javax.swing.JInternalFrame {
                 System.arraycopy(v, 0, Values[i], 0, v.length); 
             }
             Report_File = Func.fExcel(l, col, Values, "AP3_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
-            txtLog.append("\r\n=== Report Excel file:\r\n" + Report_File + "\r\n");
+            txtLog.append("=== Report Excel file:\r\n" + Report_File + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch (IOException ex) {
-            txtLog.append("\r\n=== Report > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.append("=== Report > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1995,7 +1995,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             int row = _update.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n=== LOG_UPDATE > SQL ERROR: " + ex.getMessage());
+            txtLog.append("=== LOG_UPDATE > SQL ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -2063,7 +2063,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             int row = _insert.executeUpdate();
             conn.close();
         }  catch (SQLException ex) {
-            txtLog.append("\r\n=== LOG_START > SQL ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.append("=== LOG_START > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -2080,7 +2080,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             conn.close();
         } catch (SQLException ex) {
             CONFIG = false;
-            txtLog.append("\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
@@ -2131,16 +2131,16 @@ public class AP3 extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("_all_data")); c = c.substring(0, c.indexOf("\r\n")).trim(); _all_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_logout")); c = c.substring(0, c.indexOf("\r\n")).trim(); _logout.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 CONFIG = true;
-                txtLog.append("\r\n=== LOAD_CONFIG > OK" + "\r\n");
+                txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             } else {
                 CONFIG = false;
-                txtLog.append("\r\n=== WEB / AP3, User: " + UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
+                txtLog.append("=== WEB / AP3, User: " + UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } catch (Exception ex) {
             CONFIG = false;
-            txtLog.append("\r\n=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -2200,7 +2200,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
             C += "nWaitLoad: " + nWaitLoad.getValue()+ "\r\n";
         } catch (Exception ex)  {
-            txtLog.append("\r\n=== SAVE_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }
@@ -2228,11 +2228,11 @@ public class AP3 extends javax.swing.JInternalFrame {
             _insert.setString(4, "AP3");
             _insert.setString(5, C);
             int row = _insert.executeUpdate();
-            txtLog.append("\r\n=== SAVE_CONFIG > OK (" + row + " row)" + "\r\n");
+            txtLog.append("=== SAVE_CONFIG > OK (" + row + " row)" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("\r\n=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.append("=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));

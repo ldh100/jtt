@@ -1080,7 +1080,7 @@ public class Android extends javax.swing.JInternalFrame {
         btnGetAPK.setEnabled(false);
         btnS3Install.setEnabled(false);
         btnInstallAll.setEnabled(false); 
-        txtLog.append("\r\n" + "-Get APK..." + "\r\n");
+        txtLog.append("-Get APK..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
        
         try {
@@ -1372,7 +1372,7 @@ public class Android extends javax.swing.JInternalFrame {
         btnS3Install.setEnabled(false);
         btnInstallAll.setEnabled(false); 
         
-        txtLog.append("\r\n-Install All APK(s) - App Tester ..." + "\r\n");
+        txtLog.append("-Install All APK(s) - App Tester ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         
         Swipe_WakeUp(); // ===================  
