@@ -556,7 +556,6 @@ public class TWeb {
  
         FAIL = false;
         try {
-
             int XX = E.getLocation().x;
             int YY = E.getLocation().y;
             if("Right".equals(DIRECTION)){ 
@@ -635,7 +634,7 @@ public class TWeb {
         }
         sw1.reset();
     }
-    public static void Move_out_of_Element_By_Path(String NAME, String BY, String PATH, String VAL, int X, int Y, String JIRA ){
+    public static void Move_out_of_Element_By_Path(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -671,18 +670,25 @@ public class TWeb {
                 default:
                     break;
             }
-            int XX = X;
-            int YY = Y;
-            if("Right".equals(VAL)){ XX = e.getSize().width + X;
-            }else if("Left".equals(VAL)){ XX = X; }
             
-            if("Bottom".equals(VAL)){ XX = e.getSize().height + Y;
-            }else if("Top".equals(VAL)){ XX = Y; }
+            int XX = e.getLocation().x;
+            int YY = e.getLocation().y;
+            if("Right".equals(DIRECTION)){ 
+                XX = XX + e.getSize().width + X;
+            } else if ("Left".equals(DIRECTION)){ 
+                XX = XX + X; 
+            }
+            
+            if("Bottom".equals(DIRECTION)){ 
+                YY = YY + e.getSize().height + Y;
+            } else if ("Top".equals(DIRECTION)){ 
+                YY = YY + Y; 
+            }
             
             Actions action = new Actions(d1);
             action.moveToElement(e, XX, YY).perform();
             _p++; 
-            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Move '" + VAL + "' of element successful" + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Move '" + DIRECTION + "' of element successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
@@ -693,7 +699,7 @@ public class TWeb {
         }
         sw1.reset();
     }
-    public static void Click_out_of_Element_By_Path(String NAME, String BY, String PATH, String VAL, int X, int Y, String JIRA ){
+    public static void Click_out_of_Element_By_Path(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -729,19 +735,26 @@ public class TWeb {
                 default:
                     break;
             }
+
             int XX = e.getLocation().x;
             int YY = e.getLocation().y;
-            if("Right".equals(VAL)){ XX = XX + e.getSize().width + X;
-            } else if ("Left".equals(VAL)){ XX = XX + X; }
+            if("Right".equals(DIRECTION)){ 
+                XX = XX + e.getSize().width + X;
+            } else if ("Left".equals(DIRECTION)){ 
+                XX = XX + X; 
+            }
             
-            if("Bottom".equals(VAL)){ YY = YY + e.getSize().height + Y;
-            } else if ("Top".equals(VAL)){ YY = YY + Y; }
+            if("Bottom".equals(DIRECTION)){ 
+                YY = YY + e.getSize().height + Y;
+            } else if ("Top".equals(DIRECTION)){ 
+                YY = YY + Y; 
+            }            
             
             Actions action = new Actions(d1);
             action.moveToElement(e, XX, YY).click().perform();
             //Thread.sleep(500);
             _p++; 
-            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Click out of element successful" + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Click out " + DIRECTION + " of element successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
@@ -1365,8 +1378,8 @@ public class TWeb {
                 E.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
                 E.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it              
             }else{
-                e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
-                e.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
+                E.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+                E.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
             }   
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Text cleared"+ "\t" + "PASS" + "\t" + " - " +

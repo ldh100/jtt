@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
@@ -59,19 +57,21 @@ public class Func {
         }
        return output;   
     }
-    public static String ExecuteCmdProcessBuilder(String cmd, String cwd, boolean waitFor, boolean ReturnOutput){
+    public static String ExecuteCmdProcessBuilder(String cmd, String Cwd, boolean waitFor, boolean ReturnOutput){
         String output = "";
+        Process p = null;
         try {
-            ProcessBuilder b = new ProcessBuilder();
-            b.directory(new File(cwd));
+            ProcessBuilder b = new ProcessBuilder();           
+            b.directory(new File(Cwd));  
             if(WsOS.toLowerCase().contains("windows")){
                 b.command("cmd.exe", "/c", cmd);            
             }
             if(WsOS.toLowerCase().contains("mac")){
-                b.command(cmd);            
+                String[] ios_cmd = cmd.split(" ");
+                b.command(ios_cmd);    
             }
 
-            Process p = b.start();
+            p = b.start();
             if(ReturnOutput){
                 BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 String line;
@@ -82,17 +82,19 @@ public class Func {
             if(waitFor){
                 int exitCode = p.waitFor();
                 output += "\nExited with error code : " + exitCode;                   
-            }        
-         } catch(IOException | InterruptedException ex){
-             output = ex.getMessage();
-         }
+            }   
+        } catch(IOException | InterruptedException ex){
+            output = ex.getMessage();
+        } finally{
+            p.destroyForcibly();
+        }
        return output;   
     }
     public static String SHOW_LOG_FILE(String BODY, String EXT){
         File aLog = null;
         try {
-            String userHomeFolder = System.getProperty("user.home") + File.separator + "Desktop"; 
-            aLog = new File(userHomeFolder + File.separator + "aLog." + EXT);
+            String userDesktop = System.getProperty("user.home") + File.separator + "Desktop"; 
+            aLog = new File(userDesktop + File.separator + "aLog." + EXT);
             Files.write(Paths.get(aLog.getPath()), BODY.getBytes());
             java.awt.Desktop.getDesktop().open(aLog);
             return "OK";

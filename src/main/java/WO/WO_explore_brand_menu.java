@@ -7,6 +7,7 @@ package WO;
 import A.TWeb;
 import static A.A.*;
 import static WO.WO.*;
+import org.openqa.selenium.WebElement;
 /**
  *
  * @author Oleg.Spozito
@@ -36,6 +37,8 @@ public class WO_explore_brand_menu {
         _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select 1st Location in the list", L1.get(0),"no_jira"); 
             if (FAIL) { return; } 
         Thread.sleep(500);    
+        
+//if (true)   {PICKUP = true;DELIVERY = true;return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find Header Card", "xpath", "//div[@class='header-card v-card v-sheet v-sheet--tile theme--light']", "no_jira");
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Header lines count", e1,"xpath", ".//div[contains(@class, 'v-card__')]", "no_jira");                                     
@@ -47,14 +50,14 @@ public class WO_explore_brand_menu {
         _t++; Thread.sleep((long) sleep); TWeb.List_L0("Find Service tabs", "css", "[role='tab']", "no_jira");
         if (L0.isEmpty()) {
             _t++; TWeb.Element_By_Path_Text("Single Available Service:", "xpath", "//div[@class='pickup-or-delivery']",  "no_jira"); 
-            if (t.toLowerCase().equals("pickup")) { 
+            if (t.toLowerCase().contains("pickup")) { 
                 PICKUP = true; 
                 _t++; TWeb.List_L1("Pickup Brands Count", "xpath", "//div[@class='v-card v-card--hover v-card--link v-sheet v-sheet--tile theme--light brand']", "no_jira");
                 for (int j = 0; j < L1.size(); j++) {
                     _t++; TWeb.Element_Text("Pickup Brand (" + j + "):", L1.get(j),  "no_jira");     
                 }
             }
-            if (t.toLowerCase().equals("delivery")) { 
+            if (t.toLowerCase().contains("delivery")) { 
                 DELIVERY = true;
                 for (int j = 0; j < L1.size(); j++) {
                     _t++; TWeb.Element_Text("Delivery Brand (" + j + ") name:", L1.get(j),  "no_jira");     
@@ -66,7 +69,9 @@ public class WO_explore_brand_menu {
             } 
         } else { 
             for (int i = 0; i < L0.size(); i++) {
-                _t++; TWeb.Element_Text("Service tab (" + i + ") name:", L0.get(i),  "no_jira");             
+                _t++; Thread.sleep((long) sleep); TWeb.List_L0("Find Service tabs", "css", "[role='tab']", "no_jira");
+                _t++; TWeb.Element_Text("Service tab (" + i + ") name:", L0.get(i),  "no_jira");       
+                
                 if (t.toLowerCase().equals("pickup")) { 
                     PICKUP = true; 
                     _t++; TWeb.Element_Click("Click 'Pickup' tab", L0.get(i),"no_jira"); 
@@ -75,6 +80,9 @@ public class WO_explore_brand_menu {
                     for (int j = 0; j < L1.size(); j++) {
                         _t++; TWeb.Element_Text("Pickup Brand (" + j + "):", L1.get(j),  "no_jira");     
                     }
+                   // _t++; Thread.sleep((long) sleep);  TWeb.Element_Click("Enter first Brand in Pickup:   ", L1.get(0),  "no_jira"); 
+                    leftPanelClick(L1.get(0));
+                    
                 }
                 if (t.toLowerCase().equals("delivery")) { 
                     DELIVERY = true;
@@ -84,9 +92,26 @@ public class WO_explore_brand_menu {
                     for (int j = 0; j < L1.size(); j++) {
                         _t++; TWeb.Element_Text("Delivery Brand (" + j + "):", L1.get(j),  "no_jira");     
                     } 
+                    //_t++; Thread.sleep((long) sleep);  TWeb.Element_Click("Enter first Brand in Delivery:   ", L1.get(0),  "no_jira"); 
+                    leftPanelClick(L1.get(0));
                 } 
             } 
             
         }    
     }  
+    public static void leftPanelClick( WebElement brandCard ) throws InterruptedException {
+            _t++; Thread.sleep((long) sleep);  TWeb.Element_Click("Enter first Brand in Pickup:   ", brandCard,  "no_jira"); 
+            Thread.sleep(3000);
+            _t++; TWeb.List_L2("Menu Category count ", "css", "[role='tab']", "no_jira");
+ //L0:       L1:         L2:Left pannel category         L3:                 
+            for ( WebElement we : L2){         
+                _t++; TWeb.Element_Text("Menu Category : ", we ,  "no_jira");
+                _t++; TWeb.Element_Click("Click Category",we , "no_jira");                
+            }
+            _t++; Thread.sleep((long) sleep);  TWeb.Element_By_Path_Click(" Return to site page in:   ", "xpath","//div[text()=' "+ SITE +" ']",  "no_jira"); 
+            //(By.xpath("//div[contains(@class,'row pa-0')]")
+        
+    } 
+
 }
+
