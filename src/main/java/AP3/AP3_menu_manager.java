@@ -259,7 +259,7 @@ public class AP3_menu_manager {
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); TWeb.Element_Child_E2("Find 'Rules' drop-down", e1, "xpath", ".//div[@class='v-input__icon v-input__icon--append']", "no_jira");
                 if (FAIL) { return;}                
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Click(" 'Rules' combo-box open Click", e2, "no_jira"); 
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Combo-box 'Rules' open Click", e2, "no_jira"); 
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); TWeb.Element_E2_Find("Find Rules list", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']", "no_jira");
                 if (FAIL) { return;}                                                                                             
