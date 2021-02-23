@@ -31,7 +31,7 @@ public class AP3_site {
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); TWeb.Page_URL("Sites page URL", "no_jira"); 
             if (FAIL) { return;}      
-           
+          
         // <editor-fold defaultstate="collapsed" desc="SITEs List > Sorts">    
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", "no_jira");
             if (FAIL) { return;}          
@@ -586,14 +586,14 @@ public class AP3_site {
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Payment Type Prompt", "css", "[aria-label='Payment Type']", "placeholder", "no_jira");
                          if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Payment Type Dropdown Open", "css", "[aria-label='Payment Type']", "no_jira");
+                         
+//                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Payment Type Dropdown Open", "css", "[aria-label='Payment Type']", "no_jira");
+//                    if (FAIL) { return;}                  
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Payment Type Dropdown Open", "xpath", "//input[@placeholder='Select Payment Type']/parent::div[@class='v-select__selections']/following-sibling::div", "no_jira");
                     if (FAIL) { return;} 
-                    _t++; Thread.sleep((long) sleep); TWeb.List_L1("Payment Types Count", "xpath", "/html/body/div/div[9]/div/div/div", "no_jira");             
+                    Thread.sleep(500);
+                    _t++; Thread.sleep((long) sleep); TWeb.List_L1("Find 'Payment Types' list", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']/descendant::div[@class='v-list__tile__title']", "no_jira");             
                         if (FAIL) { return;} 
-                 
-                        // This List L1 return pagination list.  But realized the dropdown doesnt get clicked. 
-                        // Tried using  xpath //div[@class='v-list__tile__title']
-                        //Similar issue in Mealplan. 
                         
                         for (int j = 0; j < L1.size(); j++) {
                             _t++; TWeb.Element_Text("Available Payment Type:", L1.get(j), "no_jira");             
@@ -608,7 +608,7 @@ public class AP3_site {
                     _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Refunds Accepted?' text", "Refunds Accepted?", true,"no_jira"); 
                         if (FAIL) { return;}   
                    break;
-                case 2:
+                case 2:     
                     _t++; TWeb.Element_Text("Mealplan section", L0.get(i), "no_jira");             
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Mealplan Info Click", L0.get(i), "no_jira");
@@ -617,7 +617,7 @@ public class AP3_site {
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Choose Prompt", "css", "[aria-label='Plan Type']", "placeholder", "no_jira");
                          if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open Meal Plan Dropdown", "css", "[aria-label='Plan Type']", "no_jira");
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open Meal Plan Dropdown", "xpath", "//div[@id='mealplan-detail']//i[@class='v-icon mdi mdi-menu-down theme--light']", "no_jira");
                          if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Plan Types' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
                         if (FAIL) { return;}    
@@ -627,20 +627,83 @@ public class AP3_site {
                             _t++; TWeb.Element_Text("Available Meal Plan:", L1.get(j), "no_jira");             
                             if (FAIL) { return;}
                         }   
-                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Meal Plan", "xpath", "//*[contains(text(), '" + "Blackboard" + "')]", "no_jira");
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Meal Plan", "xpath", "//*[contains(text(), '" + "Blackboard" + "')]", "no_jira");
                         if (FAIL) { return;}  
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Plan Name", "css", "[aria-label='Plan Name']", "BLACKBOARD", false, "no_jira");
+//                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Plan Name", "css", "[aria-label='Plan Name']", "BLACKBOARD", false, "no_jira");
+//                        if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Meal Plan Name", "css", "[aria-label='Plan Name']","no_jira");
+                     if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Host", "css", "input[aria-label='Host']", "20.62.183.69", false, "no_jira");
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Plan ID", "css", "[aria-label='Plan ID']", "O4wNDAle2lFdWRLpOwWRTZwBmMljADh97Lk2G2qXUy9pOvJlMoFEgQDOYmX2tA8Q", false, "no_jira");
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Port", "css", "input[aria-label='Port']", "9003", false, "no_jira");
+                        if (FAIL) { return;} 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter AES", "css", "input[aria-label='AES key']", "294A404E635266556A586E3272357537", false, "no_jira");
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Additional Instructions", "css", "[aria-label='Additional Instructions (en)']", "Do not use - test auto generated", false, "no_jira");
+                    
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open Vendor Dropdown", "xpath", "//input[@aria-label='Vendor number']/parent::div[@class='v-select__selections']/following-sibling::div//i", "no_jira");
+                        if (FAIL) { return;} 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Vendor number' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
+                        if (FAIL) { return;}    
+                    Thread.sleep(500);
+                    T_Index = -1;
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Vendor number Count", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");     
+                    for (int j = 0; j < L1.size(); j++) {
+                            _t++; TWeb.Element_Text("Available Vendor Number:", L1.get(j), "no_jira");
+                            if (FAIL) { return;}
+                            if(t.trim().equals("3600"))
+                                T_Index = j;
+                       }   
+                    if(T_Index!= -1)
+                    {
+                        _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select vendor", L1.get(T_Index), "no_jira");
+                        if (FAIL) { return;}  
+                    }
+                      
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Addtional Instructions", "css", "input[aria-label='Additional Instructions (en)']", "Do not use - test auto generated", false, "no_jira");
+                        if (FAIL) { return;}     
+
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Meal Plan Terminal ID", "css", "[aria-label='Meal Plan Terminal ID']", "401001", false, "no_jira");
+                        if (FAIL) { return;}   
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Tender Type", "xpath", "//input[@placeholder='Please select Tender Type']/preceding-sibling::div","no_jira");
+                        if (FAIL) { return;}     
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Name of tender", "css", "input[aria-label='Name of Tender']", "Flex Fund", false, "no_jira");
+                        if (FAIL) { return;}   
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Tender ID", "css", "input[aria-label='Tender ID']", "1", false, "no_jira");
+                        if (FAIL) { return;} 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open Tax Exempt Dropdown", "xpath", "//input[@aria-label='Tax Exempt']/parent::div[@class='v-select__selections']/following-sibling::div//i", "no_jira");
+                        if (FAIL) { return;} 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Tax exempt' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
+                        if (FAIL) { return;}    
+                    Thread.sleep(500);
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Tax exempt options", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");     
+                    T_Index = -1;
+                    for (int j = 0; j < L1.size(); j++) {
+                            _t++; TWeb.Element_Text("Available Tax exempt options :", L1.get(j), "no_jira");
+                            if (FAIL) { return;}
+                            if(t.trim().equals("Yes"))
+                                T_Index = j;
+                       }   
+                    if(T_Index!= -1)
+                    {
+                        _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select 'Tax exempt'", L1.get(T_Index), "no_jira");
+                        if (FAIL) { return;}  
+                    }    
+                        
+                    _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Add another tender type' text", "add another tender type", true,"no_jira"); 
+                        if (FAIL) { return;}      
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Click 'Add another tender type'", e, "no_url");
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Terminal ID", "css", "[aria-label='Meal Plan Terminal ID']", "401001", false, "no_jira");
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Cancel  another tender type", "xpath", "(//div[@class='layout align-center']//div[@class='flex xs1']//i)[2]", "no_jira");
+                        if (FAIL) { return;}     
+                       
+                    _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Manage Meal Plan Domains' text", "Manage Meal Plan Domains", true,"no_jira"); 
+                        if (FAIL) { return;}      
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Manage Meal Plan Domains'", "xpath", "//div[contains(@class,'Primary-Left Domain') and contains(text(),'Manage Meal Plan Domains')]", "no_jira");
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Tender type", "css", "[aria-label='Tender Type']", "401", false, "no_jira");
-                        if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Tax Exempt?' text", "Is this plan Tax Exempt?", true,"no_jira"); 
-                        if (FAIL) { return;}
+                    Thread.sleep(500);    
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Cancel  Manage Meal Plan Dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-btn__content'][normalize-space()='cancel']", "no_jira");
+                      if (FAIL) { return;}
+                      
 
                       break;
                 case 3:
