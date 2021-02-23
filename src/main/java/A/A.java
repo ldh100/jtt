@@ -590,10 +590,10 @@ public class A extends javax.swing.JFrame {
     }//GEN-LAST:event_Menu_FWMouseClicked
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         Get_User();
-        String cwd = System.getProperty("user.dir");
+        CWD = System.getProperty("user.dir");
         try{
-            Files.createDirectories(Paths.get(cwd + File.separator + "ScreenShots"));           
-            Files.createDirectories(Paths.get(cwd + File.separator + "MobileBuilds"));  
+            Files.createDirectories(Paths.get(CWD + File.separator + "ScreenShots"));           
+            Files.createDirectories(Paths.get(CWD + File.separator + "MobileBuilds"));  
         } catch(IOException ex){
             Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Create Directories ERROR: " + ex.getMessage(), ex);
         }
@@ -870,7 +870,20 @@ public class A extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Public & Private Variables">
     public static final String QA_BD_CON_STRING = "jdbc:sqlserver://dev-digitalhospitality-sql.database.windows.net:1433;database=cdlqadb;user=xttadmin;password=Sp515s10#a;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
     public static String S_OAuth_TKN = "";
-    public static String API_Response_Body = "";
+    public static String CWD = "";
+    public static final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
+    public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+    public static int F_COUNT;    
+    public static String Version = "";
+    public static String UserID = "";
+    public static String WsID = "";    
+    public static String WsOS = "";  
+    private ImageIcon II;     
+    
+    
+    public static String API_Response_Body = "";   
     public static int T_Index;
     public static WebDriver d1;
     public static WebElement e;
@@ -917,18 +930,10 @@ public class A extends javax.swing.JFrame {
     public static double p_50 = 0;
     public static double p_90 = 0;
     
-    public static DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
-    public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-    public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
-    public static int F_COUNT;    
-    public static String Version = "";
-    public static String UserID = "";
-    public static String WsID = "";    
-    public static String WsOS = "";  
-
+    
     public static String SQL = "";  
-    private ImageIcon II;  
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane DesktopPane;

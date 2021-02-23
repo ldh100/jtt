@@ -406,6 +406,7 @@ public class API extends javax.swing.JInternalFrame {
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         txtLog.setRows(5);
         txtLog.setText("Start >");
+        txtLog.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtLog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLog);
@@ -545,6 +546,7 @@ public class API extends javax.swing.JInternalFrame {
 
         jList_Orders.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jList_Orders.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jList_Orders.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jList_Orders.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 jList_OrdersValueChanged(evt);

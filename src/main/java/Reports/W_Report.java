@@ -90,6 +90,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         txtLog.setColumns(20);
         txtLog.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         txtLog.setRows(5);
+        txtLog.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtLog.setMargin(new java.awt.Insets(2, 2, 1, 1));
         jScrollPane1.setViewportView(txtLog);
 
