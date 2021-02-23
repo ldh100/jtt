@@ -7,6 +7,7 @@ package FW;
 import A.TWeb;
 import static A.A.*;
 import static FW.FW.*;
+import org.apache.commons.lang3.RandomStringUtils;
 /**
  *
  * @author Oleg.Spozito
@@ -111,7 +112,50 @@ public class FW_restaurants {
         }
     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(27), "no_jira"); 
     if (FAIL) { return;}   
-    
-    
-} 
+     Thread.sleep(5000);
+     _t++; Thread.sleep((long) sleep);TWeb.Scroll_XY("Scroll to Restaurant Name", 0, 500, "no_jira");
+ //     String s = RandomStringUtils.randomAlphanumeric(8); // To generate alphanumeric
+    String alphabet = "Restaurant"; // To generate randow alphabets
+    String s = RandomStringUtils.random(10, alphabet);
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Restaurant Name", "xpath" , "//input[@id='restaurant_name']" ,s , false, "no_jira");
+    if (FAIL) { return;}
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("*Street Address", "xpath" , "//input[@id='street']" ,"1 Prologis ave" , false, "no_jira");
+    if (FAIL) { return;}
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Unit, Suite, Floor etc.", "xpath" , "(//*[contains(@id, 'input')])[3]" ,"1" , false, "no_jira");
+    if (FAIL) { return;}
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("*City", "xpath" , "(//*[contains(@id, 'city')])[2]" ,"New York" , false, "no_jira");
+    if (FAIL) { return;}
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("*State", "xpath" , "//*[contains(@id, 'state')]" ,"NY" , false, "no_jira");
+    if (FAIL) { return;}
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("*State dropdown click ","xpath", "(//div[@class='v-input__icon v-input__icon--append'])[5]", "no_jira"); 
+      if (FAIL) { return;}
+    _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find *State dropdown list", "xpath", "//div[contains(@class,'v-list v-select-list v-sheet theme--light theme--light')]", "no_jira");
+      if (FAIL) { return;} 
+    _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("*State", e1,"xpath", ".//div[@class='v-list-item__title']", "no_jira");                                     
+        if (FAIL) { return;}
+      for (int i = 1; i < L1.size(); i++) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*State dropdown value---'"+i+"'", L1.get(i), "no_jira");                          
+                if (FAIL) { return;}
+        }
+//    _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select *State",   L1.get(36), "no_jira");
+//        if (FAIL) { return;} 
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("*Zip", "xpath" , "(//*[contains(@id, 'zip')])[2]" ,"12134" , false, "no_jira");
+    if (FAIL) { return;}
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Website", "xpath" , "(//*[contains(@id, 'website')])[2]" ,"www.google.ca" , false, "no_jira");
+    if (FAIL) { return;}
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Business Number", "xpath" , "(//*[contains(@id, 'business_number')])[2]" ,"123-456-7890" , false, "no_jira");
+    if (FAIL) { return;}
+    _t++; Thread.sleep((long) sleep);TWeb.Scroll_XY("Scroll to Restaurant Name", 0, 500, "no_jira");
+     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("*Cuisine Type dropdown click ","xpath", "(//div[@class='v-input__icon v-input__icon--append'])[6]", "no_jira"); 
+      if (FAIL) { return;} 
+    _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("*Cuisine Type dropdown values ", e1,"xpath", "//div[@class='v-list-item__title']", "no_jira");  
+      if (FAIL) { return;}
+        for (int i = 45; i < L1.size(); i++) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Cuisine Type dropdown value---'"+i+"'", L1.get(i), "no_jira");                          
+                if (FAIL) { return;}
+        }
+    _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(46), "no_jira"); 
+    if (FAIL) { return;} 
+     
+    } 
 }
