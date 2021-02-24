@@ -20,7 +20,7 @@ import org.openqa.selenium.WebElement;
  * @author Oleg.Spozito
  */
 public class WO_place_order {
-    public static int  ORDERCOUNT = 2;
+    public static int  ORDERCOUNT = 5;
     
     public static void run(boolean ISDELIVERYORDER) throws InterruptedException { 
        final String ORDERTYPE  =  ISDELIVERYORDER?"Delivery":"Pickup";
@@ -95,6 +95,7 @@ public class WO_place_order {
                 _t++; TWeb.List_L3("Menu Category in the middle pannel  ", "xpath", "//div[@class='pb-6']", "no-jira");
   //L0:       L1:         L2:       L3:   Middle Pannel catgory 
                 //iterate each category's first item
+                if (ORDERCOUNT>2){L3 = L3.subList(0, 1);}
                 for(WebElement we: L3) {
                     _t++; TWeb.Element_Child_Text("Category Name:  ", we, "css"  , "[class='pb-4']", "no_jira");
                     _t++; TWeb.Element_Child_List_L1("-Items count in Category  ",we, "css","[class='row mb-5 bold no-gutters']", "no_jira");
