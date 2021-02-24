@@ -183,7 +183,7 @@ public class FW_restaurants {
     if (FAIL) { return;} 
 //    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("*Mobile Operations dropdown click ","xpath", "//div[@class='restaurant-information-header']", "no_jira"); 
 //      if (FAIL) { return;}
-    _t++; Thread.sleep((long) sleep); TWeb.Click_out_of_Element_By_Path("*Mobile Operations dropdown dropdown Close", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",  "Top",4, 4, "no_jira");
+    _t++; Thread.sleep((long) sleep); TWeb.Click_out_of_Element_By_Path("*Mobile Operations dropdown Close", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",  "Top",4, 4, "no_jira");
        if (FAIL) { return;}  
 
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("*Food Preparation Location dropdown click ","xpath", "(//div[@class='v-input__icon v-input__icon--append'])[9]", "no_jira"); 
@@ -198,6 +198,8 @@ public class FW_restaurants {
         }
     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(95), "no_jira"); 
       if (FAIL) { return;}
+    _t++; Thread.sleep((long) sleep); TWeb.Click_out_of_Element_By_Path("*Food Preparation Location dropdown Close", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",  "Top",4, 4, "no_jira");
+       if (FAIL) { return;} 
       
     
     } 
