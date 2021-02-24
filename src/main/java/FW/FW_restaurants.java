@@ -127,18 +127,14 @@ public class FW_restaurants {
     if (FAIL) { return;}
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("*State", "xpath" , "//*[contains(@id, 'state')]" ,"NY" , false, "no_jira");
     if (FAIL) { return;}
-    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("*State dropdown click ","xpath", "(//div[@class='v-input__icon v-input__icon--append'])[5]", "no_jira"); 
-      if (FAIL) { return;}
-    _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find *State dropdown list", "xpath", "//div[contains(@class,'v-list v-select-list v-sheet theme--light theme--light')]", "no_jira");
+
+    _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find *State dropdown list", "xpath", "//div[contains(@class,'v-menu__content theme--light menuable__content__active v-autocomplete__content')]", "no_jira");
       if (FAIL) { return;} 
+    
     _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("*State", e1,"xpath", ".//div[@class='v-list-item__title']", "no_jira");                                     
         if (FAIL) { return;}
-      for (int i = 1; i < L1.size(); i++) {
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*State dropdown value---'"+i+"'", L1.get(i), "no_jira");                          
-                if (FAIL) { return;}
-        }
-//    _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select *State",   L1.get(36), "no_jira");
-//        if (FAIL) { return;} 
+    _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select *State",   L1.get(0), "no_jira");
+        if (FAIL) { return;} 
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("*Zip", "xpath" , "(//*[contains(@id, 'zip')])[2]" ,"12134" , false, "no_jira");
     if (FAIL) { return;}
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Website", "xpath" , "(//*[contains(@id, 'website')])[2]" ,"www.google.ca" , false, "no_jira");
@@ -150,12 +146,59 @@ public class FW_restaurants {
       if (FAIL) { return;} 
     _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("*Cuisine Type dropdown values ", e1,"xpath", "//div[@class='v-list-item__title']", "no_jira");  
       if (FAIL) { return;}
-        for (int i = 45; i < L1.size(); i++) {
+        for (int i = 64; i < L1.size(); i++) {
             _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Cuisine Type dropdown value---'"+i+"'", L1.get(i), "no_jira");                          
                 if (FAIL) { return;}
         }
-    _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(46), "no_jira"); 
+    _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(66), "no_jira"); 
     if (FAIL) { return;} 
-     
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("*Seating Capacity", "xpath" , "(//*[contains(@id, 'eating_capacity')])[2]" ,"100" , false, "no_jira");
+    if (FAIL) { return;}
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("*Associated Delivery Partners dropdown click ","xpath", "(//div[@class='v-input__icon v-input__icon--append'])[7]", "no_jira"); 
+      if (FAIL) { return;} 
+    _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find *Associated Delivery Partners dropdown list", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']", "no_jira");
+      if (FAIL) { return;} 
+    _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("*Associated Delivery Partners", e1,"xpath", ".//div[@class='v-list-item__title']", "no_jira");                                     
+        if (FAIL) { return;}
+        for (int i = 1; i < L1.size(); i++) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Associated Delivery Partners dropdown value---'"+i+"'", L1.get(i), "no_jira");                          
+                if (FAIL) { return;}
+        }
+    _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(2), "no_jira"); 
+    if (FAIL) { return;} 
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("*Associated Delivery Partners dropdown click ","xpath", "(//div[@class='v-input__icon v-input__icon--append'])[7]", "no_jira"); 
+      if (FAIL) { return;}
+      
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("*Mobile Operations dropdown click ","xpath", "(//div[@class='v-input__icon v-input__icon--append'])[8]", "no_jira"); 
+      if (FAIL) { return;} 
+    _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find *Mobile Operations Partners dropdown list", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']", "no_jira");
+      if (FAIL) { return;} 
+    _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("*Mobile Operations", e1,"xpath", ".//div[@class='v-list-item__title']", "no_jira");                                     
+        if (FAIL) { return;}
+        for (int i = 1; i < L1.size(); i++) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Mobile Operations dropdown value---'"+i+"'", L1.get(i), "no_jira");                          
+                if (FAIL) { return;}
+        }
+    _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(1), "no_jira"); 
+    if (FAIL) { return;} 
+//    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("*Mobile Operations dropdown click ","xpath", "//div[@class='restaurant-information-header']", "no_jira"); 
+//      if (FAIL) { return;}
+    _t++; Thread.sleep((long) sleep); TWeb.Click_out_of_Element_By_Path("*Mobile Operations dropdown dropdown Close", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",  "Top",4, 4, "no_jira");
+       if (FAIL) { return;}  
+
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("*Food Preparation Location dropdown click ","xpath", "(//div[@class='v-input__icon v-input__icon--append'])[9]", "no_jira"); 
+      if (FAIL) { return;} 
+    _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find *Food Preparation Location dropdown list", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']", "no_jira");
+      if (FAIL) { return;} 
+    _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("*Food Preparation Location values ", e1,"xpath", "//div[@class='v-list-item__title']", "no_jira");  
+      if (FAIL) { return;}
+        for (int i = 94; i < L1.size(); i++) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Food Preparation Location dropdown value---'"+i+"'", L1.get(i), "no_jira");                          
+                if (FAIL) { return;}
+        }
+    _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(95), "no_jira"); 
+      if (FAIL) { return;}
+      
+    
     } 
 }

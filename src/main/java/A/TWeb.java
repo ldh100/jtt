@@ -2948,8 +2948,7 @@ public class TWeb {
         sw1.reset();
     } 
 
-    public static void Element_Child_Text(String restaurant_Name, String s, String xpath, String inputidrestaurant_name, String no_jira) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
     }
 
-}
+
