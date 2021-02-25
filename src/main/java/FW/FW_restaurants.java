@@ -80,43 +80,48 @@ public class FW_restaurants {
       if (FAIL) { return;} 
       
   
-    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("*Market dropdown click ","xpath", "(//div[@class='v-input__icon v-input__icon--append'])[2]", "no_jira"); 
-      if (FAIL) { return;} 
-    _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("*Market dropdown values ", e1,"xpath", "//div[@class='v-list-item__title']", "no_jira");  
-      if (FAIL) { return;}
-        for (int i = 2; i < L1.size(); i++) {
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Market dropdown value---'"+i+"'", L1.get(i), "no_jira");                          
-                if (FAIL) { return;}
-          }  
-         _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(4), "no_jira"); 
-            if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Markets dropdown", "xpath", "//div[@class='v-select__selections']/input[@id='market']", "no_jira"); 
+          if (FAIL) { return;}
+          Thread.sleep(2000);
+        _t++; Thread.sleep((long) sleep); TWeb.List_L0("List Markets", "xpath", "//div[@role='listbox']/div/div/div[@class='v-list-item__title']", "no_jira");  
+          if (FAIL) { return;}
+           for (int i = 0; i < L0.size(); i++) {
+	       _t++; TWeb.Element_Text("Rows per page Value (index " + i + ")", L0.get(i),  "no_jira"); 
+	                if (FAIL) { return;}
+	                if(t.trim().equals("Cdl test 1")){ 
+	                    L0.get(i).click();
+                        }
+	            }
 
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Partner Type dropdown click ","xpath", "(//div[@class='v-input__icon v-input__icon--append'])[3]", "no_jira"); 
       if (FAIL) { return;} 
-    _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Partner Type dropdown values ", e1,"xpath", "//div[@class='v-list-item__title']", "no_jira");  
+    _t++; Thread.sleep((long) sleep); TWeb.List_L0("List of Partner Type dropdown", "xpath", "//div[@role='listbox']/div/div/div[@class='v-list-item__title']", "no_jira");  
       if (FAIL) { return;}
-        for (int i = 22; i < L1.size(); i++) {
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Partner Type dropdown value---'"+i+"'", L1.get(i), "no_jira");                          
-                if (FAIL) { return;}
-        }
-    _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(22), "no_jira"); 
-    if (FAIL) { return;}  
+         for (int i = 0; i < L0.size(); i++) {
+	    _t++; TWeb.Element_Text("Rows per page Value (index " + i + ")", L0.get(i),  "no_jira"); 
+	                if (FAIL) { return;}
+	                if(t.trim().equals("Restaurant")){ 
+	                    L0.get(i).click();
+	                }
+	            }
+        Thread.sleep(4000);    
     
     
      _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("*Restaurant Partner dropdown click ","xpath", "(//div[@class='v-input__icon v-input__icon--append'])[4]", "no_jira"); 
       if (FAIL) { return;} 
-    _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("*Restaurant Partner dropdown values ", e1,"xpath", "//div[@class='v-list-item__title']", "no_jira");  
+     _t++; Thread.sleep((long) sleep); TWeb.List_L0("List of *Restaurant Partner dropdown", "xpath", "//div[@role='listbox']/div/div/div[@class='v-list-item__title']", "no_jira");  
       if (FAIL) { return;}
-        for (int i = 24; i < L1.size(); i++) {
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Restaurant Partner dropdown value---'"+i+"'", L1.get(i), "no_jira");                          
-                if (FAIL) { return;}
-        }
-    _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(27), "no_jira"); 
-    if (FAIL) { return;}   
+         for (int i = 0; i < L0.size(); i++) {
+	    _t++; TWeb.Element_Text("Rows per page Value (index " + i + ")", L0.get(i),  "no_jira"); 
+	                if (FAIL) { return;}
+	                if(t.trim().equals("Athe Gmail Raj")){ 
+	                    L0.get(i).click();
+	                }
+	            }  
      Thread.sleep(5000);
      _t++; Thread.sleep((long) sleep);TWeb.Scroll_XY("Scroll to Restaurant Name", 0, 500, "no_jira");
  //     String s = RandomStringUtils.randomAlphanumeric(8); // To generate alphanumeric
-    String alphabet = "Restaurant"; // To generate randow alphabets
+    String alphabet = "Tim Horton"; // To generate randow alphabets
     String s = RandomStringUtils.random(10, alphabet);
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Restaurant Name", "xpath" , "//input[@id='restaurant_name']" ,s , false, "no_jira");
     if (FAIL) { return;}
@@ -152,10 +157,10 @@ public class FW_restaurants {
                 if (FAIL) { return;}
         }
     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(66), "no_jira"); 
-    if (FAIL) { return;} 
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("*Seating Capacity", "xpath" , "(//*[contains(@id, 'eating_capacity')])[2]" ,"100" , false, "no_jira");
     if (FAIL) { return;}
-    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("*Associated Delivery Partners dropdown click ","xpath", "(//div[@class='v-input__icon v-input__icon--append'])[7]", "no_jira"); 
+    Thread.sleep(5000);
+      _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("*Associated Delivery Partners dropdown click ","xpath", "(//div[@class='v-input__icon v-input__icon--append'])[7]", "no_jira"); 
       if (FAIL) { return;} 
     _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find *Associated Delivery Partners dropdown list", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']", "no_jira");
       if (FAIL) { return;} 
@@ -182,6 +187,7 @@ public class FW_restaurants {
         }
     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(1), "no_jira"); 
     if (FAIL) { return;} 
+
 //    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("*Mobile Operations dropdown click ","xpath", "//div[@class='restaurant-information-header']", "no_jira"); 
 //      if (FAIL) { return;}
 //    _t++; Thread.sleep((long) sleep); TWeb.Click_out_of_Element_By_Path("*Mobile Operations dropdown Close", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",  "Top",4, 4, "no_jira");
@@ -198,22 +204,25 @@ public class FW_restaurants {
         for (int i = 94; i < L1.size(); i++) {
             _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Food Preparation Location dropdown value---'"+i+"'", L1.get(i), "no_jira");                          
                 if (FAIL) { return;}
-        }
+               	             }
     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(95), "no_jira"); 
       if (FAIL) { return;}
      _t++; Thread.sleep((long) sleep);TWeb.Scroll_XY("Scroll to Upload Files", 0, 500, "no_jira");
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Upload Files click ","xpath", "//button[@class='secondary-button v-btn v-btn--depressed v-btn--flat v-btn--outlined v-btn--rounded theme--light v-size--default primary--text']", "no_jira"); 
       if (FAIL) { return;}
-      
-
-    _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Upload file Restaurant Site Visit Audit Form", "xpath", "//div[@class='v-dialog v-dialog--active v-dialog--persistent']", "no_jira");
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on upload file", "xpath", "//div[@class='upload-file partner-info-btn']/button", "no_jira"); 
+      if (FAIL) { return;}   	
+         Thread.sleep(4000);
+    _t++; TWeb.Element_By_Path_Text_Enter("Upload a file", "xpath", "//input[@type='file']", System.getProperty("user.dir")+"//Login screen.png", false, "no_jira"); 
       if (FAIL) { return;}
-      
-    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click to find a file ","xpath", "//p[@class='dz-text']", "no_jira"); 
-      if (FAIL) { return;}
-    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Uploading a file", "xpath" , "//p[@class='max-file']" ,"/Users/prathyusha.deshpande/jtt/Login screen.png" , false, "no_jira");
-    if (FAIL) { return;}
-
+      Thread.sleep(4000);
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Done button", "xpath", "//button//span[contains(.,'Done')]", "no_jira"); 
+      if (FAIL) { return;}  
+      Thread.sleep(5000);
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Add Restaurant button", "xpath", "//button//span[contains(.,' Add Restaurant ')]", "no_jira"); 
+      if (FAIL) { return;}     
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Create Restaurant?", "xpath", "//button[@class='primary-button send-button v-btn v-btn--depressed v-btn--rounded theme--light v-size--default secondary grape--text']", "no_jira"); 
+      if (FAIL) { return;}   
    
  
     }
