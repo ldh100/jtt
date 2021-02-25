@@ -927,7 +927,7 @@ public class WO extends javax.swing.JInternalFrame {
             "Scope: " + SCOPE + "\r\n" +
             "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w;
 
-            txtLog.append(Func.Send_File_to_Slack(Report_File, "wo_automation", MSG));
+            txtLog.append(Func.Send_File_to_Slack(Report_File, "wo_automation", MSG + "\r\n"));
             File f = new File(Report_File);
             if(f.exists() && !f.isDirectory()) { 
                 f.delete();

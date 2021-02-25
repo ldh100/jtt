@@ -590,7 +590,6 @@ public class A extends javax.swing.JFrame {
     }//GEN-LAST:event_Menu_FWMouseClicked
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         Get_User();
-        CWD = System.getProperty("user.dir");
         try{
             Files.createDirectories(Paths.get(CWD + File.separator + "ScreenShots"));           
             Files.createDirectories(Paths.get(CWD + File.separator + "MobileBuilds"));  
@@ -869,8 +868,10 @@ public class A extends javax.swing.JFrame {
 
     // <editor-fold defaultstate="collapsed" desc="Public & Private Variables">
     public static final String QA_BD_CON_STRING = "jdbc:sqlserver://dev-digitalhospitality-sql.database.windows.net:1433;database=cdlqadb;user=xttadmin;password=Sp515s10#a;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
-    public static String S_OAuth_TKN = "";
-    public static String CWD = "";
+
+    public static String CWD = System.getProperty("user.dir");
+    public static String ADB_HOME = "";
+    public static String S_OAuth_TKN = ""; 
     public static final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
     public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
@@ -882,7 +883,7 @@ public class A extends javax.swing.JFrame {
     public static String WsOS = "";  
     private ImageIcon II;     
     
-    
+    //move to individual packages
     public static String API_Response_Body = "";   
     public static int T_Index;
     public static WebDriver d1;

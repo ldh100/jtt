@@ -351,6 +351,16 @@ public class Android extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(74, 74, 74)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbMPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -371,7 +381,7 @@ public class Android extends javax.swing.JInternalFrame {
                         .addComponent(_promo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                         .addComponent(_group_management, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(_announcements, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, 0)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(_brand_new)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -381,23 +391,7 @@ public class Android extends javax.swing.JInternalFrame {
                     .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_logout))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbMPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -441,20 +435,20 @@ public class Android extends javax.swing.JInternalFrame {
                         .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
                         .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSITES12))
-                .addGap(0, 0, 0)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbMPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbMPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {_announcements, _brand, _group_management, _login, _orders, _promo, _resent_updates, _sales_reporting, _site});
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 424, 196));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 424, 200));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -481,7 +475,7 @@ public class Android extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 428, 164));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 424, 164));
 
         DV2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV2.setModel(new javax.swing.table.DefaultTableModel(
@@ -505,7 +499,7 @@ public class Android extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 20, 416, 120));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 20, 420, 120));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
 
@@ -565,7 +559,7 @@ public class Android extends javax.swing.JInternalFrame {
         txtLog.setPreferredSize(null);
         jScrollPane1.setViewportView(txtLog);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 360, 428, 140));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 360, 424, 140));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -578,7 +572,7 @@ public class Android extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 52, 78, 20));
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 48, 78, 20));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -588,7 +582,7 @@ public class Android extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
-        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 52, 84, 22));
+        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 48, 84, 22));
 
         btnFails.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnFails.setText("Show Fails");
@@ -599,7 +593,7 @@ public class Android extends javax.swing.JInternalFrame {
                 btnFailsMouseClicked(evt);
             }
         });
-        jPanel3.add(btnFails, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 28, 84, 22));
+        jPanel3.add(btnFails, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 28, 84, 20));
 
         btnExel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnExel.setText("Excel Rep");
@@ -610,7 +604,7 @@ public class Android extends javax.swing.JInternalFrame {
                 btnExelMouseClicked(evt);
             }
         });
-        jPanel3.add(btnExel, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 84, 22));
+        jPanel3.add(btnExel, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 84, 20));
 
         btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSave_Opt.setText("Save Setup");
@@ -621,19 +615,19 @@ public class Android extends javax.swing.JInternalFrame {
                 btnSave_OptMouseClicked(evt);
             }
         });
-        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 52, 116, 22));
+        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 48, 116, 22));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES13.setText("Environment:");
         lblSITES13.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 12, 92, 16));
+        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 8, 92, 16));
 
         lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES14.setText("Application:");
         lblSITES14.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 12, 92, 16));
+        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 8, 92, 16));
 
         cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbEnv.setForeground(new java.awt.Color(0, 0, 204));
@@ -642,7 +636,7 @@ public class Android extends javax.swing.JInternalFrame {
                 cmbEnvItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 28, 116, 20));
+        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 24, 116, 20));
 
         cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbApp.setForeground(new java.awt.Color(0, 0, 204));
@@ -651,36 +645,36 @@ public class Android extends javax.swing.JInternalFrame {
                 cmbAppItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 28, 108, 20));
+        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 24, 108, 20));
 
         _slack.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         _slack.setText("Report to Slack");
         _slack.setToolTipText("");
         _slack.setRequestFocusEnabled(false);
-        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 56, 100, 14));
+        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 52, 100, 14));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 424, 416, -1));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 428, 416, -1));
 
         txtMobile_Id.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_Id.setText("cdl.test.xtt@gmail.com");
-        getContentPane().add(txtMobile_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 382, 188, -1));
+        getContentPane().add(txtMobile_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 392, 188, -1));
 
         txtMobile_Pw.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_Pw.setText("Password1");
-        getContentPane().add(txtMobile_Pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(756, 382, 92, -1));
+        getContentPane().add(txtMobile_Pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(756, 392, 92, -1));
 
         lblSITES3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSITES3.setText("Mobile User:");
         lblSITES3.setToolTipText("");
         lblSITES3.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES3, new org.netbeans.lib.awtextra.AbsoluteConstraints(456, 384, 76, -1));
+        getContentPane().add(lblSITES3, new org.netbeans.lib.awtextra.AbsoluteConstraints(456, 396, 76, -1));
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSITES6.setText("PW:");
         lblSITES6.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 384, -1, -1));
+        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 396, -1, -1));
 
         DV3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV3.setModel(new javax.swing.table.DefaultTableModel(
@@ -699,7 +693,7 @@ public class Android extends javax.swing.JInternalFrame {
         DV3.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(DV3);
 
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 204, 428, 80));
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 204, 424, 80));
 
         lblAPK.setText("Builds / APK");
         lblAPK.setAlignmentX(0.5F);
@@ -769,21 +763,21 @@ public class Android extends javax.swing.JInternalFrame {
         lblSITES4.setText("Bolter User:");
         lblSITES4.setToolTipText("");
         lblSITES4.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(456, 405, 76, -1));
+        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(456, 416, 76, -1));
 
         txtBolter_Id.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtBolter_Id.setText("cdl.test.xtt+rn@gmail.com");
-        getContentPane().add(txtBolter_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 402, 188, -1));
+        getContentPane().add(txtBolter_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 412, 188, -1));
 
         lblSITES7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSITES7.setText("PW:");
         lblSITES7.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 404, -1, -1));
+        getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 416, -1, -1));
 
         txtBolter_Pw.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtBolter_Pw.setText("Password1");
-        getContentPane().add(txtBolter_Pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(756, 401, 92, -1));
+        getContentPane().add(txtBolter_Pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(756, 412, 92, -1));
 
         btnScreenshotFolder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnScreenshotFolder.setText("SreenShots Folder");
@@ -843,13 +837,17 @@ public class Android extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Android_AncestorAdded
     private void Load_Form(){   
 //        String X = Func.ExecuteCmdProcessBuilder("ls -l", CWD, true, true).trim();
-//        //String X = Func.ExecuteCmdProcessBuilder("adb devices", "", true, true).trim();
+//        //String X = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb devices", "", true, true).trim();
 //        txtLog.append("-Test X " + X + "\r\n");
 //        txtLog.setCaretPosition(txtLog.getDocument().getLength());
         
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        Load = true;  
-             
+        Load = true; 
+        if(WsOS.toLowerCase().contains("windows")){
+            ADB_HOME = "";    
+        }else{
+            ADB_HOME = System.getenv("HOME") + File.separator + "Library" + File.separator + "Android"+ File.separator + "sdk" + File.separator + "platform-tools" + File.separator;     
+        }
         Get_S3_MOB_Credentials();              
 
         cmbApp.addItem("Boost");
@@ -1021,7 +1019,7 @@ public class Android extends javax.swing.JInternalFrame {
         try {  
             String file = CWD + File.separator + "ScreenShots" + File.separator + "Mobile_Screen_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMdd_hhmmss")) + ".png";
             SCREEN = new File(file);                      // -d " + devID
-            SS = Func.ExecuteCmdProcessBuilder(("adb exec-out screencap -p > " + file).trim(), CWD, true, true).trim();
+            SS = Func.ExecuteCmdProcessBuilder((ADB_HOME + "adb exec-out screencap -p > " + file).trim(), CWD, true, true).trim();
             Thread.sleep(3000);
             txtLog.append(SS + "\r\n");
             txtLog.append("= ScreenShot > " + file + "\r\n");
@@ -1080,18 +1078,19 @@ public class Android extends javax.swing.JInternalFrame {
         btnGetAPK.setEnabled(false);
         btnS3Install.setEnabled(false);
         btnInstallAll.setEnabled(false); 
+        btnInstallAPK.setEnabled(false);
         txtLog.append("-Get APK..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
        
         try {
-            //String R = Func.ExecuteCmdRuntime("adb -s " + devID + " shell pm path " + appPackage);
-            String R = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " shell pm path " + appPackage, CWD, true, true).trim();
+            //String R = Func.ExecuteCmdRuntime(ADB_HOME + "adb -s " + devID + " shell pm path " + appPackage);
+            String R = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb -s " + devID + " shell pm path " + appPackage, CWD, true, true).trim();
             txtLog.append(R.trim() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             
             String where = System.getProperty("user.home") + File.separator + "Desktop";
-            //R = Func.ExecuteCmdRuntime("adb -s " + devID + " pull " + R.trim().substring(R.indexOf(":") + 1) + " " + where);
-            R = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " pull " + R.trim().substring(R.indexOf(":") + 1) + " " + where, where, true, true).trim();
+            //R = Func.ExecuteCmdRuntime(ADB_HOME + "adb -s " + devID + " pull " + R.trim().substring(R.indexOf(":") + 1) + " " + where);
+            R = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb -s " + devID + " pull " + R.trim().substring(R.indexOf(":") + 1) + " " + where, where, true, true).trim();
             txtLog.append(R.trim() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
@@ -1108,6 +1107,7 @@ public class Android extends javax.swing.JInternalFrame {
         btnGetAPK.setEnabled(true);
         btnS3Install.setEnabled(true);
         btnInstallAll.setEnabled(true); 
+        btnInstallAPK.setEnabled(true);
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));         
     }//GEN-LAST:event_btnGetAPKMouseClicked
     private void cmbDeviceItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDeviceItemStateChanged
@@ -1146,15 +1146,15 @@ public class Android extends javax.swing.JInternalFrame {
         btnGetAPK.setEnabled(false);
         btnS3Install.setEnabled(false);
         btnInstallAll.setEnabled(false); 
-
+        btnInstallAPK.setEnabled(false);
         Load = true;  
         cmbDevice.removeAllItems();
         txtLog.append("-Find Attached Android Devices ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        //String Dev = Func.ExecuteCmdRuntime("adb devices -l").trim();
-        String Dev  = Func.ExecuteCmdProcessBuilder("adb devices -l", CWD, true, true).trim();
+
+        String Dev  = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb devices -l", ADB_HOME, true, true).trim();
         String[] dev = Dev.split("\r\n");
-        if (dev.length > 1) {
+        if (dev.length > 2) {
             for (int i = 1; i < dev.length; i++) {
                 String D = dev[i];
                 if(D.contains("model")){
@@ -1166,19 +1166,20 @@ public class Android extends javax.swing.JInternalFrame {
             }
             txtLog.append("=== " + Dev + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());                
-                btnRun.setEnabled(true);
-                if(cmbDevice.getItemCount() == 1){
-                    btnGetScreenshot.setEnabled(true); 
-                } else{
-                    btnGetScreenshot.setEnabled(false); 
-                }
+            btnRun.setEnabled(true);
+            if(cmbDevice.getItemCount() == 1){
+                btnGetScreenshot.setEnabled(true); 
+            } else{
+                btnGetScreenshot.setEnabled(false); 
+            }
             btnRun.setEnabled(true);
             btnGetAPK.setEnabled(true);
             btnS3Install.setEnabled(true);
             btnInstallAll.setEnabled(true); 
+            btnInstallAPK.setEnabled(true);
         } else {
             cmbDevice.addItem("noDevice");
-            txtLog.append("" + "=== No Attached Device(s) found" + "\r\n" + "Return from 'adb devices -l' > '" + Dev + "'" + "\r\n");
+            txtLog.append("=== No Attached Device(s) found" + "\r\n" + "Return from 'adb devices -l' > '" + Dev + "'" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());             
         }
         Load = false; 
@@ -1188,17 +1189,15 @@ public class Android extends javax.swing.JInternalFrame {
     private void CheckDevice(){
         devID = "";
         devModel = "";
-        txtLog.append("-Check Selected Device..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
         String D = cmbDevice.getSelectedItem().toString();
         if(D.contains("id:")){
+            txtLog.append("-Check Selected Device..." + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             devModel = D.substring(0,D.indexOf(" ")).trim(); 
             devID = D.substring(D.indexOf("id:") + 3).trim();        
-            //devOS = Func.ExecuteCmdRuntime("adb -s " + devID + " shell getprop ro.build.version.release").trim();
-            devOS = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " shell getprop ro.build.version.release", CWD, true, true).trim();
+            //devOS = Func.ExecuteCmdRuntime(ADB_HOME + "adb -s " + devID + " shell getprop ro.build.version.release").trim();
+            devOS = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb -s " + devID + " shell getprop ro.build.version.release", CWD, true, true).trim();
             devOS = devOS.replace("null", "");
-            //Get_Device_OS();
-            //CheckAppPackage();
             txtLog.append("=== Model: " + devModel + ", OS version: " + devOS + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }         
@@ -1219,8 +1218,8 @@ public class Android extends javax.swing.JInternalFrame {
         String v2 = "?";
         appVersion = "Not Found";
         try{
-            //String v = Func.ExecuteCmdRuntime("adb -s " + devID + " shell dumpsys package " + appPackage).trim();
-            String v = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " shell dumpsys package " + appPackage, CWD, true, true).trim();
+            //String v = Func.ExecuteCmdRuntime(ADB_HOME + "adb -s " + devID + " shell dumpsys package " + appPackage).trim();
+            String v = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb -s " + devID + " shell dumpsys package " + appPackage, CWD, true, true).trim();
 
             if ("".equals(v.trim())) {
                 txtLog.append("=== appPackage  " + appPackage + " - no information\r\n");
@@ -1351,14 +1350,14 @@ public class Android extends javax.swing.JInternalFrame {
     private void UnInstaPackage(String PKG) {
         txtLog.append("== UnInstall Package " + PKG + " > " + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        String I = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " uninstall " + PKG, CWD, true, true).trim();
+        String I = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb -s " + devID + " uninstall " + PKG, CWD, true, true).trim();
         txtLog.append(I + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
     } 
     private void InstallBuild(String BuildFile) {
         txtLog.append("== Install Build: " + BuildFile + " > " + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        String I = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " install -r " + BuildFile, CWD, true, true).trim();
+        String I = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb -s " + devID + " install -r " + BuildFile, CWD, true, true).trim();
         txtLog.append(I + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         CheckAppPackage();
@@ -1371,7 +1370,7 @@ public class Android extends javax.swing.JInternalFrame {
         btnGetAPK.setEnabled(false);
         btnS3Install.setEnabled(false);
         btnInstallAll.setEnabled(false); 
-        
+        btnInstallAPK.setEnabled(false);        
         txtLog.append("-Install All APK(s) - App Tester ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         
@@ -1482,7 +1481,7 @@ public class Android extends javax.swing.JInternalFrame {
         btnGetAPK.setEnabled(true);
         btnS3Install.setEnabled(true);
         btnInstallAll.setEnabled(true); 
-        
+        btnInstallAPK.setEnabled(true);        
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));         
     }       
 
@@ -1526,9 +1525,9 @@ public class Android extends javax.swing.JInternalFrame {
     private void Swipe_WakeUp(){       
         txtLog.append("-Swipe_WakeUp " + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
-        String v = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " shell input touchscreen swipe 800 400 400 400 100", CWD, false, false);    
+        String v = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb -s " + devID + " shell input touchscreen swipe 800 400 400 400 100", CWD, false, false);    
     }
-    private void BW1_DoWork() { 
+    private void BW1_DoWork(){ 
         BW1 = new SwingWorker() {             
             Instant dw_start = Instant.now();
             @Override
@@ -1636,7 +1635,7 @@ public class Android extends javax.swing.JInternalFrame {
                     "Scope: " + SCOPE + "\r\n" +
                     "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w;
 
-                    txtLog.append(Func.Send_File_to_Slack(Report_File, "Androidautomation", MSG));
+                    txtLog.append(Func.Send_File_to_Slack(Report_File, "Androidautomation", MSG + "\r\n"));
                     File f = new File(Report_File);
                     if(f.exists() && !f.isDirectory()) { 
                         f.delete();
