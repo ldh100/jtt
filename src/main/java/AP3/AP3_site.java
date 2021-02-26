@@ -661,7 +661,10 @@ public class AP3_site {
                       
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Addtional Instructions", "css", "input[aria-label='Additional Instructions (en)']", "Do not use - test auto generated", false, "no_jira");
                         if (FAIL) { return;}     
-
+                    _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'EN'", "EN" , true, "no_jira");
+                          if (FAIL) { return;}  
+                    _t++; Thread.sleep((long) sleep); TWeb.Scroll_to_Element("Scroll to Meal plan ID", e, "no_jira");
+                        if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Meal Plan Terminal ID", "css", "[aria-label='Meal Plan Terminal ID']", "401001", false, "no_jira");
                         if (FAIL) { return;}   
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Tender Type", "xpath", "//input[@placeholder='Please select Tender Type']/preceding-sibling::div","no_jira");
