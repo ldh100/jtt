@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
-import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -522,7 +521,7 @@ public class Station extends javax.swing.JInternalFrame {
     private void GetSites() {   
         SitesLastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Sites ..." + "\r\n");
+        txtLog.append("- Load Sites ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         
         if(sw1.isRunning()){
@@ -657,7 +656,7 @@ public class Station extends javax.swing.JInternalFrame {
         BrandsLastRow = -1;
         SitesLastRow = DV_Sites.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Brands ..." + "\r\n");
+        txtLog.append("- Load Brands ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String[] ColumnsName = {}; 
         DefaultTableModel Model = new DefaultTableModel();
@@ -786,7 +785,7 @@ public class Station extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetMenus(){
-        txtLog.append("-Load Menus ..." + "\r\n");
+        txtLog.append("- Load Menus ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String[] cName = {}; 
         DefaultTableModel M = new DefaultTableModel();

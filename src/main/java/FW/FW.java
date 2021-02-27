@@ -1200,7 +1200,7 @@ public class FW extends javax.swing.JInternalFrame {
     
     private void GetMarkets() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Markets ..." + "\r\n");
+        txtLog.append("- Load Markets ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -1249,7 +1249,7 @@ public class FW extends javax.swing.JInternalFrame {
     private void GetRestaurants() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Restaurants ..." + "\r\n");
+        txtLog.append("- Load Restaurants ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -1364,7 +1364,7 @@ public class FW extends javax.swing.JInternalFrame {
     private void GetUnits() {
         d2LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Units ..." + "\r\n");
+        txtLog.append("- Load Units ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();

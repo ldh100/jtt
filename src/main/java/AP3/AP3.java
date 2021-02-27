@@ -1361,8 +1361,8 @@ public class AP3 extends javax.swing.JInternalFrame {
                 }  
                 btnRun.setEnabled(true);
 
-                txtLog.append("=== " + Summary); // Summary shown in EX top
-                txtLog.append("=== Scope: " + SCOPE); // SCOPE shown in EX top
+                txtLog.append("=== " + Summary + "\r\n"); // Summary shown in EX top
+                txtLog.append("=== Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
                 txtLog.append("=== Browser: " + cmbBrow.getSelectedItem().toString() + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
   
@@ -1460,7 +1460,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private void GetSites() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Sites ..." + "\r\n");
+        txtLog.append("- Load Sites ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -1590,7 +1590,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private void GetBrands() {
         d2LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Brands ..." + "\r\n");
+        txtLog.append("- Load Brands ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -1708,7 +1708,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     }
     private void GetGroups() {  
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Groups/Sector ..." + "\r\n");
+        txtLog.append("- Load Groups/Sector ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         cmbGroup.removeAllItems();
         GROUP_IDS = new ArrayList<>();
@@ -1777,12 +1777,12 @@ public class AP3 extends javax.swing.JInternalFrame {
     private void GetCompanies() {  
         int I = cmbGroup.getSelectedIndex();
         if(I < 0){ // =========== DEBUG
-            txtLog.append("-Load Sector/Companies(Menus) ERROR: cmbGROUP.getSelectedIndex() < 0" + "\r\n");
+            txtLog.append("- Load Sector/Companies(Menus) ERROR: cmbGROUP.getSelectedIndex() < 0" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Sector/Companies(Menus) ..." + "\r\n");
+        txtLog.append("- Load Sector/Companies(Menus) ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         CloseableHttpClient httpclient = HttpClients.createDefault();
         if(sw1.isRunning()){
@@ -1852,7 +1852,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     }
     private void GetBrandSector() {                                 
 
-        txtLog.append("-GetBrand Sector/Company ..." + "\r\n");
+        txtLog.append("- GetBrand Sector/Company ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         GroupID = "";
         CompanyID = "";
@@ -2239,6 +2239,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     }
 
     // <editor-fold defaultstate="collapsed" desc="Package Local Variables">
+
     private String Last_EX;
     private static final Stopwatch sw1 = Stopwatch.createUnstarted();
     private boolean Load;
@@ -2283,7 +2284,6 @@ public class AP3 extends javax.swing.JInternalFrame {
     private static String S_Signing_Secret = "";
     private static String S_Hook = "";
     
-    private static String AP3_TKN = "";    
     public static String url = "";
     public static String app = "";
     private static String appId = "";

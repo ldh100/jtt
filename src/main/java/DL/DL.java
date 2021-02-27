@@ -809,8 +809,8 @@ public class DL extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }  
         btnRun.setEnabled(true);
-        txtLog.append("=== " + Summary); // Summary shown in EX top
-        txtLog.append("=== Scope: " + SCOPE); // SCOPE shown in EX top
+        txtLog.append("=== " + Summary + "\r\n"); // Summary shown in EX top
+        txtLog.append("=== Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
         txtLog.append("=== Browser: " + cmbBrow.getSelectedItem().toString() + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
   
@@ -1134,7 +1134,7 @@ public class DL extends javax.swing.JInternalFrame {
     private void GetMetricsApi() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Metrics ..." + "\r\n");
+        txtLog.append("- Load Metrics ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -1224,7 +1224,7 @@ public class DL extends javax.swing.JInternalFrame {
     private void GetMetrics() {
         d2LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Metrics ..." + "\r\n");
+        txtLog.append("- Load Metrics ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -1292,7 +1292,7 @@ public class DL extends javax.swing.JInternalFrame {
     private void GetDates() {
         d2LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Date Ranges ..." + "\r\n");
+        txtLog.append("- Load Date Ranges ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
