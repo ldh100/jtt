@@ -6,6 +6,7 @@
 package Android;
 import A.TMob;
 import static A.A.*;
+import static Android.Android.*;
 /**
  *
  * @author Oleg.Spozito

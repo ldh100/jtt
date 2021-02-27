@@ -176,12 +176,12 @@ public class Android extends javax.swing.JInternalFrame {
         setName("Android"); // NOI18N
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 Android_AncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -215,6 +215,7 @@ public class Android extends javax.swing.JInternalFrame {
         jPanel1.setToolTipText("");
         jPanel1.setDoubleBuffered(false);
         jPanel1.setName("Scope"); // NOI18N
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         _login.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _login.setSelected(true);
@@ -223,60 +224,70 @@ public class Android extends javax.swing.JInternalFrame {
         _login.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _login.setRequestFocusEnabled(false);
+        jPanel1.add(_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 18, -1, 14));
 
         _all_data.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _all_data.setText("Show all data rows");
         _all_data.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _all_data.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _all_data.setRequestFocusEnabled(false);
+        jPanel1.add(_all_data, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 18, 131, 14));
 
         _site_new.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _site_new.setText("New Site (not in Prod)");
         _site_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _site_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _site_new.setRequestFocusEnabled(false);
+        jPanel1.add(_site_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 34, -1, 14));
 
         _site.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _site.setText("Sites");
         _site.setContentAreaFilled(false);
         _site.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _site.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        jPanel1.add(_site, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 34, 77, 14));
 
         _brand.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _brand.setText("Brand");
         _brand.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _brand.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _brand.setRequestFocusEnabled(false);
+        jPanel1.add(_brand, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 50, 84, 14));
 
         _orders.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _orders.setText("Orders");
         _orders.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _orders.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _orders.setRequestFocusEnabled(false);
+        jPanel1.add(_orders, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 66, 78, 14));
 
         _resent_updates.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _resent_updates.setText("Recent Updates");
         _resent_updates.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _resent_updates.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _resent_updates.setRequestFocusEnabled(false);
+        jPanel1.add(_resent_updates, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 50, 119, 14));
 
         _announcements.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _announcements.setText("Announcements");
         _announcements.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _announcements.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _announcements.setRequestFocusEnabled(false);
+        jPanel1.add(_announcements, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 66, 120, 14));
 
         _promo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _promo.setText("Promo Management");
         _promo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _promo.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _promo.setRequestFocusEnabled(false);
+        jPanel1.add(_promo, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 98, 120, 14));
 
         _sales_reporting.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _sales_reporting.setText("Sales Reporting");
         _sales_reporting.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _sales_reporting.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _sales_reporting.setRequestFocusEnabled(false);
+        jPanel1.add(_sales_reporting, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 82, -1, 14));
 
         _users.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _users.setSelected(true);
@@ -284,177 +295,88 @@ public class Android extends javax.swing.JInternalFrame {
         _users.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _users.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _users.setRequestFocusEnabled(false);
+        jPanel1.add(_users, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 66, 93, 14));
 
         _password.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _password.setText("Forgot Password");
         _password.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _password.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _password.setRequestFocusEnabled(false);
+        jPanel1.add(_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(292, 98, 113, 14));
 
         _logout.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _logout.setText("User Feedback & Logout");
         _logout.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _logout.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _logout.setRequestFocusEnabled(false);
+        jPanel1.add(_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 114, -1, 14));
 
         _roles.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _roles.setText("Roles Permissions");
         _roles.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _roles.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _roles.setRequestFocusEnabled(false);
+        jPanel1.add(_roles, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 82, 131, 14));
 
         _brand_new.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _brand_new.setText("Add Brand (not in Prod)");
         _brand_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _brand_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _brand_new.setRequestFocusEnabled(false);
+        jPanel1.add(_brand_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 50, -1, 14));
 
         _smart_analytics.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _smart_analytics.setText("Smart Analytics");
         _smart_analytics.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _smart_analytics.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _smart_analytics.setRequestFocusEnabled(false);
+        jPanel1.add(_smart_analytics, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 114, -1, 14));
 
         _group_management.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _group_management.setText("Group Management");
         _group_management.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _group_management.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _group_management.setRequestFocusEnabled(false);
+        jPanel1.add(_group_management, new org.netbeans.lib.awtextra.AbsoluteConstraints(119, 82, 124, 14));
 
         lblSITES8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        lblSITES8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSITES8.setText("Promo Code");
         lblSITES8.setAlignmentX(0.5F);
+        jPanel1.add(lblSITES8, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 140, 72, 16));
 
         cmbPromo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jPanel1.add(cmbPromo, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 136, 172, 20));
 
         lblSITES12.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        lblSITES12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSITES12.setText("Meal Plan");
         lblSITES12.setAlignmentX(0.5F);
+        jPanel1.add(lblSITES12, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 164, 56, -1));
 
         cmbMPlan.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        cmbMPlan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbMPlanActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmbMPlan, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 160, 172, 20));
 
         _sales_analytics.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _sales_analytics.setText("Sales Analytics");
         _sales_analytics.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _sales_analytics.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _sales_analytics.setRequestFocusEnabled(false);
+        jPanel1.add(_sales_analytics, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 98, -1, 14));
 
         _notifications.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _notifications.setText("Notifications");
         _notifications.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _notifications.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _notifications.setRequestFocusEnabled(false);
+        jPanel1.add(_notifications, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 114, 88, 14));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_smart_analytics)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(6, 6, 6)
-                            .addComponent(_orders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(_brand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(_login, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(_sales_reporting)
-                    .addComponent(_sales_analytics))
-                .addGap(0, 0, 0)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(_notifications, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_resent_updates, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(_promo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                        .addComponent(_group_management, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(_announcements, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, 0)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(_brand_new)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(_site_new, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_logout))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbMPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(_brand, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_resent_updates, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)
-                        .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(_group_management, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_sales_reporting, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(_sales_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(_notifications, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_smart_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(_site_new, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(_brand_new, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSITES12))
-                .addGap(0, 0, 0)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbMPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4))
-        );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {_announcements, _brand, _group_management, _login, _orders, _promo, _resent_updates, _sales_reporting, _site});
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 424, 196));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 424, 188));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -481,7 +403,7 @@ public class Android extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 428, 164));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 424, 164));
 
         DV2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV2.setModel(new javax.swing.table.DefaultTableModel(
@@ -505,7 +427,7 @@ public class Android extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 20, 416, 120));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 20, 420, 120));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
 
@@ -553,7 +475,7 @@ public class Android extends javax.swing.JInternalFrame {
                 .addGap(2, 2, 2))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 140, -1, -1));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 140, 420, -1));
 
         txtLog.setEditable(false);
         txtLog.setColumns(20);
@@ -565,7 +487,7 @@ public class Android extends javax.swing.JInternalFrame {
         txtLog.setPreferredSize(null);
         jScrollPane1.setViewportView(txtLog);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 360, 428, 140));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 360, 424, 140));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -578,7 +500,7 @@ public class Android extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 52, 78, 20));
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 48, 78, 20));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -588,7 +510,7 @@ public class Android extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
-        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 52, 84, 22));
+        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 48, 84, 22));
 
         btnFails.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnFails.setText("Show Fails");
@@ -599,7 +521,7 @@ public class Android extends javax.swing.JInternalFrame {
                 btnFailsMouseClicked(evt);
             }
         });
-        jPanel3.add(btnFails, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 28, 84, 22));
+        jPanel3.add(btnFails, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 24, 84, 20));
 
         btnExel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnExel.setText("Excel Rep");
@@ -610,7 +532,7 @@ public class Android extends javax.swing.JInternalFrame {
                 btnExelMouseClicked(evt);
             }
         });
-        jPanel3.add(btnExel, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 84, 22));
+        jPanel3.add(btnExel, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 0, 84, 20));
 
         btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSave_Opt.setText("Save Setup");
@@ -621,19 +543,19 @@ public class Android extends javax.swing.JInternalFrame {
                 btnSave_OptMouseClicked(evt);
             }
         });
-        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 52, 116, 22));
+        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 48, 116, 22));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES13.setText("Environment:");
         lblSITES13.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 12, 92, 16));
+        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 8, 92, 16));
 
         lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES14.setText("Application:");
         lblSITES14.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 12, 92, 16));
+        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 8, 92, 16));
 
         cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbEnv.setForeground(new java.awt.Color(0, 0, 204));
@@ -642,7 +564,7 @@ public class Android extends javax.swing.JInternalFrame {
                 cmbEnvItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 28, 116, 20));
+        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 24, 116, 20));
 
         cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbApp.setForeground(new java.awt.Color(0, 0, 204));
@@ -651,36 +573,36 @@ public class Android extends javax.swing.JInternalFrame {
                 cmbAppItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 28, 108, 20));
+        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 24, 108, 20));
 
         _slack.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         _slack.setText("Report to Slack");
         _slack.setToolTipText("");
         _slack.setRequestFocusEnabled(false);
-        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 56, 100, 14));
+        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 52, 100, 14));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 424, 416, -1));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 428, 416, -1));
 
         txtMobile_Id.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_Id.setText("cdl.test.xtt@gmail.com");
-        getContentPane().add(txtMobile_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 382, 188, -1));
+        getContentPane().add(txtMobile_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 384, 188, -1));
 
         txtMobile_Pw.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_Pw.setText("Password1");
-        getContentPane().add(txtMobile_Pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(756, 382, 92, -1));
+        getContentPane().add(txtMobile_Pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 384, 92, -1));
 
         lblSITES3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSITES3.setText("Mobile User:");
         lblSITES3.setToolTipText("");
         lblSITES3.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES3, new org.netbeans.lib.awtextra.AbsoluteConstraints(456, 384, 76, -1));
+        getContentPane().add(lblSITES3, new org.netbeans.lib.awtextra.AbsoluteConstraints(452, 388, 76, -1));
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSITES6.setText("PW:");
         lblSITES6.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 384, -1, -1));
+        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 388, -1, -1));
 
         DV3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV3.setModel(new javax.swing.table.DefaultTableModel(
@@ -699,7 +621,7 @@ public class Android extends javax.swing.JInternalFrame {
         DV3.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(DV3);
 
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 204, 428, 80));
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 204, 424, 80));
 
         lblAPK.setText("Builds / APK");
         lblAPK.setAlignmentX(0.5F);
@@ -769,21 +691,21 @@ public class Android extends javax.swing.JInternalFrame {
         lblSITES4.setText("Bolter User:");
         lblSITES4.setToolTipText("");
         lblSITES4.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(456, 405, 76, -1));
+        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(452, 408, 76, -1));
 
         txtBolter_Id.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtBolter_Id.setText("cdl.test.xtt+rn@gmail.com");
-        getContentPane().add(txtBolter_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 402, 188, -1));
+        getContentPane().add(txtBolter_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 404, 188, -1));
 
         lblSITES7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSITES7.setText("PW:");
         lblSITES7.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 404, -1, -1));
+        getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 408, -1, -1));
 
         txtBolter_Pw.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtBolter_Pw.setText("Password1");
-        getContentPane().add(txtBolter_Pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(756, 401, 92, -1));
+        getContentPane().add(txtBolter_Pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 404, 92, -1));
 
         btnScreenshotFolder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnScreenshotFolder.setText("SreenShots Folder");
@@ -843,20 +765,24 @@ public class Android extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_Android_AncestorAdded
     private void Load_Form(){   
 //        String X = Func.ExecuteCmdProcessBuilder("ls -l", CWD, true, true).trim();
-//        //String X = Func.ExecuteCmdProcessBuilder("adb devices", "", true, true).trim();
-//        txtLog.append("-Test X " + X + "\r\n");
+//        //String X = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb devices", "", true, true).trim();
+//        txtLog.append("- Test X " + X + "\r\n");
 //        txtLog.setCaretPosition(txtLog.getDocument().getLength());
         
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        Load = true;  
-             
+        Load = true; 
+        if(WsOS.toLowerCase().contains("windows")){
+            ADB_HOME = "";    
+        }else{
+            ADB_HOME = System.getenv("HOME") + File.separator + "Library" + File.separator + "Android"+ File.separator + "sdk" + File.separator + "platform-tools" + File.separator;     
+        }
         Get_S3_MOB_Credentials();              
 
+        cmbApp.addItem("Bolter"); 
         cmbApp.addItem("Boost");
-        cmbApp.addItem("Bolter");
         cmbApp.addItem("JJKitchen");
         cmbApp.addItem("Nourish");
-        cmbApp.addItem("Rogers");;
+        cmbApp.addItem("Rogers");
         cmbApp.addItem("Thrive");
 
         cmbEnv.addItem("Staging");
@@ -987,7 +913,6 @@ public class Android extends javax.swing.JInternalFrame {
             BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
         }
 
-
         txtLog.append("=== Starting Android Driver..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
@@ -1007,6 +932,9 @@ public class Android extends javax.swing.JInternalFrame {
             BW1_DoWork(
                 // parameters?
             );
+        }else{
+            btnRun.setEnabled(true);
+            btnFails.setEnabled(true);
         }
     }//GEN-LAST:event_btnRunMouseClicked
     private void btnGetScreenshotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGetScreenshotMouseClicked
@@ -1014,14 +942,14 @@ public class Android extends javax.swing.JInternalFrame {
             return;
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Take Screenshot..." + "\r\n");
+        txtLog.append("- Take Screenshot..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         File SCREEN = null;
         String SS = "";
         try {  
             String file = CWD + File.separator + "ScreenShots" + File.separator + "Mobile_Screen_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMdd_hhmmss")) + ".png";
             SCREEN = new File(file);                      // -d " + devID
-            SS = Func.ExecuteCmdProcessBuilder(("adb exec-out screencap -p > " + file).trim(), CWD, true, true).trim();
+            SS = Func.ExecuteCmdProcessBuilder((ADB_HOME + "adb exec-out screencap -p > " + file).trim(), CWD, true, true).trim();
             Thread.sleep(3000);
             txtLog.append(SS + "\r\n");
             txtLog.append("= ScreenShot > " + file + "\r\n");
@@ -1080,18 +1008,17 @@ public class Android extends javax.swing.JInternalFrame {
         btnGetAPK.setEnabled(false);
         btnS3Install.setEnabled(false);
         btnInstallAll.setEnabled(false); 
-        txtLog.append("-Get APK..." + "\r\n");
+        btnInstallAPK.setEnabled(false);
+        txtLog.append("- Get APK..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
        
         try {
-            //String R = Func.ExecuteCmdRuntime("adb -s " + devID + " shell pm path " + appPackage);
-            String R = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " shell pm path " + appPackage, CWD, true, true).trim();
+            String R = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb -s " + devID + " shell pm path " + appPackage, CWD, true, true).trim();
             txtLog.append(R.trim() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             
             String where = System.getProperty("user.home") + File.separator + "Desktop";
-            //R = Func.ExecuteCmdRuntime("adb -s " + devID + " pull " + R.trim().substring(R.indexOf(":") + 1) + " " + where);
-            R = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " pull " + R.trim().substring(R.indexOf(":") + 1) + " " + where, where, true, true).trim();
+            R = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb -s " + devID + " pull " + R.trim().substring(R.indexOf(":") + 1) + " " + where, where, true, true).trim();
             txtLog.append(R.trim() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
@@ -1108,6 +1035,7 @@ public class Android extends javax.swing.JInternalFrame {
         btnGetAPK.setEnabled(true);
         btnS3Install.setEnabled(true);
         btnInstallAll.setEnabled(true); 
+        btnInstallAPK.setEnabled(true);
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));         
     }//GEN-LAST:event_btnGetAPKMouseClicked
     private void cmbDeviceItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDeviceItemStateChanged
@@ -1139,6 +1067,10 @@ public class Android extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnInstallAPKMouseClicked
 
+    private void cmbMPlanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMPlanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbMPlanActionPerformed
+
     private void FindConnectedDevices(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         btnRun.setEnabled(false);
@@ -1146,15 +1078,15 @@ public class Android extends javax.swing.JInternalFrame {
         btnGetAPK.setEnabled(false);
         btnS3Install.setEnabled(false);
         btnInstallAll.setEnabled(false); 
-
+        btnInstallAPK.setEnabled(false);
         Load = true;  
         cmbDevice.removeAllItems();
-        txtLog.append("-Find Attached Android Devices ..." + "\r\n");
+        txtLog.append("- Find Attached Android Devices ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        //String Dev = Func.ExecuteCmdRuntime("adb devices -l").trim();
-        String Dev  = Func.ExecuteCmdProcessBuilder("adb devices -l", CWD, true, true).trim();
+
+        String Dev  = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb devices -l", ADB_HOME, true, true).trim();
         String[] dev = Dev.split("\r\n");
-        if (dev.length > 1) {
+        if (dev.length > 2) {
             for (int i = 1; i < dev.length; i++) {
                 String D = dev[i];
                 if(D.contains("model")){
@@ -1166,19 +1098,20 @@ public class Android extends javax.swing.JInternalFrame {
             }
             txtLog.append("=== " + Dev + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());                
-                btnRun.setEnabled(true);
-                if(cmbDevice.getItemCount() == 1){
-                    btnGetScreenshot.setEnabled(true); 
-                } else{
-                    btnGetScreenshot.setEnabled(false); 
-                }
+            btnRun.setEnabled(true);
+            if(cmbDevice.getItemCount() == 1){
+                btnGetScreenshot.setEnabled(true); 
+            } else{
+                btnGetScreenshot.setEnabled(false); 
+            }
             btnRun.setEnabled(true);
             btnGetAPK.setEnabled(true);
             btnS3Install.setEnabled(true);
             btnInstallAll.setEnabled(true); 
+            btnInstallAPK.setEnabled(true);
         } else {
             cmbDevice.addItem("noDevice");
-            txtLog.append("" + "=== No Attached Device(s) found" + "\r\n" + "Return from 'adb devices -l' > '" + Dev + "'" + "\r\n");
+            txtLog.append("=== No Attached Device(s) found" + "\r\n" + "Return from 'adb devices -l' > '" + Dev + "'" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());             
         }
         Load = false; 
@@ -1188,17 +1121,15 @@ public class Android extends javax.swing.JInternalFrame {
     private void CheckDevice(){
         devID = "";
         devModel = "";
-        txtLog.append("-Check Selected Device..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
         String D = cmbDevice.getSelectedItem().toString();
         if(D.contains("id:")){
+            txtLog.append("- Check Selected Device..." + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             devModel = D.substring(0,D.indexOf(" ")).trim(); 
             devID = D.substring(D.indexOf("id:") + 3).trim();        
-            //devOS = Func.ExecuteCmdRuntime("adb -s " + devID + " shell getprop ro.build.version.release").trim();
-            devOS = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " shell getprop ro.build.version.release", CWD, true, true).trim();
-            devOS = devOS.replace("null", "");
-            //Get_Device_OS();
-            //CheckAppPackage();
+            //devOS = Func.ExecuteCmdRuntime(ADB_HOME + "adb -s " + devID + " shell getprop ro.build.version.release").trim();
+            devOS = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb -s " + devID + " shell getprop ro.build.version.release", CWD, true, true).trim();
+            devOS = devOS.replace("null", "").substring(0, devOS.indexOf("\r\n")).trim();
             txtLog.append("=== Model: " + devModel + ", OS version: " + devOS + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }         
@@ -1212,15 +1143,15 @@ public class Android extends javax.swing.JInternalFrame {
             return;
         } 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
-        txtLog.append("-Check AppPackage: " + appPackage + "\r\n");
+        txtLog.append("- Check AppPackage: " + appPackage + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         //String Hash = "Not Found";
         String v1 = "?";
         String v2 = "?";
         appVersion = "Not Found";
         try{
-            //String v = Func.ExecuteCmdRuntime("adb -s " + devID + " shell dumpsys package " + appPackage).trim();
-            String v = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " shell dumpsys package " + appPackage, CWD, true, true).trim();
+            //String v = Func.ExecuteCmdRuntime(ADB_HOME + "adb -s " + devID + " shell dumpsys package " + appPackage).trim();
+            String v = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb -s " + devID + " shell dumpsys package " + appPackage, CWD, true, true).trim();
 
             if ("".equals(v.trim())) {
                 txtLog.append("=== appPackage  " + appPackage + " - no information\r\n");
@@ -1245,7 +1176,7 @@ public class Android extends javax.swing.JInternalFrame {
             txtLog.append("=== appPackage: " + appPackage + " > " + appVersion + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         } catch (Exception ex) {
-            txtLog.append("-GetAppVersion: " + ex.getMessage() + "\r\n");
+            txtLog.append("- GetAppVersion: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());      
         } 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));          
@@ -1253,7 +1184,7 @@ public class Android extends javax.swing.JInternalFrame {
 
     private void InstallBuild_S3(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));  
-        txtLog.append("-S3 Download, Unzip, Install APK ..." + "\r\n");
+        txtLog.append("- S3 Download, Unzip, Install APK ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         
         if(Download_Build()){
@@ -1351,14 +1282,14 @@ public class Android extends javax.swing.JInternalFrame {
     private void UnInstaPackage(String PKG) {
         txtLog.append("== UnInstall Package " + PKG + " > " + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        String I = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " uninstall " + PKG, CWD, true, true).trim();
+        String I = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb -s " + devID + " uninstall " + PKG, CWD, true, true).trim();
         txtLog.append(I + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
     } 
     private void InstallBuild(String BuildFile) {
         txtLog.append("== Install Build: " + BuildFile + " > " + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        String I = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " install -r " + BuildFile, CWD, true, true).trim();
+        String I = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb -s " + devID + " install -r " + BuildFile, CWD, true, true).trim();
         txtLog.append(I + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         CheckAppPackage();
@@ -1371,8 +1302,8 @@ public class Android extends javax.swing.JInternalFrame {
         btnGetAPK.setEnabled(false);
         btnS3Install.setEnabled(false);
         btnInstallAll.setEnabled(false); 
-        
-        txtLog.append("-Install All APK(s) - App Tester ..." + "\r\n");
+        btnInstallAPK.setEnabled(false);        
+        txtLog.append("- Install All APK(s) - App Tester ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         
         Swipe_WakeUp(); // ===================  
@@ -1423,19 +1354,19 @@ public class Android extends javax.swing.JInternalFrame {
 
             wait.until(ExpectedConditions.presenceOfElementLocated(By.id("app_name")));
             Thread.sleep(1000);
-            L0 = ad.findElements(By.id("app_name"));
+            mL0 = ad.findElements(By.id("app_name"));
             int app_count = L0.size();
             if (app_count > 0) {
                 txtLog.append("Found Applications - total " + app_count + ": " + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
-                for (int i = 0; i < L0.size(); i++) {
-                    txtLog.append("   - " + (i+1)  + ": " + L0.get(i).getText() + "\r\n");
+                for (int i = 0; i < mL0.size(); i++) {
+                    txtLog.append("   - " + (i+1)  + ": " + mL0.get(i).getText() + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 }
                 for (int i = 0; i < app_count; i++) {
-                    e = ad.findElements(By.id("app_name")).get(i); 
+                    me = ad.findElements(By.id("app_name")).get(i); 
                     String appName = e.getText();
-                    e.click();
+                    me.click();
                     String t = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("version_info"))).getText();
                     txtLog.append("=====  Processing App " + (i + 1) + " - " + appName + " v:" + t + " ..." + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1482,28 +1413,30 @@ public class Android extends javax.swing.JInternalFrame {
         btnGetAPK.setEnabled(true);
         btnS3Install.setEnabled(true);
         btnInstallAll.setEnabled(true); 
-        
+        btnInstallAPK.setEnabled(true);        
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));         
     }       
 
     private boolean AndroidDriver() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
+            systemPort = systemPort + cmbDevice.getSelectedIndex();
+            String SystemPort = String.valueOf(systemPort);
             DesiredCapabilities  cap = new DesiredCapabilities ();
             cap.setCapability("platformName", "Android");
             cap.setCapability("deviceName", devModel);
+            cap.setCapability("udid", devID); 
             cap.setCapability("platformVersion", devOS);
             cap.setCapability("clearSystemFiles", true);
             cap.setCapability("appPackage", appPackage);
             cap.setCapability("appActivity", appActivity);
-            cap.setCapability("udid", devID);
+
             cap.setCapability("autoGrantPermissions", false); // false- always get prompt
             cap.setCapability("unicodeKeyboard", false);
             cap.setCapability("resetKeyboard", true);
             cap.setCapability("sendKeyStrategy", "oneByOne");
             cap.setCapability("automationName", Automator);  // ============ UiAutomator2 / Appium ===========
-            cap.setCapability("systemPort", systemPort);
-
+            cap.setCapability("systemPort", SystemPort);
             appiumService = AppiumDriverLocalService.buildDefaultService();
             appiumService.start();
             ad = new AndroidDriver(new URL(appium_url), cap);             
@@ -1517,6 +1450,13 @@ public class Android extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
         } catch (Exception ex) {
+            F += "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
+            if(ad != null) {
+                ad.quit(); 
+            }
+            if(appiumService != null && appiumService.isRunning()){
+                appiumService.stop();                    
+            }
             txtLog.append("=== Android Driver > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1524,16 +1464,16 @@ public class Android extends javax.swing.JInternalFrame {
         }   
     }
     private void Swipe_WakeUp(){       
-        txtLog.append("-Swipe_WakeUp " + "\r\n");
+        txtLog.append("- Swipe_WakeUp " + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
-        String v = Func.ExecuteCmdProcessBuilder("adb -s " + devID + " shell input touchscreen swipe 800 400 400 400 100", CWD, false, false);    
+        String v = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb -s " + devID + " shell input touchscreen swipe 800 400 400 400 100", CWD, false, false);    
     }
-    private void BW1_DoWork() { 
+    private void BW1_DoWork(){ 
         BW1 = new SwingWorker() {             
             Instant dw_start = Instant.now();
             @Override
-            protected String doInBackground() throws Exception   { // define what thread will do here 
-            New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));          
+            protected String doInBackground() throws Exception   { 
+                New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));          
                 if (app.equals("Bolter")) { 
                     Android_bolter.run();
                 }else{
@@ -1551,7 +1491,7 @@ public class Android extends javax.swing.JInternalFrame {
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
                 txtLog.append("========   " + "Execution step-by-step log..." + "   ========" + "\r\n");  
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
-                EX = "Android " + app + " " + env + ", vervion: " + appVersion + ", Device: " + devModel + " OS version: " + devOS +
+                EX = "Android " + app + " " + env + ", vervion: " + appVersion + ", Device: " + devModel + " OS Version: " + devOS +
                 " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                  "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                  + EX;
@@ -1559,15 +1499,11 @@ public class Android extends javax.swing.JInternalFrame {
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 Last_EX = EX;
                 try  { 
-
                     String statusMsg = (String) get(); 
                     txtLog.append("" + statusMsg + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
-                    
                     BW1 = null;
-                 
-                }  
-                catch (InterruptedException | ExecutionException ex)  { 
+                } catch (InterruptedException | ExecutionException ex)  { 
                     txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
                     txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                 } 
@@ -1580,7 +1516,6 @@ public class Android extends javax.swing.JInternalFrame {
 
                 DD = Duration.between(dw_start, Instant.now());
                 Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
-                
                 try {
                     String t_rep = "";
                     if (!"".equals(r_time.trim())) {
@@ -1614,8 +1549,8 @@ public class Android extends javax.swing.JInternalFrame {
                 }  
                 btnRun.setEnabled(true);
 
-                txtLog.append("=== " + Summary); // Summary shown in EX top
-                txtLog.append("=== Scope: " + SCOPE); // SCOPE shown in EX top
+                txtLog.append("=== " + Summary + "\r\n"); // Summary shown in EX top
+                txtLog.append("=== Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
                 txtLog.append("=== Android_" + app + "_" + env + ", vervion: " + appVersion + ", Device: " + devModel + " OS version: " + devOS + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
   
@@ -1631,12 +1566,12 @@ public class Android extends javax.swing.JInternalFrame {
                 if(_slack.isSelected()){
                     Report(false); 
                     String MSG = "Android_" + app + "_" + env + " Automation report - " + Report_Date +  
-                    "\r\n Machine: " + WsID + " OS: " + WsOS + ", User: *" + UserID + "*\r\n" +
-                    "Device: *" + devModel + "*, Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
+                    "\r\n Machine: " + WsID + " OS: " + WsOS + ", User: " + UserID + "\r\n" +
+                    "Device: " + devModel + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
                     "Scope: " + SCOPE + "\r\n" +
-                    "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w;
+                    "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
 
-                    txtLog.append(Func.Send_File_to_Slack(Report_File, "Androidautomation", MSG));
+                    txtLog.append(Func.Send_File_to_Slack(Report_File, "Android_automation", MSG + "\r\n"));
                     File f = new File(Report_File);
                     if(f.exists() && !f.isDirectory()) { 
                         f.delete();
@@ -1695,7 +1630,7 @@ public class Android extends javax.swing.JInternalFrame {
     }
     private void GetPackages(AWSCredentials credentials ){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Android Packages list ..." + "\r\n");
+        txtLog.append("- Load Android Packages list ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         
         String[] SitesColumnsName = {"APK name","Date"}; 
@@ -1788,30 +1723,36 @@ public class Android extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     } 
     private void Set_Mobile_Package_Name(){
-        appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity"; 
         if ("Boost".equals(app)) {
             appPackage = "com.compass_canada.boost";
+            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
         }
         if ("JJKitchen".equals(app)) {
             appPackage = "io.compassdigital.jjkitchen";
+            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
         }
         if ("Thrive".equals(app)) {
             appPackage = "com.compass_canada.thrive";
+            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
         }
         if ("Nourish".equals(app)) {
             appPackage = "io.compassdigital.nourish";
+            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
         }
         if ("Rogers".equals(app)) {
             appPackage = "com.compass_canada.digital_hospitality.rogers";
+            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
         }
         if ("Bolter".equals(app)) {
             appPackage = "io.compassdigital.delivery";
+            //appActivity = "io.compassdigital.delivery.login.LoginActivity";
+            appActivity = "io.compassdigital.delivery.splash.SplashActivity";
         }
     }
     private void GetSites() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         d1LastRow = -1;
-        txtLog.append("-Load Sites ..." + "\r\n");
+        txtLog.append("- Load Sites ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -1940,7 +1881,7 @@ public class Android extends javax.swing.JInternalFrame {
     private void GetBrands() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         d2LastRow = -1;
-        txtLog.append("-Load Brands ..." + "\r\n");
+        txtLog.append("- Load Brands ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -2352,16 +2293,8 @@ public class Android extends javax.swing.JInternalFrame {
     private static String secret_key;
     private static AWSCredentials AWS_credentials; 
     
-    private AndroidDriver<AndroidElement> ad = null;
-    private AppiumDriverLocalService appiumService = null;
-    private List<AndroidElement> L0 = null;
-    private List<AndroidElement> L1 = null;
-    private AndroidElement e = null;
-    private AndroidElement e1 = null;
-    private AndroidElement e2 = null;
-    private AndroidElement e3 = null;
-    private WebDriverWait wait = null;
-    private final int appium_port = 4723;
+
+    private int appium_port = 4723;
     private final String appium_url = "http://127.0.0.1:4723/wd/hub";
     private String appPackage = "";
     private String appActivity = "";
@@ -2372,7 +2305,7 @@ public class Android extends javax.swing.JInternalFrame {
     private String devOS = "";
     
     private final String Automator = "UiAutomator2"; //Appium UiAutomator2
-    private final int systemPort = 8290; // UiAutomator2    
+    private int systemPort = 8290; // UiAutomator2    
     
     private String Last_EX;
     private static final Stopwatch sw1 = Stopwatch.createUnstarted();
@@ -2415,6 +2348,17 @@ public class Android extends javax.swing.JInternalFrame {
     public static String BRAND = "";
     public static String BrandID = "";
     public static String Location = "";
+    
+//    public static String t;
+//    public static String err;
+//    public static String F; 
+//    public static String EX; 
+//    
+//    public static int _t = 0; // Total
+//    public static int _p = 0; // Passed
+//    public static int _f = 0; // Failed
+//    public static int _w = 0; // Warn
+//    public static boolean FAIL = false;
 
     // </editor-fold>
    
