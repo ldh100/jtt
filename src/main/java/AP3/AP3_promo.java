@@ -229,8 +229,43 @@ public class AP3_promo {
          Thread.sleep(5000);
         _t++; Thread.sleep((long) sleep);TWeb.Scroll_XY("Scroll to brand", 0, 500, "no_jira");
        
+//        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Select Brand (Global Menu)' text", "Select Brand (Global Menu)", true, "no_jira");
+//        if (FAIL) { return;}  
+//        _t++; Thread.sleep((long) sleep);TWeb.Scroll_to_Element("Scroll to Brand (Global Menu)", e, "no_jira");
+
         _t++; Thread.sleep((long) sleep);TWeb.Element_By_Path_Click("Open Brand Dropdown", "xpath","//div[@class='flex xs5']//div[@class='v-input border-label-input v-text-field v-text-field--enclosed v-text-field--outline v-select v-autocomplete theme--light']", "no_jira");
         if (FAIL) { return;}      
+       /*                                                                                                            
+        _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Brand' list", "xpath", "//div[contains(@class,'v-menu__content theme--light menuable__content__active v-autocomplete__content')]", "no_jira");
+        if (FAIL) { return;}         //input[@aria-label='Brands']    //div[@class='v-menu__content theme--light menuable__content__active'] 
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Global Menu Count #1", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");                                     
+        if (FAIL) { return;}
+        // scroll Global Menu
+         T_Index = L1.size();
+        _t++; Thread.sleep((long) sleep); TWeb.Scroll_to_Element("Scroll to last Group", L1.get(L1.size() - 1), "no_jira");
+            if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Global Menu Count #2", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");             
+            if (FAIL) { return;}
+        int SC = 2;    
+        while(T_Index < L1.size()) {
+            T_Index = L1.size();
+            Thread.sleep(2000);
+             SC++; _t++; Thread.sleep((long) sleep); TWeb.Scroll_to_Element("Scroll to last Group", L1.get(L1.size() - 1), "no_jira");
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Global Menu Count #" + SC, e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");             
+                if (FAIL) { return;}  }   
+        T_Index = -1; String menu_group = GL_MENU.concat(" (").concat(GROUP).concat(")");
+        for (int j = 0; j < L1.size(); j++) {
+            if (true)  { _t++; TWeb.Element_Text("Global Menu Name", L1.get(j), "no_jira");  
+                if (FAIL) { return;}  }
+            if(t.trim().equalsIgnoreCase(menu_group)){T_Index = j;}  }
+        if(T_Index > -1){
+            _t++; Thread.sleep((long) sleep); TWeb.Scroll_to_Element("Scroll to Menu " + GROUP, L1.get(T_Index), "no_jira");
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select Global Menu " + GROUP, L1.get(T_Index), "no_jira");
+                if (FAIL) { return;} 
+        } else{return;} 
+ */
        
         String menu_group = GL_MENU.concat(" (").concat(GROUP).concat(")");
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Brand", "xpath", "//input[@aria-label='Brands']", menu_group, false, "no_jira");
@@ -280,7 +315,10 @@ public class AP3_promo {
         
         _t++;Thread.sleep((long) sleep);TWeb.Element_Child_List_L1("Date elements", e1,"xpath" , "//div[@class='v-btn__content']", "no_jira");
         if (FAIL) { return;}
-         T_Index = -1;
+//        _t++;Thread.sleep((long) sleep);TWeb.Element_Child_List_L1("Find Days", e1, "", Day, url);
+//        if (FAIL) { return;}
+//        //div[@class='v-menu__content theme--light menuable__content__active']//button[@class='v-btn v-btn--flat v-btn--floating v-btn--outline theme--light accent--text']
+        T_Index = -1;
         for(int i=0;i<=L1.size();i++)
         {
             if(L1.get(i).getText().equals( Dayofdate.format(date)))
@@ -409,7 +447,8 @@ public class AP3_promo {
         if (FAIL) { return;}
         Thread.sleep(3000);
         _t++;Thread.sleep((long) sleep);TWeb.Element_By_Path_Click("Click 'Select Items'", "xpath", "//div[contains(text(),'Select Items')]", "no_jira");
-        if (FAIL) { return;}                                                                                
+        if (FAIL) { return;}                                                                                  //div[contains(text(),'Select Items')]  
+                                                                                                            //div[@class='layout row wrap']//div[@class='flex xs12']//div//button[@type='button']
         
         _t++;Thread.sleep((long) sleep);TWeb.Find_Text("Find Global menu & Group Sector ",menu_group , true, "no_jira");
         if (FAIL) { return;}
@@ -537,7 +576,7 @@ public class AP3_promo {
         if (FAIL) { return;}       
         
            Thread.sleep(3000);   
-        _t++; Thread.sleep((long) sleep); TWeb.To_Bottom("no_jira");
+           _t++; Thread.sleep((long) sleep); TWeb.To_Bottom("no_jira");
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
             if (FAIL) { return;}         
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Rows per page Click", "xpath", "//input[@aria-label='Rows per page:']", "no_jira"); 
@@ -596,37 +635,6 @@ public class AP3_promo {
          if (FAIL) { return;}  
          _t++; Thread.sleep((long) sleep);TWeb.Element_By_Path_Text("Status of promo", "xpath", "//tbody/tr["+T_Index+"]/td[6]/span[1]/span[1]", "no_jira");
          if (FAIL) { return;}  
-         
-         // Editing a promo for promo id to make a API call
-         
-         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Edit promo", "xpath", "//tbody/tr["+T_Index+"]/td[7]//i[contains(@class,'pencil')]", "no_jira");
-            if (FAIL) { return;} 
-         
-         _t++; Thread.sleep((long) sleep);TWeb.Element_By_Path_Text_Enter("Update Promotion text", "xpath", "//textarea[@aria-label='Promotion Description']", " update", false, "no_jira");
-         if (FAIL) { return;}
-        
-        _t++; Thread.sleep((long) sleep); TWeb.Page_URL("Created Promotion page URL", "no_jira"); 
-        _t++;Thread.sleep((long) sleep);TWeb.Element_By_Path_Click("Save updated changes'", "xpath", "//div[normalize-space()='Save Changes']", "no_jira");
-        if (FAIL) { return;} 
-        
-        String P_ID = "";
-        if(t.contains("/")){
-            P_ID = t.substring(t.lastIndexOf("/") + 1);
-            _t++; Thread.sleep((long) sleep); TWeb.Call_API("Call /Promo/ API", BaseAPI + "/promo/" + P_ID, true,"no_jira" );
-            _t++; TWeb.API_Body_Contains("Promo API - find Brand ID", BrandID,true, "no_jira");    
-            _t++; TWeb.API_Body_Contains("Promo API - find Name", "Automation Test Promo ",true, "no_jira");
-            _t++; TWeb.API_Body_Contains("Promo API - find Status", "active",true, "no_jira");
-            _t++; TWeb.API_Body_Contains("Promo API - find Type", "lto",true, "no_jira");  
-        }            
-         
-         
-         
-         
-         
-        
-         
-         Thread.sleep(10000);
-         
          
          _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Pause promo", "xpath", "//tbody/tr["+T_Index+"]/td[7]//i[contains(@class,'pause')]", "no_jira");
             if (FAIL) { return;} 
@@ -1483,28 +1491,6 @@ public class AP3_promo {
             if (FAIL) { return;}
        
          Thread.sleep(15000);
-         
-      
-         
-         
-//         After editing the promo.
-//         _t++; Thread.sleep((long) sleep); TWeb.Page_URL("Created Promotion page URL", "no_jira"); 
-//            String P_ID = "";
-//            if(t.contains("/")){
-//                P_ID = t.substring(t.lastIndexOf("/") + 1);
-//                _t++; Thread.sleep((long) sleep); TWeb.Call_API("Call /Promo/ API", BaseAPI + "/promo/" + P_ID, true,"no_jira" );
-//                _t++; TWeb.API_Body_Contains("Announcemen API - find Site ID", SiteID,true, "no_jira");    
-//                _t++; TWeb.API_Body_Contains("Announcemen API - find App", app,true, "no_jira"); 
-//                _t++; TWeb.API_Body_Contains("Announcemen API - find Name", "Auto Announcement " + New_ID,true, "no_jira");
-//                _t++; TWeb.API_Body_Contains("Announcemen API - find EN Title", "EN Title " + New_ID,true, "no_jira");    
-//                _t++; TWeb.API_Body_Contains("Announcemen API - find EN Description", "EN Description " + New_ID,true, "no_jira");
-//                _t++; TWeb.API_Body_Contains("Announcemen API - find EN Sub Text", "EN Sub Text " + New_ID,true, "no_jira");  
-//                _t++; TWeb.API_Body_Contains("Announcemen API - find EN Button Text ", "Dismiss",true, "no_jira"); 
-//                _t++; TWeb.API_Body_Contains("Announcemen API - find Fr Description", "FR la Description " + New_ID,true, "no_jira"); 
-//                _t++; TWeb.API_Body_Contains("Announcemen API - find Type", "Auto_Other_Type",true, "no_jira");  
-//            }            
-//         
-//         
 
     }
 
