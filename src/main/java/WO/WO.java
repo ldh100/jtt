@@ -905,8 +905,8 @@ public class WO extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }  
         btnRun.setEnabled(true);
-        txtLog.append("=== " + Summary); // Summary shown in EX top
-        txtLog.append("=== Scope: " + SCOPE); // SCOPE shown in EX top
+        txtLog.append("=== " + Summary + "\r\n"); // Summary shown in EX top
+        txtLog.append("=== Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
         txtLog.append("=== Browser: " + cmbBrow.getSelectedItem().toString() + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         //this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));   
@@ -927,7 +927,7 @@ public class WO extends javax.swing.JInternalFrame {
             "Scope: " + SCOPE + "\r\n" +
             "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w;
 
-            txtLog.append(Func.Send_File_to_Slack(Report_File, "wo_automation", MSG));
+            txtLog.append(Func.Send_File_to_Slack(Report_File, "wo_automation", MSG + "\r\n"));
             File f = new File(Report_File);
             if(f.exists() && !f.isDirectory()) { 
                 f.delete();
@@ -1142,7 +1142,7 @@ public class WO extends javax.swing.JInternalFrame {
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
-            url = "https://dev.thriveapp.io/"; 
+            url = "https://staging.thriveapp.io/"; 
         } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
             BaseAPI = "https://api.compassdigital.org/dev";
             env = "DE";
@@ -1178,7 +1178,7 @@ public class WO extends javax.swing.JInternalFrame {
     private void GetSites() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Sites ..." + "\r\n");
+        txtLog.append("- Load Sites ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -1305,7 +1305,7 @@ public class WO extends javax.swing.JInternalFrame {
     private void GetBrands() {
         d2LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Brands ..." + "\r\n");
+        txtLog.append("- Load Brands ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();

@@ -24,6 +24,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -516,6 +517,10 @@ public class JIRA extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
     private void Load_Form(){
+//        DecimalFormat df = new DecimalFormat("0.00");
+//        float input = (float) 4.314441;
+//        //float Y = Float.parseFloat(df.format(Math.ceil(input * 100)/100.00));
+//        float Y = (float) (Math.ceil(input * 100)/100.00);
         Load = true;   
         
         cmbBrow.addItem("Chrome");  

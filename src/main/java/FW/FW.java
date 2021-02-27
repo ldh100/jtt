@@ -710,7 +710,7 @@ public class FW extends javax.swing.JInternalFrame {
 
 
         if(_headless.isSelected()) {
-            txtLog.append("=== Headless mode is selected - Browser is hidden");
+            txtLog.append("=== Headless mode is selected - Browser is hidden" + "\r\n");
             txtLog.append("=== Please wait for report...\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
@@ -925,8 +925,8 @@ public class FW extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }  
         btnRun.setEnabled(true);
-        txtLog.append("=== " + Summary); // Summary shown in EX top
-        txtLog.append("=== Scope: " + SCOPE); // SCOPE shown in EX top
+        txtLog.append("=== " + Summary + "\r\n"); // Summary shown in EX top
+        txtLog.append("=== Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
         txtLog.append("=== Browser: " + cmbBrow.getSelectedItem().toString() + HeadLess + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         if(!"".equals(F.trim())){
@@ -947,7 +947,7 @@ public class FW extends javax.swing.JInternalFrame {
                     "Scope: " + SCOPE + "\r\n" +
                     "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w;
 
-            txtLog.append(Func.Send_File_to_Slack(Report_File, "fw_automation", MSG));
+            txtLog.append(Func.Send_File_to_Slack(Report_File, "fw_automation", MSG + "\r\n"));
             File f = new File(Report_File);
             if(f.exists() && !f.isDirectory()) { 
                 f.delete();
@@ -1200,7 +1200,7 @@ public class FW extends javax.swing.JInternalFrame {
     
     private void GetMarkets() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Markets ..." + "\r\n");
+        txtLog.append("- Load Markets ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -1249,7 +1249,7 @@ public class FW extends javax.swing.JInternalFrame {
     private void GetRestaurants() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Restaurants ..." + "\r\n");
+        txtLog.append("- Load Restaurants ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
@@ -1364,7 +1364,7 @@ public class FW extends javax.swing.JInternalFrame {
     private void GetUnits() {
         d2LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Units ..." + "\r\n");
+        txtLog.append("- Load Units ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(sw1.isRunning()){
             sw1.reset();
