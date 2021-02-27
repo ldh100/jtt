@@ -15,6 +15,9 @@ import WO.WO;
 import JIRA.JIRA;
 import Orders.Orders;
 import Station.Station;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
 import java.awt.Cursor;
 import java.beans.PropertyVetoException;
 import java.io.File;
@@ -590,7 +593,6 @@ public class A extends javax.swing.JFrame {
     }//GEN-LAST:event_Menu_FWMouseClicked
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         Get_User();
-        CWD = System.getProperty("user.dir");
         try{
             Files.createDirectories(Paths.get(CWD + File.separator + "ScreenShots"));           
             Files.createDirectories(Paths.get(CWD + File.separator + "MobileBuilds"));  
@@ -602,7 +604,7 @@ public class A extends javax.swing.JFrame {
         if (!UserID.toLowerCase().contains("oleg")){
             Register_Login();            
         }
-        Get_AP3_TKN_and_Slack_IDs();
+        Get_Slack_TKN();
         
         Menu_Android.setToolTipText("Android Mobile Automation Manager - in Development");
         Menu_iOS.setToolTipText("iOS Mobile Automation Manager - in Development");
@@ -810,12 +812,12 @@ public class A extends javax.swing.JFrame {
         }
         //setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     } 
-    private void Get_AP3_TKN_and_Slack_IDs(){
+    private void Get_Slack_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));         
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_OAuth_TKN'");
-            rs.next();
-            S_OAuth_TKN = rs.getString(1);
+            ResultSet rsS = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_OAuth_TKN'");
+            rsS.next();
+            S_OAuth_TKN = rsS.getString(1);
             conn.close();
         } catch (SQLException ex) {
             S_OAuth_TKN = ex.getMessage();
@@ -869,8 +871,11 @@ public class A extends javax.swing.JFrame {
 
     // <editor-fold defaultstate="collapsed" desc="Public & Private Variables">
     public static final String QA_BD_CON_STRING = "jdbc:sqlserver://dev-digitalhospitality-sql.database.windows.net:1433;database=cdlqadb;user=xttadmin;password=Sp515s10#a;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
-    public static String S_OAuth_TKN = "";
-    public static String CWD = "";
+
+    public static String CWD = System.getProperty("user.dir");
+    public static String ADB_HOME = "";
+    public static String S_OAuth_TKN = ""; 
+    public static String AP3_TKN = "";    
     public static final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
     public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
@@ -882,7 +887,7 @@ public class A extends javax.swing.JFrame {
     public static String WsOS = "";  
     private ImageIcon II;     
     
-    
+    //move to individual packages
     public static String API_Response_Body = "";   
     public static int T_Index;
     public static WebDriver d1;
@@ -898,6 +903,16 @@ public class A extends javax.swing.JFrame {
     public static List<WebElement> L3 = null;
     public static List<WebElement> Opens = null;
     public static List<WebElement> Closes = null;
+    
+    public static AndroidDriver<AndroidElement> ad = null;
+    public static AppiumDriverLocalService appiumService = null;
+    public static List<AndroidElement> mL0 = null;
+    public static List<AndroidElement> mL1 = null;
+    public static AndroidElement me = null;
+    public static AndroidElement me1 = null;
+    public static AndroidElement me2 = null;
+    public static AndroidElement me3 = null;
+    public static WebDriverWait wait = null;    
     
     public static double sleep = 500; // milisec
     public static double LoadTimeOut = 15; // sec

@@ -61,14 +61,17 @@ public class Func {
         String output = "";
         Process p = null;
         try {
-            ProcessBuilder b = new ProcessBuilder();           
-            b.directory(new File(Cwd));  
+            ProcessBuilder b = new ProcessBuilder();  
+            if(!"".equals(Cwd)){
+                b.directory(new File(Cwd));                 
+            }
             if(WsOS.toLowerCase().contains("windows")){
                 b.command("cmd.exe", "/c", cmd);            
             }
             if(WsOS.toLowerCase().contains("mac")){
-                String[] ios_cmd = cmd.split(" ");
-                b.command(ios_cmd);    
+//                String[] ios_cmd = cmd.split(" ");
+//                b.command(ios_cmd); 
+                b.command("sh", "-c", cmd);
             }
 
             p = b.start();
@@ -76,19 +79,19 @@ public class Func {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    output += line + "\r\n";
+                    if(!"".equals(line.trim())){
+                        output += line + "\r\n";
+                    }
                 }                
             }
             if(waitFor){
                 int exitCode = p.waitFor();
-                output += "\nExited with error code : " + exitCode;                   
+                output += "Exited with error code : " + exitCode;                   
             }   
-        } catch(IOException | InterruptedException ex){
+        } catch(Exception ex){
             output = ex.getMessage();
-        } finally{
-            p.destroyForcibly();
-        }
-       return output;   
+        } 
+        return output;   
     }
     public static String SHOW_LOG_FILE(String BODY, String EXT){
         File aLog = null;
