@@ -220,8 +220,9 @@ public class FW_restaurants {
       if (FAIL) { return;}  
       Thread.sleep(5000);
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Add Restaurant button", "xpath", "//button//span[contains(.,' Add Restaurant ')]", "no_jira"); 
-      if (FAIL) { return;}     
-    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Create Restaurant?", "xpath", "//button[@class='primary-button send-button v-btn v-btn--depressed v-btn--rounded theme--light v-size--default secondary grape--text']", "no_jira"); 
+      if (FAIL) { return;}
+      Thread.sleep(5000);
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Create Restaurant?", "xpath", "//button//span[contains(.,'Yes')]", "no_jira"); 
       if (FAIL) { return;}   
    
  
