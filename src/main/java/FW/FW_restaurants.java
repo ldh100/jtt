@@ -7,6 +7,7 @@ package FW;
 import A.TWeb;
 import static A.A.*;
 import static FW.FW.*;
+import java.io.File;
 import org.apache.commons.lang3.RandomStringUtils;
 
 /**
@@ -215,7 +216,7 @@ public class FW_restaurants {
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on upload file", "xpath", "//div[@class='upload-file partner-info-btn']/button", "no_jira"); 
       if (FAIL) { return;}   	
          Thread.sleep(4000);
-    _t++; TWeb.Element_By_Path_Text_Enter("Upload a file", "xpath", "//input[@type='file']", System.getProperty("user.dir")+"//Login screen.png", false, "no_jira"); 
+    _t++; TWeb.Element_By_Path_Text_Enter("Upload a file", "xpath", "//input[@type='file']", System.getProperty("user.dir")+File.separator +"File_Name.png", false, "no_jira"); 
       if (FAIL) { return;}
       Thread.sleep(4000);
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Done button", "xpath", "//button//span[contains(.,'Done')]", "no_jira"); 
