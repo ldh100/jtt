@@ -54,6 +54,8 @@ public class FW_restaurants {
         
         
         //*************************** Add a Restaurant Testcases***************************************
+       // ****************************************************************************************************
+       //********************************************************************************************************
          Thread.sleep(5000);
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Drawer menu 'Restaurants'", "xpath", "//a[@href='/partners/']", "no_jira"); 
             if (FAIL) { return;}
