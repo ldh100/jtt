@@ -2432,6 +2432,49 @@ public class TWeb {
         sw1.reset();
     }
 
+    public static void Call_API_Auth(String NAME, String URL, boolean EXPECT_OK, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        String RR = "";
+        CloseableHttpClient httpclient = HttpClients.createDefault(); 
+        try {
+            HttpGet httpget = new HttpGet(URL); 
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                String Msg = response.getStatusLine().getReasonPhrase();
+                if (status >= 200 && status < 300) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
+                }
+            };
+            API_Response_Body = httpclient.execute(httpget, responseHandler);
+            r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
+            EX += _t + "\t == " + NAME + "\t" + URL + "\t" + "Call successful" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n"; 
+            _p++;
+        } catch(Exception ex){
+            if(EXPECT_OK){
+                _f++; err = ex.getMessage().trim();
+                if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+                EX += _t + "\t == " + NAME + "\t" + URL + "\t" + " --- " + "\t" + "FAIL" + "\t" + err +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                F += _t + " > " + err + "\r\n";                
+            } else {
+                _p++; err = ex.getMessage().trim();
+                if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+                EX += _t + "\t == " + NAME + "\t" + URL + "\t" + err + "\t" + "PASS" + "\t" + " - " +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n"; 
+            }
+        } 
+        sw1.reset();
+    }
     public static void Call_API(String NAME, String URL, boolean EXPECT_OK, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();

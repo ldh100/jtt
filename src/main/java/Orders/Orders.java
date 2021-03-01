@@ -955,7 +955,7 @@ if(!R.equals("OK")){
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }  
         btnRun.setEnabled(true);
-        txtLog.append("=== " + Summary);
+        txtLog.append("=== " + Summary + "\r\n");
         txtLog.append("=== Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
 
@@ -1023,7 +1023,7 @@ if(!R.equals("OK")){
     private void LoadOrders() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("-Load Shopping Card Templates ..." + "\r\n");
+        txtLog.append("- Load Shopping Card Templates ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         SQL = "SELECT " + 
                 "[Env] " +
@@ -1332,8 +1332,7 @@ if(!R.equals("OK")){
     private static final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
     private static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     private static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    private static String SQL = "";
-    private static String AP3_TKN;    
+    private static String SQL = ""; 
     private static String app = "";
     private static String env;
     private static String BaseAPI;
