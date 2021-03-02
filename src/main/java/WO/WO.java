@@ -1142,7 +1142,7 @@ public class WO extends javax.swing.JInternalFrame {
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
-            url = "https://dev.thriveapp.io/"; 
+            url = "https://staging.thriveapp.io/"; 
         } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
             BaseAPI = "https://api.compassdigital.org/dev";
             env = "DE";

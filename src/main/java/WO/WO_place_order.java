@@ -207,24 +207,25 @@ public class WO_place_order {
                 Thread.sleep(1000);
                 System.out.println("Place button "+d1.findElement(By.xpath("(//div[@class='v-window-item v-window-item--active']//button)[2]")).getAttribute("disabled"));
                 while ("true".equals(d1.findElement(By.xpath("(//div[@class='v-window-item v-window-item--active']//button)[2]")).getAttribute("disabled"))){
-                _t++; TWeb.Refresh("Refresh Page", "no-jira");
-                _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");
-                _t++; TWeb.Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", "no_jira"); 
-                pickTimeSlot(ISDELIVERYORDER?"Delivery":"Pickup");
-                
-                if (ISDELIVERYORDER){
-                    pickLocation();
+                    _t++; TWeb.Refresh("Refresh Page", "no-jira");
+                    _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");
+                    _t++; TWeb.Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", "no_jira"); 
+                    pickTimeSlot(ISDELIVERYORDER?"Delivery":"Pickup");
+
+                    if (ISDELIVERYORDER){
+                        pickLocation();
+                        //if (FAIL) continue;
+                    }
+
+                    pickPayment();
                     //if (FAIL) continue;
                 }
-                
-                pickPayment();
-                //if (FAIL) continue;
-            }
               
                 _t++; TWeb.Element_By_Path_Click("Click 'PLACE ORDR' button ", "xpath", "(//div[@class='v-window-item v-window-item--active']//button)[2]", "no_jira");//(//div[@class='v-window-item v-window-item--active']//button)[2]
-                _t++; TWeb.Wait_For_Element_By_Path_InVisibility("Wait for 'Place Order' button disappear, and page redirect(Loader present) ", "xpath", "(//div[@class='v-window-item v-window-item--active']//button)[2]", "no_jira");
-                    if(FAIL){continue;}
                 _t++; TWeb.Wait_For_Element_By_Path_InVisibility("Wait for greating message Loader complete and page redirect ", "css", "[role='document']", "no_jira");
+                _t++; TWeb.Wait_For_Element_By_Path_InVisibility("Wait for 'Place Order' button disappear, and page redirect(Loader present) ", "css", "[class='col col-4']", "no_jira");
+                    if(FAIL){continue;}
+                    
                 
                 System.out.println("+++++++++++++++++++++++++++++++++++ " + ORDERTYPE + " Order Nuber  " + (ordersCount+1) + " Complete  +++++++++++++++++++++++++++++++++++");
                 System.out.println();
@@ -286,7 +287,7 @@ public class WO_place_order {
        
         WebElement TimeSlotDroplist;
          //WebElement TimeSlotDroplist = d1.findElement(By.cssSelector(cssStr));//.getAttribute("disabled");
-        while (FAIL|"true".equalsIgnoreCase(d1.findElement(By.cssSelector(cssStr)).getAttribute("disabled"))) {           
+        while (FAIL||"true".equalsIgnoreCase(d1.findElement(By.cssSelector(cssStr)).getAttribute("disabled"))) {           
             _t++; TWeb.Refresh("Refresh Page", "no-jira");
             _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for 'ORDRR DETAIL' screen", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");
             Thread.sleep(3000); 
