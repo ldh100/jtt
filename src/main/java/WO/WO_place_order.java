@@ -60,10 +60,11 @@ public class WO_place_order {
             for (int ordersCount=0; ordersCount< ORDERCOUNT; ordersCount++ ){
                 _t++; TWeb.Element_By_Path_Click("click search bar ", "xpath", "//label[text()='Enter Your Thrive Location']/following::input","no_jira");
                 _t++; TWeb.Element_By_Path_Text_Enter("Type in search bar", "xpath", "//label[text()='Enter Your Thrive Location']/following::input", SITE, FAIL, "no_jira");
-                
-                _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find Location list", "xpath", "//div[@role='listbox']", "no_jira");
-                    if (FAIL) { return;}  
-                _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Matching Locations Count", e1,"xpath", ".//div[@class='v-list-item__title']", "no_jira");                                     
+                _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for location list present ", "xpath", "//div[@role='listbox']", "No_jira");
+                _t++; Thread.sleep((long) sleep); TWeb.List_L0("Locate to Location list", "xpath", "//div[@role='listbox']", "no_jira");
+                    if (FAIL|L0.size()==0) { continue;}  
+                _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Matching Locations Count", L0.get(L0.size()-1),"xpath", ".//div[@class='v-list-item__title']", "no_jira");                                     
+               if(L1.size()==0){continue;}
                 //for (int i = 0; i < L1.size(); i++) {
                 _t++; TWeb.Element_Text("Location (" + "1" + ") Name:", L1.get(0),  "no_jira");             
                     if (FAIL) { return;}
@@ -76,23 +77,23 @@ public class WO_place_order {
                 if(d1.findElements(By.className("pickup-or-delivery")).isEmpty()){
                     while(!"true".equalsIgnoreCase(d1.findElement(By.xpath(ServiceTabxPathStr)).findElement(By.xpath("./..")).getAttribute("aria-selected"))){
                         _t++;   TWeb.Element_By_Path_Click("Click service tab ","xpath",ServiceTabxPathStr,"no_jira");             
-                    }
-                    
-                    
+                    }                   
                    // _t++; TWeb.Element_By_Path_Click("Click 'service' tab", "xpath",ServiceTabxPathStr,"no_jira"); 
                     Thread.sleep( 3000);
                 }
                 
-                
-                
-                
-                
                 _t++; Thread.sleep((long) sleep);  TWeb.Element_By_Path_Click("Enter Selected  Brand:   "+ BRAND ,"xpath", "//strong[text()=' "+BRAND+" ']",  "no_jira"); 
+                if (FAIL){
+                    _t++; EX += _t + "\t" + "Brand --"+BRAND+" --has no "+ORDERTYPE+" service, quit placing order " + "\t" + " ===== " + "\t" + "Jump out PICKUP order" + "\t" + " Fail " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    return;
+                }
                 _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for Brand Menu page rendering", "xpath", "//div[@class='pt-5']", "no-jira");
                 System.out.println("+++++++++++++++++++++++++++++++++++ Start " + ORDERTYPE + " Order Number " + (ordersCount+1) + " of " + ORDERCOUNT +" +++++++++++++++++++++++++++++++++++");
                 _t++; EX += _t + "\t" + "Start placing "+ORDERTYPE +"  #"+ (ordersCount+1) +" order "+ "\t" + " +++++++++ " + "\t" + "++++++++++ " + "\t" + "  " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 //Menu screen
-                _t++; TWeb.List_L3("Menu Category in the middle pannel  ", "xpath", "//div[@class='pb-6']", "no-jira");
+                
+                _t++; Thread.sleep((long) sleep);  TWeb.List_L3("Menu Category in the middle pannel  ", "xpath", "//div[@class='pb-6']", "no-jira");
+                    if(FAIL|L3.size()==0){continue;}
   //L0:       L1:         L2:       L3:   Middle Pannel catgory 
                 //iterate each category's first item
                 if (ORDERCOUNT>2){L3 = L3.subList(0, 1);}
@@ -103,9 +104,11 @@ public class WO_place_order {
                 
                     _t++; TWeb.Element_Text("-First item name in Catgory  ",L1.get(0),"no_jira");
                     _t++; TWeb.Element_Click("-Click to open first item modal --- "+L1.get(0).getText(),L1.get(0) , "no_jira");
-                        if (FAIL) { return;} 
+                        if (FAIL) { 
+                            return;} 
 
                 //switch to opened modal 
+                    _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for item modal rendering", "xpath", "(//span[@class='v-btn__content'])[5]", "no-jira");
                     _t++; TWeb.Element_By_Path_Text("--Verify Item Name in Model Title", "css", "[class='my-0']", "no_jira");
                         if (FAIL) { return;}  
                     _t++; TWeb.Element_By_Path_Text("--Button(in item modal) Text" , "xpath","(//span[@class='v-btn__content'])[5]" , "no_jira"); //verify button 
@@ -121,6 +124,7 @@ public class WO_place_order {
                     }
                     
                     if (t.trim().equalsIgnoreCase(" Add to Cart ".trim().toLowerCase())){
+                        Thread.sleep((long) 1000);
                         _t++; TWeb.Element_By_Path_Click("--Click 'add to basket' button " , "xpath","//button[contains(@class,'add-to-cart v-btn')]", "no_jira");
                         continue;
                     }
@@ -189,6 +193,7 @@ public class WO_place_order {
                         }
                     }
                     _t++; TWeb.Element_By_Path_Click("---Click 'add to cart' button " , "xpath","//button[contains(@class,'add-to-cart v-btn')]", "no_jira");
+                    if(FAIL){return;}
                 }           
             //Place order
                 _t++; TWeb.Element_By_Path_Click("Click CHECKOUT Button", "xpath", "//p[text()='Checkout']", "no_jira");
@@ -200,22 +205,27 @@ public class WO_place_order {
                 pickTimeSlot(ISDELIVERYORDER?"Delivery":"Pickup");
                 
                 Thread.sleep(1000);
-                _t++; TWeb.Refresh("Refresh Page", "no-jira");
-                _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");
-                _t++; TWeb.Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", "no_jira"); 
-                pickTimeSlot(ISDELIVERYORDER?"Delivery":"Pickup");
-                
-                if (ISDELIVERYORDER){
-                    pickLocation();
-                    if (FAIL) continue;
+                System.out.println("Place button "+d1.findElement(By.xpath("(//div[@class='v-window-item v-window-item--active']//button)[2]")).getAttribute("disabled"));
+                while ("true".equals(d1.findElement(By.xpath("(//div[@class='v-window-item v-window-item--active']//button)[2]")).getAttribute("disabled"))){
+                    _t++; TWeb.Refresh("Refresh Page", "no-jira");
+                    _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");
+                    _t++; TWeb.Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", "no_jira"); 
+                    pickTimeSlot(ISDELIVERYORDER?"Delivery":"Pickup");
+
+                    if (ISDELIVERYORDER){
+                        pickLocation();
+                        //if (FAIL) continue;
+                    }
+
+                    pickPayment();
+                    //if (FAIL) continue;
                 }
-                
-                pickPayment();
-                if (FAIL) continue;
               
                 _t++; TWeb.Element_By_Path_Click("Click 'PLACE ORDR' button ", "xpath", "(//div[@class='v-window-item v-window-item--active']//button)[2]", "no_jira");//(//div[@class='v-window-item v-window-item--active']//button)[2]
-                
-                _t++; TWeb.Wait_For_Element_By_Path_InVisibility("Wait for checkout complete and direct to past order screen", "css", "[role='document']", "no_jira");
+                _t++; TWeb.Wait_For_Element_By_Path_InVisibility("Wait for greating message Loader complete and page redirect ", "css", "[role='document']", "no_jira");
+                _t++; TWeb.Wait_For_Element_By_Path_InVisibility("Wait for 'Place Order' button disappear, and page redirect(Loader present) ", "css", "[class='col col-4']", "no_jira");
+                    if(FAIL){continue;}
+                    
                 
                 System.out.println("+++++++++++++++++++++++++++++++++++ " + ORDERTYPE + " Order Nuber  " + (ordersCount+1) + " Complete  +++++++++++++++++++++++++++++++++++");
                 System.out.println();
@@ -277,9 +287,7 @@ public class WO_place_order {
        
         WebElement TimeSlotDroplist;
          //WebElement TimeSlotDroplist = d1.findElement(By.cssSelector(cssStr));//.getAttribute("disabled");
-        while (FAIL||"true".equalsIgnoreCase(d1.findElement(By.cssSelector(cssStr)).getAttribute("disabled"))) {
-            
-            
+        while (FAIL||"true".equalsIgnoreCase(d1.findElement(By.cssSelector(cssStr)).getAttribute("disabled"))) {           
             _t++; TWeb.Refresh("Refresh Page", "no-jira");
             _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for 'ORDRR DETAIL' screen", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");
             Thread.sleep(3000); 
