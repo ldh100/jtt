@@ -77,6 +77,7 @@ public class WO_explore_brand_menu {
                     _t++; TWeb.Element_Click("Click 'Pickup' tab", L0.get(i),"no_jira"); 
                         if (FAIL) { return; } 
                     _t++; TWeb.List_L1("Pickup Brands Count", "xpath", "//div[@class='v-card v-card--hover v-card--link v-sheet v-sheet--tile theme--light brand']", "no_jira");
+                        if(L1.isEmpty())  {return;}
                     for (int j = 0; j < L1.size(); j++) {
                         _t++; TWeb.Element_Text("Pickup Brand (" + j + "):", L1.get(j),  "no_jira");     
                     }
@@ -89,7 +90,8 @@ public class WO_explore_brand_menu {
                     _t++; TWeb.Element_Click("Click 'Delivery' tab", L0.get(i),"no_jira"); 
                         if (FAIL) { return; } 
                     _t++; TWeb.List_L1("Delivery Brands Count", "xpath", "//div[@class='v-card v-card--hover v-card--link v-sheet v-sheet--tile theme--light brand']", "no_jira"); 
-                    for (int j = 0; j < L1.size(); j++) {
+                        if(L1.isEmpty())  {return;}
+                     for (int j = 0; j < L1.size(); j++) {
                         _t++; TWeb.Element_Text("Delivery Brand (" + j + "):", L1.get(j),  "no_jira");     
                     } 
                     //_t++; Thread.sleep((long) sleep);  TWeb.Element_Click("Enter first Brand in Delivery:   ", L1.get(0),  "no_jira"); 

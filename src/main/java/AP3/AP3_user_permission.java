@@ -342,7 +342,7 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); TWeb.Find_Text("SM Y Dashboard 'Users'", "Users", false,"no_jira");     
             _t++; Thread.sleep((long) sleep); TWeb.Find_Text("SM Y Dashboard 'Announcements'", "Announcements", true,"no_jira"); 
             _t++; Thread.sleep((long) sleep); TWeb.Find_Text("SM Y Dashboard 'Promo Management'", "Promo Management", false,"no_jira");              
-            _t++; Thread.sleep((long) sleep); TWeb.Find_Text("SM Y Dashboard 'Smart Analytics'", "Smart Analytics", true,"no_jira"); 
+            _t++; Thread.sleep((long) sleep); TWeb.Find_Text("SM Y Dashboard 'Smart Analytics'", "Smart Analytics", false,"no_jira"); 
             _t++; Thread.sleep((long) sleep); TWeb.Find_Text("SM Y Dashboard 'Ap3 Notification'", "AP3 Notification", false,"no_jira"); 
             
              //SM Y Sites permissions
@@ -733,7 +733,7 @@ public class AP3_user_permission {
             _t++; Thread.sleep((long) sleep); TWeb.Find_Text("DM Y Dashboard 'Users'", "Users", true,"no_jira");     
             _t++; Thread.sleep((long) sleep); TWeb.Find_Text("DM Y Dashboard 'Announcements'", "Announcements", true,"no_jira"); 
             _t++; Thread.sleep((long) sleep); TWeb.Find_Text("DM Y Dashboard 'Promo Management'", "Promo Management", false,"no_jira");                     
-            _t++; Thread.sleep((long) sleep); TWeb.Find_Text("DM Y Dashboard 'Smart Analytics'", "Smart Analytics", true,"no_jira");
+            _t++; Thread.sleep((long) sleep); TWeb.Find_Text("DM Y Dashboard 'Smart Analytics'", "Smart Analytics", false,"no_jira");
             _t++; Thread.sleep((long) sleep); TWeb.Find_Text("DM Y Dashboard 'Ap3 Notification'", "AP3 Notification", false,"no_jira"); 
             
             // DM Y Sites permissions
