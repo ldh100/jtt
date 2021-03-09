@@ -7,6 +7,14 @@ package DL;
 
 import A.Func;
 import static A.A.*;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.ListObjectsV2Result;
+import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.google.common.base.Stopwatch;
 import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
@@ -26,6 +34,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.swing.RowSorter;
@@ -537,13 +547,13 @@ public class DL extends javax.swing.JInternalFrame {
     // admin@distilr.io MortyEscapedOntario >> https://app.distilr.io/
     // distilr.test@place.com Compass1 >> https://dev.member.distilr.io/
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
-        if (d1LastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
+        if (wdLastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
            return;
         }
 
         METRIC = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
         MetricID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
-        d1LastRow = DV1.getSelectedRow(); 
+        wdLastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
@@ -592,7 +602,7 @@ public class DL extends javax.swing.JInternalFrame {
         txtLog.append("=== Execution started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
-        LoadTimeOut = (double)nWaitLoad.getValue();
+        LoadTimeOut = (double)nWaitLoad.getValue() *1000;
         sleep = (double)nShowPage.getValue() *1000;
         EX = "";
         F = "";
@@ -1008,15 +1018,13 @@ public class DL extends javax.swing.JInternalFrame {
             d1.manage().window().maximize();
             d1.manage().deleteAllCookies(); // =================================
             
-            d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.SECONDS);
-            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.SECONDS);
-            
+            d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
+            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
             d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
-            
-            fluentWait = new FluentWait(d1).withTimeout(Duration.ofMillis(WaitForElement))			
+            loadTimeout = new FluentWait(d1).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
 			.pollingEvery(Duration.ofMillis(200))  			
-			.ignoring(NoSuchElementException.class);     // fluentWait for Visible / Clickable   
-            loadTimeout = new WebDriverWait(d1, (long) LoadTimeOut);      // for load > progress 
+			.ignoring(NoSuchElementException.class);       // for load > progress
+            
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
         } catch (Exception ex) {
@@ -1043,9 +1051,61 @@ public class DL extends javax.swing.JInternalFrame {
         
         LOAD_CONFIG();
         //GET_DL_USER_TOKEN(false);
+        Get_S3_DL_Credentials();
+        Get_S3_data(AWS_credentials);
         GetDates();       
         GetMetrics(); 
     }
+    private void Get_S3_DL_Credentials(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));         
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+            ResultSet rs1 = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S3_A_Key_DL'");
+            rs1.next();
+            access_key = rs1.getString(1);
+            ResultSet rs2 = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S3_S_Key_DL'");
+            rs2.next();
+            secret_key = rs2.getString(1);
+            conn.close();
+            AWS_credentials = new BasicAWSCredentials(
+                new String(Base64.getDecoder().decode(access_key)),
+                new String(Base64.getDecoder().decode(secret_key))
+            );  
+        } catch (SQLException ex) {
+            txtLog.append("= Get_S3_MOB_Credentials > " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        }
+    }    
+    private void Get_S3_data(AWSCredentials credentials){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("- Load DL S3 data ..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        
+        String BucketName = "distilr-data-qa"; ///fmp_source_qa_files/";
+        String X = "";
+        try {
+            BasicAWSCredentials awsCreds = new BasicAWSCredentials(access_key, secret_key);
+            AmazonS3 s3client = AmazonS3ClientBuilder
+                    .standard()
+                    .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
+                    .withRegion(Regions.US_EAST_2)
+                    .build();
+            ListObjectsV2Result PACK_List = s3client.listObjectsV2(BucketName);
+            PACK_List.getObjectSummaries().sort(Comparator.comparing(S3ObjectSummary::getLastModified));
+            for(int i = PACK_List.getObjectSummaries().size() -1 ; i > 0; i--){  // sort desc, default acs  
+                X +=  PACK_List.getObjectSummaries().get(i).getKey();
+            }
+
+            
+            txtLog.append("- BucketName: " + PACK_List.getBucketName() + ", Size: " + PACK_List.getObjectSummaries().size() + "\r\n");
+            txtLog.append(X + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        } catch (Exception ex) {
+            txtLog.append("== " + "DL S3 data: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        }     
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    } 
+     
     private void GET_DL_USER_TOKEN(boolean ShowResult) {                                                
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- DL User..." + "\r\n");
@@ -1132,7 +1192,7 @@ public class DL extends javax.swing.JInternalFrame {
         }
     }                                               
     private void GetMetricsApi() {
-        d1LastRow = -1;
+        wdLastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Metrics ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1285,7 +1345,7 @@ public class DL extends javax.swing.JInternalFrame {
                 }
             }
         } 
-        d1LastRow = DV1.getSelectedRow();        
+        wdLastRow = DV1.getSelectedRow();        
         lblDates.setText("Metrics (" + DV1.getRowCount() + " found/defined)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1638,6 +1698,10 @@ public class DL extends javax.swing.JInternalFrame {
     }
       
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
+    private static String access_key;
+    private static String secret_key;
+    private static AWSCredentials AWS_credentials; 
+    
     public static String url = "";
     public static String env = "";
     private static SwingWorker BW2; 
@@ -1652,7 +1716,7 @@ public class DL extends javax.swing.JInternalFrame {
     private String Report_Date;
     private String Report_File;
     private static Duration DD;
-    private int d1LastRow = -1; 
+    private int wdLastRow = -1; 
     private int d2LastRow = -1; 
     private List<String> GROUP_IDS;
     private List<String> COMP_IDS; 
