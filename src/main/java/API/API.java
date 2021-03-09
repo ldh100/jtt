@@ -591,13 +591,13 @@ public class API extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
-        if (d1LastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
+        if (wdLastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
            return;
         }
         SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
         GetBrands();
-        d1LastRow = DV1.getSelectedRow(); 
+        wdLastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
     private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
@@ -1441,7 +1441,7 @@ public class API extends javax.swing.JInternalFrame {
             sw1.reset();
         }
         sw1.start();         // ============ User
-        try { 
+        try {   
             HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm); 
             httpget.setHeader("Authorization",  "Basic " + UserAuth);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -1933,16 +1933,16 @@ public class API extends javax.swing.JInternalFrame {
         String UserAuth = Base64.getEncoder().encodeToString((txtAP3_ID.getText().trim() + ":" + txtAP3_PW.getText().trim()).getBytes());
         String User_ID = ""; 
         String Realm = "6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5";
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + "AP3" +
-                "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-            rs.next();
-            Realm = rs.getString(1);
-            conn.close();
-        } catch (SQLException ex) {
-            txtLog.append("=== Get Realm ID > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        } 
+//        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+//            ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + "AP3" +
+//                "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
+//            rs.next();
+//            Realm = rs.getString(1);
+//            conn.close();
+//        } catch (SQLException ex) {
+//            txtLog.append("=== Get Realm ID > ERROR: " + ex.getMessage() + "\r\n");
+//            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+//        } 
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2190,7 +2190,7 @@ public class API extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetSites() {
-        d1LastRow = -1;
+        wdLastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Sites ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -2320,7 +2320,7 @@ public class API extends javax.swing.JInternalFrame {
     }
     private void GetBrands() {
         d2LastRow = -1;
-        d1LastRow = DV1.getSelectedRow();
+        wdLastRow = DV1.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Brands ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -2606,8 +2606,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             T_Index = -1; 
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);        
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));        
             if(json.has("sector")){
                 GroupID = json.getString("sector");
                 for (int i = 0; i < GROUP_IDS.size(); i++) {
@@ -2764,7 +2763,7 @@ public class API extends javax.swing.JInternalFrame {
      
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
     private boolean Load;
-    private int d1LastRow = -1; 
+    private int wdLastRow = -1; 
     private int d2LastRow = -1; 
     private List<String> GROUP_IDS;
     private List<String> COMP_IDS; 
