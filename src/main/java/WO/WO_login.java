@@ -88,7 +88,7 @@ public class WO_login {
         _t++; TWeb.Element_Child_Text_Enter("Enter Valid Phone Number", L1.get(3), "id" , "input-103", "6470009999", false, "no_jira");
             if (FAIL) { return;} 
         _t++; TWeb.Element_Child_Click("Click 'Passsword' input", L1.get(4), "id" , "input-106", "no_jira"); 
-        String password = "Abcd1234";
+        String password = "Abcwd234";
         _t++; TWeb.Element_Child_Text_Enter("Enter Valid Password", L1.get(4), "id" , "input-106", password, true, "no_jira");
             if (FAIL) { return;} 
             
