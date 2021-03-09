@@ -15,6 +15,7 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
+import java.awt.Cursor;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -32,7 +33,16 @@ import java.util.concurrent.TimeUnit;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import org.apache.commons.io.FileUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -177,12 +187,9 @@ public class An_Met extends An_GUI {
         }
     }
     public static String Swipe_WakeUp(){       
-//        txtLog.append("- Swipe_WakeUp " + "\r\n");
-//        txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         return Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " shell input touchscreen swipe 800 400 400 400 100", A.A.CWD, false, false);    
     }
     public static String AndroidDriver(int DEVICE_INDEX) {
-        //this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
             systemPort = systemPort + DEVICE_INDEX;
             String SystemPort = String.valueOf(systemPort);
@@ -209,7 +216,6 @@ public class An_Met extends An_GUI {
             loadTimeout = new FluentWait(ad).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
 			.pollingEvery(Duration.ofMillis(200))  			
 			.ignoring(NoSuchElementException.class);   
-            //this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return "=== Android Driver Start > OK " + "\r\n";
         } catch (Exception ex) {
             F += "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
@@ -219,25 +225,21 @@ public class An_Met extends An_GUI {
             if(appiumService != null && appiumService.isRunning()){
                 appiumService.stop();                    
             }
-//            txtLog.append("=== An_GUI Driver > ERROR: " + ex.getMessage() + "\r\n");
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-//            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
         }   
     }    
-    public static String Get_S3_MOB_Credentials(){
-        //this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));         
+    public static String Get_S3_MOB_Credentials(){     
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             ResultSet rs1 = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S3_A_Key_MOB'");
             rs1.next();
-            access_key = rs1.getString(1);
+            AWS_A_key = rs1.getString(1);
             ResultSet rs2 = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S3_S_Key_MOB'");
             rs2.next();
-            secret_key = rs2.getString(1);
+            AWS_S_key = rs2.getString(1);
             conn.close();
             AWS_credentials = new BasicAWSCredentials(
-                new String(Base64.getDecoder().decode(access_key)),
-                new String(Base64.getDecoder().decode(secret_key))
+                new String(Base64.getDecoder().decode(AWS_A_key)),
+                new String(Base64.getDecoder().decode(AWS_S_key))
             );  
             return "= Get_S3_MOB_Credentials > " + "OK" + "\r\n";
         } catch (SQLException ex) {
@@ -267,22 +269,14 @@ public class An_Met extends An_GUI {
         }
         if ("Bolter".equals(app)) {
             appPackage = "io.compassdigital.delivery";
-            //appActivity = "io.compassdigital.delivery.login.LoginActivity";
             appActivity = "io.compassdigital.delivery.splash.SplashActivity";
         }
     }
     public static String UnInstaPackage(String PKG) {
-//        txtLog.append("== UnInstall Package " + PKG + " > " + "\r\n");
-//        txtLog.setCaretPosition(txtLog.getDocument().getLength());
         return Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " uninstall " + PKG, A.A.CWD, true, true).trim() + "\r\n";
-//        txtLog.append(I + "\r\n");
-//        txtLog.setCaretPosition(txtLog.getDocument().getLength());
     } 
     public static String InstallBuild(String BuildFile) {
-
         return Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " install -r " + BuildFile, A.A.CWD, true, true).trim() + "\r\n";
-//        txtLog.append(I + "\r\n");
-//        txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }  
     public static File newUnzipFile(File destinationDir, ZipEntry zipEntry) throws IOException {
         File destFile = new File(destinationDir, zipEntry.getName());
@@ -311,7 +305,6 @@ public class An_Met extends An_GUI {
 //                        if (!zipParent.isDirectory() && !zipParent.mkdirs()) {
 //                            return "== " + "Failed to create directory " + zipParent + "\r\n";
 //                        }
-
                         FileOutputStream fos = new FileOutputStream(newFile);
                         int len;
                         while ((len = zis.read(buffer)) > 0) {
@@ -328,7 +321,6 @@ public class An_Met extends An_GUI {
         } catch (IOException ex) { 
             return "== " + "Unzip_Build: " + ex.getMessage() + "\r\n";
         }
-        
     }      
     public static String Download_Build(String B_PATH){    
         String dir = A.A.CWD + File.separator + "MobileBuilds"; 
@@ -349,44 +341,24 @@ public class An_Met extends An_GUI {
     public static String CheckDevice(String D){
         devID = "";
         devModel = "";
-        //String D = cmbDevice.getSelectedItem().toString();
         if(D.contains("id:")){
-//            txtLog.append("- Check Selected Device..." + "\r\n");
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             devModel = D.substring(0,D.indexOf(" ")).trim(); 
             devID = D.substring(D.indexOf("id:") + 3).trim();        
             //devOS = Func.ExecuteCmdRuntime(ADB_HOME + "adb -s " + devID + " shell getprop ro.build.version.release").trim();
             devOS = Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " shell getprop ro.build.version.release", A.A.CWD, true, true).trim();
             devOS = devOS.replace("null", "").substring(0, devOS.indexOf("\r\n")).trim();
-//            txtLog.append("=== Model: " + devModel + ", OS version: " + devOS + "\r\n");
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength());
             return "=== CheckDevice OK > Model: " + devModel + ", OS version: " + devOS + "\r\n";
         } else{
              return "=== CheckDevice: " + "ID Not Found" + "\r\n";           
         }        
     }
     public static String CheckAppPackage(){
-//        if(Load || cmbDevice.getItemCount() < 1){
-//            return;
-//        }
-//        String D = cmbDevice.getSelectedItem().toString();
-//        if(!D.contains("id:")){
-//            return;
-//        } 
-//        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
-//        txtLog.append("- Check AppPackage: " + appPackage + "\r\n");
-//        txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        //String Hash = "Not Found";
         String v1 = "?";
         String v2 = "?";
         appVersion = "Not Found";
         try{
             String v = Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " shell dumpsys package " + appPackage, A.A.CWD, true, true).trim();
-
             if ("".equals(v.trim())) {
-//                txtLog.append("=== appPackage  " + appPackage + " - no information\r\n");
-//                txtLog.setCaretPosition(txtLog.getDocument().getLength());
-//                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
                 return "=== appPackage  " + appPackage + " - no information\r\n";
             }
 //            if(v.contains("pkg=Package{")){
@@ -403,12 +375,8 @@ public class An_Met extends An_GUI {
                 v2 = v2.substring(0, v2.indexOf(" "));
                 appVersion = "v" + v1 + "(" + v2 + ")"; // Git Hash: " + Hash;
             }
-//            txtLog.append("=== appPackage: " + appPackage + " > " + appVersion + "\r\n");
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
             return "=== appPackage: " + appPackage + " > " + appVersion + "\r\n";
-        } catch (Exception ex) {
-//            txtLog.append("- GetAppVersion: " + ex.getMessage() + "\r\n");
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        } catch (Exception ex) { 
             return "=== CheckAppPackage: " + ex.getMessage() + "\r\n";
         }      
     }
@@ -424,13 +392,36 @@ public class An_Met extends An_GUI {
         }
       return "=== InstallBuild_S3: Check Result...." + "\r\n";  
     }    
-    public static String Get_Bolter_User(String B_PATH){        
-//        HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + "bolter"); 
-//        httpget.setHeader("Authorization",  "Basic " + UserAuth);
-////        "code": 401,
-////        "error": "Invalid Login: this user can't be used to login to Bolter or does not exist"
-////            "code": 401,
-////        "error": "Invalid Login: this user can't be used to login to Bolter"
-      return "=== Get_Bolter_User: Check Result...." + "\r\n";  
+    public static String Get_Bolter_User_Site_ID(String ID, String PW){  
+        String S_ID = "ERROR";
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        try { 
+            String UserAuth = Base64.getEncoder().encodeToString((ID + ":" + PW).getBytes());
+            HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + "bolter"); 
+            httpget.setHeader("Authorization", "Basic " + UserAuth);
+            httpget.setHeader("From", "Bolter/1.0");
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 500) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            if(json.has("profile")){
+                S_ID = json.getJSONObject("profile").getString("location_group") + "\r\n";  
+            }else{
+                if(json.has("error")){
+                    S_ID = "=== Get_Bolter_User_Site_ID > ERROR: " + json.getString("error")+ "\r\n"; 
+                    S_ID += "=== URL: " + BaseAPI + "/user/auth" + "?realm=" + "bolter" + "\r\n";
+                    S_ID += "=== Runner: " + ID + "\r\n";
+                }
+            }
+            return S_ID;  
+        } catch (IOException | JSONException ex){
+            return "=== Get_Bolter_User_Site_ID > ERROR: " + ex.getMessage() + "\r\n";
+        }
     }
 }

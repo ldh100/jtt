@@ -92,32 +92,37 @@ public class An_GUI extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Optin_NU_EU = new javax.swing.ButtonGroup();
         lblSITES = new javax.swing.JLabel();
         lblBRANDS = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        _login = new javax.swing.JCheckBox();
+        paneCore_Scope = new javax.swing.JPanel();
         _all_data = new javax.swing.JCheckBox();
-        _site_new = new javax.swing.JCheckBox();
-        _site = new javax.swing.JCheckBox();
-        _brand = new javax.swing.JCheckBox();
-        _orders = new javax.swing.JCheckBox();
-        _resent_updates = new javax.swing.JCheckBox();
-        _announcements = new javax.swing.JCheckBox();
-        _promo = new javax.swing.JCheckBox();
-        _sales_reporting = new javax.swing.JCheckBox();
-        _users = new javax.swing.JCheckBox();
-        _password = new javax.swing.JCheckBox();
         _logout = new javax.swing.JCheckBox();
+        _announcements = new javax.swing.JCheckBox();
+        _sales_reporting = new javax.swing.JCheckBox();
+        rbNU_EU = new javax.swing.JRadioButton();
+        _users = new javax.swing.JCheckBox();
+        _brand = new javax.swing.JCheckBox();
+        _site = new javax.swing.JCheckBox();
+        _sales_analytics = new javax.swing.JCheckBox();
+        _login = new javax.swing.JCheckBox();
         _roles = new javax.swing.JCheckBox();
-        _brand_new = new javax.swing.JCheckBox();
         _smart_analytics = new javax.swing.JCheckBox();
-        _group_management = new javax.swing.JCheckBox();
-        lblSITES8 = new javax.swing.JLabel();
         cmbPromo = new javax.swing.JComboBox<>();
         lblSITES12 = new javax.swing.JLabel();
+        _orders = new javax.swing.JCheckBox();
+        _brand_new = new javax.swing.JCheckBox();
+        _group_management = new javax.swing.JCheckBox();
+        jrbNU = new javax.swing.JRadioButton();
+        _site_new = new javax.swing.JCheckBox();
+        _resent_updates = new javax.swing.JCheckBox();
         cmbMPlan = new javax.swing.JComboBox<>();
-        _sales_analytics = new javax.swing.JCheckBox();
+        rbEU = new javax.swing.JRadioButton();
+        lblSITES8 = new javax.swing.JLabel();
+        _promo = new javax.swing.JCheckBox();
         _notifications = new javax.swing.JCheckBox();
+        _password = new javax.swing.JCheckBox();
         jScrollPane3 = new javax.swing.JScrollPane();
         DV1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -207,79 +212,35 @@ public class An_GUI extends javax.swing.JInternalFrame {
         jPanel1.setToolTipText("");
         jPanel1.setDoubleBuffered(false);
         jPanel1.setName("Scope"); // NOI18N
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        _login.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _login.setSelected(true);
-        _login.setText("Admin Login");
-        _login.setEnabled(false);
-        _login.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _login.setRequestFocusEnabled(false);
-        jPanel1.add(_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 18, -1, 14));
 
         _all_data.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _all_data.setText("Show all data rows");
         _all_data.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _all_data.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _all_data.setRequestFocusEnabled(false);
-        jPanel1.add(_all_data, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 18, 131, 14));
 
-        _site_new.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _site_new.setText("New Site (not in Prod)");
-        _site_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _site_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _site_new.setRequestFocusEnabled(false);
-        jPanel1.add(_site_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 34, -1, 14));
-
-        _site.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _site.setText("Sites");
-        _site.setContentAreaFilled(false);
-        _site.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _site.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        jPanel1.add(_site, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 34, 77, 14));
-
-        _brand.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _brand.setText("Brand");
-        _brand.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _brand.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _brand.setRequestFocusEnabled(false);
-        jPanel1.add(_brand, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 50, 84, 14));
-
-        _orders.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _orders.setText("Orders");
-        _orders.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _orders.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _orders.setRequestFocusEnabled(false);
-        jPanel1.add(_orders, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 66, 78, 14));
-
-        _resent_updates.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _resent_updates.setText("Recent Updates");
-        _resent_updates.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _resent_updates.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _resent_updates.setRequestFocusEnabled(false);
-        jPanel1.add(_resent_updates, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 50, 119, 14));
+        _logout.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _logout.setText("User Feedback & Logout");
+        _logout.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _logout.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _logout.setRequestFocusEnabled(false);
 
         _announcements.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _announcements.setText("Announcements");
         _announcements.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _announcements.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _announcements.setRequestFocusEnabled(false);
-        jPanel1.add(_announcements, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 66, 120, 14));
-
-        _promo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _promo.setText("Promo Management");
-        _promo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _promo.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _promo.setRequestFocusEnabled(false);
-        jPanel1.add(_promo, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 98, 120, 14));
 
         _sales_reporting.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _sales_reporting.setText("Sales Reporting");
         _sales_reporting.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _sales_reporting.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _sales_reporting.setRequestFocusEnabled(false);
-        jPanel1.add(_sales_reporting, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 82, -1, 14));
+
+        Optin_NU_EU.add(rbNU_EU);
+        rbNU_EU.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        rbNU_EU.setSelected(true);
+        rbNU_EU.setText("Both");
 
         _users.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _users.setSelected(true);
@@ -287,83 +248,255 @@ public class An_GUI extends javax.swing.JInternalFrame {
         _users.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _users.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _users.setRequestFocusEnabled(false);
-        jPanel1.add(_users, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 66, 93, 14));
 
-        _password.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _password.setText("Forgot Password");
-        _password.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _password.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _password.setRequestFocusEnabled(false);
-        jPanel1.add(_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(292, 98, 113, 14));
+        _brand.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _brand.setText("Brand");
+        _brand.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _brand.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _brand.setRequestFocusEnabled(false);
 
-        _logout.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _logout.setText("User Feedback & Logout");
-        _logout.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _logout.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _logout.setRequestFocusEnabled(false);
-        jPanel1.add(_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 114, -1, 14));
-
-        _roles.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _roles.setText("Roles Permissions");
-        _roles.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _roles.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _roles.setRequestFocusEnabled(false);
-        jPanel1.add(_roles, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 82, 131, 14));
-
-        _brand_new.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _brand_new.setText("Add Brand (not in Prod)");
-        _brand_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _brand_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _brand_new.setRequestFocusEnabled(false);
-        jPanel1.add(_brand_new, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 50, -1, 14));
-
-        _smart_analytics.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _smart_analytics.setText("Smart Analytics");
-        _smart_analytics.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _smart_analytics.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _smart_analytics.setRequestFocusEnabled(false);
-        jPanel1.add(_smart_analytics, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 114, -1, 14));
-
-        _group_management.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _group_management.setText("Group Management");
-        _group_management.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _group_management.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _group_management.setRequestFocusEnabled(false);
-        jPanel1.add(_group_management, new org.netbeans.lib.awtextra.AbsoluteConstraints(119, 82, 124, 14));
-
-        lblSITES8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        lblSITES8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblSITES8.setText("Promo Code");
-        lblSITES8.setAlignmentX(0.5F);
-        jPanel1.add(lblSITES8, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 140, 72, 16));
-
-        cmbPromo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        jPanel1.add(cmbPromo, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 136, 172, 20));
-
-        lblSITES12.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        lblSITES12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblSITES12.setText("Meal Plan");
-        lblSITES12.setAlignmentX(0.5F);
-        jPanel1.add(lblSITES12, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 164, 56, -1));
-
-        cmbMPlan.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        jPanel1.add(cmbMPlan, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 160, 172, 20));
+        _site.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _site.setText("Sites");
+        _site.setContentAreaFilled(false);
+        _site.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _site.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
         _sales_analytics.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _sales_analytics.setText("Sales Analytics");
         _sales_analytics.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _sales_analytics.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _sales_analytics.setRequestFocusEnabled(false);
-        jPanel1.add(_sales_analytics, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 98, -1, 14));
+
+        _login.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _login.setSelected(true);
+        _login.setText("EU Login");
+        _login.setEnabled(false);
+        _login.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _login.setRequestFocusEnabled(false);
+
+        _roles.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _roles.setText("Roles Permissions");
+        _roles.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _roles.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _roles.setRequestFocusEnabled(false);
+
+        _smart_analytics.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _smart_analytics.setText("Smart Analytics");
+        _smart_analytics.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _smart_analytics.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _smart_analytics.setRequestFocusEnabled(false);
+
+        cmbPromo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+
+        lblSITES12.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblSITES12.setText("Meal Plan");
+        lblSITES12.setAlignmentX(0.5F);
+
+        _orders.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _orders.setText("Orders");
+        _orders.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _orders.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _orders.setRequestFocusEnabled(false);
+
+        _brand_new.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _brand_new.setText("Add Brand (not in Prod)");
+        _brand_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _brand_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _brand_new.setRequestFocusEnabled(false);
+
+        _group_management.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _group_management.setText("Group Management");
+        _group_management.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _group_management.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _group_management.setRequestFocusEnabled(false);
+
+        Optin_NU_EU.add(jrbNU);
+        jrbNU.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jrbNU.setText("NU");
+
+        _site_new.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _site_new.setText("New Site (not in Prod)");
+        _site_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _site_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _site_new.setRequestFocusEnabled(false);
+
+        _resent_updates.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _resent_updates.setText("Recent Updates");
+        _resent_updates.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _resent_updates.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _resent_updates.setRequestFocusEnabled(false);
+
+        cmbMPlan.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+
+        Optin_NU_EU.add(rbEU);
+        rbEU.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        rbEU.setText("EU");
+
+        lblSITES8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblSITES8.setText("Promo Code");
+        lblSITES8.setAlignmentX(0.5F);
+
+        _promo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _promo.setText("Promo Management");
+        _promo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _promo.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _promo.setRequestFocusEnabled(false);
 
         _notifications.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _notifications.setText("Notifications");
         _notifications.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _notifications.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _notifications.setRequestFocusEnabled(false);
-        jPanel1.add(_notifications, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 114, 88, 14));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 424, 188));
+        _password.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _password.setText("Forgot Password");
+        _password.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _password.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _password.setRequestFocusEnabled(false);
+
+        javax.swing.GroupLayout paneCore_ScopeLayout = new javax.swing.GroupLayout(paneCore_Scope);
+        paneCore_Scope.setLayout(paneCore_ScopeLayout);
+        paneCore_ScopeLayout.setHorizontalGroup(
+            paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(_brand, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(_resent_updates, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
+                        .addComponent(_brand_new))
+                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17)
+                        .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(69, 69, 69)
+                        .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                        .addComponent(_sales_reporting)
+                        .addGap(13, 13, 13)
+                        .addComponent(_group_management, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(_sales_analytics)
+                        .addGap(17, 17, 17)
+                        .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                        .addComponent(_smart_analytics)
+                        .addGap(49, 49, 49)
+                        .addComponent(_notifications, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(_logout))
+                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                        .addGap(147, 147, 147)
+                        .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jrbNU)
+                        .addGap(1, 1, 1)
+                        .addComponent(rbEU)
+                        .addGap(6, 6, 6)
+                        .addComponent(rbNU_EU)
+                        .addGap(29, 29, 29)
+                        .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(cmbMPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(_login)
+                            .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(168, 168, 168)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_site_new)
+                            .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+        paneCore_ScopeLayout.setVerticalGroup(
+            paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneCore_ScopeLayout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_site_new, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_brand, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_resent_updates, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_brand_new, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_sales_reporting, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_group_management, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_sales_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_smart_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_notifications, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(rbNU_EU, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jrbNU, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rbEU, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(lblSITES12))
+                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addComponent(cmbMPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(paneCore_Scope, javax.swing.GroupLayout.PREFERRED_SIZE, 404, Short.MAX_VALUE)
+                .addGap(2, 2, 2))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(paneCore_Scope, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 5, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 184, 416, 192));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -802,12 +935,15 @@ public class An_GUI extends javax.swing.JInternalFrame {
             this.setTitle("Android Automation Manager >>> Changing Application,  please wait...");
             app = cmbApp.getSelectedItem().toString();
 
-            GUI_Get_Sites();
-            
             GUI_Get_Packages(AWS_credentials);
             An_Met.Set_Mobile_Package_Name();
-            An_Met.CheckAppPackage(); // ========   Check selected app version
-
+            An_Met.CheckAppPackage(); 
+            
+            if("Bolter".equals(app)) {
+                GUI_Get_Bolter_Site();
+            } else{
+                GUI_Get_Sites();
+            }
             this.setTitle("Android Automation Manager");
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             if("Bolter".equals(app)){
@@ -844,6 +980,10 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnFailsMouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
+        
+//        txtLog.append(An_Met.Get_Bolter_User_Site_ID(txtBolter_Id.getText(), txtBolter_Pw.getText()) + "\r\n");
+//        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+//        
         String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
@@ -1375,9 +1515,15 @@ public class An_GUI extends javax.swing.JInternalFrame {
             Load = false;
         }
         app = cmbApp.getSelectedItem().toString();
-        GUI_Get_Sites();
+
         An_Met.Set_Mobile_Package_Name();
         GUI_Get_Packages(AWS_credentials);
+        
+        if("Bolter".equals(app)) {
+            GUI_Get_Bolter_Site();
+        } else{
+            GUI_Get_Sites();
+        }
     }
     private void GUI_Get_Sites() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -1465,6 +1611,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 }
                 SitesModel.addRow(new Object[]{site, platform, country, id});
             }
+            
             DV1.setModel(SitesModel);
             DV1.setDefaultEditor(Object.class, null);
             DV1.getColumnModel().getColumn(0).setPreferredWidth(250);
@@ -1476,14 +1623,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             sorter.sort(); 
    
         } catch (IOException | JSONException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
+            txtLog.append("- GUI_Get_Sites: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());      
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
+                txtLog.append("- GUI_Get_Sites: " + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());    
             }
         }
@@ -1506,8 +1653,96 @@ public class An_GUI extends javax.swing.JInternalFrame {
             GUI_Get_Brands();
         }
         lblSITES.setText(app + " Sites (" + DV1.getRowCount() + " found)");
-                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
+    private void GUI_Get_Bolter_Site() {
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        wdLastRow = -1;
+
+        txtLog.append("- Get Bolter " + cmbEnv.getSelectedItem().toString() + " Site ..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+        String Site_ID = An_Met.Get_Bolter_User_Site_ID(txtBolter_Id.getText(), txtBolter_Pw.getText());
+        if(Site_ID.contains("ERROR")){
+            txtLog.append(Site_ID + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());            
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            sw1.reset();
+            return;
+        }
+        String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
+        DefaultTableModel SitesModel = new DefaultTableModel();
+        SitesModel.setColumnIdentifiers(SitesColumnsName);
+        DV1.setModel(SitesModel);
+        
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV1.getModel());
+        DV1.setRowSorter(sorter);
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);  
+        sorter.setSortable(0, false);         
+        
+        String TBL = "";
+        switch (env) {
+            case "PR":
+                TBL = "p2_sites_pr";
+                break;
+            case "ST":
+                TBL = "p2_sites_st"; 
+                break;
+            default:
+                TBL = "p2_sites_de"; 
+                break;
+        }
+        String site;
+        String _platform;
+        String country;
+        String id;
+        try {
+            try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+                ResultSet rs = conn.createStatement().executeQuery("SELECT [Site], [Platform], [Country], [id] FROM " + TBL + " WHERE [id] = '" + Site_ID.trim() + "'");
+                rs.next();
+                site = rs.getString(1);
+                _platform = rs.getString(2);
+                country = rs.getString(3);
+                id = rs.getString(4);
+            } 
+            SitesModel.addRow(new Object[]{site, _platform, country, id});
+            
+            DV1.setModel(SitesModel);
+            DV1.setDefaultEditor(Object.class, null);
+            DV1.getColumnModel().getColumn(0).setPreferredWidth(250);
+            DV1.getColumnModel().getColumn(1).setPreferredWidth(70);
+            DV1.getColumnModel().getColumn(2).setPreferredWidth(50);
+            DV1.getColumnModel().getColumn(3).setPreferredWidth(400);  
+            
+            sorter.setSortable(0, true); 
+            sorter.sort();             
+            
+        } catch (Exception ex) {
+            txtLog.append("- Get Bolter Site ERROR > location_group: " + Site_ID + " >> " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            sw1.reset();
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        } 
+
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();
+        
+        if (DV1.getRowCount() > 0) {
+            DV1.changeSelection(0, 0, false, false);
+            SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
+            SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
+            GUI_Get_Brands();
+        }
+        lblSITES.setText(app + " Sites (" + DV1.getRowCount() + " found)");
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+
     private void GUI_Get_Brands() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         d2LastRow = -1;
@@ -1547,7 +1782,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             };
             String responseBody = httpclient.execute(httpget, responseHandler);
             JSONObject json = new JSONObject(responseBody);
-            JSONArray Location = json.getJSONArray("locations");
+            JSONArray Locations = json.getJSONArray("locations");
             JSONArray brands = null;
             
             String brand;
@@ -1555,7 +1790,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             String id;
             String unit_id;
             if (Location != null) {
-                for (Object l : Location) {
+                for (Object l : Locations) {
                     brand = "";
                     location = "";
                     id = "";
@@ -1571,7 +1806,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
                             }
                             id = br.getString("id");
                             unit_id = loc.getString("id");
-                            BrandsModel.addRow(new Object[]{brand, location, id, unit_id});
+                            boolean delivery = false;
+                            if(br.getJSONObject("is").has("delivery_supported")){
+                                delivery = br.getJSONObject("is").getBoolean("delivery_supported");
+                            }
+                            if(!"Bolter".equals(app) || delivery){
+                                BrandsModel.addRow(new Object[]{brand, location, id, unit_id});                                
+                            }
                         }
                     }
                 }
@@ -1621,7 +1862,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         d2LastRow = DV2.getSelectedRow();
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
         lblBRANDS.setText("Selected Site Brands (" + DV2.getRowCount() + " found)");
-                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GUI_Load_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -1889,8 +2130,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Package Variables">
     public static final Stopwatch sw1 = Stopwatch.createUnstarted();
 
-    public static String access_key;
-    public static String secret_key;
+    public static String AWS_A_key;
+    public static String AWS_S_key;
     public static AWSCredentials AWS_credentials; 
     
     public static int appium_port = 4723;
@@ -1925,12 +2166,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     public static String Mobile_PW;
     public static String Bolter_ID;
     public static String Bolter_PW;  
-    
-    private static String S_Client_ID = "";
-    private static String S_Client_Secret  = "";
-    private static String S_Signing_Secret = "";
-    private static String S_Hook = "";
-      
+         
     public static String url = "";
     public static String app = "";
     public static String appId = "";
@@ -1995,6 +2231,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;
     private javax.swing.JTable DV3;
+    private javax.swing.ButtonGroup Optin_NU_EU;
     private javax.swing.JCheckBox _all_data;
     private javax.swing.JCheckBox _announcements;
     private javax.swing.JCheckBox _brand;
@@ -2039,6 +2276,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JRadioButton jrbNU;
     private javax.swing.JLabel lblAPK;
     private javax.swing.JLabel lblBRANDS;
     private javax.swing.JLabel lblSITES;
@@ -2054,6 +2292,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblSITES9;
     private javax.swing.JSpinner nWaitElement;
     private javax.swing.JSpinner nWaitLoad;
+    private javax.swing.JPanel paneCore_Scope;
+    private javax.swing.JRadioButton rbEU;
+    private javax.swing.JRadioButton rbNU_EU;
     private javax.swing.JTextField txtBolter_Id;
     private javax.swing.JTextField txtBolter_Pw;
     private javax.swing.JTextArea txtLog;
