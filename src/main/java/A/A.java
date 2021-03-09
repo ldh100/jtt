@@ -5,7 +5,7 @@
  */
 
 package A;
-import Android.Android;
+import Android.An_GUI;
 import AP3.AP3;
 import API.API;
 import Reports.W_Report;
@@ -15,9 +15,7 @@ import WO.WO;
 import JIRA.JIRA;
 import Orders.Orders;
 import Station.Station;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
-import io.appium.java_client.service.local.AppiumDriverLocalService;
+import Jobs.Jobs;
 import java.awt.Cursor;
 import java.beans.PropertyVetoException;
 import java.io.File;
@@ -45,7 +43,6 @@ import javax.swing.UIManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * @author Oleg.Spozito
@@ -79,6 +76,7 @@ public class A extends javax.swing.JFrame {
         Menu_API = new javax.swing.JMenu();
         MenuReports = new javax.swing.JMenu();
         Menu_JIRA = new javax.swing.JMenu();
+        Menu_JOBS = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JTT");
@@ -207,13 +205,23 @@ public class A extends javax.swing.JFrame {
 
         Menu_JIRA.setBorder(null);
         Menu_JIRA.setText("JIRA");
-        Menu_JIRA.setName("FW"); // NOI18N
+        Menu_JIRA.setName("JIRA"); // NOI18N
         Menu_JIRA.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Menu_JIRAMouseClicked(evt);
             }
         });
         MenuBar.add(Menu_JIRA);
+
+        Menu_JOBS.setBorder(null);
+        Menu_JOBS.setText("JOBS");
+        Menu_JOBS.setName("JOBS"); // NOI18N
+        Menu_JOBS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_JOBSMouseClicked(evt);
+            }
+        });
+        MenuBar.add(Menu_JOBS);
 
         setJMenuBar(MenuBar);
 
@@ -544,7 +552,7 @@ public class A extends javax.swing.JFrame {
     private void Open_Android() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
         for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("JIRA")) {
+            if (frame.getName().equals("Android")) {
                 try {
                     frame.setSelected(true);
                     if (frame.isIcon()) {
@@ -559,7 +567,7 @@ public class A extends javax.swing.JFrame {
                 return;
             }
         } 
-        Android an = new Android();
+        An_GUI an = new An_GUI();
         this.DesktopPane.add(an);
         int Y;
         int X;
@@ -572,6 +580,39 @@ public class A extends javax.swing.JFrame {
         an.setLocation(X*20, Y*20);
         an.show();
         an.setSelected(true);
+        F_COUNT++;  
+    }
+    private void Open_JOBS() throws PropertyVetoException {
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("JOBS")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
+        Jobs jobs = new Jobs();
+        this.DesktopPane.add(jobs);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        jobs.setLocation(X*20, Y*20);
+        jobs.show();
+        jobs.setSelected(true);
         F_COUNT++;  
     }
 
@@ -771,6 +812,24 @@ public class A extends javax.swing.JFrame {
         Menu_Android.setEnabled(true);
     }//GEN-LAST:event_Menu_AndroidMouseClicked
 
+    private void Menu_JOBSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_JOBSMouseClicked
+        if(!Menu_JOBS.isEnabled()){
+            return;
+        }
+        Menu_JOBS.setEnabled(false);
+        MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        try {
+            Open_JOBS();
+        }
+        catch (PropertyVetoException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+        Menu_JOBS.setEnabled(true);
+    }//GEN-LAST:event_Menu_JOBSMouseClicked
+
     private void Get_Version() {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         Version =  "?"; 
@@ -895,29 +954,21 @@ public class A extends javax.swing.JFrame {
     public static WebElement e1;
     public static WebElement e2;
     public static String HeadLess = "";
-    public static FluentWait fluentWait;
-    public static WebDriverWait loadTimeout;
+
+    
     public static List<WebElement> L0 = null;
     public static List<WebElement> L1 = null;
     public static List<WebElement> L2 = null;
     public static List<WebElement> L3 = null;
     public static List<WebElement> Opens = null;
-    public static List<WebElement> Closes = null;
-    
-    public static AndroidDriver<AndroidElement> ad = null;
-    public static AppiumDriverLocalService appiumService = null;
-    public static List<AndroidElement> mL0 = null;
-    public static List<AndroidElement> mL1 = null;
-    public static AndroidElement me = null;
-    public static AndroidElement me1 = null;
-    public static AndroidElement me2 = null;
-    public static AndroidElement me3 = null;
-    public static WebDriverWait wait = null;    
-    
+    public static List<WebElement> Closes = null;  
+  
+ 
     public static double sleep = 500; // milisec
-    public static double LoadTimeOut = 15; // sec
+    public static double LoadTimeOut = 15 *1000; // milisec
     public static long WaitForElement = 3000; // milisec
-
+    public static FluentWait loadTimeout;   
+    
     public static String t;
     public static String err;
     public static String F; 
@@ -962,6 +1013,7 @@ public class A extends javax.swing.JFrame {
     private javax.swing.JMenu Menu_DL;
     private javax.swing.JMenu Menu_FW;
     private javax.swing.JMenu Menu_JIRA;
+    private javax.swing.JMenu Menu_JOBS;
     private javax.swing.JMenu Menu_OR;
     private javax.swing.JMenu Menu_iOS;
     // End of variables declaration//GEN-END:variables

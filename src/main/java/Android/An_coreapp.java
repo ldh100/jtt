@@ -56,9 +56,9 @@ public class An_coreapp {
         _t++; Thread.sleep((long) sleep); Wait_For_Element_By_Path_Presence("Wait for 'Find Food' title", "id", "title", "no_jira");             
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); Element_By_Path_Text("Get 'Title' text", "id", "title", "no_jira");             
-            if (FAIL) { return;}            
+            //if (FAIL) { return;}            
         _t++; Thread.sleep((long) sleep); Element_By_Path_Text("Get 'Decription' text", "id", "description", "no_jira");             
-            if (FAIL) { return;}   
+            //if (FAIL) { return;}   
             
         _t++; Thread.sleep((long) sleep); Element_By_Path_Text("Get 'Enable..' button text", "id", "btnEnableLocation", "no_jira");             
             if (FAIL) { return;}   
