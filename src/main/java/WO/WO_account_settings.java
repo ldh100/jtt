@@ -194,7 +194,7 @@ public class WO_account_settings {
         if (!d1.findElements(By.tagName("h3")).isEmpty()){  
             _t++; EX += _t + "\t" + "Add CC successful " + "\t" + " ===== " + "\t" + pi.name + "\t" + " PASS " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n"; 
          //   _t++; Thread.sleep((long) sleep); TWeb.Swith_to_Frame("switch to orginal webdriver",          "defaultContent", null, "no_jira");
-         //d1.switchTo().parentFrame();
+         //wd.switchTo().parentFrame();
             return;
         }
     //Determine the error message
@@ -219,7 +219,7 @@ public class WO_account_settings {
 //    System.out.println(t);
     
    // elements_List =  d1.findElements(By.className("iframe-input"));
-    //d1.switchTo("//div[@class='v-window-item v-window-item--active']")
+    //wd.switchTo("//div[@class='v-window-item v-window-item--active']")
   //  String str = d1.findElement(By.xpath("div#app>div>main>div>div>div:nth-of-type(3)>div>div>div>div:nth-of-type(2)>div>div>label")).getText();
     // String str[] = d1.findElements(By.className("label");
 //    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Add card form---Name Label",          "css", "div#app>div>main>div>div>div:nth-of-type(3)>div>div>div>div:nth-of-type(2)>div>div>label", "no_jira");

@@ -610,12 +610,12 @@ public class FW extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
-        if (d1LastRow == DV1.getSelectedRow() || DV2.getRowCount() == 0) {
+        if (wdLastRow == DV1.getSelectedRow() || DV2.getRowCount() == 0) {
            return;
         }
         RESTAURANT = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
         RestID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
-        d1LastRow = DV1.getSelectedRow(); 
+        wdLastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
@@ -669,7 +669,7 @@ public class FW extends javax.swing.JInternalFrame {
         txtLog.append("=== Execution" + HeadLess + " started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
-        LoadTimeOut = (double)nWaitLoad.getValue();
+        LoadTimeOut = (double)nWaitLoad.getValue() *1000;
         sleep = (double)nShowPage.getValue() *1000;
         EX = "";
         F = "";
@@ -1117,15 +1117,14 @@ public class FW extends javax.swing.JInternalFrame {
             d1.manage().window().maximize();
             d1.manage().deleteAllCookies(); // =================================
             
-            d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.SECONDS);
-            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.SECONDS);
+            d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
+            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
             
             d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
-            
-            fluentWait = new FluentWait(d1).withTimeout(Duration.ofMillis(WaitForElement))			
+            loadTimeout = new FluentWait(d1).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
 			.pollingEvery(Duration.ofMillis(200))  			
-			.ignoring(NoSuchElementException.class);     // fluentWait for Visible / Clickable   
-            loadTimeout = new WebDriverWait(d1, (long) LoadTimeOut);      // for load > progress 
+			.ignoring(NoSuchElementException.class);       // for load > progress
+            
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
         } catch (Exception ex) {
@@ -1184,7 +1183,6 @@ public class FW extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            
             userTKN = json.getString("token");   
             userID = json.getJSONObject("user").getString("id");
         } catch (IOException | JSONException ex) {
@@ -1247,7 +1245,7 @@ public class FW extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetRestaurants() {
-        d1LastRow = -1;
+        wdLastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Restaurants ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1796,7 +1794,7 @@ public class FW extends javax.swing.JInternalFrame {
     private static SwingWorker BW2;   
     private static String Toast_Msg = ""; 
     
-    private int d1LastRow = -1; 
+    private int wdLastRow = -1; 
     private int d2LastRow = -1; 
   
     private boolean CONFIG = false;
