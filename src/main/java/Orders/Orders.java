@@ -447,10 +447,10 @@ public class Orders extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
-        if (d1LastRow == DV1.getSelectedRow()) {
-            d1LastRow = -1;
+        if (wdLastRow == DV1.getSelectedRow()) {
+            wdLastRow = -1;
         }else{
-            d1LastRow = DV1.getSelectedRow();             
+            wdLastRow = DV1.getSelectedRow();             
         }
         ValidateRun();
     }//GEN-LAST:event_DV1MouseClicked
@@ -533,7 +533,7 @@ public class Orders extends javax.swing.JInternalFrame {
  // ============ User
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm);
-            httpget.setHeader("Authorization",  "Basic " + UserAuth);
+            httpget.setHeader("Authorization", "Basic " + UserAuth);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -1021,7 +1021,7 @@ if(!R.equals("OK")){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void LoadOrders() {
-        d1LastRow = -1;
+        wdLastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Shopping Card Templates ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1323,7 +1323,7 @@ if(!R.equals("OK")){
     private static Duration DD;
     private List<String> ORDER_IDS; 
     private List<String> SCART_IDS;   
-    private int d1LastRow = -1; 
+    private int wdLastRow = -1; 
     private boolean CONFIG = false;
    
     private String userID;

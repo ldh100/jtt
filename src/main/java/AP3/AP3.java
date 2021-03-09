@@ -728,15 +728,15 @@ public class AP3 extends javax.swing.JInternalFrame {
         getContentPane().add(txtIM_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 332, 184, -1));
 
         txtADMIN_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtADMIN_PW.setText("Password1");
+        txtADMIN_PW.setText("Passworwd");
         getContentPane().add(txtADMIN_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 284, 72, -1));
 
         txtSM_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtSM_PW.setText("Password1");
+        txtSM_PW.setText("Passworwd");
         getContentPane().add(txtSM_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 332, 72, -1));
 
         txtIM_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtIM_PW.setText("Password1");
+        txtIM_PW.setText("Passworwd");
         getContentPane().add(txtIM_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 308, 72, -1));
 
         lblSITES1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -783,13 +783,13 @@ public class AP3 extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
-        if (d1LastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
+        if (wdLastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
            return;
         }
         SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
         COUNTRY = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 2));
-        d1LastRow = DV1.getSelectedRow(); 
+        wdLastRow = DV1.getSelectedRow(); 
         GetBrands();
     }//GEN-LAST:event_DV1MouseClicked
 
@@ -931,7 +931,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLog.append("=== Execution started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
-        LoadTimeOut = (double)nWaitLoad.getValue();
+        LoadTimeOut = (double)nWaitLoad.getValue() *1000;
         sleep = (double)nShowPage.getValue() *1000;
 
         EX = "";
@@ -1127,15 +1127,13 @@ public class AP3 extends javax.swing.JInternalFrame {
             d1.manage().window().maximize();
             d1.manage().deleteAllCookies(); // =================================
             
-            d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.SECONDS);
-            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.SECONDS);
-            
-            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
-            
-            fluentWait = new FluentWait(d1).withTimeout(Duration.ofMillis(WaitForElement))			
+            d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
+            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
+            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);            
+            loadTimeout = new FluentWait(d1).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
 			.pollingEvery(Duration.ofMillis(200))  			
-			.ignoring(NoSuchElementException.class);     // fluentWait for Visible / Clickable   
-            loadTimeout = new WebDriverWait(d1, (long) LoadTimeOut);      // for load > progress 
+			.ignoring(NoSuchElementException.class);       // for load > progress
+            
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
         } catch (Exception ex) {
@@ -1458,7 +1456,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetSites() {
-        d1LastRow = -1;
+        wdLastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Sites ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1851,7 +1849,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         }
     }
     private void GetBrandSector() {                                 
-
         txtLog.append("- GetBrand Sector/Company ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         GroupID = "";
@@ -2253,7 +2250,7 @@ public class AP3 extends javax.swing.JInternalFrame {
 
     private boolean CONFIG = false;
     private String C = "";
-    private int d1LastRow = -1; 
+    private int wdLastRow = -1; 
     private int d2LastRow = -1; 
     private List<String> GROUP_IDS;
     private List<String> COMP_IDS;
