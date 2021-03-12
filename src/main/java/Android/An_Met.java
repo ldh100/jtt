@@ -15,7 +15,6 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
-import java.awt.Cursor;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -51,6 +50,32 @@ import org.openqa.selenium.support.ui.FluentWait;
  * @author oleg.spozito
  */
 public class An_Met extends An_GUI { 
+    public static void Set_Mobile_Package_Name(){
+        if ("Boost".equals(app)) {
+            appPackage = "com.compass_canada.boost";
+            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
+        }
+        if ("JJKitchen".equals(app)) {
+            appPackage = "io.compassdigital.jjkitchen";
+            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
+        }
+        if ("Thrive".equals(app)) {
+            appPackage = "com.compass_canada.thrive";
+            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
+        }
+        if ("Nourish".equals(app)) {
+            appPackage = "io.compassdigital.nourish";
+            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
+        }
+        if ("Rogers".equals(app)) {
+            appPackage = "com.compass_canada.digital_hospitality.rogers";
+            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
+        }
+        if ("Bolter".equals(app)) {
+            appPackage = "io.compassdigital.delivery";
+            appActivity = "io.compassdigital.delivery.splash.SplashActivity";
+        }
+    }
     public static String Report(boolean Open_File){
         Report_File = "";
         if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
@@ -71,53 +96,6 @@ public class An_Met extends An_GUI {
             return "=== Report Excel file:\r\n" + Report_File + "\r\n";
         } catch (IOException ex) {
             return "=== Report > ERROR: " + ex.getMessage() + "\r\n";
-        }
-    }
-    public static String LOG_UPDATE(String LOG){  
-        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
-            PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET " +
-                    " [Date] = ?" +       // 1
-                    ", [Time] = ?" +      // 2
-                    ", [app] = ?" +       // 3
-                    ", [url] = ?" +       // 4
-                    ", [summary] = ?" +   // 5
-                    ", [t_calls] = ?" +   // 6
-                    ", [t_min] = ?" +     // 7
-                    ", [t_avg] = ?" +     // 8
-                    ", [t_max] = ?" +     // 9
-                    ", [p_50] = ?" +      // 10
-                    ", [p_90] = ?" +      // 11
-                    ", [test_type] = ?" +     // 12
-                    ", [user_id] = ?" +       // 13
-                    ", [user_ws] = ?" +       // 14
-                    ", [env] = ?" +       // 15
-                    ", [Result] = ?" +    // 16
-                    ", [Status] = ?" +    // 17
-                    ", [Excel] = ?" +     // 18
-                    " WHERE [app] = 'Android_" + app + "_" + env + "' AND [Status] = 'Running'");
-            _update.setString(1, LocalDateTime.now().format(Date_formatter));
-            _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _update.setString(3, "Android_" + app + "_" + env);
-            _update.setString(4, url);
-            _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
-            _update.setInt(6, t_calls);
-            _update.setDouble(7, t_min);
-            _update.setDouble(8, t_avg);
-            _update.setDouble(9, t_max);
-            _update.setDouble(10, p_50);
-            _update.setDouble(11, p_90);
-            _update.setString(12, r_type);
-            _update.setString(13, A.A.UserID);
-            _update.setString(14, A.A.WsID);
-            _update.setString(15, devModel + " OSv: " + devOS);
-            _update.setString(16, LOG);
-            _update.setString(17, "Scope: " + SCOPE);
-            _update.setString(18, EX);
-            int row = _update.executeUpdate();
-            conn.close();
-            return "=== LOG_UPDATE > OK" + "\r\n";
-        } catch (SQLException ex) {
-            return "=== LOG_UPDATE > SQL ERROR: " + ex.getMessage() + "\r\n";
         }
     }
     public static String LOG_START(){
@@ -185,10 +163,100 @@ public class An_Met extends An_GUI {
         } catch (SQLException ex) {
             return "=== LOG_START > SQL ERROR: " + ex.getMessage() + "\r\n";
         }
+    }      
+    public static String LOG_UPDATE(String LOG){  
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+            PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET " +
+                    " [Date] = ?" +       // 1
+                    ", [Time] = ?" +      // 2
+                    ", [app] = ?" +       // 3
+                    ", [url] = ?" +       // 4
+                    ", [summary] = ?" +   // 5
+                    ", [t_calls] = ?" +   // 6
+                    ", [t_min] = ?" +     // 7
+                    ", [t_avg] = ?" +     // 8
+                    ", [t_max] = ?" +     // 9
+                    ", [p_50] = ?" +      // 10
+                    ", [p_90] = ?" +      // 11
+                    ", [test_type] = ?" +     // 12
+                    ", [user_id] = ?" +       // 13
+                    ", [user_ws] = ?" +       // 14
+                    ", [env] = ?" +       // 15
+                    ", [Result] = ?" +    // 16
+                    ", [Status] = ?" +    // 17
+                    ", [Excel] = ?" +     // 18
+                    " WHERE [app] = 'Android_" + app + "_" + env + "' AND [Status] = 'Running'");
+            _update.setString(1, LocalDateTime.now().format(Date_formatter));
+            _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
+            _update.setString(3, "Android_" + app + "_" + env);
+            _update.setString(4, url);
+            _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
+            _update.setInt(6, t_calls);
+            _update.setDouble(7, t_min);
+            _update.setDouble(8, t_avg);
+            _update.setDouble(9, t_max);
+            _update.setDouble(10, p_50);
+            _update.setDouble(11, p_90);
+            _update.setString(12, r_type);
+            _update.setString(13, A.A.UserID);
+            _update.setString(14, A.A.WsID);
+            _update.setString(15, devModel + " OSv: " + devOS);
+            _update.setString(16, LOG);
+            _update.setString(17, "Scope: " + SCOPE);
+            _update.setString(18, EX);
+            int row = _update.executeUpdate();
+            conn.close();
+            return "=== LOG_UPDATE > OK" + "\r\n";
+        } catch (SQLException ex) {
+            return "=== LOG_UPDATE > SQL ERROR: " + ex.getMessage() + "\r\n";
+        }
     }
+
     public static String Swipe_WakeUp(){       
         return Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " shell input touchscreen swipe 800 400 400 400 100", A.A.CWD, false, false);    
     }
+    public static String CheckDevice(String D){
+        devID = "";
+        devModel = "";
+        if(D.contains("id:")){
+            devModel = D.substring(0,D.indexOf(" ")).trim(); 
+            devID = D.substring(D.indexOf("id:") + 3).trim();        
+            devOS = Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " shell getprop ro.build.version.release", A.A.CWD, true, true).trim();
+            devOS = devOS.replace("null", "").substring(0, devOS.indexOf("\r\n")).trim();
+            return "=== CheckDevice OK > Model: " + devModel + ", OS version: " + devOS + "\r\n";
+        } else{
+            return "=== CheckDevice: " + "ID Not Found" + "\r\n";           
+        }        
+    }
+    public static String CheckAppPackage(){
+        String v1 = "?";
+        String v2 = "?";
+        appVersion = "Not Found";
+        try{
+            String v = Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " shell dumpsys package " + appPackage, A.A.CWD, true, true).trim();
+            if ("".equals(v.trim())) {
+                return "=== appPackage  " + appPackage + " - no information\r\n";
+            }
+//            if(v.contains("pkg=Package{")){
+//                Hash = v.substring(v.indexOf("pkg=Package{") + 12); // // pkg=Package{f2241b0 com.compass_canada.boost}  <<<< hash ??
+//                Hash = Hash.substring(0, Hash.indexOf(" ")).trim();                
+//            }
+            if(v.contains("versionName") && v.contains("versionCode")) {
+                v1 = v.substring(v.indexOf("versionName"));
+                v1 = v1.substring(0, v1.indexOf("\r\n"));
+                v1 = v1.substring(v1.indexOf("=") + 1).trim();
+                v2 = v.substring(v.indexOf("versionCode"));
+                v2 = v2.substring(0, v2.indexOf("\r\n"));
+                v2 = v2.substring(v2.indexOf("=") + 1);
+                v2 = v2.substring(0, v2.indexOf(" "));
+                appVersion = "v" + v1 + "(" + v2 + ")"; // Git Hash: " + Hash;
+            }
+            return "=== appPackage: " + appPackage + " > " + appVersion + "\r\n";
+        } catch (Exception ex) { 
+            return "=== CheckAppPackage: " + ex.getMessage() + "\r\n";
+        }      
+    }
+    
     public static String AndroidDriver(int DEVICE_INDEX) {
         try {
             systemPort = systemPort + DEVICE_INDEX;
@@ -244,32 +312,6 @@ public class An_Met extends An_GUI {
             return "= Get_S3_MOB_Credentials > " + "OK" + "\r\n";
         } catch (SQLException ex) {
             return "= Get_S3_MOB_Credentials > " + ex.getMessage() + "\r\n";
-        }
-    }
-    public static void Set_Mobile_Package_Name(){
-        if ("Boost".equals(app)) {
-            appPackage = "com.compass_canada.boost";
-            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
-        }
-        if ("JJKitchen".equals(app)) {
-            appPackage = "io.compassdigital.jjkitchen";
-            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
-        }
-        if ("Thrive".equals(app)) {
-            appPackage = "com.compass_canada.thrive";
-            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
-        }
-        if ("Nourish".equals(app)) {
-            appPackage = "io.compassdigital.nourish";
-            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
-        }
-        if ("Rogers".equals(app)) {
-            appPackage = "com.compass_canada.digital_hospitality.rogers";
-            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
-        }
-        if ("Bolter".equals(app)) {
-            appPackage = "io.compassdigital.delivery";
-            appActivity = "io.compassdigital.delivery.splash.SplashActivity";
         }
     }
     public static String UnInstaPackage(String PKG) {
@@ -338,48 +380,6 @@ public class An_Met extends An_GUI {
             return "== " + "Download_Build: " + ex.getMessage() + "\r\n";
         }
     }    
-    public static String CheckDevice(String D){
-        devID = "";
-        devModel = "";
-        if(D.contains("id:")){
-            devModel = D.substring(0,D.indexOf(" ")).trim(); 
-            devID = D.substring(D.indexOf("id:") + 3).trim();        
-            //devOS = Func.ExecuteCmdRuntime(ADB_HOME + "adb -s " + devID + " shell getprop ro.build.version.release").trim();
-            devOS = Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " shell getprop ro.build.version.release", A.A.CWD, true, true).trim();
-            devOS = devOS.replace("null", "").substring(0, devOS.indexOf("\r\n")).trim();
-            return "=== CheckDevice OK > Model: " + devModel + ", OS version: " + devOS + "\r\n";
-        } else{
-             return "=== CheckDevice: " + "ID Not Found" + "\r\n";           
-        }        
-    }
-    public static String CheckAppPackage(){
-        String v1 = "?";
-        String v2 = "?";
-        appVersion = "Not Found";
-        try{
-            String v = Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " shell dumpsys package " + appPackage, A.A.CWD, true, true).trim();
-            if ("".equals(v.trim())) {
-                return "=== appPackage  " + appPackage + " - no information\r\n";
-            }
-//            if(v.contains("pkg=Package{")){
-//                Hash = v.substring(v.indexOf("pkg=Package{") + 12); // // pkg=Package{f2241b0 com.compass_canada.boost}  <<<< hash ??
-//                Hash = Hash.substring(0, Hash.indexOf(" ")).trim();                
-//            }
-            if(v.contains("versionName") && v.contains("versionCode")) {
-                v1 = v.substring(v.indexOf("versionName"));
-                v1 = v1.substring(0, v1.indexOf("\r\n"));
-                v1 = v1.substring(v1.indexOf("=") + 1).trim();
-                v2 = v.substring(v.indexOf("versionCode"));
-                v2 = v2.substring(0, v2.indexOf("\r\n"));
-                v2 = v2.substring(v2.indexOf("=") + 1);
-                v2 = v2.substring(0, v2.indexOf(" "));
-                appVersion = "v" + v1 + "(" + v2 + ")"; // Git Hash: " + Hash;
-            }
-            return "=== appPackage: " + appPackage + " > " + appVersion + "\r\n";
-        } catch (Exception ex) { 
-            return "=== CheckAppPackage: " + ex.getMessage() + "\r\n";
-        }      
-    }
 
     public static String InstallBuild_S3(String B_PATH){        
         if(An_Met.Download_Build(B_PATH).contains("OK")){

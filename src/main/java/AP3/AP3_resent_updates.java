@@ -13,7 +13,7 @@ import static AP3.AP3.*;
  */
 public class AP3_resent_updates {
     public static void run() throws InterruptedException { 
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Resent Updates Icon Click", "xpath", "//button[contains(@class, 'bell-button ')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Resent Updates Icon Click", "xpath", "//button[contains(@class, 'bell-button')]", "no_jira"); 
             if (FAIL) { return;}
         Thread.sleep(500);            
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for load...", "css", "[role='progressbar']", "no_jira"); 

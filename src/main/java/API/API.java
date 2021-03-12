@@ -591,13 +591,13 @@ public class API extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
-        if (wdLastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
+        if (d1LastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
            return;
         }
         SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
         GetBrands();
-        wdLastRow = DV1.getSelectedRow(); 
+        d1LastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
     private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
@@ -1922,7 +1922,6 @@ public class API extends javax.swing.JInternalFrame {
             btnSCart.setEnabled(true);
         }
     }//GEN-LAST:event_jList_OrdersValueChanged
-
     private void btnUserPermissionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserPermissionsMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- AP3 User, Permissions API..." + "\r\n");
@@ -2039,7 +2038,6 @@ public class API extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
     }//GEN-LAST:event_btnUserPermissionsMouseClicked
-
     private void btnEodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEodMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Shopping Cart API..." + "\r\n");
@@ -2092,7 +2090,6 @@ public class API extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }    
     }//GEN-LAST:event_btnEodMouseClicked
-
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
         jPanel1.addComponentListener(new ComponentListener() {
             @Override
@@ -2113,6 +2110,7 @@ public class API extends javax.swing.JInternalFrame {
             }
         });
     }//GEN-LAST:event_formAncestorAdded
+ 
     private void Load_Form(){
         Load = true;
         cmbApp.addItem("Boost");
@@ -2167,6 +2165,7 @@ public class API extends javax.swing.JInternalFrame {
         
         Get_AP3_TKN();
         LOAD_CONFIG();
+        
         if (CONFIG) {
             Load = true;
             cmbApp.setSelectedItem(app);
@@ -2189,8 +2188,9 @@ public class API extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
+
     private void GetSites() {
-        wdLastRow = -1;
+        d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Sites ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -2320,7 +2320,7 @@ public class API extends javax.swing.JInternalFrame {
     }
     private void GetBrands() {
         d2LastRow = -1;
-        wdLastRow = DV1.getSelectedRow();
+        d1LastRow = DV1.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Brands ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -2413,8 +2413,7 @@ public class API extends javax.swing.JInternalFrame {
    
         if (DV2.getRowCount() > 0) {
             DV2.changeSelection(0, 0, false, false);
-            if (CONFIG && !"".equals(BRAND.trim()))
-            {
+            if (CONFIG && !"".equals(BRAND.trim())) {
                 for(int row = 0; row < DV2.getRowCount(); row++) {
                     if(DV2.getValueAt(row, 0).equals(BRAND)){
                         DV2.changeSelection(row, 0, false, false);
@@ -2471,9 +2470,6 @@ public class API extends javax.swing.JInternalFrame {
                 S_NAME = Sectors.getJSONObject(i).getString("name");
                 cmbGroup.addItem(S_NAME);
                 GROUP_IDS.add(Sectors.getJSONObject(i).getString("id"));
-                if(S_NAME.equals(GROUP)){
-                    T_Index = i;
-                }
             }
         } catch (IOException | JSONException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
@@ -2492,16 +2488,7 @@ public class API extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        
-        if(T_Index != -1){
-            cmbGroup.setSelectedIndex(T_Index);
-        }else{
-            if(cmbGroup.getItemCount() > 0){
-                cmbGroup.setSelectedIndex(0);
-            }
-        }
-        Load = false;   
-        GetCompanies();
+        Load = false;  
     }
     private void GetCompanies() {  
         int I = cmbGroup.getSelectedIndex();
@@ -2541,10 +2528,9 @@ public class API extends javax.swing.JInternalFrame {
             T_Index = -1;
             for (int i = 0; i < Sectors.length(); i++) {
                 S_NAME = Sectors.getJSONObject(i).getString("name");
-                cmbComp.addItem(S_NAME);
-                COMP_IDS.add(Sectors.getJSONObject(i).getString("id"));
-                if(S_NAME.equals(GL_MENU)){
-                    T_Index = i;
+                if(!S_NAME.isEmpty()) {
+                    cmbComp.addItem(S_NAME);
+                    COMP_IDS.add(Sectors.getJSONObject(i).getString("id"));
                 }
             }
         } catch (IOException | JSONException ex) {
@@ -2564,32 +2550,24 @@ public class API extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-        
-        for (int i = 0; i < COMP_IDS.size(); i++) {
-            if(COMP_IDS.get(i).equals(CompanyID)){
-                T_Index = i;
-            }
-        } 
-
-        if(T_Index != -1){
-            cmbComp.setSelectedIndex(T_Index);
-        }else{
-            if(cmbComp.getItemCount() > 0){
-                cmbComp.setSelectedIndex(0);
-            }
-        }
     }
-    private void GetBrandSector() {                                 
-        BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
-        txtLog.append("- Get Brand's Sector and Company" + "\r\n");
+    private void GetBrandSector() {  
+        txtLog.append("- Get Brand's Group/Sector" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        if(DV2.getRowCount()< 1){
+            txtLog.append("==== No Brands" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            return;
+        }
+        BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
         GroupID = "";
         CompanyID = "";
+        int GroupIndex = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try { 
             if(sw1.isRunning()){
-            sw1.reset();
+                sw1.reset();
             }
             sw1.start();        
      
@@ -2605,13 +2583,14 @@ public class API extends javax.swing.JInternalFrame {
                     throw new ClientProtocolException("Response: " + status + " - " + Msg);
                 }
             };
-            T_Index = -1; 
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));        
             if(json.has("sector")){
                 GroupID = json.getString("sector");
-                for (int i = 0; i < GROUP_IDS.size(); i++) {
-                    if(GROUP_IDS.get(i).equals(GroupID)){
-                        T_Index = i;
+                if(!GroupID.isEmpty()){
+                    for (int i = 0; i < GROUP_IDS.size(); i++) {
+                        if(GROUP_IDS.get(i).equals(GroupID)){
+                            GroupIndex = i;
+                        }
                     }
                 }   
             } else{
@@ -2622,7 +2601,7 @@ public class API extends javax.swing.JInternalFrame {
                 CompanyID = json.getString("company");
             } else{
                 txtLog.append("- Company ID not Found in this Brand API" + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } catch (IOException | JSONException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
@@ -2637,17 +2616,46 @@ public class API extends javax.swing.JInternalFrame {
                 this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             }
         } 
-
         txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset(); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));       
         
         if(!GroupID.equals("")){
-            cmbGroup.setSelectedIndex(T_Index);
+            cmbGroup.setSelectedIndex(GroupIndex);
+        }else{
+            if(cmbGroup.getItemCount() > 0){
+                cmbGroup.setSelectedIndex(0);
+            }
         }
+        GetCompanies();    // Load Brans Companies List after Brand's Gropu/Sector selected
+        GetBrandCompany(); // after Brand's Gropu/Sector selected
     } 
-
+    private void GetBrandCompany(){ // after Brand's Group/Sector slected
+        txtLog.append("- Get Brand's Company/Clobal Menu" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        int CompanyIndex = -1;
+        try{
+        if(!CompanyID.isEmpty()){
+                for (int i = 0; i < COMP_IDS.size(); i++) {
+                    if(COMP_IDS.get(i).equals(CompanyID)){
+                        CompanyIndex = i;
+                    }
+                }
+            }  
+            if(!CompanyID.equals("")){
+                cmbComp.setSelectedIndex(CompanyIndex);
+            }else{
+                if(cmbComp.getItemCount() > 0){
+                    cmbComp.setSelectedIndex(0);
+                }
+            }
+        } catch (Exception ex) {
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        }
+    }
+    
     private void LOAD_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
@@ -2725,6 +2733,7 @@ public class API extends javax.swing.JInternalFrame {
         } catch (Exception ex)  {
             txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             return;
         }
         
@@ -2763,7 +2772,7 @@ public class API extends javax.swing.JInternalFrame {
      
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
     private boolean Load;
-    private int wdLastRow = -1; 
+    private int d1LastRow = -1; 
     private int d2LastRow = -1; 
     private List<String> GROUP_IDS;
     private List<String> COMP_IDS; 
