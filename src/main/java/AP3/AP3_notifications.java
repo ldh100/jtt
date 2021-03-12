@@ -6,6 +6,7 @@
 package AP3;
 import A.TWeb;
 import static A.A.*;
+import static AP3.AP3.*;
 import java.time.LocalDateTime;
 /**
  *
@@ -26,6 +27,15 @@ public class AP3_notifications {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Page title > 'AP3 Notification Management'", "xpath", "//span[contains(text(),'AP3 Notification Management')]", "no_jira");
         if (FAIL) { return;}
+        //========= Verify Notifications API
+        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Notification API", BaseAPI +"/notification?realm=cdl&target=admin_panel&end=2021-03-28T16:06:36.678Z", true, "no_jira");
+        if (FAIL) { return;}
+        _t++; TWeb.API_Body_Contains("Notification API - Title", "title",true, "no_jira");    
+        _t++; TWeb.API_Body_Contains("Notification API - ID", "id",true, "no_jira");    
+        _t++; TWeb.API_Body_Contains("Notification API - Text", "text",true, "no_jira");    
+        _t++; TWeb.API_Body_Contains("Notification API - Date Modified", "date_modified",true, "no_jira");    
+        _t++; TWeb.API_Body_Contains("Notification API - Status", "status",true, "no_jira"); 
+        _t++; TWeb.API_Body_Contains("Notification API - Release Date", "release_date",true, "no_jira"); 
         //========= Verify Notifications Page
         _t++; Thread.sleep((long) sleep); TWeb.List_L3("Ap3 Notifications table headers", "xpath", "//*[@role='columnheader']", "no_jira");
         if (FAIL) { return;}
@@ -39,17 +49,19 @@ public class AP3_notifications {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Action", L3.get(4), "no_jira");
         if (FAIL) { return;}
+//        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Bell icon", "xpath", "//button[contains(@class, 'bell-button') and contains(@xpath,'1')]", "no_jira");
+//        if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Calendar icon", "xpath", "//i[contains(@class, 'mdi-calendar')]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Edit icon", "xpath", "//i[contains(@class, 'mdi-pencil')]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Delete icon", "xpath", "//i[contains(@class, 'mdi-delete')]", "no_jira");
         if (FAIL) { return;}
-        //========= click on + New Notification then Verify the Page and Create a New Notification
+        //========= click on '+ New Notification' button then Verify the Page and Create a New Notification
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Add New Notifications Button", "xpath", "//*[contains(text(), 'New Notification')]/parent::button", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(500);
-//        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Create New In App Notification Section", "xpath", "//div[contains(text(),'Create New In App Notification')]", "no_jira");
+//        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Create New In App Notification Section", "xpath", "//div[contains(text(),'Create New In App Notification') and contains(@xpath,'1')]", "no_jira");
 //            if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.List_L2("List of Breadcrumb Items", "xpath", "//a[contains(@class,'v-breadcrumbs__item')]", "no_jira");
         if (FAIL) { return;}
@@ -108,7 +120,7 @@ public class AP3_notifications {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Create New Notification Button", "xpath", "//*[contains(text(),'Create New Notification')]/parent::button", "no_jira");
         if (FAIL) { return;}
-        Thread.sleep(500);
+        Thread.sleep(1000);
         _t++; Thread.sleep((long) sleep); TWeb.List_L3("Get List of Records in Notification Management Table", "xpath", "//tr", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Text("Created Notification > Notification Name", L3.get(0), "xpath", "//div[contains(text(),'Auto-notif-test')]","no_jira");
@@ -121,85 +133,85 @@ public class AP3_notifications {
         String MONTH = DATE.substring(0,2);
         switch (MONTH) {
             case "01":
-                if (DATE.substring(3,4).equals("0")) {
-                    DATE = "Jan " + DATE.substring(4,5) + ", " + DATE.substring(6);
+                if (DATE.charAt(3) == '0') {
+                    DATE = "Jan " + DATE.charAt(4) + ", " + DATE.substring(6);
                 } else {
                     DATE = "Jan " + DATE.substring(3,5) + ", " + DATE.substring(6);
                 }
                 break;
             case "02":
-                if (DATE.substring(3,4).equals("0")) {
-                    DATE = "Feb " + DATE.substring(4,5) + ", " + DATE.substring(6);
+                if (DATE.charAt(3) == '0') {
+                    DATE = "Feb " + DATE.charAt(4) + ", " + DATE.substring(6);
                 } else {
                     DATE = "Feb " + DATE.substring(3,5) + ", " + DATE.substring(6);
                 }
                 break;
             case "03":
-                if (DATE.substring(3,4).equals("0")) {
-                    DATE = "Mar " + DATE.substring(4,5) + ", " + DATE.substring(6);
+                if (DATE.charAt(3) == '0') {
+                    DATE = "Mar " + DATE.charAt(4) + ", " + DATE.substring(6);
                 } else {
                     DATE = "Mar " + DATE.substring(3,5) + ", " + DATE.substring(6);
                 }
                 break;
             case "04":
-                if (DATE.substring(3,4).equals("0")) {
-                    DATE = "Apr " + DATE.substring(4,5) + ", " + DATE.substring(6);
+                if (DATE.charAt(3) == '0') {
+                    DATE = "Apr " + DATE.charAt(4) + ", " + DATE.substring(6);
                 } else {
                     DATE = "Apr " + DATE.substring(3,5) + ", " + DATE.substring(6);
                 }
                 break;
             case "05":
-                if (DATE.substring(3,4).equals("0")) {
-                    DATE = "May " + DATE.substring(4,5) + ", " + DATE.substring(6);
+                if (DATE.charAt(3) == '0') {
+                    DATE = "May " + DATE.charAt(4) + ", " + DATE.substring(6);
                 } else {
                     DATE = "May " + DATE.substring(3,5) + ", " + DATE.substring(6);
                 }
                 break;
             case "06":
-                if (DATE.substring(3,4).equals("0")) {
-                    DATE = "Jun " + DATE.substring(4,5) + ", " + DATE.substring(6);
+                if (DATE.charAt(3) == '0') {
+                    DATE = "Jun " + DATE.charAt(4) + ", " + DATE.substring(6);
                 } else {
                     DATE = "Jun " + DATE.substring(3,5) + ", " + DATE.substring(6);
                 }
                 break;
             case "07":
-                if (DATE.substring(3,4).equals("0")) {
-                    DATE = "Jul " + DATE.substring(4,5) + ", " + DATE.substring(6);
+                if (DATE.charAt(3) == '0') {
+                    DATE = "Jul " + DATE.charAt(4) + ", " + DATE.substring(6);
                 } else {
                     DATE = "Jul " + DATE.substring(3,5) + ", " + DATE.substring(6);
                 }
                 break;
             case "08":
-                if (DATE.substring(3,4).equals("0")) {
-                    DATE = "Aug " + DATE.substring(4,5) + ", " + DATE.substring(6);
+                if (DATE.charAt(3) == '0') {
+                    DATE = "Aug " + DATE.charAt(4) + ", " + DATE.substring(6);
                 } else {
                     DATE = "Aug " + DATE.substring(3,5) + ", " + DATE.substring(6);
                 }
                 break;
             case "09":
-                if (DATE.substring(3,4).equals("0")) {
-                    DATE = "Sep " + DATE.substring(4,5) + ", " + DATE.substring(6);
+                if (DATE.charAt(3) == '0') {
+                    DATE = "Sep " + DATE.charAt(4) + ", " + DATE.substring(6);
                 } else {
                     DATE = "Sep " + DATE.substring(3,5) + ", " + DATE.substring(6);
                 }
                 break;
             case "10":
-                if (DATE.substring(3,4).equals("0")) {
-                    DATE = "Oct " + DATE.substring(4,5) + ", " + DATE.substring(6);
+                if (DATE.charAt(3) == '0') {
+                    DATE = "Oct " + DATE.charAt(4) + ", " + DATE.substring(6);
                 } else {
                     DATE = "Oct " + DATE.substring(3,5) + ", " + DATE.substring(6);
                 }
                 break;
             case "11":
-                if (DATE.substring(3,4).equals("0")) {
-                    DATE = "Jan " + DATE.substring(4,5) + ", " + DATE.substring(6);
+                if (DATE.charAt(3) == '0') {
+                    DATE = "Nov " + DATE.charAt(4) + ", " + DATE.substring(6);
                 } else {
-                    DATE = "Jan " + DATE.substring(3,5) + ", " + DATE.substring(6);
+                    DATE = "Nov " + DATE.substring(3,5) + ", " + DATE.substring(6);
                 }
                 break;
             case "12":
-                if (DATE.substring(3,4).equals("0")) {
-                    DATE = "Dec " + DATE.substring(4,5) + ", " + DATE.substring(6);
+                if (DATE.charAt(3) == '0') {
+                    DATE = "Dec " + DATE.charAt(4) + ", " + DATE.substring(6);
                 } else {
                     DATE = "Dec " + DATE.substring(3,5) + ", " + DATE.substring(6);
                 }
@@ -211,14 +223,14 @@ public class AP3_notifications {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Click("Click > Edit icon", L3.get(0), "xpath", "//i[contains(@class, 'mdi-pencil')]", "no_jira");
         if (FAIL) { return;}
-        Thread.sleep(500);
+        Thread.sleep(1000);
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Input_Select_Clear("Clear > Notification Name", "xpath", "//input[@aria-label='Notification Name']","no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter > Updated Notification Name", "xpath", "//input[@aria-label='Notification Name']","Auto-notif-test-upd", false, "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Input_Select_Clear("Clear > Notification Name", "xpath", "//textarea[@aria-label='Notification Description']","no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Input_Select_Clear("Clear > Notification Description", "xpath", "//textarea[@aria-label='Notification Description']","no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter > Updated Notification Name", "xpath", "//textarea[@aria-label='Notification Description']","Auto-notif-test-desc-upd", false, "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter > Updated Notification Description", "xpath", "//textarea[@aria-label='Notification Description']","Auto-notif-test-desc-upd", false, "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Save Changes Button", "xpath", "//*[contains(text(),'Save Changes')]/parent::button", "no_jira");
         if (FAIL) { return;}
@@ -236,6 +248,57 @@ public class AP3_notifications {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Delete in Dialog", "xpath", "//*[contains(text(),'DELETE')]/parent::button", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_InVisibility("Deleted Notification no Longer in the Table", "xpath", "//div[contains(text(),'Auto-notif-test-upd')]", "no_jira");
+        if (FAIL) { return;}
+        //========== Edit Notification with 'Released' Status
+        _t++; Thread.sleep((long) sleep); TWeb.List_L2("List of Notifications with Release Status", "xpath", "//div[contains(text(), 'Released')]/ancestor::tr", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep);TWeb.Element_Child_Text("Original Notification Name", L2.get(0),"xpath", "//div[contains(text(),'TESTING to verify the date and time')]", "no_jira");
+        if (FAIL) { return;}
+        String nn = t;
+        _t++; Thread.sleep((long) sleep);TWeb.Element_Child_Text("Original Notification Description", L2.get(0),"xpath", "//div[contains(text(),'Admin Panel POD')]", "no_jira");
+        if (FAIL) { return;}
+        //String nd = t;  <-------------- This 't' keeps returning the text value of every div in the tr specified in the above Element_Child_Text method. Line 253 also uses the same method it doesn't have this issue.
+        //workaround
+        String nd = "";
+        if (t.contains("Admin Panel POD1")) {
+            nd = "Admin Panel POD1";
+        } else {
+            nd = "Admin Panel POD";
+        }
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Click("Click > Edit on Notif. with Released Status", L2.get(0), "xpath", "//i[contains(@class, 'mdi-pencil')]", "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(1000);
+        //Released notification auto controller (AC)
+        char AC = '1';
+        if (nn.charAt(nn.length()-1)!=AC && nd.charAt(nd.length()-1)!=AC) {
+            nn = nn + AC;
+            nd = nd + AC;
+        } else {
+            nn = nn.substring(0, nn.length()-1);
+            nd = nd.substring(0, nd.length()-1);
+        }
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Input_Select_Clear("Clear > Notification Name", "xpath", "//input[@aria-label='Notification Name']","no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter > Updated Notification Name", "xpath", "//input[@aria-label='Notification Name']", nn, false, "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Input_Select_Clear("Clear > Notification Description", "xpath", "//textarea[@aria-label='Notification Description']","no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter > Updated Notification Description", "xpath", "//textarea[@aria-label='Notification Description']", nd, false, "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Date Field is Disabled", "xpath", "//input[@aria-label='Date']", "disabled","no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Time Field is Disabled", "xpath", "//input[@aria-label='Start Time']", "disabled","no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Cancel Button", "xpath", "//div[contains(text(),'Cancel')]", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Save Changes Button", "xpath", "//*[contains(text(),'Save Changes')]/parent::button", "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(1000);
+        _t++; Thread.sleep((long) sleep); TWeb.List_L1("List of Notif. Records", "xpath", "//tr", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Text("Updated > Notif. Name on Released Notif.", L1.get(0), "xpath", "//div[contains(text(), '"+nn+"')]", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Text("Updated > Notif. Desc. on Released Notif.", L1.get(0), "xpath", "//div[contains(text(), '"+nd+"')]", "no_jira");
         if (FAIL) { return;}
     }
 }
