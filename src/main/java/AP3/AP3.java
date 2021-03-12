@@ -792,7 +792,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         wdLastRow = DV1.getSelectedRow(); 
         GetBrands();
     }//GEN-LAST:event_DV1MouseClicked
-
     private void AP3_AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_AP3_AncestorAdded
         jPanel1.addComponentListener(new ComponentListener() {
             @Override
@@ -849,19 +848,16 @@ public class AP3 extends javax.swing.JInternalFrame {
         CONFIG = false;  
         this.setTitle("AP3 Automation Manager");
     }
-
     private void cmbGroupItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbGroupItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
             GetCompanies();
         }        
     }//GEN-LAST:event_cmbGroupItemStateChanged
-
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         F_COUNT--;
         if(BW1 != null && !BW1.isCancelled()) BW1.cancel(true);
         if(BW2 != null && !BW2.isCancelled()) BW2.cancel(true);
     }//GEN-LAST:event_formInternalFrameClosed
-
     private void DV2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV2MouseClicked
         if (d2LastRow == DV2.getSelectedRow() || DV2.getRowCount() == 0) {
            return;
@@ -871,7 +867,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         Location = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 1));
         GetBrandSector();
     }//GEN-LAST:event_DV2MouseClicked
-
     private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -881,7 +876,6 @@ public class AP3 extends javax.swing.JInternalFrame {
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbAppItemStateChanged
-
     private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -891,18 +885,15 @@ public class AP3 extends javax.swing.JInternalFrame {
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
-
     private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
         SAVE_CONFIG();
     }//GEN-LAST:event_btnSave_OptMouseClicked
-
     private void btnExelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExelMouseClicked
         if(!btnExel.isEnabled()) {return;}
         btnExel.setEnabled(false);
         Report(true);
         btnExel.setEnabled(true);
     }//GEN-LAST:event_btnExelMouseClicked
-
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
         String R = Func.SHOW_LOG_FILE(F, "txt");
@@ -911,7 +902,6 @@ public class AP3 extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }//GEN-LAST:event_btnFailsMouseClicked
-
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
         String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
@@ -919,7 +909,6 @@ public class AP3 extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }//GEN-LAST:event_btnLogMouseClicked
-
     private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
         if(!btnRun.isEnabled()){
             return;

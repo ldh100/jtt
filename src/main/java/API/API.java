@@ -591,13 +591,13 @@ public class API extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
-        if (wdLastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
+        if (d1LastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
            return;
         }
         SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
         GetBrands();
-        wdLastRow = DV1.getSelectedRow(); 
+        d1LastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
     private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
@@ -2190,7 +2190,7 @@ public class API extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetSites() {
-        wdLastRow = -1;
+        d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Sites ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -2320,7 +2320,7 @@ public class API extends javax.swing.JInternalFrame {
     }
     private void GetBrands() {
         d2LastRow = -1;
-        wdLastRow = DV1.getSelectedRow();
+        d1LastRow = DV1.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Brands ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -2763,7 +2763,7 @@ public class API extends javax.swing.JInternalFrame {
      
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
     private boolean Load;
-    private int wdLastRow = -1; 
+    private int d1LastRow = -1; 
     private int d2LastRow = -1; 
     private List<String> GROUP_IDS;
     private List<String> COMP_IDS; 

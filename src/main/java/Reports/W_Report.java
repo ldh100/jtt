@@ -405,7 +405,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("url").getModelIndex()) + " - " 
             + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("env").getModelIndex()) + "\r\n" 
             + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("summary").getModelIndex()).toString().trim() + "\r\n" 
-            + Status               
+            + Status + "\r\n"               
         );
         txtLog.setCaretPosition(0);
     }

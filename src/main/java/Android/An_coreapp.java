@@ -21,10 +21,11 @@ public class An_coreapp {
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); Element_By_Path_Text("Get 'Alreay have an account'", "id", "already_have_account_text_view", "no_jira");             
             if (FAIL) { return;}    
-        _t++; Thread.sleep((long) sleep); Element_By_Path_Attribute("Get 'Explore' Content Description", "id", "explore_button_container", "contentDescription","no_jira");             
-            if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); Element_By_Path_Text("Get 'Explore <App>' text", "id", "explore_button", "no_jira");             
             if (FAIL) { return;}  
+        _t++; Thread.sleep((long) sleep); Element_By_Path_Attribute("Get 'Explore' Content Description", "id", "explore_button_container", "contentDescription","no_jira");             
+            if (FAIL) { return;}  
+
         _t++; Thread.sleep((long) sleep); Element_By_Path_Text("Get 'Log in' text", "id", "login_text", "no_jira");             
             if (FAIL) { return;}             
         _t++; Thread.sleep((long) sleep); Element_By_Path_Click("Click 'Log in'", "id", "login_text", "no_jira");             

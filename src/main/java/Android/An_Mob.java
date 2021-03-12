@@ -28,6 +28,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  * @author oleg.spozito
  */
 public class An_Mob extends An_GUI { 
+    private static String err;
     public static void Reset_App(String NAME, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
@@ -36,7 +37,6 @@ public class An_Mob extends An_GUI {
  
         FAIL = false;
         t = "resetApp()";
-
         try {
             ad.resetApp();
             _p++; 
@@ -118,12 +118,12 @@ public class An_Mob extends An_GUI {
                     .waitAction(waitOptions(Duration.ofMillis(DURATION)))
                     .moveTo(point(endX, endY)).release().perform();
             _p++; 
-            EX += _t + "\t" + NAME + "\t" + DIRECTION + "\t" + "Swipe OK" + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + "Swipe " + DIRECTION + "\t" + "Swipe OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + DIRECTION + "\t" + "Swipe Failed" + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Swipe " + DIRECTION + "\t" + "Swipe Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         }
