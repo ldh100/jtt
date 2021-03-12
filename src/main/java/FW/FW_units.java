@@ -41,11 +41,9 @@ public class FW_units {
            _t++; _f++;
            EX += " - " + "\t" + "Find Unit" + "\t" + UNIT + "/" + UnitMarket + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";            return;
         }             
-        _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Click target Unit/Market", L0.get(T_Index), "no_jira");
-            if (FAIL) { return;} 
-        Thread.sleep(500);
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//div[@role='progressbar']", "no_jira"); 
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find '" + UNIT + "' Title Name", UNIT, true,"no_jira");
+        
+    
+    
     }  
+      
 }

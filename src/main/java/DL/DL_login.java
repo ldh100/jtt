@@ -30,6 +30,7 @@ public class DL_login {
             if (FAIL) { return;}  
             
         // TestCase 01 with Invalid Username/Valid Password by Prathyusha Deshpande
+        Thread.sleep(5000);
         _t++; TWeb.Element_By_Path_Text_Enter("Enter Invalid Username", "id", "username", "test.invalid@place.com", false, "no_jira"); 
             if (FAIL) { return;}            
         _t++; TWeb.Element_By_Path_Text_Enter("Enter Valid Password", "id", "password", "Compass1", true, "no_jira"); 
@@ -40,16 +41,17 @@ public class DL_login {
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Invalid credentials'", "Invalid credentials.", true,"no_jira"); 
         if (FAIL) { return;}
 
-        //TestCase 02  with Valid Username/Invalid Password by Prathyusha Deshpande     
+        //TestCase 02  with Valid Username/Invalid Password by Prathyusha Deshpande
+        Thread.sleep(5000);
         _t++; TWeb.Element_By_Path_Text_Enter("Enter Valid Username", "id", "username", "distilr.test@place.com", false, "no_jira"); 
              if (FAIL) { return;}            
         _t++; TWeb.Element_By_Path_Text_Enter("Enter Invalid  password", "id", "password", "Compass011", false, "no_jira"); 
              if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Sign In'", "name", "login", "no_jira"); 
              if (FAIL) { return;}  
-        Thread.sleep(500);
+        Thread.sleep(5000);
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Invalid credentials'", "Invalid credentials.", true,"no_jira"); 
- 
+        Thread.sleep(5000);
         _t++; TWeb.Element_By_Path_Text_Enter("Enter Valid User Name", "id", "username", DL_UserID, false, "no_jira"); 
             if (FAIL) { return;}            
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'PASSWORD' input", "id", "password", "no_jira"); 
