@@ -8,6 +8,7 @@ import A.TWeb;
 import static A.A.*;
 import static AP3.AP3.*;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 /**
  *
  * @author Oleg.Spozito
@@ -49,20 +50,20 @@ public class AP3_notifications {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Action", L3.get(4), "no_jira");
         if (FAIL) { return;}
-//        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Bell icon", "xpath", "//button[contains(@class, 'bell-button') and contains(@xpath,'1')]", "no_jira");
-//        if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Calendar icon", "xpath", "//i[contains(@class, 'mdi-calendar')]", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Bell icon", "xpath", "(//button[contains(@class, 'bell-button')])[1]", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Edit icon", "xpath", "//i[contains(@class, 'mdi-pencil')]", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Calendar icon", "xpath", "//i[contains(@class, 'mdi-calendar')]", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Delete icon", "xpath", "//i[contains(@class, 'mdi-delete')]", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Edit icon", "xpath", "//i[contains(@class, 'mdi-pencil')]", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Delete icon", "xpath", "//i[contains(@class, 'mdi-delete')]", "no_jira");
         if (FAIL) { return;}
         //========= click on '+ New Notification' button then Verify the Page and Create a New Notification
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Add New Notifications Button", "xpath", "//*[contains(text(), 'New Notification')]/parent::button", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(500);
-//        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Create New In App Notification Section", "xpath", "//div[contains(text(),'Create New In App Notification') and contains(@xpath,'1')]", "no_jira");
-//            if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Create New In App Notification Section", "xpath", "(//div[contains(text(), 'Create New In App Notification')])[2]", "no_jira");
+            if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.List_L2("List of Breadcrumb Items", "xpath", "//a[contains(@class,'v-breadcrumbs__item')]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_Text("AP3 Notification Management", L2.get(0), "no_jira");
@@ -83,40 +84,32 @@ public class AP3_notifications {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Click("Click > Date Input Field", L1.get(1), "xpath", "//input[@aria-label='Date']", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Date Picker", "xpath", "//div[contains(@class,'v-picker--date')]", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Date Picker", "xpath", "//div[contains(@class,'v-picker--date')]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Click("Select Toady's Date", L1.get(1), "xpath", "//button[contains(@class,'v-btn--active')]", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Calendar Icon", "xpath", "//i[contains(@class,'mdi-calendar')]", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Calendar Icon", "xpath", "//i[contains(@class,'mdi-calendar')]", "no_jira");
         if (FAIL) { return;}
         TWeb.To_Bottom("no_jira");
         _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Click("Click > Start Time Input Field", L1.get(1), "xpath", "//input[@aria-label='Start Time']", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Start Time Dropdown List", "xpath", "//div[contains(@class,'v-select-list')]", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Start Time Dropdown List", "xpath", "//div[contains(@class,'v-select-list')]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Click("Select 1AM as Start Time", L1.get(1), "xpath", "//div[contains(text(),'1:00 AM')]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Invalid Message > 'Cannot Schedule in past' is Visible", "xpath", "//div[contains(text(),'You cannot schedule a notification to be released in the past')]", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Clock Icon", "xpath", "//i[contains(@class,'mdi-clock')]", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Clock Icon", "xpath", "//i[contains(@class,'mdi-clock')]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Click("Click > Start Time Input Field", L1.get(1), "xpath", "//input[@aria-label='Start Time']/parent::div", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Text_Enter("Enter 6PM Start Time", L1.get(1), "xpath", "//input[@aria-label='Start Time']", "06:00PM", false ,"no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Text_Enter("Enter 9PM Start Time", L1.get(1), "xpath", "//input[@aria-label='Start Time']", "09:00PM", false ,"no_jira");
         if (FAIL) { return;}
-//        _t++; Thread.sleep((long) sleep); TWeb.Scroll_XY_In_Element_By_Path("Move to 6PM option", "xpath", "//div[contains(@class,'v-select-list')]/div", 0, 50, "no_jira");
-//            if (FAIL) { return;}
-//        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Click("Select 6PM as Start Time", L1.get(1), "xpath", "//div[contains(text(),'6:00 PM')]", "no_jira");
-//            if (FAIL) { return;}
-//        _t++; Thread.sleep((long) sleep); TWeb.List_L0("List of Times in Dropdown", "xpath", "//div[contains(@class,'v-select-list')]//div[@role='listitem']", "no_jira");
-//            if (FAIL) { return;}
-//        _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select 6PM as Start Time", L0.get(74), "no_jira");
-//            if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_InVisibility("Invalid Message > 'Cannot Schedule in past' is not Visible", "xpath", "//div[contains(text(),'You cannot schedule a notification to be released in the past')]", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Cancel Button", "xpath", "//div[contains(text(),'Cancel')]", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Cancel Button", "xpath", "//div[contains(text(),'Cancel')]", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Create New Notification Button", "xpath", "//div[contains(text(),'Create New Notification')]", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Create New Notification Button", "xpath", "//div[contains(text(),'Create New Notification')]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Create New Notification Button", "xpath", "//*[contains(text(),'Create New Notification')]/parent::button", "no_jira");
         if (FAIL) { return;}
@@ -232,40 +225,78 @@ public class AP3_notifications {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter > Updated Notification Description", "xpath", "//textarea[@aria-label='Notification Description']","Auto-notif-test-desc-upd", false, "no_jira");
         if (FAIL) { return;}
+        /**
+         * Get LocalTime and format it into a String with value 'HH:MMAM/PM' to edit a 'Pending'
+         * Notification's Start Time with Current Time +1 minute for the purpose of Testing when
+         * Status changes from 'Pending' to 'Released'
+        **/
+        LocalTime LT = LocalTime.now();
+        String HH = String.valueOf(LT.getHour());
+        String MM = String.valueOf(LT.getMinute()+1);
+        if (MM.length() == 1) {
+            MM = "0"+MM;
+        }
+        String AMPM = "AM";
+        if (LT.getHour() >= 12) {
+           AMPM = "PM";
+        }
+        switch (HH) {
+            case "13":
+                HH = "01";
+                break;
+            case "14":
+                HH = "02";
+                break;
+            case "15":
+                HH = "03";
+                break;
+            case "16":
+                HH = "04";
+                break;
+            case "17":
+                HH = "05";
+                break;
+            case "18":
+                HH = "06";
+                break;
+            case "19":
+                HH = "07";
+                break;
+            case "20":
+                HH = "08";
+                break;
+            case "21":
+                HH = "09";
+                break;
+            case "22":
+                HH = "10";
+                break;
+            case "23":
+                HH = "11";
+                break;
+            case "00":
+                HH = "12";
+                break;
+            default:
+                break;
+        }
+        String updatedTime = HH+":"+MM+AMPM;
+        TWeb.To_Bottom("no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Current Time + 1 minute Start Time", "xpath", "//input[@aria-label='Start Time']", updatedTime, false,"no_jira");
+        if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Save Changes Button", "xpath", "//*[contains(text(),'Save Changes')]/parent::button", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(1000);
-        _t++; Thread.sleep((long) sleep); TWeb.List_L3("Get List of Records in Notification Management Table", "xpath", "//tr", "no_jira");
-        if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Text("Updated Notification Name", L3.get(0), "xpath", "//div[contains(text(),'Auto-notif-test-upd')]","no_jira");
-        if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Text("Updated Notification Description", L3.get(0), "xpath", "//div[contains(text(),'Auto-notif-test-desc-upd')]","no_jira");
-        if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Click("Click > Delete icon", L3.get(0), "xpath", "//i[contains(@class, 'mdi-delete')]", "no_jira");
-        if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Delete Confirmation Dialog", "xpath", "//div[contains(@class,'confirm-dialog v-card')]", "no_jira");
-        if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Delete in Dialog", "xpath", "//*[contains(text(),'DELETE')]/parent::button", "no_jira");
-        if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_InVisibility("Deleted Notification no Longer in the Table", "xpath", "//div[contains(text(),'Auto-notif-test-upd')]", "no_jira");
-        if (FAIL) { return;}
         //========== Edit Notification with 'Released' Status
-        _t++; Thread.sleep((long) sleep); TWeb.List_L2("List of Notifications with Release Status", "xpath", "//div[contains(text(), 'Released')]/ancestor::tr", "no_jira");
-        if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep);TWeb.Element_Child_Text("Original Notification Name", L2.get(0),"xpath", "//div[contains(text(),'TESTING to verify the date and time')]", "no_jira");
+//        _t++; Thread.sleep((long) sleep); TWeb.List_L2("List of Notifications with Release Status", "xpath", "//div[contains(text(), 'Released')]/ancestor::tr", "no_jira");
+//        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Original Notification Name", "xpath", "(//div[contains(text(), 'Released')]/ancestor::tr)[1]/td[1]", "no_jira");
         if (FAIL) { return;}
         String nn = t;
-        _t++; Thread.sleep((long) sleep);TWeb.Element_Child_Text("Original Notification Description", L2.get(0),"xpath", "//div[contains(text(),'Admin Panel POD')]", "no_jira");
+         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Original Notification Description", "xpath", "(//div[contains(text(), 'Released')]/ancestor::tr)[1]/td[2]", "no_jira");
         if (FAIL) { return;}
-        //String nd = t;  <-------------- This 't' keeps returning the text value of every div in the tr specified in the above Element_Child_Text method. Line 253 also uses the same method it doesn't have this issue.
-        //workaround
-        String nd = "";
-        if (t.contains("Admin Panel POD1")) {
-            nd = "Admin Panel POD1";
-        } else {
-            nd = "Admin Panel POD";
-        }
-        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Click("Click > Edit on Notif. with Released Status", L2.get(0), "xpath", "//i[contains(@class, 'mdi-pencil')]", "no_jira");
+        String nd = t;   
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Edit on Notif. with Released Status", "xpath", "//div[contains(text(),'"+nn+"')]/ancestor::tr//i[contains(@class, 'mdi-pencil')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(1000);
         //Released notification auto controller (AC)
@@ -294,11 +325,58 @@ public class AP3_notifications {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Save Changes Button", "xpath", "//*[contains(text(),'Save Changes')]/parent::button", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(1000);
-        _t++; Thread.sleep((long) sleep); TWeb.List_L1("List of Notif. Records", "xpath", "//tr", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Updated > Notif. Name on Released Notif.", "xpath", "//div[contains(text(), '"+nn+"')]", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Text("Updated > Notif. Name on Released Notif.", L1.get(0), "xpath", "//div[contains(text(), '"+nn+"')]", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Updated > Notif. Desc. on Released Notif.", "xpath", "//div[contains(text(), '"+nn+"')]/ancestor::tr/td[2]", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Text("Updated > Notif. Desc. on Released Notif.", L1.get(0), "xpath", "//div[contains(text(), '"+nd+"')]", "no_jira");
+        /**
+         * Compare Current LocalTime with the Previous LocalTime; Loop as long as Current Minutes Value = Previous Minutes Value
+         * This is required to wait for Notification with 'Pending' status to change to 'Released' for the purpose of testing
+         * Bell Notification Count and Clicking on 'Unread' Notification card in side panel and verify it has been 'read' by 
+         * Comparing the Count before click and after click 
+        **/
+        int i = 1;
+        for(int j = 0; j < i; j++) {
+            LocalTime CLT = LocalTime.now();
+            if (CLT.getMinute() == LT.getMinute()) {
+                i++; //<------ loop breaker
+                Thread.sleep(1000);  //<------- this should limit the loop to run once per second until the condition is no longer met 
+            } else {
+                _t++; TWeb.Navigate_to_URL("Navigate to Notifications page", url + "#/notification-manager/", "no_jira");
+                if (FAIL) { return;}
+                Thread.sleep(1000);
+            }
+        }
+        _t++; Thread.sleep((long) sleep); TWeb.Page_URL("AP3 Notification URL", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Updated Notification Name", "xpath", "//div[contains(text(),'Auto-notif-test-upd')]","no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Updated Notification Description", "xpath", "//div[contains(text(),'Auto-notif-test-desc-upd')]","no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Status has Changed from 'Pending' > 'Released'", "xpath", "//div[contains(text(),'Released')]","no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Bell Notif. Number", "xpath", "(//button[contains(@class, 'bell-button')])[1]//span", "no_jira");
+        if (FAIL) { return;}
+        int BNN = Integer.parseInt(t);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Bell icon", "xpath", "(//button[contains(@class, 'bell-button')])[1]", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Bell Notif. Panel", "xpath", "(//aside[contains(@class,'v-navigation-drawer')])[2]", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > First Notif. Card", "xpath", "(//div[contains(@class,'notification-card')])[1]", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Updated Bell Notif. Number", "xpath", "(//button[contains(@class, 'bell-button')])[1]//span[contains(text(),'"+String.valueOf(BNN-1)+"')]", "no_jira");
+        if (FAIL) { return;}
+        _t++; TWeb.Refresh("Refresh Notifications page", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Page_URL("AP3 Notification URL", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Delete icon", "xpath", "//div[contains(text(),'Auto-notif-test-upd')]/ancestor::tr//i[contains(@class, 'mdi-delete')]", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Delete Confirmation Dialog", "xpath", "//div[contains(@class,'confirm-dialog v-card')]", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Delete in Dialog", "xpath", "//*[contains(text(),'DELETE')]/parent::button", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_InVisibility("Deleted Notification no Longer in the Table", "xpath", "//div[contains(text(),'Auto-notif-test-upd')]", "no_jira");
         if (FAIL) { return;}
     }
 }
