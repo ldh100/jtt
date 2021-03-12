@@ -1441,7 +1441,7 @@ public class API extends javax.swing.JInternalFrame {
             sw1.reset();
         }
         sw1.start();         // ============ User
-        try { 
+        try {   
             HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm); 
             httpget.setHeader("Authorization",  "Basic " + UserAuth);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -1933,16 +1933,16 @@ public class API extends javax.swing.JInternalFrame {
         String UserAuth = Base64.getEncoder().encodeToString((txtAP3_ID.getText().trim() + ":" + txtAP3_PW.getText().trim()).getBytes());
         String User_ID = ""; 
         String Realm = "6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5";
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + "AP3" +
-                "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-            rs.next();
-            Realm = rs.getString(1);
-            conn.close();
-        } catch (SQLException ex) {
-            txtLog.append("=== Get Realm ID > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        } 
+//        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+//            ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + "AP3" +
+//                "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
+//            rs.next();
+//            Realm = rs.getString(1);
+//            conn.close();
+//        } catch (SQLException ex) {
+//            txtLog.append("=== Get Realm ID > ERROR: " + ex.getMessage() + "\r\n");
+//            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+//        } 
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2606,8 +2606,7 @@ public class API extends javax.swing.JInternalFrame {
                 }
             };
             T_Index = -1; 
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);        
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));        
             if(json.has("sector")){
                 GroupID = json.getString("sector");
                 for (int i = 0; i < GROUP_IDS.size(); i++) {
