@@ -92,37 +92,38 @@ public class An_GUI extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Optin_NU_EU = new javax.swing.ButtonGroup();
+        rb_NU_EU = new javax.swing.ButtonGroup();
         lblSITES = new javax.swing.JLabel();
         lblBRANDS = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         paneCore_Scope = new javax.swing.JPanel();
-        _all_data = new javax.swing.JCheckBox();
-        _logout = new javax.swing.JCheckBox();
-        _announcements = new javax.swing.JCheckBox();
-        _sales_reporting = new javax.swing.JCheckBox();
+        _support = new javax.swing.JCheckBox();
+        _forgot_pw = new javax.swing.JCheckBox();
+        _allow_loc = new javax.swing.JCheckBox();
+        _order_history = new javax.swing.JCheckBox();
         rbNU_EU = new javax.swing.JRadioButton();
-        _users = new javax.swing.JCheckBox();
-        _brand = new javax.swing.JCheckBox();
-        _site = new javax.swing.JCheckBox();
-        _sales_analytics = new javax.swing.JCheckBox();
+        _edit_profile = new javax.swing.JCheckBox();
+        _invalids = new javax.swing.JCheckBox();
+        _logout = new javax.swing.JCheckBox();
+        _order_email = new javax.swing.JCheckBox();
         _login = new javax.swing.JCheckBox();
-        _roles = new javax.swing.JCheckBox();
-        _smart_analytics = new javax.swing.JCheckBox();
+        _all_cards = new javax.swing.JCheckBox();
+        _reorder = new javax.swing.JCheckBox();
         cmbPromo = new javax.swing.JComboBox<>();
         lblSITES12 = new javax.swing.JLabel();
-        _orders = new javax.swing.JCheckBox();
-        _brand_new = new javax.swing.JCheckBox();
-        _group_management = new javax.swing.JCheckBox();
+        _optX = new javax.swing.JCheckBox();
+        _acc_options = new javax.swing.JCheckBox();
+        _edit_item = new javax.swing.JCheckBox();
         jrbNU = new javax.swing.JRadioButton();
-        _site_new = new javax.swing.JCheckBox();
-        _resent_updates = new javax.swing.JCheckBox();
+        _welcome = new javax.swing.JCheckBox();
+        _explore = new javax.swing.JCheckBox();
         cmbMPlan = new javax.swing.JComboBox<>();
         rbEU = new javax.swing.JRadioButton();
         lblSITES8 = new javax.swing.JLabel();
         _promo = new javax.swing.JCheckBox();
-        _notifications = new javax.swing.JCheckBox();
-        _password = new javax.swing.JCheckBox();
+        _mplan = new javax.swing.JCheckBox();
+        _feedback = new javax.swing.JCheckBox();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         DV1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -213,79 +214,79 @@ public class An_GUI extends javax.swing.JInternalFrame {
         jPanel1.setDoubleBuffered(false);
         jPanel1.setName("Scope"); // NOI18N
 
-        _all_data.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _all_data.setText("Show all data rows");
-        _all_data.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _all_data.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _all_data.setRequestFocusEnabled(false);
+        _support.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _support.setText("NU Contact Us, Support");
+        _support.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _support.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _support.setRequestFocusEnabled(false);
 
-        _logout.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _logout.setText("User Feedback & Logout");
-        _logout.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _logout.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _logout.setRequestFocusEnabled(false);
+        _forgot_pw.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _forgot_pw.setText("NU Forgot Password");
+        _forgot_pw.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _forgot_pw.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _forgot_pw.setRequestFocusEnabled(false);
 
-        _announcements.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _announcements.setText("Announcements");
-        _announcements.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _announcements.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _announcements.setRequestFocusEnabled(false);
+        _allow_loc.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _allow_loc.setText("Allow Location");
+        _allow_loc.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _allow_loc.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _allow_loc.setRequestFocusEnabled(false);
 
-        _sales_reporting.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _sales_reporting.setText("Sales Reporting");
-        _sales_reporting.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _sales_reporting.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _sales_reporting.setRequestFocusEnabled(false);
+        _order_history.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _order_history.setText("Order History");
+        _order_history.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _order_history.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _order_history.setRequestFocusEnabled(false);
 
-        Optin_NU_EU.add(rbNU_EU);
+        rb_NU_EU.add(rbNU_EU);
         rbNU_EU.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         rbNU_EU.setSelected(true);
         rbNU_EU.setText("Both");
 
-        _users.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _users.setSelected(true);
-        _users.setText("Users");
-        _users.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _users.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _users.setRequestFocusEnabled(false);
+        _edit_profile.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _edit_profile.setSelected(true);
+        _edit_profile.setText("NU Edit Profile");
+        _edit_profile.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _edit_profile.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _edit_profile.setRequestFocusEnabled(false);
 
-        _brand.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _brand.setText("Brand");
-        _brand.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _brand.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _brand.setRequestFocusEnabled(false);
+        _invalids.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _invalids.setText("Invalid entries");
+        _invalids.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _invalids.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _invalids.setRequestFocusEnabled(false);
 
-        _site.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _site.setText("Sites");
-        _site.setContentAreaFilled(false);
-        _site.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _site.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _logout.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _logout.setText("Logout");
+        _logout.setContentAreaFilled(false);
+        _logout.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _logout.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
-        _sales_analytics.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _sales_analytics.setText("Sales Analytics");
-        _sales_analytics.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _sales_analytics.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _sales_analytics.setRequestFocusEnabled(false);
+        _order_email.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _order_email.setText("EU Order Email");
+        _order_email.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _order_email.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _order_email.setRequestFocusEnabled(false);
 
         _login.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _login.setSelected(true);
-        _login.setText("EU Login");
+        _login.setText("Login");
         _login.setEnabled(false);
         _login.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _login.setRequestFocusEnabled(false);
 
-        _roles.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _roles.setText("Roles Permissions");
-        _roles.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _roles.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _roles.setRequestFocusEnabled(false);
+        _all_cards.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _all_cards.setText("NU All Credit Cards");
+        _all_cards.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _all_cards.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _all_cards.setRequestFocusEnabled(false);
 
-        _smart_analytics.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _smart_analytics.setText("Smart Analytics");
-        _smart_analytics.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _smart_analytics.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _smart_analytics.setRequestFocusEnabled(false);
+        _reorder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _reorder.setText("EU Reorder");
+        _reorder.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _reorder.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _reorder.setRequestFocusEnabled(false);
 
         cmbPromo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
 
@@ -294,43 +295,43 @@ public class An_GUI extends javax.swing.JInternalFrame {
         lblSITES12.setText("Meal Plan");
         lblSITES12.setAlignmentX(0.5F);
 
-        _orders.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _orders.setText("Orders");
-        _orders.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _orders.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _orders.setRequestFocusEnabled(false);
+        _optX.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _optX.setText("=====");
+        _optX.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _optX.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _optX.setRequestFocusEnabled(false);
 
-        _brand_new.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _brand_new.setText("Add Brand (not in Prod)");
-        _brand_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _brand_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _brand_new.setRequestFocusEnabled(false);
+        _acc_options.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _acc_options.setText("NU My Account options");
+        _acc_options.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _acc_options.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _acc_options.setRequestFocusEnabled(false);
 
-        _group_management.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _group_management.setText("Group Management");
-        _group_management.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _group_management.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _group_management.setRequestFocusEnabled(false);
+        _edit_item.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _edit_item.setText("Edit / Remove Item");
+        _edit_item.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _edit_item.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _edit_item.setRequestFocusEnabled(false);
 
-        Optin_NU_EU.add(jrbNU);
+        rb_NU_EU.add(jrbNU);
         jrbNU.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jrbNU.setText("NU");
 
-        _site_new.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _site_new.setText("New Site (not in Prod)");
-        _site_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _site_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _site_new.setRequestFocusEnabled(false);
+        _welcome.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _welcome.setText("NU Welcome screen");
+        _welcome.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _welcome.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _welcome.setRequestFocusEnabled(false);
 
-        _resent_updates.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _resent_updates.setText("Recent Updates");
-        _resent_updates.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _resent_updates.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _resent_updates.setRequestFocusEnabled(false);
+        _explore.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _explore.setText("Explore");
+        _explore.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _explore.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _explore.setRequestFocusEnabled(false);
 
         cmbMPlan.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
 
-        Optin_NU_EU.add(rbEU);
+        rb_NU_EU.add(rbEU);
         rbEU.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         rbEU.setText("EU");
 
@@ -340,154 +341,149 @@ public class An_GUI extends javax.swing.JInternalFrame {
         lblSITES8.setAlignmentX(0.5F);
 
         _promo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _promo.setText("Promo Management");
+        _promo.setText("Promos");
         _promo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _promo.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _promo.setRequestFocusEnabled(false);
 
-        _notifications.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _notifications.setText("Notifications");
-        _notifications.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _notifications.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _notifications.setRequestFocusEnabled(false);
+        _mplan.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _mplan.setText("Meal Plan Order");
+        _mplan.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _mplan.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _mplan.setRequestFocusEnabled(false);
 
-        _password.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _password.setText("Forgot Password");
-        _password.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _password.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _password.setRequestFocusEnabled(false);
+        _feedback.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _feedback.setText("NU Feedback");
+        _feedback.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _feedback.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _feedback.setRequestFocusEnabled(false);
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel1.setText("New/Existing User:");
 
         javax.swing.GroupLayout paneCore_ScopeLayout = new javax.swing.GroupLayout(paneCore_Scope);
         paneCore_Scope.setLayout(paneCore_ScopeLayout);
         paneCore_ScopeLayout.setHorizontalGroup(
             paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(_brand, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(_resent_updates, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)
-                        .addComponent(_brand_new))
-                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)
-                        .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69)
-                        .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                        .addComponent(_sales_reporting)
-                        .addGap(13, 13, 13)
-                        .addComponent(_group_management, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(_sales_analytics)
-                        .addGap(17, 17, 17)
-                        .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                        .addComponent(_smart_analytics)
-                        .addGap(49, 49, 49)
-                        .addComponent(_notifications, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(_logout))
-                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jrbNU)
-                        .addGap(1, 1, 1)
-                        .addComponent(rbEU)
-                        .addGap(6, 6, 6)
-                        .addComponent(rbNU_EU)
-                        .addGap(29, 29, 29)
-                        .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(cmbMPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(_login)
-                            .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(168, 168, 168)
-                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(_site_new)
-                            .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(_optX, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_invalids, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_login, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_order_history, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_order_email, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_reorder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(_explore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_edit_item, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                    .addComponent(_promo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_mplan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_allow_loc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(_acc_options, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(_welcome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(_support, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(_edit_profile, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_all_cards, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_feedback, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_forgot_pw, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
+            .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                        .addComponent(jrbNU)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbEU)
+                        .addGap(0, 0, 0)
+                        .addComponent(rbNU_EU)))
+                .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(lblSITES12))
+                    .addComponent(lblSITES8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbMPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbPromo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(8, 8, 8))
         );
         paneCore_ScopeLayout.setVerticalGroup(
             paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneCore_ScopeLayout.createSequentialGroup()
-                .addGap(2, 2, 2)
+            .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneCore_ScopeLayout.createSequentialGroup()
+                        .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_invalids, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_explore, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_optX, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_allow_loc, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_order_history, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_edit_item, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_order_email, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_reorder, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_mplan, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneCore_ScopeLayout.createSequentialGroup()
+                        .addComponent(_edit_profile, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(_all_cards, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(_feedback, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(_forgot_pw, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneCore_ScopeLayout.createSequentialGroup()
+                        .addComponent(_support, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(_welcome, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(_acc_options, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64)))
                 .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)
-                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_site_new, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)
-                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(_brand, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_resent_updates, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_brand_new, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)
-                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)
-                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(_sales_reporting, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_group_management, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)
-                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(_sales_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)
-                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(_smart_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_notifications, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(4, 4, 4)
-                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(rbNU_EU, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jrbNU, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rbEU, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(rbEU, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rbNU_EU, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                        .addGap(146, 146, 146)
-                        .addComponent(lblSITES12))
-                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(cmbMPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cmbMPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblSITES12)))))))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(paneCore_Scope, javax.swing.GroupLayout.PREFERRED_SIZE, 404, Short.MAX_VALUE)
-                .addGap(2, 2, 2))
+            .addComponent(paneCore_Scope, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -496,7 +492,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 .addGap(0, 5, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 184, 416, 192));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 184, 420, 192));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -684,6 +680,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 cmbEnvItemStateChanged(evt);
             }
         });
+        cmbEnv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEnvActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 24, 116, 20));
 
         cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -853,13 +854,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
-        if (wdLastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
+        if (d1LastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
            return;
         }
         SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
         COUNTRY = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 2));
-        wdLastRow = DV1.getSelectedRow(); 
+        d1LastRow = DV1.getSelectedRow(); 
         GUI_Get_Brands();
     }//GEN-LAST:event_DV1MouseClicked
 
@@ -910,8 +911,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
         app = cmbApp.getSelectedItem().toString();
         CONFIG = false;  
         GUI_Find_Connected_Devices();
-        An_Met.CheckDevice(cmbDevice.getSelectedItem().toString());
-        An_Met.CheckAppPackage(); // ========   Check selected app version
+        
+        Current_Log_Update(true, "- Check Device " + "\r\n"); 
+        Current_Log_Update(true, An_Met.CheckDevice(cmbDevice.getSelectedItem().toString()));                                 
+      
+        Current_Log_Update(true, "- Check Package " + "\r\n"); 
+        Current_Log_Update(true, An_Met.CheckAppPackage());                                
+        
         this.setTitle("Android Automation Manager");
     }
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
@@ -935,9 +941,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
             this.setTitle("Android Automation Manager >>> Changing Application,  please wait...");
             app = cmbApp.getSelectedItem().toString();
 
-            GUI_Get_Packages(AWS_credentials);
+            GUI_Get_S3_Packages(AWS_credentials);
+            
             An_Met.Set_Mobile_Package_Name();
-            An_Met.CheckAppPackage(); 
+            
+            Current_Log_Update(true, "- Check Package " + "\r\n"); 
+            Current_Log_Update(true, An_Met.CheckAppPackage());                                 
             
             if("Bolter".equals(app)) {
                 GUI_Get_Bolter_Site();
@@ -975,95 +984,32 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(!btnFails.isEnabled()) {return;}
         String R = Func.SHOW_LOG_FILE(F, "txt");
         if(!R.equals("OK")){
-            txtLog.append(R + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            Current_Log_Update(true, R + "\r\n");
         }
     }//GEN-LAST:event_btnFailsMouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
         
-//        txtLog.append(An_Met.Get_Bolter_User_Site_ID(txtBolter_Id.getText(), txtBolter_Pw.getText()) + "\r\n");
-//        txtLog.setCaretPosition(txtLog.getDocument().getLength());
-//        
+//        Current_Log_Update(true, An_Met.Get_Bolter_User_Site_ID(txtBolter_Id.getText(), txtBolter_Pw.getText()) + "\r\n");
+       
         String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
-            txtLog.append(R + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            Current_Log_Update(true, R + "\r\n");
         }
     }//GEN-LAST:event_btnLogMouseClicked
     private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
         if(!btnRun.isEnabled()){
             return;
         }
-        btnRun.setEnabled(false);
-        btnFails.setEnabled(false);
-        btnExel.setEnabled(false);
-        //txtLog.setText("");
-        txtLog.append("=== Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
-        LoadTimeOut = (double)nWaitLoad.getValue() *1000;
-
-        EX = "";
-        F = "";
-        t_calls = 0;
-        t_min =  0;
-        t_avg = 0;
-        t_max =  0;
-        p_50 = 0;
-        p_90 = 0;
-        _t = 0; // Total
-        _p = 0; // Passed
-        _f = 0; // Failed
-        _w = 0; // Warn
-        r_time = "";
-
-        Mobile_ID = txtMobile_Id.getText();
-        Mobile_PW = txtMobile_Pw.getText();
-        Bolter_ID = txtBolter_Id.getText();
-        Bolter_PW = txtBolter_Pw.getText();
-
-        SCOPE = "";
-
-        if(DV1.getRowCount() > 0) {
-            SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
-            platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform
-            COUNTRY = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
-        }
-        if(DV2.getRowCount() > 0) {
-            BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
-        }
-
-        txtLog.append("=== Starting Android Driver..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
-
-        r_type = "ad-hoc";
-
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        sw1.start();
-        String DriverStart = An_Met.AndroidDriver(cmbDevice.getSelectedIndex());
-        if(DriverStart.contains("OK")){
-            txtLog.append("=== Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            sw1.reset();
-            An_Met.LOG_START(); // ========================================================
-            
-            GUI_BW1_DoWork(
-                // parameters?
-            );
-        }else{
-            btnRun.setEnabled(true);
-            btnFails.setEnabled(true);
-        }
+        Run_Manual();
+ 
     }//GEN-LAST:event_btnRunMouseClicked
     private void btnGetScreenshotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGetScreenshotMouseClicked
         if(!btnGetScreenshot.isEnabled()){
             return;
         }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("- Take Screenshot..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
+        Current_Log_Update(true, "- Take Screenshot..." + "\r\n");
+
         File SCREEN = null;
         String SS = "";
         try {  
@@ -1071,27 +1017,28 @@ public class An_GUI extends javax.swing.JInternalFrame {
             SCREEN = new File(file);                      // -ad " + devID
             SS = Func.ExecuteCmdProcessBuilder((A.A.ADB_HOME + "adb exec-out screencap -p > " + file).trim(), A.A.CWD, true, true).trim();
             Thread.sleep(3000);
-            txtLog.append(SS + "\r\n");
-            txtLog.append("= ScreenShot > " + file + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            Current_Log_Update(true, SS + "\r\n");
+            Current_Log_Update(true, "= ScreenShot > " + file + "\r\n");
         }
         catch (InterruptedException ex) {
-            txtLog.append("= ScreenShot > " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            Current_Log_Update(true, "= ScreenShot > " + ex.getMessage() + "\r\n");
         }
         try {
             java.awt.Desktop.getDesktop().edit(SCREEN);
         }
         catch (IOException ex) {
-            txtLog.append("= Show last ScreenShot >  " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            Current_Log_Update(true, "= Show last ScreenShot >  " + ex.getMessage() + "\r\n");
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnGetScreenshotMouseClicked
     private void btnFindDeviceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFindDeviceMouseClicked
         GUI_Find_Connected_Devices();
-        An_Met.CheckDevice(cmbDevice.getSelectedItem().toString());
-        An_Met.CheckAppPackage(); // ========   Check selected app version
+        
+        Current_Log_Update(true, "- Check Device " + "\r\n"); 
+        Current_Log_Update(true, An_Met.CheckDevice(cmbDevice.getSelectedItem().toString()));                                  
+        
+        Current_Log_Update(true, "- Check Package " + "\r\n"); 
+        Current_Log_Update(true, An_Met.CheckAppPackage());                                 
     }//GEN-LAST:event_btnFindDeviceMouseClicked
     private void btnInstallAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInstallAllMouseClicked
         if(!btnInstallAll.isEnabled()){
@@ -1129,26 +1076,21 @@ public class An_GUI extends javax.swing.JInternalFrame {
         btnS3Install.setEnabled(false);
         btnInstallAll.setEnabled(false); 
         btnInstallAPK.setEnabled(false);
-        txtLog.append("- Get APK..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        Current_Log_Update(true, "- Get APK..." + "\r\n");
        
         try {
             String R = Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " shell pm path " + appPackage, A.A.CWD, true, true).trim();
-            txtLog.append(R.trim() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            Current_Log_Update(true, R.trim() + "\r\n");
             
             String where = System.getProperty("user.home") + File.separator + "Desktop";
             R = Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " pull " + R.trim().substring(R.indexOf(":") + 1) + " " + where, where, true, true).trim();
-            txtLog.append(R.trim() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            Current_Log_Update(true, R.trim() + "\r\n");
 
             Files.move(Paths.get(where + File.separator + "base.apk"), Paths.get(where + File.separator + app + "_" + appVersion + ".apk"), java.nio.file.StandardCopyOption.REPLACE_EXISTING );
             
-            txtLog.append("File Saved: " + where + File.separator + app + "_" + appVersion + ".apk" + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());            
+            Current_Log_Update(true, "File Saved: " + where + File.separator + app + "_" + appVersion + ".apk" + "\r\n");         
         } catch (IOException ex) {
-            txtLog.append("=== Get APK > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            Current_Log_Update(true, "=== Get APK > ERROR: " + ex.getMessage() + "\r\n");
         }
         btnRun.setEnabled(true);
         btnGetScreenshot.setEnabled(true);
@@ -1160,19 +1102,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnGetAPKMouseClicked
     private void cmbDeviceItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDeviceItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
-            An_Met.CheckDevice(cmbDevice.getSelectedItem().toString());
+            Current_Log_Update(true, "- Check Device " + "\r\n"); 
+            Current_Log_Update(true, An_Met.CheckDevice(cmbDevice.getSelectedItem().toString()));                                 
         }
     }//GEN-LAST:event_cmbDeviceItemStateChanged
     private void btnScreenshotFolderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnScreenshotFolderMouseClicked
-        txtLog.append("- Open Current Directory Folder > " + "\r\n" + "=== Look for ScreenShots, Packages, etc." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        Current_Log_Update(true, "- Open Current Directory Folder > " + "\r\n" + "=== Look for ScreenShots, Packages, etc." + "\r\n");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         try{     
             String dir = A.A.CWD; 
             Desktop.getDesktop().open(new File(dir));            
         } catch (IOException ex) {
-            txtLog.append("=== Open Current Directory Folder > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            Current_Log_Update(true, "=== Open Current Directory Folder > ERROR: " + ex.getMessage() + "\r\n");
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } 
     }//GEN-LAST:event_btnScreenshotFolderMouseClicked
@@ -1185,18 +1126,37 @@ public class An_GUI extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
             BuildFile = fileChooser.getSelectedFile();
             
-            txtLog.append("- UnInstall Package: " + appPackage + " > " + "\r\n");
-            txtLog.append(An_Met.UnInstaPackage(appPackage));                  
+            Current_Log_Update(true, "- UnInstall Package: " + appPackage + " > " + "\r\n");
+            Current_Log_Update(true, An_Met.UnInstaPackage(appPackage));                  
             
-            txtLog.append("- Install Build: " + BuildFile + " > " + "\r\n"); 
-            txtLog.append(An_Met.InstallBuild(BuildFile.getAbsolutePath())); 
+            Current_Log_Update(true, "- Install Build: " + BuildFile + " > " + "\r\n"); 
+            Current_Log_Update(true, An_Met.InstallBuild(BuildFile.getAbsolutePath())); 
             
-            txtLog.append("- Check Package " + "\r\n"); 
-            txtLog.append(An_Met.CheckAppPackage());                                 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());            
+            Current_Log_Update(true, "- Check Package " + "\r\n"); 
+            Current_Log_Update(true, An_Met.CheckAppPackage());                                 
+          
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         }
     }//GEN-LAST:event_btnInstallAPKMouseClicked
+    private void cmbEnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEnvActionPerformed
+//        String X = evt.getActionCommand();
+//        if(!Load && "comboBoxChanged".equals(evt.getActionCommand())){
+//            cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+//            this.setTitle("Android Automation Manager >>> Changing Environment,  please wait...");
+//            GUI_Load_Env();
+//            this.setTitle("Android Automation Manager");
+//            cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+//        }
+    }//GEN-LAST:event_cmbEnvActionPerformed
+
+    public void Current_Log_Update(boolean GUI, String Text){
+        if(GUI){
+            txtLog.append(Text);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());              
+        } else{
+            Log += Text;
+        }
+    }    
 
     private void GUI_Find_Connected_Devices(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
@@ -1208,8 +1168,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         btnInstallAPK.setEnabled(false);
         Load = true;  
         cmbDevice.removeAllItems();
-        txtLog.append("- Find Attached Android Devices ..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        Current_Log_Update(true, "- Find Attached Android Devices ..." + "\r\n");
 
         String Dev  = Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb devices -l", A.A.ADB_HOME, true, true).trim();
         String[] dev = Dev.split("\r\n");
@@ -1223,8 +1182,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     cmbDevice.addItem(D + "  id:" + ID);
                 }
             }
-            txtLog.append("=== " + Dev + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());                
+            Current_Log_Update(true, "=== " + Dev + "\r\n");              
             btnRun.setEnabled(true);
             if(cmbDevice.getItemCount() == 1){
                 btnGetScreenshot.setEnabled(true); 
@@ -1240,12 +1198,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
             cmbDevice.setSelectedIndex(0);        
         } else {
             cmbDevice.addItem("noDevice");
-            txtLog.append("=== No Attached Device(s) found" + "\r\n" + "Return from 'adb devices -l' > '" + Dev + "'" + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());             
+            Current_Log_Update(true, "=== No Attached Device(s) found" + "\r\n" + "Return from 'adb devices -l' > '" + Dev + "'" + "\r\n");          
         }
         Load = false; 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));     
     } 
+
     private void GUI_Install_All_AppTester() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         btnRun.setEnabled(false);
@@ -1254,8 +1212,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         btnS3Install.setEnabled(false);
         btnInstallAll.setEnabled(false); 
         btnInstallAPK.setEnabled(false);        
-        txtLog.append("- Install All APK(s) - App Tester ..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        Current_Log_Update(true, "- Install All APK(s) - App Tester ..." + "\r\n");
         
         An_Met.Swipe_WakeUp(); // ===================  
         try {
@@ -1288,8 +1245,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
 			.ignoring(NoSuchElementException.class);       
             
             
-            txtLog.append("=== Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            Current_Log_Update(true, "=== Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
             sw1.reset();
             
             try{
@@ -1298,8 +1254,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("com.google.android.gms:id/account_name")));
                 ad.findElement(By.id("com.google.android.gms:id/account_name")).click();
             } catch (Exception ex) {
-                txtLog.append("=== 'Sign In...' ERROR - " + ex.getMessage()  + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                Current_Log_Update(true, "=== 'Sign In...' ERROR - " + ex.getMessage()  + "\r\n");
             }
 
             loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("app_name")));
@@ -1307,19 +1262,16 @@ public class An_GUI extends javax.swing.JInternalFrame {
             aL0 = ad.findElements(By.id("app_name"));
             int app_count = aL0.size();
             if (app_count > 0) {
-                txtLog.append("Found Applications - total " + app_count + ": " + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                Current_Log_Update(true, "Found Applications - total " + app_count + ": " + "\r\n");
                 for (int i = 0; i < aL0.size(); i++) {
-                    txtLog.append("   - " + (i+1)  + ": " + aL0.get(i).getText() + "\r\n");
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                    Current_Log_Update(true, "   - " + (i+1)  + ": " + aL0.get(i).getText() + "\r\n");
                 }
                 for (int i = 0; i < app_count; i++) {
                     ae = ad.findElements(By.id("app_name")).get(i); 
                     String appName = ae.getText();
                     ae.click();
                     String t = ((AndroidElement)loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("version_info")))).getText();
-                    txtLog.append("=====  Processing App " + (i + 1) + " - " + appName + " v:" + t + " ..." + "\r\n");
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                    Current_Log_Update(true, "=====  Processing App " + (i + 1) + " - " + appName + " v:" + t + " ..." + "\r\n");
                     try {
                         ad.findElement(By.id("download_button")).click();
                         try {
@@ -1328,27 +1280,24 @@ public class An_GUI extends javax.swing.JInternalFrame {
                             ad.findElement(By.id("com.android.packageinstaller:id/ok_button")).click();
                             loadTimeout.until(ExpectedConditions.invisibilityOfElementLocated(By.id("progress_bar")));
                             t = ((AndroidElement) loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("installed_version_info")))).getText();
-                            txtLog.append("- " + t  + "\r\n");
-                            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                            Current_Log_Update(true, "- " + t  + "\r\n");
+
                             ad.findElement(By.id("back_arrow")).click(); 
                             loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("app_name")));
                         } catch(Exception ex) {
-                            txtLog.append("Download/Install failed: " + ex.getMessage() + "\r\n");
-                            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                            Current_Log_Update(true, "Download/Install failed: " + ex.getMessage() + "\r\n");
                         }
                     } catch (Exception ex){
-                        txtLog.append("No Download button found" + "\r\n");
+                        Current_Log_Update(true, "Download button Not Found" + "\r\n");
                         ad.findElement(By.id("back_arrow")).click();
                         loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("app_name")));
                     }
                 }
             } else {
-                txtLog.append("=== " + "No Applications found" + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                Current_Log_Update(true, "=== " + "No Applications found" + "\r\n");
             } 
         } catch (Exception ex) {
-            txtLog.append("=== App Tester ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            Current_Log_Update(true, "=== App Tester ERROR: " + ex.getMessage() + "\r\n");
         }            
         if(ad != null) {
             ad.quit(); 
@@ -1365,10 +1314,10 @@ public class An_GUI extends javax.swing.JInternalFrame {
         btnInstallAPK.setEnabled(true);        
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));         
     }       
-    private void GUI_Get_Packages(AWSCredentials credentials ){
+
+    private void GUI_Get_S3_Packages(AWSCredentials credentials ){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("- Load Android Packages list ..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        Current_Log_Update(true, "- Load Android Packages list ..." + "\r\n");
         
         String[] SitesColumnsName = {"APK name","Date"}; 
         DefaultTableModel PModel = new DefaultTableModel();
@@ -1450,44 +1399,39 @@ public class An_GUI extends javax.swing.JInternalFrame {
             DV3.getColumnModel().getColumn(1).setPreferredWidth(170);
             DV3.changeSelection(0, 1, false, false);
             
-            txtLog.append("- BucketName: " + PACK_List.getBucketName() + ", Size: " + PACK_List.getObjectSummaries().size() + "\r\n");
-            txtLog.append(X + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            Current_Log_Update(true, "- BucketName: " + PACK_List.getBucketName() + ", Size: " + PACK_List.getObjectSummaries().size() + "\r\n");
+            Current_Log_Update(true, X + "\r\n");
         } catch (Exception ex) {
-            txtLog.append("== " + "GetPackages: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            Current_Log_Update(true, "== " + "GetPackages: " + ex.getMessage() + "\r\n");
         }     
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     } 
     private void GUI_InstallBuild_S3(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));  
-        txtLog.append("- Download_Build > " + "\r\n"); 
+        Current_Log_Update(true, "- Download_Build > " + "\r\n"); 
         String RES = String.valueOf(DV3.getValueAt(DV3.getSelectedRow(), 0));
         RES = An_Met.Download_Build(RES); // ====================
-        txtLog.append(RES);
+        Current_Log_Update(true, RES);
         
         if(RES.contains("OK")){
-            txtLog.append("- UnZip Build > " + "\r\n"); 
+            Current_Log_Update(true, "- UnZip Build > " + "\r\n"); 
             RES = An_Met.Unzip_Build();                        // ====================
-            txtLog.append(RES);
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            Current_Log_Update(true, RES);
             
             if(RES.contains("OK")){
-                txtLog.append("- UnInstall Package > " + appPackage + "\r\n"); 
+                Current_Log_Update(true, "- UnInstall Package > " + appPackage + "\r\n"); 
                 RES = An_Met.UnInstaPackage(appPackage);   // ====================
-                txtLog.append(RES);
+                Current_Log_Update(true, RES);
                 
                 String BuildPath = System.getProperty("user.dir") + File.separator + "MobileBuilds" + File.separator + appBuldFile;
                 
-                txtLog.append("- Install Build > " + BuildPath + "\r\n"); 
+                Current_Log_Update(true, "- Install Build > " + BuildPath + "\r\n"); 
                 RES = An_Met.InstallBuild(BuildPath); // ==================== 
-                txtLog.append(RES);
+                Current_Log_Update(true, RES);
                 
-                txtLog.append("- Check AppPackage> " + appPackage + "\r\n"); 
+                Current_Log_Update(true, "- Check AppPackage> " + appPackage + "\r\n"); 
                 RES = An_Met.CheckAppPackage();               // ==================== 
-                txtLog.append(RES);
-                
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());                 
+                Current_Log_Update(true, RES);         
             }
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));     
@@ -1517,7 +1461,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         app = cmbApp.getSelectedItem().toString();
 
         An_Met.Set_Mobile_Package_Name();
-        GUI_Get_Packages(AWS_credentials);
+        GUI_Get_S3_Packages(AWS_credentials);
         
         if("Bolter".equals(app)) {
             GUI_Get_Bolter_Site();
@@ -1527,9 +1471,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
     }
     private void GUI_Get_Sites() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        wdLastRow = -1;
-        txtLog.append("- Load Sites ..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        d1LastRow = -1;
+        Current_Log_Update(true,"- Load Sites ..." + "\r\n");
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1542,8 +1485,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             appId = rs.getString(1);
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("=== Get " + cmbApp.getSelectedItem().toString() + " App_ID > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            Current_Log_Update(true,"=== Get " + cmbApp.getSelectedItem().toString() + " App_ID > ERROR: " + ex.getMessage() + "\r\n");
         }
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
@@ -1623,19 +1565,16 @@ public class An_GUI extends javax.swing.JInternalFrame {
             sorter.sort(); 
    
         } catch (IOException | JSONException ex) {
-            txtLog.append("- GUI_Get_Sites: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());      
+            Current_Log_Update(true,"- GUI_Get_Sites: " + ex.getMessage() + "\r\n");     
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("- GUI_Get_Sites: " + ex.getMessage() + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());    
+                Current_Log_Update(true,"- GUI_Get_Sites: " + ex.getMessage() + "\r\n"); 
             }
         }
-        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        Current_Log_Update(true,"== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         sw1.reset();
         
         if (DV1.getRowCount() > 0) {
@@ -1657,18 +1596,16 @@ public class An_GUI extends javax.swing.JInternalFrame {
     }
     private void GUI_Get_Bolter_Site() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        wdLastRow = -1;
+        d1LastRow = -1;
 
-        txtLog.append("- Get Bolter " + cmbEnv.getSelectedItem().toString() + " Site ..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        Current_Log_Update(true,"- Get Bolter " + cmbEnv.getSelectedItem().toString() + " Site ..." + "\r\n");
         if(sw1.isRunning()){
             sw1.reset();
         }
         sw1.start();        
         String Site_ID = An_Met.Get_Bolter_User_Site_ID(txtBolter_Id.getText(), txtBolter_Pw.getText());
         if(Site_ID.contains("ERROR")){
-            txtLog.append(Site_ID + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());            
+            Current_Log_Update(true, Site_ID + "\r\n");        
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             sw1.reset();
             return;
@@ -1723,14 +1660,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
             sorter.sort();             
             
         } catch (Exception ex) {
-            txtLog.append("- Get Bolter Site ERROR > location_group: " + Site_ID + " >> " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            Current_Log_Update(true,"- Get Bolter Site ERROR > location_group: " + Site_ID + " >> " + ex.getMessage() + "\r\n");
             sw1.reset();
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } 
 
-        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        Current_Log_Update(true,"== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         sw1.reset();
         
         if (DV1.getRowCount() > 0) {
@@ -1742,12 +1677,10 @@ public class An_GUI extends javax.swing.JInternalFrame {
         lblSITES.setText(app + " Sites (" + DV1.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-
     private void GUI_Get_Brands() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         d2LastRow = -1;
-        txtLog.append("- Load Brands ..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        Current_Log_Update(true, "- Load Brands ..." + "\r\n"); 
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1827,19 +1760,16 @@ public class An_GUI extends javax.swing.JInternalFrame {
             sorter.sort(); 
             
         } catch (IOException | JSONException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
+            Current_Log_Update(true, "- Exception: " + ex.getMessage() + "\r\n");      
         }         
         finally {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                Current_Log_Update(true, "- Exception: " + ex.getMessage() + "\r\n");   
             }
         } 
-        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        Current_Log_Update(true, "== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         sw1.reset();
    
         if (DV2.getRowCount() > 0) {
@@ -1864,76 +1794,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
         lblBRANDS.setText("Selected Site Brands (" + DV2.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    private void GUI_Load_CONFIG(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
-            A.A.SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + A.A.UserID + "' AND [platform] = 'MOB' AND [app] = 'Android' AND [env] = '" + env + "'" + "\r\n";
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery(A.A.SQL);
-            rs.next();
-            C = rs.getString(1);
-            conn.close();
-        } catch (SQLException ex) {
-            CONFIG = false;
-            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage());
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            return;
-        }
-            
-        try{             
-            if (C.contains(": ")) {
-                String c;
-                c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
-             
-                c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
-                
-                c = C.substring(C.indexOf("txtMobile_Id:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_Id.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtMobile_Pw:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_Pw.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtBolter_Id:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtBolter_Id.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtBolter_Pw:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtBolter_Pw.setText(c.substring(c.indexOf(" ")).trim());
 
-                c = C.substring(C.indexOf("nWaitElement:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitElement.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("nWaitLoad:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitLoad.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
-
-                c = C.substring(C.indexOf("_slack:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _slack.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-
-                c = C.substring(C.indexOf("_site:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _site.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_site_new:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _site_new.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_brand_new:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _brand_new.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_brand:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _brand.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_group_management:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _group_management.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_orders:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _orders.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_sales_reporting:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _sales_reporting.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_users:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _users.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_resent_updates")); c = c.substring(0, c.indexOf("\r\n")).trim(); _resent_updates.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_announcements:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _announcements.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_promo")); c = c.substring(0, c.indexOf("\r\n")).trim(); _promo.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_password:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _password.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_roles")); c = c.substring(0, c.indexOf("\r\n")).trim(); _roles.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_all_data")); c = c.substring(0, c.indexOf("\r\n")).trim(); _all_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_logout")); c = c.substring(0, c.indexOf("\r\n")).trim(); _logout.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                CONFIG = true;
-                txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            } else {
-                CONFIG = false;
-                txtLog.append("=== MOB / Android, User: " + A.A.UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-        } catch (Exception ex) {
-            CONFIG = false;
-            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }
     private void GUI_Save_CONFIG() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String _S = "n/a";
         String _B = "n/a";
+        String C ="";
         try {
             if(DV1.getRowCount() > 0){
                 _S = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
@@ -1942,10 +1808,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 _B = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
             }
             C = "";
+            C += "device: " + "N/A" + "\r\n";
             C += "env: " + env + "\r\n";
             C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
-            C += "SITE: " + _S + "\r\n";
-            C += "BRAND: " + _B + "\r\n";
+            C += "Site: " + _S + "\r\n";
+            C += "Brand: " + _B + "\r\n";
+            C += "Menu: " + "N/A" + "\r\n";
+            C += "Category: " + "N/A" + "\r\n";
+            C += "Options: " + "N/A" + "\r\n";  
             
             C += "txtMobile_Id: " + txtMobile_Id.getText() + "\r\n";
             C += "txtMobile_Pw: " + txtMobile_Pw.getText() + "\r\n";
@@ -1955,27 +1825,31 @@ public class An_GUI extends javax.swing.JInternalFrame {
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
             C += "nWaitLoad: " + nWaitLoad.getValue()+ "\r\n";  
             
+            C += "Slack_Ch: " + "TBD";
             C += "_slack: " + _slack.isSelected() + "\r\n";
-            
-            C += "_site: " + _site.isSelected() + "\r\n";
-            C += "_site_new: " + _site_new.isSelected() + "\r\n";
-            C += "_brand_new: " + _brand_new.isSelected() + "\r\n";
-            C += "_brand: " + _brand.isSelected() + "\r\n";
-            C += "_group_management: " + _group_management.isSelected() + "\r\n";
-            C += "_orders: " + _orders.isSelected() + "\r\n";
-            C += "_sales_reporting: " + _sales_reporting.isSelected() + "\r\n";
-            C += "_users: " + _users.isSelected() + "\r\n";
-            C += "_resent_updates: " + _resent_updates.isSelected() + "\r\n";
-            C += "_announcements: " + _announcements.isSelected() + "\r\n";
-            C += "_promo: " + _promo.isSelected() + "\r\n";
-            C += "_password: " + _password.isSelected() + "\r\n";
-            C += "_roles: " + _roles.isSelected() + "\r\n";           
-            C += "_all_data: " + _all_data.isSelected() + "\r\n";
+           
+            C += "_acc_options: " + _acc_options.isSelected() + "\r\n";
+            C += "_all_cards: " + _all_cards.isSelected() + "\r\n";
+            C += "_allow_loc: " + _allow_loc.isSelected() + "\r\n";
+            C += "_edit_item: " + _edit_item.isSelected() + "\r\n";
+            C += "_edit_profile: " + _edit_profile.isSelected() + "\r\n";
+            C += "_explore: " + _explore.isSelected() + "\r\n";
+            C += "_feedback: " + _feedback.isSelected() + "\r\n";
+            C += "_forgot_pw: " + _forgot_pw.isSelected() + "\r\n";
+            C += "_invalids: " + _invalids.isSelected() + "\r\n";
+            C += "_login: " + _login.isSelected() + "\r\n";
             C += "_logout: " + _logout.isSelected() + "\r\n";
+            C += "_mplan: " + _mplan.isSelected() + "\r\n";
+            C += "_optX: " + _optX.isSelected() + "\r\n";
+            C += "_order_email: " + _order_email.isSelected() + "\r\n";
+            C += "_order_history: " + _order_history.isSelected() + "\r\n";
+            C += "_promo: " + _promo.isSelected() + "\r\n";
+            C += "_reorder: " + _reorder.isSelected() + "\r\n";
+            C += "_support: " + _support.isSelected() + "\r\n";
+            C += "_welcome: " + _welcome.isSelected() + "\r\n";
            
         } catch (Exception ex)  {
-            txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            Current_Log_Update(true, "=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             return;
         }
         
@@ -2002,19 +1876,324 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _insert.setString(4, "Android");
             _insert.setString(5, C);
             int row = _insert.executeUpdate();
-            txtLog.append("=== SAVE_CONFIG > OK (" + row + " row)" + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            conn.close();
+            conn.close(); 
+            Current_Log_Update(true, "=== SAVE_CONFIG > OK (" + row + " row)" + "\r\n");
         } catch (SQLException ex) {
-            txtLog.append("=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            Current_Log_Update(true, "=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage() + "\r\n");
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    
-    private void GUI_BW1_DoWork(){ 
-        BW1 = new SwingWorker() {             
-            Instant dw_start = Instant.now();
+    private void GUI_Load_CONFIG(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        String C = "";
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+            A.A.SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + A.A.UserID + "' AND [platform] = 'MOB' AND [app] = 'Android' AND [env] = '" + env + "'" + "\r\n";
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(A.A.SQL);
+            rs.next();
+            C = rs.getString(1);
+            conn.close();
+        } catch (SQLException ex) {
+            CONFIG = false;
+            Current_Log_Update(true, "=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            Current_Log_Update(true, "=== MOB / Android, User: " + A.A.UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            return;
+        }
+        String[] lines = C.split(System.getProperty("line.separator"));  
+        String value;
+        try{             
+            for (String l : lines) {
+                value = l.substring(l.indexOf(" ")).trim();
+                if(l.contains("device: ")) device = value;
+                if(l.contains("env: ")) env = value;
+                if(l.contains("app: ")) app = value;  
+                if(l.contains("Site: ")) SITE = value;
+                if(l.contains("Brand: ")) BRAND = value;
+                if(l.contains("Menu: ")) Menu = value;
+                if(l.contains("Category: ")) Category = value;
+                if(l.contains("Options: ")) Options = value;  
+
+                if(l.contains("txtMobile_Id: ")) txtMobile_Id.setText(value);
+                if(l.contains("txtMobile_Pw: ")) txtMobile_Pw.setText(value);
+                if(l.contains("txtBolter_Id: ")) txtBolter_Id.setText(value);
+                if(l.contains("txtBolter_Pw: ")) txtBolter_Pw.setText(value);
+
+                if(l.contains("nWaitElement: ")) nWaitElement.setValue(Double.parseDouble(value));
+                if(l.contains("nWaitLoad: ")) nWaitLoad.setValue(Double.parseDouble(value)); 
+
+                if(l.contains("Slack_Ch: ")) Slack_Channel = value;
+                if(l.contains("_slack: ")) _slack.setSelected(Boolean.parseBoolean(value));
+           
+                if(l.contains("_acc_options: ")) _acc_options.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_all_cards: ")) _all_cards.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_allow_loc: ")) _allow_loc.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_edit_item: ")) _edit_item.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_edit_profile: ")) _edit_profile.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_explore: ")) _explore.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_feedback: ")) _feedback.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_forgot_pw: ")) _forgot_pw.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_invalids: ")) _invalids.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_login: ")) _login.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_logout: ")) _logout.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_mplan: ")) _mplan.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_optX: ")) _optX.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_order_email: ")) _order_email.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_order_history: ")) _order_history.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_promo: ")) _promo.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_reorder: ")) _reorder.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_support: ")) _support.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_welcome: ")) _welcome.setSelected(Boolean.parseBoolean(value));
+            }            
+            CONFIG = true;
+            Current_Log_Update(true, "=== LOAD_CONFIG > OK" + "\r\n");
+        } catch (Exception ex) {
+            CONFIG = false;
+            Current_Log_Update(true, "=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+
+    private void Run_Manual(){
+        btnRun.setEnabled(false);
+        btnFails.setEnabled(false);
+        btnExel.setEnabled(false);
+        
+        run_start = Instant.now();
+        Current_Log_Update(true, "=== Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+
+        WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
+        LoadTimeOut = (double)nWaitLoad.getValue() *1000;
+        EX = "";
+        F = "";
+        t_calls = 0;
+        t_min =  0;
+        t_avg = 0;
+        t_max =  0;
+        p_50 = 0;
+        p_90 = 0;
+        _t = 0; // Total
+        _p = 0; // Passed
+        _f = 0; // Failed
+        _w = 0; // Warn
+        r_time = "";
+
+        Mobile_ID = txtMobile_Id.getText();
+        Mobile_PW = txtMobile_Pw.getText();
+        Bolter_ID = txtBolter_Id.getText();
+        Bolter_PW = txtBolter_Pw.getText();
+        
+        _Slack = _slack.isSelected();
+        
+        _Acc_options = _acc_options.isSelected();
+        _All_cards = _all_cards.isSelected();
+        _Allow_loc = _allow_loc.isSelected();
+        _Edit_item = _edit_item.isSelected();
+        _Edit_profile = _edit_profile.isSelected();
+        _Explore = _explore.isSelected();
+        _Feedback = _feedback.isSelected();
+        _Forgot_pw = _forgot_pw.isSelected();
+        _Invalids = _invalids.isSelected();
+        _Login = _login.isSelected();
+        _Logout = _logout.isSelected();
+        _Mplan = _mplan.isSelected();
+        _OptX = _optX.isSelected();
+        _Order_email = _order_email.isSelected();
+        _Order_history = _order_history.isSelected();
+        _Promo = _promo.isSelected();
+        _Reorder = _reorder.isSelected();
+        _Support = _support.isSelected();
+        _Welcome = _welcome.isSelected();
+
+        SCOPE = "";
+        r_type = "manual";
+        
+        if(DV1.getRowCount() > 0) {
+            SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
+            platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform
+            COUNTRY = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
+        }
+        if(DV2.getRowCount() > 0) {
+            BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
+        }
+
+        Current_Log_Update(true, "=== Starting Android Driver..." + "\r\n");
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();
+        Instant dw_start = Instant.now();
+        String DriverStart = An_Met.AndroidDriver(cmbDevice.getSelectedIndex());
+        if(DriverStart.contains("OK")){
+            Current_Log_Update(true, "=== Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");    
+            sw1.reset();
+            
+            An_Met.LOG_START(); // ========================================================
+            BW1_DoWork( true);        
+        } else{
+            Current_Log_Update(true, DriverStart + "\r\n");
+            btnRun.setEnabled(true);
+            btnFails.setEnabled(true);
+        }        
+    }
+
+    private String JOB_Load_CONFIG(String config){
+        String[] lines = config.split(System.getProperty("line.separator"));  
+        String value;
+        try{             
+            for (String l : lines) {
+                value = l.substring(l.indexOf(" ")).trim();
+                if(l.contains("device: ")) device = value;
+                if(l.contains("update_build: ")) Update_Build = Boolean.parseBoolean(value);
+                if(l.contains("env: ")) env = value;
+                if(l.contains("app: ")) app = value;  
+                if(l.contains("Site: ")) SITE = value;
+                if(l.contains("Brand: ")) BRAND = value;
+                if(l.contains("Menu: ")) Menu = value;
+                if(l.contains("Category: ")) Category = value;
+                if(l.contains("Options: ")) Options = value;  
+
+                if(l.contains("txtMobile_Id: ")) Mobile_ID = value;
+                if(l.contains("txtMobile_Pw: ")) Mobile_PW = value;
+                if(l.contains("txtBolter_Id: ")) Bolter_ID = value;
+                if(l.contains("txtBolter_Pw: ")) Bolter_PW = value;
+
+                if(l.contains("nWaitElement: ")) WaitForElement = Math.round(Double.parseDouble(value)*1000);
+                if(l.contains("nWaitLoad: ")) LoadTimeOut = Math.round(Double.parseDouble(value)*1000);
+
+                if(l.contains("Slack_Ch: ")) Slack_Channel = value;
+                if(l.contains("_slack: ")) _Slack = Boolean.parseBoolean(value);
+           
+                if(l.contains("_acc_options: ")) _Acc_options = Boolean.parseBoolean(value);
+                if(l.contains("_all_cards: ")) _All_cards = Boolean.parseBoolean(value);
+                if(l.contains("_allow_loc: ")) _Allow_loc = Boolean.parseBoolean(value);
+                if(l.contains("_edit_item: ")) _Edit_item = Boolean.parseBoolean(value);
+                if(l.contains("_edit_profile: ")) _Edit_profile = Boolean.parseBoolean(value);
+                if(l.contains("_explore: ")) _Explore = Boolean.parseBoolean(value);
+                if(l.contains("_feedback: ")) _Feedback = Boolean.parseBoolean(value);
+                if(l.contains("_forgot_pw: ")) _Forgot_pw = Boolean.parseBoolean(value);
+                if(l.contains("_invalids: ")) _Invalids = Boolean.parseBoolean(value);
+                if(l.contains("_login: ")) _Login = Boolean.parseBoolean(value);
+                if(l.contains("_logout: ")) _Logout = Boolean.parseBoolean(value);
+                if(l.contains("_mplan: ")) _Mplan = Boolean.parseBoolean(value);
+                if(l.contains("_optX: ")) _OptX = Boolean.parseBoolean(value);
+                if(l.contains("_order_email: ")) _Order_email = Boolean.parseBoolean(value);
+                if(l.contains("_order_history: ")) _Order_history = Boolean.parseBoolean(value);
+                if(l.contains("_promo: ")) _Promo = Boolean.parseBoolean(value);
+                if(l.contains("_reorder: ")) _Reorder = Boolean.parseBoolean(value);
+                if(l.contains("_support: ")) _Support = Boolean.parseBoolean(value);
+                if(l.contains("_welcome: ")) _Welcome = Boolean.parseBoolean(value);
+            }            
+            CONFIG = true;
+            
+            if("ST".equals(env)){
+                BaseAPI = "https://api.compassdigital.org/staging";               
+                url = "https://staging.adminpanel.compassdigital.org/";
+            } else if ("DE".equals(env)){
+                BaseAPI = "https://api.compassdigital.org/dev";
+                url = "https://dev.adminpanel.compassdigital.org/";
+            } else{
+                BaseAPI = "https://api.compassdigital.org/v1";
+                url = "https://adminpanel.compassdigital.org/";
+            }
+            Current_Log_Update(true, "=== JOB_Load_CONFIG > OK" + "\r\n");
+            return "OK";
+        } catch (Exception ex) {
+            CONFIG = false;
+            Current_Log_Update(true, "=== JOB_Load_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
+            return "ERROR > " + ex.getMessage();
+        }
+    }
+    private String JOB_Find_Connected_Devices(){
+        Current_Log_Update(true, "- Find Attached Android Devices ..." + "\r\n");
+        String Dev  = Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb devices -l", A.A.ADB_HOME, true, true).trim();
+        String[] dev = Dev.split("\r\n");
+        if (dev.length > 2 && Dev.contains(device)) {
+            for (int i = 1; i < dev.length; i++) {
+                String D = dev[i];
+                if(D.contains("model") && D.contains(device)){
+                    String ID = D.substring(0, dev[i].indexOf(" ")).trim();
+                    D = D.substring(D.indexOf("model:") + 6);
+                    D = D.substring(0, D.indexOf(" ")).trim();
+                }
+            }
+            Current_Log_Update(false, "=== " + Dev + "\r\n");  
+            return "JOB_Find_Connected_Device > OK: Device " + device + " found";
+        } else {
+            Current_Log_Update(false, "=== Target Device " + device + " Not Found" + "\r\n");          
+            return "JOB_Find_Connected_Devices > ERROR: " + "No Attached Device(s) found";
+        } 
+    } 
+    public String Run_Job(String run_type, String config){
+        Log  = "";
+        String RES = "";
+        
+        RES = JOB_Load_CONFIG(config);
+        if(RES.contains("ERROR")){
+            Current_Log_Update(false, RES);
+            return "JOB_Load_CONFIG > " + RES;
+        }
+        
+        if(Update_Build){
+            An_Met.Get_S3_MOB_Credentials();             
+        }
+
+        An_Met.Set_Mobile_Package_Name();
+        
+        Current_Log_Update(false, "- Check Connected Device " + "\r\n");
+        RES = JOB_Find_Connected_Devices();
+        Current_Log_Update(false, RES);
+        if(!RES.contains("OK")){
+            return RES;
+        }
+        
+        Current_Log_Update(false, "- Check Package " + "\r\n"); 
+        Current_Log_Update(false, An_Met.CheckAppPackage()); 
+        
+        try{
+            run_start = Instant.now();
+            Current_Log_Update(false, "=== Auto Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+            EX = "";
+            F = "";
+            t_calls = 0;
+            t_min =  0;
+            t_avg = 0;
+            t_max =  0;
+            p_50 = 0;
+            p_90 = 0;
+            _t = 0; // Total
+            _p = 0; // Passed
+            _f = 0; // Failed
+            _w = 0; // Warn
+            r_time = "";
+            SCOPE = "";
+            r_type = run_type;
+            int Device_Index = 0; // =================     
+
+            Current_Log_Update(false, "- Starting Android Driver..." + "\r\n");
+            if(sw1.isRunning()){
+                sw1.reset();
+            }
+            sw1.start();
+            String DriverStart = An_Met.AndroidDriver(Device_Index);
+            if(DriverStart.contains("OK")){
+                Current_Log_Update(false, "=== Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
+                sw1.reset();
+
+                An_Met.LOG_START();   // ========================================================
+                BW1_DoWork( false);  
+                return "OK > BW1 started";
+            } else{
+                Current_Log_Update(false, DriverStart + "\r\n");
+                return DriverStart;
+            }  
+        }catch(Exception ex){
+            return "ERROR > " + ex.getMessage();
+        }
+    }
+ 
+    private void BW1_DoWork(Boolean GUI){ 
+        BW1 = new SwingWorker() {                        
             @Override
             protected String doInBackground() throws Exception   { 
                 New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));          
@@ -2022,8 +2201,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     An_bolter.run();
                 }else{
                     An_coreapp.run();
-                }
-               
+                }              
                 if(_f > 0) {
                     return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
                 }else{
@@ -2032,24 +2210,23 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }  
             @Override
             protected void done() { 
+                DD = Duration.between(run_start, Instant.now());
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
-                txtLog.append("========   " + "Execution step-by-step log..." + "   ========" + "\r\n");  
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n"); 
+                
                 EX = "Android " + app + " " + env + ", vervion: " + appVersion + ", Device: " + devModel + " OS Version: " + devOS +
                 " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                  "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                  + EX;
-                txtLog.append("" + EX.replaceAll("\t", " > ") + "\r\n"); 
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());
-                Last_EX = EX;
+                
+                Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n"); 
+
                 try  { 
                     String statusMsg = (String) get(); 
-                    txtLog.append("" + statusMsg + "\r\n");
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                    Current_Log_Update(GUI, statusMsg + "\r\n");
                     BW1 = null;
                 } catch (InterruptedException | ExecutionException ex)  { 
-                    txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                    Current_Log_Update(GUI, "- BW1 Done: " + ex.getMessage() + "\r\n"); 
                 } 
                 if(ad != null) {
                     ad.quit(); 
@@ -2057,79 +2234,89 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 if(appiumService != null && appiumService.isRunning()){
                     appiumService.stop();                    
                 }
-
-                DD = Duration.between(dw_start, Instant.now());
-                Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
-                try {
-                    String t_rep = "";
-                    if (!"".equals(r_time.trim())) {
-                        double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
-                        if (am0.length > 0) {
-                            Arrays.sort(am0);
-                            double total = 0;
-                            for(int i=0; i < am0.length; i++){
-                                total = total + am0[i];
-                            }
-                            t_calls = am0.length;
-                            t_min = am0[0] / (double)1000;
-                            t_avg = (total / am0.length) / (double)1000;
-                            t_max = am0[am0.length - 1]  / (double)1000; 
-                            p_50 = Func.p50(am0) / (double)1000;
-                            p_90 = Func.p90(am0) / (double)1000;
-                            
-                            DecimalFormat df = new DecimalFormat("#.##");
-                            t_rep += "=== Total Calls: " + t_calls + ", Response Times (sec) - Min: " + df.format(t_min) +
-                                                                        ", Avg: " + df.format(t_avg) +
-                                                                        ", Max: " + df.format(t_max) +
-                                                                        ", p50: " + df.format(p_50) +
-                                                                        ", p90: " + df.format(p_90);
-                        }
-                        txtLog.append("" + t_rep + "\r\n");
-                        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-                    }
-                } catch(Exception ex){
-                    txtLog.append("=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-                }  
-                btnRun.setEnabled(true);
-
-                txtLog.append("=== " + Summary + "\r\n"); // Summary shown in EX top
-                txtLog.append("=== Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
-                txtLog.append("=== Android_" + app + "_" + env + ", vervion: " + appVersion + ", Device: " + devModel + " OS version: " + devOS + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-  
-                if(!"".equals(F.trim())){
-                    btnFails.setEnabled(true);
-                } else{
-                    btnFails.setEnabled(false);
+                if(GUI){
+                    Log = txtLog.getText();
                 }
-                btnExel.setEnabled(true);
-                
-                An_Met.LOG_UPDATE(txtLog.getText()); // ========================================================
-                
-                if(_slack.isSelected()){
-                    An_Met.Report(false); 
-                    String MSG = "Android_" + app + "_" + env + " Automation report - " + Report_Date +  
-                    "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
-                    "Device: " + devModel + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
-                    "Scope: " + SCOPE + "\r\n" +
-                    "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
-
-                    txtLog.append(Func.Send_File_to_Slack(Report_File, "Android_automation", MSG + "\r\n"));
-                    File f = new File(Report_File);
-                    if(f.exists() && !f.isDirectory()) { 
-                        f.delete();
-                    }
-                }
+                BW1_Done();
             } 
         }; 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         BW1.execute();  // executes the swingworker on worker thread 
     }
+    private void BW1_Done(){
+        Last_EX = EX;
+        Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
+        try {
+            String t_rep = "";
+            if (!"".equals(r_time.trim())) {
+                double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
+                if (am0.length > 0) {
+                    Arrays.sort(am0);
+                    double total = 0;
+                    for(int i=0; i < am0.length; i++){
+                        total = total + am0[i];
+                    }
+                    t_calls = am0.length;
+                    t_min = am0[0] / (double)1000;
+                    t_avg = (total / am0.length) / (double)1000;
+                    t_max = am0[am0.length - 1]  / (double)1000; 
+                    p_50 = Func.p50(am0) / (double)1000;
+                    p_90 = Func.p90(am0) / (double)1000;
+
+                    DecimalFormat df = new DecimalFormat("#.##");
+                    t_rep += "=== Total Calls: " + t_calls + 
+                        ", Response Times (sec) - Min: " + df.format(t_min) +
+                        ", Avg: " + df.format(t_avg) +
+                        ", Max: " + df.format(t_max) +
+                        ", p50: " + df.format(p_50) +
+                        ", p90: " + df.format(p_90);
+                }
+                Current_Log_Update(true, t_rep + "\r\n");
+            }
+        } catch(Exception ex){
+            Current_Log_Update(true, "=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
+        }  
+
+        Current_Log_Update(true, "=== " + Summary + "\r\n"); // Summary shown in EX top
+        Current_Log_Update(true, "=== Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
+        Current_Log_Update(true, "=== Android_" + app + "_" + env + ", vervion: " + appVersion + ", Device: " + devModel + " OS version: " + devOS + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
+
+        An_Met.LOG_UPDATE(Log); // ========================================================
+
+        if(_Slack){
+            An_Met.Report(false); 
+            String MSG = "Android_" + app + "_" + env + " Automation report - " + Report_Date +  
+            "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
+            "Device: " + devModel + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
+            "Scope: " + SCOPE + "\r\n" +
+            "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
+
+            Current_Log_Update(true, Func.Send_File_to_Slack(Report_File, "Android_automation", MSG + "\r\n"));
+            File f = new File(Report_File);
+            if(f.exists() && !f.isDirectory()) { 
+                f.delete();
+            }
+        }
+        btnRun.setEnabled(true);               
+        if(!"".equals(F.trim())){
+            btnFails.setEnabled(true);
+        } else{
+            btnFails.setEnabled(false);
+        }
+        btnExel.setEnabled(true);          
+    }
 
     // <editor-fold defaultstate="collapsed" desc="Package Variables">
+    private int d1LastRow = -1; 
+    private int d2LastRow = -1;  
+    private boolean Load; 
+    private static SwingWorker BW1;  
+    private static boolean CONFIG = false;
+    private static Instant run_start;
+    
     public static final Stopwatch sw1 = Stopwatch.createUnstarted();
-
+    public static Duration DD;
+    public static boolean Update_Build = false;
     public static String AWS_A_key;
     public static String AWS_S_key;
     public static AWSCredentials AWS_credentials; 
@@ -2143,20 +2330,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
     public static String appActivity = "";
     public static String appBuldFile = "";
     public static String appVersion = "";
+    
+    public static String device = "";
     public static String devID = "";
     public static String devModel = "";
     public static String devOS = "";
     
-    public boolean Load;
     public static String Report_Date;
-    public static Duration DD;
-    public static SwingWorker BW1;  
-
-    public static boolean CONFIG = false;
-    public static String C = "";
-    public int wdLastRow = -1; 
-    public int d2LastRow = -1; 
-
     public static String SCOPE;
     public static String Last_EX;
     public static String Report_File;    
@@ -2180,9 +2360,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
     public static String BRAND = "";
     public static String BrandID = "";
     public static String Location = "";
+    public static String Menu = "";
+    public static String Category = "";
+    public static String Options = "";    
     
     public static String t;
-    public static String err;
     public static String F; 
     public static String EX; 
     
@@ -2198,11 +2380,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
     public static double p_50 = 0;
     public static double p_90 = 0;  
     
+    public static String r_type; 
     public static String r_time = "";
     public static String Ver = "";
     public static String TZone;      
     public static String Summary;
-    public static String r_type; 
+    public static String Log;
+
     
     public static int _t = 0; // Total
     public static int _p = 0; // Passed
@@ -2224,6 +2408,28 @@ public class An_GUI extends javax.swing.JInternalFrame {
     public static AndroidElement ae1 = null;
     public static AndroidElement ae2 = null;
     public static AndroidElement ae3 = null;
+    
+    public static String Slack_Channel = "";
+    public static boolean _Slack = false;
+    public static boolean _Support = false;
+    public static boolean _Forgot_pw  = false;
+    public static boolean _Allow_loc  = false;
+    public static boolean _Order_history  = false;
+    public static boolean _Edit_profile  = false;
+    public static boolean _Invalids = false;
+    public static boolean _Logout = false;
+    public static boolean _Order_email = false;
+    public static boolean _Login = false;
+    public static boolean _All_cards = false;
+    public static boolean _Reorder = false;
+    public static boolean _OptX = false;
+    public static boolean _Acc_options = false;
+    public static boolean _Edit_item = false;
+    public static boolean _Welcome = false;
+    public static boolean _Explore = false;
+    public static boolean _Promo = false;
+    public static boolean _Mplan = false;
+    public static boolean _Feedback = false;
     // </editor-fold>
    
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
@@ -2231,27 +2437,26 @@ public class An_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;
     private javax.swing.JTable DV3;
-    private javax.swing.ButtonGroup Optin_NU_EU;
-    private javax.swing.JCheckBox _all_data;
-    private javax.swing.JCheckBox _announcements;
-    private javax.swing.JCheckBox _brand;
-    private javax.swing.JCheckBox _brand_new;
-    private javax.swing.JCheckBox _group_management;
+    private javax.swing.JCheckBox _acc_options;
+    private javax.swing.JCheckBox _all_cards;
+    private javax.swing.JCheckBox _allow_loc;
+    private javax.swing.JCheckBox _edit_item;
+    private javax.swing.JCheckBox _edit_profile;
+    private javax.swing.JCheckBox _explore;
+    private javax.swing.JCheckBox _feedback;
+    private javax.swing.JCheckBox _forgot_pw;
+    private javax.swing.JCheckBox _invalids;
     private javax.swing.JCheckBox _login;
     private javax.swing.JCheckBox _logout;
-    private javax.swing.JCheckBox _notifications;
-    private javax.swing.JCheckBox _orders;
-    private javax.swing.JCheckBox _password;
+    private javax.swing.JCheckBox _mplan;
+    private javax.swing.JCheckBox _optX;
+    private javax.swing.JCheckBox _order_email;
+    private javax.swing.JCheckBox _order_history;
     private javax.swing.JCheckBox _promo;
-    private javax.swing.JCheckBox _resent_updates;
-    private javax.swing.JCheckBox _roles;
-    private javax.swing.JCheckBox _sales_analytics;
-    private javax.swing.JCheckBox _sales_reporting;
-    private javax.swing.JCheckBox _site;
-    private javax.swing.JCheckBox _site_new;
+    private javax.swing.JCheckBox _reorder;
     private javax.swing.JCheckBox _slack;
-    private javax.swing.JCheckBox _smart_analytics;
-    private javax.swing.JCheckBox _users;
+    private javax.swing.JCheckBox _support;
+    private javax.swing.JCheckBox _welcome;
     private javax.swing.JButton btnExel;
     private javax.swing.JButton btnFails;
     private javax.swing.JButton btnFindDevice;
@@ -2269,6 +2474,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cmbEnv;
     private javax.swing.JComboBox<String> cmbMPlan;
     private javax.swing.JComboBox<String> cmbPromo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2295,6 +2501,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JPanel paneCore_Scope;
     private javax.swing.JRadioButton rbEU;
     private javax.swing.JRadioButton rbNU_EU;
+    private javax.swing.ButtonGroup rb_NU_EU;
     private javax.swing.JTextField txtBolter_Id;
     private javax.swing.JTextField txtBolter_Pw;
     private javax.swing.JTextArea txtLog;
