@@ -8,6 +8,8 @@ import A.TWeb;
 import static A.A.*;
 import static AP3.AP3.*;
 import java.time.LocalDateTime;
+import org.json.JSONArray;
+import org.json.JSONObject;
 /**
  *
  * @author Oleg.Spozito
@@ -27,7 +29,7 @@ public class AP3_menu_manager {
             if (FAIL) { return;} 
         _t++; Thread.sleep(200); TWeb.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
             if (FAIL) { return;}
-             
+         
         // <editor-fold defaultstate="collapsed" desc="Group Selection">  
         EX += " - " + "\t" + " === MM Sector Selection " + "\t" + " ===== " + "\t" + " == Sector Selection Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";  
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -287,7 +289,7 @@ public class AP3_menu_manager {
                         if (FAIL) { return;} 
                 } 
 
-            // ================ Add New Modifiesr(s) 
+            // ================ Add New Modifier(s) 
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click  'Add MODIFIER'", "xpath", "//*[contains(text(), 'Add MODIFIER')]", "no_jira"); 
                 if (FAIL) { return;}  
             _t++; Thread.sleep((long) sleep); TWeb.To_Bottom("no_jira"); 
@@ -342,9 +344,26 @@ public class AP3_menu_manager {
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Click 'Prepared'", L1.get(T_Index), "no_jira");
                         if (FAIL) { return;}   
                 } 
-            _t++; Thread.sleep((long) sleep); TWeb.Click_out_of_Element_By_Path("Tax Tags dropdown Close", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",  "Top",4, 4, "no_jira");
-                if (FAIL) { return;}
+//            _t++; Thread.sleep((long) sleep); TWeb.Click_out_of_Element_By_Path("Tax Tags dropdown Close", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",  "Top",4, 4, "no_jira");
+//                if (FAIL) { return;}
                     
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Modifier label", "xpath", "//div[normalize-space()='Modifiers']", "no_jira");
+             if (FAIL) { return;}
+            
+             //Clone the last modifier and verify API calls for unique ids
+            //<editor-fold defaultstate="collapsed" desc="Clone modifier">   
+            _t++; Thread.sleep((long) sleep); TWeb.List_L2("Modifiers Count", "xpath", "//div[@class='layout modifier row wrap align-center']", "no_jira");             
+                if (FAIL) { return;}                
+            _t++; Thread.sleep((long) sleep); TWeb.Move_to_Element("Last Modifier Hover", L2.get(L2.size() - 1), "no_jira"); 
+                if (FAIL) { return;}    
+                
+            _t++; Thread.sleep((long) sleep); TWeb.List_Child_E1_By_Path("Find 'Clone' Modifier icon", L2, (L2.size() - 1), "xpath", ".//i[@class='v-icon mdi mdi-content-copy theme--light']", "no_jira"); 
+                if (FAIL) { return;}      
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Click("'Clone' Last Modifier Click", e1, "no_jira"); 
+                if (FAIL) { return;}     
+             _t++; Thread.sleep((long) sleep); TWeb.To_Bottom("no_jira"); 
+                if (FAIL) { return;}          
+
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'APPLY Changes'", "xpath", "//*[contains(text(), 'Apply Changes')]", "no_jira"); 
               if (FAIL) { return;}     
             _t++; TWeb.Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]", "no_jira");        
@@ -352,12 +371,86 @@ public class AP3_menu_manager {
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", "no_jira"); 
                 if (FAIL) { return;}                                                                           
             Thread.sleep(500);
-            _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+               _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;} 
             _t++; Thread.sleep((long) sleep); TWeb.Refresh("Refresh after PUBLISH", "no_jira"); 
                 if (FAIL) { return;}   
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for page load", "xpath", "//*[@class='H4-Secondary-Center']", "no_jira"); 
                 if (FAIL) { return;} 
+            
+            //To find Modifier group ID    
+            String Mod_grp_id ="";    
+            _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/Company / API )", BaseAPI + "/menu/modifier/group/company/" +CompanyID, true,"no_jira" );
+            if (FAIL) { return;} 
+            JSONObject json = new JSONObject(API_Response_Body);
+            JSONArray mod_items = new JSONArray();
+            mod_items = json.getJSONArray("modifier_groups");
+            if(mod_items.isEmpty())
+            {
+               _t++;
+               _p++; EX += _t + "\t" + "No Modifier items exists" + "\t" + "-" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            }
+            else {
+                for (int i = 0; i < mod_items.length(); i++) {
+                    JSONObject mod_item = mod_items.getJSONObject(i);
+                    if(mod_item.getString("unique_name").equalsIgnoreCase("New Group "+New_ID))
+                    {
+                      Mod_grp_id = mod_item.getString("id");
+                    }//End of if
+                }//End of for     
+            } //End of else
+            
+            //To verify cloned id is different from original in Menu modifier group.
+            String Original_Mod_ID_Name = "";
+            String Copy_Mod_ID = "";
+            String Copy_Mod_ID_Name = "";
+         
+            _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/Modifier / API )", BaseAPI + "/menu/modifier/group/"+Mod_grp_id, true,"no_jira" );
+            if (FAIL) { return;} 
+            JSONObject json1 = new JSONObject(API_Response_Body);
+            JSONArray modifier_items = new JSONArray();
+            modifier_items = json1.getJSONArray("items");
+            for (int i=0;i<modifier_items.length();i++)
+            {
+               JSONObject modifier_item = modifier_items.getJSONObject(i) ;
+               if(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("copy"))            
+               {
+                 
+                   Copy_Mod_ID = modifier_item.getString("id");
+                   Copy_Mod_ID_Name = modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en");
+                   Original_Mod_ID_Name = Copy_Mod_ID_Name.substring(0, Copy_Mod_ID_Name.length()-5);
+                   break;
+               }
+            }//End of for
+           boolean flag = true;
+           for (int i=0;i<modifier_items.length();i++)
+            {
+               JSONObject modifier_item = modifier_items.getJSONObject(i) ;
+               if(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en").equals(Original_Mod_ID_Name))            
+               {
+                   if(!(modifier_item.getString("id").equals(Copy_Mod_ID)))
+                   { 
+                      //print pass unique id message 
+                      _t++;
+                      _p++; EX += _t + "\t" + "Unique ids for copied modifiers" + "\t" + modifier_item.getString("id") + "\t" + Copy_Mod_ID + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                      flag = false;
+                   }
+                   else
+                   { 
+                       _t++;
+                       _f++; EX += _t + "\t" + "Same ids for copied modifiers" + "\t" + modifier_item.getString("id") + "\t" + Copy_Mod_ID + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                   }
+               }
+             
+            }//End of for
+            if(flag)
+               { 
+                 //Print error message could not find original modifier.
+                  _t++;
+                 _f++; EX += _t + "\t" + "Original Modifier does not exist" + "\t" + "-" + "\t" + "" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+               }
+            
+           //</editor-fold> 
                 
             //<editor-fold defaultstate="collapsed" desc="Pagination">   
             _t++; TWeb.Move_to_Element_By_Path("Paging - Rows per page", "css", "[aria-label='Rows per page:']", "no_jira");
@@ -825,8 +918,12 @@ public class AP3_menu_manager {
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Click 'Prepared'", L1.get(T_Index), "no_jira");
                         if (FAIL) { return;}   
                 } 
-                _t++; Thread.sleep((long) sleep); TWeb.Click_out_of_Element_By_Path("Tax Tags dropdown Close", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",  "Top",4, 4, "no_jira");
-                    if (FAIL) { return;} 
+//                _t++; Thread.sleep((long) sleep); TWeb.Click_out_of_Element_By_Path("Tax Tags dropdown Close", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",  "Top",4, 4, "no_jira");
+//                    if (FAIL) { return;} 
+             
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Description click to close tax tags ", "css", "[aria-label='Description']", "no_jira");
+                if (FAIL) { return;}          
+                    
    
             // ======= Add Modifier >>>
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Modifiers 'Add Group' Click", "xpath", "//*[contains(text(), 'Add modifier group')]", "no_jira"); 
@@ -1104,7 +1201,9 @@ public class AP3_menu_manager {
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'IMPORT'", "xpath", "//*[contains(text(), 'IMPORT')]", "no_jira"); 
                     if (FAIL) { return;}  
                 _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for 'IMPORT' result...", "xpath", "//i[@class='v-icon v-icon--link mdi mdi-delete-forever theme--light']", "no_jira");     
-                    if (!FAIL) {               
+   
+    // If Import menu successful            
+                if (!FAIL) {               
                         Thread.sleep(500); 
                         _t++; Thread.sleep((long) sleep); TWeb.List_L0("Menus + 1 Imported Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", "no_jira");             
                             if (FAIL) { return;}   
@@ -1343,16 +1442,37 @@ public class AP3_menu_manager {
 
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent","no_jira"); 
                      if (FAIL) { return;} 
-                }
+                     _t++; Thread.sleep((long) sleep); TWeb.Navigate_Back("Navigate Back","MM 'Menu' page","MM 'Sector' page", "no_jira"); 
+                    Thread.sleep(500); 
+                    _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for page load...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+                      if (FAIL) { return;}               
+                    //Thread.sleep(1000);
+                    _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for MM 'Sector' page", "xpath", "//div[@class='layout hover align-baseline']", "no_jira"); 
+                     if (FAIL) { return;}     
+                     
+                     
+                } // End of if(fail)
+     //If menu import fails            
+                else 
+                {
+                   _t++;Thread.sleep((long) sleep); TWeb.Refresh("Refreshing page since Edit Menu is active", "no_jira");
+                   Thread.sleep(500); 
+                   _t++; Thread.sleep((long) sleep); TWeb.Navigate_Back("Navigate Back","MM 'Menu' page","MM 'Sector' page", "no_jira"); 
+                   if (FAIL) { return;}
+                   Thread.sleep(500); 
+                   _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for page load...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+                   if (FAIL) { return;} 
+                   _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true,"no_jira"); 
+                   if (FAIL) { return; }   
+                   _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", "no_jira"); 
+                   if (FAIL) { return; }         
+                   _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Find 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", "no_jira"); 
+                   if (FAIL) { return; }     
+                   _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", "no_jira"); 
+                   if (FAIL) { return;}  
+                    
+                }//End of else    
             } 
-
-            _t++; Thread.sleep((long) sleep); TWeb.Navigate_Back("Navigate Back","MM 'Menu' page","MM 'Sector' page", "no_jira"); 
-            Thread.sleep(500); 
-            _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for page load...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
-                if (FAIL) { return;}               
-            //Thread.sleep(1000);
-            _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for MM 'Sector' page", "xpath", "//div[@class='layout hover align-baseline']", "no_jira"); 
-                if (FAIL) { return;}     
 
             EX += " - " + "\t" + " === MM Global Menus Import" + "\t" + " ===== " + "\t" + " == Global Menus Import End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         } else{
