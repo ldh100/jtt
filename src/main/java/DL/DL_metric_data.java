@@ -20,7 +20,8 @@ public class DL_metric_data {
 	    		 metricRef="Compared to last week";	 
 	    	 
 	    	 MetricCardsSelection();
-	     }
+                 
+             }
 	    	
       }
     
@@ -127,8 +128,10 @@ public class DL_metric_data {
             EX += _t + "\t" + NAME + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err + "\t" + " - " + "\t" + " - " + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
 	}
+      
     }
-
+    
+        
     }
 
 

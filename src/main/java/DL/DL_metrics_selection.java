@@ -14,10 +14,10 @@ import static A.A.*;
 public class DL_metrics_selection {
     public static void run() throws InterruptedException { 
         Thread.sleep(6000);     
-        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Filters' label", "Filters", true,"no_jira"); 
-        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Configure Filters' button label", " Configure Filters", true,"no_jira"); 
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Find 'Add metrics...'", "tagName", "img", "alt", "no_jira");        
-
+//        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Filters' label", "Filters", true,"no_jira"); 
+//        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Configure Filters' button label", " Configure Filters", true,"no_jira"); 
+//        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Find 'Add metrics...'", "tagName", "img", "alt", "no_jira");        
+        Thread.sleep(6000);
         _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find Date selection container", "xpath", "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3']", "no_jira"); 
              if (FAIL) { return;}        
         _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Date Items count", e1,"xpath", ".//div[contains(@class, 'MuiGrid-root MuiGrid-item')]", "no_jira");             
@@ -69,7 +69,13 @@ public class DL_metrics_selection {
                     _t++; TWeb.Element_Child_Attribute("Metrics " + (j + 1) + " checkbox disabled", L0.get(j),"tagName", "span", "aria-disabled", "no_jira");
                         if (FAIL) { return;}                        
                 } 
-            }       
+            }   
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Configure Filters button'", "xpath", "(//*[contains(@class, 'MuiButtonBase-root')])[33]", "no_jira"); 
+            if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Configure Filters' label", " Configure Filters", true,"no_jira"); 
+//            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Upload Files click ","xpath", "//button[@class='secondary-button v-btn v-btn--depressed v-btn--flat v-btn--outlined v-btn--rounded theme--light v-size--default primary--text']", "no_jira"); 
+//            if (FAIL) { return;}
+           
             _t++; Thread.sleep((long) sleep); TWeb.Refresh("Refresh/Reload Metrics","no_jira"); 
             
             // Refresh returns to Login ??? ===========================
