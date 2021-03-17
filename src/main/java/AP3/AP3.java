@@ -26,6 +26,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -1613,7 +1614,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             };
             String responseBody = httpclient.execute(httpget, responseHandler);
             JSONObject json = new JSONObject(responseBody);
-            JSONArray Location = json.getJSONArray("locations");
+            JSONArray Loc = json.getJSONArray("locations");
             JSONArray brands = null;
             
             String brand;
@@ -1621,7 +1622,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             String id;
             String unit_id;
             if (Location != null) {
-                for (Object l : Location) {
+                for (Object l : Loc) {
                     brand = "";
                     location = "";
                     id = "";
@@ -1689,9 +1690,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         lblBRANDS.setText("Selected Site Brands (" + DV2.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         
-        if (DV2.getRowCount() > 0) {
-            GetBrandSector();
-        }
+        GetBrandSector();
     }
     private void GetGroups() {  
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -1713,7 +1712,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 400) {
+                if (status >= 200 && status < 300) {
                     HttpEntity entity = response.getEntity();
                     return entity != null ? EntityUtils.toString(entity) : null;
                 } else {
@@ -1729,13 +1728,10 @@ public class AP3 extends javax.swing.JInternalFrame {
                 S_NAME = Sectors.getJSONObject(i).getString("name");
                 cmbGroup.addItem(S_NAME);
                 GROUP_IDS.add(Sectors.getJSONObject(i).getString("id"));
-                if(S_NAME.equals(GROUP)){
-                    T_Index = i;
-                }
             }
         } catch (IOException | JSONException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } finally {
             try {
@@ -1750,16 +1746,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-
-        if(T_Index != -1){
-            cmbGroup.setSelectedIndex(T_Index);
-        } else {
-            if(cmbGroup.getItemCount() > 0){
-                cmbGroup.setSelectedIndex(0);
-            }
-        }
-        Load = false;   
-        GetCompanies();
+        Load = false;  
     }
     private void GetCompanies() {  
         int I = cmbGroup.getSelectedIndex();
@@ -1772,12 +1759,12 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLog.append("- Load Sector/Companies(Menus) ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        if(sw1.isRunning()){
-            sw1.reset();
-        } 
         try { 
             cmbComp.removeAllItems();
             COMP_IDS = new ArrayList<>();
+            if(sw1.isRunning()){
+                sw1.reset();
+            }
             sw1.start();        
      
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 
@@ -1799,10 +1786,9 @@ public class AP3 extends javax.swing.JInternalFrame {
             T_Index = -1;
             for (int i = 0; i < Sectors.length(); i++) {
                 S_NAME = Sectors.getJSONObject(i).getString("name");
-                cmbComp.addItem(S_NAME);
-                COMP_IDS.add(Sectors.getJSONObject(i).getString("id"));
-                if(S_NAME.equals(GL_MENU)){
-                    T_Index = i;
+                if(!S_NAME.isEmpty()) {
+                    cmbComp.addItem(S_NAME);
+                    COMP_IDS.add(Sectors.getJSONObject(i).getString("id"));
                 }
             }
         } catch (IOException | JSONException ex) {
@@ -1813,8 +1799,8 @@ public class AP3 extends javax.swing.JInternalFrame {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());   
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());    
                 this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             }
         } 
@@ -1822,34 +1808,27 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-        
-        for (int i = 0; i < COMP_IDS.size(); i++) {
-            if(COMP_IDS.get(i).equals(CompanyID)){
-                T_Index = i;
-            }
-        } 
-
-        if(T_Index != -1){
-            cmbComp.setSelectedIndex(T_Index);
-        }else{
-            if(cmbComp.getItemCount() > 0){
-                cmbComp.setSelectedIndex(0);
-            }
-        }
     }
-    private void GetBrandSector() {                                 
-        txtLog.append("- GetBrand Sector/Company ..." + "\r\n");
+    private void GetBrandSector() {  
+        txtLog.append("- Get Brand's Group/Sector" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        if(DV2.getRowCount()< 1){
+            txtLog.append("==== No Brands" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            return;
+        }
+        BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
         GroupID = "";
         CompanyID = "";
+        int GroupIndex = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        if(sw1.isRunning()){
-            sw1.reset();
-        }  
         try { 
+            if(sw1.isRunning()){
+                sw1.reset();
+            }
             sw1.start();        
-            BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));     
+     
             HttpGet httpget = new HttpGet(BaseAPI + "/location/brand/" + BrandID + "?extended=true&nocache=1"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -1862,13 +1841,14 @@ public class AP3 extends javax.swing.JInternalFrame {
                     throw new ClientProtocolException("Response: " + status + " - " + Msg);
                 }
             };
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);        
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));        
             if(json.has("sector")){
                 GroupID = json.getString("sector");
-                for (int i = 0; i < GROUP_IDS.size(); i++) {
-                    if(GROUP_IDS.get(i).equals(GroupID)){
-                        T_Index = i;
+                if(!GroupID.isEmpty()){
+                    for (int i = 0; i < GROUP_IDS.size(); i++) {
+                        if(GROUP_IDS.get(i).equals(GroupID)){
+                            GroupIndex = i;
+                        }
                     }
                 }   
             } else{
@@ -1889,26 +1869,51 @@ public class AP3 extends javax.swing.JInternalFrame {
             try {
                 httpclient.close();
             } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());   
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                 this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             }
         } 
-
         txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset();
+        sw1.reset(); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));       
         
         if(!GroupID.equals("")){
-            cmbGroup.setSelectedIndex(T_Index);
+            cmbGroup.setSelectedIndex(GroupIndex);
         }else{
             if(cmbGroup.getItemCount() > 0){
                 cmbGroup.setSelectedIndex(0);
             }
         }
+        GetCompanies();    // Load Brans Companies List after Brand's Gropu/Sector selected
+        GetBrandCompany(); // after Brand's Gropu/Sector selected
     } 
-       
+    private void GetBrandCompany(){ // after Brand's Group/Sector slected
+        txtLog.append("- Get Brand's Company/Clobal Menu" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        int CompanyIndex = -1;
+        try{
+        if(!CompanyID.isEmpty()){
+                for (int i = 0; i < COMP_IDS.size(); i++) {
+                    if(COMP_IDS.get(i).equals(CompanyID)){
+                        CompanyIndex = i;
+                    }
+                }
+            }  
+            if(!CompanyID.equals("")){
+                cmbComp.setSelectedIndex(CompanyIndex);
+            }else{
+                if(cmbComp.getItemCount() > 0){
+                    cmbComp.setSelectedIndex(0);
+                }
+            }
+        } catch (Exception ex) {
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        }
+    }
+    
     private void Report(boolean Open_File){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         Report_File = "";
