@@ -4,13 +4,13 @@
  * and open the template in the editor.
  */
 package Android;
-import static Android.An_Mob.*;
+//import static Android.An_Mob.*;
 /**
  *
  * @author Oleg.Spozito
  */
-public class An_bolter {
-    public static void run() throws InterruptedException {   
+public class An_bolter extends Android.An_Mob {
+    protected void run() throws InterruptedException {   
 //        Thread.sleep(500);
 //        _t++; Thread.sleep((long) sleep); Element_E1_Find("Is it Splash Screen/Logo?", "id", "splashScreenLogo", "no_jira");             
 //            //if (FAIL) { return;}        // "id", "packagename:id/splashScreenLogo",          
@@ -47,6 +47,8 @@ public class An_bolter {
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); Element_By_Path_Text("Get 'About' > Version", "id", "appVersion","no_jira");             
             if (FAIL) { return;}  
+            appVersion = t;
+            
         _t++; Thread.sleep((long) sleep); Element_By_Path_Click("Click 'Log out'", "id", "nav_logout", "no_jira");             
             if (FAIL) { return;} 
     }

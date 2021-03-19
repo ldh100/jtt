@@ -89,15 +89,15 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="cmbGroup" alignment="1" min="-2" pref="212" max="-2" attributes="0"/>
-                      <Component id="lblSITES8" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                      <Component id="lblSITES8" min="-2" pref="72" max="-2" attributes="0"/>
+                      <Component id="txtSector" min="-2" pref="169" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="cmbComp" min="-2" pref="184" max="-2" attributes="0"/>
-                      <Component id="lblSITES12" min="-2" pref="143" max="-2" attributes="0"/>
+                      <Component id="txtComp" min="-2" pref="169" max="-2" attributes="0"/>
+                      <Component id="lblSITES12" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -232,10 +232,10 @@
                       <Component id="lblSITES8" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
                       <Component id="lblSITES12" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="cmbGroup" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="cmbComp" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="txtComp" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtSector" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -454,22 +454,6 @@
             <Property name="alignmentX" type="float" value="0.5"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cmbGroup">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="11" style="0"/>
-            </Property>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbGroupItemStateChanged"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JLabel" name="lblSITES12">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -479,19 +463,6 @@
             <Property name="text" type="java.lang.String" value="Company/Global Menu:"/>
             <Property name="alignmentX" type="float" value="0.5"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="cmbComp">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="11" style="0"/>
-            </Property>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="_sales_analytics">
           <Properties>
@@ -531,6 +502,34 @@
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="&gt; Import DH Menu Id:"/>
             <Property name="alignmentX" type="float" value="0.5"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtComp">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
+            <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtSector">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
+            <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
           </Properties>
         </Component>
       </SubComponents>
@@ -755,7 +754,6 @@
               <Font name="Monospaced" size="12" style="0"/>
             </Property>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="Start &gt;"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Text Cursor"/>
             </Property>

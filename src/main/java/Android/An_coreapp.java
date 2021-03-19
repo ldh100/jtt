@@ -4,13 +4,13 @@
  * and open the template in the editor.
  */
 package Android;
-import static Android.An_Mob.*;
+//import static Android.An_Mob.*;
 /**
  *
  * @author Oleg.Spozito
  */
-public class An_coreapp {
-    public static void run() throws InterruptedException {     
+public class An_coreapp extends Android.An_Mob {
+    protected void run() throws InterruptedException {     
 //        _t++; Thread.sleep((long) sleep); ResetApp("Reset App", "no_jira");             
         _t++; Thread.sleep((long) sleep); Wait_For_Element_By_Path_InVisibility("Wait for Splash screen", "id", "splashScreenLogo", "no_jira");             
             if (FAIL) { return;} 
@@ -18,24 +18,24 @@ public class An_coreapp {
         _t++; Thread.sleep((long) sleep); Wait_For_Element_By_Path_Presence("Wait for 'Join/Login' screen", "id", "join_button", "no_jira");             
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); Element_By_Path_Text("Get 'Join <App>' button text", "id", "join_button", "no_jira");             
-            if (FAIL) { return;} 
+            //if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); Element_By_Path_Text("Get 'Alreay have an account'", "id", "already_have_account_text_view", "no_jira");             
-            if (FAIL) { return;}    
+            //if (FAIL) { return;}    
         _t++; Thread.sleep((long) sleep); Element_By_Path_Text("Get 'Explore <App>' text", "id", "explore_button", "no_jira");             
-            if (FAIL) { return;}  
+            //if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); Element_By_Path_Attribute("Get 'Explore' Content Description", "id", "explore_button_container", "contentDescription","no_jira");             
-            if (FAIL) { return;}  
+            //if (FAIL) { return;}  
 
         _t++; Thread.sleep((long) sleep); Element_By_Path_Text("Get 'Log in' text", "id", "login_text", "no_jira");             
-            if (FAIL) { return;}             
+            //if (FAIL) { return;}             
         _t++; Thread.sleep((long) sleep); Element_By_Path_Click("Click 'Log in'", "id", "login_text", "no_jira");             
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); Element_By_Path_Text("Get 'Welcome...' text", "id", "toolbar_title", "no_jira");             
-            if (FAIL) { return;}     
+            //if (FAIL) { return;}     
         _t++; Thread.sleep((long) sleep); Element_By_Path_Text("Get 'Welcome...' subtext", "id", "subtext", "no_jira");             
-            if (FAIL) { return;}  
+            //if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); Element_By_Path_Text("Get 'Forgot PW?' button text", "id", "btn_forgotPassword", "no_jira");             
-            if (FAIL) { return;} 
+            //if (FAIL) { return;} 
              
         _t++; Thread.sleep((long) sleep); Element_By_Path_Click("Click 'Email' input", "id", "textInputEditText_login_email_address", "no_jira");             
             if (FAIL) { return;}            
@@ -89,7 +89,8 @@ public class An_coreapp {
         _t++; Thread.sleep((long) sleep); Wait_For_Element_By_Path_Presence("Wait for 'Account' screen", "id", "appVersion", "no_jira");             
             if (FAIL) { return;}             
         _t++; Thread.sleep((long) sleep); Element_By_Path_Text("Get 'About' > Version", "id", "appVersion","no_jira");             
-            if (FAIL) { return;}  
+            if (FAIL) { return;} 
+            appVersion = t;
         _t++; Thread.sleep((long) sleep); Element_By_Path_Click("Click 'Log out'", "id", "profile_logout", "no_jira");             
             if (FAIL) { return;}              
     }

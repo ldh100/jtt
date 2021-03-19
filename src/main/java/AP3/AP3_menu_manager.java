@@ -46,9 +46,9 @@ public class AP3_menu_manager {
         // =========================================== Group Selection
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open 'Group' dropdown", "css", "[role='combobox']", "no_jira");
             if (FAIL) return;   
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Sector Name", "css", "[role='combobox']", GROUP, false, "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Sector Name", "css", "[role='combobox']", SECTOR, false, "no_jira");
                 if (FAIL) { return;}    
-            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Sector Name Click", "xpath", "//*[contains(text(), '" + GROUP + "')]", "no_jira"); 
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Sector Name Click", "xpath", "//*[contains(text(), '" + SECTOR + "')]", "no_jira"); 
                 if (FAIL) { return;}             
 //        _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Group' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active v-autocomplete__content')]", "no_jira");
 //            if (FAIL) { return;} 
@@ -76,15 +76,15 @@ public class AP3_menu_manager {
 //            if(ALL_DATA){
 //                _t++; TWeb.Element_Text("Group Name", L1, "L1", j, "no_jira");  
 //            }
-//            if(L1.get(j).getText().trim().equals(GROUP)){
+//            if(L1.get(j).getText().trim().equals(SECTOR)){
 //                T_Index = j;
 //            }
 //        }
 //        if(T_Index > -1){
 //            //((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", L1.get(T_Index));  
-//            _t++; Thread.sleep((long) sleep); TWeb.Scroll_to_Element("Scroll to Group " + GROUP, L1.get(T_Index), "no_jira");
+//            _t++; Thread.sleep((long) sleep); TWeb.Scroll_to_Element("Scroll to Group " + SECTOR, L1.get(T_Index), "no_jira");
 //                if (FAIL) { return;}
-////            _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select Group " + GROUP, L1, "L1", T_Index, "no_jira");
+////            _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select Group " + SECTOR, L1, "L1", T_Index, "no_jira");
 //                if (FAIL) { return;} 
 //        } else{
 //            return;
@@ -100,7 +100,7 @@ public class AP3_menu_manager {
         
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", "no_jira"); 
             if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); TWeb.Page_URL("Menu > " + GROUP + " page URL", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); TWeb.Page_URL("Menu > " + SECTOR + " page URL", "no_jira"); 
             if (FAIL) { return;}
         _t++; TWeb.Find_Text("Button 'Add Global Menu' text", "ADD GLOBAL MENU", true,"no_jira");   
             if (FAIL) { return;} 

@@ -106,13 +106,13 @@ public class AP3 extends javax.swing.JInternalFrame {
         _smart_analytics = new javax.swing.JCheckBox();
         _group_management = new javax.swing.JCheckBox();
         lblSITES8 = new javax.swing.JLabel();
-        cmbGroup = new javax.swing.JComboBox<>();
         lblSITES12 = new javax.swing.JLabel();
-        cmbComp = new javax.swing.JComboBox<>();
         _sales_analytics = new javax.swing.JCheckBox();
         _notifications = new javax.swing.JCheckBox();
         txtDH_Id = new javax.swing.JTextField();
         lblSITES15 = new javax.swing.JLabel();
+        txtComp = new javax.swing.JTextField();
+        txtSector = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         DV1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -318,19 +318,10 @@ public class AP3 extends javax.swing.JInternalFrame {
         lblSITES8.setText("Group/Sector:");
         lblSITES8.setAlignmentX(0.5F);
 
-        cmbGroup.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        cmbGroup.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbGroupItemStateChanged(evt);
-            }
-        });
-
         lblSITES12.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES12.setText("Company/Global Menu:");
         lblSITES12.setAlignmentX(0.5F);
-
-        cmbComp.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
 
         _sales_analytics.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _sales_analytics.setText("Sales Analytics");
@@ -352,6 +343,16 @@ public class AP3 extends javax.swing.JInternalFrame {
         lblSITES15.setText("> Import DH Menu Id:");
         lblSITES15.setAlignmentX(0.5F);
 
+        txtComp.setEditable(false);
+        txtComp.setBackground(new java.awt.Color(255, 255, 255));
+        txtComp.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtComp.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
+        txtSector.setEditable(false);
+        txtSector.setBackground(new java.awt.Color(255, 255, 255));
+        txtSector.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtSector.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -359,13 +360,13 @@ public class AP3 extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbGroup, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSector, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbComp, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtComp, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
+                .addGap(22, 22, 22))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -469,10 +470,10 @@ public class AP3 extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSITES12))
-                .addGap(0, 0, 0)
+                .addGap(1, 1, 1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbComp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtComp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -599,7 +600,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtLog.setColumns(20);
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         txtLog.setRows(5);
-        txtLog.setText("Start >");
         txtLog.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtLog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
@@ -729,15 +729,15 @@ public class AP3 extends javax.swing.JInternalFrame {
         getContentPane().add(txtIM_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 332, 184, -1));
 
         txtADMIN_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtADMIN_PW.setText("Passworwd");
+        txtADMIN_PW.setText("Password1");
         getContentPane().add(txtADMIN_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 284, 72, -1));
 
         txtSM_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtSM_PW.setText("Passworwd");
+        txtSM_PW.setText("Password1");
         getContentPane().add(txtSM_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 332, 72, -1));
 
         txtIM_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtIM_PW.setText("Passworwd");
+        txtIM_PW.setText("Password1");
         getContentPane().add(txtIM_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 308, 72, -1));
 
         lblSITES1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -849,11 +849,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         CONFIG = false;  
         this.setTitle("AP3 Automation Manager");
     }
-    private void cmbGroupItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbGroupItemStateChanged
-        if(!Load && evt.getStateChange() == 1) {
-            GetCompanies();
-        }        
-    }//GEN-LAST:event_cmbGroupItemStateChanged
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         F_COUNT--;
         if(BW1 != null && !BW1.isCancelled()) BW1.cancel(true);
@@ -957,8 +952,10 @@ public class AP3 extends javax.swing.JInternalFrame {
             BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
         }
 
-        GROUP = cmbGroup.getSelectedItem().toString();
-        GL_MENU = cmbComp.getSelectedItem().toString();
+        SECTOR = txtSector.getText();
+        GL_MENU = txtComp.getText();
+        //GroupID = "";
+        //CompanyID = "";
 
         if(_headless.isSelected()) {
             txtLog.append("=== Headless mode is selected - Browser is hidden");
@@ -1012,7 +1009,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             Load = false;
         }
         app = cmbApp.getSelectedItem().toString();
-        GetGroups(); // load 1st to be ready for selection by BrandSector
+        GetSectors(); // load 1st to be ready for selection by BrandSector
         GetSites();
     }
     private boolean Driver() {
@@ -1566,7 +1563,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                         break;
                     }
                 }
-            } //
+            } 
 //            DV1.repaint();
             SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
             SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
@@ -1692,12 +1689,13 @@ public class AP3 extends javax.swing.JInternalFrame {
         
         GetBrandSector();
     }
-    private void GetGroups() {  
+
+    private void GetSectors() {  
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Groups/Sector ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        cmbGroup.removeAllItems();
-        GROUP_IDS = new ArrayList<>();
+        SECTORS = new ArrayList<>();
+        SECTOR_IDS = new ArrayList<>();
         
         Load = true;
         if(sw1.isRunning()){
@@ -1722,12 +1720,9 @@ public class AP3 extends javax.swing.JInternalFrame {
             String responseBody = httpclient.execute(httpget, responseHandler);
             JSONObject json = new JSONObject(responseBody);
             JSONArray Sectors = json.getJSONArray("sectors");           
-            String S_NAME = "";
-            T_Index = -1;
             for (int i = 0; i < Sectors.length(); i++) {
-                S_NAME = Sectors.getJSONObject(i).getString("name");
-                cmbGroup.addItem(S_NAME);
-                GROUP_IDS.add(Sectors.getJSONObject(i).getString("id"));
+                SECTORS.add(Sectors.getJSONObject(i).getString("name"));
+                SECTOR_IDS.add(Sectors.getJSONObject(i).getString("id"));
             }
         } catch (IOException | JSONException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
@@ -1748,67 +1743,6 @@ public class AP3 extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         Load = false;  
     }
-    private void GetCompanies() {  
-        int I = cmbGroup.getSelectedIndex();
-        if(I < 0){ // =========== DEBUG
-            txtLog.append("- Load Sector/Companies(Menus) ERROR: cmbGROUP.getSelectedIndex() < 0" + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            return;
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("- Load Sector/Companies(Menus) ..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        try { 
-            cmbComp.removeAllItems();
-            COMP_IDS = new ArrayList<>();
-            if(sw1.isRunning()){
-                sw1.reset();
-            }
-            sw1.start();        
-     
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                }
-            };
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
-            JSONArray Sectors = json.getJSONArray("companies");           
-            String S_NAME = "";
-            T_Index = -1;
-            for (int i = 0; i < Sectors.length(); i++) {
-                S_NAME = Sectors.getJSONObject(i).getString("name");
-                if(!S_NAME.isEmpty()) {
-                    cmbComp.addItem(S_NAME);
-                    COMP_IDS.add(Sectors.getJSONObject(i).getString("id"));
-                }
-            }
-        } catch (IOException | JSONException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        } finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());    
-                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            }
-        } 
-        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset();
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-    }
     private void GetBrandSector() {  
         txtLog.append("- Get Brand's Group/Sector" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1818,9 +1752,9 @@ public class AP3 extends javax.swing.JInternalFrame {
             return;
         }
         BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
-        GroupID = "";
+        SectorID = "";
         CompanyID = "";
-        int GroupIndex = -1;
+        int SectorIndex = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try { 
@@ -1843,11 +1777,11 @@ public class AP3 extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));        
             if(json.has("sector")){
-                GroupID = json.getString("sector");
-                if(!GroupID.isEmpty()){
-                    for (int i = 0; i < GROUP_IDS.size(); i++) {
-                        if(GROUP_IDS.get(i).equals(GroupID)){
-                            GroupIndex = i;
+                SectorID = json.getString("sector");
+                if(!SectorID.isEmpty()){
+                    for (int i = 0; i < SECTOR_IDS.size(); i++) {
+                        if(SECTOR_IDS.get(i).equals(SectorID)){
+                            SectorIndex = i;
                         }
                     }
                 }   
@@ -1879,38 +1813,89 @@ public class AP3 extends javax.swing.JInternalFrame {
         sw1.reset(); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));       
         
-        if(!GroupID.equals("")){
-            cmbGroup.setSelectedIndex(GroupIndex);
+        if(!SectorID.equals("")){
+            txtSector.setText(SECTORS.get(SectorIndex));
         }else{
-            if(cmbGroup.getItemCount() > 0){
-                cmbGroup.setSelectedIndex(0);
-            }
+            txtSector.setText("Not Found");
+            txtComp.setText("Not Found");
         }
-        GetCompanies();    // Load Brans Companies List after Brand's Gropu/Sector selected
-        GetBrandCompany(); // after Brand's Gropu/Sector selected
+        if(!"".equals(CompanyID)){
+            GetCompanies();    // Load Brans Companies List after Brand's Gropu/Sector selected
+            GetBrandCompany(); // after Brand's Gropu/Sector selected            
+        }
     } 
+ 
+    private void GetCompanies() {  
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("- Load Sector/Companies(Menus) ..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        try { 
+            COMPANIES = new ArrayList<>();
+            COMP_IDS = new ArrayList<>();
+            if(sw1.isRunning()){
+                sw1.reset();
+            }
+            sw1.start();        
+     
+            HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + SectorID + "?expanded=false");
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                String Msg = response.getStatusLine().getReasonPhrase();
+                if (status >= 200 && status < 300) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
+                }
+            };
+            String responseBody = httpclient.execute(httpget, responseHandler);
+            JSONObject json = new JSONObject(responseBody);
+            JSONArray Coimpanies = json.getJSONArray("companies");           
+            String C_NAME = "";
+            for (int i = 0; i < Coimpanies.length(); i++) {
+                C_NAME = Coimpanies.getJSONObject(i).getString("name");
+                if(!C_NAME.isEmpty()) {
+                    COMPANIES.add(C_NAME);
+                    COMP_IDS.add(Coimpanies.getJSONObject(i).getString("id"));
+                }
+            }
+        } catch (IOException | JSONException ex) {
+            txtLog.append("- GetCompanies: " + ex.getMessage() + "\r\n");  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        } finally {
+            try {
+                httpclient.close();
+            } catch (IOException ex) {
+                txtLog.append("- GetCompanies: " + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());    
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            }
+        } 
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+    }
     private void GetBrandCompany(){ // after Brand's Group/Sector slected
         txtLog.append("- Get Brand's Company/Clobal Menu" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         int CompanyIndex = -1;
-        try{
         if(!CompanyID.isEmpty()){
-                for (int i = 0; i < COMP_IDS.size(); i++) {
-                    if(COMP_IDS.get(i).equals(CompanyID)){
-                        CompanyIndex = i;
-                    }
-                }
-            }  
-            if(!CompanyID.equals("")){
-                cmbComp.setSelectedIndex(CompanyIndex);
-            }else{
-                if(cmbComp.getItemCount() > 0){
-                    cmbComp.setSelectedIndex(0);
+            for (int i = 0; i < COMP_IDS.size(); i++) {
+                if(COMP_IDS.get(i).equals(CompanyID)){
+                    CompanyIndex = i;
                 }
             }
-        } catch (Exception ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        }  
+        if(!CompanyID.equals("")){
+            txtComp.setText(COMPANIES.get(CompanyIndex));
+        }else{
+            txtComp.setText("Not Found");
+            txtLog.append("- Company ID not Found in this Brand API" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }
     
@@ -2088,7 +2073,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("_slack:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _slack.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_headless:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _headless.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
 
-                c = C.substring(C.indexOf("GROUP:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GROUP = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("GROUP:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SECTOR = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("GL_MENU:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GL_MENU = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
                 c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
@@ -2153,8 +2138,8 @@ public class AP3 extends javax.swing.JInternalFrame {
             
             C += "cmbBROW: " + cmbBrow.getSelectedItem().toString() + "\r\n";
             C += "url: " + url + "\r\n";
-            C += "GROUP: " + cmbGroup.getSelectedItem().toString() + "\r\n";
-            C += "GL_MENU: " + cmbComp.getSelectedItem().toString() + "\r\n";
+            C += "GROUP: " + txtSector.getText() + "\r\n";
+            C += "GL_MENU: " + txtComp.getText() + "\r\n";
             C += "SITE: " + _S + "\r\n";
             C += "BRAND: " + _B + "\r\n";
             C += "COUNTRY: " + COUNTRY + "\r\n";
@@ -2246,7 +2231,10 @@ public class AP3 extends javax.swing.JInternalFrame {
     private String C = "";
     private int wdLastRow = -1; 
     private int d2LastRow = -1; 
-    private List<String> GROUP_IDS;
+    
+    private List<String> SECTORS;
+    private List<String> SECTOR_IDS;
+    private List<String> COMPANIES;
     private List<String> COMP_IDS;
 
     private String SCOPE;
@@ -2284,11 +2272,11 @@ public class AP3 extends javax.swing.JInternalFrame {
     public static String COUNTRY = "COUNTRY";
     public static String SITE = "";
     public static String SiteID = "";
-    public static String GROUP = "";
+    public static String SECTOR = "";
     public static String BRAND = "";
     public static String BrandID = "";
     public static String Location = "";
-    public static String GroupID = "";
+    public static String SectorID = "";
     public static String CompanyID = "";
     public static String DH_Menu_ID = "";    
     public static String GL_MENU = "TIM HORTONS";
@@ -2328,9 +2316,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSave_Opt;
     private javax.swing.JComboBox<String> cmbApp;
     private javax.swing.JComboBox<String> cmbBrow;
-    private javax.swing.JComboBox<String> cmbComp;
     private javax.swing.JComboBox<String> cmbEnv;
-    private javax.swing.JComboBox<String> cmbGroup;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2359,12 +2345,14 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JSpinner nWaitLoad;
     private javax.swing.JTextField txtADMIN_ID;
     private javax.swing.JTextField txtADMIN_PW;
+    private javax.swing.JTextField txtComp;
     private javax.swing.JTextField txtDH_Id;
     private javax.swing.JTextField txtIM_ID;
     private javax.swing.JTextField txtIM_PW;
     private javax.swing.JTextArea txtLog;
     private javax.swing.JTextField txtSM_ID;
     private javax.swing.JTextField txtSM_PW;
+    private javax.swing.JTextField txtSector;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>
 }

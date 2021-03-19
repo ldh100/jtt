@@ -214,8 +214,8 @@ public class AP3_group_management {
             if (FAIL) { return;} 
             
         // Search >>>
-        String G = GROUP.substring(0, GROUP.indexOf("/"));
-        String C = GROUP.substring(GROUP.indexOf("/") + 1);
+        String G = SECTOR.substring(0, SECTOR.indexOf("/"));
+        String C = SECTOR.substring(SECTOR.indexOf("/") + 1);
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Fund 'Search...' text", "Search all Groups", true,"no_jira");   
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Search Groups Click", "xpath", "//label[contains(text(), 'Search all Groups')]", "no_jira"); 
@@ -232,7 +232,7 @@ public class AP3_group_management {
                 if("CA".equals(C) && t.contains("Canada") && t.contains(G)) { T_Index = i;}
                 if("US".equals(C) && t.contains("United States") && t.contains(G)) { T_Index = i;}
             } 
-        _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Click " + GROUP , L0.get(T_Index), "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Click " + SECTOR , L0.get(T_Index), "no_jira");
             if (FAIL) { return;}  
         Thread.sleep(500);          
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 

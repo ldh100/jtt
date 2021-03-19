@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package A;
-import static A.A.WsOS;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -65,10 +64,10 @@ public class Func {
             if(!"".equals(Cwd)){
                 b.directory(new File(Cwd));                 
             }
-            if(WsOS.toLowerCase().contains("windows")){
+            if(A.WsOS.toLowerCase().contains("windows")){
                 b.command("cmd.exe", "/c", cmd);            
             }
-            if(WsOS.toLowerCase().contains("mac")){
+            if(A.WsOS.toLowerCase().contains("mac")){
 //                String[] ios_cmd = cmd.split(" ");
 //                b.command(ios_cmd); 
                 b.command("sh", "-c", cmd);

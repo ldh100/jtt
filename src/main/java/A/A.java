@@ -5,17 +5,6 @@
  */
 
 package A;
-import Android.An_GUI;
-import AP3.AP3;
-import API.API;
-import Reports.W_Report;
-import DL.DL;
-import FW.FW;
-import WO.WO;
-import JIRA.JIRA;
-import Orders.Orders;
-import Station.Station;
-import Jobs.Jobs;
 import java.awt.Cursor;
 import java.beans.PropertyVetoException;
 import java.io.File;
@@ -256,366 +245,6 @@ public class A extends javax.swing.JFrame {
             Menu_AP3.setVisible(true);
         }
     }//GEN-LAST:event_Menu_AP3MouseClicked
- 
-    private void Open_REPORT() { 
-        final JInternalFrame[] frames = DesktopPane.getAllFrames();
-        for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("Report")) {
-                try {
-                    frame.setSelected(true);
-                    if (frame.isIcon()) {
-                        frame.setIcon(false);
-                    }
-                    frame.setSelected(true);
-                }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                frame.requestFocus();
-                frame.toFront();
-                return;
-            }
-        }
-        W_Report wr = new W_Report();
-        DesktopPane.add(wr);
-        int X = this.DesktopPane.getWidth();
-        int X1 = wr.getWidth();
-        int Y = this.DesktopPane.getHeight();
-        int Y1 = wr.getHeight();
-        wr.setLocation(X - X1, Y - Y1);
-        wr.setVisible(true);
-        wr.show();
-    }
-    private void Open_AP3() throws PropertyVetoException{
-        final JInternalFrame[] frames = DesktopPane.getAllFrames();
-        for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("AP3")) {
-                try {
-                    frame.setSelected(true);
-                    if (frame.isIcon()) {
-                        frame.setIcon(false);
-                    }
-                    frame.setSelected(true);
-                }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                frame.requestFocus();
-                frame.toFront();
-                return;
-            }
-        } 
-        AP3 ap3 = new AP3();
-        DesktopPane.add(ap3);
-        int Y;
-        int X;
-        if(F_COUNT > 4) {
-            Y = F_COUNT;
-            X = F_COUNT - 5;
-        }else{
-            Y = X = F_COUNT;
-        }
-        ap3.setLocation(X*20, Y*20);
-        ap3.show();
-        ap3.setSelected(true);
-        F_COUNT++;     
-    }
-    private void Open_API() throws PropertyVetoException{
-        final JInternalFrame[] frames = DesktopPane.getAllFrames();
-        for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("API")) {
-                try {
-                    frame.setSelected(true);
-                    if (frame.isIcon()) {
-                        frame.setIcon(false);
-                    }
-                    frame.setSelected(true);
-                }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                frame.requestFocus();
-                frame.toFront();
-                return;
-            }
-        } 
-        API api = new API();
-        DesktopPane.add(api);
-        int Y;
-        int X;
-        if(F_COUNT > 4) {
-            Y = F_COUNT;
-            X = F_COUNT - 5;
-        }else{
-            Y = X = F_COUNT;
-        }
-        api.setLocation(X*20, Y*20);
-        api.show();
-        api.setSelected(true);
-        F_COUNT++;     //
-    }    
-    private void Open_WO() throws PropertyVetoException {                                    
-        final JInternalFrame[] frames = DesktopPane.getAllFrames();
-        for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("WO")) {
-                try {
-                    frame.setSelected(true);
-                    if (frame.isIcon()) {
-                        frame.setIcon(false);
-                    }
-                    frame.setSelected(true);
-                }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                frame.requestFocus();
-                frame.toFront();
-                return;
-            }
-        } 
-        WO wo = new WO();
-        this.DesktopPane.add(wo);
-        int Y;
-        int X;
-        if(F_COUNT > 4) {
-            Y = F_COUNT;
-            X = F_COUNT - 5;
-        }else{
-            Y = X = F_COUNT;
-        }
-        wo.setLocation(X*20, Y*20);
-        wo.show();
-        wo.setSelected(true);
-        F_COUNT++;  
-    }
-    private void Open_FW() throws PropertyVetoException {
-        final JInternalFrame[] frames = DesktopPane.getAllFrames();
-        for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("FW")) {
-                try {
-                    frame.setSelected(true);
-                    if (frame.isIcon()) {
-                        frame.setIcon(false);
-                    }
-                    frame.setSelected(true);
-                }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                frame.requestFocus();
-                frame.toFront();
-                return;
-            }
-        } 
-        FW fw = new FW();
-        this.DesktopPane.add(fw);
-        int Y;
-        int X;
-        if(F_COUNT > 4) {
-            Y = F_COUNT;
-            X = F_COUNT - 5;
-        }else{
-            Y = X = F_COUNT;
-        }
-        fw.setLocation(X*20, Y*20);
-        fw.show();
-        fw.setSelected(true);
-        F_COUNT++;  
-    }
-    private void Open_DL() throws PropertyVetoException {
-        final JInternalFrame[] frames = DesktopPane.getAllFrames();
-        for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("DL")) {
-                try {
-                    frame.setSelected(true);
-                    if (frame.isIcon()) {
-                        frame.setIcon(false);
-                    }
-                    frame.setSelected(true);
-                }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                frame.requestFocus();
-                frame.toFront();
-                return;
-            }
-        } 
-        DL dl = new DL();
-        this.DesktopPane.add(dl);
-        int Y;
-        int X;
-        if(F_COUNT > 4) {
-            Y = F_COUNT;
-            X = F_COUNT - 5;
-        }else{
-            Y = X = F_COUNT;
-        }
-        dl.setLocation(X*20, Y*20);
-        dl.show();
-        dl.setSelected(true);
-        F_COUNT++;  
-    }
-    private void Open_Station() throws PropertyVetoException {
-        final JInternalFrame[] frames = DesktopPane.getAllFrames();
-        for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("Station")) {
-                try {
-                    frame.setSelected(true);
-                    if (frame.isIcon()) {
-                        frame.setIcon(false);
-                    }
-                    frame.setSelected(true);
-                }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                frame.requestFocus();
-                frame.toFront();
-                return;
-            }
-        } 
-        Station dl = new Station();
-        this.DesktopPane.add(dl);
-        int Y;
-        int X;
-        if(F_COUNT > 4) {
-            Y = F_COUNT;
-            X = F_COUNT - 5;
-        }else{
-            Y = X = F_COUNT;
-        }
-        dl.setLocation(X*20, Y*20);
-        dl.show();
-        dl.setSelected(true);
-        F_COUNT++;  
-    }
-    private void Open_OR() throws PropertyVetoException {
-        final JInternalFrame[] frames = DesktopPane.getAllFrames();
-        for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("OR")) {
-                try {
-                    frame.setSelected(true);
-                    if (frame.isIcon()) {
-                        frame.setIcon(false);
-                    }
-                    frame.setSelected(true);
-                }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                frame.requestFocus();
-                frame.toFront();
-                return;
-            }
-        } 
-        Orders or = new Orders();
-        this.DesktopPane.add(or);
-        int Y;
-        int X;
-        if(F_COUNT > 4) {
-            Y = F_COUNT;
-            X = F_COUNT - 5;
-        }else{
-            Y = X = F_COUNT;
-        }
-        or.setLocation(X*20, Y*20);
-        or.show();
-        or.setSelected(true);
-        F_COUNT++;  
-    }
-    private void Open_JIRA() throws PropertyVetoException {
-        final JInternalFrame[] frames = DesktopPane.getAllFrames();
-        for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("JIRA")) {
-                try {
-                    frame.setSelected(true);
-                    if (frame.isIcon()) {
-                        frame.setIcon(false);
-                    }
-                    frame.setSelected(true);
-                }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                frame.requestFocus();
-                frame.toFront();
-                return;
-            }
-        } 
-        JIRA jira = new JIRA();
-        this.DesktopPane.add(jira);
-        int Y;
-        int X;
-        if(F_COUNT > 4) {
-            Y = F_COUNT;
-            X = F_COUNT - 5;
-        }else{
-            Y = X = F_COUNT;
-        }
-        jira.setLocation(X*20, Y*20);
-        jira.show();
-        jira.setSelected(true);
-        F_COUNT++;  
-    }
-    private void Open_Android() throws PropertyVetoException {
-        final JInternalFrame[] frames = DesktopPane.getAllFrames();
-        for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("Android")) {
-                try {
-                    frame.setSelected(true);
-                    if (frame.isIcon()) {
-                        frame.setIcon(false);
-                    }
-                    frame.setSelected(true);
-                }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                frame.requestFocus();
-                frame.toFront();
-                return;
-            }
-        } 
-        An_GUI an = new An_GUI();
-        this.DesktopPane.add(an);
-        int Y;
-        int X;
-        if(F_COUNT > 4) {
-            Y = F_COUNT;
-            X = F_COUNT - 5;
-        }else{
-            Y = X = F_COUNT;
-        }
-        an.setLocation(X*20, Y*20);
-        an.show();
-        an.setSelected(true);
-        F_COUNT++;  
-    }
-    private void Open_JOBS() throws PropertyVetoException {
-        final JInternalFrame[] frames = DesktopPane.getAllFrames();
-        for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("JOBS")) {
-                try {
-                    frame.setSelected(true);
-                    if (frame.isIcon()) {
-                        frame.setIcon(false);
-                    }
-                    frame.setSelected(true);
-                }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                frame.requestFocus();
-                frame.toFront();
-                return;
-            }
-        } 
-        Jobs jobs = new Jobs();
-        this.DesktopPane.add(jobs);
-        int Y;
-        int X;
-        if(F_COUNT > 4) {
-            Y = F_COUNT;
-            X = F_COUNT - 5;
-        }else{
-            Y = X = F_COUNT;
-        }
-        jobs.setLocation(X*20, Y*20);
-        jobs.show();
-        jobs.setSelected(true);
-        F_COUNT++;  
-    }
-
     private void Menu_FWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_FWMouseClicked
         if(Menu_FW.isVisible()){
             Menu_FW.setVisible(false);
@@ -658,27 +287,6 @@ public class A extends javax.swing.JFrame {
         MenuReports.setToolTipText("All xTT and JTT reports"); 
         MenuStation.setToolTipText("Site > Brand > Menus(s) difinitions"); 
     }//GEN-LAST:event_formWindowOpened
-
-    private void Register_Login() {     
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                    PreparedStatement _update = conn.prepareStatement("UPDATE users SET " +
-                            "LogIN = 'JTT', " +
-                            "LastL = '" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yy hh:mm a")) + "', " +
-                            "USER_MACHINE = '" + WsID + "', " +
-                            "IP = '" + "Not used" + "' " +
-                            "WHERE User_ID = '" + UserID + "'");
-                    int row = _update.executeUpdate();
-                    //Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Register_Login: " + row + " row updated");
-                } catch (SQLException ex) {                  
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Register_Login > SQL ERROR: " + ex.getMessage(), ex);
-                }
-            }
-        }).start();
-    } 
-
     private void MenuStationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuStationMouseClicked
         if(!MenuStation.isEnabled()){
             return;
@@ -793,7 +401,6 @@ public class A extends javax.swing.JFrame {
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         Menu_JIRA.setEnabled(true); 
     }//GEN-LAST:event_Menu_JIRAMouseClicked
-
     private void Menu_AndroidMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_AndroidMouseClicked
         if(!Menu_Android.isEnabled()){
             return;
@@ -811,7 +418,6 @@ public class A extends javax.swing.JFrame {
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         Menu_Android.setEnabled(true);
     }//GEN-LAST:event_Menu_AndroidMouseClicked
-
     private void Menu_JOBSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_JOBSMouseClicked
         if(!Menu_JOBS.isEnabled()){
             return;
@@ -830,6 +436,365 @@ public class A extends javax.swing.JFrame {
         Menu_JOBS.setEnabled(true);
     }//GEN-LAST:event_Menu_JOBSMouseClicked
 
+    private void Open_Android() throws PropertyVetoException {
+        if(An_F_COUNT > 3){
+            return;
+        }
+        int Y;
+        int X; 
+    
+        if(An_F_COUNT == 0){
+            Android.An_GUI an1 = new Android.An_GUI();
+            this.DesktopPane.add(an1);
+            Y = X = An_F_COUNT;
+            an1.setLocation(X*20, Y*20); an1.show();  an1.setSelected(true);            
+        }
+        if(An_F_COUNT == 1){
+            Android.An_GUI an2 = new Android.An_GUI();
+            this.DesktopPane.add(an2);
+            Y = X = An_F_COUNT;
+            an2.setLocation(X*20, Y*20); an2.show();  an2.setSelected(true);            
+        }
+        if(An_F_COUNT == 2){
+            Android.An_GUI an3 = new Android.An_GUI();
+            this.DesktopPane.add(an3);
+            Y = X = An_F_COUNT;
+            an3.setLocation(X*20, Y*20); an3.show();  an3.setSelected(true);            
+        }        
+        if(An_F_COUNT == 3){
+            Android.An_GUI an4 = new Android.An_GUI();
+            this.DesktopPane.add(an4);
+            Y = X = An_F_COUNT;
+            an4.setLocation(X*20, Y*20); an4.show();  an4.setSelected(true);            
+        }  
+        An_F_COUNT++;   
+    }
+    private void Open_REPORT() { 
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("Report")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        }
+        Reports.W_Report wr = new Reports.W_Report();
+        DesktopPane.add(wr);
+        int X = this.DesktopPane.getWidth();
+        int X1 = wr.getWidth();
+        int Y = this.DesktopPane.getHeight();
+        int Y1 = wr.getHeight();
+        wr.setLocation(X - X1, Y - Y1);
+        wr.setVisible(true);
+        wr.show();
+    }
+    private void Open_AP3() throws PropertyVetoException{
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("AP3")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
+        AP3.AP3 ap3 = new AP3.AP3();
+        DesktopPane.add(ap3);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        ap3.setLocation(X*20, Y*20);
+        ap3.show();
+        ap3.setSelected(true);
+        F_COUNT++;     
+    }
+    private void Open_API() throws PropertyVetoException{
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("API")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
+        API.API api = new API.API();
+        DesktopPane.add(api);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        api.setLocation(X*20, Y*20);
+        api.show();
+        api.setSelected(true);
+        F_COUNT++;     //
+    }    
+    private void Open_WO() throws PropertyVetoException {                                    
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("WO")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
+        WO.WO wo = new WO.WO();
+        this.DesktopPane.add(wo);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        wo.setLocation(X*20, Y*20);
+        wo.show();
+        wo.setSelected(true);
+        F_COUNT++;  
+    }
+    private void Open_FW() throws PropertyVetoException {
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("FW")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
+        FW.FW fw = new FW.FW();
+        this.DesktopPane.add(fw);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        fw.setLocation(X*20, Y*20);
+        fw.show();
+        fw.setSelected(true);
+        F_COUNT++;  
+    }
+    private void Open_DL() throws PropertyVetoException {
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("DL")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
+        DL.DL dl = new DL.DL();
+        this.DesktopPane.add(dl);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        dl.setLocation(X*20, Y*20);
+        dl.show();
+        dl.setSelected(true);
+        F_COUNT++;  
+    }
+    private void Open_Station() throws PropertyVetoException {
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("Station")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
+        Station.Station dl = new Station.Station();
+        this.DesktopPane.add(dl);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        dl.setLocation(X*20, Y*20);
+        dl.show();
+        dl.setSelected(true);
+        F_COUNT++;  
+    }
+    private void Open_OR() throws PropertyVetoException {
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("OR")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
+        Orders.Orders or = new Orders.Orders();
+        this.DesktopPane.add(or);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        or.setLocation(X*20, Y*20);
+        or.show();
+        or.setSelected(true);
+        F_COUNT++;  
+    }
+    private void Open_JIRA() throws PropertyVetoException {
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("JIRA")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
+        JIRA.JIRA jira = new JIRA.JIRA();
+        this.DesktopPane.add(jira);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        jira.setLocation(X*20, Y*20);
+        jira.show();
+        jira.setSelected(true);
+        F_COUNT++;  
+    }
+    private void Open_JOBS() throws PropertyVetoException {
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("JOBS")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
+        Jobs.Jobs jobs = new Jobs.Jobs();
+        this.DesktopPane.add(jobs);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        jobs.setLocation(X*20, Y*20);
+        jobs.show();
+        jobs.setSelected(true);
+        F_COUNT++;  
+    }
+    
     private void Get_Version() {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         Version =  "?"; 
@@ -857,8 +822,7 @@ public class A extends javax.swing.JFrame {
         }
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     } 
-    private static void Get_User() {
-        //setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+    private void Get_User() {
         UserID = System.getProperty("user.name");
         //UserID = "theleepan.sivabalasi";
         WsOS = System.getProperty("os.name");
@@ -869,7 +833,24 @@ public class A extends javax.swing.JFrame {
         } catch (UnknownHostException ex) { 
             WsID = "Unknown - " + ex.getMessage();
         }
-        //setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    } 
+    private void Register_Login() {     
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                    PreparedStatement _update = conn.prepareStatement("UPDATE users SET " +
+                            "LogIN = 'JTT', " +
+                            "LastL = '" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yy hh:mm a")) + "', " +
+                            "USER_MACHINE = '" + WsID + "', " +
+                            "IP = '" + "Not used" + "' " +
+                            "WHERE User_ID = '" + UserID + "'");
+                    int row = _update.executeUpdate();
+                } catch (SQLException ex) {                  
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Register_Login > SQL ERROR: " + ex.getMessage(), ex);
+                }
+            }
+        }).start();
     } 
     private void Get_Slack_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));         
@@ -900,7 +881,7 @@ public class A extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AP3.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
+            java.util.logging.Logger.getLogger(A.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
         }
 
         /* Create and display the form */
@@ -930,7 +911,9 @@ public class A extends javax.swing.JFrame {
 
     // <editor-fold defaultstate="collapsed" desc="Public & Private Variables">
     public static final String QA_BD_CON_STRING = "jdbc:sqlserver://dev-digitalhospitality-sql.database.windows.net:1433;database=cdlqadb;user=xttadmin;password=Sp515s10#a;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
-
+    public static int F_COUNT = 0;   
+    public static int An_F_COUNT = 0;  
+    
     public static String CWD = System.getProperty("user.dir");
     public static String ADB_HOME = "";
     public static String S_OAuth_TKN = ""; 
@@ -939,7 +922,7 @@ public class A extends javax.swing.JFrame {
     public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
-    public static int F_COUNT;    
+
     public static String Version = "";
     public static String UserID = "";
     public static String WsID = "";    

@@ -28,8 +28,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  * @author oleg.spozito
  */
 public class An_Mob extends An_GUI { 
-    private static String err;
-    public static void Reset_App(String NAME, String JIRA ){
+    private String err;
+    protected void Reset_App(String NAME, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -51,7 +51,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }     
-    public static void HideKeyboard(String NAME, String JIRA ){
+    protected void HideKeyboard(String NAME, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -77,14 +77,13 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     } 
-    public static void Swipe_From_Screen_Center(String NAME, String DIRECTION, int DURATION, String JIRA ){
+    protected void Swipe_From_Screen_Center(String NAME, String DIRECTION, int DURATION, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
         sw1.start();        
  
         FAIL = false;
-
         try {
             int h = ad.manage().window().getSize().height; 
             int w = ad.manage().window().getSize().width;
@@ -129,7 +128,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }    
-    public static void Swipe_From_Elenent_XY(String NAME, AndroidElement E, String DIRECTION, int DURATION, String JIRA ){
+    protected void Swipe_From_Elenent_XY(String NAME, AndroidElement E, String DIRECTION, int DURATION, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -181,7 +180,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }    
-    public static void Wait_For_Element_By_Path_Visibility(String NAME, String BY, String PATH, String JIRA ){
+    protected void Wait_For_Element_By_Path_Visibility(String NAME, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -226,7 +225,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void Wait_For_Element_By_Path_Presence(String NAME, String BY, String PATH, String JIRA ){
+    protected void Wait_For_Element_By_Path_Presence(String NAME, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -272,7 +271,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void Wait_For_Element_By_Path_InVisibility(String NAME, String BY, String PATH, String JIRA ){
+    protected void Wait_For_Element_By_Path_InVisibility(String NAME, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -319,7 +318,7 @@ public class An_Mob extends An_GUI {
         sw1.reset();
     }
 
-    public static void Scroll_to_Element(String NAME, AndroidElement E, String JIRA ){
+    protected void Scroll_to_Element(String NAME, AndroidElement E, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -340,7 +339,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void Move_to_Element(String NAME, AndroidElement E, String JIRA ){
+    protected void Move_to_Element(String NAME, AndroidElement E, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -362,7 +361,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     } 
-    public static void Click_out_of_Element(String NAME, AndroidElement E, String DIRECTION, int X, int Y, String JIRA ){
+    protected void Click_out_of_Element(String NAME, AndroidElement E, String DIRECTION, int X, int Y, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -398,7 +397,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     } 
-    public static void Move_to_Element_By_Path(String NAME, String BY, String PATH, String JIRA ){
+    protected void Move_to_Element_By_Path(String NAME, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -448,7 +447,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void Move_out_of_Element_By_Path(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, String JIRA ){
+    protected void Move_out_of_Element_By_Path(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -513,7 +512,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void Click_out_of_Element_By_Path(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, String JIRA ){
+    protected void Click_out_of_Element_By_Path(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -580,7 +579,7 @@ public class An_Mob extends An_GUI {
         sw1.reset();
     }
 
-    public static void Text_Found(String NAME, String VAL, String JIRA ){
+    protected void Text_Found(String NAME, String VAL, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -601,7 +600,7 @@ public class An_Mob extends An_GUI {
         _p++;
         sw1.reset();
     }
-    public static void Find_Text(String NAME, String VAL, Boolean EXPECTED,String JIRA ){
+    protected void Find_Text(String NAME, String VAL, Boolean EXPECTED,String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -640,7 +639,7 @@ public class An_Mob extends An_GUI {
         sw1.reset();
     }    
 
-    public static void Element_E1_Find(String NAME, String BY, String PATH, String JIRA ){
+    protected void Element_E1_Find(String NAME, String BY, String PATH, String JIRA ){
         FAIL = false;
         if(sw1.isRunning()){
             sw1.reset();
@@ -688,7 +687,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void Element_E2_Find(String NAME, String BY, String PATH, String JIRA ){
+    protected void Element_E2_Find(String NAME, String BY, String PATH, String JIRA ){
         FAIL = false;
         if(sw1.isRunning()){
             sw1.reset();
@@ -735,7 +734,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void Element_By_Path_Click(String NAME, String BY, String PATH, String JIRA ){
+    protected void Element_By_Path_Click(String NAME, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -785,7 +784,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void Element_By_Path_Text(String NAME, String BY, String PATH, String JIRA ){
+    protected void Element_By_Path_Text(String NAME, String BY, String PATH, String JIRA ){
         t = "empty"; FAIL = false;
         if(sw1.isRunning()){
             sw1.reset();
@@ -833,7 +832,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void Element_By_Path_Attribute(String NAME, String BY, String PATH, String VAL, String JIRA ){
+    protected void Element_By_Path_Attribute(String NAME, String BY, String PATH, String VAL, String JIRA ){
         t = ""; FAIL = false;
         if(sw1.isRunning()){
             sw1.reset();
@@ -887,7 +886,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void Element_By_Path_Text_Select_Copy(String NAME, String BY, String PATH, String JIRA ){
+    protected void Element_By_Path_Text_Select_Copy(String NAME, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -937,7 +936,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void Element_By_Path_Text_DblClick_Copy(String NAME, String BY, String PATH, String JIRA ){
+    protected void Element_By_Path_Text_DblClick_Copy(String NAME, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -987,7 +986,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void Element_By_Path_Text_DblClick_Paste(String NAME, String BY, String PATH, String VAL,  String JIRA ){
+    protected void Element_By_Path_Text_DblClick_Paste(String NAME, String BY, String PATH, String VAL,  String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1040,7 +1039,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void Element_By_Path_Input_Select_Clear(String NAME, String BY, String PATH, String JIRA ){
+    protected void Element_By_Path_Input_Select_Clear(String NAME, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1096,7 +1095,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void Element_By_Path_Text_Enter(String NAME, String BY, String PATH, String VAL, boolean HIDE,String JIRA ){
+    protected void Element_By_Path_Text_Enter(String NAME, String BY, String PATH, String VAL, boolean HIDE,String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1149,7 +1148,7 @@ public class An_Mob extends An_GUI {
         sw1.reset();
     }
 
-    public static void Element_Text(String NAME, AndroidElement E, String JIRA ){
+    protected void Element_Text(String NAME, AndroidElement E, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1181,7 +1180,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void Element_Text_Clear(String NAME, AndroidElement E, String JIRA ){
+    protected void Element_Text_Clear(String NAME, AndroidElement E, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1208,7 +1207,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void Element_Text_Enter(String NAME, AndroidElement E, String VAL, String JIRA ){
+    protected void Element_Text_Enter(String NAME, AndroidElement E, String VAL, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1229,7 +1228,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void Element_Attribute(String NAME, AndroidElement E, String VAL, String JIRA ){       
+    protected void Element_Attribute(String NAME, AndroidElement E, String VAL, String JIRA ){       
         t = "empty";
         if(sw1.isRunning()){
             sw1.reset();
@@ -1264,7 +1263,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void Element_Click(String NAME, AndroidElement E, String JIRA ){
+    protected void Element_Click(String NAME, AndroidElement E, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1287,7 +1286,7 @@ public class An_Mob extends An_GUI {
         sw1.reset();
     }
 
-    public static void Element_Child_List_L1(String NAME, AndroidElement E, String BY, String PATH, String JIRA ){
+    protected void Element_Child_List_L1(String NAME, AndroidElement E, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1342,7 +1341,7 @@ public class An_Mob extends An_GUI {
         } 
         sw1.reset();
     }    
-    public static void Element_Child_List_L2(String NAME, AndroidElement  E, String BY, String PATH, String JIRA ){
+    protected void Element_Child_List_L2(String NAME, AndroidElement  E, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1397,7 +1396,7 @@ public class An_Mob extends An_GUI {
         } 
         sw1.reset();
     }    
-    public static void Element_Child_E2(String NAME, AndroidElement E, String BY, String PATH, String JIRA ){
+    protected void Element_Child_E2(String NAME, AndroidElement E, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1445,7 +1444,7 @@ public class An_Mob extends An_GUI {
         } 
         sw1.reset();
     }    
-    public static void Element_Child_Text(String NAME, AndroidElement E, String BY, String PATH, String JIRA ){
+    protected void Element_Child_Text(String NAME, AndroidElement E, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1503,7 +1502,7 @@ public class An_Mob extends An_GUI {
         } 
         sw1.reset();
     }    
-    public static void Element_Child_Text_Enter(String NAME, AndroidElement E, String BY, String PATH, String VAL, boolean HIDE, String JIRA ){
+    protected void Element_Child_Text_Enter(String NAME, AndroidElement E, String BY, String PATH, String VAL, boolean HIDE, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1556,7 +1555,7 @@ public class An_Mob extends An_GUI {
         } 
         sw1.reset();
     }
-    public static void Element_Child_Click(String NAME, AndroidElement E, String BY, String PATH, String JIRA ){
+    protected void Element_Child_Click(String NAME, AndroidElement E, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1604,7 +1603,7 @@ public class An_Mob extends An_GUI {
         } 
         sw1.reset();
     }    
-    public static void Element_Child_Attribute(String NAME, AndroidElement E, String BY, String PATH, String VAL, String JIRA ){
+    protected void Element_Child_Attribute(String NAME, AndroidElement E, String BY, String PATH, String VAL, String JIRA ){
         t = "";
         if(sw1.isRunning()){
             sw1.reset();
@@ -1667,7 +1666,7 @@ public class An_Mob extends An_GUI {
         sw1.reset();
     }
 
-    public static void List_L0(String NAME, String BY, String PATH, String JIRA ){
+    protected void List_L0(String NAME, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1722,7 +1721,7 @@ public class An_Mob extends An_GUI {
         }
         sw1.reset();
     }
-    public static void List_L1(String NAME, String BY, String PATH, String JIRA ){
+    protected void List_L1(String NAME, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1777,7 +1776,7 @@ public class An_Mob extends An_GUI {
         } 
         sw1.reset();
     }
-    public static void List_L2(String NAME, String BY, String PATH, String JIRA ){
+    protected void List_L2(String NAME, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1832,7 +1831,7 @@ public class An_Mob extends An_GUI {
         } 
         sw1.reset();
     }
-    public static void List_L3(String NAME, String BY, String PATH, String JIRA ){
+    protected void List_L3(String NAME, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
