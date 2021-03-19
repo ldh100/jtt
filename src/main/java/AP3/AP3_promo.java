@@ -44,9 +44,12 @@ public class AP3_promo {
         
         _t++; Thread.sleep(20000); TWeb.Element_By_Path_Attribute("Page Title", "xpath", "//span[@class='titlePromo']", "textContent", "no_jira"); 
            if (FAIL) { return;}          
+          
+        // _t++; Thread.sleep((long) sleep);TWeb.Wait_For_Element_By_Path_Presence("Wait for Promotion Name","xpath" , "//th[contains(@aria-label,'Promotion Name')]", "no_jira");
        
          // <editor-fold defaultstate="collapsed" desc="Pagination">  
-           
+         EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Pagination Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+          
            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
             if (FAIL) { return;}     
         
@@ -143,6 +146,9 @@ public class AP3_promo {
             _t++; TWeb.Element_Text("Promotion Data Row Text", L0.get(L0.size() - 1), "no_jira");             
             if (FAIL) { return;}        
         } 
+        
+        EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Pagination Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+         
         // </editor-fold> 
         
         _t++; Thread.sleep((long) sleep); TWeb.To_Top("no_jira");
@@ -233,6 +239,7 @@ public class AP3_promo {
         
        
          // <editor-fold defaultstate="collapsed" desc="LTO PROMO"> 
+        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Creating LTO PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
         Promo_details("lto");        
         Promo_scheduling(date,futuredate,"Custom");
         
@@ -397,11 +404,14 @@ public class AP3_promo {
         if (FAIL) { return;}   
         
         Promo_Actions("lto");
-     
+        EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Creating LTO PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+       
         // </editor-fold>    
         
             
-         // <editor-fold defaultstate="collapsed" desc="BOGO PROMO">            
+         // <editor-fold defaultstate="collapsed" desc="BOGO PROMO">  
+         
+          EX += " - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Creating BOGO PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
          _t++; Thread.sleep((long) sleep); TWeb.To_Top("no_jira");
          _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click New Promotion", "xpath", "//div[contains(text(),'New Promotion')]", "no_jira");
          if (FAIL) { return;}  
@@ -598,12 +608,13 @@ public class AP3_promo {
         if (FAIL) { return;}   
            
          Promo_Actions("bogo"); 
-           
+          EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Creating BOGO PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";  
         // </editor-fold>
                   
         
          // <editor-fold defaultstate="collapsed" desc="Bundle PROMO">     
-              
+        
+        EX += " - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Creating BUNDLE PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
          _t++; Thread.sleep((long) sleep); TWeb.To_Top("no_jira");
          _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click New Promotion", "xpath", "//div[contains(text(),'New Promotion')]", "no_jira");
          if (FAIL) { return;}  
@@ -813,10 +824,133 @@ public class AP3_promo {
         if (FAIL) { return;}   
            
          Promo_Actions("bundle");
+         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Creating BUNDLE PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
        // </editor-fold>   
+       
+         // <editor-fold defaultstate="collapsed" desc="Tests for Dev and Staging Environment">   
+         
+       EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Creating LTO with Repeat : Weekends==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+       if(!env.equals("PR"))
+       {
+         _t++; Thread.sleep((long) sleep); TWeb.To_Top("no_jira");
+         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click New Promotion", "xpath", "//div[contains(text(),'New Promotion')]", "no_jira");
+         if (FAIL) { return;}
+         Promo_details("lto");
+         Promo_scheduling(date,futuredate,"Weekends");
+         _t++;Thread.sleep((long) sleep);TWeb.To_Bottom("no_jira");
+         Thread.sleep(10000);       
+        _t++;Thread.sleep((long) sleep);TWeb.Element_By_Path_Click("Click 'Promotion type'", "xpath", "//div[@class='layout row wrap']//div[@class='v-input__icon v-input__icon--append']", "no_jira");
+        if (FAIL) { return;}                                                                                    
+        
+        _t++;Thread.sleep((long) sleep);TWeb.Element_E1_Find("Find 'Promotion Type'","css" , "div[class='v-menu__content theme--light menuable__content__active']", "no_jira");
+        if (FAIL) { return;}
+        
+        _t++;Thread.sleep((long) sleep);TWeb.Element_Child_List_L1("Date elements", e1,"xpath" , ".//div[@class='v-list__tile__title']", "no_jira");
+        if (FAIL) { return;}
+        
+         T_Index = -1;
+        for (int i = 0; i < L1.size(); i++) {
+         _t++; TWeb.Element_Text("Promotion type options : (index " + i + ")", L1.get(i),  "no_jira");              
+         if (FAIL) { return;}
+         if(L1.get(i).getText().equalsIgnoreCase("Limited Time Offer")){ T_Index = i; }
+         }
+        
+         _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select 'Limited Time Offer'" , L1.get(T_Index), "no_jira");
+         if (FAIL) { return;}
+        
+        _t++; Thread.sleep((long) sleep);TWeb.Element_By_Path_Text_Enter("Enter Promotion text English", "xpath", "//input[@placeholder='English']", "Automation English Promo", false, "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep);TWeb.Element_By_Path_Text_Enter("Enter Promotion text French", "xpath", "//input[@placeholder='French']", "Automation French Promo", false, "no_jira");
+        if (FAIL) { return;}
+        
+        _t++;Thread.sleep((long) sleep);TWeb.Find_Text("Find 'Items' ","Items" , true, "no_jira");
+        if (FAIL) { return;}
+        _t++;Thread.sleep((long) sleep);TWeb.Find_Text("Find 'Select Items button' ","Select Items" , true, "no_jira");
+        if (FAIL) { return;} 
+        _t++;Thread.sleep((long) sleep);TWeb.Scroll_to_Element("Select items", e, "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(3000);
+        _t++;Thread.sleep((long) sleep);TWeb.Element_By_Path_Click("Click 'Select Items'", "xpath", "//div[contains(text(),'Select Items')]", "no_jira");
+        if (FAIL) { return;}                                                                                
+        _t++;Thread.sleep((long) sleep);TWeb.Find_Text("Find Global menu & Group Sector ",menu_group , true, "no_jira");
+        if (FAIL) { return;}
+        _t++;Thread.sleep((long) sleep);TWeb.Element_E1_Find("Find 'Menu Category container'","xpath" , "//ul[@class='v-expansion-panel panel theme--light']", "no_jira");
+        if (FAIL) { return;}
+        
+        _t++;Thread.sleep((long) sleep);TWeb.Element_Child_List_L1("Menu Category elements", e1,"xpath" , "//div[@class='v-expansion-panel__header']", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select " , L1.get(0), "no_jira");
+         if (FAIL) { return;}
+        Thread.sleep(5000);
+        _t++;Thread.sleep((long) sleep);TWeb.Element_E2_Find("Find 'Category container'","xpath" , "//div[@class='v-expansion-panel__body']//div[@role='list']", "no_jira");
+        if (FAIL) { return;}
+        
+        _t++;Thread.sleep((long) sleep);TWeb.Element_Child_List_L2("Category elements", e2,"xpath" , ".//div[@class='v-list__tile__title group ml-3']", "no_jira");
+        if (FAIL) { return;} 
+                
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select "  , L2.get(0), "no_jira");
+         if (FAIL) { return;}
+       
+        _t++; Thread.sleep((long) sleep); TWeb.List_L0("Item Count", "xpath", "//table[@class='v-datatable v-table v-datatable--select-all theme--light']//tr", "no_jira");             
+        if (FAIL) { return;}
+        _t++; TWeb.Element_Text("Item Row Header", L0.get(0), "no_jira"); 
+        if (FAIL) { return;} 
+     
+         
+        
+        if(L0.size()>=2)  {  _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select First Item"  , L0.get(2), "no_jira"); if (FAIL) { return;}}
+        
+         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Save'", "xpath", "//div[normalize-space()='Save']", "no_jira");
+        if (FAIL) { return;}        
+        _t++;Thread.sleep((long) sleep);TWeb.Find_Text("Find 'Item Name' ","Item Name" , true, "no_jira");
+        if (FAIL) { return;} 
+        _t++;Thread.sleep((long) sleep);TWeb.Scroll_to_Element("Items", e, "no_jira");
+        if (FAIL) { return;}
+        _t++;Thread.sleep((long) sleep);TWeb.Find_Text("Find 'Price per Item'","Price Per Item" , true, "no_jira");
+        if (FAIL) { return;} 
+        _t++;Thread.sleep((long) sleep);TWeb.Find_Text("Find 'Total Item Price' ","Total Item Price" , true, "no_jira");
+        if (FAIL) { return;} 
+        _t++;Thread.sleep((long) sleep);TWeb.Find_Text("Find 'Discounted Price'","Discounted Price" , true, "no_jira");
+        if (FAIL) { return;} 
+        _t++;Thread.sleep((long) sleep);TWeb.Find_Text("Find 'Discount given' ","Discount Given" , true, "no_jira");
+        if (FAIL) { return;} 
+     
+        _t++;Thread.sleep((long) sleep);TWeb.Find_Text("Find 'Discount Amount' ","$ Discount Amount" , true, "no_jira");
+        if (FAIL) { return;}  
+        
+        _t++;Thread.sleep((long) sleep);TWeb.List_L0("List of Discount type box", "xpath", "//div[contains(text(),'No Discount')]", "no_jira");
+        if (FAIL) { return;} 
+        
+        _t++;Thread.sleep((long) sleep);TWeb.Element_Click("Click 1st item Discount type", L0.get(1), "no_jira");
+        if (FAIL) { return;}   
+        
+         _t++;Thread.sleep((long) sleep);TWeb.Element_E2_Find("Find 'Discount type dropdown'","xpath" , "//div[@class='v-menu__content theme--light menuable__content__active']", "no_jira");
+        if (FAIL) { return;}
+        
+        _t++;Thread.sleep((long) sleep);TWeb.Element_Child_List_L2("Discount type", e2,"xpath" , ".//div[@class='v-list__tile__title']", "no_jira");
+        if (FAIL) { return;}
+         T_Index = -1;
+        for (int i = 0; i < L2.size(); i++) {
+         _t++; TWeb.Element_Text("Discount type : (index " + i + ")", L2.get(i),  "no_jira");              
+         if (FAIL) { return;}
+         if(t.trim().equalsIgnoreCase("$ Discount Amount")){ T_Index = i; }
+         }
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select : Discount Amount"  , L2.get(T_Index), "no_jira");
+         if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter discount amount", "xpath", "//div[contains(@class,'active')]//input[@type='number']", "0.50", false, "no_jira");
+         if (FAIL) { return;}
+        
+        _t++;Thread.sleep((long) sleep);TWeb.Element_By_Path_Click("Click Create New Promotion button'", "xpath", "//button[@type='button']//div[contains(text(),'Create New Promotion')]", "no_jira");
+        if (FAIL) { return;}   
+        
+        Promo_Actions("lto");
+        
+        EX += "\n - " + "\t" + " ====END=====" + "\t" + " ===== " + "\t" + " == Creating LTO with Repeat : Weekends" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+       //End of staging environment
+     // </editor-fold>
     }
     
-    
+} 
     public static void Promo_details(String Promo_type) throws InterruptedException
     {
          _t++; Thread.sleep((long) sleep);TWeb.Element_By_Path_Text_Enter("Enter Promotion name", "xpath", "//input[@aria-label='Promotion Name']", "Automation Test Promo", false, "no_jira");
@@ -882,12 +1016,9 @@ public class AP3_promo {
         
         DateTimeFormatter Dayofdate = DateTimeFormatter.ofPattern("d");
         
-        
-       
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Promotion Schedule' text", "Promotion Schedule", true,"no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep);TWeb.Scroll_to_Element("Scroll to promotion schedule", e, "no_jira");
-        
         
         _t++;Thread.sleep((long) sleep);TWeb.Element_By_Path_Click("Click Start date", "xpath", "//input[@aria-label='Start Date']", "no_jira");
         if (FAIL) { return;}
@@ -991,12 +1122,10 @@ public class AP3_promo {
         _t++;Thread.sleep((long) sleep);TWeb.Find_Text("Find Schedule confirmation","Promotion will repeat" , true, "no_jira");
         
         
-      
-        
     }//End of Promo_scheduling
     
     
-   public static void Promo_Actions(String Promo_type) throws InterruptedException
+    public static void Promo_Actions(String Promo_type) throws InterruptedException
     {
          String P_ID = "";
           _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for data...", "className", "v-datatable__progress", "no_jira"); 
@@ -1020,7 +1149,7 @@ public class AP3_promo {
          if (FAIL) { return;}  
          
          //Clone bundle promotion
-         if(Promo_type.equalsIgnoreCase("lto1"))
+         if(Promo_type.equalsIgnoreCase("bundle"))
          {
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Clone promo", "xpath", "//tbody/tr[1]/td[7]//i[contains(@class,'copy')]", "no_jira");
             if (FAIL) { return;} 
@@ -1066,21 +1195,21 @@ public class AP3_promo {
              if (FAIL) { return;} 
              _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for data...", "className", "v-datatable__progress", "no_jira"); 
              if (FAIL) { return;}       
+             Thread.sleep(5000);
              _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Search for Cloned promo", "css","input[aria-label='Search Promotions']" , "Copy  - Automation Test Promo", false, "no_jira");
              if (FAIL) { return;}  
-
+             
              _t++; Thread.sleep((long) sleep);TWeb.Find_Text("Find 'Cloned Automation Test promo'", "Automation Test Promo", true, "no_jira"); 
               if (FAIL) { return;}  
              _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Delete Cloned promo", "xpath", "//tbody/tr[1]/td[7]//i[contains(@class,'delete')]", "no_jira");
                 if (FAIL) { return;}               
              _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Confirm Delete cloned  promo", "xpath", "//div[normalize-space()='DELETE']", "no_jira");
                 if (FAIL) { return;}
-             Thread.sleep(2000);
-//             
-//              _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Input_Select_Clear("Clear search box", "xpath","input[aria-label='Search Promotions']", "no_jira");
-//              if (FAIL) { return;}
-//             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Search for Original promo", "css","input[aria-label='Search Promotions']" , "Automation Test Promo", false, "no_jira");
-//              if (FAIL) { return;}           
+             Thread.sleep(5000);
+             _t++; Thread.sleep((long) sleep);TWeb.Refresh("Refresh Page", "no_jira");
+             Thread.sleep(20000);
+             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Search for Original promo", "css","input[aria-label='Search Promotions']" , "Automation Test Promo", false, "no_jira");
+             if (FAIL) { return;}           
          }//End of if cloned promo
          
          // Editing a promo for promo id to make a API call
@@ -1126,6 +1255,8 @@ public class AP3_promo {
     
      public static void Promo_API(String P_ID,String Promo_action,String Promo_type) throws InterruptedException
      {
+         EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Promo API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+         
           _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Promo/ API ("+Promo_action+" promo)", BaseAPI + "/promo/" + P_ID, true,"no_jira" );
             _t++; TWeb.API_Body_Contains("Promo API - find company ID", CompanyID,true, "no_jira");    
             _t++; TWeb.API_Body_Contains("Promo API - find Promo Name", "Automation Test Promo ",true, "no_jira");
@@ -1143,6 +1274,8 @@ public class AP3_promo {
             }
             else {_t++; TWeb.API_Body_Contains("Promo API - find Status", "archived",true, "no_jira");}
           Promo_discount_verify();
+         EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Promo API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+          
       }//End of Promo_API
      
      public static void Promo_discount_verify() throws InterruptedException
@@ -1160,7 +1293,6 @@ public class AP3_promo {
                         if(discount.has("amount_off"))
                          {
                             float fpromo_amount = discount.getFloat("amount_off");           //getString("amount_off");
-                            System.out.println("\n\n"+fpromo_amount+"\n\n");
                             _t++;
                             if(fpromo_amount == 0.50)
                                  { 
@@ -1174,7 +1306,6 @@ public class AP3_promo {
                         else if(discount.has("percent_off"))
                         {
                            int promo_amount = discount.getInt("percent_off");           //getString("amount_off");
-                            System.out.println("\n\n"+promo_amount+"\n\n");
                             if(promo_amount == 50)
                                  { _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "Percent off : "+promo_amount + "\t" + "50%" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
 
@@ -1186,11 +1317,14 @@ public class AP3_promo {
                         }//End of percent off
 
            }//End of for
+          
      }
      
      
      public static void Promo_Location_API(String P_ID,String Promo_action,String Promo_type) throws InterruptedException
      {
+         EX += "\n - " + "\t" + " ====START====" + "\t" + " ===== " + "\t" + " == Promo Location API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+         
          if(Promo_type.equalsIgnoreCase("bundle"))
          {
          _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call/Promo/Location API", BaseAPI + "/promo/company/" +CompanyID+"/location/group/"+SiteID+"?nocache=1", true,"no_jira" );  
@@ -1220,6 +1354,7 @@ public class AP3_promo {
             _t++; TWeb.API_Body_Contains("Promo Location API - find Promo name", "Automation Test Promo",false, "no_jira");
           }       
          }
-       
+       EX += "\n - " + "\t" + " ====END====" + "\t" + " ===== " + "\t" + " == Promo Location API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+         
      } // End of Promo_Location_API
 }

@@ -20,12 +20,13 @@ public class DL_metric_data {
 	    		 metricRef="Compared to last week";	 
 	    	 
 	    	 MetricCardsSelection();
-	     }
+                 
+             }
 	    	
       }
     
     public static void MetricCardsSelection()throws InterruptedException {
-
+       Thread.sleep(6000);
        SelectMetricCard("Total Spend", null, 1, 2);
        SelectMetricCard("Contracted Spend", null, 2, 1);
        SelectMetricCard("Contract Utilization Rate (CUR)", "Contract Utilization Rate (CUR) = Sum (Contracted Spend)/ Sum (Total Spend)", 3, 0);
@@ -127,8 +128,10 @@ public class DL_metric_data {
             EX += _t + "\t" + NAME + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err + "\t" + " - " + "\t" + " - " + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
 	}
+      
     }
-
+    
+        
     }
 
 

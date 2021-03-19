@@ -2989,6 +2989,28 @@ public class TWeb {
         } 
         sw1.reset();
     } 
+
+     public static void PressEnter(String NAME, WebElement E, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();       
+ 
+        FAIL = false;
+        try {
+            E.sendKeys(Keys.chord(Keys.ENTER)); //select all text in textbox
+            _p++;
+            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Enter key presses"+ "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
    
     
     }
