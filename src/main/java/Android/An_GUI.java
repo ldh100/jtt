@@ -17,12 +17,19 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.google.common.base.Stopwatch;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
+import static io.appium.java_client.touch.offset.PointOption.point;
 import java.awt.Cursor;
 import java.awt.Desktop;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.io.File;
@@ -51,6 +58,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import javax.swing.JFileChooser;
@@ -75,6 +83,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -84,7 +95,6 @@ import org.openqa.selenium.support.ui.FluentWait;
  * @author Oleg.Spozito
  */
 public class An_GUI extends javax.swing.JInternalFrame {
-    //private An_Met AM = new An_Met();
     public An_GUI() {  
         initComponents();
     }
@@ -847,6 +857,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Actions"> 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
         if (d1LastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
            return;
@@ -957,7 +968,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(!btnRun.isEnabled()){
             return;
         }
-        Run_Manual();
+        GUI_Run_Manual();
     }//GEN-LAST:event_btnRunMouseClicked
     private void btnGetScreenshotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGetScreenshotMouseClicked
         if(!btnGetScreenshot.isEnabled()){
@@ -1094,7 +1105,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         }
     }//GEN-LAST:event_btnInstallAPKMouseClicked
-    
+    // </editor-fold>    
     private void Load_Form(){   
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
 
@@ -1130,17 +1141,10 @@ public class An_GUI extends javax.swing.JInternalFrame {
         Current_Log_Update(true, "- Check Package " + "\r\n"); 
         Current_Log_Update(true, CheckAppPackage());                                
         
-        this.setTitle("Android Automation Manager");
+        this.setTitle("Android Automation Manager " + A.A.An_F_COUNT);
     }
 
-    public void Current_Log_Update(boolean GUI, String Text){
-        if(GUI){
-            txtLog.append(Text);
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());              
-        } else{
-            Log += Text;
-        }
-    }    
+    // <editor-fold defaultstate="collapsed" desc="Package Methods">    
 
     private void GUI_Find_Connected_Devices(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
@@ -1230,7 +1234,6 @@ public class An_GUI extends javax.swing.JInternalFrame {
 			.pollingEvery(Duration.ofMillis(200))  			
 			.ignoring(NoSuchElementException.class);       
             
-            
             Current_Log_Update(true, "=== Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
             sw1.reset();
             
@@ -1274,7 +1277,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                             Current_Log_Update(true, "Download/Install failed: " + ex.getMessage() + "\r\n");
                         }
                     } catch (Exception ex){
-                        Current_Log_Update(true, "Download button Not Found" + "\r\n");
+                        Current_Log_Update(true, "Download button Not Found >> Latest Version already Insatlled (?)" + "\r\n");
                         ad.findElement(By.id("back_arrow")).click();
                         loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("app_name")));
                     }
@@ -1420,8 +1423,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));     
-    }  
-    
+    }     
     private void GUI_Load_Env(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
@@ -1779,7 +1781,6 @@ public class An_GUI extends javax.swing.JInternalFrame {
         lblBRANDS.setText("Selected Site Brands (" + DV2.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-
     private void GUI_Save_CONFIG() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String _S = "n/a";
@@ -1938,8 +1939,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-
-    private void Run_Manual(){
+    private void GUI_Run_Manual(){
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
@@ -2008,23 +2008,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
         sw1.start();
         LOG_START(); // ======================================================== 
-        String DriverStart = AndroidDriver();
-        if(DriverStart.contains("OK")){
-            Current_Log_Update(true, "=== Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");    
-            sw1.reset();
-            
-            BW1_DoWork( true);        
-        } else{
-            Current_Log_Update(true, DriverStart.trim() + "\r\n");
-            Summary = "Start Driver - Failed"; 
-            DD = Duration.between(run_start, Instant.now());
-            LOG_UPDATE(txtLog.getText());   // ========================================================
-            btnRun.setEnabled(true);
-            btnFails.setEnabled(true);
-        }        
+        
+        BW1_DoWork( true);            
     }
 
-    public String Run_Job(String run_type, String config){
+    public String JOB_Run_Auto(String run_type, String config){
         run_start = Instant.now();
         Log  = "";
         String RES = "";
@@ -2040,7 +2028,6 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
 
         Set_Mobile_Package_Name();
-        
         Current_Log_Update(false, "- Check Connected Device " + "\r\n");
         RES = JOB_Find_Connected_Devices();
         Current_Log_Update(false, RES);
@@ -2075,26 +2062,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 sw1.reset();
             }
             sw1.start();
-            LOG_START();   // ========================================================
-            String DriverStart = AndroidDriver();
-            if(DriverStart.contains("OK")){
-                Current_Log_Update(false, "=== Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
-                sw1.reset();
-                BW1_DoWork( false);  
-                return "OK > BW1 started >> Please Monitor Reports...";
-            } else{
-                Current_Log_Update(false, "=== Android Driver ERROR: (" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec)" + "\r\n");
-                sw1.reset();
-                Current_Log_Update(false, DriverStart + "\r\n");
-                Current_Log_Update(true, "=== Android_" + app + "_" + env + ", v: " + appVersion + ", Device: " + devModel + " OS version: " + devOS + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
-                Summary = "Start Driver - Failed"; 
-                DD = Duration.between(run_start, Instant.now());
-                LOG_UPDATE(Log);   // ========================================================
-                return DriverStart;
-            }  
+            LOG_START();   // ========================================================            
+            BW1_DoWork( false);
         }catch(Exception ex){
             return "ERROR > " + ex.getMessage();
         }
+        return "OK > BW1 started >> Please Monitor Reports...";
     }
     private String JOB_Load_CONFIG(String config){
         //config = config.replace("\r\n", "\n");
@@ -2146,15 +2119,19 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }            
             CONFIG = true;
             
-            if("ST".equals(env)){
-                BaseAPI = "https://api.compassdigital.org/staging";               
-                url = "https://staging.adminpanel.compassdigital.org/";
-            } else if ("DE".equals(env)){
-                BaseAPI = "https://api.compassdigital.org/dev";
-                url = "https://dev.adminpanel.compassdigital.org/";
-            } else{
-                BaseAPI = "https://api.compassdigital.org/v1";
-                url = "https://adminpanel.compassdigital.org/";
+            switch (env) {
+                case "ST":
+                    BaseAPI = "https://api.compassdigital.org/staging";
+                    url = "https://staging.adminpanel.compassdigital.org/";
+                    break;
+                case "DE":
+                    BaseAPI = "https://api.compassdigital.org/dev";
+                    url = "https://dev.adminpanel.compassdigital.org/";
+                    break;
+                default:
+                    BaseAPI = "https://api.compassdigital.org/v1";
+                    url = "https://adminpanel.compassdigital.org/";
+                    break;
             }
             Current_Log_Update(true, "=== JOB_Load_CONFIG > OK" + "\r\n");
             return "OK";
@@ -2192,122 +2169,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
         return "=== JOB_Check_Device_OS > Model: " + devModel + ", OS version: " + devOS + "\r\n";
     } 
 
-
-    private void BW1_DoWork(Boolean GUI){ 
-        BW1 = new SwingWorker() {                        
-            @Override
-            protected String doInBackground() throws Exception   { 
-                New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));  
-                if (app.equals("Bolter")) { 
-                    An_bolter x = new An_bolter();
-                    x.run();
-                }else{
-                    An_coreapp x = new An_coreapp();
-                    x.run();
-                }   
-                if(_f > 0) {
-                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
-                }else{
-                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter);  
-                } 
-            }  
-            @Override
-            protected void done() { 
-                DD = Duration.between(run_start, Instant.now());
-                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
-                Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n"); 
-                
-                EX = "Android " + app + " " + env + ", v: " + appVersion + ", Device: " + devModel + " OS Version: " + devOS +
-                " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
-                 "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
-                 + EX;
-                
-                Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n"); 
-
-                try  { 
-                    String statusMsg = (String) get(); 
-                    Current_Log_Update(GUI, statusMsg + "\r\n");
-                    BW1 = null;
-                } catch (InterruptedException | ExecutionException ex)  { 
-                    Current_Log_Update(GUI, "- BW1 Done: " + ex.getMessage() + "\r\n"); 
-                } 
-                if(ad != null) {
-                    ad.quit(); 
-                }
-                if(appiumService != null && appiumService.isRunning()){
-                    appiumService.stop();                    
-                }
-                if(GUI){
-                    Log = txtLog.getText();
-                }
-                BW1_Done();
-            } 
-        }; 
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        BW1.execute();  // executes the swingworker on worker thread 
-    }
-    private void BW1_Done(){
-        Last_EX = EX;
-        Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
-        try {
-            String t_rep = "";
-            if (!"".equals(r_time.trim())) {
-                double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
-                if (am0.length > 0) {
-                    Arrays.sort(am0);
-                    double total = 0;
-                    for(int i=0; i < am0.length; i++){
-                        total = total + am0[i];
-                    }
-                    t_calls = am0.length;
-                    t_min = am0[0] / (double)1000;
-                    t_avg = (total / am0.length) / (double)1000;
-                    t_max = am0[am0.length - 1]  / (double)1000; 
-                    p_50 = Func.p50(am0) / (double)1000;
-                    p_90 = Func.p90(am0) / (double)1000;
-
-                    DecimalFormat df = new DecimalFormat("#.##");
-                    t_rep += "=== Total Calls: " + t_calls + 
-                        ", Response Times (sec) - Min: " + df.format(t_min) +
-                        ", Avg: " + df.format(t_avg) +
-                        ", Max: " + df.format(t_max) +
-                        ", p50: " + df.format(p_50) +
-                        ", p90: " + df.format(p_90);
-                }
-                Current_Log_Update(true, t_rep + "\r\n");
-            }
-        } catch(Exception ex){
-            Current_Log_Update(true, "=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
-        }  
-
-        Current_Log_Update(true, "=== " + Summary + "\r\n"); // Summary shown in EX top
-        Current_Log_Update(true, "=== Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
-        Current_Log_Update(true, "=== Android_" + app + "_" + env + ", v: " + appVersion + ", Device: " + devModel + " OS version: " + devOS + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
-
-        LOG_UPDATE(Log); // ========================================================
-
-        if(_Slack){
-            Report(false); 
-            String MSG = "Android_" + app + "_" + env + " Automation report - " + Report_Date +  
-            "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
-            "Device: " + devModel + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
-            "Scope: " + SCOPE + "\r\n" +
-            "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
-
-            Current_Log_Update(true, Func.Send_File_to_Slack(Report_File, "Android_automation", MSG + "\r\n"));
-            File f = new File(Report_File);
-            if(f.exists() && !f.isDirectory()) { 
-                f.delete();
-            }
-        }
-        btnRun.setEnabled(true);               
-        if(!"".equals(F.trim())){
-            btnFails.setEnabled(true);
+    public void Current_Log_Update(boolean GUI, String Text){
+        if(GUI){
+            txtLog.append(Text);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());              
         } else{
-            btnFails.setEnabled(false);
+            Log += Text;
         }
-        btnExel.setEnabled(true);          
-    }
+    }    
     protected void Set_Mobile_Package_Name(){
         if ("Boost".equals(app)) {
             appPackage = "com.compass_canada.boost";
@@ -2515,46 +2384,6 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }      
     }
     
-    protected String AndroidDriver() {
-        try {
-            DesiredCapabilities  cap = new DesiredCapabilities ();
-            cap.setCapability("platformName", "Android");
-            cap.setCapability("deviceName", devModel);
-            cap.setCapability("udid", devID); 
-            cap.setCapability("platformVersion", devOS);
-            cap.setCapability("clearSystemFiles", true);
-            cap.setCapability("appPackage", appPackage);
-            cap.setCapability("appActivity", appActivity);
-
-            cap.setCapability("autoGrantPermissions", false); // false- always get prompt
-            cap.setCapability("unicodeKeyboard", false);
-            cap.setCapability("resetKeyboard", true);
-            cap.setCapability("sendKeyStrategy", "oneByOne");
-            cap.setCapability("automationName", "UiAutomator2");  // UiAutomator2 / Appium 
-            
-            AppiumServiceBuilder builder = new AppiumServiceBuilder();
-            builder.usingAnyFreePort();
-            appiumService = AppiumDriverLocalService.buildService(builder);
-            appiumService.start();
-            
-            ad = new AndroidDriver(new URL(appiumService.getUrl().toString()), cap);             
-            ad.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
-                      
-            loadTimeout = new FluentWait(ad).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
-			.pollingEvery(Duration.ofMillis(200))  			
-			.ignoring(NoSuchElementException.class);   
-            return "=== Android Driver Start > OK " + "\r\n";
-        } catch (Exception ex) {
-            F += "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
-            if(ad != null) {
-                ad.quit(); 
-            }
-            if(appiumService != null && appiumService.isRunning()){
-                appiumService.stop();                    
-            }
-            return "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
-        }   
-    }    
     protected String Get_S3_MOB_Credentials(){     
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             ResultSet rs1 = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S3_A_Key_MOB'");
@@ -2683,16 +2512,2164 @@ public class An_GUI extends javax.swing.JInternalFrame {
             return "=== Get_Bolter_User_Site_ID > ERROR: " + ex.getMessage() + "\r\n";
         }
     }   
+    // </editor-fold>
     
+    private void BW1_DoWork(Boolean GUI){ 
+        BW1 = new SwingWorker() {                        
+            @Override
+            protected String doInBackground() throws Exception   { 
+                String DriverStart = AndroidDriver();
+                if(DriverStart.contains("OK")){
+                    Current_Log_Update(GUI, "=== Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");    
+                    sw1.reset();      
+                } else{
+                    Current_Log_Update(GUI, DriverStart.trim() + "\r\n");
+                    Summary = "Start Driver - Failed"; 
+                    DD = Duration.between(run_start, Instant.now());
+                    LOG_UPDATE(txtLog.getText());   // ========================================================
+                    btnRun.setEnabled(true);
+                    btnFails.setEnabled(true);
+                }   
+                
+                New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));  
+                if (app.equals("Bolter")) {
+                    Run_Bolter();
+//                    An_bolter x = new Android.An_bolter();
+//                    x.Run();
+                }else{
+                    Run_CoreApp();
+//                    An_coreapp x = new An_coreapp();
+//                    x.Run();
+                }   
+                if(_f > 0) {
+                    //Current_Log_Update(GUI,"=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)");
+                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
+                }else{
+                    //Current_Log_Update(GUI,"=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter));  
+                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter);
+                } 
+            }  
+            @Override
+            protected void done() { 
+                DD = Duration.between(run_start, Instant.now());
+                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+                Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n"); 
+                
+                EX = "Android " + app + " " + env + ", v: " + appVersion + ", Device: " + devModel + " OS Version: " + devOS +
+                " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
+                 "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
+                 + EX;
+                
+                Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n"); 
+
+                try  { 
+                    String statusMsg = (String) get(); 
+                    Current_Log_Update(GUI, statusMsg + "\r\n");
+                    BW1 = null;
+                } catch (InterruptedException | ExecutionException ex)  { 
+                    Current_Log_Update(GUI, "- BW1 Done: " + ex.getMessage() + "\r\n"); 
+                } 
+                if(ad != null) {
+                    ad.quit(); 
+                }
+                if(appiumService != null && appiumService.isRunning()){
+                    appiumService.stop();                    
+                }
+
+                BW1_Done(GUI);
+            } 
+        }; 
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        BW1.execute();  
+    }
+    private void BW1_Done(boolean GUI){
+        Last_EX = EX;
+        Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
+        try {
+            String t_rep = "";
+            if (!"".equals(r_time.trim())) {
+                double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
+                if (am0.length > 0) {
+                    Arrays.sort(am0);
+                    double total = 0;
+                    for(int i=0; i < am0.length; i++){
+                        total = total + am0[i];
+                    }
+                    t_calls = am0.length;
+                    t_min = am0[0] / (double)1000;
+                    t_avg = (total / am0.length) / (double)1000;
+                    t_max = am0[am0.length - 1]  / (double)1000; 
+                    p_50 = Func.p50(am0) / (double)1000;
+                    p_90 = Func.p90(am0) / (double)1000;
+
+                    DecimalFormat df = new DecimalFormat("#.##");
+                    t_rep += "=== Total Calls: " + t_calls + 
+                        ", Response Times (sec) - Min: " + df.format(t_min) +
+                        ", Avg: " + df.format(t_avg) +
+                        ", Max: " + df.format(t_max) +
+                        ", p50: " + df.format(p_50) +
+                        ", p90: " + df.format(p_90);
+                }
+                Current_Log_Update(GUI, t_rep + "\r\n");
+            }
+        } catch(Exception ex){
+            Current_Log_Update(GUI, "=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
+        }  
+
+        Current_Log_Update(GUI, "=== " + Summary + "\r\n"); // Summary shown in EX top
+        Current_Log_Update(GUI, "=== Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
+        Current_Log_Update(GUI, "=== Android_" + app + "_" + env + ", v: " + appVersion + ", Device: " + devModel + " OS version: " + devOS + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
+
+        if(GUI){
+            Log = txtLog.getText();
+        }
+        LOG_UPDATE(Log); // ========================================================
+
+        if(_Slack){
+            Report(false); 
+            String MSG = "Android_" + app + "_" + env + " Automation report - " + Report_Date +  
+            "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
+            "Device: " + devModel + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
+            "Scope: " + SCOPE + "\r\n" +
+            "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
+
+            Current_Log_Update(true, Func.Send_File_to_Slack(Report_File, "Android_automation", MSG + "\r\n"));
+            File f = new File(Report_File);
+            if(f.exists() && !f.isDirectory()) { 
+                f.delete();
+            }
+        }
+        btnRun.setEnabled(true);               
+        if(!"".equals(F.trim())){
+            btnFails.setEnabled(true);
+        } else{
+            btnFails.setEnabled(false);
+        }
+        btnExel.setEnabled(true); 
+    }
+    protected String AndroidDriver() {
+        try {
+            DesiredCapabilities  cap = new DesiredCapabilities ();
+            cap.setCapability("platformName", "Android");
+            cap.setCapability("deviceName", devModel);
+            cap.setCapability("udid", devID); 
+            cap.setCapability("platformVersion", devOS);
+            cap.setCapability("clearSystemFiles", true);
+            cap.setCapability("appPackage", appPackage);
+            cap.setCapability("appActivity", appActivity);
+
+            cap.setCapability("autoGrantPermissions", false); // false- always get prompt
+            cap.setCapability("unicodeKeyboard", false);
+            cap.setCapability("resetKeyboard", true);
+            cap.setCapability("sendKeyStrategy", "oneByOne");
+            cap.setCapability("automationName", "UiAutomator2"); 
+            
+            AppiumServiceBuilder builder = new AppiumServiceBuilder();
+            builder.usingAnyFreePort();
+            appiumService = AppiumDriverLocalService.buildService(builder);
+            appiumService.start();
+            
+            ad = new AndroidDriver(new URL(appiumService.getUrl().toString()), cap);
+            ad.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
+                      
+            loadTimeout = new FluentWait(ad).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
+			.pollingEvery(Duration.ofMillis(200))  			
+			.ignoring(NoSuchElementException.class); 
+            return "=== Android Driver Start > OK " + "\r\n";
+        } catch (Exception ex) {
+            F += "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
+            if(ad != null) {
+                ad.quit(); 
+            }
+            if(appiumService != null && appiumService.isRunning()){
+                appiumService.stop();                    
+            }
+            return "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
+        }   
+    }    
+
+    // <editor-fold defaultstate="collapsed" desc="Android Driver Actions">    
+    protected void Test_EX_Update(String NAME, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+        FAIL = false;
+        t = "Test_EX_Update";
+        try {
+            _p++; 
+            err = "No Error";
+            EX += _t + "\t" + NAME + "\t" + "Test_EX_Update OK"  + "\t" + t + "\t" + "PASS" + "\t" + err + " TimeOut: " + LoadTimeOut + " ms" +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Page URL" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }     
+    protected void Reset_App(String NAME, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        t = "resetApp()";
+        try {
+            ad.resetApp();
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + "test"  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Page URL" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }     
+    protected void HideKeyboard(String NAME, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            if(ad.isKeyboardShown()){
+                ad.hideKeyboard();                
+                EX += _t + "\t" + NAME + "\t" + "Keyboard is Shown"  + "\t" + "hideKeyboard" + "\t" + "PASS" + "\t" + " - " +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            }else{
+                EX += _t + "\t" + NAME + "\t" + "Keyboard is Not Shown"  + "\t" + " - " + "\t" + "PASS" + "\t" + " - " +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            }
+            _p++; 
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    } 
+    protected void Swipe_From_Screen_Center(String NAME, String DIRECTION, int DURATION, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            int h = ad.manage().window().getSize().height; 
+            int w = ad.manage().window().getSize().width;
+            int endX = w/2;
+            int endY = h/2;
+            int startX = w/2;
+            int startY = h/2; 
+            
+            switch (DIRECTION) {
+                case "UP":
+                    endX = w/2;  
+                    endY = 10;
+                    break;
+                case "DOWN":
+                    endX = w/2;  
+                    endY = h - 10;
+                    break;
+                case "LEFT":
+                    endX = 10;  
+                    endY = h/2;
+                    break;
+                case "RIGHT":
+                    endX = w - 10;  
+                    endY = h/2;
+                    break;
+                default:
+                    break;
+            }        
+            new TouchAction(ad)
+                    .press(point(startX, startY))
+                    .waitAction(waitOptions(Duration.ofMillis(DURATION)))
+                    .moveTo(point(endX, endY)).release().perform();
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + "Swipe " + DIRECTION + "\t" + "Swipe OK" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Swipe " + DIRECTION + "\t" + "Swipe Failed" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }    
+    protected void Swipe_From_Elenent_XY(String NAME, AndroidElement E, String DIRECTION, int DURATION, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+
+        try {
+            int h = ad.manage().window().getSize().height; 
+            int w = ad.manage().window().getSize().width;
+            int endX = w/2;
+            int endY = h/2; 
+            int startX = E.getLocation().x;
+            int startY = E.getLocation().y;
+            
+            switch (DIRECTION) {
+                case "UP":
+                    endX = w/2;  
+                    endY = 10;
+                    break;
+                case "DOWN":
+                    endX = w/2;  
+                    endY = h - 10;
+                    break;
+                case "LEFT":
+                    endX = 10;  
+                    endY = h/2;
+                    break;
+                case "RIGHT":
+                    endX = w - 10;  
+                    endY = h/2;
+                    break;
+                default:
+                    break;
+            }        
+            new TouchAction(ad)
+                    .press(point(startX, startY))
+                    .waitAction(waitOptions(Duration.ofMillis(DURATION)))
+                    .moveTo(point(endX, endY)).release().perform();
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + DIRECTION + "\t" + "Swipe OK" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + DIRECTION + "\t" + "Swipe Failed" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }    
+    protected void Wait_For_Element_By_Path_Presence(String NAME, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            switch (BY) {
+                case "xpath":
+                    loadTimeout.until((Function) ExpectedConditions.presenceOfElementLocated(By.xpath(PATH)));
+                    break;
+                case "css":
+                    loadTimeout.until((Function) ExpectedConditions.presenceOfElementLocated(By.cssSelector(PATH)));
+                    break;
+                case "className":
+                    loadTimeout.until((Function) ExpectedConditions.presenceOfElementLocated(By.className(PATH)));
+                    break;
+                case "id":
+                    loadTimeout.until((Function) ExpectedConditions.presenceOfElementLocated(By.id(PATH)));
+                    break;
+                case "tagName":
+                    loadTimeout.until((Function) ExpectedConditions.presenceOfElementLocated(By.tagName(PATH)));
+                    break;                     
+                case "linkText":
+                    loadTimeout.until((Function) ExpectedConditions.presenceOfElementLocated(By.linkText(PATH)));
+                    break;
+                case "partialLinkText":
+                    loadTimeout.until((Function) ExpectedConditions.presenceOfElementLocated(By.partialLinkText(PATH)));
+                    break;
+                default:
+                    break;
+            }
+            r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
+            _p++; 
+            EX += _t + "\t" + NAME  + "\t" + PATH + "\t" + "Done in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME  + "\t" + PATH + "\t" + "loadTimeout " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Wait_For_Element_By_Path_InVisibility(String NAME, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            switch (BY) {
+                case "xpath":
+                    loadTimeout.until((Function) ExpectedConditions.invisibilityOfElementLocated(By.xpath(PATH)));
+                    break;
+                case "css":
+                    loadTimeout.until((Function) ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(PATH)));
+                    break;
+                case "className":
+                    loadTimeout.until((Function) ExpectedConditions.invisibilityOfElementLocated(By.className(PATH)));
+                    break;
+                case "id":
+                    loadTimeout.until((Function) ExpectedConditions.invisibilityOfElementLocated(By.id(PATH)));
+                    break;
+                case "tagName":
+                    loadTimeout.until((Function) ExpectedConditions.invisibilityOfElementLocated(By.tagName(PATH)));
+                    break;
+                case "linkText":
+                    loadTimeout.until((Function) ExpectedConditions.invisibilityOfElementLocated(By.linkText(PATH)));
+                    break;
+                case "partialLinkText":
+                    loadTimeout.until((Function) ExpectedConditions.invisibilityOfElementLocated(By.partialLinkText(PATH)));
+                    break;
+                default:
+                    break;
+            }
+            r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
+            _p++; 
+            EX += _t + "\t" + NAME  + "\t" + PATH + "\t" + "Done in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME  + "\t" + PATH + "\t" + "loadTimeout " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+
+    protected void Scroll_to_Element(String NAME, AndroidElement E, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            ((JavascriptExecutor)ad).executeScript("arguments[0].scrollIntoView(true);", E);
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Move_to_Element(String NAME, AndroidElement E, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            Actions action = new Actions(ad);
+            action.moveToElement(E).perform();
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    } 
+    protected void Click_out_of_Element(String NAME, AndroidElement E, String DIRECTION, int X, int Y, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            int XX = E.getLocation().x;
+            int YY = E.getLocation().y;
+            if("Right".equals(DIRECTION)){ 
+                XX = XX + ae.getSize().width + X;
+            } else if ("Left".equals(DIRECTION)){ 
+                XX = XX + X; 
+            }
+            
+            if("Bottom".equals(DIRECTION)){ 
+                YY = YY + ae.getSize().height + Y;
+            } else if ("Top".equals(DIRECTION)){ 
+                YY = YY + Y; 
+            }
+            
+            Actions action = new Actions(ad);
+            action.moveToElement(E, XX, YY).click().perform();
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Click " + DIRECTION + " of element successful" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true;  err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + DIRECTION + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    } 
+    protected void Move_to_Element_By_Path(String NAME, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            switch (BY) {
+                case "xpath":
+                    ae = ad.findElement(By.xpath(PATH));
+                    break;
+                case "css":
+                    ae = ad.findElement(By.cssSelector(PATH));
+                    break;
+                case "className":
+                    ae = ad.findElement(By.className(PATH));
+                    break;
+                case "id":
+                    ae = ad.findElement(By.id(PATH));
+                    break;
+                case "tagName":
+                    ae = ad.findElement(By.tagName(PATH));
+                    break;
+                case "name":
+                    ae = ad.findElement(By.name(PATH));
+                    break;                     
+                case "linkText":
+                    ae = ad.findElement(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    ae = ad.findElement(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            Actions action = new Actions(ad);
+            action.moveToElement(ae).perform();
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Move_out_of_Element_By_Path(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            switch (BY) {
+                case "xpath":
+                    ae = ad.findElement(By.xpath(PATH));
+                    break;
+                case "css":
+                    ae = ad.findElement(By.cssSelector(PATH));
+                    break;
+                case "className":
+                    ae = ad.findElement(By.className(PATH));
+                    break;
+                case "id":
+                    ae = ad.findElement(By.id(PATH));
+                    break;
+                case "tagName":
+                    ae = ad.findElement(By.tagName(PATH));
+                    break;
+                case "name":
+                    ae = ad.findElement(By.name(PATH));
+                    break;                     
+                case "linkText":
+                    ae = ad.findElement(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    ae = ad.findElement(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            
+            int XX = ae.getLocation().x;
+            int YY = ae.getLocation().y;
+            if("Right".equals(DIRECTION)){ 
+                XX = XX + ae.getSize().width + X;
+            } else if ("Left".equals(DIRECTION)){ 
+                XX = XX + X; 
+            }
+            
+            if("Bottom".equals(DIRECTION)){ 
+                YY = YY + ae.getSize().height + Y;
+            } else if ("Top".equals(DIRECTION)){ 
+                YY = YY + Y; 
+            }
+            
+            Actions action = new Actions(ad);
+            action.moveToElement(ae, XX, YY).perform();
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Move '" + DIRECTION + "' of element successful" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true;  err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Click_out_of_Element_By_Path(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            switch (BY) {
+                case "xpath":
+                    ae = ad.findElement(By.xpath(PATH));
+                    break;
+                case "css":
+                    ae = ad.findElement(By.cssSelector(PATH));
+                    break;
+                case "className":
+                    ae = ad.findElement(By.className(PATH));
+                    break;
+                case "id":
+                    ae = ad.findElement(By.id(PATH));
+                    break;
+                case "tagName":
+                    ae = ad.findElement(By.tagName(PATH));
+                    break;
+                case "name":
+                    ae = ad.findElement(By.name(PATH));
+                    break;                     
+                case "linkText":
+                    ae = ad.findElement(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    ae = ad.findElement(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+
+            int XX = ae.getLocation().x;
+            int YY = ae.getLocation().y;
+            if("Right".equals(DIRECTION)){ 
+                XX = XX + ae.getSize().width + X;
+            } else if ("Left".equals(DIRECTION)){ 
+                XX = XX + X; 
+            }
+            
+            if("Bottom".equals(DIRECTION)){ 
+                YY = YY + ae.getSize().height + Y;
+            } else if ("Top".equals(DIRECTION)){ 
+                YY = YY + Y; 
+            }            
+            
+            Actions action = new Actions(ad);
+            action.moveToElement(ae, XX, YY).click().perform();
+            //Thread.sleep(500);
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Click out " + DIRECTION + " of element successful" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true;  err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+
+    protected void Text_Found(String NAME, String VAL, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        t ="?";
+        try {
+            ae = ad.findElement(By.xpath("//*[contains(text(), \"" + VAL + "\")]"));
+            t = "Found";
+            EX += _t + "\t" + NAME + "\t" + VAL  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            t = "Not Found";
+            EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Not Found" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        }
+        _p++;
+        sw1.reset();
+    }
+    protected void Find_Text(String NAME, String VAL, Boolean EXPECTED,String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        t = "Not Found";
+        try {
+            ae = ad.findElement(By.xpath("//*[contains(text(), \"" + VAL + "\")]"));
+            t = ae.getText();
+            if(t.trim().equals("")){
+                t = ae.getAttribute("content-desc");
+            }
+            if(t != null && t.trim() != ""){
+                t = t.replace("\r\n", " ").replace("\n", " ");
+                t = t.replaceAll("[ ]+", " ");
+            } else {
+                t = "Not Found";
+            }
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + "Text Found" + "\t" + t + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            if(EXPECTED){
+                _f++; FAIL = false; err = ex.getMessage().trim();
+                if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+                EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";                
+            } else {
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text Not Found" + "\t" + "PASS" + "\t" + " - " +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                
+            }
+        }
+        sw1.reset();
+    }    
+
+    protected void Element_E1_Find(String NAME, String BY, String PATH, String JIRA ){
+        FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
+        try {
+            switch (BY) {
+                case "xpath":
+                    ae1 = ad.findElement(By.xpath(PATH));
+                    break;
+                case "css":
+                    ae1 = ad.findElement(By.cssSelector(PATH));
+                    break;
+                case "className":
+                    ae1 = ad.findElement(By.className(PATH));
+                    break;
+                case "id":
+                    ae1 = ad.findElement(By.id(PATH));
+                    break;
+                case "tagName":
+                    ae1 = ad.findElement(By.tagName(PATH));
+                    break;
+                 case "name":
+                    ae1 = ad.findElement(By.name(PATH));                
+                    break;
+                 case "linkText":
+                    ae1 = ad.findElement(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    ae1 = ad.findElement(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            _p++;
+            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Element Found" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
+            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Element_E2_Find(String NAME, String BY, String PATH, String JIRA ){
+        FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
+        try {
+            switch (BY) {
+                case "xpath":
+                    ae2 = ad.findElement(By.xpath(PATH));
+                    break;
+                case "css":
+                    ae2 = ad.findElement(By.cssSelector(PATH));
+                    break;
+                case "className":
+                    ae2 = ad.findElement(By.className(PATH));
+                    break;
+                case "id":
+                    ae2 = ad.findElement(By.id(PATH));
+                    break;
+                case "tagName":
+                    ae2 = ad.findElement(By.tagName(PATH));
+                    break;
+                 case "name":
+                    ae2 = ad.findElement(By.name(PATH));                   
+                case "linkText":
+                    ae2 = ad.findElement(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    ae2 = ad.findElement(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            _p++;
+            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Element Found" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
+            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Element_By_Path_Click(String NAME, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            switch (BY) {
+                case "xpath":
+                    ae = ad.findElement(By.xpath(PATH));
+                    break;
+                case "css":
+                    ae = ad.findElement(By.cssSelector(PATH));
+                    break;
+                case "className":
+                    ae = ad.findElement(By.className(PATH));
+                    break;
+                case "id":
+                    ae = ad.findElement(By.id(PATH));
+                    break;
+                case "tagName":
+                    ae = ad.findElement(By.tagName(PATH));
+                    break;
+                case "name":
+                    ae = ad.findElement(By.name(PATH));
+                    break;
+                 case "linkText":
+                    ae = ad.findElement(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    ae = ad.findElement(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            Actions action = new Actions(ad);
+            action.moveToElement(ae).click().perform();
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Element_By_Path_Text(String NAME, String BY, String PATH, String JIRA ){
+        t = "empty"; FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
+        try {
+            switch (BY) {
+                case "xpath":
+                    t = ad.findElement(By.xpath(PATH)).getText();
+                    break;
+                case "css":
+                    t = ad.findElement(By.cssSelector(PATH)).getText();   
+                    break;
+                case "className":
+                    t = ad.findElement(By.className(PATH)).getText();
+                    break;
+                case "id":
+                    t = ad.findElement(By.id(PATH)).getText();
+                    break;
+                case "tagName":
+                    t = ad.findElement(By.tagName(PATH)).getText();
+                    break;
+                case "name":
+                    t = ad.findElement(By.name(PATH)).getText();                    
+                    break;
+                case "linkText":
+                    t = ad.findElement(By.linkText(PATH)).getText();
+                    break;
+                case "partialLinkText":
+                    t = ad.findElement(By.partialLinkText(PATH)).getText();
+                    break;
+                default:
+                    break;
+            }
+            _p++;
+            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t.replace("\r\n", " ").replace("\n", " ") + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = false; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
+            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Element_By_Path_Attribute(String NAME, String BY, String PATH, String VAL, String JIRA ){
+        t = ""; FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+
+        try {
+            switch (BY) {
+                case "xpath":
+                    t = ad.findElement(By.xpath(PATH)).getAttribute(VAL); 
+                    break;
+                case "css":
+                    t = ad.findElement(By.cssSelector(PATH)).getAttribute(VAL); 
+                    break;
+                case "className":
+                    t = ad.findElement(By.className(PATH)).getAttribute(VAL); 
+                    break;
+                case "id":
+                    t = ad.findElement(By.id(PATH)).getAttribute(VAL); 
+                    break;
+                case "tagName":
+                    t = ad.findElement(By.tagName(PATH)).getAttribute(VAL); 
+                    break;
+                case "name":
+                    t = ad.findElement(By.name(PATH)).getAttribute(VAL); 
+                    break;
+                case "linkText":
+                    t = ad.findElement(By.linkText(PATH)).getAttribute(VAL); 
+                    break;
+                case "partialLinkText":
+                    t = ad.findElement(By.partialLinkText(PATH)).getAttribute(VAL); 
+                    break;
+                default:
+                    break;
+            }
+            if(t != null){
+                t = t.replace("\r\n", " ").replace("\n", " ");
+                t = t.replaceAll("[ ]+", " ");
+            } else {
+                t = "null";
+            }
+            EX += _t + "\t" + NAME + "\t" + VAL  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            _p++; 
+        } catch(Exception ex){
+            _f++; FAIL = false; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
+            EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Element_By_Path_Text_Select_Copy(String NAME, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        t = "not found!";
+        try {
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Clipboard clipboard = null;
+            try{
+                clipboard = toolkit.getSystemClipboard();
+                clipboard.setContents( new StringSelection(""), null); // 900009
+            }catch (Exception ex){
+                Thread.sleep(20);
+                clipboard = toolkit.getSystemClipboard();
+                clipboard.setContents( new StringSelection(""), null);
+            } 
+            switch (BY) {
+                case "xpath":
+                    ae = ad.findElement(By.xpath(PATH));
+                    break;                    
+                case "css":
+                    ae = ad.findElement(By.cssSelector(PATH));
+                    break;
+                default:
+                    break;
+            }
+            
+            if(A.A.WsOS.toLowerCase().contains("windows")){
+                ae.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
+                ae.sendKeys(Keys.chord(Keys.CONTROL, "c")); //copy                 
+            }else{
+                ae.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+                ae.sendKeys(Keys.chord(Keys.COMMAND, "c")); //copy                   
+            }
+            t = (String) clipboard.getData(DataFlavor.stringFlavor);
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = false; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
+            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Element_By_Path_Text_DblClick_Copy(String NAME, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        t = "not found!";
+        try {
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Clipboard clipboard = null;
+            try{
+                clipboard = toolkit.getSystemClipboard();
+                clipboard.setContents( new StringSelection(""), null); // 900009
+            }catch (Exception ex){
+                Thread.sleep(20);
+                clipboard = toolkit.getSystemClipboard();
+                clipboard.setContents( new StringSelection(""), null);
+            }
+            switch (BY) {
+                case "xpath":
+                    ae = ad.findElement(By.xpath(PATH));
+                    break;
+                case "css":
+                    ae = ad.findElement(By.cssSelector(PATH));
+                    break;
+                default:
+                    break;
+            }
+            Actions action = new Actions(ad);
+            action.doubleClick(ae).perform();
+            if(A.A.WsOS.toLowerCase().contains("windows")){
+                ae.sendKeys(Keys.chord(Keys.CONTROL, "c")); //copy             
+            }else{
+                ae.sendKeys(Keys.chord(Keys.COMMAND, "c")); //copy                   
+            }            
+
+            t = (String) clipboard.getData(DataFlavor.stringFlavor);
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = false; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
+            EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Element_By_Path_Text_DblClick_Paste(String NAME, String BY, String PATH, String VAL,  String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        t = "not found!";
+        try {
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Clipboard clipboard = null;
+            try{
+                clipboard = toolkit.getSystemClipboard();
+                clipboard.setContents( new StringSelection(""), null); // 900009
+            }catch (Exception ex){
+                Thread.sleep(20);
+                clipboard = toolkit.getSystemClipboard();
+                clipboard.setContents( new StringSelection(""), null);
+            }
+            switch (BY) {
+                case "xpath":
+                    ae = ad.findElement(By.xpath(PATH));
+                    break;
+                case "css":
+                    ae = ad.findElement(By.cssSelector(PATH));
+                    break;
+                default:
+                    break;
+            }
+            Actions action = new Actions(ad);
+            action.doubleClick(ae).perform();
+            
+            if(A.A.WsOS.toLowerCase().contains("windows")){
+                ae.sendKeys(Keys.chord(Keys.CONTROL, "c")); //copy
+                t = (String) clipboard.getData(DataFlavor.stringFlavor);
+                ae.sendKeys(Keys.chord(Keys.CONTROL, "v")); //paste       
+            }else{
+                ae.sendKeys(Keys.chord(Keys.COMMAND, "c")); //copy
+                t = (String) clipboard.getData(DataFlavor.stringFlavor);
+                ae.sendKeys(Keys.chord(Keys.COMMAND, "v")); //paste                
+            }               
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + " > " + VAL + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = false; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
+            EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Element_By_Path_Input_Select_Clear(String NAME, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            switch (BY) {
+                case "xpath":
+                    ae = ad.findElement(By.xpath(PATH));
+                    break;
+                case "css":
+                    ae = ad.findElement(By.cssSelector(PATH)); 
+                    break;
+                case "className":
+                    ae = ad.findElement(By.className(PATH)); 
+                    break;
+                case "id":
+                    ae = ad.findElement(By.id(PATH));
+                    break;
+                case "tagName":
+                    ae = ad.findElement(By.tagName(PATH));
+                    break;
+                case "name":
+                    ae = ad.findElement(By.name(PATH));
+                    break;
+                 case "linkText":
+                    ae = ad.findElement(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    ae = ad.findElement(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            if(A.A.WsOS.toLowerCase().contains("windows")){
+                ae.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
+                ae.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it                  
+            }else{
+                ae.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+                ae.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
+            }
+
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Cleared" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
+            EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Element_By_Path_Text_Enter(String NAME, String BY, String PATH, String VAL, boolean HIDE,String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            if(null != BY) switch (BY) {
+                case "xpath":
+                    ae = ad.findElement(By.xpath(PATH));
+                    break;
+                case "css":
+                    ae = ad.findElement(By.cssSelector(PATH)); 
+                    break;
+                case "className":
+                    ae = ad.findElement(By.className(PATH)); 
+                    break;
+                case "id":
+                    ae = ad.findElement(By.id(PATH));
+                    break;
+                case "tagName":
+                    ae = ad.findElement(By.tagName(PATH));
+                    break;
+                case "name":
+                    ae = ad.findElement(By.name(PATH));
+                    break;
+                 case "linkText":
+                    ae = ad.findElement(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    ae = ad.findElement(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            ae.sendKeys(VAL);
+            _p++; 
+            if(HIDE){
+                VAL = "*****";
+            }
+            EX += _t + "\t" + NAME + "\t" + BY + " " + PATH + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true;  err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        } 
+        sw1.reset();
+    }
+
+    protected void Element_Text(String NAME, AndroidElement E, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        t = "?";
+        try {
+            t = E.getText();
+            if(t.trim().equals("")){
+                //t = E.getAttribute("content-desc");
+                t = E.getAttribute("name");
+            }
+            if(t != null){
+                t = t.replace("\r\n", " ").replace("\n", " ");
+                t = t.replaceAll("[ ]+", " ");
+            } else {
+                t = "null";
+            }
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Element_Text_Clear(String NAME, AndroidElement E, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {      
+            if(A.A.WsOS.toLowerCase().contains("windows")){
+                E.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
+                E.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it              
+            }else{
+                E.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+                E.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
+            }   
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Text cleared"+ "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Element_Text_Enter(String NAME, AndroidElement E, String VAL, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            E.sendKeys(VAL);
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Element_Attribute(String NAME, AndroidElement E, String VAL, String JIRA ){       
+        t = "empty";
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            t = E.getAttribute(VAL);
+            if(t != null){
+                t = t.replace("\r\n", " ").replace("\n", " ");
+                t = t.replaceAll("[ ]+", " "); 
+            } else {
+                t = "null";
+            }
+            if (t.contains("img-default"))
+            {
+                EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "WARN" + "\t" + "No Image" +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                _w++;
+            } else {
+                EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                _p++;
+            }
+        } catch(Exception ex){
+            _f++; FAIL = false;  err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Element_Click(String NAME, AndroidElement E, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            Actions action = new Actions(ad);
+            action.moveToElement(E).click().perform();
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+
+    protected void Element_Child_List_L1(String NAME, AndroidElement E, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        if(aL1 != null) {aL1.clear();}
+        try {
+            switch (BY) {
+                case "xpath":
+                    aL1 = (List<AndroidElement>) (AndroidElement) E.findElements(By.xpath(PATH));
+                    break;
+                case "css":
+                    aL1 = (List<AndroidElement>) (AndroidElement) E.findElements(By.cssSelector(PATH));
+                    break;
+                case "className":
+                    aL1 = (List<AndroidElement>) (AndroidElement) E.findElements(By.className(PATH));
+                    break;
+                case "id":
+                    aL1 = (List<AndroidElement>) (AndroidElement) E.findElements(By.id(PATH));
+                    break;
+                case "tagName":
+                    aL1 = (List<AndroidElement>) (AndroidElement) E.findElements(By.tagName(PATH));
+                    break;
+                case "name":
+                    aL1 = (List<AndroidElement>) (AndroidElement) E.findElements(By.name(PATH));
+                    break;
+                case "linkText":
+                    aL1 = (List<AndroidElement>) (AndroidElement) E.findElements(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    aL1 = (List<AndroidElement>) (AndroidElement) E.findElements(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            if(aL1.isEmpty()){
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L1.isEmpty" +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
+            }else{
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + aL1.size() + " item(s) (L1)" + "\t" + "PASS" + "\t" + " - " +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";               
+            }
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + PATH+ "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        } 
+        sw1.reset();
+    }    
+    protected void Element_Child_List_L2(String NAME, AndroidElement  E, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        if(aL1 != null) {aL1.clear();}
+        try {
+            switch (BY) {
+                case "xpath":
+                    aL2 = (List<AndroidElement>) (AndroidElement) E.findElements(By.xpath(PATH));
+                    break;
+                case "css":
+                    aL2 = (List<AndroidElement>) (AndroidElement) E.findElements(By.cssSelector(PATH));
+                    break;
+                case "className":
+                    aL2 = (List<AndroidElement>) (AndroidElement) E.findElements(By.className(PATH));
+                    break;
+                case "id":
+                    aL2 = (List<AndroidElement>) (AndroidElement) E.findElements(By.id(PATH));
+                    break;
+                case "tagName":
+                    aL2 = (List<AndroidElement>) (AndroidElement) E.findElements(By.tagName(PATH));
+                    break;
+                case "name":
+                    aL2 = (List<AndroidElement>) (AndroidElement) E.findElements(By.name(PATH));
+                    break;
+                case "linkText":
+                    aL2 = (List<AndroidElement>) (AndroidElement) E.findElements(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    aL2 = (List<AndroidElement>) (AndroidElement) E.findElements(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            if(aL2.isEmpty()){
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L2.isEmpty" +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
+            }else{
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + aL2.size() + " item(s) (L1)" + "\t" + "PASS" + "\t" + " - " +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";               
+            }
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + PATH+ "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        } 
+        sw1.reset();
+    }    
+    protected void Element_Child_E2(String NAME, AndroidElement E, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            switch (BY) {
+                case "xpath":
+                    ae2 = (AndroidElement) E.findElement(By.xpath(PATH));
+                    break;
+                case "css":
+                    ae2 = (AndroidElement) E.findElement(By.cssSelector(PATH));
+                    break;
+                case "className":
+                    ae2 = (AndroidElement) E.findElement(By.className(PATH));
+                    break;
+                case "id":
+                    ae2 = (AndroidElement) E.findElement(By.id(PATH));
+                    break;
+                case "tagName":
+                    ae2 = (AndroidElement) E.findElement(By.tagName(PATH));
+                    break;
+                case "name":
+                    ae2 = (AndroidElement) E.findElement(By.name(PATH));
+                    break;
+                case "linkText":
+                    ae2 = (AndroidElement) E.findElement(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    ae2 = (AndroidElement) E.findElement(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Element (e2) found" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "e2" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        } 
+        sw1.reset();
+    }    
+    protected void Element_Child_Text(String NAME, AndroidElement E, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        t = "?";
+        try {
+            switch (BY) {
+                case "xpath":
+                    t = E.findElement(By.xpath(PATH)).getText();
+                    break;
+                case "css":
+                    t = E.findElement(By.cssSelector(PATH)).getText();
+                    break;
+                case "className":
+                    t = E.findElement(By.className(PATH)).getText();
+                    break;
+                case "id":
+                    t = E.findElement(By.id(PATH)).getText();
+                    break;
+                case "tagName":
+                    t = E.findElement(By.tagName(PATH)).getText();
+                    break;
+                case "name":
+                    t = E.findElement(By.name(PATH)).getText();
+                    break;
+                case "linkText":
+                    t = E.findElement(By.linkText(PATH)).getText();
+                    break;
+                case "partialLinkText":
+                    t = E.findElement(By.partialLinkText(PATH)).getText();
+                    break;
+                default:
+                    break;
+            }
+            if(t.trim().equals("")){
+                t = E.getAttribute("content-desc");
+            }
+            if(t != null){
+                t = t.replace("\r\n", " ").replace("\n", " ");
+                t = t.replaceAll("[ ]+", " ");
+            } else {
+                t = "null";
+            }
+            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + t + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            _p++;
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        } 
+        sw1.reset();
+    }    
+    protected void Element_Child_Text_Enter(String NAME, AndroidElement E, String BY, String PATH, String VAL, boolean HIDE, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        AndroidElement _e = null;
+        try {
+            switch (BY) {
+                case "xpath":
+                    _e = (AndroidElement) E.findElement(By.xpath(PATH));
+                    break;
+                case "css":
+                    _e = (AndroidElement) E.findElement(By.cssSelector(PATH));
+                    break;
+                case "className":
+                    _e = (AndroidElement) E.findElement(By.className(PATH));
+                    break;
+                case "id":
+                    _e = (AndroidElement) E.findElement(By.id(PATH));
+                    break;
+                case "tagName":
+                    _e = (AndroidElement) E.findElement(By.tagName(PATH));
+                    break;
+                case "name":
+                    _e = (AndroidElement) E.findElement(By.name(PATH));
+                    break;
+                case "linkText":
+                    _e = (AndroidElement) E.findElement(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    _e = (AndroidElement) E.findElement(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            _e.sendKeys(VAL);
+            _p++; 
+            if(HIDE){
+                VAL = "*****";
+            }            
+            EX += _t + "\t" + NAME + "\t" + BY + " " + PATH + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true;  err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        } 
+        sw1.reset();
+    }
+    protected void Element_Child_Click(String NAME, AndroidElement E, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            switch (BY) {
+                case "xpath":
+                    E.findElement(By.xpath(PATH)).click();
+                    break;
+                case "css":
+                    E.findElement(By.cssSelector(PATH)).click();
+                    break;
+                case "className":
+                    E.findElement(By.className(PATH)).click();
+                    break;
+                case "id":
+                    E.findElement(By.id(PATH)).click();
+                    break;
+                case "tagName":
+                    E.findElement(By.tagName(PATH)).click();
+                    break;
+                case "name":
+                    E.findElement(By.name(PATH)).click();
+                    break;
+                case "linkText":
+                    E.findElement(By.linkText(PATH)).click();
+                    break;
+                case "partialLinkText":
+                    E.findElement(By.partialLinkText(PATH)).click();
+                    break;
+                default:
+                    break;
+            }
+            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Click OK" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            _p++;
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        } 
+        sw1.reset();
+    }    
+    protected void Element_Child_Attribute(String NAME, AndroidElement E, String BY, String PATH, String VAL, String JIRA ){
+        t = "";
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            switch (BY) {
+                case "xpath":
+                    t = E.findElement(By.xpath(PATH)).getAttribute(VAL); 
+                    break;
+                case "css":
+                    t = E.findElement(By.cssSelector(PATH)).getAttribute(VAL); 
+                    break;
+                case "className":
+                    t = E.findElement(By.className(PATH)).getAttribute(VAL); 
+                    break;
+                case "id":
+                    t = E.findElement(By.id(PATH)).getAttribute(VAL); 
+                    break;
+                case "tagName":
+                    t = E.findElement(By.tagName(PATH)).getAttribute(VAL); 
+                    break;
+                case "name":
+                    t = E.findElement(By.name(PATH)).getAttribute(VAL); 
+                    break;
+                case "linkText":
+                    t = E.findElement(By.linkText(PATH)).getAttribute(VAL); 
+                    break;
+                case "partialLinkText":
+                    t = E.findElement(By.partialLinkText(PATH)).getAttribute(VAL); 
+                    break;
+                default:
+                    break;
+            }
+            if(t != null){
+                t = t.replace("\r\n", " ").replace("\n", " ");
+                t = t.replaceAll("[ ]+", " ");
+            } else {
+                t = "null";
+            }
+            if (t.contains("placeholder") || t.contains("adminpanel.compassdigital.org") || t.contains("img-default"))
+            {
+                EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "WARN" + "\t" + "No Image" +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                _w++;
+            } else {
+                EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "PASS" + "\t" + " - " +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                _p++;
+            } 
+        } catch(Exception ex){
+            _f++; FAIL = false; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
+            EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+
+    protected void List_L0(String NAME, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        if(aL0 != null) {aL0.clear();}
+        try {
+            switch (BY) {
+                case "xpath":
+                    aL0 = ad.findElements(By.xpath(PATH));
+                    break;
+                case "css":
+                    aL0 = ad.findElements(By.cssSelector(PATH));
+                    break;
+                case "className":
+                    aL0 = ad.findElements(By.className(PATH));
+                    break;
+                case "id":
+                    aL0 = ad.findElements(By.id(PATH));
+                    break;
+                case "tagName":
+                    aL0 = ad.findElements(By.tagName(PATH));
+                    break;
+                case "name":
+                    aL0 = ad.findElements(By.name(PATH));
+                    break;
+                case "linkText":
+                    aL0 = ad.findElements(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    aL0 = ad.findElements(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            if(aL0.isEmpty()){
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L0.isEmpty" +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
+            }else{
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + aL0.size() + " item(s) (L0)" + "\t" + "PASS" + "\t" + " - " +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";               
+            }
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + PATH+ "\t" + "L0" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void List_L1(String NAME, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        if(aL1 != null) {aL1.clear();}
+        try {
+            switch (BY) {
+                case "xpath":
+                    aL1 = ad.findElements(By.xpath(PATH));
+                    break;
+                case "css":
+                    aL1 = ad.findElements(By.cssSelector(PATH));
+                    break;
+                case "className":
+                    aL1 = ad.findElements(By.className(PATH));
+                    break;
+                case "id":
+                    aL1 = ad.findElements(By.id(PATH));
+                    break;
+                case "tagName":
+                    aL1 = ad.findElements(By.tagName(PATH));
+                    break;
+                case "name":
+                    aL1 = ad.findElements(By.name(PATH));
+                    break;
+                case "linkText":
+                    aL1 = ad.findElements(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    aL1 = ad.findElements(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            if(aL1.isEmpty()){
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L1.isEmpty" +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
+            }else{
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + aL1.size() + " item(s) (L1)" + "\t" + "PASS" + "\t" + " - " +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                
+            }
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + PATH+ "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        } 
+        sw1.reset();
+    }
+    protected void List_L2(String NAME, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        if(aL2 != null) {aL2.clear();}
+        try {
+            switch (BY) {
+                case "xpath":
+                    aL2 = ad.findElements(By.xpath(PATH));
+                    break;
+                case "css":
+                    aL2 = ad.findElements(By.cssSelector(PATH));
+                    break;
+                case "className":
+                    aL2 = ad.findElements(By.className(PATH));
+                    break;
+                case "id":
+                    aL2 = ad.findElements(By.id(PATH));
+                    break;
+                case "tagName":
+                    aL2 = ad.findElements(By.tagName(PATH));
+                    break;
+                case "name":
+                    aL2 = ad.findElements(By.name(PATH));
+                    break;
+                case "linkText":
+                    aL2 = ad.findElements(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    aL2 = ad.findElements(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            if(aL2.isEmpty()){
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L2.isEmpty()" +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
+            }else{
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + aL2.size() + " item(s) (L2)" + "\t" + "PASS" + "\t" + " - " +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";               
+            }
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + PATH+ "\t" + "L2" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        } 
+        sw1.reset();
+    }
+    protected void List_L3(String NAME, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        if(aL3 != null) {aL3.clear();}
+        try {
+            switch (BY) {
+                case "xpath":
+                    aL3 = ad.findElements(By.xpath(PATH));
+                    break;
+                case "css":
+                    aL3 = ad.findElements(By.cssSelector(PATH));
+                    break;
+                case "className":
+                    aL3 = ad.findElements(By.className(PATH));
+                    break;
+                case "id":
+                    aL3 = ad.findElements(By.id(PATH));
+                    break;
+                case "tagName":
+                    aL3 = ad.findElements(By.tagName(PATH));
+                    break;
+                case "name":
+                    aL3 = ad.findElements(By.name(PATH));
+                    break;
+                case "linkText":
+                    aL3 = ad.findElements(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    aL3 = ad.findElements(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            if(aL3.isEmpty()){
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L3.isEmpty" +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
+            }else{
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + aL3.size() + " item(s) (L3)" + "\t" + "PASS" + "\t" + " - " +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                
+            }
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + PATH+ "\t" + "L2" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        } 
+        sw1.reset();
+    } 
+    // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="Package Variables">
+    // <editor-fold defaultstate="collapsed" desc="Mobile Run Flow(s)">    
+    protected void Run_Bolter() throws InterruptedException {   
+//        Thread.sleep(500);
+//        _t++; Element_E1_Find("Is it Splash Screen/Logo?", "id", "splashScreenLogo", "no_jira");             
+////            //if (FAIL) { return;}        // "id", "packagename:id/splashScreenLogo",          
+        _t++; Test_EX_Update("Bolter Test EX Update 1", "no_jira");             
+            if (FAIL) { return; }   
+        _t++; Test_EX_Update("Bolter Test EX Update 2", "no_jira");             
+            if (FAIL) { return; }            
+        _t++; Wait_For_Element_By_Path_InVisibility("Wait for Splash screen", "id", "splashScreenLogo", "no_jira");             
+            if (FAIL) { return;} 
+        
+        _t++; Wait_For_Element_By_Path_Presence("Wait for 'Sign In' screen", "id", "button_login", "no_jira");             
+            if (FAIL) { return;} 
+        _t++; Element_By_Path_Text("Get 'Sign In' button text", "id", "button_login", "no_jira");             
+            if (FAIL) { return;} 
+        _t++; Element_By_Path_Text("Get 'Forgot PW?' button text", "id", "btn_forgotPassword", "no_jira");             
+            if (FAIL) { return;}      
+        _t++; Element_By_Path_Click("Click 'Email' input", "id", "textInputEditText_login_email_address", "no_jira");             
+            if (FAIL) { return;}            
+        _t++; Element_By_Path_Text_Enter("Enter 'Email'", "id", "textInputEditText_login_email_address", Bolter_ID, false,"no_jira");             
+            if (FAIL) { return;} 
+        _t++; Element_By_Path_Click("Click 'Password' input", "id", "textInputEditText_login_password", "no_jira");             
+            if (FAIL) { return;}            
+        _t++; Element_By_Path_Text_Enter("Enter 'Password' input", "id", "textInputEditText_login_password", Bolter_PW, true,"no_jira");             
+            if (FAIL) { return;} 
+        _t++; Element_By_Path_Click("Click 'Undide Password' icon", "id", "text_input_end_icon", "no_jira");             
+            if (FAIL) { return;}              
+        _t++; HideKeyboard("Hide Keyboard", "no_jira");             
+            if (FAIL) { return;}
+        _t++; Element_By_Path_Click("Click 'Log In' button", "id", "button_login", "no_jira");             
+            if (FAIL) { return;}  
+        _t++; Wait_For_Element_By_Path_InVisibility("Wait for load", "id", "android:id/progress", "no_jira");             
+            if (FAIL) { return;}          
+        _t++; Wait_For_Element_By_Path_Presence("Wait for 'Dashboard' screen", "id", "delivery_dashboard_title", "no_jira");             
+            if (FAIL) { return;} 
+
+        _t++; Element_By_Path_Click("Click 'Open Navigation drawer' image", "xpath", "//android.widget.ImageButton[@content-desc='Open navigation drawer']", "no_jira");             
+            if (FAIL) { return;} 
+        _t++; Element_By_Path_Text("Get 'About' > Version", "id", "appVersion","no_jira");             
+            if (FAIL) { return;}  
+            appVersion = t;
+            
+        _t++; Element_By_Path_Click("Click 'Log out'", "id", "nav_logout", "no_jira");             
+            if (FAIL) { return;} 
+    }
+    protected void Run_CoreApp() throws InterruptedException {     
+//        _t++; ResetApp("Reset App", "no_jira");  
+
+        _t++; Test_EX_Update("CoreApp Test EX Update 1", "no_jira");             
+            if (FAIL) { return; }   
+        _t++; Test_EX_Update("CoreApp Test EX Update 2", "no_jira");             
+            if (FAIL) { return; } 
+            
+            
+        _t++; Wait_For_Element_By_Path_InVisibility("Wait for Splash screen", "id", "splashScreenLogo", "no_jira");             
+            if (FAIL) { return;}     
+        _t++; Wait_For_Element_By_Path_Presence("Wait for 'Join/Login' screen", "id", "join_button", "no_jira");             
+            if (FAIL) { return;} 
+        _t++; Element_By_Path_Text("Get 'Join <App>' button text", "id", "join_button", "no_jira");             
+            //if (FAIL) { return;} 
+        _t++; Element_By_Path_Text("Get 'Alreay have an account'", "id", "already_have_account_text_view", "no_jira");             
+            //if (FAIL) { return;}    
+        _t++; Element_By_Path_Text("Get 'Explore <App>' text", "id", "explore_button", "no_jira");             
+            //if (FAIL) { return;}  
+        _t++; Element_By_Path_Attribute("Get 'Explore' Content Description", "id", "explore_button_container", "contentDescription","no_jira");             
+            //if (FAIL) { return;}  
+
+        _t++; Element_By_Path_Text("Get 'Log in' text", "id", "login_text", "no_jira");             
+            //if (FAIL) { return;}             
+        _t++; Element_By_Path_Click("Click 'Log in'", "id", "login_text", "no_jira");             
+            if (FAIL) { return;}
+        _t++; Element_By_Path_Text("Get 'Welcome...' text", "id", "toolbar_title", "no_jira");             
+            //if (FAIL) { return;}     
+        _t++; Element_By_Path_Text("Get 'Welcome...' subtext", "id", "subtext", "no_jira");             
+            //if (FAIL) { return;}  
+        _t++; Element_By_Path_Text("Get 'Forgot PW?' button text", "id", "btn_forgotPassword", "no_jira");             
+            //if (FAIL) { return;} 
+             
+        _t++; Element_By_Path_Click("Click 'Email' input", "id", "textInputEditText_login_email_address", "no_jira");             
+            if (FAIL) { return;}            
+        _t++; Element_By_Path_Text_Enter("Enter 'Email'", "id", "textInputEditText_login_email_address", Mobile_ID, false,"no_jira");             
+            if (FAIL) { return;} 
+        _t++; Element_By_Path_Click("Click 'Password' input", "id", "textInputEditText_login_password", "no_jira");             
+            if (FAIL) { return;}            
+        _t++; Element_By_Path_Text_Enter("Enter 'Password' input", "id", "textInputEditText_login_password", Mobile_PW, true,"no_jira");             
+            if (FAIL) { return;} 
+        _t++; Element_By_Path_Click("Click 'Undide Password' icon", "id", "text_input_end_icon", "no_jira");             
+            if (FAIL) { return;}              
+        _t++; HideKeyboard("Hide Keyboard", "no_jira");             
+            if (FAIL) { return;}
+        _t++; Element_By_Path_Click("Click 'Log In' button", "id", "button_login", "no_jira");             
+            if (FAIL) { return;}  
+        _t++; Wait_For_Element_By_Path_InVisibility("Wait for load", "id", "android:id/progress", "no_jira");             
+            if (FAIL) { return;}   
+            
+        _t++; Wait_For_Element_By_Path_Presence("Wait for 'Find Food' title", "id", "title", "no_jira");             
+            if (FAIL) { return;} 
+        _t++; Element_By_Path_Text("Get 'Title' text", "id", "title", "no_jira");             
+            //if (FAIL) { return;}            
+        _t++; Element_By_Path_Text("Get 'Decription' text", "id", "description", "no_jira");             
+            //if (FAIL) { return;}   
+            
+        _t++; Element_By_Path_Text("Get 'Enable..' button text", "id", "btnEnableLocation", "no_jira");             
+            if (FAIL) { return;}   
+        _t++; Element_By_Path_Text("Get 'No..' button text", "id", "btnNoThanks", "no_jira");             
+            if (FAIL) { return;}  
+        _t++; Element_By_Path_Click("Click 'Enable..' button ", "id", "btnEnableLocation", "no_jira");             
+            if (FAIL) { return;}             
+//        _t++; Element_By_Path_Click("Click 'No..' button ", "id", "btnNoThanks", "no_jira");             
+//            if (FAIL) { return;} 
+        _t++; Element_By_Path_Click("Click 'Allow..' button ", "id", "com.android.packageinstaller:id/permission_allow_button", "no_jira");             
+            if (FAIL) { return;} 
+            
+        _t++; Wait_For_Element_By_Path_Presence("Wait for 'Home' screen", "id", "home", "no_jira");             
+            if (FAIL) { return;} 
+        _t++; Element_By_Path_Attribute("Get 'Home' Content Description", "id", "home", "contentDescription","no_jira");             
+            if (FAIL) { return;} 
+        _t++; Element_By_Path_Attribute("Get 'Orders' Content Description", "id", "order", "contentDescription","no_jira");             
+            if (FAIL) { return;} 
+        _t++; Element_By_Path_Attribute("Get 'Account' Content Description", "id", "account", "contentDescription","no_jira");             
+            if (FAIL) { return;} 
+            
+        _t++; Element_By_Path_Click("Click 'Account'", "id", "account", "no_jira");             
+            if (FAIL) { return;}  
+        _t++; Swipe_From_Screen_Center("Swipe Up to show 'Logout'", "UP", 500, "no_jira");             
+            if (FAIL) { return;}              
+            
+        _t++; Wait_For_Element_By_Path_Presence("Wait for 'Account' screen", "id", "appVersion", "no_jira");             
+            if (FAIL) { return;}             
+        _t++; Element_By_Path_Text("Get 'About' > Version", "id", "appVersion","no_jira");             
+            if (FAIL) { return;} 
+            appVersion = t;
+        _t++; Element_By_Path_Click("Click 'Log out'", "id", "profile_logout", "no_jira");             
+            if (FAIL) { return;}              
+    }
+    // </editor-fold>
+   
+    // <editor-fold defaultstate="collapsed" desc="Instance Variables Declaratios">
     private int d1LastRow = -1; 
     private int d2LastRow = -1; 
     private boolean Load = true; 
     private SwingWorker BW1;  
     private boolean CONFIG = false;
     private Instant run_start;
-    
+    private String err;    
     protected Duration DD;  
     
     protected final Stopwatch sw1 = Stopwatch.createUnstarted();
@@ -2744,10 +4721,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected String F = "";   
     protected String EX = "";   
     
-    protected double sleep = 500; // milisec
-    protected double LoadTimeOut = 15 *1000; // milisec
-    protected long WaitForElement = 3000; // milisec
+
+    protected AndroidDriver<AndroidElement> ad = null;
     protected FluentWait loadTimeout = null;
+    protected AppiumDriverLocalService appiumService = null;
+    protected long WaitForElement = 3000; // milisec
+    protected double LoadTimeOut = 15 *1000; // milisec  
     
     protected int t_calls = 0;
     protected double t_min = 0;
@@ -2774,8 +4753,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     protected final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     
-    protected AndroidDriver<AndroidElement> ad = null;
-    protected AppiumDriverLocalService appiumService = null;
+
     protected List<AndroidElement> aL0 = null;
     protected List<AndroidElement> aL1 = null;
     protected List<AndroidElement> aL2 = null;

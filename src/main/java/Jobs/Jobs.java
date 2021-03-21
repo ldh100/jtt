@@ -486,7 +486,7 @@ public class Jobs extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
 //        if(Job name == "??"){
             Android.An_GUI An_Job = new Android.An_GUI();
-            String RES = An_Job.Run_Job("ad-hoc", config);
+            String RES = An_Job.JOB_Run_Auto("ad-hoc", config);
             txtLog.append("Run_Job: " + "\r\n" + RES.trim() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());        
 //        }
