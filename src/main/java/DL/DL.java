@@ -117,7 +117,7 @@ public class DL extends javax.swing.JInternalFrame {
         _all_data = new javax.swing.JCheckBox();
         _metrics_selection = new javax.swing.JCheckBox();
         _metric_data = new javax.swing.JCheckBox();
-        _3 = new javax.swing.JCheckBox();
+        _filters = new javax.swing.JCheckBox();
         _4 = new javax.swing.JCheckBox();
         _password = new javax.swing.JCheckBox();
         _logout = new javax.swing.JCheckBox();
@@ -364,11 +364,11 @@ public class DL extends javax.swing.JInternalFrame {
         _metric_data.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _metric_data.setRequestFocusEnabled(false);
 
-        _3.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _3.setText("op3");
-        _3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _3.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _3.setRequestFocusEnabled(false);
+        _filters.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _filters.setText("Metric(s) Filters");
+        _filters.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _filters.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _filters.setRequestFocusEnabled(false);
 
         _4.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _4.setText("op4");
@@ -403,7 +403,7 @@ public class DL extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(_metrics_selection, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_metric_data, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_filters, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(80, 80, 80)
@@ -430,7 +430,7 @@ public class DL extends javax.swing.JInternalFrame {
                     .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(_3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_filters, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -766,6 +766,13 @@ public class DL extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === ^ Metrics Data" + "\t" + " ===== " + "\t" + " == ^ Metrics Data End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
+        if (_filters.isSelected()) { 
+            SCOPE += ", Metrics Filters";  
+            EX += " - " + "\t" + " === Metrics Filters" + "\t" + " ===== " + "\t" + " == Metrics Filters Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            DL_filters.run();
+            EX += " - " + "\t" + " === ^ Metrics Filters" + "\t" + " ===== " + "\t" + " == ^ Metrics Filters End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }        
         if (_users.isSelected()) { 
             SCOPE += ", Users";  
             EX += " - " + "\t" + " === Users - Data Access" + "\t" + " ===== " + "\t" + " == Users Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
@@ -789,6 +796,7 @@ public class DL extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }  
+        
                     
         if(_f > 0) {
             txtLog.append("=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)" + "\r\n");
@@ -1491,7 +1499,7 @@ public class DL extends javax.swing.JInternalFrame {
 
                 c = C.substring(C.indexOf("_1:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _metrics_selection.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_2:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _metric_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_3:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _3.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_3:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _filters.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_4:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _4.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_password:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _password.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_all_data:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _all_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
@@ -1543,7 +1551,7 @@ public class DL extends javax.swing.JInternalFrame {
 
             C += "_1: " + _metrics_selection.isSelected() + "\r\n";
             C += "_2: " + _metric_data.isSelected() + "\r\n";
-            C += "_3: " + _3.isSelected() + "\r\n";
+            C += "_3: " + _filters.isSelected() + "\r\n";
             C += "_4: " + _4.isSelected() + "\r\n";
             C += "_password: " + _password.isSelected() + "\r\n";         
             C += "_all_data: " + _all_data.isSelected() + "\r\n";
@@ -1795,9 +1803,9 @@ public class DL extends javax.swing.JInternalFrame {
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;
     private javax.swing.JTable DV_User;
-    private javax.swing.JCheckBox _3;
     private javax.swing.JCheckBox _4;
     private javax.swing.JCheckBox _all_data;
+    private javax.swing.JCheckBox _filters;
     private javax.swing.JCheckBox _headless;
     private javax.swing.JCheckBox _login;
     private javax.swing.JCheckBox _logout;

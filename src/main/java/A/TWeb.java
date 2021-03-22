@@ -3012,7 +3012,63 @@ public class TWeb {
         sw1.reset();
     }
    
-    
+    public static void Element_By_DisplayCheck(String NAME, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();       
+ 
+        FAIL = false;
+        try {
+            switch (BY) {
+                case "xpath":
+                      if(d1.findElements(By.xpath(PATH)).size()!=0)
+                                  d1.findElement(By.xpath(PATH)).click();
+                    break;
+                case "css":
+                      if (d1.findElements(By.cssSelector(PATH)).size()!=0)
+                                 d1.findElement(By.cssSelector(PATH)).click();
+                    break;
+                case "className":
+                      if(d1.findElements(By.className(PATH)).size()!=0)
+                                 d1.findElement(By.className(PATH)).click();
+                    break;
+                case "id":
+                      if(d1.findElements(By.id(PATH)).size()!=0)
+                                 d1.findElement(By.id(PATH)).click();
+                    break;
+                case "tagName":
+                      if(d1.findElements(By.tagName(PATH)).size()!=0)
+                                 d1.findElement(By.tagName(PATH)).click();
+                    break;
+                case "name":
+                      if(d1.findElements(By.name(PATH)).size()!=0)
+                                 d1.findElement(By.name(PATH)).click();
+                    break;
+                 case "linkText":
+                      if(d1.findElements(By.linkText(PATH)).size()!=0)
+                                 d1.findElement(By.linkText(PATH)).click();
+                    break;
+                case "partialLinkText":
+                      if(d1.findElements(By.partialLinkText(PATH)).size()!=0)
+                                 d1.findElement(By.partialLinkText(PATH)).click();
+                    break;
+                default:
+                    break;
+            }
+                      _p++;
+                EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "item has been displayed & deleted successfully" + "\t" + "PASS" + "\t" + " - " +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+ 
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
     }
     
     
