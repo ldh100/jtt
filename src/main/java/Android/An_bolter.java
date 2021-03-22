@@ -8,17 +8,22 @@ package Android;
  *
  * @author Oleg.Spozito
  */
-class An_bolter extends An_GUI{//
+class An_bolter extends An_Mob{//
+//    public An_bolter() {
+//        // default constructor
+//    }
+//    public An_bolter(An_GUI a) {
+//        // copy constructor -- initialize some fields from values in original, others with default values 
+//        _t = a._t;
+//        FAIL = a.FAIL;
+//    }
+
     protected void Run() throws InterruptedException { 
 //        Thread.sleep(500);
 //        _t++; Element_E1_Find("Is it Splash Screen/Logo?", "id", "splashScreenLogo", "no_jira");             
 ////            //if (FAIL) { return;}        // "id", "packagename:id/splashScreenLogo",          
         _t++; Test_EX_Update("Bolter Test EX Update 1", "no_jira");             
             if (FAIL) { return; }   
-        _t++; Test_EX_Update("Bolter Test EX Update 2", "no_jira");             
-            if (FAIL) { return; }            
-        _t++; Wait_For_Element_By_Path_InVisibility("Wait for Splash screen", "id", "splashScreenLogo", "no_jira");             
-            if (FAIL) { return;} 
         
         _t++; Wait_For_Element_By_Path_Presence("Wait for 'Sign In' screen", "id", "button_login", "no_jira");             
             if (FAIL) { return;} 

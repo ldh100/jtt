@@ -23,30 +23,37 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  *
  * @author oleg.spozito
  */
-public class An_Mob extends An_GUI { //
+public class An_Mob extends An_GUI{ //
+//    public An_Mob(An_GUI a) {
+//        ad = a.ad;
+//        loadTimeout = a.loadTimeout;
+//        t = a.t;
+//        // copy constructor -- initialize some fields from values in original, others with default values
+//    }
     private String err = "";
-//    protected void Test_EX_Update(String NAME, String JIRA ){
-//        if(sw1.isRunning()){
-//            sw1.reset();
-//        }
-//        sw1.start();        
-// 
-//        FAIL = false;
-//        t = "Test_EX_Update";
-//        try {
-//            _p++; 
-//            err = "No Error";
-//            EX += _t + "\t" + NAME + "\t" + "Test_EX_Update OK"  + "\t" + t + "\t" + "PASS" + "\t" + err + " TimeOut: " + LoadTimeOut + " ms" +
-//            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-//        } catch(Exception ex){
-//            _f++; FAIL = true; err = ex.getMessage().trim();
-//            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-//            EX += _t + "\t" + NAME + "\t" + "Page URL" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
-//            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-//            F += _t + " > " + err + "\r\n";
-//        }
-//        sw1.reset();
-//    }     
+    @Override
+    protected void Test_EX_Update(String NAME, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        t = "Test_EX_Update";
+        try {
+            _p++; 
+            err = "No Error";
+            EX += _t + "\t" + NAME + "\t" + "Test_EX_Update OK"  + "\t" + t + "\t" + "PASS" + "\t" + err + " TimeOut: " + LoadTimeOut + " ms" +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Page URL" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }     
 //    protected void Reset_App(String NAME, String JIRA ){
 //        if(sw1.isRunning()){
 //            sw1.reset();

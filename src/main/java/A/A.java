@@ -446,32 +446,14 @@ public class A extends javax.swing.JFrame {
         Android.An_GUI an = new Android.An_GUI();
         this.DesktopPane.add(an);
         Y = X = An_F_COUNT;
-        an.setLocation(X*20, Y*20); an.show();  an.setSelected(true);   
-    
-//        if(An_F_COUNT == 0){
-//            Android.An_GUI an1 = new Android.An_GUI();
-//            this.DesktopPane.add(an1);
-//            Y = X = An_F_COUNT;
-//            an1.setLocation(X*20, Y*20); an1.show();  an1.setSelected(true);            
-//        }
-//        if(An_F_COUNT == 1){
-//            Android.An_GUI an2 = new Android.An_GUI();
-//            this.DesktopPane.add(an2);
-//            Y = X = An_F_COUNT;
-//            an2.setLocation(X*20, Y*20); an2.show();  an2.setSelected(true);            
-//        }
-//        if(An_F_COUNT == 2){
-//            Android.An_GUI an3 = new Android.An_GUI();
-//            this.DesktopPane.add(an3);
-//            Y = X = An_F_COUNT;
-//            an3.setLocation(X*20, Y*20); an3.show();  an3.setSelected(true);            
-//        }        
-//        if(An_F_COUNT == 3){
-//            Android.An_GUI an4 = new Android.An_GUI();
-//            this.DesktopPane.add(an4);
-//            Y = X = An_F_COUNT;
-//            an4.setLocation(X*20, Y*20); an4.show();  an4.setSelected(true);            
-//        }  
+        an.setLocation(X*20, Y*20); an.show();  an.setSelected(true); 
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        F_COUNT++;
         An_F_COUNT++;   
     }
     private void Open_REPORT() { 

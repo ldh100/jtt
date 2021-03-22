@@ -1025,7 +1025,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
         Object[] options = {"Yes", "No"};
         int reply = JOptionPane.showOptionDialog(this,
-            "Pull " + app + " " + appVersion + " APK file from " + devModel + " device to your desktop?" + "\r\n" +
+            "Pull " + app + " " + appVersion + " APK file from " + device + " device to your desktop?" + "\r\n" +
             "Existing " + app + " " + appVersion + " file will be replaced",
             "Pull APK file",
             JOptionPane.YES_NO_OPTION,
@@ -1105,7 +1105,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         }
     }//GEN-LAST:event_btnInstallAPKMouseClicked
-    // </editor-fold>    
+ 
     private void Load_Form(){   
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
 
@@ -1143,9 +1143,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
         
         this.setTitle("Android Automation Manager " + A.A.An_F_COUNT);
     }
-
+    // </editor-fold>   
+    
     // <editor-fold defaultstate="collapsed" desc="Package Methods">    
-
     private void GUI_Find_Connected_Devices(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         btnRun.setEnabled(false);
@@ -1210,7 +1210,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
 
             DesiredCapabilities  cap = new DesiredCapabilities ();
             cap.setCapability("platformName", "Android");
-            cap.setCapability("deviceName", devModel);
+            cap.setCapability("deviceName", device);
             cap.setCapability("platformVersion", devOS);
             cap.setCapability("clearSystemFiles", true);
             cap.setCapability("appPackage", "dev.firebase.appdistribution");
@@ -1995,7 +1995,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         
         if(DV1.getRowCount() > 0) {
             SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
-            platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform
+            platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString();
             COUNTRY = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
         }
         if(DV2.getRowCount() > 0) {
@@ -2007,8 +2007,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             sw1.reset();
         }
         sw1.start();
-        LOG_START(); // ======================================================== 
-        
+        LOG_START();        // ============================================
         BW1_DoWork( true);            
     }
 
@@ -2166,7 +2165,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         devOS = "Not Found";
         devOS = Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " shell getprop ro.build.version.release", A.A.CWD, true, true).trim();
         devOS = devOS.replace("null", "").substring(0, devOS.indexOf("\r\n")).trim();
-        return "=== JOB_Check_Device_OS > Model: " + devModel + ", OS version: " + devOS + "\r\n";
+        return "=== JOB_Check_Device_OS > Model: " + device + ", OS version: " + devOS + "\r\n";
     } 
 
     public void Current_Log_Update(boolean GUI, String Text){
@@ -2280,7 +2279,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _insert.setString(12, r_type);
             _insert.setString(13, A.A.UserID);
             _insert.setString(14, A.A.WsID);
-            _insert.setString(15, devModel+ " OSv: " + devOS);
+            _insert.setString(15, device + " OSv: " + devOS);
             _insert.setString(16, "=== Job is running... ===\r\n" + "");
             _insert.setString(17, "Running");
             _insert.setString(18, "None");
@@ -2327,7 +2326,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _update.setString(12, r_type);
             _update.setString(13, A.A.UserID);
             _update.setString(14, A.A.WsID);
-            _update.setString(15, devModel + " OSv: " + devOS);
+            _update.setString(15, device + " OSv: " + devOS);
             _update.setString(16, LOG);
             _update.setString(17, "Scope: " + SCOPE);
             _update.setString(18, EX);
@@ -2344,13 +2343,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
     }
     protected String CheckDevice(String D){
         devID = "";
-        devModel = "";
+        device = "";
         if(D.contains("id:")){
-            devModel = D.substring(0,D.indexOf(" ")).trim(); 
+            device = D.substring(0,D.indexOf(" ")).trim(); 
             devID = D.substring(D.indexOf("id:") + 3).trim();        
             devOS = A.Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " shell getprop ro.build.version.release", A.A.CWD, true, true).trim();
             devOS = devOS.replace("null", "").substring(0, devOS.indexOf("\r\n")).trim();
-            return "=== CheckDevice OK > Model: " + devModel + ", OS version: " + devOS + "\r\n";
+            return "=== CheckDevice OK > Model: " + device + ", OS version: " + devOS + "\r\n";
         } else{
             return "=== CheckDevice: " + "ID Not Found" + "\r\n";           
         }        
@@ -2513,12 +2512,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
     }   
     // </editor-fold>
-    
+
     private void BW1_DoWork(Boolean GUI){ 
         BW1 = new SwingWorker() {                        
             @Override
             protected String doInBackground() throws Exception   { 
-                String DriverStart = AndroidDriver();
+                String DriverStart = StartAndroidDriver();
                 if(DriverStart.contains("OK")){
                     Current_Log_Update(GUI, "=== Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");    
                     sw1.reset();      
@@ -2534,7 +2533,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));  
                 if (app.equals("Bolter")) {
                     Run_Bolter();
-//                    An_bolter x = new Android.An_bolter();
+//                    An_bolter x = new Android.An_bolter(An_GUI.this);
 //                    x.Run();
                 }else{
                     Run_CoreApp();
@@ -2542,10 +2541,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
 //                    x.Run();
                 }   
                 if(_f > 0) {
-                    //Current_Log_Update(GUI,"=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)");
                     return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
                 }else{
-                    //Current_Log_Update(GUI,"=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter));  
                     return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter);
                 } 
             }  
@@ -2555,7 +2552,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n"); 
                 
-                EX = "Android " + app + " " + env + ", v: " + appVersion + ", Device: " + devModel + " OS Version: " + devOS +
+                EX = "Android " + app + " " + env + ", v: " + appVersion + ", Device: " + device + " OS Version: " + devOS +
                 " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                  "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                  + EX;
@@ -2618,7 +2615,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
 
         Current_Log_Update(GUI, "=== " + Summary + "\r\n"); // Summary shown in EX top
         Current_Log_Update(GUI, "=== Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
-        Current_Log_Update(GUI, "=== Android_" + app + "_" + env + ", v: " + appVersion + ", Device: " + devModel + " OS version: " + devOS + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
+        Current_Log_Update(GUI, "=== Android_" + app + "_" + env + ", v: " + appVersion + ", Device: " + device + " OS version: " + devOS + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
 
         if(GUI){
             Log = txtLog.getText();
@@ -2629,7 +2626,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             Report(false); 
             String MSG = "Android_" + app + "_" + env + " Automation report - " + Report_Date +  
             "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
-            "Device: " + devModel + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
+            "Device: " + device + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
             "Scope: " + SCOPE + "\r\n" +
             "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
 
@@ -2647,11 +2644,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
         btnExel.setEnabled(true); 
     }
-    protected String AndroidDriver() {
+    protected String StartAndroidDriver() {
         try {
             DesiredCapabilities  cap = new DesiredCapabilities ();
             cap.setCapability("platformName", "Android");
-            cap.setCapability("deviceName", devModel);
+            cap.setCapability("deviceName", device);
             cap.setCapability("udid", devID); 
             cap.setCapability("platformVersion", devOS);
             cap.setCapability("clearSystemFiles", true);
@@ -4529,12 +4526,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
 //        Thread.sleep(500);
 //        _t++; Element_E1_Find("Is it Splash Screen/Logo?", "id", "splashScreenLogo", "no_jira");             
 ////            //if (FAIL) { return;}        // "id", "packagename:id/splashScreenLogo",          
-        _t++; Test_EX_Update("Bolter Test EX Update 1", "no_jira");             
-            if (FAIL) { return; }   
-        _t++; Test_EX_Update("Bolter Test EX Update 2", "no_jira");             
-            if (FAIL) { return; }            
-        _t++; Wait_For_Element_By_Path_InVisibility("Wait for Splash screen", "id", "splashScreenLogo", "no_jira");             
-            if (FAIL) { return;} 
+//        _t++; Test_EX_Update("Bolter Test EX Update 1", "no_jira");             
+//            if (FAIL) { return; }   
+//        _t++; Test_EX_Update("Bolter Test EX Update 2", "no_jira");             
+//            if (FAIL) { return; }            
+//        _t++; Wait_For_Element_By_Path_InVisibility("Wait for Splash screen", "id", "splashScreenLogo", "no_jira");             
+//            if (FAIL) { return;} 
         
         _t++; Wait_For_Element_By_Path_Presence("Wait for 'Sign In' screen", "id", "button_login", "no_jira");             
             if (FAIL) { return;} 
@@ -4573,11 +4570,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected void Run_CoreApp() throws InterruptedException {     
 //        _t++; ResetApp("Reset App", "no_jira");  
 
-        _t++; Test_EX_Update("CoreApp Test EX Update 1", "no_jira");             
-            if (FAIL) { return; }   
-        _t++; Test_EX_Update("CoreApp Test EX Update 2", "no_jira");             
-            if (FAIL) { return; } 
-            
+//        _t++; Test_EX_Update("CoreApp Test EX Update 1", "no_jira");             
+//            if (FAIL) { return; }   
+//        _t++; Test_EX_Update("CoreApp Test EX Update 2", "no_jira");             
+//            if (FAIL) { return; } 
+//            
             
         _t++; Wait_For_Element_By_Path_InVisibility("Wait for Splash screen", "id", "splashScreenLogo", "no_jira");             
             if (FAIL) { return;}     
@@ -4685,8 +4682,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected String appVersion = "";   
     
     protected String device = "";   
-    protected String devID = "";   
-    protected String devModel = "";   
+    protected String devID = "";    
     protected String devOS = "";   
     
     protected String Report_Date;

@@ -121,7 +121,7 @@ public class DL extends javax.swing.JInternalFrame {
         _4 = new javax.swing.JCheckBox();
         _password = new javax.swing.JCheckBox();
         _logout = new javax.swing.JCheckBox();
-        _roles = new javax.swing.JCheckBox();
+        _users = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         cmbBrow = new javax.swing.JComboBox<>();
         btnRun = new javax.swing.JButton();
@@ -135,6 +135,9 @@ public class DL extends javax.swing.JInternalFrame {
         _slack = new javax.swing.JCheckBox();
         _headless = new javax.swing.JCheckBox();
         btnGet_User = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        DV_User = new javax.swing.JTable();
+        lblUsers = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -174,11 +177,11 @@ public class DL extends javax.swing.JInternalFrame {
 
         lblMetrics.setText("Metrics");
         lblMetrics.setAlignmentX(0.5F);
-        getContentPane().add(lblMetrics, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 360, -1));
+        getContentPane().add(lblMetrics, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 172, 360, -1));
 
         lblDates.setText("Date Ranges");
         lblDates.setName("lblDates"); // NOI18N
-        getContentPane().add(lblDates, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 296, 280, -1));
+        getContentPane().add(lblDates, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 300, 280, -1));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -205,7 +208,7 @@ public class DL extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 22, 428, 272));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 188, 428, 108));
 
         DV2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV2.setModel(new javax.swing.table.DefaultTableModel(
@@ -231,7 +234,7 @@ public class DL extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 316, 428, 100));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 320, 428, 96));
 
         txtLog.setEditable(false);
         txtLog.setColumns(20);
@@ -328,7 +331,7 @@ public class DL extends javax.swing.JInternalFrame {
                 .addGap(2, 2, 2))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 16, 416, -1));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 172, 416, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Scope"));
         jPanel1.setToolTipText("");
@@ -385,11 +388,11 @@ public class DL extends javax.swing.JInternalFrame {
         _logout.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _logout.setRequestFocusEnabled(false);
 
-        _roles.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _roles.setText("User Permissions");
-        _roles.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _roles.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _roles.setRequestFocusEnabled(false);
+        _users.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _users.setText("User Permissions");
+        _users.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _users.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _users.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -409,7 +412,7 @@ public class DL extends javax.swing.JInternalFrame {
                         .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                         .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -432,11 +435,11 @@ public class DL extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(_4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(63, Short.MAX_VALUE))
+                    .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 108, 412, 188));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 216, 412, 160));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -529,8 +532,6 @@ public class DL extends javax.swing.JInternalFrame {
         _headless.setRequestFocusEnabled(false);
         jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 68, 100, 14));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 416, 416, 88));
-
         btnGet_User.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnGet_User.setText(" < Get User");
         btnGet_User.setEnabled(false);
@@ -540,7 +541,38 @@ public class DL extends javax.swing.JInternalFrame {
                 btnGet_UserMouseClicked(evt);
             }
         });
-        getContentPane().add(btnGet_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 348, 84, 22));
+        jPanel3.add(btnGet_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 12, 84, 22));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 416, 416, 88));
+
+        DV_User.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        DV_User.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        DV_User.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        DV_User.setCellSelectionEnabled(true);
+        DV_User.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_User.setName("DV2"); // NOI18N
+        DV_User.setOpaque(false);
+        DV_User.setRowHeight(18);
+        DV_User.getTableHeader().setReorderingAllowed(false);
+        DV_User.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DV_UserMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(DV_User);
+
+        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 852, 152));
+
+        lblUsers.setText("Test Users");
+        lblUsers.setName("lblDates"); // NOI18N
+        getContentPane().add(lblUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 280, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -734,6 +766,13 @@ public class DL extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === ^ Metrics Data" + "\t" + " ===== " + "\t" + " == ^ Metrics Data End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
+        if (_users.isSelected()) { 
+            SCOPE += ", Users";  
+            EX += " - " + "\t" + " === Users - Data Access" + "\t" + " ===== " + "\t" + " == Users Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            DL_users.run();
+            EX += " - " + "\t" + " === ^ Users - Data Access" + "\t" + " ===== " + "\t" + " == ^ Users End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }        
 
         // ============================== Last Blocks
         if (_logout.isSelected()) { 
@@ -889,6 +928,10 @@ public class DL extends javax.swing.JInternalFrame {
             GET_DL_USER_TOKEN(true);            
         }
     }//GEN-LAST:event_btnGet_UserMouseClicked
+
+    private void DV_UserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_UserMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DV_UserMouseClicked
     private void Load_Form(){
         Load = true;   
         
@@ -1335,8 +1378,7 @@ public class DL extends javax.swing.JInternalFrame {
    
         if (DV1.getRowCount() > 0) {
             DV1.changeSelection(0, 0, false, false);
-            if (CONFIG && !"".equals(METRIC.trim()))
-            {
+            if (CONFIG && !"".equals(METRIC.trim())) {
                 for(int row = 0; row < DV1.getRowCount(); row++) {
                     if(DV1.getValueAt(row, 0).equals(METRIC)){
                         DV1.changeSelection(row, 0, false, false);
@@ -1752,6 +1794,7 @@ public class DL extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;
+    private javax.swing.JTable DV_User;
     private javax.swing.JCheckBox _3;
     private javax.swing.JCheckBox _4;
     private javax.swing.JCheckBox _all_data;
@@ -1761,8 +1804,8 @@ public class DL extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _metric_data;
     private javax.swing.JCheckBox _metrics_selection;
     private javax.swing.JCheckBox _password;
-    private javax.swing.JCheckBox _roles;
     private javax.swing.JCheckBox _slack;
+    private javax.swing.JCheckBox _users;
     private javax.swing.JButton btnExel;
     private javax.swing.JButton btnFails;
     private javax.swing.JButton btnGet_User;
@@ -1777,6 +1820,7 @@ public class DL extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lblDates;
     private javax.swing.JLabel lblMetrics;
     private javax.swing.JLabel lblSITES10;
@@ -1786,6 +1830,7 @@ public class DL extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblSITES6;
     private javax.swing.JLabel lblSITES7;
     private javax.swing.JLabel lblSITES9;
+    private javax.swing.JLabel lblUsers;
     private javax.swing.JSpinner nShowPage;
     private javax.swing.JSpinner nWaitElement;
     private javax.swing.JSpinner nWaitLoad;
