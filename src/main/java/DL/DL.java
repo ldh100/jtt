@@ -750,6 +750,7 @@ public class DL extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }  
+        
                     
         if(_f > 0) {
             txtLog.append("=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)" + "\r\n");
