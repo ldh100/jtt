@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Oleg.Spozito
  */
-public class DL_metric_data {
+public class DL_filters {
     public static void run() throws InterruptedException {     
        Thread.sleep(6000);
 	for (int i = 0; i < 3; i++) {
