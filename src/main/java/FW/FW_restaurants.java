@@ -117,7 +117,7 @@ public class FW_restaurants {
          for (int i = 0; i < L0.size(); i++) {
 	    _t++; TWeb.Element_Text("Rows per page Value (index " + i + ")", L0.get(i),  "no_jira"); 
 	                if (FAIL) { return;}
-	                if(t.trim().equals("Athe Gmail Raj")){ 
+	                if(t.trim().equals("Aabc Testing")){ 
 	                    L0.get(i).click();
 	                }
 	            }  
@@ -204,11 +204,7 @@ public class FW_restaurants {
       if (FAIL) { return;} 
     _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("*Food Preparation Location values ", e1,"xpath", "//div[@class='v-list-item__title']", "no_jira");  
       if (FAIL) { return;}
-        for (int i = 94; i < L1.size(); i++) {
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Food Preparation Location dropdown value---'"+i+"'", L1.get(i), "no_jira");                          
-                if (FAIL) { return;}
-               	             }
-    _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(95), "no_jira"); 
+    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select 'Restaurant location' from food preparation location dropdown", "xpath", "//div[@role='listbox']/div/div/div[contains(.,'Restaurant location')]", "no_jira"); 
       if (FAIL) { return;}
      _t++; Thread.sleep((long) sleep);TWeb.Scroll_XY("Scroll to Upload Files", 0, 500, "no_jira");
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Upload Files click ","xpath", "//button[@class='secondary-button v-btn v-btn--depressed v-btn--flat v-btn--outlined v-btn--rounded theme--light v-size--default primary--text']", "no_jira"); 
@@ -216,7 +212,7 @@ public class FW_restaurants {
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on upload file", "xpath", "//div[@class='upload-file partner-info-btn']/button", "no_jira"); 
       if (FAIL) { return;}   	
          Thread.sleep(4000);
-    _t++; TWeb.Element_By_Path_Text_Enter("Upload a file", "xpath", "//input[@type='file']", System.getProperty("user.dir")+File.separator +"File_Name.png", false, "no_jira"); 
+    _t++; TWeb.Element_By_Path_Text_Enter("Upload a file", "xpath", "//input[@type='file']", System.getProperty("user.dir")+File.separator +"Login screen.png", false, "no_jira"); 
       if (FAIL) { return;}
       Thread.sleep(4000);
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Done button", "xpath", "//button//span[contains(.,'Done')]", "no_jira"); 

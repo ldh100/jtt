@@ -11,7 +11,7 @@ import static DL.DL.*;
  *
  * @author Oleg.Spozito
  */
-public class DL_user_permission {
+public class DL_users {
     public static void run() throws InterruptedException { 
         
     }  

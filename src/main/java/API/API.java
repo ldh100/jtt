@@ -2490,67 +2490,6 @@ public class API extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         Load = false;  
     }
-    private void GetCompanies() {  
-        int I = cmbGroup.getSelectedIndex();
-        if(I < 0){ // =========== DEBUG
-            txtLog.append("- Load Sector/Companies(Menus) ERROR: cmbGROUP.getSelectedIndex() < 0" + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            return;
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("- Load Sector/Companies(Menus) ..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        try { 
-            cmbComp.removeAllItems();
-            COMP_IDS = new ArrayList<>();
-            if(sw1.isRunning()){
-                sw1.reset();
-            }
-            sw1.start();        
-     
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                }
-            };
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
-            JSONArray Sectors = json.getJSONArray("companies");           
-            String S_NAME = "";
-            T_Index = -1;
-            for (int i = 0; i < Sectors.length(); i++) {
-                S_NAME = Sectors.getJSONObject(i).getString("name");
-                if(!S_NAME.isEmpty()) {
-                    cmbComp.addItem(S_NAME);
-                    COMP_IDS.add(Sectors.getJSONObject(i).getString("id"));
-                }
-            }
-        } catch (IOException | JSONException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        } finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());    
-                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            }
-        } 
-        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset();
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-    }
     private void GetBrandSector() {  
         txtLog.append("- Get Brand's Group/Sector" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -2621,6 +2560,7 @@ public class API extends javax.swing.JInternalFrame {
         sw1.reset(); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));       
         
+        Load = true;
         if(!GroupID.equals("")){
             cmbGroup.setSelectedIndex(GroupIndex);
         }else{
@@ -2628,16 +2568,79 @@ public class API extends javax.swing.JInternalFrame {
                 cmbGroup.setSelectedIndex(0);
             }
         }
+        Load = false;
+        
         GetCompanies();    // Load Brans Companies List after Brand's Gropu/Sector selected
         GetBrandCompany(); // after Brand's Gropu/Sector selected
     } 
+    private void GetCompanies() {  
+        int I = cmbGroup.getSelectedIndex();
+        if(I < 0){ // =========== DEBUG
+            txtLog.append("- Load Sector/Companies(Menus) ERROR: cmbGROUP.getSelectedIndex() < 0" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            return;
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("- Load Sector/Companies(Menus) ..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        try { 
+            cmbComp.removeAllItems();
+            COMP_IDS = new ArrayList<>();
+            if(sw1.isRunning()){
+                sw1.reset();
+            }
+            sw1.start();        
+     
+            HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                String Msg = response.getStatusLine().getReasonPhrase();
+                if (status >= 200 && status < 300) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
+                }
+            };
+            String responseBody = httpclient.execute(httpget, responseHandler);
+            JSONObject json = new JSONObject(responseBody);
+            JSONArray Sectors = json.getJSONArray("companies");           
+            String S_NAME = "";
+            T_Index = -1;
+            for (int i = 0; i < Sectors.length(); i++) {
+                S_NAME = Sectors.getJSONObject(i).getString("name");
+                if(!S_NAME.isEmpty()) {
+                    cmbComp.addItem(S_NAME);
+                    COMP_IDS.add(Sectors.getJSONObject(i).getString("id"));
+                }
+            }
+        } catch (IOException | JSONException ex) {
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        } finally {
+            try {
+                httpclient.close();
+            } catch (IOException ex) {
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());    
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            }
+        } 
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+    }
     private void GetBrandCompany(){ // after Brand's Group/Sector slected
         txtLog.append("- Get Brand's Company/Clobal Menu" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         int CompanyIndex = -1;
         try{
         if(!CompanyID.isEmpty()){
-                for (int i = 0; i < COMP_IDS.size(); i++) {
+            for (int i = 0; i < COMP_IDS.size(); i++) {
                     if(COMP_IDS.get(i).equals(CompanyID)){
                         CompanyIndex = i;
                     }

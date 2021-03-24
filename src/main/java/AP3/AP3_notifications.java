@@ -28,6 +28,7 @@ public class AP3_notifications {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Page title > 'AP3 Notification Management'", "xpath", "//span[contains(text(),'AP3 Notification Management')]", "no_jira");
         if (FAIL) { return;}
+        // <editor-fold defaultstate="collapsed" desc="Notifications API">  
         //========= Verify Notifications API
         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Notification API", BaseAPI +"/notification?realm=cdl&target=admin_panel&end=2021-03-28T16:06:36.678Z", true, "no_jira");
         if (FAIL) { return;}
@@ -37,6 +38,9 @@ public class AP3_notifications {
         _t++; TWeb.API_Body_Contains("Notification API - Date Modified", "date_modified",true, "no_jira");    
         _t++; TWeb.API_Body_Contains("Notification API - Status", "status",true, "no_jira"); 
         _t++; TWeb.API_Body_Contains("Notification API - Release Date", "release_date",true, "no_jira"); 
+        // </editor-fold>  
+        
+        // <editor-fold defaultstate="collapsed" desc="Verify Notifications Page">  
         //========= Verify Notifications Page
         _t++; Thread.sleep((long) sleep); TWeb.List_L3("Ap3 Notifications table headers", "xpath", "//*[@role='columnheader']", "no_jira");
         if (FAIL) { return;}
@@ -58,6 +62,9 @@ public class AP3_notifications {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Delete icon", "xpath", "//i[contains(@class, 'mdi-delete')]", "no_jira");
         if (FAIL) { return;}
+        // </editor-fold> 
+        
+        // <editor-fold defaultstate="collapsed" desc="Create New Notification">  
         //========= click on '+ New Notification' button then Verify the Page and Create a New Notification
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Add New Notifications Button", "xpath", "//*[contains(text(), 'New Notification')]/parent::button", "no_jira");
         if (FAIL) { return;}
@@ -95,9 +102,15 @@ public class AP3_notifications {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Start Time Dropdown List", "xpath", "//div[contains(@class,'v-select-list')]", "no_jira");
         if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click outside Start Time Input Field", "xpath", "(//div[contains(@class,'v-card-content')]/parent::div/parent::div)[2]", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("'cannot be empty' Validation Message", "xpath", "//div[contains(text(),'Schedule start time cannot be empty.')]", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Click("Click > Start Time Input Field", L1.get(1), "xpath", "//input[@aria-label='Start Time']", "no_jira");
+        if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Click("Select 1AM as Start Time", L1.get(1), "xpath", "//div[contains(text(),'1:00 AM')]", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("Invalid Message > 'Cannot Schedule in past' is Visible", "xpath", "//div[contains(text(),'You cannot schedule a notification to be released in the past')]", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Visibility("'cannot schedule in past' Validation Message", "xpath", "//div[contains(text(),'You cannot schedule a notification to be released in the past')]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Clock Icon", "xpath", "//i[contains(@class,'mdi-clock')]", "no_jira");
         if (FAIL) { return;}
@@ -114,6 +127,9 @@ public class AP3_notifications {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Create New Notification Button", "xpath", "//*[contains(text(),'Create New Notification')]/parent::button", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(1000);
+        // </editor-fold>
+        
+        // <editor-fold defaultstate="collapsed" desc="Verify New Notification">  
         _t++; Thread.sleep((long) sleep); TWeb.List_L3("Get List of Records in Notification Management Table", "xpath", "//tr", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Text("Created Notification > Notification Name", L3.get(0), "xpath", "//div[contains(text(),'Auto-notif-test')]","no_jira");
@@ -214,6 +230,54 @@ public class AP3_notifications {
         }
         _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Text("Created Notification > Date Scheduled", L3.get(0), "xpath", "//span[contains(text(),'"+DATE+"')]", "no_jira");
         if (FAIL) { return;}
+        // </editor-fold>
+        
+        // <editor-fold defaultstate="collapsed" desc="Edit and Cancel"> 
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Click("Click > Edit icon", L3.get(0), "xpath", "//i[contains(@class, 'mdi-pencil')]", "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(1000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Input_Select_Clear("Clear > Notification Name", "xpath", "//input[@aria-label='Notification Name']","no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter > Updated Notification Name", "xpath", "//input[@aria-label='Notification Name']","Auto-notif-test-upd", false, "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Input_Select_Clear("Clear > Notification Description", "xpath", "//textarea[@aria-label='Notification Description']","no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter > Updated Notification Description", "xpath", "//textarea[@aria-label='Notification Description']","Auto-notif-test-desc-upd", false, "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Date Input Field", "xpath", "//input[@aria-label='Date']", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Date Picker", "xpath", "//div[contains(@class,'v-picker--date')]", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Today's day", "xpath", "//button[contains(@class,'v-btn--active')]/div", "no_jira");
+        if (FAIL) { return;}
+        int day = Integer.parseInt(t);
+        if (day >= 28) {
+            _t++; TWeb.Element_By_Path_Click("Click on Next Month Arrow", "xpath", "//i[contains(@class, 'mdi-chevron-right')]", "no_jira"); 
+            if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select A Later Date", "xpath", "//div[contains(@class, 'v-btn__content') and contains(text(),'1')]", "no_jira");
+            if (FAIL) { return;}
+        } else {
+            day = day+1;
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select A Later Date", "xpath", "//div[contains(@class, 'v-btn__content') and contains(text(),'"+String.valueOf(day)+"')]", "no_jira");
+            if (FAIL) { return;}
+        }
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Cancel Button", "xpath", "//div[contains(text(),'Cancel')]", "no_jira");
+        if (FAIL) { return;}
+        _t++; TWeb.Navigate_to_URL("Navigate to Notifications page", url + "#/notification-manager/", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.List_L3("Get List of Records in Notification Management Table", "xpath", "//tr", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Text("Canceled edit Notification > Notification Name", L3.get(0), "xpath", "//div[contains(text(),'Auto-notif-test')]","no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Text("Canceled edit Notification > Notification Description", L3.get(0), "xpath", "//div[contains(text(),'Auto-notif-test-desc')]","no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Text("Canceled edit Notification > Notification Status", L3.get(0), "xpath", "//div[contains(text(),'Pending')]", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Text("Canceled edit Notification > Date Scheduled", L3.get(0), "xpath", "//span[contains(text(),'"+DATE+"')]", "no_jira");
+        if (FAIL) { return;}
+        // </editor-fold>
+        
+        // <editor-fold defaultstate="collapsed" desc="Edit and Save"> 
         _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Click("Click > Edit icon", L3.get(0), "xpath", "//i[contains(@class, 'mdi-pencil')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(1000);
@@ -287,9 +351,12 @@ public class AP3_notifications {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Save Changes Button", "xpath", "//*[contains(text(),'Save Changes')]/parent::button", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(1000);
+        // </editor-fold>
+        
+        // <editor-fold defaultstate="collapsed" desc="Edit 'Released' Notification"> 
         //========== Edit Notification with 'Released' Status
-//        _t++; Thread.sleep((long) sleep); TWeb.List_L2("List of Notifications with Release Status", "xpath", "//div[contains(text(), 'Released')]/ancestor::tr", "no_jira");
-//        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Page_URL("AP3 Notification URL", "no_jira");
+        if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Original Notification Name", "xpath", "(//div[contains(text(), 'Released')]/ancestor::tr)[1]/td[1]", "no_jira");
         if (FAIL) { return;}
         String nn = t;
@@ -329,6 +396,9 @@ public class AP3_notifications {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Updated > Notif. Desc. on Released Notif.", "xpath", "//div[contains(text(), '"+nn+"')]/ancestor::tr/td[2]", "no_jira");
         if (FAIL) { return;}
+        // </editor-fold>
+        
+        // <editor-fold defaultstate="collapsed" desc="Verify 'Pending' to 'Released' Status Change"> 
         /**
          * Compare Current LocalTime with the Previous LocalTime; Loop as long as Current Minutes Value = Previous Minutes Value
          * This is required to wait for Notification with 'Pending' status to change to 'Released' for the purpose of testing
@@ -339,13 +409,12 @@ public class AP3_notifications {
         for(int j = 0; j < i; j++) {
             LocalTime CLT = LocalTime.now();
             if (CLT.getMinute() == LT.getMinute()) {
-                i++; //<------ loop breaker
-                Thread.sleep(1000);  //<------- this should limit the loop to run once per second until the condition is no longer met 
+                i++; //<------ loop breaker          
             } else {
                 _t++; TWeb.Navigate_to_URL("Navigate to Notifications page", url + "#/notification-manager/", "no_jira");
                 if (FAIL) { return;}
-                Thread.sleep(1000);
             }
+            Thread.sleep(1000);  //<------- this should limit the loop to run once per second until the condition is no longer met 
         }
         _t++; Thread.sleep((long) sleep); TWeb.Page_URL("AP3 Notification URL", "no_jira");
         if (FAIL) { return;}
@@ -366,6 +435,8 @@ public class AP3_notifications {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Updated Bell Notif. Number", "xpath", "(//button[contains(@class, 'bell-button')])[1]//span[contains(text(),'"+String.valueOf(BNN-1)+"')]", "no_jira");
         if (FAIL) { return;}
+        // </editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="Delete Notification"> 
         _t++; TWeb.Refresh("Refresh Notifications page", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Page_URL("AP3 Notification URL", "no_jira");
@@ -378,5 +449,6 @@ public class AP3_notifications {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_InVisibility("Deleted Notification no Longer in the Table", "xpath", "//div[contains(text(),'Auto-notif-test-upd')]", "no_jira");
         if (FAIL) { return;}
+        // </editor-fold>
     }
 }
