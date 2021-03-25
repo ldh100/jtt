@@ -105,7 +105,7 @@ public class FW_units {
         for (int i = 0; i < L0.size(); i++) {
             _t++; TWeb.Element_Text("Rows per page Value (index " + i + ")", L0.get(i),  "no_jira"); 
             if (FAIL) { return;}
-            if(t.trim().equals("CDL")){ 
+            if(t.trim().equals("Charwells")){ 
                 L0.get(i).click();
             }
         }
@@ -125,7 +125,7 @@ public class FW_units {
         for (int i = 0; i < L0.size(); i++) {
             _t++; TWeb.Element_Text("Rows per page Value (index " + i + ")", L0.get(i),  "no_jira"); 
             if (FAIL) { return;}
-            if(t.trim().equals("Abc")){ 
+            if(t.trim().equals("Cdl test 1")){ 
                 L0.get(i).click();
             }
         }
@@ -136,7 +136,7 @@ public class FW_units {
       _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on unit manager dropdown", "xpath", "//div[@class='v-select__slot']/input[@id='unit_manager']", "no_jira"); 
      	if (FAIL) { return;}
      	Thread.sleep(2000);
-      _t++; TWeb.Element_By_Path_Text_Enter("Enter Unit Manager", "xpath", "//div[@class='v-select__slot']/input[@id='unit_manager']", "Abc Unittest", false, "no_jira"); 
+      _t++; TWeb.Element_By_Path_Text_Enter("Enter Unit Manager", "xpath", "//div[@class='v-select__slot']/input[@id='unit_manager']", "Fw Gmail Unit Manager", false, "no_jira"); 
    		if (FAIL) { return;}
    		
       _t++; Thread.sleep((long) sleep); TWeb.PressEnter("Press 'Enter' Key", A.e, "no_jira");
