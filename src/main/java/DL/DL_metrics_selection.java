@@ -7,8 +7,6 @@ package DL;
 
 import A.TWeb;
 import static A.A.*;
-import static DL.DL.DL_UserID;
-import static DL.DL.DL_UserPW;
 /**
  *
  * @author Oleg.Spozito
@@ -78,8 +76,8 @@ public class DL_metrics_selection {
             _t++; Thread.sleep((long) sleep); TWeb.Refresh("Refresh/Reload Metrics","no_jira"); 
             
             // Refresh returns to Login ??? ===========================
-//            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'LOGIN'", "id", "login-btn", "no_jira"); 
-//                if (FAIL) { return;}  
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'LOGIN'", "id", "login-btn", "no_jira"); 
+                if (FAIL) { return;}  
             Thread.sleep(500);  
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}                 
@@ -89,21 +87,7 @@ public class DL_metrics_selection {
 //            Thread.sleep(500);
 //            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open Metrics Drawer - click 'arrow_right'", "xpath", ".//span[text()='arrow_right']", "no_jira"); 
 //                if (FAIL) { return;}   // ===================== BUG - Empty list after re-open - to be FIXED  A.S.A.P ^^^^^   ==============
-//            Thread.sleep(500);
-            _t++; Thread.sleep((long) sleep); TWeb.Page_URL("Foodbuy Login page URL", "no_jira");        
-//            _t++; TWeb.Element_By_Path_Text("Button 'Sign in' Text", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
-//            Thread.sleep(5000);
-//        _t++; TWeb.Element_By_Path_Text_Enter("Enter Valid User Name", "id", "username", DL_UserID, false, "no_jira"); 
-//            if (FAIL) { return;}            
-//        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'PASSWORD' input", "id", "password", "no_jira"); 
-//            if (FAIL) { return;}
-//        _t++; TWeb.Element_By_Path_Text_Enter("Enter Valid User Password", "id", "password", DL_UserPW, true, "no_jira"); 
-//            if (FAIL) { return;}
-//        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Sign In'", "name", "login", "no_jira"); 
-//            if (FAIL) { return;}  
-        Thread.sleep(500);  
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
-            if (FAIL) { return;} 
+//            Thread.sleep(500);                
             _t++; Thread.sleep((long) sleep); TWeb.List_L0("Metrics Subheader Count", "xpath", "//ul[contains(@class, 'MuiList-subheader')]", "no_jira");             
                 if (FAIL) { return;}  
             for (int i = 0; i < L0.size(); i++) {
