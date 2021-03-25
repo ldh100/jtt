@@ -113,6 +113,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         lblSITES15 = new javax.swing.JLabel();
         txtComp = new javax.swing.JTextField();
         txtSector = new javax.swing.JTextField();
+        _bulk_apply = new javax.swing.JCheckBox();
         jScrollPane3 = new javax.swing.JScrollPane();
         DV1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -353,6 +354,12 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtSector.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtSector.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
+        _bulk_apply.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _bulk_apply.setText("Bulk Apply");
+        _bulk_apply.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _bulk_apply.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _bulk_apply.setRequestFocusEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -372,7 +379,8 @@ public class AP3 extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(_smart_analytics, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(_menu_manager, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(_menu_manager, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(_bulk_apply, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(_sales_analytics, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(_sales_reporting, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -461,7 +469,9 @@ public class AP3 extends javax.swing.JInternalFrame {
                         .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
                         .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 22, 22)
+                .addGap(6, 6, 6)
+                .addComponent(_bulk_apply, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(_menu_manager, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDH_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -730,15 +740,15 @@ public class AP3 extends javax.swing.JInternalFrame {
 
         txtADMIN_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtADMIN_PW.setText("Password1");
-        getContentPane().add(txtADMIN_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 284, 72, -1));
+        getContentPane().add(txtADMIN_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 284, 84, -1));
 
         txtSM_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtSM_PW.setText("Password1");
-        getContentPane().add(txtSM_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 332, 72, -1));
+        getContentPane().add(txtSM_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 332, 84, -1));
 
         txtIM_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtIM_PW.setText("Password1");
-        getContentPane().add(txtIM_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 308, 72, -1));
+        getContentPane().add(txtIM_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 308, 84, -1));
 
         lblSITES1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -958,7 +968,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         //CompanyID = "";
 
         if(_headless.isSelected()) {
-            txtLog.append("=== Headless mode is selected - Browser is hidden");
+            txtLog.append("=== Headless mode is selected - Browser is hidden" + "\r\n");
             txtLog.append("=== Please wait for report...\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
@@ -1165,6 +1175,13 @@ public class AP3 extends javax.swing.JInternalFrame {
                     EX += " - " + "\t" + " === ^ Group Management" + "\t" + " ===== " + "\t" + " == ^ Group Management End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     Thread.sleep(1500);
                 }
+                if (_bulk_apply.isSelected()) { 
+                    SCOPE += ", Bulk Apply";
+                    EX += " - " + "\t" + " === Bulk Apply" + "\t" + " ===== " + "\t" + " == Bulk Apply Begin>>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    AP3_bulk_apply.run();                        
+                    EX += " - " + "\t" + " === ^ Bulk Apply" + "\t" + " ===== " + "\t" + " == ^ Bulk Apply End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
+                }                
                 if (_menu_manager.isSelected()) { 
                     SCOPE += ", Menu Mgm";
                     EX += " - " + "\t" + " === Menu Manager" + "\t" + " ===== " + "\t" + " == Menu Manager Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
@@ -2291,6 +2308,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _announcements;
     private javax.swing.JCheckBox _brand;
     private javax.swing.JCheckBox _brand_new;
+    private javax.swing.JCheckBox _bulk_apply;
     private javax.swing.JCheckBox _group_management;
     private javax.swing.JCheckBox _headless;
     private javax.swing.JCheckBox _login;

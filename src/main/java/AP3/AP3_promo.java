@@ -829,9 +829,10 @@ public class AP3_promo {
        
          // <editor-fold defaultstate="collapsed" desc="Tests for Dev and Staging Environment">   
          
-       EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Creating LTO with Repeat : Weekends==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
        if(!env.equals("PR"))
        {
+            EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Creating LTO with Repeat : Weekends==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+      
          _t++; Thread.sleep((long) sleep); TWeb.To_Top("no_jira");
          _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click New Promotion", "xpath", "//div[contains(text(),'New Promotion')]", "no_jira");
          if (FAIL) { return;}
@@ -1332,13 +1333,14 @@ public class AP3_promo {
           { 
             _t++; TWeb.API_Body_Contains("Promo Location API - find Promo ID", P_ID,true, "no_jira");
             _t++; TWeb.API_Body_Contains("Promo Location API - find Promo name", "Automation Test Promo",true, "no_jira");
+            _t++; TWeb.API_Body_Contains("Promo Location API - find company ID", CompanyID,true, "no_jira");
           }
          else
           { 
             _t++; TWeb.API_Body_Contains("Promo Location API - find Promo ID", P_ID,false, "no_jira");
             _t++; TWeb.API_Body_Contains("Promo Location API - find Promo name", "Automation Test Promo",false, "no_jira");
           }   
-          _t++; TWeb.API_Body_Contains("Promo Location API - find company ID", CompanyID,true, "no_jira");
+          
          }
          else
          {
