@@ -5,6 +5,7 @@
  */
 package Android;
 import A.Func;
+//import environment.Singleton;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -95,6 +96,7 @@ import org.openqa.selenium.support.ui.FluentWait;
  * @author Oleg.Spozito
  */
 public class An_GUI extends javax.swing.JInternalFrame {
+    //private static Singleton An_GUI_Singleton = new An_GUI( );
     public An_GUI() {  
         initComponents();
     }
@@ -1356,7 +1358,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 AppPath = "";
                 break; 
         }  
-        BucketName =  "mobile-app-repos";//automation
+        BucketName = "mobile-app-repos";//automation
         
         String PName = "";
         Date PDate = new Date();
@@ -1373,12 +1375,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
 
                 PName = PACK_List.getObjectSummaries().get(i).getKey();
                 PDate = PACK_List.getObjectSummaries().get(i).getLastModified();
-                if(PName.contains("android-coreapp") || PName.contains("bolter")){
+                //if(PName.contains("android-coreapp") || PName.contains("bolter")){
                     X +=  PName + "  -  " + PDate + "\r\n";
-                    if(PName.contains(app.toLowerCase())){
+                    //if(PName.contains(app.toLowerCase())){
                         PModel.addRow(new Object[]{PName, PDate});                              
-                    }
-                }
+                    //}
+                //}
             }
             
             DV3.setModel(PModel);
@@ -2455,10 +2457,10 @@ public class An_GUI extends javax.swing.JInternalFrame {
         String dir = A.A.CWD + File.separator + "MobileBuilds"; 
         try {                        
             AmazonS3 s3client = AmazonS3ClientBuilder
-                    .standard()
-                    .withCredentials(new AWSStaticCredentialsProvider(AWS_credentials))
-                    .withRegion(Regions.US_EAST_1)
-                    .build();
+                .standard()
+                .withCredentials(new AWSStaticCredentialsProvider(AWS_credentials))
+                .withRegion(Regions.US_EAST_1)
+                .build();
             S3Object s3object = s3client.getObject("mobile-app-repos", B_PATH);
             S3ObjectInputStream inputStream = s3object.getObjectContent();
             FileUtils.copyInputStreamToFile(inputStream, new File(dir + File.separator + "x.zip")); 
