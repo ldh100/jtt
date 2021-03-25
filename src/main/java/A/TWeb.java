@@ -3069,6 +3069,58 @@ public class TWeb {
         }
         sw1.reset();
     }
+    
+    public static void Scroll_to_WebElement(String NAME, String BY, String PATH, String JIRA){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();       
+ 
+        FAIL = false;
+        try {
+          
+            switch (BY) {
+             case "xpath":
+                 e = d1.findElement(By.xpath(PATH));
+                 break;
+             case "css":
+                 e = d1.findElement(By.cssSelector(PATH));
+                 break;
+             case "className":
+                 e = d1.findElement(By.className(PATH));
+                 break;
+             case "id":
+                 e = d1.findElement(By.id(PATH));
+                 break;
+             case "tagName":
+                 e = d1.findElement(By.tagName(PATH));
+                 break;
+             case "name":
+                 e = d1.findElement(By.name(PATH));
+                 break;
+              case "linkText":
+                 e = d1.findElement(By.linkText(PATH));
+                 break;
+             case "partialLinkText":
+                 e = d1.findElement(By.partialLinkText(PATH));
+                 break;
+             default:
+                 break;
+         }
+            
+            ((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", e);
+            _p++;
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
     }
     
     

@@ -16,8 +16,8 @@ public class DL_login {
         _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to", url, "no_jira");             
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Page_URL("Login page URL", "no_jira");             
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'LOGIN'", "id", "login-btn", "no_jira"); 
-            if (FAIL) { return;}  
+//        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'LOGIN'", "id", "login-btn", "no_jira"); 
+//            if (FAIL) { return;}  
         Thread.sleep(500);  
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}         
