@@ -193,10 +193,27 @@ public class AP3_brand {
                     if(t.equals("Not Found")){                    
                         _t++; TWeb.Find_Text("Find 'Timeslot Length' text", "Timeslot Length", true,"no_jira");
                         if (FAIL) { return; }
+                        
+                        _t++; TWeb.Element_By_Path_Click("Click 'Timeslot Length' value", "css", "[aria-label='Timeslot Length']","no_jira");
+                        _t++; TWeb.Element_By_Path_Text_Select_Copy("Get 'Timeslot Length' value", "css", "[aria-label='Timeslot Length']","no_jira");
+                        if (!FAIL && !t.equals("not found!")) { 
+                            String Minutes = t;
+                            _t++; TWeb.Element_By_Path_Input_Select_Clear("Clear 'Timeslot Length'", "css", "[aria-label='Timeslot Length']","no_jira");                            
+                            //_t++; TWeb.Element_By_Path_Text("Find 'Timeslot Length < 1 min' message ", "xpath", "//div[contains(text(), 'at least 1 minute')]", "no_jira");                            
+                            _t++; TWeb.Element_By_Path_Text_Enter("Enter 'Timeslot Length'", "css", "[aria-label='Timeslot Length']", Minutes, false,"no_jira");
+                        } 
+                        
                         _t++; TWeb.Find_Text("Find 'Avg Prep time' text", "Average Prep Time", true,"no_jira");
-                            if (FAIL) { return; }
+                            if (FAIL) { return; } 
+                        _t++; TWeb.Element_By_Path_Click("Click 'Average Prep Time' value", "css", "[aria-label='Average Prep Time']","no_jira");
+                        _t++; TWeb.Element_By_Path_Text_Select_Copy("Get 'Average Prep Time' value", "css", "[aria-label='Average Prep Time']","no_jira");
+ 
+                            
                         _t++; TWeb.Find_Text("Find 'Cust per Slot' text", "Customers Per Slot", true,"no_jira");
                             if (FAIL) { return; }
+                        _t++; TWeb.Element_By_Path_Click("Click 'Cust per Slot' value", "css", "[aria-label='Customers Per Slot']","no_jira");                            
+                        _t++; TWeb.Element_By_Path_Text_Select_Copy("Get 'Cust per Slot' value", "css", "[aria-label='Customers Per Slot']","no_jira");
+                            
                         _t++; TWeb.Find_Text("Find 'ASAP pickup' text", "ASAP Pickup", true,"no_jira");
                             if (FAIL) { return; }
                         _t++; TWeb.Element_By_Path_Attribute("Find 'DISABLE' text", "xpath", "//i[contains(@class, 'v-icon icon mdi mdi-cellphone-off theme--light')]/parent::div", "textContent", "no_jira");

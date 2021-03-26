@@ -14,13 +14,17 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ListObjectsV2Result;
+import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.google.common.base.Stopwatch;
 import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -36,6 +40,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.swing.RowSorter;
@@ -44,6 +49,7 @@ import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -54,6 +60,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -134,10 +141,9 @@ public class DL extends javax.swing.JInternalFrame {
         cmbEnv = new javax.swing.JComboBox<>();
         _slack = new javax.swing.JCheckBox();
         _headless = new javax.swing.JCheckBox();
-        btnGet_User = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
-        DV_User = new javax.swing.JTable();
-        lblUsers = new javax.swing.JLabel();
+        DVU = new javax.swing.JTable();
+        lblTestData = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -532,21 +538,10 @@ public class DL extends javax.swing.JInternalFrame {
         _headless.setRequestFocusEnabled(false);
         jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 68, 100, 14));
 
-        btnGet_User.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnGet_User.setText(" < Get User");
-        btnGet_User.setEnabled(false);
-        btnGet_User.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        btnGet_User.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnGet_UserMouseClicked(evt);
-            }
-        });
-        jPanel3.add(btnGet_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 12, 84, 22));
-
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 416, 416, 88));
 
-        DV_User.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        DV_User.setModel(new javax.swing.table.DefaultTableModel(
+        DVU.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        DVU.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -554,25 +549,25 @@ public class DL extends javax.swing.JInternalFrame {
 
             }
         ));
-        DV_User.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV_User.setCellSelectionEnabled(true);
-        DV_User.setGridColor(java.awt.SystemColor.activeCaptionBorder);
-        DV_User.setName("DV2"); // NOI18N
-        DV_User.setOpaque(false);
-        DV_User.setRowHeight(18);
-        DV_User.getTableHeader().setReorderingAllowed(false);
-        DV_User.addMouseListener(new java.awt.event.MouseAdapter() {
+        DVU.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        DVU.setCellSelectionEnabled(true);
+        DVU.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DVU.setName("DV2"); // NOI18N
+        DVU.setOpaque(false);
+        DVU.setRowHeight(18);
+        DVU.getTableHeader().setReorderingAllowed(false);
+        DVU.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DV_UserMouseClicked(evt);
+                DVUMouseClicked(evt);
             }
         });
-        jScrollPane5.setViewportView(DV_User);
+        jScrollPane5.setViewportView(DVU);
 
         getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 852, 152));
 
-        lblUsers.setText("Test Users");
-        lblUsers.setName("lblDates"); // NOI18N
-        getContentPane().add(lblUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 280, -1));
+        lblTestData.setText("Test Data");
+        lblTestData.setName("lblDates"); // NOI18N
+        getContentPane().add(lblTestData, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 820, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -587,12 +582,10 @@ public class DL extends javax.swing.JInternalFrame {
         MetricID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
         wdLastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
-
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         if(BW2 != null && !BW2.isCancelled()) BW2.cancel(true);
         F_COUNT--;
     }//GEN-LAST:event_formInternalFrameClosed
-
     private void DV2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV2MouseClicked
         if (d2LastRow == DV2.getSelectedRow()) {
            return;
@@ -601,7 +594,6 @@ public class DL extends javax.swing.JInternalFrame {
         DATE_RANGE = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 0));
         CatID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
     }//GEN-LAST:event_DV2MouseClicked
-
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
         jPanel3.addComponentListener(new ComponentListener() {
             @Override
@@ -622,7 +614,6 @@ public class DL extends javax.swing.JInternalFrame {
             }
         });
     }//GEN-LAST:event_formAncestorAdded
-
     private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
         if(!btnRun.isEnabled()){
             return;
@@ -663,7 +654,7 @@ public class DL extends javax.swing.JInternalFrame {
         }
 
         if(_headless.isSelected()) {
-            txtLog.append("=== Headless mode is selected - Browser is hidden");
+            txtLog.append("=== Headless mode is selected - Browser is hidden" + "\r\n");
             txtLog.append("=== Please wait for report...\r\n");          
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
@@ -695,6 +686,7 @@ public class DL extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_btnRunMouseClicked
+
     private void BW2_DoWork(){
         BW2 = new SwingWorker() {             
             @Override
@@ -742,7 +734,6 @@ public class DL extends javax.swing.JInternalFrame {
         }; 
         BW2.execute();  // executes the swingworker on worker thread   
     }
-
     private void Execute() throws InterruptedException{
         Instant dw_start = Instant.now();
         if (_login.isSelected()) { 
@@ -895,6 +886,7 @@ public class DL extends javax.swing.JInternalFrame {
             }
         }
     }
+
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
         String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
@@ -902,7 +894,6 @@ public class DL extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
     }//GEN-LAST:event_btnLogMouseClicked
-
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
         String R = Func.SHOW_LOG_FILE(F, "txt");
@@ -911,18 +902,15 @@ public class DL extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
     }//GEN-LAST:event_btnFailsMouseClicked
-
     private void btnExelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExelMouseClicked
         if(!btnExel.isEnabled()) {return;}
         btnExel.setEnabled(false);
         Report(true);
         btnExel.setEnabled(true);
     }//GEN-LAST:event_btnExelMouseClicked
-
     private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
         SAVE_CONFIG();
     }//GEN-LAST:event_btnSave_OptMouseClicked
-
     private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -931,15 +919,9 @@ public class DL extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
 
-    private void btnGet_UserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGet_UserMouseClicked
-        if(btnGet_User.isEnabled()){
-            GET_DL_USER_TOKEN(true);            
-        }
-    }//GEN-LAST:event_btnGet_UserMouseClicked
-
-    private void DV_UserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_UserMouseClicked
+    private void DVUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DVUMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_DV_UserMouseClicked
+    }//GEN-LAST:event_DVUMouseClicked
     private void Load_Form(){
         Load = true;   
         
@@ -1102,10 +1084,11 @@ public class DL extends javax.swing.JInternalFrame {
         
         LOAD_CONFIG();
         //GET_DL_USER_TOKEN(false);
-        Get_S3_DL_Credentials();
-        Get_S3_data(AWS_credentials);
         GetDates();       
         GetMetrics(); 
+        Get_S3_DL_Credentials();
+        Get_S3_data(AWS_credentials);
+
     }
     private void Get_S3_DL_Credentials(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));         
@@ -1131,6 +1114,10 @@ public class DL extends javax.swing.JInternalFrame {
         txtLog.append("- Load DL S3 data ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         
+        String[] SitesColumnsName = {"username","metric","time_period","value","location_filters","item_filters","source"}; 
+        DefaultTableModel TestDataModel = new DefaultTableModel();
+        TestDataModel.setColumnIdentifiers(SitesColumnsName);
+        DVU.setModel(TestDataModel);
         String BucketName = "distilr-data-qa"; ///fmp_source_qa_files/";
         String X = "";
         try {
@@ -1140,14 +1127,82 @@ public class DL extends javax.swing.JInternalFrame {
                     .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
                     .withRegion(Regions.US_EAST_2)
                     .build();
-            ListObjectsV2Result PACK_List = s3client.listObjectsV2(BucketName);
-            PACK_List.getObjectSummaries().sort(Comparator.comparing(S3ObjectSummary::getLastModified));
-            for(int i = PACK_List.getObjectSummaries().size() -1 ; i > 0; i--){  // sort desc, default acs  
-                X +=  PACK_List.getObjectSummaries().get(i).getKey();
-            }
+            ListObjectsV2Result File_List = s3client.listObjectsV2(BucketName);
+            File_List.getObjectSummaries().sort(Comparator.comparing(S3ObjectSummary::getLastModified)); 
+            int LastFileIndex = File_List.getObjectSummaries().size() - 1;
+            String File_Path = File_List.getObjectSummaries().get(LastFileIndex).getKey();
+            lblTestData.setText("Test Data - from file:   " 
+                    + File_Path + "  >  "
+                    + File_List.getObjectSummaries().get(LastFileIndex).getLastModified());
+            S3Object s3object = s3client.getObject(BucketName, File_Path);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(s3object.getObjectContent()));
+            String TestDataJson ="";
+            String s = null;
+            while ((s = reader.readLine()) != null) {
+                TestDataJson += s;
+            }   
+            String username = "";
 
+            String metric = "";
+            String time_period = "";
+            String location_filters = "None";
+            String item_filters = "None";
+            Float value = 0.0f;
+            String source = "";
+            JSONObject json = new JSONObject(TestDataJson);  
+            JSONArray Results = json.getJSONArray("results");
+            for (int i = 0; i < Results.length(); i++) {
+                JSONObject o = Results.getJSONObject(i);
+                if(o.has("username")){
+                    username = o.getString("username");   
+                } 
+                if(o.has("metric")){
+                    metric = o.getString("metric");
+                }              
+                if(o.has("time_period")){
+                    time_period = o.getString("time_period");
+                }  
+                if(o.has("location_filters")){
+                    location_filters = "";
+                    JSONObject F = o.getJSONObject("location_filters");
+                    Iterator keys = F.keys();
+                    while(keys.hasNext()) {
+                        String NextKey = (String)keys.next();
+                        location_filters += NextKey + " " + F.getString(NextKey) + "\r\n";
+                    }
+                } 
+                if(o.has("item_filters")){
+                    item_filters = "";
+                    JSONObject F = o.getJSONObject("item_filters"); 
+                    Iterator keys = F.keys();
+                    while(keys.hasNext()) {
+                        String NextKey = (String)keys.next();
+                        item_filters += NextKey + " " + F.getString(NextKey) + "\r\n";
+                    }
+                } 
+                if(o.has("value")){
+                    value = o.getFloat("value");//.toString()
+                }             
+                if(o.has("source")){
+                    source = o.getString("source");
+                }
+                TestDataModel.addRow(new Object[]{
+                    username.trim(), 
+                    metric.trim(), 
+                    time_period.trim(), 
+                    value, 
+                    location_filters.trim(), 
+                    item_filters.trim(), 
+                    source.trim()});
+            }
             
-            txtLog.append("- BucketName: " + PACK_List.getBucketName() + ", Size: " + PACK_List.getObjectSummaries().size() + "\r\n");
+            DVU.setModel(TestDataModel);
+            DVU.setDefaultEditor(Object.class, null);
+            DVU.getColumnModel().getColumn(0).setPreferredWidth(160);
+            DVU.getColumnModel().getColumn(1).setPreferredWidth(160);
+            DVU.changeSelection(0, 0, false, false);
+            
+            txtLog.append("- BucketName: " + File_List.getBucketName() + ", Size: " + File_List.getObjectSummaries().size() + "\r\n");
             txtLog.append(X + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } catch (Exception ex) {
@@ -1157,181 +1212,6 @@ public class DL extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     } 
      
-    private void GET_DL_USER_TOKEN(boolean ShowResult) {                                                
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("- DL User..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-    // client_id=FMP+Distilr+DEV  
-    // admin@distilr.io MortyEscapedOntario >> https://app.distilr.io/
-    // distilr.test@place.com Compass1 >> https://dev.member.distilr.io/
-    
-//URL: [GET] api.member.distilr.io/testing/metrics
-// --header {auth-header: my_access_token}
-    
-        String J = "==== DL User:" + "\r\n";
-
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        sw1.start();         // ============ DL User verify Password
-        try { 
-            CloseableHttpClient httpclient = HttpClients.createDefault();
-            String json = "{\"email\":\"" + txtAdmin_ID.getText().trim() + "\",\"password\":\"" + txtAdmin_PW.getText().trim() + "\",\"returnSecureToken\":true}";
-            StringEntity entity = new StringEntity(json);  
-            HttpPost httpPost = new HttpPost("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBTMCuLvll2eQq5BLiBQxtzo-PqYZLluaI");
-            httpPost.setEntity(entity); 
-            httpPost.setHeader("Accept", "application/json");
-            httpPost.setHeader("Content-type", "application/json");
-    
-            HttpResponse response = httpclient.execute(httpPost);
-            String jsonString = EntityUtils.toString(response.getEntity());
-            JSONObject Json = new JSONObject(jsonString);
-            ID_TKN = Json.getString("idToken");
-            REFRESH_TKN = Json.getString("refreshToken");
-            
-            J += "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBTMCuLvll2eQq5BLiBQxtzo-PqYZLluaI" + "\r\n" 
-            + Json.toString(4) + "\r\n";
-//            + response.getStatusLine() + "\r\n"; 
-            J += "\r\n";            
-
-        } catch (IOException | JSONException ex) {
-            J += "Error: " + ex.getMessage();            
-            txtLog.append("- verifyPassword Error: " + ex.getMessage() + "\r\n");  
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
-        }   
-        txtLog.append("== verifyPassword > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset();   
-
-        sw1.start();         // ============ DL User verify Password
-        try { 
-            CloseableHttpClient httpclient = HttpClients.createDefault();
-            String json = "{\"idToken\":\"" + ID_TKN + "\"}";
-            StringEntity entity = new StringEntity(json);  
-            HttpPost httpPost = new HttpPost("https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyBTMCuLvll2eQq5BLiBQxtzo-PqYZLluaI");
-            httpPost.setEntity(entity); 
-            httpPost.setHeader("Accept", "application/json");
-            httpPost.setHeader("Content-type", "application/json");
-    
-            HttpResponse response = httpclient.execute(httpPost);
-            String jsonString = EntityUtils.toString(response.getEntity());
-            JSONObject Json = new JSONObject(jsonString);
-            //DL_TKN = Json.getString("idToken");
-            
-            J += "https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyBTMCuLvll2eQq5BLiBQxtzo-PqYZLluaI" + "\r\n" 
-            + Json.toString(4) + "\r\n";
-//            + response.getStatusLine() + "\r\n"; 
-            //J += "\r\n";            
-
-        } catch (IOException | JSONException ex) {
-            J += "Error: " + ex.getMessage();            
-            txtLog.append("- getAccountInfo Error: " + ex.getMessage() + "\r\n");  
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
-        }   
-        txtLog.append("== getAccountInfo= > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset();         
-        
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        
-        if(ShowResult){
-            String R = Func.SHOW_LOG_FILE(J, "json");
-            if(!R.equals("OK")){
-                txtLog.append(R + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            } 
-        }
-    }                                               
-    private void GetMetricsApi() {
-        wdLastRow = -1;
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("- Load Metrics ..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        sw1.start();        
-
-        String[] SitesColumnsName = {"Metrics","Id"}; 
-        DefaultTableModel SitesModel = new DefaultTableModel();
-        SitesModel.setColumnIdentifiers(SitesColumnsName);
-        DV1.setModel(SitesModel);
-        
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV2.getModel());
-        DV2.setRowSorter(sorter);
-        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
-        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
-        sorter.setSortKeys(sortKeys);  
-        sorter.setSortable(0, false);         
-               
-        
-        String authheader = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNjYmM4ZjIyMDJmNjZkMWIxZTEwMTY1OTFhZTIxNTZiZTM5NWM2ZDciLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRGlzdGlsciBBZG1pbiIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9jZGwtLS1kYXJ3aW4tMTUyOTYxMTk3MTE0MSIsImF1ZCI6ImNkbC0tLWRhcndpbi0xNTI5NjExOTcxMTQxIiwiYXV0aF90aW1lIjoxNjA4NjU4MTk1LCJ1c2VyX2lkIjoiTUpLY3RpeWNVeE9NcXFXZWFaQkZOWDZrb280MiIsInN1YiI6Ik1KS2N0aXljVXhPTXFxV2VhWkJGTlg2a29vNDIiLCJpYXQiOjE2MDg2NTgxOTUsImV4cCI6MTYwODY2MTc5NSwiZW1haWwiOiJhZG1pbkBkaXN0aWxyLmlvIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImFkbWluQGRpc3RpbHIuaW8iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.STqy_wCGUZwtbQPG4xa-sP_ytqEPmAtOMnEg45BC6kusNp3RMSzfPwFTIJoZxQYxNUckRfcxvfIHMSx0YerAqFL9GNaILFDMyL35KkgOvyBoe06awIbk9impE27rPKQNjIQtWahGCVHxwAp79m3ykXx49h74yC9Q6ey1Q4h-miz9eGsuyUVxvjzTTQn-sZGhajOrT77D2GVy1WdRcBxxp693lUL0PrqCxoHWCQF06KfPRGSh_CF21ApsKrWgC6Xi_l7L4E0SgYYLHeKlsJG-VoojP3CH0o-ZMBWGQCbTk6rutopjq0MmI3aWGNHyGH2BQkM5QpRRXlSgRl9RXdM9dA";
-        //String UserAuth = Base64.getEncoder().encodeToString((txtAdmin_ID.getText().trim() + ":" + txtAdmin_PW.getText().trim()).getBytes());
-        //String UserAuth = Base64.getEncoder().encodeToString((REFRESH_TKN).getBytes());
-// https://teamideaworks.atlassian.net/browse/DIS-885
-        
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        try { 
-            HttpGet httpget = new HttpGet("https://bnfawn1xw3.execute-api.us-east-2.amazonaws.com/PROD/dropdown/items-dropdown");  
-            httpget.setHeader("Accept", "application/json, text/plain, */*");
-            httpget.setHeader("auth-header", authheader); 
-            //httpget.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + authheader); 
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-                    throw new ClientProtocolException("Response: " + response.getStatusLine().getStatusCode() + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            String responseBody = httpclient.execute(httpget, responseHandler);  
-            JSONObject json = new JSONObject(responseBody);
-
-            DV1.setDefaultEditor(Object.class, null);
-//            DV1.getColumnModel().getColumn(0).setPreferredWidth(250);
-//            DV1.getColumnModel().getColumn(1).setPreferredWidth(70);
-//            DV1.getColumnModel().getColumn(2).setPreferredWidth(50);
-//            DV1.getColumnModel().getColumn(3).setPreferredWidth(400);
-
-            sorter.setSortable(0, true); 
-            sorter.sort();            
-
-        } catch (IOException | JSONException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
-        }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());   
-            }
-        }
-        DV1.setModel(SitesModel);
-        
-        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset();
-        
-        if (DV1.getRowCount() > 0) {
-            DV1.changeSelection(0, 0, false, false);
-            if (CONFIG && !"".equals(METRIC.trim())) {
-                for(int row = 0; row < DV1.getRowCount(); row++) {
-                    if(DV1.getValueAt(row, 0).equals(METRIC)){
-                        DV1.changeSelection(row, 0, false, false);
-                        break;
-                    }
-                }
-            }
-            METRIC = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
-            MetricID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
-        }
-        lblMetrics.setText("Metrics (" + DV1.getRowCount() + " found)");
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }
     private void GetMetrics() {
         d2LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -1589,7 +1469,7 @@ public class DL extends javax.swing.JInternalFrame {
             int row = _insert.executeUpdate();
             conn.close();
             
-            txtLog.append("=== SAVE_CONFIG > OK (" + row + " row) + \"\\r\\n\"");
+            txtLog.append("=== SAVE_CONFIG > OK (" + row + " row) " + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());            
         } catch (SQLException ex) {
             txtLog.append("=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage());
@@ -1649,7 +1529,6 @@ public class DL extends javax.swing.JInternalFrame {
     }
     private void LOG_START(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
             PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] (" +
                     "[Date]" +   // 1
@@ -1727,7 +1606,7 @@ public class DL extends javax.swing.JInternalFrame {
             return;
         }   
         try {
-            int col = 9; // 8 + 1 new JIRA = 9
+            int col = 9; 
             String Top_Row = Last_EX.substring(0, Last_EX.indexOf("\r\n"));        
             String[] lines = Last_EX.substring(Last_EX.indexOf("\r\n") + 2).split(System.getProperty("line.separator"));
             int l = lines.length;
@@ -1802,7 +1681,7 @@ public class DL extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;
-    private javax.swing.JTable DV_User;
+    private javax.swing.JTable DVU;
     private javax.swing.JCheckBox _4;
     private javax.swing.JCheckBox _all_data;
     private javax.swing.JCheckBox _filters;
@@ -1816,7 +1695,6 @@ public class DL extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _users;
     private javax.swing.JButton btnExel;
     private javax.swing.JButton btnFails;
-    private javax.swing.JButton btnGet_User;
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;
     private javax.swing.JButton btnSave_Opt;
@@ -1838,7 +1716,7 @@ public class DL extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblSITES6;
     private javax.swing.JLabel lblSITES7;
     private javax.swing.JLabel lblSITES9;
-    private javax.swing.JLabel lblUsers;
+    private javax.swing.JLabel lblTestData;
     private javax.swing.JSpinner nShowPage;
     private javax.swing.JSpinner nWaitElement;
     private javax.swing.JSpinner nWaitLoad;

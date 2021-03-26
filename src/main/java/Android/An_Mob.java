@@ -23,7 +23,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  *
  * @author oleg.spozito
  */
-public class An_Mob extends An_GUI{ //
+public class An_Mob extends An_GUI { //
 //    public An_Mob(An_GUI a) {
 //        ad = a.ad;
 //        loadTimeout = a.loadTimeout;

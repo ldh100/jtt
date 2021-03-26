@@ -456,7 +456,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             txtLog.append("=== Report Excel file:\r\n" + Func.fExcel(l, col, Values, DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()) + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File) + "\r\n");
             // ===============================================================
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             txtLog.append("=== Report > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
