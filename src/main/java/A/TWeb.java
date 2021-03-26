@@ -1112,12 +1112,12 @@ public class TWeb {
             }
             t = (String) clipboard.getData(DataFlavor.stringFlavor);
             _p++; 
-            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-        } catch(Exception ex){
+        } catch(Exception ex) {
             _f++; FAIL = false; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
-            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         }
@@ -1177,7 +1177,7 @@ public class TWeb {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        sw1.start();          
  
         FAIL = false;
         t = "not found!";
@@ -1228,7 +1228,7 @@ public class TWeb {
     }
     public static void Element_By_Path_Input_Select_Clear(String NAME, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
-            sw1.reset();
+            sw1.reset(); 
         }
         sw1.start();        
  
@@ -1282,7 +1282,7 @@ public class TWeb {
         }
         sw1.reset();
     }
-    public static void Element_By_Path_Text_Enter(String NAME, String BY, String PATH, String VAL, boolean HIDE,String JIRA ){
+    public static void Element_By_Path_Text_Enter(String NAME, String BY, String PATH, String VAL, boolean HIDE, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2229,7 +2229,7 @@ public class TWeb {
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + " - " + "\t" + "Day " + I + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Day " + I + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         }
@@ -2306,7 +2306,7 @@ public class TWeb {
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "Day " + (I + 1) + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Day " + (I + 1) + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         }
@@ -2356,7 +2356,7 @@ public class TWeb {
         try {
             List<WebElement> X = L.get(I).findElements(By.tagName("td"));
             t = X.get(X.size() - 1).findElement(By.xpath(".//i[contains(@class, 'icon mdi mdi-eye')]")).getAttribute("class").trim();
-            if(t != "" && t.contains("mdi-eye-off")){
+            if(!t.equals("") && t.contains("mdi-eye-off")){
                 t = "Hidden in App";         //   v-icon mdi mdi-eye-off theme--light none--text
             } else {
                 t = "Display in App";        //   v-icon mdi mdi-eye theme--light
@@ -3069,8 +3069,7 @@ public class TWeb {
         }
         sw1.reset();
     }
-    }
+}
     
     
-
 

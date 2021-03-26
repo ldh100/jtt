@@ -695,7 +695,7 @@ public class WO extends javax.swing.JInternalFrame {
         }
 
         if(_headless.isSelected()) {
-            txtLog.append("=== Headless mode is selected - Browser is hidden");
+            txtLog.append("=== Headless mode is selected - Browser is hidden" + "\r\n");
             txtLog.append("=== Please wait for report...\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
