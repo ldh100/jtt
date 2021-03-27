@@ -1147,7 +1147,7 @@ public class DL extends javax.swing.JInternalFrame {
             String time_period = "";
             String location_filters = "None";
             String item_filters = "None";
-            String value = "";
+            Float value = 0.0f;
             String source = "";
             JSONObject json = new JSONObject(TestDataJson);  
             JSONArray Results = json.getJSONArray("results");
@@ -1181,7 +1181,7 @@ public class DL extends javax.swing.JInternalFrame {
                     }
                 } 
                 if(o.has("value")){
-                    value = (o.getNumber("value")).toString();
+                    value = o.getFloat("value");//.toString()
                 }             
                 if(o.has("source")){
                     source = o.getString("source");
@@ -1190,21 +1190,17 @@ public class DL extends javax.swing.JInternalFrame {
                     username.trim(), 
                     metric.trim(), 
                     time_period.trim(), 
-                    value.trim(), 
+                    value, 
                     location_filters.trim(), 
                     item_filters.trim(), 
                     source.trim()});
             }
             
-//            for(int i = File_List.getObjectSummaries().size() - 1 ; i > 0; i--){  // sort desc, default acs  
-//                TestDataModel.addRow(new Object[]{File_List.getObjectSummaries().get(i).getKey(), File_List.getObjectSummaries().get(i).getLastModified()});     
-//            }
-            
             DVU.setModel(TestDataModel);
             DVU.setDefaultEditor(Object.class, null);
-            DVU.getColumnModel().getColumn(0).setPreferredWidth(240);
-            DVU.getColumnModel().getColumn(1).setPreferredWidth(170);
-            DVU.changeSelection(0, 1, false, false);
+            DVU.getColumnModel().getColumn(0).setPreferredWidth(160);
+            DVU.getColumnModel().getColumn(1).setPreferredWidth(160);
+            DVU.changeSelection(0, 0, false, false);
             
             txtLog.append("- BucketName: " + File_List.getBucketName() + ", Size: " + File_List.getObjectSummaries().size() + "\r\n");
             txtLog.append(X + "\r\n");
