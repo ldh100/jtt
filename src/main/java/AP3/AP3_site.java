@@ -696,8 +696,9 @@ public class AP3_site {
                         if (FAIL) { return;}      
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Click 'Add another tender type'", e, "no_url");
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Cancel  another tender type", "xpath", "(//div[@class='layout align-center']//div[@class='flex xs1']//i)[2]", "no_jira");
-                        if (FAIL) { return;}     
+                  
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Cancel  another tender type", "xpath", "(//div[@class='flex display-flex align-center']//div[@class='flex xs1']//i[contains(@class,'close')])[2]", "no_jira");
+                        if (FAIL) { return;}                                                                                         
                        
                     _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Manage Meal Plan Domains' text", "Manage Meal Plan Domains", true,"no_jira"); 
                         if (FAIL) { return;}      

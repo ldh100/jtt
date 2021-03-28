@@ -179,7 +179,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Android Automation Manager >>> loading, please wait ... ... ... ...");
-        setMinimumSize(new java.awt.Dimension(860, 532));
+        setMinimumSize(new java.awt.Dimension(854, 525));
         setName("Android"); // NOI18N
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -1145,7 +1145,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     }
     // </editor-fold>   
     
-    // <editor-fold defaultstate="collapsed" desc="Package Methods">    
+    // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">    
     private void GUI_Find_Connected_Devices(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         btnRun.setEnabled(false);
@@ -1356,7 +1356,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 AppPath = "";
                 break; 
         }  
-        BucketName =  "mobile-app-repos";//automation
+        BucketName = "mobile-app-repos";//automation
         
         String PName = "";
         Date PDate = new Date();
@@ -1373,12 +1373,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
 
                 PName = PACK_List.getObjectSummaries().get(i).getKey();
                 PDate = PACK_List.getObjectSummaries().get(i).getLastModified();
-                if(PName.contains("android-coreapp") || PName.contains("bolter")){
+                //if(PName.contains("android-coreapp") || PName.contains("bolter")){
                     X +=  PName + "  -  " + PDate + "\r\n";
-                    if(PName.contains(app.toLowerCase())){
+                    //if(PName.contains(app.toLowerCase())){
                         PModel.addRow(new Object[]{PName, PDate});                              
-                    }
-                }
+                    //}
+                //}
             }
             
             DV3.setModel(PModel);
@@ -1939,6 +1939,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
+
     private void GUI_Run_Manual(){
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
@@ -1948,21 +1949,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
         Current_Log_Update(true, "=== Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
 
         WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
-        LoadTimeOut = (double)nWaitLoad.getValue() *1000;
-        EX = "";
-        F = "";
+        LoadTimeOut = (double)nWaitLoad.getValue() *1000;   
         t_calls = 0;
         t_min =  0;
         t_avg = 0;
         t_max =  0;
         p_50 = 0;
         p_90 = 0;
-        _t = 0; // Total
-        _p = 0; // Passed
-        _f = 0; // Failed
-        _w = 0; // Warn
-        r_time = "";
-
         Mobile_ID = txtMobile_Id.getText();
         Mobile_PW = txtMobile_Pw.getText();
         Bolter_ID = txtBolter_Id.getText();
@@ -2010,7 +2003,6 @@ public class An_GUI extends javax.swing.JInternalFrame {
         LOG_START();        // ============================================
         BW1_DoWork( true);            
     }
-
     public String JOB_Run_Auto(String run_type, String config){
         run_start = Instant.now();
         Log  = "";
@@ -2455,10 +2447,10 @@ public class An_GUI extends javax.swing.JInternalFrame {
         String dir = A.A.CWD + File.separator + "MobileBuilds"; 
         try {                        
             AmazonS3 s3client = AmazonS3ClientBuilder
-                    .standard()
-                    .withCredentials(new AWSStaticCredentialsProvider(AWS_credentials))
-                    .withRegion(Regions.US_EAST_1)
-                    .build();
+                .standard()
+                .withCredentials(new AWSStaticCredentialsProvider(AWS_credentials))
+                .withRegion(Regions.US_EAST_1)
+                .build();
             S3Object s3object = s3client.getObject("mobile-app-repos", B_PATH);
             S3ObjectInputStream inputStream = s3object.getObjectContent();
             FileUtils.copyInputStreamToFile(inputStream, new File(dir + File.separator + "x.zip")); 
@@ -2514,6 +2506,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
     // </editor-fold>
 
     private void BW1_DoWork(Boolean GUI){ 
+        EX = "";
+        _t = 0;
+        _p = 0;
+        _f = 0;
+        _w = 0;
+        F = "";
+        r_time = "";
         BW1 = new SwingWorker() {                        
             @Override
             protected String doInBackground() throws Exception   { 
@@ -2532,14 +2531,37 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 
                 New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));  
                 if (app.equals("Bolter")) {
-                    Run_Bolter();
-//                    An_bolter x = new Android.An_bolter(An_GUI.this);
-//                    x.Run();
+                    An_bolter x = new Android.An_bolter(An_GUI.this);
+                    x.Run();
+                    EX += x.EX;
+                    _t += x._t;
+                    _p += x._p;
+                    _f += x._f;
+                    _w += x._w;
+                    F += x.F;
+                    r_time += x.r_time;
                 }else{
-                    Run_CoreApp();
-//                    An_coreapp x = new An_coreapp();
-//                    x.Run();
-                }   
+                    An_coreapp x = new An_coreapp(An_GUI.this);// 
+                    x.Run();
+                    EX += x.EX;
+                    _t = x._t;
+                    _p = x._p;
+                    _f = x._f;
+                    _w = x._w;
+                    F = x.F;
+                    r_time = x.r_time;
+                }                 
+                DD = Duration.between(run_start, Instant.now());
+                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+                Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n"); 
+                
+                EX = "Android " + app + " " + env + ", v: " + appVersion + ", Device: " + device + " OS v: " + devOS +
+                " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
+                 "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
+                 + EX;
+                
+                Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n"); 
+                BW1_Done(GUI);
                 if(_f > 0) {
                     return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
                 }else{
@@ -2548,23 +2570,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }  
             @Override
             protected void done() { 
-                DD = Duration.between(run_start, Instant.now());
-                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
-                Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n"); 
-                
-                EX = "Android " + app + " " + env + ", v: " + appVersion + ", Device: " + device + " OS Version: " + devOS +
-                " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
-                 "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
-                 + EX;
-                
-                Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n"); 
-
                 try  { 
                     String statusMsg = (String) get(); 
                     Current_Log_Update(GUI, statusMsg + "\r\n");
                     BW1 = null;
                 } catch (InterruptedException | ExecutionException ex)  { 
-                    Current_Log_Update(GUI, "- BW1 Done: " + ex.getMessage() + "\r\n"); 
+                    Current_Log_Update(GUI, "- BW1 Done ERROR: " + ex.getMessage() + "\r\n"); 
                 } 
                 if(ad != null) {
                     ad.quit(); 
@@ -2572,8 +2583,6 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 if(appiumService != null && appiumService.isRunning()){
                     appiumService.stop();                    
                 }
-
-                BW1_Done(GUI);
             } 
         }; 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -2691,12 +2700,19 @@ public class An_GUI extends javax.swing.JInternalFrame {
             sw1.reset();
         }
         sw1.start();        
-        FAIL = false;
-        t = "Test_EX_Update";
+        if(NAME.endsWith("1")){
+            FAIL = true;
+            t = "Test_EX_Update FAIL = true";
+        }
+        if(NAME.endsWith("2")){
+            FAIL = false;           
+            t = "Test_EX_Update FAIL = false";
+        } 
+        
         try {
             _p++; 
             err = "No Error";
-            EX += _t + "\t" + NAME + "\t" + "Test_EX_Update OK"  + "\t" + t + "\t" + "PASS" + "\t" + err + " TimeOut: " + LoadTimeOut + " ms" +
+            EX += _t + "\t" + NAME + "\t" + "Test_EX_Update OK"  + "\t" + t + "\t" + "PASS" + "\t" + err + 
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -3005,13 +3021,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
             int XX = E.getLocation().x;
             int YY = E.getLocation().y;
             if("Right".equals(DIRECTION)){ 
-                XX = XX + ae.getSize().width + X;
+                XX = XX + E.getSize().width + X;
             } else if ("Left".equals(DIRECTION)){ 
                 XX = XX + X; 
             }
             
             if("Bottom".equals(DIRECTION)){ 
-                YY = YY + ae.getSize().height + Y;
+                YY = YY + E.getSize().height + Y;
             } else if ("Top".equals(DIRECTION)){ 
                 YY = YY + Y; 
             }
@@ -4520,146 +4536,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
     } 
     // </editor-fold>
-    
-    // <editor-fold defaultstate="collapsed" desc="Mobile Run Flow(s)">    
-    protected void Run_Bolter() throws InterruptedException {   
-//        Thread.sleep(500);
-//        _t++; Element_E1_Find("Is it Splash Screen/Logo?", "id", "splashScreenLogo", "no_jira");             
-////            //if (FAIL) { return;}        // "id", "packagename:id/splashScreenLogo",          
-//        _t++; Test_EX_Update("Bolter Test EX Update 1", "no_jira");             
-//            if (FAIL) { return; }   
-//        _t++; Test_EX_Update("Bolter Test EX Update 2", "no_jira");             
-//            if (FAIL) { return; }            
-//        _t++; Wait_For_Element_By_Path_InVisibility("Wait for Splash screen", "id", "splashScreenLogo", "no_jira");             
-//            if (FAIL) { return;} 
-        
-        _t++; Wait_For_Element_By_Path_Presence("Wait for 'Sign In' screen", "id", "button_login", "no_jira");             
-            if (FAIL) { return;} 
-        _t++; Element_By_Path_Text("Get 'Sign In' button text", "id", "button_login", "no_jira");             
-            if (FAIL) { return;} 
-        _t++; Element_By_Path_Text("Get 'Forgot PW?' button text", "id", "btn_forgotPassword", "no_jira");             
-            if (FAIL) { return;}      
-        _t++; Element_By_Path_Click("Click 'Email' input", "id", "textInputEditText_login_email_address", "no_jira");             
-            if (FAIL) { return;}            
-        _t++; Element_By_Path_Text_Enter("Enter 'Email'", "id", "textInputEditText_login_email_address", Bolter_ID, false,"no_jira");             
-            if (FAIL) { return;} 
-        _t++; Element_By_Path_Click("Click 'Password' input", "id", "textInputEditText_login_password", "no_jira");             
-            if (FAIL) { return;}            
-        _t++; Element_By_Path_Text_Enter("Enter 'Password' input", "id", "textInputEditText_login_password", Bolter_PW, true,"no_jira");             
-            if (FAIL) { return;} 
-        _t++; Element_By_Path_Click("Click 'Undide Password' icon", "id", "text_input_end_icon", "no_jira");             
-            if (FAIL) { return;}              
-        _t++; HideKeyboard("Hide Keyboard", "no_jira");             
-            if (FAIL) { return;}
-        _t++; Element_By_Path_Click("Click 'Log In' button", "id", "button_login", "no_jira");             
-            if (FAIL) { return;}  
-        _t++; Wait_For_Element_By_Path_InVisibility("Wait for load", "id", "android:id/progress", "no_jira");             
-            if (FAIL) { return;}          
-        _t++; Wait_For_Element_By_Path_Presence("Wait for 'Dashboard' screen", "id", "delivery_dashboard_title", "no_jira");             
-            if (FAIL) { return;} 
-
-        _t++; Element_By_Path_Click("Click 'Open Navigation drawer' image", "xpath", "//android.widget.ImageButton[@content-desc='Open navigation drawer']", "no_jira");             
-            if (FAIL) { return;} 
-        _t++; Element_By_Path_Text("Get 'About' > Version", "id", "appVersion","no_jira");             
-            if (FAIL) { return;}  
-            appVersion = t;
-            
-        _t++; Element_By_Path_Click("Click 'Log out'", "id", "nav_logout", "no_jira");             
-            if (FAIL) { return;} 
-    }
-    protected void Run_CoreApp() throws InterruptedException {     
-//        _t++; ResetApp("Reset App", "no_jira");  
-
-//        _t++; Test_EX_Update("CoreApp Test EX Update 1", "no_jira");             
-//            if (FAIL) { return; }   
-//        _t++; Test_EX_Update("CoreApp Test EX Update 2", "no_jira");             
-//            if (FAIL) { return; } 
-//            
-            
-        _t++; Wait_For_Element_By_Path_InVisibility("Wait for Splash screen", "id", "splashScreenLogo", "no_jira");             
-            if (FAIL) { return;}     
-        _t++; Wait_For_Element_By_Path_Presence("Wait for 'Join/Login' screen", "id", "join_button", "no_jira");             
-            if (FAIL) { return;} 
-        _t++; Element_By_Path_Text("Get 'Join <App>' button text", "id", "join_button", "no_jira");             
-            //if (FAIL) { return;} 
-        _t++; Element_By_Path_Text("Get 'Alreay have an account'", "id", "already_have_account_text_view", "no_jira");             
-            //if (FAIL) { return;}    
-        _t++; Element_By_Path_Text("Get 'Explore <App>' text", "id", "explore_button", "no_jira");             
-            //if (FAIL) { return;}  
-        _t++; Element_By_Path_Attribute("Get 'Explore' Content Description", "id", "explore_button_container", "contentDescription","no_jira");             
-            //if (FAIL) { return;}  
-
-        _t++; Element_By_Path_Text("Get 'Log in' text", "id", "login_text", "no_jira");             
-            //if (FAIL) { return;}             
-        _t++; Element_By_Path_Click("Click 'Log in'", "id", "login_text", "no_jira");             
-            if (FAIL) { return;}
-        _t++; Element_By_Path_Text("Get 'Welcome...' text", "id", "toolbar_title", "no_jira");             
-            //if (FAIL) { return;}     
-        _t++; Element_By_Path_Text("Get 'Welcome...' subtext", "id", "subtext", "no_jira");             
-            //if (FAIL) { return;}  
-        _t++; Element_By_Path_Text("Get 'Forgot PW?' button text", "id", "btn_forgotPassword", "no_jira");             
-            //if (FAIL) { return;} 
-             
-        _t++; Element_By_Path_Click("Click 'Email' input", "id", "textInputEditText_login_email_address", "no_jira");             
-            if (FAIL) { return;}            
-        _t++; Element_By_Path_Text_Enter("Enter 'Email'", "id", "textInputEditText_login_email_address", Mobile_ID, false,"no_jira");             
-            if (FAIL) { return;} 
-        _t++; Element_By_Path_Click("Click 'Password' input", "id", "textInputEditText_login_password", "no_jira");             
-            if (FAIL) { return;}            
-        _t++; Element_By_Path_Text_Enter("Enter 'Password' input", "id", "textInputEditText_login_password", Mobile_PW, true,"no_jira");             
-            if (FAIL) { return;} 
-        _t++; Element_By_Path_Click("Click 'Undide Password' icon", "id", "text_input_end_icon", "no_jira");             
-            if (FAIL) { return;}              
-        _t++; HideKeyboard("Hide Keyboard", "no_jira");             
-            if (FAIL) { return;}
-        _t++; Element_By_Path_Click("Click 'Log In' button", "id", "button_login", "no_jira");             
-            if (FAIL) { return;}  
-        _t++; Wait_For_Element_By_Path_InVisibility("Wait for load", "id", "android:id/progress", "no_jira");             
-            if (FAIL) { return;}   
-            
-        _t++; Wait_For_Element_By_Path_Presence("Wait for 'Find Food' title", "id", "title", "no_jira");             
-            if (FAIL) { return;} 
-        _t++; Element_By_Path_Text("Get 'Title' text", "id", "title", "no_jira");             
-            //if (FAIL) { return;}            
-        _t++; Element_By_Path_Text("Get 'Decription' text", "id", "description", "no_jira");             
-            //if (FAIL) { return;}   
-            
-        _t++; Element_By_Path_Text("Get 'Enable..' button text", "id", "btnEnableLocation", "no_jira");             
-            if (FAIL) { return;}   
-        _t++; Element_By_Path_Text("Get 'No..' button text", "id", "btnNoThanks", "no_jira");             
-            if (FAIL) { return;}  
-        _t++; Element_By_Path_Click("Click 'Enable..' button ", "id", "btnEnableLocation", "no_jira");             
-            if (FAIL) { return;}             
-//        _t++; Element_By_Path_Click("Click 'No..' button ", "id", "btnNoThanks", "no_jira");             
-//            if (FAIL) { return;} 
-        _t++; Element_By_Path_Click("Click 'Allow..' button ", "id", "com.android.packageinstaller:id/permission_allow_button", "no_jira");             
-            if (FAIL) { return;} 
-            
-        _t++; Wait_For_Element_By_Path_Presence("Wait for 'Home' screen", "id", "home", "no_jira");             
-            if (FAIL) { return;} 
-        _t++; Element_By_Path_Attribute("Get 'Home' Content Description", "id", "home", "contentDescription","no_jira");             
-            if (FAIL) { return;} 
-        _t++; Element_By_Path_Attribute("Get 'Orders' Content Description", "id", "order", "contentDescription","no_jira");             
-            if (FAIL) { return;} 
-        _t++; Element_By_Path_Attribute("Get 'Account' Content Description", "id", "account", "contentDescription","no_jira");             
-            if (FAIL) { return;} 
-            
-        _t++; Element_By_Path_Click("Click 'Account'", "id", "account", "no_jira");             
-            if (FAIL) { return;}  
-        _t++; Swipe_From_Screen_Center("Swipe Up to show 'Logout'", "UP", 500, "no_jira");             
-            if (FAIL) { return;}              
-            
-        _t++; Wait_For_Element_By_Path_Presence("Wait for 'Account' screen", "id", "appVersion", "no_jira");             
-            if (FAIL) { return;}             
-        _t++; Element_By_Path_Text("Get 'About' > Version", "id", "appVersion","no_jira");             
-            if (FAIL) { return;} 
-            appVersion = t;
-        _t++; Element_By_Path_Click("Click 'Log out'", "id", "profile_logout", "no_jira");             
-            if (FAIL) { return;}              
-    }
-    // </editor-fold>
-   
-    // <editor-fold defaultstate="collapsed" desc="Instance Variables Declaratios">
+      
+    // <editor-fold defaultstate="collapsed" desc="Android Instance Variables Declaratios">
     private int d1LastRow = -1; 
     private int d2LastRow = -1; 
     private boolean Load = true; 
@@ -4711,12 +4589,16 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected String Location = "";
     protected String Menu = "";
     protected String Category = "";
-    protected String Options = "";    
+    protected String Options = "";   
     
+    protected int _t = 0; // Total
+    protected int _p = 0; // Passed
+    protected int _f = 0; // Failed
+    protected int _w = 0; // Warn
     protected String t = "";   
     protected String F = "";   
     protected String EX = "";   
-    
+    protected String r_time = "";    
 
     protected AndroidDriver<AndroidElement> ad = null;
     protected FluentWait loadTimeout = null;
@@ -4732,17 +4614,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected double p_90 = 0;  
     
     protected String r_type = "";   
-    protected String r_time = "";
+
     protected String Ver = "";
     protected String TZone = "";      
     protected String Summary = "";   
     protected String Log = "";   
 
     
-    protected int _t = 0; // Total
-    protected int _p = 0; // Passed
-    protected int _f = 0; // Failed
-    protected int _w = 0; // Warn
+
     protected boolean FAIL = false;
     
     protected final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
@@ -4782,7 +4661,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected boolean _Feedback = false;
     // </editor-fold>
    
-    // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
+    // <editor-fold defaultstate="collapsed" desc="Android GUI Form Variables Declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;
