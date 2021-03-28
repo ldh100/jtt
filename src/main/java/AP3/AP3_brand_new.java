@@ -677,6 +677,7 @@ public class AP3_brand_new {
             Thread.sleep(500);                 
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}    
+            Thread.sleep(500);     
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Find 'Edit Menu Set Name' dialog", "xpath", "//div[@class='v-card__title H4-Secondary-Center v-card__title--primary']", "no_jira");
                 if (t.contains("Edit")){                              
                     _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Edit Menu Set name' container", "xpath", "//div[@class='v-dialog v-dialog--active']", "no_jira");

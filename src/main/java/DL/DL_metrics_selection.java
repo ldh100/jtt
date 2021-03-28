@@ -13,11 +13,11 @@ import static A.A.*;
  */
 public class DL_metrics_selection {
     public static void run() throws InterruptedException { 
-        System.out.println("**************************************************  DL_MetricSelection ***********************");
-        Thread.sleep(16000);     
-////        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Filters' label", "Filters", true,"no_jira"); 
-////        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Configure Filters' button label", " Configure Filters", true,"no_jira"); 
-////        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Find 'Add metrics...'", "tagName", "img", "alt", "no_jira");        
+        System.out.println("********DL_MetricSelection ***********************");
+        //Thread.sleep(16000);     
+        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Filters' label", "Filters", true,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Configure Filters' button label", " Configure Filters", true,"no_jira"); 
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Find 'Add metrics...'", "tagName", "img", "alt", "no_jira");        
 //        Thread.sleep(6000);
         _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find Date selection container", "xpath", "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3']", "no_jira"); 
              if (FAIL) { return;}        
@@ -73,12 +73,11 @@ public class DL_metrics_selection {
             }   
 
            
-            _t++; Thread.sleep((long) sleep); TWeb.Refresh("Refresh/Reload Metrics","no_jira"); 
-            
+            _t++; Thread.sleep((long) sleep); TWeb.Refresh("Refresh/Reload Metrics","no_jira");           
             // Refresh returns to Login ??? ===========================
-            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'LOGIN'", "id", "login-btn", "no_jira"); 
-                if (FAIL) { return;}  
-            Thread.sleep(500);  
+//            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'LOGIN'", "id", "login-btn", "no_jira"); 
+//                if (FAIL) { return;}  
+//            Thread.sleep(500);  
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
                 if (FAIL) { return;}                 
 //            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Find 'Add metrics...'", "tagName", "img", "alt", "no_jira");  
