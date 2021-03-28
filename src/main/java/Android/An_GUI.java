@@ -95,7 +95,6 @@ import org.openqa.selenium.support.ui.FluentWait;
  * @author Oleg.Spozito
  */
 public class An_GUI extends javax.swing.JInternalFrame {
-    //private static Singleton An_GUI_Singleton = new An_GUI( );
     public An_GUI() {  
         initComponents();
     }
@@ -180,7 +179,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Android Automation Manager >>> loading, please wait ... ... ... ...");
-        setMinimumSize(new java.awt.Dimension(860, 532));
+        setMinimumSize(new java.awt.Dimension(854, 525));
         setName("Android"); // NOI18N
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -1146,7 +1145,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     }
     // </editor-fold>   
     
-    // <editor-fold defaultstate="collapsed" desc="Package Methods">    
+    // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">    
     private void GUI_Find_Connected_Devices(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         btnRun.setEnabled(false);
@@ -2552,15 +2551,6 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     F = x.F;
                     r_time = x.r_time;
                 }                 
-
-                if(_f > 0) {
-                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
-                }else{
-                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter);
-                } 
-            }  
-            @Override
-            protected void done() { 
                 DD = Duration.between(run_start, Instant.now());
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n"); 
@@ -2572,13 +2562,20 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 
                 Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n"); 
                 BW1_Done(GUI);
-                
+                if(_f > 0) {
+                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
+                }else{
+                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter);
+                } 
+            }  
+            @Override
+            protected void done() { 
                 try  { 
                     String statusMsg = (String) get(); 
                     Current_Log_Update(GUI, statusMsg + "\r\n");
                     BW1 = null;
                 } catch (InterruptedException | ExecutionException ex)  { 
-                    Current_Log_Update(GUI, "- BW1 Done: " + ex.getMessage() + "\r\n"); 
+                    Current_Log_Update(GUI, "- BW1 Done ERROR: " + ex.getMessage() + "\r\n"); 
                 } 
                 if(ad != null) {
                     ad.quit(); 
@@ -4540,7 +4537,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     } 
     // </editor-fold>
       
-    // <editor-fold defaultstate="collapsed" desc="Instance Variables Declaratios">
+    // <editor-fold defaultstate="collapsed" desc="Android Instance Variables Declaratios">
     private int d1LastRow = -1; 
     private int d2LastRow = -1; 
     private boolean Load = true; 
@@ -4664,7 +4661,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected boolean _Feedback = false;
     // </editor-fold>
    
-    // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
+    // <editor-fold defaultstate="collapsed" desc="Android GUI Form Variables Declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;
