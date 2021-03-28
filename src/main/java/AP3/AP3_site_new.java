@@ -527,19 +527,19 @@ public class AP3_site_new {
                             _t++; TWeb.Element_Text("Group Name", L1.get(j), "no_jira");  
                             if (FAIL) { return;} 
                         }
-                        if(L1.get(j).getText().trim().equals(GROUP)){
+                        if(L1.get(j).getText().trim().equals(SECTOR)){
                             T_Index = j;
                         }
                     }
                     if(T_Index > -1){
-                        _t++; Thread.sleep((long) sleep); TWeb.Scroll_to_Element("Scroll to Group " + GROUP, L1.get(T_Index), "no_jira");
+                        _t++; Thread.sleep((long) sleep); TWeb.Scroll_to_Element("Scroll to Group " + SECTOR, L1.get(T_Index), "no_jira");
                             if (FAIL) { return;}
-                        _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select Group " + GROUP, L1.get(T_Index), "no_jira");
+                        _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select Group " + SECTOR, L1.get(T_Index), "no_jira");
                             if (FAIL) { return;} 
                     } else{
                         _t++;
                         _f++;
-                        EX += " - " + "\t" + "Select Group/Sector" + "\t" + GROUP + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + GROUP + " Not found";
+                        EX += " - " + "\t" + "Select Group/Sector" + "\t" + SECTOR + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + SECTOR + " Not found";
                         EX += "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";
                         return;
                     } 
@@ -592,7 +592,7 @@ public class AP3_site_new {
                     } else{
                         _t++;
                         _f++;
-                        EX += " - " + "\t" + GROUP + " Global Menu List" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + GL_MENU + " Not found";
+                        EX += " - " + "\t" + SECTOR + " Global Menu List" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + GL_MENU + " Not found";
                         EX += "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";
                         return;
                     } 
@@ -989,9 +989,9 @@ public class AP3_site_new {
             
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open 'Group' dropdown", "css", "[role='combobox']", "no_jira");
             if (FAIL) return;   
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Sector Name", "css", "[role='combobox']", GROUP, false, "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Sector Name", "css", "[role='combobox']", SECTOR, false, "no_jira");
                 if (FAIL) { return;}    
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Sector Name Click", "xpath", "//*[contains(text(), '" + GROUP + "')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Sector Name Click", "xpath", "//*[contains(text(), '" + SECTOR + "')]", "no_jira"); 
             if (FAIL) { return;}             
         _t++; TWeb.Element_By_Path_Click("Button 'Go to Menu' Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", "no_jira");
             if (FAIL) { return;}
@@ -1003,7 +1003,7 @@ public class AP3_site_new {
         
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", "no_jira"); 
             if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); TWeb.Page_URL("Menu > " + GROUP + " page URL", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); TWeb.Page_URL("Menu > " + SECTOR + " page URL", "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Page SubTitle", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "textContent", "no_jira"); 
             if (FAIL) { return;}

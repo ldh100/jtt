@@ -229,7 +229,7 @@ public class AP3_promo {
         // </editor-fold>    
             
         Thread.sleep((long) sleep);
-        String menu_group = GL_MENU.concat(" (").concat(GROUP).concat(")");
+        String menu_group = GL_MENU.concat(" (").concat(SECTOR).concat(")");
         //Select Dates
         LocalDate date = LocalDate.now();             
         LocalDate futuredate = date.plusDays(1);
@@ -982,14 +982,14 @@ public class AP3_promo {
         _t++; Thread.sleep((long) sleep);TWeb.Element_By_Path_Click("Open Brand Dropdown", "xpath","//div[@class='flex xs5']//div[@class='v-input border-label-input v-text-field v-text-field--enclosed v-text-field--outline v-select v-autocomplete theme--light']", "no_jira");
         if (FAIL) { return;}      
        
-        String menu_group = GL_MENU.concat(" (").concat(GROUP).concat(")");
+        String menu_group = GL_MENU.concat(" (").concat(SECTOR).concat(")");
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Brand", "xpath", "//input[@aria-label='Brands']", menu_group, false, "no_jira");
         if (FAIL) { return;} 
          _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Brand' list", "xpath", "//div[contains(@class,'v-menu__content theme--light menuable__content__active v-autocomplete__content')]", "no_jira");
         if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Global Menu ", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");                                     
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select Global Menu " + GROUP, L1.get(0), "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select Global Menu " + SECTOR, L1.get(0), "no_jira");
                 if (FAIL) { return;} 
 
          //Select Sites

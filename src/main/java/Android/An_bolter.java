@@ -4,50 +4,60 @@
  * and open the template in the editor.
  */
 package Android;
-import static Android.An_Mob.*;
 /**
  *
  * @author Oleg.Spozito
  */
-public class An_bolter {
-    public static void run() throws InterruptedException {   
-//        Thread.sleep(500);
-//        _t++; Thread.sleep((long) sleep); Element_E1_Find("Is it Splash Screen/Logo?", "id", "splashScreenLogo", "no_jira");             
-//            //if (FAIL) { return;}        // "id", "packagename:id/splashScreenLogo",          
-//            
-        _t++; Thread.sleep((long) sleep); Wait_For_Element_By_Path_InVisibility("Wait for Splash screen", "id", "splashScreenLogo", "no_jira");             
-            if (FAIL) { return;} 
+class An_bolter extends An_GUI{//
+    public An_bolter(An_GUI a) {
+       Bolter_ID = a.Bolter_ID;
+       Bolter_PW = a.Bolter_PW;
+       ad = a.ad;
+       loadTimeout = a.loadTimeout;
+    }
+
+    protected void Run() throws InterruptedException {         
+        _t++; Test_EX_Update("Bolter Test EX Update 1", "no_jira");             
+            if (FAIL) { 
+                String A = "true";
+            }   
+        _t++; Test_EX_Update("Bolter Test EX Update 2", "no_jira");             
+            if (FAIL) { 
+                String A = "false";
+            }  
         
-        _t++; Thread.sleep((long) sleep); Wait_For_Element_By_Path_Presence("Wait for 'Sign In' screen", "id", "button_login", "no_jira");             
+        _t++; Wait_For_Element_By_Path_Presence("Wait for 'Sign In' screen", "id", "button_login", "no_jira");             
             if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); Element_By_Path_Text("Get 'Sign In' button text", "id", "button_login", "no_jira");             
+        _t++; Element_By_Path_Text("Get 'Sign In' button text", "id", "button_login", "no_jira");             
             if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); Element_By_Path_Text("Get 'Forgot PW?' button text", "id", "btn_forgotPassword", "no_jira");             
+        _t++; Element_By_Path_Text("Get 'Forgot PW?' button text", "id", "btn_forgotPassword", "no_jira");             
             if (FAIL) { return;}      
-        _t++; Thread.sleep((long) sleep); Element_By_Path_Click("Click 'Email' input", "id", "textInputEditText_login_email_address", "no_jira");             
+        _t++; Element_By_Path_Click("Click 'Email' input", "id", "textInputEditText_login_email_address", "no_jira");             
             if (FAIL) { return;}            
-        _t++; Thread.sleep((long) sleep); Element_By_Path_Text_Enter("Enter 'Email'", "id", "textInputEditText_login_email_address", Bolter_ID, false,"no_jira");             
+        _t++; Element_By_Path_Text_Enter("Enter 'Email'", "id", "textInputEditText_login_email_address", Bolter_ID, false,"no_jira");             
             if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); Element_By_Path_Click("Click 'Password' input", "id", "textInputEditText_login_password", "no_jira");             
+        _t++; Element_By_Path_Click("Click 'Password' input", "id", "textInputEditText_login_password", "no_jira");             
             if (FAIL) { return;}            
-        _t++; Thread.sleep((long) sleep); Element_By_Path_Text_Enter("Enter 'Password' input", "id", "textInputEditText_login_password", Bolter_PW, true,"no_jira");             
+        _t++; Element_By_Path_Text_Enter("Enter 'Password' input", "id", "textInputEditText_login_password", Bolter_PW, true,"no_jira");             
             if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); Element_By_Path_Click("Click 'Undide Password' icon", "id", "text_input_end_icon", "no_jira");             
+        _t++; Element_By_Path_Click("Click 'Undide Password' icon", "id", "text_input_end_icon", "no_jira");             
             if (FAIL) { return;}              
-        _t++; Thread.sleep((long) sleep); HideKeyboard("Hide Keyboard", "no_jira");             
+        _t++; HideKeyboard("Hide Keyboard", "no_jira");             
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); Element_By_Path_Click("Click 'Log In' button", "id", "button_login", "no_jira");             
+        _t++; Element_By_Path_Click("Click 'Log In' button", "id", "button_login", "no_jira");             
             if (FAIL) { return;}  
-        _t++; Thread.sleep((long) sleep); Wait_For_Element_By_Path_InVisibility("Wait for load", "id", "android:id/progress", "no_jira");             
+        _t++; Wait_For_Element_By_Path_InVisibility("Wait for load", "id", "android:id/progress", "no_jira");             
             if (FAIL) { return;}          
-        _t++; Thread.sleep((long) sleep); Wait_For_Element_By_Path_Presence("Wait for 'Dashboard' screen", "id", "delivery_dashboard_title", "no_jira");             
+        _t++; Wait_For_Element_By_Path_Presence("Wait for 'Dashboard' screen", "id", "delivery_dashboard_title", "no_jira");             
             if (FAIL) { return;} 
 
-        _t++; Thread.sleep((long) sleep); Element_By_Path_Click("Click 'Open Navigation drawer' image", "xpath", "//android.widget.ImageButton[@content-desc='Open navigation drawer']", "no_jira");             
+        _t++; Element_By_Path_Click("Click 'Open Navigation drawer' image", "xpath", "//android.widget.ImageButton[@content-desc='Open navigation drawer']", "no_jira");             
             if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); Element_By_Path_Text("Get 'About' > Version", "id", "appVersion","no_jira");             
+        _t++; Element_By_Path_Text("Get 'About' > Version", "id", "appVersion","no_jira");             
             if (FAIL) { return;}  
-        _t++; Thread.sleep((long) sleep); Element_By_Path_Click("Click 'Log out'", "id", "nav_logout", "no_jira");             
+            appVersion = t;
+            
+        _t++; Element_By_Path_Click("Click 'Log out'", "id", "nav_logout", "no_jira");             
             if (FAIL) { return;} 
     }
 }
