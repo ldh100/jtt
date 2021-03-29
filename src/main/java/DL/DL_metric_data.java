@@ -25,12 +25,14 @@ public class DL_metric_data {
       }
     
     public static void MetricCardsSelection()throws InterruptedException {
-
+       Thread.sleep(6000);
        SelectMetricCard("Total Spend", null, 1, 2);
+       Thread.sleep(6000);
        SelectMetricCard("Contracted Spend", null, 2, 1);
+       Thread.sleep(6000);
        SelectMetricCard("Contract Utilization Rate (CUR)", "Contract Utilization Rate (CUR) = Sum (Contracted Spend)/ Sum (Total Spend)", 3, 0);
    
-       
+       Thread.sleep(6000);
        SelectMetricCard("Program earned revenue", null, 10, 1);
        SelectMetricCard("Program rate of return", "Program Rate of Return: Sum (Program Earned Revenue)/Sum (Total Spend)", 11, 0);
        
@@ -87,7 +89,7 @@ public class DL_metric_data {
             if (FAIL) { return;}
 		}
        	
-        Configure();
+        
        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Uncheck '"+desc+"' checkbox ", "xpath", "(//div[@class='MuiListItemIcon-root']/span/span/input)[position()="+position+"]", "no_jira"); 
         if (FAIL) { return;}
     }
@@ -128,59 +130,9 @@ public class DL_metric_data {
             F += _t + " > " + err + "\r\n";
 	}
     }
-public static void Configure() throws InterruptedException {
-                      _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Cick on configure filters", "xpath", "//button[contains(.,' Configure Filters')]", "no_jira");
-                   if (FAIL) { return;}
-                   
-                   Thread.sleep(6000);
-                  
-                   _t++; Thread.sleep((long) sleep); TWeb.Element_By_DisplayCheck("Delete the existing item", "xpath", "//div[contains(@class,'MuiChip-deletable')]/*[name()='svg']", "no_jira");
-                   if (FAIL) { return;}
-                  
-                   Thread.sleep(4000);
-                   
-                   _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Cick on first dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')])[position()=3]", "no_jira");
-                   if (FAIL) { return;}
-                  
-                   _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("choose 'Distributor Name' from the dropdown box", "xpath", "//*[contains(text(), 'Distributor Name')]", "no_jira");
-                   if (FAIL) { return;}
- 
-//                   _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select 1st item from the list box", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]/div/div[1]/div[1]", "no_jira");
-//                   if (FAIL) { return;}
- 
-//                   _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select 1st item from list box", "xpath", "//div[contains(text(),'Farmer Brothers Co - Headquarters')]", "no_jira");
-//                   if (FAIL) { return;}
-// 
-//                   _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Cick on Products/Item Categories tab", "xpath", "//span[contains(text(),'Products/Item Categories')]", "no_jira");
-//                   if (FAIL) { return;}
-//                
-//                   Thread.sleep(6000);
-//                  
-//                   _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select 1st item from the list box", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]/div/div[1]/div[1]", "no_jira");
-//                   if (FAIL) { return;}
-                  
-                   Thread.sleep(2000);
-      
-                                
-                   _t++; Thread.sleep((long) sleep);TWeb.Scroll_XY("Scroll to apply dropdown", 0, 500, "no_jira");
-                   _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Cick on Apply button", "xpath", "//span[contains(.,'Apply')]", "no_jira");
-                   if (FAIL) { return;}
-                  
-                   Thread.sleep(6000);
-                  
-                   _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("get the 'Total Spend' amount ", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]/div[2]/div[2]/p", "no_jira");
-                   if (FAIL) { return;}
-                  
-                   String get_Text1 = get_Text(t);
-                  
-                   System.out.println(get_Text1);
-                   _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("get the 'Total Spend' amount ", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]/div[2]/div[1]/p", "no_jira");
-                   if (FAIL) { return;}     
-                   
-                   String get_Text2 = get_Text(t);
-                   System.out.println(get_Text2);
-           }
+
     }
+
 
 
 
