@@ -1941,6 +1941,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
     }
 
     private void GUI_Run_Manual(){
+        String Device_Status = LOG_GET_DEVICE_STATUS();
+        Current_Log_Update(true, Device_Status + "\r\n"); 
+        if(!Device_Status.contains("OK")){
+            return;
+        }
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
@@ -2007,17 +2012,27 @@ public class An_GUI extends javax.swing.JInternalFrame {
         run_start = Instant.now();
         Log  = "";
         String RES = "";
-        
+
         RES = JOB_Load_CONFIG(config);
         if(RES.contains("ERROR")){
             Current_Log_Update(false, RES);
             return "JOB_Load_CONFIG > " + RES;
         }
+        RES = LOG_GET_DEVICE_STATUS();
+        Current_Log_Update(false, RES + "\r\n");
+        if(!RES.contains("OK")){
+            return RES;
+        }      
+        
+        if(RES.contains("ERROR")){
+            Current_Log_Update(false, RES);
+            return "JOB_STATUS > " + RES;
+        }          
+        
         
         if(Update_Build){
             Get_S3_MOB_Credentials();             
         }
-
         Set_Mobile_Package_Name();
         Current_Log_Update(false, "- Check Connected Device " + "\r\n");
         RES = JOB_Find_Connected_Devices();
@@ -2058,7 +2073,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }catch(Exception ex){
             return "ERROR > " + ex.getMessage();
         }
-        return "OK > BW1 started >> Please Monitor Reports...";
+        return "OK > Job Started >> Please Monitor Reports...";
     }
     private String JOB_Load_CONFIG(String config){
         //config = config.replace("\r\n", "\n");
@@ -2160,7 +2175,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         return "=== JOB_Check_Device_OS > Model: " + device + ", OS version: " + devOS + "\r\n";
     } 
 
-    public void Current_Log_Update(boolean GUI, String Text){
+    protected void Current_Log_Update(boolean GUI, String Text){
         if(GUI){
             txtLog.append(Text);
             txtLog.setCaretPosition(txtLog.getDocument().getLength());              
@@ -2216,6 +2231,26 @@ public class An_GUI extends javax.swing.JInternalFrame {
             return "=== Report > ERROR: " + ex.getMessage() + "\r\n";
         }
     }
+    
+    protected String LOG_GET_DEVICE_STATUS(){
+        String Job_Status = "";
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+        ResultSet rs = conn.createStatement().executeQuery("SELECT [env] FROM [dbo].[aw_result] WHERE "
+                + " [summary] = '" + "Running..." + "' AND "
+                + " [user_ws] = '" + A.A.WsID + "' AND "
+                + " [env] LIKE '" + device + "%'" );
+            if(rs.next()){
+                Job_Status = rs.getString(1);
+                conn.close(); 
+                return "\r\n=== Device " + Job_Status + " - currently busy"; 
+            }else{           
+                conn.close(); 
+                return "\r\n=== Device Availability Check > OK "; 
+            }
+        } catch (SQLException ex) {
+            return "\r\n=== Device Availability Check > SQL ERROR: " + ex.getMessage() + "\r\n";
+        }
+    }      
     protected String LOG_START(){
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] (" +
@@ -2271,8 +2306,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _insert.setString(12, r_type);
             _insert.setString(13, A.A.UserID);
             _insert.setString(14, A.A.WsID);
-            _insert.setString(15, device + " OSv: " + devOS);
-            _insert.setString(16, "=== Job is running... ===\r\n" + "");
+            _insert.setString(15, device + " id:" + devID);
+            _insert.setString(16, "=== Job is running... ===");
             _insert.setString(17, "Running");
             _insert.setString(18, "None");
             int row = _insert.executeUpdate();
@@ -2303,7 +2338,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     ", [Result] = ?" +    // 16
                     ", [Status] = ?" +    // 17
                     ", [Excel] = ?" +     // 18
-                    " WHERE [app] = 'Android_" + app + "_" + env + "' AND [Status] = 'Running'");
+                    " WHERE [app] = 'Android_" + app + "_" + env + "' "
+                            + "AND [Status] = 'Running'"
+                            + "AND [env] = '" + device + " id:" + devID + "'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
             _update.setString(3, "Android_" + app + "_" + env);
@@ -2318,7 +2355,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _update.setString(12, r_type);
             _update.setString(13, A.A.UserID);
             _update.setString(14, A.A.WsID);
-            _update.setString(15, device + " OSv: " + devOS);
+            _update.setString(15, device + " id:" + devID);
             _update.setString(16, LOG);
             _update.setString(17, "Scope: " + SCOPE);
             _update.setString(18, EX);
@@ -2561,6 +2598,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                  + EX;
                 
                 Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n"); 
+                
                 BW1_Done(GUI);
                 if(_f > 0) {
                     return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
@@ -4619,9 +4657,6 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected String TZone = "";      
     protected String Summary = "";   
     protected String Log = "";   
-
-    
-
     protected boolean FAIL = false;
     
     protected final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
