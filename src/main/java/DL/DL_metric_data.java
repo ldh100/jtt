@@ -78,7 +78,7 @@ public class DL_metric_data {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Get the '"+desc+"' amount ", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]/div[2]/div[2]/p", "no_jira");
        	if (FAIL) { return;}
        	
-       	
+      
        	if (initVar == 1) {
 			var1 = Integer.parseInt(get_Text(t));
 		}else if (initVar == 2) {
@@ -130,6 +130,7 @@ public class DL_metric_data {
             F += _t + " > " + err + "\r\n";
 	}
     }
+    
 
     }
 
