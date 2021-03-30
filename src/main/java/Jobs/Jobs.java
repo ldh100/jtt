@@ -68,6 +68,7 @@ public class Jobs extends javax.swing.JInternalFrame {
         setTitle("Jobs");
         setMinimumSize(new java.awt.Dimension(854, 525));
         setName("Jobs"); // NOI18N
+        setNormalBounds(new java.awt.Rectangle(0, 0, 103, 0));
         setPreferredSize(new java.awt.Dimension(854, 525));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -96,7 +97,6 @@ public class Jobs extends javax.swing.JInternalFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -122,8 +122,6 @@ public class Jobs extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 12, 563, 424));
-
         txtLog.setEditable(false);
         txtLog.setColumns(20);
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
@@ -133,8 +131,6 @@ public class Jobs extends javax.swing.JInternalFrame {
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLog);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 440, 428, 60));
-
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
         btnLog.setMargin(new java.awt.Insets(2, 4, 2, 4));
@@ -143,7 +139,6 @@ public class Jobs extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
-        getContentPane().add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 476, 52, 22));
 
         btnSave.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSave.setText("Save Changes ^");
@@ -155,7 +150,6 @@ public class Jobs extends javax.swing.JInternalFrame {
                 btnSaveMouseClicked(evt);
             }
         });
-        getContentPane().add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(573, 443, 100, -1));
 
         btnRun.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         btnRun.setForeground(new java.awt.Color(0, 0, 0));
@@ -167,71 +161,58 @@ public class Jobs extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        getContentPane().add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(716, 468, -1, 22));
 
         txtConfig.setColumns(20);
         txtConfig.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         txtConfig.setRows(5);
         txtConfig.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtConfig.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        txtConfig.setMinimumSize(new java.awt.Dimension(50, 19));
+        txtConfig.setMinimumSize(new java.awt.Dimension(854, 525));
+        txtConfig.setPreferredSize(new java.awt.Dimension(854, 525));
         jScrollPane2.setViewportView(txtConfig);
-
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(572, 164, 288, 273));
 
         txtJob_Name.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtJob_Name.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtJob_Name.setEnabled(false);
         txtJob_Name.setSelectionColor(new java.awt.Color(0, 0, 0));
-        getContentPane().add(txtJob_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(682, 12, 164, -1));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jLabel1.setText("Config");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(588, 140, 162, -1));
-        getContentPane().add(txtCheckValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(682, 55, 164, -1));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel2.setText("Job Name");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(591, 14, 79, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel3.setText("Trigger");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(595, 36, 79, -1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel4.setText("Check Value");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(594, 58, 80, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel5.setText("Run From");
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 81, 96, 12));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel6.setText("Run To");
         jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 96, -1));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel7.setText("Frequency (min)");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 96, -1));
 
         cmbTrigger.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         cmbTrigger.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "cron", "new version", "new githash", "webhook" }));
-        getContentPane().add(cmbTrigger, new org.netbeans.lib.awtextra.AbsoluteConstraints(682, 33, 164, 20));
 
         txtCron.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtCron.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        getContentPane().add(txtCron, new org.netbeans.lib.awtextra.AbsoluteConstraints(734, 118, 112, -1));
 
         try {
             txtFrom.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##:##")));
@@ -239,7 +220,6 @@ public class Jobs extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
         txtFrom.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        getContentPane().add(txtFrom, new org.netbeans.lib.awtextra.AbsoluteConstraints(734, 78, 112, -1));
 
         try {
             txtTo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##:##")));
@@ -247,7 +227,123 @@ public class Jobs extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
         txtTo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        getContentPane().add(txtTo, new org.netbeans.lib.awtextra.AbsoluteConstraints(734, 98, 112, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(txtJob_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8)
+                                .addComponent(cmbTrigger, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8)
+                                .addComponent(txtCheckValue, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(60, 60, 60)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8)
+                                .addComponent(txtFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(60, 60, 60)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8)
+                                .addComponent(txtTo, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(60, 60, 60)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8)
+                                .addComponent(txtCron, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnRun)))))
+                .addGap(7, 7, 7))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel2))
+                            .addComponent(txtJob_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel3))
+                            .addComponent(cmbTrigger, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel4))
+                            .addComponent(txtCheckValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(3, 3, 3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel6))
+                            .addComponent(txtTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel7))
+                            .addComponent(txtCron, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel1)
+                        .addGap(9, 9, 9)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -404,17 +500,89 @@ public class Jobs extends javax.swing.JInternalFrame {
     private void Run_Job(String Job, String r_type, String config){
         txtLog.append("=== Execution (" + r_type + ") started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-//        if(Job name == "??"){
+        JobName = txtJob_Name.getText();
+        if(JobName.startsWith("Android")){
             Android.An_GUI An_Job = new Android.An_GUI();
             String RES = An_Job.JOB_Run_Auto("ad-hoc", config);
             txtLog.append("Run_Job: " + "\r\n" + RES.trim() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());        
-//        }
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            if(!RES.contains("OK")){
+                LOG_FAILRE(RES);
+            }
+        }
     }
+    private void LOG_FAILRE(String MSG){
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] (" +
+                    "[Date]" +   // 1
+                    ", [Time]" +   // 2
+                    ", [app]" +   // 3
+                    ", [url]" +   // 4
+                    ", [summary]" +   // 5
+                    ", [t_calls]" +   // 6
+                    ", [t_min]" +   // 7
+                    ", [t_avg]" +   // 8
+                    ", [t_max]" +   // 9
+                    ", [p_50]" +   // 10
+                    ", [p_90]" +   // 11
+                    ", [test_type]" +   // 12
+                    ", [user_id]" +   // 13
+                    ", [user_ws]" +   // 14
+                    ", [env]" +   // 15
+                    ", [Result]" +   // 16
+                    ", [Status]" +   // 17
+                    ", [Excel]" +     // 18
+                    ") VALUES (" +
+                    "?" +     // 1
+                    ",?" +    // 2
+                    ",?" +    // 3
+                    ",?" +    // 4
+                    ",?" +    // 5
+                    ",?" +    // 6
+                    ",?" +    // 7
+                    ",?" +    // 8
+                    ",?" +    // 9
+                    ",?" +    // 10
+                    ",?" +    // 11
+                    ",?" +    // 12
+                    ",?" +    // 13
+                    ",?" +    // 14
+                    ",?" +    // 15
+                    ",?" +    // 16
+                    ",?" +    // 17
+                    ",?" +    // 18
+                    ")");
+            _insert.setString(1, LocalDateTime.now().format(Date_formatter));
+            _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
+            _insert.setString(3, JobName);
+            _insert.setString(4, "N/A");
+            _insert.setString(5, MSG.replace("===", "Failed:"));
+            _insert.setString(6, "0");
+            _insert.setString(7, "0");
+            _insert.setString(8, "0");
+            _insert.setString(9, "0");
+            _insert.setString(10, "0");
+            _insert.setString(11, "0");
+            _insert.setString(12, "auto");
+            _insert.setString(13, A.A.UserID);
+            _insert.setString(14, A.A.WsID);
+            _insert.setString(15, "N/A");
+            _insert.setString(16, "Failed");
+            _insert.setString(17, "Failed");
+            _insert.setString(18, "None");
+            int row = _insert.executeUpdate();   
+            txtLog.append("Failure logged in Reports: " + MSG + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        } catch (SQLException ex) {
+            txtLog.append("Log Failure ERROR : " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        }
+    }      
     
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
     private int dv1LastRow = -1; 
     private String Last_JOB = ""; 
+    private String JobName = "";
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;

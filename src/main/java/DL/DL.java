@@ -15,7 +15,6 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ListObjectsV2Result;
 import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.google.common.base.Stopwatch;
 import java.awt.Cursor;
@@ -43,25 +42,14 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import javax.swing.JTable;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import org.apache.commons.io.FileUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -80,7 +68,6 @@ import org.openqa.selenium.ie.ElementScrollBehavior;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  *
  * @author Oleg.Spozito
@@ -767,7 +754,7 @@ public class DL extends javax.swing.JInternalFrame {
         if (_users.isSelected()) { 
             SCOPE += ", Users";  
             EX += " - " + "\t" + " === Users - Data Access" + "\t" + " ===== " + "\t" + " == Users Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            DL_users.run();
+            DL_users.run(DVU); // ====== pass QA Data from GUI DVU
             EX += " - " + "\t" + " === ^ Users - Data Access" + "\t" + " ===== " + "\t" + " == ^ Users End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }        
