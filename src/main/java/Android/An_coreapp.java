@@ -17,14 +17,14 @@ public class An_coreapp extends An_GUI {
        // copy constructor -- initialize some fields from values in original, others with default values 
     }
     protected void Run() throws InterruptedException {     
-        _t++; Test_EX_Update("CoreApp Test EX Update 1", "no_jira");             
-            if (FAIL) { 
-                String A = "true";
-            }   
-        _t++; Test_EX_Update("CoreApp Test EX Update 2", "no_jira");             
-            if (FAIL) { 
-                String A = "false";
-            } 
+//        _t++; Test_EX_Update("CoreApp Test EX Update 1", "no_jira");             
+//            if (FAIL) { 
+//                String A = "true";
+//            }   
+//        _t++; Test_EX_Update("CoreApp Test EX Update 2", "no_jira");             
+//            if (FAIL) { 
+//                String A = "false";
+//            } 
             
             
         _t++; Wait_For_Element_By_Path_InVisibility("Wait for Splash screen", "id", "splashScreenLogo", "no_jira");             
@@ -74,17 +74,25 @@ public class An_coreapp extends An_GUI {
             //if (FAIL) { return;}            
         _t++; Element_By_Path_Text("Get 'Decription' text", "id", "description", "no_jira");             
             //if (FAIL) { return;}   
-            
-        _t++; Element_By_Path_Text("Get 'Enable..' button text", "id", "btnEnableLocation", "no_jira");             
-            if (FAIL) { return;}   
-        _t++; Element_By_Path_Text("Get 'No..' button text", "id", "btnNoThanks", "no_jira");             
-            if (FAIL) { return;}  
-        _t++; Element_By_Path_Click("Click 'Enable..' button ", "id", "btnEnableLocation", "no_jira");             
-            if (FAIL) { return;}             
-//        _t++; Element_By_Path_Click("Click 'No..' button ", "id", "btnNoThanks", "no_jira");             
-//            if (FAIL) { return;} 
-        _t++; Element_By_Path_Click("Click 'Allow..' button ", "id", "com.android.packageinstaller:id/permission_allow_button", "no_jira");             
-            if (FAIL) { return;} 
+        if(devOS.startsWith("8")){    
+            _t++; Element_By_Path_Text("Get 'Enable..' button text", "id", "btnEnableLocation", "no_jira");             
+                if (FAIL) { return;}   
+            _t++; Element_By_Path_Text("Get 'No..' button text", "id", "btnNoThanks", "no_jira");             
+                if (FAIL) { return;}  
+            _t++; Element_By_Path_Click("Click 'Enable..' button ", "id", "btnEnableLocation", "no_jira");             
+                if (FAIL) { return;}             
+    //        _t++; Element_By_Path_Click("Click 'No..' button ", "id", "btnNoThanks", "no_jira");             
+    //            if (FAIL) { return;} 
+            _t++; Element_By_Path_Click("Click 'Allow..' button ", "id", "com.android.packageinstaller:id/permission_allow_button", "no_jira");             
+                if (FAIL) { return;}             
+        }else{ // version 11 - different Allow Location fargment
+//            _t++; Element_By_Path_Text("Get 'No..' button text", "id", "btnNoThanks", "no_jira");             
+//                if (FAIL) { return;}  
+//            _t++; Element_By_Path_Click("Click 'Enable..' button ", "id", "btnEnableLocation", "no_jira");             
+//                if (FAIL) { return;}             
+//            _t++; Element_By_Path_Click("Click 'Allow..' button ", "id", "com.android.packageinstaller:id/permission_allow_button", "no_jira");             
+//                if (FAIL) { return;}             
+        }
             
         _t++; Wait_For_Element_By_Path_Presence("Wait for 'Home' screen", "id", "home", "no_jira");             
             if (FAIL) { return;} 

@@ -1155,7 +1155,7 @@ public class DL extends javax.swing.JInternalFrame {
                     Iterator keys = F.keys();
                     while(keys.hasNext()) {
                         String NextKey = (String)keys.next();
-                        location_filters += NextKey + " " + F.getString(NextKey) + "\r\n";
+                        location_filters += NextKey + ": " + F.getString(NextKey) + "\r\n";
                     }
                 } 
                 if(o.has("item_filters")){
@@ -1164,7 +1164,7 @@ public class DL extends javax.swing.JInternalFrame {
                     Iterator keys = F.keys();
                     while(keys.hasNext()) {
                         String NextKey = (String)keys.next();
-                        item_filters += NextKey + " " + F.getString(NextKey) + "\r\n";
+                        item_filters += NextKey + ": " + F.getString(NextKey) + "\r\n";
                     }
                 } 
                 if(o.has("value")){
