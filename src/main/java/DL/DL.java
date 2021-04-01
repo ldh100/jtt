@@ -233,7 +233,6 @@ public class DL extends javax.swing.JInternalFrame {
         txtLog.setColumns(20);
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         txtLog.setRows(5);
-        txtLog.setText("Start >");
         txtLog.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtLog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
@@ -382,7 +381,7 @@ public class DL extends javax.swing.JInternalFrame {
         _logout.setRequestFocusEnabled(false);
 
         _users.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _users.setText("User Permissions");
+        _users.setText("QA Users Data Validation");
         _users.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _users.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _users.setRequestFocusEnabled(false);
@@ -399,13 +398,13 @@ public class DL extends javax.swing.JInternalFrame {
                     .addComponent(_filters, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 80, 80)
+                .addGap(61, 61, 61)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                         .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -543,11 +542,6 @@ public class DL extends javax.swing.JInternalFrame {
         DVU.setOpaque(false);
         DVU.setRowHeight(18);
         DVU.getTableHeader().setReorderingAllowed(false);
-        DVU.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DVUMouseClicked(evt);
-            }
-        });
         jScrollPane5.setViewportView(DVU);
 
         getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 852, 152));
@@ -905,10 +899,6 @@ public class DL extends javax.swing.JInternalFrame {
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
-
-    private void DVUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DVUMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DVUMouseClicked
     private void Load_Form(){
         Load = true;   
         
@@ -1155,7 +1145,7 @@ public class DL extends javax.swing.JInternalFrame {
                     Iterator keys = F.keys();
                     while(keys.hasNext()) {
                         String NextKey = (String)keys.next();
-                        location_filters += NextKey + ": " + F.getString(NextKey) + "\r\n";
+                        location_filters += NextKey + ": " + F.getString(NextKey) + ", \r\n";
                     }
                 } 
                 if(o.has("item_filters")){
@@ -1164,7 +1154,7 @@ public class DL extends javax.swing.JInternalFrame {
                     Iterator keys = F.keys();
                     while(keys.hasNext()) {
                         String NextKey = (String)keys.next();
-                        item_filters += NextKey + ": " + F.getString(NextKey) + "\r\n";
+                        item_filters += NextKey + ": " + F.getString(NextKey) + ", \r\n";
                     }
                 } 
                 if(o.has("value")){
@@ -1185,8 +1175,11 @@ public class DL extends javax.swing.JInternalFrame {
             
             DVU.setModel(TestDataModel);
             DVU.setDefaultEditor(Object.class, null);
-            DVU.getColumnModel().getColumn(0).setPreferredWidth(160);
+            DVU.getColumnModel().getColumn(0).setPreferredWidth(140);
             DVU.getColumnModel().getColumn(1).setPreferredWidth(160);
+            
+            DVU.getColumnModel().getColumn(4).setPreferredWidth(160);
+            DVU.getColumnModel().getColumn(5).setPreferredWidth(160);            
             DVU.changeSelection(0, 0, false, false);
             
             txtLog.append("- BucketName: " + File_List.getBucketName() + ", Size: " + File_List.getObjectSummaries().size() + "\r\n");
@@ -1343,42 +1336,40 @@ public class DL extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
-            
-        try{            
-            if (C.contains(": ")) {
-                String c;
-                c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
+        String[] lines = C.split(System.getProperty("line.separator"));  
+        String value;            
+        try{       
+            for (String l : lines) {
+                value = l.substring(l.indexOf(" ")).trim();
+                if(l.contains("env: ")) env = value;
+                if(l.contains("url: ")) url = value;
+                //if(l.contains("Slack_Ch: ")) Slack_Channel = value;
+                if(l.contains("_slack: ")) _slack.setSelected(Boolean.parseBoolean(value));                
+                if(l.contains("_headless: ")) _headless.setSelected(Boolean.parseBoolean(value));
+                
+                if(l.contains("METRIC: ")) METRIC = value;
+                if(l.contains("DATE_RANGE: ")) DATE_RANGE = value;
 
-                c = C.substring(C.indexOf("_slack:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _slack.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_headless:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _headless.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                if(l.contains("txtAdmin_ID: ")) txtAdmin_ID.setText(value);
+                if(l.contains("txtAdmin_PW: ")) txtAdmin_PW.setText(value);
 
-                c = C.substring(C.indexOf("METRIC:")); c = c.substring(0, c.indexOf("\r\n")).trim(); METRIC = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("DATE_RANGE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); DATE_RANGE = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("COUNTRY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); COUNTRY = c.substring(c.indexOf(" ")).trim();
+                if(l.contains("nWaitElement: ")) nWaitElement.setValue(Double.parseDouble(value));
+                if(l.contains("nShowPage: ")) nShowPage.setValue(Double.parseDouble(value)); 
+                if(l.contains("nWaitLoad: ")) nWaitLoad.setValue(Double.parseDouble(value)); 
 
-                c = C.substring(C.indexOf("txtAdmin_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtAdmin_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_PW.setText(c.substring(c.indexOf(" ")).trim());
-
-                c = C.substring(C.indexOf("nShowPage:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nShowPage.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("nWaitElement:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitElement.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("nWaitLoad:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitLoad.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
-
-                c = C.substring(C.indexOf("_1:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _metrics_selection.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_2:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _metric_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_3:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _filters.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_4:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _4.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_password:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _password.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_all_data:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _all_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_logout:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _logout.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                CONFIG = true;
-                txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            } else {
-                CONFIG = false;
-                txtLog.append("=== WEB / DL, User: " + UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
+           
+                if(l.contains("_metrics_selection: ")) _metrics_selection.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_metric_data: ")) _metric_data.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_filters: ")) _filters.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_4: ")) _4.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_password: ")) _password.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_all_data: ")) _all_data.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_logout: ")) _logout.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_users: ")) _users.setSelected(Boolean.parseBoolean(value));
+            }             
+            CONFIG = true;
+            txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } catch (Exception ex) {
             CONFIG = false;
             txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
@@ -1399,15 +1390,13 @@ public class DL extends javax.swing.JInternalFrame {
             }
             C = "";
             C += "env: " + env + "\r\n";
-            C += "app: " + "N/A" + "\r\n";
             C += "url: " + url + "\r\n";
             
             C += "_slack: " + _slack.isSelected() + "\r\n";
             C += "_headless: " + _headless.isSelected() + "\r\n";  
            
             C += "METRIC: " + _S + "\r\n";
-            C += "DATE_RANGE: " + _B + "\r\n";
-            C += "COUNTRY: " + COUNTRY + "\r\n";            
+            C += "DATE_RANGE: " + _B + "\r\n";         
             
             C += "txtAdmin_ID: " + txtAdmin_ID.getText() + "\r\n";
             C += "txtAdmin_PW: " + txtAdmin_PW.getText()  + "\r\n";
@@ -1416,15 +1405,14 @@ public class DL extends javax.swing.JInternalFrame {
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
             C += "nWaitLoad: " + nWaitLoad.getValue()+ "\r\n";
 
-            C += "_1: " + _metrics_selection.isSelected() + "\r\n";
-            C += "_2: " + _metric_data.isSelected() + "\r\n";
-            C += "_3: " + _filters.isSelected() + "\r\n";
+            C += "_metrics_selection: " + _metrics_selection.isSelected() + "\r\n";
+            C += "_metric_data: " + _metric_data.isSelected() + "\r\n";
+            C += "_filters: " + _filters.isSelected() + "\r\n";
             C += "_4: " + _4.isSelected() + "\r\n";
             C += "_password: " + _password.isSelected() + "\r\n";         
             C += "_all_data: " + _all_data.isSelected() + "\r\n";
             C += "_logout: " + _logout.isSelected() + "\r\n";          
-
-
+            C += "_users: " + _users.isSelected() + "\r\n"; 
         } catch (Exception ex)  {
             txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1652,16 +1640,11 @@ public class DL extends javax.swing.JInternalFrame {
     public static String DL_UserID = "";    
     public static String DL_UserPW = "";
 
-    private static String ID_TKN = "";    
-    private static String DL_TKN = ""; 
-    private static String REFRESH_TKN = "";  
-    
     private static String METRIC = "";
     private static String MetricID = "";
     private static String DATE_RANGE = "";
     private static String CatID = "";
     private static String BaseAPI = "";
-    private static String COUNTRY = "Canada";
 
     
 

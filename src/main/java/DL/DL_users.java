@@ -4,11 +4,6 @@
  * and open the template in the editor.
  */
 package DL;
-import A.TWeb;
-import static A.A.*;
-import static DL.DL.*;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JTable;
 /**
  *
@@ -21,23 +16,48 @@ public class DL_users {
         String dMetrics = "";  
         String dTPeriod = "";
         float dValue = 0;
-        String [] dLFilters; 
-        String [] dIFilters; 
-        String Source = ""; // just in case
+        String [] L_Filters; 
+        String [] I_Filters; 
+        String L_FilterKey = "";
+        String L_FilterValue = "";
+        String I_FilterKey = "";
+        String I_FilterValue = "";
+        String dSource = ""; // just in case
         for (int i = 0; i < TBL.getRowCount(); i++) {
-            dUser = String.valueOf(TBL.getValueAt(TBL.getSelectedRow(), 0));
-            dMetrics = String.valueOf(TBL.getValueAt(TBL.getSelectedRow(), 1)); 
-            dTPeriod = String.valueOf(TBL.getValueAt(TBL.getSelectedRow(), 2));
-            dValue = (float) TBL.getValueAt(TBL.getSelectedRow(), 3);
-            dLFilters = String.valueOf(TBL.getValueAt(TBL.getSelectedRow(), 4)).split("\r\n");
-            dIFilters = String.valueOf(TBL.getValueAt(TBL.getSelectedRow(), 5)).split("\r\n");
-            Source = String.valueOf(TBL.getValueAt(TBL.getSelectedRow(), 6));
-            // Check if dUser is actually logged user - if not relogin
+            dUser = String.valueOf(TBL.getValueAt(i, 0));
+            dMetrics = String.valueOf(TBL.getValueAt(i, 1)); 
+            dTPeriod = String.valueOf(TBL.getValueAt(i, 2));
+            dValue = (float) TBL.getValueAt(i, 3);
+            L_Filters = String.valueOf(TBL.getValueAt(i, 4)).split(",");
+            I_Filters = String.valueOf(TBL.getValueAt(i, 5)).split(",");
+            dSource = String.valueOf(TBL.getValueAt(i, 6));
+            
+            // Check if dUser is actually logged user (dUser == DL_UserID) - if not > relogin
+            // If relogin Save last user (update DL_UserID) to check again
+            
             // Check dTPeriod - if selected by default - do nothing, if not - select one from current row
-            // to go dMetrics
-            // apply location dLFilters (multiple?)
-            // apply item dIFilters(multiple?)
-            // verify values           
+            
+            // select dMetrics
+            
+            for (String L : L_Filters) {// Location dIFilter(s) loop 
+                if(L.contains(":")){
+                    L_FilterKey = L.substring(0,L.indexOf(":")).trim();
+                    L_FilterValue = L.substring(L.indexOf(":")+1 ).trim();   
+                    // ========  Apply Location Filter Key / FilterValue ===============
+                    //
+                }  
+            }                   
+            
+            for (String I : I_Filters) {// Item dIFilter(s) loop
+                if(I.contains(":")){
+                    I_FilterKey = I.substring(0,I.indexOf(":")).trim();
+                    I_FilterValue = I.substring(I.indexOf(":")+1 ).trim();   
+                    // ========  Apply Item Filter Key / FilterValue ===============
+                    //
+                }                
+            }
+            
+            // verify dValue  from file agains FrontEnd         
 
         }
     }  
