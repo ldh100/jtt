@@ -14,6 +14,7 @@ public class An_coreapp extends An_GUI {
        Mobile_PW = a.Mobile_PW;
        ad = a.ad;
        loadTimeout = a.loadTimeout;
+       devOS = a.devOS;
        // copy constructor -- initialize some fields from values in original, others with default values 
     }
     protected void Run() throws InterruptedException {     
@@ -74,7 +75,7 @@ public class An_coreapp extends An_GUI {
             //if (FAIL) { return;}            
         _t++; Element_By_Path_Text("Get 'Decription' text", "id", "description", "no_jira");             
             //if (FAIL) { return;}   
-        if(devOS.startsWith("8")){    
+        if(!devOS.startsWith("11")){    
             _t++; Element_By_Path_Text("Get 'Enable..' button text", "id", "btnEnableLocation", "no_jira");             
                 if (FAIL) { return;}   
             _t++; Element_By_Path_Text("Get 'No..' button text", "id", "btnNoThanks", "no_jira");             
@@ -85,7 +86,7 @@ public class An_coreapp extends An_GUI {
     //            if (FAIL) { return;} 
             _t++; Element_By_Path_Click("Click 'Allow..' button ", "id", "com.android.packageinstaller:id/permission_allow_button", "no_jira");             
                 if (FAIL) { return;}             
-        }else{ // version 11 - different Allow Location fargment
+        }else{ // version 11 - different Allow Location fragment
 //            _t++; Element_By_Path_Text("Get 'No..' button text", "id", "btnNoThanks", "no_jira");             
 //                if (FAIL) { return;}  
 //            _t++; Element_By_Path_Click("Click 'Enable..' button ", "id", "btnEnableLocation", "no_jira");             
