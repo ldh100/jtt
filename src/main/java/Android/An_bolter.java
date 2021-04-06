@@ -17,14 +17,14 @@ class An_bolter extends An_GUI{//
     }
 
     protected void Run() throws InterruptedException {         
-        _t++; Test_EX_Update("Bolter Test EX Update 1", "no_jira");             
-            if (FAIL) { 
-                String A = "true";
-            }   
-        _t++; Test_EX_Update("Bolter Test EX Update 2", "no_jira");             
-            if (FAIL) { 
-                String A = "false";
-            }  
+//        _t++; Test_EX_Update("Bolter Test EX Update 1", "no_jira");             
+//            if (FAIL) { 
+//                String A = "true";
+//            }   
+//        _t++; Test_EX_Update("Bolter Test EX Update 2", "no_jira");             
+//            if (FAIL) { 
+//                String A = "false";
+//            }  
         
         _t++; Wait_For_Element_By_Path_Presence("Wait for 'Sign In' screen", "id", "button_login", "no_jira");             
             if (FAIL) { return;} 
