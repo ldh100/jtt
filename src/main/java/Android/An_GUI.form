@@ -127,15 +127,13 @@
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="_acc_options" alignment="0" max="32767" attributes="0"/>
-                              <Component id="_welcome" alignment="0" max="32767" attributes="0"/>
-                              <Component id="_support" alignment="0" max="32767" attributes="0"/>
-                              <Component id="_edit_profile" min="-2" pref="155" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="_all_cards" min="-2" pref="154" max="-2" attributes="0"/>
-                          <Component id="_feedback" min="-2" pref="154" max="-2" attributes="0"/>
-                          <Component id="_forgot_pw" min="-2" pref="154" max="-2" attributes="0"/>
+                          <Component id="_support" alignment="1" max="32767" attributes="0"/>
+                          <Component id="_welcome" alignment="1" max="32767" attributes="0"/>
+                          <Component id="_acc_options" alignment="1" max="32767" attributes="0"/>
+                          <Component id="_edit_profile" alignment="1" min="-2" pref="155" max="-2" attributes="0"/>
+                          <Component id="_all_cards" alignment="1" min="-2" pref="154" max="-2" attributes="0"/>
+                          <Component id="_feedback" alignment="1" min="-2" pref="154" max="-2" attributes="0"/>
+                          <Component id="_forgot_pw" alignment="1" min="-2" pref="154" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
