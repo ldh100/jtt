@@ -4,23 +4,61 @@
  * and open the template in the editor.
  */
 package DL;
-import A.TWeb;
-import static A.A.*;
-import static DL.DL.*;
+import javax.swing.JTable;
 /**
  *
  * @author Oleg.Spozito
  */
 public class DL_users {
-    public static void run() throws InterruptedException { 
-        //String dUser = "";
-        //String dMetrics = DVU.
-        // loop for each row in DVU
-        // Check in user is actually logged user - if not relogin
-        // Check Time Period - if selected by default - do nothing, if not - select one from current row
-        // to go Mertic
-        // apply location filter (multiple?)
-        // apply item filter(multiple?)
-        // varify values
+    public static void run(JTable TBL) throws InterruptedException { 
+        String dUser = "";
+        String dUserPW = "Compass1"; // ============== ????
+        String dMetrics = "";  
+        String dTPeriod = "";
+        float dValue = 0;
+        String [] L_Filters; 
+        String [] I_Filters; 
+        String L_FilterKey = "";
+        String L_FilterValue = "";
+        String I_FilterKey = "";
+        String I_FilterValue = "";
+        String dSource = ""; // just in case
+        for (int i = 0; i < TBL.getRowCount(); i++) {
+            dUser = String.valueOf(TBL.getValueAt(i, 0));
+            dMetrics = String.valueOf(TBL.getValueAt(i, 1)); 
+            dTPeriod = String.valueOf(TBL.getValueAt(i, 2));
+            dValue = (float) TBL.getValueAt(i, 3);
+            L_Filters = String.valueOf(TBL.getValueAt(i, 4)).split(",");
+            I_Filters = String.valueOf(TBL.getValueAt(i, 5)).split(",");
+            dSource = String.valueOf(TBL.getValueAt(i, 6));
+            
+            // Check if dUser is actually logged user (dUser == DL_UserID) - if not > relogin
+            // If relogin Save last user (update DL_UserID) to check again
+            
+            // Check dTPeriod - if selected by default - do nothing, if not - select one from current row
+            
+            // select dMetrics
+            
+            for (String L : L_Filters) {// Location dIFilter(s) loop 
+                if(L.contains(":")){
+                    L_FilterKey = L.substring(0,L.indexOf(":")).trim();
+                    L_FilterValue = L.substring(L.indexOf(":")+1 ).trim();   
+                    // ========  Apply Location Filter Key / FilterValue ===============
+                    //
+                }  
+            }                   
+            
+            for (String I : I_Filters) {// Item dIFilter(s) loop
+                if(I.contains(":")){
+                    I_FilterKey = I.substring(0,I.indexOf(":")).trim();
+                    I_FilterValue = I.substring(I.indexOf(":")+1 ).trim();   
+                    // ========  Apply Item Filter Key / FilterValue ===============
+                    //
+                }                
+            }
+            
+            // verify dValue  from file agains FrontEnd         
+
+        }
     }  
 }

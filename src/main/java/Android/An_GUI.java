@@ -392,14 +392,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     .addComponent(_allow_loc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(_acc_options, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(_welcome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(_support, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(_edit_profile, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(_all_cards, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_feedback, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_forgot_pw, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_support, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_welcome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_acc_options, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_edit_profile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_all_cards, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_feedback, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_forgot_pw, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addGroup(paneCore_ScopeLayout.createSequentialGroup()
                 .addGap(8, 8, 8)
@@ -1168,8 +1167,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     D = D.substring(D.indexOf("model:") + 6);
                     D = D.substring(0, D.indexOf(" ")).trim();
                     cmbDevice.addItem(D + "  id:" + ID);
+                }else{
+                    cmbDevice.addItem(D);
                 }
             }
+             ///
             Current_Log_Update(true, "=== " + Dev + "\r\n");              
             btnRun.setEnabled(true);
             if(cmbDevice.getItemCount() == 1){
@@ -1941,6 +1943,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
     }
 
     private void GUI_Run_Manual(){
+        String Device_Status = LOG_GET_DEVICE_STATUS();
+        Current_Log_Update(true, Device_Status + "\r\n"); 
+        if(!Device_Status.contains("OK")){
+            return;
+        }
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
@@ -2007,17 +2014,27 @@ public class An_GUI extends javax.swing.JInternalFrame {
         run_start = Instant.now();
         Log  = "";
         String RES = "";
-        
+
         RES = JOB_Load_CONFIG(config);
         if(RES.contains("ERROR")){
             Current_Log_Update(false, RES);
             return "JOB_Load_CONFIG > " + RES;
         }
+        RES = LOG_GET_DEVICE_STATUS();
+        Current_Log_Update(false, RES + "\r\n");
+        if(!RES.contains("OK")){
+            return RES;
+        }      
+        
+        if(RES.contains("ERROR")){
+            Current_Log_Update(false, RES);
+            return "JOB_STATUS > " + RES;
+        }          
+        
         
         if(Update_Build){
             Get_S3_MOB_Credentials();             
         }
-
         Set_Mobile_Package_Name();
         Current_Log_Update(false, "- Check Connected Device " + "\r\n");
         RES = JOB_Find_Connected_Devices();
@@ -2058,7 +2075,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }catch(Exception ex){
             return "ERROR > " + ex.getMessage();
         }
-        return "OK > BW1 started >> Please Monitor Reports...";
+        return "OK > Job Started >> Please Monitor Reports...";
     }
     private String JOB_Load_CONFIG(String config){
         //config = config.replace("\r\n", "\n");
@@ -2160,7 +2177,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         return "=== JOB_Check_Device_OS > Model: " + device + ", OS version: " + devOS + "\r\n";
     } 
 
-    public void Current_Log_Update(boolean GUI, String Text){
+    protected void Current_Log_Update(boolean GUI, String Text){
         if(GUI){
             txtLog.append(Text);
             txtLog.setCaretPosition(txtLog.getDocument().getLength());              
@@ -2216,6 +2233,26 @@ public class An_GUI extends javax.swing.JInternalFrame {
             return "=== Report > ERROR: " + ex.getMessage() + "\r\n";
         }
     }
+    
+    protected String LOG_GET_DEVICE_STATUS(){
+        String Job_Status = "";
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+        ResultSet rs = conn.createStatement().executeQuery("SELECT [env] FROM [dbo].[aw_result] WHERE "
+                + " [summary] = '" + "Running..." + "' AND "
+                + " [user_ws] = '" + A.A.WsID + "' AND "
+                + " [env] LIKE '" + device + "%'" );
+            if(rs.next()){
+                Job_Status = rs.getString(1);
+                conn.close(); 
+                return "\r\n=== Device " + Job_Status + " - currently busy"; 
+            }else{           
+                conn.close(); 
+                return "\r\n=== Device Availability Check > OK "; 
+            }
+        } catch (SQLException ex) {
+            return "\r\n=== Device Availability Check > SQL ERROR: " + ex.getMessage() + "\r\n";
+        }
+    }      
     protected String LOG_START(){
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] (" +
@@ -2271,8 +2308,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _insert.setString(12, r_type);
             _insert.setString(13, A.A.UserID);
             _insert.setString(14, A.A.WsID);
-            _insert.setString(15, device + " OSv: " + devOS);
-            _insert.setString(16, "=== Job is running... ===\r\n" + "");
+            _insert.setString(15, device + " id:" + devID);
+            _insert.setString(16, "=== Job is running... ===");
             _insert.setString(17, "Running");
             _insert.setString(18, "None");
             int row = _insert.executeUpdate();
@@ -2303,7 +2340,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     ", [Result] = ?" +    // 16
                     ", [Status] = ?" +    // 17
                     ", [Excel] = ?" +     // 18
-                    " WHERE [app] = 'Android_" + app + "_" + env + "' AND [Status] = 'Running'");
+                    " WHERE [app] = 'Android_" + app + "_" + env + "' "
+                            + "AND [Status] = 'Running'"
+                            + "AND [env] = '" + device + " id:" + devID + "'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
             _update.setString(3, "Android_" + app + "_" + env);
@@ -2318,7 +2357,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _update.setString(12, r_type);
             _update.setString(13, A.A.UserID);
             _update.setString(14, A.A.WsID);
-            _update.setString(15, device + " OSv: " + devOS);
+            _update.setString(15, device + " id:" + devID);
             _update.setString(16, LOG);
             _update.setString(17, "Scope: " + SCOPE);
             _update.setString(18, EX);
@@ -2367,7 +2406,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 v2 = v2.substring(0, v2.indexOf("\r\n"));
                 v2 = v2.substring(v2.indexOf("=") + 1);
                 v2 = v2.substring(0, v2.indexOf(" "));
-                appVersion = "v" + v1 + "(" + v2 + ")"; // Git Hash: " + Hash;
+                appVersion = v1 + "(" + v2 + ")"; // Git Hash: " + Hash;
             }
             return "=== appPackage: " + appPackage + " > Version: " + appVersion + "\r\n";
         } catch (Exception ex) { 
@@ -2555,12 +2594,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n"); 
                 
-                EX = "Android " + app + " " + env + ", v: " + appVersion + ", Device: " + device + " OS v: " + devOS +
+                EX = "Android " + app + " " + env + ", App v: " + appVersion + ", Device: " + device + " OS v: " + devOS +
                 " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                  "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                  + EX;
                 
                 Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n"); 
+                
                 BW1_Done(GUI);
                 if(_f > 0) {
                     return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
@@ -2624,7 +2664,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
 
         Current_Log_Update(GUI, "=== " + Summary + "\r\n"); // Summary shown in EX top
         Current_Log_Update(GUI, "=== Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
-        Current_Log_Update(GUI, "=== Android_" + app + "_" + env + ", v: " + appVersion + ", Device: " + device + " OS version: " + devOS + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
+        Current_Log_Update(GUI, "=== Android_" + app + "_" + env + ", App v: " + appVersion + ", Device: " + device + " OS v: " + devOS + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
 
         if(GUI){
             Log = txtLog.getText();
@@ -2671,6 +2711,10 @@ public class An_GUI extends javax.swing.JInternalFrame {
             cap.setCapability("automationName", "UiAutomator2"); 
             
             AppiumServiceBuilder builder = new AppiumServiceBuilder();
+            if(!A.A.WsOS.toLowerCase().contains("windows")){
+                //builder.usingDriverExecutable(new File(("/path/to/node")));
+                builder.withAppiumJS(new File(("/usr/local/lib/node_modules/appium/build/lib/main.js")));            
+            }
             builder.usingAnyFreePort();
             appiumService = AppiumDriverLocalService.buildService(builder);
             appiumService.start();
@@ -2909,12 +2953,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }
             r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
             _p++; 
-            EX += _t + "\t" + NAME  + "\t" + PATH + "\t" + "Done in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "Done in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME  + "\t" + PATH + "\t" + "loadTimeout " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "loadTimeout " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         }
@@ -2960,7 +3004,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME  + "\t" + PATH + "\t" + "loadTimeout " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "loadTimeout " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         }
@@ -3085,12 +3129,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
             Actions action = new Actions(ad);
             action.moveToElement(ae).perform();
             _p++; 
-            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         }
@@ -3155,7 +3199,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "moveToElement" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         }
@@ -3221,7 +3265,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "moveToElement" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         }
@@ -3325,12 +3369,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     break;
             }
             _p++;
-            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Element Found" + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element Found" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
-            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         }
@@ -3422,12 +3466,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
             Actions action = new Actions(ad);
             action.moveToElement(ae).click().perform();
             _p++; 
-            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         }
@@ -3733,7 +3777,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }
 
             _p++; 
-            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Cleared" + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Cleared" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -3785,12 +3829,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(HIDE){
                 VAL = "*****";
             }
-            EX += _t + "\t" + NAME + "\t" + BY + " " + PATH + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "sendKeys" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         } 
@@ -3974,17 +4018,17 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }
             if(aL1.isEmpty()){
                 _p++; 
-                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L1.isEmpty" +
+                EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L1.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
             }else{
                 _p++; 
-                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + aL1.size() + " item(s) (L1)" + "\t" + "PASS" + "\t" + " - " +
+                EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + aL1.size() + " item(s) (L1)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";               
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + PATH+ "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         } 
@@ -4029,17 +4073,17 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }
             if(aL2.isEmpty()){
                 _p++; 
-                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L2.isEmpty" +
+                EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L2.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
             }else{
                 _p++; 
-                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + aL2.size() + " item(s) (L1)" + "\t" + "PASS" + "\t" + " - " +
+                EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + aL2.size() + " item(s) (L1)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";               
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + PATH+ "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         } 
@@ -4082,12 +4126,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     break;
             }
             _p++; 
-            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Element (e2) found" + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element (e2) found" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "e2" + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "e2" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         } 
@@ -4139,13 +4183,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
             } else {
                 t = "null";
             }
-            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + t + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             _p++;
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         } 
@@ -4193,12 +4237,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(HIDE){
                 VAL = "*****";
             }            
-            EX += _t + "\t" + NAME + "\t" + BY + " " + PATH + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "sendKeys"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         } 
@@ -4240,13 +4284,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 default:
                     break;
             }
-            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Click OK" + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             _p++;
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         } 
@@ -4354,17 +4398,17 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }
             if(aL0.isEmpty()){
                 _p++; 
-                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L0.isEmpty" +
+                EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L0.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
             }else{
                 _p++; 
-                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + aL0.size() + " item(s) (L0)" + "\t" + "PASS" + "\t" + " - " +
+                EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + aL0.size() + " item(s) (L0)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";               
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + PATH+ "\t" + "L0" + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L0" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         }
@@ -4409,17 +4453,17 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }
             if(aL1.isEmpty()){
                 _p++; 
-                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L1.isEmpty" +
+                EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L1.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
             }else{
                 _p++; 
-                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + aL1.size() + " item(s) (L1)" + "\t" + "PASS" + "\t" + " - " +
+                EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + aL1.size() + " item(s) (L1)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + PATH+ "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         } 
@@ -4464,17 +4508,17 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }
             if(aL2.isEmpty()){
                 _p++; 
-                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L2.isEmpty()" +
+                EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L2.isEmpty()" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
             }else{
                 _p++; 
-                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + aL2.size() + " item(s) (L2)" + "\t" + "PASS" + "\t" + " - " +
+                EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + aL2.size() + " item(s) (L2)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";               
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + PATH+ "\t" + "L2" + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L2" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         } 
@@ -4519,17 +4563,17 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }
             if(aL3.isEmpty()){
                 _p++; 
-                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L3.isEmpty" +
+                EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L3.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
             }else{
                 _p++; 
-                EX += _t + "\t" + NAME + "\t" + PATH + "\t" + aL3.size() + " item(s) (L3)" + "\t" + "PASS" + "\t" + " - " +
+                EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + aL3.size() + " item(s) (L3)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + PATH+ "\t" + "L2" + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L3" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
         } 
@@ -4619,9 +4663,6 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected String TZone = "";      
     protected String Summary = "";   
     protected String Log = "";   
-
-    
-
     protected boolean FAIL = false;
     
     protected final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
