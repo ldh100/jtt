@@ -10,6 +10,9 @@ import static AP3.AP3.*;
 
 import java.time.LocalDateTime;
 import java.util.Calendar;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 /**
  *
  * @author Oleg.Spozito
@@ -211,11 +214,34 @@ public class AP3_brand_new {
 
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select last Cost Centre in the List", L1.get(L1.size() - 1), "no_jira"); 
                         if (FAIL) { return;} 
+//                        Thread.sleep(3000);
+                   //  _t++;Thread.sleep((long)sleep); TWeb.Find_Text("Find Tax rate", "Tax Rate", true, url);
+                    
+//                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Tax Rate Click", "xpath", "//label[contains(text(), 'Tax Rate')]", "no_jira"); 
+//                        if (FAIL) { return;}
+//                   e=d1.findElement(By.cssSelector("[aria-label='Tax Rate']"));
+//                    
+                    // e=d1.findElement(By.xpath("//label[contains(text(), 'Tax Rate')]"));
+//                     JavascriptExecutor jse = (JavascriptExecutor)d1;
+//                     jse.executeScript("arguments[0].click();", e);
+//                     jse.executeScript("arguments[0].value='3';", e);
+                      
+//                      Thread.sleep(1000);
+//                     e=d1.findElement(By.cssSelector("[aria-label='Station Location Description']"));
+//                     jse.executeScript("arguments[0].click();", e);
+//                     e.click();
+//                    e.sendKeys(Keys.ARROW_UP);
+                   //     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Tax Rate", "css", "[aria-label='Tax Rate']", "", false, "no_jira"); 
+                        //if (FAIL) { return;}             
                         
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Tax Rate Click", "xpath", "//label[contains(text(), 'Tax Rate')]", "no_jira"); 
-                        if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Tax Rate", "css", "[aria-label='Tax Rate']", "1.5", false, "no_jira"); 
-                        //if (FAIL) { return;}                         
+//                        
+//                        e=d1.findElement(By.xpath("//label[contains(text(), 'Tax Rate')]"));
+//                        e.click();
+//                        e=d1.findElement(By.cssSelector("[aria-label='Station Location Description']"));
+//                        e.sendKeys(Keys.ARROW_UP);
+//                        e.sendKeys(Keys.ARROW_UP);
+//                        e.sendKeys(Keys.ARROW_UP);
+                        
                     break;
                 case "Fee Setup":                   
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Fee Setup types count", L2.get(i), "xpath", ".//input[@role='checkbox']", "no_jira"); // 1st
