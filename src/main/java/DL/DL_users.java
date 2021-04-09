@@ -22,6 +22,7 @@ public class DL_users {
         String L_FilterValue = "";
         String I_FilterKey = "";
         String I_FilterValue = "";
+        String KPI = "";
         String dSource = ""; // just in case
         for (int i = 0; i < TBL.getRowCount(); i++) {
             dUser = String.valueOf(TBL.getValueAt(i, 0));
@@ -30,7 +31,8 @@ public class DL_users {
             dValue = (float) TBL.getValueAt(i, 3);
             L_Filters = String.valueOf(TBL.getValueAt(i, 4)).split(",");
             I_Filters = String.valueOf(TBL.getValueAt(i, 5)).split(",");
-            dSource = String.valueOf(TBL.getValueAt(i, 6));
+            KPI = String.valueOf(TBL.getValueAt(i, 6));
+            dSource = String.valueOf(TBL.getValueAt(i, 7));
             
             // Check if dUser is actually logged user (dUser == DL_UserID) - if not > relogin
             // If relogin Save last user (update DL_UserID) to check again
@@ -57,7 +59,7 @@ public class DL_users {
                 }                
             }
             
-            // verify dValue  from file agains FrontEnd         
+            // verify dValue, KPI from file agains FrontEnd         
 
         }
     }  
