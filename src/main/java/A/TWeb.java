@@ -2990,7 +2990,7 @@ public class TWeb {
         sw1.reset();
     } 
 
-     public static void PressEnter(String NAME, WebElement E, String JIRA ){
+    public static void PressEnter(String NAME, WebElement E, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3056,9 +3056,9 @@ public class TWeb {
                 default:
                     break;
             }
-                      _p++;
-                EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "item has been displayed & deleted successfully" + "\t" + "PASS" + "\t" + " - " +
-                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            _p++;
+            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "item has been displayed & deleted successfully" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
  
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -3070,15 +3070,14 @@ public class TWeb {
         sw1.reset();
     }
     
- public static void Scroll_to_WebElement(String NAME, String BY, String PATH, String JIRA){
+    public static void Scroll_to_WebElement(String NAME, String BY, String PATH, String JIRA){
         if(sw1.isRunning()){
             sw1.reset();
         }
         sw1.start();       
  
         FAIL = false;
-        try {
-          
+        try {         
             switch (BY) {
              case "xpath":
                  e = d1.findElement(By.xpath(PATH));
@@ -3106,8 +3105,7 @@ public class TWeb {
                  break;
              default:
                  break;
-         }
-            
+            }            
             ((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", e);
             _p++;
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +
@@ -3123,6 +3121,6 @@ public class TWeb {
     }
     }
 
-    
+                                                                                                             
     
 
