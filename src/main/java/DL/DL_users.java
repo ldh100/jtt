@@ -60,7 +60,6 @@ public class DL_users {
             }
             
             // verify dValue, KPI from file agains FrontEnd         
-
         }
     }  
 }
