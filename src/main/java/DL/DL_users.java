@@ -1,15 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DL;
+import A.TWeb;
+import static A.A.*;
+import static DL.DL.*;
 import javax.swing.JTable;
 /**
  *
  * @author Oleg.Spozito
  */
 public class DL_users {
+    private static String tbl_userName;
     public static void run(JTable TBL) throws InterruptedException { 
         String dUser = "";
         String dUserPW = "Compass1"; // ============== ????
@@ -36,11 +35,35 @@ public class DL_users {
             
             // Check if dUser is actually logged user (dUser == DL_UserID) - if not > relogin
             // If relogin Save last user (update DL_UserID) to check again
+//            String tbl_userName = TBL.getValueAt(TBL.getSelectedRow(), 0).toString();
+//            System.out.println(tbl_userName);
+//            String DL_UserID= "distilr.test2@place.com";
+//            String username= (String) TBL.getModel().getValueAt(i, 0);
+           System.out.println(dUser);
+   
+            if(dUser.equals(DL_UserID) ) {
+                 DL_login.run();
+            } else {
+                _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to", url, "no_jira");             
+                if (FAIL) { return;}
+                Thread.sleep(10000);
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'USERNAME' input", "id", "username", "no_jira"); 
+                    if (FAIL) { return;}
+                _t++; TWeb.Element_By_Path_Text_Enter("Enter Valid User Name", "id", "username", dUser, false, "no_jira"); 
+                    if (FAIL) { return;}            
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'PASSWORD' input", "id", "password", "no_jira"); 
+                    if (FAIL) { return;}
+                _t++; TWeb.Element_By_Path_Text_Enter("Enter Valid User Password", "id", "password", DL_UserPW, true, "no_jira"); 
+                    if (FAIL) { return;}
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Sign In'", "name", "login", "no_jira"); 
+                    if (FAIL) { return;} 
+                Thread.sleep(500);
+            }
             
             // Check dTPeriod - if selected by default - do nothing, if not - select one from current row
-            
-            // select dMetrics
-            
+
+            // Select dMetrics
+
             for (String L : L_Filters) {// Location dIFilter(s) loop 
                 if(L.contains(":")){
                     L_FilterKey = L.substring(0,L.indexOf(":")).trim();
@@ -58,9 +81,8 @@ public class DL_users {
                     //
                 }                
             }
-            
-            // verify dValue, KPI from file agains FrontEnd         
-
         }
-    }  
-}
+        
+        // Verify dValue from file against FrontEnd   
+    }   
+}  

@@ -136,9 +136,10 @@ public class DL extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Distiller Automatio Manager >>> loading, please wait ... ... ... ...");
-        setMinimumSize(new java.awt.Dimension(860, 532));
+        setMinimumSize(new java.awt.Dimension(858, 527));
         setName("DL"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
+        setPreferredSize(new java.awt.Dimension(858, 527));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -1096,7 +1097,6 @@ public class DL extends javax.swing.JInternalFrame {
         TestDataModel.setColumnIdentifiers(SitesColumnsName);
         DVU.setModel(TestDataModel);
         String BucketName = "distilr-data-qa"; ///fmp_source_qa_files/";
-        String X = "";
         try {
             BasicAWSCredentials awsCreds = new BasicAWSCredentials(access_key, secret_key);
             AmazonS3 s3client = AmazonS3ClientBuilder
@@ -1191,7 +1191,7 @@ public class DL extends javax.swing.JInternalFrame {
             DVU.changeSelection(0, 0, false, false);
             
             txtLog.append("- BucketName: " + File_List.getBucketName() + ", Size: " + File_List.getObjectSummaries().size() + "\r\n");
-            txtLog.append(X + "\r\n");
+            txtLog.append("- Total validations requested: " + DVU.getRowCount() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } catch (Exception ex) {
             txtLog.append("== " + "DL S3 data: " + ex.getMessage() + "\r\n");
