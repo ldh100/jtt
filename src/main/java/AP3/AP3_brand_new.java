@@ -511,12 +511,7 @@ public class AP3_brand_new {
                     break;
             }
         }  
-        
-        
-        boolean DD = true;
-        if(DD) {
-            return;
-        }
+ 
        
         _t++; TWeb.Element_By_Path_Click("Click 'Create Brand'", "xpath", "//*[contains(text(), 'Create Brand')]","no_jira");
             if (FAIL) { return;}
