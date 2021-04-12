@@ -55,6 +55,7 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -98,6 +99,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     public An_GUI() {  
         initComponents();
     }
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -179,8 +181,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Android Automation Manager >>> loading, please wait ... ... ... ...");
-        setMinimumSize(new java.awt.Dimension(854, 525));
+        setMinimumSize(new java.awt.Dimension(858, 527));
         setName("Android"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(858, 527));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -1942,74 +1945,6 @@ public class An_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
 
-    private void GUI_Run_Manual(){
-        String Device_Status = LOG_GET_DEVICE_STATUS();
-        Current_Log_Update(true, Device_Status + "\r\n"); 
-        if(!Device_Status.contains("OK")){
-            return;
-        }
-        btnRun.setEnabled(false);
-        btnFails.setEnabled(false);
-        btnExel.setEnabled(false);
-        
-        run_start = Instant.now();
-        Current_Log_Update(true, "=== Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
-
-        WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
-        LoadTimeOut = (double)nWaitLoad.getValue() *1000;   
-        t_calls = 0;
-        t_min =  0;
-        t_avg = 0;
-        t_max =  0;
-        p_50 = 0;
-        p_90 = 0;
-        Mobile_ID = txtMobile_Id.getText();
-        Mobile_PW = txtMobile_Pw.getText();
-        Bolter_ID = txtBolter_Id.getText();
-        Bolter_PW = txtBolter_Pw.getText();
-        
-        _Slack = _slack.isSelected();
-        
-        _Acc_options = _acc_options.isSelected();
-        _All_cards = _all_cards.isSelected();
-        _Allow_loc = _allow_loc.isSelected();
-        _Edit_item = _edit_item.isSelected();
-        _Edit_profile = _edit_profile.isSelected();
-        _Explore = _explore.isSelected();
-        _Feedback = _feedback.isSelected();
-        _Forgot_pw = _forgot_pw.isSelected();
-        _Invalids = _invalids.isSelected();
-        _Login = _login.isSelected();
-        _Logout = _logout.isSelected();
-        _Mplan = _mplan.isSelected();
-        _OptX = _optX.isSelected();
-        _Order_email = _order_email.isSelected();
-        _Order_history = _order_history.isSelected();
-        _Promo = _promo.isSelected();
-        _Reorder = _reorder.isSelected();
-        _Support = _support.isSelected();
-        _Welcome = _welcome.isSelected();
-
-        SCOPE = "";
-        r_type = "manual";
-        
-        if(DV1.getRowCount() > 0) {
-            SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
-            platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString();
-            COUNTRY = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
-        }
-        if(DV2.getRowCount() > 0) {
-            BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
-        }
-
-        Current_Log_Update(true, "=== Starting Android Driver..." + "\r\n");
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        sw1.start();
-        LOG_START();        // ============================================
-        BW1_DoWork( true);            
-    }
     public String JOB_Run_Auto(String run_type, String config){
         run_start = Instant.now();
         Log  = "";
@@ -2176,6 +2111,75 @@ public class An_GUI extends javax.swing.JInternalFrame {
         devOS = devOS.replace("null", "").substring(0, devOS.indexOf("\r\n")).trim();
         return "=== JOB_Check_Device_OS > Model: " + device + ", OS version: " + devOS + "\r\n";
     } 
+    
+    private void GUI_Run_Manual(){
+        String Device_Status = LOG_GET_DEVICE_STATUS();
+        Current_Log_Update(true, Device_Status + "\r\n"); 
+        if(!Device_Status.contains("OK")){
+            return;
+        }
+        btnRun.setEnabled(false);
+        btnFails.setEnabled(false);
+        btnExel.setEnabled(false);
+        
+        run_start = Instant.now();
+        Current_Log_Update(true, "=== Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+
+        WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
+        LoadTimeOut = (double)nWaitLoad.getValue() *1000;   
+        t_calls = 0;
+        t_min =  0;
+        t_avg = 0;
+        t_max =  0;
+        p_50 = 0;
+        p_90 = 0;
+        Mobile_ID = txtMobile_Id.getText();
+        Mobile_PW = txtMobile_Pw.getText();
+        Bolter_ID = txtBolter_Id.getText();
+        Bolter_PW = txtBolter_Pw.getText();
+        
+        _Slack = _slack.isSelected();
+        
+        _Acc_options = _acc_options.isSelected();
+        _All_cards = _all_cards.isSelected();
+        _Allow_loc = _allow_loc.isSelected();
+        _Edit_item = _edit_item.isSelected();
+        _Edit_profile = _edit_profile.isSelected();
+        _Explore = _explore.isSelected();
+        _Feedback = _feedback.isSelected();
+        _Forgot_pw = _forgot_pw.isSelected();
+        _Invalids = _invalids.isSelected();
+        _Login = _login.isSelected();
+        _Logout = _logout.isSelected();
+        _Mplan = _mplan.isSelected();
+        _OptX = _optX.isSelected();
+        _Order_email = _order_email.isSelected();
+        _Order_history = _order_history.isSelected();
+        _Promo = _promo.isSelected();
+        _Reorder = _reorder.isSelected();
+        _Support = _support.isSelected();
+        _Welcome = _welcome.isSelected();
+
+        SCOPE = "";
+        r_type = "manual";
+        
+        if(DV1.getRowCount() > 0) {
+            SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
+            platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString();
+            COUNTRY = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
+        }
+        if(DV2.getRowCount() > 0) {
+            BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
+        }
+
+        Current_Log_Update(true, "=== Starting Android Driver..." + "\r\n");
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();
+        LOG_START();        // ============================================
+        BW1_DoWork( true);            
+    }
 
     protected void Current_Log_Update(boolean GUI, String Text){
         if(GUI){
@@ -2707,24 +2711,29 @@ public class An_GUI extends javax.swing.JInternalFrame {
             cap.setCapability("autoGrantPermissions", false); // false- always get prompt
             cap.setCapability("unicodeKeyboard", false);
             cap.setCapability("resetKeyboard", true);
-            cap.setCapability("sendKeyStrategy", "oneByOne");
-            cap.setCapability("automationName", "UiAutomator2"); 
-            
-            AppiumServiceBuilder builder = new AppiumServiceBuilder();
+            cap.setCapability("sendKeyStrategy", "oneByOne"); // ‘setValue’“);
+//            cap.setCapability(MobileCapabilityType.FULL_RESET, false);
+//            cap.setCapability(MobileCapabilityType.NO_RESET, true);
+            cap.setCapability("automationName", "UiAutomator2");
+
+            AppiumServiceBuilder ASB  = new AppiumServiceBuilder();
             if(!A.A.WsOS.toLowerCase().contains("windows")){
-                //builder.usingDriverExecutable(new File(("/path/to/node")));
-                builder.withAppiumJS(new File(("/usr/local/lib/node_modules/appium/build/lib/main.js")));            
+                //asb.usingDriverExecutable(new File(("/path/to/node")));
+                HashMap<String, String> environment = new HashMap();
+                environment.put("ANDROID_HOME", "/Users/" + A.A.UserID + "/Library/Android/sdk"); //PATH”));
+                ASB.withEnvironment(environment);
+                ASB.withAppiumJS(new File(("/usr/local/lib/node_modules/appium/build/lib/main.js")));
             }
-            builder.usingAnyFreePort();
-            appiumService = AppiumDriverLocalService.buildService(builder);
+            ASB.usingAnyFreePort();
+            appiumService = AppiumDriverLocalService.buildService(ASB);
             appiumService.start();
             
             ad = new AndroidDriver(new URL(appiumService.getUrl().toString()), cap);
             ad.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
                       
             loadTimeout = new FluentWait(ad).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
-			.pollingEvery(Duration.ofMillis(200))  			
-			.ignoring(NoSuchElementException.class); 
+                    .pollingEvery(Duration.ofMillis(200))  			
+                    .ignoring(NoSuchElementException.class); 
             return "=== Android Driver Start > OK " + "\r\n";
         } catch (Exception ex) {
             F += "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
@@ -2738,12 +2747,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }   
     }    
 
-    // <editor-fold defaultstate="collapsed" desc="Android Driver Actions">    
+    // <editor-fold defaultstate="collapsed" desc="Driver Actions">    
     protected void Test_EX_Update(String NAME, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
         if(NAME.endsWith("1")){
             FAIL = true;
             t = "Test_EX_Update FAIL = true";
@@ -2771,7 +2780,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         t = "resetApp()";
@@ -2793,7 +2802,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -2819,7 +2828,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -2870,7 +2879,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
 
@@ -2922,7 +2931,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -2968,7 +2977,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -3015,7 +3024,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -3036,7 +3045,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -3058,7 +3067,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -3094,7 +3103,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -3144,7 +3153,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -3209,7 +3218,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -3276,7 +3285,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         t ="?";
@@ -3297,7 +3306,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         t = "Not Found";
@@ -3337,7 +3346,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
 
         try {
             switch (BY) {
@@ -3385,7 +3394,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
 
         try {
             switch (BY) {
@@ -3431,7 +3440,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -3482,7 +3491,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
 
         try {
             switch (BY) {
@@ -3530,7 +3539,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
 
         try {
             switch (BY) {
@@ -3583,7 +3592,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         t = "not found!";
@@ -3633,7 +3642,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         t = "not found!";
@@ -3683,7 +3692,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         t = "not found!";
@@ -3736,7 +3745,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -3792,7 +3801,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -3845,7 +3854,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         t = "?";
@@ -3877,7 +3886,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {      
@@ -3904,7 +3913,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -3926,7 +3935,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -3960,7 +3969,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -3983,7 +3992,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         if(aL1 != null) {aL1.clear();}
@@ -4038,7 +4047,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         if(aL1 != null) {aL1.clear();}
@@ -4093,7 +4102,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -4141,7 +4150,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         t = "?";
@@ -4199,7 +4208,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         AndroidElement _e = null;
@@ -4252,7 +4261,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -4301,7 +4310,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         try {
@@ -4363,7 +4372,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         if(aL0 != null) {aL0.clear();}
@@ -4418,7 +4427,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         if(aL1 != null) {aL1.clear();}
@@ -4473,7 +4482,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         if(aL2 != null) {aL2.clear();}
@@ -4528,7 +4537,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        _t++; sw1.start();        
  
         FAIL = false;
         if(aL3 != null) {aL3.clear();}
@@ -4580,8 +4589,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
     } 
     // </editor-fold>
-      
-    // <editor-fold defaultstate="collapsed" desc="Android Instance Variables Declaratios">
+    
+    // <editor-fold defaultstate="collapsed" desc="Instance Variables Declaratios">
     private int d1LastRow = -1; 
     private int d2LastRow = -1; 
     private boolean Load = true; 
@@ -4702,7 +4711,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected boolean _Feedback = false;
     // </editor-fold>
    
-    // <editor-fold defaultstate="collapsed" desc="Android GUI Form Variables Declaration - do not modify">
+    // <editor-fold defaultstate="collapsed" desc="GUI Form Variables Declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;

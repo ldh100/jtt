@@ -136,9 +136,10 @@ public class DL extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Distiller Automatio Manager >>> loading, please wait ... ... ... ...");
-        setMinimumSize(new java.awt.Dimension(860, 532));
+        setMinimumSize(new java.awt.Dimension(858, 527));
         setName("DL"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
+        setPreferredSize(new java.awt.Dimension(858, 527));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -1091,12 +1092,11 @@ public class DL extends javax.swing.JInternalFrame {
         txtLog.append("- Load DL S3 data ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         
-        String[] SitesColumnsName = {"username","metric","time_period","value","location_filters","item_filters","source"}; 
+        String[] SitesColumnsName = {"username","metric","period","value","location_filters","item_filters","kpi","source"}; 
         DefaultTableModel TestDataModel = new DefaultTableModel();
         TestDataModel.setColumnIdentifiers(SitesColumnsName);
         DVU.setModel(TestDataModel);
         String BucketName = "distilr-data-qa"; ///fmp_source_qa_files/";
-        String X = "";
         try {
             BasicAWSCredentials awsCreds = new BasicAWSCredentials(access_key, secret_key);
             AmazonS3 s3client = AmazonS3ClientBuilder
@@ -1113,7 +1113,7 @@ public class DL extends javax.swing.JInternalFrame {
                     + File_List.getObjectSummaries().get(LastFileIndex).getLastModified());
             S3Object s3object = s3client.getObject(BucketName, File_Path);
             BufferedReader reader = new BufferedReader(new InputStreamReader(s3object.getObjectContent()));
-            String TestDataJson ="";
+            String TestDataJson = "";
             String s = null;
             while ((s = reader.readLine()) != null) {
                 TestDataJson += s;
@@ -1126,6 +1126,7 @@ public class DL extends javax.swing.JInternalFrame {
             String item_filters = "None";
             Float value = 0.0f;
             String source = "";
+            String KPI = "";
             JSONObject json = new JSONObject(TestDataJson);  
             JSONArray Results = json.getJSONArray("results");
             for (int i = 0; i < Results.length(); i++) {
@@ -1141,25 +1142,31 @@ public class DL extends javax.swing.JInternalFrame {
                 }  
                 if(o.has("location_filters")){
                     location_filters = "";
-                    JSONObject F = o.getJSONObject("location_filters");
-                    Iterator keys = F.keys();
+                    JSONObject LF = o.getJSONObject("location_filters");
+                    Iterator keys = LF.keys();
                     while(keys.hasNext()) {
                         String NextKey = (String)keys.next();
-                        location_filters += NextKey + ": " + F.getString(NextKey) + ", \r\n";
+                        location_filters += NextKey + ": " + LF.getString(NextKey) + ", \r\n";
                     }
                 } 
                 if(o.has("item_filters")){
                     item_filters = "";
-                    JSONObject F = o.getJSONObject("item_filters"); 
-                    Iterator keys = F.keys();
+                    JSONObject IF = o.getJSONObject("item_filters"); 
+                    Iterator keys = IF.keys();
                     while(keys.hasNext()) {
                         String NextKey = (String)keys.next();
-                        item_filters += NextKey + ": " + F.getString(NextKey) + ", \r\n";
+                        item_filters += NextKey + ": " + IF.getString(NextKey) + ", \r\n";
                     }
                 } 
                 if(o.has("value")){
                     value = o.getFloat("value");//.toString()
-                }             
+                }  
+                if(o.has("teams_info")){
+                    JSONObject TI = o.getJSONObject("teams_info"); 
+                    if(TI.has("KPIs Available")){
+                        KPI = TI.getString("KPIs Available");
+                    }
+                }                
                 if(o.has("source")){
                     source = o.getString("source");
                 }
@@ -1170,20 +1177,21 @@ public class DL extends javax.swing.JInternalFrame {
                     value, 
                     location_filters.trim(), 
                     item_filters.trim(), 
+                    KPI.trim(), 
                     source.trim()});
             }
             
             DVU.setModel(TestDataModel);
             DVU.setDefaultEditor(Object.class, null);
-            DVU.getColumnModel().getColumn(0).setPreferredWidth(140);
-            DVU.getColumnModel().getColumn(1).setPreferredWidth(160);
-            
+            DVU.getColumnModel().getColumn(0).setPreferredWidth(130);
+            DVU.getColumnModel().getColumn(1).setPreferredWidth(150);
+            DVU.getColumnModel().getColumn(2).setPreferredWidth(40);            
             DVU.getColumnModel().getColumn(4).setPreferredWidth(160);
-            DVU.getColumnModel().getColumn(5).setPreferredWidth(160);            
+            DVU.getColumnModel().getColumn(5).setPreferredWidth(140);            
             DVU.changeSelection(0, 0, false, false);
             
             txtLog.append("- BucketName: " + File_List.getBucketName() + ", Size: " + File_List.getObjectSummaries().size() + "\r\n");
-            txtLog.append(X + "\r\n");
+            txtLog.append("- Total validations requested: " + DVU.getRowCount() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } catch (Exception ex) {
             txtLog.append("== " + "DL S3 data: " + ex.getMessage() + "\r\n");
