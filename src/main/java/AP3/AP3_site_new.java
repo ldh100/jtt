@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 /**
  *
  * @author Oleg.Spozito
@@ -777,30 +779,36 @@ public class AP3_site_new {
                   _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Enable Scan & ...'", "Enable Scan & Go?", true,"no_jira");                                                        
                     break;
                 case "Assign Menus":
-                    _t++; Thread.sleep((long) sleep); TWeb.List_L3("Menu 'Button' Count", "xpath", "//button[@class='ml-0 pl-0 v-btn v-btn--flat theme--light']", "no_jira"); 
+                      _t++; Thread.sleep((long) sleep); TWeb.List_L3("Menu 'Button' Count", "xpath", "//button[@class='ml-0 pl-0 v-btn v-btn--flat theme--light']", "no_jira"); 
                         if (FAIL) { return;}
+                        
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Click 'IMPORT MENU'", L3.get(1), "no_jira"); // index 1 > 2nd button - Import
                         if (FAIL) { return;} 
                     //Thread.sleep(1000);
                     _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for Import options...", "css", "[aria-label='Location Stations']", "no_jira"); 
+                        if (FAIL) { return;}  
+//                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open Location Station drop-down", "css", "[aria-label='Location Stations']", "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Inport Menu > drop-down(s) count", L2.get(i), "xpath", ".//div[@class='v-input__icon v-input__icon--append']", "no_jira");             
+                        if (FAIL) { return;}  
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Open 'Location Station' drop-down", L1.get(0), "no_jira"); 
                         if (FAIL) { return;}                        
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open Location Station drop-down", "css", "[aria-label='Location Stations']", "no_jira"); 
-                        if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Location Station' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
                         if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Location Station Count", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");             
-                        if (FAIL) { return;} 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Location Station Count", e1, "xpath", ".//div[@class='v-list__tile__title']", "no_jira");             
                         if(L1.size() > 0) {
-                            _t++; Thread.sleep((long) sleep); TWeb.Element_Attribute("Last Location Station", L1.get(L1.size()- 1), "textContent", "no_jira");
-                                if (FAIL) { return;}                              
+                            _t++; Thread.sleep((long) sleep); TWeb.Element_Attribute("Last Location Station", L1.get(L1.size() - 1), "textContent", "no_jira");
+                                if (FAIL) { return;}                            
                             _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select Location Station", L1.get(L1.size() - 1), "no_jira");
                                 if (FAIL) { return;}
-                                Thread.sleep(500);
-                            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open Menus drop-down", "css", "[aria-label='Menus']", "no_jira"); 
-                                if (FAIL) { return;}
+                            Thread.sleep(500);
+//                            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open Menus drop-down", "css", "[aria-label='Menus']", "no_jira"); 
+                            _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Inport Menu > drop-down(s) count", L2.get(i), "xpath", ".//div[@class='v-input__icon v-input__icon--append']", "no_jira");             
+                                if (FAIL) { return;}  
+                            _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Open 'Menus' drop-down", L1.get(1), "no_jira");                                 
+                                 if (FAIL) { return;}
                             _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Menus' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
                                 if (FAIL) { return;}
-                            _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Menus Count", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");             
+                            _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Menus Count", e1, "xpath", ".//div[@class='v-list__tile__title']", "no_jira");             
                                 if (FAIL) { return;} 
                             _t++; Thread.sleep((long) sleep); TWeb.Element_Attribute("Last Menu", L1.get(L1.size()- 1), "textContent", "no_jira");
                                 if (FAIL) { return;} 
@@ -810,14 +818,19 @@ public class AP3_site_new {
                         } else{
                             _t++; 
                             _f++;
-                            F += _t + " > " + "New Station > Assign Menu" + " > " + "Import" + " > " + "No Available Menus" + "\r\n";
-                            EX += " - " + "\t" + "New Station > Assign Menus" + "\t" + "Import" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                               
+                            F += _t + " > " + "Add Station > Assign Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
+                            EX += " - " + "\t" + "Add Station > Assign Menus" + "\t" + "Import" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                               
                         }                                                  
                                               
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("ADD MENU Click", L3.get(0), "no_jira"); // index 0 > 1st button - Add
-                        if (FAIL) { return;}                         
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open Menu Name drop-down", "css", "[aria-label='Menu Name']", "no_jira"); 
-                        if (FAIL) { return;}   
+                        if (FAIL) { return;}    
+//                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open Menu Name drop-down", "css", "[aria-label='Menu Name']", "no_jira"); 
+//                        if (FAIL) { return;} 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Add Menu > drop-down(s) count", L2.get(i), "xpath", ".//div[@class='v-input__icon v-input__icon--append']", "no_jira");             
+                        if (FAIL) { return;}  
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Open 'Menu Name' drop-down", L1.get(0), "no_jira");                                 
+                         if (FAIL) { return;}                                               
+  
                     _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Menu Names' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Menu Names Count", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");             
@@ -831,8 +844,8 @@ public class AP3_site_new {
                         } else{
                             _t++; 
                             _f++;
-                            F += _t + " > " + "New Station > Assign Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
-                            EX += " - " + "\t" + "New Station > Assign Menus" + "\t" + "Add" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                           
+                            F += _t + " > " + "Add Station > Assign Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
+                            EX += " - " + "\t" + "Add Station > Assign Menus" + "\t" + "Add" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                           
                         }
                     break;
                 case "Integration Type": 
@@ -936,9 +949,15 @@ public class AP3_site_new {
             if (FAIL) { return;}
         Thread.sleep(500);       
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'Create Brand'", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
-            if (FAIL) { return;}            
+            if (FAIL) { return;}    
+              
         // </editor-fold>     
 
+        // 
+        
+        
+        
+        
 /*                   After_Station_creation
         1)  Verify api calls
         2) Flag = 2 make changes in brand configuration / Save changes / Verify api calls
@@ -1390,15 +1409,89 @@ public class AP3_site_new {
                 case "Pickup Details":    
                     break;
                 case "Delivery Details":      
+                     if(flag==2)
+                     {
+                         
+                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Timeslot Type Dropdown", "xpath", "//input[@aria-label='Timeslot Type']", "no_jira"); 
+                     if (FAIL) { return;}
+
+                     _t++; Thread.sleep((long) sleep); TWeb.List_L3("Timeslot type options", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']/descendant::div[@class='v-list__tile__title']", "no_jira"); 
+                     if (FAIL) { return;}
+
+                     T_Index=-1; 
+                     for (int k = 0; k < L3.size(); k++) {
+                     _t++; TWeb.Element_Text("Timeslot Type (index " + k + ")", L3.get(k),  "no_jira");              
+                     if (FAIL) { return;}
+                     if(t.trim().startsWith("User"))
+                     { T_Index = k;
+                     }
+                     }
+
+                     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select 'User Generated'" , L3.get(T_Index), "no_jira");
+                     if (FAIL) { return;}
+
+                     _t++;Thread.sleep((long) sleep); TWeb.Scroll_to_WebElement("Scroll to Manage Drop-off locations", "xpath", "//div[@id='toc-delivery']//a[contains(text(),'Manage Drop-off Locations')]", "no_jira");
+                     if (FAIL) { return;}
+                     
+//                     _t++;Thread.sleep((long) sleep); TWeb.Scroll_to_WebElement("Scroll to Add Timeslot", "xpath", "//div[contains(text(),'Add Timeslot')]", "no_jira");
+//                     if (FAIL) { return;}
+//                     
+                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Add timeslot", "xpath", "//div[@id='toc-delivery']//div[@class='flex xs12'][6]//button", "no_jira"); 
+                     if (FAIL) { return;}
+                       
+                                            
+                     _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Add New Timeslot'", "Add New Timeslot", true, "no_jira"); 
+                     if (FAIL) { return;}
+
+                     _t++;Thread.sleep((long) sleep);TWeb.Element_By_Path_Click("Click Start Time Slot", "xpath", "//input[@aria-label='Start Time']", "no_jira");
+                     if (FAIL) { return;}
+
+                     String hR;
+                     String mR;
+                     hR = String.format("%02d",(int)(Math.random()*3 + 8));
+                     mR = String.format("%02d",(int)(Math.random()*59));
+                     New_From = hR + ":" + mR + "AM";
+                     _t++;Thread.sleep((long) sleep);TWeb.Element_By_Path_Text_Enter("Start Time", "xpath", "//input[@aria-label='Start Time']", New_From, false, "no_jira");
+                     if(FAIL) {return;}
+                     
+                     d1.findElement(By.xpath("//input[@aria-label='Start Time']")).sendKeys(Keys.TAB);
+                     _t++;Thread.sleep((long) sleep);TWeb.Element_By_Path_Click("Click End Time Slot", "xpath", "//input[@aria-label='End Time']", "no_jira");
+                     if (FAIL) { return;}
+
+                     hR = String.format("%02d",(int)(Math.random()*3 + 1));
+                     mR = String.format("%02d",(int)(Math.random()*59));
+                     New_To = hR + ":" + mR + "PM";
+                     _t++;Thread.sleep((long) sleep);TWeb.Element_By_Path_Text_Enter("End Time", "xpath", "//input[@aria-label='End Time']", New_To, false, "no_jira");
+                     if(FAIL) {return;}
+                     d1.findElement(By.xpath("//input[@aria-label='End Time']")).sendKeys(Keys.TAB);
+                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Select All'", "xpath", "//i[@class='v-icon mdi mdi-checkbox-blank-outline theme--light']", "no_jira"); 
+                     if (FAIL) { return;}  
+                     _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Dropoff Locations Selected (num)' text", "Dropoff Locations Selected", true,"no_jira"); 
+                     if (FAIL) { return;} 
+                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Save - Add New timeslot", "xpath", "//div[@class='v-dialog v-dialog--active']//div[normalize-space()='save']", "no_jira"); 
+                     if (FAIL) { return;}
+                       
+                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click - Display timeslots as one time? - Yes", "xpath", "(//div[@id='toc-delivery']//div[@class='flex xs12']//div[contains(@class,'Option-Left')])[1]", "no_jira"); 
+                     if (FAIL) { return;}
+
+                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click - Allow delivery instruction? - Yes", "xpath", "(//div[@id='toc-delivery']//div[@class='flex xs12']//div[contains(@class,'Option-Left')])[2]", "no_jira");
+                     if (FAIL) { return;}
+                       
+                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click - Enable Bolter Delivery App? - Yes", "xpath", "(//div[@id='toc-delivery']//div[@class='flex xs12']//div[contains(@class,'Option-Left')])[3]", "no_jira");; 
+                     if (FAIL) { return;}
+                    }
                      break;
                 case "Scan & Go Setup":  
+                    if(flag==2)
+                    {
                    _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Enable Scan & ...'", "id", "toc-ScanAndGo", "no_jira"); 
                         if (FAIL) { return;}
                     _t++;Thread.sleep((long) sleep);TWeb.Element_Child_List_L1("Find 'Enable Scan & Go Setup' options", e1, "xpath", ".//div[contains(@class, 'Option-Left')]", "no_jira");             
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Click 'Enable Scan & Go' - Yes", L1.get(0), "no_jira");
                         if (FAIL) { return;}                                                       
-                     break;
+                    }
+                    break;
                 case "Assign Menus":
                     break;
                 case "Integration Type": 
