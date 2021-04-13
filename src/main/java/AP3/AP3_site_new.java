@@ -1896,7 +1896,55 @@ public class AP3_site_new {
           _p++; EX += _t + "\t" + "Meal Plan Disabled-expected" + "\t" + "Meal Plan Disabled" + "\t" + "Meal PLan Disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
          }
              
-         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Brand API Public config Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+       
+         
+        // Single time slot verification for User generated Delivery  
+        
+        if(json.has("show_single_timeslot") && flag == 2)
+        {
+           if (json.getBoolean("show_single_timeslot"))
+           {  // Print pass expected result 
+            _t++;
+            _p++; EX += _t + "\t" + "Show Single timeslot Enabled-expected" + "\t" + "Show Single timeslot Enabled" + "\t" + "Show Single timeslot Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+           }
+           else if (!json.getBoolean("show_single_timeslot"))
+           { // Print Fail expected to be enabled but not enabled.
+              _t++;
+             _f++; EX += _t + "\t" + "Show Single timeslot - Disabled -  not expected" + "\t" + "Show Single timeslot - Disabled" + "\t" + "Show Single timeslot - Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            }
+         }
+        
+        // Allow delivery instruction verification for User generated Delivery 
+        if(json.has("show_instructions") && flag == 2)
+        {
+           if (json.getBoolean("show_instructions"))
+           {  // Print pass expected result 
+            _t++;
+            _p++; EX += _t + "\t" + "Allow delivery instruction - Enabled-expected" + "\t" + "Allow delivery instruction - Enabled" + "\t" + "Allow delivery instruction - Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+           }
+           else if (!json.getBoolean("show_instructions"))
+           { // Print Fail expected to be enabled but not enabled.
+              _t++;
+             _f++; EX += _t + "\t" + "Allow delivery instruction? - Disabled -  not expected" + "\t" + "Allow delivery instruction? - Disabled" + "\t" + "Allow delivery instruction? - Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            }
+         }
+        
+        // Enable Bolter Delivery App verification for User generated Delivery 
+        if(json.has("runner_app_enabled") && flag == 2)
+        {
+           if (json.getBoolean("runner_app_enabled"))
+           {  // Print pass expected result 
+            _t++;
+            _p++; EX += _t + "\t" + "Bolter Delivery App Enabled-expected" + "\t" + "Bolter Delivery App - Enabled" + "\t" + "Bolter Delivery App - Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+           }
+           else if (!json.getBoolean("runner_app_enabled"))
+           { // Print Fail expected to be enabled but not enabled.
+              _t++;
+             _f++; EX += _t + "\t" + "Bolter Delivery App - Disabled -  not expected" + "\t" + "Bolter Delivery App - Disabled" + "\t" + "Bolter Delivery App - Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            }
+         }
+        
+        EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Brand API Public config Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
        
      }
     
