@@ -11,7 +11,7 @@
     <Property name="iconifiable" type="boolean" value="true"/>
     <Property name="title" type="java.lang.String" value="AP3 Automation Manager &gt;&gt;&gt; loading, please wait ... ... ... ..."/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[860, 532]"/>
+      <Dimension value="[858, 527]"/>
     </Property>
     <Property name="name" type="java.lang.String" value="AP3" noResource="true"/>
     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
