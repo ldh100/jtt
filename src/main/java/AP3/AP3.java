@@ -158,7 +158,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("AP3 Automation Manager >>> loading, please wait ... ... ... ...");
-        setMinimumSize(new java.awt.Dimension(860, 532));
+        setMinimumSize(new java.awt.Dimension(858, 527));
         setName("AP3"); // NOI18N
         setVerifyInputWhenFocusTarget(false);
         setVisible(true);

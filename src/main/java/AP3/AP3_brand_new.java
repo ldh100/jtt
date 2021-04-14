@@ -10,9 +10,6 @@ import static AP3.AP3.*;
 
 import java.time.LocalDateTime;
 import java.util.Calendar;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 /**
  *
  * @author Oleg.Spozito
@@ -129,8 +126,7 @@ public class AP3_brand_new {
                         }
                     }
                     if(T_Index > -1){
-                        //((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", L1.get(T_Index));  
-                        _t++; Thread.sleep((long) sleep); TWeb.Scroll_to_Element("Scroll to Group " + SECTOR, L1.get(T_Index), "no_jira");
+                          _t++; Thread.sleep((long) sleep); TWeb.Scroll_to_Element("Scroll to Group " + SECTOR, L1.get(T_Index), "no_jira");
                             if (FAIL) { return;}
                         _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select Group " + SECTOR, L1.get(T_Index), "no_jira");
                             if (FAIL) { return;} 
@@ -195,7 +191,7 @@ public class AP3_brand_new {
                         Thread.sleep(1000);
                     // ============================== ^^^ Menu Assignation
                         
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Station Name'", "xpath", "//label[contains(text(), 'Station Name')]", "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Station Name'", "xpath", "//input[@aria-label='Station Name']", "no_jira"); 
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Station Name", "css", "[aria-label='Station Name']", "Add Station " + New_ID, false, "no_jira"); 
                         if (FAIL) { return;}    
@@ -216,11 +212,7 @@ public class AP3_brand_new {
 
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select last Cost Centre in the List", L1.get(L1.size() - 1), "no_jira"); 
                         if (FAIL) { return;} 
-//                        Thread.sleep(3000);
-                   //  _t++;Thread.sleep((long)sleep); TWeb.Find_Text("Find Tax rate", "Tax Rate", true, url);
-                    
-//                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Tax Rate Click", "xpath", "//label[contains(text(), 'Tax Rate')]", "no_jira"); 
-//                        if (FAIL) { return;
+
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Timeslot Length Click", "css", "[aria-label='Tax Rate']", "no_jira"); 
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Timeslot Length", "css", "[aria-label='Tax Rate']", "12", false, "no_jira"); 
@@ -308,11 +300,6 @@ public class AP3_brand_new {
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Setup Delievery > Yes Click", e1, "no_jira"); 
                         if (FAIL) { return;}  
-                        
-//                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Timeslot Type dropdown Click", "xpath", "//*[contains(text(), 'Automatic')]", "no_jira"); 
-//                        if (FAIL) { return;}     
-//                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select 'Automatic'", "xpath", "//*[contains(text(), 'Automatic')]", "no_jira"); 
-//                        if (FAIL) { return;}   
 
                     _t++; Thread.sleep((long) sleep); TWeb.List_L1("Input 'Timeslot Length' Count", "css", "[aria-label='Timeslot Length']", "no_jira"); 
                         if (FAIL) { return;}                        
@@ -357,7 +344,6 @@ public class AP3_brand_new {
                         
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Click 'IMPORT MENU'", L3.get(1), "no_jira"); // index 1 > 2nd button - Import
                         if (FAIL) { return;} 
-                    //Thread.sleep(1000);
                     _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for Import options...", "css", "[aria-label='Location Stations']", "no_jira"); 
                         if (FAIL) { return;}  
 //                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open Location Station drop-down", "css", "[aria-label='Location Stations']", "no_jira"); 
@@ -490,9 +476,9 @@ public class AP3_brand_new {
                         if (FAIL) { return; } 
                     _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Google Wallet'", "Google Wallet", true,"no_jira"); 
                         if (FAIL) { return; }                    
-                    _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Meal Plans'", "Meal Plans", true,"no_jira"); 
+                    _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Meal Plans'", "Meal Plans", false,"no_jira"); 
                         if (FAIL) { return; } 
-                    _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Excluded tenders'", "Excluded tenders", true,"no_jira"); 
+                    _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Excluded tenders'", "Excluded tenders", false,"no_jira"); 
                         if (FAIL) { return; } 
                     if(L1.size() > 0){
                         _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Check/Exclude last method", L1.get(L1.size() -1), "no_jira");
