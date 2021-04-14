@@ -191,7 +191,7 @@ public class AP3_brand_new {
                         Thread.sleep(1000);
                     // ============================== ^^^ Menu Assignation
                         
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Station Name'", "xpath", "//label[contains(text(), 'Station Name')]", "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Station Name'", "xpath", "//input[@aria-label='Station Name']", "no_jira"); 
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Station Name", "css", "[aria-label='Station Name']", "Add Station " + New_ID, false, "no_jira"); 
                         if (FAIL) { return;}    

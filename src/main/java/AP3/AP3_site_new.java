@@ -638,7 +638,7 @@ public class AP3_site_new {
                         Thread.sleep(1000);
                     // ============================== ^^^ Menu Assignation
                         
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Station Name'", "xpath", "//label[contains(text(), 'Station Name')]", "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Station Name'", "xpath", "//input[@aria-label='Station Name']", "no_jira"); 
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Station Name", "css", "[aria-label='Station Name']", "New Station " + New_ID, false, "no_jira"); 
                         if (FAIL) { return;}    
@@ -2048,7 +2048,7 @@ public class AP3_site_new {
     
     public static void Verify_station_data_after_refresh(String B_ID) throws InterruptedException
     {
-        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " ==  API Verification on Refresh START ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r";
+        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " ==  API Verification on Refresh START ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         
         
         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Brand Public API", BaseAPI + "/config/public/"+B_ID, true,"no_jira" );
@@ -2078,7 +2078,7 @@ public class AP3_site_new {
         if(Public_response_Before.equals(Public_response_After))
         { // Print Pass 
             _t++;
-          _p++; EX += _t + "\t" + "Public Api call response equal after Refresh" + "\t" + "API Response equal" + "\t" + "API response equal" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+           _p++; EX += _t + "\t" + "Public Api call response equal after Refresh" + "\t" + "API Response equal" + "\t" + "API response equal" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
         else
         {
@@ -2107,7 +2107,7 @@ public class AP3_site_new {
           _t++;
           _f++; EX += _t + "\t" + "Brand Api call response different after Refresh" + "\t" + "Unequal API response" + "\t" + "Unequal API response" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
-       EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " ==  API Verification on Refresh END ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r";
+       EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " ==  API Verification on Refresh END ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
           
     }
     
