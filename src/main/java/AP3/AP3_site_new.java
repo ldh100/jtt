@@ -638,7 +638,7 @@ public class AP3_site_new {
                         Thread.sleep(1000);
                     // ============================== ^^^ Menu Assignation
                         
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Station Name'", "xpath", "//label[contains(text(), 'Station Name')]", "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Station Name'", "xpath", "//input[@aria-label='Station Name']", "no_jira"); 
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Station Name", "css", "[aria-label='Station Name']", "New Station " + New_ID, false, "no_jira"); 
                         if (FAIL) { return;}    
@@ -954,16 +954,14 @@ public class AP3_site_new {
         // </editor-fold>     
 
         // 
-        
-        
-        
+              
         
 /*                   After_Station_creation
         1)  Verify api calls
         2) Flag = 2 make changes in brand configuration / Save changes / Verify api calls
         3) Flag = 3 Choose integration type : Volante   / Save changes / Verify api calls
         4) Flag = 4 Choose integration type : Agilysys  / Save changes / Verify api calls
-        
+        5) Flag = 5 Verify Brand API Calls before and after refresh
 */        
         After_station_creation();
         
@@ -1385,8 +1383,12 @@ public class AP3_site_new {
         Brand_Private_API(B_ID,flag);
         Brand_Public_API(B_ID,flag); 
         flag++;
+        // Verify the Station Data after a refresh
         if(flag==5)
-        {break;}
+        {
+            Verify_station_data_after_refresh(B_ID);
+            break;
+        }
         _t++; TWeb.Element_By_Path_Click("Click 'Brand Configuration'", "xpath", "//div[contains(text(),'Configuration')]","no_jira");
             if (FAIL) { return;}
             
@@ -1644,6 +1646,8 @@ public class AP3_site_new {
             
         }         
   } // End of After_station_creation
+    
+    
     
     public static void Location_brand_API(String B_ID,int flag) throws InterruptedException
     {
@@ -2001,9 +2005,7 @@ public class AP3_site_new {
     
     public static void   Location_Group_API(String S_ID) throws InterruptedException
     {
-       
         EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Location Group API Verification Start==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-        
         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Location group API", BaseAPI + "/location/group/"+S_ID, true,"no_jira" );
         JSONObject json = new JSONObject(API_Response_Body);
         
@@ -2040,12 +2042,73 @@ public class AP3_site_new {
             _t++;   
             _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "Sector : "+sector_name + "\t" + "Chartwells" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
            }   
-         
-         
          EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Location Group API Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         
-       
-       
-       
     }//End of Location_Group_API
+    
+    public static void Verify_station_data_after_refresh(String B_ID) throws InterruptedException
+    {
+        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " ==  API Verification on Refresh START ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        
+        
+        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Brand Public API", BaseAPI + "/config/public/"+B_ID, true,"no_jira" );
+        String Public_response_Before = API_Response_Body;
+    
+        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Brand Private API", BaseAPI + "/config/"+B_ID, true,"no_jira" );
+        String Private_response_Before = API_Response_Body;
+        
+        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Location Brand API", BaseAPI + "/location/brand/"+B_ID, true,"no_jira" );
+        String Brand_response_Before = API_Response_Body;
+        
+        TWeb.Refresh("Refresh Page", "no_jira");
+        Thread.sleep(500); 
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
+            if (FAIL) { return;}  
+        Thread.sleep(500);  
+        
+        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Brand Public API", BaseAPI + "/config/public/"+B_ID, true,"no_jira" );
+        String Public_response_After = API_Response_Body;
+    
+        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Brand Private API", BaseAPI + "/config/"+B_ID, true,"no_jira" );
+        String Private_response_After = API_Response_Body;
+        
+        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Location Brand API", BaseAPI + "/location/brand/"+B_ID, true,"no_jira" );
+        String Brand_response_After = API_Response_Body;
+        
+        if(Public_response_Before.equals(Public_response_After))
+        { // Print Pass 
+            _t++;
+           _p++; EX += _t + "\t" + "Public Api call response equal after Refresh" + "\t" + "API Response equal" + "\t" + "API response equal" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }
+        else
+        {
+          _t++;
+          _f++; EX += _t + "\t" + "Public Api call response different after Refresh" + "\t" + "Unequal API response" + "\t" + "Unequal API response" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }
+        
+        if(Private_response_Before.equals(Private_response_After))
+        { // Print Pass 
+            _t++;
+          _p++; EX += _t + "\t" + "Private Api call response equal after Refresh" + "\t" + "API Response equal" + "\t" + "API response equal" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }
+        else
+        {
+          _t++;
+          _f++; EX += _t + "\t" + "Private Api call response different after Refresh" + "\t" + "Unequal API response" + "\t" + "Unequal API response" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }
+        
+        if(Brand_response_Before.equals(Brand_response_After))
+        { // Print Pass 
+            _t++;
+          _p++; EX += _t + "\t" + "Brand Api call response equal after Refresh" + "\t" + "API Response equal" + "\t" + "API response equal" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }
+        else
+        {
+          _t++;
+          _f++; EX += _t + "\t" + "Brand Api call response different after Refresh" + "\t" + "Unequal API response" + "\t" + "Unequal API response" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }
+       EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " ==  API Verification on Refresh END ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+          
+    }
+    
 }

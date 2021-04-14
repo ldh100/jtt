@@ -20,6 +20,8 @@ import com.google.common.base.Stopwatch;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
@@ -1163,7 +1165,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         String Dev  = Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb devices -l", A.A.ADB_HOME, true, true).trim();
         String[] dev = Dev.split("\r\n");
         if (dev.length > 2) {
-            for (int i = 1; i < dev.length; i++) {
+            for (int i = 1; i < dev.length - 1; i++) {
                 String D = dev[i];
                 if(D.contains("model")){
                     String ID = D.substring(0, dev[i].indexOf(" ")).trim();
@@ -1252,7 +1254,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }
 
             loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("app_name")));
-            Thread.sleep(1000);
+            Thread.sleep(500);
             aL0 = ad.findElements(By.id("app_name"));
             int app_count = aL0.size();
             if (app_count > 0) {
@@ -1966,7 +1968,6 @@ public class An_GUI extends javax.swing.JInternalFrame {
             return "JOB_STATUS > " + RES;
         }          
         
-        
         if(Update_Build){
             Get_S3_MOB_Credentials();             
         }
@@ -2000,7 +2001,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             SCOPE = "";
             r_type = run_type; 
 
-            Current_Log_Update(false, "- Starting Android Driver..." + "\r\n");
+            Current_Log_Update(false, "- Starting Appium Service and Android Driver..." + "\r\n");
             if(sw1.isRunning()){
                 sw1.reset();
             }
@@ -2172,7 +2173,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
         }
 
-        Current_Log_Update(true, "=== Starting Android Driver..." + "\r\n");
+        Current_Log_Update(true, "=== Starting Appium Service and Android Driver..." + "\r\n");
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2561,7 +2562,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             protected String doInBackground() throws Exception   { 
                 String DriverStart = StartAndroidDriver();
                 if(DriverStart.contains("OK")){
-                    Current_Log_Update(GUI, "=== Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");    
+                    Current_Log_Update(GUI, "=== Appium Service and Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");    
                     sw1.reset();      
                 } else{
                     Current_Log_Update(GUI, DriverStart.trim() + "\r\n");
@@ -2747,7 +2748,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }   
     }    
 
-    // <editor-fold defaultstate="collapsed" desc="Driver Actions">    
+    // <editor-fold defaultstate="collapsed" desc="Driver Actions">  
     protected void Test_EX_Update(String NAME, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
@@ -2798,6 +2799,28 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }     
+    protected void Go_Back_Key(String NAME, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        _t++; sw1.start();        
+ 
+        FAIL = false;
+        try {
+            ad.pressKey(new KeyEvent(AndroidKey.BACK));
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + "AndroidKey.BACK" + "\t" + "driver.pressKey" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "AndroidKey.BACK" + "\t" + "driver.pressKey" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }     
+
     protected void HideKeyboard(String NAME, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
@@ -2807,10 +2830,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
         FAIL = false;
         try {
             if(ad.isKeyboardShown()){
+                _p++;
                 ad.hideKeyboard();                
                 EX += _t + "\t" + NAME + "\t" + "Keyboard is Shown"  + "\t" + "hideKeyboard" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             }else{
+                _p++;
                 EX += _t + "\t" + NAME + "\t" + "Keyboard is Not Shown"  + "\t" + " - " + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             }
@@ -3292,10 +3317,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
         try {
             ae = ad.findElement(By.xpath("//*[contains(text(), \"" + VAL + "\")]"));
             t = "Found";
+            _p++;
             EX += _t + "\t" + NAME + "\t" + VAL  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             t = "Not Found";
+            _p++;
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Not Found" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         }
@@ -3327,11 +3354,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             if(EXPECTED){
-                _f++; FAIL = false; err = ex.getMessage().trim();
+                _f++; FAIL = true; err = ex.getMessage().trim();
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "FAIL" + "\t" + err +
-            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";                
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                F += _t + " > " + err + "\r\n";                
             } else {
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text Not Found" + "\t" + "PASS" + "\t" + " - " +
@@ -3436,7 +3463,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Click(String NAME, String BY, String PATH, String JIRA ){
+    protected void Element_By_Path_Action_Click(String NAME, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3474,6 +3501,55 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }
             Actions action = new Actions(ad);
             action.moveToElement(ae).click().perform();
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Element_By_Path_Click(String NAME, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        _t++; sw1.start();        
+ 
+        FAIL = false;
+        try {
+            switch (BY) {
+                case "xpath":
+                    ae = ad.findElement(By.xpath(PATH));
+                    break;
+                case "css":
+                    ae = ad.findElement(By.cssSelector(PATH));
+                    break;
+                case "className":
+                    ae = ad.findElement(By.className(PATH));
+                    break;
+                case "id":
+                    ae = ad.findElement(By.id(PATH));
+                    break;
+                case "tagName":
+                    ae = ad.findElement(By.tagName(PATH));
+                    break;
+                case "name":
+                    ae = ad.findElement(By.name(PATH));
+                    break;
+                 case "linkText":
+                    ae = ad.findElement(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    ae = ad.findElement(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            ae.click();
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -3526,7 +3602,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t.replace("\r\n", " ").replace("\n", " ") + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
-            _f++; FAIL = false; err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -3580,7 +3656,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             _p++; 
         } catch(Exception ex){
-            _f++; FAIL = false; err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -3630,7 +3706,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
-            _f++; FAIL = false; err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -3680,7 +3756,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
-            _f++; FAIL = false; err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -3733,7 +3809,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + " > " + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
-            _f++; FAIL = false; err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -3949,15 +4025,15 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if (t.contains("img-default"))
             {
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "WARN" + "\t" + "No Image" +
-            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _w++;
             } else {
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "PASS" + "\t" + " - " +
-            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _p++;
             }
         } catch(Exception ex){
-            _f++; FAIL = false;  err = ex.getMessage().trim();
+            _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -4192,9 +4268,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
             } else {
                 t = "null";
             }
+            _p++;
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            _p++;
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
@@ -4359,7 +4435,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 _p++;
             } 
         } catch(Exception ex){
-            _f++; FAIL = false; err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -4657,7 +4733,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected FluentWait loadTimeout = null;
     protected AppiumDriverLocalService appiumService = null;
     protected long WaitForElement = 3000; // milisec
-    protected double LoadTimeOut = 15 *1000; // milisec  
+    protected double LoadTimeOut = 15 * 1000; // milisec  
     
     protected int t_calls = 0;
     protected double t_min = 0;
