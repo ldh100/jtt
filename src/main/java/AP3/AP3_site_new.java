@@ -7,6 +7,7 @@ package AP3;
 import A.TWeb;
 import static A.A.*;
 import static AP3.AP3.*;
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import org.json.JSONArray;
@@ -638,10 +639,23 @@ public class AP3_site_new {
                         Thread.sleep(1000);
                     // ============================== ^^^ Menu Assignation
                         
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Station Name'", "xpath", "//input[@aria-label='Station Name']", "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Station Name'", "xpath", "//label[contains(text(), 'Station Name')]", "no_jira"); 
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Station Name", "css", "[aria-label='Station Name']", "New Station " + New_ID, false, "no_jira"); 
                         if (FAIL) { return;}    
+                        
+                     File tmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_brand_image.png");
+                      if(tmp.exists())
+                      {
+                       _t++; TWeb.Element_By_Path_Text_Enter("Upload a file", "xpath", "//div[@id='toc-information']//input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_brand_image.png", false, "no_jira"); 
+                        if (FAIL) { return;}
+                      }
+                      else
+                      {
+                       _t++; 
+                       _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File : Ap3_brand_image  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+       
+                      }  
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Station Location Description Click", "xpath", "//label[contains(text(), 'Location Description')]", "no_jira"); 
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Station Location Description", "css", "[aria-label='Station Location Description']", "Attic " + New_ID, false, "no_jira"); 
@@ -659,10 +673,9 @@ public class AP3_site_new {
 
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select last Cost Centre in the List", L1.get(L1.size() - 1), "no_jira"); 
                         if (FAIL) { return;} 
-                        
-                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Tax Rate Click", "css", "[aria-label='Tax Rate']", "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Tax Rate Click", "css", "[aria-label='Tax Rate']", "no_jira"); 
                         if (FAIL) { return;}
-                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Tax Rate", "css", "[aria-label='Tax Rate']", "12", false, "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Tax Rate", "css", "[aria-label='Tax Rate']", "12", false, "no_jira"); 
                         if (FAIL) { return;}                                
                     break;
                 case "Fee Setup":                   
@@ -1798,11 +1811,25 @@ public class AP3_site_new {
        
         }
         
-         /*                       Verify if Web Order Enabled is supported 
-                                flag = 1 / Web Ordering enabled
-                                flag = 2 /  Web Ordering not enabled                */
+         /*                     Verify if Brand Image  is saved  
+                                flag = 1 / Brand Image is saved
+         */                       
         
-        
+         meta = json.getJSONObject("style");
+         if(flag == 1 && !meta.getString("logo").isEmpty())
+          {
+              if(meta.getString("logo").contains("https://images"))
+              {
+                 _t++;
+                 _p++; EX += _t + "\t" + "Brand Image Saved - expected" + "\t" + "Brand Image Saved" + "\t" + "Brand Image Saved" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+              }
+          }
+          else if(flag == 1 && meta.getString("logo").isEmpty())
+          {
+           _t++;
+           _f++; EX += _t + "\t" + "Brand Image not saved - not expected" + "\t" + "Brand Image not available" + "\t" + "Brand Image available" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          }
+         
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Location Brand API Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
          
     }//End of Location Brand API
