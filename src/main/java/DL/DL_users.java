@@ -39,14 +39,14 @@ public class DL_users {
 //            System.out.println(tbl_userName);
 //            String DL_UserID= "distilr.test2@place.com";
 //            String username= (String) TBL.getModel().getValueAt(i, 0);
-           System.out.println(dUser);
+            System.out.println(dUser);
    
             if(dUser.equals(DL_UserID) ) {
                  DL_login.run();
             } else {
                 _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to", url, "no_jira");             
                 if (FAIL) { return;}
-                Thread.sleep(10000);
+                //Thread.sleep(10000);
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'USERNAME' input", "id", "username", "no_jira"); 
                     if (FAIL) { return;}
                 _t++; TWeb.Element_By_Path_Text_Enter("Enter Valid User Name", "id", "username", dUser, false, "no_jira"); 

@@ -46,7 +46,7 @@ public class AP3_brand {
                 _t++; TWeb.Element_Text("Application Name (index " + i + ")", L1.get(i),  "no_jira");         
                 if (FAIL) { return;}
                 if(t.contains("All")){ T_Index = i; }
-        }
+            }
         _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select 'All'", L1.get(T_Index), "no_jira");
             if (FAIL) { return;} 
  

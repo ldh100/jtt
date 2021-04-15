@@ -43,7 +43,7 @@ public class AP3_bulk_apply {
         //open Local Menu on new tab
         _t++; Thread.sleep((long) sleep); TWeb.Open_Switch_to_2nd_Tab("Navigate to Local Menu", url + "#/menu/sector/"+SectorID+"/company/"+CompanyID+"/brands/"+BrandID, "no_jira");
         if (FAIL) { return;}
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Category: Sides", "xpath", "//div[contains(text(),'Sides')]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Item Set: Soup", "xpath", "//div[contains(text(),'Soup')]", "no_jira");
@@ -240,8 +240,12 @@ public class AP3_bulk_apply {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Edit Modifier Group", "xpath", "(//i[contains(@class,'mdi-pencil')])[7]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(500);
-        String thirdModVisibility = getAttributeOfElementByXpath("((//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[3]//i)[2]", "class");
-        if (thirdModVisibility.contains("mdi-eye-off")) {
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Show Selection", "xpath", "//div[contains(text(),'Show Selection')]", "no_jira");
+        if (FAIL) { return;}
+        String secondModVisibility = getAttributeOfElementByXpath("((//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i)[2]", "class");
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Close Selection", "xpath", "//div[contains(text(),'Close Selection')]", "no_jira");
+        if (FAIL) { return;}
+        if (secondModVisibility.contains("mdi-eye-off")) {
             //API call https://api.compassdigital.org/staging/menu/G2WGRdwMygFp93RRYqawiKJX08vL15UoAokKwmaZcQO1lWXPAWTprNA8wWL0sZRlp8m?nocache=true
             _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/G2WGRdwMygFp93RRYqawiKJX08vL15UoAokKwmaZcQO1lWXPAWTprNA8wWL0sZRlp8m?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
             json = new JSONObject(API_Response_Body);
@@ -265,7 +269,10 @@ public class AP3_bulk_apply {
                     _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 }
             }
-            _t++; TWeb.Element_By_Path_Click("Add Visibility of Third Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[3]//i[contains(@class,'mdi-eye')]", "no_jira");
+            _t++; TWeb.Element_By_Path_Click("Add Visibility of Second Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i[contains(@class,'mdi-eye')]", "no_jira");
+            if (FAIL) { return;}
+            Thread.sleep(500);
+            _t++; TWeb.Element_By_Path_Click("Add Visibility of Second Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i[contains(@class,'mdi-eye')]", "no_jira");
             if (FAIL) { return;}
             Thread.sleep(500);
             _t++; TWeb.Element_By_Path_Click("Click > Save Mod Changes", "xpath", "//div[text()='Save Modifiers Changes']", "no_jira");
@@ -280,7 +287,7 @@ public class AP3_bulk_apply {
                 if (FAIL) { return;}
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Modifier", "xpath", "//span[contains(text(),'Pita Options Modifier')]", "no_jira");
                 if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check Modifier 'Cheese' is visible", "xpath", "(//div[contains(@class,'layout modifier')])[3]//i[contains(@class,'mdi-eye ')]", "no_jira");
+                _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check Modifier 'Extra Beef' is visible", "xpath", "(//div[contains(@class,'layout modifier')])[2]//i[contains(@class,'mdi-eye ')]", "no_jira");
                 if (FAIL) { return;} 
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
                 if (FAIL) { return;}
@@ -312,7 +319,7 @@ public class AP3_bulk_apply {
                     _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 }
             }
-            _t++; TWeb.Element_By_Path_Click("Remove Visibility of Third Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[3]//i[contains(@class,'mdi-eye')]", "no_jira");
+            _t++; TWeb.Element_By_Path_Click("Remove Visibility of Second Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i[contains(@class,'mdi-eye')]", "no_jira");
             if (FAIL) { return;}
             Thread.sleep(500);
             _t++; TWeb.Element_By_Path_Click("Click > Save Mod Changes", "xpath", "//div[text()='Save Modifiers Changes']", "no_jira");
@@ -327,7 +334,7 @@ public class AP3_bulk_apply {
                 if (FAIL) { return;}
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Modifier", "xpath", "//span[contains(text(),'Pita Options Modifier')]", "no_jira");
                 if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check Modifier 'Cheese' is NOT visible", "xpath", "(//div[contains(@class,'layout modifier')])[3]//i[contains(@class,'mdi-eye-off')]", "no_jira");
+                _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check Modifier 'Extra Beef' is NOT visible", "xpath", "(//div[contains(@class,'layout modifier')])[2]//i[contains(@class,'mdi-eye-off')]", "no_jira");
                 if (FAIL) { return;} 
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
                 if (FAIL) { return;}
@@ -393,7 +400,7 @@ public class AP3_bulk_apply {
                 _t++;
                 _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "\"price\" : {\"amount\" : "+FIP+"}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
-            if (!item.isNull("plu")) {
+            if (item.isNull("plu")) {
                 _t++;
                 _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "has PLU" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             } else {
@@ -482,7 +489,7 @@ public class AP3_bulk_apply {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Update "+L1.size()+" Items", "xpath", "//span[contains(text(),'Update "+String.valueOf(L1.size())+" Items')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(500);
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Hide In App", "xpath", "//input[@aria-label='Remove PLU Numbers from selected Items']", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Remove PLU Numbers", "xpath", "//input[@aria-label='Remove PLU Numbers from selected Items']", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", "no_jira");
         if (FAIL) { return;}
@@ -558,7 +565,6 @@ public class AP3_bulk_apply {
                 _t++;
                 _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"disabled\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
-           
             if (item.isNull("plu")) {
                 _t++;
                 _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "has No PLU" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -568,7 +574,7 @@ public class AP3_bulk_apply {
             }
             JSONArray options = new JSONArray();
             options = item.getJSONArray("options");
-            JSONObject option = options.getJSONObject(i);
+            JSONObject option = options.getJSONObject(0);
             JSONArray option_items = new JSONArray();
             option_items = option.getJSONArray("items");
             if (option_items.length() == 3) {
@@ -686,7 +692,7 @@ public class AP3_bulk_apply {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Update "+L1.size()+" Items", "xpath", "//span[contains(text(),'Update "+String.valueOf(L1.size())+" Items')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(500);
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Edit Modifier Group", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Edit Modifier Group", "xpath", "(//i[contains(@class,'v-icon mdi mdi-pencil theme--light')])[3]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Add Modifier", "xpath", "//div[contains(text(),'Add MODIFIER')]", "no_jira");
         if (FAIL) { return;}
@@ -694,7 +700,7 @@ public class AP3_bulk_apply {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Mod from dropdown", "xpath", "(//div[@class='v-list__tile__title'])[1]", "no_jira");
         if (FAIL) { return;}
-        _t++; TWeb.Element_By_Path_Click("Click > Save Mod Changes", "xpath", "//div[text(),'Save Modifiers Changes']", "no_jira");
+        _t++; TWeb.Element_By_Path_Click("Click > Save Mod Changes", "xpath", "//div[contains(text(),'Save Modifiers Changes')]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", "no_jira");
         if (FAIL) { return;}
@@ -745,7 +751,7 @@ public class AP3_bulk_apply {
         String SALTCHARS = "1234567890";
         StringBuilder salt = new StringBuilder();
         Random rnd = new Random();
-        while (salt.length() < 8) { // length of the random string.
+        while (salt.length() < 6) { // length of the random string.
             int index = (int) (rnd.nextFloat() * SALTCHARS.length());
             salt.append(SALTCHARS.charAt(index));
         }

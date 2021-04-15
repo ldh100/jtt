@@ -20,6 +20,8 @@ import com.google.common.base.Stopwatch;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
@@ -1163,7 +1165,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         String Dev  = Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb devices -l", A.A.ADB_HOME, true, true).trim();
         String[] dev = Dev.split("\r\n");
         if (dev.length > 2) {
-            for (int i = 1; i < dev.length; i++) {
+            for (int i = 1; i < dev.length - 1; i++) {
                 String D = dev[i];
                 if(D.contains("model")){
                     String ID = D.substring(0, dev[i].indexOf(" ")).trim();
@@ -1252,7 +1254,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }
 
             loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("app_name")));
-            Thread.sleep(1000);
+            Thread.sleep(500);
             aL0 = ad.findElements(By.id("app_name"));
             int app_count = aL0.size();
             if (app_count > 0) {
@@ -1416,7 +1418,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 RES = UnInstaPackage(appPackage);   // ====================
                 Current_Log_Update(true, RES);
                 
-                String BuildPath = System.getProperty("user.dir") + File.separator + "MobileBuilds" + File.separator + appBuldFile;
+                String BuildPath = A.A.CWD + File.separator + "MobileBuilds" + File.separator + appBuldFile;
                 
                 Current_Log_Update(true, "- Install Build > " + BuildPath + "\r\n"); 
                 RES = InstallBuild(BuildPath); // ==================== 
@@ -1966,7 +1968,6 @@ public class An_GUI extends javax.swing.JInternalFrame {
             return "JOB_STATUS > " + RES;
         }          
         
-        
         if(Update_Build){
             Get_S3_MOB_Credentials();             
         }
@@ -2000,7 +2001,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             SCOPE = "";
             r_type = run_type; 
 
-            Current_Log_Update(false, "- Starting Android Driver..." + "\r\n");
+            Current_Log_Update(false, "- Starting Appium Service and Android Driver..." + "\r\n");
             if(sw1.isRunning()){
                 sw1.reset();
             }
@@ -2172,7 +2173,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
         }
 
-        Current_Log_Update(true, "=== Starting Android Driver..." + "\r\n");
+        Current_Log_Update(true, "=== Starting Appium Service and Android Driver..." + "\r\n");
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2507,15 +2508,15 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(Download_Build(B_PATH).contains("OK")){
             if(Unzip_Build().contains("OK")){
                 UnInstaPackage(appPackage);
-                String BuildPath = System.getProperty("user.dir") + File.separator + "MobileBuilds" + File.separator + appBuldFile;
+                String BuildPath = A.A.CWD + File.separator + "MobileBuilds" + File.separator + appBuldFile;
                 InstallBuild(BuildPath);
                 CheckAppPackage();
             }
         }
-      return "=== InstallBuild_S3: Check Result...." + "\r\n";  
+        return "=== InstallBuild_S3: Check Result...." + "\r\n";  
     }    
     protected String Get_Bolter_User_Site_ID(String ID, String PW){  
-        String S_ID = "ERROR";
+        String Site_ID = "ERROR";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try { 
             String UserAuth = Base64.getEncoder().encodeToString((ID + ":" + PW).getBytes());
@@ -2533,22 +2534,23 @@ public class An_GUI extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             if(json.has("profile")){
-                S_ID = json.getJSONObject("profile").getString("location_group") + "\r\n";  
+                Site_ID = json.getJSONObject("profile").getString("location_group") + "\r\n";  
             }else{
                 if(json.has("error")){
-                    S_ID = "=== Get_Bolter_User_Site_ID > ERROR: " + json.getString("error")+ "\r\n"; 
-                    S_ID += "=== URL: " + BaseAPI + "/user/auth" + "?realm=" + "bolter" + "\r\n";
-                    S_ID += "=== Runner: " + ID + "\r\n";
+                    Site_ID = "=== Get_Bolter_User_Site_ID > ERROR: " + json.getString("error")+ "\r\n"; 
+                    Site_ID += "=== URL: " + BaseAPI + "/user/auth" + "?realm=" + "bolter" + "\r\n";
+                    Site_ID += "=== Runner: " + ID + "\r\n";
                 }
             }
-            return S_ID;  
+            return Site_ID;  
         } catch (IOException | JSONException ex){
             return "=== Get_Bolter_User_Site_ID > ERROR: " + ex.getMessage() + "\r\n";
         }
     }   
     // </editor-fold>
 
-    private void BW1_DoWork(Boolean GUI){ 
+    //<editor-fold defaultstate="collapsed" desc="Appium Service > Driver > Execution">
+    private void BW1_DoWork(Boolean GUI){
         EX = "";
         _t = 0;
         _p = 0;
@@ -2556,81 +2558,154 @@ public class An_GUI extends javax.swing.JInternalFrame {
         _w = 0;
         F = "";
         r_time = "";
-        BW1 = new SwingWorker() {                        
+        BW1 = new SwingWorker() {
             @Override
-            protected String doInBackground() throws Exception   { 
+            protected String doInBackground() throws Exception {
                 String DriverStart = StartAndroidDriver();
                 if(DriverStart.contains("OK")){
-                    Current_Log_Update(GUI, "=== Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");    
-                    sw1.reset();      
+                    Current_Log_Update(GUI, "=== Appium Service and Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
+                    sw1.reset();
                 } else{
                     Current_Log_Update(GUI, DriverStart.trim() + "\r\n");
-                    Summary = "Start Driver - Failed"; 
+                    Summary = "Start Driver - Failed";
                     DD = Duration.between(run_start, Instant.now());
                     LOG_UPDATE(txtLog.getText());   // ========================================================
                     btnRun.setEnabled(true);
                     btnFails.setEnabled(true);
-                }   
+                }
                 
-                New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));  
+                New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
                 if (app.equals("Bolter")) {
-                    An_bolter x = new Android.An_bolter(An_GUI.this);
-                    x.Run();
-                    EX += x.EX;
-                    _t += x._t;
-                    _p += x._p;
-                    _f += x._f;
-                    _w += x._w;
-                    F += x.F;
-                    r_time += x.r_time;
+                    Execute_Bolter();
+//                    An_bolter x = new Android.An_bolter(An_GUI.this);
+//                    x.Run();
+//                    EX += x.EX;
+//                    _t += x._t;
+//                    _p += x._p;
+//                    _f += x._f;
+//                    _w += x._w;
+//                    F += x.F;
+//                    r_time += x.r_time;
                 }else{
-                    An_coreapp x = new An_coreapp(An_GUI.this);// 
-                    x.Run();
-                    EX += x.EX;
-                    _t = x._t;
-                    _p = x._p;
-                    _f = x._f;
-                    _w = x._w;
-                    F = x.F;
-                    r_time = x.r_time;
-                }                 
+                    Execute_Core_App();
+//                    An_coreapp x = new An_coreapp(An_GUI.this);//
+//                    x.Run();
+//                    EX += x.EX;
+//                    _t = x._t;
+//                    _p = x._p;
+//                    _f = x._f;
+//                    _w = x._w;
+//                    F = x.F;
+//                    r_time = x.r_time;
+                }
                 DD = Duration.between(run_start, Instant.now());
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
-                Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n"); 
+                Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
-                EX = "Android " + app + " " + env + ", App v: " + appVersion + ", Device: " + device + " OS v: " + devOS +
-                " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
-                 "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
-                 + EX;
+                EX = "Android " + app + " " + env + ", App v: " + appVersion + ", Device: " + device + " OS v:" + devOS +
+                        " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
+                        "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
+                        + EX;
                 
-                Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n"); 
+                Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n");
                 
                 BW1_Done(GUI);
                 if(_f > 0) {
-                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
+                    return "=== Completed @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)"+ ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" ;
                 }else{
-                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter);
-                } 
-            }  
+                    return "=== Completed @" + LocalDateTime.now().format(Time_12_formatter)+ ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" ;
+                }
+            }
             @Override
-            protected void done() { 
-                try  { 
-                    String statusMsg = (String) get(); 
+            protected void done() {
+                try  {
+                    String statusMsg = (String) get();
                     Current_Log_Update(GUI, statusMsg + "\r\n");
                     BW1 = null;
-                } catch (InterruptedException | ExecutionException ex)  { 
-                    Current_Log_Update(GUI, "- BW1 Done ERROR: " + ex.getMessage() + "\r\n"); 
-                } 
+                } catch (InterruptedException | ExecutionException ex)  {
+                    Current_Log_Update(GUI, "- BW1 Done ERROR: " + ex.getMessage() + "\r\n");
+                }
                 if(ad != null) {
-                    ad.quit(); 
+                    ad.quit();
                 }
                 if(appiumService != null && appiumService.isRunning()){
-                    appiumService.stop();                    
+                    appiumService.stop();
                 }
-            } 
-        }; 
+            }
+        };
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        BW1.execute();  
+        BW1.execute();
+    }
+    private String StartAndroidDriver() {
+        try {
+            DesiredCapabilities  cap = new DesiredCapabilities ();
+            cap.setCapability("platformName", "Android");
+            cap.setCapability("deviceName", device);
+            cap.setCapability("udid", devID);
+            cap.setCapability("platformVersion", devOS);
+            cap.setCapability("clearSystemFiles", true);
+            cap.setCapability("appPackage", appPackage);
+            cap.setCapability("appActivity", appActivity);
+            
+            cap.setCapability("autoGrantPermissions", false); // false- always get prompt
+            cap.setCapability("unicodeKeyboard", false);
+            cap.setCapability("resetKeyboard", true);
+            cap.setCapability("sendKeyStrategy", "oneByOne"); // ‘setValue’“);
+//            cap.setCapability(MobileCapabilityType.FULL_RESET, false);
+//            cap.setCapability(MobileCapabilityType.NO_RESET, true);
+cap.setCapability("automationName", "UiAutomator2");
+
+AppiumServiceBuilder ASB  = new AppiumServiceBuilder();
+if(!A.A.WsOS.toLowerCase().contains("windows")){
+    //asb.usingDriverExecutable(new File(("/path/to/node")));
+    HashMap<String, String> environment = new HashMap();
+    environment.put("ANDROID_HOME", "/Users/" + A.A.UserID + "/Library/Android/sdk"); //PATH”));
+    ASB.withEnvironment(environment);
+    ASB.withAppiumJS(new File(("/usr/local/lib/node_modules/appium/build/lib/main.js")));
+}
+ASB.usingAnyFreePort();
+appiumService = AppiumDriverLocalService.buildService(ASB);
+appiumService.start();
+
+ad = new AndroidDriver(new URL(appiumService.getUrl().toString()), cap);
+ad.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
+
+loadTimeout = new FluentWait(ad).withTimeout(Duration.ofMillis((long) LoadTimeOut))
+        .pollingEvery(Duration.ofMillis(200))
+        .ignoring(NoSuchElementException.class);
+return "=== Android Driver Start > OK " + "\r\n";
+        } catch (Exception ex) {
+            F += "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
+            if(ad != null) {
+                ad.quit();
+            }
+            if(appiumService != null && appiumService.isRunning()){
+                appiumService.stop();
+            }
+            return "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
+        }
+    }
+    private void Execute_Bolter() throws Exception {
+        An_bolter _bolter = new Android.An_bolter(An_GUI.this);
+        _bolter.Run(); // ======================================
+        EX += _bolter.EX;
+        _t += _bolter._t;
+        _p += _bolter._p;
+        _f += _bolter._f;
+        _w += _bolter._w;
+        F += _bolter.F;
+        r_time += _bolter.r_time;
+    }
+    private void Execute_Core_App() throws Exception{
+        An_coreapp _coreapp = new An_coreapp(An_GUI.this);//
+        _coreapp.Run(); // ======================================
+        EX += _coreapp.EX;
+        _t = _coreapp._t;
+        _p = _coreapp._p;
+        _f = _coreapp._f;
+        _w = _coreapp._w;
+        F = _coreapp.F;
+        r_time = _coreapp.r_time;
     }
     private void BW1_Done(boolean GUI){
         Last_EX = EX;
@@ -2648,106 +2723,58 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     t_calls = am0.length;
                     t_min = am0[0] / (double)1000;
                     t_avg = (total / am0.length) / (double)1000;
-                    t_max = am0[am0.length - 1]  / (double)1000; 
+                    t_max = am0[am0.length - 1]  / (double)1000;
                     p_50 = Func.p50(am0) / (double)1000;
                     p_90 = Func.p90(am0) / (double)1000;
-
+                    
                     DecimalFormat df = new DecimalFormat("#.##");
-                    t_rep += "=== Total Calls: " + t_calls + 
-                        ", Response Times (sec) - Min: " + df.format(t_min) +
-                        ", Avg: " + df.format(t_avg) +
-                        ", Max: " + df.format(t_max) +
-                        ", p50: " + df.format(p_50) +
-                        ", p90: " + df.format(p_90);
+                    t_rep += "=== Total Calls: " + t_calls +
+                            ", Response Times (sec) - Min: " + df.format(t_min) +
+                            ", Avg: " + df.format(t_avg) +
+                            ", Max: " + df.format(t_max) +
+                            ", p50: " + df.format(p_50) +
+                            ", p90: " + df.format(p_90);
                 }
                 Current_Log_Update(GUI, t_rep + "\r\n");
             }
         } catch(Exception ex){
             Current_Log_Update(GUI, "=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
-        }  
-
+        }
+        
         Current_Log_Update(GUI, "=== " + Summary + "\r\n"); // Summary shown in EX top
         Current_Log_Update(GUI, "=== Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
-        Current_Log_Update(GUI, "=== Android_" + app + "_" + env + ", App v: " + appVersion + ", Device: " + device + " OS v: " + devOS + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
-
+        Current_Log_Update(GUI, "=== Android_" + app + "_" + env + ", App v: " + appVersion + ", Device: " + device + " OS v: " + devOS + "\r\n");
+        
         if(GUI){
             Log = txtLog.getText();
         }
         LOG_UPDATE(Log); // ========================================================
-
+        
         if(_Slack){
-            Report(false); 
-            String MSG = "Android_" + app + "_" + env + " Automation report - " + Report_Date +  
-            "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
-            "Device: " + device + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
-            "Scope: " + SCOPE + "\r\n" +
-            "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
-
+            Report(false);
+            String MSG = "Android_" + app + "_" + env + " Automation report - " + Report_Date +
+                    "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
+                    "Device: " + device + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +
+                    "Scope: " + SCOPE + "\r\n" +
+                    "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
+            
             Current_Log_Update(true, Func.Send_File_to_Slack(Report_File, "Android_automation", MSG + "\r\n"));
             File f = new File(Report_File);
-            if(f.exists() && !f.isDirectory()) { 
+            if(f.exists() && !f.isDirectory()) {
                 f.delete();
             }
         }
-        btnRun.setEnabled(true);               
+        btnRun.setEnabled(true);
         if(!"".equals(F.trim())){
             btnFails.setEnabled(true);
         } else{
             btnFails.setEnabled(false);
         }
-        btnExel.setEnabled(true); 
+        btnExel.setEnabled(true);
     }
-    protected String StartAndroidDriver() {
-        try {
-            DesiredCapabilities  cap = new DesiredCapabilities ();
-            cap.setCapability("platformName", "Android");
-            cap.setCapability("deviceName", device);
-            cap.setCapability("udid", devID); 
-            cap.setCapability("platformVersion", devOS);
-            cap.setCapability("clearSystemFiles", true);
-            cap.setCapability("appPackage", appPackage);
-            cap.setCapability("appActivity", appActivity);
-
-            cap.setCapability("autoGrantPermissions", false); // false- always get prompt
-            cap.setCapability("unicodeKeyboard", false);
-            cap.setCapability("resetKeyboard", true);
-            cap.setCapability("sendKeyStrategy", "oneByOne"); // ‘setValue’“);
-//            cap.setCapability(MobileCapabilityType.FULL_RESET, false);
-//            cap.setCapability(MobileCapabilityType.NO_RESET, true);
-            cap.setCapability("automationName", "UiAutomator2");
-
-            AppiumServiceBuilder ASB  = new AppiumServiceBuilder();
-            if(!A.A.WsOS.toLowerCase().contains("windows")){
-                //asb.usingDriverExecutable(new File(("/path/to/node")));
-                HashMap<String, String> environment = new HashMap();
-                environment.put("ANDROID_HOME", "/Users/" + A.A.UserID + "/Library/Android/sdk"); //PATH”));
-                ASB.withEnvironment(environment);
-                ASB.withAppiumJS(new File(("/usr/local/lib/node_modules/appium/build/lib/main.js")));
-            }
-            ASB.usingAnyFreePort();
-            appiumService = AppiumDriverLocalService.buildService(ASB);
-            appiumService.start();
-            
-            ad = new AndroidDriver(new URL(appiumService.getUrl().toString()), cap);
-            ad.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
-                      
-            loadTimeout = new FluentWait(ad).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
-                    .pollingEvery(Duration.ofMillis(200))  			
-                    .ignoring(NoSuchElementException.class); 
-            return "=== Android Driver Start > OK " + "\r\n";
-        } catch (Exception ex) {
-            F += "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
-            if(ad != null) {
-                ad.quit(); 
-            }
-            if(appiumService != null && appiumService.isRunning()){
-                appiumService.stop();                    
-            }
-            return "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
-        }   
-    }    
-
-    // <editor-fold defaultstate="collapsed" desc="Driver Actions">    
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Driver Actions">  
     protected void Test_EX_Update(String NAME, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
@@ -2798,6 +2825,28 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }     
+    protected void Go_Back_Key(String NAME, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        _t++; sw1.start();        
+ 
+        FAIL = false;
+        try {
+            ad.pressKey(new KeyEvent(AndroidKey.BACK));
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + "AndroidKey.BACK" + "\t" + "driver.pressKey" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "AndroidKey.BACK" + "\t" + "driver.pressKey" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }     
+
     protected void HideKeyboard(String NAME, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
@@ -3292,10 +3341,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
         try {
             ae = ad.findElement(By.xpath("//*[contains(text(), \"" + VAL + "\")]"));
             t = "Found";
+            _p++;
             EX += _t + "\t" + NAME + "\t" + VAL  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             t = "Not Found";
+            _p++;
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Not Found" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         }
@@ -3327,11 +3378,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             if(EXPECTED){
-                _f++; FAIL = false; err = ex.getMessage().trim();
+                _f++; FAIL = true; err = ex.getMessage().trim();
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "FAIL" + "\t" + err +
-            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";                
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                F += _t + " > " + err + "\r\n";                
             } else {
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text Not Found" + "\t" + "PASS" + "\t" + " - " +
@@ -3436,7 +3487,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Click(String NAME, String BY, String PATH, String JIRA ){
+    protected void Element_By_Path_Action_Click(String NAME, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3474,6 +3525,55 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }
             Actions action = new Actions(ad);
             action.moveToElement(ae).click().perform();
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    protected void Element_By_Path_Click(String NAME, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        _t++; sw1.start();        
+ 
+        FAIL = false;
+        try {
+            switch (BY) {
+                case "xpath":
+                    ae = ad.findElement(By.xpath(PATH));
+                    break;
+                case "css":
+                    ae = ad.findElement(By.cssSelector(PATH));
+                    break;
+                case "className":
+                    ae = ad.findElement(By.className(PATH));
+                    break;
+                case "id":
+                    ae = ad.findElement(By.id(PATH));
+                    break;
+                case "tagName":
+                    ae = ad.findElement(By.tagName(PATH));
+                    break;
+                case "name":
+                    ae = ad.findElement(By.name(PATH));
+                    break;
+                 case "linkText":
+                    ae = ad.findElement(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    ae = ad.findElement(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            ae.click();
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -3526,7 +3626,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t.replace("\r\n", " ").replace("\n", " ") + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
-            _f++; FAIL = false; err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -3580,7 +3680,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             _p++; 
         } catch(Exception ex){
-            _f++; FAIL = false; err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -3630,7 +3730,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
-            _f++; FAIL = false; err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -3680,7 +3780,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
-            _f++; FAIL = false; err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -3733,7 +3833,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + " > " + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
-            _f++; FAIL = false; err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -3949,15 +4049,15 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if (t.contains("img-default"))
             {
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "WARN" + "\t" + "No Image" +
-            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _w++;
             } else {
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "PASS" + "\t" + " - " +
-            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _p++;
             }
         } catch(Exception ex){
-            _f++; FAIL = false;  err = ex.getMessage().trim();
+            _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -4192,9 +4292,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
             } else {
                 t = "null";
             }
+            _p++;
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            _p++;
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
@@ -4359,7 +4459,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 _p++;
             } 
         } catch(Exception ex){
-            _f++; FAIL = false; err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -4657,7 +4757,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected FluentWait loadTimeout = null;
     protected AppiumDriverLocalService appiumService = null;
     protected long WaitForElement = 3000; // milisec
-    protected double LoadTimeOut = 15 *1000; // milisec  
+    protected double LoadTimeOut = 15 * 1000; // milisec  
     
     protected int t_calls = 0;
     protected double t_min = 0;
