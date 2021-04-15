@@ -1,0 +1,304 @@
+{
+   "results":[
+      {
+         "username":"distilr.test2@place.com",
+         "time_period":"L12",
+         "metric":"Total Spend",
+         "value":18401473.2349,
+         "source":"supplychain"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "time_period":"L12",
+         "metric":"Total Spend",
+         "value":18401305.5449,
+         "source":"frontend"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "time_period":"L12",
+         "metric":"Contracted Spend",
+         "value":2261717.712,
+         "source":"supplychain"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "time_period":"L12",
+         "metric":"Contracted Spend",
+         "value":2228201.8416,
+         "source":"frontend"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "time_period":"L12",
+         "metric":"Program Earned Revenue",
+         "value":192595.95,
+         "source":"supplychain"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "time_period":"L12",
+         "metric":"Program Earned Revenue",
+         "value":188758.12,
+         "source":"frontend"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "time_period":"L12",
+         "metric":"Member Earned Revenue",
+         "value":96381.92,
+         "source":"supplychain"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "time_period":"L12",
+         "metric":"Member Earned Revenue",
+         "value":94475.97,
+         "source":"frontend"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "time_period":"L12",
+         "metric":"Customer Earned Revenue",
+         "value":96395.97,
+         "source":"supplychain"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "time_period":"L12",
+         "metric":"Customer Earned Revenue",
+         "value":94475.97,
+         "source":"frontend"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "location_filters":{
+            "customername":"Forest View Rehab & Nursing Center - HCS"
+         },
+         "time_period":"L12",
+         "metric":"Total Spend",
+         "value":56857.2,
+         "source":"supplychain"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "location_filters":{
+            "customername":"Forest View Rehab & Nursing Center - HCS"
+         },
+         "time_period":"L12",
+         "metric":"Total Spend",
+         "value":56857.2,
+         "source":"frontend"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "location_filters":{
+            "customername":"Forest View Rehab & Nursing Center - HCS"
+         },
+         "time_period":"L12",
+         "metric":"Contracted Spend",
+         "value":4648.52,
+         "source":"supplychain"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "location_filters":{
+            "customername":"Forest View Rehab & Nursing Center - HCS"
+         },
+         "time_period":"L12",
+         "metric":"Contracted Spend",
+         "value":4648.52,
+         "source":"frontend"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "location_filters":{
+            "customername":"Forest View Rehab & Nursing Center - HCS"
+         },
+         "time_period":"L12",
+         "metric":"Program Earned Revenue",
+         "value":456.84,
+         "source":"supplychain"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "location_filters":{
+            "customername":"Forest View Rehab & Nursing Center - HCS"
+         },
+         "time_period":"L12",
+         "metric":"Program Earned Revenue",
+         "value":456.84,
+         "source":"frontend"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "location_filters":{
+            "customername":"Forest View Rehab & Nursing Center - HCS"
+         },
+         "time_period":"L12",
+         "metric":"Member Earned Revenue",
+         "value":228.88,
+         "source":"supplychain"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "location_filters":{
+            "customername":"Forest View Rehab & Nursing Center - HCS"
+         },
+         "time_period":"L12",
+         "metric":"Member Earned Revenue",
+         "value":228.88,
+         "source":"frontend"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "location_filters":{
+            "customername":"Forest View Rehab & Nursing Center - HCS"
+         },
+         "time_period":"L12",
+         "metric":"Customer Earned Revenue",
+         "value":228.88,
+         "source":"supplychain"
+      },
+      {
+         "username":"distilr.test2@place.com",
+         "location_filters":{
+            "customername":"Forest View Rehab & Nursing Center - HCS"
+         },
+         "time_period":"L12",
+         "metric":"Customer Earned Revenue",
+         "value":228.88,
+         "source":"frontend"
+      },
+      {
+         "username":"distilr.test1@place.com",
+         "location_filters":{
+            "division":"HCA Healthcare"
+         },
+         "item_filters":{
+            "category":"Beverages"
+         },
+         "time_period":"L12",
+         "metric":"Total Spend",
+         "value":2943010.5835,
+         "source":"supplychain"
+      },
+      {
+         "username":"distilr.test1@place.com",
+         "location_filters":{
+            "division":"HCA Healthcare"
+         },
+         "item_filters":{
+            "category":"Beverages"
+         },
+         "time_period":"L12",
+         "metric":"Total Spend",
+         "value":2942430.2335,
+         "source":"frontend"
+      },
+      {
+         "username":"distilr.test1@place.com",
+         "location_filters":{
+            "division":"HCA Healthcare"
+         },
+         "item_filters":{
+            "category":"Beverages"
+         },
+         "time_period":"L12",
+         "metric":"Contracted Spend",
+         "value":2472344.3515,
+         "source":"supplychain"
+      },
+      {
+         "username":"distilr.test1@place.com",
+         "location_filters":{
+            "division":"HCA Healthcare"
+         },
+         "item_filters":{
+            "category":"Beverages"
+         },
+         "time_period":"L12",
+         "metric":"Contracted Spend",
+         "value":2470300.3735,
+         "source":"frontend"
+      },
+      {
+         "username":"distilr.test1@place.com",
+         "location_filters":{
+            "division":"HCA Healthcare"
+         },
+         "item_filters":{
+            "category":"Beverages"
+         },
+         "time_period":"L12",
+         "metric":"Program Earned Revenue",
+         "value":312190.98,
+         "source":"supplychain"
+      },
+      {
+         "username":"distilr.test1@place.com",
+         "location_filters":{
+            "division":"HCA Healthcare"
+         },
+         "item_filters":{
+            "category":"Beverages"
+         },
+         "time_period":"L12",
+         "metric":"Program Earned Revenue",
+         "value":312190.98,
+         "source":"frontend"
+      },
+      {
+         "username":"distilr.test1@place.com",
+         "location_filters":{
+            "division":"HCA Healthcare"
+         },
+         "item_filters":{
+            "category":"Beverages"
+         },
+         "time_period":"L12",
+         "metric":"Member Earned Revenue",
+         "value":312190.98,
+         "source":"supplychain"
+      },
+      {
+         "username":"distilr.test1@place.com",
+         "location_filters":{
+            "division":"HCA Healthcare"
+         },
+         "item_filters":{
+            "category":"Beverages"
+         },
+         "time_period":"L12",
+         "metric":"Member Earned Revenue",
+         "value":312190.98,
+         "source":"frontend"
+      },
+      {
+         "username":"distilr.test1@place.com",
+         "location_filters":{
+            "division":"HCA Healthcare"
+         },
+         "item_filters":{
+            "category":"Beverages"
+         },
+         "time_period":"L12",
+         "metric":"Customer Earned Revenue",
+         "value":312190.98,
+         "source":"supplychain"
+      },
+      {
+         "username":"distilr.test1@place.com",
+         "location_filters":{
+            "division":"HCA Healthcare"
+         },
+         "item_filters":{
+            "category":"Beverages"
+         },
+         "time_period":"L12",
+         "metric":"Customer Earned Revenue",
+         "value":312190.98,
+         "source":"frontend"
+      }
+   ]
+}
