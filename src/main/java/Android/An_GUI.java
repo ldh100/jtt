@@ -1418,7 +1418,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 RES = UnInstaPackage(appPackage);   // ====================
                 Current_Log_Update(true, RES);
                 
-                String BuildPath = System.getProperty("user.dir") + File.separator + "MobileBuilds" + File.separator + appBuldFile;
+                String BuildPath = A.A.CWD + File.separator + "MobileBuilds" + File.separator + appBuldFile;
                 
                 Current_Log_Update(true, "- Install Build > " + BuildPath + "\r\n"); 
                 RES = InstallBuild(BuildPath); // ==================== 
@@ -2508,15 +2508,15 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(Download_Build(B_PATH).contains("OK")){
             if(Unzip_Build().contains("OK")){
                 UnInstaPackage(appPackage);
-                String BuildPath = System.getProperty("user.dir") + File.separator + "MobileBuilds" + File.separator + appBuldFile;
+                String BuildPath = A.A.CWD + File.separator + "MobileBuilds" + File.separator + appBuldFile;
                 InstallBuild(BuildPath);
                 CheckAppPackage();
             }
         }
-      return "=== InstallBuild_S3: Check Result...." + "\r\n";  
+        return "=== InstallBuild_S3: Check Result...." + "\r\n";  
     }    
     protected String Get_Bolter_User_Site_ID(String ID, String PW){  
-        String S_ID = "ERROR";
+        String Site_ID = "ERROR";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try { 
             String UserAuth = Base64.getEncoder().encodeToString((ID + ":" + PW).getBytes());
@@ -2534,22 +2534,23 @@ public class An_GUI extends javax.swing.JInternalFrame {
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             if(json.has("profile")){
-                S_ID = json.getJSONObject("profile").getString("location_group") + "\r\n";  
+                Site_ID = json.getJSONObject("profile").getString("location_group") + "\r\n";  
             }else{
                 if(json.has("error")){
-                    S_ID = "=== Get_Bolter_User_Site_ID > ERROR: " + json.getString("error")+ "\r\n"; 
-                    S_ID += "=== URL: " + BaseAPI + "/user/auth" + "?realm=" + "bolter" + "\r\n";
-                    S_ID += "=== Runner: " + ID + "\r\n";
+                    Site_ID = "=== Get_Bolter_User_Site_ID > ERROR: " + json.getString("error")+ "\r\n"; 
+                    Site_ID += "=== URL: " + BaseAPI + "/user/auth" + "?realm=" + "bolter" + "\r\n";
+                    Site_ID += "=== Runner: " + ID + "\r\n";
                 }
             }
-            return S_ID;  
+            return Site_ID;  
         } catch (IOException | JSONException ex){
             return "=== Get_Bolter_User_Site_ID > ERROR: " + ex.getMessage() + "\r\n";
         }
     }   
     // </editor-fold>
 
-    private void BW1_DoWork(Boolean GUI){ 
+    //<editor-fold defaultstate="collapsed" desc="Appium Service > Driver > Execution">
+    private void BW1_DoWork(Boolean GUI){
         EX = "";
         _t = 0;
         _p = 0;
@@ -2557,81 +2558,154 @@ public class An_GUI extends javax.swing.JInternalFrame {
         _w = 0;
         F = "";
         r_time = "";
-        BW1 = new SwingWorker() {                        
+        BW1 = new SwingWorker() {
             @Override
-            protected String doInBackground() throws Exception   { 
+            protected String doInBackground() throws Exception {
                 String DriverStart = StartAndroidDriver();
                 if(DriverStart.contains("OK")){
-                    Current_Log_Update(GUI, "=== Appium Service and Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");    
-                    sw1.reset();      
+                    Current_Log_Update(GUI, "=== Appium Service and Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
+                    sw1.reset();
                 } else{
                     Current_Log_Update(GUI, DriverStart.trim() + "\r\n");
-                    Summary = "Start Driver - Failed"; 
+                    Summary = "Start Driver - Failed";
                     DD = Duration.between(run_start, Instant.now());
                     LOG_UPDATE(txtLog.getText());   // ========================================================
                     btnRun.setEnabled(true);
                     btnFails.setEnabled(true);
-                }   
+                }
                 
-                New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));  
+                New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
                 if (app.equals("Bolter")) {
-                    An_bolter x = new Android.An_bolter(An_GUI.this);
-                    x.Run();
-                    EX += x.EX;
-                    _t += x._t;
-                    _p += x._p;
-                    _f += x._f;
-                    _w += x._w;
-                    F += x.F;
-                    r_time += x.r_time;
+                    Execute_Bolter();
+//                    An_bolter x = new Android.An_bolter(An_GUI.this);
+//                    x.Run();
+//                    EX += x.EX;
+//                    _t += x._t;
+//                    _p += x._p;
+//                    _f += x._f;
+//                    _w += x._w;
+//                    F += x.F;
+//                    r_time += x.r_time;
                 }else{
-                    An_coreapp x = new An_coreapp(An_GUI.this);// 
-                    x.Run();
-                    EX += x.EX;
-                    _t = x._t;
-                    _p = x._p;
-                    _f = x._f;
-                    _w = x._w;
-                    F = x.F;
-                    r_time = x.r_time;
-                }                 
+                    Execute_Core_App();
+//                    An_coreapp x = new An_coreapp(An_GUI.this);//
+//                    x.Run();
+//                    EX += x.EX;
+//                    _t = x._t;
+//                    _p = x._p;
+//                    _f = x._f;
+//                    _w = x._w;
+//                    F = x.F;
+//                    r_time = x.r_time;
+                }
                 DD = Duration.between(run_start, Instant.now());
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
-                Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n"); 
+                Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
-                EX = "Android " + app + " " + env + ", App v: " + appVersion + ", Device: " + device + " OS v: " + devOS +
-                " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
-                 "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
-                 + EX;
+                EX = "Android " + app + " " + env + ", App v: " + appVersion + ", Device: " + device + " OS v:" + devOS +
+                        " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
+                        "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
+                        + EX;
                 
-                Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n"); 
+                Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n");
                 
                 BW1_Done(GUI);
                 if(_f > 0) {
-                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
+                    return "=== Completed @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)"+ ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" ;
                 }else{
-                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter);
-                } 
-            }  
+                    return "=== Completed @" + LocalDateTime.now().format(Time_12_formatter)+ ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" ;
+                }
+            }
             @Override
-            protected void done() { 
-                try  { 
-                    String statusMsg = (String) get(); 
+            protected void done() {
+                try  {
+                    String statusMsg = (String) get();
                     Current_Log_Update(GUI, statusMsg + "\r\n");
                     BW1 = null;
-                } catch (InterruptedException | ExecutionException ex)  { 
-                    Current_Log_Update(GUI, "- BW1 Done ERROR: " + ex.getMessage() + "\r\n"); 
-                } 
+                } catch (InterruptedException | ExecutionException ex)  {
+                    Current_Log_Update(GUI, "- BW1 Done ERROR: " + ex.getMessage() + "\r\n");
+                }
                 if(ad != null) {
-                    ad.quit(); 
+                    ad.quit();
                 }
                 if(appiumService != null && appiumService.isRunning()){
-                    appiumService.stop();                    
+                    appiumService.stop();
                 }
-            } 
-        }; 
+            }
+        };
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        BW1.execute();  
+        BW1.execute();
+    }
+    private String StartAndroidDriver() {
+        try {
+            DesiredCapabilities  cap = new DesiredCapabilities ();
+            cap.setCapability("platformName", "Android");
+            cap.setCapability("deviceName", device);
+            cap.setCapability("udid", devID);
+            cap.setCapability("platformVersion", devOS);
+            cap.setCapability("clearSystemFiles", true);
+            cap.setCapability("appPackage", appPackage);
+            cap.setCapability("appActivity", appActivity);
+            
+            cap.setCapability("autoGrantPermissions", false); // false- always get prompt
+            cap.setCapability("unicodeKeyboard", false);
+            cap.setCapability("resetKeyboard", true);
+            cap.setCapability("sendKeyStrategy", "oneByOne"); // ‘setValue’“);
+//            cap.setCapability(MobileCapabilityType.FULL_RESET, false);
+//            cap.setCapability(MobileCapabilityType.NO_RESET, true);
+cap.setCapability("automationName", "UiAutomator2");
+
+AppiumServiceBuilder ASB  = new AppiumServiceBuilder();
+if(!A.A.WsOS.toLowerCase().contains("windows")){
+    //asb.usingDriverExecutable(new File(("/path/to/node")));
+    HashMap<String, String> environment = new HashMap();
+    environment.put("ANDROID_HOME", "/Users/" + A.A.UserID + "/Library/Android/sdk"); //PATH”));
+    ASB.withEnvironment(environment);
+    ASB.withAppiumJS(new File(("/usr/local/lib/node_modules/appium/build/lib/main.js")));
+}
+ASB.usingAnyFreePort();
+appiumService = AppiumDriverLocalService.buildService(ASB);
+appiumService.start();
+
+ad = new AndroidDriver(new URL(appiumService.getUrl().toString()), cap);
+ad.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
+
+loadTimeout = new FluentWait(ad).withTimeout(Duration.ofMillis((long) LoadTimeOut))
+        .pollingEvery(Duration.ofMillis(200))
+        .ignoring(NoSuchElementException.class);
+return "=== Android Driver Start > OK " + "\r\n";
+        } catch (Exception ex) {
+            F += "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
+            if(ad != null) {
+                ad.quit();
+            }
+            if(appiumService != null && appiumService.isRunning()){
+                appiumService.stop();
+            }
+            return "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
+        }
+    }
+    private void Execute_Bolter() throws Exception {
+        An_bolter _bolter = new Android.An_bolter(An_GUI.this);
+        _bolter.Run(); // ======================================
+        EX += _bolter.EX;
+        _t += _bolter._t;
+        _p += _bolter._p;
+        _f += _bolter._f;
+        _w += _bolter._w;
+        F += _bolter.F;
+        r_time += _bolter.r_time;
+    }
+    private void Execute_Core_App() throws Exception{
+        An_coreapp _coreapp = new An_coreapp(An_GUI.this);//
+        _coreapp.Run(); // ======================================
+        EX += _coreapp.EX;
+        _t = _coreapp._t;
+        _p = _coreapp._p;
+        _f = _coreapp._f;
+        _w = _coreapp._w;
+        F = _coreapp.F;
+        r_time = _coreapp.r_time;
     }
     private void BW1_Done(boolean GUI){
         Last_EX = EX;
@@ -2649,105 +2723,57 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     t_calls = am0.length;
                     t_min = am0[0] / (double)1000;
                     t_avg = (total / am0.length) / (double)1000;
-                    t_max = am0[am0.length - 1]  / (double)1000; 
+                    t_max = am0[am0.length - 1]  / (double)1000;
                     p_50 = Func.p50(am0) / (double)1000;
                     p_90 = Func.p90(am0) / (double)1000;
-
+                    
                     DecimalFormat df = new DecimalFormat("#.##");
-                    t_rep += "=== Total Calls: " + t_calls + 
-                        ", Response Times (sec) - Min: " + df.format(t_min) +
-                        ", Avg: " + df.format(t_avg) +
-                        ", Max: " + df.format(t_max) +
-                        ", p50: " + df.format(p_50) +
-                        ", p90: " + df.format(p_90);
+                    t_rep += "=== Total Calls: " + t_calls +
+                            ", Response Times (sec) - Min: " + df.format(t_min) +
+                            ", Avg: " + df.format(t_avg) +
+                            ", Max: " + df.format(t_max) +
+                            ", p50: " + df.format(p_50) +
+                            ", p90: " + df.format(p_90);
                 }
                 Current_Log_Update(GUI, t_rep + "\r\n");
             }
         } catch(Exception ex){
             Current_Log_Update(GUI, "=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
-        }  
-
+        }
+        
         Current_Log_Update(GUI, "=== " + Summary + "\r\n"); // Summary shown in EX top
         Current_Log_Update(GUI, "=== Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
-        Current_Log_Update(GUI, "=== Android_" + app + "_" + env + ", App v: " + appVersion + ", Device: " + device + " OS v: " + devOS + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
-
+        Current_Log_Update(GUI, "=== Android_" + app + "_" + env + ", App v: " + appVersion + ", Device: " + device + " OS v: " + devOS + "\r\n");
+        
         if(GUI){
             Log = txtLog.getText();
         }
         LOG_UPDATE(Log); // ========================================================
-
+        
         if(_Slack){
-            Report(false); 
-            String MSG = "Android_" + app + "_" + env + " Automation report - " + Report_Date +  
-            "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
-            "Device: " + device + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
-            "Scope: " + SCOPE + "\r\n" +
-            "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
-
+            Report(false);
+            String MSG = "Android_" + app + "_" + env + " Automation report - " + Report_Date +
+                    "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
+                    "Device: " + device + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +
+                    "Scope: " + SCOPE + "\r\n" +
+                    "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
+            
             Current_Log_Update(true, Func.Send_File_to_Slack(Report_File, "Android_automation", MSG + "\r\n"));
             File f = new File(Report_File);
-            if(f.exists() && !f.isDirectory()) { 
+            if(f.exists() && !f.isDirectory()) {
                 f.delete();
             }
         }
-        btnRun.setEnabled(true);               
+        btnRun.setEnabled(true);
         if(!"".equals(F.trim())){
             btnFails.setEnabled(true);
         } else{
             btnFails.setEnabled(false);
         }
-        btnExel.setEnabled(true); 
+        btnExel.setEnabled(true);
     }
-    protected String StartAndroidDriver() {
-        try {
-            DesiredCapabilities  cap = new DesiredCapabilities ();
-            cap.setCapability("platformName", "Android");
-            cap.setCapability("deviceName", device);
-            cap.setCapability("udid", devID); 
-            cap.setCapability("platformVersion", devOS);
-            cap.setCapability("clearSystemFiles", true);
-            cap.setCapability("appPackage", appPackage);
-            cap.setCapability("appActivity", appActivity);
-
-            cap.setCapability("autoGrantPermissions", false); // false- always get prompt
-            cap.setCapability("unicodeKeyboard", false);
-            cap.setCapability("resetKeyboard", true);
-            cap.setCapability("sendKeyStrategy", "oneByOne"); // ‘setValue’“);
-//            cap.setCapability(MobileCapabilityType.FULL_RESET, false);
-//            cap.setCapability(MobileCapabilityType.NO_RESET, true);
-            cap.setCapability("automationName", "UiAutomator2");
-
-            AppiumServiceBuilder ASB  = new AppiumServiceBuilder();
-            if(!A.A.WsOS.toLowerCase().contains("windows")){
-                //asb.usingDriverExecutable(new File(("/path/to/node")));
-                HashMap<String, String> environment = new HashMap();
-                environment.put("ANDROID_HOME", "/Users/" + A.A.UserID + "/Library/Android/sdk"); //PATH”));
-                ASB.withEnvironment(environment);
-                ASB.withAppiumJS(new File(("/usr/local/lib/node_modules/appium/build/lib/main.js")));
-            }
-            ASB.usingAnyFreePort();
-            appiumService = AppiumDriverLocalService.buildService(ASB);
-            appiumService.start();
-            
-            ad = new AndroidDriver(new URL(appiumService.getUrl().toString()), cap);
-            ad.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
-                      
-            loadTimeout = new FluentWait(ad).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
-                    .pollingEvery(Duration.ofMillis(200))  			
-                    .ignoring(NoSuchElementException.class); 
-            return "=== Android Driver Start > OK " + "\r\n";
-        } catch (Exception ex) {
-            F += "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
-            if(ad != null) {
-                ad.quit(); 
-            }
-            if(appiumService != null && appiumService.isRunning()){
-                appiumService.stop();                    
-            }
-            return "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
-        }   
-    }    
-
+    //</editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Driver Actions">  
     protected void Test_EX_Update(String NAME, String JIRA ){
         if(sw1.isRunning()){
