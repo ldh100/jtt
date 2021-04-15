@@ -643,6 +643,19 @@ public class AP3_site_new {
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Station Name", "css", "[aria-label='Station Name']", "New Station " + New_ID, false, "no_jira"); 
                         if (FAIL) { return;}    
+                        
+                     File tmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_brand_image.png");
+                      if(tmp.exists())
+                      {
+                       _t++; TWeb.Element_By_Path_Text_Enter("Upload a file", "xpath", "//div[@id='toc-information']//input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_brand_image.png", false, "no_jira"); 
+                        if (FAIL) { return;}
+                      }
+                      else
+                      {
+                       _t++; 
+                       _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File : Ap3_brand_image  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+       
+                      }  
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Station Location Description Click", "xpath", "//label[contains(text(), 'Location Description')]", "no_jira"); 
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Station Location Description", "css", "[aria-label='Station Location Description']", "Attic " + New_ID, false, "no_jira"); 
@@ -660,13 +673,9 @@ public class AP3_site_new {
 
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select last Cost Centre in the List", L1.get(L1.size() - 1), "no_jira"); 
                         if (FAIL) { return;} 
-                        
-                    _t++; TWeb.Element_By_Path_Text_Enter("Upload a file", "xpath", "//div[@id='toc-information']//input[@type='file']", System.getProperty("user.dir")+File.separator +"brand_image.png", false, "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Tax Rate Click", "css", "[aria-label='Tax Rate']", "no_jira"); 
                         if (FAIL) { return;}
-                        
-                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Tax Rate Click", "css", "[aria-label='Tax Rate']", "no_jira"); 
-                        if (FAIL) { return;}
-                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Tax Rate", "css", "[aria-label='Tax Rate']", "12", false, "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Tax Rate", "css", "[aria-label='Tax Rate']", "12", false, "no_jira"); 
                         if (FAIL) { return;}                                
                     break;
                 case "Fee Setup":                   
