@@ -266,6 +266,7 @@ public class A extends javax.swing.JFrame {
         try{
             Files.createDirectories(Paths.get(CWD + File.separator + "ScreenShots"));           
             Files.createDirectories(Paths.get(CWD + File.separator + "MobileBuilds"));  
+            Files.createDirectories(Paths.get(CWD + File.separator + "FilesToUpload"));  
         } catch(IOException ex){
             Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Create Directories ERROR: " + ex.getMessage(), ex);
         }
