@@ -211,10 +211,14 @@ public class FW_restaurants {
       if (FAIL) { return;}
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on upload file", "xpath", "//div[@class='upload-file partner-info-btn']/button", "no_jira"); 
       if (FAIL) { return;}   	
-         Thread.sleep(4000);
+         Thread.sleep(4000);   
+    // A.A.CWD + File.separator + "FilesToUpload"; 
+    //Check for Target file exists
+    // if Yes
     _t++; TWeb.Element_By_Path_Text_Enter("Upload a file", "xpath", "//input[@type='file']", System.getProperty("user.dir")+File.separator +"Login screen.png", false, "no_jira"); 
-      if (FAIL) { return;}
+        if (FAIL) { return;}
       Thread.sleep(4000);
+    //  
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Done button", "xpath", "//button//span[contains(.,'Done')]", "no_jira"); 
       if (FAIL) { return;}  
       Thread.sleep(5000);
