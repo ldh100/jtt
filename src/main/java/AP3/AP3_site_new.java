@@ -647,7 +647,7 @@ public class AP3_site_new {
                      File tmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_brand_image.png");
                       if(tmp.exists())
                       {
-                       _t++; TWeb.Element_By_Path_Text_Enter("Upload a file", "xpath", "//div[@id='toc-information']//input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_brand_image.png", false, "no_jira"); 
+                       _t++; TWeb.Element_By_Path_Text_Enter("Upload Brand Image", "xpath", "//div[@id='toc-information']//input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_brand_image.png", false, "no_jira"); 
                         if (FAIL) { return;}
                       }
                       else
@@ -875,7 +875,17 @@ public class AP3_site_new {
                                         if (FAIL) { return;}                        
                                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter KDS Admin Passcode", "css", "[aria-label='KDS Admin Passcode']", "1459", false, "no_jira"); 
                                         if (FAIL) { return;}
-
+                                      File kdstmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_kds_image.png");
+                                      if(kdstmp.exists())
+                                      {
+                                       _t++; TWeb.Element_By_Path_Text_Enter("Upload KDS receipt image", "xpath", "//div[@id='toc-kds']//input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_kds_image.png", false, "no_jira"); 
+                                        if (FAIL) { return;}
+                                      }
+                                      else
+                                      {
+                                       _t++; 
+                                       _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File : Ap3_kds_image  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                                      }  
                                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Station Phone Number'", "css", "[aria-label='Station Phone Number']", "no_jira"); 
                                         if (FAIL) { return;}                                     
                                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Station Phone Number", "css", "[aria-label='Station Phone Number']", "9025550321", false, "no_jira"); 
@@ -1973,6 +1983,21 @@ public class AP3_site_new {
               _t++;
              _f++; EX += _t + "\t" + "Bolter Delivery App - Disabled -  not expected" + "\t" + "Bolter Delivery App - Disabled" + "\t" + "Bolter Delivery App - Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
+         }
+        
+        // Verify is KDS Receipt image is saved
+        if(json.getJSONObject("logos").has("print") && flag ==1)
+        {
+          if(json.getJSONObject("logos").getString("print").contains("https://images"))
+          {
+           _t++;
+           _p++; EX += _t + "\t" + "KDS Receipt Image Saved - expected" + "\t" + "KDS Image Saved" + "\t" + "KDS Image Saved" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          }
+          else if(json.getJSONObject("logos").getString("print").isEmpty())
+          {
+           _t++;
+           _f++; EX += _t + "\t" + "KDS Receipt Image Not Saved - Not expected" + "\t" + "KDS Image Saved" + "\t" + "KDS Image Not Saved" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          }
          }
         
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Brand API Public config Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
