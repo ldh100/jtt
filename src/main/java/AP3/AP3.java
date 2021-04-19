@@ -2280,7 +2280,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     
     public static String url = "";
     public static String app = "";
-    private static String appId = "";
+    protected static String appId = "";
     public static String env = "";
     public static String platform = "CDL";
     public static String BaseAPI;
