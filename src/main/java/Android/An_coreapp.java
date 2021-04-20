@@ -8,24 +8,25 @@ package Android;
  *
  * @author Oleg.Spozito
  */
-public class An_coreapp extends An_GUI {
-    public An_coreapp(An_GUI a) {
+ class An_coreapp extends An_GUI {
+    protected An_coreapp(An_GUI a) {
        Mobile_ID = a.Mobile_ID;
        Mobile_PW = a.Mobile_PW;
        ad = a.ad;
        loadTimeout = a.loadTimeout;
+       LoadTimeOut = a.LoadTimeOut;
        devOS = a.devOS;
-       // copy constructor -- initialize some fields from values in original, others with default values 
+       ParentTest = a.ParentTest;
     }
-    protected void Run() throws InterruptedException {     
-//        Test_EX_Update("CoreApp Test EX Update 1", "no_jira");             
-//            if (FAIL) { 
-//                String A = "true";
-//            }   
-//        Test_EX_Update("CoreApp Test EX Update 2", "no_jira");             
-//            if (FAIL) { 
-//                String A = "false";
-//            } 
+    protected void Run() throws InterruptedException, Exception {     
+        Test_EX_Update("CoreApp Test EX Update 1", "no_jira");             
+            if (FAIL) { 
+                String A = "true";
+            }   
+        Test_EX_Update("CoreApp Test EX Update 2", "no_jira");             
+            if (FAIL) { 
+                String A = "false";
+            } 
             
             
         Wait_For_Element_By_Path_InVisibility("Wait for Splash screen", "id", "splashScreenLogo", "no_jira");             
