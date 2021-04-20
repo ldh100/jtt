@@ -10,6 +10,9 @@ import static AP3.AP3.*;
 
 import java.time.LocalDateTime;
 import java.util.Calendar;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 /**
  *
  * @author Oleg.Spozito
@@ -895,6 +898,134 @@ public class AP3_brand_new {
                 EX += " - " + "\t" + "Add Station > Schedule Menu" + "\t" + "Add" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                           
                 return;
             }
-        // </editor-fold>    
-    }
+        // </editor-fold>   
+        
+        // <editor-fold defaultstate="collapsed" desc="Menu Assigned/Not assigned"> 
+        _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to Brands List", url + "#/sites/" + appId + "/site/" + SiteID, "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.List_L0("Get Menu Column", "xpath", "//table/tbody/tr/td[5]", "no_jira");
+        if (FAIL) { return;}  
+        for (int i = 0; i < L0.size(); i++){
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Child_Text("Check Menu Availability", L0.get(i), "xpath", "//a/div", "no_jira");
+            if (FAIL) { return;}
+            if (t.contains("UNAVAILABLE")) {
+                _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check Menu is Unavailable", "xpath", "//table/tbody/tr["+String.valueOf(i+1)+"]/td[5]/a[@disabled='disabled']", "no_jira");
+                if (FAIL) { return;}              
+            } else {
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'VIEW MENU'", "xpath", "//table/tbody/tr["+String.valueOf(i+1)+"]/td[5]/a/div[contains(text(),'VIEW MENU')]", "no_jira");
+                if (FAIL) { return;}
+                Thread.sleep(5000);
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira"); 
+                if (FAIL) { return;} 
+                Thread.sleep(500);
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > First Category", "xpath", "(//div[contains(@class,'flex xs12 list-item list-item-large')])[1]", "no_jira"); 
+                if (FAIL) { return;} 
+                Thread.sleep(2000);
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", "no_jira"); 
+                if (FAIL) { return;} 
+                Thread.sleep(500);
+                _t++; Thread.sleep((long) sleep); TWeb.Move_to_Element_By_Path("Move to Item Name in Side Panel", "xpath", "//input[@aria-label='Item Name']", "no_jira");
+                if (FAIL) { return;}
+                String OIN = e.getAttribute("value");
+                if (OIN.contains("1")) {
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Item Name in Side Panel", "css", "[aria-label='Item Name']", "no_jira");
+                    if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Input_Select_Clear("Clear > Item Name", "css", "[aria-label='Item Name']", "no_jira");
+                    if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Update > Item Name", "css", "[aria-label='Item Name']", OIN.substring(0, OIN.length()-1), false,"no_jira");
+                    if (FAIL) { return;}
+                    if (d1.findElement(By.xpath("//div[contains(text(),'Apply Changes')]/parent::button")).isEnabled()) {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu was Edited Successfully" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    } else {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu Edit Failed" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    }    
+                } else {
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Item Name in Side Panel", "css", "[aria-label='Item Name']", "no_jira");
+                    if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Input_Select_Clear("Clear > Item Name", "css", "[aria-label='Item Name']", "no_jira");
+                    if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Update > Item Name", "css", "[aria-label='Item Name']", OIN + "1", false,"no_jira");
+                    if (FAIL) { return;}
+                    if (d1.findElement(By.xpath("//div[contains(text(),'Apply Changes')]/parent::button")).isEnabled()) {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu was Edited Successfully" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    } else {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu Edit Failed" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    }  
+                }
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]/parent::button", "no_jira"); 
+                if (FAIL) { return;} 
+                Thread.sleep(500);
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Publish", "xpath", "//div[contains(text(),'publish')]/parent::button", "no_jira"); 
+                if (FAIL) { return;} 
+                Thread.sleep(500);
+                break;
+            }    
+        }
+        _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate Back to Brands List", url + "#/sites/" + appId + "/site/" + SiteID, "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.List_L0("Get Menu Column", "xpath", "//table/tbody/tr/td[5]", "no_jira");
+        if (FAIL) { return;}
+        for (int i = 0; i < L0.size(); i++){
+            if (!t.contains("UNAVAILABLE")) {
+                Actions actions = new Actions(d1);
+                actions.contextClick(L0.get(i)).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).build().perform();
+                _t++; Thread.sleep((long) sleep); TWeb.Close_Current_Tab_switch_To_1st("Switch to new tab", "no_jira");
+                if (FAIL) { return;}
+                Thread.sleep(2000);
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira"); 
+                if (FAIL) { return;} 
+                Thread.sleep(500);
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > First Category", "xpath", "(//div[contains(@class,'flex xs12 list-item list-item-large')])[1]", "no_jira"); 
+                if (FAIL) { return;} 
+                Thread.sleep(2000);
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", "no_jira"); 
+                if (FAIL) { return;} 
+                Thread.sleep(500);
+                _t++; Thread.sleep((long) sleep); TWeb.Move_to_Element_By_Path("Move to Item Name in Side Panel", "xpath", "//input[@aria-label='Item Name']", "no_jira");
+                if (FAIL) { return;}
+                String OIN = e.getAttribute("value");
+                if (e.getAttribute("value").contains("1")) {
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Item Name in Side Panel", "css", "[aria-label='Item Name']", "no_jira");
+                    if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Input_Select_Clear("Clear > Item Name", "css", "[aria-label='Item Name']", "no_jira");
+                    if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Update > Item Name", "css", "[aria-label='Item Name']", OIN.substring(0, OIN.length()-1), false,"no_jira");
+                    if (FAIL) { return;}
+                    if (d1.findElement(By.xpath("//div[contains(text(),'Apply Changes')]/parent::button")).isEnabled()) {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu was Edited Successfully" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    } else {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu Edit Failed" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    }    
+                } else {
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Item Name in Side Panel", "css", "[aria-label='Item Name']", "no_jira");
+                    if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Input_Select_Clear("Clear > Item Name", "css", "[aria-label='Item Name']", "no_jira");
+                    if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Update > Item Name", "css", "[aria-label='Item Name']", OIN + "1", false,"no_jira");
+                    if (FAIL) { return;}
+                    if (d1.findElement(By.xpath("//div[contains(text(),'Apply Changes')]/parent::button")).isEnabled()) {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu was Edited Successfully" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    } else {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu Edit Failed" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    }  
+                }
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]/parent::button", "no_jira"); 
+                if (FAIL) { return;} 
+                Thread.sleep(500);
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Publish", "xpath", "//div[contains(text(),'publish')]/parent::button", "no_jira"); 
+                if (FAIL) { return;} 
+                Thread.sleep(500);
+                break;
+            }
+        }
+        // </editor-fold> 
+    }   
 } // End of AP3_Brand_New
