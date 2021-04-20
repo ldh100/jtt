@@ -939,7 +939,7 @@ public class AP3_brand_new {
                         _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu was Edited Successfully" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     } else {
                         _t++;
-                        _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu Edit Failed" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        _f++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu Edit Failed" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     }    
                 } else {
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Item Name in Side Panel", "css", "[aria-label='Item Name']", "no_jira");
@@ -953,7 +953,7 @@ public class AP3_brand_new {
                         _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu was Edited Successfully" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     } else {
                         _t++;
-                        _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu Edit Failed" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        _f++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu Edit Failed" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     }  
                 }
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]/parent::button", "no_jira"); 
@@ -1000,7 +1000,7 @@ public class AP3_brand_new {
                         _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu was Edited Successfully" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     } else {
                         _t++;
-                        _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu Edit Failed" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        _f++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu Edit Failed" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     }    
                 } else {
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Item Name in Side Panel", "css", "[aria-label='Item Name']", "no_jira");
@@ -1014,7 +1014,7 @@ public class AP3_brand_new {
                         _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu was Edited Successfully" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     } else {
                         _t++;
-                        _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu Edit Failed" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        _f++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu Edit Failed" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     }  
                 }
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]/parent::button", "no_jira"); 
