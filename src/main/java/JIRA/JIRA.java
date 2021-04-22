@@ -902,7 +902,6 @@ public class JIRA extends javax.swing.JInternalFrame {
     public static String env = "";
    
     private boolean Load;
-    private String Report_Date;
     private String Report_File;
     private static Duration DD;
     private int wdLastRow = -1; 

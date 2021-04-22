@@ -7,7 +7,6 @@ package WO;
 import A.TWeb;
 import static A.A.*;
 import static WO.WO.*;
-import static java.lang.System.exit;
 import java.util.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

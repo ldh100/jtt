@@ -34,6 +34,7 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -64,6 +65,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
@@ -88,10 +90,22 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -861,6 +875,134 @@ public class An_GUI extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // <editor-fold defaultstate="collapsed" desc="Instance Variables Declaratios">
+    private int d1LastRow = -1; 
+    private int d2LastRow = -1; 
+    private boolean Load = true; 
+    private SwingWorker BW1;  
+    private Instant run_start;
+    private String err;   
+    
+    private String HTML_Report_Path = null;
+    private ExtentHtmlReporter HtmlReporter;
+    protected ExtentReports HtmlReport;
+    protected ExtentTest ParentTest;
+            
+    protected Duration DD;  
+    protected final Stopwatch sw1 = Stopwatch.createUnstarted();
+
+    protected boolean Update_Build = false;   
+    protected String AWS_A_key = "";   
+    protected String AWS_S_key = "";   
+    protected AWSCredentials AWS_credentials;   
+
+    protected String appPackage = "";   
+    protected String appActivity = "";   
+    protected String appBuldFile = "";   
+    protected String appVersion = "";   
+    
+    protected String device = "";   
+    protected String devID = "";    
+    protected String devOS = "";   
+    
+    protected String Report_Date;
+    protected String SCOPE = "";   
+    protected String Last_EX = "";   
+    protected String Report_File = "";    
+    protected String New_ID = "";
+
+    protected String Mobile_ID = "";   
+    protected String Mobile_PW = "";   
+    protected String Bolter_ID = "";   
+    protected String Bolter_PW = "";   
+         
+    protected String url = "";
+    protected String app = "";
+    protected String appId = "";
+    protected String env = "";
+    protected String platform = "CDL";
+    protected String BaseAPI = "";   
+    protected String COUNTRY = "COUNTRY";
+    protected String SITE = "";
+    protected String SiteID = "";
+    protected String GROUP = "";
+    protected String BRAND = "";
+    protected String BrandID = "";
+    protected String Location = "";
+    protected String Menu = "";
+    protected String Category = "";
+    protected String Options = "";   
+    
+    protected int _t = 0; // Total
+    protected int _p = 0; // Passed
+    protected int _f = 0; // Failed
+    protected int _w = 0; // Warn
+    protected int _i = 0; // Info
+    protected String t = "";   
+    protected String F = "";   
+    protected String EX = "";   
+    protected String r_time = "";    
+
+    protected AndroidDriver<AndroidElement> ad = null;
+    protected FluentWait loadTimeout = null;
+    protected AppiumDriverLocalService appiumService = null;
+    protected long WaitForElement = 3000; // milisec
+    protected double LoadTimeOut = 15 * 1000; // milisec  
+    
+    protected int t_calls = 0;
+    protected double t_min = 0;
+    protected double t_max = 0;
+    protected double t_avg = 0;
+    protected double p_50 = 0;
+    protected double p_90 = 0;  
+    
+    protected String r_type = "";   
+
+    protected String Ver = "";
+    protected String TZone = "";      
+    protected String Summary = "";   
+    protected String Log = "";   
+    protected boolean FAIL = false;
+    
+    protected final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
+    protected final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    protected final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    
+
+    protected List<AndroidElement> aL0 = null;
+    protected List<AndroidElement> aL1 = null;
+    protected List<AndroidElement> aL2 = null;
+    protected List<AndroidElement> aL3 = null;
+    protected AndroidElement ae = null;
+    protected AndroidElement ae1 = null;
+    protected AndroidElement ae2 = null;
+    protected AndroidElement ae3 = null;
+    
+    private boolean CONFIG = false;
+    private boolean Zip_Report = false;
+    private String Slack_Channel = "";
+    protected boolean _Slack = false;
+    protected boolean _Support = false;
+    protected boolean _Forgot_pw  = false;
+    protected boolean _Allow_loc  = false;
+    protected boolean _Order_history  = false;
+    protected boolean _Edit_profile  = false;
+    protected boolean _Invalids = false;
+    protected boolean _Logout = false;
+    protected boolean _Order_email = false;
+    protected boolean _Login = false;
+    protected boolean _All_cards = false;
+    protected boolean _Reorder = false;
+    protected boolean _OptX = false;
+    protected boolean _Acc_options = false;
+    protected boolean _Edit_item = false;
+    protected boolean _Welcome = false;
+    protected boolean _Explore = false;
+    protected boolean _Promo = false;
+    protected boolean _Mplan = false;
+    protected boolean _Feedback = false;
+    // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="GUI Components Actions"> 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
         if (d1LastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
@@ -984,7 +1126,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         File SCREEN = null;
         String SS = "";
         try {  
-            String file = A.A.CWD + File.separator + "ScreenShots" + File.separator + "Mobile_Screen_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMdd_hhmmss")) + ".png";
+            String file = A.A.CWD + File.separator + "ScreenShots" + File.separator + "Mobile_Screen_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMdd_hhmmss")) + ".jpg";
             SCREEN = new File(file);                      // -ad " + devID
             SS = Func.ExecuteCmdProcessBuilder((A.A.ADB_HOME + "adb exec-out screencap -p > " + file).trim(), A.A.CWD, true, true).trim();
             Thread.sleep(3000);
@@ -1061,7 +1203,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             
             Current_Log_Update(true, "File Saved: " + where + File.separator + app + "_" + appVersion + ".apk" + "\r\n");         
         } catch (IOException ex) {
-            Current_Log_Update(true, "=== Get APK > ERROR: " + ex.getMessage() + "\r\n");
+            Current_Log_Update(true, "= Get APK > ERROR: " + ex.getMessage() + "\r\n");
         }
         btnRun.setEnabled(true);
         btnGetScreenshot.setEnabled(true);
@@ -1084,7 +1226,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             String dir = A.A.CWD; 
             Desktop.getDesktop().open(new File(dir));            
         } catch (IOException ex) {
-            Current_Log_Update(true, "=== Open Current Directory Folder > ERROR: " + ex.getMessage() + "\r\n");
+            Current_Log_Update(true, "= Open Current Directory Folder > ERROR: " + ex.getMessage() + "\r\n");
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         } 
     }//GEN-LAST:event_btnScreenshotFolderMouseClicked
@@ -1150,287 +1292,6 @@ public class An_GUI extends javax.swing.JInternalFrame {
     // </editor-fold>   
     
     // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">    
-    private void GUI_Find_Connected_Devices(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
-        btnRun.setEnabled(false);
-        btnGetScreenshot.setEnabled(false);
-        btnGetAPK.setEnabled(false);
-        btnS3Install.setEnabled(false);
-        btnInstallAll.setEnabled(false); 
-        btnInstallAPK.setEnabled(false);
-        Load = true;  
-        cmbDevice.removeAllItems();
-        Current_Log_Update(true, "- Find Attached Android Devices ..." + "\r\n");
-
-        String Dev  = Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb devices -l", A.A.ADB_HOME, true, true).trim();
-        String[] dev = Dev.split("\r\n");
-        if (dev.length > 2) {
-            for (int i = 1; i < dev.length - 1; i++) {
-                String D = dev[i];
-                if(D.contains("model")){
-                    String ID = D.substring(0, dev[i].indexOf(" ")).trim();
-                    D = D.substring(D.indexOf("model:") + 6);
-                    D = D.substring(0, D.indexOf(" ")).trim();
-                    cmbDevice.addItem(D + "  id:" + ID);
-                }else{
-                    cmbDevice.addItem(D);
-                }
-            }
-             ///
-            Current_Log_Update(true, "=== " + Dev + "\r\n");              
-            btnRun.setEnabled(true);
-            if(cmbDevice.getItemCount() == 1){
-                btnGetScreenshot.setEnabled(true); 
-            } else{
-                btnGetScreenshot.setEnabled(false); 
-            }
-            btnRun.setEnabled(true);
-            btnGetAPK.setEnabled(true);
-            btnS3Install.setEnabled(true);
-            btnInstallAll.setEnabled(true); 
-            btnInstallAPK.setEnabled(true);
-            
-            cmbDevice.setSelectedIndex(0);        
-        } else {
-            cmbDevice.addItem("noDevice");
-            Current_Log_Update(true, "=== No Attached Device(s) found" + "\r\n" + "Return from 'adb devices -l' > '" + Dev + "'" + "\r\n");          
-        }
-        Load = false; 
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));     
-    } 
-    private void GUI_Install_All_AppTester() {
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
-        btnRun.setEnabled(false);
-        btnGetScreenshot.setEnabled(false);
-        btnGetAPK.setEnabled(false);
-        btnS3Install.setEnabled(false);
-        btnInstallAll.setEnabled(false); 
-        btnInstallAPK.setEnabled(false);        
-        Current_Log_Update(true, "- Install All APK(s) - App Tester ..." + "\r\n");
-        
-        Swipe_WakeUp(); // ===================  
-        try {
-            if(sw1.isRunning()){
-                sw1.reset();
-            }
-            sw1.start();  
-
-            DesiredCapabilities  cap = new DesiredCapabilities ();
-            cap.setCapability("platformName", "Android");
-            cap.setCapability("deviceName", device);
-            cap.setCapability("platformVersion", devOS);
-            cap.setCapability("clearSystemFiles", true);
-            cap.setCapability("appPackage", "dev.firebase.appdistribution");
-            cap.setCapability("appActivity", "dev.firebase.appdistribution.main.MainActivity");
-            cap.setCapability("udid", devID);
-            cap.setCapability("autoGrantPermissions", false); // false- always get prompt
-            cap.setCapability("unicodeKeyboard", false);
-            cap.setCapability("resetKeyboard", false);
-            cap.setCapability("noReset", true); // ====== ?????
-            cap.setCapability("automationName", "UiAutomator2"); 
-            
-            AppiumServiceBuilder builder = new AppiumServiceBuilder();
-            builder.usingAnyFreePort();
-            AppiumDriverLocalService appiumService = AppiumDriverLocalService.buildService(builder);
-            appiumService.start();
-            
-            ad = new AndroidDriver(new URL(appiumService.getUrl().toString()), cap);                
-            ad.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
-                      
-            loadTimeout = new FluentWait(ad).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
-			.pollingEvery(Duration.ofMillis(200))  			
-			.ignoring(NoSuchElementException.class);       
-            
-            Current_Log_Update(true, "=== Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
-            sw1.reset();
-            
-            try{
-                loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("signInButton")));
-                ad.findElement(By.id("signInButton")).click();
-                loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("com.google.android.gms:id/account_name")));
-                ad.findElement(By.id("com.google.android.gms:id/account_name")).click();
-            } catch (Exception ex) {
-                Current_Log_Update(true, "=== 'Sign In...' ERROR - " + ex.getMessage()  + "\r\n");
-            }
-
-            loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("app_name")));
-            Thread.sleep(500);
-            aL0 = ad.findElements(By.id("app_name"));
-            int app_count = aL0.size();
-            if (app_count > 0) {
-                Current_Log_Update(true, "Found Applications - total " + app_count + ": " + "\r\n");
-                for (int i = 0; i < aL0.size(); i++) {
-                    Current_Log_Update(true, "   - " + (i+1)  + ": " + aL0.get(i).getText() + "\r\n");
-                }
-                for (int i = 0; i < app_count; i++) {
-                    ae = ad.findElements(By.id("app_name")).get(i); 
-                    String appName = ae.getText();
-                    ae.click();
-                    String t = ((AndroidElement)loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("version_info")))).getText();
-                    Current_Log_Update(true, "=====  Processing App " + (i + 1) + " - " + appName + " v:" + t + " ..." + "\r\n");
-                    try {
-                        ad.findElement(By.id("download_button")).click();
-                        try {
-                            loadTimeout.until(ExpectedConditions.invisibilityOfElementLocated(By.id("progress_bar")));
-                            loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("com.android.packageinstaller:id/ok_button")));
-                            ad.findElement(By.id("com.android.packageinstaller:id/ok_button")).click();
-                            loadTimeout.until(ExpectedConditions.invisibilityOfElementLocated(By.id("progress_bar")));
-                            t = ((AndroidElement) loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("installed_version_info")))).getText();
-                            Current_Log_Update(true, "- " + t  + "\r\n");
-
-                            ad.findElement(By.id("back_arrow")).click(); 
-                            loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("app_name")));
-                        } catch(Exception ex) {
-                            Current_Log_Update(true, "Download/Install failed: " + ex.getMessage() + "\r\n");
-                        }
-                    } catch (Exception ex){
-                        Current_Log_Update(true, "Download button Not Found >> Latest Version already Insatlled (?)" + "\r\n");
-                        ad.findElement(By.id("back_arrow")).click();
-                        loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("app_name")));
-                    }
-                }
-            } else {
-                Current_Log_Update(true, "=== " + "No Applications found" + "\r\n");
-            } 
-        } catch (Exception ex) {
-            Current_Log_Update(true, "=== App Tester ERROR: " + ex.getMessage() + "\r\n");
-        }            
-        if(ad != null) {
-            ad.quit(); 
-        }
-        if(appiumService != null && appiumService.isRunning()){
-            appiumService.stop();                    
-        }
-        
-        btnRun.setEnabled(true);
-        btnGetScreenshot.setEnabled(true);
-        btnGetAPK.setEnabled(true);
-        btnS3Install.setEnabled(true);
-        btnInstallAll.setEnabled(true); 
-        btnInstallAPK.setEnabled(true);        
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));         
-    }       
-    private void GUI_Get_S3_Packages(AWSCredentials credentials ){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        Current_Log_Update(true, "- Load Android Packages list ..." + "\r\n");
-        
-        String[] SitesColumnsName = {"APK name","Date"}; 
-        DefaultTableModel PModel = new DefaultTableModel();
-        PModel.setColumnIdentifiers(SitesColumnsName);
-        DV3.setModel(PModel);
-        
-        String BucketName = "";
-        String AppPath = "";
-        //Android app S3 bucket path
-        String mobile_repo_name = "mobile-app-repos";
-        String android_app_path_S3_bucket = "automation/android-coreapp/staging/";
-        String Dev_android_app_path_S3_bucket = "automation/android-coreapp/daily/";
-
-        //iOS app S3 bucket path
-        String Dev_iOS_app_path_S3_bucket = "automation/novus/";
-        String Staging_iOS_app_path_S3_bucket = "automation/novus/regression/";
-        String Staging_iOS_app_path_S3_bucket_bolter = "automation/bolter/";
-        String Prod_iOS_app_path_S3_bucket = "automation/novus/production/";
-    
-        switch (env) {
-            case "PR":
-                BucketName = "";
-                break;
-            case "ST":
-                BucketName = "";
-                break;
-            case "DE":
-                BucketName = "";
-                break;            
-        }
-        switch (app) {
-            case "Boost":
-                AppPath = "";
-                break;
-            case "Bolter":
-                AppPath = "";
-                break;
-            case "JJKitchen":
-                AppPath = "";
-                break;            
-            case "Nourish":
-                AppPath = "";
-                break;
-            case "Rogers":
-                AppPath = "";
-                break;
-            case "Thrive":
-                AppPath = "";
-                break; 
-        }  
-        BucketName = "mobile-app-repos";//automation
-        
-        String PName = "";
-        Date PDate = new Date();
-        String X = "";
-        try {
-            AmazonS3 s3client = AmazonS3ClientBuilder
-                    .standard()
-                    .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                    .withRegion(Regions.US_EAST_1)
-                    .build();
-            ListObjectsV2Result PACK_List = s3client.listObjectsV2(BucketName);
-            PACK_List.getObjectSummaries().sort(Comparator.comparing(S3ObjectSummary::getLastModified));
-            for(int i = PACK_List.getObjectSummaries().size() -1 ; i > 0; i--){  // sort desc, default acs  
-
-                PName = PACK_List.getObjectSummaries().get(i).getKey();
-                PDate = PACK_List.getObjectSummaries().get(i).getLastModified();
-                //if(PName.contains("android-coreapp") || PName.contains("bolter")){
-                    X +=  PName + "  -  " + PDate + "\r\n";
-                    //if(PName.contains(app.toLowerCase())){
-                        PModel.addRow(new Object[]{PName, PDate});                              
-                    //}
-                //}
-            }
-            
-            DV3.setModel(PModel);
-            DV3.setDefaultEditor(Object.class, null);
-            DV3.getColumnModel().getColumn(0).setPreferredWidth(240);
-            DV3.getColumnModel().getColumn(1).setPreferredWidth(170);
-            DV3.changeSelection(0, 1, false, false);
-            
-            Current_Log_Update(true, "- BucketName: " + PACK_List.getBucketName() + ", Size: " + PACK_List.getObjectSummaries().size() + "\r\n");
-            Current_Log_Update(true, X + "\r\n");
-        } catch (Exception ex) {
-            Current_Log_Update(true, "== " + "GetPackages: " + ex.getMessage() + "\r\n");
-        }     
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    } 
-    private void GUI_InstallBuild_S3(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));  
-        Current_Log_Update(true, "- Download_Build > " + "\r\n"); 
-        String RES = String.valueOf(DV3.getValueAt(DV3.getSelectedRow(), 0));
-        RES = Download_Build(RES); // ====================
-        Current_Log_Update(true, RES);
-        
-        if(RES.contains("OK")){
-            Current_Log_Update(true, "- UnZip Build > " + "\r\n"); 
-            RES = Unzip_Build();                        // ====================
-            Current_Log_Update(true, RES);
-            
-            if(RES.contains("OK")){
-                Current_Log_Update(true, "- UnInstall Package > " + appPackage + "\r\n"); 
-                RES = UnInstaPackage(appPackage);   // ====================
-                Current_Log_Update(true, RES);
-                
-                String BuildPath = System.getProperty("user.dir") + File.separator + "MobileBuilds" + File.separator + appBuldFile;
-                
-                Current_Log_Update(true, "- Install Build > " + BuildPath + "\r\n"); 
-                RES = InstallBuild(BuildPath); // ==================== 
-                Current_Log_Update(true, RES);
-                
-                Current_Log_Update(true, "- Check AppPackage> " + appPackage + "\r\n"); 
-                RES = CheckAppPackage();               // ==================== 
-                Current_Log_Update(true, RES);         
-            }
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));     
-    }     
     private void GUI_Load_Env(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
@@ -1479,7 +1340,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             appId = rs.getString(1);
             conn.close();
         } catch (SQLException ex) {
-            Current_Log_Update(true,"=== Get " + cmbApp.getSelectedItem().toString() + " App_ID > ERROR: " + ex.getMessage() + "\r\n");
+            Current_Log_Update(true,"= Get " + cmbApp.getSelectedItem().toString() + " App_ID > ERROR: " + ex.getMessage() + "\r\n");
         }
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
@@ -1788,6 +1649,411 @@ public class An_GUI extends javax.swing.JInternalFrame {
         lblBRANDS.setText("Selected Site Brands (" + DV2.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
+    private String Get_Bolter_User_Site_ID(String ID, String PW){  
+        String Site_ID = "ERROR";
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        try { 
+            String UserAuth = Base64.getEncoder().encodeToString((ID + ":" + PW).getBytes());
+            HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + "bolter"); 
+            httpget.setHeader("Authorization", "Basic " + UserAuth);
+            httpget.setHeader("From", "Bolter/1.0");
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 500) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            if(json.has("profile")){
+                Site_ID = json.getJSONObject("profile").getString("location_group") + "\r\n";  
+            }else{
+                if(json.has("error")){
+                    Site_ID = "=== Get_Bolter_User_Site_ID > ERROR: " + json.getString("error")+ "\r\n"; 
+                    Site_ID += "=== URL: " + BaseAPI + "/user/auth" + "?realm=" + "bolter" + "\r\n";
+                    Site_ID += "=== Runner: " + ID + "\r\n";
+                }
+            }
+            return Site_ID;  
+        } catch (IOException | JSONException ex){
+            return "=== Get_Bolter_User_Site_ID > ERROR: " + ex.getMessage() + "\r\n";
+        }
+    }  
+
+    private void GUI_Find_Connected_Devices(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
+        btnRun.setEnabled(false);
+        btnGetScreenshot.setEnabled(false);
+        btnGetAPK.setEnabled(false);
+        btnS3Install.setEnabled(false);
+        btnInstallAll.setEnabled(false); 
+        btnInstallAPK.setEnabled(false);
+        Load = true;  
+        cmbDevice.removeAllItems();
+        Current_Log_Update(true, "- Find Attached Android Devices ..." + "\r\n");
+
+        String Dev  = Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb devices -l", A.A.ADB_HOME, true, true).trim();
+        String[] dev = Dev.split("\r\n");
+        if (dev.length > 2) {
+            for (int i = 1; i < dev.length - 1; i++) {
+                String D = dev[i];
+                if(D.contains("model")){
+                    String ID = D.substring(0, dev[i].indexOf(" ")).trim();
+                    D = D.substring(D.indexOf("model:") + 6);
+                    D = D.substring(0, D.indexOf(" ")).trim();
+                    cmbDevice.addItem(D + "  id:" + ID);
+                }else{
+                    cmbDevice.addItem(D);
+                }
+            }
+             ///
+            Current_Log_Update(true, "= " + Dev + "\r\n");              
+            btnRun.setEnabled(true);
+            if(cmbDevice.getItemCount() == 1){
+                btnGetScreenshot.setEnabled(true); 
+            } else{
+                btnGetScreenshot.setEnabled(false); 
+            }
+            btnRun.setEnabled(true);
+            btnGetAPK.setEnabled(true);
+            btnS3Install.setEnabled(true);
+            btnInstallAll.setEnabled(true); 
+            btnInstallAPK.setEnabled(true);
+            
+            cmbDevice.setSelectedIndex(0);        
+        } else {
+            cmbDevice.addItem("noDevice");
+            Current_Log_Update(true, "= No Attached Device(s) found" + "\r\n" + "Return from 'adb devices -l' > '" + Dev + "'" + "\r\n");          
+        }
+        Load = false; 
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));     
+    } 
+    private void GUI_Install_All_AppTester() {
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
+        btnRun.setEnabled(false);
+        btnGetScreenshot.setEnabled(false);
+        btnGetAPK.setEnabled(false);
+        btnS3Install.setEnabled(false);
+        btnInstallAll.setEnabled(false); 
+        btnInstallAPK.setEnabled(false);        
+        Current_Log_Update(true, "- Install All APK(s) - App Tester ..." + "\r\n");
+        
+        Swipe_WakeUp(); // ===================  
+        try {
+            if(sw1.isRunning()){
+                sw1.reset();
+            }
+            sw1.start();  
+
+            DesiredCapabilities  cap = new DesiredCapabilities ();
+            cap.setCapability("platformName", "Android");
+            cap.setCapability("deviceName", device);
+            cap.setCapability("platformVersion", devOS);
+            cap.setCapability("clearSystemFiles", true);
+            cap.setCapability("appPackage", "dev.firebase.appdistribution");
+            cap.setCapability("appActivity", "dev.firebase.appdistribution.main.MainActivity");
+            cap.setCapability("udid", devID);
+            cap.setCapability("autoGrantPermissions", false); // false- always get prompt
+            cap.setCapability("unicodeKeyboard", false);
+            cap.setCapability("resetKeyboard", false);
+            cap.setCapability("noReset", true); // ====== ?????
+            cap.setCapability("automationName", "UiAutomator2"); 
+            
+            AppiumServiceBuilder builder = new AppiumServiceBuilder();
+            builder.usingAnyFreePort();
+            AppiumDriverLocalService appiumService = AppiumDriverLocalService.buildService(builder);
+            appiumService.start();
+            
+            ad = new AndroidDriver(new URL(appiumService.getUrl().toString()), cap);                
+            ad.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
+                      
+            loadTimeout = new FluentWait(ad).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
+			.pollingEvery(Duration.ofMillis(200))  			
+			.ignoring(NoSuchElementException.class);       
+            
+            Current_Log_Update(true, "= Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
+            sw1.reset();
+            
+            try{
+                loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("signInButton")));
+                ad.findElement(By.id("signInButton")).click();
+                loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("com.google.android.gms:id/account_name")));
+                ad.findElement(By.id("com.google.android.gms:id/account_name")).click();
+            } catch (Exception ex) {
+                Current_Log_Update(true, "= 'Sign In...' ERROR - " + ex.getMessage()  + "\r\n");
+            }
+
+            loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("app_name")));
+            Thread.sleep(500);
+            aL0 = ad.findElements(By.id("app_name"));
+            int app_count = aL0.size();
+            if (app_count > 0) {
+                Current_Log_Update(true, "Found Applications - total " + app_count + ": " + "\r\n");
+                for (int i = 0; i < aL0.size(); i++) {
+                    Current_Log_Update(true, "   - " + (i+1)  + ": " + aL0.get(i).getText() + "\r\n");
+                }
+                for (int i = 0; i < app_count; i++) {
+                    ae = ad.findElements(By.id("app_name")).get(i); 
+                    String appName = ae.getText();
+                    ae.click();
+                    String t = ((AndroidElement)loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("version_info")))).getText();
+                    Current_Log_Update(true, "=====  Processing App " + (i + 1) + " - " + appName + " v:" + t + " ..." + "\r\n");
+                    try {
+                        ad.findElement(By.id("download_button")).click();
+                        try {
+                            loadTimeout.until(ExpectedConditions.invisibilityOfElementLocated(By.id("progress_bar")));
+                            loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("com.android.packageinstaller:id/ok_button")));
+                            ad.findElement(By.id("com.android.packageinstaller:id/ok_button")).click();
+                            loadTimeout.until(ExpectedConditions.invisibilityOfElementLocated(By.id("progress_bar")));
+                            t = ((AndroidElement) loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("installed_version_info")))).getText();
+                            Current_Log_Update(true, "- " + t  + "\r\n");
+
+                            ad.findElement(By.id("back_arrow")).click(); 
+                            loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("app_name")));
+                        } catch(Exception ex) {
+                            Current_Log_Update(true, "Download/Install failed: " + ex.getMessage() + "\r\n");
+                        }
+                    } catch (Exception ex){
+                        Current_Log_Update(true, "Download button Not Found >> Latest Version already Insatlled (?)" + "\r\n");
+                        ad.findElement(By.id("back_arrow")).click();
+                        loadTimeout.until(ExpectedConditions.presenceOfElementLocated(By.id("app_name")));
+                    }
+                }
+            } else {
+                Current_Log_Update(true, "= " + "No Applications found" + "\r\n");
+            } 
+        } catch (Exception ex) {
+            Current_Log_Update(true, "= App Tester ERROR: " + ex.getMessage() + "\r\n");
+        }            
+        if(ad != null) {
+            ad.quit(); 
+        }
+        if(appiumService != null && appiumService.isRunning()){
+            appiumService.stop();                    
+        }
+        
+        btnRun.setEnabled(true);
+        btnGetScreenshot.setEnabled(true);
+        btnGetAPK.setEnabled(true);
+        btnS3Install.setEnabled(true);
+        btnInstallAll.setEnabled(true); 
+        btnInstallAPK.setEnabled(true);        
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));         
+    }       
+    private void GUI_Get_S3_Packages(AWSCredentials credentials ){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        Current_Log_Update(true, "- Load Android Packages list ..." + "\r\n");
+        
+        String[] SitesColumnsName = {"APK name","Date"}; 
+        DefaultTableModel PModel = new DefaultTableModel();
+        PModel.setColumnIdentifiers(SitesColumnsName);
+        DV3.setModel(PModel);
+        
+        String BucketName = "";
+        String AppPath = "";
+        //Android app S3 bucket path
+        String mobile_repo_name = "mobile-app-repos";
+        String android_app_path_S3_bucket = "automation/android-coreapp/staging/";
+        String Dev_android_app_path_S3_bucket = "automation/android-coreapp/daily/";
+
+        //iOS app S3 bucket path
+        String Dev_iOS_app_path_S3_bucket = "automation/novus/";
+        String Staging_iOS_app_path_S3_bucket = "automation/novus/regression/";
+        String Staging_iOS_app_path_S3_bucket_bolter = "automation/bolter/";
+        String Prod_iOS_app_path_S3_bucket = "automation/novus/production/";
+    
+        switch (env) {
+            case "PR":
+                BucketName = "";
+                break;
+            case "ST":
+                BucketName = "";
+                break;
+            case "DE":
+                BucketName = "";
+                break;            
+        }
+        switch (app) {
+            case "Boost":
+                AppPath = "";
+                break;
+            case "Bolter":
+                AppPath = "";
+                break;
+            case "JJKitchen":
+                AppPath = "";
+                break;            
+            case "Nourish":
+                AppPath = "";
+                break;
+            case "Rogers":
+                AppPath = "";
+                break;
+            case "Thrive":
+                AppPath = "";
+                break; 
+        }  
+        BucketName = "mobile-app-repos";//automation
+        
+        String PName = "";
+        Date PDate = new Date();
+        String X = "";
+        try {
+            AmazonS3 s3client = AmazonS3ClientBuilder
+                    .standard()
+                    .withCredentials(new AWSStaticCredentialsProvider(credentials))
+                    .withRegion(Regions.US_EAST_1)
+                    .build();
+            ListObjectsV2Result PACK_List = s3client.listObjectsV2(BucketName);
+            PACK_List.getObjectSummaries().sort(Comparator.comparing(S3ObjectSummary::getLastModified));
+            for(int i = PACK_List.getObjectSummaries().size() -1 ; i > 0; i--){  // sort desc, default acs  
+
+                PName = PACK_List.getObjectSummaries().get(i).getKey();
+                PDate = PACK_List.getObjectSummaries().get(i).getLastModified();
+                //if(PName.contains("android-coreapp") || PName.contains("bolter")){
+                    X +=  PName + "  -  " + PDate + "\r\n";
+                    //if(PName.contains(app.toLowerCase())){
+                        PModel.addRow(new Object[]{PName, PDate});                              
+                    //}
+                //}
+            }
+            
+            DV3.setModel(PModel);
+            DV3.setDefaultEditor(Object.class, null);
+            DV3.getColumnModel().getColumn(0).setPreferredWidth(240);
+            DV3.getColumnModel().getColumn(1).setPreferredWidth(170);
+            DV3.changeSelection(0, 1, false, false);
+            
+            Current_Log_Update(true, "- BucketName: " + PACK_List.getBucketName() + ", Size: " + PACK_List.getObjectSummaries().size() + "\r\n");
+            Current_Log_Update(true, X + "\r\n");
+        } catch (Exception ex) {
+            Current_Log_Update(true, "= " + "GetPackages: " + ex.getMessage() + "\r\n");
+        }     
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    } 
+    private void GUI_InstallBuild_S3(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));  
+        Current_Log_Update(true, "- Download_Build > " + "\r\n"); 
+        String RES = String.valueOf(DV3.getValueAt(DV3.getSelectedRow(), 0));
+        RES = Download_Build(RES); // ====================
+        Current_Log_Update(true, RES);
+        
+        if(RES.contains("OK")){
+            Current_Log_Update(true, "- UnZip Build > " + "\r\n"); 
+            RES = Unzip_Build();                        // ====================
+            Current_Log_Update(true, RES);
+            
+            if(RES.contains("OK")){
+                Current_Log_Update(true, "- UnInstall Package > " + appPackage + "\r\n"); 
+                RES = UnInstaPackage(appPackage);   // ====================
+                Current_Log_Update(true, RES);
+                
+                String BuildPath = A.A.CWD + File.separator + "MobileBuilds" + File.separator + appBuldFile;
+                
+                Current_Log_Update(true, "- Install Build > " + BuildPath + "\r\n"); 
+                RES = InstallBuild(BuildPath); // ==================== 
+                Current_Log_Update(true, RES);
+                
+                Current_Log_Update(true, "- Check AppPackage> " + appPackage + "\r\n"); 
+                RES = CheckAppPackage();               // ==================== 
+                Current_Log_Update(true, RES);         
+            }
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));     
+    }     
+    protected void Set_Mobile_Package_Name(){
+        if ("Boost".equals(app)) {
+            appPackage = "com.compass_canada.boost";
+            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
+        }
+        if ("JJKitchen".equals(app)) {
+            appPackage = "io.compassdigital.jjkitchen";
+            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
+        }
+        if ("Thrive".equals(app)) {
+            appPackage = "com.compass_canada.thrive";
+            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
+        }
+        if ("Nourish".equals(app)) {
+            appPackage = "io.compassdigital.nourish";
+            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
+        }
+        if ("Rogers".equals(app)) {
+            appPackage = "com.compass_canada.digital_hospitality.rogers";
+            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
+        }
+        if ("Bolter".equals(app)) {
+            appPackage = "io.compassdigital.delivery";
+            appActivity = "io.compassdigital.delivery.splash.SplashActivity";
+        }
+    }
+
+    protected String Swipe_WakeUp(){       
+        return A.Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " shell input touchscreen swipe 800 400 400 400 100", A.A.CWD, false, false);    
+    }
+    protected String CheckDevice(String D){
+        devID = "";
+        device = "";
+        if(D.contains("id:")){
+            device = D.substring(0,D.indexOf(" ")).trim(); 
+            devID = D.substring(D.indexOf("id:") + 3).trim();        
+            devOS = A.Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " shell getprop ro.build.version.release", A.A.CWD, true, true).trim();
+            devOS = devOS.replace("null", "").substring(0, devOS.indexOf("\r\n")).trim();
+            return "= CheckDevice OK > Model: " + device + ", OS version: " + devOS + "\r\n";
+        } else{
+            return "= CheckDevice: " + "ID Not Found" + "\r\n";           
+        }        
+    }
+    protected String CheckAppPackage(){
+        String v1 = "?";
+        String v2 = "?";
+        appVersion = "Not Found";
+        try{
+            String v = A.Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " shell dumpsys package " + appPackage, A.A.CWD, true, true).trim();
+            if ("".equals(v.trim())) {
+                return "= appPackage  " + appPackage + " - no information\r\n";
+            }
+//            if(v.contains("pkg=Package{")){
+//                Hash = v.substring(v.indexOf("pkg=Package{") + 12); // // pkg=Package{f2241b0 com.compass_canada.boost}  <<<< hash ??
+//                Hash = Hash.substring(0, Hash.indexOf(" ")).trim();                
+//            }
+            if(v.contains("versionName") && v.contains("versionCode")) {
+                v1 = v.substring(v.indexOf("versionName"));
+                v1 = v1.substring(0, v1.indexOf("\r\n"));
+                v1 = v1.substring(v1.indexOf("=") + 1).trim();
+                v2 = v.substring(v.indexOf("versionCode"));
+                v2 = v2.substring(0, v2.indexOf("\r\n"));
+                v2 = v2.substring(v2.indexOf("=") + 1);
+                v2 = v2.substring(0, v2.indexOf(" "));
+                appVersion = v1 + "(" + v2 + ")"; // Git Hash: " + Hash;
+            }
+            return "= appPackage: " + appPackage + " > Version: " + appVersion + "\r\n";
+        } catch (Exception ex) { 
+            return "= CheckAppPackage: " + ex.getMessage() + "\r\n";
+        }      
+    }
+    protected String LOG_GET_DEVICE_STATUS(){
+        String Job_Status = "";
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+        ResultSet rs = conn.createStatement().executeQuery("SELECT [env] FROM [dbo].[aw_result] WHERE "
+                + " [summary] = '" + "Running..." + "' AND "
+                + " [user_ws] = '" + A.A.WsID + "' AND "
+                + " [env] LIKE '" + device + "%'" );
+            if(rs.next()){
+                Job_Status = rs.getString(1);
+                conn.close(); 
+                return "= Target Device is Busy " + Job_Status; 
+            }else{           
+                conn.close(); 
+                return "\r\n=Target Device Availability Check > OK "; 
+            }
+        } catch (SQLException ex) {
+            return "= Device Availability Check > SQL ERROR: " + ex.getMessage() + "\r\n";
+        }
+    }      
+  
     private void GUI_Save_CONFIG() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String _S = "n/a";
@@ -1816,11 +2082,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
             C += "txtBolter_Pw: " + txtBolter_Pw.getText() + "\r\n";
             
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
-            C += "nWaitLoad: " + nWaitLoad.getValue()+ "\r\n";  
+            C += "nWaitLoad: " + nWaitLoad.getValue() + "\r\n";  
             
-            C += "Slack_Ch: " + "TBD";
+            C += "Slack_Ch: " + "xtt_test" + "\r\n";//TBD + "\r\n"; 
             C += "_slack: " + _slack.isSelected() + "\r\n";
-           
+            C += "_zip_report: " + "true" + "\r\n";
+            
             C += "_acc_options: " + _acc_options.isSelected() + "\r\n";
             C += "_all_cards: " + _all_cards.isSelected() + "\r\n";
             C += "_allow_loc: " + _allow_loc.isSelected() + "\r\n";
@@ -1842,7 +2109,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             C += "_welcome: " + _welcome.isSelected() + "\r\n";
            
         } catch (Exception ex)  {
-            Current_Log_Update(true, "=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
+            Current_Log_Update(true, "= SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             return;
         }
         
@@ -1870,9 +2137,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _insert.setString(5, C);
             int row = _insert.executeUpdate();
             conn.close(); 
-            Current_Log_Update(true, "=== SAVE_CONFIG > OK (" + row + " row)" + "\r\n");
+            Current_Log_Update(true, "= SAVE_CONFIG > OK (" + row + " row)" + "\r\n");
         } catch (SQLException ex) {
-            Current_Log_Update(true, "=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage() + "\r\n");
+            Current_Log_Update(true, "= SAVE_CONFIG > SQL ERROR: " + ex.getMessage() + "\r\n");
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1888,8 +2155,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
             conn.close();
         } catch (SQLException ex) {
             CONFIG = false;
-            Current_Log_Update(true, "=== LOAD_CONFIG > ERROR: " + ex.getMessage());
-            Current_Log_Update(true, "=== MOB / Android, User: " + A.A.UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
+            Current_Log_Update(true, "= LOAD_CONFIG > ERROR: " + ex.getMessage());
+            Current_Log_Update(true, "= MOB / Android, User: " + A.A.UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
@@ -1917,7 +2184,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
 
                 if(l.contains("Slack_Ch: ")) Slack_Channel = value;
                 if(l.contains("_slack: ")) _slack.setSelected(Boolean.parseBoolean(value));
-           
+                if(l.contains("_zip_report: ")) Zip_Report = Boolean.parseBoolean(value);
+                
                 if(l.contains("_acc_options: ")) _acc_options.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_all_cards: ")) _all_cards.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_allow_loc: ")) _allow_loc.setSelected(Boolean.parseBoolean(value));
@@ -1939,14 +2207,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_welcome: ")) _welcome.setSelected(Boolean.parseBoolean(value));
             }            
             CONFIG = true;
-            Current_Log_Update(true, "=== LOAD_CONFIG > OK" + "\r\n");
+            Current_Log_Update(true, "= LOAD_CONFIG > OK" + "\r\n");
         } catch (Exception ex) {
             CONFIG = false;
-            Current_Log_Update(true, "=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
+            Current_Log_Update(true, "= LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-
+    
     public String JOB_Run_Auto(String run_type, String config){
         run_start = Instant.now();
         Log  = "";
@@ -1984,7 +2252,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         Current_Log_Update(false, CheckAppPackage()); 
         
         try{
-            Current_Log_Update(false, "=== Auto Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+            Current_Log_Update(false, "= Auto Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
             EX = "";
             F = "";
             t_calls = 0;
@@ -1997,6 +2265,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p = 0; // Passed
             _f = 0; // Failed
             _w = 0; // Warn
+            _i = 0; // Info
             r_time = "";
             SCOPE = "";
             r_type = run_type; 
@@ -2077,11 +2346,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     url = "https://adminpanel.compassdigital.org/";
                     break;
             }
-            Current_Log_Update(true, "=== JOB_Load_CONFIG > OK" + "\r\n");
+            Current_Log_Update(true, "= JOB_Load_CONFIG > OK" + "\r\n");
             return "OK";
         } catch (Exception ex) {
             CONFIG = false;
-            Current_Log_Update(true, "=== JOB_Load_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
+            Current_Log_Update(true, "= JOB_Load_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             return "ERROR > " + ex.getMessage();
         }
     }
@@ -2098,10 +2367,10 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     D = D.substring(0, D.indexOf(" ")).trim();
                 }
             }
-            Current_Log_Update(false, "=== " + Dev + "\r\n");  
+            Current_Log_Update(false, "= " + Dev + "\r\n");  
             return "JOB_Find_Connected_Device > OK: Device " + device + " found" + "\r\n";
         } else {
-            Current_Log_Update(false, "=== Target Device " + device + " Not Found" + "\r\n");          
+            Current_Log_Update(false, "= Target Device " + device + " Not Found" + "\r\n");          
             return "JOB_Find_Connected_Devices > ERROR: " + "No Attached Device(s) found";
         } 
     } 
@@ -2122,64 +2391,68 @@ public class An_GUI extends javax.swing.JInternalFrame {
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
-        
-        run_start = Instant.now();
-        Current_Log_Update(true, "=== Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+        try{
+            run_start = Instant.now();
+            Current_Log_Update(true, "= Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
 
-        WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
-        LoadTimeOut = (double)nWaitLoad.getValue() *1000;   
-        t_calls = 0;
-        t_min =  0;
-        t_avg = 0;
-        t_max =  0;
-        p_50 = 0;
-        p_90 = 0;
-        Mobile_ID = txtMobile_Id.getText();
-        Mobile_PW = txtMobile_Pw.getText();
-        Bolter_ID = txtBolter_Id.getText();
-        Bolter_PW = txtBolter_Pw.getText();
-        
-        _Slack = _slack.isSelected();
-        
-        _Acc_options = _acc_options.isSelected();
-        _All_cards = _all_cards.isSelected();
-        _Allow_loc = _allow_loc.isSelected();
-        _Edit_item = _edit_item.isSelected();
-        _Edit_profile = _edit_profile.isSelected();
-        _Explore = _explore.isSelected();
-        _Feedback = _feedback.isSelected();
-        _Forgot_pw = _forgot_pw.isSelected();
-        _Invalids = _invalids.isSelected();
-        _Login = _login.isSelected();
-        _Logout = _logout.isSelected();
-        _Mplan = _mplan.isSelected();
-        _OptX = _optX.isSelected();
-        _Order_email = _order_email.isSelected();
-        _Order_history = _order_history.isSelected();
-        _Promo = _promo.isSelected();
-        _Reorder = _reorder.isSelected();
-        _Support = _support.isSelected();
-        _Welcome = _welcome.isSelected();
+            WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
+            LoadTimeOut = (double)nWaitLoad.getValue() *1000;   
+            t_calls = 0;
+            t_min =  0;
+            t_avg = 0;
+            t_max =  0;
+            p_50 = 0;
+            p_90 = 0;
+            Mobile_ID = txtMobile_Id.getText();
+            Mobile_PW = txtMobile_Pw.getText();
+            Bolter_ID = txtBolter_Id.getText();
+            Bolter_PW = txtBolter_Pw.getText();
 
-        SCOPE = "";
-        r_type = "manual";
-        
-        if(DV1.getRowCount() > 0) {
-            SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
-            platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString();
-            COUNTRY = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
-        }
-        if(DV2.getRowCount() > 0) {
-            BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
-        }
+            _Slack = _slack.isSelected();
 
-        Current_Log_Update(true, "=== Starting Appium Service and Android Driver..." + "\r\n");
-        if(sw1.isRunning()){
-            sw1.reset();
+            _Acc_options = _acc_options.isSelected();
+            _All_cards = _all_cards.isSelected();
+            _Allow_loc = _allow_loc.isSelected();
+            _Edit_item = _edit_item.isSelected();
+            _Edit_profile = _edit_profile.isSelected();
+            _Explore = _explore.isSelected();
+            _Feedback = _feedback.isSelected();
+            _Forgot_pw = _forgot_pw.isSelected();
+            _Invalids = _invalids.isSelected();
+            _Login = _login.isSelected();
+            _Logout = _logout.isSelected();
+            _Mplan = _mplan.isSelected();
+            _OptX = _optX.isSelected();
+            _Order_email = _order_email.isSelected();
+            _Order_history = _order_history.isSelected();
+            _Promo = _promo.isSelected();
+            _Reorder = _reorder.isSelected();
+            _Support = _support.isSelected();
+            _Welcome = _welcome.isSelected();
+
+            SCOPE = "";
+            r_type = "manual";
+
+            if(DV1.getRowCount() > 0) {
+                SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
+                platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString();
+                COUNTRY = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
+            }
+            if(DV2.getRowCount() > 0) {
+                BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
+            }
+
+            Current_Log_Update(true, "= Starting Appium Service and Android Driver..." + "\r\n");
+            if(sw1.isRunning()){
+                sw1.reset();
+            }
+            sw1.start();
+            LOG_START();        // ============================================
+            BW1_DoWork( true); 
+        }catch(Exception ex){
+            Current_Log_Update(true, "= GUI_Run_Manual ERROR > " + ex.getMessage() + "\r\n");
+            BW1_FAIL_LOG_UPDATE("= GUI_Run_Manual ERROR > " + ex.getMessage());
         }
-        sw1.start();
-        LOG_START();        // ============================================
-        BW1_DoWork( true);            
     }
 
     protected void Current_Log_Update(boolean GUI, String Text){
@@ -2190,32 +2463,6 @@ public class An_GUI extends javax.swing.JInternalFrame {
             Log += Text;
         }
     }    
-    protected void Set_Mobile_Package_Name(){
-        if ("Boost".equals(app)) {
-            appPackage = "com.compass_canada.boost";
-            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
-        }
-        if ("JJKitchen".equals(app)) {
-            appPackage = "io.compassdigital.jjkitchen";
-            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
-        }
-        if ("Thrive".equals(app)) {
-            appPackage = "com.compass_canada.thrive";
-            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
-        }
-        if ("Nourish".equals(app)) {
-            appPackage = "io.compassdigital.nourish";
-            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
-        }
-        if ("Rogers".equals(app)) {
-            appPackage = "com.compass_canada.digital_hospitality.rogers";
-            appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
-        }
-        if ("Bolter".equals(app)) {
-            appPackage = "io.compassdigital.delivery";
-            appActivity = "io.compassdigital.delivery.splash.SplashActivity";
-        }
-    }
     protected String Report(boolean Open_File){
         Report_File = "";
         if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
@@ -2232,32 +2479,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 String[] v = lines[i].split("\t");
                 System.arraycopy(v, 0, Values[i], 0, v.length); 
             }
-            Report_File = A.Func.fExcel(l, col, Values, "Android_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
+            Report_File = A.Func.fExcel(l, col, Values, "Android_" + app + "_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
             return "=== Report Excel file:\r\n" + Report_File + "\r\n";
         } catch (IOException ex) {
             return "=== Report > ERROR: " + ex.getMessage() + "\r\n";
         }
     }
     
-    protected String LOG_GET_DEVICE_STATUS(){
-        String Job_Status = "";
-        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
-        ResultSet rs = conn.createStatement().executeQuery("SELECT [env] FROM [dbo].[aw_result] WHERE "
-                + " [summary] = '" + "Running..." + "' AND "
-                + " [user_ws] = '" + A.A.WsID + "' AND "
-                + " [env] LIKE '" + device + "%'" );
-            if(rs.next()){
-                Job_Status = rs.getString(1);
-                conn.close(); 
-                return "\r\n=== Device " + Job_Status + " - currently busy"; 
-            }else{           
-                conn.close(); 
-                return "\r\n=== Device Availability Check > OK "; 
-            }
-        } catch (SQLException ex) {
-            return "\r\n=== Device Availability Check > SQL ERROR: " + ex.getMessage() + "\r\n";
-        }
-    }      
     protected String LOG_START(){
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] (" +
@@ -2374,51 +2602,6 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
     }
 
-    protected String Swipe_WakeUp(){       
-        return A.Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " shell input touchscreen swipe 800 400 400 400 100", A.A.CWD, false, false);    
-    }
-    protected String CheckDevice(String D){
-        devID = "";
-        device = "";
-        if(D.contains("id:")){
-            device = D.substring(0,D.indexOf(" ")).trim(); 
-            devID = D.substring(D.indexOf("id:") + 3).trim();        
-            devOS = A.Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " shell getprop ro.build.version.release", A.A.CWD, true, true).trim();
-            devOS = devOS.replace("null", "").substring(0, devOS.indexOf("\r\n")).trim();
-            return "=== CheckDevice OK > Model: " + device + ", OS version: " + devOS + "\r\n";
-        } else{
-            return "=== CheckDevice: " + "ID Not Found" + "\r\n";           
-        }        
-    }
-    protected String CheckAppPackage(){
-        String v1 = "?";
-        String v2 = "?";
-        appVersion = "Not Found";
-        try{
-            String v = A.Func.ExecuteCmdProcessBuilder(A.A.ADB_HOME + "adb -s " + devID + " shell dumpsys package " + appPackage, A.A.CWD, true, true).trim();
-            if ("".equals(v.trim())) {
-                return "=== appPackage  " + appPackage + " - no information\r\n";
-            }
-//            if(v.contains("pkg=Package{")){
-//                Hash = v.substring(v.indexOf("pkg=Package{") + 12); // // pkg=Package{f2241b0 com.compass_canada.boost}  <<<< hash ??
-//                Hash = Hash.substring(0, Hash.indexOf(" ")).trim();                
-//            }
-            if(v.contains("versionName") && v.contains("versionCode")) {
-                v1 = v.substring(v.indexOf("versionName"));
-                v1 = v1.substring(0, v1.indexOf("\r\n"));
-                v1 = v1.substring(v1.indexOf("=") + 1).trim();
-                v2 = v.substring(v.indexOf("versionCode"));
-                v2 = v2.substring(0, v2.indexOf("\r\n"));
-                v2 = v2.substring(v2.indexOf("=") + 1);
-                v2 = v2.substring(0, v2.indexOf(" "));
-                appVersion = v1 + "(" + v2 + ")"; // Git Hash: " + Hash;
-            }
-            return "=== appPackage: " + appPackage + " > Version: " + appVersion + "\r\n";
-        } catch (Exception ex) { 
-            return "=== CheckAppPackage: " + ex.getMessage() + "\r\n";
-        }      
-    }
-    
     protected String Get_S3_MOB_Credentials(){     
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             ResultSet rs1 = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S3_A_Key_MOB'");
@@ -2503,139 +2686,302 @@ public class An_GUI extends javax.swing.JInternalFrame {
             return "== " + "Download_Build: " + ex.getMessage() + "\r\n";
         }
     }    
-
     protected String InstallBuild_S3(String B_PATH){        
         if(Download_Build(B_PATH).contains("OK")){
             if(Unzip_Build().contains("OK")){
                 UnInstaPackage(appPackage);
-                String BuildPath = System.getProperty("user.dir") + File.separator + "MobileBuilds" + File.separator + appBuldFile;
+                String BuildPath = A.A.CWD + File.separator + "MobileBuilds" + File.separator + appBuldFile;
                 InstallBuild(BuildPath);
                 CheckAppPackage();
             }
         }
-      return "=== InstallBuild_S3: Check Result...." + "\r\n";  
+        return "=== InstallBuild_S3: Check Result...." + "\r\n";  
     }    
-    protected String Get_Bolter_User_Site_ID(String ID, String PW){  
-        String S_ID = "ERROR";
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        try { 
-            String UserAuth = Base64.getEncoder().encodeToString((ID + ":" + PW).getBytes());
-            HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + "bolter"); 
-            httpget.setHeader("Authorization", "Basic " + UserAuth);
-            httpget.setHeader("From", "Bolter/1.0");
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            if(json.has("profile")){
-                S_ID = json.getJSONObject("profile").getString("location_group") + "\r\n";  
-            }else{
-                if(json.has("error")){
-                    S_ID = "=== Get_Bolter_User_Site_ID > ERROR: " + json.getString("error")+ "\r\n"; 
-                    S_ID += "=== URL: " + BaseAPI + "/user/auth" + "?realm=" + "bolter" + "\r\n";
-                    S_ID += "=== Runner: " + ID + "\r\n";
-                }
-            }
-            return S_ID;  
-        } catch (IOException | JSONException ex){
-            return "=== Get_Bolter_User_Site_ID > ERROR: " + ex.getMessage() + "\r\n";
-        }
-    }   
     // </editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="HTML Report Methods">
+    protected void Extent_Report_Detail() throws IOException{
+//    protected String HTML_Report_Path = null;
+//    protected ExtentHtmlReporter HtmlReporter;
+//    public ExtentReports HtmlReport;
+//    protected ExtentTest ParentTest;
+//    protected ExtentTest ChildTest;
+//    protected ExtentTest GrandChildTest;
+        HTML_Report_Path = System.getProperty("user.home") + File.separator + "Desktop";
+        Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
+        HtmlReporter = new ExtentHtmlReporter(HTML_Report_Path + File.separator + "Android_" + app + "_" + env + "_" + Report_Date + ".html");
+        HtmlReport = new ExtentReports();
+        HtmlReport.attachReporter(HtmlReporter);
+        
+        HtmlReport.setSystemInfo("App Version", app + " " + appVersion); 
+        HtmlReport.setSystemInfo("Device Name", device);        
+        HtmlReport.setSystemInfo("Device ID", devID);
+        HtmlReport.setSystemInfo("Machine", A.A.WsID);
+        HtmlReport.setSystemInfo("Machine OS", A.A.WsOS);
+        HtmlReport.setSystemInfo("Tester ID", A.A.UserID); 
+        HtmlReport.setSystemInfo("Run Trigger", r_type);
+        
+        HtmlReporter.config().setDocumentTitle("JTT Mobile Automation Report");
+        HtmlReporter.config().enableTimeline(false);
+        HtmlReporter.config().setTheme(Theme.DARK);
+        
+//        ParentTest = HtmlReport.createTest("ParentTest1"); //  ===== Just for Debug
+//        Log_Html_Result("PASS", "Log Test_Description 01", false, ParentTest.log(Status.PASS, "Device Name: " + device));
+//        Log_Html_Result("FAIL", "Log Test_Description 02", true, ParentTest.log(Status.PASS, "Device OS: " + devOS));
+//        Log_Html_Result("INFO", "Log Test_Description 03", false, ParentTest.log(Status.PASS, "Device ID: " + devID));
+//
+//        Log_Html_Result("PASS", "Node Test_Description 1", false, ParentTest.createNode("Node Description 1"));
+//        Log_Html_Result("FAIL", "Node Test_Description 2", true, ParentTest.createNode("Node Description 2"));
+//        Log_Html_Result("PASS", "Node Test_Description 3", false, ParentTest.createNode("Node Description 3"));
+//        Log_Html_Result("PASS", "Node Test_Description 4", false, ParentTest.createNode("Node Description 4"));                
+    }    
+    protected void Log_Html_Result(String RES, String Test_Description, boolean Capture_Screenshot, ExtentTest Test) throws IOException  {
+        switch (RES) {
+            case "PASS":
+                Test.log(Status.PASS, MarkupHelper.createLabel(Test_Description, ExtentColor.GREEN));
+                if (Capture_Screenshot) {
+                    Test.log(Status.PASS, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
+                }
+                break;
+            case "FAIL":
+                Test.log(Status.FAIL, MarkupHelper.createLabel(Test_Description, ExtentColor.RED));
+                if (Capture_Screenshot) {
+                    Test.log(Status.FAIL, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
+                }                
+                break;
+            case "SKIP":
+                Test.log(Status.SKIP, MarkupHelper.createLabel(Test_Description, ExtentColor.ORANGE));
+                if (Capture_Screenshot) {
+                    Test.log(Status.SKIP, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
+                }
+                break;
+            case "INFO":
+                Test.log(Status.INFO, MarkupHelper.createLabel(Test_Description, ExtentColor.BLUE));
+                if (Capture_Screenshot) {
+                    Test.log(Status.INFO, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
+                }
+                break;
+            case "WARN":
+                Test.log(Status.WARNING, MarkupHelper.createLabel(Test_Description, ExtentColor.YELLOW));
+                if (Capture_Screenshot) {
+                    Test.log(Status.WARNING,"Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
+                }
+                break;
+        }
+    }
+    protected String getScreenshot() {
+        try{
+            File SF = ad.getScreenshotAs(OutputType.FILE);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ImageIO.write(ImageIO.read(SF), "png", bos);
+            SF.delete();
+            return "data:image/png;base64, " + Base64.getEncoder().encodeToString(bos.toByteArray());
+        }catch (IOException ex) {
+            Logger.getLogger(An_GUI.class.getName()).log(Level.SEVERE, null, ex);
+            return "data:image/png;base64," + " ERROR";
+        }
 
-    private void BW1_DoWork(Boolean GUI){ 
+    }
+     //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Backgroud Worker: Appium Service > Android Driver > Execution">
+    private void BW1_DoWork(Boolean GUI) throws Exception{
         EX = "";
         _t = 0;
         _p = 0;
         _f = 0;
         _w = 0;
+        _i = 0;
         F = "";
         r_time = "";
-        BW1 = new SwingWorker() {                        
+
+        BW1 = new SwingWorker() {
             @Override
-            protected String doInBackground() throws Exception   { 
+            protected String doInBackground() throws Exception {
                 String DriverStart = StartAndroidDriver();
                 if(DriverStart.contains("OK")){
-                    Current_Log_Update(GUI, "=== Appium Service and Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");    
-                    sw1.reset();      
+                    Current_Log_Update(GUI, "= Appium Service and Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
+                    sw1.reset();
                 } else{
                     Current_Log_Update(GUI, DriverStart.trim() + "\r\n");
-                    Summary = "Start Driver - Failed"; 
+                    Summary = "Start Driver - Failed";
                     DD = Duration.between(run_start, Instant.now());
-                    LOG_UPDATE(txtLog.getText());   // ========================================================
+                    LOG_UPDATE(txtLog.getText());   // ======================================================
                     btnRun.setEnabled(true);
                     btnFails.setEnabled(true);
-                }   
+                }
                 
-                New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));  
+                New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
+                Extent_Report_Detail();// ======================================================================= 
+                
                 if (app.equals("Bolter")) {
-                    An_bolter x = new Android.An_bolter(An_GUI.this);
-                    x.Run();
-                    EX += x.EX;
-                    _t += x._t;
-                    _p += x._p;
-                    _f += x._f;
-                    _w += x._w;
-                    F += x.F;
-                    r_time += x.r_time;
+                    Execute_Bolter();
+                    //HtmlReport.flush();
                 }else{
-                    An_coreapp x = new An_coreapp(An_GUI.this);// 
-                    x.Run();
-                    EX += x.EX;
-                    _t = x._t;
-                    _p = x._p;
-                    _f = x._f;
-                    _w = x._w;
-                    F = x.F;
-                    r_time = x.r_time;
-                }                 
+                    Execute_Core_App();
+                    //HtmlReport.flush();
+                }
                 DD = Duration.between(run_start, Instant.now());
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
-                Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n"); 
+                Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
-                EX = "Android " + app + " " + env + ", App v: " + appVersion + ", Device: " + device + " OS v: " + devOS +
-                " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
-                 "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
-                 + EX;
+                EX = "Android " + app + " " + env + ", App v: " + appVersion + ", Device: " + device + " OS v:" + devOS +
+                        " - Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i + ". Scope: " + SCOPE + "\r\n" +
+                        "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
+                        + EX;
                 
-                Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n"); 
+                Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n");
                 
                 BW1_Done(GUI);
                 if(_f > 0) {
-                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
+                    return "=== Completed @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)"+ ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" ;
                 }else{
-                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter);
-                } 
-            }  
+                    return "=== Completed @" + LocalDateTime.now().format(Time_12_formatter)+ ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" ;
+                }
+            }
             @Override
-            protected void done() { 
-                try  { 
-                    String statusMsg = (String) get(); 
+            protected void done() {
+                try  {
+                    String statusMsg = (String) get();
                     Current_Log_Update(GUI, statusMsg + "\r\n");
                     BW1 = null;
-                } catch (InterruptedException | ExecutionException ex)  { 
-                    Current_Log_Update(GUI, "- BW1 Done ERROR: " + ex.getMessage() + "\r\n"); 
-                } 
+                } catch (InterruptedException | ExecutionException ex)  {
+                    Current_Log_Update(GUI, "- BW1 ERROR: " + ex.getMessage() + "\r\n");
+                    BW1_FAIL_LOG_UPDATE(ex.getMessage());
+                }
                 if(ad != null) {
-                    ad.quit(); 
+                    ad.quit();
                 }
                 if(appiumService != null && appiumService.isRunning()){
-                    appiumService.stop();                    
+                    appiumService.stop();
                 }
-            } 
-        }; 
+            }
+        };
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        BW1.execute();  
+        BW1.execute();
     }
-    private void BW1_Done(boolean GUI){
+    private void BW1_FAIL_LOG_UPDATE(String Error){
+        Summary = "BW1 - Failed";
+        DD = Duration.between(run_start, Instant.now());
+        LOG_UPDATE("- BW1 ERROR: " + Error);        
+    }
+    private String StartAndroidDriver() {
+        try {
+            DesiredCapabilities  cap = new DesiredCapabilities ();
+            cap.setCapability("platformName", "Android");
+            cap.setCapability("deviceName", device);
+            cap.setCapability("udid", devID);
+            cap.setCapability("platformVersion", devOS);
+            cap.setCapability("clearSystemFiles", true);
+            cap.setCapability("appPackage", appPackage);
+            cap.setCapability("appActivity", appActivity);
+            
+            cap.setCapability("autoGrantPermissions", false); // false- always get prompt
+            cap.setCapability("unicodeKeyboard", false);
+            cap.setCapability("resetKeyboard", true);
+            cap.setCapability("sendKeyStrategy", "oneByOne"); // ‘setValue’“);
+//            cap.setCapability(MobileCapabilityType.FULL_RESET, false);
+//            cap.setCapability(MobileCapabilityType.NO_RESET, true);
+            cap.setCapability("automationName", "UiAutomator2");
+            cap.setCapability("newCommandTimeout", "240");
+
+            AppiumServiceBuilder ASB  = new AppiumServiceBuilder();
+            if(!A.A.WsOS.toLowerCase().contains("windows")){
+                //asb.usingDriverExecutable(new File(("/path/to/node")));
+                HashMap<String, String> environment = new HashMap();
+                environment.put("ANDROID_HOME", "/Users/" + A.A.UserID + "/Library/Android/sdk"); //PATH”));
+                ASB.withEnvironment(environment);
+                ASB.withAppiumJS(new File(("/usr/local/lib/node_modules/appium/build/lib/main.js")));
+            }
+            ASB.usingAnyFreePort();
+            appiumService = AppiumDriverLocalService.buildService(ASB);
+            appiumService.start();
+
+            ad = new AndroidDriver(new URL(appiumService.getUrl().toString()), cap);
+            ad.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
+
+            loadTimeout = new FluentWait(ad).withTimeout(Duration.ofMillis((long) LoadTimeOut))
+                    .pollingEvery(Duration.ofMillis(200))
+                    .ignoring(NoSuchElementException.class);
+            return "=== Android Driver Start > OK " + "\r\n";
+        } catch (Exception ex) {
+            F += "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
+            if(ad != null) {
+                ad.quit();
+            }
+            if(appiumService != null && appiumService.isRunning()){
+                appiumService.stop();
+            }
+            return "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
+        }
+    }
+    private void Execute_Bolter() throws Exception {
+        if(_Login){
+            ParentTest = HtmlReport.createTest("Bolter Main"); 
+            An_bolter_main b1 = new Android.An_bolter_main(An_GUI.this);
+            b1.Run(); // ======================================
+            EX += b1.EX; _t += b1._t; _p += b1._p; _f += b1._f; _w += b1._w; _i += b1._i; F += b1.F; r_time += b1.r_time;
+        }
+        if(_Forgot_pw){        
+            ParentTest = HtmlReport.createTest("Forgot Password");         
+            An_bolter_forgot_pw b2 = new Android.An_bolter_forgot_pw(An_GUI.this);
+            b2.Run(); // ======================================
+            EX += b2.EX; _t += b2._t; _p += b2._p; _f += b2._f; _w += b2._w; _i += b2._i; F += b2.F; r_time += b2.r_time;
+        }
+        if(_Invalids){              
+            ParentTest = HtmlReport.createTest("Logins > invalid, valid");         
+            An_bolter_logins b4 = new Android.An_bolter_logins(An_GUI.this);
+            b4.Run(); // ======================================
+            EX += b4.EX; _t += b4._t; _p += b4._p; _f += b4._f; _w += b4._w; _i += b4._i; F += b4.F; r_time += b4.r_time;
+        }
+        if(_Edit_profile){               
+            ParentTest = HtmlReport.createTest("User Profile");         
+            An_bolter_profile b5 = new Android.An_bolter_profile(An_GUI.this);
+            b5.Run(); // ======================================
+            EX += b5.EX; _t += b5._t; _p += b5._p; _f += b5._f; _w += b5._w; _i += b5._i; F += b5.F; r_time += b5.r_time;
+        }
+        if(_Order_history){                    
+            ParentTest = HtmlReport.createTest("History");         
+            An_bolter_history b6 = new Android.An_bolter_history(An_GUI.this);
+            b6.Run(); // ======================================
+            EX += b6.EX; _t += b6._t; _p += b6._p;  _f += b6._f; _w += b6._w;  _i += b6._i; F += b6.F; r_time += b6.r_time;
+        }
+        if(_Support){            
+            ParentTest = HtmlReport.createTest("Support");         
+            An_bolter_support b7 = new Android.An_bolter_support(An_GUI.this);
+            b7.Run(); // ======================================
+            EX += b7.EX; _t += b7._t; _p += b7._p;  _f += b7._f; _w += b7._w;  _i += b7._i; F += b7.F; r_time += b7.r_time;
+        }
+//        if(_Dashboard"){    
+            ParentTest = HtmlReport.createTest("Delievery Dashboard");         
+            An_bolter_dashboard b8 = new Android.An_bolter_dashboard(An_GUI.this);
+            b8.Run(); // ======================================
+            EX += b8.EX; _t += b8._t; _p += b8._p;  _f += b8._f; _w += b8._w;  _i += b8._i; F += b8.F; r_time += b8.r_time;
+//        }
+        
+        if(_Logout){    
+            ParentTest = HtmlReport.createTest("Logout");         
+            An_bolter_logout b9 = new Android.An_bolter_logout(An_GUI.this);
+            b9.Run(); // ======================================
+            EX += b9.EX; _t += b9._t; _p += b9._p;  _f += b9._f; _w += b9._w;  _i += b9._i; F += b9.F; r_time += b9.r_time;
+        }
+    }
+    private void Execute_Core_App() throws Exception{
+        An_core_main _coreapp = new An_core_main(An_GUI.this);//
+        ParentTest = HtmlReport.createTest(app);
+        _coreapp.Run(); // ======================================
+        EX += _coreapp.EX;
+        _t = _coreapp._t;
+        _p = _coreapp._p;
+        _f = _coreapp._f;
+        _w = _coreapp._w;
+        _i += _coreapp._i;
+        F = _coreapp.F;
+        r_time = _coreapp.r_time;
+    }
+    private void BW1_Done(boolean GUI) throws Exception{
         Last_EX = EX;
-        Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
+        Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
         try {
             String t_rep = "";
             if (!"".equals(r_time.trim())) {
@@ -2649,135 +2995,100 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     t_calls = am0.length;
                     t_min = am0[0] / (double)1000;
                     t_avg = (total / am0.length) / (double)1000;
-                    t_max = am0[am0.length - 1]  / (double)1000; 
+                    t_max = am0[am0.length - 1]  / (double)1000;
                     p_50 = Func.p50(am0) / (double)1000;
                     p_90 = Func.p90(am0) / (double)1000;
-
+                    
                     DecimalFormat df = new DecimalFormat("#.##");
-                    t_rep += "=== Total Calls: " + t_calls + 
-                        ", Response Times (sec) - Min: " + df.format(t_min) +
-                        ", Avg: " + df.format(t_avg) +
-                        ", Max: " + df.format(t_max) +
-                        ", p50: " + df.format(p_50) +
-                        ", p90: " + df.format(p_90);
+                    t_rep += "=== Total Calls: " + t_calls +
+                            ", Response Times (sec) - Min: " + df.format(t_min) +
+                            ", Avg: " + df.format(t_avg) +
+                            ", Max: " + df.format(t_max) +
+                            ", p50: " + df.format(p_50) +
+                            ", p90: " + df.format(p_90);
                 }
                 Current_Log_Update(GUI, t_rep + "\r\n");
             }
         } catch(Exception ex){
-            Current_Log_Update(GUI, "=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
-        }  
-
-        Current_Log_Update(GUI, "=== " + Summary + "\r\n"); // Summary shown in EX top
-        Current_Log_Update(GUI, "=== Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
-        Current_Log_Update(GUI, "=== Android_" + app + "_" + env + ", App v: " + appVersion + ", Device: " + device + " OS v: " + devOS + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
-
+            Current_Log_Update(GUI, "= LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
+        }
+        
+        Current_Log_Update(GUI, "= " + Summary + "\r\n"); // Summary shown in EX top
+        Current_Log_Update(GUI, "= Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
+        Current_Log_Update(GUI, "= Android_" + app + "_" + env + ", App v: " + appVersion + ", Device: " + device + " OS v: " + devOS + "\r\n");
+        
         if(GUI){
             Log = txtLog.getText();
         }
         LOG_UPDATE(Log); // ========================================================
-
-        if(_Slack){
-            Report(false); 
-            String MSG = "Android_" + app + "_" + env + " Automation report - " + Report_Date +  
-            "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
-            "Device: " + device + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
-            "Scope: " + SCOPE + "\r\n" +
-            "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
-
-            Current_Log_Update(true, Func.Send_File_to_Slack(Report_File, "Android_automation", MSG + "\r\n"));
-            File f = new File(Report_File);
-            if(f.exists() && !f.isDirectory()) { 
-                f.delete();
+        HtmlReporter.config().setReportName("Android OS v" + devOS + ", App: " + app + " v: " + appVersion + ", Environment: " + env + ", Summary: Total Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i);
+        HtmlReport.flush();
+        
+        if(_Slack && !Slack_Channel.equals("N/A")){
+            Report(false);
+            String MSG = "Android_" + app + "_" + env + " Automation report - " + Report_Date +
+                    "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
+                    "Device: " + device + " > ID: " + devID + "\r\n" +
+                    "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +
+                    "Scope: " + SCOPE + "\r\n" +
+                    "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;;
+            
+            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Report_File, Slack_Channel, MSG));
+            File ef = new File(Report_File);
+            if(ef.exists() && !ef.isDirectory()) {
+                ef.delete();
+            }  
+            String HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Click to Oopen";
+            String HTML_Path = HtmlReporter.getFilePath();
+            if(Zip_Report){
+                String Origin_HTML = HTML_Path;
+                HTML_Path = A.Func.Zip_File(HTML_Path);
+                File hf = new File(Origin_HTML);
+                if(hf.exists() && !hf.isDirectory()) {
+                    hf.delete();
+                }
+                HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Extract Here > open unzipped HTML file";
+            }
+            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(HTML_Path, Slack_Channel, "HTML Report"));
+            File hf = new File(HTML_Path);
+            if(hf.exists() && !hf.isDirectory()) {
+                hf.delete();
             }
         }
-        btnRun.setEnabled(true);               
+        btnRun.setEnabled(true);
         if(!"".equals(F.trim())){
             btnFails.setEnabled(true);
         } else{
             btnFails.setEnabled(false);
         }
-        btnExel.setEnabled(true); 
+        btnExel.setEnabled(true);
     }
-    protected String StartAndroidDriver() {
-        try {
-            DesiredCapabilities  cap = new DesiredCapabilities ();
-            cap.setCapability("platformName", "Android");
-            cap.setCapability("deviceName", device);
-            cap.setCapability("udid", devID); 
-            cap.setCapability("platformVersion", devOS);
-            cap.setCapability("clearSystemFiles", true);
-            cap.setCapability("appPackage", appPackage);
-            cap.setCapability("appActivity", appActivity);
-
-            cap.setCapability("autoGrantPermissions", false); // false- always get prompt
-            cap.setCapability("unicodeKeyboard", false);
-            cap.setCapability("resetKeyboard", true);
-            cap.setCapability("sendKeyStrategy", "oneByOne"); // ‘setValue’“);
-//            cap.setCapability(MobileCapabilityType.FULL_RESET, false);
-//            cap.setCapability(MobileCapabilityType.NO_RESET, true);
-            cap.setCapability("automationName", "UiAutomator2");
-
-            AppiumServiceBuilder ASB  = new AppiumServiceBuilder();
-            if(!A.A.WsOS.toLowerCase().contains("windows")){
-                //asb.usingDriverExecutable(new File(("/path/to/node")));
-                HashMap<String, String> environment = new HashMap();
-                environment.put("ANDROID_HOME", "/Users/" + A.A.UserID + "/Library/Android/sdk"); //PATH”));
-                ASB.withEnvironment(environment);
-                ASB.withAppiumJS(new File(("/usr/local/lib/node_modules/appium/build/lib/main.js")));
-            }
-            ASB.usingAnyFreePort();
-            appiumService = AppiumDriverLocalService.buildService(ASB);
-            appiumService.start();
-            
-            ad = new AndroidDriver(new URL(appiumService.getUrl().toString()), cap);
-            ad.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
-                      
-            loadTimeout = new FluentWait(ad).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
-                    .pollingEvery(Duration.ofMillis(200))  			
-                    .ignoring(NoSuchElementException.class); 
-            return "=== Android Driver Start > OK " + "\r\n";
-        } catch (Exception ex) {
-            F += "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
-            if(ad != null) {
-                ad.quit(); 
-            }
-            if(appiumService != null && appiumService.isRunning()){
-                appiumService.stop();                    
-            }
-            return "=== Android Driver > ERROR: " + ex.getMessage() + "\r\n";
-        }   
-    }    
-
-    // <editor-fold defaultstate="collapsed" desc="Driver Actions">  
-    protected void Test_EX_Update(String NAME, String JIRA ){
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Driver Actions > Log Step Result">  
+    protected void Test_EX_Update(String NAME, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
         _t++; sw1.start();        
-        if(NAME.endsWith("1")){
-            FAIL = true;
-            t = "Test_EX_Update FAIL = true";
-        }
-        if(NAME.endsWith("2")){
-            FAIL = false;           
-            t = "Test_EX_Update FAIL = false";
-        } 
         
         try {
             _p++; 
             err = "No Error";
             EX += _t + "\t" + NAME + "\t" + "Test_EX_Update OK"  + "\t" + t + "\t" + "PASS" + "\t" + err + 
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Page URL" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }     
-    protected void Reset_App(String NAME, String JIRA ){
+    protected void Reset_App(String NAME, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2790,16 +3101,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "test"  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Page URL" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }     
-    protected void Go_Back_Key(String NAME, String JIRA ){
+    protected void Go_Back_Key(String NAME, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2811,17 +3124,19 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "AndroidKey.BACK" + "\t" + "driver.pressKey" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "AndroidKey.BACK" + "\t" + "driver.pressKey" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }     
 
-    protected void HideKeyboard(String NAME, String JIRA ){
+    protected void HideKeyboard(String NAME, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2833,9 +3148,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 ad.hideKeyboard();                
                 EX += _t + "\t" + NAME + "\t" + "Keyboard is Shown"  + "\t" + "hideKeyboard" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
             }else{
                 EX += _t + "\t" + NAME + "\t" + "Keyboard is Not Shown"  + "\t" + " - " + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
             }
             _p++; 
         } catch(Exception ex){
@@ -2844,10 +3161,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     } 
-    protected void Swipe_From_Screen_Center(String NAME, String DIRECTION, int DURATION, String JIRA ){
+    protected void Swipe_From_Screen_Center(String NAME, String DIRECTION, int DURATION, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2889,16 +3207,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Swipe " + DIRECTION + "\t" + "Swipe OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Swipe " + DIRECTION + "\t" + "Swipe Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }    
-    protected void Swipe_From_Elenent_XY(String NAME, AndroidElement E, String DIRECTION, int DURATION, String JIRA ){
+    protected void Swipe_From_Elenent_XY(String NAME, AndroidElement E, String DIRECTION, int DURATION, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2941,16 +3261,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + DIRECTION + "\t" + "Swipe OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + DIRECTION + "\t" + "Swipe Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }    
-    protected void Wait_For_Element_By_Path_Presence(String NAME, String BY, String PATH, String JIRA ){
+    protected void Wait_For_Element_By_Path_Presence(String NAME, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2987,16 +3309,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "Done in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "loadTimeout " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void Wait_For_Element_By_Path_InVisibility(String NAME, String BY, String PATH, String JIRA ){
+    protected void Wait_For_Element_By_Path_InVisibility(String NAME, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3033,17 +3357,19 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME  + "\t" + PATH + "\t" + "Done in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "loadTimeout " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
 
-    protected void Scroll_to_Element(String NAME, AndroidElement E, String JIRA ){
+    protected void Scroll_to_Element(String NAME, AndroidElement E, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3055,16 +3381,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void Move_to_Element(String NAME, AndroidElement E, String JIRA ){
+    protected void Move_to_Element(String NAME, AndroidElement E, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3077,16 +3405,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     } 
-    protected void Click_out_of_Element(String NAME, AndroidElement E, String DIRECTION, int X, int Y, String JIRA ){
+    protected void Click_out_of_Element(String NAME, AndroidElement E, String DIRECTION, int X, int Y, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3113,16 +3443,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Click " + DIRECTION + " of element successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + DIRECTION + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     } 
-    protected void Move_to_Element_By_Path(String NAME, String BY, String PATH, String JIRA ){
+    protected void Move_to_Element_By_Path(String NAME, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3163,16 +3495,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void Move_out_of_Element_By_Path(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, String JIRA ){
+    protected void Move_out_of_Element_By_Path(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3228,16 +3562,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Move '" + DIRECTION + "' of element successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "moveToElement" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void Click_out_of_Element_By_Path(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, String JIRA ){
+    protected void Click_out_of_Element_By_Path(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3294,17 +3630,19 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Click out " + DIRECTION + " of element successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "moveToElement" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
 
-    protected void Text_Found(String NAME, String VAL, String JIRA ){
+    protected void Text_Found(String NAME, String VAL, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3318,6 +3656,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + VAL  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             t = "Not Found";
             _p++;
@@ -3327,7 +3666,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         _p++;
         sw1.reset();
     }
-    protected void Find_Text(String NAME, String VAL, Boolean EXPECTED,String JIRA ){
+    protected void Find_Text(String NAME, String VAL, Boolean EXPECTED, String JIRA ) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3350,13 +3689,15 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Text Found" + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             if(EXPECTED){
                 _f++; FAIL = true; err = ex.getMessage().trim();
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "FAIL" + "\t" + err +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                F += _t + " > " + err + "\r\n";                
+                F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));                
             } else {
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text Not Found" + "\t" + "PASS" + "\t" + " - " +
@@ -3366,7 +3707,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
     }    
 
-    protected void Element_E1_Find(String NAME, String BY, String PATH, String JIRA ){
+    protected void Element_E1_Find(String NAME, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         FAIL = false;
         if(sw1.isRunning()){
             sw1.reset();
@@ -3405,16 +3746,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element Found" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void Element_E2_Find(String NAME, String BY, String PATH, String JIRA ){
+    protected void Element_E2_Find(String NAME, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         FAIL = false;
         if(sw1.isRunning()){
             sw1.reset();
@@ -3452,16 +3795,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Element Found" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Action_Click(String NAME, String BY, String PATH, String JIRA ){
+    protected void Element_By_Path_Action_Click(String NAME, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3502,16 +3847,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Click(String NAME, String BY, String PATH, String JIRA ){
+    protected void Element_By_Path_Click(String NAME, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3551,16 +3898,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Text(String NAME, String BY, String PATH, String JIRA ){
+    protected void Element_By_Path_Text(String NAME, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         t = "empty"; FAIL = false;
         if(sw1.isRunning()){
             sw1.reset();
@@ -3599,16 +3948,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t.replace("\r\n", " ").replace("\n", " ") + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Attribute(String NAME, String BY, String PATH, String VAL, String JIRA ){
+    protected void Element_By_Path_Attribute(String NAME, String BY, String PATH, String VAL, ExtentTest ParentTest,  String JIRA) throws Exception {
         t = ""; FAIL = false;
         if(sw1.isRunning()){
             sw1.reset();
@@ -3650,19 +4001,21 @@ public class An_GUI extends javax.swing.JInternalFrame {
             } else {
                 t = "null";
             }
+            _p++;  
             EX += _t + "\t" + NAME + "\t" + VAL  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            _p++; 
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Text_Select_Copy(String NAME, String BY, String PATH, String JIRA ){
+    protected void Element_By_Path_Text_Select_Copy(String NAME, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3703,16 +4056,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Text_DblClick_Copy(String NAME, String BY, String PATH, String JIRA ){
+    protected void Element_By_Path_Text_DblClick_Copy(String NAME, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3753,16 +4108,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Text_DblClick_Paste(String NAME, String BY, String PATH, String VAL,  String JIRA ){
+    protected void Element_By_Path_Text_DblClick_Paste(String NAME, String BY, String PATH, String VAL,  String JIRA ) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3806,16 +4163,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + " > " + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Input_Select_Clear(String NAME, String BY, String PATH, String JIRA ){
+    protected void Element_By_Path_Input_Select_Clear(String NAME, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3862,16 +4221,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Cleared" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Text_Enter(String NAME, String BY, String PATH, String VAL, boolean HIDE,String JIRA ){
+    protected void Element_By_Path_Text_Enter(String NAME, String BY, String PATH, String VAL, boolean HIDE,String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3914,17 +4275,19 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "sendKeys" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
     }
 
-    protected void Element_Text(String NAME, AndroidElement E, String JIRA ){
+    protected void Element_Text(String NAME, AndroidElement E, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3947,16 +4310,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void Element_Text_Clear(String NAME, AndroidElement E, String JIRA ){
+    protected void Element_Text_Clear(String NAME, AndroidElement E, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3974,16 +4339,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Text cleared"+ "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void Element_Text_Enter(String NAME, AndroidElement E, String VAL, String JIRA ){
+    protected void Element_Text_Enter(String NAME, AndroidElement E, String VAL, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3995,16 +4362,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void Element_Attribute(String NAME, AndroidElement E, String VAL, String JIRA ){       
+    protected void Element_Attribute(String NAME, AndroidElement E, String VAL, ExtentTest ParentTest,  String JIRA) throws Exception {       
         t = "empty";
         if(sw1.isRunning()){
             sw1.reset();
@@ -4020,15 +4389,16 @@ public class An_GUI extends javax.swing.JInternalFrame {
             } else {
                 t = "null";
             }
-            if (t.contains("img-default"))
-            {
+            if (t.contains("img-default")) {
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "WARN" + "\t" + "No Image" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _w++;
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName(), true, ParentTest.createNode(NAME));
             } else {
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _p++;
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
             }
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
@@ -4036,10 +4406,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void Element_Click(String NAME, AndroidElement E, String JIRA ){
+    protected void Element_Click(String NAME, AndroidElement E, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -4052,17 +4423,19 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
 
-    protected void Element_Child_List_L1(String NAME, AndroidElement E, String BY, String PATH, String JIRA ){
+    protected void Element_Child_List_L1(String NAME, AndroidElement E, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -4103,10 +4476,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L1.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + aL1.size() + " item(s) (L1)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";               
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -4114,10 +4489,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
     }    
-    protected void Element_Child_List_L2(String NAME, AndroidElement  E, String BY, String PATH, String JIRA ){
+    protected void Element_Child_List_L2(String NAME, AndroidElement  E, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -4158,10 +4534,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L2.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + aL2.size() + " item(s) (L1)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";               
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -4169,10 +4547,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
     }    
-    protected void Element_Child_E2(String NAME, AndroidElement E, String BY, String PATH, String JIRA ){
+    protected void Element_Child_E2(String NAME, AndroidElement E, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -4211,16 +4590,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element (e2) found" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "e2" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
     }    
-    protected void Element_Child_Text(String NAME, AndroidElement E, String BY, String PATH, String JIRA ){
+    protected void Element_Child_Text(String NAME, AndroidElement E, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -4269,16 +4650,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
     }    
-    protected void Element_Child_Text_Enter(String NAME, AndroidElement E, String BY, String PATH, String VAL, boolean HIDE, String JIRA ){
+    protected void Element_Child_Text_Enter(String NAME, AndroidElement E, String BY, String PATH, String VAL, boolean HIDE, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -4322,16 +4705,18 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }            
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "sendKeys"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
     }
-    protected void Element_Child_Click(String NAME, AndroidElement E, String BY, String PATH, String JIRA ){
+    protected void Element_Child_Click(String NAME, AndroidElement E, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -4367,19 +4752,21 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 default:
                     break;
             }
+            _p++;
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            _p++;
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
     }    
-    protected void Element_Child_Attribute(String NAME, AndroidElement E, String BY, String PATH, String VAL, String JIRA ){
+    protected void Element_Child_Attribute(String NAME, AndroidElement E, String BY, String PATH, String VAL, ExtentTest ParentTest,  String JIRA) throws Exception {
         t = "";
         if(sw1.isRunning()){
             sw1.reset();
@@ -4422,15 +4809,16 @@ public class An_GUI extends javax.swing.JInternalFrame {
             } else {
                 t = "null";
             }
-            if (t.contains("placeholder") || t.contains("adminpanel.compassdigital.org") || t.contains("img-default"))
-            {
+            if (t.contains("placeholder") || t.contains("adminpanel.compassdigital.org") || t.contains("img-default")) {
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "WARN" + "\t" + "No Image" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _w++;
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
             } else {
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _p++;
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
             } 
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -4438,11 +4826,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
 
-    protected void List_L0(String NAME, String BY, String PATH, String JIRA ){
+    protected void List_L0(String NAME, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -4483,10 +4872,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L0.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + aL0.size() + " item(s) (L0)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";               
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -4494,10 +4885,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L0" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
-    protected void List_L1(String NAME, String BY, String PATH, String JIRA ){
+    protected void List_L1(String NAME, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -4538,10 +4930,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L1.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + aL1.size() + " item(s) (L1)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -4549,10 +4943,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
     }
-    protected void List_L2(String NAME, String BY, String PATH, String JIRA ){
+    protected void List_L2(String NAME, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -4593,10 +4988,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L2.isEmpty()" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + aL2.size() + " item(s) (L2)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";               
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -4604,10 +5001,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L2" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
     }
-    protected void List_L3(String NAME, String BY, String PATH, String JIRA ){
+    protected void List_L3(String NAME, String BY, String PATH, ExtentTest ParentTest,  String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -4648,10 +5046,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L3.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + aL3.size() + " item(s) (L3)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -4659,133 +5059,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L3" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
     } 
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="Instance Variables Declaratios">
-    private int d1LastRow = -1; 
-    private int d2LastRow = -1; 
-    private boolean Load = true; 
-    private SwingWorker BW1;  
-    private boolean CONFIG = false;
-    private Instant run_start;
-    private String err;    
-    protected Duration DD;  
-    
-    protected final Stopwatch sw1 = Stopwatch.createUnstarted();
-
-    protected boolean Update_Build = false;   
-    protected String AWS_A_key = "";   
-    protected String AWS_S_key = "";   
-    protected AWSCredentials AWS_credentials;   
-
-    protected String appPackage = "";   
-    protected String appActivity = "";   
-    protected String appBuldFile = "";   
-    protected String appVersion = "";   
-    
-    protected String device = "";   
-    protected String devID = "";    
-    protected String devOS = "";   
-    
-    protected String Report_Date;
-    protected String SCOPE = "";   
-    protected String Last_EX = "";   
-    protected String Report_File = "";    
-    protected String New_ID = "";
-
-    protected String Mobile_ID = "";   
-    protected String Mobile_PW = "";   
-    protected String Bolter_ID = "";   
-    protected String Bolter_PW = "";   
-         
-    protected String url = "";
-    protected String app = "";
-    protected String appId = "";
-    protected String env = "";
-    protected String platform = "CDL";
-    protected String BaseAPI = "";   
-    protected String COUNTRY = "COUNTRY";
-    protected String SITE = "";
-    protected String SiteID = "";
-    protected String GROUP = "";
-    protected String BRAND = "";
-    protected String BrandID = "";
-    protected String Location = "";
-    protected String Menu = "";
-    protected String Category = "";
-    protected String Options = "";   
-    
-    protected int _t = 0; // Total
-    protected int _p = 0; // Passed
-    protected int _f = 0; // Failed
-    protected int _w = 0; // Warn
-    protected String t = "";   
-    protected String F = "";   
-    protected String EX = "";   
-    protected String r_time = "";    
-
-    protected AndroidDriver<AndroidElement> ad = null;
-    protected FluentWait loadTimeout = null;
-    protected AppiumDriverLocalService appiumService = null;
-    protected long WaitForElement = 3000; // milisec
-    protected double LoadTimeOut = 15 * 1000; // milisec  
-    
-    protected int t_calls = 0;
-    protected double t_min = 0;
-    protected double t_max = 0;
-    protected double t_avg = 0;
-    protected double p_50 = 0;
-    protected double p_90 = 0;  
-    
-    protected String r_type = "";   
-
-    protected String Ver = "";
-    protected String TZone = "";      
-    protected String Summary = "";   
-    protected String Log = "";   
-    protected boolean FAIL = false;
-    
-    protected final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
-    protected final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-    protected final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    
-
-    protected List<AndroidElement> aL0 = null;
-    protected List<AndroidElement> aL1 = null;
-    protected List<AndroidElement> aL2 = null;
-    protected List<AndroidElement> aL3 = null;
-    protected AndroidElement ae = null;
-    protected AndroidElement ae1 = null;
-    protected AndroidElement ae2 = null;
-    protected AndroidElement ae3 = null;
-    
-    protected String Slack_Channel = "";
-    protected boolean _Slack = false;
-    protected boolean _Support = false;
-    protected boolean _Forgot_pw  = false;
-    protected boolean _Allow_loc  = false;
-    protected boolean _Order_history  = false;
-    protected boolean _Edit_profile  = false;
-    protected boolean _Invalids = false;
-    protected boolean _Logout = false;
-    protected boolean _Order_email = false;
-    protected boolean _Login = false;
-    protected boolean _All_cards = false;
-    protected boolean _Reorder = false;
-    protected boolean _OptX = false;
-    protected boolean _Acc_options = false;
-    protected boolean _Edit_item = false;
-    protected boolean _Welcome = false;
-    protected boolean _Explore = false;
-    protected boolean _Promo = false;
-    protected boolean _Mplan = false;
-    protected boolean _Feedback = false;
-    // </editor-fold>
-   
-    // <editor-fold defaultstate="collapsed" desc="GUI Form Variables Declaration - do not modify">
+    // <editor-fold defaultstate="collapsed" desc="GUI Variables Declaration">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;

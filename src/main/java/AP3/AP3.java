@@ -26,7 +26,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -64,7 +63,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  *
  * @author Oleg.Spozito
@@ -1403,7 +1401,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                     "Scope: " + SCOPE + "\r\n" +
                     "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w;
 
-                    txtLog.append(Func.Send_File_to_Slack(Report_File, "ap3automation", MSG + "\r\n"));
+                    txtLog.append(Func.Send_File_with_Message_to_Slack(Report_File, "ap3automation", MSG + "\r\n"));
                     File f = new File(Report_File);
                     if(f.exists() && !f.isDirectory()) { 
                         f.delete();

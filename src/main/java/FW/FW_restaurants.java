@@ -8,6 +8,7 @@ import A.TWeb;
 import static A.A.*;
 import static FW.FW.*;
 import java.io.File;
+import java.time.LocalDateTime;
 import org.apache.commons.lang3.RandomStringUtils;
 
 /**
@@ -28,11 +29,14 @@ public class FW_restaurants {
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;} 
         _t++; TWeb.Element_By_Path_Text_Enter("Enter '" + RESTAURANT + "' in Search", "xpath", "//input[@placeholder='Search']", FW.RESTAURANT, false, "no_jira");
-            if (FAIL) { return;}
+        //_t++; TWeb.Element_By_Path_Text_Enter("Enter Search", "xpath", "//input[@placeholder='Search']", "Tim Horton", false, "no_jira"); 
+        if (FAIL) { return;}   
         Thread.sleep(500);
+        
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress-circular')]", "no_jira"); 
             if (FAIL) { return;} 
         Thread.sleep(500);  
+        
         _t++; Thread.sleep((long) sleep); TWeb.List_L0("Restaurant(s) Data row Count", "tagName", "tr", "no_jira");                                     
             T_Index = -1;
             for (int i = 0; i < L0.size(); i++) {
@@ -117,7 +121,7 @@ public class FW_restaurants {
          for (int i = 0; i < L0.size(); i++) {
 	    _t++; TWeb.Element_Text("Rows per page Value (index " + i + ")", L0.get(i),  "no_jira"); 
 	                if (FAIL) { return;}
-	                if(t.trim().equals("Aabc Testing")){ 
+	                if(t.trim().equals("Athe Gmail Raj")){ 
 	                    L0.get(i).click();
 	                }
 	            }  
@@ -206,15 +210,30 @@ public class FW_restaurants {
       if (FAIL) { return;}
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select 'Restaurant location' from food preparation location dropdown", "xpath", "//div[@role='listbox']/div/div/div[contains(.,'Restaurant location')]", "no_jira"); 
       if (FAIL) { return;}
-     _t++; Thread.sleep((long) sleep);TWeb.Scroll_XY("Scroll to Upload Files", 0, 500, "no_jira");
+    _t++; Thread.sleep((long) sleep);TWeb.Scroll_XY("Scroll to Upload Files", 0, 500, "no_jira");
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Upload Files click ","xpath", "//button[@class='secondary-button v-btn v-btn--depressed v-btn--flat v-btn--outlined v-btn--rounded theme--light v-size--default primary--text']", "no_jira"); 
       if (FAIL) { return;}
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on upload file", "xpath", "//div[@class='upload-file partner-info-btn']/button", "no_jira"); 
       if (FAIL) { return;}   	
-         Thread.sleep(4000);
-    _t++; TWeb.Element_By_Path_Text_Enter("Upload a file", "xpath", "//input[@type='file']", System.getProperty("user.dir")+File.separator +"Login screen.png", false, "no_jira"); 
-      if (FAIL) { return;}
+         Thread.sleep(4000);   
+    // A.A.CWD + File.separator + "FilesToUpload"; 
+    // Check for Target file starting with prefix "FW_" exists
+    // if Yes
+    File tmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"FW_login_image.jpg");
+      if(tmp.exists())
+      {
+       _t++; TWeb.Element_By_Path_Text_Enter("Upload  Image", "xpath", "//input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"FW_login_image.jpg", false, "no_jira"); 
+        if (FAIL) { return;}
+      }
+      else
+      {
+       _t++; 
+       _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File : Ap3_brand_image  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+
+      }  
+
       Thread.sleep(4000);
+//    //  
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Done button", "xpath", "//button//span[contains(.,'Done')]", "no_jira"); 
       if (FAIL) { return;}  
       Thread.sleep(5000);
