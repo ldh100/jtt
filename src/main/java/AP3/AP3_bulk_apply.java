@@ -66,14 +66,14 @@ public class AP3_bulk_apply {
                 _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"hidden\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             } else {
                 _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"hidden\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"hidden\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
             if (item.getJSONObject("is").getBoolean("out_of_stock")) {
                 _t++;
                 _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             } else {
                 _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
         }
         //reset list visibility and in/out of stock checkbox indicator
@@ -105,14 +105,14 @@ public class AP3_bulk_apply {
                 _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + " {\"hidden\" : false}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             } else {
                 _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + " {\"hidden\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + " {\"hidden\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
             if (!item.getJSONObject("is").getBoolean("out_of_stock")) {
                 _t++;
                 _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : false}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             } else {
                 _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
         }
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
@@ -266,7 +266,7 @@ public class AP3_bulk_apply {
                     _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 } else {
                     _t++;
-                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 }
             }
             _t++; TWeb.Element_By_Path_Click("Add Visibility of Second Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i[contains(@class,'mdi-eye')]", "no_jira");
@@ -316,7 +316,7 @@ public class AP3_bulk_apply {
                     _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 } else {
                     _t++;
-                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 }
             }
             _t++; TWeb.Element_By_Path_Click("Remove Visibility of Second Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i[contains(@class,'mdi-eye')]", "no_jira");
@@ -391,21 +391,21 @@ public class AP3_bulk_apply {
                 _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"disabled\" : false}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             } else {
                 _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"disabled\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"disabled\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
             if (item.getJSONObject("price").getInt("amount") == Integer.parseInt(FIP)) {
                 _t++;
                 _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "\"price\" : {\"amount\" : "+FIP+"}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             } else {
                 _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "\"price\" : {\"amount\" : "+FIP+"}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "\"price\" : {\"amount\" : "+FIP+"}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
             if (item.isNull("plu")) {
                 _t++;
                 _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "has PLU" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             } else {
                 _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "has PLU" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "has PLU" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
             JSONArray options = new JSONArray();
             options = item.getJSONArray("options");
@@ -417,7 +417,7 @@ public class AP3_bulk_apply {
                 _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             } else {
                 _t++;
-                 _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
         }  
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira");
@@ -563,14 +563,14 @@ public class AP3_bulk_apply {
                 _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"disabled\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             } else {
                 _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"disabled\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"disabled\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
             if (item.isNull("plu")) {
                 _t++;
                 _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "has No PLU" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             } else {
                 _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "has No PLU" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "has No PLU" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
             JSONArray options = new JSONArray();
             options = item.getJSONArray("options");
@@ -582,7 +582,7 @@ public class AP3_bulk_apply {
                 _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             } else {
                 _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
         }     
         // <editor-fold defaultstate="collapsed" desc="Check Local Menu After Global Changes">  
@@ -728,7 +728,7 @@ public class AP3_bulk_apply {
                     EX += _t + "\t" + NAME + "\t" + LIST1 + " = " + LIST2 + "\t" + "List size comparison successful" + "\t" + "PASS" + "\t" + "===" +
                 "   \t" + "===" + "\t" + JIRA + "\r\n";  
                 } else {
-                   _p++; 
+                   _f++; 
                     EX += _t + "\t" + NAME + "\t" + "Size comaprison returned false" + "\t" + "List size comparison successful" + "\t" + "FAIL" + "\t" + "===" +
                 "   \t" + "===" + "\t" + JIRA + "\r\n";   
                 }                  
