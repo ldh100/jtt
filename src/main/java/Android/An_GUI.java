@@ -2784,7 +2784,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     }
      //</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc="Backgroud Worker: Appium Service > Android Driver > Execution">
+    //<editor-fold defaultstate="collapsed" desc="Backgroud Worker: Appium Service > Android Driver > Execution > Reports">
     private void BW1_DoWork(Boolean GUI) throws Exception{
         EX = "";
         _t = 0;
@@ -3031,7 +3031,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     "Device: " + device + " > ID: " + devID + "\r\n" +
                     "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +
                     "Scope: " + SCOPE + "\r\n" +
-                    "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;;
+                    "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
             
             Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Report_File, Slack_Channel, MSG));
             File ef = new File(Report_File);
@@ -3049,7 +3049,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 }
                 HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Extract Here > open unzipped HTML file";
             }
-            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(HTML_Path, Slack_Channel, "HTML Report"));
+            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(HTML_Path, Slack_Channel, HTML_Report_Msg));
             File hf = new File(HTML_Path);
             if(hf.exists() && !hf.isDirectory()) {
                 hf.delete();
