@@ -216,14 +216,14 @@ public class FW_restaurants {
       if (FAIL) { return;}
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select 'Restaurant location' from food preparation location dropdown", "xpath", "//div[@role='listbox']/div/div/div[contains(.,'Restaurant location')]", "no_jira"); 
       if (FAIL) { return;}
-     _t++; Thread.sleep((long) sleep);TWeb.Scroll_XY("Scroll to Upload Files", 0, 500, "no_jira");
+    _t++; Thread.sleep((long) sleep);TWeb.Scroll_XY("Scroll to Upload Files", 0, 500, "no_jira");
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Upload Files click ","xpath", "//button[@class='secondary-button v-btn v-btn--depressed v-btn--flat v-btn--outlined v-btn--rounded theme--light v-size--default primary--text']", "no_jira"); 
       if (FAIL) { return;}
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on upload file", "xpath", "//div[@class='upload-file partner-info-btn']/button", "no_jira"); 
       if (FAIL) { return;}   	
          Thread.sleep(4000);   
     // A.A.CWD + File.separator + "FilesToUpload"; 
-    //Check for Target file exists
+    // Check for Target file starting with prefix "FW_" exists
     // if Yes
     File tmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"FW_login_image.jpg");
       if(tmp.exists())
