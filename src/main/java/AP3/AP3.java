@@ -1178,9 +1178,9 @@ public class AP3 extends javax.swing.JInternalFrame {
                 }
                 if (_images.isSelected()) { 
                     SCOPE += ", Images";
-                    EX += " - " + "\t" + " === Brand" + "\t" + " ===== " + "\t" + " == Brand Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    EX += " - " + "\t" + " === Images" + "\t" + " ===== " + "\t" + " == Images Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     AP3_images.run();
-                    EX += " - " + "\t" + " === ^ Brand" + "\t" + " ===== " + "\t" + " == ^ Brand End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    EX += " - " + "\t" + " === ^ Images" + "\t" + " ===== " + "\t" + " == ^ Images End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     Thread.sleep(1500);
                 }
                 if (_group_management.isSelected()) { 
