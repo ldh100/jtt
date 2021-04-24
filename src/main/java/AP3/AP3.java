@@ -1483,17 +1483,18 @@ public class AP3 extends javax.swing.JInternalFrame {
             sw1.reset();
         }
         sw1.start();        
+        appId = Func.App_ID(cmbApp.getSelectedItem().toString());
 
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() +
-                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-            rs.next();
-            appId = rs.getString(1);
-            conn.close();
-        } catch (SQLException ex) {
-            txtLog.append("=== Get P2 App_ID > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
+//        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+//            ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem() +
+//                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
+//            rs.next();
+//            appId = rs.getString(1);
+//            conn.close();
+//        } catch (SQLException ex) {
+//            txtLog.append("=== Get P2 App_ID > ERROR: " + ex.getMessage() + "\r\n");
+//            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+//        }
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
         SitesModel.setColumnIdentifiers(SitesColumnsName);

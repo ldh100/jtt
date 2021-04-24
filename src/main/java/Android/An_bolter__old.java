@@ -26,7 +26,7 @@ class An_bolter__old extends An_GUI{
 //        Test_EX_Update("Test_EX_Update_Log_02", ParentTest, "no_jira");     
         
         //<editor-fold defaultstate="collapsed" desc="Forgot Password">
-        EX += "\r\n" + " - " + "\t" + " === Forgot Password ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += "\r\n" + " - " + "\t" + " === Forgot Password ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         Element_By_Path_Text("Get 'Forgot PW?' button text", "id", "btn_forgotPassword", ParentTest, "no_jira");
         Element_By_Path_Click("Click 'Forgot PW?' button", "id", "btn_forgotPassword", ParentTest, "no_jira");
             if (FAIL) { return;}        
@@ -45,11 +45,11 @@ class An_bolter__old extends An_GUI{
         Element_By_Path_Text("Alert message", "id", "android:id/message", ParentTest, "no_jira");   
         Element_By_Path_Click("Click Alert 'OK' button", "id", "android:id/button1", ParentTest, "no_jira");         
         Thread.sleep(500); 
-        EX += " - " + "\t" + " === Forgot Password ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";        
+        EX += " - " + "\t" + " === Forgot Password ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";        
         //</editor-fold>       
             
         //<editor-fold defaultstate="collapsed" desc="Login, Invalid > Valid ID/PW, User Name, Version">
-        EX += "\r\n" + " - " + "\t" + " === Login(s) ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += "\r\n" + " - " + "\t" + " === Login(s) ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         Element_By_Path_Text("Get 'Sign In' button text", "id", "button_login", ParentTest, "no_jira");
             if (FAIL) { return;}
             
@@ -155,11 +155,11 @@ class An_bolter__old extends An_GUI{
         } else{
             appVersion = t;
         }
-        EX += " - " + "\t" + " === Login(s) ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === Login(s) ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Profile">
-        EX += "\r\n" + " - " + "\t" + " === Profile ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";       
+        EX += "\r\n" + " - " + "\t" + " === Profile ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";       
         Element_E1_Find("Find 'nav_profile' element", "id", "nav_profile", ParentTest, "no_jira");
             if (FAIL) { return;}        
         Element_Child_Text("Get 'nav_profile' text", ae1, "id", "design_menu_item_text", ParentTest, "no_jira");
@@ -183,11 +183,11 @@ class An_bolter__old extends An_GUI{
         Thread.sleep(500);
         Wait_For_Element_By_Path_InVisibility("Wait for load", "id", "progress_bar", ParentTest, "no_jira");
             if (FAIL) { return;}   
-        EX += " - " + "\t" + " === Profile ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";       
+        EX += " - " + "\t" + " === Profile ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";       
         //</editor-fold>
         
         //<editor-fold defaultstate="collapsed" desc="History">
-        EX += "\r\n" + " - " + "\t" + " === History ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += "\r\n" + " - " + "\t" + " === History ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         Wait_For_Element_By_Path_Presence("Wait for 'Navigation' button", "xpath", "//android.widget.ImageButton[@content-desc='Open navigation drawer']", ParentTest, "no_jira");
             if (FAIL) { return;}        
         Element_By_Path_Click("Click 'Open Navigation drawer' image", "xpath", "//android.widget.ImageButton[@content-desc='Open navigation drawer']", ParentTest, "no_jira");
@@ -208,11 +208,11 @@ class An_bolter__old extends An_GUI{
         }else{
             //
         }  
-        EX += " - " + "\t" + " === History ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === History ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Support">
-        EX += "\r\n" + " - " + "\t" + " === Support ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";        
+        EX += "\r\n" + " - " + "\t" + " === Support ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";        
         Wait_For_Element_By_Path_Presence("Wait for 'Navigation' button", "xpath", "//android.widget.ImageButton[@content-desc='Open navigation drawer']", ParentTest, "no_jira");
             if (FAIL) { return;}        
         Element_By_Path_Click("Click 'Open Navigation drawer' image", "xpath", "//android.widget.ImageButton[@content-desc='Open navigation drawer']", ParentTest, "no_jira");        
@@ -227,11 +227,11 @@ class An_bolter__old extends An_GUI{
         Thread.sleep(500);
         Wait_For_Element_By_Path_InVisibility("Wait for load", "id", "progress_bar", ParentTest, "no_jira");
             if (FAIL) { return;}    
-        EX += " - " + "\t" + " === Support ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";                   
+        EX += " - " + "\t" + " === Support ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";                   
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Delievery Dashboard">
-        EX += "\r\n" + " - " + "\t" + " === Delievery Dashboard ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";                
+        EX += "\r\n" + " - " + "\t" + " === Delievery Dashboard ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";                
         Wait_For_Element_By_Path_Presence("Wait for 'Navigation' button", "xpath", "//android.widget.ImageButton[@content-desc='Open navigation drawer']", ParentTest, "no_jira");
             if (FAIL) { return;}        
         Element_By_Path_Click("Click 'Open Navigation drawer' image", "xpath", "//android.widget.ImageButton[@content-desc='Open navigation drawer']", ParentTest, "no_jira");
@@ -252,16 +252,16 @@ class An_bolter__old extends An_GUI{
         }else{
             //
         }
-        EX += " - " + "\t" + " === Delievery Dashboard ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";                       
+        EX += " - " + "\t" + " === Delievery Dashboard ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";                       
         //</editor-fold>
                 
         //<editor-fold defaultstate="collapsed" desc="Logout">
-        EX += "\r\n" + " - " + "\t" + " === Logout ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";                             
+        EX += "\r\n" + " - " + "\t" + " === Logout ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";                             
         Wait_For_Element_By_Path_Presence("Wait for 'Navigation' button", "xpath", "//android.widget.ImageButton[@content-desc='Open navigation drawer']", ParentTest, "no_jira");
             if (FAIL) { return;}        
         Element_By_Path_Click("Click 'Open Navigation drawer' image", "xpath", "//android.widget.ImageButton[@content-desc='Open navigation drawer']", ParentTest, "no_jira");    
         Element_By_Path_Click("Click 'Log out'", "id", "nav_logout", ParentTest, "no_jira");
-        EX += " - " + "\t" + " === Logout ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";                               
+        EX += " - " + "\t" + " === Logout ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";                               
         //</editor-fold>
     }
 }

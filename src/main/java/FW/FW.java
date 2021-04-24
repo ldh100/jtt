@@ -801,35 +801,35 @@ public class FW extends javax.swing.JInternalFrame {
 
         if (_config.isSelected()) { 
             SCOPE += ", Configuration";
-            EX += " - " + "\t" + " === Configuration" + "\t" + " ===== " + "\t" + " == Configuration Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === Configuration" + "\t" + " ===== " + "\t" + " == Configuration Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             FW_config.run();
             EX += " - " + "\t" + " === ^ Configuration" + "\t" + " ===== " + "\t" + " == ^ Configuration End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
         if (_restaurants.isSelected()) { 
             SCOPE += ", Restaurants";
-            EX += " - " + "\t" + " === Restaurants" + "\t" + " ===== " + "\t" + " == Restaurants Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === Restaurants" + "\t" + " ===== " + "\t" + " == Restaurants Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             FW_restaurants.run();
             EX += " - " + "\t" + " === ^ Restaurants" + "\t" + " ===== " + "\t" + " == ^ Restaurants End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
         if (_units.isSelected()) { 
             SCOPE += ", Units";
-            EX += " - " + "\t" + " === Units" + "\t" + " ===== " + "\t" + " == Units Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === Units" + "\t" + " ===== " + "\t" + " == Units Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             FW_units.run();
             EX += " - " + "\t" + " === ^ Units" + "\t" + " ===== " + "\t" + " == ^ Units End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
         if (_calendar.isSelected()) { 
             SCOPE += ", Calendar";
-            EX += " - " + "\t" + " === Calendar" + "\t" + " ===== " + "\t" + " == Calendar Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === Calendar" + "\t" + " ===== " + "\t" + " == Calendar Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             FW_calendar.run();
             EX += " - " + "\t" + " === ^ Calendar" + "\t" + " ===== " + "\t" + " == ^ Calendar End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }        
         if (_roles.isSelected()) { 
             SCOPE += ", User Permission";
-            EX += " - " + "\t" + " === User Permission" + "\t" + " ===== " + "\t" + " == User Permission Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === User Permission" + "\t" + " ===== " + "\t" + " == User Permission Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             FW_user_permission.run();
             EX += " - " + "\t" + " === ^ User Permission" + "\t" + " ===== " + "\t" + " == ^ User Permission End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
@@ -837,23 +837,23 @@ public class FW extends javax.swing.JInternalFrame {
         // ============================== Last Blocks
         if (_users.isSelected()) { 
             SCOPE += ", Users";
-            EX += " - " + "\t" + " === Users" + "\t" + " ===== " + "\t" + " == Users Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === Users" + "\t" + " ===== " + "\t" + " == Users Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             FW_users.run();
             EX += " - " + "\t" + " === ^ Users" + "\t" + " ===== " + "\t" + " == ^ Users End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
         if (_logout.isSelected()) { 
             SCOPE += ", LogOut";
-            EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             FW_logout.run();
-            EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
         if (_password.isSelected()) { 
             SCOPE += ", Forgot PW";  
-            EX += " - " + "\t" + " === Forgot PW" + "\t" + " ===== " + "\t" + " == Forgot PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === Forgot PW" + "\t" + " ===== " + "\t" + " == Forgot PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             FW_password.run();
-            EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
 
         }                                          

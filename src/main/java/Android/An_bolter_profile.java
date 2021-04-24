@@ -20,7 +20,7 @@ class An_bolter_profile extends An_GUI{
 
     protected void Run() throws InterruptedException, Exception{                
         //<editor-fold defaultstate="collapsed" desc="Profile">
-        EX += "\r\n" + " - " + "\t" + " === Profile ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";       
+        EX += "\r\n" + " - " + "\t" + " === Profile ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";       
         Element_E1_Find("Find 'nav_profile' element", "id", "nav_profile", ParentTest, "no_jira");
             if (FAIL) { return;}        
         Element_Child_Text("Get 'nav_profile' text", ae1, "id", "design_menu_item_text", ParentTest, "no_jira");
@@ -44,7 +44,7 @@ class An_bolter_profile extends An_GUI{
         Thread.sleep(500);
         Wait_For_Element_By_Path_InVisibility("Wait for load", "id", "progress_bar", ParentTest, "no_jira");
             if (FAIL) { return;}   
-        EX += " - " + "\t" + " === Profile ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";       
+        EX += " - " + "\t" + " === Profile ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";       
         //</editor-fold>
     }
 }

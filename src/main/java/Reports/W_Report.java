@@ -8,7 +8,6 @@ import static A.A.*;
 import A.Func;
 import java.awt.Component;
 import java.awt.Cursor;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -243,7 +242,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         dtpDel.setDateFormatString("dd-MMM-yyy");
         Date now = new Date();
         dtpDel.setMaxSelectableDate(now);
-        dtpDel.setDate(new Date(now.getTime() - Duration.ofDays(14).toMillis()));
+        dtpDel.setDate(new Date(now.getTime() - Duration.ofDays(7).toMillis())); // 1 week old
         LoadF();
         LoadDB();
     } 
@@ -289,7 +288,7 @@ public class W_Report extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnDelMouseClicked
 
     private void btnDelOldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelOldMouseClicked
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat( "yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat( "dd-MMM-yyyy");
         Object[] options = {"Yes", "No"};
         int reply = JOptionPane.showOptionDialog(this,
             "Are you sure you want to delete all recodrs logged before " + simpleDateFormat.format(dtpDel.getDate()) + "?",

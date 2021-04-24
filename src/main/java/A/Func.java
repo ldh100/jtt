@@ -44,6 +44,20 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Oleg.Spozito
  */
 public class Func { 
+   public static String App_ID(String APP) {
+        if (APP.equals("Boost")) {
+            return "D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe";
+        } else if (APP.equals("Thrive")) {
+            return "Roj5NWl4mXtl2dZ8yJLKF9Rq5Eow59FJaNGB6";
+        } else if (APP.equals("Nourish")) {
+            return"GKEAwXZ1P3FNLg6MlqA5crzqQwpDm8sevv2Q5DG";
+        } else if (APP.equals("Rogers")) {
+            return "wjgOXDMqrQIGPEYlKj0dUzKR79YX4BIjWRrzO";
+        } else if (APP.equals("JJKitchen")) {
+            return "Roj5NWl4mXtl2dZ8yJLKF9Rq5EpOlaIAmv61pZ7LCzD";
+        }
+        return null;
+    }
     public static String ExecuteCmdRuntime(String cmd){
         String output = null;
         try {
@@ -283,20 +297,21 @@ public class Func {
     }
     public static String Zip_File(String Source){
         try {
-            FileOutputStream fos = new FileOutputStream(Source.replace(".html", ".zip")); 
-            ZipOutputStream zipOut = new ZipOutputStream(fos);
-            File fileToZip = new File(Source);
-            FileInputStream fis = new FileInputStream(fileToZip);
-            ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
-            zipOut.putNextEntry(zipEntry);
-            final byte[] bytes = new byte[1024];
-            int length;
-            while ((length = fis.read(bytes)) >= 0) {
-                zipOut.write(bytes, 0, length);
+            try (FileOutputStream fos = new FileOutputStream(Source.replace(".html", ".zip"))) {
+                FileInputStream fis;
+                try (ZipOutputStream zipOut = new ZipOutputStream(fos)) {
+                    File fileToZip = new File(Source);
+                    fis = new FileInputStream(fileToZip);
+                    ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
+                    zipOut.putNextEntry(zipEntry);
+                    final byte[] bytes = new byte[1024];
+                    int length;
+                    while ((length = fis.read(bytes)) >= 0) {
+                        zipOut.write(bytes, 0, length);
+                    }
+                }
+                fis.close();
             }
-            zipOut.close();
-            fis.close();
-            fos.close();  
             return Source.replace(".html", ".zip"); 
         } catch (Exception ex) {
             return "Zip_File ERROR: " + ex.getMessage();  

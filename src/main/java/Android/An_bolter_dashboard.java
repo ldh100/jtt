@@ -20,7 +20,7 @@ class An_bolter_dashboard extends An_GUI{
 
     protected void Run() throws InterruptedException, Exception{         
         //<editor-fold defaultstate="collapsed" desc="Delievery Dashboard">
-        EX += "\r\n" + " - " + "\t" + " === Delievery Dashboard ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";                
+        EX += "\r\n" + " - " + "\t" + " === Delievery Dashboard ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";                
         Wait_For_Element_By_Path_Presence("Wait for 'Navigation' button", "xpath", "//android.widget.ImageButton[@content-desc='Open navigation drawer']", ParentTest, "no_jira");
             if (FAIL) { return;}        
         Element_By_Path_Click("Click 'Open Navigation drawer' image", "xpath", "//android.widget.ImageButton[@content-desc='Open navigation drawer']", ParentTest, "no_jira");
@@ -41,7 +41,7 @@ class An_bolter_dashboard extends An_GUI{
         }else{
             //
         }
-        EX += " - " + "\t" + " === Delievery Dashboard ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";                       
+        EX += " - " + "\t" + " === Delievery Dashboard ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";                       
         //</editor-fold>
     }
 }
