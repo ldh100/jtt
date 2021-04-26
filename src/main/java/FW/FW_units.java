@@ -13,7 +13,9 @@ import static FW.FW.*;
  * @author Oleg.Spozito
  */
 public class FW_units {
-    public static void run() throws InterruptedException { 
+    public static void run() throws InterruptedException {
+        
+        String unit = "xyUnit";
         _t++; Thread.sleep((long) sleep); TWeb.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//nav[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);
@@ -43,9 +45,8 @@ public class FW_units {
            EX += " - " + "\t" + "Find Unit" + "\t" + UNIT + "/" + UnitMarket + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";            return;
         }             
         
-     //*************************** Add Unit Testcases***************************************
-       // ****************************************************************************************************
-       //********************************************************************************************************
+    //************************************************** Add Unit Testcases ************************************** 
+    // <editor-fold defaultstate="collapsed" desc="Add unit ">  
      Thread.sleep(500);
     _t++; Thread.sleep((long) sleep); TWeb.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//nav[contains(@class, 'navigation-drawer')]", "no_jira");             
     	if (FAIL) { return;}
@@ -66,7 +67,7 @@ public class FW_units {
     _t++; TWeb.Element_By_Path_Text_Enter("Enter unit id", "xpath", "//div[@class='v-text-field__slot']/input[@id='unit_id']", "1", false, "no_jira"); 
     	if (FAIL) { return;}
 
-    _t++; TWeb.Element_By_Path_Text_Enter("Enter unit name", "xpath", "//div[@class='v-text-field__slot']/input[@id='unit_name']", "Unit 1", false, "no_jira"); 
+    _t++; TWeb.Element_By_Path_Text_Enter("Enter unit name", "xpath", "//div[@class='v-text-field__slot']/input[@id='unit_name']", unit, false, "no_jira"); 
         if (FAIL) { return;}
     	
     _t++; TWeb.Element_By_Path_Text_Enter("Enter Street Address", "xpath", "//div[@class='v-text-field__slot']/input[@id='street_address']", "1 prologis st", false, "no_jira"); 
@@ -144,8 +145,13 @@ public class FW_units {
    	Thread.sleep(6000);		
    	_t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Add Unit button", "xpath", "//button/span[contains(.,'Add Unit')]", "no_jira"); 
    	     if (FAIL) { return;}		
-   		
-     	
+    // </editor-fold> 	
+    
+    //************************************************** Search for Unit *****************************************
+    // <editor-fold defaultstate="collapsed" desc="Search for unit "> 
+     
+    // </editor-fold>
+       
     }  
 }
     

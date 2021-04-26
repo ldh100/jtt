@@ -7,6 +7,7 @@ package AP3;
 import A.TWeb;
 import static A.A.*;
 import static AP3.AP3.*;
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import org.json.JSONArray;
@@ -638,10 +639,23 @@ public class AP3_site_new {
                         Thread.sleep(1000);
                     // ============================== ^^^ Menu Assignation
                         
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Station Name'", "xpath", "//input[@aria-label='Station Name']", "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Station Name'", "xpath", "//label[contains(text(), 'Station Name')]", "no_jira"); 
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Station Name", "css", "[aria-label='Station Name']", "New Station " + New_ID, false, "no_jira"); 
                         if (FAIL) { return;}    
+                        
+                     File tmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_brand_image.png");
+                      if(tmp.exists())
+                      {
+                       _t++; TWeb.Element_By_Path_Text_Enter("Upload Brand Image", "xpath", "//div[@id='toc-information']//input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_brand_image.png", false, "no_jira"); 
+                        if (FAIL) { return;}
+                      }
+                      else
+                      {
+                       _t++; 
+                       _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File : Ap3_brand_image  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+       
+                      }  
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Station Location Description Click", "xpath", "//label[contains(text(), 'Location Description')]", "no_jira"); 
                         if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Station Location Description", "css", "[aria-label='Station Location Description']", "Attic " + New_ID, false, "no_jira"); 
@@ -659,10 +673,9 @@ public class AP3_site_new {
 
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select last Cost Centre in the List", L1.get(L1.size() - 1), "no_jira"); 
                         if (FAIL) { return;} 
-                        
-                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Tax Rate Click", "css", "[aria-label='Tax Rate']", "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Tax Rate Click", "css", "[aria-label='Tax Rate']", "no_jira"); 
                         if (FAIL) { return;}
-                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Tax Rate", "css", "[aria-label='Tax Rate']", "12", false, "no_jira"); 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Tax Rate", "css", "[aria-label='Tax Rate']", "12", false, "no_jira"); 
                         if (FAIL) { return;}                                
                     break;
                 case "Fee Setup":                   
@@ -862,7 +875,17 @@ public class AP3_site_new {
                                         if (FAIL) { return;}                        
                                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter KDS Admin Passcode", "css", "[aria-label='KDS Admin Passcode']", "1459", false, "no_jira"); 
                                         if (FAIL) { return;}
-
+                                      File kdstmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_kds_image.png");
+                                      if(kdstmp.exists())
+                                      {
+                                       _t++; TWeb.Element_By_Path_Text_Enter("Upload KDS receipt image", "xpath", "//div[@id='toc-kds']//input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_kds_image.png", false, "no_jira"); 
+                                        if (FAIL) { return;}
+                                      }
+                                      else
+                                      {
+                                       _t++; 
+                                       _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File : Ap3_kds_image  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                                      }  
                                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Station Phone Number'", "css", "[aria-label='Station Phone Number']", "no_jira"); 
                                         if (FAIL) { return;}                                     
                                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Station Phone Number", "css", "[aria-label='Station Phone Number']", "9025550321", false, "no_jira"); 
@@ -1358,6 +1381,8 @@ public class AP3_site_new {
     public static void After_station_creation() throws InterruptedException
     {
         int flag = 1;
+        int Menu_set_cnt = -1;
+        int Category_cnt = -1;
         while(flag<=4)
         {
           
@@ -1382,6 +1407,8 @@ public class AP3_site_new {
         Location_brand_API(B_ID,flag);
         Brand_Private_API(B_ID,flag);
         Brand_Public_API(B_ID,flag); 
+        if(flag==1) { Verify_menu_category_API(B_ID,flag,0,0);}
+        if(flag>=3) {   Verify_menu_category_API(B_ID,flag,Menu_set_cnt,Category_cnt);}
         flag++;
         // Verify the Station Data after a refresh
         if(flag==5)
@@ -1495,6 +1522,53 @@ public class AP3_site_new {
                     }
                     break;
                 case "Assign Menus":
+                    /* Remove second menu set if 2 menu set present in assigned menus*/
+                    
+                    if(flag == 3)
+                    {
+                         _t++; Thread.sleep((long) sleep); TWeb.List_L3("Find List of Menu sets", "xpath", "//div[@id='toc-assignMenus']//div[@class='flex shrink xs2']//i[contains(@class,'close')]", "no_jira");
+                        if(FAIL) 
+                        {
+                            _t++;
+                            _w++; EX += _t + "\t" + "No Menu Set exist" + "\t" + "-" + "\t" + "No Menu Set exist" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        }
+                        else if(L3.size()>=2)
+                        {
+                          Menu_set_cnt = L3.size();
+                          _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Remove last Menu set ", L3.get(L3.size()-1), "no_jira");
+                          if (FAIL) { return;}     
+                        }
+                        else if(L3.size()<2)
+                        {
+                           _t++;
+                           _w++; EX += _t + "\t" + "Less than 2 Menu Set exist" + "\t" + "-" + "\t" + "Atleast 2 Menu Set must exist" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        }
+                    }//End of flag=3
+                    
+                    
+                    
+                    
+                    /* Remove second category if 2 categories present in assigned menus*/
+                    if(flag == 4)
+                    {
+                      _t++; Thread.sleep((long) sleep); TWeb.List_L3("Find List of categories", "xpath", "(//div[@id='toc-assignMenus']//div[@class='flex xs12'])[5]//i[contains(@class,'close')]", "no_jira");
+                        if(FAIL) 
+                        {
+                            _t++;
+                            _w++; EX += _t + "\t" + "No categories exist" + "\t" + "-" + "\t" + "No categories exist" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        }
+                        else if(L3.size()>=2)
+                        {
+                          Category_cnt = L3.size();
+                          _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Remove last category ", L3.get(L3.size()-1), "no_jira");
+                          if (FAIL) { return;}                          
+                        }
+                        else if(L3.size()<2)
+                        {
+                           _t++;
+                           _w++; EX += _t + "\t" + "Less than 2 categories exist" + "\t" + "-" + "\t" + "Atleast 2 categories exist" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        }
+                    }
                     break;
                 case "Integration Type": 
                          T_Index = -1;
@@ -1798,11 +1872,25 @@ public class AP3_site_new {
        
         }
         
-         /*                       Verify if Web Order Enabled is supported 
-                                flag = 1 / Web Ordering enabled
-                                flag = 2 /  Web Ordering not enabled                */
+         /*                     Verify if Brand Image  is saved  
+                                flag = 1 / Brand Image is saved
+         */                       
         
-        
+         meta = json.getJSONObject("style");
+         if(flag == 1 && !meta.getString("logo").isEmpty())
+          {
+              if(meta.getString("logo").contains("https://images"))
+              {
+                 _t++;
+                 _p++; EX += _t + "\t" + "Brand Image Saved - expected" + "\t" + "Brand Image Saved" + "\t" + "Brand Image Saved" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+              }
+          }
+          else if(flag == 1 && meta.getString("logo").isEmpty())
+          {
+           _t++;
+           _f++; EX += _t + "\t" + "Brand Image not saved - not expected" + "\t" + "Brand Image not available" + "\t" + "Brand Image available" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          }
+         
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Location Brand API Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
          
     }//End of Location Brand API
@@ -1948,7 +2036,119 @@ public class AP3_site_new {
             }
          }
         
+        // Verify is KDS Receipt image is saved
+        if(json.getJSONObject("logos").has("print") && flag ==1)
+        {
+          if(json.getJSONObject("logos").getString("print").contains("https://images"))
+          {
+           _t++;
+           _p++; EX += _t + "\t" + "KDS Receipt Image Saved - expected" + "\t" + "KDS Image Saved" + "\t" + "KDS Image Saved" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          }
+          else if(json.getJSONObject("logos").getString("print").isEmpty())
+          {
+           _t++;
+           _f++; EX += _t + "\t" + "KDS Receipt Image Not Saved - Not expected" + "\t" + "KDS Image Saved" + "\t" + "KDS Image Not Saved" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          }
+         }
+        
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Brand API Public config Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+       
+     }
+    
+    
+    public static void Verify_menu_category_API(String B_ID,int flag,int Menu_set_cnt,int Category_cnt) throws InterruptedException
+     {
+         EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API Start==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+         String[] Menu_ID = new String[2];
+         int lmenu_cnt = 0;
+         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Global menu API", BaseAPI + "/menu/company/"+CompanyID, true,"no_jira" );
+         JSONObject json = new JSONObject(API_Response_Body);
+         JSONArray menus = json.getJSONArray("menus");
+         
+         for(int k=0;k<menus.length();k++)
+         {
+           JSONObject menu = menus.getJSONObject(k);
+           if(menu.has("location_brand"))
+           {
+               if(menu.getString("location_brand").equals(B_ID))
+               {
+                 Menu_ID[lmenu_cnt] = menu.getString("id");
+                 lmenu_cnt++;       
+               }
+           }
+         }
+
+//https://api.compassdigital.org/staging/menu/d42lqjyNdWHDj6LprWy2iK2AQQ54LOHBkBgQyDX9T4OBja6aw9ujRGkPo6mrhzN0zeG?nocache=true&extended=true&_query=%7Bid,label,is,groups%7Bid,label,is%7D%7D&show_unlinked=true
+          if(flag == 1)
+         {
+           for(int k=0;k<lmenu_cnt;k++)
+           {
+               _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Local menu API", BaseAPI + "/menu/"+Menu_ID[k]+"?nocache=true&extended=true&_query=%7Bid,label,is,groups%7Bid,label,is%7D%7D&show_unlinked=true", true,"no_jira" );
+               JSONObject json1 = new JSONObject(API_Response_Body);
+               _t++;
+               _p++; EX += _t + "\t" + "Menu set - "+json1.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            
+               JSONArray Category = json1.getJSONArray("groups");
+               for(int l=0;l<Category.length();l++)
+               {
+                   JSONObject category_obj = Category.getJSONObject(l);
+                   _t++;
+                   _p++; EX += _t + "\t" + "Category set - "+category_obj.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+               }
+           }
+         }
+         
+         
+         if(flag == 3 && Menu_set_cnt>=2)
+         {
+           for(int k=0;k<lmenu_cnt;k++)
+           {
+               _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Local menu API", BaseAPI + "/menu/"+Menu_ID[k]+"?nocache=true&extended=true&_query=%7Bid,label,is,groups%7Bid,label,is%7D%7D&show_unlinked=true", true,"no_jira" );
+               JSONObject json1 = new JSONObject(API_Response_Body);
+               _t++;
+                _p++; EX += _t + "\t" + "Menu set - "+json1.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                JSONArray Category = json1.getJSONArray("groups");
+               for(int l=0;l<Category.length();l++)
+               {
+                   JSONObject category_obj = Category.getJSONObject(l);
+                   _t++;
+                   _p++; EX += _t + "\t" + "Category set - "+category_obj.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+               }
+           }
+         }
+         
+         if(flag == 4 && Category_cnt>=2)
+         {
+          //Verify category is removed.
+             for(int k=0;k<lmenu_cnt;k++)
+           {
+               _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Local menu API", BaseAPI + "/menu/"+Menu_ID[k]+"?nocache=true&extended=true&_query=%7Bid,label,is,groups%7Bid,label,is%7D%7D&show_unlinked=true", true,"no_jira" );
+               JSONObject json1 = new JSONObject(API_Response_Body);
+               _t++;
+                _p++; EX += _t + "\t" + "Menu set - "+json1.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                JSONArray Category = json1.getJSONArray("groups");
+               for(int l=0;l<Category.length();l++)
+               {
+                   JSONObject category_obj = Category.getJSONObject(l);
+                   _t++;
+                   _p++; EX += _t + "\t" + "Category set - "+category_obj.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+               }
+           }
+             
+             
+//              menus = json1.getJSONArray("groups");
+//              if(menus.length()== (Category_cnt-1))
+//              {
+//                _t++;
+//                _p++; EX += _t + "\t" + "Category deleted - expected" + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//              }
+//              else
+//              {
+//                _t++;
+//                _f++; EX += _t + "\t" + "Category not deleted -  not expected" + "\t" + "Last Category deleted" + "\t" + "No category deleted" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//              }
+          }
+         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
        
      }
     
