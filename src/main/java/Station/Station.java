@@ -529,16 +529,8 @@ public class Station extends javax.swing.JInternalFrame {
         }
         sw1.start();        
 
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem().toString() +
-                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-            rs.next();
-            appId = rs.getString(1);
-            conn.close();
-        } catch (SQLException ex) {
-            txtLog.append("=== Get S_OAuth_TKN > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
+        appId = Func.App_ID(cmbApp.getSelectedItem().toString());
+
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
         SitesModel.setColumnIdentifiers(SitesColumnsName);

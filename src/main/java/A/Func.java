@@ -44,6 +44,58 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Oleg.Spozito
  */
 public class Func { 
+    public static String Realm_ID(String APP) {
+       switch (APP.toLowerCase()) {
+            case "boost":
+                return "WEW9lgWk5oTkA98PNGEoc97J9Mdgy6foMM2";
+            case "thrive":
+                return "Kq8m4B8GNRCgjlRL9A3rsYj0YBNGP3SLOKgg";
+            case "nourish":
+                return"k5wqOkwMrEcvdO3q5BpmCzZ2z18MEGSDrKG2R";
+            case "rogers":
+                return "2Me8lJeDq4S0vzlga89ZHB9OBdEmBPIpMoDZ";
+            case "jjkitchen":
+                return "ZeDrkODo2gu0qJ1rZDW3HMN169NZG";
+            case "canteen":
+                return "81NDOePO6pCwo4KBddpXcGoj9PppoquOed3y4mDD";
+            case "tacit":
+                return "llq08WB8epuwmABXjj70ce46dgll48SKYB7pqoooFXDoZ6lggdtZmK5owEqEuBQNragNj2h7JmjAqmzGs4G";
+            case "distiller":
+                return "darvin";
+            case "bolter":
+                return "bolter";
+            case "ap3":
+                return "6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5";                              
+            default:
+               break;
+        }
+        return "Not Found";
+    }
+    public static String App_ID(String APP) {
+       switch (APP.toLowerCase()) {
+            case "boost":
+                return "D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe";
+            case "thrive":
+                return "Roj5NWl4mXtl2dZ8yJLKF9Rq5Eow59FJaNGB6";
+            case "nourish":
+                return"GKEAwXZ1P3FNLg6MlqA5crzqQwpDm8sevv2Q5DG";
+            case "rogers":
+                return "wjgOXDMqrQIGPEYlKj0dUzKR79YX4BIjWRrzO";
+            case "jjkitchen":
+                return "Roj5NWl4mXtl2dZ8yJLKF9Rq5EpOlaIAmv61pZ7LCzD";
+            case "canteen":
+                return "71rpYwPYzkCW1Kg466Qjc8K4MvOOdAfQ7M5R9v3AcB99Y3M0XYh45GYz032ohm70lXpNd4F7v8gZZ56QI7N";
+            case "Tacit":
+                return "llq08WB8epuwmABXjj70ce46dgll48SKYB7pqoooFXDoZ6lggdtZmK5owEqEuBQNragNj2h7JmjAqmzGs4G";
+            case "distiller":
+                return "darvin";
+            case "bolter":
+                return "bolter";
+            default:
+                break;
+        }
+        return "Not Found";
+    }
     public static String ExecuteCmdRuntime(String cmd){
         String output = null;
         try {
@@ -283,20 +335,21 @@ public class Func {
     }
     public static String Zip_File(String Source){
         try {
-            FileOutputStream fos = new FileOutputStream(Source.replace(".html", ".zip")); 
-            ZipOutputStream zipOut = new ZipOutputStream(fos);
-            File fileToZip = new File(Source);
-            FileInputStream fis = new FileInputStream(fileToZip);
-            ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
-            zipOut.putNextEntry(zipEntry);
-            final byte[] bytes = new byte[1024];
-            int length;
-            while ((length = fis.read(bytes)) >= 0) {
-                zipOut.write(bytes, 0, length);
+            try (FileOutputStream fos = new FileOutputStream(Source.replace(".html", ".zip"))) {
+                FileInputStream fis;
+                try (ZipOutputStream zipOut = new ZipOutputStream(fos)) {
+                    File fileToZip = new File(Source);
+                    fis = new FileInputStream(fileToZip);
+                    ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
+                    zipOut.putNextEntry(zipEntry);
+                    final byte[] bytes = new byte[1024];
+                    int length;
+                    while ((length = fis.read(bytes)) >= 0) {
+                        zipOut.write(bytes, 0, length);
+                    }
+                }
+                fis.close();
             }
-            zipOut.close();
-            fis.close();
-            fos.close();  
             return Source.replace(".html", ".zip"); 
         } catch (Exception ex) {
             return "Zip_File ERROR: " + ex.getMessage();  

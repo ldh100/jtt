@@ -1096,7 +1096,7 @@ public class AP3_user {
         
 // <editor-fold defaultstate="collapsed" desc="New Runner Set PW > Login">
 //        _t++; Thread.sleep((long) sleep); TWeb.Open_Switch_to_2nd_Tab("Open Google in New Tab", "https://mail.google.com/mail/u/0/#inbox","no_jira");             
-//        EX += " - " + "\t" + " === User Permissions " + "\t" + " ===== " + "\t" + " == New Runner Set PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";           
+//        EX += " - " + "\t" + " === User Permissions " + "\t" + " ===== " + "\t" + " == New Runner Set PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";           
 //        Thread.sleep(500);
 //        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("WaitForElement for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
 //            if (FAIL) { return;}    
@@ -1126,7 +1126,7 @@ public class AP3_user {
 //        //"cdl.test.xtt+" + "R_" + New_ID + "@gmail.com" >>> AnnaL0g0 //identifierId
 //        //Runner Login rejected  
 
-//        EX += " - " + "\t" + " === User Permissions " + "\t" + " ===== " + "\t" + " == New Runner Set PW End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+//        EX += " - " + "\t" + " === User Permissions " + "\t" + " ===== " + "\t" + " == New Runner Set PW End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
 //        _t++; Thread.sleep((long) sleep); TWeb.Close_Current_Tab_switch_To_1st("Close 2nd tab","no_jira"); 
 // </editor-fold> 
              

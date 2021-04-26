@@ -27,9 +27,9 @@ public class AP3_bulk_apply {
         //Bulk Apply Start       
         _t++; Thread.sleep((long) sleep); TWeb.List_L0("List of Categories", "xpath", "//div[contains(@class,'flex xs12 list-item list-item-large')]", "no_jira");
         if (FAIL) { return;} 
-        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";       
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";       
         //get orginal price values
-        EX += " - " + "\t" + " === " + "\t" + " ===== Store Data and Reset List" + "\t" + " == Store Data and Reset List >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== Store Data and Reset List" + "\t" + " == Store Data and Reset List >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Category: Sides", "xpath", "//div[contains(text(),'Sides')]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_InVisibility("Wait for Spinner", "xpath", "//circle[@class='v-progress-circular__overlay']", "no_jira");
@@ -115,10 +115,10 @@ public class AP3_bulk_apply {
                 _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
         }
-        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         
         // <editor-fold defaultstate="collapsed" desc="Bulk Select, Click Update, Verify Bulk Apply Side Panel">  
-        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Select, Click Update, Verify Bulk Apply Side Panel" + "\t" + " == Bulk Select, Click Update, Verify Bulk Apply Side Panel >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Select, Click Update, Verify Bulk Apply Side Panel" + "\t" + " == Bulk Select, Click Update, Verify Bulk Apply Side Panel >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         String OP = getAttributeOfElementByXpath("(//table[contains(@class,'v-table')]//tbody/tr)[1]//td[5]", "innerHTML");
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira");
         if (FAIL) { return;}
@@ -138,12 +138,12 @@ public class AP3_bulk_apply {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("In-App Visibility", "xpath", "(//div[contains(@class,'v-card__title')])[7]", "no_jira");
         if (FAIL) { return;}
-        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
         
         //change price
         // <editor-fold defaultstate="collapsed" desc="Bulk Change Prices in Local Menu">  
-        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Change Prices in Local Menu" + "\t" + " == Bulk Change Prices in Local Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Change Prices in Local Menu" + "\t" + " == Bulk Change Prices in Local Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Price Input Field", "xpath", "//input[contains(@placeholder,'Price')]", "no_jira");
         if (FAIL) { return;}
         if (OP.contains("6")) {
@@ -171,11 +171,11 @@ public class AP3_bulk_apply {
                 if (FAIL) { return;}
             } 
         }
-        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
         
         // <editor-fold defaultstate="collapsed" desc="Bulk Change IN/OUT of stock in Local Menu">  
-        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Change IN/OUT of stock in Local Menu" + "\t" + " == Bulk Change IN/OUT of stock in Local Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Change IN/OUT of stock in Local Menu" + "\t" + " == Bulk Change IN/OUT of stock in Local Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         for (int i = 0; i < L1.size(); i++){
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is In Stock", "xpath", "((//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[8])//input[@aria-checked='true']", "no_jira");
             if (FAIL) { return;}
@@ -194,11 +194,11 @@ public class AP3_bulk_apply {
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is Out of Stock", "xpath", "((//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[8])//input[@aria-checked='false']", "no_jira");
             if (FAIL) { return;}
         }
-        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
         
         // <editor-fold defaultstate="collapsed" desc="Bulk Change Visibility in Local Menu">  
-        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Change Visibility in Local Menu" + "\t" + " == Bulk Change Visibility in Local Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Change Visibility in Local Menu" + "\t" + " == Bulk Change Visibility in Local Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         for (int i = 0; i < L1.size(); i++){
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is visible", "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//i[contains(@class,'mdi-eye ')]", "no_jira");
             if (FAIL) { return;}
@@ -216,16 +216,16 @@ public class AP3_bulk_apply {
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is NOT visible", "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//i[contains(@class,'mdi-eye-off')]", "no_jira");
             if (FAIL) { return;}
         }
-        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
         
         //publish changes in Local Menu
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Publish in Local Menu", "xpath", "//div[contains(text(),'publish')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(1000);
-        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // <editor-fold defaultstate="collapsed" desc="Bulk Change Visibility of Modifiers in Local Menu">  
-        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Change Visibility of Modifiers in Local Menu" + "\t" + " == Bulk Change Visibility of Modifiers in Local Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Change Visibility of Modifiers in Local Menu" + "\t" + " == Bulk Change Visibility of Modifiers in Local Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Category", "xpath", "//div[contains(text(),'Flame Grilled Pitas')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(500);
@@ -343,10 +343,10 @@ public class AP3_bulk_apply {
             if (FAIL) { return;}
             Thread.sleep(500);
         }             
-        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         
         // <editor-fold defaultstate="collapsed" desc="Check Global Menu">  
-        EX += " - " + "\t" + " === " + "\t" + " ===== Check Global Menu" + "\t" + " == Check Global Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== Check Global Menu" + "\t" + " == Check Global Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); TWeb.Close_Current_Tab_switch_To_1st("Switch Tab to Global Menu", "no_jira");
         if (FAIL) { return;}
         TWeb.Refresh("Refresh page", "no_jira");
@@ -365,11 +365,11 @@ public class AP3_bulk_apply {
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is Enabled", "xpath", "((//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[4])//input[@aria-checked='true']", "no_jira");
             if (FAIL) { return;}
         }
-        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
              
         // <editor-fold defaultstate="collapsed" desc="Bulk Change Prices in Global Menu">  
-        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Change Prices in Global Menu" + "\t" + " == Bulk Change Prices in Global Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Change Prices in Global Menu" + "\t" + " == Bulk Change Prices in Global Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); TWeb.List_L0("List of Categories", "xpath", "//div[contains(@class,'flex xs12 list-item list-item-large')]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Category", "xpath", "//div[contains(text(),'Flame Grilled Pitas')]", "no_jira");
@@ -451,11 +451,11 @@ public class AP3_bulk_apply {
                 if (FAIL) { return;} 
             }
         }
-        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
         
         // <editor-fold defaultstate="collapsed" desc="Bulk Update Enable/Disable in Global Menu">  
-        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Update Enable/Disable in Global Menu" + "\t" + " == Bulk Update Enable/Disable in Global Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Update Enable/Disable in Global Menu" + "\t" + " == Bulk Update Enable/Disable in Global Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         for (int i = 0; i < L1.size(); i++){
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is Enabled", "xpath", "((//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[4])//input[@aria-checked='true']", "no_jira");
             if (FAIL) { return;}
@@ -474,11 +474,11 @@ public class AP3_bulk_apply {
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is Disabled", "xpath", "((//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[4])//input[@aria-checked='false']", "no_jira");
             if (FAIL) { return;}
         }
-        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
         
         // <editor-fold defaultstate="collapsed" desc="Bulk Remove PLU numbers in Global Menu">  
-        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Remove PLU numbers in Global Menu" + "\t" + " == Bulk Remove PLU numbers in Global Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Remove PLU numbers in Global Menu" + "\t" + " == Bulk Remove PLU numbers in Global Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         for (int i = 0; i < L1.size(); i++){
             String PLU = getAttributeOfElementByXpath("(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[6]", "innerHTML");
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" has a PLU number", "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[contains(text(),'"+PLU+"')]", "no_jira");
@@ -498,11 +498,11 @@ public class AP3_bulk_apply {
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" has NO PLU number", "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[contains(text(),'"+PLU+"')]", "no_jira");
             if (FAIL) { return;}
         }
-        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
         
         // <editor-fold defaultstate="collapsed" desc="Bulk Update Global Modifiers">  
-        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Update Global Modifiers" + "\t" + " == Bulk Update Global Modifiers >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Update Global Modifiers" + "\t" + " == Bulk Update Global Modifiers >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Update "+L1.size()+" Items", "xpath", "//span[contains(text(),'Update "+String.valueOf(L1.size())+" Items')]", "no_jira");
@@ -539,14 +539,14 @@ public class AP3_bulk_apply {
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
             if (FAIL) { return;}
         }
-        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
         
         //publish changes in Global Menu
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(500);
-        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         
         //API call https://api.compassdigital.org/staging/menu/lpmAZO8Ga6Umjaz85ELNI93MkmW1B7TezGGJ1r5MiX0ZDgJMdySk7ZYM9lwqI2a4Zy0?nocache=true&extended=true&show_unlinked=false
         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/lpmAZO8Ga6Umjaz85ELNI93MkmW1B7TezGGJ1r5MiX0ZDgJMdySk7ZYM9lwqI2a4Zy0?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
@@ -586,7 +586,7 @@ public class AP3_bulk_apply {
             }
         }     
         // <editor-fold defaultstate="collapsed" desc="Check Local Menu After Global Changes">  
-        EX += " - " + "\t" + " === " + "\t" + " ===== Check Local Menu After Global Changes" + "\t" + " == Check Local Menu After Global Changes >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== Check Local Menu After Global Changes" + "\t" + " == Check Local Menu After Global Changes >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); TWeb.Open_Switch_to_2nd_Tab("Navigate to Local Menu", url + "#/menu/sector/"+SectorID+"/company/"+CompanyID+"/brands/"+BrandID, "no_jira");
         if (FAIL) { return;}
         Thread.sleep(5000);
@@ -598,7 +598,7 @@ public class AP3_bulk_apply {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check table is empty", "xpath", "//td[contains(text(),'No data available')]", "no_jira");
         if (FAIL) { return;}
-        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Re-enabled Items in Global and Verify in Local" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Re-enabled Items in Global and Verify in Local" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); TWeb.Close_Current_Tab_switch_To_1st("Switch Tab to Global Menu", "no_jira");
         if (FAIL) { return;}
         TWeb.Refresh("Refresh page", "no_jira");
@@ -661,11 +661,11 @@ public class AP3_bulk_apply {
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
             if (FAIL) { return;}
         }   
-        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
         
         //Reset Global Modifiers
-        EX += " - " + "\t" + " === " + "\t" + " ===== Reset Global Modifiers, and PLUs " + "\t" + " == Reset Global Modifiers, and PLUs >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === " + "\t" + " ===== Reset Global Modifiers, and PLUs " + "\t" + " == Reset Global Modifiers, and PLUs >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); TWeb.Close_Current_Tab_switch_To_1st("Switch Tab to Global Menu", "no_jira");
         if (FAIL) { return;}
         TWeb.Refresh("Refresh page", "no_jira");

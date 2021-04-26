@@ -20,7 +20,7 @@ class An_bolter_forgot_pw extends An_GUI{
 
     protected void Run() throws InterruptedException, Exception{              
         //<editor-fold defaultstate="collapsed" desc="Forgot Password">
-        EX += "\r\n" + " - " + "\t" + " === Forgot Password ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += "\r\n" + " - " + "\t" + " === Forgot Password ====" + "\t" + "==== " + "\t" + " == Begin > ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         Element_By_Path_Text("Get 'Forgot PW?' button text", "id", "btn_forgotPassword", ParentTest, "no_jira");
         Element_By_Path_Click("Click 'Forgot PW?' button", "id", "btn_forgotPassword", ParentTest, "no_jira");
             if (FAIL) { return;}        
@@ -39,7 +39,7 @@ class An_bolter_forgot_pw extends An_GUI{
         Element_By_Path_Text("Alert message", "id", "android:id/message", ParentTest, "no_jira");   
         Element_By_Path_Click("Click Alert 'OK' button", "id", "android:id/button1", ParentTest, "no_jira");         
         Thread.sleep(500); 
-        EX += " - " + "\t" + " === Forgot Password ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";        
+        EX += " - " + "\t" + " === Forgot Password ====" + "\t" + "==== " + "\t" + " == End ^ ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";        
         //</editor-fold>       
     }
 }

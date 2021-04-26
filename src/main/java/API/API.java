@@ -405,7 +405,6 @@ public class API extends javax.swing.JInternalFrame {
         txtLog.setColumns(20);
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         txtLog.setRows(5);
-        txtLog.setText("Start >");
         txtLog.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtLog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
@@ -1426,17 +1425,7 @@ public class API extends javax.swing.JInternalFrame {
         userTKN = "";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
-        String Realm = "";
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + cmbApp.getSelectedItem().toString() +
-                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-            rs.next();
-            Realm = rs.getString(1);
-            conn.close();
-        } catch (SQLException ex) {
-            txtLog.append("=== Get Realm ID > ERROR: " + ex.getMessage() + "\r\n");            
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        } 
+        String Realm = Func.App_ID(cmbApp.getSelectedItem().toString());
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1499,7 +1488,7 @@ public class API extends javax.swing.JInternalFrame {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }   
-        txtLog.append("== " + "/payment/method" + "?user_id=" + userID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.append("== " + BaseAPI + "/payment/method" + "?user_id=" + userID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();        
 
@@ -1561,7 +1550,7 @@ public class API extends javax.swing.JInternalFrame {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
             txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }   
-        txtLog.append("== " + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.append("== " + BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();          
         try {
@@ -1931,17 +1920,8 @@ public class API extends javax.swing.JInternalFrame {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String UserAuth = Base64.getEncoder().encodeToString((txtAP3_ID.getText().trim() + ":" + txtAP3_PW.getText().trim()).getBytes());
         String User_ID = ""; 
-        String Realm = "6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5";
-//        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-//            ResultSet rs = conn.createStatement().executeQuery("SELECT [P2_ID] FROM [dbo].[env_app] WHERE [APPLICATION] = '" + "AP3" +
-//                "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-//            rs.next();
-//            Realm = rs.getString(1);
-//            conn.close();
-//        } catch (SQLException ex) {
-//            txtLog.append("=== Get Realm ID > ERROR: " + ex.getMessage() + "\r\n");
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-//        } 
+        //String Realm = "6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5"; 
+        String Realm = Func.Realm_ID("AP3");
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1979,7 +1959,7 @@ public class API extends javax.swing.JInternalFrame {
         sw1.start();         // ============ AP3 User Permissions
         try { 
             HttpGet httpget = new HttpGet(BaseAPI + "/user/" + User_ID + "/permissions" + "?nocache=1"); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN); // UserAuth // userTKN
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN); 
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -2040,7 +2020,7 @@ public class API extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnUserPermissionsMouseClicked
     private void btnEodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEodMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("- Shopping Cart API..." + "\r\n");
+        txtLog.append("- Site: " + SITE + " Sales Reporting API..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         String J = "==== Site: " + SITE + " Sales Reporting - EOD:" + "\r\n";
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -2054,7 +2034,8 @@ public class API extends javax.swing.JInternalFrame {
 
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To); 
-            //httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN); // 401 "Not authorized" ??
+            //httpget.setHeader("Authorization",  "Basic " + AP3_TKN); // // 401 "Not authorized" ??
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -2197,18 +2178,10 @@ public class API extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        sw1.start();     
+        
+        appId = Func.App_ID(cmbApp.getSelectedItem().toString());
 
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem().toString() +
-                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-            rs.next();
-            appId = rs.getString(1);
-            conn.close();
-        } catch (SQLException ex) {
-            txtLog.append("=== Get appId > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
         SitesModel.setColumnIdentifiers(SitesColumnsName);
