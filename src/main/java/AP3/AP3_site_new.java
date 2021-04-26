@@ -581,8 +581,7 @@ public class AP3_site_new {
                         EX += "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";
                         return;
                     } 
-//                    _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Click '" + t + "'", L0, "L0", i, "no_jira"); // === invisible DEBUG
-//                        if (FAIL) return;
+
                         Thread.sleep(1000);
                     // ========================================= Group Selection ^^^^
                     
@@ -673,10 +672,7 @@ public class AP3_site_new {
 
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select last Cost Centre in the List", L1.get(L1.size() - 1), "no_jira"); 
                         if (FAIL) { return;} 
-//                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Tax Rate Click", "css", "[aria-label='Tax Rate']", "no_jira"); 
-//                        if (FAIL) { return;}
-//                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Tax Rate", "css", "[aria-label='Tax Rate']", "12", false, "no_jira"); 
-//                        if (FAIL) { return;}                                
+                             
                     break;
                 case "Fee Setup":                   
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Fee Setup types count", L2.get(i), "xpath", ".//input[@role='checkbox']", "no_jira"); // 1st
@@ -964,10 +960,7 @@ public class AP3_site_new {
                     break;
             }
         }           
-//        _t++; TWeb.Element_By_Path_Click("Click 'Cancel'", "xpath", "//*[contains(text(), 'Cancel')]","no_jira");
-//            if (FAIL) { return;}
-        // Leave without saving..
-        
+
         _t++; TWeb.Element_By_Path_Click("Click 'Create Brand'", "xpath", "//*[contains(text(), 'Create Brand')]","no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);       
@@ -976,7 +969,6 @@ public class AP3_site_new {
               
         // </editor-fold>     
 
-        // 
               
         
 /*                   After_Station_creation
@@ -1967,11 +1959,8 @@ public class AP3_site_new {
               _f++; EX += _t + "\t" + "Tax rate field not empty - not expected" + "\t" + "Tax Rate - "+json.getNumber("tax_rate") + "\t" + "Tax Rate - Location tax rate" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                
             }
-            
-            
          }
-         
-         
+           
          EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Brand API Private config Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
        
      }
@@ -2116,35 +2105,7 @@ public class AP3_site_new {
                }
            }
          }
-
-//         if(flag == 1)
-//         {
-//           for(int k=0;k<lmenu_cnt;k++)
-//           {
-//               _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Local menu API", BaseAPI + "/menu/"+Menu_ID[k]+"?nocache=true&extended=true&_query=%7Bid,label,is,groups%7Bid,label,is%7D%7D&show_unlinked=true", true,"no_jira" );
-//               JSONObject json1 = new JSONObject(API_Response_Body);
-//               _t++;
-//               _p++; EX += _t + "\t" + "Menu set - "+json1.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//            
-//               JSONArray Category = json1.getJSONArray("groups");
-//               for(int l=0;l<Category.length();l++)
-//               {
-//                   JSONObject category_obj = Category.getJSONObject(l);
-//                   if(category_obj.getJSONObject("is").getBoolean("linked"))
-//                   {
-//                    _t++;
-//                    _p++; EX += _t + "\t" + "Active Category set - "+category_obj.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                   }
-//                   else if(!category_obj.getJSONObject("is").getBoolean("linked"))
-//                   {
-//                     _t++;
-//                     _p++;EX += _t + "\t" + "Deleted Category set - "+category_obj.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                   }
-//               }
-//           }
-//         }
-//         
-         
+      
          if( (flag == 1) || (flag == 3 ) || (flag == 4) )
          {
            for(int k=0;k<lmenu_cnt;k++)
@@ -2179,33 +2140,6 @@ public class AP3_site_new {
                }
             }
          }
-         
-//         if(flag == 4 && Category_cnt>=2)
-//         {
-//          //Verify category is removed.
-//             for(int k=0;k<lmenu_cnt;k++)
-//           {
-//               _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Local menu API", BaseAPI + "/menu/"+Menu_ID[k]+"?nocache=true&extended=true&_query=%7Bid,label,is,groups%7Bid,label,is%7D%7D&show_unlinked=true", true,"no_jira" );
-//               JSONObject json1 = new JSONObject(API_Response_Body);
-//               _t++;
-//                _p++; EX += _t + "\t" + "Menu set - "+json1.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                JSONArray Category = json1.getJSONArray("groups");
-//               for(int l=0;l<Category.length();l++)
-//               {
-//                   JSONObject category_obj = Category.getJSONObject(l);
-//                   if(category_obj.getJSONObject("is").getBoolean("linked"))
-//                   {
-//                    _t++;
-//                    _p++; EX += _t + "\t" + "Active Category set - "+category_obj.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                   }
-//                   else if(!category_obj.getJSONObject("is").getBoolean("linked"))
-//                   {
-//                     _t++;
-//                     _p++;EX += _t + "\t" + "Deleted Category set - "+category_obj.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                   }
-//               }
-//            }
-//          }
          EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
        
      }
