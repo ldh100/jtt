@@ -197,31 +197,70 @@ public class WO_place_order {
                 }           
             //Place order
                 _t++; TWeb.Element_By_Path_Click("Click CHECKOUT Button", "xpath", "//p[text()='Checkout']", "no_jira");
-                _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");
-//                Thread.sleep(3000); 
-                _t++; TWeb.Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");       
-       
-       
-                pickTimeSlot(ISDELIVERYORDER?"Delivery":"Pickup");
                 
-                Thread.sleep(1000);
-                System.out.println("Place button "+d1.findElement(By.xpath("(//div[@class='v-window-item v-window-item--active']//button)[2]")).getAttribute("disabled"));
-                while ("true".equals(d1.findElement(By.xpath("(//div[@class='v-window-item v-window-item--active']//button)[2]")).getAttribute("disabled"))){
-                    _t++; TWeb.Refresh("Refresh Page", "no-jira");
-                    _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");
-                    _t++; TWeb.Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", "no_jira"); 
-                    pickTimeSlot(ISDELIVERYORDER?"Delivery":"Pickup");
+                if (url.contains("dev.thriveapp.io")){
+                    _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//h3[text()=' Ordering from ']", "no-Jira");
 
-                    if (ISDELIVERYORDER){
-                        pickLocation();
-                        //if (FAIL) continue;
+                    WebElement placeOrdertext = d1.findElement(By.xpath("//p[text()='Place order']"));
+                    System.out.println(placeOrdertext.getText());
+                    WebElement btn = placeOrdertext.findElement(By.xpath("./..") ).findElement(By.xpath("./.."));
+                    System.out.println(btn.getAttribute("disabled"));
+                    System.out.println(d1.findElement(By.xpath("//p[text()='Place order']")).findElement(By.xpath("./..")).findElement(By.xpath("./..")).getAttribute("disabled"));
+
+                    pickTimeSlot(ISDELIVERYORDER?"Delivery":"Pickup",true);
+                    Thread.sleep(1000);
+                    System.out.println("Place Order Button disabled is "+d1.findElement(By.xpath("//p[text()='Place order']")).findElement(By.xpath("./..")).findElement(By.xpath("./..")).getAttribute("disabled"));
+
+                    while ("true".equals(d1.findElement(By.xpath("//p[text()='Place order']")).findElement(By.xpath("./..")).findElement(By.xpath("./..")).getAttribute("disabled"))){
+                        _t++; TWeb.Refresh("Refresh Page", "no-jira");
+                        _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//h3[text()=' Ordering from ']", "no_jira");
+                        //_t++; TWeb.Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", "no_jira"); 
+                        pickTimeSlot(ISDELIVERYORDER?"Delivery":"Pickup",true);
+
+                        if (ISDELIVERYORDER){
+                            pickLocation(true);
+                            //if (FAIL) continue;
+                        }        
+                        System.out.println("Place Order Button disabled is "+d1.findElement(By.xpath("//p[text()='Place order']")).findElement(By.xpath("./..")).findElement(By.xpath("./..")).getAttribute("disabled"));
+
+
+                        pickPayment(true);
+                        System.out.println("Place Order Button disabled is "+d1.findElement(By.xpath("//p[text()='Place order']")).findElement(By.xpath("./..")).findElement(By.xpath("./..")).getAttribute("disabled")); 
                     }
+                    _t++; TWeb.Element_By_Path_Click("Click 'PLACE ORDER' button ", "xpath","//p[text()='Place order']/../..", "no-Jira");
+                }
+                
+            
+                else{
+                
+                    _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");
+    //                Thread.sleep(3000); 
+                    _t++; TWeb.Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");       
 
-                    pickPayment();
-                    //if (FAIL) continue;
+
+                    pickTimeSlot(ISDELIVERYORDER?"Delivery":"Pickup",false);
+
+                    Thread.sleep(1000);
+                    System.out.println("Place button "+d1.findElement(By.xpath("(//div[@class='v-window-item v-window-item--active']//button)[2]")).getAttribute("disabled"));
+                    while ("true".equals(d1.findElement(By.xpath("(//div[@class='v-window-item v-window-item--active']//button)[2]")).getAttribute("disabled"))){
+                        _t++; TWeb.Refresh("Refresh Page", "no-jira");
+                        _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");
+                        _t++; TWeb.Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", "no_jira"); 
+                        pickTimeSlot(ISDELIVERYORDER?"Delivery":"Pickup",false);
+
+                        if (ISDELIVERYORDER){
+                            pickLocation(false);
+                            //if (FAIL) continue;
+                        }
+
+                        pickPayment(false);
+                    }
+                    _t++; TWeb.Element_By_Path_Click("Click 'PLACE ORDER' button ", "xpath", "(//div[@class='v-window-item v-window-item--active']//button)[2]", "no_jira");//(//div[@class='v-window-item v-window-item--active']//button)[2]
+                
+                    
                 }
               
-                _t++; TWeb.Element_By_Path_Click("Click 'PLACE ORDR' button ", "xpath", "(//div[@class='v-window-item v-window-item--active']//button)[2]", "no_jira");//(//div[@class='v-window-item v-window-item--active']//button)[2]
+              //  _t++; TWeb.Element_By_Path_Click("Click 'PLACE ORDR' button ", "xpath", "(//div[@class='v-window-item v-window-item--active']//button)[2]", "no_jira");//(//div[@class='v-window-item v-window-item--active']//button)[2]
                 _t++; TWeb.Wait_For_Element_By_Path_InVisibility("Wait for greating message Loader complete and page redirect ", "css", "[role='document']", "no_jira");
                 _t++; TWeb.Wait_For_Element_By_Path_InVisibility("Wait for 'Place Order' button disappear, and page redirect(Loader present) ", "css", "[class='col col-4']", "no_jira");
                     if(FAIL){continue;}
@@ -281,15 +320,18 @@ public class WO_place_order {
         
     }  
     
-    public static void pickTimeSlot(String OrderType)throws InterruptedException  {
-        String cssStr = "[placeholder='Select " +    OrderType +  " Time']";
+    public static void pickTimeSlot(String OrderType,boolean newUI)throws InterruptedException  {
+        if (newUI && OrderType == "Pickup") OrderType = "Pick Up";
+        
+        String cssStr = newUI?"[placeholder='Select a " +    OrderType +  " Time']":"[placeholder='Select " +    OrderType +  " Time']";
+        
          TWeb.Wait_For_Element_By_Path_Presence("Wait for timeslot presence ", "css", cssStr, "no_jira");
        
         WebElement TimeSlotDroplist;
          //WebElement TimeSlotDroplist = d1.findElement(By.cssSelector(cssStr));//.getAttribute("disabled");
         while (FAIL||"true".equalsIgnoreCase(d1.findElement(By.cssSelector(cssStr)).getAttribute("disabled"))) {           
             _t++; TWeb.Refresh("Refresh Page", "no-jira");
-            _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for 'ORDRR DETAIL' screen", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");
+           // _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for 'ORDRR DETAIL' screen", "xpath", "//p[text()='Proceed to Checkout']", "no_jira");
             Thread.sleep(3000); 
             _t++; TWeb.Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", "no_jira"); 
             _t++; TWeb.Wait_For_Element_By_Path_Presence("Wait for TimeSlot presence", "css", cssStr, "no_jira");
@@ -304,8 +346,8 @@ public class WO_place_order {
      }
     
     
-    public static void pickLocation(){
-        _t++; TWeb.Element_By_Path_Click("Click 'select Delivery location' dropdown", "css", "[placeholder='Select Delivery Location']", "no_jira");
+    public static void pickLocation(boolean newUI){
+        _t++; TWeb.Element_By_Path_Click("Click 'select Delivery location' dropdown", "css", newUI?"[placeholder='Select a Delivery Location']":"[placeholder='Select Delivery Location']", "no_jira");
         _t++; TWeb.List_L0("find list box ", "xpath", "(//div[@role='listbox'])", "no_jira");
         //List<WebElement> listBox = d1.findElements(By.xpath("(//div[@role='listbox'])"));
         _t++ ;TWeb.Element_Child_List_L1("Find location list count ", L0.get(L0.size()-1), "css", "[role='option']", "no_jira");
@@ -317,14 +359,25 @@ public class WO_place_order {
     }
     
     
-    public static void pickPayment(){
+    public static void pickPayment(boolean newUI){
+        if (newUI){
+            _t++; TWeb.Element_By_Path_Click("Open Payment Dropdown", "css", "[placeholder='Select a Payment Method']", "no_jira");
+            _t++; TWeb.List_L0("Locate list box ", "xpath", "(//div[@role='listbox'])",  "no_jira");
+            _t++ ;TWeb.Element_Child_List_L1("Find Payment CC list count ", L0.get(L0.size()-1), "css", "[role='option']", "no_jira");
+        _t++; TWeb.Element_Click("Select 'Payment' from dropdown", L1.get(L1.size()>3?3:(L1.size()-1)), "no_jira");
+        if (FAIL){return;}
+        }
+        
+        
+        
+        else{
         _t++; TWeb.Element_E1_Find("Find Payment Panel Title  " ,"xpath" , "//div[text()=' Saved Cards ']", "no-jira");
         _t++; TWeb.Element_Child_E2("Locate Payment panel", e1, "xpath", "./..", "no_Jira");
         _t++; TWeb.Element_Child_Click("Open Payment Dropdown", e2, "css", "[class='v-select__slot']", "no_Jira");
         _t++; TWeb.List_L0("Locate list box ", "xpath", "(//div[@role='listbox'])", "no_jira");
         _t++ ;TWeb.Element_Child_List_L1("Find Payment CC list count ", L0.get(L0.size()-1), "css", "[role='option']", "no_jira");
         _t++; TWeb.Element_Click("Select 'Payment' from dropdown", L1.get(L1.size()>3?3:(L1.size()-1)), "no_jira");
-        if (FAIL){return;}
+        if (FAIL){return;}}
         //WebElement cardPanel = e1.findElement(By.xpath("./.."));
         //System.out.println(cardPanel.getAttribute("class"));
         //System.out.println(cardPanel.findElement(By.cssSelector("[class='v-select__slot']")).getAttribute("class"));
