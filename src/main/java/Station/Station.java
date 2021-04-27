@@ -529,7 +529,7 @@ public class Station extends javax.swing.JInternalFrame {
         }
         sw1.start();        
 
-        appId = Func.App_ID(cmbApp.getSelectedItem().toString());
+        appId = Func.App_ID(cmbApp.getSelectedItem().toString(), env);
 
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
