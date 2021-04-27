@@ -740,7 +740,7 @@ public class WO extends javax.swing.JInternalFrame {
 
         if (_expore_brand_menu.isSelected()) { 
             SCOPE += ", Explore Brand Menu";
-            EX += " - " + "\t" + " === Explore Brand Menu" + "\t" + " ===== " + "\t" + " == Explore Brand Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === Explore Brand Menu" + "\t" + " ===== " + "\t" + " == Explore Brand Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_explore_brand_menu.run(_edit_item.isSelected());
             EX += " - " + "\t" + " === ^ Explore Brand Menu" + "\t" + " ===== " + "\t" + " == ^ Explore Brand Menu" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             //Thread.sleep(1500);
@@ -748,14 +748,14 @@ public class WO extends javax.swing.JInternalFrame {
 
         if (_place_pickup_order.isSelected()) { 
             SCOPE += ", Place Pickup Order";
-            EX += " - " + "\t" + " === Place Pickup Order" + "\t" + " ===== " + "\t" + " == Place Pickup Order >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === Place Pickup Order" + "\t" + " ===== " + "\t" + " == Place Pickup Order >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_place_order.run(false);
             EX += " - " + "\t" + " === ^ Place Pickup Order" + "\t" + " ===== " + "\t" + " == ^ Place Pickup Order" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             //Thread.sleep(1500);
         }
         if (_place_delivery_order.isSelected()) { 
             SCOPE += ", Place Delivery Order";
-            EX += " - " + "\t" + " === Place Delivery Order" + "\t" + " ===== " + "\t" + " == Place Delivery Order >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === Place Delivery Order" + "\t" + " ===== " + "\t" + " == Place Delivery Order >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_place_order.run(true);
             EX += " - " + "\t" + " === ^ Place Delivery Order" + "\t" + " ===== " + "\t" + " == ^ Place Delivery Order" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             //Thread.sleep(1500);
@@ -763,30 +763,30 @@ public class WO extends javax.swing.JInternalFrame {
         // ============================== Last Blocks
         if (_order_status.isSelected()) { 
             SCOPE += ", Order Status";
-            EX += " - " + "\t" + " === Order Status" + "\t" + " ===== " + "\t" + " == Order Status Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === Order Status" + "\t" + " ===== " + "\t" + " == Order Status Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_order_status.run();
-            EX += " - " + "\t" + " === ^ Order Status" + "\t" + " ===== " + "\t" + " == ^ Order Status End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === ^ Order Status" + "\t" + " ===== " + "\t" + " == ^ Order Status End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             //Thread.sleep(1500);
         }
         if (_account_settings.isSelected()) { 
             SCOPE += ", Account Settings";
-            EX += " - " + "\t" + " === Account Settings" + "\t" + " ===== " + "\t" + " == Account Settings Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === Account Settings" + "\t" + " ===== " + "\t" + " == Account Settings Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_account_settings.run();
-            EX += " - " + "\t" + " === ^ Account Settings" + "\t" + " ===== " + "\t" + " == ^ Account Settings End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === ^ Account Settings" + "\t" + " ===== " + "\t" + " == ^ Account Settings End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             //Thread.sleep(1500);
         }
         if (_order_history.isSelected()) { 
             SCOPE += ", Order History";
-            EX += " - " + "\t" + " === Order History" + "\t" + " ===== " + "\t" + " == Order History Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === Order History" + "\t" + " ===== " + "\t" + " == Order History Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_order_history.run();
-            EX += " - " + "\t" + " === ^ Order History" + "\t" + " ===== " + "\t" + " == ^ Order History End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === ^ Order History" + "\t" + " ===== " + "\t" + " == ^ Order History End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             //Thread.sleep(1500);
         }
         if (_logout.isSelected()) { 
             SCOPE += ", LogOut";
-            EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_logout.run();
-            EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             //Thread.sleep(1500);
         }
                                    
@@ -1006,11 +1006,11 @@ public class WO extends javax.swing.JInternalFrame {
 //        cmbApp.addItem("Tacit");
         cmbApp.addItem("Thrive");
         
+        cmbEnv.addItem("Development");         
         cmbEnv.addItem("Staging");
-        cmbEnv.addItem("Development");
-        //cmbEnv.addItem("Production");         
-        cmbEnv.setSelectedIndex(1); // delevopment
-        cmbApp.setSelectedIndex(0);       
+        cmbEnv.addItem("Production");
+        
+        cmbEnv.setSelectedIndex(0); // delevopment       
         
         Load = false;
         LOAD_ENV();
@@ -1148,7 +1148,7 @@ public class WO extends javax.swing.JInternalFrame {
         } else{
             BaseAPI = "https://api.compassdigital.org/v1";
             env = "PR";
-            url = "https://dev.thriveapp.io/";
+            url = "https://thriveapp.io/";
         }
         Get_WO_TKN();
         LOAD_CONFIG();
@@ -1183,16 +1183,8 @@ public class WO extends javax.swing.JInternalFrame {
         }
         sw1.start();        
 
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [id] FROM[dbo].[p2_app] WHERE [app] = '" + cmbApp.getSelectedItem().toString() +
-                    "' AND [env] LIKE '" + cmbEnv.getSelectedItem().toString() + "%'");
-            rs.next();
-            appId = rs.getString(1);
-            conn.close();
-        } catch (SQLException ex) {
-            txtLog.append("=== Get S_OAuth_TKN > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
+        appId = Func.App_ID(cmbApp.getSelectedItem().toString(), env);
+
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
         SitesModel.setColumnIdentifiers(SitesColumnsName);

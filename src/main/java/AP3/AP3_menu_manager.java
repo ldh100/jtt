@@ -31,7 +31,7 @@ public class AP3_menu_manager {
             if (FAIL) { return;}
          
         // <editor-fold defaultstate="collapsed" desc="Group Selection">  
-        EX += " - " + "\t" + " === MM Sector Selection " + "\t" + " ===== " + "\t" + " == Sector Selection Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";  
+        EX += " - " + "\t" + " === MM Sector Selection " + "\t" + " ===== " + "\t" + " == Sector Selection Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";  
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}         
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", "no_jira"); 
@@ -108,7 +108,7 @@ public class AP3_menu_manager {
             if (FAIL) { return;}
         _t++; TWeb.Find_Text("Fund 'Search...' text", "Search Menus", true,"no_jira");   
             if (FAIL) { return;}  
-        EX += " - " + "\t" + " === MM Sector Selection " + "\t" + " ===== " + "\t" + " == Sector Selection End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === MM Sector Selection " + "\t" + " ===== " + "\t" + " == Sector Selection End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold>           
 
         // <editor-fold defaultstate="collapsed" desc="Training Video">
@@ -693,7 +693,7 @@ public class AP3_menu_manager {
         // </editor-fold>       
 
         // <editor-fold defaultstate="collapsed" desc="Global Menus Add Menu Set">  
-        EX += " - " + "\t" + " === MM Global Menus Add Menu Set" + "\t" + " ===== " + "\t" + " == Add Menu Sets Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === MM Global Menus Add Menu Set" + "\t" + " ===== " + "\t" + " == Add Menu Sets Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); TWeb.List_L3("Menus Pages Count", "xpath", "//button[contains(@class, 'v-pagination__item')]", "no_jira"); 
         PAGES = L3.size();
         
@@ -1075,11 +1075,11 @@ public class AP3_menu_manager {
         //Thread.sleep(500);
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for MM 'Sector' page", "xpath", "//div[@class='layout hover align-baseline']", "no_jira"); 
             if (FAIL) { return;} 
-        EX += " - " + "\t" + " === MM Global Menus Add Menu Set" + "\t" + " ===== " + "\t" + " == Add Menu Sets End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === MM Global Menus Add Menu Set" + "\t" + " ===== " + "\t" + " == Add Menu Sets End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold>  
         
         // <editor-fold defaultstate="collapsed" desc="Global Menus Import">  
-        EX += " - " + "\t" + " === MM Global Menus Import" + "\t" + " ===== " + "\t" + " == Global Menus Import Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === MM Global Menus Import" + "\t" + " ===== " + "\t" + " == Global Menus Import Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         if(!DH_Menu_ID.contains(" ") && DH_Menu_ID.length() > 18){ // check for valid ID
             _t++; Thread.sleep((long) sleep); TWeb.List_L3("Menus Pages Count", "xpath", "//button[contains(@class, 'v-pagination__item')]", "no_jira"); 
             PAGES = L3.size();
@@ -1474,14 +1474,14 @@ public class AP3_menu_manager {
                 }//End of else    
             } 
 
-            EX += " - " + "\t" + " === MM Global Menus Import" + "\t" + " ===== " + "\t" + " == Global Menus Import End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === MM Global Menus Import" + "\t" + " ===== " + "\t" + " == Global Menus Import End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         } else{
-            EX += " - " + "\t" + " === MM Global Menus Import" + "\t" + " ===== " + "\t" + " == Skipped (" + DH_Menu_ID + ") ^^" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === MM Global Menus Import" + "\t" + " ===== " + "\t" + " == Skipped (" + DH_Menu_ID + ") ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         }
         // </editor-fold>  
         
         // <editor-fold defaultstate="collapsed" desc="Local Brands">  
-        EX += " - " + "\t" + " === MM Local Brands" + "\t" + " ===== " + "\t" + " == Local Brands Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === MM Local Brands" + "\t" + " ===== " + "\t" + " == Local Brands Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); TWeb.List_L3("Menus Pages Count", "xpath", "//button[contains(@class, 'v-pagination__item')]", "no_jira"); 
         PAGES = L3.size();
         
@@ -1667,7 +1667,7 @@ public class AP3_menu_manager {
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for 'Local Brands' page", "xpath", "//div[@class='layout hover align-baseline']", "no_jira"); 
             if (FAIL) { return;}      
             
-        EX += " - " + "\t" + " === MM Local Brands" + "\t" + " ===== " + "\t" + " == Local Brands End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === MM Local Brands" + "\t" + " ===== " + "\t" + " == Local Brands End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold>    
     }   
 }

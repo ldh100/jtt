@@ -18,7 +18,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 public class FW_restaurants {
     public static void run() throws InterruptedException { 
         
-        //************************* Select a Restaurant Testcase*****************************************************************
+    
+    
         _t++; Thread.sleep((long) sleep); TWeb.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//nav[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);
@@ -28,6 +29,11 @@ public class FW_restaurants {
         Thread.sleep(500);
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;} 
+            
+            
+    //*********************************************** Search & click on Restaurant *****************************************
+   // <editor-fold defaultstate="collapsed" desc="Search & Click on Restaurant ">  
+        
         _t++; TWeb.Element_By_Path_Text_Enter("Enter '" + RESTAURANT + "' in Search", "xpath", "//input[@placeholder='Search']", FW.RESTAURANT, false, "no_jira");
         //_t++; TWeb.Element_By_Path_Text_Enter("Enter Search", "xpath", "//input[@placeholder='Search']", "Tim Horton", false, "no_jira"); 
         if (FAIL) { return;}   
@@ -56,11 +62,11 @@ public class FW_restaurants {
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//div[@role='progressbar']", "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find '" + RESTAURANT + "' Title Name", RESTAURANT, true,"no_jira");
+    // </editor-fold> 	   
         
-        
-        //*************************** Add a Restaurant Testcases***************************************
-       // ****************************************************************************************************
-       //********************************************************************************************************
+   // *********************************************** Add a Restaurant Testcases *******************************************
+    // <editor-fold defaultstate="collapsed" desc="Add Restaurant ">  
+       
          Thread.sleep(5000);
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Drawer menu 'Restaurants'", "xpath", "//a[@href='/partners/']", "no_jira"); 
             if (FAIL) { return;}
@@ -242,7 +248,7 @@ public class FW_restaurants {
       Thread.sleep(5000);
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Create Restaurant?", "xpath", "//button//span[contains(.,'Yes')]", "no_jira"); 
       if (FAIL) { return;}   
-   
+    // </editor-fold> 
  
     }
     

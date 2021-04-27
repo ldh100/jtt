@@ -48,7 +48,7 @@ public class AP3_promo {
         // _t++; Thread.sleep((long) sleep);TWeb.Wait_For_Element_By_Path_Presence("Wait for Promotion Name","xpath" , "//th[contains(@aria-label,'Promotion Name')]", "no_jira");
        
         // <editor-fold defaultstate="collapsed" desc="Pagination">  
-        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Pagination Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Pagination Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
           
            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
             if (FAIL) { return;}     
@@ -147,7 +147,7 @@ public class AP3_promo {
             if (FAIL) { return;}        
         } 
         
-        EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Pagination Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+        EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Pagination Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
          
         // </editor-fold> 
         
@@ -239,7 +239,7 @@ public class AP3_promo {
         
        
          // <editor-fold defaultstate="collapsed" desc="LTO PROMO"> 
-        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Creating LTO PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Creating LTO PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
         Promo_details("lto");        
         Promo_scheduling(date,futuredate,"Custom");
         
@@ -404,14 +404,14 @@ public class AP3_promo {
         if (FAIL) { return;}   
         
         Promo_Actions("lto");
-        EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Creating LTO PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+        EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Creating LTO PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
        
         // </editor-fold>    
         
             
          // <editor-fold defaultstate="collapsed" desc="BOGO PROMO">  
          
-          EX += " - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Creating BOGO PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+          EX += " - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Creating BOGO PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
          _t++; Thread.sleep((long) sleep); TWeb.To_Top("no_jira");
          _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click New Promotion", "xpath", "//div[contains(text(),'New Promotion')]", "no_jira");
          if (FAIL) { return;}  
@@ -608,13 +608,13 @@ public class AP3_promo {
         if (FAIL) { return;}   
            
          Promo_Actions("bogo"); 
-          EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Creating BOGO PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";  
+          EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Creating BOGO PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";  
         // </editor-fold>
                   
         
          // <editor-fold defaultstate="collapsed" desc="Bundle PROMO">     
         
-        EX += " - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Creating BUNDLE PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+        EX += " - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Creating BUNDLE PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
          _t++; Thread.sleep((long) sleep); TWeb.To_Top("no_jira");
          _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click New Promotion", "xpath", "//div[contains(text(),'New Promotion')]", "no_jira");
          if (FAIL) { return;}  
@@ -824,14 +824,14 @@ public class AP3_promo {
         if (FAIL) { return;}   
            
          Promo_Actions("bundle");
-         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Creating BUNDLE PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Creating BUNDLE PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
        // </editor-fold>   
        
          // <editor-fold defaultstate="collapsed" desc="Tests for Dev and Staging Environment">   
          
        if(!env.equals("PR"))
        {
-            EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Creating LTO with Repeat : Weekends==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+            EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Creating LTO with Repeat : Weekends==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
       
          _t++; Thread.sleep((long) sleep); TWeb.To_Top("no_jira");
          _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click New Promotion", "xpath", "//div[contains(text(),'New Promotion')]", "no_jira");
@@ -946,7 +946,7 @@ public class AP3_promo {
         
         Promo_Actions("lto");
         
-        EX += "\n - " + "\t" + " ====END=====" + "\t" + " ===== " + "\t" + " == Creating LTO with Repeat : Weekends" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+        EX += "\n - " + "\t" + " ====END=====" + "\t" + " ===== " + "\t" + " == Creating LTO with Repeat : Weekends" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
        //End of staging environment
      // </editor-fold>
     }
@@ -1256,7 +1256,7 @@ public class AP3_promo {
     
      public static void Promo_API(String P_ID,String Promo_action,String Promo_type) throws InterruptedException
      {
-         EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Promo API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+         EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Promo API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
          
           _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Promo/ API ("+Promo_action+" promo)", BaseAPI + "/promo/" + P_ID, true,"no_jira" );
             _t++; TWeb.API_Body_Contains("Promo API - find company ID", CompanyID,true, "no_jira");    
@@ -1275,7 +1275,7 @@ public class AP3_promo {
             }
             else {_t++; TWeb.API_Body_Contains("Promo API - find Status", "archived",true, "no_jira");}
           Promo_discount_verify();
-         EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Promo API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+         EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Promo API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
           
       }//End of Promo_API
      
@@ -1324,7 +1324,7 @@ public class AP3_promo {
      
      public static void Promo_Location_API(String P_ID,String Promo_action,String Promo_type) throws InterruptedException
      {
-         EX += "\n - " + "\t" + " ====START====" + "\t" + " ===== " + "\t" + " == Promo Location API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+         EX += "\n - " + "\t" + " ====START====" + "\t" + " ===== " + "\t" + " == Promo Location API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
          
          if(Promo_type.equalsIgnoreCase("bundle"))
          {
@@ -1356,7 +1356,7 @@ public class AP3_promo {
             _t++; TWeb.API_Body_Contains("Promo Location API - find Promo name", "Automation Test Promo",false, "no_jira");
           }       
          }
-       EX += "\n - " + "\t" + " ====END====" + "\t" + " ===== " + "\t" + " == Promo Location API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+       EX += "\n - " + "\t" + " ====END====" + "\t" + " ===== " + "\t" + " == Promo Location API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
          
      } // End of Promo_Location_API
 }

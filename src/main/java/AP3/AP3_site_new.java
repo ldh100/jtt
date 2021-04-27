@@ -581,8 +581,7 @@ public class AP3_site_new {
                         EX += "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";
                         return;
                     } 
-//                    _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Click '" + t + "'", L0, "L0", i, "no_jira"); // === invisible DEBUG
-//                        if (FAIL) return;
+
                         Thread.sleep(1000);
                     // ========================================= Group Selection ^^^^
                     
@@ -673,10 +672,7 @@ public class AP3_site_new {
 
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select last Cost Centre in the List", L1.get(L1.size() - 1), "no_jira"); 
                         if (FAIL) { return;} 
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Tax Rate Click", "css", "[aria-label='Tax Rate']", "no_jira"); 
-                        if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Tax Rate", "css", "[aria-label='Tax Rate']", "12", false, "no_jira"); 
-                        if (FAIL) { return;}                                
+                             
                     break;
                 case "Fee Setup":                   
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Fee Setup types count", L2.get(i), "xpath", ".//input[@role='checkbox']", "no_jira"); // 1st
@@ -964,10 +960,7 @@ public class AP3_site_new {
                     break;
             }
         }           
-//        _t++; TWeb.Element_By_Path_Click("Click 'Cancel'", "xpath", "//*[contains(text(), 'Cancel')]","no_jira");
-//            if (FAIL) { return;}
-        // Leave without saving..
-        
+
         _t++; TWeb.Element_By_Path_Click("Click 'Create Brand'", "xpath", "//*[contains(text(), 'Create Brand')]","no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);       
@@ -976,7 +969,6 @@ public class AP3_site_new {
               
         // </editor-fold>     
 
-        // 
               
         
 /*                   After_Station_creation
@@ -1381,6 +1373,8 @@ public class AP3_site_new {
     public static void After_station_creation() throws InterruptedException
     {
         int flag = 1;
+        int Menu_set_cnt = -1;
+        int Category_cnt = -1;
         while(flag<=4)
         {
           
@@ -1405,6 +1399,8 @@ public class AP3_site_new {
         Location_brand_API(B_ID,flag);
         Brand_Private_API(B_ID,flag);
         Brand_Public_API(B_ID,flag); 
+        if(flag==1) { Verify_menu_category_API(B_ID,flag,0,0);}
+        if(flag>=3) {   Verify_menu_category_API(B_ID,flag,Menu_set_cnt,Category_cnt);}
         flag++;
         // Verify the Station Data after a refresh
         if(flag==5)
@@ -1427,14 +1423,21 @@ public class AP3_site_new {
                 if (FAIL) return;
                 Thread.sleep(1000);
             switch (CHOICE) { 
-                case "Station Information":        
+                case "Station Information":   
+                    if(flag == 2)
+                    {
+                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Tax Rate Click", "css", "[aria-label='Tax Rate']", "no_jira"); 
+                        if (FAIL) { return;}
+                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Tax Rate", "css", "[aria-label='Tax Rate']", "12", false, "no_jira"); 
+                        if (FAIL) { return;}   
+                    } 
                     break;
                 case "Fee Setup":                   
                     break; 
                 case "Pickup Details":    
                     break;
                 case "Delivery Details":      
-                     if(flag==2)
+                     if(flag==3)
                      {
                          
                      _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Timeslot Type Dropdown", "xpath", "//input[@aria-label='Timeslot Type']", "no_jira"); 
@@ -1518,6 +1521,53 @@ public class AP3_site_new {
                     }
                     break;
                 case "Assign Menus":
+                    /* Remove second menu set if 2 menu set present in assigned menus*/
+                    
+                    if(flag == 3)
+                    {
+                         _t++; Thread.sleep((long) sleep); TWeb.List_L3("Find List of Menu sets", "xpath", "//div[@id='toc-assignMenus']//div[@class='flex shrink xs2']//i[contains(@class,'close')]", "no_jira");
+                        if(FAIL) 
+                        {
+                            _t++;
+                            _w++; EX += _t + "\t" + "No Menu Set exist" + "\t" + "-" + "\t" + "No Menu Set exist" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        }
+                        else if(L3.size()>=2)
+                        {
+                          Menu_set_cnt = L3.size();
+                          _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Remove last Menu set ", L3.get(L3.size()-1), "no_jira");
+                          if (FAIL) { return;}     
+                        }
+                        else if(L3.size()<2)
+                        {
+                           _t++;
+                           _w++; EX += _t + "\t" + "Less than 2 Menu Set exist" + "\t" + "-" + "\t" + "Atleast 2 Menu Set must exist" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        }
+                    }//End of flag=3
+                    
+                    
+                    
+                    
+                    /* Remove second category if 2 categories present in assigned menus*/
+                    if(flag == 4)
+                    {
+                      _t++; Thread.sleep((long) sleep); TWeb.List_L3("Find List of categories", "xpath", "(//div[@id='toc-assignMenus']//div[@class='flex xs12'])[5]//i[contains(@class,'close')]", "no_jira");
+                        if(FAIL) 
+                        {
+                            _t++;
+                            _w++; EX += _t + "\t" + "No categories exist" + "\t" + "-" + "\t" + "No categories exist" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        }
+                        else if(L3.size()>=2)
+                        {
+                          Category_cnt = L3.size();
+                          _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Remove last category ", L3.get(L3.size()-1), "no_jira");
+                          if (FAIL) { return;}                          
+                        }
+                        else if(L3.size()<2)
+                        {
+                           _t++;
+                           _w++; EX += _t + "\t" + "Less than 2 categories exist" + "\t" + "-" + "\t" + "Atleast 2 categories exist" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        }
+                    }
                     break;
                 case "Integration Type": 
                          T_Index = -1;
@@ -1880,8 +1930,37 @@ public class AP3_site_new {
           _f++; EX += _t + "\t" + "Digital wallet exclusions Enabled-  not expected" + "\t" + "Digital wallet exclusions Enabled" + "\t" + "Digital wallet exclusions Not Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
        
          }
-                  
          
+         
+         if(json.has("tax_rate") && flag == 2)
+         {
+               if(json.getDouble("tax_rate") == 0.12)
+               {
+                   _t++;
+                   _p++; EX += _t + "\t" + "Tax rate set to 12% - Expected" + "\t" + "Tax Rate - 12%" + "\t" + "Tax Rate - 12%" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+               }
+               else 
+               {
+                   _t++;
+                   _f++; EX += _t + "\t" + "Tax rate not 12% - not expected" + "\t" + "Tax Rate not 12%" + "\t" + "Tax Rate - 12%" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+               }    
+         }
+         
+         if(flag ==1)
+         {
+            if(!json.has("tax_rate"))
+            {
+             _t++;
+             _p++; EX += _t + "\t" + "Tax rate set to Location tax " + "\t" + "Tax Rate field empty" + "\t" + "Tax Rate field empty" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            }
+            else
+            {
+              _t++;
+              _f++; EX += _t + "\t" + "Tax rate field not empty - not expected" + "\t" + "Tax Rate - "+json.getNumber("tax_rate") + "\t" + "Tax Rate - Location tax rate" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+               
+            }
+         }
+           
          EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Brand API Private config Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
        
      }
@@ -1941,7 +2020,7 @@ public class AP3_site_new {
          
         // Single time slot verification for User generated Delivery  
         
-        if(json.has("show_single_timeslot") && flag == 2)
+        if(json.has("show_single_timeslot") && flag == 3)
         {
            if (json.getBoolean("show_single_timeslot"))
            {  // Print pass expected result 
@@ -1956,7 +2035,7 @@ public class AP3_site_new {
          }
         
         // Allow delivery instruction verification for User generated Delivery 
-        if(json.has("show_instructions") && flag == 2)
+        if(json.has("show_instructions") && flag == 3)
         {
            if (json.getBoolean("show_instructions"))
            {  // Print pass expected result 
@@ -1971,7 +2050,7 @@ public class AP3_site_new {
          }
         
         // Enable Bolter Delivery App verification for User generated Delivery 
-        if(json.has("runner_app_enabled") && flag == 2)
+        if(json.has("runner_app_enabled") && flag == 3)
         {
            if (json.getBoolean("runner_app_enabled"))
            {  // Print pass expected result 
@@ -2001,6 +2080,67 @@ public class AP3_site_new {
          }
         
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Brand API Public config Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+       
+     }
+    
+    
+    public static void Verify_menu_category_API(String B_ID,int flag,int Menu_set_cnt,int Category_cnt) throws InterruptedException
+     {
+         EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API Start==" + "\t" + "Round : "+flag+ "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+         String[] Menu_ID = new String[2];
+         int lmenu_cnt = 0;
+         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Global menu API", BaseAPI + "/menu/company/"+CompanyID, true,"no_jira" );
+         JSONObject json = new JSONObject(API_Response_Body);
+         JSONArray menus = json.getJSONArray("menus");
+         
+         for(int k=0;k<menus.length();k++)
+         {
+           JSONObject menu = menus.getJSONObject(k);
+           if(menu.has("location_brand"))
+           {
+               if(menu.getString("location_brand").equals(B_ID))
+               {
+                 Menu_ID[lmenu_cnt] = menu.getString("id");
+                 lmenu_cnt++;       
+               }
+           }
+         }
+      
+         if( (flag == 1) || (flag == 3 ) || (flag == 4) )
+         {
+           for(int k=0;k<lmenu_cnt;k++)
+           {
+               _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Local menu API", BaseAPI + "/menu/"+Menu_ID[k]+"?nocache=true&extended=true&_query=%7Bid,label,is,groups%7Bid,label,is%7D%7D&show_unlinked=true", true,"no_jira" );
+               JSONObject json1 = new JSONObject(API_Response_Body);
+               if(json1.getJSONObject("is").getBoolean("linked"))
+               {
+                _t++;
+                _p++; EX += _t + "\t" + "Active Menu set - "+json1.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                JSONArray Category = json1.getJSONArray("groups");
+                for(int l=0;l<Category.length();l++)
+                 {
+                   JSONObject category_obj = Category.getJSONObject(l);
+                   if(category_obj.getJSONObject("is").getBoolean("linked"))
+                   {
+                    _t++;
+                    _p++; EX += _t + "\t" + "Active Category set - "+category_obj.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                   }
+                   else if(!category_obj.getJSONObject("is").getBoolean("linked"))
+                   {
+                     _t++;
+                     _p++;EX += _t + "\t" + "Deleted Category set - "+category_obj.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                   }
+                 }
+               }
+               else if(!json1.getJSONObject("is").getBoolean("linked"))
+               {
+                _t++;
+               _p++;EX += _t + "\t" + "Deleted Menu set - "+json1.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                  
+               }
+            }
+         }
+         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
        
      }
     

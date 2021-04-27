@@ -830,6 +830,9 @@ public class FW extends javax.swing.JInternalFrame {
         if (_roles.isSelected()) { 
             SCOPE += ", User Permission";
             EX += " - " + "\t" + " === User Permission" + "\t" + " ===== " + "\t" + " == User Permission Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+            if (!_logout.isSelected()){
+                       FW_logout.run();
+                    }
             FW_user_permission.run();
             EX += " - " + "\t" + " === ^ User Permission" + "\t" + " ===== " + "\t" + " == ^ User Permission End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
