@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.concurrent.TimeUnit;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 import javax.swing.JTable;
@@ -71,18 +72,50 @@ public class Func {
         }
         return "Not Found";
     }
-    public static String App_ID(String APP) {
+    public static String App_ID(String APP, String ENV) {
        switch (APP.toLowerCase()) {
             case "boost":
-                return "D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe";
+                if(ENV.equals("DE")) 
+                    return "014B6RP683C2QL7X00oDS86lrKOO14twGXQwzDARCgympJ42Q5SD1LWZ2gppTOGd4eov2GcePXaa59Zquma";
+                if(ENV.equals("ST")) 
+                    return "11J3gKPg8BCR3mr5OO92S6EBL4ddEAT17G44eoLPSw0N21gy4OHjQXjDG6LXIrL1MY8B5PHPX9omNMrqFJO";
+                if(ENV.equals("PR")) 
+                    return "11J3gKPg8BCR3mr5OO92S6EBL4ddEAT17G44eoLPSw0N21gy4OHjQXjDG6LXIrL1MY8B5PHPX9omNMrqFJO";
             case "thrive":
-                return "Roj5NWl4mXtl2dZ8yJLKF9Rq5Eow59FJaNGB6";
-            case "nourish":
-                return"GKEAwXZ1P3FNLg6MlqA5crzqQwpDm8sevv2Q5DG";
-            case "rogers":
-                return "wjgOXDMqrQIGPEYlKj0dUzKR79YX4BIjWRrzO";
+                if(ENV.equals("DE")) 
+                    return "91LoqkPqyDCeGj4JllPRS2e0pWRRj5UZwMWR5E01FwGwORg7kyI0kwpjakyGfK7geXm602UXkg7XzlNDI0k";
+                if(ENV.equals("ST")) 
+                    return "Ym7By6oy1dTOBE5P880jTamr9022GqCD7BB2y1vOIlgk1B16Y7hzOGjMXNMoh1oQRojae9T8JqBXJ8llt9d";
+                if(ENV.equals("PR")) 
+                    return "Ym7By6oy1dTOBE5P880jTamr9022GqCD7BB2y1vOIlgk1B16Y7hzOGjMXNMoh1oQRojae9T8JqBXJ8llt9d";
             case "jjkitchen":
-                return "Roj5NWl4mXtl2dZ8yJLKF9Rq5EpOlaIAmv61pZ7LCzD";
+                if(ENV.equals("DE")) 
+                    return "014B6RP683C2QL7X00oDS86lrKOO6Gi8GWyDLqM8IGerMLAXz4ujgmy4B2jziDvY2604zWTeDj5qwkBai7Q";
+                if(ENV.equals("ST")) 
+                    return "014B6RP683C2QL7X00oDS86lrKOO6Gi8GWyDLqM8IGerMLAXz4ujgmy4B2jziDvY2604zWTeDj5qwkBai7Q";
+                if(ENV.equals("PR")) 
+                    return "014B6RP683C2QL7X00oDS86lrKOO6Gi8GWyDLqM8IGerMLAXz4ujgmy4B2jziDvY2604zWTeDj5qwkBai7Q";
+            case "nourish":
+                if(ENV.equals("DE")) 
+                    return "pjKAypwy46UqpZaKOOEBTA86dKRRyJIPDPNNlWPEf3k94PXPj3cAXaO6o4dgsEXjJ8RL78HdBLz7rK75f3W"; 
+                if(ENV.equals("ST")) 
+                    return "Ym7By6oy1dTOBE5P880jTamr9022mQCvpaXorrdOukDoYNDddatraAzdWPNqSLA8p4B52Mu8QMAOW8Rluad";
+                if(ENV.equals("PR")) 
+                    return "Ym7By6oy1dTOBE5P880jTamr9022mQCvpaXorrdOukDoYNDddatraAzdWPNqSLA8p4B52Mu8QMAOW8Rluad";
+            case "rogers":
+                if(ENV.equals("DE")) 
+                    return "D72zJqPJQ5h91JXM22Q4Iqa0E4335XC394dO6JN0s2XezzG3P2FQ2LJXzKWgSzkl2ZLP1kFvN7BdEqX0f2e"; 
+                 if(ENV.equals("ST")) 
+                    return "rjEZyoky4rUlgzRwOO0dtEXkD2wwK3tw1y3GlJJzsY3LYK6aPPTRydal9dOktZ9ZL1aB5JH2zlyPzemzCjy";
+                if(ENV.equals("PR")) 
+                    return "rjEZyoky4rUlgzRwOO0dtEXkD2wwK3tw1y3GlJJzsY3LYK6aPPTRydal9dOktZ9ZL1aB5JH2zlyPzemzCjy";
+            case "bamco":
+                if(ENV.equals("DE")) 
+                    return "pjKAypwy46UqpZaKOOEBTA86dKRRy5tPe2DKrjoMS37lZO6BZXcyQBv3GZ4WIEmlDaOW8du1drKAWKL6uzR"; 
+                if(ENV.equals("ST")) 
+                    return "pjKAypwy46UqpZaKOOEBTA86dKRRy5tPe2DKrjoMS37lZO6BZXcyQBv3GZ4WIEmlDaOW8du1drKAWKL6uzR";
+                if(ENV.equals("PR")) 
+                    return "pjKAypwy46UqpZaKOOEBTA86dKRRy5tPe2DKrjoMS37lZO6BZXcyQBv3GZ4WIEmlDaOW8du1drKAWKL6uzR";
             case "canteen":
                 return "71rpYwPYzkCW1Kg466Qjc8K4MvOOdAfQ7M5R9v3AcB99Y3M0XYh45GYz032ohm70lXpNd4F7v8gZZ56QI7N";
             case "Tacit":
@@ -128,6 +161,11 @@ public class Func {
             }
 
             p = b.start();
+            if(waitFor){
+                p.waitFor(10, TimeUnit.SECONDS);
+                //boolean exitCode = p.waitFor(10, TimeUnit.SECONDS);
+                //output += "Exited with error code : " + exitCode;                   
+            }  
             if(ReturnOutput){
                 BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 String line;
@@ -137,10 +175,7 @@ public class Func {
                     }
                 }                
             }
-            if(waitFor){
-                int exitCode = p.waitFor();
-                output += "Exited with error code : " + exitCode;                   
-            }   
+ 
         } catch(Exception ex){
             output = ex.getMessage();
         } 
@@ -156,8 +191,8 @@ public class Func {
             return "OK";
         }
         catch (IOException ex) {
-            System.out.println("\r\n\r\n=== Show " + aLog + " > ERROR: " + ex.getMessage());
-            return "\r\n\r\n=== Show " + aLog + " > ERROR: " + ex.getMessage();
+            System.out.println("\r\n= Show " + aLog + " > ERROR: " + ex.getMessage() + "\r\n");
+            return "\r\n= Show " + aLog + " > ERROR: " + ex.getMessage()+ "\r\n";
         }
     }
     public static class ColorRenderer extends DefaultTableCellRenderer{
