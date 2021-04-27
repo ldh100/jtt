@@ -10,6 +10,8 @@ import A.TWeb;
 import static AP3.AP3.*;
 import java.io.File;
 import java.time.LocalDateTime;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * @author astrit.ademi
@@ -28,6 +30,33 @@ public class AP3_images {
         Thread.sleep(1000);
         TWeb.Refresh("Refresh Brand List Page", "no_jira");
         Thread.sleep(2000);
+        //check initial api
+        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Check API before toggle", BaseAPI + "/location/sector/" + SectorID + "?nocache=true&expanded=true", true, "no_jira");
+        JSONObject json = new JSONObject(API_Response_Body);
+        JSONArray companies = new JSONArray();
+        companies = json.getJSONArray("companies");
+        JSONObject json2 = companies.getJSONObject(2);
+        JSONArray locations = new JSONArray();
+        locations = json2.getJSONArray("locations");
+        for (int i = 0; i < locations.length(); i++) {
+            JSONObject location = locations.getJSONObject(i);
+            if (location.getString("name").contains("Building A")) {
+                JSONArray brands = new JSONArray();
+                brands = location.getJSONArray("brands");
+                for (int j = 0; j < brands.length(); j++) {
+                    JSONObject brand = brands.getJSONObject(j);
+                    if (brand.getString("location_description").contains("100th floor, canteen area")) {
+                        if (brand.getJSONObject("is").getBoolean("local_images_enabled")) {
+                            _t++;
+                            _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "images are disabled" + "\t" + "{\"local_images_enabled\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        } else {
+                            _t++;
+                            _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "iamges are disabled" + "\t" + "{\"local_images_enabled\" : false}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        }
+                    }
+                }
+            }
+        }
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Edit Global menu on 'Starbucks' Brand", "xpath", "//*[text()='Starbucks']/ancestor::tr//button", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check > 'Edit Global Menu Brand Name' dialog is open", "xpath", "//div[contains(text(),'Allow Images in Global Menu')]", "no_jira");
@@ -40,6 +69,31 @@ public class AP3_images {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Save'", "xpath", "(//div[contains(text(),'Save')])[2]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(2000);
+        json = new JSONObject(API_Response_Body);
+        companies = new JSONArray();
+        companies = json.getJSONArray("companies");
+        json2 = companies.getJSONObject(2);
+        locations = new JSONArray();
+        locations = json2.getJSONArray("locations");
+        for (int i = 0; i < locations.length(); i++) {
+            JSONObject location = locations.getJSONObject(i);
+            if (location.getString("name").contains("Building A")) {
+                JSONArray brands = new JSONArray();
+                brands = location.getJSONArray("brands");
+                for (int j = 0; j < brands.length(); j++) {
+                    JSONObject brand = brands.getJSONObject(j);
+                    if (brand.getString("location_description").contains("100th floor, canteen area")) {
+                        if (brand.getJSONObject("is").getBoolean("local_images_enabled")) {
+                            _t++;
+                            _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "images are enabled" + "\t" + "{\"local_images_enabled\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        } else {
+                            _t++;
+                            _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "iamges are enabled" + "\t" + "{\"local_images_enabled\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        }
+                    }
+                }
+            }
+        }
         //navigate to the sites -> brand -> settings
         _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to Site -> Brand Configuration", url + "#/sites/" + appId + "/site/" + SiteID + "/brand/" + BrandID + "/settings", "no_jira");
         if (FAIL) { return;}
@@ -66,11 +120,10 @@ public class AP3_images {
         if (FAIL) { return;}
         Thread.sleep(2000);
         TWeb.Refresh("Refresh Brand List Page", "no_jira");
-        Thread.sleep(2000);
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > First Category", "xpath", "(//div[contains(@class,'flex xs12 list-item list-item-large')])[1]//span/div", "no_jira"); 
+        Thread.sleep(5000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > First Category", "xpath", "(//div[contains(@class,'flex xs12 list-item list-item-large')])[1]", "no_jira"); 
         if (FAIL) { return;} 
         Thread.sleep(2000);
-        String CATEGORY = e.getText();
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira"); 
         if (FAIL) { return;} 
         Thread.sleep(500);
@@ -88,21 +141,22 @@ public class AP3_images {
             _t++; 
             _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File : Ap3_image1  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
+        Thread.sleep(1000);
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check > Remove Image Icon exists", "xpath", "//*[contains(@class,'icon-remove')]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Apply Changes'", "xpath", "//*[contains(text(),'Apply Changes')]", "no_jira"); 
         if (FAIL) { return;} 
-        Thread.sleep(1000);
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'Publish')]", "no_jira"); 
+        Thread.sleep(5000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'publish')]", "no_jira"); 
         if (FAIL) { return;} 
-        Thread.sleep(2000);
+        Thread.sleep(500);
         EX += " - " + "\t" + " === " + "\t" + " ===== Check for Image in Local Menu" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, "no_jira");
         if (FAIL) { return;}
         Thread.sleep(2000);
         TWeb.Refresh("Refresh Brand List Page", "no_jira");
-        Thread.sleep(2000);
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'"+CATEGORY+"')][1]/parent::span", "no_jira"); 
+        Thread.sleep(5000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'Lunch')][1]/parent::span", "no_jira"); 
         if (FAIL) { return;} 
         Thread.sleep(2000);
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira"); 
@@ -150,7 +204,7 @@ public class AP3_images {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Apply Changes'", "xpath", "//*[contains(text(),'Apply Changes')]", "no_jira"); 
         if (FAIL) { return;} 
         Thread.sleep(500);
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'Publish')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'publish')]", "no_jira"); 
         if (FAIL) { return;} 
         Thread.sleep(2000);
         EX += " - " + "\t" + " === " + "\t" + " ===== Check Image was Removed in Local Menu" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
@@ -159,7 +213,7 @@ public class AP3_images {
         Thread.sleep(2000);
         TWeb.Refresh("Refresh Local Menu Page", "no_jira");
         Thread.sleep(2000);
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'"+CATEGORY+"')][1]/parent::span", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'Lunch')][1]/parent::span", "no_jira"); 
         if (FAIL) { return;} 
         Thread.sleep(2000);
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira"); 
@@ -206,7 +260,7 @@ public class AP3_images {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Apply Changes'", "xpath", "//*[contains(text(),'Apply Changes')]", "no_jira"); 
         if (FAIL) { return;} 
         Thread.sleep(500);
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'Publish')]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'publish')]", "no_jira"); 
         if (FAIL) { return;} 
         Thread.sleep(2000);
         //navigate to the sites -> brand -> settings
@@ -233,7 +287,7 @@ public class AP3_images {
         Thread.sleep(2000);
         TWeb.Refresh("Refresh Brand List Page", "no_jira");
         Thread.sleep(2000);
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'"+CATEGORY+"')][1]/parent::span", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'Lunch')][1]/parent::span", "no_jira"); 
         if (FAIL) { return;} 
         Thread.sleep(2000);
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira"); 

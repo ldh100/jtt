@@ -589,7 +589,7 @@ public class AP3_brand_new {
         
         // <editor-fold defaultstate="collapsed" desc="MM - Activate/Set Visible in App New Local Menu">
         _t++; Thread.sleep((long) sleep); TWeb.Open_Switch_to_2nd_Tab("Open Menu Manager in New Tab", url + "#/menu","no_jira");             
-        EX += " - " + "\t" + " === MM New Local Menu " + "\t" + " ===== " + "\t" + " == Activate New Local Menu Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === MM New Local Menu " + "\t" + " ===== " + "\t" + " == Activate New Local Menu Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         Thread.sleep(500);              
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}    
@@ -774,7 +774,7 @@ public class AP3_brand_new {
            _t++; _f++;
            EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
         }  
-        EX += " - " + "\t" + " === MM New Local Menu " + "\t" + " ===== " + "\t" + " == Activate Local Menu End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " === MM New Local Menu " + "\t" + " ===== " + "\t" + " == Activate Local Menu End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
 
             
         _t++; Thread.sleep((long) sleep); TWeb.Close_Current_Tab_switch_To_1st("Close Menu Managar tab","no_jira");  
