@@ -19,16 +19,6 @@ package Android;
        ParentTest = a.ParentTest;
     }
     protected void Run() throws InterruptedException, Exception {     
-        Test_EX_Update("CoreApp Test EX Update 1", ParentTest,"no_jira");             
-            if (FAIL) { 
-                String A = "true";
-            }   
-        Test_EX_Update("CoreApp Test EX Update 2", ParentTest,"no_jira");             
-            if (FAIL) { 
-                String A = "false";
-            } 
-            
-            
         Wait_For_Element_By_Path_InVisibility("Wait for Splash screen", "id", "splashScreenLogo", ParentTest, "no_jira");             
             if (FAIL) { return;}     
         Wait_For_Element_By_Path_Presence("Wait for 'Join/Login' screen", "id", "join_button", ParentTest, "no_jira");             
@@ -74,7 +64,7 @@ package Android;
             if (FAIL) { return;} 
         Element_By_Path_Text("Get 'Title' text", "id", "title", ParentTest, "no_jira");             
             //if (FAIL) { return;}            
-        Element_By_Path_Text("Get 'Decription' text", "id", "description", ParentTest, "no_jira");             
+        Element_By_Path_Text("Get 'Description' text", "id", "description", ParentTest, "no_jira");             
             //if (FAIL) { return;}   
         if(!devOS.startsWith("11")){    
             Element_By_Path_Text("Get 'Enable..' button text", "id", "btnEnableLocation", ParentTest, "no_jira");             
