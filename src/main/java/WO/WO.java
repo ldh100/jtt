@@ -1006,11 +1006,11 @@ public class WO extends javax.swing.JInternalFrame {
 //        cmbApp.addItem("Tacit");
         cmbApp.addItem("Thrive");
         
+        cmbEnv.addItem("Development");         
         cmbEnv.addItem("Staging");
-        cmbEnv.addItem("Development");
-        //cmbEnv.addItem("Production");         
-        cmbEnv.setSelectedIndex(1); // delevopment
-        cmbApp.setSelectedIndex(0);       
+        cmbEnv.addItem("Production");
+        
+        cmbEnv.setSelectedIndex(0); // delevopment       
         
         Load = false;
         LOAD_ENV();
@@ -1148,7 +1148,7 @@ public class WO extends javax.swing.JInternalFrame {
         } else{
             BaseAPI = "https://api.compassdigital.org/v1";
             env = "PR";
-            url = "https://dev.thriveapp.io/";
+            url = "https://thriveapp.io/";
         }
         Get_WO_TKN();
         LOAD_CONFIG();
@@ -1183,7 +1183,7 @@ public class WO extends javax.swing.JInternalFrame {
         }
         sw1.start();        
 
-        appId = Func.App_ID(cmbApp.getSelectedItem().toString());
+        appId = Func.App_ID(cmbApp.getSelectedItem().toString(), env);
 
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
