@@ -40,10 +40,10 @@ public class AP3_images {
         JSONObject is = json2.getJSONObject("is");
         if (is.getBoolean("global_images_enabled")) {
              _t++;
-             _f++; EX += _t + "\t" + "API - Global Menu Images are disabled" + "\t" + "images are disabled" + "\t" + "{\"local_images_enabled\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+             _f++; EX += _t + "\t" + "API - Global Menu Images are Disabled" + "\t" + "images are disabled" + "\t" + "{\"local_images_enabled\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         } else {
              _t++;
-             _p++; EX += _t + "\t" + "API - Global Menu Images are disabled" + "\t" + "iamges are disabled" + "\t" + "{\"local_images_enabled\" : false}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+             _p++; EX += _t + "\t" + "API - Global Menu Images are Disabled" + "\t" + "iamges are disabled" + "\t" + "{\"local_images_enabled\" : false}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }                              
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Edit Global menu on 'Starbucks' Brand", "xpath", "//*[text()='Starbucks']/ancestor::tr//button", "no_jira");
         if (FAIL) { return;}
@@ -64,10 +64,10 @@ public class AP3_images {
         is = json2.getJSONObject("is");
         if (is.getBoolean("global_images_enabled")) {
              _t++;
-             _p++; EX += _t + "\t" + "API - Global Menu Images are Enabled" + "\t" + "images are disabled" + "\t" + "{\"local_images_enabled\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+             _p++; EX += _t + "\t" + "API - Global Menu Images are Enabled" + "\t" + "images are enabled" + "\t" + "{\"local_images_enabled\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         } else {
              _t++;
-             _f++; EX += _t + "\t" + "API - Global Menu Images are Enabled" + "\t" + "iamges are disabled" + "\t" + "{\"local_images_enabled\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+             _f++; EX += _t + "\t" + "API - Global Menu Images are Enabled" + "\t" + "iamges are enabled" + "\t" + "{\"local_images_enabled\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         } 
         //navigate to the sites -> brand -> settings
         _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to Site -> Brand Configuration", url + "#/sites/" + appId + "/site/" + SiteID + "/brand/" + BrandID + "/settings", "no_jira");
