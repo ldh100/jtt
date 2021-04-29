@@ -18,147 +18,226 @@
             <Property name="name" type="java.lang.String" value="Menu_Tools" noResource="true"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="Menu_AP3_DE">
+            <Menu class="javax.swing.JMenu" name="Menu_C360_">
               <Properties>
-                <Property name="text" type="java.lang.String" value="AP3 - Development (https://dev.adminpanel.compassdigital.org/)"/>
+                <Property name="text" type="java.lang.String" value="Cafe 360"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="12" style="0"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_AP3_DEMouseClicked"/>
-              </Events>
+              <SubComponents>
+                <Menu class="javax.swing.JMenu" name="Menu_C360_DE">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="- Development (dev.cafe360.compassdigital.org)"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_C360_DEMouseClicked"/>
+                  </Events>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="Menu_C360_ST">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="- Staging (staging.cafe360.compassdigital.org)"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_C360_STMouseClicked"/>
+                  </Events>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="Menu_C360_PR">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="- Production (cafe360.compassdigital.org)"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_C360_PRMouseClicked"/>
+                  </Events>
+                </Menu>
+              </SubComponents>
             </Menu>
-            <Menu class="javax.swing.JMenu" name="Menu_AP3_ST">
+            <Menu class="javax.swing.JMenu" name="Menu_AP3_">
               <Properties>
-                <Property name="text" type="java.lang.String" value="AP3 - Staging (https://staging.adminpanel.compassdigital.org/)"/>
+                <Property name="text" type="java.lang.String" value="AP3"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="12" style="0"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_AP3_STMouseClicked"/>
-              </Events>
+              <SubComponents>
+                <Menu class="javax.swing.JMenu" name="Menu_AP3_DE">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="- Development (https://dev.adminpanel.compassdigital.org/)"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_AP3_DEMouseClicked"/>
+                  </Events>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="Menu_AP3_ST">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value=" - Staging (https://staging.adminpanel.compassdigital.org/)"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_AP3_STMouseClicked"/>
+                  </Events>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="Menu_AP3_PR">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="- Production (https://adminpanel.compassdigital.org/)"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_AP3_PRMouseClicked"/>
+                  </Events>
+                </Menu>
+              </SubComponents>
             </Menu>
-            <Menu class="javax.swing.JMenu" name="Menu_AP3_PR">
+            <Menu class="javax.swing.JMenu" name="Menu_DL_">
               <Properties>
-                <Property name="text" type="java.lang.String" value="AP3 - Production (https://adminpanel.compassdigital.org/)"/>
+                <Property name="text" type="java.lang.String" value="Distilr"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="12" style="0"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_AP3_PRMouseClicked"/>
-              </Events>
+              <SubComponents>
+                <Menu class="javax.swing.JMenu" name="Menu_DL_DE">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="- Development (https://dev.member.distilr.io)"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_DL_DEMouseClicked"/>
+                  </Events>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="Menu_DL_ST">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value=" Staging (?)"/>
+                    <Property name="borderPainted" type="boolean" value="false"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_DL_STMouseClicked"/>
+                  </Events>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="Menu_DL_PR">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="- Production (https://member.distilr.io/"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_DL_PRMouseClicked"/>
+                  </Events>
+                </Menu>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="Menu_FW_">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="FoodWorks"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+              </Properties>
+              <SubComponents>
+                <Menu class="javax.swing.JMenu" name="Menu_FW_DE">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="- Development (https://dev.app.foodworks.org/)"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_FW_DEMouseClicked"/>
+                  </Events>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="Menu_FW_ST">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="- Staging (https://staging.app.foodworks.org/)"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_FW_STMouseClicked"/>
+                  </Events>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="Menu_FW_PR">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="- Production (https://app.foodworks.org/&quot;)"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_FW_PRMouseClicked"/>
+                  </Events>
+                </Menu>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="Menu_WO_">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Web Order"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="12" style="0"/>
+                </Property>
+              </Properties>
+              <SubComponents>
+                <Menu class="javax.swing.JMenu" name="Menu_WO_DE">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="- Development (https://dev.thriveapp.io/"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_WO_DEMouseClicked"/>
+                  </Events>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="Menu_WO_ST">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="- Staging (https://staging.thriveapp.io/)"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_WO_STMouseClicked"/>
+                  </Events>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="Menu_WO_PR">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="- Production (https://thriveapp.io/)"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_WO_PRMouseClicked"/>
+                  </Events>
+                </Menu>
+              </SubComponents>
             </Menu>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator2">
-            </MenuItem>
-            <Menu class="javax.swing.JMenu" name="Menu_DL_DE">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Distilr - Development (https://dev.member.distilr.io)"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="12" style="0"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_DL_DEMouseClicked"/>
-              </Events>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="Menu_DL_ST">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Distilr - Staging (?)"/>
-                <Property name="borderPainted" type="boolean" value="false"/>
-                <Property name="enabled" type="boolean" value="false"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="12" style="0"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_DL_STMouseClicked"/>
-              </Events>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="Menu_DL_PR">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Distilr - Production (https://app.distilr.io/)"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="12" style="0"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_DL_PRMouseClicked"/>
-              </Events>
-            </Menu>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
-            </MenuItem>
-            <Menu class="javax.swing.JMenu" name="Menu_FW_DE">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="FoodWorks - Development (https://dev.app.foodworks.org/)"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="12" style="0"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_FW_DEMouseClicked"/>
-              </Events>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="Menu_FW_ST">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="FoodWorks - Staging (https://staging.app.foodworks.org/)"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="12" style="0"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_FW_STMouseClicked"/>
-              </Events>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="Menu_FW_PR">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="FoodWorks - Production (https://app.foodworks.org/&quot;)"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="12" style="0"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_FW_PRMouseClicked"/>
-              </Events>
-            </Menu>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator4">
-            </MenuItem>
-            <Menu class="javax.swing.JMenu" name="Menu_WO_DE">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Web Order - Development (https://dev.thriveapp.io/"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="12" style="0"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_WO_DEMouseClicked"/>
-              </Events>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="Menu_WO_ST">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Web Order - Staging (https://staging.thriveapp.io/)"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="12" style="0"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_WO_STMouseClicked"/>
-              </Events>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="Menu_WO_PR">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Web Order - Production (https://thirive.io/)"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="12" style="0"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_WO_PRMouseClicked"/>
-              </Events>
-            </Menu>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator5">
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="Menu_Devices">
               <Properties>
@@ -211,6 +290,23 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_iOSMouseClicked"/>
+          </Events>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="Menu_C360">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
+                <BevelBorder/>
+              </Border>
+            </Property>
+            <Property name="text" type="java.lang.String" value="C360"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="12" style="0"/>
+            </Property>
+            <Property name="name" type="java.lang.String" value="AP3" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_C360MouseClicked"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="Menu_AP3">
