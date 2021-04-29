@@ -1425,7 +1425,7 @@ public class API extends javax.swing.JInternalFrame {
         userTKN = "";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
-        String Realm = Func.App_ID(cmbApp.getSelectedItem().toString());
+        String Realm = Func.App_ID(cmbApp.getSelectedItem().toString(), env);
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2180,7 +2180,7 @@ public class API extends javax.swing.JInternalFrame {
         }
         sw1.start();     
         
-        appId = Func.App_ID(cmbApp.getSelectedItem().toString());
+        appId = Func.App_ID(cmbApp.getSelectedItem().toString(), env);
 
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();

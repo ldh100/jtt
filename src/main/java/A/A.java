@@ -10,6 +10,7 @@ import java.beans.PropertyVetoException;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.URI;
 import java.net.UnknownHostException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -54,6 +55,25 @@ public class A extends javax.swing.JFrame {
 
         DesktopPane = new javax.swing.JDesktopPane();
         MenuBar = new javax.swing.JMenuBar();
+        Menu_Tools = new javax.swing.JMenu();
+        Menu_AP3_DE = new javax.swing.JMenu();
+        Menu_AP3_ST = new javax.swing.JMenu();
+        Menu_AP3_PR = new javax.swing.JMenu();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        Menu_DL_DE = new javax.swing.JMenu();
+        Menu_DL_ST = new javax.swing.JMenu();
+        Menu_DL_PR = new javax.swing.JMenu();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        Menu_FW_DE = new javax.swing.JMenu();
+        Menu_FW_ST = new javax.swing.JMenu();
+        Menu_FW_PR = new javax.swing.JMenu();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        Menu_WO_DE = new javax.swing.JMenu();
+        Menu_WO_ST = new javax.swing.JMenu();
+        Menu_WO_PR = new javax.swing.JMenu();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        Menu_Devices = new javax.swing.JMenu();
+        Menu_UI_Viewer = new javax.swing.JMenu();
         Menu_Android = new javax.swing.JMenu();
         Menu_iOS = new javax.swing.JMenu();
         Menu_AP3 = new javax.swing.JMenu();
@@ -94,7 +114,148 @@ public class A extends javax.swing.JFrame {
             .addGap(0, 697, Short.MAX_VALUE)
         );
 
+        Menu_Tools.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Menu_Tools.setText("Tools");
+        Menu_Tools.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_Tools.setName("Menu_Tools"); // NOI18N
+
+        Menu_AP3_DE.setText("AP3 - Development (https://dev.adminpanel.compassdigital.org/)");
+        Menu_AP3_DE.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_AP3_DE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_AP3_DEMouseClicked(evt);
+            }
+        });
+        Menu_Tools.add(Menu_AP3_DE);
+
+        Menu_AP3_ST.setText("AP3 - Staging (https://staging.adminpanel.compassdigital.org/)");
+        Menu_AP3_ST.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_AP3_ST.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_AP3_STMouseClicked(evt);
+            }
+        });
+        Menu_Tools.add(Menu_AP3_ST);
+
+        Menu_AP3_PR.setText("AP3 - Production (https://adminpanel.compassdigital.org/)");
+        Menu_AP3_PR.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_AP3_PR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_AP3_PRMouseClicked(evt);
+            }
+        });
+        Menu_Tools.add(Menu_AP3_PR);
+        Menu_Tools.add(jSeparator2);
+
+        Menu_DL_DE.setText("Distilr - Development (https://dev.member.distilr.io)");
+        Menu_DL_DE.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_DL_DE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_DL_DEMouseClicked(evt);
+            }
+        });
+        Menu_Tools.add(Menu_DL_DE);
+
+        Menu_DL_ST.setText("Distilr - Staging (?)");
+        Menu_DL_ST.setBorderPainted(false);
+        Menu_DL_ST.setEnabled(false);
+        Menu_DL_ST.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_DL_ST.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_DL_STMouseClicked(evt);
+            }
+        });
+        Menu_Tools.add(Menu_DL_ST);
+
+        Menu_DL_PR.setText("Distilr - Production (https://app.distilr.io/)");
+        Menu_DL_PR.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_DL_PR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_DL_PRMouseClicked(evt);
+            }
+        });
+        Menu_Tools.add(Menu_DL_PR);
+        Menu_Tools.add(jSeparator3);
+
+        Menu_FW_DE.setText("FoodWorks - Development (https://dev.app.foodworks.org/)");
+        Menu_FW_DE.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_FW_DE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_FW_DEMouseClicked(evt);
+            }
+        });
+        Menu_Tools.add(Menu_FW_DE);
+
+        Menu_FW_ST.setText("FoodWorks - Staging (https://staging.app.foodworks.org/)");
+        Menu_FW_ST.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_FW_ST.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_FW_STMouseClicked(evt);
+            }
+        });
+        Menu_Tools.add(Menu_FW_ST);
+
+        Menu_FW_PR.setText("FoodWorks - Production (https://app.foodworks.org/\")");
+        Menu_FW_PR.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_FW_PR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_FW_PRMouseClicked(evt);
+            }
+        });
+        Menu_Tools.add(Menu_FW_PR);
+        Menu_Tools.add(jSeparator4);
+
+        Menu_WO_DE.setText("Web Order - Development (https://dev.thriveapp.io/");
+        Menu_WO_DE.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_WO_DE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_WO_DEMouseClicked(evt);
+            }
+        });
+        Menu_Tools.add(Menu_WO_DE);
+
+        Menu_WO_ST.setText("Web Order - Staging (https://staging.thriveapp.io/)");
+        Menu_WO_ST.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_WO_ST.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_WO_STMouseClicked(evt);
+            }
+        });
+        Menu_Tools.add(Menu_WO_ST);
+
+        Menu_WO_PR.setText("Web Order - Production (https://thirive.io/)");
+        Menu_WO_PR.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_WO_PR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_WO_PRMouseClicked(evt);
+            }
+        });
+        Menu_Tools.add(Menu_WO_PR);
+        Menu_Tools.add(jSeparator5);
+
+        Menu_Devices.setText("Mobile Devices");
+        Menu_Devices.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_Devices.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_DevicesMouseClicked(evt);
+            }
+        });
+        Menu_Tools.add(Menu_Devices);
+
+        Menu_UI_Viewer.setText("Android UI Automator Viewer");
+        Menu_UI_Viewer.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_UI_Viewer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_UI_ViewerMouseClicked(evt);
+            }
+        });
+        Menu_Tools.add(Menu_UI_Viewer);
+
+        MenuBar.add(Menu_Tools);
+
+        Menu_Android.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_Android.setText("Android");
+        Menu_Android.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_Android.setName("Station"); // NOI18N
         Menu_Android.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -104,6 +265,7 @@ public class A extends javax.swing.JFrame {
         MenuBar.add(Menu_Android);
 
         Menu_iOS.setText("iOS");
+        Menu_iOS.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_iOS.setName("Station"); // NOI18N
         Menu_iOS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -114,6 +276,7 @@ public class A extends javax.swing.JFrame {
 
         Menu_AP3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_AP3.setText("AP3");
+        Menu_AP3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_AP3.setName("AP3"); // NOI18N
         Menu_AP3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -124,7 +287,8 @@ public class A extends javax.swing.JFrame {
 
         MenuWO.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         MenuWO.setText("WO");
-        MenuWO.setName("FW"); // NOI18N
+        MenuWO.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        MenuWO.setName("WO"); // NOI18N
         MenuWO.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 MenuWOMouseClicked(evt);
@@ -134,6 +298,7 @@ public class A extends javax.swing.JFrame {
 
         Menu_FW.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_FW.setText("FW");
+        Menu_FW.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_FW.setName("FW"); // NOI18N
         Menu_FW.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -144,6 +309,7 @@ public class A extends javax.swing.JFrame {
 
         Menu_DL.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_DL.setText("DL");
+        Menu_DL.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_DL.setName("FW"); // NOI18N
         Menu_DL.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -154,6 +320,7 @@ public class A extends javax.swing.JFrame {
 
         MenuStation.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         MenuStation.setText("Station");
+        MenuStation.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         MenuStation.setName("Station"); // NOI18N
         MenuStation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -164,6 +331,7 @@ public class A extends javax.swing.JFrame {
 
         Menu_OR.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_OR.setText("Orders");
+        Menu_OR.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_OR.setName("Station"); // NOI18N
         Menu_OR.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -174,6 +342,7 @@ public class A extends javax.swing.JFrame {
 
         Menu_API.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_API.setText("APIs");
+        Menu_API.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_API.setName("AP3"); // NOI18N
         Menu_API.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -184,6 +353,7 @@ public class A extends javax.swing.JFrame {
 
         MenuReports.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         MenuReports.setText("Reports");
+        MenuReports.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         MenuReports.setName("FW"); // NOI18N
         MenuReports.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -194,6 +364,7 @@ public class A extends javax.swing.JFrame {
 
         Menu_JIRA.setBorder(null);
         Menu_JIRA.setText("JIRA");
+        Menu_JIRA.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_JIRA.setName("JIRA"); // NOI18N
         Menu_JIRA.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -204,6 +375,7 @@ public class A extends javax.swing.JFrame {
 
         Menu_JOBS.setBorder(null);
         Menu_JOBS.setText("JOBS");
+        Menu_JOBS.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_JOBS.setName("JOBS"); // NOI18N
         Menu_JOBS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -437,6 +609,162 @@ public class A extends javax.swing.JFrame {
         Menu_JOBS.setEnabled(true);
     }//GEN-LAST:event_Menu_JOBSMouseClicked
 
+    private void Menu_AP3_DEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_AP3_DEMouseClicked
+        try {
+            java.awt.Desktop.getDesktop().browse(URI.create("https://dev.adminpanel.compassdigital.org/"));
+        }
+        catch (IOException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Menu_AP3_DEMouseClicked
+
+    private void Menu_AP3_STMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_AP3_STMouseClicked
+        try {
+            java.awt.Desktop.getDesktop().browse(URI.create("https://staging.adminpanel.compassdigital.org/"));
+        }
+        catch (IOException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Menu_AP3_STMouseClicked
+
+    private void Menu_AP3_PRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_AP3_PRMouseClicked
+        try {
+            java.awt.Desktop.getDesktop().browse(URI.create("https://adminpanel.compassdigital.org/"));
+        }
+        catch (IOException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Menu_AP3_PRMouseClicked
+
+    private void Menu_DevicesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_DevicesMouseClicked
+        try {
+            Open_Devices();
+        }
+        catch (PropertyVetoException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }     
+    }//GEN-LAST:event_Menu_DevicesMouseClicked
+
+    private void Menu_DL_DEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_DL_DEMouseClicked
+        try {
+            java.awt.Desktop.getDesktop().browse(URI.create("https://dev.member.distilr.io"));
+        }
+        catch (IOException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Menu_DL_DEMouseClicked
+
+    private void Menu_DL_STMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_DL_STMouseClicked
+        try {
+            java.awt.Desktop.getDesktop().browse(URI.create("https://staging.member.distilr.io"));
+        }
+        catch (IOException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Menu_DL_STMouseClicked
+
+    private void Menu_DL_PRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_DL_PRMouseClicked
+        try {
+            java.awt.Desktop.getDesktop().browse(URI.create("https://app.distilr.io/"));
+        }
+        catch (IOException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Menu_DL_PRMouseClicked
+
+    private void Menu_FW_DEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_FW_DEMouseClicked
+        try {
+            java.awt.Desktop.getDesktop().browse(URI.create("https://dev.app.foodworks.org/"));
+        }
+        catch (IOException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Menu_FW_DEMouseClicked
+
+    private void Menu_FW_STMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_FW_STMouseClicked
+        try {
+            java.awt.Desktop.getDesktop().browse(URI.create("https://staging.app.foodworks.org/"));
+        }
+        catch (IOException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Menu_FW_STMouseClicked
+
+    private void Menu_FW_PRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_FW_PRMouseClicked
+        try {
+            java.awt.Desktop.getDesktop().browse(URI.create("https://app.foodworks.org/"));
+        }
+        catch (IOException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Menu_FW_PRMouseClicked
+
+    private void Menu_WO_DEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_WO_DEMouseClicked
+        try {
+            java.awt.Desktop.getDesktop().browse(URI.create("https://dev.thriveapp.io/"));
+        }
+        catch (IOException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Menu_WO_DEMouseClicked
+
+    private void Menu_WO_STMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_WO_STMouseClicked
+        try {
+            java.awt.Desktop.getDesktop().browse(URI.create("https://staging.thriveapp.io/"));
+        }
+        catch (IOException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Menu_WO_STMouseClicked
+
+    private void Menu_WO_PRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_WO_PRMouseClicked
+        try {
+            java.awt.Desktop.getDesktop().browse(URI.create("https://https://thriveapp.io/"));
+        }
+        catch (IOException ex) {
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Menu_WO_PRMouseClicked
+
+    private void Menu_UI_ViewerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_UI_ViewerMouseClicked
+        Func.ExecuteCmdProcessBuilder(ADB_HOME + "uiautomatorviewer.bat", CWD, false, false).trim();
+    }//GEN-LAST:event_Menu_UI_ViewerMouseClicked
+
+    private void Open_Devices() throws PropertyVetoException {
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("Devices")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
+        
+        Mob_Devices.M_Devices md = new Mob_Devices.M_Devices(); 
+        this.DesktopPane.add(md);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        md.setLocation(X*20, Y*20);
+        md.setVisible(true);
+        md.show();
+        md.setSelected(true);
+        F_COUNT++; 
+    }
     private void Open_Android() throws PropertyVetoException {
         if(An_F_COUNT > 3){
             return;
@@ -444,10 +772,12 @@ public class A extends javax.swing.JFrame {
         int Y;
         int X; 
         
-        Android.An_GUI an = new Android.An_GUI();
+        Mob_Android.An_GUI an = new Mob_Android.An_GUI();
         this.DesktopPane.add(an);
         Y = X = An_F_COUNT;
-        an.setLocation(X*20, Y*20); an.show();  an.setSelected(true); 
+        an.setLocation(X*20, Y*20); 
+        an.show();  
+        an.setSelected(true); 
         if(F_COUNT > 4) {
             Y = F_COUNT;
             X = F_COUNT - 5;
@@ -979,14 +1309,33 @@ public class A extends javax.swing.JFrame {
     private javax.swing.JMenu MenuStation;
     private javax.swing.JMenu MenuWO;
     private javax.swing.JMenu Menu_AP3;
+    private javax.swing.JMenu Menu_AP3_DE;
+    private javax.swing.JMenu Menu_AP3_PR;
+    private javax.swing.JMenu Menu_AP3_ST;
     private javax.swing.JMenu Menu_API;
     private javax.swing.JMenu Menu_Android;
     private javax.swing.JMenu Menu_DL;
+    private javax.swing.JMenu Menu_DL_DE;
+    private javax.swing.JMenu Menu_DL_PR;
+    private javax.swing.JMenu Menu_DL_ST;
+    private javax.swing.JMenu Menu_Devices;
     private javax.swing.JMenu Menu_FW;
+    private javax.swing.JMenu Menu_FW_DE;
+    private javax.swing.JMenu Menu_FW_PR;
+    private javax.swing.JMenu Menu_FW_ST;
     private javax.swing.JMenu Menu_JIRA;
     private javax.swing.JMenu Menu_JOBS;
     private javax.swing.JMenu Menu_OR;
+    private javax.swing.JMenu Menu_Tools;
+    private javax.swing.JMenu Menu_UI_Viewer;
+    private javax.swing.JMenu Menu_WO_DE;
+    private javax.swing.JMenu Menu_WO_PR;
+    private javax.swing.JMenu Menu_WO_ST;
     private javax.swing.JMenu Menu_iOS;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>   
 }
