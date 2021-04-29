@@ -17,10 +17,10 @@ import java.util.Set;
 public class FW_users {
     public static void run() throws InterruptedException { 
     
-    String adminEmail = "testadx110@mailinator.com";
-    String fwEmail = "testfwx110@mailinator.com";
-    String partnerEmail = "testpx110@mailinator.com";
-    String umEmail = "testux110@mailinator.com";
+    String adminEmail = "testadx112@mailinator.com";
+    String fwEmail = "testfwx112@mailinator.com";
+    String partnerEmail = "testpx112@mailinator.com";
+    String umEmail = "testux112@mailinator.com";
     
     String passWord = "Test123*";
     String user = "Delete";  
