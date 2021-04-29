@@ -429,23 +429,19 @@ public class AP3_menu_manager {
                if(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en").equals(Original_Mod_ID_Name))            
                {
                    if(!(modifier_item.getString("id").equals(Copy_Mod_ID)))
-                   { 
-                      //print pass unique id message 
+                   { //print pass unique id message 
                       _t++;
                       _p++; EX += _t + "\t" + "Unique ids for copied modifiers" + "\t" + modifier_item.getString("id") + "\t" + Copy_Mod_ID + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                       flag = false;
                    }
                    else
-                   { 
-                       _t++;
+                   {   _t++;
                        _f++; EX += _t + "\t" + "Same ids for copied modifiers" + "\t" + modifier_item.getString("id") + "\t" + Copy_Mod_ID + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                    }
                }
-             
             }//End of for
             if(flag)
-               { 
-                 //Print error message could not find original modifier.
+               {  //Print error message could not find original modifier.
                   _t++;
                  _f++; EX += _t + "\t" + "Original Modifier does not exist" + "\t" + "-" + "\t" + "" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                }
@@ -476,7 +472,7 @@ public class AP3_menu_manager {
             if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira");
             if (FAIL) { return;}
-            //</editor-fold>
+           //</editor-fold>  
    
             _t++; Thread.sleep((long) sleep); TWeb.List_L0("Groups Count after Add Group", "tagName", "tr", "no_jira");             
                 if (FAIL) { return;}
@@ -496,6 +492,8 @@ public class AP3_menu_manager {
 //                if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Cancel'", "xpath", "//div[contains(text(), 'Cancel')]", "no_jira"); 
                 if (FAIL) { return;}  
+                  
+          //<editor-fold defaultstate="collapsed" desc="Deleting Modifier & API Verification">  
             _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select New Group Again", L0.get(T_Index), "no_jira");
                 if (FAIL) { return;}   
             _t++; Thread.sleep((long) sleep); TWeb.List_L2("Mofifiers Count", "xpath", "//div[@class='layout modifier row wrap align-center']", "no_jira");             
@@ -508,7 +506,37 @@ public class AP3_menu_manager {
                 if (FAIL) { return;}   
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click  'APPLY Changes'", "xpath", "//*[contains(text(), 'Apply Changes')]", "no_jira"); 
               if (FAIL) { return;}
-                
+            _t++; TWeb.Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]", "no_jira");        
+                if (FAIL) { return;} 
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", "no_jira"); 
+                if (FAIL) { return;}                                                                            
+            Thread.sleep(500);
+            _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+                if (FAIL) { return;} 
+                Thread.sleep(500);
+              _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/Modifier / API )", BaseAPI + "/menu/modifier/group/"+Mod_grp_id, true,"no_jira" );
+            if (FAIL) { return;} 
+            json1 = new JSONObject(API_Response_Body);
+            modifier_items = new JSONArray();
+            modifier_items = json1.getJSONArray("items");
+            flag = true;
+            for (int i=0;i<modifier_items.length();i++)
+            {
+               JSONObject modifier_item = modifier_items.getJSONObject(i) ;
+               if(modifier_item.getString("id").equals(Copy_Mod_ID))            
+               {  
+                 _t++;
+                 _f++; EX += _t + "\t" + "Modifier has not been deleted: "+Copy_Mod_ID_Name + "\t" + "-" + "\t" + "" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 flag = false;
+               }
+            }//End of for  
+            if(flag)
+            {
+              _t++;
+              _p++; EX += _t + "\t" + "Modifier is deleted: "+Copy_Mod_ID_Name + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            }
+             //</editor-fold>  
+             
             // Delete New Group
             if(!NO_DATA && T_Index > -1){
                 _t++; Thread.sleep((long) sleep); TWeb.List_Child_E1_By_Path("Find 'Delete' New Group " + New_ID, L0, T_Index, "xpath", ".//i[@class='v-icon mdi mdi-delete theme--light']", "no_jira"); 
