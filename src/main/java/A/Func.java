@@ -161,21 +161,20 @@ public class Func {
             }
 
             p = b.start();
-            if(waitFor){
-                p.waitFor(10, TimeUnit.SECONDS);
-                //boolean exitCode = p.waitFor(10, TimeUnit.SECONDS);
-                //output += "Exited with error code : " + exitCode;                   
-            }  
             if(ReturnOutput){
-                BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                BufferedReader out_reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 String line;
-                while ((line = reader.readLine()) != null) {
+                while ((line = out_reader.readLine()) != null) {
                     if(!"".equals(line.trim())){
                         output += line + "\r\n";
                     }
                 }                
             }
- 
+            if(waitFor){
+                p.waitFor(10, TimeUnit.SECONDS);
+                boolean exitCode = p.waitFor(10, TimeUnit.SECONDS);
+                output += "Terminated normally: " + exitCode + "\r\n";                   
+            }   
         } catch(Exception ex){
             output = ex.getMessage();
         } 

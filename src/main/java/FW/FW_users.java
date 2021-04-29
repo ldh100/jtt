@@ -17,10 +17,10 @@ import java.util.Set;
 public class FW_users {
     public static void run() throws InterruptedException { 
     
-    String adminEmail = "testadx109@mailinator.com";
-    String fwEmail = "testfwx109@mailinator.com";
-    String partnerEmail = "testpx109@mailinator.com";
-    String umEmail = "testux109@mailinator.com";
+    String adminEmail = "testadx112@mailinator.com";
+    String fwEmail = "testfwx112@mailinator.com";
+    String partnerEmail = "testpx112@mailinator.com";
+    String umEmail = "testux112@mailinator.com";
     
     String passWord = "Test123*";
     String user = "Delete";  
@@ -34,117 +34,120 @@ public class FW_users {
     _t++; Thread.sleep((long)sleep); TWeb.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//nav[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira"); 
         Thread.sleep(500);
         
-         
-    //*************************************************************** Create FW manager *************************************************************   
-    // <editor-fold defaultstate="collapsed" desc="User - fw manager ">   
-    
-    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on create user button", "xpath", "//span[contains(text(),'Create User')]", "no_jira");
-    if (FAIL) { return;} 
-
-    _t++; Thread.sleep((long)sleep);TWeb.Element_By_Path_Text("User information", "xpath", "//h3[contains(text(), 'User Information')]", "no_jira");
-    if (FAIL) { return;}  
-
-    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on users tab", "xpath", "//div[@class='v-select__selections']", "no_jira");
-   if (FAIL) { return;} 
-    
-    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on users tab", "xpath", "//div[@role='listbox']/div[3]", "no_jira");
-    if (FAIL) { return;}  
-    Thread.sleep(500);
-            
-     _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("First name", "xpath", "//div[@label='*First Name'] //input[@type='text']", "FW FirstName", FAIL, "no_jira");
-    if (FAIL) { return;}           
-            
-    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Last name", "xpath", "//div[@label='*Last Name'] //input[@type='text']", "FW LastName", FAIL, "no_jira");
-    if (FAIL) { return;}
-    
-    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Email", "xpath", "//div[@label='*E-mail'] //input[@type='text']", fwEmail, FAIL, "no_jira");
-    if (FAIL) { return;}
-    
-    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Contact Number", "xpath", "//div[@label='*Contact Number'] //input[@type='text']", "1234567890", FAIL, "no_jira");
-    if (FAIL) { return;}
-    
-    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on approve checkbox ", "xpath", "//input[@aria-checked='false']", "no_jira");
-    if (FAIL) { return;}  
-    Thread.sleep(500);
-    
-    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on create user", "xpath", "//span[contains(text(), ' Create User ')]", "no_jira");
-    if (FAIL) { return;}  
-    Thread.sleep(5000);
-    // </editor-fold> 
-
-    
-    // ************************************************************** Create a restaurant partner ***************************************************
-    // <editor-fold defaultstate="collapsed" desc="User - RP ">  
-     _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on users tab", "xpath", "//span[contains(text(),'Create User')]", "no_jira");
-    if (FAIL) { return;} 
-
-    _t++; Thread.sleep((long)sleep);TWeb.Element_By_Path_Text("User information", "xpath", "//h3[contains(text(), 'User Information')]", "no_jira");
-    if (FAIL) { return;}  
-    
-    
-     _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on Role", "xpath", "//div[@class='v-select__selections']", "no_jira");
-   if (FAIL) { return;} 
-    
-    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on a Role partner", "xpath", "//div[@role='listbox']/div[1]", "no_jira");
-    if (FAIL) { return;}  
-    Thread.sleep(500);
-            
-     _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("First name", "xpath", "//div[@label='*First Name'] //input[@type='text']", "RP FirstName", FAIL, "no_jira");
-    if (FAIL) { return;}           
-            
-    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Last name", "xpath", "//div[@label='*Last Name'] //input[@type='text']", "RP LastName", FAIL, "no_jira");
-    if (FAIL) { return;}
-    
-    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Email", "xpath", "//div[@label='*E-mail'] //input[@type='text']", partnerEmail, FAIL, "no_jira");
-    if (FAIL) { return;}
-    
-    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Contact Number", "xpath", "//div[@label='*Contact Number'] //input[@type='text']", "1234567890", FAIL, "no_jira");
-    if (FAIL) { return;}
-
-    
-    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on create user", "xpath", "//span[contains(text(), ' Create User ')]", "no_jira");
-    if (FAIL) { return;}  
-    Thread.sleep(2000);
-    // </editor-fold> 
-    
-    
-    // ************************************************************** Create a Unit Manager  ********************************************************
-    // <editor-fold defaultstate="collapsed" desc="User - UM ">  
-       _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on users tab", "xpath", "//span[contains(text(),'Create User')]", "no_jira");
-    if (FAIL) { return;} 
-
-    _t++; Thread.sleep((long)sleep);TWeb.Element_By_Path_Text("User information", "xpath", "//h3[contains(text(), 'User Information')]", "no_jira");
-    if (FAIL) { return;}  
-    
-    
-     _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on Role", "xpath", "//div[@class='v-select__selections']", "no_jira");
-   if (FAIL) { return;} 
-    
-    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on a Role unit Manager", "xpath", "//div[@role='listbox']/div[2]", "no_jira");
-    if (FAIL) { return;}  
-    Thread.sleep(500);
-            
-     _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("First name", "xpath", "//div[@label='*First Name'] //input[@type='text']", "UM FirstName", FAIL, "no_jira");
-    if (FAIL) { return;}           
-            
-    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Last name", "xpath", "//div[@label='*Last Name'] //input[@type='text']", "UM LastName", FAIL, "no_jira");
-    if (FAIL) { return;}
-    
-    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Email", "xpath", "//div[@label='*E-mail'] //input[@type='text']", umEmail, FAIL, "no_jira");
-    if (FAIL) { return;}
-    
-    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Contact Number", "xpath", "//div[@label='*Contact Number'] //input[@type='text']", "1234567890", FAIL, "no_jira");
-    if (FAIL) { return;}
-
-    
-    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on create user", "xpath", "//span[contains(text(), ' Create User ')]", "no_jira");
-    if (FAIL) { return;}  
-    Thread.sleep(3000);
-    // </editor-fold> 
-
-    
-    // ************************************************************** Create an admin user  *********************************************************
+//         
+//    //*************************************************************** Create FW manager *************************************************************   
+//    // <editor-fold defaultstate="collapsed" desc="User - fw manager ">   
+//    
+//    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on create user button", "xpath", "//span[contains(text(),'Create User')]", "no_jira");
+//    if (FAIL) { return;} 
+//
+//    _t++; Thread.sleep((long)sleep);TWeb.Element_By_Path_Text("User information", "xpath", "//h3[contains(text(), 'User Information')]", "no_jira");
+//    if (FAIL) { return;}  
+//
+//    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on users tab", "xpath", "//div[@class='v-select__selections']", "no_jira");
+//   if (FAIL) { return;} 
+//    
+//    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on users tab", "xpath", "//div[@role='listbox']/div[3]", "no_jira");
+//    if (FAIL) { return;}  
+//    Thread.sleep(500);
+//            
+//     _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("First name", "xpath", "//div[@label='*First Name'] //input[@type='text']", "FW FirstName", FAIL, "no_jira");
+//    if (FAIL) { return;}           
+//            
+//    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Last name", "xpath", "//div[@label='*Last Name'] //input[@type='text']", "FW LastName", FAIL, "no_jira");
+//    if (FAIL) { return;}
+//    
+//    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Email", "xpath", "//div[@label='*E-mail'] //input[@type='text']", fwEmail, FAIL, "no_jira");
+//    if (FAIL) { return;}
+//    
+//    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Contact Number", "xpath", "//div[@label='*Contact Number'] //input[@type='text']", "1234567890", FAIL, "no_jira");
+//    if (FAIL) { return;}
+//    
+//    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on approve checkbox ", "xpath", "//input[@aria-checked='false']", "no_jira");
+//    if (FAIL) { return;}  
+//    Thread.sleep(500);
+//    
+//    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on create user", "xpath", "//span[contains(text(), ' Create User ')]", "no_jira");
+//    if (FAIL) { return;}  
+//    Thread.sleep(5000);
+//    // </editor-fold> 
+//
+//    
+//    // ************************************************************** Create a restaurant partner ***************************************************
+//    // <editor-fold defaultstate="collapsed" desc="User - RP ">  
+//     _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on users tab", "xpath", "//span[contains(text(),'Create User')]", "no_jira");
+//    if (FAIL) { return;} 
+//
+//    _t++; Thread.sleep((long)sleep);TWeb.Element_By_Path_Text("User information", "xpath", "//h3[contains(text(), 'User Information')]", "no_jira");
+//    if (FAIL) { return;}  
+//    
+//    
+//     _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on Role", "xpath", "//div[@class='v-select__selections']", "no_jira");
+//   if (FAIL) { return;} 
+//    
+//    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on a Role partner", "xpath", "//div[@role='listbox']/div[1]", "no_jira");
+//    if (FAIL) { return;}  
+//    Thread.sleep(500);
+//            
+//     _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("First name", "xpath", "//div[@label='*First Name'] //input[@type='text']", "RP FirstName", FAIL, "no_jira");
+//    if (FAIL) { return;}           
+//            
+//    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Last name", "xpath", "//div[@label='*Last Name'] //input[@type='text']", "RP LastName", FAIL, "no_jira");
+//    if (FAIL) { return;}
+//    
+//    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Email", "xpath", "//div[@label='*E-mail'] //input[@type='text']", partnerEmail, FAIL, "no_jira");
+//    if (FAIL) { return;}
+//    
+//    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Contact Number", "xpath", "//div[@label='*Contact Number'] //input[@type='text']", "1234567890", FAIL, "no_jira");
+//    if (FAIL) { return;}
+//
+//    
+//    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on create user", "xpath", "//span[contains(text(), ' Create User ')]", "no_jira");
+//    if (FAIL) { return;}  
+//    Thread.sleep(2000);
+//    // </editor-fold> 
+//    
+//    
+//    // ************************************************************** Create a Unit Manager  ********************************************************
+//    // <editor-fold defaultstate="collapsed" desc="User - UM ">  
+//       _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on users tab", "xpath", "//span[contains(text(),'Create User')]", "no_jira");
+//    if (FAIL) { return;} 
+//
+//    _t++; Thread.sleep((long)sleep);TWeb.Element_By_Path_Text("User information", "xpath", "//h3[contains(text(), 'User Information')]", "no_jira");
+//    if (FAIL) { return;}  
+//    
+//    
+//     _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on Role", "xpath", "//div[@class='v-select__selections']", "no_jira");
+//   if (FAIL) { return;} 
+//    
+//    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on a Role unit Manager", "xpath", "//div[@role='listbox']/div[2]", "no_jira");
+//    if (FAIL) { return;}  
+//    Thread.sleep(500);
+//            
+//     _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("First name", "xpath", "//div[@label='*First Name'] //input[@type='text']", "UM FirstName", FAIL, "no_jira");
+//    if (FAIL) { return;}           
+//            
+//    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Last name", "xpath", "//div[@label='*Last Name'] //input[@type='text']", "UM LastName", FAIL, "no_jira");
+//    if (FAIL) { return;}
+//    
+//    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Email", "xpath", "//div[@label='*E-mail'] //input[@type='text']", umEmail, FAIL, "no_jira");
+//    if (FAIL) { return;}
+//    
+//    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Contact Number", "xpath", "//div[@label='*Contact Number'] //input[@type='text']", "1234567890", FAIL, "no_jira");
+//    if (FAIL) { return;}
+//
+//    
+//    _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on create user", "xpath", "//span[contains(text(), ' Create User ')]", "no_jira");
+//    if (FAIL) { return;}  
+//    Thread.sleep(3000);
+//    // </editor-fold> 
+//
+//    
+//    // ************************************************************** Create an admin user  *********************************************************
     // <editor-fold defaultstate="collapsed" desc="User - admin ">   
+    
+    
+  
        _t++; Thread.sleep((long)sleep); TWeb.Element_By_Path_Click("Click on users tab", "xpath", "//span[contains(text(),'Create User')]", "no_jira");
     if (FAIL) { return;} 
 
