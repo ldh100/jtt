@@ -9,12 +9,8 @@ import A.Func;
 import static A.A.*;
 import java.awt.Cursor;
 import java.io.File;
-import java.util.ArrayList;
-import javax.swing.RowSorter;
-import javax.swing.SortOrder;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -213,6 +209,8 @@ public class M_Devices extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formAncestorAdded
     private void btnLaunchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaunchMouseClicked
         Launch();
+        //Thread.sleep(2000);
+        Load_Connected_Devices();
     }//GEN-LAST:event_btnLaunchMouseClicked
     private void btnXMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXMouseClicked
         //
@@ -245,11 +243,11 @@ public class M_Devices extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_DV1MouseClicked
 
     private void DV2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV2MouseClicked
-//        if(DV2.getSelectedRows().length > 0){
-//            btnLaunch.setEnabled(true);       
-//        } else{
-//            btnLaunch.setEnabled(false);
-//        }
+        if(DV2.getSelectedRows().length > 0){
+            btnLaunch.setEnabled(true);       
+        } else{
+            btnLaunch.setEnabled(false);
+        }
     }//GEN-LAST:event_DV2MouseClicked
  
     private void Load_AVD() {   
@@ -269,13 +267,13 @@ public class M_Devices extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         
         dev = Dev.split("\r\n");
-        for (int i = 0; i < dev.length - 1; i++) {
+        for (int i = 0; i < dev.length -1; i++) {
             M2.addRow(new Object[]{"Android", dev[i]}); 
         }
 
         DV2.setDefaultEditor(Object.class, null);
         DV2.getColumnModel().getColumn(0).setPreferredWidth(60);
-        DV2.setAutoResizeMode(DV2.AUTO_RESIZE_LAST_COLUMN);
+        DV2.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         //DV2.getColumnModel().getColumn(1).sizeWidthToFit();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -322,7 +320,7 @@ public class M_Devices extends javax.swing.JInternalFrame {
             String AVD = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 1));
             if(String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 0)).equals("Android")){
                 D = "";
-                Dev  = Func.ExecuteCmdProcessBuilder("emulator -avd " + AVD, EMULATOR_HOME, true, true).trim();
+                Dev  = Func.ExecuteCmdProcessBuilder("emulator -avd " + AVD, EMULATOR_HOME, true, false).trim();
                 txtLog.append("- " + "emulator -avd " + AVD + " >> " + "\r\n" + Dev + "\r\n\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());                
             }else{
