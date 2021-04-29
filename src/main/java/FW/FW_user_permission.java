@@ -18,7 +18,7 @@ public class FW_user_permission {
         
         
         
-        //******************************************************** FW manager User ****************************************************
+        //******************************************************** FWM Login ****************************************************
         // <editor-fold defaultstate="collapsed" desc="FW Manager User "> 
         _t++; TWeb.Element_By_Path_Text("Email Text", "xpath", "//*[contains(text(), 'E-mail')]", "no_jira");    
         _t++; TWeb.Element_By_Path_Text("Password Text", "xpath", "//*[contains(text(), 'Password')]", "no_jira");     
@@ -43,12 +43,11 @@ public class FW_user_permission {
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("FW manager's  Dashboard 'Statistics'", "Statistics", true,"no_jira"); 
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("FW manager's  Dashboard 'Configuration'", "Configuration", false,"no_jira");  
         
-       // FW_restaurants.run();
         FW_logout.run();
         
         // </editor-fold> 
         
-        //******************************************************** Partner User *******************************************************
+        //******************************************************** Partner Login *******************************************************
         // <editor-fold defaultstate="collapsed" desc="Partner User "> 
         _t++; TWeb.Element_By_Path_Text("Email Text", "xpath", "//*[contains(text(), 'E-mail')]", "no_jira"); 
         _t++; TWeb.Element_By_Path_Text("Password Text", "xpath", "//*[contains(text(), 'Password')]", "no_jira"); 
@@ -80,7 +79,7 @@ public class FW_user_permission {
         
         // </editor-fold> 
         
-        //******************************************************** Unit manager User **************************************************
+        //******************************************************** UM Login **************************************************
         // <editor-fold defaultstate="collapsed" desc="Unit Manager User "> 
         _t++; TWeb.Element_By_Path_Text("Email Text", "xpath", "//*[contains(text(), 'E-mail')]", "no_jira"); 
         _t++; TWeb.Element_By_Path_Text("Password Text", "xpath", "//*[contains(text(), 'Password')]", "no_jira"); 
