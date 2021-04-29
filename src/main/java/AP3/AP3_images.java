@@ -62,6 +62,12 @@ public class AP3_images {
         Thread.sleep(1000);
         TWeb.Refresh("Refresh Brand List Page", "no_jira");
         Thread.sleep(5000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > '+ GLOBAL MENU' button", "xpath", "//*[contains(text(),'Global Menu')]/parent::button", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check > 'No' is Selected by default", "xpath", "//div[contains(text(),'Yes')]/parent::div[contains(@class,'Not-Selected')]", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Cancel'", "xpath", "(//*[contains(text(),'Cancel')])[2]", "no_jira");
+        if (FAIL) { return;}
         //check initial api
         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Check API before toggle", BaseAPI + "/location/sector/" + SectorID + "?nocache=true&expanded=true", true, "no_jira");
         JSONObject json = new JSONObject(API_Response_Body);
