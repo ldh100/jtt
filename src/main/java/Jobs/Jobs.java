@@ -101,7 +101,7 @@ public class Jobs extends javax.swing.JInternalFrame {
 
             }
         ));
-        DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
         DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV1.setName("DV1"); // NOI18N
         DV1.setRequestFocusEnabled(false);
@@ -344,7 +344,7 @@ public class Jobs extends javax.swing.JInternalFrame {
             DV1.getColumnModel().getColumn(1).setPreferredWidth(100);
             DV1.getColumnModel().getColumn(2).setPreferredWidth(90);
             DV1.getColumnModel().getColumn(3).setPreferredWidth(120);        
-            DV1.getColumnModel().getColumn(4).setPreferredWidth(160);
+            DV1.getColumnModel().getColumn(4).sizeWidthToFit();
           
             sorter.setSortable(0, true); 
             sorter.sort();
