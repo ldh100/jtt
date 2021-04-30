@@ -102,7 +102,7 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
 /**
@@ -882,7 +882,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     private String err;   
     
     private String HTML_Report_Path = null;
-    private ExtentHtmlReporter HtmlReporter;
+    private ExtentSparkReporter HtmlReporter;
     protected ExtentReports HtmlReport;
     protected ExtentTest ParentTest;
             
@@ -2710,7 +2710,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected void Extent_Report_Config() throws IOException{
         HTML_Report_Path = System.getProperty("user.home") + File.separator + "Desktop";
         Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
-        HtmlReporter = new ExtentHtmlReporter(HTML_Report_Path + File.separator + "Android_" + app + "_" + env + "_" + Report_Date + ".html");
+        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + "Android_" + app + "_" + env + "_" + Report_Date + ".html");
         HtmlReport = new ExtentReports();
         HtmlReport.attachReporter(HtmlReporter);
         
@@ -2721,6 +2721,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         HtmlReport.setSystemInfo("Machine OS", A.A.WsOS);
         HtmlReport.setSystemInfo("Tester ID", A.A.UserID); 
         HtmlReport.setSystemInfo("Run Trigger", r_type);
+        HtmlReport.setReportUsesManualConfiguration(true); // DEBUG - steps duration time incorrect
         
         HtmlReporter.config().setDocumentTitle("JTT Mobile Automation Report");
         HtmlReporter.config().enableTimeline(false);

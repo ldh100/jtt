@@ -12,7 +12,7 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.google.common.base.Stopwatch;
 import java.awt.Cursor;
@@ -820,7 +820,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
 
     // <editor-fold defaultstate="collapsed" desc="Instance Variables Declarations">
     private String HTML_Report_Path = null;
-    private ExtentHtmlReporter HtmlReporter;
+    private ExtentSparkReporter HtmlReporter;
     protected ExtentReports HtmlReport;
     protected ExtentTest ParentTest;
     
@@ -1033,7 +1033,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
         //txtLog.setText("");
-        txtLog.append("=== Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+        txtLog.append( "= Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
         LoadTimeOut = (double)nWaitLoad.getValue() *1000;
@@ -1078,11 +1078,11 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         //CompanyID = "";
 
         if(_headless.isSelected()) {
-            txtLog.append("=== Headless mode is selected - Browser is hidden" + "\r\n");
-            txtLog.append("=== Please wait for report...\r\n");
+            txtLog.append( "= Headless mode is selected - Browser is hidden" + "\r\n");
+            txtLog.append( "= Please wait for report...\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
-        txtLog.append("=== Starting Web Driver..." + "\r\n");
+        txtLog.append( "= Starting Web Driver..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
         r_type = "ad-hoc";
@@ -1093,7 +1093,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         sw1.start();
 
         if(Driver()){
-            txtLog.append("=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
+            txtLog.append( "= Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             sw1.reset();
             LOG_START(); // ========================================================
@@ -1186,7 +1186,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             AP3_TKN = rs.getString(1);
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("=== AP3_TKN > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.append( "= AP3_TKN > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1644,7 +1644,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         Report_File = "";
         if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            txtLog.append("=== Report > Not Excel");
+            txtLog.append( "= Report > Not Excel");
             return;
         }   
         try {
@@ -1659,10 +1659,10 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 System.arraycopy(v, 0, Values[i], 0, v.length); 
             }
             Report_File = Func.fExcel(l, col, Values, "C360_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
-            txtLog.append("=== Report Excel file:\r\n" + Report_File + "\r\n");
+            txtLog.append( "= Report Excel file:\r\n" + Report_File + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch (Exception ex) {
-            txtLog.append("=== Report > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.append( "= Report > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1711,7 +1711,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             int row = _update.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("=== LOG_UPDATE > SQL ERROR: " + ex.getMessage());
+            txtLog.append( "= LOG_UPDATE > SQL ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1773,13 +1773,13 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             _insert.setString(13, A.A.UserID);
             _insert.setString(14, A.A.WsID);
             _insert.setString(15, cmbBrow.getSelectedItem().toString());
-            _insert.setString(16, "=== Job is running... ===\r\n" + "");
+            _insert.setString(16,  "= Job is running... ===\r\n" + "");
             _insert.setString(17, "Running");
             _insert.setString(18, "None");
             int row = _insert.executeUpdate();
             conn.close();
         }  catch (SQLException ex) {
-            txtLog.append("=== LOG_START > SQL ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.append( "= LOG_START > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1796,7 +1796,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             conn.close();
         } catch (SQLException ex) {
             CONFIG = false;
-            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append( "= LOAD_CONFIG > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
@@ -1918,7 +1918,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
             C += "nWaitLoad: " + nWaitLoad.getValue()+ "\r\n";
         } catch (Exception ex)  {
-            txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage());
+            txtLog.append( "= SAVE_CONFIG > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             return;
         }
@@ -1946,11 +1946,11 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             _insert.setString(4, "C360");
             _insert.setString(5, C);
             int row = _insert.executeUpdate();
-            txtLog.append("=== SAVE_CONFIG > OK (" + row + " row)" + "\r\n");
+            txtLog.append( "= SAVE_CONFIG > OK (" + row + " row)" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             conn.close();
         } catch (SQLException ex) {
-            txtLog.append("=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.append( "= SAVE_CONFIG > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1961,7 +1961,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     protected void Extent_Report_Config() throws IOException{
         HTML_Report_Path = System.getProperty("user.home") + File.separator + "Desktop";
         Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
-        HtmlReporter = new ExtentHtmlReporter(HTML_Report_Path + File.separator + "C360" + "_" + env + "_" + Report_Date + ".html");
+        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + "C360" + "_" + env + "_" + Report_Date + ".html");
         HtmlReport = new ExtentReports();
         HtmlReport.attachReporter(HtmlReporter);
         
@@ -2036,7 +2036,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
 
-            txtLog.append("=== CWD: " + A.A.CWD + "\r\n");
+            txtLog.append( "= CWD: " + A.A.CWD + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             
             if(A.A.WsOS.toLowerCase().contains("windows")){
@@ -2070,7 +2070,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                         d1 = new ChromeDriver(chrome_op);
                     break;
                 case "Edge":
-//                    txtLog.append("=== Edge Driver:" + System.getProperty("webdriver.edge.driver") + "\r\n");
+//                    txtLog.append( "= Edge Driver:" + System.getProperty("webdriver.edge.driver") + "\r\n");
 //                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                         EdgeDriverService edgeServise = EdgeDriverService.createDefaultService();
                         //edgeServise.SuppressInitialDiagnosticInformation = true;
@@ -2132,7 +2132,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
         } catch (Exception ex) {
-            txtLog.append("=== Web Driver > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.append( "= Web Driver > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return false;
@@ -2150,9 +2150,9 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 Execute();
 
                 if(_f > 0) {
-                    return "=== Execution finished @" + LocalDateTime.now().format(A.A.Time_12_formatter) + " with " + _f + " FAIL(s)";
+                    return  "= Execution finished @" + LocalDateTime.now().format(A.A.Time_12_formatter) + " with " + _f + " FAIL(s)";
                 }else{
-                    return "=== Execution finished @" + LocalDateTime.now().format(A.A.Time_12_formatter);  
+                    return  "= Execution finished @" + LocalDateTime.now().format(A.A.Time_12_formatter);  
                 } 
             }  
             @Override
@@ -2205,7 +2205,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                             p_90 = Func.p90(am0) / (double)1000;
                             
                             DecimalFormat df = new DecimalFormat("#.##");
-                            t_rep += "=== Total Calls: " + t_calls + ", Response Times (sec) - Min: " + df.format(t_min) +
+                            t_rep +=  "= Total Calls: " + t_calls + ", Response Times (sec) - Min: " + df.format(t_min) +
                                                                         ", Avg: " + df.format(t_avg) +
                                                                         ", Max: " + df.format(t_max) +
                                                                         ", p50: " + df.format(p_50) +
@@ -2215,14 +2215,14 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                     }
                 } catch(Exception ex){
-                    txtLog.append("=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
+                    txtLog.append( "= LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                 }  
                 btnRun.setEnabled(true);
 
-                txtLog.append("=== " + Summary + "\r\n"); // Summary shown in EX top
-                txtLog.append("=== Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
-                txtLog.append("=== Browser: " + cmbBrow.getSelectedItem().toString() + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
+                txtLog.append( "= " + Summary + "\r\n"); // Summary shown in EX top
+                txtLog.append( "= Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
+                txtLog.append( "= Browser: " + cmbBrow.getSelectedItem().toString() + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
   
                 if(!"".equals(F.trim())){
@@ -2295,7 +2295,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                             Thread.sleep(4000); //  pause till new alert expected ???? 
                         }
                     } catch (InterruptedException ex){ // Exception ex
-                        txtLog.append("=== BW2: " + ex.getMessage() + "\r\n");
+                        txtLog.append( "= BW2: " + ex.getMessage() + "\r\n");
                         txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
                     }
                 }
