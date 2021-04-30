@@ -20,9 +20,13 @@ import org.openqa.selenium.WebElement;
  * @author Oleg.Spozito
  */
 public class WO_place_order {
+    
+
     public static int  ORDERCOUNT = 5;
     
     public static void run(boolean ISDELIVERYORDER) throws InterruptedException { 
+        if (env == "PR"){
+    return;}
        final String ORDERTYPE  =  ISDELIVERYORDER?"Delivery":"Pickup";
 //        try {
 //            System.out.println ("place "+ ORDERTYPE +" orders number");
@@ -174,8 +178,16 @@ public class WO_place_order {
                         for (WebElement charge : charges ){
                             if (clicked>= req) {break;}
                             if (!charge.getAttribute("innerText").isEmpty()){
-                                WebElement btn = charge.findElement(By.xpath("./..")).findElement(By.cssSelector("[type='"+selectionType+"']"));
-                                js.executeScript("arguments[0].click();",btn );
+                                WebElement testEl = charge.findElement(By.xpath("./.."));
+                                testEl = testEl.findElement(By.cssSelector("[type='checkbox']+ div"));///following-sibling::div"));
+                               // testEl = testEl.findElement(By.xpath("./following-sibling::div[1]"));
+                                js.executeScript("arguments[0].click();",testEl );
+                                
+                                //WebElement btn = charge.findElement(By.xpath("./..")).findElement(By.cssSelector("[type='"+selectionType+"']"));
+                                
+                                
+                                
+                                //js.executeScript("arguments[0].click();",btn );
                                 clicked ++ ;
                             }
 
@@ -186,8 +198,14 @@ public class WO_place_order {
                                 if (clicked >=req) {break;}
                                 //System.out.println(btn.getAttribute("aria-checked"));
                                 if (btn.getAttribute("aria-checked").equalsIgnoreCase("false")){
-                                   js.executeScript("arguments[0].click();",btn );
-                                    clicked++;  
+                                    WebElement testEl = btn.findElement(By.xpath("./.."));
+                                testEl = testEl.findElement(By.xpath("./input[@role='checkbox']/following-sibling::div"));
+                                js.executeScript("arguments[0].click();",testEl );
+                                    
+                                    
+                                    
+                                 //  js.executeScript("arguments[0].click();",btn );
+                                   clicked++;  
                                 }
                             }
                         }
