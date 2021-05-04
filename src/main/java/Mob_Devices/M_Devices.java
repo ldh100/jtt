@@ -90,7 +90,7 @@ public class M_Devices extends javax.swing.JInternalFrame {
         txtLog.setMargin(new java.awt.Insets(2, 2, 1, 1));
         jScrollPane1.setViewportView(txtLog);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 390, 696, 108));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 202, 696, 296));
 
         DV1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         DV1.setModel(new javax.swing.table.DefaultTableModel(
@@ -115,7 +115,7 @@ public class M_Devices extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(DV1);
         DV1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 24, 536, 360));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 24, 540, 172));
 
         btnLaunch.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLaunch.setText("^ Launch Selected");
@@ -125,7 +125,7 @@ public class M_Devices extends javax.swing.JInternalFrame {
                 btnLaunchMouseClicked(evt);
             }
         });
-        getContentPane().add(btnLaunch, new org.netbeans.lib.awtextra.AbsoluteConstraints(708, 392, 140, 22));
+        getContentPane().add(btnLaunch, new org.netbeans.lib.awtextra.AbsoluteConstraints(704, 204, 140, 22));
 
         btnX.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnX.setText("Do Nothing");
@@ -135,7 +135,7 @@ public class M_Devices extends javax.swing.JInternalFrame {
                 btnXMouseClicked(evt);
             }
         });
-        getContentPane().add(btnX, new org.netbeans.lib.awtextra.AbsoluteConstraints(708, 420, 140, 22));
+        getContentPane().add(btnX, new org.netbeans.lib.awtextra.AbsoluteConstraints(704, 284, 140, 22));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText("< Log");
@@ -183,7 +183,7 @@ public class M_Devices extends javax.swing.JInternalFrame {
         jScrollPane3.setViewportView(DV2);
         DV2.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(548, 24, 300, 360));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(548, 24, 300, 172));
 
         lblSITES.setText("AVD list");
         lblSITES.setAlignmentX(0.5F);

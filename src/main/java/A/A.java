@@ -66,6 +66,8 @@ public class A extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         Menu_Devices = new javax.swing.JMenu();
         Menu_UI_Viewer = new javax.swing.JMenu();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        Menu_Swagger = new javax.swing.JMenu();
         Menu_Android = new javax.swing.JMenu();
         Menu_iOS = new javax.swing.JMenu();
         Menu_C360 = new javax.swing.JMenu();
@@ -277,6 +279,7 @@ public class A extends javax.swing.JFrame {
         Menu_Tools.add(Menu_WO_);
         Menu_Tools.add(jSeparator2);
 
+        Menu_Devices.setBorder(null);
         Menu_Devices.setText("Mobile Devices");
         Menu_Devices.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_Devices.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -294,6 +297,18 @@ public class A extends javax.swing.JFrame {
             }
         });
         Menu_Tools.add(Menu_UI_Viewer);
+        Menu_Tools.add(jSeparator3);
+
+        Menu_Swagger.setBorder(null);
+        Menu_Swagger.setText("Swagger");
+        Menu_Swagger.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_Swagger.setName("Swagger"); // NOI18N
+        Menu_Swagger.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_SwaggerMouseClicked(evt);
+            }
+        });
+        Menu_Tools.add(Menu_Swagger);
 
         MenuBar.add(Menu_Tools);
 
@@ -694,7 +709,8 @@ public class A extends javax.swing.JFrame {
         }
         catch (PropertyVetoException ex) {
             Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
-        }     
+        }    
+        javax.swing.MenuSelectionManager.defaultManager().clearSelectedPath(); //   DEBUG   --- to close menu after click !!!
     }//GEN-LAST:event_Menu_DevicesMouseClicked
     private void Menu_DL_DEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_DL_DEMouseClicked
         try {
@@ -799,9 +815,25 @@ public class A extends javax.swing.JFrame {
             DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
             Menu_C360.setVisible(true);
-        }
-        
+        }        
     }//GEN-LAST:event_Menu_C360MouseClicked
+
+    private void Menu_SwaggerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_SwaggerMouseClicked
+//        if(Menu_Swagger.isVisible()){
+//            Menu_Swagger.setVisible(false);
+//            MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+//            DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            try {
+                Open_SWAGGER();
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            }
+//            DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+//            MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+//            Menu_Swagger.setVisible(true);
+            javax.swing.MenuSelectionManager.defaultManager().clearSelectedPath(); //   DEBUG   --- to close menu after click !!!
+//        } 
+    }//GEN-LAST:event_Menu_SwaggerMouseClicked
 
     private void Open_Devices() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
@@ -972,7 +1004,7 @@ public class A extends javax.swing.JFrame {
                 return;
             }
         } 
-        API.API api = new API.API();
+        API.API_GUI api = new API.API_GUI();
         DesktopPane.add(api);
         int Y;
         int X;
@@ -1218,6 +1250,41 @@ public class A extends javax.swing.JFrame {
         jobs.setSelected(true);
         F_COUNT++;  
     }
+    private void Open_SWAGGER() throws PropertyVetoException {
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("Swagger")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
+        
+        Swagger.Swagger sw = new Swagger.Swagger(); 
+        this.DesktopPane.add(sw);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        sw.setLocation(X*20, Y*20);
+        sw.setVisible(true);
+        sw.show();
+        sw.setSelected(true);
+        F_COUNT++; 
+    }
     
     private void Get_Version() {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -1440,6 +1507,7 @@ public class A extends javax.swing.JFrame {
     private javax.swing.JMenu Menu_JIRA;
     private javax.swing.JMenu Menu_JOBS;
     private javax.swing.JMenu Menu_OR;
+    private javax.swing.JMenu Menu_Swagger;
     private javax.swing.JMenu Menu_Tools;
     private javax.swing.JMenu Menu_UI_Viewer;
     private javax.swing.JMenu Menu_WO_;
@@ -1448,6 +1516,7 @@ public class A extends javax.swing.JFrame {
     private javax.swing.JMenu Menu_WO_ST;
     private javax.swing.JMenu Menu_iOS;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>   
 }
