@@ -387,7 +387,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         try {
             utcTime = utcFormat.parse(utcTimeString);
         } catch (ParseException ex) {
-            Logger.getLogger(W_Report.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            // Logger.getLogger(W_Report.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
         DateFormat localFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         localFormat.setTimeZone(TimeZone.getDefault());

@@ -118,7 +118,7 @@ public class Swagger extends javax.swing.JInternalFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         jList_Tragets.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jList_Tragets.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jList_Tragets.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jList_Tragets.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 jList_TragetsValueChanged(evt);

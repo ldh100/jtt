@@ -1073,7 +1073,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             to = from + (60*60*24*1000) - 2;
         }
         catch (ParseException ex) {
-            Logger.getLogger(API_GUI.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            // Logger.getLogger(API_GUI.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
             
         if(sw1.isRunning()){
