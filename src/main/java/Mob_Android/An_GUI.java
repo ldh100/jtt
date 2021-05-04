@@ -2721,6 +2721,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         HtmlReport.setSystemInfo("Machine OS", A.A.WsOS);
         HtmlReport.setSystemInfo("Tester ID", A.A.UserID); 
         HtmlReport.setSystemInfo("Run Trigger", r_type);
+        HtmlReport.setReportUsesManualConfiguration(true); // DEBUG - steps duration time incorrect
         
         HtmlReporter.config().setDocumentTitle("JTT Mobile Automation Report");
         HtmlReporter.config().enableTimeline(false);
