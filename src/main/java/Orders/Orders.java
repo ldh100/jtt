@@ -88,7 +88,7 @@ public class Orders extends javax.swing.JInternalFrame {
         lblSITES7 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btnUser = new javax.swing.JButton();
-        lblSITES3 = new javax.swing.JLabel();
+        lblUserOrders = new javax.swing.JLabel();
         txtMobile_ID = new javax.swing.JTextField();
         lblSITES6 = new javax.swing.JLabel();
         txtMobile_PW = new javax.swing.JTextField();
@@ -365,12 +365,12 @@ public class Orders extends javax.swing.JInternalFrame {
         });
         jPanel1.add(btnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(736, 20, 108, 20));
 
-        lblSITES3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        lblSITES3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES3.setText("User's Orders - last 7 days");
-        lblSITES3.setToolTipText("");
-        lblSITES3.setAlignmentX(0.5F);
-        jPanel1.add(lblSITES3, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 4, 152, -1));
+        lblUserOrders.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblUserOrders.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblUserOrders.setText("User's Orders - last 7 days");
+        lblUserOrders.setToolTipText("");
+        lblUserOrders.setAlignmentX(0.5F);
+        jPanel1.add(lblUserOrders, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 4, 460, -1));
 
         txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_ID.setText("App_User@?.?");
@@ -484,11 +484,13 @@ public class Orders extends javax.swing.JInternalFrame {
         LOAD_ENV();
         Get_User();
         LoadOrders(); // ================================  
+        lblUserOrders.setText("User's Orders - last 7 days >> " + jList_Orders.getModel().getSize() + " found");
         this.setTitle("Orders");
     }
 
     private void btnUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserMouseClicked
         Get_User();
+        lblUserOrders.setText("User's Orders - last 7 days >> " + jList_Orders.getModel().getSize() + " found");
     }
     private void Get_User(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -500,7 +502,7 @@ public class Orders extends javax.swing.JInternalFrame {
         PaymetMethod = new JSONObject();
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
-        String Realm = Func.Realm_ID(cmbApp.getSelectedItem().toString());
+        String Realm = Func.Realm_ID(cmbApp.getSelectedItem().toString(), env);
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -589,8 +591,8 @@ public class Orders extends javax.swing.JInternalFrame {
                     throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
                 }
             };
-            String A;
-            String D;
+            String Order_Status;
+            String Order_Date;
 
             ZoneOffset offset = OffsetDateTime.now( ZoneId.of(TimeZone.getDefault().getID())).getOffset();
             DateTimeFormatter UTC_formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -605,25 +607,25 @@ public class Orders extends javax.swing.JInternalFrame {
                 for (int i = 0; i < OR.length(); i++) {
                     JSONObject or = OR.getJSONObject(i);
                     JSONObject is = or.getJSONObject("is");
-                    A = "";
-                    if (is.getBoolean("accepted")) A = "  Accepted ";
-                    if (is.getBoolean("in_progress")) A = "  In_Progress ";
-                    if (is.getBoolean("ready")) A = "  Ready ";
+                    Order_Status = "";
+                    if (is.getBoolean("accepted")) Order_Status = "  Accepted ";
+                    if (is.getBoolean("in_progress")) Order_Status = "  In_Progress ";
+                    if (is.getBoolean("ready")) Order_Status = "  Ready ";
                     SCART_IDS.add(or.getString("shoppingcart"));
                     ORDER_IDS.add(or.getString("id"));
                     LocDate = LocalDateTime.parse(or.getString("requested_date"), UTC_formatter).plusSeconds(offset.getTotalSeconds());
-                    D = LocDate.format(LOC_formatter);
-                    model.addElement(D + " " + A +
+                    Order_Date = LocDate.format(LOC_formatter);
+                    model.addElement(Order_Date + " " + Order_Status +
                         " - " + or.getJSONObject("details").getString("order_type") +
                         ", ID: " + or.getJSONObject("details").getString("display_id") +
                         ", Destination: '" + or.getJSONObject("details").getString("destination") + "'");
                 }
             }
             jList_Orders.setModel(model);
-            J += "\r\n";
-            J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + "\r\n" + json.toString(4);
+//            J += "\r\n";
+//            J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + " > " + ex.getMessage() + "\r\n";
+//            J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
@@ -636,6 +638,7 @@ public class Orders extends javax.swing.JInternalFrame {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
+
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnUserMouseClicked
 
@@ -1331,11 +1334,11 @@ if(!R.equals("OK")){
     private javax.swing.JLabel lblOrders;
     private javax.swing.JLabel lblSITES13;
     private javax.swing.JLabel lblSITES14;
-    private javax.swing.JLabel lblSITES3;
     private javax.swing.JLabel lblSITES4;
     private javax.swing.JLabel lblSITES5;
     private javax.swing.JLabel lblSITES6;
     private javax.swing.JLabel lblSITES7;
+    private javax.swing.JLabel lblUserOrders;
     private javax.swing.JSpinner nLoop;
     private javax.swing.JSpinner nWaitLoad;
     private javax.swing.JTextArea txtLog;

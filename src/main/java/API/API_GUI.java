@@ -591,27 +591,20 @@ public class API_GUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_DV1MouseClicked
     private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
-//            this.setTitle("Configurations / APIs >>> re-loading, please fluentWait ... ... ... ...");
-//            this.repaint();
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             LOAD_ENV();
             txtApi.setText(BaseAPI + "/");
-//            setTitle("Configurations / APIs");
-//            this.repaint();
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
     private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
-            DefaultListModel model = new DefaultListModel();
-            model.clear();
-            jList_Orders.setModel(model);
-            btnSCart.setEnabled(false);
-        
-            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            DefaultListModel Lmodel = new DefaultListModel();
+            Lmodel.clear();
+            jList_Orders.setModel(Lmodel);
+            btnSCart.setEnabled(false); 
             app = cmbApp.getSelectedItem().toString();
             GetSites();
-            cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbAppItemStateChanged
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
@@ -740,7 +733,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         txtLog.append("- Load " + SITE + " group API..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== Site: " + SITE + " - configuration API(s):" + "\r\n";
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         
         J += "\r\n========= Public Configuration:" + "\r\n";
         if(sw1.isRunning()){
@@ -749,24 +741,12 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/config/public/" + SiteID); 
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(response.getEntity()) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/config/public/" + SiteID + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "/config/public/" + SiteID, ""); 
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/public/" + SiteID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
-        }         
+        }     
         txtLog.append("== /config/public/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
@@ -778,20 +758,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/config/" + SiteID); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(response.getEntity()) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/config/" + SiteID + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "/config/" + SiteID, "Bearer " + AP3_TKN);             
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/" + SiteID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
@@ -808,31 +775,12 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + SiteID); 
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/location/group/" + SiteID + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "/location/group/" + SiteID, "Bearer " + "");             
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/group/" + SiteID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
-        
-        try {
-            httpclient.close();
-        } catch (IOException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
-        }
         txtLog.append("== /location/group/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
@@ -851,7 +799,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         String UNIT_ID = DV2.getValueAt(DV2.getSelectedRow(), 3).toString();
         String J = "==== Unit ID: " + UNIT_ID + " - configuration API(s):" + "\r\n";
 
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         J += "\r\n========= Public Configuration:" + "\r\n";
         if(sw1.isRunning()){
             sw1.reset();
@@ -859,19 +806,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/config/public/" + UNIT_ID); 
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(response.getEntity()) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/config/public/" + UNIT_ID + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "/config/public/" + UNIT_ID, "");             
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/public/" + UNIT_ID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
@@ -888,20 +823,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/config/" + UNIT_ID); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(response.getEntity()) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/config/" + UNIT_ID + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "/config/" + UNIT_ID, "Bearer " + AP3_TKN);             
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/" + UNIT_ID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
@@ -918,31 +840,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1"); 
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1" + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1", "");             
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1" + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }   
         
-        try {
-            httpclient.close();
-        } catch (IOException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
-        }
         txtLog.append("== /location/> " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
@@ -963,42 +867,22 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Sector/Companies(Menus) API..." + "\r\n"); 
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        
         String J = "==== Sector/Companies(Menus):" + "\r\n";
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-
         if(sw1.isRunning()){
             sw1.reset();
         }
         sw1.start();        
 
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false", "Bearer " + AP3_TKN);             
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
-        
-        try {
-            httpclient.close();
-        } catch (IOException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
-        }
+
         txtLog.append("== /location/sector/<ID> > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
@@ -1015,7 +899,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
         txtLog.append("- Load " + BRAND + " brand API..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== Site: " + SITE + ", Brand: " + BRAND + " - configuration API(s):" + "\r\n";
+        
         CloseableHttpClient httpclient = HttpClients.createDefault();
+        
         J += "\r\n========= Public Configuration:" + "\r\n";
         if(sw1.isRunning()){
             sw1.reset();
@@ -1023,19 +909,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/config/public/" + BrandID); // ?nocache=true&extended=true
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(response.getEntity()) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));               
-            J += BaseAPI + "/config/public/" + BrandID  + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "/config/public/" + BrandID, "");             
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/public/" + BrandID  + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
@@ -1052,20 +926,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/config/" + BrandID); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(response.getEntity()) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/config/" + BrandID + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "/config/" + BrandID, "Bearer " + AP3_TKN);             
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/" + BrandID  + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
@@ -1082,8 +943,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         sw1.start();        
 
-        try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/brand/" + BrandID + "?nocache=true&extended=true"); // ?extended=true
+        try {       
+            HttpGet httpget = new HttpGet(BaseAPI + "/location/brand/" + BrandID + "?nocache=true&extended=true"); 
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -1134,41 +995,21 @@ public class API_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Group/Sector API..." + "\r\n"); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        
         String J = "==== Group/Sector:" + "\r\n";
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-
         if(sw1.isRunning()){
             sw1.reset();
         }
         sw1.start();        
 
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/sector?_provider=cdl"); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/location/sector?_provider=cdl" + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "", "Bearer " + AP3_TKN);             
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/sector?_provider=cdl" + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
-        
-        try {
-            httpclient.close();
-        } catch (IOException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
-        }
+
         txtLog.append("== /location/sector?_provider=cdl > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
@@ -1191,41 +1032,20 @@ public class API_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Group/Sector API..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+        
         String J = "==== Site: " + SITE + ", Brand: " + BRAND + " > Calendar:" + "\r\n";
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-
         if(sw1.isRunning()){
             sw1.reset();
         }
         sw1.start();        
 
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/calendar/" + BrandID); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/calendar/"  + BrandID + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "/calendar/" + BrandID, "Bearer " + AP3_TKN);             
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/calendar/" + " > " + ex.getMessage() + "\r\n";              
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
-        
-        try {
-            httpclient.close();
-        } catch (IOException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
-        }
         txtLog.append("== /calendar/ > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
@@ -1253,43 +1073,22 @@ public class API_GUI extends javax.swing.JInternalFrame {
             to = from + (60*60*24*1000) - 2;
         }
         catch (ParseException ex) {
-            Logger.getLogger(API_GUI.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            // Logger.getLogger(API_GUI.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
             
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         if(sw1.isRunning()){
             sw1.reset();
         }
         sw1.start();        
 
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/order/location/brand/" + BrandID + "?pickup_start=" + from + "&pickup_end=" + to); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/order/location/brand/" + BrandID + "\r\n" + json.toString(4);  
-            
-        } catch (IOException | JSONException ex) {
+            J += GUI_API_Get(BaseAPI + "/order/location/brand/" + BrandID + "?pickup_start=" + from + "&pickup_end=" + to, "Bearer " + AP3_TKN);                        
+        } catch (IOException ex) {
             J += BaseAPI + "/order/location/brand/" + BrandID + " > " + ex.getMessage() + "\r\n";                  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
-        
-        try {
-            httpclient.close();
-        } catch (IOException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
-        }
+
         txtLog.append("== " + BaseAPI + "order/location/brand/" + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
@@ -1306,39 +1105,19 @@ public class API_GUI extends javax.swing.JInternalFrame {
         txtLog.append("- Announcements API..." + "\r\n"); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "========= Announcements:" + "\r\n";
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         if(sw1.isRunning()){
             sw1.reset();
         }
         sw1.start();        
 
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/announcement/resource"); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/announcement/resource" + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "/announcement/resource/", "Bearer " + AP3_TKN);                        
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/announcement/resource" + " > " + ex.getMessage() + "\r\n";     
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
-        
-        try {
-            httpclient.close();
-        } catch (IOException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
-        }
+
         txtLog.append("== " + BaseAPI + "/announcement/resource" + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
@@ -1360,7 +1139,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         txtLog.append("- Custom API..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         String J = "==== Custom API:" + "\r\n";
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         String URL = txtApi.getText().trim();
         if(sw1.isRunning()){
             sw1.reset();
@@ -1368,31 +1146,11 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            HttpGet httpget = new HttpGet(URL); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += URL + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + URL, "Bearer " + AP3_TKN);                        
         } catch (IOException | JSONException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }   
-        
-        try {
-            httpclient.close();
-        } catch (IOException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
-        }
         txtLog.append("== " + URL + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
@@ -1413,12 +1171,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
         userTKN = "";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
-        String Realm = Func.App_ID(cmbApp.getSelectedItem().toString(), env);
+        //String Realm = Func.App_ID(cmbApp.getSelectedItem().toString(), env);
+        String Realm = Func.Realm_ID(app, env);//cmbApp.getSelectedItem().toString(), cmbEnv.getSelectedItem().toString()
         if(sw1.isRunning()){
             sw1.reset();
         }
         sw1.start();         // ============ User
-        try {   
+        try {               
             HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm); 
             httpget.setHeader("Authorization",  "Basic " + UserAuth);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -1456,21 +1215,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         sw1.start();        // ============ Payment
         try { 
-            HttpGet httpget = new HttpGet(BaseAPI + "/payment/method" + "?user_id=" + userID); 
-            httpget.setHeader("Authorization",  "Bearer " + userTKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += "\r\n";
-            J += BaseAPI + "/payment/method" + "?user_id=" + userID + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "/payment/method" + "?user_id=" + userID, "Bearer " + userTKN);                        
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/payment/method" + "?user_id=" + userID + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
@@ -1572,20 +1317,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/menu/company/" + COMP_IDS.get(I)); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/menu/company/"  + COMP_IDS.get(I) + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "/menu/company/" + COMP_IDS.get(I), "Bearer " + AP3_TKN);                        
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/menu/company/"  + COMP_IDS.get(I) + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
@@ -1614,39 +1346,18 @@ public class API_GUI extends javax.swing.JInternalFrame {
         txtLog.append("- AP3 Resent Updates/Notifications API..." + "\r\n"); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== AP3 Resent Updates/Notifications:" + "\r\n";
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         if(sw1.isRunning()){
             sw1.reset();
         }
         sw1.start();        
 
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/notification?realm=cdl&target=admin_panel"); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/notification?realm=cdl&target=admin_panel" + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "/notification?realm=cdl&target=admin_panel", "Bearer " + AP3_TKN);                        
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/notification?realm=cdl&target=admin_panel" + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
             txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }   
-        
-        try {
-            httpclient.close();
-        } catch (IOException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
-        }
         txtLog.append("== " + BaseAPI + "/notification?realm=cdl&target=admin_panel" + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
@@ -1667,7 +1378,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         txtLog.append("- Load Promo API..." + "\r\n"); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== Company: " + cmbComp.getSelectedItem().toString() + ", Site: " + SITE + " > Promo:" + "\r\n";
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
         if(sw1.isRunning()){
             sw1.reset();
@@ -1675,32 +1385,12 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/promo/company/" + COMP_IDS.get(cmbComp.getSelectedIndex()) + "/location/group/" + SiteID); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/promo/company/" + COMP_IDS.get(cmbComp.getSelectedIndex()) + "/location/group/" + SiteID + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "/promo/company/" + COMP_IDS.get(cmbComp.getSelectedIndex()) + "/location/group/" + SiteID, "Bearer " + AP3_TKN);                        
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/promo/company/" + COMP_IDS.get(cmbComp.getSelectedIndex()) + "/location/group/" + SiteID + " > " + ex.getMessage() + "\r\n";              
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }   
-        
-        try {
-            httpclient.close();
-        } catch (IOException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
-        }
         txtLog.append("== " + BaseAPI + "/promo/company/" + COMP_IDS.get(cmbComp.getSelectedIndex()) + "/location/group/" + SiteID + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
@@ -1724,7 +1414,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         String J = "==== Site: " + SITE + ", Brand: " + BRAND + " > Menu(s):" + "\r\n";
         boolean DH = false;
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         for(int i = 0; i < MENU_IDS.size(); i++){
             if(sw1.isRunning()){
                 sw1.reset();
@@ -1732,19 +1421,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             sw1.start();        
 
             try {
-                HttpGet httpget = new HttpGet(BaseAPI + "/menu/" + MENU_IDS.get(i) + "?extended=true&nocache=1"); 
-                ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                    int status = response.getStatusLine().getStatusCode();
-                    if (status >= 200 && status < 500) {
-                        HttpEntity entity = response.getEntity();
-                        return entity != null ? EntityUtils.toString(entity) : null;
-                    } else {
-                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                        throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                    }
-                };
-                JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-                J += BaseAPI + "/menu/" + MENU_IDS.get(i) + "?extended=true&nocache=1" + "\r\n" + json.toString(4);
+                J += GUI_API_Get(BaseAPI + "/menu/" + MENU_IDS.get(i) + "?extended=true&nocache=1", "");                        
             } catch (IOException | JSONException ex) {
                 DH = true;
                 J += BaseAPI + "/menu/" + MENU_IDS.get(i) + "?extended=true&nocache=1" + " > " + ex.getMessage() + "\r\n";
@@ -1762,19 +1439,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 sw1.start();        
 
                 try {
-                    HttpGet httpget = new HttpGet(BaseAPI + "/menu/" + MENU_IDS.get(i)); 
-                    ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                        int status = response.getStatusLine().getStatusCode();
-                        if (status >= 200 && status < 500) {
-                            HttpEntity entity = response.getEntity();
-                            return entity != null ? EntityUtils.toString(entity) : null;
-                        } else {
-                            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                            throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                        }
-                    };
-                    JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-                    J += BaseAPI + "/menu/" + MENU_IDS.get(i) + "\r\n" + json.toString(4);
+                    J += GUI_API_Get(BaseAPI + "/menu/" + MENU_IDS.get(i), "");                        
                 } catch (IOException | JSONException ex) {
                     J += BaseAPI + "/menu/" + MENU_IDS.get(i) + " > " + ex.getMessage() + "\r\n";
                     txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
@@ -1785,13 +1450,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 sw1.reset();   
             }
         }   
-        
-        try {
-            httpclient.close();
-        } catch (IOException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         String R = Func.SHOW_LOG_FILE(J, "json");
@@ -1815,13 +1473,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String UserAuth = Base64.getEncoder().encodeToString((txtAP3_ID.getText().trim() + ":" + txtAP3_PW.getText().trim()).getBytes());
         String User_ID = ""; 
-        //String Realm = "6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5"; 
-        String Realm = Func.Realm_ID("AP3");
+        String Realm = Func.Realm_ID("AP3", env); //"6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5";
         if(sw1.isRunning()){
             sw1.reset();
         }
         sw1.start();         // ============ AP3 User
         try { 
+            
             HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm); 
             httpget.setHeader("Authorization",  "Basic " + UserAuth);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
@@ -1835,8 +1493,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 }
             };
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
-            //J += "\r\n";            
+            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);            
             User_ID = json.getString("user");
             userTKN = json.getString("token");
         } catch (IOException | JSONException ex) {
@@ -1853,21 +1510,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         sw1.start();         // ============ AP3 User Permissions
         try { 
-            HttpGet httpget = new HttpGet(BaseAPI + "/user/" + User_ID + "/permissions" + "?nocache=1"); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN); 
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += "\r\n\r\n";
-            J += BaseAPI + "/user/" + User_ID + "/permissions" + "?nocache=1" + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "/user/" + User_ID + "/permissions" + "?nocache=1", "Bearer " + AP3_TKN);                        
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/user/" + User_ID + "/permissions" + "?nocache=1" + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
@@ -1882,21 +1525,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         sw1.start();       // ============ AP3 User
         try { 
-            HttpGet httpget = new HttpGet(BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000"); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN); // UserAuth // userTKN
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += "\r\n\r\n";
-            J += BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000" + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000", "Bearer " + AP3_TKN);                        
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000" + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
@@ -1918,7 +1547,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         txtLog.append("- Site: " + SITE + " Sales Reporting API..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         String J = "==== Site: " + SITE + " Sales Reporting - EOD:" + "\r\n";
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         String From = new SimpleDateFormat( "yyyy-MM-dd").format(dtpDate.getDate()); //"2020-11-15";
         String To = From;
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
@@ -1928,33 +1556,12 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN); // 401 "Not authorized" ??
-            //httpget.setHeader("Authorization",  "Basic " + AP3_TKN); // // 401 "Not authorized" ??
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To + "\r\n" + json.toString(4);
+            J += GUI_API_Get(BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To, "Bearer " + AP3_TKN);                        
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }   
-        
-        try {
-            httpclient.close();
-        } catch (IOException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
-        }
         txtLog.append("== " + BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
@@ -2662,6 +2269,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             CartID = SCART_IDS.get(jList_Orders.getSelectedIndex());
             HttpGet httpget = new HttpGet(BaseAPI + "/shoppingcart/" + CartID); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
+            
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -2678,7 +2286,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
             J += BaseAPI + "/shoppingcart/" + CartID + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
             txtLog.setCaretPosition(txtLog.getDocument().getLength());    
-        }           
+        }     
+        
+        
         txtLog.append("== " + BaseAPI + "/shoppingcart/" + CartID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
@@ -2777,34 +2387,49 @@ public class API_GUI extends javax.swing.JInternalFrame {
     private String TZone; 
     // </editor-fold>    
 
-    // <editor-fold defaultstate="collapsed" desc="API(s)">
-    private void API_config(){
-		// 
-	}
-    private void API_config_pulic(){
-                    // 
+    private String GUI_API_Get(String EndPoint, String AUTH) throws IOException{
+        String AJ = "";
+        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
+            HttpGet httpget = new HttpGet(EndPoint);
+            if(!AUTH.isEmpty()){
+                httpget.setHeader("Authorization",  AUTH);
+            }
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 500) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(response.getEntity()) : null;      
+                } else {
+                    throw new ClientProtocolException("\r\n" + "== ERROR > " + status + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            AJ += EndPoint + "\r\n" + json.toString(4);
+        }
+        return AJ;
     }
-//    private void API_config(){
-//                     
-//    }
-//    private void API_config(){
-//                     
-//    }
-//    private void API_config(){
-//                     
-//    }
-//    private void API_config(){
-//                     
-//    }
-//    private void API_config(){
-//                     
-//    }
-//    private void API_config(){
-//                     
-//    }
-
-    // </editor-fold>   
-    
+    private String JOB_API_Get(String EndPoint, String AUTH) throws IOException{
+        String AJ = "";
+        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
+            HttpGet httpget = new HttpGet(EndPoint);
+            if(!AUTH.isEmpty()){
+                httpget.setHeader("Authorization",  AUTH);
+            }
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 500) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(response.getEntity()) : null;      
+                } else {
+                    throw new ClientProtocolException("\r\n" + "== ERROR > " + status + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            AJ += EndPoint + "\r\n" + json.toString(4);
+        }
+        return AJ;
+    }
+   
     // <editor-fold defaultstate="collapsed" desc="GUI Variables Declaration">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;

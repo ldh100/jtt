@@ -1696,6 +1696,116 @@ public class AP3_menu_manager {
             if (FAIL) { return;}      
             
         EX += " - " + "\t" + " === MM Local Brands" + "\t" + " ===== " + "\t" + " == Local Brands End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-        // </editor-fold>    
+        // </editor-fold> 
+        
+       // <editor-fold defaultstate="collapsed" desc="Add/Delete a Global Modifier">  
+        EX += " - " + "\t" + " === Delete a Global Modifier" + "\t" + " ===== " + "\t" + " == Delete a Global Modifier Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n"; 
+        EX += " - " + "\t" + " === Add new modifier to a group" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to Global Modifiers", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/globalmods/", "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(6000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'Copied Group 90331')]", "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(500);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > ADD MODIFIER", "xpath", "//*[contains(text(),'Add MODIFIER')]", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Item Name Field on New Modifier", "xpath", "(//input[@aria-label='Item Name'])[5]", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter a Name for New Modifier", "xpath", "(//input[@aria-label='Item Name'])[5]", "adddeletemod", false, "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Price Field on New Modifier", "xpath", "(//input[@aria-label='Price'])[5]", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter a Price for New Modifier", "xpath", "(//input[@aria-label='Price'])[5]", "3", false, "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Apply Changes'", "xpath", "//*[contains(text(), 'Apply Changes')]", "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(3000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'publish')]", "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(5000);
+        EX += " - " + "\t" + " === Check new modifier exists in Global Menu item" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID, "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(5000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Lunch' Category", "xpath", "(//div[contains(@class,'flex xs12 list-item list-item-large')])[1]", "no_jira"); 
+        if (FAIL) { return;} 
+        Thread.sleep(2000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", "no_jira"); 
+        if (FAIL) { return;} 
+        Thread.sleep(500);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'Copied Group 90331')]", "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(500);
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check > New Modifier exists in items config side panel", "xpath", "//*[contains(text(),'adddeletemod')]", "no_jira");
+        if (FAIL) { return;}
+        EX += " - " + "\t" + " === Check new modifier exists in Local Menu item" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(2000);
+        TWeb.Refresh("Refresh local menu page", "no_jira");
+        Thread.sleep(3000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Lunch' Category", "xpath", "//*[contains(text(),'Lunch')][1]/parent::span", "no_jira"); 
+        if (FAIL) { return;} 
+        Thread.sleep(2000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", "no_jira"); 
+        if (FAIL) { return;} 
+        Thread.sleep(500);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'Copied Group 90331')]", "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(500);
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check > New Modifier exists in items config side panel", "xpath", "//*[contains(text(),'adddeletemod')]", "no_jira");
+        if (FAIL) { return;}
+        
+        EX += " - " + "\t" + " === Delete new modifier from the group" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to Global Modifiers", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/globalmods/", "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(5000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'Copied Group 90331')]", "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(500);
+        _t++; Thread.sleep((long) sleep); TWeb.Move_to_Element_By_Path("Move > New Modifier", "xpath", "(//*[contains(@class,'layout modifier')])[5]", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Delete on New Modifier", "xpath", "(//*[contains(@class,'layout modifier')])[5]//i[contains(@class,'mdi-delete')]", "no_jira");
+        if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Apply Changes'", "xpath", "//*[contains(text(), 'Apply Changes')]", "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(3000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'publish')]", "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(5000);
+        EX += " - " + "\t" + " === Check new modifier no longer exists in Global Menu item" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID, "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(5000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Lunch' Category", "xpath", "(//div[contains(@class,'flex xs12 list-item list-item-large')])[1]", "no_jira"); 
+        if (FAIL) { return;} 
+        Thread.sleep(2000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", "no_jira"); 
+        if (FAIL) { return;} 
+        Thread.sleep(500);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'Copied Group 90331')]", "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(500);
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_InVisibility("Check > New Modifier no longer exists in items config side panel", "xpath", "//*[contains(text(),'adddeletemod')]", "no_jira");
+        if (FAIL) { return;}
+        EX += " - " + "\t" + " === Check new modifier no longer exists in Local Menu item" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(2000);
+        TWeb.Refresh("Refresh local menu page", "no_jira");
+        Thread.sleep(3000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Lunch' Category", "xpath", "//*[contains(text(),'Lunch')][1]/parent::span", "no_jira"); 
+        if (FAIL) { return;} 
+        Thread.sleep(2000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", "no_jira"); 
+        if (FAIL) { return;} 
+        Thread.sleep(500);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'Copied Group 90331')]", "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(500);
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_InVisibility("Check > New Modifier no longer exists in items config side panel", "xpath", "//*[contains(text(),'adddeletemod')]", "no_jira");
+        if (FAIL) { return;}
+        EX += " - " + "\t" + " === Delete a Global Modifier" + "\t" + " ===== " + "\t" + " == Delete a Global Modifier End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        // </editor-fold> 
     }   
 }
