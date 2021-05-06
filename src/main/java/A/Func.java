@@ -45,7 +45,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Oleg.Spozito
  */
 public class Func { 
-    public static String Realm_ID(String APP) {
+    public static String Realm_ID(String APP, String ENV) {
        switch (APP.toLowerCase()) {
             case "boost":
                 return "WEW9lgWk5oTkA98PNGEoc97J9Mdgy6foMM2";

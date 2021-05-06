@@ -66,6 +66,8 @@ public class A extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         Menu_Devices = new javax.swing.JMenu();
         Menu_UI_Viewer = new javax.swing.JMenu();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        Menu_Swagger = new javax.swing.JMenu();
         Menu_Android = new javax.swing.JMenu();
         Menu_iOS = new javax.swing.JMenu();
         Menu_C360 = new javax.swing.JMenu();
@@ -277,6 +279,7 @@ public class A extends javax.swing.JFrame {
         Menu_Tools.add(Menu_WO_);
         Menu_Tools.add(jSeparator2);
 
+        Menu_Devices.setBorder(null);
         Menu_Devices.setText("Mobile Devices");
         Menu_Devices.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_Devices.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -294,6 +297,18 @@ public class A extends javax.swing.JFrame {
             }
         });
         Menu_Tools.add(Menu_UI_Viewer);
+        Menu_Tools.add(jSeparator3);
+
+        Menu_Swagger.setBorder(null);
+        Menu_Swagger.setText("Swagger");
+        Menu_Swagger.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_Swagger.setName("Swagger"); // NOI18N
+        Menu_Swagger.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_SwaggerMouseClicked(evt);
+            }
+        });
+        Menu_Tools.add(Menu_Swagger);
 
         MenuBar.add(Menu_Tools);
 
@@ -465,7 +480,7 @@ public class A extends javax.swing.JFrame {
             try {
                 Open_AP3();
             } catch (PropertyVetoException ex) {
-                Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
             }
             DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
@@ -481,7 +496,7 @@ public class A extends javax.swing.JFrame {
                 Open_FW();
             }
             catch (PropertyVetoException ex) {
-                Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
             }
             DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
@@ -495,7 +510,7 @@ public class A extends javax.swing.JFrame {
             Files.createDirectories(Paths.get(CWD + File.separator + "MobileBuilds"));  
             Files.createDirectories(Paths.get(CWD + File.separator + "FilesToUpload"));  
         } catch(IOException ex){
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Create Directories ERROR: " + ex.getMessage(), ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Create Directories ERROR: " + ex.getMessage(), ex);
         }
 
         this.setTitle("JTT v1.0.1" + " - " + "User: " + UserID + ", Machine: " + WsID + ", OS: " + WsOS);
@@ -525,7 +540,7 @@ public class A extends javax.swing.JFrame {
         try {
             Open_Station();
         } catch (PropertyVetoException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
@@ -541,7 +556,7 @@ public class A extends javax.swing.JFrame {
         try {
             Open_WO();
         } catch (PropertyVetoException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
@@ -570,7 +585,7 @@ public class A extends javax.swing.JFrame {
         try {
             Open_API();
         } catch (PropertyVetoException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
@@ -586,7 +601,7 @@ public class A extends javax.swing.JFrame {
         try {
             Open_DL();
         } catch (PropertyVetoException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
@@ -603,7 +618,7 @@ public class A extends javax.swing.JFrame {
             Open_OR();
         }
         catch (PropertyVetoException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
@@ -623,7 +638,7 @@ public class A extends javax.swing.JFrame {
             Open_JIRA();
         }
         catch (PropertyVetoException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
@@ -640,7 +655,7 @@ public class A extends javax.swing.JFrame {
             Open_Android();
         }
         catch (PropertyVetoException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
@@ -657,7 +672,7 @@ public class A extends javax.swing.JFrame {
             Open_JOBS();
         }
         catch (PropertyVetoException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
@@ -669,7 +684,7 @@ public class A extends javax.swing.JFrame {
             java.awt.Desktop.getDesktop().browse(URI.create("https://dev.adminpanel.compassdigital.org/"));
         }
         catch (IOException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Menu_AP3_DEMouseClicked
     private void Menu_AP3_STMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_AP3_STMouseClicked
@@ -677,7 +692,7 @@ public class A extends javax.swing.JFrame {
             java.awt.Desktop.getDesktop().browse(URI.create("https://staging.adminpanel.compassdigital.org/"));
         }
         catch (IOException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Menu_AP3_STMouseClicked
     private void Menu_AP3_PRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_AP3_PRMouseClicked
@@ -685,7 +700,7 @@ public class A extends javax.swing.JFrame {
             java.awt.Desktop.getDesktop().browse(URI.create("https://adminpanel.compassdigital.org/"));
         }
         catch (IOException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Menu_AP3_PRMouseClicked
     private void Menu_DevicesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_DevicesMouseClicked
@@ -693,15 +708,16 @@ public class A extends javax.swing.JFrame {
             Open_Devices();
         }
         catch (PropertyVetoException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
-        }     
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+        javax.swing.MenuSelectionManager.defaultManager().clearSelectedPath(); //   DEBUG   --- to close menu after click !!!
     }//GEN-LAST:event_Menu_DevicesMouseClicked
     private void Menu_DL_DEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_DL_DEMouseClicked
         try {
             java.awt.Desktop.getDesktop().browse(URI.create("https://dev.member.distilr.io"));
         }
         catch (IOException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Menu_DL_DEMouseClicked
     private void Menu_DL_STMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_DL_STMouseClicked
@@ -709,7 +725,7 @@ public class A extends javax.swing.JFrame {
             java.awt.Desktop.getDesktop().browse(URI.create("https://staging.member.distilr.io"));
         }
         catch (IOException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Menu_DL_STMouseClicked
     private void Menu_DL_PRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_DL_PRMouseClicked
@@ -717,7 +733,7 @@ public class A extends javax.swing.JFrame {
             java.awt.Desktop.getDesktop().browse(URI.create("https://member.distilr.io/"));
         }
         catch (IOException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Menu_DL_PRMouseClicked
     private void Menu_WO_DEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_WO_DEMouseClicked
@@ -725,7 +741,7 @@ public class A extends javax.swing.JFrame {
             java.awt.Desktop.getDesktop().browse(URI.create("https://dev.thriveapp.io/"));
         }
         catch (IOException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Menu_WO_DEMouseClicked
     private void Menu_WO_STMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_WO_STMouseClicked
@@ -733,7 +749,7 @@ public class A extends javax.swing.JFrame {
             java.awt.Desktop.getDesktop().browse(URI.create("https://staging.thriveapp.io/"));
         }
         catch (IOException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Menu_WO_STMouseClicked
     private void Menu_WO_PRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_WO_PRMouseClicked
@@ -741,7 +757,7 @@ public class A extends javax.swing.JFrame {
             java.awt.Desktop.getDesktop().browse(URI.create("https://thriveapp.io/"));
         }
         catch (IOException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Menu_WO_PRMouseClicked
     private void Menu_UI_ViewerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_UI_ViewerMouseClicked
@@ -752,7 +768,7 @@ public class A extends javax.swing.JFrame {
             java.awt.Desktop.getDesktop().browse(URI.create("http://dev.cafe360.compassdigital.org/"));
         }
         catch (IOException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Menu_C360_DEMouseClicked
     private void Menu_C360_STMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_C360_STMouseClicked
@@ -766,7 +782,7 @@ public class A extends javax.swing.JFrame {
             java.awt.Desktop.getDesktop().browse(URI.create("https://app.foodworks.org/"));
         }
         catch (IOException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Menu_FW_PRMouseClicked
     private void Menu_FW_STMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_FW_STMouseClicked
@@ -774,7 +790,7 @@ public class A extends javax.swing.JFrame {
             java.awt.Desktop.getDesktop().browse(URI.create("https://staging.app.foodworks.org/"));
         }
         catch (IOException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Menu_FW_STMouseClicked
     private void Menu_FW_DEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_FW_DEMouseClicked
@@ -782,7 +798,7 @@ public class A extends javax.swing.JFrame {
             java.awt.Desktop.getDesktop().browse(URI.create("https://dev.app.foodworks.org/"));
         }
         catch (IOException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Menu_FW_DEMouseClicked
 
@@ -794,14 +810,30 @@ public class A extends javax.swing.JFrame {
             try {
                 Open_C360();
             } catch (PropertyVetoException ex) {
-                Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
             }
             DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
             Menu_C360.setVisible(true);
-        }
-        
+        }        
     }//GEN-LAST:event_Menu_C360MouseClicked
+
+    private void Menu_SwaggerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_SwaggerMouseClicked
+//        if(Menu_Swagger.isVisible()){
+//            Menu_Swagger.setVisible(false);
+//            MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+//            DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            try {
+                Open_SWAGGER();
+            } catch (PropertyVetoException ex) {
+                // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            }
+//            DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+//            MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+//            Menu_Swagger.setVisible(true);
+            javax.swing.MenuSelectionManager.defaultManager().clearSelectedPath(); //   DEBUG   --- to close menu after click !!!
+//        } 
+    }//GEN-LAST:event_Menu_SwaggerMouseClicked
 
     private void Open_Devices() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
@@ -814,7 +846,7 @@ public class A extends javax.swing.JFrame {
                     }
                     frame.setSelected(true);
                 }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                    // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 frame.requestFocus();
                 frame.toFront();
@@ -871,7 +903,7 @@ public class A extends javax.swing.JFrame {
                     }
                     frame.setSelected(true);
                 }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                    // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 frame.requestFocus();
                 frame.toFront();
@@ -899,7 +931,7 @@ public class A extends javax.swing.JFrame {
                     }
                     frame.setSelected(true);
                 }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                    // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 frame.requestFocus();
                 frame.toFront();
@@ -932,7 +964,7 @@ public class A extends javax.swing.JFrame {
                     }
                     frame.setSelected(true);
                 }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                    // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 frame.requestFocus();
                 frame.toFront();
@@ -965,14 +997,14 @@ public class A extends javax.swing.JFrame {
                     }
                     frame.setSelected(true);
                 }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                    // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 frame.requestFocus();
                 frame.toFront();
                 return;
             }
         } 
-        API.API api = new API.API();
+        API.API_GUI api = new API.API_GUI();
         DesktopPane.add(api);
         int Y;
         int X;
@@ -998,7 +1030,7 @@ public class A extends javax.swing.JFrame {
                     }
                     frame.setSelected(true);
                 }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                    // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 frame.requestFocus();
                 frame.toFront();
@@ -1031,7 +1063,7 @@ public class A extends javax.swing.JFrame {
                     }
                     frame.setSelected(true);
                 }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                    // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 frame.requestFocus();
                 frame.toFront();
@@ -1064,7 +1096,7 @@ public class A extends javax.swing.JFrame {
                     }
                     frame.setSelected(true);
                 }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                    // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 frame.requestFocus();
                 frame.toFront();
@@ -1097,7 +1129,7 @@ public class A extends javax.swing.JFrame {
                     }
                     frame.setSelected(true);
                 }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                    // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 frame.requestFocus();
                 frame.toFront();
@@ -1130,7 +1162,7 @@ public class A extends javax.swing.JFrame {
                     }
                     frame.setSelected(true);
                 }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                    // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 frame.requestFocus();
                 frame.toFront();
@@ -1163,7 +1195,7 @@ public class A extends javax.swing.JFrame {
                     }
                     frame.setSelected(true);
                 }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                    // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 frame.requestFocus();
                 frame.toFront();
@@ -1196,7 +1228,7 @@ public class A extends javax.swing.JFrame {
                     }
                     frame.setSelected(true);
                 }catch (PropertyVetoException ex) {
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                    // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 frame.requestFocus();
                 frame.toFront();
@@ -1217,6 +1249,41 @@ public class A extends javax.swing.JFrame {
         jobs.show();
         jobs.setSelected(true);
         F_COUNT++;  
+    }
+    private void Open_SWAGGER() throws PropertyVetoException {
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("Swagger")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        } 
+        
+        Swagger.Swagger sw = new Swagger.Swagger(); 
+        this.DesktopPane.add(sw);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        sw.setLocation(X*20, Y*20);
+        sw.setVisible(true);
+        sw.show();
+        sw.setSelected(true);
+        F_COUNT++; 
     }
     
     private void Get_Version() {
@@ -1259,20 +1326,17 @@ public class A extends javax.swing.JFrame {
         }
     } 
     private void Register_Login() {     
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-                    PreparedStatement _update = conn.prepareStatement("UPDATE users SET " +
-                            "LogIN = 'JTT', " +
-                            "LastL = '" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yy hh:mm a")) + "', " +
-                            "USER_MACHINE = '" + WsID + "', " +
-                            "IP = '" + "Not used" + "' " +
-                            "WHERE User_ID = '" + UserID + "'");
-                    int row = _update.executeUpdate();
-                } catch (SQLException ex) {                  
-                    Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Register_Login > SQL ERROR: " + ex.getMessage(), ex);
-                }
+        new Thread(() -> {
+            try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+                PreparedStatement _update = conn.prepareStatement("UPDATE users SET " +
+                        "LogIN = 'JTT', " +
+                        "LastL = '" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yy hh:mm a")) + "', " +
+                        "USER_MACHINE = '" + WsID + "', " +
+                        "IP = '" + "Not used" + "' " +
+                    "WHERE User_ID = '" + UserID + "'");
+                int row = _update.executeUpdate();
+            } catch (SQLException ex) {
+                // Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Register_Login > SQL ERROR: " + ex.getMessage(), ex);
             }
         }).start();
     } 
@@ -1305,19 +1369,18 @@ public class A extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(A.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
+            //Logger.getLogger(A.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
         }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            final A F = new A();
-            F.addWindowListener(new java.awt.event.WindowAdapter() {
+            final A AF = new A();
+            AF.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
                     //
                 }
             });
-
 //            try{
 //                //Image i = (new ImageIcon(ClassLoader.getResource("/images/jTTi32.png"))).getImage(); // .png
 //                //ImageIcon ii = new ImageIcon("jTTi32.png", "JTT");               
@@ -1326,10 +1389,10 @@ public class A extends javax.swing.JFrame {
 //                Image i = ii.getImage();// .png
 //                F.setIconImage(i);
 //            }catch(MalformedURLException ex){
-//                java.util.logging.Logger.getLogger(AP3.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
+//                java.util.logging.// Logger.getLogger(AP3.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
 //            }
-            F.setLocationRelativeTo(null);
-            F.setVisible(true);
+            AF.setLocationRelativeTo(null);
+            AF.setVisible(true);
         });
     }
 
@@ -1440,6 +1503,7 @@ public class A extends javax.swing.JFrame {
     private javax.swing.JMenu Menu_JIRA;
     private javax.swing.JMenu Menu_JOBS;
     private javax.swing.JMenu Menu_OR;
+    private javax.swing.JMenu Menu_Swagger;
     private javax.swing.JMenu Menu_Tools;
     private javax.swing.JMenu Menu_UI_Viewer;
     private javax.swing.JMenu Menu_WO_;
@@ -1448,6 +1512,7 @@ public class A extends javax.swing.JFrame {
     private javax.swing.JMenu Menu_WO_ST;
     private javax.swing.JMenu Menu_iOS;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>   
 }
