@@ -69,29 +69,39 @@ public class AP3_orders {
         Thread.sleep(500);
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//div[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for Brands load", "xpath", "//*[@class='H6-Selected-On-Surface-Medium-Emphasis-Left']", "no_jira"); 
-                if (FAIL) { return;}            
-        _t++; Thread.sleep((long) sleep); TWeb.List_L0("Brands Count", "xpath", "//div[contains(@class,'clickable v-card')]", "no_jira");             
-            if (FAIL) { return;}
-            if(L0.isEmpty()){
-                EX += " - " + "\t" + "Orders - Brands Count" + "\t" + app + "\t" + SITE + "\t" + "FAIL" + "\t" + "No Brands";
-                EX += "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";
-            }else{            
-                for (int i = 0; i < L0.size(); i++) {
-                    _t++; TWeb.Element_Child_Attribute("Brand " + (i+1) + " Name", L0.get(i), "tagName", "span", "textContent", "no_jira");             
-                        if (FAIL) { return;}   
-                    if(t.trim().startsWith(BRAND)){
-                        T_Index = i;
-                    }
-                    _t++; TWeb.Element_Child_Attribute("Brand " + (i+1) + " Logo/Image", L0.get(i), "xpath", ".//div[contains(@class,'v-image__image v-image__image--cover')]", "style", "no_jira");             
-                        if (FAIL) { return;}     
-                }         
-            }
-        _t++; TWeb.Element_Click("Click Brand", L0.get(T_Index),"no_jira");  
-            if (FAIL) { return;}    
-        Thread.sleep(500);
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//div[contains(@class, 'v-datatable__progress')]", "no_jira");
-            if (FAIL) { return;}
+            
+            /* 
+            May 5th 2021
+            This screen is excluded in 1.31 release 
+            Once successfully deployed to prod can be removed from code.
+            https://teamideaworks.atlassian.net/browse/CM-3084
+            */
+            
+            
+            
+//            _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for Brands load", "xpath", "//*[@class='H6-Selected-On-Surface-Medium-Emphasis-Left']", "no_jira"); 
+//                if (FAIL) { return;}            
+//        _t++; Thread.sleep((long) sleep); TWeb.List_L0("Brands Count", "xpath", "//div[contains(@class,'clickable v-card')]", "no_jira");             
+//            if (FAIL) { return;}
+//            if(L0.isEmpty()){
+//                EX += " - " + "\t" + "Orders - Brands Count" + "\t" + app + "\t" + SITE + "\t" + "FAIL" + "\t" + "No Brands";
+//                EX += "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";
+//            }else{            
+//                for (int i = 0; i < L0.size(); i++) {
+//                    _t++; TWeb.Element_Child_Attribute("Brand " + (i+1) + " Name", L0.get(i), "tagName", "span", "textContent", "no_jira");             
+//                        if (FAIL) { return;}   
+//                    if(t.trim().startsWith(BRAND)){
+//                        T_Index = i;
+//                    }
+//                    _t++; TWeb.Element_Child_Attribute("Brand " + (i+1) + " Logo/Image", L0.get(i), "xpath", ".//div[contains(@class,'v-image__image v-image__image--cover')]", "style", "no_jira");             
+//                        if (FAIL) { return;}     
+//                }         
+//            }
+//        _t++; TWeb.Element_Click("Click Brand", L0.get(T_Index),"no_jira");  
+//            if (FAIL) { return;}    
+//        Thread.sleep(500);
+//        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//div[contains(@class, 'v-datatable__progress')]", "no_jira");
+//            if (FAIL) { return;}
             
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Search for...'", "Search for anything", true,"no_jira"); 
             if (FAIL) { return;}
