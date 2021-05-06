@@ -130,7 +130,7 @@ public class JIRA extends javax.swing.JInternalFrame {
 
         lblMetrics.setText("Target");
         lblMetrics.setAlignmentX(0.5F);
-        getContentPane().add(lblMetrics, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 360, -1));
+        getContentPane().add(lblMetrics, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 360, -1));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -157,7 +157,7 @@ public class JIRA extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 22, 428, 76));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 32, 428, 76));
 
         txtLog.setEditable(false);
         txtLog.setColumns(20);
@@ -280,12 +280,12 @@ public class JIRA extends javax.swing.JInternalFrame {
 
         lblSITES7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES7.setText("Cycle /ID");
+        lblSITES7.setText("Cycle / ID");
         lblSITES7.setAlignmentX(0.5F);
         getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 108, -1, -1));
 
         txtCycle.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtCycle.setText("password");
+        txtCycle.setText("Cycle_X / ID");
         getContentPane().add(txtCycle, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 124, 404, -1));
 
         pack();

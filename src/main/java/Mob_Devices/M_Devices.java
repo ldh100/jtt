@@ -262,7 +262,7 @@ public class M_Devices extends javax.swing.JInternalFrame {
         M2.setColumnIdentifiers(M2_ColumnsName);
         DV2.setModel(M2); 
         
-        Dev  = Func.ExecuteCmdProcessBuilder("emulator -list-avds", EMULATOR_HOME, true, true).trim();
+        Dev = Func.ExecuteCmdProcessBuilder("emulator -list-avds", EMULATOR_HOME, true, true).trim();
         txtLog.append("- " + "emulator -list-avds" + " >> " + "\r\n" + Dev + "\r\n\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         

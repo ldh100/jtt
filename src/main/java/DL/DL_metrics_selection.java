@@ -9,6 +9,7 @@ import A.TWeb;
 import static A.A.*;
 import static DL.DL.DL_UserID;
 import static DL.DL.DL_UserPW;
+import static DL.DL_metric_data.metrics;
 /**
  *
  * @author Oleg.Spozito
@@ -30,8 +31,17 @@ public class DL_metrics_selection {
                 if (FAIL) { return;}
 //                 _t++; Thread.sleep((long) sleep); TWeb.Element_Click(t + " > DataItem " + i + " name", L1.get(i) , "no_jira" );
 //                     if (FAIL) { return;}
-        }        
-        
+        }  
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("get the side bar text ", "xpath", "(//span[@class='MuiButton-label'])[1]/span", "no_jira");
+       if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("get the side bar text ", "xpath", "(//span[@class='MuiButton-label'])[1]/span", "no_jira");
+           	if (FAIL) { return;}
+        if(t.equalsIgnoreCase("arrow_right"))
+        {
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'To Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[1]", "no_jira"); 
+        if (FAIL) { return;} 
+        }
+        metrics();
         _t++; Thread.sleep((long) sleep); TWeb.List_L0("Metrics Subheader Count", "xpath", "//ul[contains(@class, 'MuiList-subheader')]", "no_jira");             
             if (FAIL) { return;}  
         for (int i = 0; i < L0.size(); i++) {

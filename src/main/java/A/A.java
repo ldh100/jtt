@@ -192,9 +192,8 @@ public class A extends javax.swing.JFrame {
         });
         Menu_DL_.add(Menu_DL_DE);
 
-        Menu_DL_ST.setText(" Staging (?)");
+        Menu_DL_ST.setText("- Staging (https://staging.member.distilr.io)");
         Menu_DL_ST.setBorderPainted(false);
-        Menu_DL_ST.setEnabled(false);
         Menu_DL_ST.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_DL_ST.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -203,7 +202,7 @@ public class A extends javax.swing.JFrame {
         });
         Menu_DL_.add(Menu_DL_ST);
 
-        Menu_DL_PR.setText("- Production (https://member.distilr.io/");
+        Menu_DL_PR.setText("- Production (https://mpower.distilr.io/)");
         Menu_DL_PR.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_DL_PR.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -730,7 +729,7 @@ public class A extends javax.swing.JFrame {
     }//GEN-LAST:event_Menu_DL_STMouseClicked
     private void Menu_DL_PRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_DL_PRMouseClicked
         try {
-            java.awt.Desktop.getDesktop().browse(URI.create("https://member.distilr.io/"));
+            java.awt.Desktop.getDesktop().browse(URI.create("https://mpower.distilr.io/"));
         }
         catch (IOException ex) {
             // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);

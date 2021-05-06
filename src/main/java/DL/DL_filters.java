@@ -22,69 +22,76 @@ import static DL.DL.var3;
 import static DL.DL_metric_data.MetricCardsSelection;
 public class DL_filters {
     public static void run() throws InterruptedException {    
-       Thread.sleep(6000);  
+       Thread.sleep(10000);  
        MetricCards("Total Spend", null, 1, 2);
-       Thread.sleep(6000);
+       Thread.sleep(10000);
        MetricCards("Contracted Spend", null, 2, 1);
-       Thread.sleep(6000);
+       Thread.sleep(10000);
        MetricCards("Contract Utilization Rate (CUR)", "Contract Utilization Rate (CUR) = Sum (Contracted Spend)/ Sum (Total Spend)", 3, 0);
-   
-       Thread.sleep(6000);
+       Thread.sleep(10000);
        MetricCards("Program earned revenue", null, 10, 1);
-       Thread.sleep(6000);
+       Thread.sleep(10000);
        MetricCards("Program rate of return", "Program Rate of Return: Sum (Program Earned Revenue)/Sum (Total Spend)", 11, 0);
-       Thread.sleep(6000);
+       Thread.sleep(10000);
        MetricCards("Member earned revenue", null, 4, 1);
-       Thread.sleep(6000);
+       Thread.sleep(10000);
        MetricCards("Member rate of return", "Member Rate of Return: Sum (Member Earned Revenue)/ Sum (Total Spend)", 5, 0);
-       Thread.sleep(6000);
+       Thread.sleep(10000);
        MetricCards("Customer earned revenue", null, 7, 1);
-       Thread.sleep(6000);
+       Thread.sleep(10000);
        MetricCards("Customer rate of return", "Customer Rate of Return: Sum (Customer Earned Revenue)/ Sum (Total Spend)", 8, 0);
-       Thread.sleep(6000);
+       Thread.sleep(10000);
        MetricCards("Contracted Spend", null, 2, 2);
-       Thread.sleep(6000);
+       Thread.sleep(10000);
        MetricCards("Program Earned Revenue", null, 10, 1);
-       Thread.sleep(6000);
+       Thread.sleep(10000);
        MetricCards("Program Strength of Program", "Program Strength of Program: Sum (Program Earned Revenue)/ Sum (Contracted Spend)", 12, 0);
-       Thread.sleep(6000);
+       Thread.sleep(10000);
        _t++; Thread.sleep((long) sleep); TWeb.To_Top("no_jira");
-       Thread.sleep(6000);
+       Thread.sleep(10000);
        MetricCards("Member Earned Revenue", null, 4, 1);
-       Thread.sleep(6000);
+       Thread.sleep(10000);
        MetricCards("Member Strength of Program", "Member Strength of Program: Sum (Member Earned Revenue)/ Sum (Contracted Spend)", 6, 0);
-       Thread.sleep(6000);
+       Thread.sleep(10000);
        MetricCards("Customer Earned Revenue", null, 7, 1);
-       Thread.sleep(6000);
+       Thread.sleep(10000);
        MetricCards("Customer Strength of Program", "Customer Strength of Program: Sum (Customer Earned Revenue)/ Sum (Contracted Spend)", 9, 0);
        _t++; Thread.sleep((long) sleep); TWeb.To_Top("no_jira");
               
 //        MetricCards();
             
       }
-
-      public static void MetricCards(String desc, String calcDesc, int position, int initVar)throws InterruptedException {
+    public static void MetricCards(String desc, String calcDesc, int position, int initVar)throws InterruptedException {
     	Thread.sleep(6000);
+
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for side bar", "xpath", "(//span[@class='MuiButton-label'])[1]/span", "no_jira");
+            if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("get the side bar text ", "xpath", "(//span[@class='MuiButton-label'])[1]/span", "no_jira");
+            if (FAIL) { return;}
+        if(t.equalsIgnoreCase("arrow_right")) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'To Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[1]", "no_jira"); 
+            if (FAIL) { return;} 
+        }
+
+//metrics();        
     	_t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Check '"+desc+"' checkbox ", "xpath", "(//div[@class='MuiListItemIcon-root']/span/span/input)[position()="+position+"]", "no_jira"); 
-        if (FAIL) { return;}
+            if (FAIL) { return;}
         Thread.sleep(12000);
         Configure();
-         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Get the '"+desc+"' amount ", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]/div[2]/div[2]/p", "no_jira");
-       	if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Get the '"+desc+"' amount ", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]/div[2]/div[2]/p", "no_jira");
+            if (FAIL) { return;}
         Thread.sleep(6000);
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Uncheck '"+desc+"' checkbox ", "xpath", "(//div[@class='MuiListItemIcon-root']/span/span/input)[position()="+position+"]", "no_jira"); 
-        if (FAIL) { return;}
-            if (initVar == 1) {
-			var1 = Integer.parseInt(get_Text(t));
-		}else if (initVar == 2) {
-			var2 = Integer.parseInt(get_Text(t));
-		}else {
-			var3 = Double.parseDouble(get_Text(t)) ;
+            if (FAIL) { return;}
+        if (initVar == 1) {
+                    var1 = Integer.parseInt(get_Text(t));
+            }else if (initVar == 2) {
+                    var2 = Integer.parseInt(get_Text(t));
+            }else {
+                    var3 = Double.parseDouble(get_Text(t)) ;
             _t++; Thread.sleep((long) sleep); DL_Calculation_1("Verifying '"+calcDesc+"' ", "no jira");
             if (FAIL) { return;}
-//            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Uncheck '"+desc+"' checkbox ", "xpath", "(//div[@class='MuiListItemIcon-root']/span/span/input)[position()="+position+"]", "no_jira"); 
-//            if (FAIL) { return;}
-    }
+        }
     }
     public static void Configure() throws InterruptedException {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Cick on configure filters", "xpath", "//button[contains(.,' Configure Filters')]", "no_jira"); 
@@ -153,7 +160,6 @@ public class DL_filters {
         
         Thread.sleep(8000);
     }
-    
     public static String get_Text(String str) {
     	for (int i = 0; i < str.length(); i++) {
             if (str.charAt(i) == '$') str = str.replace(String.valueOf(str.charAt(i)), "");
@@ -165,7 +171,6 @@ public class DL_filters {
     	//System.out.println("final str "+str);
     	return str;
     }
-
     private static void DL_Calculation_1(String NAME, String JIRA) {
 	String status;     
 	try {
@@ -189,7 +194,4 @@ public class DL_filters {
             F += _t + " > " + err + "\r\n";
 	}
     }
-
-
-
 }

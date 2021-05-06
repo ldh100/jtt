@@ -3,6 +3,8 @@ import A.TWeb;
 import static A.A.*;
 import static DL.DL.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 /**
  *
@@ -20,12 +22,14 @@ public class DL_metric_data {
 	    		 metricRef="Compared to last week";	 
 	    	 
 	    	 MetricCardsSelection();
+                     
 	     }
 	    	
       }
     
     public static void MetricCardsSelection()throws InterruptedException {
        Thread.sleep(6000);
+
        SelectMetricCard("Total Spend", null, 1, 2);
        Thread.sleep(6000);
        SelectMetricCard("Contracted Spend", null, 2, 1);
@@ -67,7 +71,20 @@ public class DL_metric_data {
     }
     
     public static void SelectMetricCard(String desc, String calcDesc, int position, int initVar)throws InterruptedException {
-    	
+    	Thread.sleep(6000);
+        
+       _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("get the side bar text ", "xpath", "(//span[@class='MuiButton-label'])[1]/span", "no_jira");
+       if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("get the side bar text ", "xpath", "(//span[@class='MuiButton-label'])[1]/span", "no_jira");
+           	if (FAIL) { return;}
+        if(t.equalsIgnoreCase("arrow_right"))
+        {
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'To Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[1]", "no_jira"); 
+        if (FAIL) { return;} 
+        }
+ //       _t++; TWeb.Element_By_DisplayChecking("Check '"+desc+"' is Displayed ", "xpath", "//div/span[contains(.,'"+desc+"')]/parent::div/parent::div/div/span/span/input", "no_jira");
+        metrics();
+        if (FAIL) { return;}
     	_t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Check '"+desc+"' checkbox ", "xpath", "(//div[@class='MuiListItemIcon-root']/span/span/input)[position()="+position+"]", "no_jira"); 
         if (FAIL) { return;}
         Thread.sleep(12000);
@@ -78,7 +95,8 @@ public class DL_metric_data {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Get the '"+desc+"' amount ", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]/div[2]/div[2]/p", "no_jira");
        	if (FAIL) { return;}
        	
-      
+        try
+        {
        	if (initVar == 1) {
 			var1 = Integer.parseInt(get_Text(t));
 		}else if (initVar == 2) {
@@ -88,12 +106,37 @@ public class DL_metric_data {
             _t++; Thread.sleep((long) sleep); DL_Calculation_1("Verifying '"+calcDesc+"' ", "no jira");
             if (FAIL) { return;}
 		}
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
        	
         
        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Uncheck '"+desc+"' checkbox ", "xpath", "(//div[@class='MuiListItemIcon-root']/span/span/input)[position()="+position+"]", "no_jira"); 
         if (FAIL) { return;}
     }
  
+    public static void metrics()
+    {
+    List<String> metricList=new ArrayList<String>();
+       metricList.add("Total Spend");
+       metricList.add("Contracted Spend");
+       metricList.add("Contracted Utilization Rate");
+       metricList.add("Member Earned Revenue");
+       metricList.add("Member Rate of Return");
+       metricList.add("Member Strength of Program");
+       metricList.add("Customer Earned Revenue");
+       metricList.add("Customer Rate of Return");
+       metricList.add("Customer Strength of Program");
+       metricList.add("Program Earned Revenue");
+       metricList.add("Program Rate of Return");
+       metricList.add("Program Strength of Program");
+       for (String metric : metricList) {
+
+        _t++; TWeb.Element_By_DisplayChecking("Check '"+metric+"' is Displayed ", "xpath", "//div/span[contains(.,'"+metric+"')]/parent::div/parent::div/div/span/span/input", "no_jira");
+}
+    }
     
       public static String get_Text(String str) {
     	for (int i = 0; i < str.length(); i++) {
@@ -133,6 +176,9 @@ public class DL_metric_data {
     
 
     }
+
+
+
 
 
 
