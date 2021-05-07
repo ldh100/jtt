@@ -25,6 +25,7 @@ public class AP3_images {
         * Tes data to be used in JTT:
         * App - Thrive, Site - Ap3 Automation, Brand - Starbucks
         */ 
+        if (!env.equals("PR")) {
         // <editor-fold defaultstate="collapsed" desc="Add New Brand as 'Allow Images in Global Menu' set to 'No'"> 
         EX += " - " + "\t" + " === " + "\t" + " ===== Add New Brand as 'Allow Images in Global Menu' set to 'No'" + "\t" + " == Add New Brand as 'Allow Images in Global Menu' set to 'No' >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         //navigate to the sites -> brand -> settings
@@ -462,5 +463,6 @@ public class AP3_images {
         Thread.sleep(500);
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         // </editor-fold> 
+        }
     }
 }

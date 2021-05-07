@@ -127,9 +127,8 @@
                 </Menu>
                 <Menu class="javax.swing.JMenu" name="Menu_DL_ST">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value=" Staging (?)"/>
+                    <Property name="text" type="java.lang.String" value="- Staging (https://staging.member.distilr.io)"/>
                     <Property name="borderPainted" type="boolean" value="false"/>
-                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Dialog" size="12" style="0"/>
                     </Property>
@@ -140,7 +139,7 @@
                 </Menu>
                 <Menu class="javax.swing.JMenu" name="Menu_DL_PR">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="- Production (https://member.distilr.io/"/>
+                    <Property name="text" type="java.lang.String" value="- Production (https://mpower.distilr.io/)"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Dialog" size="12" style="0"/>
                     </Property>

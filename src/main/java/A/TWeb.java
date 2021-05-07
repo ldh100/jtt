@@ -39,9 +39,13 @@ import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * @author Oleg.Spozito
@@ -2989,7 +2993,6 @@ public class TWeb {
         } 
         sw1.reset();
     } 
-
     public static void PressEnter(String NAME, WebElement E, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
@@ -3011,7 +3014,6 @@ public class TWeb {
         }
         sw1.reset();
     }
-   
     public static void Element_By_DisplayCheck(String NAME, String BY, String PATH, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
@@ -3069,7 +3071,6 @@ public class TWeb {
         }
         sw1.reset();
     }
-    
     public static void Scroll_to_WebElement(String NAME, String BY, String PATH, String JIRA){
         if(sw1.isRunning()){
             sw1.reset();
@@ -3119,7 +3120,253 @@ public class TWeb {
         }
         sw1.reset();
     }
+    
+    // Added by Prathyusha  >>>> temporary
+    public static void Wait_Element_Visible(String NAME, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        WebDriverWait Wait_d = new WebDriverWait(d1,40);
+        try {
+            switch (BY) {
+                case "xpath":
+
+                    Wait_d.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(PATH)));
+                    break;
+                case "css":
+                    Wait_d.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PATH)));
+                   
+                    break;
+                case "className":
+                    Wait_d.until(ExpectedConditions.visibilityOfElementLocated(By.className(PATH)));
+                  
+                    break;
+                case "id":
+                     Wait_d.until(ExpectedConditions.visibilityOfElementLocated(By.id(PATH)));
+                   
+                    break;
+                case "tagName":
+                         Wait_d.until(ExpectedConditions.visibilityOfElementLocated(By.tagName(PATH)));
+               
+                    break;
+                case "name":
+                     Wait_d.until(ExpectedConditions.visibilityOfElementLocated(By.name(PATH)));
+                    
+                    break;
+                 case "linkText":
+                         Wait_d.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(PATH)));
+                   
+                    break;
+                case "partialLinkText":
+                    Wait_d.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(PATH)));
+                   
+                    break;
+                default:
+                    break;
+            }
+        
+           
+           r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
+            _p++; 
+           
+            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Waiting for Element to be visible" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
     }
+    public static void Open_NewIncognitoWindow(String NAME, String BY, String PATH, String JIRA){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();       
+ 
+        FAIL = false;
+        try {         
+               d1.close();
+               
+                       ChromeOptions chrome_op = new ChromeOptions();
+                     
+                        chrome_op.addArguments("incognito");
+                        chrome_op.addArguments("--disable-infobars");
+                        chrome_op.addArguments("--start-maximized");
+ 
+                 
+                        chrome_op.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+                        d1 = new ChromeDriver(chrome_op);
+                        d1.manage().window().maximize();
+
+               Thread.sleep(7000);
+ 
+  
+
+
+
+               _p++;
+            EX += _t + "\t" + NAME + "\t" + "Opening the Browser in Incognito Mode" + "\t" + "Incognito Mode" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Opening the Browser in Incognito Mode" + "\t" + "Not able to Open Browser in Incognito Mode" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    public static void Element_By_DisplayChecking(String NAME, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();       
+ 
+        FAIL = false;
+        try {
+            switch (BY) {
+                case "xpath":
+                      if(d1.findElements(By.xpath(PATH)).size()!=0)
+                               e=   d1.findElement(By.xpath(PATH));
+                    break;
+                case "css":
+                      if (d1.findElements(By.cssSelector(PATH)).size()!=0)
+                               e=  d1.findElement(By.cssSelector(PATH));
+                    break;
+                case "className":
+                      if(d1.findElements(By.className(PATH)).size()!=0)
+                               e=  d1.findElement(By.className(PATH));
+                    break;
+                case "id":
+                      if(d1.findElements(By.id(PATH)).size()!=0)
+                               e=  d1.findElement(By.id(PATH));
+                    break;
+                case "tagName":
+                      if(d1.findElements(By.tagName(PATH)).size()!=0)
+                              e=   d1.findElement(By.tagName(PATH));
+                    break;
+                case "name":
+                      if(d1.findElements(By.name(PATH)).size()!=0)
+                               e=  d1.findElement(By.name(PATH));
+                    break;
+                 case "linkText":
+                      if(d1.findElements(By.linkText(PATH)).size()!=0)
+                               e=  d1.findElement(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                      if(d1.findElements(By.partialLinkText(PATH)).size()!=0)
+                              e=   d1.findElement(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+            _p++;
+            System.out.println(e.isSelected());
+            if(e.isSelected())
+           {
+               
+            Actions action = new Actions(d1);
+            action.moveToElement(e).click().perform();
+           }
+            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "KPI is Displayed" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+ 
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    public static void CheckboxElement_By_Path_Click(String NAME, String BY, String PATH, String JIRA ){
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+ 
+        FAIL = false;
+        try {
+            switch (BY) {
+                case "xpath":
+                    e = d1.findElement(By.xpath(PATH));
+                    break;
+                case "css":
+                    e = d1.findElement(By.cssSelector(PATH));
+                    break;
+                case "className":
+                    e = d1.findElement(By.className(PATH));
+                    break;
+                case "id":
+                    e = d1.findElement(By.id(PATH));
+                    break;
+                case "tagName":
+                    e = d1.findElement(By.tagName(PATH));
+                    break;
+                case "name":
+                    e = d1.findElement(By.name(PATH));
+                    break;
+                 case "linkText":
+                    e = d1.findElement(By.linkText(PATH));
+                    break;
+                case "partialLinkText":
+                    e = d1.findElement(By.partialLinkText(PATH));
+                    break;
+                default:
+                    break;
+            }
+           if(!e.isSelected())
+           {
+            Actions action = new Actions(d1);
+            action.moveToElement(e).click().perform();
+           }
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        }
+        sw1.reset();
+    }
+    public static void CompareText(String NAME, String actual, String Expected,String JIRA) {
+        try {
+            if(actual.equals(Expected)) {
+                _p++;
+                EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Expected Matches "+Expected+"  with Actual Value "+actual+"" + "\t" + "PASS" + "\t" + " - " +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            }
+            else if((Integer.parseInt(actual)-2)<=Integer.parseInt(Expected)) {
+                 _p++;
+                 EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Expected Matches "+Expected+"  with Actual Value "+actual+"" + "\t" + "PASS" + "\t" + " - " +
+                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            }else {
+                 _f++; FAIL = true; err ="Failed to match Expected value "+Expected+"  with Actual value - "+actual+"";
+                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+                 EX += _t + "\t" + NAME + "\t"  + "L0" + "\t" + "FAIL" + "\t" + err +
+                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                 F += _t + " > " + err + "\r\n";
+            }
+        } catch(Exception ex){
+            _f++; FAIL = true; err ="Failed due to exception " + Expected + "  with Actual value - "+actual+"";
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t"  + "L0" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+
+        }
+    }
+}
 
                                                                                                              
     
