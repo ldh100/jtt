@@ -2,33 +2,25 @@ package DL;
 import A.TWeb;
 import static A.A.*;
 import static DL.DL.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 /**
  *
  * @author Oleg.Spozito
  */
 public class DL_metric_data {
     public static void run() throws InterruptedException {     
-       Thread.sleep(6000);
+        Thread.sleep(500);
 	for (int i = 0; i < 3; i++) {
-	    	 System.out.println("count "+i);
-	    	 count = i;
-	    	 if(i==1) 
-	    		 metricRef="Compared to last month";
-	    	 if(i==2) 
-	    		 metricRef="Compared to last week";	 
-	    	 
-	    	 MetricCardsSelection();
-                     
-	     }
-	    	
-      }
+	    count = i;
+	    if(i == 1)  metricRef = "Compared to last month";
+	    if(i == 2)  metricRef = "Compared to last week";	 
+	    MetricCardsSelection();      
+	}   	
+    }
     
     public static void MetricCardsSelection()throws InterruptedException {
-       Thread.sleep(6000);
+       //Thread.sleep(6000);
 
        SelectMetricCard("Total Spend", null, 1, 2);
        Thread.sleep(6000);
@@ -61,84 +53,85 @@ public class DL_metric_data {
     }
     
     public static  void SelectComparedToLastMonth_Week()throws InterruptedException {
-    	 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select metrics dropdown", "xpath", "//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", "no_jira"); 
-	      if (FAIL) { return;}
-	    
-	      Thread.sleep(2000); 
-		 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select metrics dropdown item '"+metricRef+"' ", "xpath", "//ul/li[contains(.,'"+metricRef+"')]", "no_jira"); 
-		  if (FAIL) { return;}
-		  Thread.sleep(12000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select metrics dropdown", "xpath", "//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", "no_jira"); 
+            if (FAIL) { return;}	    
+	Thread.sleep(500); 
+	_t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select metrics dropdown item '" + metricRef + "'", "xpath", "//ul/li[contains(.,'"+metricRef+"')]", "no_jira"); 
+            if (FAIL) { return;}
+        Thread.sleep(12000);
     }
     
     public static void SelectMetricCard(String desc, String calcDesc, int position, int initVar)throws InterruptedException {
     	Thread.sleep(6000);
-        
-       _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("get the side bar text ", "xpath", "(//span[@class='MuiButton-label'])[1]/span", "no_jira");
-       if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("get the side bar text ", "xpath", "(//span[@class='MuiButton-label'])[1]/span", "no_jira");
-           	if (FAIL) { return;}
-        if(t.equalsIgnoreCase("arrow_right"))
-        {
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'To Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[1]", "no_jira"); 
-        if (FAIL) { return;} 
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", "no_jira");
+            if (FAIL) { return;} // [1]/span > [2]/span after 'Apply' buttorn added ([1]/span)
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "(//span[@class='MuiButton-label'])[2]/span", "no_jira");
+            if (FAIL) { return;}
+        if(t.equalsIgnoreCase("arrow_right")) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'arrow_right' > Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[2]/span", "no_jira"); 
+                if (FAIL) { return;} 
         }
- //       _t++; TWeb.Element_By_DisplayChecking("Check '"+desc+"' is Displayed ", "xpath", "//div/span[contains(.,'"+desc+"')]/parent::div/parent::div/div/span/span/input", "no_jira");
-        metrics();
+ //       _t++; TWeb.Element_By_DisplayChecking("Check '" + desc + "' is Displayed ", "xpath", "//div/span[contains(.,'" + desc +"')]/parent::div/parent::div/div/span/span/input", "no_jira");
+        
+        metrics(); // ==============================
+        
         if (FAIL) { return;}
-    	_t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Check '"+desc+"' checkbox ", "xpath", "(//div[@class='MuiListItemIcon-root']/span/span/input)[position()="+position+"]", "no_jira"); 
+    	_t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Check '" + desc + "' checkbox", "xpath", "(//div[@class='MuiListItemIcon-root']/span/span/input)[position()="+position+"]", "no_jira"); 
         if (FAIL) { return;}
         Thread.sleep(12000);
        
-        if(count != 0)
-        	SelectComparedToLastMonth_Week();
-       
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Get the '"+desc+"' amount ", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]/div[2]/div[2]/p", "no_jira");
-       	if (FAIL) { return;}
-       	
-        try
-        {
-       	if (initVar == 1) {
-			var1 = Integer.parseInt(get_Text(t));
-		}else if (initVar == 2) {
-			var2 = Integer.parseInt(get_Text(t));
-		}else {
-			var3 = Double.parseDouble(get_Text(t)) ;
-            _t++; Thread.sleep((long) sleep); DL_Calculation_1("Verifying '"+calcDesc+"' ", "no jira");
-            if (FAIL) { return;}
-		}
+        if(count != 0) {
+            SelectComparedToLastMonth_Week();
         }
-        catch(Exception e)
-        {
+       
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Get the '" + desc + "' amount", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]/div[2]/div[2]/p", "no_jira");
+            if (FAIL) { return;}
+       	
+        try {
+            switch (initVar) {
+                case 1:
+                    var1 = Integer.parseInt(get_Text(t));
+                    break;
+                case 2:
+                    var2 = Integer.parseInt(get_Text(t));
+                    break;
+                default:
+                    var3 = Double.parseDouble(get_Text(t)) ;
+                    break;
+            }
+            _t++; Thread.sleep((long) sleep); DL_Calculation_1("Verifying '" + calcDesc + "'", "no jira");
+            if (FAIL) { return;}
+        } catch(Exception e) {
             System.out.println(e);
         }
-       	
-        
-       _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Uncheck '"+desc+"' checkbox ", "xpath", "(//div[@class='MuiListItemIcon-root']/span/span/input)[position()="+position+"]", "no_jira"); 
+
+       _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Uncheck '" + desc + "' checkbox", "xpath", "(//div[@class='MuiListItemIcon-root']/span/span/input)[position()="+position+"]", "no_jira"); 
         if (FAIL) { return;}
     }
  
-    public static void metrics()
-    {
-    List<String> metricList=new ArrayList<String>();
-       metricList.add("Total Spend");
-       metricList.add("Contracted Spend");
-       metricList.add("Contracted Utilization Rate");
-       metricList.add("Member Earned Revenue");
-       metricList.add("Member Rate of Return");
-       metricList.add("Member Strength of Program");
-       metricList.add("Customer Earned Revenue");
-       metricList.add("Customer Rate of Return");
-       metricList.add("Customer Strength of Program");
-       metricList.add("Program Earned Revenue");
-       metricList.add("Program Rate of Return");
-       metricList.add("Program Strength of Program");
-       for (String metric : metricList) {
-
-        _t++; TWeb.Element_By_DisplayChecking("Check '"+metric+"' is Displayed ", "xpath", "//div/span[contains(.,'"+metric+"')]/parent::div/parent::div/div/span/span/input", "no_jira");
-}
+    public static void metrics() {
+        List<String> metricList = new ArrayList<>();
+            metricList.add("Total Spend");
+            metricList.add("Contracted Spend");
+            metricList.add("Contracted Utilization Rate");
+            metricList.add("Member Earned Revenue");
+            metricList.add("Member Rate of Return");
+            metricList.add("Member Strength of Program");
+            metricList.add("Customer Earned Revenue");
+            metricList.add("Customer Rate of Return");
+            metricList.add("Customer Strength of Program");
+            metricList.add("Program Earned Revenue");
+            metricList.add("Program Rate of Return");
+            metricList.add("Program Strength of Program");
+            
+        metricList.stream().map(metric -> {
+            _t++;
+            return metric;
+        }).forEachOrdered(metric -> {
+            TWeb.Element_By_DisplayChecking("Check '" + metric + "' is Displayed", "xpath", "//div/span[contains(.,'" + metric + "')]/parent::div/parent::div/div/span/span/input", "no_jira");
+        });
     }
-    
-      public static String get_Text(String str) {
+    public static String get_Text(String str) {
     	for (int i = 0; i < str.length(); i++) {
             if (str.charAt(i) == '$') str = str.replace(String.valueOf(str.charAt(i)), "");
             if (str.charAt(i) == ',') str = str.replace(String.valueOf(str.charAt(i)), "");
@@ -146,10 +139,8 @@ public class DL_metric_data {
             if (str.charAt(i) == ')') str = str.replace(String.valueOf(str.charAt(i)), "");
             if (str.charAt(i) == '%') str = str.replace(String.valueOf(str.charAt(i)), "");
 	}
-    	//System.out.println("final str "+str);
     	return str;
     }
-
     private static void DL_Calculation_1(String NAME, String JIRA) {
 	String status;     
 	try {
@@ -164,18 +155,15 @@ public class DL_metric_data {
                 status = "FAIL";
             }
             _p++;
-            EX += _t + "\t" + NAME + "\t" + " - " + "\t" + t + "\t" + status + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + JIRA + "\r\n";
-			
+            EX += _t + "\t" + NAME + "\t" + " - " + "\t" + t + "\t" + status + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + JIRA + "\r\n";			
         } catch (Exception ex) {
             _f++; err = ex.getMessage().trim(); err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err + "\t" + " - " + "\t" + " - " + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
 	}
-    }
-    
-
-    }
+    }    
+}
 
 
 

@@ -4,22 +4,12 @@
  * and open the template in the editor.
  */
 package DL;
-import static A.A.EX;
-import static A.A.F;
-import static A.A.FAIL;
-import static A.A._f;
-import static A.A._p;
-import static A.A._t;
-import static A.A.err;
-import static A.A.sleep;
-import static A.A.t;
-
+import static A.A.*;
 import A.TWeb;
-import static DL.DL.count;
 import static DL.DL.var1;
 import static DL.DL.var2;
 import static DL.DL.var3;
-import static DL.DL_metric_data.MetricCardsSelection;
+
 public class DL_filters {
     public static void run() throws InterruptedException {    
        Thread.sleep(10000);  
@@ -65,7 +55,7 @@ public class DL_filters {
     	Thread.sleep(6000);
 
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for side bar", "xpath", "(//span[@class='MuiButton-label'])[1]/span", "no_jira");
-            if (FAIL) { return;}
+            if (FAIL) { return;} // MuiButtonBase-root MuiButton-root MuiButton-text jss25
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("get the side bar text ", "xpath", "(//span[@class='MuiButton-label'])[1]/span", "no_jira");
             if (FAIL) { return;}
         if(t.equalsIgnoreCase("arrow_right")) {
@@ -77,10 +67,13 @@ public class DL_filters {
     	_t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Check '"+desc+"' checkbox ", "xpath", "(//div[@class='MuiListItemIcon-root']/span/span/input)[position()="+position+"]", "no_jira"); 
             if (FAIL) { return;}
         Thread.sleep(12000);
+        
         Configure();
+        
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Get the '"+desc+"' amount ", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]/div[2]/div[2]/p", "no_jira");
             if (FAIL) { return;}
         Thread.sleep(6000);
+        
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Uncheck '"+desc+"' checkbox ", "xpath", "(//div[@class='MuiListItemIcon-root']/span/span/input)[position()="+position+"]", "no_jira"); 
             if (FAIL) { return;}
         if (initVar == 1) {
