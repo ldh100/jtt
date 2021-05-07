@@ -7,7 +7,7 @@
 // *
 // * @author Oleg.Spozito
 // */
-//public class DL_users {
+//public class DL_qa_user {
 //    private static String tbl_userName;
 //    public static void run(JTable TBL) throws InterruptedException { 
 //        String dUser = "";
@@ -102,7 +102,7 @@ import A.TWeb;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DL_users {
+public class DL_qa_user {
     public static String loc_dropdown1 = "";
     public static String item1 = "";
     public static String loc_dropdown2 = "";
@@ -115,22 +115,22 @@ public class DL_users {
     public static String tbl_itemFilter; 
     
     public static void run(JTable TBL) throws InterruptedException {
-        String Logged_User=DL.DL_UserID;
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("get the side bar text ", "xpath", "(//span[@class='MuiButton-label'])[1]/span", "no_jira");
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("get the side bar text ", "xpath", "(//span[@class='MuiButton-label'])[1]/span", "no_jira");
+        String Logged_User = DL.DL_UserID;
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", "no_jira");
+            if (FAIL) { return;}   // [1]/span > [2]/span after 'Apply' buttorn added ([1]/span)
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "(//span[@class='MuiButton-label'])[2]/span", "no_jira");
             if (FAIL) { return;}
         if(t.equalsIgnoreCase("arrow_right")) {
-            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'To Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[1]", "no_jira"); 
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click ' arrow_right' > Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[2]/span", "no_jira"); 
                 if (FAIL) { return;} 
         }
 
-        for (int i = 10; i < 11; i++) {
-            System.out.println("Testcase No: " + i);
+        for (int i = 10; i < 11; i++) {  // ================== BEBUG
     	    tbl_userName = TBL.getValueAt(i, 0).toString();
-            if (Logged_User== null || Logged_User.length()==0 || !Logged_User.equals(tbl_userName) ) {
+            if (Logged_User == null || Logged_User.length()== 0 || !Logged_User.equals(tbl_userName) ) {
                 Logged_User = tbl_userName;
-                _t++;TWeb.Open_NewIncognitoWindow("Open a New Incognito Window", "", "","");
+
+                _t++;TWeb.Open_NewIncognitoWindow("Open a New Incognito Window", "no_jira");
                 
                 _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to", url, "no_jira"); 
                 
@@ -158,7 +158,7 @@ public class DL_users {
                     if (FAIL) { return;} 
                 }
             }
-            Thread.sleep(5000);
+            //Thread.sleep(5000);
 
             List<String> metricList=new ArrayList<>();
             metricList.add("Total Spend");
@@ -173,11 +173,11 @@ public class DL_users {
             metricList.add("Program Earned Revenue");
             metricList.add("Program Rate of Return");
             metricList.add("Program Strength of Program");
+            
             for (String metric : metricList) {
                 _t++; TWeb.Element_By_DisplayChecking("Check '"+ metric+"' is Displayed ", "xpath", "//div/span[contains(.,'"+metric+"')]/parent::div/parent::div/div/span/span/input", "no_jira");
                 //Metric Selection
                 tbl_metric = TBL.getValueAt(i, 1).toString();
-
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Check '"+tbl_metric+"' checkbox ", "xpath", "//div/span[contains(.,'"+tbl_metric+"')]/parent::div/parent::div/div/span/span", "no_jira"); 
                     if (FAIL) { return;}
 
@@ -192,8 +192,8 @@ public class DL_users {
                     if (FAIL) { return;}           
 
                 //Delete choosen Location Filters
-                if(i>0) {
-                    Thread.sleep(15000);
+                if(i > 0) {
+                    //Thread.sleep(15000);
     //                _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("list all selected items", "xpath", "//div[contains(@class,'MuiChip-deletable')]/*[name()='svg']", "no_jira");
     //             if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.List_L0("list all selected items", "xpath", "//div[contains(@class,'MuiChip-deletable')]/*[name()='svg']", "no_jira");                                     
@@ -204,13 +204,11 @@ public class DL_users {
                 }
 
                 //Select Location Filters
-                tbl_locationFilter =TBL.getValueAt(i, 4).toString();
+                tbl_locationFilter = TBL.getValueAt(i, 4).toString();
                     testdataFilter(tbl_locationFilter, 0);
 
-
-
                 //Select Item Filters
-                tbl_itemFilter =TBL.getValueAt(i, 5).toString(); 
+                tbl_itemFilter = TBL.getValueAt(i, 5).toString(); 
                 _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for Products/Item Categories tab", "xpath", "//span[contains(text(),'Products/Item Categories')]", "no_jira");
                     if (FAIL) { return;}
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Cick on Products/Item Categories tab", "xpath", "//span[contains(text(),'Products/Item Categories')]", "no_jira"); 
@@ -218,7 +216,7 @@ public class DL_users {
 
                 //Delete choosen Item Filters
                 if(i > 0) {
-                    Thread.sleep(15000);
+                    //Thread.sleep(15000);
     //                  _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("list all selected items", "xpath", "//div[contains(@class,'MuiChip-deletable')]/*[name()='svg']", "no_jira");  
     //                  if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.List_L0("list all selected items", "xpath", "//div[contains(@class,'MuiChip-deletable')]/*[name()='svg']", "no_jira");                                     
@@ -230,21 +228,19 @@ public class DL_users {
                 testdataFilter(tbl_itemFilter, 1);
 
                 //Click on Apply
-                _t++; Thread.sleep((long) sleep); TWeb.Scroll_to_WebElement("Scroll to apply button ", "xpath", "//button/span[contains(.,'Apply')]", "no_jira");
+                _t++; Thread.sleep((long) sleep); TWeb.Scroll_to_WebElement("Scroll to 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", "no_jira");
                     if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on apply button ", "xpath", "//button/span[contains(.,'Apply')]", "no_jira");
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", "no_jira");
                     if (FAIL) { return;}	
-        	tbl_value =TBL.getValueAt(i, 3).toString();
-        	 _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("get the 'Dollar' amount ", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'"+tbl_metric+"')]/..//div[2]/div[2]/p", "no_jira");
+        	tbl_value = TBL.getValueAt(i, 3).toString();
+        	_t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Wait for 'Dollar' amount", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'" + tbl_metric + "')]/..//div[2]/div[2]/p", "no_jira");
                     if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("get the 'Dollar' amount ", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'"+tbl_metric+"')]/..//div[2]/div[2]/p", "no_jira");
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Get 'Dollar' amount", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'"+ tbl_metric + "')]/..//div[2]/div[2]/p", "no_jira");
                     if (FAIL) { return;}
-           	
-           	System.out.println(get_Text(t));
            	
            	TWeb.CompareText("comparing values ", get_Text(t), tbl_value, "no_jira");
            	//Uncheck Metric
-           	_t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Un Check '"+tbl_metric+"' checkbox ", "xpath", "//div/span[contains(.,'"+tbl_metric+"')]/parent::div/parent::div/div/span/span", "no_jira"); 
+           	_t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Un Check '" + tbl_metric + "' checkbox ", "xpath", "//div/span[contains(.,'" + tbl_metric + "')]/parent::div/parent::div/div/span/span", "no_jira"); 
                 if (FAIL) { return;}
             }
         }
@@ -257,127 +253,94 @@ public class DL_users {
 
             if (str==null || str.length()==0 || (str!= null && str.equalsIgnoreCase("none"))) {//None
                     System.out.println("do nothing");
-            }
-            else if(str.contains(",")) {
-                 for(int i=0; i< str.split(",").length;i++)
-                {
-                    loc_dropdown1=str.split(",")[i].split(":")[0].trim();
-                    item1=str.split(",")[i].split(":")[1].trim();
+            } else if(str.contains(",")) {
+                for(int i=0; i < str.split(",").length; i++) {
+                    loc_dropdown1 = str.split(",")[i].split(":")[0].trim();
+                    item1 = str.split(",")[i].split(":")[1].trim();
                     if(flag == 0) {//choose location filter
 
-                         if(loc_dropdown1.contains("Dropdown"))
-                         {
+                         if(loc_dropdown1.contains("Dropdown")) {
                              _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Cick on location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=2]", "no_jira");
                               if (FAIL) { return;}
                              _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Cick on location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=2]", "no_jira"); 
                                     if (FAIL) { return;}
 //				 Thread.sleep(6000);
-                             _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("choose  dropdown item - '"+item1+"'  ", "xpath", "//*[contains(text(), '"+item1+"')]", "no_jira");
+                             _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("choose  dropdown item - '" + item1 + "'", "xpath", "//*[contains(text(), '"+item1+"')]", "no_jira");
                               if (FAIL) { return;}
-                             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("choose  dropdown item - '"+item1+"'  ", "xpath", "//*[contains(text(), '"+item1+"')]", "no_jira"); 
+                             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("choose  dropdown item - '" + item1 + "'", "xpath", "//*[contains(text(), '"+item1+"')]", "no_jira"); 
                                     if (FAIL) { return;}
 //				        Thread.sleep(6000);
 //				        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select item "+item1+" from the table", "xpath", "//*[contains(text(), '"+item1+"')]", "no_jira");
 //				        if (FAIL) { return;}
-
-
                              continue;
                          }
-
-                    }
-                    else
-                    {
-                        if(loc_dropdown1.contains("Dropdown"))
-                         {
+                    } else {
+                        if(loc_dropdown1.contains("Dropdown")) {
                               _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Cick on Item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=2]", "no_jira");
                               if (FAIL) { return;}
                              _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Cick on Item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=2]", "no_jira"); 
                                     if (FAIL) { return;}
 //				 Thread.sleep(6000);
-                             _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("choose  dropdown item - '"+item1+"'  ", "xpath", "//*[contains(text(), '"+item1+"')]", "no_jira"); 
+                             _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("choose  dropdown item - '" + item1 + "'", "xpath", "//*[contains(text(), '"+item1+"')]", "no_jira"); 
                               if (FAIL) { return;}
-                             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("choose  dropdown item - '"+item1+"'  ", "xpath", "//*[contains(text(), '"+item1+"')]", "no_jira"); 
+                             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("choose  dropdown item - '" + item1 + "'", "xpath", "//*[contains(text(), '"+item1+"')]", "no_jira"); 
                                     if (FAIL) { return;}
 //				        Thread.sleep(14000);
-//				        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select item "+item1+" from the table", "xpath", "//*[contains(text(), '"+item1+"')]", "no_jira");
+//				        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select item " + item1 + " from the table", "xpath", "//*[contains(text(), '"+item1+"')]", "no_jira");
 //				        if (FAIL) { return;}
-
-
                              continue;
                          }
                     }
-
-
                 }
 
-                for(int i=0; i< str.split(",").length;i++)
-                {
-                    loc_dropdown1=str.split(",")[i].split(":")[0].trim();
-                    item1=str.split(",")[i].split(":")[1].trim();
+                for(int i=0; i < str.split(",").length; i++) {
+                    loc_dropdown1 = str.split(",")[i].split(":")[0].trim();
+                    item1= str.split(",")[i].split(":")[1].trim();
                     if(flag == 0) {//choose location filter
-
-                         if(loc_dropdown1.contains("Dropdown"))
-                         {
-
+                         if(loc_dropdown1.contains("Dropdown")) {
                              continue;
                          }
-                          _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Cick on location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')])[position()=3]", "no_jira"); 
-                              if (FAIL) { return;}
-                                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Cick on location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')])[position()=3]", "no_jira"); 
-                                    if (FAIL) { return;}
-                                    Thread.sleep(6000);
-                                            _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("choose  dropdown item - '"+loc_dropdown1+"'  ", "xpath", "//div[@role='dialog']//*[contains(text(), '"+loc_dropdown1+"')]", "no_jira"); 
-                              if (FAIL) { return;}
-                                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("choose  dropdown item - '"+loc_dropdown1+"'  ", "xpath", "//div[@role='dialog']//*[contains(text(), '"+loc_dropdown1+"')]", "no_jira"); 
-                                    if (FAIL) { return;}
-//                                                _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Select item "+item1+" from the table", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]/div/div[1]/*[contains(text(),'"+item1+"')]", "no_jira");
-//				        if (FAIL) { return;}
-
-
-                                    Thread.sleep(10000);
-//				        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select item "+item1+" from the table", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]//*[contains(text(),'"+item1+"')]/..", "no_jira");
-//				        if (FAIL) { return;}
-
-
+                        _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Cick on location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')])[position()=3]", "no_jira"); 
+                            if (FAIL) { return;}
+                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Cick on location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')])[position()=3]", "no_jira"); 
+                        if (FAIL) { return;}
+                        Thread.sleep(6000);
+                        _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Wait for dropdown item - '" + loc_dropdown1 + "'", "xpath", "//div[@role='dialog']//*[contains(text(), '"+loc_dropdown1+"')]", "no_jira"); 
+                            if (FAIL) { return;}
+                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("choose  dropdown item - '" + loc_dropdown1 + "'", "xpath", "//div[@role='dialog']//*[contains(text(), '"+loc_dropdown1+"')]", "no_jira"); 
+                            if (FAIL) { return;}
+                            
+                        Thread.sleep(10000);
                         _t++; TWeb.Element_By_Path_Text_Enter("Enter Item "+item1+" to be Searched", "id", "filter-group-search",item1 , false, "no_jira"); 
-                        if (FAIL) { return;} 
+                            if (FAIL) { return;} 
 
-                        _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Select item "+item1+" from the table", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]//*[contains(text(),'"+item1+"')]/..", "no_jira");
-                        if (FAIL) { return;}
-                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select item "+item1+" from the table", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]//*[contains(text(),'"+item1+"')]/..", "no_jira");
-                        if (FAIL) { return;}
+                        _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Select item " + item1 + " from the table", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]//*[contains(text(),'"+item1+"')]/..", "no_jira");
+                            if (FAIL) { return;}
+                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select item " + item1 + " from the table", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]//*[contains(text(),'"+item1+"')]/..", "no_jira");
+                            if (FAIL) { return;}
 
-//				        Thread.sleep(10000);
-
-                                    }else {//choose item filter
-                        if(loc_dropdown1.contains("Dropdown"))
-                         {
-
+                    }else {//choose item filter
+                        if(loc_dropdown1.contains("Dropdown")) {
                              continue;
                          }
-                                _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Click on item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=3]", "no_jira"); 
-                                        if (FAIL) { return;}
-                                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=3]", "no_jira"); 
-                                        if (FAIL) { return;}
-//				         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("choose 'Beverages ' from the dropdown box", "xpath", "//*[contains(text(), 'Beverages')]", "no_jira"); 
-//				            if (FAIL) { return;}
-//                                         Thread.sleep(10000);
-                                      _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("choose  dropdown item - '"+loc_dropdown1+"'  ", "xpath", "//*[contains(text(), '"+loc_dropdown1+"')]", "no_jira"); 
-                                    if (FAIL) { return;}
-                                            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("choose  dropdown item - '"+loc_dropdown1+"'  ", "xpath", "//*[contains(text(), '"+loc_dropdown1+"')]", "no_jira"); 
-                                    if (FAIL) { return;}
-                                     Thread.sleep(10000);
+                        _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Wait for filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=3]", "no_jira"); 
+                            if (FAIL) { return;}
+                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=3]", "no_jira"); 
+                            if (FAIL) { return;}
+                        _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Wait for dropdown item - '" + loc_dropdown1 + "'", "xpath", "//*[contains(text(), '" + loc_dropdown1 + "')]", "no_jira"); 
+                            if (FAIL) { return;}
+                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Vhoose  dropdown item - '" + loc_dropdown1 + "'", "xpath", "//*[contains(text(), '" + loc_dropdown1 + "')]", "no_jira"); 
+                            if (FAIL) { return;}
+                        Thread.sleep(10000);
 
-                                     _t++; TWeb.Element_By_Path_Text_Enter("Enter Item "+item1+" to be Searched", "id", "filter-group-search",item1 , false, "no_jira"); 
-    if (FAIL) { return;} 
-                         _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Select item "+item1+" from the table", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]//*[contains(text(),'"+item1+"')]/..", "no_jira");
-                                    if (FAIL) { return;}
-                                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select item "+item1+" from the table", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]//*[contains(text(),'"+item1+"')]/..", "no_jira");
-                                    if (FAIL) { return;}
-
-                                    }
-                            Thread.sleep(8000);
-
+                        _t++; TWeb.Element_By_Path_Text_Enter("Enter Item " + item1 + " to be Searched", "id", "filter-group-search",item1 , false, "no_jira"); 
+                            if (FAIL) { return;} 
+                        _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Wait for item " + item1 + " from the table", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]//*[contains(text(),'" + item1 + "')]/..", "no_jira");
+                            if (FAIL) { return;}
+                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select item " + item1 + " from the table", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]//*[contains(text(),'" + item1 + "')]/..", "no_jira");
+                        if (FAIL) { return;}
+                    }
+                    Thread.sleep(8000);
                 }
 //			if(str.split(",").length>1) {//Multiple Items
 //				if(str.split(",")[0].contains(":")) {
@@ -456,8 +419,7 @@ public class DL_users {
 //			            if (FAIL) { return;}
 //				}
 //			}
-
-            }
+        }
     }
 
     public static String filterTimePeriod() {

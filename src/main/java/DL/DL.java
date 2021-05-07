@@ -105,6 +105,7 @@ public class DL extends javax.swing.JInternalFrame {
         _password = new javax.swing.JCheckBox();
         _logout = new javax.swing.JCheckBox();
         _users = new javax.swing.JCheckBox();
+        _invalid_login = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         cmbBrow = new javax.swing.JComboBox<>();
         btnRun = new javax.swing.JButton();
@@ -353,7 +354,7 @@ public class DL extends javax.swing.JInternalFrame {
         _filters.setRequestFocusEnabled(false);
 
         _4.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _4.setText("op4");
+        _4.setText("opt4 - not used ");
         _4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _4.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _4.setRequestFocusEnabled(false);
@@ -376,6 +377,12 @@ public class DL extends javax.swing.JInternalFrame {
         _users.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _users.setRequestFocusEnabled(false);
 
+        _invalid_login.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _invalid_login.setText("Invalid Login");
+        _invalid_login.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _invalid_login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _invalid_login.setRequestFocusEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -387,7 +394,8 @@ public class DL extends javax.swing.JInternalFrame {
                     .addComponent(_metric_data, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_filters, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_invalid_login, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(61, 61, 61)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -404,7 +412,9 @@ public class DL extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                .addGap(2, 2, 2)
+                .addComponent(_invalid_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(_metrics_selection, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -562,7 +572,6 @@ public class DL extends javax.swing.JInternalFrame {
         }
         d2LastRow = DV2.getSelectedRow();   
         DATE_RANGE = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 0));
-        CatID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
     }//GEN-LAST:event_DV2MouseClicked
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
         jPanel3.addComponentListener(new ComponentListener() {
@@ -763,10 +772,14 @@ public class DL extends javax.swing.JInternalFrame {
     private void Execute() throws InterruptedException{
         Instant dw_start = Instant.now();
         if (_login.isSelected()) { 
-            SCOPE += "Login";
-            EX += " - " + "\t" + " === Login " + "\t" + " ===== " + "\t" + " == Login Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_login.run();
-            EX += " - " + "\t" + " === ^ Login " + "\t" + " ===== " + "\t" + " == ^ Login End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            if(_invalid_login.isSelected()){
+                 SCOPE += "Valid/Invalid Login";                  
+            } else{
+                SCOPE += "Login";                
+            }
+            EX += " - " + "\t" + " === Login(s) " + "\t" + " ===== " + "\t" + " == Login(s) Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            DL_login.run(_invalid_login.isSelected());
+            EX += " - " + "\t" + " === ^ Login(s) " + "\t" + " ===== " + "\t" + " == ^ Login(s) End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
         if (_metrics_selection.isSelected()) { 
@@ -791,10 +804,10 @@ public class DL extends javax.swing.JInternalFrame {
             Thread.sleep(1500);
         }        
         if (_users.isSelected()) { 
-            SCOPE += ", Users";  
-            EX += " - " + "\t" + " === Users - Data Access" + "\t" + " ===== " + "\t" + " == Users Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_users.run(DVU); // ====== pass QA Data from GUI DVU
-            EX += " - " + "\t" + " === ^ Users - Data Access" + "\t" + " ===== " + "\t" + " == ^ Users End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            SCOPE += ", QA Users";  
+            EX += " - " + "\t" + " === QA Users - Data Access" + "\t" + " Data Validation " + "\t" + " == Users Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            DL_qa_user.run(DVU); // ====== pass QA Data from GUI DVU
+            EX += " - " + "\t" + " === ^ QA Users - Data Access" + "\t" + " Data Validation " + "\t" + " == ^ Users End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }        
 
@@ -813,8 +826,7 @@ public class DL extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }  
-        
-                    
+                     
         if(_f > 0) {
             txtLog.append("=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1034,15 +1046,12 @@ public class DL extends javax.swing.JInternalFrame {
     }
     private void LOAD_ENV(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
-            BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
             url = "https://staging.member.distilr.io";
         } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
-            BaseAPI = "https://api.compassdigital.org/dev";
             env = "DE";
             url = "https://dev.member.distilr.io";
         } else{
-            BaseAPI = "https://api.compassdigital.org/v1";
             env = "PR";
             url = "https://mpower.distilr.io/";
         }
@@ -1347,7 +1356,8 @@ public class DL extends javax.swing.JInternalFrame {
 
                 if(l.contains("txtAdmin_ID: ")) txtAdmin_ID.setText(value);
                 if(l.contains("txtAdmin_PW: ")) txtAdmin_PW.setText(value);
-
+                if(l.contains("_invalid_login: ")) _invalid_login.setSelected(Boolean.parseBoolean(value));
+                
                 if(l.contains("nWaitElement: ")) nWaitElement.setValue(Double.parseDouble(value));
                 if(l.contains("nShowPage: ")) nShowPage.setValue(Double.parseDouble(value)); 
                 if(l.contains("nWaitLoad: ")) nWaitLoad.setValue(Double.parseDouble(value)); 
@@ -1395,7 +1405,7 @@ public class DL extends javax.swing.JInternalFrame {
             
             C += "txtAdmin_ID: " + txtAdmin_ID.getText() + "\r\n";
             C += "txtAdmin_PW: " + txtAdmin_PW.getText()  + "\r\n";
-            
+            C += "_invalid_login: " + _invalid_login.isSelected() + "\r\n";            
             C += "nShowPage: " + nShowPage.getValue() + "\r\n";
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
             C += "nWaitLoad: " + nWaitLoad.getValue()+ "\r\n";
@@ -1406,6 +1416,7 @@ public class DL extends javax.swing.JInternalFrame {
             C += "_4: " + _4.isSelected() + "\r\n";
             C += "_password: " + _password.isSelected() + "\r\n";         
             C += "_all_data: " + _all_data.isSelected() + "\r\n";
+ 
             C += "_logout: " + _logout.isSelected() + "\r\n";          
             C += "_users: " + _users.isSelected() + "\r\n"; 
         } catch (Exception ex)  {
@@ -1604,8 +1615,9 @@ public class DL extends javax.swing.JInternalFrame {
     public static String url = "";
     public static String env = "";
     private static SwingWorker BW2; 
-    private static String Toast_Msg = "";   
-    public static String metricRef=null;
+    private static String Toast_Msg = "";  
+    
+    public static String metricRef = null;
     public static int count;
     public static int var1;
     public static int var2;
@@ -1638,10 +1650,7 @@ public class DL extends javax.swing.JInternalFrame {
     private static String METRIC = "";
     private static String MetricID = "";
     private static String DATE_RANGE = "";
-    private static String CatID = "";
-    private static String BaseAPI = "";
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
@@ -1651,6 +1660,7 @@ public class DL extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _all_data;
     private javax.swing.JCheckBox _filters;
     private javax.swing.JCheckBox _headless;
+    private javax.swing.JCheckBox _invalid_login;
     private javax.swing.JCheckBox _login;
     private javax.swing.JCheckBox _logout;
     private javax.swing.JCheckBox _metric_data;
