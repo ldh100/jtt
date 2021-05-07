@@ -996,6 +996,10 @@ public class AP3_menu_manager {
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent","no_jira"); 
                 if (FAIL) { return;}            
 
+            clone_menuset();
+            // ======== Delete Last Added Cloned Menu and Original Menu Set.
+            for(int k=0;k<2;k++)
+            {
             // ======== Delete Last Added
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira"); 
                 if (FAIL) { return;} 
@@ -1010,12 +1014,18 @@ public class AP3_menu_manager {
             Thread.sleep(500);                
             _t++; Thread.sleep((long) sleep); TWeb.List_L0("Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", "no_jira");             
                 if (FAIL) { return;} 
+                T_Index = -1;
                 for (int i = 0; i < L0.size(); i++) {
                     _t++; TWeb.Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent", "no_jira");            
                     if (FAIL) { return;}
+                    if(t.contains("Added "+ New_ID))
+                    { T_Index=i; }
                 }              
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L2("Find Added Menu Set - dots", L0.get(L0.size() - 1), "tagName", "button", "no_jira"); 
-                if (FAIL) { return;}
+           _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L2("Find Added Menu Set - dots", L0.get(T_Index), "tagName", "button", "no_jira"); 
+            if (FAIL) { return;} 
+                
+//            _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L2("Find Added Menu Set - dots", L0.get(L0.size() - 1), "tagName", "button", "no_jira"); 
+//                if (FAIL) { return;}
             Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Added Menu Set 'dots' Click", L2.get(1), "no_jira");
                 if (FAIL) { return;}   
@@ -1045,6 +1055,9 @@ public class AP3_menu_manager {
             Thread.sleep(500);
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]", "no_jira"); 
                 if (FAIL) { return;} 
+             _t++; Thread.sleep((long) sleep); TWeb.Refresh("Refresh the page", "no_jira");
+             Thread.sleep(1000);
+            }
             _t++; Thread.sleep((long) sleep); TWeb.List_L2("Published Menus ID Count", "css", "[menu-id]", "no_jira");        
             _t++; Thread.sleep((long) sleep); TWeb.List_L0("Re-Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", "no_jira");             
                 if (FAIL) { return;}    
@@ -2089,5 +2102,91 @@ public class AP3_menu_manager {
         EX += " - " + "\t" + " === Manipulate Global Modifiers" + "\t" + " ===== " + "\t" + " == Manipulate Global Modifiers End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
         }
-    }   
+    }
+    
+    public static void clone_menuset() throws InterruptedException
+       {
+         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira"); 
+                if (FAIL) { return;} 
+            Thread.sleep(500);  
+            _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+                if (FAIL) { return;}   
+            Thread.sleep(500);
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent","no_jira"); 
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); TWeb.Move_to_Element_By_Path("Added Menu Set Hover", "xpath", "//*[contains(text(), 'Added " + New_ID + "')]", "no_jira"); 
+                if (FAIL) { return;} 
+            Thread.sleep(500);                
+            _t++; Thread.sleep((long) sleep); TWeb.List_L0("Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", "no_jira");             
+                if (FAIL) { return;} 
+                for (int i = 0; i < L0.size(); i++) {
+                    _t++; TWeb.Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent", "no_jira");            
+                    if (FAIL) { return;}
+                }              
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L2("Find Added Menu Set - dots", L0.get(L0.size() - 1), "tagName", "button", "no_jira"); 
+                if (FAIL) { return;}
+            Thread.sleep(500);
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Added Menu Set 'dots' Click", L2.get(1), "no_jira");
+                if (FAIL) { return;}   
+            Thread.sleep(1000);
+            _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira"); 
+                    if (FAIL) { return;}                
+            _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find Menu Edit Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", "no_jira");
+                if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Menu Edit Options list Count", e1,"xpath", ".//div[@class='v-list__tile__title']", "no_jira");                                     
+                if (FAIL) { return;}
+                T_Index = -1;
+                for (int i = 0; i < L1.size(); i++) {
+                    _t++; TWeb.Element_Text("Menu Edit Option (index " + i + ")", L1.get(i),  "no_jira");             
+                    if(t.contains("Duplicate")){ T_Index = i; }
+                }
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Click 'Duplicate'", L1.get(T_Index), "no_jira");
+                if (FAIL) { return;} 
+            Thread.sleep(500);                
+            _t++; TWeb.Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]", "no_jira");        
+                if (FAIL) { return;}  
+            Thread.sleep(500);
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", "no_jira"); 
+                if (FAIL) { return;} 
+            Thread.sleep(500);
+            _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+                if (FAIL) { return;} 
+            Thread.sleep(500);
+            _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]", "no_jira"); 
+                if (FAIL) { return;}
+                
+           //Verify API if ID's are unique    
+          EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API Start==" + "\t" + "-" +"\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+         String[] Menu_ID = new String[2];
+         int lmenu_cnt = 0;
+         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Global menu API", BaseAPI + "/menu/company/"+CompanyID, true,"no_jira" );
+         JSONObject json = new JSONObject(API_Response_Body);
+         JSONArray menus = json.getJSONArray("menus");
+         
+         for(int k=0;k<menus.length();k++)
+         {
+           JSONObject menu = menus.getJSONObject(k);
+           if(menu.getJSONObject("label").getString("en").contains("Added "+New_ID))
+           {
+                 Menu_ID[lmenu_cnt] = menu.getString("id");
+                 lmenu_cnt++;       
+           }
+         }
+         if(lmenu_cnt==2)
+         {
+           if(Menu_ID[0].equals(Menu_ID[1]))
+           {//Print Fail the ids are not unique
+               _t++;
+               _f++; EX += _t + "\t" + "Same ids for cloned Menu set" + "\t" + Menu_ID[0] + "\t" + Menu_ID[1] + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+           }
+           else
+           {//Print Pass the ids are unique
+               _t++;
+               _p++; EX += _t + "\t" + "Unique ids for cloned Menu set" + "\t" + Menu_ID[0] + "\t" + Menu_ID[1] + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+           }
+           
+         }  
+          EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API END==" + "\t" + "-" +"\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+       }//End of clone menu set
+    
 }
