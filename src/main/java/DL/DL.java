@@ -191,6 +191,7 @@ public class DL extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane3.setViewportView(DV1);
+        DV1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 188, 428, 108));
 
@@ -233,7 +234,7 @@ public class DL extends javax.swing.JInternalFrame {
 
         lblSITES4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES4.setText("Admin ID:");
+        lblSITES4.setText("User ID:");
         lblSITES4.setToolTipText("");
         lblSITES4.setAlignmentX(0.5F);
         getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 380, 120, -1));
@@ -244,7 +245,7 @@ public class DL extends javax.swing.JInternalFrame {
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES6.setText("Admin Password");
+        lblSITES6.setText("User Password");
         lblSITES6.setAlignmentX(0.5F);
         getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(664, 380, -1, -1));
 
@@ -349,6 +350,7 @@ public class DL extends javax.swing.JInternalFrame {
 
         _filters.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _filters.setText("Metric(s) Filters");
+        _filters.setEnabled(false);
         _filters.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _filters.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _filters.setRequestFocusEnabled(false);
@@ -557,9 +559,8 @@ public class DL extends javax.swing.JInternalFrame {
         if (wdLastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
            return;
         }
-
         METRIC = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
-        MetricID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
+        GROUP = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 1));
         wdLastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
@@ -805,10 +806,22 @@ public class DL extends javax.swing.JInternalFrame {
         }        
         if (_users.isSelected()) { 
             SCOPE += ", QA Users";  
-            EX += " - " + "\t" + " === QA Users - Data Access" + "\t" + " Data Validation " + "\t" + " == Users Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_qa_user.run(DVU); // ====== pass QA Data from GUI DVU
-            EX += " - " + "\t" + " === ^ QA Users - Data Access" + "\t" + " Data Validation " + "\t" + " == ^ Users End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            Thread.sleep(1500);
+            for (int i = DVU.getRowCount(); i < 4; i--) { // i < DVU.getRowCount();
+                EX += " - " + "\t" + " === QA Users - Data Access" + "\t" + "User " + (i+1) + " Data Validation" + "\t" + " == Users Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+   
+                DL_qa_user.run(  // ====== pass QA User Data from GUI DVU
+                        DVU.getValueAt(i, 0).toString(), 
+                        DVU.getValueAt(i, 1).toString(), 
+                        DVU.getValueAt(i, 2).toString(), 
+                        DVU.getValueAt(i, 3).toString(), 
+                        DVU.getValueAt(i, 4).toString(), 
+                        DVU.getValueAt(i, 5).toString(),
+                        DVU.getValueAt(i, 6).toString() 
+                ); 
+                EX += " - " + "\t" + " === ^ QA Users - Data Access" + "\t" + "User " + (i+1) + " Data Validation" + "\t" + " == ^ User End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                Thread.sleep(1500);               
+            }
+
         }        
 
         // ============================== Last Blocks
@@ -1207,7 +1220,7 @@ public class DL extends javax.swing.JInternalFrame {
         sw1.start();        
      
         try{
-            String[] DateColumnsName = {"Metric Nnme", "Group"}; 
+            String[] DateColumnsName = {"Metric Name", "Group"}; 
             DefaultTableModel DateModel = new DefaultTableModel();
             DateModel.setColumnIdentifiers(DateColumnsName);
             DV1.setModel(DateModel);
@@ -1647,9 +1660,9 @@ public class DL extends javax.swing.JInternalFrame {
     public static String DL_UserID = "";    
     public static String DL_UserPW = "";
 
-    private static String METRIC = "";
-    private static String MetricID = "";
-    private static String DATE_RANGE = "";
+    public static String METRIC = "";
+    public static String GROUP = "";
+    public static String DATE_RANGE = "";
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
