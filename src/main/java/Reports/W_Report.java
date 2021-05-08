@@ -146,7 +146,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         });
 
         btnExcel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnExcel.setText("Excel Report");
+        btnExcel.setText("View Report");
         btnExcel.setPreferredSize(new java.awt.Dimension(113, 25));
         btnExcel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
