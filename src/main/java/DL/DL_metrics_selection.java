@@ -66,11 +66,15 @@ public class DL_metrics_selection {
                         if (FAIL) { return;} 
                     _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L2("Loaded Metric Card '-body1' Count", L1.get(L1.size() - 1), "xpath", ".//p[contains(@class,'-body1')]", "no_jira");             
                         if (FAIL) { return;} 
-                    if(L2.size() > 0) {   
-                        _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Last loaded Metric Card " + (j+1) + " name", L2.get(0), "no_jira");                             
-                        _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Last loaded Metric Card " + (j+1) + " Value 1", L2.get(1), "no_jira");                          
-                        _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Last loaded Metric Card " + (j+1) + " Value 2", L2.get(2), "no_jira");        
-                    }
+                        if(L2.size() > 0) {    
+                            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Loaded Metric Card name", L2.get(0), "no_jira"); 
+                            if(L2.size() > 1) {  
+                                _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Loaded Metric Card Value 1", L2.get(1), "no_jira");
+                                if(L2.size() > 2) {     
+                                    _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Loaded Metric Card Value 2", L2.get(2), "no_jira");        
+                                }   
+                            }
+                        }
                 }else{
                     _t++; TWeb.Element_Child_Attribute("Metrics " + (j + 1) + " checkbox disabled", L0.get(j),"tagName", "span", "aria-disabled", "no_jira");
                         if (FAIL) { return;}                        

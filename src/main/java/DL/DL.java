@@ -803,28 +803,7 @@ public class DL extends javax.swing.JInternalFrame {
             DL_filters.run();
             EX += " - " + "\t" + " === ^ Metrics Filters" + "\t" + " ===== " + "\t" + " == ^ Metrics Filters End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
-        }        
-        if (_users.isSelected()) { 
-            SCOPE += ", QA Users";  
-            for (int i = DVU.getRowCount(); i < 4; i--) { // i < DVU.getRowCount();
-                EX += " - " + "\t" + " === QA Users - Data Access" + "\t" + "User " + (i+1) + " Data Validation" + "\t" + " == Users Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-   
-                DL_qa_user.run(  // ====== pass QA User Data from GUI DVU
-                        DVU.getValueAt(i, 0).toString(), 
-                        DVU.getValueAt(i, 1).toString(), 
-                        DVU.getValueAt(i, 2).toString(), 
-                        DVU.getValueAt(i, 3).toString(), 
-                        DVU.getValueAt(i, 4).toString(), 
-                        DVU.getValueAt(i, 5).toString(),
-                        DVU.getValueAt(i, 6).toString() 
-                ); 
-                EX += " - " + "\t" + " === ^ QA Users - Data Access" + "\t" + "User " + (i+1) + " Data Validation" + "\t" + " == ^ User End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Thread.sleep(1500);               
-            }
-
-        }        
-
-        // ============================== Last Blocks
+        }    
         if (_logout.isSelected()) { 
             SCOPE += ", LogOut";
             EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -838,7 +817,37 @@ public class DL extends javax.swing.JInternalFrame {
             DL_password.run();
             EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
-        }  
+        }          
+        
+        if (_users.isSelected()) { 
+            SCOPE += ", QA Users"; 
+
+//            int Attempts = 20;
+//            for (int i = DVU.getRowCount() - 1; i > DVU.getRowCount() - Attempts; i--) { 
+            for (int i = 0; i < DVU.getRowCount(); i++) { 
+//            for (int i = 20; i < 60; i++) { 
+                if(DL_UserID.startsWith(DVU.getValueAt(i, 0).toString()) && DL_UserID.endsWith("Bad Login")){
+                    continue;
+                }
+                EX += " - " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                EX += " - " + "\t" + " === QA Users - Data Validation" + "\t" + "User: " + DVU.getValueAt(i, 0).toString() + "\t" + " == Users " + " - Test# "+ (i+1) + " Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+   
+                DL_qa_user.run(  // ====== pass Browser and QA User Data from GUI DVU
+                    cmbBrow.getSelectedItem().toString() ,   
+                    DVU.getValueAt(i, 0).toString(), 
+                    DVU.getValueAt(i, 1).toString(), 
+                    DVU.getValueAt(i, 2).toString(), 
+                    DVU.getValueAt(i, 3).toString(), 
+                    DVU.getValueAt(i, 4).toString(), 
+                    DVU.getValueAt(i, 5).toString(),
+                    DVU.getValueAt(i, 6).toString() 
+                ); 
+                EX += " - " + "\t" + " === ^ QA Users - Data Validation" + "\t" + "User: " + DVU.getValueAt(i, 0).toString() + "\t" + " == ^ User " + " - Test# "+ (i+1) + " End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                Thread.sleep(1500);               
+            }
+
+        }        
+
                      
         if(_f > 0) {
             txtLog.append("=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)" + "\r\n");
@@ -1273,7 +1282,7 @@ public class DL extends javax.swing.JInternalFrame {
             }
         } 
         wdLastRow = DV1.getSelectedRow();        
-        lblDates.setText("Metrics (" + DV1.getRowCount() + " found/defined)");
+        lblMetrics.setText("Metrics (" + DV1.getRowCount() + " found/defined)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetDates() {
@@ -1300,8 +1309,9 @@ public class DL extends javax.swing.JInternalFrame {
             sorter.setSortable(0, false);         
             DateModel.addRow(new Object[]{"Last 4 weeks"});       
             DateModel.addRow(new Object[]{"Last 12 weeks"}); 
-            DateModel.addRow(new Object[]{"Calendar YTD"});  
+            DateModel.addRow(new Object[]{"Last 52 weeks"}); 
             DateModel.addRow(new Object[]{"Compass YTD"});    
+            DateModel.addRow(new Object[]{"Foodbuy YTD"});
             DV2.setModel(DateModel);    
             DV2.setDefaultEditor(Object.class, null);
             DV2.getColumnModel().getColumn(0).setPreferredWidth(240);

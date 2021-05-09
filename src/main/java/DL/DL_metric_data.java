@@ -1,7 +1,6 @@
 package DL;
 import A.TWeb;
 import static A.A.*;
-import static DL.DL.*;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -19,13 +18,13 @@ public class DL_metric_data {
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Filters' label", "Filters", true,"no_jira"); 
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Configure Filters' button label", " Configure Filters", true,"no_jira");        
         _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find Date selection container", "xpath", "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3']", "no_jira"); 
-         if (!FAIL) {         
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Date Items count", e1,"xpath", ".//div[contains(@class, 'MuiGrid-root MuiGrid-item')]", "no_jira");             
-                 if (FAIL) { return;}                              
-            for (int i = 0; i < L1.size(); i++) {
-                _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Date Items", L1.get(i), "no_jira");                          
-            }
-        }  
+            if (!FAIL) {         
+                _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Date Items count", e1,"xpath", ".//div[contains(@class, 'MuiGrid-root MuiGrid-item')]", "no_jira");             
+                     if (FAIL) { return;}                              
+                for (int i = 0; i < L1.size(); i++) {
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Date Items", L1.get(i), "no_jira");                          
+                }
+            }  
         _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", "no_jira");
             if (FAIL) { return;} // [1]/span > [2]/span after 'Apply' buttorn added ([1]/span)
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "(//span[@class='MuiButton-label'])[2]/span", "no_jira");
@@ -34,18 +33,24 @@ public class DL_metric_data {
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'arrow_right' > Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[2]/span", "no_jira"); 
             if (FAIL) { return;}  
         }
+        _t++; Thread.sleep((long) sleep); TWeb.List_L0("Get User Metrics Count", "xpath", "//div[@class='MuiListItemIcon-root']", "no_jira");             
+            if (FAIL) { return;}            
+            if (L0.isEmpty()) { 
+                return;  // No User Metrics Found FATAL ===================================================
+            } 
         _t++; Thread.sleep((long) sleep); TWeb.List_L0("Get Selected Metrics Count", "xpath", "//span[contains(@class, ' Mui-checked ')]", "no_jira");             
             if (FAIL) { return;}            
-        for (int j = 0; j < L0.size(); j++) {        
-            _t++; TWeb.Element_Click("Un-Check Selected Metrics " + (j + 1), L0.get(j), "no_jira");
-        }        
+            for (int j = 0; j < L0.size(); j++) {        
+                _t++; TWeb.Element_Click("Un-Check Selected Metrics " + (j + 1), L0.get(j), "no_jira");
+            }        
         _t++; TWeb.Element_By_Path_Click("Select Metric " + DL.METRIC, "xpath", "//span[text()='" + DL.METRIC + "']", "no_jira");
             if (FAIL) { return;}   
         _t++; Thread.sleep((long) sleep); TWeb.Scroll_to_WebElement("Scroll to 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", "no_jira");
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", "no_jira");
             if (FAIL) { return;} 
-            _t++; TWeb.Element_By_Path_Click("Select Date Range " + DL.DATE_RANGE, "xpath", "//span[text()='" + DL.DATE_RANGE + "']", "no_jira");
+            
+        _t++; TWeb.Element_By_Path_Click("Select Date Range " + DL.DATE_RANGE, "xpath", "//span[text()='" + DL.DATE_RANGE + "']", "no_jira");
             if (FAIL) { return;}           
             
         _t++; Thread.sleep((long) sleep); TWeb.List_L1("Loaded Metrics Cards Count", "xpath", "//div[contains(@class, 'MuiPaper-root MuiCard-root')]", "no_jira");             
@@ -53,11 +58,16 @@ public class DL_metric_data {
         _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L2("Loaded Metric Card '-body1' Count", L1.get(L1.size() - 1), "xpath", ".//p[contains(@class,'-body1')]", "no_jira");             
             if (FAIL) { return;} 
         if(L2.size() > 0) {    
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Loaded Metric Card name", L2.get(0), "no_jira");                             
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Loaded Metric Card Value 1", L2.get(1), "no_jira");                          
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Loaded Metric Card Value 2", L2.get(2), "no_jira");        
-            // Continue ...... Maybe not necessary
-        }     
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Loaded Metric Card name", L2.get(0), "no_jira"); 
+            if(L2.size() > 1) {  
+                _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Loaded Metric Card Value 1", L2.get(1), "no_jira");
+                if(L2.size() > 2) {     
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Loaded Metric Card Value 2", L2.get(2), "no_jira");        
+                }   
+            }
+        }
+
+    
         
         
         // Continue ...... Maybe not necessary

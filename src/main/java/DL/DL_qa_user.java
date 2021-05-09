@@ -3,16 +3,38 @@ package DL;
 import A.TWeb;
 import static A.A.*;
 import static DL.DL.*;
-import javax.swing.JTable;/**
+/**
  *
  * @author Oleg.Spozito
  */
 public class DL_qa_user {
-    private static String tbl_userName;
-    public static void run(String User_ID, String Metric, String Period, String Location_Filters, String Item_Filters, String Kpi, String Source) throws InterruptedException { 
+    private static String TrasLate_Date_Range(String DR){
+       switch (DR) {
+            case "L4":
+                return "Last 4 weeks";
+            case "L12":
+                return "Last 12 weeks";
+            case "L52":
+                return "Last 52 weeks";                       
+            case "CYTD":
+                return "Calendar YTD"; 
+            case "FYTD":
+               return "Foodbuy YTD"; 
+            default:
+               break;   
+        }
+        return "Not Found";
+    }
+    public static void run(String BROWSER, String User_ID, String Metric, String Period, String Location_Filters, String Item_Filters, String Kpi, String Source) throws InterruptedException { 
         if(!User_ID.equals(DL_UserID)){
-            _t++; Thread.sleep((long) sleep); TWeb.Clear_Cookies("no_jira");          
-            _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to", url, "no_jira");             
+            DL_UserID = User_ID; // Use last QA User from S3 for the next in the loop
+
+            _t++; Thread.sleep((long) sleep); TWeb.Clear_Cookies_Restart_Driver(BROWSER,"no_jira");  
+                if (FAIL) { return;}   
+            _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to", url, "no_jira"); 
+            Thread.sleep(500);
+            _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Wait for 'USERNAME' input", "id", "username", "no_jira");
+                if (FAIL) { return;}            
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'USERNAME' input", "id", "username", "no_jira"); 
                 if (FAIL) { return;}
             _t++; TWeb.Element_By_Path_Text_Enter("Enter Valid User Name", "id", "username", User_ID, false, "no_jira"); 
@@ -23,24 +45,89 @@ public class DL_qa_user {
                 if (FAIL) { return;}
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Sign In'", "name", "login", "no_jira"); 
                 if (FAIL) { return;} 
+            Thread.sleep(500);  
+            _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+                if (FAIL) { return;}  
             Thread.sleep(500);
-            DL_UserID = User_ID; // Use last QA User from S3 for the next in the loop
+            _t++; Thread.sleep((long) sleep); TWeb.Page_URL("Login page URL", "no_jira");                     
+            _t++; Thread.sleep((long) sleep); TWeb.List_L0("Check for Login Messages (count)", "xpath", "//*[@class = 'message' or @class = 'note note-danger']", "no_jira");             
+                if (FAIL) { return;}
+            if(!L0.isEmpty()){
+                _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Message text", L0.get(0), "no_jira");
+                if(t.contains("locked")){   // This account has been locked. 
+                    EX += _t + "\t" + "Check for Login Messages" + "\t" + DL_UserID + "\t" + "This account has been locked." + "\t" + "FAIL" + "\t" + " - " +
+                    "\t" + " - " + "\t" + " - " + "\t" +  "no_jira" + "\r\n";
+                    F += _t + " > " + DL_UserID + " > " + "Invalid credentials." + "\r\n";
+                    DL_UserID = User_ID + " Bad Login";
+                    return;
+                } else {                      // ...will expire
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Reset Password Now' button", "name", "resetPasswordNow", "no_jira");
+                        if (FAIL) { return;} 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Reset Later' button", "name", "continue", "no_jira");
+                        if (FAIL) { return;}            
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Click 'Reset Later'", e1, "no_jira");
+                        if (FAIL) { return;}
+                    Thread.sleep(500);  
+                    _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+                        if (FAIL) { return;}  
+                    Thread.sleep(500); 
+                }
+            } 
+            _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Invalid credentials'", "Invalid credentials.", false,"no_jira"); 
+            if (t.toLowerCase().contains("invalid")) { 
+                EX += _t + "\t" + "Find 'Invalid credentials'" + "\t" + DL_UserID + "\t" + "Invalid credentials." + "\t" + "FAIL" + "\t" + " - " +
+                "\t" + " - " + "\t" + " - " + "\t" +  "no_jira" + "\r\n";
+                F += _t + " > " + DL_UserID + " > " + "Invalid credentials." + "\r\n";
+                DL_UserID = User_ID + " Bad Login"; 
+                return;  // Login Failed FATAL for this User ===================================================
+            }
         }
+
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", "no_jira");
+            if (FAIL) { return;} // [1]/span > [2]/span after 'Apply' buttorn added ([1]/span)
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "(//span[@class='MuiButton-label'])[2]/span", "no_jira");
+            if (FAIL) { return;}
+        if(t.equalsIgnoreCase("arrow_right")) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'arrow_right' > Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[2]/span", "no_jira"); 
+            if (FAIL) { return;}  
+        }
+        _t++; Thread.sleep((long) sleep); TWeb.List_L0("Get User Metrics Count", "xpath", "//div[@class='MuiListItemIcon-root']", "no_jira");             
+            if (FAIL) { return;}            
+            if (L0.isEmpty()) { 
+                EX += _t + "\t" + "Get User Metrics Count" + "\t" + DL_UserID + "\t" + "No Metrics" + "\t" + "FAIL" + "\t" + "L0.isEmpty()" +
+                "\t" + " - " + "\t" + " - " + "\t" +  "no_jira" + "\r\n";
+                DL_UserID = User_ID + " Bad Login";
+                return;  // No User Metrics Found FATAL ===================================================
+            }         
         
+        _t++; Thread.sleep((long) sleep); TWeb.List_L0("Get Selected Metrics Count", "xpath", "//span[contains(@class, ' Mui-checked ')]", "no_jira");             
+            if (FAIL) { return;}            
+            for (int j = 0; j < L0.size(); j++) {        
+                _t++; TWeb.Element_Click("Un-Check Selected Metrics " + (j + 1), L0.get(j), "no_jira");
+            }        
+        // Find / Select dMetric
+         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find Metric '" + Metric + "'", Metric, true,"no_jira"); 
+            if (t.equals("Not Found")) { 
+                return;  // Metric Not Found FATAL for this Test# ===================================================
+            } 
+        _t++; TWeb.Element_By_Path_Click("Select Metric '" + Metric + "'", "xpath", "//span[text()='" + Metric + "']", "no_jira");
+            if (FAIL) { return;}   
+        _t++; Thread.sleep((long) sleep); TWeb.Scroll_to_WebElement("Scroll to 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", "no_jira");
+            if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", "no_jira");
+            if (FAIL) { return;}        
+        
+
+
+             
+        // Check dTPeriod - select one from current row
+        _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find Date selection container", "xpath", "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3']", "no_jira");         
+        _t++; TWeb.Element_By_Path_Click("Select Date Range " + Period, "xpath", "//span[text()='" + TrasLate_Date_Range(Period) + "']", "no_jira");
+            if (FAIL) { return;} 
+
+
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Filters' label", "Filters", true,"no_jira"); 
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Configure Filters' button label", " Configure Filters", true,"no_jira");        
-        _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find Date selection container", "xpath", "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3']", "no_jira"); 
-         if (!FAIL) {         
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Date Items count", e1,"xpath", ".//div[contains(@class, 'MuiGrid-root MuiGrid-item')]", "no_jira");             
-                 if (FAIL) { return;}                              
-            for (int i = 0; i < L1.size(); i++) {
-                _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Date Items", L1.get(i), "no_jira");                          
-            }
-        }        
-            
-        // Check dTPeriod - if selected by default - do nothing, if not - select one from current row
-
-        // Select dMetrics
 
         for (String L : Location_Filters.split("\r\n")) {// Location dIFilter(s) loop 
             if(L.contains(":")){
@@ -59,7 +146,27 @@ public class DL_qa_user {
                 //
             }                
         }
-        
+        Thread.sleep(500);  
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for Selected Metric load...", "xpath", "//div[@role='progressbar']", "no_jira"); 
+            if (FAIL) { return;}  
+        Thread.sleep(500); 
+        _t++; Thread.sleep((long) sleep); TWeb.List_L1("Loaded Metrics Cards Count", "xpath", "//div[contains(@class, 'MuiPaper-root MuiCard-root')]", "no_jira");             
+            if (FAIL) { return;} 
+            if (L1.isEmpty()) { 
+                return;  // Loaded Metric Not Found FATAL for this Test# ===================================================
+            }  
+            
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L2("Loaded Metric Card '-body1' Count", L1.get(L1.size() - 1), "xpath", ".//p[contains(@class,'-body1')]", "no_jira");             
+            if (FAIL) { return;} 
+            if(L2.size() > 0) {    
+                _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Loaded Metric Card name", L2.get(0), "no_jira"); 
+                if(L2.size() > 1) {  
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Loaded Metric Card Value 1", L2.get(1), "no_jira");
+                    if(L2.size() > 2) {     
+                        _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Loaded Metric Card Value 2", L2.get(2), "no_jira");        
+                    }   
+                }
+            }        
         // Verify dValue from file against FrontEnd   
     }   
 } 

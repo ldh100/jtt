@@ -57,21 +57,24 @@ public class DL_login {
             if (FAIL) { return;}  
         Thread.sleep(500);
         _t++; Thread.sleep((long) sleep); TWeb.Page_URL("Login page URL", "no_jira");                     
-        _t++; Thread.sleep((long) sleep); TWeb.List_L0("Check for Login Messages (count)", "xpath", "//h2[@class='message']", "no_jira");             
+        _t++; Thread.sleep((long) sleep); TWeb.List_L0("Check for Login Messages (count)", "xpath", "//*[@class = 'message' or @class = 'note note-danger']", "no_jira");             
             if (FAIL) { return;}
         if(!L0.isEmpty()){
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Message text", L0.get(0), "no_jira"); 
-                if (FAIL) { return;} 
-            _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Reset Password Now' button", "name", "resetPasswordNow", "no_jira");
-                if (FAIL) { return;} 
-            _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Reset Later' button", "name", "continue", "no_jira");
-                if (FAIL) { return;}            
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Click 'Reset Later'", e1, "no_jira");
-                if (FAIL) { return;}
-            Thread.sleep(500);  
-            _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
-                if (FAIL) { return;}  
-            Thread.sleep(500);     
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Message text", L0.get(0), "no_jira");
+            if(t.contains("locked")){   // This account has been locked.               
+                return;
+            } else {                      // ...will expire
+                _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Reset Password Now' button", "name", "resetPasswordNow", "no_jira");
+                    if (FAIL) { return;} 
+                _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Reset Later' button", "name", "continue", "no_jira");
+                    if (FAIL) { return;}            
+                _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Click 'Reset Later'", e1, "no_jira");
+                    if (FAIL) { return;}
+                Thread.sleep(500);  
+                _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+                    if (FAIL) { return;}  
+                Thread.sleep(500); 
+            }
         }
     }
 }
