@@ -33,7 +33,7 @@ public class DL_qa_user {
                 if (FAIL) { return;}   
             _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to", url, "no_jira"); 
             Thread.sleep(500);
-            _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Wait for 'USERNAME' input", "id", "username", "no_jira");
+            _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for 'USERNAME' input", "id", "username", "no_jira");
                 if (FAIL) { return;}            
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'USERNAME' input", "id", "username", "no_jira"); 
                 if (FAIL) { return;}
@@ -57,7 +57,7 @@ public class DL_qa_user {
                 if(t.contains("locked")){   // This account has been locked. 
                     EX += _t + "\t" + "Check for Login Messages" + "\t" + DL_UserID + "\t" + "This account has been locked." + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + " - " + "\t" + " - " + "\t" +  "no_jira" + "\r\n";
-                    F += _t + " > " + DL_UserID + " > " + "Invalid credentials." + "\r\n";
+                    F += _t + " > " + DL_UserID + " > " + "This account has been locked." + "\r\n";
                     DL_UserID = User_ID + " Bad Login";
                     return;
                 } else {                      // ...will expire
@@ -94,7 +94,7 @@ public class DL_qa_user {
         _t++; Thread.sleep((long) sleep); TWeb.List_L0("Get User Metrics Count", "xpath", "//div[@class='MuiListItemIcon-root']", "no_jira");             
             if (FAIL) { return;}            
             if (L0.isEmpty()) { 
-                EX += _t + "\t" + "Get User Metrics Count" + "\t" + DL_UserID + "\t" + "No Metrics" + "\t" + "FAIL" + "\t" + "L0.isEmpty()" +
+                EX += _t + "\t" + "User Metrics > " + "\t" + DL_UserID + "\t" + "No Metrics" + "\t" + "FAIL" + "\t" + "L0.isEmpty()" +
                 "\t" + " - " + "\t" + " - " + "\t" +  "no_jira" + "\r\n";
                 DL_UserID = User_ID + " Bad Login";
                 return;  // No User Metrics Found FATAL ===================================================
@@ -117,9 +117,7 @@ public class DL_qa_user {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", "no_jira");
             if (FAIL) { return;}        
         
-
-
-             
+ 
         // Check dTPeriod - select one from current row
         _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find Date selection container", "xpath", "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3']", "no_jira");         
         _t++; TWeb.Element_By_Path_Click("Select Date Range " + Period, "xpath", "//span[text()='" + TrasLate_Date_Range(Period) + "']", "no_jira");

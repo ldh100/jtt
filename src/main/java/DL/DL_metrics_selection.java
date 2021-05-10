@@ -17,7 +17,7 @@ public class DL_metrics_selection {
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}  
         Thread.sleep(500);
-          _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Wait for Side bar arrow", "xpath", "//*[text()='Filters']", "no_jira");
+          _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "//*[text()='Filters']", "no_jira");
             if (FAIL) { return;}  
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Filters' label", "Filters", true,"no_jira"); 
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Configure Filters' button label", " Configure Filters", true,"no_jira");        
@@ -29,7 +29,7 @@ public class DL_metrics_selection {
                 _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Date Items", L1.get(i), "no_jira");                          
             }
         }  
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", "no_jira");
             if (FAIL) { return;} // [1]/span > [2]/span after 'Apply' buttorn added ([1]/span)
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "(//span[@class='MuiButton-label'])[2]/span", "no_jira");
             if (FAIL) { return;}
@@ -87,7 +87,7 @@ public class DL_metrics_selection {
             if (FAIL) { return;}                             
         Thread.sleep(500);
         _t++; Thread.sleep((long) sleep); TWeb.Page_URL("Foodbuy Login page URL", "no_jira");    
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", "no_jira");
             if (FAIL) { return;} // [1]/span > [2]/span after 'Apply' buttorn added ([1]/span)
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "(//span[@class='MuiButton-label'])[2]/span", "no_jira");
             if (FAIL) { return;}
