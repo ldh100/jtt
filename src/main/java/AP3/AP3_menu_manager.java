@@ -983,6 +983,10 @@ public class AP3_menu_manager {
             // ======= Add Modifier End ^^^         
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'APPLY Changes'", "xpath", "//*[contains(text(), 'Apply Changes')]", "no_jira"); 
                 if (FAIL) { return;}   
+                
+           //Cloning item 
+             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Item clone", "xpath", "//div[@class='menutable']//tbody//tr[1]//td[9]//i[contains(@class,'copy')]", "no_jira"); 
+             if (FAIL) {return;}
 
             _t++; TWeb.Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]", "no_jira");        
                 if (FAIL) { return;} 
@@ -2183,6 +2187,37 @@ public class AP3_menu_manager {
            {//Print Pass the ids are unique
                _t++;
                _p++; EX += _t + "\t" + "Unique ids for cloned Menu set" + "\t" + Menu_ID[0] + "\t" + Menu_ID[1] + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+           }
+           
+         }  
+         
+         //Verify if menu items are unique
+         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call menu API", BaseAPI + "/menu/"+Menu_ID[0], true,"no_jira" );
+         json = new JSONObject(API_Response_Body);
+         
+         JSONArray items = json.getJSONArray("groups").getJSONObject(0).getJSONArray("items");  
+         String[] Item_ID = new String[2];
+         int Item_ID_cnt = 0;
+         for(int k=0;k<items.length();k++)
+         {
+           JSONObject item = items.getJSONObject(k);
+           if(item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("Item "+New_ID))
+           {
+             Item_ID[Item_ID_cnt] = item.getString("id");
+             Item_ID_cnt++;
+           }
+         }
+         if(Item_ID_cnt==2)
+         {
+           if(Item_ID[0].equals(Item_ID[1]))
+           {//Print Fail the ids are not unique
+               _t++;
+               _f++; EX += _t + "\t" + "Same ids for cloned items" + "\t" + Item_ID[0] + "\t" + Item_ID[1] + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+           }
+           else
+           {//Print Pass the ids are unique
+               _t++;
+               _p++; EX += _t + "\t" + "Unique ids for cloned Items" + "\t" + Item_ID[0] + "\t" + Item_ID[1] + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
            }
            
          }  
