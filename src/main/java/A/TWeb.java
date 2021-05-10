@@ -226,6 +226,24 @@ public class TWeb {
         } 
         sw1.reset();
     }
+    public static void Clear_Cookies(String JIRA ){
+       sw1.start();
+       FAIL = false;
+        try {
+            d1.manage().deleteAllCookies();
+            _p++;
+            EX += _t + "\t" + "Clear Cookies" + "\t" + "Current page" + "\t" + "d1.manage().deleteAllCookies()" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + "Move to page Top" + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += _t + " > " + err + "\r\n";
+        } 
+        sw1.reset();
+    }
+
     public static void To_Bottom(String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
@@ -3171,8 +3189,7 @@ public class TWeb {
            
            r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
             _p++; 
-           
-            EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Waiting for Element to be visible" + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME  + "\t" + PATH + "\t" + "Wait:  " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -3183,7 +3200,7 @@ public class TWeb {
         }
         sw1.reset();
     }
-    public static void Open_NewIncognitoWindow(String NAME, String BY, String PATH, String JIRA){
+    public static void Open_NewIncognitoWindow(String NAME, String JIRA){
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3191,26 +3208,17 @@ public class TWeb {
  
         FAIL = false;
         try {         
-               d1.close();
-               
-                       ChromeOptions chrome_op = new ChromeOptions();
-                     
-                        chrome_op.addArguments("incognito");
-                        chrome_op.addArguments("--disable-infobars");
-                        chrome_op.addArguments("--start-maximized");
- 
-                 
-                        chrome_op.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-                        d1 = new ChromeDriver(chrome_op);
-                        d1.manage().window().maximize();
+            d1.close();
+            ChromeOptions chrome_op = new ChromeOptions();                    
+            chrome_op.addArguments("incognito"); // ==================
+            chrome_op.addArguments("--disable-infobars");
+            chrome_op.addArguments("--start-maximized");
+            chrome_op.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+            d1 = new ChromeDriver(chrome_op);
+            d1.manage().window().maximize();
 
-               Thread.sleep(7000);
- 
-  
-
-
-
-               _p++;
+            Thread.sleep(7000);
+            _p++;
             EX += _t + "\t" + NAME + "\t" + "Opening the Browser in Incognito Mode" + "\t" + "Incognito Mode" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
@@ -3232,51 +3240,47 @@ public class TWeb {
         try {
             switch (BY) {
                 case "xpath":
-                      if(d1.findElements(By.xpath(PATH)).size()!=0)
-                               e=   d1.findElement(By.xpath(PATH));
+                    if(!d1.findElements(By.xpath(PATH)).isEmpty())
+                        e = d1.findElement(By.xpath(PATH));
                     break;
                 case "css":
-                      if (d1.findElements(By.cssSelector(PATH)).size()!=0)
-                               e=  d1.findElement(By.cssSelector(PATH));
+                    if (!d1.findElements(By.cssSelector(PATH)).isEmpty())
+                        e = d1.findElement(By.cssSelector(PATH));
                     break;
                 case "className":
-                      if(d1.findElements(By.className(PATH)).size()!=0)
-                               e=  d1.findElement(By.className(PATH));
+                    if(!d1.findElements(By.className(PATH)).isEmpty())
+                        e = d1.findElement(By.className(PATH));
                     break;
                 case "id":
-                      if(d1.findElements(By.id(PATH)).size()!=0)
-                               e=  d1.findElement(By.id(PATH));
+                    if(!d1.findElements(By.id(PATH)).isEmpty())
+                        e = d1.findElement(By.id(PATH));
                     break;
                 case "tagName":
-                      if(d1.findElements(By.tagName(PATH)).size()!=0)
-                              e=   d1.findElement(By.tagName(PATH));
+                    if(!d1.findElements(By.tagName(PATH)).isEmpty())
+                        e = d1.findElement(By.tagName(PATH));
                     break;
                 case "name":
-                      if(d1.findElements(By.name(PATH)).size()!=0)
-                               e=  d1.findElement(By.name(PATH));
+                    if(!d1.findElements(By.name(PATH)).isEmpty())
+                        e = d1.findElement(By.name(PATH));
                     break;
                  case "linkText":
-                      if(d1.findElements(By.linkText(PATH)).size()!=0)
-                               e=  d1.findElement(By.linkText(PATH));
+                    if(!d1.findElements(By.linkText(PATH)).isEmpty())
+                        e = d1.findElement(By.linkText(PATH));
                     break;
                 case "partialLinkText":
-                      if(d1.findElements(By.partialLinkText(PATH)).size()!=0)
-                              e=   d1.findElement(By.partialLinkText(PATH));
+                    if(!d1.findElements(By.partialLinkText(PATH)).isEmpty())
+                        e = d1.findElement(By.partialLinkText(PATH));
                     break;
                 default:
                     break;
             }
-            _p++;
-            System.out.println(e.isSelected());
-            if(e.isSelected())
-           {
-               
-            Actions action = new Actions(d1);
-            action.moveToElement(e).click().perform();
-           }
+            if(e.isSelected()) {              
+                Actions action = new Actions(d1);
+                action.moveToElement(e).click().perform();
+            }
+            _p++; 
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "KPI is Displayed" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
- 
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
@@ -3322,11 +3326,10 @@ public class TWeb {
                 default:
                     break;
             }
-           if(!e.isSelected())
-           {
-            Actions action = new Actions(d1);
-            action.moveToElement(e).click().perform();
-           }
+            if(!e.isSelected()){
+                Actions action = new Actions(d1);
+                action.moveToElement(e).click().perform();
+            }
             _p++; 
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -3347,15 +3350,15 @@ public class TWeb {
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             }
             else if((Integer.parseInt(actual)-2)<=Integer.parseInt(Expected)) {
-                 _p++;
-                 EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Expected Matches "+Expected+"  with Actual Value "+actual+"" + "\t" + "PASS" + "\t" + " - " +
-                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                _p++;
+                EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Expected Matches "+Expected+"  with Actual Value "+actual+"" + "\t" + "PASS" + "\t" + " - " +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             }else {
-                 _f++; FAIL = true; err ="Failed to match Expected value "+Expected+"  with Actual value - "+actual+"";
-                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-                 EX += _t + "\t" + NAME + "\t"  + "L0" + "\t" + "FAIL" + "\t" + err +
-                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                 F += _t + " > " + err + "\r\n";
+                _f++; FAIL = true; err ="Failed to match Expected value "+Expected+"  with Actual value - "+actual+"";
+                if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+                EX += _t + "\t" + NAME + "\t"  + "L0" + "\t" + "FAIL" + "\t" + err +
+                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                F += _t + " > " + err + "\r\n";
             }
         } catch(Exception ex){
             _f++; FAIL = true; err ="Failed due to exception " + Expected + "  with Actual value - "+actual+"";
@@ -3363,7 +3366,6 @@ public class TWeb {
             EX += _t + "\t" + NAME + "\t"  + "L0" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += _t + " > " + err + "\r\n";
-
         }
     }
 }

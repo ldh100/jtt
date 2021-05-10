@@ -78,9 +78,9 @@ public class A extends javax.swing.JFrame {
         MenuStation = new javax.swing.JMenu();
         Menu_OR = new javax.swing.JMenu();
         Menu_API = new javax.swing.JMenu();
-        MenuReports = new javax.swing.JMenu();
         Menu_JIRA = new javax.swing.JMenu();
         Menu_JOBS = new javax.swing.JMenu();
+        MenuReports = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JTT");
@@ -106,7 +106,7 @@ public class A extends javax.swing.JFrame {
         );
         DesktopPaneLayout.setVerticalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 697, Short.MAX_VALUE)
+            .addGap(0, 699, Short.MAX_VALUE)
         );
 
         Menu_Tools.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -420,17 +420,6 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_API);
 
-        MenuReports.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        MenuReports.setText("Reports");
-        MenuReports.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        MenuReports.setName("FW"); // NOI18N
-        MenuReports.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MenuReportsMouseClicked(evt);
-            }
-        });
-        MenuBar.add(MenuReports);
-
         Menu_JIRA.setBorder(null);
         Menu_JIRA.setText("JIRA");
         Menu_JIRA.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -453,6 +442,17 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_JOBS);
 
+        MenuReports.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        MenuReports.setText("Reports");
+        MenuReports.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        MenuReports.setName("FW"); // NOI18N
+        MenuReports.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuReportsMouseClicked(evt);
+            }
+        });
+        MenuBar.add(MenuReports);
+
         setJMenuBar(MenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -464,7 +464,7 @@ public class A extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(DesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
+                .addComponent(DesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
