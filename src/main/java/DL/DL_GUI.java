@@ -1776,7 +1776,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         
         if(!_Slack && !Slack_Channel.equals("N/A")){
             Report(false);
-            String MSG = "Distiller_" + env + " Automation report - " + Report_Date +
+            String MSG = "Distiller_" + env + " Excel Automation report - " + Report_Date +
                     "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
                     "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +
                     "Scope: " + SCOPE + "\r\n" +
