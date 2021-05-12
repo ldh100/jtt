@@ -18,7 +18,7 @@ public class AP3_bulk_apply {
     TO RUN THIS TEST IN JTT, SELECT (APPLICATION: Boost, SITE: Sites Bulk Apply)
     */
     public static void run() throws InterruptedException {
-        if (!env.equals("PR")) {
+        
         _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/"+SectorID+"/company/"+CompanyID, "no_jira");
         if (FAIL) { return;}
         Thread.sleep(1000);
@@ -51,6 +51,7 @@ public class AP3_bulk_apply {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(1000);
+        if(!env.equals("PR")) {
         //API call https://api.compassdigital.org/staging/menu/4Wyo37NMD5tpzMvEJMl2FNdZNmL3NzFywWP52ZP8CKQPWlLQy2H4BdpXwaKDc9aq8mO?nocache=true&extended=true&show_unlinked=false
         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Sides / API )", BaseAPI + "/menu/4Wyo37NMD5tpzMvEJMl2FNdZNmL3NzFywWP52ZP8CKQPWlLQy2H4BdpXwaKDc9aq8mO?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
         JSONObject json = new JSONObject(API_Response_Body);
@@ -76,6 +77,33 @@ public class AP3_bulk_apply {
                 _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
         }
+        } else {
+            //api call https://api.compassdigital.org/v1/menu/J4qRgLpO1NH83rk0d5QRiKkM0djlkNSvoQJkY2N6Ce2MyJQq1PSroW9GqqM8cMgzBPq?nocache=true&extended=true&show_unlinked=false
+        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Sides / API )", BaseAPI + "/menu/J4qRgLpO1NH83rk0d5QRiKkM0djlkNSvoQJkY2N6Ce2MyJQq1PSroW9GqqM8cMgzBPq?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
+        JSONObject json = new JSONObject(API_Response_Body);
+        JSONArray groups = new JSONArray();
+        groups = json.getJSONArray("groups");
+        JSONObject json2 = groups.getJSONObject(0);
+        JSONArray items = new JSONArray();
+        items = json2.getJSONArray("items");
+        for (int i = 0; i < items.length(); i++) {
+            JSONObject item = items.getJSONObject(i);           
+            if (item.getJSONObject("is").getBoolean("hidden")) {
+                _t++;
+                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"hidden\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            } else {
+                _t++;
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"hidden\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            }
+            if (item.getJSONObject("is").getBoolean("out_of_stock")) {
+                _t++;
+                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            } else {
+                _t++;
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            }
+        }    
+        }
         //reset list visibility and in/out of stock checkbox indicator
         String inStock = getAttributeOfElementByXpath("((//table[contains(@class,'v-table')]//tbody/tr)[1]//td[8])//input", "aria-checked");
         String visible = getAttributeOfElementByXpath("((//table[contains(@class,'v-table')]//tbody/tr)[1]//td[4])//i", "class");
@@ -90,13 +118,14 @@ public class AP3_bulk_apply {
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_InVisibility("Wait for Spinner", "xpath", "//circle[@class='v-progress-circular__overlay']", "no_jira");
             if (FAIL) { return;}
         }
+        if (!env.equals("PR")) {
         //API call https://api.compassdigital.org/staging/menu/4Wyo37NMD5tpzMvEJMl2FNdZNmL3NzFywWP52ZP8CKQPWlLQy2H4BdpXwaKDc9aq8mO?nocache=true
         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Sides / API )", BaseAPI + "/menu/4Wyo37NMD5tpzMvEJMl2FNdZNmL3NzFywWP52ZP8CKQPWlLQy2H4BdpXwaKDc9aq8mO?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
-        json = new JSONObject(API_Response_Body);
-        groups = new JSONArray();
+        JSONObject json = new JSONObject(API_Response_Body);
+        JSONArray groups = new JSONArray();
         groups = json.getJSONArray("groups");
-        json2 = groups.getJSONObject(0);
-        items = new JSONArray();
+       JSONObject json2 = groups.getJSONObject(0);
+        JSONArray items = new JSONArray();
         items = json2.getJSONArray("items");
         for (int i = 0; i < items.length(); i++) {
             JSONObject item = items.getJSONObject(i);           
@@ -114,6 +143,33 @@ public class AP3_bulk_apply {
                 _t++;
                 _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
+        }
+        } else {
+                //api call https://api.compassdigital.org/v1/menu/J4qRgLpO1NH83rk0d5QRiKkM0djlkNSvoQJkY2N6Ce2MyJQq1PSroW9GqqM8cMgzBPq?nocache=true&extended=true&show_unlinked=false
+        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Sides / API )", BaseAPI + "/menu/J4qRgLpO1NH83rk0d5QRiKkM0djlkNSvoQJkY2N6Ce2MyJQq1PSroW9GqqM8cMgzBPq?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
+        JSONObject json = new JSONObject(API_Response_Body);
+        JSONArray groups = new JSONArray();
+        groups = json.getJSONArray("groups");
+        JSONObject json2 = groups.getJSONObject(0);
+        JSONArray items = new JSONArray();
+        items = json2.getJSONArray("items");
+        for (int i = 0; i < items.length(); i++) {
+            JSONObject item = items.getJSONObject(i);           
+            if (item.getJSONObject("is").getBoolean("hidden")) {
+                _t++;
+                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"hidden\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            } else {
+                _t++;
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"hidden\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            }
+            if (item.getJSONObject("is").getBoolean("out_of_stock")) {
+                _t++;
+                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            } else {
+                _t++;
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            }
+        }
         }
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         
@@ -246,102 +302,203 @@ public class AP3_bulk_apply {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Close Selection", "xpath", "//div[contains(text(),'Close Selection')]", "no_jira");
         if (FAIL) { return;}
         if (secondModVisibility.contains("mdi-eye-off")) {
-            //API call https://api.compassdigital.org/staging/menu/G2WGRdwMygFp93RRYqawiKJX08vL15UoAokKwmaZcQO1lWXPAWTprNA8wWL0sZRlp8m?nocache=true
-            _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/G2WGRdwMygFp93RRYqawiKJX08vL15UoAokKwmaZcQO1lWXPAWTprNA8wWL0sZRlp8m?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
-            json = new JSONObject(API_Response_Body);
-            groups = new JSONArray();
-            groups = json.getJSONArray("groups");
-            json2 = groups.getJSONObject(0);
-            items = new JSONArray();
-            items = json2.getJSONArray("items");
-            for (int i = 0; i < items.length(); i++) {
-                JSONObject item = items.getJSONObject(i);           
-                JSONArray options = new JSONArray();
-                options = item.getJSONArray("options");
-                JSONObject option = options.getJSONObject(0);
-                JSONArray option_items = new JSONArray();
-                option_items = option.getJSONArray("items");
-                if (option_items.length() == 3) {
-                    _t++;
-                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                } else {
-                    _t++;
-                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            if (!env.equals("PR")) {
+                //API call https://api.compassdigital.org/staging/menu/G2WGRdwMygFp93RRYqawiKJX08vL15UoAokKwmaZcQO1lWXPAWTprNA8wWL0sZRlp8m?nocache=true
+                _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/G2WGRdwMygFp93RRYqawiKJX08vL15UoAokKwmaZcQO1lWXPAWTprNA8wWL0sZRlp8m?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
+                JSONObject json = new JSONObject(API_Response_Body);
+                JSONArray groups = new JSONArray();
+                groups = json.getJSONArray("groups");
+                JSONObject json2 = groups.getJSONObject(0);
+                JSONArray items = new JSONArray();
+                items = json2.getJSONArray("items");
+                for (int i = 0; i < items.length(); i++) {
+                    JSONObject item = items.getJSONObject(i);           
+                    JSONArray options = new JSONArray();
+                    options = item.getJSONArray("options");
+                    JSONObject option = options.getJSONObject(0);
+                    JSONArray option_items = new JSONArray();
+                    option_items = option.getJSONArray("items");
+                    if (option_items.length() == 3) {
+                        _t++;
+                        _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    } else {
+                        _t++;
+                        _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    }
                 }
+                _t++; TWeb.Element_By_Path_Click("Add Visibility of Second Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i[contains(@class,'mdi-eye')]", "no_jira");
+                if (FAIL) { return;}
+                Thread.sleep(500);
+                _t++; TWeb.Element_By_Path_Click("Add Visibility of Second Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i[contains(@class,'mdi-eye')]", "no_jira");
+                if (FAIL) { return;}
+                Thread.sleep(500);
+                _t++; TWeb.Element_By_Path_Click("Click > Save Mod Changes", "xpath", "//div[text()='Save Modifiers Changes']", "no_jira");
+                if (FAIL) { return;}
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", "no_jira");
+                if (FAIL) { return;}
+                Thread.sleep(500);
+                _t++; Thread.sleep((long) sleep); TWeb.List_L1("List of Items", "xpath", "//table[contains(@class,'v-table')]//tbody/tr", "no_jira");
+                if (FAIL) { return;}
+                for (int i = 0; i < L1.size(); i++) {
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on item "+ String.valueOf(i+1), "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]", "no_jira");
+                    if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Modifier", "xpath", "//span[contains(text(),'Pita Options Modifier')]", "no_jira");
+                    if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check Modifier 'Extra Beef' is visible", "xpath", "(//div[contains(@class,'layout modifier')])[2]//i[contains(@class,'mdi-eye ')]", "no_jira");
+                    if (FAIL) { return;} 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
+                    if (FAIL) { return;}
+                }
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", "no_jira");
+                if (FAIL) { return;}
+                Thread.sleep(500);
+            } else {
+                //API call https://api.compassdigital.org/v1/menu/KBmKZYDqO9f73a8NzloaIXey7861mOi9XqrWeG6khN1Njo5gGPS1ljP8E82MSv5Z149?nocache=true&extended=true&show_unlinked=false
+                _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/KBmKZYDqO9f73a8NzloaIXey7861mOi9XqrWeG6khN1Njo5gGPS1ljP8E82MSv5Z149?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
+                JSONObject json = new JSONObject(API_Response_Body);
+                JSONArray groups = new JSONArray();
+                groups = json.getJSONArray("groups");
+                JSONObject json2 = groups.getJSONObject(0);
+                JSONArray items = new JSONArray();
+                items = json2.getJSONArray("items");
+                for (int i = 0; i < items.length(); i++) {
+                    JSONObject item = items.getJSONObject(i);           
+                    JSONArray options = new JSONArray();
+                    options = item.getJSONArray("options");
+                    JSONObject option = options.getJSONObject(0);
+                    JSONArray option_items = new JSONArray();
+                    option_items = option.getJSONArray("items");
+                    if (option_items.length() == 3) {
+                        _t++;
+                        _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    } else {
+                        _t++;
+                        _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    }
+                }
+                _t++; TWeb.Element_By_Path_Click("Add Visibility of Second Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i[contains(@class,'mdi-eye')]", "no_jira");
+                if (FAIL) { return;}
+                Thread.sleep(500);
+                _t++; TWeb.Element_By_Path_Click("Add Visibility of Second Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i[contains(@class,'mdi-eye')]", "no_jira");
+                if (FAIL) { return;}
+                Thread.sleep(500);
+                _t++; TWeb.Element_By_Path_Click("Click > Save Mod Changes", "xpath", "//div[text()='Save Modifiers Changes']", "no_jira");
+                if (FAIL) { return;}
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", "no_jira");
+                if (FAIL) { return;}
+                Thread.sleep(500);
+                _t++; Thread.sleep((long) sleep); TWeb.List_L1("List of Items", "xpath", "//table[contains(@class,'v-table')]//tbody/tr", "no_jira");
+                if (FAIL) { return;}
+                for (int i = 0; i < L1.size(); i++) {
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on item "+ String.valueOf(i+1), "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]", "no_jira");
+                    if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Modifier", "xpath", "//span[contains(text(),'Pita Options Modifier')]", "no_jira");
+                    if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check Modifier 'Extra Beef' is visible", "xpath", "(//div[contains(@class,'layout modifier')])[2]//i[contains(@class,'mdi-eye ')]", "no_jira");
+                    if (FAIL) { return;} 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
+                    if (FAIL) { return;}
+                }
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", "no_jira");
+                if (FAIL) { return;}
+                Thread.sleep(500);
             }
-            _t++; TWeb.Element_By_Path_Click("Add Visibility of Second Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i[contains(@class,'mdi-eye')]", "no_jira");
-            if (FAIL) { return;}
-            Thread.sleep(500);
-            _t++; TWeb.Element_By_Path_Click("Add Visibility of Second Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i[contains(@class,'mdi-eye')]", "no_jira");
-            if (FAIL) { return;}
-            Thread.sleep(500);
-            _t++; TWeb.Element_By_Path_Click("Click > Save Mod Changes", "xpath", "//div[text()='Save Modifiers Changes']", "no_jira");
-            if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", "no_jira");
-            if (FAIL) { return;}
-            Thread.sleep(500);
-            _t++; Thread.sleep((long) sleep); TWeb.List_L1("List of Items", "xpath", "//table[contains(@class,'v-table')]//tbody/tr", "no_jira");
-            if (FAIL) { return;}
-            for (int i = 0; i < L1.size(); i++) {
-                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on item "+ String.valueOf(i+1), "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]", "no_jira");
-                if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Modifier", "xpath", "//span[contains(text(),'Pita Options Modifier')]", "no_jira");
-                if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check Modifier 'Extra Beef' is visible", "xpath", "(//div[contains(@class,'layout modifier')])[2]//i[contains(@class,'mdi-eye ')]", "no_jira");
-                if (FAIL) { return;} 
-                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
-                if (FAIL) { return;}
-            }
-            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", "no_jira");
-            if (FAIL) { return;}
-            Thread.sleep(500);
         } else {
-            //API call https://api.compassdigital.org/staging/menu/G2WGRdwMygFp93RRYqawiKJX08vL15UoAokKwmaZcQO1lWXPAWTprNA8wWL0sZRlp8m?nocache=true
-            _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/G2WGRdwMygFp93RRYqawiKJX08vL15UoAokKwmaZcQO1lWXPAWTprNA8wWL0sZRlp8m?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
-            json = new JSONObject(API_Response_Body);
-            groups = new JSONArray();
-            groups = json.getJSONArray("groups");
-            json2 = groups.getJSONObject(0);
-            items = new JSONArray();
-            items = json2.getJSONArray("items");
-            for (int i = 0; i < items.length(); i++) {
-                JSONObject item = items.getJSONObject(i);           
-                JSONArray options = new JSONArray();
-                options = item.getJSONArray("options");
-                JSONObject option = options.getJSONObject(0);
-                JSONArray option_items = new JSONArray();
-                option_items = option.getJSONArray("items");
-                if (option_items.length() == 4) {
-                    _t++;
-                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                } else {
-                    _t++;
-                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            if (!env.equals("PR")) {
+                //API call https://api.compassdigital.org/staging/menu/G2WGRdwMygFp93RRYqawiKJX08vL15UoAokKwmaZcQO1lWXPAWTprNA8wWL0sZRlp8m?nocache=true
+                _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/G2WGRdwMygFp93RRYqawiKJX08vL15UoAokKwmaZcQO1lWXPAWTprNA8wWL0sZRlp8m?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
+                JSONObject json = new JSONObject(API_Response_Body);
+                JSONArray groups = new JSONArray();
+                groups = json.getJSONArray("groups");
+                JSONObject json2 = groups.getJSONObject(0);
+                JSONArray items = new JSONArray();
+                items = json2.getJSONArray("items");
+                for (int i = 0; i < items.length(); i++) {
+                    JSONObject item = items.getJSONObject(i);           
+                    JSONArray options = new JSONArray();
+                    options = item.getJSONArray("options");
+                    JSONObject option = options.getJSONObject(0);
+                    JSONArray option_items = new JSONArray();
+                    option_items = option.getJSONArray("items");
+                    if (option_items.length() == 4) {
+                        _t++;
+                        _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    } else {
+                        _t++;
+                        _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    }
                 }
-            }
-            _t++; TWeb.Element_By_Path_Click("Remove Visibility of Second Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i[contains(@class,'mdi-eye')]", "no_jira");
-            if (FAIL) { return;}
-            Thread.sleep(500);
-            _t++; TWeb.Element_By_Path_Click("Click > Save Mod Changes", "xpath", "//div[text()='Save Modifiers Changes']", "no_jira");
-            if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", "no_jira");
-            if (FAIL) { return;}
-            Thread.sleep(500);
-            _t++; Thread.sleep((long) sleep); TWeb.List_L1("List of Items", "xpath", "//table[contains(@class,'v-table')]//tbody/tr", "no_jira");
-            if (FAIL) { return;}
-            for (int i = 0; i < L1.size(); i++) {
-                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on item "+ String.valueOf(i+1), "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]", "no_jira");
+                _t++; TWeb.Element_By_Path_Click("Remove Visibility of Second Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i[contains(@class,'mdi-eye')]", "no_jira");
                 if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Modifier", "xpath", "//span[contains(text(),'Pita Options Modifier')]", "no_jira");
+                Thread.sleep(500);
+                _t++; TWeb.Element_By_Path_Click("Click > Save Mod Changes", "xpath", "//div[text()='Save Modifiers Changes']", "no_jira");
                 if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check Modifier 'Extra Beef' is NOT visible", "xpath", "(//div[contains(@class,'layout modifier')])[2]//i[contains(@class,'mdi-eye-off')]", "no_jira");
-                if (FAIL) { return;} 
-                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", "no_jira");
                 if (FAIL) { return;}
-            }
-            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", "no_jira");
-            if (FAIL) { return;}
-            Thread.sleep(500);
+                Thread.sleep(500);
+                _t++; Thread.sleep((long) sleep); TWeb.List_L1("List of Items", "xpath", "//table[contains(@class,'v-table')]//tbody/tr", "no_jira");
+                if (FAIL) { return;}
+                for (int i = 0; i < L1.size(); i++) {
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on item "+ String.valueOf(i+1), "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]", "no_jira");
+                    if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Modifier", "xpath", "//span[contains(text(),'Pita Options Modifier')]", "no_jira");
+                    if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check Modifier 'Extra Beef' is NOT visible", "xpath", "(//div[contains(@class,'layout modifier')])[2]//i[contains(@class,'mdi-eye-off')]", "no_jira");
+                    if (FAIL) { return;} 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
+                    if (FAIL) { return;}
+                }
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", "no_jira");
+                if (FAIL) { return;}
+                Thread.sleep(500);
+            } else {
+                //API call https://api.compassdigital.org/v1/menu/KBmKZYDqO9f73a8NzloaIXey7861mOi9XqrWeG6khN1Njo5gGPS1ljP8E82MSv5Z149?nocache=true&extended=true&show_unlinked=false
+                _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/KBmKZYDqO9f73a8NzloaIXey7861mOi9XqrWeG6khN1Njo5gGPS1ljP8E82MSv5Z149?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
+                JSONObject json = new JSONObject(API_Response_Body);
+                JSONArray groups = new JSONArray();
+                groups = json.getJSONArray("groups");
+                JSONObject json2 = groups.getJSONObject(0);
+                JSONArray items = new JSONArray();
+                items = json2.getJSONArray("items");
+                for (int i = 0; i < items.length(); i++) {
+                    JSONObject item = items.getJSONObject(i);           
+                    JSONArray options = new JSONArray();
+                    options = item.getJSONArray("options");
+                    JSONObject option = options.getJSONObject(0);
+                    JSONArray option_items = new JSONArray();
+                    option_items = option.getJSONArray("items");
+                    if (option_items.length() == 4) {
+                        _t++;
+                        _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    } else {
+                        _t++;
+                        _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    }
+                }
+                _t++; TWeb.Element_By_Path_Click("Remove Visibility of Second Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i[contains(@class,'mdi-eye')]", "no_jira");
+                if (FAIL) { return;}
+                Thread.sleep(500);
+                _t++; TWeb.Element_By_Path_Click("Click > Save Mod Changes", "xpath", "//div[text()='Save Modifiers Changes']", "no_jira");
+                if (FAIL) { return;}
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", "no_jira");
+                if (FAIL) { return;}
+                Thread.sleep(500);
+                _t++; Thread.sleep((long) sleep); TWeb.List_L1("List of Items", "xpath", "//table[contains(@class,'v-table')]//tbody/tr", "no_jira");
+                if (FAIL) { return;}
+                for (int i = 0; i < L1.size(); i++) {
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on item "+ String.valueOf(i+1), "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]", "no_jira");
+                    if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Modifier", "xpath", "//span[contains(text(),'Pita Options Modifier')]", "no_jira");
+                    if (FAIL) { return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check Modifier 'Extra Beef' is NOT visible", "xpath", "(//div[contains(@class,'layout modifier')])[2]//i[contains(@class,'mdi-eye-off')]", "no_jira");
+                    if (FAIL) { return;} 
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
+                    if (FAIL) { return;}
+                }
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", "no_jira");
+                if (FAIL) { return;}
+                Thread.sleep(500);
+            }            
         }             
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         
@@ -378,11 +535,11 @@ public class AP3_bulk_apply {
         String FIP = getAttributeOfElementByXpath("(//table[contains(@class,'v-table')]//tbody/tr)[1]//td[5]", "innerHTML");
         //API call https://api.compassdigital.org/staging/menu/lpmAZO8Ga6Umjaz85ELNI93MkmW1B7TezGGJ1r5MiX0ZDgJMdySk7ZYM9lwqI2a4Zy0?nocache=true&extended=true&show_unlinked=false
         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/lpmAZO8Ga6Umjaz85ELNI93MkmW1B7TezGGJ1r5MiX0ZDgJMdySk7ZYM9lwqI2a4Zy0?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
-        json = new JSONObject(API_Response_Body);
-        groups = new JSONArray();
+        JSONObject json = new JSONObject(API_Response_Body);
+        JSONArray groups = new JSONArray();
         groups = json.getJSONArray("groups");
-        json2 = groups.getJSONObject(0);
-        items = new JSONArray();
+        JSONObject json2 = groups.getJSONObject(0);
+        JSONArray items = new JSONArray();
         items = json2.getJSONArray("items");
         for (int i = 0; i < items.length(); i++) {
             JSONObject item = items.getJSONObject(i);           
@@ -548,7 +705,8 @@ public class AP3_bulk_apply {
         Thread.sleep(500);
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         
-        //API call https://api.compassdigital.org/staging/menu/lpmAZO8Ga6Umjaz85ELNI93MkmW1B7TezGGJ1r5MiX0ZDgJMdySk7ZYM9lwqI2a4Zy0?nocache=true&extended=true&show_unlinked=false
+        if (!env.equals("PR")) {
+            //API call https://api.compassdigital.org/staging/menu/lpmAZO8Ga6Umjaz85ELNI93MkmW1B7TezGGJ1r5MiX0ZDgJMdySk7ZYM9lwqI2a4Zy0?nocache=true&extended=true&show_unlinked=false
         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/lpmAZO8Ga6Umjaz85ELNI93MkmW1B7TezGGJ1r5MiX0ZDgJMdySk7ZYM9lwqI2a4Zy0?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
         json = new JSONObject(API_Response_Body);
         groups = new JSONArray();
@@ -584,7 +742,47 @@ public class AP3_bulk_apply {
                 _t++;
                 _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
-        }     
+        }
+        } else {
+            //API call https://api.compassdigital.org/v1/menu/6evoORLMl7t6rGDWkZKgTrz9jeY8Y4Ce7ZX1oW2WS82kwdaNJLi892Zg27M2Uzq5YkJ?extended=true&show_unlinked=false
+        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/6evoORLMl7t6rGDWkZKgTrz9jeY8Y4Ce7ZX1oW2WS82kwdaNJLi892Zg27M2Uzq5YkJ?extended=true&show_unlinked=false", true,"no_jira");
+        json = new JSONObject(API_Response_Body);
+        groups = new JSONArray();
+        groups = json.getJSONArray("groups");
+        json2 = groups.getJSONObject(0);
+        items = new JSONArray();
+        items = json2.getJSONArray("items");
+        for (int i = 0; i < items.length(); i++) {
+            JSONObject item = items.getJSONObject(i);           
+            if (item.getJSONObject("is").getBoolean("disabled")) {
+                _t++;
+                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"disabled\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            } else {
+                _t++;
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"disabled\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            }
+            if (item.isNull("plu")) {
+                _t++;
+                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "has No PLU" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            } else {
+                _t++;
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "has No PLU" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            }
+            JSONArray options = new JSONArray();
+            options = item.getJSONArray("options");
+            JSONObject option = options.getJSONObject(0);
+            JSONArray option_items = new JSONArray();
+            option_items = option.getJSONArray("items");
+            if (option_items.length() == 3) {
+                _t++;
+                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            } else {
+                _t++;
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            }
+        }
+        }
+             
         // <editor-fold defaultstate="collapsed" desc="Check Local Menu After Global Changes">  
         EX += " - " + "\t" + " === " + "\t" + " ===== Check Local Menu After Global Changes" + "\t" + " == Check Local Menu After Global Changes >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); TWeb.Open_Switch_to_2nd_Tab("Navigate to Local Menu", url + "#/menu/sector/"+SectorID+"/company/"+CompanyID+"/brands/"+BrandID, "no_jira");
@@ -707,8 +905,7 @@ public class AP3_bulk_apply {
         //publish changes in Global Menu
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", "no_jira");
         if (FAIL) { return;}
-        Thread.sleep(500);
-    }
+        Thread.sleep(500);   
     }
     // Comparison eg. LIST1.size() ==/>/< LIST2.size()
     private static void compareListSizes(String NAME, List<WebElement> LIST1, List<WebElement> LIST2, Boolean comparison, String JIRA) {
