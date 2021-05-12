@@ -747,11 +747,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         _mobile_view.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _mobile_view.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _mobile_view.setRequestFocusEnabled(false);
-        _mobile_view.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                _mobile_viewActionPerformed(evt);
-            }
-        });
         jPanel3.add(_mobile_view, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 8, 160, 16));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 384, 416, 116));
@@ -1041,11 +1036,9 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         }
         GUI_Run_Manual();
     }//GEN-LAST:event_btnRunMouseClicked
+    // </editor-fold>  
 
-    private void _mobile_viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__mobile_viewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event__mobile_viewActionPerformed
-
+    // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">      
     private void Load_Form(){     
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         Load = true;
@@ -1083,9 +1076,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         CONFIG = false;  
         this.setTitle("C360 Automation Manager");
     }
-    // </editor-fold>  
-
-    // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">      
     private void GUI_Load_Env(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
@@ -1907,7 +1897,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
-  
+        _Slack = _slack.isSelected();
         try{    
             run_start = Instant.now();
             Current_Log_Update(true, "= Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
@@ -1939,8 +1929,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             ALL_DATA = _all_data.isSelected();
             DH_Menu_ID = txtDH_Id.getText(); // like NWEJgN87Q3Sw46JaQ1Q, length > 18
             
-            SCOPE = "";
-            r_type = "manual";
+
             
             if(DV1.getRowCount() > 0) {
                 SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
@@ -1956,7 +1945,8 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             //GroupID = "";
             //CompanyID = "";
 
-            if(_headless.isSelected()) {
+            SCOPE = "";
+            r_type = "manual";            if(_headless.isSelected()) {
                 Current_Log_Update(true,"= Headless mode is selected - Browser is hidden" + "\r\n");
                 txtLog.append( "= Please wait for report...\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -2032,7 +2022,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("app:")) app = value;
                 if(l.contains("url:")) url = value;
              
-                if(l.contains("_slack:")) _slack.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_slack:")) _Slack = Boolean.parseBoolean(value); 
                 if(l.contains("_headless:")) _headless.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_mobile_view:")) _mobile_view.setSelected(Boolean.parseBoolean(value));
                 
@@ -2096,8 +2086,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             return "ERROR > " + ex.getMessage();
         }
     }
-
-// </editor-fold> 
+    // </editor-fold> 
 
     //<editor-fold defaultstate="collapsed" desc="Extend HTML Report Methods">
     protected void Extent_Report_Config() throws IOException{
@@ -2422,7 +2411,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         DD = Duration.between(run_start, Instant.now());
              
         Slack_Channel = "xtt_test";
-        _Slack = true;
         Zip_Report = true;
         
         Last_EX = EX;
@@ -2434,7 +2422,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 if (am0.length > 0) {
                     Arrays.sort(am0);
                     double total = 0;
-                    for(int i=0; i < am0.length; i++){
+                    for(int i = 0; i < am0.length; i++){
                         total = total + am0[i];
                     }
                     t_calls = am0.length;

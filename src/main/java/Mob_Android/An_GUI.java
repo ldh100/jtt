@@ -11,6 +11,14 @@ import com.amazonaws.services.s3.model.ListObjectsV2Result;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.google.common.base.Stopwatch;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
@@ -81,24 +89,15 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
-
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.aventstack.extentreports.reporter.configuration.Theme;
 
 /**
  *
@@ -1251,7 +1250,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         }
     }//GEN-LAST:event_btnInstallAPKMouseClicked
- 
+    // </editor-fold>   
+    
+    // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">    
     private void Load_Form(){   
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
 
@@ -1291,12 +1292,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
       
         Current_Log_Update(true, "- Check Package " + "\r\n"); 
         Current_Log_Update(true, CheckAppPackage());                                
-        
-
     }
-    // </editor-fold>   
-    
-    // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">    
     private void GUI_Load_Env(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";

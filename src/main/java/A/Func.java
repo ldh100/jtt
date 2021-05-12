@@ -337,6 +337,7 @@ public class Func {
         return ExcelFile.getAbsolutePath();
     }
     public static String Send_File_with_Message_to_Slack(String Path, String Channel, String MSG) {
+        String F_Name = "?";
         try{           
             MultipartEntityBuilder builder = MultipartEntityBuilder.create(); 
             builder.addTextBody("token", A.S_OAuth_TKN); 
@@ -344,7 +345,8 @@ public class Func {
             builder.addTextBody("initial_comment", MSG); 
             
             if(!Path.equals("")){ 
-                File file = new File(Path);            
+                File file = new File(Path); 
+                F_Name = file.getName();
                 builder.addBinaryBody(
                     file.getName(), // File_Name
                     new FileInputStream(file), 
@@ -357,9 +359,9 @@ public class Func {
             HttpPost httpPost = new HttpPost("https://slack.com/api/files.upload");
             httpPost.setEntity(multiPartEntity); 
             HttpResponse response = httpclient.execute(httpPost);
-            return "=== Send_to_Slack - " + response.getStatusLine() + "\r\n"; 
+            return "= File " + F_Name + " > Slack - " + response.getStatusLine() + "\r\n"; 
         } catch(IOException ex) {
-            return "=== Send_to_Slack > ERROR: " + ex.getMessage() + "\r\n";
+            return "= File " + F_Name + " > Slack > ERROR: " + ex.getMessage() + "\r\n";
         }
     }
     public static String Zip_File(String Source){

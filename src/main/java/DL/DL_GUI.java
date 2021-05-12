@@ -85,7 +85,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.safari.SafariDriver; 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -99,6 +98,7 @@ import org.openqa.selenium.ie.ElementScrollBehavior;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
@@ -153,7 +153,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         cmbEnv = new javax.swing.JComboBox<>();
         _slack = new javax.swing.JCheckBox();
         _headless = new javax.swing.JCheckBox();
-        txtSlackChannel = new javax.swing.JTextField();
+        txtSlackCh = new javax.swing.JTextField();
         lblSITES14 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         DV_QA = new javax.swing.JTable();
@@ -572,9 +572,9 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         _headless.setRequestFocusEnabled(false);
         jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 68, 100, 14));
 
-        txtSlackChannel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtSlackChannel.setText("xtt_test");
-        jPanel3.add(txtSlackChannel, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 4, 96, -1));
+        txtSlackCh.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtSlackCh.setText("xtt_test");
+        jPanel3.add(txtSlackCh, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 4, 96, -1));
 
         lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -680,19 +680,116 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         btnExel.setEnabled(true);
     }//GEN-LAST:event_btnExelMouseClicked
     private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
-        SAVE_CONFIG();
+        GUI_Save_CONFIG();
     }//GEN-LAST:event_btnSave_OptMouseClicked
     private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-            LOAD_ENV();
+            GUI_Load_Env();
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
     // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="Instance Variables Declarations">  
+    private boolean Zip_Report = true;
+    private boolean _Slack = false;
+    private String Slack_Channel = "";
+    private String Log = "";
+    private String access_key;
+    private String secret_key;
+    private AWSCredentials AWS_credentials; 
+    
+    private String HTML_Report_Path = null;
+    private ExtentSparkReporter HtmlReporter;
+    protected ExtentReports HtmlReport;
+    protected ExtentTest ParentTest;
+    
+    protected String url = "";
+    protected String env = "";
+    private static SwingWorker BW1; 
+    private static SwingWorker BW2; 
+    private Instant run_start;
+    private String Toast_Msg = "";  
+    
+    protected boolean ALL_DATA = false;
+    protected boolean NO_DATA = false;
+    
+    protected boolean FAIL = false;
+    
+    protected int _t = 0; // Total
+    protected int _p = 0; // Passed
+    protected int _f = 0; // Failed
+    protected int _w = 0; // Warn
+    protected int _i = 0; // Info
+    protected String t = "";   
+    protected String F = "";   
+    protected String EX = "";   
+    protected String r_time = ""; 
+    protected double sleep = 500; // milisec
+
+    protected String err;
+
+    protected int t_calls = 0;
+    protected double t_min = 0;
+    protected double t_max = 0;
+    protected double t_avg = 0;
+    protected double p_50 = 0;
+    protected double p_90 = 0; 
+    
+    private String Last_EX;
+    private  final Stopwatch sw1 = Stopwatch.createUnstarted();
+    private boolean Load;
+    private String Report_Date;
+    private String Report_File;
+    private Duration DD;
+    
+    private String Ver = "";
+    private String TZone;      
+    private String Summary;
+    private String r_type;  
+    
+    protected String API_Response_Body = "";   
+    protected int T_Index;
+    protected WebDriver d1;
+    protected WebElement e;
+    protected WebElement e1;
+    protected WebElement e2;
+    protected List<WebElement> L0 = null;
+    protected List<WebElement> L1 = null;
+    protected List<WebElement> L2 = null;
+    protected List<WebElement> L3 = null; 
+    protected List<WebElement> Opens = null;
+    protected List<WebElement> Closes = null; 
+    
+    protected FluentWait loadTimeout = null;
+    protected long WaitForElement = 1500; // milisec
+    protected double LoadTimeOut = 15 * 1000; // milisec    
+    
+    private int wdLastRow = -1; 
+    private int d2LastRow = -1; 
+ 
+    private boolean CONFIG = false;
+    private String C = "";
+
+    private final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
+    private final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    private String SQL = ""; 
+    private String SCOPE;
+    
+    protected String DL_UserID = "";    
+    protected String DL_UserPW = "";
+    protected boolean Login_OK = true;
+
+    protected String METRIC = "";
+    protected String GROUP = "";
+    protected String DATE_RANGE = "";
+    // </editor-fold>
+
     // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">   
     private void Load_Form(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         Load = true;   
         
         cmbBrow.addItem("Chrome");  
@@ -712,13 +809,13 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         cmbEnv.setSelectedIndex(0); 
         
 
-        LOAD_ENV();
+        GUI_Load_Env();
         Load = false;
         CONFIG = false;   
         this.setTitle("Distiller Automation Manager");
     }
 
-    private void LOAD_ENV(){
+    private void GUI_Load_Env(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             env = "ST";
             url = "https://staging.member.distilr.io";
@@ -730,7 +827,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             url = "https://mpower.distilr.io/";
         }
         
-        LOAD_CONFIG();
+        GUI_Load_CONFIG();
         //GET_DL_USER_TOKEN(false);
         GetDates();       
         GetMetrics(); 
@@ -1006,7 +1103,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
 
-    private void LOAD_CONFIG(){
+    private void GUI_Load_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + A.A.UserID + "' AND [platform] = 'WEB' AND [app] = 'DL' AND [env] = '" + env + "'";
@@ -1029,7 +1126,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 value = l.substring(l.indexOf(" ")).trim();
                 if(l.contains("env: ")) env = value;
                 if(l.contains("url: ")) url = value;
-                if(l.contains("SlackChannel: ")) txtSlackChannel.setText(value);
+                if(l.contains("SlackCh: ")) txtSlackCh.setText(value);
                 if(l.contains("_slack: ")) _slack.setSelected(Boolean.parseBoolean(value));                
                 if(l.contains("_headless: ")) _headless.setSelected(Boolean.parseBoolean(value));
                 
@@ -1065,7 +1162,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    private void SAVE_CONFIG() {
+    private void GUI_Save_CONFIG() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String _S = "n/a";
         String _B = "n/a";
@@ -1081,7 +1178,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             C += "url: " + url + "\r\n";
             
             C += "_slack: " + _slack.isSelected() + "\r\n";
-            C += "SlackChannel: " + txtSlackChannel.getText() + "\r\n";
+            C += "SlackCh: " + txtSlackCh.getText() + "\r\n";
             C += "_headless: " + _headless.isSelected() + "\r\n";  
            
             C += "METRIC: " + _S + "\r\n";
@@ -1144,6 +1241,43 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
 
+    protected void Current_Log_Update(boolean GUI, String Text){
+        if(GUI){
+            txtLog.append(Text);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());              
+        } else{
+            Log += Text;
+        }
+    }    
+    private void Report(boolean Open_File){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        Report_File = "";
+        if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            txtLog.append("=== Report > Not Excel" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            return;
+        }   
+        try {
+            int col = 9; 
+            String Top_Row = Last_EX.substring(0, Last_EX.indexOf("\r\n"));        
+            String[] lines = Last_EX.substring(Last_EX.indexOf("\r\n") + 2).split(System.getProperty("line.separator"));
+            int l = lines.length;
+            String[][] Values = new String[l][col];
+            int n = 1;
+            for (int i = 0; i < l; i++) {
+                String[] v = lines[i].split("\t");
+                System.arraycopy(v, 0, Values[i], 0, v.length); 
+            }
+            Report_File = Func.fExcel(l, col, Values, "DL_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
+            txtLog.append("=== Report Excel file:\r\n" + Report_File + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        } catch (IOException ex) {
+            txtLog.append("=== Report > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
     private void LOG_UPDATE(String LOG){  
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
@@ -1262,40 +1396,12 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
 
-    private void Report(boolean Open_File){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        Report_File = "";
-        if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
-            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            txtLog.append("=== Report > Not Excel" + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            return;
-        }   
-        try {
-            int col = 9; 
-            String Top_Row = Last_EX.substring(0, Last_EX.indexOf("\r\n"));        
-            String[] lines = Last_EX.substring(Last_EX.indexOf("\r\n") + 2).split(System.getProperty("line.separator"));
-            int l = lines.length;
-            String[][] Values = new String[l][col];
-            int n = 1;
-            for (int i = 0; i < l; i++) {
-                String[] v = lines[i].split("\t");
-                System.arraycopy(v, 0, Values[i], 0, v.length); 
-            }
-            Report_File = Func.fExcel(l, col, Values, "DL_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
-            txtLog.append("=== Report Excel file:\r\n" + Report_File + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        } catch (IOException ex) {
-            txtLog.append("=== Report > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }
-    
     private void GUI_Run_Manual(){
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
+        _Slack = _slack.isSelected();
+        Slack_Channel = txtSlackCh.getText();
         try{
             run_start = Instant.now();
             txtLog.append("=== Execution started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
@@ -1328,59 +1434,198 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 DATE_RANGE = DV_D_RANGES.getValueAt(DV_D_RANGES.getSelectedRow(), 0).toString();
             }
 
+            SCOPE = "";
+            r_type = "manual"; 
+            
             if(_headless.isSelected()) {
-                txtLog.append("=== Headless mode is selected - Browser is hidden" + "\r\n");
-                txtLog.append("=== Please wait for report...\r\n");          
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                Current_Log_Update(true,"= Headless mode is selected - Browser is hidden" + "\r\n");
+                txtLog.append( "= Please wait for report...\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
-            txtLog.append("=== Starting Web Driver..." + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            Current_Log_Update(true, "= Starting Appium Service and Android Driver..." + "\r\n");
+            
             if(sw1.isRunning()){
                 sw1.reset();
             }
-            sw1.start();        
-
-            r_type = "ad-hoc";
-
-            if(Driver()){
-                txtLog.append("=== Web Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());
-                sw1.reset();
-
-                LOG_START(); // ======================================================== 
-                BW1_DoWork(true);           
-                BW2_DoWork( );
-            } 
+            sw1.start();
+            LOG_START(); // ========================================================
+            BW1_DoWork(true);
+            BW2_DoWork();
         }catch(Exception ex){
             Current_Log_Update(true, "= GUI_Run_Manual ERROR > " + ex.getMessage() + "\r\n");
             BW1_FAIL_LOG_UPDATE("= GUI_Run_Manual ERROR > " + ex.getMessage());
-        }            
+        }           
     }
-    public void JOB_Run_Auto(){
-        //
+    public String JOB_Run_Auto(String run_type, String config){
+        run_start = Instant.now();
+        Log  = "";
+        String RES = "";
+
+        RES = JOB_Load_CONFIG(config);
+        if(RES.contains("ERROR")){
+            Current_Log_Update(false, RES);
+            return "JOB_Load_CONFIG > " + RES;
+        }
+        Current_Log_Update(false, RES);
+        if(!RES.contains("OK")){
+            return RES;
+        }
+
+        try{
+            Current_Log_Update(false, "= Auto Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+            EX = "";
+            F = "";
+            t_calls = 0;
+            t_min =  0;
+            t_avg = 0;
+            t_max =  0;
+            p_50 = 0;
+            p_90 = 0;
+            _t = 0; // Total
+            _p = 0; // Passed
+            _f = 0; // Failed
+            _w = 0; // Warn
+            _i = 0; // Info
+            r_time = "";
+            SCOPE = "";
+            r_type = run_type; 
+
+            Current_Log_Update(false, "- Starting Appium Service and Android Driver..." + "\r\n");
+            if(sw1.isRunning()){
+                sw1.reset();
+            }
+            sw1.start();
+            LOG_START();   // ========================================================            
+            BW1_DoWork(false);
+        }catch(Exception ex){
+            return "ERROR > " + ex.getMessage();
+        }
+        return "OK > Job Started >> Please Monitor Reports..."; 
     }
-    private void BW1_FAIL_LOG_UPDATE(String Error){
-        Summary = "BW1 - Failed";
-        DD = Duration.between(run_start, Instant.now());
-        LOG_UPDATE("- BW1 ERROR: " + Error);
-        btnRun.setEnabled(true);
+    private String JOB_Load_CONFIG(String config){ 
+        String[] lines = config.split("\n");
+        String value;            
+        try{       
+            for (String l : lines) {
+                value = l.substring(l.indexOf(" ")).trim();
+                if(l.contains("env: ")) env = value;
+                if(l.contains("url: ")) url = value;
+                if(l.contains("SlackCh: ")) Slack_Channel = value;
+                if(l.contains("_slack: ")) _Slack = Boolean.parseBoolean(value);                
+                if(l.contains("_headless: ")) _headless.setSelected(Boolean.parseBoolean(value));
+                
+                if(l.contains("METRIC: ")) METRIC = value;
+                if(l.contains("DATE_RANGE: ")) DATE_RANGE = value;
+
+                if(l.contains("txtAdmin_ID: ")) txtAdmin_ID.setText(value);
+                if(l.contains("txtAdmin_PW: ")) txtAdmin_PW.setText(value);
+                if(l.contains("_invalid_login: ")) _invalid_login.setSelected(Boolean.parseBoolean(value));
+                
+                if(l.contains("nWaitElement: ")) nWaitElement.setValue(Double.parseDouble(value));
+                if(l.contains("nShowPage: ")) nShowPage.setValue(Double.parseDouble(value)); 
+                if(l.contains("nWaitLoad: ")) nWaitLoad.setValue(Double.parseDouble(value)); 
+
+                if(l.contains("_metrics_selection: ")) _metrics_selection.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_metric_data: ")) _metric_data.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_filters: ")) _filters.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_Drilldown: ")) _Drilldown.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_Insights: ")) _Insights.setSelected(Boolean.parseBoolean(value)); 
+                if(l.contains("_password: ")) _password.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_all_data: ")) _all_data.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_logout: ")) _logout.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_users: ")) _users.setSelected(Boolean.parseBoolean(value));
+            }             
+            CONFIG = true;
+            Current_Log_Update(true, "= JOB_Load_CONFIG > OK" + "\r\n");
+            return "OK";
+        } catch (Exception ex) {
+            CONFIG = false;
+            Current_Log_Update(true, "= JOB_Load_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
+            return "ERROR > " + ex.getMessage(); 
+        }
     }
     // </editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc="Background Workers: Web Driver > Execution > Reports">
-    protected void Current_Log_Update(boolean GUI, String Text){
-        if(GUI){
-            txtLog.append(Text);
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());              
-        } else{
-            Log += Text;
-        }
+    //<editor-fold defaultstate="collapsed" desc="Extend HTML Report Methods">
+    protected void Extent_Report_Config() throws IOException{
+        HTML_Report_Path = System.getProperty("user.home") + File.separator + "Desktop";
+        Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
+        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + "DL" + "_" + env + "_" + Report_Date + ".html");
+        HtmlReport = new ExtentReports();
+        HtmlReport.attachReporter(HtmlReporter);
+        
+        HtmlReport.setSystemInfo("App Version", "Distiller" + " " + "Version - TBD"); 
+        HtmlReport.setSystemInfo("Browser", cmbBrow.getSelectedItem().toString());        
+        HtmlReport.setSystemInfo("Machine", A.A.WsID);
+        HtmlReport.setSystemInfo("Machine OS", A.A.WsOS);
+        HtmlReport.setSystemInfo("Tester ID", A.A.UserID); 
+        HtmlReport.setSystemInfo("Run Trigger", r_type);
+        
+        HtmlReporter.config().setDocumentTitle("JTT Web Automation Report");
+        HtmlReporter.config().enableTimeline(false);
+        //HtmlReporter.config().setTheme(Theme.DARK);   
+        HtmlReporter.config().setTheme(Theme.STANDARD);   
     }    
+    protected void Log_Html_Result(String RES, String Test_Description, boolean Capture_Screenshot, ExtentTest Test) throws IOException  {
+        switch (RES) {
+            case "PASS":
+                Test.log(Status.PASS, MarkupHelper.createLabel(Test_Description, ExtentColor.GREEN));
+                if (Capture_Screenshot) {
+                    Test.log(Status.PASS, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
+                }
+                break;
+            case "FAIL":
+                Test.log(Status.FAIL, MarkupHelper.createLabel(Test_Description, ExtentColor.RED));
+                if (Capture_Screenshot) {
+                    Test.log(Status.FAIL, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
+                }                
+                break;
+            case "FATAL":
+                Test.log(Status.FATAL, MarkupHelper.createLabel(Test_Description, ExtentColor.PURPLE));
+                if (Capture_Screenshot) {
+                    Test.log(Status.FATAL, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
+                }                
+                break;
+            case "SKIP":
+                Test.log(Status.SKIP, MarkupHelper.createLabel(Test_Description, ExtentColor.ORANGE));
+                if (Capture_Screenshot) {
+                    Test.log(Status.SKIP, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
+                }
+                break;
+            case "INFO":
+                Test.log(Status.INFO, MarkupHelper.createLabel(Test_Description, ExtentColor.BLUE));
+                if (Capture_Screenshot) {
+                    Test.log(Status.INFO, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
+                }
+                break;
+            case "WARN":
+                Test.log(Status.WARNING, MarkupHelper.createLabel(Test_Description, ExtentColor.YELLOW));
+                if (Capture_Screenshot) {
+                    Test.log(Status.WARNING,"Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
+                }
+                break;
+        }
+    }
+    protected String getScreenshot() {
+        try{
+            TakesScreenshot scrShot =((TakesScreenshot)d1);
+            File SF = scrShot.getScreenshotAs(OutputType.FILE);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ImageIO.write(ImageIO.read(SF), "png", bos);
+            SF.delete();
+            return "data:image/png;base64, " + Base64.getEncoder().encodeToString(bos.toByteArray());
+        }catch (IOException ex) {
+            return "data:image/png;base64," + " ERROR: " + ex.getMessage();
+        }
+    }
+     //</editor-fold>
 
-    private boolean Driver() {
+    //<editor-fold defaultstate="collapsed" desc="Background Workers: Web Driver > Execution > Reports">
+    private String StartWebDriver() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
-            txtLog.append("=== CWD: " + A.A.CWD + "\r\n");
+
+            txtLog.append( "= CWD: " + A.A.CWD + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             
             if(A.A.WsOS.toLowerCase().contains("windows")){
@@ -1390,8 +1635,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 System.setProperty("webdriver.ie.driver", A.A.CWD + "\\IEDriverServer.exe"); 
             }
             if(A.A.WsOS.toLowerCase().contains("mac")){
-                System.setProperty("webdriver.chrome.driver", A.A.CWD + "/chromedriver");  
-               // System.setProperty("webdriver.chrome.driver", "/Users/prathyusha.deshpande/distilr/BrowserDriver/87/chromedriver");            
+                System.setProperty("webdriver.chrome.driver", A.A.CWD + "/chromedriver");                
                 System.setProperty("webdriver.edge.driver", A.A.CWD + "/msedgedriver");  
                 System.setProperty("webdriver.gecko.driver", A.A.CWD + "/geckodriver");
                 System.setProperty("webdriver.safari.driver", A.A.CWD + "/safaridriver");
@@ -1415,7 +1659,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                         d1 = new ChromeDriver(chrome_op);
                     break;
                 case "Edge":
-//                    txtLog.append("=== Edge Driver:" + System.getProperty("webdriver.edge.driver") + "\r\n");
+//                    txtLog.append( "= Edge Driver:" + System.getProperty("webdriver.edge.driver") + "\r\n");
 //                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                         EdgeDriverService edgeServise = EdgeDriverService.createDefaultService();
                         //edgeServise.SuppressInitialDiagnosticInformation = true;
@@ -1456,18 +1700,6 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                         ie_op.introduceFlakinessByIgnoringSecurityDomains(); // Necessary to skip protected  mode setup
                         ie_op.elementScrollTo(ElementScrollBehavior.BOTTOM);
                         ie_op.disableNativeEvents();
-//                        var options = new InternetExplorerOptions
-//                        {
-//                                IgnoreZoomLevel = true,
-//                                IntroduceInstabilityByIgnoringProtectedModeSettings = true,
-//                                RequireWindowFocus = false,
-//                                ElementScrollBehavior = InternetExplorerElementScrollBehavior.Top, // with botton click doesn't work
-//                                EnsureCleanSession = true,
-//                                //AcceptInsecureCertificates = true,
-//                                EnablePersistentHover = true,
-//                                UnhandledPromptBehavior = UnhandledPromptBehavior.Accept,
-//                                EnableNativeEvents = false //  with true > click problem
-//                        };
                         d1 = new InternetExplorerDriver(ie_op);
                     break;
                 case "Safari":
@@ -1481,52 +1713,65 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             
             d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
             d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
-            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
+            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);            
             loadTimeout = new FluentWait(d1).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
 			.pollingEvery(Duration.ofMillis(200))  			
 			.ignoring(NoSuchElementException.class);       // for load > progress
             
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            return true;
+            return "= WabDriver Start > OK " + "\r\n";
         } catch (Exception ex) {
-            txtLog.append("=== Web Driver > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            return false;
-        }   
+            F += "= WebDriver > ERROR: " + ex.getMessage() + "\r\n";
+            if(d1 != null) {
+                d1.quit();
+            }
+            return "=WebDriver > ERROR: " + ex.getMessage() + "\r\n";
+        }  
     }
-    private void BW1_DoWork(boolean GUI) throws Exception { 
+    private void BW1_DoWork(Boolean GUI) { 
         BW1 = new SwingWorker() {             
             Instant dw_start = Instant.now();
-            
+
             @Override
-            protected String doInBackground() throws Exception   { 
-                
+            protected String doInBackground() throws Exception { 
+                String DriverStart = StartWebDriver();
+                if(DriverStart.contains("OK")){
+                    Current_Log_Update(GUI, "= Appium Service and Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
+                    sw1.reset();
+                } else{
+                    Current_Log_Update(GUI, DriverStart.trim() + "\r\n");
+                    Summary = "Start Web Driver - Failed";
+                    DD = Duration.between(run_start, Instant.now());
+                    LOG_UPDATE(DriverStart.trim() + "\r\n");   // ======================================================
+                    btnRun.setEnabled(true);
+                    btnFails.setEnabled(true);
+                }
                 Extent_Report_Config();// ======================================================================= 
-                Execute();             
-                BW1_Done(GUI); // ==========================================================================
+                
+                Execute();
+                
+                DD = Duration.between(run_start, Instant.now());
+                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+                Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
+                
+                EX = "Distiller " + env + ", v" + Ver + ", Browser: " + cmbBrow.getSelectedItem().toString() +
+                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
+                    "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
+                    + EX;
+                
+                Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n");
+                
+                BW1_Done(GUI); // ================================================================================
 
                 if(_f > 0) {
-                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
+                    return  "= Execution finished @" + LocalDateTime.now().format(A.A.Time_12_formatter) + " with " + _f + " FAIL(s)";
                 }else{
-                    return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter);  
+                    return  "= Execution finished @" + LocalDateTime.now().format(A.A.Time_12_formatter);  
                 } 
             }  
             @Override
             protected void done() { 
-                BW2.cancel(true); // ================================================
-                Ver = "?";
-                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
-                txtLog.append("========   " + "Execution step-by-step log..." + "   ========" + "\r\n");  
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());               
-                EX = "DL " + env + " - v" + Ver + ", Browser: " + cmbBrow.getSelectedItem().toString() +
-                " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
-                 "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
-                 + EX;
-                txtLog.append("" + EX.replaceAll("\t", " > ") + "\r\n"); 
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-                Last_EX = EX;
-                
+                BW2.cancel(true); // ================================================            
                 try  { 
                     String statusMsg = (String) get(); 
                     txtLog.append("" + statusMsg + "\r\n");
@@ -1540,60 +1785,9 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                     }
                 }  
                 catch (InterruptedException | ExecutionException ex)  { 
-                    txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                    Current_Log_Update(GUI, "- BW1 ERROR: " + ex.getMessage() + "\r\n");
+                    BW1_FAIL_LOG_UPDATE(ex.getMessage()); 
                 } 
-                DD = Duration.between(dw_start, Instant.now());
-                Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w;
-                
-                try {
-                    String t_rep = "";
-                    if (!"".equals(r_time.trim())) {
-                        double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
-                        if (am0.length > 0) {
-                            Arrays.sort(am0);
-                            double total = 0;
-                            for(int i=0; i < am0.length; i++){
-                                total = total + am0[i];
-                            }
-                            t_calls = am0.length;
-                            t_min = am0[0] / (double)1000;
-                            t_avg = (total / am0.length) / (double)1000;
-                            t_max = am0[am0.length - 1]  / (double)1000; 
-                            p_50 = Func.p50(am0) / (double)1000;
-                            p_90 = Func.p90(am0) / (double)1000;
-                            
-                            DecimalFormat df = new DecimalFormat("#.##");
-                            t_rep += "=== Total Calls: " + t_calls + ", Response Times (sec) - Min: " + df.format(t_min) +
-                                                                        ", Avg: " + df.format(t_avg) +
-                                                                        ", Max: " + df.format(t_max) +
-                                                                        ", p50: " + df.format(p_50) +
-                                                                        ", p90: " + df.format(p_90);
-                        }
-                        txtLog.append("" + t_rep + "\r\n");
-                        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-                    }
-                } catch(Exception ex){
-                    txtLog.append("=== LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-                }  
-                btnRun.setEnabled(true);
-
-                txtLog.append("=== " + Summary + "\r\n"); // Summary shown in EX top
-                txtLog.append("=== Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
-                txtLog.append("=== Browser: " + cmbBrow.getSelectedItem().toString() + ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"); 
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-  
-                if(!"".equals(F.trim())){
-                    btnFails.setEnabled(true);
-                } else{
-                    btnFails.setEnabled(false);
-                }
-                btnExel.setEnabled(true);
-                
-                LOG_UPDATE(txtLog.getText()); // ========================================================
-                HtmlReporter.config().setReportName("DL" + " v: " + "?" + ", Environment: " + env + ", Summary: Total Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i);
-                HtmlReport.flush();                
             } 
         }; 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1618,33 +1812,40 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                                     Toast_Msg.toLowerCase().contains(" saved")) {
                                 _t++;
                                 _p++;
-                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                            
+                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                            
                             } else if(Toast_Msg.toLowerCase().contains("could not")|| 
                                     Toast_Msg.toLowerCase().contains("unable to save")|| 
                                     Toast_Msg.toLowerCase().contains("fail")) {
                                 _t++;
                                 _f++;
                                 F += "Step: " + _t + " > FAIL - " + Toast_Msg + "\r\n";
-                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                           
                             } else if(Toast_Msg.toLowerCase().contains("fix") || Toast_Msg.toLowerCase().contains("error")) {
                                 _t++;
                                 _w++;
-                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                           
                             } else {
                                 _t++;
                                 _w++;
                                 //F += "Step: " + _t + " > WARN - " + tt + "\r\n";
-                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                                EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                           
                             }
                             Thread.sleep(4000); //  pause till new alert expected ???? 
                         }
                     } catch (InterruptedException ex){ // Exception ex
-                        System.out.println("BW2: " + ex.getMessage());
+                        txtLog.append( "= BW2: " + ex.getMessage() + "\r\n");
+                        txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
                     }
                 }
             }
         }; 
-        BW2.execute();  
+        BW2.execute();  // executes the swingworker on worker thread   
+    }
+    private void BW1_FAIL_LOG_UPDATE(String Error){
+        Summary = "BW1 - Failed";
+        DD = Duration.between(run_start, Instant.now());
+        LOG_UPDATE("- BW1 ERROR: " + Error);
+        btnRun.setEnabled(true);
     }
     private void Execute() throws Exception {
         if (_users.isSelected()) { 
@@ -1768,13 +1969,55 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     }
     private void BW1_Done(boolean GUI) throws Exception{
         DD = Duration.between(run_start, Instant.now());
-        // get more code from BW1.done here
-        
+             
         Slack_Channel = "xtt_test";
-        _Slack = true;
         Zip_Report = true;
         
-        if(!_Slack && !Slack_Channel.equals("N/A")){
+        Last_EX = EX;
+        Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
+        try {
+            String t_rep = "";
+            if (!"".equals(r_time.trim())) {
+                double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
+                if (am0.length > 0) {
+                    Arrays.sort(am0);
+                    double total = 0;
+                    for(int i = 0; i < am0.length; i++){
+                        total = total + am0[i];
+                    }
+                    t_calls = am0.length;
+                    t_min = am0[0] / (double)1000;
+                    t_avg = (total / am0.length) / (double)1000;
+                    t_max = am0[am0.length - 1]  / (double)1000;
+                    p_50 = Func.p50(am0) / (double)1000;
+                    p_90 = Func.p90(am0) / (double)1000;
+                    
+                    DecimalFormat df = new DecimalFormat("#.##");
+                    t_rep += "= Total Calls: " + t_calls +
+                            ", Response Times (sec) - Min: " + df.format(t_min) +
+                            ", Avg: " + df.format(t_avg) +
+                            ", Max: " + df.format(t_max) +
+                            ", p50: " + df.format(p_50) +
+                            ", p90: " + df.format(p_90);
+                }
+                Current_Log_Update(GUI, t_rep + "\r\n");
+            }
+        } catch(Exception ex){
+            Current_Log_Update(GUI, "= LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
+        }
+        
+        Current_Log_Update(GUI, "= " + Summary + "\r\n"); // Summary shown in EX top
+        Current_Log_Update(GUI, "= Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
+        Current_Log_Update(GUI, "= Distiller " + " v: " + "?" + ", Environment: " + env + "\r\n");
+        
+        if(GUI){
+            Log = txtLog.getText();
+        }
+        LOG_UPDATE(Log); // ========================================================
+        HtmlReporter.config().setReportName("Distiller " + " v: " + "?" + ", Environment: " + env + ", Summary: Total Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i);
+        HtmlReport.flush();
+        
+        if(_Slack && !Slack_Channel.equals("N/A")){
             Report(false);
             String MSG = "Distiller_" + env + " Excel Automation report - " + Report_Date +
                     "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
@@ -1815,229 +2058,6 @@ public class DL_GUI extends javax.swing.JInternalFrame {
   
     // </editor-fold> 
     
-    //<editor-fold defaultstate="collapsed" desc="Extend HTML Report Methods">
-    protected void Extent_Report_Config() throws IOException{
-        HTML_Report_Path = System.getProperty("user.home") + File.separator + "Desktop";
-        Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
-        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + "DL" + "_" + env + "_" + Report_Date + ".html");
-        HtmlReport = new ExtentReports();
-        HtmlReport.attachReporter(HtmlReporter);
-        
-        HtmlReport.setSystemInfo("App Version", "Distiller" + " " + "Version - TBD"); 
-        HtmlReport.setSystemInfo("Browser", cmbBrow.getSelectedItem().toString());        
-        HtmlReport.setSystemInfo("Machine", A.A.WsID);
-        HtmlReport.setSystemInfo("Machine OS", A.A.WsOS);
-        HtmlReport.setSystemInfo("Tester ID", A.A.UserID); 
-        HtmlReport.setSystemInfo("Run Trigger", r_type);
-        
-        HtmlReporter.config().setDocumentTitle("JTT Web Automation Report");
-        HtmlReporter.config().enableTimeline(false);
-        //HtmlReporter.config().setTheme(Theme.DARK);   
-        HtmlReporter.config().setTheme(Theme.STANDARD);   
-    }    
-    protected void Log_Html_Result(String RES, String Test_Description, boolean Capture_Screenshot, ExtentTest Test) throws IOException  {
-        switch (RES) {
-            case "PASS":
-                Test.log(Status.PASS, MarkupHelper.createLabel(Test_Description, ExtentColor.GREEN));
-                if (Capture_Screenshot) {
-                    Test.log(Status.PASS, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
-                }
-                break;
-            case "FAIL":
-                Test.log(Status.FAIL, MarkupHelper.createLabel(Test_Description, ExtentColor.RED));
-                if (Capture_Screenshot) {
-                    Test.log(Status.FAIL, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
-                }                
-                break;
-            case "FATAL":
-                Test.log(Status.FATAL, MarkupHelper.createLabel(Test_Description, ExtentColor.PURPLE));
-                if (Capture_Screenshot) {
-                    Test.log(Status.FATAL, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
-                }                
-                break;
-            case "SKIP":
-                Test.log(Status.SKIP, MarkupHelper.createLabel(Test_Description, ExtentColor.ORANGE));
-                if (Capture_Screenshot) {
-                    Test.log(Status.SKIP, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
-                }
-                break;
-            case "INFO":
-                Test.log(Status.INFO, MarkupHelper.createLabel(Test_Description, ExtentColor.BLUE));
-                if (Capture_Screenshot) {
-                    Test.log(Status.INFO, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
-                }
-                break;
-            case "WARN":
-                Test.log(Status.WARNING, MarkupHelper.createLabel(Test_Description, ExtentColor.YELLOW));
-                if (Capture_Screenshot) {
-                    Test.log(Status.WARNING,"Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
-                }
-                break;
-        }
-    }
-    protected String getScreenshot() {
-        try{
-            TakesScreenshot scrShot =((TakesScreenshot)d1);
-            File SF = scrShot.getScreenshotAs(OutputType.FILE);
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ImageIO.write(ImageIO.read(SF), "png", bos);
-            SF.delete();
-            return "data:image/png;base64, " + Base64.getEncoder().encodeToString(bos.toByteArray());
-        }catch (IOException ex) {
-            return "data:image/png;base64," + " ERROR: " + ex.getMessage();
-        }
-    }
-     //</editor-fold>
-
-    // <editor-fold defaultstate="collapsed" desc="Instance Variables Declarations">  
-    private boolean Zip_Report = true;
-    private boolean _Slack = false;
-    private String Slack_Channel = "";
-    private String Log = "";
-    private String access_key;
-    private String secret_key;
-    private AWSCredentials AWS_credentials; 
-    
-    private String HTML_Report_Path = null;
-    private ExtentSparkReporter HtmlReporter;
-    protected ExtentReports HtmlReport;
-    protected ExtentTest ParentTest;
-    
-    protected String url = "";
-    protected String env = "";
-    private static SwingWorker BW1; 
-    private static SwingWorker BW2; 
-    private Instant run_start;
-    private String Toast_Msg = "";  
-    
-    protected boolean ALL_DATA = false;
-    protected boolean NO_DATA = false;
-    
-    protected boolean FAIL = false;
-    
-    protected int _t = 0; // Total
-    protected int _p = 0; // Passed
-    protected int _f = 0; // Failed
-    protected int _w = 0; // Warn
-    protected int _i = 0; // Info
-    protected String t = "";   
-    protected String F = "";   
-    protected String EX = "";   
-    protected String r_time = ""; 
-    protected double sleep = 500; // milisec
-
-    protected String err;
-
-    protected int t_calls = 0;
-    protected double t_min = 0;
-    protected double t_max = 0;
-    protected double t_avg = 0;
-    protected double p_50 = 0;
-    protected double p_90 = 0; 
-    
-    private String Last_EX;
-    private  final Stopwatch sw1 = Stopwatch.createUnstarted();
-    private boolean Load;
-    private String Report_Date;
-    private String Report_File;
-    private Duration DD;
-    
-    private String Ver = "";
-    private String TZone;      
-    private String Summary;
-    private String r_type;  
-    
-    protected String API_Response_Body = "";   
-    protected int T_Index;
-    protected WebDriver d1;
-    protected WebElement e;
-    protected WebElement e1;
-    protected WebElement e2;
-    protected List<WebElement> L0 = null;
-    protected List<WebElement> L1 = null;
-    protected List<WebElement> L2 = null;
-    protected List<WebElement> L3 = null; 
-    protected List<WebElement> Opens = null;
-    protected List<WebElement> Closes = null; 
-    
-    protected FluentWait loadTimeout = null;
-    protected long WaitForElement = 1500; // milisec
-    protected double LoadTimeOut = 15 * 1000; // milisec    
-    
-    private int wdLastRow = -1; 
-    private int d2LastRow = -1; 
- 
-    private boolean CONFIG = false;
-    private String C = "";
-
-    private final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
-    private final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-    private final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    private String SQL = ""; 
-    private String SCOPE;
-    
-    protected String DL_UserID = "";    
-    protected String DL_UserPW = "";
-    protected boolean Login_OK = true;
-
-    protected String METRIC = "";
-    protected String GROUP = "";
-    protected String DATE_RANGE = "";
-    // </editor-fold>
-    
-    // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable DV_D_RANGES;
-    private javax.swing.JTable DV_METRICS;
-    private javax.swing.JTable DV_QA;
-    private javax.swing.JCheckBox _Drilldown;
-    private javax.swing.JCheckBox _Insights;
-    private javax.swing.JCheckBox _all_data;
-    private javax.swing.JCheckBox _filters;
-    private javax.swing.JCheckBox _headless;
-    private javax.swing.JCheckBox _invalid_login;
-    private javax.swing.JCheckBox _login;
-    private javax.swing.JCheckBox _logout;
-    private javax.swing.JCheckBox _metric_data;
-    private javax.swing.JCheckBox _metrics_selection;
-    private javax.swing.JCheckBox _password;
-    private javax.swing.JCheckBox _slack;
-    private javax.swing.JCheckBox _users;
-    private javax.swing.JButton btnExel;
-    private javax.swing.JButton btnFails;
-    private javax.swing.JButton btnLog;
-    private javax.swing.JButton btnRun;
-    private javax.swing.JButton btnSave_Opt;
-    private javax.swing.JComboBox<String> cmbBrow;
-    private javax.swing.JComboBox<String> cmbEnv;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JLabel lblDates;
-    private javax.swing.JLabel lblMetrics;
-    private javax.swing.JLabel lblSITES10;
-    private javax.swing.JLabel lblSITES11;
-    private javax.swing.JLabel lblSITES13;
-    private javax.swing.JLabel lblSITES14;
-    private javax.swing.JLabel lblSITES4;
-    private javax.swing.JLabel lblSITES6;
-    private javax.swing.JLabel lblSITES7;
-    private javax.swing.JLabel lblSITES9;
-    private javax.swing.JLabel lblTestData;
-    private javax.swing.JSpinner nShowPage;
-    private javax.swing.JSpinner nWaitElement;
-    private javax.swing.JSpinner nWaitLoad;
-    private javax.swing.JTextField txtAdmin_ID;
-    private javax.swing.JTextField txtAdmin_PW;
-    private javax.swing.JTextArea txtLog;
-    private javax.swing.JTextField txtSlackChannel;
-    // End of variables declaration//GEN-END:variables
-    // </editor-fold>
-
     // <editor-fold defaultstate="collapsed" desc="Driver Actions > Log Step Result">  
     protected void Clear_Cookies_Restart_Driver(String BROWSER, ExtentTest ParentTest, String JIRA )throws Exception {
         if(sw1.isRunning()){
@@ -5408,5 +5428,58 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="GUI Variables Declaration">
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable DV_D_RANGES;
+    private javax.swing.JTable DV_METRICS;
+    private javax.swing.JTable DV_QA;
+    private javax.swing.JCheckBox _Drilldown;
+    private javax.swing.JCheckBox _Insights;
+    private javax.swing.JCheckBox _all_data;
+    private javax.swing.JCheckBox _filters;
+    private javax.swing.JCheckBox _headless;
+    private javax.swing.JCheckBox _invalid_login;
+    private javax.swing.JCheckBox _login;
+    private javax.swing.JCheckBox _logout;
+    private javax.swing.JCheckBox _metric_data;
+    private javax.swing.JCheckBox _metrics_selection;
+    private javax.swing.JCheckBox _password;
+    private javax.swing.JCheckBox _slack;
+    private javax.swing.JCheckBox _users;
+    private javax.swing.JButton btnExel;
+    private javax.swing.JButton btnFails;
+    private javax.swing.JButton btnLog;
+    private javax.swing.JButton btnRun;
+    private javax.swing.JButton btnSave_Opt;
+    private javax.swing.JComboBox<String> cmbBrow;
+    private javax.swing.JComboBox<String> cmbEnv;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JLabel lblDates;
+    private javax.swing.JLabel lblMetrics;
+    private javax.swing.JLabel lblSITES10;
+    private javax.swing.JLabel lblSITES11;
+    private javax.swing.JLabel lblSITES13;
+    private javax.swing.JLabel lblSITES14;
+    private javax.swing.JLabel lblSITES4;
+    private javax.swing.JLabel lblSITES6;
+    private javax.swing.JLabel lblSITES7;
+    private javax.swing.JLabel lblSITES9;
+    private javax.swing.JLabel lblTestData;
+    private javax.swing.JSpinner nShowPage;
+    private javax.swing.JSpinner nWaitElement;
+    private javax.swing.JSpinner nWaitLoad;
+    private javax.swing.JTextField txtAdmin_ID;
+    private javax.swing.JTextField txtAdmin_PW;
+    private javax.swing.JTextArea txtLog;
+    private javax.swing.JTextField txtSlackCh;
+    // End of variables declaration//GEN-END:variables
     // </editor-fold>
 }

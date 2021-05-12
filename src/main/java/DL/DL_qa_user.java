@@ -11,7 +11,7 @@ public class DL_qa_user extends DL_GUI {
     protected void run(String User_ID, String Metric, String Period, String Location_Filters, String Item_Filters, String Kpi, String Source) throws InterruptedException, Exception { 
 
         Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
-            if (FAIL) { return;} // [1]/span > [2]/span after 'Apply' buttorn added ([1]/span)
+            if (FAIL) { return;} 
         Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
             if (FAIL) { return;}
         if(t.equalsIgnoreCase("arrow_right")) {
