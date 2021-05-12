@@ -396,7 +396,7 @@ public class AP3_sales_reporting {
         if(EMAILS_COUNT < L0.size()) {
             _t++;
             _f++;
-            EX += _t + "\t" + "Sales report" + "\t" + "Add Recipient" + "\t" + "Not Saved" + "\t" + "FAIL" + "\t" + "Sales report - Add Recipient - not saved";  F += _t + " > " + "Sales report - Add Recipient - not saved";
+            EX += _t + "\t" + "Sales report" + "\t" + "Add Recipient" + "\t" + "Not Saved" + "\t" + "FAIL" + "\t" + "Sales report - Add Recipient - not saved";  F += "Step: " + _t + " > " + "Sales report - Add Recipient - not saved";
             EX += "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }  else{
             _t++;

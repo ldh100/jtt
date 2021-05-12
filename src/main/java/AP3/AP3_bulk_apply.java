@@ -738,7 +738,7 @@ public class AP3_bulk_apply {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + LIST1+ " " +LIST2+ "\t" + "Lists Size Comparison Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + "===" + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
     }
     

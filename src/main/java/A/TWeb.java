@@ -85,7 +85,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Target URL" + "\t" + LINK + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }    
@@ -110,7 +110,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Page URL" + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -132,7 +132,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Page URL" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }    
@@ -153,7 +153,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + " - " + "\t" + URL + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -174,7 +174,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + FROM + "\t" + TO + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -195,7 +195,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + FROM + "\t" + TO + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -216,7 +216,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -234,7 +234,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + "Move to page Top" + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }
@@ -357,7 +357,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + "Clear Cookies & Re-start Driver" + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }
@@ -380,7 +380,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + "Move to page Bottom" + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -432,7 +432,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -453,7 +453,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "X = " + X + ", Y = " + Y + "\t" + "Scroll Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }    
@@ -499,7 +499,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME  + "\t" + PATH + "\t" + "LoadTimeOut " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -545,7 +545,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME  + "\t" + PATH + "\t" + "LoadTimeOut " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -594,7 +594,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME  + "\t" + PATH + "\t" + "LoadTimeOut " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -640,7 +640,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME  + "\t" + PATH + "\t" + "LoadTimeOut " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -662,7 +662,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -684,7 +684,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     } 
@@ -720,7 +720,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + DIRECTION + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     } 
@@ -770,7 +770,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -835,7 +835,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -901,7 +901,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -956,7 +956,7 @@ public class TWeb {
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "FAIL" + "\t" + err +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                F += _t + " > " + err + "\r\n";                
+                F += "Step: " + _t + " > " + err + "\r\n";                
             } else {
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text Not Found" + "\t" + "WARN" + "\t" + " - " +
@@ -1010,7 +1010,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -1057,7 +1057,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -1107,7 +1107,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -1155,7 +1155,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -1209,7 +1209,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -1259,7 +1259,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -1309,7 +1309,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -1362,7 +1362,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -1418,7 +1418,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -1470,7 +1470,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }
@@ -1502,7 +1502,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -1529,7 +1529,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -1550,7 +1550,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -1585,7 +1585,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -1607,7 +1607,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -1663,7 +1663,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + PATH+ "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }    
@@ -1718,7 +1718,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + PATH+ "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }    
@@ -1766,7 +1766,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "e2" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }    
@@ -1824,7 +1824,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }    
@@ -1877,7 +1877,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }
@@ -1925,7 +1925,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }    
@@ -1987,7 +1987,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -2043,7 +2043,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + PATH+ "\t" + "L0" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -2098,7 +2098,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + PATH+ "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }
@@ -2153,7 +2153,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + PATH+ "\t" + "L2" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }
@@ -2208,7 +2208,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + PATH+ "\t" + "L2" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }
@@ -2256,7 +2256,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "List index " + I + " > " + PATH + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }
@@ -2311,7 +2311,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Index " + I + ": td(s)" + "\t" + "table data" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -2347,7 +2347,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Index " + I + ": th(s)" + "\t" + "table header" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -2371,7 +2371,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Day " + I + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -2448,7 +2448,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Day " + (I + 1) + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -2480,7 +2480,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }
@@ -2509,7 +2509,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "mdi-eye/mdi-eye" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }     
@@ -2533,7 +2533,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "mdi-eye/mdi-eye-off" + "\t" + "action.moveToElement(e).click().perform()" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }     
@@ -2566,7 +2566,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Row" + " Index " + I + ": td(s)" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -2604,7 +2604,7 @@ public class TWeb {
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
                 EX += _t + "\t == " + NAME + "\t" + URL + "\t" + " --- " + "\t" + "FAIL" + "\t" + err +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                F += _t + " > " + err + "\r\n";                
+                F += "Step: " + _t + " > " + err + "\r\n";                
             } else {
                 _p++; err = ex.getMessage().trim();
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
@@ -2646,7 +2646,7 @@ public class TWeb {
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
                 EX += _t + "\t == " + NAME + "\t" + URL + "\t" + " --- " + "\t" + "FAIL" + "\t" + err +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                F += _t + " > " + err + "\r\n";                
+                F += "Step: " + _t + " > " + err + "\r\n";                
             } else {
                 _p++; err = ex.getMessage().trim();
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
@@ -2693,7 +2693,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t == " + NAME + "\t" + VAL + "\t" + " --- " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }
@@ -2754,7 +2754,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t == " + NAME + "\t" + "Closure Title: " + C_Name + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -2839,7 +2839,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t == " + NAME + "\t" + TARGET + "\t" + "Day " + DAY + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }
@@ -2889,7 +2889,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t == " + NAME + "\t" + TARGET + "\t" + "*_supported" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }
@@ -2951,7 +2951,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t == " + NAME + "\t" + DAY + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -3012,7 +3012,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t == " + NAME + "\t" + DAY + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -3048,7 +3048,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }
@@ -3096,7 +3096,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     }
@@ -3125,7 +3125,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         } 
         sw1.reset();
     } 
@@ -3146,7 +3146,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -3203,7 +3203,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -3252,7 +3252,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -3304,7 +3304,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -3334,7 +3334,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Opening the Browser in Incognito Mode" + "\t" + "Not able to Open Browser in Incognito Mode" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -3394,7 +3394,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -3446,7 +3446,7 @@ public class TWeb {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
         sw1.reset();
     }
@@ -3466,14 +3466,14 @@ public class TWeb {
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
                 EX += _t + "\t" + NAME + "\t"  + "L0" + "\t" + "FAIL" + "\t" + err +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                F += _t + " > " + err + "\r\n";
+                F += "Step: " + _t + " > " + err + "\r\n";
             }
         } catch(Exception ex){
             _f++; FAIL = true; err ="Failed due to exception " + Expected + "  with Actual value - "+actual+"";
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t"  + "L0" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
         }
     }
 }

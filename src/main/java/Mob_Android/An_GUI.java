@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Mob_Android;
 import A.Func;
 import com.amazonaws.SdkClientException;
@@ -889,7 +884,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected Duration DD;  
     protected final Stopwatch sw1 = Stopwatch.createUnstarted();
 
-    protected String ADB_HOME;
+    protected String ADB_HOME = "";
+    protected String EMULATOR_HOME = "";
     protected boolean Update_Build = false;   
     protected String AWS_A_key = "";   
     protected String AWS_S_key = "";   
@@ -978,7 +974,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected AndroidElement ae3 = null;
     
     private boolean CONFIG = false;
-    private boolean Zip_Report = false;
+    private boolean Zip_Report = true;
     private String Slack_Channel = "";
     protected boolean _Slack = false;
     protected boolean _Support = false;
@@ -1002,7 +998,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected boolean _Feedback = false;
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="GUI Components Actions"> 
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">   
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
         if (d1LastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
            return;
@@ -1263,7 +1259,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(A.A.WsOS.toLowerCase().contains("windows")){
             ADB_HOME = "";    
         }else{
-             ADB_HOME = System.getenv("HOME") + File.separator + "Library" + File.separator + "Android"+ File.separator + "sdk" + File.separator + "platform-tools" + File.separator;     
+            ADB_HOME = System.getenv("HOME") + File.separator + "Library" + File.separator + "Android"+ File.separator + "sdk" + File.separator + "platform-tools" + File.separator;     
         }
         Get_S3_MOB_Credentials();              
 
@@ -1695,7 +1691,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         cmbDevice.removeAllItems();
         Current_Log_Update(true, "- Find Attached Android Devices ..." + "\r\n");
 
-        String Dev  = Func.ExecuteCmdProcessBuilder( ADB_HOME + "adb devices -l", A.A.ADB_HOME, true, true).trim();
+        String Dev  = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb devices -l", A.A.ADB_HOME, true, true).trim();
         String[] dev = Dev.split("\r\n");
         if (dev.length > 2) {
             for (int i = 1; i < dev.length - 1; i++) {
@@ -2278,14 +2274,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }
             sw1.start();
             LOG_START();   // ========================================================            
-            BW1_DoWork( false);
+            BW1_DoWork(false);
         }catch(Exception ex){
             return "ERROR > " + ex.getMessage();
         }
         return "OK > Job Started >> Please Monitor Reports...";
     }
     private String JOB_Load_CONFIG(String config){
-        //config = config.replace("\r\n", "\n");
         String[] lines = config.split("\n");  
         String value;
         try{             
@@ -2358,7 +2353,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
     }
     private String JOB_Find_Connected_Devices(){
         Current_Log_Update(true, "- Find Attached Android Devices ..." + "\r\n");
-        String Dev  = Func.ExecuteCmdProcessBuilder( ADB_HOME + "adb devices -l", A.A.ADB_HOME, true, true).trim();
+        if(A.A.WsOS.toLowerCase().contains("windows")){
+            ADB_HOME = "";  
+            EMULATOR_HOME = "C:/Users/" + A.A.UserID + "/AppData/Local/Android/Sdk/emulator";
+        }else{
+            ADB_HOME = System.getenv("HOME") + File.separator + "Library" + File.separator + "Android"+ File.separator + "sdk" + File.separator + "platform-tools" + File.separator;     
+            EMULATOR_HOME =System.getenv("HOME") + File.separator + "Library" + File.separator + "Android"+ File.separator + "sdk" + File.separator + "emulator" + File.separator;   
+        }
+        String Dev  = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb devices -l", A.A.ADB_HOME, true, true).trim();
         String[] dev = Dev.split("\r\n");
         if (dev.length > 2 && Dev.contains(device)) {
             for (int i = 1; i < dev.length; i++) {
@@ -2450,12 +2452,15 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }
 
             Current_Log_Update(true, "= Starting Appium Service and Android Driver..." + "\r\n");
+            
+            r_type = "ad-hoc";
+            
             if(sw1.isRunning()){
                 sw1.reset();
             }
             sw1.start();
             LOG_START();           // ============================================
-            BW1_DoWork( true); // ============================================
+            BW1_DoWork(true);  // ============================================
         }catch(Exception ex){
             Current_Log_Update(true, "= GUI_Run_Manual ERROR > " + ex.getMessage() + "\r\n");
             BW1_FAIL_LOG_UPDATE("= GUI_Run_Manual ERROR > " + ex.getMessage());
@@ -2784,6 +2789,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     //<editor-fold defaultstate="collapsed" desc="Background Worker: Appium Service > Android Driver > Execution > Reports">
     private void BW1_DoWork(Boolean GUI) throws Exception{
         BW1 = new SwingWorker() {
+            Instant dw_start = Instant.now();
             @Override
             protected String doInBackground() throws Exception {
                 String DriverStart = StartAndroidDriver();
@@ -2794,7 +2800,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     Current_Log_Update(GUI, DriverStart.trim() + "\r\n");
                     Summary = "Start Driver - Failed";
                     DD = Duration.between(run_start, Instant.now());
-                    LOG_UPDATE(txtLog.getText());   // ======================================================
+                    LOG_UPDATE(DriverStart.trim() + "\r\n");   // ======================================================
                     btnRun.setEnabled(true);
                     btnFails.setEnabled(true);
                 }
@@ -2818,7 +2824,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 
                 Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n");
                 
-                BW1_Done(GUI);
+                BW1_Done(GUI); // ================================================================================
+                
                 if(_f > 0) {
                     return "= Completed @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)"+ ", Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" ;
                 }else{
@@ -2990,6 +2997,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
 //        }
     }
     private void BW1_Done(boolean GUI) throws Exception{
+        DD = Duration.between(run_start, Instant.now());
+        
+        Slack_Channel = "xtt_test";
+        _Slack = true;
+        Zip_Report = true;
+        
         Last_EX = EX;
         Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
         try {
@@ -3048,7 +3061,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(ef.exists() && !ef.isDirectory()) {
                 ef.delete();
             }  
-            String HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Click to Oopen";
+            String HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Click to Open";
             String HTML_Path = HtmlReporter.getFilePath();
             if(Zip_Report){
                 String Origin_HTML = HTML_Path;
@@ -3093,7 +3106,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Page URL" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3117,7 +3130,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Page URL" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3140,7 +3153,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "AndroidKey.BACK" + "\t" + "driver.pressKey" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3170,7 +3183,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3223,7 +3236,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Swipe " + DIRECTION + "\t" + "Swipe Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3277,7 +3290,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + DIRECTION + "\t" + "Swipe Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3325,7 +3338,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "loadTimeout " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3373,7 +3386,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "loadTimeout " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3397,7 +3410,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3421,7 +3434,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3459,7 +3472,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + DIRECTION + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3511,7 +3524,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3578,7 +3591,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "moveToElement" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3646,7 +3659,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "moveToElement" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3706,7 +3719,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "FAIL" + "\t" + err +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                F += _t + " > " + err + "\r\n";
+                F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));                
             } else {
                 _p++; 
@@ -3762,7 +3775,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3811,7 +3824,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3863,7 +3876,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3914,7 +3927,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3964,7 +3977,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4020,7 +4033,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4072,7 +4085,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4124,7 +4137,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4179,7 +4192,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4237,7 +4250,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4291,7 +4304,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "sendKeys" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -4326,7 +4339,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4355,7 +4368,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4378,7 +4391,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4415,7 +4428,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4439,7 +4452,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4498,7 +4511,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -4556,7 +4569,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -4606,7 +4619,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "e2" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -4666,7 +4679,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -4721,7 +4734,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "sendKeys"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -4771,7 +4784,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -4835,7 +4848,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4894,7 +4907,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L0" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4952,7 +4965,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -5010,7 +5023,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L2" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -5068,7 +5081,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L3" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -5152,4 +5165,5 @@ public class An_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtMobile_Pw;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>
+
 }

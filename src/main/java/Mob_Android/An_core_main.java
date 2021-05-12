@@ -50,7 +50,7 @@ package Mob_Android;
             if (FAIL) { return;}            
         Element_By_Path_Text_Enter("Enter 'Password' input", "id", "textInputEditText_login_password", Mobile_PW, true,"no_jira");             
             if (FAIL) { return;} 
-        Element_By_Path_Action_Click("Click 'Undide Password' icon", "id", "text_input_end_icon", ParentTest, "no_jira");             
+        Element_By_Path_Action_Click("Click 'Unhide  Password' icon", "id", "text_input_end_icon", ParentTest, "no_jira");             
             if (FAIL) { return;}              
         HideKeyboard("Hide Keyboard", ParentTest, "no_jira");             
             if (FAIL) { return;}

@@ -824,7 +824,7 @@ public class WO extends javax.swing.JInternalFrame {
                                     Toast_Msg.toLowerCase().contains("fail")) {
                                 _t++;
                                 _f++;
-                                F += _t + " > FAIL - " + Toast_Msg + "\r\n";
+                                F += "Step: " + _t + " > FAIL - " + Toast_Msg + "\r\n";
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
                             } else if(Toast_Msg.toLowerCase().contains("fix") || Toast_Msg.toLowerCase().contains("error")) {
                                 _t++;
@@ -833,7 +833,7 @@ public class WO extends javax.swing.JInternalFrame {
                             } else {
                                 _t++;
                                 _w++;
-                                //F += _t + " > WARN - " + tt + "\r\n";
+                                //F += "Step: " + _t + " > WARN - " + tt + "\r\n";
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";                           
                             }
                             Thread.sleep(100); //  pause till new alert expected ???? 

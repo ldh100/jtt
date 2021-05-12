@@ -3006,7 +3006,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Page URL" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3030,7 +3030,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Page URL" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3053,7 +3053,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "AndroidKey.BACK" + "\t" + "driver.pressKey" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3083,7 +3083,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3136,7 +3136,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Swipe " + DIRECTION + "\t" + "Swipe Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3190,7 +3190,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + DIRECTION + "\t" + "Swipe Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3238,7 +3238,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "loadTimeout " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3286,7 +3286,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "loadTimeout " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3310,7 +3310,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3334,7 +3334,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3372,7 +3372,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + DIRECTION + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3424,7 +3424,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3491,7 +3491,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "moveToElement" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3559,7 +3559,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "moveToElement" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3619,7 +3619,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "FAIL" + "\t" + err +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                F += _t + " > " + err + "\r\n";
+                F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));                
             } else {
                 _p++; 
@@ -3675,7 +3675,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3724,7 +3724,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3776,7 +3776,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3827,7 +3827,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3877,7 +3877,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3933,7 +3933,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -3985,7 +3985,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4037,7 +4037,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4092,7 +4092,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4150,7 +4150,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4204,7 +4204,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "sendKeys" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -4239,7 +4239,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4268,7 +4268,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4291,7 +4291,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4328,7 +4328,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4352,7 +4352,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4411,7 +4411,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -4469,7 +4469,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -4519,7 +4519,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "e2" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -4579,7 +4579,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -4634,7 +4634,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "sendKeys"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -4684,7 +4684,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -4748,7 +4748,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4807,7 +4807,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L0" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         }
         sw1.reset();
@@ -4865,7 +4865,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -4923,7 +4923,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L2" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
@@ -4981,7 +4981,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L3" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += _t + " > " + err + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();

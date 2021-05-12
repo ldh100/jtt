@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package A;
 import java.awt.Color;
 import java.awt.Component;
@@ -348,10 +343,10 @@ public class Func {
             builder.addTextBody("channels", Channel); 
             builder.addTextBody("initial_comment", MSG); 
             
-            if(!Path.equals("")){
+            if(!Path.equals("")){ 
                 File file = new File(Path);            
                 builder.addBinaryBody(
-                    "file", // File_Name
+                    file.getName(), // File_Name
                     new FileInputStream(file), 
                     ContentType.APPLICATION_OCTET_STREAM,
                     file.getName()
@@ -363,7 +358,7 @@ public class Func {
             httpPost.setEntity(multiPartEntity); 
             HttpResponse response = httpclient.execute(httpPost);
             return "=== Send_to_Slack - " + response.getStatusLine() + "\r\n"; 
-        }catch(IOException ex) {
+        } catch(IOException ex) {
             return "=== Send_to_Slack > ERROR: " + ex.getMessage() + "\r\n";
         }
     }
