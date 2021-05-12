@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Mob_Android;
-/**
- *
- * @author Oleg.Spozito
- */
- class An_core_main extends An_GUI {
+
+class An_core_main extends An_GUI {
     protected An_core_main(An_GUI a) {
        Mobile_ID = a.Mobile_ID;
        Mobile_PW = a.Mobile_PW;

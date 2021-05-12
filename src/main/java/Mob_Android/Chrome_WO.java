@@ -3,18 +3,20 @@ package Mob_Android;
  *
  * @author Oleg.Spozito
  */
-class An_C360 extends An_GUI{
-    protected An_C360(An_GUI a) {
+class Chrome_WO extends An_GUI{
+    protected Chrome_WO(An_GUI a) {
        Bolter_ID = a.Bolter_ID;
        Bolter_PW = a.Bolter_PW;
        ad = a.ad;
+       app_url = a.app_url;
        loadTimeout = a.loadTimeout;
        LoadTimeOut = a.LoadTimeOut;
        ParentTest = a.ParentTest;
     }
 
-    protected void Run() throws InterruptedException, Exception{         
-        //
+    protected void Run() throws InterruptedException, Exception{   
+        ad.get(app_url);
+        Thread.sleep(5000);
     }
 }
 

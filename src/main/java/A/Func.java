@@ -69,6 +69,20 @@ public class Func {
     }
     public static String App_ID(String APP, String ENV) {
        switch (APP.toLowerCase()) {
+            case "chrome c360":
+                if(ENV.equals("DE")) 
+                    return "https://dev.cafe360.compassdigital.org/";
+                if(ENV.equals("ST")) 
+                    return "https://dev.cafe360.compassdigital.org/";
+                if(ENV.equals("PR")) 
+                    return "https://dev.cafe360.compassdigital.org/";
+            case "chrome wo":
+                if(ENV.equals("DE")) 
+                    return "https://dev.thriveapp.io";
+                if(ENV.equals("ST")) 
+                    return "https://staging.thriveapp.io";
+                if(ENV.equals("PR")) 
+                    return "https://thriveapp.io";
             case "boost":
                 if(ENV.equals("DE")) 
                     return "014B6RP683C2QL7X00oDS86lrKOO14twGXQwzDARCgympJ42Q5SD1LWZ2gppTOGd4eov2GcePXaa59Zquma";
@@ -382,7 +396,7 @@ public class Func {
                 fis.close();
             }
             return Source.replace(".html", ".zip"); 
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             return "Zip_File ERROR: " + ex.getMessage();  
         }            
     }

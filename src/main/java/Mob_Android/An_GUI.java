@@ -1060,7 +1060,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
             Current_Log_Update(true, "- Check Package " + "\r\n"); 
             Current_Log_Update(true, CheckAppPackage());                                 
             
-            if(app.equals("Bolter")) {
+            if(app.startsWith("Chrome")){
+                // do nothing
+            }else if(app.equals("Bolter")) {
                 GUI_Get_Bolter_Site();
             }else{
                 GUI_Get_Sites();
@@ -2808,8 +2810,10 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 
                 if (app.equals("Bolter")) {
                     Execute_Bolter();
-                } else if (app.equals("C360")) {
+                }else if (app.equals("Chrome C360")) {
                     Execute_C360();    
+                }else if (app.equals("Chrome WO")) {
+                    Execute_WO(); 
                 }else{
                     Execute_Core_App();
                 }
@@ -2867,7 +2871,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             cap.setCapability("udid", devID);
             cap.setCapability("platformVersion", devOS);
             cap.setCapability("clearSystemFiles", true);
-            if(app.equals("C360")){
+            if(app.startsWith("Chrome")){
                 cap.setCapability(CapabilityType.BROWSER_NAME, "Chrome"); 
                 // path for correct
                 //cap.setCapability("chromedriverExecutable","/Users/myUsername/node_modules/appium/node_modules/appium-chromedriver/chromedriver/mac/chromedriver")
@@ -2992,9 +2996,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(true){
             SCOPE += "C360 Chrome";
             ParentTest = HtmlReport.createTest("C360 Chrome"); 
-//            Chrome_C360 BR = new Chrome_C360.Chrome_C360(An_GUI.this);
-//            BR.Run(); // ======================================
-//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            Chrome_C360 BR = new Mob_Android.Chrome_C360(An_GUI.this);
+            BR.Run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
         }
 
     }
@@ -3002,9 +3006,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(true){
             SCOPE += "WO Chrome";
             ParentTest = HtmlReport.createTest("WO Chrome"); 
-//            Chrome_WO BR = new Chrome_WO.Chrome_WO(An_GUI.this);
-//            BR.Run(); // ======================================
-//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            Chrome_WO BR = new Mob_Android.Chrome_WO(An_GUI.this);
+            BR.Run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
         }
 
     }
@@ -3028,8 +3032,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
         DD = Duration.between(run_start, Instant.now());
         
         Slack_Channel = "xtt_test";
-        _Slack = true;
-        Zip_Report = true;
+        if(_Slack){
+            Zip_Report = true;
+        } else{
+            Zip_Report = false;
+        }
         
         Last_EX = EX;
         Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
