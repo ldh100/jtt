@@ -2186,7 +2186,11 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                         ChromeOptions chrome_op = new ChromeOptions();
                         //chrome_op.addExtensions(new File("/path/to/extension.crx"));
                         chrome_op.addArguments("--disable-infobars");
-                        chrome_op.addArguments("--start-maximized");
+                        if(!_mobile_view.isSelected()){
+                            chrome_op.addArguments("--start-maximized");
+                        } else{
+                            //chrome_op. >> Set Screen Dimetion
+                        }
             //            chrome_op.addArguments("--start-minimized");
             //            chrome_op.addArguments("enable-automation");
             //            chrome_op.addArguments("--no-sandbox");

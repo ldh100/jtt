@@ -2806,6 +2806,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 
                 if (app.equals("Bolter")) {
                     Execute_Bolter();
+                } else if (app.equals("C360")) {
+                    Execute_C360();    
                 }else{
                     Execute_Core_App();
                 }
@@ -2975,6 +2977,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
             BR.Run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
         }
+    }
+    private void Execute_C360() throws Exception {
+        if(_Login){
+            //
+        }
+
     }
     private void Execute_Core_App() throws Exception{
         if(_Login){ 
