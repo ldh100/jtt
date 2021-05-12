@@ -95,6 +95,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -910,7 +911,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected String Bolter_ID = "";   
     protected String Bolter_PW = "";   
          
-    protected String url = "";
+    protected String ap3_url = "";
+    protected String app_url = "";
     protected String app = "";
     protected String appId = "";
     protected String env = "";
@@ -1048,6 +1050,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             this.setTitle("Android Automation Manager >>> Changing Application,  please wait...");
             app = cmbApp.getSelectedItem().toString();
+            app_url = "";
+            app_url = Func.App_ID(app, env);
 
             GUI_Get_S3_Packages(AWS_credentials);
             
@@ -1056,18 +1060,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
             Current_Log_Update(true, "- Check Package " + "\r\n"); 
             Current_Log_Update(true, CheckAppPackage());                                 
             
-            if("Bolter".equals(app)) {
+            if(app.equals("Bolter")) {
                 GUI_Get_Bolter_Site();
-            } else{
+            }else{
                 GUI_Get_Sites();
             }
-            this.setTitle("Android Automation Manager");
+            this.setTitle("Android Automation Manager " + A.A.An_F_COUNT);  
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            if("Bolter".equals(app)){
-                jPanel1.setVisible(false);
-            }else{
-                jPanel1.setVisible(true);  
-            }
         }
     }//GEN-LAST:event_cmbAppItemStateChanged
     private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
@@ -1268,7 +1267,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
         cmbApp.addItem("Boost"); 
         cmbApp.addItem("JJKitchen");
         cmbApp.addItem("Thrive");
-
+        cmbApp.addItem("Chrome C360");
+        cmbApp.addItem("Chrome WO");
+        
         cmbEnv.addItem("Staging");
         cmbEnv.addItem("Production");
         cmbEnv.addItem("Development");
@@ -1278,7 +1279,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         
         Load = false;
         GUI_Load_Env();
-        app = cmbApp.getSelectedItem().toString();
+        
         CONFIG = false;  
         GUI_Find_Connected_Devices();
         
@@ -1297,15 +1298,15 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
-            url = "https://staging.adminpanel.compassdigital.org/";
+            ap3_url = "https://staging.adminpanel.compassdigital.org/";
         } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
             BaseAPI = "https://api.compassdigital.org/dev";
             env = "DE";
-            url = "https://dev.adminpanel.compassdigital.org/";
+            ap3_url = "https://dev.adminpanel.compassdigital.org/";
         } else{
             BaseAPI = "https://api.compassdigital.org/v1";
             env = "PR";
-            url = "https://adminpanel.compassdigital.org/";
+            ap3_url = "https://adminpanel.compassdigital.org/";
         }     
 
         GUI_Load_CONFIG();
@@ -1315,7 +1316,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
             Load = false;
         }
         app = cmbApp.getSelectedItem().toString();
-
+        app_url = Func.App_ID(cmbApp.getSelectedItem().toString(), env);
+        
         Set_Mobile_Package_Name();
         GUI_Get_S3_Packages(AWS_credentials);
         
@@ -2328,15 +2330,15 @@ public class An_GUI extends javax.swing.JInternalFrame {
             switch (env) {
                 case "ST":
                     BaseAPI = "https://api.compassdigital.org/staging";
-                    url = "https://staging.adminpanel.compassdigital.org/";
+                    ap3_url = "https://staging.adminpanel.compassdigital.org/";
                     break;
                 case "DE":
                     BaseAPI = "https://api.compassdigital.org/dev";
-                    url = "https://dev.adminpanel.compassdigital.org/";
+                    ap3_url = "https://dev.adminpanel.compassdigital.org/";
                     break;
                 default:
                     BaseAPI = "https://api.compassdigital.org/v1";
-                    url = "https://adminpanel.compassdigital.org/";
+                    ap3_url = "https://adminpanel.compassdigital.org/";
                     break;
             }
             Current_Log_Update(true, "= JOB_Load_CONFIG > OK" + "\r\n");
@@ -2538,7 +2540,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _insert.setString(1, LocalDateTime.now().format(Date_formatter));
             _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
             _insert.setString(3, "Android_" + app + "_" + env);
-            _insert.setString(4, url);
+            _insert.setString(4, ap3_url);
             _insert.setString(5, "Running...");
             _insert.setString(6, "0");
             _insert.setString(7, "0");
@@ -2587,7 +2589,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
             _update.setString(3, "Android_" + app + "_" + env);
-            _update.setString(4, url);
+            _update.setString(4, ap3_url);
             _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
             _update.setInt(6, t_calls);
             _update.setDouble(7, t_min);
@@ -2780,7 +2782,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
 
     }
-     //</editor-fold>
+    //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Background Worker: Appium Service > Android Driver > Execution > Reports">
     private void BW1_DoWork(Boolean GUI) throws Exception{
@@ -2812,7 +2814,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     Execute_Core_App();
                 }
                 DD = Duration.between(run_start, Instant.now());
-                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_hh_mma"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
                 EX = "Android " + app + " " + env + ", App v: " + appVersion + ", Device: " + device + " OS v:" + devOS +
@@ -2865,8 +2867,16 @@ public class An_GUI extends javax.swing.JInternalFrame {
             cap.setCapability("udid", devID);
             cap.setCapability("platformVersion", devOS);
             cap.setCapability("clearSystemFiles", true);
-            cap.setCapability("appPackage", appPackage);
-            cap.setCapability("appActivity", appActivity);
+            if(app.equals("C360")){
+                cap.setCapability(CapabilityType.BROWSER_NAME, "Chrome"); 
+                // path for correct
+                //cap.setCapability("chromedriverExecutable","/Users/myUsername/node_modules/appium/node_modules/appium-chromedriver/chromedriver/mac/chromedriver")
+                cap.setCapability("chromedriverExecutable", A.A.CWD + File.separator + "chromedriver.exe");
+                //cap.setCapability(CapabilityType.VERSION, "5.1");
+            } else{
+                cap.setCapability("appPackage", appPackage);  
+                cap.setCapability("appActivity", appActivity);                 
+            }
             
             cap.setCapability("autoGrantPermissions", false); // false- always get prompt
             cap.setCapability("unicodeKeyboard", false);
@@ -2979,8 +2989,22 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
     }
     private void Execute_C360() throws Exception {
-        if(_Login){
-            //
+        if(true){
+            SCOPE += "C360 Chrome";
+            ParentTest = HtmlReport.createTest("C360 Chrome"); 
+//            Chrome_C360 BR = new Chrome_C360.Chrome_C360(An_GUI.this);
+//            BR.Run(); // ======================================
+//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+        }
+
+    }
+    private void Execute_WO() throws Exception {
+        if(true){
+            SCOPE += "WO Chrome";
+            ParentTest = HtmlReport.createTest("WO Chrome"); 
+//            Chrome_WO BR = new Chrome_WO.Chrome_WO(An_GUI.this);
+//            BR.Run(); // ======================================
+//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
         }
 
     }
@@ -3051,6 +3075,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         HtmlReporter.config().setReportName("Android OS v" + devOS + ", App: " + app + " v: " + appVersion + ", Environment: " + env + ", Summary: Total Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i);
         HtmlReport.flush();
         
+   
         if(_Slack && !Slack_Channel.equals("N/A")){
             Report(false);
             String MSG = "Android_" + app + "_" + env + " Excel Automation report - " + Report_Date +
@@ -3082,6 +3107,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 hf.delete();
             }
         }
+        
         btnRun.setEnabled(true);
         if(!"".equals(F.trim())){
             btnFails.setEnabled(true);
