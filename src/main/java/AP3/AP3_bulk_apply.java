@@ -105,9 +105,7 @@ public class AP3_bulk_apply {
         }
         //reset list visibility and in/out of stock checkbox indicator
         String inStock = getAttributeOfElementByXpath("((//table[contains(@class,'v-table')]//tbody/tr)[1]//td[8])//i", "class");
-        System.out.println(inStock);
         String visible = getAttributeOfElementByXpath("((//table[contains(@class,'v-table')]//tbody/tr)[1]//td[4])//i", "class");
-        System.out.println(visible);
         if (inStock.contains("mdi-checkbox-blank-outline") && visible.contains("mdi-eye-off")) {
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira");
             if (FAIL) { return;}
