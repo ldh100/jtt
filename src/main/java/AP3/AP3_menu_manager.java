@@ -1113,7 +1113,7 @@ public class AP3_menu_manager {
         if ("Found".equals(t)) {     
             _t++; _f++;
             EX += _t + "\t" + "Navigate Back after Publish OK" + "\t" + "MM 'Sector' page" + "\t" + "Dialog 'Leave without publishing?'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-            F += _t + " > " + "Dialog 'Leave without publishing?' after Published OK" + "\r\n";
+            F += "Step: " + _t + " > " + "Dialog 'Leave without publishing?' after Published OK" + "\r\n";
             _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true,"no_jira"); 
                 if (FAIL) { return; }   
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", "no_jira"); 

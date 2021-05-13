@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package A;
 import java.awt.Color;
 import java.awt.Component;
@@ -74,6 +69,20 @@ public class Func {
     }
     public static String App_ID(String APP, String ENV) {
        switch (APP.toLowerCase()) {
+            case "chrome c360":
+                if(ENV.equals("DE")) 
+                    return "https://dev.cafe360.compassdigital.org/";
+                if(ENV.equals("ST")) 
+                    return "https://dev.cafe360.compassdigital.org/";
+                if(ENV.equals("PR")) 
+                    return "https://dev.cafe360.compassdigital.org/";
+            case "chrome wo":
+                if(ENV.equals("DE")) 
+                    return "https://dev.thriveapp.io";
+                if(ENV.equals("ST")) 
+                    return "https://staging.thriveapp.io";
+                if(ENV.equals("PR")) 
+                    return "https://thriveapp.io";
             case "boost":
                 if(ENV.equals("DE")) 
                     return "014B6RP683C2QL7X00oDS86lrKOO14twGXQwzDARCgympJ42Q5SD1LWZ2gppTOGd4eov2GcePXaa59Zquma";
@@ -342,16 +351,18 @@ public class Func {
         return ExcelFile.getAbsolutePath();
     }
     public static String Send_File_with_Message_to_Slack(String Path, String Channel, String MSG) {
+        String F_Name = "?";
         try{           
             MultipartEntityBuilder builder = MultipartEntityBuilder.create(); 
             builder.addTextBody("token", A.S_OAuth_TKN); 
             builder.addTextBody("channels", Channel); 
             builder.addTextBody("initial_comment", MSG); 
             
-            if(!Path.equals("")){
-                File file = new File(Path);            
+            if(!Path.equals("")){ 
+                File file = new File(Path); 
+                F_Name = file.getName();
                 builder.addBinaryBody(
-                    "file", // File_Name
+                    file.getName(), // File_Name
                     new FileInputStream(file), 
                     ContentType.APPLICATION_OCTET_STREAM,
                     file.getName()
@@ -362,9 +373,9 @@ public class Func {
             HttpPost httpPost = new HttpPost("https://slack.com/api/files.upload");
             httpPost.setEntity(multiPartEntity); 
             HttpResponse response = httpclient.execute(httpPost);
-            return "=== Send_to_Slack - " + response.getStatusLine() + "\r\n"; 
-        }catch(IOException ex) {
-            return "=== Send_to_Slack > ERROR: " + ex.getMessage() + "\r\n";
+            return "= File " + F_Name + " > Slack - " + response.getStatusLine() + "\r\n"; 
+        } catch(IOException ex) {
+            return "= File " + F_Name + " > Slack > ERROR: " + ex.getMessage() + "\r\n";
         }
     }
     public static String Zip_File(String Source){
@@ -385,7 +396,7 @@ public class Func {
                 fis.close();
             }
             return Source.replace(".html", ".zip"); 
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             return "Zip_File ERROR: " + ex.getMessage();  
         }            
     }

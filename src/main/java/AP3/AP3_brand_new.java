@@ -380,7 +380,7 @@ public class AP3_brand_new {
                         } else{
                             _t++; 
                             _f++;
-                            F += _t + " > " + "Add Station > Assign Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
+                            F += "Step: " + _t + " > " + "Add Station > Assign Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
                             EX += " - " + "\t" + "Add Station > Assign Menus" + "\t" + "Import" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                               
                         }                                                  
                                               
@@ -406,7 +406,7 @@ public class AP3_brand_new {
                         } else{
                             _t++; 
                             _f++;
-                            F += _t + " > " + "Add Station > Assing Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
+                            F += "Step: " + _t + " > " + "Add Station > Assing Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
                             EX += " - " + "\t" + "Add Station > Assign Menus" + "\t" + "Add" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                           
                         }
                     break;
@@ -894,7 +894,7 @@ public class AP3_brand_new {
             } else{
                 _t++; 
                 _f++;
-                F += _t + " > " + "Add Station > Schedule Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
+                F += "Step: " + _t + " > " + "Add Station > Schedule Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
                 EX += " - " + "\t" + "Add Station > Schedule Menu" + "\t" + "Add" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                           
                 return;
             }
