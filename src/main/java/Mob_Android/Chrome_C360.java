@@ -10,7 +10,9 @@ class Chrome_C360 extends An_GUI {
     }
 
     protected void Run() throws InterruptedException, Exception{   
-        ad.get(app_url);
-        Thread.sleep(5000);
+        Go_To_URL("Go to " + app_url, app_url, ParentTest, "no_lira");
+            if (FAIL) { return;} 
+        Get_Current_URL("Get_Current_URL" + app_url, ParentTest, "no_lira");
+        //Thread.sleep(5000);
     }
 }

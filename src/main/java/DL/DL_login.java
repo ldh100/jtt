@@ -4,6 +4,7 @@ class DL_login extends DL_GUI {
     protected DL_login(DL_GUI a) {
         url = a.url;
         d1 = a.d1;
+        Login_OK = a.Login_OK;
         loadTimeout = a.loadTimeout;
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;

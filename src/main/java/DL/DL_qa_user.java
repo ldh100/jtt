@@ -8,6 +8,7 @@ public class DL_qa_user extends DL_GUI {
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
     }
+    // Error: User Initilization Fail. Please Try Again    <<<< How to deal with That??   DEBUG
     protected void run(String User_ID, String Metric, String Period, String Val, String Location_Filters, String Item_Filters, String Kpi, String Source) throws InterruptedException, Exception { 
 
         Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
@@ -56,11 +57,20 @@ public class DL_qa_user extends DL_GUI {
         Element_E1_Find("Find Date selection container", "xpath", "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3']", ParentTest, "no_jira");          
         Element_By_Path_Click("Select Date Range " + Period, "xpath", "//span[text()='" + Period + "']", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-
-
+            
+//        // Clear Saved Filter 
+//        Find_Text("Find 'Saved Filters' drop-down", "Saved Filters", true, ParentTest, "no_jira");          
+//        Element_By_Path_Click("Open 'Saved Filters'", "xpath", "//span[text()='Saved Filters']", ParentTest, "no_jira"); 
+//        // input name=active-filter-select
+//        // list saved filters
+//        // if not "No option" >
+//        // loop: click on each > click 'delete' > garbage bin icon //svg[@class='MuiSvgIcon-root jss68']
+        
         Find_Text("Find 'Filters' label", "Filters", true, ParentTest, "no_jira");  
-        Find_Text("Find 'Configure Filters' button label", " Configure Filters", true, ParentTest, "no_jira");         
-
+        Find_Text("Find 'Configure Filters' button label", " Configure Filters", true, ParentTest, "no_jira"); 
+        Element_By_Path_Click("Open 'Configure Filters'", "xpath", "//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined jss65']", ParentTest, "no_jira"); 
+        // Save Selection > Enter name > click "Save and Appy"
+        
         if(!Location_Filters.isEmpty()){
             for (String L : Location_Filters.split("\r\n")) {
                 if(L.contains(":")){
@@ -131,104 +141,8 @@ public class DL_qa_user extends DL_GUI {
 } 
 
 
-////// <editor-fold defaultstate="collapsed" desc="New Code">
-//package DL;
-//
-//import static A.A.FAIL;
-//import static A.A.L0;
-//import static A.A._t;
-//import static A.A.sleep;
-//import static A.A.t;
-//import static DL.DL.url;
-//import javax.swing.JTable;
-//import A.TWeb;
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//public class DL_qa_user {
-//    public static String loc_dropdown1 = "";
-//    public static String item1 = "";
-//    public static String loc_dropdown2 = "";
-//    public static String item2 = "";
-//    public static String tbl_userName;
-//    public static String tbl_metric;
-//    public static String tbl_timePeriod;
-//    public static String tbl_value;
-//    public static String tbl_locationFilter;
-//    public static String tbl_itemFilter; 
-//    
-//    public static void run(JTable TBL) throws InterruptedException {
-//        String Logged_User = DL.DL_UserID;
-//        Wait_Element_Visible("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
-//            if (FAIL) { return;}   // [1]/span > [2]/span after 'Apply' buttorn added ([1]/span)
-//        Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
-//            if (FAIL) { return;}
-//        if(t.equalsIgnoreCase("arrow_right")) {
-//            Element_By_Path_Click("Click ' arrow_right' > Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira");  
-//                if (FAIL) { return;} 
-//        }
-//
-//        for (int i = 10; i < 11; i++) {  // ================== BEBUG
-//    	    tbl_userName = TBL.getValueAt(i, 0).toString();
-//            if (Logged_User == null || Logged_User.length()== 0 || !Logged_User.equals(tbl_userName) ) {
-//                Logged_User = tbl_userName;
-//
-//                _t++;Open_NewIncognitoWindow("Open a New Incognito Window", ParentTest, "no_jira"); 
-//                
-//                Navigate_to_URL("Navigate to", url, ParentTest, "no_jira");  
-//                
-//                if (FAIL) { return;}
-//                 Page_URL("Login page URL", ParentTest, "no_jira");              
-//        //        Element_By_Path_Click("Click 'LOGIN'", "id", "login-btn", ParentTest, "no_jira");  
-//        //            if (FAIL) { return;}  
-//        //        Thread.sleep(500);  
-//                Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");  
-//                    if (FAIL) { return;}  
-//                Element_By_Path_Text_Enter("Enter valid Username", "id", "username",tbl_userName , false, ParentTest, "no_jira");  
-//                    if (FAIL) { return;}            
-//                Element_By_Path_Text_Enter("Enter Valid Password", "id", "password", "Compass1", true, ParentTest, "no_jira");  
-//                    if (FAIL) { return;}
-//                Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");  
-//                    if (FAIL) { return;}
-//                Element_By_Path_Click("Click 'Sign In'", "name", "login", ParentTest, "no_jira");  
-//                    if (FAIL) { return;} 
-//                Wait_Element_Visible("get the side bar text ", "xpath", "(//span[@class='MuiButton-label'])[1]/span", ParentTest, "no_jira"); 
-//                    if (FAIL) { return;}
-//                Element_By_Path_Text("get the side bar text ", "xpath", "(//span[@class='MuiButton-label'])[1]/span", ParentTest, "no_jira"); 
-//                   if (FAIL) { return;}
-//                if(t.equalsIgnoreCase("arrow_right")) {
-//                    Element_By_Path_Click("Click 'To Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[1]", ParentTest, "no_jira");  
-//                    if (FAIL) { return;} 
-//                }
-//            }
-//            //Thread.sleep(5000);
-//
-//            List<String> metricList=new ArrayList<>();
-//            metricList.add("Total Spend");
-//            metricList.add("Contracted Spend");
-//            metricList.add("Contracted Utilization Rate");
-//            metricList.add("Member Earned Revenue");
-//            metricList.add("Member Rate of Return");
-//            metricList.add("Member Strength of Program");
-//            metricList.add("Customer Earned Revenue");
-//            metricList.add("Customer Rate of Return");
-//            metricList.add("Customer Strength of Program");
-//            metricList.add("Program Earned Revenue");
-//            metricList.add("Program Rate of Return");
-//            metricList.add("Program Strength of Program");
-//            
-//            for (String metric : metricList) {
-//                Element_By_DisplayChecking("Check '"+ metric+"' is Displayed ", "xpath", "//div/span[contains(.,'"+metric+"')]/parent::div/parent::div/div/span/span/input", ParentTest, "no_jira"); 
-//                //Metric Selection
-//                tbl_metric = TBL.getValueAt(i, 1).toString();
-//                Element_By_Path_Click("Check '"+tbl_metric+"' checkbox ", "xpath", "//div/span[contains(.,'"+tbl_metric+"')]/parent::div/parent::div/div/span/span", ParentTest, "no_jira");  
-//                    if (FAIL) { return;}
-//
-//                //Select the Time period
-//                tbl_timePeriod = TBL.getValueAt(i, 2).toString();
-//                String filterTimePeriod = filterTimePeriod();
-//                Element_By_Path_Click("Choose '"+filterTimePeriod+"' Date period ", "xpath", "//button[contains(@class,'disableElevation')]/span[contains(.,'"+filterTimePeriod+"')]", ParentTest, "no_jira");  
-//                    if (FAIL) { return;}
+// <editor-fold defaultstate="collapsed" desc="New Code">
+
 //
 //                //Click on Configure Filter
 //                Element_By_Path_Click("Cick on configure filters", "xpath", "//button[contains(.,' Configure Filters')]", ParentTest, "no_jira");  
@@ -463,28 +377,6 @@ public class DL_qa_user extends DL_GUI {
 ////				}
 ////			}
 //        }
-//    }
-//
-//    public static String filterTimePeriod() {
-//            tbl_timePeriod=tbl_timePeriod.trim();
-//            if(tbl_timePeriod.equalsIgnoreCase("L4"))
-//                    tbl_timePeriod = "Last 4 weeks";
-//            else if(tbl_timePeriod.equalsIgnoreCase("L12"))
-//                    tbl_timePeriod = "Last 12 weeks";
-//            else
-//                    tbl_timePeriod = "Last 52 weeks";
-//            return tbl_timePeriod;
-//    }
-//
-//    public static String get_Text(String str) {
-//        for (int i = 0; i < str.length(); i++) {
-//            if (str.charAt(i) == '$') str = str.replace(String.valueOf(str.charAt(i)), "");
-//            if (str.charAt(i) == ',') str = str.replace(String.valueOf(str.charAt(i)), "");
-//            if (str.charAt(i) == '(') str = str.replace(String.valueOf(str.charAt(i)), "");
-//            if (str.charAt(i) == ')') str = str.replace(String.valueOf(str.charAt(i)), "");
-//            if (str.charAt(i) == '%') str = str.replace(String.valueOf(str.charAt(i)), "");
-//        }
-//        return str;
 //    }
 //
 //    
