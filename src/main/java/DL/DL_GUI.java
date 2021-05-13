@@ -1866,6 +1866,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                         DL_login BR = new DL.DL_login(DL_GUI.this);
                         BR.run(DL_UserID, DL_UserPW, false); // ======================================
                         EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+                        Login_OK = BR.Login_OK;
                     } else{
                         Login_OK = false;
                         return;
