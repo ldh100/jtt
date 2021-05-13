@@ -14,8 +14,10 @@ import org.openqa.selenium.WebElement;
 
 public class AP3_bulk_apply {
     /*
-    Currently set-up for Staging only
-    TO RUN THIS TEST IN JTT, SELECT (APPLICATION: Boost, SITE: Sites Bulk Apply)
+    For Staging:
+    IN JTT, SELECT (APPLICATION: Boost, SITE: Sites Bulk Apply)
+    For Production:
+    IN JTT, SELECT (APPLICATION: Boost, SITE: QA University, BRAND: bulk apply test station (brandId:okYqgJ4...))
     */
     public static void run() throws InterruptedException {
         
@@ -48,9 +50,6 @@ public class AP3_bulk_apply {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Item Set: Soup", "xpath", "//div[contains(text(),'Soup')]", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira");
-        if (FAIL) { return;}
-        Thread.sleep(1000);
         if(!env.equals("PR")) {
         //API call https://api.compassdigital.org/staging/menu/4Wyo37NMD5tpzMvEJMl2FNdZNmL3NzFywWP52ZP8CKQPWlLQy2H4BdpXwaKDc9aq8mO?nocache=true&extended=true&show_unlinked=false
         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Sides / API )", BaseAPI + "/menu/4Wyo37NMD5tpzMvEJMl2FNdZNmL3NzFywWP52ZP8CKQPWlLQy2H4BdpXwaKDc9aq8mO?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
@@ -105,13 +104,28 @@ public class AP3_bulk_apply {
         }    
         }
         //reset list visibility and in/out of stock checkbox indicator
-        String inStock = getAttributeOfElementByXpath("((//table[contains(@class,'v-table')]//tbody/tr)[1]//td[8])//input", "aria-checked");
+        String inStock = getAttributeOfElementByXpath("((//table[contains(@class,'v-table')]//tbody/tr)[1]//td[8])", "class");
         String visible = getAttributeOfElementByXpath("((//table[contains(@class,'v-table')]//tbody/tr)[1]//td[4])//i", "class");
-        if (inStock.contains("false") && visible.contains("mdi-eye-off")) {
-            for (int i = 0; i < L1.size(); i++) {
-                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Reset visibility of item "+ String.valueOf(i+1), "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//i[contains(@class,'mdi-eye-off')]", "no_jira");
-                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Reset In/Out of stock of item "+ String.valueOf(i+1), "xpath", "((//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[8])//input", "no_jira");
-            }
+        if (inStock.contains("is-disabled") && visible.contains("mdi-eye-off")) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira");
+            if (FAIL) { return;}
+            Thread.sleep(1000);
+            if (!env.equals("PR")) {
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
+                if (FAIL) { return;}
+            } else {
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", "no_jira");
+                if (FAIL) { return;}
+            } 
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Update "+L1.size()+" Items", "xpath", "//span[contains(text(),'Update "+String.valueOf(L1.size())+" Items')]", "no_jira");
+        if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > In Stock", "xpath", "//label[contains(text(),'In Stock')]", "no_jira");
+            if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Visible In App", "xpath", "//label[contains(text(),'Visible In App')]", "no_jira");
+            if (FAIL) { return;}
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", "no_jira");
+            if (FAIL) { return;}
+            Thread.sleep(500);           
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Publish in Local Menu", "xpath", "//div[contains(text(),'publish')]", "no_jira");
             if (FAIL) { return;}
             Thread.sleep(5000);
@@ -155,19 +169,19 @@ public class AP3_bulk_apply {
         items = json2.getJSONArray("items");
         for (int i = 0; i < items.length(); i++) {
             JSONObject item = items.getJSONObject(i);           
-            if (item.getJSONObject("is").getBoolean("hidden")) {
+            if (!item.getJSONObject("is").getBoolean("hidden")) {
                 _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"hidden\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + " {\"hidden\" : false}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             } else {
                 _t++;
-                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"hidden\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + " {\"hidden\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
-            if (item.getJSONObject("is").getBoolean("out_of_stock")) {
+            if (!item.getJSONObject("is").getBoolean("out_of_stock")) {
                 _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : false}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             } else {
                 _t++;
-                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
         }
         }
@@ -179,8 +193,13 @@ public class AP3_bulk_apply {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(2000);
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
-        if (FAIL) { return;}
+        if (!env.equals("PR")) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
+            if (FAIL) { return;}
+        } else {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", "no_jira");
+            if (FAIL) { return;}
+        }        
         //Open Bulk Apply Side Panel for all items and verify side panel
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Update "+L1.size()+" Items", "xpath", "//span[contains(text(),'Update "+String.valueOf(L1.size())+" Items')]", "no_jira");
         if (FAIL) { return;}
@@ -236,12 +255,18 @@ public class AP3_bulk_apply {
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is In Stock", "xpath", "((//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[8])//input[@aria-checked='true']", "no_jira");
             if (FAIL) { return;}
         }
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
-        if (FAIL) { return;}
+        if (!env.equals("PR")) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
+            if (FAIL) { return;}
+        } else {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", "no_jira");
+            if (FAIL) { return;}
+        }
+        
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Update "+L1.size()+" Items", "xpath", "//span[contains(text(),'Update "+String.valueOf(L1.size())+" Items')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(500);
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Out of Stock checkbox", "xpath", "//input[@aria-label='Out of Stock']", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Out of Stock", "xpath", "//label[contains(text(),'Out of Stock')]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", "no_jira");
         if (FAIL) { return;}
@@ -259,12 +284,17 @@ public class AP3_bulk_apply {
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is visible", "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//i[contains(@class,'mdi-eye ')]", "no_jira");
             if (FAIL) { return;}
         }
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
-        if (FAIL) { return;}
+        if (!env.equals("PR")) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
+            if (FAIL) { return;}
+        } else {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", "no_jira");
+            if (FAIL) { return;}
+        }
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Update "+L1.size()+" Items", "xpath", "//span[contains(text(),'Update "+String.valueOf(L1.size())+" Items')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(500);
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Hide In App", "xpath", "//input[@aria-label='Hide In App']", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Hide In App", "xpath", "//label[contains(text(),'Hide In App')]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", "no_jira");
         if (FAIL) { return;}
@@ -288,14 +318,26 @@ public class AP3_bulk_apply {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(2000);
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
-        if (FAIL) { return;}
+        if (!env.equals("PR")) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
+            if (FAIL) { return;}
+        } else {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", "no_jira");
+            if (FAIL) { return;}
+        }
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Update "+L1.size()+" Items", "xpath", "//span[contains(text(),'Update "+String.valueOf(L1.size())+" Items')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(500);
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Edit Modifier Group", "xpath", "(//i[contains(@class,'mdi-pencil')])[7]", "no_jira");
-        if (FAIL) { return;}
-        Thread.sleep(500);
+        if (!env.equals("PR")) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Edit Modifier Group", "xpath", "(//i[contains(@class,'mdi-pencil')])[7]", "no_jira");
+            if (FAIL) { return;}
+            Thread.sleep(500);
+        } else {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Edit Modifier Group", "xpath", "(//i[contains(@class,'mdi-pencil')])[6]", "no_jira");
+            if (FAIL) { return;}
+            Thread.sleep(500);
+        }
+        
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Show Selection", "xpath", "//div[contains(text(),'Show Selection')]", "no_jira");
         if (FAIL) { return;}
         String secondModVisibility = getAttributeOfElementByXpath("((//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i)[2]", "class");
@@ -345,9 +387,14 @@ public class AP3_bulk_apply {
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Modifier", "xpath", "//span[contains(text(),'Pita Options Modifier')]", "no_jira");
                     if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check Modifier 'Extra Beef' is visible", "xpath", "(//div[contains(@class,'layout modifier')])[2]//i[contains(@class,'mdi-eye ')]", "no_jira");
-                    if (FAIL) { return;} 
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
                     if (FAIL) { return;}
+                    if (!env.equals("PR")) {
+                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
+                        if (FAIL) { return;}
+                    } else {
+                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[4]", "no_jira");
+                        if (FAIL) { return;}
+                    }                    
                 }
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", "no_jira");
                 if (FAIL) { return;}
@@ -396,8 +443,13 @@ public class AP3_bulk_apply {
                     if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check Modifier 'Extra Beef' is visible", "xpath", "(//div[contains(@class,'layout modifier')])[2]//i[contains(@class,'mdi-eye ')]", "no_jira");
                     if (FAIL) { return;} 
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
-                    if (FAIL) { return;}
+                    if (!env.equals("PR")) {
+                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
+                        if (FAIL) { return;}
+                    } else {
+                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[4]", "no_jira");
+                        if (FAIL) { return;}
+                    }  
                 }
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", "no_jira");
                 if (FAIL) { return;}
@@ -445,8 +497,13 @@ public class AP3_bulk_apply {
                     if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check Modifier 'Extra Beef' is NOT visible", "xpath", "(//div[contains(@class,'layout modifier')])[2]//i[contains(@class,'mdi-eye-off')]", "no_jira");
                     if (FAIL) { return;} 
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
-                    if (FAIL) { return;}
+                    if (!env.equals("PR")) {
+                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
+                        if (FAIL) { return;}
+                    } else {
+                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[4]", "no_jira");
+                        if (FAIL) { return;}
+                    }  
                 }
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", "no_jira");
                 if (FAIL) { return;}
@@ -492,8 +549,13 @@ public class AP3_bulk_apply {
                     if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check Modifier 'Extra Beef' is NOT visible", "xpath", "(//div[contains(@class,'layout modifier')])[2]//i[contains(@class,'mdi-eye-off')]", "no_jira");
                     if (FAIL) { return;} 
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
-                    if (FAIL) { return;}
+                    if (!env.equals("PR")) {
+                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
+                        if (FAIL) { return;}
+                    } else {
+                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[4]", "no_jira");
+                        if (FAIL) { return;}
+                    }  
                 }
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", "no_jira");
                 if (FAIL) { return;}
@@ -580,8 +642,13 @@ public class AP3_bulk_apply {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(2000);
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
-        if (FAIL) { return;}
+        if (!env.equals("PR")) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
+            if (FAIL) { return;}
+        } else {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", "no_jira");
+            if (FAIL) { return;}
+        }
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Update "+L1.size()+" Items", "xpath", "//span[contains(text(),'Update "+String.valueOf(L1.size())+" Items')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(500);
@@ -617,8 +684,13 @@ public class AP3_bulk_apply {
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is Enabled", "xpath", "((//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[4])//input[@aria-checked='true']", "no_jira");
             if (FAIL) { return;}
         }
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
-        if (FAIL) { return;}
+        if (!env.equals("PR")) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
+            if (FAIL) { return;}
+        } else {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", "no_jira");
+            if (FAIL) { return;}
+        }
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Update "+L1.size()+" Items", "xpath", "//span[contains(text(),'Update "+String.valueOf(L1.size())+" Items')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(1000);
@@ -641,8 +713,13 @@ public class AP3_bulk_apply {
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" has a PLU number", "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[contains(text(),'"+PLU+"')]", "no_jira");
             if (FAIL) { return;}
         }
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
-        if (FAIL) { return;}
+        if (!env.equals("PR")) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
+            if (FAIL) { return;}
+        } else {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", "no_jira");
+            if (FAIL) { return;}
+        }
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Update "+L1.size()+" Items", "xpath", "//span[contains(text(),'Update "+String.valueOf(L1.size())+" Items')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(500);
@@ -660,8 +737,13 @@ public class AP3_bulk_apply {
         
         // <editor-fold defaultstate="collapsed" desc="Bulk Update Global Modifiers">  
         EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Update Global Modifiers" + "\t" + " == Bulk Update Global Modifiers >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
-        if (FAIL) { return;}
+        if (!env.equals("PR")) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
+            if (FAIL) { return;}
+        } else {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", "no_jira");
+            if (FAIL) { return;}
+        }
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Update "+L1.size()+" Items", "xpath", "//span[contains(text(),'Update "+String.valueOf(L1.size())+" Items')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(500);
@@ -693,8 +775,13 @@ public class AP3_bulk_apply {
             if (FAIL) { return;}
             _t++; compareListSizes("updated Mod List size is smaller than original size", L3, L0, L3.size()>L0.size(), "no_jira");
             if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
-            if (FAIL) { return;}
+            if (!env.equals("PR")) {
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
+                if (FAIL) { return;}
+            } else {
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[4]", "no_jira");
+                if (FAIL) { return;}
+            }  
         }
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
@@ -856,8 +943,13 @@ public class AP3_bulk_apply {
             if (FAIL) { return;}
             _t++; compareListSizes("updated Mod List size is smaller than original size", L3, L0, L3.size()>L0.size(), "no_jira");
             if (FAIL) { return;}
-            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
-            if (FAIL) { return;}
+            if (!env.equals("PR")) {
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
+                if (FAIL) { return;}
+            } else {
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[4]", "no_jira");
+                if (FAIL) { return;}
+            }  
         }   
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
@@ -885,8 +977,13 @@ public class AP3_bulk_apply {
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", "no_jira");
             if (FAIL) { return;}
         }           
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
-        if (FAIL) { return;}
+        if (!env.equals("PR")) {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
+            if (FAIL) { return;}
+        } else {
+            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", "no_jira");
+            if (FAIL) { return;}
+        }
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Update "+L1.size()+" Items", "xpath", "//span[contains(text(),'Update "+String.valueOf(L1.size())+" Items')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(500);

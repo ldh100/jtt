@@ -26,8 +26,8 @@ public class AP3_images {
         * App - Thrive, Site - Ap3 Automation, Brand - Starbucks
         */ 
         if (!env.equals("PR")) {
-        // <editor-fold defaultstate="collapsed" desc="Add New Brand as 'Allow Images in Global Menu' set to 'No'"> 
-        EX += " - " + "\t" + " === " + "\t" + " ===== Add New Brand as 'Allow Images in Global Menu' set to 'No'" + "\t" + " == Add New Brand as 'Allow Images in Global Menu' set to 'No' >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        // <editor-fold defaultstate="collapsed" desc="Add New Brand has 'Allow Images in Global Menu' set to 'No'"> 
+        EX += " - " + "\t" + " === " + "\t" + " ===== Add New Brand has 'Allow Images in Global Menu' set to 'No'" + "\t" + " == Add New Brand has 'Allow Images in Global Menu' set to 'No' >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         //navigate to the sites -> brand -> settings
         _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to Site -> Brand List", url + "#/sites/" + appId + "/site/" + SiteID, "no_jira");
         if (FAIL) { return;}
@@ -289,7 +289,7 @@ public class AP3_images {
         if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check > Image was re-added", "xpath", "//*[contains(@class,'icon-remove')]", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Cancel'", "xpath", "(//*[contains(text(),'Cancel')])[4]", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Cancel'", "xpath", "(//*[contains(text(),'Cancel')])[3]", "no_jira"); 
         if (FAIL) { return;} 
         Thread.sleep(500);
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
