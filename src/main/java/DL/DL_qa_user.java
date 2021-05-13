@@ -8,7 +8,7 @@ public class DL_qa_user extends DL_GUI {
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
     }
-    protected void run(String User_ID, String Metric, String Period, String Location_Filters, String Item_Filters, String Kpi, String Source) throws InterruptedException, Exception { 
+    protected void run(String User_ID, String Metric, String Period, String Val, String Location_Filters, String Item_Filters, String Kpi, String Source) throws InterruptedException, Exception { 
 
         Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
@@ -18,6 +18,8 @@ public class DL_qa_user extends DL_GUI {
             Element_By_Path_Click("Click 'arrow_right' > Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira");  
             if (FAIL) { return;}  
         }
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");  
+            if (FAIL) { return;}         
         List_L0("Get User Metrics Count", "xpath", "//div[@class='MuiListItemIcon-root']", ParentTest, "no_jira");              
             if (FAIL) { return;}            
             if (L0.isEmpty()) { 
@@ -41,35 +43,45 @@ public class DL_qa_user extends DL_GUI {
         Scroll_to_WebElement("Scroll to 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Click("Click on 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}        
-        
- 
+            if (FAIL) { return;}  
+        Thread.sleep(500);
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");  
+            if (FAIL) { return;}   
+        Thread.sleep(500); 
+        Wait_For_Element_By_Path_Presence("Wait for Metric Card", "xpath", "//div[contains(@class, 'MuiPaper-root MuiCard-root')]", ParentTest, "no_jira"); 
+        if (FAIL) { return;} 
+        Thread.sleep(500); 
+
         // Check dTPeriod - select one from current row
         Element_E1_Find("Find Date selection container", "xpath", "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3']", ParentTest, "no_jira");          
-        Element_By_Path_Click("Select Date Range " + Period, "xpath", "//span[text()='" + Period.replace("W", "w") + "']", ParentTest, "no_jira"); 
+        Element_By_Path_Click("Select Date Range " + Period, "xpath", "//span[text()='" + Period + "']", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
 
 
         Find_Text("Find 'Filters' label", "Filters", true, ParentTest, "no_jira");  
         Find_Text("Find 'Configure Filters' button label", " Configure Filters", true, ParentTest, "no_jira");         
 
-        for (String L : Location_Filters.split("\r\n")) {// Location dIFilter(s) loop 
-            if(L.contains(":")){
-                String L_FilterKey = L.substring(0,L.indexOf(":")).trim();
-                String L_FilterValue = L.substring(L.indexOf(":") + 1 ).trim();   
-                // ========  Apply Location Filter Key / FilterValue ===============
-                //
-            }  
-        }                   
-
-        for (String I : Item_Filters.split("\r\n")) {// Item dIFilter(s) loop
-            if(I.contains(":")){
-                String I_FilterKey = I.substring(0,I.indexOf(":")).trim();
-                String I_FilterValue = I.substring(I.indexOf(":")+1 ).trim();   
-                // ========  Apply Item Filter Key / FilterValue ===============
-                //
-            }                
+        if(!Location_Filters.isEmpty()){
+            for (String L : Location_Filters.split("\r\n")) {
+                if(L.contains(":")){
+                    String L_FilterKey = L.substring(0,L.indexOf(":")).trim();
+                    String L_FilterValue = L.substring(L.indexOf(":") + 1 ).trim();   
+                    // ========  Apply Location Filter Key / FilterValue ===============
+                    //
+                }  
+            }            
         }
+        if(!Item_Filters.isEmpty()){
+            for (String I : Item_Filters.split("\r\n")) {// Item dIFilter(s) loop
+                if(I.contains(":")){
+                    String I_FilterKey = I.substring(0,I.indexOf(":")).trim();
+                    String I_FilterValue = I.substring(I.indexOf(":")+1 ).trim();   
+                    // ========  Apply Item Filter Key / FilterValue ===============
+                    //
+                }                
+            }
+        }
+        // Click Apply   
         Thread.sleep(500);  
         Wait_For_All_Elements_InVisibility("Wait for Selected Metric load...", "xpath", "//div[@role='progressbar']", ParentTest, "no_jira");  
             if (FAIL) { return;}  
@@ -80,12 +92,35 @@ public class DL_qa_user extends DL_GUI {
                 return;  // Loaded Metric Not Found FATAL for this Test# ===================================================
             }  
             
+        //  Validate Matric $ Value  
+        float QA_Value = Float.parseFloat(Val);
+        float FE_Value = (float) 0.00001;        
         Element_Child_List_L2("Loaded Metric Card '-body1' Count", L1.get(L1.size() - 1), "xpath", ".//p[contains(@class,'-body1')]", ParentTest, "no_jira");              
             if (FAIL) { return;} 
             if(L2.size() > 0) {    
                 Element_Text("Loaded Metric Card name", L2.get(0), ParentTest, "no_jira");  
                 if(L2.size() > 1) {  
                     Element_Text("Loaded Metric Card Value 1", L2.get(1), ParentTest, "no_jira"); 
+                    if(t.startsWith("$")){
+                        t = t.replace("$", "").replace(",", "").trim();
+                        FE_Value = Float.parseFloat(t);
+                        if(QA_Value == FE_Value){
+                            Log_Html_Result("PASS", "QA Value: " + QA_Value + " > FE $Value: " + FE_Value, false, ParentTest.createNode("Compare QA_Value and FE_Value"));
+                            EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + FE_Value + "\t" + "PASS" + "\t" + " - " +
+                            "\t" + " -" + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+                            _p++; 
+                        }else{
+                            Log_Html_Result("FAIL", "QA Value: " + QA_Value + " > FE $Value: " + FE_Value, true, ParentTest.createNode("Compare QA_Value and FE_Value"));
+                            EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + FE_Value + "\t" + "FAIL" + "\t" + " - " +
+                            "\t" + " -" + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+                            _f++;                            
+                        }
+                    } else{
+                            Log_Html_Result("FAIL", "QA Value: " + QA_Value + " > FE $Value: " +  " Not Found ", true, ParentTest.createNode("Compare QA_Value and FE_Value"));
+                            EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + " Not Found " + "\t" + "FAIL" + "\t" + " - " +
+                            "\t" + " -" + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+                            _f++;                        
+                    }
                     if(L2.size() > 2) {     
                         Element_Text("Loaded Metric Card Value 2", L2.get(2), ParentTest, "no_jira");         
                     }   

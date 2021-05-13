@@ -1849,11 +1849,11 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     }
     private void Execute() throws Exception {
         if (_users.isSelected()) { 
-            SCOPE += ", QA Users";
+            SCOPE += "QA Users";
             DL_UserID = "";         // Clear DL_User from GUI to force Clear_Cookies > Restart_Driver and Re-Login
             String QA_USER = "";    // Next QA User from S3 DV_QA table
-            for (int i = 28; i < 34; i++) {                     // Custom Test range selection from DV_QA table
-//            for (int i = 0; i < DV_QA.getRowCount(); i++) {    // All Tests from S3 DV_QA table
+            //for (int i = 28; i < 34; i++) {                     // Custom Test range selection from DV_QA table
+            for (int i = 0; i < DV_QA.getRowCount(); i++) {    // All Tests from S3 DV_QA table
                 if(!Login_OK){
                     continue;      // Do Not proceed with User having Invalid Credentials or Locked Account
                 }                
@@ -1884,7 +1884,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                     DV_QA.getValueAt(i, 4).toString(), 
                     DV_QA.getValueAt(i, 5).toString(), 
                     DV_QA.getValueAt(i, 6).toString(),
-                    DV_QA.getValueAt(i, 7).toString() 
+                    DV_QA.getValueAt(i, 7).toString(), 
+                    DV_QA.getValueAt(i, 8).toString()     
                 ); 
                 EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time; // DL_UserID = BR.DL_UserID;
                 EX += " - " + "\t" + " === ^ QA Users - Data Validation" + "\t" + "User: " + DV_QA.getValueAt(i, 1).toString() + "\t" + " == ^ User " + " - Test# "+ (i+1) + " End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
