@@ -99,65 +99,68 @@
                   </Group>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="_smart_analytics" alignment="1" max="32767" attributes="0"/>
-                              <Component id="_menu_manager" alignment="1" max="32767" attributes="0"/>
-                              <Component id="_bulk_apply" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="_sales_analytics" alignment="1" max="32767" attributes="0"/>
-                              <Component id="_sales_reporting" alignment="1" min="-2" pref="114" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="_login" alignment="1" min="-2" pref="106" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="_site" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="_orders" alignment="1" min="-2" pref="106" max="-2" attributes="0"/>
-                                  <Component id="_brand" alignment="1" min="-2" pref="96" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="_group_management" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="_announcements" alignment="0" max="32767" attributes="0"/>
-                      <Component id="_notifications" alignment="1" min="-2" pref="88" max="-2" attributes="0"/>
-                      <Component id="_resent_updates" alignment="1" min="-2" pref="119" max="-2" attributes="0"/>
-                      <Component id="_images" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="_promo" pref="141" max="32767" attributes="0"/>
-                  </Group>
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="_brand_new" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="_all_data" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="_site_new" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="_smart_analytics" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="_menu_manager" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="_bulk_apply" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="_sales_analytics" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="_sales_reporting" alignment="1" min="-2" pref="114" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="_login" alignment="1" min="-2" pref="106" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="_site" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="_orders" alignment="1" min="-2" pref="106" max="-2" attributes="0"/>
+                                          <Component id="_brand" alignment="1" min="-2" pref="96" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="_group_management" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="_announcements" alignment="0" max="32767" attributes="0"/>
+                              <Component id="_notifications" alignment="1" min="-2" pref="88" max="-2" attributes="0"/>
+                              <Component id="_resent_updates" alignment="1" min="-2" pref="119" max="-2" attributes="0"/>
+                              <Component id="_images" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="_promo" pref="141" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="_brand_new" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="_all_data" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="_site_new" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                  <Component id="_users" alignment="1" min="-2" pref="93" max="-2" attributes="0"/>
+                                  <Component id="_roles" alignment="1" min="-2" pref="131" max="-2" attributes="0"/>
+                                  <Component id="_password" alignment="1" min="-2" pref="113" max="-2" attributes="0"/>
+                                  <Component id="_logout" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                          <Component id="_users" alignment="1" min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="_roles" alignment="1" min="-2" pref="131" max="-2" attributes="0"/>
-                          <Component id="_password" alignment="1" min="-2" pref="113" max="-2" attributes="0"/>
-                          <Component id="_logout" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="138" pref="138" max="-2" attributes="0"/>
+                          <Component id="lblSITES15" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                          <Component id="txtDH_Id" min="-2" pref="169" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="138" pref="138" max="-2" attributes="0"/>
-                  <Component id="lblSITES15" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                  <Component id="txtDH_Id" min="-2" pref="169" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>

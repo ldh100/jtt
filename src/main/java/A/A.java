@@ -1102,7 +1102,7 @@ public class A extends javax.swing.JFrame {
                 return;
             }
         } 
-        DL.DL dl = new DL.DL();
+        DL.DL_GUI dl = new DL.DL_GUI();
         this.DesktopPane.add(dl);
         int Y;
         int X;
