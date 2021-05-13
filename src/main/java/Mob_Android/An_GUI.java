@@ -1961,6 +1961,10 @@ public class An_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));     
     }     
     protected void Set_Mobile_Package_Name(){
+        if (app.startsWith("Chrome")) {
+            appPackage = "com.android.chrome";
+            appActivity = "N/A";
+        }
         if ("Boost".equals(app)) {
             appPackage = "com.compass_canada.boost";
             appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
