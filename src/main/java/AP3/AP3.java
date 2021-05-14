@@ -1390,8 +1390,9 @@ public class AP3 extends javax.swing.JInternalFrame {
                     Report(false); 
                     String MSG = "AP3_" + env + " Automation report - " + Report_Date +  
                     "\r\n Machine: " + WsID + " OS: " + WsOS + ", User: *" + UserID + "*\r\n" +
-                    "Browser: *" + cmbBrow.getSelectedItem().toString() + "*, Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
+                    "Browser: *" + cmbBrow.getSelectedItem().toString() + "*" + "\r\n" +        
                     "Scope: " + SCOPE + "\r\n" +
+                    "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +      
                     "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w;
 
                     txtLog.append(Func.Send_File_with_Message_to_Slack(Report_File, "ap3automation", MSG + "\r\n"));

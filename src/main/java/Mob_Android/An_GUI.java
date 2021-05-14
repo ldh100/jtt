@@ -2733,8 +2733,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         HtmlReport.setReportUsesManualConfiguration(true); // DEBUG - steps duration time incorrect
         
         HtmlReporter.config().setDocumentTitle("JTT Mobile Automation Report");
-        HtmlReporter.config().enableTimeline(false);
-        HtmlReporter.config().setTheme(Theme.DARK);               
+        HtmlReporter.config().setTheme(Theme.STANDARD);               
     }    
     protected void Log_Html_Result(String RES, String Test_Description, boolean Capture_Screenshot, ExtentTest Test) throws IOException  {
         switch (RES) {
@@ -2748,12 +2747,6 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 Test.log(Status.FAIL, MarkupHelper.createLabel(Test_Description, ExtentColor.RED));
                 if (Capture_Screenshot) {
                     Test.log(Status.FAIL, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
-                }                
-                break;
-            case "FATAL":
-                Test.log(Status.FATAL, MarkupHelper.createLabel(Test_Description, ExtentColor.PURPLE));
-                if (Capture_Screenshot) {
-                    Test.log(Status.FATAL, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
                 }                
                 break;
             case "SKIP":
@@ -2955,7 +2948,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             if(BR.FAIL){
                 // FATAL - cannot procced
-                Log_Html_Result("FATAL", "Runner: " + Bolter_ID + "/" + Bolter_PW, true, ParentTest.createNode("Login Failed, cannot proceed"));
+                Log_Html_Result("FAIL", "Runner: " + Bolter_ID + "/" + Bolter_PW, true, ParentTest.createNode("Login Failed, cannot proceed"));
                 return;
             }
         }        
@@ -3091,9 +3084,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
             Report(false);
             String MSG = "Android_" + app + "_" + env + " Excel Automation report - " + Report_Date +
                     "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
-                    "Device: " + device + " > ID: " + devID + "\r\n" +
-                    "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +
+                    "Device: " + device + " > ID: " + devID + "\r\n" +      
                     "Scope: " + SCOPE + "\r\n" +
+                    "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
                     "Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
             
             Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Report_File, Slack_Channel, MSG));
@@ -3102,7 +3095,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 ef.delete();
             }  
             String HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Click to Open";
-            String HTML_Path = HtmlReporter.getFilePath();
+            String HTML_Path = HtmlReporter.getFile().getAbsolutePath();
             if(Zip_Report){
                 String Origin_HTML = HTML_Path;
                 HTML_Path = A.Func.Zip_File(HTML_Path);

@@ -1562,7 +1562,6 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         HtmlReport.setSystemInfo("Run Trigger", r_type);
         
         HtmlReporter.config().setDocumentTitle("JTT Web Automation Report");
-        HtmlReporter.config().enableTimeline(false);
         //HtmlReporter.config().setTheme(Theme.DARK);   
         HtmlReporter.config().setTheme(Theme.STANDARD);   
     }    
@@ -1578,12 +1577,6 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 Test.log(Status.FAIL, MarkupHelper.createLabel(Test_Description, ExtentColor.RED));
                 if (Capture_Screenshot) {
                     Test.log(Status.FAIL, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
-                }                
-                break;
-            case "FATAL":
-                Test.log(Status.FATAL, MarkupHelper.createLabel(Test_Description, ExtentColor.PURPLE));
-                if (Capture_Screenshot) {
-                    Test.log(Status.FATAL, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
                 }                
                 break;
             case "SKIP":
@@ -1892,7 +1885,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 EX += " - " + "\t" + " === ^ QA Users - Data Validation" + "\t" + "User: " + DV_QA.getValueAt(i, 1).toString() + "\t" + " == ^ User " + " - Test# "+ (i+1) + " End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 Thread.sleep(1500);               
             }   
-            return; // Do Not execute any Other Scope is Testinf QA Users S3 list
+            return; // Do Not execute any Other Scope if Testing QA Users S3 list
         }   
         
         
@@ -2023,8 +2016,9 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             Report(false);
             String MSG = "Distiller_" + env + " Excel Automation report - " + Report_Date +
                     "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
-                    "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +
+                    "Browser: *" + cmbBrow.getSelectedItem().toString() + "*" + "\r\n" +        
                     "Scope: " + SCOPE + "\r\n" +
+                    "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
                     "Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
             
             Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Report_File, Slack_Channel, MSG));
@@ -2033,7 +2027,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 ef.delete();
             }  
             String HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Click to Open";
-            String HTML_Path = HtmlReporter.getFilePath();
+            String HTML_Path = HtmlReporter.getFile().getAbsolutePath();
             if(Zip_Report){
                 String Origin_HTML = HTML_Path;
                 HTML_Path = A.Func.Zip_File(HTML_Path);
