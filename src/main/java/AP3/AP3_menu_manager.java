@@ -454,6 +454,183 @@ public class AP3_menu_manager {
             
            //</editor-fold> 
                 
+           //<editor-fold defaultstate="collapsed" desc="Verify modifier API call">  
+           EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Validating modifiers in global menu==" + "\t" + "-" +"\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+           //API Response is from the previous test of cloned id's
+           
+           if(json1.has("unique_name"))
+           {
+              if(json1.getString("unique_name").equals("New Group "+New_ID))
+              {
+                _t++;
+                _p++; EX += _t + "\t" + "Mod Group Name's are same" + "\t" + json1.getString("unique_name") + "\t" + "New Group "+New_ID + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+              }
+              else
+              {
+                 _t++;
+                 _f++; EX += _t + "\t" + "Mod Group Name's are different" + "\t" + json1.getString("unique_name") + "\t" + "New Group "+New_ID + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                  
+              }
+           }
+           String label = json1.getJSONObject("meta").getJSONObject("original_label").getString("en");
+           if(label.equals("Label "+New_ID))
+           {    _t++;
+                _p++; EX += _t + "\t" + "In-App Label Name's are same" + "\t" + label + "\t" + "Label "+New_ID + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+           }
+           else
+           {  _t++;
+              _f++; EX += _t + "\t" + "In-App Label Name's are different" + "\t" + label + "\t" + "Label "+New_ID + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+           }
+           
+           if(json1.has("max") && !json1.has("min"))
+           {
+               if(json1.getInt("max") == 1)
+               { _t++;
+                _p++; EX += _t + "\t" + "Modifier rules are same" + "\t" + "Maximum: "+json1.getInt("max") + "\t" + "Maximum: 1" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+               }
+               else
+               {_t++;
+                _f++; EX += _t + "\t" + "Modifier rules are different" + "\t" + "Maximum: "+json1.getInt("max") + "\t" + "Maximum: 1" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+               }    
+           }
+           flag = true;
+           for (int i=0;i<modifier_items.length();i++)
+            {
+               JSONObject modifier_item = modifier_items.getJSONObject(i) ;
+               
+               if(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("Mod 0 "+New_ID))            
+               {
+                  _t++;
+                  _p++; EX += _t + "\t" + "Modifier Name same" + "\t" + "Mod 0 "+New_ID + "\t" + "Mod 0 "+New_ID + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+               
+                    
+                 if(modifier_item.getJSONObject("meta").getInt("sort_number")==2)
+                 {//Print pass
+                  _t++;
+                  _p++; EX += _t + "\t" + "Modifier Sort number (Chit#) same" + "\t" + "Chit#: 2" + "\t" + "Chit#: 2" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                 else
+                 {//Print fail
+                  _t++;
+                  _f++; EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: "+modifier_item.getJSONObject("meta").getInt("sort_number") + "\t" + "Chit#: 2" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                 
+                 
+                 if(modifier_item.getJSONObject("meta").getJSONArray("taxes").getString(0).equals("Prepared"))
+                 {//Print Pass
+                   _t++;
+                  _p++; EX += _t + "\t" + "Tax Tags are same" + "\t" + "Tax Tag : Prepared" + "\t" + "Tax Tag : Prepared" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                 else
+                 {//Print Fail
+                  _t++;
+                  _f++; EX += _t + "\t" + "Tax Tags are different" + "\t" + "Tax Tag : "+modifier_item.getJSONObject("meta").getJSONArray("taxes").getString(0) + "\t" + "Tax Tag : Prepared" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                 
+                 if(modifier_item.getJSONObject("price").getDouble("amount")== 2.25)
+                 {//Print pass
+                  _t++;
+                  _p++; EX += _t + "\t" + "Modifier price are same" + "\t" + "Price : 2.25" + "\t" + "Price : 2.25" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                 else
+                 {//Print Fail
+                  _t++;
+                  _f++; EX += _t + "\t" + "Modifier price are different" + "\t" + "Price : "+modifier_item.getJSONObject("price").getDouble("amount") + "\t" + "Price : 2.25" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                 
+                 if(modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") == 100)
+                 {//Print pass
+                  _t++;
+                  _p++; EX += _t + "\t" + "Modifier Calories are same" + "\t" + "Calories : 100" + "\t" + "Calories : 100" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                 else
+                 {//Print Fail
+                  _t++;
+                  _f++; EX += _t + "\t" + "Modifier Calories are different" + "\t" + "Calories : "+modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") + "\t" + "Calories : 100" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                 
+                 if(modifier_item.getJSONObject("meta").getString("plu").equals("600100"))
+                 {//Print pass
+                  _t++;
+                  _p++; EX += _t + "\t" + "PLU's are same" + "\t" + "PLU : 600100" + "\t" + "PLU : 600100" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                 else
+                 {//Print Fail
+                  _t++;
+                  _f++; EX += _t + "\t" + "PLU's are different" + "\t" + "PLU : "+modifier_item.getJSONObject("meta").getString("plu") + "\t" + "PLU : 600100" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                 flag = false;
+               }
+               else if(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("Mod 1 "+New_ID))
+               {//For both Mod 1 and Mod 1 copy
+                if(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("Mod 1 "+New_ID+" copy"))
+                {   _t++;
+                    _p++; EX += _t + "\t" + "Modifier Name same" + "\t" + "Mod 1 "+New_ID+" copy" + "\t" + "Mod 1 "+New_ID+" copy" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                }
+                else
+                {
+                   _t++;
+                   _p++; EX += _t + "\t" + "Modifier Name same" + "\t" + "Mod 1 "+New_ID + "\t" + "Mod 1 "+New_ID + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                
+                if(modifier_item.getJSONObject("meta").getInt("sort_number")==3)
+                 {//Print pass
+                  _t++;
+                  _p++; EX += _t + "\t" + "Modifier Sort number (Chit#) same" + "\t" + "Chit#: 3" + "\t" + "Chit#: 3" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                 else
+                 {//Print fail
+                  _t++;
+                  _f++; EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: "+modifier_item.getJSONObject("meta").getInt("sort_number") + "\t" + "Chit#: 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                   
+                if(modifier_item.getJSONObject("price").getDouble("amount")== 3.25)
+                 {//Print pass
+                  _t++;
+                  _p++; EX += _t + "\t" + "Modifier price are same" + "\t" + "Price : 3.25" + "\t" + "Price : 3.25" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                 else
+                 {//Print Fail
+                  _t++;
+                  _f++; EX += _t + "\t" + "Modifier price are different" + "\t" + "Price : "+modifier_item.getJSONObject("price").getDouble("amount") + "\t" + "Price : 3.25" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                
+                 if(modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") == 102)
+                 {//Print pass
+                  _t++;
+                  _p++; EX += _t + "\t" + "Modifier Calories are same" + "\t" + "Calories : 102" + "\t" + "Calories : 102" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                 else
+                 {//Print Fail
+                  _t++;
+                  _f++; EX += _t + "\t" + "Modifier Calories are different" + "\t" + "Calories : "+modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") + "\t" + "Calories : 102" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                   
+                 if(modifier_item.getJSONObject("meta").getString("plu").equals("600102"))
+                 {//Print pass
+                  _t++;
+                  _p++; EX += _t + "\t" + "PLU's are same" + "\t" + "PLU : 600102" + "\t" + "PLU : 600102" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                 else
+                 {//Print Fail
+                  _t++;
+                  _f++; EX += _t + "\t" + "PLU's are different" + "\t" + "PLU : "+modifier_item.getJSONObject("meta").getString("plu") + "\t" + "PLU : 600102" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 }
+                    flag = false;
+               }
+               else if(flag)
+               { // Print fail unidentifed modifier
+                    _t++;
+                    _f++; EX += _t + "\t" + "Unidentified Modifier " + "\t" + modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en") + "\t" + "No new modifiers" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+               }
+             EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Validating modifiers in global menu==" + "\t" + "-" +"\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+          
+            }//End of for
+           
+           
+           //</editor-fold> 
+           
+           
             //<editor-fold defaultstate="collapsed" desc="Pagination">   
             _t++; TWeb.Move_to_Element_By_Path("Paging - Rows per page", "css", "[aria-label='Rows per page:']", "no_jira");
             if (FAIL) { return;}
