@@ -1355,12 +1355,11 @@ public class AP3 extends javax.swing.JInternalFrame {
                             p_50 = Func.p50(am0) / (double)1000;
                             p_90 = Func.p90(am0) / (double)1000;
                             
-                            DecimalFormat df = new DecimalFormat("#.##");
-                            t_rep += "=== Total Calls: " + t_calls + ", Response Times (sec) - Min: " + df.format(t_min) +
-                                                                        ", Avg: " + df.format(t_avg) +
-                                                                        ", Max: " + df.format(t_max) +
-                                                                        ", p50: " + df.format(p_50) +
-                                                                        ", p90: " + df.format(p_90);
+                            t_rep += "=== Total Calls: " + t_calls + ", Response Times (sec) - Min: " + A.A.df.format(t_min) +
+                                                                        ", Avg: " + A.A.df.format(t_avg) +
+                                                                        ", Max: " + A.A.df.format(t_max) +
+                                                                        ", p50: " + A.A.df.format(p_50) +
+                                                                        ", p90: " + A.A.df.format(p_90);
                         }
                         txtLog.append("" + t_rep + "\r\n");
                         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 

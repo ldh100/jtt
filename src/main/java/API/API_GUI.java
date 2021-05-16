@@ -9,6 +9,9 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.google.common.base.Stopwatch;///
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -20,7 +23,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -57,10 +59,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-/**
- *
- * @author Oleg.Spozito
- */
+
 public class API_GUI extends javax.swing.JInternalFrame {
     public API_GUI() {
         initComponents();
@@ -2804,13 +2803,12 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     p_50 = Func.p50(am0) / (double)1000;
                     p_90 = Func.p90(am0) / (double)1000;
                     
-                    DecimalFormat df = new DecimalFormat("#.##");
                     t_rep += "= Total Calls: " + t_calls +
-                            ", Response Times (sec) - Min: " + df.format(t_min) +
-                            ", Avg: " + df.format(t_avg) +
-                            ", Max: " + df.format(t_max) +
-                            ", p50: " + df.format(p_50) +
-                            ", p90: " + df.format(p_90);
+                            ", Response Times (sec) - Min: " + A.A.df.format(t_min) +
+                            ", Avg: " + A.A.df.format(t_avg) +
+                            ", Max: " + A.A.df.format(t_max) +
+                            ", p50: " + A.A.df.format(p_50) +
+                            ", p90: " + A.A.df.format(p_90);
                 }
                 Current_Log_Update(GUI, t_rep + "\r\n");
             }
@@ -2826,7 +2824,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Log = txtLog.getText();
         }
         LOG_UPDATE(Log); // ========================================================
-        HtmlReporter.config().setReportName("API(s) "+ ", Environment: " + env + ", Summary: Total Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i);
+        HtmlReporter.config().setReportName("API(s) "+ ", Environment: " + env + 
+                ", Total Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
+                ".  Resp(sec) - Min: " + A.A.df.format(t_min) +
+                            ", Avg: " + A.A.df.format(t_avg) +
+                            ", Max: " + A.A.df.format(t_max) +
+                            ", p50: " + A.A.df.format(p_50) +
+                            ", p90: " + A.A.df.format(p_90));
         HtmlReport.flush();
         
         if(_Slack && !Slack_Channel.equals("N/A")){
@@ -2861,7 +2865,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
     }
     
-    private void JOB_API_Get(String NAME, String EndPoint, String AUTH, ExtentTest ParentTest, String JIRA) {
+
+    private void JOB_Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY, ExtentTest ParentTest, String JIRA) {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2872,32 +2877,51 @@ public class API_GUI extends javax.swing.JInternalFrame {
         String R_Time = "";
         json = null;
         try {
-            CloseableHttpClient httpclient = HttpClients.createDefault();
-            HttpGet httpget = new HttpGet(EndPoint);
+            RequestSpecification request;
+            request = RestAssured.given();
             if(!AUTH.isEmpty()){
-                httpget.setHeader("Authorization",  AUTH);
+                request.header("Authorization", AUTH);
             }
-            CloseableHttpResponse response = httpclient.execute(httpget);
+            Response response =null;
+            switch (Method) {
+                case "GET":
+                    response = request.get(EndPoint);
+                    break;
+                case "POST":
+                    request.body(BODY);
+                    response = request.post(EndPoint);
+                    break;
+                case "DELETE":
+                    request.body(BODY);
+                    response = request.delete(EndPoint);
+                    break;
+                case "PUT":
+                    request.body(BODY);
+                    response = request.put(EndPoint);
+                    break; 
+                default:
+                    break;
+            }
             Result = response.getStatusLine().toString();
-            status = response.getStatusLine().getStatusCode(); 
-            HttpEntity entity = response.getEntity();
-            json = new JSONObject(EntityUtils.toString(entity));           
+            status = response.getStatusCode();
+            json = new JSONObject(response.asString());
+
             R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
             if (status == 200) {                                                 
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + "EndPoint: " + EndPoint + "\t" + Result + "\t" + "PASS" + "\t" + " - " +
                 "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("PASS", NAME + " > EndPoint: " + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > GET: " + EndPoint));
+                Log_Html_Result("PASS", NAME + " > EndPoint: " + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
             } else if (status > 200 && status < 500) { 
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + "EndPoint: " + EndPoint + "\t" + Result + "\t" + "WARN" + "\t" + " - " +
                 "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("WARN", NAME + " > EndPoint: " + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > GET: " + EndPoint));
+                Log_Html_Result("WARN", NAME + " > EndPoint: " + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
             } else {
                 _f++; FAIL = true; 
                 EX += _t + "\t" + NAME + "\t" + "EndPoint: " + EndPoint + "\t" + "Staus Code: " + status + "\t" + "FAIL" + "\t" + Result +
                 "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("FAIL", NAME + " > Error: " + err + "<br />EndPoint: " + BaseAPI + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > GET: " + EndPoint));
+                Log_Html_Result("FAIL", NAME + " > Error: " + err + "<br />EndPoint: " + BaseAPI + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
             }
         } catch(Exception ex){
             R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
@@ -2905,7 +2929,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + "API EndPoint" + "\t" + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("FAIL", NAME + " > Error: " + err + "<br />EndPoint: " + BaseAPI + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > GET: " + EndPoint));
+            Log_Html_Result("FAIL", NAME + " > Error: " + err + "<br />EndPoint: " + BaseAPI + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
         } 
         r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
         sw1.reset();
@@ -2920,32 +2944,32 @@ public class API_GUI extends javax.swing.JInternalFrame {
             
             Auth = "Basic " + Base64.getEncoder().encodeToString((Mobile_ID + ":" + Mobile_PW).getBytes());
             Realm = Func.Realm_ID(app, env);
-            JOB_API_Get("Mobile User Authentication", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, ParentTest, "no_jira");    
+            JOB_Api_Call("Mobile User Authentication GET", "GET", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", ParentTest, "no_jira");
             if(json != null){
                 if(json.has("user")) userID = json.getString("user"); 
                 if(json.has("token")) userTKN = json.getString("token");   
             }
                   
             Auth = "Bearer " + userTKN;
-            JOB_API_Get("Mobile User Payment", BaseAPI + "/payment/method" + "?user_id=" + userID,  Auth, ParentTest, "no_jira");
+            JOB_Api_Call("Mobile User Payment GET", "GET", BaseAPI + "/payment/method" + "?user_id=" + userID, Auth, "", ParentTest, "no_jira");
 
             long m1 = System.currentTimeMillis();                     
             long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // - 7 days
-            JOB_API_Get("Mobile User Orders", BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1,  Auth, ParentTest, "no_jira");
+            JOB_Api_Call("Mobile User Orders", "GET", BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1, Auth, "", ParentTest, "no_jira");
             
             Auth = "Basic " + Base64.getEncoder().encodeToString((AP3_ID + ":" + AP3_PW).getBytes());
             Realm = Func.Realm_ID("AP3", env);
-            JOB_API_Get("AP3 User Authentication", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, ParentTest, "no_jira");    
+            JOB_Api_Call("AP3 User Authentication GET", "GET", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", ParentTest, "no_jira");
             if(json != null){
                 if(json.has("user")) userID = json.getString("user"); 
                 if(json.has("token")) userTKN = json.getString("token");   
             }
             Auth = "Bearer " + userTKN;
-            JOB_API_Get("AP3 User > /realm", BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000", Auth, ParentTest, "no_jira");
+            JOB_Api_Call("AP3 User > /realm GET", "GET", BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000", Auth, "", ParentTest, "no_jira");
  
             Auth = "Bearer " + userTKN;
-            JOB_API_Get("AP3 User > /permissions", BaseAPI + "/user/" + userID + "/permissions" + "?nocache=1", Auth, ParentTest, "no_jira");
-            
+            JOB_Api_Call("AP3 User > /permissions GET", "GET", BaseAPI + "/user/" + userID + "/permissions" + "?nocache=1", Auth, "", ParentTest, "no_jira");
+           
         }   
         if(SCOPE.contains("config_prv")) {
              ParentTest = HtmlReport.createTest("Private Config API(s)");              
