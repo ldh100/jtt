@@ -1,6 +1,7 @@
 package DL;
 
 import A.Func;
+import DL.*;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -101,6 +102,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class DL_GUI extends javax.swing.JInternalFrame {
     public DL_GUI() {
@@ -893,7 +895,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             String time_period = "";
             String location_filters = "None";
             String item_filters = "None";
-            Float value = 0.0f;
+            float value = 0.0f;
             String source = "";
             String KPI = "";
             JSONObject json = new JSONObject(TestDataJson);  
@@ -928,7 +930,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                     }
                 } 
                 if(o.has("value")){
-                    value = o.getFloat("value");//.toString()
+                    value = o.getLong("value");//.toString()
                 }  
                 if(o.has("teams_info")){
                     JSONObject TI = o.getJSONObject("teams_info"); 
@@ -1852,8 +1854,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             SCOPE += "QA Users";
             DL_UserID = "";         // Clear DL_User from GUI to force Clear_Cookies > Restart_Driver and Re-Login
             String QA_USER = "";    // Next QA User from S3 DV_QA table
-            //for (int i = 28; i < 34; i++) {                     // Custom Test range selection from DV_QA table
-            for (int i = 0; i < DV_QA.getRowCount(); i++) {    // All Tests from S3 DV_QA table
+            for (int i = 25; i < 28; i++) {                     // Custom Test range selection from DV_QA table
+            //for (int i = 0; i < DV_QA.getRowCount(); i++) {    // All Tests from S3 DV_QA table
                 if(!Login_OK){
                     continue;      // Do Not proceed with User having Invalid Credentials or Locked Account
                 }                
@@ -1863,10 +1865,11 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                     DL_UserID = QA_USER;                // ======  Use last QA User from S3 for the next in the loop ====
                     Clear_Cookies_Restart_Driver(cmbBrow.getSelectedItem().toString(), ParentTest, "no_jira");   
                     if (!FAIL) { 
-                        DL_login BR = new DL.DL_login(DL_GUI.this);
+                        DL_login BR = new DL_login(DL_GUI.this);
                         BR.run(DL_UserID, DL_UserPW, false); // ======================================
                         EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
                         Login_OK = BR.Login_OK;
+
                     } else{
                         Login_OK = false;
                         return;
@@ -1877,7 +1880,9 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 EX += " - " + "\t" + " === QA Users - Data Validation" + "\t" + "User: " + QA_USER + "\t" + " == Users " + " - Test# "+ (i+1) + " Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 
                 
-                DL_qa_user BR = new DL.DL_qa_user(DL_GUI.this);
+                DL_qa_user BR = new DL_qa_user(DL_GUI.this);
+                System.out.println(DV_QA.getValueAt(i, 4));
+                try{
                 BR.run(  // ====== pass QA User Data from GUI DVU =========================
                     DL_UserID, 
                     DV_QA.getValueAt(i, 2).toString(), 
@@ -1887,8 +1892,12 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                     DV_QA.getValueAt(i, 6).toString(),
                     DV_QA.getValueAt(i, 7).toString(), 
                     DV_QA.getValueAt(i, 8).toString()     
-                ); 
-                EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time; // DL_UserID = BR.DL_UserID;
+                ); }
+                catch(Exception e)
+                {
+                e.printStackTrace();
+                }
+                    EX += BR.EX;_t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time; // DL_UserID = BR.DL_UserID;
                 EX += " - " + "\t" + " === ^ QA Users - Data Validation" + "\t" + "User: " + DV_QA.getValueAt(i, 1).toString() + "\t" + " == ^ User " + " - Test# "+ (i+1) + " End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 Thread.sleep(1500);               
             }   
@@ -1907,7 +1916,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             DL_UserID = txtAdmin_ID.getText();
             DL_UserPW = txtAdmin_PW.getText();
             EX += " - " + "\t" + " === Login(s) " + "\t" + " ===== " + "\t" + " == Login(s) Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";      
-            DL_login BR = new DL.DL_login(DL_GUI.this);
+            DL_login BR = new DL_login(DL_GUI.this);
             BR.run(DL_UserID, DL_UserPW, _invalid_login.isSelected()); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Login(s) " + "\t" + " ===== " + "\t" + " == ^ Login(s) End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -1922,7 +1931,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Metrics Selection"); 
             SCOPE += ", Metrics Selection"; 
             EX += " - " + "\t" + " === Metrics Selection" + "\t" + " ===== " + "\t" + " == Metrics Selection Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_metrics_selection BR = new DL.DL_metrics_selection(DL_GUI.this);
+            DL_metrics_selection BR = new DL_metrics_selection(DL_GUI.this);
             BR.run(); // ============================================================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Metrics Selection" + "\t" + " ===== " + "\t" + " == ^ Metrics Selection End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -1932,7 +1941,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Metrics Data"); 
             SCOPE += ", Metrics Data";  
             EX += " - " + "\t" + " === Metrics Data" + "\t" + " ===== " + "\t" + " == Metrics Data Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_metric_data BR = new DL.DL_metric_data(DL_GUI.this);
+            DL_metric_data BR = new DL_metric_data(DL_GUI.this);
             BR.run(); // ============================================================================            
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Metrics Data" + "\t" + " ===== " + "\t" + " == ^ Metrics Data End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -1942,7 +1951,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Metrics Filters");             
             SCOPE += ", Metrics Filters";  
             EX += " - " + "\t" + " === Metrics Filters" + "\t" + " ===== " + "\t" + " == Metrics Filters Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_filters BR = new DL.DL_filters(DL_GUI.this);
+            DL_filters BR = new DL_filters(DL_GUI.this);
             BR.run(); // ============================================================================  
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Metrics Filters" + "\t" + " ===== " + "\t" + " == ^ Metrics Filters End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -1952,7 +1961,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("LogOut");                         
             SCOPE += ", LogOut";
             EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_logout BR = new DL.DL_logout(DL_GUI.this);
+            DL_logout BR = new DL_logout(DL_GUI.this);
             BR.run(); // ============================================================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -1962,7 +1971,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Forgot PW");                                     
             SCOPE += ", Forgot PW";  
             EX += " - " + "\t" + " === Forgot PW" + "\t" + " ===== " + "\t" + " == Forgot PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_password BR = new DL.DL_password(DL_GUI.this);
+            DL_password BR = new DL_password(DL_GUI.this);
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             BR.run(); // ============================================================================
             EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -3670,6 +3679,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         FAIL = false;
         try {
             Actions action = new Actions(d1);
+  //          if(E.isSelected())
             action.moveToElement(E).click().perform();
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
@@ -5430,6 +5440,68 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
+    
+    protected void Wait_Element_Visible(String NAME, String BY, String PATH,ExtentTest ParentTest, String JIRA ) throws IOException{
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+       _t++; sw1.start();        
+        FAIL = false;
+        WebDriverWait Wait_d = new WebDriverWait(d1,40);
+        try {
+            switch (BY) {
+                case "xpath":
+
+                    Wait_d.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(PATH)));
+                    break;
+                case "css":
+                    Wait_d.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PATH)));
+                   
+                    break;
+                case "className":
+                    Wait_d.until(ExpectedConditions.visibilityOfElementLocated(By.className(PATH)));
+                  
+                    break;
+                case "id":
+                     Wait_d.until(ExpectedConditions.visibilityOfElementLocated(By.id(PATH)));
+                   
+                    break;
+                case "tagName":
+                         Wait_d.until(ExpectedConditions.visibilityOfElementLocated(By.tagName(PATH)));
+               
+                    break;
+                case "name":
+                     Wait_d.until(ExpectedConditions.visibilityOfElementLocated(By.name(PATH)));
+                    
+                    break;
+                 case "linkText":
+                         Wait_d.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(PATH)));
+                   
+                    break;
+                case "partialLinkText":
+                    Wait_d.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(PATH)));
+                   
+                    break;
+                default:
+                    break;
+            }
+        
+           
+           _p++;
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+        }
+        sw1.reset();
+    }
+
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="GUI Variables Declaration">
