@@ -2104,8 +2104,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         HtmlReport.setSystemInfo("Run Trigger", r_type);
         
         HtmlReporter.config().setDocumentTitle("JTT Web Automation Report");
-        HtmlReporter.config().enableTimeline(false);
-        HtmlReporter.config().setTheme(Theme.DARK);               
+        HtmlReporter.config().setTheme(Theme.STANDARD);               
     }    
     protected void Log_Html_Result(String RES, String Test_Description, boolean Capture_Screenshot, ExtentTest Test) throws IOException  {
         switch (RES) {
@@ -2119,12 +2118,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 Test.log(Status.FAIL, MarkupHelper.createLabel(Test_Description, ExtentColor.RED));
                 if (Capture_Screenshot) {
                     Test.log(Status.FAIL, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
-                }                
-                break;
-            case "FATAL":
-                Test.log(Status.FATAL, MarkupHelper.createLabel(Test_Description, ExtentColor.PURPLE));
-                if (Capture_Screenshot) {
-                    Test.log(Status.FATAL, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
                 }                
                 break;
             case "SKIP":
@@ -2436,13 +2429,12 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                     p_50 = Func.p50(am0) / (double)1000;
                     p_90 = Func.p90(am0) / (double)1000;
                     
-                    DecimalFormat df = new DecimalFormat("#.##");
                     t_rep += "= Total Calls: " + t_calls +
-                            ", Response Times (sec) - Min: " + df.format(t_min) +
-                            ", Avg: " + df.format(t_avg) +
-                            ", Max: " + df.format(t_max) +
-                            ", p50: " + df.format(p_50) +
-                            ", p90: " + df.format(p_90);
+                            ", Response Times (sec) - Min: " + A.A.df.format(t_min) +
+                            ", Avg: " + A.A.df.format(t_avg) +
+                            ", Max: " + A.A.df.format(t_max) +
+                            ", p50: " + A.A.df.format(p_50) +
+                            ", p90: " + A.A.df.format(p_90);
                 }
                 Current_Log_Update(GUI, t_rep + "\r\n");
             }
@@ -2465,8 +2457,9 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             Report(false);
             String MSG = "C360_" + env + " Excel Automation report - " + Report_Date +  
                     "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: *" + A.A.UserID + "*\r\n" +
-                    "Browser: *" + cmbBrow.getSelectedItem().toString() + "*, Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
+                    "Browser: *" + cmbBrow.getSelectedItem().toString() + "*" + "\r\n" +        
                     "Scope: " + SCOPE + "\r\n" +
+                    "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
                     "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w + ", Info: " + _i;
             
             Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Report_File, Slack_Channel, MSG));
@@ -2475,7 +2468,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 ef.delete();
             }  
             String HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Click to Open";
-            String HTML_Path = HtmlReporter.getFilePath();
+            String HTML_Path = HtmlReporter.getFile().getAbsolutePath();
             if(Zip_Report){
                 String Origin_HTML = HTML_Path;
                 HTML_Path = A.Func.Zip_File(HTML_Path);

@@ -75,7 +75,7 @@ public class DL_qa_user extends DL_GUI {
         
         Find_Text("Find 'Filters' label", "Filters", true, ParentTest, "no_jira");  
         Find_Text("Find 'Configure Filters' button label", " Configure Filters", true, ParentTest, "no_jira"); 
-        Element_By_Path_Click("Open 'Configure Filters'", "xpath", "//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined jss65']", ParentTest, "no_jira"); 
+        //Element_By_Path_Click("Open 'Configure Filters'", "xpath", "//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined jss65']", ParentTest, "no_jira"); 
         // Save Selection > Enter name > click "Save and Appy"
         //Delete choosen Location Filters
 //             if(i > 0) {

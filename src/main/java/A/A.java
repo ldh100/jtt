@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -471,6 +472,7 @@ public class A extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">  
     private void Menu_AP3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_AP3MouseClicked
         if(Menu_AP3.isVisible()){
             Menu_AP3.setVisible(false);
@@ -800,7 +802,6 @@ public class A extends javax.swing.JFrame {
             // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Menu_FW_DEMouseClicked
-
     private void Menu_C360MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_C360MouseClicked
         if(Menu_C360.isVisible()){
             Menu_C360.setVisible(false);
@@ -816,7 +817,6 @@ public class A extends javax.swing.JFrame {
             Menu_C360.setVisible(true);
         }        
     }//GEN-LAST:event_Menu_C360MouseClicked
-
     private void Menu_SwaggerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_SwaggerMouseClicked
 //        if(Menu_Swagger.isVisible()){
 //            Menu_Swagger.setVisible(false);
@@ -833,7 +833,49 @@ public class A extends javax.swing.JFrame {
             javax.swing.MenuSelectionManager.defaultManager().clearSelectedPath(); //   DEBUG   --- to close menu after click !!!
 //        } 
     }//GEN-LAST:event_Menu_SwaggerMouseClicked
+    //</editor-fold>
 
+    public static void main(String args[]) {
+        try {
+            for (UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+                if ("Metal".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            //Logger.getLogger(A.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
+        }
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> {
+            final A AF = new A();
+            AF.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    //
+                }
+            });
+//            try{
+//                //Image i = (new ImageIcon(ClassLoader.getResource("/images/jTTi32.png"))).getImage(); // .png
+//                //ImageIcon ii = new ImageIcon("jTTi32.png", "JTT");               
+//
+//                ImageIcon ii = new ImageIcon(new URL("images/jTTi32.png"));
+//                Image i = ii.getImage();// .png
+//                F.setIconImage(i);
+//            }catch(MalformedURLException ex){
+//                java.util.logging.// Logger.getLogger(AP3.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
+//            }
+            AF.setLocationRelativeTo(null);
+            AF.setVisible(true);
+        });
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">      
     private void Open_Devices() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
         for (JInternalFrame frame : frames) {
@@ -851,9 +893,9 @@ public class A extends javax.swing.JFrame {
                 frame.toFront();
                 return;
             }
-        } 
+        }
         
-        Mob_Devices.M_Devices md = new Mob_Devices.M_Devices(); 
+        Mob_Devices.M_Devices md = new Mob_Devices.M_Devices();
         this.DesktopPane.add(md);
         int Y;
         int X;
@@ -867,21 +909,21 @@ public class A extends javax.swing.JFrame {
         md.setVisible(true);
         md.show();
         md.setSelected(true);
-        F_COUNT++; 
+        F_COUNT++;
     }
     private void Open_Android() throws PropertyVetoException {
         if(An_F_COUNT > 3){
             return;
         }
         int Y;
-        int X; 
+        int X;
         
         Mob_Android.An_GUI an = new Mob_Android.An_GUI();
         this.DesktopPane.add(an);
         Y = X = An_F_COUNT;
-        an.setLocation(X*20, Y*20); 
-        an.show();  
-        an.setSelected(true); 
+        an.setLocation(X*20, Y*20);
+        an.show();
+        an.setSelected(true);
         if(F_COUNT > 4) {
             Y = F_COUNT;
             X = F_COUNT - 5;
@@ -889,9 +931,9 @@ public class A extends javax.swing.JFrame {
             Y = X = F_COUNT;
         }
         F_COUNT++;
-        An_F_COUNT++;   
+        An_F_COUNT++;
     }
-    private void Open_REPORT() { 
+    private void Open_REPORT() {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
         for (JInternalFrame frame : frames) {
             if (frame.getName().equals("Report")) {
@@ -936,7 +978,7 @@ public class A extends javax.swing.JFrame {
                 frame.toFront();
                 return;
             }
-        } 
+        }
         C360.C360_GUI c360 = new C360.C360_GUI();
         DesktopPane.add(c360);
         int Y;
@@ -950,7 +992,7 @@ public class A extends javax.swing.JFrame {
         c360.setLocation(X*20, Y*20);
         c360.show();
         c360.setSelected(true);
-        F_COUNT++;     
+        F_COUNT++;
     }
     private void Open_AP3() throws PropertyVetoException{
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
@@ -969,7 +1011,7 @@ public class A extends javax.swing.JFrame {
                 frame.toFront();
                 return;
             }
-        } 
+        }
         AP3.AP3 ap3 = new AP3.AP3();
         DesktopPane.add(ap3);
         int Y;
@@ -983,7 +1025,7 @@ public class A extends javax.swing.JFrame {
         ap3.setLocation(X*20, Y*20);
         ap3.show();
         ap3.setSelected(true);
-        F_COUNT++;     
+        F_COUNT++;
     }
     private void Open_API() throws PropertyVetoException{
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
@@ -1002,7 +1044,7 @@ public class A extends javax.swing.JFrame {
                 frame.toFront();
                 return;
             }
-        } 
+        }
         API.API_GUI api = new API.API_GUI();
         DesktopPane.add(api);
         int Y;
@@ -1017,8 +1059,8 @@ public class A extends javax.swing.JFrame {
         api.show();
         api.setSelected(true);
         F_COUNT++;     //
-    }    
-    private void Open_WO() throws PropertyVetoException {                                    
+    }
+    private void Open_WO() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
         for (JInternalFrame frame : frames) {
             if (frame.getName().equals("WO")) {
@@ -1035,7 +1077,7 @@ public class A extends javax.swing.JFrame {
                 frame.toFront();
                 return;
             }
-        } 
+        }
         WO.WO wo = new WO.WO();
         this.DesktopPane.add(wo);
         int Y;
@@ -1049,7 +1091,7 @@ public class A extends javax.swing.JFrame {
         wo.setLocation(X*20, Y*20);
         wo.show();
         wo.setSelected(true);
-        F_COUNT++;  
+        F_COUNT++;
     }
     private void Open_FW() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
@@ -1068,7 +1110,7 @@ public class A extends javax.swing.JFrame {
                 frame.toFront();
                 return;
             }
-        } 
+        }
         FW.FW fw = new FW.FW();
         this.DesktopPane.add(fw);
         int Y;
@@ -1082,7 +1124,7 @@ public class A extends javax.swing.JFrame {
         fw.setLocation(X*20, Y*20);
         fw.show();
         fw.setSelected(true);
-        F_COUNT++;  
+        F_COUNT++;
     }
     private void Open_DL() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
@@ -1101,7 +1143,7 @@ public class A extends javax.swing.JFrame {
                 frame.toFront();
                 return;
             }
-        } 
+        }
         DL.DL_GUI dl = new DL.DL_GUI();
         this.DesktopPane.add(dl);
         int Y;
@@ -1115,7 +1157,7 @@ public class A extends javax.swing.JFrame {
         dl.setLocation(X*20, Y*20);
         dl.show();
         dl.setSelected(true);
-        F_COUNT++;  
+        F_COUNT++;
     }
     private void Open_Station() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
@@ -1134,7 +1176,7 @@ public class A extends javax.swing.JFrame {
                 frame.toFront();
                 return;
             }
-        } 
+        }
         Station.Station dl = new Station.Station();
         this.DesktopPane.add(dl);
         int Y;
@@ -1148,7 +1190,7 @@ public class A extends javax.swing.JFrame {
         dl.setLocation(X*20, Y*20);
         dl.show();
         dl.setSelected(true);
-        F_COUNT++;  
+        F_COUNT++;
     }
     private void Open_OR() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
@@ -1167,7 +1209,7 @@ public class A extends javax.swing.JFrame {
                 frame.toFront();
                 return;
             }
-        } 
+        }
         Orders.Orders or = new Orders.Orders();
         this.DesktopPane.add(or);
         int Y;
@@ -1181,7 +1223,7 @@ public class A extends javax.swing.JFrame {
         or.setLocation(X*20, Y*20);
         or.show();
         or.setSelected(true);
-        F_COUNT++;  
+        F_COUNT++;
     }
     private void Open_JIRA() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
@@ -1200,7 +1242,7 @@ public class A extends javax.swing.JFrame {
                 frame.toFront();
                 return;
             }
-        } 
+        }
         JIRA.JIRA jira = new JIRA.JIRA();
         this.DesktopPane.add(jira);
         int Y;
@@ -1214,7 +1256,7 @@ public class A extends javax.swing.JFrame {
         jira.setLocation(X*20, Y*20);
         jira.show();
         jira.setSelected(true);
-        F_COUNT++;  
+        F_COUNT++;
     }
     private void Open_JOBS() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
@@ -1233,7 +1275,7 @@ public class A extends javax.swing.JFrame {
                 frame.toFront();
                 return;
             }
-        } 
+        }
         Jobs.Jobs jobs = new Jobs.Jobs();
         this.DesktopPane.add(jobs);
         int Y;
@@ -1247,7 +1289,7 @@ public class A extends javax.swing.JFrame {
         jobs.setLocation(X*20, Y*20);
         jobs.show();
         jobs.setSelected(true);
-        F_COUNT++;  
+        F_COUNT++;
     }
     private void Open_SWAGGER() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
@@ -1266,9 +1308,9 @@ public class A extends javax.swing.JFrame {
                 frame.toFront();
                 return;
             }
-        } 
+        }
         
-        Swagger.Swagger sw = new Swagger.Swagger(); 
+        Swagger.Swagger sw = new Swagger.Swagger();
         this.DesktopPane.add(sw);
         int Y;
         int X;
@@ -1282,19 +1324,19 @@ public class A extends javax.swing.JFrame {
         sw.setVisible(true);
         sw.show();
         sw.setSelected(true);
-        F_COUNT++; 
+        F_COUNT++;
     }
     
     private void Get_Version() {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        Version =  "?"; 
+        Version =  "?";
         try {
             String s = "A.A";
-            Version = s.getClass().getPackage().getImplementationVersion(); 
+            Version = s.getClass().getPackage().getImplementationVersion();
             String path = getClass().getResource("").getPath();
             Manifest m = new JarFile(path).getManifest();
             //s = "1";
-
+            
             Attributes attributes = m.getMainAttributes();
             if (attributes!=null){
                 java.util.Iterator it = attributes.keySet().iterator();
@@ -1308,10 +1350,10 @@ public class A extends javax.swing.JFrame {
                 }
             }
         } catch(Exception ex){
-            Version =  ex.getMessage(); 
+            Version =  ex.getMessage();
         }
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    } 
+    }
     private void Get_User() {
         UserID = System.getProperty("user.name");
         //UserID = "theleepan.sivabalasi";
@@ -1320,27 +1362,27 @@ public class A extends javax.swing.JFrame {
             InetAddress addr;
             addr = InetAddress.getLocalHost();
             WsID = addr.getHostName();
-        } catch (UnknownHostException ex) { 
+        } catch (UnknownHostException ex) {
             WsID = "Unknown - " + ex.getMessage();
         }
-    } 
-    private void Register_Login() {     
+    }
+    private void Register_Login() {
         new Thread(() -> {
             try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
                 PreparedStatement _update = conn.prepareStatement("UPDATE users SET " +
                         "LogIN = 'JTT', " +
                         "LastL = '" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yy hh:mm a")) + "', " +
-                        "USER_MACHINE = '" + WsID + "', " +
-                        "IP = '" + "Not used" + "' " +
-                    "WHERE User_ID = '" + UserID + "'");
+                                "USER_MACHINE = '" + WsID + "', " +
+                                        "IP = '" + "Not used" + "' " +
+                                        "WHERE User_ID = '" + UserID + "'");
                 int row = _update.executeUpdate();
             } catch (SQLException ex) {
                 // Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Register_Login > SQL ERROR: " + ex.getMessage(), ex);
             }
         }).start();
-    } 
+    }
     private void Get_Slack_TKN(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));         
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
             ResultSet rsS = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_OAuth_TKN'");
             rsS.next();
@@ -1352,97 +1394,57 @@ public class A extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        try {
-            for (UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-                if ("Metal".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            //Logger.getLogger(A.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
-        }
+//</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            final A AF = new A();
-            AF.addWindowListener(new java.awt.event.WindowAdapter() {
-                @Override
-                public void windowClosing(java.awt.event.WindowEvent e) {
-                    //
-                }
-            });
-//            try{
-//                //Image i = (new ImageIcon(ClassLoader.getResource("/images/jTTi32.png"))).getImage(); // .png
-//                //ImageIcon ii = new ImageIcon("jTTi32.png", "JTT");               
-//
-//                ImageIcon ii = new ImageIcon(new URL("images/jTTi32.png"));
-//                Image i = ii.getImage();// .png
-//                F.setIconImage(i);
-//            }catch(MalformedURLException ex){
-//                java.util.logging.// Logger.getLogger(AP3.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
-//            }
-            AF.setLocationRelativeTo(null);
-            AF.setVisible(true);
-        });
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="Public & Private Variables">
+    // <editor-fold defaultstate="collapsed" desc="Project Variables Declarations">
     public static final String QA_BD_CON_STRING = "jdbc:sqlserver://dev-digitalhospitality-sql.database.windows.net:1433;database=cdlqadb;user=xttadmin;password=Sp515s10#a;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
-    public static int F_COUNT = 0;   
-    public static int An_F_COUNT = 0;  
+    public static String SQL = "";
+    
+    public static int F_COUNT = 0;
+    public static int An_F_COUNT = 0;
     
     public static String CWD = System.getProperty("user.dir");
     public static String ADB_HOME = "";
-    public static String S_OAuth_TKN = ""; 
-    public static String AP3_TKN = "";    
-    public static final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
+    public static String S_OAuth_TKN = "";
+    public static String AP3_TKN = "";
+    public static final DecimalFormat df = new DecimalFormat("#.##");
+    public static final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
     public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-
-
+    
+    
     public static String Version = "";
     public static String UserID = "";
-    public static String WsID = "";    
-    public static String WsOS = "";  
-    private ImageIcon II;     
+    public static String WsID = "";
+    public static String WsOS = "";
+    private ImageIcon II;
     
     //move to individual packages
-    public static String API_Response_Body = "";   
+    public static String API_Response_Body = "";
     public static int T_Index;
     public static WebDriver d1;
     public static WebElement e;
     public static WebElement e1;
     public static WebElement e2;
     public static String HeadLess = "";
-
     
     public static List<WebElement> L0 = null;
     public static List<WebElement> L1 = null;
     public static List<WebElement> L2 = null;
     public static List<WebElement> L3 = null;
     public static List<WebElement> Opens = null;
-    public static List<WebElement> Closes = null;  
-  
- 
+    public static List<WebElement> Closes = null;
+    
     public static double sleep = 500; // milisec
     public static double LoadTimeOut = 15 *1000; // milisec
     public static long WaitForElement = 3000; // milisec
-    public static FluentWait loadTimeout;   
+    public static FluentWait loadTimeout;
     
     public static String t;
     public static String err;
-    public static String F; 
-    public static String EX; 
-     
+    public static String F;
+    public static String EX;
+    
     public static int _t = 0; // Total
     public static int _p = 0; // Passed
     public static int _f = 0; // Failed
@@ -1451,12 +1453,12 @@ public class A extends javax.swing.JFrame {
     public static boolean ALL_DATA = false;
     public static boolean NO_DATA = false;
     
-
+    
     public static String r_time = "";
     public static String Ver = "";
-    public static String TZone;      
+    public static String TZone;
     public static String Summary;
-    public static String r_type;  
+    public static String r_type;
     
     public static int t_calls = 0;
     public static double t_min = 0;
@@ -1464,12 +1466,9 @@ public class A extends javax.swing.JFrame {
     public static double t_avg = 0;
     public static double p_50 = 0;
     public static double p_90 = 0;
+    //</editor-fold>
     
-
-    
-    public static String SQL = "";  
- 
-
+    // <editor-fold defaultstate="collapsed" desc="GUI rivate Variables">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane DesktopPane;
     private javax.swing.JMenuBar MenuBar;
