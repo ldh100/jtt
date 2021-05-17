@@ -23,18 +23,18 @@ class Chrome_WO extends An_GUI{
         Go_To_URL("Go to: " + app_url, app_url, ParentTest, "no_lira");
             if (FAIL) { return;} 
         Get_Current_URL("Get_Current_URL", ParentTest, "no_lira");
-        System.out.println(ad.getContext()); // CHROMIUM
-        //  {"using":"xpath","value":"//*[contains(text(), \"Download the \")]"}
-        Set<String> contextNames = ad.getContextHandles();
-        contextNames.forEach(_item -> {
-            System.out.println(_item);
-        });
-        ad.context(contextNames.toArray()[1].toString()); // set context to WEBVIEW_1
-        Find_Text("Find 'WebView' text", "Download the ", true, ParentTest,"no_lira");
-
-        ad.context("NATIVE_APP");        
         
-        Find_Text("Find 'WebView' text", "Download the ", true, ParentTest,"no_lira");
+//        System.out.println(ad.getContext()); // CHROMIUM
+//        Set<String> contextNames = ad.getContextHandles();
+//        contextNames.forEach(_item -> {
+//            System.out.println(_item);
+//        });
+//        ad.context(contextNames.toArray()[1].toString()); // set context to WEBVIEW_1
+//        Find_Text("Find 'WebView' text", "Download the ", true, ParentTest,"no_lira");
+//
+//        ad.context("NATIVE_APP");        
+//        
+//        Find_Text("Find 'WebView' text", "Download the ", true, ParentTest,"no_lira");
 //        input[contains(@id,’search-keywords’)]
 //        Element_By_Path_Text("Find 'WebView' text", "xpath", "//*[@class='android.webkit.WebView']", ParentTest,"no_lira");
 //        Element_By_Path_Text("Find 'Download' message text", "xpath", "//*[@class='android.webkit.WebView'][1]", ParentTest,"no_lira");
