@@ -13,8 +13,8 @@ public class DL_qa_user extends DL_GUI {
     // Error: User Initilization Fail. Please Try Again    <<<< How to deal with That??   DEBUG
     protected void run(String User_ID, String Metric, String Period, String Val, String Location_Filters, String Item_Filters, String Kpi, String Source) throws InterruptedException, Exception { 
     //Thread.sleep(25000);
-    for(int k=25; k<28;k++)
-    {
+//    for(int k=25; k<28;k++)
+//    {
     Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
     Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
@@ -24,7 +24,7 @@ public class DL_qa_user extends DL_GUI {
             if (FAIL) { return;}  
 
         }
-    }
+//    }
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");  
             if (FAIL) { return;}         
         List_L0("Get User Metrics Count", "xpath", "//div[@class='MuiListItemIcon-root']", ParentTest, "no_jira");              
