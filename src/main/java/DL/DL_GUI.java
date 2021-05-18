@@ -107,7 +107,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         initComponents();
     }
 
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         lblMetrics = new javax.swing.JLabel();
@@ -610,29 +610,29 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         getContentPane().add(lblTestData, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 820, -1));
 
         pack();
-    }// </editor-fold>                        
+    }// </editor-fold>//GEN-END:initComponents
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">     
-    private void DV_METRICSMouseClicked(java.awt.event.MouseEvent evt) {                                        
+    private void DV_METRICSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_METRICSMouseClicked
         if (wdLastRow == DV_METRICS.getSelectedRow() || DV_METRICS.getRowCount() == 0) {
            return;
         }
         METRIC = String.valueOf(DV_METRICS.getValueAt(DV_METRICS.getSelectedRow(), 0));
         GROUP = String.valueOf(DV_METRICS.getValueAt(DV_METRICS.getSelectedRow(), 1));
         wdLastRow = DV_METRICS.getSelectedRow(); 
-    }                                       
-    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {                                         
+    }//GEN-LAST:event_DV_METRICSMouseClicked
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         if(BW2 != null && !BW2.isCancelled()) BW2.cancel(true);
         A.A.F_COUNT--;
-    }                                        
-    private void DV_D_RANGESMouseClicked(java.awt.event.MouseEvent evt) {                                         
+    }//GEN-LAST:event_formInternalFrameClosed
+    private void DV_D_RANGESMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_D_RANGESMouseClicked
         if (d2LastRow == DV_D_RANGES.getSelectedRow()) {
            return;
         }
         d2LastRow = DV_D_RANGES.getSelectedRow();   
         DATE_RANGE = String.valueOf(DV_D_RANGES.getValueAt(DV_D_RANGES.getSelectedRow(), 0));
-    }                                        
-    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {                                   
+    }//GEN-LAST:event_DV_D_RANGESMouseClicked
+    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
         jPanel3.addComponentListener(new ComponentListener() {
             @Override
             public void componentResized(ComponentEvent arg0) {
@@ -651,44 +651,44 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
-    }                                  
-    private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {                                    
+    }//GEN-LAST:event_formAncestorAdded
+    private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
         if(!btnRun.isEnabled()){
             return;
         }
         GUI_Run_Manual();
-    }                                   
-    private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {                                    
+    }//GEN-LAST:event_btnRunMouseClicked
+    private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
         String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
-    }                                   
-    private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {                                      
+    }//GEN-LAST:event_btnLogMouseClicked
+    private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
         String R = Func.SHOW_LOG_FILE(F, "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
-    }                                     
-    private void btnExelMouseClicked(java.awt.event.MouseEvent evt) {                                     
+    }//GEN-LAST:event_btnFailsMouseClicked
+    private void btnExelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExelMouseClicked
         if(!btnExel.isEnabled()) {return;}
         btnExel.setEnabled(false);
         Report(true);
         btnExel.setEnabled(true);
-    }                                    
-    private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {                                         
+    }//GEN-LAST:event_btnExelMouseClicked
+    private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
         GUI_Save_CONFIG();
-    }                                        
-    private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {                                        
+    }//GEN-LAST:event_btnSave_OptMouseClicked
+    private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             GUI_Load_Env();
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
-    }                                       
+    }//GEN-LAST:event_cmbEnvItemStateChanged
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Instance Variables Declarations">  
@@ -5424,7 +5424,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV_D_RANGES;
     private javax.swing.JTable DV_METRICS;
     private javax.swing.JTable DV_QA;
@@ -5473,6 +5473,6 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtAdmin_PW;
     private javax.swing.JTextArea txtLog;
     private javax.swing.JTextField txtSlackCh;
-    // End of variables declaration                   
+    // End of variables declaration//GEN-END:variables
     // </editor-fold>
 }
