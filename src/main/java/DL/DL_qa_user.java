@@ -79,7 +79,7 @@ public class DL_qa_user extends DL_GUI {
         
         Element_By_Path_Click("Open 'Configure Filters'", "xpath", "//button[contains(.,' Configure Filters')]", ParentTest, "no_jira"); 
         // Save Selection > Enter name > click "Save and Appy"
-        //Delete choosen Location Filters
+        // Delete choosen Location Filters
 //             if(i > 0) {
 Thread.sleep(15000);
 //                 Wait_Element_Visible("list all selected items", "xpath", "//div[contains(@class,'MuiChip-deletable')]/*[name()='svg']",ParentTest, "no_jira"); 
@@ -247,17 +247,15 @@ Thread.sleep(15000);
            e.printStackTrace();
        }
             
-                         //Click on Apply
-//                Scroll_to_WebElement("Scroll to 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", ParentTest, "no_jira"); 
-//                    if (FAIL) { return;}
-                Element_By_Path_Click("Click on 'Apply' button", "xpath", "(//button/span[contains(.,'Apply')])[2]", ParentTest, "no_jira"); 
-                    if (FAIL) { return;}
+
+        Element_By_Path_Click("Click on 'Apply' button", "xpath", "(//button/span[contains(.,'Apply')])[2]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
          
         // Wait for Metrics to load 
-        Thread.sleep(15000);  
+        Thread.sleep(500); //15000);  
         Wait_For_All_Elements_InVisibility("Wait for Selected Metric load...", "xpath", "//div[@role='progressbar']", ParentTest, "no_jira");  
             if (FAIL) { return;}  
-        Thread.sleep(15000); 
+        Thread.sleep(500); //15000);  
         List_L1("Loaded Metrics Cards Count", "xpath", "//div[contains(@class, 'MuiPaper-root MuiCard-root')]", ParentTest, "no_jira");              
             if (FAIL) { return;} 
             if (L1.isEmpty()) { 
@@ -269,36 +267,36 @@ Thread.sleep(15000);
         float FE_Value = (float) 0.00001;        
         Element_Child_List_L2("Loaded Metric Card '-body1' Count", L1.get(L1.size() - 1), "xpath", ".//p[contains(@class,'-body1')]", ParentTest, "no_jira");              
             if (FAIL) { return;} 
-            if(L2.size() > 0) {    
-                Element_Text("Loaded Metric Card name", L2.get(0), ParentTest, "no_jira");  
-                if(L2.size() > 1) {  
-                    Element_Text("Loaded Metric Card Value 1", L2.get(1), ParentTest, "no_jira"); 
-                    if(t.startsWith("$")){
-                        t = t.replace("$", "").replace(",", "").trim();
-                        FE_Value = Float.parseFloat(t);
-                        if(QA_Value == FE_Value){
-                            Log_Html_Result("PASS", "QA Value: " + QA_Value + " > FE $Value: " + FE_Value, false, ParentTest.createNode("Compare QA_Value and FE_Value"));
-                            EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + FE_Value + "\t" + "PASS" + "\t" + " - " +
-                            "\t" + " -" + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                            _p++; 
-                        }else{
-                            Log_Html_Result("FAIL", "QA Value: " + QA_Value + " > FE $Value: " + FE_Value, true, ParentTest.createNode("Compare QA_Value and FE_Value"));
-                            EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + FE_Value + "\t" + "FAIL" + "\t" + " - " +
-                            "\t" + " -" + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                            _f++;                            
-                        }
-                    } else{
-                        Log_Html_Result("FAIL", "QA Value: " + QA_Value + " > FE $Value: " +  " Not Found ", true, ParentTest.createNode("Compare QA_Value and FE_Value"));
-                        EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + " Not Found " + "\t" + "FAIL" + "\t" + " - " +
+        if(L2.size() > 0) {    
+            Element_Text("Loaded Metric Card name", L2.get(0), ParentTest, "no_jira");  
+            if(L2.size() > 1) {  
+                Element_Text("Loaded Metric Card Value 1", L2.get(1), ParentTest, "no_jira"); 
+                if(t.startsWith("$")){
+                    t = t.replace("$", "").replace(",", "").trim();
+                    FE_Value = Float.parseFloat(t);
+                    if(Math.abs(QA_Value - FE_Value) < QA_Value * 0.01) {
+                    //if(QA_Value == FE_Value){
+                        Log_Html_Result("PASS", "QA Value: " + QA_Value + " > FE $Value: " + FE_Value, false, ParentTest.createNode("Compare QA_Value and FE_Value"));
+                        EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + FE_Value + "\t" + "PASS" + "\t" + " - " +
+                        "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+                        _p++; 
+                    }else{
+                        Log_Html_Result("FAIL", "QA Value: " + QA_Value + " > FE $Value: " + FE_Value, true, ParentTest.createNode("Compare QA_Value and FE_Value"));
+                        EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + FE_Value + "\t" + "FAIL" + "\t" + " - " +
                         "\t" + " -" + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                        _f++;                        
+                        _f++;                            
                     }
-                    if(L2.size() > 2) {     
-                        Element_Text("Loaded Metric Card Value 2", L2.get(2), ParentTest, "no_jira");         
-                    }   
+                } else{
+                    Log_Html_Result("FAIL", "QA Value: " + QA_Value + " > FE $Value: " +  " Not Found ", true, ParentTest.createNode("Compare QA_Value and FE_Value"));
+                    EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + " Not Found " + "\t" + "FAIL" + "\t" + " - " +
+                    "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+                    _f++;                        
                 }
-            }        
-        // Verify dValue from file against FrontEnd   
+                if(L2.size() > 2) {     
+                    Element_Text("Loaded Metric Card Value 2", L2.get(2), ParentTest, "no_jira");         
+                }   
+            }
+        }        
     }   
 } 
 
