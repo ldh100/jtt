@@ -1273,7 +1273,7 @@ public class Station extends javax.swing.JInternalFrame {
     public static String New_ID = "";
     
 
-
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV_Brands;
     private javax.swing.JTable DV_Categories;

@@ -556,7 +556,10 @@ public class W_Report extends javax.swing.JInternalFrame {
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }  
     // <editor-fold defaultstate="collapsed" desc="Public & Private Variables">    
-    public static String SQL = ""; 
+    private String SQL = ""; 
+    // </editor-fold>   
+    
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JButton btnDel;

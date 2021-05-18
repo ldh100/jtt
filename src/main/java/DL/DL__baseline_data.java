@@ -6,8 +6,8 @@ import java.util.List;
  *
  * @author Oleg.Spozito
  */
-class DL_metric_data extends DL_GUI {
-    protected DL_metric_data (DL_GUI a) {
+class DL__baseline_data extends DL_GUI {
+    protected DL__baseline_data (DL_GUI a) {
         DL_UserID = a.DL_UserID;
         DL_UserPW = a.DL_UserPW;
         url = a.url;
@@ -42,9 +42,22 @@ class DL_metric_data extends DL_GUI {
             for (int j = 0; j < L0.size(); j++) {        
                 Element_Click("Un-Check Selected Metrics " + (j + 1), L0.get(j), ParentTest, "no_jira"); 
             } 
-            
-        Element_By_Path_Click("Select Metric " + METRIC, "xpath", "//span[text()='" + METRIC + "']", ParentTest, "no_jira"); 
-            if (FAIL) { return;}   
+        List_L0("Metrics Subheader Count", "xpath", "//ul[contains(@class, 'MuiList-subheader')]", ParentTest, "no_jira");              
+            if (FAIL) { return;}  
+        for (int i = 0; i < L0.size(); i++) {
+            Element_Child_Text("Metrics Subheader Title", L0.get(i),"xpath", ".//p[contains(@class, 'MuiTypography-body1')]", ParentTest, "no_jira");                           
+                if (FAIL) { return;}
+            if(t.toUpperCase().equals("BASELINE"))   {
+                Element_Child_List_L1(t + " > Metrics count", L0.get(i),"xpath", ".//span[contains(@class, 'MuiTypography-displayBlock')]", ParentTest, "no_jira");                           
+                    if (FAIL) { return;}
+                for (int j = 0; j < L1.size(); j++) {
+                    Element_Text("Metric " + j + " name", L1.get(j), ParentTest, "no_jira"); 
+                    Element_Click("Select Metric " + t, L1.get(j), ParentTest, url);
+                }             
+            } 
+           
+        }            
+              
         Scroll_to_WebElement("Scroll to 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Click("Click on 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", ParentTest, "no_jira"); 

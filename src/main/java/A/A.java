@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.UIManager;
@@ -1403,7 +1401,7 @@ public class A extends javax.swing.JFrame {
     public static int F_COUNT = 0;
     public static int An_F_COUNT = 0;
     
-    public static String CWD = System.getProperty("user.dir");
+    public static final String CWD = System.getProperty("user.dir");
     public static String ADB_HOME = "";
     public static String S_OAuth_TKN = "";
     public static String AP3_TKN = "";
@@ -1419,7 +1417,7 @@ public class A extends javax.swing.JFrame {
     public static String WsOS = "";
     private ImageIcon II;
     
-    //move to individual packages
+    //move all below to individual packages when all of them converted to 'no static/job ready'
     public static String API_Response_Body = "";
     public static int T_Index;
     public static WebDriver d1;
@@ -1468,7 +1466,7 @@ public class A extends javax.swing.JFrame {
     public static double p_90 = 0;
     //</editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="GUI rivate Variables">
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane DesktopPane;
     private javax.swing.JMenuBar MenuBar;

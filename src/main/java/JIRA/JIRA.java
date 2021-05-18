@@ -923,8 +923,7 @@ public class JIRA extends javax.swing.JInternalFrame {
     private static String BaseAPI = "";
     private static String COUNTRY = "Canada";
 
-    
-
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JCheckBox _JWeb;

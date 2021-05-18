@@ -102,7 +102,7 @@ public class DL_qa_user extends DL_GUI {
                 return;  // Loaded Metric Not Found FATAL for this Test# ===================================================
             }  
             
-        //  Validate Matric $ Value  
+        //  Validate Metric $ Value  
         float QA_Value = Float.parseFloat(Val);
         float FE_Value = (float) 0.00001;        
         Element_Child_List_L2("Loaded Metric Card '-body1' Count", L1.get(L1.size() - 1), "xpath", ".//p[contains(@class,'-body1')]", ParentTest, "no_jira");              
@@ -126,10 +126,10 @@ public class DL_qa_user extends DL_GUI {
                             _f++;                            
                         }
                     } else{
-                            Log_Html_Result("FAIL", "QA Value: " + QA_Value + " > FE $Value: " +  " Not Found ", true, ParentTest.createNode("Compare QA_Value and FE_Value"));
-                            EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + " Not Found " + "\t" + "FAIL" + "\t" + " - " +
-                            "\t" + " -" + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                            _f++;                        
+                        Log_Html_Result("FAIL", "QA Value: " + QA_Value + " > FE $Value: " +  " Not Found ", true, ParentTest.createNode("Compare QA_Value and FE_Value"));
+                        EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + " Not Found " + "\t" + "FAIL" + "\t" + " - " +
+                        "\t" + " -" + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+                        _f++;                        
                     }
                     if(L2.size() > 2) {     
                         Element_Text("Loaded Metric Card Value 2", L2.get(2), ParentTest, "no_jira");         
