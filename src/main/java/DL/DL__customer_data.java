@@ -1,13 +1,10 @@
 package DL;
-
-import java.util.ArrayList;
-import java.util.List;
 /**
  *
  * @author Oleg.Spozito
  */
-class DL_metric_data extends DL_GUI {
-    protected DL_metric_data (DL_GUI a) {
+class DL__customer_data extends DL_GUI {
+    protected DL__customer_data (DL_GUI a) {
         DL_UserID = a.DL_UserID;
         DL_UserPW = a.DL_UserPW;
         url = a.url;

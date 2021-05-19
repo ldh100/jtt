@@ -262,7 +262,7 @@ public class M_Devices extends javax.swing.JInternalFrame {
         M2.setColumnIdentifiers(M2_ColumnsName);
         DV2.setModel(M2); 
         
-        Dev  = Func.ExecuteCmdProcessBuilder("emulator -list-avds", EMULATOR_HOME, true, true).trim();
+        Dev = Func.ExecuteCmdProcessBuilder("emulator -list-avds", EMULATOR_HOME, true, true).trim();
         txtLog.append("- " + "emulator -list-avds" + " >> " + "\r\n" + Dev + "\r\n\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         
@@ -333,10 +333,13 @@ public class M_Devices extends javax.swing.JInternalFrame {
         } 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    
+
+
     // <editor-fold defaultstate="collapsed" desc="Public & Private Variables">    
     private String ADB_HOME;
     private String EMULATOR_HOME;
+    
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;

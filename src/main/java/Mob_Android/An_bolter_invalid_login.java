@@ -33,7 +33,7 @@ class An_bolter_invalid_login extends An_GUI{
             if (FAIL) { return;}
         Element_By_Path_Text_Enter("Enter valid 'Password'", "id", "textInputEditText_login_password", Bolter_PW, true,"no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Click("Click 'Undide Password' icon", "id", "text_input_end_icon", ParentTest, "no_jira");
+        Element_By_Path_Click("Click 'Unhide  Password' icon", "id", "text_input_end_icon", ParentTest, "no_jira");
             if (FAIL) { return;}            
         HideKeyboard("Hide Keyboard", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -58,7 +58,7 @@ class An_bolter_invalid_login extends An_GUI{
             if (FAIL) { return;}
         Element_By_Path_Text_Enter("Enter InValid 'Password'", "id", "textInputEditText_login_password", "X_Invalid_PW", false,"no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Click("Click 'Undide Password' icon", "id", "text_input_end_icon", ParentTest, "no_jira");
+        Element_By_Path_Click("Click 'Unhide  Password' icon", "id", "text_input_end_icon", ParentTest, "no_jira");
             if (FAIL) { return;}            
         HideKeyboard("Hide Keyboard", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -81,7 +81,7 @@ class An_bolter_invalid_login extends An_GUI{
             if (FAIL) { return;}
         Element_By_Path_Text_Enter("Enter valid 'Password'", "id", "textInputEditText_login_password", "Password1", true,"no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Click("Click 'Undide Password' icon", "id", "text_input_end_icon", ParentTest, "no_jira");
+        Element_By_Path_Click("Click 'Unhide  Password' icon", "id", "text_input_end_icon", ParentTest, "no_jira");
             if (FAIL) { return;}
         HideKeyboard("Hide Keyboard", ParentTest, "no_jira");
             if (FAIL) { return;}

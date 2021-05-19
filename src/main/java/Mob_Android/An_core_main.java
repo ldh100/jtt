@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Mob_Android;
-/**
- *
- * @author Oleg.Spozito
- */
- class An_core_main extends An_GUI {
+
+class An_core_main extends An_GUI {
     protected An_core_main(An_GUI a) {
        Mobile_ID = a.Mobile_ID;
        Mobile_PW = a.Mobile_PW;
@@ -50,7 +42,7 @@ package Mob_Android;
             if (FAIL) { return;}            
         Element_By_Path_Text_Enter("Enter 'Password' input", "id", "textInputEditText_login_password", Mobile_PW, true,"no_jira");             
             if (FAIL) { return;} 
-        Element_By_Path_Action_Click("Click 'Undide Password' icon", "id", "text_input_end_icon", ParentTest, "no_jira");             
+        Element_By_Path_Action_Click("Click 'Unhide  Password' icon", "id", "text_input_end_icon", ParentTest, "no_jira");             
             if (FAIL) { return;}              
         HideKeyboard("Hide Keyboard", ParentTest, "no_jira");             
             if (FAIL) { return;}

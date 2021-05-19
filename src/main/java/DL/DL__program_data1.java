@@ -6,8 +6,8 @@ import java.util.List;
  *
  * @author Oleg.Spozito
  */
-class DL_metric_data extends DL_GUI {
-    protected DL_metric_data (DL_GUI a) {
+class DL__program_data1 extends DL_GUI {
+    protected DL__program_data1 (DL_GUI a) {
         DL_UserID = a.DL_UserID;
         DL_UserPW = a.DL_UserPW;
         url = a.url;
