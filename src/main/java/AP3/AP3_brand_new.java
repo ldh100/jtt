@@ -961,7 +961,7 @@ public class AP3_brand_new {
                 Thread.sleep(500);
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Publish", "xpath", "//div[contains(text(),'publish')]/parent::button", "no_jira"); 
                 if (FAIL) { return;} 
-                Thread.sleep(500);
+                Thread.sleep(5000);
                 break;
             }    
         }
