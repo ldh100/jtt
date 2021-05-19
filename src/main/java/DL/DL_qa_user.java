@@ -14,11 +14,12 @@ public class DL_qa_user extends DL_GUI {
         Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
-            if (FAIL) { return;}
+                if (FAIL) { return;}
         if(t.equalsIgnoreCase("arrow_right")) {
             Element_By_Path_Click("Click 'arrow_right' > Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira");  
-            if (FAIL) { return;}  
+                    if (FAIL) { return;}  
         }
+
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");  
             if (FAIL) { return;}         
         List_L0("Get User Metrics Count", "xpath", "//div[@class='MuiListItemIcon-root']", ParentTest, "no_jira");              
@@ -29,11 +30,11 @@ public class DL_qa_user extends DL_GUI {
                 return;  // No User Metrics Found FATAL  for this User ===================================================
             }         
         
-        List_L0("Get Selected Metrics Count", "xpath", "//span[contains(@class, ' Mui-checked ')]", ParentTest, "no_jira");              
-            if (FAIL) { return;}            
-            for (int j = 0; j < L0.size(); j++) {        
+       List_L0("Get Selected Metrics Count", "xpath", "//span[contains(@class, ' Mui-checked ')]", ParentTest, "no_jira");              
+          if (FAIL) { return;}            
+            for (int j = 0; j < L0.size(); j++) {  
                 Element_Click("Un-Check Selected Metrics " + (j + 1), L0.get(j), ParentTest, "no_jira"); 
-            }        
+            }    
         // Find / Select dMetric
          Find_Text("Find Metric '" + Metric + "'", Metric, true, ParentTest, "no_jira");  
             if (t.equals("Not Found")) { 
@@ -66,82 +67,203 @@ public class DL_qa_user extends DL_GUI {
 //        // if not "No option" >
 //        // loop: click on each > click 'delete' > garbage bin icon //svg[@class='MuiSvgIcon-root jss68']
         
-        Find_Text("Find 'Filters' label", "Filters", true, ParentTest, "no_jira");  
-        Find_Text("Find 'Configure Filters' button label", " Configure Filters", true, ParentTest, "no_jira"); 
-        //Element_By_Path_Click("Open 'Configure Filters'", "xpath", "//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined jss65']", ParentTest, "no_jira"); 
+        Find_Text("Find 'Filters' label", "Filters", true, ParentTest, "no_jira");
+        Find_Text("Find 'Configure Filters' button label", " Configure Filters", true, ParentTest, "no_jira");  
+        Element_By_Path_Click("Open 'Configure Filters'", "xpath", "//button[contains(.,' Configure Filters')]", ParentTest, "no_jira"); 
         // Save Selection > Enter name > click "Save and Appy"
+        // Delete choosen Location Filters
         
-        if(!Location_Filters.isEmpty()){
+Thread.sleep(15000);
+
+        List_L0("list all selected items", "xpath", "//div[contains(@class,'MuiChip-deletable')]/*[name()='svg']", ParentTest, "no_jira");                                      
+        for (int j = 0; j < L0.size(); j++) {
+            Element_Click("Delete all selected items", L0.get(j), ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+        }
+                
+       try
+       {
+           if(!Location_Filters.isEmpty()){
             for (String L : Location_Filters.split("\r\n")) {
                 if(L.contains(":")){
                     String L_FilterKey = L.substring(0,L.indexOf(":")).trim();
-                    String L_FilterValue = L.substring(L.indexOf(":") + 1 ).trim();   
+                    String L_FilterValue = L.substring(L.indexOf(":") + 1 ).trim().replaceAll(",", ""); 
+                    System.out.println(L_FilterKey);
+                    System.out.println(L_FilterValue);
                     // ========  Apply Location Filter Key / FilterValue ===============
-                    //
+                    if(L_FilterKey.contains("Dropdown")) {
+Thread.sleep(15000);
+//                      Wait_Element_Visible("choose  dropdown item - '" + L_FilterValue + "'", "xpath", "//*[contains(text(), '"+L_FilterValue+"')]", ParentTest, "no_jira"); 
+//                          if (FAIL) { return;}
+                        Element_By_Path_Click("Cick on location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=2]", ParentTest, "no_jira");  
+                            if (FAIL) { return;}
+Thread.sleep(15000);
+                        Scroll_to_WebElement("Scroll to 'location filter'", "xpath", "//*[contains(text(), '"+L_FilterValue+"')]", ParentTest, "no_jira"); 
+                            if (FAIL) { return;}  
+                        Element_By_Path_Click("choose  dropdown item - '" + L_FilterValue + "'", "xpath", "//*[contains(text(), '"+L_FilterValue+"')]", ParentTest, "no_jira");  
+                              if (FAIL) { return;}
+                                  Thread.sleep(6000);
+                        continue;
+                    }
                 }  
             }            
         }
+        
+         if(!Location_Filters.isEmpty()){
+            for (String L : Location_Filters.split("\r\n")) {
+                if(L.contains(":")){
+                    String L_FilterKey = L.substring(0,L.indexOf(":")).trim();
+                    String L_FilterValue = L.substring(L.indexOf(":") + 1 ).trim().replaceAll(",", ""); 
+                    System.out.println(L_FilterKey);
+                    System.out.println(L_FilterValue);
+                    // ========  Apply Location Filter Key / FilterValue ===============
+                    if(L_FilterKey.contains("Dropdown")) {
+                        continue;
+                    }
+//                        Wait_Element_Visible("Cick on location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')])[position()=3]", ParentTest, "no_jira");  
+//                            if (FAIL) { return;}
+Thread.sleep(6000);
+                    Element_By_Path_Click("Cick on location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')])[position()=3]", ParentTest, "no_jira");  
+                    if (FAIL) { return;}
+                    Element_By_Path_Click("choose  dropdown item - '" + L_FilterKey + "'", "xpath", "//div[@role='dialog']//*[contains(text(), '"+L_FilterKey+"')]", ParentTest, "no_jira");  
+                        if (FAIL) { return;}
+
+Thread.sleep(10000);
+                    Element_By_Path_Text_Enter("Enter Item "+L_FilterValue+" to be Searched", "id", "filter-group-search",L_FilterValue , false, ParentTest, "no_jira");  
+                        if (FAIL) { return;} 
+
+//                        Wait_Element_Visible("Select item " + L_FilterValue + " from the table", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]//*[contains(text(),'"+L_FilterValue+"')]/..", ParentTest, "no_jira"); 
+//                            if (FAIL) { return;}
+                    Element_By_Path_Click("Select item " + L_FilterValue + " from the table", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]//*[contains(text(),'"+L_FilterValue+"')]/..", ParentTest, "no_jira"); 
+                        if (FAIL) { return;}
+                }  
+            }            
+        }
+ 
+
         if(!Item_Filters.isEmpty()){
+               Element_By_Path_Click("Cick on Products/Item Categories tab", "xpath", "//span[contains(text(),'Products/Item Categories')]", ParentTest, "no_jira");  
+        if (FAIL) { return;}
+                        Thread.sleep(20000);
+//                   _t++; Thread.sleep((long) sleep); Wait_Element_Visible("list all selected items", "xpath", "//div[contains(@class,'MuiChip-deletable')]/*[name()='svg']", ParentTest,"no_jira");  
+//             if (FAIL) { return;}
+                List_L0("list all selected items", "xpath", "//div[contains(@class,'MuiChip-deletable')]/*[name()='svg']", ParentTest, "no_jira");                                      
+                    for (int j = 0; j < L0.size(); j++) {
+                        Element_Click("Delete all selected items", L0.get(j), ParentTest, "no_jira"); 
+                        if (FAIL) { return;} 
+                    } 
             for (String I : Item_Filters.split("\r\n")) {// Item dIFilter(s) loop
                 if(I.contains(":")){
                     String I_FilterKey = I.substring(0,I.indexOf(":")).trim();
-                    String I_FilterValue = I.substring(I.indexOf(":")+1 ).trim();   
+                    String I_FilterValue = I.substring(I.indexOf(":")+1 ).trim().replaceAll(",", "");   
+                    System.out.println(I_FilterKey);
+                    System.out.println(I_FilterValue);
                     // ========  Apply Item Filter Key / FilterValue ===============
-                    //
-                }                
-            }
+                    if(I_FilterKey.contains("Dropdown")) {
+                        Element_By_Path_Click("Cick on Item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=2]", ParentTest, "no_jira");  
+                            if (FAIL) { return;}                             
+                        Scroll_to_WebElement("Scroll to 'Item filter'", "xpath", "//*[contains(text(), '"+I_FilterValue+"')]", ParentTest, "no_jira"); 
+                          if (FAIL) { return;}    
+                        Element_By_Path_Click("Select item " + I_FilterValue + " from the table", "xpath", "//*[contains(text(), '"+I_FilterValue+"')]", ParentTest, "no_jira"); 
+                        if (FAIL) { return;}
+                    }
+                }
+            }                
         }
-        // Click Apply   
-        Thread.sleep(500);  
+        
+         Thread.sleep(8000); 
+         if(!Item_Filters.isEmpty()){
+            for (String I : Item_Filters.split("\r\n")) {// Item dIFilter(s) loop
+                if(I.contains(":")){
+                    String I_FilterKey = I.substring(0,I.indexOf(":")).trim();
+                    String I_FilterValue = I.substring(I.indexOf(":")+1 ).trim().replaceAll(",", "");    
+                    System.out.println(I_FilterKey);
+                    System.out.println(I_FilterValue);
+                    // ========  Apply Item Filter Key / FilterValue ===============
+                    if(I_FilterKey.contains("Dropdown")) {
+                        continue;
+                    }
+//                        Wait_Element_Visible("Wait for filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=3]", ParentTest, "no_jira");  
+//                            if (FAIL) { return;}
+                        Thread.sleep(10000);
+                        Element_By_Path_Click("Click on item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=3]", ParentTest, "no_jira");  
+                            if (FAIL) { return;}
+//                        Wait_Element_Visible("Wait for dropdown item - '" + I_FilterKey + "'", "xpath", "//*[contains(text(), '" + I_FilterKey + "')]", ParentTest, "no_jira");  
+//                            if (FAIL) { return;}
+                        Element_By_Path_Click("Choose  dropdown item - '" + I_FilterKey + "'", "xpath", "//*[contains(text(), '" + I_FilterKey + "')]", ParentTest, "no_jira");  
+                            if (FAIL) { return;}
+                        Thread.sleep(15000);
+
+                        Element_By_Path_Text_Enter("Enter Item " + I_FilterValue + " to be Searched", "id", "filter-group-search",I_FilterValue , false, ParentTest, "no_jira");  
+                            if (FAIL) { return;} 
+//                        Wait_Element_Visible("Wait for item " + I_FilterValue + " from the table", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]//*[contains(text(),'" + I_FilterValue + "')]/..", ParentTest, "no_jira"); 
+//                            if (FAIL) { return;}
+                        Thread.sleep(1000);
+                        Element_By_Path_Click("Select item " + I_FilterValue + " from the table", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]//*[contains(text(),'" + I_FilterValue + "')]/..", ParentTest, "no_jira"); 
+                        if (FAIL) { return;}
+                    }
+                    Thread.sleep(8000);
+                }
+            }  
+       } catch(Exception e) {
+           e.printStackTrace();
+       }
+            
+
+        Element_By_Path_Click("Click on 'Apply' button", "xpath", "(//button/span[contains(.,'Apply')])[2]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+         
+        // Wait for Metrics to load 
+        Thread.sleep(500); //15000);  
         Wait_For_All_Elements_InVisibility("Wait for Selected Metric load...", "xpath", "//div[@role='progressbar']", ParentTest, "no_jira");  
             if (FAIL) { return;}  
-        Thread.sleep(500); 
+        Thread.sleep(500); //15000);  
         List_L1("Loaded Metrics Cards Count", "xpath", "//div[contains(@class, 'MuiPaper-root MuiCard-root')]", ParentTest, "no_jira");              
             if (FAIL) { return;} 
             if (L1.isEmpty()) { 
                 return;  // Loaded Metric Not Found FATAL for this Test# ===================================================
             }  
             
-        //  Validate Matric $ Value  
+        //  Validate Metric $ Value  
         float QA_Value = Float.parseFloat(Val);
         float FE_Value = (float) 0.00001;        
         Element_Child_List_L2("Loaded Metric Card '-body1' Count", L1.get(L1.size() - 1), "xpath", ".//p[contains(@class,'-body1')]", ParentTest, "no_jira");              
             if (FAIL) { return;} 
-            if(L2.size() > 0) {    
-                Element_Text("Loaded Metric Card name", L2.get(0), ParentTest, "no_jira");  
-                if(L2.size() > 1) {  
-                    Element_Text("Loaded Metric Card Value 1", L2.get(1), ParentTest, "no_jira"); 
-                    if(t.startsWith("$")){
-                        t = t.replace("$", "").replace(",", "").trim();
-                        FE_Value = Float.parseFloat(t);
-                        if(QA_Value == FE_Value){
-                            Log_Html_Result("PASS", "QA Value: " + QA_Value + " > FE $Value: " + FE_Value, false, ParentTest.createNode("Compare QA_Value and FE_Value"));
-                            EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + FE_Value + "\t" + "PASS" + "\t" + " - " +
-                            "\t" + " -" + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                            _p++; 
-                        }else{
-                            Log_Html_Result("FAIL", "QA Value: " + QA_Value + " > FE $Value: " + FE_Value, true, ParentTest.createNode("Compare QA_Value and FE_Value"));
-                            EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + FE_Value + "\t" + "FAIL" + "\t" + " - " +
-                            "\t" + " -" + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                            _f++;                            
-                        }
-                    } else{
-                            Log_Html_Result("FAIL", "QA Value: " + QA_Value + " > FE $Value: " +  " Not Found ", true, ParentTest.createNode("Compare QA_Value and FE_Value"));
-                            EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + " Not Found " + "\t" + "FAIL" + "\t" + " - " +
-                            "\t" + " -" + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                            _f++;                        
+        if(L2.size() > 0) {    
+            Element_Text("Loaded Metric Card name", L2.get(0), ParentTest, "no_jira");  
+            if(L2.size() > 1) {  
+                Element_Text("Loaded Metric Card Value 1", L2.get(1), ParentTest, "no_jira"); 
+                if(t.startsWith("$")){
+                    t = t.replace("$", "").replace(",", "").trim();
+                    FE_Value = Float.parseFloat(t);
+                    if(Math.abs(QA_Value - FE_Value) < QA_Value * 0.01) { // 1% precision
+                    //if(QA_Value == FE_Value){
+                        Log_Html_Result("PASS", "QA Value: " + QA_Value + " > FE $Value: " + FE_Value, false, ParentTest.createNode("Compare QA_Value and FE_Value"));
+                        EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + FE_Value + "\t" + "PASS" + "\t" + " - " +
+                        "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+                        _p++; 
+                    }else{
+                        Log_Html_Result("FAIL", "QA Value: " + QA_Value + " > FE $Value: " + FE_Value, true, ParentTest.createNode("Compare QA_Value and FE_Value"));
+                        EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + FE_Value + "\t" + "FAIL" + "\t" + " - " +
+                        "\t" + " -" + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+                        _f++;                            
                     }
-                    if(L2.size() > 2) {     
-                        Element_Text("Loaded Metric Card Value 2", L2.get(2), ParentTest, "no_jira");         
-                    }   
+                } else{
+                    Log_Html_Result("FAIL", "QA Value: " + QA_Value + " > FE $Value: " +  " Not Found ", true, ParentTest.createNode("Compare QA_Value and FE_Value"));
+                    EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + " Not Found " + "\t" + "FAIL" + "\t" + " - " +
+                    "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+                    _f++;                        
                 }
-            }        
-        // Verify dValue from file against FrontEnd   
+                if(L2.size() > 2) {     
+                    Element_Text("Loaded Metric Card Value 2", L2.get(2), ParentTest, "no_jira");         
+                }   
+            }
+        }        
     }   
 } 
 
 
-// <editor-fold defaultstate="collapsed" desc="New Code">
+
 
 //
 //                //Click on Configure Filter
@@ -201,7 +323,7 @@ public class DL_qa_user extends DL_GUI {
 //                if (FAIL) { return;}
 //            }
 //        }
-//    }
+// }
 //
 //    private static void testdataFilter(String str, int flag)throws InterruptedException {
 //            // Division: HCA HealthCare, Sector: HealthTrust,
@@ -299,87 +421,87 @@ public class DL_qa_user extends DL_GUI {
 //                    }
 //                    Thread.sleep(8000);
 //                }
-////			if(str.split(",").length>1) {//Multiple Items
-////				if(str.split(",")[0].contains(":")) {
-////					loc_dropdown1=str.split(",")[0].split(":")[0].trim();
-////					item1=str.split(",")[0].split(":")[1].trim();
-////				    
-////					if(flag == 0) {//choose location filter
-////						Element_By_Path_Click("Cick on location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')])[position()=3]", ParentTest, "no_jira");  
-////				        if (FAIL) { return;}
-////				        Thread.sleep(6000);
-////				    	Element_By_Path_Click("choose  dropdown item - '"+loc_dropdown1+"'  ", "xpath", "//*[contains(text(), '"+loc_dropdown1+"')]", ParentTest, "no_jira");  
-////				        if (FAIL) { return;}
-////				        
-////				        Thread.sleep(6000);
-////				        Element_By_Path_Click("Select item "+item1+" from the table", "xpath", "//*[contains(text(), '"+item1+"')]", ParentTest, "no_jira"); 
-////				        if (FAIL) { return;}
-////				        
-////				        Thread.sleep(10000);
-////				        
-////					}else {//choose item filter
-////						 Element_By_Path_Click("Click on item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=2]", ParentTest, "no_jira");  
-////				            if (FAIL) { return;}
-////				         Element_By_Path_Click("choose 'Beverages ' from the dropdown box", "xpath", "//*[contains(text(), '"+item1+"')]", ParentTest, "no_jira");  
-////				            if (FAIL) { return;}
-////				           
-////					}
-////			        Thread.sleep(8000);
-////				}	
-////				if(str.split(",")[1].contains(":")) {
-////					loc_dropdown2=str.split(",")[1].split(":")[0].trim();
-////					item2=str.split(",")[1].split(":")[1].trim();
-////					if(flag == 0) {//choose location filter
-////						Element_By_Path_Click("Cick on location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')])[position()=3]", ParentTest, "no_jira");  
-////				        if (FAIL) { return;}
-////				        Thread.sleep(6000);
-////				    	Element_By_Path_Click("choose  dropdown item - '"+loc_dropdown2+"'  ", "xpath", "//*[contains(text(), '"+loc_dropdown2+"')]", ParentTest, "no_jira");  
-////				        if (FAIL) { return;}
-////				        Thread.sleep(6000);
-////				        Element_By_Path_Click("Select item "+item2+" from the table", "xpath", "//*[contains(text(), '"+item2+"')]", ParentTest, "no_jira"); 
-////				        if (FAIL) { return;} 
-////				        Thread.sleep(6000); 
-////				        if (FAIL) { return;}
-////					}else {//choose item filter
-////						Element_By_Path_Click("Click on item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=2]", ParentTest, "no_jira");  
-////			            if (FAIL) { return;}
-////			            
-////			            Element_By_Path_Click("choose 'Beverages ' from the dropdown box", "xpath", "//*[contains(text(), '"+item2+"')]", ParentTest, "no_jira");  	
-////			            if (FAIL) { return;}
-////			            
-////			            Element_By_Path_Click("Select 1st item from the list box", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]/div/div[1]/div['"+item2+"']", ParentTest, "no_jira");  
-////			            if (FAIL) { return;}
-////					}
-////					
-////				}
-////			}else {//ONE ITEM
-////			
-////				loc_dropdown1=str.split(",")[0].split(":")[0].trim();
-////				item1=str.split(",")[0].split(":")[1].trim();
-////				if(flag == 0) {//choose location filter
-////					Element_By_Path_Click("Cick on location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')])[position()=3]", ParentTest, "no_jira");  
-////			        if (FAIL) { return;}
-////			        Thread.sleep(6000);
-////			    	Element_By_Path_Click("choose dropdown item - '"+loc_dropdown1+"'  ", "xpath", "//*[contains(text(), '"+loc_dropdown1+"')]", ParentTest, "no_jira");  
-////			        if (FAIL) { return;}
-////			        
-////			        
-////			        Thread.sleep(6000);
-////			        Element_By_Path_Click("Select item "+item1+" from the table", "xpath", "//*[contains(text(), '"+item1+"')]", ParentTest, "no_jira"); 
-////			        if (FAIL) { return;}
-////			        
-////			        Thread.sleep(8000);		
-////				}else {//choose item filter
-////					 Element_By_Path_Click("Click on item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=2]", ParentTest, "no_jira");  
-////			            if (FAIL) { return;}
-////			         Element_By_Path_Click("choose 'Beverages ' from the dropdown box", "xpath", "//*[contains(text(), '"+item1+"')]", ParentTest, "no_jira");  
-////			            if (FAIL) { return;}
-////				}
-////			}
+//////			if(str.split(",").length>1) {//Multiple Items
+//////				if(str.split(",")[0].contains(":")) {
+//////					loc_dropdown1=str.split(",")[0].split(":")[0].trim();
+//////					item1=str.split(",")[0].split(":")[1].trim();
+//////				    
+//////					if(flag == 0) {//choose location filter
+//////						Element_By_Path_Click("Cick on location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')])[position()=3]", ParentTest, "no_jira");  
+//////				        if (FAIL) { return;}
+//////				        Thread.sleep(6000);
+//////				    	Element_By_Path_Click("choose  dropdown item - '"+loc_dropdown1+"'  ", "xpath", "//*[contains(text(), '"+loc_dropdown1+"')]", ParentTest, "no_jira");  
+//////				        if (FAIL) { return;}
+//////				        
+//////				        Thread.sleep(6000);
+//////				        Element_By_Path_Click("Select item "+item1+" from the table", "xpath", "//*[contains(text(), '"+item1+"')]", ParentTest, "no_jira"); 
+//////				        if (FAIL) { return;}
+//////				        
+//////				        Thread.sleep(10000);
+//////				        
+//////					}else {//choose item filter
+//////						 Element_By_Path_Click("Click on item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=2]", ParentTest, "no_jira");  
+//////				            if (FAIL) { return;}
+//////				         Element_By_Path_Click("choose 'Beverages ' from the dropdown box", "xpath", "//*[contains(text(), '"+item1+"')]", ParentTest, "no_jira");  
+//////				            if (FAIL) { return;}
+//////				           
+//////					}
+//////			        Thread.sleep(8000);
+//////				}	
+//////				if(str.split(",")[1].contains(":")) {
+//////					loc_dropdown2=str.split(",")[1].split(":")[0].trim();
+//////					item2=str.split(",")[1].split(":")[1].trim();
+//////					if(flag == 0) {//choose location filter
+//////						Element_By_Path_Click("Cick on location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')])[position()=3]", ParentTest, "no_jira");  
+//////				        if (FAIL) { return;}
+//////				        Thread.sleep(6000);
+//////				    	Element_By_Path_Click("choose  dropdown item - '"+loc_dropdown2+"'  ", "xpath", "//*[contains(text(), '"+loc_dropdown2+"')]", ParentTest, "no_jira");  
+//////				        if (FAIL) { return;}
+//////				        Thread.sleep(6000);
+//////				        Element_By_Path_Click("Select item "+item2+" from the table", "xpath", "//*[contains(text(), '"+item2+"')]", ParentTest, "no_jira"); 
+//////				        if (FAIL) { return;} 
+//////				        Thread.sleep(6000); 
+//////				        if (FAIL) { return;}
+//////					}else {//choose item filter
+//////						Element_By_Path_Click("Click on item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=2]", ParentTest, "no_jira");  
+//////			            if (FAIL) { return;}
+//////			            
+//////			            Element_By_Path_Click("choose 'Beverages ' from the dropdown box", "xpath", "//*[contains(text(), '"+item2+"')]", ParentTest, "no_jira");  	
+//////			            if (FAIL) { return;}
+//////			            
+//////			            Element_By_Path_Click("Select 1st item from the list box", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]/div/div[1]/div['"+item2+"']", ParentTest, "no_jira");  
+//////			            if (FAIL) { return;}
+//////					}
+//////					
+//////				}
+//////			}else {//ONE ITEM
+//////			
+//////				loc_dropdown1=str.split(",")[0].split(":")[0].trim();
+//////				item1=str.split(",")[0].split(":")[1].trim();
+//////				if(flag == 0) {//choose location filter
+//////					Element_By_Path_Click("Cick on location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')])[position()=3]", ParentTest, "no_jira");  
+//////			        if (FAIL) { return;}
+//////			        Thread.sleep(6000);
+//////			    	Element_By_Path_Click("choose dropdown item - '"+loc_dropdown1+"'  ", "xpath", "//*[contains(text(), '"+loc_dropdown1+"')]", ParentTest, "no_jira");  
+//////			        if (FAIL) { return;}
+//////			        
+//////			        
+//////			        Thread.sleep(6000);
+//////			        Element_By_Path_Click("Select item "+item1+" from the table", "xpath", "//*[contains(text(), '"+item1+"')]", ParentTest, "no_jira"); 
+//////			        if (FAIL) { return;}
+//////			        
+//////			        Thread.sleep(8000);		
+//////				}else {//choose item filter
+//////					 Element_By_Path_Click("Click on item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=2]", ParentTest, "no_jira");  
+//////			            if (FAIL) { return;}
+//////			         Element_By_Path_Click("choose 'Beverages ' from the dropdown box", "xpath", "//*[contains(text(), '"+item1+"')]", ParentTest, "no_jira");  
+//////			            if (FAIL) { return;}
+//////				}
+//////			}
 //        }
 //    }
-//
-//    
+////
+////    
 //}
 //// </editor-fold>
 

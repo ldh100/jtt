@@ -29,7 +29,7 @@ class DL_login extends DL_GUI {
             Element_By_Path_Click("Click 'Sign In'", "name", "login", ParentTest, "no_jira");  
                 if (FAIL) { return;}  
             Find_Text("Find 'Invalid credentials'", "Invalid credentials.", true, ParentTest, "no_jira");  
-            if (FAIL) { return;}
+                if (FAIL) { return;}
 
             //TestCase 02  with Valid Username/Invalid Password by Prathyusha Deshpande
             Element_By_Path_Text_Enter("Enter Valid Username", "id", "username", ID, false, ParentTest, "no_jira");  
@@ -62,7 +62,8 @@ class DL_login extends DL_GUI {
             Login_OK = true;
         }else{
             Element_Text("Message text", L3.get(0), ParentTest, "no_jira"); 
-            if(t.contains("locked")){   // This account has been locked.               
+            if(t.contains("locked")){   // This account has been locked.  
+                Login_OK = false;
                 return;
             } else {                      // ...will expire
                 Element_E1_Find("Find 'Reset Password Now' button", "name", "resetPasswordNow", ParentTest, "no_jira"); 
@@ -75,9 +76,9 @@ class DL_login extends DL_GUI {
                 Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");  
                     if (FAIL) { return;}  
                 Thread.sleep(500);  
+                Login_OK = false;
+                return;
             }
-            Login_OK = false;
-            return;
         }
         Find_Text("Find 'Invalid credentials'", "Invalid credentials.", false, ParentTest, "no_jira"); 
         if (t.toLowerCase().contains("invalid")) { 

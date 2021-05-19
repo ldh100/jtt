@@ -1752,7 +1752,7 @@ public class WO extends javax.swing.JInternalFrame {
     public static String PROMO; 
     public static String New_ID = "";
     
-
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;

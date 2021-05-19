@@ -1310,7 +1310,7 @@ if(!R.equals("OK")){
     private static String env;
     private static String BaseAPI;
 
-    
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JButton btnCart;

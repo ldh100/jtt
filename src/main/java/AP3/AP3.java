@@ -2303,7 +2303,7 @@ public class AP3 extends javax.swing.JInternalFrame {
 
     // </editor-fold>
    
-    // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;
