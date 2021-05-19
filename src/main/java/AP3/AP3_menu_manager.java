@@ -35,7 +35,7 @@ public class AP3_menu_manager {
             if (FAIL) { return;} 
         _t++; Thread.sleep(200); TWeb.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
             if (FAIL) { return;}
-         
+      
         // <editor-fold defaultstate="collapsed" desc="Group Selection">  
         EX += " - " + "\t" + " === MM Sector Selection " + "\t" + " ===== " + "\t" + " == Sector Selection Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";  
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
@@ -1897,7 +1897,7 @@ public class AP3_menu_manager {
             
         EX += " - " + "\t" + " === MM Local Brands" + "\t" + " ===== " + "\t" + " == Local Brands End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
-        
+       
         if (!env.equals("PR")) {
         // <editor-fold defaultstate="collapsed" desc="Changes in Global Menu Item Reflect on Local Menu Item">  
         EX += " - " + "\t" + " === Changes in Global Menu Item Reflect on Local Menu Item" + "\t" + " ===== " + "\t" + " == Changes in Global Menu Item Reflect on Local Menu Item Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n"; 
@@ -2183,8 +2183,9 @@ public class AP3_menu_manager {
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check > Existing Modifier PLU Changed", "xpath", "//*[contains(text(),'111')]", "no_jira");
             if (FAIL) { return;}
         } 
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check > New Modifier Exists", "xpath", "//*[contains(text(),'adddeletemod')]", "no_jira");
-        if (FAIL) { return;}
+        /* Commenting because of changes in auto assigning of newly added modifier. To remove once Ram confirms*/
+//        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check > New Modifier Exists", "xpath", "//*[contains(text(),'adddeletemod')]", "no_jira");
+//        if (FAIL) { return;}
         EX += " - " + "\t" + " === Check modifier changes in Local Menu item" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, "no_jira");
         if (FAIL) { return;}
@@ -2228,8 +2229,11 @@ public class AP3_menu_manager {
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check > Existing Modifier PLU Changed", "xpath", "//*[contains(text(),'111')]", "no_jira");
             if (FAIL) { return;}
         }      
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check > New Modifier Exists", "xpath", "//*[contains(text(),'adddeletemod')]", "no_jira");
-        if (FAIL) { return;}
+        
+        /* Commenting because of changes in auto assigning of newly added modifier. To remove once Ram confirms*/
+        
+//             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check > New Modifier Exists", "xpath", "//*[contains(text(),'adddeletemod')]", "no_jira");
+//        if (FAIL) { return;}
         
         EX += " - " + "\t" + " === Delete new modifier from the group" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to Global Modifiers", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/globalmods/", "no_jira");
@@ -2263,6 +2267,22 @@ public class AP3_menu_manager {
         Thread.sleep(500);
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_InVisibility("Check > New Modifier no longer exists", "xpath", "//*[contains(text(),'adddeletemod')]", "no_jira");
         if (FAIL) { return;}
+        
+        // Verifying if modifier item Name/ price/calories /PLU / chit is not editable
+        
+        _t++; Thread.sleep((long) sleep); TWeb.List_L0("Find Disabled elements", "xpath", "//div[@class='pa-0']/descendant::div[contains(@class,'disabled')]", "no_jira");
+         if(L0.size()==6 || (L0.size()%6==0))
+         {
+          _t++;
+          _p++; EX += _t + "\t" + "Price,Calories,PLU,Item Enabled,Chit,Tax tags" + "\t" +" Disabled " + "\t" + " - " + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          
+//          _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Calories is disabled", "xpath", "(//*[contains(text(),'Calories') and contains(@class,'disabled')])[2]", "no_jira");
+//            if (FAIL) { return;}
+          }
+        
+        
+        
+        
         EX += " - " + "\t" + " === Check new modifier no longer exists in Local Menu item" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, "no_jira");
         if (FAIL) { return;}
