@@ -961,7 +961,21 @@ public class AP3_brand_new {
                 Thread.sleep(500);
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Publish", "xpath", "//div[contains(text(),'publish')]/parent::button", "no_jira"); 
                 if (FAIL) { return;} 
-                Thread.sleep(500);
+                        // =================== "Leave without publishing?" Dialog even PUBLISH OK ============ DEBUG    
+                _t++; Thread.sleep((long) sleep); TWeb.Text_Found("Find 'Leave...' question", "Leave without publishing?", "no_jira"); 
+                if ("Found".equals(t)) {     
+                    _t++; _f++;
+                    EX += _t + "\t" + "Navigate Back after Publish OK" + "\t" + "MM 'Sector' page" + "\t" + "Dialog 'Leave without publishing?'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+                    F += "Step: " + _t + " > " + "Dialog 'Leave without publishing?' after Published OK" + "\r\n";
+                    _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true,"no_jira"); 
+                    if (FAIL) { return; }   
+                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", "no_jira"); 
+                    if (FAIL) { return; }         
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Find 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", "no_jira"); 
+                    if (FAIL) { return; }     
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", "no_jira"); 
+                    if (FAIL) { return;}  
+                }
                 break;
             }    
         }
