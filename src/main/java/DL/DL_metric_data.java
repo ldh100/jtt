@@ -1,7 +1,10 @@
 package DL;
 
+import com.aventstack.extentreports.ExtentTest;
 import java.util.ArrayList;
 import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 /**
  *
  * @author Oleg.Spozito
@@ -16,11 +19,264 @@ class DL_metric_data extends DL_GUI {
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
         METRIC = a.METRIC;
+        //System.out.println(a.METRIC);
         DATE_RANGE = a.DATE_RANGE;
+       // System.out.println(a.DATE_RANGE);
+        
+        
     }
-    protected void run() throws InterruptedException, Exception {   
-        Thread.sleep(500); 
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");  
+  protected void run() throws InterruptedException, Exception {   
+          
+  String metricRef="Compared to last year";
+   Thread.sleep(500);
+	for (int i = 0; i < 3; i++) {
+	    
+	    if(i == 1)  metricRef = "Compared to last month";
+	    if(i == 2)  metricRef = "Compared to last week";	 
+       Thread.sleep(5000); 
+        int TS;
+        int CS;
+        int MER;
+        int CER;
+        int PER;
+        double CUR;
+        double MROR;
+        double MSOP;
+        double CROR;
+        double CSOP;
+        double PROR;
+        double PSOP;
+        UnCheckMetrics();
+        Element_By_Path_Click("Select Metric " + "Total Spend", "xpath", "//span[text()='" + "Total Spend" + "']", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Select Metric " + "Contracted Spend", "xpath", "//span[text()='" + "Contracted Spend" + "']", ParentTest, "no_jira"); 
+            if (FAIL) { return;}  
+        Element_By_Path_Click("Select Metric " + "Contracted Utilization Rate", "xpath", "//span[text()='" + "Contracted Utilization Rate" + "']", ParentTest, "no_jira"); 
+            if (FAIL) { return;}  
+
+        Scroll_to_WebElement("Scroll to 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+        Element_By_Path_Click("Click on 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+        Thread.sleep(5000);
+        Element_By_Path_Click("Select Date Range " + DATE_RANGE, "xpath", "//span[text()='" + DATE_RANGE + "']", ParentTest, "no_jira"); 
+            if (FAIL) { return;}           
+        Thread.sleep(10000);
+        Element_By_Path_Click("Select Metric reference dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Total Spend')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Select metrics dropdown item '" + metricRef + "'", "xpath", "//ul/li[contains(.,'"+metricRef+"')]", ParentTest, "no_jira");  
+            if (FAIL) { return;}
+//        Wait_For_All_Elements_InVisibility("Wait for metric cards to load", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Total Spend')]/..//div[2]/div[1]/p", ParentTest, "no_jira");  
+//            if (FAIL) { return;}  
+       Thread.sleep(5000);
+        Element_By_Path_Text("Loaded Metrics Cards Count", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Total Spend')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+            if (FAIL) { return;}
+ 
+       // System.out.println(get_Text(t));
+        TS= Integer.parseInt(get_Text(t));
+        Element_By_Path_Click("Select Metric reference dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Contracted Spend')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Select metrics dropdown item '" + metricRef + "'", "xpath", "//ul/li[contains(.,'"+metricRef+"')]", ParentTest, "no_jira");  
+            if (FAIL) { return;}
+           
+//              Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Contracted Spend')]/..//div[2]/div[1]/p", ParentTest, "no_jira");  
+//            if (FAIL) { return;}  
+        Thread.sleep(5000);
+        Element_By_Path_Text("Loaded Metrics Cards Count", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Contracted Spend')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+            if (FAIL) { return;}
+       // System.out.println(get_Text(t));
+        CS= Integer.parseInt(get_Text(t));
+        Element_By_Path_Click("Select Metric reference dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Contract Utilization Rate')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Select metrics dropdown item '" + metricRef + "'", "xpath", "//ul/li[contains(.,'"+metricRef+"')]", ParentTest, "no_jira");  
+            if (FAIL) { return;}
+//                  Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Contract Utilization Rate')]/..//div[2]/div[1]/p", ParentTest, "no_jira");  
+//            if (FAIL) { return;}  
+        Thread.sleep(5000);
+         Element_By_Path_Text("Loaded Metrics Cards Count", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Contract Utilization Rate')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+            if (FAIL) { return;}
+ 
+       // System.out.println(get_Text(t));
+        CUR= Double.parseDouble(get_Text(t));
+
+         SecondaryMetric_Calculation(CS, TS, CUR, "Contract Utilization Rate Calculation", ParentTest, "no_jira" );
+         UnCheckMetrics();
+            
+        Element_By_Path_Click("Select Metric " + "Member Earned Revenue", "xpath", "//span[text()='" + "Member Earned Revenue" + "']", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Select Metric " + "Member Rate of Return", "xpath", "//span[text()='" + "Member Rate of Return" + "']", ParentTest, "no_jira"); 
+            if (FAIL) { return;}  
+        Element_By_Path_Click("Select Metric " + "Member Strength of Program", "xpath", "//span[text()='" + "Member Strength of Program" + "']", ParentTest, "no_jira"); 
+            if (FAIL) { return;}  
+
+        Scroll_to_WebElement("Scroll to 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+        Element_By_Path_Click("Click on 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+            
+         
+        Thread.sleep(10000);
+        Element_By_Path_Click("Select Metric reference dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Member Earned Revenue')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Select metrics dropdown item '" + metricRef + "'", "xpath", "//ul/li[contains(.,'"+metricRef+"')]", ParentTest, "no_jira");  
+            if (FAIL) { return;}
+//        Wait_For_All_Elements_InVisibility("Wait for metric cards to load", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Total Spend')]/..//div[2]/div[1]/p", ParentTest, "no_jira");  
+//            if (FAIL) { return;}  
+       Thread.sleep(5000);
+        Element_By_Path_Text("Loaded Metrics Cards Count", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Member Earned Revenue')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+            if (FAIL) { return;}
+ 
+       // System.out.println(get_Text(t));
+        MER= Integer.parseInt(get_Text(t));
+        Element_By_Path_Click("Select Metric reference dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Member Rate of Return')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Select metrics dropdown item '" + metricRef + "'", "xpath", "//ul/li[contains(.,'"+metricRef+"')]", ParentTest, "no_jira");  
+            if (FAIL) { return;}
+//        Wait_For_All_Elements_InVisibility("Wait for metric cards to load", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Member Rate of Return')]/..//div[2]/div[1]/p", ParentTest, "no_jira");  
+//            if (FAIL) { return;}  
+        Thread.sleep(5000);
+        Element_By_Path_Text("Loaded Metrics Cards Count", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Member Rate of Return')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+            if (FAIL) { return;}
+ 
+       // System.out.println(get_Text(t));
+        MROR= Double.parseDouble(get_Text(t));
+        Element_By_Path_Click("Select Metric reference dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Member Strength of Program')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Select metrics dropdown item '" + metricRef + "'", "xpath", "//ul/li[contains(.,'"+metricRef+"')]", ParentTest, "no_jira");  
+            if (FAIL) { return;}
+//        Wait_For_All_Elements_InVisibility("Wait for metric cards to load", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Member Strength of Program')]/..//div[2]/div[1]/p", ParentTest, "no_jira");  
+//            if (FAIL) { return;}  
+        Thread.sleep(5000);
+         Element_By_Path_Text("Loaded Metrics Cards Count", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Member Strength of Program')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+            if (FAIL) { return;}
+ 
+      //  System.out.println(get_Text(t));
+        MSOP= Double.parseDouble(get_Text(t));
+
+         SecondaryMetric_Calculation(MER,TS, MROR, "Member Rate of Return Calculation",ParentTest, "no_jira" );
+         SecondaryMetric_Calculation(MER,CS, MSOP, "Member Strength of Program Calculation", ParentTest,"no_jira" );
+         UnCheckMetrics();
+            
+        Element_By_Path_Click("Select Metric " + "Customer Earned Revenue", "xpath", "//span[text()='" + "Customer Earned Revenue" + "']", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Select Metric " + "Customer Rate of Return", "xpath", "//span[text()='" + "Customer Rate of Return" + "']", ParentTest, "no_jira"); 
+            if (FAIL) { return;}  
+            Element_By_Path_Click("Select Metric " + "Customer Strength of Program", "xpath", "//span[text()='" + "Customer Strength of Program" + "']", ParentTest, "no_jira"); 
+            if (FAIL) { return;}  
+
+        Scroll_to_WebElement("Scroll to 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+        Element_By_Path_Click("Click on 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+            
+          
+        Thread.sleep(10000); 
+        Element_By_Path_Click("Select Metric reference dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Customer Earned Revenue')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Select metrics dropdown item '" + metricRef + "'", "xpath", "//ul/li[contains(.,'"+metricRef+"')]", ParentTest, "no_jira");  
+            if (FAIL) { return;}
+//        Wait_For_All_Elements_InVisibility("Wait for metric cards to load", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Customer Earned Revenue')]/..//div[2]/div[1]/p", ParentTest, "no_jira");  
+//            if (FAIL) { return;}  
+        Thread.sleep(5000);
+        Element_By_Path_Text("Loaded Metrics Cards Count", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Customer Earned Revenue')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+            if (FAIL) { return;}
+ 
+       // System.out.println(get_Text(t));
+        CER= Integer.parseInt(get_Text(t));
+        Element_By_Path_Click("Select Metric reference dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Customer Rate of Return')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Select metrics dropdown item '" + metricRef + "'", "xpath", "//ul/li[contains(.,'"+metricRef+"')]", ParentTest, "no_jira");  
+            if (FAIL) { return;}
+//        Wait_For_All_Elements_InVisibility("Wait for metric cards to load", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Customer Rate of Return')]/..//div[2]/div[1]/p", ParentTest, "no_jira");  
+//            if (FAIL) { return;}  
+        Thread.sleep(5000);
+        Element_By_Path_Text("Loaded Metrics Cards Count", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Customer Rate of Return')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+            if (FAIL) { return;}
+ 
+       // System.out.println(get_Text(t));
+        CROR= Double.parseDouble(get_Text(t));
+        Element_By_Path_Click("Select Metric reference dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Customer Strength of Program')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Select metrics dropdown item '" + metricRef + "'", "xpath", "//ul/li[contains(.,'"+metricRef+"')]", ParentTest, "no_jira");  
+            if (FAIL) { return;}
+//        Wait_For_All_Elements_InVisibility("Wait for metric cards to load", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Customer Strength of Program')]/..//div[2]/div[1]/p", ParentTest, "no_jira");  
+//            if (FAIL) { return;}  
+        Thread.sleep(5000);
+        Element_By_Path_Text("Loaded Metrics Cards Count", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Customer Strength of Program')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+            if (FAIL) { return;}
+ 
+       // System.out.println(get_Text(t));
+        CSOP= Double.parseDouble(get_Text(t));
+
+         SecondaryMetric_Calculation(CER,TS, CROR, "Customer Rate of Return Calculation", ParentTest,"no_jira" );
+         SecondaryMetric_Calculation(CER,CS, CSOP, "Customer Strength of Program Calculation",ParentTest, "no_jira" );
+         UnCheckMetrics();
+        Scroll_to_WebElement("Scroll to 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}    
+        Element_By_Path_Click("Select Metric " + "Program Earned Revenue", "xpath", "//span[text()='" + "Program Earned Revenue" + "']", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Select Metric " + "Program Rate of Return", "xpath", "//span[text()='" + "Program Rate of Return" + "']", ParentTest, "no_jira"); 
+            if (FAIL) { return;}  
+            Element_By_Path_Click("Select Metric " + "Program Strength of Program", "xpath", "//span[text()='" + "Program Strength of Program" + "']", ParentTest, "no_jira"); 
+            if (FAIL) { return;}  
+        
+        Scroll_to_WebElement("Scroll to 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+ //           Thread.sleep(500);
+        Element_By_Path_Click("Click on 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+            
+         
+        Thread.sleep(10000); 
+        Element_By_Path_Click("Select Metric reference dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Program Earned Revenue')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Select metrics dropdown item '" + metricRef + "'", "xpath", "//ul/li[contains(.,'"+metricRef+"')]", ParentTest, "no_jira");  
+            if (FAIL) { return;}
+//        Wait_For_All_Elements_InVisibility("Wait for metric cards to load", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Program Earned Revenue')]/..//div[2]/div[1]/p", ParentTest, "no_jira");  
+//            if (FAIL) { return;}  
+        Thread.sleep(5000);
+        Element_By_Path_Text("Loaded Metrics Cards Count", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Program Earned Revenue')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+            if (FAIL) { return;}
+ 
+      //  System.out.println(get_Text(t));
+        PER= Integer.parseInt(get_Text(t));
+        Element_By_Path_Click("Select Metric reference dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Program Rate of Return')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Select metrics dropdown item '" + metricRef + "'", "xpath", "//ul/li[contains(.,'"+metricRef+"')]", ParentTest, "no_jira");  
+            if (FAIL) { return;}
+//        Wait_For_All_Elements_InVisibility("Wait for metric cards to load", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Program Rate of Return')]/..//div[2]/div[1]/p", ParentTest, "no_jira");  
+//            if (FAIL) { return;}  
+        Thread.sleep(5000);
+        Element_By_Path_Text("Loaded Metrics Cards Count", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Program Rate of Return')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+            if (FAIL) { return;}
+ 
+      //  System.out.println(get_Text(t));
+        PROR= Double.parseDouble(get_Text(t));
+        Element_By_Path_Click("Select Metric reference dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Program Strength of Program')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Select metrics dropdown item '" + metricRef + "'", "xpath", "//ul/li[contains(.,'"+metricRef+"')]", ParentTest, "no_jira");  
+            if (FAIL) { return;}
+//        Wait_For_All_Elements_InVisibility("Wait for metric cards to load", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Program Strength of Program')]/..//div[2]/div[1]/p", ParentTest, "no_jira");  
+//            if (FAIL) { return;}  
+        Thread.sleep(5000);
+         Element_By_Path_Text("Loaded Metrics Cards Count", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Program Strength of Program')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+            if (FAIL) { return;}
+ 
+       // System.out.println(get_Text(t));
+        PSOP= Double.parseDouble(get_Text(t));
+
+         SecondaryMetric_Calculation(PER,TS, PROR, "Program Rate of Return Calculation", ParentTest, "no_jira" );
+         SecondaryMetric_Calculation(PER,CS, PSOP, "Program Strength of Program Calculation",ParentTest, "no_jira" );
+        }
+    }
+
+    
+        
+        
+
+ public void UnCheckMetrics() throws Exception
+    {
+      Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");  
             if (FAIL) { return;}  
         Thread.sleep(500);
 
@@ -38,197 +294,43 @@ class DL_metric_data extends DL_GUI {
                 return;  // No User Metrics Found FATAL ===================================================
             } 
         List_L0("Get Selected Metrics Count", "xpath", "//span[contains(@class, ' Mui-checked ')]", ParentTest, "no_jira");              
-            if (FAIL) { return;}            
-            for (int j = 0; j < L0.size(); j++) {        
+            if (FAIL) { return;}  
+            for (int j = 0; j < L0.size(); j++) { 
+              Thread.sleep(500);  
+       
                 Element_Click("Un-Check Selected Metrics " + (j + 1), L0.get(j), ParentTest, "no_jira"); 
-            } 
-            
-        Element_By_Path_Click("Select Metric " + METRIC, "xpath", "//span[text()='" + METRIC + "']", ParentTest, "no_jira"); 
-            if (FAIL) { return;}   
-        Scroll_to_WebElement("Scroll to 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}
-        Element_By_Path_Click("Click on 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;} 
-            
-        Element_By_Path_Click("Select Date Range " + DATE_RANGE, "xpath", "//span[text()='" + DATE_RANGE + "']", ParentTest, "no_jira"); 
-            if (FAIL) { return;}           
-            
-        List_L1("Loaded Metrics Cards Count", "xpath", "//div[contains(@class, 'MuiPaper-root MuiCard-root')]", ParentTest, "no_jira");              
-            if (FAIL) { return;} 
-        Element_Child_List_L2("Loaded Metric Card '-body1' Count", L1.get(L1.size() - 1), "xpath", ".//p[contains(@class,'-body1')]", ParentTest, "no_jira");              
-            if (FAIL) { return;} 
-        if(L2.size() > 0) {    
-            Element_Text("Loaded Metric Card name", L2.get(0), ParentTest, "no_jira");  
-            if(L2.size() > 1) {  
-                Element_Text("Loaded Metric Card Value 1", L2.get(1), ParentTest, "no_jira"); 
-                if(L2.size() > 2) {     
-                    Element_Text("Loaded Metric Card Value 2", L2.get(2), ParentTest, "no_jira");         
-                }   
+            }   
+    }
+    public String get_Text(String str) {
+    	for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == '$') str = str.replace(String.valueOf(str.charAt(i)), "");
+            if (str.charAt(i) == ',') str = str.replace(String.valueOf(str.charAt(i)), "");
+            if (str.charAt(i) == '(') str = str.replace(String.valueOf(str.charAt(i)), "");
+            if (str.charAt(i) == ')') str = str.replace(String.valueOf(str.charAt(i)), "");
+            if (str.charAt(i) == '%') str = str.replace(String.valueOf(str.charAt(i)), "");
+	}
+    	return str;
+    }
+    private void SecondaryMetric_Calculation(int var1,int var2, double var3, String NAME,ExtentTest ParentTest, String JIRA) {
+	String status;     
+	try {
+            double val = (double) var1 / var2 * 100;
+            double actVal = Math.round(val * 100.0) / 100.0;
+
+            if (actVal == (double) var3) {
+                t = "Actual value - " + actVal + " is matching with expected value - " + (double) var3;
+                status = "PASS";
+            } else {
+                t = "Actual value - " + actVal + " is not matching with expected value - " + (double) var3;
+                status = "FAIL";
             }
-        }
-
-    
-        
-        
-        // Continue ...... Maybe not necessary
-    } 
-    
-    
-
+            _p++;
+            EX += _t + "\t" + NAME + "\t" + " - " + "\t" + t + "\t" + status + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + JIRA + "\r\n";			
+        } catch (Exception ex) {
+            _f++; err = ex.getMessage().trim(); err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err + "\t" + " - " + "\t" + " - " + "\t" + JIRA + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
+	}  
+    }
 }
-//        
-//        
-//        Wait_Element_Visible("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
-//            if (FAIL) { return;} 
-//        Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
-//            if (FAIL) { return;}
-//        if(t.equalsIgnoreCase("arrow_right")) {
-//            Element_By_Path_Click("Click 'arrow_right' > Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira");  
-//                if (FAIL) { return;} 
-//        }    
-//        
-//        Thread.sleep(500);
-//	for (int i = 0; i < 3; i++) {
-//	    count = i;
-//	    if(i == 1)  metricRef = "Compared to last month";
-//	    if(i == 2)  metricRef = "Compared to last week";	 
-//	    MetricCardsSelection();      
-//	}   	
-//    }
-//    
-//    public static void MetricCardsSelection()throws InterruptedException {
-//       Thread.sleep(6000);
-//
-//       SelectMetricCard("Total Spend", null, 1, 2);
-//       Thread.sleep(6000);
-//       SelectMetricCard("Contracted Spend", null, 2, 1);
-//       Thread.sleep(6000);
-//       SelectMetricCard("Contract Utilization Rate (CUR)", "Contract Utilization Rate (CUR) = Sum (Contracted Spend)/ Sum (Total Spend)", 3, 0);
-//   
-//       Thread.sleep(6000);
-//       SelectMetricCard("Program earned revenue", null, 10, 1);
-//       SelectMetricCard("Program rate of return", "Program Rate of Return: Sum (Program Earned Revenue)/Sum (Total Spend)", 11, 0);
-//       
-//       SelectMetricCard("Member earned revenue", null, 4, 1);
-//       SelectMetricCard("Member rate of return", "Member Rate of Return: Sum (Member Earned Revenue)/ Sum (Total Spend)", 5, 0);
-//      
-//       SelectMetricCard("Customer earned revenue", null, 7, 1);
-//       SelectMetricCard("Customer rate of return", "Customer Rate of Return: Sum (Customer Earned Revenue)/ Sum (Total Spend)", 8, 0);
-//       
-//      
-//       SelectMetricCard("Contracted Spend", null, 2, 2);
-//       SelectMetricCard("Program Earned Revenue", null, 10, 1);
-//       SelectMetricCard("Program Strength of Program", "Program Strength of Program: Sum (Program Earned Revenue)/ Sum (Contracted Spend)", 12, 0);
-//      
-//       To_Top(ParentTest, "no_jira"); 
-//       SelectMetricCard("Member Earned Revenue", null, 4, 1);
-//       SelectMetricCard("Member Strength of Program", "Member Strength of Program: Sum (Member Earned Revenue)/ Sum (Contracted Spend)", 6, 0);
-//      
-//       SelectMetricCard("Customer Earned Revenue", null, 7, 1);
-//       SelectMetricCard("Customer Strength of Program", "Customer Strength of Program: Sum (Customer Earned Revenue)/ Sum (Contracted Spend)", 9, 0);
-//       To_Top(ParentTest, "no_jira"); 
-//    }
-//    
-//    public static  void SelectComparedToLastMonth_Week()throws InterruptedException {
-//        Element_By_Path_Click("Select metrics dropdown", "xpath", "//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
-//            if (FAIL) { return;}	    
-//	Thread.sleep(500); 
-//	Element_By_Path_Click("Select metrics dropdown item '" + metricRef + "'", "xpath", "//ul/li[contains(.,'"+metricRef+"')]", ParentTest, "no_jira");  
-//            if (FAIL) { return;}
-//
-//    }
-//    
-//    public static void SelectMetricCard(String desc, String calcDesc, int position, int initVar) throws InterruptedException {
-//    	Thread.sleep(6000);
-//        Wait_Element_Visible("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
-//            if (FAIL) { return;} // [1]/span > [2]/span after 'Apply' buttorn added ([1]/span)
-//        Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
-//            if (FAIL) { return;}
-//        if(t.equalsIgnoreCase("arrow_right")) {
-//            Element_By_Path_Click("Click 'arrow_right' > Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira");  
-//                if (FAIL) { return;} 
-//        }
-//        Element_By_DisplayChecking("Check '" + desc + "' is Displayed ", "xpath", "//div/span[contains(.,'" + desc +"')]/parent::div/parent::div/div/span/span/input", ParentTest, "no_jira"); 
-//        
-//        metrics(); // ==============================
-//        
-//        if (FAIL) { return;}
-//    	Element_By_Path_Click("Check '" + desc + "' checkbox", "xpath", "(//div[@class='MuiListItemIcon-root']/span/span/input)[position()=" +  position + "]", ParentTest, "no_jira");  
-//        if (FAIL) { return;}
-//        Thread.sleep(12000);
-//       
-//        if(count != 0) {
-//            SelectComparedToLastMonth_Week();
-//        }
-//       
-//        Element_By_Path_Text("Get the '" + desc + "' amount", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]/div[2]/div[2]/p", ParentTest, "no_jira"); 
-//            if (FAIL) { return;}
-//       	
-//        try {
-//            switch (initVar) {
-//                case 1:
-//                    var1 = Integer.parseInt(get_Text(t));
-//                    break;
-//                case 2:
-//                    var2 = Integer.parseInt(get_Text(t));
-//                    break;
-//                default:
-//                    var3 = Double.parseDouble(get_Text(t)) ;
-//                    break;
-//            }
-//            DL_Calculation_1("Verifying '" + calcDesc + "'", "no jira");
-//            if (FAIL) { return;}
-//        } catch(Exception e) {
-//            System.out.println(e);
-//        }
-//
-//       Element_By_Path_Click("Uncheck '" + desc + "' checkbox", "xpath", "(//div[@class='MuiListItemIcon-root']/span/span/input)[position()="+position+"]", ParentTest, "no_jira");  
-//        if (FAIL) { return;}
-//    }
-// 
-
-
-//    public static String get_Text(String str) {
-//    	for (int i = 0; i < str.length(); i++) {
-//            if (str.charAt(i) == '$') str = str.replace(String.valueOf(str.charAt(i)), "");
-//            if (str.charAt(i) == ',') str = str.replace(String.valueOf(str.charAt(i)), "");
-//            if (str.charAt(i) == '(') str = str.replace(String.valueOf(str.charAt(i)), "");
-//            if (str.charAt(i) == ')') str = str.replace(String.valueOf(str.charAt(i)), "");
-//            if (str.charAt(i) == '%') str = str.replace(String.valueOf(str.charAt(i)), "");
-//	}
-//    	return str;
-//    }
-//    private static void DL_Calculation_1(String NAME, String JIRA) {
-//	String status;     
-//	try {
-//            double val = (double) var1 / var2 * 100;
-//            double actVal = Math.round(val * 100.0) / 100.0;
-//
-//            if (actVal == (double) var3) {
-//                t = "Actual value - " + actVal + " is matching with expected value - " + (double) var3;
-//                status = "PASS";
-//            } else {
-//                t = "Actual value - " + actVal + " is not matching with expected value - " + (double) var3;
-//                status = "FAIL";
-//            }
-//            _p++;
-//            EX += _t + "\t" + NAME + "\t" + " - " + "\t" + t + "\t" + status + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + JIRA + "\r\n";			
-//        } catch (Exception ex) {
-//            _f++; err = ex.getMessage().trim(); err = ex.getMessage().trim();
-//            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-//            EX += _t + "\t" + NAME + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err + "\t" + " - " + "\t" + " - " + "\t" + JIRA + "\r\n";
-//            F += "Step: " + _t + " > " + err + "\r\n";
-//	}  
-
-
-
-
-
-
-
-
-
-
-
-
-
