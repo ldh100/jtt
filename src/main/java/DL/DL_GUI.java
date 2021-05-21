@@ -1059,9 +1059,9 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
             sorter.setSortKeys(sortKeys);  
             sorter.setSortable(0, false);         
-            DateModel.addRow(new Object[]{"Last 4 Weeks"});       
-            DateModel.addRow(new Object[]{"Last 12 Weeks"}); 
-            DateModel.addRow(new Object[]{"Last 52 Weeks"});    
+            DateModel.addRow(new Object[]{"Last 4 weeks"});       
+            DateModel.addRow(new Object[]{"Last 12 weeks"}); 
+            DateModel.addRow(new Object[]{"Last 52 weeks"});    
             DateModel.addRow(new Object[]{"Calendar YTD"});
             DateModel.addRow(new Object[]{"Foodbuy YTD"});
             DV_D_RANGES.setModel(DateModel);    
