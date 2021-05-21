@@ -352,7 +352,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 .addGap(2, 2, 2))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 172, 416, -1));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 172, 408, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Scope"));
         jPanel1.setToolTipText("");
@@ -603,7 +603,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         DV_QA.getTableHeader().setReorderingAllowed(false);
         jScrollPane5.setViewportView(DV_QA);
 
-        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 852, 152));
+        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 844, 152));
 
         lblTestData.setText("Test Data");
         lblTestData.setName("lblDates"); // NOI18N
@@ -707,8 +707,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     
     protected String url = "";
     protected String env = "";
-    private static SwingWorker BW1; 
-    private static SwingWorker BW2; 
+    private SwingWorker BW1; 
+    private SwingWorker BW2; 
     private Instant run_start;
     private String Toast_Msg = "";  
     
@@ -717,7 +717,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     
     protected boolean FAIL = false;
     
-    protected int _t = 0; // Total
+    protected int _t = 0; // Total- calculate in report as sum of others
     protected int _p = 0; // Passed
     protected int _f = 0; // Failed
     protected int _w = 0; // Warn
@@ -803,8 +803,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         cmbEnv.addItem("Development");
         cmbEnv.addItem("Staging");
         cmbEnv.addItem("Production");         
-        cmbEnv.setSelectedIndex(0); 
-        
+        cmbEnv.setSelectedIndex(1); // <<< Staging
 
         GUI_Load_Env();
         Load = false;
@@ -1413,7 +1412,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             t_max =  0;
             p_50 = 0;
             p_90 = 0;
-            _t = 0; // Total
+            //_t = 0; // Total
             _p = 0; // Passed
             _f = 0; // Failed
             _w = 0; // Warn
@@ -1478,7 +1477,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             t_max =  0;
             p_50 = 0;
             p_90 = 0;
-            _t = 0; // Total
+            //_t = 0; // Total
             _p = 0; // Passed
             _f = 0; // Failed
             _w = 0; // Warn
@@ -1745,7 +1744,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
                 EX = "Distiller " + env + ", v" + Ver + ", Browser: " + cmbBrow.getSelectedItem().toString() +
-                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
+                    " - Steps: " + (_p + _f +_w + _i) + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + 
+                    ", Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                     + EX;
                 
@@ -1842,7 +1842,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             SCOPE += "QA Users";
             DL_UserID = "";         // Clear DL_User from GUI to force Clear_Cookies > Restart_Driver and Re-Login
             String QA_USER = "";    // Next QA User from S3 DV_QA table
-            //for (int i = 149; i < 152; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
+            
+            //for (int i = 288; i < 293; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
             for (int i = 0; i < DV_QA.getRowCount(); i++) {    // All Tests from S3 DV_QA table
                 if(QA_USER.equals(DV_QA.getValueAt(i, 1).toString()) && !Login_OK){
                     continue;      // Do Not proceed with User having Invalid Credentials or Locked Account
@@ -1871,7 +1872,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 
                 
                 DL_qa_user BR = new DL.DL_qa_user(DL_GUI.this);
-                BR.run(  // ====== pass QA User Data from GUI DVU =========================
+                BR.run(  // ====== pass QA User Test # 'i + 1' Data from QA Data Table build from S3 QA file =========================
                     DL_UserID, 
                     DV_QA.getValueAt(i, 2).toString(), 
                     DV_QA.getValueAt(i, 3).toString(), 
@@ -1908,7 +1909,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         }
         
         if(!Login_OK){
-            return; // Cannot proceed - Bad Login
+            return; // Cannot proceed with this User - Bad Login
         }
             
         if (_metrics_selection.isSelected()) { 
@@ -1970,7 +1971,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         Zip_Report = true;
         
         Last_EX = EX;
-        Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
+        Summary = "Steps: " + (_p + _f +_w + _i) + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
         try {
             String t_rep = "";
             if (!"".equals(r_time.trim())) {
@@ -2001,15 +2002,18 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             Current_Log_Update(GUI, "= LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
         }
         
-        Current_Log_Update(GUI, "= " + Summary + "\r\n"); // Summary shown in EX top
-        Current_Log_Update(GUI, "= Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
         Current_Log_Update(GUI, "= Distiller" + " v: " + "?" + ", Environment: " + env + "\r\n");
+        Current_Log_Update(GUI, "= Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
+        Current_Log_Update(GUI, "= " + Summary + "\r\n"); // Summary shown in EX top
+        Current_Log_Update(GUI, "= Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n");
+
         
         if(GUI){
             Log = txtLog.getText();
         }
         LOG_UPDATE(Log); // ========================================================
-        HtmlReporter.config().setReportName("Distiller " + " v: " + "?" + ", Environment: " + env + ", Summary: Total Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i);
+        HtmlReporter.config().setReportName("Distiller " + " v: " + "?" + ", Environment: " + env + 
+                ", Summary: Total Steps: " + (_p + _f +_w + _i) + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i);
         HtmlReport.flush();
         
         if(_Slack && !Slack_Channel.equals("N/A")){
@@ -2019,7 +2023,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                     "Browser: *" + cmbBrow.getSelectedItem().toString() + "*" + "\r\n" +        
                     "Scope: " + SCOPE + "\r\n" +
                     "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
-                    "Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
+                    "Steps: " + (_p + _f +_w + _i) + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
             
             Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Report_File, Slack_Channel, MSG));
             File ef = new File(Report_File);
@@ -2351,8 +2355,11 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
     }
     protected void To_Top(String NAME, ExtentTest ParentTest, String JIRA) throws Exception {
-       sw1.start();
-       FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        _t++; sw1.start();  
+        FAIL = false;
         try {
             Actions action = new Actions(d1);
             action.sendKeys(Keys.HOME).perform();
@@ -2471,53 +2478,6 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
     }    
 
-    protected void Wait_For_Element_By_Path_Visibility(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        _t++; sw1.start();       
-        FAIL = false;
-        try {
-            switch (BY) {
-                case "xpath":
-                    loadTimeout.until((Function) ExpectedConditions.visibilityOfElementLocated(By.xpath(PATH)));
-                    break;
-                case "css":
-                    loadTimeout.until((Function) ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PATH)));
-                    break;
-                case "className":
-                    loadTimeout.until((Function) ExpectedConditions.visibilityOfElementLocated(By.className(PATH)));
-                    break;
-                case "id":
-                    loadTimeout.until((Function) ExpectedConditions.visibilityOfElementLocated(By.id(PATH)));
-                    break;
-                case "tagName":
-                    loadTimeout.until((Function) ExpectedConditions.visibilityOfElementLocated(By.tagName(PATH)));
-                    break;                     
-                case "linkText":
-                    loadTimeout.until((Function) ExpectedConditions.visibilityOfElementLocated(By.linkText(PATH)));
-                    break;
-                case "partialLinkText":
-                    loadTimeout.until((Function) ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(PATH)));
-                    break;
-                default:
-                    break;
-            }
-            r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
-            _p++; 
-            EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "Wait:  " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + "PASS" + "\t" + " - " +
-            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />" + BY + " > " + PATH, false, ParentTest.createNode(NAME));
-        } catch(Exception ex){
-            _f++; FAIL = true; err = ex.getMessage().trim();
-            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "LoadTimeOut " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
-            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH, true, ParentTest.createNode(NAME));
-        }
-        sw1.reset();
-    }
     protected void Wait_For_Element_By_Path_Presence(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
@@ -2689,6 +2649,58 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
+    protected void Scroll_to_WebElement(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        _t++; sw1.start();      
+ 
+        FAIL = false;
+        try {         
+            switch (BY) {
+             case "xpath":
+                 e = d1.findElement(By.xpath(PATH));
+                 break;
+             case "css":
+                 e = d1.findElement(By.cssSelector(PATH));
+                 break;
+             case "className":
+                 e = d1.findElement(By.className(PATH));
+                 break;
+             case "id":
+                 e = d1.findElement(By.id(PATH));
+                 break;
+             case "tagName":
+                 e = d1.findElement(By.tagName(PATH));
+                 break;
+             case "name":
+                 e = d1.findElement(By.name(PATH));
+                 break;
+              case "linkText":
+                 e = d1.findElement(By.linkText(PATH));
+                 break;
+             case "partialLinkText":
+                 e = d1.findElement(By.partialLinkText(PATH));
+                 break;
+             default:
+                 break;
+            }            
+            ((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", e);
+            _p++;
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Scroll OK" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Scroll Failed" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+        }
+        sw1.reset();
+    }
+    
     protected void Move_to_Element(String NAME, WebElement E, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
@@ -2923,7 +2935,6 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             
             Actions action = new Actions(d1);
             action.moveToElement(e, XX, YY).click().perform();
-            //Thread.sleep(500);
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "Click out " + DIRECTION + " of element successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -3377,7 +3388,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();
+        _t++; sw1.start();  
  
         FAIL = false;
         t = "not found!";
@@ -3529,14 +3540,14 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             }
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + "Enter: " + VAL, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " Enter: " + VAL, false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH + "Enter: " + VAL, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH + " Enter: " + VAL, true, ParentTest.createNode(NAME));
         } 
         sw1.reset();
     }
@@ -3615,7 +3626,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Passed Element enter: " + VAL, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Passed Element Enter: " + VAL, false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
@@ -4206,7 +4217,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             sw1.reset();
         }
         _t++; sw1.start();       
- 
+        // L2 specific for Empty List just - PASS in ether case and report size, not - WARN 
         FAIL = false;
         if(L2 != null) {L2.clear();}
         try {
@@ -4238,17 +4249,10 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 default:
                     break;
             }
-            if(L2.isEmpty()){
-                _w++; 
-                EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "WARN" + "\t" + "L2.isEmpty()" +
-                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                    
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L2.size(), false, ParentTest.createNode(NAME));
-            }else{
-                _p++; 
-                EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + L2.size() + " item(s) (L2)" + "\t" + "PASS" + "\t" + " - " +
-                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";               
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L2.size(), false, ParentTest.createNode(NAME));
-            }
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + L2.size() + " item(s) (L2)" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";               
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L2.size(), false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
@@ -4264,7 +4268,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             sw1.reset();
         }
         _t++; sw1.start();       
- 
+        // L3 specific for Login Messages - if No "will expire" or "locked" - PASS, otherwise - WARN > procees to FAIl in Execution
         FAIL = false;
         if(L3 != null) {L3.clear();}
         try {
@@ -4732,7 +4736,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 F += "Step: " + _t + " > " + err + "\r\n";
                 Log_Html_Result("FAIL", "Error: " + err + "<br />URL: " +  URL, true, ParentTest.createNode(NAME));                
             } else {
-                _p++; err = ex.getMessage().trim();
+                _p++; 
+                err = ex.getMessage().trim();
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
                 EX += _t + "\t == " + NAME + "\t" + URL + "\t" + err + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n"; 
@@ -4777,7 +4782,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 F += "Step: " + _t + " > " + err + "\r\n";
                 Log_Html_Result("FAIL", "Error: " + err + "<br />URL: " +  URL, true, ParentTest.createNode(NAME));                
             } else {
-                _p++; err = ex.getMessage().trim();
+                _p++; 
+                err = ex.getMessage().trim();
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
                 EX += _t + "\t == " + NAME + "\t" + URL + "\t" + err + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n"; 
@@ -5321,7 +5327,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-   
+
     protected void Element_By_DisplayCheck(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
@@ -5374,58 +5380,6 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
-            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
-        }
-        sw1.reset();
-    }
-    
-    protected void Scroll_to_WebElement(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        _t++; sw1.start();      
- 
-        FAIL = false;
-        try {         
-            switch (BY) {
-             case "xpath":
-                 e = d1.findElement(By.xpath(PATH));
-                 break;
-             case "css":
-                 e = d1.findElement(By.cssSelector(PATH));
-                 break;
-             case "className":
-                 e = d1.findElement(By.className(PATH));
-                 break;
-             case "id":
-                 e = d1.findElement(By.id(PATH));
-                 break;
-             case "tagName":
-                 e = d1.findElement(By.tagName(PATH));
-                 break;
-             case "name":
-                 e = d1.findElement(By.name(PATH));
-                 break;
-              case "linkText":
-                 e = d1.findElement(By.linkText(PATH));
-                 break;
-             case "partialLinkText":
-                 e = d1.findElement(By.partialLinkText(PATH));
-                 break;
-             default:
-                 break;
-            }            
-            ((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", e);
-            _p++;
-            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Scroll OK" + "\t" + "PASS" + "\t" + " - " +
-            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
-        } catch(Exception ex){
-            _f++; FAIL = true; err = ex.getMessage().trim();
-            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Scroll Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
