@@ -81,14 +81,14 @@ public class DL_qa_user extends DL_GUI {
                     String L_FilterKey = L.substring(0,L.indexOf(":")).trim();
                     String L_FilterValue = L.substring(L.indexOf(":") + 1).trim().replaceAll(",", ""); 
                     if(L_FilterKey.contains("Dropdown")) {
-                        Element_By_Path_Click("Cick on Location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=2]", ParentTest, "no_jira");  
+                        Element_By_Path_Click("Open Location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=2]", ParentTest, "no_jira");  
                             if (FAIL) { return;}
                         Scroll_to_WebElement("Scroll to '" + L_FilterValue + "'", "xpath", "//*[contains(text(), '" + L_FilterValue + "')]", ParentTest, "no_jira"); 
                             if (FAIL) { return;}  
-                        Element_By_Path_Click("Choose dropdown item Value'" + L_FilterValue + "'", "xpath", "//*[contains(text(), '" + L_FilterValue + "')]", ParentTest, "no_jira");  
+                        Element_By_Path_Click("Choose dropdown Location Value'" + L_FilterValue + "'", "xpath", "//*[contains(text(), '" + L_FilterValue + "')]", ParentTest, "no_jira");  
                             if (FAIL) { return;}
                     }else{
-                        Element_By_Path_Click("Click on location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')])[position()=3]", ParentTest, "no_jira");  
+                        Element_By_Path_Click("Open location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')])[position()=3]", ParentTest, "no_jira");  
                             if (FAIL) { return;}
                         Element_By_Path_Click("Choose Location Key '" + L_FilterKey + "'", "xpath", "//div[@role='dialog']//*[contains(text(), '" + L_FilterKey + "')]", ParentTest, "no_jira");  
                             if (FAIL) { return;}
@@ -104,7 +104,8 @@ public class DL_qa_user extends DL_GUI {
         // ==================================== Products/Item Categories Filters - Clear > Apply new ones if Required ====================================================
         Element_By_Path_Click("Click on Products/Item Categories tab", "xpath", "//span[contains(text(),'Products/Item Categories')]", ParentTest, "no_jira");  
             if (FAIL) { return;}
-        Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Wait for drop-down 'Category Name'", "xpath", "//div[text()='Category Name']", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
         List_L2("Existing Products/Item Categories Filters", "xpath", "//div[contains(@class,'MuiChip-deletable')]/*[name()='svg']", ParentTest, "no_jira");                                      
             for (int j = 0; j < L2.size(); j++) {
                 Element_Click("Delete Products/Item Categories Filter " + j, L2.get(j), ParentTest, "no_jira"); 
@@ -122,10 +123,9 @@ public class DL_qa_user extends DL_GUI {
                         Scroll_to_WebElement("Scroll to '" + I_FilterValue + "'", "xpath", "//*[contains(text(), '" + I_FilterValue + "')]", ParentTest, "no_jira"); 
                             if (FAIL) { return;}    
                         Element_By_Path_Click("Select Item Value '" + I_FilterValue + "'", "xpath", "//*[contains(text(), '" + I_FilterValue + "')]", ParentTest, "no_jira"); 
-                            if (FAIL) { return;}
-                        
+                            if (FAIL) { return;}                 
                     }else{
-                        Element_By_Path_Click("Click on Item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=3]", ParentTest, "no_jira");  
+                        Element_By_Path_Click("Open Item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=3]", ParentTest, "no_jira");  
                             if (FAIL) { return;}
                         Element_By_Path_Click("Choose Item Key '" + I_FilterKey + "'", "xpath", "//*[contains(text(), '" + I_FilterKey + "')]", ParentTest, "no_jira");  
                             if (FAIL) { return;}
