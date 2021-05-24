@@ -39,11 +39,105 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,17,0,0,3,86"/>
   </AuxValues>
 
-  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-    <Property name="useNullLayout" type="boolean" value="false"/>
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
+              <Component id="lblTestData" min="-2" pref="820" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+              <Component id="jScrollPane5" min="-2" pref="844" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
+                      <Component id="lblMetrics" min="-2" pref="360" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jScrollPane3" min="-2" pref="428" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                      <Component id="lblDates" min="-2" pref="280" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jScrollPane2" min="-2" pref="428" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jPanel4" min="-2" pref="408" max="-2" attributes="0"/>
+                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                      <Component id="lblSITES4" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace min="100" pref="100" max="-2" attributes="0"/>
+                      <Component id="lblSITES6" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="txtAdmin_ID" min="-2" pref="216" max="-2" attributes="0"/>
+                      <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
+                      <Component id="txtAdmin_PW" min="-2" pref="184" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="428" max="-2" attributes="0"/>
+              <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+              <Component id="jPanel3" min="-2" pref="416" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+              <Component id="lblTestData" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <Component id="jScrollPane5" min="-2" pref="152" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="lblMetrics" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" min="-2" pref="108" max="-2" attributes="0"/>
+                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                      <Component id="lblDates" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="96" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="44" pref="44" max="-2" attributes="0"/>
+                              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblSITES4" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblSITES6" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtAdmin_ID" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtAdmin_PW" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="84" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jPanel3" min="-2" pref="88" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lblMetrics">
@@ -51,32 +145,17 @@
         <Property name="text" type="java.lang.String" value="Metrics"/>
         <Property name="alignmentX" type="float" value="0.5"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="12" y="172" width="360" height="-1"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="lblDates">
       <Properties>
         <Property name="text" type="java.lang.String" value="Date Ranges"/>
         <Property name="name" type="java.lang.String" value="lblDates" noResource="true"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="8" y="300" width="280" height="-1"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane3">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="4" y="188" width="428" height="108"/>
-        </Constraint>
-      </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
@@ -121,11 +200,6 @@
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="4" y="320" width="428" height="96"/>
-        </Constraint>
-      </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
@@ -162,11 +236,6 @@
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="4" y="420" width="428" height="84"/>
-        </Constraint>
-      </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
@@ -201,11 +270,6 @@
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="alignmentX" type="float" value="0.5"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="444" y="380" width="120" height="-1"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JTextField" name="txtAdmin_ID">
       <Properties>
@@ -214,11 +278,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="App_User@?.?"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="440" y="396" width="216" height="-1"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="lblSITES6">
       <Properties>
@@ -229,11 +288,6 @@
         <Property name="text" type="java.lang.String" value="User Password"/>
         <Property name="alignmentX" type="float" value="0.5"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="664" y="380" width="-1" height="-1"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Component class="javax.swing.JTextField" name="txtAdmin_PW">
       <Properties>
@@ -242,11 +296,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="password"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="664" y="396" width="184" height="-1"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel4">
       <Properties>
@@ -256,11 +305,6 @@
           </Border>
         </Property>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="440" y="172" width="408" height="-1"/>
-        </Constraint>
-      </Constraints>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -376,36 +420,31 @@
         <Property name="doubleBuffered" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="Scope" noResource="true"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="440" y="216" width="412" height="160"/>
-        </Constraint>
-      </Constraints>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="_Insights" min="-2" pref="132" max="-2" attributes="0"/>
                       <Component id="_metrics_selection" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_metric_data" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
                       <Component id="_filters" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
                       <Component id="_Drilldown" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
                       <Component id="_login" alignment="1" min="-2" pref="124" max="-2" attributes="0"/>
                       <Component id="_invalid_login" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="_metric_data" min="-2" pref="191" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                  <EmptySpace pref="26" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                           <Component id="_logout" alignment="1" min="-2" pref="114" max="-2" attributes="0"/>
-                          <Component id="_all_data" alignment="1" pref="139" max="32767" attributes="0"/>
-                          <Component id="_password" alignment="1" max="32767" attributes="0"/>
+                          <Component id="_all_data" alignment="1" max="32767" attributes="0"/>
+                          <Component id="_password" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
                       </Group>
                       <Component id="_users" min="-2" pref="158" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="27" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -413,28 +452,29 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="_login" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="_all_data" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                  <Component id="_invalid_login" min="-2" pref="14" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="_metrics_selection" min="-2" pref="14" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="_metric_data" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="_password" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="_filters" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="_logout" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="_Drilldown" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="_users" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="_login" min="-2" pref="14" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                          <Component id="_invalid_login" min="-2" pref="14" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_metrics_selection" min="-2" pref="14" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_metric_data" min="-2" pref="14" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_filters" min="-2" pref="14" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_Drilldown" min="-2" pref="14" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="_all_data" min="-2" pref="14" max="-2" attributes="0"/>
+                          <EmptySpace min="38" pref="38" max="-2" attributes="0"/>
+                          <Component id="_password" min="-2" pref="14" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_logout" min="-2" pref="14" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_users" min="-2" pref="14" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="_Insights" min="-2" pref="14" max="-2" attributes="0"/>
@@ -484,7 +524,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Metric Data"/>
+            <Property name="text" type="java.lang.String" value="Secondary Metric Data Validation "/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
@@ -495,7 +535,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Metric(s) Filters"/>
+            <Property name="text" type="java.lang.String" value="======"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
@@ -571,11 +611,6 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel3">
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="436" y="416" width="416" height="88"/>
-        </Constraint>
-      </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
         <Property name="useNullLayout" type="boolean" value="false"/>
@@ -814,11 +849,6 @@
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="4" y="20" width="844" height="152"/>
-        </Constraint>
-      </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
@@ -850,11 +880,6 @@
         <Property name="text" type="java.lang.String" value="Test Data"/>
         <Property name="name" type="java.lang.String" value="lblDates" noResource="true"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="8" y="4" width="820" height="-1"/>
-        </Constraint>
-      </Constraints>
     </Component>
   </SubComponents>
 </Form>

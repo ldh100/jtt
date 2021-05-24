@@ -9,7 +9,7 @@ public class DL_qa_user extends DL_GUI {
         ParentTest = a.ParentTest;
     }
     // Error: User Initilization Fail. Please Try Again    <<<< How to deal with That??   DEBUG
-    protected void run(String User_ID, String Metric, String Period, String Val, String Location_Filters, String Item_Filters, String Kpi, String Source) throws InterruptedException, Exception { 
+    protected void run(String User_ID, String Metric, String Restricted, String Period, String Val, String Location_Filters, String Item_Filters, String Kpi, String Source) throws InterruptedException, Exception { 
 
         Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
@@ -19,9 +19,11 @@ public class DL_qa_user extends DL_GUI {
             Element_By_Path_Click("Click 'arrow_right' > Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira");  
                     if (FAIL) { return;}  
         }
-
+        Thread.sleep(500);
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");  
-            if (FAIL) { return;}         
+            if (FAIL) { return;}   
+        Thread.sleep(500);  
+        
         List_L0("Get User Metrics Count", "xpath", "//div[@class='MuiListItemIcon-root']", ParentTest, "no_jira");              
             if (FAIL) { return;}            
             if (L0.isEmpty()) { 
@@ -97,7 +99,7 @@ public class DL_qa_user extends DL_GUI {
                         Element_By_Path_Click("Select Location '" + L_FilterValue + "'", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]//*[contains(text(),'" + L_FilterValue + "')]/..", ParentTest, "no_jira"); 
                             //if (FAIL) { return;} // do not return, juat log an error Search value not Found                       
                     }
-                }  
+                } 
             }            
         }
  
@@ -132,13 +134,13 @@ public class DL_qa_user extends DL_GUI {
                         Element_By_Path_Text_Enter("Enter/Search Item '" + I_FilterValue + "'", "id", "filter-group-search",I_FilterValue , false, ParentTest, "no_jira");  
                             if (FAIL) { return;}                                                            
                         Element_By_Path_Click("Select Item Value '" + I_FilterValue + "'", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]//*[contains(text(),'" + I_FilterValue + "')]/..", ParentTest, "no_jira"); 
-                            //if (FAIL) { return;} // do not return, juat log an error Search value not Found
                     }
                 }
             }                
         }
             
         // ====  Apply cleared / new Selected filters
+        Thread.sleep(1000);     
         Element_By_Path_Click("Click on 'Apply' button", "xpath", "(//button/span[contains(.,'Apply')])[2]", ParentTest, "no_jira"); 
             if (FAIL) { return;}  
         Thread.sleep(500); 
