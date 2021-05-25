@@ -241,6 +241,7 @@ Thread.sleep(5000);
             Element_By_Path_Click("Click 'arrow_right' > Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira");  
             if (FAIL) { return;}  
         }
+        Thread.sleep(500);
         List_L0("Get User Metrics Count", "xpath", "//div[@class='MuiListItemIcon-root']", ParentTest, "no_jira");              
             if (FAIL) { return;}            
             if (L0.isEmpty()) { 
