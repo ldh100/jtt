@@ -360,7 +360,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         DV1.setCellSelectionEnabled(true);
         DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV1.setName("DV1"); // NOI18N
-        DV1.setRequestFocusEnabled(false);
+        DV1.setOpaque(false);
         DV1.setRowHeight(18);
         DV1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         DV1.getTableHeader().setReorderingAllowed(false);
@@ -602,8 +602,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
     
     private static SwingWorker BW1; 
     private Instant run_start;
-    protected String r_time = ""; 
-    protected String SCOPE = "";  
+    protected String r_time = "";  
     private boolean Zip_Report = true;
     private boolean _Slack = false;
     private String Slack_Channel = "";
@@ -636,15 +635,16 @@ public class API_GUI extends javax.swing.JInternalFrame {
     
     private String SITE = "";
     private String SiteID = "";
-    private String GROUP = "";
-    private String GroupID = ""; 
+    
+    private String SECTOR = "";
+    private String SectorID = ""; 
     private String BRAND = "";
     private String BrandID = "";
+    private String UnitID = "";
     private String CompanyID = "";
     private String GL_MENU = "TIM HORTONS";
-    private String COUNTRY = "COUNTRY";
     
-    private List<String> GROUP_IDS;
+    private List<String> SECTOR_IDS;
     private List<String> COMP_IDS; 
     private List<String> MENU_IDS;
     private List<String> ORDER_IDS; 
@@ -890,8 +890,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load " + "Utit" + " location API..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        String UNIT_ID = DV2.getValueAt(DV2.getSelectedRow(), 3).toString();
-        String J = "==== Unit ID: " + UNIT_ID + " - configuration API(s):" + "\r\n";
+        UnitID = DV2.getValueAt(DV2.getSelectedRow(), 3).toString();
+        String J = "==== Unit ID: " + UnitID + " - configuration API(s):" + "\r\n";
 
         J += "\r\n========= Public Configuration:" + "\r\n";
         if(sw1.isRunning()){
@@ -900,9 +900,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            J += GUI_API_Get(BaseAPI + "/config/public/" + UNIT_ID, "") + "\r\n";             
+            J += GUI_API_Get(BaseAPI + "/config/public/" + UnitID, "") + "\r\n";             
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/config/public/" + UNIT_ID + " > " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/config/public/" + UnitID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
             txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }         
@@ -917,9 +917,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            J += GUI_API_Get(BaseAPI + "/config/" + UNIT_ID, "Bearer " + AP3_User_TKN) + "\r\n";             
+            J += GUI_API_Get(BaseAPI + "/config/" + UnitID, "Bearer " + AP3_User_TKN) + "\r\n";             
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/config/" + UNIT_ID + " > " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/config/" + UnitID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
             txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }         
@@ -934,9 +934,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            J += GUI_API_Get(BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1", "") + "\r\n";             
+            J += GUI_API_Get(BaseAPI + "/location/" + UnitID + "?extended=true&nocache=1", "") + "\r\n";             
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1" + " > " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/location/" + UnitID + "?extended=true&nocache=1" + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }   
@@ -970,9 +970,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            J += GUI_API_Get(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false", "Bearer " + AP3_User_TKN) + "\r\n";             
+            J += GUI_API_Get(BaseAPI + "/location/sector/" + SECTOR_IDS.get(I) + "?expanded=false", "Bearer " + AP3_User_TKN) + "\r\n";             
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + " > " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/location/sector/" + SECTOR_IDS.get(I) + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
@@ -1823,15 +1823,15 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 addresses = null;
                 meta = null;
                 platform = "DH";
-                JSONObject object = Groups.getJSONObject(i);
-                if(object.has("name")){
-                    site = object.getString("name");   
+                JSONObject group = Groups.getJSONObject(i);
+                if(group.has("name")){
+                    site = group.getString("name");   
                 } 
-                if(object.has("id")){
-                    id = object.getString("id");
+                if(group.has("id")){
+                    id = group.getString("id");
                 } 
-                if(object.has("meta")){
-                    meta = object.getJSONObject("meta");
+                if(group.has("meta")){
+                    meta = group.getJSONObject("meta");
                     if (meta.has("migrated") && meta.getBoolean("migrated")){
                         platform = "CDL migrated";
                     }
@@ -1840,8 +1840,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     platform = "CDL";
                 } 
 
-                if(object.has("address")){
-                    addresses = object.getJSONObject("address");
+                if(group.has("address")){
+                    addresses = group.getJSONObject("address");
                 }  
                 if(addresses != null && addresses.has("country")){
                     country = addresses.getString("country");   
@@ -2012,7 +2012,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         txtLog.append("- Load Groups/Sector ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         cmbGroup.removeAllItems();
-        GROUP_IDS = new ArrayList<>();
+        SECTOR_IDS = new ArrayList<>();
         
         Load = true;
         if(sw1.isRunning()){
@@ -2041,7 +2041,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             for (int i = 0; i < Sectors.length(); i++) {
                 S_NAME = Sectors.getJSONObject(i).getString("name");
                 cmbGroup.addItem(S_NAME);
-                GROUP_IDS.add(Sectors.getJSONObject(i).getString("id"));
+                SECTOR_IDS.add(Sectors.getJSONObject(i).getString("id"));
             }
         } catch (IOException | JSONException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
@@ -2071,7 +2071,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             return;
         }
         BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
-        GroupID = "";
+        SectorID = "";
         CompanyID = "";
         int GroupIndex = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -2096,10 +2096,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
             };
             json = new JSONObject(httpclient.execute(httpget, responseHandler));        
             if(json.has("sector")){
-                GroupID = json.getString("sector");
-                if(!GroupID.isEmpty()){
-                    for (int i = 0; i < GROUP_IDS.size(); i++) {
-                        if(GROUP_IDS.get(i).equals(GroupID)){
+                SectorID = json.getString("sector");
+                if(!SectorID.isEmpty()){
+                    for (int i = 0; i < SECTOR_IDS.size(); i++) {
+                        if(SECTOR_IDS.get(i).equals(SectorID)){
                             GroupIndex = i;
                         }
                     }
@@ -2133,7 +2133,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));       
         
         Load = true;
-        if(!GroupID.equals("")){
+        if(!SectorID.equals("")){
             cmbGroup.setSelectedIndex(GroupIndex);
         }else{
             if(cmbGroup.getItemCount() > 0){
@@ -2164,7 +2164,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             }
             sw1.start();        
      
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 
+            HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + SECTOR_IDS.get(I) + "?expanded=false"); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_User_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
@@ -2254,11 +2254,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("env:")) env = value;
                 if(l.contains("app:")) app = value;
                 if(l.contains("url:")) url = value;
-                if(l.contains("GROUP:")) GROUP  = value;
+                if(l.contains("GROUP:")) SECTOR  = value;
                 if(l.contains("GL_MENU:")) GL_MENU = value;
                 if(l.contains("SITE:")) SITE = value;
                 if(l.contains("BRAND:")) BRAND = value;
-                if(l.contains("COUNTRY:")) COUNTRY = value;
                 if(l.contains("txtMobile_ID:")) txtMobile_ID.setText(value);
                 if(l.contains("txtMobile_PW:")) txtMobile_PW.setText(value);
                 if(l.contains("txtAP3_ID:")) txtAP3_ID.setText(value);
@@ -2294,7 +2293,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
             C += "GL_MENU: " + cmbComp.getSelectedItem().toString() + "\r\n";
             C += "SITE: " + _S + "\r\n";
             C += "BRAND: " + _B + "\r\n";
-            C += "COUNTRY: " + COUNTRY + "\r\n";
             
             C += "txtMobile_ID: " + txtMobile_ID.getText().trim() + "\r\n";
             C += "txtMobile_PW: " + txtMobile_PW.getText().trim()  + "\r\n";
@@ -2541,14 +2539,12 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("env: ")) env = value;
                 if(l.contains("app: ")) app = value;
                 if(l.contains("url: ")) url = value; 
-                if(l.contains("Scope: ")) SCOPE = value;
                 if(l.contains("SlackCh: ")) Slack_Channel = value;
                 if(l.contains("_slack: ")) _Slack = Boolean.parseBoolean(value);
-                if(l.contains("GROUP: ")) GROUP  = value;
+                if(l.contains("GROUP: ")) SECTOR  = value;
                 if(l.contains("GL_MENU: ")) GL_MENU = value;
                 if(l.contains("SITE: ")) SITE = value;
                 if(l.contains("BRAND: ")) BRAND = value;
-                if(l.contains("COUNTRY: ")) COUNTRY = value;
                 if(l.contains("Mobile_ID: ")) Mobile_ID = value; 
                 if(l.contains("Mobile_PW: ")) Mobile_PW = value; 
                 if(l.contains("AP3_ID: ")) AP3_ID = value; 
@@ -2651,7 +2647,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             _update.setString(14, A.A.WsID);
             _update.setString(15, "N/A");
             _update.setString(16, LOG);
-            _update.setString(17, "Scope: " + SCOPE);
+            _update.setString(17, "Scope: " + "All");
             _update.setString(18, EX);
             int row = _update.executeUpdate();
             conn.close();
@@ -2743,7 +2739,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
                 EX = "API " + env + ", " +
-                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
+                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ", Info: " + _i + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                     + EX;
                 
@@ -2819,27 +2815,26 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         
         Current_Log_Update(GUI, "= " + Summary + "\r\n"); // Summary shown in EX top
-        Current_Log_Update(GUI, "= Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
         Current_Log_Update(GUI, "= API(s) " + ", Environment: " + env + "\r\n");
         
         if(GUI){
             Log = txtLog.getText();
         }
         LOG_UPDATE(Log); // ========================================================
-        HtmlReporter.config().setReportName("API(s) " + ", Environment: " + env + 
+        HtmlReporter.config().setReportName("API(s) " + ", Env: " + env + 
                 ", Total Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
-                ".  Resp(sec) - Min: " + A.A.df.format(t_min) +
+                ". Resp(sec) - Min: " + A.A.df.format(t_min) +
                             ", Avg: " + A.A.df.format(t_avg) +
                             ", Max: " + A.A.df.format(t_max) +
                             ", p50: " + A.A.df.format(p_50) +
-                            ", p90: " + A.A.df.format(p_90));
+                            ", p90: " + A.A.df.format(p_90) + 
+                ". Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
         HtmlReport.flush();
         
         if(_Slack && !Slack_Channel.equals("N/A")){
             Report(false);
             String MSG = "API_" + env + " Excel Automation report - " + Report_Date +
                     "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +    
-                    "Scope: " + SCOPE + "\r\n" +
                     "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
                     "Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
             
@@ -2867,7 +2862,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
     }
     
-
     private void JOB_Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY, ExtentTest ParentTest, String JIRA) {
         if(sw1.isRunning()){
             sw1.reset();
@@ -2921,9 +2915,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 Log_Html_Result("WARN", NAME + " > EndPoint: " + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
             } else {
                 _f++; FAIL = true; 
-                EX += _t + "\t" + NAME + "\t" + "EndPoint: " + EndPoint + "\t" + "Staus Code: " + status + "\t" + "FAIL" + "\t" + Result +
+                EX += _t + "\t" + NAME + "\t" + "EndPoint: " + EndPoint + "\t" + "Status Code: " + status + "\t" + "FAIL" + "\t" + Result +
                 "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("FAIL", NAME + " > Error: " + err + "<br />EndPoint: " + BaseAPI + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+                Log_Html_Result("FAIL", NAME + " > EndPoint: " + BaseAPI + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
             }
         } catch(Exception ex){
             R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
@@ -2936,6 +2930,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
         r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
         sw1.reset();
     }
+    //</editor-fold>  
+    
     private void Execute() throws Exception {
         String Realm = "";
         String Auth = "";
@@ -2944,67 +2940,151 @@ public class API_GUI extends javax.swing.JInternalFrame {
         Mobile_User_ID = "";
         Mobile_User_TKN = "";
 
-        if(SCOPE.contains("user")) {
-            ParentTest = HtmlReport.createTest("User API(s)");            
-            
-            Auth = "Basic " + Base64.getEncoder().encodeToString((Mobile_ID + ":" + Mobile_PW).getBytes());
-            Realm = Func.Realm_ID(app, env);
-            JOB_Api_Call("Mobile User Authentication GET", "GET", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", ParentTest, "no_jira");
-            if(json != null){
-                if(json.has("user")) Mobile_User_ID = json.getString("user"); 
-                if(json.has("token")) Mobile_User_TKN = json.getString("token");   
-            }
-                  
-            Auth = "Bearer " + Mobile_User_TKN;
-            JOB_Api_Call("Mobile User Payment GET", "GET", BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "", ParentTest, "no_jira");
+        //<editor-fold defaultstate="collapsed" desc="User">
+        ParentTest = HtmlReport.createTest("User API(s)");            
 
-            long m1 = System.currentTimeMillis();                     
-            long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // - 7 days
-            JOB_Api_Call("Mobile User Orders", "GET", BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1, Auth, "", ParentTest, "no_jira");
-            
-            Auth = "Basic " + Base64.getEncoder().encodeToString((AP3_ID + ":" + AP3_PW).getBytes());
-            Realm = Func.Realm_ID("AP3", env);
-            JOB_Api_Call("AP3 User Authentication GET", "GET", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", ParentTest, "no_jira");
-            if(json != null){
-                if(json.has("user")) AP3_User_ID = json.getString("user"); 
-                if(json.has("token")) AP3_User_TKN = json.getString("token");   
+        Auth = "Basic " + Base64.getEncoder().encodeToString((Mobile_ID + ":" + Mobile_PW).getBytes());
+        Realm = Func.Realm_ID(app, env);
+        JOB_Api_Call("Mobile User Authentication GET", "GET", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", ParentTest, "no_jira");
+        if(json != null){
+            if(json.has("user")) Mobile_User_ID = json.getString("user"); 
+            if(json.has("token")) Mobile_User_TKN = json.getString("token");   
+        }
+
+        Auth = "Bearer " + Mobile_User_TKN;
+        JOB_Api_Call("Mobile User Payment GET", "GET", BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "", ParentTest, "no_jira");
+
+        long m1 = System.currentTimeMillis();                     
+        long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // - 7 days
+        JOB_Api_Call("Mobile User Orders", "GET", BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1, Auth, "", ParentTest, "no_jira");
+
+        Auth = "Basic " + Base64.getEncoder().encodeToString((AP3_ID + ":" + AP3_PW).getBytes());
+        Realm = Func.Realm_ID("AP3", env);
+        JOB_Api_Call("AP3 User Authentication GET", "GET", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", ParentTest, "no_jira");
+        if(json != null){
+            if(json.has("user")) AP3_User_ID = json.getString("user"); 
+            if(json.has("token")) AP3_User_TKN = json.getString("token");   
+        }
+
+        Auth = "Bearer " + AP3_User_TKN;
+        JOB_Api_Call("AP3 User > /realm GET", "GET", BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000", Auth, "", ParentTest, "no_jira");
+
+        Auth = "Bearer " + AP3_User_TKN;
+        JOB_Api_Call("AP3 User > /permissions GET", "GET", BaseAPI + "/user/" + AP3_User_ID + "/permissions" + "?nocache=1", Auth, "", ParentTest, "no_jira");
+
+
+        //</editor-fold>  
+        
+        //<editor-fold defaultstate="collapsed" desc="location">
+        ParentTest = HtmlReport.createTest("Location API(s)"); 
+
+        Auth = "Bearer " + AP3_User_TKN;  // =============== AP3 Sectors ===========================
+        JOB_Api_Call("Location > /sector GET", "GET", BaseAPI + "/location/sector?_provider=cdl", Auth, "", ParentTest, "no_jira");
+            SECTOR_IDS = new ArrayList<>();
+            JSONArray Sectors = json.getJSONArray("sectors");           
+            for (int i = 0; i < Sectors.length(); i++) {
+                SECTOR_IDS.add(Sectors.getJSONObject(i).getString("id"));
+                for (Object s : Sectors) {
+                    JSONObject sec = (JSONObject) s;                           
+                    if (sec.getString("name").equals(SECTOR)) { 
+                        SectorID = Sectors.getJSONObject(i).getString("id");
+                    }
+                }   
             }
-            Auth = "Bearer " + AP3_User_TKN;
-            JOB_Api_Call("AP3 User > /realm GET", "GET", BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000", Auth, "", ParentTest, "no_jira");
- 
-            Auth = "Bearer " + AP3_User_TKN;
-            JOB_Api_Call("AP3 User > /permissions GET", "GET", BaseAPI + "/user/" + AP3_User_ID + "/permissions" + "?nocache=1", Auth, "", ParentTest, "no_jira");
            
-        }   
-        if(SCOPE.contains("config_prv")) {
-             ParentTest = HtmlReport.createTest("Private Config API(s)");              
+        Auth = "";                        // =============== AP3 ALL Sites ===========================
+        appId = Func.App_ID(app, env);
+        JOB_Api_Call("Location > /multigroup/ GET", "GET", BaseAPI + "/location/multigroup/", Auth, "", ParentTest, "no_jira");
+
+        Auth = "";                       // =============== AP3 App Sites ===========================
+        appId = Func.App_ID(app, env);
+        JOB_Api_Call("Location > /multigroup/'AppID' GET", "GET", BaseAPI + "/location/multigroup/" + appId + "?nocache=true&extended=true", Auth, "", ParentTest, "no_jira");
+        if(json != null){
+            JSONArray Groups = json.getJSONArray("groups");
+            for (int i = 0; i < Groups.length(); i++) {
+                JSONObject group = Groups.getJSONObject(i);
+                if(group.has("name") && group.getString("name").equals(SITE)){
+                    SiteID = group.getString("id");
+                    break;
+                } 
+            } 
         }
-        if(SCOPE.contains("config_pub")) {
-            ParentTest = HtmlReport.createTest("Public Config API(s)");   
-        } 
-        if(SCOPE.contains("location")) {
-            ParentTest = HtmlReport.createTest("Location API(s)");   
-            //
+
+        Auth = "";                      // =============== AP3 Site Brands ===========================
+        JOB_Api_Call("Location > /group/'SiteID' GET", "GET", BaseAPI + "/location/group/" + SiteID, Auth, "", ParentTest, "no_jira");
+        if(json != null){
+            JSONArray Location = json.getJSONArray("locations");
+            if (Location != null) {
+                for (Object l : Location) {
+                    JSONObject loc = (JSONObject) l;
+                    JSONArray brands = loc.getJSONArray("brands");
+                    for (Object b : brands) {
+                        JSONObject br = (JSONObject) b;                           
+                        if (br.getString("name").equals(BRAND)) { 
+                            BrandID = br.getString("id");
+                            UnitID = loc.getString("id");
+                        }
+                    }
+                }
+            }
         }   
-        if(SCOPE.contains("menu")) {
-            ParentTest = HtmlReport.createTest("Menu API(s)");             
-        }
-        if(SCOPE.contains("calendar"))   {
-            ParentTest = HtmlReport.createTest("Calendar API(s)");
-            //
+
+        Auth = "";                      // ===============    AP3 Unit ===========================
+        JOB_Api_Call("Location > /'UnitID' GET", "GET", BaseAPI + "/location/" + UnitID + "?extended=true&nocache=1", Auth, "", ParentTest, "no_jira");
+        
+        Auth = "";                      // ===============    AP3 Brand ===========================
+        JOB_Api_Call("Location > /'BrandID' GET", "GET", BaseAPI + "/location/brand/" + BrandID + "?extended=true&nocache=1", Auth, "", ParentTest, "no_jira");
+        if(json != null){
+            MENU_IDS = new ArrayList<>();
+            JSONArray MENUS = json.getJSONArray("menus");
+            for (int i = 0; i < MENUS.length(); i++) {
+                JSONObject menu = MENUS.getJSONObject(i);
+                    MENU_IDS.add(menu.getString("id"));
+            } 
         }   
-        if(SCOPE.contains("announcement"))   {
-            ParentTest = HtmlReport.createTest("Announcement API(s)");              
-        }
-//        if(SCOPE.contains("calendar"))   {
-//            //
-//        }   
-//        if(SCOPE.contains("announcement"))   {
-//            
-//        }
+        //</editor-fold>
+        
+//       //<editor-fold defaultstate="collapsed" desc="promos">        
+//            Auth = "";                      // ===============  AP3 Promo ===========================
+//            JOB_Api_Call("Location > /'UnitID' GET", "GET", BaseAPI + "promo/company/" + "?" + "/location/group/" + SiteID, Auth, "", ParentTest, "no_jira");
+//
+//            Auth = "";                      // =============== AP3 Promo ===========================
+//            JOB_Api_Call("Location > /'UnitID' GET", "GET", BaseAPI + "promo/company/" + "?" + "/location/group/" + "?", Auth, "", ParentTest, "no_jira");
+//
+//            Auth = "";                      // =============== AP3 Promo ===========================
+//            JOB_Api_Call("Location > /'UnitID' GET", "GET", BaseAPI + "promo/company/" + "?" + "/location/group/" + "?", Auth, "", ParentTest, "no_jira");
+        
+//</editor-fold>
+
+        //<editor-fold defaultstate="collapsed" desc="config">
+        ParentTest = HtmlReport.createTest("Config API(s)");              
+
+        //</editor-fold>          
+       
+        //<editor-fold defaultstate="collapsed" desc="calendar">           
+        ParentTest = HtmlReport.createTest("Calendar API(s)");
+            //  
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc="menus">        
+        ParentTest = HtmlReport.createTest("Global / Local Menu API(s)");     
+
+            Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Company/Global Menus ===========================
+            JOB_Api_Call("Company / Global Menu > /'CompID' GET", "GET", BaseAPI + "/menu/company/" + CompanyID, Auth, "", ParentTest, "no_jira");
+            
+            Auth = "";                        // =============== AP3 Local Menu(s) ===========================
+            for(int i = 0; i < MENU_IDS.size(); i++){
+                JOB_Api_Call("Local Menu > /'MenuID' GET", "GET", BaseAPI + "/menu/" + MENU_IDS.get(i), Auth, "", ParentTest, "no_jira");
+            }
+        //</editor-fold>
+
+        
+        //<editor-fold defaultstate="collapsed" desc="announcement">            
+        ParentTest = HtmlReport.createTest("Announcement API(s)");              
+
+        //</editor-fold>
     }
-    //</editor-fold>  
-    
+
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
