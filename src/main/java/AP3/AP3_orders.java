@@ -70,38 +70,7 @@ public class AP3_orders {
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//div[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}
             
-            /* 
-            May 5th 2021
-            This screen is excluded in 1.31 release 
-            Once successfully deployed to prod can be removed from code.
-            https://teamideaworks.atlassian.net/browse/CM-3084
-            */
-            
-            
-            
-//            _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for Brands load", "xpath", "//*[@class='H6-Selected-On-Surface-Medium-Emphasis-Left']", "no_jira"); 
-//                if (FAIL) { return;}            
-//        _t++; Thread.sleep((long) sleep); TWeb.List_L0("Brands Count", "xpath", "//div[contains(@class,'clickable v-card')]", "no_jira");             
-//            if (FAIL) { return;}
-//            if(L0.isEmpty()){
-//                EX += " - " + "\t" + "Orders - Brands Count" + "\t" + app + "\t" + SITE + "\t" + "FAIL" + "\t" + "No Brands";
-//                EX += "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + " - " + "\r\n";
-//            }else{            
-//                for (int i = 0; i < L0.size(); i++) {
-//                    _t++; TWeb.Element_Child_Attribute("Brand " + (i+1) + " Name", L0.get(i), "tagName", "span", "textContent", "no_jira");             
-//                        if (FAIL) { return;}   
-//                    if(t.trim().startsWith(BRAND)){
-//                        T_Index = i;
-//                    }
-//                    _t++; TWeb.Element_Child_Attribute("Brand " + (i+1) + " Logo/Image", L0.get(i), "xpath", ".//div[contains(@class,'v-image__image v-image__image--cover')]", "style", "no_jira");             
-//                        if (FAIL) { return;}     
-//                }         
-//            }
-//        _t++; TWeb.Element_Click("Click Brand", L0.get(T_Index),"no_jira");  
-//            if (FAIL) { return;}    
-//        Thread.sleep(500);
-//        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//div[contains(@class, 'v-datatable__progress')]", "no_jira");
-//            if (FAIL) { return;}
+          
             
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Search for...'", "Search for anything", true,"no_jira"); 
             if (FAIL) { return;}
@@ -111,11 +80,11 @@ public class AP3_orders {
             if (FAIL) { return;}        
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Default Order Type", "xpath", "//div[contains(@class, 'v-select__selection v-select__selection--comma')]", "no_jira"); 
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open Date picker", "css", "[aria-label='Date']", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open Date picker", "css", "[aria-label='Date(s)']", "no_jira"); 
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Default Order Date", "xpath", "//div[contains(@class, 'v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active')]", "no_jira"); 
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Close Date picker", "css", "[aria-label='Date']", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Close Date picker", "css", "[aria-label='Date(s)']", "no_jira"); 
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open Order Type combobox", "css", "[aria-label='Order Type']", "no_jira"); 
             if (FAIL) { return;}                                                          
@@ -156,9 +125,9 @@ public class AP3_orders {
             
         _t++; Thread.sleep((long) sleep); TWeb.List_L0("Orders Data Rows Count", "tagName", "tr", "no_jira");             
             if (FAIL) { return;}
-            _t++; TWeb.Element_Text("Order Data Headers", L0.get(6), "no_jira");  
+            _t++; TWeb.Element_Text("Order Data Headers", L0.get(7), "no_jira");  
             
-        if(L0.size() > 8)  {
+        if(L0.size() > 7)  {
             T_Index = 0;
             for (int i = 8; i < L0.size(); i++) {
                 _t++; TWeb.Element_Text("Order Data Row Text", L0.get(i), "no_jira");             
@@ -168,7 +137,7 @@ public class AP3_orders {
                 }
             }
             if(T_Index != -1){  
-                _t++; Thread.sleep((long) sleep); TWeb.List_Child_E1_By_Path("Find child 'td' element", L0, 8, "tagName", "td", "no_jira"); // ====== index 8 ===  
+                _t++; Thread.sleep((long) sleep); TWeb.List_Child_E1_By_Path("Find child 'td' element", L0, 9, "tagName", "td", "no_jira"); // ====== index 8 ===  
                     if (FAIL) { return;} 
                 _t++; TWeb.Element_Click("Click top Order",e1, "no_jira");  
                     if (FAIL) { return;} 
