@@ -1,4 +1,6 @@
 package DL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DL_qa_user extends DL_GUI {
     protected DL_qa_user(DL_GUI a) {
@@ -8,9 +10,9 @@ public class DL_qa_user extends DL_GUI {
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
     }
-    // Error: User Initilization Fail. Please Try Again    <<<< How to deal with That??   DEBUG
+    // Error: User Initialization Fail. Please Try Again    <<<< How to deal with That??   DEBUG
     protected void run(String User_ID, String Metric, String Restricted, String Period, String Val, String Location_Filters, String Item_Filters, String Kpi, String Source) throws InterruptedException, Exception { 
-
+        
         Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
@@ -23,7 +25,7 @@ public class DL_qa_user extends DL_GUI {
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");  
             if (FAIL) { return;}   
         Thread.sleep(500);  
-        
+       
         List_L0("Get User Metrics Count", "xpath", "//div[@class='MuiListItemIcon-root']", ParentTest, "no_jira");              
             if (FAIL) { return;}            
             if (L0.isEmpty()) { 
@@ -31,21 +33,26 @@ public class DL_qa_user extends DL_GUI {
                 "\t" + " - " + "\t" + " - " + "\t" +  "no_jira" + "\r\n";
                 return;  // No User Metrics Found FATAL  for this User ===================================================
             }         
-        
+
+            
        List_L2("Get Selected Metrics Count", "xpath", "//span[contains(@class, ' Mui-checked ')]", ParentTest, "no_jira");              
           if (FAIL) { return;}            
             for (int j = 0; j < L2.size(); j++) {  
                 Element_Click("Un-Check Selected Metrics " + (j + 1), L2.get(j), ParentTest, "no_jira"); 
             } 
-            
+       KPI_Validation(Kpi);   
         // Find / Select Target dMetric >>>>   Add code to Pass/Fail if the Target Metric Allowed/Disallowed in S3 Qa file
+  //                Restricted;
+            if ( Restricted.equalsIgnoreCase("Yes"))
+           {
+               return;
+           }
          Find_Text("Find Metric '" + Metric + "'", Metric, true, ParentTest, "no_jira");  
             if (t.equals("Not Found")) { 
                 return;  // Metric Not Found FATAL for this Test# ===================================================
             } 
-            
         Element_By_Path_Click("Select Metric '" + Metric + "'", "xpath", "//span[text()='" + Metric + "']", ParentTest, "no_jira"); 
-            if (FAIL) { return;}   
+            if (FAIL) { return;}  
         Scroll_to_WebElement("Scroll to 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Click("Click on 'Apply' button", "xpath", "//button/span[contains(.,'Apply')]", ParentTest, "no_jira"); 
@@ -192,6 +199,19 @@ public class DL_qa_user extends DL_GUI {
                     Element_Text("Loaded Metric Card Value 2", L2.get(2), ParentTest, "no_jira");         
                 }   
             }
-        }        
-    }   
-} 
+      }
+    }
+    public void KPI_Validation(String Kpi) throws Exception
+    {
+ String[] KPIList=Kpi.split("\\|");
+// System.out.println(Kpi);
+ for (String KPI : KPIList) {
+     if(KPI.contains(":")){
+ String KPI_FilterKey = KPI.substring(0,KPI.indexOf(":"));
+_t++; Text_Found("Check '"+KPI_FilterKey+"' is Displayed ", KPI_FilterKey, ParentTest , "no_jira");
+}
+    }        
+    }
+}
+
+
