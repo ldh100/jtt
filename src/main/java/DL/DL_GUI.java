@@ -136,12 +136,12 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         _metrics_selection = new javax.swing.JCheckBox();
         _metric_data = new javax.swing.JCheckBox();
         _filters = new javax.swing.JCheckBox();
-        _Drilldown = new javax.swing.JCheckBox();
+        _drilldown = new javax.swing.JCheckBox();
         _password = new javax.swing.JCheckBox();
         _logout = new javax.swing.JCheckBox();
         _users = new javax.swing.JCheckBox();
         _invalid_login = new javax.swing.JCheckBox();
-        _Insights = new javax.swing.JCheckBox();
+        _insights = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         cmbBrow = new javax.swing.JComboBox<>();
         btnRun = new javax.swing.JButton();
@@ -378,11 +378,11 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         _filters.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _filters.setRequestFocusEnabled(false);
 
-        _Drilldown.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _Drilldown.setText("Drilldown");
-        _Drilldown.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _Drilldown.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _Drilldown.setRequestFocusEnabled(false);
+        _drilldown.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _drilldown.setText("Drilldown");
+        _drilldown.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _drilldown.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _drilldown.setRequestFocusEnabled(false);
 
         _password.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _password.setText("Forgot Password");
@@ -408,11 +408,11 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         _invalid_login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _invalid_login.setRequestFocusEnabled(false);
 
-        _Insights.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _Insights.setText("Insights ");
-        _Insights.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _Insights.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _Insights.setRequestFocusEnabled(false);
+        _insights.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _insights.setText("Insights ");
+        _insights.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _insights.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _insights.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -421,10 +421,10 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(_Insights, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_insights, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_metrics_selection, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_filters, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_Drilldown, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_drilldown, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_invalid_login, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_metric_data, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -453,7 +453,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(_filters, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_Drilldown, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(_drilldown, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
@@ -463,7 +463,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(_Insights, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(_insights, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -662,7 +662,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                             .addComponent(txtAdmin_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
+                        .addGap(2, 2, 2)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
@@ -1205,8 +1205,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_metrics_selection: ")) _metrics_selection.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_metric_data: ")) _metric_data.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_filters: ")) _filters.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_Drilldown: ")) _Drilldown.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_Insights: ")) _Insights.setSelected(Boolean.parseBoolean(value)); 
+                if(l.contains("_Drilldown: ")) _drilldown.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_Insights: ")) _insights.setSelected(Boolean.parseBoolean(value)); 
                 if(l.contains("_password: ")) _password.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_all_data: ")) _all_data.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_logout: ")) _logout.setSelected(Boolean.parseBoolean(value));
@@ -1254,8 +1254,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             C += "_metrics_selection: " + _metrics_selection.isSelected() + "\r\n";
             C += "_metric_data: " + _metric_data.isSelected() + "\r\n";
             C += "_filters: " + _filters.isSelected() + "\r\n";
-            C += "_Drilldown: " + _Drilldown.isSelected() + "\r\n";
-            C += "_Insights: " + _Insights.isSelected() + "\r\n";
+            C += "_Drilldown: " + _drilldown.isSelected() + "\r\n";
+            C += "_Insights: " + _insights.isSelected() + "\r\n";
             C += "_password: " + _password.isSelected() + "\r\n";         
             C += "_all_data: " + _all_data.isSelected() + "\r\n";
  
@@ -1588,8 +1588,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_metrics_selection: ")) _metrics_selection.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_metric_data: ")) _metric_data.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_filters: ")) _filters.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_Drilldown: ")) _Drilldown.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_Insights: ")) _Insights.setSelected(Boolean.parseBoolean(value)); 
+                if(l.contains("_Drilldown: ")) _drilldown.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_Insights: ")) _insights.setSelected(Boolean.parseBoolean(value)); 
                 if(l.contains("_password: ")) _password.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_all_data: ")) _all_data.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_logout: ")) _logout.setSelected(Boolean.parseBoolean(value));
@@ -1907,8 +1907,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             DL_UserID = "";         // Clear DL_User from GUI to force Clear_Cookies > Restart_Driver and Re-Login
             String QA_USER = "";    // Next QA User from S3 DV_QA table
             
-            for (int i = 293; i < 298; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
-            //for (int i = 0; i < DV_QA.getRowCount(); i++) {    // All Tests from S3 DV_QA table
+            //for (int i = 293; i < 298; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
+            for (int i = 0; i < DV_QA.getRowCount(); i++) {    // All Tests from S3 DV_QA table
                 if(QA_USER.equals(DV_QA.getValueAt(i, 1).toString()) && !Login_OK){
                     continue;      // Do Not proceed with User having Invalid Credentials or Locked Account
                 }                
@@ -2002,7 +2002,29 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 EX += " - " + "\t" + " === ^ Secondary Metrics  - " + CompareTo + "\t" + " ===== " + "\t" + " == ^ Secondary Metrics Data End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             }    
         }
-  
+
+        if (_insights.isSelected()) { 
+            ParentTest = HtmlReport.createTest("Insights");                         
+            SCOPE += ", Insights";
+            EX += " - " + "\t" + " === Insights" + "\t" + " ===== " + "\t" + " == Insights Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            DL_insights BR = new DL.DL_insights(DL_GUI.this);
+            BR.run(); // ============================================================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            EX += " - " + "\t" + " === ^ Insights" + "\t" + " ===== " + "\t" + " == ^ Insights End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }
+        
+        if (_drilldown.isSelected()) { 
+            ParentTest = HtmlReport.createTest("Drilldown");                         
+            SCOPE += ", Drilldown";
+            EX += " - " + "\t" + " === Drilldown" + "\t" + " ===== " + "\t" + " == Drilldown Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            DL_drilldown BR = new DL.DL_drilldown(DL_GUI.this);
+            BR.run(); // ============================================================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            EX += " - " + "\t" + " === ^ Drilldown" + "\t" + " ===== " + "\t" + " == ^ Drilldown End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+        }
+
         if (_logout.isSelected()) { 
             ParentTest = HtmlReport.createTest("LogOut");                         
             SCOPE += ", LogOut";
@@ -5423,11 +5445,11 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JTable DV_D_RANGES;
     private javax.swing.JTable DV_METRICS;
     private javax.swing.JTable DV_QA;
-    private javax.swing.JCheckBox _Drilldown;
-    private javax.swing.JCheckBox _Insights;
     private javax.swing.JCheckBox _all_data;
+    private javax.swing.JCheckBox _drilldown;
     private javax.swing.JCheckBox _filters;
     private javax.swing.JCheckBox _headless;
+    private javax.swing.JCheckBox _insights;
     private javax.swing.JCheckBox _invalid_login;
     private javax.swing.JCheckBox _login;
     private javax.swing.JCheckBox _logout;

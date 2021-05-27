@@ -628,7 +628,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
     private String url = "";
     private String app = "";
-    private String appId = "";
+    private String AppID = "";
     private String env = "";
     private String platform = "CDL";
     private String BaseAPI = "";
@@ -728,7 +728,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/config/public/" + appId); 
+            HttpGet httpget = new HttpGet(BaseAPI + "/config/public/" + AppID); 
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -740,9 +740,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 }
             };
             json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/config/public/" + appId + "\r\n" + json.toString(4) + "\r\n";
+            J += BaseAPI + "/config/public/" + AppID + "\r\n" + json.toString(4) + "\r\n";
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/config/public/" + appId + " > " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/config/public/" + AppID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());      
         }         
@@ -757,7 +757,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/config/" + appId); 
+            HttpGet httpget = new HttpGet(BaseAPI + "/config/" + AppID); 
             httpget.setHeader("Authorization",  "Bearer " + AP3_User_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
@@ -770,9 +770,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 }
             };
             json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/config/" + appId + "\r\n" + json.toString(4) + "\r\n";
+            J += BaseAPI + "/config/" + AppID + "\r\n" + json.toString(4) + "\r\n";
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/config/" + appId + " > " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/config/" + AppID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
@@ -787,7 +787,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + appId + "?nocache=true&extended=true"); // ?nocache=true&extended=true
+            HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + AppID + "?nocache=true&extended=true"); // ?nocache=true&extended=true
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -799,9 +799,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 }
             };
             json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/location/multigroup/" + appId  + "?nocache=true&extended=true"+ "\r\n" + json.toString(4) + "\r\n";
+            J += BaseAPI + "/location/multigroup/" + AppID  + "?nocache=true&extended=true"+ "\r\n" + json.toString(4) + "\r\n";
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/location/multigroup/" + appId  + "?nocache=true&extended=true"+ " > " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/location/multigroup/" + AppID  + "?nocache=true&extended=true"+ " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }         
@@ -1780,7 +1780,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         sw1.start();     
         
-        appId = Func.App_ID(cmbApp.getSelectedItem().toString(), env);
+        AppID = Func.App_ID(cmbApp.getSelectedItem().toString(), env);
 
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
@@ -1796,7 +1796,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                   
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try { 
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + appId);         
+            HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + AppID);         
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 300) {
@@ -2254,7 +2254,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("env:")) env = value;
                 if(l.contains("app:")) app = value;
                 if(l.contains("url:")) url = value;
-                if(l.contains("GROUP:")) SECTOR  = value;
+                if(l.contains("SECTOR:")) SECTOR  = value;
                 if(l.contains("GL_MENU:")) GL_MENU = value;
                 if(l.contains("SITE:")) SITE = value;
                 if(l.contains("BRAND:")) BRAND = value;
@@ -2289,7 +2289,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             C += "env: " + env + "\r\n";
             C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
             C += "url: " + url + "\r\n";
-            C += "GROUP: " + cmbGroup.getSelectedItem().toString() + "\r\n";
+            C += "SECTOR: " + cmbGroup.getSelectedItem().toString() + "\r\n";
             C += "GL_MENU: " + cmbComp.getSelectedItem().toString() + "\r\n";
             C += "SITE: " + _S + "\r\n";
             C += "BRAND: " + _B + "\r\n";
@@ -2541,7 +2541,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("url: ")) url = value; 
                 if(l.contains("SlackCh: ")) Slack_Channel = value;
                 if(l.contains("_slack: ")) _Slack = Boolean.parseBoolean(value);
-                if(l.contains("GROUP: ")) SECTOR  = value;
+                if(l.contains("SECTOR: ")) SECTOR  = value;
                 if(l.contains("GL_MENU: ")) GL_MENU = value;
                 if(l.contains("SITE: ")) SITE = value;
                 if(l.contains("BRAND: ")) BRAND = value;
@@ -2941,7 +2941,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         Mobile_User_TKN = "";
 
         //<editor-fold defaultstate="collapsed" desc="User">
-        ParentTest = HtmlReport.createTest("User API(s)");            
+        ParentTest = HtmlReport.createTest("User");            
 
         Auth = "Basic " + Base64.getEncoder().encodeToString((Mobile_ID + ":" + Mobile_PW).getBytes());
         Realm = Func.Realm_ID(app, env);
@@ -2976,29 +2976,18 @@ public class API_GUI extends javax.swing.JInternalFrame {
         //</editor-fold>  
         
         //<editor-fold defaultstate="collapsed" desc="location">
-        ParentTest = HtmlReport.createTest("Location API(s)"); 
+        ParentTest = HtmlReport.createTest("Location"); 
 
-        Auth = "Bearer " + AP3_User_TKN;  // =============== AP3 Sectors ===========================
+        Auth = "Bearer " + AP3_User_TKN;  // =============== AP3 Sectors > Company ID===========================
         JOB_Api_Call("Location > /sector GET", "GET", BaseAPI + "/location/sector?_provider=cdl", Auth, "", ParentTest, "no_jira");
-            SECTOR_IDS = new ArrayList<>();
-            JSONArray Sectors = json.getJSONArray("sectors");           
-            for (int i = 0; i < Sectors.length(); i++) {
-                SECTOR_IDS.add(Sectors.getJSONObject(i).getString("id"));
-                for (Object s : Sectors) {
-                    JSONObject sec = (JSONObject) s;                           
-                    if (sec.getString("name").equals(SECTOR)) { 
-                        SectorID = Sectors.getJSONObject(i).getString("id");
-                    }
-                }   
-            }
-           
+        
         Auth = "";                        // =============== AP3 ALL Sites ===========================
-        appId = Func.App_ID(app, env);
+        AppID = Func.App_ID(app, env);
         JOB_Api_Call("Location > /multigroup/ GET", "GET", BaseAPI + "/location/multigroup/", Auth, "", ParentTest, "no_jira");
 
         Auth = "";                       // =============== AP3 App Sites ===========================
-        appId = Func.App_ID(app, env);
-        JOB_Api_Call("Location > /multigroup/'AppID' GET", "GET", BaseAPI + "/location/multigroup/" + appId + "?nocache=true&extended=true", Auth, "", ParentTest, "no_jira");
+        AppID = Func.App_ID(app, env);
+        JOB_Api_Call("Location > /multigroup/'AppID' GET", "GET", BaseAPI + "/location/multigroup/" + AppID + "?nocache=true&extended=true", Auth, "", ParentTest, "no_jira");
         if(json != null){
             JSONArray Groups = json.getJSONArray("groups");
             for (int i = 0; i < Groups.length(); i++) {
@@ -3034,6 +3023,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
         
         Auth = "";                      // ===============    AP3 Brand ===========================
         JOB_Api_Call("Location > /'BrandID' GET", "GET", BaseAPI + "/location/brand/" + BrandID + "?extended=true&nocache=1", Auth, "", ParentTest, "no_jira");
+        SectorID = "";
+        CompanyID = "";
         if(json != null){
             MENU_IDS = new ArrayList<>();
             JSONArray MENUS = json.getJSONArray("menus");
@@ -3041,46 +3032,75 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 JSONObject menu = MENUS.getJSONObject(i);
                     MENU_IDS.add(menu.getString("id"));
             } 
-        }   
+            if(json.has("sector")){           
+                SectorID = json.getString("sector");
+            }
+            if(json.has("company")){
+                CompanyID = json.getString("company");
+            }
+        }
         //</editor-fold>
         
-//       //<editor-fold defaultstate="collapsed" desc="promos">        
-//            Auth = "";                      // ===============  AP3 Promo ===========================
-//            JOB_Api_Call("Location > /'UnitID' GET", "GET", BaseAPI + "promo/company/" + "?" + "/location/group/" + SiteID, Auth, "", ParentTest, "no_jira");
-//
-//            Auth = "";                      // =============== AP3 Promo ===========================
-//            JOB_Api_Call("Location > /'UnitID' GET", "GET", BaseAPI + "promo/company/" + "?" + "/location/group/" + "?", Auth, "", ParentTest, "no_jira");
-//
-//            Auth = "";                      // =============== AP3 Promo ===========================
-//            JOB_Api_Call("Location > /'UnitID' GET", "GET", BaseAPI + "promo/company/" + "?" + "/location/group/" + "?", Auth, "", ParentTest, "no_jira");
-        
-//</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="promos">  
+        ParentTest = HtmlReport.createTest("Promo"); 
+        Auth = "Bearer " + AP3_User_TKN;  // ===============  AP3 Promo ===========================
+        JOB_Api_Call("Promo > /'CompanyID' GET", "GET", BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID, Auth, "", ParentTest, "no_jira");
+
+        //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="config">
-        ParentTest = HtmlReport.createTest("Config API(s)");              
+        ParentTest = HtmlReport.createTest("Config");              
+        Auth = "Bearer " + AP3_User_TKN;   // =============== Config(s) ========================================
+        JOB_Api_Call("Config > /'AppID' GET", "GET", BaseAPI + "/config/" + AppID, Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Public Config > /'AppID' GET", "GET", BaseAPI + "/config/public/" + AppID, "", "", ParentTest, "no_jira");
+        
+        JOB_Api_Call("Config > /'SiteID' GET", "GET", BaseAPI + "/config/" + SiteID, Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Public Config > /'SiteID' GET", "GET", BaseAPI + "/config/public/" + SiteID, "", "", ParentTest, "no_jira");
+                
+        JOB_Api_Call("Config > /'UnitID' GET", "GET", BaseAPI + "/config/" + UnitID, Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Public Config > /'UnitID' GET", "GET", BaseAPI + "/config/public/" + UnitID, "", "", ParentTest, "no_jira");
+         
+        JOB_Api_Call("Config > /'BrandID' GET", "GET", BaseAPI + "/config/" + BrandID, Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Public Config > /'BrandID' GET", "GET", BaseAPI + "/config/public/" + BrandID, "", "", ParentTest, "no_jira");
 
         //</editor-fold>          
        
         //<editor-fold defaultstate="collapsed" desc="calendar">           
-        ParentTest = HtmlReport.createTest("Calendar API(s)");
-            //  
+        ParentTest = HtmlReport.createTest("Calendar");
+        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Company/Global Menus ===========================
+        JOB_Api_Call("Calendar > /'BrandID' GET", "GET", BaseAPI + "/calendar/" + BrandID, Auth, "", ParentTest, "no_jira");
+
         //</editor-fold>
         
         //<editor-fold defaultstate="collapsed" desc="menus">        
-        ParentTest = HtmlReport.createTest("Global / Local Menu API(s)");     
+        ParentTest = HtmlReport.createTest("Global / Local Menu");     
+        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Company/Global Menus ===========================
+        JOB_Api_Call("Company / Global Menu > /'CompID' GET", "GET", BaseAPI + "/menu/company/" + CompanyID, Auth, "", ParentTest, "no_jira");
 
-            Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Company/Global Menus ===========================
-            JOB_Api_Call("Company / Global Menu > /'CompID' GET", "GET", BaseAPI + "/menu/company/" + CompanyID, Auth, "", ParentTest, "no_jira");
-            
-            Auth = "";                        // =============== AP3 Local Menu(s) ===========================
-            for(int i = 0; i < MENU_IDS.size(); i++){
-                JOB_Api_Call("Local Menu > /'MenuID' GET", "GET", BaseAPI + "/menu/" + MENU_IDS.get(i), Auth, "", ParentTest, "no_jira");
-            }
+        Auth = "";                        // =============== AP3 Local Menu(s) ===========================
+        for(int i = 0; i < MENU_IDS.size(); i++){
+            JOB_Api_Call("Local Menu > /'MenuID' GET", "GET", BaseAPI + "/menu/" + MENU_IDS.get(i), Auth, "", ParentTest, "no_jira");
+        }
         //</editor-fold>
 
+        //<editor-fold defaultstate="collapsed" desc="Sales Reporting EOD">        
+        ParentTest = HtmlReport.createTest("Sales Reporting EOD");     
+        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Sales Reporting EOD ===========================
+        JOB_Api_Call("Sales Reporting EOD > /'SiteID' GET", "GET", BaseAPI + "/report/eod/group/" + SiteID, Auth, "", ParentTest, "no_jira");
+        //</editor-fold>        
+        
         
         //<editor-fold defaultstate="collapsed" desc="announcement">            
-        ParentTest = HtmlReport.createTest("Announcement API(s)");              
+        ParentTest = HtmlReport.createTest("Announcement");              
+        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Announcement ===========================
+        JOB_Api_Call("AP3 Announcement GET", "GET", BaseAPI + "/announcement/resource/", Auth, "", ParentTest, "no_jira");
+
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc="Notification / Resent Updates">            
+        ParentTest = HtmlReport.createTest("AP3 Notification");              
+        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Announcement ===========================
+        JOB_Api_Call("AP3 Notification GET", "GET", BaseAPI + "/notification?realm=cdl&target=admin_panel", Auth, "", ParentTest, "no_jira");
 
         //</editor-fold>
     }

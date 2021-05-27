@@ -130,7 +130,7 @@
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="84" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jPanel3" min="-2" pref="88" max="-2" attributes="0"/>
@@ -427,10 +427,10 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="_Insights" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="_insights" min="-2" pref="132" max="-2" attributes="0"/>
                       <Component id="_metrics_selection" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
                       <Component id="_filters" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_Drilldown" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="_drilldown" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
                       <Component id="_login" alignment="1" min="-2" pref="124" max="-2" attributes="0"/>
                       <Component id="_invalid_login" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
                       <Component id="_metric_data" min="-2" pref="191" max="-2" attributes="0"/>
@@ -464,7 +464,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="_filters" min="-2" pref="14" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="_Drilldown" min="-2" pref="14" max="-2" attributes="0"/>
+                          <Component id="_drilldown" min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="_all_data" min="-2" pref="14" max="-2" attributes="0"/>
@@ -477,7 +477,7 @@
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="_Insights" min="-2" pref="14" max="-2" attributes="0"/>
+                  <Component id="_insights" min="-2" pref="14" max="-2" attributes="0"/>
                   <EmptySpace pref="17" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -542,7 +542,7 @@
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="_Drilldown">
+        <Component class="javax.swing.JCheckBox" name="_drilldown">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="0"/>
@@ -597,7 +597,7 @@
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="_Insights">
+        <Component class="javax.swing.JCheckBox" name="_insights">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="0"/>
