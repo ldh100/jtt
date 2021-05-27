@@ -903,11 +903,11 @@ public class AP3_brand_new {
                 }
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Start Time Field'", "css", "[aria-label='Start Time']", "no_jira");
                     if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter a Start Time", "css", "[aria-label='Start Time']", String.valueOf(hour + 1) + "000A", false,"no_jira");
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter a Start Time", "css", "[aria-label='Start Time']", String.valueOf(hour + 1) + "000 A", false,"no_jira");
 a                    if (FAIL) { return;}
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'End Time Field'", "css", "[aria-label='End Time']", "no_jira");
                     if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter a End Time", "css", "[aria-label='End Time']", String.valueOf(hour + 1) + "000P", false,"no_jira");
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter a End Time", "css", "[aria-label='End Time']", String.valueOf(hour + 1) + "000 P", false,"no_jira");
                     if (FAIL) { return;}
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Save'", "xpath", "//div[contains(text(),'Save')]", "no_jira");
                     if (FAIL) { return;}
