@@ -70,7 +70,31 @@ public class AP3_orders {
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//div[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}
             
-          
+        
+         //Find stations 
+         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'All Stations'","All Stations" , true, "no_jira");
+         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open Brand combobox", "css", "[aria-label='Brand']", "no_jira"); 
+            if (FAIL) { return;}                                                          
+        _t++; Thread.sleep((long) sleep); TWeb.List_L1("Brands Count", "xpath", "//div[contains(@class,'menuable__content__active')]/descendant::div[@class='v-list__tile__title']", "no_jira");             
+            if (FAIL) { return;}
+            for (int i = 0; i < L1.size(); i++) {
+                _t++; TWeb.Element_Attribute("Brands : ", L1.get(i), "textContent", "no_jira");    
+                if (FAIL) { return;}
+               if(t.equalsIgnoreCase("All Stations"))
+               {
+                T_Index = i;
+               // T_Index--;
+               }
+            }
+            
+          _t++; Thread.sleep((long) sleep);TWeb.Element_Click("Select 'All Station'", L1.get(T_Index), "no_jira");
+            if (FAIL) { return;}    
+            
+            
+            
+            
+            
+            
             
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Search for...'", "Search for anything", true,"no_jira"); 
             if (FAIL) { return;}
