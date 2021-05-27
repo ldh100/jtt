@@ -3,11 +3,19 @@ package API;
 import A.Func;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.google.common.base.Stopwatch;///
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,22 +25,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -47,10 +58,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-/**
- *
- * @author Oleg.Spozito
- */
+
 public class API_GUI extends javax.swing.JInternalFrame {
     public API_GUI() {
         initComponents();
@@ -352,7 +360,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         DV1.setCellSelectionEnabled(true);
         DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV1.setName("DV1"); // NOI18N
-        DV1.setRequestFocusEnabled(false);
+        DV1.setOpaque(false);
         DV1.setRowHeight(18);
         DV1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         DV1.getTableHeader().setReorderingAllowed(false);
@@ -579,6 +587,92 @@ public class API_GUI extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // <editor-fold defaultstate="collapsed" desc="Instance Variables Declarations">
+    private String Mobile_ID = "";
+    private String Mobile_PW = "";
+    private String AP3_ID = "";
+    private String AP3_PW = "";
+    
+    private String HTML_Report_Path = "";
+    private String Report_Date = "";
+    private ExtentSparkReporter HtmlReporter;
+    protected ExtentReports HtmlReport;
+    protected ExtentTest ParentTest;
+    protected JSONObject json;
+    
+    private static SwingWorker BW1; 
+    private Instant run_start;
+    protected String r_time = "";  
+    private boolean Zip_Report = true;
+    private boolean _Slack = false;
+    private String Slack_Channel = "";
+    private String Log = "";
+    
+    private boolean Load;
+    private int d1LastRow = -1; 
+    private int d2LastRow = -1; 
+
+    private boolean CONFIG = false;
+
+    private String AP3_User_ID = "";
+    private String AP3_User_TKN = "";
+    private String Mobile_User_ID = "";
+    private String Mobile_User_TKN = "";
+    
+    private final Stopwatch sw1 = Stopwatch.createUnstarted();
+    private final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
+    private final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    private String SQL = ""; 
+    
+
+    private String url = "";
+    private String app = "";
+    private String AppID = "";
+    private String env = "";
+    private String platform = "CDL";
+    private String BaseAPI = "";
+    
+    private String SITE = "";
+    private String SiteID = "";
+    
+    private String SECTOR = "";
+    private String SectorID = ""; 
+    private String BRAND = "";
+    private String BrandID = "";
+    private String UnitID = "";
+    private String CompanyID = "";
+    private String GL_MENU = "TIM HORTONS";
+    
+    private List<String> SECTOR_IDS;
+    private List<String> COMP_IDS; 
+    private List<String> MENU_IDS;
+    private List<String> ORDER_IDS; 
+    private List<String> SCART_IDS; 
+    
+    protected int _t = 0; // Total
+    protected int _p = 0; // Passed
+    protected int _f = 0; // Failed
+    protected int _w = 0; // Warn
+    protected int _i = 0; // Info
+    protected String t = "";   
+    protected String EX = "";   
+    protected String err = "";
+    protected String Summary = "";    
+    protected boolean FAIL = false;
+    protected String r_type = "";  
+    
+    protected int t_calls = 0;
+    protected double t_min = 0;
+    protected double t_max = 0;
+    protected double t_avg = 0;
+    protected double p_50 = 0;
+    protected double p_90 = 0;  
+    private static Duration DD;
+    private String Last_EX = "";
+    private String Report_File = "";
+    // </editor-fold>    
+
     // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">        
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
         if (d1LastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
@@ -586,13 +680,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
         SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
-        GetBrands();
+        GUI_Get_Brands();
         d1LastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
     private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-            LOAD_ENV();
+            GUI_Load_Env();
             txtApi.setText(BaseAPI + "/");
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
@@ -604,7 +698,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             jList_Orders.setModel(Lmodel);
             btnSCart.setEnabled(false); 
             app = cmbApp.getSelectedItem().toString();
-            GetSites();
+            GUI_Get_Sites();
         }
     }//GEN-LAST:event_cmbAppItemStateChanged
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
@@ -618,7 +712,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         BRAND = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 0));
         BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
         btnLoc_Menus.setEnabled(false);
-        GetBrandSector();
+        GUI_Get_Brand_Sector();
     }//GEN-LAST:event_DV2MouseClicked
     private void btnAppMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAppMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -634,7 +728,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/config/public/" + appId); 
+            HttpGet httpget = new HttpGet(BaseAPI + "/config/public/" + AppID); 
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -645,10 +739,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
                 }
             };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/config/public/" + appId + "\r\n" + json.toString(4);
+            json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            J += BaseAPI + "/config/public/" + AppID + "\r\n" + json.toString(4) + "\r\n";
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/config/public/" + appId + " > " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/config/public/" + AppID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());      
         }         
@@ -663,8 +757,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/config/" + appId); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
+            HttpGet httpget = new HttpGet(BaseAPI + "/config/" + AppID); 
+            httpget.setHeader("Authorization",  "Bearer " + AP3_User_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -675,10 +769,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
                 }
             };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/config/" + appId + "\r\n" + json.toString(4);
+            json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            J += BaseAPI + "/config/" + AppID + "\r\n" + json.toString(4) + "\r\n";
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/config/" + appId + " > " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/config/" + AppID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
@@ -693,7 +787,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + appId + "?nocache=true&extended=true"); // ?nocache=true&extended=true
+            HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + AppID + "?nocache=true&extended=true"); // ?nocache=true&extended=true
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -704,10 +798,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
                 }
             };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/location/multigroup/" + appId  + "?nocache=true&extended=true"+ "\r\n" + json.toString(4);
+            json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            J += BaseAPI + "/location/multigroup/" + AppID  + "?nocache=true&extended=true"+ "\r\n" + json.toString(4) + "\r\n";
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/location/multigroup/" + appId  + "?nocache=true&extended=true"+ " > " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/location/multigroup/" + AppID  + "?nocache=true&extended=true"+ " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }         
@@ -741,7 +835,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            J += GUI_API_Get(BaseAPI + "/config/public/" + SiteID, ""); 
+            J += GUI_API_Get(BaseAPI + "/config/public/" + SiteID, "") + "\r\n"; 
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/public/" + SiteID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
@@ -758,7 +852,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            J += GUI_API_Get(BaseAPI + "/config/" + SiteID, "Bearer " + AP3_TKN);             
+            J += GUI_API_Get(BaseAPI + "/config/" + SiteID, "Bearer " + AP3_User_TKN) + "\r\n";             
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/" + SiteID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
@@ -775,7 +869,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            J += GUI_API_Get(BaseAPI + "/location/group/" + SiteID, "Bearer " + "");             
+            J += GUI_API_Get(BaseAPI + "/location/group/" + SiteID, "Bearer " + "") + "\r\n";             
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/group/" + SiteID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
@@ -796,8 +890,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load " + "Utit" + " location API..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        String UNIT_ID = DV2.getValueAt(DV2.getSelectedRow(), 3).toString();
-        String J = "==== Unit ID: " + UNIT_ID + " - configuration API(s):" + "\r\n";
+        UnitID = DV2.getValueAt(DV2.getSelectedRow(), 3).toString();
+        String J = "==== Unit ID: " + UnitID + " - configuration API(s):" + "\r\n";
 
         J += "\r\n========= Public Configuration:" + "\r\n";
         if(sw1.isRunning()){
@@ -806,9 +900,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            J += GUI_API_Get(BaseAPI + "/config/public/" + UNIT_ID, "");             
+            J += GUI_API_Get(BaseAPI + "/config/public/" + UnitID, "") + "\r\n";             
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/config/public/" + UNIT_ID + " > " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/config/public/" + UnitID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
             txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }         
@@ -823,9 +917,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            J += GUI_API_Get(BaseAPI + "/config/" + UNIT_ID, "Bearer " + AP3_TKN);             
+            J += GUI_API_Get(BaseAPI + "/config/" + UnitID, "Bearer " + AP3_User_TKN) + "\r\n";             
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/config/" + UNIT_ID + " > " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/config/" + UnitID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
             txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }         
@@ -840,9 +934,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            J += GUI_API_Get(BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1", "");             
+            J += GUI_API_Get(BaseAPI + "/location/" + UnitID + "?extended=true&nocache=1", "") + "\r\n";             
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/location/" + UNIT_ID + "?extended=true&nocache=1" + " > " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/location/" + UnitID + "?extended=true&nocache=1" + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }   
@@ -876,9 +970,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            J += GUI_API_Get(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false", "Bearer " + AP3_TKN);             
+            J += GUI_API_Get(BaseAPI + "/location/sector/" + SECTOR_IDS.get(I) + "?expanded=false", "Bearer " + AP3_User_TKN) + "\r\n";             
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + " > " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/location/sector/" + SECTOR_IDS.get(I) + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }   
@@ -909,7 +1003,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            J += GUI_API_Get(BaseAPI + "/config/public/" + BrandID, "");             
+            J += GUI_API_Get(BaseAPI + "/config/public/" + BrandID, "") + "\r\n";             
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/public/" + BrandID  + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
@@ -926,7 +1020,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
  
         try {
-            J += GUI_API_Get(BaseAPI + "/config/" + BrandID, "Bearer " + AP3_TKN);             
+            J += GUI_API_Get(BaseAPI + "/config/" + BrandID, "Bearer " + AP3_User_TKN) + "\r\n";             
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/" + BrandID  + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
@@ -955,13 +1049,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
                 }
             };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            json = new JSONObject(httpclient.execute(httpget, responseHandler));
             JSONArray MENUS = json.getJSONArray("menus");
             for (int i = 0; i < MENUS.length(); i++) {
                 JSONObject menu = MENUS.getJSONObject(i);
                     MENU_IDS.add(menu.getString("id"));
             }             
-            J += BaseAPI + "/location/brand/" + BrandID + "?nocache=true&extended=true" + "\r\n" + json.toString(4);
+            J += BaseAPI + "/location/brand/" + BrandID + "?nocache=true&extended=true" + "\r\n" + json.toString(4) + "\r\n";
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/brand/" + BrandID + "?nocache=true&extended=true" + " > " + ex.getMessage() + "\r\n";            
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
@@ -1003,7 +1097,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            J += GUI_API_Get(BaseAPI + "", "Bearer " + AP3_TKN);             
+            J += GUI_API_Get(BaseAPI + "", "Bearer " + AP3_User_TKN) + "\r\n";             
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/sector?_provider=cdl" + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
@@ -1040,7 +1134,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            J += GUI_API_Get(BaseAPI + "/calendar/" + BrandID, "Bearer " + AP3_TKN);             
+            J += GUI_API_Get(BaseAPI + "/calendar/" + BrandID, "Bearer " + AP3_User_TKN) + "\r\n";             
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/calendar/" + " > " + ex.getMessage() + "\r\n";              
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
@@ -1082,7 +1176,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            J += GUI_API_Get(BaseAPI + "/order/location/brand/" + BrandID + "?pickup_start=" + from + "&pickup_end=" + to, "Bearer " + AP3_TKN);                        
+            J += GUI_API_Get(BaseAPI + "/order/location/brand/" + BrandID + "?pickup_start=" + from + "&pickup_end=" + to, "Bearer " + AP3_User_TKN) + "\r\n";                        
         } catch (IOException ex) {
             J += BaseAPI + "/order/location/brand/" + BrandID + " > " + ex.getMessage() + "\r\n";                  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
@@ -1111,7 +1205,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            J += GUI_API_Get(BaseAPI + "/announcement/resource/", "Bearer " + AP3_TKN);                        
+            J += GUI_API_Get(BaseAPI + "/announcement/resource/", "Bearer " + AP3_User_TKN) + "\r\n";                        
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/announcement/resource" + " > " + ex.getMessage() + "\r\n";     
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
@@ -1131,7 +1225,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAnMouseClicked
     private void cmbGroupItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbGroupItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
-            GetCompanies();
+            GUI_Get_Companies();
         }
     }//GEN-LAST:event_cmbGroupItemStateChanged
     private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
@@ -1146,7 +1240,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            J += GUI_API_Get(BaseAPI + URL, "Bearer " + AP3_TKN);                        
+            J += GUI_API_Get(BaseAPI + URL, "Bearer " + AP3_User_TKN) + "\r\n";                        
         } catch (IOException | JSONException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
@@ -1167,16 +1261,15 @@ public class API_GUI extends javax.swing.JInternalFrame {
         txtLog.append("- Load User API(s)..." + "\r\n"); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String J = "==== User API(s):" + "\r\n";
-        userID = "";
-        userTKN = "";
+        Mobile_User_ID = "";
+        Mobile_User_TKN = "";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
-        //String Realm = Func.App_ID(cmbApp.getSelectedItem().toString(), env);
-        String Realm = Func.Realm_ID(app, env);//cmbApp.getSelectedItem().toString(), cmbEnv.getSelectedItem().toString()
+        String Realm = Func.Realm_ID(app, env);
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();         // ============ User
+        sw1.start();         // ============ Mobile User Authentication
         try {               
             HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm); 
             httpget.setHeader("Authorization",  "Basic " + UserAuth);
@@ -1190,11 +1283,11 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
                 }
             };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
+            json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4) + "\r\n";
             
-            userID = json.getString("user");
-            userTKN = json.getString("token");
+            Mobile_User_ID = json.getString("user");
+            Mobile_User_TKN = json.getString("token");
             
         } catch (IOException | JSONException ex) {
             txtLog.append(" > " + J); 
@@ -1205,7 +1298,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
         
-        if(userID.isEmpty()){
+        if(Mobile_User_ID.isEmpty()){
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
@@ -1213,28 +1306,28 @@ public class API_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        // ============ Payment
+        sw1.start();        // ============ Mobile User Payment
         try { 
-            J += GUI_API_Get(BaseAPI + "/payment/method" + "?user_id=" + userID, "Bearer " + userTKN);                        
+            J += GUI_API_Get(BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, "Bearer " + Mobile_User_TKN) + "\r\n";                        
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/payment/method" + "?user_id=" + userID + " > " + ex.getMessage() + "\r\n";  
+            J += BaseAPI + "/payment/method" + "?user_id=" + AP3_User_ID + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }   
-        txtLog.append("== " + BaseAPI + "/payment/method" + "?user_id=" + userID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.append("== " + BaseAPI + "/payment/method" + "?user_id=" + AP3_User_ID + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();        
 
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        // ============ Orders
+        sw1.start();        // ============ Mobile User Orders
         long m1 = System.currentTimeMillis();                     // 1605286535799
         long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // 1604681735799
 
         try { 
-            HttpGet httpget = new HttpGet(BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1); 
-            httpget.setHeader("Authorization",  "Bearer " + userTKN);
+            HttpGet httpget = new HttpGet(BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1); 
+            httpget.setHeader("Authorization",  "Bearer " + Mobile_User_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -1255,7 +1348,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCART_IDS = new ArrayList<>();
             ORDER_IDS = new ArrayList<>();
             DefaultListModel<String> model = new DefaultListModel<>();
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            json = new JSONObject(httpclient.execute(httpget, responseHandler));
             JSONArray OR = json.getJSONArray("orders");
             if(!OR.isEmpty()){
                 for (int i = 0; i < OR.length(); i++) {
@@ -1277,13 +1370,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
             }
             jList_Orders.setModel(model);  
             J += "\r\n";
-            J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + "\r\n" + json.toString(4);
+            J += BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1 + "\r\n" + json.toString(4) + "\r\n";
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + " > " + ex.getMessage() + "\r\n";  
+            J += BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1 + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
             txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }   
-        txtLog.append("== " + BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.append("== " + BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1 + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();          
         try {
@@ -1317,7 +1410,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            J += GUI_API_Get(BaseAPI + "/menu/company/" + COMP_IDS.get(I), "Bearer " + AP3_TKN);                        
+            J += GUI_API_Get(BaseAPI + "/menu/company/" + COMP_IDS.get(I), "Bearer " + AP3_User_TKN) + "\r\n";                        
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/menu/company/"  + COMP_IDS.get(I) + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
@@ -1352,7 +1445,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            J += GUI_API_Get(BaseAPI + "/notification?realm=cdl&target=admin_panel", "Bearer " + AP3_TKN);                        
+            J += GUI_API_Get(BaseAPI + "/notification?realm=cdl&target=admin_panel", "Bearer " + AP3_User_TKN) + "\r\n";                        
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/notification?realm=cdl&target=admin_panel" + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
@@ -1385,7 +1478,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            J += GUI_API_Get(BaseAPI + "/promo/company/" + COMP_IDS.get(cmbComp.getSelectedIndex()) + "/location/group/" + SiteID, "Bearer " + AP3_TKN);                        
+            J += GUI_API_Get(BaseAPI + "/promo/company/" + COMP_IDS.get(cmbComp.getSelectedIndex()) + "/location/group/" + SiteID, "Bearer " + AP3_User_TKN) + "\r\n";                        
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/promo/company/" + COMP_IDS.get(cmbComp.getSelectedIndex()) + "/location/group/" + SiteID + " > " + ex.getMessage() + "\r\n";              
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
@@ -1403,7 +1496,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         } 
     }//GEN-LAST:event_btnPromoMouseClicked
     private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
-        SAVE_CONFIG();
+        GUI_Save_CONFIG();
     }//GEN-LAST:event_btnSave_OptMouseClicked
     private void btnLoc_MenusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoc_MenusMouseClicked
         if(!btnLoc_Menus.isEnabled()){
@@ -1421,7 +1514,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             sw1.start();        
 
             try {
-                J += GUI_API_Get(BaseAPI + "/menu/" + MENU_IDS.get(i) + "?extended=true&nocache=1", "");                        
+                J += GUI_API_Get(BaseAPI + "/menu/" + MENU_IDS.get(i) + "?extended=true&nocache=1", "") + "\r\n";                        
             } catch (IOException | JSONException ex) {
                 DH = true;
                 J += BaseAPI + "/menu/" + MENU_IDS.get(i) + "?extended=true&nocache=1" + " > " + ex.getMessage() + "\r\n";
@@ -1439,7 +1532,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 sw1.start();        
 
                 try {
-                    J += GUI_API_Get(BaseAPI + "/menu/" + MENU_IDS.get(i), "");                        
+                    J += GUI_API_Get(BaseAPI + "/menu/" + MENU_IDS.get(i), "") + "\r\n";                        
                 } catch (IOException | JSONException ex) {
                     J += BaseAPI + "/menu/" + MENU_IDS.get(i) + " > " + ex.getMessage() + "\r\n";
                     txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
@@ -1492,12 +1585,12 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());  
                 }
             };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);            
+            json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4) + "\r\n";            
             User_ID = json.getString("user");
-            userTKN = json.getString("token");
+            Mobile_User_TKN = json.getString("token");
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/user/auth?realm=" + Realm + " > " + ex.getMessage();            
+            J += BaseAPI + "/user/auth?realm=" + Realm + " > " + ex.getMessage() + "\r\n";            
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
             txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }   
@@ -1510,7 +1603,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         sw1.start();         // ============ AP3 User Permissions
         try { 
-            J += GUI_API_Get(BaseAPI + "/user/" + User_ID + "/permissions" + "?nocache=1", "Bearer " + AP3_TKN);                        
+            J += GUI_API_Get(BaseAPI + "/user/" + User_ID + "/permissions" + "?nocache=1", "Bearer " + AP3_User_TKN) + "\r\n";                        
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/user/" + User_ID + "/permissions" + "?nocache=1" + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
@@ -1525,7 +1618,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         sw1.start();       // ============ AP3 User
         try { 
-            J += GUI_API_Get(BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000", "Bearer " + AP3_TKN);                        
+            J += GUI_API_Get(BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000", "Bearer " + AP3_User_TKN) + "\r\n";                        
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000" + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
@@ -1556,7 +1649,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            J += GUI_API_Get(BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To, "Bearer " + AP3_TKN);                        
+            J += GUI_API_Get(BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To, "Bearer " + AP3_User_TKN) + "\r\n";                        
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
@@ -1626,12 +1719,12 @@ public class API_GUI extends javax.swing.JInternalFrame {
         MENU_IDS = new ArrayList<>();
         
         Load = false;
-        LOAD_ENV();
+        GUI_Load_Env();
         app = cmbApp.getSelectedItem().toString();
         CONFIG = false;   
         this.setTitle("Configurations / APIs");
     }
-    private void LOAD_ENV(){
+    private void GUI_Load_Env(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
@@ -1653,7 +1746,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         btnSCart.setEnabled(false);
         
         Get_AP3_TKN();
-        LOAD_CONFIG();
+        GUI_Load_CONFIG();
         
         if (CONFIG) {
             Load = true;
@@ -1661,15 +1754,15 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Load = false;
         }
         app = cmbApp.getSelectedItem().toString();
-        GetGroups(); // load 1st to be ready for selection by BrandSector
-        GetSites();       
+        GUI_Get_Groups(); // load 1st to be ready for selection by BrandSector
+        GUI_Get_Sites();       
     }
     private void Get_AP3_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
             rs.next();
-            AP3_TKN = rs.getString(1);
+            AP3_User_TKN = rs.getString(1);
             conn.close();
         } catch (SQLException ex) {
             txtLog.append("=== AP3_TKN > ERROR: " + ex.getMessage() + "\r\n");
@@ -1677,7 +1770,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    private void GetSites() {
+    private void GUI_Get_Sites() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Sites ..." + "\r\n");
@@ -1687,7 +1780,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         sw1.start();     
         
-        appId = Func.App_ID(cmbApp.getSelectedItem().toString(), env);
+        AppID = Func.App_ID(cmbApp.getSelectedItem().toString(), env);
 
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
@@ -1703,7 +1796,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                   
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try { 
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + appId);         
+            HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + AppID);         
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 300) {
@@ -1714,7 +1807,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 }
             };
             String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
+            json = new JSONObject(responseBody);
             
             String site;
             String country;
@@ -1730,15 +1823,15 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 addresses = null;
                 meta = null;
                 platform = "DH";
-                JSONObject object = Groups.getJSONObject(i);
-                if(object.has("name")){
-                    site = object.getString("name");   
+                JSONObject group = Groups.getJSONObject(i);
+                if(group.has("name")){
+                    site = group.getString("name");   
                 } 
-                if(object.has("id")){
-                    id = object.getString("id");
+                if(group.has("id")){
+                    id = group.getString("id");
                 } 
-                if(object.has("meta")){
-                    meta = object.getJSONObject("meta");
+                if(group.has("meta")){
+                    meta = group.getJSONObject("meta");
                     if (meta.has("migrated") && meta.getBoolean("migrated")){
                         platform = "CDL migrated";
                     }
@@ -1747,8 +1840,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     platform = "CDL";
                 } 
 
-                if(object.has("address")){
-                    addresses = object.getJSONObject("address");
+                if(group.has("address")){
+                    addresses = group.getJSONObject("address");
                 }  
                 if(addresses != null && addresses.has("country")){
                     country = addresses.getString("country");   
@@ -1793,12 +1886,12 @@ public class API_GUI extends javax.swing.JInternalFrame {
             }
             SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
             SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
-            GetBrands();
+            GUI_Get_Brands();
         }
         lblSITES.setText(app + " Sites (" + DV1.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    private void GetBrands() {
+    private void GUI_Get_Brands() {
         d2LastRow = -1;
         d1LastRow = DV1.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -1836,7 +1929,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 }
             };
             String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
+            json = new JSONObject(responseBody);
             JSONArray Location = json.getJSONArray("locations");
             JSONArray brands = null;
             
@@ -1912,14 +2005,14 @@ public class API_GUI extends javax.swing.JInternalFrame {
         lblBRANDS.setText("Selected Site Brands (" + DV2.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         
-        GetBrandSector();
+        GUI_Get_Brand_Sector();
     }
-    private void GetGroups() {  
+    private void GUI_Get_Groups() {  
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Groups/Sector ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         cmbGroup.removeAllItems();
-        GROUP_IDS = new ArrayList<>();
+        SECTOR_IDS = new ArrayList<>();
         
         Load = true;
         if(sw1.isRunning()){
@@ -1930,7 +2023,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/location/sector?_provider=cdl"); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_User_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 String Msg = response.getStatusLine().getReasonPhrase();
@@ -1942,14 +2035,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 }
             };
             String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
+            json = new JSONObject(responseBody);
             JSONArray Sectors = json.getJSONArray("sectors");           
             String S_NAME = "";
-            T_Index = -1;
             for (int i = 0; i < Sectors.length(); i++) {
                 S_NAME = Sectors.getJSONObject(i).getString("name");
                 cmbGroup.addItem(S_NAME);
-                GROUP_IDS.add(Sectors.getJSONObject(i).getString("id"));
+                SECTOR_IDS.add(Sectors.getJSONObject(i).getString("id"));
             }
         } catch (IOException | JSONException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
@@ -1970,7 +2062,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         Load = false;  
     }
-    private void GetBrandSector() {  
+    private void GUI_Get_Brand_Sector() {  
         txtLog.append("- Get Brand's Group/Sector" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         if(DV2.getRowCount()< 1){
@@ -1979,7 +2071,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             return;
         }
         BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
-        GroupID = "";
+        SectorID = "";
         CompanyID = "";
         int GroupIndex = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -1991,7 +2083,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             sw1.start();        
      
             HttpGet httpget = new HttpGet(BaseAPI + "/location/brand/" + BrandID + "?extended=true&nocache=1"); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_User_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 String Msg = response.getStatusLine().getReasonPhrase();
@@ -2002,12 +2094,12 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     throw new ClientProtocolException("Response: " + status + " - " + Msg);
                 }
             };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));        
+            json = new JSONObject(httpclient.execute(httpget, responseHandler));        
             if(json.has("sector")){
-                GroupID = json.getString("sector");
-                if(!GroupID.isEmpty()){
-                    for (int i = 0; i < GROUP_IDS.size(); i++) {
-                        if(GROUP_IDS.get(i).equals(GroupID)){
+                SectorID = json.getString("sector");
+                if(!SectorID.isEmpty()){
+                    for (int i = 0; i < SECTOR_IDS.size(); i++) {
+                        if(SECTOR_IDS.get(i).equals(SectorID)){
                             GroupIndex = i;
                         }
                     }
@@ -2041,7 +2133,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));       
         
         Load = true;
-        if(!GroupID.equals("")){
+        if(!SectorID.equals("")){
             cmbGroup.setSelectedIndex(GroupIndex);
         }else{
             if(cmbGroup.getItemCount() > 0){
@@ -2050,10 +2142,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         Load = false;
         
-        GetCompanies();    // Load Brans Companies List after Brand's Gropu/Sector selected
-        GetBrandCompany(); // after Brand's Gropu/Sector selected
+        GUI_Get_Companies();    // Load Brans Companies List after Brand's Gropu/Sector selected
+        GUI_Get_Brand_Company(); // after Brand's Gropu/Sector selected
     } 
-    private void GetCompanies() {  
+    private void GUI_Get_Companies() {  
         int I = cmbGroup.getSelectedIndex();
         if(I < 0){ // =========== DEBUG
             txtLog.append("- Load Sector/Companies(Menus) ERROR: cmbGROUP.getSelectedIndex() < 0" + "\r\n");
@@ -2072,8 +2164,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             }
             sw1.start();        
      
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + GROUP_IDS.get(I) + "?expanded=false"); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
+            HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + SECTOR_IDS.get(I) + "?expanded=false"); 
+            httpget.setHeader("Authorization",  "Bearer " + AP3_User_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 String Msg = response.getStatusLine().getReasonPhrase();
@@ -2085,10 +2177,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 }
             };
             String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
+            json = new JSONObject(responseBody);
             JSONArray Sectors = json.getJSONArray("companies");           
             String S_NAME = "";
-            T_Index = -1;
             for (int i = 0; i < Sectors.length(); i++) {
                 S_NAME = Sectors.getJSONObject(i).getString("name");
                 if(!S_NAME.isEmpty()) {
@@ -2114,7 +2205,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
     }
-    private void GetBrandCompany(){ // after Brand's Group/Sector slected
+    private void GUI_Get_Brand_Company(){ // after Brand's Group/Sector slected
         txtLog.append("- Get Brand's Company/Clobal Menu" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         int CompanyIndex = -1;
@@ -2138,8 +2229,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
     }
-    private void LOAD_CONFIG(){
+    private void GUI_Load_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        String C = "";
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + A.A.UserID + "' AND [platform] = 'WEB' AND [app] = 'API' AND [env] = '" + env + "'";
             Statement statement = conn.createStatement();
@@ -2154,31 +2246,26 @@ public class API_GUI extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
-            
-        try{            
-            if (C.contains(": ")) {
-                String c;
-                c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("GROUP:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GROUP = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("GL_MENU:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GL_MENU = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("COUNTRY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); COUNTRY = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("txtMobile_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtMobile_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtAP3_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAP3_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtAP3_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAP3_PW.setText(c.substring(c.indexOf(" ")).trim());
-
-                CONFIG = true;
-                txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            } else {
-                CONFIG = false;
-                txtLog.append("=== WEB / AP3, User: " + A.A.UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
+        String[] lines = C.split(System.getProperty("line.separator"));  
+        String value;            
+        try{       
+            for (String l : lines) {
+                value = l.substring(l.indexOf(" ")).trim();
+                if(l.contains("env:")) env = value;
+                if(l.contains("app:")) app = value;
+                if(l.contains("url:")) url = value;
+                if(l.contains("SECTOR:")) SECTOR  = value;
+                if(l.contains("GL_MENU:")) GL_MENU = value;
+                if(l.contains("SITE:")) SITE = value;
+                if(l.contains("BRAND:")) BRAND = value;
+                if(l.contains("txtMobile_ID:")) txtMobile_ID.setText(value);
+                if(l.contains("txtMobile_PW:")) txtMobile_PW.setText(value);
+                if(l.contains("txtAP3_ID:")) txtAP3_ID.setText(value);
+                if(l.contains("txtAP3_PW:")) txtAP3_PW.setText(value);             
+            }             
+            CONFIG = true;
+            txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } catch (Exception ex) {
             CONFIG = false;
             txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
@@ -2186,8 +2273,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    private void SAVE_CONFIG() {
+    private void GUI_Save_CONFIG() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        String C = "";
         String _S = "n/a";
         String _B = "n/a";
         try {
@@ -2201,11 +2289,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
             C += "env: " + env + "\r\n";
             C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
             C += "url: " + url + "\r\n";
-            C += "GROUP: " + cmbGroup.getSelectedItem().toString() + "\r\n";
+            C += "SECTOR: " + cmbGroup.getSelectedItem().toString() + "\r\n";
             C += "GL_MENU: " + cmbComp.getSelectedItem().toString() + "\r\n";
             C += "SITE: " + _S + "\r\n";
             C += "BRAND: " + _B + "\r\n";
-            C += "COUNTRY: " + COUNTRY + "\r\n";
             
             C += "txtMobile_ID: " + txtMobile_ID.getText().trim() + "\r\n";
             C += "txtMobile_PW: " + txtMobile_PW.getText().trim()  + "\r\n";
@@ -2250,8 +2337,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }
-       
+    }     
     private void GetShoppingCartAndOrder(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Shopping Cart..." + "\r\n"); 
@@ -2268,7 +2354,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         try {
             CartID = SCART_IDS.get(jList_Orders.getSelectedIndex());
             HttpGet httpget = new HttpGet(BaseAPI + "/shoppingcart/" + CartID); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_User_TKN);
             
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
@@ -2280,8 +2366,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
                 }
             };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/shoppingcart/" + CartID + "\r\n" + json.toString(4);
+            json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            J += BaseAPI + "/shoppingcart/" + CartID + "\r\n" + json.toString(4) + "\r\n";
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/shoppingcart/" + CartID + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
@@ -2305,7 +2391,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         try {
             OrderID = ORDER_IDS.get(jList_Orders.getSelectedIndex());
             HttpGet httpget = new HttpGet(BaseAPI + "/order/" + OrderID); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_User_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 500) {
@@ -2316,8 +2402,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
                 }
             };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            J += BaseAPI + "/order/" + OrderID + "\r\n" + json.toString(4);
+            json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            J += BaseAPI + "/order/" + OrderID + "\r\n" + json.toString(4) + "\r\n";
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/order/" + OrderID + " > " + ex.getMessage() + "\r\n";  
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
@@ -2341,52 +2427,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
     }                                     
-    // </editor-fold>  
-
-    // <editor-fold defaultstate="collapsed" desc="Instance Variables Declarations">
-    private String HTML_Report_Path;
-    private ExtentSparkReporter HtmlReporter;
-    protected ExtentReports HtmlReport;
-    protected ExtentTest ParentTest;
-    private boolean Load;
-    private int d1LastRow = -1; 
-    private int d2LastRow = -1; 
-    private List<String> GROUP_IDS;
-    private List<String> COMP_IDS; 
-    private List<String> MENU_IDS;
-    private List<String> ORDER_IDS; 
-    private List<String> SCART_IDS; 
-    private boolean CONFIG = false;
-    private String C = "";
-    private String AP3_TKN;
-    private String userID;
-    private String userTKN;
-    private int T_Index;
-    
-    private final Stopwatch sw1 = Stopwatch.createUnstarted();
-    private final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
-    private final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-    private final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    private String SQL = ""; 
-    
-    private String url = "";
-    private String app = "";
-    private String appId = "";
-    private String env = "";
-    private String SITE = "";
-    private String SiteID = "";
-    private String GROUP = "";
-    private String BRAND = "";
-    private String BrandID = "";
-    private String CompanyID = "";
-    private String GroupID = "";
-    private String COUNTRY = "COUNTRY";
-    private String GL_MENU = "TIM HORTONS";
-    private String platform = "CDL";
-    private String BaseAPI;
-    private String TZone; 
-    // </editor-fold>    
-
     private String GUI_API_Get(String EndPoint, String AUTH) throws IOException{
         String AJ = "";
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
@@ -2403,34 +2443,669 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     throw new ClientProtocolException("\r\n" + "== ERROR > " + status + " - " + response.getStatusLine().getReasonPhrase());
                 }
             };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            AJ += EndPoint + "\r\n" + json.toString(4);
+            json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            AJ += EndPoint + "\r\n" + json.toString(4) + "\r\n";
         }
         return AJ;
     }
-    private String JOB_API_Get(String EndPoint, String AUTH) throws IOException{
-        String AJ = "";
-        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
-            HttpGet httpget = new HttpGet(EndPoint);
-            if(!AUTH.isEmpty()){
-                httpget.setHeader("Authorization",  AUTH);
+    // </editor-fold>  
+
+    //<editor-fold defaultstate="collapsed" desc="Extend HTML Report Methods">
+    protected void Extent_Report_Config() throws IOException{
+        HTML_Report_Path = System.getProperty("user.home") + File.separator + "Desktop";
+        Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
+        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + "API_" + env + "_" + Report_Date + ".html");
+        HtmlReport = new ExtentReports();
+        HtmlReport.attachReporter(HtmlReporter);
+        
+        HtmlReport.setSystemInfo("Application", "API(s)");
+        HtmlReport.setSystemInfo("Machine", A.A.WsID);
+        HtmlReport.setSystemInfo("Machine OS", A.A.WsOS);
+        HtmlReport.setSystemInfo("Tester ID", A.A.UserID); 
+        HtmlReport.setSystemInfo("Run Trigger", r_type);
+        HtmlReport.setReportUsesManualConfiguration(true); // DEBUG - steps duration time incorrect
+        
+        HtmlReporter.config().setDocumentTitle("JTT API Automation Report");
+        HtmlReporter.config().setTheme(Theme.DARK);               
+    }    
+    protected void Log_Html_Result(String RES, String Test_Description, boolean Capture_Screenshot, ExtentTest Test)  {
+        switch (RES) {
+            case "PASS":
+                Test.log(Status.PASS, MarkupHelper.createLabel(Test_Description, ExtentColor.GREEN));
+                break;
+            case "FAIL":
+                Test.log(Status.FAIL, MarkupHelper.createLabel(Test_Description, ExtentColor.RED));               
+                break;
+            case "INFO":
+                Test.log(Status.INFO, MarkupHelper.createLabel(Test_Description, ExtentColor.BLUE));
+                break;
+            case "WARN":
+                Test.log(Status.WARNING, MarkupHelper.createLabel(Test_Description, ExtentColor.YELLOW));
+                break;
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Automated JOB">
+    public String JOB_Run_Auto(String run_type, String config){
+        run_start = Instant.now();
+        Log  = "";
+        String RES = "";
+        
+        RES = JOB_Load_CONFIG(config);
+        if(RES.contains("ERROR")){
+            Current_Log_Update(false, RES);
+            return "JOB_Load_CONFIG > " + RES;
+        }
+        Current_Log_Update(false, RES);
+        if(!RES.contains("OK")){
+            return RES;
+        }
+        
+        try{
+            Current_Log_Update(false, "= Auto Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+            EX = "";
+            t_calls = 0;
+            t_min =  0;
+            t_avg = 0;
+            t_max =  0;
+            p_50 = 0;
+            p_90 = 0;
+            _t = 0; // Total
+            _p = 0; // Passed
+            _f = 0; // Failed
+            _w = 0; // Warn
+            _i = 0; // Info
+            r_time = "";
+            r_type = run_type;
+            
+            if(sw1.isRunning()){
+                sw1.reset();
             }
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(response.getEntity()) : null;      
-                } else {
-                    throw new ClientProtocolException("\r\n" + "== ERROR > " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
-            AJ += EndPoint + "\r\n" + json.toString(4);
+            sw1.start();
+            LOG_START();   // ========================================================
+            BW1_DoWork(false);
+        }catch(Exception ex){
+            return "ERROR > " + ex.getMessage();
         }
-        return AJ;
+        return "OK > Job Started >> Please Monitor Reports...";
     }
-   
-    // <editor-fold defaultstate="collapsed" desc="GUI Variables Declaration">
+    private String JOB_Load_CONFIG(String config){
+        String[] lines = config.split("\n");
+        String value;
+        try{
+            for (String l : lines) {
+                value = l.substring(l.indexOf(" ")).trim();
+                if(l.contains("env: ")) env = value;
+                if(l.contains("app: ")) app = value;
+                if(l.contains("url: ")) url = value; 
+                if(l.contains("SlackCh: ")) Slack_Channel = value;
+                if(l.contains("_slack: ")) _Slack = Boolean.parseBoolean(value);
+                if(l.contains("SECTOR: ")) SECTOR  = value;
+                if(l.contains("GL_MENU: ")) GL_MENU = value;
+                if(l.contains("SITE: ")) SITE = value;
+                if(l.contains("BRAND: ")) BRAND = value;
+                if(l.contains("Mobile_ID: ")) Mobile_ID = value; 
+                if(l.contains("Mobile_PW: ")) Mobile_PW = value; 
+                if(l.contains("AP3_ID: ")) AP3_ID = value; 
+                if(l.contains("AP3_PW: ")) AP3_PW = value;  
+            }
+            CONFIG = true;
+            switch (env) {
+                case "ST":
+                    BaseAPI = "https://api.compassdigital.org/staging";
+                    break;
+                case "DE":
+                    BaseAPI = "https://api.compassdigital.org/dev";
+                    break; 
+                default:
+                    BaseAPI = "https://api.compassdigital.org/v1";
+                    break;
+            }
+            Current_Log_Update(true, "= JOB_Load_CONFIG > OK" + "\r\n");
+            return "OK";
+        } catch (Exception ex) {
+            CONFIG = false;
+            Current_Log_Update(true, "= JOB_Load_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
+            return "ERROR > " + ex.getMessage();
+        }
+    }
+    protected void Current_Log_Update(boolean GUI, String Text){
+        if(GUI){
+            txtLog.append(Text);
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        } else{
+            Log += Text;
+        }
+    }
+    
+    private void Report(boolean Open_File){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        Report_File = "";
+        if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            txtLog.append("=== Report > Not Excel" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            return;
+        }
+        try {
+            int col = 9;
+            String Top_Row = Last_EX.substring(0, Last_EX.indexOf("\r\n"));
+            String[] lines = Last_EX.substring(Last_EX.indexOf("\r\n") + 2).split(System.getProperty("line.separator"));
+            int l = lines.length;
+            String[][] Values = new String[l][col];
+            int n = 1;
+            for (int i = 0; i < l; i++) {
+                String[] v = lines[i].split("\t");
+                System.arraycopy(v, 0, Values[i], 0, v.length);
+            }
+            Report_File = Func.fExcel(l, col, Values, "API_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
+            txtLog.append("=== Report Excel file:\r\n" + Report_File + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        } catch (IOException ex) {
+            txtLog.append("=== Report > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+    private void LOG_UPDATE(String LOG){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+            PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET " +
+                    " [Date] = ?" +       // 1
+                    ", [Time] = ?" +      // 2
+                    ", [app] = ?" +       // 3
+                    ", [url] = ?" +       // 4
+                    ", [summary] = ?" +   // 5
+                    ", [t_calls] = ?" +   // 6
+                    ", [t_min] = ?" +     // 7
+                    ", [t_avg] = ?" +     // 8
+                    ", [t_max] = ?" +     // 9
+                    ", [p_50] = ?" +      // 10
+                    ", [p_90] = ?" +      // 11
+                    ", [test_type] = ?" +     // 12
+                    ", [user_id] = ?" +       // 13
+                    ", [user_ws] = ?" +       // 14
+                    ", [env] = ?" +       // 15
+                    ", [Result] = ?" +    // 16
+                    ", [Status] = ?" +    // 17
+                    ", [Excel] = ?" +     // 18
+                    " WHERE [app] = 'API_" + env + "' AND [Status] = 'Running'");
+            _update.setString(1, LocalDateTime.now().format(Date_formatter));
+            _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
+            _update.setString(3, "API_" + env);
+            _update.setString(4, url);
+            _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
+            _update.setInt(6, t_calls);
+            _update.setDouble(7, t_min);
+            _update.setDouble(8, t_avg);
+            _update.setDouble(9, t_max);
+            _update.setDouble(10, p_50);
+            _update.setDouble(11, p_90);
+            _update.setString(12, r_type);
+            _update.setString(13, A.A.UserID);
+            _update.setString(14, A.A.WsID);
+            _update.setString(15, "N/A");
+            _update.setString(16, LOG);
+            _update.setString(17, "Scope: " + "All");
+            _update.setString(18, EX);
+            int row = _update.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            txtLog.append("=== LOG_UPDATE > SQL ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+    private void LOG_START(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] (" +
+                    "[Date]" +   // 1
+                    ", [Time]" +   // 2
+                    ", [app]" +   // 3
+                    ", [url]" +   // 4
+                    ", [summary]" +   // 5
+                    ", [t_calls]" +   // 6
+                    ", [t_min]" +   // 7
+                    ", [t_avg]" +   // 8
+                    ", [t_max]" +   // 9
+                    ", [p_50]" +   // 10
+                    ", [p_90]" +   // 11
+                    ", [test_type]" +   // 12
+                    ", [user_id]" +   // 13
+                    ", [user_ws]" +   // 14
+                    ", [env]" +   // 15
+                    ", [Result]" +   // 16
+                    ", [Status]" +   // 17
+                    ", [Excel]" +     // 18
+                    ") VALUES (" +
+                    "?" +     // 1
+                    ",?" +    // 2
+                    ",?" +    // 3
+                    ",?" +    // 4
+                    ",?" +    // 5
+                    ",?" +    // 6
+                    ",?" +    // 7
+                    ",?" +    // 8
+                    ",?" +    // 9
+                    ",?" +    // 10
+                    ",?" +    // 11
+                    ",?" +    // 12
+                    ",?" +    // 13
+                    ",?" +    // 14
+                    ",?" +    // 15
+                    ",?" +    // 16
+                    ",?" +    // 17
+                    ",?" +    // 18
+                    ")");
+            _insert.setString(1, LocalDateTime.now().format(Date_formatter));
+            _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
+            _insert.setString(3, "API_" + env);
+            _insert.setString(4, url);
+            _insert.setString(5, "Running...");
+            _insert.setString(6, "0");
+            _insert.setString(7, "0");
+            _insert.setString(8, "0");
+            _insert.setString(9, "0");
+            _insert.setString(10, "0");
+            _insert.setString(11, "0");
+            _insert.setString(12, r_type);
+            _insert.setString(13, A.A.UserID);
+            _insert.setString(14, A.A.WsID);
+            _insert.setString(15, "N/A");
+            _insert.setString(16, "=== Job is running... ===\r\n" + "");
+            _insert.setString(17, "Running");
+            _insert.setString(18, "None");
+            int row = _insert.executeUpdate();
+            conn.close();
+        }  catch (SQLException ex) {
+            txtLog.append("=== LOG_START > SQL ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+    private void BW1_DoWork(Boolean GUI) { 
+        BW1 = new SwingWorker() {             
+            Instant dw_start = Instant.now();
+            @Override
+            protected String doInBackground() throws Exception { 
+                Extent_Report_Config();// ======================================================================= 
+                
+                Execute();
+                
+                DD = Duration.between(run_start, Instant.now());
+                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+                Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
+                
+                EX = "API " + env + ", " +
+                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ", Info: " + _i + "\r\n" +
+                    "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
+                    + EX;
+                
+                Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n");
+                
+                BW1_Done(GUI); // ================================================================================
+
+                if(_f > 0) {
+                    return  "= Execution finished @" + LocalDateTime.now().format(A.A.Time_12_formatter) + " with " + _f + " FAIL(s)";
+                }else{
+                    return  "= Execution finished @" + LocalDateTime.now().format(A.A.Time_12_formatter);  
+                } 
+            }  
+            @Override
+            protected void done() {      
+                try  { 
+                    String statusMsg = (String) get(); 
+                    txtLog.append("" + statusMsg + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                   
+                    BW1 = null;
+                }  
+                catch (InterruptedException | ExecutionException ex)  { 
+                    Current_Log_Update(GUI, "- BW1 ERROR: " + ex.getMessage() + "\r\n");
+                    BW1_FAIL_LOG_UPDATE(ex.getMessage()); 
+                } 
+            } 
+        }; 
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        BW1.execute();  
+    }
+    private void BW1_FAIL_LOG_UPDATE(String Error){
+        Summary = "BW1 - Failed";
+        DD = Duration.between(run_start, Instant.now());
+        LOG_UPDATE("- BW1 ERROR: " + Error);
+    } 
+    private void BW1_Done(boolean GUI) throws Exception{
+        DD = Duration.between(run_start, Instant.now());
+             
+        Slack_Channel = "xtt_test";
+        Zip_Report = true;
+        
+        Last_EX = EX;
+        Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
+        try {
+            String t_rep = "";
+            if (!"".equals(r_time.trim())) {
+                double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
+                if (am0.length > 0) {
+                    Arrays.sort(am0);
+                    double total = 0;
+                    for(int i = 0; i < am0.length; i++){
+                        total = total + am0[i];
+                    }
+                    t_calls = am0.length;
+                    t_min = am0[0] / (double)1000;
+                    t_avg = (total / am0.length) / (double)1000;
+                    t_max = am0[am0.length - 1]  / (double)1000;
+                    p_50 = Func.p50(am0) / (double)1000;
+                    p_90 = Func.p90(am0) / (double)1000;
+                    
+                    t_rep += "= Total Calls: " + t_calls +
+                            ", Response Times (sec) - Min: " + A.A.df.format(t_min) +
+                            ", Avg: " + A.A.df.format(t_avg) +
+                            ", Max: " + A.A.df.format(t_max) +
+                            ", p50: " + A.A.df.format(p_50) +
+                            ", p90: " + A.A.df.format(p_90);
+                }
+                Current_Log_Update(GUI, t_rep + "\r\n");
+            }
+        } catch(Exception ex){
+            Current_Log_Update(GUI, "= LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
+        }
+        
+        Current_Log_Update(GUI, "= " + Summary + "\r\n"); // Summary shown in EX top
+        Current_Log_Update(GUI, "= API(s) " + ", Environment: " + env + "\r\n");
+        
+        if(GUI){
+            Log = txtLog.getText();
+        }
+        LOG_UPDATE(Log); // ========================================================
+        HtmlReporter.config().setReportName("API(s) " + ", Env: " + env + 
+                ", Total Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
+                ". Resp(sec) - Min: " + A.A.df.format(t_min) +
+                            ", Avg: " + A.A.df.format(t_avg) +
+                            ", Max: " + A.A.df.format(t_max) +
+                            ", p50: " + A.A.df.format(p_50) +
+                            ", p90: " + A.A.df.format(p_90) + 
+                ". Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
+        HtmlReport.flush();
+        
+        if(_Slack && !Slack_Channel.equals("N/A")){
+            Report(false);
+            String MSG = "API_" + env + " Excel Automation report - " + Report_Date +
+                    "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +    
+                    "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
+                    "Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
+            
+            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Report_File, Slack_Channel, MSG));
+            File ef = new File(Report_File);
+            if(ef.exists() && !ef.isDirectory()) {
+                ef.delete();
+            }  
+            String HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Click to Open";
+            String HTML_Path = HtmlReporter.getFile().getAbsolutePath();
+            if(Zip_Report){
+                String Origin_HTML = HTML_Path;
+                HTML_Path = A.Func.Zip_File(HTML_Path);
+                File hf = new File(Origin_HTML);
+                if(hf.exists() && !hf.isDirectory()) {
+                    hf.delete();
+                }
+                HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Extract Here > open unzipped HTML file";
+            }
+            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(HTML_Path, Slack_Channel, HTML_Report_Msg));
+            File hf = new File(HTML_Path);
+            if(hf.exists() && !hf.isDirectory()) {
+                hf.delete();
+            }
+        }
+    }
+    
+    private void JOB_Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY, ExtentTest ParentTest, String JIRA) {
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        _t++; sw1.start();
+        FAIL = false;
+        String Result = "?";
+        int status = 0;
+        String R_Time = "";
+        json = null;
+        try {
+            RequestSpecification request;
+            request = RestAssured.given();
+            if(!AUTH.isEmpty()){
+                request.header("Authorization", AUTH);
+            }
+            Response response =null;
+            switch (Method) {
+                case "GET":
+                    response = request.get(EndPoint);
+                    break;
+                case "POST":
+                    request.body(BODY);
+                    response = request.post(EndPoint);
+                    break;
+                case "DELETE":
+                    request.body(BODY);
+                    response = request.delete(EndPoint);
+                    break;
+                case "PUT":
+                    request.body(BODY);
+                    response = request.put(EndPoint);
+                    break; 
+                default:
+                    break;
+            }
+            Result = response.getStatusLine().toString();
+            status = response.getStatusCode();
+            json = new JSONObject(response.asString());
+
+            R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
+            if (status == 200) {                                                 
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + "EndPoint: " + EndPoint + "\t" + Result + "\t" + "PASS" + "\t" + " - " +
+                "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                Log_Html_Result("PASS", NAME + " > EndPoint: " + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+            } else if (status > 200 && status < 500) { 
+                _w++; 
+                EX += _t + "\t" + NAME + "\t" + "EndPoint: " + EndPoint + "\t" + Result + "\t" + "WARN" + "\t" + " - " +
+                "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                Log_Html_Result("WARN", NAME + " > EndPoint: " + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+            } else {
+                _f++; FAIL = true; 
+                EX += _t + "\t" + NAME + "\t" + "EndPoint: " + EndPoint + "\t" + "Status Code: " + status + "\t" + "FAIL" + "\t" + Result +
+                "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                Log_Html_Result("FAIL", NAME + " > EndPoint: " + BaseAPI + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+            }
+        } catch(Exception ex){
+            R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + "API EndPoint" + "\t" + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("FAIL", NAME + " > Error: " + err + "<br />EndPoint: " + BaseAPI + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+        } 
+        r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
+        sw1.reset();
+    }
+    //</editor-fold>  
+    
+    private void Execute() throws Exception {
+        String Realm = "";
+        String Auth = "";
+        AP3_User_ID = "";
+        AP3_User_TKN = ""; 
+        Mobile_User_ID = "";
+        Mobile_User_TKN = "";
+
+        //<editor-fold defaultstate="collapsed" desc="User">
+        ParentTest = HtmlReport.createTest("User");            
+
+        Auth = "Basic " + Base64.getEncoder().encodeToString((Mobile_ID + ":" + Mobile_PW).getBytes());
+        Realm = Func.Realm_ID(app, env);
+        JOB_Api_Call("Mobile User Authentication GET", "GET", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", ParentTest, "no_jira");
+        if(json != null){
+            if(json.has("user")) Mobile_User_ID = json.getString("user"); 
+            if(json.has("token")) Mobile_User_TKN = json.getString("token");   
+        }
+
+        Auth = "Bearer " + Mobile_User_TKN;
+        JOB_Api_Call("Mobile User Payment GET", "GET", BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "", ParentTest, "no_jira");
+
+        long m1 = System.currentTimeMillis();                     
+        long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // - 7 days
+        JOB_Api_Call("Mobile User Orders", "GET", BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1, Auth, "", ParentTest, "no_jira");
+
+        Auth = "Basic " + Base64.getEncoder().encodeToString((AP3_ID + ":" + AP3_PW).getBytes());
+        Realm = Func.Realm_ID("AP3", env);
+        JOB_Api_Call("AP3 User Authentication GET", "GET", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", ParentTest, "no_jira");
+        if(json != null){
+            if(json.has("user")) AP3_User_ID = json.getString("user"); 
+            if(json.has("token")) AP3_User_TKN = json.getString("token");   
+        }
+
+        Auth = "Bearer " + AP3_User_TKN;
+        JOB_Api_Call("AP3 User > /realm GET", "GET", BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000", Auth, "", ParentTest, "no_jira");
+
+        Auth = "Bearer " + AP3_User_TKN;
+        JOB_Api_Call("AP3 User > /permissions GET", "GET", BaseAPI + "/user/" + AP3_User_ID + "/permissions" + "?nocache=1", Auth, "", ParentTest, "no_jira");
+
+
+        //</editor-fold>  
+        
+        //<editor-fold defaultstate="collapsed" desc="location">
+        ParentTest = HtmlReport.createTest("Location"); 
+
+        Auth = "Bearer " + AP3_User_TKN;  // =============== AP3 Sectors > Company ID===========================
+        JOB_Api_Call("Location > /sector GET", "GET", BaseAPI + "/location/sector?_provider=cdl", Auth, "", ParentTest, "no_jira");
+        
+        Auth = "";                        // =============== AP3 ALL Sites ===========================
+        AppID = Func.App_ID(app, env);
+        JOB_Api_Call("Location > /multigroup/ GET", "GET", BaseAPI + "/location/multigroup/", Auth, "", ParentTest, "no_jira");
+
+        Auth = "";                       // =============== AP3 App Sites ===========================
+        AppID = Func.App_ID(app, env);
+        JOB_Api_Call("Location > /multigroup/'AppID' GET", "GET", BaseAPI + "/location/multigroup/" + AppID + "?nocache=true&extended=true", Auth, "", ParentTest, "no_jira");
+        if(json != null){
+            JSONArray Groups = json.getJSONArray("groups");
+            for (int i = 0; i < Groups.length(); i++) {
+                JSONObject group = Groups.getJSONObject(i);
+                if(group.has("name") && group.getString("name").equals(SITE)){
+                    SiteID = group.getString("id");
+                    break;
+                } 
+            } 
+        }
+
+        Auth = "";                      // =============== AP3 Site Brands ===========================
+        JOB_Api_Call("Location > /group/'SiteID' GET", "GET", BaseAPI + "/location/group/" + SiteID, Auth, "", ParentTest, "no_jira");
+        if(json != null){
+            JSONArray Location = json.getJSONArray("locations");
+            if (Location != null) {
+                for (Object l : Location) {
+                    JSONObject loc = (JSONObject) l;
+                    JSONArray brands = loc.getJSONArray("brands");
+                    for (Object b : brands) {
+                        JSONObject br = (JSONObject) b;                           
+                        if (br.getString("name").equals(BRAND)) { 
+                            BrandID = br.getString("id");
+                            UnitID = loc.getString("id");
+                        }
+                    }
+                }
+            }
+        }   
+
+        Auth = "";                      // ===============    AP3 Unit ===========================
+        JOB_Api_Call("Location > /'UnitID' GET", "GET", BaseAPI + "/location/" + UnitID + "?extended=true&nocache=1", Auth, "", ParentTest, "no_jira");
+        
+        Auth = "";                      // ===============    AP3 Brand ===========================
+        JOB_Api_Call("Location > /'BrandID' GET", "GET", BaseAPI + "/location/brand/" + BrandID + "?extended=true&nocache=1", Auth, "", ParentTest, "no_jira");
+        SectorID = "";
+        CompanyID = "";
+        if(json != null){
+            MENU_IDS = new ArrayList<>();
+            JSONArray MENUS = json.getJSONArray("menus");
+            for (int i = 0; i < MENUS.length(); i++) {
+                JSONObject menu = MENUS.getJSONObject(i);
+                    MENU_IDS.add(menu.getString("id"));
+            } 
+            if(json.has("sector")){           
+                SectorID = json.getString("sector");
+            }
+            if(json.has("company")){
+                CompanyID = json.getString("company");
+            }
+        }
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc="promos">  
+        ParentTest = HtmlReport.createTest("Promo"); 
+        Auth = "Bearer " + AP3_User_TKN;  // ===============  AP3 Promo ===========================
+        JOB_Api_Call("Promo > /'CompanyID' GET", "GET", BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID, Auth, "", ParentTest, "no_jira");
+
+        //</editor-fold>
+
+        //<editor-fold defaultstate="collapsed" desc="config">
+        ParentTest = HtmlReport.createTest("Config");              
+        Auth = "Bearer " + AP3_User_TKN;   // =============== Config(s) ========================================
+        JOB_Api_Call("Config > /'AppID' GET", "GET", BaseAPI + "/config/" + AppID, Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Public Config > /'AppID' GET", "GET", BaseAPI + "/config/public/" + AppID, "", "", ParentTest, "no_jira");
+        
+        JOB_Api_Call("Config > /'SiteID' GET", "GET", BaseAPI + "/config/" + SiteID, Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Public Config > /'SiteID' GET", "GET", BaseAPI + "/config/public/" + SiteID, "", "", ParentTest, "no_jira");
+                
+        JOB_Api_Call("Config > /'UnitID' GET", "GET", BaseAPI + "/config/" + UnitID, Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Public Config > /'UnitID' GET", "GET", BaseAPI + "/config/public/" + UnitID, "", "", ParentTest, "no_jira");
+         
+        JOB_Api_Call("Config > /'BrandID' GET", "GET", BaseAPI + "/config/" + BrandID, Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Public Config > /'BrandID' GET", "GET", BaseAPI + "/config/public/" + BrandID, "", "", ParentTest, "no_jira");
+
+        //</editor-fold>          
+       
+        //<editor-fold defaultstate="collapsed" desc="calendar">           
+        ParentTest = HtmlReport.createTest("Calendar");
+        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Company/Global Menus ===========================
+        JOB_Api_Call("Calendar > /'BrandID' GET", "GET", BaseAPI + "/calendar/" + BrandID, Auth, "", ParentTest, "no_jira");
+
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc="menus">        
+        ParentTest = HtmlReport.createTest("Global / Local Menu");     
+        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Company/Global Menus ===========================
+        JOB_Api_Call("Company / Global Menu > /'CompID' GET", "GET", BaseAPI + "/menu/company/" + CompanyID, Auth, "", ParentTest, "no_jira");
+
+        Auth = "";                        // =============== AP3 Local Menu(s) ===========================
+        for(int i = 0; i < MENU_IDS.size(); i++){
+            JOB_Api_Call("Local Menu > /'MenuID' GET", "GET", BaseAPI + "/menu/" + MENU_IDS.get(i), Auth, "", ParentTest, "no_jira");
+        }
+        //</editor-fold>
+
+        //<editor-fold defaultstate="collapsed" desc="Sales Reporting EOD">        
+        ParentTest = HtmlReport.createTest("Sales Reporting EOD");     
+        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Sales Reporting EOD ===========================
+        JOB_Api_Call("Sales Reporting EOD > /'SiteID' GET", "GET", BaseAPI + "/report/eod/group/" + SiteID, Auth, "", ParentTest, "no_jira");
+        //</editor-fold>        
+        
+        
+        //<editor-fold defaultstate="collapsed" desc="announcement">            
+        ParentTest = HtmlReport.createTest("Announcement");              
+        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Announcement ===========================
+        JOB_Api_Call("AP3 Announcement GET", "GET", BaseAPI + "/announcement/resource/", Auth, "", ParentTest, "no_jira");
+
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc="Notification / Resent Updates">            
+        ParentTest = HtmlReport.createTest("AP3 Notification");              
+        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Announcement ===========================
+        JOB_Api_Call("AP3 Notification GET", "GET", BaseAPI + "/notification?realm=cdl&target=admin_panel", Auth, "", ParentTest, "no_jira");
+
+        //</editor-fold>
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;

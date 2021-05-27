@@ -188,7 +188,7 @@ public class Jobs extends javax.swing.JInternalFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel2.setText("Job Name");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(588, 14, 79, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(588, 8, 79, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -348,11 +348,15 @@ public class Jobs extends javax.swing.JInternalFrame {
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
             Last_JOB = txtJob_Name.getText();
             PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[jtt_jobs] SET " +
-                    "_cron = '" + txtCron.getText() + "', " +  
-                    "_trigger = '" + cmbTrigger.getSelectedItem().toString() + "', " +
-                    "_check_val = '" + txtCheckValue.getText() + "', " +
-                    "_conf = '" + txtConfig.getText() + "'" +                         
-                "WHERE [job_name] = '" + Last_JOB + "'");
+                        " [_cron] = ?" +           // 1
+                        ", [_trigger] = ?" +       // 2
+                        ", [_conf] = ?" +          // 3
+                        ", [_check_val] = ?" +     // 4                               
+                    " WHERE [job_name] = '" + Last_JOB + "'");
+                _update.setString(1, txtCron.getText());
+                _update.setString(2, cmbTrigger.getSelectedItem().toString());
+                _update.setString(3, txtConfig.getText());
+                _update.setString(4, txtCheckValue.getText());
             int row = _update.executeUpdate();
             if(row == 0){
                 txtLog.append( "= Save " + Last_JOB + " configuration changes - ERROR: no row updated " + "\r\n");
@@ -516,9 +520,18 @@ public class Jobs extends javax.swing.JInternalFrame {
                 LOG_FAILRE(RES);
             }
         }
+        if(JobName.startsWith("API")){
+            API.API_GUI _Job = new API.API_GUI();
+            String RES = _Job.JOB_Run_Auto("ad-hoc", config);
+            txtLog.append("Run_Job: " + "\r\n" + RES.trim() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            if(!RES.contains("OK")){
+                LOG_FAILRE(RES);
+            }
+        }        
     }
    
-    // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">    
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">">    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JButton btnLog;

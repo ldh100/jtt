@@ -104,12 +104,12 @@ public class AP3_bulk_apply {
         }    
         }
         //reset list visibility and in/out of stock checkbox indicator
-        String inStock = getAttributeOfElementByXpath("((//table[contains(@class,'v-table')]//tbody/tr)[1]//td[8])", "class");
+        String inStock = getAttributeOfElementByXpath("((//table[contains(@class,'v-table')]//tbody/tr)[1]//td[8])//i", "class");
         String visible = getAttributeOfElementByXpath("((//table[contains(@class,'v-table')]//tbody/tr)[1]//td[4])//i", "class");
-        if (inStock.contains("is-disabled") && visible.contains("mdi-eye-off")) {
+        if (inStock.contains("mdi-checkbox-blank-outline") && visible.contains("mdi-eye-off")) {
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira");
             if (FAIL) { return;}
-            Thread.sleep(1000);
+            Thread.sleep(2000);
             if (!env.equals("PR")) {
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
                 if (FAIL) { return;}
@@ -314,7 +314,7 @@ public class AP3_bulk_apply {
         EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Change Visibility of Modifiers in Local Menu" + "\t" + " == Bulk Change Visibility of Modifiers in Local Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Category", "xpath", "//div[contains(text(),'Flame Grilled Pitas')]", "no_jira");
         if (FAIL) { return;}
-        Thread.sleep(500);
+        Thread.sleep(1000);
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(2000);

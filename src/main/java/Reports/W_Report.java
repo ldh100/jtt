@@ -22,8 +22,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.TimeZone;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
@@ -373,6 +371,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("FW") || 
             DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("DL") || 
             DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("WO") ||
+            DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("API") ||
             DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("Android") ||
             DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("iOS")) 
             {
@@ -557,7 +556,10 @@ public class W_Report extends javax.swing.JInternalFrame {
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }  
     // <editor-fold defaultstate="collapsed" desc="Public & Private Variables">    
-    public static String SQL = ""; 
+    private String SQL = ""; 
+    // </editor-fold>   
+    
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JButton btnDel;

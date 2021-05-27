@@ -471,7 +471,7 @@
               <Color blue="b4" green="b4" id="Active Caption Border" palette="2" red="b4" type="palette"/>
             </Property>
             <Property name="name" type="java.lang.String" value="DV1" noResource="true"/>
-            <Property name="requestFocusEnabled" type="boolean" value="false"/>
+            <Property name="opaque" type="boolean" value="false"/>
             <Property name="rowHeight" type="int" value="18"/>
             <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
               <JTableSelectionModel selectionMode="0"/>

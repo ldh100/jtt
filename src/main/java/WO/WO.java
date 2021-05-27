@@ -890,12 +890,11 @@ public class WO extends javax.swing.JInternalFrame {
                     p_50 = Func.p50(am0) / (double)1000;
                     p_90 = Func.p90(am0) / (double)1000;
 
-                    DecimalFormat df = new DecimalFormat("#.##");
-                    t_rep += "=== Total Calls: " + t_calls + ", Response Times (sec) - Min: " + df.format(t_min) +
-                                                                ", Avg: " + df.format(t_avg) +
-                                                                ", Max: " + df.format(t_max) +
-                                                                ", p50: " + df.format(p_50) +
-                                                                ", p90: " + df.format(p_90);
+                    t_rep += "=== Total Calls: " + t_calls + ", Response Times (sec) - Min: " + A.A.df.format(t_min) +
+                                                                ", Avg: " + A.A.df.format(t_avg) +
+                                                                ", Max: " + A.A.df.format(t_max) +
+                                                                ", p50: " + A.A.df.format(p_50) +
+                                                                ", p90: " + A.A.df.format(p_90);
                 }
                 txtLog.append("" + t_rep + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -923,8 +922,9 @@ public class WO extends javax.swing.JInternalFrame {
             Report(false);
             String MSG = "WO_" + env + " Automation report - " + Report_Date + 
             "\r\n Machine: " + WsID + " OS: " + WsOS + ", User: *" + UserID + "*\r\n" +
-            "Browser: *" + cmbBrow.getSelectedItem().toString() + "*, Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +        
+            "Browser: *" + cmbBrow.getSelectedItem().toString() + "*" + "\r\n" +        
             "Scope: " + SCOPE + "\r\n" +
+            "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
             "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w;
 
             txtLog.append(Func.Send_File_with_Message_to_Slack(Report_File, "wo_automation", MSG + "\r\n"));
@@ -1752,7 +1752,7 @@ public class WO extends javax.swing.JInternalFrame {
     public static String PROMO; 
     public static String New_ID = "";
     
-
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;

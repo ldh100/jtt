@@ -1961,6 +1961,10 @@ public class An_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));     
     }     
     protected void Set_Mobile_Package_Name(){
+        if (app.startsWith("Chrome")) {
+            appPackage = "com.android.chrome";
+            appActivity = "N/A";
+        }
         if ("Boost".equals(app)) {
             appPackage = "com.compass_canada.boost";
             appActivity = "io.compassdigital.ca.base.patron.splash.SplashActivity";
@@ -2729,8 +2733,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         HtmlReport.setReportUsesManualConfiguration(true); // DEBUG - steps duration time incorrect
         
         HtmlReporter.config().setDocumentTitle("JTT Mobile Automation Report");
-        HtmlReporter.config().enableTimeline(false);
-        HtmlReporter.config().setTheme(Theme.DARK);               
+        HtmlReporter.config().setTheme(Theme.STANDARD);               
     }    
     protected void Log_Html_Result(String RES, String Test_Description, boolean Capture_Screenshot, ExtentTest Test) throws IOException  {
         switch (RES) {
@@ -2744,12 +2747,6 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 Test.log(Status.FAIL, MarkupHelper.createLabel(Test_Description, ExtentColor.RED));
                 if (Capture_Screenshot) {
                     Test.log(Status.FAIL, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
-                }                
-                break;
-            case "FATAL":
-                Test.log(Status.FATAL, MarkupHelper.createLabel(Test_Description, ExtentColor.PURPLE));
-                if (Capture_Screenshot) {
-                    Test.log(Status.FATAL, "Screenshot - click to open >  ", MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshot()).build());
                 }                
                 break;
             case "SKIP":
@@ -2951,7 +2948,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             if(BR.FAIL){
                 // FATAL - cannot procced
-                Log_Html_Result("FATAL", "Runner: " + Bolter_ID + "/" + Bolter_PW, true, ParentTest.createNode("Login Failed, cannot proceed"));
+                Log_Html_Result("FAIL", "Runner: " + Bolter_ID + "/" + Bolter_PW, true, ParentTest.createNode("Login Failed, cannot proceed"));
                 return;
             }
         }        
@@ -3057,13 +3054,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     p_50 = Func.p50(am0) / (double)1000;
                     p_90 = Func.p90(am0) / (double)1000;
                     
-                    DecimalFormat df = new DecimalFormat("#.##");
                     t_rep += "= Total Calls: " + t_calls +
-                            ", Response Times (sec) - Min: " + df.format(t_min) +
-                            ", Avg: " + df.format(t_avg) +
-                            ", Max: " + df.format(t_max) +
-                            ", p50: " + df.format(p_50) +
-                            ", p90: " + df.format(p_90);
+                            ", Response Times (sec) - Min: " + A.A.df.format(t_min) +
+                            ", Avg: " + A.A.df.format(t_avg) +
+                            ", Max: " + A.A.df.format(t_max) +
+                            ", p50: " + A.A.df.format(p_50) +
+                            ", p90: " + A.A.df.format(p_90);
                 }
                 Current_Log_Update(GUI, t_rep + "\r\n");
             }
@@ -3087,9 +3083,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
             Report(false);
             String MSG = "Android_" + app + "_" + env + " Excel Automation report - " + Report_Date +
                     "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
-                    "Device: " + device + " > ID: " + devID + "\r\n" +
-                    "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +
+                    "Device: " + device + " > ID: " + devID + "\r\n" +      
                     "Scope: " + SCOPE + "\r\n" +
+                    "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
                     "Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
             
             Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Report_File, Slack_Channel, MSG));
@@ -3098,7 +3094,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 ef.delete();
             }  
             String HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Click to Open";
-            String HTML_Path = HtmlReporter.getFilePath();
+            String HTML_Path = HtmlReporter.getFile().getAbsolutePath();
             if(Zip_Report){
                 String Origin_HTML = HTML_Path;
                 HTML_Path = A.Func.Zip_File(HTML_Path);
@@ -4212,13 +4208,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
 
             t = (String) clipboard.getData(DataFlavor.stringFlavor);
             _p++; 
-            EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
-            EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
@@ -4267,13 +4263,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 ae.sendKeys(Keys.chord(Keys.COMMAND, "v")); //paste                
             }               
             _p++; 
-            EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + " > " + VAL + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + t + " > " + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
-            EX += _t + "\t" + NAME + "\t" + BY + " " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
@@ -5171,7 +5167,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     } 
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="GUI Variables Declaration">
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;

@@ -252,6 +252,8 @@ public class Swagger extends javax.swing.JInternalFrame {
     private String BaseAPI;
     private String TKN;
     private String env;
+    
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;
