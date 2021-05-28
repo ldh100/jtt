@@ -763,6 +763,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     protected ExtentReports HtmlReport;
     protected ExtentTest ParentTest;
     
+    protected String BROWSER = "";
     protected String url = "";
     protected String env = "";
     private SwingWorker BW1; 
@@ -802,6 +803,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     private String Report_File;
     private Duration DD;
     
+    private String SQL = ""; 
     private String Ver = "";
     private String TZone;      
     private String Summary;
@@ -829,9 +831,19 @@ public class DL_GUI extends javax.swing.JInternalFrame {
  
     private boolean CONFIG = false;
     private String C = "";
-
-    private String SQL = ""; 
+    
     private String SCOPE;
+    private boolean _Invalid_login = false;
+    private boolean _Headless = false;
+    private boolean _Metrics_selection = false;
+    private boolean _Metric_data = false;
+    private boolean _Filters = false;
+    private boolean _Drilldown = false;
+    private boolean _Insights = false;
+    private boolean _Password = false;
+    private boolean _All_data = false;
+    private boolean _Logout = false;
+    private boolean _Users = false;
     
     protected String DL_UserID = "";    
     protected String DL_UserPW = "";
@@ -1184,6 +1196,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         try{       
             for (String l : lines) {
                 value = l.substring(l.indexOf(" ")).trim();
+                if(l.contains("Browser: ")) cmbBrow.setSelectedItem(value);
                 if(l.contains("env: ")) env = value;
                 if(l.contains("url: ")) url = value;
                 if(l.contains("SlackCh: ")) txtSlackCh.setText(value);
@@ -1205,8 +1218,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_metrics_selection: ")) _metrics_selection.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_metric_data: ")) _metric_data.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_filters: ")) _filters.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_Drilldown: ")) _drilldown.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_Insights: ")) _insights.setSelected(Boolean.parseBoolean(value)); 
+                if(l.contains("_drilldown: ")) _drilldown.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_insights: ")) _insights.setSelected(Boolean.parseBoolean(value)); 
                 if(l.contains("_password: ")) _password.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_all_data: ")) _all_data.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_logout: ")) _logout.setSelected(Boolean.parseBoolean(value));
@@ -1234,6 +1247,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 _B = DV_D_RANGES.getValueAt(DV_D_RANGES.getSelectedRow(), 0).toString();
             }
             C = "";
+            C += "Browser: " + cmbBrow.getSelectedItem().toString() + "\r\n";
             C += "env: " + env + "\r\n";
             C += "url: " + url + "\r\n";
             
@@ -1254,8 +1268,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             C += "_metrics_selection: " + _metrics_selection.isSelected() + "\r\n";
             C += "_metric_data: " + _metric_data.isSelected() + "\r\n";
             C += "_filters: " + _filters.isSelected() + "\r\n";
-            C += "_Drilldown: " + _drilldown.isSelected() + "\r\n";
-            C += "_Insights: " + _insights.isSelected() + "\r\n";
+            C += "_drilldown: " + _drilldown.isSelected() + "\r\n";
+            C += "_insights: " + _insights.isSelected() + "\r\n";
             C += "_password: " + _password.isSelected() + "\r\n";         
             C += "_all_data: " + _all_data.isSelected() + "\r\n";
  
@@ -1468,6 +1482,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
             LoadTimeOut = (double)nWaitLoad.getValue() *1000;
+            
+            BROWSER = cmbBrow.getSelectedItem().toString();
             EX = "";
             F = "";
             t_calls = 0;
@@ -1568,32 +1584,35 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         try{       
             for (String l : lines) {
                 value = l.substring(l.indexOf(" ")).trim();
+                if(l.contains("Browser: ")) BROWSER = value;
                 if(l.contains("env: ")) env = value;
                 if(l.contains("url: ")) url = value;
                 if(l.contains("SlackCh: ")) Slack_Channel = value;
-                if(l.contains("_slack: ")) _Slack = Boolean.parseBoolean(value);                
-                if(l.contains("_headless: ")) _headless.setSelected(Boolean.parseBoolean(value));
+
                 
                 if(l.contains("METRIC: ")) METRIC = value;
                 if(l.contains("DATE_RANGE: ")) DATE_RANGE = value;
 
-                if(l.contains("txtAdmin_ID: ")) txtAdmin_ID.setText(value);
-                if(l.contains("txtAdmin_PW: ")) txtAdmin_PW.setText(value);
-                if(l.contains("_invalid_login: ")) _invalid_login.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("txtAdmin_ID: ")) DL_UserID = value;
+                if(l.contains("txtAdmin_PW: ")) DL_UserPW = value;
                 
+               
                 if(l.contains("nWaitElement: ")) nWaitElement.setValue(Double.parseDouble(value));
                 if(l.contains("nShowPage: ")) nShowPage.setValue(Double.parseDouble(value)); 
                 if(l.contains("nWaitLoad: ")) nWaitLoad.setValue(Double.parseDouble(value)); 
 
-                if(l.contains("_metrics_selection: ")) _metrics_selection.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_metric_data: ")) _metric_data.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_filters: ")) _filters.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_Drilldown: ")) _drilldown.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_Insights: ")) _insights.setSelected(Boolean.parseBoolean(value)); 
-                if(l.contains("_password: ")) _password.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_all_data: ")) _all_data.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_logout: ")) _logout.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_users: ")) _users.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_slack: ")) _Slack = Boolean.parseBoolean(value);                
+                if(l.contains("_invalid_login: ")) _Invalid_login = Boolean.parseBoolean(value);
+                if(l.contains("_headless: ")) _Headless = Boolean.parseBoolean(value);
+                if(l.contains("_metrics_selection: ")) _Metrics_selection = Boolean.parseBoolean(value);
+                if(l.contains("_metric_data: ")) _Metric_data = Boolean.parseBoolean(value);
+                if(l.contains("_filters: ")) _Filters = Boolean.parseBoolean(value);
+                if(l.contains("_drilldown: ")) _Drilldown = Boolean.parseBoolean(value);
+                if(l.contains("_insights: ")) _Insights = Boolean.parseBoolean(value);
+                if(l.contains("_password: ")) _Password = Boolean.parseBoolean(value);
+                if(l.contains("_all_data: ")) _All_data = Boolean.parseBoolean(value);
+                if(l.contains("_logout: ")) _Logout = Boolean.parseBoolean(value);
+                if(l.contains("_users: ")) _Users = Boolean.parseBoolean(value);
             }             
             CONFIG = true;
             Current_Log_Update(true, "= JOB_Load_CONFIG > OK" + "\r\n");
@@ -1693,7 +1712,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 System.setProperty("webdriver.gecko.driver", A.A.CWD + "/geckodriver");
                 System.setProperty("webdriver.safari.driver", A.A.CWD + "/safaridriver");
             }
-            switch (cmbBrow.getSelectedItem().toString()) {
+            switch (BROWSER) {
                 case "Chrome":
                         ChromeOptions chrome_op = new ChromeOptions();
                         //chrome_op.addExtensions(new File("/path/to/extension.crx"));
