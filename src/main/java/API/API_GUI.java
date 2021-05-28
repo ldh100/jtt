@@ -27,6 +27,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
@@ -55,6 +56,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -592,6 +594,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
     private String Mobile_PW = "";
     private String AP3_ID = "";
     private String AP3_PW = "";
+    private String Runner_ID = "";
+    private String Runner_PW = "";
     
     private String HTML_Report_Path = "";
     private String Report_Date = "";
@@ -618,6 +622,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
     private String AP3_User_TKN = "";
     private String Mobile_User_ID = "";
     private String Mobile_User_TKN = "";
+    private String Runner_User_ID = "";
+    private String Runner_User_TKN = "";    
     
     private final Stopwatch sw1 = Stopwatch.createUnstarted();
     private final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
@@ -2549,6 +2555,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("Mobile_PW: ")) Mobile_PW = value; 
                 if(l.contains("AP3_ID: ")) AP3_ID = value; 
                 if(l.contains("AP3_PW: ")) AP3_PW = value;  
+                if(l.contains("Runner_ID: ")) Runner_ID = value; 
+                if(l.contains("Runner_PW: ")) Runner_PW = value; 
             }
             CONFIG = true;
             switch (env) {
@@ -2939,6 +2947,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
         AP3_User_TKN = ""; 
         Mobile_User_ID = "";
         Mobile_User_TKN = "";
+        Runner_User_ID = "";
+        Runner_User_TKN = "";
 
         //<editor-fold defaultstate="collapsed" desc="User">
         ParentTest = HtmlReport.createTest("User");            
@@ -3041,30 +3051,30 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         //</editor-fold>
         
+        //<editor-fold defaultstate="collapsed" desc="config">
+        ParentTest = HtmlReport.createTest("Config");              
+        Auth = "Bearer " + AP3_User_TKN;   // =============== Config(s) ========================================
+//        JOB_Api_Call("Config > /'AppID' GET", "GET", BaseAPI + "/config/" + AppID, Auth, "", ParentTest, "no_jira");
+//        JOB_Api_Call("Public Config > /'AppID' GET", "GET", BaseAPI + "/config/public/" + AppID, "", "", ParentTest, "no_jira");
+        
+        JOB_Api_Call("Config > /'SiteID' GET", "GET", BaseAPI + "/config/" + SiteID, Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Public Config > /'SiteID' GET", "GET", BaseAPI + "/config/public/" + SiteID, "", "", ParentTest, "no_jira");
+                
+//        JOB_Api_Call("Config > /'UnitID' GET", "GET", BaseAPI + "/config/" + UnitID, Auth, "", ParentTest, "no_jira");
+//        JOB_Api_Call("Public Config > /'UnitID' GET", "GET", BaseAPI + "/config/public/" + UnitID, "", "", ParentTest, "no_jira");
+         
+        JOB_Api_Call("Config > /'BrandID' GET", "GET", BaseAPI + "/config/" + BrandID, Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Public Config > /'BrandID' GET", "GET", BaseAPI + "/config/public/" + BrandID, "", "", ParentTest, "no_jira");
+
+        //</editor-fold>          
+
         //<editor-fold defaultstate="collapsed" desc="promos">  
         ParentTest = HtmlReport.createTest("Promo"); 
         Auth = "Bearer " + AP3_User_TKN;  // ===============  AP3 Promo ===========================
         JOB_Api_Call("Promo > /'CompanyID' GET", "GET", BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID, Auth, "", ParentTest, "no_jira");
 
         //</editor-fold>
-
-        //<editor-fold defaultstate="collapsed" desc="config">
-        ParentTest = HtmlReport.createTest("Config");              
-        Auth = "Bearer " + AP3_User_TKN;   // =============== Config(s) ========================================
-        JOB_Api_Call("Config > /'AppID' GET", "GET", BaseAPI + "/config/" + AppID, Auth, "", ParentTest, "no_jira");
-        JOB_Api_Call("Public Config > /'AppID' GET", "GET", BaseAPI + "/config/public/" + AppID, "", "", ParentTest, "no_jira");
-        
-        JOB_Api_Call("Config > /'SiteID' GET", "GET", BaseAPI + "/config/" + SiteID, Auth, "", ParentTest, "no_jira");
-        JOB_Api_Call("Public Config > /'SiteID' GET", "GET", BaseAPI + "/config/public/" + SiteID, "", "", ParentTest, "no_jira");
-                
-        JOB_Api_Call("Config > /'UnitID' GET", "GET", BaseAPI + "/config/" + UnitID, Auth, "", ParentTest, "no_jira");
-        JOB_Api_Call("Public Config > /'UnitID' GET", "GET", BaseAPI + "/config/public/" + UnitID, "", "", ParentTest, "no_jira");
-         
-        JOB_Api_Call("Config > /'BrandID' GET", "GET", BaseAPI + "/config/" + BrandID, Auth, "", ParentTest, "no_jira");
-        JOB_Api_Call("Public Config > /'BrandID' GET", "GET", BaseAPI + "/config/public/" + BrandID, "", "", ParentTest, "no_jira");
-
-        //</editor-fold>          
-       
+      
         //<editor-fold defaultstate="collapsed" desc="calendar">           
         ParentTest = HtmlReport.createTest("Calendar");
         Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Company/Global Menus ===========================
@@ -3086,21 +3096,32 @@ public class API_GUI extends javax.swing.JInternalFrame {
         //<editor-fold defaultstate="collapsed" desc="Sales Reporting EOD">        
         ParentTest = HtmlReport.createTest("Sales Reporting EOD");     
         Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Sales Reporting EOD ===========================
-        JOB_Api_Call("Sales Reporting EOD > /'SiteID' GET", "GET", BaseAPI + "/report/eod/group/" + SiteID, Auth, "", ParentTest, "no_jira");
-        //</editor-fold>        
-        
-        
-        //<editor-fold defaultstate="collapsed" desc="announcement">            
+        JOB_Api_Call("Sales EOD Report - Default > /'SiteID' GET", "GET", BaseAPI + "/report/eod/group/" + SiteID, Auth, "", ParentTest, "no_jira");
+        String From = ""; 
+        Date Yesterday = new DateTime(new Date()).minusDays(1).toDate();
+        From = new SimpleDateFormat("yyyy-MM-dd").format(Yesterday); 
+        String To = From;
+        JOB_Api_Call("Sales EOD Report - Yesterday > /'SiteID' GET", "GET", BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To, Auth, "", ParentTest, "no_jira");
+        if(json != null){
+            boolean XXX = true;
+            //
+        }
+
+    //</editor-fold>        
+               
+        //<editor-fold defaultstate="collapsed" desc="Announcement">            
         ParentTest = HtmlReport.createTest("Announcement");              
         Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Announcement ===========================
         JOB_Api_Call("AP3 Announcement GET", "GET", BaseAPI + "/announcement/resource/", Auth, "", ParentTest, "no_jira");
 
         //</editor-fold>
         
-        //<editor-fold defaultstate="collapsed" desc="Notification / Resent Updates">            
+        //<editor-fold defaultstate="collapsed" desc="Notification">            
         ParentTest = HtmlReport.createTest("AP3 Notification");              
-        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Announcement ===========================
+        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Notification ===========================
+        // "target" >>> "Recipient of the notifications. Can be the whole realm, role or user id"
         JOB_Api_Call("AP3 Notification GET", "GET", BaseAPI + "/notification?realm=cdl&target=admin_panel", Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("'" + app + "' Notification GET", "GET", BaseAPI + "/notification?realm=" + app.toLowerCase() + "&target=cdl", Auth, "", ParentTest, "no_jira");
 
         //</editor-fold>
     }
