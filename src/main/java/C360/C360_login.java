@@ -9,7 +9,7 @@ class C360_login extends C360_GUI{
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
     }
-    protected void run() throws InterruptedException, Exception{  
+    protected void run() throws InterruptedException, Exception {  
         EX += " - " + "\t" + " === Login " + "\t" + " ===== " + "\t" + " == Login  Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
 
         Navigate_to_URL("Navigate to", url, ParentTest, "no_jira"); 

@@ -2,8 +2,8 @@
 package DL;
 
 
-class DL_password extends DL_GUI {
-    protected DL_password(DL_GUI a) {
+class DL_drilldown extends DL_GUI {
+    protected DL_drilldown(DL_GUI a) {
         DL_UserID = a.DL_UserID;
         DL_UserPW = a.DL_UserPW;
         url = a.url;
