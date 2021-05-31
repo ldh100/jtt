@@ -52,7 +52,7 @@ public class Jobs extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         cmbTrigger = new javax.swing.JComboBox<>();
         txtCron = new javax.swing.JFormattedTextField();
-        btnRunCron = new javax.swing.JButton();
+        btnStartCron = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -215,16 +215,16 @@ public class Jobs extends javax.swing.JInternalFrame {
         txtCron.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         getContentPane().add(txtCron, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 84, 172, -1));
 
-        btnRunCron.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        btnRunCron.setForeground(new java.awt.Color(0, 0, 0));
-        btnRunCron.setText(" Run Cron");
-        btnRunCron.setName("btnRun"); // NOI18N
-        btnRunCron.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnStartCron.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        btnStartCron.setForeground(new java.awt.Color(0, 0, 0));
+        btnStartCron.setText("Start Cron");
+        btnStartCron.setName("btnRun"); // NOI18N
+        btnStartCron.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRunCronMouseClicked(evt);
+                btnStartCronMouseClicked(evt);
             }
         });
-        getContentPane().add(btnRunCron, new org.netbeans.lib.awtextra.AbsoluteConstraints(707, 443, 143, 22));
+        getContentPane().add(btnStartCron, new org.netbeans.lib.awtextra.AbsoluteConstraints(707, 443, 143, 22));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -266,12 +266,12 @@ public class Jobs extends javax.swing.JInternalFrame {
         }
         String Job = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
         String config = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 4));
-        Run_Job(Job, "ad-hoc", config);  
+        Run_Selected_Job(Job, config);  
     }//GEN-LAST:event_btnRunMouseClicked
 
-    private void btnRunCronMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunCronMouseClicked
-        RUN_CRON("59 11 * * 1,2,3,4,5");       
-    }//GEN-LAST:event_btnRunCronMouseClicked
+    private void btnStartCronMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStartCronMouseClicked
+        START_CRON();       
+    }//GEN-LAST:event_btnStartCronMouseClicked
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">     
@@ -454,17 +454,17 @@ public class Jobs extends javax.swing.JInternalFrame {
     }      
     // </editor-fold> 
     
-    private void RUN_CRON(String SCH_PATTERN){
+    private void START_CRON(){
+        String SCH_PATTERN = ""; // "59 11 * * 1,2,3,4,5"
         try{
-            Scheduler SCH_1 = new Scheduler();
-            //SCH_PATTERN = "59 11 * * 1,2,3,4,5";
+            Scheduler SCH = new Scheduler();
             SCH_PATTERN = "* * * * *";
             ProcessTask TASK_1 = new ProcessTask("A_TASK");
-            SCH_1.schedule(SCH_PATTERN, () -> {
+            SCH.schedule(SCH_PATTERN, () -> {
                 txtLog.append( "= SCH_1 Another 1 minute ticked away..." + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());  
             });
-            SCH_1.start();   
+            SCH.start();   
             txtLog.append( "= Scheduler SCH_1 started started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());            
         } catch(InvalidPatternException | IllegalStateException ex){
@@ -472,15 +472,14 @@ public class Jobs extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());            
         }
         try{        
-            Scheduler SCH_2 = new Scheduler();
-            //SCH_PATTERN = "59 11 * * 1,2,3,4,5";
+            Scheduler SCH = new Scheduler();
             SCH_PATTERN = "*/2 * * * *";
             ProcessTask TASK_2 = new ProcessTask("A_TASK");
-            SCH_2.schedule(SCH_PATTERN, () -> {
+            SCH.schedule(SCH_PATTERN, () -> {
                 txtLog.append( "= SCH_2 Another 2 minutes ticked away..." + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());  
             });
-            SCH_2.start();
+            SCH.start();
             txtLog.append( "= Scheduler SCH_2 started started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch(InvalidPatternException | IllegalStateException ex){
@@ -488,8 +487,8 @@ public class Jobs extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());            
         }
     }    
-    private void Run_Job(String Job, String r_type, String config){
-        txtLog.append( "= " + Job + " Execution (" + r_type + ") started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
+    private void Run_Selected_Job(String Job, String config){
+        txtLog.append( "= " + Job + ": ad-hoc) Execution  started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         JobName = txtJob_Name.getText();
         
@@ -536,8 +535,8 @@ public class Jobs extends javax.swing.JInternalFrame {
     private javax.swing.JTable DV1;
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;
-    private javax.swing.JButton btnRunCron;
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnStartCron;
     private javax.swing.JComboBox<String> cmbTrigger;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
