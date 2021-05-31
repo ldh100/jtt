@@ -1,8 +1,6 @@
 package DL;
-import java.time.LocalDateTime;
-import java.util.concurrent.TimeUnit;
 
-public class DL_qa_user extends DL_GUI {
+class DL_qa_user extends DL_GUI {
 
     protected DL_qa_user(DL_GUI a) {
         url = a.url;
