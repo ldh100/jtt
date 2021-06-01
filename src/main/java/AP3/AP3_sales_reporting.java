@@ -17,10 +17,6 @@ import java.time.LocalDateTime;
  */
 public class AP3_sales_reporting {
 
-    public static String storeBusinessUnit = "";
-    public static String storeSearchedSite = "";
-    public static String storeSearchedCountry = "";
-    public static String storeNoReportsError = "";
 
     public static void run() throws InterruptedException {
 
