@@ -1,8 +1,4 @@
 package DL;
-
-import org.openqa.selenium.Alert;
-
-
 public class DL_insights extends DL_GUI {
     protected DL_insights(DL_GUI a) {
         DL_UserID = a.DL_UserID;
@@ -26,6 +22,9 @@ public class DL_insights extends DL_GUI {
         if (FAIL) {
             return;
         }
+        Element_By_Path_Click("Click on 'Settings' icon", "xpath", "//button[@class='MuiButtonBase-root MuiIconButton-root']", ParentTest, "no_jira"); 
+        Thread.sleep(2000);
+        Element_By_Path_Click("Click on 'Cancel' button", "xpath", "//span[contains(text(),'Cancel')]/..", ParentTest, "no_jira");
         Wait_For_Element_By_Path_Presence("Wait for Show More Chevron", "xpath", "//*[contains(text(),'Show ')]", ParentTest, "no_jira");
         if (FAIL) {
             return;
