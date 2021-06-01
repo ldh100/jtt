@@ -211,7 +211,6 @@ public class Jobs extends javax.swing.JInternalFrame {
         cmbTrigger.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "cron", "new version", "new githash", "webhook", "N/A" }));
         getContentPane().add(cmbTrigger, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 36, 168, 20));
 
-        txtCron.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtCron.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         getContentPane().add(txtCron, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 84, 172, -1));
 
@@ -455,81 +454,133 @@ public class Jobs extends javax.swing.JInternalFrame {
     // </editor-fold> 
     
     private void START_CRON(){
-        String SCH_PATTERN = ""; // "59 11 * * 1,2,3,4,5"
-        try{
-            Scheduler SCH = new Scheduler();
-            SCH_PATTERN = "* * * * *";
-            ProcessTask TASK_1 = new ProcessTask("A_TASK");
-            SCH.schedule(SCH_PATTERN, () -> {
-                txtLog.append( "= SCH_1 Another 1 minute ticked away..." + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());  
-            });
-            SCH.start();   
-            txtLog.append( "= Scheduler SCH_1 started started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());            
-        } catch(InvalidPatternException | IllegalStateException ex){
-            txtLog.append( "= SCH_1 ERROR > " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());            
+        int Started_Jobs = 0;
+        r_type = "cron";
+        String SCH_PATTERN = ""; // "59 11 * * 1,2,3,4,5" 
+        for(int i = 0; i < DV1.getRowCount(); i++){
+            String Sch_ID = "";
+            SCH_PATTERN = DV1.getValueAt(i, 1).toString();
+            if(!SCH_PATTERN.toLowerCase().contains("no")){
+                Started_Jobs++;
+                try{
+                    JobName = DV1.getValueAt(i, 0).toString();
+                    String CONFIG = DV1.getValueAt(DV1.getSelectedRow(), 4).toString();
+                    Scheduler SCH = new Scheduler();
+                    Sch_ID = SCH.schedule(SCH_PATTERN, () -> {
+                        if(JobName.startsWith("API")){
+                            Job_API(CONFIG);
+                        } else if(JobName.startsWith("AP3")){
+                            Job_AP3(CONFIG);
+                        } else if(JobName.startsWith("DL")){
+                            Job_DL(CONFIG);
+                        } else if(JobName.startsWith("C360")){
+                            Job_C360(CONFIG);
+                        } else if(JobName.startsWith("FW")){
+                            //Job_FW(CONFIG);
+                        } else if(JobName.startsWith("WO")){
+                            //Job_WO(CONFIG);
+                        } else if(JobName.startsWith("Android")){
+                            Job_Android(CONFIG);
+                        } else if(JobName.startsWith("iOS")){
+                            //Job_iOS(config);
+                        }
+                    });
+                    SCH.start();             
+                } catch(InvalidPatternException | IllegalStateException ex){
+                    txtLog.append( "= Scheduler ERROR > " + ex.getMessage() + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());            
+                }                
+            }
         }
-        try{        
-            Scheduler SCH = new Scheduler();
-            SCH_PATTERN = "*/2 * * * *";
-            ProcessTask TASK_2 = new ProcessTask("A_TASK");
-            SCH.schedule(SCH_PATTERN, () -> {
-                txtLog.append( "= SCH_2 Another 2 minutes ticked away..." + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());  
-            });
-            SCH.start();
-            txtLog.append( "= Scheduler SCH_2 started started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        } catch(InvalidPatternException | IllegalStateException ex){
-            txtLog.append( "= SCH_2 ERROR > " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());            
-        }
+        txtLog.append( "= "  + Started_Jobs + " Scheduled jobs Started " + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+
+//        try{        
+//            Scheduler SCH = new Scheduler();
+//            SCH_PATTERN = "*/5 * * * *";
+//            ProcessTask TASK = new ProcessTask("A_TASK");
+//            String Sch_ID = SCH.schedule(SCH_PATTERN, () -> {
+//                txtLog.append( "= SCH_2 Another 5 minutes ticked away..." + "\r\n");
+//                txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+//            });
+//            SCH.start();
+//            txtLog.append( "= Scheduler SCH_2 started started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
+//            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+//        } catch(InvalidPatternException | IllegalStateException ex){
+//            txtLog.append( "= SCH ERROR > " + ex.getMessage() + "\r\n");
+//            txtLog.setCaretPosition(txtLog.getDocument().getLength());            
+//        }
     }    
     private void Run_Selected_Job(String Job, String config){
-        txtLog.append( "= " + Job + ": ad-hoc) Execution  started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
         JobName = txtJob_Name.getText();
-        
-        if(JobName.startsWith("Android")){
-            Mob_Android.An_GUI _Job = new Mob_Android.An_GUI();
-            String RES = _Job.JOB_Run_Auto("ad-hoc", config);
-            txtLog.append("Run_Job: " + "\r\n" + RES.trim() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            if(!RES.contains("OK")){
-                LOG_FAILRE(RES);
-            }
-        }
-        if(JobName.startsWith("C360")){
-            C360.C360_GUI _Job = new C360.C360_GUI();
-            String RES = _Job.JOB_Run_Auto("ad-hoc", config);
-            txtLog.append("Run_Job: " + "\r\n" + RES.trim() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            if(!RES.contains("OK")){
-                LOG_FAILRE(RES);
-            }
-        }
-        if(JobName.startsWith("DL")){
-            DL.DL_GUI _Job = new DL.DL_GUI();
-            String RES = _Job.JOB_Run_Auto("ad-hoc", config);
-            txtLog.append("Run_Job: " + "\r\n" + RES.trim() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            if(!RES.contains("OK")){
-                LOG_FAILRE(RES);
-            }
-        }
+        r_type = "ad-hoc";
         if(JobName.startsWith("API")){
-            API.API_GUI _Job = new API.API_GUI();
-            String RES = _Job.JOB_Run_Auto("ad-hoc", config);
-            txtLog.append("Run_Job: " + "\r\n" + RES.trim() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            if(!RES.contains("OK")){
-                LOG_FAILRE(RES);
-            }
-        }        
+            Job_API(config);
+        } else if(JobName.startsWith("AP3")){
+            Job_AP3(config);        
+        } else if(JobName.startsWith("DL")){
+            Job_DL(config);
+        } else if(JobName.startsWith("C360")){
+            Job_C360(config);
+        } else if(JobName.startsWith("FW")){
+            //Job_FW(config);
+        } else if(JobName.startsWith("WO")){
+            //Job_WO(config);
+        } else if(JobName.startsWith("Android")){
+            Job_Android(config);
+        } else if(JobName.startsWith("iOS")){
+            //Job_iOS(config);
+        }  
+        txtLog.append( "= " + Job + ": (ad-hoc) Execution started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }
-   
+
+    private void Job_Android(String config){
+        Mob_Android.An_GUI _Job = new Mob_Android.An_GUI();
+        String RES = _Job.JOB_Run_Auto(r_type, config);
+        txtLog.append("= Job " + JobName + " > Result: \r\n" + RES.trim() + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        if(!RES.contains("OK")){
+            LOG_FAILRE(RES);
+        }
+    }
+    private void Job_C360(String config){
+        C360.C360_GUI _Job = new C360.C360_GUI();
+        String RES = _Job.JOB_Run_Auto(r_type, config);
+        txtLog.append("= Job " + JobName + " > Result: \r\n" + RES.trim() + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        if(!RES.contains("OK")){
+            LOG_FAILRE(RES);
+        }
+    }
+    private void Job_DL(String config){
+        DL.DL_GUI _Job = new DL.DL_GUI();
+        String RES = _Job.JOB_Run_Auto(r_type, config);
+        txtLog.append("= Job " + JobName + " > Result: \r\n" + RES.trim() + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        if(!RES.contains("OK")){
+            LOG_FAILRE(RES);
+        }
+    }
+    private void Job_AP3(String config){
+        AP3_New.AP3_GUI _Job = new AP3_New.AP3_GUI();
+        String RES = _Job.JOB_Run_Auto(r_type, config);
+        txtLog.append("= Job " + JobName + " > Result: \r\n" + RES.trim() + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        if(!RES.contains("OK")){
+            LOG_FAILRE(RES);
+        }
+    }
+    private void Job_API(String config){
+        API.API_GUI _Job = new API.API_GUI();
+        String RES = _Job.JOB_Run_Auto(r_type, config);
+        txtLog.append("= Job " + JobName + " > Result: \r\n" + RES.trim() + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        if(!RES.contains("OK")){
+            LOG_FAILRE(RES);
+        }
+    }
+
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">">    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
