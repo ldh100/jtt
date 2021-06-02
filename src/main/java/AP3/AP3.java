@@ -1130,7 +1130,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);            
             loadTimeout = new FluentWait(d1).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
 			.pollingEvery(Duration.ofMillis(200))  			
-			.ignoring(NoSuchElementException.class);       // for load > progress
+			.ignoring(NoSuchElementException.class);      
             
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
@@ -2163,7 +2163,10 @@ public class AP3 extends javax.swing.JInternalFrame {
             C += "COUNTRY: " + COUNTRY + "\r\n";
             C += "DH_MENU_ID: " + txtDH_Id.getText() + "\r\n";
             
+            C += "SlackCh: " + "xtt_test"; //txtSlackCh.getText() + "\r\n";
             C += "_slack: " + _slack.isSelected() + "\r\n";
+            C += "_zip_report: " + "true" + "\r\n";
+            
             C += "_headless: " + _headless.isSelected() + "\r\n";  
            
             C += "txtEMail: " + txtADMIN_ID.getText() + "\r\n";

@@ -20,7 +20,7 @@ class AP3_login extends AP3_GUI{
         ParentTest = a.ParentTest;
     }    
     protected void run(boolean users) throws InterruptedException, Exception  {     
-        Navigate_to_URL("Navigate to", url,ParentTest, "no_jira");             
+        Navigate_to_URL("Navigate to", url, ParentTest, "no_jira");             
             if (FAIL) { return;}
         Page_URL("AP3 Login page", ParentTest, "no_jira");             
             if (FAIL) { return;}
