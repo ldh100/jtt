@@ -9,6 +9,7 @@ import static A.A.*;
 import static AP3.AP3.*;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Calendar;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -880,7 +881,39 @@ public class AP3_brand_new {
                     if (FAIL) { return;}   
                     
                 _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for 'Brand/Location' page", "css", "[role='columnheader']", "no_jira");
-                    if (FAIL) { return;}   
+                    if (FAIL) { return;}  
+                    //------- AUT-850
+                    // update menu hours and check that we don't see a new record in the scheduled menu screen
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'Added ')]","no_jira");
+                    if (FAIL) {return;}
+                _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for 'Menu Details' page", "xpath", "//*[contains(text(),'Menu Details')]", "no_jira");
+                    if (FAIL) { return;} 
+                if (d1.findElements(By.xpath("(//div[@class='flex']//div[contains(@class,'is-disabled')])[1]")).size() > 0) {
+                    //click on All day
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Deselect > 'All day' checkbox", "xpath", "(//i[contains(@class,'marked')])[1]", "no_jira");
+                        if (FAIL) { return;} 
+                }             
+                LocalTime lt = LocalTime.now();
+                int hour = lt.getHour();
+                if (hour > 12) {
+                    hour = hour - 12;
+                    if (hour == 11) {
+                        hour = hour - 1;
+                    }
+                }
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Start Time Field'", "css", "[aria-label='Start Time']", "no_jira");
+                    if (FAIL) { return;}
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter a Start Time", "css", "[aria-label='Start Time']", String.valueOf(hour + 1) + "000 A", false,"no_jira");
+                    if (FAIL) { return;}
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'End Time Field'", "css", "[aria-label='End Time']", "no_jira");
+                    if (FAIL) { return;}
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter a End Time", "css", "[aria-label='End Time']", String.valueOf(hour + 1) + "000 P", false,"no_jira");
+                    if (FAIL) { return;}
+                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Save'", "xpath", "//div[contains(text(),'Save')]", "no_jira");
+                    if (FAIL) { return;}
+                _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for 'Brand/Location' page", "css", "[role='columnheader']", "no_jira");
+                    if (FAIL) { return;} 
+                    //------- AUT-850
 //                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Find side_id ", "tagName", "side_id", "side_id","no_jira");
 //                    if (FAIL) { return;}                     
                 _t++; Thread.sleep((long) sleep); TWeb.List_L0("Menu Count after Schedule", "tagName", "tr", "no_jira");             
