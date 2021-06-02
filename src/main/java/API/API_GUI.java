@@ -596,6 +596,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
     private String AP3_PW = "";
     private String Runner_ID = "";
     private String Runner_PW = "";
+    private String New_ID = "";
     
     private String HTML_Report_Path = "";
     private String Report_Date = "";
@@ -2510,6 +2511,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         
         try{
             Current_Log_Update(false, "= Auto Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+            New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
             EX = "";
             t_calls = 0;
             t_min =  0;
@@ -2829,8 +2831,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Log = txtLog.getText();
         }
         LOG_UPDATE(Log); // ========================================================
-        HtmlReporter.config().setReportName("API(s) " + ", Env: " + env + 
-                ", Total Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
+        HtmlReporter.config().setReportName("API(s)" + ", Env: " + env + 
+                ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
                 ". Resp(sec) - Min: " + A.A.df.format(t_min) +
                             ", Avg: " + A.A.df.format(t_avg) +
                             ", Max: " + A.A.df.format(t_max) +
@@ -2889,6 +2891,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Response response =null;
             switch (Method) {
                 case "GET":
+                    if(BODY.equals("Runner")){
+                        request.header("From", "Bolter/1.0");
+                    }
                     response = request.get(EndPoint);
                     break;
                 case "POST":
@@ -2982,6 +2987,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
         Auth = "Bearer " + AP3_User_TKN;
         JOB_Api_Call("AP3 User > /permissions GET", "GET", BaseAPI + "/user/" + AP3_User_ID + "/permissions" + "?nocache=1", Auth, "", ParentTest, "no_jira");
 
+        Auth = "Basic " + Base64.getEncoder().encodeToString((Runner_ID + ":" + Runner_PW).getBytes());
+        JOB_Api_Call("Bolter Runner Site > /user/auth?realm=bolter GET", "GET", BaseAPI + "/user/auth" + "?realm=" + "bolter", Auth, "Runner", ParentTest, "no_jira");
+
+  
 
         //</editor-fold>  
         
@@ -3094,7 +3103,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Sales Reporting EOD">        
-        ParentTest = HtmlReport.createTest("Sales Reporting EOD");     
+        ParentTest = HtmlReport.createTest("Sales Reporting EOD");   
+        
         Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Sales Reporting EOD ===========================
         JOB_Api_Call("Sales EOD Report - Default > /'SiteID' GET", "GET", BaseAPI + "/report/eod/group/" + SiteID, Auth, "", ParentTest, "no_jira");
         String From = ""; 
@@ -3106,8 +3116,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             boolean XXX = true;
             //
         }
-
-    //</editor-fold>        
+        //https://dev.adminpanel.compassdigital.org/#/reports/all/site/Ne9O6BK6vWhgKm7p2K7YuX3Z21Ww07sy28YoXd8WFNmqDgPBXXtlkq0jkA3PtA1Gz1qEkWIgMep?dates=2021-05-20_2021-05-20
+        //</editor-fold>        
                
         //<editor-fold defaultstate="collapsed" desc="Announcement">            
         ParentTest = HtmlReport.createTest("Announcement");              
@@ -3116,14 +3126,22 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         //</editor-fold>
         
-        //<editor-fold defaultstate="collapsed" desc="Notification">            
-        ParentTest = HtmlReport.createTest("AP3 Notification");              
-        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Notification ===========================
-        // "target" >>> "Recipient of the notifications. Can be the whole realm, role or user id"
-        JOB_Api_Call("AP3 Notification GET", "GET", BaseAPI + "/notification?realm=cdl&target=admin_panel", Auth, "", ParentTest, "no_jira");
-        JOB_Api_Call("'" + app + "' Notification GET", "GET", BaseAPI + "/notification?realm=" + app.toLowerCase() + "&target=cdl", Auth, "", ParentTest, "no_jira");
+
+        //<editor-fold defaultstate="collapsed" desc="calendar">           
+        ParentTest = HtmlReport.createTest("Calendar");
+        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Company/Global Menus ===========================
+        JOB_Api_Call("Calendar > /'BrandID' GET", "GET", BaseAPI + "/calendar/" + BrandID, Auth, "", ParentTest, "no_jira");
 
         //</editor-fold>
+    
+        //<editor-fold defaultstate="collapsed" desc="KDS">            
+        ParentTest = HtmlReport.createTest("KDS");              
+        Auth = "Bearer " + AP3_User_TKN;   // =============== "KDS devices for Unit numbers > string separated with commas", ===========================
+        JOB_Api_Call("KDS Devices > ?'unitNumber(s)' GET", "GET", BaseAPI + "/kds/devices?unitNumber=" + "12345,34567,32446673542657", Auth, "", ParentTest, "no_jira");
+        if(json != null){
+            String DEVICES = "Check json"; 
+        }
+        //</editor-fold>   
     }
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">
