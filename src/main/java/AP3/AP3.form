@@ -79,7 +79,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="432" y="184" width="424" height="232"/>
+          <AbsoluteConstraints x="430" y="180" width="424" height="232"/>
         </Constraint>
       </Constraints>
 
@@ -87,7 +87,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                  <EmptySpace min="4" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblSITES8" min="-2" pref="72" max="-2" attributes="0"/>
                       <Component id="txtSector" min="-2" pref="169" max="-2" attributes="0"/>
@@ -126,31 +126,33 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="_group_management" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="_announcements" alignment="0" max="32767" attributes="0"/>
-                              <Component id="_notifications" alignment="1" min="-2" pref="88" max="-2" attributes="0"/>
-                              <Component id="_resent_updates" alignment="1" min="-2" pref="119" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="_images" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="_promo" pref="141" max="32767" attributes="0"/>
+                              <Component id="_notifications" alignment="1" min="-2" pref="88" max="-2" attributes="0"/>
+                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="_announcements" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="_group_management" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="_promo" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="_resent_updates" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="_brand_new" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="_all_data" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="_site_new" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="_site_new" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="_all_data" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="_reschedule_menu" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                  <Component id="_users" alignment="1" min="-2" pref="93" max="-2" attributes="0"/>
-                                  <Component id="_roles" alignment="1" min="-2" pref="131" max="-2" attributes="0"/>
                                   <Component id="_password" alignment="1" min="-2" pref="113" max="-2" attributes="0"/>
                                   <Component id="_logout" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="_users" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="_roles" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -168,46 +170,54 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="_login" linkSize="1" min="-2" pref="14" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          <Component id="_site" linkSize="1" min="-2" pref="14" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          <Component id="_brand" linkSize="1" min="-2" pref="14" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="_orders" linkSize="1" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                              <Component id="_resent_updates" linkSize="1" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="_login" linkSize="1" min="-2" pref="14" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                  <Component id="_site" linkSize="1" min="-2" pref="14" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                  <Component id="_brand" linkSize="1" min="-2" pref="14" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                  <Component id="_orders" linkSize="1" min="-2" pref="14" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Component id="_sales_reporting" linkSize="1" min="-2" pref="14" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                  <Component id="_sales_analytics" min="-2" pref="14" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                  <Component id="_smart_analytics" min="-2" pref="14" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="_resent_updates" linkSize="1" min="-2" pref="14" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                  <Component id="_announcements" linkSize="1" min="-2" pref="14" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                  <Component id="_group_management" linkSize="1" min="-2" pref="14" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                  <Component id="_promo" linkSize="1" min="-2" pref="14" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                  <Component id="_notifications" min="-2" pref="14" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="_images" min="-2" pref="14" max="-2" attributes="0"/>
+                                  <EmptySpace min="96" pref="96" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          <Component id="_announcements" linkSize="1" min="-2" pref="14" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="_group_management" linkSize="1" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                              <Component id="_sales_reporting" linkSize="1" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="_sales_analytics" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                              <Component id="_promo" linkSize="1" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="_notifications" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                              <Component id="_smart_analytics" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="_bulk_apply" min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="_all_data" min="-2" pref="14" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="_site_new" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                              <Component id="_images" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="_site_new" min="-2" pref="14" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                           <Component id="_brand_new" min="-2" pref="14" max="-2" attributes="0"/>
-                          <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                          <Component id="_reschedule_menu" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="_users" min="-2" pref="14" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                           <Component id="_roles" min="-2" pref="14" max="-2" attributes="0"/>
@@ -217,8 +227,6 @@
                           <Component id="_logout" min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                  <Component id="_bulk_apply" min="-2" pref="14" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="_menu_manager" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
@@ -547,6 +555,17 @@
               <Font name="Dialog" size="11" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Images"/>
+            <Property name="horizontalAlignment" type="int" value="11"/>
+            <Property name="horizontalTextPosition" type="int" value="10"/>
+            <Property name="requestFocusEnabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="_reschedule_menu">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Reschedule menu"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>

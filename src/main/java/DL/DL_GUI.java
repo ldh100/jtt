@@ -1251,8 +1251,10 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             C += "env: " + env + "\r\n";
             C += "url: " + url + "\r\n";
             
-            C += "_slack: " + _slack.isSelected() + "\r\n";
             C += "SlackCh: " + txtSlackCh.getText() + "\r\n";
+            C += "_slack: " + _slack.isSelected() + "\r\n";
+            C += "_zip_report: " + "true" + "\r\n";
+            
             C += "_headless: " + _headless.isSelected() + "\r\n";  
            
             C += "METRIC: " + _S + "\r\n";
@@ -1389,7 +1391,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             _update.setString(12, r_type);
             _update.setString(13, A.A.UserID); 
             _update.setString(14, A.A.WsID);
-            _update.setString(15, cmbBrow.getSelectedItem().toString());
+            _update.setString(15, BROWSER);
             _update.setString(16, LOG);
             _update.setString(17, "Scope: " + SCOPE);
             _update.setString(18, EX);
@@ -1457,7 +1459,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             _insert.setString(12, r_type);
             _insert.setString(13, A.A.UserID);
             _insert.setString(14, A.A.WsID);
-            _insert.setString(15, cmbBrow.getSelectedItem().toString());
+            _insert.setString(15, BROWSER);
             _insert.setString(16, "=== Job is running... ===\r\n" + "");
             _insert.setString(17, "Running");
             _insert.setString(18, "None");
@@ -1513,7 +1515,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             SCOPE = "";
             r_type = "manual"; 
             
-            if(_headless.isSelected()) {
+            if(_Headless) {
                 Current_Log_Update(true,"= Headless mode is selected - Browser is hidden" + "\r\n");
                 txtLog.append( "= Please wait for report...\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1587,20 +1589,19 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("Browser: ")) BROWSER = value;
                 if(l.contains("env: ")) env = value;
                 if(l.contains("url: ")) url = value;
-                if(l.contains("SlackCh: ")) Slack_Channel = value;
 
-                
+   
                 if(l.contains("METRIC: ")) METRIC = value;
                 if(l.contains("DATE_RANGE: ")) DATE_RANGE = value;
 
                 if(l.contains("txtAdmin_ID: ")) DL_UserID = value;
                 if(l.contains("txtAdmin_PW: ")) DL_UserPW = value;
-                
-               
-                if(l.contains("nWaitElement: ")) nWaitElement.setValue(Double.parseDouble(value));
-                if(l.contains("nShowPage: ")) nShowPage.setValue(Double.parseDouble(value)); 
-                if(l.contains("nWaitLoad: ")) nWaitLoad.setValue(Double.parseDouble(value)); 
 
+                if(l.contains("nShowPage:")) sleep = Double.parseDouble(value);
+                if(l.contains("nWaitElement:")) WaitForElement = Math.round(Double.parseDouble(value) * 1000);
+                if(l.contains("nWaitLoad:")) LoadTimeOut = Double.parseDouble(value) * 1000;
+
+                if(l.contains("SlackCh: ")) Slack_Channel = value;
                 if(l.contains("_slack: ")) _Slack = Boolean.parseBoolean(value);                
                 if(l.contains("_invalid_login: ")) _Invalid_login = Boolean.parseBoolean(value);
                 if(l.contains("_headless: ")) _Headless = Boolean.parseBoolean(value);
@@ -1634,7 +1635,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         HtmlReport.attachReporter(HtmlReporter);
         
         HtmlReport.setSystemInfo("App Version", "Distiller" + " " + "Version - TBD"); 
-        HtmlReport.setSystemInfo("Browser", cmbBrow.getSelectedItem().toString());        
+        HtmlReport.setSystemInfo("Browser", BROWSER);        
         HtmlReport.setSystemInfo("Machine", A.A.WsID);
         HtmlReport.setSystemInfo("Machine OS", A.A.WsOS);
         HtmlReport.setSystemInfo("Tester ID", A.A.UserID); 
@@ -1724,7 +1725,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             //            chrome_op.addArguments("--disable-extensions");
             //            chrome_op.addArguments("--dns-prefetch-disable");
             //            chrome_op.addArguments("--disable-gpu");
-                        if(_headless.isSelected()){
+                        if(_Headless){
                             chrome_op.addArguments("--headless");
                         }
                         chrome_op.setPageLoadStrategy(PageLoadStrategy.NORMAL);
@@ -1744,7 +1745,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                         edge_op.setCapability("useAutomationExtension", false);
 //                                PageLoadStrategy = PageLoadStrategy.Default,
 //                                UnhandledPromptBehavior = UnhandledPromptBehavior.Dismiss
-                        if(_headless.isSelected()){
+                        if(_Headless){
                             edge_op.setCapability( "headless", true);
                         }
                         
@@ -1826,7 +1827,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
-                EX = "Distiller " + env + ", v" + Ver + ", Browser: " + cmbBrow.getSelectedItem().toString() +
+                EX = "Distiller " + env + ", v" + Ver + ", Browser: " + BROWSER +
                     " - Steps: " + (_p + _f +_w + _i) + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + 
                     ", Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
@@ -1915,7 +1916,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         BW2.execute();  // executes the swingworker on worker thread   
     }
     private void BW1_FAIL_LOG_UPDATE(String Error){
-        Summary = "BW1 - Failed";
+        Summary = "BW1 - Failed: " + Error;
         DD = Duration.between(run_start, Instant.now());
         LOG_UPDATE("- BW1 ERROR: " + Error);
         btnRun.setEnabled(true);
@@ -1936,7 +1937,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 if(!QA_USER.equals(DL_UserID)){  // ======  Clear Cookies and Login with New QA User ===========
                     DL_UserID = QA_USER;                // ======  Use last QA User from S3 for the next in the loop ====
                     EX += " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\r\n";
-                    Clear_Cookies_Restart_Driver(cmbBrow.getSelectedItem().toString(), ParentTest, "no_jira");   
+                    Clear_Cookies_Restart_Driver(BROWSER, ParentTest, "no_jira");   
                     if (!FAIL) { 
                         DL_login BR = new DL.DL_login(DL_GUI.this);
                         BR.run(DL_UserID, DL_UserPW, false); // ======================================
@@ -2113,16 +2114,21 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             Log = txtLog.getText();
         }
         LOG_UPDATE(Log); // ========================================================
-        HtmlReporter.config().setReportName("Distiller " + " v: " + "?" + ", Env: " + env + 
-                ", Summary: Total Steps: " + (_p + _f +_w + _i) + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i +
-                ", Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s") ;
+        HtmlReporter.config().setReportName("Distiller" + ", Env: " + env + 
+                ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
+                ". Resp(sec) - Min: " + A.A.df.format(t_min) +
+                            ", Avg: " + A.A.df.format(t_avg) +
+                            ", Max: " + A.A.df.format(t_max) +
+                            ", p50: " + A.A.df.format(p_50) +
+                            ", p90: " + A.A.df.format(p_90) + 
+                ". Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
         HtmlReport.flush();
         
         if(_Slack && !Slack_Channel.equals("N/A")){
             Report(false);
             String MSG = "Distiller " + env + " Excel Automation report - " + Report_Date +
                     "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
-                    "Browser: *" + cmbBrow.getSelectedItem().toString() + "*" + "\r\n" +        
+                    "Browser: *" + BROWSER + "*" + "\r\n" +        
                     "Scope: " + SCOPE + "\r\n" +
                     "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
                     "Steps: " + (_p + _f +_w + _i) + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
@@ -2195,7 +2201,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             //            chrome_op.addArguments("--disable-extensions");
             //            chrome_op.addArguments("--dns-prefetch-disable");
             //            chrome_op.addArguments("--disable-gpu");
-//                        if(_headless.isSelected()){
+//                        if(_Headless){
 //                            chrome_op.addArguments("--headless");
 //                        }
                         chrome_op.setPageLoadStrategy(PageLoadStrategy.NORMAL);
@@ -2215,7 +2221,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                         edge_op.setCapability("useAutomationExtension", false);
 //                                PageLoadStrategy = PageLoadStrategy.Default,
 //                                UnhandledPromptBehavior = UnhandledPromptBehavior.Dismiss
-//                        if(_headless.isSelected()){
+//                        if(_Headless){
 //                            edge_op.setCapability( "headless", true);
 //                        }
                         

@@ -4,15 +4,13 @@
  * and open the template in the editor.
  */
 package AP3_New;
-import A.TWeb;
 import static A.A.*;
-import static AP3_New.AP3.*;
 /**
  *
  * @author Oleg.Spozito
  */
-class AP3_login extends AP3{
-    protected AP3_login(AP3 a) throws InterruptedException, Exception {
+class AP3_login extends AP3_GUI{
+    protected AP3_login(AP3_GUI a) throws InterruptedException, Exception {
         ADMIN_ID = a.ADMIN_ID;
         ADMIN_PW = a.ADMIN_PW;
         url = a.url;
@@ -22,7 +20,7 @@ class AP3_login extends AP3{
         ParentTest = a.ParentTest;
     }    
     protected void run(boolean users) throws InterruptedException, Exception  {     
-        Navigate_to_URL("Navigate to", url,ParentTest, "no_jira");             
+        Navigate_to_URL("Navigate to", url, ParentTest, "no_jira");             
             if (FAIL) { return;}
         Page_URL("AP3 Login page", ParentTest, "no_jira");             
             if (FAIL) { return;}
@@ -83,7 +81,7 @@ class AP3_login extends AP3{
         List_L0("Drawer Items Count", "css", "[role='listitem']", ParentTest, "no_jira");             
             if (FAIL) { return;}
             for (int i = 0; i < L0.size(); i++) {
-                Element_Attribute("Drawer Items Text", L0.get(i), "textContent", ParentTest, "no_jira");   
+                Element_Attribute("Drawer Item " + (i+1) + " Text", L0.get(i), "textContent", ParentTest, "no_jira");   
                 if (FAIL) { return;}
                 if(i == (L0.size()-1)){
                     Ver = t;

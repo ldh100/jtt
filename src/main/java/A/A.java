@@ -71,7 +71,7 @@ public class A extends javax.swing.JFrame {
         Menu_iOS = new javax.swing.JMenu();
         Menu_C360 = new javax.swing.JMenu();
         Menu_AP3 = new javax.swing.JMenu();
-        MenuWO = new javax.swing.JMenu();
+        Menu_WO = new javax.swing.JMenu();
         Menu_FW = new javax.swing.JMenu();
         Menu_DL = new javax.swing.JMenu();
         MenuStation = new javax.swing.JMenu();
@@ -80,6 +80,7 @@ public class A extends javax.swing.JFrame {
         Menu_JIRA = new javax.swing.JMenu();
         Menu_JOBS = new javax.swing.JMenu();
         MenuReports = new javax.swing.JMenu();
+        Menu_AP3_New = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JTT");
@@ -159,7 +160,7 @@ public class A extends javax.swing.JFrame {
         });
         Menu_AP3_.add(Menu_AP3_DE);
 
-        Menu_AP3_ST.setText(" - Staging (https://staging.adminpanel.compassdigital.org/)");
+        Menu_AP3_ST.setText("- Staging (https://staging.adminpanel.compassdigital.org/)");
         Menu_AP3_ST.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_AP3_ST.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -353,16 +354,16 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_AP3);
 
-        MenuWO.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        MenuWO.setText("WO");
-        MenuWO.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        MenuWO.setName("WO"); // NOI18N
-        MenuWO.addMouseListener(new java.awt.event.MouseAdapter() {
+        Menu_WO.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Menu_WO.setText("WO");
+        Menu_WO.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_WO.setName("WO"); // NOI18N
+        Menu_WO.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MenuWOMouseClicked(evt);
+                Menu_WOMouseClicked(evt);
             }
         });
-        MenuBar.add(MenuWO);
+        MenuBar.add(Menu_WO);
 
         Menu_FW.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_FW.setText("FW");
@@ -452,6 +453,17 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(MenuReports);
 
+        Menu_AP3_New.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Menu_AP3_New.setText("AP3_New");
+        Menu_AP3_New.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_AP3_New.setName("AP3"); // NOI18N
+        Menu_AP3_New.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_AP3_NewMouseClicked(evt);
+            }
+        });
+        MenuBar.add(Menu_AP3_New);
+
         setJMenuBar(MenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -520,9 +532,8 @@ public class A extends javax.swing.JFrame {
         
         Menu_Android.setToolTipText("Android Mobile Automation Manager - in Development");
         Menu_iOS.setToolTipText("iOS Mobile Automation Manager - in Development");
-        MenuWO.setToolTipText("Web Ordering Automation"); 
+        Menu_WO.setToolTipText("Web Ordering Automation"); 
         Menu_AP3.setToolTipText("Ap3 Automation Manager");
-        MenuWO.setToolTipText("Web Ordering Automation"); 
         Menu_FW.setToolTipText("Food Works Automation"); 
         Menu_DL.setToolTipText("Distiller Automation");
         Menu_API.setToolTipText("Configutation / AP3 API(s)"); 
@@ -545,11 +556,11 @@ public class A extends javax.swing.JFrame {
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         MenuStation.setEnabled(true);
     }//GEN-LAST:event_MenuStationMouseClicked
-    private void MenuWOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuWOMouseClicked
-        if(!MenuWO.isEnabled()){
+    private void Menu_WOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_WOMouseClicked
+        if(!Menu_WO.isEnabled()){
             return;
         }
-        MenuWO.setEnabled(false);
+        Menu_WO.setEnabled(false);
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
@@ -559,9 +570,9 @@ public class A extends javax.swing.JFrame {
         }
         DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-        MenuWO.setEnabled(true);
+        Menu_WO.setEnabled(true);
 
-    }//GEN-LAST:event_MenuWOMouseClicked
+    }//GEN-LAST:event_Menu_WOMouseClicked
     private void MenuReportsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuReportsMouseClicked
         if(!MenuReports.isEnabled()){
             return;
@@ -831,6 +842,22 @@ public class A extends javax.swing.JFrame {
             javax.swing.MenuSelectionManager.defaultManager().clearSelectedPath(); //   DEBUG   --- to close menu after click !!!
 //        } 
     }//GEN-LAST:event_Menu_SwaggerMouseClicked
+
+    private void Menu_AP3_NewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_AP3_NewMouseClicked
+        if(Menu_AP3_New.isVisible()){
+            Menu_AP3_New.setVisible(false);
+            MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            try {
+                Open_AP3_New();
+            } catch (PropertyVetoException ex) {
+                // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+            Menu_AP3_New.setVisible(true);
+        }
+    }//GEN-LAST:event_Menu_AP3_NewMouseClicked
     //</editor-fold>
 
     public static void main(String args[]) {
@@ -866,7 +893,7 @@ public class A extends javax.swing.JFrame {
 //                Image i = ii.getImage();// .png
 //                F.setIconImage(i);
 //            }catch(MalformedURLException ex){
-//                java.util.logging.// Logger.getLogger(AP3.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
+//                java.util.logging.// Logger.getLogger(AP3_GUI.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
 //            }
             AF.setLocationRelativeTo(null);
             AF.setVisible(true);
@@ -1025,6 +1052,40 @@ public class A extends javax.swing.JFrame {
         ap3.setSelected(true);
         F_COUNT++;
     }
+    private void Open_AP3_New() throws PropertyVetoException{
+        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+        for (JInternalFrame frame : frames) {
+            if (frame.getName().equals("AP3")) {
+                try {
+                    frame.setSelected(true);
+                    if (frame.isIcon()) {
+                        frame.setIcon(false);
+                    }
+                    frame.setSelected(true);
+                }catch (PropertyVetoException ex) {
+                    // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.requestFocus();
+                frame.toFront();
+                return;
+            }
+        }
+        AP3_New.AP3_GUI ap3 = new AP3_New.AP3_GUI();
+        DesktopPane.add(ap3);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        ap3.setLocation(X*20, Y*20);
+        ap3.show();
+        ap3.setSelected(true);
+        F_COUNT++;
+    }    
+    
     private void Open_API() throws PropertyVetoException{
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
         for (JInternalFrame frame : frames) {
@@ -1472,10 +1533,10 @@ public class A extends javax.swing.JFrame {
     private javax.swing.JMenuBar MenuBar;
     private javax.swing.JMenu MenuReports;
     private javax.swing.JMenu MenuStation;
-    private javax.swing.JMenu MenuWO;
     private javax.swing.JMenu Menu_AP3;
     private javax.swing.JMenu Menu_AP3_;
     private javax.swing.JMenu Menu_AP3_DE;
+    private javax.swing.JMenu Menu_AP3_New;
     private javax.swing.JMenu Menu_AP3_PR;
     private javax.swing.JMenu Menu_AP3_ST;
     private javax.swing.JMenu Menu_API;
@@ -1502,6 +1563,7 @@ public class A extends javax.swing.JFrame {
     private javax.swing.JMenu Menu_Swagger;
     private javax.swing.JMenu Menu_Tools;
     private javax.swing.JMenu Menu_UI_Viewer;
+    private javax.swing.JMenu Menu_WO;
     private javax.swing.JMenu Menu_WO_;
     private javax.swing.JMenu Menu_WO_DE;
     private javax.swing.JMenu Menu_WO_PR;

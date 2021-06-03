@@ -590,12 +590,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // <editor-fold defaultstate="collapsed" desc="Instance Variables Declarations">
-    private String Mobile_ID = "";
-    private String Mobile_PW = "";
-    private String AP3_ID = "";
-    private String AP3_PW = "";
-    private String Runner_ID = "";
-    private String Runner_PW = "";
+    private String MOBILE_ID = "";
+    private String MOBILE_PW = "";
+    private String ADMIN_ID = "";
+    private String ADMIN_PW = "";
+    private String RUNNER_ID = "";
+    private String RUNNER_PW = "";
+    private String New_ID = "";
     
     private String HTML_Report_Path = "";
     private String Report_Date = "";
@@ -2264,10 +2265,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("GL_MENU:")) GL_MENU = value;
                 if(l.contains("SITE:")) SITE = value;
                 if(l.contains("BRAND:")) BRAND = value;
-                if(l.contains("txtMobile_ID:")) txtMobile_ID.setText(value);
-                if(l.contains("txtMobile_PW:")) txtMobile_PW.setText(value);
-                if(l.contains("txtAP3_ID:")) txtAP3_ID.setText(value);
-                if(l.contains("txtAP3_PW:")) txtAP3_PW.setText(value);             
+                if(l.contains("MOBILE_ID:")) txtMobile_ID.setText(value);
+                if(l.contains("MOBILE_PW:")) txtMobile_PW.setText(value);
+                if(l.contains("ADMIN_ID:")) txtAP3_ID.setText(value);
+                if(l.contains("ADMIN_PW:")) txtAP3_PW.setText(value);             
             }             
             CONFIG = true;
             txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
@@ -2300,10 +2301,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
             C += "SITE: " + _S + "\r\n";
             C += "BRAND: " + _B + "\r\n";
             
-            C += "txtMobile_ID: " + txtMobile_ID.getText().trim() + "\r\n";
-            C += "txtMobile_PW: " + txtMobile_PW.getText().trim()  + "\r\n";
-            C += "txtAP3_ID: " + txtAP3_ID.getText()  + "\r\n";
-            C += "txtAP3_PW: " + txtAP3_PW.getText() + "\r\n";            
+            C += "MOBILE_ID: " + txtMobile_ID.getText().trim() + "\r\n";
+            C += "MOBILE_PW: " + txtMobile_PW.getText().trim()  + "\r\n";
+            C += "ADMIN_ID: " + txtAP3_ID.getText()  + "\r\n";
+            C += "ADMIN_PW: " + txtAP3_PW.getText() + "\r\n";            
 
         } catch (Exception ex)  {
             txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
@@ -2510,6 +2511,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         
         try{
             Current_Log_Update(false, "= Auto Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+            New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
             EX = "";
             t_calls = 0;
             t_min =  0;
@@ -2545,18 +2547,21 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("env: ")) env = value;
                 if(l.contains("app: ")) app = value;
                 if(l.contains("url: ")) url = value; 
+                
                 if(l.contains("SlackCh: ")) Slack_Channel = value;
                 if(l.contains("_slack: ")) _Slack = Boolean.parseBoolean(value);
+                if(l.contains("_zip_report: ")) Zip_Report = Boolean.parseBoolean(value);
+                
                 if(l.contains("SECTOR: ")) SECTOR  = value;
                 if(l.contains("GL_MENU: ")) GL_MENU = value;
                 if(l.contains("SITE: ")) SITE = value;
                 if(l.contains("BRAND: ")) BRAND = value;
-                if(l.contains("Mobile_ID: ")) Mobile_ID = value; 
-                if(l.contains("Mobile_PW: ")) Mobile_PW = value; 
-                if(l.contains("AP3_ID: ")) AP3_ID = value; 
-                if(l.contains("AP3_PW: ")) AP3_PW = value;  
-                if(l.contains("Runner_ID: ")) Runner_ID = value; 
-                if(l.contains("Runner_PW: ")) Runner_PW = value; 
+                if(l.contains("MOBILE_ID: ")) MOBILE_ID = value; 
+                if(l.contains("MOBILE_PW: ")) MOBILE_PW = value; 
+                if(l.contains("ADMIN_ID: ")) ADMIN_ID = value; 
+                if(l.contains("ADMIN_PW: ")) ADMIN_PW = value;  
+                if(l.contains("RUNNER_ID: ")) RUNNER_ID = value; 
+                if(l.contains("RUNNER_PW: ")) RUNNER_PW = value; 
             }
             CONFIG = true;
             switch (env) {
@@ -2780,7 +2785,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         BW1.execute();  
     }
     private void BW1_FAIL_LOG_UPDATE(String Error){
-        Summary = "BW1 - Failed";
+        Summary = "BW1 - Failed: " + Error;
         DD = Duration.between(run_start, Instant.now());
         LOG_UPDATE("- BW1 ERROR: " + Error);
     } 
@@ -2829,8 +2834,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Log = txtLog.getText();
         }
         LOG_UPDATE(Log); // ========================================================
-        HtmlReporter.config().setReportName("API(s) " + ", Env: " + env + 
-                ", Total Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
+        HtmlReporter.config().setReportName("API(s)" + ", Env: " + env + 
+                ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
                 ". Resp(sec) - Min: " + A.A.df.format(t_min) +
                             ", Avg: " + A.A.df.format(t_avg) +
                             ", Max: " + A.A.df.format(t_max) +
@@ -2889,6 +2894,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Response response =null;
             switch (Method) {
                 case "GET":
+                    if(BODY.equals("Runner")){
+                        request.header("From", "Bolter/1.0");
+                    }
                     response = request.get(EndPoint);
                     break;
                 case "POST":
@@ -2953,7 +2961,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         //<editor-fold defaultstate="collapsed" desc="User">
         ParentTest = HtmlReport.createTest("User");            
 
-        Auth = "Basic " + Base64.getEncoder().encodeToString((Mobile_ID + ":" + Mobile_PW).getBytes());
+        Auth = "Basic " + Base64.getEncoder().encodeToString((MOBILE_ID + ":" + MOBILE_PW).getBytes());
         Realm = Func.Realm_ID(app, env);
         JOB_Api_Call("Mobile User Authentication GET", "GET", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", ParentTest, "no_jira");
         if(json != null){
@@ -2968,7 +2976,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // - 7 days
         JOB_Api_Call("Mobile User Orders", "GET", BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1, Auth, "", ParentTest, "no_jira");
 
-        Auth = "Basic " + Base64.getEncoder().encodeToString((AP3_ID + ":" + AP3_PW).getBytes());
+        Auth = "Basic " + Base64.getEncoder().encodeToString((ADMIN_ID + ":" + ADMIN_PW).getBytes());
         Realm = Func.Realm_ID("AP3", env);
         JOB_Api_Call("AP3 User Authentication GET", "GET", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", ParentTest, "no_jira");
         if(json != null){
@@ -2982,6 +2990,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
         Auth = "Bearer " + AP3_User_TKN;
         JOB_Api_Call("AP3 User > /permissions GET", "GET", BaseAPI + "/user/" + AP3_User_ID + "/permissions" + "?nocache=1", Auth, "", ParentTest, "no_jira");
 
+        Auth = "Basic " + Base64.getEncoder().encodeToString((RUNNER_ID + ":" + RUNNER_PW).getBytes());
+        JOB_Api_Call("Bolter Runner Site > /user/auth?realm=bolter GET", "GET", BaseAPI + "/user/auth" + "?realm=" + "bolter", Auth, "Runner", ParentTest, "no_jira");
+
+  
 
         //</editor-fold>  
         
@@ -3094,7 +3106,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Sales Reporting EOD">        
-        ParentTest = HtmlReport.createTest("Sales Reporting EOD");     
+        ParentTest = HtmlReport.createTest("Sales Reporting EOD");   
+        
         Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Sales Reporting EOD ===========================
         JOB_Api_Call("Sales EOD Report - Default > /'SiteID' GET", "GET", BaseAPI + "/report/eod/group/" + SiteID, Auth, "", ParentTest, "no_jira");
         String From = ""; 
@@ -3106,8 +3119,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             boolean XXX = true;
             //
         }
-
-    //</editor-fold>        
+        //https://dev.adminpanel.compassdigital.org/#/reports/all/site/Ne9O6BK6vWhgKm7p2K7YuX3Z21Ww07sy28YoXd8WFNmqDgPBXXtlkq0jkA3PtA1Gz1qEkWIgMep?dates=2021-05-20_2021-05-20
+        //</editor-fold>        
                
         //<editor-fold defaultstate="collapsed" desc="Announcement">            
         ParentTest = HtmlReport.createTest("Announcement");              
@@ -3116,14 +3129,22 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         //</editor-fold>
         
-        //<editor-fold defaultstate="collapsed" desc="Notification">            
-        ParentTest = HtmlReport.createTest("AP3 Notification");              
-        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Notification ===========================
-        // "target" >>> "Recipient of the notifications. Can be the whole realm, role or user id"
-        JOB_Api_Call("AP3 Notification GET", "GET", BaseAPI + "/notification?realm=cdl&target=admin_panel", Auth, "", ParentTest, "no_jira");
-        JOB_Api_Call("'" + app + "' Notification GET", "GET", BaseAPI + "/notification?realm=" + app.toLowerCase() + "&target=cdl", Auth, "", ParentTest, "no_jira");
+
+        //<editor-fold defaultstate="collapsed" desc="calendar">           
+        ParentTest = HtmlReport.createTest("Calendar");
+        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Company/Global Menus ===========================
+        JOB_Api_Call("Calendar > /'BrandID' GET", "GET", BaseAPI + "/calendar/" + BrandID, Auth, "", ParentTest, "no_jira");
 
         //</editor-fold>
+    
+        //<editor-fold defaultstate="collapsed" desc="KDS">            
+        ParentTest = HtmlReport.createTest("KDS");              
+        Auth = "Bearer " + AP3_User_TKN;   // =============== "KDS devices for Unit numbers > string separated with commas", ===========================
+        JOB_Api_Call("KDS Devices > ?'unitNumber(s)' GET", "GET", BaseAPI + "/kds/devices?unitNumber=" + "12345,34567,32446673542657", Auth, "", ParentTest, "no_jira");
+        if(json != null){
+            String DEVICES = "Check json"; 
+        }
+        //</editor-fold>   
     }
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">

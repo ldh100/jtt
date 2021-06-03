@@ -2085,7 +2085,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
             C += "nWaitLoad: " + nWaitLoad.getValue() + "\r\n";  
             
-            C += "Slack_Ch: " + "xtt_test" + "\r\n";//TBD + "\r\n"; 
+            C += "SlackCh: " + "xtt_test"; //txtSlackCh.getText() + "\r\n"; 
             C += "_slack: " + _slack.isSelected() + "\r\n";
             C += "_zip_report: " + "true" + "\r\n";
             
@@ -2305,8 +2305,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("txtBolter_Id: ")) Bolter_ID = value;
                 if(l.contains("txtBolter_Pw: ")) Bolter_PW = value;
 
-                if(l.contains("nWaitElement: ")) WaitForElement = Math.round(Double.parseDouble(value)*1000);
-                if(l.contains("nWaitLoad: ")) LoadTimeOut = Math.round(Double.parseDouble(value)*1000);
+                if(l.contains("nWaitElement: ")) WaitForElement = Math.round(Double.parseDouble(value) * 1000);
+                if(l.contains("nWaitLoad: ")) LoadTimeOut = Math.round(Double.parseDouble(value) * 1000);
 
                 if(l.contains("Slack_Ch: ")) Slack_Channel = value;
                 if(l.contains("_slack: ")) _Slack = Boolean.parseBoolean(value);
@@ -2421,6 +2421,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             Bolter_ID = txtBolter_Id.getText();
             Bolter_PW = txtBolter_Pw.getText();
 
+            //Slack_Channel = txt
             _Slack = _slack.isSelected();
 
             _Acc_options = _acc_options.isSelected();
@@ -2855,7 +2856,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         BW1.execute();
     }
     private void BW1_FAIL_LOG_UPDATE(String Error){
-        Summary = "BW1 - Failed";
+        Summary = "BW1 - Failed: " + Error;
         DD = Duration.between(run_start, Instant.now());
         LOG_UPDATE("- BW1 ERROR: " + Error);
         btnRun.setEnabled(true);
@@ -3067,9 +3068,10 @@ public class An_GUI extends javax.swing.JInternalFrame {
             Current_Log_Update(GUI, "= LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
         }
         
+        Current_Log_Update(GUI, "= Android_" + app + "_" + env + ", App v: " + appVersion + ", Device: " + device + " OS v: " + devOS + "\r\n"); 
         Current_Log_Update(GUI, "= " + Summary + "\r\n"); // Summary shown in EX top
         Current_Log_Update(GUI, "= Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
-        Current_Log_Update(GUI, "= Android_" + app + "_" + env + ", App v: " + appVersion + ", Device: " + device + " OS v: " + devOS + "\r\n");
+        Current_Log_Update(GUI, "= Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n");
         
         if(GUI){
             Log = txtLog.getText();
