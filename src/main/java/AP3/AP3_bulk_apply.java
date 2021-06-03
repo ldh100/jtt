@@ -50,10 +50,26 @@ public class AP3_bulk_apply {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Item Set: Soup", "xpath", "//div[contains(text(),'Soup')]", "no_jira");
         if (FAIL) { return;}
+        String MenuID = "";
+        String menuName = "";
+
         if(!env.equals("PR")) {
-        //API call https://api.compassdigital.org/staging/menu/4Wyo37NMD5tpzMvEJMl2FNdZNmL3NzFywWP52ZP8CKQPWlLQy2H4BdpXwaKDc9aq8mO?nocache=true&extended=true&show_unlinked=false
-        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Sides / API )", BaseAPI + "/menu/4Wyo37NMD5tpzMvEJMl2FNdZNmL3NzFywWP52ZP8CKQPWlLQy2H4BdpXwaKDc9aq8mO?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
-        JSONObject json = new JSONObject(API_Response_Body);
+            TWeb.Call_API_Auth("Find 'Sides' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
+            JSONObject json = new JSONObject(API_Response_Body);
+            JSONArray menus = new JSONArray();
+            menus = json.getJSONArray("menus");
+            for (int i = 0; i < menus.length(); i++) {
+                JSONObject menu = menus.getJSONObject(i);
+                if (menu.getString("location_brand").equals(BrandID)) {
+                    JSONObject label = new JSONObject("label");
+                    menuName = label.getString("en");
+                    if (menuName.equals("Sides")) {
+                        MenuID = menu.getString("id");
+                    }  
+                }
+            }
+        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Sides / API )", BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
+        json = new JSONObject(API_Response_Body);
         JSONArray groups = new JSONArray();
         groups = json.getJSONArray("groups");
         JSONObject json2 = groups.getJSONObject(0);
@@ -77,9 +93,23 @@ public class AP3_bulk_apply {
             }
         }
         } else {
+            TWeb.Call_API_Auth("Find 'Sides' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
+            JSONObject json = new JSONObject(API_Response_Body);
+            JSONArray menus = new JSONArray();
+            menus = json.getJSONArray("menus");
+            for (int i = 0; i < menus.length(); i++) {
+                JSONObject menu = menus.getJSONObject(i);
+                if (menu.getString("location_brand").equals(BrandID)) {
+                    JSONObject label = new JSONObject("label");
+                    menuName = label.getString("en");
+                    if (menuName.equals("Sides")) {
+                        MenuID = menu.getString("id");
+                    }  
+                }
+            }
             //api call https://api.compassdigital.org/v1/menu/J4qRgLpO1NH83rk0d5QRiKkM0djlkNSvoQJkY2N6Ce2MyJQq1PSroW9GqqM8cMgzBPq?nocache=true&extended=true&show_unlinked=false
-        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Sides / API )", BaseAPI + "/menu/J4qRgLpO1NH83rk0d5QRiKkM0djlkNSvoQJkY2N6Ce2MyJQq1PSroW9GqqM8cMgzBPq?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
-        JSONObject json = new JSONObject(API_Response_Body);
+        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Sides / API )", BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
+        json = new JSONObject(API_Response_Body);
         JSONArray groups = new JSONArray();
         groups = json.getJSONArray("groups");
         JSONObject json2 = groups.getJSONObject(0);
@@ -133,9 +163,22 @@ public class AP3_bulk_apply {
             if (FAIL) { return;}
         }
         if (!env.equals("PR")) {
-        //API call https://api.compassdigital.org/staging/menu/4Wyo37NMD5tpzMvEJMl2FNdZNmL3NzFywWP52ZP8CKQPWlLQy2H4BdpXwaKDc9aq8mO?nocache=true
-        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Sides / API )", BaseAPI + "/menu/4Wyo37NMD5tpzMvEJMl2FNdZNmL3NzFywWP52ZP8CKQPWlLQy2H4BdpXwaKDc9aq8mO?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
-        JSONObject json = new JSONObject(API_Response_Body);
+            TWeb.Call_API_Auth("Find 'Sides' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
+            JSONObject json = new JSONObject(API_Response_Body);
+            JSONArray menus = new JSONArray();
+            menus = json.getJSONArray("menus");
+            for (int i = 0; i < menus.length(); i++) {
+                JSONObject menu = menus.getJSONObject(i);
+                if (menu.getString("location_brand").equals(BrandID)) {
+                    JSONObject label = new JSONObject("label");
+                    menuName = label.getString("en");
+                    if (menuName.equals("Sides")) {
+                        MenuID = menu.getString("id");
+                    }  
+                }
+            }
+        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Sides / API )", BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
+        json = new JSONObject(API_Response_Body);
         JSONArray groups = new JSONArray();
         groups = json.getJSONArray("groups");
        JSONObject json2 = groups.getJSONObject(0);
@@ -159,9 +202,22 @@ public class AP3_bulk_apply {
             }
         }
         } else {
-                //api call https://api.compassdigital.org/v1/menu/J4qRgLpO1NH83rk0d5QRiKkM0djlkNSvoQJkY2N6Ce2MyJQq1PSroW9GqqM8cMgzBPq?nocache=true&extended=true&show_unlinked=false
-        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Sides / API )", BaseAPI + "/menu/J4qRgLpO1NH83rk0d5QRiKkM0djlkNSvoQJkY2N6Ce2MyJQq1PSroW9GqqM8cMgzBPq?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
-        JSONObject json = new JSONObject(API_Response_Body);
+            TWeb.Call_API_Auth("Find 'Sides' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
+            JSONObject json = new JSONObject(API_Response_Body);
+            JSONArray menus = new JSONArray();
+            menus = json.getJSONArray("menus");
+            for (int i = 0; i < menus.length(); i++) {
+                JSONObject menu = menus.getJSONObject(i);
+                if (menu.getString("location_brand").equals(BrandID)) {
+                    JSONObject label = new JSONObject("label");
+                    menuName = label.getString("en");
+                    if (menuName.equals("Sides")) {
+                        MenuID = menu.getString("id");
+                    }  
+                }
+            }
+        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Sides / API )", BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
+        json = new JSONObject(API_Response_Body);
         JSONArray groups = new JSONArray();
         groups = json.getJSONArray("groups");
         JSONObject json2 = groups.getJSONObject(0);
@@ -345,9 +401,22 @@ public class AP3_bulk_apply {
         if (FAIL) { return;}
         if (secondModVisibility.contains("mdi-eye-off")) {
             if (!env.equals("PR")) {
-                //API call https://api.compassdigital.org/staging/menu/G2WGRdwMygFp93RRYqawiKJX08vL15UoAokKwmaZcQO1lWXPAWTprNA8wWL0sZRlp8m?nocache=true
-                _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/G2WGRdwMygFp93RRYqawiKJX08vL15UoAokKwmaZcQO1lWXPAWTprNA8wWL0sZRlp8m?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
-                JSONObject json = new JSONObject(API_Response_Body);
+                TWeb.Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
+            JSONObject json = new JSONObject(API_Response_Body);
+            JSONArray menus = new JSONArray();
+            menus = json.getJSONArray("menus");
+            for (int i = 0; i < menus.length(); i++) {
+                JSONObject menu = menus.getJSONObject(i);
+                if (menu.getString("location_brand").equals(BrandID)) {
+                    JSONObject label = new JSONObject("label");
+                    menuName = label.getString("en");
+                    if (menuName.equals("Flame Grilled Pitas")) {
+                        MenuID = menu.getString("id");
+                    }  
+                }
+            }
+                _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/"+MenuID+"?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
+                json = new JSONObject(API_Response_Body);
                 JSONArray groups = new JSONArray();
                 groups = json.getJSONArray("groups");
                 JSONObject json2 = groups.getJSONObject(0);
@@ -400,9 +469,22 @@ public class AP3_bulk_apply {
                 if (FAIL) { return;}
                 Thread.sleep(500);
             } else {
-                //API call https://api.compassdigital.org/v1/menu/KBmKZYDqO9f73a8NzloaIXey7861mOi9XqrWeG6khN1Njo5gGPS1ljP8E82MSv5Z149?nocache=true&extended=true&show_unlinked=false
-                _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/KBmKZYDqO9f73a8NzloaIXey7861mOi9XqrWeG6khN1Njo5gGPS1ljP8E82MSv5Z149?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
-                JSONObject json = new JSONObject(API_Response_Body);
+                    TWeb.Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
+            JSONObject json = new JSONObject(API_Response_Body);
+            JSONArray menus = new JSONArray();
+            menus = json.getJSONArray("menus");
+            for (int i = 0; i < menus.length(); i++) {
+                JSONObject menu = menus.getJSONObject(i);
+                if (menu.getString("location_brand").equals(BrandID)) {
+                    JSONObject label = new JSONObject("label");
+                    menuName = label.getString("en");
+                    if (menuName.equals("Flame Grilled Pitas")) {
+                        MenuID = menu.getString("id");
+                    }  
+                }
+            }
+                _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/"+MenuID+"?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
+                json = new JSONObject(API_Response_Body);
                 JSONArray groups = new JSONArray();
                 groups = json.getJSONArray("groups");
                 JSONObject json2 = groups.getJSONObject(0);
@@ -457,9 +539,22 @@ public class AP3_bulk_apply {
             }
         } else {
             if (!env.equals("PR")) {
-                //API call https://api.compassdigital.org/staging/menu/G2WGRdwMygFp93RRYqawiKJX08vL15UoAokKwmaZcQO1lWXPAWTprNA8wWL0sZRlp8m?nocache=true
-                _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/G2WGRdwMygFp93RRYqawiKJX08vL15UoAokKwmaZcQO1lWXPAWTprNA8wWL0sZRlp8m?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
-                JSONObject json = new JSONObject(API_Response_Body);
+                     TWeb.Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
+            JSONObject json = new JSONObject(API_Response_Body);
+            JSONArray menus = new JSONArray();
+            menus = json.getJSONArray("menus");
+            for (int i = 0; i < menus.length(); i++) {
+                JSONObject menu = menus.getJSONObject(i);
+                if (menu.getString("location_brand").equals(BrandID)) {
+                    JSONObject label = new JSONObject("label");
+                    menuName = label.getString("en");
+                    if (menuName.equals("Flame Grilled Pitas")) {
+                        MenuID = menu.getString("id");
+                    }  
+                }
+            }
+                _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/"+MenuID+"?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
+                json = new JSONObject(API_Response_Body);
                 JSONArray groups = new JSONArray();
                 groups = json.getJSONArray("groups");
                 JSONObject json2 = groups.getJSONObject(0);
@@ -509,9 +604,22 @@ public class AP3_bulk_apply {
                 if (FAIL) { return;}
                 Thread.sleep(500);
             } else {
-                //API call https://api.compassdigital.org/v1/menu/KBmKZYDqO9f73a8NzloaIXey7861mOi9XqrWeG6khN1Njo5gGPS1ljP8E82MSv5Z149?nocache=true&extended=true&show_unlinked=false
-                _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/KBmKZYDqO9f73a8NzloaIXey7861mOi9XqrWeG6khN1Njo5gGPS1ljP8E82MSv5Z149?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
-                JSONObject json = new JSONObject(API_Response_Body);
+                     TWeb.Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
+            JSONObject json = new JSONObject(API_Response_Body);
+            JSONArray menus = new JSONArray();
+            menus = json.getJSONArray("menus");
+            for (int i = 0; i < menus.length(); i++) {
+                JSONObject menu = menus.getJSONObject(i);
+                if (menu.getString("location_brand").equals(BrandID)) {
+                    JSONObject label = new JSONObject("label");
+                    menuName = label.getString("en");
+                    if (menuName.equals("Flame Grilled Pitas")) {
+                        MenuID = menu.getString("id");
+                    }  
+                }
+            }
+                _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/"+MenuID+"?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
+                json = new JSONObject(API_Response_Body);
                 JSONArray groups = new JSONArray();
                 groups = json.getJSONArray("groups");
                 JSONObject json2 = groups.getJSONObject(0);
@@ -595,9 +703,22 @@ public class AP3_bulk_apply {
         if (FAIL) { return;}
         //get First Item Price (FIP)
         String FIP = getAttributeOfElementByXpath("(//table[contains(@class,'v-table')]//tbody/tr)[1]//td[5]", "innerHTML");
-        //API call https://api.compassdigital.org/staging/menu/lpmAZO8Ga6Umjaz85ELNI93MkmW1B7TezGGJ1r5MiX0ZDgJMdySk7ZYM9lwqI2a4Zy0?nocache=true&extended=true&show_unlinked=false
-        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/lpmAZO8Ga6Umjaz85ELNI93MkmW1B7TezGGJ1r5MiX0ZDgJMdySk7ZYM9lwqI2a4Zy0?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
-        JSONObject json = new JSONObject(API_Response_Body);
+             TWeb.Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
+            JSONObject json = new JSONObject(API_Response_Body);
+            JSONArray menus = new JSONArray();
+            menus = json.getJSONArray("menus");
+            for (int i = 0; i < menus.length(); i++) {
+                JSONObject menu = menus.getJSONObject(i);
+                if (menu.getString("location_brand").equals(BrandID)) {
+                    JSONObject label = new JSONObject("label");
+                    menuName = label.getString("en");
+                    if (menuName.equals("Flame Grilled Pitas")) {
+                        MenuID = menu.getString("id");
+                    }  
+                }
+            }
+        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/"+MenuID+"?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
+        json = new JSONObject(API_Response_Body);
         JSONArray groups = new JSONArray();
         groups = json.getJSONArray("groups");
         JSONObject json2 = groups.getJSONObject(0);
@@ -792,9 +913,22 @@ public class AP3_bulk_apply {
         Thread.sleep(500);
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         
-        if (!env.equals("PR")) {
-            //API call https://api.compassdigital.org/staging/menu/lpmAZO8Ga6Umjaz85ELNI93MkmW1B7TezGGJ1r5MiX0ZDgJMdySk7ZYM9lwqI2a4Zy0?nocache=true&extended=true&show_unlinked=false
-        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/lpmAZO8Ga6Umjaz85ELNI93MkmW1B7TezGGJ1r5MiX0ZDgJMdySk7ZYM9lwqI2a4Zy0?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
+
+            TWeb.Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
+            json = new JSONObject(API_Response_Body);
+            menus = new JSONArray();
+            menus = json.getJSONArray("menus");
+            for (int i = 0; i < menus.length(); i++) {
+                JSONObject menu = menus.getJSONObject(i);
+                if (menu.getString("location_brand").equals(BrandID)) {
+                    JSONObject label = new JSONObject("label");
+                    menuName = label.getString("en");
+                    if (menuName.equals("Flame Grilled Pitas")) {
+                        MenuID = menu.getString("id");
+                    }  
+                }
+            }
+        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/"+MenuID+"?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
         json = new JSONObject(API_Response_Body);
         groups = new JSONArray();
         groups = json.getJSONArray("groups");
@@ -830,46 +964,7 @@ public class AP3_bulk_apply {
                 _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
         }
-        } else {
-            //API call https://api.compassdigital.org/v1/menu/6evoORLMl7t6rGDWkZKgTrz9jeY8Y4Ce7ZX1oW2WS82kwdaNJLi892Zg27M2Uzq5YkJ?extended=true&show_unlinked=false
-        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/6evoORLMl7t6rGDWkZKgTrz9jeY8Y4Ce7ZX1oW2WS82kwdaNJLi892Zg27M2Uzq5YkJ?extended=true&show_unlinked=false", true,"no_jira");
-        json = new JSONObject(API_Response_Body);
-        groups = new JSONArray();
-        groups = json.getJSONArray("groups");
-        json2 = groups.getJSONObject(0);
-        items = new JSONArray();
-        items = json2.getJSONArray("items");
-        for (int i = 0; i < items.length(); i++) {
-            JSONObject item = items.getJSONObject(i);           
-            if (item.getJSONObject("is").getBoolean("disabled")) {
-                _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"disabled\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            } else {
-                _t++;
-                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"disabled\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            }
-            if (item.isNull("plu")) {
-                _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "has No PLU" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            } else {
-                _t++;
-                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "has No PLU" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            }
-            JSONArray options = new JSONArray();
-            options = item.getJSONArray("options");
-            JSONObject option = options.getJSONObject(0);
-            JSONArray option_items = new JSONArray();
-            option_items = option.getJSONArray("items");
-            if (option_items.length() == 3) {
-                _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            } else {
-                _t++;
-                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            }
-        }
-        }
-             
+                      
         // <editor-fold defaultstate="collapsed" desc="Check Local Menu After Global Changes">  
         EX += " - " + "\t" + " === " + "\t" + " ===== Check Local Menu After Global Changes" + "\t" + " == Check Local Menu After Global Changes >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         _t++; Thread.sleep((long) sleep); TWeb.Open_Switch_to_2nd_Tab("Navigate to Local Menu", url + "#/menu/sector/"+SectorID+"/company/"+CompanyID+"/brands/"+BrandID, "no_jira");
