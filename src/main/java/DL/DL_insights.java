@@ -18,12 +18,12 @@ public class DL_insights extends DL_GUI {
         Thread.sleep(500);
         Find_Text("Find 'Insights' label", "Insights", true, ParentTest, "no_jira");
         Move_to_Element_By_Path("User is able to find 'Insights' label", "xpath", "//p[contains(text(),'Insights')]", ParentTest, "no_jira");
-        List_L0("Get Insights tab Count", "xpath", "//span[contains(@class, 'MuiTab-wrapper')]", ParentTest, "no_jira");
-        if (FAIL) {
-            return;
-        }
+        List_L0("Get the tabs Count", "xpath", "//span[contains(@class, 'MuiTab-wrapper')]", ParentTest, "no_jira");
+        for (int j = 0; j < L0.size(); j++) {
+             Element_Text("Tabs name", L0.get(j), ParentTest, "no_jira");
+             }
         Element_By_Path_Click("Click on 'Settings' icon", "xpath", "//button[@class='MuiButtonBase-root MuiIconButton-root']", ParentTest, "no_jira"); 
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         Element_By_Path_Click("Click on 'Cancel' button", "xpath", "//span[contains(text(),'Cancel')]/..", ParentTest, "no_jira");
         Wait_For_Element_By_Path_Presence("Wait for Show More Chevron", "xpath", "//*[contains(text(),'Show ')]", ParentTest, "no_jira");
         if (FAIL) {
