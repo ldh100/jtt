@@ -3,7 +3,6 @@ package Jobs;
 import A.Func;
 import static A.A.*;
 import it.sauronsoftware.cron4j.InvalidPatternException;
-import it.sauronsoftware.cron4j.ProcessTask;
 import it.sauronsoftware.cron4j.Scheduler;
 import java.awt.Cursor;
 import java.sql.Connection;
@@ -164,11 +163,10 @@ public class Jobs extends javax.swing.JInternalFrame {
 
         txtConfig.setColumns(20);
         txtConfig.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        txtConfig.setRows(5);
+        txtConfig.setRows(100);
         txtConfig.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtConfig.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtConfig.setMinimumSize(new java.awt.Dimension(854, 525));
-        txtConfig.setPreferredSize(new java.awt.Dimension(854, 525));
         jScrollPane2.setViewportView(txtConfig);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 132, 284, 304));
@@ -492,7 +490,7 @@ public class Jobs extends javax.swing.JInternalFrame {
                 }                
             }
         }
-        txtLog.append( "= "  + Started_Jobs + " Scheduled jobs Started " + "\r\n");
+        txtLog.append( "= "  + Started_Jobs + " Scheduled Jobs Started " + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
 //        try{        

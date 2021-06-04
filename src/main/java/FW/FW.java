@@ -1567,7 +1567,10 @@ public class FW extends javax.swing.JInternalFrame {
             C += "env: " + env + "\r\n";
             C += "url: " + url + "\r\n";
             
+            C += "SlackCh: " + "xtt_test"; //txtSlackCh.getText() + "\r\n";
             C += "_slack: " + _slack.isSelected() + "\r\n";
+            C += "_zip_report: " + "true" + "\r\n";
+            
             C += "_headless: " + _headless.isSelected() + "\r\n";  
  
             C += "RESTAURANT: " + _R + "\r\n";
