@@ -10,6 +10,8 @@ import static AP3.AP3.*;
 import A.TWeb;
 import java.time.LocalDateTime;
 import java.util.Random;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.openqa.selenium.By;
 
 /**
@@ -30,9 +32,9 @@ public class AP3_reschedule_menu {
             _t++; Thread.sleep((long) sleep); TWeb.List_L0("List of Scheduled Menus", "xpath", "//tbody/tr", "no_jira");
                 if (FAIL) {return;}
                 
-            int expectedScheduledMenus = L0.size(); //
+            int expectedScheduledMenus = L0.size(); 
                 
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 50; i++) {  //this will run the rescheduling of a menu 50 times
                 String startTime = startTimes[new Random().nextInt(startTimes.length)];
                 String endTime = endTimes[new Random().nextInt(endTimes.length)];
                 if (L0.isEmpty()) {
@@ -52,13 +54,13 @@ public class AP3_reschedule_menu {
                     if (FAIL) {return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for dropdown", "xpath", "//div[contains(@class,'v-select-list')]","no_jira");
                     if (FAIL) {return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Start Time '3PM'", "css", "[aria-label='Start Time']", startTime, false,"no_jira");
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Start Time", "css", "[aria-label='Start Time']", startTime, false,"no_jira");
                     if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'End Time'", "css", "[aria-label='End Time']","no_jira");
                     if (FAIL) {return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for dropdown", "xpath", "//div[contains(@class,'v-select-list')]","no_jira");
                     if (FAIL) {return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter End Time '6PM'", "css", "[aria-label='End Time']", endTime, false,"no_jira");
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter End Time", "css", "[aria-label='End Time']", endTime, false,"no_jira");
                     if (FAIL) { return;}
                     if (d1.findElement(By.cssSelector("[aria-label='Repeat']")).getAttribute("value").equals("")) {
                         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Repeat' dd", "css", "[aria-label='Repeat']","no_jira");
@@ -87,6 +89,18 @@ public class AP3_reschedule_menu {
                     if (FAIL) {return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(text(),'Schedule menu')]","no_jira");
                     if (FAIL) {return;}
+                    _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Calendar API", BaseAPI + "/calendar/" + BrandID + "?nocache=false", true, "no_jira");
+                    if (FAIL) {return;}        
+                    JSONObject json = new JSONObject(API_Response_Body);
+                    JSONArray events = new JSONArray();
+                    events = json.getJSONArray("events");
+                    if (events.length() == 16) {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Expected Number of events" + "\t" + "-" + "\t" + "16" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    } else {
+                        _t++;
+                        _f++; EX += _t + "\t" + "Expected Number of events" + "\t" + "-" + "\t" + "16" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    }
                 } else {
                     _t++; Thread.sleep((long) sleep); TWeb.List_L0("List of Scheduled Menus", "xpath", "//tbody/tr", "no_jira");
                     if (FAIL) {return;}
@@ -103,13 +117,13 @@ public class AP3_reschedule_menu {
                     if (FAIL) {return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for dropdown", "xpath", "//div[contains(@class,'v-select-list')]","no_jira");
                     if (FAIL) {return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Start Time '3PM'", "css", "[aria-label='Start Time']", startTime, false,"no_jira");
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Start Time", "css", "[aria-label='Start Time']", startTime, false,"no_jira");
                     if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'End Time'", "css", "[aria-label='End Time']","no_jira");
                     if (FAIL) {return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for dropdown", "xpath", "//div[contains(@class,'v-select-list')]","no_jira");
                     if (FAIL) {return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter End Time '6PM'", "css", "[aria-label='End Time']", endTime, false,"no_jira");
+                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter End Time", "css", "[aria-label='End Time']", endTime, false,"no_jira");
                     if (FAIL) { return;}
                     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > 'Save'", "xpath", "//*[contains(text(),'Save')]","no_jira");
                     if (FAIL) {return;}
@@ -118,13 +132,28 @@ public class AP3_reschedule_menu {
                 }
                 _t++; Thread.sleep((long) sleep); TWeb.List_L2("List of Scheduled Menus", "xpath", "//tbody/tr", "no_jira");
                     if (FAIL) {return;}
-                if (L2.size() == L0.size()) {
+                if (expectedScheduledMenus == 0 && L2.size() == 1) {
+                    _t++;
+                    _p++; EX += _t + "\t" + "Expected number of Scheduled Menus" + "\t" + "-" + "\t" + L2.size() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                } else if (L2.size() == expectedScheduledMenus) {                    
                     _t++;
                     _p++; EX += _t + "\t" + "Expected number of Scheduled Menus" + "\t" + "-" + "\t" + expectedScheduledMenus + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "Expected number of Scheduled Menus" + "\t" + "-" + "\t" + expectedScheduledMenus + "\t" + "FAIL" + "\t" + "reschduled menu may have cause an unexpected duplication after " +i+ " iterations" + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                }           
+                }
+                    _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call Calendar API", BaseAPI + "/calendar/" + BrandID + "?nocache=false", true, "no_jira");
+                    if (FAIL) {return;}        
+                    JSONObject json = new JSONObject(API_Response_Body);
+                    JSONArray events = new JSONArray();
+                    events = json.getJSONArray("events");
+                    if (events.length() == 16) {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Expected Number of events" + "\t" + "-" + "\t" + "16" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    } else {
+                        _t++;
+                        _f++; EX += _t + "\t" + "Expected Number of events" + "\t" + "-" + "\t" + "16" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    }                
             }           //------- AUT-850
     }
 }
