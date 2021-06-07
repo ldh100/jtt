@@ -14,7 +14,11 @@ import static AP3.AP3_sales_reporting_for_hidden_stations.searchBySelectedSiteAp
 import static AP3.AP3_sales_reporting_for_hidden_stations.storePresentVisibilityOfStation;
 import static AP3.AP3_sales_reporting_for_hidden_stations.storeVisibilityOfStation;
 import static AP3.AP3_sales_reporting_for_hidden_stations.validateOnSiteProductApplication;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 /**
  *
@@ -36,6 +40,7 @@ public class AP3_orders_reporting_for_hidden_station {
         searchBySelectedSiteAp3();
         checkSelectedSite();
         checkOrdersForStation();
+        checkDateRangeFunctionality();
         revertVisibilityOfStation();
     }
 
@@ -109,11 +114,11 @@ public class AP3_orders_reporting_for_hidden_station {
         _t++;
         Thread.sleep((long) sleep);
         TWeb.Element_By_Path_Text("Get default selected Production app", "xpath", "//*[@aria-label='Select App']", "no_jira");
-        System.err.println(t);
+       
         if (FAIL) {
             return;
         }
-        System.err.println(t);
+      
         if (t != "All") {
 
             _t++;
@@ -326,7 +331,7 @@ public class AP3_orders_reporting_for_hidden_station {
 
             _t++;
             TWeb.List_TR_TDs("Check Station list to matches with selected station from 'AP3' ", L0, (row - 1), "no_jira");
-           
+
             if (t.substring(0, t.indexOf("  >")).trim().equalsIgnoreCase(BRAND)) {
                 _t++;
                 Thread.sleep((long) sleep);
@@ -477,8 +482,285 @@ public class AP3_orders_reporting_for_hidden_station {
         }
         EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Verify if Orders available for hidden Station ====END==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
     }
-// Revert all sites back to original aria-Checked
 
+    // This methid will validate Date range funationality for AUT-870
+    public static void checkDateRangeFunctionality() throws InterruptedException {
+
+        EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Upon selecting the date range, the selection must remain the same ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        //Select a specific date from the calendar to view the orders for that date
+        LocalDate date = LocalDate.now();
+        LocalDate prev_date = date.minusDays(1);
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Open Date picker", "css", "[aria-label='Date(s)']", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        if (prev_date.getMonthValue() != date.getMonthValue()) {
+            _t++;
+            Thread.sleep((long) sleep);
+            TWeb.Element_By_Path_Click("Click previous month", "xpath", "//i[@class='v-icon mdi mdi-chevron-left theme--light']", "no_jira");
+            if (FAIL) {
+                return;
+            }
+        }
+
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Wait_For_Element_By_Path_Visibility("Wait until previous day element visible", "xpath", "//tr/td[contains(number()," + prev_date.getDayOfMonth() + ")]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Click previous day", "xpath", "//tr/td[contains(number()," + prev_date.getDayOfMonth() + ")]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+
+        Thread.sleep(3000);
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Close Date picker", "css", "[aria-label='Date(s)']", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(5000);
+
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Wait_For_Element_By_Path_Visibility("Wait until Button Attribute visible", "xpath", "//button[@class=' button-styling export-button v-btn theme--light primary']", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Attribute("Button Attribute", "xpath", "//button[@class=' button-styling export-button v-btn theme--light primary']", "dates", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        String button_date_attribute = t;  //2021-06-02
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Page_URL("Current URL", "no_jira");
+        String date_URL = t.substring(t.length() - 10);
+        if (date_URL.equals(button_date_attribute)) { // Pass order date is equal to displayed order date
+            _t++;
+            _p++;
+            EX += _t + "\t" + "URL Order date is equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        } else {
+            _t++;
+            _f++;
+            EX += _t + "\t" + "URL Order date is not equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }
+
+        //Select a 7 day range from the calendar to view the orders for that period
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Open Date picker", "css", "[aria-label='Date(s)']", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        //Click previous month
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Click previous month", "xpath", "//i[@class='v-icon mdi mdi-chevron-left theme--light']", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        //Error toast message since more than 7 days
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Wait_For_Element_By_Path_Visibility("Wait unti day 10 visible", "xpath", "//tr/td[contains(number(),10)]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Click day 10", "xpath", "//tr/td[contains(number(),10)]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Wait_For_Element_By_Path_Visibility("Wait until day 17 visible", "xpath", "//tr/td[contains(number(),17)]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Click day 17", "xpath", "//tr/td[contains(number(),17)]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(3000);
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Close Date picker", "css", "[aria-label='Date(s)']", "no_jira");
+        if (FAIL) {
+            return;
+        }
+
+        //Select 6 days range for next month
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Wait_For_Element_By_Path_Visibility("Wait until Open Date picker available", "css", "[aria-label='Date(s)']", "no_jira");
+        if (FAIL) {
+            return;
+        }
+
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Open Date picker", "css", "[aria-label='Date(s)']", "no_jira");
+        if (FAIL) {
+            return;
+        }
+
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Wait_For_Element_By_Path_Visibility("Wait until next button is available on calander", "xpath", "//button[@class='v-btn v-btn--icon theme--light']//i[@class='v-icon mdi mdi-chevron-right theme--light']", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Click next month", "xpath", "//button[@class='v-btn v-btn--icon theme--light']//i[@class='v-icon mdi mdi-chevron-right theme--light']", "no_jira");
+        if (FAIL) {
+            return;
+        }
+
+         Thread.sleep(1000);
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Wait_For_Element_By_Path_Visibility("Wait until day 10 is visible", "xpath", "//tr/td[contains(number(),10)]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(1000);
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Text_DblClick("Click day 10", "xpath", "//tr/td[contains(number(),10)]", "no_jira");
+        if (false) {
+            return;
+        }
+
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Wait_For_Element_By_Path_Visibility("Wait until day 16 available", "xpath", "//tr/td//div[contains(number(),16)]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Click day 16", "xpath", "//tr/td//div[contains(number(),16)]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+
+        //Can use Close Date picker too instead of Escape Key  
+        d1.findElement(By.cssSelector("[aria-label='Date(s)']")).sendKeys(Keys.ESCAPE);
+
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Wait_For_Element_By_Path_Presence("Wait for Button Attribute to be visible", "xpath", "//button[@class=' button-styling export-button v-btn theme--light primary']", "no_jira");
+        if (FAIL) {
+            return;
+        }
+
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Attribute("Button Attribute", "xpath", "//button[@class=' button-styling export-button v-btn theme--light primary']", "dates", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        button_date_attribute = t.replace(" to ", "_");  //2021-06-10 to 2021-06-16
+
+        //URL to verify the date picker has selected 7 day range
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Page_URL("Current URL", "no_jira");
+        date_URL = t.substring(t.length() - 21);
+
+        if (date_URL.equals(button_date_attribute)) { // Pass order date is equal to displayed order date
+
+            _t++;
+            _p++;
+            EX += _t + "\t" + "URL Order date for 7 days range is equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+
+        } else {
+            System.err.println("Going Fail");
+
+            _t++;
+            _f++;
+            EX += _t + "\t" + "URL Order date for 7 days range is not equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }
+
+        //Select a 2 days range -  June 1st to June 2nd (2021-06-01 to 2021-06-02)
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Open Date picker", "css", "[aria-label='Date(s)']", "no_jira");
+        if (FAIL) {
+            return;
+        }
+
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Wait_For_Element_By_Path_Visibility("Wait untit day 1 is visible", "xpath", "//tr/td[contains(number(),1)]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Text_DblClick("Click day 1", "xpath", "//tr/td[contains(number(),1)]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(1000);
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Wait_For_Element_By_Path_Visibility("Wait until day 2 is visible", "xpath", "//tr/td[contains(number(),2)]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Click day 2", "xpath", "//tr/td[contains(number(),2)]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(1000);
+
+        //Can use Close Date picker too instead of Escape Key   
+        d1.findElement(By.cssSelector("[aria-label='Date(s)']")).sendKeys(Keys.ESCAPE);
+        Thread.sleep(1000);
+
+        //URL to verify the date picker has selected 2 day range
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Attribute("Button Attribute", "xpath", "//button[@class=' button-styling export-button v-btn theme--light primary']", "dates", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        button_date_attribute = t.replace(" to ", "_");  //2021-06-01 to 2021-06-02
+
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Page_URL("Current URL", "no_jira");
+        date_URL = t.substring(t.length() - 21);
+        if (date_URL.equals(button_date_attribute)) { // Pass order date is equal to displayed order date
+            _t++;
+            _p++;
+            EX += _t + "\t" + "URL Order date for 2 days range is equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        } else {
+            _t++;
+            _f++;
+            EX += _t + "\t" + "URL Order date for 2 days range is not equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }
+
+    }
+
+    // Revert all sites back to original aria-Checked
     public static void revertVisibilityOfStation() throws InterruptedException {
 
         EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Verify if Visibility of selected Station Revert it back to original mode ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
@@ -518,7 +800,7 @@ public class AP3_orders_reporting_for_hidden_station {
 
             }
         }
-       
+
     }
 
 }
