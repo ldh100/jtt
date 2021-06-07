@@ -1,7 +1,5 @@
 package Swagger;
 
-import A.Func;
-import static A.A.*;
 import java.awt.Cursor;
 import java.io.IOException;
 import java.sql.Connection;
@@ -156,7 +154,7 @@ public class Swagger extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        F_COUNT--;
+        A.A.F_COUNT--;
     }//GEN-LAST:event_formInternalFrameClosed
     private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
         if(!btnRun.isEnabled()){
@@ -165,7 +163,7 @@ public class Swagger extends javax.swing.JInternalFrame {
         RUN();    
     }//GEN-LAST:event_btnRunMouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
+        String R = A.Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 

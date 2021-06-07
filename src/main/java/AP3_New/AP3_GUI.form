@@ -10,6 +10,9 @@
     <Property name="closable" type="boolean" value="true"/>
     <Property name="iconifiable" type="boolean" value="true"/>
     <Property name="title" type="java.lang.String" value="AP3 Automation Manager &gt;&gt;&gt; loading, please wait ... ... ... ..."/>
+    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[858, 527]"/>
+    </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[858, 527]"/>
     </Property>
@@ -18,7 +21,7 @@
     <Property name="visible" type="boolean" value="true"/>
   </Properties>
   <AccessibilityProperties>
-    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="AP3"/>
+    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="AP3_New"/>
   </AccessibilityProperties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
