@@ -916,7 +916,6 @@ public class WO extends javax.swing.JInternalFrame {
         }
         btnExcel.setEnabled(true);
         
-        LOG_UPDATE(); // ========================================================
         
         if(_slack.isSelected()){
             Report(false);
@@ -933,6 +932,8 @@ public class WO extends javax.swing.JInternalFrame {
                 f.delete();
             } 
         }
+        
+        LOG_UPDATE(); // ========================================================
     }
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked

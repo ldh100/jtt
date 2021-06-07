@@ -132,7 +132,6 @@
                               <Component id="_smart_analytics" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="_bulk_apply" alignment="1" min="-2" pref="101" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="_images" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="_announcements" alignment="1" min="-2" pref="119" max="-2" attributes="0"/>

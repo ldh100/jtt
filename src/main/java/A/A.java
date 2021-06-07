@@ -530,7 +530,7 @@ public class A extends javax.swing.JFrame {
         if (!UserID.toLowerCase().contains("oleg")){
             Register_Login();            
         }
-        Get_Slack_TKN();
+        Get_TKN_KEYS();
         
         Menu_Android.setToolTipText("Android Mobile Automation Manager - in Development");
         Menu_iOS.setToolTipText("iOS Mobile Automation Manager - in Development");
@@ -1444,12 +1444,18 @@ public class A extends javax.swing.JFrame {
             }
         }).start();
     }
-    private void Get_Slack_TKN(){
+    private void Get_TKN_KEYS(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        ResultSet rs;
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rsS = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_OAuth_TKN'");
-            rsS.next();
-            S_OAuth_TKN = rsS.getString(1);
+            rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'S_OAuth_TKN'");
+            rs.next();
+            S_OAuth_TKN = rs.getString(1);
+            
+            rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'AWS_Routing_Key'");
+            rs.next();
+            AWS_Routing_Key = rs.getString(1);  
+            
             conn.close();
         } catch (SQLException ex) {
             S_OAuth_TKN = ex.getMessage();
@@ -1469,6 +1475,7 @@ public class A extends javax.swing.JFrame {
     public static final String CWD = System.getProperty("user.dir");
     public static String ADB_HOME = "";
     public static String S_OAuth_TKN = "";
+    public static String AWS_Routing_Key = "";
     public static String AP3_TKN = "";
     public static final DecimalFormat df = new DecimalFormat("#.##");
     public static final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");

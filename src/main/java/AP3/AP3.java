@@ -1457,9 +1457,6 @@ public class AP3 extends javax.swing.JInternalFrame {
                 }
                 btnExel.setEnabled(true);
                 
-                LOG_UPDATE(); // ========================================================
-                
-
                 if(_slack.isSelected()){
                     Report(false); 
                     String MSG = "AP3_" + env + " Automation report - " + Report_Date +  
@@ -1475,6 +1472,8 @@ public class AP3 extends javax.swing.JInternalFrame {
                         f.delete();
                     }
                 }
+                
+                LOG_UPDATE(); // ========================================================
             } 
         }; 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -2269,6 +2268,10 @@ public class AP3 extends javax.swing.JInternalFrame {
             C += "_roles: " + _roles.isSelected() + "\r\n";           
             C += "_all_data: " + _all_data.isSelected() + "\r\n";
             C += "_logout: " + _logout.isSelected() + "\r\n";
+            
+            C += "_sales_report_hidden: " + _sales_report_hidden.isSelected() + "\r\n";           
+            C += "_orders_report_hidden: " + _orders_report_hidden.isSelected() + "\r\n";
+            C += "_brand_closure: " + _brand_closure.isSelected() + "\r\n";
             
             C += "nShowPage: " + nShowPage.getValue() + "\r\n";
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
