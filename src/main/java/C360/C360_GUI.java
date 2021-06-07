@@ -1,5 +1,6 @@
 package C360;
 
+
 import A.Func;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -133,10 +134,8 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         DV2 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
-        nShowPage = new javax.swing.JSpinner();
         nWaitElement = new javax.swing.JSpinner();
         nWaitLoad = new javax.swing.JSpinner();
-        lblSITES7 = new javax.swing.JLabel();
         lblSITES9 = new javax.swing.JLabel();
         lblSITES10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -156,12 +155,14 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         _slack = new javax.swing.JCheckBox();
         _headless = new javax.swing.JCheckBox();
         _mobile_view = new javax.swing.JCheckBox();
+        lblSITES16 = new javax.swing.JLabel();
+        txtSlackCh = new javax.swing.JTextField();
         txtADMIN_ID = new javax.swing.JTextField();
-        txtSM_ID = new javax.swing.JTextField();
-        txtIM_ID = new javax.swing.JTextField();
+        txtMOBILE_ID = new javax.swing.JTextField();
+        txtRUNNER_ID = new javax.swing.JTextField();
         txtADMIN_PW = new javax.swing.JTextField();
-        txtSM_PW = new javax.swing.JTextField();
-        txtIM_PW = new javax.swing.JTextField();
+        txtRUNNER_PW = new javax.swing.JTextField();
+        txtMOBILE_PW = new javax.swing.JTextField();
         lblSITES1 = new javax.swing.JLabel();
         lblSITES2 = new javax.swing.JLabel();
         lblSITES3 = new javax.swing.JLabel();
@@ -286,7 +287,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         _menu_manager.setRequestFocusEnabled(false);
 
         _users.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _users.setSelected(true);
         _users.setText("Users");
         _users.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _users.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
@@ -384,24 +384,31 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSector, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtComp, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtSector, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(72, 72, 72)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtComp, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(_menu_manager, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(297, 297, 297))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(134, 134, 134)
+                                .addComponent(lblSITES15)
+                                .addGap(1, 1, 1)
+                                .addComponent(txtDH_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(_smart_analytics, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(_menu_manager, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(_bulk_apply, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(_sales_analytics, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -434,13 +441,8 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                                 .addComponent(_users, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(_roles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(lblSITES15)
-                        .addGap(1, 1, 1)
-                        .addComponent(txtDH_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                                .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                .addGap(0, 0, 0))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -488,7 +490,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                         .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(2, 2, 2)
                 .addComponent(_bulk_apply, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(_menu_manager, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDH_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -500,13 +502,12 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 .addGap(1, 1, 1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtComp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {_announcements, _brand, _group_management, _login, _orders, _promo, _resent_updates, _sales_reporting, _site});
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 140, 424, 240));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 140, 424, 256));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -561,11 +562,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
 
-        nShowPage.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        nShowPage.setModel(new javax.swing.SpinnerNumberModel(0.2d, 0.2d, 2.0d, 0.2d));
-        nShowPage.setAutoscrolls(true);
-        nShowPage.setName("nShowPage"); // NOI18N
-
         nWaitElement.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nWaitElement.setModel(new javax.swing.SpinnerNumberModel(1.0d, 0.0d, 5.0d, 0.5d));
         nWaitElement.setName("nWaitElement"); // NOI18N
@@ -573,11 +569,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         nWaitLoad.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nWaitLoad.setModel(new javax.swing.SpinnerNumberModel(30.0d, 0.0d, 60.0d, 5.0d));
         nWaitLoad.setName("nWaitLoad"); // NOI18N
-
-        lblSITES7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        lblSITES7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblSITES7.setText("Show page:");
-        lblSITES7.setAlignmentX(0.5F);
 
         lblSITES9.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -594,11 +585,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblSITES7, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(nShowPage, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
+                .addGap(147, 147, 147)
                 .addComponent(lblSITES10, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addComponent(nWaitElement, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -614,10 +601,8 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(nWaitElement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nWaitLoad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSITES7, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSITES9, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSITES10, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nShowPage, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(lblSITES10, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2))
         );
 
@@ -638,7 +623,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmbBrow.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 56, 78, 20));
+        jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 78, 20));
 
         btnRun.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         btnRun.setForeground(new java.awt.Color(204, 0, 0));
@@ -649,7 +634,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 80, 78, 32));
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 64, 78, 32));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -659,7 +644,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
-        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 88, 84, 22));
+        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 72, 84, 22));
 
         btnFails.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnFails.setText("Show Fails");
@@ -670,7 +655,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 btnFailsMouseClicked(evt);
             }
         });
-        jPanel3.add(btnFails, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 56, 84, 22));
+        jPanel3.add(btnFails, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 40, 84, 22));
 
         btnExel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnExel.setText("Excel Rep");
@@ -681,7 +666,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 btnExelMouseClicked(evt);
             }
         });
-        jPanel3.add(btnExel, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 32, 84, 22));
+        jPanel3.add(btnExel, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 84, 22));
 
         btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSave_Opt.setText("Save Setup");
@@ -692,25 +677,25 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 btnSave_OptMouseClicked(evt);
             }
         });
-        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 88, 116, 22));
+        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 72, 116, 22));
 
         lblSITES11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES11.setText("Browser:");
         lblSITES11.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES11, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 40, 72, 16));
+        jPanel3.add(lblSITES11, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 24, 72, 16));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES13.setText("Environment:");
         lblSITES13.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 40, 92, 16));
+        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 24, 92, 16));
 
         lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES14.setText("Application:");
         lblSITES14.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 40, 92, 16));
+        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 24, 92, 16));
 
         cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbEnv.addItemListener(new java.awt.event.ItemListener() {
@@ -718,7 +703,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 cmbEnvItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 56, 116, 20));
+        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 40, 116, 20));
 
         cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbApp.addItemListener(new java.awt.event.ItemListener() {
@@ -726,53 +711,64 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 cmbAppItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 56, 108, 20));
+        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 40, 108, 20));
 
         _slack.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         _slack.setText("Report to Slack");
         _slack.setToolTipText("");
         _slack.setRequestFocusEnabled(false);
-        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 100, 14));
+        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 64, 100, 14));
 
         _headless.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         _headless.setText("Headless <<<<");
         _headless.setToolTipText("");
         _headless.setRequestFocusEnabled(false);
-        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 96, 100, 14));
+        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 80, 100, 14));
 
         _mobile_view.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _mobile_view.setText("mobile_view");
         _mobile_view.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _mobile_view.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _mobile_view.setRequestFocusEnabled(false);
-        jPanel3.add(_mobile_view, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 8, 160, 16));
+        jPanel3.add(_mobile_view, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 4, 88, 16));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 384, 416, 116));
+        lblSITES16.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES16.setText("Slack Shannel:");
+        lblSITES16.setAlignmentX(0.5F);
+        lblSITES16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel3.add(lblSITES16, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 4, 72, 16));
+
+        txtSlackCh.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtSlackCh.setText("xtt_test");
+        jPanel3.add(txtSlackCh, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 4, 96, -1));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 404, 424, 96));
 
         txtADMIN_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtADMIN_ID.setText("oleg.spozito@compassdigital.io");
         getContentPane().add(txtADMIN_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 284, 184, -1));
 
-        txtSM_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtSM_ID.setText("cdl.test.xtt@gmail.com");
-        getContentPane().add(txtSM_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 308, 184, -1));
+        txtMOBILE_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMOBILE_ID.setText("cdl.test.xtt@gmail.com");
+        getContentPane().add(txtMOBILE_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 308, 184, -1));
 
-        txtIM_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtIM_ID.setText("cdl.test.xtt+rn@gmail.com");
-        txtIM_ID.setToolTipText("");
-        getContentPane().add(txtIM_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 332, 184, -1));
+        txtRUNNER_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtRUNNER_ID.setText("cdl.test.xtt+rn@gmail.com");
+        txtRUNNER_ID.setToolTipText("");
+        getContentPane().add(txtRUNNER_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 332, 184, -1));
 
         txtADMIN_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtADMIN_PW.setText("Password1");
         getContentPane().add(txtADMIN_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 284, 84, -1));
 
-        txtSM_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtSM_PW.setText("Password1");
-        getContentPane().add(txtSM_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 332, 84, -1));
+        txtRUNNER_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtRUNNER_PW.setText("Password1");
+        getContentPane().add(txtRUNNER_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 332, 84, -1));
 
-        txtIM_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtIM_PW.setText("Password1");
-        getContentPane().add(txtIM_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 308, 84, -1));
+        txtMOBILE_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMOBILE_PW.setText("Password1");
+        getContentPane().add(txtMOBILE_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 308, 84, -1));
 
         lblSITES1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -841,7 +837,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     protected String F = "";   
     protected String EX = "";   
     protected String r_time = ""; 
-    protected double sleep = 500; // milisec
     
     protected int t_calls = 0;
     protected double t_min = 0;
@@ -854,7 +849,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     private  final Stopwatch sw1 = Stopwatch.createUnstarted();
     private boolean Load;
     private String Report_Date;
-    private String Report_File;
+    private String Excel_Report_Path;
     private Duration DD;
     
     private String Ver = "";
@@ -866,8 +861,8 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     protected long WaitForElement = 1500; // milisec
     protected double LoadTimeOut = 15 * 1000; // milisec 
     
-    private static SwingWorker BW1;  
-    private static SwingWorker BW2; 
+    private SwingWorker BW1;  
+    private SwingWorker BW2; 
     private String Toast_Msg = ""; 
     private Instant run_start;
     private String err;
@@ -886,7 +881,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
 
     private String SCOPE;
 
-    private boolean _Login = false;
+    private boolean _Login = true;
     private boolean _Headless = false;
     private boolean _Mobile_view = false;
     private boolean _Site = false;
@@ -920,10 +915,10 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     
     protected String ADMIN_ID;
     protected String ADMIN_PW;
-    protected String SM_ID; 
-    protected String SM_PW;
-    protected String IM_ID; 
-    protected String IM_PW;
+    protected String MOBILE_ID; 
+    protected String MOBILE_PW;
+    protected String RUNNER_ID; 
+    protected String RUNNER_PW;
       
     private String S_Client_ID = "";
     private String S_Client_Secret  = "";
@@ -959,7 +954,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     protected String Location = "";
     protected String SectorID = "";
     protected String CompanyID = "";
-    protected String DH_Menu_ID = "";    
+    protected String DH_MENU_ID = "";    
     protected String GL_MENU = "TIM HORTONS";
 
     // </editor-fold>
@@ -1038,14 +1033,14 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnExelMouseClicked
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
-        String R = Func.SHOW_LOG_FILE(F, "txt");
+        String R = A.Func.SHOW_LOG_FILE(F, "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }//GEN-LAST:event_btnFailsMouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
+        String R = A.Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1596,7 +1591,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     }    
     private void Report(boolean Open_File){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        Report_File = "";
+        Excel_Report_Path = "";
         if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             txtLog.append( "= Report > Not Excel");
@@ -1613,8 +1608,8 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 String[] v = lines[i].split("\t");
                 System.arraycopy(v, 0, Values[i], 0, v.length); 
             }
-            Report_File = Func.fExcel(l, col, Values, "C360_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
-            txtLog.append( "= Report Excel file:\r\n" + Report_File + "\r\n");
+            Excel_Report_Path = Func.fExcel(l, col, Values, "C360_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
+            txtLog.append( "= Report Excel file:\r\n" + Excel_Report_Path + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch (Exception ex) {
             txtLog.append( "= Report > ERROR: " + ex.getMessage() + "\r\n");
@@ -1659,7 +1654,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             _update.setString(12, r_type);
             _update.setString(13, A.A.UserID);
             _update.setString(14, A.A.WsID);
-            _update.setString(15, cmbBrow.getSelectedItem().toString());
+            _update.setString(15, BROWSER);
             _update.setString(16, txtLog.getText());
             _update.setString(17, "Scope: " + SCOPE);
             _update.setString(18, EX);
@@ -1727,7 +1722,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             _insert.setString(12, r_type);
             _insert.setString(13, A.A.UserID);
             _insert.setString(14, A.A.WsID);
-            _insert.setString(15, cmbBrow.getSelectedItem().toString());
+            _insert.setString(15, BROWSER);
             _insert.setString(16,  "= Job is running... ===\r\n" + "");
             _insert.setString(17, "Running");
             _insert.setString(18, "None");
@@ -1763,49 +1758,49 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             for (String l : lines) {
                 value = l.substring(l.indexOf(" ")).trim(); 
                 if(l.contains("Browser: ")) cmbBrow.setSelectedItem(value);
-                if(l.contains("env:")) env = value;
-                if(l.contains("app:")) app = value;
-                if(l.contains("url:")) url = value;
+                if(l.contains("env: ")) env = value;
+                if(l.contains("app: ")) url = value;
                 
-                if(l.contains("txtEMail:")) txtADMIN_ID.setText(value);
-                if(l.contains("txtPW:")) txtADMIN_PW.setText(value);
-                if(l.contains("txtSM:")) txtSM_ID.setText(value);
-                if(l.contains("txtSM_PW:")) txtSM_PW.setText(value);
-                if(l.contains("txtIM:")) txtIM_ID.setText(value);
-                if(l.contains("txtIM_PW:")) txtIM_PW.setText(value);  
+                if(l.contains("ADMIN_ID: ")) txtADMIN_ID.setText(value);
+                if(l.contains("ADMIN_PW: ")) txtADMIN_PW.setText(value);
+                if(l.contains("MOBILE_ID: ")) txtMOBILE_ID.setText(value);
+                if(l.contains("MOBILE_PW: ")) txtMOBILE_PW.setText(value);
+                if(l.contains("RUNNER_ID: ")) txtRUNNER_ID.setText(value);
+                if(l.contains("RUNNER_PW: ")) txtRUNNER_PW.setText(value);
                 
+                if(l.contains("GROUP: ")) SECTOR = value;
+                if(l.contains("GL_MENU: ")) GL_MENU = value;
+                if(l.contains("SITE: ")) SITE = value;
+                if(l.contains("BRAND: ")) BRAND = value;
+                if(l.contains("DH_MENU_ID: ")) txtDH_Id.setText(value);
                 
-                if(l.contains("GROUP:")) SECTOR = value;
-                if(l.contains("GL_MENU:")) GL_MENU = value;
-                if(l.contains("SITE:")) SITE = value;
-                if(l.contains("BRAND:")) BRAND = value;
-                if(l.contains("DH_MENU_ID:")) txtDH_Id.setText(value);
+                if(l.contains("nWaitElement: ")) nWaitElement.setValue(Double.parseDouble(value));
+                if(l.contains("nWaitLoad: ")) nWaitLoad.setValue(Double.parseDouble(value));
                 
-                if(l.contains("nShowPage:")) nShowPage.setValue(Double.parseDouble(value));
-                if(l.contains("nWaitElement:")) nWaitElement.setValue(Double.parseDouble(value));
-                if(l.contains("nWaitLoad:")) nWaitLoad.setValue(Double.parseDouble(value));
+                if(l.contains("SlackCh: ")) txtSlackCh.setText(value);
+                if(l.contains("_slack: ")) _slack.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_zip_report: ")) Zip_Report = Boolean.parseBoolean(value);
                 
-                if(l.contains("_slack:")) _slack.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_headless:")) _headless.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_mobile_view:")) _mobile_view.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_site:"))  _site.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_site_new:"))  _site_new.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_brand_new:"))  _brand_new.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_brand:"))  _brand.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_group_management:"))  _group_management.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_menu_manager:"))  _menu_manager.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_bulk_apply:"))  _bulk_apply.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_images:"))  _images.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_orders:"))  _orders.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_sales_reporting:"))  _sales_reporting.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_users:"))  _users.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_resent_updates:"))  _resent_updates.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_announcements:"))  _announcements.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_promo:"))  _promo.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_password:"))  _password.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_roles:"))  _roles.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_all_data:"))  _all_data.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_logout:"))  _logout.setSelected(Boolean.parseBoolean(value));               
+                if(l.contains("_headless: ")) _headless.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_mobile_view: ")) _mobile_view.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_site: "))  _site.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_site_new: "))  _site_new.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_brand_new: "))  _brand_new.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_brand: "))  _brand.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_group_management: "))  _group_management.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_menu_manager: "))  _menu_manager.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_bulk_apply: "))  _bulk_apply.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_images: "))  _images.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_orders: "))  _orders.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_sales_reporting: "))  _sales_reporting.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_users: "))  _users.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_resent_updates: "))  _resent_updates.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_announcements: "))  _announcements.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_promo: "))  _promo.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_password: "))  _password.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_roles: "))  _roles.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_all_data: "))  _all_data.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_logout: "))  _logout.setSelected(Boolean.parseBoolean(value));               
             }  
             CONFIG = true;
             txtLog.append("= LOAD_CONFIG > OK" + "\r\n");
@@ -1834,12 +1829,12 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
             C += "url: " + url + "\r\n"; 
             
-            C += "txtEMail: " + txtADMIN_ID.getText() + "\r\n";
-            C += "txtPW: " + txtADMIN_PW.getText()  + "\r\n";
-            C += "txtSM: " + txtSM_ID.getText()  + "\r\n";
-            C += "txtSM_PW: " + txtSM_PW.getText() + "\r\n";
-            C += "txtIM: " + txtIM_ID.getText()+ "\r\n";
-            C += "txtIM_PW: " + txtIM_PW.getText() + "\r\n";            
+            C += "ADMIN_ID: " + txtADMIN_ID.getText() + "\r\n";
+            C += "ADMIN_PW: " + txtADMIN_PW.getText()  + "\r\n";
+            C += "MOBILE_ID: " + txtMOBILE_ID.getText()  + "\r\n";
+            C += "MOBILE_PW: " + txtMOBILE_PW.getText() + "\r\n";
+            C += "RUNNER_ID: " + txtRUNNER_ID.getText()+ "\r\n";
+            C += "RUNNER_PW: " + txtRUNNER_PW.getText() + "\r\n";        
 
 
             C += "GROUP: " + txtSector.getText() + "\r\n";
@@ -1849,11 +1844,13 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             C += "COUNTRY: " + COUNTRY + "\r\n";
             C += "DH_MENU_ID: " + txtDH_Id.getText() + "\r\n";
             
-            C += "nShowPage: " + nShowPage.getValue() + "\r\n";
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
-            C += "nWaitLoad: " + nWaitLoad.getValue()+ "\r\n";
+            C += "nWaitLoad: " + nWaitLoad.getValue() + "\r\n";
             
+            C += "SlackCh: " + txtSlackCh.getText() + "\r\n";
             C += "_slack: " + _slack.isSelected() + "\r\n";
+            C += "_zip_report: " + "true" + "\r\n";
+            
             C += "_headless: " + _headless.isSelected() + "\r\n";  
             C += "_mobile_view: " + _mobile_view.isSelected() + "\r\n";
             C += "_site: " + _site.isSelected() + "\r\n";
@@ -1918,14 +1915,15 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
+        Slack_Channel = txtSlackCh.getText();
         _Slack = _slack.isSelected();
+        _Mobile_view = _mobile_view.isSelected();
         try{    
             run_start = Instant.now();
             Current_Log_Update(true, "= Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
             
             WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
             LoadTimeOut = (double)nWaitLoad.getValue() *1000;
-            sleep = (double)nShowPage.getValue() *1000;
 
             BROWSER = cmbBrow.getSelectedItem().toString();
             EX = "";
@@ -1944,12 +1942,12 @@ public class C360_GUI extends javax.swing.JInternalFrame {
 
             ADMIN_ID = txtADMIN_ID.getText();
             ADMIN_PW = txtADMIN_PW.getText();
-            SM_ID = txtADMIN_ID.getText();
-            SM_PW = txtADMIN_ID.getText();
-            IM_ID = txtADMIN_ID.getText();
-            IM_PW = txtADMIN_ID.getText();
+            MOBILE_ID = txtADMIN_ID.getText();
+            MOBILE_PW = txtADMIN_ID.getText();
+            RUNNER_ID = txtADMIN_ID.getText();
+            RUNNER_PW = txtADMIN_ID.getText();
             ALL_DATA = _all_data.isSelected();
-            DH_Menu_ID = txtDH_Id.getText(); // like NWEJgN87Q3Sw46JaQ1Q, length > 18
+            DH_MENU_ID = txtDH_Id.getText(); // like NWEJgN87Q3Sw46JaQ1Q, length > 18
             
 
             if(DV1.getRowCount() > 0) {
@@ -1968,7 +1966,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
 
             SCOPE = "";
             r_type = "manual"; 
-            if(_headless.isSelected()) {
+            if(_Headless) {
                 Current_Log_Update(true,"= Headless mode is selected - Browser is hidden" + "\r\n");
                 txtLog.append( "= Please wait for report...\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -2028,6 +2026,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             sw1.start();
             LOG_START();   // ========================================================            
             BW1_DoWork(false);
+            BW2_DoWork();
         }catch(Exception ex){
             return "ERROR > " + ex.getMessage();
         }
@@ -2040,64 +2039,62 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             for (String l : lines) {
                 value = l.substring(l.indexOf(" ")).trim(); 
                 if(l.contains("Browser: ")) BROWSER = value;
-                if(l.contains("env:")) env = value;
-                if(l.contains("app:")) app = value;
-                if(l.contains("url:")) url = value;
+                if(l.contains("env: ")) env = value;
+                if(l.contains("app: ")) app = value;
+                if(l.contains("url: ")) url = value;
              
+                if(l.contains("SlackCh: ")) Slack_Channel = value;
                 if(l.contains("_slack:")) _Slack = Boolean.parseBoolean(value); 
-                if(l.contains("_headless:")) _headless.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_mobile_view:")) _mobile_view.setSelected(Boolean.parseBoolean(value));
                 
-                if(l.contains("GROUP:")) SECTOR = value;
-                if(l.contains("GL_MENU:")) GL_MENU = value;
-                if(l.contains("SITE:")) SITE = value;
-                if(l.contains("BRAND:")) BRAND = value;
-                if(l.contains("DH_MENU_ID:")) txtDH_Id.setText(value);
+                if(l.contains("_headless: ")) _Headless = Boolean.parseBoolean(value);
+                if(l.contains("_mobile_view: ")) _Mobile_view = Boolean.parseBoolean(value);
                 
-                if(l.contains("txtEMail:")) ADMIN_ID = value;
-                if(l.contains("txtPW:")) ADMIN_PW = value;
-                if(l.contains("txtSM:")) SM_ID = value;
-                if(l.contains("txtSM_PW:")) SM_PW = value;
-                if(l.contains("txtIM:")) IM_ID = value;
-                if(l.contains("txtIM_PW:")) IM_PW = value;
+                if(l.contains("GROUP: ")) SECTOR = value;
+                if(l.contains("GL_MENU: ")) GL_MENU = value;
+                if(l.contains("SITE: ")) SITE = value;
+                if(l.contains("BRAND: ")) BRAND = value;
+                if(l.contains("DH_MENU_ID: ")) DH_MENU_ID = value;
+                
+                if(l.contains("ADMIN_ID: ")) ADMIN_ID = value;
+                if(l.contains("ADMIN_PW: ")) ADMIN_PW = value;
+                if(l.contains("MOBILE_ID: ")) MOBILE_ID = value;
+                if(l.contains("MOBILE_PW: ")) MOBILE_PW = value;
+                if(l.contains("RUNNER_ID: ")) RUNNER_ID = value;
+                if(l.contains("RUNNER_PW: ")) RUNNER_PW = value;
 
-                if(l.contains("nShowPage:")) nShowPage.setValue(Double.parseDouble(value));
-                if(l.contains("nWaitElement:")) nWaitElement.setValue(Double.parseDouble(value));
-                if(l.contains("nWaitLoad:")) nWaitLoad.setValue(Double.parseDouble(value));
+                if(l.contains("nWaitElement: ")) WaitForElement = Math.round(Double.parseDouble(value) * 1000);
+                if(l.contains("nWaitLoad: ")) LoadTimeOut = Double.parseDouble(value) * 1000;
 
-                if(l.contains("_site:")) _Site = Boolean.parseBoolean(value);
-                if(l.contains("_site_new:")) _Site_new = Boolean.parseBoolean(value);
-                if(l.contains("_brand_new:")) _Brand_new = Boolean.parseBoolean(value);
-                if(l.contains("_brand:")) _Brand = Boolean.parseBoolean(value);
-                if(l.contains("_group_management:")) _Group_management = Boolean.parseBoolean(value);
-                if(l.contains("_menu_manager:")) _Menu_manager = Boolean.parseBoolean(value);
-                if(l.contains("_bulk_apply:")) _Bulk_apply = Boolean.parseBoolean(value);
-                if(l.contains("_images:")) _Images = Boolean.parseBoolean(value);
-                if(l.contains("_orders:")) _Orders = Boolean.parseBoolean(value);
-                if(l.contains("_sales_reporting:")) _Sales_reporting = Boolean.parseBoolean(value);
-                if(l.contains("_users:")) _Users = Boolean.parseBoolean(value);
-                if(l.contains("_resent_updates:")) _Resent_updates = Boolean.parseBoolean(value);
-                if(l.contains("_announcements:"))  _Announcements = Boolean.parseBoolean(value);
-                if(l.contains("_promo:")) _Promo = Boolean.parseBoolean(value);
-                if(l.contains("_password:")) _Password = Boolean.parseBoolean(value);
-                if(l.contains("_roles:")) _Roles = Boolean.parseBoolean(value);
-                if(l.contains("_all_data:")) _All_data = Boolean.parseBoolean(value);
-                if(l.contains("_logout:")) _Logout = Boolean.parseBoolean(value);
+                if(l.contains("_site: ")) _Site = Boolean.parseBoolean(value);
+                if(l.contains("_site_new: ")) _Site_new = Boolean.parseBoolean(value);
+                if(l.contains("_brand_new: ")) _Brand_new = Boolean.parseBoolean(value);
+                if(l.contains("_brand: ")) _Brand = Boolean.parseBoolean(value);
+                if(l.contains("_group_management: ")) _Group_management = Boolean.parseBoolean(value);
+                if(l.contains("_menu_manager: ")) _Menu_manager = Boolean.parseBoolean(value);
+                if(l.contains("_bulk_apply: ")) _Bulk_apply = Boolean.parseBoolean(value);
+                if(l.contains("_images: ")) _Images = Boolean.parseBoolean(value);
+                if(l.contains("_orders: ")) _Orders = Boolean.parseBoolean(value);
+                if(l.contains("_sales_reporting: ")) _Sales_reporting = Boolean.parseBoolean(value);
+                if(l.contains("_users: ")) _Users = Boolean.parseBoolean(value);
+                if(l.contains("_resent_updates: ")) _Resent_updates = Boolean.parseBoolean(value);
+                if(l.contains("_announcements: "))  _Announcements = Boolean.parseBoolean(value);
+                if(l.contains("_promo: ")) _Promo = Boolean.parseBoolean(value);
+                if(l.contains("_password: ")) _Password = Boolean.parseBoolean(value);
+                if(l.contains("_roles: ")) _Roles = Boolean.parseBoolean(value);
+                if(l.contains("_all_data: ")) _All_data = Boolean.parseBoolean(value);
+                if(l.contains("_logout: ")) _Logout = Boolean.parseBoolean(value);
             }            
             CONFIG = true;
             
             switch (env) {
                 case "ST":
                     BaseAPI = "https://api.compassdigital.org/staging";
-                    url = "https://staging.adminpanel.compassdigital.org/";
                     break;
                 case "DE":
                     BaseAPI = "https://api.compassdigital.org/dev";
-                    url = "https://dev.adminpanel.compassdigital.org/";
                     break;
                 default:
                     BaseAPI = "https://api.compassdigital.org/v1";
-                    url = "https://adminpanel.compassdigital.org/";
                     break;
             }
             Current_Log_Update(true, "= JOB_Load_CONFIG > OK" + "\r\n");
@@ -2119,7 +2116,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         HtmlReport.attachReporter(HtmlReporter);
         
         HtmlReport.setSystemInfo("App Version", "Cafe 360" + " " + "Version - TBD"); 
-        HtmlReport.setSystemInfo("Browser", cmbBrow.getSelectedItem().toString());        
+        HtmlReport.setSystemInfo("Browser", BROWSER);        
         HtmlReport.setSystemInfo("Machine", A.A.WsID);
         HtmlReport.setSystemInfo("Machine OS", A.A.WsOS);
         HtmlReport.setSystemInfo("Tester ID", A.A.UserID); 
@@ -2201,10 +2198,10 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                         ChromeOptions chrome_op = new ChromeOptions();
                         //chrome_op.addExtensions(new File("/path/to/extension.crx"));
                         chrome_op.addArguments("--disable-infobars");
-                        if(!_mobile_view.isSelected()){
+                        if(!_Mobile_view){
                             chrome_op.addArguments("--start-maximized");
                         } else{
-                            //chrome_op. >> Set Screen Dimetion
+                            //chrome_op. >> Set Screen Dimension
                         }
             //            chrome_op.addArguments("--start-minimized");
             //            chrome_op.addArguments("enable-automation");
@@ -2212,7 +2209,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             //            chrome_op.addArguments("--disable-extensions");
             //            chrome_op.addArguments("--dns-prefetch-disable");
             //            chrome_op.addArguments("--disable-gpu");
-                        if(_headless.isSelected()){
+                        if(_Headless){
                             chrome_op.addArguments("--headless");
                         }
                         chrome_op.setPageLoadStrategy(PageLoadStrategy.NORMAL);
@@ -2232,7 +2229,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                         edge_op.setCapability("useAutomationExtension", false);
 //                                PageLoadStrategy = PageLoadStrategy.Default,
 //                                UnhandledPromptBehavior = UnhandledPromptBehavior.Dismiss
-                        if(_headless.isSelected()){
+                        if(_Headless){
                             edge_op.setCapability( "headless", true);
                         }
                         
@@ -2276,7 +2273,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);            
             loadTimeout = new FluentWait(d1).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
 			.pollingEvery(Duration.ofMillis(200))  			
-			.ignoring(NoSuchElementException.class);       // for load > progress
+			.ignoring(NoSuchElementException.class); 
             
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return "= WabDriver Start > OK " + "\r\n";
@@ -2312,10 +2309,10 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 Execute();
                 
                 DD = Duration.between(run_start, Instant.now());
-                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
-                EX = "C360 " + env + ", v" + Ver + ", Browser: " + cmbBrow.getSelectedItem().toString() +
+                EX = "C360 " + env + ", v" + Ver + ", Browser: " + BROWSER +
                     " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                     + EX;
@@ -2402,7 +2399,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         BW2.execute();  // executes the swingworker on worker thread   
     }
     private void BW1_FAIL_LOG_UPDATE(String Error){
-        Summary = "BW1 - Failed";
+        Summary = "BW1 - Failed: " + Error;
         DD = Duration.between(run_start, Instant.now());
         LOG_UPDATE("- BW1 ERROR: " + Error);
         btnRun.setEnabled(true);
@@ -2413,24 +2410,18 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Cafe 360 Login"); 
             C360_login BR = new C360.C360_login(C360_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-            Thread.sleep(1500);            
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;        
         }
 //        if(_Logout){
 //            SCOPE += "Login";
 //            ParentTest = HtmlReport.createTest("Cafe 360 Login"); 
 //            C360_logout BR = new C360.C360_loout(C360_GUI.this);
 //            BR.run(); // ======================================
-//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-//            Thread.sleep(1500);            
+//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;       
 //        }
     }
     private void BW1_Done(boolean GUI) throws Exception{
-        DD = Duration.between(run_start, Instant.now());
-             
-        Slack_Channel = "xtt_test";
-        Zip_Report = true;
-        
+        DD = Duration.between(run_start, Instant.now());      
         Last_EX = EX;
         Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
         try {
@@ -2463,44 +2454,52 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             Current_Log_Update(GUI, "= LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
         }
         
-        Current_Log_Update(GUI, "= " + Summary + "\r\n"); // Summary shown in EX top
+        Current_Log_Update(GUI, "= C360" + " v: " + "?" + ", Environment: " + env + "\r\n");       
         Current_Log_Update(GUI, "= Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
-        Current_Log_Update(GUI, "= C360" + " v: " + "?" + ", Environment: " + env + "\r\n");
-        
+        Current_Log_Update(GUI, "= " + Summary + "\r\n"); // Summary shown in EX top
+        Current_Log_Update(GUI, "= Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n");
+    
         if(GUI){
             Log = txtLog.getText();
         }
         LOG_UPDATE(Log); // ========================================================
-        HtmlReporter.config().setReportName("C360" + " v: " + "?" + ", Environment: " + env + ", Summary: Total Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i);
+        HtmlReporter.config().setReportName("C360" + ", Env: " + env + 
+                ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
+                ". Resp(sec) - Min: " + A.A.df.format(t_min) +
+                            ", Avg: " + A.A.df.format(t_avg) +
+                            ", Max: " + A.A.df.format(t_max) +
+                            ", p50: " + A.A.df.format(p_50) +
+                            ", p90: " + A.A.df.format(p_90) + 
+                ". Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
         HtmlReport.flush();
         
         if(_Slack && !Slack_Channel.equals("N/A")){
             Report(false);
             String MSG = "C360_" + env + " Excel Automation report - " + Report_Date +  
                     "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: *" + A.A.UserID + "*\r\n" +
-                    "Browser: *" + cmbBrow.getSelectedItem().toString() + "*" + "\r\n" +        
+                    "Browser: *" + BROWSER + "*" + "\r\n" +        
                     "Scope: " + SCOPE + "\r\n" +
                     "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
                     "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w + ", Info: " + _i;
             
-            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Report_File, Slack_Channel, MSG));
-            File ef = new File(Report_File);
+            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Excel_Report_Path, Slack_Channel, MSG));
+            File ef = new File(Excel_Report_Path);
             if(ef.exists() && !ef.isDirectory()) {
                 ef.delete();
             }  
             String HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Click to Open";
-            String HTML_Path = HtmlReporter.getFile().getAbsolutePath();
+            HTML_Report_Path = HtmlReporter.getFile().getAbsolutePath();
             if(Zip_Report){
-                String Origin_HTML = HTML_Path;
-                HTML_Path = A.Func.Zip_File(HTML_Path);
+                String Origin_HTML = HTML_Report_Path;
+                HTML_Report_Path = A.Func.Zip_File(HTML_Report_Path);
                 File hf = new File(Origin_HTML);
                 if(hf.exists() && !hf.isDirectory()) {
                     hf.delete();
                 }
                 HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Extract Here > open unzipped HTML file";
             }
-            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(HTML_Path, Slack_Channel, HTML_Report_Msg));
-            File hf = new File(HTML_Path);
+            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(HTML_Report_Path, Slack_Channel, HTML_Report_Msg));
+            File hf = new File(HTML_Report_Path);
             if(hf.exists() && !hf.isDirectory()) {
                 hf.delete();
             }
@@ -2551,7 +2550,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             //            chrome_op.addArguments("--disable-extensions");
             //            chrome_op.addArguments("--dns-prefetch-disable");
             //            chrome_op.addArguments("--disable-gpu");
-//                        if(_headless.isSelected()){
+//                        if(_Headless){
 //                            chrome_op.addArguments("--headless");
 //                        }
                         chrome_op.setPageLoadStrategy(PageLoadStrategy.NORMAL);
@@ -2571,7 +2570,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                         edge_op.setCapability("useAutomationExtension", false);
 //                                PageLoadStrategy = PageLoadStrategy.Default,
 //                                UnhandledPromptBehavior = UnhandledPromptBehavior.Dismiss
-//                        if(_headless.isSelected()){
+//                        if(_Headless){
 //                            edge_op.setCapability( "headless", true);
 //                        }
                         
@@ -2734,7 +2733,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName()+ "<br />d1.navigate().to(" + URL + ")", false, ParentTest.createNode(NAME));
         } catch(Exception ex){
-            _f++; err = ex.getMessage().trim(); err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim(); 
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + " - " + "\t" + URL + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -2757,7 +2756,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName()+ "<br />d1.navigate().back()(" + FROM + "  > " + TO + ")", false, ParentTest.createNode(NAME));
         } catch(Exception ex){
-            _f++; err = ex.getMessage().trim(); err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim(); 
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + FROM + "\t" + TO + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -2780,7 +2779,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />d1.forward().back()(" + FROM + "  > " + TO + ")", false, ParentTest.createNode(NAME));
         } catch(Exception ex){
-            _f++; err = ex.getMessage().trim(); err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim(); 
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + FROM + "\t" + TO + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -2803,7 +2802,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName()+ "<br />d1.navigate().refresh()", false, ParentTest.createNode(NAME));
         } catch(Exception ex){
-            _f++; err = ex.getMessage().trim(); err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim(); 
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -3664,7 +3663,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + t.replace("\r\n", " ").replace("\n", " ") + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Text; " + t, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Text: " + t, false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = false; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
@@ -5187,7 +5186,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />URL: " + URL, false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             if(EXPECT_OK){
-                _f++; err = ex.getMessage().trim();
+                _f++; FAIL = true; err = ex.getMessage().trim();
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
                 EX += _t + "\t == " + NAME + "\t" + URL + "\t" + " --- " + "\t" + "FAIL" + "\t" + err +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -5232,7 +5231,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />URL: " + URL, false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             if(EXPECT_OK){
-                _f++; err = ex.getMessage().trim();
+                _f++; FAIL = true; err = ex.getMessage().trim();
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
                 EX += _t + "\t == " + NAME + "\t" + URL + "\t" + " --- " + "\t" + "FAIL" + "\t" + err +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -5285,7 +5284,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 }                                    
             }
         } catch(Exception ex){
-            _f++; err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t == " + NAME + "\t" + VAL + "\t" + " --- " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -5351,7 +5350,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 }
             }
         } catch(Exception ex){
-            _f++; err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t == " + NAME + "\t" + "Closure Title: " + C_Name + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -5439,7 +5438,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                                                    
             }
         } catch(Exception ex){
-            _f++; err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t == " + NAME + "\t" + TARGET + "\t" + "Day " + DAY + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -5494,7 +5493,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 }                                    
             }
         } catch(Exception ex){
-            _f++; err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t == " + NAME + "\t" + TARGET + "\t" + "*_supported" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -5560,7 +5559,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             }
 
         } catch(Exception ex){
-            _f++; err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t == " + NAME + "\t" + DAY + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -5626,7 +5625,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             }
 
         } catch(Exception ex){
-            _f++; err = ex.getMessage().trim();
+            _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t == " + NAME + "\t" + DAY + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -5894,8 +5893,8 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-    // </editor-fold>
-    
+    // </editor-fold>    
+   
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
@@ -5948,27 +5947,27 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblSITES13;
     private javax.swing.JLabel lblSITES14;
     private javax.swing.JLabel lblSITES15;
+    private javax.swing.JLabel lblSITES16;
     private javax.swing.JLabel lblSITES2;
     private javax.swing.JLabel lblSITES3;
     private javax.swing.JLabel lblSITES4;
     private javax.swing.JLabel lblSITES5;
     private javax.swing.JLabel lblSITES6;
-    private javax.swing.JLabel lblSITES7;
     private javax.swing.JLabel lblSITES8;
     private javax.swing.JLabel lblSITES9;
-    private javax.swing.JSpinner nShowPage;
     private javax.swing.JSpinner nWaitElement;
     private javax.swing.JSpinner nWaitLoad;
     private javax.swing.JTextField txtADMIN_ID;
     private javax.swing.JTextField txtADMIN_PW;
     private javax.swing.JTextField txtComp;
     private javax.swing.JTextField txtDH_Id;
-    private javax.swing.JTextField txtIM_ID;
-    private javax.swing.JTextField txtIM_PW;
     private javax.swing.JTextArea txtLog;
-    private javax.swing.JTextField txtSM_ID;
-    private javax.swing.JTextField txtSM_PW;
+    private javax.swing.JTextField txtMOBILE_ID;
+    private javax.swing.JTextField txtMOBILE_PW;
+    private javax.swing.JTextField txtRUNNER_ID;
+    private javax.swing.JTextField txtRUNNER_PW;
     private javax.swing.JTextField txtSector;
+    private javax.swing.JTextField txtSlackCh;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>
 }
