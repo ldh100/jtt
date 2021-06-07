@@ -20,10 +20,12 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
@@ -350,32 +352,26 @@ public class Func {
         }
         return ExcelFile.getAbsolutePath();
     }
+    
     public static String Send_File_with_Message_to_Slack(String Path, String Channel, String MSG) {
-        String F_Name = "?";
         try{           
-            MultipartEntityBuilder builder = MultipartEntityBuilder.create(); 
-            builder.addTextBody("token", A.S_OAuth_TKN); 
-            builder.addTextBody("channels", Channel); 
-            builder.addTextBody("initial_comment", MSG); 
+            File file = new File(Path); 
+            HttpClient httpclient = HttpClientBuilder.create().disableContentCompression().build();
+            HttpPost httpPost = new HttpPost("https://slack.com/api/files.upload");  
             
-            if(!Path.equals("")){ 
-                File file = new File(Path); 
-                F_Name = file.getName();
-                builder.addBinaryBody(
-                    file.getName(), // File_Name
-                    new FileInputStream(file), 
-                    ContentType.APPLICATION_OCTET_STREAM,
-                    file.getName()
-                );            
-            }
-            HttpEntity multiPartEntity = builder.build();
-            CloseableHttpClient httpclient = HttpClients.createDefault();
-            HttpPost httpPost = new HttpPost("https://slack.com/api/files.upload");
-            httpPost.setEntity(multiPartEntity); 
+            MultipartEntityBuilder reqEntity = MultipartEntityBuilder.create(); 
+            reqEntity.addTextBody("token", A.S_OAuth_TKN);       
+            reqEntity.addTextBody("channels", Channel); 
+            reqEntity.addTextBody("initial_comment", MSG); 
+            reqEntity.addTextBody("media", "file");
+            reqEntity.addBinaryBody("file", file);
+            
+            httpPost.setEntity(reqEntity.build());
             HttpResponse response = httpclient.execute(httpPost);
-            return "= File " + F_Name + " > Slack - " + response.getStatusLine() + "\r\n"; 
+            
+            return "= File to Slack: " + Path + " > " + response.getStatusLine().getStatusCode() + ", " + response.getStatusLine().getReasonPhrase()+ "\r\n"; 
         } catch(IOException ex) {
-            return "= File " + F_Name + " > Slack > ERROR: " + ex.getMessage() + "\r\n";
+            return "= File to Slack: " + Path + " > ERROR: " + ex.getMessage() + "\r\n";
         }
     }
     public static String Zip_File(String Source){

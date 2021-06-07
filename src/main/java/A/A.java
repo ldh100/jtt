@@ -1,5 +1,7 @@
 package A;
+import java.awt.Toolkit;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.beans.PropertyVetoException;
 import java.io.File;
 import java.io.IOException;
@@ -71,6 +73,7 @@ public class A extends javax.swing.JFrame {
         Menu_iOS = new javax.swing.JMenu();
         Menu_C360 = new javax.swing.JMenu();
         Menu_AP3 = new javax.swing.JMenu();
+        Menu_AP3_New = new javax.swing.JMenu();
         Menu_WO = new javax.swing.JMenu();
         Menu_FW = new javax.swing.JMenu();
         Menu_DL = new javax.swing.JMenu();
@@ -80,7 +83,6 @@ public class A extends javax.swing.JFrame {
         Menu_JIRA = new javax.swing.JMenu();
         Menu_JOBS = new javax.swing.JMenu();
         MenuReports = new javax.swing.JMenu();
-        Menu_AP3_New = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JTT");
@@ -106,7 +108,7 @@ public class A extends javax.swing.JFrame {
         );
         DesktopPaneLayout.setVerticalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 699, Short.MAX_VALUE)
+            .addGap(0, 701, Short.MAX_VALUE)
         );
 
         Menu_Tools.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -354,6 +356,17 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_AP3);
 
+        Menu_AP3_New.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Menu_AP3_New.setText("AP3_New");
+        Menu_AP3_New.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_AP3_New.setName("AP3"); // NOI18N
+        Menu_AP3_New.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_AP3_NewMouseClicked(evt);
+            }
+        });
+        MenuBar.add(Menu_AP3_New);
+
         Menu_WO.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_WO.setText("WO");
         Menu_WO.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -398,7 +411,7 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(MenuStation);
 
-        Menu_OR.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Menu_OR.setBorder(null);
         Menu_OR.setText("Orders");
         Menu_OR.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_OR.setName("Station"); // NOI18N
@@ -431,8 +444,8 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_JIRA);
 
-        Menu_JOBS.setBorder(null);
-        Menu_JOBS.setText("JOBS");
+        Menu_JOBS.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Menu_JOBS.setText("Jobs");
         Menu_JOBS.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_JOBS.setName("JOBS"); // NOI18N
         Menu_JOBS.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -453,17 +466,6 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(MenuReports);
 
-        Menu_AP3_New.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Menu_AP3_New.setText("AP3_New");
-        Menu_AP3_New.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        Menu_AP3_New.setName("AP3"); // NOI18N
-        Menu_AP3_New.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Menu_AP3_NewMouseClicked(evt);
-            }
-        });
-        MenuBar.add(Menu_AP3_New);
-
         setJMenuBar(MenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -475,7 +477,7 @@ public class A extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(DesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
+                .addComponent(DesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -895,6 +897,8 @@ public class A extends javax.swing.JFrame {
 //            }catch(MalformedURLException ex){
 //                java.util.logging.// Logger.getLogger(AP3_GUI.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
 //            }
+            Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());                
+            AF.setSize(screenSize.width - 150, screenSize.height - 150);    
             AF.setLocationRelativeTo(null);
             AF.setVisible(true);
         });
@@ -1055,7 +1059,7 @@ public class A extends javax.swing.JFrame {
     private void Open_AP3_New() throws PropertyVetoException{
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
         for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("AP3")) {
+            if (frame.getName().equals("AP3_New")) {
                 try {
                     frame.setSelected(true);
                     if (frame.isIcon()) {

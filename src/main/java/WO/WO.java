@@ -5,8 +5,8 @@
  */
 package WO;
 
-import A.Func;
 import static A.A.*;
+import A.Func;
 import com.google.common.base.Stopwatch;
 import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
@@ -616,7 +616,7 @@ public class WO extends javax.swing.JInternalFrame {
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         if(BW2 != null && !BW2.isCancelled()) BW2.cancel(true);
-        F_COUNT--;
+        A.A.F_COUNT--;
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void DV2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV2MouseClicked
@@ -849,7 +849,7 @@ public class WO extends javax.swing.JInternalFrame {
     private void Done(Instant dw_start){
         BW2.cancel(true); // ================================================        
         Ver = "?";
-        Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+        Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
         txtLog.append("========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());                 
         EX = "WO " + env + " - v" + Ver + ", Browser: " + cmbBrow.getSelectedItem().toString() +
@@ -936,7 +936,7 @@ public class WO extends javax.swing.JInternalFrame {
     }
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
+        String R = A.Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -945,7 +945,7 @@ public class WO extends javax.swing.JInternalFrame {
 
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
-        String R = Func.SHOW_LOG_FILE(F, "txt");
+        String R = A.Func.SHOW_LOG_FILE(F, "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 

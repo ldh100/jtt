@@ -1,5 +1,6 @@
 package C360;
 
+
 import A.Func;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -848,7 +849,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     private  final Stopwatch sw1 = Stopwatch.createUnstarted();
     private boolean Load;
     private String Report_Date;
-    private String Report_File;
+    private String Excel_Report_Path;
     private Duration DD;
     
     private String Ver = "";
@@ -860,8 +861,8 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     protected long WaitForElement = 1500; // milisec
     protected double LoadTimeOut = 15 * 1000; // milisec 
     
-    private static SwingWorker BW1;  
-    private static SwingWorker BW2; 
+    private SwingWorker BW1;  
+    private SwingWorker BW2; 
     private String Toast_Msg = ""; 
     private Instant run_start;
     private String err;
@@ -1032,14 +1033,14 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnExelMouseClicked
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
-        String R = Func.SHOW_LOG_FILE(F, "txt");
+        String R = A.Func.SHOW_LOG_FILE(F, "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }//GEN-LAST:event_btnFailsMouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
+        String R = A.Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1590,7 +1591,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     }    
     private void Report(boolean Open_File){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        Report_File = "";
+        Excel_Report_Path = "";
         if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             txtLog.append( "= Report > Not Excel");
@@ -1607,8 +1608,8 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 String[] v = lines[i].split("\t");
                 System.arraycopy(v, 0, Values[i], 0, v.length); 
             }
-            Report_File = Func.fExcel(l, col, Values, "C360_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
-            txtLog.append( "= Report Excel file:\r\n" + Report_File + "\r\n");
+            Excel_Report_Path = Func.fExcel(l, col, Values, "C360_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
+            txtLog.append( "= Report Excel file:\r\n" + Excel_Report_Path + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch (Exception ex) {
             txtLog.append( "= Report > ERROR: " + ex.getMessage() + "\r\n");
@@ -1757,50 +1758,49 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             for (String l : lines) {
                 value = l.substring(l.indexOf(" ")).trim(); 
                 if(l.contains("Browser: ")) cmbBrow.setSelectedItem(value);
-                if(l.contains("env:")) env = value;
-                if(l.contains("app:")) app = value;
-                if(l.contains("url:")) url = value;
+                if(l.contains("env: ")) env = value;
+                if(l.contains("app: ")) url = value;
                 
-                if(l.contains("ADMIN_ID:")) txtADMIN_ID.setText(value);
-                if(l.contains("ADMIN_PW:")) txtADMIN_PW.setText(value);
-                if(l.contains("MOBILE_ID:")) txtMOBILE_ID.setText(value);
-                if(l.contains("MOBILE_PW:")) txtMOBILE_PW.setText(value);
-                if(l.contains("RUNNER_ID:")) txtRUNNER_ID.setText(value);
-                if(l.contains("RUNNER_PW:")) txtRUNNER_PW.setText(value);
+                if(l.contains("ADMIN_ID: ")) txtADMIN_ID.setText(value);
+                if(l.contains("ADMIN_PW: ")) txtADMIN_PW.setText(value);
+                if(l.contains("MOBILE_ID: ")) txtMOBILE_ID.setText(value);
+                if(l.contains("MOBILE_PW: ")) txtMOBILE_PW.setText(value);
+                if(l.contains("RUNNER_ID: ")) txtRUNNER_ID.setText(value);
+                if(l.contains("RUNNER_PW: ")) txtRUNNER_PW.setText(value);
                 
-                if(l.contains("GROUP:")) SECTOR = value;
-                if(l.contains("GL_MENU:")) GL_MENU = value;
-                if(l.contains("SITE:")) SITE = value;
-                if(l.contains("BRAND:")) BRAND = value;
-                if(l.contains("DH_MENU_ID:")) txtDH_Id.setText(value);
+                if(l.contains("GROUP: ")) SECTOR = value;
+                if(l.contains("GL_MENU: ")) GL_MENU = value;
+                if(l.contains("SITE: ")) SITE = value;
+                if(l.contains("BRAND: ")) BRAND = value;
+                if(l.contains("DH_MENU_ID: ")) txtDH_Id.setText(value);
                 
-                if(l.contains("nWaitElement:")) nWaitElement.setValue(Double.parseDouble(value));
-                if(l.contains("nWaitLoad:")) nWaitLoad.setValue(Double.parseDouble(value));
+                if(l.contains("nWaitElement: ")) nWaitElement.setValue(Double.parseDouble(value));
+                if(l.contains("nWaitLoad: ")) nWaitLoad.setValue(Double.parseDouble(value));
                 
                 if(l.contains("SlackCh: ")) txtSlackCh.setText(value);
-                if(l.contains("_slack:")) _slack.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_slack: ")) _slack.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_zip_report: ")) Zip_Report = Boolean.parseBoolean(value);
                 
-                if(l.contains("_headless:")) _headless.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_mobile_view:")) _mobile_view.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_site:"))  _site.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_site_new:"))  _site_new.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_brand_new:"))  _brand_new.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_brand:"))  _brand.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_group_management:"))  _group_management.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_menu_manager:"))  _menu_manager.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_bulk_apply:"))  _bulk_apply.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_images:"))  _images.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_orders:"))  _orders.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_sales_reporting:"))  _sales_reporting.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_users:"))  _users.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_resent_updates:"))  _resent_updates.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_announcements:"))  _announcements.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_promo:"))  _promo.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_password:"))  _password.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_roles:"))  _roles.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_all_data:"))  _all_data.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_logout:"))  _logout.setSelected(Boolean.parseBoolean(value));               
+                if(l.contains("_headless: ")) _headless.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_mobile_view: ")) _mobile_view.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_site: "))  _site.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_site_new: "))  _site_new.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_brand_new: "))  _brand_new.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_brand: "))  _brand.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_group_management: "))  _group_management.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_menu_manager: "))  _menu_manager.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_bulk_apply: "))  _bulk_apply.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_images: "))  _images.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_orders: "))  _orders.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_sales_reporting: "))  _sales_reporting.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_users: "))  _users.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_resent_updates: "))  _resent_updates.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_announcements: "))  _announcements.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_promo: "))  _promo.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_password: "))  _password.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_roles: "))  _roles.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_all_data: "))  _all_data.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_logout: "))  _logout.setSelected(Boolean.parseBoolean(value));               
             }  
             CONFIG = true;
             txtLog.append("= LOAD_CONFIG > OK" + "\r\n");
@@ -2039,50 +2039,50 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             for (String l : lines) {
                 value = l.substring(l.indexOf(" ")).trim(); 
                 if(l.contains("Browser: ")) BROWSER = value;
-                if(l.contains("env:")) env = value;
-                if(l.contains("app:")) app = value;
-                if(l.contains("url:")) url = value;
+                if(l.contains("env: ")) env = value;
+                if(l.contains("app: ")) app = value;
+                if(l.contains("url: ")) url = value;
              
                 if(l.contains("SlackCh: ")) Slack_Channel = value;
                 if(l.contains("_slack:")) _Slack = Boolean.parseBoolean(value); 
                 
-                if(l.contains("_headless:")) _Headless = Boolean.parseBoolean(value);
-                if(l.contains("_mobile_view:")) _Mobile_view = Boolean.parseBoolean(value);
+                if(l.contains("_headless: ")) _Headless = Boolean.parseBoolean(value);
+                if(l.contains("_mobile_view: ")) _Mobile_view = Boolean.parseBoolean(value);
                 
-                if(l.contains("GROUP:")) SECTOR = value;
-                if(l.contains("GL_MENU:")) GL_MENU = value;
-                if(l.contains("SITE:")) SITE = value;
-                if(l.contains("BRAND:")) BRAND = value;
-                if(l.contains("DH_MENU_ID:")) DH_MENU_ID = value;
+                if(l.contains("GROUP: ")) SECTOR = value;
+                if(l.contains("GL_MENU: ")) GL_MENU = value;
+                if(l.contains("SITE: ")) SITE = value;
+                if(l.contains("BRAND: ")) BRAND = value;
+                if(l.contains("DH_MENU_ID: ")) DH_MENU_ID = value;
                 
-                if(l.contains("ADMIN_ID:")) ADMIN_ID = value;
-                if(l.contains("ADMIN_PW:")) ADMIN_PW = value;
-                if(l.contains("MOBILE_ID:")) MOBILE_ID = value;
-                if(l.contains("MOBILE_PW:")) MOBILE_PW = value;
-                if(l.contains("RUNNER_ID:")) RUNNER_ID = value;
-                if(l.contains("RUNNER_PW:")) RUNNER_PW = value;
+                if(l.contains("ADMIN_ID: ")) ADMIN_ID = value;
+                if(l.contains("ADMIN_PW: ")) ADMIN_PW = value;
+                if(l.contains("MOBILE_ID: ")) MOBILE_ID = value;
+                if(l.contains("MOBILE_PW: ")) MOBILE_PW = value;
+                if(l.contains("RUNNER_ID: ")) RUNNER_ID = value;
+                if(l.contains("RUNNER_PW: ")) RUNNER_PW = value;
 
-                if(l.contains("nWaitElement:")) WaitForElement = Math.round(Double.parseDouble(value) * 1000);
-                if(l.contains("nWaitLoad:")) LoadTimeOut = Double.parseDouble(value) * 1000;
+                if(l.contains("nWaitElement: ")) WaitForElement = Math.round(Double.parseDouble(value) * 1000);
+                if(l.contains("nWaitLoad: ")) LoadTimeOut = Double.parseDouble(value) * 1000;
 
-                if(l.contains("_site:")) _Site = Boolean.parseBoolean(value);
-                if(l.contains("_site_new:")) _Site_new = Boolean.parseBoolean(value);
-                if(l.contains("_brand_new:")) _Brand_new = Boolean.parseBoolean(value);
-                if(l.contains("_brand:")) _Brand = Boolean.parseBoolean(value);
-                if(l.contains("_group_management:")) _Group_management = Boolean.parseBoolean(value);
-                if(l.contains("_menu_manager:")) _Menu_manager = Boolean.parseBoolean(value);
-                if(l.contains("_bulk_apply:")) _Bulk_apply = Boolean.parseBoolean(value);
-                if(l.contains("_images:")) _Images = Boolean.parseBoolean(value);
-                if(l.contains("_orders:")) _Orders = Boolean.parseBoolean(value);
-                if(l.contains("_sales_reporting:")) _Sales_reporting = Boolean.parseBoolean(value);
-                if(l.contains("_users:")) _Users = Boolean.parseBoolean(value);
-                if(l.contains("_resent_updates:")) _Resent_updates = Boolean.parseBoolean(value);
-                if(l.contains("_announcements:"))  _Announcements = Boolean.parseBoolean(value);
-                if(l.contains("_promo:")) _Promo = Boolean.parseBoolean(value);
-                if(l.contains("_password:")) _Password = Boolean.parseBoolean(value);
-                if(l.contains("_roles:")) _Roles = Boolean.parseBoolean(value);
-                if(l.contains("_all_data:")) _All_data = Boolean.parseBoolean(value);
-                if(l.contains("_logout:")) _Logout = Boolean.parseBoolean(value);
+                if(l.contains("_site: ")) _Site = Boolean.parseBoolean(value);
+                if(l.contains("_site_new: ")) _Site_new = Boolean.parseBoolean(value);
+                if(l.contains("_brand_new: ")) _Brand_new = Boolean.parseBoolean(value);
+                if(l.contains("_brand: ")) _Brand = Boolean.parseBoolean(value);
+                if(l.contains("_group_management: ")) _Group_management = Boolean.parseBoolean(value);
+                if(l.contains("_menu_manager: ")) _Menu_manager = Boolean.parseBoolean(value);
+                if(l.contains("_bulk_apply: ")) _Bulk_apply = Boolean.parseBoolean(value);
+                if(l.contains("_images: ")) _Images = Boolean.parseBoolean(value);
+                if(l.contains("_orders: ")) _Orders = Boolean.parseBoolean(value);
+                if(l.contains("_sales_reporting: ")) _Sales_reporting = Boolean.parseBoolean(value);
+                if(l.contains("_users: ")) _Users = Boolean.parseBoolean(value);
+                if(l.contains("_resent_updates: ")) _Resent_updates = Boolean.parseBoolean(value);
+                if(l.contains("_announcements: "))  _Announcements = Boolean.parseBoolean(value);
+                if(l.contains("_promo: ")) _Promo = Boolean.parseBoolean(value);
+                if(l.contains("_password: ")) _Password = Boolean.parseBoolean(value);
+                if(l.contains("_roles: ")) _Roles = Boolean.parseBoolean(value);
+                if(l.contains("_all_data: ")) _All_data = Boolean.parseBoolean(value);
+                if(l.contains("_logout: ")) _Logout = Boolean.parseBoolean(value);
             }            
             CONFIG = true;
             
@@ -2309,7 +2309,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 Execute();
                 
                 DD = Duration.between(run_start, Instant.now());
-                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
                 EX = "C360 " + env + ", v" + Ver + ", Browser: " + BROWSER +
@@ -2421,11 +2421,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
 //        }
     }
     private void BW1_Done(boolean GUI) throws Exception{
-        DD = Duration.between(run_start, Instant.now());
-             
-        Slack_Channel = "xtt_test";
-        Zip_Report = true;
-        
+        DD = Duration.between(run_start, Instant.now());      
         Last_EX = EX;
         Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
         try {
@@ -2486,24 +2482,24 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                     "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
                     "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w + ", Info: " + _i;
             
-            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Report_File, Slack_Channel, MSG));
-            File ef = new File(Report_File);
+            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Excel_Report_Path, Slack_Channel, MSG));
+            File ef = new File(Excel_Report_Path);
             if(ef.exists() && !ef.isDirectory()) {
                 ef.delete();
             }  
             String HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Click to Open";
-            String HTML_Path = HtmlReporter.getFile().getAbsolutePath();
+            HTML_Report_Path = HtmlReporter.getFile().getAbsolutePath();
             if(Zip_Report){
-                String Origin_HTML = HTML_Path;
-                HTML_Path = A.Func.Zip_File(HTML_Path);
+                String Origin_HTML = HTML_Report_Path;
+                HTML_Report_Path = A.Func.Zip_File(HTML_Report_Path);
                 File hf = new File(Origin_HTML);
                 if(hf.exists() && !hf.isDirectory()) {
                     hf.delete();
                 }
                 HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Extract Here > open unzipped HTML file";
             }
-            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(HTML_Path, Slack_Channel, HTML_Report_Msg));
-            File hf = new File(HTML_Path);
+            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(HTML_Report_Path, Slack_Channel, HTML_Report_Msg));
+            File hf = new File(HTML_Report_Path);
             if(hf.exists() && !hf.isDirectory()) {
                 hf.delete();
             }

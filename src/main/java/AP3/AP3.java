@@ -919,14 +919,14 @@ public class AP3 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnExelMouseClicked
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
-        String R = Func.SHOW_LOG_FILE(F, "txt");
+        String R = A.Func.SHOW_LOG_FILE(F, "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }//GEN-LAST:event_btnFailsMouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
+        String R = A.Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1332,7 +1332,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             @Override
             protected void done() { 
                 BW2.cancel(true); // ================================================
-                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
                 txtLog.append("========   " + "Execution step-by-step log..." + "   ========" + "\r\n");  
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 EX = "AP3 " + env + ", v" + Ver + ", Browser: " + cmbBrow.getSelectedItem().toString() +
@@ -2104,49 +2104,49 @@ public class AP3 extends javax.swing.JInternalFrame {
         try{             
             if (C.contains(": ")) {
                 String c;
-                c = C.substring(C.indexOf("cmbBROW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); cmbBrow.setSelectedItem(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("cmbBROW: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); cmbBrow.setSelectedItem(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("env: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("app: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("url: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
              
-                c = C.substring(C.indexOf("_slack:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _slack.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_headless:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _headless.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_slack: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _slack.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_headless: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _headless.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
 
-                c = C.substring(C.indexOf("GROUP:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SECTOR = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("GL_MENU:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GL_MENU = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("DH_MENU_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtDH_Id.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("GROUP: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); SECTOR = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("GL_MENU: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); GL_MENU = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("SITE: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("BRAND: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("DH_MENU_ID: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtDH_Id.setText(c.substring(c.indexOf(" ")).trim());
                 
-                c = C.substring(C.indexOf("txtEMail:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtADMIN_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtPW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtADMIN_PW.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtSM:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtSM_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtSM_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtSM_PW.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtIM:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtIM_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtIM_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtIM_PW.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtEMail: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtADMIN_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtPW: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtADMIN_PW.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtSM: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtSM_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtSM_PW: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtSM_PW.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtIM: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtIM_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtIM_PW: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtIM_PW.setText(c.substring(c.indexOf(" ")).trim());
 
-                c = C.substring(C.indexOf("nShowPage:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nShowPage.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("nWaitElement:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitElement.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("nWaitLoad:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitLoad.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("nShowPage: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); nShowPage.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("nWaitElement: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitElement.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("nWaitLoad: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitLoad.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
 
-                c = C.substring(C.indexOf("_site:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _site.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_site_new:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _site_new.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_brand_new:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _brand_new.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_brand:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _brand.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_group_management:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _group_management.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_menu_manager:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _menu_manager.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_bulk_apply:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _bulk_apply.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_images:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _images.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_orders:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _orders.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_sales_reporting:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _sales_reporting.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_users:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _users.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_resent_updates")); c = c.substring(0, c.indexOf("\r\n")).trim(); _resent_updates.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_announcements:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _announcements.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_promo")); c = c.substring(0, c.indexOf("\r\n")).trim(); _promo.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_password:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _password.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_roles")); c = c.substring(0, c.indexOf("\r\n")).trim(); _roles.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_all_data")); c = c.substring(0, c.indexOf("\r\n")).trim(); _all_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_logout")); c = c.substring(0, c.indexOf("\r\n")).trim(); _logout.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_site: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _site.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_site_new: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _site_new.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_brand_new: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _brand_new.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_brand: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _brand.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_group_management: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _group_management.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_menu_manager: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _menu_manager.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_bulk_apply: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _bulk_apply.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_images: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _images.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_orders: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _orders.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_sales_reporting: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _sales_reporting.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_users: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _users.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_resent_updates: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _resent_updates.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_announcements: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _announcements.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_promo: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _promo.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_password: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _password.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_roles: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _roles.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_all_data: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _all_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_logout: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _logout.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 CONFIG = true;
                 txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
