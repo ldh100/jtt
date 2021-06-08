@@ -112,6 +112,10 @@ public class AP3 extends javax.swing.JInternalFrame {
         txtSector = new javax.swing.JTextField();
         _bulk_apply = new javax.swing.JCheckBox();
         _images = new javax.swing.JCheckBox();
+        _reschedule_menu = new javax.swing.JCheckBox();
+        _sales_report_hidden = new javax.swing.JCheckBox();
+        _orders_report_hidden = new javax.swing.JCheckBox();
+        _brand_closure = new javax.swing.JCheckBox();
         jScrollPane3 = new javax.swing.JScrollPane();
         DV1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -364,133 +368,172 @@ public class AP3 extends javax.swing.JInternalFrame {
         _images.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _images.setRequestFocusEnabled(false);
 
+        _reschedule_menu.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _reschedule_menu.setText("Reschedule menu");
+        _reschedule_menu.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _reschedule_menu.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _reschedule_menu.setRequestFocusEnabled(false);
+
+        _sales_report_hidden.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _sales_report_hidden.setText("Sales-rep hidden");
+        _sales_report_hidden.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _sales_report_hidden.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _sales_report_hidden.setRequestFocusEnabled(false);
+
+        _orders_report_hidden.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _orders_report_hidden.setText("Order-rep hidden");
+        _orders_report_hidden.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _orders_report_hidden.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _orders_report_hidden.setRequestFocusEnabled(false);
+
+        _brand_closure.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _brand_closure.setText("Brand Closure");
+        _brand_closure.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _brand_closure.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _brand_closure.setRequestFocusEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSector, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtComp, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(_brand_closure, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                        .addComponent(_site, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(_sales_reporting, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_brand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_login, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(292, 292, 292))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(_menu_manager, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(lblSITES15)
+                .addGap(2, 2, 2)
+                .addComponent(txtDH_Id)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(245, 245, 245)
+                .addComponent(txtComp)
+                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(_smart_analytics, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(_menu_manager, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(_bulk_apply, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(_sales_analytics, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(_sales_reporting, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(_orders, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(_brand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(_group_management, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(_announcements, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(_notifications, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_resent_updates, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_images, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(_promo, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(_brand_new, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(_site_new, javax.swing.GroupLayout.Alignment.TRAILING))))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(_users, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(_roles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGap(4, 4, 4)
+                        .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(169, 169, 169)
+                        .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(lblSITES15)
-                        .addGap(1, 1, 1)
-                        .addComponent(txtDH_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(4, 4, 4)
+                        .addComponent(txtSector, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_sales_analytics, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_smart_analytics, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(_bulk_apply, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(_images)
+                            .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_group_management)
+                            .addComponent(_promo)
+                            .addComponent(_notifications, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_sales_report_hidden)
+                            .addComponent(_orders_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(_resent_updates)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(_site_new, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(_brand_new, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(_reschedule_menu, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(_users, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(_roles, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(8, 8, 8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_images, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
                         .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
-                        .addComponent(_brand, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_resent_updates, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)
-                        .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(_group_management, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_sales_reporting, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(_sales_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(_notifications, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_smart_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(_brand, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_site_new, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(_site_new, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_images, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)
-                        .addComponent(_brand_new, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(_brand_new, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_resent_updates, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(2, 2, 2)
-                .addComponent(_bulk_apply, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(_menu_manager, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_brand_closure, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addComponent(_group_management, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(_reschedule_menu)))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(_sales_reporting, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(_sales_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_notifications, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(_smart_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(_bulk_apply, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_orders_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, Short.MAX_VALUE)
+                .addComponent(_sales_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtDH_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSITES15))
-                .addGap(4, 4, 4)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_menu_manager, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSITES15))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSITES12))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(lblSITES12)))
                 .addGap(1, 1, 1)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtComp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtComp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {_announcements, _brand, _group_management, _login, _orders, _promo, _resent_updates, _sales_reporting, _site});
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 184, 424, 232));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 152, 424, 264));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -541,7 +584,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 22, 420, 116));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 22, 420, 80));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
 
@@ -605,7 +648,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 .addGap(2, 2, 2))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 140, 424, -1));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 104, 416, -1));
 
         txtLog.setEditable(false);
         txtLog.setColumns(20);
@@ -716,13 +759,13 @@ public class AP3 extends javax.swing.JInternalFrame {
         _slack.setText("Report to Slack");
         _slack.setToolTipText("");
         _slack.setRequestFocusEnabled(false);
-        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 52, 100, 14));
+        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 52, 112, 14));
 
         _headless.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         _headless.setText("Headless <<<<");
         _headless.setToolTipText("");
         _headless.setRequestFocusEnabled(false);
-        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 68, 100, 14));
+        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 68, 108, 14));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 416, 416, 84));
 
@@ -903,14 +946,14 @@ public class AP3 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnExelMouseClicked
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
-        String R = Func.SHOW_LOG_FILE(F, "txt");
+        String R = A.Func.SHOW_LOG_FILE(F, "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }//GEN-LAST:event_btnFailsMouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
+        String R = A.Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1130,7 +1173,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);            
             loadTimeout = new FluentWait(d1).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
 			.pollingEvery(Duration.ofMillis(200))  			
-			.ignoring(NoSuchElementException.class);       // for load > progress
+			.ignoring(NoSuchElementException.class);      
             
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return true;
@@ -1169,6 +1212,15 @@ public class AP3 extends javax.swing.JInternalFrame {
                     EX += " - " + "\t" + " === ^ Brand" + "\t" + " ===== " + "\t" + " == ^ Brand End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     Thread.sleep(1500);
                 }
+                if (_brand_closure.isSelected()) { 
+                    SCOPE += ", Brand Closure";
+                    EX += " - " + "\t" + " === Brand Closure" + "\t" + " ===== " + "\t" + " == Brand ClosureBegin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    AP3_brand_closure.run();
+                    EX += " - " + "\t" + " === ^ Brand Closure" + "\t" + " ===== " + "\t" + " == ^ Brand Closure End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
+                }                 
+                
+                
                 if (_images.isSelected()) { 
                     SCOPE += ", Images";
                     EX += " - " + "\t" + " === Images" + "\t" + " ===== " + "\t" + " == Images Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
@@ -1212,12 +1264,28 @@ public class AP3 extends javax.swing.JInternalFrame {
                     Thread.sleep(1500);
                 }
                 if (_sales_reporting.isSelected()) { 
-                    SCOPE += ", Sales Rep";
+                    SCOPE += ", Sales Rep Hidden Station";
                     EX += " - " + "\t" + " === Sales Reporting" + "\t" + " ===== " + "\t" + " == Sales Reporting Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     AP3_sales_reporting.run();
                     EX += " - " + "\t" + " === ^ Sales Reporting" + "\t" + " ===== " + "\t" + " == ^ Sales Reporting End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                     Thread.sleep(1500);
                 }
+                if (_sales_report_hidden.isSelected()) { 
+                    SCOPE += ", Sales Rep";
+                    EX += " - " + "\t" + " === Sales Report for Hidden Stations" + "\t" + " ===== " + "\t" + " == Sales Report for Hidden Stations Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    AP3_sales_reporting_for_hidden_stations.run();
+                    EX += " - " + "\t" + " === ^ Sales Report for Hidden Stations" + "\t" + " ===== " + "\t" + " == ^ Sales Report for Hidden Stations End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
+                }                
+                if (_orders_report_hidden.isSelected()) { 
+                    SCOPE += ", Order Rep Hidden Station";
+                    EX += " - " + "\t" + " === Order Report for Hidden Stations" + "\t" + " ===== " + "\t" + " == Order Report for Hidden Stations Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    AP3_orders_reporting_for_hidden_station.run();
+                    EX += " - " + "\t" + " === ^ Order Report for Hidden Stations" + "\t" + " ===== " + "\t" + " == ^ Order Report for Hidden Stations End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
+                }                 
+                
+                
                 if (_sales_analytics.isSelected()) { 
                     SCOPE += ", Sales Analytics";
                     EX += " - " + "\t" + " === Sales Analytics" + "\t" + " ===== " + "\t" + " == Sales Reporting Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
@@ -1267,6 +1335,13 @@ public class AP3 extends javax.swing.JInternalFrame {
                     EX += " - " + "\t" + " === ^ Site > Add Brand" + "\t" + " ===== " + "\t" + " == ^ Add Brand End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     Thread.sleep(1500);
                 }
+                if (_reschedule_menu.isSelected()) { 
+                    SCOPE += ", Reschedule menu";
+                    EX += " - " + "\t" + " === Reschedule Menu" + "\t" + " ===== " + "\t" + " == Add Reschedule Menu Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    AP3_reschedule_menu.run();
+                    EX += " - " + "\t" + " === ^ Reschedule Menu" + "\t" + " ===== " + "\t" + " == ^ Add Reschedule Menu End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
+                }
                 if (_site_new.isSelected() && !"PR".equals(env)) { 
                     SCOPE += ", New Site";
                     EX += " - " + "\t" + " === New Site" + "\t" + " ===== " + "\t" + " == New Site Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
@@ -1309,7 +1384,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             @Override
             protected void done() { 
                 BW2.cancel(true); // ================================================
-                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
                 txtLog.append("========   " + "Execution step-by-step log..." + "   ========" + "\r\n");  
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 EX = "AP3 " + env + ", v" + Ver + ", Browser: " + cmbBrow.getSelectedItem().toString() +
@@ -1382,9 +1457,6 @@ public class AP3 extends javax.swing.JInternalFrame {
                 }
                 btnExel.setEnabled(true);
                 
-                LOG_UPDATE(); // ========================================================
-                
-
                 if(_slack.isSelected()){
                     Report(false); 
                     String MSG = "AP3_" + env + " Automation report - " + Report_Date +  
@@ -1400,6 +1472,8 @@ public class AP3 extends javax.swing.JInternalFrame {
                         f.delete();
                     }
                 }
+                
+                LOG_UPDATE(); // ========================================================
             } 
         }; 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -2081,49 +2155,49 @@ public class AP3 extends javax.swing.JInternalFrame {
         try{             
             if (C.contains(": ")) {
                 String c;
-                c = C.substring(C.indexOf("cmbBROW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); cmbBrow.setSelectedItem(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("cmbBROW: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); cmbBrow.setSelectedItem(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("env: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("app: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("url: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
              
-                c = C.substring(C.indexOf("_slack:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _slack.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_headless:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _headless.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_slack: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _slack.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_headless: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _headless.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
 
-                c = C.substring(C.indexOf("GROUP:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SECTOR = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("GL_MENU:")); c = c.substring(0, c.indexOf("\r\n")).trim(); GL_MENU = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("DH_MENU_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtDH_Id.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("GROUP: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); SECTOR = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("GL_MENU: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); GL_MENU = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("SITE: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("BRAND: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("DH_MENU_ID: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtDH_Id.setText(c.substring(c.indexOf(" ")).trim());
                 
-                c = C.substring(C.indexOf("txtEMail:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtADMIN_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtPW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtADMIN_PW.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtSM:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtSM_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtSM_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtSM_PW.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtIM:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtIM_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtIM_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtIM_PW.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtEMail: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtADMIN_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtPW: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtADMIN_PW.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtSM: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtSM_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtSM_PW: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtSM_PW.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtIM: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtIM_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtIM_PW: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtIM_PW.setText(c.substring(c.indexOf(" ")).trim());
 
-                c = C.substring(C.indexOf("nShowPage:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nShowPage.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("nWaitElement:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitElement.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("nWaitLoad:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitLoad.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("nShowPage: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); nShowPage.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("nWaitElement: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitElement.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("nWaitLoad: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitLoad.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
 
-                c = C.substring(C.indexOf("_site:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _site.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_site_new:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _site_new.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_brand_new:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _brand_new.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_brand:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _brand.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_group_management:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _group_management.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_menu_manager:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _menu_manager.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_bulk_apply:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _bulk_apply.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_images:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _images.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_orders:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _orders.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_sales_reporting:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _sales_reporting.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_users:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _users.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_resent_updates")); c = c.substring(0, c.indexOf("\r\n")).trim(); _resent_updates.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_announcements:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _announcements.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_promo")); c = c.substring(0, c.indexOf("\r\n")).trim(); _promo.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_password:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _password.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_roles")); c = c.substring(0, c.indexOf("\r\n")).trim(); _roles.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_all_data")); c = c.substring(0, c.indexOf("\r\n")).trim(); _all_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_logout")); c = c.substring(0, c.indexOf("\r\n")).trim(); _logout.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_site: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _site.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_site_new: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _site_new.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_brand_new: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _brand_new.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_brand: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _brand.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_group_management: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _group_management.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_menu_manager: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _menu_manager.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_bulk_apply: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _bulk_apply.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_images: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _images.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_orders: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _orders.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_sales_reporting: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _sales_reporting.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_users: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _users.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_resent_updates: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _resent_updates.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_announcements: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _announcements.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_promo: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _promo.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_password: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _password.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_roles: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _roles.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_all_data: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _all_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_logout: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _logout.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 CONFIG = true;
                 txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -2163,7 +2237,10 @@ public class AP3 extends javax.swing.JInternalFrame {
             C += "COUNTRY: " + COUNTRY + "\r\n";
             C += "DH_MENU_ID: " + txtDH_Id.getText() + "\r\n";
             
+            C += "SlackCh: " + "xtt_test"; //txtSlackCh.getText() + "\r\n";
             C += "_slack: " + _slack.isSelected() + "\r\n";
+            C += "_zip_report: " + "true" + "\r\n";
+            
             C += "_headless: " + _headless.isSelected() + "\r\n";  
            
             C += "txtEMail: " + txtADMIN_ID.getText() + "\r\n";
@@ -2191,6 +2268,10 @@ public class AP3 extends javax.swing.JInternalFrame {
             C += "_roles: " + _roles.isSelected() + "\r\n";           
             C += "_all_data: " + _all_data.isSelected() + "\r\n";
             C += "_logout: " + _logout.isSelected() + "\r\n";
+            
+            C += "_sales_report_hidden: " + _sales_report_hidden.isSelected() + "\r\n";           
+            C += "_orders_report_hidden: " + _orders_report_hidden.isSelected() + "\r\n";
+            C += "_brand_closure: " + _brand_closure.isSelected() + "\r\n";
             
             C += "nShowPage: " + nShowPage.getValue() + "\r\n";
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
@@ -2310,6 +2391,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _all_data;
     private javax.swing.JCheckBox _announcements;
     private javax.swing.JCheckBox _brand;
+    private javax.swing.JCheckBox _brand_closure;
     private javax.swing.JCheckBox _brand_new;
     private javax.swing.JCheckBox _bulk_apply;
     private javax.swing.JCheckBox _group_management;
@@ -2320,11 +2402,14 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _menu_manager;
     private javax.swing.JCheckBox _notifications;
     private javax.swing.JCheckBox _orders;
+    private javax.swing.JCheckBox _orders_report_hidden;
     private javax.swing.JCheckBox _password;
     private javax.swing.JCheckBox _promo;
+    private javax.swing.JCheckBox _reschedule_menu;
     private javax.swing.JCheckBox _resent_updates;
     private javax.swing.JCheckBox _roles;
     private javax.swing.JCheckBox _sales_analytics;
+    private javax.swing.JCheckBox _sales_report_hidden;
     private javax.swing.JCheckBox _sales_reporting;
     private javax.swing.JCheckBox _site;
     private javax.swing.JCheckBox _site_new;

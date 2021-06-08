@@ -78,34 +78,45 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="432" y="140" width="424" height="240"/>
+          <AbsoluteConstraints x="432" y="140" width="424" height="256"/>
         </Constraint>
       </Constraints>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblSITES8" min="-2" pref="72" max="-2" attributes="0"/>
-                      <Component id="txtSector" min="-2" pref="169" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtComp" min="-2" pref="169" max="-2" attributes="0"/>
-                      <Component id="lblSITES12" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblSITES8" min="-2" pref="72" max="-2" attributes="0"/>
+                                  <Component id="txtSector" min="-2" pref="169" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtComp" min="-2" pref="169" max="-2" attributes="0"/>
+                                  <Component id="lblSITES12" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="_menu_manager" max="32767" attributes="0"/>
+                                  <EmptySpace min="297" pref="297" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
+                                  <Component id="lblSITES15" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                  <Component id="txtDH_Id" min="-2" pref="169" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="_smart_analytics" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="_menu_manager" alignment="1" max="32767" attributes="0"/>
                                       <Component id="_bulk_apply" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
@@ -153,14 +164,8 @@
                               </Group>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="138" pref="138" max="-2" attributes="0"/>
-                          <Component id="lblSITES15" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                          <Component id="txtDH_Id" min="-2" pref="169" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -218,7 +223,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                   <Component id="_bulk_apply" min="-2" pref="14" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="_menu_manager" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
                       <Component id="txtDH_Id" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -234,7 +239,6 @@
                       <Component id="txtComp" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtSector" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -368,7 +372,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="0"/>
             </Property>
-            <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Users"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
@@ -654,11 +657,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblSITES7" min="-2" pref="72" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                  <Component id="nShowPage" min="-2" pref="51" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
                   <Component id="lblSITES10" min="-2" pref="85" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   <Component id="nWaitElement" min="-2" pref="44" max="-2" attributes="0"/>
@@ -676,10 +675,8 @@
                   <Group type="103" groupAlignment="2" attributes="0">
                       <Component id="nWaitElement" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="nWaitLoad" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblSITES7" alignment="2" min="-2" pref="16" max="-2" attributes="0"/>
                       <Component id="lblSITES9" alignment="2" min="-2" pref="16" max="-2" attributes="0"/>
                       <Component id="lblSITES10" alignment="2" min="-2" pref="16" max="-2" attributes="0"/>
-                      <Component id="nShowPage" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
               </Group>
@@ -687,18 +684,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JSpinner" name="nShowPage">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="12" style="0"/>
-            </Property>
-            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="0.2" maximum="2.0" minimum="0.2" numberType="java.lang.Double" stepSize="0.2" type="number"/>
-            </Property>
-            <Property name="autoscrolls" type="boolean" value="true"/>
-            <Property name="name" type="java.lang.String" value="nShowPage" noResource="true"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JSpinner" name="nWaitElement">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -719,16 +704,6 @@
               <SpinnerModel initial="30.0" maximum="60.0" minimum="0.0" numberType="java.lang.Double" stepSize="5.0" type="number"/>
             </Property>
             <Property name="name" type="java.lang.String" value="nWaitLoad" noResource="true"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblSITES7">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="0"/>
-            </Property>
-            <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="Show page:"/>
-            <Property name="alignmentX" type="float" value="0.5"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblSITES9">
@@ -792,7 +767,7 @@
     <Container class="javax.swing.JPanel" name="jPanel3">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="436" y="384" width="416" height="116"/>
+          <AbsoluteConstraints x="432" y="404" width="424" height="96"/>
         </Constraint>
       </Constraints>
 
@@ -814,7 +789,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="336" y="56" width="78" height="20"/>
+              <AbsoluteConstraints x="340" y="40" width="78" height="20"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -834,7 +809,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="336" y="80" width="78" height="32"/>
+              <AbsoluteConstraints x="340" y="64" width="78" height="32"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -853,7 +828,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="4" y="88" width="84" height="22"/>
+              <AbsoluteConstraints x="8" y="72" width="84" height="22"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -873,7 +848,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="4" y="56" width="84" height="22"/>
+              <AbsoluteConstraints x="8" y="40" width="84" height="22"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -893,7 +868,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="4" y="32" width="84" height="22"/>
+              <AbsoluteConstraints x="8" y="4" width="84" height="22"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -913,7 +888,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="100" y="88" width="116" height="22"/>
+              <AbsoluteConstraints x="104" y="72" width="116" height="22"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -928,7 +903,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="336" y="40" width="72" height="16"/>
+              <AbsoluteConstraints x="340" y="24" width="72" height="16"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -943,7 +918,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="104" y="40" width="92" height="16"/>
+              <AbsoluteConstraints x="108" y="24" width="92" height="16"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -958,7 +933,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="228" y="40" width="92" height="16"/>
+              <AbsoluteConstraints x="232" y="24" width="92" height="16"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -979,7 +954,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="100" y="56" width="116" height="20"/>
+              <AbsoluteConstraints x="104" y="40" width="116" height="20"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -1000,7 +975,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="224" y="56" width="108" height="20"/>
+              <AbsoluteConstraints x="228" y="40" width="108" height="20"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -1015,7 +990,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="220" y="80" width="100" height="14"/>
+              <AbsoluteConstraints x="224" y="64" width="100" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -1030,7 +1005,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="220" y="96" width="100" height="14"/>
+              <AbsoluteConstraints x="224" y="80" width="100" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -1046,7 +1021,36 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="252" y="8" width="160" height="16"/>
+              <AbsoluteConstraints x="328" y="4" width="88" height="16"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblSITES16">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="11" style="0"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="2"/>
+            <Property name="text" type="java.lang.String" value="Slack Shannel:"/>
+            <Property name="alignmentX" type="float" value="0.5"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="152" y="4" width="72" height="16"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtSlackCh">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="xtt_test"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="228" y="4" width="96" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -1065,7 +1069,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtSM_ID">
+    <Component class="javax.swing.JTextField" name="txtMOBILE_ID">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="11" style="0"/>
@@ -1078,7 +1082,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtIM_ID">
+    <Component class="javax.swing.JTextField" name="txtRUNNER_ID">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="11" style="0"/>
@@ -1105,7 +1109,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtSM_PW">
+    <Component class="javax.swing.JTextField" name="txtRUNNER_PW">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="11" style="0"/>
@@ -1118,7 +1122,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtIM_PW">
+    <Component class="javax.swing.JTextField" name="txtMOBILE_PW">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="11" style="0"/>

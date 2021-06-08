@@ -1,7 +1,7 @@
 package Orders;
 
-import A.Func;
 import static A.A.*;
+import A.Func;
 import com.google.common.base.Stopwatch;
 import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
@@ -14,7 +14,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -879,7 +878,7 @@ public class Orders extends javax.swing.JInternalFrame {
                 }
             }
 
-String R = Func.SHOW_LOG_FILE(JSCart.toString(4), "json");
+String R = A.Func.SHOW_LOG_FILE(JSCart.toString(4), "json");
 if(!R.equals("OK")){
     txtLog.append(R + "\r\n");
     txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -942,7 +941,7 @@ if(!R.equals("OK")){
 
     private void btnCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCartMouseClicked
         if(btnCart.isEnabled() && DV1.getSelectedRowCount() > 0){
-            String R = Func.SHOW_LOG_FILE(
+            String R = A.Func.SHOW_LOG_FILE(
                     "==== Shopping Cart:\r\n" + DV1.getValueAt(DV1.getSelectedRow(), 7).toString() +
                     "\r\n\r\n" +
                     "==== Order:\r\n" + DV1.getValueAt(DV1.getSelectedRow(), 8).toString(), "json");

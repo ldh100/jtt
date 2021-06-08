@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package Mob_iOS;
-import Mob_Android.*;
 import A.Func;
 import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.AWSCredentials;
@@ -49,7 +48,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -908,7 +906,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
     protected String Report_Date;
     protected String SCOPE = "";   
     protected String Last_EX = "";   
-    protected String Report_File = "";    
+    protected String Excel_Report_Path = "";    
     protected String New_ID = "";
 
     protected String Mobile_ID = "";   
@@ -1096,7 +1094,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnExelMouseClicked
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
-        String R = Func.SHOW_LOG_FILE(F, "txt");
+        String R = A.Func.SHOW_LOG_FILE(F, "txt");
         if(!R.equals("OK")){
             Current_Log_Update(true, R + "\r\n");
         }
@@ -1105,7 +1103,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
         
 //        Current_Log_Update(true, An_Met.Get_Bolter_User_Site_ID(txtBolter_Id.getText(), txtBolter_Pw.getText()) + "\r\n");
        
-        String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
+        String R = A.Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             Current_Log_Update(true, R + "\r\n");
         }
@@ -2086,7 +2084,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
             C += "nWaitLoad: " + nWaitLoad.getValue() + "\r\n";  
             
-            C += "Slack_Ch: " + "xtt_test" + "\r\n";//TBD + "\r\n"; 
+            C += "SlackCh: " + "xtt_test"; //txtSlackCh.getText() + "\r\n";
             C += "_slack: " + _slack.isSelected() + "\r\n";
             C += "_zip_report: " + "true" + "\r\n";
             
@@ -2307,8 +2305,8 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("txtBolter_Id: ")) Bolter_ID = value;
                 if(l.contains("txtBolter_Pw: ")) Bolter_PW = value;
 
-                if(l.contains("nWaitElement: ")) WaitForElement = Math.round(Double.parseDouble(value)*1000);
-                if(l.contains("nWaitLoad: ")) LoadTimeOut = Math.round(Double.parseDouble(value)*1000);
+                if(l.contains("nWaitElement: ")) WaitForElement = Math.round(Double.parseDouble(value) * 1000);
+                if(l.contains("nWaitLoad: ")) LoadTimeOut = Math.round(Double.parseDouble(value) * 1000);
 
                 if(l.contains("Slack_Ch: ")) Slack_Channel = value;
                 if(l.contains("_slack: ")) _Slack = Boolean.parseBoolean(value);
@@ -2416,6 +2414,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             Bolter_ID = txtBolter_Id.getText();
             Bolter_PW = txtBolter_Pw.getText();
 
+            //Slack_Channel = txtSlackCh.getText();
             _Slack = _slack.isSelected();
 
             _Acc_options = _acc_options.isSelected();
@@ -2472,7 +2471,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
         }
     }    
     protected String Report(boolean Open_File){
-        Report_File = "";
+        Excel_Report_Path = "";
         if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
             return "= Report > Not Excel";
         }   
@@ -2487,8 +2486,8 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
                 String[] v = lines[i].split("\t");
                 System.arraycopy(v, 0, Values[i], 0, v.length); 
             }
-            Report_File = A.Func.fExcel(l, col, Values, "Android_" + app + "_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
-            return "= Report Excel file:\r\n" + Report_File + "\r\n";
+            Excel_Report_Path = A.Func.fExcel(l, col, Values, "Android_" + app + "_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
+            return "= Report Excel file:\r\n" + Excel_Report_Path + "\r\n";
         } catch (IOException ex) {
             return "= Report > ERROR: " + ex.getMessage() + "\r\n";
         }
@@ -2801,7 +2800,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
                     //Execute_Core_App();
                 }
                 DD = Duration.between(run_start, Instant.now());
-                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
                 EX = "Android " + app + " " + env + ", App v: " + appVersion + ", Device: " + device + " OS v:" + devOS +
@@ -2840,7 +2839,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
         BW1.execute();
     }
     private void BW1_FAIL_LOG_UPDATE(String Error){
-        Summary = "BW1 - Failed";
+        Summary = "BW1 - Failed: " + Error;
         DD = Duration.between(run_start, Instant.now());
         LOG_UPDATE("- BW1 ERROR: " + Error);
         btnRun.setEnabled(true);
@@ -2935,7 +2934,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
         if(GUI){
             Log = txtLog.getText();
         }
-        LOG_UPDATE(Log); // ========================================================
+
         HtmlReporter.config().setReportName("Android OS v" + devOS + ", App: " + app + " v: " + appVersion + ", Environment: " + env + ", Summary: Total Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i);
         HtmlReport.flush();
         
@@ -2948,24 +2947,24 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
                     "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
                     "Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
             
-            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Report_File, Slack_Channel, MSG));
-            File ef = new File(Report_File);
+            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Excel_Report_Path, Slack_Channel, MSG));
+            File ef = new File(Excel_Report_Path);
             if(ef.exists() && !ef.isDirectory()) {
                 ef.delete();
             }  
             String HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Click to Oopen";
-            String HTML_Path = HtmlReporter.getFile().getAbsolutePath();
+            HTML_Report_Path = HtmlReporter.getFile().getAbsolutePath();
             if(Zip_Report){
-                String Origin_HTML = HTML_Path;
-                HTML_Path = A.Func.Zip_File(HTML_Path);
+                String Origin_HTML = HTML_Report_Path;
+                HTML_Report_Path = A.Func.Zip_File(HTML_Report_Path);
                 File hf = new File(Origin_HTML);
                 if(hf.exists() && !hf.isDirectory()) {
                     hf.delete();
                 }
                 HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Extract Here > open unzipped HTML file";
             }
-            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(HTML_Path, Slack_Channel, HTML_Report_Msg));
-            File hf = new File(HTML_Path);
+            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(HTML_Report_Path, Slack_Channel, HTML_Report_Msg));
+            File hf = new File(HTML_Report_Path);
             if(hf.exists() && !hf.isDirectory()) {
                 hf.delete();
             }
@@ -2977,6 +2976,8 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             btnFails.setEnabled(false);
         }
         btnExel.setEnabled(true);
+        
+        LOG_UPDATE(Log); // ========================================================
     }
     //</editor-fold>
     

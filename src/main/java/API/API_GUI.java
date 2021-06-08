@@ -27,7 +27,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
@@ -590,12 +589,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // <editor-fold defaultstate="collapsed" desc="Instance Variables Declarations">
-    private String Mobile_ID = "";
-    private String Mobile_PW = "";
-    private String AP3_ID = "";
-    private String AP3_PW = "";
-    private String Runner_ID = "";
-    private String Runner_PW = "";
+    private String MOBILE_ID = "";
+    private String MOBILE_PW = "";
+    private String ADMIN_ID = "";
+    private String ADMIN_PW = "";
+    private String RUNNER_ID = "";
+    private String RUNNER_PW = "";
+    private String New_ID = "";
     
     private String HTML_Report_Path = "";
     private String Report_Date = "";
@@ -604,7 +604,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected ExtentTest ParentTest;
     protected JSONObject json;
     
-    private static SwingWorker BW1; 
+    private SwingWorker BW1; 
     private Instant run_start;
     protected String r_time = "";  
     private boolean Zip_Report = true;
@@ -674,7 +674,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected double t_avg = 0;
     protected double p_50 = 0;
     protected double p_90 = 0;  
-    private static Duration DD;
+    private Duration DD;
     private String Last_EX = "";
     private String Report_File = "";
     // </editor-fold>    
@@ -822,7 +822,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            String R = Func.SHOW_LOG_FILE(J, "json");
+            String R = A.Func.SHOW_LOG_FILE(J, "json");
             if(!R.equals("OK")){
                 txtLog.append(R + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -886,7 +886,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            String R = Func.SHOW_LOG_FILE(J, "json");
+            String R = A.Func.SHOW_LOG_FILE(J, "json");
             if(!R.equals("OK")){
                 txtLog.append(R + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -952,7 +952,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_LOG_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -988,7 +988,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_LOG_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1085,7 +1085,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_LOG_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1115,14 +1115,14 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_LOG_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
     }//GEN-LAST:event_btnGroupMouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
+        String R = A.Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1151,7 +1151,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_LOG_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1194,7 +1194,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_LOG_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1223,7 +1223,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_LOG_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1256,7 +1256,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_LOG_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1392,7 +1392,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_LOG_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1434,7 +1434,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_LOG_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1462,7 +1462,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_LOG_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1495,7 +1495,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_LOG_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1551,7 +1551,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }   
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_LOG_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1635,7 +1635,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();        
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_LOG_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1666,7 +1666,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_LOG_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -2257,17 +2257,17 @@ public class API_GUI extends javax.swing.JInternalFrame {
         try{       
             for (String l : lines) {
                 value = l.substring(l.indexOf(" ")).trim();
-                if(l.contains("env:")) env = value;
-                if(l.contains("app:")) app = value;
-                if(l.contains("url:")) url = value;
-                if(l.contains("SECTOR:")) SECTOR  = value;
-                if(l.contains("GL_MENU:")) GL_MENU = value;
-                if(l.contains("SITE:")) SITE = value;
-                if(l.contains("BRAND:")) BRAND = value;
-                if(l.contains("txtMobile_ID:")) txtMobile_ID.setText(value);
-                if(l.contains("txtMobile_PW:")) txtMobile_PW.setText(value);
-                if(l.contains("txtAP3_ID:")) txtAP3_ID.setText(value);
-                if(l.contains("txtAP3_PW:")) txtAP3_PW.setText(value);             
+                if(l.contains("env: ")) env = value;
+                if(l.contains("app: ")) app = value;
+                if(l.contains("url: ")) url = value;
+                if(l.contains("SECTOR: ")) SECTOR  = value;
+                if(l.contains("GL_MENU: ")) GL_MENU = value;
+                if(l.contains("SITE: ")) SITE = value;
+                if(l.contains("BRAND: ")) BRAND = value;
+                if(l.contains("MOBILE_ID: ")) txtMobile_ID.setText(value);
+                if(l.contains("MOBILE_PW: ")) txtMobile_PW.setText(value);
+                if(l.contains("ADMIN_ID: ")) txtAP3_ID.setText(value);
+                if(l.contains("ADMIN_PW: ")) txtAP3_PW.setText(value);             
             }             
             CONFIG = true;
             txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
@@ -2300,10 +2300,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
             C += "SITE: " + _S + "\r\n";
             C += "BRAND: " + _B + "\r\n";
             
-            C += "txtMobile_ID: " + txtMobile_ID.getText().trim() + "\r\n";
-            C += "txtMobile_PW: " + txtMobile_PW.getText().trim()  + "\r\n";
-            C += "txtAP3_ID: " + txtAP3_ID.getText()  + "\r\n";
-            C += "txtAP3_PW: " + txtAP3_PW.getText() + "\r\n";            
+            C += "MOBILE_ID: " + txtMobile_ID.getText().trim() + "\r\n";
+            C += "MOBILE_PW: " + txtMobile_PW.getText().trim()  + "\r\n";
+            C += "ADMIN_ID: " + txtAP3_ID.getText()  + "\r\n";
+            C += "ADMIN_PW: " + txtAP3_PW.getText() + "\r\n";            
 
         } catch (Exception ex)  {
             txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
@@ -2427,7 +2427,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         } 
         
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_LOG_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -2510,6 +2510,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         
         try{
             Current_Log_Update(false, "= Auto Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+            New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
             EX = "";
             t_calls = 0;
             t_min =  0;
@@ -2545,18 +2546,21 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("env: ")) env = value;
                 if(l.contains("app: ")) app = value;
                 if(l.contains("url: ")) url = value; 
+                
                 if(l.contains("SlackCh: ")) Slack_Channel = value;
                 if(l.contains("_slack: ")) _Slack = Boolean.parseBoolean(value);
+                if(l.contains("_zip_report: ")) Zip_Report = Boolean.parseBoolean(value);
+                
                 if(l.contains("SECTOR: ")) SECTOR  = value;
                 if(l.contains("GL_MENU: ")) GL_MENU = value;
                 if(l.contains("SITE: ")) SITE = value;
                 if(l.contains("BRAND: ")) BRAND = value;
-                if(l.contains("Mobile_ID: ")) Mobile_ID = value; 
-                if(l.contains("Mobile_PW: ")) Mobile_PW = value; 
-                if(l.contains("AP3_ID: ")) AP3_ID = value; 
-                if(l.contains("AP3_PW: ")) AP3_PW = value;  
-                if(l.contains("Runner_ID: ")) Runner_ID = value; 
-                if(l.contains("Runner_PW: ")) Runner_PW = value; 
+                if(l.contains("MOBILE_ID: ")) MOBILE_ID = value; 
+                if(l.contains("MOBILE_PW: ")) MOBILE_PW = value; 
+                if(l.contains("ADMIN_ID: ")) ADMIN_ID = value; 
+                if(l.contains("ADMIN_PW: ")) ADMIN_PW = value;  
+                if(l.contains("RUNNER_ID: ")) RUNNER_ID = value; 
+                if(l.contains("RUNNER_PW: ")) RUNNER_PW = value; 
             }
             CONFIG = true;
             switch (env) {
@@ -2743,7 +2747,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 Execute();
                 
                 DD = Duration.between(run_start, Instant.now());
-                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
                 EX = "API " + env + ", " +
@@ -2780,16 +2784,12 @@ public class API_GUI extends javax.swing.JInternalFrame {
         BW1.execute();  
     }
     private void BW1_FAIL_LOG_UPDATE(String Error){
-        Summary = "BW1 - Failed";
+        Summary = "BW1 - Failed: " + Error;
         DD = Duration.between(run_start, Instant.now());
         LOG_UPDATE("- BW1 ERROR: " + Error);
     } 
     private void BW1_Done(boolean GUI) throws Exception{
         DD = Duration.between(run_start, Instant.now());
-             
-        Slack_Channel = "xtt_test";
-        Zip_Report = true;
-        
         Last_EX = EX;
         Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
         try {
@@ -2829,8 +2829,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Log = txtLog.getText();
         }
         LOG_UPDATE(Log); // ========================================================
-        HtmlReporter.config().setReportName("API(s) " + ", Env: " + env + 
-                ", Total Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
+        HtmlReporter.config().setReportName("API(s)" + ", Env: " + env + 
+                ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
                 ". Resp(sec) - Min: " + A.A.df.format(t_min) +
                             ", Avg: " + A.A.df.format(t_avg) +
                             ", Max: " + A.A.df.format(t_max) +
@@ -2889,6 +2889,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Response response =null;
             switch (Method) {
                 case "GET":
+                    if(BODY.equals("Runner")){
+                        request.header("From", "Bolter/1.0");
+                    }
                     response = request.get(EndPoint);
                     break;
                 case "POST":
@@ -2906,24 +2909,24 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 default:
                     break;
             }
-            Result = response.getStatusLine().toString();
+            Result = response.getStatusLine();
             status = response.getStatusCode();
             json = new JSONObject(response.asString());
 
             R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
             if (status == 200) {                                                 
                 _p++; 
-                EX += _t + "\t" + NAME + "\t" + "EndPoint: " + EndPoint + "\t" + Result + "\t" + "PASS" + "\t" + " - " +
+                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "PASS" + "\t" + " - " +
                 "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 Log_Html_Result("PASS", NAME + " > EndPoint: " + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
             } else if (status > 200 && status < 500) { 
                 _w++; 
-                EX += _t + "\t" + NAME + "\t" + "EndPoint: " + EndPoint + "\t" + Result + "\t" + "WARN" + "\t" + " - " +
+                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "WARN" + "\t" + " - " +
                 "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 Log_Html_Result("WARN", NAME + " > EndPoint: " + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
             } else {
                 _f++; FAIL = true; 
-                EX += _t + "\t" + NAME + "\t" + "EndPoint: " + EndPoint + "\t" + "Status Code: " + status + "\t" + "FAIL" + "\t" + Result +
+                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + "Status Code: " + status + "\t" + "FAIL" + "\t" + Result +
                 "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 Log_Html_Result("FAIL", NAME + " > EndPoint: " + BaseAPI + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
             }
@@ -2931,7 +2934,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + "API EndPoint" + "\t" + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             Log_Html_Result("FAIL", NAME + " > Error: " + err + "<br />EndPoint: " + BaseAPI + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
         } 
@@ -2953,12 +2956,16 @@ public class API_GUI extends javax.swing.JInternalFrame {
         //<editor-fold defaultstate="collapsed" desc="User">
         ParentTest = HtmlReport.createTest("User");            
 
-        Auth = "Basic " + Base64.getEncoder().encodeToString((Mobile_ID + ":" + Mobile_PW).getBytes());
+        Auth = "Basic " + Base64.getEncoder().encodeToString((MOBILE_ID + ":" + MOBILE_PW).getBytes());
         Realm = Func.Realm_ID(app, env);
         JOB_Api_Call("Mobile User Authentication GET", "GET", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", ParentTest, "no_jira");
         if(json != null){
-            if(json.has("user")) Mobile_User_ID = json.getString("user"); 
-            if(json.has("token")) Mobile_User_TKN = json.getString("token");   
+            try {
+                if(json.has("user")) Mobile_User_ID = json.getString("user"); 
+                if(json.has("token")) Mobile_User_TKN = json.getString("token");  
+            } catch (Exception ex){
+                //
+            }
         }
 
         Auth = "Bearer " + Mobile_User_TKN;
@@ -2968,12 +2975,16 @@ public class API_GUI extends javax.swing.JInternalFrame {
         long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // - 7 days
         JOB_Api_Call("Mobile User Orders", "GET", BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1, Auth, "", ParentTest, "no_jira");
 
-        Auth = "Basic " + Base64.getEncoder().encodeToString((AP3_ID + ":" + AP3_PW).getBytes());
+        Auth = "Basic " + Base64.getEncoder().encodeToString((ADMIN_ID + ":" + ADMIN_PW).getBytes());
         Realm = Func.Realm_ID("AP3", env);
         JOB_Api_Call("AP3 User Authentication GET", "GET", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", ParentTest, "no_jira");
-        if(json != null){
-            if(json.has("user")) AP3_User_ID = json.getString("user"); 
-            if(json.has("token")) AP3_User_TKN = json.getString("token");   
+        if(json != null){ 
+            try {
+                if(json.has("user")) AP3_User_ID = json.getString("user"); 
+                if(json.has("token")) AP3_User_TKN = json.getString("token");  
+            } catch (Exception ex){
+                //
+            }
         }
 
         Auth = "Bearer " + AP3_User_TKN;
@@ -2982,6 +2993,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
         Auth = "Bearer " + AP3_User_TKN;
         JOB_Api_Call("AP3 User > /permissions GET", "GET", BaseAPI + "/user/" + AP3_User_ID + "/permissions" + "?nocache=1", Auth, "", ParentTest, "no_jira");
 
+        Auth = "Basic " + Base64.getEncoder().encodeToString((RUNNER_ID + ":" + RUNNER_PW).getBytes());
+        JOB_Api_Call("Bolter Runner Site > /user/auth?realm=bolter GET", "GET", BaseAPI + "/user/auth" + "?realm=" + "bolter", Auth, "Runner", ParentTest, "no_jira");
+
+  
 
         //</editor-fold>  
         
@@ -2999,32 +3014,40 @@ public class API_GUI extends javax.swing.JInternalFrame {
         AppID = Func.App_ID(app, env);
         JOB_Api_Call("Location > /multigroup/'AppID' GET", "GET", BaseAPI + "/location/multigroup/" + AppID + "?nocache=true&extended=true", Auth, "", ParentTest, "no_jira");
         if(json != null){
-            JSONArray Groups = json.getJSONArray("groups");
-            for (int i = 0; i < Groups.length(); i++) {
-                JSONObject group = Groups.getJSONObject(i);
-                if(group.has("name") && group.getString("name").equals(SITE)){
-                    SiteID = group.getString("id");
-                    break;
+            try{
+                JSONArray Groups = json.getJSONArray("groups");
+                for (int i = 0; i < Groups.length(); i++) {
+                    JSONObject group = Groups.getJSONObject(i);
+                    if(group.has("name") && group.getString("name").equals(SITE)){
+                        SiteID = group.getString("id");
+                        break;
+                    } 
                 } 
-            } 
-        }
+            } catch (Exception ex){
+                //
+            }
+        } 
 
         Auth = "";                      // =============== AP3 Site Brands ===========================
         JOB_Api_Call("Location > /group/'SiteID' GET", "GET", BaseAPI + "/location/group/" + SiteID, Auth, "", ParentTest, "no_jira");
         if(json != null){
-            JSONArray Location = json.getJSONArray("locations");
-            if (Location != null) {
-                for (Object l : Location) {
-                    JSONObject loc = (JSONObject) l;
-                    JSONArray brands = loc.getJSONArray("brands");
-                    for (Object b : brands) {
-                        JSONObject br = (JSONObject) b;                           
-                        if (br.getString("name").equals(BRAND)) { 
-                            BrandID = br.getString("id");
-                            UnitID = loc.getString("id");
+            try {
+                JSONArray Location = json.getJSONArray("locations");
+                if (Location != null) {
+                    for (Object l : Location) {
+                        JSONObject loc = (JSONObject) l;
+                        JSONArray brands = loc.getJSONArray("brands");
+                        for (Object b : brands) {
+                            JSONObject br = (JSONObject) b;                           
+                            if (br.getString("name").equals(BRAND)) { 
+                                BrandID = br.getString("id");
+                                UnitID = loc.getString("id");
+                            }
                         }
                     }
                 }
+            } catch (Exception ex){
+                //
             }
         }   
 
@@ -3037,16 +3060,20 @@ public class API_GUI extends javax.swing.JInternalFrame {
         CompanyID = "";
         if(json != null){
             MENU_IDS = new ArrayList<>();
-            JSONArray MENUS = json.getJSONArray("menus");
-            for (int i = 0; i < MENUS.length(); i++) {
-                JSONObject menu = MENUS.getJSONObject(i);
+            try {
+                JSONArray MENUS = json.getJSONArray("menus");
+                for (int i = 0; i < MENUS.length(); i++) {
+                    JSONObject menu = MENUS.getJSONObject(i);
                     MENU_IDS.add(menu.getString("id"));
-            } 
-            if(json.has("sector")){           
-                SectorID = json.getString("sector");
-            }
-            if(json.has("company")){
-                CompanyID = json.getString("company");
+                } 
+                if(json.has("sector")){           
+                    SectorID = json.getString("sector");
+                }
+                if(json.has("company")){
+                    CompanyID = json.getString("company");
+                }
+            } catch (Exception ex){
+                //
             }
         }
         //</editor-fold>
@@ -3094,7 +3121,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Sales Reporting EOD">        
-        ParentTest = HtmlReport.createTest("Sales Reporting EOD");     
+        ParentTest = HtmlReport.createTest("Sales Reporting EOD");   
+        
         Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Sales Reporting EOD ===========================
         JOB_Api_Call("Sales EOD Report - Default > /'SiteID' GET", "GET", BaseAPI + "/report/eod/group/" + SiteID, Auth, "", ParentTest, "no_jira");
         String From = ""; 
@@ -3106,24 +3134,24 @@ public class API_GUI extends javax.swing.JInternalFrame {
             boolean XXX = true;
             //
         }
-
-    //</editor-fold>        
+        //https://dev.adminpanel.compassdigital.org/#/reports/all/site/Ne9O6BK6vWhgKm7p2K7YuX3Z21Ww07sy28YoXd8WFNmqDgPBXXtlkq0jkA3PtA1Gz1qEkWIgMep?dates=2021-05-20_2021-05-20
+        //</editor-fold>        
                
         //<editor-fold defaultstate="collapsed" desc="Announcement">            
         ParentTest = HtmlReport.createTest("Announcement");              
         Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Announcement ===========================
         JOB_Api_Call("AP3 Announcement GET", "GET", BaseAPI + "/announcement/resource/", Auth, "", ParentTest, "no_jira");
 
-        //</editor-fold>
-        
-        //<editor-fold defaultstate="collapsed" desc="Notification">            
-        ParentTest = HtmlReport.createTest("AP3 Notification");              
-        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Notification ===========================
-        // "target" >>> "Recipient of the notifications. Can be the whole realm, role or user id"
-        JOB_Api_Call("AP3 Notification GET", "GET", BaseAPI + "/notification?realm=cdl&target=admin_panel", Auth, "", ParentTest, "no_jira");
-        JOB_Api_Call("'" + app + "' Notification GET", "GET", BaseAPI + "/notification?realm=" + app.toLowerCase() + "&target=cdl", Auth, "", ParentTest, "no_jira");
-
-        //</editor-fold>
+        //</editor-fold>       
+    
+        //<editor-fold defaultstate="collapsed" desc="KDS">            
+        ParentTest = HtmlReport.createTest("KDS");              
+        Auth = "Bearer " + AP3_User_TKN;   // =============== "KDS devices for Unit numbers > string separated with commas", ===========================
+        JOB_Api_Call("KDS Devices > ?'unitNumber(s)' GET", "GET", BaseAPI + "/kds/devices?unitNumber=" + "12345,34567,32446673542657", Auth, "", ParentTest, "no_jira");
+        if(json != null){
+            String DEVICES = "Check json"; 
+        }
+        //</editor-fold>   
     }
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">
