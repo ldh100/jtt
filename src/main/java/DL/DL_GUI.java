@@ -104,6 +104,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
 public class DL_GUI extends javax.swing.JInternalFrame {
+
+    
     public DL_GUI() {
         initComponents();
     }
@@ -157,6 +159,9 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         DV_QA = new javax.swing.JTable();
         lblTestData = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        DV_D_Variants = new javax.swing.JTable();
+        lblDates1 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -165,32 +170,31 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(858, 527));
         setName("DL"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
-        setPreferredSize(new java.awt.Dimension(858, 527));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameClosed(evt);
             }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
         });
 
@@ -572,30 +576,62 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         lblTestData.setText("Test Data");
         lblTestData.setName("lblDates"); // NOI18N
 
+        DV_D_Variants.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        DV_D_Variants.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        DV_D_Variants.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        DV_D_Variants.setCellSelectionEnabled(true);
+        DV_D_Variants.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_D_Variants.setName("DV_D_Variants"); // NOI18N
+        DV_D_Variants.setOpaque(false);
+        DV_D_Variants.setRowHeight(18);
+        DV_D_Variants.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        DV_D_Variants.getTableHeader().setReorderingAllowed(false);
+        DV_D_Variants.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DV_D_VariantsMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(DV_D_Variants);
+
+        lblDates1.setText("Variants");
+        lblDates1.setName("lblDates"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(lblTestData, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(lblMetrics, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(4, 4, 4)
-                        .addComponent(lblDates, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(lblMetrics, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblDates, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblDates1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(4, 4, 4)
@@ -607,10 +643,19 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                         .addGap(8, 8, 8)
                         .addComponent(txtAdmin_PW, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(lblTestData, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -622,12 +667,18 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblMetrics)
-                        .addGap(0, 0, 0)
+                        .addGap(8, 8, 8)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(lblDates)
-                        .addGap(4, 4, 4)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDates)
+                            .addComponent(lblDates1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -641,12 +692,10 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                         .addGap(2, 2, 2)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtAdmin_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAdmin_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtAdmin_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(37, 37, 37))
         );
 
         pack();
@@ -729,6 +778,16 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
+
+    private void DV_D_VariantsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_D_VariantsMouseClicked
+        // TODO add your handling code here:
+         if (d2LastRow == DV_D_Variants.getSelectedRow()) {
+           return;
+        }
+        d2LastRow = DV_D_Variants.getSelectedRow();   
+        Variants = String.valueOf(DV_D_Variants.getValueAt(DV_D_Variants.getSelectedRow(), 0));
+        System.out.println(Variants);
+    }//GEN-LAST:event_DV_D_VariantsMouseClicked
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Instance Variables Declarations">  
@@ -833,6 +892,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     protected String METRIC = "";
     protected String GROUP = "";
     protected String DATE_RANGE = "";
+    protected String Variants = "";
+    
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">   
@@ -877,7 +938,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         GUI_Load_CONFIG();
         //GET_DL_USER_TOKEN(false);
         GetDates();       
-        GetMetrics(); 
+        GetMetrics();
+        GetVariants();
         Get_S3_DL_Credentials();
         Get_S3_data(AWS_credentials);
 
@@ -1153,6 +1215,67 @@ public class DL_GUI extends javax.swing.JInternalFrame {
 
         d2LastRow = DV_D_RANGES.getSelectedRow();        
         lblDates.setText("Date Ranges (" + DV_D_RANGES.getRowCount() + " found/defined)");
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+    
+    private void GetVariants() {
+        d2LastRow = -1;
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("- Load Variants ..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+     
+        try{
+            String[] DateColumnsName = {"Variants"}; 
+            DefaultTableModel DateModel = new DefaultTableModel();
+            DateModel.setColumnIdentifiers(DateColumnsName);
+            DV_D_Variants.setModel(DateModel);
+
+            TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV_D_Variants.getModel());
+            DV_D_Variants.setRowSorter(sorter);
+            ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+            sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+            sorter.setSortKeys(sortKeys);  
+            sorter.setSortable(0, false);         
+            DateModel.addRow(new Object[]{"Total"});       
+            DateModel.addRow(new Object[]{"Distributor only"}); 
+            DateModel.addRow(new Object[]{"Manufacturer only"});    
+        
+            DV_D_Variants.setModel(DateModel);    
+            DV_D_Variants.setDefaultEditor(Object.class, null);
+            DV_D_Variants.getColumnModel().getColumn(0).setPreferredWidth(240);
+//            DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
+//            DV2.getColumnModel().getColumn(2).setPreferredWidth(80);
+
+            sorter.setSortable(0, true); 
+            sorter.sort();            
+   
+        } catch (Exception ex) {
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
+        }          
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();
+   
+        if (DV_D_Variants.getRowCount() > 0) {
+            DV_D_Variants.changeSelection(0, 0, false, false);
+            if (CONFIG && !"".equals(Variants.trim()))
+            {
+                for(int row = 0; row < DV_D_Variants.getRowCount(); row++) {
+                    if(DV_D_Variants.getValueAt(row, 0).equals(Variants)){
+                        DV_D_Variants.changeSelection(row, 0, false, false);
+                        break;
+                    } 
+                }
+            }
+        } 
+
+        d2LastRow = DV_D_Variants.getSelectedRow();        
+        lblDates1.setText("Variants (" + DV_D_Variants.getRowCount() + " found/defined)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
 
@@ -1916,7 +2039,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                     EX += " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\r\n";
                     Clear_Cookies_Restart_Driver(BROWSER, ParentTest, "no_jira");   
                     if (!FAIL) { 
-                        DL_login BR = new DL.DL_login(DL_GUI.this);
+                        DL_login BR = new DL_login(DL_GUI.this);
                         BR.run(DL_UserID, DL_UserPW, false); // ======================================
                         EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
                         Login_OK = BR.Login_OK;
@@ -1932,7 +2055,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 EX += " - " + "\t" + " === QA Users - Data Validation" + "\t" + "User: " + QA_USER + "\t" + " == Users " + " - Test# " + (i+1) + " Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 
                 
-                DL_qa_user BR = new DL.DL_qa_user(DL_GUI.this);
+                DL_qa_user BR = new DL_qa_user(DL_GUI.this);
                 BR.run(  // ====== pass QA User Test # 'i + 1' Data from QA Data Table build from S3 QA file =========================
                     DL_UserID, 
                     DV_QA.getValueAt(i, 2).toString(),     
@@ -1963,7 +2086,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             DL_UserID = txtAdmin_ID.getText();
             DL_UserPW = txtAdmin_PW.getText();
             EX += " - " + "\t" + " === Login(s) " + "\t" + " ===== " + "\t" + " == Login(s) Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";      
-            DL_login BR = new DL.DL_login(DL_GUI.this);
+            DL_login BR = new DL_login(DL_GUI.this);
             BR.run(DL_UserID, DL_UserPW, _invalid_login.isSelected()); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Login(s) " + "\t" + " ===== " + "\t" + " == ^ Login(s) End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -1978,7 +2101,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Metrics Selection"); 
             SCOPE += ", Metrics Selection"; 
             EX += " - " + "\t" + " === Metrics Selection" + "\t" + " ===== " + "\t" + " == Metrics Selection Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_metrics_selection BR = new DL.DL_metrics_selection(DL_GUI.this);
+            DL_metrics_selection BR = new DL_metrics_selection(DL_GUI.this);
             BR.run(); // ============================================================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Metrics Selection" + "\t" + " ===== " + "\t" + " == ^ Metrics Selection End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -1990,21 +2113,26 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             for (int i = 0; i < 3; i++) {
                 if(i == 0)  CompareTo = "Compared to last year";
                 if(i == 1)  CompareTo = "Compared to last month";
-                if(i == 2)  CompareTo = "Compared to last week";	
+                if(i == 2)  CompareTo = "Compared to last week";
+                for (int j = 0; j < 3; j++) {
+                if(j == 0)  Variants = "Total";
+                if(j == 1)  Variants = "Distributor only";
+                if(j == 2)  Variants = "Manufacturer only";
                 ParentTest = HtmlReport.createTest("Secondary Metrics - " + CompareTo); 
                 EX += " - " + "\t" + " === Secondary Metrics  - " + CompareTo + "\t" + " ===== " + "\t" + " == Secondary Metrics Data Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                DL_metric_data BR = new DL.DL_metric_data(DL_GUI.this);
-                BR.run(CompareTo); // ============================================================================            
+                DL_metric_data BR = new DL_metric_data(DL_GUI.this);
+                BR.run(CompareTo, Variants); // ============================================================================            
                 EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
                 EX += " - " + "\t" + " === ^ Secondary Metrics  - " + CompareTo + "\t" + " ===== " + "\t" + " == ^ Secondary Metrics Data End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             }    
+            }
         }
 
         if (_insights.isSelected()) { 
             ParentTest = HtmlReport.createTest("Insights");                         
             SCOPE += ", Insights";
             EX += " - " + "\t" + " === Insights" + "\t" + " ===== " + "\t" + " == Insights Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_insights BR = new DL.DL_insights(DL_GUI.this);
+            DL_insights BR = new DL_insights(DL_GUI.this);
             BR.run(); // ============================================================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Insights" + "\t" + " ===== " + "\t" + " == ^ Insights End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -2015,7 +2143,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Drilldown");                         
             SCOPE += ", Drilldown";
             EX += " - " + "\t" + " === Drilldown" + "\t" + " ===== " + "\t" + " == Drilldown Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_drilldown BR = new DL.DL_drilldown(DL_GUI.this);
+            DL_drilldown BR = new DL_drilldown(DL_GUI.this);
             BR.run(); // ============================================================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Drilldown" + "\t" + " ===== " + "\t" + " == ^ Drilldown End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -2026,7 +2154,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("LogOut");                         
             SCOPE += ", LogOut";
             EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_logout BR = new DL.DL_logout(DL_GUI.this);
+            DL_logout BR = new DL_logout(DL_GUI.this);
             BR.run(); // ============================================================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -2036,7 +2164,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Forgot PW");                                     
             SCOPE += ", Forgot PW";  
             EX += " - " + "\t" + " === Forgot PW" + "\t" + " ===== " + "\t" + " == Forgot PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_password BR = new DL.DL_password(DL_GUI.this);
+            DL_password BR = new DL_password(DL_GUI.this);
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             BR.run(); // ============================================================================
             EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -5447,6 +5575,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV_D_RANGES;
+    private javax.swing.JTable DV_D_Variants;
     private javax.swing.JTable DV_METRICS;
     private javax.swing.JTable DV_QA;
     private javax.swing.JCheckBox _all_data;
@@ -5475,8 +5604,10 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lblDates;
+    private javax.swing.JLabel lblDates1;
     private javax.swing.JLabel lblMetrics;
     private javax.swing.JLabel lblSITES10;
     private javax.swing.JLabel lblSITES11;
