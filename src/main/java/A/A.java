@@ -129,7 +129,6 @@ public class A extends javax.swing.JFrame {
         Menu_C360_.add(Menu_C360_DE);
 
         Menu_C360_ST.setText("- Staging (staging.cafe360.compassdigital.org)");
-        Menu_C360_ST.setEnabled(false);
         Menu_C360_ST.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_C360_ST.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -139,7 +138,6 @@ public class A extends javax.swing.JFrame {
         Menu_C360_.add(Menu_C360_ST);
 
         Menu_C360_PR.setText("- Production (cafe360.compassdigital.org)");
-        Menu_C360_PR.setEnabled(false);
         Menu_C360_PR.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_C360_PR.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1419,7 +1417,6 @@ public class A extends javax.swing.JFrame {
     }
     private void Get_User() {
         UserID = System.getProperty("user.name");
-        //UserID = "theleepan.sivabalasi";
         WsOS = System.getProperty("os.name");
         try {
             InetAddress addr;

@@ -1638,121 +1638,121 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void LOG_UPDATE(String LOG){  
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
-            PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET " +
-                    " [Date] = ?" +       // 1
-                    ", [Time] = ?" +      // 2
-                    ", [app] = ?" +       // 3
-                    ", [url] = ?" +       // 4
-                    ", [summary] = ?" +   // 5
-                    ", [t_calls] = ?" +   // 6
-                    ", [t_min] = ?" +     // 7
-                    ", [t_avg] = ?" +     // 8
-                    ", [t_max] = ?" +     // 9
-                    ", [p_50] = ?" +      // 10
-                    ", [p_90] = ?" +      // 11
-                    ", [test_type] = ?" +     // 12
-                    ", [user_id] = ?" +       // 13
-                    ", [user_ws] = ?" +       // 14
-                    ", [env] = ?" +       // 15
-                    ", [Result] = ?" +    // 16
-                    ", [Status] = ?" +    // 17
-                    ", [Excel] = ?" +     // 18
-                    " WHERE [app] = 'AP3_" + env + "' AND [Status] = 'Running'");
-            _update.setString(1, LocalDateTime.now().format(A.A.Date_formatter));
-            _update.setString(2, LocalDateTime.now().format(A.A.Time_24_formatter));
-            _update.setString(3, "AP3_" + env);
-            _update.setString(4, url);
-            _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
-            _update.setInt(6, t_calls);
-            _update.setDouble(7, t_min);
-            _update.setDouble(8, t_avg);
-            _update.setDouble(9, t_max);
-            _update.setDouble(10, p_50);
-            _update.setDouble(11, p_90);
-            _update.setString(12, r_type);
-            _update.setString(13, A.A.UserID);
-            _update.setString(14, A.A.WsID);
-            _update.setString(15, BROWSER);
-            _update.setString(16, LOG);
-            _update.setString(17, "Scope: " + SCOPE);
-            _update.setString(18, EX);
-            int row = _update.executeUpdate();
-            conn.close();
-        } catch (SQLException ex) {
-            txtLog.append( "= LOG_UPDATE > SQL ERROR: " + ex.getMessage());
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        new Thread(() -> {
+            try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+                PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET " +
+                        " [Date] = ?" +       // 1
+                        ", [Time] = ?" +      // 2
+                        ", [app] = ?" +       // 3
+                        ", [url] = ?" +       // 4
+                        ", [summary] = ?" +   // 5
+                        ", [t_calls] = ?" +   // 6
+                        ", [t_min] = ?" +     // 7
+                        ", [t_avg] = ?" +     // 8
+                        ", [t_max] = ?" +     // 9
+                        ", [p_50] = ?" +      // 10
+                        ", [p_90] = ?" +      // 11
+                        ", [test_type] = ?" +     // 12
+                        ", [user_id] = ?" +       // 13
+                        ", [user_ws] = ?" +       // 14
+                        ", [env] = ?" +       // 15
+                        ", [Result] = ?" +    // 16
+                        ", [Status] = ?" +    // 17
+                        ", [Excel] = ?" +     // 18
+                        " WHERE [app] = 'AP3_" + env + "' AND [Status] = 'Running'");
+                _update.setString(1, LocalDateTime.now().format(A.A.Date_formatter));
+                _update.setString(2, LocalDateTime.now().format(A.A.Time_24_formatter));
+                _update.setString(3, "AP3_" + env);
+                _update.setString(4, url);
+                _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
+                _update.setInt(6, t_calls);
+                _update.setDouble(7, t_min);
+                _update.setDouble(8, t_avg);
+                _update.setDouble(9, t_max);
+                _update.setDouble(10, p_50);
+                _update.setDouble(11, p_90);
+                _update.setString(12, r_type);
+                _update.setString(13, A.A.UserID);
+                _update.setString(14, A.A.WsID);
+                _update.setString(15, BROWSER);
+                _update.setString(16, LOG);
+                _update.setString(17, "Scope: " + SCOPE);
+                _update.setString(18, EX);
+                int row = _update.executeUpdate();
+                conn.close();
+            } catch (SQLException ex) {
+                txtLog.append( "= LOG_UPDATE > SQL ERROR: " + ex.getMessage());
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            }            
+        }).start();
     }
     private void LOG_START(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
-            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] (" +
-                    "[Date]" +   // 1
-                    ", [Time]" +   // 2
-                    ", [app]" +   // 3
-                    ", [url]" +   // 4
-                    ", [summary]" +   // 5
-                    ", [t_calls]" +   // 6
-                    ", [t_min]" +   // 7
-                    ", [t_avg]" +   // 8
-                    ", [t_max]" +   // 9
-                    ", [p_50]" +   // 10
-                    ", [p_90]" +   // 11
-                    ", [test_type]" +   // 12
-                    ", [user_id]" +   // 13
-                    ", [user_ws]" +   // 14
-                    ", [env]" +   // 15
-                    ", [Result]" +   // 16
-                    ", [Status]" +   // 17
-                    ", [Excel]" +     // 18
-                    ") VALUES (" +
-                    "?" +     // 1
-                    ",?" +    // 2
-                    ",?" +    // 3
-                    ",?" +    // 4
-                    ",?" +    // 5
-                    ",?" +    // 6
-                    ",?" +    // 7
-                    ",?" +    // 8
-                    ",?" +    // 9
-                    ",?" +    // 10
-                    ",?" +    // 11
-                    ",?" +    // 12
-                    ",?" +    // 13
-                    ",?" +    // 14
-                    ",?" +    // 15
-                    ",?" +    // 16
-                    ",?" +    // 17
-                    ",?" +    // 18
-                    ")");
-            _insert.setString(1, LocalDateTime.now().format(A.A.Date_formatter));
-            _insert.setString(2, LocalDateTime.now().format(A.A.Time_24_formatter));
-            _insert.setString(3, "AP3_" + env);
-            _insert.setString(4, url);
-            _insert.setString(5, "Running...");
-            _insert.setString(6, "0");
-            _insert.setString(7, "0");
-            _insert.setString(8, "0");
-            _insert.setString(9, "0");
-            _insert.setString(10, "0");
-            _insert.setString(11, "0");
-            _insert.setString(12, r_type);
-            _insert.setString(13, A.A.UserID);
-            _insert.setString(14, A.A.WsID);
-            _insert.setString(15, BROWSER);
-            _insert.setString(16,  "= Job is running... ===\r\n" + "");
-            _insert.setString(17, "Running");
-            _insert.setString(18, "None");
-            int row = _insert.executeUpdate();
-            conn.close();
-        }  catch (SQLException ex) {
-            txtLog.append( "= LOG_START > SQL ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        new Thread(() -> {
+            try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+                PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] (" +
+                        "[Date]" +   // 1
+                        ", [Time]" +   // 2
+                        ", [app]" +   // 3
+                        ", [url]" +   // 4
+                        ", [summary]" +   // 5
+                        ", [t_calls]" +   // 6
+                        ", [t_min]" +   // 7
+                        ", [t_avg]" +   // 8
+                        ", [t_max]" +   // 9
+                        ", [p_50]" +   // 10
+                        ", [p_90]" +   // 11
+                        ", [test_type]" +   // 12
+                        ", [user_id]" +   // 13
+                        ", [user_ws]" +   // 14
+                        ", [env]" +   // 15
+                        ", [Result]" +   // 16
+                        ", [Status]" +   // 17
+                        ", [Excel]" +     // 18
+                        ") VALUES (" +
+                        "?" +     // 1
+                        ",?" +    // 2
+                        ",?" +    // 3
+                        ",?" +    // 4
+                        ",?" +    // 5
+                        ",?" +    // 6
+                        ",?" +    // 7
+                        ",?" +    // 8
+                        ",?" +    // 9
+                        ",?" +    // 10
+                        ",?" +    // 11
+                        ",?" +    // 12
+                        ",?" +    // 13
+                        ",?" +    // 14
+                        ",?" +    // 15
+                        ",?" +    // 16
+                        ",?" +    // 17
+                        ",?" +    // 18
+                        ")");
+                _insert.setString(1, LocalDateTime.now().format(A.A.Date_formatter));
+                _insert.setString(2, LocalDateTime.now().format(A.A.Time_24_formatter));
+                _insert.setString(3, "AP3_" + env);
+                _insert.setString(4, url);
+                _insert.setString(5, "Running...");
+                _insert.setString(6, "0");
+                _insert.setString(7, "0");
+                _insert.setString(8, "0");
+                _insert.setString(9, "0");
+                _insert.setString(10, "0");
+                _insert.setString(11, "0");
+                _insert.setString(12, r_type);
+                _insert.setString(13, A.A.UserID);
+                _insert.setString(14, A.A.WsID);
+                _insert.setString(15, BROWSER);
+                _insert.setString(16,  "= Job is running... ===\r\n" + "");
+                _insert.setString(17, "Running");
+                _insert.setString(18, "None");
+                int row = _insert.executeUpdate();
+                conn.close();
+            }  catch (SQLException ex) {
+                txtLog.append( "= LOG_START > SQL ERROR: " + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            }
+        }).start();
     }
 
     private void GUI_Load_CONFIG(){
@@ -2340,14 +2340,14 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                     Current_Log_Update(GUI, DriverStart.trim() + "\r\n");
                     Summary = "Start Web Driver - Failed";
                     DD = Duration.between(run_start, Instant.now());
-                    LOG_UPDATE(DriverStart.trim() + "\r\n");   // ======================================================
+                    LOG_UPDATE(DriverStart.trim() + "\r\n");   
                     btnRun.setEnabled(true);
                     btnFails.setEnabled(true);
                 }
                 New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
-                Extent_Report_Config();// ======================================================================= 
                 
-                Execute();
+                Extent_Report_Config(); 
+                Execute(); // ======================================================================= 
                 
                 DD = Duration.between(run_start, Instant.now());
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
@@ -2452,7 +2452,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("AP3 Login"); 
             AP3_login BR = new AP3_New.AP3_login(AP3_GUI.this);
             BR.run(_users.isSelected()); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;           
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time; 
+            Ver = BR.Ver;
         }
 //        if(_login.isSelected()){
 //            SCOPE += "Login";
@@ -2546,22 +2547,23 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 hf.delete();
             }
         }
-        if(_AWS_Alert) { // && failed
+        if(_AWS_Alert && _f > 0) { // && failed
             JSONObject requestParams = new JSONObject();
             JSONObject payload = new JSONObject();
             JSONObject custom_details = new JSONObject();            
                 payload.put("summary", "Admin Panel (AP3) - Sanity Check");
                 payload.put("source", "https://adminpanel.compassdigital.org/#/");                
                 payload.put("severity", "critical");
-                    custom_details.put("test_type", "manual");
-                    custom_details.put("max_responce_time", "2.12 sec");
-                    custom_details.put("steps_total", "12");
-                    custom_details.put("steps_failed", "3");
+                    custom_details.put("host", A.A.WsID);
+                    custom_details.put("test_type", "cron");
+                    custom_details.put("max_responce_time", t_max + " sec");
+                    custom_details.put("steps_total", _t);
+                    custom_details.put("steps_failed", _f);
                 payload.put("custom_details", custom_details);    
             requestParams.put("payload", payload);
             requestParams.put("routing_key", "AWS_Routing_Key");
             requestParams.put("event_action", "trigger");
-            requestParams.put("client", "QAVM - AWS Special Projects");
+            requestParams.put("client", "JTT - AWS Special Projects");
             requestParams.put("client_url", "ec2-3-13-3-59.us-east-2.compute.amazonaws.com");
             String BODY = requestParams.toString(4);
 
