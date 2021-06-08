@@ -2090,7 +2090,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         if(GUI){
             Log = txtLog.getText();
         }
-        LOG_UPDATE(Log); // ========================================================
+
         HtmlReporter.config().setReportName("Distiller" + ", Env: " + env + 
                 ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
                 ". Resp(sec) - Min: " + A.A.df.format(t_min) +
@@ -2139,6 +2139,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             btnFails.setEnabled(false);
         }
         btnExel.setEnabled(true);
+        
+        LOG_UPDATE(Log); // ========================================================
     }
   
     // </editor-fold> 

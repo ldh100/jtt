@@ -939,8 +939,6 @@ public class FW extends javax.swing.JInternalFrame {
         btnExel.setEnabled(true);
         
         
-        LOG_UPDATE(); // ========================================================
-        
         if(_slack.isSelected()){
             Report(false);
             String MSG = "FW_" + env + " Automation report - " + Report_Date  +  
@@ -956,6 +954,8 @@ public class FW extends javax.swing.JInternalFrame {
                 f.delete();
             }  
         }
+        
+        LOG_UPDATE(); // ========================================================
     }
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked

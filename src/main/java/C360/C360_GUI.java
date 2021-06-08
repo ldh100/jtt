@@ -1617,7 +1617,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    private void LOG_UPDATE(String GUI){  
+    private void LOG_UPDATE(String LOG){  
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET " +
@@ -1655,7 +1655,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             _update.setString(13, A.A.UserID);
             _update.setString(14, A.A.WsID);
             _update.setString(15, BROWSER);
-            _update.setString(16, txtLog.getText());
+            _update.setString(16, LOG);
             _update.setString(17, "Scope: " + SCOPE);
             _update.setString(18, EX);
             int row = _update.executeUpdate();
@@ -2462,7 +2462,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         if(GUI){
             Log = txtLog.getText();
         }
-        LOG_UPDATE(Log); // ========================================================
+
         HtmlReporter.config().setReportName("C360" + ", Env: " + env + 
                 ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
                 ". Resp(sec) - Min: " + A.A.df.format(t_min) +
@@ -2511,6 +2511,8 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             btnFails.setEnabled(false);
         }
         btnExel.setEnabled(true);
+        
+        LOG_UPDATE(Log); // ========================================================
     }
 
     // </editor-fold> 

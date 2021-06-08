@@ -56,8 +56,6 @@ public class Jobs extends javax.swing.JInternalFrame {
         txtCron = new javax.swing.JFormattedTextField();
         btnStartCron = new javax.swing.JButton();
         btnStopCron = new javax.swing.JButton();
-        btnX = new javax.swing.JButton();
-        btnStartCron1 = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -220,26 +218,6 @@ public class Jobs extends javax.swing.JInternalFrame {
             }
         });
 
-        btnX.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnX.setForeground(new java.awt.Color(0, 0, 0));
-        btnX.setText("X");
-        btnX.setName("btnStart"); // NOI18N
-        btnX.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnXMouseClicked(evt);
-            }
-        });
-
-        btnStartCron1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnStartCron1.setForeground(new java.awt.Color(0, 0, 0));
-        btnStartCron1.setText("Start Cron");
-        btnStartCron1.setName("btnStart"); // NOI18N
-        btnStartCron1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnStartCron1MouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -278,20 +256,13 @@ public class Jobs extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
-                .addComponent(btnX, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnStartCron, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8)
                         .addComponent(btnStopCron, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(682, Short.MAX_VALUE)
-                    .addComponent(btnStartCron1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(86, 86, 86)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,7 +303,6 @@ public class Jobs extends javax.swing.JInternalFrame {
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnX, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnStartCron, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnStopCron, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(6, 6, 6)
@@ -340,11 +310,6 @@ public class Jobs extends javax.swing.JInternalFrame {
                             .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(2, 2, 2))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(452, Short.MAX_VALUE)
-                    .addComponent(btnStartCron1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(24, 24, 24)))
         );
 
         pack();
@@ -354,7 +319,6 @@ public class Jobs extends javax.swing.JInternalFrame {
     private int dv1LastRow = -1; 
     private String Last_JOB = ""; 
     private String JobName = "";
-    private String AWS_Routing_Key = "";
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">        
@@ -396,14 +360,6 @@ public class Jobs extends javax.swing.JInternalFrame {
     private void btnStopCronMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStopCronMouseClicked
         STOP_CRON();  
     }//GEN-LAST:event_btnStopCronMouseClicked
-
-    private void btnXMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXMouseClicked
-        DEV_OPS_ALERT();
-    }//GEN-LAST:event_btnXMouseClicked
-
-    private void btnStartCron1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStartCron1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnStartCron1MouseClicked
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">     
@@ -448,10 +404,6 @@ public class Jobs extends javax.swing.JInternalFrame {
           
             sorter.setSortable(0, true); 
             sorter.sort();
-            
-            rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'AWS_Routing_Key'");
-            rs.next();
-            AWS_Routing_Key = rs.getString(1);
             
             conn.close();           
         } catch (SQLException ex) {
@@ -710,54 +662,6 @@ public class Jobs extends javax.swing.JInternalFrame {
         txtLog.append( "= " + Job + ": (ad-hoc) Execution started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }
-    public void DEV_OPS_ALERT(){
-        int StatusCode = 0;
-        String Result = "";
-        String EndPoint = "https://events.pagerduty.com/v2/enqueue";
-        try {
-            RequestSpecification request;
-            request = RestAssured.given();
-            Response response = null;
-            //request.header("Authorization", "Bearer " + Bearer_Token); // no Authorization header required
-            
-            JSONObject requestParams = new JSONObject();
-            JSONObject payload = new JSONObject();
-            JSONObject custom_details = new JSONObject();            
-                payload.put("summary", "Admin Panel (AP3) - Sanity Check");
-                payload.put("source", "https://adminpanel.compassdigital.org/#/");                
-                payload.put("severity", "critical");
-                    custom_details.put("test_type", "manual");
-                    custom_details.put("max_responce_time", "2.12 sec");
-                    custom_details.put("steps_total", "12");
-                    custom_details.put("steps_failed", "3");
-                payload.put("custom_details", custom_details);    
-            requestParams.put("payload", payload);
-            requestParams.put("routing_key", AWS_Routing_Key);
-            requestParams.put("event_action", "trigger");
-            requestParams.put("client", "QAVM - AWS Special Projects");
-            requestParams.put("client_url", "ec2-3-13-3-59.us-east-2.compute.amazonaws.com");
-
-            request.body(requestParams.toString(4));            
-            
-            response = request.post(EndPoint);
-            Result = response.getStatusLine();
-            StatusCode = response.getStatusCode();
-            JSONObject json = new JSONObject(response.asString());
-                txtLog.append("= Json: " + "\r\n" + json.toString(4) + "\r\n" + Result + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            if(StatusCode == 202){
-                txtLog.append("= Alert sent to " + EndPoint + " @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());                 
-            } else{
-                txtLog.append("= Send Alert to " + EndPoint + " ERROR: " + Result + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());                  
-            }
-
-        } catch(Exception ex){
-            txtLog.append("= Send Alert to " + EndPoint + " - ERROR:" + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        }
-    }
 
     //<editor-fold defaultstate="collapsed" desc="Jobs > Job Name, Config">
     private void Job_AP3(String job, String config){
@@ -814,9 +718,7 @@ public class Jobs extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnRun;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnStartCron;
-    private javax.swing.JButton btnStartCron1;
     private javax.swing.JButton btnStopCron;
-    private javax.swing.JButton btnX;
     private javax.swing.JComboBox<String> cmbTrigger;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

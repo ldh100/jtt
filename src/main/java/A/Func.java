@@ -1,4 +1,7 @@
 package A;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -12,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -205,6 +209,40 @@ public class Func {
             return "\r\n= Show " + aLog + " > ERROR: " + ex.getMessage()+ "\r\n";
         }
     }
+    
+    public static String AWS_ALERT(String BODY){
+        int StatusCode = 0;
+        String Result = "";
+        String EndPoint = "https://events.pagerduty.com/v2/enqueue";
+        try {
+            RequestSpecification request;
+            request = RestAssured.given();
+            Response response = null;
+            //request.header("Authorization", "Bearer " + Bearer_Token); // no Authorization header required
+            BODY = BODY.replace("AWS_Routing_Key", A.AWS_Routing_Key);
+            request.body(BODY);            
+            
+//            response = request.post(EndPoint);
+//            Result = response.getStatusLine();
+//            StatusCode = response.getStatusCode();
+//            JSONObject json = new JSONObject(response.asString());
+//                txtLog.append("= Json: " + "\r\n" + json.toString(4) + "\r\n" + Result + "\r\n");
+//                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            if(StatusCode == 202){
+                return "= Alert sent to " + EndPoint + " @" + LocalDateTime.now().format(A.Time_12_formatter) + "\r\n";
+               
+            } else{
+                return "= Send Alert to " + EndPoint + " ERROR: " + Result + "\r\n";            
+            }
+
+        } catch(Exception ex){
+            return"= Send Alert to " + EndPoint + " - ERROR:" + ex.getMessage() + "\r\n";
+
+        }
+    }
+
+
+    
     public static class ColorRenderer extends DefaultTableCellRenderer{
         private static final TableCellRenderer TCR = new DefaultTableCellRenderer();
         @Override
