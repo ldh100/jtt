@@ -8,7 +8,7 @@ import A.TWeb;
 import static A.A.*;
 import static AP3.AP3.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 /**
@@ -213,21 +213,34 @@ public class AP3_orders {
         //Select a specific date from the calendar to view the orders for that date
         LocalDate date = LocalDate.now();  
         LocalDate prev_date = date.minusDays(1);
-        
-        DateTimeFormatter Dayofdate = DateTimeFormatter.ofPattern("d");
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open Date picker", "css", "[aria-label='Date(s)']", "no_jira"); 
             if (FAIL) { return;} 
          if(prev_date.getMonthValue()!=date.getMonthValue())
          {  _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click previous month", "xpath", "//i[@class='v-icon mdi mdi-chevron-left theme--light']", "no_jira"); 
             if (FAIL) { return;} 
          }  
+         Thread.sleep(3000);
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click previous day", "xpath", "//tr/td[contains(number(),"+ prev_date.getDayOfMonth() +")]", "no_jira"); 
             if (FAIL) { return;} 
+          Thread.sleep(3000);  
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Close Date picker", "css", "[aria-label='Date(s)']", "no_jira"); 
             if (FAIL) { return;} 
-        Thread.sleep(2000);
- 
-        
+         Thread.sleep(5000);
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Attribute("Button Attribute", "xpath", "//button[@class=' button-styling export-button v-btn theme--light primary']", "dates", "no_jira");
+          if (FAIL) { return;} 
+        String button_date_attribute = t;  //2021-06-02
+        _t++; Thread.sleep((long) sleep); TWeb.Page_URL("Current URL", "no_jira");
+        String date_URL = t.substring(t.length()-10);
+        if(date_URL.equals(button_date_attribute))
+           { // Pass order date is equal to displayed order date
+             _t++;
+             _p++; EX += _t + "\t" + "URL Order date is equal to button date attribute" + "\t" + "Date in URL: "+date_URL + "\t" + "Date in Datepicker: "+button_date_attribute + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+           }
+         else
+           { _t++;
+             _f++; EX += _t + "\t" + "URL Order date is not equal to button date attribute" + "\t" + "Date in URL: "+date_URL + "\t" + "Date in Datepicker: "+button_date_attribute + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+           }
+              
         //Select a 7 day range from the calendar to view the orders for that period
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Open Date picker", "css", "[aria-label='Date(s)']", "no_jira"); 
             if (FAIL) { return;} 
@@ -240,7 +253,7 @@ public class AP3_orders {
             Thread.sleep(1000);
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click day 17", "xpath", "//tr/td[contains(number(),17)]", "no_jira"); 
             if (FAIL) { return;} 
-            Thread.sleep(1000);    
+            Thread.sleep(3000);    
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click day 10", "xpath", "//tr/td[contains(number(),10)]", "no_jira"); 
             if (FAIL) { return;} 
             Thread.sleep(3000);
@@ -251,6 +264,6 @@ public class AP3_orders {
          d1.findElement(By.cssSelector("[aria-label='Date(s)']")).sendKeys(Keys.ESCAPE);
          Thread.sleep(1000);
          //URL to verify the date picker has selected 7 day range
-         TWeb.Page_URL("Current URL", "no_jira");
+         _t++; Thread.sleep((long) sleep);TWeb.Page_URL("Current URL", "no_jira");
     }  
 }

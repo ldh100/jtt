@@ -871,7 +871,7 @@ public class FW extends javax.swing.JInternalFrame {
     }
     private void Done(Instant dw_start){
         BW2.cancel(true); // ================================================
-        Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+        Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
         txtLog.append("========   " + "Execution step-by-step log..." + "   ========" + "\r\n"); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength());                
 
@@ -939,8 +939,6 @@ public class FW extends javax.swing.JInternalFrame {
         btnExel.setEnabled(true);
         
         
-        LOG_UPDATE(); // ========================================================
-        
         if(_slack.isSelected()){
             Report(false);
             String MSG = "FW_" + env + " Automation report - " + Report_Date  +  
@@ -956,10 +954,12 @@ public class FW extends javax.swing.JInternalFrame {
                 f.delete();
             }  
         }
+        
+        LOG_UPDATE(); // ========================================================
     }
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
+        String R = A.Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -968,7 +968,7 @@ public class FW extends javax.swing.JInternalFrame {
 
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
-        String R = Func.SHOW_LOG_FILE(F, "txt");
+        String R = A.Func.SHOW_LOG_FILE(F, "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 

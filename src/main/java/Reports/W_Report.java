@@ -339,7 +339,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             EXX = rs.getString(1);
             conn.close();
 
-            String R = Func.SHOW_LOG_FILE(EXX, "txt");
+            String R = A.Func.SHOW_LOG_FILE(EXX, "txt");
             if(!R.equals("OK")){
                 txtLog.append(R + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -460,13 +460,13 @@ public class W_Report extends javax.swing.JInternalFrame {
                 String[] v = lines[i].split("\t");
                 System.arraycopy(v, 0, Values[i], 0, v.length); 
             }
-            String Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd_MMM_yyyy_hh_mma"));
+            String Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
             try{
                 Report_Date = DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("Date").getModelIndex()).toString() +
                     " " + DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("Time").getModelIndex()).toString();
                 DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 Date R_Date = formatter.parse(Report_Date); 
-                formatter = new SimpleDateFormat("dd_MMM_yyyy_hh_mma");
+                formatter = new SimpleDateFormat("ddMMMyyyy_HHmmss");
                 Report_Date = formatter.format(R_Date);
             } catch (Exception ex){
                 txtLog.append("=== Report Excel Error: " + ex.getMessage()+ "\r\n");
@@ -612,7 +612,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }  
 
-    // <editor-fold defaultstate="collapsed" desc="Public & Private Variables">    
+    // <editor-fold defaultstate="collapsed" desc="Private Variables">    
     private boolean LOAD = true;
     private String SQL = ""; 
     // </editor-fold>   

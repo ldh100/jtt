@@ -903,7 +903,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected String Report_Date;
     protected String SCOPE = "";   
     protected String Last_EX = "";   
-    protected String Report_File = "";    
+    protected String Excel_Report_Path = "";    
     protected String New_ID = "";
 
     protected String Mobile_ID = "";   
@@ -1091,7 +1091,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnExelMouseClicked
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
-        String R = Func.SHOW_LOG_FILE(F, "txt");
+        String R = A.Func.SHOW_LOG_FILE(F, "txt");
         if(!R.equals("OK")){
             Current_Log_Update(true, R + "\r\n");
         }
@@ -1100,7 +1100,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         
 //        Current_Log_Update(true, An_Met.Get_Bolter_User_Site_ID(txtBolter_Id.getText(), txtBolter_Pw.getText()) + "\r\n");
        
-        String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
+        String R = A.Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             Current_Log_Update(true, R + "\r\n");
         }
@@ -2481,7 +2481,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
     }    
     protected String Report(boolean Open_File){
-        Report_File = "";
+        Excel_Report_Path = "";
         if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())){
             return "= Report > Not Excel";
         }   
@@ -2496,8 +2496,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 String[] v = lines[i].split("\t");
                 System.arraycopy(v, 0, Values[i], 0, v.length); 
             }
-            Report_File = A.Func.fExcel(l, col, Values, "Android_" + app + "_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
-            return "= Report Excel file:\r\n" + Report_File + "\r\n";
+            Excel_Report_Path = A.Func.fExcel(l, col, Values, "Android_" + app + "_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
+            return "= Report Excel file:\r\n" + Excel_Report_Path + "\r\n";
         } catch (IOException ex) {
             return "= Report > ERROR: " + ex.getMessage() + "\r\n";
         }
@@ -3076,7 +3076,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(GUI){
             Log = txtLog.getText();
         }
-        LOG_UPDATE(Log); // ========================================================
+
         HtmlReporter.config().setReportName("Android OS v" + devOS + ", App: " + app + " v: " + appVersion + ", Environment: " + env + ", Summary: Total Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i);
         HtmlReport.flush();
         
@@ -3090,24 +3090,24 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
                     "Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
             
-            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Report_File, Slack_Channel, MSG));
-            File ef = new File(Report_File);
+            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Excel_Report_Path, Slack_Channel, MSG));
+            File ef = new File(Excel_Report_Path);
             if(ef.exists() && !ef.isDirectory()) {
                 ef.delete();
             }  
             String HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Click to Open";
-            String HTML_Path = HtmlReporter.getFile().getAbsolutePath();
+            HTML_Report_Path = HtmlReporter.getFile().getAbsolutePath();
             if(Zip_Report){
-                String Origin_HTML = HTML_Path;
-                HTML_Path = A.Func.Zip_File(HTML_Path);
+                String Origin_HTML = HTML_Report_Path;
+                HTML_Report_Path = A.Func.Zip_File(HTML_Report_Path);
                 File hf = new File(Origin_HTML);
                 if(hf.exists() && !hf.isDirectory()) {
                     hf.delete();
                 }
                 HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Extract Here > open unzipped HTML file";
             }
-            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(HTML_Path, Slack_Channel, HTML_Report_Msg));
-            File hf = new File(HTML_Path);
+            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(HTML_Report_Path, Slack_Channel, HTML_Report_Msg));
+            File hf = new File(HTML_Report_Path);
             if(hf.exists() && !hf.isDirectory()) {
                 hf.delete();
             }
@@ -3120,6 +3120,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
             btnFails.setEnabled(false);
         }
         btnExel.setEnabled(true);
+        
+        LOG_UPDATE(Log); // ========================================================
     }
     //</editor-fold>
     

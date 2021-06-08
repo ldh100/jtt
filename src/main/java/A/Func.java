@@ -1,4 +1,7 @@
 package A;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -12,19 +15,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.HttpClientBuilder;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
@@ -35,6 +37,7 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 /**
  *
  * @author Oleg.Spozito
@@ -203,6 +206,40 @@ public class Func {
             return "\r\n= Show " + aLog + " > ERROR: " + ex.getMessage()+ "\r\n";
         }
     }
+    
+    public static String AWS_ALERT(String BODY){
+        int StatusCode = 0;
+        String Result = "";
+        String EndPoint = "https://events.pagerduty.com/v2/enqueue";
+        try {
+            RequestSpecification request;
+            request = RestAssured.given();
+            Response response = null;
+            //request.header("Authorization", "Bearer " + Bearer_Token); // no Authorization header required
+            BODY = BODY.replace("AWS_Routing_Key", A.AWS_Routing_Key);
+            request.body(BODY);            
+            
+//            response = request.post(EndPoint);
+//            Result = response.getStatusLine();
+//            StatusCode = response.getStatusCode();
+//            JSONObject json = new JSONObject(response.asString());
+//                txtLog.append("= Json: " + "\r\n" + json.toString(4) + "\r\n" + Result + "\r\n");
+//                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            if(StatusCode == 202){
+                return "= Alert sent to " + EndPoint + " @" + LocalDateTime.now().format(A.Time_12_formatter) + "\r\n";
+               
+            } else{
+                return "= Send Alert to " + EndPoint + " ERROR: " + Result + "\r\n";            
+            }
+
+        } catch(Exception ex){
+            return"= Send Alert to " + EndPoint + " - ERROR:" + ex.getMessage() + "\r\n";
+
+        }
+    }
+
+
+    
     public static class ColorRenderer extends DefaultTableCellRenderer{
         private static final TableCellRenderer TCR = new DefaultTableCellRenderer();
         @Override
@@ -350,32 +387,26 @@ public class Func {
         }
         return ExcelFile.getAbsolutePath();
     }
+    
     public static String Send_File_with_Message_to_Slack(String Path, String Channel, String MSG) {
-        String F_Name = "?";
         try{           
-            MultipartEntityBuilder builder = MultipartEntityBuilder.create(); 
-            builder.addTextBody("token", A.S_OAuth_TKN); 
-            builder.addTextBody("channels", Channel); 
-            builder.addTextBody("initial_comment", MSG); 
+            File file = new File(Path); 
+            HttpClient httpclient = HttpClientBuilder.create().disableContentCompression().build();
+            HttpPost httpPost = new HttpPost("https://slack.com/api/files.upload");  
             
-            if(!Path.equals("")){ 
-                File file = new File(Path); 
-                F_Name = file.getName();
-                builder.addBinaryBody(
-                    file.getName(), // File_Name
-                    new FileInputStream(file), 
-                    ContentType.APPLICATION_OCTET_STREAM,
-                    file.getName()
-                );            
-            }
-            HttpEntity multiPartEntity = builder.build();
-            CloseableHttpClient httpclient = HttpClients.createDefault();
-            HttpPost httpPost = new HttpPost("https://slack.com/api/files.upload");
-            httpPost.setEntity(multiPartEntity); 
+            MultipartEntityBuilder reqEntity = MultipartEntityBuilder.create(); 
+            reqEntity.addTextBody("token", A.S_OAuth_TKN);       
+            reqEntity.addTextBody("channels", Channel); 
+            reqEntity.addTextBody("initial_comment", MSG); 
+            reqEntity.addTextBody("media", "file");
+            reqEntity.addBinaryBody("file", file);
+            
+            httpPost.setEntity(reqEntity.build());
             HttpResponse response = httpclient.execute(httpPost);
-            return "= File " + F_Name + " > Slack - " + response.getStatusLine() + "\r\n"; 
+            
+            return "= File to Slack: " + Path + " > " + response.getStatusLine().getStatusCode() + ", " + response.getStatusLine().getReasonPhrase()+ "\r\n"; 
         } catch(IOException ex) {
-            return "= File " + F_Name + " > Slack > ERROR: " + ex.getMessage() + "\r\n";
+            return "= File to Slack: " + Path + " > ERROR: " + ex.getMessage() + "\r\n";
         }
     }
     public static String Zip_File(String Source){
