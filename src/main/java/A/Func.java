@@ -1,4 +1,7 @@
 package A;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -12,21 +15,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.impl.client.HttpClients;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
@@ -37,6 +37,7 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 /**
  *
  * @author Oleg.Spozito
@@ -69,6 +70,7 @@ public class Func {
         }
         return "Not Found";
     }
+
     public static String App_ID(String APP, String ENV) {
        switch (APP.toLowerCase()) {
             case "chrome c360":
@@ -140,6 +142,7 @@ public class Func {
         }
         return "Not Found";
     }
+
     public static String ExecuteCmdRuntime(String cmd){
         String output = null;
         try {
@@ -154,6 +157,7 @@ public class Func {
         }
        return output;   
     }
+
     public static String ExecuteCmdProcessBuilder(String cmd, String Cwd, boolean waitFor, boolean ReturnOutput){
         String output = "";
         Process p = null;
@@ -191,6 +195,7 @@ public class Func {
         } 
         return output;   
     }
+
     public static String SHOW_LOG_FILE(String BODY, String EXT){
         File aLog = null;
         try {
@@ -205,6 +210,31 @@ public class Func {
             return "\r\n= Show " + aLog + " > ERROR: " + ex.getMessage()+ "\r\n";
         }
     }
+    
+    public static String AWS_ALERT(String BODY){
+        int StatusCode = 0;
+        String Result = "";
+        String EndPoint = "https://events.pagerduty.com/v2/enqueue";
+        try {
+            RequestSpecification request;
+            request = RestAssured.given();
+            Response response = null;
+            BODY = BODY.replace("AWS_Routing_Key", A.AWS_Routing_Key);
+            request.body(BODY);            
+            
+            response = request.post(EndPoint); //  ===========================
+            Result = response.getStatusLine();
+            StatusCode = response.getStatusCode();
+            if(StatusCode == 202){
+                return "= Alert sent to " + EndPoint + " @" + LocalDateTime.now().format(A.Time_12_formatter) + "\r\n";   
+            } else{
+                return "= Send Alert to " + EndPoint + " ERROR: " + Result + "\r\n";            
+            }
+        } catch(Exception ex){
+            return"= Send Alert to " + EndPoint + " - ERROR:" + ex.getMessage() + "\r\n";
+        }
+    }
+
     public static class ColorRenderer extends DefaultTableCellRenderer{
         private static final TableCellRenderer TCR = new DefaultTableCellRenderer();
         @Override
@@ -227,6 +257,7 @@ public class Func {
             return this;
         }
     }
+
     public static double p90(double[] l){
         if (l.length < 2) {
             return Math.round(l[0]);
@@ -246,6 +277,7 @@ public class Func {
             double part = n - Math.floor(n); return Math.round(leftNumber + part * (rightNumber - leftNumber));
         }
     }
+
     public static double p50(double[] l){
         if (l.length < 2) {
             return Math.round(l[0]);
@@ -265,6 +297,7 @@ public class Func {
             double part = n - Math.floor(n); return Math.round(leftNumber + part * (rightNumber - leftNumber));
         }
     }
+
     public static String fExcel(int row1, int col1, String[][] Values1, String SheetName1, String Top_Row1, 
                               int row2, int col2, String[][] Values2, String SheetName2, String Top_Row2, boolean Open_File) 
         throws FileNotFoundException, IOException    {
@@ -353,6 +386,7 @@ public class Func {
         return ExcelFile.getAbsolutePath();
     }
     
+
     public static String Send_File_with_Message_to_Slack(String Path, String Channel, String MSG) {
         try{           
             File file = new File(Path); 
