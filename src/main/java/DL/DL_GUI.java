@@ -104,6 +104,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
 public class DL_GUI extends javax.swing.JInternalFrame {
+
+    
     public DL_GUI() {
         initComponents();
     }
@@ -133,7 +135,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         _all_data = new javax.swing.JCheckBox();
         _metrics_selection = new javax.swing.JCheckBox();
         _metric_data = new javax.swing.JCheckBox();
-        _filters = new javax.swing.JCheckBox();
+        _sanity = new javax.swing.JCheckBox();
         _drilldown = new javax.swing.JCheckBox();
         _password = new javax.swing.JCheckBox();
         _logout = new javax.swing.JCheckBox();
@@ -157,11 +159,15 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         DV_QA = new javax.swing.JTable();
         lblTestData = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        DV_D_Variants = new javax.swing.JTable();
+        lblDates1 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
         setTitle("Distiller Automatio Manager >>> loading, please wait ... ... ... ...");
+        setMaximumSize(new java.awt.Dimension(858, 527));
         setMinimumSize(new java.awt.Dimension(858, 527));
         setName("DL"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
@@ -277,50 +283,29 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         txtAdmin_PW.setText("password");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nWaitElement.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nWaitElement.setModel(new javax.swing.SpinnerNumberModel(1.0d, 0.0d, 5.0d, 1.0d));
         nWaitElement.setName("nWaitElement"); // NOI18N
+        jPanel4.add(nWaitElement, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 12, 44, -1));
 
         nWaitLoad.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         nWaitLoad.setModel(new javax.swing.SpinnerNumberModel(30.0d, 0.0d, 60.0d, 5.0d));
         nWaitLoad.setName("nWaitLoad"); // NOI18N
+        jPanel4.add(nWaitLoad, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 12, 43, -1));
 
         lblSITES9.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSITES9.setText("Timeout:");
         lblSITES9.setAlignmentX(0.5F);
+        jPanel4.add(lblSITES9, new org.netbeans.lib.awtextra.AbsoluteConstraints(276, 16, 49, 16));
 
         lblSITES10.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSITES10.setText("Element exists:");
         lblSITES10.setAlignmentX(0.5F);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(147, 147, 147)
-                .addComponent(lblSITES10, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(nWaitElement, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblSITES9, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(nWaitLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(nWaitElement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nWaitLoad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSITES9, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSITES10, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2))
-        );
+        jPanel4.add(lblSITES10, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 16, 85, 16));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Scope"));
         jPanel1.setToolTipText("");
@@ -353,12 +338,12 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         _metric_data.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _metric_data.setRequestFocusEnabled(false);
 
-        _filters.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _filters.setText("======");
-        _filters.setEnabled(false);
-        _filters.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _filters.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _filters.setRequestFocusEnabled(false);
+        _sanity.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _sanity.setForeground(new java.awt.Color(204, 0, 0));
+        _sanity.setText("Sanity Test Only");
+        _sanity.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _sanity.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _sanity.setRequestFocusEnabled(false);
 
         _drilldown.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _drilldown.setText("Drilldown");
@@ -379,6 +364,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         _logout.setRequestFocusEnabled(false);
 
         _users.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _users.setForeground(new java.awt.Color(0, 51, 255));
         _users.setText("QA Users Data Validation");
         _users.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _users.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
@@ -405,18 +391,18 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(_insights, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_metrics_selection, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_filters, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_drilldown, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_invalid_login, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_metric_data, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_users, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_sanity, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -432,27 +418,27 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                         .addComponent(_metrics_selection, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(_metric_data, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_filters, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(22, 22, 22)
                         .addComponent(_drilldown, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
+                        .addGap(18, 18, 18)
                         .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(24, 24, 24)
                         .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(_insights, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(_insights, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_sanity, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmbBrow.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 36, 84, 20));
+        jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(324, 36, 84, 20));
 
         btnRun.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         btnRun.setForeground(new java.awt.Color(204, 0, 0));
@@ -463,7 +449,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 60, 84, 24));
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(324, 60, 84, 24));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -532,16 +518,16 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         _slack.setText("Report to Slack");
         _slack.setToolTipText("");
         _slack.setRequestFocusEnabled(false);
-        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 52, 100, 14));
+        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 52, 100, 14));
 
         _headless.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         _headless.setText("Headless <<<<");
         _headless.setToolTipText("");
         _headless.setRequestFocusEnabled(false);
-        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 68, 100, 14));
+        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 68, 100, 14));
 
         txtSlackCh.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtSlackCh.setText("xtt_test");
+        txtSlackCh.setText("#xtt_test");
         jPanel3.add(txtSlackCh, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 4, 96, -1));
 
         lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -572,6 +558,33 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         lblTestData.setText("Test Data");
         lblTestData.setName("lblDates"); // NOI18N
 
+        DV_D_Variants.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        DV_D_Variants.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        DV_D_Variants.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        DV_D_Variants.setCellSelectionEnabled(true);
+        DV_D_Variants.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_D_Variants.setName("DV_D_Variants"); // NOI18N
+        DV_D_Variants.setOpaque(false);
+        DV_D_Variants.setRowHeight(18);
+        DV_D_Variants.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        DV_D_Variants.getTableHeader().setReorderingAllowed(false);
+        DV_D_Variants.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DV_D_VariantsMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(DV_D_Variants);
+
+        lblDates1.setText("Variants");
+        lblDates1.setName("lblDates"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -581,34 +594,42 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 .addComponent(lblTestData, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 852, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(lblMetrics, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(4, 4, 4)
-                        .addComponent(lblDates, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                        .addComponent(lblDates, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(lblDates1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addComponent(lblSITES4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100)
+                        .addGap(104, 104, 104)
                         .addComponent(lblSITES6))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtAdmin_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8)
-                        .addComponent(txtAdmin_PW, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(txtAdmin_PW, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -625,16 +646,17 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                         .addGap(0, 0, 0)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
-                        .addComponent(lblDates)
-                        .addGap(4, 4, 4)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(44, 44, 44)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(4, 4, 4)
+                            .addComponent(lblDates)
+                            .addComponent(lblDates1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSITES4)
                             .addComponent(lblSITES6))
@@ -644,7 +666,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                             .addComponent(txtAdmin_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
+                        .addGap(4, 4, 4)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
@@ -729,6 +751,16 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
+
+    private void DV_D_VariantsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_D_VariantsMouseClicked
+        // TODO add your handling code here:
+         if (d2LastRow == DV_D_Variants.getSelectedRow()) {
+           return;
+        }
+        d2LastRow = DV_D_Variants.getSelectedRow();   
+        Variants = String.valueOf(DV_D_Variants.getValueAt(DV_D_Variants.getSelectedRow(), 0));
+        System.out.println(Variants);
+    }//GEN-LAST:event_DV_D_VariantsMouseClicked
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Instance Variables Declarations">  
@@ -752,10 +784,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     private SwingWorker BW2; 
     private Instant run_start;
     private String Toast_Msg = "";  
-    
-    protected boolean ALL_DATA = false;
-    protected boolean NO_DATA = false;
-    
+
     protected boolean FAIL = false;
     
     protected int _t = 0; // Total- calculate in report as sum of others
@@ -814,11 +843,12 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     private String C = "";
     
     private String SCOPE;
-    private boolean _Invalid_login = false;
     private boolean _Headless = false;
+    private boolean _Sanity = false;
+    private boolean _Invalid_login = false;
     private boolean _Metrics_selection = false;
     private boolean _Metric_data = false;
-    private boolean _Filters = false;
+
     private boolean _Drilldown = false;
     private boolean _Insights = false;
     private boolean _Password = false;
@@ -833,6 +863,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     protected String METRIC = "";
     protected String GROUP = "";
     protected String DATE_RANGE = "";
+    protected String Variants = "";
+    
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">   
@@ -877,7 +909,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         GUI_Load_CONFIG();
         //GET_DL_USER_TOKEN(false);
         GetDates();       
-        GetMetrics(); 
+        GetMetrics();
+        GetVariants();
         Get_S3_DL_Credentials();
         Get_S3_data(AWS_credentials);
 
@@ -1155,6 +1188,67 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         lblDates.setText("Date Ranges (" + DV_D_RANGES.getRowCount() + " found/defined)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
+    
+    private void GetVariants() {
+        d2LastRow = -1;
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("- Load Variants ..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+     
+        try{
+            String[] DateColumnsName = {"Variants"}; 
+            DefaultTableModel DateModel = new DefaultTableModel();
+            DateModel.setColumnIdentifiers(DateColumnsName);
+            DV_D_Variants.setModel(DateModel);
+
+            TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV_D_Variants.getModel());
+            DV_D_Variants.setRowSorter(sorter);
+            ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+            sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+            sorter.setSortKeys(sortKeys);  
+            sorter.setSortable(0, false);         
+            DateModel.addRow(new Object[]{"Total"});       
+            DateModel.addRow(new Object[]{"Distributor only"}); 
+            DateModel.addRow(new Object[]{"Manufacturer only"});    
+        
+            DV_D_Variants.setModel(DateModel);    
+            DV_D_Variants.setDefaultEditor(Object.class, null);
+            DV_D_Variants.getColumnModel().getColumn(0).setPreferredWidth(240);
+//            DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
+//            DV2.getColumnModel().getColumn(2).setPreferredWidth(80);
+
+            sorter.setSortable(0, true); 
+            sorter.sort();            
+   
+        } catch (Exception ex) {
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());    
+        }          
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();
+   
+        if (DV_D_Variants.getRowCount() > 0) {
+            DV_D_Variants.changeSelection(0, 0, false, false);
+            if (CONFIG && !"".equals(Variants.trim()))
+            {
+                for(int row = 0; row < DV_D_Variants.getRowCount(); row++) {
+                    if(DV_D_Variants.getValueAt(row, 0).equals(Variants)){
+                        DV_D_Variants.changeSelection(row, 0, false, false);
+                        break;
+                    } 
+                }
+            }
+        } 
+
+        d2LastRow = DV_D_Variants.getSelectedRow();        
+        lblDates1.setText("Variants (" + DV_D_Variants.getRowCount() + " found/defined)");
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
 
     private void GUI_Load_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -1187,8 +1281,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("METRIC: ")) METRIC = value;
                 if(l.contains("DATE_RANGE: ")) DATE_RANGE = value;
 
-                if(l.contains("txtAdmin_ID: ")) txtAdmin_ID.setText(value);
-                if(l.contains("txtAdmin_PW: ")) txtAdmin_PW.setText(value);
+                if(l.contains("User_ID: ")) txtAdmin_ID.setText(value);
+                if(l.contains("User_PW: ")) txtAdmin_PW.setText(value);
                 if(l.contains("_invalid_login: ")) _invalid_login.setSelected(Boolean.parseBoolean(value));
                 
                 if(l.contains("nWaitElement: ")) nWaitElement.setValue(Double.parseDouble(value));
@@ -1196,7 +1290,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
            
                 if(l.contains("_metrics_selection: ")) _metrics_selection.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_metric_data: ")) _metric_data.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_filters: ")) _filters.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_sanity: ")) _sanity.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_drilldown: ")) _drilldown.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_insights: ")) _insights.setSelected(Boolean.parseBoolean(value)); 
                 if(l.contains("_password: ")) _password.setSelected(Boolean.parseBoolean(value));
@@ -1239,15 +1333,15 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             C += "METRIC: " + _S + "\r\n";
             C += "DATE_RANGE: " + _B + "\r\n";         
             
-            C += "txtAdmin_ID: " + txtAdmin_ID.getText() + "\r\n";
-            C += "txtAdmin_PW: " + txtAdmin_PW.getText()  + "\r\n";
+            C += "User_ID: " + txtAdmin_ID.getText() + "\r\n";
+            C += "User_PW: " + txtAdmin_PW.getText()  + "\r\n";
             C += "_invalid_login: " + _invalid_login.isSelected() + "\r\n";            
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
             C += "nWaitLoad: " + nWaitLoad.getValue()+ "\r\n";
 
             C += "_metrics_selection: " + _metrics_selection.isSelected() + "\r\n";
             C += "_metric_data: " + _metric_data.isSelected() + "\r\n";
-            C += "_filters: " + _filters.isSelected() + "\r\n";
+            C += "_sanity: " + _sanity.isSelected() + "\r\n";
             C += "_drilldown: " + _drilldown.isSelected() + "\r\n";
             C += "_insights: " + _insights.isSelected() + "\r\n";
             C += "_password: " + _password.isSelected() + "\r\n";         
@@ -1454,7 +1548,6 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
-        _Slack = _slack.isSelected();
         Slack_Channel = txtSlackCh.getText();
         try{
             run_start = Instant.now();
@@ -1478,8 +1571,6 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             _w = 0; // Warn
             r_time = "";
 
-            ALL_DATA = _all_data.isSelected();
-            SCOPE = "";
             DL_UserID = txtAdmin_ID.getText();
             DL_UserPW = txtAdmin_PW.getText();
 
@@ -1492,6 +1583,21 @@ public class DL_GUI extends javax.swing.JInternalFrame {
 
             SCOPE = "";
             r_type = "manual"; 
+
+            _Headless = _headless.isSelected();
+            _Slack = _slack.isSelected();                
+            _Sanity = _sanity.isSelected();
+            _Invalid_login = _invalid_login.isSelected();
+
+            _Metrics_selection = _metrics_selection.isSelected();
+            _Metric_data = _metric_data.isSelected();
+
+            _Drilldown = _drilldown.isSelected();
+            _Insights = _insights.isSelected();
+            _Password = _password.isSelected();
+            _All_data = _all_data.isSelected();
+            _Logout = _logout.isSelected();
+            _Users = _users.isSelected();
             
             if(_Headless) {
                 Current_Log_Update(true,"= Headless mode is selected - Browser is hidden" + "\r\n");
@@ -1568,23 +1674,24 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("env: ")) env = value;
                 if(l.contains("url: ")) url = value;
 
-   
                 if(l.contains("METRIC: ")) METRIC = value;
                 if(l.contains("DATE_RANGE: ")) DATE_RANGE = value;
 
-                if(l.contains("txtAdmin_ID: ")) DL_UserID = value;
-                if(l.contains("txtAdmin_PW: ")) DL_UserPW = value;
+                if(l.contains("User_ID: ")) DL_UserID = value;
+                if(l.contains("User_PW: ")) DL_UserPW = value;
 
                 if(l.contains("nWaitElement:")) WaitForElement = Math.round(Double.parseDouble(value) * 1000);
                 if(l.contains("nWaitLoad:")) LoadTimeOut = Double.parseDouble(value) * 1000;
 
                 if(l.contains("SlackCh: ")) Slack_Channel = value;
-                if(l.contains("_slack: ")) _Slack = Boolean.parseBoolean(value);                
-                if(l.contains("_invalid_login: ")) _Invalid_login = Boolean.parseBoolean(value);
                 if(l.contains("_headless: ")) _Headless = Boolean.parseBoolean(value);
+                if(l.contains("_slack: ")) _Slack = Boolean.parseBoolean(value);                
+                if(l.contains("_sanity: ")) _Sanity = Boolean.parseBoolean(value);
+                if(l.contains("_invalid_login: ")) _Invalid_login = Boolean.parseBoolean(value);
+
                 if(l.contains("_metrics_selection: ")) _Metrics_selection = Boolean.parseBoolean(value);
                 if(l.contains("_metric_data: ")) _Metric_data = Boolean.parseBoolean(value);
-                if(l.contains("_filters: ")) _Filters = Boolean.parseBoolean(value);
+
                 if(l.contains("_drilldown: ")) _Drilldown = Boolean.parseBoolean(value);
                 if(l.contains("_insights: ")) _Insights = Boolean.parseBoolean(value);
                 if(l.contains("_password: ")) _Password = Boolean.parseBoolean(value);
@@ -1674,7 +1781,6 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     private String StartWebDriver() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
-
             txtLog.append( "= CWD: " + A.A.CWD + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             
@@ -1899,7 +2005,23 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         btnRun.setEnabled(true);
     }
     private void Execute() throws Exception {
-        if (_users.isSelected()) { 
+        if (_Sanity) { 
+            ParentTest = HtmlReport.createTest("Sanity"); 
+            SCOPE += "Sanity";                  
+
+            DL_UserID = txtAdmin_ID.getText();
+            DL_UserPW = txtAdmin_PW.getText();
+            EX += " - " + "\t" + " === Sanity Test " + "\t" + " ===== " + "\t" + " == Sanity Test Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";      
+            DL_sanity BR = new DL_sanity(DL_GUI.this);
+            BR.run(DL_UserID, DL_UserPW ); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            EX += " - " + "\t" + " === ^ Sanity Test " + "\t" + " ===== " + "\t" + " == ^ Sanity Test End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+
+            return; // Do Not execute any Other Scope if Testing Sanity
+        }        
+
+        
+        if (_Users) { 
             SCOPE += "QA Users";
             DL_UserID = "";         // Clear DL_User from GUI to force Clear_Cookies > Restart_Driver and Re-Login
             String QA_USER = "";    // Next QA User from S3 DV_QA table
@@ -1916,7 +2038,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                     EX += " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\r\n";
                     Clear_Cookies_Restart_Driver(BROWSER, ParentTest, "no_jira");   
                     if (!FAIL) { 
-                        DL_login BR = new DL.DL_login(DL_GUI.this);
+                        DL_login BR = new DL_login(DL_GUI.this);
                         BR.run(DL_UserID, DL_UserPW, false); // ======================================
                         EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
                         Login_OK = BR.Login_OK;
@@ -1931,8 +2053,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 EX += " - " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 EX += " - " + "\t" + " === QA Users - Data Validation" + "\t" + "User: " + QA_USER + "\t" + " == Users " + " - Test# " + (i+1) + " Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 
-                
-                DL_qa_user BR = new DL.DL_qa_user(DL_GUI.this);
+                DL_qa_user BR = new DL_qa_user(DL_GUI.this);
                 BR.run(  // ====== pass QA User Test # 'i + 1' Data from QA Data Table build from S3 QA file =========================
                     DL_UserID, 
                     DV_QA.getValueAt(i, 2).toString(),     
@@ -1945,15 +2066,14 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                     DV_QA.getValueAt(i, 9).toString()     
                 ); 
                 EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time; // DL_UserID = BR.DL_UserID;
-                EX += " - " + "\t" + " === ^ QA Users - Data Validation" + "\t" + "User: " + DV_QA.getValueAt(i, 1).toString() + "\t" + " == ^ User " + " - Test# "+ (i+1) + " End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Thread.sleep(1500);               
+                EX += " - " + "\t" + " === ^ QA Users - Data Validation" + "\t" + "User: " + DV_QA.getValueAt(i, 1).toString() + "\t" + " == ^ User " + " - Test# "+ (i+1) + " End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";             
             }   
             return; // Do Not execute any Other Scope if Testing QA Users S3 list
         }   
         
         
-        if (_login.isSelected()) { 
-            if(_invalid_login.isSelected()){
+        if (true) { // _login.isSelected() ALWAYS TRUE
+            if(_Invalid_login){
                 ParentTest = HtmlReport.createTest("Valid/Invalid Login"); 
                 SCOPE += "Valid/Invalid Login";                  
             } else{
@@ -1963,7 +2083,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             DL_UserID = txtAdmin_ID.getText();
             DL_UserPW = txtAdmin_PW.getText();
             EX += " - " + "\t" + " === Login(s) " + "\t" + " ===== " + "\t" + " == Login(s) Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";      
-            DL_login BR = new DL.DL_login(DL_GUI.this);
+            DL_login BR = new DL_login(DL_GUI.this);
             BR.run(DL_UserID, DL_UserPW, _invalid_login.isSelected()); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Login(s) " + "\t" + " ===== " + "\t" + " == ^ Login(s) End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -1974,69 +2094,74 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             return; // Cannot proceed with this User - Bad Login
         }
             
-        if (_metrics_selection.isSelected()) { 
+        if (_Metrics_selection) { 
             ParentTest = HtmlReport.createTest("Metrics Selection"); 
             SCOPE += ", Metrics Selection"; 
             EX += " - " + "\t" + " === Metrics Selection" + "\t" + " ===== " + "\t" + " == Metrics Selection Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_metrics_selection BR = new DL.DL_metrics_selection(DL_GUI.this);
+            DL_metrics_selection BR = new DL_metrics_selection(DL_GUI.this);
             BR.run(); // ============================================================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Metrics Selection" + "\t" + " ===== " + "\t" + " == ^ Metrics Selection End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }  
-        if (_metric_data.isSelected()) { 
+        if (_Metric_data) { 
             String CompareTo = "";
             SCOPE += ", Metrics Secondary Data"; 
             for (int i = 0; i < 3; i++) {
                 if(i == 0)  CompareTo = "Compared to last year";
                 if(i == 1)  CompareTo = "Compared to last month";
-                if(i == 2)  CompareTo = "Compared to last week";	
+                if(i == 2)  CompareTo = "Compared to last week";
+                for (int j = 0; j < 3; j++) {
+                if(j == 0)  Variants = "Total";
+                if(j == 1)  Variants = "Distributor only";
+                if(j == 2)  Variants = "Manufacturer only";
                 ParentTest = HtmlReport.createTest("Secondary Metrics - " + CompareTo); 
                 EX += " - " + "\t" + " === Secondary Metrics  - " + CompareTo + "\t" + " ===== " + "\t" + " == Secondary Metrics Data Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                DL_metric_data BR = new DL.DL_metric_data(DL_GUI.this);
-                BR.run(CompareTo); // ============================================================================            
+                DL_metric_data BR = new DL_metric_data(DL_GUI.this);
+                BR.run(CompareTo, Variants); // ============================================================================            
                 EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
                 EX += " - " + "\t" + " === ^ Secondary Metrics  - " + CompareTo + "\t" + " ===== " + "\t" + " == ^ Secondary Metrics Data End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             }    
+            }
         }
 
-        if (_insights.isSelected()) { 
+        if (_Insights) { 
             ParentTest = HtmlReport.createTest("Insights");                         
             SCOPE += ", Insights";
             EX += " - " + "\t" + " === Insights" + "\t" + " ===== " + "\t" + " == Insights Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_insights BR = new DL.DL_insights(DL_GUI.this);
+            DL_insights BR = new DL_insights(DL_GUI.this);
             BR.run(); // ============================================================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Insights" + "\t" + " ===== " + "\t" + " == ^ Insights End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
         
-        if (_drilldown.isSelected()) { 
+        if (_Drilldown) { 
             ParentTest = HtmlReport.createTest("Drilldown");                         
             SCOPE += ", Drilldown";
             EX += " - " + "\t" + " === Drilldown" + "\t" + " ===== " + "\t" + " == Drilldown Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_drilldown BR = new DL.DL_drilldown(DL_GUI.this);
+            DL_drilldown BR = new DL_drilldown(DL_GUI.this);
             BR.run(); // ============================================================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Drilldown" + "\t" + " ===== " + "\t" + " == ^ Drilldown End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
 
-        if (_logout.isSelected()) { 
+        if (_Logout) { 
             ParentTest = HtmlReport.createTest("LogOut");                         
             SCOPE += ", LogOut";
             EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_logout BR = new DL.DL_logout(DL_GUI.this);
+            DL_logout BR = new DL_logout(DL_GUI.this);
             BR.run(); // ============================================================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }
-        if (_password.isSelected()) { 
+        if (_Password) { 
             ParentTest = HtmlReport.createTest("Forgot PW");                                     
             SCOPE += ", Forgot PW";  
             EX += " - " + "\t" + " === Forgot PW" + "\t" + " ===== " + "\t" + " == Forgot PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_password BR = new DL.DL_password(DL_GUI.this);
+            DL_password BR = new DL_password(DL_GUI.this);
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             BR.run(); // ============================================================================
             EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -5447,11 +5572,11 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV_D_RANGES;
+    private javax.swing.JTable DV_D_Variants;
     private javax.swing.JTable DV_METRICS;
     private javax.swing.JTable DV_QA;
     private javax.swing.JCheckBox _all_data;
     private javax.swing.JCheckBox _drilldown;
-    private javax.swing.JCheckBox _filters;
     private javax.swing.JCheckBox _headless;
     private javax.swing.JCheckBox _insights;
     private javax.swing.JCheckBox _invalid_login;
@@ -5460,6 +5585,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _metric_data;
     private javax.swing.JCheckBox _metrics_selection;
     private javax.swing.JCheckBox _password;
+    private javax.swing.JCheckBox _sanity;
     private javax.swing.JCheckBox _slack;
     private javax.swing.JCheckBox _users;
     private javax.swing.JButton btnExel;
@@ -5475,8 +5601,10 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lblDates;
+    private javax.swing.JLabel lblDates1;
     private javax.swing.JLabel lblMetrics;
     private javax.swing.JLabel lblSITES10;
     private javax.swing.JLabel lblSITES11;
