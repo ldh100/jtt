@@ -1,6 +1,5 @@
 package Jobs;
 
-import static A.A.*;
 import it.sauronsoftware.cron4j.InvalidPatternException;
 import it.sauronsoftware.cron4j.Scheduler;
 import java.awt.Cursor;
@@ -26,6 +25,52 @@ import javax.swing.table.TableRowSorter;
  */
 
 public class Jobs extends javax.swing.JInternalFrame {
+
+//<editor-fold defaultstate="collapsed" desc="Cron PAttern Samples">
+//    5 * * * *
+//    This pattern causes a task to be launched once every hour, at the begin of the fifth minute (00:05, 01:05, 02:05 etc.).
+//    
+//    * * * * *
+//    This pattern causes a task to be launched every minute.
+//    
+//    * 12 * * Mon
+//    This pattern causes a task to be launched every minute during the 12th hour of Monday.
+//    
+//    * 12 16 * Mon
+//    This pattern causes a task to be launched every minute during the 12th hour of Monday, 16th, but only if the day is the 16th of the month.
+//    
+//    Every sub-pattern can contain two or more comma separated values.
+//    59 11 * * 1,2,3,4,5
+//    This pattern causes a task to be launched at 11:59AM on Monday, Tuesday, Wednesday, Thursday and Friday.
+//    
+//    Values intervals are admitted and defined using the minus character.
+//    59 11 * * 1-5
+//    This pattern is equivalent to the previous one.
+//    
+//    The slash character can be used to identify step values within a range. It can be used both in the form */c and a-b/c. The subpattern is matched every c values of the range 0,maxvalue or a-b.         
+//    */5 * * * *
+//    This pattern causes a task to be launched every 5 minutes (0:00, 0:05, 0:10, 0:15 and so on).
+//            
+//    3-18/5 * * * *
+//    This pattern causes a task to be launched every 5 minutes starting from the third minute of the hour, up to the 18th (0:03, 0:08, 0:13, 0:18, 1:03, 1:08 and so on).
+//
+//    */15 9-17 * * *
+//    This pattern causes a task to be launched every 15 minutes between the 9th and 17th hour of the day (9:00, 9:15, 9:30, 9:45 and so on... note that the last execution will be at 17:45).
+//
+//    All the fresh described syntax rules can be used together.
+//
+//    * 12 10-16/2 * *
+//    This pattern causes a task to be launched every minute during the 12th hour of the day, but only if the day is the 10th, the 12th, the 14th or the 16th of the month.
+//
+//    * 12 1-15,17,20-25 * *
+//    This pattern causes a task to be launched every minute during the 12th hour of the day, but the day of the month must be between the 1st and the 15th, the 20th and the 25, or at least it must be the 17th.
+//
+//    Finally cron4j lets you combine more scheduling patterns into one, with the pipe character:
+//
+//    0 5 * * *|8 10 * * *|22 17 * * *
+//    This pattern causes a task to be launched every day at 05:00, 10:08 and 17:22.
+//</editor-fold>
+    
     public Jobs() {
         initComponents();
     }
@@ -57,6 +102,7 @@ public class Jobs extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Jobs");
+        setMaximumSize(new java.awt.Dimension(858, 527));
         setMinimumSize(new java.awt.Dimension(858, 527));
         setName("Jobs"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 103, 0));
@@ -114,7 +160,7 @@ public class Jobs extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 4, 552, 428));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 4, 552, 424));
 
         txtLog.setEditable(false);
         txtLog.setColumns(20);
@@ -125,7 +171,7 @@ public class Jobs extends javax.swing.JInternalFrame {
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLog);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 434, 548, 64));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 430, 548, 68));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -151,7 +197,7 @@ public class Jobs extends javax.swing.JInternalFrame {
 
         btnRun.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnRun.setForeground(new java.awt.Color(0, 0, 0));
-        btnRun.setText(" Run Selected Job");
+        btnRun.setText(" Run Selected Job (ad-hoc)");
         btnRun.setEnabled(false);
         btnRun.setName("btnRun"); // NOI18N
         btnRun.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -169,7 +215,7 @@ public class Jobs extends javax.swing.JInternalFrame {
         txtConfig.setMinimumSize(new java.awt.Dimension(854, 525));
         jScrollPane2.setViewportView(txtConfig);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 96, 296, 336));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 96, 296, 332));
 
         txtJob_Name.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtJob_Name.setDisabledTextColor(new java.awt.Color(0, 0, 0));
@@ -242,6 +288,8 @@ public class Jobs extends javax.swing.JInternalFrame {
     private int dv1LastRow = -1; 
     private String Last_JOB = ""; 
     private String JobName = "";
+    private Scheduler SCH;
+    private String r_type;  
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">        
@@ -254,7 +302,7 @@ public class Jobs extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_DV1MouseClicked
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         STOP_CRON();
-        F_COUNT--;
+        A.A.F_COUNT--;
     }//GEN-LAST:event_formInternalFrameClosed
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
         LOAD_JOBS();
@@ -274,7 +322,7 @@ public class Jobs extends javax.swing.JInternalFrame {
             return;
         }
         String Job = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
-        String config = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 5));
+        String config = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 6));
         Run_Selected_Job(Job, config);  
     }//GEN-LAST:event_btnRunMouseClicked
     private void btnStartCronMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStartCronMouseClicked
@@ -288,7 +336,7 @@ public class Jobs extends javax.swing.JInternalFrame {
     private void LOAD_JOBS() {
         dv1LastRow = -1; 
         ResultSet rs = null;
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             rs = conn.createStatement().executeQuery("SELECT * FROM [dbo].[jtt_jobs] ORDER BY [job_name]");
             ResultSetMetaData rsmd = rs.getMetaData();
             DefaultTableModel dm = new DefaultTableModel();
@@ -354,7 +402,7 @@ public class Jobs extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void SAVE_CHANGES() { 
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             Last_JOB = txtJob_Name.getText();
             PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[jtt_jobs] SET " +
                         " [_cron] = ?" +           // 1
@@ -436,8 +484,8 @@ public class Jobs extends javax.swing.JInternalFrame {
                     ",?" +    // 17
                     ",?" +    // 18
                     ")");
-            _insert.setString(1, LocalDateTime.now().format(Date_formatter));
-            _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
+            _insert.setString(1, LocalDateTime.now().format(A.A.Date_formatter));
+            _insert.setString(2, LocalDateTime.now().format(A.A.Time_24_formatter));
             _insert.setString(3, JobName);
             _insert.setString(4, "N/A");
             _insert.setString(5, MSG.replace("===", "Failed:"));
@@ -465,68 +513,64 @@ public class Jobs extends javax.swing.JInternalFrame {
 
     private void START_CRON(){
         btnStartCron.setEnabled(false);
-        int Started_Jobs = 0;
+        txtLog.append( "= START_CRON @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         r_type = "cron";
+        int Job_Count = 0;
+        SCH = new Scheduler();
         String SCH_PATTERN = ""; // "59 11 * * 1,2,3,4,5" 
         for(int i = 0; i < DV1.getRowCount(); i++){
-            String Sch_ID = "";
             String Cron_Status = DV1.getValueAt(i, 2).toString();
             SCH_PATTERN = DV1.getValueAt(i, 3).toString();
             
             if(!SCH_PATTERN.toLowerCase().contains("no") && Cron_Status.equals("Idle")){
-                Started_Jobs++;
                 JobName = DV1.getValueAt(i, 0).toString();
                 String CONFIG = DV1.getValueAt(i, 6).toString();
                 try{
-                    if(JobName.startsWith("API")){
-                        Scheduler SCH = new Scheduler();
-                        Sch_ID = SCH.schedule(SCH_PATTERN, () -> {
+                    if(JobName.startsWith("API")){              
+                        SCH.schedule(SCH_PATTERN, () -> {
                             Job_API(JobName,CONFIG);
                             txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
                             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                         });
-                        SCH.start();
-                        Set_Cron_Status_Running(JobName, Sch_ID);
+                        Job_Count++;
+                        Set_Cron_Status_Running(JobName);
                         
                     } else if(JobName.startsWith("AP3")){
-                        Scheduler SCH = new Scheduler();
-                        Sch_ID = SCH.schedule(SCH_PATTERN, () -> {
+                        SCH.schedule(SCH_PATTERN, () -> {
                             Job_AP3(JobName,CONFIG);
                             txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
                             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                         });
-                        SCH.start(); 
-                        Set_Cron_Status_Running(JobName, Sch_ID);
+                        Job_Count++;
+                        Set_Cron_Status_Running(JobName);
                         
                     } else if(JobName.startsWith("DL")){
-                        Scheduler SCH = new Scheduler();
-                        Sch_ID = SCH.schedule(SCH_PATTERN, () -> {
+                        SCH.schedule(SCH_PATTERN, () -> {
                             Job_DL(JobName,CONFIG);
                             txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
                             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
-                        });
-                        SCH.start();                        
-                        Set_Cron_Status_Running(JobName, Sch_ID);
+                        });                       
+                        Job_Count++;
+                        Set_Cron_Status_Running(JobName);
 
                     } else if(JobName.startsWith("C360")){
-                        Scheduler SCH = new Scheduler();
-                        Sch_ID = SCH.schedule(SCH_PATTERN, () -> {
+                        SCH.schedule(SCH_PATTERN, () -> {
                             Job_C360(JobName,CONFIG);
                             txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
                             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                         });
-                        SCH.start();
-                        Set_Cron_Status_Running(JobName, Sch_ID);
+                        Job_Count++;
+                        Set_Cron_Status_Running(JobName);
                         
                     } else if(JobName.startsWith("Android")){
-                        Scheduler SCH = new Scheduler();
-                        Sch_ID = SCH.schedule(SCH_PATTERN, () -> {
+                        SCH.schedule(SCH_PATTERN, () -> {
                             Job_Android(JobName,CONFIG);
                             txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
                             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                         });
-                        SCH.start();
-                        Set_Cron_Status_Running(JobName, Sch_ID);
+                        Job_Count++;
+                        Set_Cron_Status_Running(JobName);
                     
                     } else if(JobName.startsWith("FW")){
                         //Job_FW(JobName,CONFIG);
@@ -538,20 +582,19 @@ public class Jobs extends javax.swing.JInternalFrame {
                     } else if(JobName.startsWith("iOS")){
                         //Job_iOS(config);
                     }                    
+
                 } catch(InvalidPatternException | IllegalStateException ex){
                     txtLog.append( "= Scheduler ERROR > " + ex.getMessage() + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());            
                 }                
             }
         }
-        txtLog.append( "= "  + Started_Jobs + " Scheduled Jobs Started " + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
 //        try{        
 //            Scheduler SCH = new Scheduler();
 //            SCH_PATTERN = "*/5 * * * *";
 //            ProcessTask TASK = new ProcessTask("A_TASK");
-//            String Sch_ID = SCH.schedule(SCH_PATTERN, () -> {
+//            String Sch_Task_ID = SCH.schedule(SCH_PATTERN, () -> {
 //                txtLog.append( "= SCH_2 Another 5 minutes ticked away..." + "\r\n");
 //                txtLog.setCaretPosition(txtLog.getDocument().getLength());  
 //            });
@@ -562,25 +605,40 @@ public class Jobs extends javax.swing.JInternalFrame {
 //            txtLog.append( "= SCH ERROR > " + ex.getMessage() + "\r\n");
 //            txtLog.setCaretPosition(txtLog.getDocument().getLength());            
 //        }
-        btnStopCron.setEnabled(true);
-        LOAD_JOBS();
+        if(Job_Count > 0){
+            SCH.start();
+            btnStopCron.setEnabled(true);
+            LOAD_JOBS();    
+            txtLog.append( "= Cron Started - " + Job_Count + " Job(s) scheduled" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        } else{
+            btnStartCron.setEnabled(true);
+            btnStopCron.setEnabled(false);
+            txtLog.append( "= Cron NOT Started - " + Job_Count + " Job(s) to schedule" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        }
     }    
     private void STOP_CRON(){
         btnStopCron.setEnabled(false);
+        if(SCH.isStarted()){
+            SCH.stop();
+            SCH = null;
+        }
+
+        txtLog.append( "= STOP_CRON @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        
         for(int i = 0; i < DV1.getRowCount(); i++){
             if(String.valueOf(DV1.getValueAt(i, 1)).equals(A.A.WsID)){
-                String SchID = DV1.getValueAt(i, 7).toString();
-                Scheduler SCH = new Scheduler();
-                SCH.deschedule(SchID);
                 DV1.setValueAt("N/A" , i, 2); 
                 DV1.setValueAt("Idle", i, 3);
             }
         }
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[jtt_jobs] SET " +
-                    " [Cron] = 'Idle'" +  
-                    ", [Host] = '" + "N/A" + "'" +  
-                    ", [SchID] = '" + "N/A" + "'" +  
+                    " [Host] = '" + "N/A" + "'" +  
+                    ", [Cron] = 'Idle'" +  
+                    ", [UserID] = '" + "N/A" + "'" +  
                     " WHERE [Host] = '" + A.A.WsID + "'");
             int row = _update.executeUpdate();
             conn.close();
@@ -591,6 +649,27 @@ public class Jobs extends javax.swing.JInternalFrame {
 
         btnStartCron.setEnabled(true);
         LOAD_JOBS();
+    }
+    private void Set_Cron_Status_Running(String job){
+            try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+                PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[jtt_jobs] SET " +
+                        " [Host] = '" + A.A.WsID + "'" + 
+                        ", [Cron] = 'Running'" +
+                        ", [UserID] = '" + A.A.UserID + "'" +
+
+                    " WHERE [Job_Name] = '" + job + "'");
+                int row = _update.executeUpdate();
+                conn.close();
+            } catch (SQLException ex) {
+                txtLog.append( "= Set_Cron_Status_Running > SQL ERROR: " + ex.getMessage());
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+            for(int i = 0; i < DV1.getRowCount(); i++){
+                if(String.valueOf(DV1.getValueAt(i, 0)).equals(job)){
+                    DV1.setValueAt(A.A.WsID , i, 1);
+                    DV1.setValueAt("Running", i, 2);
+                }
+            }
     }
     private void Run_Selected_Job(String Job, String config){
         JobName = txtJob_Name.getText();
@@ -612,35 +691,15 @@ public class Jobs extends javax.swing.JInternalFrame {
         } else if(JobName.startsWith("iOS")){
             //Job_iOS(config);
         }  
-        txtLog.append( "= " + Job + ": (ad-hoc) Execution started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
+        txtLog.append( "= " + Job + ": (ad-hoc) Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-    }
-    private void Set_Cron_Status_Running(String job, String SchID){
-            try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
-                PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[jtt_jobs] SET " +
-                        " [Cron] = 'Running'" +
-                        ", [SchID] = '" + SchID + "'" +
-                        ", [Host] = '" + A.A.WsID + "'" +
-                    " WHERE [Job_Name] = '" + job + "'");
-                int row = _update.executeUpdate();
-                conn.close();
-            } catch (SQLException ex) {
-                txtLog.append( "= Set_Cron_Status_Running > SQL ERROR: " + ex.getMessage());
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            }
-            for(int i = 0; i < DV1.getRowCount(); i++){
-                if(String.valueOf(DV1.getValueAt(i, 0)).equals(job)){
-                    DV1.setValueAt(A.A.WsID , i, 1);
-                    DV1.setValueAt("Running", i, 2);
-                }
-            }
     }
 
     //<editor-fold defaultstate="collapsed" desc="Jobs > Job Name, Config">
     private void Job_AP3(String job, String config){
         AP3_New.AP3_GUI _Job = new AP3_New.AP3_GUI();
         String RES = _Job.JOB_Run_Auto(r_type, config);
-        txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
+        txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         if(!RES.contains("OK")){
             LOG_FAILURE(RES);
@@ -649,6 +708,8 @@ public class Jobs extends javax.swing.JInternalFrame {
     private void Job_API(String job, String config){
         API.API_GUI _Job = new API.API_GUI();
         String RES = _Job.JOB_Run_Auto(r_type, config);
+        txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
         if(!RES.contains("OK")){
             LOG_FAILURE(RES);
         }
@@ -656,6 +717,8 @@ public class Jobs extends javax.swing.JInternalFrame {
     private void Job_Android(String job, String config){
         Mob_Android.An_GUI _Job = new Mob_Android.An_GUI();
         String RES = _Job.JOB_Run_Auto(r_type, config);
+        txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
         if(!RES.contains("OK")){
             LOG_FAILURE(RES);
         }
@@ -663,6 +726,8 @@ public class Jobs extends javax.swing.JInternalFrame {
     private void Job_C360(String job, String config){
         C360.C360_GUI _Job = new C360.C360_GUI();
         String RES = _Job.JOB_Run_Auto(r_type, config);
+        txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
         if(!RES.contains("OK")){
             LOG_FAILURE(RES);
         }
@@ -670,8 +735,8 @@ public class Jobs extends javax.swing.JInternalFrame {
     private void Job_DL(String job, String config){
         DL.DL_GUI _Job = new DL.DL_GUI();
         String RES = _Job.JOB_Run_Auto(r_type, config);
-//        txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
-//        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
         if(!RES.contains("OK")){
             LOG_FAILURE(RES);
         }

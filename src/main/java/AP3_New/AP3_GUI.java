@@ -838,10 +838,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     private ExtentSparkReporter HtmlReporter;
     protected ExtentReports HtmlReport;
     protected ExtentTest ParentTest;
-    
-    protected boolean ALL_DATA = false;
-    protected boolean NO_DATA = false;
-    
+
     protected boolean FAIL = false;
     
     protected int _t = 0; // Total
@@ -1965,7 +1962,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             MOBILE_PW = txtMOBILE_PW.getText();
             RUNNER_ID = txtRUNNER_ID.getText();
             RUNNER_PW = txtRUNNER_PW.getText();
-            ALL_DATA = _all_data.isSelected();
             DH_MENU_ID = txtDH_Id.getText(); // like NWEJgN87Q3Sw46JaQ1Q, length > 18
             
             Slack_Channel = txtSlackCh.getText();
@@ -2551,15 +2547,15 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             JSONObject requestParams = new JSONObject();
             JSONObject payload = new JSONObject();
             JSONObject custom_details = new JSONObject();            
-                payload.put("summary", "Admin Panel (AP3) - Sanity Check");
+                payload.put("summary", "Admin Panel (AP3) - Sanity Check Failed");
                 payload.put("source", "https://adminpanel.compassdigital.org/#/");                
                 payload.put("severity", "critical");
+                    custom_details.put("test_type", "jtt_cron"); 
                     custom_details.put("host", A.A.WsID);
-                    custom_details.put("test_type", "cron");
-                    custom_details.put("max_responce_time", t_max + " sec");
+                    custom_details.put("user", A.A.UserID);
                     custom_details.put("steps_total", _t);
                     custom_details.put("steps_failed", _f);
-                payload.put("custom_details", custom_details);    
+            payload.put("custom_details", custom_details);    
             requestParams.put("payload", payload);
             requestParams.put("routing_key", "AWS_Routing_Key");
             requestParams.put("event_action", "trigger");
