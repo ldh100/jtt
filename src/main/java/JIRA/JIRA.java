@@ -699,7 +699,7 @@ public class JIRA extends javax.swing.JInternalFrame {
 
                 c = C.substring(C.indexOf("COUNTRY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); COUNTRY = c.substring(c.indexOf(" ")).trim();
 
-                c = C.substring(C.indexOf("txtAdmin_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("User_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_ID.setText(c.substring(c.indexOf(" ")).trim());
                 c = C.substring(C.indexOf("txtAdmin_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtAdmin_PW.setText(c.substring(c.indexOf(" ")).trim());
 
                 CONFIG = true;
@@ -728,7 +728,7 @@ public class JIRA extends javax.swing.JInternalFrame {
             
             C += "COUNTRY: " + COUNTRY + "\r\n";            
             
-            C += "txtAdmin_ID: " + txtAdmin_ID.getText() + "\r\n";
+            C += "User_ID: " + txtAdmin_ID.getText() + "\r\n";
             C += "txtAdmin_PW: " + txtAdmin_PW.getText()  + "\r\n";
             
 
