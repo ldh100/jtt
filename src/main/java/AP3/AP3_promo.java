@@ -408,7 +408,10 @@ public class AP3_promo {
        
         // </editor-fold>    
         
-            
+        // <editor-fold defaultstate="collapsed" desc="Tests for Dev and Staging Environment">   
+          if(!env.equals("PR"))
+              
+       {  
          // <editor-fold defaultstate="collapsed" desc="BOGO PROMO">  
          
           EX += " - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Creating BOGO PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
@@ -827,10 +830,9 @@ public class AP3_promo {
          EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Creating BUNDLE PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
        // </editor-fold>   
        
-         // <editor-fold defaultstate="collapsed" desc="Tests for Dev and Staging Environment">   
          
-       if(!env.equals("PR"))
-       {
+         
+       
             EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Creating LTO with Repeat : Weekends==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
       
          _t++; Thread.sleep((long) sleep); TWeb.To_Top("no_jira");
@@ -948,9 +950,9 @@ public class AP3_promo {
         
         EX += "\n - " + "\t" + " ====END=====" + "\t" + " ===== " + "\t" + " == Creating LTO with Repeat : Weekends" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
        //End of staging environment
-     // </editor-fold>
-    }
     
+    }
+     // </editor-fold>
 } 
     public static void Promo_details(String Promo_type) throws InterruptedException
     {
