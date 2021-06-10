@@ -1264,14 +1264,14 @@ public class AP3 extends javax.swing.JInternalFrame {
                     Thread.sleep(1500);
                 }
                 if (_sales_reporting.isSelected()) { 
-                    SCOPE += ", Sales Rep Hidden Station";
+                    SCOPE += ", Sales Rep ";
                     EX += " - " + "\t" + " === Sales Reporting" + "\t" + " ===== " + "\t" + " == Sales Reporting Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     AP3_sales_reporting.run();
                     EX += " - " + "\t" + " === ^ Sales Reporting" + "\t" + " ===== " + "\t" + " == ^ Sales Reporting End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                     Thread.sleep(1500);
                 }
                 if (_sales_report_hidden.isSelected()) { 
-                    SCOPE += ", Sales Rep";
+                    SCOPE += ", Sales Rep Hidden Station";
                     EX += " - " + "\t" + " === Sales Report for Hidden Stations" + "\t" + " ===== " + "\t" + " == Sales Report for Hidden Stations Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     AP3_sales_reporting_for_hidden_stations.run();
                     EX += " - " + "\t" + " === ^ Sales Report for Hidden Stations" + "\t" + " ===== " + "\t" + " == ^ Sales Report for Hidden Stations End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
