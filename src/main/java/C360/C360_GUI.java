@@ -1,7 +1,5 @@
 package C360;
 
-
-import A.Func;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
@@ -860,12 +858,14 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     protected FluentWait loadTimeout = null;
     protected long WaitForElement = 1500; // milisec
     protected double LoadTimeOut = 15 * 1000; // milisec 
+    protected String err = "";
+    protected String Toast_Msg = "";  
     
     private SwingWorker BW1;  
     private SwingWorker BW2; 
-    private String Toast_Msg = ""; 
+
     private Instant run_start;
-    private String err;
+    
 
     private String SQL;
     private String AP3_TKN = "";
@@ -1142,7 +1142,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             sw1.reset();
         }
         _t++; sw1.start();       
-        appId = Func.App_ID(cmbApp.getSelectedItem().toString(), env);
+        appId = A.Func.App_ID(cmbApp.getSelectedItem().toString(), env);
 
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
@@ -1608,7 +1608,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 String[] v = lines[i].split("\t");
                 System.arraycopy(v, 0, Values[i], 0, v.length); 
             }
-            Excel_Report_Path = Func.fExcel(l, col, Values, "C360_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
+            Excel_Report_Path = A.Func.fExcel(l, col, Values, "C360_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
             txtLog.append( "= Report Excel file:\r\n" + Excel_Report_Path + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch (Exception ex) {
@@ -2287,8 +2287,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     }
     private void BW1_DoWork(Boolean GUI) { 
         BW1 = new SwingWorker() {             
-            Instant dw_start = Instant.now();
-
             @Override
             protected String doInBackground() throws Exception { 
                 String DriverStart = StartWebDriver();
@@ -2304,9 +2302,9 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                     btnFails.setEnabled(true);
                 }
                 New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
-                Extent_Report_Config();// ======================================================================= 
                 
-                Execute();
+                Extent_Report_Config();
+                Execute();// ======================================================================= 
                 
                 DD = Duration.between(run_start, Instant.now());
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
@@ -2438,8 +2436,8 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                     t_min = am0[0] / (double)1000;
                     t_avg = (total / am0.length) / (double)1000;
                     t_max = am0[am0.length - 1]  / (double)1000;
-                    p_50 = Func.p50(am0) / (double)1000;
-                    p_90 = Func.p90(am0) / (double)1000;
+                    p_50 = A.Func.p50(am0) / (double)1000;
+                    p_90 = A.Func.p90(am0) / (double)1000;
                     
                     t_rep += "= Total Calls: " + t_calls +
                             ", Response Times (sec) - Min: " + A.A.df.format(t_min) +
@@ -2482,7 +2480,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                     "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
                     "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w + ", Info: " + _i;
             
-            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Excel_Report_Path, Slack_Channel, MSG));
+            Current_Log_Update(GUI, A.Func.Send_File_with_Message_to_Slack(Excel_Report_Path, Slack_Channel, MSG));
             File ef = new File(Excel_Report_Path);
             if(ef.exists() && !ef.isDirectory()) {
                 ef.delete();
@@ -2498,7 +2496,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 }
                 HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Extract Here > open unzipped HTML file";
             }
-            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(HTML_Report_Path, Slack_Channel, HTML_Report_Msg));
+            Current_Log_Update(GUI, A.Func.Send_File_with_Message_to_Slack(HTML_Report_Path, Slack_Channel, HTML_Report_Msg));
             File hf = new File(HTML_Report_Path);
             if(hf.exists() && !hf.isDirectory()) {
                 hf.delete();

@@ -2739,12 +2739,11 @@ public class API_GUI extends javax.swing.JInternalFrame {
     }
     private void BW1_DoWork(Boolean GUI) { 
         BW1 = new SwingWorker() {             
-            Instant dw_start = Instant.now();
             @Override
             protected String doInBackground() throws Exception { 
-                Extent_Report_Config();// ======================================================================= 
                 
-                Execute();
+                Extent_Report_Config();
+                Execute();// ======================================================================= 
                 
                 DD = Duration.between(run_start, Instant.now());
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
