@@ -53,57 +53,22 @@ public class AP3_bulk_apply {
         String MenuID = "";
         String menuName = "";
 
-        if(!env.equals("PR")) {
-            TWeb.Call_API_Auth("Find 'Sides' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
+        
+            TWeb.Call_API_Auth("Find 'Sides' MenuID", BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, "no_jira");
             JSONObject json = new JSONObject(API_Response_Body);
             JSONArray menus = new JSONArray();
             menus = json.getJSONArray("menus");
             for (int i = 0; i < menus.length(); i++) {
                 JSONObject menu = menus.getJSONObject(i);
-                if (menu.getString("location_brand").equals(BrandID)) {
-                    JSONObject label = new JSONObject("label");
-                    menuName = label.getString("en");
-                    if (menuName.equals("Sides")) {
-                        MenuID = menu.getString("id");
-                    }  
-                }
-            }
-        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Sides / API )", BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
-        json = new JSONObject(API_Response_Body);
-        JSONArray groups = new JSONArray();
-        groups = json.getJSONArray("groups");
-        JSONObject json2 = groups.getJSONObject(0);
-        JSONArray items = new JSONArray();
-        items = json2.getJSONArray("items");
-        for (int i = 0; i < items.length(); i++) {
-            JSONObject item = items.getJSONObject(i);           
-            if (item.getJSONObject("is").getBoolean("hidden")) {
-                _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"hidden\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            } else {
-                _t++;
-                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"hidden\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            }
-            if (item.getJSONObject("is").getBoolean("out_of_stock")) {
-                _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            } else {
-                _t++;
-                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            }
-        }
-        } else {
-            TWeb.Call_API_Auth("Find 'Sides' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
-            JSONObject json = new JSONObject(API_Response_Body);
-            JSONArray menus = new JSONArray();
-            menus = json.getJSONArray("menus");
-            for (int i = 0; i < menus.length(); i++) {
-                JSONObject menu = menus.getJSONObject(i);
-                if (menu.getString("location_brand").equals(BrandID)) {
-                    JSONObject label = new JSONObject("label");
-                    menuName = label.getString("en");
-                    if (menuName.equals("Sides")) {
-                        MenuID = menu.getString("id");
+                String loc_brand = "";
+                if (menu.has("location_brand") && menu.has("label")) {
+                    loc_brand = menu.getString("location_brand");
+                    if (loc_brand.equals(BrandID)) {
+                        JSONObject label = menu.getJSONObject("label");
+                        menuName = label.getString("en");
+                        if (menuName.equals("Sides")) {
+                            MenuID = menu.getString("id"); 
+                        }
                     }  
                 }
             }
@@ -132,7 +97,7 @@ public class AP3_bulk_apply {
                 _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
         }    
-        }
+        
         //reset list visibility and in/out of stock checkbox indicator
         String inStock = getAttributeOfElementByXpath("((//table[contains(@class,'v-table')]//tbody/tr)[1]//td[8])//i", "class");
         String visible = getAttributeOfElementByXpath("((//table[contains(@class,'v-table')]//tbody/tr)[1]//td[4])//i", "class");
@@ -162,27 +127,31 @@ public class AP3_bulk_apply {
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_InVisibility("Wait for Spinner", "xpath", "//circle[@class='v-progress-circular__overlay']", "no_jira");
             if (FAIL) { return;}
         }
-        if (!env.equals("PR")) {
-            TWeb.Call_API_Auth("Find 'Sides' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
-            JSONObject json = new JSONObject(API_Response_Body);
-            JSONArray menus = new JSONArray();
+        
+            TWeb.Call_API_Auth("Find 'Sides' MenuID", BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, "no_jira");
+            json = new JSONObject(API_Response_Body);
+            menus = new JSONArray();
             menus = json.getJSONArray("menus");
             for (int i = 0; i < menus.length(); i++) {
                 JSONObject menu = menus.getJSONObject(i);
-                if (menu.getString("location_brand").equals(BrandID)) {
-                    JSONObject label = new JSONObject("label");
-                    menuName = label.getString("en");
-                    if (menuName.equals("Sides")) {
-                        MenuID = menu.getString("id");
+                String loc_brand = "";
+                if (menu.has("location_brand") && menu.has("label")) {
+                    loc_brand = menu.getString("location_brand");
+                    if (loc_brand.equals(BrandID)) {
+                        JSONObject label = menu.getJSONObject("label");
+                        menuName = label.getString("en");
+                        if (menuName.equals("Sides")) {
+                            MenuID = menu.getString("id"); 
+                        }
                     }  
                 }
             }
         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Sides / API )", BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
         json = new JSONObject(API_Response_Body);
-        JSONArray groups = new JSONArray();
+        groups = new JSONArray();
         groups = json.getJSONArray("groups");
-       JSONObject json2 = groups.getJSONObject(0);
-        JSONArray items = new JSONArray();
+        json2 = groups.getJSONObject(0);
+        items = new JSONArray();
         items = json2.getJSONArray("items");
         for (int i = 0; i < items.length(); i++) {
             JSONObject item = items.getJSONObject(i);           
@@ -200,46 +169,6 @@ public class AP3_bulk_apply {
                 _t++;
                 _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
-        }
-        } else {
-            TWeb.Call_API_Auth("Find 'Sides' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
-            JSONObject json = new JSONObject(API_Response_Body);
-            JSONArray menus = new JSONArray();
-            menus = json.getJSONArray("menus");
-            for (int i = 0; i < menus.length(); i++) {
-                JSONObject menu = menus.getJSONObject(i);
-                if (menu.getString("location_brand").equals(BrandID)) {
-                    JSONObject label = new JSONObject("label");
-                    menuName = label.getString("en");
-                    if (menuName.equals("Sides")) {
-                        MenuID = menu.getString("id");
-                    }  
-                }
-            }
-        _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Sides / API )", BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
-        json = new JSONObject(API_Response_Body);
-        JSONArray groups = new JSONArray();
-        groups = json.getJSONArray("groups");
-        JSONObject json2 = groups.getJSONObject(0);
-        JSONArray items = new JSONArray();
-        items = json2.getJSONArray("items");
-        for (int i = 0; i < items.length(); i++) {
-            JSONObject item = items.getJSONObject(i);           
-            if (!item.getJSONObject("is").getBoolean("hidden")) {
-                _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + " {\"hidden\" : false}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            } else {
-                _t++;
-                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + " {\"hidden\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            }
-            if (!item.getJSONObject("is").getBoolean("out_of_stock")) {
-                _t++;
-                _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : false}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            } else {
-                _t++;
-                _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            }
-        }
         }
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         
@@ -400,95 +329,30 @@ public class AP3_bulk_apply {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Close Selection", "xpath", "//div[contains(text(),'Close Selection')]", "no_jira");
         if (FAIL) { return;}
         if (secondModVisibility.contains("mdi-eye-off")) {
-            if (!env.equals("PR")) {
-                TWeb.Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
-            JSONObject json = new JSONObject(API_Response_Body);
-            JSONArray menus = new JSONArray();
+            TWeb.Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, "no_jira");
+            json = new JSONObject(API_Response_Body);
+            menus = new JSONArray();
             menus = json.getJSONArray("menus");
             for (int i = 0; i < menus.length(); i++) {
                 JSONObject menu = menus.getJSONObject(i);
-                if (menu.getString("location_brand").equals(BrandID)) {
-                    JSONObject label = new JSONObject("label");
-                    menuName = label.getString("en");
-                    if (menuName.equals("Flame Grilled Pitas")) {
-                        MenuID = menu.getString("id");
+                String loc_brand = "";
+                if (menu.has("location_brand") && menu.has("label")) {
+                    loc_brand = menu.getString("location_brand");
+                    if (loc_brand.equals(BrandID)) {
+                        JSONObject label = menu.getJSONObject("label");
+                        menuName = label.getString("en");
+                        if (menuName.equals("Sides")) {
+                            MenuID = menu.getString("id"); 
+                        }
                     }  
                 }
             }
                 _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/"+MenuID+"?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
                 json = new JSONObject(API_Response_Body);
-                JSONArray groups = new JSONArray();
+                groups = new JSONArray();
                 groups = json.getJSONArray("groups");
-                JSONObject json2 = groups.getJSONObject(0);
-                JSONArray items = new JSONArray();
-                items = json2.getJSONArray("items");
-                for (int i = 0; i < items.length(); i++) {
-                    JSONObject item = items.getJSONObject(i);           
-                    JSONArray options = new JSONArray();
-                    options = item.getJSONArray("options");
-                    JSONObject option = options.getJSONObject(0);
-                    JSONArray option_items = new JSONArray();
-                    option_items = option.getJSONArray("items");
-                    if (option_items.length() == 3) {
-                        _t++;
-                        _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    } else {
-                        _t++;
-                        _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    }
-                }
-                _t++; TWeb.Element_By_Path_Click("Add Visibility of Second Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i[contains(@class,'mdi-eye')]", "no_jira");
-                if (FAIL) { return;}
-                Thread.sleep(500);
-                _t++; TWeb.Element_By_Path_Click("Add Visibility of Second Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i[contains(@class,'mdi-eye')]", "no_jira");
-                if (FAIL) { return;}
-                Thread.sleep(500);
-                _t++; TWeb.Element_By_Path_Click("Click > Save Mod Changes", "xpath", "//div[text()='Save Modifiers Changes']", "no_jira");
-                if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", "no_jira");
-                if (FAIL) { return;}
-                Thread.sleep(500);
-                _t++; Thread.sleep((long) sleep); TWeb.List_L1("List of Items", "xpath", "//table[contains(@class,'v-table')]//tbody/tr", "no_jira");
-                if (FAIL) { return;}
-                for (int i = 0; i < L1.size(); i++) {
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on item "+ String.valueOf(i+1), "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]", "no_jira");
-                    if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Modifier", "xpath", "//span[contains(text(),'Pita Options Modifier')]", "no_jira");
-                    if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check Modifier 'Extra Beef' is visible", "xpath", "(//div[contains(@class,'layout modifier')])[2]//i[contains(@class,'mdi-eye ')]", "no_jira");
-                    if (FAIL) { return;}
-                    if (!env.equals("PR")) {
-                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
-                        if (FAIL) { return;}
-                    } else {
-                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[4]", "no_jira");
-                        if (FAIL) { return;}
-                    }                    
-                }
-                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", "no_jira");
-                if (FAIL) { return;}
-                Thread.sleep(500);
-            } else {
-                    TWeb.Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
-            JSONObject json = new JSONObject(API_Response_Body);
-            JSONArray menus = new JSONArray();
-            menus = json.getJSONArray("menus");
-            for (int i = 0; i < menus.length(); i++) {
-                JSONObject menu = menus.getJSONObject(i);
-                if (menu.getString("location_brand").equals(BrandID)) {
-                    JSONObject label = new JSONObject("label");
-                    menuName = label.getString("en");
-                    if (menuName.equals("Flame Grilled Pitas")) {
-                        MenuID = menu.getString("id");
-                    }  
-                }
-            }
-                _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/"+MenuID+"?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
-                json = new JSONObject(API_Response_Body);
-                JSONArray groups = new JSONArray();
-                groups = json.getJSONArray("groups");
-                JSONObject json2 = groups.getJSONObject(0);
-                JSONArray items = new JSONArray();
+                json2 = groups.getJSONObject(0);
+                items = new JSONArray();
                 items = json2.getJSONArray("items");
                 for (int i = 0; i < items.length(); i++) {
                     JSONObject item = items.getJSONObject(i);           
@@ -536,29 +400,32 @@ public class AP3_bulk_apply {
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", "no_jira");
                 if (FAIL) { return;}
                 Thread.sleep(500);
-            }
-        } else {
-            if (!env.equals("PR")) {
-                     TWeb.Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
-            JSONObject json = new JSONObject(API_Response_Body);
-            JSONArray menus = new JSONArray();
+            
+        } else { 
+            TWeb.Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, "no_jira");
+            json = new JSONObject(API_Response_Body);
+            menus = new JSONArray();
             menus = json.getJSONArray("menus");
             for (int i = 0; i < menus.length(); i++) {
                 JSONObject menu = menus.getJSONObject(i);
-                if (menu.getString("location_brand").equals(BrandID)) {
-                    JSONObject label = new JSONObject("label");
-                    menuName = label.getString("en");
-                    if (menuName.equals("Flame Grilled Pitas")) {
-                        MenuID = menu.getString("id");
+                String loc_brand = "";
+                if (menu.has("location_brand") && menu.has("label")) {
+                    loc_brand = menu.getString("location_brand");
+                    if (loc_brand.equals(BrandID)) {
+                        JSONObject label = menu.getJSONObject("label");
+                        menuName = label.getString("en");
+                        if (menuName.equals("Sides")) {
+                            MenuID = menu.getString("id"); 
+                        }
                     }  
                 }
             }
                 _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/"+MenuID+"?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
                 json = new JSONObject(API_Response_Body);
-                JSONArray groups = new JSONArray();
+                groups = new JSONArray();
                 groups = json.getJSONArray("groups");
-                JSONObject json2 = groups.getJSONObject(0);
-                JSONArray items = new JSONArray();
+                json2 = groups.getJSONObject(0);
+                items = new JSONArray();
                 items = json2.getJSONArray("items");
                 for (int i = 0; i < items.length(); i++) {
                     JSONObject item = items.getJSONObject(i);           
@@ -603,73 +470,7 @@ public class AP3_bulk_apply {
                 _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", "no_jira");
                 if (FAIL) { return;}
                 Thread.sleep(500);
-            } else {
-                     TWeb.Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
-            JSONObject json = new JSONObject(API_Response_Body);
-            JSONArray menus = new JSONArray();
-            menus = json.getJSONArray("menus");
-            for (int i = 0; i < menus.length(); i++) {
-                JSONObject menu = menus.getJSONObject(i);
-                if (menu.getString("location_brand").equals(BrandID)) {
-                    JSONObject label = new JSONObject("label");
-                    menuName = label.getString("en");
-                    if (menuName.equals("Flame Grilled Pitas")) {
-                        MenuID = menu.getString("id");
-                    }  
-                }
-            }
-                _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/"+MenuID+"?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
-                json = new JSONObject(API_Response_Body);
-                JSONArray groups = new JSONArray();
-                groups = json.getJSONArray("groups");
-                JSONObject json2 = groups.getJSONObject(0);
-                JSONArray items = new JSONArray();
-                items = json2.getJSONArray("items");
-                for (int i = 0; i < items.length(); i++) {
-                    JSONObject item = items.getJSONObject(i);           
-                    JSONArray options = new JSONArray();
-                    options = item.getJSONArray("options");
-                    JSONObject option = options.getJSONObject(0);
-                    JSONArray option_items = new JSONArray();
-                    option_items = option.getJSONArray("items");
-                    if (option_items.length() == 4) {
-                        _t++;
-                        _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    } else {
-                        _t++;
-                        _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    }
-                }
-                _t++; TWeb.Element_By_Path_Click("Remove Visibility of Second Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[2]//i[contains(@class,'mdi-eye')]", "no_jira");
-                if (FAIL) { return;}
-                Thread.sleep(500);
-                _t++; TWeb.Element_By_Path_Click("Click > Save Mod Changes", "xpath", "//div[text()='Save Modifiers Changes']", "no_jira");
-                if (FAIL) { return;}
-                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", "no_jira");
-                if (FAIL) { return;}
-                Thread.sleep(500);
-                _t++; Thread.sleep((long) sleep); TWeb.List_L1("List of Items", "xpath", "//table[contains(@class,'v-table')]//tbody/tr", "no_jira");
-                if (FAIL) { return;}
-                for (int i = 0; i < L1.size(); i++) {
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on item "+ String.valueOf(i+1), "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]", "no_jira");
-                    if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Modifier", "xpath", "//span[contains(text(),'Pita Options Modifier')]", "no_jira");
-                    if (FAIL) { return;}
-                    _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check Modifier 'Extra Beef' is NOT visible", "xpath", "(//div[contains(@class,'layout modifier')])[2]//i[contains(@class,'mdi-eye-off')]", "no_jira");
-                    if (FAIL) { return;} 
-                    if (!env.equals("PR")) {
-                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", "no_jira");
-                        if (FAIL) { return;}
-                    } else {
-                        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[4]", "no_jira");
-                        if (FAIL) { return;}
-                    }  
-                }
-                _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", "no_jira");
-                if (FAIL) { return;}
-                Thread.sleep(500);
-            }            
-        }             
+            }                              
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         
         // <editor-fold defaultstate="collapsed" desc="Check Global Menu">  
@@ -703,26 +504,32 @@ public class AP3_bulk_apply {
         if (FAIL) { return;}
         //get First Item Price (FIP)
         String FIP = getAttributeOfElementByXpath("(//table[contains(@class,'v-table')]//tbody/tr)[1]//td[5]", "innerHTML");
-             TWeb.Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
-            JSONObject json = new JSONObject(API_Response_Body);
-            JSONArray menus = new JSONArray();
-            menus = json.getJSONArray("menus");
-            for (int i = 0; i < menus.length(); i++) {
-                JSONObject menu = menus.getJSONObject(i);
-                if (menu.getString("location_brand").equals(BrandID)) {
-                    JSONObject label = new JSONObject("label");
-                    menuName = label.getString("en");
-                    if (menuName.equals("Flame Grilled Pitas")) {
-                        MenuID = menu.getString("id");
-                    }  
-                }
+        TWeb.Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, "no_jira");
+        json = new JSONObject(API_Response_Body);
+        menus = new JSONArray();
+        menus = json.getJSONArray("menus");
+        for (int i = 0; i < menus.length(); i++) {
+            JSONObject menu = menus.getJSONObject(i);
+            String loc_brand = "";
+            if (menu.has("location_brand")) {
+                loc_brand = menu.getString("location_brand");
+                if (loc_brand.equals(BrandID)) {
+                    if (menu.has("label")) {
+                        JSONObject label = new JSONObject("label");
+                        menuName = label.getString("en");
+                        if (menuName.equals("Sides")) {
+                            MenuID = menu.getString("id");
+                        }  
+                    }
+                }  
             }
+        }
         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/"+MenuID+"?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
         json = new JSONObject(API_Response_Body);
-        JSONArray groups = new JSONArray();
+        groups = new JSONArray();
         groups = json.getJSONArray("groups");
-        JSONObject json2 = groups.getJSONObject(0);
-        JSONArray items = new JSONArray();
+        json2 = groups.getJSONObject(0);
+        items = new JSONArray();
         items = json2.getJSONArray("items");
         for (int i = 0; i < items.length(); i++) {
             JSONObject item = items.getJSONObject(i);           
@@ -914,17 +721,21 @@ public class AP3_bulk_apply {
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         
 
-            TWeb.Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + BrandID + "?nocache=1&extended=true", true, "no_jira");
+            TWeb.Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, "no_jira");
             json = new JSONObject(API_Response_Body);
             menus = new JSONArray();
             menus = json.getJSONArray("menus");
             for (int i = 0; i < menus.length(); i++) {
                 JSONObject menu = menus.getJSONObject(i);
-                if (menu.getString("location_brand").equals(BrandID)) {
-                    JSONObject label = new JSONObject("label");
-                    menuName = label.getString("en");
-                    if (menuName.equals("Flame Grilled Pitas")) {
-                        MenuID = menu.getString("id");
+                String loc_brand = "";
+                if (menu.has("location_brand") && menu.has("label")) {
+                    loc_brand = menu.getString("location_brand");
+                    if (loc_brand.equals(BrandID)) {
+                        JSONObject label = menu.getJSONObject("label");
+                        menuName = label.getString("en");
+                        if (menuName.equals("Sides")) {
+                            MenuID = menu.getString("id"); 
+                        }
                     }  
                 }
             }
