@@ -9,7 +9,11 @@ import static A.A.*;
 import static AP3.AP3.ADMIN_ID;
 import static AP3.AP3.ADMIN_PW;
 import static AP3.AP3.BaseAPI;
+import static AP3.AP3.DH_Menu_ID;
+import static AP3.AP3.GL_MENU;
 import static AP3.AP3.New_ID;
+import static AP3.AP3.SECTOR;
+import static AP3.AP3.SITE;
 import static AP3.AP3.url;
 import java.time.LocalDateTime;
 import java.util.Iterator;
@@ -40,7 +44,8 @@ public class AP3_password {
         static String passWord5="DhruvsethAuto2!"; // Valid password
         static String passWord6="DhruvsethAuto2!0"; // New Valid password
         static String passWord7="DhruvQA7"; // At least 9 characters
-        static String SITE="DS Derry Village";
+        
+        
         
         //milo.a@mailsac.com Admin
         //milo.d@mailsac.om Delivery Manager
@@ -48,12 +53,9 @@ public class AP3_password {
         //Password is Test1234
     
     public static void run() throws InterruptedException { 
-       
-       
-         
-         
+                                  
         //**AUT-845 After creating an Admin user, sign up to Ap3 with the new user and login to ap3 with the new user **
-        /**
+        
         clickNewUser();            
         //Selecting role as admin and creating a new admin user
         createNewAdminUser();        
@@ -61,7 +63,7 @@ public class AP3_password {
         //Entering mailinator and clicking on the email    
         enterMailnator();
         // Click on email "You have received a invite to log into the Admin Panel!"
-        clickEmailInviteToLogin();        
+        clickEmailInviteToLogin();          
         Thread.sleep(1000);        
         Set<String> windows = d1.getWindowHandles();
         Iterator<String> it = windows.iterator();
@@ -95,12 +97,14 @@ public class AP3_password {
         // AUT-840 As an Admin, I can reset my password and login to Ap3 with the new password   **     
         forgotPassWord();        
         enterMailnator();
-        clickEmailResetPassword();        
+        clickEmailResetPassword(); 
+        Thread.sleep(5000);
          windows = d1.getWindowHandles();
          it = windows.iterator();
          parentId = it.next();
          childId = it.next();
-         childThreeId = it.next();                       
+         childThreeId = it.next();  
+         Thread.sleep(1000);
         d1.switchTo().window(childThreeId);                                      
         //Scenario 1: Admin: At least 15 characters requirement is not fulfilled
         fifteenCharacters();        
@@ -125,26 +129,47 @@ public class AP3_password {
         adminUserLoginOldPassword();
         adminUserLoginAfterResetPassword();            
         logout();
-        ap3LoginPage();//can be deleted
-        Admin_IDLogin();
-        deleteUser();
+        ap3LoginPage();//can be deleted       
+        
+        
+        Admin_IDLogin(); 
+        SearchUser();
+        String U_ID=getU_ID();
+        click_User_Inactive();
+        getUser_API(U_ID);        
+        click_User_Active();
+        getUser_API(U_ID);
+        SearchUser();        
+        deleteUser();     
+        TWeb.Refresh("Refresh", "no_jira"); 
+        verify_User_Deleted_API(U_ID);
+        
         //logout();
+        //ap3LoginPage();
+        
         
         // AUT-847 After creating CDL delivery manager user, sign up to Ap3 with the new user and login to ap3 with the new user **
-        //Admin_IDLogin();
+        
+       // Admin_IDLogin();  
+        
         clickNewUser();
         createNewCDLDeliveryManager();
         logout();
         //Entering mailinator and clicking on the email    
         enterMailnator();
+        Thread.sleep(1000);
         // Click on email "You have received a invite to log into the Admin Panel!"
         clickEmailInviteToLogin();        
-        Thread.sleep(1000);        
+        Thread.sleep(1000); 
+               
+       
+        
          windows = d1.getWindowHandles();
          it = windows.iterator();
          parentId = it.next();
          childId = it.next();
-         childThreeId = it.next();       
+         childThreeId = it.next();  
+        
         //d1.switchTo().window(childId).close();
         //d1.switchTo().window(parentId).close();        
         d1.switchTo().window(childThreeId);                                           
@@ -175,7 +200,7 @@ public class AP3_password {
         
         enterMailnator();
         clickEmailResetPassword();
-        
+        Thread.sleep(5000);
          windows = d1.getWindowHandles();
          it = windows.iterator();
          parentId = it.next();
@@ -211,12 +236,27 @@ public class AP3_password {
         cdlSiteUserLoginAfterResetPassword();            
         logout();
         ap3LoginPage();
-        Admin_IDLogin();
-        deleteUser();
+        
+        Thread.sleep(1000);
+        Admin_IDLogin(); 
+        SearchUser();
+        U_ID=getU_ID();
+        click_User_Inactive();
+        getUser_API(U_ID);        
+        click_User_Active();
+        getUser_API(U_ID);
+        SearchUser();        
+        deleteUser();         
+        
+        TWeb.Refresh("Refresh", "no_jira"); 
+        verify_User_Deleted_API(U_ID);
+        
         //logout(); 
         
-        //** AUT-846: After creating Site manager user, sign up to Ap3 with the new user and login to ap3 with the new user //**
-        //Admin_IDLogin();
+         //AUT-846: After creating Site manager user, sign up to Ap3 with the new user and login to ap3 with the new user //**
+        
+        // Admin_IDLogin();
+        
         clickNewUser();
         createNewSiteManager();
         logout();
@@ -239,7 +279,15 @@ public class AP3_password {
             if (FAIL) { return;}
         
         Thread.sleep(1000);  
-                                
+        
+        /*
+        Set<String> windows = d1.getWindowHandles();
+        Iterator<String> it = windows.iterator();
+        String parentId = it.next();
+        String childId = it.next();
+        String childThreeId = it.next();
+        */
+        
         windows = d1.getWindowHandles();
          it = windows.iterator();
          parentId = it.next();
@@ -247,7 +295,10 @@ public class AP3_password {
          childThreeId = it.next();       
         //d1.switchTo().window(childId).close();
         //d1.switchTo().window(parentId).close();        
-        d1.switchTo().window(childThreeId);        
+        d1.switchTo().window(childThreeId);     
+        
+        
+        
         //Scenario 1: Site Manager: At least 9 characters requirement is not fulfilled
         nineCharacters();        
         //Scenario 2: Site Manager: An uppercase character requirement is not fulfilled
@@ -311,19 +362,35 @@ public class AP3_password {
         cdlSiteUserLoginOldPassword();
         cdlSiteUserLoginAfterResetPassword();            
         logout();
+        
         ap3LoginPage();
-        Admin_IDLogin();
-        deleteUser();
-        logout(); 
-        */
+        Thread.sleep(1000);
+        Admin_IDLogin(); 
+        SearchUser();
+         U_ID=getU_ID();
+        click_User_Inactive();
+        getUser_API(U_ID);        
+        click_User_Active();
+        getUser_API(U_ID);
+        SearchUser();        
+        deleteUser(); 
+        
+         TWeb.Refresh("Refresh", "no_jira"); 
+        verify_User_Deleted_API(U_ID);
         logout();
+        
+        //oldUsersLogin();
         
         //AUT-844 As an existing user (admin or site manager or delivery manager), I can still use my old password (rules) to sign in
         //oldUsersLogin();
-        
-        Admin_IDLogin();
-        getUsers_ID();
-        
+        /*
+        Admin_IDLogin(); 
+        SearchUser();
+        //String U_ID=getUsers_ID();
+        click_User_Inactive();
+        getUsers_API(U_ID);        
+        click_User_Active();
+        getUsers_API(U_ID);*/
         
         
             } //Run time closing bracket so add all the methods before this..      
@@ -332,6 +399,11 @@ public class AP3_password {
 
 
     //AUT-840 : As an Admin, I can reset my password and login to Ap3 with the new password    
+
+    /**
+     *
+     * @throws InterruptedException
+     */
     private static void ap3LoginPage() throws InterruptedException{
         _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to", url,"no_jira");             
             if (FAIL) { return;}
@@ -384,6 +456,7 @@ public class AP3_password {
             if (FAIL) { return;}    
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text ("Unregistered email Error Message... Text", "xpath", "//*[contains(text(), 'Could not reset your password, contact support.')]", "no_jira"); 
             if (FAIL) { return;}  
+            Thread.sleep(500);
         _t++; TWeb.Element_By_Path_Input_Select_Clear("Email Clear", "xpath", "//input[@aria-label='E-mail']",  "no_jira"); 
             if (FAIL) { return;}   
         _t++; TWeb.Element_By_Path_Text_Enter("Enter registered Email", "xpath", "//input[@aria-label='E-mail']", eMail , true, "no_jira"); 
@@ -392,7 +465,7 @@ public class AP3_password {
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("An email has been sent message...", "xpath","//div[@class='v-messages__message']", "no_jira");
             if (FAIL) { return;}     
-            
+         Thread.sleep(500);   
     }
                 
     //User logout
@@ -421,10 +494,10 @@ public class AP3_password {
     // Click on email "You have received a invite to log into the Admin Panel!"
     private static void clickEmailInviteToLogin() throws InterruptedException{
         
-        //TWeb.Refresh("Refresh", "no_jira");   
+        TWeb.Refresh("Refresh", "no_jira");   
         _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Click on the email", "xpath","(//*[contains(text(), 'You have received a invite to log into the Admin Panel!')])[1]", "no_jira");            
         TWeb.Refresh("Refresh", "no_jira"); 
-        Thread.sleep(10000);
+        Thread.sleep(30000);
         //TWeb.Refresh("Refresh", "no_jira");
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on the email", "xpath","(//*[contains(text(), 'You have received a invite to log into the Admin Panel!')])[1]", "no_jira");
             if (FAIL) { return;}
@@ -439,7 +512,7 @@ public class AP3_password {
         _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Click on the email", "xpath","//td[normalize-space()='Reset Your Password']", "no_jira");
             if (FAIL) { return;}
         TWeb.Refresh("Refresh", "no_jira");
-        Thread.sleep(10000);  
+        Thread.sleep(30000);  
         //TWeb.Refresh("Refresh", "no_jira");
         _t++; Thread.sleep((long) sleep);TWeb.Element_By_Path_Click("Click on the email", "xpath","//td[normalize-space()='Reset Your Password']", "no_jira");
             if (FAIL) { return;}
@@ -566,8 +639,10 @@ public class AP3_password {
             if (FAIL) { return;}                    
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Error Message:", "xpath", "//*[@class='blue_state']", "no_jira");
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Confirm Password Password don't match Error Message is not displayed", "xpath", "//div[@class='v-messages theme--light']", "no_jira"); 
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Verify Password don't match Error Message is not displayed", "xpath", "//div[@class='v-messages theme--light']", "no_jira"); 
             if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+            if (FAIL) { return;}     
     }
     
     //Scenario : Setting new Valid password with all requirements after password reset (Happy Path)
@@ -590,6 +665,8 @@ public class AP3_password {
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Confirm Password Password don't match Error Message is not displayed", "xpath", "//div[@class='v-messages theme--light']", "no_jira"); 
             if (FAIL) { return;}
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+            if (FAIL) { return;} 
     }
     
     //Scenario 7: At least 9 characters requirement is not fulfilled
@@ -699,7 +776,7 @@ public class AP3_password {
             if (FAIL) { return;}    
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Sign In'", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
             if (FAIL) { return;} 
-        Thread.sleep(1000);
+        Thread.sleep(10000);
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Page_URL("AP3 Dashboard URL", "no_jira");             
@@ -726,7 +803,7 @@ public class AP3_password {
             if (FAIL) { return;}
         _t++; TWeb.Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type = 'password']", "no_jira"); 
             if (FAIL) { return;}     
-        Thread.sleep(1000);
+        Thread.sleep(10000);
     }  
     
     //CDL Delivery Manager User logging in with the registered email and password reset
@@ -740,7 +817,7 @@ public class AP3_password {
             if (FAIL) { return;}    
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Sign In'", "xpath", "//*[contains(text(), 'Sign in')]", "no_jira"); 
             if (FAIL) { return;} 
-        Thread.sleep(1000); 
+        Thread.sleep(10000); 
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Page_URL("AP3 Dashboard URL", "no_jira");             
@@ -748,11 +825,12 @@ public class AP3_password {
         Thread.sleep(1000);
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Wait for Welcome...' text", "xpath", "//div[@class='H4-Primary-Left']", "no_jira");             
             if (FAIL) { return;}   
+        Thread.sleep(1000);    
     }
     
-    //Delete the user after searching it using email
-    private static void deleteUser() throws InterruptedException{   
-        _t++; Thread.sleep((long) sleep); TWeb.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
+    // searching user with email address
+    private static void SearchUser() throws InterruptedException{  
+    _t++; Thread.sleep((long) sleep); TWeb.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Drawer > 'Users' Click", "xpath", "//*[contains(text(), 'Users')]", "no_jira"); 
@@ -790,10 +868,14 @@ public class AP3_password {
         Thread.sleep(500);            
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
             if (FAIL) { return;} 
+    }
+    
+    //Delete the user 
+    private static void deleteUser() throws InterruptedException{   
+                   
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Find 'Delete User' Text", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
-            if (FAIL) { return; } 
-            
-            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
+            if (FAIL) { return; }             
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", "no_jira"); 
             if (FAIL) { return; }  
         _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Delete' dialog", "xpath", "//div[@class='confirm-dialog v-card v-sheet v-sheet--tile theme--light']", "no_jira");
             if (FAIL) { return;}    // Find fragment              
@@ -818,7 +900,64 @@ public class AP3_password {
         _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Deleted Admin 'Not Found' notification", "No matching records found", true,"no_jira"); 
             if (FAIL) { return;}     
     }
+    
+    //Making the user Inactive after search
+    private static void click_User_Inactive() throws InterruptedException{  
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'User LinkText'", "linkText", "Users", "no_jira"); 
+            if (FAIL) { return; } 
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+            if (FAIL) { return;}     
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Search Prompt", "xpath", "//*[contains(text(), 'Search Users')]", "no_jira"); 
+            if (FAIL) { return;}
+        //_t++; TWeb.Element_By_Path_Input_Select_Clear("User Search Clear", "xpath", "//input[contains(@aria-label, 'Search ')]",  "no_jira"); 
+            //if (FAIL) { return;}            
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", eMail, false, "no_jira");
+            if (FAIL) { return;}   
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
+            if (FAIL) { return;} 
+        _t++; Thread.sleep((long) sleep); TWeb.List_L0("Users Data Rows Count", "tagName", "tr", "no_jira");             
+            if (FAIL) { return;}
+            for (int j = 0; j < L0.size(); j++) {
+                _t++; TWeb.Element_Text("Users Data Row Text", L0.get(j), "no_jira");             
+                if (FAIL) { return;}
+            } 
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Inactive'", "xpath", "//div[@class='Option-Right-Not-Selected-Blue-Red']", "no_jira"); 
+            if (FAIL) { return; }    
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Inactive Highlighted in Red", "xpath", "//div[@class='Subtitle-2-White-High-Emphasis-Center']", "no_jira");
+            if (FAIL) { return;}
+        TWeb.Refresh("Refresh", "no_jira");
+        Thread.sleep(5000);
+            
+    }
      
+    //Making the user active after search
+    private static void click_User_Active() throws InterruptedException{  
+       // _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'User LinkText'", "linkText", "Users", "no_jira"); 
+         //   if (FAIL) { return; } 
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Search Prompt", "xpath", "//*[contains(text(), 'Search Users')]", "no_jira"); 
+            if (FAIL) { return;}
+        //_t++; TWeb.Element_By_Path_Input_Select_Clear("User Search Clear", "xpath", "//input[contains(@aria-label, 'Search ')]",  "no_jira"); 
+            //if (FAIL) { return;}            
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", eMail, false, "no_jira");
+            if (FAIL) { return;}   
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
+            if (FAIL) { return;} 
+        _t++; Thread.sleep((long) sleep); TWeb.List_L0("Users Data Rows Count", "tagName", "tr", "no_jira");             
+            if (FAIL) { return;}
+            for (int j = 0; j < L0.size(); j++) {
+                _t++; TWeb.Element_Text("Users Data Row Text", L0.get(j), "no_jira");             
+                if (FAIL) { return;}
+            } 
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'active'", "xpath", "//div[@class='Option-Left-Not-Selected-Blue-Red']", "no_jira"); 
+            if (FAIL) { return; }    
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Active Highlighted in Blue", "xpath", "//div[@class='Subtitle-2-White-High-Emphasis-Center']", "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(5000);
+        TWeb.Refresh("Refresh", "no_jira");
+        Thread.sleep(5000);
+            
+    }
+    
     //Click on new user after logging in
     private static void clickNewUser() throws InterruptedException{ 
      _t++; Thread.sleep((long) sleep); TWeb.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
@@ -872,7 +1011,7 @@ public class AP3_password {
             if (FAIL) { return;}    
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
             if (FAIL) { return;}   
-        Thread.sleep(500);  
+        //Thread.sleep(5000);  
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}   
         Thread.sleep(5000);
@@ -916,17 +1055,24 @@ public class AP3_password {
             if (FAIL) { return;} 
         _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find 'Choose Sites' dialog", "xpath", "//div[@class='v-dialog v-dialog--active']", "no_jira");    
             if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Search Site Name", "xpath", "//input[@aria-label='Search Sites']", SITE, false, "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Search Site Name", "xpath", "//input[@aria-label='Search Sites']",SITE, false, "no_jira");
             if (FAIL) { return;}    
         
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Selecting DS Derry Village Site", "css", "[aria-label='DS Derry Village']", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Sites Selected (num)' text", "Sites Selected", true,"no_jira"); 
+            if (FAIL) { return;} 
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Found/Select Sites count", e1, "xpath", ".//i[@class='v-icon mdi mdi-checkbox-blank-outline theme--light']", "no_jira");             
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Site is displayed in Remove All", "xpath", "//div[contains(text(),'DS Derry Village')]", "no_jira"); 
-            if (FAIL) { return;}    
+            for (int j = 0; j < L1.size(); j++) {  
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Check Site " + j, L1.get(j),"no_jira"); 
+            if (FAIL) { return;}                                         
+            }
+        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Sites Selected (num)' text", "Sites Selected", true,"no_jira"); 
+            if (FAIL) { return;}
+         
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Continue'", "xpath", ".//*[text()='Continue']", "no_jira"); 
             if (FAIL) { return;}    
         
-            Thread.sleep(500);              
+            Thread.sleep(5000);              
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
             if (FAIL) { return;}    
         Thread.sleep(500); 
@@ -976,17 +1122,24 @@ public class AP3_password {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Search Site Name", "xpath", "//input[@aria-label='Search Sites']", SITE, false, "no_jira");
             if (FAIL) { return;}    
         
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Selecting DS Derry Village Site", "css", "[aria-label='DS Derry Village']", "no_jira");
+                                    
+        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Sites Selected (num)' text", "Sites Selected", true,"no_jira"); 
+            if (FAIL) { return;} 
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Found/Select Sites count", e1, "xpath", ".//i[@class='v-icon mdi mdi-checkbox-blank-outline theme--light']", "no_jira");             
             if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Site is displayed in Remove All", "xpath", "//div[contains(text(),'DS Derry Village')]", "no_jira"); 
-            if (FAIL) { return;}    
+            for (int j = 0; j < L1.size(); j++) {  
+        _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Check Site " + j, L1.get(j),"no_jira"); 
+            if (FAIL) { return;}                                         
+            }
+        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Sites Selected (num)' text", "Sites Selected", true,"no_jira"); 
+            if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Continue'", "xpath", ".//*[text()='Continue']", "no_jira"); 
             if (FAIL) { return;}    
         
-            Thread.sleep(500);              
+            Thread.sleep(5000);              
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]","no_jira");             
             if (FAIL) { return;}    
-        Thread.sleep(500); 
+        Thread.sleep(5000); 
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}
             Thread.sleep(5000);
@@ -1016,83 +1169,66 @@ public class AP3_password {
             }                             
     }
     
-    private static void getUsers_ID() throws InterruptedException
+    //Getting the User ID from URL
+    private static String getU_ID() throws InterruptedException
      {
          //EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == User API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
-        String U_ID = "";
-        _t++; Thread.sleep((long) sleep); TWeb.Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "no_jira");             
-            if (FAIL) { return;}
-        Thread.sleep(500);          
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Drawer > 'Users' Click", "xpath", "//*[contains(text(), 'Users')]", "no_jira"); 
-            if (FAIL) { return;} 
-        _t++; Thread.sleep(200); TWeb.Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,"no_jira");             
-            if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
-            if (FAIL) { return;} 
-        _t++; TWeb.To_Top("no_jira");
-            if (FAIL) { return;} 
-            
-            _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Search Users')]", "no_jira"); 
-            if (FAIL) { return;} 
-            Thread.sleep(500);
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Search Prompt", "xpath", "//*[contains(text(), 'Search Users')]", "no_jira"); 
-            if (FAIL) { return;} 
-            
-            _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "ds_seth598@mailinator.com", false, "no_jira");
-            if (FAIL) { return;}   
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", "no_jira"); 
-            if (FAIL) { return;} 
-        _t++; Thread.sleep((long) sleep); TWeb.List_L0("Users Data Rows Count", "tagName", "tr", "no_jira");             
-            if (FAIL) { return;}
-            for (int j = 0; j < L0.size(); j++) {
-                _t++; TWeb.Element_Text("Users Data Row Text", L0.get(j), "no_jira");             
-                if (FAIL) { return;}
-            } 
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("User Email Click", "xpath", "//div[text()='" + "ds_seth598@mailinator.com" + "']", "no_jira"); 
-            if (FAIL) { return;} 
-        Thread.sleep(500);            
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", "no_jira");
-            if (FAIL) { return;}
-                       
+        String U_ID = "";                             
          _t++; Thread.sleep((long) sleep); TWeb.Page_URL("User details URL", "no_jira"); 
           if(t.contains("/")){
             U_ID = t.substring(t.lastIndexOf("/") + 1);
-            getUsers_API(U_ID);
             
+            //getUsers_API(U_ID);            
           }
+            return U_ID;
      }
     
-    private static void getUsers_API(String U_ID) throws InterruptedException      {
+    //Getting the user api and validating if its active or not
+    private static void getUser_API(String U_ID) throws InterruptedException      {
           _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /User/ API", BaseAPI + "/user/" + U_ID, true,"no_jira" );
              JSONObject json = new JSONObject(API_Response_Body); 
           JSONObject meta = json.getJSONObject("meta");   
-       
+          
+        boolean checkdisabled=false;
+          if(json.has("is")){
           JSONObject isObject = json.getJSONObject("is");  
-                                    /* Verify if user is active */
+           checkdisabled= isObject.getBoolean("disabled");
+          }                             /* Verify if user is active */
        //meta = json.getJSONObject("is");   
        
-       boolean checkdisabled= isObject.getBoolean("disabled");
-       System.err.println("Value"+checkdisabled);
+       
+       System.err.println("Value "+checkdisabled);
+       
        if(checkdisabled==false)                
        { 
            //System.err.println("Pass");           
              _t++;
               _p++; EX += _t + "\t" + "User is active" + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
                         
-       }else if(!checkdisabled==true)      
+       }else if(checkdisabled==true)      
        { // Print Brand is visible.
-           System.err.println("Fail");
+           //System.err.println("Fail");
           _t++;
           _p++; EX += _t + "\t" + "User is inactive" + "\t" + "-" + "\t" + "User is Inactive" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
-             
+               
     }
             
-            
-          
-         //EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == User API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
-          
-      }//End of Promo_API         
+           private static void verify_User_Deleted_API(String U_ID) throws InterruptedException      {
+          _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /User/ API", BaseAPI + "/user/" + U_ID, true,"no_jira" );
+             JSONObject json = new JSONObject(API_Response_Body); 
+             
+         String Uemail=json.getString("email");
+         System.out.println(Uemail);
+         if(Uemail.contains("deleted")){
+             _t++;
+          _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "User is deleted" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+         }
+         else {
+             _t++;
+          _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "User is not deleted yet" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+         }
+           }
     
-    
+}
 
