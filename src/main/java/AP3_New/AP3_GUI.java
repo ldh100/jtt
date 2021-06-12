@@ -843,7 +843,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
 
     protected boolean FAIL = false;
     
-    protected int _t = 0; // Total
+    protected int _t = 0; // Total- calculate in report as sum of others
     protected int _p = 0; // Passed
     protected int _f = 0; // Failed
     protected int _w = 0; // Warn
@@ -869,9 +869,9 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     private Duration DD;
     
     protected String Ver = "";
-    private String TZone;      
-    private String Summary;
-    private String r_type;  
+    protected String TZone = "";   
+    private String Summary = "";
+    private String r_type = "";
     
     protected FluentWait loadTimeout = null;
     protected long WaitForElement = 1500; // milisec
@@ -925,21 +925,21 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     private boolean _Brand_closure = false; 
     
     protected String New_ID = "";
-    protected String Tab_Name;
+    protected String Tab_Name = "";
     
-    protected String Day;
-    protected String Open;
-    protected String Close;
-    protected String New_From;
-    protected String New_To;
-    protected String _24;    
+    protected String Day = "";
+    protected String Open = "";
+    protected String Close = "";
+    protected String New_From = "";
+    protected String New_To = "";
+    protected String _24 = "";  
     
-    protected String ADMIN_ID;
-    protected String ADMIN_PW;
-    protected String MOBILE_ID; 
-    protected String MOBILE_PW;
-    protected String RUNNER_ID; 
-    protected String RUNNER_PW;
+    protected String ADMIN_ID = "";
+    protected String ADMIN_PW = "";
+    protected String MOBILE_ID = "";
+    protected String MOBILE_PW = "";
+    protected String RUNNER_ID = "";
+    protected String RUNNER_PW = "";
       
     private String S_Client_ID = "";
     private String S_Client_Secret  = "";
@@ -964,7 +964,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     protected String appId = "";
     protected String env = "";
     protected String platform = "CDL";
-    protected String BaseAPI;
+    protected String BaseAPI = "";
     protected String COUNTRY = "COUNTRY";
     protected String SITE = "";
     protected String SiteID = "";
@@ -1161,7 +1161,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        sw1.start();       
         appId = A.Func.App_ID(cmbApp.getSelectedItem().toString(), env);
 
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
@@ -1282,7 +1282,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        sw1.start();       
      
         String[] BrandsColumnsName = {"Station","Location","Brand Id", "Unit ID"}; 
         DefaultTableModel BrandsModel = new DefaultTableModel();
@@ -1403,7 +1403,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        sw1.start();       
      
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
@@ -2374,7 +2374,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
                 EX = "AP3 " + env + ", v" + Ver + ", Browser: " + BROWSER +
-                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
+                    " - Steps: " + (_p + _f +_w + _i) + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                     + EX;
                 
@@ -2431,6 +2431,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                                 _t++;
                                 _p++;
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                            
+                                Log_Html_Result("PASS", Toast_Msg, false, ParentTest.createNode("Snackbar Toast Msg"));                            
                             } else if(Toast_Msg.toLowerCase().contains("could not")|| 
                                     Toast_Msg.toLowerCase().contains("unable to save")|| 
                                     Toast_Msg.toLowerCase().contains("fail")) {
@@ -2438,15 +2439,18 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                                 _f++;
                                 F += "Step: " + _t + " > FAIL - " + Toast_Msg + "\r\n";
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                                Log_Html_Result("FAIL", Toast_Msg, true, ParentTest.createNode("Snackbar Toast Msg"));                            
                             } else if(Toast_Msg.toLowerCase().contains("fix") || Toast_Msg.toLowerCase().contains("error")) {
                                 _t++;
                                 _w++;
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                                Log_Html_Result("WARN", Toast_Msg, true, ParentTest.createNode("Snackbar Toast Msg"));                            
                             } else {
                                 _t++;
                                 _w++;
                                 //F += "Step: " + _t + " > WARN - " + tt + "\r\n";
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                                Log_Html_Result("WARN", Toast_Msg, true, ParentTest.createNode("Snackbar Toast Msg"));
                             }
                             Thread.sleep(4000); //  pause till new alert expected ???? 
                         }
@@ -2482,11 +2486,19 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }
+        if(_Brand){
+            SCOPE += ", Brand";
+            ParentTest = HtmlReport.createTest("Brand"); 
+            AP3_brand BR = new AP3_New.AP3_brand(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+        }
+
     }
     private void BW1_Done(boolean GUI) throws Exception{
         DD = Duration.between(run_start, Instant.now());
         Last_EX = EX;
-        Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
+        Summary = "Steps: " + (_p + _f +_w + _i) + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
         try {
             String t_rep = "";
             if (!"".equals(r_time.trim())) {
@@ -2527,24 +2539,24 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         }
         if(!r_type.equals("cron")){
             HtmlReporter.config().setReportName("AP3" + ", Env: " + env + 
-                    ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
-                    ". Resp(sec) - Min: " + A.A.df.format(t_min) +
-                                ", Avg: " + A.A.df.format(t_avg) +
-                                ", Max: " + A.A.df.format(t_max) +
-                                ", p50: " + A.A.df.format(p_50) +
-                                ", p90: " + A.A.df.format(p_90) + 
-                    ". Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
+                ", Steps: " + (_p + _f +_w + _i) + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
+                ". Resp(sec) - Min: " + A.A.df.format(t_min) +
+                            ", Avg: " + A.A.df.format(t_avg) +
+                            ", Max: " + A.A.df.format(t_max) +
+                            ", p50: " + A.A.df.format(p_50) +
+                            ", p90: " + A.A.df.format(p_90) + 
+                ". Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
             HtmlReport.flush();
         }
         
         if(!r_type.equals("cron") && _Slack && !Slack_Channel.equals("N/A")){
             Report(false);
             String MSG = "AP3_" + env + " Excel Automation report - " + Report_Date +  
-                    "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: *" + A.A.UserID + "*\r\n" +
-                    "Browser: *" + BROWSER + "*" + "\r\n" +        
-                    "Scope: " + SCOPE + "\r\n" +
-                    "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
-                    "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w + ", Info: " + _i;
+                "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: *" + A.A.UserID + "*\r\n" +
+                "Browser: *" + BROWSER + "*" + "\r\n" +        
+                "Scope: " + SCOPE + "\r\n" +
+                "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
+                "Steps: " + (_p + _f +_w + _i) + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w + ", Info: " + _i;
             
             Current_Log_Update(GUI, A.Func.Send_File_with_Message_to_Slack(Excel_Report_Path, Slack_Channel, MSG));
             File ef = new File(Excel_Report_Path);
@@ -5357,7 +5369,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         _t++; sw1.start();       
  
         FAIL = false;
-        CloseableHttpClient httpclient = HttpClients.createDefault(); 
         boolean FOUND;
         try {
             FOUND = Response_Body.contains(VAL);
@@ -5404,7 +5415,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         _t++; sw1.start();       
  
         FAIL = false;
-        CloseableHttpClient httpclient = HttpClients.createDefault();
+
         long _start = 0;
         long _end = 0; 
         boolean FOUND;
@@ -5469,7 +5480,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         _t++; sw1.start();       
  
         FAIL = false;
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         String DAY = TARGET.substring(TARGET.length() - 1).trim();
         String from_to = "";
         int _start = 0;
@@ -5557,7 +5567,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         _t++; sw1.start();       
  
         FAIL = false;
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         boolean IS_YES = false;
         try {
             JSONObject json = new JSONObject(Response_Body );
@@ -5613,7 +5622,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         _t++; sw1.start();       
 
         FAIL = false;
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         long _start = 0;
         long _end = 0; 
         boolean FOUND;
@@ -5678,7 +5686,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         _t++; sw1.start();       
  
         FAIL = false;
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         long _start = 0;
         long _end = 0; 
         boolean FOUND;
