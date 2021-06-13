@@ -248,7 +248,7 @@ class AP3_announcements extends AP3_GUI{
                              if (FAIL) { return;} 
                         Element_By_Path_Text_Enter("Enter 'Search Sites...'", "css", "[aria-label='" + s + "']", SITE, false, ParentTest, "no_jira");
                             if (FAIL) { return;} 
-                        List_Child_E1_By_Path("Find 'Sites...' list", L2, i, "xpath", ".//div[@class='v-list list-panel theme--light']", ParentTest, "no_jira");
+                        List_Child_E1_By_Path("Find 'Sites...' list", L2.get(i), "xpath", ".//div[@class='v-list list-panel theme--light']", ParentTest, "no_jira");
                             if (FAIL) { return;}                           
                         Element_Child_List_L1("Sites' Count", e1, "xpath", ".//label[@class='v-label theme--light']", ParentTest, "no_jira");              
                            T_Index = -1;
@@ -295,7 +295,7 @@ class AP3_announcements extends AP3_GUI{
                             if (FAIL) { return;}  
                         Scroll_to_Element("Scroll to Card " + i, L2.get(1), ParentTest, "no_jira");
                             if (FAIL) { return;}
-                        List_Child_E1_By_Path("Find EN Title", L2, i, "css", "[aria-label='Title']", ParentTest, "no_jira"); 
+                        List_Child_E1_By_Path("Find EN Title", L2.get(i), "css", "[aria-label='Title']", ParentTest, "no_jira"); 
                             if (FAIL) { return;}                        
                         Element_Click("Click EN Title", e1, ParentTest, "no_jira");
                             if (FAIL) { return;} 
@@ -316,7 +316,7 @@ class AP3_announcements extends AP3_GUI{
                         Element_Child_Attribute("Sub-title " + i, L2.get(i), "xpath", ".//div[@class='H5-Primary-Left']", "textContent", ParentTest, "no_jira");         
                             if (FAIL) { return;}  
                         Scroll_to_Element("Scroll to Card " + i, L2.get(2), ParentTest, "no_jira");
-                        List_Child_E1_By_Path("Find EN Title", L2, i, "css", "[aria-label='Title']", ParentTest, "no_jira"); 
+                        List_Child_E1_By_Path("Find EN Title", L2.get(i), "css", "[aria-label='Title']", ParentTest, "no_jira"); 
                             if (FAIL) { return;}                        
                         Element_Click("Click FR Title", e1, ParentTest, "no_jira");
                             if (FAIL) { return;} 
@@ -453,12 +453,12 @@ class AP3_announcements extends AP3_GUI{
             A_ID = t.substring(t.lastIndexOf("/") + 1);
             Call_API("Call /announcemen/ API", BaseAPI + "/announcement/" + A_ID, true, ParentTest, "no_jira" );
             API_Responce_Body = t;
-            API_Body_Contains("Announcemen API - find Site ID", API_Responce_Body, SiteID,true, ParentTest, "no_jira");    
+            API_Body_Contains("Announcemen API - find Site ID", API_Responce_Body, SiteID, true, ParentTest, "no_jira");    
             API_Body_Contains("Announcemen API - find App", API_Responce_Body, app, true, ParentTest, "no_jira"); 
-            API_Body_Contains("Announcemen API - find Name", API_Responce_Body, "Auto Announcement " + New_ID,true, ParentTest, "no_jira");
-            API_Body_Contains("Announcemen API - find EN Title", API_Responce_Body, "EN Title " + New_ID,true, ParentTest, "no_jira");    
-            API_Body_Contains("Announcemen API - find EN Description", API_Responce_Body, "EN Description " + New_ID,true, ParentTest, "no_jira");
-            API_Body_Contains("Announcemen API - find EN Sub Text", API_Responce_Body, "EN Sub Text " + New_ID,true, ParentTest, "no_jira");  
+            API_Body_Contains("Announcemen API - find Name", API_Responce_Body, "Auto Announcement " + New_ID, true, ParentTest, "no_jira");
+            API_Body_Contains("Announcemen API - find EN Title", API_Responce_Body, "EN Title " + New_ID,  true, ParentTest, "no_jira");    
+            API_Body_Contains("Announcemen API - find EN Description", API_Responce_Body, "EN Description " + New_ID, true, ParentTest, "no_jira");
+            API_Body_Contains("Announcemen API - find EN Sub Text", API_Responce_Body, "EN Sub Text " + New_ID, true, ParentTest, "no_jira");  
             API_Body_Contains("Announcemen API - find EN Button Text ", API_Responce_Body, "Dismiss",true, ParentTest, "no_jira"); 
             API_Body_Contains("Announcemen API - find Fr Description", API_Responce_Body, "FR la Description " + New_ID,true, ParentTest, "no_jira"); 
             API_Body_Contains("Announcemen API - find Type", API_Responce_Body, "Auto_Other_Type",true, ParentTest, "no_jira");  

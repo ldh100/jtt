@@ -1659,6 +1659,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             sw1.start();
             LOG_START();   // ========================================================            
             BW1_DoWork(false);
+            BW2_DoWork();
         }catch(Exception ex){
             return "ERROR > " + ex.getMessage();
         }

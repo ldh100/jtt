@@ -78,10 +78,11 @@ class AP3_brand extends AP3_GUI{
                 if (FAIL) { return;}
             } 
         Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", ParentTest, "no_jira"); 
-            if (FAIL) { return;}                                                                                               
+            if (FAIL) { return;}
+        Thread.sleep(500);            
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//div[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}
-            Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//div[contains(@class, 'timezone-address')]", ParentTest, "no_jira"); 
+        Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//div[contains(@class, 'timezone-address')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
         Element_By_Path_Text("Site Address text", "xpath", "//div[contains(@class, 'timezone-address')][1]", ParentTest, "no_jira"); 
             if (FAIL) { return;}     
@@ -108,7 +109,7 @@ class AP3_brand extends AP3_GUI{
                 Element_Child_List_L1("Unit Stations Count", L0.get(i), "tagName", "tr", ParentTest, "no_jira");             
                     if (FAIL) { return;}
                 for (int j = 2; j < L1.size(); j++) {  
-                    List_TR_TDs("Station " + (j - 1), L1, j, ParentTest, "no_jira");      
+                    List_TR_TDs("Station " + (j - 1), L1.get(j), ParentTest, "no_jira");      
                         if (FAIL) { continue;}
                     if(t.trim().startsWith(BRAND)){
                         T_Index = j;
@@ -122,14 +123,14 @@ class AP3_brand extends AP3_GUI{
             if (FAIL) { return;} 
             
         if(SITE_LIST_COL_COUNT == 5){
-            Brand_Status("Get Brand Status in App", L2, T_Index,ParentTest, "no_jira");        
+            Brand_Status("Get Brand Status in App", L2.get(T_Index), ParentTest, "no_jira");        
                 if (FAIL) { return;}  
                 if(t.equals("Hidden in App")){ 
                     Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true, ParentTest, "no_jira" );
                     API_Responce_Body = t;
                     API_Body_Contains("Location Group API - find Hidden Brand", API_Responce_Body, BrandID, false, ParentTest, "no_jira");        
                         if (FAIL) { return;} 
-                    Brand_Status_Click("Status Click to 'Display'",L2, T_Index, ParentTest, "no_jira");  // was L1 ^^^
+                    Brand_Status_Click("Status Click to 'Display'", L2.get(T_Index), ParentTest, "no_jira");  // was L1 ^^^
                         if (FAIL) { return;}
                     Thread.sleep(500); 
                     Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
@@ -140,7 +141,7 @@ class AP3_brand extends AP3_GUI{
                     API_Body_Contains("Location Group API - find Displayed Brand", API_Responce_Body, BrandID, true, ParentTest, "no_jira");        
                         if (FAIL) { return;}     
                 } else {
-                    Brand_Status_Click("Status Click to 'Hide'",L2, T_Index,ParentTest, "no_jira");  
+                    Brand_Status_Click("Status Click to 'Hide'", L2.get(T_Index), ParentTest, "no_jira");  
                         if (FAIL) { return;} 
                     Thread.sleep(500); 
                     Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
@@ -150,7 +151,7 @@ class AP3_brand extends AP3_GUI{
                     API_Responce_Body = t;
                     API_Body_Contains("Location Group API - find Hidden Brand", API_Responce_Body, BrandID, false, ParentTest, "no_jira");        
                         if (FAIL) { return;}   
-                    Brand_Status_Click("Status Click to 'Display'", L2, T_Index,ParentTest, "no_jira");  
+                    Brand_Status_Click("Status Click to 'Display'", L2.get(T_Index), ParentTest, "no_jira");  
                         if (FAIL) { return;}
                     Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'v-progress-circular')]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}
@@ -402,11 +403,11 @@ class AP3_brand extends AP3_GUI{
                        Find_Text("Find 'not enabled...'", "Pickup is not enabled for this brand", true, ParentTest, "no_jira");                  
                 }else{                     
                     for (int j = 0; j < L1.size(); j++) { 
-                        Scroll_to_Day("Scroll to Day " + j, L1, j, ParentTest, "no_jira");             
+                        Scroll_to_Day("Scroll to Day " + j, L1.get(j), ParentTest, "no_jira");             
                             if (FAIL) { return;}                        
                         Element_Text("Service Week Day Labels", L1.get(j), ParentTest, "no_jira");             
                             if (FAIL) { return;}
-                        Day_Snedule("Service Week Day Schedule", L1, j, ParentTest, "no_jira");             
+                        Day_Snedule("Service Week Day Schedule", L1.get(j), ParentTest, "no_jira");             
                             if (FAIL) { return;}
                     }                    
                     To_Top("Move to page Top", ParentTest, "no_jira");             
@@ -440,12 +441,12 @@ class AP3_brand extends AP3_GUI{
                     hR = String.format("%02d",(int)(Math.random()*3 + 8));
                     mR = String.format("%02d",(int)(Math.random()*59));
                     New_From = hR + ":" + mR + "AM";    
-                    Time_Enter("Enter Sunday Opens Time", L1, 0, "css", "[aria-label='Opens']", New_From, ParentTest, "no_jira");             
+                    Time_Enter("Enter Sunday Opens Time", L1.get(0), "css", "[aria-label='Opens']", New_From, ParentTest, "no_jira");             
                         if (FAIL) { return;}                               // ^^^ Enter Text within 8:00-11:59 AM
                     hR = String.format("%02d",(int)(Math.random()*3 + 1));
                     mR = String.format("%02d",(int)(Math.random()*59));
                     New_To = hR + ":" + mR + "PM";
-                    Time_Enter("Enter Sunday Closes Time", L1, 0, "css", "[aria-label^='Closes']", New_To,ParentTest, "no_jira");             
+                    Time_Enter("Enter Sunday Closes Time", L1.get(0), "css", "[aria-label^='Closes']", New_To, ParentTest, "no_jira");             
                         if (FAIL) { return;}                                // ^^^ Enter Text within 1:00-4:59 PM
                     Element_By_Path_Click("Click 'Sunday'  - activate 'Save'", "xpath", "//p[text()='Sunday']", ParentTest, "no_jira"); 
                         if (FAIL) { return;}    //  Save not visible after time enter/not selection    - DEBUG                                                                                       
@@ -472,11 +473,11 @@ class AP3_brand extends AP3_GUI{
                     Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}        
                     for (int j = 0; j < L1.size(); j++) { 
-                        Scroll_to_Day("Scroll to Day " + j, L1, j, ParentTest, "no_jira");             
+                        Scroll_to_Day("Scroll to Day " + j, L1.get(j), ParentTest, "no_jira");             
                             if (FAIL) { return;}                        
                         Element_Text("Service Week Day Labels", L1.get(j), ParentTest, "no_jira");             
                             if (FAIL) { return;}
-                        Day_Snedule("Service Week Day Schedule", L1, j, ParentTest, "no_jira");             
+                        Day_Snedule("Service Week Day Schedule", L1.get(j), ParentTest, "no_jira");             
                             if (FAIL) { return;}
                     }  
                     To_Top("Move to page Top", ParentTest, "no_jira");             
@@ -493,11 +494,11 @@ class AP3_brand extends AP3_GUI{
                        Find_Text("Find 'not enabled...'", "Delivery is not enabled for this station", true, ParentTest, "no_jira");                  
                 }else{                   
                     for (int j = 0; j < L1.size(); j++) {
-                        Scroll_to_Day("Scroll to Day " + j, L1, j, ParentTest, "no_jira");             
+                        Scroll_to_Day("Scroll to Day " + j, L1.get(j), ParentTest, "no_jira");             
                             if (FAIL) { return;} 
                         Element_Text("Delivery Week Day Labels", L1.get(j), ParentTest, "no_jira");             
                             if (FAIL) { return;}
-                        Day_Snedule("Delivery Week Day Schedule", L1, j, ParentTest, "no_jira");             
+                        Day_Snedule("Delivery Week Day Schedule", L1.get(j), ParentTest, "no_jira");             
                             if (FAIL) { return;}                           
                     }
                     // ===================================================================================================
@@ -532,12 +533,12 @@ class AP3_brand extends AP3_GUI{
                     hR = String.format("%02d",(int)(Math.random()*3 + 8));
                     mR = String.format("%02d",(int)(Math.random()*59));
                     New_From = hR + ":" + mR + "AM";    
-                    Time_Enter("Enter Sunday Delivery Opens Time", L1, 0, "css", "[aria-label='Opens']", New_From,ParentTest, "no_jira");             
+                    Time_Enter("Enter Sunday Delivery Opens Time", L1.get(0), "css", "[aria-label='Opens']", New_From, ParentTest, "no_jira");             
                         if (FAIL) { return;}                                // ^^^ Enter Text within 8:00-11:59 AM
                     hR = String.format("%02d",(int)(Math.random()*3 + 1));
                     mR = String.format("%02d",(int)(Math.random()*59));
                     New_To = hR + ":" + mR + "PM";
-                    Time_Enter("Enter Sunday Delivery Closes Time", L1, 0, "css", "[aria-label^='Closes']", New_To,ParentTest, "no_jira");             
+                    Time_Enter("Enter Sunday Delivery Closes Time", L1.get(0), "css", "[aria-label^='Closes']", New_To, ParentTest, "no_jira");             
                         if (FAIL) { return;}                                // ^^^ Enter Text within 1:00-4:59 PM
                     Element_By_Path_Click("Click 'Sunday'  - activate 'Save'", "xpath", "//p[text()='Sunday']", ParentTest, "no_jira"); 
                         if (FAIL) { return;}    //  Save not visible after time enter/not selection    - DEBUG                                                                                       
@@ -559,85 +560,83 @@ class AP3_brand extends AP3_GUI{
                     Element_By_Path_Click("Click 'Delivery Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}        
                     for (int j = 0; j < L1.size(); j++) { 
-                        Scroll_to_Day("Scroll to Day " + j, L1, j, ParentTest, "no_jira");             
+                        Scroll_to_Day("Scroll to Day " + j, L1.get(j), ParentTest, "no_jira");             
                             if (FAIL) { return;}                        
                         Element_Text("Delivery Week Day Labels", L1.get(j), ParentTest, "no_jira");             
                             if (FAIL) { return;}
-                        Day_Snedule("Delivery Week Day Schedule", L1, j, ParentTest, "no_jira");             
+                        Day_Snedule("Delivery Week Day Schedule", L1.get(j), ParentTest, "no_jira");             
                             if (FAIL) { return;}
                     }    
                     To_Top("Move to page Top", ParentTest, "no_jira");             
                         if (FAIL) { return;}
-                }   
-            } else if (Tab_Name.toLowerCase().contains("closure")) {
-                Element_By_Path_Click("Click 'Brand Closure'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", ParentTest, "no_jira"); 
-                    if (FAIL) { return;}
-                Page_URL("Closure page URL", ParentTest, "no_jira"); 
-                    if (FAIL) { return;}  
-                //..../brand/rjEZyoky4rUZ1ZqEyP8RFAEqOzg2RQcwqQlBX0vaF8XBo3RlkdsKg0aL9Dw2FZ9QKRAGk6S761K/closure
-//                List_L1("Closure rows Count", "xpath", "//div[contains(@class, 'layout flex xs12 nowrap align-center')]", ParentTest, "no_jira");             
-//                    if (FAIL) { return;}                    
-                Find_Text("Find 'Add closure' text", "Add Station Closure", true,ParentTest, "no_jira"); 
-                    if (FAIL) { return; }     
-                Element_By_Path_Click("Click 'Add closure'", "xpath", "//button[contains(@class, 'ml-0 pl-0 v-btn v-btn--flat theme--light')]", ParentTest, "no_jira"); 
-                    if (FAIL) { return; } 
-                List_L1("Closure rows Count", "xpath", "//div[contains(@class, 'layout flex xs12 nowrap align-center')]", ParentTest, "no_jira");             
-                    if (FAIL) { return;} 
-                    for (int j = 0; j < L1.size(); j++) {
-                        Element_Text("Closure Data Row Text", L1.get(j), ParentTest, "no_jira");             
-                            if (FAIL) { return;}
-                    }
-                Find_Text("Find '..Reason' text", "Closure Reason", true,ParentTest, "no_jira"); 
-                    if (FAIL) { return; }
-                Find_Text("Find 'Remove' text", "REMOVE", true,ParentTest, "no_jira"); 
-                    if (FAIL) { return; }
-                Find_Text("Find 'Save' text", "Save", true,ParentTest, "no_jira"); 
-                    if (FAIL) { return; }
-                Element_By_Path_Click(" 'SAVE' Click", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", ParentTest, "no_jira"); 
-                    if (FAIL) { return; } 
-                Element_By_Path_Text("Find 'required' text", "xpath", "//div[contains(@class,'v-messages__message')]",ParentTest, "no_jira"); 
-                    if (FAIL) { return; }                    
-                Element_By_Path_Input_Select_Clear("Clear Closure Reason", "css", "[aria-label='Closure Reason']", ParentTest, "no_jira"); 
-                    if (FAIL) { return;}
-
-                Element_By_Path_Text_Enter("Enter Closure Reason", "css", "[aria-label='Closure Reason']", "Auto Closure " + New_ID, false, ParentTest, "no_jira"); 
-                    if (FAIL) { return;}
-                Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", ParentTest, "no_jira"); 
-                    if (FAIL) { return; } 
-                Thread.sleep(500); 
-                Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-                    if (FAIL) { return;}
-                List_L1("Closure rows Count", "xpath", "//div[contains(@class, 'layout flex xs12 nowrap align-center')]", ParentTest, "no_jira");             
-                    if (FAIL) { return;} 
-                    for (int j = 0; j < L1.size(); j++) {
-                        Element_Text("Closure Data Row Text", L1.get(j), ParentTest, "no_jira");             
-                            if (FAIL) { return;}
-                    }
-                Element_By_Path_Text_Select_Copy("Saved Closure Reason", "xpath", "//input[@aria-label='Closure Reason']",ParentTest, "no_jira"); 
-                    if (FAIL) { return; }                    
-                Element_By_Path_Text("Find 'closure under effect...'", "className", "Temporarily-closed-text", ParentTest, "no_jira"); 
-                    if (FAIL) { return; }   
-                Call_API("Call 'calendar' API", BaseAPI + "/calendar/" + BrandID, true, ParentTest, "no_jira" );
-                API_Responce_Body = t;
-                Calendar_API_Closure("Validate Closure in 'calendar' API", API_Responce_Body, "Auto Closure " + New_ID, true, ParentTest, "no_jira" );
-
-                Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]", ParentTest, "no_jira"); 
-                    if (FAIL) { return; } 
-                Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", ParentTest, "no_jira"); 
-                    if (FAIL) { return; } 
-                Thread.sleep(500);                    
-                Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", ParentTest, "no_jira"); 
-                    if (FAIL) { return;}
-//                List_L1("Closure rows Count", "xpath", "//div[contains(@class, 'layout flex xs12 nowrap align-center')]", ParentTest, "no_jira");             
-//                    if (FAIL) { return;} 
+                } 
+            }    
+//          <editor-fold defaultstate="collapsed" desc="Brand Closure > Moved to AP3_brand_closure">
+//            } else if (Tab_Name.toLowerCase().contains("closure")) { // ==== Covered in AP3_brand_closure
+//                Element_By_Path_Click("Click 'Brand Closure'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", ParentTest, "no_jira");
+//                    if (FAIL) { return;}
+//                Page_URL("Closure page URL", ParentTest, "no_jira");
+//                    if (FAIL) { return;}
+//                //..../brand/rjEZyoky4rUZ1ZqEyP8RFAEqOzg2RQcwqQlBX0vaF8XBo3RlkdsKg0aL9Dw2FZ9QKRAGk6S761K/closure
+////                List_L1("Closure rows Count", "xpath", "//div[contains(@class, 'layout flex xs12 nowrap align-center')]", ParentTest, "no_jira");
+////                    if (FAIL) { return;}
+//                Find_Text("Find 'Add closure' text", "Add Station Closure", true,ParentTest, "no_jira");
+//                    if (FAIL) { return; }
+//                Element_By_Path_Click("Click 'Add closure'", "xpath", "//button[contains(@class, 'ml-0 pl-0 v-btn v-btn--flat theme--light')]", ParentTest, "no_jira");
+//                    if (FAIL) { return; }
+//                List_L1("Closure rows Count", "xpath", "//div[contains(@class, 'layout flex xs12 nowrap align-center')]", ParentTest, "no_jira");
+//                    if (FAIL) { return;}
 //                    for (int j = 0; j < L1.size(); j++) {
-//                        Element_Text("Closure Data Row Text", L1.get(j), ParentTest, "no_jira");             
+//                        Element_Text("Closure Data Row Text", L1.get(j), ParentTest, "no_jira");
 //                            if (FAIL) { return;}
-//                    }          
-                Call_API("Call 'calendar' API", BaseAPI + "/calendar/" + BrandID, true, ParentTest, "no_jira" );
-                API_Responce_Body = t;
-                Calendar_API_Closure("Validate Closure in 'calendar' API", API_Responce_Body, "Auto Closure " + New_ID, false, ParentTest, "no_jira" );
-            }
+//                    }
+//                Find_Text("Find '..Reason' text", "Closure Reason", true,ParentTest, "no_jira");
+//                    if (FAIL) { return; }
+//                Find_Text("Find 'Remove' text", "REMOVE", true,ParentTest, "no_jira");
+//                    if (FAIL) { return; }
+//                Find_Text("Find 'Save' text", "Save", true,ParentTest, "no_jira");
+//                    if (FAIL) { return; }
+//                Element_By_Path_Click(" 'SAVE' Click", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", ParentTest, "no_jira");
+//                    if (FAIL) { return; }
+//                Element_By_Path_Text("Find 'required' text", "xpath", "//div[contains(@class,'v-messages__message')]",ParentTest, "no_jira");
+//                    if (FAIL) { return; }
+//                Element_By_Path_Input_Select_Clear("Clear Closure Reason", "css", "[aria-label='Closure Reason']", ParentTest, "no_jira");
+//                    if (FAIL) { return;}
+//
+//                Element_By_Path_Text_Enter("Enter Closure Reason", "css", "[aria-label='Closure Reason']", "Auto Closure " + New_ID, false, ParentTest, "no_jira");
+//                    if (FAIL) { return;}
+//                Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", ParentTest, "no_jira");
+//                    if (FAIL) { return; }
+//                Thread.sleep(500);
+//                Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+//                    if (FAIL) { return;}
+//                List_L1("Closure rows Count", "xpath", "//div[contains(@class, 'layout flex xs12 nowrap align-center')]", ParentTest, "no_jira");
+//                    if (FAIL) { return;}
+//                    for (int j = 0; j < L1.size(); j++) {
+//                        Element_Text("Closure Data Row Text", L1.get(j), ParentTest, "no_jira");
+//                            if (FAIL) { return;}
+//                    }
+//                Element_By_Path_Text_Select_Copy("Saved Closure Reason", "xpath", "//input[@aria-label='Closure Reason']",ParentTest, "no_jira");
+//                    if (FAIL) { return; }
+//                Element_By_Path_Text("Find 'closure under effect...'", "className", "Temporarily-closed-text", ParentTest, "no_jira");
+//                    if (FAIL) { return; }
+//                Call_API("Call 'calendar' API", BaseAPI + "/calendar/" + BrandID, true, ParentTest, "no_jira" );
+//                API_Responce_Body = t;
+//                Calendar_API_Closure("Validate Closure in 'calendar' API", API_Responce_Body, "Auto Closure " + New_ID, true, ParentTest, "no_jira" );
+//
+//                Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]", ParentTest, "no_jira");
+//                    if (FAIL) { return; }
+//                Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", ParentTest, "no_jira");
+//                    if (FAIL) { return; }
+//                Thread.sleep(500);
+//                Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", ParentTest, "no_jira");
+//                    if (FAIL) { return;}
+//
+//                Call_API("Call 'calendar' API", BaseAPI + "/calendar/" + BrandID, true, ParentTest, "no_jira" );
+//                API_Responce_Body = t;
+//                Calendar_API_Closure("Validate Closure in 'calendar' API", API_Responce_Body, "Auto Closure " + New_ID, false, ParentTest, "no_jira" );
+//            }
+//        </editor-fold>
         }
     }  
 }
