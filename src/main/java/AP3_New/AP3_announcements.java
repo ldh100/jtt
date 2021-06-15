@@ -263,7 +263,7 @@ class AP3_announcements extends AP3_GUI{
                             Element_Click("Check '" + SITE + "'", L1.get(T_Index), ParentTest, "no_jira");
                                 if (FAIL) { return;}                                
                         } else{
-                           // EX = no BRAND
+                           // EX = no SITE
                         }   
                         
                         Text_Found("Enable this announcement...", "Enable this announcement to see", ParentTest, "no_jira");

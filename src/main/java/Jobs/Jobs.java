@@ -252,7 +252,7 @@ public class Jobs extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(592, 72, 96, -1));
 
         cmbTrigger.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        cmbTrigger.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "cron", "new version", "new githash", "webhook", "N/A" }));
+        cmbTrigger.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "N/A", "websocket", "webhook", "new version", "new githash" }));
         getContentPane().add(cmbTrigger, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 24, 152, 20));
 
         txtCron.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
