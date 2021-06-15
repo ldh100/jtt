@@ -848,7 +848,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     private boolean _Sanity = false;
     private boolean _Invalid_login = false;
     private boolean _Metrics_selection = false;
-    private boolean _Metric_data = false;
+    protected boolean _Metric_data = false;
 
     private boolean _Drilldown = false;
     private boolean _Insights = false;
@@ -865,6 +865,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     protected String GROUP = "";
     protected String DATE_RANGE = "";
     protected String Variants = "";
+    protected String CompareTo="";
     
     // </editor-fold>
 
@@ -2017,7 +2018,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         if (_Sanity) { 
             ParentTest = HtmlReport.createTest("Sanity"); 
             SCOPE += "Sanity";                  
-
+  
             DL_UserID = txtAdmin_ID.getText();
             DL_UserPW = txtAdmin_PW.getText();
             EX += " - " + "\t" + " === Sanity Test " + "\t" + " ===== " + "\t" + " == Sanity Test Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";      
@@ -2113,7 +2114,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === ^ Metrics Selection" + "\t" + " ===== " + "\t" + " == ^ Metrics Selection End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         }  
-        if (_Metric_data) { 
+        if (_Metric_data ) { 
             String CompareTo = "";
             SCOPE += ", Metrics Secondary Data"; 
             for (int i = 0; i < 3; i++) {
@@ -2133,6 +2134,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             }    
             }
         }
+        
+
 
         if (_Insights) { 
             ParentTest = HtmlReport.createTest("Insights");                         
