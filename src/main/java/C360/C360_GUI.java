@@ -1,7 +1,5 @@
 package C360;
 
-
-import A.Func;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
@@ -860,12 +858,14 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     protected FluentWait loadTimeout = null;
     protected long WaitForElement = 1500; // milisec
     protected double LoadTimeOut = 15 * 1000; // milisec 
+    protected String err = "";
+    protected String Toast_Msg = "";  
     
     private SwingWorker BW1;  
     private SwingWorker BW2; 
-    private String Toast_Msg = ""; 
+
     private Instant run_start;
-    private String err;
+    
 
     private String SQL;
     private String AP3_TKN = "";
@@ -939,6 +939,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     protected List<WebElement> Closes = null; 
     
     protected String BROWSER = "";
+    protected String HEADLESS = "";
     protected String url = "";
     protected String app = "";
     protected String appId = "";
@@ -1142,7 +1143,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             sw1.reset();
         }
         _t++; sw1.start();       
-        appId = Func.App_ID(cmbApp.getSelectedItem().toString(), env);
+        appId = A.Func.App_ID(cmbApp.getSelectedItem().toString(), env);
 
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
@@ -1608,7 +1609,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 String[] v = lines[i].split("\t");
                 System.arraycopy(v, 0, Values[i], 0, v.length); 
             }
-            Excel_Report_Path = Func.fExcel(l, col, Values, "C360_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
+            Excel_Report_Path = A.Func.fExcel(l, col, Values, "C360_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
             txtLog.append( "= Report Excel file:\r\n" + Excel_Report_Path + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch (Exception ex) {
@@ -1654,7 +1655,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             _update.setString(12, r_type);
             _update.setString(13, A.A.UserID);
             _update.setString(14, A.A.WsID);
-            _update.setString(15, BROWSER);
+            _update.setString(15, BROWSER + HEADLESS);
             _update.setString(16, LOG);
             _update.setString(17, "Scope: " + SCOPE);
             _update.setString(18, EX);
@@ -1722,7 +1723,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             _insert.setString(12, r_type);
             _insert.setString(13, A.A.UserID);
             _insert.setString(14, A.A.WsID);
-            _insert.setString(15, BROWSER);
+            _insert.setString(15, BROWSER + HEADLESS);
             _insert.setString(16,  "= Job is running... ===\r\n" + "");
             _insert.setString(17, "Running");
             _insert.setString(18, "None");
@@ -2175,6 +2176,11 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     
     //<editor-fold defaultstate="collapsed" desc="Background Workers: Web Driver > Execution > Reports">
     private String StartWebDriver() {
+        if(_Headless){
+            HEADLESS = " - headless";           
+        } else{
+            HEADLESS = "";
+        }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
 
@@ -2287,8 +2293,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     }
     private void BW1_DoWork(Boolean GUI) { 
         BW1 = new SwingWorker() {             
-            Instant dw_start = Instant.now();
-
             @Override
             protected String doInBackground() throws Exception { 
                 String DriverStart = StartWebDriver();
@@ -2304,15 +2308,15 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                     btnFails.setEnabled(true);
                 }
                 New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
-                Extent_Report_Config();// ======================================================================= 
                 
-                Execute();
+                Extent_Report_Config();
+                Execute();// ======================================================================= 
                 
                 DD = Duration.between(run_start, Instant.now());
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
-                EX = "C360 " + env + ", v" + Ver + ", Browser: " + BROWSER +
+                EX = "C360 " + env + ", v" + Ver + ", Browser: " + BROWSER  + HEADLESS +
                     " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                     + EX;
@@ -2423,7 +2427,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     private void BW1_Done(boolean GUI) throws Exception{
         DD = Duration.between(run_start, Instant.now());      
         Last_EX = EX;
-        Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
+        Summary = "Steps: " + (_p + _f +_w + _i) + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
         try {
             String t_rep = "";
             if (!"".equals(r_time.trim())) {
@@ -2438,8 +2442,8 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                     t_min = am0[0] / (double)1000;
                     t_avg = (total / am0.length) / (double)1000;
                     t_max = am0[am0.length - 1]  / (double)1000;
-                    p_50 = Func.p50(am0) / (double)1000;
-                    p_90 = Func.p90(am0) / (double)1000;
+                    p_50 = A.Func.p50(am0) / (double)1000;
+                    p_90 = A.Func.p90(am0) / (double)1000;
                     
                     t_rep += "= Total Calls: " + t_calls +
                             ", Response Times (sec) - Min: " + A.A.df.format(t_min) +
@@ -2477,12 +2481,12 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             Report(false);
             String MSG = "C360_" + env + " Excel Automation report - " + Report_Date +  
                     "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: *" + A.A.UserID + "*\r\n" +
-                    "Browser: *" + BROWSER + "*" + "\r\n" +        
+                    "Browser: *" + BROWSER  + HEADLESS + "*" + "\r\n" +        
                     "Scope: " + SCOPE + "\r\n" +
                     "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
                     "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w + ", Info: " + _i;
             
-            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Excel_Report_Path, Slack_Channel, MSG));
+            Current_Log_Update(GUI, A.Func.Send_File_with_Message_to_Slack(Excel_Report_Path, Slack_Channel, MSG));
             File ef = new File(Excel_Report_Path);
             if(ef.exists() && !ef.isDirectory()) {
                 ef.delete();
@@ -2498,7 +2502,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 }
                 HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Extract Here > open unzipped HTML file";
             }
-            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(HTML_Report_Path, Slack_Channel, HTML_Report_Msg));
+            Current_Log_Update(GUI, A.Func.Send_File_with_Message_to_Slack(HTML_Report_Path, Slack_Channel, HTML_Report_Msg));
             File hf = new File(HTML_Report_Path);
             if(hf.exists() && !hf.isDirectory()) {
                 hf.delete();

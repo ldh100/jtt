@@ -1,6 +1,5 @@
 package DL;
 
-import A.Func;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -280,7 +279,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         lblSITES6.setAlignmentX(0.5F);
 
         txtAdmin_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtAdmin_PW.setText("password");
+        txtAdmin_PW.setText("Compass1");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -778,16 +777,17 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     protected ExtentTest ParentTest;
     
     protected String BROWSER = "";
+    protected String HEADLESS = "";
     protected String url = "";
     protected String env = "";
     private SwingWorker BW1; 
     private SwingWorker BW2; 
     private Instant run_start;
-    private String Toast_Msg = "";  
+
 
     protected boolean FAIL = false;
     
-    protected int _t = 0; // Total- calculate in report as sum of others
+    protected int _t = 0; // Total - calculate in report as sum of others
     protected int _p = 0; // Passed
     protected int _f = 0; // Failed
     protected int _w = 0; // Warn
@@ -797,8 +797,9 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     protected String EX = "";   
     protected String r_time = ""; 
 
-    protected String err;
-
+    protected String err = "";
+    protected String Toast_Msg = ""; 
+    
     protected int t_calls = 0;
     protected double t_min = 0;
     protected double t_max = 0;
@@ -1418,7 +1419,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 String[] v = lines[i].split("\t");
                 System.arraycopy(v, 0, Values[i], 0, v.length); 
             }
-            Excel_Report_Path = Func.fExcel(l, col, Values, "DL_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
+            Excel_Report_Path = A.Func.fExcel(l, col, Values, "DL_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
             txtLog.append("=== Report Excel file:\r\n" + Excel_Report_Path + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch (IOException ex) {
@@ -1464,7 +1465,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             _update.setString(12, r_type);
             _update.setString(13, A.A.UserID); 
             _update.setString(14, A.A.WsID);
-            _update.setString(15, BROWSER);
+            _update.setString(15, BROWSER + HEADLESS);
             _update.setString(16, LOG);
             _update.setString(17, "Scope: " + SCOPE);
             _update.setString(18, EX);
@@ -1532,7 +1533,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             _insert.setString(12, r_type);
             _insert.setString(13, A.A.UserID);
             _insert.setString(14, A.A.WsID);
-            _insert.setString(15, BROWSER);
+            _insert.setString(15, BROWSER + HEADLESS);
             _insert.setString(16, "=== Job is running... ===\r\n" + "");
             _insert.setString(17, "Running");
             _insert.setString(18, "None");
@@ -1566,7 +1567,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             t_max =  0;
             p_50 = 0;
             p_90 = 0;
-            //_t = 0; // Total
+            _t = 0; // Total
             _p = 0; // Passed
             _f = 0; // Failed
             _w = 0; // Warn
@@ -1644,7 +1645,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             t_max =  0;
             p_50 = 0;
             p_90 = 0;
-            //_t = 0; // Total
+            _t = 0; // Total
             _p = 0; // Passed
             _f = 0; // Failed
             _w = 0; // Warn
@@ -1660,6 +1661,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             sw1.start();
             LOG_START();   // ========================================================            
             BW1_DoWork(false);
+            BW2_DoWork();
         }catch(Exception ex){
             return "ERROR > " + ex.getMessage();
         }
@@ -1780,6 +1782,11 @@ public class DL_GUI extends javax.swing.JInternalFrame {
 
     //<editor-fold defaultstate="collapsed" desc="Background Workers: Web Driver > Execution > Reports">
     private String StartWebDriver() {
+        if(_Headless){
+            HEADLESS = " - headless";           
+        } else{
+            HEADLESS = "";
+        }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
             txtLog.append( "= CWD: " + A.A.CWD + "\r\n");
@@ -1887,8 +1894,6 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     }
     private void BW1_DoWork(Boolean GUI) { 
         BW1 = new SwingWorker() {             
-            Instant dw_start = Instant.now();
-
             @Override
             protected String doInBackground() throws Exception { 
                 String DriverStart = StartWebDriver();
@@ -1911,7 +1916,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
-                EX = "Distiller " + env + ", v" + Ver + ", Browser: " + BROWSER +
+                EX = "Distiller " + env + ", v" + Ver + ", Browser: " + BROWSER  + HEADLESS +
                     " - Steps: " + (_p + _f +_w + _i) + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + 
                     ", Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
@@ -1971,6 +1976,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                                 _t++;
                                 _p++;
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                            
+                                Log_Html_Result("PASS", Toast_Msg, false, ParentTest.createNode("Snackbar Toast Msg"));
                             } else if(Toast_Msg.toLowerCase().contains("could not")|| 
                                     Toast_Msg.toLowerCase().contains("unable to save")|| 
                                     Toast_Msg.toLowerCase().contains("fail")) {
@@ -1978,15 +1984,18 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                                 _f++;
                                 F += "Step: " + _t + " > FAIL - " + Toast_Msg + "\r\n";
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                                Log_Html_Result("FAIL", Toast_Msg, true, ParentTest.createNode("Snackbar Toast Msg"));
                             } else if(Toast_Msg.toLowerCase().contains("fix") || Toast_Msg.toLowerCase().contains("error")) {
                                 _t++;
                                 _w++;
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                                Log_Html_Result("WARN", Toast_Msg, true, ParentTest.createNode("Snackbar Toast Msg"));
                             } else {
                                 _t++;
                                 _w++;
                                 //F += "Step: " + _t + " > WARN - " + tt + "\r\n";
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                           
+                                Log_Html_Result("WARN", Toast_Msg, true, ParentTest.createNode("Snackbar Toast Msg"));
                             }
                             Thread.sleep(4000); //  pause till new alert expected ???? 
                         }
@@ -2193,8 +2202,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                     t_min = am0[0] / (double)1000;
                     t_avg = (total / am0.length) / (double)1000;
                     t_max = am0[am0.length - 1]  / (double)1000;
-                    p_50 = Func.p50(am0) / (double)1000;
-                    p_90 = Func.p90(am0) / (double)1000;
+                    p_50 = A.Func.p50(am0) / (double)1000;
+                    p_90 = A.Func.p90(am0) / (double)1000;
                     
                     t_rep += "= Total Calls: " + t_calls +
                             ", Response Times (sec) - Min: " + A.A.df.format(t_min) +
@@ -2220,25 +2229,25 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         }
 
         HtmlReporter.config().setReportName("Distiller" + ", Env: " + env + 
-                ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
-                ". Resp(sec) - Min: " + A.A.df.format(t_min) +
-                            ", Avg: " + A.A.df.format(t_avg) +
-                            ", Max: " + A.A.df.format(t_max) +
-                            ", p50: " + A.A.df.format(p_50) +
-                            ", p90: " + A.A.df.format(p_90) + 
-                ". Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
+            ", Steps: " + (_p + _f +_w + _i) + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
+            ". Resp(sec) - Min: " + A.A.df.format(t_min) +
+                        ", Avg: " + A.A.df.format(t_avg) +
+                        ", Max: " + A.A.df.format(t_max) +
+                        ", p50: " + A.A.df.format(p_50) +
+                        ", p90: " + A.A.df.format(p_90) + 
+            ". Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
         HtmlReport.flush();
         
         if(_Slack && !Slack_Channel.equals("N/A")){
             Report(false);
             String MSG = "Distiller " + env + " Excel Automation report - " + Report_Date +
-                    "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
-                    "Browser: *" + BROWSER + "*" + "\r\n" +        
-                    "Scope: " + SCOPE + "\r\n" +
-                    "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
-                    "Steps: " + (_p + _f +_w + _i) + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
+                "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
+                "Browser: *" + BROWSER  + HEADLESS + "*" + "\r\n" +        
+                "Scope: " + SCOPE + "\r\n" +
+                "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
+                "Steps: " + (_p + _f +_w + _i) + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
             
-            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Excel_Report_Path, Slack_Channel, MSG));
+            Current_Log_Update(GUI, A.Func.Send_File_with_Message_to_Slack(Excel_Report_Path, Slack_Channel, MSG));
             File ef = new File(Excel_Report_Path);
             if(ef.exists() && !ef.isDirectory()) {
                 ef.delete();
@@ -2254,7 +2263,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 }
                 HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Extract Here > open unzipped HTML file";
             }
-            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(HTML_Report_Path, Slack_Channel, HTML_Report_Msg));
+            Current_Log_Update(GUI, A.Func.Send_File_with_Message_to_Slack(HTML_Report_Path, Slack_Channel, HTML_Report_Msg));
             File hf = new File(HTML_Report_Path);
             if(hf.exists() && !hf.isDirectory()) {
                 hf.delete();
