@@ -178,7 +178,7 @@ class AP3_brand_closure extends AP3_GUI{
 //                mR = String.format("%02d",(int)(Math.random()*59));
 //                New_To = hR + ":" + mR + "PM"; // 12:45 AM
 //                Element_By_Path_Text_Enter("Enter '...will re-open' time", "xpath", "//input[@type='time'][2]", New_To, false, ParentTest, "no_jira");             
-//                    //if (FAIL) { return;}     // ^^^ Enter Text within 1:00-4:59 PM      ==============   Doesn;t work ?????              
+//                    //if (FAIL) { return;}     // ^^^ Enter Text within 1:00-4:59 PM      ==============   Doesn't work ?????              
 
                 Element_By_Path_Text_Enter("Enter Closure Reason", "css", "[aria-label='Closure Reason']", "Auto Future Closure " + New_ID, false, ParentTest, "no_jira"); 
                     if (FAIL) { return;}
