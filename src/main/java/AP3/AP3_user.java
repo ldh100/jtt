@@ -270,7 +270,7 @@ public class AP3_user {
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
             if (FAIL) { return;}         
         _t++; Thread.sleep((long) sleep); TWeb.File_Find("Find User List File", System.getProperty("user.home") + File.separator + "Downloads", "site-operators.csv", "no_jira");
-        if (FAIL) { return;}
+            if (FAIL) { return;}
         if(!"".equals(t)){
             _t++; Thread.sleep((long) sleep); TWeb.File_Read("Read File - User Count", System.getProperty("user.home") + File.separator + "Downloads", "site-operators.csv", "User_Count", TOT_USER, "no_jira");
             //if (FAIL) { return;}
