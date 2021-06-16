@@ -19,7 +19,7 @@ class AP3_announcements extends AP3_GUI{
         _All_data = a._All_data;
     }    
     protected void run() throws InterruptedException, Exception   { 
-        String API_Responce_Body = "";
+        String API_Response_Body = "";
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
@@ -451,17 +451,26 @@ class AP3_announcements extends AP3_GUI{
         String A_ID = "";           
         if(t.contains("/")){
             A_ID = t.substring(t.lastIndexOf("/") + 1);
-            Call_API("Call /announcemen/ API", BaseAPI + "/announcement/" + A_ID, true, ParentTest, "no_jira" );
-            API_Responce_Body = t;
-            API_Body_Contains("Announcemen API - find Site ID", API_Responce_Body, SiteID, true, ParentTest, "no_jira");    
-            API_Body_Contains("Announcemen API - find App", API_Responce_Body, app, true, ParentTest, "no_jira"); 
-            API_Body_Contains("Announcemen API - find Name", API_Responce_Body, "Auto Announcement " + New_ID, true, ParentTest, "no_jira");
-            API_Body_Contains("Announcemen API - find EN Title", API_Responce_Body, "EN Title " + New_ID,  true, ParentTest, "no_jira");    
-            API_Body_Contains("Announcemen API - find EN Description", API_Responce_Body, "EN Description " + New_ID, true, ParentTest, "no_jira");
-            API_Body_Contains("Announcemen API - find EN Sub Text", API_Responce_Body, "EN Sub Text " + New_ID, true, ParentTest, "no_jira");  
-            API_Body_Contains("Announcemen API - find EN Button Text ", API_Responce_Body, "Dismiss",true, ParentTest, "no_jira"); 
-            API_Body_Contains("Announcemen API - find Fr Description", API_Responce_Body, "FR la Description " + New_ID,true, ParentTest, "no_jira"); 
-            API_Body_Contains("Announcemen API - find Type", API_Responce_Body, "Auto_Other_Type",true, ParentTest, "no_jira");  
+            Call_API("Call /announcement/ API", BaseAPI + "/announcement/" + A_ID, true, ParentTest, "no_jira" );
+            if(t.startsWith("{")){
+                API_Response_Body = t;               
+            }else{
+                EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/announcement/" + A_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                Log_Html_Result("FAIL", "URL: " + BaseAPI + "/announcement/" + A_ID, false, ParentTest.createNode("API Responce Error"));
+                return;
+            }
+
+            
+            API_Body_Contains("Announcement API - find Site ID", API_Response_Body, SiteID, true, ParentTest, "no_jira");    
+            API_Body_Contains("Announcement API - find App", API_Response_Body, app, true, ParentTest, "no_jira"); 
+            API_Body_Contains("Announcement API - find Name", API_Response_Body, "Auto Announcement " + New_ID, true, ParentTest, "no_jira");
+            API_Body_Contains("Announcement API - find EN Title", API_Response_Body, "EN Title " + New_ID,  true, ParentTest, "no_jira");    
+            API_Body_Contains("Announcement API - find EN Description", API_Response_Body, "EN Description " + New_ID, true, ParentTest, "no_jira");
+            API_Body_Contains("Announcement API - find EN Sub Text", API_Response_Body, "EN Sub Text " + New_ID, true, ParentTest, "no_jira");  
+            API_Body_Contains("Announcement API - find EN Button Text ", API_Response_Body, "Dismiss",true, ParentTest, "no_jira"); 
+            API_Body_Contains("Announcement API - find Fr Description", API_Response_Body, "FR la Description " + New_ID,true, ParentTest, "no_jira"); 
+            API_Body_Contains("Announcement API - find Type", API_Response_Body, "Auto_Other_Type",true, ParentTest, "no_jira");  
         }            
 
 //            Move_to_Element_By_Path("Scroll up to Sites", "xpath", "//div[@class='v-list list-panel theme--light']", ParentTest, "no_jira");
