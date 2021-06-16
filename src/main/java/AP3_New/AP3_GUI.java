@@ -836,6 +836,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     protected boolean _Slack = false;
     protected boolean _AWS_Alert = false;
     private String Log = "";
+    
+    protected String AP3_TKN = "";
 
     private ExtentSparkReporter HtmlReporter;
     protected ExtentReports HtmlReport;
@@ -885,7 +887,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     private Instant run_start;
     
     private String SQL;
-    private String AP3_TKN = "";
+
     private boolean CONFIG = false;
     private String C = "";
     private int wdLastRow = -1; 
@@ -2512,6 +2514,13 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("New Brand"); 
             AP3_brand_new BR = new AP3_New.AP3_brand_new(AP3_GUI.this);
             BR.run(_Site_new); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+        }   
+        if(_Bulk_apply){
+            SCOPE += ", New Brand";
+            ParentTest = HtmlReport.createTest("New Brand"); 
+            AP3_bulk_apply BR = new AP3_New.AP3_bulk_apply(AP3_GUI.this);
+            BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }        
     }
@@ -5303,7 +5312,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         CloseableHttpClient httpclient = HttpClients.createDefault(); 
         try {
             HttpGet httpget = new HttpGet(URL); 
-            httpget.setHeader("Authorization",  "Bearer " + A.A.AP3_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 String Msg = response.getStatusLine().getReasonPhrase();
