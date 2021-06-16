@@ -8,6 +8,13 @@ import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+    /*
+    For Staging:
+    IN JTT, SELECT (APPLICATION: Boost, SITE: Sites Bulk Apply)
+    For Production:
+    IN JTT, SELECT (APPLICATION: Boost, SITE: QA University, BRAND: bulk apply test station (brandId:okYqgJ4...))
+    */
+
 class AP3_bulk_apply extends AP3_GUI{
     protected AP3_bulk_apply (AP3_GUI a) throws InterruptedException, Exception {
         ADMIN_ID = a.ADMIN_ID;
@@ -34,6 +41,8 @@ class AP3_bulk_apply extends AP3_GUI{
         _All_data = a._All_data;
         TZone = a.TZone;
     } 
+    
+    
     protected void run() throws InterruptedException, Exception {
         String API_Response_Body = "";
         JSONObject json;
