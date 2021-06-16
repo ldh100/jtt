@@ -96,7 +96,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         _sales_reporting = new javax.swing.JCheckBox();
         _menu_manager = new javax.swing.JCheckBox();
         _users = new javax.swing.JCheckBox();
-        _password = new javax.swing.JCheckBox();
+        _export_menuset = new javax.swing.JCheckBox();
         _logout = new javax.swing.JCheckBox();
         _roles = new javax.swing.JCheckBox();
         _brand_new = new javax.swing.JCheckBox();
@@ -117,6 +117,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         _orders_report_hidden = new javax.swing.JCheckBox();
         _brand_closure = new javax.swing.JCheckBox();
         _timeslots = new javax.swing.JCheckBox();
+        _password = new javax.swing.JCheckBox();
         jScrollPane3 = new javax.swing.JScrollPane();
         DV1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -302,14 +303,24 @@ public class AP3 extends javax.swing.JInternalFrame {
         _users.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _users.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _users.setRequestFocusEnabled(false);
+        _users.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _usersActionPerformed(evt);
+            }
+        });
         jPanel1.add(_users, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, 70, 14));
 
-        _password.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _password.setText("Forgot Password");
-        _password.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _password.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _password.setRequestFocusEnabled(false);
-        jPanel1.add(_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, 120, 18));
+        _export_menuset.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _export_menuset.setText("Export Menu set");
+        _export_menuset.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _export_menuset.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _export_menuset.setRequestFocusEnabled(false);
+        _export_menuset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _export_menusetActionPerformed(evt);
+            }
+        });
+        jPanel1.add(_export_menuset, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 120, 18));
 
         _logout.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _logout.setText("User Feedback & Logout");
@@ -323,7 +334,7 @@ public class AP3 extends javax.swing.JInternalFrame {
         _roles.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _roles.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _roles.setRequestFocusEnabled(false);
-        jPanel1.add(_roles, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, -1, 14));
+        jPanel1.add(_roles, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, 14));
 
         _brand_new.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _brand_new.setText("Add Brand (not in Prod)");
@@ -387,13 +398,11 @@ public class AP3 extends javax.swing.JInternalFrame {
         jPanel1.add(lblSITES15, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 149, 20));
 
         txtComp.setEditable(false);
-        txtComp.setBackground(new java.awt.Color(255, 255, 255));
         txtComp.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtComp.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jPanel1.add(txtComp, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 169, -1));
 
         txtSector.setEditable(false);
-        txtSector.setBackground(new java.awt.Color(255, 255, 255));
         txtSector.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtSector.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jPanel1.add(txtSector, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 168, -1));
@@ -452,6 +461,13 @@ public class AP3 extends javax.swing.JInternalFrame {
         _timeslots.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _timeslots.setRequestFocusEnabled(false);
         jPanel1.add(_timeslots, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 80, 14));
+
+        _password.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _password.setText("Forgot Password");
+        _password.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _password.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _password.setRequestFocusEnabled(false);
+        jPanel1.add(_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, 120, 18));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, 460, 300));
 
@@ -962,6 +978,14 @@ public class AP3 extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnRunMouseClicked
 
+    private void _usersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__usersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event__usersActionPerformed
+
+    private void _export_menusetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__export_menusetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event__export_menusetActionPerformed
+
     private void LOAD_ENV(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
@@ -1302,7 +1326,15 @@ public class AP3 extends javax.swing.JInternalFrame {
                     AP3_user_permission.run();
                     EX += " - " + "\t" + " === ^ User Permissions" + "\t" + " ===== " + "\t" + " == ^ User Permissions End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
                     Thread.sleep(1500);
-                }                    
+                }
+                 if (_export_menuset.isSelected()) { 
+                    SCOPE += ", _export_menuset";  
+                    EX += " - " + "\t" + " === Export Menuset" + "\t" + " ===== " + "\t" + " == Export Menuset Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    AP3_export_menuset.run();
+                    EX += " - " + "\t" + " === ^ Export Menuset" + "\t" + " ===== " + "\t" + " == ^ Export Menuset End" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                    Thread.sleep(1500);
+                }
+               
                 if(_f > 0) {
                     return "=== Execution finished @" + LocalDateTime.now().format(Time_12_formatter) + " with " + _f + " FAIL(s)";
                 }else{
@@ -2122,7 +2154,7 @@ public class AP3 extends javax.swing.JInternalFrame {
                 c = C.substring(C.indexOf("_resent_updates: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _resent_updates.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_announcements: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _announcements.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_promo: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _promo.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_password: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _password.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                c = C.substring(C.indexOf("_password: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _export_menuset.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_roles: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _roles.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_all_data: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _all_data.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
                 c = C.substring(C.indexOf("_logout: ")); c = c.substring(0, c.indexOf("\r\n")).trim(); _logout.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
@@ -2192,7 +2224,7 @@ public class AP3 extends javax.swing.JInternalFrame {
             C += "_resent_updates: " + _resent_updates.isSelected() + "\r\n";
             C += "_announcements: " + _announcements.isSelected() + "\r\n";
             C += "_promo: " + _promo.isSelected() + "\r\n";
-            C += "_password: " + _password.isSelected() + "\r\n";
+            C += "_password: " + _export_menuset.isSelected() + "\r\n";
             C += "_roles: " + _roles.isSelected() + "\r\n";           
             C += "_all_data: " + _all_data.isSelected() + "\r\n";
             C += "_logout: " + _logout.isSelected() + "\r\n";
@@ -2322,6 +2354,7 @@ public class AP3 extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _brand_closure;
     private javax.swing.JCheckBox _brand_new;
     private javax.swing.JCheckBox _bulk_apply;
+    private javax.swing.JCheckBox _export_menuset;
     private javax.swing.JCheckBox _group_management;
     private javax.swing.JCheckBox _headless;
     private javax.swing.JCheckBox _images;
