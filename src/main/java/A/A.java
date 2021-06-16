@@ -18,10 +18,13 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Base64;
 import java.util.List;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.UIManager;
@@ -1433,11 +1436,11 @@ public class A extends javax.swing.JFrame {
                         "LogIN = 'JTT', " +
                         "LastL = '" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yy hh:mm a")) + "', " +
                                 "USER_MACHINE = '" + WsID + "', " +
-                                        "IP = '" + "Not used" + "' " +
-                                        "WHERE User_ID = '" + UserID + "'");
+                                "IP = '" + "Not used" + "' " +
+                        "WHERE User_ID = '" + UserID + "'");
                 int row = _update.executeUpdate();
             } catch (SQLException ex) {
-                // Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Register_Login > SQL ERROR: " + ex.getMessage(), ex);
+                Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Register_Login > SQL ERROR: " + ex.getMessage(), ex);
             }
         }).start();
     }
@@ -1453,9 +1456,26 @@ public class A extends javax.swing.JFrame {
             rs.next();
             AWS_Routing_Key = rs.getString(1);  
             
+            rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'C1_Num'");
+            rs.next();
+            C1_Num = new String(Base64.getDecoder().decode(rs.getString(1)));
+            
+            rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'C1_Cvv'");
+            rs.next();
+            C1_Cvv = new String(Base64.getDecoder().decode(rs.getString(1)));   
+            
+            rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'C1_Exp'");
+            rs.next();
+            C1_Exp = new String(Base64.getDecoder().decode(rs.getString(1)));
+            
+            rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'C1_Zip'");
+            rs.next();
+            C1_Zip = new String(Base64.getDecoder().decode(rs.getString(1)));
+            
             conn.close();
+            Logger.getLogger(A.class.getName()).log(Level.INFO, "Keys Loaded");
         } catch (SQLException ex) {
-            S_OAuth_TKN = ex.getMessage();
+            Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Load Keys > SQL ERROR: " + ex.getMessage(), ex);
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1474,6 +1494,11 @@ public class A extends javax.swing.JFrame {
     public static String S_OAuth_TKN = "";
     public static String AWS_Routing_Key = "";
     public static String AP3_TKN = "";
+    public static String C1_Num = "";
+    public static String C1_Cvv = "";
+    public static String C1_Exp = "";
+    public static String C1_Zip = "";
+    
     public static final DecimalFormat df = new DecimalFormat("#.##");
     public static final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
     public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");

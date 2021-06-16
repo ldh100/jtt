@@ -939,6 +939,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     protected List<WebElement> Closes = null; 
     
     protected String BROWSER = "";
+    protected String HEADLESS = "";
     protected String url = "";
     protected String app = "";
     protected String appId = "";
@@ -1654,7 +1655,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             _update.setString(12, r_type);
             _update.setString(13, A.A.UserID);
             _update.setString(14, A.A.WsID);
-            _update.setString(15, BROWSER);
+            _update.setString(15, BROWSER + HEADLESS);
             _update.setString(16, LOG);
             _update.setString(17, "Scope: " + SCOPE);
             _update.setString(18, EX);
@@ -1722,7 +1723,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             _insert.setString(12, r_type);
             _insert.setString(13, A.A.UserID);
             _insert.setString(14, A.A.WsID);
-            _insert.setString(15, BROWSER);
+            _insert.setString(15, BROWSER + HEADLESS);
             _insert.setString(16,  "= Job is running... ===\r\n" + "");
             _insert.setString(17, "Running");
             _insert.setString(18, "None");
@@ -2175,6 +2176,11 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     
     //<editor-fold defaultstate="collapsed" desc="Background Workers: Web Driver > Execution > Reports">
     private String StartWebDriver() {
+        if(_Headless){
+            HEADLESS = " - headless";           
+        } else{
+            HEADLESS = "";
+        }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
 
@@ -2310,7 +2316,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
-                EX = "C360 " + env + ", v" + Ver + ", Browser: " + BROWSER +
+                EX = "C360 " + env + ", v" + Ver + ", Browser: " + BROWSER  + HEADLESS +
                     " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                     + EX;
@@ -2421,7 +2427,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     private void BW1_Done(boolean GUI) throws Exception{
         DD = Duration.between(run_start, Instant.now());      
         Last_EX = EX;
-        Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
+        Summary = "Steps: " + (_p + _f +_w + _i) + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
         try {
             String t_rep = "";
             if (!"".equals(r_time.trim())) {
@@ -2475,7 +2481,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             Report(false);
             String MSG = "C360_" + env + " Excel Automation report - " + Report_Date +  
                     "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: *" + A.A.UserID + "*\r\n" +
-                    "Browser: *" + BROWSER + "*" + "\r\n" +        
+                    "Browser: *" + BROWSER  + HEADLESS + "*" + "\r\n" +        
                     "Scope: " + SCOPE + "\r\n" +
                     "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
                     "Steps: " + _t + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w + ", Info: " + _i;

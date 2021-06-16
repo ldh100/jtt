@@ -1,14 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package AP3_New;
-
-/**
- *
- * @author Oleg.Spozito
- */
 class AP3_announcements extends AP3_GUI{
     protected AP3_announcements (AP3_GUI a) throws InterruptedException, Exception {
         ADMIN_ID = a.ADMIN_ID;
@@ -28,7 +18,8 @@ class AP3_announcements extends AP3_GUI{
         SiteID = a.SiteID;
         _All_data = a._All_data;
     }    
-    protected void  run() throws InterruptedException, Exception   { 
+    protected void run() throws InterruptedException, Exception   { 
+        String API_Response_Body = "";
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
@@ -257,7 +248,7 @@ class AP3_announcements extends AP3_GUI{
                              if (FAIL) { return;} 
                         Element_By_Path_Text_Enter("Enter 'Search Sites...'", "css", "[aria-label='" + s + "']", SITE, false, ParentTest, "no_jira");
                             if (FAIL) { return;} 
-                        List_Child_E1_By_Path("Find 'Sites...' list", L2, i, "xpath", ".//div[@class='v-list list-panel theme--light']", ParentTest, "no_jira");
+                        List_Child_E1_By_Path("Find 'Sites...' list", L2.get(i), "xpath", ".//div[@class='v-list list-panel theme--light']", ParentTest, "no_jira");
                             if (FAIL) { return;}                           
                         Element_Child_List_L1("Sites' Count", e1, "xpath", ".//label[@class='v-label theme--light']", ParentTest, "no_jira");              
                            T_Index = -1;
@@ -272,7 +263,7 @@ class AP3_announcements extends AP3_GUI{
                             Element_Click("Check '" + SITE + "'", L1.get(T_Index), ParentTest, "no_jira");
                                 if (FAIL) { return;}                                
                         } else{
-                           // EX = no BRAND
+                           // EX = no SITE
                         }   
                         
                         Text_Found("Enable this announcement...", "Enable this announcement to see", ParentTest, "no_jira");
@@ -304,7 +295,7 @@ class AP3_announcements extends AP3_GUI{
                             if (FAIL) { return;}  
                         Scroll_to_Element("Scroll to Card " + i, L2.get(1), ParentTest, "no_jira");
                             if (FAIL) { return;}
-                        List_Child_E1_By_Path("Find EN Title", L2, i, "css", "[aria-label='Title']", ParentTest, "no_jira"); 
+                        List_Child_E1_By_Path("Find EN Title", L2.get(i), "css", "[aria-label='Title']", ParentTest, "no_jira"); 
                             if (FAIL) { return;}                        
                         Element_Click("Click EN Title", e1, ParentTest, "no_jira");
                             if (FAIL) { return;} 
@@ -325,7 +316,7 @@ class AP3_announcements extends AP3_GUI{
                         Element_Child_Attribute("Sub-title " + i, L2.get(i), "xpath", ".//div[@class='H5-Primary-Left']", "textContent", ParentTest, "no_jira");         
                             if (FAIL) { return;}  
                         Scroll_to_Element("Scroll to Card " + i, L2.get(2), ParentTest, "no_jira");
-                        List_Child_E1_By_Path("Find EN Title", L2, i, "css", "[aria-label='Title']", ParentTest, "no_jira"); 
+                        List_Child_E1_By_Path("Find EN Title", L2.get(i), "css", "[aria-label='Title']", ParentTest, "no_jira"); 
                             if (FAIL) { return;}                        
                         Element_Click("Click FR Title", e1, ParentTest, "no_jira");
                             if (FAIL) { return;} 
@@ -420,117 +411,126 @@ class AP3_announcements extends AP3_GUI{
         Element_Text("Announcement Image text", L2.get(5), ParentTest, "no_jira"); 
         Element_Click("Click 'View Image'", L2.get(5), ParentTest, "no_jira");
             if (FAIL) { return;}  
-                Element_E1_Find("Find 'Sites' dialog", "xpath", ".//div[@class='v-dialog v-dialog--active v-dialog--persistent']", ParentTest, "no_jira");
-                    if (!FAIL) {    // Find fragment 
-                Element_Child_E2("Find 'Image(s)' dialog Title", e1, "xpath", ".//div[@class='v-card__title H4-Secondary-Center']", ParentTest, "no_jira");
-                    if (FAIL) { return;}   
-                Element_Text("Find 'Image(s)' dialog Title text", e2, ParentTest, "no_jira");
-                    if (FAIL) { return;}      
-                Find_Text("Find 'En...' version text", "English Version", true, ParentTest, "no_jira"); 
-                    if (FAIL) { return;}
-                Find_Text("Find 'Fr...' version text", "French Version", true, ParentTest, "no_jira"); 
-                    if (FAIL) { return;}
-                    
-                Element_Child_List_L1("Images Count", e1, "tagName", "img", ParentTest, "no_jira");              
-                    for (int j = 0; j < L1.size(); j++) {        
-                        Element_Attribute("Image " + j + " src", L1.get(j), "src", ParentTest, "no_jira");             
-                        if (FAIL) { return;}  
-                    }          
-                Element_Child_E2("Find dialog 'Edit' button", e1, "xpath", ".//*[text()='EDIT']", ParentTest, "no_jira");
-                    if (FAIL) { return;} 
-                Element_Text("Botton 'Edit' text", e2, ParentTest, "no_jira");      
-                Element_Child_E2("Find dialog 'Cancel' button", e1, "xpath", ".//*[text()='Cancel']", ParentTest, "no_jira");
-                    if (FAIL) { return;}  
-                Element_Text("Botton 'Cancel' text", e2, ParentTest, "no_jira");
-                Scroll_to_Element("Scroll to 'Cancel' button", e2, ParentTest, "no_jira");
-                    if (FAIL) { return;}                    
-                Element_Click("Click dialog 'Cancel' ", e2, ParentTest, "no_jira");
-                    if (FAIL) { return;}                    
-            }        
-        Element_Click("Select Created Announcement", L2.get(1), ParentTest, "no_jira");
+        Element_E1_Find("Find 'Sites' dialog", "xpath", ".//div[@class='v-dialog v-dialog--active v-dialog--persistent']", ParentTest, "no_jira");
+            if (!FAIL) {    // Find fragment 
+        Element_Child_E2("Find 'Image(s)' dialog Title", e1, "xpath", ".//div[@class='v-card__title H4-Secondary-Center']", ParentTest, "no_jira");
+            if (FAIL) { return;}   
+        Element_Text("Find 'Image(s)' dialog Title text", e2, ParentTest, "no_jira");
+            if (FAIL) { return;}      
+        Find_Text("Find 'En...' version text", "English Version", true, ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Thread.sleep(500);              
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+        Find_Text("Find 'Fr...' version text", "French Version", true, ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+
+        Element_Child_List_L1("Images Count", e1, "tagName", "img", ParentTest, "no_jira");              
+            for (int j = 0; j < L1.size(); j++) {        
+                Element_Attribute("Image " + j + " src", L1.get(j), "src", ParentTest, "no_jira");             
+                if (FAIL) { return;}  
+            }          
+        Element_Child_E2("Find dialog 'Edit' button", e1, "xpath", ".//*[text()='EDIT']", ParentTest, "no_jira");
             if (FAIL) { return;} 
-        Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'DELETE ANNOUNCEMENT')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;} 
-         Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
-           if (FAIL) { return;} 
-        Page_URL("Created Announcements page URL", ParentTest, "no_jira"); 
-            String A_ID = "";
-            String API_Responce_Body = "";
-            if(t.contains("/")){
-                A_ID = t.substring(t.lastIndexOf("/") + 1);
-                Call_API("Call /announcemen/ API", BaseAPI + "/announcement/" + A_ID, true, ParentTest, "no_jira" );
-                API_Responce_Body = t;
-                API_Body_Contains("Announcemen API - find Site ID", API_Responce_Body, SiteID,true, ParentTest, "no_jira");    
-                API_Body_Contains("Announcemen API - find App", API_Responce_Body, app, true, ParentTest, "no_jira"); 
-                API_Body_Contains("Announcemen API - find Name", API_Responce_Body, "Auto Announcement " + New_ID,true, ParentTest, "no_jira");
-                API_Body_Contains("Announcemen API - find EN Title", API_Responce_Body, "EN Title " + New_ID,true, ParentTest, "no_jira");    
-                API_Body_Contains("Announcemen API - find EN Description", API_Responce_Body, "EN Description " + New_ID,true, ParentTest, "no_jira");
-                API_Body_Contains("Announcemen API - find EN Sub Text", API_Responce_Body, "EN Sub Text " + New_ID,true, ParentTest, "no_jira");  
-                API_Body_Contains("Announcemen API - find EN Button Text ", API_Responce_Body, "Dismiss",true, ParentTest, "no_jira"); 
-                API_Body_Contains("Announcemen API - find Fr Description", API_Responce_Body, "FR la Description " + New_ID,true, ParentTest, "no_jira"); 
-                API_Body_Contains("Announcemen API - find Type", API_Responce_Body, "Auto_Other_Type",true, ParentTest, "no_jira");  
-            }            
+        Element_Text("Botton 'Edit' text", e2, ParentTest, "no_jira");      
+        Element_Child_E2("Find dialog 'Cancel' button", e1, "xpath", ".//*[text()='Cancel']", ParentTest, "no_jira");
+            if (FAIL) { return;}  
+        Element_Text("Botton 'Cancel' text", e2, ParentTest, "no_jira");
+        Scroll_to_Element("Scroll to 'Cancel' button", e2, ParentTest, "no_jira");
+            if (FAIL) { return;}                    
+        Element_Click("Click dialog 'Cancel' ", e2, ParentTest, "no_jira");
+            if (FAIL) { return;}                    
+    }        
+    Element_Click("Select Created Announcement", L2.get(1), ParentTest, "no_jira");
+        if (FAIL) { return;}
+    Thread.sleep(500);              
+    Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+        if (FAIL) { return;} 
+    Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'DELETE ANNOUNCEMENT')]", ParentTest, "no_jira"); 
+        if (FAIL) { return;} 
+     Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
+       if (FAIL) { return;} 
+    Page_URL("Created Announcements page URL", ParentTest, "no_jira"); 
+        String A_ID = "";           
+        if(t.contains("/")){
+            A_ID = t.substring(t.lastIndexOf("/") + 1);
+            Call_API("Call /announcement/ API", BaseAPI + "/announcement/" + A_ID, true, ParentTest, "no_jira" );
+            if(t.startsWith("{")){
+                API_Response_Body = t;               
+            }else{
+                EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/announcement/" + A_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                Log_Html_Result("FAIL", "URL: " + BaseAPI + "/announcement/" + A_ID, false, ParentTest.createNode("API Responce Error"));
+                return;
+            }
+
+            
+            API_Body_Contains("Announcement API - find Site ID", API_Response_Body, SiteID, true, ParentTest, "no_jira");    
+            API_Body_Contains("Announcement API - find App", API_Response_Body, app, true, ParentTest, "no_jira"); 
+            API_Body_Contains("Announcement API - find Name", API_Response_Body, "Auto Announcement " + New_ID, true, ParentTest, "no_jira");
+            API_Body_Contains("Announcement API - find EN Title", API_Response_Body, "EN Title " + New_ID,  true, ParentTest, "no_jira");    
+            API_Body_Contains("Announcement API - find EN Description", API_Response_Body, "EN Description " + New_ID, true, ParentTest, "no_jira");
+            API_Body_Contains("Announcement API - find EN Sub Text", API_Response_Body, "EN Sub Text " + New_ID, true, ParentTest, "no_jira");  
+            API_Body_Contains("Announcement API - find EN Button Text ", API_Response_Body, "Dismiss",true, ParentTest, "no_jira"); 
+            API_Body_Contains("Announcement API - find Fr Description", API_Response_Body, "FR la Description " + New_ID,true, ParentTest, "no_jira"); 
+            API_Body_Contains("Announcement API - find Type", API_Response_Body, "Auto_Other_Type",true, ParentTest, "no_jira");  
+        }            
 
 //            Move_to_Element_By_Path("Scroll up to Sites", "xpath", "//div[@class='v-list list-panel theme--light']", ParentTest, "no_jira");
 //                if (FAIL) { return;}  // English Version
-            Move_to_Element_By_Path("Scroll up to Position/Status", "xpath", "//div[text()='English Version']", ParentTest, "no_jira");
-                if (FAIL) { return;}  // English Version
-            Text_Found("Enable this announcement...", "Enable this announcement to see", ParentTest, "no_jira");
-            if(t.equals("Not Found")){  
-                Element_By_Path_Click("Announcement Position Dropdown Open", "css", "[aria-label='Position']", ParentTest, "no_jira");
-                    if (FAIL) { return; }
-                Element_E1_Find("Find 'Position' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
-                    if (FAIL) { return;}                          
-                Element_Child_List_L1("Positions' Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                                     
-                    for (int j = 0; j < L1.size(); j++) {
-                        Element_Text("Available Position:", L1.get(j), ParentTest, "no_jira");             
-                        if (FAIL) { return;}                            
-                    }
-                Element_Click("Select 1st Available Position", L1.get(0),ParentTest, "no_jira");
-                    if (FAIL) { return;}         
+        Move_to_Element_By_Path("Scroll up to Position/Status", "xpath", "//div[text()='English Version']", ParentTest, "no_jira");
+            if (FAIL) { return;}  // English Version
+        Text_Found("Enable this announcement...", "Enable this announcement to see", ParentTest, "no_jira");
+        if(t.equals("Not Found")){  
+            Element_By_Path_Click("Announcement Position Dropdown Open", "css", "[aria-label='Position']", ParentTest, "no_jira");
+                if (FAIL) { return; }
+            Element_E1_Find("Find 'Position' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
+                if (FAIL) { return;}                          
+            Element_Child_List_L1("Positions' Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                                     
+                for (int j = 0; j < L1.size(); j++) {
+                    Element_Text("Available Position:", L1.get(j), ParentTest, "no_jira");             
+                    if (FAIL) { return;}                            
+                }
+            Element_Click("Select 1st Available Position", L1.get(0),ParentTest, "no_jira");
+                if (FAIL) { return;}         
+        }else{
+            Find_Text("Find 'Enable this announcement' Text", "Enable this announcement",true,ParentTest, "no_jira");             
+                if (FAIL) { return;}
+            if(t.contains("If not possible, disable another one")){  
+                _t++; 
+                _w++;
+                EX += _t + "\t" + "Enable Announcement - not possible" + "\t" + "No Position available" + "\t" + t + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\r\n";    
+                Log_Html_Result("WARN", "No Position available", true, ParentTest.createNode("Enable Announcement - not possible"));
             }else{
-                Find_Text("Find 'Enable this announcement' Text", "Enable this announcement",true,ParentTest, "no_jira");             
-                    if (FAIL) { return;}
-                if(t.contains("If not possible, disable another one")){  
-                    _t++; _w++;
-                    EX += _t + "\t" + "Enable Announcement - not possible" + "\t" + "No Position available" + "\t" + t + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\r\n";    
-                }
-                else{
-                    Element_By_Path_Click("Announcement Status Dropdown Open", "css", "[aria-label='Status']", ParentTest, "no_jira");
-                        if (FAIL) { return; }
-                    Element_E1_Find("Find 'Status' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
-                        if (FAIL) { return;}                          
-                    Element_Child_List_L1("Announcement Status' Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                                     
-                        T_Index = -1;
-                        for (int j = 0; j < L1.size(); j++) {
-                            Element_Text("Available Status:", L1.get(j), ParentTest, "no_jira");             
-                            if (FAIL) { return;}  
-                            if(t.trim().equals("Active")){
-                                T_Index = j;
-                            }
+                Element_By_Path_Click("Announcement Status Dropdown Open", "css", "[aria-label='Status']", ParentTest, "no_jira");
+                    if (FAIL) { return; }
+                Element_E1_Find("Find 'Status' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
+                    if (FAIL) { return;}                          
+                Element_Child_List_L1("Announcement Status' Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                                     
+                    T_Index = -1;
+                    for (int j = 0; j < L1.size(); j++) {
+                        Element_Text("Available Status:", L1.get(j), ParentTest, "no_jira");             
+                        if (FAIL) { return;}  
+                        if(t.trim().equals("Active")){
+                            T_Index = j;
                         }
-                        if(T_Index > -1){
-                            Element_Click("Check '" + "Active" + "'", L1.get(T_Index), ParentTest, "no_jira");
-                                if (FAIL) { return;}   
-                            Element_By_Path_Click("Announcement Position Dropdown Open", "css", "[aria-label='Position']", ParentTest, "no_jira");
-                                if (FAIL) { return; }
-                            Element_E1_Find("Find 'Position' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
-                                if (FAIL) { return;}                          
-                            Element_Child_List_L1("Announcement App' Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                                     
-                                for (int j = 0; j < L1.size(); j++) {
-                                    Element_Text("Available Position:", L1.get(j), ParentTest, "no_jira");             
-                                    if (FAIL) { return;}                            
-                                }
-                            Element_Click("Select 1st Available Position", L1.get(0),ParentTest, "no_jira");
-                                if (FAIL) { return;}                                
-                        } else{
-                           // EX += no BRAND
-                        } 
-                }
-             }           
+                    }
+                    if(T_Index > -1){
+                        Element_Click("Check '" + "Active" + "'", L1.get(T_Index), ParentTest, "no_jira");
+                            if (FAIL) { return;}   
+                        Element_By_Path_Click("Announcement Position Dropdown Open", "css", "[aria-label='Position']", ParentTest, "no_jira");
+                            if (FAIL) { return; }
+                        Element_E1_Find("Find 'Position' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
+                            if (FAIL) { return;}                          
+                        Element_Child_List_L1("Announcement App' Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                                     
+                            for (int j = 0; j < L1.size(); j++) {
+                                Element_Text("Available Position:", L1.get(j), ParentTest, "no_jira");             
+                                if (FAIL) { return;}                            
+                            }
+                        Element_Click("Select 1st Available Position", L1.get(0),ParentTest, "no_jira");
+                            if (FAIL) { return;}                                
+                    } else{
+                       // EX += no BRAND
+                    } 
+            }
+        }           
         To_Top("Move to page Top", ParentTest, "no_jira"); 
         Thread.sleep(1000);            
         Element_By_Path_Click("Delete Announcement Click", "xpath", "//*[contains(text(), 'DELETE ANNOUNCEMENT')]", ParentTest, "no_jira"); 
@@ -549,22 +549,22 @@ class AP3_announcements extends AP3_GUI{
                 Element_E1_Find("Find 'Delete' dialog again", "xpath", "//div[@class='v-dialog v-dialog--active']", ParentTest, "no_jira");
                     if (FAIL) { return;} 
             }            
-            Find_Text("Find 'Delete..' Title", "Delete Announcement", true, ParentTest, "no_jira"); 
-                if (FAIL) { return;}
-            Find_Text("Find 'Delete..' warning", "Are you sure", true, ParentTest, "no_jira"); 
-                if (FAIL) { return;}
-            Element_Child_E2("Find dialog 'Edit' button", e1, "xpath", ".//*[text()='CANCEL']", ParentTest, "no_jira");
-                if (FAIL) { return;} 
-            Element_Child_E2("Find dialog 'Cancel' button", e1, "xpath", ".//*[text()='DELETE']", ParentTest, "no_jira");
-                if (FAIL) { return;}    
-            Element_Click("Click dialog 'Delete' ", e2, ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Thread.sleep(500);                  
-            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Find_Text("Confirm Deleted", "Auto Announcement " + New_ID, false, ParentTest, "no_jira"); 
-                if (FAIL) { return;}
-            Call_API("Call /announcemen/ API", BaseAPI + "/announcement/" + A_ID, false, ParentTest, "no_jira");    // A_ID or Site ID
+        Find_Text("Find 'Delete..' Title", "Delete Announcement", true, ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+        Find_Text("Find 'Delete..' warning", "Are you sure", true, ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+        Element_Child_E2("Find dialog 'Edit' button", e1, "xpath", ".//*[text()='CANCEL']", ParentTest, "no_jira");
+            if (FAIL) { return;} 
+        Element_Child_E2("Find dialog 'Cancel' button", e1, "xpath", ".//*[text()='DELETE']", ParentTest, "no_jira");
+            if (FAIL) { return;}    
+        Element_Click("Click dialog 'Delete' ", e2, ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);                  
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Find_Text("Confirm Deleted", "Auto Announcement " + New_ID, false, ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+        Call_API("Call /announcemen/ API", BaseAPI + "/announcement/" + A_ID, false, ParentTest, "no_jira");    // A_ID or Site ID
 //      Line 70:         "/announcement/{id}": {
 //	Line 72:                 "summary": "Get Announcement",
 //	Line 76:                         "schema": {"$ref": "#/definitions/Announcement"},
