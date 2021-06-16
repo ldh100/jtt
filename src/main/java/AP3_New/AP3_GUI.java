@@ -836,6 +836,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     protected boolean _Slack = false;
     protected boolean _AWS_Alert = false;
     private String Log = "";
+    
+    protected String AP3_TKN = "";
 
     private ExtentSparkReporter HtmlReporter;
     protected ExtentReports HtmlReport;
@@ -885,7 +887,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     private Instant run_start;
     
     private String SQL;
-    private String AP3_TKN = "";
+
     private boolean CONFIG = false;
     private String C = "";
     private int wdLastRow = -1; 
@@ -959,6 +961,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     protected List<WebElement> Closes = null; 
     
     protected String BROWSER = "";
+    protected String HEADLESS = "";
     protected String url = "";
     protected String app = "";
     protected String appId = "";
@@ -975,7 +978,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     protected String SectorID = "";
     protected String CompanyID = "";
     protected String DH_MENU_ID = "";    
-    protected String GL_MENU = "TIM HORTONS";
+    protected String GL_MENU = "";
     // </editor-fold>
      
     // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">  
@@ -1710,7 +1713,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 _insert.setString(12, r_type);
                 _insert.setString(13, A.A.UserID);
                 _insert.setString(14, A.A.WsID);
-                _insert.setString(15, BROWSER);
+                _insert.setString(15, BROWSER + HEADLESS);
                 _insert.setString(16,  "= Job is running... ===\r\n" + "");
                 _insert.setString(17, "Running");
                 _insert.setString(18, "None");
@@ -1759,7 +1762,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 _update.setString(12, r_type);
                 _update.setString(13, A.A.UserID);
                 _update.setString(14, A.A.WsID);
-                _update.setString(15, BROWSER);
+                _update.setString(15, BROWSER + HEADLESS);
                 _update.setString(16, LOG);
                 _update.setString(17, "Scope: " + SCOPE);
                 _update.setString(18, EX);
@@ -2245,8 +2248,12 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     //<editor-fold defaultstate="collapsed" desc="Background Workers: Web Driver > Execution > Reports">
     private String StartWebDriver() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        if(_Headless){
+            HEADLESS = " - headless";           
+        } else{
+            HEADLESS = "";
+        }
         try {
-
             txtLog.append( "= CWD: " + A.A.CWD + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             
@@ -2375,7 +2382,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
-                EX = "AP3 " + env + ", v" + Ver + ", Browser: " + BROWSER +
+                EX = "AP3 " + env + ", v" + Ver + ", Browser: " + BROWSER  + HEADLESS +
                     " - Steps: " + (_p + _f +_w + _i) + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                     + EX;
@@ -2502,6 +2509,20 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }
+        if(_Brand_new){
+            SCOPE += ", New Brand";
+            ParentTest = HtmlReport.createTest("New Brand"); 
+            AP3_brand_new BR = new AP3_New.AP3_brand_new(AP3_GUI.this);
+            BR.run(_Site_new); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+        }   
+        if(_Bulk_apply){
+            SCOPE += ", New Brand";
+            ParentTest = HtmlReport.createTest("New Brand"); 
+            AP3_bulk_apply BR = new AP3_New.AP3_bulk_apply(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+        }        
     }
     private void BW1_Done(boolean GUI) throws Exception{
         DD = Duration.between(run_start, Instant.now());
@@ -2561,7 +2582,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             Report(false);
             String MSG = "AP3_" + env + " Excel Automation report - " + Report_Date +  
                 "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: *" + A.A.UserID + "*\r\n" +
-                "Browser: *" + BROWSER + "*" + "\r\n" +        
+                "Browser: *" + BROWSER  + HEADLESS + "*" + "\r\n" +        
                 "Scope: " + SCOPE + "\r\n" +
                 "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
                 "Steps: " + (_p + _f +_w + _i) + ", Passed: " + _p + ", *Failed: " + _f + "*, Warnings: " + _w + ", Info: " + _i;
@@ -5291,7 +5312,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         CloseableHttpClient httpclient = HttpClients.createDefault(); 
         try {
             HttpGet httpget = new HttpGet(URL); 
-            httpget.setHeader("Authorization",  "Bearer " + A.A.AP3_TKN);
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 String Msg = response.getStatusLine().getReasonPhrase();

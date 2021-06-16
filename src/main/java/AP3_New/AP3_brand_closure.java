@@ -20,7 +20,7 @@ class AP3_brand_closure extends AP3_GUI{
         TZone = a.TZone;
     }    
     protected void run() throws InterruptedException, Exception { 
-        String API_Responce_Body = "";
+        String API_Response_Body = "";
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
@@ -139,8 +139,15 @@ class AP3_brand_closure extends AP3_GUI{
                     if (FAIL) { return; }   
  Thread.sleep(60000); // Wait for data propagation  - takes too long !!!!               
                 Call_API("Call 'calendar' API", BaseAPI + "/calendar/" + BrandID, true, ParentTest, "no_jira" );
-                API_Responce_Body = t;
-                Calendar_API_Closure("Validate New Default Closure in 'calendar' API", API_Responce_Body, "Auto Default Date Closure " + New_ID, true, ParentTest, "no_jira" );
+                if(t.startsWith("{")){
+                    API_Response_Body = t;               
+                }else{
+                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/calendar/" + BrandID+ "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                    "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID, false, ParentTest.createNode("API Responce Error"));
+                    return;
+                }
+                Calendar_API_Closure("Validate New Default Closure in 'calendar' API", API_Response_Body, "Auto Default Date Closure " + New_ID, true, ParentTest, "no_jira" );
 
                 Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]", ParentTest, "no_jira"); 
                     if (FAIL) { return; } 
@@ -152,8 +159,16 @@ class AP3_brand_closure extends AP3_GUI{
                 Thread.sleep(500);      
  Thread.sleep(60000); // Wait for data propagation  - takes too long !!!!
                 Call_API("Call 'calendar' API", BaseAPI + "/calendar/" + BrandID, true, ParentTest, "no_jira" );
-                API_Responce_Body = t;
-                Calendar_API_Closure("Validate Default Closure Removed in 'calendar' API", API_Responce_Body, "Auto Default Date Closure " + New_ID, false, ParentTest, "no_jira" );          
+                API_Response_Body = t;
+                if(t.startsWith("{")){
+                    API_Response_Body = t;               
+                }else{
+                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/calendar/" + BrandID+ "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                    "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID, false, ParentTest.createNode("API Responce Error"));
+                    return;
+                }                
+                Calendar_API_Closure("Validate Default Closure Removed in 'calendar' API", API_Response_Body, "Auto Default Date Closure " + New_ID, false, ParentTest, "no_jira" );          
                
                 // ======= Future Date / Time - Next Month 1st day   
                 Element_By_Path_Click("Click 'Add closure'", "xpath", "//button[contains(@class, 'ml-0 pl-0 v-btn v-btn--flat theme--light')]", ParentTest, "no_jira"); 
@@ -178,7 +193,7 @@ class AP3_brand_closure extends AP3_GUI{
 //                mR = String.format("%02d",(int)(Math.random()*59));
 //                New_To = hR + ":" + mR + "PM"; // 12:45 AM
 //                Element_By_Path_Text_Enter("Enter '...will re-open' time", "xpath", "//input[@type='time'][2]", New_To, false, ParentTest, "no_jira");             
-//                    //if (FAIL) { return;}     // ^^^ Enter Text within 1:00-4:59 PM      ==============   Doesn;t work ?????              
+//                    //if (FAIL) { return;}     // ^^^ Enter Text within 1:00-4:59 PM      ==============   Doesn't work ?????              
 
                 Element_By_Path_Text_Enter("Enter Closure Reason", "css", "[aria-label='Closure Reason']", "Auto Future Closure " + New_ID, false, ParentTest, "no_jira"); 
                     if (FAIL) { return;}
@@ -196,8 +211,16 @@ class AP3_brand_closure extends AP3_GUI{
                     }
  Thread.sleep(60000); // Wait for data propagation - takes too long !!!!
                 Call_API("Call 'calendar' API", BaseAPI + "/calendar/" + BrandID, true, ParentTest, "no_jira" );
-                API_Responce_Body = t;
-                Calendar_API_Closure("Validate New Future Closure in 'calendar' API", API_Responce_Body, "Auto Future Closure " + New_ID, true, ParentTest, "no_jira" );
+                API_Response_Body = t;
+                if(t.startsWith("{")){
+                    API_Response_Body = t;               
+                }else{
+                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/calendar/" + BrandID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                    "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID, false, ParentTest.createNode("API Responce Error"));
+                    return;
+                }                
+                Calendar_API_Closure("Validate New Future Closure in 'calendar' API", API_Response_Body, "Auto Future Closure " + New_ID, true, ParentTest, "no_jira" );
 
                 Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]", ParentTest, "no_jira"); 
                     if (FAIL) { return; } 
@@ -209,8 +232,16 @@ class AP3_brand_closure extends AP3_GUI{
                 Thread.sleep(500);       
  Thread.sleep(60000); // Wait for data propagation - takes too long !!!!
                 Call_API("Call 'calendar' API", BaseAPI + "/calendar/" + BrandID, true, ParentTest, "no_jira" );
-                API_Responce_Body = t;
-                Calendar_API_Closure("Validate Future Closure Removed in 'calendar' API", API_Responce_Body, "Auto Future Closure " + New_ID, false, ParentTest, "no_jira" );              
+                API_Response_Body = t;
+                if(t.startsWith("{")){
+                    API_Response_Body = t;               
+                }else{
+                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/calendar/" + BrandID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                    "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID, false, ParentTest.createNode("API Responce Error"));
+                    return;
+                }                
+                Calendar_API_Closure("Validate Future Closure Removed in 'calendar' API", API_Response_Body, "Auto Future Closure " + New_ID, false, ParentTest, "no_jira" );              
             }
         }
     }  

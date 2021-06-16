@@ -28,12 +28,12 @@ class DL_metrics_selection extends DL_GUI {
                 Element_Text("Date Items", L1.get(i), ParentTest, "no_jira");                           
             }
         }  
-        Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
+        Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "//span[contains(text(),'arrow_right')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-        Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
+        Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "//span[contains(text(),'arrow_right')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}
         if(t.equalsIgnoreCase("arrow_right")) {
-            Element_By_Path_Click("Click 'arrow_right' > Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira");  
+            Element_By_Path_Click("Click 'arrow_right' > Expand the Side bar'", "xpath", "//span[contains(text(),'arrow_right')]", ParentTest, "no_jira");  
             if (FAIL) { return;} 
         }
         
@@ -86,12 +86,12 @@ class DL_metrics_selection extends DL_GUI {
             if (FAIL) { return;}                             
         Thread.sleep(500);
         Page_URL("Foodbuy Login page URL", ParentTest, "no_jira");     
-        Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
+        Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "//span[contains(text(),'arrow_right')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} // [1]/span > [2]/span after 'Apply' buttorn added ([1]/span)
-        Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira"); 
+        Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "//span[contains(text(),'arrow_right')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}
         if(t.equalsIgnoreCase("arrow_right")) {
-            Element_By_Path_Click("Click 'arrow_right' > Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira");  
+            Element_By_Path_Click("Click 'arrow_right' > Expand the Side bar'", "xpath", "//span[contains(text(),'arrow_right')]", ParentTest, "no_jira");  
             if (FAIL) { return;} 
         } 
         List_L0("Metrics Subheader Count", "xpath", "//ul[contains(@class, 'MuiList-subheader')]", ParentTest, "no_jira");              
