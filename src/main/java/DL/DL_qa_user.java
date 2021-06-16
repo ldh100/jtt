@@ -13,16 +13,16 @@ class DL_qa_user extends DL_GUI {
     // Error: User Initialization Fail. Please Try Again    <<<< How to deal with That??   DEBUG
     protected void run(String User_ID, String Metric, String Restricted, String Period, String Val, String Location_Filters, String Item_Filters, String Kpi, String Source) throws InterruptedException, Exception {
 
-        Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira");
+        Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "//span[contains(text(),'arrow_right')]", ParentTest, "no_jira");
         if (FAIL) {
             return;
         }
-        Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira");
+        Element_By_Path_Text("Get Side bar arrow text/direction", "xpath", "//span[contains(text(),'arrow_right')]", ParentTest, "no_jira");
         if (FAIL) {
             return;
         }
         if (t.equalsIgnoreCase("arrow_right")) {
-            Element_By_Path_Click("Click 'arrow_right' > Expand the Side bar'", "xpath", "(//span[@class='MuiButton-label'])[2]/span", ParentTest, "no_jira");
+            Element_By_Path_Click("Click 'arrow_right' > Expand the Side bar'", "xpath", "//span[contains(text(),'arrow_right')]", ParentTest, "no_jira");
             if (FAIL) {
                 return;
             }

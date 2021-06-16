@@ -20,7 +20,7 @@ class AP3_brand extends AP3_GUI{
         TZone = a.TZone;
     }    
     protected void run() throws InterruptedException, Exception { 
-        String API_Responce_Body = "";
+        String API_Response_Body = "";
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
@@ -127,8 +127,15 @@ class AP3_brand extends AP3_GUI{
                 if (FAIL) { return;}  
                 if(t.equals("Hidden in App")){ 
                     Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true, ParentTest, "no_jira" );
-                    API_Responce_Body = t;
-                    API_Body_Contains("Location Group API - find Hidden Brand", API_Responce_Body, BrandID, false, ParentTest, "no_jira");        
+                    if(t.startsWith("{")){
+                        API_Response_Body = t;               
+                    }else{
+                        EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                        "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+                        return;
+                    }
+                    API_Body_Contains("Location Group API - find Hidden Brand", API_Response_Body, BrandID, false, ParentTest, "no_jira");        
                         if (FAIL) { return;} 
                     Brand_Status_Click("Status Click to 'Display'", L2.get(T_Index), ParentTest, "no_jira");  // was L1 ^^^
                         if (FAIL) { return;}
@@ -137,8 +144,15 @@ class AP3_brand extends AP3_GUI{
                         if (FAIL) { return;}
                     Thread.sleep(500);     
                     Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true, ParentTest, "no_jira");
-                    API_Responce_Body = t;
-                    API_Body_Contains("Location Group API - find Displayed Brand", API_Responce_Body, BrandID, true, ParentTest, "no_jira");        
+                    if(t.startsWith("{")){
+                        API_Response_Body = t;               
+                    }else{
+                        EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                        "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+                        return;
+                    }
+                    API_Body_Contains("Location Group API - find Displayed Brand", API_Response_Body, BrandID, true, ParentTest, "no_jira");        
                         if (FAIL) { return;}     
                 } else {
                     Brand_Status_Click("Status Click to 'Hide'", L2.get(T_Index), ParentTest, "no_jira");  
@@ -148,16 +162,30 @@ class AP3_brand extends AP3_GUI{
                         if (FAIL) { return;}
                     Thread.sleep(500);     
                     Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true, ParentTest, "no_jira");     
-                    API_Responce_Body = t;
-                    API_Body_Contains("Location Group API - find Hidden Brand", API_Responce_Body, BrandID, false, ParentTest, "no_jira");        
+                    if(t.startsWith("{")){
+                        API_Response_Body = t;               
+                    }else{
+                        EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                        "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+                        return;
+                    }
+                    API_Body_Contains("Location Group API - find Hidden Brand", API_Response_Body, BrandID, false, ParentTest, "no_jira");        
                         if (FAIL) { return;}   
                     Brand_Status_Click("Status Click to 'Display'", L2.get(T_Index), ParentTest, "no_jira");  
                         if (FAIL) { return;}
                     Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'v-progress-circular')]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}
                     Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,  ParentTest, "no_jira" );
-                    API_Responce_Body = t;
-                    API_Body_Contains("Location Group API - find Displayed Brand", API_Responce_Body, BrandID,true, ParentTest, "no_jira");        
+                    if(t.startsWith("{")){
+                        API_Response_Body = t;               
+                    }else{
+                        EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1"+ "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                        "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+                        return;
+                    }
+                    API_Body_Contains("Location Group API - find Displayed Brand", API_Response_Body, BrandID,true, ParentTest, "no_jira");        
                         if (FAIL) { return;}     
                 }
         }            
@@ -243,8 +271,15 @@ class AP3_brand extends AP3_GUI{
 //                            if (FAIL) { return;}    
                     } else {
                         Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true, ParentTest, "no_jira" );
-                        API_Responce_Body = t;
-                        Brand_API_Is("Brand API Pickup Supported",  API_Responce_Body, "pickup_supported", false, ParentTest, "no_jira" );
+                        if(t.startsWith("{")){
+                            API_Response_Body = t;               
+                        }else{
+                            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + BrandID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + BrandID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+                            return;
+                        }
+                        Brand_API_Is("Brand API Pickup Supported",  API_Response_Body, "pickup_supported", false, ParentTest, "no_jira" );
                         Find_Text("Find '...enable Pickup' text", "to enable Pickup", true,ParentTest, "no_jira"); 
                             if (FAIL) { return; }
                     }
@@ -253,8 +288,15 @@ class AP3_brand extends AP3_GUI{
                     Text_Found("Is Delivery Enabled?", "Delivery is not enabled", ParentTest, "no_jira"); 
                     if(t.equals("Not Found")){
                         Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true, ParentTest, "no_jira" );
-                        API_Responce_Body = t;
-                        Brand_API_Is("Brand API Delivery Supported", API_Responce_Body, "delivery_supported", true, ParentTest, "no_jira" );
+                        if(t.startsWith("{")){
+                            API_Response_Body = t;               
+                        }else{
+                            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + BrandID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + BrandID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+                            return;
+                        }
+                        Brand_API_Is("Brand API Delivery Supported", API_Response_Body, "delivery_supported", true, ParentTest, "no_jira" );
                         if("DH".equals(platform)){
                             Find_Text("Find 'Timeslot Type' text", "Timeslot Type", true,ParentTest, "no_jira"); 
                         }else{
@@ -292,8 +334,15 @@ class AP3_brand extends AP3_GUI{
                             if (FAIL) { return;}
                     } else {
                         Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true, ParentTest, "no_jira" );
-                        API_Responce_Body = t;
-                        Brand_API_Is("Brand API Delivery Supported", API_Responce_Body, "delivery_supported", false, ParentTest, "no_jira" );
+                        if(t.startsWith("{")){
+                            API_Response_Body = t;               
+                        }else{
+                            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + BrandID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + BrandID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+                            return;
+                        }
+                        Brand_API_Is("Brand API Delivery Supported", API_Response_Body, "delivery_supported", false, ParentTest, "no_jira" );
                         Find_Text("Find '...setup delivery' text", "to setup delivery", true, ParentTest, "no_jira"); 
                             if (FAIL) { return; }
 //                        List_Child_E1_By_Path("Find 'Yes' button", L1, i, "xpath", ".//div[contains(@class, 'Option-Left-Not-Selected-Blue-White')]", ParentTest, "no_jira"); 
@@ -455,8 +504,15 @@ class AP3_brand extends AP3_GUI{
                     Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}
                     Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true, ParentTest, "no_jira" );
-                    API_Responce_Body = t;               
-                    Brand_API_Hours("Brand API - new Service Hours", API_Responce_Body, "Pickup - day 0", New_From, New_To, true, ParentTest, "no_jira"); 
+                    if(t.startsWith("{")){
+                        API_Response_Body = t;               
+                    }else{
+                        EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + BrandID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                        "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + BrandID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+                        return;
+                    }          
+                    Brand_API_Hours("Brand API - new Service Hours", API_Response_Body, "Pickup - day 0", New_From, New_To, true, ParentTest, "no_jira"); 
                         if (FAIL) { return;} // ^^ Check Brand API > Pickup / Delivery / others?                 ^^ "Delivery - day X"
                     // Click Sunday Opens >
                     // Enter Text 11:45 AM
@@ -548,8 +604,15 @@ class AP3_brand extends AP3_GUI{
                     Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}
                     Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true, ParentTest, "no_jira" );
-                    API_Responce_Body = t;                 
-                    Brand_API_Hours("Brand API - new Delivery Hours", API_Responce_Body, "Delivery - day 0", New_From, New_To,true, ParentTest, "no_jira"); 
+                    if(t.startsWith("{")){
+                        API_Response_Body = t;               
+                    }else{
+                        EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + BrandID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                        "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + BrandID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+                        return;
+                    }                
+                    Brand_API_Hours("Brand API - new Delivery Hours", API_Response_Body, "Delivery - day 0", New_From, New_To,true, ParentTest, "no_jira"); 
                         if (FAIL) { return;} // ^^ Check Brand API > Pickup / Delivery / others?                         ^^ "Delivery - day X"
 
                     // =================   Refresh Page after Save and Select Service Tab
@@ -567,76 +630,8 @@ class AP3_brand extends AP3_GUI{
                         Day_Snedule("Delivery Week Day Schedule", L1.get(j), ParentTest, "no_jira");             
                             if (FAIL) { return;}
                     }    
-                    To_Top("Move to page Top", ParentTest, "no_jira");             
-                        if (FAIL) { return;}
                 } 
             }    
-//          <editor-fold defaultstate="collapsed" desc="Brand Closure > Moved to AP3_brand_closure">
-//            } else if (Tab_Name.toLowerCase().contains("closure")) { // ==== Covered in AP3_brand_closure
-//                Element_By_Path_Click("Click 'Brand Closure'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", ParentTest, "no_jira");
-//                    if (FAIL) { return;}
-//                Page_URL("Closure page URL", ParentTest, "no_jira");
-//                    if (FAIL) { return;}
-//                //..../brand/rjEZyoky4rUZ1ZqEyP8RFAEqOzg2RQcwqQlBX0vaF8XBo3RlkdsKg0aL9Dw2FZ9QKRAGk6S761K/closure
-////                List_L1("Closure rows Count", "xpath", "//div[contains(@class, 'layout flex xs12 nowrap align-center')]", ParentTest, "no_jira");
-////                    if (FAIL) { return;}
-//                Find_Text("Find 'Add closure' text", "Add Station Closure", true,ParentTest, "no_jira");
-//                    if (FAIL) { return; }
-//                Element_By_Path_Click("Click 'Add closure'", "xpath", "//button[contains(@class, 'ml-0 pl-0 v-btn v-btn--flat theme--light')]", ParentTest, "no_jira");
-//                    if (FAIL) { return; }
-//                List_L1("Closure rows Count", "xpath", "//div[contains(@class, 'layout flex xs12 nowrap align-center')]", ParentTest, "no_jira");
-//                    if (FAIL) { return;}
-//                    for (int j = 0; j < L1.size(); j++) {
-//                        Element_Text("Closure Data Row Text", L1.get(j), ParentTest, "no_jira");
-//                            if (FAIL) { return;}
-//                    }
-//                Find_Text("Find '..Reason' text", "Closure Reason", true,ParentTest, "no_jira");
-//                    if (FAIL) { return; }
-//                Find_Text("Find 'Remove' text", "REMOVE", true,ParentTest, "no_jira");
-//                    if (FAIL) { return; }
-//                Find_Text("Find 'Save' text", "Save", true,ParentTest, "no_jira");
-//                    if (FAIL) { return; }
-//                Element_By_Path_Click(" 'SAVE' Click", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", ParentTest, "no_jira");
-//                    if (FAIL) { return; }
-//                Element_By_Path_Text("Find 'required' text", "xpath", "//div[contains(@class,'v-messages__message')]",ParentTest, "no_jira");
-//                    if (FAIL) { return; }
-//                Element_By_Path_Input_Select_Clear("Clear Closure Reason", "css", "[aria-label='Closure Reason']", ParentTest, "no_jira");
-//                    if (FAIL) { return;}
-//
-//                Element_By_Path_Text_Enter("Enter Closure Reason", "css", "[aria-label='Closure Reason']", "Auto Closure " + New_ID, false, ParentTest, "no_jira");
-//                    if (FAIL) { return;}
-//                Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", ParentTest, "no_jira");
-//                    if (FAIL) { return; }
-//                Thread.sleep(500);
-//                Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
-//                    if (FAIL) { return;}
-//                List_L1("Closure rows Count", "xpath", "//div[contains(@class, 'layout flex xs12 nowrap align-center')]", ParentTest, "no_jira");
-//                    if (FAIL) { return;}
-//                    for (int j = 0; j < L1.size(); j++) {
-//                        Element_Text("Closure Data Row Text", L1.get(j), ParentTest, "no_jira");
-//                            if (FAIL) { return;}
-//                    }
-//                Element_By_Path_Text_Select_Copy("Saved Closure Reason", "xpath", "//input[@aria-label='Closure Reason']",ParentTest, "no_jira");
-//                    if (FAIL) { return; }
-//                Element_By_Path_Text("Find 'closure under effect...'", "className", "Temporarily-closed-text", ParentTest, "no_jira");
-//                    if (FAIL) { return; }
-//                Call_API("Call 'calendar' API", BaseAPI + "/calendar/" + BrandID, true, ParentTest, "no_jira" );
-//                API_Responce_Body = t;
-//                Calendar_API_Closure("Validate Closure in 'calendar' API", API_Responce_Body, "Auto Closure " + New_ID, true, ParentTest, "no_jira" );
-//
-//                Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]", ParentTest, "no_jira");
-//                    if (FAIL) { return; }
-//                Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", ParentTest, "no_jira");
-//                    if (FAIL) { return; }
-//                Thread.sleep(500);
-//                Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", ParentTest, "no_jira");
-//                    if (FAIL) { return;}
-//
-//                Call_API("Call 'calendar' API", BaseAPI + "/calendar/" + BrandID, true, ParentTest, "no_jira" );
-//                API_Responce_Body = t;
-//                Calendar_API_Closure("Validate Closure in 'calendar' API", API_Responce_Body, "Auto Closure " + New_ID, false, ParentTest, "no_jira" );
-//            }
-//        </editor-fold>
-        }
+       }
     }  
 }

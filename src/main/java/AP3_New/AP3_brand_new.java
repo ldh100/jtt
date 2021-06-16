@@ -1,7 +1,6 @@
 package AP3_New;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Calendar;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -75,7 +74,7 @@ class AP3_brand_new extends AP3_GUI{
             if (FAIL) { return;} 
         Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + ADD_TO_SITE + "']",  ParentTest, "no_jira");    
             if (FAIL) { return;} 
-//Thread.sleep(500);           
+        
         // </editor-fold> 
 
         // <editor-fold defaultstate="collapsed" desc="Add Station">    
