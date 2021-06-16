@@ -15,9 +15,18 @@ import static AP3.AP3.New_ID;
 import static AP3.AP3.SECTOR;
 import static AP3.AP3.SITE;
 import static AP3.AP3.url;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+import static org.joda.time.format.ISODateTimeFormat.date;
 import org.json.JSONObject;
 /**
  *
@@ -46,16 +55,20 @@ public class AP3_password {
         static String passWord7="DhruvQA7"; // At least 9 characters
         
         
-        
         //milo.a@mailsac.com Admin
         //milo.d@mailsac.om Delivery Manager
         //milo.sm@mailsac.com Site Manager
         //Password is Test1234
     
     public static void run() throws InterruptedException { 
+                
+       
+  
+                   
                                   
         //**AUT-845 After creating an Admin user, sign up to Ap3 with the new user and login to ap3 with the new user **
         
+        /*
         clickNewUser();            
         //Selecting role as admin and creating a new admin user
         createNewAdminUser();        
@@ -147,11 +160,13 @@ public class AP3_password {
         //logout();
         //ap3LoginPage();
         
+        */
         
         // AUT-847 After creating CDL delivery manager user, sign up to Ap3 with the new user and login to ap3 with the new user **
         
        // Admin_IDLogin();  
         
+       /*
         clickNewUser();
         createNewCDLDeliveryManager();
         logout();
@@ -162,8 +177,15 @@ public class AP3_password {
         clickEmailInviteToLogin();        
         Thread.sleep(1000); 
                
-       
+       Set<String> windows = d1.getWindowHandles();
+        Iterator<String> it = windows.iterator();
+        String parentId = it.next();
+        String childId = it.next();
+        String childThreeId = it.next();
+        Thread.sleep(1000);                
+        d1.switchTo().window(childThreeId);
         
+        /*
          windows = d1.getWindowHandles();
          it = windows.iterator();
          parentId = it.next();
@@ -172,7 +194,10 @@ public class AP3_password {
         
         //d1.switchTo().window(childId).close();
         //d1.switchTo().window(parentId).close();        
-        d1.switchTo().window(childThreeId);                                           
+        d1.switchTo().window(childThreeId);  
+        */
+        
+       /*
         //Scenario 1: CDL Delivery Manager: At least 9 characters requirement is not fulfilled
         nineCharacters();        
         //Scenario 2: CDL Delivery Manager: An uppercase character requirement is not fulfilled
@@ -201,6 +226,7 @@ public class AP3_password {
         enterMailnator();
         clickEmailResetPassword();
         Thread.sleep(5000);
+        
          windows = d1.getWindowHandles();
          it = windows.iterator();
          parentId = it.next();
@@ -240,7 +266,7 @@ public class AP3_password {
         Thread.sleep(1000);
         Admin_IDLogin(); 
         SearchUser();
-        U_ID=getU_ID();
+        String U_ID=getU_ID();
         click_User_Inactive();
         getUser_API(U_ID);        
         click_User_Active();
@@ -251,12 +277,12 @@ public class AP3_password {
         TWeb.Refresh("Refresh", "no_jira"); 
         verify_User_Deleted_API(U_ID);
         
-        //logout(); 
-        
+        logout(); 
+        */
          //AUT-846: After creating Site manager user, sign up to Ap3 with the new user and login to ap3 with the new user //**
         
-        // Admin_IDLogin();
-        
+         //Admin_IDLogin();
+        /*
         clickNewUser();
         createNewSiteManager();
         logout();
@@ -278,16 +304,17 @@ public class AP3_password {
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click here to set your password", "xpath","//a[contains(text(),'here')]", "no_jira");
             if (FAIL) { return;}
         
-        Thread.sleep(1000);  
+        Thread.sleep(1000);        
         
-        /*
         Set<String> windows = d1.getWindowHandles();
         Iterator<String> it = windows.iterator();
         String parentId = it.next();
         String childId = it.next();
         String childThreeId = it.next();
-        */
+        Thread.sleep(1000);                
+        d1.switchTo().window(childThreeId);
         
+        /*
         windows = d1.getWindowHandles();
          it = windows.iterator();
          parentId = it.next();
@@ -296,9 +323,9 @@ public class AP3_password {
         //d1.switchTo().window(childId).close();
         //d1.switchTo().window(parentId).close();        
         d1.switchTo().window(childThreeId);     
+        */
         
-        
-        
+        /*
         //Scenario 1: Site Manager: At least 9 characters requirement is not fulfilled
         nineCharacters();        
         //Scenario 2: Site Manager: An uppercase character requirement is not fulfilled
@@ -320,9 +347,9 @@ public class AP3_password {
         ap3LoginPage();
         cdlSiteUserLogin();            
         logout(); 
-        
+        /*
         //** AUT-843 As a Site Manager, I can reset my password and login in to Ap3 with the new password 
-        
+        /*
         forgotPassWord();
         
         enterMailnator();
@@ -367,7 +394,7 @@ public class AP3_password {
         Thread.sleep(1000);
         Admin_IDLogin(); 
         SearchUser();
-         U_ID=getU_ID();
+         String U_ID=getU_ID();
         click_User_Inactive();
         getUser_API(U_ID);        
         click_User_Active();
@@ -378,7 +405,7 @@ public class AP3_password {
          TWeb.Refresh("Refresh", "no_jira"); 
         verify_User_Deleted_API(U_ID);
         logout();
-        
+        */
         //oldUsersLogin();
         
         //AUT-844 As an existing user (admin or site manager or delivery manager), I can still use my old password (rules) to sign in
@@ -390,9 +417,9 @@ public class AP3_password {
         click_User_Inactive();
         getUsers_API(U_ID);        
         click_User_Active();
-        getUsers_API(U_ID);*/
+        getUsers_API(U_ID);
         
-        
+        */
             } //Run time closing bracket so add all the methods before this..      
     
     
@@ -404,6 +431,8 @@ public class AP3_password {
      *
      * @throws InterruptedException
      */
+
+   
     private static void ap3LoginPage() throws InterruptedException{
         _t++; Thread.sleep((long) sleep); TWeb.Navigate_to_URL("Navigate to", url,"no_jira");             
             if (FAIL) { return;}
@@ -435,6 +464,7 @@ public class AP3_password {
     */
     
     //AUT-840
+
     private static void forgotPassWord() throws InterruptedException{        
         String eMail1="testautomation598@mailinator.com";
         //String eMail2="testautomation895@mailinator.com";
@@ -494,7 +524,7 @@ public class AP3_password {
     // Click on email "You have received a invite to log into the Admin Panel!"
     private static void clickEmailInviteToLogin() throws InterruptedException{
         
-        TWeb.Refresh("Refresh", "no_jira");   
+        //TWeb.Refresh("Refresh", "no_jira");   
         _t++; Thread.sleep((long) sleep); TWeb.Wait_Element_Visible("Click on the email", "xpath","(//*[contains(text(), 'You have received a invite to log into the Admin Panel!')])[1]", "no_jira");            
         TWeb.Refresh("Refresh", "no_jira"); 
         Thread.sleep(30000);
@@ -922,7 +952,9 @@ public class AP3_password {
                 if (FAIL) { return;}
             } 
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'Inactive'", "xpath", "//div[@class='Option-Right-Not-Selected-Blue-Red']", "no_jira"); 
-            if (FAIL) { return; }    
+            if (FAIL) { return; }  
+         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+            if (FAIL) { return;}    
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Inactive Highlighted in Red", "xpath", "//div[@class='Subtitle-2-White-High-Emphasis-Center']", "no_jira");
             if (FAIL) { return;}
         TWeb.Refresh("Refresh", "no_jira");
@@ -949,7 +981,9 @@ public class AP3_password {
                 if (FAIL) { return;}
             } 
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'active'", "xpath", "//div[@class='Option-Left-Not-Selected-Blue-Red']", "no_jira"); 
-            if (FAIL) { return; }    
+            if (FAIL) { return; } 
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
+            if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Active Highlighted in Blue", "xpath", "//div[@class='Subtitle-2-White-High-Emphasis-Center']", "no_jira");
             if (FAIL) { return;}
         Thread.sleep(5000);
@@ -1196,6 +1230,7 @@ public class AP3_password {
           }                             /* Verify if user is active */
        //meta = json.getJSONObject("is");   
        
+    
        
        System.err.println("Value "+checkdisabled);
        
@@ -1229,6 +1264,11 @@ public class AP3_password {
           _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "User is not deleted yet" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
          }
            }
+           
+         
+           
+          
+
     
 }
 
