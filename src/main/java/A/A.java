@@ -72,6 +72,8 @@ public class A extends javax.swing.JFrame {
         Menu_UI_Viewer = new javax.swing.JMenu();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         Menu_Swagger = new javax.swing.JMenu();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        Menu_Web_Tools = new javax.swing.JMenu();
         Menu_Android = new javax.swing.JMenu();
         Menu_iOS = new javax.swing.JMenu();
         Menu_C360 = new javax.swing.JMenu();
@@ -311,6 +313,18 @@ public class A extends javax.swing.JFrame {
             }
         });
         Menu_Tools.add(Menu_Swagger);
+        Menu_Tools.add(jSeparator4);
+
+        Menu_Web_Tools.setBorder(null);
+        Menu_Web_Tools.setText("Base64 decode - Other Tools");
+        Menu_Web_Tools.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_Web_Tools.setName("Swagger"); // NOI18N
+        Menu_Web_Tools.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_Web_ToolsMouseClicked(evt);
+            }
+        });
+        Menu_Tools.add(Menu_Web_Tools);
 
         MenuBar.add(Menu_Tools);
 
@@ -861,6 +875,15 @@ public class A extends javax.swing.JFrame {
             Menu_AP3_New.setVisible(true);
         }
     }//GEN-LAST:event_Menu_AP3_NewMouseClicked
+
+    private void Menu_Web_ToolsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_Web_ToolsMouseClicked
+         try {
+            java.awt.Desktop.getDesktop().browse(URI.create("https://www.base64decode.org/"));
+        }
+        catch (IOException ex) {
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Menu_Web_ToolsMouseClicked
     //</editor-fold>
 
     public static void main(String args[]) {
@@ -1472,6 +1495,10 @@ public class A extends javax.swing.JFrame {
             rs.next();
             C1_Zip = new String(Base64.getDecoder().decode(rs.getString(1)));
             
+            rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'C1_Name'");
+            rs.next();
+            C1_Name = new String(Base64.getDecoder().decode(rs.getString(1)));            
+            
             conn.close();
             Logger.getLogger(A.class.getName()).log(Level.INFO, "Keys Loaded");
         } catch (SQLException ex) {
@@ -1498,6 +1525,7 @@ public class A extends javax.swing.JFrame {
     public static String C1_Cvv = "";
     public static String C1_Exp = "";
     public static String C1_Zip = "";
+    public static String C1_Name = "";
     
     public static final DecimalFormat df = new DecimalFormat("#.##");
     public static final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
@@ -1601,9 +1629,11 @@ public class A extends javax.swing.JFrame {
     private javax.swing.JMenu Menu_WO_DE;
     private javax.swing.JMenu Menu_WO_PR;
     private javax.swing.JMenu Menu_WO_ST;
+    private javax.swing.JMenu Menu_Web_Tools;
     private javax.swing.JMenu Menu_iOS;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>   
 }
