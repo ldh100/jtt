@@ -17,17 +17,19 @@ import org.openqa.selenium.WebElement;
 
 class AP3_bulk_apply extends AP3_GUI{
     protected AP3_bulk_apply (AP3_GUI a) throws InterruptedException, Exception {
-        ADMIN_ID = a.ADMIN_ID;
-        ADMIN_PW = a.ADMIN_PW;
-        url = a.url;
         d1 = a.d1;
+        url = a.url;
         loadTimeout = a.loadTimeout;
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
-        
-        AP3_TKN = a.AP3_TKN;
-        
+        env = a.env;
         BaseAPI = a.BaseAPI;
+        
+        ADMIN_ID = a.ADMIN_ID;
+        ADMIN_PW = a.ADMIN_PW;
+
+        AP3_TKN = a.AP3_TKN;
+
         New_ID = a.New_ID;
         app = a.app;
         SITE = a.SITE;
