@@ -8,13 +8,6 @@ import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-    /*
-    For Staging:
-    IN JTT, SELECT (APPLICATION: Boost, SITE: Sites Bulk Apply)
-    For Production:
-    IN JTT, SELECT (APPLICATION: Boost, SITE: QA University, BRAND: bulk apply test station (brandId:okYqgJ4...))
-    */
-
 class AP3_bulk_apply extends AP3_GUI{
     protected AP3_bulk_apply (AP3_GUI a) throws InterruptedException, Exception {
         ADMIN_ID = a.ADMIN_ID;
@@ -41,8 +34,6 @@ class AP3_bulk_apply extends AP3_GUI{
         _All_data = a._All_data;
         TZone = a.TZone;
     } 
-    
-    
     protected void run() throws InterruptedException, Exception {
         String API_Response_Body = "";
         JSONObject json;
@@ -63,6 +54,7 @@ class AP3_bulk_apply extends AP3_GUI{
             if (FAIL) { return;}
         Wait_For_Element_By_Path_InVisibility("Wait for Spinner", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");
             if (FAIL) { return;}
+            Thread.sleep(500);
         List_L1("List of Items", "xpath", "//table[contains(@class,'v-table')]//tbody/tr", ParentTest, "no_jira");
             if (FAIL) { return;}
         String[] List_of_Item_Prices_Before_Change = new String[L1.size()];
@@ -72,7 +64,7 @@ class AP3_bulk_apply extends AP3_GUI{
         //open Local Menu on new tab
         Open_Switch_to_2nd_Tab("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(10000);
+        Thread.sleep(5000);
         Element_By_Path_Click("Click > Category: Sides", "xpath", "//div[contains(text(),'Sides')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Click > Item Set: Soup", "xpath", "//div[contains(text(),'Soup')]", ParentTest, "no_jira");
@@ -88,19 +80,19 @@ class AP3_bulk_apply extends AP3_GUI{
                 menus = new JSONArray();
                 menus = json.getJSONArray("menus");
                 for (int i = 0; i < menus.length(); i++) {
-                    JSONObject menu = menus.getJSONObject(i);
-                    String loc_brand = "";
-                    if (menu.has("location_brand") && menu.has("label")) {
-                        loc_brand = menu.getString("location_brand");
-                        if (loc_brand.equals(BrandID)) {
-                            JSONObject label = menu.getJSONObject("label");
-                            menuName = label.getString("en");
-                            if (menuName.equals("Sides")) {
-                                MenuID = menu.getString("id"); 
-                            }
-                        }  
-                    }
-                }  
+                JSONObject menu = menus.getJSONObject(i);
+                String loc_brand = "";
+                if (menu.has("location_brand") && menu.has("label")) {
+                    loc_brand = menu.getString("location_brand");
+                    if (loc_brand.equals(BrandID)) {
+                        JSONObject label = menu.getJSONObject("label");
+                        menuName = label.getString("en");
+                        if (menuName.equals("Sides")) {
+                            MenuID = menu.getString("id"); 
+                        }
+                    }  
+                }
+            }  
             }catch (Exception ex) {
                 _f++; err = ex.getMessage().trim();
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
@@ -383,6 +375,7 @@ class AP3_bulk_apply extends AP3_GUI{
             if (FAIL) { return;}
         Thread.sleep(1000);
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        
         // <editor-fold defaultstate="collapsed" desc="Bulk Change Visibility of Modifiers in Local Menu">  
         EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Change Visibility of Modifiers in Local Menu" + "\t" + " == Bulk Change Visibility of Modifiers in Local Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         Element_By_Path_Click("Click > Category", "xpath", "//div[contains(text(),'Flame Grilled Pitas')]", ParentTest, "no_jira");
@@ -426,21 +419,21 @@ class AP3_bulk_apply extends AP3_GUI{
                 API_Response_Body = t;               
                 json = new JSONObject(API_Response_Body);
                 menus = new JSONArray();
-                menus = json.getJSONArray("menus");
-                for (int i = 0; i < menus.length(); i++) {
-                    JSONObject menu = menus.getJSONObject(i);
-                    String loc_brand = "";
-                    if (menu.has("location_brand") && menu.has("label")) {
-                        loc_brand = menu.getString("location_brand");
-                        if (loc_brand.equals(BrandID)) {
-                            JSONObject label = menu.getJSONObject("label");
-                            menuName = label.getString("en");
-                            if (menuName.equals("Sides")) {
-                                MenuID = menu.getString("id"); 
-                            }
-                        }  
-                    }
+            menus = json.getJSONArray("menus");
+            for (int i = 0; i < menus.length(); i++) {
+                JSONObject menu = menus.getJSONObject(i);
+                String loc_brand = "";
+                if (menu.has("location_brand") && menu.has("label")) {
+                    loc_brand = menu.getString("location_brand");
+                    if (loc_brand.equals(BrandID)) {
+                        JSONObject label = menu.getJSONObject("label");
+                        menuName = label.getString("en");
+                        if (menuName.equals("Flame Grilled Pitas")) {
+                            MenuID = menu.getString("id"); 
+                        }
+                    }  
                 }
+            }
             }catch (Exception ex) {
                 _f++; err = ex.getMessage().trim();
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
@@ -523,21 +516,21 @@ class AP3_bulk_apply extends AP3_GUI{
                 API_Response_Body = t;               
                 json = new JSONObject(API_Response_Body);
                 menus = new JSONArray();
-                menus = json.getJSONArray("menus");
-                for (int i = 0; i < menus.length(); i++) {
-                    JSONObject menu = menus.getJSONObject(i);
-                    String loc_brand = "";
-                    if (menu.has("location_brand") && menu.has("label")) {
-                        loc_brand = menu.getString("location_brand");
-                        if (loc_brand.equals(BrandID)) {
-                            JSONObject label = menu.getJSONObject("label");
-                            menuName = label.getString("en");
-                            if (menuName.equals("Sides")) {
-                                MenuID = menu.getString("id"); 
-                            }
-                        }  
-                    }
-                }  
+            menus = json.getJSONArray("menus");
+            for (int i = 0; i < menus.length(); i++) {
+                JSONObject menu = menus.getJSONObject(i);
+                String loc_brand = "";
+                if (menu.has("location_brand") && menu.has("label")) {
+                    loc_brand = menu.getString("location_brand");
+                    if (loc_brand.equals(BrandID)) {
+                        JSONObject label = menu.getJSONObject("label");
+                        menuName = label.getString("en");
+                        if (menuName.equals("Flame Grilled Pitas")) {
+                            MenuID = menu.getString("id"); 
+                        }
+                    }  
+                }
+            } 
             }catch (Exception ex) {
                 _f++; err = ex.getMessage().trim();
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
@@ -611,6 +604,7 @@ class AP3_bulk_apply extends AP3_GUI{
             Thread.sleep(500);
         }                              
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        // </editor-fold>
         
         // <editor-fold defaultstate="collapsed" desc="Check Global Menu">  
         EX += " - " + "\t" + " === " + "\t" + " ===== Check Global Menu" + "\t" + " == Check Global Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -642,26 +636,22 @@ class AP3_bulk_apply extends AP3_GUI{
         Element_By_Path_Click("Click > Category", "xpath", "//div[contains(text(),'Flame Grilled Pitas')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         //get First Item Price (FIP)
-        String FIP = getAttributeOfElementByXpath("(//table[contains(@class,'v-table')]//tbody/tr)[1]//td[5]", "innerHTML");
+        String FIP = getAttributeOfElementByXpath("(//table[contains(@class,'v-table')]//tbody/tr)[1]//td[5]", "textContent");
         Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
         try {
             API_Response_Body = t;  
             json = new JSONObject(API_Response_Body);
-            menus = new JSONArray();
             menus = json.getJSONArray("menus");
             for (int i = 0; i < menus.length(); i++) {
                 JSONObject menu = menus.getJSONObject(i);
-                String loc_brand = "";
-                if (menu.has("location_brand")) {
-                    loc_brand = menu.getString("location_brand");
-                    if (loc_brand.equals(BrandID)) {
-                        if (menu.has("label")) {
-                            JSONObject label = new JSONObject("label");
-                            menuName = label.getString("en");
-                            if (menuName.equals("Sides")) {
-                                MenuID = menu.getString("id");
-                            }  
-                        }
+                //String loc_brand = "";
+                if (!menu.has("location_brand") && menu.has("label")) {
+                    //loc_brand = menu.getString("location_brand");
+                    JSONObject label = menu.getJSONObject("label");
+                    menuName = label.getString("en");
+                    if (menuName.equals("Flame Grilled Pitas")) {
+                        MenuID = menu.getString("id"); 
+                        
                     }  
                 }
             }
@@ -740,8 +730,9 @@ class AP3_bulk_apply extends AP3_GUI{
         }
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
-        Thread.sleep(500);              
-        Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
+        Thread.sleep(500);
+        Element_By_Path_Click("Click > Update "+L1.size()+" Items", "xpath", "//span[contains(text(),'Update "+String.valueOf(L1.size())+" Items')]", ParentTest,"no_jira");
+        //Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
         //Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(), 'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
@@ -786,8 +777,9 @@ class AP3_bulk_apply extends AP3_GUI{
         }
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
-        Thread.sleep(500);              
-        Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
+        Thread.sleep(500);
+        Element_By_Path_Click("Click > Update "+L1.size()+" Items", "xpath", "//span[contains(text(),'Update "+String.valueOf(L1.size())+" Items')]", ParentTest,"no_jira");
+        //Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
         //Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(), 'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(1000);
@@ -820,8 +812,8 @@ class AP3_bulk_apply extends AP3_GUI{
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500);              
-        Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
-        //Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(), 'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
+        //Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
+        Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(), 'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
         Element_By_Path_Click("Click on Remove PLU Numbers", "xpath", "//input[@aria-label='Remove PLU Numbers from selected Items']", ParentTest, "no_jira");
@@ -848,8 +840,8 @@ class AP3_bulk_apply extends AP3_GUI{
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500);              
-        Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
-        //Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(), 'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
+        //Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
+        Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(), 'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
         Move_to_Element_By_Path("Move to Edit Mod Groups Section", "xpath", "//div[text()='Edit Mod Groups in Your Item Selection']", ParentTest, "no_jira");
@@ -905,15 +897,14 @@ class AP3_bulk_apply extends AP3_GUI{
             menus = json.getJSONArray("menus");
             for (int i = 0; i < menus.length(); i++) {
                 JSONObject menu = menus.getJSONObject(i);
-                String loc_brand = "";
-                if (menu.has("location_brand") && menu.has("label")) {
-                    loc_brand = menu.getString("location_brand");
-                    if (loc_brand.equals(BrandID)) {
-                        JSONObject label = menu.getJSONObject("label");
-                        menuName = label.getString("en");
-                        if (menuName.equals("Sides")) {
-                            MenuID = menu.getString("id"); 
-                        }
+                //String loc_brand = "";
+                if (!menu.has("location_brand") && menu.has("label")) {
+                    //loc_brand = menu.getString("location_brand");
+                    JSONObject label = menu.getJSONObject("label");
+                    menuName = label.getString("en");
+                    if (menuName.equals("Flame Grilled Pitas")) {
+                        MenuID = menu.getString("id"); 
+                        
                     }  
                 }
             }  
@@ -1004,8 +995,8 @@ class AP3_bulk_apply extends AP3_GUI{
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}    
         Thread.sleep(500);              
-        Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
-        //Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(), 'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
+        //Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
+        Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(), 'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
         if (FAIL) { return;}
         Thread.sleep(500);
         Element_By_Path_Click("Click on Enable in Local Menu", "xpath", "(//i[contains(@class,'mdi-radiobox')])[1]", ParentTest, "no_jira");
@@ -1096,8 +1087,8 @@ class AP3_bulk_apply extends AP3_GUI{
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500); 
-        Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");
-        //Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(),'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
+        //Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");
+        Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(),'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
         Element_By_Path_Click("Click > Edit Modifier Group", "xpath", "(//i[contains(@class,'v-icon mdi mdi-pencil theme--light')])[3]", ParentTest, "no_jira");
