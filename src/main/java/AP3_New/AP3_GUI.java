@@ -2220,7 +2220,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         HtmlReport = new ExtentReports();
         HtmlReport.attachReporter(HtmlReporter);
         
-        HtmlReport.setSystemInfo("App Version", "Cafe 360" + " " + "Version - TBD"); 
+        HtmlReport.setSystemInfo("App Version", "AP3" + " " + "Version " + Ver); 
         HtmlReport.setSystemInfo("Browser", BROWSER);        
         HtmlReport.setSystemInfo("Machine", A.A.WsID);
         HtmlReport.setSystemInfo("Machine OS", A.A.WsOS);
@@ -2560,6 +2560,29 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             SCOPE += ", Export menuset";
             ParentTest = HtmlReport.createTest("Export menuset"); 
             AP3_export_menuset BR = new AP3_New.AP3_export_menuset(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+        } 
+        if(_Group_management){
+            SCOPE += ", Group Management";
+            ParentTest = HtmlReport.createTest("Group Management"); 
+            AP3_group_management BR = new AP3_New.AP3_group_management(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+        }     
+        if(_Images){
+            SCOPE += ", Images";
+            ParentTest = HtmlReport.createTest("Images"); 
+            AP3_images BR = new AP3_New.AP3_images(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+        }   
+        
+        
+        if(_Logout){ // ======== Last Scope
+            SCOPE += ", Logout";
+            ParentTest = HtmlReport.createTest("Logout"); 
+            AP3_logout BR = new AP3_New.AP3_logout(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }         

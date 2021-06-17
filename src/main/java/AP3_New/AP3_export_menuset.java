@@ -1,12 +1,7 @@
 package AP3_New;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 /**
  *
@@ -16,17 +11,19 @@ import java.util.zip.ZipInputStream;
 
 class AP3_export_menuset extends AP3_GUI{
     protected AP3_export_menuset (AP3_GUI a) throws InterruptedException, Exception {
-        ADMIN_ID = a.ADMIN_ID;
-        ADMIN_PW = a.ADMIN_PW;
-        url = a.url;
         d1 = a.d1;
+        url = a.url;
         loadTimeout = a.loadTimeout;
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
+        env = a.env;
+        BaseAPI = a.BaseAPI;        
+        
+        ADMIN_ID = a.ADMIN_ID;
+        ADMIN_PW = a.ADMIN_PW;
         
         AP3_TKN = a.AP3_TKN;
         
-        BaseAPI = a.BaseAPI;
         New_ID = a.New_ID;
         app = a.app;
         SITE = a.SITE;
@@ -103,16 +100,25 @@ class AP3_export_menuset extends AP3_GUI{
 
         Element_By_Path_Click("Search Menus Click", "xpath", "//div[normalize-space()='View GLobal Menus']", ParentTest, "no_jira");
             if (FAIL) { return;}
+        Thread.sleep(500);
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Wait for Menu List", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
+            if (FAIL) { return;}            
         //</editor-fold>
+        
 
         Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
         //Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent",ParentTest, "no_jira"); 
         // ^^^ fails
         List_L0("Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");             
-            if (FAIL) { return;} 
+            if (FAIL || L0.isEmpty()) { 
+                return;
+            } 
             for (int i = 0; i < L0.size(); i++) {
                 Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent", ParentTest, "no_jira");            
-                if (FAIL) { return;}                   
+                    if (FAIL) { return;}                   
             } 
         Element_Attribute("Menu setName", L0.get(0), "textContent", ParentTest, "no_jira");      
         MenuSetName = t; // ==========================
