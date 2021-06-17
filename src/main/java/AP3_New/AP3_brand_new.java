@@ -8,15 +8,17 @@ import org.openqa.selenium.interactions.Actions;
 
 class AP3_brand_new extends AP3_GUI{
     protected AP3_brand_new (AP3_GUI a) throws InterruptedException, Exception {
-        ADMIN_ID = a.ADMIN_ID;
-        ADMIN_PW = a.ADMIN_PW;
-        url = a.url;
         d1 = a.d1;
+        url = a.url;
         loadTimeout = a.loadTimeout;
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
-        
+        env = a.env;
         BaseAPI = a.BaseAPI;
+        
+        ADMIN_ID = a.ADMIN_ID;
+        ADMIN_PW = a.ADMIN_PW;
+
         New_ID = a.New_ID;
         app = a.app;
         SITE = a.SITE;
