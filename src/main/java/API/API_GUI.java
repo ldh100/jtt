@@ -2927,7 +2927,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 _f++; FAIL = true; 
                 EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + "Status Code: " + status + "\t" + "FAIL" + "\t" + Result +
                 "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("FAIL", NAME + " > EndPoint: " + BaseAPI + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+                Log_Html_Result("FAIL", NAME + " > EndPoint: " + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
             }
         } catch(Exception ex){
             R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
@@ -2935,7 +2935,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("FAIL", NAME + " > Error: " + err + "<br />EndPoint: " + BaseAPI + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+            Log_Html_Result("FAIL", NAME + " > Error: " + err + "<br />EndPoint: " + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
         } 
         r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
         sw1.reset();
