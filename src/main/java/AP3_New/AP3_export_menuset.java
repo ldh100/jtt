@@ -100,6 +100,12 @@ class AP3_export_menuset extends AP3_GUI{
 
         Element_By_Path_Click("Search Menus Click", "xpath", "//div[normalize-space()='View GLobal Menus']", ParentTest, "no_jira");
             if (FAIL) { return;}
+        Thread.sleep(500);
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Wait for Menu List", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
+            if (FAIL) { return;}            
         //</editor-fold>
         
 
@@ -107,10 +113,12 @@ class AP3_export_menuset extends AP3_GUI{
         //Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent",ParentTest, "no_jira"); 
         // ^^^ fails
         List_L0("Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");             
-            if (FAIL) { return;} 
+            if (FAIL || L0.isEmpty()) { 
+                return;
+            } 
             for (int i = 0; i < L0.size(); i++) {
                 Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent", ParentTest, "no_jira");            
-                if (FAIL) { return;}                   
+                    if (FAIL) { return;}                   
             } 
         Element_Attribute("Menu setName", L0.get(0), "textContent", ParentTest, "no_jira");      
         MenuSetName = t; // ==========================
