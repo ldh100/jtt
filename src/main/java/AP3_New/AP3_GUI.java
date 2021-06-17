@@ -2220,7 +2220,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         HtmlReport = new ExtentReports();
         HtmlReport.attachReporter(HtmlReporter);
         
-        HtmlReport.setSystemInfo("App Version", "Cafe 360" + " " + "Version - TBD"); 
+        HtmlReport.setSystemInfo("App Version", "AP3" + " " + "Version " + Ver); 
         HtmlReport.setSystemInfo("Browser", BROWSER);        
         HtmlReport.setSystemInfo("Machine", A.A.WsID);
         HtmlReport.setSystemInfo("Machine OS", A.A.WsOS);
