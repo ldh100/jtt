@@ -17,9 +17,10 @@ class AP3_announcements extends AP3_GUI{
         BRAND = a.BRAND;
         SiteID = a.SiteID;
         _All_data = a._All_data;
-    }    
+    }  
+    String API_Response_Body = "";
     protected void run() throws InterruptedException, Exception   { 
-        String API_Response_Body = "";
+        
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
@@ -451,7 +452,7 @@ class AP3_announcements extends AP3_GUI{
         String A_ID = "";           
         if(t.contains("/")){
             A_ID = t.substring(t.lastIndexOf("/") + 1);
-            Call_API("Call /announcement/ API", BaseAPI + "/announcement/" + A_ID, true, ParentTest, "no_jira" );
+            Call_API("Call /announcement/ API", "",BaseAPI + "/announcement/" + A_ID, true, ParentTest, "no_jira" );
             if(t.startsWith("{")){
                 API_Response_Body = t;               
             }else{
@@ -460,8 +461,6 @@ class AP3_announcements extends AP3_GUI{
                 Log_Html_Result("FAIL", "URL: " + BaseAPI + "/announcement/" + A_ID, false, ParentTest.createNode("API Responce Error"));
                 return;
             }
-
-            
             API_Body_Contains("Announcement API - find Site ID", API_Response_Body, SiteID, true, ParentTest, "no_jira");    
             API_Body_Contains("Announcement API - find App", API_Response_Body, app, true, ParentTest, "no_jira"); 
             API_Body_Contains("Announcement API - find Name", API_Response_Body, "Auto Announcement " + New_ID, true, ParentTest, "no_jira");
@@ -564,7 +563,7 @@ class AP3_announcements extends AP3_GUI{
             if (FAIL) { return;}
         Find_Text("Confirm Deleted", "Auto Announcement " + New_ID, false, ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Call_API("Call /announcemen/ API", BaseAPI + "/announcement/" + A_ID, false, ParentTest, "no_jira");    // A_ID or Site ID
+        Call_API("Call /announcemen/ API", "",  BaseAPI + "/announcement/" + A_ID, false, ParentTest, "no_jira");    // A_ID or Site ID
 //      Line 70:         "/announcement/{id}": {
 //	Line 72:                 "summary": "Get Announcement",
 //	Line 76:                         "schema": {"$ref": "#/definitions/Announcement"},

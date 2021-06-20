@@ -536,11 +536,11 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="xtt_test"/>
+            <Property name="text" type="java.lang.String" value="#xtt_test"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="228" y="4" width="96" height="-1"/>
+              <AbsoluteConstraints x="228" y="4" width="192" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -730,7 +730,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="436" y="140" width="416" height="264"/>
+          <AbsoluteConstraints x="436" y="140" width="420" height="264"/>
         </Constraint>
       </Constraints>
 
@@ -738,98 +738,103 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
-                  <Component id="_login" min="-2" pref="106" max="-2" attributes="0"/>
-                  <EmptySpace min="66" pref="66" max="-2" attributes="0"/>
-                  <Component id="_images" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="25" pref="25" max="-2" attributes="0"/>
-                  <Component id="_all_data" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
-                  <Component id="_site" min="-2" pref="106" max="-2" attributes="0"/>
-                  <EmptySpace min="45" pref="45" max="-2" attributes="0"/>
-                  <Component id="_timeslots" min="-2" pref="80" max="-2" attributes="0"/>
-                  <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
-                  <Component id="_site_new" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
-                  <Component id="_brand" min="-2" pref="96" max="-2" attributes="0"/>
-                  <EmptySpace min="23" pref="23" max="-2" attributes="0"/>
-                  <Component id="_resent_updates" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                  <Component id="_brand_new" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
-                  <Component id="_brand_closure" min="-2" pref="106" max="-2" attributes="0"/>
-                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                  <Component id="_announcements" min="-2" pref="119" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="128" pref="128" max="-2" attributes="0"/>
-                  <Component id="_group_management" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="34" pref="34" max="-2" attributes="0"/>
-                  <Component id="_reschedule_menu" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                  <Component id="_sales_reporting" min="-2" pref="114" max="-2" attributes="0"/>
-                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                  <Component id="_promo" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="91" pref="91" max="-2" attributes="0"/>
-                  <Component id="_users" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                  <Component id="_sales_analytics" min="-2" pref="114" max="-2" attributes="0"/>
-                  <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                  <Component id="_notifications" min="-2" pref="117" max="-2" attributes="0"/>
-                  <EmptySpace min="32" pref="32" max="-2" attributes="0"/>
-                  <Component id="_roles" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
-                  <Component id="_smart_analytics" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                  <Component id="_orders" min="-2" pref="117" max="-2" attributes="0"/>
-                  <EmptySpace min="23" pref="23" max="-2" attributes="0"/>
-                  <Component id="_password" min="-2" pref="122" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
-                  <Component id="_bulk_apply" min="-2" pref="101" max="-2" attributes="0"/>
-                  <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                  <Component id="_orders_report_hidden" min="-2" pref="121" max="-2" attributes="0"/>
-                  <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                  <Component id="_logout" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                  <Component id="_export_menuset" min="-2" pref="101" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="_sales_report_hidden" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="17" pref="17" max="-2" attributes="0"/>
-                  <Component id="_menu_manager" min="-2" pref="104" max="-2" attributes="0"/>
-                  <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
-                  <Component id="lblSITES15" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                  <Component id="txtDH_Id" min="-2" pref="159" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                  <Component id="lblSITES8" min="-2" pref="72" max="-2" attributes="0"/>
-                  <EmptySpace min="169" pref="169" max="-2" attributes="0"/>
-                  <Component id="lblSITES12" min="-2" pref="143" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                  <Component id="txtSector" min="-2" pref="169" max="-2" attributes="0"/>
-                  <EmptySpace min="72" pref="72" max="-2" attributes="0"/>
-                  <Component id="txtComp" min="-2" pref="157" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="_login" min="-2" pref="114" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_images" min="-2" pref="121" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_all_data" min="-2" pref="141" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="_site" min="-2" pref="114" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_timeslots" min="-2" pref="121" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_site_new" min="-2" pref="141" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="_brand" min="-2" pref="114" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_resent_updates" min="-2" pref="121" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          <Component id="_brand_new" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="_brand_closure" min="-2" pref="114" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_announcements" min="-2" pref="121" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="128" pref="128" max="-2" attributes="0"/>
+                          <Component id="_group_management" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_reschedule_menu" min="-2" pref="141" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
+                          <Component id="_sales_reporting" min="-2" pref="114" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_promo" min="-2" pref="121" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_users" min="-2" pref="141" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
+                          <Component id="_sales_analytics" min="-2" pref="114" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_notifications" min="-2" pref="121" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_roles" min="-2" pref="141" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="_smart_analytics" min="-2" pref="114" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_orders" min="-2" pref="121" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_password" min="-2" pref="141" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="_bulk_apply" min="-2" pref="114" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                          <Component id="_orders_report_hidden" min="-2" pref="121" max="-2" attributes="0"/>
+                          <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                          <Component id="_logout" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="_export_menuset" min="-2" pref="114" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="_sales_report_hidden" min="-2" pref="121" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="17" pref="17" max="-2" attributes="0"/>
+                          <Component id="_menu_manager" min="-2" pref="104" max="-2" attributes="0"/>
+                          <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
+                          <Component id="lblSITES15" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
+                          <Component id="txtDH_Id" min="-2" pref="159" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                          <Component id="lblSITES8" min="-2" pref="72" max="-2" attributes="0"/>
+                          <EmptySpace min="169" pref="169" max="-2" attributes="0"/>
+                          <Component id="lblSITES12" min="-2" pref="143" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                          <Component id="txtSector" min="-2" pref="169" max="-2" attributes="0"/>
+                          <EmptySpace min="72" pref="72" max="-2" attributes="0"/>
+                          <Component id="txtComp" min="-2" pref="157" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

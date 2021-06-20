@@ -316,7 +316,6 @@ public class W_Report extends javax.swing.JInternalFrame {
             conn.close(); 
             txtLog.append("=== Old Reports > " + d + " record(s) deleted" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-
         } catch (SQLException ex) {
             txtLog.append("=== Delete Old Reports > ERROR: " + ex.getMessage());
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
