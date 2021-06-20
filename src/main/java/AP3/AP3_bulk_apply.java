@@ -72,7 +72,6 @@ public class AP3_bulk_apply {
                     }  
                 }
             }
-            //api call https://api.compassdigital.org/v1/menu/J4qRgLpO1NH83rk0d5QRiKkM0djlkNSvoQJkY2N6Ce2MyJQq1PSroW9GqqM8cMgzBPq?nocache=true&extended=true&show_unlinked=false
         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Sides / API )", BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
         json = new JSONObject(API_Response_Body);
         JSONArray groups = new JSONArray();
@@ -145,7 +144,7 @@ public class AP3_bulk_apply {
                         }
                     }  
                 }
-            }
+            } 
         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Sides / API )", BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
         json = new JSONObject(API_Response_Body);
         groups = new JSONArray();
@@ -188,15 +187,15 @@ public class AP3_bulk_apply {
         //Open Bulk Apply Side Panel for all items and verify side panel
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Update "+L1.size()+" Items", "xpath", "//span[contains(text(),'Update "+String.valueOf(L1.size())+" Items')]", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait_For 'Side Panel'", "xpath", "//aside[@id='bulkupdatepaneldrawer']", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Side Panel", "xpath", "//aside[@id='bulkupdatepaneldrawer']", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait_For 'Update "+L1.size()+"' Items header", "xpath", "//div[contains(text(),'Update "+String.valueOf(L1.size())+" Items')]", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Update "+L1.size()+" Items header", "xpath", "//div[contains(text(),'Update "+String.valueOf(L1.size())+" Items')]", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait_For 'Price Container'", "xpath", "(//div[contains(@class,'v-card__title')])[5]", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Price Container", "xpath", "(//div[contains(@class,'v-card__title')])[5]", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait_For 'Stock Container'", "xpath", "(//div[contains(@class,'v-card__title')])[6]", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Stock Container", "xpath", "(//div[contains(@class,'v-card__title')])[6]", "no_jira");
         if (FAIL) { return;}
-        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait_For 'In-App Visibility'", "xpath", "(//div[contains(@class,'v-card__title')])[7]", "no_jira");
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("In-App Visibility", "xpath", "(//div[contains(@class,'v-card__title')])[7]", "no_jira");
         if (FAIL) { return;}
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
@@ -239,7 +238,7 @@ public class AP3_bulk_apply {
         for (int i = 0; i < L1.size(); i++){
             _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is In Stock", "xpath", "((//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[8])//input[@aria-checked='true']", "no_jira");
             if (FAIL) { return;}
-        }
+        } 
         if (!env.equals("PR")) {
             _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", "no_jira");
             if (FAIL) { return;}
@@ -342,7 +341,7 @@ public class AP3_bulk_apply {
                     if (loc_brand.equals(BrandID)) {
                         JSONObject label = menu.getJSONObject("label");
                         menuName = label.getString("en");
-                        if (menuName.equals("Sides")) {
+                        if (menuName.equals("Flame Grilled Pitas")) {
                             MenuID = menu.getString("id"); 
                         }
                     }  
@@ -415,7 +414,7 @@ public class AP3_bulk_apply {
                     if (loc_brand.equals(BrandID)) {
                         JSONObject label = menu.getJSONObject("label");
                         menuName = label.getString("en");
-                        if (menuName.equals("Sides")) {
+                        if (menuName.equals("Flame Grilled Pitas")) {
                             MenuID = menu.getString("id"); 
                         }
                     }  
@@ -473,6 +472,7 @@ public class AP3_bulk_apply {
                 Thread.sleep(500);
             }                              
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        // </editor-fold>
         
         // <editor-fold defaultstate="collapsed" desc="Check Global Menu">  
         EX += " - " + "\t" + " === " + "\t" + " ===== Check Global Menu" + "\t" + " == Check Global Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -484,6 +484,7 @@ public class AP3_bulk_apply {
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Category: Sides", "xpath", "//div[contains(text(),'Sides')]", "no_jira");
         if (FAIL) { return;}
+        Thread.sleep(500);
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Item Set: Soup ", "xpath", "//div[contains(text(),'Soup')]", "no_jira");
         if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.List_L1("List of Items", "xpath", "//table[contains(@class,'v-table')]//tbody/tr", "no_jira");
@@ -506,25 +507,22 @@ public class AP3_bulk_apply {
         //get First Item Price (FIP)
         String FIP = getAttributeOfElementByXpath("(//table[contains(@class,'v-table')]//tbody/tr)[1]//td[5]", "innerHTML");
         TWeb.Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, "no_jira");
-        json = new JSONObject(API_Response_Body);
-        menus = new JSONArray();
-        menus = json.getJSONArray("menus");
-        for (int i = 0; i < menus.length(); i++) {
-            JSONObject menu = menus.getJSONObject(i);
-            String loc_brand = "";
-            if (menu.has("location_brand")) {
-                loc_brand = menu.getString("location_brand");
-                if (loc_brand.equals(BrandID)) {
-                    if (menu.has("label")) {
-                        JSONObject label = new JSONObject("label");
-                        menuName = label.getString("en");
-                        if (menuName.equals("Sides")) {
-                            MenuID = menu.getString("id");
-                        }  
-                    }
-                }  
+            json = new JSONObject(API_Response_Body);
+            menus = new JSONArray();
+            menus = json.getJSONArray("menus");
+            for (int i = 0; i < menus.length(); i++) {
+                JSONObject menu = menus.getJSONObject(i);
+                //String loc_brand = "";
+                if (!menu.has("location_brand") && menu.has("label")) {
+                    //loc_brand = menu.getString("location_brand");
+                    JSONObject label = menu.getJSONObject("label");
+                    menuName = label.getString("en");
+                    if (menuName.equals("Flame Grilled Pitas")) {
+                        MenuID = menu.getString("id"); 
+                        
+                    }  
+                }
             }
-        }
         _t++; Thread.sleep((long) sleep); TWeb.Call_API_Auth("Call /Menu/ Flame Grilled Pitas / API )", BaseAPI + "/menu/"+MenuID+"?nocache=true&extended=true&show_unlinked=false", true,"no_jira");
         json = new JSONObject(API_Response_Body);
         groups = new JSONArray();
@@ -728,15 +726,14 @@ public class AP3_bulk_apply {
             menus = json.getJSONArray("menus");
             for (int i = 0; i < menus.length(); i++) {
                 JSONObject menu = menus.getJSONObject(i);
-                String loc_brand = "";
-                if (menu.has("location_brand") && menu.has("label")) {
-                    loc_brand = menu.getString("location_brand");
-                    if (loc_brand.equals(BrandID)) {
-                        JSONObject label = menu.getJSONObject("label");
-                        menuName = label.getString("en");
-                        if (menuName.equals("Sides")) {
-                            MenuID = menu.getString("id"); 
-                        }
+                //String loc_brand = "";
+                if (!menu.has("location_brand") && menu.has("label")) {
+                    //loc_brand = menu.getString("location_brand");
+                    JSONObject label = menu.getJSONObject("label");
+                    menuName = label.getString("en");
+                    if (menuName.equals("Flame Grilled Pitas")) {
+                        MenuID = menu.getString("id"); 
+                        
                     }  
                 }
             }
@@ -795,6 +792,8 @@ public class AP3_bulk_apply {
         if (FAIL) { return;}
         TWeb.Refresh("Refresh page", "no_jira");
         Thread.sleep(2000);
+        _t++; Thread.sleep((long) sleep); TWeb.Wait_For_Element_By_Path_Presence("Wait for page load", "xpath", "//div[contains(text(),'Flame Grilled Pitas')]", "no_jira");
+        if (FAIL) { return;}
         _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click > Category", "xpath", "//div[contains(text(),'Flame Grilled Pitas')]", "no_jira");
         if (FAIL) { return;}
         Thread.sleep(1000);

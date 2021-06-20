@@ -18,6 +18,8 @@ class AP3_brand_closure extends AP3_GUI{
         SiteID = a.SiteID;
         BRAND = a.BRAND;
         BrandID = a.BrandID;
+        
+        AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
         TZone = a.TZone;
     }    
@@ -140,7 +142,7 @@ class AP3_brand_closure extends AP3_GUI{
                 Element_By_Path_Text("Find 'closure under effect...'", "className", "Temporarily-closed-text", ParentTest, "no_jira"); 
                     if (FAIL) { return; }   
  Thread.sleep(60000); // Wait for data propagation  - takes too long !!!!               
-                Call_API("Call 'calendar' API", BaseAPI + "/calendar/" + BrandID, true, ParentTest, "no_jira" );
+                Call_API("Call 'calendar' API", "", BaseAPI + "/calendar/" + BrandID, true, ParentTest, "no_jira" );
                 if(t.startsWith("{")){
                     API_Response_Body = t;               
                 }else{
@@ -160,7 +162,7 @@ class AP3_brand_closure extends AP3_GUI{
                     if (FAIL) { return;}
                 Thread.sleep(500);      
  Thread.sleep(60000); // Wait for data propagation  - takes too long !!!!
-                Call_API("Call 'calendar' API", BaseAPI + "/calendar/" + BrandID, true, ParentTest, "no_jira" );
+                Call_API("Call 'calendar' API", "", BaseAPI + "/calendar/" + BrandID, true, ParentTest, "no_jira" );
                 API_Response_Body = t;
                 if(t.startsWith("{")){
                     API_Response_Body = t;               
@@ -212,7 +214,7 @@ class AP3_brand_closure extends AP3_GUI{
                             if (FAIL) { return;}
                     }
  Thread.sleep(60000); // Wait for data propagation - takes too long !!!!
-                Call_API("Call 'calendar' API", BaseAPI + "/calendar/" + BrandID, true, ParentTest, "no_jira" );
+                Call_API("Call 'calendar' API", "", BaseAPI + "/calendar/" + BrandID, true, ParentTest, "no_jira" );
                 API_Response_Body = t;
                 if(t.startsWith("{")){
                     API_Response_Body = t;               
@@ -233,7 +235,7 @@ class AP3_brand_closure extends AP3_GUI{
                     if (FAIL) { return;}
                 Thread.sleep(500);       
  Thread.sleep(60000); // Wait for data propagation - takes too long !!!!
-                Call_API("Call 'calendar' API", BaseAPI + "/calendar/" + BrandID, true, ParentTest, "no_jira" );
+                Call_API("Call 'calendar' API", "", BaseAPI + "/calendar/" + BrandID, true, ParentTest, "no_jira" );
                 API_Response_Body = t;
                 if(t.startsWith("{")){
                     API_Response_Body = t;               

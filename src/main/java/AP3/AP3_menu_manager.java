@@ -1879,15 +1879,15 @@ public class AP3_menu_manager {
             return;
         } 
         _t++; Thread.sleep((long) sleep); TWeb.Navigate_Back("Navigate Back","MM 'Local Brands' page","MM 'Sector' page", "no_jira"); 
-        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true,"no_jira"); 
-            if (FAIL) { return; }   
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", "no_jira"); 
-            if (FAIL) { return; }         
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Find 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", "no_jira"); 
-            if (FAIL) { return; }     
-        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", "no_jira"); 
-            if (FAIL) { return;}          
-        
+//        _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true,"no_jira"); 
+//            if (FAIL) { return; }   
+//        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", "no_jira"); 
+//            if (FAIL) { return; }         
+//        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Find 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", "no_jira"); 
+//            if (FAIL) { return; }     
+//        _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", "no_jira"); 
+//            if (FAIL) { return;}          
+//        
         Thread.sleep(500); 
         _t++; Thread.sleep((long) sleep); TWeb.Wait_For_All_Elements_InVisibility("Wait for page load...", "xpath", "//*[contains(@class, 'progress')]", "no_jira"); 
             if (FAIL) { return;}               
