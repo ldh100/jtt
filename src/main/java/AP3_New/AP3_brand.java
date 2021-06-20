@@ -128,7 +128,7 @@ class AP3_brand extends AP3_GUI{
             Brand_Status("Get Brand Status in App", L2.get(T_Index), ParentTest, "no_jira");        
                 if (FAIL) { return;}  
                 if(t.equals("Hidden in App")){ 
-                    Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true, ParentTest, "no_jira" );
+                    Call_API("Call /location/group/ API", "", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true, ParentTest, "no_jira" );
                     if(t.startsWith("{")){
                         API_Response_Body = t;               
                     }else{
@@ -145,7 +145,7 @@ class AP3_brand extends AP3_GUI{
                     Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}
                     Thread.sleep(500);     
-                    Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true, ParentTest, "no_jira");
+                    Call_API("Call /location/group/ API", "", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true, ParentTest, "no_jira");
                     if(t.startsWith("{")){
                         API_Response_Body = t;               
                     }else{
@@ -163,7 +163,7 @@ class AP3_brand extends AP3_GUI{
                     Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}
                     Thread.sleep(500);     
-                    Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true, ParentTest, "no_jira");     
+                    Call_API("Call /location/group/ API", "", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true, ParentTest, "no_jira");     
                     if(t.startsWith("{")){
                         API_Response_Body = t;               
                     }else{
@@ -178,7 +178,7 @@ class AP3_brand extends AP3_GUI{
                         if (FAIL) { return;}
                     Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'v-progress-circular')]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}
-                    Call_API("Call /location/group/ API", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,  ParentTest, "no_jira" );
+                    Call_API("Call /location/group/ API", "", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,  ParentTest, "no_jira" );
                     if(t.startsWith("{")){
                         API_Response_Body = t;               
                     }else{
@@ -272,7 +272,7 @@ class AP3_brand extends AP3_GUI{
 //                        Element_By_Path_Click("Click 'Cancel'", "xpath", "//*[contains(text(), 'cancel')]",ParentTest, "no_jira"); 
 //                            if (FAIL) { return;}    
                     } else {
-                        Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true, ParentTest, "no_jira" );
+                        Call_API("Call '/location/brand/' API", "", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true, ParentTest, "no_jira" );
                         if(t.startsWith("{")){
                             API_Response_Body = t;               
                         }else{
@@ -289,7 +289,7 @@ class AP3_brand extends AP3_GUI{
                 case "Delivery Details":       
                     Text_Found("Is Delivery Enabled?", "Delivery is not enabled", ParentTest, "no_jira"); 
                     if(t.equals("Not Found")){
-                        Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true, ParentTest, "no_jira" );
+                        Call_API("Call '/location/brand/' API", "", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true, ParentTest, "no_jira" );
                         if(t.startsWith("{")){
                             API_Response_Body = t;               
                         }else{
@@ -335,7 +335,7 @@ class AP3_brand extends AP3_GUI{
 //                        Element_By_Path_Click("Click 'Cancel'", "xpath", "//*[contains(text(), 'cancel')]",ParentTest, "no_jira"); 
                             if (FAIL) { return;}
                     } else {
-                        Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true, ParentTest, "no_jira" );
+                        Call_API("Call '/location/brand/' API", "", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true, ParentTest, "no_jira" );
                         if(t.startsWith("{")){
                             API_Response_Body = t;               
                         }else{
@@ -505,7 +505,7 @@ class AP3_brand extends AP3_GUI{
                         if (FAIL) { return; } // Save
                     Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}
-                    Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true, ParentTest, "no_jira" );
+                    Call_API("Call '/location/brand/' API", "", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true, ParentTest, "no_jira" );
                     if(t.startsWith("{")){
                         API_Response_Body = t;               
                     }else{
@@ -605,7 +605,7 @@ class AP3_brand extends AP3_GUI{
                         if (FAIL) { return; } // Save
                     Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}
-                    Call_API("Call '/location/brand/' API", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true, ParentTest, "no_jira" );
+                    Call_API("Call '/location/brand/' API", "", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true, ParentTest, "no_jira" );
                     if(t.startsWith("{")){
                         API_Response_Body = t;               
                     }else{

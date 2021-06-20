@@ -33,6 +33,8 @@ class AP3_bulk_apply extends AP3_GUI{
         SectorID = a.SectorID;
         GL_MENU = a.GL_MENU;
         CompanyID = a.CompanyID;
+        
+        AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
         TZone = a.TZone;
     } 
@@ -75,7 +77,7 @@ class AP3_bulk_apply extends AP3_GUI{
         String menuName = "";
 
         
-            Call_API_Auth("Find 'Sides' MenuID", BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
+            Call_API("Find 'Sides' MenuID", "", BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
             try {
                 API_Response_Body = t;               
                 json = new JSONObject(API_Response_Body);
@@ -105,7 +107,7 @@ class AP3_bulk_apply extends AP3_GUI{
             }
 
         //api call https://api.compassdigital.org/v1/menu/J4qRgLpO1NH83rk0d5QRiKkM0djlkNSvoQJkY2N6Ce2MyJQq1PSroW9GqqM8cMgzBPq?nocache=true&extended=true&show_unlinked=false
-        Call_API_Auth("Call /menu/<MenuID> API", BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,ParentTest, "no_jira");
+        Call_API("Call /menu/<MenuID> API", "Bearer " + AP3_TKN, BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,ParentTest, "no_jira");
         try {
             API_Response_Body = t;               
             json = new JSONObject(API_Response_Body);
@@ -176,7 +178,7 @@ class AP3_bulk_apply extends AP3_GUI{
             Thread.sleep(500);     
         }
         
-        Call_API_Auth("Find 'Sides' MenuID", BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
+        Call_API("Find 'Sides' MenuID", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
         try {
             API_Response_Body = t;               
             json = new JSONObject(API_Response_Body);
@@ -206,7 +208,7 @@ class AP3_bulk_apply extends AP3_GUI{
         }
 
             
-        Call_API_Auth("Call /menu/<MenuID> API )", BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,ParentTest, "no_jira");
+        Call_API("Call /menu/<MenuID> API )", "Bearer " + AP3_TKN, BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,ParentTest, "no_jira");
         try {
             API_Response_Body = t;               
             json = new JSONObject(API_Response_Body);
@@ -416,7 +418,7 @@ class AP3_bulk_apply extends AP3_GUI{
         Element_By_Path_Click("Click > Close Selection", "xpath", "//div[contains(text(),'Close Selection')]", ParentTest, "no_jira");
         if (FAIL) { return;}
         if (secondModVisibility.contains("mdi-eye-off")) {
-            Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
+            Call_API("Find 'Flame Grilled Pitas' MenuID", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
             try {
                 API_Response_Body = t;               
                 json = new JSONObject(API_Response_Body);
@@ -446,7 +448,7 @@ class AP3_bulk_apply extends AP3_GUI{
             }
 
             
-            Call_API_Auth("Call /menu/<MenuID> API )", BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,ParentTest, "no_jira");
+            Call_API("Call /menu/<MenuID> API )", "Bearer " + AP3_TKN, BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,ParentTest, "no_jira");
             try {
                 API_Response_Body = t;               
                 json = new JSONObject(API_Response_Body);
@@ -513,7 +515,7 @@ class AP3_bulk_apply extends AP3_GUI{
             Thread.sleep(500);
             
         } else { 
-            Call_API_Auth("Call /menu/company/<CompanyID> API", BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
+            Call_API("Call /menu/company/<CompanyID> API", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
             try {
                 API_Response_Body = t;               
                 json = new JSONObject(API_Response_Body);
@@ -543,7 +545,7 @@ class AP3_bulk_apply extends AP3_GUI{
             }
 
             
-            Call_API_Auth("Call /menu/<MenuID> API )", BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,ParentTest, "no_jira");
+            Call_API("Call /menu/<MenuID> API )", "Bearer " + AP3_TKN, BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,ParentTest, "no_jira");
             try {
                 API_Response_Body = t;               
                 json = new JSONObject(API_Response_Body);
@@ -639,7 +641,7 @@ class AP3_bulk_apply extends AP3_GUI{
             if (FAIL) { return;}
         //get First Item Price (FIP)
         String FIP = getAttributeOfElementByXpath("(//table[contains(@class,'v-table')]//tbody/tr)[1]//td[5]", "textContent");
-        Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
+        Call_API("Find 'Flame Grilled Pitas' MenuID", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
         try {
             API_Response_Body = t;  
             json = new JSONObject(API_Response_Body);
@@ -666,7 +668,7 @@ class AP3_bulk_apply extends AP3_GUI{
             return;
         }
 
-        Call_API_Auth("Call /menu/<MenuID> API )", BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,ParentTest, "no_jira");
+        Call_API("Call /menu/<MenuID> API )", "Bearer " + AP3_TKN, BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,ParentTest, "no_jira");
         try {
             API_Response_Body = t;               
             json = new JSONObject(API_Response_Body);
@@ -891,7 +893,7 @@ class AP3_bulk_apply extends AP3_GUI{
         Thread.sleep(500);
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         
-        Call_API_Auth("Find 'Flame Grilled Pitas' MenuID", BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
+        Call_API("Find 'Flame Grilled Pitas' MenuID", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
         try {
             API_Response_Body = t;               
             json = new JSONObject(API_Response_Body);
@@ -920,7 +922,7 @@ class AP3_bulk_apply extends AP3_GUI{
         }
 
         
-        Call_API_Auth("Call /menu/<MenuID>/ API )", BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,ParentTest, "no_jira");
+        Call_API("Call /menu/<MenuID>/ API )", "Bearer " + AP3_TKN, BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,ParentTest, "no_jira");
         try {
             API_Response_Body = t;  
             json = new JSONObject(API_Response_Body);
