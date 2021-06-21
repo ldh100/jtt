@@ -935,6 +935,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     private boolean _Mobile_view = false;
     private boolean _Site = false;
     private boolean _Site_new = false;
+    private boolean _Smart_analytics = false;
     private boolean _Brand_new = false;
     private boolean _Brand = false;
     private boolean _Group_management = false;
@@ -1859,6 +1860,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
 
                 if(l.contains("_site: "))  _site.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_site_new: "))  _site_new.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_smart_analytics: "))  _smart_analytics.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_timeslots: "))  _timeslots.setSelected(Boolean.parseBoolean(value));                
                 if(l.contains("_brand_new: "))  _brand_new.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_brand: "))  _brand.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_group_management: "))  _group_management.setSelected(Boolean.parseBoolean(value));
@@ -1932,6 +1935,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
 
             C += "_site: " + _site.isSelected() + "\r\n";
             C += "_site_new: " + _site_new.isSelected() + "\r\n";
+            C += "_smart_analytics: " + _smart_analytics.isSelected() + "\r\n";            
             C += "_brand_new: " + _brand_new.isSelected() + "\r\n";
             C += "_brand: " + _brand.isSelected() + "\r\n";
             C += "_brand_closure: " + _brand_closure.isSelected() + "\r\n";
@@ -2039,6 +2043,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
 
             _Site = _site.isSelected();
             _Site_new = _site_new.isSelected();
+            _Smart_analytics = _smart_analytics.isSelected();
             _Brand_new = _brand_new.isSelected();
             _Brand = _brand.isSelected();
             _Brand_closure = _brand_closure.isSelected();
@@ -2184,6 +2189,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
 
                 if(l.contains("_site: ")) _Site = Boolean.parseBoolean(value);
                 if(l.contains("_site_new: ")) _Site_new = Boolean.parseBoolean(value);
+                if(l.contains("_smart_analytics : ")) _Smart_analytics = Boolean.parseBoolean(value);
                 if(l.contains("_brand_new: ")) _Brand_new = Boolean.parseBoolean(value);
                 if(l.contains("_brand: ")) _Brand = Boolean.parseBoolean(value);
                 if(l.contains("_brand_closure: ")) _Brand_closure = Boolean.parseBoolean(value);
@@ -2765,6 +2771,13 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }    
+        if(_Resent_updates){
+            SCOPE += ", Resent Updates";
+            ParentTest = HtmlReport.createTest("Resent Updates"); 
+            AP3_resent_updates BR = new AP3_New.AP3_resent_updates(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+        }          
         if(_Sales_analytics){
             SCOPE += ", Promo";
             ParentTest = HtmlReport.createTest("Sales Analytics"); 
@@ -2779,22 +2792,56 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }         
-         if(_Sales_report_hidden){
+        if(_Sales_report_hidden){
             SCOPE += ", Promo";
             ParentTest = HtmlReport.createTest("Sales Report Hidden"); 
             AP3_sales_reporting_for_hidden_stations BR = new AP3_New.AP3_sales_reporting_for_hidden_stations(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }        
-         if(_Site){
+        if(_Site){
             SCOPE += ", Site";
             ParentTest = HtmlReport.createTest("Site"); 
             AP3_site BR = new AP3_New.AP3_site(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }        
-
-
+        if(_Site_new){
+            SCOPE += ", New Site";
+            ParentTest = HtmlReport.createTest("New Site"); 
+            AP3_site_new BR = new AP3_New.AP3_site_new(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+        } 
+        if(_Smart_analytics){
+            SCOPE += ", Smart Analytics";
+            ParentTest = HtmlReport.createTest("Smart Analytics"); 
+            AP3_smart_analytics BR = new AP3_New.AP3_smart_analytics(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+        }        
+        if(_Timeslots){
+            SCOPE += ", Timeslots";
+            ParentTest = HtmlReport.createTest("Timeslots"); 
+            AP3_timeslots BR = new AP3_New.AP3_timeslots(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+        }
+        if(_Users){
+            SCOPE += ", Users";
+            ParentTest = HtmlReport.createTest("Users"); 
+            AP3_user BR = new AP3_New.AP3_user(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+        }   
+        if(_Roles){
+            SCOPE += ", Users Permissions";
+            ParentTest = HtmlReport.createTest("Users Permissions"); 
+            AP3_user_permission BR = new AP3_New.AP3_user_permission(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+        }         
+        
         // ======== Last Scope
         if(_Logout){ 
             SCOPE += ", Logout";
@@ -4129,7 +4176,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
                 e.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
             }
-
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + "Cleared" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";

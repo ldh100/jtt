@@ -709,7 +709,7 @@ class AP3_site extends AP3_GUI{
                         if (FAIL) { return;} 
                         for (int j = 0; j < L1.size(); j++) {
                             Element_Text("Required: ", L1.get(j), ParentTest, "no_jira");             
-                            if (FAIL) { return;}
+                                if (FAIL) { return;}
                         }
                     Element_By_Path_Text_Enter("Enter new Promo Name", "css", "[aria-label='Promotion Name']", "New Auto Site " + New_ID + " Promo%%" , false, ParentTest, "no_jira");
                         if (FAIL) { return;} 
