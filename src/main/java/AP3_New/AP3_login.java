@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package AP3_New;
 
 /**
@@ -19,7 +14,7 @@ class AP3_login extends AP3_GUI{
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
     }    
-    protected void run(boolean users) throws InterruptedException, Exception  {     
+    protected void run(boolean users) throws Exception  {     
         Navigate_to_URL("Navigate to", url, ParentTest, "no_jira");             
             if (FAIL) { return;}
         Page_URL("AP3 Login page", ParentTest, "no_jira");             
@@ -48,19 +43,21 @@ class AP3_login extends AP3_GUI{
         }
         Element_By_Path_Text_Enter("Enter Valid Email", "css", "[aria-label='E-mail']", ADMIN_ID, false, ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        if(users) {   
-            Element_By_Path_Text_Enter("Enter Invalid Password", "css", "[aria-label='Password']", ADMIN_PW + "_X", false, ParentTest, "no_jira"); 
-                if (FAIL) { return;}
-            Element_By_Path_Click("Unmask Password Click", "xpath", "/html/body/div[1]/div/main/div/div[2]/div[2]/div/div/form/div[4]/div/div[1]/div[2]/div/i", ParentTest, "no_jira"); 
-            Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", ParentTest, "no_jira"); 
-                if (FAIL) { return;} 
-            Wait_For_Element_By_Path_Presence("WaitForElement for Error...", "xpath", "//*[contains(@class, 'v-messages theme--light error--text')]", ParentTest, "no_jira"); 
-                if (FAIL) { return;}   
-            Element_By_Path_Text("Inavalid Credentials Message", "xpath", "//*[contains(text(), 'Your username or credentials')]", ParentTest, "no_jira"); 
-                if (FAIL) { return;}
-            Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']", ParentTest, "no_jira"); // .//input
-                if (FAIL) { return;}     //   "xpath", ".//input[@type='password']" ".//input[@area-label='Password']"
-        }    
+//        if(users) {   
+//            Element_By_Path_Text_Enter("Enter Invalid Password", "css", "[aria-label='Password']", ADMIN_PW + "_X", false, ParentTest, "no_jira"); 
+//                if (FAIL) { return;}
+//            Element_By_Path_Click("Unmask Password Click", "xpath", "/html/body/div[1]/div/main/div/div[2]/div[2]/div/div/form/div[4]/div/div[1]/div[2]/div/i", ParentTest, "no_jira"); 
+//            Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]", ParentTest, "no_jira"); 
+//                if (FAIL) { return;} 
+//            Wait_For_Element_By_Path_Presence("WaitForElement for Error...", "xpath", "//*[contains(@class, 'v-messages theme--light error--text')]", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}   
+//            Element_By_Path_Text("Inavalid Credentials Message", "xpath", "//*[contains(text(), 'Your username or credentials')]", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}
+//            Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}   
+//            Element_By_Path_Input_Select_Clear("Entered Password Clear", "xpath", "//input[@area-label='Password']", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}  
+//        }    
         Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", ADMIN_PW, true, ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Click("Click 'Sign In'", "xpath", "//*[contains(text(), 'Sign in')]", ParentTest, "no_jira"); 
