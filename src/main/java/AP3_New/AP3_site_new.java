@@ -21,14 +21,16 @@ class AP3_site_new extends AP3_GUI{
         ADMIN_ID = a.ADMIN_ID;
         ADMIN_PW = a.ADMIN_PW;
 
-        New_ID = a.New_ID;
         app = a.app;
         appId = a.appId;
         SITE = a.SITE;
         SiteID = a.SiteID;
         BRAND = a.BRAND;
         BrandID = a.BrandID;
+        
+        AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
+        New_ID = a.New_ID;
         TZone = a.TZone;
     }    
     String API_Response_Body = "";

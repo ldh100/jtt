@@ -13,6 +13,11 @@ class AP3_user_permission extends AP3_GUI{
         loadTimeout = a.loadTimeout;
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
+        
+        AP3_TKN = a.AP3_TKN;
+        _All_data = a._All_data;
+        New_ID = a.New_ID;
+        TZone = a.TZone;
     }    
     // in each Env:
     // cdl.test.xtt+rn@gmail.com - Runner // https://api.compassdigital.org/dev/user/auth?realm=bolter  
@@ -27,6 +32,22 @@ class AP3_user_permission extends AP3_GUI{
             if (FAIL) { return;}
         Page_URL("AP3 Login page", ParentTest, "no_jira");             
             if (FAIL) { return;}
+            
+        // logout >>>>>>>>>>>    
+//        Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]",  ParentTest, "no_jira");             
+//            if (FAIL) { return;}
+//        Thread.sleep(500);          
+//        Element_By_Path_Click("Drawer > Dashboard Click", "xpath", "//*[contains(text(), 'Dashboard')]",  ParentTest, "no_jira"); 
+//            if (FAIL) { return;} 
+//        Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0, ParentTest, "no_jira");             
+//        Thread.sleep(500);
+//        Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]",  ParentTest, "no_jira");
+//            if (FAIL) { return;}
+        Element_By_Path_Click("Click 'User Name'", "xpath", "//button[@type='button'][2]",  ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+        Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(),'Logout')]",  ParentTest, "no_jira"); 
+            if (FAIL) { return;}  
+       
 
         // @ST - Hiding this "Runner Login" code for me to run unit test   
         /*    
@@ -517,7 +538,6 @@ Thread.sleep(1000);
         //</editor-fold>   
         // </editor-fold>
        
-
         // <editor-fold defaultstate="collapsed" desc="SM N" >
         Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",   ParentTest, "no_jira"); 
             if (FAIL) { return;}
@@ -706,7 +726,6 @@ Thread.sleep(1000);
         // </editor-fold> 
 // </editor-fold>
        
-
         // <editor-fold defaultstate="collapsed" desc="DM Y" >
         Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",   ParentTest, "no_jira"); 
             if (FAIL) { return;}
@@ -908,7 +927,6 @@ Thread.sleep(1000);
         }
         // </editor-fold>  
    
-
         // <editor-fold defaultstate="collapsed" desc="DM N" >
         Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",   ParentTest, "no_jira"); 
             if (FAIL) { return;}

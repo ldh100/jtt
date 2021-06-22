@@ -23,7 +23,10 @@ class AP3_notifications extends AP3_GUI{
         Location = a.Location;
         DH_MENU_ID = a.DH_MENU_ID;
         
+        AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
+        New_ID = a.New_ID;
+        TZone = a.TZone;
     }    
     protected void run() throws InterruptedException, Exception {
         Wait_For_Element_By_Path_Visibility("Wait for 'AP3 Welcome...' text", "xpath", "//*[contains(text(), 'Welcome to the CDL Admin Panel')]", ParentTest, "no_jira");

@@ -34,6 +34,7 @@ class AP3_menu_manager extends AP3_GUI{
         
         AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
+        New_ID = a.New_ID;
         TZone = a.TZone;
     }    
     protected void run() throws InterruptedException, Exception { 
