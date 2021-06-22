@@ -24,7 +24,6 @@ class AP3_export_menuset extends AP3_GUI{
         
         AP3_TKN = a.AP3_TKN;
         
-        New_ID = a.New_ID;
         app = a.app;
         SITE = a.SITE;
         SiteID = a.SiteID;
@@ -34,7 +33,10 @@ class AP3_export_menuset extends AP3_GUI{
         SectorID = a.SectorID;
         GL_MENU = a.GL_MENU;
         CompanyID = a.CompanyID;
+        
+        AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
+        New_ID = a.New_ID;
         TZone = a.TZone;
     } 
     protected void run() throws InterruptedException, Exception {
