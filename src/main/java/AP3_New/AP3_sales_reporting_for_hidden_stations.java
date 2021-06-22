@@ -32,6 +32,8 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI{
         
         AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
+        New_ID = a.New_ID;
+        TZone = a.TZone;
     }    
     String API_Response_Body = "";
     private String storeBusinessUnit = "";

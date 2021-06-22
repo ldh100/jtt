@@ -33,14 +33,14 @@ class AP3_login extends AP3_GUI{
             if (FAIL) { return;}
         Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type = 'password']", ParentTest, "no_jira"); 
             if (FAIL) { return;}      
-        if(users) {    
-            Element_By_Path_Text_Enter("Enter Invalid Email", "css", "[aria-label='E-mail']", "x.y@compassdigitalio", false, ParentTest, "no_jira"); 
-                if (FAIL) { return;}
-            Element_By_Path_Text("Invalid Email Message", "xpath", "//*[contains(text(), 'Please enter a valid email')]", ParentTest, "no_jira"); 
-                if (FAIL) { return;}
-            Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']", ParentTest, "no_jira"); 
-                if (FAIL) { return;}
-        }
+//        if(users) {    
+//            Element_By_Path_Text_Enter("Enter Invalid Email", "css", "[aria-label='E-mail']", "x.y@compassdigitalio", false, ParentTest, "no_jira"); 
+//                if (FAIL) { return;}
+//            Element_By_Path_Text("Invalid Email Message", "xpath", "//*[contains(text(), 'Please enter a valid email')]", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}
+//            Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}
+//        }
         Element_By_Path_Text_Enter("Enter Valid Email", "css", "[aria-label='E-mail']", ADMIN_ID, false, ParentTest, "no_jira"); 
             if (FAIL) { return;}
 //        if(users) {   

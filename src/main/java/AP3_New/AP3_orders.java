@@ -26,7 +26,10 @@ class AP3_orders extends AP3_GUI{
         DH_MENU_ID = a.DH_MENU_ID;
         SECTOR = a.SECTOR;
         
+        AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
+        New_ID = a.New_ID;
+        TZone = a.TZone;
     }    
     protected void run() throws InterruptedException, Exception { 
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
@@ -84,7 +87,7 @@ class AP3_orders extends AP3_GUI{
             } 
         Element_By_Path_Click("Click 'Site' Name", "xpath", "//td[text()='" + SITE + "']", ParentTest, "no_jira"); 
             if (FAIL) { return;}    
-        Thread.sleep(500);
+        Thread.sleep(1000);
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//div[contains(@class, 'progress')]", ParentTest, "no_jira");
             if (FAIL) { return;}   // v-datatable__progress << 'v-progress-circular'
         Thread.sleep(500);            
