@@ -19,7 +19,6 @@ class AP3_brand_new extends AP3_GUI{
         ADMIN_ID = a.ADMIN_ID;
         ADMIN_PW = a.ADMIN_PW;
 
-        New_ID = a.New_ID;
         app = a.app;
         SITE = a.SITE;
         SiteID = a.SiteID;
@@ -27,7 +26,10 @@ class AP3_brand_new extends AP3_GUI{
         BrandID = a.BrandID;
         SECTOR = a.SECTOR;
         GL_MENU = a.GL_MENU;
+        
+        AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
+        New_ID = a.New_ID;
         TZone = a.TZone;
     } 
     protected void run(boolean NEW_SITE) throws InterruptedException, Exception  { 

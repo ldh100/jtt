@@ -33,7 +33,10 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI{
         SECTOR = a.SECTOR;
         COUNTRY = a.COUNTRY;
         
+        AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
+        New_ID = a.New_ID;
+        TZone = a.TZone;
     }    
 
     private String storeSearchedSite = "";

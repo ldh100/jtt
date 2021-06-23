@@ -19,8 +19,6 @@ class AP3_images extends AP3_GUI{
         ADMIN_ID = a.ADMIN_ID;
         ADMIN_PW = a.ADMIN_PW;
         url = a.url;
-
-        AP3_TKN = a.AP3_TKN;
         
         BaseAPI = a.BaseAPI;
         New_ID = a.New_ID;
@@ -36,6 +34,7 @@ class AP3_images extends AP3_GUI{
         
         AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
+        New_ID = a.New_ID;
         TZone = a.TZone;
     } 
     protected void run() throws InterruptedException, Exception {
