@@ -1,5 +1,8 @@
 package AP3_New;
 
+import static A.A.Time_12_formatter;
+import static A.A.sleep;
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import org.openqa.selenium.By;
@@ -95,13 +98,25 @@ class AP3_orders extends AP3_GUI{
         Find_Text("Find 'Search for...'", "Search for anything", true, ParentTest, "no_jira"); 
         Find_Text("Find 'Order type'", "Order Type", true, ParentTest, "no_jira"); 
             
-        // Should be not here > expected nothing for today     
+        String filebrand = BRAND.toLowerCase().replace(" ","-");
+        filebrand = "all-orders-"+filebrand+"-undefined.pdf";
+        // Should be not here > expected nothing for today  //Once we add placing orders to our script the below export is required.
         Find_Text("Find 'Export' text", "Export", true, ParentTest, "no_jira");      
         Element_By_Path_Click("Click Export Button", "xpath", "//div[normalize-space()='Export']", ParentTest, "no_jira");
             if (FAIL) { return;} 
-Thread.sleep(5000);           
+    Thread.sleep(5000);           
         //  Call it later after date range selected, Check PDF > delete,  achnge to CSV > Check > delete 
-        
+     
+        File tmp = new File(System.getProperty("user.home") + File.separator + "Downloads"+ File.separator+ "pickup-orders-undefined.pdf");
+        if (tmp.exists()) {
+            _t++; Thread.sleep((long) sleep);File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", "pickup-orders-undefined.pdf", ParentTest, "no_jira") ;
+               if (FAIL) { return;}   
+        } else {
+            _t++;
+            _w++;
+            EX += _t + "\t" + "File to delete does not exist" + "\t" + "File : pickup-orders-undefined.pdf  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }
+ 
         Element_By_Path_Text("Default Order Type", "xpath", "//div[contains(@class, 'v-select__selection v-select__selection--comma')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Click("Open Date picker", "css", "[aria-label='Date(s)']", ParentTest, "no_jira"); 
@@ -146,7 +161,7 @@ Thread.sleep(5000);
         Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         //</editor-fold>            
-
+        
         List_L0("Orders Data Rows Count", "tagName", "tr", ParentTest, "no_jira");             
             if (FAIL) { return;}
         Element_Text("Order Data Headers", L0.get(7), ParentTest, "no_jira");  
@@ -160,7 +175,24 @@ Thread.sleep(5000);
             }
             //Execute only if orders present
             if(T_Index != -1) {  
-               
+                //Export in CSV format
+               Element_By_Path_Click("Select  CSV", "xpath", "(//div[@class='v-radio theme--light'])[1]", ParentTest, "no_jira"); 
+                    if (FAIL) { return;}              
+                  Thread.sleep(3000);
+                Element_By_Path_Click("Click Export Button", "xpath", "//div[normalize-space()='Export']", ParentTest, "no_jira");
+                   if (FAIL) { return;}         
+                Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+                   if (FAIL) { return;}      
+                Thread.sleep(3000);
+                tmp = new File(System.getProperty("user.home") + File.separator + "Downloads"+ File.separator+ "all-orders-undefined.csv");
+                if (tmp.exists()) {
+                    _t++; Thread.sleep((long) sleep); File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", "all-orders-undefined.csv",ParentTest, "no_jira");
+                            if (FAIL) { return;}   
+                } else {
+                    _t++; _w++;
+                    EX += _t + "\t" + "File to delete does not exist" + "\t" + "all-orders-undefined.pdf  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                }
+                         
                 List_Child_E1_By_Path("Find child 'td' element", L0.get(8), "tagName", "td", ParentTest, "no_jira"); 
                     if (FAIL) { return;}        // ====== index 8, was 9 ===  
                 Element_Click("Click top Order",L0.get(8), ParentTest, "no_jira");  //  e1
@@ -197,7 +229,8 @@ Thread.sleep(5000);
                     if (FAIL) { return;}
                 Element_By_Path_Click("Close Order #YYYY", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')]", ParentTest, "no_jira"); 
                     if (FAIL) { return;}       
-            }     
+            }   
+        }
             //Selecting a station to display orders
             T_Index = 0; // ============= Default 'All Stations' ===================
             Element_By_Path_Click("Open Brand combobox", "css", "[aria-label='Brand']", ParentTest, "no_jira"); 
@@ -213,13 +246,8 @@ Thread.sleep(5000);
             }
             Element_Click("Select Brand: " + BRAND, L2.get(T_Index), ParentTest, "no_jira");
             if (FAIL) { return;}    
-Thread.sleep(3000);
-            Element_By_Path_Click("Click Export Button", "xpath", "//div[normalize-space()='Export']", ParentTest, "no_jira");
-               if (FAIL) { return;}         
-            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
-               if (FAIL) { return;}      
-        }     
-        
+            Thread.sleep(3000);
+           
         //Select a specific date from the calendar to view the orders for that date
         LocalDate date = LocalDate.now();  
         LocalDate prev_date = date.minusDays(1);
@@ -261,8 +289,8 @@ Thread.sleep(1000);
         Element_By_Path_Click("Click day 17", "xpath", "//tr/td[contains(number(),17)]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
 Thread.sleep(3000);    
-        Element_By_Path_Click("Click day 10", "xpath", "//tr/td[contains(number(),10)]", ParentTest, "no_jira"); 
-            if (FAIL) { return;} 
+       Element_By_Path_Text_DblClick("Click day 10", "xpath", "//tr/td[contains(number(),10)]", ParentTest, "no_jira"); 
+            if (FAIL) { return; }
 Thread.sleep(3000);
         Element_By_Path_Click("Click day 16", "xpath", "//tr/td[contains(number(),16)]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
@@ -272,5 +300,21 @@ Thread.sleep(5000);
 Thread.sleep(1000);
         //URL to verify the date picker has selected 7 day range
         Page_URL("Current URL", ParentTest, "no_jira");
+       
+        
+        Element_By_Path_Click("Click Export Button", "xpath", "//div[normalize-space()='Export']", ParentTest, "no_jira");
+           if (FAIL) { return;}         
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+           if (FAIL) { return;}      
+        Thread.sleep(3000);
+        tmp = new File(System.getProperty("user.home") + File.separator + "Downloads"+ File.separator+ filebrand);
+        if (tmp.exists()) {
+          _t++; Thread.sleep((long) sleep); File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", filebrand, ParentTest, "no_jira");
+             if (FAIL) { return;}   
+        } else {
+            _t++; _w++;
+            EX += _t + "\t" + "File to delete does not exist" + "\t" + filebrand + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }
+        
     }  
 }
