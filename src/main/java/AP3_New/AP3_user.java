@@ -437,7 +437,7 @@ class AP3_user extends AP3_GUI{
         Find_Text("Admin 'Site Permissions'", "Site Permissions", false, ParentTest, "no_jira"); 
         Find_Text("Admin 'Menu Scheduler'", "Menu Scheduler", false, ParentTest, "no_jira"); 
         Find_Text("Admin 'Brand Config'", "Brand Config", false, ParentTest, "no_jira"); 
-        Find_Text("Admin 'Smart Analytics'", "Smart Analytics", false, ParentTest, "no_jira");
+        Find_Text("Admin 'Smart Analytics'", "Smart Analytics", true, ParentTest, "no_jira");
         
         Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", ParentTest, "no_jira" ); 
             if (FAIL) { return; }  
@@ -603,10 +603,10 @@ class AP3_user extends AP3_GUI{
                                         if (FAIL) { return;} 
                                     Element_Child_List_L1("Found/Select Sites count", e1, "xpath", ".//i[@class='v-icon mdi mdi-checkbox-blank-outline theme--light']", ParentTest, "no_jira" );             
                                         if (FAIL) { return;}
-                                    for (int j = 0; j < L1.size(); j++) {  
-                                        Element_Click("Check Site " + j, L1.get(j), ParentTest, "no_jira"); 
-                                            if (FAIL) { return;}                                         
-                                    }
+                                        for (int j = 0; j < L1.size(); j++) {  
+                                            Element_Click("Check Site " + j, L1.get(j), ParentTest, "no_jira"); 
+                                                if (FAIL) { return;}                                         
+                                        }
                                     Find_Text("Find 'Sites Selected (num)' text", "Sites Selected", true, ParentTest, "no_jira"); 
                                         if (FAIL) { return;}   
                                 }                                  
@@ -855,10 +855,10 @@ class AP3_user extends AP3_GUI{
                                         if (FAIL) { return;} 
                                     Element_Child_List_L1("Found/Select Sites count", e1, "xpath", ".//i[@class='v-icon mdi mdi-checkbox-blank-outline theme--light']", ParentTest, "no_jira" );             
                                         if (FAIL) { return;}
-                                    for (int j = 0; j < L1.size(); j++) {  
-                                        Element_Click("Check Site " + j, L1.get(j), ParentTest, "no_jira"); 
-                                            if (FAIL) { return;}                                         
-                                    }
+                                        for (int j = 0; j < L1.size(); j++) {  
+                                            Element_Click("Check Site " + j, L1.get(j), ParentTest, "no_jira"); 
+                                                if (FAIL) { return;}                                         
+                                        }
                                     Find_Text("Find 'Sites Selected (num)' text", "Sites Selected", true, ParentTest, "no_jira"); 
                                         if (FAIL) { return;}   
 //                              }                                  

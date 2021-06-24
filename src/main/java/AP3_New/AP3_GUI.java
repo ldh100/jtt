@@ -703,86 +703,71 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_images, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_timeslots, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_site_new, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(_brand, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_resent_updates, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(_brand_new))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(_brand_closure, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(_group_management)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_reschedule_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(_sales_reporting, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(_sales_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_notifications, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(_smart_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(_bulk_apply, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(_orders_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_login, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_site, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_brand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_brand_closure, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_sales_reporting, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_sales_analytics, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_smart_analytics, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_bulk_apply, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_export_menuset, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_reschedule_menu, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(_menu_manager, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(_notifications, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(_group_management))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(_images, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(_timeslots, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(_resent_updates, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(1, 1, 1)
-                        .addComponent(_logout))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_site_new, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_brand_new, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(_users, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_roles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(_export_menuset, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_sales_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(_menu_manager, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
-                        .addComponent(lblSITES15)
-                        .addGap(2, 2, 2)
-                        .addComponent(txtDH_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)
+                        .addComponent(txtSector, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72)
+                        .addComponent(txtComp, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(169, 169, 169)
                         .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(txtSector, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72)
-                        .addComponent(txtComp, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(138, 138, 138)
+                        .addComponent(lblSITES15)
+                        .addGap(2, 2, 2)
+                        .addComponent(txtDH_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(_sales_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(_orders_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(8, 8, 8))
         );
         jPanel1Layout.setVerticalGroup(
@@ -808,36 +793,42 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                     .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(_group_management, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_reschedule_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(_sales_reporting, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(_sales_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_notifications, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(_smart_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(_group_management, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_sales_reporting, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_sales_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_notifications, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_smart_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(_bulk_apply, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_orders_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_orders_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(_sales_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_export_menuset, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(_export_menuset, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_sales_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addComponent(_reschedule_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
+                        .addGap(2, 2, 2)
                         .addComponent(_menu_manager, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
@@ -1693,121 +1684,117 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         }
     }
     private void LOG_START(){
-        new Thread(() -> {
-            try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
-                PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] (" +
-                        "[Date]" +   // 1
-                        ", [Time]" +   // 2
-                        ", [app]" +   // 3
-                        ", [url]" +   // 4
-                        ", [summary]" +   // 5
-                        ", [t_calls]" +   // 6
-                        ", [t_min]" +   // 7
-                        ", [t_avg]" +   // 8
-                        ", [t_max]" +   // 9
-                        ", [p_50]" +   // 10
-                        ", [p_90]" +   // 11
-                        ", [test_type]" +   // 12
-                        ", [user_id]" +   // 13
-                        ", [user_ws]" +   // 14
-                        ", [env]" +   // 15
-                        ", [Result]" +   // 16
-                        ", [Status]" +   // 17
-                        ", [Excel]" +     // 18
-                        ") VALUES (" +
-                        "?" +     // 1
-                        ",?" +    // 2
-                        ",?" +    // 3
-                        ",?" +    // 4
-                        ",?" +    // 5
-                        ",?" +    // 6
-                        ",?" +    // 7
-                        ",?" +    // 8
-                        ",?" +    // 9
-                        ",?" +    // 10
-                        ",?" +    // 11
-                        ",?" +    // 12
-                        ",?" +    // 13
-                        ",?" +    // 14
-                        ",?" +    // 15
-                        ",?" +    // 16
-                        ",?" +    // 17
-                        ",?" +    // 18
-                        ")");
-                _insert.setString(1, LocalDateTime.now().format(A.A.Date_formatter));
-                _insert.setString(2, LocalDateTime.now().format(A.A.Time_24_formatter));
-                _insert.setString(3, "AP3_" + env);
-                _insert.setString(4, url);
-                _insert.setString(5, "Running...");
-                _insert.setString(6, "0");
-                _insert.setString(7, "0");
-                _insert.setString(8, "0");
-                _insert.setString(9, "0");
-                _insert.setString(10, "0");
-                _insert.setString(11, "0");
-                _insert.setString(12, r_type);
-                _insert.setString(13, A.A.UserID);
-                _insert.setString(14, A.A.WsID);
-                _insert.setString(15, BROWSER + HEADLESS);
-                _insert.setString(16,  "= Job is running... ===\r\n" + "");
-                _insert.setString(17, "Running");
-                _insert.setString(18, "None");
-                int row = _insert.executeUpdate();
-                conn.close();
-            }  catch (SQLException ex) {
-                txtLog.append( "= LOG_START > SQL ERROR: " + ex.getMessage() + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-        }).start();
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] (" +
+                    "[Date]" +   // 1
+                    ", [Time]" +   // 2
+                    ", [app]" +   // 3
+                    ", [url]" +   // 4
+                    ", [summary]" +   // 5
+                    ", [t_calls]" +   // 6
+                    ", [t_min]" +   // 7
+                    ", [t_avg]" +   // 8
+                    ", [t_max]" +   // 9
+                    ", [p_50]" +   // 10
+                    ", [p_90]" +   // 11
+                    ", [test_type]" +   // 12
+                    ", [user_id]" +   // 13
+                    ", [user_ws]" +   // 14
+                    ", [env]" +   // 15
+                    ", [Result]" +   // 16
+                    ", [Status]" +   // 17
+                    ", [Excel]" +     // 18
+                    ") VALUES (" +
+                    "?" +     // 1
+                    ",?" +    // 2
+                    ",?" +    // 3
+                    ",?" +    // 4
+                    ",?" +    // 5
+                    ",?" +    // 6
+                    ",?" +    // 7
+                    ",?" +    // 8
+                    ",?" +    // 9
+                    ",?" +    // 10
+                    ",?" +    // 11
+                    ",?" +    // 12
+                    ",?" +    // 13
+                    ",?" +    // 14
+                    ",?" +    // 15
+                    ",?" +    // 16
+                    ",?" +    // 17
+                    ",?" +    // 18
+                    ")");
+            _insert.setString(1, LocalDateTime.now().format(A.A.Date_formatter));
+            _insert.setString(2, LocalDateTime.now().format(A.A.Time_24_formatter));
+            _insert.setString(3, "AP3_" + env);
+            _insert.setString(4, url);
+            _insert.setString(5, "Running...");
+            _insert.setString(6, "0");
+            _insert.setString(7, "0");
+            _insert.setString(8, "0");
+            _insert.setString(9, "0");
+            _insert.setString(10, "0");
+            _insert.setString(11, "0");
+            _insert.setString(12, r_type);
+            _insert.setString(13, A.A.UserID);
+            _insert.setString(14, A.A.WsID);
+            _insert.setString(15, BROWSER + HEADLESS);
+            _insert.setString(16,  "= Job is running... ===\r\n" + "");
+            _insert.setString(17, "Running");
+            _insert.setString(18, "None");
+            int row = _insert.executeUpdate();
+            conn.close();
+        }  catch (SQLException ex) {
+            txtLog.append( "= LOG_START > SQL ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        }
     }
     private void LOG_UPDATE(String LOG){  
-        new Thread(() -> {
-            try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
-                PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET " +
-                        " [Date] = ?" +       // 1
-                        ", [Time] = ?" +      // 2
-                        ", [app] = ?" +       // 3
-                        ", [url] = ?" +       // 4
-                        ", [summary] = ?" +   // 5
-                        ", [t_calls] = ?" +   // 6
-                        ", [t_min] = ?" +     // 7
-                        ", [t_avg] = ?" +     // 8
-                        ", [t_max] = ?" +     // 9
-                        ", [p_50] = ?" +      // 10
-                        ", [p_90] = ?" +      // 11
-                        ", [test_type] = ?" +     // 12
-                        ", [user_id] = ?" +       // 13
-                        ", [user_ws] = ?" +       // 14
-                        ", [env] = ?" +       // 15
-                        ", [Result] = ?" +    // 16
-                        ", [Status] = ?" +    // 17
-                        ", [Excel] = ?" +     // 18
-                        " WHERE [app] = 'AP3_" + env + "' AND [Status] = 'Running'");
-                _update.setString(1, LocalDateTime.now().format(A.A.Date_formatter));
-                _update.setString(2, LocalDateTime.now().format(A.A.Time_24_formatter));
-                _update.setString(3, "AP3_" + env);
-                _update.setString(4, url);
-                _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
-                _update.setInt(6, t_calls);
-                _update.setDouble(7, t_min);
-                _update.setDouble(8, t_avg);
-                _update.setDouble(9, t_max);
-                _update.setDouble(10, p_50);
-                _update.setDouble(11, p_90);
-                _update.setString(12, r_type);
-                _update.setString(13, A.A.UserID);
-                _update.setString(14, A.A.WsID);
-                _update.setString(15, BROWSER + HEADLESS);
-                _update.setString(16, LOG);
-                _update.setString(17, "Scope: " + SCOPE);
-                _update.setString(18, EX);
-                int row = _update.executeUpdate();
-                conn.close();
-            } catch (SQLException ex) {
-                txtLog.append( "= LOG_UPDATE > SQL ERROR: " + ex.getMessage());
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }            
-        }).start();
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+            PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET " +
+                    " [Date] = ?" +       // 1
+                    ", [Time] = ?" +      // 2
+                    ", [app] = ?" +       // 3
+                    ", [url] = ?" +       // 4
+                    ", [summary] = ?" +   // 5
+                    ", [t_calls] = ?" +   // 6
+                    ", [t_min] = ?" +     // 7
+                    ", [t_avg] = ?" +     // 8
+                    ", [t_max] = ?" +     // 9
+                    ", [p_50] = ?" +      // 10
+                    ", [p_90] = ?" +      // 11
+                    ", [test_type] = ?" +     // 12
+                    ", [user_id] = ?" +       // 13
+                    ", [user_ws] = ?" +       // 14
+                    ", [env] = ?" +       // 15
+                    ", [Result] = ?" +    // 16
+                    ", [Status] = ?" +    // 17
+                    ", [Excel] = ?" +     // 18
+                    " WHERE [app] = 'AP3_" + env + "' AND [Status] = 'Running'");
+            _update.setString(1, LocalDateTime.now().format(A.A.Date_formatter));
+            _update.setString(2, LocalDateTime.now().format(A.A.Time_24_formatter));
+            _update.setString(3, "AP3_" + env);
+            _update.setString(4, url);
+            _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
+            _update.setInt(6, t_calls);
+            _update.setDouble(7, t_min);
+            _update.setDouble(8, t_avg);
+            _update.setDouble(9, t_max);
+            _update.setDouble(10, p_50);
+            _update.setDouble(11, p_90);
+            _update.setString(12, r_type);
+            _update.setString(13, A.A.UserID);
+            _update.setString(14, A.A.WsID);
+            _update.setString(15, BROWSER + HEADLESS);
+            _update.setString(16, LOG);
+            _update.setString(17, "Scope: " + SCOPE);
+            _update.setString(18, EX);
+            int row = _update.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            txtLog.append( "= LOG_UPDATE > SQL ERROR: " + ex.getMessage());
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        }            
     }
  
     private void GUI_Load_CONFIG(){
@@ -2471,11 +2458,11 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                     }
                 } catch (InterruptedException | ExecutionException ex)  { 
                     Current_Log_Update(GUI, "- BW1 Done > ERROR: " + ex.getMessage() + "\r\n");
+                    
                     BW1_FAIL_LOG_UPDATE(ex.getMessage()); 
                 } 
             } 
         }; 
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         BW1.execute();  
     }
     private void BW2_DoWork(){
@@ -2484,7 +2471,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             protected String doInBackground() throws Exception { 
                 String Toast_Msg = "";
                 String Previous_Toast_Msg = "";
-                while (true){
+                while (BW1 != null){
                     Toast_Msg = "";
                     Thread.sleep(1000);
                     try {
@@ -2528,11 +2515,12 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                             }
                             Thread.sleep(2000); //  pause till new alert expected ???? 
                         }
-                    } catch (Exception ex){ // Exception ex
+                    } catch (IOException | InterruptedException ex){ // Exception ex
                         txtLog.append( "= BW2: " + ex.getMessage() + "\r\n");
                         txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
                     }
                 }
+                return "Done"; 
             }
         }; 
         BW2.execute();
@@ -5579,7 +5567,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         CloseableHttpClient httpclient = HttpClients.createDefault(); 
         try {
             HttpGet httpget = new HttpGet(URL); 
-            if(AUTH!= ""){
+            if(AUTH != ""){
                 httpget.setHeader("Authorization", AUTH);               
             }
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
