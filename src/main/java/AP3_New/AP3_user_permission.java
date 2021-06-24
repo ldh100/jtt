@@ -1,18 +1,27 @@
 package AP3_New;
 
-/**
- *
- * @author Oleg.Spozito
- */
 class AP3_user_permission extends AP3_GUI{
     protected AP3_user_permission(AP3_GUI a) throws InterruptedException, Exception {
-        ADMIN_ID = a.ADMIN_ID;
-        ADMIN_PW = a.ADMIN_PW;
-        url = a.url;
         d1 = a.d1;
+        url = a.url;
         loadTimeout = a.loadTimeout;
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
+        env = a.env;
+        BaseAPI = a.BaseAPI;
+        
+        ADMIN_ID = a.ADMIN_ID;
+        ADMIN_PW = a.ADMIN_PW;
+        New_ID = a.New_ID;
+        app = a.app;
+        appId = a.appId;
+        SITE = a.SITE;
+        BRAND = a.BRAND;
+        SiteID = a.SiteID;
+        Location = a.Location;
+        DH_MENU_ID = a.DH_MENU_ID;
+        SECTOR = a.SECTOR;
+        CompanyID = a.CompanyID;
         
         AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
@@ -30,6 +39,7 @@ class AP3_user_permission extends AP3_GUI{
     protected void run() throws Exception { 
         Navigate_to_URL("Navigate to", url, ParentTest, "no_jira");             
             if (FAIL) { return;}
+        Thread.sleep(500);
         Page_URL("AP3 Login page", ParentTest, "no_jira");             
             if (FAIL) { return;}
             
@@ -365,7 +375,7 @@ Thread.sleep(1000);
             Find_Text("SM Y Dashboard 'Users'", "Users", false, ParentTest, "no_jira");     
             Find_Text("SM Y Dashboard 'Announcements'", "Announcements", true, ParentTest, "no_jira"); 
             Find_Text("SM Y Dashboard 'Promo Management'", "Promo Management", false, ParentTest, "no_jira");              
-            Find_Text("SM Y Dashboard 'Smart Analytics'", "Smart Analytics", false, ParentTest, "no_jira"); 
+            Find_Text("SM Y Dashboard 'Smart Analytics'", "Smart Analytics", true, ParentTest, "no_jira"); 
             Find_Text("SM Y Dashboard 'Ap3 Notification'", "AP3 Notification", false, ParentTest, "no_jira"); 
             
              //SM Y Sites permissions

@@ -484,6 +484,7 @@ public class W_Report extends javax.swing.JInternalFrame {
 
     private void LoadFilters() {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        cmbF_App.removeAllItems();
         cmbF_App.addItem("ALL");
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery("SELECT Distinct [app] FROM[dbo].[aw_result] ORDER BY [app]");
@@ -497,6 +498,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         }
         cmbF_App.setSelectedIndex(0);
         
+        cmbF_User.removeAllItems();
         cmbF_User.addItem("ALL");
         int User_Index = -1;
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {

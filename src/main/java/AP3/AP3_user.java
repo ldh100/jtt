@@ -595,10 +595,10 @@ public class AP3_user {
                                         if (FAIL) { return;} 
                                     _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Found/Select Sites count", e1, "xpath", ".//i[@class='v-icon mdi mdi-checkbox-blank-outline theme--light']", "no_jira");             
                                         if (FAIL) { return;}
-                                    for (int j = 0; j < L1.size(); j++) {  
-                                        _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Check Site " + j, L1.get(j),"no_jira"); 
-                                            if (FAIL) { return;}                                         
-                                    }
+                                        for (int j = 0; j < L1.size(); j++) {  
+                                            _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Check Site " + j, L1.get(j),"no_jira"); 
+                                                if (FAIL) { return;}                                         
+                                        }
                                     _t++; Thread.sleep((long) sleep); TWeb.Find_Text("Find 'Sites Selected (num)' text", "Sites Selected", true,"no_jira"); 
                                         if (FAIL) { return;}   
                                 }                                  
