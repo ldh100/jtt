@@ -1960,13 +1960,19 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         BW2 = new SwingWorker() {             
             @Override
             protected String doInBackground() throws Exception { 
-                while (true){
+                String Toast_Msg = "";
+                String Previous_Toast_Msg = "";
+                while (BW1 != null){
                     Toast_Msg = "";
                     Thread.sleep(1000);
                     try {
                         List<WebElement> ALERTS = d1.findElements(By.cssSelector("[role='alert']"));
-                        if(ALERTS.size() > 0){
+                        if(ALERTS.size() > 0) {
                             Toast_Msg = ALERTS.get(0).getAttribute("textContent");// .getText();
+                            if(Toast_Msg.equals(Previous_Toast_Msg)){
+                                continue;
+                            }
+                            Previous_Toast_Msg = Toast_Msg;
                             if(     Toast_Msg.toLowerCase().contains("successfully") || 
                                     Toast_Msg.toLowerCase().contains(" been updated") || 
                                     Toast_Msg.toLowerCase().contains(" been added") || 
@@ -1976,20 +1982,21 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                                 _t++;
                                 _p++;
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                            
-                                Log_Html_Result("PASS", Toast_Msg, false, ParentTest.createNode("Snackbar Toast Msg"));
+                                Log_Html_Result("PASS", Toast_Msg, false, ParentTest.createNode("Snackbar Toast Msg"));                            
                             } else if(Toast_Msg.toLowerCase().contains("could not")|| 
                                     Toast_Msg.toLowerCase().contains("unable to save")|| 
+                                    Toast_Msg.toLowerCase().contains("already ")|| 
                                     Toast_Msg.toLowerCase().contains("fail")) {
                                 _t++;
                                 _f++;
                                 F += "Step: " + _t + " > FAIL - " + Toast_Msg + "\r\n";
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                           
-                                Log_Html_Result("FAIL", Toast_Msg, true, ParentTest.createNode("Snackbar Toast Msg"));
+                                Log_Html_Result("FAIL", Toast_Msg, true, ParentTest.createNode("Snackbar Toast Msg"));                            
                             } else if(Toast_Msg.toLowerCase().contains("fix") || Toast_Msg.toLowerCase().contains("error")) {
                                 _t++;
                                 _w++;
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                           
-                                Log_Html_Result("WARN", Toast_Msg, true, ParentTest.createNode("Snackbar Toast Msg"));
+                                Log_Html_Result("WARN", Toast_Msg, true, ParentTest.createNode("Snackbar Toast Msg"));                            
                             } else {
                                 _t++;
                                 _w++;
@@ -1997,16 +2004,17 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                           
                                 Log_Html_Result("WARN", Toast_Msg, true, ParentTest.createNode("Snackbar Toast Msg"));
                             }
-                            Thread.sleep(4000); //  pause till new alert expected ???? 
+                            Thread.sleep(2000); //  pause till new alert expected ???? 
                         }
-                    } catch (InterruptedException ex){ // Exception ex
+                    } catch (IOException | InterruptedException ex){ // Exception ex
                         txtLog.append( "= BW2: " + ex.getMessage() + "\r\n");
                         txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
                     }
                 }
+                return "Done"; 
             }
         }; 
-        BW2.execute();  // executes the swingworker on worker thread   
+        BW2.execute();
     }
     private void BW1_FAIL_LOG_UPDATE(String Error){
         Summary = "BW1 - Failed: " + Error;
