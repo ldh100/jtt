@@ -132,9 +132,9 @@ class AP3_export_menuset extends AP3_GUI{
         Thread.sleep(500);
         Element_Click("Added Menu Set 'dots' Click", L2.get(1), ParentTest, "no_jira");
             if (FAIL) { return;}   
-        Thread.sleep(1000);
+//Thread.sleep(1000);
         Wait_For_Element_By_Path_Presence("Wait for Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira"); 
-                if (FAIL) { return;}                
+            if (FAIL) { return;}                
         Element_E1_Find("Find Menu Edit Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_Child_List_L1("Menu Edit Options list Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                                     

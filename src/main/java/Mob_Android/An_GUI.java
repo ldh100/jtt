@@ -388,55 +388,57 @@ public class An_GUI extends javax.swing.JInternalFrame {
             paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneCore_ScopeLayout.createSequentialGroup()
                 .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(_optX, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(_invalids, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(_login, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(_order_history, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(_order_email, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(_reorder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(_explore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(_edit_item, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-                    .addComponent(_promo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(_mplan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(_allow_loc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(_support, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(_welcome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(_acc_options, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(_edit_profile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_all_cards, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_feedback, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_forgot_pw, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-            .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                        .addComponent(jrbNU)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_optX, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(_invalids, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(_login, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(_order_history, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(_order_email, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                            .addComponent(_reorder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rbEU)
-                        .addGap(0, 0, 0)
-                        .addComponent(rbNU_EU)))
-                .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(lblSITES12))
-                    .addComponent(lblSITES8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
-                .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbMPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbPromo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(_explore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(_edit_item, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                            .addComponent(_promo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(_mplan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(_allow_loc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_support, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                            .addComponent(_welcome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(_acc_options, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(_edit_profile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_all_cards, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_feedback, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_forgot_pw, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneCore_ScopeLayout.createSequentialGroup()
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                                .addComponent(jrbNU)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbEU)
+                                .addGap(0, 0, 0)
+                                .addComponent(rbNU_EU))
+                            .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(paneCore_ScopeLayout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(lblSITES12))
+                            .addComponent(lblSITES8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbPromo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbMPlan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(8, 8, 8))
         );
         paneCore_ScopeLayout.setVerticalGroup(
             paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                .addGap(4, 4, 4)
+                .addGap(0, 0, 0)
                 .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneCore_ScopeLayout.createSequentialGroup()
                         .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -477,26 +479,25 @@ public class An_GUI extends javax.swing.JInternalFrame {
                         .addGap(2, 2, 2)
                         .addComponent(_acc_options, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(64, 64, 64)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
+                        .addGap(9, 9, 9)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jrbNU, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rbEU, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rbNU_EU, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(paneCore_ScopeLayout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cmbMPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblSITES12)))))))
+                        .addGap(22, 22, 22)
+                        .addGroup(paneCore_ScopeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbMPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSITES12))))
+                .addGap(6, 6, 6))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -507,12 +508,10 @@ public class An_GUI extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(paneCore_Scope, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 5, Short.MAX_VALUE))
+            .addComponent(paneCore_Scope, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 184, 420, 192));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 152, 420, 220));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -539,7 +538,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 424, 164));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 424, 172));
 
         DV2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV2.setModel(new javax.swing.table.DefaultTableModel(
@@ -563,7 +562,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 20, 420, 120));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 20, 420, 84));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
 
@@ -611,7 +610,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 .addGap(2, 2, 2))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 140, 420, -1));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 104, 420, -1));
 
         txtLog.setEditable(false);
         txtLog.setColumns(20);
@@ -623,7 +622,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         txtLog.setPreferredSize(null);
         jScrollPane1.setViewportView(txtLog);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 360, 424, 140));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 372, 428, 128));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -721,24 +720,24 @@ public class An_GUI extends javax.swing.JInternalFrame {
 
         txtMobile_Id.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_Id.setText("cdl.test.xtt@gmail.com");
-        getContentPane().add(txtMobile_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 384, 188, -1));
+        getContentPane().add(txtMobile_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 376, 188, -1));
 
         txtMobile_Pw.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_Pw.setText("Password1");
-        getContentPane().add(txtMobile_Pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 384, 92, -1));
+        getContentPane().add(txtMobile_Pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 376, 92, -1));
 
         lblSITES3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSITES3.setText("Mobile User:");
         lblSITES3.setToolTipText("");
         lblSITES3.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES3, new org.netbeans.lib.awtextra.AbsoluteConstraints(452, 388, 76, -1));
+        getContentPane().add(lblSITES3, new org.netbeans.lib.awtextra.AbsoluteConstraints(452, 380, 76, -1));
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSITES6.setText("PW:");
         lblSITES6.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 388, -1, -1));
+        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 380, -1, -1));
 
         DV3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV3.setModel(new javax.swing.table.DefaultTableModel(
@@ -751,17 +750,17 @@ public class An_GUI extends javax.swing.JInternalFrame {
         ));
         DV3.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV3.setGridColor(java.awt.SystemColor.activeCaptionBorder);
-        DV3.setName("DV2"); // NOI18N
+        DV3.setName("DV3"); // NOI18N
         DV3.setOpaque(false);
         DV3.setRowHeight(18);
         DV3.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(DV3);
 
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 204, 424, 80));
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 212, 424, 60));
 
         lblAPK.setText("Builds / APK");
         lblAPK.setAlignmentX(0.5F);
-        getContentPane().add(lblAPK, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 188, 360, -1));
+        getContentPane().add(lblAPK, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 196, 360, -1));
 
         cmbDevice.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         cmbDevice.setForeground(new java.awt.Color(0, 51, 204));
@@ -770,7 +769,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 cmbDeviceItemStateChanged(evt);
             }
         });
-        getContentPane().add(cmbDevice, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 336, 256, 20));
+        getContentPane().add(cmbDevice, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 348, 424, 20));
 
         btnGetScreenshot.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnGetScreenshot.setText("Take ScreenShot");
@@ -780,7 +779,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 btnGetScreenshotMouseClicked(evt);
             }
         });
-        getContentPane().add(btnGetScreenshot, new org.netbeans.lib.awtextra.AbsoluteConstraints(324, 312, 104, 20));
+        getContentPane().add(btnGetScreenshot, new org.netbeans.lib.awtextra.AbsoluteConstraints(324, 300, 104, 20));
 
         btnFindDevice.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnFindDevice.setText("Find Connected Device(s) >");
@@ -790,7 +789,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 btnFindDeviceMouseClicked(evt);
             }
         });
-        getContentPane().add(btnFindDevice, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 336, 156, 20));
+        getContentPane().add(btnFindDevice, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 324, 156, 20));
 
         btnInstallAll.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnInstallAll.setText("Install All from App Tester ");
@@ -800,7 +799,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 btnInstallAllMouseClicked(evt);
             }
         });
-        getContentPane().add(btnInstallAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 288, 148, 20));
+        getContentPane().add(btnInstallAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 276, 148, 20));
 
         btnS3Install.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnS3Install.setText("Install Selected S3 Build ^");
@@ -810,7 +809,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 btnS3InstallMouseClicked(evt);
             }
         });
-        getContentPane().add(btnS3Install, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 288, 156, 20));
+        getContentPane().add(btnS3Install, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 276, 156, 20));
 
         btnGetAPK.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnGetAPK.setText("Get Build from Device");
@@ -820,28 +819,28 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 btnGetAPKMouseClicked(evt);
             }
         });
-        getContentPane().add(btnGetAPK, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 312, 156, 20));
+        getContentPane().add(btnGetAPK, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 300, 156, 20));
 
         lblSITES4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSITES4.setText("Bolter User:");
         lblSITES4.setToolTipText("");
         lblSITES4.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(452, 408, 76, -1));
+        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(452, 400, 76, -1));
 
         txtBolter_Id.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtBolter_Id.setText("cdl.test.xtt+rn@gmail.com");
-        getContentPane().add(txtBolter_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 404, 188, -1));
+        getContentPane().add(txtBolter_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 396, 188, -1));
 
         lblSITES7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSITES7.setText("PW:");
         lblSITES7.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 408, -1, -1));
+        getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 400, -1, -1));
 
         txtBolter_Pw.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtBolter_Pw.setText("Password1");
-        getContentPane().add(txtBolter_Pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 404, 92, -1));
+        getContentPane().add(txtBolter_Pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 396, 92, -1));
 
         btnScreenshotFolder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnScreenshotFolder.setText("Current Directory Folder");
@@ -851,7 +850,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 btnScreenshotFolderMouseClicked(evt);
             }
         });
-        getContentPane().add(btnScreenshotFolder, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 312, 148, 20));
+        getContentPane().add(btnScreenshotFolder, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 300, 148, 20));
 
         btnInstallAPK.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnInstallAPK.setText("Install Build file...");
@@ -861,7 +860,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 btnInstallAPKMouseClicked(evt);
             }
         });
-        getContentPane().add(btnInstallAPK, new org.netbeans.lib.awtextra.AbsoluteConstraints(324, 288, 104, 20));
+        getContentPane().add(btnInstallAPK, new org.netbeans.lib.awtextra.AbsoluteConstraints(324, 276, 104, 20));
 
         getAccessibleContext().setAccessibleName("Android");
 
@@ -1849,7 +1848,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
         DV3.setModel(PModel);
         
         String BucketName = "";
-        String AppPath = "";
+        String S3_env = "";
+        String S3_app = "";
+
         //Android app S3 bucket path
         String mobile_repo_name = "mobile-app-repos";
         String android_app_path_S3_bucket = "automation/android-coreapp/staging/";
@@ -1863,35 +1864,36 @@ public class An_GUI extends javax.swing.JInternalFrame {
     
         switch (env) {
             case "PR":
-                BucketName = "";
+                S3_env = "/android/production/";
                 break;
             case "ST":
-                BucketName = "";
+                S3_env = "/android/staging/";
                 break;
             case "DE":
-                BucketName = "";
+                S3_env = "/android/development/";
                 break;            
         }
         switch (app) {
             case "Boost":
-                AppPath = "";
+                S3_app = "/boost.zip";
                 break;
             case "Bolter":
-                AppPath = "";
+                S3_app = "/bolter.zip";
                 break;
             case "JJKitchen":
-                AppPath = "";
+                S3_app = "/jjkitchen.zip";
                 break;            
             case "Nourish":
-                AppPath = "";
+                S3_app = "/nourish.zip";
                 break;
             case "Rogers":
-                AppPath = "";
+                S3_app = "/rogers.zip";
                 break;
             case "Thrive":
-                AppPath = "";
+                S3_app = "/thrive.zip";
                 break; 
         }  
+        
         BucketName = "mobile-app-repos";//automation
         
         String PName = "";
@@ -1909,12 +1911,10 @@ public class An_GUI extends javax.swing.JInternalFrame {
 
                 PName = PACK_List.getObjectSummaries().get(i).getKey();
                 PDate = PACK_List.getObjectSummaries().get(i).getLastModified();
-                //if(PName.contains("android-coreapp") || PName.contains("bolter")){
-                    X +=  PName + "  -  " + PDate + "\r\n";
-                    //if(PName.contains(app.toLowerCase())){
-                        PModel.addRow(new Object[]{PName, PDate});                              
-                    //}
-                //}
+                X +=  PName + "  -  " + PDate + "\r\n";
+                if(PName.contains(S3_env) && PName.contains(S3_app)){
+                    PModel.addRow(new Object[]{PName, PDate});                              
+                }
             }
             
             DV3.setModel(PModel);

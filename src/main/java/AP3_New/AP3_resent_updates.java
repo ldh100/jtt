@@ -1,7 +1,7 @@
 package AP3_New;
 
 class AP3_resent_updates extends AP3_GUI{
-    protected AP3_resent_updates(AP3_GUI a) throws Exception {
+    protected AP3_resent_updates(AP3_GUI a) throws Exception{ // InterruptedException, 
         ADMIN_ID = a.ADMIN_ID;
         ADMIN_PW = a.ADMIN_PW;
         url = a.url;
