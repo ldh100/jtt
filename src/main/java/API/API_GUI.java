@@ -1,6 +1,5 @@
 package API;
 
-import A.Func;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
@@ -1271,7 +1270,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         Mobile_User_TKN = "";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
-        String Realm = Func.Realm_ID(app, env);
+        String Realm = A.Func.Realm_ID(app, env);
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1572,7 +1571,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String UserAuth = Base64.getEncoder().encodeToString((txtAP3_ID.getText().trim() + ":" + txtAP3_PW.getText().trim()).getBytes());
         String User_ID = ""; 
-        String Realm = Func.Realm_ID("AP3", env); //"6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5";
+        String Realm = A.Func.Realm_ID("AP3", env); //"6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5";
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -1786,7 +1785,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         sw1.start();     
         
-        AppID = Func.App_ID(cmbApp.getSelectedItem().toString(), env);
+        AppID = A.Func.App_ID(cmbApp.getSelectedItem().toString(), env);
 
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
@@ -2611,7 +2610,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 String[] v = lines[i].split("\t");
                 System.arraycopy(v, 0, Values[i], 0, v.length);
             }
-            Report_File = Func.fExcel(l, col, Values, "API_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
+            Report_File = A.Func.fExcel(l, col, Values, "API_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
             txtLog.append("=== Report Excel file:\r\n" + Report_File + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch (IOException ex) {
@@ -2805,8 +2804,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     t_min = am0[0] / (double)1000;
                     t_avg = (total / am0.length) / (double)1000;
                     t_max = am0[am0.length - 1]  / (double)1000;
-                    p_50 = Func.p50(am0) / (double)1000;
-                    p_90 = Func.p90(am0) / (double)1000;
+                    p_50 = A.Func.p50(am0) / (double)1000;
+                    p_90 = A.Func.p90(am0) / (double)1000;
                     
                     t_rep += "= Total Calls: " + t_calls +
                             ", Response Times (sec) - Min: " + A.A.df.format(t_min) +
@@ -2845,7 +2844,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" + 
                     "Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
             
-            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(Report_File, Slack_Channel, MSG));
+            Current_Log_Update(GUI, A.Func.Send_File_with_Message_to_Slack(Report_File, Slack_Channel, MSG));
             File ef = new File(Report_File);
             if(ef.exists() && !ef.isDirectory()) {
                 ef.delete();
@@ -2861,7 +2860,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 }
                 HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Extract Here > open unzipped HTML file";
             }
-            Current_Log_Update(GUI, Func.Send_File_with_Message_to_Slack(HTML_Path, Slack_Channel, HTML_Report_Msg));
+            Current_Log_Update(GUI, A.Func.Send_File_with_Message_to_Slack(HTML_Path, Slack_Channel, HTML_Report_Msg));
             File hf = new File(HTML_Path);
             if(hf.exists() && !hf.isDirectory()) {
                 hf.delete();
@@ -2945,6 +2944,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
     private void Execute() throws Exception {
         String Realm = "";
         String Auth = "";
+        String BrandIDS = "";
         AP3_User_ID = "";
         AP3_User_TKN = ""; 
         Mobile_User_ID = "";
@@ -2956,8 +2956,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
         ParentTest = HtmlReport.createTest("User");            
 
         Auth = "Basic " + Base64.getEncoder().encodeToString((MOBILE_ID + ":" + MOBILE_PW).getBytes());
-        Realm = Func.Realm_ID(app, env);
-        JOB_Api_Call("Mobile User Authentication GET", "GET", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", ParentTest, "no_jira");
+        Realm = A.Func.Realm_ID(app, env);
+        JOB_Api_Call("Mobile User Authentication", "GET", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", ParentTest, "no_jira");
         if(json != null){
             try {
                 if(json.has("user")) Mobile_User_ID = json.getString("user"); 
@@ -2968,15 +2968,15 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
 
         Auth = "Bearer " + Mobile_User_TKN;
-        JOB_Api_Call("Mobile User Payment GET", "GET", BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Mobile User Payment", "GET", BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "", ParentTest, "no_jira");
 
         long m1 = System.currentTimeMillis();                     
         long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // - 7 days
         JOB_Api_Call("Mobile User Orders", "GET", BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1, Auth, "", ParentTest, "no_jira");
 
         Auth = "Basic " + Base64.getEncoder().encodeToString((ADMIN_ID + ":" + ADMIN_PW).getBytes());
-        Realm = Func.Realm_ID("AP3", env);
-        JOB_Api_Call("AP3 User Authentication GET", "GET", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", ParentTest, "no_jira");
+        Realm = A.Func.Realm_ID("AP3", env);
+        JOB_Api_Call("AP3 User Authentication", "GET", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", ParentTest, "no_jira");
         if(json != null){ 
             try {
                 if(json.has("user")) AP3_User_ID = json.getString("user"); 
@@ -2987,13 +2987,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
 
         Auth = "Bearer " + AP3_User_TKN;
-        JOB_Api_Call("AP3 User > /realm GET", "GET", BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000", Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("AP3 User > /realm", "GET", BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000", Auth, "", ParentTest, "no_jira");
 
         Auth = "Bearer " + AP3_User_TKN;
-        JOB_Api_Call("AP3 User > /permissions GET", "GET", BaseAPI + "/user/" + AP3_User_ID + "/permissions" + "?nocache=1", Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("AP3 User > /permissions", "GET", BaseAPI + "/user/" + AP3_User_ID + "/permissions" + "?nocache=1", Auth, "", ParentTest, "no_jira");
 
         Auth = "Basic " + Base64.getEncoder().encodeToString((RUNNER_ID + ":" + RUNNER_PW).getBytes());
-        JOB_Api_Call("Bolter Runner Site > /user/auth?realm=bolter GET", "GET", BaseAPI + "/user/auth" + "?realm=" + "bolter", Auth, "Runner", ParentTest, "no_jira");
+        JOB_Api_Call("Bolter Runner Site > /user/auth?realm=bolter", "GET", BaseAPI + "/user/auth" + "?realm=" + "bolter", Auth, "Runner", ParentTest, "no_jira");
 
   
 
@@ -3003,15 +3003,15 @@ public class API_GUI extends javax.swing.JInternalFrame {
         ParentTest = HtmlReport.createTest("Location"); 
 
         Auth = "Bearer " + AP3_User_TKN;  // =============== AP3 Sectors > Company ID===========================
-        JOB_Api_Call("Location > /sector GET", "GET", BaseAPI + "/location/sector?_provider=cdl", Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Location > /sector", "GET", BaseAPI + "/location/sector?_provider=cdl", Auth, "", ParentTest, "no_jira");
         
         Auth = "";                        // =============== AP3 ALL Sites ===========================
-        AppID = Func.App_ID(app, env);
-        JOB_Api_Call("Location > /multigroup/ GET", "GET", BaseAPI + "/location/multigroup/", Auth, "", ParentTest, "no_jira");
+        AppID = A.Func.App_ID(app, env);
+        JOB_Api_Call("Location > /multigroup/", "GET", BaseAPI + "/location/multigroup/", Auth, "", ParentTest, "no_jira");
 
         Auth = "";                       // =============== AP3 App Sites ===========================
-        AppID = Func.App_ID(app, env);
-        JOB_Api_Call("Location > /multigroup/'AppID' GET", "GET", BaseAPI + "/location/multigroup/" + AppID + "?nocache=true&extended=true", Auth, "", ParentTest, "no_jira");
+        AppID = A.Func.App_ID(app, env);
+        JOB_Api_Call("Location > /multigroup/'AppID'", "GET", BaseAPI + "/location/multigroup/" + AppID + "?nocache=true&extended=true", Auth, "", ParentTest, "no_jira");
         if(json != null){
             try{
                 JSONArray Groups = json.getJSONArray("groups");
@@ -3028,7 +3028,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         } 
 
         Auth = "";                      // =============== AP3 Site Brands ===========================
-        JOB_Api_Call("Location > /group/'SiteID' GET", "GET", BaseAPI + "/location/group/" + SiteID, Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Location > /group/'SiteID'", "GET", BaseAPI + "/location/group/" + SiteID, Auth, "", ParentTest, "no_jira");
         if(json != null){
             try {
                 JSONArray Location = json.getJSONArray("locations");
@@ -3037,7 +3037,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
                         JSONObject loc = (JSONObject) l;
                         JSONArray brands = loc.getJSONArray("brands");
                         for (Object b : brands) {
-                            JSONObject br = (JSONObject) b;                           
+                            JSONObject br = (JSONObject) b; 
+                            BrandIDS += br.getString("id") + ",";
                             if (br.getString("name").equals(BRAND)) { 
                                 BrandID = br.getString("id");
                                 UnitID = loc.getString("id");
@@ -3045,16 +3046,17 @@ public class API_GUI extends javax.swing.JInternalFrame {
                         }
                     }
                 }
+                BrandIDS = BrandIDS.substring(0, BrandIDS.length() - 1);
             } catch (Exception ex){
                 //
             }
         }   
 
         Auth = "";                      // ===============    AP3 Unit ===========================
-        JOB_Api_Call("Location > /'UnitID' GET", "GET", BaseAPI + "/location/" + UnitID + "?extended=true&nocache=1", Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Location > /'UnitID'", "GET", BaseAPI + "/location/" + UnitID + "?extended=true&nocache=1", Auth, "", ParentTest, "no_jira");
         
         Auth = "";                      // ===============    AP3 Brand ===========================
-        JOB_Api_Call("Location > /'BrandID' GET", "GET", BaseAPI + "/location/brand/" + BrandID + "?extended=true&nocache=1", Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Location > /'BrandID'", "GET", BaseAPI + "/location/brand/" + BrandID + "?extended=true&nocache=1", Auth, "", ParentTest, "no_jira");
         SectorID = "";
         CompanyID = "";
         if(json != null){
@@ -3075,78 +3077,96 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 //
             }
         }
+       
         //</editor-fold>
         
         //<editor-fold defaultstate="collapsed" desc="config">
         ParentTest = HtmlReport.createTest("Config");              
         Auth = "Bearer " + AP3_User_TKN;   // =============== Config(s) ========================================
-//        JOB_Api_Call("Config > /'AppID' GET", "GET", BaseAPI + "/config/" + AppID, Auth, "", ParentTest, "no_jira");
-//        JOB_Api_Call("Public Config > /'AppID' GET", "GET", BaseAPI + "/config/public/" + AppID, "", "", ParentTest, "no_jira");
+//        JOB_Api_Call("Config > /'AppID'", "GET", BaseAPI + "/config/" + AppID, Auth, "", ParentTest, "no_jira");
+//        JOB_Api_Call("Public Config > /'AppID'", "GET", BaseAPI + "/config/public/" + AppID, "", "", ParentTest, "no_jira");
         
-        JOB_Api_Call("Config > /'SiteID' GET", "GET", BaseAPI + "/config/" + SiteID, Auth, "", ParentTest, "no_jira");
-        JOB_Api_Call("Public Config > /'SiteID' GET", "GET", BaseAPI + "/config/public/" + SiteID, "", "", ParentTest, "no_jira");
+        JOB_Api_Call("Config > /'SiteID'", "GET", BaseAPI + "/config/" + SiteID, Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Public Config > /'SiteID'", "GET", BaseAPI + "/config/public/" + SiteID, "", "", ParentTest, "no_jira");
                 
-//        JOB_Api_Call("Config > /'UnitID' GET", "GET", BaseAPI + "/config/" + UnitID, Auth, "", ParentTest, "no_jira");
-//        JOB_Api_Call("Public Config > /'UnitID' GET", "GET", BaseAPI + "/config/public/" + UnitID, "", "", ParentTest, "no_jira");
+//        JOB_Api_Call("Config > /'UnitID'", "GET", BaseAPI + "/config/" + UnitID, Auth, "", ParentTest, "no_jira");
+//        JOB_Api_Call("Public Config > /'UnitID'", "GET", BaseAPI + "/config/public/" + UnitID, "", "", ParentTest, "no_jira");
          
-        JOB_Api_Call("Config > /'BrandID' GET", "GET", BaseAPI + "/config/" + BrandID, Auth, "", ParentTest, "no_jira");
-        JOB_Api_Call("Public Config > /'BrandID' GET", "GET", BaseAPI + "/config/public/" + BrandID, "", "", ParentTest, "no_jira");
+        JOB_Api_Call("Config > /'BrandID'", "GET", BaseAPI + "/config/" + BrandID, Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Public Config > /'BrandID'", "GET", BaseAPI + "/config/public/" + BrandID, "", "", ParentTest, "no_jira");
 
         //</editor-fold>          
 
         //<editor-fold defaultstate="collapsed" desc="promos">  
         ParentTest = HtmlReport.createTest("Promo"); 
         Auth = "Bearer " + AP3_User_TKN;  // ===============  AP3 Promo ===========================
-        JOB_Api_Call("Promo > /'CompanyID' GET", "GET", BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID, Auth, "", ParentTest, "no_jira");
-
+        JOB_Api_Call("Promo > /'CompanyID'", "GET", BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID, Auth, "", ParentTest, "no_jira");
         //</editor-fold>
       
         //<editor-fold defaultstate="collapsed" desc="calendar">           
         ParentTest = HtmlReport.createTest("Calendar");
         Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Company/Global Menus ===========================
-        JOB_Api_Call("Calendar > /'BrandID' GET", "GET", BaseAPI + "/calendar/" + BrandID, Auth, "", ParentTest, "no_jira");
-
+        JOB_Api_Call("Calendar > /'BrandID'", "GET", BaseAPI + "/calendar/" + BrandID, Auth, "", ParentTest, "no_jira");
         //</editor-fold>
         
         //<editor-fold defaultstate="collapsed" desc="menus">        
         ParentTest = HtmlReport.createTest("Global / Local Menu");     
         Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Company/Global Menus ===========================
-        JOB_Api_Call("Company / Global Menu > /'CompID' GET", "GET", BaseAPI + "/menu/company/" + CompanyID, Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Company / Global Menu > /'CompID'", "GET", BaseAPI + "/menu/company/" + CompanyID, Auth, "", ParentTest, "no_jira");
 
         Auth = "";                        // =============== AP3 Local Menu(s) ===========================
         for(int i = 0; i < MENU_IDS.size(); i++){
-            JOB_Api_Call("Local Menu > /'MenuID' GET", "GET", BaseAPI + "/menu/" + MENU_IDS.get(i), Auth, "", ParentTest, "no_jira");
+            JOB_Api_Call("Local Menu > /'MenuID'", "GET", BaseAPI + "/menu/" + MENU_IDS.get(i), Auth, "", ParentTest, "no_jira");
         }
         //</editor-fold>
-
-        //<editor-fold defaultstate="collapsed" desc="Sales Reporting EOD">        
-        ParentTest = HtmlReport.createTest("Sales Reporting EOD");   
+        
+        //<editor-fold defaultstate="collapsed" desc="Reporting">        
+        ParentTest = HtmlReport.createTest("Reports");   
         
         Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Sales Reporting EOD ===========================
-        JOB_Api_Call("Sales EOD Report - Default > /'SiteID' GET", "GET", BaseAPI + "/report/eod/group/" + SiteID, Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Sales EOD Report - Default > /'SiteID'", "GET", BaseAPI + "/report/eod/group/" + SiteID, Auth, "", ParentTest, "no_jira");
         String From = ""; 
         Date Yesterday = new DateTime(new Date()).minusDays(1).toDate();
         From = new SimpleDateFormat("yyyy-MM-dd").format(Yesterday); 
         String To = From;
-        JOB_Api_Call("Sales EOD Report - Yesterday > /'SiteID' GET", "GET", BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To, Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Sales EOD Report - Yesterday > /'SiteID'", "GET", BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To, Auth, "", ParentTest, "no_jira");
         if(json != null){
             boolean XXX = true;
             //
         }
-        //https://dev.adminpanel.compassdigital.org/#/reports/all/site/Ne9O6BK6vWhgKm7p2K7YuX3Z21Ww07sy28YoXd8WFNmqDgPBXXtlkq0jkA3PtA1Gz1qEkWIgMep?dates=2021-05-20_2021-05-20
+        String Start = ""; 
+        String End = ""; 
+        Date _Start = new DateTime(new Date()).minusDays(31).toDate();
+        Date _End = new DateTime(new Date()).minusDays(1).toDate();
+        Start = new SimpleDateFormat("yyyy-MM-dd").format(_Start); 
+        End = new SimpleDateFormat("yyyy-MM-dd").format(_End); 
+        JOB_Api_Call("Report Analytics > /'SiteID/all_brands/week/30 days'", "GET", BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + BrandIDS + "&time_frame=week&start_date=" + Start + "&end_date=" + End, Auth, "", ParentTest, "no_jira");
+        if(json != null){
+            boolean XXX = true;
+            //
+        }  
+        Date _Start1 = new DateTime(new Date()).minusDays(8).toDate();
+        Date _End1 = new DateTime(new Date()).minusDays(1).toDate();
+        Start = new SimpleDateFormat("yyyy-MM-dd").format(_Start1); 
+        End = new SimpleDateFormat("yyyy-MM-dd").format(_End1); 
+        JOB_Api_Call("Report Analytics > /'SiteID/brand/day/7 days'", "GET", BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_id=" + BrandID + "&time_frame=day&start_date=" + Start + "&end_date=" + End, Auth, "", ParentTest, "no_jira");
+        if(json != null){
+            boolean XXX = true;
+            //
+        }         
         //</editor-fold>        
                
         //<editor-fold defaultstate="collapsed" desc="Announcement">            
         ParentTest = HtmlReport.createTest("Announcement");              
         Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Announcement ===========================
-        JOB_Api_Call("AP3 Announcement GET", "GET", BaseAPI + "/announcement/resource/", Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("AP3 Announcement", "GET", BaseAPI + "/announcement/resource/", Auth, "", ParentTest, "no_jira");
 
         //</editor-fold>       
     
         //<editor-fold defaultstate="collapsed" desc="KDS">            
         ParentTest = HtmlReport.createTest("KDS");              
         Auth = "Bearer " + AP3_User_TKN;   // =============== "KDS devices for Unit numbers > string separated with commas", ===========================
-        JOB_Api_Call("KDS Devices > ?'unitNumber(s)' GET", "GET", BaseAPI + "/kds/devices?unitNumber=" + "12345,34567,32446673542657", Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("KDS Devices > ?'unitNumber(s)'", "GET", BaseAPI + "/kds/devices?unitNumber=" + "12345,34567,32446673542657", Auth, "", ParentTest, "no_jira");
         if(json != null){
             String DEVICES = "Check json"; 
         }
