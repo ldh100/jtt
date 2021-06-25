@@ -1,5 +1,14 @@
 package AP3_New;
 
+import static A.A.EX;
+import static A.A.FAIL;
+import static A.A.L0;
+import static A.A.L1;
+import static A.A._f;
+import static A.A._p;
+import static A.A._t;
+import static A.A.sleep;
+import A.TWeb;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import org.openqa.selenium.By;
@@ -7,6 +16,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
 class AP3_brand_new extends AP3_GUI{
+    public static String stationName = "";
     protected AP3_brand_new (AP3_GUI a) throws InterruptedException, Exception {
         d1 = a.d1;
         url = a.url;
@@ -211,6 +221,7 @@ class AP3_brand_new extends AP3_GUI{
                         if (FAIL) { return;}
                     Element_By_Path_Text_Enter("Enter Station Name", "css", "[aria-label='Station Name']", "Add Station " + New_ID, false, ParentTest, "no_jira");    
                         if (FAIL) { return;}    
+                        stationName = "Add Station " + New_ID;
                     Element_By_Path_Click("Station Location Description Click", "xpath", "//label[contains(text(), 'Location Description')]", ParentTest, "no_jira");    
                         if (FAIL) { return;}
                     Element_By_Path_Text_Enter("Enter Station Location Description", "css", "[aria-label='Station Location Description']", "Penthouse " + New_ID, false, ParentTest, "no_jira");    
@@ -519,7 +530,8 @@ class AP3_brand_new extends AP3_GUI{
             if (FAIL) { return;}
         Thread.sleep(500);               
         Wait_For_All_Elements_InVisibility("Wait for 'Create Brand'", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");   
-            if (FAIL) { return;}            
+            if (FAIL) { return;} 
+               removeGlobalMenu();
         // </editor-fold>     
 
         // <editor-fold defaultstate="collapsed" desc="Add Station > Hours">   
@@ -1054,5 +1066,144 @@ class AP3_brand_new extends AP3_GUI{
             }
         }
         // </editor-fold> 
-    }   
-} // End of AP3_Brand_New
+    }  
+    // <editor-fold defaultstate="collapsed" desc="Removing and re-adding the global menus in the brand configuration AUT-293">
+     protected void removeGlobalMenu() throws InterruptedException {
+         EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Removing and re-adding the global menus in the brand configuration ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+      
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Brand Name Click", "xpath", "//td[contains(text(), '" + stationName + "')]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(500);
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(500);
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+         
+        // Assign and remove GLobal menu
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Click of Assign menus from left corner", "xpath", "//div[6]//div[contains(@class, 'SelectedLeft')]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(1000);
+
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.List_L0("Count total assigned menus", "xpath", "//div[@class='layout row nowrap']//div[@class='flex shrink xs2']//button[@class='v-btn v-btn--icon theme--light']", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        int countAssignedMenuBeforeRemove = L0.size();
+
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Click on remove assigned menu", "xpath", "//div[1][@class='layout row nowrap']//div[@class='flex shrink xs2']//button[@class='v-btn v-btn--icon theme--light']", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        _t++;
+        TWeb.Element_By_Path_Click("Click 'Save Chnages Brand'", "xpath", "//*[contains(text(), 'Save Changes')]", "no_jira");
+        if (FAIL) {
+            return;
+
+        }
+
+        //Check if assigned menu has removed
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(500);
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.Element_By_Path_Click("Click of Assign menus from left corner", "xpath", "//div[6]//div[contains(@class, 'SelectedLeft')]", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(1000);
+
+        _t++;
+        Thread.sleep((long) sleep);
+        TWeb.List_L1("Count total assigned menus", "xpath", "//div[@class='layout row nowrap']//div[@class='flex shrink xs2']//button[@class='v-btn v-btn--icon theme--light']", "no_jira");
+        if (FAIL) {
+            return;
+        }
+        int countAssignedMenuAfterRemove = L1.size();
+        if (countAssignedMenuBeforeRemove == (countAssignedMenuAfterRemove - 1)) {
+            _t++;
+            Thread.sleep((long) sleep);
+            TWeb.Wait_For_Element_By_Path_Presence("Wait for breadscrumbs to be visible ", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", "no_jira");
+            if (FAIL) {
+                return;
+            }
+            _t++;
+            TWeb.Element_By_Path_Click("Click navigate back to Station Index page", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", "no_jira");
+            if (FAIL) {
+                return;
+            }
+          _t++;
+            _p++;
+            EX += _t + "\t" + "Removing and re-adding the global menus in the brand configuration" + "\t" + "Original Assigned menus" + countAssignedMenuBeforeRemove + "\t" + "After removing Assigned menu: " + countAssignedMenuAfterRemove + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\"\t" + "no_jira" + "\r\n";
+
+        } else {
+            _t++;
+            Thread.sleep((long) sleep);
+            TWeb.Wait_For_Element_By_Path_Presence("Wait for breadscrumbs to be visible ", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", "no_jira");
+            if (FAIL) {
+                return;
+            }
+            _t++;
+            TWeb.Element_By_Path_Click("Click navigate back to Station Index page", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", "no_jira");
+            if (FAIL) {
+                return;
+            }
+             _t++;
+            _f++;
+            EX += _t + "\t" + "Removing and re-adding the global menus in the brand configuration" + "\t" + "Original Assigned menus" + countAssignedMenuBeforeRemove + "\t" + "After removing Assigned menu: " + countAssignedMenuAfterRemove + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\"\t" + "no_jira" + "\r\n";
+        }
+
+    }
+     // </editor-fold> 
+} 
+// End of AP3_Brand_New
