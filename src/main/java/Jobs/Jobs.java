@@ -697,7 +697,7 @@ public class Jobs extends javax.swing.JInternalFrame {
 
     //<editor-fold defaultstate="collapsed" desc="Jobs > Job Name, Config">
     private void Job_AP3(String job, String config){
-        AP3_New.AP3_GUI _Job = new AP3_New.AP3_GUI();
+        AP3.AP3_GUI _Job = new AP3.AP3_GUI();
         String RES = _Job.JOB_Run_Auto(r_type, config);
         txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());

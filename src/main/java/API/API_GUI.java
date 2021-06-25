@@ -647,6 +647,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
     private String BrandID = "";
     private String UnitID = "";
     private String CompanyID = "";
+    private String MenuID = "";
     private String GL_MENU = "TIM HORTONS";
     
     private List<String> SECTOR_IDS;
@@ -3112,12 +3113,18 @@ public class API_GUI extends javax.swing.JInternalFrame {
         //<editor-fold defaultstate="collapsed" desc="menus">        
         ParentTest = HtmlReport.createTest("Global / Local Menu");     
         Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Company/Global Menus ===========================
-        JOB_Api_Call("Company / Global Menu > /'CompID'", "GET", BaseAPI + "/menu/company/" + CompanyID, Auth, "", ParentTest, "no_jira");
+        JOB_Api_Call("Company / Global Menus > /'CompID'", "GET", BaseAPI + "/menu/company/" + CompanyID, Auth, "", ParentTest, "no_jira");
 
         Auth = "";                        // =============== AP3 Local Menu(s) ===========================
         for(int i = 0; i < MENU_IDS.size(); i++){
-            JOB_Api_Call("Local Menu > /'MenuID'", "GET", BaseAPI + "/menu/" + MENU_IDS.get(i), Auth, "", ParentTest, "no_jira");
+            JOB_Api_Call("Brand Local Menu " + i + " > /menu/'MenuID'", "GET", BaseAPI + "/menu/" + MENU_IDS.get(i), Auth, "", ParentTest, "no_jira");
+            JOB_Api_Call("Brand > Timeslots > Menu " + i + " > /timeslots/menu/'MenuID'", "GET", BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MENU_IDS.get(i) + "?nocache=1&extended=true", Auth, "", ParentTest, "no_jira" );
         }
+        
+//        Auth = "";                        // =============== AP3 Brand > Timeslots / Menu  ===========================
+//        MenuID = MENU_IDS.get(0);
+//        JOB_Api_Call("Brand > Timeslots > Menu", "GET", BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MenuID + "?nocache=1&extended=true", Auth, "", ParentTest, "no_jira" );
+//                
         //</editor-fold>
         
         //<editor-fold defaultstate="collapsed" desc="Reporting">        
