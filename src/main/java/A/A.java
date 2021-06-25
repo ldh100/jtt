@@ -800,10 +800,20 @@ public class A extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Menu_C360_DEMouseClicked
     private void Menu_C360_STMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_C360_STMouseClicked
-        // TODO add your handling code here:
+        try {
+            java.awt.Desktop.getDesktop().browse(URI.create("http://staging.cafe360.compassdigital.org/"));
+        }
+        catch (IOException ex) {
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_Menu_C360_STMouseClicked
     private void Menu_C360_PRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_C360_PRMouseClicked
-        // TODO add your handling code here:
+        try {
+            java.awt.Desktop.getDesktop().browse(URI.create("http://cafe360.compassdigital.org/"));
+        }
+        catch (IOException ex) {
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_Menu_C360_PRMouseClicked
     private void Menu_FW_PRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_FW_PRMouseClicked
         try {

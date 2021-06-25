@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.concurrent.TimeUnit;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -19,6 +18,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Swagger extends javax.swing.JInternalFrame {
+    
+    private String BaseAPI;
+    private String TKN;
+    private String env;
+    
     public Swagger() {
         initComponents();
     }
@@ -246,10 +250,6 @@ public class Swagger extends javax.swing.JInternalFrame {
         }
         return AJ;
     }
-
-    private String BaseAPI;
-    private String TKN;
-    private String env;
     
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">      
     // Variables declaration - do not modify//GEN-BEGIN:variables
