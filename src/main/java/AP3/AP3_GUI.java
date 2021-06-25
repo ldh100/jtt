@@ -1,4 +1,4 @@
-package AP3_New;
+package AP3;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -2077,7 +2077,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 txtLog.append( "= Please wait for report...\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
-            Current_Log_Update(true, "= Starting Appium Service and Android Driver..." + "\r\n");
+            Current_Log_Update(true, "= Starting " + BROWSER + " Driver..." + "\r\n");
             
             if(sw1.isRunning()){
                 sw1.reset();
@@ -2125,7 +2125,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             SCOPE = "";
             r_type = run_type; 
 
-            Current_Log_Update(false, "- Starting Appium Service and Android Driver..." + "\r\n");
+            Current_Log_Update(false, "- Starting " + BROWSER + " Driver..." + "\r\n");
             if(sw1.isRunning()){
                 sw1.reset();
             }
@@ -2399,7 +2399,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             if(d1 != null) {
                 d1.quit();
             }
-            return "=WebDriver > ERROR: " + ex.getMessage() + "\r\n";
+            return "= WebDriver > ERROR: " + ex.getMessage() + "\r\n";
         }  
     }
     private void BW1_DoWork(Boolean GUI) { 
@@ -2408,7 +2408,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             protected String doInBackground() throws Exception { 
                 String DriverStart = StartWebDriver();
                 if(DriverStart.contains("OK")){
-                    Current_Log_Update(GUI, "= Appium Service and Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
+                    Current_Log_Update(GUI, "= " + BROWSER + " Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
                     sw1.reset();
                 } else{
                     Current_Log_Update(GUI, DriverStart.trim() + "\r\n");
@@ -2655,7 +2655,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         if(_Login){ // Always true - must login to continue
             SCOPE += "Login";
             ParentTest = HtmlReport.createTest("AP3 Login"); 
-            AP3_login BR = new AP3_New.AP3_login(AP3_GUI.this);
+            AP3_login BR = new AP3.AP3_login(AP3_GUI.this);
             BR.run(_Users); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time; 
             Ver = BR.Ver;
@@ -2663,175 +2663,175 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         if(_Announcements){
             SCOPE += ", Announcements";
             ParentTest = HtmlReport.createTest("Announcements"); 
-            AP3_announcements BR = new AP3_New.AP3_announcements(AP3_GUI.this);
+            AP3_announcements BR = new AP3.AP3_announcements(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }
         if(_Brand){
             SCOPE += ", Brand";
             ParentTest = HtmlReport.createTest("Brand"); 
-            AP3_brand BR = new AP3_New.AP3_brand(AP3_GUI.this);
+            AP3_brand BR = new AP3.AP3_brand(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }
         if(_Brand_closure){
             SCOPE += ", Brand Closure";
             ParentTest = HtmlReport.createTest("Brand"); 
-            AP3_brand_closure BR = new AP3_New.AP3_brand_closure(AP3_GUI.this);
+            AP3_brand_closure BR = new AP3.AP3_brand_closure(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }
         if(_Brand_new){
             SCOPE += ", New Brand";
             ParentTest = HtmlReport.createTest("New Brand"); 
-            AP3_brand_new BR = new AP3_New.AP3_brand_new(AP3_GUI.this);
+            AP3_brand_new BR = new AP3.AP3_brand_new(AP3_GUI.this);
             BR.run(_Site_new); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }   
         if(_Bulk_apply){
             SCOPE += ", Bulk Apply";
             ParentTest = HtmlReport.createTest("Bulk Apply"); 
-            AP3_bulk_apply BR = new AP3_New.AP3_bulk_apply(AP3_GUI.this);
+            AP3_bulk_apply BR = new AP3.AP3_bulk_apply(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }   
         if(_Export_menuset){
             SCOPE += ", Export menuset";
             ParentTest = HtmlReport.createTest("Export menuset"); 
-            AP3_export_menuset BR = new AP3_New.AP3_export_menuset(AP3_GUI.this);
+            AP3_export_menuset BR = new AP3.AP3_export_menuset(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         } 
         if(_Group_management){
             SCOPE += ", Group Management";
             ParentTest = HtmlReport.createTest("Group Management"); 
-            AP3_group_management BR = new AP3_New.AP3_group_management(AP3_GUI.this);
+            AP3_group_management BR = new AP3.AP3_group_management(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }     
         if(_Images){
             SCOPE += ", Images";
             ParentTest = HtmlReport.createTest("Images"); 
-            AP3_images BR = new AP3_New.AP3_images(AP3_GUI.this);
+            AP3_images BR = new AP3.AP3_images(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }   
         if(_Menu_manager){
             SCOPE += ", Menu Manager";
             ParentTest = HtmlReport.createTest("Menu Manager"); 
-            AP3_menu_manager BR = new AP3_New.AP3_menu_manager(AP3_GUI.this);
+            AP3_menu_manager BR = new AP3.AP3_menu_manager(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }        
         if(_Notifications){
             SCOPE += ", Notifications";
             ParentTest = HtmlReport.createTest("Notifications"); 
-            AP3_notifications BR = new AP3_New.AP3_notifications(AP3_GUI.this);
+            AP3_notifications BR = new AP3.AP3_notifications(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }     
         if(_Orders){
             SCOPE += ", Orders";
             ParentTest = HtmlReport.createTest("Orders"); 
-            AP3_orders BR = new AP3_New.AP3_orders(AP3_GUI.this);
+            AP3_orders BR = new AP3.AP3_orders(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }   
         if(_Orders_report_hidden){
             SCOPE += ", Orders Hidden Station";
             ParentTest = HtmlReport.createTest("Orders Hidden Station"); 
-            AP3_orders_reporting_for_hidden_station BR = new AP3_New.AP3_orders_reporting_for_hidden_station(AP3_GUI.this);
+            AP3_orders_reporting_for_hidden_station BR = new AP3.AP3_orders_reporting_for_hidden_station(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }     
         if(_Password){
             SCOPE += ", Password";
             ParentTest = HtmlReport.createTest("Password"); 
-            AP3_password BR = new AP3_New.AP3_password(AP3_GUI.this);
+            AP3_password BR = new AP3.AP3_password(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }  
         if(_Promo){
             SCOPE += ", Promo";
             ParentTest = HtmlReport.createTest("Promo"); 
-            AP3_promo BR = new AP3_New.AP3_promo(AP3_GUI.this);
+            AP3_promo BR = new AP3.AP3_promo(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }    
         if(_Reschedule_menu ){
             SCOPE += ", Reschedule Menu";
             ParentTest = HtmlReport.createTest("Reschedule Menu"); 
-            AP3_reschedule_menu BR = new AP3_New.AP3_reschedule_menu(AP3_GUI.this);
+            AP3_reschedule_menu BR = new AP3.AP3_reschedule_menu(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }    
         if(_Resent_updates){
             SCOPE += ", Resent Updates";
             ParentTest = HtmlReport.createTest("Resent Updates"); 
-            AP3_resent_updates BR = new AP3_New.AP3_resent_updates(AP3_GUI.this);
+            AP3_resent_updates BR = new AP3.AP3_resent_updates(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }          
         if(_Sales_analytics){
             SCOPE += ", Promo";
             ParentTest = HtmlReport.createTest("Sales Analytics"); 
-            AP3_sales_analytics BR = new AP3_New.AP3_sales_analytics(AP3_GUI.this);
+            AP3_sales_analytics BR = new AP3.AP3_sales_analytics(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         } 
         if(_Sales_reporting){
             SCOPE += ", Promo";
             ParentTest = HtmlReport.createTest("_Sales_reporting"); 
-            AP3_sales_reporting BR = new AP3_New.AP3_sales_reporting(AP3_GUI.this);
+            AP3_sales_reporting BR = new AP3.AP3_sales_reporting(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }         
         if(_Sales_report_hidden){
             SCOPE += ", Promo";
             ParentTest = HtmlReport.createTest("Sales Report Hidden"); 
-            AP3_sales_reporting_for_hidden_stations BR = new AP3_New.AP3_sales_reporting_for_hidden_stations(AP3_GUI.this);
+            AP3_sales_reporting_for_hidden_stations BR = new AP3.AP3_sales_reporting_for_hidden_stations(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }        
         if(_Site){
             SCOPE += ", Site";
             ParentTest = HtmlReport.createTest("Site"); 
-            AP3_site BR = new AP3_New.AP3_site(AP3_GUI.this);
+            AP3_site BR = new AP3.AP3_site(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }        
         if(_Site_new){
             SCOPE += ", New Site";
             ParentTest = HtmlReport.createTest("New Site"); 
-            AP3_site_new BR = new AP3_New.AP3_site_new(AP3_GUI.this);
+            AP3_site_new BR = new AP3.AP3_site_new(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         } 
         if(_Smart_analytics){
             SCOPE += ", Smart Analytics";
             ParentTest = HtmlReport.createTest("Smart Analytics"); 
-            AP3_smart_analytics BR = new AP3_New.AP3_smart_analytics(AP3_GUI.this);
+            AP3_smart_analytics BR = new AP3.AP3_smart_analytics(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }        
         if(_Timeslots){
             SCOPE += ", Timeslots";
             ParentTest = HtmlReport.createTest("Timeslots"); 
-            AP3_timeslots BR = new AP3_New.AP3_timeslots(AP3_GUI.this);
+            AP3_timeslots BR = new AP3.AP3_timeslots(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }
         if(_Users){
             SCOPE += ", Users";
             ParentTest = HtmlReport.createTest("Users"); 
-            AP3_user BR = new AP3_New.AP3_user(AP3_GUI.this);
+            AP3_user BR = new AP3.AP3_user(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }   
         if(_Roles){
             SCOPE += ", Users Permissions";
             ParentTest = HtmlReport.createTest("Users Permissions"); 
-            AP3_user_permission BR = new AP3_New.AP3_user_permission(AP3_GUI.this);
+            AP3_user_permission BR = new AP3.AP3_user_permission(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }         
@@ -2840,7 +2840,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         if(_Logout){ 
             SCOPE += ", Logout";
             ParentTest = HtmlReport.createTest("Logout"); 
-            AP3_logout BR = new AP3_New.AP3_logout(AP3_GUI.this);
+            AP3_logout BR = new AP3.AP3_logout(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }         
