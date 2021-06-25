@@ -2077,7 +2077,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 txtLog.append( "= Please wait for report...\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
-            Current_Log_Update(true, "= Starting Appium Service and Android Driver..." + "\r\n");
+            Current_Log_Update(true, "= Starting " + BROWSER + " Driver..." + "\r\n");
             
             if(sw1.isRunning()){
                 sw1.reset();
@@ -2125,7 +2125,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             SCOPE = "";
             r_type = run_type; 
 
-            Current_Log_Update(false, "- Starting Appium Service and Android Driver..." + "\r\n");
+            Current_Log_Update(false, "- Starting " + BROWSER + " Driver..." + "\r\n");
             if(sw1.isRunning()){
                 sw1.reset();
             }
@@ -2408,7 +2408,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             protected String doInBackground() throws Exception { 
                 String DriverStart = StartWebDriver();
                 if(DriverStart.contains("OK")){
-                    Current_Log_Update(GUI, "= Appium Service and Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
+                    Current_Log_Update(GUI, "= " + BROWSER + " Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
                     sw1.reset();
                 } else{
                     Current_Log_Update(GUI, DriverStart.trim() + "\r\n");
