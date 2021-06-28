@@ -5,11 +5,6 @@
  */
 package DL;
 
-import JIRA.JIRA;
-import com.google.common.base.Stopwatch;
-import java.time.LocalDateTime;
-import java.util.concurrent.TimeUnit;
-
 /**
  *
  * @author prathyusha.deshpande
