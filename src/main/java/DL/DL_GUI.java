@@ -1331,6 +1331,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_sanity: ")) _sanity.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_drilldown: ")) _drilldown.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_insights: ")) _insights.setSelected(Boolean.parseBoolean(value)); 
+              
                 if(l.contains("_password: ")) _password.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_all_data: ")) _all_data.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_logout: ")) _logout.setSelected(Boolean.parseBoolean(value));
@@ -1383,6 +1384,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             C += "_sanity: " + _sanity.isSelected() + "\r\n";
             C += "_drilldown: " + _drilldown.isSelected() + "\r\n";
             C += "_insights: " + _insights.isSelected() + "\r\n";
+         
             C += "_password: " + _password.isSelected() + "\r\n";         
             C += "_all_data: " + _all_data.isSelected() + "\r\n";
  
@@ -1735,6 +1737,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 
                 if(l.contains("_drilldown: ")) _Drilldown = Boolean.parseBoolean(value);
                 if(l.contains("_insights: ")) _Insights = Boolean.parseBoolean(value);
+                if(l.contains("_Accountmanager: "))_Account_manager = Boolean.parseBoolean(value);
                 if(l.contains("_password: ")) _Password = Boolean.parseBoolean(value);
                 if(l.contains("_all_data: ")) _All_data = Boolean.parseBoolean(value);
                 if(l.contains("_logout: ")) _Logout = Boolean.parseBoolean(value);
@@ -2230,9 +2233,10 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             SCOPE += ", Account Manager";  
             EX += " - " + "\t" + " === Account Manager" + "\t" + " ===== " + "\t" + " == Account Manager Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             DL_Accountmanager BR = new DL_Accountmanager(DL_GUI.this);
+            BR.run();
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-            BR.run(); // ============================================================================
-            EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            // ============================================================================
+            EX += " - " + "\t" + " === ^ Account Manager" + "\t" + " ===== " + "\t" + " == ^ Account ManagerEnd" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
         } 
     }
