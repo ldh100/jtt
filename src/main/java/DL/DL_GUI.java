@@ -1331,7 +1331,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_sanity: ")) _sanity.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_drilldown: ")) _drilldown.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_insights: ")) _insights.setSelected(Boolean.parseBoolean(value)); 
-                if(l.contains("_Accountmanager: ")) _Accountmanager.setSelected(Boolean.parseBoolean(value)); 
+              
                 if(l.contains("_password: ")) _password.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_all_data: ")) _all_data.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_logout: ")) _logout.setSelected(Boolean.parseBoolean(value));
@@ -1384,7 +1384,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             C += "_sanity: " + _sanity.isSelected() + "\r\n";
             C += "_drilldown: " + _drilldown.isSelected() + "\r\n";
             C += "_insights: " + _insights.isSelected() + "\r\n";
-            C += "_Accountmanager: " + _Accountmanager.isSelected() + "\r\n";
+         
             C += "_password: " + _password.isSelected() + "\r\n";         
             C += "_all_data: " + _all_data.isSelected() + "\r\n";
  
