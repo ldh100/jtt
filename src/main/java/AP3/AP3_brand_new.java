@@ -1,14 +1,5 @@
 package AP3;
 
-import static A.A.EX;
-import static A.A.FAIL;
-import static A.A.L0;
-import static A.A.L1;
-import static A.A._f;
-import static A.A._p;
-import static A.A._t;
-import static A.A.sleep;
-import A.TWeb;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import org.openqa.selenium.By;
@@ -206,7 +197,7 @@ class AP3_brand_new extends AP3_GUI{
                         Element_Click("Select " + GL_MENU, L1.get(T_Index), ParentTest, "no_jira");   
                             if (FAIL) { return;} 
                     } else{
-                        _t++;
+                        
                         _f++;
                         EX += " - " + "\t" + SECTOR + " Global Menu List" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + GL_MENU + " Not found";
                         EX += "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -402,7 +393,7 @@ class AP3_brand_new extends AP3_GUI{
                                 if (FAIL) { return;}  
                                 Thread.sleep(500);
                         } else{
-                            _t++; 
+                             
                             _f++;
                             F += "Step: " + _t + " > " + "Add Station > Assign Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
                             EX += " - " + "\t" + "Add Station > Assign Menus" + "\t" + "Import" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                               
@@ -428,7 +419,7 @@ class AP3_brand_new extends AP3_GUI{
                                 if (FAIL) { return;} 
                                 Thread.sleep(500);
                         } else{
-                            _t++; 
+                             
                             _f++;
                             F += "Step: " + _t + " > " + "Add Station > Assing Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
                             EX += " - " + "\t" + "Add Station > Assign Menus" + "\t" + "Add" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                           
@@ -798,7 +789,7 @@ class AP3_brand_new extends AP3_GUI{
             Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");    
                 if (FAIL) { return;}              
         } else {
-           _t++; _f++;
+            _f++;
            EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
         }  
         EX += " - " + "\t" + " === MM New Local Menu " + "\t" + " ===== " + "\t" + " == Activate Local Menu End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -917,7 +908,7 @@ class AP3_brand_new extends AP3_GUI{
                             if (FAIL) { return;}
                     }                  
             } else{
-                _t++; 
+                 
                 _f++;
                 F += "Step: " + _t + " > " + "Add Station > Schedule Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
                 EX += " - " + "\t" + "Add Station > Schedule Menu" + "\t" + "Add" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";                           
@@ -960,10 +951,10 @@ class AP3_brand_new extends AP3_GUI{
                     Element_By_Path_Text_Enter("Update > Item Name", "css", "[aria-label='Item Name']", OIN.substring(0, OIN.length()-1), false, ParentTest, "no_jira");
                     if (FAIL) { return;}
                     if (d1.findElement(By.xpath("//div[contains(text(),'Apply Changes')]/parent::button")).isEnabled()) {
-                        _t++;
+                        
                         _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu was Edited Successfully" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     } else {
-                        _t++;
+                        
                         _f++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu Edit Failed" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     }    
                 } else {
@@ -974,10 +965,10 @@ class AP3_brand_new extends AP3_GUI{
                     Element_By_Path_Text_Enter("Update > Item Name", "css", "[aria-label='Item Name']", OIN + "1", false, ParentTest, "no_jira");
                     if (FAIL) { return;}
                     if (d1.findElement(By.xpath("//div[contains(text(),'Apply Changes')]/parent::button")).isEnabled()) {
-                        _t++;
+                        
                         _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu was Edited Successfully" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     } else {
-                        _t++;
+                        
                         _f++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu Edit Failed" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     }  
                 }
@@ -989,7 +980,7 @@ class AP3_brand_new extends AP3_GUI{
                         // =================== "Leave without publishing?" Dialog even PUBLISH OK ============ DEBUG    
                 Text_Found("Find 'Leave...' question", "Leave without publishing?", ParentTest, "no_jira");    
                 if ("Found".equals(t)) {     
-                    _t++; _f++;
+                     _f++;
                     EX += _t + "\t" + "Navigate Back after Publish OK" + "\t" + "MM 'Sector' page" + "\t" + "Dialog 'Leave without publishing?'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
                     F += "Step: " + _t + " > " + "Dialog 'Leave without publishing?' after Published OK" + "\r\n";
                     Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true, ParentTest, "no_jira"); 
@@ -1035,10 +1026,10 @@ class AP3_brand_new extends AP3_GUI{
                     Element_By_Path_Text_Enter("Update > Item Name", "css", "[aria-label='Item Name']", OIN.substring(0, OIN.length()-1), false, ParentTest,"no_jira");
                     if (FAIL) { return;}
                     if (d1.findElement(By.xpath("//div[contains(text(),'Apply Changes')]/parent::button")).isEnabled()) {
-                        _t++;
+                        
                         _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu was Edited Successfully" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     } else {
-                        _t++;
+                        
                         _f++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu Edit Failed" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     }    
                 } else {
@@ -1049,10 +1040,10 @@ class AP3_brand_new extends AP3_GUI{
                     Element_By_Path_Text_Enter("Update > Item Name", "css", "[aria-label='Item Name']", OIN + "1", false, ParentTest,"no_jira");
                     if (FAIL) { return;}
                     if (d1.findElement(By.xpath("//div[contains(text(),'Apply Changes')]/parent::button")).isEnabled()) {
-                        _t++;
+                        
                         _p++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu was Edited Successfully" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     } else {
-                        _t++;
+                        
                         _f++; EX += _t + "\t" + "Menu Edit" + "\t" + e + "\t" + "Menu Edit Failed" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     }  
                 }
@@ -1068,137 +1059,134 @@ class AP3_brand_new extends AP3_GUI{
         // </editor-fold> 
     }  
     // <editor-fold defaultstate="collapsed" desc="Removing and re-adding the global menus in the brand configuration AUT-293">
-     protected void removeGlobalMenu() throws InterruptedException {
+     protected void removeGlobalMenu() throws InterruptedException, Exception {
          EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Removing and re-adding the global menus in the brand configuration ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
       
-        _t++;
-        Thread.sleep((long) sleep);
-        TWeb.Element_By_Path_Click("Brand Name Click", "xpath", "//td[contains(text(), '" + stationName + "')]", "no_jira");
+        
+        
+        Element_By_Path_Click("Brand Name Click", "xpath", "//td[contains(text(), '" + stationName + "')]", ParentTest, "no_jira");
         if (FAIL) {
             return;
         }
         Thread.sleep(500);
-        _t++;
-        Thread.sleep((long) sleep);
-        TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
+        
+       
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]",ParentTest, "no_jira");
         if (FAIL) {
             return;
         }
-        _t++;
-        Thread.sleep((long) sleep);
-        TWeb.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira");
+        
+       
+        Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]",ParentTest, "no_jira");
         if (FAIL) {
             return;
         }
-        _t++;
-        Thread.sleep((long) sleep);
-        TWeb.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira");
+        
+        
+        Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]",ParentTest,"no_jira");
         if (FAIL) {
             return;
         }
         Thread.sleep(500);
-        _t++;
-        Thread.sleep((long) sleep);
-        TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
+        
+        
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]",ParentTest, "no_jira");
         if (FAIL) {
             return;
         }
          
         // Assign and remove GLobal menu
-        _t++;
-        Thread.sleep((long) sleep);
-        TWeb.Element_By_Path_Click("Click of Assign menus from left corner", "xpath", "//div[6]//div[contains(@class, 'SelectedLeft')]", "no_jira");
+        
+        
+        Element_By_Path_Click("Click of Assign menus from left corner", "xpath", "//div[6]//div[contains(@class, 'SelectedLeft')]",ParentTest, "no_jira");
         if (FAIL) {
             return;
         }
         Thread.sleep(1000);
 
-        _t++;
-        Thread.sleep((long) sleep);
-        TWeb.List_L0("Count total assigned menus", "xpath", "//div[@class='layout row nowrap']//div[@class='flex shrink xs2']//button[@class='v-btn v-btn--icon theme--light']", "no_jira");
+        
+      
+        List_L0("Count total assigned menus", "xpath", "//div[@class='layout row nowrap']//div[@class='flex shrink xs2']//button[@class='v-btn v-btn--icon theme--light']", ParentTest,"no_jira");
         if (FAIL) {
             return;
         }
         int countAssignedMenuBeforeRemove = L0.size();
 
-        _t++;
-        Thread.sleep((long) sleep);
-        TWeb.Element_By_Path_Click("Click on remove assigned menu", "xpath", "//div[1][@class='layout row nowrap']//div[@class='flex shrink xs2']//button[@class='v-btn v-btn--icon theme--light']", "no_jira");
+        
+      
+        Element_By_Path_Click("Click on remove assigned menu", "xpath", "//div[1][@class='layout row nowrap']//div[@class='flex shrink xs2']//button[@class='v-btn v-btn--icon theme--light']",ParentTest, "no_jira");
         if (FAIL) {
             return;
         }
-        _t++;
-        TWeb.Element_By_Path_Click("Click 'Save Chnages Brand'", "xpath", "//*[contains(text(), 'Save Changes')]", "no_jira");
+        
+        Element_By_Path_Click("Click 'Save Chnages Brand'", "xpath", "//*[contains(text(), 'Save Changes')]",ParentTest, "no_jira");
         if (FAIL) {
             return;
 
         }
 
         //Check if assigned menu has removed
-        _t++;
-        Thread.sleep((long) sleep);
-        TWeb.Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira");
+        
+       
+        Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]",ParentTest, "no_jira");
         if (FAIL) {
             return;
         }
-        _t++;
-        Thread.sleep((long) sleep);
-        TWeb.Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", "no_jira");
+       
+        Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", ParentTest,"no_jira");
         if (FAIL) {
             return;
         }
         Thread.sleep(500);
-        _t++;
-        Thread.sleep((long) sleep);
-        TWeb.Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", "no_jira");
+        
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest,"no_jira");
         if (FAIL) {
             return;
         }
 
-        _t++;
-        Thread.sleep((long) sleep);
-        TWeb.Element_By_Path_Click("Click of Assign menus from left corner", "xpath", "//div[6]//div[contains(@class, 'SelectedLeft')]", "no_jira");
+        
+        
+        Element_By_Path_Click("Click of Assign menus from left corner", "xpath", "//div[6]//div[contains(@class, 'SelectedLeft')]",ParentTest, "no_jira");
         if (FAIL) {
             return;
         }
         Thread.sleep(1000);
 
-        _t++;
-        Thread.sleep((long) sleep);
-        TWeb.List_L1("Count total assigned menus", "xpath", "//div[@class='layout row nowrap']//div[@class='flex shrink xs2']//button[@class='v-btn v-btn--icon theme--light']", "no_jira");
+       
+        List_L1("Count total assigned menus", "xpath", "//div[@class='layout row nowrap']//div[@class='flex shrink xs2']//button[@class='v-btn v-btn--icon theme--light']",ParentTest, "no_jira");
         if (FAIL) {
             return;
         }
         int countAssignedMenuAfterRemove = L1.size();
         if (countAssignedMenuBeforeRemove == (countAssignedMenuAfterRemove - 1)) {
-            _t++;
-            Thread.sleep((long) sleep);
-            TWeb.Wait_For_Element_By_Path_Presence("Wait for breadscrumbs to be visible ", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", "no_jira");
+            
+           
+            Wait_For_Element_By_Path_Presence("Wait for breadscrumbs to be visible ", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']",ParentTest, "no_jira");
             if (FAIL) {
                 return;
             }
-            _t++;
-            TWeb.Element_By_Path_Click("Click navigate back to Station Index page", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", "no_jira");
+            
+            Element_By_Path_Click("Click navigate back to Station Index page", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']",ParentTest, "no_jira");
             if (FAIL) {
                 return;
             }
-          _t++;
+          
             _p++;
             EX += _t + "\t" + "Removing and re-adding the global menus in the brand configuration" + "\t" + "Original Assigned menus" + countAssignedMenuBeforeRemove + "\t" + "After removing Assigned menu: " + countAssignedMenuAfterRemove + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\"\t" + "no_jira" + "\r\n";
 
         } else {
-            _t++;
-            Thread.sleep((long) sleep);
-            TWeb.Wait_For_Element_By_Path_Presence("Wait for breadscrumbs to be visible ", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", "no_jira");
+            
+          
+            Wait_For_Element_By_Path_Presence("Wait for breadscrumbs to be visible ", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']",ParentTest, "no_jira");
             if (FAIL) {
                 return;
             }
-            _t++;
-            TWeb.Element_By_Path_Click("Click navigate back to Station Index page", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", "no_jira");
+            
+            Element_By_Path_Click("Click navigate back to Station Index page", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']",ParentTest, "no_jira");
             if (FAIL) {
                 return;
             }
-             _t++;
+             
             _f++;
             EX += _t + "\t" + "Removing and re-adding the global menus in the brand configuration" + "\t" + "Original Assigned menus" + countAssignedMenuBeforeRemove + "\t" + "After removing Assigned menu: " + countAssignedMenuAfterRemove + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\"\t" + "no_jira" + "\r\n";
         }
