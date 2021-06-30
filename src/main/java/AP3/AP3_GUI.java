@@ -2283,9 +2283,9 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ImageIO.write(ImageIO.read(SF), "png", bos);
             SF.delete();
-            return "data:image/png;base64, " + Base64.getEncoder().encodeToString(bos.toByteArray());
+            return "Get Screenshot > data:image/png;base64, " + Base64.getEncoder().encodeToString(bos.toByteArray());
         }catch (IOException ex) {
-            return "data:image/png;base64," + " ERROR: " + ex.getMessage();
+            return "Get Screenshot > data:image/png;base64," + " ERROR: " + ex.getMessage();
         }
     }
      //</editor-fold>
