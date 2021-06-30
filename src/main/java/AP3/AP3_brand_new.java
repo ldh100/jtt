@@ -1063,7 +1063,7 @@ class AP3_brand_new extends AP3_GUI{
      protected void removeGlobalMenu() throws InterruptedException, Exception {
          EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Removing and re-adding the global menus in the brand configuration ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
       
-         Wait_For_Element_By_Path_Presence("Brand Name Click", "xpath", "//td[contains(text(), '" + stationName + "')]", ParentTest, "no_jira");
+         Wait_For_Element_By_Path_Presence("Wait for brand name to load..", "xpath", "//td[contains(text(), '" + stationName + "')]", ParentTest, "no_jira");
         if (FAIL) {
             return;
         }
