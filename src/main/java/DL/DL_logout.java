@@ -19,7 +19,7 @@ class DL_logout extends DL_GUI {
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
     }
-    protected void run() throws InterruptedException, Exception {   
+    protected void run() {   
          
     }
 }

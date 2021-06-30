@@ -1,7 +1,5 @@
 package AP3;
 
-import static A.A.API_Response_Body;
-import static A.A.Time_12_formatter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -23,7 +21,14 @@ import org.json.JSONObject;
 //Export Automation tickets AUT-876
 
 class AP3_export_menuset extends AP3_GUI{
-    protected AP3_export_menuset (AP3_GUI a) throws InterruptedException, Exception {
+    String MenuSetName = "";
+    String MenuSetFile = "";
+    String Menu_ID="";
+    boolean NO_DATA = false;
+    String destinationDir = System.getProperty("user.home") + File.separator + "Downloads"; 
+    String API_Response_Body = "";   
+        
+    protected AP3_export_menuset (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -51,15 +56,11 @@ class AP3_export_menuset extends AP3_GUI{
         _All_data = a._All_data;
         New_ID = a.New_ID;
         TZone = a.TZone;
+        
+     
     } 
-    protected void run() throws InterruptedException, Exception {
-    
-        String MenuSetName = "";
-        String MenuSetFile = "";
-        String Menu_ID="";
-        boolean NO_DATA = false;
-        String destinationDir = System.getProperty("user.home") + File.separator + "Downloads"; 
-        String API_Response_Body = "";
+    protected void run(){
+    try {
        /*
                //AUT-875: As an Admin, I cannot export the menu in EDIT mode
          selectingGlobalMenu();
@@ -501,11 +502,13 @@ class AP3_export_menuset extends AP3_GUI{
                 
                         
                 
-                
+    } catch (Exception ex){}   // =============================================  
+        
     } //run time closing bracket
     
     //This block clicks Menu Manager, selects group that was selected in GUI, searches and clicks on the global menu that was selected in jtt
-    public void selectingGlobalMenu() throws InterruptedException, Exception{
+    public void selectingGlobalMenu() {
+    try {    
         //<editor-fold defaultstate="collapsed" desc="Select Global Menu">
         //This block clicks Menu Manager, selects group that was selected in GUI, searches and clicks on the global menu that was selected in jtt
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");
@@ -575,10 +578,12 @@ class AP3_export_menuset extends AP3_GUI{
 
         */
         //</editor-fold>
+    } catch (Exception ex){}   // =============================================  
     }
     
       
-    public void readExcel(String filePath, String fileName, String sheetName) throws FileNotFoundException, IOException{
+    public void readExcel(String filePath, String fileName, String sheetName) {
+    try {    
         //<editor-fold defaultstate="collapsed" desc="Read Excel">
         //This block reads and gets the cell value of from the exported menuset excel file
     //Create an object of File class to open xlsx file    
@@ -631,252 +636,238 @@ class AP3_export_menuset extends AP3_GUI{
 
         if(row.getCell(0).getStringCellValue().equals("Record Type")){                                      
              _t++;
-              _p++; EX += _t + "\t" + "Cell 0,0: "+row.getCell(0).getStringCellValue() + "\t" + row.getCell(0).getStringCellValue() + "\t" + "Record Type" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
+              _p++; EX += _t + "\t" + "Cell 0,0: "+row.getCell(0).getStringCellValue() + "\t" + row.getCell(0).getStringCellValue() + "\t" + "Record Type" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
                         
        }else
        {           
           _t++;
-          _f++; EX += _t + "\t" + "Cell 0,0: Test Failed" + "\t" + row.getCell(0).getStringCellValue() + "\t" + "Record Type" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          _f++; EX += _t + "\t" + "Cell 0,0: Test Failed" + "\t" + row.getCell(0).getStringCellValue() + "\t" + "Record Type" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }   
          
          
         if(row.getCell(1).getStringCellValue().equals("Category ID")){             
               _t++;
-              _p++; EX += _t + "\t" +  "Cell 0,1: "+row.getCell(1).getStringCellValue() + "\t" + row.getCell(1).getStringCellValue()+ "\t" + "Category ID" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
+              _p++; EX += _t + "\t" +  "Cell 0,1: "+row.getCell(1).getStringCellValue() + "\t" + row.getCell(1).getStringCellValue()+ "\t" + "Category ID" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
                         
         }else
        { 
           _t++;
-          _f++; EX += _t + "\t" + "Cell 0,1: "+row.getCell(1).getStringCellValue() + "\t" + row.getCell(1).getStringCellValue() + "\t" + "Category ID" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          _f++; EX += _t + "\t" + "Cell 0,1: "+row.getCell(1).getStringCellValue() + "\t" + row.getCell(1).getStringCellValue() + "\t" + "Category ID" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         } 
         
         if(row.getCell(2).getStringCellValue().equals("Category Name")){             
               _t++;
-              _p++; EX += _t + "\t" +"Cell 0,2: " +row.getCell(2).getStringCellValue() + "\t" + row.getCell(2).getStringCellValue() + "\t" + "Category Name" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
+              _p++; EX += _t + "\t" +"Cell 0,2: " +row.getCell(2).getStringCellValue() + "\t" + row.getCell(2).getStringCellValue() + "\t" + "Category Name" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
                         
         }else
        { 
           _t++;
-          _f++; EX += _t + "\t" + "Cell 0,2: "+row.getCell(2).getStringCellValue() + "\t" + row.getCell(1).getStringCellValue() + "\t" + "Category Name" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          _f++; EX += _t + "\t" + "Cell 0,2: "+row.getCell(2).getStringCellValue() + "\t" + row.getCell(1).getStringCellValue() + "\t" + "Category Name" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
         
         if(row.getCell(3).getStringCellValue().equals("Category Chit #")){            
               _t++;
-              _p++; EX += _t + "\t" + "Cell 0,3: "+row.getCell(3).getStringCellValue() + "\t" + row.getCell(3).getStringCellValue() + "\t" + "Category Chit #" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
+              _p++; EX += _t + "\t" + "Cell 0,3: "+row.getCell(3).getStringCellValue() + "\t" + row.getCell(3).getStringCellValue() + "\t" + "Category Chit #" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
                         
         }else
        { 
           _t++;
-          _f++; EX += _t + "\t" +  "Cell 0,3: "+row.getCell(3).getStringCellValue() + "\t" + row.getCell(3).getStringCellValue() + "\t" + "Category Chit #" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          _f++; EX += _t + "\t" +  "Cell 0,3: "+row.getCell(3).getStringCellValue() + "\t" + row.getCell(3).getStringCellValue() + "\t" + "Category Chit #" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
         
           if(row.getCell(4).getStringCellValue().equals("Category Enabled")){             
               _t++;
-              _p++; EX += _t + "\t" +"Cell 0,4: "+ row.getCell(4).getStringCellValue() + "\t" + row.getCell(4).getStringCellValue() + "\t" + "Category Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
+              _p++; EX += _t + "\t" +"Cell 0,4: "+ row.getCell(4).getStringCellValue() + "\t" + row.getCell(4).getStringCellValue() + "\t" + "Category Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
                         
         }else
        { 
           _t++;
-          _f++; EX += _t + "\t" + "Cell 0,4: "+row.getCell(4).getStringCellValue() + "\t" + row.getCell(3).getStringCellValue() + "\t" + "Category Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          _f++; EX += _t + "\t" + "Cell 0,4: "+row.getCell(4).getStringCellValue() + "\t" + row.getCell(3).getStringCellValue() + "\t" + "Category Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         } 
           
          if(row.getCell(5).getStringCellValue().equals("Item ID")){            
               _t++;
-              _p++; EX += _t + "\t" +"Cell 0,5: "+row.getCell(5).getStringCellValue() + "\t" +row.getCell(5).getStringCellValue() + "\t" + "Item ID" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
+              _p++; EX += _t + "\t" +"Cell 0,5: "+row.getCell(5).getStringCellValue() + "\t" +row.getCell(5).getStringCellValue() + "\t" + "Item ID" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
                         
         }else
        { 
           _t++;
-          _f++; EX += _t + "\t" + "Cell 0,5: "+row.getCell(5).getStringCellValue() + "\t" +row.getCell(5).getStringCellValue() + "\t" + "Item ID" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          _f++; EX += _t + "\t" + "Cell 0,5: "+row.getCell(5).getStringCellValue() + "\t" +row.getCell(5).getStringCellValue() + "\t" + "Item ID" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         } 
          
          if(row.getCell(6).getStringCellValue().equals("Item Name")){             
               _t++;
-              _p++; EX += _t + "\t" + "Cell 0,6: "+row.getCell(6).getStringCellValue() + "\t" + row.getCell(6).getStringCellValue() + "\t" + "Item Name" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
+              _p++; EX += _t + "\t" + "Cell 0,6: "+row.getCell(6).getStringCellValue() + "\t" + row.getCell(6).getStringCellValue() + "\t" + "Item Name" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
                         
         }else
        { 
           _t++;
-          _f++; EX += _t + "\t" + "Cell 0,6: " +row.getCell(6).getStringCellValue()+ "\t" + row.getCell(6).getStringCellValue() + "\t" + "Item Name" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          _f++; EX += _t + "\t" + "Cell 0,6: " +row.getCell(6).getStringCellValue()+ "\t" + row.getCell(6).getStringCellValue() + "\t" + "Item Name" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         } 
          
          if(row.getCell(7).getStringCellValue().equals("Price")){
              
               _t++;
-              _p++; EX += _t + "\t" +"Cell 0,7: " + row.getCell(7).getStringCellValue() + "\t" + row.getCell(7).getStringCellValue()  + "\t" + "Price" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
+              _p++; EX += _t + "\t" +"Cell 0,7: " + row.getCell(7).getStringCellValue() + "\t" + row.getCell(7).getStringCellValue()  + "\t" + "Price" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
                         
         }else
        { 
           _t++;
-          _f++; EX += _t + "\t" + "Cell 0,7: " + row.getCell(7).getStringCellValue() + "\t" + row.getCell(7).getStringCellValue()  + "\t" + "Price" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          _f++; EX += _t + "\t" + "Cell 0,7: " + row.getCell(7).getStringCellValue() + "\t" + row.getCell(7).getStringCellValue()  + "\t" + "Price" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         } 
          
          if(row.getCell(8).getStringCellValue().equals("Calories")){            
               _t++;
-              _p++; EX += _t + "\t" +"Cell 0,8: " +row.getCell(8).getStringCellValue() + "\t" + row.getCell(8).getStringCellValue()+ "\t" + "Calories" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
+              _p++; EX += _t + "\t" +"Cell 0,8: " +row.getCell(8).getStringCellValue() + "\t" + row.getCell(8).getStringCellValue()+ "\t" + "Calories" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
                         
         }else
        { 
           _t++;
-          _f++; EX += _t + "\t" + "Cell 0,8: "+row.getCell(8).getStringCellValue() + "\t" + row.getCell(8).getStringCellValue() + "\t" + "Calories" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          _f++; EX += _t + "\t" + "Cell 0,8: "+row.getCell(8).getStringCellValue() + "\t" + row.getCell(8).getStringCellValue() + "\t" + "Calories" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
          
          if(row.getCell(9).getStringCellValue().equals("Description")){
               _t++;
-              _p++; EX += _t + "\t" + "Cell 0,9: "+row.getCell(9).getStringCellValue() + "\t" + row.getCell(9).getStringCellValue()  + "\t" + "Description" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
+              _p++; EX += _t + "\t" + "Cell 0,9: "+row.getCell(9).getStringCellValue() + "\t" + row.getCell(9).getStringCellValue()  + "\t" + "Description" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
                         
         }else
        { 
           _t++;
-          _f++; EX += _t + "\t" + "Cell 0,9: " +row.getCell(9).getStringCellValue()  + "\t" + row.getCell(9).getStringCellValue()  + "\t" + "Description" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          _f++; EX += _t + "\t" + "Cell 0,9: " +row.getCell(9).getStringCellValue()  + "\t" + row.getCell(9).getStringCellValue()  + "\t" + "Description" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
          
          if(row.getCell(10).getStringCellValue().equals("Item Chit #")){           
               _t++;
-              _p++; EX += _t + "\t" + "Cell 0,10: "+row.getCell(10).getStringCellValue() + "\t" + row.getCell(10).getStringCellValue() + "\t" + "Item Chit #" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
+              _p++; EX += _t + "\t" + "Cell 0,10: "+row.getCell(10).getStringCellValue() + "\t" + row.getCell(10).getStringCellValue() + "\t" + "Item Chit #" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
                         
         }else
        { 
           _t++;
-          _f++; EX += _t + "\t" + "Cell 0,10: "+row.getCell(10).getStringCellValue() + "\t" + row.getCell(10).getStringCellValue() + "\t" + "Item Chit #" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          _f++; EX += _t + "\t" + "Cell 0,10: "+row.getCell(10).getStringCellValue() + "\t" + row.getCell(10).getStringCellValue() + "\t" + "Item Chit #" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
          
          if(row.getCell(11).getStringCellValue().equals("PLU")){
               _t++;
-              _p++; EX += _t + "\t" +"Cell 0,11: " +row.getCell(11).getStringCellValue() + "\t" + row.getCell(11).getStringCellValue() + "\t" + "PLU" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
+              _p++; EX += _t + "\t" +"Cell 0,11: " +row.getCell(11).getStringCellValue() + "\t" + row.getCell(11).getStringCellValue() + "\t" + "PLU" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
                         
         }else
        { 
           _t++;
-          _f++; EX += _t + "\t" + "Cell 0,11: " +row.getCell(11).getStringCellValue() + "\t" + row.getCell(11).getStringCellValue()+ "\t" + "PLU" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          _f++; EX += _t + "\t" + "Cell 0,11: " +row.getCell(11).getStringCellValue() + "\t" + row.getCell(11).getStringCellValue()+ "\t" + "PLU" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
          
          if(row.getCell(12).getStringCellValue().equals("Item Enabled")){             
               _t++;
-              _p++; EX += _t + "\t" + "Cell 0,12: "+row.getCell(12).getStringCellValue() + "\t" + row.getCell(12).getStringCellValue() + "\t" + "Item Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
+              _p++; EX += _t + "\t" + "Cell 0,12: "+row.getCell(12).getStringCellValue() + "\t" + row.getCell(12).getStringCellValue() + "\t" + "Item Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
                         
         }else
        { 
           _t++;
-          _f++; EX += _t + "\t" + "Cell 0,12: "+row.getCell(12).getStringCellValue() + "\t" + row.getCell(12).getStringCellValue()+ "\t" + "Item Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          _f++; EX += _t + "\t" + "Cell 0,12: "+row.getCell(12).getStringCellValue() + "\t" + row.getCell(12).getStringCellValue()+ "\t" + "Item Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
          
          if(row.getCell(13).getStringCellValue().equals("Modifier Group ID")){             
               _t++;
-              _p++; EX += _t + "\t" + "Cell 0,13: "+row.getCell(13).getStringCellValue() + "\t" + row.getCell(13).getStringCellValue() + "\t" + "Modifier Group ID" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
+              _p++; EX += _t + "\t" + "Cell 0,13: "+row.getCell(13).getStringCellValue() + "\t" + row.getCell(13).getStringCellValue() + "\t" + "Modifier Group ID" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
                         
         }else
        { 
           _t++;
-          _f++; EX += _t + "\t" + "Cell 0,13: "+row.getCell(13).getStringCellValue() + "\t" + row.getCell(13).getStringCellValue() + "\t" + "Modifier Group ID" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          _f++; EX += _t + "\t" + "Cell 0,13: "+row.getCell(13).getStringCellValue() + "\t" + row.getCell(13).getStringCellValue() + "\t" + "Modifier Group ID" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
          
          if(row.getCell(14).getStringCellValue().equals("Modifier Group Name")){             
               _t++;
-              _p++; EX += _t + "\t" + "Cell 0,14: "+row.getCell(14).getStringCellValue() + "\t" + row.getCell(14).getStringCellValue() + "\t" + "Modifier Group Name" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
+              _p++; EX += _t + "\t" + "Cell 0,14: "+row.getCell(14).getStringCellValue() + "\t" + row.getCell(14).getStringCellValue() + "\t" + "Modifier Group Name" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
                         
         }else
        { 
           _t++;
-          _f++; EX += _t + "\t" + "Cell 0,14: "+ row.getCell(14).getStringCellValue() + "\t" + row.getCell(14).getStringCellValue()+ "\t" + "Modifier Group Name" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+          _f++; EX += _t + "\t" + "Cell 0,14: "+ row.getCell(14).getStringCellValue() + "\t" + row.getCell(14).getStringCellValue()+ "\t" + "Modifier Group Name" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }  
           //</editor-fold>
-        } 
+    } catch (Exception ex){}   // =============================================  
+    }
     
-    //This block call the company API: BaseAPI + "/menu/company/"+CompanyID
-    public  void Call_Company_API(String MenuSetName,int flag) throws InterruptedException, Exception  {
-        //<editor-fold defaultstate="collapsed" desc="Call Company API">
-        Call_API("Call Global menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/"+CompanyID, true, ParentTest, "no_jira" );        
-       if(t.startsWith("{")){
+    //<editor-fold defaultstate="collapsed" desc="Call Company API">    //This block call the company API: BaseAPI + "/menu/company/"+CompanyID
+    public  void Call_Company_API(String MenuSetName,int flag) {
+    try {    
+
+        Call_API("Call Global menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID, true, ParentTest, "no_jira" );        
+        if(t.startsWith("{")){
+            API_Response_Body = t;               
+        }else{
+            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/" + CompanyID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode("API Responce Error"));
+            return;
+        }
+        JSONObject json = new JSONObject(API_Response_Body);
+        JSONArray menus = json.getJSONArray("menus");
+         
+        for(int k = 0; k < menus.length(); k++) {
+           JSONObject menu = menus.getJSONObject(k);
+           if(menu.has("location_brand")){                                  
+               if(menu.getString("location_brand").equals(BrandID)) {
+                   if(menu.getJSONObject("label").getString("en").equalsIgnoreCase(MenuSetName)) {
+                       if(menu.getJSONObject("is").getBoolean("disabled") && flag==1) {
+                            _t++;
+                            _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "MenuSet is disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                           //print pass menu set is disabled
+                        }  else if(!menu.getJSONObject("is").getBoolean("disabled") && flag==2) {
+                            _t++;
+                            _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "MenuSet is enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                           //print pass menu set is d
+                        } else {
+                           _t++;
+                           _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found opposite values" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                           //print fail menuset is eneabled
+                        }  
+                    }    
+                }     
+            } 
+        }
+    } catch (Exception ex){}   // =============================================  
+    } 
+    //</editor-fold>  
+    
+    //<editor-fold defaultstate="collapsed" desc="Call Global Menuset API">    //This block call the GlobalMenuSet API: BaseAPI + "/menu/" + Menu_ID
+    public  void Call_GlobalMenuSet_API(String Menu_ID, String MenuSetName, int flag) {
+    try {    
+
+        Call_API("Call GlobalMenuSet API", "Bearer " + AP3_TKN, BaseAPI + "/menu/" + Menu_ID, true, ParentTest, "no_jira" );
+        if(t.startsWith("{")){
             API_Response_Body = t;               
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/"+CompanyID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
             Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/"+CompanyID , false, ParentTest.createNode("API Responce Error"));
             return;
-        }
-         JSONObject json = new JSONObject(API_Response_Body);
-         JSONArray menus = json.getJSONArray("menus");
-         
-         for(int k=0;k<menus.length();k++)
-         {
-           JSONObject menu = menus.getJSONObject(k);
-           if(menu.has("location_brand")){                                  
-               if(menu.getString("location_brand").equals(BrandID))
-                   
-               {
-                   //System.out.println(menu.getJSONObject("label").getString("en"));
-                   if(menu.getJSONObject("label").getString("en").equalsIgnoreCase(MenuSetName)) //lunch
-               
-                   {
-                       if(menu.getJSONObject("is").getBoolean("disabled") && flag==1)
-                       {
-                            _t++;
-                            _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "MenuSet is disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                           //print pass menu set is disabled
-                       } 
-                       else if(!menu.getJSONObject("is").getBoolean("disabled") && flag==2)
-                       {
-                            _t++;
-                            _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "MenuSet is enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                           //print pass menu set is d
-                       }       
-                       else{
-                           _t++;
-                           _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found opposite values" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                           //print fail menuset is eneabled
-                       }
-                       
-                       
-                   }
-                   
-               }     
-               }
-           
-         }
-         //</editor-fold>
-    }
-    
-     //This block call the GlobalMenuSet API: BaseAPI + "/menu/" + Menu_ID
-    public  void Call_GlobalMenuSet_API(String Menu_ID, String MenuSetName, int flag) throws InterruptedException, Exception  {
-         //<editor-fold defaultstate="collapsed" desc="Call Global Menuset API">
-        Call_API("Call GlobalMenuSet API", "Bearer " + AP3_TKN, BaseAPI + "/menu/" +Menu_ID, true, ParentTest, "no_jira" );
-        
-        
+        }               
         JSONObject json = new JSONObject(API_Response_Body);
-        
         JSONArray groups = json.getJSONArray("groups");
-         if(json.getString("id").equals(Menu_ID.trim()))                                     
-               {                           
-           
-           if(json.has("id")){                                  
-               
-                   System.out.println(json.getJSONObject("label").getString("en"));
-                   if(json.getJSONObject("label").getString("en").equalsIgnoreCase(MenuSetName)) //lunch
-               
-                   {
-                       if(json.getJSONObject("is").getBoolean("disabled") && flag==1)
-                       {
-                            _t++;
-                            _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "MenuSet is disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                           //print pass menu set is disabled
-                       } 
-                       else if(!json.getJSONObject("is").getBoolean("disabled") && flag==2)
-                       {
-                            _t++;
-                            _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "MenuSet is enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                           //print pass menu set is enabled
-                       }       
-                       else{
-                           _t++;
-                           _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found opposite values" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                           //print fail if found contradicting values
-                       }                                              
-                   }                                      
-    }
-         }   
-          //</editor-fold>
-    }
+        if(json.getString("id").equals(Menu_ID.trim())){                           
+            if(json.has("id")){                                     
+                System.out.println(json.getJSONObject("label").getString("en"));
+                if(json.getJSONObject("label").getString("en").equalsIgnoreCase(MenuSetName)){
+                    if(json.getJSONObject("is").getBoolean("disabled") && flag==1) {
+                         _t++;
+                         _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "MenuSet is disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                        //print pass menu set is disabled
+                    } else if(!json.getJSONObject("is").getBoolean("disabled") && flag==2) {
+                         _t++;
+                         _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "MenuSet is enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                        //print pass menu set is enabled
+                    } else {
+                        _t++;
+                        _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found opposite values" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        //print fail if found contradicting values
+                    }                                              
+                }                                      
+            }
+        }   
 
-   //comment to commit
+    } catch (Exception ex){}   // =============================================  
+    } 
+    //</editor-fold>
 }

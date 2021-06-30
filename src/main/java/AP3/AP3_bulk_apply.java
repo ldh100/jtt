@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 class AP3_bulk_apply extends AP3_GUI{
-    protected AP3_bulk_apply (AP3_GUI a) throws InterruptedException, Exception {
+    protected AP3_bulk_apply (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -36,7 +36,8 @@ class AP3_bulk_apply extends AP3_GUI{
         New_ID = a.New_ID;
         TZone = a.TZone;
     } 
-    protected void run() throws InterruptedException, Exception {
+    protected void run() {
+    try {    
         String API_Response_Body = "";
         JSONObject json;
         JSONArray menus;
@@ -1109,7 +1110,9 @@ class AP3_bulk_apply extends AP3_GUI{
         Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);   
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
+    
     // Comparison eg. LIST1.size() ==/>/< LIST2.size()
     private void compareListSizes(String NAME, List<WebElement> LIST1, List<WebElement> LIST2, Boolean comparison, ExtentTest ParentTest,  String JIRA) {
         FAIL = false;

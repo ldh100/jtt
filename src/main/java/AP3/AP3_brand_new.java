@@ -8,7 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 
 class AP3_brand_new extends AP3_GUI {
 
-    protected AP3_brand_new(AP3_GUI a) throws InterruptedException, Exception {
+    protected AP3_brand_new(AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -35,7 +35,8 @@ class AP3_brand_new extends AP3_GUI {
     }
     private String stationName = "";
 
-    protected void run(boolean NEW_SITE) throws InterruptedException, Exception {
+    protected void run(boolean NEW_SITE) {
+    try{    
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");
         if (FAIL) {
             return;
@@ -113,6 +114,7 @@ class AP3_brand_new extends AP3_GUI {
         }
 
         // </editor-fold> 
+
         // <editor-fold defaultstate="collapsed" desc="Add Station">    
 //Thread.sleep(500); 
         Element_By_Path_Click("Button 'Add Station' click", "xpath", "//*[contains(text(), 'ADD STATION')]", ParentTest, "no_jira");
@@ -947,7 +949,7 @@ class AP3_brand_new extends AP3_GUI {
         if (FAIL) {
             return;
         }
-        // </editor-fold>    _
+        // </editor-fold>   
 
         // <editor-fold defaultstate="collapsed" desc="MM - Activate/Set Visible in App New Local Menu">
         Open_Switch_to_2nd_Tab("Open Menu Manager in New Tab", url + "#/menu", ParentTest, "no_jira");
@@ -1672,10 +1674,12 @@ class AP3_brand_new extends AP3_GUI {
             }
         }
         // </editor-fold> 
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="Removing and re-adding the global menus in the brand configuration AUT-293">
-    protected void removeGlobalMenu() throws InterruptedException, Exception {
+    protected void removeGlobalMenu(){
+    try {
         EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Removing and re-adding the global menus in the brand configuration ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
 
         Wait_For_Element_By_Path_Presence("Wait for brand name to load..", "xpath", "//td[contains(text(), '" + stationName + "')]", ParentTest, "no_jira");
@@ -1801,8 +1805,8 @@ class AP3_brand_new extends AP3_GUI {
             _f++;
             EX += _t + "\t" + "Removing and re-adding the global menus in the brand configuration" + "\t" + "Original Assigned menus" + countAssignedMenuBeforeRemove + "\t" + "After removing Assigned menu: " + countAssignedMenuAfterRemove + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\"\t" + "no_jira" + "\r\n";
         }
-
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     // </editor-fold> 
 } 
 // End of AP3_Brand_New

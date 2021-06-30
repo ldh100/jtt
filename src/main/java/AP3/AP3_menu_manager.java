@@ -12,7 +12,7 @@ import org.json.JSONObject;
  * save and publish
  */
 class AP3_menu_manager extends AP3_GUI{
-    protected AP3_menu_manager (AP3_GUI a) throws InterruptedException, Exception {
+    protected AP3_menu_manager (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -31,23 +31,27 @@ class AP3_menu_manager extends AP3_GUI{
         Location = a.Location;
         DH_MENU_ID = a.DH_MENU_ID;
         SECTOR = a.SECTOR;
+        CompanyID = a.CompanyID;
+        GL_MENU =a.GL_MENU;
         
         AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
         New_ID = a.New_ID;
         TZone = a.TZone;
-    }    
-    protected void run() throws InterruptedException, Exception { 
-        
-//        DH menu IDs; see https://teamideaworks.atlassian.net/browse/AUT-253
-//        A3lvmE18ORC7zv1GkPG - Brand: PIZZA PIZZA, Site: Sheridan College Davis B & C Wing, Unit: Sheridan College Davis C-Wing
-//        z03ykAm5JNszPA7Ne3X - Brand: Tim Hortons, Site: Sheridan College Davis B & C Wing, Unit: Sheridan College Davis C-Wing
-//        NWEJgN87Q3Sw46JaQ1Q - Brand: PARAMOUNT,   Site: Fennel, Unit: Mohawk College
-        
+    }  
+    
+    protected void run() { 
+    try {
+    //        DH menu IDs; see https://teamideaworks.atlassian.net/browse/AUT-253
+    //        A3lvmE18ORC7zv1GkPG - Brand: PIZZA PIZZA, Site: Sheridan College Davis B & C Wing, Unit: Sheridan College Davis C-Wing
+    //        z03ykAm5JNszPA7Ne3X - Brand: Tim Hortons, Site: Sheridan College Davis B & C Wing, Unit: Sheridan College Davis C-Wing
+    //        NWEJgN87Q3Sw46JaQ1Q - Brand: PARAMOUNT,   Site: Fennel, Unit: Mohawk College
+
+        String API_Respoce_Body = "";      
         String MENU_ID = "";      
         int PAGES;
         boolean NO_DATA = false;
-        
+
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
@@ -233,6 +237,7 @@ class AP3_menu_manager extends AP3_GUI{
             Page_URL("Current page URL", ParentTest, "no_jira");
             Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
                 if (FAIL) { return;}              
+
             //<editor-fold defaultstate="collapsed" desc="Pagination">   
             Move_to_Element_By_Path("Paging - Rows per page", "css", "[aria-label='Rows per page:']", ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -1945,6 +1950,7 @@ class AP3_menu_manager extends AP3_GUI{
         // </editor-fold> 
        
         if (!env.equals("PR")) {
+            
         // <editor-fold defaultstate="collapsed" desc="Changes in Global Menu Item Reflect on Local Menu Item">  
         EX += " - " + "\t" + " === Changes in Global Menu Item Reflect on Local Menu Item" + "\t" + " ===== " + "\t" + " == Changes in Global Menu Item Reflect on Local Menu Item Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n"; 
         EX += " - " + "\t" + " === Navigate to Global Menu and Make Changes" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -2333,107 +2339,111 @@ Thread.sleep(2000);
             if (FAIL) { return;}
         EX += " - " + "\t" + " === Manipulate Global Modifiers" + "\t" + " ===== " + "\t" + " == Manipulate Global Modifiers End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
-    }
-}
     
-    private void clone_menuset() throws InterruptedException, Exception {
-    //<editor-fold defaultstate="collapsed" desc="Clone MenuSet">
-    Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
-        if (FAIL) { return;}
-    Thread.sleep(500);
-    Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
-        if (FAIL) { return;}
-    Thread.sleep(500);
-    Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent", ParentTest, "no_jira");
-        if (FAIL) { return;}
-    //Cloning Menu set
-    Move_to_Element_By_Path("Added Menu Set Hover", "xpath", "//*[contains(text(), 'Added " + New_ID + "')]", ParentTest, "no_jira");
-        if (FAIL) { return;}
-    List_L0("Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
-        if (FAIL) { return;}
-    for (int i = 0; i < L0.size(); i++) {
-        Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent", ParentTest, "no_jira");
-        if (FAIL) { return;}
-    }
-    Element_Child_List_L2("Find Added Menu Set - dots", L0.get(L0.size() - 1), "tagName", "button", ParentTest, "no_jira");
-        if (FAIL) { return;}
-    Thread.sleep(500);
-    Element_Click("Added Menu Set 'dots' Click", L2.get(1), ParentTest, "no_jira");
-        if (FAIL) { return;}
-    Thread.sleep(1000);
-    Wait_For_Element_By_Path_Presence("Wait for Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
-        if (FAIL) { return;}
-    Element_E1_Find("Find Menu Edit Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
-        if (FAIL) { return;}
-    Element_Child_List_L1("Menu Edit Options list Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
-        if (FAIL) { return;}
-    T_Index = -1;
-    for (int i = 0; i < L1.size(); i++) {
-        Element_Text("Menu Edit Option (index " + i + ")", L1.get(i), ParentTest, "no_jira");
-        if(t.contains("Duplicate")){ T_Index = i; }
-    }
-    Element_Click("Click 'Duplicate'", L1.get(T_Index), ParentTest, "no_jira");
-        if (FAIL) { return;}
-    Thread.sleep(500);
-    Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]", ParentTest, "no_jira");
-        if (FAIL) { return;}
-    Thread.sleep(500);
-    Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", ParentTest, "no_jira");
-        if (FAIL) { return;}
-    Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
-        if (FAIL) { return;}
-    Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]", ParentTest, "no_jira");
-        if (FAIL) { return;}
-
-    //Verify API if ID's are unique
-    EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API Start ==" + "\t" + "-" +"\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-    String[] Menu_ID = new String[2];
-    int lmenu_cnt = 0;
-    Call_API("Call Global menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID, true, ParentTest, "no_jira" );
-    JSONObject json = new JSONObject(t);
-    JSONArray menus = json.getJSONArray("menus");
-
-    for(int k=0; k<menus.length(); k++) {
-        JSONObject menu = menus.getJSONObject(k);
-        if(menu.getJSONObject("label").getString("en").contains("Added " + New_ID))  {
-            Menu_ID[lmenu_cnt] = menu.getString("id");
-            lmenu_cnt++;
-        }
-    }
-    if(lmenu_cnt == 2) {
-        if(Menu_ID[0].equals(Menu_ID[1])) {//Print Fail the ids are not unique
-            _t++;
-            _f++; EX += _t + "\t" + "Same ids for cloned Menu set" + "\t" + Menu_ID[0] + "\t" + Menu_ID[1] + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-        } else {//Print Pass the ids are unique
-            _t++;
-            _p++; EX += _t + "\t" + "Unique ids for cloned Menu set" + "\t" + Menu_ID[0] + "\t" + Menu_ID[1] + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-        }
+        } 
+    } catch (Exception ex){}   // =============================================  
     }
 
-    //Verify if cloned menu items are unique
-    Call_API("Call menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/"+Menu_ID[0], true, ParentTest, "no_jira" );
-    json = new JSONObject(t);
-    JSONArray items = json.getJSONArray("groups").getJSONObject(0).getJSONArray("items");
-    String[] Item_ID = new String[2];
-    int Item_ID_cnt = 0;
-    for(int k=0; k<items.length(); k++)  {
-        JSONObject item = items.getJSONObject(k);
-        if(item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("Item "+ New_ID)) {
-            Item_ID[Item_ID_cnt] = item.getString("id");
-            Item_ID_cnt++;
+    //<editor-fold defaultstate="collapsed" desc="Clone MenuSet">    
+    private void clone_menuset() {
+    try{
+        Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);
+        Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        //Cloning Menu set
+        Move_to_Element_By_Path("Added Menu Set Hover", "xpath", "//*[contains(text(), 'Added " + New_ID + "')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        List_L0("Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        for (int i = 0; i < L0.size(); i++) {
+            Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent", ParentTest, "no_jira");
+            if (FAIL) { return;}
         }
-    }
-    if(Item_ID_cnt == 2)  {
-        if(Item_ID[0].equals(Item_ID[1])) {//Print Fail the ids are not unique
-            _t++;
-            _f++; EX += _t + "\t" + "Same ids for cloned items" + "\t" + Item_ID[0] + "\t" + Item_ID[1] + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        Element_Child_List_L2("Find Added Menu Set - dots", L0.get(L0.size() - 1), "tagName", "button", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);
+        Element_Click("Added Menu Set 'dots' Click", L2.get(1), ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(1000);
+        Wait_For_Element_By_Path_Presence("Wait for Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_E1_Find("Find Menu Edit Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_Child_List_L1("Menu Edit Options list Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        T_Index = -1;
+        for (int i = 0; i < L1.size(); i++) {
+            Element_Text("Menu Edit Option (index " + i + ")", L1.get(i), ParentTest, "no_jira");
+            if(t.contains("Duplicate")){ T_Index = i; }
         }
-        else {//Print Pass the ids are unique
-            _t++;
-            _p++; EX += _t + "\t" + "Unique ids for cloned Items" + "\t" + Item_ID[0] + "\t" + Item_ID[1] + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        Element_Click("Click 'Duplicate'", L1.get(T_Index), ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);
+        Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);
+        Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+
+        //Verify API if ID's are unique
+        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API Start ==" + "\t" + "-" +"\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        String[] Menu_ID = new String[2];
+        int lmenu_cnt = 0;
+        Call_API("Call Global menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID, true, ParentTest, "no_jira" );
+        JSONObject json = new JSONObject(t);
+        JSONArray menus = json.getJSONArray("menus");
+
+        for(int k=0; k<menus.length(); k++) {
+            JSONObject menu = menus.getJSONObject(k);
+            if(menu.getJSONObject("label").getString("en").contains("Added " + New_ID))  {
+                Menu_ID[lmenu_cnt] = menu.getString("id");
+                lmenu_cnt++;
+            }
         }
-    }
-    EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API END==" + "\t" + "-" +"\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        if(lmenu_cnt == 2) {
+            if(Menu_ID[0].equals(Menu_ID[1])) {//Print Fail the ids are not unique
+                _t++;
+                _f++; EX += _t + "\t" + "Same ids for cloned Menu set" + "\t" + Menu_ID[0] + "\t" + Menu_ID[1] + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            } else {//Print Pass the ids are unique
+                _t++;
+                _p++; EX += _t + "\t" + "Unique ids for cloned Menu set" + "\t" + Menu_ID[0] + "\t" + Menu_ID[1] + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            }
+        }
+
+        //Verify if cloned menu items are unique
+        Call_API("Call menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/"+Menu_ID[0], true, ParentTest, "no_jira" );
+        json = new JSONObject(t);
+        JSONArray items = json.getJSONArray("groups").getJSONObject(0).getJSONArray("items");
+        String[] Item_ID = new String[2];
+        int Item_ID_cnt = 0;
+        for(int k=0; k<items.length(); k++)  {
+            JSONObject item = items.getJSONObject(k);
+            if(item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("Item "+ New_ID)) {
+                Item_ID[Item_ID_cnt] = item.getString("id");
+                Item_ID_cnt++;
+            }
+        }
+        if(Item_ID_cnt == 2)  {
+            if(Item_ID[0].equals(Item_ID[1])) {//Print Fail the ids are not unique
+                _t++;
+                _f++; EX += _t + "\t" + "Same ids for cloned items" + "\t" + Item_ID[0] + "\t" + Item_ID[1] + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            }
+            else {//Print Pass the ids are unique
+                _t++;
+                _p++; EX += _t + "\t" + "Unique ids for cloned Items" + "\t" + Item_ID[0] + "\t" + Item_ID[1] + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            }
+        }
+        EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API END==" + "\t" + "-" +"\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+    } catch (Exception ex){}   // =============================================  
+    }    
     //</editor-fold>
-    }
 }

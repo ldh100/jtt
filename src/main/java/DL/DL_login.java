@@ -9,7 +9,8 @@ class DL_login extends DL_GUI {
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
     }
-    protected void run(String ID, String PW, boolean Invalid_Login) throws InterruptedException, Exception {     
+    protected void run(String ID, String PW, boolean Invalid_Login) {     
+    try {    
         Navigate_to_URL("Navigate to", url, ParentTest, "no_jira");                                 
         Wait_For_Element_By_Path_Presence("Wait 'USERNAME' input", "id", "username", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
@@ -88,5 +89,6 @@ class DL_login extends DL_GUI {
             Login_OK = false;
             return;  // Login Failed FATAL for this User ===================================================
         }
+    } catch (Exception ex){}   // =============================================  
     }
 }

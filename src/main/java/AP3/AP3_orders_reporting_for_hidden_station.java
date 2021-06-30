@@ -12,7 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
 class AP3_orders_reporting_for_hidden_station extends AP3_GUI{
-    protected AP3_orders_reporting_for_hidden_station (AP3_GUI a) throws InterruptedException, Exception {
+    protected AP3_orders_reporting_for_hidden_station (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -46,7 +46,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI{
     private Boolean flagStationVisibility = false;
     private ArrayList<String> storePresentVisibilityOfStation = new ArrayList<>();
 
-    protected void run() throws Exception {
+    protected void run(){
         openDashboardDrawer();
         navigateToSiteIndexPage();
         validateOnSiteProductApplication();
@@ -57,13 +57,16 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI{
         revertVisibilityOfStation();
     }
 
-    protected void openDashboardDrawer() throws Exception {
+    protected void openDashboardDrawer()  {
+    try {    
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira"); 
             if (FAIL) { return; }
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     //This method will navigate to Site Index page
-    protected void navigateToSiteIndexPage() throws Exception {
+    protected void navigateToSiteIndexPage() {
+    try {
         Element_By_Path_Click("Drawer > Sites Click", "xpath", "//div[contains(text(),'Sites')]", ParentTest, "no_jira"); 
             if (FAIL) { return; }
         Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0, ParentTest, "no_jira"); 
@@ -71,10 +74,12 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI{
         Thread.sleep(500);    
         Element_By_Path_Input_Select_Clear("Site Search Clear", "xpath", "//input[contains(@aria-label, 'Search ')]", ParentTest, "no_jira"); 
             if (FAIL) { return; }
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     //This method validates if "Site Production" has All selected in dropdown.
-    protected void validateOnSiteProductApplication() throws Exception {
+    protected void validateOnSiteProductApplication() {
+    try {    
         Element_By_Path_Text("Get default selected Production app on Site page", "xpath", "//*[@class='flex']//*[@class='v-select__selection v-select__selection--comma']", ParentTest, "no_jira"); 
             if (FAIL) { return; }
         if (t != "All") {
@@ -83,11 +88,12 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI{
             Element_By_Path_Click("Select All from On Site Product from drop-down", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']//div[contains(text(),'All')][contains(@class,'v-list__tile__title')]", ParentTest, "no_jira"); 
                 if (FAIL) { return; }
         }
-
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     //This method validates if "Site Production" has All selected in dropdown.
 
-    protected void validateOnSiteProductApplicationOrders() throws Exception {
+    protected void validateOnSiteProductApplicationOrders(){
+    try{    
         Element_By_Path_Text("Get default selected Production app", "xpath", "//*[@aria-label='Select App']", ParentTest, "no_jira"); 
             if (FAIL) { return; }
       
@@ -98,11 +104,12 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI{
                 if (FAIL) { return; }
             searchBySelectedSiteOrdersIndex();
         }
-
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     //This method will search for selected site from Ap3
-    protected void searchBySelectedSiteAp3() throws Exception {
+    protected void searchBySelectedSiteAp3() {
+    try {    
         Element_By_Path_Text("Get default selected Production app", "xpath", "//*[@class='flex']//*[@class='v-select__selection v-select__selection--comma']", ParentTest, "no_jira"); 
             if (FAIL) { return; }
 
@@ -133,9 +140,11 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI{
         } else {
             if (FAIL) { return; } //  ?????
         }
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
-    protected void searchBySelectedSiteOrdersIndex() throws Exception {
+    protected void searchBySelectedSiteOrdersIndex()  {
+    try {    
         Element_By_Path_Text_Enter("Enter Site name in Search box", "css", "[aria-label='Search Sites']", SITE, false, ParentTest, "no_jira"); 
             if (FAIL) { return; }
         Wait_For_Element_By_Path_Presence("Wait for Site name to load.. after search", "xpath", "//table[@class='v-datatable v-table theme--light']//tbody//tr[1]//td[1]", ParentTest, "no_jira"); 
@@ -157,10 +166,12 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI{
             //    ?????
             System.err.println("Selected site from Ap3 not found in site list");
         }
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     //This method will search by selcted Site from AP3 on Order report Index page
-    protected void searchBySelectedSitedSiteOrderReport() throws Exception {
+    protected void searchBySelectedSitedSiteOrderReport() {
+    try {    
         Element_By_Path_Text("Get default selected Production app on Orders Index", "xpath", "//*[@class='layout row wrap']//*[@class='v-select__selection v-select__selection--comma']", ParentTest, "no_jira"); 
             if (FAIL) { return; }
         if (t.equals("All")) {
@@ -177,10 +188,12 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI{
                 System.err.println("Selected site from JTT not found in site list");
             }
         }
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     // Store initial visibility of station before any change
-    protected void hideVisibilityOfStation() throws Exception {
+    protected void hideVisibilityOfStation() {
+    try {    
         Find_Text("Get Station name from list after search result", BRAND, true, ParentTest, "no_jira"); 
             if (FAIL) { return; }
         storeStationName = t;
@@ -204,20 +217,23 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI{
         if (flagStationVisibility.equals(true)) {
             navigateToOrdersIndexPage();
         }
-
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     //Validate if selected Site header match
-    protected void checkSelectedSite() throws Exception {
+    protected void checkSelectedSite() {
+    try {    
         Element_By_Path_Text("Validate header for selected site", "xpath", "//div[@class='title-brand clickable']//div[@class='H3-Primary-Left']", ParentTest, "no_jira"); 
             if (FAIL) { return; }
         if (t.equalsIgnoreCase(SITE)) {
             hideVisibilityOfStation();
         }
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     //This method will navigate page to /"Order Reporting" index page
-    protected void navigateToOrdersIndexPage() throws Exception {
+    protected void navigateToOrdersIndexPage() {
+    try {    
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira"); 
             if (FAIL) { return; }
         Thread.sleep(500);
@@ -236,10 +252,12 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI{
         Element_By_Path_Text("User default App", "xpath", "//div[contains(@class, 'v-select__selection v-select__selection--comma')]", ParentTest, "no_jira"); 
             if (FAIL) { return; }
         validateOnSiteProductApplicationOrders();
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     //This method will check order for selected station
-    protected void checkOrdersForStation() throws Exception {
+    protected void checkOrdersForStation() {
+    try {    
         Element_By_Path_Text("Validate header for selected site", "xpath", "//div[@class='flex xs8']//div[@class='H3-Primary-Left']", ParentTest, "no_jira"); 
             if (FAIL) { return; }
         System.err.println("Header" + t);
@@ -267,10 +285,12 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI{
                 if (FAIL) { return; }
         }
         EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Verify if Orders available for hidden Station ====END==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     // This methid will validate Date range funationality for AUT-870
-    protected void checkDateRangeFunctionality() throws Exception {
+    protected void checkDateRangeFunctionality() {
+    try {    
         EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Upon selecting the date range, the selection must remain the same ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         //Select a specific date from the calendar to view the orders for that date
         LocalDate date = LocalDate.now();
@@ -411,10 +431,12 @@ Thread.sleep(1000);
             _f++;
             EX += _t + "\t" + "URL Order date for 2 days range is not equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     // Revert all sites back to original aria-Checked
-    protected void revertVisibilityOfStation() throws Exception {
+    protected void revertVisibilityOfStation() {
+    try {    
         EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Verify if Visibility of selected Station Revert it back to original mode ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         openDashboardDrawer();
         navigateToSiteIndexPage();
@@ -441,5 +463,6 @@ Thread.sleep(1000);
                 }
             }
         }
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 }

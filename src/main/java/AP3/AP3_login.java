@@ -5,7 +5,7 @@ package AP3;
  * @author Oleg.Spozito
  */
 class AP3_login extends AP3_GUI{
-    protected AP3_login(AP3_GUI a) throws InterruptedException, Exception {
+    protected AP3_login(AP3_GUI a) {
         ADMIN_ID = a.ADMIN_ID;
         ADMIN_PW = a.ADMIN_PW;
         url = a.url;
@@ -14,7 +14,8 @@ class AP3_login extends AP3_GUI{
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
     }    
-    protected void run(boolean users) throws Exception  {     
+    protected void run(boolean users) {   
+    try {    
         Navigate_to_URL("Navigate to", url, ParentTest, "no_jira");             
             if (FAIL) { return;}
         Page_URL("AP3 Login page", ParentTest, "no_jira");             
@@ -85,5 +86,6 @@ class AP3_login extends AP3_GUI{
                 }
             } 
         Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,ParentTest, "no_jira");                    
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 }

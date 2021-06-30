@@ -16,7 +16,7 @@ import org.openqa.selenium.By;
  */
 
 class AP3_sales_analytics extends AP3_GUI{
-    protected AP3_sales_analytics (AP3_GUI a) throws Exception {
+    protected AP3_sales_analytics (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -43,7 +43,8 @@ class AP3_sales_analytics extends AP3_GUI{
     }    
     String API_Response_Body = "";
     
-    protected void run() throws Exception {
+    protected void run(){
+    try {    
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Sales Analytics Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         //set BaseAPI to PROD regradless of JTT Env selection
         if (!env.equals("PR")) {
@@ -548,5 +549,6 @@ class AP3_sales_analytics extends AP3_GUI{
         // </editor-fold>
         
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Sales Analytics End >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 }

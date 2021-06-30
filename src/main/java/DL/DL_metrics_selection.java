@@ -11,7 +11,8 @@ class DL_metrics_selection extends DL_GUI {
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
     }
-    protected void run() throws InterruptedException, Exception { 
+    protected void run() { 
+    try {    
         Thread.sleep(500); 
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");  
             if (FAIL) { return;}  
@@ -106,5 +107,6 @@ class DL_metrics_selection extends DL_GUI {
             if (FAIL) { return;}
         List_L1("Loaded Metrics Cards Count", "xpath", "//div[contains(@class, 'MuiPaper-root MuiCard-root')]", ParentTest, "no_jira");              
             if (FAIL) { return;}     
+    } catch (Exception ex){}   // =============================================  
     }
 }

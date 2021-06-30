@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
 class AP3_site_new extends AP3_GUI{
-    protected AP3_site_new (AP3_GUI a) throws Exception {
+    protected AP3_site_new (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -34,8 +34,8 @@ class AP3_site_new extends AP3_GUI{
         TZone = a.TZone;
     }    
     String API_Response_Body = "";
-    protected void run() throws Exception { 
-
+    protected void run() { 
+    try {    
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
@@ -986,7 +986,7 @@ class AP3_site_new extends AP3_GUI{
 
               
         
-/*                   After_Station_creation
+/*      After_Station_creation
         1)  Verify api calls
         2) Flag = 2 make changes in brand configuration / Save changes / Verify api calls
         3) Flag = 3 Choose integration type : Volante   / Save changes / Verify api calls
@@ -1382,18 +1382,18 @@ class AP3_site_new extends AP3_GUI{
                 return;
             }
         // </editor-fold>       
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     
-     private void After_station_creation() throws Exception
-    {
+    private void After_station_creation() {
+    try {    
         int flag = 1;
         int Menu_set_cnt = -1;
         int Category_cnt = -1;
-        while(flag<=4)
-        {
+        while( flag <= 4) {
           
-        if(flag ==1)
+        if(flag == 1)
         {
         Move_to_Element_By_Path("Scroll to New Brand data row", "xpath", "//td[contains(text(), '" + "New Station " + New_ID + "')]", ParentTest, "no_jira");        
             if (FAIL) { return;} 
@@ -1731,11 +1731,13 @@ class AP3_site_new extends AP3_GUI{
         Wait_For_All_Elements_InVisibility("Wait for 'Create Brand'", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
             if (FAIL) { return;}   
         }         
+    } catch (Exception ex){}   // =============================================  
     } // End of After_station_creation
     
     
     
-    private void Location_brand_API(String B_ID,int flag) throws Exception {
+    private void Location_brand_API(String B_ID,int flag) {
+    try {    
         EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Location Brand API Verification Start==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         
         Call_API("Call Location Brand API", "Bearer " + AP3_TKN, BaseAPI + "/location/brand/" + B_ID, true, ParentTest, "no_jira" );
@@ -1852,9 +1854,11 @@ class AP3_site_new extends AP3_GUI{
             _f++; EX += _t + "\t" + "Brand Image not saved - not expected" + "\t" + "Brand Image not available" + "\t" + "Brand Image available" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
          } 
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Location Brand API Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";  
+    } catch (Exception ex){}   // =============================================  
     }//End of Location Brand API
     
-    private void Brand_Private_API(String B_ID,int flag) throws Exception {
+    private void Brand_Private_API(String B_ID,int flag) {
+    try {    
         EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Brand API Private config Verification Start==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         Call_API("Call Brand Private API", "Bearer " + AP3_TKN, BaseAPI + "/config/" + B_ID, true, ParentTest, "no_jira" );
         if(t.startsWith("{")){
@@ -1905,9 +1909,11 @@ class AP3_site_new extends AP3_GUI{
            }
         }
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Brand API Private config Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
-     }
+    } catch (Exception ex){}   // =============================================  
+    }
     
-    private void Brand_Public_API(String B_ID, int flag) throws Exception {
+    private void Brand_Public_API(String B_ID, int flag) {
+    try {    
         EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Brand API Public config Verification Start==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         Call_API("Call Brand Public API", "Bearer " + AP3_TKN, BaseAPI + "/config/public/" + B_ID, true, ParentTest, "no_jira" );
         if(t.startsWith("{")){
@@ -1995,9 +2001,11 @@ class AP3_site_new extends AP3_GUI{
             }
          }
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Brand API Public config Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
+    } catch (Exception ex){}   // =============================================  
     }
     
-    private void Verify_menu_category_API(String B_ID,int flag,int Menu_set_cnt,int Category_cnt) throws Exception {
+    private void Verify_menu_category_API(String B_ID,int flag,int Menu_set_cnt,int Category_cnt)  {
+    try {    
         EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API Start==" + "\t" + "Round : "+flag+ "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         String[] Menu_ID = new String[2];
         int lmenu_cnt = 0;
@@ -2056,9 +2064,11 @@ class AP3_site_new extends AP3_GUI{
             }
         }
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
-     }
+    } catch (Exception ex){}   // =============================================  
+    }
     
-    private void Location_API() throws Exception {
+    private void Location_API() {
+    try {    
         EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == App Multipgroup API Verification Start==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         boolean flag = false;
         String id = "";
@@ -2106,9 +2116,11 @@ class AP3_site_new extends AP3_GUI{
             }  
         }//End of for    
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == App Multipgroup API Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";  
+    } catch (Exception ex){}   // =============================================  
     }//End of Location_API
     
-    private void Location_Group_API(String S_ID) throws Exception {
+    private void Location_Group_API(String S_ID)  {
+    try {    
         EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Location Group API Verification Start==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         Call_API("Call Location group API", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + S_ID, true, ParentTest, "no_jira" );
         if(t.startsWith("{")){
@@ -2147,9 +2159,11 @@ class AP3_site_new extends AP3_GUI{
             _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "Sector : "+sector_name + "\t" + "Chartwells" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }   
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Location Group API Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";  
+    } catch (Exception ex){}   // =============================================  
     }//End of Location_Group_API
     
-    private void Verify_station_data_after_refresh(String B_ID) throws Exception {
+    private void Verify_station_data_after_refresh(String B_ID)  {
+    try {    
         EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " ==  API Verification on Refresh START ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         Call_API("Call Brand Public API", "Bearer " + AP3_TKN, BaseAPI + "/config/public/" + B_ID, true, ParentTest, "no_jira" );
         if(t.startsWith("{")){
@@ -2247,5 +2261,6 @@ class AP3_site_new extends AP3_GUI{
             _f++; EX += _t + "\t" + "Brand Api call response different after Refresh" + "\t" + "Unequal API response" + "\t" + "Unequal API response" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " ==  API Verification on Refresh END ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";  
+    } catch (Exception ex){}   // =============================================  
     }
 }

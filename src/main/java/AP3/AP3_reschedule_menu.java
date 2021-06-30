@@ -12,7 +12,7 @@ import org.openqa.selenium.By;
  */
 
 class AP3_reschedule_menu extends AP3_GUI{
-    protected AP3_reschedule_menu (AP3_GUI a) throws Exception {
+    protected AP3_reschedule_menu (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -40,7 +40,8 @@ class AP3_reschedule_menu extends AP3_GUI{
         TZone = a.TZone;
     }    
     String API_Response_Body = "";
-    protected void run() throws Exception {
+    protected void run() {
+    try {    
         String[] startTimes = {"05:00A", "06:00A", "07:00A", "08:00A", "09:00A", "10:00A", "11:00A"};
         String[] endTimes = {"05:00P", "06:15P", "07:30P", "08:40P", "09:00P", "10:10P", "11:20P"};
                
@@ -187,5 +188,6 @@ class AP3_reschedule_menu extends AP3_GUI{
                 _f++; EX += _t + "\t" + "Expected Number of events" + "\t" + "-" + "\t" + "16" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }                
         }           //------- AUT-850
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 }

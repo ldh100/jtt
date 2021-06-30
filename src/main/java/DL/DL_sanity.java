@@ -16,7 +16,8 @@ class DL_sanity extends DL_GUI {
         DATE_RANGE = a.DATE_RANGE;
         _Metric_data = a._Metric_data;
     }
-    protected void run(String ID, String PW) throws InterruptedException, Exception {   
+    protected void run(String ID, String PW) { 
+    try {    
         Navigate_to_URL("Navigate to", url, ParentTest, "no_jira");                                 
         Wait_For_Element_By_Path_Presence("Wait 'USERNAME' input", "id", "username", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
@@ -312,10 +313,11 @@ class DL_sanity extends DL_GUI {
         SecondaryMetric_Calculation("Program Rate of Return Calculation", PER,TS, PROR, ParentTest, "no_jira" );
         SecondaryMetric_Calculation("Program Strength of Program Calculation", PER,CS, PSOP, ParentTest, "no_jira" );
         }
+    } catch (Exception ex){}   // =============================================  
     }
 
-   public void UnCheckMetrics() throws Exception
-    {
+    public void UnCheckMetrics() {
+    try {   
       Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");  
             if (FAIL) { return;}  
         Thread.sleep(5000);
@@ -342,10 +344,8 @@ class DL_sanity extends DL_GUI {
        
                 Element_Click("Un-Check Selected Metrics " + (j + 1), L0.get(j), ParentTest, "no_jira"); 
             }   
+    } catch (Exception ex){}   // =============================================  
     }
-
-
- 
-    }
+}
    
 

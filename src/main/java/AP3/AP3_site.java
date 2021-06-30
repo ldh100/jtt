@@ -1,7 +1,7 @@
 package AP3;
 
 class AP3_site extends AP3_GUI{
-    protected AP3_site (AP3_GUI a) throws InterruptedException, Exception {
+    protected AP3_site (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -25,7 +25,8 @@ class AP3_site extends AP3_GUI{
         New_ID = a.New_ID;
         TZone = a.TZone;
     }    
-    protected void run() throws Exception { 
+    protected void run() { 
+    try {    
         String API_Response_Body = "";  
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
             if (FAIL) { return;}
@@ -814,5 +815,6 @@ class AP3_site extends AP3_GUI{
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             //if (FAIL) { return;}           
         // </editor-fold> 
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 }
