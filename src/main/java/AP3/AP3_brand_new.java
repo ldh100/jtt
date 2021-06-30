@@ -1682,7 +1682,6 @@ class AP3_brand_new extends AP3_GUI {
         if (FAIL) {
             return;
         }
-        Thread.sleep(1000);
         Element_By_Path_Click("Brand Name Click", "xpath", "//td[contains(text(), '" + stationName + "')]", ParentTest, "no_jira");
         if (FAIL) {
             return;
