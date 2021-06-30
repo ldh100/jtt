@@ -7,7 +7,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
 class AP3_brand_new extends AP3_GUI{
-    public static String stationName = "";
+    
     protected AP3_brand_new (AP3_GUI a) throws InterruptedException, Exception {
         d1 = a.d1;
         url = a.url;
@@ -33,6 +33,7 @@ class AP3_brand_new extends AP3_GUI{
         New_ID = a.New_ID;
         TZone = a.TZone;
     } 
+    private static String stationName = "";
     protected void run(boolean NEW_SITE) throws InterruptedException, Exception  { 
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]",  ParentTest, "no_jira");                    
             if (FAIL) { return;}
@@ -522,7 +523,7 @@ class AP3_brand_new extends AP3_GUI{
         Thread.sleep(500);               
         Wait_For_All_Elements_InVisibility("Wait for 'Create Brand'", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");   
             if (FAIL) { return;} 
-               removeGlobalMenu();
+        removeGlobalMenu();
         // </editor-fold>     
 
         // <editor-fold defaultstate="collapsed" desc="Add Station > Hours">   
@@ -1062,8 +1063,11 @@ class AP3_brand_new extends AP3_GUI{
      protected void removeGlobalMenu() throws InterruptedException, Exception {
          EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Removing and re-adding the global menus in the brand configuration ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
       
-        
-        
+         Wait_For_Element_By_Path_Presence("Brand Name Click", "xpath", "//td[contains(text(), '" + stationName + "')]", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(1000);
         Element_By_Path_Click("Brand Name Click", "xpath", "//td[contains(text(), '" + stationName + "')]", ParentTest, "no_jira");
         if (FAIL) {
             return;
