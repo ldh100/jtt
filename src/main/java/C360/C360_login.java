@@ -9,7 +9,8 @@ class C360_login extends C360_GUI{
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
     }
-    protected void run() throws InterruptedException, Exception {  
+    protected void run() {  
+    try {    
         EX += " - " + "\t" + " === Login " + "\t" + " ===== " + "\t" + " == Login  Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
 
         Navigate_to_URL("Navigate to", url, ParentTest, "no_jira"); 
@@ -35,5 +36,6 @@ class C360_login extends C360_GUI{
 //        Page_URL("Cafe 360 Dashboard URL", ParentTest,"no_jira");         
             if (FAIL) { return;}            
         EX += " - " + "\t" + " === ^ Login " + "\t" + " ===== " + "\t" + " == ^ Login End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";  
+    } catch (Exception ex){}   // =============================================  
     }
 }

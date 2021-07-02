@@ -7,7 +7,7 @@ import java.io.File;
  * @author Oleg.Spozito
  */
 class AP3_user extends AP3_GUI{
-    protected AP3_user(AP3_GUI a) throws InterruptedException, Exception {
+    protected AP3_user(AP3_GUI a){
         ADMIN_ID = a.ADMIN_ID;
         ADMIN_PW = a.ADMIN_PW;
         url = a.url;
@@ -22,7 +22,8 @@ class AP3_user extends AP3_GUI{
         New_ID = a.New_ID;
         TZone = a.TZone;
     }    
-    protected void run() throws Exception { 
+    protected void run() { 
+    try {    
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira" );             
             if (FAIL) { return;}
         Thread.sleep(500);          
@@ -1199,5 +1200,6 @@ class AP3_user extends AP3_GUI{
             if (FAIL) { return;}            
         // </editor-fold>  
         }
-    }   
+    } catch (Exception ex){}   // =============================================  
+    }
 }

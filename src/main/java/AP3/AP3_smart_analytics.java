@@ -6,7 +6,7 @@ package AP3;
  */
 
 class AP3_smart_analytics extends AP3_GUI{
-    protected AP3_smart_analytics (AP3_GUI a) throws Exception {
+    protected AP3_smart_analytics (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -34,7 +34,7 @@ class AP3_smart_analytics extends AP3_GUI{
         TZone = a.TZone;
     }    
     String API_Response_Body = "";
-    protected void run() throws Exception {
+    protected void run() {
 
     }
 }

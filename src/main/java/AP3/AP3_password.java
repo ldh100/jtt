@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 import org.json.JSONObject;
 
 class AP3_password extends AP3_GUI {
-    protected AP3_password (AP3_GUI a) throws Exception {
+    protected AP3_password (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -53,7 +53,7 @@ class AP3_password extends AP3_GUI {
     private final String passWord6="DhruvsethAuto2!0"; // New Valid password
     private final String passWord7="DhruvQA7"; // At least 9 characters
     
-    protected void run() throws Exception {
+    protected void run()  {
 //<editor-fold defaultstate="collapsed" desc="comment">
 //milo.a@mailsac.com Admin
 //milo.d@mailsac.om Delivery Manager
@@ -418,7 +418,8 @@ getUsers_API(U_ID);
     } //Run time closing bracket so add all the methods before this..      
     
     //AUT-840 : As an Admin, I can reset my password and login to Ap3 with the new password    
-    protected void ap3LoginPage() throws Exception{
+    protected void ap3LoginPage() {
+    try {    
         Navigate_to_URL("Navigate to", url, ParentTest, "no_jira");             
             if (FAIL) { return;}
         Page_URL("AP3 Login page", ParentTest, "no_jira");             
@@ -437,7 +438,9 @@ getUsers_API(U_ID);
             if (FAIL) { return;}
         Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type = 'password']", ParentTest, "no_jira"); 
             if (FAIL) { return;}     
-     }   
+    } catch (Exception ex){}   // =============================================  
+    } 
+    
     /**
      * 1) Go to the Ap3 login screen as ADMIN
      * 2) Click on Forgot password 
@@ -448,7 +451,8 @@ getUsers_API(U_ID);
     */
     //AUT-840
 
-    private void forgotPassWord() throws Exception{        
+    private void forgotPassWord() {      
+    try {    
         String eMail1="testautomation598@mailinator.com";
         //String eMail2="testautomation895@mailinator.com";
         Thread.sleep(1000);
@@ -479,20 +483,24 @@ getUsers_API(U_ID);
         Element_By_Path_Text("An email has been sent message...", "xpath","//div[@class='v-messages__message']", ParentTest, "no_jira");
             if (FAIL) { return;}     
          Thread.sleep(500);   
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
                 
     //User logout
-    private void logout() throws Exception{
+    private void logout() {
+    try {   
         Element_By_Path_Click("Click 'User Name'", "css", "div[class='v-btn__content'] div[class='flex xs12']", ParentTest, "no_jira");
             if (FAIL) {return;}
         Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(), 'Logout')]", ParentTest, "no_jira");
             if (FAIL) {return;}   
         Element_By_Path_Text("Welcome Prompt", "xpath", "//*[@id='operator']/div/main/div/div[2]/div[2]/div/div/form/div[1]", ParentTest, "no_jira"); 
             if (FAIL) { return;}    
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //Enter Mailinator > email > click on go
-    private void enterMailnator() throws Exception{
+    private void enterMailnator() {
+    try {    
         //String eMail = "testautomation895@mailinator.com";
         Open_Switch_to_2nd_Tab("Go to mailinator", "https://www.mailinator.com", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -502,11 +510,12 @@ getUsers_API(U_ID);
         Element_By_Path_Click("Click on go", "xpath","//button[@id='go-to-public']", ParentTest, "no_jira");
          Thread.sleep(1000);
             if (FAIL) { return;}
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     // Click on email "You have received a invite to log into the Admin Panel!"
-    private void clickEmailInviteToLogin() throws Exception{
-        
+    private void clickEmailInviteToLogin() {
+    try {    
         //Refresh("Refresh", ParentTest, "no_jira");   
         Wait_For_Element_By_Path_Presence("Click on the email", "xpath","(//*[contains(text(), 'You have received a invite to log into the Admin Panel!')])[1]", ParentTest, "no_jira");            
         Refresh("Refresh", ParentTest, "no_jira"); 
@@ -518,10 +527,12 @@ Thread.sleep(30000);
             if (FAIL) { return;}
         Element_By_Path_Click("Click here to set your password", "xpath","//a[contains(text(),'here')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     // Click on email "Reset Your Password"
-    private void clickEmailResetPassword() throws Exception{
+    private void clickEmailResetPassword() {
+    try {    
         Wait_For_Element_By_Path_Presence("Click on the email", "xpath", "//td[normalize-space()='Reset Your Password']", ParentTest, "no_jira");
             if (FAIL) { return;}
         Refresh("Refresh", ParentTest, "no_jira");
@@ -533,11 +544,12 @@ Thread.sleep(30000);
             if (FAIL) { return;}
         Element_By_Path_Click("Click on the reset password", "xpath","//a[contains(text(),'here')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //Scenario 1: Admin: At least 15 characters requirement is not fulfilled
-    private void fifteenCharacters() throws Exception{  
+    private void fifteenCharacters() {  
+    try {    
         Thread.sleep(1000);
         Element_By_Path_Text_Enter("Enter Invalid Password", "css", "[aria-label='Password']", passWord1, true, ParentTest, "no_jira");  
             if (FAIL) { return;}
@@ -550,10 +562,12 @@ Thread.sleep(30000);
             if (FAIL) { return;}                    
         Element_By_Path_Text("Error Message:", "xpath", "//*[@class='error_state']", ParentTest, "no_jira");
             if (FAIL) { return;}
-        }   
+    } catch (Exception ex){}   // =============================================  
+    }  
     
     //Scenario 2: Admin: An uppercase character requirement is not fulfilled
-    private void upperCaseCharacter() throws Exception{  
+    private void upperCaseCharacter() {  
+    try {    
         Thread.sleep(1000);
         Element_By_Path_Input_Select_Clear("Clear Password Field", "css", "[aria-label='Password']", ParentTest, "no_jira"); 
             if (FAIL) { return;}
@@ -570,10 +584,12 @@ Thread.sleep(30000);
             if (FAIL) { return;}                    
         Element_By_Path_Text("Error Message:", "xpath", "//*[@class='error_state']", ParentTest, "no_jira");
             if (FAIL) { return;}
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //Scenario 3: Admin: An lowercase character requirement is not fulfilled
-    private void lowerCaseCharacter() throws Exception{          
+    private void lowerCaseCharacter() {     
+    try {    
         Thread.sleep(1000);
         Element_By_Path_Input_Select_Clear("Clear Password Field", "css", "[aria-label='Password']", ParentTest, "no_jira"); 
             if (FAIL) { return;}
@@ -590,10 +606,12 @@ Thread.sleep(30000);
             if (FAIL) { return;}                    
                 Element_By_Path_Text("Error Message:", "xpath", "//*[@class='error_state']", ParentTest, "no_jira");
             if (FAIL) { return;}
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //Scenario 4: Admin: A number or special character requirement is not fulfilled
-    private void numberOrSpecialCharacter() throws Exception{
+    private void numberOrSpecialCharacter() {
+    try {    
         Thread.sleep(1000);
         Element_By_Path_Input_Select_Clear("Clear Password Field", "css", "[aria-label='Password']", ParentTest, "no_jira"); 
             if (FAIL) { return;}
@@ -610,10 +628,12 @@ Thread.sleep(30000);
             if (FAIL) { return;}                    
         Element_By_Path_Text("Error Message:", "xpath", "//*[@class='error_state']", ParentTest, "no_jira");
             if (FAIL) { return;}
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //Scenario 5: Admin: Passwords do not match 
-    private void passwordsDontMatch() throws Exception{        
+    private void passwordsDontMatch() {   
+    try {    
         Thread.sleep(1000);
         Element_By_Path_Input_Select_Clear("Clear Password Field", "css", "[aria-label='Password']", ParentTest, "no_jira"); 
             if (FAIL) { return;}
@@ -632,10 +652,12 @@ Thread.sleep(30000);
             if (FAIL) { return;}
         Element_By_Path_Text("Confirm Password Error Message", "xpath", "//div[@class='v-messages__message']", ParentTest, "no_jira"); 
             if (FAIL) { return;}
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //Scenario 6: Setting Valid password with all requirements (Happy Path)
-    private void setValidPassword() throws Exception{        
+    private void setValidPassword() {      
+    try {   
         Thread.sleep(1000);
         Element_By_Path_Input_Select_Clear("Clear Password Field", "css", "[aria-label='Password']", ParentTest, "no_jira"); 
             if (FAIL) { return;}
@@ -656,10 +678,12 @@ Thread.sleep(30000);
             if (FAIL) { return;}
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}     
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //Scenario : Setting new Valid password with all requirements after password reset (Happy Path)
-    private void setNewValidPassword() throws Exception{        
+    private void setNewValidPassword() {  
+    try {    
         Thread.sleep(1000);
         Element_By_Path_Input_Select_Clear("Clear Password Field", "css", "[aria-label='Password']", ParentTest, "no_jira"); 
             if (FAIL) { return;}
@@ -680,10 +704,12 @@ Thread.sleep(30000);
             if (FAIL) { return;}
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //Scenario 7: At least 9 characters requirement is not fulfilled
-    private void nineCharacters() throws Exception{  
+    private void nineCharacters() {  
+    try {    
         Thread.sleep(1000);
         Element_By_Path_Text_Enter("Enter Invalid Password", "css", "[aria-label='Password']", passWord7, true, ParentTest, "no_jira");  
             if (FAIL) { return;}
@@ -696,20 +722,24 @@ Thread.sleep(30000);
             if (FAIL) { return;}                    
         Element_By_Path_Text("Error Message:", "xpath", "//*[@class='error_state']", ParentTest, "no_jira");
             if (FAIL) { return;}
-        }   
+    } catch (Exception ex){}   // =============================================  
+    }   
     
     //Clicking on the Set Password button and entering Admin Panel Page
-    private void clickSetPassword() throws Exception{
+    private void clickSetPassword() {
+    try {    
         Wait_For_Element_By_Path_Presence("Wait for set password button to enable", "xpath", "//div[contains(text(),'Set Password')]", ParentTest, "no_jira");                 
             if (FAIL) { return;}
         Element_By_Path_Click("Click on Set Password", "xpath", "//div[contains(text(),'Set Password')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}    
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}      
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //Admin User logging in with the registered email and new password
-    private void adminUserLogin() throws Exception{        
+    private void adminUserLogin() {    
+    try {    
         //Page_URL("AP3 Login page", ParentTest, "no_jira");             
             //if (FAIL) { return;}   
         Element_By_Path_Text_Enter("Enter Registered Admin Email", "css", "[aria-label='E-mail']", eMail, true, ParentTest, "no_jira"); 
@@ -724,11 +754,12 @@ Thread.sleep(30000);
             if (FAIL) { return;}   
         //Element_By_Path_Text("Wait for 'Hi Username...' text", "xpath", "//*[contains(text(),'Hi DS TestAutomation')]", ParentTest, "no_jira");             
             //if (FAIL) { return;}
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //Admin User logging in with the registered email and password reset
-    private void adminUserLoginAfterResetPassword() throws Exception{    
-        
+    private void adminUserLoginAfterResetPassword() {    
+    try {    
        Page_URL("AP3 Login page", ParentTest, "no_jira");             
             if (FAIL) { return;}    
         Element_By_Path_Text_Enter("Enter Registered Admin Email", "css", "[aria-label='E-mail']", eMail, true, ParentTest, "no_jira"); 
@@ -743,10 +774,12 @@ Thread.sleep(30000);
             if (FAIL) { return;}   
         Element_By_Path_Text("Wait for 'Hi Username...' text", "xpath", "//*[contains(text(),'Hi DS_Admin TestQA')]", ParentTest, "no_jira");             
             if (FAIL) { return;}
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //Admin User logging in with the registered email and old password after password reset
-    private void adminUserLoginOldPassword() throws Exception{        
+    private void adminUserLoginOldPassword() { 
+    try {    
         //Page_URL("AP3 Login page", ParentTest, "no_jira");             
             //if (FAIL) { return;}   
         Element_By_Path_Text_Enter("Enter Registered Admin Email", "css", "[aria-label='E-mail']", eMail, true, ParentTest, "no_jira"); 
@@ -762,10 +795,12 @@ Thread.sleep(30000);
         Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type = 'password']", ParentTest, "no_jira"); 
             if (FAIL) { return;}     
 Thread.sleep(1000);
-    }  
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //Me: my login
-    private void Admin_IDLogin() throws Exception{
+    private void Admin_IDLogin() {
+    try  {    
         Element_By_Path_Text_Enter("Enter Valid Email", "css", "[aria-label='E-mail']", ADMIN_ID, false, ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", ADMIN_PW, true, ParentTest, "no_jira"); 
@@ -776,9 +811,11 @@ Thread.sleep(1000);
             if (FAIL) { return;}
         Page_URL("AP3 Dashboard URL", ParentTest, "no_jira");             
             if (FAIL) { return;}                       
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
-    private void cdlSiteUserLogin() throws Exception{        
+    private void cdlSiteUserLogin() {     
+    try {    
         //Page_URL("AP3 Login page", ParentTest, "no_jira");             
             //if (FAIL) { return;}   
         Element_By_Path_Text_Enter("Enter Registered Email", "css", "[aria-label='E-mail']", eMail, true, ParentTest, "no_jira"); 
@@ -796,10 +833,12 @@ Thread.sleep(10000);
             if (FAIL) { return;}   
         //Element_By_Path_Text("Wait for 'Hi Username...' text", "xpath", "//*[contains(text(),'Hi DS TestAutomation')]", ParentTest, "no_jira");             
             //if (FAIL) { return;}
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //CDL Delivery Manager User logging in with the registered email and old password after password reset
-    private void cdlSiteUserLoginOldPassword() throws Exception{        
+    private void cdlSiteUserLoginOldPassword() {   
+    try {    
         //Page_URL("AP3 Login page", ParentTest, "no_jira");             
             //if (FAIL) { return;}   
         Element_By_Path_Text_Enter("Enter Registered Email", "css", "[aria-label='E-mail']", eMail, true, ParentTest, "no_jira"); 
@@ -815,10 +854,12 @@ Thread.sleep(10000);
         Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type = 'password']", ParentTest, "no_jira"); 
             if (FAIL) { return;}     
 Thread.sleep(10000);
-    }  
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //CDL Delivery Manager User logging in with the registered email and password reset
-    private void cdlSiteUserLoginAfterResetPassword() throws Exception{    
+    private void cdlSiteUserLoginAfterResetPassword() {    
+    try {    
        Page_URL("AP3 Login page", ParentTest, "no_jira");             
             if (FAIL) { return;}    
         Element_By_Path_Text_Enter("Enter Registered Email", "css", "[aria-label='E-mail']", eMail, true, ParentTest, "no_jira"); 
@@ -836,10 +877,12 @@ Thread.sleep(1000);
         Element_By_Path_Text("Wait for Welcome...' text", "xpath", "//div[@class='H4-Primary-Left']", ParentTest, "no_jira");             
             if (FAIL) { return;}   
 Thread.sleep(1000);    
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     // searching user with email address
-    private void SearchUser() throws Exception{  
+    private void SearchUser() {  
+    try {    
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
@@ -878,10 +921,12 @@ Thread.sleep(1000);
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500); 
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //Delete the user 
-    private void deleteUser() throws Exception{           
+    private void deleteUser() {       
+    try {    
         Element_By_Path_Text("Find 'Delete User' Text", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", ParentTest, "no_jira"); 
             if (FAIL) { return; }             
         Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", ParentTest, "no_jira"); 
@@ -908,10 +953,12 @@ Thread.sleep(1000);
             if (FAIL) { return;}
         Find_Text("Deleted Admin 'Not Found' notification", "No matching records found", true, ParentTest, "no_jira"); 
             if (FAIL) { return;}     
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //Making the user Inactive after search
-    private void click_User_Inactive() throws Exception{  
+    private void click_User_Inactive() {  
+    try {    
         Element_By_Path_Click("Click 'User LinkText'", "linkText", "Users", ParentTest, "no_jira"); 
             if (FAIL) { return; } 
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
@@ -938,10 +985,12 @@ Thread.sleep(1000);
             if (FAIL) { return;}
         Refresh("Refresh", ParentTest, "no_jira");
 Thread.sleep(5000);     
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
      
     //Making the user active after search
-    private void click_User_Active() throws Exception{  
+    private void click_User_Active() {  
+    try {    
        // Element_By_Path_Click("Click 'User LinkText'", "linkText", "Users", ParentTest, "no_jira"); 
          //   if (FAIL) { return; } 
         Element_By_Path_Text("Search Prompt", "xpath", "//*[contains(text(), 'Search Users')]", ParentTest, "no_jira"); 
@@ -967,11 +1016,13 @@ Thread.sleep(5000);
 Thread.sleep(5000);
         Refresh("Refresh", ParentTest, "no_jira");
 Thread.sleep(5000);         
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //Click on new user after logging in
-    private void clickNewUser() throws Exception{ 
-     Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
+    private void clickNewUser() { 
+    try {    
+        Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
         Element_By_Path_Click("Drawer > 'Users' Click", "xpath", "//*[contains(text(), 'Users')]", ParentTest, "no_jira"); 
@@ -987,10 +1038,12 @@ Thread.sleep(5000);
             if (FAIL) { return;}
         Page_URL("New User page URL",  ParentTest,"no_jira");
             if (FAIL) { return;}              
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //Selecting role as admin and creating a new admin user
-    private void createNewAdminUser() throws Exception{ 
+    private void createNewAdminUser() { 
+    try {    
         Element_By_Path_Attribute("Role selection Prompt", "css", "[aria-label='Role']", "placeholder", ParentTest,"no_jira");
              if (FAIL) { return;}        
         Element_By_Path_Click("Open Role combobox", "css", "[role='combobox']", ParentTest, "no_jira"); 
@@ -1024,10 +1077,12 @@ Thread.sleep(5000);
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}   
         Thread.sleep(5000);
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //Selecting role as CDL Delivery Manager and creating a new CDL Delivery Manager user
-    protected void createNewCDLDeliveryManager() throws Exception{ 
+    protected void createNewCDLDeliveryManager() { 
+    try {    
         Element_By_Path_Attribute("Role selection Prompt", "css", "[aria-label='Role']", "placeholder", ParentTest, "no_jira");
              if (FAIL) { return;}        
         Page_URL("New User page URL", ParentTest, "no_jira");
@@ -1088,11 +1143,13 @@ Thread.sleep(5000);
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}
             Thread.sleep(5000);
-            }  
+    } catch (Exception ex){}   // =============================================  
+    }  
     
     //Selecting role as CDL Delivery Manager and creating a new CDL Delivery Manager user
-    protected void createNewSiteManager() throws Exception{ 
-    Element_By_Path_Attribute("Role selection Prompt", "css", "[aria-label='Role']", "placeholder", ParentTest, "no_jira");
+    protected void createNewSiteManager() { 
+    try {    
+        Element_By_Path_Attribute("Role selection Prompt", "css", "[aria-label='Role']", "placeholder", ParentTest, "no_jira");
              if (FAIL) { return;}        
         Page_URL("New User page URL", ParentTest, "no_jira");
         Element_By_Path_Click("Open Role combobox", "css", "[role='combobox']", ParentTest, "no_jira"); 
@@ -1152,10 +1209,11 @@ Thread.sleep(5000);
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}
             Thread.sleep(5000);
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //AUT-844 As an existing user (admin or site manager or delivery manager), I can still use my old password (rules) to sign in
-    private void oldUsersLogin() throws Exception{ 
+    private void oldUsersLogin() { 
         ap3LoginPage();
         
         String passWordOld="Test1234";
@@ -1163,7 +1221,7 @@ Thread.sleep(5000);
         oldUsers[0]="milo.a@mailsac.com"; //Admin
         oldUsers[1]="milo.d@mailsac.com"; //Delivery Manager
         oldUsers[2]="milo.sm@mailsac.com"; //Site Manger       
-        
+    try {    
         for (String emails:oldUsers) {
         Element_By_Path_Text_Enter("Enter Registered Admin Email", "css", "[aria-label='E-mail']", emails, true, ParentTest, "no_jira"); 
             if (FAIL) { return;}    
@@ -1176,11 +1234,11 @@ Thread.sleep(5000);
             if (FAIL) { return;}        
         logout();    
             }                             
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
     
     //Getting the User ID from URL
-    private String getU_ID() throws Exception
-     {
+    private String getU_ID() throws Exception {
          //EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == User API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
         String U_ID = "";                             
          Page_URL("User details URL", ParentTest, "no_jira"); 
@@ -1193,7 +1251,8 @@ Thread.sleep(5000);
      }
     
     //Getting the user api and validating if its active or not
-    private void getUser_API(String U_ID) throws Exception      {
+    private void getUser_API(String U_ID) {
+    try {    
         Call_API("Call /User/ API", "Bearer " + AP3_TKN, BaseAPI + "/user/" + U_ID, true, ParentTest, "no_jira" );
             JSONObject json = new JSONObject(t); 
             JSONObject meta = json.getJSONObject("meta");   
@@ -1221,10 +1280,11 @@ Thread.sleep(5000);
           _t++;
           _p++; EX += _t + "\t" + "User is inactive" + "\t" + "-" + "\t" + "User is Inactive" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
-               
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
             
-    private void verify_User_Deleted_API(String U_ID) throws Exception      {
+    private void verify_User_Deleted_API(String U_ID) {
+    try {    
           Call_API("Call /User/ API", "Bearer " + AP3_TKN, BaseAPI + "/user/" + U_ID, true, ParentTest, "no_jira");
              JSONObject json = new JSONObject(t); 
              
@@ -1238,6 +1298,7 @@ Thread.sleep(5000);
              _t++;
           _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "User is not deleted yet" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
          }
-           }
+    } catch (Exception ex){}   // =============================================  
+    } 
 }
 

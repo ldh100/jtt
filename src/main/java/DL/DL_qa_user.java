@@ -11,7 +11,8 @@ class DL_qa_user extends DL_GUI {
     }
 
     // Error: User Initialization Fail. Please Try Again    <<<< How to deal with That??   DEBUG
-    protected void run(String User_ID, String Metric, String Restricted, String Period, String Val, String Location_Filters, String Item_Filters, String Kpi, String Source) throws InterruptedException, Exception {
+    protected void run(String User_ID, String Metric, String Restricted, String Period, String Val, String Location_Filters, String Item_Filters, String Kpi, String Source) {
+    try {     
 
         Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "//span[contains(text(),'arrow_right')]", ParentTest, "no_jira");
         if (FAIL) {
@@ -51,9 +52,20 @@ class DL_qa_user extends DL_GUI {
         for (int j = 0; j < L2.size(); j++) {
             Element_Click("Un-Check Selected Metrics " + (j + 1), L2.get(j), ParentTest, "no_jira");
         }
-        KPI_Validation(Kpi);
+        
+        
+        //KPI_Validation(Kpi);
+        String[] KPIList = Kpi.split("\\|");
+        for (String KPI : KPIList) {
+            if (KPI.contains(":")) {
+                String KPI_FilterKey = KPI.substring(0, KPI.indexOf(":"));
+                Text_Found("Check '" + KPI_FilterKey + "' is Displayed ", KPI_FilterKey, ParentTest, "no_jira");
+            }
+        }
         // Find / Select Target dMetric >>>>   Add code to Pass/Fail if the Target Metric Allowed/Disallowed in S3 Qa file
         //                Restricted;
+        
+        
         if (Restricted.equalsIgnoreCase("Yes")) {
             Find_Text("Find Metric '" + Metric + "'", Metric, true, ParentTest, "no_jira");
             if (t.equals("Not Found")) {
@@ -276,16 +288,6 @@ class DL_qa_user extends DL_GUI {
                 }
             }
         }
-    }
-
-    public void KPI_Validation(String Kpi) throws Exception {
-        String[] KPIList = Kpi.split("\\|");
-// System.out.println(Kpi);
-        for (String KPI : KPIList) {
-            if (KPI.contains(":")) {
-                String KPI_FilterKey = KPI.substring(0, KPI.indexOf(":"));
-                Text_Found("Check '" + KPI_FilterKey + "' is Displayed ", KPI_FilterKey, ParentTest, "no_jira");
-            }
-        }
+    } catch (Exception ex){}   // =============================================  
     }
 }

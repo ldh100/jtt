@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 class AP3_notifications extends AP3_GUI{
-    protected AP3_notifications (AP3_GUI a) throws InterruptedException, Exception {
+    protected AP3_notifications (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -28,7 +28,8 @@ class AP3_notifications extends AP3_GUI{
         New_ID = a.New_ID;
         TZone = a.TZone;
     }    
-    protected void run() throws InterruptedException, Exception {
+    protected void run() {
+    try {    
         Wait_For_Element_By_Path_Visibility("Wait for 'AP3 Welcome...' text", "xpath", "//*[contains(text(), 'Welcome to the CDL Admin Panel')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Page_URL("AP3 Dashboard URL", ParentTest, "no_jira");
@@ -466,5 +467,6 @@ class AP3_notifications extends AP3_GUI{
             if (FAIL) { return;}
         // </editor-fold>
         }
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 }

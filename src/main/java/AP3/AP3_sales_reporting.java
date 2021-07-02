@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  */
 
 class AP3_sales_reporting extends AP3_GUI{
-    protected AP3_sales_reporting (AP3_GUI a) throws Exception {
+    protected AP3_sales_reporting (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -37,8 +37,8 @@ class AP3_sales_reporting extends AP3_GUI{
         TZone = a.TZone;
     }    
     String API_Response_Body = "";
-    protected void run() throws Exception {
-
+    protected void run() {
+    try {    
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");            
             if (FAIL) { return;}
         Thread.sleep(500);          
@@ -465,5 +465,6 @@ class AP3_sales_reporting extends AP3_GUI{
                 Element_Child_Attribute("Input 'End Time' state", L0.get(i), "css", "[aria-label='End Time']", "disabled", ParentTest, "no_jira");  
                     if (FAIL) { return;}
             }   
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 }

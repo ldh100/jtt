@@ -17,7 +17,8 @@ class DL_metric_data extends DL_GUI {
         Variants = a.Variants;
         System.out.println(Variants);
     }
-    protected void run(String CompareTo, String Variants) throws InterruptedException, Exception {   
+    protected void run(String CompareTo, String Variants) {  
+    try {    
         double TS = 0.0;
         double CS = 0.0;
         double MER = 0.0;
@@ -263,10 +264,12 @@ class DL_metric_data extends DL_GUI {
         PSOP = Double.parseDouble(t.replace("$", "").replace(",", "").replace("%", "").replace("(", "").replace(")", ""));
         SecondaryMetric_Calculation("Program Rate of Return Calculation", PER,TS, PROR, ParentTest, "no_jira" );
         SecondaryMetric_Calculation("Program Strength of Program Calculation", PER,CS, PSOP, ParentTest, "no_jira" );
+    } catch (Exception ex){}   // =============================================  
     }
 
 
-    public void UnCheckMetrics() throws Exception {
+    public void UnCheckMetrics() {
+    try {    
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");  
             if (FAIL) { return;}  
         Thread.sleep(500);
@@ -291,11 +294,12 @@ class DL_metric_data extends DL_GUI {
                 Thread.sleep(500);
                 Element_Click("Un-Check Selected Metrics " + (j + 1), L0.get(j), ParentTest, "no_jira"); 
             }   
+    } catch (Exception ex){}   // =============================================  
     }
     
     
-    public void SelectVariants() throws Exception
-    {
+    public void SelectVariants() {
+    try {    
         List_L2("More icon on Metric Cards", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//button[contains(@class,'MuiButtonBase-root MuiIconButton-root jss')]", ParentTest, "no_jira");
         for (int i = 0; i < L2.size(); i++) {
            Thread.sleep(500);
@@ -324,5 +328,6 @@ class DL_metric_data extends DL_GUI {
         }
         
         }
-}
+    } catch (Exception ex){}   // =============================================  
+    }
 }

@@ -22,7 +22,7 @@ import org.json.JSONObject;
  */
 
 class AP3_promo extends AP3_GUI{
-    protected AP3_promo (AP3_GUI a) throws InterruptedException, Exception {
+    protected AP3_promo (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -49,7 +49,8 @@ class AP3_promo extends AP3_GUI{
         TZone = a.TZone;
     }    
     String API_Response_Body = "";
-    protected void run() throws Exception { 
+    protected void run() { 
+    try {    
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
@@ -857,8 +858,11 @@ Thread.sleep(10000);
             //End of staging environment
         }
     // </editor-fold>
+    } catch (Exception ex){}   // =============================================  
     } 
-    private void Promo_details(String Promo_type) throws Exception  {
+    
+    private void Promo_details(String Promo_type) {
+    try {    
         Element_By_Path_Text_Enter("Enter Promotion Name", "xpath", "//input[@aria-label='Promotion Name']", "Automation Test Promo", false, ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Text_Enter("Enter Promotion Desription", "xpath", "//textarea[@aria-label='Promotion Description']", "Automation Test Promo " + Promo_type, false, ParentTest, "no_jira");
@@ -910,8 +914,11 @@ Thread.sleep(5000);
             if (FAIL) { return;}           
         Element_By_Path_Click("Click SITE", "xpath", "//i[@class='v-icon mdi mdi-checkbox-blank-outline theme--light']/following::i[@class='v-icon mdi mdi-checkbox-blank-outline theme--light']", ParentTest, "no_jira");
             if (FAIL) { return;}
-    }//End of Promo_details
-    private void Promo_scheduling(LocalDate startdate,LocalDate enddate,String Repeat_opt) throws Exception {       
+    } catch (Exception ex){}   // =============================================  
+    } //End of Promo_details
+    
+    private void Promo_scheduling(LocalDate startdate,LocalDate enddate,String Repeat_opt)  {  
+    try {    
         DateTimeFormatter Dayofdate = DateTimeFormatter.ofPattern("d");
         Find_Text("Find 'Promotion Schedule' text", "Promotion Schedule", true, ParentTest, "no_jira"); 
             if (FAIL) { return;}
@@ -999,8 +1006,11 @@ Thread.sleep(5000);
                 if (FAIL) { return;}
         }
         Find_Text("Find Schedule confirmation","Promotion will repeat" , true, ParentTest, "no_jira");
-    }//End of Promo_scheduling
-    private void Promo_Actions(String Promo_type) throws Exception {
+    } catch (Exception ex){}   // =============================================  
+    } //End of Promo_scheduling
+    
+    private void Promo_Actions(String Promo_type) {
+    try {    
         String P_ID = "";
         Thread.sleep(500);   
         Wait_For_All_Elements_InVisibility("Wait for data...", "className", "v-datatable__progress", ParentTest, "no_jira"); 
@@ -1124,8 +1134,11 @@ Thread.sleep(3000);
 Thread.sleep(5000);
         Promo_API(P_ID,"Deleted",Promo_type);  
         Promo_Location_API(P_ID,"Deleted",Promo_type);
-    }//End of Promo_search_btn
-    private void Promo_API(String P_ID,String Promo_action,String Promo_type) throws Exception {
+    } catch (Exception ex){}   // =============================================  
+    } //End of Promo_search_btn
+    
+    private void Promo_API(String P_ID,String Promo_action,String Promo_type) {
+    try {    
         EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Promo API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
         Call_API("Call /Promo/ API (" + Promo_action + " promo)", "Bearer " + AP3_TKN, BaseAPI + "/promo/" + P_ID, true, ParentTest, "no_jira" );
         if(t.startsWith("{")){
@@ -1155,8 +1168,11 @@ Thread.sleep(5000);
         }
         Promo_discount_verify();
         EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Promo API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
-    }//End of Promo_API
-    private void Promo_discount_verify() throws Exception {
+    } catch (Exception ex){}   // =============================================  
+    } //End of Promo_API
+    
+    private void Promo_discount_verify() {
+    try {    
         JSONObject json = new JSONObject(API_Response_Body);
         JSONArray promo_items = new JSONArray();
         String type = json.getString("type") ;
@@ -1184,8 +1200,11 @@ Thread.sleep(5000);
                     }
                 }//End of percent off
        }//End of for
-    }
-    private void Promo_Location_API(String P_ID,String Promo_action,String Promo_type) throws Exception {
+    } catch (Exception ex){}   // =============================================  
+    } 
+    
+    private void Promo_Location_API(String P_ID,String Promo_action,String Promo_type) {
+    try {    
         EX += "\n - " + "\t" + " ====START====" + "\t" + " ===== " + "\t" + " == Promo Location API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";    
         if(Promo_type.equalsIgnoreCase("bundle")) {
             Call_API("Call/Promo/Location API", "Bearer " + AP3_TKN, BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID + "?nocache=1", true, ParentTest, "no_jira" );  
@@ -1234,5 +1253,6 @@ Thread.sleep(5000);
             }       
         }
         EX += "\n - " + "\t" + " ====END====" + "\t" + " ===== " + "\t" + " == Promo Location API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";   
-    } // End of Promo_Location_API
+    } catch (Exception ex){}   // =============================================  
+    }  // End of Promo_Location_API
 }
