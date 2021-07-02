@@ -11,7 +11,8 @@ class DL_drilldown extends DL_GUI {
         ParentTest = a.ParentTest;
     }
 
-    protected void run() throws InterruptedException, Exception {
+    protected void run() {
+    try {    
         Thread.sleep(3000);
 
         List_L0("Get the tabs Count", "xpath", "//span[contains(@class, 'MuiTab-wrapper')]", ParentTest, "no_jira");
@@ -65,5 +66,6 @@ class DL_drilldown extends DL_GUI {
         Element_By_Path_Click("Select the Distributor", "xpath", "(//button[contains(@class,'MuiTypography-root MuiLink-root MuiLink-underlineNone')])[3]", ParentTest, "no_jira");
         Thread.sleep(2000);
         Element_By_Path_Click("Click on 'Export to CSV' button", "xpath", "(//span[contains(text(),'Export CSV')])/..", ParentTest, "no_jira");
+    } catch (Exception ex){}   // =============================================  
     }
 }

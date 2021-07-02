@@ -1,7 +1,7 @@
 package AP3;
 
 class AP3_user_permission extends AP3_GUI{
-    protected AP3_user_permission(AP3_GUI a) throws InterruptedException, Exception {
+    protected AP3_user_permission(AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -36,7 +36,8 @@ class AP3_user_permission extends AP3_GUI{
     // cdl.test.xtt+dy@gmail.com - DM All Optins
     // cdl.test.xtt+dn@gmail.com - DM No Optins
     
-    protected void run() throws Exception { 
+    protected void run() { 
+    try {    
         Navigate_to_URL("Navigate to", url, ParentTest, "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);
@@ -1132,5 +1133,6 @@ Thread.sleep(1000);
         }
         // </editor-fold>    
         
-    }   
+    } catch (Exception ex){}   // =============================================  
+    }  
 }

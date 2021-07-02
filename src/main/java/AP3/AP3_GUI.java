@@ -1993,7 +1993,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
 
-        try{    
+//        try{    
             run_start = Instant.now();
             Current_Log_Update(true, "= Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
             
@@ -2086,10 +2086,10 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             LOG_START(); // ========================================================
             BW1_DoWork(true);
             BW2_DoWork();
-        }catch(Exception ex){
-            Current_Log_Update(true, "= GUI_Run_Manual ERROR > " + ex.getMessage() + "\r\n");
-            BW1_FAIL_LOG_UPDATE("= GUI_Run_Manual ERROR > " + ex.getMessage());
-        }
+//        }catch(Exception ex){
+//            Current_Log_Update(true, "= GUI_Run_Manual ERROR > " + ex.getMessage() + "\r\n");
+//            BW1_FAIL_LOG_UPDATE("= GUI_Run_Manual ERROR > " + ex.getMessage());
+//        }
     }
     public String JOB_Run_Auto(String run_type, String config){
         run_start = Instant.now();
@@ -2225,7 +2225,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     // </editor-fold> 
 
     //<editor-fold defaultstate="collapsed" desc="Extend HTML Report Methods">
-    protected void Extent_Report_Config() throws IOException{
+    protected void Extent_Report_Config() {
         HTML_Report_Path = System.getProperty("user.home") + File.separator + "Desktop";
         Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
         HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + "AP3" + "_" + env + "_" + Report_Date + ".html");
@@ -2283,9 +2283,9 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ImageIO.write(ImageIO.read(SF), "png", bos);
             SF.delete();
-            return "data:image/png;base64, " + Base64.getEncoder().encodeToString(bos.toByteArray());
+            return "Get Screenshot > data:image/png;base64, " + Base64.getEncoder().encodeToString(bos.toByteArray());
         }catch (IOException ex) {
-            return "data:image/png;base64," + " ERROR: " + ex.getMessage();
+            return "Get Screenshot > data:image/png;base64," + " ERROR: " + ex.getMessage();
         }
     }
      //</editor-fold>
@@ -2651,7 +2651,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     }
     // </editor-fold>    
     
-    private void Execute() throws Exception {
+    private void Execute() {
         if(_Login){ // Always true - must login to continue
             SCOPE += "Login";
             ParentTest = HtmlReport.createTest("AP3 Login"); 

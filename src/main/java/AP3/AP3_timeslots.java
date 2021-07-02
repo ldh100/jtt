@@ -16,7 +16,7 @@ import org.openqa.selenium.interactions.Actions;
  * @author astrit.ademi
  */
 class AP3_timeslots extends AP3_GUI{
-    protected AP3_timeslots (AP3_GUI a) throws Exception {
+    protected AP3_timeslots (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -41,8 +41,8 @@ class AP3_timeslots extends AP3_GUI{
         TZone = a.TZone;
     }    
     String API_Response_Body = "";
-    protected void run() throws Exception {
-        
+    protected void run() {
+    try {    
         String MENU = "";
         String MENU2 = "";
         
@@ -1267,9 +1267,11 @@ class AP3_timeslots extends AP3_GUI{
         }
         EX += " - " + "\t" + " === " + "\t" + " ===== Non-Overlapping Menus End" + "\t" + " == Non-Overlapping Menus End >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
+    } catch (Exception ex){}   // =============================================  
     }
    
-    private void setHours(String day, String pick_up_time_start, String pick_up_time_end, String delivery_start, String delivery_end) throws Exception {
+    private void setHours(String day, String pick_up_time_start, String pick_up_time_end, String delivery_start, String delivery_end) {
+    try{    
         day = day.substring(0, 1).toUpperCase() + day.substring(1, day.length()).toLowerCase();
         Element_By_Path_Click("Click > Service Hours", "xpath", "//a[contains(text(), 'Service Hours')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
@@ -1361,5 +1363,6 @@ class AP3_timeslots extends AP3_GUI{
         Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(text(),'Schedule menu')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
         }
-    }   
+    } catch (Exception ex){}   // =============================================  
+    } 
 }

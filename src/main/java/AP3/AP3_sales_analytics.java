@@ -3,6 +3,7 @@ package AP3;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import org.joda.time.DateTime;
 import org.json.JSONArray;
@@ -15,7 +16,7 @@ import org.openqa.selenium.By;
  */
 
 class AP3_sales_analytics extends AP3_GUI{
-    protected AP3_sales_analytics (AP3_GUI a) throws Exception {
+    protected AP3_sales_analytics (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -42,20 +43,30 @@ class AP3_sales_analytics extends AP3_GUI{
     }    
     String API_Response_Body = "";
     
-    protected void run() throws Exception {
+    protected void run(){
+    try {    
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Sales Analytics Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        //set BaseAPI to PROD regradless of JTT Env selection
+        if (!env.equals("PR")) {
+            BaseAPI = BaseAPI.replace("staging", "v1");
+            AP3_TKN = "eyJhbGciOiJLTVMiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiJEOHJCMTVyTURxU21nRVl5UXFwS1RxNTFxSjlXemFmd1JQQWw2ZTJESXp2ZGthRDNKYVNRWGdRMjJQV3JjejFyREV6dzJMZnYzUERSejR2ZHNPTVkiLCJzY29wZXMiOiIqOiogKjp1c2VyIGFkbWluX3JvbGU6KjoqIHdyaXRlOm9yZGVyOiogKjp1c2VyOiogKjpicmFuZDoqICo6bG9jYXRpb246KiAqOmdyb3VwOiogKjpjb25maWc6KiByZWFkOm9yZGVyOiogKjpzZWN0b3I6KiAqOm11bHRpZ3JvdXA6KiAqOm1lbnU6KiAqOmNhbGVuZGFyOiogd3JpdGU6ZmlsZToqIHJlYWQ6YWN0aW9uOiogKjpwcm9tbzoqICo6YW5ub3VuY2VtZW50OiogcmVhZDprZHM6KiByZWFkOmFuYWx5dGljczoqIGRlbGV0ZTprZHM6KiAqOm5vdGlmaWNhdGlvbjoqIiwiaWF0IjoxNjI0OTc4Njk0LCJleHAiOjE2MzI3NTQ2OTV9.AQICAHg3B+yaImOx8iePCmKXjUT1mJ+gyTV+zezNpAJjOkZbFgEfcQQQNvOJJtRaqbl1f+UyAAACpzCCAqMGCSqGSIb3DQEHBqCCApQwggKQAgEAMIICiQYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAyEvguZdCxruoMmXrACARCAggJao4ODwqlUg+WmlXrnj6eyq2YXw9sb88R2/mJ0jN/GVvgyK3f18BpLzxHD+Zz8PF+tFRH0XOHQPKiTcwfZvHYviuork9c8elRkFjy/PrYONVU5SKwQqmINCw/V583o5QLGqrpe4igWtFtc8UyLDwesjQD2JbgQFmrNsIF0tdZeKGjoQbYJtcruBIqFHDCnC8sM1MNYUfskeAm+W1O+K7AQX8/Om/kiwqZnvpJ7NocggWyYjweVvrV1p6NL2cvG1HbVife+Ji99fKh2UvroJOwtJVsYQmwIGG/CI+Ad4SeMGEK15D4rkBk930WKCwbz8DQu6Tx7e5EkatiQPxR1e/cbYPPiyNNO75qv8xPyiF78DLe7Elc9ypNqUpWuv/OwV3oQsRWD1lrMyXYeDzZ0COogK2WYekCyOmTTDEMNslFb0if9iugdqp6VTqw8z4Z11ORWy4v1YwuG1Pnm6YEd/ePZG3gsy8ZnTwJBKSCrFMhJ07o0jQ9GXATLecWickQ2C1KHvvquRiwHNm2ws+QfffTwjIC14TQV07uG1+3HS7FMX91HvFQSVg30fBp5UU2UzcgevVDSZXym6binE54udK10G05q35qnJQCGOnCXIeM4iXNms49oz1TKvkQkfNtfq0WEFYR7S9VcNiIPt5LJS8UeB7uS3DVhwAZlYbWD7WKqIHyh3adpZ3nOVXq6W6ffYAYngM5fT+NuEf+BoD9pZnMgn7it4UOvZSucy9LGvsWaA37ulMeD78uHTrorgEHXOfNot7DiQfPlnQT6lpBiUJZKlP7STtHxD0sAztw=";
+        }
         
         ArrayList<String> brandIds = new ArrayList<String>();
         String brandNames[] = {"subeway", "drexler's bbq", "chick-fil-a", "starbucks", "freshii", "pizza hut", "einstein bros. bagels", "taco cabana", "taco bell"};
         //get all brand ids from site: University of Houston 
-        Call_API("Call /location/group/'SiteID'", "Bearer " + AP3_TKN, "https://api.compassdigital.org/v1/location/group/" + SiteID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
+        Call_API("Call /location/group/'SiteID'", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
         if(t.startsWith("{")){
             API_Response_Body = t;               
         }else{
-            EX += _t + "\t == " + "API Responce Error" + "\t" + "https://api.compassdigital.org/v1/location/group/" + SiteID + "?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + "https://api.compassdigital.org/v1/location/group/" + SiteID + "?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"));
             return;
         }
+        
+        String brand1 = "";
+        String brand2 = "";
         JSONObject json = new JSONObject(API_Response_Body);
         JSONArray locations = json.getJSONArray("locations");
         for (int i = 0; i < locations.length(); i++) {
@@ -66,6 +77,11 @@ class AP3_sales_analytics extends AP3_GUI{
                 for (int j = 0; j < brandNames.length; j++) {
                     if (brandNames[j].contains(brand.getString("name").toLowerCase())) {
                         brandIds.add(brand.getString("id"));
+                        if (brand.getString("name").equalsIgnoreCase("chick-fil-a")) {
+                            brand1 = brand.getString("id");
+                        } else if (brand.getString("name").equals("STARBUCKS")) {
+                            brand2 = brand.getString("id");
+                        }
                     }
                 }
                 
@@ -85,8 +101,10 @@ class AP3_sales_analytics extends AP3_GUI{
         
         String Start = ""; 
         String End = ""; 
-        Date _Start = new DateTime(new Date()).minusDays(7).toDate();
-        Date _End = new DateTime(new Date()).minusDays(1).toDate();
+        Calendar c = Calendar.getInstance();
+        int day = c.get(Calendar.DAY_OF_WEEK) - c.getFirstDayOfWeek();
+        Date _Start = new DateTime(new Date()).minusDays(7+day).toDate();
+        Date _End = new DateTime(new Date()).minusDays(day).toDate();
         Start = new SimpleDateFormat("yyyy-MM-dd").format(_Start); 
         End = new SimpleDateFormat("yyyy-MM-dd").format(_End);
         
@@ -112,6 +130,12 @@ class AP3_sales_analytics extends AP3_GUI{
         float[] prices = new float[data.length()];
         for (int i = 0; i < data.length(); i++) {
             prices[i] = data.optFloat(i);
+        }
+        JSONObject series2 = series.getJSONObject(1);
+        JSONArray data2 = series2.optJSONArray("data");
+        float[] prices2 = new float[data2.length()];
+        for (int i = 0; i < data2.length(); i++) {
+            prices2[i] = data2.optFloat(i);
         }
         
         Navigate_to_URL("Navigate to Sales Analytics Page", url + "#/sales-analytics/all", ParentTest, "no_jira");
@@ -212,8 +236,10 @@ class AP3_sales_analytics extends AP3_GUI{
         Wait_For_Element_By_Path_Presence("Check 'Sales Chart' is present", "xpath", "//div[contains(@id, 'apexchart')]", ParentTest, "no_jira");
         if (FAIL) { return;}
         for (int i = 0; i < prices.length; i++) {
-            if (prices[i] == 0) {
+            if (prices[i] == 0 && (i+1) == prices.length) {
                 break;
+            } else if (prices[i] == 0  && (i+1) != prices.length){
+                continue;
             }
             Move_to_Element_By_Path("Move > Bar " + (i+1) + " in Chart for Brand 1", "xpath", "//*[local-name()='g'][1]/*[local-name()='path'][" + (i+1) + "]", ParentTest, "np_jira");
             if (FAIL) { return;}
@@ -229,6 +255,28 @@ class AP3_sales_analytics extends AP3_GUI{
                 _t++;
                 _f++; EX += _t + "\t" + "Verify tooltip value" + "\t" + "\t" + "Output: " + t + " / Expected: $ " + String.valueOf(prices[i]) + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";  
                 Log_Html_Result("FAIL", "Verify tooltip value", true, ParentTest.createNode("Output: " + t + " / Expected: $ " + String.valueOf(prices[i])));
+            }
+        }
+        for (int i = 0; i < prices2.length; i++) {
+            if (prices2[i] == 0 && (i+1) == prices2.length) {
+                break;
+            } else if (prices2[i] == 0  && (i+1) != prices2.length){
+                continue;
+            }
+            Move_to_Element_By_Path("Move > Bar " + (i+1) + " in Chart for Brand 2", "xpath", "//*[local-name()='g'][2]/*[local-name()='path'][" + (i+1) + "]", ParentTest, "np_jira");
+            if (FAIL) { return;}
+            Thread.sleep(500);
+            Element_By_Path_Attribute("Get tooltip value", "xpath", "(//span[@class='apexcharts-tooltip-text-y-value'])[1]", "textContent", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (t.contains(String.valueOf(prices2[i]))) {
+               _t++;
+               _p++; EX += _t + "\t" + "Verify tooltip value" + "\t" + "\t" + "Output: " + t + " / Expected: $ " + String.valueOf(prices2[i]) +  "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+               Log_Html_Result("PASS", "Verify tooltip value", false, ParentTest.createNode("Output: " + t + " / Expected: $ " + String.valueOf(prices2[i])));
+               
+            } else {
+                _t++;
+                _f++; EX += _t + "\t" + "Verify tooltip value" + "\t" + "\t" + "Output: " + t + " / Expected: $ " + String.valueOf(prices2[i]) + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";  
+                Log_Html_Result("FAIL", "Verify tooltip value", true, ParentTest.createNode("Output: " + t + " / Expected: $ " + String.valueOf(prices2[i])));
             }
         }
         EX += " - " + "\t" + " === " + "\t" + " =====  Pickup Only" + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -355,5 +403,152 @@ class AP3_sales_analytics extends AP3_GUI{
         if (FAIL) { return;}
         EX += " - " + "\t" + " === " + "\t" + " =====  Order Types End" + "\t" + " ==  Order Types End >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold>
-    }
+        
+        // <editor-fold defaultstate="collapsed" desc="Station Selection">  
+        EX += " - " + "\t" + " === " + "\t" + " =====  Station Selection Begin" + "\t" + " == Station Selection Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        Navigate_to_URL("Navigate to Sales Analytics Page", url + "#/sales-analytics/all", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(text(), 'Sales Analytics')]", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        Element_By_Path_Click("Click > 'Search' field", "css", "[aria-label='Search Sites']", ParentTest,"no_jira");
+        if (FAIL) { return;}
+        Element_By_Path_Text_Enter("Search > 'University of Houston'", "css", "[aria-label='Search Sites']", SITE, false,ParentTest, "no_jira");
+        if (FAIL) { return;}
+        if (!env.equals("PR")) {
+            Element_By_Path_Click("Click > 'Site' = '"+SITE+"'", "xpath", "//span[text()='Volante Printer']/ancestor::tr//td[text()='"+SITE+"']",ParentTest, "no_jira");
+            if (FAIL) { return;}
+        } else {
+            Element_By_Path_Click("Click > 'Site' = '"+SITE+"'", "xpath", "//td[text()='"+SITE+"']",ParentTest, "no_jira");
+            if (FAIL) { return;}
+        }        
+        Wait_For_Element_By_Path_Presence("Wait (if needed) page to load", "xpath", "//div[@class='salesTransactions']", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        Element_By_Path_Click("Click > 'Order Type' dd", "xpath", "//label[contains(text(),'Order Type')]/parent::div", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        Wait_For_Element_By_Path_Presence("Wait (if needed) for dd to appear", "xpath", "//*[@class='v-list v-list--dense theme--light']", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        Element_By_Path_Click("Select > 'All Order Types'", "xpath", "//*[text()='All Order Types']", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Wait (if needed) page to load", "xpath", "//div[@class='salesTransactions']", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        Element_By_Path_Click("Click > 'Select Station' dropdown", "xpath", "//*[text()='All Stations']/parent::*[@class='v-select__selections']", ParentTest,"no_jira");
+        if (FAIL) { return;}
+        Wait_For_Element_By_Path_Presence("Wait (if needed) for dd to appear", "xpath", "//*[@class='v-list v-list--dense theme--light']", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        List_L3("Get list of Active Stations", "xpath", "(//div[@class='v-select-list v-card theme--light'])[3]//a[contains(@class,'primary--text')]", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        for (int i = 0; i < L3.size(); i++) {
+            Element_Attribute("Get 'class' value of Station " + (i+1), L3.get(i), "class", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (t.contains("active")) {
+                _t++;
+                _p++; EX += _t + "\t" + "Verify Station " + (i+1) + "is active" + "\t" + "\t" + t.contains("active") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";  
+                Log_Html_Result("PASS", "Verify Station " + (i+1) + "is active", false, ParentTest.createNode(t));
+            } else {
+                _t++;
+                _f++; EX += _t + "\t" + "Verify Station " + (i+1) + "is active" + "\t" + "\t" + t.contains("active") + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";  
+                Log_Html_Result("FAIL", "Verify Station " + (i+1) + "is active", true, ParentTest.createNode(t));
+            }
+        }
+        Element_By_Path_Click("Deselect > 'Chick-fil-a'", "xpath", "//div[text()='Chick-fil-a']", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(500);
+        Element_By_Path_Click("Click > 'Apply'", "xpath", "(//*[text()='Apply']/parent::button)[2]", ParentTest, "no_jira");
+        if (FAIL) { return;}
+
+        combinedBrands = combinedBrands.replace(brand1, "");
+        if (combinedBrands.contains(",,")) {
+            combinedBrands = combinedBrands.replace(",,", ",");
+        }
+        if (combinedBrands.substring(0,1).equals(",")) {
+            combinedBrands = combinedBrands.substring(1, combinedBrands.length());
+        }
+        
+        Call_API("Call Analytics API", "Bearer " + AP3_TKN, BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date="+Start+"&end_date="+End, true, ParentTest, "no_jira");
+        if(t.startsWith("{")){
+            API_Response_Body = t;               
+        }else{
+            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date="+Start+"&end_date="+End + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date=2021-06-14&end_date=2021-06-20", false, ParentTest.createNode("API Responce Error"));
+            return;
+        }
+        json = new JSONObject(API_Response_Body);
+        analytics = json.getJSONObject("analytics");
+        //get various data from analytics API
+        float avg_bill2 = analytics.getFloat("avg_bill");
+        top_items = analytics.getJSONArray("top_items");
+        int transactions_total2 = analytics.getInt("transactions_total");
+        int sales_total2 = analytics.getInt("sales_total");
+        series = analytics.getJSONArray("series");
+        series1 = series.getJSONObject(0);
+        data = series1.optJSONArray("data");
+        prices = new float[data.length()];
+        for (int i = 0; i < data.length(); i++) {
+            prices[i] = data.optFloat(i);
+        }
+
+        EX += " - " + "\t" + " === " + "\t" + " =====  Check Updated Analytics" + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        Wait_For_Element_By_Path_Presence("Check 'Total Sales' is present", "xpath", "//span[contains(text(), '$"+sales_total2+"')]", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        if (String.valueOf(avg_bill2).length() == 3 && String.valueOf(avg_bill2).contains(".0")) {
+            String formatted_avg_bill = String.valueOf(avg_bill2).substring(0, 1);
+            Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$"+formatted_avg_bill+"')]", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        } else if (String.valueOf(avg_bill2).length() == 3) {
+           String formatted_avg_bill = String.valueOf(avg_bill2) + "0"; 
+           Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$"+formatted_avg_bill+"')]", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        } else {
+            Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$"+avg_bill2+"')]", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        }
+        Wait_For_Element_By_Path_Presence("Check 'Total Transactions' is present", "xpath", "//span[contains(text(), '"+transactions_total2+"')]", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        List_L2("List of 'Top Selling Items'", "xpath", "(//tbody)[2]/tr", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        if (L2.size() == 3) {
+            _t++;
+            _p++; EX += _t + "\t" + "Number of 'Top Selling Items'" + "\t" + "\t" + "Outout: " + L2.size() + " / Expected: " + top_items.length() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";  
+            Log_Html_Result("PASS", "Number of 'Top Selling Items'", false, ParentTest.createNode("Outout: " + L2.size() + " / Expected: " + top_items.length()));
+            Element_E1_Find("Verify Top Item 1 is '" + top_items.getJSONObject(0).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[1]/td[text()='"+top_items.getJSONObject(0).getString("itemlabel")+"']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            Element_E1_Find("Verify Top Item 2 is '" + top_items.getJSONObject(1).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[2]/td[text()='"+top_items.getJSONObject(1).getString("itemlabel")+"']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            Element_E1_Find("Verify Top Item 3 is '" + top_items.getJSONObject(2).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[3]/td[text()='"+top_items.getJSONObject(2).getString("itemlabel")+"']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        } else {
+            _t++;
+            _f++; EX += _t + "\t" + "Number of 'Top Selling Items'" + "\t" +  "\t" + "Outout: " + L2.size() + " / Expected: " + top_items.length() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";  
+            Log_Html_Result("FAIL", "Number of 'Top Selling Items'", true, ParentTest.createNode("Outout: " + L2.size() + " / Expected: " + top_items.length()));
+        }
+        Wait_For_Element_By_Path_Presence("Check 'Sales Chart' is present", "xpath", "//div[contains(@id, 'apexchart')]", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] == 0) {
+                break;
+            }
+            Move_to_Element_By_Path("Move > Bar " + (i+1) + " in Chart for Brand 1", "xpath", "//*[local-name()='g'][1]/*[local-name()='path'][" + (i+1) + "]", ParentTest, "np_jira");
+            if (FAIL) { return;}
+            Thread.sleep(500);
+            Element_By_Path_Attribute("Get tooltip value", "xpath", "(//span[@class='apexcharts-tooltip-text-y-value'])[1]", "textContent", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (t.contains(String.valueOf(prices[i]))) {
+               _t++;
+               _p++; EX += _t + "\t" + "Verify tooltip value" + "\t" + "\t" + "Output: " + t + " / Expected: $ " + String.valueOf(prices[i]) +  "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+               Log_Html_Result("PASS", "Verify tooltip value", false, ParentTest.createNode("Output: " + t + " / Expected: $ " + String.valueOf(prices[i])));
+               
+            } else {
+                _t++;
+                _f++; EX += _t + "\t" + "Verify tooltip value" + "\t" + "\t" + "Output: " + t + " / Expected: $ " + String.valueOf(prices[i]) + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";  
+                Log_Html_Result("FAIL", "Verify tooltip value", true, ParentTest.createNode("Output: " + t + " / Expected: $ " + String.valueOf(prices[i])));
+            }
+        }
+        EX += " - " + "\t" + " === " + "\t" + " =====  Station Selection End" + "\t" + " ==  Station Selection End >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        // </editor-fold>
+        
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Sales Analytics End >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+    } catch (Exception ex){}   // =============================================  
+    } 
 }
