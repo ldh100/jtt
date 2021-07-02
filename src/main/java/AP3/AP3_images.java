@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
  * @author astrit.ademi
  */
 class AP3_images extends AP3_GUI{
-    protected AP3_images (AP3_GUI a) throws InterruptedException, Exception {
+    protected AP3_images (AP3_GUI a)  {
         d1 = a.d1; 
         loadTimeout = a.loadTimeout;
         LoadTimeOut = a.LoadTimeOut;
@@ -37,7 +37,8 @@ class AP3_images extends AP3_GUI{
         New_ID = a.New_ID;
         TZone = a.TZone;
     } 
-    protected void run() throws InterruptedException, Exception {
+    protected void run() {
+    try {    
         /*
         * currently only in staging
         * Tes data to be used in JTT:
@@ -461,5 +462,6 @@ Thread.sleep(2000);
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         // </editor-fold> 
         }
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 }
