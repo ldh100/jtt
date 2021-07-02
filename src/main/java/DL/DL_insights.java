@@ -9,7 +9,8 @@ public class DL_insights extends DL_GUI {
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
     }
-    protected void run() throws InterruptedException, Exception { 
+    protected void run() { 
+    try {    
         Thread.sleep(500);
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
         if (FAIL) {
@@ -29,17 +30,18 @@ public class DL_insights extends DL_GUI {
         if (FAIL) {
             return;
         }
-       Element_By_Path_Click("Click on 'Show More' Chevron", "xpath", "//*[contains(text(),'Show ')]", ParentTest, "no_jira"); 
-       Element_E1_Find("Verify whether the Graph is displayed or not","xpath", "(//*[@class='MuiCollapse-container MuiCollapse-entered'])[2]", ParentTest, "no_jira");
-       Element_By_Path_Click("Click on 'Show Less' Chevron", "xpath", "//*[contains(text(),'Show ')]", ParentTest, "no_jira"); 
-       Element_E1_Find("Verify whether the Graph is displayed or not","xpath", "//*[@class='MuiCollapse-container MuiCollapse-hidden']", ParentTest, "no_jira");
-       e1.isEnabled();
-       Element_E1_Find("Verify whether the Back button is disabled or not","xpath", "//span[contains(text(),'Back')]/..", ParentTest, "no_jira");
-       System.out.println(e1.isEnabled());
-       //System.out.println();
-       List_L2("Get the number of Insights Count", "xpath", "//div[contains(@class, 'MuiMobileStepper-dot')]", ParentTest, "no_jira");
+        Element_By_Path_Click("Click on 'Show More' Chevron", "xpath", "//*[contains(text(),'Show ')]", ParentTest, "no_jira"); 
+        Element_E1_Find("Verify whether the Graph is displayed or not","xpath", "(//*[@class='MuiCollapse-container MuiCollapse-entered'])[2]", ParentTest, "no_jira");
+        Element_By_Path_Click("Click on 'Show Less' Chevron", "xpath", "//*[contains(text(),'Show ')]", ParentTest, "no_jira"); 
+        Element_E1_Find("Verify whether the Graph is displayed or not","xpath", "//*[@class='MuiCollapse-container MuiCollapse-hidden']", ParentTest, "no_jira");
+        e1.isEnabled();
+        Element_E1_Find("Verify whether the Back button is disabled or not","xpath", "//span[contains(text(),'Back')]/..", ParentTest, "no_jira");
+        System.out.println(e1.isEnabled());
+        //System.out.println();
+        List_L2("Get the number of Insights Count", "xpath", "//div[contains(@class, 'MuiMobileStepper-dot')]", ParentTest, "no_jira");
         for (int j = 0; j < L2.size(); j++) {
             if(!L2.get(j).isEnabled()) {
+                // ??????
             } else { 
                 Element_By_Path_Click("Click on 'Next' button", "xpath", "//span[contains(text(),'Next')]/..", ParentTest, "no_jira");
             }
@@ -60,25 +62,19 @@ public class DL_insights extends DL_GUI {
        System.out.println(e1.isEnabled());
        
        }
-       Element_By_Path_Click("Click on 'Cancel' button", "xpath", "//span[contains(text(),'Cancel')]/..", ParentTest, "no_jira");
-
-        
+        Element_By_Path_Click("Click on 'Cancel' button", "xpath", "//span[contains(text(),'Cancel')]/..", ParentTest, "no_jira");
+            if (FAIL) { return; }  
         Wait_For_Element_By_Path_Presence("Wait for Insight", "xpath", "(//div[contains(@class, 'MuiGrid-root jss')]/div/button)[2]", ParentTest, "no_jira");
-        if (FAIL) {
-            return;
-        }
-         Element_By_Path_Text("Get the status of Insight", "xpath","(//div[contains(@class, 'MuiGrid-root jss')]/div/button)[2]", ParentTest, "no_jira");
-         System.out.println(t);
-         if(t.equalsIgnoreCase("Save"))
-         {
+            if (FAIL) { return; }
+        Element_By_Path_Text("Get the status of Insight", "xpath","(//div[contains(@class, 'MuiGrid-root jss')]/div/button)[2]", ParentTest, "no_jira");
+        System.out.println(t);
+        if(t.equalsIgnoreCase("Save")) {
            Thread.sleep(5000);
            Element_By_Path_Click("Click on 'Save' button", "xpath","(//div[contains(@class, 'MuiGrid-root jss')]/div/button)[2]", ParentTest, "no_jira"); 
            Thread.sleep(5000);
            Element_By_Path_Text("Get the confirmation of Insight", "css","[role='alert']", ParentTest, "no_jira");
            System.out.println(t);
-         }
-        else
-         {
+        } else {
            Thread.sleep(5000);
            Element_By_Path_Click("Navigate to 'Saved Insights' tab", "xpath","//span[contains(text(),'Saved Insights')]/..", ParentTest, "no_jira"); 
            Element_By_Path_Click("Click on 'Unsave' button", "xpath","(//div[contains(@class, 'MuiGrid-root jss')]/div/button)[2]", ParentTest, "no_jira"); 
@@ -87,9 +83,9 @@ public class DL_insights extends DL_GUI {
            System.out.println(t);
  
          }
-       }
-       
-    }
+    } catch (Exception ex){}   // =============================================  
+    }     
+}
     
     
 

@@ -24,7 +24,8 @@ class DL_Accountmanager extends DL_GUI {
         ParentTest = a.ParentTest;
     }
 
-    protected void run() throws InterruptedException, Exception {
+    protected void run() {
+    try {   
         List_L2("Members Selection List", "xpath", "//button[contains(@class, 'MuiGrid-root jss')]/div", ParentTest, "no_jira");
         if (FAIL) {
             return;
@@ -69,5 +70,6 @@ class DL_Accountmanager extends DL_GUI {
             }
         }
 
+    } catch (Exception ex){}   // =============================================  
     }
 }

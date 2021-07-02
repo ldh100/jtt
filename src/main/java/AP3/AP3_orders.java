@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
 class AP3_orders extends AP3_GUI{
-    protected AP3_orders (AP3_GUI a) throws InterruptedException, Exception {
+    protected AP3_orders (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -34,7 +34,8 @@ class AP3_orders extends AP3_GUI{
         New_ID = a.New_ID;
         TZone = a.TZone;
     }    
-    protected void run() throws InterruptedException, Exception { 
+    protected void run() { 
+    try {    
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
@@ -318,6 +319,6 @@ Thread.sleep(1000);
             _t++; _w++;
             EX += _t + "\t" + "File to delete does not exist" + "\t" + filebrand + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
-        
-    }  
+    } catch (Exception ex){}   // =============================================  
+    } 
 }
