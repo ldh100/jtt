@@ -1,7 +1,7 @@
 package AP3;
 
 class AP3_logout extends AP3_GUI{
-    protected AP3_logout (AP3_GUI a) throws InterruptedException, Exception {
+    protected AP3_logout (AP3_GUI a) {
         d1 = a.d1; 
         loadTimeout = a.loadTimeout;
         LoadTimeOut = a.LoadTimeOut;
@@ -11,7 +11,8 @@ class AP3_logout extends AP3_GUI{
         ADMIN_PW = a.ADMIN_PW;
         url = a.url;
     } 
-    protected void run() throws InterruptedException, Exception {
+    protected void run()  {
+    try {    
         if (!env.equals("PR")) {
             for (int i = 0; i < 3; i++) {
                 Element_By_Path_Click("Click 'Feedback'", "xpath", "//div[contains(@id,'appzi-launch-button')]", ParentTest, "no_jira");
@@ -77,5 +78,6 @@ class AP3_logout extends AP3_GUI{
         Find_Text("Forgot Password Text", "Forgot Password", true, ParentTest, "no_jira");
             if (FAIL) {return;}
         Page_URL("AP3 Welcome page URL", ParentTest, "no_jira");
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 
 class AP3_sales_reporting_for_hidden_stations extends AP3_GUI{
-    protected AP3_sales_reporting_for_hidden_stations (AP3_GUI a) throws Exception {
+    protected AP3_sales_reporting_for_hidden_stations (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -42,7 +42,7 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI{
     private String storeStationName = "";
     private ArrayList<String> storeVisibilityOfStation = new ArrayList<>();
     private ArrayList<String> storePresentVisibilityOfStation = new ArrayList<>();
-    protected void run() throws Exception {
+    protected void run() {
 
         openDashboardDrawer();
         navigateToSiteIndexPage();
@@ -57,14 +57,17 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI{
 
     }
     //This method will open & closed dashboard
-    protected void openDashboardDrawer() throws Exception {
+    protected void openDashboardDrawer() {
+    try {    
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");
             if (FAIL) { return; }
         Thread.sleep(500);
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     //This method will navigate to Site Index page
-    protected void navigateToSiteIndexPage() throws Exception {
+    protected void navigateToSiteIndexPage() {
+    try {    
         Element_By_Path_Click("Drawer > Sites Click", "xpath", "//div[contains(text(),'Sites')]", ParentTest, "no_jira");
         if (FAIL) {
             return;
@@ -75,10 +78,12 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI{
         Thread.sleep(200);
         Element_By_Path_Input_Select_Clear("Site Search Clear", "xpath", "//input[contains(@aria-label, 'Search ')]", ParentTest, "no_jira");
         if (FAIL) { return; }
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     //This method validates if "Site Production" has All selected in dropdown.
-    protected void validateOnSiteProductApplication() throws Exception {
+    protected void validateOnSiteProductApplication() {
+    try {    
         Element_By_Path_Text("Get default selected Production app", "xpath", "//*[@class='flex']//*[@class='v-select__selection v-select__selection--comma']", ParentTest, "no_jira");
             if (FAIL) { return; }
         if (t != "All") {
@@ -87,10 +92,12 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI{
             Element_By_Path_Click("Select All from On Site Product from drop-down", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']//div[contains(text(),'All')][contains(@class,'v-list__tile__title')]", ParentTest, "no_jira");
                 if (FAIL) { return; }
         }
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     //This method validates if "Site Production" has All selected in dropdown
-    protected void validateOnSiteProductApplicationSalesReport() throws Exception {
+    protected void validateOnSiteProductApplicationSalesReport() {
+    try {    
         Element_By_Path_Text("Get default selected Production app", "xpath", "//*[@class='layout row wrap']//*[@class='v-select__selection v-select__selection--comma']", ParentTest, "no_jira");
             if (FAIL) { return; }
         if (t != "All") {
@@ -99,10 +106,12 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI{
             Element_By_Path_Click("Select All from On Site Product from drop-down", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']//div[@class='v-list theme--light']//div[contains(text(),'All')]", ParentTest, "no_jira");
                 if (FAIL) { return; }
         }
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     //This method will search for selected site from Ap3
-    protected void searchBySelectedSiteAp3() throws Exception {
+    protected void searchBySelectedSiteAp3() {
+    try {    
         Element_By_Path_Text("Get default selected Production app on Site page", "xpath", "//*[@class='flex']//*[@class='v-select__selection v-select__selection--comma']", ParentTest, "no_jira");
             if (FAIL) { return; }
         if (t.equals("All")) {
@@ -133,10 +142,12 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI{
         } else {
             validateOnSiteProductApplication();
         }
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     //This method will search by selcted Site from AP3 on Sales report Index page
-    protected void searchBySelectedSitedSiteReport() throws Exception {
+    protected void searchBySelectedSitedSiteReport() {
+    try {    
         Element_By_Path_Text("Get default selected Production app on Sales Report page", "xpath", "//*[@class='layout row wrap']//*[@class='v-select__selection v-select__selection--comma']", ParentTest, "no_jira");
             if (FAIL) { return; }
         if (t.equals("All")) {
@@ -155,10 +166,12 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI{
         } else {
             validateOnSiteProductApplicationSalesReport();
         }
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     // Store initial visibility of station before any change
-    protected void storeVisibilityOfStation() throws Exception {
+    protected void storeVisibilityOfStation() {
+    try {    
         List_L0("Station row Count", "xpath", "//div[@class='v-table__overflow']//table[@class='v-datatable v-table theme--light']/tbody/tr", ParentTest, "no_jira");
         for (int row = 1; row <= L0.size(); row++) {
             _t++;
@@ -168,19 +181,23 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI{
             storeVisibilityOfStation.add(t);
                 if (FAIL) { return; }
         }
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     // Check if header maches to Selected Site
-    protected void checkHeaderForSiteIndex() throws Exception {
+    protected void checkHeaderForSiteIndex() {
+    try {    
         Element_By_Path_Text("Validate header for selected site ", "xpath", "//div[@class='title-brand clickable']//div[@class='H3-Primary-Left']", ParentTest, "no_jira");
             if (FAIL) { return; }
         if (t.equalsIgnoreCase(SITE)) {
             hideVisibilityOfAllStation();
         }
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     //Validate if all stations are hidden for selected Site
-    protected void hideVisibilityOfAllStation() throws Exception {
+    protected void hideVisibilityOfAllStation() {
+    try {    
         List_L0("Station row Count", "xpath", "//div[@class='v-table__overflow']//table[@class='v-datatable v-table theme--light']/tbody/tr", ParentTest, "no_jira");
         for (int row = 1; row <= L0.size(); row++) {
             Element_By_Path_Attribute("Get visibility Status,To make it hide if it's visible", "xpath", "//div[@class='v-table__overflow']//table[@class='v-datatable v-table theme--light']/tbody/tr[" + row + "]/td[6]//div[@class='v-input__control']//div[@class='v-input--selection-controls__input']/i", "className", ParentTest, "no_jira");
@@ -190,11 +207,12 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI{
                     if (FAIL) {  return;  }
             }
         }
-
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     //This method will navigate page to "Site Reporting" index page
-    protected void navigateToSiteReportIndexPage() throws Exception {
+    protected void navigateToSiteReportIndexPage() {
+    try {    
         Wait_For_All_Elements_InVisibility("Drawer > 'Sales Reporting' visibility", "xpath", "//*[contains(text(), 'Sales Reporting')]", ParentTest, "no_jira");
             if (FAIL) { return; }
         Element_By_Path_Click("Drawer > 'Sales Reporting' Click", "xpath", "//*[contains(text(), 'Sales Reporting')]", ParentTest, "no_jira");
@@ -208,10 +226,12 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI{
         Element_By_Path_Text("User default App", "xpath", "//div[contains(@class, 'v-select__selection v-select__selection--comma')]", ParentTest, "no_jira");
             if (FAIL) { return; }
         validateOnSiteProductApplicationSalesReport();
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     //This method will open "Filters" for selected site from  "Sales Reporting"
-    protected void openReportFilters() throws Exception {
+    protected void openReportFilters() {
+    try {    
         Wait_For_All_Elements_InVisibility("Filter element should be visible on Site report", "xpath", "//*[@class='flex shrink']/button[1][@class='v-btn v-btn--flat theme--light']", ParentTest, "no_jira");
             if (FAIL) { return; }
         Element_By_Path_Click("Click on Filter button", "xpath", "//*[@class='flex shrink']/button[@class='v-btn v-btn--flat theme--light']", ParentTest, "no_jira");
@@ -240,10 +260,12 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI{
                 if (FAIL) { return; }
         }
         EX += " - " + "\t" + " === ^ Sales Report for hidden stations" + "\t" + " ===== " + "\t" + " == ^ Sales Reporting for hidden stations End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 
     // Revert all sites back to original aria-Checked
-    protected void revertVisibilityOfStation() throws Exception {
+    protected void revertVisibilityOfStation() {
+    try {    
         EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Verify if Visibility for all Station Revert it back to Original mode ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         openDashboardDrawer();
         navigateToSiteIndexPage();
@@ -276,5 +298,6 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI{
             if (FAIL) { return; }
         storePresentVisibilityOfStation.clear();
         storeVisibilityOfStation.clear();
-    }
+    } catch (Exception ex){}   // =============================================  
+    } 
 }
