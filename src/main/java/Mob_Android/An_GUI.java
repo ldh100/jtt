@@ -1090,7 +1090,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnExelMouseClicked
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
-        String R = A.Func.SHOW_LOG_FILE(F, "txt");
+        String R = A.Func.SHOW_FILE(F, "txt");
         if(!R.equals("OK")){
             Current_Log_Update(true, R + "\r\n");
         }
@@ -1099,7 +1099,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         
 //        Current_Log_Update(true, An_Met.Get_Bolter_User_Site_ID(txtBolter_Id.getText(), txtBolter_Pw.getText()) + "\r\n");
        
-        String R = A.Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
+        String R = A.Func.SHOW_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             Current_Log_Update(true, R + "\r\n");
         }
