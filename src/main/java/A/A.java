@@ -74,6 +74,7 @@ public class A extends javax.swing.JFrame {
         Menu_Swagger = new javax.swing.JMenu();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
         Menu_Web_Tools = new javax.swing.JMenu();
+        Menu_Env = new javax.swing.JMenu();
         Menu_Android = new javax.swing.JMenu();
         Menu_iOS = new javax.swing.JMenu();
         Menu_C360 = new javax.swing.JMenu();
@@ -112,7 +113,7 @@ public class A extends javax.swing.JFrame {
         );
         DesktopPaneLayout.setVerticalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 701, Short.MAX_VALUE)
+            .addGap(0, 703, Short.MAX_VALUE)
         );
 
         Menu_Tools.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -327,6 +328,17 @@ public class A extends javax.swing.JFrame {
 
         MenuBar.add(Menu_Tools);
 
+        Menu_Env.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Menu_Env.setText("Environment");
+        Menu_Env.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_Env.setName("JOBS"); // NOI18N
+        Menu_Env.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_EnvMouseClicked(evt);
+            }
+        });
+        MenuBar.add(Menu_Env);
+
         Menu_Android.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_Android.setText("Android");
         Menu_Android.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -480,7 +492,7 @@ public class A extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(DesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
+                .addComponent(DesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -866,6 +878,22 @@ public class A extends javax.swing.JFrame {
             // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Menu_Web_ToolsMouseClicked
+
+    private void Menu_EnvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_EnvMouseClicked
+        if(Menu_Env.isVisible()){
+            Menu_AP3.setVisible(false);
+            MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            try {
+                Open_Env();
+            } catch (PropertyVetoException ex) {
+                // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+            Menu_Env.setVisible(true);
+        }
+    }//GEN-LAST:event_Menu_EnvMouseClicked
     //</editor-fold>
 
     public static void main(String args[]) {
@@ -911,6 +939,25 @@ public class A extends javax.swing.JFrame {
     }
 
     // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">      
+ 
+    private void Open_Env() throws PropertyVetoException {       
+        Env es = new Env();
+        this.DesktopPane.add(es);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        es.setLocation(X*20, Y*20);
+        es.setVisible(true);
+        es.show();
+        es.setSelected(true);
+        F_COUNT++;
+    }    
+    
     private void Open_Devices() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
         for (JInternalFrame frame : frames) {
@@ -1598,6 +1645,7 @@ public class A extends javax.swing.JFrame {
     private javax.swing.JMenu Menu_DL_PR;
     private javax.swing.JMenu Menu_DL_ST;
     private javax.swing.JMenu Menu_Devices;
+    private javax.swing.JMenu Menu_Env;
     private javax.swing.JMenu Menu_FW;
     private javax.swing.JMenu Menu_FW_;
     private javax.swing.JMenu Menu_FW_DE;

@@ -338,7 +338,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             EXX = rs.getString(1);
             conn.close();
 
-            String R = A.Func.SHOW_LOG_FILE(EXX, "txt");
+            String R = A.Func.SHOW_FILE(EXX, "txt");
             if(!R.equals("OK")){
                 txtLog.append(R + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
