@@ -1,5 +1,8 @@
 package DL;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class DL_qa_user extends DL_GUI {
 
     protected DL_qa_user(DL_GUI a) {
@@ -11,7 +14,7 @@ class DL_qa_user extends DL_GUI {
     }
 
     // Error: User Initialization Fail. Please Try Again    <<<< How to deal with That??   DEBUG
-    protected void run(String User_ID, String Metric, String Restricted, String Period, String Val, String Location_Filters, String Item_Filters, String Kpi, String Source) {
+    protected void run(String User_ID, String Metric, String Restricted, String Period, String Val, String Location_Filters, String Item_Filters, String Kpi, String Source, Boolean IsMember) {
     try {     
 
         Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "//span[contains(text(),'arrow_right')]", ParentTest, "no_jira");
@@ -290,4 +293,29 @@ class DL_qa_user extends DL_GUI {
         }
     } catch (Exception ex){}   // =============================================  
     }
+     public void SelectMember() {
+         try{
+
+        List_L2("Members Selection List", "xpath", "//button[contains(@class, 'MuiGrid-root jss')]/div", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        if (L2 == null || L2.size() == 0) {
+
+            List_L2("Members Selection List", "xpath", "//p[contains(@class, 'MuiTypography-root jss')]", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+        }
+        List<String> Memberlist = new ArrayList<>();
+
+        Element_Click("Members Selection List" + (0 + 1), L2.get(0), ParentTest, "no_jira");
+        Element_By_Path_Click("Click on Continue as a Member", "xpath", "//span[text()='Continue as Member']", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(5000);
+    }catch (Exception ex){}
+}
+
 }

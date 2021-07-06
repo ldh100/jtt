@@ -18,7 +18,11 @@ import org.json.JSONObject;
  *
  * @author dhruv.seth
  */
-//Export Automation tickets AUT-876
+        //AUT-875: As an Admin, I cannot export the menu in EDIT mode
+        //AUT-876: As an Admin, I can export the menu
+        //AUT-877: As a user, I can verify the fields in the exported excel report
+        //AUT-262 : Disabling a menu set  
+        //AUT-997: As an Admin, I can export the Global Modifiers
 
 class AP3_export_menuset extends AP3_GUI{
     String MenuSetName = "";
@@ -56,8 +60,7 @@ class AP3_export_menuset extends AP3_GUI{
         _All_data = a._All_data;
         New_ID = a.New_ID;
         TZone = a.TZone;
-        
-     
+               
     } 
     protected void run(){
     try {
@@ -419,6 +422,8 @@ class AP3_export_menuset extends AP3_GUI{
 
         */
         
+        //AUT-997: As an Admin, I can export the Global Modifiers
+        /*
         selectingGlobalMenu();
         
         Element_By_Path_Click("View Global Modifiers Groups Click", "xpath", "//div[normalize-space()='View GLobal Modifier Groups']", ParentTest, "no_jira");
@@ -497,11 +502,136 @@ class AP3_export_menuset extends AP3_GUI{
                 }
             }
         }
-                 
+         */        
+              
+        //AUT-280: Mods can be added only if they exist in the global mods 
+        //Description:2 scenarios here. 1st scenario: No mod groups exist in the global mods
+        //Go to the Global Menu
+        //Select V2 menu
+        //Select an item
+        //Click on Add Modifier Group
                 
-                
+        selectingGlobalMenu();
+        
+        Element_By_Path_Click("Search Menus Click", "xpath", "//div[normalize-space()='View GLobal Modifier Groups']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);
+        
+        
+       Element_By_Path_Text("Check no Global Modifier Group is present", "xpath", "//table/tbody/tr[1]/td[1]", ParentTest, "no_jira"); 
+            if (FAIL) { return; }
+        System.out.println(t);
                         
+        
+        if(t.equals("No data available")){
+            _t++;
+            _p++; EX += _t + "\t" + "No Global Modifiers Group Found" + "\t" + t + "\t"  + "\t" + "Pass" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";  
+            Log_Html_Result("Pass", "No data available", true, ParentTest.createNode("Global Modifiers are present")); 
+        }
+        else{
+            Element_By_Path_Text("Get Modifier Name", "xpath", "//table/tbody/tr[1]/td[2]", ParentTest, "no_jira");
+            _t++;
+            _f++; EX += _t + "\t" + "Global Modifiers Group Present" + "\t" + t + "\t" + "\t" + "Fail" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("FAIL", "Global Modifier Group Present", true, ParentTest.createNode("Global Modifiers are present"));
+            return;            
+            }
+        
+        
+        
+        Navigate_Back("Navigate Back"," 'globalmods' page"," 'menu' page", ParentTest, "no_jira"); 
+            Thread.sleep(500); 
+            Wait_For_All_Elements_InVisibility("Wait for page load...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+                if (FAIL) { return;}               
+            Wait_For_Element_By_Path_Presence("Wait for Menu page load", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira"); 
+                    if (FAIL) { return;}                
+        
+        Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);         
+        
+        Element_By_Path_Click("Search Menus Click", "xpath", "//div[normalize-space()='View GLobal Menus']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Wait for Menu List", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
+            if (FAIL) { return;}            
+                    
+                    
+        Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent",ParentTest ,"no_jira"); 
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]",ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+        Thread.sleep(500);  
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]",ParentTest, "no_jira"); 
+            if (FAIL) { return;}   
+        Thread.sleep(500);        
+        
+        //Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent",ParentTest, "no_jira"); 
+        // ^^^ fails
+        List_L0("Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");             
+            if (FAIL || L0.isEmpty()) { 
+                return;
+            } 
+            for (int i = 0; i < L0.size(); i++) {
+                Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent", ParentTest, "no_jira");            
+                    if (FAIL) { return;}                   
+            } 
+        Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira");      
+        MenuSetName = t; // ==========================
+        Element_Click("Click First Menuset", L0.get(0), ParentTest, "no_jira");        
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]",ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+            
+        Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}    
+        Element_By_Path_Attribute("Get Current Item Name Value", "css", "[aria-label='Item Name']", "value", ParentTest, "no_jira");
+        if (FAIL) { return;} 
+        Element_By_Path_Click("Click > Add Modifier Group ", "xpath", "//div[contains(text(),'Add modifier group')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+            Thread.sleep(3000);
+        Element_By_Path_Click("Click >  ", "xpath", "//div[@class='v-select__selections']", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+            Thread.sleep(3000);  
+        
+        Element_By_Path_Click("Modifier Name Input Click", "xpath", "//div[@class='v-input v-text-field v-select theme--light']", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+            
+            
+        //Element_By_Path_Click("Modifier Name Input Click", "xpath", "//div[@class='v-input v-text-field v-select v-input--is-focused theme--light primary--text']", ParentTest, "no_jira"); 
+            //if (FAIL) { return;}    
+        Element_E1_Find("Find 'Modifier Groups' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
+            if (FAIL) { return;}             
+        Element_Child_List_L1("Available Modifier Groups Count", e1,"xpath", "//div[@class='v-input v-text-field v-select v-select--is-menu-active v-input--is-focused theme--light primary--text']", ParentTest, "no_jira");                                     
+            if (FAIL) { return;}
+            for (int i = 0; i < L1.size(); i++) {
+                Element_Text("Modifier Group (index " + i + ")", L1.get(i), ParentTest, "no_jira");             
+                if (FAIL) { return;}
+                Element_Attribute("Menu setName", L1.get(i), "textContent", ParentTest, "no_jira");           
+                if (FAIL) { return;}                               
+                Element_By_Path_Attribute("No modifier found text", "xpath", "//div[@data-v-21325df0='true']//div[@class='v-list__tile__title'][normalize-space()='No data available']", "textContent",ParentTest ,"no_jira"); 
+                if (FAIL) { return;}
                 
+            if(t.equals("No data available")) {//Print Fail the ids are not unique
+                _t++;
+                _p++; EX += _t + "\t" + "No Global Modifiers Group Found" + "\t" + t + "\t"  + "\t" + "Pass" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            } else {//Print Pass the ids are unique
+                _t++;
+                _f++; EX += _t + "\t" + "Global Modifiers Group Present" + "\t" + t + "\t" + "\t" + "Fail" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("FAIL", "Global Modifier Group Present", true, ParentTest.createNode("Global Modifiers are present"));
+            }
+        
+            }
+        
+            
+            
+            
     } catch (Exception ex){}   // =============================================  
         
     } //run time closing bracket
@@ -575,8 +705,8 @@ class AP3_export_menuset extends AP3_GUI{
         Thread.sleep(500);
         Wait_For_Element_By_Path_Presence("Wait for Menu List", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
             if (FAIL) { return;}   
-
         */
+        
         //</editor-fold>
     } catch (Exception ex){}   // =============================================  
     }
