@@ -1034,14 +1034,14 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnExelMouseClicked
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
-        String R = A.Func.SHOW_LOG_FILE(F, "txt");
+        String R = A.Func.SHOW_FILE(F, "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }//GEN-LAST:event_btnFailsMouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = A.Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
+        String R = A.Func.SHOW_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());

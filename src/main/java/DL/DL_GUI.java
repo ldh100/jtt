@@ -727,7 +727,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         GUI_Run_Manual();
     }//GEN-LAST:event_btnRunMouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = A.Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
+        String R = A.Func.SHOW_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -735,7 +735,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnLogMouseClicked
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
-        String R = A.Func.SHOW_LOG_FILE(F, "txt");
+        String R = A.Func.SHOW_FILE(F, "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -2084,31 +2084,54 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             SCOPE += "QA Users";
             DL_UserID = "";         // Clear DL_User from GUI to force Clear_Cookies > Restart_Driver and Re-Login
             String QA_USER = "";    // Next QA User from S3 DV_QA table
-            
+            Boolean IsMember=false;
             //for (int i = 293; i < 298; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
             for (int i = 0; i < DV_QA.getRowCount(); i++) {    // All Tests from S3 DV_QA table
                 if(QA_USER.equals(DV_QA.getValueAt(i, 1).toString()) && !Login_OK){
                     continue;      // Do Not proceed with User having Invalid Credentials or Locked Account
-                }                
-                ParentTest = HtmlReport.createTest("User: " + DV_QA.getValueAt(i, 1) + " Test# " + (i+1));  // (i+1) = # in the table
+                }  
+                
+                ParentTest = HtmlReport.createTest("User: " + DV_QA.getValueAt(i, 1) + " Test# " + (i + 1));  // (i+1) = # in the table
                 QA_USER = DV_QA.getValueAt(i, 1).toString();
-                if(!QA_USER.equals(DL_UserID)){  // ======  Clear Cookies and Login with New QA User ===========
+                if (i == 0) {
+                    Text_Found("Check member is Displayed ", "My Members", ParentTest, "no_jira");
+                    if (t.equalsIgnoreCase("Not Found")) {
+                        IsMember = false;
+                    } else {
+                        IsMember = true;
+                    }
+                }
+
+                if (!QA_USER.equals(DL_UserID)) {  // ======  Clear Cookies and Login with New QA User ===========
                     DL_UserID = QA_USER;                // ======  Use last QA User from S3 for the next in the loop ====
                     EX += " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\r\n";
-                    Clear_Cookies_Restart_Driver(BROWSER, ParentTest, "no_jira");   
-                    if (!FAIL) { 
+                    Clear_Cookies_Restart_Driver(BROWSER, ParentTest, "no_jira");
+                    if (!FAIL) {
                         DL_login BR = new DL_login(DL_GUI.this);
                         BR.run(DL_UserID, DL_UserPW, false); // ======================================
-                        EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+                        EX += BR.EX;
+                        _t += BR._t;
+                        _p += BR._p;
+                        _f += BR._f;
+                        _w += BR._w;
+                        _i += BR._i;
+                        F += BR.F;
+                        r_time += BR.r_time;
                         Login_OK = BR.Login_OK;
-                    } else{
+                        Text_Found("Check member is Displayed ", "My Members", ParentTest, "no_jira");
+                        if (t.equalsIgnoreCase("Not Found")) {
+                            IsMember = false;
+                        } else {
+                            IsMember = true;
+                        }
+                    } else {
                         Login_OK = false;
                     }
                 }
-                if(!Login_OK){
+                if (!Login_OK) {
                     continue;      // Go to next Test
                 }
-                
+
                 EX += " - " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 EX += " - " + "\t" + " === QA Users - Data Validation" + "\t" + "User: " + QA_USER + "\t" + " == Users " + " - Test# " + (i+1) + " Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 
@@ -2122,11 +2145,13 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                     DV_QA.getValueAt(i, 6).toString(), 
                     DV_QA.getValueAt(i, 7).toString(),
                     DV_QA.getValueAt(i, 8).toString(), 
-                    DV_QA.getValueAt(i, 9).toString()     
-                ); 
+                    DV_QA.getValueAt(i, 9).toString(),
+                    IsMember
+                );
                 EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time; // DL_UserID = BR.DL_UserID;
                 EX += " - " + "\t" + " === ^ QA Users - Data Validation" + "\t" + "User: " + DV_QA.getValueAt(i, 1).toString() + "\t" + " == ^ User " + " - Test# "+ (i+1) + " End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";             
             }   
+
             return; // Do Not execute any Other Scope if Testing QA Users S3 list
         }   
         

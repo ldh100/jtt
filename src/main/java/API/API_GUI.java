@@ -822,7 +822,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            String R = A.Func.SHOW_LOG_FILE(J, "json");
+            String R = A.Func.SHOW_FILE(J, "json");
             if(!R.equals("OK")){
                 txtLog.append(R + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -886,7 +886,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            String R = A.Func.SHOW_LOG_FILE(J, "json");
+            String R = A.Func.SHOW_FILE(J, "json");
             if(!R.equals("OK")){
                 txtLog.append(R + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -952,7 +952,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = A.Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -988,7 +988,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = A.Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1085,7 +1085,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = A.Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1115,14 +1115,14 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = A.Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } 
     }//GEN-LAST:event_btnGroupMouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = A.Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
+        String R = A.Func.SHOW_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1151,7 +1151,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = A.Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1194,7 +1194,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = A.Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1223,7 +1223,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = A.Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1256,7 +1256,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = A.Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1392,7 +1392,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());    
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = A.Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1434,7 +1434,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = A.Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1462,7 +1462,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = A.Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1495,7 +1495,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = A.Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1551,7 +1551,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }   
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = A.Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1635,7 +1635,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();        
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = A.Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1666,7 +1666,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = A.Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -2427,7 +2427,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         } 
         
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = A.Func.SHOW_LOG_FILE(J, "json");
+        String R = A.Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
