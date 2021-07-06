@@ -131,7 +131,7 @@ public class Func {
                     return "pjKAypwy46UqpZaKOOEBTA86dKRRy5tPe2DKrjoMS37lZO6BZXcyQBv3GZ4WIEmlDaOW8du1drKAWKL6uzR";
             case "canteen":
                 return "71rpYwPYzkCW1Kg466Qjc8K4MvOOdAfQ7M5R9v3AcB99Y3M0XYh45GYz032ohm70lXpNd4F7v8gZZ56QI7N";
-            case "Tacit":
+            case "tacit":
                 return "llq08WB8epuwmABXjj70ce46dgll48SKYB7pqoooFXDoZ6lggdtZmK5owEqEuBQNragNj2h7JmjAqmzGs4G";
             case "distiller":
                 return "darvin";
@@ -196,7 +196,7 @@ public class Func {
         return output;   
     }
 
-    public static String SHOW_LOG_FILE(String BODY, String EXT){
+    public static String SHOW_FILE(String BODY, String EXT){
         File aLog = null;
         try {
             String userDesktop = System.getProperty("user.home") + File.separator + "Desktop"; 
