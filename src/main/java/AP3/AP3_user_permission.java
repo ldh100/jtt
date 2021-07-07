@@ -179,7 +179,7 @@ Thread.sleep(1000);
                 Element_Text("Brand Setup Tab >>>>", L3.get(i),  ParentTest, "no_jira");
                 Tab_Name = t;  
                 if (Tab_Name.toLowerCase().contains("menu")) { // Menu > Menu Scheduler 
-                    Find_Text("Admin N 'Schedule menu'", "Schedule menu", false, ParentTest, "no_jira");  
+                    Find_Text("Admin N 'Schedule menu'", "Schedule menu", true, ParentTest, "no_jira");  
                     List_L0("Menu Status icons Count", "xpath", "//i[contains(@class, 'v-icon mdi mdi-eye')]",  ParentTest, "no_jira");                       
                         if (FAIL) { return;}
                     List_L1("Menu Status Disabled Count", "xpath", "//div[contains(@class, 'v-input--is-disabled theme--light')]",  ParentTest, "no_jira");             
@@ -443,7 +443,7 @@ Thread.sleep(1000);
                 Element_Text("Brand Setup Tab >>>>", L3.get(i),  ParentTest, "no_jira");
                 Tab_Name = t;  
                 if (Tab_Name.toLowerCase().contains("menu")) { // Menu > Menu Scheduler    
-                    Find_Text("SM Y 'Schedule menu'", "Schedule menu", false, ParentTest, "no_jira");                     
+                    Find_Text("SM Y 'Schedule menu'", "Schedule menu", true, ParentTest, "no_jira");                     
                     List_L0("Menu Status icons Count", "xpath", "//i[contains(@class, 'v-icon mdi mdi-eye')]",  ParentTest, "no_jira");                       
                         if (FAIL) { return;}
                     List_L1("Menu Status Disabled Count", "xpath", "//div[contains(@class, 'v-input--is-disabled theme--light')]",  ParentTest, "no_jira");             
