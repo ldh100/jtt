@@ -1653,7 +1653,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             sw1.start();
             LOG_START(); // ========================================================
             BW1_DoWork(true);
-            BW2_DoWork();
+            //BW2_DoWork();  >>>>>>> Moved into BW1_DoWork after Driver started successfully
         }catch(Exception ex){
             Current_Log_Update(true, "= GUI_Run_Manual ERROR > " + ex.getMessage() + "\r\n");
             BW1_FAIL_LOG_UPDATE("= GUI_Run_Manual ERROR > " + ex.getMessage());
@@ -1949,6 +1949,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                     btnRun.setEnabled(true);
                     btnFails.setEnabled(true);
                 }
+                BW2_DoWork();
+                
                 Extent_Report_Config();// ======================================================================= 
                 
                 Execute();

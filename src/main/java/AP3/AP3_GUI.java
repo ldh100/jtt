@@ -2085,7 +2085,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             sw1.start();
             LOG_START(); // ========================================================
             BW1_DoWork(true);
-            BW2_DoWork();
+            //BW2_DoWork();  >>>>>>> Moved into BW1_DoWork after Driver started successfully
 //        }catch(Exception ex){
 //            Current_Log_Update(true, "= GUI_Run_Manual ERROR > " + ex.getMessage() + "\r\n");
 //            BW1_FAIL_LOG_UPDATE("= GUI_Run_Manual ERROR > " + ex.getMessage());
@@ -2418,6 +2418,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                     btnRun.setEnabled(true);
                     btnFails.setEnabled(true);
                 }
+                BW2_DoWork();
                 New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
                 
                 Extent_Report_Config(); 
@@ -3289,7 +3290,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "LoadTimeOut " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH + ". Wait: " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec", true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
@@ -3337,7 +3338,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "LoadTimeOut " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH + ". Wait: " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec", true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
@@ -3381,7 +3382,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "Wait:  " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />" + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />" + BY + " > " + PATH + ". Wait: " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec", false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
@@ -3436,7 +3437,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "LoadTimeOut " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH + ". Wait: " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec", true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
