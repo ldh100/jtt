@@ -625,7 +625,7 @@ class AP3_menu_manager extends AP3_GUI{
                 Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira"); 
                     if (FAIL) { return;} 
                     for (int i = 2; i < L0.size(); i++) {
-                        List_TR_TDs("Modifier Group Row Data", L0.get(0), ParentTest, "no_jira");   
+                        List_TR_TDs("Modifier Group Row Data", L0.get(i), ParentTest, "no_jira");   
                             if(t.trim().contains("New Group " + New_ID)){
                                 T_Index = i;
                         }
@@ -659,7 +659,7 @@ class AP3_menu_manager extends AP3_GUI{
             Wait_For_All_Elements_InVisibility("Wait 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
             Thread.sleep(500);
-            Call_API("Call /Menu/Modifier / API )", "Bearer " + AP3_TKN, BaseAPI + "/menu/modifier/group/" + Mod_grp_id, true, ParentTest, "no_jira" );
+            Call_API("Call /Menu/Modifier / API", "Bearer " + AP3_TKN, BaseAPI + "/menu/modifier/group/" + Mod_grp_id, true, ParentTest, "no_jira" );
                 if (FAIL) { return;} 
             json1 = new JSONObject(t);
             modifier_items = new JSONArray();
@@ -671,14 +671,14 @@ class AP3_menu_manager extends AP3_GUI{
                if(modifier_item.getString("id").equals(Copy_Mod_ID))            
                {  
                  _t++;
-                 _f++; EX += _t + "\t" + "Modifier has not been deleted: "+Copy_Mod_ID_Name + "\t" + "-" + "\t" + "" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                 _f++; EX += _t + "\t" + "Modifier has not been deleted: " + Copy_Mod_ID_Name + "\t" + "-" + "\t" + "" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                  flag = false;
                }
             }//End of for  
             if(flag)
             {
               _t++;
-              _p++; EX += _t + "\t" + "Modifier is deleted: "+Copy_Mod_ID_Name + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+              _p++; EX += _t + "\t" + "Modifier is deleted: " + Copy_Mod_ID_Name + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
              //</editor-fold>  
              
@@ -762,7 +762,7 @@ class AP3_menu_manager extends AP3_GUI{
                 Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira"); 
                     if (FAIL) { return;} 
                 for (int i = 2; i < L0.size(); i++) {
-                    List_TR_TDs("Modifier Group Row Data", L0.get(0), ParentTest, "no_jira");   
+                    List_TR_TDs("Modifier Group Row Data", L0.get(i), ParentTest, "no_jira");   
                         if (FAIL) { return;}
                 }    
             int S = L0.size(); 
@@ -1036,47 +1036,51 @@ class AP3_menu_manager extends AP3_GUI{
             if (FAIL) { return;}    
             Thread.sleep(500); 
         To_Bottom("Scroll to page Bottom", ParentTest, "no_jira"); 
-            Thread.sleep(500); 
-        Element_By_Path_Click("New Category Chit # Click", "css", "[aria-label='Chit #']", ParentTest, "no_jira");
+            Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Wait for 'Category Chit #' Presence", "css", "[aria-label='Chit #']", ParentTest, Ver);
+            if (FAIL) { return;}    
+        Element_By_Path_Click("Click 'New Category Chit #'", "css", "[aria-label='Chit #']", ParentTest, "no_jira");
             if (FAIL) { return;}            
         Element_By_Path_Text_Enter("Enter Category Chit #", "css", "[aria-label='Chit #']", "3", false, ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Click("New Category Name Click", "css", "[aria-label='Enter Category Name']", ParentTest, "no_jira");
+        Element_By_Path_Click("Click 'New Category Name'", "css", "[aria-label='Enter Category Name']", ParentTest, "no_jira");
             if (FAIL) { return;}            
         Element_By_Path_Text_Enter("Enter Category Name", "css", "[aria-label='Enter Category Name']", "Category " + New_ID, false, ParentTest, "no_jira");
             if (FAIL) { return;}          
         Thread.sleep(500); 
         // ======== New Item
+        To_Top("Scroll to page Top", ParentTest, "no_jira");
+            if (FAIL) { return;}   
         Move_to_Element_By_Path("Scroll to 'NEW ITEM' button", "xpath", "//*[contains(text(), 'new item')]", ParentTest, "no_jira");        
             if (FAIL) { return;}   
         Thread.sleep(500);            
-        Element_By_Path_Click(" 'NEW ITEM' Click", "xpath", "//*[contains(text(), 'new item')]", ParentTest, "no_jira"); 
+        Element_By_Path_Click("Click 'NEW ITEM'", "xpath", "//*[contains(text(), 'new item')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-        Element_By_Path_Click("New Item Name Click", "css", "[aria-label='Item Name']", ParentTest, "no_jira");
+        Element_By_Path_Click("Click 'New Item Name'", "css", "[aria-label='Item Name']", ParentTest, "no_jira");
             if (FAIL) { return;}             
         Element_By_Path_Text_Enter("Enter Item Name", "css", "[aria-label='Item Name']", "Item " + New_ID, false, ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Click("Price Click", "css", "[aria-label='Price']", ParentTest, "no_jira");
+        Element_By_Path_Click("Click 'Price'", "css", "[aria-label='Price']", ParentTest, "no_jira");
             if (FAIL) { return;}                 
-        Element_By_Path_Text_Enter("Enter Price", "css", "[aria-label='Price']", "1.05", false, ParentTest, "no_jira");
+        Element_By_Path_Text_Enter("Enter 'Price'", "css", "[aria-label='Price']", "1.05", false, ParentTest, "no_jira");
             if (FAIL) { return;}    
-        Element_By_Path_Click("Calories Click", "css", "[aria-label='Calories']", ParentTest, "no_jira");
+        Element_By_Path_Click("Click 'Calories'", "css", "[aria-label='Calories']", ParentTest, "no_jira");
             if (FAIL) { return;}    
         Element_By_Path_Text_Enter("Enter Calories", "css", "[aria-label='Calories']", "280", false, ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Click("Units Click", "css", "[aria-label='Units']", ParentTest, "no_jira");
+        Element_By_Path_Click("Click 'Units'", "css", "[aria-label='Units']", ParentTest, "no_jira");
             if (FAIL) { return;}    
         Element_By_Path_Text_Enter("Enter Units", "css", "[aria-label='Units']", "8", false, ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Click("PLU Click", "css", "[aria-label='PLU ID']", ParentTest, "no_jira");
+        Element_By_Path_Click("Click 'PLU'", "css", "[aria-label='PLU ID']", ParentTest, "no_jira");
             if (FAIL) { return;} 
         Element_By_Path_Text_Enter("Enter PLU ID", "css", "[aria-label='PLU ID']", "900019", false, ParentTest, "no_jira");
             if (FAIL) { return;} 
-        Element_By_Path_Click("Barcode Click", "css", "[aria-label='Barcode']", ParentTest, "no_jira");
+        Element_By_Path_Click("Click 'Barcode'", "css", "[aria-label='Barcode']", ParentTest, "no_jira");
             if (FAIL) { return;} 
         Element_By_Path_Text_Enter("Enter Barcode", "css", "[aria-label='Barcode']", "BC900019", false, ParentTest, "no_jira");
             if (FAIL) { return;} 
-        Element_By_Path_Click("Description Click", "css", "[aria-label='Description']", ParentTest, "no_jira");
+        Element_By_Path_Click("Click 'Description'", "css", "[aria-label='Description']", ParentTest, "no_jira");
             if (FAIL) { return;}    
         Element_By_Path_Text_Enter("Enter Description", "css", "[aria-label='Description']", "Description " + New_ID, false, ParentTest, "no_jira");
             if (FAIL) { return;}                
@@ -1104,9 +1108,9 @@ class AP3_menu_manager extends AP3_GUI{
             if (FAIL) { return;}          
 
         // ======= Add Modifier >>>
-        Element_By_Path_Click("Modifiers 'Add Group' Click", "xpath", "//*[contains(text(), 'Add modifier group')]", ParentTest, "no_jira"); 
+        Element_By_Path_Click("Click Modifiers 'Add Group'", "xpath", "//*[contains(text(), 'Add modifier group')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}  
-        Element_By_Path_Click("Modifier Name Input Click", "xpath", "//div[@class='v-input v-text-field v-select v-input--is-focused theme--light primary--text']", ParentTest, "no_jira"); 
+        Element_By_Path_Click("Click 'Modifier Name' Input", "xpath", "//div[@class='v-input v-text-field v-select v-input--is-focused theme--light primary--text']", ParentTest, "no_jira"); 
             if (FAIL) { return;}                                                                                                     
         Element_E1_Find("Find 'Modifier Groups' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
             if (FAIL) { return;}             
