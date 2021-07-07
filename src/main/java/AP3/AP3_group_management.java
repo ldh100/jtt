@@ -355,8 +355,8 @@ class AP3_group_management extends AP3_GUI{
                 }
             }
 
-           
-          if(!env.equals("PR"))
+ //July 6 2021, Only will be run on Dev since JDE hasnt been pushed to Staging/Prod          
+          if(env.equals("DE"))
           {
              if(C.equals("CA"))
              {
@@ -376,7 +376,7 @@ class AP3_group_management extends AP3_GUI{
                  if (FAIL) { return;}
                  Element_By_Path_Click("Click JDE dropdown", "xpath", "(//div[@role='combobox']//div[@class='v-input__append-inner'])[2]", ParentTest, "no_jira");
                  if (FAIL) { return;}
-     Thread.sleep(5000);
+    Thread.sleep(5000);
 //                 Wait_For_Element_By_Path_Presence("Wait for 'JDE' list", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']", ParentTest, "no_jira");
 //                 if (FAIL) { return;} 
                  T_Index = -1;
@@ -501,7 +501,6 @@ Thread.sleep(5000);
              Text_Found("Find ..Option Yes", "Yes", ParentTest, "no_jira");
              Text_Found("Find ..Option No", "No", ParentTest, "no_jira");
              Find_Text("Find ..Default JDE Category", "Default JDE Category", false, ParentTest, "no_jira");
-            
             }
           
         }
