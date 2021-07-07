@@ -2242,7 +2242,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         HtmlReporter.config().setDocumentTitle("JTT Web Automation Report");
         HtmlReporter.config().setTheme(Theme.STANDARD);               
     }    
-    protected void Log_Html_Result(String RES, String Test_Description, boolean Capture_Screenshot, ExtentTest Test) throws IOException  {
+    protected void Log_Html_Result(String RES, String Test_Description, boolean Capture_Screenshot, ExtentTest Test) {
         switch (RES) {
             case "PASS":
                 Test.log(Status.PASS, MarkupHelper.createLabel(Test_Description, ExtentColor.GREEN));
@@ -2283,7 +2283,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ImageIO.write(ImageIO.read(SF), "png", bos);
             SF.delete();
-            return "Get Screenshot > data:image/png;base64, " + Base64.getEncoder().encodeToString(bos.toByteArray());
+            return "data:image/png;base64, " + Base64.getEncoder().encodeToString(bos.toByteArray());
         }catch (IOException ex) {
             return "Get Screenshot > data:image/png;base64," + " ERROR: " + ex.getMessage();
         }
@@ -2456,9 +2456,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                     if(d1 != null) {
                         d1.quit(); 
                     }
-                } catch (InterruptedException | ExecutionException ex)  { 
+                } catch (Exception ex)  { 
                     Current_Log_Update(GUI, "- BW1 Done > ERROR: " + ex.getMessage() + "\r\n");
-                    
                     BW1_FAIL_LOG_UPDATE(ex.getMessage()); 
                 } 
             } 
@@ -2515,7 +2514,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                             }
                             Thread.sleep(2000); //  pause till new alert expected ???? 
                         }
-                    } catch (IOException | InterruptedException ex){ // Exception ex
+                    } catch (Exception ex){ // Exception ex
                         txtLog.append( "= BW2: " + ex.getMessage() + "\r\n");
                         txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
                     }
