@@ -1028,15 +1028,15 @@ class AP3_menu_manager extends AP3_GUI{
             if (FAIL) { return;}
         List_Child_E1_By_Path("Find last 'Added...' > '+'", L0.get((L0.size() - 1)), "xpath", ".//i[@class='v-icon mdi mdi-plus theme--light']", ParentTest, "no_jira"); 
             if (FAIL) { return;}  
-            Thread.sleep(500); 
-        Element_Click("Last Added Set > '+' Click", e1, ParentTest, "no_jira"); 
+        Thread.sleep(500); 
+        Element_Click("Click Last Added Set > '+'", e1, ParentTest, "no_jira"); 
             if (FAIL) { return;}   
         Thread.sleep(500);   
         Wait_For_All_Elements_InVisibility("Wait for Category Name field", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}    
-            Thread.sleep(500); 
+        Thread.sleep(500); 
         To_Bottom("Scroll to page Bottom", ParentTest, "no_jira"); 
-            Thread.sleep(500);
+        Thread.sleep(500);
         Wait_For_Element_By_Path_Presence("Wait for 'Category Chit #' Presence", "css", "[aria-label='Chit #']", ParentTest, Ver);
             if (FAIL) { return;}    
         Element_By_Path_Click("Click 'New Category Chit #'", "css", "[aria-label='Chit #']", ParentTest, "no_jira");
@@ -1839,7 +1839,9 @@ class AP3_menu_manager extends AP3_GUI{
             }
             Element_By_Path_Text_Enter("Enter Local Menu Search", "css", "[aria-label='Search Menus']", Location, false, ParentTest, "no_jira");
                 if (FAIL) { return;} 
-                Thread.sleep(500);                 
+            Thread.sleep(500);  
+            Wait_For_Element_By_Path_Presence("Wait for 'VIEW LOCAL MENUS' button", "xpath", "//div[contains(text(), '" + "View Local Menus" + "')]", ParentTest, "no_jira"); 
+                if (FAIL) { return;} 
             Element_By_Path_Click("Click 'VIEW LOCAL MENUS'", "xpath", "//div[contains(text(), '" + "View Local Menus" + "')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
             Thread.sleep(500); 
@@ -1847,7 +1849,7 @@ class AP3_menu_manager extends AP3_GUI{
                 if (FAIL) { return;} 
             Thread.sleep(500);        
             To_Top("Scroll to page Top", ParentTest, "no_jira");        
-             Thread.sleep(500);
+            Thread.sleep(500);
             Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
             Thread.sleep(500); 
