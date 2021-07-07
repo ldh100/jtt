@@ -23,6 +23,7 @@ class AP3_images extends AP3_GUI{
         BaseAPI = a.BaseAPI;
         New_ID = a.New_ID;
         app = a.app;
+        appId = a.appId;
         SITE = a.SITE;
         SiteID = a.SiteID;
         BRAND = a.BRAND;
@@ -50,7 +51,7 @@ class AP3_images extends AP3_GUI{
         //navigate to the sites -> brand -> settings
         Navigate_to_URL("Navigate to Site -> Brand List", url + "#/sites/" + appId + "/site/" + SiteID, ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(2000);
+        Thread.sleep(2000);
         //add new brand and check 'Allow Local Menu Images' toggle is disabled
         Element_By_Path_Click("Click > ADD STATION", "xpath", "//div[contains(text(),'ADD STATION')]/parent::button", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -78,9 +79,9 @@ Thread.sleep(2000);
         if (d1.findElements(By.xpath("//*[contains(text(),'LEAVE')]")).size() > 0) {
             d1.findElement(By.xpath("//*[contains(text(),'LEAVE')]")).click();
         }
-Thread.sleep(1000);
+        Thread.sleep(1000);
         Refresh("Refresh Brand List Page", ParentTest, "no_jira");
-Thread.sleep(5000);
+        Thread.sleep(5000);
         Element_By_Path_Click("Click > '+ GLOBAL MENU' button", "xpath", "//*[contains(text(),'Global Menu')]/parent::button", ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Check > 'No' is Selected by default", "xpath", "//div[contains(text(),'Yes')]/parent::div[contains(@class,'Not-Selected')]", ParentTest, "no_jira");
@@ -96,10 +97,12 @@ Thread.sleep(5000);
         JSONObject is = json2.getJSONObject("is");
         if (is.getBoolean("global_images_enabled")) {
              _t++;
-             _f++; EX += _t + "\t" + "API - Global Menu Images are Disabled" + "\t" + "images are disabled" + "\t" + "{\"global_images_enabled\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+             _f++; EX += _t + "\t" + "API - Global Menu Images are Disabled" + "\t" + "images are disabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled") + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+             Log_Html_Result("FAIL", "images are disabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), true, ParentTest.createNode("API - Global Menu Images are Disabled"));
         } else {
              _t++;
-             _p++; EX += _t + "\t" + "API - Global Menu Images are Disabled" + "\t" + "images are disabled" + "\t" + "{\"global_images_enabled\" : false}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+             _p++; EX += _t + "\t" + "API - Global Menu Images are Disabled" + "\t" + "images are disabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+             Log_Html_Result("PASS", "images are disabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Disabled"));
         }                              
         Element_By_Path_Click("Click > Edit Global menu on 'Starbucks' Brand", "xpath", "//*[text()='Starbucks']/ancestor::tr//button", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -112,9 +115,9 @@ Thread.sleep(5000);
             if (FAIL) { return;}
         Element_By_Path_Click("Click > 'Save'", "xpath", "(//div[contains(text(),'Save')])[2]", ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Refresh("Refresh page", ParentTest, "no_jira");
-Thread.sleep(5000);
+        Thread.sleep(5000);
         Call_API("Check API before toggle", "Bearer " + AP3_TKN, BaseAPI + "/location/sector/" + SectorID + "?nocache=true&expanded=true", true, ParentTest, "no_jira");
         json = new JSONObject(t);
         companies = new JSONArray();
@@ -123,16 +126,18 @@ Thread.sleep(5000);
         is = json2.getJSONObject("is");
         if (is.getBoolean("global_images_enabled")) {
              _t++;
-             _p++; EX += _t + "\t" + "API - Global Menu Images are Enabled" + "\t" + "images are enabled" + "\t" + "{\"global_images_enabled\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+             _p++; EX += _t + "\t" + "API - Global Menu Images are Enabled" + "\t" + "images are enabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+             Log_Html_Result("PASS", "images are enabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Enabled"));
         } else {
              _t++;
-             _f++; EX += _t + "\t" + "API - Global Menu Images are Enabled" + "\t" + "images are enabled" + "\t" + "{\"global_images_enabled\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+             _f++; EX += _t + "\t" + "API - Global Menu Images are Enabled" + "\t" + "images are enabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled") + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+             Log_Html_Result("FAIL", "images are enabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), true, ParentTest.createNode("API - Global Menu Images are Enabled"));
         }
         EX += " - " + "\t" + " === " + "\t" + " ===== Add New Brand as 'Allow Images in Global Menu' set to 'Yes'" + "\t" + " == Start >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         //navigate to the sites -> brand -> settings
         Navigate_to_URL("Navigate to Site -> Brand List", url + "#/sites/" + appId + "/site/" + SiteID, ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(2000);
+        Thread.sleep(2000);
         //add new brand and check 'Allow Local Menu Images' toggle is enabled
         Element_By_Path_Click("Click > ADD STATION", "xpath", "//div[contains(text(),'ADD STATION')]/parent::button", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -157,9 +162,9 @@ Thread.sleep(2000);
         if (d1.findElements(By.xpath("//*[contains(text(),'LEAVE')]")).size() > 0) {
             d1.findElement(By.xpath("//*[contains(text(),'LEAVE')]")).click();
         }
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Refresh("Refresh Brand List Page", ParentTest, "no_jira");
-Thread.sleep(5000);
+        Thread.sleep(5000);
         //check initial api
         Call_API("Check API before toggle", "Bearer " + AP3_TKN, BaseAPI + "/location/sector/" + SectorID + "?nocache=true&expanded=true", true, ParentTest, "no_jira");
         json = new JSONObject(t);
@@ -178,10 +183,12 @@ Thread.sleep(5000);
                     if (brand.getString("location_description").contains("100th floor, canteen area")) {
                         if (brand.getJSONObject("is").getBoolean("local_images_enabled")) {
                             _t++;
-                            _f++; EX += _t + "\t" + "API - Local Menu Images are Disabled" + "\t" + "images are disabled" + "\t" + "{\"local_images_enabled\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                            _f++; EX += _t + "\t" + "API - Local Menu Images are Disabled" + "\t" + "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled") + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                            Log_Html_Result("FAIL", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), true, ParentTest.createNode("API - Global Menu Images are Enabled"));
                         } else {
                             _t++;
-                            _p++; EX += _t + "\t" + "API - Local Menu Images are Disabled" + "\t" + "images are disabled" + "\t" + "{\"local_images_enabled\" : false}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                            _p++; EX += _t + "\t" + "API - Local Menu Images are Disabled" + "\t" + "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                            Log_Html_Result("PASS", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Enabled"));
                         }
                     }
                 }
@@ -197,9 +204,9 @@ Thread.sleep(5000);
             if (FAIL) { return;}
         Element_By_Path_Click("Click > 'Save Changes'", "xpath", "//div[contains(text(),'Save Changes')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Refresh("Refresh page", ParentTest, "no_jira");
-Thread.sleep(5000);
+        Thread.sleep(5000);
         Call_API("Check API before toggle", "Bearer " + AP3_TKN, BaseAPI + "/location/sector/" + SectorID + "?nocache=true&expanded=true", true, ParentTest, "no_jira");
         json = new JSONObject(t);
         companies = new JSONArray();
@@ -217,10 +224,12 @@ Thread.sleep(5000);
                     if (brand.getString("location_description").contains("100th floor, canteen area")) {
                         if (brand.getJSONObject("is").getBoolean("local_images_enabled")) {
                             _t++;
-                            _p++; EX += _t + "\t" + "API - Local Menu Images are Enabled" + "\t" + "images are enabled" + "\t" + "{\"local_images_enabled\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                            _p++; EX += _t + "\t" + "API - Local Menu Images are Enabled" + "\t" + "images are enabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                            Log_Html_Result("PASS", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Enabled"));
                         } else {
                             _t++;
-                            _f++; EX += _t + "\t" + "API - Local Menu Images are Enabled" + "\t" + "images are enabled" + "\t" + "{\"local_images_enabled\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                            _f++; EX += _t + "\t" + "API - Local Menu Images are Enabled" + "\t" + "images are enabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled") + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                            Log_Html_Result("FAIL", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), true, ParentTest.createNode("API - Global Menu Images are Enabled"));
                         }
                     }
                 }
@@ -233,12 +242,12 @@ Thread.sleep(5000);
         EX += " - " + "\t" + " === " + "\t" + " ===== Add an Image to Global Menu Item" + "\t" + " == Add an Image to Global Menu Item >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID, ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Refresh("Refresh Brand List Page", ParentTest, "no_jira");
-Thread.sleep(5000);
+        Thread.sleep(5000);
         Element_By_Path_Click("Click > First Category", "xpath", "(//div[contains(@class,'flex xs12 list-item list-item-large')])[1]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Element_By_Path_Click("Click > 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", ParentTest, "no_jira"); 
@@ -268,24 +277,24 @@ Thread.sleep(2000);
             _t++; 
             _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File : Ap3_image1  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
-Thread.sleep(1000);
+        Thread.sleep(1000);
         Wait_For_Element_By_Path_Presence("Check > Remove Image Icon exists", "xpath", "//*[contains(@class,'icon-remove')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Click > 'Apply Changes'", "xpath", "//*[contains(text(),'Apply Changes')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(5000);
+        Thread.sleep(5000);
         Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'publish')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(2000);
+        Thread.sleep(2000);
         EX += " - " + "\t" + " === " + "\t" + " ===== Check for Image in Local Menu" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Refresh("Refresh Brand List Page", ParentTest, "no_jira");
-Thread.sleep(5000);
+        Thread.sleep(5000);
         Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'Lunch')][1]/parent::span", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Element_By_Path_Click("Click > 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", ParentTest, "no_jira"); 
@@ -311,12 +320,12 @@ Thread.sleep(2000);
         EX += " - " + "\t" + " === " + "\t" + " ===== Remove Image from Global Menu Item" + "\t" + " == Remove Image from Global Menu Item >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n"; 
         Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID, ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Refresh("Refresh Global Menu Page", ParentTest, "no_jira");
-Thread.sleep(5000);
+        Thread.sleep(5000);
         Element_By_Path_Click("Click > First Category", "xpath", "(//div[contains(@class,'flex xs12 list-item list-item-large')])[1]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Element_By_Path_Click("Click > 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", ParentTest, "no_jira"); 
@@ -327,16 +336,16 @@ Thread.sleep(2000);
             if (FAIL) { return;} 
         Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'publish')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(2000);
+        Thread.sleep(2000);
         EX += " - " + "\t" + " === " + "\t" + " ===== Check Image was Removed in Local Menu" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Refresh("Refresh Local Menu Page", ParentTest, "no_jira");
-Thread.sleep(5000);
+        Thread.sleep(5000);
         Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'Lunch')][1]/parent::span", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Element_By_Path_Click("Click > 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", ParentTest, "no_jira"); 
@@ -353,12 +362,12 @@ Thread.sleep(2000);
         EX += " - " + "\t" + " === " + "\t" + " ===== Re-upload Image to Item in Global Menu" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID, ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Refresh("Refresh Global Menu Page", ParentTest, "no_jira");
-Thread.sleep(5000);
+        Thread.sleep(5000);
         Element_By_Path_Click("Click > First Category", "xpath", "(//div[contains(@class,'flex xs12 list-item list-item-large')])[1]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Element_By_Path_Click("Click > 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", ParentTest, "no_jira"); 
@@ -376,14 +385,14 @@ Thread.sleep(2000);
             if (FAIL) { return;} 
         Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'publish')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(2000);
+        Thread.sleep(2000);
         //navigate to the sites -> brand -> settings
         EX += " - " + "\t" + " === " + "\t" + " ===== Navigate to Station Configuration Page and Toggle 'Allow Local Menu Images' to 'No' " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         Navigate_to_URL("Navigate to Site -> Brand Configuration", url + "#/sites/" + appId + "/site/" + SiteID + "/brand/" + BrandID + "/settings", ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(1000);
+        Thread.sleep(1000);
         Refresh("Refresh Station Configuration Page", ParentTest, "no_jira");
-Thread.sleep(5000);
+        Thread.sleep(5000);
         Wait_For_Element_By_Path_Presence("Check > Navigated to Brand Configuration", "xpath", "//div[contains(text(),'Station Information')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Scroll_to_WebElement("Scroll to 'Menu Information' Section", "xpath", "//div[@id='toc-menu-info']", ParentTest, "no_jira");
@@ -394,16 +403,16 @@ Thread.sleep(5000);
             if (FAIL) { return;}
         Element_By_Path_Click("Click > 'Save Changes'", "xpath", "//div[contains(text(),'Save Changes')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(2000);
+        Thread.sleep(2000);
         EX += " - " + "\t" + " === " + "\t" + " ===== Check Image Area does not exist in Local Menu" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Refresh("Refresh Brand List Page", ParentTest, "no_jira");
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'Lunch')][1]/parent::span", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Element_By_Path_Click("Click > 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", ParentTest, "no_jira"); 
@@ -419,7 +428,7 @@ Thread.sleep(2000);
         EX += " - " + "\t" + " === " + "\t" + " ===== Toggle Allow Images to 'No'" + "\t" + " == Toggle Allow Images to 'No' >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         Navigate_to_URL("Navigate to Group Management List Page", url + "#/sectors/" + SectorID, ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Element_By_Path_Click("Click > Edit Global menu on 'Starbucks' Brand", "xpath", "//*[text()='Starbucks']/ancestor::tr//button", ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Check > 'Edit Global Menu Brand Name' dialog is open", "xpath", "//div[contains(text(),'Allow Images in Global Menu')]", ParentTest, "no_jira");
@@ -431,11 +440,11 @@ Thread.sleep(2000);
             if (FAIL) { return;}
         Element_By_Path_Click("Click > 'Save'", "xpath", "(//div[contains(text(),'Save')])[2]", ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(2000);
+        Thread.sleep(2000);
         //navigate to the sites -> brand -> settings
         Navigate_to_URL("Navigate to Site -> Brand Configuration", url + "#/sites/" + appId + "/site/" + SiteID + "/brand/" + BrandID + "/settings", ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(1000);
+        Thread.sleep(1000);
         Wait_For_Element_By_Path_Presence("Check > Navigated to Brand Configuration", "xpath", "//div[contains(text(),'Station Information')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Scroll_to_WebElement("Scroll to 'Menu Information' Section", "xpath", "//div[@id='toc-menu-info']", ParentTest, "no_jira");
@@ -445,10 +454,10 @@ Thread.sleep(1000);
         //navigate to global menu and check that images cannot be added
         Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/"+SectorID+"/company/"+CompanyID, ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Element_By_Path_Click("Click > First Category", "xpath", "(//div[contains(@class,'flex xs12 list-item list-item-large')])[1]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(2000);
+        Thread.sleep(2000);
         Element_By_Path_Click("Click > 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", ParentTest, "no_jira"); 
