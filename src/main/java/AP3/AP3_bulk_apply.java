@@ -76,7 +76,7 @@ class AP3_bulk_apply extends AP3_GUI{
         String menuName = "";
 
         
-            Call_API("Find 'Sides' MenuID", "", BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
+            Call_API("Find 'Sides' MenuID", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
             try {
                 API_Response_Body = t;               
                 json = new JSONObject(API_Response_Body);

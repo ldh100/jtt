@@ -578,18 +578,24 @@ class AP3_sales_analytics extends AP3_GUI{
             _f++; EX += _t + "\t" + "Verify List Size of Active Stations" + "\t" + "\t" + "Output: " + L2.size() + " / Expected: $ " + initalSizeOfSelectedStations + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";  
             Log_Html_Result("FAIL", "Output: " + L2.size() + " / Expected: $ " + initalSizeOfSelectedStations, true, ParentTest.createNode("Verify List of Active Stations"));
         }
-        Refresh("Reload page", ParentTest, "no_jira");
+        Element_By_Path_Click("Click > 'Apply'", "xpath", "(//*[text()='Apply']/parent::button)[2]", ParentTest, "no_jira");
+        if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(text(), 'Sales Analytics')]", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        Element_By_Path_Click("Click > 'Select Station' dropdown", "xpath", "//*[text()='Select Station']/following-sibling::*[@class='v-select__selections']", ParentTest,"no_jira");
+        if (FAIL) { return;}
+        Wait_For_Element_By_Path_Presence("Wait (if needed) for dd to appear", "xpath", "//*[@class='v-list v-list--dense theme--light']", ParentTest, "no_jira");
         if (FAIL) { return;}
         List_L0("Get List of Stations", "xpath", "(//div[@class='v-select-list v-card theme--light'])[3]//a[@class='v-list__tile v-list__tile--link theme--light']", ParentTest, "no_jira");
         if (FAIL) { return;}
         for (int i = 1; i < L0.size(); i++) {
-            Element_Attribute("Get 'class' value of Station" + (i+1), L2.get(i), "class", ParentTest, "no_jira");
+            Element_Attribute("Get 'class' value of Station " + i, L0.get(i), "class", ParentTest, "no_jira");
             if (FAIL) { return;}
             if (!t.contains("active")) {
-                Element_Child_Text("Get Station Name", L2.get(i), "xpath", "//div[contains(text(),'Chick-fil-a')]", ParentTest, "no_jira");
+                Element_Child_Text("Get Station Name", L0.get(i), "xpath", "//div[contains(text(),'Chick-fil-a')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
                 if (!t.equals("Chick-fil-a")) {
-                    Element_Click("Select 'Stations'", L2.get(i), ParentTest, "no_jira");
+                    Element_Click("Select 'Stations'", L0.get(i), ParentTest, "no_jira");
                     if (FAIL) { return;}
                 } 
             } 
