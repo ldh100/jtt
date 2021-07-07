@@ -2,12 +2,15 @@ package AP3;
 
 import java.time.LocalDateTime;
 import java.util.Calendar;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
 class AP3_brand_new extends AP3_GUI {
 
+    private String stationName = "";
     protected AP3_brand_new(AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
@@ -26,6 +29,7 @@ class AP3_brand_new extends AP3_GUI {
         BRAND = a.BRAND;
         BrandID = a.BrandID;
         SECTOR = a.SECTOR;
+        SectorID = a.SectorID;
         GL_MENU = a.GL_MENU;
 
         AP3_TKN = a.AP3_TKN;
@@ -33,8 +37,10 @@ class AP3_brand_new extends AP3_GUI {
         New_ID = a.New_ID;
         TZone = a.TZone;
     }
-    private String stationName = "";
-
+    private String API_Response_Body = "";
+    private String JDE_id = "";
+    private String JDE_category = ""; 
+    private boolean flag = false;
     protected void run(boolean NEW_SITE) {
     try{    
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");
@@ -341,7 +347,18 @@ class AP3_brand_new extends AP3_GUI {
                     if (FAIL) {
                         return;
                     }
-
+ /* Date : July 6th 2021
+    Commenting until JDE ticket get released to staging and production. AUT 1004
+    Tested on DEV - works fine                
+                    //Verify if JDE category is auto assigned based on the global menu.
+                    Verify_Sector_JDE_API();  //Verify is global menu has JDE category assigned to it.
+                    if(flag)
+                    {
+                        Element_By_Path_Attribute("Get Auto assigned JDE Category", "xpath", "(//div[@class='v-select__selections'])[4]//div[@class='v-select__selection v-select__selection--comma']", "innerHTML", ParentTest, "no_jira");
+                        if(FAIL){return;}
+                        Verify_JDE_API(t);
+                    }
+*/
                     Element_By_Path_Click("Timeslot Length Click", "css", "[aria-label='Tax Rate']", ParentTest, "no_jira");
                     if (FAIL) {
                         return;
@@ -1812,5 +1829,88 @@ class AP3_brand_new extends AP3_GUI {
     } catch (Exception ex){}   // =============================================  
     } 
     // </editor-fold> 
+
+    private void Verify_Sector_JDE_API() throws Exception {
+       try{
+        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == JDE API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
+       
+        Call_API("Call /Sector/ API ", "Bearer " + AP3_TKN, BaseAPI + "/location/sector/" +SectorID+"?nocache=1", true, ParentTest, "no_jira" );
+        if(t.startsWith("{")){
+            API_Response_Body = t;               
+        }else{
+            EX += _t + "\t == " + "API Response Error" + "\t" + BaseAPI + "/location/sector/" +SectorID  + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/sector/"+SectorID, false, ParentTest.createNode("API Responce Error"));
+            return;
+        }
+        
+        JSONObject json = new JSONObject(API_Response_Body);
+        JSONArray JDE_companies = new JSONArray();
+        JDE_companies = json.getJSONArray("companies");
+        JSONObject company = new JSONObject();
+        for(int i = 0;i<JDE_companies.length();i++)
+        {
+          company = JDE_companies.getJSONObject(i);
+          if(company.getString("name").equals(GL_MENU))
+          {
+              if(company.getJSONObject("meta").has("jde_category"))
+              {
+                 //Print Pass new created brand has JDE category auto assigned
+                    JDE_id = company.getJSONObject("meta").getString("jde_category");
+                    _t++; _p++;
+                    EX += _t + "\t" + "JDE Category auto assigned to global menu" + "\t" + "-" + "\t" + "JDE API ID: " +company.getJSONObject("meta").getString("jde_category")  + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("PASS", "JDE Category auto assigned to global menu : " + JDE_id, false, ParentTest.createNode("JDE Category assigned correctly"));
+                    flag = true;
+                    break;
+              }
+              else
+              {     //Print fail
+                  _t++; _f++;
+                  EX += _t + "\t" + "JDE Category  assigned to Global menu incorrectly" + "\t" + "JDE ID: " + JDE_id + "\t" + "JDE API ID: " +company.getJSONObject("meta").getString("jde_category")  + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                  Log_Html_Result("FAIL", "JDE Category assigned to global menu incorrectly: "+company.getJSONObject("meta").getString("jde_category") , false, ParentTest.createNode("JDE Category assigned incorrectly"));
+                  flag = false;
+              }
+          }
+          
+        }   EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == JDE API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
+       }catch (Exception ex){}   // =============================================
+    }//End of Sector_JDE_API
+
+    private void Verify_JDE_API(String JDE_category) throws Exception {
+       
+        try{
+       
+        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == JDE API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
+        Call_API("Call /JDE/ API ", "Bearer " + AP3_TKN, BaseAPI + "/config/jde-configuration", true, ParentTest, "no_jira" );
+        if(t.startsWith("{")){
+            API_Response_Body = t;               
+        }else{
+            EX += _t + "\t == " + "API Response Error" + "\t" + BaseAPI + "/config/jde-configuration" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/jde-configuration", false, ParentTest.createNode("API Responce Error"));
+           // return;
+        }
+        
+        JSONObject json = new JSONObject(API_Response_Body);
+        JSONArray JDE_categories = new JSONArray();
+        JDE_categories = json.getJSONArray("jde_categories");
+        for(int i = 0;i<JDE_categories.length();i++)
+        {
+             if(JDE_categories.getJSONObject(i).getString("name").equals(JDE_category))
+             {
+                 if(JDE_id.equals(JDE_categories.getJSONObject(i).getString("id")))
+                 {
+                  _t++; _p++;
+                  EX += _t + "\t" + "JDE Category UI : "+JDE_category + "\t" + "JDE UI ID: "+JDE_id  + "\t" + "JDE Category API: " +JDE_category+ "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                  Log_Html_Result("PASS", "JDE Category and ID : " +JDE_id, false, ParentTest.createNode("JDE Category & ID"));
+                 }
+             }
+        }
+        EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == JDE API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
+       
+        } catch (Exception ex){}   // =============================================
+         
+    }//End of JDE_API
+    
 } 
 // End of AP3_Brand_New
