@@ -881,7 +881,7 @@ public class A extends javax.swing.JFrame {
 
     private void Menu_EnvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_EnvMouseClicked
         if(Menu_Env.isVisible()){
-            Menu_AP3.setVisible(false);
+            Menu_Env.setVisible(false);
             MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             try {
