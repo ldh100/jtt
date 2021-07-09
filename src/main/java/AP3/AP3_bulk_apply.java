@@ -156,13 +156,10 @@ class AP3_bulk_apply extends AP3_GUI{
             Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(2000);
-            if (!env.equals("PR")) {
+           
                 Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            } else {
-                Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            } 
+           
             Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
                 if (FAIL) { return;}
             Thread.sleep(500);    
@@ -265,13 +262,10 @@ class AP3_bulk_apply extends AP3_GUI{
         Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(2000);
-        if (!env.equals("PR")) { // ============== Why Different ????
+
             Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        } else {
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        }        
+       
         //Open Bulk Apply Side Panel for all items and verify side panel
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
@@ -331,13 +325,10 @@ class AP3_bulk_apply extends AP3_GUI{
             Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is In Stock", "xpath", "((//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[8])//input[@aria-checked='true']", ParentTest, "no_jira");
             if (FAIL) { return;}
         }
-        if (!env.equals("PR")) {
+
             Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
                 if (FAIL) { return;}
-        } else {
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-        }
+
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500);              
@@ -363,13 +354,10 @@ class AP3_bulk_apply extends AP3_GUI{
             Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is visible", "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//i[contains(@class,'mdi-eye ')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         }
-        if (!env.equals("PR")) {
+
             Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        } else {
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        }
+
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500);              
@@ -402,13 +390,10 @@ class AP3_bulk_apply extends AP3_GUI{
         Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(2000);
-        if (!env.equals("PR")) {
+
             Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        } else {
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        }
+
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500);              
@@ -763,13 +748,10 @@ class AP3_bulk_apply extends AP3_GUI{
         Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(2000);
-        if (!env.equals("PR")) {
+
             Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        } else {
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        }
+
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500);
@@ -810,13 +792,10 @@ class AP3_bulk_apply extends AP3_GUI{
             Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is Enabled", "xpath", "((//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[4])//input[@aria-checked='true']", ParentTest, "no_jira");
             if (FAIL) { return;}
         }
-        if (!env.equals("PR")) {
+
             Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        } else {
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        }
+
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500);
@@ -844,13 +823,10 @@ class AP3_bulk_apply extends AP3_GUI{
             Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" has a PLU number", "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[contains(text(),'"+PLU+"')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
         }
-        if (!env.equals("PR")) {
+
             Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
                 if (FAIL) { return;}
-        } else {
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-        }
+
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500);              
@@ -872,13 +848,10 @@ class AP3_bulk_apply extends AP3_GUI{
         
         // <editor-fold defaultstate="collapsed" desc="Bulk Update Global Modifiers">  
         EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Update Global Modifiers" + "\t" + " == Bulk Update Global Modifiers >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-        if (!env.equals("PR")) {
+
             Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
                 if (FAIL) { return;}
-        } else {
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-        }
+
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500);              
@@ -1043,7 +1016,10 @@ class AP3_bulk_apply extends AP3_GUI{
         Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
-        Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
+
+            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+   
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}    
@@ -1130,13 +1106,10 @@ class AP3_bulk_apply extends AP3_GUI{
             Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
         }           
-        if (!env.equals("PR")) {
+
             Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        } else {
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-        }
+
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500); 

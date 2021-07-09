@@ -3,6 +3,7 @@ package AP3;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import org.joda.time.DateTime;
@@ -45,7 +46,7 @@ class AP3_sales_analytics extends AP3_GUI{
     String API_Response_Body = "";
     String[] expectedDateRanges = {"Today", "Yesterday", "Last 7 Days", "Last Week", "Last 30 Days", "Last 90 Days", "Last Month", "Last Year", "Custom"};
     String[] brandNames = {"subeway", "drexler's bbq", "chick-fil-a", "starbucks", "freshii", "pizza hut", "einstein bros. bagels", "taco cabana", "taco bell"};
-    
+
     protected void run() {
         try {
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Sales Analytics Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -53,6 +54,8 @@ class AP3_sales_analytics extends AP3_GUI{
         if (!env.equals("PR")) {
             BaseAPI = BaseAPI.replace("staging", "v1");
             AP3_TKN = "eyJhbGciOiJLTVMiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiJEOHJCMTVyTURxU21nRVl5UXFwS1RxNTFxSjlXemFmd1JQQWw2ZTJESXp2ZGthRDNKYVNRWGdRMjJQV3JjejFyREV6dzJMZnYzUERSejR2ZHNPTVkiLCJzY29wZXMiOiIqOiogKjp1c2VyIGFkbWluX3JvbGU6KjoqIHdyaXRlOm9yZGVyOiogKjp1c2VyOiogKjpicmFuZDoqICo6bG9jYXRpb246KiAqOmdyb3VwOiogKjpjb25maWc6KiByZWFkOm9yZGVyOiogKjpzZWN0b3I6KiAqOm11bHRpZ3JvdXA6KiAqOm1lbnU6KiAqOmNhbGVuZGFyOiogd3JpdGU6ZmlsZToqIHJlYWQ6YWN0aW9uOiogKjpwcm9tbzoqICo6YW5ub3VuY2VtZW50OiogcmVhZDprZHM6KiByZWFkOmFuYWx5dGljczoqIGRlbGV0ZTprZHM6KiAqOm5vdGlmaWNhdGlvbjoqIiwiaWF0IjoxNjI0OTc4Njk0LCJleHAiOjE2MzI3NTQ2OTV9.AQICAHg3B+yaImOx8iePCmKXjUT1mJ+gyTV+zezNpAJjOkZbFgEfcQQQNvOJJtRaqbl1f+UyAAACpzCCAqMGCSqGSIb3DQEHBqCCApQwggKQAgEAMIICiQYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAyEvguZdCxruoMmXrACARCAggJao4ODwqlUg+WmlXrnj6eyq2YXw9sb88R2/mJ0jN/GVvgyK3f18BpLzxHD+Zz8PF+tFRH0XOHQPKiTcwfZvHYviuork9c8elRkFjy/PrYONVU5SKwQqmINCw/V583o5QLGqrpe4igWtFtc8UyLDwesjQD2JbgQFmrNsIF0tdZeKGjoQbYJtcruBIqFHDCnC8sM1MNYUfskeAm+W1O+K7AQX8/Om/kiwqZnvpJ7NocggWyYjweVvrV1p6NL2cvG1HbVife+Ji99fKh2UvroJOwtJVsYQmwIGG/CI+Ad4SeMGEK15D4rkBk930WKCwbz8DQu6Tx7e5EkatiQPxR1e/cbYPPiyNNO75qv8xPyiF78DLe7Elc9ypNqUpWuv/OwV3oQsRWD1lrMyXYeDzZ0COogK2WYekCyOmTTDEMNslFb0if9iugdqp6VTqw8z4Z11ORWy4v1YwuG1Pnm6YEd/ePZG3gsy8ZnTwJBKSCrFMhJ07o0jQ9GXATLecWickQ2C1KHvvquRiwHNm2ws+QfffTwjIC14TQV07uG1+3HS7FMX91HvFQSVg30fBp5UU2UzcgevVDSZXym6binE54udK10G05q35qnJQCGOnCXIeM4iXNms49oz1TKvkQkfNtfq0WEFYR7S9VcNiIPt5LJS8UeB7uS3DVhwAZlYbWD7WKqIHyh3adpZ3nOVXq6W6ffYAYngM5fT+NuEf+BoD9pZnMgn7it4UOvZSucy9LGvsWaA37ulMeD78uHTrorgEHXOfNot7DiQfPlnQT6lpBiUJZKlP7STtHxD0sAztw=";
+        } else {
+            brandNames[9] = "mondo subs";
         }
         
         ArrayList<String> brandIds = new ArrayList<String>();       
@@ -76,17 +79,14 @@ class AP3_sales_analytics extends AP3_GUI{
             JSONArray brands = location.getJSONArray("brands");
             for (int k = 0; k < brands.length(); k++) {
                 JSONObject brand = brands.getJSONObject(k);
-                for (int j = 0; j < brandNames.length; j++) {
-                    if (brandNames[j].contains(brand.getString("name").toLowerCase())) {
-                        brandIds.add(brand.getString("id"));
-                        if (brand.getString("name").equalsIgnoreCase("chick-fil-a")) {
-                            brand1 = brand.getString("id");
-                        } else if (brand.getString("name").equals("STARBUCKS")) {
-                            //brand2 = brand.getString("id");
-                        }
-                    }
-                }
-                
+                if (Arrays.stream(brandNames).anyMatch(brand.getString("name").toLowerCase()::equals)) {
+                    brandIds.add(brand.getString("id"));
+                    if (brand.getString("name").equalsIgnoreCase("chick-fil-a")) {
+                        brand1 = brand.getString("id");
+                    } else if (brand.getString("name").equals("STARBUCKS")) {
+                        //brand2 = brand.getString("id");
+                    }                   
+                }                
             }
         }      
 
