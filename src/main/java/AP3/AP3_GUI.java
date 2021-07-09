@@ -2781,21 +2781,21 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }          
         if(_Sales_analytics){
-            SCOPE += ", Promo";
+            SCOPE += ", Sales Analytics";
             ParentTest = HtmlReport.createTest("Sales Analytics"); 
             AP3_sales_analytics BR = new AP3.AP3_sales_analytics(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         } 
         if(_Sales_reporting){
-            SCOPE += ", Promo";
-            ParentTest = HtmlReport.createTest("_Sales_reporting"); 
+            SCOPE += ", Sales Reporting";
+            ParentTest = HtmlReport.createTest("Sales Reporting"); 
             AP3_sales_reporting BR = new AP3.AP3_sales_reporting(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }         
         if(_Sales_report_hidden){
-            SCOPE += ", Promo";
+            SCOPE += ", Sales Report Hidden";
             ParentTest = HtmlReport.createTest("Sales Report Hidden"); 
             AP3_sales_reporting_for_hidden_stations BR = new AP3.AP3_sales_reporting_for_hidden_stations(AP3_GUI.this);
             BR.run(); // ======================================
