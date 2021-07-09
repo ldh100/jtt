@@ -50,6 +50,7 @@ import java.util.function.Function;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.SwingWorker;
@@ -235,7 +236,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         DV1.setCellSelectionEnabled(true);
         DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV1.setName("DV1"); // NOI18N
-        DV1.setRequestFocusEnabled(false);
         DV1.setRowHeight(18);
         DV1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         DV1.getTableHeader().setReorderingAllowed(false);
@@ -260,7 +260,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         DV2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV2.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV2.setName("DV2"); // NOI18N
-        DV2.setOpaque(false);
         DV2.setRowHeight(18);
         DV2.getTableHeader().setReorderingAllowed(false);
         DV2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1046,7 +1045,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             this.setTitle("AP3 Automation Manager >>> Changing Environment,  please wait...");
             GUI_Load_Env();
-            this.setTitle("AP3 Automation Manager (New)");
+            this.setTitle("AP3 Automation Manager");
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
@@ -1078,7 +1077,10 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         if(!btnRun.isEnabled()){
             return;
         }
-        GUI_Run_Manual();
+        if(env.equals("PR") && !ProdSiteOK()){
+            return;          
+        } 
+        GUI_Run_Manual();  
     }//GEN-LAST:event_btnRunMouseClicked
     // </editor-fold>
     
@@ -1118,7 +1120,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         GUI_Load_Env();
         app = cmbApp.getSelectedItem().toString();
         CONFIG = false;  
-        this.setTitle("AP3 Automation Manager (New)");
+        this.setTitle("AP3 Automation Manager");
     }
     private void GUI_Load_Env(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
@@ -1274,7 +1276,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                     }
                 }
             } 
-//            DV1.repaint();
             SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
             SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
             GUI_Get_Brands();
@@ -2206,6 +2207,22 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             return "ERROR > " + ex.getMessage();
         }
     }
+    private boolean ProdSiteOK(){
+        String App = "";
+        String Site = "";
+        if(!((app.equals("Boost") && SITE.equals("QA University"))
+            || (app.equals("Thrive") && SITE.equals("Compass Labs QA Only")))){
+            JOptionPane.showMessageDialog(this,
+            "Please select QA Production Site to run Automation:" +  System.getProperty("line.separator") +
+            " = Boost > 'QA University'" +  System.getProperty("line.separator") +
+            " = Thrive > 'Compass Labs QA Only'" +  System.getProperty("line.separator") +
+            " = No AP3 Automation on other apps"               
+                    ); 
+            return false;
+        } else{
+            return true;
+        }
+    }
     // </editor-fold> 
 
     //<editor-fold defaultstate="collapsed" desc="Extend HTML Report Methods">
@@ -2764,21 +2781,21 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }          
         if(_Sales_analytics){
-            SCOPE += ", Promo";
+            SCOPE += ", Sales Analytics";
             ParentTest = HtmlReport.createTest("Sales Analytics"); 
             AP3_sales_analytics BR = new AP3.AP3_sales_analytics(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         } 
         if(_Sales_reporting){
-            SCOPE += ", Promo";
-            ParentTest = HtmlReport.createTest("_Sales_reporting"); 
+            SCOPE += ", Sales Reporting";
+            ParentTest = HtmlReport.createTest("Sales Reporting"); 
             AP3_sales_reporting BR = new AP3.AP3_sales_reporting(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }         
         if(_Sales_report_hidden){
-            SCOPE += ", Promo";
+            SCOPE += ", Sales Report Hidden";
             ParentTest = HtmlReport.createTest("Sales Report Hidden"); 
             AP3_sales_reporting_for_hidden_stations BR = new AP3.AP3_sales_reporting_for_hidden_stations(AP3_GUI.this);
             BR.run(); // ======================================

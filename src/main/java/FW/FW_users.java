@@ -7,13 +7,10 @@ package FW;
 import WO.*;
 import A.TWeb;
 import static A.A.*;
-import static WO.WO.*;
+import static WO.WO_GUI.*;
 import java.util.Iterator;
 import java.util.Set;
-/**
- *
- * @author Oleg.Spozito
- */
+
 public class FW_users {
     public static void run() throws InterruptedException { 
     
@@ -228,15 +225,15 @@ public class FW_users {
     // ************************************************************** Search field ******************************************************************
     // <editor-fold defaultstate="collapsed" desc="Search User ">   
       
-        _t++;Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Search for a user", "xpath", "//input[@placeholder = 'Search']", "Rp", FAIL, url);
+        _t++;Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Search for a user", "xpath", "//input[@placeholder = 'Search']", "Rp", FAIL, "no_jira");
         if (FAIL) { return;}Thread.sleep(1000);
         _t++;Thread.sleep((long)sleep); TWeb.Element_By_Path_Input_Select_Clear("Clear", "xpath", "//input[@placeholder = 'Search']", "no_jira");
         if (FAIL) { return;}
-        _t++;Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Search for a user", "xpath", "//input[@placeholder = 'Search']", "Foodworks manager", FAIL, url);
+        _t++;Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Search for a user", "xpath", "//input[@placeholder = 'Search']", "Foodworks manager", FAIL, "no_jira");
         if (FAIL) { return;}Thread.sleep(1000);
           _t++;Thread.sleep((long)sleep); TWeb.Element_By_Path_Input_Select_Clear("Clear", "xpath", "//input[@placeholder = 'Search']", "no_jira");
           if (FAIL) { return;}
-          _t++;Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Search for a user", "xpath", "//input[@placeholder = 'Search']", "Deactivated", FAIL, url);
+          _t++;Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Search for a user", "xpath", "//input[@placeholder = 'Search']", "Deactivated", FAIL, "no_jira");
         if (FAIL) { return;}Thread.sleep(1000);
          _t++;Thread.sleep((long)sleep); TWeb.Element_By_Path_Input_Select_Clear("Clear", "xpath", "//input[@placeholder = 'Search']", "no_jira");
          if (FAIL) { return;}
@@ -290,7 +287,7 @@ public class FW_users {
     
     //*************************************************************** Deactivate User *************************************************************
     // <editor-fold defaultstate="collapsed" desc="Deactivate user ">
-//    _t++;Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Search for a user", "xpath", "//input[@placeholder = 'Search']", "delete", FAIL, url);
+//    _t++;Thread.sleep((long)sleep); TWeb.Element_By_Path_Text_Enter("Search for a user", "xpath", "//input[@placeholder = 'Search']", "delete", FAIL, "no_jira");
 //    if (FAIL) { return;}Thread.sleep(1000);
 //    
 //    _t++; Thread.sleep((long) sleep); TWeb.List_L0("Users Data row Count", "tagName", "tr", "no_jira");  

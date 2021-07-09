@@ -647,16 +647,23 @@ class AP3_mm_items extends AP3_GUI{
         EX += " - " + "\t" + " === Navigate to Global Menu and Make Changes" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID, ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(5000);
-        Element_By_Path_Click("Click > 'Breakfast' Category", "xpath", "//*[contains(text(),'Breakfast')][1]/parent::span", ParentTest, "no_jira"); 
+        Wait_For_Element_By_Path_Presence("Wait for Global Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
+        if (FAIL) { return;}
+        Element_By_Path_Text("Get First Category", "xpath", "(//*[@class='listspan'])[1]/div", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        String Category = t;
+        Element_By_Path_Click("Click > '"+Category+"' Category", "xpath", "//*[contains(text(),'"+Category+"')][1]/parent::span", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(2000);
+        Wait_For_Element_By_Path_Presence("Wait for Items table", "xpath", "//*[text()='Menu Version: 2']", ParentTest,"no_jira");
+        if (FAIL) { return;}
         Element_By_Path_Click("Click > 'EDIT MENU'", "xpath", "//*[contains(text(),'EDIT MENU')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(1000);
+        Wait_For_Element_By_Path_Presence("Wait for Edit mode", "xpath", "//*[text()='You are editing this menu']", ParentTest,"no_jira");
+        if (FAIL) { return;}
         Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-
+        Wait_For_Element_By_Path_Presence("Wait for Edit Item side panel", "xpath", "(//aside[contains(@class,'v-navigation-drawer')])[3]", ParentTest,"no_jira");
+        if (FAIL) { return;}
         // get item name
         Element_By_Path_Attribute("Get Current Item Name Value", "css", "[aria-label='Item Name']", "value", ParentTest, "no_jira");
         if (FAIL) { return;}
@@ -738,28 +745,32 @@ Thread.sleep(1000);
         }
         Element_By_Path_Click("Click > 'Apply Changes'", "xpath", "//*[contains(text(),'Apply Changes')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(2000);
+        Thread.sleep(1000);
         Element_By_Path_Click("Click > 'PUBLISH'", "xpath", "//*[contains(text(),'publish')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(2000);
+        Wait_For_Element_By_Path_Presence("Wait for publication", "xpath", "//*[contains(text(),'Last Published: ')]", ParentTest,"no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(500);
         EX += " - " + "\t" + " === Navigate to Local Menu and Check for Changes" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(2000);
-        Refresh("Refresh local menu page", ParentTest, "no_jira");
-Thread.sleep(3000);
-        Element_By_Path_Click("Click > 'Breakfast' Category", "xpath", "//*[contains(text(),'Breakfast')][1]/parent::span", ParentTest, "no_jira"); 
+        Wait_For_Element_By_Path_Presence("Wait for Local Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
+        if (FAIL) { return;}
+        Element_By_Path_Click("Click > '"+Category+"' Category", "xpath", "//*[contains(text(),'"+Category+"')][1]/parent::span", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(2000);
+        Wait_For_Element_By_Path_Presence("Wait for Items table", "xpath", "//*[text()='Menu Version: 2']", ParentTest,"no_jira");
+        if (FAIL) { return;}
         // get name and check if it changed
         Element_By_Path_Text("Get Item Name in Local Menu", "xpath", "//tr[1]/td[3]", ParentTest, "no_jira");
             if (FAIL) { return;}
         if (!NBC.equals(t)) {
             _t++;
             _p++; EX += _t + "\t" + "Check > Item Name was Updated in Local Menu" + "\t" + "-" + "\t" + "Local Menu Item Name Updated" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "Local Menu Item Name Updated to " + t, false, ParentTest.createNode("Check > Item Name was Updated in Local Menu"));
         } else {
             _t++;
             _f++; EX += _t + "\t" + "Check > Item Name was Updated in Local Menu" + "\t" + "-" + "\t" + "Local Menu Item Name Updated" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";   
+            Log_Html_Result("FAIL", "Local Menu Item Name Not Updated to " + t, true, ParentTest.createNode("Check > Item Name was Updated in Local Menu"));
         }
         // get price and check if it changed
         Element_By_Path_Text("Get Price in Local Menu", "xpath", "//tr[1]/td[5]", ParentTest, "no_jira");
@@ -767,9 +778,11 @@ Thread.sleep(2000);
         if (!PBC.equals(t)) {
             _t++;
             _p++; EX += _t + "\t" + "Check > Price was Updated in Local Menu" + "\t" + "-" + "\t" + "Local Menu Price Updated" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";          
+            Log_Html_Result("PASS", "Local Menu Price Updated to " + t, false, ParentTest.createNode("Check > Price was Updated in Local Menu"));
         } else {
              _t++;
              _f++; EX += _t + "\t" + "Check > Price was Updated in Local Menu" + "\t" + "-" + "\t" + "Local Menu Price Updated" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";         
+             Log_Html_Result("FAIL", "Local Menu Price Not Updated to " + t, true, ParentTest.createNode("Check > Price was Updated in Local Menu"));
         }
         // get calories and check if it changed
         Element_By_Path_Text("Get Calories in Local Menu", "xpath", "//tr[1]/td[8]", ParentTest, "no_jira");
@@ -777,9 +790,11 @@ Thread.sleep(2000);
         if (!CBC.equals(t)) {
             _t++;
             _p++; EX += _t + "\t" + "Check > Calories was Updated in Local Menu" + "\t" + "-" + "\t" + "Local Menu Calories Updated" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";          
+            Log_Html_Result("PASS", "Local Menu Calories Updated to " + t, false, ParentTest.createNode("Check > Calories was Updated in Local Menu"));
         } else {
             _t++;
             _f++; EX += _t + "\t" + "Check > Calories was Updated in Local Menu" + "\t" + "-" + "\t" + "Local Menu Calories Updated" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";    
+            Log_Html_Result("FAIL", "Local Menu Calories Not Updated to " + t, true, ParentTest.createNode("Check > Calories was Updated in Local Menu"));
         }
         // get units and check if it changed
         Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", ParentTest, "no_jira"); 
@@ -789,9 +804,11 @@ Thread.sleep(2000);
         if (!UBC.equals(t)) {
             _t++;
             _p++; EX += _t + "\t" + "Check > Units was Updated in Local Menu" + "\t" + "-" + "\t" + "Local Menu Units Updated" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "Local Menu Units Updated to " + t, false, ParentTest.createNode("Check > Units was Updated in Local Menu"));
         } else {
             _t++;
             _f++; EX += _t + "\t" + "Check > Units was Updated in Local Menu" + "\t" + "-" + "\t" + "Local Menu Units Updated" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";    
+            Log_Html_Result("FAIL", "Local Menu Units Not Updated to " + t, true, ParentTest.createNode("Check > Units was Updated in Local Menu"));
         }
         EX += " - " + "\t" + " === Changes in Global Menu Item Reflect on Local Menu Item" + "\t" + " ===== " + "\t" + " == Changes in Global Menu Item Reflect on Local Menu Item End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n"; 
         // </editor-fold> 
@@ -800,11 +817,12 @@ Thread.sleep(2000);
         EX += " - " + "\t" + " === Manipulate Global Modifiers" + "\t" + " ===== " + "\t" + " == Manipulate Global Modifiers Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n"; 
         Navigate_to_URL("Navigate to Global Modifiers", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/globalmods/", ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(6000);
+        Wait_For_Element_By_Path_Presence("Wait for Modifier Group", "xpath", "//*[contains(text(),'MMTG')]", ParentTest,"no_jira");
+        if (FAIL) { return;}
         Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'MMTG')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
+            if (FAIL) { return;}      
         EX += " - " + "\t" + " === Update existing modifier" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-        Element_By_Path_Click("Click > Modifiers Area", "xpath", "//div[contains(@class,'layout modifier')]", ParentTest, "no_jira");
+        Wait_For_Element_By_Path_Presence("Wait for Modifier side panel", "xpath", "//div[contains(@class,'layout modifier')]", ParentTest,"no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Click > Item Name Field on Existing Modifier", "xpath", "(//*[@aria-label='Item Name'])[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -879,19 +897,25 @@ Thread.sleep(6000);
             if (FAIL) { return;}
         Element_By_Path_Click("Click > 'Apply Changes'", "xpath", "//*[contains(text(), 'Apply Changes')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(3000);
+        Thread.sleep(1000);
         Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'publish')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(5000);
+        Wait_For_Element_By_Path_Presence("Wait for publication", "xpath", "//*[contains(text(),'publish')]/parent::button[contains(@class,'disabled')]", ParentTest,"no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(500);
         EX += " - " + "\t" + " === Check modifier changes in Global Menu item" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID, ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(5000);
-        Element_By_Path_Click("Click > 'Lunch' Category", "xpath", "(//div[contains(@class,'flex xs12 list-item list-item-large')])[1]", ParentTest, "no_jira"); 
+        Wait_For_Element_By_Path_Presence("Wait for Global Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
+        if (FAIL) { return;}
+        Element_By_Path_Click("Click > '"+Category+"' Category", "xpath", "//*[contains(text(),'"+Category+"')][1]/parent::span", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(2000);
+        Wait_For_Element_By_Path_Presence("Wait for Items table", "xpath", "//*[text()='Menu Version: 2']", ParentTest,"no_jira");
+        if (FAIL) { return;}
         Element_By_Path_Click("Click > Second Item", "xpath", "//table/tbody/tr[2]/td[3]", ParentTest, "no_jira"); 
-            if (FAIL) { return;} 
+            if (FAIL) { return;}
+        Wait_For_Element_By_Path_Presence("Wait for Item side panel", "xpath", "(//aside[contains(@class,'v-navigation-drawer')])[3]", ParentTest,"no_jira");
+        if (FAIL) { return;}
         Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'Modifier Manipulation')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         if (!NBC.contains("-upd")) {
@@ -930,15 +954,16 @@ Thread.sleep(2000);
         EX += " - " + "\t" + " === Check modifier changes in Local Menu item" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(2000);
-        Refresh("Refresh local menu page", ParentTest, "no_jira");
-Thread.sleep(3000);
-        Element_By_Path_Click("Click > 'Lunch' Category", "xpath", "//*[contains(text(),'Lunch')][1]/parent::span", ParentTest, "no_jira"); 
+        Wait_For_Element_By_Path_Presence("Wait for Local Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
+        if (FAIL) { return;}
+        Element_By_Path_Click("Click > '"+Category+"' Category", "xpath", "//*[contains(text(),'"+Category+"')][1]/parent::span", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(2000);
+        Wait_For_Element_By_Path_Presence("Wait for Items table", "xpath", "//*[text()='Menu Version: 2']", ParentTest,"no_jira");
+        if (FAIL) { return;}
         Element_By_Path_Click("Click > Second Item", "xpath", "//table/tbody/tr[2]/td[3]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-
+        Wait_For_Element_By_Path_Presence("Wait for Item side panel", "xpath", "(//aside[contains(@class,'v-navigation-drawer')])[3]", ParentTest,"no_jira");
+        if (FAIL) { return;}
         Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'Modifier Manipulation')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         if (!NBC.contains("-upd")) {
@@ -977,8 +1002,9 @@ Thread.sleep(2000);
         EX += " - " + "\t" + " === Delete new modifier from the group" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         Navigate_to_URL("Navigate to Global Modifiers", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/globalmods/", ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(5000);
-        Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'Modifier Manipulation')]", ParentTest, "no_jira");
+        Wait_For_Element_By_Path_Presence("Wait for Modifier Group", "xpath", "//*[contains(text(),'MMTG')]", ParentTest,"no_jira");
+        if (FAIL) { return;}
+        Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'MMTG')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Move_to_Element_By_Path("Move > New Modifier", "xpath", "(//*[contains(@class,'layout modifier')])[2]", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -986,20 +1012,25 @@ Thread.sleep(5000);
             if (FAIL) { return;}
         Element_By_Path_Click("Click > 'Apply Changes'", "xpath", "//*[contains(text(), 'Apply Changes')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(3000);
+        Thread.sleep(1000);
         Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'publish')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(5000);
+        Wait_For_Element_By_Path_Presence("Wait for publication", "xpath", "//*[contains(text(),'publish')]/parent::button[contains(@class,'disabled')]", ParentTest,"no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(500);
         EX += " - " + "\t" + " === Check new modifier no longer exists in Global Menu item" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID, ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(5000);
-        Element_By_Path_Click("Click > 'Lunch' Category", "xpath", "(//div[contains(@class,'flex xs12 list-item list-item-large')])[1]", ParentTest, "no_jira"); 
+        Wait_For_Element_By_Path_Presence("Wait for Global Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
+        if (FAIL) { return;}
+        Element_By_Path_Click("Click > '"+Category+"' Category", "xpath", "//*[contains(text(),'"+Category+"')][1]/parent::span", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(2000);
+        Wait_For_Element_By_Path_Presence("Wait for Items table", "xpath", "//*[text()='Menu Version: 2']", ParentTest,"no_jira");
+        if (FAIL) { return;}
         Element_By_Path_Click("Click > Second Item", "xpath", "//table/tbody/tr[2]/td[3]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-
+        Wait_For_Element_By_Path_Presence("Wait for Item side panel", "xpath", "(//aside[contains(@class,'v-navigation-drawer')])[3]", ParentTest,"no_jira");
+        if (FAIL) { return;}
         Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'Modifier Manipulation')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_InVisibility("Check > New Modifier no longer exists", "xpath", "//*[contains(text(),'adddeletemod')]", ParentTest, "no_jira");
@@ -1009,21 +1040,24 @@ Thread.sleep(2000);
         List_L0("Find Disabled elements", "xpath", "//div[@class='pa-0']/descendant::div[contains(@class,'disabled')]", ParentTest, "no_jira");
         if(L0.size()==6 || (L0.size()%6==0)) {
             _t++;
-            _p++; EX += _t + "\t" + "Price,Calories,PLU,Item Enabled,Chit,Tax tags" + "\t" +" Disabled " + "\t" + " - " + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            _p++; EX += _t + "\t" + "Price,Calories,PLU,Item Enabled,Chit,Tax tags" + "\t" + "Disabled" + "\t" + " - " + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "Disabled", false, ParentTest.createNode("Price,Calories,PLU,Item Enabled,Chit,Tax tags are disabled"));
         }
 
         
         EX += " - " + "\t" + " === Check new modifier no longer exists in Local Menu item" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(2000);
-        Refresh("Refresh local menu page", ParentTest, "no_jira");
-Thread.sleep(3000);
-        Element_By_Path_Click("Click > 'Lunch' Category", "xpath", "//*[contains(text(),'Lunch')][1]/parent::span", ParentTest, "no_jira"); 
+        Wait_For_Element_By_Path_Presence("Wait for Local Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
+        if (FAIL) { return;}
+        Element_By_Path_Click("Click > '"+Category+"' Category", "xpath", "//*[contains(text(),'"+Category+"')][1]/parent::span", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-Thread.sleep(2000);
+        Wait_For_Element_By_Path_Presence("Wait for Items table", "xpath", "//*[text()='Menu Version: 2']", ParentTest,"no_jira");
+        if (FAIL) { return;}
         Element_By_Path_Click("Click > Second Item", "xpath", "//table/tbody/tr[2]/td[3]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
+        Wait_For_Element_By_Path_Presence("Wait for Item side panel", "xpath", "(//aside[contains(@class,'v-navigation-drawer')])[3]", ParentTest,"no_jira");
+        if (FAIL) { return;}
         Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'Modifier Manipulation')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_InVisibility("Check > New Modifier no longer exists", "xpath", "//*[contains(text(),'adddeletemod')]", ParentTest, "no_jira");
