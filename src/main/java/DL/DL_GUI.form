@@ -462,6 +462,7 @@
                       <Component id="_insights" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
                       <Component id="_sanity" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace pref="9" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
