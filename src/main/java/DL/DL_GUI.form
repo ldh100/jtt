@@ -726,7 +726,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="100" y="60" width="116" height="22"/>
+              <AbsoluteConstraints x="100" y="60" width="110" height="22"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -788,11 +788,12 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Report to Slack"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="220" y="52" width="100" height="14"/>
+              <AbsoluteConstraints x="210" y="52" width="110" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -803,11 +804,12 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Headless &lt;&lt;&lt;&lt;"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="220" y="68" width="100" height="14"/>
+              <AbsoluteConstraints x="210" y="68" width="110" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
