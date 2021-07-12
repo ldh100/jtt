@@ -9,7 +9,7 @@ import A.TWeb;
 import static A.A.*;
 import static FW.FW.ADMIN_ID;
 import static FW.FW.ADMIN_PW;
-import static WO.WO.*;
+import static WO.WO_GUI.*;
 import java.util.Iterator;
 import java.util.Set;
 import org.openqa.selenium.By;

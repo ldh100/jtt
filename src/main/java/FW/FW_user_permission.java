@@ -8,7 +8,7 @@ import WO.*;
 import A.TWeb;
 import static A.A.*;
 import static FW.FW.ADMIN_PW;
-import static WO.WO.*;
+import static WO.WO_GUI.*;
 /**
  *
  * @author Oleg.Spozito
