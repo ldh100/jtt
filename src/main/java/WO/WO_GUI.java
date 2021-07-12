@@ -125,12 +125,13 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         _place_delivery_order = new javax.swing.JCheckBox();
         _password = new javax.swing.JCheckBox();
         _logout = new javax.swing.JCheckBox();
-        cmbPromo = new javax.swing.JComboBox<>();
         lblSITES8 = new javax.swing.JLabel();
         _place_pickup_order = new javax.swing.JCheckBox();
         _new_user = new javax.swing.JCheckBox();
         _order_email = new javax.swing.JCheckBox();
-        _expore_brand_menu = new javax.swing.JCheckBox();
+        _explore_brand_menu = new javax.swing.JCheckBox();
+        _promo = new javax.swing.JCheckBox();
+        txtPromo = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         cmbBrow = new javax.swing.JComboBox<>();
         btnRun = new javax.swing.JButton();
@@ -391,14 +392,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         _logout.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _logout.setRequestFocusEnabled(false);
 
-        cmbPromo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        cmbPromo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None" }));
-        cmbPromo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbPromoItemStateChanged(evt);
-            }
-        });
-
         lblSITES8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES8.setText("Promo Code");
@@ -422,13 +415,22 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         _order_email.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _order_email.setRequestFocusEnabled(false);
 
-        _expore_brand_menu.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _expore_brand_menu.setSelected(true);
-        _expore_brand_menu.setText("Explore Brand Menu");
-        _expore_brand_menu.setEnabled(false);
-        _expore_brand_menu.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _expore_brand_menu.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _expore_brand_menu.setRequestFocusEnabled(false);
+        _explore_brand_menu.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _explore_brand_menu.setSelected(true);
+        _explore_brand_menu.setText("Explore Brand Menu");
+        _explore_brand_menu.setEnabled(false);
+        _explore_brand_menu.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _explore_brand_menu.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _explore_brand_menu.setRequestFocusEnabled(false);
+
+        _promo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _promo.setText("Promo");
+        _promo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _promo.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _promo.setRequestFocusEnabled(false);
+
+        txtPromo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtPromo.setText("None");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -437,24 +439,27 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(_expore_brand_menu)
+                    .addComponent(_explore_brand_menu)
                     .addComponent(_order_status, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_edit_item, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_place_delivery_order, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_place_pickup_order, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_login)
-                    .addComponent(_order_email, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_order_email, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblSITES8)
-                        .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_order_history, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_account_settings, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_new_user, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(lblSITES8)
+                            .addGap(99, 99, 99))
+                        .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_order_history, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_account_settings, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_new_user, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -476,14 +481,16 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                                 .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblSITES8)
-                        .addGap(2, 2, 2)
-                        .addComponent(cmbPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPromo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(_order_status, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
-                        .addComponent(_expore_brand_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_explore_brand_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
                         .addComponent(_edit_item, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -623,13 +630,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     private boolean _Slack = false;
     private String Slack_Channel = "";
     private String Log = "";
-    private String access_key;
-    private String secret_key;
     
     private String HTML_Report_Path = null;
     private ExtentSparkReporter HtmlReporter;
     protected ExtentReports HtmlReport;
     protected ExtentTest ParentTest;
+    protected String Report_File;
+    private String Report_Date;
+    private String Excel_Report_Path;
     
     protected String BROWSER = "";
     protected String HEADLESS = "";
@@ -639,9 +647,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     private SwingWorker BW2; 
     private Instant run_start;
 
-
     protected boolean FAIL = false;
-    
     protected int _t = 0; // Total - calculate in report as sum of others
     protected int _p = 0; // Passed
     protected int _f = 0; // Failed
@@ -665,8 +671,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     private String Last_EX;
     private  final Stopwatch sw1 = Stopwatch.createUnstarted();
     private boolean Load;
-    private String Report_Date;
-    private String Excel_Report_Path;
+
     private Duration DD;
     
     private String SQL = ""; 
@@ -693,67 +698,49 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     protected double LoadTimeOut = 15 * 1000; // milisec  
     
     protected String SCOPE;
-
-    
-    protected boolean _Login = true;
     protected boolean _Headless = false;
-    protected boolean _Site = false;
-    protected boolean _Site_new = false;
-    protected boolean _Brand_new = false;
-    protected boolean _Brand = false;
-    protected boolean _Group_management = false;
-    protected boolean _Menu_manager = false;
-    protected boolean _Bulk_apply = false;
-    protected boolean _Images = false;
-    protected boolean _Orders = false;
-    protected boolean _Sales_reporting = false;
-    protected boolean _Users = false;
-    protected boolean _Resent_updates = false;
-    protected boolean _Announcements = false;
-    protected boolean _Promo = false;
-    protected boolean _Password = false;
-    protected boolean _Roles = false;       
-    protected boolean _All_data = false;
-    protected boolean _Logout = false;      
     
-
-    protected String Report_File;
-    
-    protected boolean NEW_USER;
     protected String MOBILE_ID;
     protected String MOBILE_PW;
     
     protected boolean PICKUP;
-    protected boolean DELIVERY;    
+    protected boolean DELIVERY;  
     
+
     protected int wdLastRow = -1; 
     protected int d2LastRow = -1; 
 
     protected boolean CONFIG = false;
     protected String C = "";
-
+    protected String New_ID = "";
 
     protected DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
     protected final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     protected final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-
 
     protected String WO_TKN = "";    
 
     protected String app = "";
     protected String appId = "";
     protected String SITE = "";
-    protected String SiteID = "";
-    protected String GROUP = "";
     protected String BRAND = "";
-    protected String BrandID = "";
-    protected String CompanyID = "";
-    protected String GroupID = "";
+
     protected String COUNTRY = "COUNTRY";
     protected String platform = "CDL";
     protected String BaseAPI;
-    protected String PROMO; 
-    protected String New_ID = "";
+    protected String PROMO = "";
+    protected boolean _New_user = false;
+    protected boolean _Explore_brand_menu = false;
+    protected boolean _Account_settings = false;
+    protected boolean _Order_status = false;
+    protected boolean _Order_history = false;
+    protected boolean _Edit_item = false;
+    protected boolean _Place_pickup_order = false;
+    protected boolean _Place_delivery_order = false;
+    protected boolean _Order_email = false;
+    protected boolean _Password = false;       
+    protected boolean _Logout = false;
+    protected boolean _Promo = false;
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">       
@@ -764,8 +751,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
         platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform        
         COUNTRY = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 2));
-        SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
-        GetBrands(); 
+        GUI_Get_Brands(); 
         wdLastRow = DV1.getSelectedRow(); 
     }//GEN-LAST:event_DV1MouseClicked
     protected void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
@@ -778,7 +764,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         }
         d2LastRow = DV2.getSelectedRow();   
         BRAND = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 0));
-        BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
     }//GEN-LAST:event_DV2MouseClicked
     protected void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
         jPanel3.addComponentListener(new ComponentListener() {
@@ -833,12 +818,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         btnExcel.setEnabled(true);
     }//GEN-LAST:event_btnExcelMouseClicked
     protected void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
-        SAVE_CONFIG();
+        GUI_Save_CONFIG();
     }//GEN-LAST:event_btnSave_OptMouseClicked
     protected void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-            LOAD_ENV();
+            GUI_Load_Env();
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
@@ -846,13 +831,10 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(!Load && evt.getStateChange() == 1) {
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             app = cmbApp.getSelectedItem().toString();
-            GetSites();
+            GUI_Get_Sites();
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbAppItemStateChanged
-    protected void cmbPromoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPromoItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbPromoItemStateChanged
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">    
@@ -884,13 +866,13 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         cmbEnv.setSelectedIndex(0); // delevopment       
         
         Load = false;
-        LOAD_ENV();
+        GUI_Load_Env();
         app = cmbApp.getSelectedItem().toString();
         CONFIG = false;   
         this.setTitle("Web Ordering Automation Manager");
     }
 
-    protected void LOAD_ENV(){
+    protected void GUI_Load_Env(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
@@ -905,17 +887,17 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             url = "https://thriveapp.io/";
         }
         Get_WO_TKN();
-        LOAD_CONFIG();
+        GUI_Load_CONFIG();
         if (CONFIG) {
             Load = true;
             cmbApp.setSelectedItem(app);
             Load = false;
         }
         app = cmbApp.getSelectedItem().toString();
-        GetSites();       
+        GUI_Get_Sites();       
     }
 
-    protected void GetSites() {
+    protected void GUI_Get_Sites() {
         wdLastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Sites ..." + "\r\n");
@@ -1028,13 +1010,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 }
             }
             SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
-            SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
-            GetBrands();
+            GUI_Get_Brands();
         }
         lblSITES.setText(app + " Sites (" + DV1.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    protected void GetBrands() {
+    protected void GUI_Get_Brands() {
         d2LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Brands ..." + "\r\n");
@@ -1136,17 +1117,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                     } 
                 }
             }
-            BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
-        } else {
-            BrandID = "null";
-        }
+        } 
 
         d2LastRow = DV2.getSelectedRow();        
         lblBRANDS.setText("Selected Site Brands (" + DV2.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-
-
     protected void Get_WO_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
@@ -1161,7 +1137,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
 
-    
     protected void Current_Log_Update(boolean GUI, String Text){
         if(GUI){
             txtLog.append(Text);
@@ -1317,7 +1292,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     } 
 
-    protected void LOAD_CONFIG(){
+    protected void GUI_Load_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + A.A.UserID + "' AND [platform] = 'WEB' AND [app] = 'WO' AND [env] = '" + env + "'";
@@ -1332,56 +1307,56 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
-        }
-            
-        try{            
-            if (C.contains(": ")) {
-                String c;
-                c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
+        }    
+        String[] lines = C.split(System.getProperty("line.separator"));  
+        String value;
+        try{             
+            for (String l : lines) {
+                value = l.substring(l.indexOf(" ")).trim(); 
+                if(l.contains("Browser: ")) cmbBrow.setSelectedItem(value);
+                if(l.contains("env: ")) env = value;
+                if(l.contains("app: ")) app = value;
                 
-                c = C.substring(C.indexOf("_slack:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _slack.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_headless:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _headless.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
+                if(l.contains("MOBILE_ID: ")) txtMobile_ID.setText(value);
+                if(l.contains("MOBILE_PW: ")) txtMobile_PW.setText(value);
 
-                c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("COUNTRY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); COUNTRY = c.substring(c.indexOf(" ")).trim();
+                if(l.contains("SITE: ")) SITE = value;
+                if(l.contains("BRAND: ")) BRAND = value;
+                
+                if(l.contains("nWaitElement: ")) nWaitElement.setValue(Double.parseDouble(value));
+                if(l.contains("nWaitLoad: ")) nWaitLoad.setValue(Double.parseDouble(value));
+                
+                if(l.contains("SlackCh: ")) txtSlackCh.setText(value);
+                if(l.contains("_slack: ")) _slack.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_zip_report: ")) Zip_Report = Boolean.parseBoolean(value);
+                
+                if(l.contains("_headless: ")) _headless.setSelected(Boolean.parseBoolean(value));
 
-                c = C.substring(C.indexOf("txtMobile_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtMobile_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
-
-                c = C.substring(C.indexOf("nShowPage:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nShowPage.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("nWaitElement:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitElement.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("nWaitLoad:")); c = c.substring(0, c.indexOf("\r\n")).trim(); nWaitLoad.setValue(Double.parseDouble(c.substring(c.indexOf(" ")).trim()));
-
-                c = C.substring(C.indexOf("_new_user:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _new_user.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_account_settings:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _account_settings.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_pending_orders:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _order_status.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_order_history:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _order_history.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_edit_item:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _edit_item.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_place_pickup_order:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _place_pickup_order.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_place_delivery_order:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _place_delivery_order.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_order_email:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _order_email.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_password:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _password.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("_logout:")); c = c.substring(0, c.indexOf("\r\n")).trim(); _logout.setSelected(Boolean.parseBoolean(c.substring(c.indexOf(" ")).trim()));
-                c = C.substring(C.indexOf("cmbPromo:")); c = c.substring(0, c.indexOf("\r\n")).trim(); PROMO = c.substring(c.indexOf(" ")).trim();
-                CONFIG = true;
-                txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            } else {
-                CONFIG = false;
-                txtLog.append("=== WEB / WO, User: " + A.A.UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
+                if(l.contains("_new_user: ")) _new_user.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_explore_brand_menu: ")) _explore_brand_menu.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_account_settings: ")) _account_settings.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_order_status: "))  _order_status.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_order_history: "))  _order_history.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_edit_item: "))  _edit_item.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_place_pickup_order: "))  _place_pickup_order.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_place_delivery_order: "))  _place_delivery_order.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_order_email: "))  _order_email.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_promo: "))  _promo.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_password: "))  _password.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_logout: "))  _logout.setSelected(Boolean.parseBoolean(value));  
+                if(l.contains("Promo: ")) txtPromo.setText(value);             
+            }  
+            CONFIG = true;
+            txtLog.append("= LOAD_CONFIG > OK" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch (Exception ex) {
             CONFIG = false;
-            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            txtLog.append("= LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    protected void SAVE_CONFIG() {
+    protected void GUI_Save_CONFIG() {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String _S = "n/a";
         String _B = "n/a";
@@ -1397,7 +1372,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
             C += "url: " + url + "\r\n";
             
-            C += "SlackCh: " + "xtt_test"; //txtSlackCh.getText() + "\r\n";
+            C += "SlackCh: " + "#xtt_test" + "\r\n";
             C += "_slack: " + _slack.isSelected() + "\r\n";
             C += "_zip_report: " + "true" + "\r\n";
             
@@ -1407,27 +1382,26 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             C += "BRAND: " + _B + "\r\n";
             C += "COUNTRY: " + COUNTRY + "\r\n";            
             
-            C += "txtMobile_ID: " + txtMobile_ID.getText().trim() + "\r\n";
-            C += "txtMobile_PW: " + txtMobile_PW.getText().trim()  + "\r\n";
+            C += "MOBILE_ID: " + txtMobile_ID.getText().trim() + "\r\n";
+            C += "MOBILE_PW: " + txtMobile_PW.getText().trim()  + "\r\n";
             
             C += "nShowPage: " + nShowPage.getValue() + "\r\n";
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
             C += "nWaitLoad: " + nWaitLoad.getValue()+ "\r\n";
 
             C += "_new_user: " + _new_user.isSelected() + "\r\n";
+            C += "_explore_brand_menu: " + _explore_brand_menu.isSelected() + "\r\n";
             C += "_account_settings: " + _account_settings.isSelected() + "\r\n";
-            C += "_pending_orders: " + _order_status.isSelected() + "\r\n";
+            C += "_order_status: " + _order_status.isSelected() + "\r\n";
             C += "_order_history: " + _order_history.isSelected() + "\r\n";
             C += "_edit_item: " + _edit_item.isSelected() + "\r\n";
             C += "_place_pickup_order: " + _place_pickup_order.isSelected() + "\r\n";
             C += "_place_delivery_order: " + _place_delivery_order.isSelected() + "\r\n";
             C += "_order_email: " + _order_email.isSelected() + "\r\n";
-
             C += "_password: " + _password.isSelected() + "\r\n";         
             C += "_logout: " + _logout.isSelected() + "\r\n";
-            C += "cmbPromo: " + PROMO + "\r\n";            
-
-
+            C += "_promo: " + _promo.isSelected() + "\r\n";
+            C += "Promo: " + txtPromo.getText() + "\r\n";            
         } catch (Exception ex)  {
             txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1483,7 +1457,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             WaitForElement = Math.round((double)nWaitElement.getValue() *1000);
             LoadTimeOut = (double)nWaitLoad.getValue() *1000;
 
-            BROWSER = cmbBrow.getSelectedItem().toString();
             EX = "";
             F = "";
             t_calls = 0;
@@ -1500,6 +1473,31 @@ public class WO_GUI extends javax.swing.JInternalFrame {
 
             MOBILE_ID = txtMobile_ID.getText();
             MOBILE_PW = txtMobile_PW.getText();
+            
+            BROWSER = cmbBrow.getSelectedItem().toString();
+            Slack_Channel = txtSlackCh.getText();
+            _Slack = _slack.isSelected();
+            _Headless = _headless.isSelected();
+            Zip_Report = true;
+
+            MOBILE_ID = txtMobile_ID.getText();
+            MOBILE_PW = txtMobile_PW.getText();
+
+            _New_user = _new_user.isSelected();
+            _Explore_brand_menu = _explore_brand_menu.isSelected();
+            _Account_settings = _account_settings.isSelected();
+            _Order_status = _order_status.isSelected();
+            _Order_history = _order_history.isSelected();
+            _Edit_item = _edit_item.isSelected();
+            _Place_pickup_order = _place_pickup_order.isSelected();
+            _Place_delivery_order = _place_delivery_order.isSelected();
+            _Order_email = _order_email.isSelected();
+            _Promo = _promo.isSelected();
+            _Password = _password.isSelected();
+            _Logout = _logout.isSelected();
+            PROMO = txtPromo.getText();            
+            
+            
 
             if(DV1.getRowCount() > 0) {
                 SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
@@ -1517,6 +1515,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 txtLog.append( "= Please wait for report...\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
+            
+            
             Current_Log_Update(true, "= Starting Appium Service and Android Driver..." + "\r\n");
             
             if(sw1.isRunning()){
@@ -1591,38 +1591,31 @@ public class WO_GUI extends javax.swing.JInternalFrame {
              
                 if(l.contains("SlackCh: ")) Slack_Channel = value;
                 if(l.contains("_slack:")) _Slack = Boolean.parseBoolean(value); 
-                
                 if(l.contains("_headless: ")) _Headless = Boolean.parseBoolean(value);
+                if(l.contains("_zip_report: ")) Zip_Report = Boolean.parseBoolean(value);
                 
-
                 if(l.contains("SITE: ")) SITE = value;
                 if(l.contains("BRAND: ")) BRAND = value;
                 
                 if(l.contains("MOBILE_ID: ")) MOBILE_ID = value;
                 if(l.contains("MOBILE_PW: ")) MOBILE_PW = value;
 
-
                 if(l.contains("nWaitElement: ")) WaitForElement = Math.round(Double.parseDouble(value) * 1000);
                 if(l.contains("nWaitLoad: ")) LoadTimeOut = Double.parseDouble(value) * 1000;
 
-                if(l.contains("_site: ")) _Site = Boolean.parseBoolean(value);
-                if(l.contains("_site_new: ")) _Site_new = Boolean.parseBoolean(value);
-                if(l.contains("_brand_new: ")) _Brand_new = Boolean.parseBoolean(value);
-                if(l.contains("_brand: ")) _Brand = Boolean.parseBoolean(value);
-                if(l.contains("_group_management: ")) _Group_management = Boolean.parseBoolean(value);
-                if(l.contains("_menu_manager: ")) _Menu_manager = Boolean.parseBoolean(value);
-                if(l.contains("_bulk_apply: ")) _Bulk_apply = Boolean.parseBoolean(value);
-                if(l.contains("_images: ")) _Images = Boolean.parseBoolean(value);
-                if(l.contains("_orders: ")) _Orders = Boolean.parseBoolean(value);
-                if(l.contains("_sales_reporting: ")) _Sales_reporting = Boolean.parseBoolean(value);
-                if(l.contains("_users: ")) _Users = Boolean.parseBoolean(value);
-                if(l.contains("_resent_updates: ")) _Resent_updates = Boolean.parseBoolean(value);
-                if(l.contains("_announcements: "))  _Announcements = Boolean.parseBoolean(value);
+                if(l.contains("_new_user: ")) _New_user = Boolean.parseBoolean(value); 
+                if(l.contains("_explore_brand_menu: ")) _Explore_brand_menu = Boolean.parseBoolean(value);
+                if(l.contains("_account_settings: ")) _Account_settings = Boolean.parseBoolean(value);
+                if(l.contains("_order_status: ")) _Order_status = Boolean.parseBoolean(value);
+                if(l.contains("_order_history: ")) _Order_history = Boolean.parseBoolean(value);
+                if(l.contains("_edit_item: ")) _Edit_item = Boolean.parseBoolean(value);
+                if(l.contains("_place_pickup_order: ")) _Place_pickup_order = Boolean.parseBoolean(value);
+                if(l.contains("_place_delivery_order: ")) _Place_delivery_order = Boolean.parseBoolean(value);
+                if(l.contains("_order_email: ")) _Order_email = Boolean.parseBoolean(value);
                 if(l.contains("_promo: ")) _Promo = Boolean.parseBoolean(value);
                 if(l.contains("_password: ")) _Password = Boolean.parseBoolean(value);
-                if(l.contains("_roles: ")) _Roles = Boolean.parseBoolean(value);
-                if(l.contains("_all_data: ")) _All_data = Boolean.parseBoolean(value);
                 if(l.contains("_logout: ")) _Logout = Boolean.parseBoolean(value);
+                if(l.contains("Promo: ")) PROMO = value; 
             }            
             CONFIG = true;
             
@@ -1652,7 +1645,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     protected void Extent_Report_Config() throws IOException{
         HTML_Report_Path = System.getProperty("user.home") + File.separator + "Desktop";
         Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
-        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + "C360" + "_" + env + "_" + Report_Date + ".html");
+        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + "WO" + "_" + env + "_" + Report_Date + ".html");
         HtmlReport = new ExtentReports();
         HtmlReport.attachReporter(HtmlReporter);
         
@@ -1854,7 +1847,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
-                EX = "C360 " + env + ", v" + Ver + ", Browser: " + BROWSER  + HEADLESS +
+                EX = "WO " + env + ", v" + Ver + ", Browser: " + BROWSER  + HEADLESS +
                     " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                     + EX;
@@ -1993,7 +1986,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             Current_Log_Update(GUI, "= LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
         }
         
-        Current_Log_Update(GUI, "= C360" + " v: " + "?" + ", Env: " + env + "\r\n");       
+        Current_Log_Update(GUI, "= WO" + " v: " + "?" + ", Env: " + env + "\r\n");       
         Current_Log_Update(GUI, "= Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
         Current_Log_Update(GUI, "= " + Summary + "\r\n"); // Summary shown in EX top
         Current_Log_Update(GUI, "= Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n");
@@ -2002,7 +1995,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             Log = txtLog.getText();
         }
 
-        HtmlReporter.config().setReportName("C360" + ", Env: " + env + 
+        HtmlReporter.config().setReportName("WO" + ", Env: " + env + 
                 ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
                 ". Resp(sec) - Min: " + A.A.df.format(t_min) +
                             ", Avg: " + A.A.df.format(t_avg) +
@@ -2014,7 +2007,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         
         if(_Slack && !Slack_Channel.equals("N/A")){
             Report(false);
-            String MSG = "C360_" + env + " Excel Automation report - " + Report_Date +  
+            String MSG = "WO_" + env + " Excel Automation report - " + Report_Date +  
                     "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: *" + A.A.UserID + "*\r\n" +
                     "Browser: *" + BROWSER  + HEADLESS + "*" + "\r\n" +        
                     "Scope: " + SCOPE + "\r\n" +
@@ -2053,9 +2046,11 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         
         LOG_UPDATE(Log); // ========================================================
     }
+    // </editor-fold> 
     protected void Execute() throws InterruptedException{
-        if (_login.isSelected()) { 
+        if (true) { 
             SCOPE += "Login";
+            ParentTest = HtmlReport.createTest("Login"); 
             EX += " - " + "\t" + " === Login " + "\t" + " ===== " + "\t" + " == Login Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_login BR = new WO_login(WO_GUI.this);
             BR.run(); // ======================================
@@ -2063,63 +2058,63 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === ^ Login " + "\t" + " ===== " + "\t" + " == ^ Login End " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         }
 
-        if (_expore_brand_menu.isSelected()) { 
+        if (_Explore_brand_menu) { 
             SCOPE += ", Explore Brand Menu";
+            ParentTest = HtmlReport.createTest("Explore Brand"); 
             EX += " - " + "\t" + " === Explore Brand Menu" + "\t" + " ===== " + "\t" + " == Explore Brand Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_explore_brand_menu BR = new WO_explore_brand_menu(WO_GUI.this);
-            BR.run(_edit_item.isSelected()); // ======================================
+            BR.run(); // ======================================
             EX += " - " + "\t" + " === ^ Explore Brand Menu" + "\t" + " ===== " + "\t" + " == ^ Explore Brand Menu" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            //Thread.sleep(1500);
         }
 
-        if (_place_pickup_order.isSelected()) { 
-            SCOPE += ", Place Pickup Order";
+        if (_Place_pickup_order) { 
+            SCOPE += ", Pickup Order";
+            ParentTest = HtmlReport.createTest("Place Pickup Order"); 
             EX += " - " + "\t" + " === Place Pickup Order" + "\t" + " ===== " + "\t" + " == Place Pickup Order >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_place_order BR = new WO_place_order(WO_GUI.this);
             BR.run(false); // ======================================
             EX += " - " + "\t" + " === ^ Place Pickup Order" + "\t" + " ===== " + "\t" + " == ^ Place Pickup Order" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            //Thread.sleep(1500);
         }
-        if (_place_delivery_order.isSelected()) { 
-            SCOPE += ", Place Delivery Order";
+        if (_Place_delivery_order) { 
+            SCOPE += ", Delivery Order";
+            ParentTest = HtmlReport.createTest("Place Delivery Order"); 
             EX += " - " + "\t" + " === Place Delivery Order" + "\t" + " ===== " + "\t" + " == Place Delivery Order >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_place_order BR = new WO_place_order(WO_GUI.this);
             BR.run(true); // ======================================
             EX += " - " + "\t" + " === ^ Place Delivery Order" + "\t" + " ===== " + "\t" + " == ^ Place Delivery Order" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            //Thread.sleep(1500);
         }
         // ============================== Last Blocks
-        if (_order_status.isSelected()) { 
+        if (_Order_status) { 
             SCOPE += ", Order Status";
+            ParentTest = HtmlReport.createTest("Order Status"); 
             EX += " - " + "\t" + " === Order Status" + "\t" + " ===== " + "\t" + " == Order Status Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_order_status BR = new WO_order_status(WO_GUI.this);
             BR.run(); // ======================================            
             EX += " - " + "\t" + " === ^ Order Status" + "\t" + " ===== " + "\t" + " == ^ Order Status End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            //Thread.sleep(1500);
         }
-        if (_account_settings.isSelected()) { 
+        if (_Account_settings) { 
             SCOPE += ", Account Settings";
+            ParentTest = HtmlReport.createTest("Account Settings"); 
             EX += " - " + "\t" + " === Account Settings" + "\t" + " ===== " + "\t" + " == Account Settings Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_account_settings BR = new WO_account_settings(WO_GUI.this);
             BR.run(); // ====================================== 
             EX += " - " + "\t" + " === ^ Account Settings" + "\t" + " ===== " + "\t" + " == ^ Account Settings End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            //Thread.sleep(1500);
         }
-        if (_order_history.isSelected()) { 
+        if (_Order_history) { 
             SCOPE += ", Order History";
+            ParentTest = HtmlReport.createTest("Order History"); 
             EX += " - " + "\t" + " === Order History" + "\t" + " ===== " + "\t" + " == Order History Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_order_history BR = new WO_order_history(WO_GUI.this);
             BR.run(); // ====================================== 
             EX += " - " + "\t" + " === ^ Order History" + "\t" + " ===== " + "\t" + " == ^ Order History End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            //Thread.sleep(1500);
         }
-        if (_logout.isSelected()) { 
+        if (_Logout) { 
             SCOPE += ", LogOut";
+            ParentTest = HtmlReport.createTest("LogOut"); 
             EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_logout BR = new WO_logout(WO_GUI.this);
             BR.run(); // ====================================== 
             EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            //Thread.sleep(1500);
         }
                                    
         if(_f > 0) {
@@ -2130,7 +2125,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }         
     }
-    // </editor-fold> 
 
     // <editor-fold defaultstate="collapsed" desc="Driver Actions > Log Step Result">  
     protected void Clear_Cookies_Restart_Driver(String BROWSER, ExtentTest ParentTest, String JIRA )throws Exception {
@@ -5518,7 +5512,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JTable DV2;
     private javax.swing.JCheckBox _account_settings;
     private javax.swing.JCheckBox _edit_item;
-    private javax.swing.JCheckBox _expore_brand_menu;
+    private javax.swing.JCheckBox _explore_brand_menu;
     private javax.swing.JCheckBox _headless;
     private javax.swing.JCheckBox _login;
     private javax.swing.JCheckBox _logout;
@@ -5529,6 +5523,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _password;
     private javax.swing.JCheckBox _place_delivery_order;
     private javax.swing.JCheckBox _place_pickup_order;
+    private javax.swing.JCheckBox _promo;
     private javax.swing.JCheckBox _slack;
     private javax.swing.JButton btnExcel;
     private javax.swing.JButton btnFails;
@@ -5538,7 +5533,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cmbApp;
     private javax.swing.JComboBox<String> cmbBrow;
     private javax.swing.JComboBox<String> cmbEnv;
-    private javax.swing.JComboBox<String> cmbPromo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -5563,6 +5557,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea txtLog;
     private javax.swing.JTextField txtMobile_ID;
     private javax.swing.JTextField txtMobile_PW;
+    private javax.swing.JTextField txtPromo;
     private javax.swing.JTextField txtSlackCh;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>

@@ -29,7 +29,7 @@ class DL_metrics_selection extends DL_GUI {
                 return;
             }
             Find_Text("Find 'Filters' label", "Filters", true, ParentTest, "no_jira");
-            Find_Text("Find 'Configure Filters' button label", " Configure Filters", true, ParentTest, "no_jira");
+            Find_Text("Find 'Create a Filter' button label", "Create a Filter", true, ParentTest, "no_jira");
             Element_E1_Find("Find Date selection container", "xpath", "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3']", ParentTest, "no_jira");
             if (!FAIL) {
                 Element_Child_List_L1("Date Items count", e1, "xpath", ".//div[contains(@class, 'MuiGrid-root MuiGrid-item')]", ParentTest, "no_jira");
@@ -169,7 +169,7 @@ class DL_metrics_selection extends DL_GUI {
         }   // =============================================  
     }
 
-    public void SelectMember(){
+    public void SelectMember() {
         try {
             Text_Found("Check member is Displayed ", "My Members", ParentTest, "no_jira");
             if (t.equalsIgnoreCase("Not Found")) {
@@ -200,7 +200,8 @@ class DL_metrics_selection extends DL_GUI {
             }
             Thread.sleep(5000);
         }
-        catch (Exception ex) {}
+        catch (Exception ex) {
+        }
 
     }
 }
