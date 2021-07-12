@@ -1653,7 +1653,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             sw1.start();
             LOG_START(); // ========================================================
             BW1_DoWork(true);
-            //BW2_DoWork();  >>>>>>> Moved into BW1_DoWork after Driver started successfully
+            BW2_DoWork();
         }catch(Exception ex){
             Current_Log_Update(true, "= GUI_Run_Manual ERROR > " + ex.getMessage() + "\r\n");
             BW1_FAIL_LOG_UPDATE("= GUI_Run_Manual ERROR > " + ex.getMessage());
@@ -1949,8 +1949,6 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                     btnRun.setEnabled(true);
                     btnFails.setEnabled(true);
                 }
-                BW2_DoWork();
-                
                 Extent_Report_Config();// ======================================================================= 
                 
                 Execute();
@@ -2087,23 +2085,26 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             DL_UserID = "";         // Clear DL_User from GUI to force Clear_Cookies > Restart_Driver and Re-Login
             String QA_USER = "";    // Next QA User from S3 DV_QA table
             Boolean IsMember=false;
-            //for (int i = 293; i < 298; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
-            for (int i = 0; i < DV_QA.getRowCount(); i++) {    // All Tests from S3 DV_QA table
+            Boolean IsMemberSwitch=false;
+            for (int i = 550; i < 555; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
+           // for (int i = 0; i < DV_QA.getRowCount(); i++) {    // All Tests from S3 DV_QA table
                 if(QA_USER.equals(DV_QA.getValueAt(i, 1).toString()) && !Login_OK){
                     continue;      // Do Not proceed with User having Invalid Credentials or Locked Account
                 }  
-                
+                IsMemberSwitch=false;
                 ParentTest = HtmlReport.createTest("User: " + DV_QA.getValueAt(i, 1) + " Test# " + (i + 1));  // (i+1) = # in the table
                 QA_USER = DV_QA.getValueAt(i, 1).toString();
-                if (i == 0) {
+                if (i == 550) {
                     Text_Found("Check member is Displayed ", "My Members", ParentTest, "no_jira");
                     if (t.equalsIgnoreCase("Not Found")) {
                         IsMember = false;
                     } else {
                         IsMember = true;
+                        SelectMember(DV_QA.getValueAt(i, 5).toString());
+                        IsMemberSwitch=true;
                     }
                 }
-
+System.out.println(DV_QA.getValueAt(i, 5).toString());
                 if (!QA_USER.equals(DL_UserID)) {  // ======  Clear Cookies and Login with New QA User ===========
                     DL_UserID = QA_USER;                // ======  Use last QA User from S3 for the next in the loop ====
                     EX += " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\r\n";
@@ -2125,6 +2126,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                             IsMember = false;
                         } else {
                             IsMember = true;
+                            SelectMember(DV_QA.getValueAt(i, 5).toString());
+                            IsMemberSwitch=true;
                         }
                     } else {
                         Login_OK = false;
@@ -2133,7 +2136,11 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 if (!Login_OK) {
                     continue;      // Go to next Test
                 }
-
+                if(!IsMemberSwitch && IsMember)
+                {
+                    SwitchMember(DV_QA.getValueAt(i, 5).toString());
+                    
+                }
                 EX += " - " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 EX += " - " + "\t" + " === QA Users - Data Validation" + "\t" + "User: " + QA_USER + "\t" + " == Users " + " - Test# " + (i+1) + " Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 
@@ -2143,11 +2150,11 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                     DV_QA.getValueAt(i, 2).toString(),     
                     DV_QA.getValueAt(i, 3).toString(), 
                     DV_QA.getValueAt(i, 4).toString(), 
-                    DV_QA.getValueAt(i, 5).toString(), 
                     DV_QA.getValueAt(i, 6).toString(), 
-                    DV_QA.getValueAt(i, 7).toString(),
-                    DV_QA.getValueAt(i, 8).toString(), 
-                    DV_QA.getValueAt(i, 9).toString(),
+                    DV_QA.getValueAt(i, 7).toString(), 
+                    DV_QA.getValueAt(i, 8).toString(),
+                    DV_QA.getValueAt(i, 9).toString(), 
+                    DV_QA.getValueAt(i, 10).toString(),
                     IsMember
                 );
                 EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time; // DL_UserID = BR.DL_UserID;
@@ -2366,7 +2373,110 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         
         LOG_UPDATE(Log); // ========================================================
     }
-  
+     public void SelectMember(String Member) {
+         try{
+    Boolean p = false;
+        List_L2("Members Selection List", "xpath", "//button[contains(@class, 'MuiGrid-root jss')]/div", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        if (L2 == null || L2.size() == 0) {
+            p = true;
+            List_L2("Members Selection List", "xpath", "//p[contains(@class, 'MuiTypography-root jss')]", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+        }
+        List<String> Memberlist = new ArrayList<>();
+
+        if (p) {
+                    Scroll_to_WebElement("Scroll to Member", "xpath", "//p[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
+                    if (FAIL) {
+                        return;
+                    }
+                    Thread.sleep(2000);
+                    Element_By_Path_Click("Click on Continue as a Member", "xpath", "//p[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
+                    if (FAIL) {
+                        return;
+                    }
+                } else {
+                    Scroll_to_WebElement("Scroll to Member", "xpath", "//div[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
+                    if (FAIL) {
+                        return;
+                    }
+                    Thread.sleep(2000);
+                    Element_By_Path_Click("Click on Continue as a Member", "xpath", "//div[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
+                    if (FAIL) {
+                        return;
+                    }
+                }
+        Element_By_Path_Click("Click on Continue as a Member", "xpath", "//span[text()='Continue as Member']", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(5000);
+    }catch (Exception ex){}
+         
+     }
+     public void SwitchMember(String Member) {
+         try{
+              Boolean p = false;
+
+            List_L2("Members Selection List", "xpath", "//div[@role='dialog']//button[contains(@class, 'MuiGrid-root jss')]/div", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+            if (L2 == null || L2.size() == 0) {
+                p = true;
+                List_L2("Members Selection List", "xpath", "//div[@role='dialog']//p[contains(@class, 'MuiTypography-root jss')]", ParentTest, "no_jira");
+                if (FAIL) {
+                    return;
+                }
+            }
+         
+Thread.sleep(5000);
+
+                Wait_For_Element_By_Path_Presence("Wait for Chevron", "xpath", "//span[contains(text(),'keyboard_arrow_down')]", ParentTest, "no_jira");
+                if (FAIL) {
+                    return;
+                }
+                Element_By_Path_Click("Click on Chevron", "xpath", "//span[contains(text(),'keyboard_arrow_down')]", ParentTest, "no_jira");
+                if (FAIL) {
+                    return;
+                }
+
+                Thread.sleep(5000);
+                if (p) {
+                    Move_to_Element_By_Path("Scroll to Member", "xpath", "//p[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
+                    if (FAIL) {
+                        return;
+                    }
+                    Thread.sleep(2000);
+                    Element_By_Path_Click("Click on Continue as a Member", "xpath", "//p[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
+                    if (FAIL) {
+                        return;
+                    }
+                } else {
+                    Scroll_to_WebElement("Scroll to Member", "xpath", "//div[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
+                    if (FAIL) {
+                        return;
+                    }
+                    Thread.sleep(2000);
+                    Element_By_Path_Click("Click on Continue as a Member", "xpath", "//div[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
+                    if (FAIL) {
+                        return;
+                    }
+                }
+                System.out.println(Member);
+
+                Element_By_Path_Click("Click on Continue as a Member", "xpath", "//span[text()='Continue as Member']", ParentTest, "no_jira");
+                if (FAIL) {
+                    return;
+
+                }
+    }catch (Exception ex){}
+         
+     }
     // </editor-fold> 
     
     // <editor-fold defaultstate="collapsed" desc="Driver Actions > Log Step Result">  

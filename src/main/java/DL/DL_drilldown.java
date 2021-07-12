@@ -23,6 +23,7 @@ class DL_drilldown extends DL_GUI {
             for (int j = 0; j < L0.size(); j++) {
                 Element_Text("Tabs name", L0.get(j), ParentTest, "no_jira");
             }
+            Thread.sleep(2000);
             Element_By_Path_Click("Click on 'Drilldown' tab'", "xpath", "(//button[contains(@class, 'MuiButtonBase-root MuiTab-root')])[2]", ParentTest, "no_jira");
             List_L0("Get the drilldown tabs Count", "xpath", "((//div[contains(@class, 'MuiTabs-root')])[2])//button", ParentTest, "no_jira");
             for (int j = 0; j < L0.size(); j++) {
