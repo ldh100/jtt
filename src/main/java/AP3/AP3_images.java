@@ -80,8 +80,6 @@ class AP3_images extends AP3_GUI{
             d1.findElement(By.xpath("//*[contains(text(),'LEAVE')]")).click();
         }
         Thread.sleep(1000);
-        Refresh("Refresh Brand List Page", ParentTest, "no_jira");
-        Thread.sleep(5000);
         Element_By_Path_Click("Click > '+ GLOBAL MENU' button", "xpath", "//*[contains(text(),'Global Menu')]/parent::button", ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Check > 'No' is Selected by default", "xpath", "//div[contains(text(),'Yes')]/parent::div[contains(@class,'Not-Selected')]", ParentTest, "no_jira");
@@ -116,8 +114,6 @@ class AP3_images extends AP3_GUI{
         Element_By_Path_Click("Click > 'Save'", "xpath", "(//div[contains(text(),'Save')])[2]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(2000);
-        Refresh("Refresh page", ParentTest, "no_jira");
-        Thread.sleep(5000);
         Call_API("Check API before toggle", "Bearer " + AP3_TKN, BaseAPI + "/location/sector/" + SectorID + "?nocache=true&expanded=true", true, ParentTest, "no_jira");
         json = new JSONObject(t);
         companies = new JSONArray();
@@ -163,8 +159,6 @@ class AP3_images extends AP3_GUI{
             d1.findElement(By.xpath("//*[contains(text(),'LEAVE')]")).click();
         }
         Thread.sleep(2000);
-        Refresh("Refresh Brand List Page", ParentTest, "no_jira");
-        Thread.sleep(5000);
         //check initial api
         Call_API("Check API before toggle", "Bearer " + AP3_TKN, BaseAPI + "/location/sector/" + SectorID + "?nocache=true&expanded=true", true, ParentTest, "no_jira");
         json = new JSONObject(t);
@@ -243,8 +237,6 @@ class AP3_images extends AP3_GUI{
         Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(2000);
-        Refresh("Refresh Brand List Page", ParentTest, "no_jira");
-        Thread.sleep(5000);
         Element_By_Path_Click("Click > First Category", "xpath", "(//div[contains(@class,'flex xs12 list-item list-item-large')])[1]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Thread.sleep(2000);
@@ -290,8 +282,6 @@ class AP3_images extends AP3_GUI{
         Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(2000);
-        Refresh("Refresh Brand List Page", ParentTest, "no_jira");
-        Thread.sleep(5000);
         Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'Lunch')][1]/parent::span", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Thread.sleep(2000);
@@ -341,8 +331,6 @@ class AP3_images extends AP3_GUI{
         Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(2000);
-        Refresh("Refresh Local Menu Page", ParentTest, "no_jira");
-        Thread.sleep(5000);
         Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'Lunch')][1]/parent::span", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Thread.sleep(2000);
@@ -363,8 +351,6 @@ class AP3_images extends AP3_GUI{
         Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(2000);
-        Refresh("Refresh Global Menu Page", ParentTest, "no_jira");
-        Thread.sleep(5000);
         Element_By_Path_Click("Click > First Category", "xpath", "(//div[contains(@class,'flex xs12 list-item list-item-large')])[1]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Thread.sleep(2000);
@@ -390,9 +376,6 @@ class AP3_images extends AP3_GUI{
         EX += " - " + "\t" + " === " + "\t" + " ===== Navigate to Station Configuration Page and Toggle 'Allow Local Menu Images' to 'No' " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         Navigate_to_URL("Navigate to Site -> Brand Configuration", url + "#/sites/" + appId + "/site/" + SiteID + "/brand/" + BrandID + "/settings", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(1000);
-        Refresh("Refresh Station Configuration Page", ParentTest, "no_jira");
-        Thread.sleep(5000);
         Wait_For_Element_By_Path_Presence("Check > Navigated to Brand Configuration", "xpath", "//div[contains(text(),'Station Information')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Scroll_to_WebElement("Scroll to 'Menu Information' Section", "xpath", "//div[@id='toc-menu-info']", ParentTest, "no_jira");
