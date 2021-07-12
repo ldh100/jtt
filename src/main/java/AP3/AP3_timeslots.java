@@ -34,6 +34,7 @@ class AP3_timeslots extends AP3_GUI{
         SiteID = a.SiteID;
         BRAND = a.BRAND;
         BrandID = a.BrandID;
+        CompanyID = a.CompanyID;
         
         AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
