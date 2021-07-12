@@ -40,6 +40,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,16,0,0,3,101"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
@@ -312,7 +313,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="338" y="70" width="90" height="32"/>
+              <AbsoluteConstraints x="336" y="64" width="90" height="32"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -736,57 +737,67 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="_bulk_apply" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_menu_manager" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_export_menuset" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="_mm_items" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblSITES8" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
-                      <Component id="lblSITES12" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
-                      <Component id="txtSector" alignment="0" min="-2" pref="164" max="-2" attributes="0"/>
-                      <Component id="txtComp" alignment="0" min="-2" pref="164" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <Component id="lblSITES15" min="-2" max="-2" attributes="0"/>
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="_smart_analytics" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_sales_analytics" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_sales_reporting" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_reschedule_menu" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_brand_config" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_brand_closure" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_brand" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_site" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_login" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="_sales_report_hidden" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                      <Component id="_orders_report_hidden" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                      <Component id="_orders" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                      <Component id="_notifications" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                      <Component id="_announcements" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                      <Component id="_resent_updates" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                      <Component id="_timeslots" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                      <Component id="_images" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="_promo" linkSize="1" alignment="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="_group_management" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblSITES15" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="_bulk_apply" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                                  <Component id="_menu_manager" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                                  <Component id="_export_menuset" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="_mm_items" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblSITES8" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
+                                          <Component id="lblSITES12" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="txtComp" alignment="1" min="-2" pref="164" max="-2" attributes="0"/>
+                                  <Component id="txtSector" alignment="1" min="-2" pref="164" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="_smart_analytics" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
+                                  <Component id="_sales_analytics" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
+                                  <Component id="_sales_reporting" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
+                                  <Component id="_reschedule_menu" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
+                                  <Component id="_brand_config" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
+                                  <Component id="_brand_closure" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
+                                  <Component id="_brand" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
+                                  <Component id="_site" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
+                                  <Component id="_login" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="_sales_report_hidden" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                                  <Component id="_orders_report_hidden" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                                  <Component id="_orders" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                                  <Component id="_notifications" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                                  <Component id="_announcements" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                                  <Component id="_resent_updates" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                                  <Component id="_timeslots" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                                  <Component id="_images" linkSize="1" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                                  <Component id="_promo" linkSize="1" alignment="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="_group_management" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="_logout" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
+                                  <Component id="_password" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
+                                  <Component id="_roles" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
+                                  <Component id="_users" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
+                                  <Component id="_brand_new" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
+                                  <Component id="_site_new" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
+                                  <Component id="_all_data" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="_logout" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
-                      <Component id="_password" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
-                      <Component id="_roles" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
-                      <Component id="_users" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
-                      <Component id="_brand_new" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
-                      <Component id="_site_new" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
-                      <Component id="_all_data" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -849,9 +860,12 @@
                   <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
                   <Component id="_sales_report_hidden" min="-2" pref="14" max="-2" attributes="0"/>
                   <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="_menu_manager" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="lblSITES8" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="_menu_manager" min="-2" pref="14" max="-2" attributes="0"/>
                           <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
                           <Component id="_bulk_apply" min="-2" pref="14" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
@@ -860,24 +874,15 @@
                           <Component id="_mm_items" min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="lblSITES8" min="-2" pref="16" max="-2" attributes="0"/>
-                                  <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
-                                  <Component id="lblSITES12" min="-2" pref="16" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
-                                  <Component id="txtComp" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                  <Component id="txtSector" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Component id="txtSector" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                          <Component id="lblSITES12" min="-2" pref="16" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Component id="txtComp" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -894,7 +899,7 @@
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -909,7 +914,7 @@
             <Property name="text" type="java.lang.String" value="Show all data rows"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -924,7 +929,7 @@
             <Property name="text" type="java.lang.String" value="New Site (not Prod)"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -940,7 +945,7 @@
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -954,7 +959,7 @@
             <Property name="text" type="java.lang.String" value="Brand"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -969,7 +974,7 @@
             <Property name="text" type="java.lang.String" value="Orders"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -984,7 +989,7 @@
             <Property name="text" type="java.lang.String" value="Recent Updates"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -999,7 +1004,7 @@
             <Property name="text" type="java.lang.String" value="Announcements"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1014,7 +1019,7 @@
             <Property name="text" type="java.lang.String" value="Promo Management"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1029,7 +1034,7 @@
             <Property name="text" type="java.lang.String" value="Sales Reporting"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1044,7 +1049,7 @@
             <Property name="text" type="java.lang.String" value="MM Basic"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1059,7 +1064,7 @@
             <Property name="text" type="java.lang.String" value="Users"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1074,7 +1079,7 @@
             <Property name="text" type="java.lang.String" value="Forgot Password"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1092,7 +1097,7 @@
             <Property name="text" type="java.lang.String" value="Feedback &amp; Logout"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1107,7 +1112,7 @@
             <Property name="text" type="java.lang.String" value="Roles Permissions"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1122,7 +1127,7 @@
             <Property name="text" type="java.lang.String" value="Add Brand (not Prod)"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1137,7 +1142,7 @@
             <Property name="text" type="java.lang.String" value="Smart Analytics"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1152,7 +1157,7 @@
             <Property name="text" type="java.lang.String" value="Group Management"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1187,7 +1192,7 @@
             <Property name="text" type="java.lang.String" value="Sales Analytics"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1202,7 +1207,7 @@
             <Property name="text" type="java.lang.String" value="Notifications"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1248,7 +1253,7 @@
             <Property name="text" type="java.lang.String" value="MM Bulk Apply"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1263,7 +1268,7 @@
             <Property name="text" type="java.lang.String" value="Images"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1278,7 +1283,7 @@
             <Property name="text" type="java.lang.String" value="Reschedule menu"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1293,7 +1298,7 @@
             <Property name="text" type="java.lang.String" value="Sales-rep hidden"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1308,7 +1313,7 @@
             <Property name="text" type="java.lang.String" value="Order-rep hidden"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1323,7 +1328,7 @@
             <Property name="text" type="java.lang.String" value="Brand Closure"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1338,7 +1343,7 @@
             <Property name="text" type="java.lang.String" value="Timeslots"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1353,7 +1358,7 @@
             <Property name="text" type="java.lang.String" value="MM Export Menuset"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1368,7 +1373,7 @@
             <Property name="text" type="java.lang.String" value="MM Items Updates"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
@@ -1383,7 +1388,7 @@
             <Property name="text" type="java.lang.String" value="Brand Config"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="iconTextGap" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
             </Property>
