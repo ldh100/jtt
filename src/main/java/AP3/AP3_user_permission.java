@@ -156,9 +156,11 @@ Thread.sleep(1000);
             if(L1.isEmpty()){
                 _p++;
                 EX += _t + "\t" + " === Admin No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                Log_Html_Result("PASS", "Enabled for all Stations" , false, ParentTest.createNode("Admin No Options-Station visibility status (hide/unhide)"));
             }else{
                 _f++;
                 EX += _t + "\t" + " === Admin No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";
+                Log_Html_Result("FAIL", "Disabled for "+ L1.size()  , true, ParentTest.createNode("Admin No Options-Station visibility status (hide/unhide)"));
             }            
             // </editor-fold> 
 
@@ -188,9 +190,11 @@ Thread.sleep(1000);
                     if(L1.isEmpty()){
                         _p++;
                         EX += _t + "\t" + " === Admin No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                        Log_Html_Result("PASS", "Enabled for all Stations" , false, ParentTest.createNode("Admin No Options-Menu visibility status (hide/unhide)"));
                     }else{
                         _f++;
                         EX += _t + "\t" + " === Admin No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";
+                        Log_Html_Result("FAIL", "Disabled for "+ L1.size()  , true, ParentTest.createNode("Admin No Options-Menu visibility status (hide/unhide)"));        
                     }                    
                 } else if (Tab_Name.toLowerCase().contains("service")) { 
                     Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]",  ParentTest, "no_jira"); 
@@ -242,6 +246,7 @@ Thread.sleep(1000);
                     _t++; 
                     _f++;
                     EX += _t + "\t" + " === Adnim No Options " + "\t" + "Station Configuration" + "\t" + "Unable to Edit 'Station Name'" + "\t" + "FAIL" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";                        
+                    Log_Html_Result("FAIL", "Unable to Edit 'Station Name'"  , true, ParentTest.createNode("Admin No Options-Station Configuration"));
                 }      
             // </editor-fold> 
 
@@ -275,7 +280,7 @@ Thread.sleep(1000);
             Find_Text("Admin N 'Edit Group' text", "Edit Group", true, ParentTest, "no_jira");   
             Element_By_Path_Click("Click 'Edit Group' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]",  ParentTest, "no_jira"); 
                 if (FAIL) { return;}    
-             Element_By_Path_Click("Click '+ GLOBAL MENU'", "xpath", "//*[contains(text(), 'Global Menu')]",  ParentTest, "no_jira"); 
+             Element_By_Path_Click("Click '+ ADD GLOBAL MENU'", "xpath", "//button[@class='v-btn theme--light primary']",  ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             // ST 
             //Element_By_Path_Click("Click '+ GLOBAL MENU'", "xpath", "//*[@id='operator']/div[126]/main[1]/div[1]/div[2]/div[1]/div[3]/div[1]/button[1]/div[1]",  ParentTest, "no_jira"); 
@@ -284,7 +289,8 @@ Thread.sleep(1000);
             // end ST
 
             Find_Text("Admin N 'Enter Menu ... Name'", "Enter Global Menu Brand Name", true, ParentTest, "no_jira");   
-            Element_By_Path_Click("Click 'New Global Menu' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]",  ParentTest, "no_jira"); 
+            Element_By_Path_Click("Click 'New Global Menu' > Cancel", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//button[1]",  ParentTest, "no_jira"); 
+            //Element_By_Path_Click("Click 'New Global Menu' > Cancel", "xpath", "//*[contains(text(), 'Cancel')]",  ParentTest, "no_jira"); 
                 if (FAIL) { return;}    
             Element_By_Path_Click("Click 1st Group 'Edit' icon", "xpath", "//button[contains(@class, 'v-btn v-btn--flat v-btn--icon theme--light grey--text')]",  ParentTest, "no_jira"); 
                 if (FAIL) { return;}
@@ -423,9 +429,11 @@ Thread.sleep(1000);
             if(L1.isEmpty()){
                 _p++;
                 EX += _t + "\t" + " === SM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
-            }else{
+                Log_Html_Result("PASS", "Enabled for all Stations" , false, ParentTest.createNode("SM All Options-Station visibility status (hide/unhide)"));
+     }else{
                 _f++;
                 EX += _t + "\t" + " === SM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";
+               Log_Html_Result("FAIL", "Disabled for "+ L1.size()  , true, ParentTest.createNode("SM All Options-Station visibility status (hide/unhide)"));
             } 
             // <editor-fold defaultstate="collapsed" desc="SN Y Brand Permissions" >               
             Move_to_Element_By_Path("Scroll to Brand data row", "xpath", "//td[contains(text(), '" + BRAND + "')]",  ParentTest, "no_jira");        
@@ -452,9 +460,12 @@ Thread.sleep(1000);
                     if(L1.isEmpty()){
                         _p++;
                         EX += _t + "\t" + " === SM All Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                        Log_Html_Result("PASS", "Enabled for all Stations" , false, ParentTest.createNode("SM All Options-Menu visibility status (hide/unhide)"));
+ 
                     }else{
                         _f++;
                         EX += _t + "\t" + " === SM All Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";
+                        Log_Html_Result("FAIL", "Disabled for "+ L1.size()  , true, ParentTest.createNode("SM All Options-Menu visibility status (hide/unhide)"));
                     }                                      
                 } else if (Tab_Name.toLowerCase().contains("service")) { 
                     Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]",  ParentTest, "no_jira"); 
@@ -501,9 +512,13 @@ Thread.sleep(1000);
                 if (t.equals("true")) {
                     _p++;
                     EX += _t + "\t" + " === SM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+               Log_Html_Result("PASS", "Edit 'Station Name' disabled" , false, ParentTest.createNode("SM All Options-Station Configuration"));
+
                 } else {
                     _f++;
                     EX += _t + "\t" + " === SM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' enabled" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                        
+                  Log_Html_Result("FAIL", "Edit 'Station Name' enabled - Expected disabled"  , true, ParentTest.createNode("SM All Options-Station Configuration"));
+
                 }                    
             Element_By_Path_Attribute("Enable 'ASAP Pick-up'?", "css", "[aria-label='ASAP Pickup']", "disabled", ParentTest, "no_jira"); 
                 if (FAIL) { return;}                     
@@ -511,9 +526,11 @@ Thread.sleep(1000);
                 if (t.equals("true")) {
                     _f++;
                     EX += _t + "\t" + " === SM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";                        
+                    Log_Html_Result("FAIL", "Edit 'ASAP Pick-up' disabled"  , true, ParentTest.createNode("SM All Options-Station Configuration"));
                 } else {
                     _p++;
                     EX += _t + "\t" + " === SM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                    Log_Html_Result("PASS", "Edit 'ASAP Pick-up' enabled" , false, ParentTest.createNode("SM All Options-Station Configuration"));
                 }            
             //</editor-fold>   
 
@@ -570,11 +587,11 @@ Thread.sleep(1000);
             Find_Text("SM N Dashboard 'Dashboard'", "Dashboard", true, ParentTest, "no_jira");  
             Find_Text("SM N Dashboard 'Sites'", "Sites", true, ParentTest, "no_jira");   
             Find_Text("SM N Dashboard 'Group Management'", "Group Management", false, ParentTest, "no_jira");                               
-            Find_Text("SM N Dashboard 'Menu Manager'", "Menu Manager", false, ParentTest, "no_jira"); 
             Find_Text("SM N Dashboard 'Orders'", "Orders", true, ParentTest, "no_jira"); 
             Find_Text("SM N Dashboard 'Sales Reporting'", "Sales Reporting", true, ParentTest, "no_jira"); 
             Find_Text("SM N Dashboard 'Sales Analytics'", "Sales Analytics", true, ParentTest, "no_jira"); 
             Find_Text("SM N Dashboard 'Users'", "Users", false, ParentTest, "no_jira");     
+           // (Returning false error) Find_Text("SM N Dashboard 'Menu Manager'", "Menu Manager", false, ParentTest, "no_jira"); 
             Find_Text("SM N Dashboard 'Announcements'", "Announcements", false, ParentTest, "no_jira"); 
             Find_Text("SM N Dashboard 'Promo Management'", "Promo Management", false, ParentTest, "no_jira"); 
             Find_Text("SM N Dashboard 'Smart Analytics'", "Smart Analytics", false, ParentTest, "no_jira");
@@ -621,9 +638,12 @@ Thread.sleep(1000);
             if(L0.size() == L1.size()){
                 _p++;
                 EX += _t + "\t" + " === SM No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                Log_Html_Result("PASS", "Disabled for all Stations" , false, ParentTest.createNode("SM No Options-Station visibility status (hide/unhide)"));
+
             }else{
                 _f++;
                 EX += _t + "\t" + " === SM No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                
+                Log_Html_Result("FAIL", "Enabled for " + L1.size() + " Stations" , true, ParentTest.createNode("SM No Options-Station visibility status (hide/unhide)"));
             } 
             // <editor-fold defaultstate="collapsed" desc="SM N Brand Permissions" >               
             Move_to_Element_By_Path("Scroll to Brand data row", "xpath", "//td[contains(text(), '" + BRAND + "')]",  ParentTest, "no_jira");        
@@ -650,9 +670,11 @@ Thread.sleep(1000);
                     if(L0.size() == L1.size()){
                         _p++;
                         EX += _t + "\t" + " === SM No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                        Log_Html_Result("PASS", "Disabled for all Stations" , false, ParentTest.createNode("SM No Options-Menu visibility status (hide/unhide)"));
                     }else{
                         _f++;
                         EX += _t + "\t" + " === SM No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Enabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                
+                        Log_Html_Result("FAIL", "Enabled for " + L1.size()+ " Stations"  , true, ParentTest.createNode("SM No Options-Menu visibility status (hide/unhide)"));
                     }                    
                 } else if (Tab_Name.toLowerCase().contains("service")) { 
                     Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]",  ParentTest, "no_jira"); 
@@ -700,9 +722,11 @@ Thread.sleep(1000);
                 if (t.equals("true")) {
                     _p++;
                     EX += _t + "\t" + " === SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                    Log_Html_Result("PASS", "Edit 'Station Name' disabled" , false, ParentTest.createNode("SM No Options-Station Configuration"));
                 } else {
                     _f++;
                     EX += _t + "\t" + " === SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' enabled" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                        
+                    Log_Html_Result("FAIL", "Edit 'Station Name' enabled - Expected disabled"  , true, ParentTest.createNode("SM No Options-Station Configuration"));
                 }                    
             Element_By_Path_Attribute("Enable 'ASAP Pick-up'?", "css", "[aria-label='ASAP Pickup']", "disabled", ParentTest, "no_jira"); 
                 if (FAIL) { return;}                     
@@ -710,10 +734,12 @@ Thread.sleep(1000);
                 if (t.equals("true")) {
                     _p++;
                     EX += _t + "\t" + " === SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
-                } else {
+                   Log_Html_Result("PASS", "Edit 'ASAP Pick-up' disabled" , false, ParentTest.createNode("SM No Options-Station Configuration"));
+                 } else {
                     _f++;
                     EX += _t + "\t" + " === SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                        
-                    }            
+                   Log_Html_Result("FAIL", "Edit 'ASAP Pick-up' enabled - Expected disabled"  , true, ParentTest.createNode("SM No Options-Station Configuration")); 
+                }            
             // </editor-fold> 
 ////
             // <editor-fold defaultstate="collapsed" desc="SN N Menu Management" >   
@@ -765,7 +791,7 @@ Thread.sleep(1000);
             Find_Text("DM Y Dashboard 'Users'", "Users", true, ParentTest, "no_jira");     
             Find_Text("DM Y Dashboard 'Announcements'", "Announcements", true, ParentTest, "no_jira"); 
             Find_Text("DM Y Dashboard 'Promo Management'", "Promo Management", false, ParentTest, "no_jira");                     
-            Find_Text("DM Y Dashboard 'Smart Analytics'", "Smart Analytics", false, ParentTest, "no_jira");
+            Find_Text("DM Y Dashboard 'Smart Analytics'", "Smart Analytics", true, ParentTest, "no_jira");
             Find_Text("DM Y Dashboard 'Ap3 Notification'", "AP3 Notification", false, ParentTest, "no_jira"); 
             
             // DM Y Sites permissions
@@ -812,9 +838,11 @@ Thread.sleep(1000);
             if(L1.isEmpty()){
                 _p++;
                 EX += _t + "\t" + " === DM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+               Log_Html_Result("PASS", "Enabled for all Stations" , false, ParentTest.createNode("DM All Options-Station visibility status (hide/unhide)"));
             }else{
                 _f++;
                 EX += _t + "\t" + " === DM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";
+                Log_Html_Result("FAIL", "Disabled for " + L1.size() + " Stations - Expected enabled"  , true, ParentTest.createNode("DM All Options - Station visibility status (hide/unhide)"));
             }
             // <editor-fold defaultstate="collapsed" desc="DM Y Brand Permissions" >               
             Move_to_Element_By_Path("Scroll to Brand data row", "xpath", "//td[contains(text(), '" + BRAND + "')]",  ParentTest, "no_jira");        
@@ -832,7 +860,7 @@ Thread.sleep(1000);
                 Element_Text("Brand Setup Tab >>>>", L3.get(i),  ParentTest, "no_jira");
                 Tab_Name = t;  
                 if (Tab_Name.toLowerCase().contains("menu")) { // Menu > Menu Scheduler
-                    Find_Text("DM Y 'Schedule menu'", "Schedule menu", false, ParentTest, "no_jira");                     
+                    Find_Text("DM Y 'Schedule menu'", "Schedule menu", true, ParentTest, "no_jira");                     
                     List_L0("Menu Status icons Count", "xpath", "//i[contains(@class, 'v-icon mdi mdi-eye')]",  ParentTest, "no_jira");                       
                         if (FAIL) { return;}
                     List_L1("Menu Status Disabled Count", "xpath", "//div[contains(@class, 'v-input--is-disabled theme--light')]",  ParentTest, "no_jira");             
@@ -841,9 +869,12 @@ Thread.sleep(1000);
                     if(L1.isEmpty()){
                         _p++;
                         EX += _t + "\t" + " === DM All Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                        Log_Html_Result("PASS", "Enabled for all Stations" , false, ParentTest.createNode("DM All Options-Menu visibility status (hide/unhide)"));
+           
                     }else{
                         _f++;
                         EX += _t + "\t" + " === DM All Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";
+                   Log_Html_Result("FAIL", "Disabled for " + L1.size() + " Stations - Expected enabled"  , true, ParentTest.createNode("DM All Options - Menu visibility status (hide/unhide)"));
                     }                     
                 } else if (Tab_Name.toLowerCase().contains("service")) { 
                     Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]",  ParentTest, "no_jira"); 
@@ -890,9 +921,11 @@ Thread.sleep(1000);
                 if (t.equals("true")) {
                     _p++;
                     EX += _t + "\t" + " === DM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                    Log_Html_Result("PASS", "Edit 'Station Name' disabled" , false, ParentTest.createNode("DM All Options-Station Configuration"));
                 } else {
                     _f++;
                     EX += _t + "\t" + " === DM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' enabled" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                        
+                    Log_Html_Result("FAIL", "Edit 'Station Name' enabled-Expected disabled"  , true, ParentTest.createNode("DM All Options - Station Configuration"));
                 }                    
             Element_By_Path_Attribute("Enable 'ASAP Pick-up'?", "css", "[aria-label='ASAP Pickup']", "disabled", ParentTest, "no_jira"); 
                 if (FAIL) { return;}                     
@@ -900,9 +933,11 @@ Thread.sleep(1000);
                 if (t.equals("true")) {
                     _f++;
                     EX += _t + "\t" + " === DM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";                        
+                    Log_Html_Result("FAIL", "Disabled for " + L1.size() + " Stations - Expected enabled"  , true, ParentTest.createNode("DM All Options - Station Configuration"));
                 } else {
                     _p++;
                     EX += _t + "\t" + " === DM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                    Log_Html_Result("PASS", "Edit 'ASAP Pick-up' enabled" , false, ParentTest.createNode("DM All Options-Station Configuration"));
                 }           
             // </editor-fold>   
             
@@ -960,12 +995,12 @@ Thread.sleep(1000);
             Find_Text("DM N Dashboard 'Dashboard'", "Dashboard", true, ParentTest, "no_jira");  
             Find_Text("DM N Dashboard 'Sites'", "Sites", true, ParentTest, "no_jira");   
             Find_Text("DM N Dashboard 'Group Management'", "Group Management", false, ParentTest, "no_jira");                               
-            Find_Text("DM N Dashboard 'Menu Manager'", "Menu Manager", false, ParentTest, "no_jira"); 
             Find_Text("DM N Dashboard 'Orders'", "Orders", true, ParentTest, "no_jira"); 
             Find_Text("DM N Dashboard 'Sales Reporting'", "Sales Reporting", true, ParentTest, "no_jira"); 
             Find_Text("DM N Dashboard 'Sales Analytics'", "Sales Analytics", true, ParentTest, "no_jira"); 
             Find_Text("DM N Dashboard 'Users'", "Users", true, ParentTest, "no_jira");     
             Find_Text("DM N Dashboard 'Announcements'", "Announcements", false, ParentTest, "no_jira"); 
+            //(returning false error )Find_Text("DM N Dashboard 'Menu Manager'", "Menu Manager", false, ParentTest, "no_jira"); 
             Find_Text("DM N Dashboard 'Promo Management'", "Promo Management", false, ParentTest, "no_jira"); 
             Find_Text("DM N Dashboard 'Smart Analytics'", "Smart Analytics", false, ParentTest, "no_jira");
             Find_Text("DM N Dashboard 'Ap3 Notification'", "AP3 Notification", false, ParentTest, "no_jira"); 
@@ -1015,9 +1050,11 @@ Thread.sleep(1000);
             if(L0.size() == L1.size()){
                 _p++;
                 EX += _t + "\t" + " === DM No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                Log_Html_Result("PASS", "Disabled for all Stations" , false, ParentTest.createNode("DM No Options-Station visibility status (hide/unhide)"));
             }else{
                 _f++;
                 EX += _t + "\t" + " === DM No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                
+                Log_Html_Result("FAIL", "Enabled for " + L1.size() + " Stations - Expected disabled"  , true, ParentTest.createNode("DM No Options-Station visibility status (hide/unhide)"));
             }
             // <editor-fold defaultstate="collapsed" desc="DM N Brand Permissions" >               
             Move_to_Element_By_Path("Scroll to Brand data row", "xpath", "//td[contains(text(), '" + BRAND + "')]",  ParentTest, "no_jira");        
@@ -1045,9 +1082,11 @@ Thread.sleep(1000);
                     if(L0.size() == L1.size()){
                         _p++;
                         EX += _t + "\t" + " === DM No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
+                        Log_Html_Result("PASS", "Disabled for all Stations" , false, ParentTest.createNode("DM No Options-Menu visibility status (hide/unhide)"));
                     }else{
                         _f++;
                         EX += _t + "\t" + " === DM No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Enabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                
+                        Log_Html_Result("FAIL", "Enabled for " + L1.size() + " Stations - Expected disabled"  , true, ParentTest.createNode("DM No Options - Menu visibility status (hide/unhide)"));
                     }                    
                 } else if (Tab_Name.toLowerCase().contains("service")) { 
                     Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]",  ParentTest, "no_jira"); 
@@ -1094,9 +1133,11 @@ Thread.sleep(1000);
                 if (t.equals("true")) {
                     _p++;
                     EX += _t + "\t" + " === DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                    Log_Html_Result("PASS", "Edit 'Station Name' disabled" , false, ParentTest.createNode("DM No Options-Station Configuration"));
                 } else {
                     _f++;
                     EX += _t + "\t" + " === DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + "Expected disabled" + "\r\n";                        
+                    Log_Html_Result("FAIL", " Edit 'Station Name' enabled - Expected disabled"  , true, ParentTest.createNode("DM No Options-Station Configuration"));
                 }                    
             Element_By_Path_Attribute("Enable 'ASAP Pick-up'?", "css", "[aria-label='ASAP Pickup']", "disabled", ParentTest, "no_jira"); 
                 if (FAIL) { return;}                     
@@ -1104,9 +1145,11 @@ Thread.sleep(1000);
                 if (t.equals("true")) {
                     _p++;
                     EX += _t + "\t" + " === DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+                    Log_Html_Result("PASS", "Edit 'ASAP Pick-up' disabled" , false, ParentTest.createNode("DM No Options-Station Configuration"));
                 } else {
                     _f++;
                     EX += _t + "\t" + " === DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                        
+                    Log_Html_Result("FAIL", "Edit 'ASAP Pick-up' enabled - Expected disabled"  , true, ParentTest.createNode("DM No Options-Station Configuration"));
                 }
             // </editor-fold> 
   
