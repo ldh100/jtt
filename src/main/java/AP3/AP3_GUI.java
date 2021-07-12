@@ -247,7 +247,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 22, 428, 260));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 22, 430, 260));
 
         DV2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV2.setModel(new javax.swing.table.DefaultTableModel(
@@ -270,7 +270,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 22, 420, 76));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 420, 76));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
