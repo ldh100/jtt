@@ -448,18 +448,21 @@
                           <Component id="_logout" min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Component id="_account_manager" min="-2" pref="14" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="_drilldown" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="_users" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="_users" min="-2" pref="14" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="_drilldown" min="-2" pref="14" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="_insights" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
                       <Component id="_sanity" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace pref="9" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -726,7 +729,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="100" y="60" width="116" height="22"/>
+              <AbsoluteConstraints x="100" y="60" width="110" height="22"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -788,11 +791,12 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Report to Slack"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="220" y="52" width="100" height="14"/>
+              <AbsoluteConstraints x="210" y="52" width="110" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -803,11 +807,12 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Headless &lt;&lt;&lt;&lt;"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="iconTextGap" type="int" value="1"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="220" y="68" width="100" height="14"/>
+              <AbsoluteConstraints x="210" y="68" width="110" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
