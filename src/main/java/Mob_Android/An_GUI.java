@@ -1090,7 +1090,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnExelMouseClicked
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
-        String R = A.Func.SHOW_LOG_FILE(F, "txt");
+        String R = A.Func.SHOW_FILE(F, "txt");
         if(!R.equals("OK")){
             Current_Log_Update(true, R + "\r\n");
         }
@@ -1099,7 +1099,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         
 //        Current_Log_Update(true, An_Met.Get_Bolter_User_Site_ID(txtBolter_Id.getText(), txtBolter_Pw.getText()) + "\r\n");
        
-        String R = A.Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
+        String R = A.Func.SHOW_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             Current_Log_Update(true, R + "\r\n");
         }
@@ -1850,18 +1850,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         String BucketName = "";
         String S3_env = "";
         String S3_app = "";
-
-        //Android app S3 bucket path
-        String mobile_repo_name = "mobile-app-repos";
-        String android_app_path_S3_bucket = "automation/android-coreapp/staging/";
-        String Dev_android_app_path_S3_bucket = "automation/android-coreapp/daily/";
-
-        //iOS app S3 bucket path
-        String Dev_iOS_app_path_S3_bucket = "automation/novus/";
-        String Staging_iOS_app_path_S3_bucket = "automation/novus/regression/";
-        String Staging_iOS_app_path_S3_bucket_bolter = "automation/bolter/";
-        String Prod_iOS_app_path_S3_bucket = "automation/novus/production/";
-    
+ 
         switch (env) {
             case "PR":
                 S3_env = "/android/production/";

@@ -50,6 +50,7 @@ import java.util.function.Function;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.SwingWorker;
@@ -163,7 +164,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         lblSITES12 = new javax.swing.JLabel();
         _sales_analytics = new javax.swing.JCheckBox();
         _notifications = new javax.swing.JCheckBox();
-        txtDH_Id = new javax.swing.JTextField();
         lblSITES15 = new javax.swing.JLabel();
         txtComp = new javax.swing.JTextField();
         txtSector = new javax.swing.JTextField();
@@ -175,6 +175,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         _brand_closure = new javax.swing.JCheckBox();
         _timeslots = new javax.swing.JCheckBox();
         _export_menuset = new javax.swing.JCheckBox();
+        _mm_items = new javax.swing.JCheckBox();
+        _brand_config = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -186,12 +188,12 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         setVerifyInputWhenFocusTarget(false);
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 AP3_AncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -235,7 +237,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         DV1.setCellSelectionEnabled(true);
         DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV1.setName("DV1"); // NOI18N
-        DV1.setRequestFocusEnabled(false);
         DV1.setRowHeight(18);
         DV1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         DV1.getTableHeader().setReorderingAllowed(false);
@@ -246,7 +247,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 22, 428, 260));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 22, 430, 260));
 
         DV2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV2.setModel(new javax.swing.table.DefaultTableModel(
@@ -260,7 +261,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         DV2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV2.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV2.setName("DV2"); // NOI18N
-        DV2.setOpaque(false);
         DV2.setRowHeight(18);
         DV2.getTableHeader().setReorderingAllowed(false);
         DV2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -270,7 +270,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 22, 420, 76));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 420, 76));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -297,7 +297,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         lblSITES10.setAlignmentX(0.5F);
         jPanel4.add(lblSITES10, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 16, 85, 16));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 100, 420, 40));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 420, 40));
 
         txtLog.setEditable(false);
         txtLog.setColumns(20);
@@ -314,7 +314,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmbBrow.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 78, 20));
+        jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(338, 40, 90, 20));
 
         btnRun.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         btnRun.setForeground(new java.awt.Color(204, 0, 0));
@@ -325,7 +325,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 64, 78, 32));
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 64, 90, 32));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -374,7 +374,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         lblSITES11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES11.setText("Browser:");
         lblSITES11.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES11, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 24, 72, 16));
+        jPanel3.add(lblSITES11, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 72, 16));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -408,26 +408,26 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         _slack.setText("Report to Slack");
         _slack.setToolTipText("");
         _slack.setRequestFocusEnabled(false);
-        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 64, 100, 14));
+        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 64, 110, 14));
 
         _headless.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         _headless.setText("Headless <<<<");
         _headless.setToolTipText("");
         _headless.setRequestFocusEnabled(false);
-        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 80, 100, 14));
+        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 80, 110, 14));
 
         lblSITES16.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES16.setText("Slack Shannel:");
+        lblSITES16.setText("Slack Channel:");
         lblSITES16.setAlignmentX(0.5F);
         lblSITES16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel3.add(lblSITES16, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 4, 72, 16));
+        jPanel3.add(lblSITES16, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 4, 72, 16));
 
         txtSlackCh.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtSlackCh.setText("#xtt_test");
-        jPanel3.add(txtSlackCh, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 4, 192, -1));
+        jPanel3.add(txtSlackCh, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 192, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 404, 420, 96));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 404, 430, 96));
 
         txtADMIN_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtADMIN_ID.setText("oleg.spozito@compassdigital.io");
@@ -500,21 +500,28 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         _login.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _login.setSelected(true);
         _login.setText("Admin Login");
+        _login.setAlignmentY(0.0F);
         _login.setEnabled(false);
-        _login.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _login.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         _login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _login.setIconTextGap(1);
+        _login.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _login.setRequestFocusEnabled(false);
 
         _all_data.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _all_data.setText("Show all data rows");
         _all_data.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _all_data.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _all_data.setIconTextGap(1);
+        _all_data.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _all_data.setRequestFocusEnabled(false);
 
         _site_new.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _site_new.setText("New Site (not in Prod)");
+        _site_new.setText("New Site (not Prod)");
         _site_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _site_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _site_new.setIconTextGap(1);
+        _site_new.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _site_new.setRequestFocusEnabled(false);
 
         _site.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
@@ -522,90 +529,124 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         _site.setContentAreaFilled(false);
         _site.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _site.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _site.setIconTextGap(1);
+        _site.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
         _brand.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _brand.setText("Brand");
         _brand.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _brand.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _brand.setIconTextGap(1);
+        _brand.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _brand.setRequestFocusEnabled(false);
 
         _orders.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _orders.setText("Orders");
         _orders.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _orders.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _orders.setIconTextGap(1);
+        _orders.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _orders.setRequestFocusEnabled(false);
 
         _resent_updates.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _resent_updates.setText("Recent Updates");
         _resent_updates.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _resent_updates.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _resent_updates.setIconTextGap(1);
+        _resent_updates.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _resent_updates.setRequestFocusEnabled(false);
 
         _announcements.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _announcements.setText("Announcements");
         _announcements.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _announcements.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _announcements.setIconTextGap(1);
+        _announcements.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _announcements.setRequestFocusEnabled(false);
 
         _promo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _promo.setText("Promo Management");
         _promo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _promo.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _promo.setIconTextGap(1);
+        _promo.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _promo.setRequestFocusEnabled(false);
 
         _sales_reporting.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _sales_reporting.setText("Sales Reporting");
         _sales_reporting.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _sales_reporting.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _sales_reporting.setIconTextGap(1);
+        _sales_reporting.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _sales_reporting.setRequestFocusEnabled(false);
 
         _menu_manager.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _menu_manager.setText("Menu Manager");
+        _menu_manager.setText("MM Basic");
         _menu_manager.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _menu_manager.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _menu_manager.setIconTextGap(1);
+        _menu_manager.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _menu_manager.setRequestFocusEnabled(false);
 
         _users.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _users.setSelected(true);
         _users.setText("Users");
         _users.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _users.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _users.setIconTextGap(1);
+        _users.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _users.setRequestFocusEnabled(false);
 
         _password.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _password.setText("Forgot Password");
         _password.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _password.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _password.setIconTextGap(1);
+        _password.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _password.setRequestFocusEnabled(false);
+        _password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _passwordActionPerformed(evt);
+            }
+        });
 
         _logout.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _logout.setText("User Feedback & Logout");
+        _logout.setText("Feedback & Logout");
         _logout.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _logout.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _logout.setIconTextGap(1);
+        _logout.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _logout.setRequestFocusEnabled(false);
 
         _roles.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _roles.setText("Roles Permissions");
         _roles.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _roles.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _roles.setIconTextGap(1);
+        _roles.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _roles.setRequestFocusEnabled(false);
 
         _brand_new.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _brand_new.setText("Add Brand (not in Prod)");
+        _brand_new.setText("Add Brand (not Prod)");
         _brand_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _brand_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _brand_new.setIconTextGap(1);
+        _brand_new.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _brand_new.setRequestFocusEnabled(false);
 
         _smart_analytics.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _smart_analytics.setText("Smart Analytics");
         _smart_analytics.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _smart_analytics.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _smart_analytics.setIconTextGap(1);
+        _smart_analytics.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _smart_analytics.setRequestFocusEnabled(false);
 
         _group_management.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _group_management.setText("Group Management");
         _group_management.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _group_management.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _group_management.setIconTextGap(1);
+        _group_management.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _group_management.setRequestFocusEnabled(false);
 
         lblSITES8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -622,79 +663,109 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         _sales_analytics.setText("Sales Analytics");
         _sales_analytics.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _sales_analytics.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _sales_analytics.setIconTextGap(1);
+        _sales_analytics.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _sales_analytics.setRequestFocusEnabled(false);
 
         _notifications.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _notifications.setText("Notifications");
         _notifications.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _notifications.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _notifications.setIconTextGap(1);
+        _notifications.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _notifications.setRequestFocusEnabled(false);
-
-        txtDH_Id.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtDH_Id.setText("Fails, no test");
 
         lblSITES15.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblSITES15.setText("> Import DH Menu Id:");
         lblSITES15.setAlignmentX(0.5F);
 
         txtComp.setEditable(false);
-        txtComp.setBackground(new java.awt.Color(255, 255, 255));
         txtComp.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtComp.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         txtSector.setEditable(false);
-        txtSector.setBackground(new java.awt.Color(255, 255, 255));
         txtSector.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtSector.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         _bulk_apply.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _bulk_apply.setText("Bulk Apply");
+        _bulk_apply.setText("MM Bulk Apply");
         _bulk_apply.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _bulk_apply.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _bulk_apply.setIconTextGap(1);
+        _bulk_apply.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _bulk_apply.setRequestFocusEnabled(false);
 
         _images.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _images.setText("Images");
         _images.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _images.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _images.setIconTextGap(1);
+        _images.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _images.setRequestFocusEnabled(false);
 
         _reschedule_menu.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _reschedule_menu.setText("Reschedule menu");
         _reschedule_menu.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _reschedule_menu.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _reschedule_menu.setIconTextGap(1);
+        _reschedule_menu.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _reschedule_menu.setRequestFocusEnabled(false);
 
         _sales_report_hidden.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _sales_report_hidden.setText("Sales-rep hidden");
         _sales_report_hidden.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _sales_report_hidden.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _sales_report_hidden.setIconTextGap(1);
+        _sales_report_hidden.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _sales_report_hidden.setRequestFocusEnabled(false);
 
         _orders_report_hidden.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _orders_report_hidden.setText("Order-rep hidden");
         _orders_report_hidden.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _orders_report_hidden.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _orders_report_hidden.setIconTextGap(1);
+        _orders_report_hidden.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _orders_report_hidden.setRequestFocusEnabled(false);
 
         _brand_closure.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _brand_closure.setText("Brand Closure");
         _brand_closure.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _brand_closure.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _brand_closure.setIconTextGap(1);
+        _brand_closure.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _brand_closure.setRequestFocusEnabled(false);
 
         _timeslots.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _timeslots.setText("Timeslots");
         _timeslots.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _timeslots.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _timeslots.setIconTextGap(1);
+        _timeslots.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _timeslots.setRequestFocusEnabled(false);
 
         _export_menuset.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _export_menuset.setText("Export Menuset");
+        _export_menuset.setText("MM Export Menuset");
         _export_menuset.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _export_menuset.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _export_menuset.setIconTextGap(1);
+        _export_menuset.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _export_menuset.setRequestFocusEnabled(false);
+
+        _mm_items.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _mm_items.setText("MM Items Updates");
+        _mm_items.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _mm_items.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _mm_items.setIconTextGap(1);
+        _mm_items.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        _mm_items.setRequestFocusEnabled(false);
+
+        _brand_config.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _brand_config.setText("Brand Config");
+        _brand_config.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _brand_config.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _brand_config.setIconTextGap(1);
+        _brand_config.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        _brand_config.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -702,77 +773,65 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(_login, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_site, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_brand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_brand_closure, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_sales_reporting, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_sales_analytics, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_smart_analytics, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_bulk_apply, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_export_menuset, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_reschedule_menu, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(_menu_manager, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(_notifications, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(_group_management))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(_images, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(_timeslots, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(_resent_updates, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(1, 1, 1)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_site_new, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_brand_new, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(_users, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_roles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(txtSector, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72)
-                        .addComponent(txtComp, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(169, 169, 169)
-                        .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(lblSITES15)
-                        .addGap(2, 2, 2)
-                        .addComponent(txtDH_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(_sales_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(_orders_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(8, 8, 8))
+                    .addComponent(lblSITES15)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(_bulk_apply, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_menu_manager, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_export_menuset, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(_mm_items, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(10, 10, 10))
+                                .addComponent(txtComp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtSector, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(_smart_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_sales_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_sales_reporting, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_reschedule_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_brand_config, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_brand_closure, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_brand, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(0, 0, 0)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(_sales_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_orders_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_notifications, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_resent_updates, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_timeslots, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_images, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(_group_management, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(0, 0, 0)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_brand_new, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_site_new, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(1, 1, 1))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {_announcements, _group_management, _images, _notifications, _orders, _orders_report_hidden, _promo, _resent_updates, _sales_report_hidden, _timeslots});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(lblSITES15)
+                .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_images, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -793,59 +852,53 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                     .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(_group_management, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(_sales_reporting, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(_sales_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_notifications, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(_smart_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(_brand_config, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_group_management, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(_bulk_apply, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_reschedule_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_roles, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(_sales_reporting, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_notifications, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(_sales_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(_smart_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_orders_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(_export_menuset, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_sales_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
-                .addComponent(_reschedule_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(_sales_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(_menu_manager, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(_menu_manager, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(_bulk_apply, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(_export_menuset, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(_mm_items, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(lblSITES15))
-                    .addComponent(txtDH_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(lblSITES12)))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtComp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, 0)
+                        .addComponent(txtSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(txtComp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 140, 420, 264));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 420, 260));
 
         getAccessibleContext().setAccessibleName("AP3_New");
 
@@ -933,6 +986,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     private boolean _Notifications = false;
     private boolean _Bulk_apply = false;
     private boolean _Export_menuset = false;
+    private boolean _MM_items = false;
     private boolean _Images = false;
     private boolean _Timeslots = false;
     private boolean _Orders = false;
@@ -951,6 +1005,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     private boolean _Sales_report_hidden = false;       
     private boolean _Orders_report_hidden = false;
     private boolean _Brand_closure = false; 
+    private boolean _Brand_config = false; 
     
     protected String New_ID = "";
     protected String Tab_Name = "";
@@ -1067,7 +1122,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             this.setTitle("AP3 Automation Manager >>> Changing Environment,  please wait...");
             GUI_Load_Env();
-            this.setTitle("AP3 Automation Manager (New)");
+            this.setTitle("AP3 Automation Manager");
             cmbEnv.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
@@ -1082,14 +1137,14 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnExelMouseClicked
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
-        String R = A.Func.SHOW_LOG_FILE(F, "txt");
+        String R = A.Func.SHOW_FILE(F, "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }//GEN-LAST:event_btnFailsMouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = A.Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
+        String R = A.Func.SHOW_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1099,8 +1154,15 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         if(!btnRun.isEnabled()){
             return;
         }
-        GUI_Run_Manual();
+        if(env.equals("PR") && !ProdSiteOK()){
+            return;          
+        } 
+        GUI_Run_Manual();  
     }//GEN-LAST:event_btnRunMouseClicked
+
+    private void _passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__passwordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event__passwordActionPerformed
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">      
@@ -1139,7 +1201,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         GUI_Load_Env();
         app = cmbApp.getSelectedItem().toString();
         CONFIG = false;  
-        this.setTitle("AP3 Automation Manager (New)");
+        this.setTitle("AP3 Automation Manager");
     }
     private void GUI_Load_Env(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
@@ -1295,7 +1357,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                     }
                 }
             } 
-//            DV1.repaint();
             SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
             SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
             GUI_Get_Brands();
@@ -1832,7 +1893,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("GL_MENU: ")) GL_MENU = value;
                 if(l.contains("SITE: ")) SITE = value;
                 if(l.contains("BRAND: ")) BRAND = value;
-                if(l.contains("DH_MENU_ID: ")) txtDH_Id.setText(value);
+                if(l.contains("DH_MENU_ID: ")) DH_MENU_ID = value;
                 
                 if(l.contains("ADMIN_ID: ")) txtADMIN_ID.setText(value);
                 if(l.contains("ADMIN_PW: ")) txtADMIN_PW.setText(value);
@@ -1854,6 +1915,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_menu_manager: "))  _menu_manager.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_bulk_apply: "))  _bulk_apply.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_export_menuset: "))  _export_menuset.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_mm_items: "))  _mm_items.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_images: "))  _images.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_orders: "))  _orders.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_sales_reporting: "))  _sales_reporting.setSelected(Boolean.parseBoolean(value));
@@ -1871,6 +1933,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_sales_report_hidden: "))  _sales_report_hidden.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_orders_report_hidden: "))  _orders_report_hidden.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_brand_closure: "))  _brand_closure.setSelected(Boolean.parseBoolean(value)); 
+                if(l.contains("_brand_config: "))  _brand_config.setSelected(Boolean.parseBoolean(value)); 
             }  
             CONFIG = true;
             txtLog.append("= LOAD_CONFIG > OK" + "\r\n");
@@ -1904,7 +1967,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             C += "SITE: " + _S + "\r\n";
             C += "BRAND: " + _B + "\r\n";
             C += "COUNTRY: " + COUNTRY + "\r\n";
-            C += "DH_MENU_ID: " + txtDH_Id.getText() + "\r\n";
+            C += "DH_MENU_ID: " + "Not Used" + "\r\n";
             
             C += "SlackCh: " + txtSlackCh.getText() + "\r\n";
             C += "_slack: " + _slack.isSelected() + "\r\n";
@@ -1925,11 +1988,13 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             C += "_brand_new: " + _brand_new.isSelected() + "\r\n";
             C += "_brand: " + _brand.isSelected() + "\r\n";
             C += "_brand_closure: " + _brand_closure.isSelected() + "\r\n";
+            C += "_brand_config: " + _brand_config.isSelected() + "\r\n";
             C += "_group_management: " + _group_management.isSelected() + "\r\n";
             C += "_menu_manager: " + _menu_manager.isSelected() + "\r\n";
             C += "_notifications: " + _notifications.isSelected() + "\r\n";
             C += "_bulk_apply: " + _bulk_apply.isSelected() + "\r\n";
             C += "_export_menuset: " + _export_menuset.isSelected() + "\r\n";
+            C += "_mm_items: " + _mm_items.isSelected() + "\r\n";
             C += "_images: " + _images.isSelected() + "\r\n";
             C += "_timeslots: " + _timeslots.isSelected() + "\r\n";
             C += "_orders: " + _orders.isSelected() + "\r\n"; 
@@ -2021,7 +2086,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             MOBILE_PW = txtMOBILE_PW.getText();
             RUNNER_ID = txtRUNNER_ID.getText();
             RUNNER_PW = txtRUNNER_PW.getText();
-            DH_MENU_ID = txtDH_Id.getText(); // like NWEJgN87Q3Sw46JaQ1Q, length > 18
+            DH_MENU_ID = "Not Used"; // like NWEJgN87Q3Sw46JaQ1Q, length > 18
             
             Slack_Channel = txtSlackCh.getText();
             _Slack = _slack.isSelected();
@@ -2033,11 +2098,13 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             _Brand_new = _brand_new.isSelected();
             _Brand = _brand.isSelected();
             _Brand_closure = _brand_closure.isSelected();
+            _Brand_config = _brand_config.isSelected();
             _Group_management = _group_management.isSelected();
             _Menu_manager = _menu_manager.isSelected();
             _Notifications = _notifications.isSelected();
             _Bulk_apply = _bulk_apply.isSelected();
             _Export_menuset = _export_menuset.isSelected();
+            _MM_items = _mm_items.isSelected();
             _Images = _images.isSelected();
             _Timeslots = _timeslots.isSelected();
             _Orders = _orders.isSelected();
@@ -2085,7 +2152,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             sw1.start();
             LOG_START(); // ========================================================
             BW1_DoWork(true);
-            BW2_DoWork();
+            //BW2_DoWork();  >>>>>>> Moved into BW1_DoWork after Driver started successfully
 //        }catch(Exception ex){
 //            Current_Log_Update(true, "= GUI_Run_Manual ERROR > " + ex.getMessage() + "\r\n");
 //            BW1_FAIL_LOG_UPDATE("= GUI_Run_Manual ERROR > " + ex.getMessage());
@@ -2179,11 +2246,14 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_brand_new: ")) _Brand_new = Boolean.parseBoolean(value);
                 if(l.contains("_brand: ")) _Brand = Boolean.parseBoolean(value);
                 if(l.contains("_brand_closure: ")) _Brand_closure = Boolean.parseBoolean(value);
+                if(l.contains("_brand_config: ")) _Brand_config = Boolean.parseBoolean(value);
                 if(l.contains("_group_management: ")) _Group_management = Boolean.parseBoolean(value);
                 if(l.contains("_menu_manager: ")) _Menu_manager = Boolean.parseBoolean(value);
                 if(l.contains("_notifications: ")) _Notifications = Boolean.parseBoolean(value);
                 if(l.contains("_bulk_apply: ")) _Bulk_apply = Boolean.parseBoolean(value);
                 if(l.contains("_export_menuset: ")) _Export_menuset = Boolean.parseBoolean(value);
+                if(l.contains("_mm_items: ")) _MM_items = Boolean.parseBoolean(value);
+
                 if(l.contains("_images: ")) _Images = Boolean.parseBoolean(value);
                 if(l.contains("_timeslots: ")) _Timeslots = Boolean.parseBoolean(value); 
                 if(l.contains("_orders: ")) _Orders = Boolean.parseBoolean(value);
@@ -2222,6 +2292,22 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             return "ERROR > " + ex.getMessage();
         }
     }
+    private boolean ProdSiteOK(){
+        String App = "";
+        String Site = "";
+        if(!((app.equals("Boost") && SITE.equals("QA University"))
+            || (app.equals("Thrive") && SITE.equals("Compass Labs QA Only")))){
+            JOptionPane.showMessageDialog(this,
+            "Please select QA Production Site to run Automation:" +  System.getProperty("line.separator") +
+            " = Boost > 'QA University'" +  System.getProperty("line.separator") +
+            " = Thrive > 'Compass Labs QA Only'" +  System.getProperty("line.separator") +
+            " = No AP3 Automation on other apps"               
+                    ); 
+            return false;
+        } else{
+            return true;
+        }
+    }
     // </editor-fold> 
 
     //<editor-fold defaultstate="collapsed" desc="Extend HTML Report Methods">
@@ -2242,7 +2328,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         HtmlReporter.config().setDocumentTitle("JTT Web Automation Report");
         HtmlReporter.config().setTheme(Theme.STANDARD);               
     }    
-    protected void Log_Html_Result(String RES, String Test_Description, boolean Capture_Screenshot, ExtentTest Test) throws IOException  {
+    protected void Log_Html_Result(String RES, String Test_Description, boolean Capture_Screenshot, ExtentTest Test) {
         switch (RES) {
             case "PASS":
                 Test.log(Status.PASS, MarkupHelper.createLabel(Test_Description, ExtentColor.GREEN));
@@ -2283,7 +2369,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ImageIO.write(ImageIO.read(SF), "png", bos);
             SF.delete();
-            return "Get Screenshot > data:image/png;base64, " + Base64.getEncoder().encodeToString(bos.toByteArray());
+            return "data:image/png;base64, " + Base64.getEncoder().encodeToString(bos.toByteArray());
         }catch (IOException ex) {
             return "Get Screenshot > data:image/png;base64," + " ERROR: " + ex.getMessage();
         }
@@ -2418,6 +2504,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                     btnRun.setEnabled(true);
                     btnFails.setEnabled(true);
                 }
+                BW2_DoWork();
                 New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
                 
                 Extent_Report_Config(); 
@@ -2456,9 +2543,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                     if(d1 != null) {
                         d1.quit(); 
                     }
-                } catch (InterruptedException | ExecutionException ex)  { 
+                } catch (Exception ex)  { 
                     Current_Log_Update(GUI, "- BW1 Done > ERROR: " + ex.getMessage() + "\r\n");
-                    
                     BW1_FAIL_LOG_UPDATE(ex.getMessage()); 
                 } 
             } 
@@ -2515,7 +2601,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                             }
                             Thread.sleep(2000); //  pause till new alert expected ???? 
                         }
-                    } catch (IOException | InterruptedException ex){ // Exception ex
+                    } catch (Exception ex){ // Exception ex
                         txtLog.append( "= BW2: " + ex.getMessage() + "\r\n");
                         txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
                     }
@@ -2681,6 +2767,13 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }
+        if(_Brand_config){
+            SCOPE += ", Brand Config";
+            ParentTest = HtmlReport.createTest("Brand"); 
+            AP3_brand_config BR = new AP3.AP3_brand_config(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+        }        
         if(_Brand_new){
             SCOPE += ", New Brand";
             ParentTest = HtmlReport.createTest("New Brand"); 
@@ -2702,6 +2795,13 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         } 
+        if(_MM_items){
+            SCOPE += ", MM Items Update";
+            ParentTest = HtmlReport.createTest("Items Update"); 
+            AP3_mm_items BR = new AP3.AP3_mm_items(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+        }        
         if(_Group_management){
             SCOPE += ", Group Management";
             ParentTest = HtmlReport.createTest("Group Management"); 
@@ -2773,21 +2873,21 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }          
         if(_Sales_analytics){
-            SCOPE += ", Promo";
+            SCOPE += ", Sales Analytics";
             ParentTest = HtmlReport.createTest("Sales Analytics"); 
             AP3_sales_analytics BR = new AP3.AP3_sales_analytics(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         } 
         if(_Sales_reporting){
-            SCOPE += ", Promo";
-            ParentTest = HtmlReport.createTest("_Sales_reporting"); 
+            SCOPE += ", Sales Reporting";
+            ParentTest = HtmlReport.createTest("Sales Reporting"); 
             AP3_sales_reporting BR = new AP3.AP3_sales_reporting(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }         
         if(_Sales_report_hidden){
-            SCOPE += ", Promo";
+            SCOPE += ", Sales Report Hidden";
             ParentTest = HtmlReport.createTest("Sales Report Hidden"); 
             AP3_sales_reporting_for_hidden_stations BR = new AP3.AP3_sales_reporting_for_hidden_stations(AP3_GUI.this);
             BR.run(); // ======================================
@@ -3290,7 +3390,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "LoadTimeOut " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH + ". Wait: " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec", true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
@@ -3338,7 +3438,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "LoadTimeOut " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH + ". Wait: " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec", true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
@@ -3382,7 +3482,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "Wait:  " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />" + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />" + BY + " > " + PATH + ". Wait: " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec", false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
@@ -3437,7 +3537,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "LoadTimeOut " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH + ". Wait: " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec", true, ParentTest.createNode(NAME));
         }
         sw1.reset();
     }
@@ -3730,13 +3830,13 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             action.moveToElement(e, XX, YY).click().perform();
             Thread.sleep(500);
             _p++; 
-            EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "Click out " + DIRECTION + " of element successful" + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click out " + DIRECTION + " of element successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
@@ -6321,6 +6421,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _announcements;
     private javax.swing.JCheckBox _brand;
     private javax.swing.JCheckBox _brand_closure;
+    private javax.swing.JCheckBox _brand_config;
     private javax.swing.JCheckBox _brand_new;
     private javax.swing.JCheckBox _bulk_apply;
     private javax.swing.JCheckBox _export_menuset;
@@ -6330,6 +6431,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _login;
     private javax.swing.JCheckBox _logout;
     private javax.swing.JCheckBox _menu_manager;
+    private javax.swing.JCheckBox _mm_items;
     private javax.swing.JCheckBox _notifications;
     private javax.swing.JCheckBox _orders;
     private javax.swing.JCheckBox _orders_report_hidden;
@@ -6383,7 +6485,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtADMIN_ID;
     private javax.swing.JTextField txtADMIN_PW;
     private javax.swing.JTextField txtComp;
-    private javax.swing.JTextField txtDH_Id;
     private javax.swing.JTextArea txtLog;
     private javax.swing.JTextField txtMOBILE_ID;
     private javax.swing.JTextField txtMOBILE_PW;

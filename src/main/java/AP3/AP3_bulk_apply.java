@@ -76,7 +76,7 @@ class AP3_bulk_apply extends AP3_GUI{
         String menuName = "";
 
         
-            Call_API("Find 'Sides' MenuID", "", BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
+            Call_API("Find 'Sides' MenuID", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
             try {
                 API_Response_Body = t;               
                 json = new JSONObject(API_Response_Body);
@@ -105,7 +105,6 @@ class AP3_bulk_apply extends AP3_GUI{
                 return;
             }
 
-        //api call https://api.compassdigital.org/v1/menu/J4qRgLpO1NH83rk0d5QRiKkM0djlkNSvoQJkY2N6Ce2MyJQq1PSroW9GqqM8cMgzBPq?nocache=true&extended=true&show_unlinked=false
         Call_API("Call /menu/<MenuID> API", "Bearer " + AP3_TKN, BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", true,ParentTest, "no_jira");
         try {
             API_Response_Body = t;               
@@ -119,17 +118,25 @@ class AP3_bulk_apply extends AP3_GUI{
                 JSONObject item = items.getJSONObject(i);           
                 if (item.getJSONObject("is").getBoolean("hidden")) {
                     _t++;
-                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"hidden\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is not visible" + "\t" + "-" + "\t" + "\"hidden\" : " + item.getJSONObject("is").getBoolean("hidden") + "\t" + "PASS" + "\t" 
+                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("PASS", "\"hidden\" : " + item.getJSONObject("is").getBoolean("hidden"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is not visible"));
                 } else {
                     _t++;
-                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"hidden\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is not visible" + "\t" + "-" + "\t" + "\"hidden\" : " + item.getJSONObject("is").getBoolean("hidden") + "\t" + "FAIL" + "\t" 
+                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "\"hidden\" : " + item.getJSONObject("is").getBoolean("hidden"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is not visible"));
                 }
                 if (item.getJSONObject("is").getBoolean("out_of_stock")) {
                     _t++;
-                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is out of stock" + "\t" + "-" + "\t" + "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("out_of_stock") + "\t" + "PASS" + "\t" 
+                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("PASS", "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("out_of_stock"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is out of stock"));
                 } else {
                     _t++;
-                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is out of stock" + "\t" + "-" + "\t" + "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("out_of_stock") + "\t" + "FAIL" + "\t" 
+                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("out_of_stock"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is out of stock"));
                 }
             } 
         }catch (Exception ex) {
@@ -149,13 +156,10 @@ class AP3_bulk_apply extends AP3_GUI{
             Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(2000);
-            if (!env.equals("PR")) {
+           
                 Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            } else {
-                Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            } 
+           
             Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
                 if (FAIL) { return;}
             Thread.sleep(500);    
@@ -220,17 +224,25 @@ class AP3_bulk_apply extends AP3_GUI{
                 JSONObject item = items.getJSONObject(i);           
                 if (!item.getJSONObject("is").getBoolean("hidden")) {
                     _t++;
-                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + " {\"hidden\" : false}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is visible" + "\t" + "-" + "\t" + " \"hidden\" : " + item.getJSONObject("is").getBoolean("hidden") + "\t" + "PASS" + "\t" 
+                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("PASS", "\"hidden\" : " + item.getJSONObject("is").getBoolean("hidden"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is visible"));
                 } else {
                     _t++;
-                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + " {\"hidden\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is visible" + "\t" + "-" + "\t" + " \"hidden\" : " + item.getJSONObject("is").getBoolean("hidden") + "\t" + "FAIL" + "\t" 
+                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "\"hidden\" : " + item.getJSONObject("is").getBoolean("hidden"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is visible"));
                 }
                 if (!item.getJSONObject("is").getBoolean("out_of_stock")) {
                     _t++;
-                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : false}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is in stock" + "\t" + "-" + "\t" + "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("out_of_stock") + "\t" + "PASS" + "\t" 
+                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("PASS", "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("hidden"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is in stock"));
                 } else {
                     _t++;
-                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"out_of_stock\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is in stock" + "\t" + "-" + "\t" + "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("out_of_stock") + "\t" + "FAIL" + "\t" 
+                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("hidden"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is in stock"));
                 }
             } 
         }catch (Exception ex) {
@@ -250,13 +262,10 @@ class AP3_bulk_apply extends AP3_GUI{
         Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(2000);
-        if (!env.equals("PR")) { // ============== Why Different ????
+
             Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        } else {
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        }        
+       
         //Open Bulk Apply Side Panel for all items and verify side panel
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
@@ -316,13 +325,10 @@ class AP3_bulk_apply extends AP3_GUI{
             Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is In Stock", "xpath", "((//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[8])//input[@aria-checked='true']", ParentTest, "no_jira");
             if (FAIL) { return;}
         }
-        if (!env.equals("PR")) {
+
             Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
                 if (FAIL) { return;}
-        } else {
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-        }
+
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500);              
@@ -348,13 +354,10 @@ class AP3_bulk_apply extends AP3_GUI{
             Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is visible", "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//i[contains(@class,'mdi-eye ')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         }
-        if (!env.equals("PR")) {
+
             Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        } else {
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        }
+
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500);              
@@ -387,13 +390,10 @@ class AP3_bulk_apply extends AP3_GUI{
         Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(2000);
-        if (!env.equals("PR")) {
+
             Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        } else {
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        }
+
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500);              
@@ -465,10 +465,14 @@ class AP3_bulk_apply extends AP3_GUI{
                     option_items = option.getJSONArray("items");
                     if (option_items.length() == 3) {
                         _t++;
-                        _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has 3 modifier otions" + "\t" + "-" + "\t" + "modifier options = " + option_items.length() + "\t" + "PASS" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        Log_Html_Result("PASS", "modifier options = " + option_items.length(), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 3 modifier otions"));
                     } else {
                         _t++;
-                        _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has 3 modifier otions" + "\t" + "-" + "\t" + "modifier options = " + option_items.length() + "\t" + "FAIL" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        Log_Html_Result("FAIL", "modifier options = " + option_items.length(), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 3 modifier otions"));
                     }
                 } 
             }catch (Exception ex) {
@@ -562,10 +566,14 @@ class AP3_bulk_apply extends AP3_GUI{
                     option_items = option.getJSONArray("items");
                     if (option_items.length() == 4) {
                         _t++;
-                        _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has 4 modifier otions" + "\t" + "-" + "\t" + "modifier options = " + option_items.length() + "\t" + "PASS" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        Log_Html_Result("PASS", "modifier options = " + option_items.length(), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 4 modifier otions"));
                     } else {
                         _t++;
-                        _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has 4 modifier otions" + "\t" + "-" + "\t" + "modifier options = " + option_items.length() + "\t" + "FAIL" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        Log_Html_Result("FAIL", "modifier options = " + option_items.length(), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 4 modifier otions"));
                     }
                 }
             }catch (Exception ex) {
@@ -680,24 +688,36 @@ class AP3_bulk_apply extends AP3_GUI{
                 JSONObject item = items.getJSONObject(i);           
                 if (!item.getJSONObject("is").getBoolean("disabled")) {
                     _t++;
-                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"disabled\" : false}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is not diabled" + "\t" + "-" + "\t" + "\"disabled\" = " + item.getJSONObject("is").getBoolean("disabled") + "\t" + "PASS" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("PASS", "\"disabled\" = " + item.getJSONObject("is").getBoolean("disabled"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is not diabled"));
                 } else {
                     _t++;
-                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"disabled\" : false}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is not diabled" + "\t" + "-" + "\t" + "\"disabled\" = " + item.getJSONObject("is").getBoolean("disabled") + "\t" + "FAIL" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "\"disabled\" = " + item.getJSONObject("is").getBoolean("disabled"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is not diabled"));
                 }
                 if (item.getJSONObject("price").getInt("amount") == Integer.parseInt(FIP)) {
                     _t++;
-                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "\"price\" : {\"amount\" : "+FIP+"}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " price is " + FIP + "\t" + "-" + "\t" + "\"price\" = " + item.getJSONObject("price").getInt("amount") + "\t" + "PASS" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("PASS", "\"price\" = " + item.getJSONObject("price").getInt("amount"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " price is " + FIP));
                 } else {
                     _t++;
-                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "\"price\" : {\"amount\" : "+FIP+"}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " price is " + FIP + "\t" + "-" + "\t" + "\"price\" = " + item.getJSONObject("price").getInt("amount") + "\t" + "FAIL" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "\"price\" = " + item.getJSONObject("price").getInt("amount"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " price is " + FIP));
                 }
-                if (item.isNull("plu")) {
+                if (!item.isNull("plu")) {
                     _t++;
-                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "has PLU" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has a PLU" + "\t" + "-" + "\t" + "has PLU = " + item.isNull("plu") + "\t" + "PASS" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("PASS", "has PLU = " + item.isNull("plu"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has a PLU"));
                 } else {
                     _t++;
-                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "has PLU" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has a PLU" + "\t" + "-" + "\t" + "has PLU = " + item.isNull("plu") + "\t" + "FAIL" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "has PLU = " + item.isNull("plu"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has a PLU"));
                 }
                 JSONArray options = new JSONArray();
                 options = item.getJSONArray("options");
@@ -706,10 +726,14 @@ class AP3_bulk_apply extends AP3_GUI{
                 option_items = option.getJSONArray("items");          
                 if (option_items.length() == 4) {
                     _t++;
-                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has 4 modifier otions" + "\t" + "-" + "\t" + "modifier options = " + option_items.length() + "\t" + "PASS" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        Log_Html_Result("PASS", "modifier options = " + option_items.length(), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 4 modifier otions"));
                 } else {
                     _t++;
-                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 4" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has 4 modifier otions" + "\t" + "-" + "\t" + "modifier options = " + option_items.length() + "\t" + "FAIL" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        Log_Html_Result("FAIL", "modifier options = " + option_items.length(), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 4 modifier otions"));
                 }
             }    
         }catch (Exception ex) {
@@ -724,13 +748,10 @@ class AP3_bulk_apply extends AP3_GUI{
         Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(2000);
-        if (!env.equals("PR")) {
+
             Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        } else {
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        }
+
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500);
@@ -771,13 +792,10 @@ class AP3_bulk_apply extends AP3_GUI{
             Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is Enabled", "xpath", "((//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[4])//input[@aria-checked='true']", ParentTest, "no_jira");
             if (FAIL) { return;}
         }
-        if (!env.equals("PR")) {
+
             Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        } else {
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        }
+
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500);
@@ -805,13 +823,10 @@ class AP3_bulk_apply extends AP3_GUI{
             Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" has a PLU number", "xpath", "(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[contains(text(),'"+PLU+"')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
         }
-        if (!env.equals("PR")) {
+
             Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
                 if (FAIL) { return;}
-        } else {
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-        }
+
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500);              
@@ -833,13 +848,10 @@ class AP3_bulk_apply extends AP3_GUI{
         
         // <editor-fold defaultstate="collapsed" desc="Bulk Update Global Modifiers">  
         EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Update Global Modifiers" + "\t" + " == Bulk Update Global Modifiers >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-        if (!env.equals("PR")) {
+
             Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
                 if (FAIL) { return;}
-        } else {
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-        }
+
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500);              
@@ -934,17 +946,25 @@ class AP3_bulk_apply extends AP3_GUI{
                 JSONObject item = items.getJSONObject(i);           
                 if (item.getJSONObject("is").getBoolean("disabled")) {
                     _t++;
-                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"disabled\" : true}" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is disabled" + "\t" + "-" + "\t" + "\"disabled\"  = " + item.getJSONObject("is").getBoolean("disabled") + "\t" + "PASS" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("PASS", "\"disabled\"  = " + item.getJSONObject("is").getBoolean("disabled"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is disabled"));
                 } else {
                     _t++;
-                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "{\"disabled\" : true}" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is disabled" + "\t" + "-" + "\t" + "\"disabled\"  = " + item.getJSONObject("is").getBoolean("disabled") + "\t" + "FAIL" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "\"disabled\"  = " + item.getJSONObject("is").getBoolean("disabled"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is disabled"));
                 }
                 if (item.isNull("plu")) {
                     _t++;
-                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "has No PLU" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " does not have a PLU" + "\t" + "-" + "\t" + "has PLU  = " + item.isNull("plu") + "\t" + "PASS" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("PASS", "has PLU  = " + item.isNull("plu"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " does not have a PLU"));
                 } else {
                     _t++;
-                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "has No PLU" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " does not have a PLU" + "\t" + "-" + "\t" + "has PLU  = " + item.isNull("plu") + "\t" + "FAIL" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "has PLU  = " + item.isNull("plu"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " does not have a PLU"));
                 }
                 JSONArray options = new JSONArray();
                 options = item.getJSONArray("options");
@@ -953,10 +973,14 @@ class AP3_bulk_apply extends AP3_GUI{
                 option_items = option.getJSONArray("items");
                 if (option_items.length() == 3) {
                     _t++;
-                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has 3 modifier otions" + "\t" + "-" + "\t" + "modifier options = " + option_items.length() + "\t" + "PASS" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("PASS", "modifier options = " + option_items.length(), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 3 modifier otions"));
                 } else {
                     _t++;
-                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + "\t" + "-" + "\t" + "modifier options = 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has 3 modifier otions" + "\t" + "-" + "\t" + "modifier options = " + option_items.length() + "\t" + "FAIL" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "modifier options = " + option_items.length(), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 3 modifier otions"));
                 }
             }            
         }catch (Exception ex) {
@@ -967,7 +991,6 @@ class AP3_bulk_apply extends AP3_GUI{
             Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", false, ParentTest.createNode("API Responce Error"));
             return;
         }
-
                       
         // <editor-fold defaultstate="collapsed" desc="Check Local Menu After Global Changes">  
         EX += " - " + "\t" + " === " + "\t" + " ===== Check Local Menu After Global Changes" + "\t" + " == Check Local Menu After Global Changes >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -993,7 +1016,10 @@ class AP3_bulk_apply extends AP3_GUI{
         Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
-        Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
+
+            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+   
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}    
@@ -1080,13 +1106,10 @@ class AP3_bulk_apply extends AP3_GUI{
             Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
         }           
-        if (!env.equals("PR")) {
+
             Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        } else {
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[4]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-        }
+
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}
         Thread.sleep(500); 

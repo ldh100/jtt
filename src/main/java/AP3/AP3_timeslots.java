@@ -1,7 +1,5 @@
-
 package AP3;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Calendar;
@@ -34,6 +32,7 @@ class AP3_timeslots extends AP3_GUI{
         SiteID = a.SiteID;
         BRAND = a.BRAND;
         BrandID = a.BrandID;
+        CompanyID = a.CompanyID;
         
         AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
@@ -81,7 +80,9 @@ class AP3_timeslots extends AP3_GUI{
             if (FAIL) {return;}
             Element_By_Path_Text_Enter("Enter End Time '6PM'", "xpath", "//*[contains(@aria-label,'End Time')]", "06:00P", false, ParentTest, "no_jira" );
             if (FAIL) { return;}
-            if (d1.findElement(By.cssSelector("[aria-label='Repeat']")).getAttribute("value").equals("")) {
+            Element_By_Path_Attribute("Get attr value", "css", "[aria-label='Repeat']", "value", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (t.equals("")) {
                 Element_By_Path_Click("Click > 'Repeat' dd", "css", "[aria-label='Repeat']", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 Wait_For_Element_By_Path_Presence("Wait for dropdown", "xpath", "//div[contains(@class,'v-select-list')]", ParentTest, "no_jira" );
@@ -89,15 +90,17 @@ class AP3_timeslots extends AP3_GUI{
                 Element_By_Path_Click("Select > 'Daily' in dd list", "xpath", "//*[contains(text(), 'Daily')]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
             }
-            if (!d1.findElement(By.xpath("//input[@aria-label='No end date']/following-sibling::i")).getAttribute("class").contains("-marked")) {
+            Element_By_Path_Attribute("Get attr value", "xpath", "//input[@aria-label='No end date']/following-sibling::i", "class", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (!t.contains("-marked")) {
                 Element_By_Path_Click("Click > 'No end date' Checkbox", "xpath", "//input[@aria-label='No end date']/following-sibling::i", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 List_L1("List of 'Date' Fields", "xpath", "//input[contains(@aria-label, 'Date')]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 if (L1.size() > 1) {
-                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields" + "\t" + "-" + "\t" + "1" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields should not be greater than 1" + "\t" + "-" + "\t" + "Number of 'Date' fields found = " + L1.size() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "Number of 'Date' fields found = " + L1.size(), true, ParentTest.createNode("Expected number of 'Date' fields should not be greater than 1"));
                 }
-                
             }  
             Element_By_Path_Click("Click > 'Start Date' field", "css", "[aria-label='Start Date']", ParentTest, "no_jira" );
             if (FAIL) {return;}
@@ -136,15 +139,17 @@ class AP3_timeslots extends AP3_GUI{
             if (FAIL) {return;}
             Element_By_Path_Text_Enter("Enter End Time '6PM'", "xpath", "//*[contains(@aria-label,'End Time')]", "06:00P", false, ParentTest, "no_jira" );
             if (FAIL) { return;}
-            if (!d1.findElement(By.xpath("//input[@aria-label='No end date']/following-sibling::i")).getAttribute("class").contains("-marked")) {
+            Element_By_Path_Attribute("Get attr value", "xpath", "//input[@aria-label='No end date']/following-sibling::i", "class", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (!t.contains("-marked")) {
                 Element_By_Path_Click("Click > 'No end date' Checkbox", "xpath", "//input[@aria-label='No end date']/following-sibling::i", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 List_L1("List of 'Date' Fields", "xpath", "//input[contains(@aria-label, 'Date')]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 if (L1.size() > 1) {
-                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields" + "\t" + "-" + "\t" + "1" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                }
-                
+                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields should not be greater than 1" + "\t" + "-" + "\t" + "Number of 'Date' fields found = " + L1.size() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "Number of 'Date' fields found = " + L1.size(), true, ParentTest.createNode("Expected number of 'Date' fields should not be greater than 1"));
+                }   
             }  
             Element_By_Path_Click("Click > 'Start Date' field", "css", "[aria-label='Start Date']", ParentTest, "no_jira" );
             if (FAIL) {return;}
@@ -239,9 +244,11 @@ class AP3_timeslots extends AP3_GUI{
         if (timeslots.length() <= numberOfExpectedTimeslots) {
             _t++;
             _p++; EX += _t + "\t" + "API - number of pick-up timeslots" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of pick-up timeslots found: " + timeslots.length()));
         } else {
             _t++;
             _f++; EX += _t + "\t" + "API - number of pick-up timeslots" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("FAIL", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of pick-up timeslots found: " + timeslots.length()));
         }
         
         Call_API("timeslots API call (delivery menu)", "Bearer " + AP3_TKN, BaseAPI + "/location/brand/" + BrandID + "/timeslots/delivery/menu/" + MenuID + "?nocache=1&extended=true", true, ParentTest, "no_jira" );
@@ -259,9 +266,11 @@ class AP3_timeslots extends AP3_GUI{
         if (timeslots.length() <= numberOfExpectedTimeslots) {
             _t++;
             _p++; EX += _t + "\t" + "API - number of delivery timeslots" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of delivery timeslots found: " + timeslots.length()));
         } else {
             _t++;
             _f++; EX += _t + "\t" + "API - number of delivery timeslots" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+             Log_Html_Result("FAIL", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of delivery timeslots found: " + timeslots.length()));
         }
         EX += " - " + "\t" + " === " + "\t" + " ===== Station Hours Greater Than Menu Hours End" + "\t" + " == Station Hours Greater Than Menu Hours End >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold>
@@ -301,7 +310,9 @@ class AP3_timeslots extends AP3_GUI{
             if (FAIL) {return;}
             Element_By_Path_Text_Enter("Enter End Time '5PM'", "xpath", "//*[contains(@aria-label,'End Time')]", "05:00P", false, ParentTest, "no_jira" );
             if (FAIL) { return;}
-            if (d1.findElement(By.cssSelector("[aria-label='Repeat']")).getAttribute("value").equals("")) {
+            Element_By_Path_Attribute("Get attr value", "css", "[aria-label='Repeat']", "value", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (t.equals("")) {
                 Element_By_Path_Click("Click > 'Repeat' dd", "css", "[aria-label='Repeat']", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 Wait_For_Element_By_Path_Presence("Wait for dropdown", "xpath", "//div[contains(@class,'v-select-list')]", ParentTest, "no_jira" );
@@ -309,13 +320,16 @@ class AP3_timeslots extends AP3_GUI{
                 Element_By_Path_Click("Select > 'Daily' in dd list", "xpath", "//*[contains(text(), 'Daily')]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
             }
-            if (!d1.findElement(By.xpath("//input[@aria-label='No end date']/following-sibling::i")).getAttribute("class").contains("-marked")) {
+            Element_By_Path_Attribute("Get attr value", "xpath", "//input[@aria-label='No end date']/following-sibling::i", "class", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (!t.contains("-marked")) {
                 Element_By_Path_Click("Click > 'No end date' Checkbox", "xpath", "//input[@aria-label='No end date']/following-sibling::i", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 List_L1("List of 'Date' Fields", "xpath", "//input[contains(@aria-label, 'Date')]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 if (L1.size() > 1) {
-                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields" + "\t" + "-" + "\t" + "1" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields should not be greater than 1" + "\t" + "-" + "\t" + "Number of 'Date' fields found = " + L1.size() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "Number of 'Date' fields found = " + L1.size(), true, ParentTest.createNode("Expected number of 'Date' fields should not be greater than 1"));
                 }
                 
             }  
@@ -356,13 +370,16 @@ class AP3_timeslots extends AP3_GUI{
             if (FAIL) {return;}
             Element_By_Path_Text_Enter("Enter End Time '5PM'", "xpath", "//*[contains(@aria-label,'End Time')]", "05:00P", false, ParentTest, "no_jira" );
             if (FAIL) { return;}
-            if (!d1.findElement(By.xpath("//input[@aria-label='No end date']/following-sibling::i")).getAttribute("class").contains("-marked")) {
+            Element_By_Path_Attribute("Get attr value", "xpath", "//input[@aria-label='No end date']/following-sibling::i", "class", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (!t.contains("-marked")) {
                 Element_By_Path_Click("Click > 'No end date' Checkbox", "xpath", "//input[@aria-label='No end date']/following-sibling::i", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 List_L1("List of 'Date' Fields", "xpath", "//input[contains(@aria-label, 'Date')]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 if (L1.size() > 1) {
-                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields" + "\t" + "-" + "\t" + "1" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields should not be greater than 1" + "\t" + "-" + "\t" + "Number of 'Date' fields found = " + L1.size() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "Number of 'Date' fields found = " + L1.size(), true, ParentTest.createNode("Expected number of 'Date' fields should not be greater than 1"));
                 }
                 
             }  
@@ -453,9 +470,11 @@ class AP3_timeslots extends AP3_GUI{
         if (timeslots.length() <= numberOfExpectedTimeslots) {
             _t++;
             _p++; EX += _t + "\t" + "API - number of pick-up timeslots" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of pick-up timeslots found: " + timeslots.length()));
         } else {
             _t++;
             _f++; EX += _t + "\t" + "API - number of pick-up timeslots" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("FAIL", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of pick-up timeslots found: " + timeslots.length()));
         }
         
         Call_API("timeslots API call (delivery menu)", "Bearer " + AP3_TKN, BaseAPI + "/location/brand/" + BrandID + "/timeslots/delivery/menu/" + MenuID + "?nocache=1&extended=true", true, ParentTest, "no_jira" );
@@ -471,11 +490,13 @@ class AP3_timeslots extends AP3_GUI{
         timeslots = new JSONArray();
         timeslots = json.getJSONArray("timeslots");
         if (timeslots.length() <= numberOfExpectedTimeslots) {
-            _t++;
+             _t++;
             _p++; EX += _t + "\t" + "API - number of delivery timeslots" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of delivery timeslots found: " + timeslots.length()));
         } else {
             _t++;
             _f++; EX += _t + "\t" + "API - number of delivery timeslots" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+             Log_Html_Result("FAIL", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of delivery timeslots found: " + timeslots.length()));
         }        
         EX += " - " + "\t" + " === " + "\t" + " ===== Menu Hours Greater than Station Hours End" + "\t" + " == Menu Hours Greater than Station Hours End >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold>
@@ -515,7 +536,9 @@ class AP3_timeslots extends AP3_GUI{
             if (FAIL) {return;}
             Element_By_Path_Text_Enter("Enter End Time '3PM'", "xpath", "//*[contains(@aria-label,'End Time')]", "03:00P", false, ParentTest, "no_jira" );
             if (FAIL) { return;}
-            if (d1.findElement(By.cssSelector("[aria-label='Repeat']")).getAttribute("value").equals("")) {
+            Element_By_Path_Attribute("Get attr value", "css", "[aria-label='Repeat']", "value", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (t.equals("")) {
                 Element_By_Path_Click("Click > 'Repeat' dd", "css", "[aria-label='Repeat']", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 Wait_For_Element_By_Path_Presence("Wait for dropdown", "xpath", "//div[contains(@class,'v-select-list')]", ParentTest, "no_jira" );
@@ -523,13 +546,16 @@ class AP3_timeslots extends AP3_GUI{
                 Element_By_Path_Click("Select > 'Daily' in dd list", "xpath", "//*[contains(text(), 'Daily')]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
             }
-            if (!d1.findElement(By.xpath("//input[@aria-label='No end date']/following-sibling::i")).getAttribute("class").contains("-marked")) {
+            Element_By_Path_Attribute("Get attr value", "xpath", "//input[@aria-label='No end date']/following-sibling::i", "class", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (!t.contains("-marked")) {
                 Element_By_Path_Click("Click > 'No end date' Checkbox", "xpath", "//input[@aria-label='No end date']/following-sibling::i", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 List_L1("List of 'Date' Fields", "xpath", "//input[contains(@aria-label, 'Date')]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 if (L1.size() > 1) {
-                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields" + "\t" + "-" + "\t" + "1" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields should not be greater than 1" + "\t" + "-" + "\t" + "Number of 'Date' fields found = " + L1.size() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "Number of 'Date' fields found = " + L1.size(), true, ParentTest.createNode("Expected number of 'Date' fields should not be greater than 1"));
                 }
                 
             }  
@@ -572,7 +598,9 @@ class AP3_timeslots extends AP3_GUI{
             if (FAIL) {return;}
             Element_By_Path_Text_Enter("Enter End Time '9PM'", "xpath", "//*[contains(@aria-label,'End Time')]", "09:00P", false, ParentTest, "no_jira" );
             if (FAIL) { return;}
-            if (d1.findElement(By.cssSelector("[aria-label='Repeat']")).getAttribute("value").equals("")) {
+            Element_By_Path_Attribute("Get attr value", "css", "[aria-label='Repeat']", "value", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (t.equals("")) {
                 Element_By_Path_Click("Click > 'Repeat' dd", "css", "[aria-label='Repeat']", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 Wait_For_Element_By_Path_Presence("Wait for dropdown", "xpath", "//div[contains(@class,'v-select-list')]", ParentTest, "no_jira" );
@@ -580,13 +608,16 @@ class AP3_timeslots extends AP3_GUI{
                 Element_By_Path_Click("Select > 'Daily' in dd list", "xpath", "//*[contains(text(), 'Daily')]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
             }
-            if (!d1.findElement(By.xpath("//input[@aria-label='No end date']/following-sibling::i")).getAttribute("class").contains("-marked")) {
+            Element_By_Path_Attribute("Get attr value", "xpath", "//input[@aria-label='No end date']/following-sibling::i", "class", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (!t.contains("-marked")) {
                 Element_By_Path_Click("Click > 'No end date' Checkbox", "xpath", "//input[@aria-label='No end date']/following-sibling::i", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 List_L1("List of 'Date' Fields", "xpath", "//input[contains(@aria-label, 'Date')]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 if (L1.size() > 1) {
-                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields" + "\t" + "-" + "\t" + "1" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields should not be greater than 1" + "\t" + "-" + "\t" + "Number of 'Date' fields found = " + L1.size() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "Number of 'Date' fields found = " + L1.size(), true, ParentTest.createNode("Expected number of 'Date' fields should not be greater than 1"));
                 }
                 
             }  
@@ -627,13 +658,16 @@ class AP3_timeslots extends AP3_GUI{
             if (FAIL) {return;}
             Element_By_Path_Text_Enter("Enter End Time '5PM'", "xpath", "//*[contains(@aria-label,'End Time')]", "05:00P", false, ParentTest, "no_jira" );
             if (FAIL) { return;}
-            if (!d1.findElement(By.xpath("//input[@aria-label='No end date']/following-sibling::i")).getAttribute("class").contains("-marked")) {
+            Element_By_Path_Attribute("Get attr value", "xpath", "//input[@aria-label='No end date']/following-sibling::i", "class", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (!t.contains("-marked")) {
                 Element_By_Path_Click("Click > 'No end date' Checkbox", "xpath", "//input[@aria-label='No end date']/following-sibling::i", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 List_L1("List of 'Date' Fields", "xpath", "//input[contains(@aria-label, 'Date')]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 if (L1.size() > 1) {
-                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields" + "\t" + "-" + "\t" + "1" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields should not be greater than 1" + "\t" + "-" + "\t" + "Number of 'Date' fields found = " + L1.size() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "Number of 'Date' fields found = " + L1.size(), true, ParentTest.createNode("Expected number of 'Date' fields should not be greater than 1"));
                 }
                 
             }  
@@ -675,13 +709,16 @@ class AP3_timeslots extends AP3_GUI{
             if (FAIL) {return;}
             Element_By_Path_Text_Enter("Enter End Time '5PM'", "xpath", "//*[contains(@aria-label,'End Time')]", "05:00P", false, ParentTest, "no_jira" );
             if (FAIL) { return;}
-            if (!d1.findElement(By.xpath("//input[@aria-label='No end date']/following-sibling::i")).getAttribute("class").contains("-marked")) {
+            Element_By_Path_Attribute("Get attr value", "xpath", "//input[@aria-label='No end date']/following-sibling::i", "class", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (!t.contains("-marked")) {
                 Element_By_Path_Click("Click > 'No end date' Checkbox", "xpath", "//input[@aria-label='No end date']/following-sibling::i", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 List_L1("List of 'Date' Fields", "xpath", "//input[contains(@aria-label, 'Date')]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 if (L1.size() > 1) {
-                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields" + "\t" + "-" + "\t" + "1" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields should not be greater than 1" + "\t" + "-" + "\t" + "Number of 'Date' fields found = " + L1.size() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "Number of 'Date' fields found = " + L1.size(), true, ParentTest.createNode("Expected number of 'Date' fields should not be greater than 1"));
                 }
                 
             }  
@@ -772,9 +809,11 @@ class AP3_timeslots extends AP3_GUI{
         if (timeslots.length() <= numberOfExpectedTimeslots) {
             _t++;
             _p++; EX += _t + "\t" + "API - number of pick-up timeslots - " +MENU+ " menu" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of pick-up timeslots - " +MENU+ " menu = " + timeslots.length()));
         } else {
             _t++;
             _f++; EX += _t + "\t" + "API - number of pick-up timeslots - " +MENU+ " menu" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("FAIL", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of pick-up timeslots - " +MENU+ " menu = " + timeslots.length()));
         }
         
         Call_API("timeslots API call (delivery menu)", "Bearer " + AP3_TKN, BaseAPI + "/location/brand/" + BrandID + "/timeslots/delivery/menu/" + MenuID + "?nocache=1&extended=true", true, ParentTest, "no_jira" );
@@ -792,9 +831,11 @@ class AP3_timeslots extends AP3_GUI{
         if (timeslots.length() <= numberOfExpectedTimeslots) {
             _t++;
             _p++; EX += _t + "\t" + "API - number of delivery timeslots - " +MENU+ " menu" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of delivery timeslots - " +MENU+ " menu = " + timeslots.length()));
         } else {
             _t++;
             _f++; EX += _t + "\t" + "API - number of delivery timeslots - " +MENU+ " menu" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("FAIL", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of delivery timeslots - " +MENU+ " menu = " + timeslots.length()));
         } 
         
         ///// ------api verif. for second menu 
@@ -847,9 +888,11 @@ class AP3_timeslots extends AP3_GUI{
         if (timeslots.length() <= numberOfExpectedTimeslots) {
             _t++;
             _p++; EX += _t + "\t" + "API - number of pick-up timeslots - " +MENU2+ " menu" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of pick-up timeslots - " +MENU2+ " menu = " + timeslots.length()));
         } else {
             _t++;
             _f++; EX += _t + "\t" + "API - number of pick-up timeslots - " +MENU2+ " menu" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("FAIL", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of pick-up timeslots - " +MENU2+ " menu = " + timeslots.length()));
         }
         
         Call_API("timeslots API call (delivery menu)", "Bearer " + AP3_TKN, BaseAPI + "/location/brand/" + BrandID + "/timeslots/delivery/menu/" + MenuID + "?nocache=1&extended=true", true, ParentTest, "no_jira" );
@@ -867,9 +910,11 @@ class AP3_timeslots extends AP3_GUI{
         if (timeslots.length() <= numberOfExpectedTimeslots) {
             _t++;
             _p++; EX += _t + "\t" + "API - number of delivery timeslots - " +MENU2+ " menu" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of delivery timeslots - " +MENU2+ " menu = " + timeslots.length()));
         } else {
             _t++;
             _f++; EX += _t + "\t" + "API - number of delivery timeslots - " +MENU2+ " menu" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("FAIL", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of delivery timeslots - " +MENU2+ " menu = " + timeslots.length()));
         }
         EX += " - " + "\t" + " === " + "\t" + " ===== Overlapping Menus End" + "\t" + " == Overlapping Menus End >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
@@ -909,7 +954,9 @@ class AP3_timeslots extends AP3_GUI{
             if (FAIL) {return;}
             Element_By_Path_Text_Enter("Enter End Time '1PM'", "xpath", "//*[contains(@aria-label,'End Time')]", "01:00P", false, ParentTest, "no_jira" );
             if (FAIL) { return;}
-            if (d1.findElement(By.cssSelector("[aria-label='Repeat']")).getAttribute("value").equals("")) {
+            Element_By_Path_Attribute("Get attr value", "css", "[aria-label='Repeat']", "value", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (t.equals("")) {
                 Element_By_Path_Click("Click > 'Repeat' dd", "css", "[aria-label='Repeat']", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 Wait_For_Element_By_Path_Presence("Wait for dropdown", "xpath", "//div[contains(@class,'v-select-list')]", ParentTest, "no_jira" );
@@ -917,13 +964,16 @@ class AP3_timeslots extends AP3_GUI{
                 Element_By_Path_Click("Select > 'Daily' in dd list", "xpath", "//*[contains(text(), 'Daily')]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
             }
-            if (!d1.findElement(By.xpath("//input[@aria-label='No end date']/following-sibling::i")).getAttribute("class").contains("-marked")) {
+            Element_By_Path_Attribute("Get attr value", "xpath", "//input[@aria-label='No end date']/following-sibling::i", "class", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (!t.contains("-marked")) {
                 Element_By_Path_Click("Click > 'No end date' Checkbox", "xpath", "//input[@aria-label='No end date']/following-sibling::i", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 List_L1("List of 'Date' Fields", "xpath", "//input[contains(@aria-label, 'Date')]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 if (L1.size() > 1) {
-                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields" + "\t" + "-" + "\t" + "1" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields should not be greater than 1" + "\t" + "-" + "\t" + "Number of 'Date' fields found = " + L1.size() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "Number of 'Date' fields found = " + L1.size(), true, ParentTest.createNode("Expected number of 'Date' fields should not be greater than 1"));
                 }
                 
             }  
@@ -966,7 +1016,9 @@ class AP3_timeslots extends AP3_GUI{
             if (FAIL) {return;}
             Element_By_Path_Text_Enter("Enter End Time '9PM'", "xpath", "//*[contains(@aria-label,'End Time')]", "09:00P", false, ParentTest, "no_jira" );
             if (FAIL) { return;}
-            if (d1.findElement(By.cssSelector("[aria-label='Repeat']")).getAttribute("value").equals("")) {
+            Element_By_Path_Attribute("Get attr value", "css", "[aria-label='Repeat']", "value", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (t.equals("")) {
                 Element_By_Path_Click("Click > 'Repeat' dd", "css", "[aria-label='Repeat']", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 Wait_For_Element_By_Path_Presence("Wait for dropdown", "xpath", "//div[contains(@class,'v-select-list')]", ParentTest, "no_jira" );
@@ -974,15 +1026,17 @@ class AP3_timeslots extends AP3_GUI{
                 Element_By_Path_Click("Select > 'Daily' in dd list", "xpath", "//*[contains(text(), 'Daily')]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
             }
-            if (!d1.findElement(By.xpath("//input[@aria-label='No end date']/following-sibling::i")).getAttribute("class").contains("-marked")) {
+            Element_By_Path_Attribute("Get attr value", "xpath", "//input[@aria-label='No end date']/following-sibling::i", "class", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (!t.contains("-marked")) {
                 Element_By_Path_Click("Click > 'No end date' Checkbox", "xpath", "//input[@aria-label='No end date']/following-sibling::i", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 List_L1("List of 'Date' Fields", "xpath", "//input[contains(@aria-label, 'Date')]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 if (L1.size() > 1) {
-                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields" + "\t" + "-" + "\t" + "1" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                }
-                
+                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields should not be greater than 1" + "\t" + "-" + "\t" + "Number of 'Date' fields found = " + L1.size() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "Number of 'Date' fields found = " + L1.size(), true, ParentTest.createNode("Expected number of 'Date' fields should not be greater than 1"));
+                }   
             }  
             Element_By_Path_Click("Click > 'Start Date' field", "css", "[aria-label='Start Date']", ParentTest, "no_jira" );
             if (FAIL) {return;}
@@ -1021,15 +1075,17 @@ class AP3_timeslots extends AP3_GUI{
             if (FAIL) {return;}
             Element_By_Path_Text_Enter("Enter End Time '1PM'", "xpath", "//*[contains(@aria-label,'End Time')]", "01:00P", false, ParentTest, "no_jira" );
             if (FAIL) { return;}
-            if (!d1.findElement(By.xpath("//input[@aria-label='No end date']/following-sibling::i")).getAttribute("class").contains("-marked")) {
+            Element_By_Path_Attribute("Get attr value", "xpath", "//input[@aria-label='No end date']/following-sibling::i", "class", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (!t.contains("-marked")) {
                 Element_By_Path_Click("Click > 'No end date' Checkbox", "xpath", "//input[@aria-label='No end date']/following-sibling::i", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 List_L1("List of 'Date' Fields", "xpath", "//input[contains(@aria-label, 'Date')]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 if (L1.size() > 1) {
-                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields" + "\t" + "-" + "\t" + "1" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                }
-                
+                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields should not be greater than 1" + "\t" + "-" + "\t" + "Number of 'Date' fields found = " + L1.size() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "Number of 'Date' fields found = " + L1.size(), true, ParentTest.createNode("Expected number of 'Date' fields should not be greater than 1"));
+                }  
             }  
             Element_By_Path_Click("Click > 'Start Date' field", "css", "[aria-label='Start Date']", ParentTest, "no_jira" );
             if (FAIL) {return;}
@@ -1069,15 +1125,17 @@ class AP3_timeslots extends AP3_GUI{
             if (FAIL) {return;}
             Element_By_Path_Text_Enter("Enter End Time '9PM'", "xpath", "//*[contains(@aria-label,'End Time')]", "09:00P", false, ParentTest, "no_jira" );
             if (FAIL) { return;}
-            if (!d1.findElement(By.xpath("//input[@aria-label='No end date']/following-sibling::i")).getAttribute("class").contains("-marked")) {
+            Element_By_Path_Attribute("Get attr value", "xpath", "//input[@aria-label='No end date']/following-sibling::i", "class", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            if (!t.contains("-marked")) {
                 Element_By_Path_Click("Click > 'No end date' Checkbox", "xpath", "//input[@aria-label='No end date']/following-sibling::i", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 List_L1("List of 'Date' Fields", "xpath", "//input[contains(@aria-label, 'Date')]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
                 if (L1.size() > 1) {
-                    _f++; EX += _t + "\t" + "Expected number of 'Date' fields" + "\t" + "-" + "\t" + "1" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                }
-                
+                   _f++; EX += _t + "\t" + "Expected number of 'Date' fields should not be greater than 1" + "\t" + "-" + "\t" + "Number of 'Date' fields found = " + L1.size() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "Number of 'Date' fields found = " + L1.size(), true, ParentTest.createNode("Expected number of 'Date' fields should not be greater than 1"));
+                } 
             }  
             Element_By_Path_Click("Click > 'Start Date' field", "css", "[aria-label='Start Date']", ParentTest, "no_jira" );
             if (FAIL) {return;}
@@ -1166,9 +1224,11 @@ class AP3_timeslots extends AP3_GUI{
         if (timeslots.length() <= numberOfExpectedTimeslots) {
             _t++;
             _p++; EX += _t + "\t" + "API - number of pick-up timeslots - " +MENU+ " menu" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of pick-up timeslots - " +MENU+ " menu = " + timeslots.length()));
         } else {
             _t++;
             _f++; EX += _t + "\t" + "API - number of pick-up timeslots - " +MENU+ " menu" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("FAIL", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of pick-up timeslots - " +MENU+ " menu = " + timeslots.length()));
         }
         
         Call_API("timeslots API call (delivery menu)", "Bearer " + AP3_TKN, BaseAPI + "/location/brand/" + BrandID + "/timeslots/delivery/menu/" + MenuID + "?nocache=1&extended=true", true, ParentTest, "no_jira" );
@@ -1186,9 +1246,11 @@ class AP3_timeslots extends AP3_GUI{
         if (timeslots.length() <= numberOfExpectedTimeslots) {
             _t++;
             _p++; EX += _t + "\t" + "API - number of delivery timeslots - " +MENU+ " menu" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of delivery timeslots - " +MENU+ " menu = " + timeslots.length()));
         } else {
             _t++;
             _f++; EX += _t + "\t" + "API - number of delivery timeslots - " +MENU+ " menu" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("FAIL", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of delivery timeslots - " +MENU+ " menu = " + timeslots.length()));
         } 
         
         ///// ------api verif. for second menu 
@@ -1240,10 +1302,12 @@ class AP3_timeslots extends AP3_GUI{
         timeslots = json.getJSONArray("timeslots");
         if (timeslots.length() <= numberOfExpectedTimeslots) {
             _t++;
-            _p++; EX += _t + "\t" + "API - number of pick-up timeslots - " + MENU2 + " menu" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            _p++; EX += _t + "\t" + "API - number of pick-up timeslots - " +MENU2+ " menu" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of pick-up timeslots - " +MENU2+ " menu = " + timeslots.length()));
         } else {
             _t++;
-            _f++; EX += _t + "\t" + "API - number of pick-up timeslots - " + MENU2 + " menu" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            _f++; EX += _t + "\t" + "API - number of pick-up timeslots - " +MENU2+ " menu" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("FAIL", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of pick-up timeslots - " +MENU2+ " menu = " + timeslots.length()));
         }
         
         Call_API("timeslots API call (delivery menu)", "Bearer " + AP3_TKN, BaseAPI + "/location/brand/" + BrandID + "/timeslots/delivery/menu/" + MenuID + "?nocache=1&extended=true", true, ParentTest, "no_jira" );
@@ -1261,9 +1325,11 @@ class AP3_timeslots extends AP3_GUI{
         if (timeslots.length() <= numberOfExpectedTimeslots) {
             _t++;
             _p++; EX += _t + "\t" + "API - number of delivery timeslots - " +MENU2+ " menu" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of delivery timeslots - " +MENU2+ " menu = " + timeslots.length()));
         } else {
             _t++;
             _f++; EX += _t + "\t" + "API - number of delivery timeslots - " +MENU2+ " menu" + "\t" + "-" + "\t" + timeslots.length() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("FAIL", "Should be <= " + numberOfExpectedTimeslots, false, ParentTest.createNode("API - number of delivery timeslots - " +MENU2+ " menu = " + timeslots.length()));
         }
         EX += " - " + "\t" + " === " + "\t" + " ===== Non-Overlapping Menus End" + "\t" + " == Non-Overlapping Menus End >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
@@ -1304,29 +1370,44 @@ class AP3_timeslots extends AP3_GUI{
             Element_By_Path_Click("Click > 'Save'", "xpath", "//*[contains(text(),'Save')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
             Thread.sleep(1000);
+            // =================== "Leave without publishing?" Dialog even PUBLISH OK ============ DEBUG    
+            Text_Found("Find 'Leave...' question", "Leave without publishing?", ParentTest, "no_jira" ); 
+            if ("Found".equals(t)) {     
+                _t++; _f++;
+                EX += _t + "\t" + "Navigate Back after Publish OK" + "\t" + "MM 'Sector' page" + "\t" + "Dialog 'Leave without publishing?'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+                F += "Step: " + _t + " > " + "Dialog 'Leave without publishing?' after Published OK" + "\r\n";
+                Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true, ParentTest, "no_jira" ); 
+                if (FAIL) { return; }   
+                 Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", ParentTest, "no_jira" ); 
+                if (FAIL) { return; }         
+                Element_By_Path_Text("Find 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", ParentTest, "no_jira" ); 
+                if (FAIL) { return; }     
+                Element_By_Path_Click("Click 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", ParentTest, "no_jira" ); 
+                if (FAIL) { return;}  
+            }
+            // =================== "Leave without publishing?" Dialog even PUBLISH OK ============ DEBUG
         } else {
             Navigate_to_URL( "Navigate to Schedule Page", url + "#/sites/" + appId + "/site/" + SiteID + "/brand/" + BrandID + "/schedules", ParentTest, "no_jira" );
             if (FAIL) {return;}
+        // =================== "Leave without publishing?" Dialog even PUBLISH OK ============ DEBUG    
+        Text_Found("Find 'Leave...' question", "Leave without publishing?", ParentTest, "no_jira" ); 
+        if ("Found".equals(t)) {     
+            _t++; _f++;
+            EX += _t + "\t" + "Navigate Back after Publish OK" + "\t" + "MM 'Sector' page" + "\t" + "Dialog 'Leave without publishing?'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+            F += "Step: " + _t + " > " + "Dialog 'Leave without publishing?' after Published OK" + "\r\n";
+            Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true, ParentTest, "no_jira" ); 
+            if (FAIL) { return; }   
+             Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", ParentTest, "no_jira" ); 
+            if (FAIL) { return; }         
+            Element_By_Path_Text("Find 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", ParentTest, "no_jira" ); 
+            if (FAIL) { return; }     
+            Element_By_Path_Click("Click 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", ParentTest, "no_jira" ); 
+            if (FAIL) { return;}  
+        }
+        // =================== "Leave without publishing?" Dialog even PUBLISH OK ============ DEBUG
         Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(text(),'Schedule menu')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
-        }
-                // =================== "Leave without publishing?" Dialog even PUBLISH OK ============ DEBUG    
-                Text_Found("Find 'Leave...' question", "Leave without publishing?", ParentTest, "no_jira" ); 
-                if ("Found".equals(t)) {     
-                    _t++; _f++;
-                    EX += _t + "\t" + "Navigate Back after Publish OK" + "\t" + "MM 'Sector' page" + "\t" + "Dialog 'Leave without publishing?'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-                    F += "Step: " + _t + " > " + "Dialog 'Leave without publishing?' after Published OK" + "\r\n";
-                    Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true, ParentTest, "no_jira" ); 
-                    if (FAIL) { return; }   
-                     Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", ParentTest, "no_jira" ); 
-                    if (FAIL) { return; }         
-                    Element_By_Path_Text("Find 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", ParentTest, "no_jira" ); 
-                    if (FAIL) { return; }     
-                    Element_By_Path_Click("Click 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", ParentTest, "no_jira" ); 
-                    if (FAIL) { return;}  
-                }
-                // =================== "Leave without publishing?" Dialog even PUBLISH OK ============ DEBUG
-                
+        }   
         Element_By_Path_Click("Click > Delivery Hours", "xpath", "//a[contains(text(), 'Delivery Hours')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
         Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//a[contains(text(), 'Delivery Hours') and contains(@class,'item--active')]", ParentTest, "no_jira" );
@@ -1357,10 +1438,42 @@ class AP3_timeslots extends AP3_GUI{
             Element_By_Path_Click("Click > 'Save'", "xpath", "//*[contains(text(),'Save')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
             Thread.sleep(1000);
+            // =================== "Leave without publishing?" Dialog even PUBLISH OK ============ DEBUG    
+            Text_Found("Find 'Leave...' question", "Leave without publishing?", ParentTest, "no_jira" ); 
+            if ("Found".equals(t)) {     
+                _t++; _f++;
+                EX += _t + "\t" + "Navigate Back after Publish OK" + "\t" + "MM 'Sector' page" + "\t" + "Dialog 'Leave without publishing?'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+                F += "Step: " + _t + " > " + "Dialog 'Leave without publishing?' after Published OK" + "\r\n";
+                Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true, ParentTest, "no_jira" ); 
+                if (FAIL) { return; }   
+                 Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", ParentTest, "no_jira" ); 
+                if (FAIL) { return; }         
+                Element_By_Path_Text("Find 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", ParentTest, "no_jira" ); 
+                if (FAIL) { return; }     
+                Element_By_Path_Click("Click 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", ParentTest, "no_jira" ); 
+                if (FAIL) { return;}  
+            }
+            // =================== "Leave without publishing?" Dialog even PUBLISH OK ============ DEBUG
         } else {
             Navigate_to_URL( "Navigate to Schedule Page", url + "#/sites/" + appId + "/site/" + SiteID + "/brand/" + BrandID + "/schedules", ParentTest, "no_jira" );
             if (FAIL) {return;}
-        Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(text(),'Schedule menu')]", ParentTest, "no_jira" );
+            // =================== "Leave without publishing?" Dialog even PUBLISH OK ============ DEBUG    
+            Text_Found("Find 'Leave...' question", "Leave without publishing?", ParentTest, "no_jira" ); 
+            if ("Found".equals(t)) {     
+                _t++; _f++;
+                EX += _t + "\t" + "Navigate Back after Publish OK" + "\t" + "MM 'Sector' page" + "\t" + "Dialog 'Leave without publishing?'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+                F += "Step: " + _t + " > " + "Dialog 'Leave without publishing?' after Published OK" + "\r\n";
+                Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true, ParentTest, "no_jira" ); 
+                if (FAIL) { return; }   
+                 Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", ParentTest, "no_jira" ); 
+                if (FAIL) { return; }         
+                Element_By_Path_Text("Find 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", ParentTest, "no_jira" ); 
+                if (FAIL) { return; }     
+                Element_By_Path_Click("Click 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", ParentTest, "no_jira" ); 
+                if (FAIL) { return;}  
+            }
+            // =================== "Leave without publishing?" Dialog even PUBLISH OK ============ DEBUG
+            Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(text(),'Schedule menu')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
         }
     } catch (Exception ex){}   // =============================================  

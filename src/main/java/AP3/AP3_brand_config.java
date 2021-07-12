@@ -8,10 +8,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
-class AP3_brand_new extends AP3_GUI {
+class AP3_brand_config extends AP3_GUI {
 
     private String stationName = "";
-    protected AP3_brand_new(AP3_GUI a) {
+    protected AP3_brand_config(AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -41,7 +41,7 @@ class AP3_brand_new extends AP3_GUI {
     private String JDE_id = "";
     private String JDE_category = ""; 
     private boolean flag = false;
-    protected void run(boolean NEW_SITE) {
+    protected void run() {
     try{    
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");
         if (FAIL) {
@@ -1737,10 +1737,6 @@ class AP3_brand_new extends AP3_GUI {
         }
         Thread.sleep(1000);
 
-         Wait_For_Element_By_Path_Presence("Wait for brand name to load..","xpath", "//div[@class='layout row nowrap']//div[@class='flex shrink xs2']//button[@class='v-btn v-btn--icon theme--light']", ParentTest, "no_jira");
-        if (FAIL) {
-            return;
-        }
         List_L0("Count total assigned menus", "xpath", "//div[@class='layout row nowrap']//div[@class='flex shrink xs2']//button[@class='v-btn v-btn--icon theme--light']", ParentTest, "no_jira");
         if (FAIL) {
             return;

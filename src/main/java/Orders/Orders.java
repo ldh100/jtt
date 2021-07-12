@@ -734,7 +734,7 @@ public class Orders extends javax.swing.JInternalFrame {
         }
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        String R = Func.SHOW_LOG_FILE(J, "json");
+        String R = Func.SHOW_FILE(J, "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -764,7 +764,7 @@ public class Orders extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSave_OptMouseClicked
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = Func.SHOW_LOG_FILE(txtLog.getText(), "txt");
+        String R = Func.SHOW_FILE(txtLog.getText(), "txt");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -878,7 +878,7 @@ public class Orders extends javax.swing.JInternalFrame {
                 }
             }
 
-String R = A.Func.SHOW_LOG_FILE(JSCart.toString(4), "json");
+String R = A.Func.SHOW_FILE(JSCart.toString(4), "json");
 if(!R.equals("OK")){
     txtLog.append(R + "\r\n");
     txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -941,7 +941,7 @@ if(!R.equals("OK")){
 
     private void btnCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCartMouseClicked
         if(btnCart.isEnabled() && DV1.getSelectedRowCount() > 0){
-            String R = A.Func.SHOW_LOG_FILE(
+            String R = A.Func.SHOW_FILE(
                     "==== Shopping Cart:\r\n" + DV1.getValueAt(DV1.getSelectedRow(), 7).toString() +
                     "\r\n\r\n" +
                     "==== Order:\r\n" + DV1.getValueAt(DV1.getSelectedRow(), 8).toString(), "json");

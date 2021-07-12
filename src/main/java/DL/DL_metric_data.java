@@ -2,6 +2,8 @@ package DL;
 
 import com.aventstack.extentreports.ExtentTest;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 class DL_metric_data extends DL_GUI {
     protected DL_metric_data (DL_GUI a) {
@@ -19,6 +21,7 @@ class DL_metric_data extends DL_GUI {
     }
     protected void run(String CompareTo, String Variants) {  
     try {    
+        SelectMember();
         double TS = 0.0;
         double CS = 0.0;
         double MER = 0.0;
@@ -330,4 +333,31 @@ class DL_metric_data extends DL_GUI {
         }
     } catch (Exception ex){}   // =============================================  
     }
+    public void SelectMember() {
+        try{
+        Text_Found("Check member is Displayed ", "My Members", ParentTest, "no_jira");
+        if (t.equalsIgnoreCase("Not Found")) {
+            return;
+        }
+        List_L2("Members Selection List", "xpath", "//button[contains(@class, 'MuiGrid-root jss')]/div", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        if (L2 == null || L2.size() == 0) {
+
+            List_L2("Members Selection List", "xpath", "//p[contains(@class, 'MuiTypography-root jss')]", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+        }
+        List<String> Memberlist = new ArrayList<>();
+
+        Element_Click("Members Selection List" + (0 + 1), L2.get(0), ParentTest, "no_jira");
+        Element_By_Path_Click("Click on Continue as a Member", "xpath", "//span[text()='Continue as Member']", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(5000);
+    }catch (Exception ex){}
+}
 }
