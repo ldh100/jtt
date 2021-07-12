@@ -65,7 +65,7 @@ class WO_account_settings extends WO_GUI {
         Element_By_Path_Text("Payment tab  text", "xpath", "//a[@href='/account-settings/payment-options']",ParentTest, "no_jira");  
         Element_By_Path_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']",ParentTest, "no_jira");
           if (FAIL) { return;} 
-          Thread.sleep(5000);  
+Thread.sleep(5000);  
     //verify CC ---- delete  existed
     
         Element_By_Path_Text("Detect First row of list ", "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]",ParentTest, "no_jira");
