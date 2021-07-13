@@ -31,6 +31,7 @@ class AP3_brand_new extends AP3_GUI {
         SECTOR = a.SECTOR;
         SectorID = a.SectorID;
         GL_MENU = a.GL_MENU;
+        CompanyID = a.CompanyID;
 
         AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
@@ -40,6 +41,7 @@ class AP3_brand_new extends AP3_GUI {
     private String API_Response_Body = "";
     private String JDE_id = "";
     private String JDE_category = ""; 
+    private String MenuName="";
     private boolean flag = false;
     protected void run(boolean NEW_SITE) {
     try{    
@@ -668,6 +670,7 @@ class AP3_brand_new extends AP3_GUI {
                     if (FAIL) {
                         return;
                     }
+                                      
                     Element_Click("Open 'Menu Name' drop-down", L1.get(0), ParentTest, "no_jira");
                     if (FAIL) {
                         return;
@@ -681,23 +684,61 @@ class AP3_brand_new extends AP3_GUI {
                     if (FAIL) {
                         return;
                     }
+                    
+                    
                     if (L1.size() > 0) {
                         Element_Attribute("1st Menu Name", L1.get(0), "textContent", ParentTest, "no_jira");
                         if (FAIL) {
                             return;
                         }
-                        Element_Click("Select 1st Menu", L1.get(0), ParentTest, "no_jira");
+                    Element_Click("Select 1st Menu", L1.get(0), ParentTest, "no_jira");
                         if (FAIL) {
                             return;
                         }
-                        Thread.sleep(500);
-                    } else {
+                    } 
+                    
+                    
+                  
+
+        
+               
+                    
+                    
+                    
+                    if (L1.size() > 0) {                        
+                    for(int m=0; m<L1.size();m++){                                                   
+                       Element_Attribute("Get Menu Name", L1.get(m), "textContent", ParentTest, "no_jira");
+                       MenuName=t;
+                        System.out.println(MenuName);
+                        //List_TR_TDs("Check Station list to matches with selected station from 'AP3' ", L1.get(i), ParentTest, "no_jira"); 
+                        if (FAIL) {
+                            return;
+                        }
+                     }
+                                                                              
+                        
+                        Thread.sleep(500);  
+                       
+                        
+                     
+                    /*
+                    if (L1.size() > 0) {
+                        Element_Attribute("1st Menu Name", L1.get(0), "textContent", ParentTest, "no_jira");
+                        if (FAIL) {
+                            return;
+                        }
+                    */
+                                          
+                    }else {
 
                         _f++;
                         F += "Step: " + _t + " > " + "Add Station > Assing Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
                         EX += " - " + "\t" + "Add Station > Assign Menus" + "\t" + "Add" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
                     }
                     break;
+                    
+                     
+                    
                 case "Integration Type":
                     List_Child_E1_By_Path("Find Setup KDS > Yes", L2.get(i), "xpath", ".//div[contains(@class, 'Option-Left-Not-Selected-Blue-White')]", ParentTest, "no_jira");
                     if (!FAIL) {
@@ -836,6 +877,7 @@ class AP3_brand_new extends AP3_GUI {
         if (FAIL) {
             return;
         }
+        
         removeGlobalMenu();
         // </editor-fold>     
 
@@ -1910,7 +1952,46 @@ class AP3_brand_new extends AP3_GUI {
        
         } catch (Exception ex){}   // =============================================
          
-    }//End of JDE_API
+    }//End of JDE_API      
+    
+    //<editor-fold defaultstate="collapsed" desc="Call Company API">    //This block call the company API: BaseAPI + "/menu/company/"+CompanyID
+    private void Call_Company_API(String MenuName) {
+    try {    
+
+        Call_API("Call Global menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID, true, ParentTest, "no_jira" );        
+        if(t.startsWith("{")){
+            API_Response_Body = t;               
+        }else{
+            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/" + CompanyID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode("API Responce Error"));
+            return;
+        }
+        JSONObject json = new JSONObject(API_Response_Body);
+        JSONArray menus = json.getJSONArray("menus");
+         
+        for(int k = 0; k < menus.length(); k++) {
+           JSONObject menu = menus.getJSONObject(k);
+           
+                   System.out.println(menu.getJSONObject("label").getString("en"));
+                   
+                   if(menu.getJSONObject("label").getString("en").equals(MenuName)) {                       
+                            _t++;
+                            _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "MenuNames are from Global Menu" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                           //print pass menu set is disabled
+                       
+                        } else {
+                           _t++;
+                           _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found Incorrect MenuNames" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                           //print fail menuset is eneabled
+                        } 
+
+                         
+                 
+            }
+        } catch (Exception ex){}   // =============================================  
+    } 
+    //</editor-fold>  
     
 } 
 // End of AP3_Brand_New
