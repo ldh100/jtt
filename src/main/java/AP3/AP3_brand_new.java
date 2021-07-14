@@ -1779,6 +1779,10 @@ class AP3_brand_new extends AP3_GUI {
         }
         Thread.sleep(1000);
 
+         Wait_For_Element_By_Path_Presence("Wait for brand name to load..","xpath", "//div[@class='layout row nowrap']//div[@class='flex shrink xs2']//button[@class='v-btn v-btn--icon theme--light']", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
         List_L0("Count total assigned menus", "xpath", "//div[@class='layout row nowrap']//div[@class='flex shrink xs2']//button[@class='v-btn v-btn--icon theme--light']", ParentTest, "no_jira");
         if (FAIL) {
             return;
