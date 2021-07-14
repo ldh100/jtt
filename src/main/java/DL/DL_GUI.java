@@ -542,7 +542,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
 
         lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES14.setText("Slack Shannel:");
+        lblSITES14.setText("Slack Channel:");
         lblSITES14.setAlignmentX(0.5F);
         lblSITES14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 4, 72, 16));

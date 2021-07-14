@@ -519,13 +519,13 @@
               <Font name="Tahoma" size="11" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="2"/>
-            <Property name="text" type="java.lang.String" value="Slack Shannel:"/>
+            <Property name="text" type="java.lang.String" value="Slack Channel:"/>
             <Property name="alignmentX" type="float" value="0.5"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="148" y="4" width="72" height="16"/>
+              <AbsoluteConstraints x="144" y="4" width="72" height="16"/>
             </Constraint>
           </Constraints>
         </Component>
