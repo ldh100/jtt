@@ -1188,15 +1188,19 @@ Thread.sleep(5000);
                     _t++;
                     if(fpromo_amount == 0.50)  { 
                         _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "Discount Amount: "+fpromo_amount + "\t" + "0.50" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        Log_Html_Result("PASS", "Discount Amount: "+fpromo_amount, false, ParentTest.createNode("Discount Amount : Found-as expected"));
                     } else {
                         _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "Discount Amount: "+fpromo_amount + "\t" + "0.50" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        Log_Html_Result("FAIL", "Discount Amount: "+fpromo_amount  , true, ParentTest.createNode("Discount Amount : Not Found - expected")); 
                     }
                 }  else if(discount.has("percent_off")) {
                     int promo_amount = discount.getInt("percent_off");           //getString("amount_off");
                     if(promo_amount == 50) { 
                         _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "Percent off : "+promo_amount + "\t" + "50%" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        Log_Html_Result("PASS", "Percent off : "+promo_amount, false, ParentTest.createNode("Percent off : Found-as expected"));
                     } else {
                         _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "Percent off : "+promo_amount + "\t" + "50%" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        Log_Html_Result("FAIL", "Percent off : "+promo_amount  , true, ParentTest.createNode("Percent off : Not Found - expected"));
                     }
                 }//End of percent off
        }//End of for

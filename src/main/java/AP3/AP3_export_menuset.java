@@ -64,7 +64,7 @@ class AP3_export_menuset extends AP3_GUI{
     } 
     protected void run(){
     try {
-       /*
+       
                //AUT-875: As an Admin, I cannot export the menu in EDIT mode
          selectingGlobalMenu();
          
@@ -220,38 +220,40 @@ class AP3_export_menuset extends AP3_GUI{
         File_Delete("Delete Report Unzipped File", destinationDir, MenuSetName.trim() + ".xlsx" , ParentTest, "no_jira");
             if (FAIL) { return;}                                                                
     }  
-        /*/       
+               
                 
          
         //AUT-262 : Disabling a menu set 
-        /*
-        selectingGlobalMenu();
-//        Navigate_Back("Navigate Back"," 'global menu' page"," 'View Global Menus of a group' page", ParentTest, "no_jira"); 
-//        Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//        Page_URL("Menu > " + SECTOR + " page URL", ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//        Find_Text("Button 'Add Global Menu' text", "ADD GLOBAL MENU", true,ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//        Element_By_Path_Attribute("Page SubTitle", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "textContent", ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//        Find_Text("Find 'Search...' text", "Search Menus", true,ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//
-//        Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//        Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//        Thread.sleep(500);
-//
-//        Element_By_Path_Click("Search Menus Click", "xpath", "//div[normalize-space()='View GLobal Menus']", ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//        Thread.sleep(500);
-//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//        Thread.sleep(500);
-//        Wait_For_Element_By_Path_Presence("Wait for Menu List", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
-//            if (FAIL) { return;}
+        
+        //selectingGlobalMenu();
+        
+        
+        Navigate_Back("Navigate Back"," 'global menu' page"," 'View Global Menus of a group' page", ParentTest, "no_jira"); 
+        Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Page_URL("Menu > " + SECTOR + " page URL", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Find_Text("Button 'Add Global Menu' text", "ADD GLOBAL MENU", true,ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Attribute("Page SubTitle", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "textContent", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Find_Text("Find 'Search...' text", "Search Menus", true,ParentTest, "no_jira");
+            if (FAIL) { return;}
+
+        Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);
+
+        Element_By_Path_Click("Search Menus Click", "xpath", "//div[normalize-space()='View GLobal Menus']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Wait for Menu List", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
+            if (FAIL) { return;}
             
         int flag=1;                          
 
@@ -420,7 +422,7 @@ class AP3_export_menuset extends AP3_GUI{
            
           Call_GlobalMenuSet_API(Menu_ID,MenuSetName,flag);
 
-        */
+        
         
         //AUT-997: As an Admin, I can export the Global Modifiers
         /*
@@ -503,14 +505,15 @@ class AP3_export_menuset extends AP3_GUI{
             }
         }
          */        
-              
+         //Prerequisite for this test is that there cannot be any Global modifier group in the global menu to be selected     
         //AUT-280: Mods can be added only if they exist in the global mods 
         //Description:2 scenarios here. 1st scenario: No mod groups exist in the global mods
         //Go to the Global Menu
         //Select V2 menu
         //Select an item
         //Click on Add Modifier Group
-                
+        
+        /*
         selectingGlobalMenu();
         
         Element_By_Path_Click("Search Menus Click", "xpath", "//div[normalize-space()='View GLobal Modifier Groups']", ParentTest, "no_jira");
@@ -629,7 +632,7 @@ class AP3_export_menuset extends AP3_GUI{
         
             }
         
-            
+            */
             
             
     } catch (Exception ex){}   // =============================================  
@@ -696,7 +699,7 @@ class AP3_export_menuset extends AP3_GUI{
         Thread.sleep(500);
         
  
-        /*
+        
         Element_By_Path_Click("Search Menus Click", "xpath", "//div[normalize-space()='View GLobal Menus']", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
@@ -705,7 +708,7 @@ class AP3_export_menuset extends AP3_GUI{
         Thread.sleep(500);
         Wait_For_Element_By_Path_Presence("Wait for Menu List", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
             if (FAIL) { return;}   
-        */
+        
         
         //</editor-fold>
     } catch (Exception ex){}   // =============================================  
