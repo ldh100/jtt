@@ -1850,18 +1850,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         String BucketName = "";
         String S3_env = "";
         String S3_app = "";
-
-        //Android app S3 bucket path
-        String mobile_repo_name = "mobile-app-repos";
-        String android_app_path_S3_bucket = "automation/android-coreapp/staging/";
-        String Dev_android_app_path_S3_bucket = "automation/android-coreapp/daily/";
-
-        //iOS app S3 bucket path
-        String Dev_iOS_app_path_S3_bucket = "automation/novus/";
-        String Staging_iOS_app_path_S3_bucket = "automation/novus/regression/";
-        String Staging_iOS_app_path_S3_bucket_bolter = "automation/bolter/";
-        String Prod_iOS_app_path_S3_bucket = "automation/novus/production/";
-    
+ 
         switch (env) {
             case "PR":
                 S3_env = "/android/production/";

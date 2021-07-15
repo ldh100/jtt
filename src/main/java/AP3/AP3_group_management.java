@@ -31,6 +31,7 @@ class AP3_group_management extends AP3_GUI{
         ADMIN_PW = a.ADMIN_PW;
  
         app = a.app;
+        appId = a.appId;
         SITE = a.SITE;
         SiteID = a.SiteID;
         BRAND = a.BRAND;
@@ -470,6 +471,7 @@ Thread.sleep(5000);
                 _f++;
                 EX += " - " + "\t" + "\t" + " JDE Category " + "\t" + "Bento Nouveau Sales" + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + "Bento Nouveau Sales Not found";
                 EX += "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                Log_Html_Result("FAIL", "Bento Nouveau Sales Not found"  , true, ParentTest.createNode("JDE Category - Bento Nouveau Sales"));
                 return;
             } 
 
@@ -501,12 +503,211 @@ Thread.sleep(5000);
              Text_Found("Find ..Option Yes", "Yes", ParentTest, "no_jira");
              Text_Found("Find ..Option No", "No", ParentTest, "no_jira");
              Find_Text("Find ..Default JDE Category", "Default JDE Category", false, ParentTest, "no_jira");
+             Element_By_Path_Click("Click Cancel", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//button[1]", ParentTest, "no_jira");
+             if (FAIL) { return;}  
+             
+             //AUT 1005 - JDE Category-Station level- As an Admin, I can update the JDE category in the station configuration
+             Element_By_Path_Click("Click on Group mgmt", "xpath", "//div[@class='flex']//div//a[@class='v-breadcrumbs__item'][normalize-space()='Group Management']", ParentTest, "no_jira");
+             if (FAIL) { return;}  
+             Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");  
+             if (FAIL) { return;}     
+             Find_Text("Fund 'Search...' text", "Search all Groups", true, ParentTest, "no_jira"); 
+             if (FAIL) { return;} 
+             Element_By_Path_Click("Search Groups Click", "xpath", "//label[contains(text(), 'Search all Groups')]", ParentTest, "no_jira");  
+             if (FAIL) { return;}            
+             Element_By_Path_Text_Enter("Enter Group Search", "css", "[aria-label='Search all Groups']", G, false, ParentTest, "no_jira"); 
+             if (FAIL) { return;} 
+            
+             List_L0("Filtered Groups Count", "tagName", "tr", ParentTest, "no_jira");              
+             if (FAIL) { return;}
+             T_Index = -1;
+             for (int i = 0; i < L0.size(); i++) {
+             Element_Text("Group Row Text", L0.get(i), ParentTest, "no_jira");              
+             if (FAIL) { return;}
+             if("CA".equals(C) && t.contains("Canada") && t.contains(G)) { T_Index = i;}
+             if("US".equals(C) && t.contains("United States") && t.contains(G)) { T_Index = i;}
+             } 
+             Element_Click("Click " + SECTOR , L0.get(T_Index), ParentTest, "no_jira"); 
+             if (FAIL) { return;}  
+             Thread.sleep(500);          
+             Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");  
+             if (FAIL) { return;} 
+             Find_Text("Find 'Search...' text", "Search all Brands", true, ParentTest, "no_jira");  
+             if (FAIL) { return;} 
+             Element_By_Path_Click("Search Brands Click", "xpath", "//label[contains(text(), 'Search all Brands')]", ParentTest, "no_jira");  
+             if (FAIL) { return;}            
+             Element_By_Path_Text_Enter("Enter Brand Menu Search", "css", "[aria-label='Search all Brands']", GL_MENU, false, ParentTest, "no_jira"); 
+             if (FAIL) { return;} 
+             Element_By_Path_Click("Click Edit Global menu", "xpath", "//tr[1]//td[3]//i[@class='v-icon mdi mdi-pencil theme--light']", ParentTest, "no_jira");
+             if (FAIL) { return;}
+             Wait_For_Element_By_Path_Visibility("Wait for Add global menu", "xpath", "//span[normalize-space()='Default JDE Category']", ParentTest, "no_jira");
+             if (FAIL) { return;}
+             Element_By_Path_Attribute("Read JDE category assigned", "xpath", "(//div[@class='v-select__selection v-select__selection--comma'])[2]", "innerHTML", ParentTest, "no_jira");
+             // 1 - No category assigned
+             //2 - X category assigned
+             //3 - y category assigned.
+             JDE_Category = "";
+             if(t.equals("") || !(t.equals("Bento Nouveau Sales")))
+             {
+               JDE_Category = "Bento Nouveau Sales";
+             }
+             else 
+             {
+               JDE_Category = "Artisan Deli";
+             }
+              Element_By_Path_Click("Click JDE dropdown", "xpath", "(//div[@role='combobox']//div[@class='v-input__append-inner'])[2]", ParentTest, "no_jira");
+                 if (FAIL) { return;}
+Thread.sleep(5000);
+             //Wait_For_Element_By_Path_Presence("Wait for 'JDE' list", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']", ParentTest, "no_jira");
+             if (FAIL) { return;} 
+             T_Index = -1;
+             List_L1("List all JDE categories", "xpath", "//div[contains(@class,'menuable__content__active')]//div[@role='listitem']//div[@class='v-list__tile__title']", ParentTest, "no_jira");
+             if (FAIL) { return;}
+             Scroll_to_Element("Scroll to last element", L1.get(L1.size()- 1), ParentTest, "no_jira");
+             if(FAIL) {return;}
+             do
+             {
+                 T_Index = L1.size();
+                 List_L1("List all JDE categories", "xpath", "//div[contains(@class,'menuable__content__active')]//div[@role='listitem']//div[@class='v-list__tile__title']", ParentTest, "no_jira");
+                 if (FAIL) { return;}
+                 Scroll_to_Element("Scroll to last element", L1.get(L1.size()- 1), ParentTest, "no_jira");
+                 if(FAIL) {return;}
+             }while(T_Index<L1.size());
+            for(int i=0;i<L1.size();i++)
+             {
+               Element_Text("JDE Category : (index " + i + ")", L1.get(i),  ParentTest, "no_jira"); 
+               if(t.equalsIgnoreCase(JDE_Category))   {T_Index = i; }
+             }
+            if(T_Index > -1){
+                    Scroll_to_Element("Scroll to "+JDE_Category, L1.get(T_Index), ParentTest, "no_jira");   
+                        if (FAIL) { return;}
+                    Element_Click("Select "+JDE_Category, L1.get(T_Index), ParentTest, "no_jira");   
+                        if (FAIL) { return;} 
+            } else{
+                _t++;
+                _f++;
+                EX += " - " + "\t" + "\t" + " JDE Category " + "\t" + JDE_Category + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + "Not found -"+JDE_Category;
+                EX += "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                Log_Html_Result("FAIL", "Not found : "+JDE_Category  , true, ParentTest.createNode("JDE Category - "+JDE_Category));
+                return;
+            } 
+
+            Element_By_Path_Click("Click Save", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-btn__content'][normalize-space()='Save']", ParentTest, "no_jira");
+             if (FAIL) { return;} 
+            JDE_id = Verify_JDE_API(JDE_Category);
+            Verify_Sector_JDE_API(G_ID,JDE_id);
+            Navigate_to_URL("Navigate to Site -> Brand Configuration", url + "#/sites/" + appId + "/site/" + SiteID + "/brand/" + BrandID + "/settings", ParentTest, "no_jira");
+              if (FAIL) { return;}
+            Thread.sleep(1000);
+            Wait_For_Element_By_Path_Presence("Check > Navigated to Brand Configuration", "xpath", "//div[contains(text(),'Station Information')]", ParentTest, "no_jira");
+              if (FAIL) { return;}
+            Element_By_Path_Attribute("Get assigned JDE Category", "xpath", "(//div[@class='v-select__selections'])[4]//div[@class='v-select__selection v-select__selection--comma']", "innerHTML", ParentTest, "no_jira");
+              if(FAIL){return;}
+            if(!(JDE_Category.equals(t)))
+            {
+              //Print JDE category not updated
+                
+              //Assign JDE category
+                Element_By_Path_Click("Click on JDE dropdown", "xpath", "//label[normalize-space()='JDE Category']/parent::div/descendant::i", ParentTest, "no_jira");
+                Thread.sleep(5000);
+             //Wait_For_Element_By_Path_Presence("Wait for 'JDE' list", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']", ParentTest, "no_jira");
+             if (FAIL) { return;} 
+             T_Index = -1;
+             List_L1("List all JDE categories", "xpath", "//div[contains(@class,'menuable__content__active')]//div[@role='listitem']//div[@class='v-list__tile__title']", ParentTest, "no_jira");
+             if (FAIL) { return;}
+             Scroll_to_Element("Scroll to last element", L1.get(L1.size()- 1), ParentTest, "no_jira");
+             if(FAIL) {return;}
+             do
+             {
+                 T_Index = L1.size();
+                 List_L1("List all JDE categories", "xpath", "//div[contains(@class,'menuable__content__active')]//div[@role='listitem']//div[@class='v-list__tile__title']", ParentTest, "no_jira");
+                 if (FAIL) { return;}
+                 Scroll_to_Element("Scroll to last element", L1.get(L1.size()- 1), ParentTest, "no_jira");
+                 if(FAIL) {return;}
+             }while(T_Index<L1.size());
+            for(int i=0;i<L1.size();i++)
+             {
+               Element_Text("JDE Category : (index " + i + ")", L1.get(i),  ParentTest, "no_jira"); 
+               if(t.equalsIgnoreCase(JDE_Category))   {T_Index = i; }
+             }
+            if(T_Index > -1){
+                    Scroll_to_Element("Scroll to "+JDE_Category, L1.get(T_Index), ParentTest, "no_jira");   
+                        if (FAIL) { return;}
+                    Element_Click("Select "+JDE_Category, L1.get(T_Index), ParentTest, "no_jira");   
+                        if (FAIL) { return;} 
+            } else{
+                _t++;
+                _f++;
+                EX += " - " + "\t" + "\t" + " JDE Category " + "\t" + JDE_Category + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + "Not found -"+JDE_Category;
+                EX += "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                Log_Html_Result("FAIL", "Not found : "+JDE_Category  , true, ParentTest.createNode("JDE Category - "+JDE_Category));
+                return;
+            } 
+                Element_By_Path_Click("Save Brand changes", "xpath", "//button//div[contains(text(),'Save Changes')]", ParentTest, "no_jira");
+   
+               Verify_Location_API(JDE_Category); 
             }
-          
+          } 
         }
 
      } catch (Exception ex){}   // =============================================  
     }//End of run
+    
+       private void Verify_Location_API(String JDE_Category) throws Exception {
+       try{
+        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Location API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
+       
+        Call_API("Call /Sector/ API ", "Bearer " + AP3_TKN, BaseAPI + "/location/brand/" +BrandID+"?nocache=1", true, ParentTest, "no_jira" );
+        if(t.startsWith("{")){
+            API_Response_Body = t;               
+        }else{
+            EX += _t + "\t == " + "API Response Error" + "\t" + BaseAPI + "/location/brand/" +BrandID+ "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "location/brand/" +BrandID, false, ParentTest.createNode("API Response Error"));
+            return;
+        }
+        JSONObject json = new JSONObject(API_Response_Body);
+        String Brand_JDE_id = json.getJSONObject("meta").getString("jde_category");
+        String Brand_JDE_name = "";
+        Call_API("Call /JDE/ API ", "Bearer " + AP3_TKN, BaseAPI + "/config/jde-configuration", true, ParentTest, "no_jira" );
+        if(t.startsWith("{")){
+            API_Response_Body = t;               
+        }else{
+            EX += _t + "\t == " + "API Response Error" + "\t" + BaseAPI + "/config/jde-configuration" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/jde-configuration", false, ParentTest.createNode("API Responce Error"));
+           // return;
+        }
+        
+        json = new JSONObject(API_Response_Body);
+        JSONArray JDE_categories = new JSONArray();
+        JDE_categories = json.getJSONArray("jde_categories");
+        for(int i = 0;i<JDE_categories.length();i++)
+        {
+             if(JDE_categories.getJSONObject(i).getString("id").equals(Brand_JDE_id))
+             {
+                 Brand_JDE_name = JDE_categories.getJSONObject(i).getString("name");
+                 if(Brand_JDE_name.equals(JDE_Category))
+                 {
+                  _t++; _p++;
+                  EX += _t + "\t" + "Same JDE Category assigned to Brand and GM" + "\t" + "JDE Category in GM: "+JDE_Category+ "\t" + "JDE Category assigned to Brand : "+Brand_JDE_name+"\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                  Log_Html_Result("PASS", "JDE Category in GM : "+JDE_Category+" - JDE Category assigned to Brand : "+Brand_JDE_name, false, ParentTest.createNode("Same JDE Category assigned to Brand and GM"));
+                 }
+                 else
+                 {
+                  _t++; _f++;
+                  EX += _t + "\t" + "Different JDE Category assigned to Brand and GM" + "\t" + "JDE Category in GM: "+JDE_Category+ "\t" + "JDE Category assigned to Brand : "+Brand_JDE_name+"\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                  Log_Html_Result("FAIL", "JDE Category in GM : "+JDE_Category+" - JDE Category assigned to Brand : "+Brand_JDE_name, false, ParentTest.createNode("Different JDE Category assigned to Brand and GM"));
+                 }
+                 break;
+             }
+        }
+        EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Location API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
+       }catch (Exception ex){}   // =============================================
+    }//End of Verify_Location_API
+    
+    
+    
     
          private void Verify_JDE_Count(int JDE_count) throws Exception {
       try{
