@@ -2090,7 +2090,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             String QA_USER = "";    // Next QA User from S3 DV_QA table
             Boolean IsMember=false;
             Boolean IsMemberSwitch=false;
-            for (int i = 550; i < 555; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
+            for (int i = 500; i < 560; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
            // for (int i = 0; i < DV_QA.getRowCount(); i++) {    // All Tests from S3 DV_QA table
                 if(QA_USER.equals(DV_QA.getValueAt(i, 1).toString()) && !Login_OK){
                     continue;      // Do Not proceed with User having Invalid Credentials or Locked Account
@@ -2098,7 +2098,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 IsMemberSwitch=false;
                 ParentTest = HtmlReport.createTest("User: " + DV_QA.getValueAt(i, 1) + " Test# " + (i + 1));  // (i+1) = # in the table
                 QA_USER = DV_QA.getValueAt(i, 1).toString();
-                if (i == 550) {
+                if (i == 500) {
                     Text_Found("Check member is Displayed ", "My Members", ParentTest, "no_jira");
                     if (t.equalsIgnoreCase("Not Found")) {
                         IsMember = false;
@@ -2108,7 +2108,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                         IsMemberSwitch=true;
                     }
                 }
-System.out.println(DV_QA.getValueAt(i, 5).toString());
+                System.out.println(DV_QA.getValueAt(i, 5).toString());
                 if (!QA_USER.equals(DL_UserID)) {  // ======  Clear Cookies and Login with New QA User ===========
                     DL_UserID = QA_USER;                // ======  Use last QA User from S3 for the next in the loop ====
                     EX += " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\r\n";
@@ -2456,7 +2456,7 @@ Thread.sleep(5000);
                         return;
                     }
                     Thread.sleep(2000);
-                    Element_By_Path_Click("Click on Continue as a Member", "xpath", "//p[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
+                    Element_By_Path_Click("Click on a Member", "xpath", "//p[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
                     if (FAIL) {
                         return;
                     }
