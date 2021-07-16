@@ -2991,27 +2991,27 @@ public class API_GUI extends javax.swing.JInternalFrame {
             AP3_User_ID = BR.AP3_User_ID; 
             AP3_User_TKN = BR.AP3_User_TKN;
         }      
-//        if(true){
-//            SCOPE += "Locations ";
-//            ParentTest = HtmlReport.createTest("Locations"); 
-//            locations BR = new API.locations(API_GUI.this);
-//            BR.run(); // ======================================
-//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
-//            SiteID = BR.SiteID; 
-//            UnitID = BR.UnitID;
-//            BrandID = BR.BrandID;
-//            SectorID = BR.SectorID;
-//            CompanyID = BR.CompanyID;
-//            MENU_IDS = BR.MENU_IDS;
-//            BrandIDS = BR.BrandIDS;
-//        }        
-//        if(true){
-//            SCOPE += "Config ";
-//            ParentTest = HtmlReport.createTest("Config"); 
-//            config BR = new API.config(API_GUI.this);
-//            BR.run(); // ======================================
-//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
-//        } 
+        if(true){
+            SCOPE += "Locations ";
+            ParentTest = HtmlReport.createTest("Locations"); 
+            locations BR = new API.locations(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+            SiteID = BR.SiteID; 
+            UnitID = BR.UnitID;
+            BrandID = BR.BrandID;
+            SectorID = BR.SectorID;
+            CompanyID = BR.CompanyID;
+            MENU_IDS = BR.MENU_IDS;
+            BrandIDS = BR.BrandIDS;
+        }        
+        if(true){
+            SCOPE += "Config ";
+            ParentTest = HtmlReport.createTest("Config"); 
+            config BR = new API.config(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        } 
         if(true){
             SCOPE += "Task ";
             ParentTest = HtmlReport.createTest("Task"); 
@@ -3019,48 +3019,48 @@ public class API_GUI extends javax.swing.JInternalFrame {
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
         }
-//        if(true){
-//            SCOPE += "Calendar ";
-//            ParentTest = HtmlReport.createTest("Calendar"); 
-//            calendar BR = new API.calendar(API_GUI.this);
-//            BR.run(); // ======================================
-//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
-//        }       
-//        if(true){
-//            SCOPE += "Menus ";
-//            ParentTest = HtmlReport.createTest("Global/Local Menus"); 
-//            menus BR = new API.menus(API_GUI.this);
-//            BR.run(); // ======================================
-//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
-//        }    
-//        if(true){
-//            SCOPE += "Reports ";
-//            ParentTest = HtmlReport.createTest("Reports"); 
-//            reports BR = new API.reports(API_GUI.this);
-//            BR.run(); // ======================================
-//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
-//        }            
-//        if(true){
-//            SCOPE += "Announcement ";
-//            ParentTest = HtmlReport.createTest("Announcement"); 
-//            announcement BR = new API.announcement(API_GUI.this);
-//            BR.run(); // ======================================
-//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
-//        }
-//        if(true){
-//            SCOPE += "Notification ";
-//            ParentTest = HtmlReport.createTest("Recent Updates/Notifications");      
-//            notification BR = new API.notification(API_GUI.this);
-//            BR.run(); // ======================================
-//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
-//        }
-//        if(true){
-//            SCOPE += "KDS ";
-//            ParentTest = HtmlReport.createTest("KDS");      
-//            kds BR = new API.kds(API_GUI.this);
-//            BR.run(); // ======================================
-//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
-//        }        
+        if(true){
+            SCOPE += "Calendar ";
+            ParentTest = HtmlReport.createTest("Calendar"); 
+            calendar BR = new API.calendar(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        }       
+        if(true){
+            SCOPE += "Menus ";
+            ParentTest = HtmlReport.createTest("Global/Local Menus"); 
+            menus BR = new API.menus(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        }    
+        if(true){
+            SCOPE += "Reports ";
+            ParentTest = HtmlReport.createTest("Reports"); 
+            reports BR = new API.reports(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        }            
+        if(true){
+            SCOPE += "Announcement ";
+            ParentTest = HtmlReport.createTest("Announcement"); 
+            announcement BR = new API.announcement(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        }
+        if(true){
+            SCOPE += "Notification ";
+            ParentTest = HtmlReport.createTest("Recent Updates/Notifications");      
+            notification BR = new API.notification(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        }
+        if(true){
+            SCOPE += "KDS ";
+            ParentTest = HtmlReport.createTest("KDS");      
+            kds BR = new API.kds(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        }        
   
     }
 
