@@ -5,20 +5,23 @@ class task extends API_GUI{
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;
-        AP3_User_TKN = a.AP3_User_TKN;
-        SiteID = a.SiteID;
-        BrandID = a.BrandID;
-        UnitID = a.UnitID;
-        // UnitNum ???????
+        Bolter_User_TKN = a.Bolter_User_TKN;
+        Bolter_Site_ID = a.Bolter_Site_ID;
+        BolterBrandIDS = a.BolterBrandIDS;
+
         ParentTest = a.ParentTest;
     }
     protected void run() {                                                       
         Auth = "";   // ==========================================
-        JOB_Api_Call("Tasks > 'BrandID'", "GET", 
-            BaseAPI + "/task/location/brand/" + SiteID +"?query_type=kds", Auth, "", 200, ParentTest, "no_jira");
-        //?location_id=zjYX7Pd7p0U6K64QgeEPfk2J9zQd23UY4peLvzqdF5GqA2GJDKSYdWlj0dNlHkgPKBADE2ijzN&query_type=kds
+//        JOB_Api_Call("Tasks > 'BrandID'", "GET", 
+//            BaseAPI + "/task/location/brand/" + BolterBrandIDS.get(0) +"?query_type=kds", Auth, "", 200, ParentTest, "no_jira");
+//        if(json != null){
+//            String Tasks = "Check json"; 
+//        }    
+        JOB_Api_Call("Tasks > 'MarketPlace BrandID' (hardcoded)", "GET",  // ================   Hard Coded for now ======================================================
+            BaseAPI + "/task/location/brand/" + "zjYX7Pd7p0U6K64QgeEPfk2J9zQd23UY4peLvzqdF5GqA2GJDKSYdWlj0dNlHkgPKBADE2ijzN" +"?query_type=kds", Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             String Tasks = "Check json"; 
-        }    
+        }         
     }
 }
