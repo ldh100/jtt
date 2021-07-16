@@ -40,37 +40,27 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Component id="jScrollPane2" pref="790" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnDel" min="-2" pref="113" max="-2" attributes="0"/>
-                  <Component id="btnDelOld" min="-2" pref="113" max="-2" attributes="0"/>
-                  <Component id="dtpDel" min="-2" pref="113" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="28" pref="28" max="-2" attributes="0"/>
-                      <Component id="lblUsers" min="-2" pref="84" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="cmbF_User" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
-                      <Component id="lblSITES" min="-2" pref="74" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jScrollPane2" pref="794" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <Component id="jScrollPane1" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="cmbF_App" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnExcel" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
+                  <Component id="dtpDel" alignment="1" min="-2" pref="113" max="-2" attributes="0"/>
+                  <Component id="lblSITES" alignment="1" min="-2" pref="74" max="-2" attributes="0"/>
+                  <Component id="btnDel" alignment="1" min="-2" pref="113" max="-2" attributes="0"/>
+                  <Component id="btnDelOld" alignment="1" min="-2" pref="113" max="-2" attributes="0"/>
+                  <Component id="btnExcel" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
                       <Component id="btnLog" min="-2" pref="56" max="-2" attributes="0"/>
-                      <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnRef" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="cmbF_App" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblUsers" alignment="1" min="-2" pref="84" max="-2" attributes="0"/>
+                  <Component id="cmbF_User" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -101,9 +91,9 @@
                       <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
                       <Component id="btnExcel" min="-2" pref="22" max="-2" attributes="0"/>
                       <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnLog" min="-2" pref="22" max="-2" attributes="0"/>
-                          <Component id="btnRef" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnLog" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="btnRef" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
