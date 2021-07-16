@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.joda.time.DateTime;
 
-class Reports extends API_GUI{
-    protected Reports(API_GUI a) {
+class reports extends API_GUI{
+    protected reports(API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;
@@ -15,9 +15,8 @@ class Reports extends API_GUI{
         BrandIDS = a.BrandIDS;
         ParentTest = a.ParentTest;
     }
-    protected void run() {  
-    try {           
-        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Sales Reporting EOD ===========================
+    protected void run() {      
+        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Sales Reporting EOD ========================
         JOB_Api_Call("Sales EOD Report - Default > /'SiteID'", "GET", 
             BaseAPI + "/report/eod/group/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
         String From = ""; 
@@ -52,7 +51,5 @@ class Reports extends API_GUI{
             boolean XXX = true;
             //
         }              
-
-    } catch (Exception ex){}   // =============================================  
     }
 }

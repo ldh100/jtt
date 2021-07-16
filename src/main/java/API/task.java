@@ -13,9 +13,10 @@ class task extends API_GUI{
         ParentTest = a.ParentTest;
     }
     protected void run() {                                                       
-        Auth = "Bearer " + AP3_User_TKN;   // ==========================================
+        Auth = "";   // ==========================================
         JOB_Api_Call("Tasks > 'BrandID'", "GET", 
-            BaseAPI + "/task/location/brand/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
+            BaseAPI + "/task/location/brand/" + SiteID +"?query_type=kds", Auth, "", 200, ParentTest, "no_jira");
+        //?location_id=zjYX7Pd7p0U6K64QgeEPfk2J9zQd23UY4peLvzqdF5GqA2GJDKSYdWlj0dNlHkgPKBADE2ijzN&query_type=kds
         if(json != null){
             String Tasks = "Check json"; 
         }    

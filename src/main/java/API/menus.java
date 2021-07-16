@@ -1,7 +1,7 @@
 package API;
 
-class Menus extends API_GUI{
-    protected Menus(API_GUI a) {
+class menus extends API_GUI{
+    protected menus(API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;
@@ -12,9 +12,8 @@ class Menus extends API_GUI{
         MENU_IDS = a.MENU_IDS;
         ParentTest = a.ParentTest;
     }
-    protected void run() {  
-    try {              
-        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Company/Global Menus ===========================
+    protected void run() {             
+        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Company/Global menus ===================
         JOB_Api_Call("Company / Global Menus > /'CompID'", "GET", 
             BaseAPI + "/menu/company/" + CompanyID, Auth, "", 200, ParentTest, "no_jira");
 
@@ -25,7 +24,5 @@ class Menus extends API_GUI{
             JOB_Api_Call("Brand > Timeslots > Menu " + (i+1) + " > /timeslots/menu/'MenuID'", "GET", 
                 BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MENU_IDS.get(i) + "?nocache=1&extended=true", Auth, "", 200, ParentTest, "no_jira" );
         }
-
-    } catch (Exception ex){}   // =============================================  
     }
 }

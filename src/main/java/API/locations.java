@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-class Locations extends API_GUI{
-    protected Locations(API_GUI a) {
+class locations extends API_GUI{
+    protected locations(API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;
@@ -16,8 +16,7 @@ class Locations extends API_GUI{
         ParentTest = a.ParentTest;
     }
     protected void run() {  
-    try {
-        Auth = "Bearer " + AP3_User_TKN;  // =============== AP3 Sectors > Company ID===========================
+        Auth = "Bearer " + AP3_User_TKN;  // =============== AP3 Sectors > Company ID ================
         JOB_Api_Call("Location > /sector", "GET", 
             BaseAPI + "/location/sector?_provider=cdl", Auth, "", 200, ParentTest, "no_jira");
         
@@ -101,6 +100,6 @@ class Locations extends API_GUI{
         Auth = "Bearer " + AP3_User_TKN;  // ===============    AP3 Sector ===========================
         JOB_Api_Call("Location/Sector > /'SectorID'", "GET", 
             BaseAPI + "/location/sector/" + SectorID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
-    } catch (Exception ex){}   // =============================================  
+ 
     }
 }

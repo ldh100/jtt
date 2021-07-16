@@ -1,7 +1,7 @@
 package API;
 
-class Calendar extends API_GUI{
-    protected Calendar(API_GUI a) {
+class calendar extends API_GUI{
+    protected calendar(API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;
@@ -10,12 +10,10 @@ class Calendar extends API_GUI{
         BrandID = a.BrandID;
         ParentTest = a.ParentTest;
     }
-    protected void run() {  
-    try {                  
-        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Calendar ===========================
+    protected void run() {                  
+        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 calendar ===========================
         JOB_Api_Call("Calendar > /'BrandID'", "GET", 
             BaseAPI + "/calendar/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
-        
-    } catch (Exception ex){}   // =============================================  
+        //
     }
 }

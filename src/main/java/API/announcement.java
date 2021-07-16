@@ -1,7 +1,7 @@
 package API;
 
-class Announcement extends API_GUI{
-    protected Announcement(API_GUI a) {
+class announcement extends API_GUI{
+    protected announcement(API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;
@@ -11,12 +11,9 @@ class Announcement extends API_GUI{
         ParentTest = a.ParentTest;
     }
     protected void run() {  
-    try {                    
-    
-        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Announcement ===========================
+        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 announcement ===========================
         JOB_Api_Call("AP3 Announcement", "GET", 
             BaseAPI + "/announcement/resource/", Auth, "", 200, ParentTest, "no_jira");
-
-    } catch (Exception ex){}   // =============================================  
+        //
     }
 }
