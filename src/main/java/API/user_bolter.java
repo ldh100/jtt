@@ -2,8 +2,8 @@ package API;
 
 import java.util.Base64;
 
-class Bolter_Runner extends API_GUI{
-    protected Bolter_Runner(API_GUI a) {
+class user_bolter extends API_GUI{
+    protected user_bolter(API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;

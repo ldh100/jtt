@@ -2,8 +2,8 @@ package API;
 
 import java.util.Base64;
 
-class AP3_User extends API_GUI{
-    protected AP3_User(API_GUI a) {
+class user_ap3 extends API_GUI{
+    protected user_ap3(API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;

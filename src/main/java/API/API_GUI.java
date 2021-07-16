@@ -2955,7 +2955,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         if(true){
             SCOPE += "Mobile User ";
             ParentTest = HtmlReport.createTest("Mobile User"); 
-            Mobile_User BR = new API.Mobile_User(API_GUI.this);
+            user_mobile BR = new API.user_mobile(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
             Mobile_User_ID = BR.Mobile_User_ID; 
@@ -2964,7 +2964,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         if(true){
             SCOPE += "Bolter ";
             ParentTest = HtmlReport.createTest("Bolter"); 
-            Bolter_Runner BR = new API.Bolter_Runner(API_GUI.this);
+            user_bolter BR = new API.user_bolter(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
             Runner_User_ID = BR.Runner_User_ID; 
@@ -2974,7 +2974,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         if(true){
             SCOPE += "AP3 User ";
             ParentTest = HtmlReport.createTest("AP3 User"); 
-            AP3_User BR = new API.AP3_User(API_GUI.this);
+            user_ap3 BR = new API.user_ap3(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
             AP3_User_ID = BR.AP3_User_ID; 
@@ -2983,7 +2983,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         if(true){
             SCOPE += "Locations ";
             ParentTest = HtmlReport.createTest("Locations"); 
-            Locations BR = new API.Locations(API_GUI.this);
+            locations BR = new API.locations(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
             SiteID = BR.SiteID; 
@@ -2997,49 +2997,49 @@ public class API_GUI extends javax.swing.JInternalFrame {
         if(true){
             SCOPE += "Config ";
             ParentTest = HtmlReport.createTest("Config"); 
-            Config BR = new API.Config(API_GUI.this);
+            config BR = new API.config(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
         }        
         if(true){
             SCOPE += "Calendar ";
             ParentTest = HtmlReport.createTest("Calendar"); 
-            Calendar BR = new API.Calendar(API_GUI.this);
+            calendar BR = new API.calendar(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
         }       
         if(true){
             SCOPE += "Menus ";
             ParentTest = HtmlReport.createTest("Global/Local Menus"); 
-            Menus BR = new API.Menus(API_GUI.this);
+            menus BR = new API.menus(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
         }    
         if(true){
             SCOPE += "Reports ";
             ParentTest = HtmlReport.createTest("Reports"); 
-            Reports BR = new API.Reports(API_GUI.this);
+            reports BR = new API.reports(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
         }            
         if(true){
             SCOPE += "Announcement ";
             ParentTest = HtmlReport.createTest("Announcement"); 
-            Announcement BR = new API.Announcement(API_GUI.this);
+            announcement BR = new API.announcement(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
         }
         if(true){
             SCOPE += "Notification ";
             ParentTest = HtmlReport.createTest("Recent Updates/Notifications");      
-            Notification BR = new API.Notification(API_GUI.this);
+            notification BR = new API.notification(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
         }
         if(true){
             SCOPE += "KDS ";
             ParentTest = HtmlReport.createTest("KDS");      
-            KDS BR = new API.KDS(API_GUI.this);
+            kds BR = new API.kds(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
         }        

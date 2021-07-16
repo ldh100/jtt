@@ -2,8 +2,8 @@ package API;
 
 import java.util.Base64;
 
-class Mobile_User extends API_GUI{
-    protected Mobile_User(API_GUI a) {
+class user_mobile extends API_GUI{
+    protected user_mobile(API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;
