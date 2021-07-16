@@ -16,7 +16,6 @@ class user_bolter extends API_GUI{
         ParentTest = a.ParentTest;
     }
     protected void run() {  
-    try {
         Auth = "Basic " + Base64.getEncoder().encodeToString((RUNNER_ID + ":" + RUNNER_PW).getBytes());
         JOB_Api_Call("Bolter Runner Authentication > /user/auth?realm=bolter", "GET", 
             BaseAPI + "/user/auth" + "?realm=" + "bolter", Auth, "Runner", 200, ParentTest, "no_jira");
@@ -35,7 +34,5 @@ class user_bolter extends API_GUI{
         Auth = "Basic " + Base64.getEncoder().encodeToString((RUNNER_ID + ":" + "WrongPW").getBytes());
         JOB_Api_Call("Bolter Runner Authentication - Wrong PW> /user/auth?realm=bolter", "GET", 
             BaseAPI + "/user/auth" + "?realm=" + "bolter", Auth, "Runner", 401, ParentTest, "no_jira");
-
-    } catch (Exception ex){}   // =============================================  
     }
 }

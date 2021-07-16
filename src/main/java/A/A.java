@@ -1497,7 +1497,7 @@ public class A extends javax.swing.JFrame {
 //            int d = st.executeUpdate("DELETE FROM [dbo].[aw_result] WHERE [Date] < '" + simpleDateFormat.format(dtpDel.getDate()) + "'");
             
             conn.close();
-            Logger.getLogger(A.class.getName()).log(Level.INFO, "Keys Loaded");
+            //Logger.getLogger(A.class.getName()).log(Level.INFO, "Keys Loaded");
         } catch (SQLException ex) {
             Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Load Keys > SQL ERROR: " + ex.getMessage(), ex);
         }

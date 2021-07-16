@@ -2902,7 +2902,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                         request.header("From", "Bolter/1.0");
                     }
                     response = request.get(EndPoint);
-                    json = new JSONObject(response.asString());
+
                     break;
                 case "POST":
                     request.body(BODY);
@@ -2925,18 +2925,20 @@ public class API_GUI extends javax.swing.JInternalFrame {
             }
             Result = response.getStatusLine();
             status = response.getStatusCode();
-
+            if(response.asString().startsWith("{") && response.asString().endsWith("}")) {
+                json = new JSONObject(response.asString());
+            }
             R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
             if (status == ExpStatus) {                                                 
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "PASS" + "\t" + " - " +
                 "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("PASS", NAME + " > EndPoint: " + EndPoint + "<br />Expected/Actual Status Code: " + ExpStatus + " / " + status + ", Result: " + Result + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+                Log_Html_Result("PASS", "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
             } else {
                 _f++; FAIL = true; 
                 EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + "Status Code: " + status + "\t" + "FAIL" + "\t" + Result +
                 "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("FAIL", NAME + " > EndPoint: " + EndPoint + "<br />Expected/Actual Status Code: " + ExpStatus + " / " + status + ", Result: " + Result + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+                Log_Html_Result("FAIL", "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
             }
         } catch(Exception ex){
             R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
@@ -2944,7 +2946,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("FAIL", NAME + " > Error: " + err + "<br />EndPoint: " + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+            Log_Html_Result("FAIL", "Error: " + err + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
         } 
         r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
         sw1.reset();
@@ -2961,6 +2963,15 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Mobile_User_ID = BR.Mobile_User_ID; 
             Mobile_User_TKN = BR.Mobile_User_TKN;
         }
+        if(true){
+            SCOPE += "Payment ";
+            ParentTest = HtmlReport.createTest("Payment"); 
+            payment BR = new API.payment(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+            Mobile_User_ID = BR.Mobile_User_ID; 
+            Mobile_User_TKN = BR.Mobile_User_TKN;
+        } 
         if(true){
             SCOPE += "Bolter ";
             ParentTest = HtmlReport.createTest("Bolter"); 
@@ -3000,7 +3011,14 @@ public class API_GUI extends javax.swing.JInternalFrame {
             config BR = new API.config(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
-        }        
+        } 
+        if(true){
+            SCOPE += "Task ";
+            ParentTest = HtmlReport.createTest("Task"); 
+            task BR = new API.task(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        }
         if(true){
             SCOPE += "Calendar ";
             ParentTest = HtmlReport.createTest("Calendar"); 

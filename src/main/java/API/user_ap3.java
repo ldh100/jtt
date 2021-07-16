@@ -15,7 +15,6 @@ class user_ap3 extends API_GUI{
         ParentTest = a.ParentTest;
     }
     protected void run() {  
-    try {
         Realm = A.Func.Realm_ID("AP3", env);
         
         Auth = "Basic " + Base64.getEncoder().encodeToString((RUNNER_ID + ":" + RUNNER_PW).getBytes());
@@ -60,7 +59,6 @@ class user_ap3 extends API_GUI{
 //                "\"phone\":" + "1" + NewID + "\"}";
 //        JOB_Api_Call("AP3 User - Create New", "PUT", 
 //            BaseAPI + "/user/" + AP3_User_ID, Auth, BODY, 200, ParentTest, "no_jira"); 
-        
-    } catch (Exception ex){}   // =============================================  
+
     }
 }

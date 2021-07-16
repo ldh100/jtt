@@ -12,10 +12,8 @@ class partner extends API_GUI{
         // UnitNum ???????
         ParentTest = a.ParentTest;
     }
-    protected void run() {  
-    try {                                                          
+    protected void run() {                                                           
         //  
 
-    } catch (Exception ex){}   // =============================================  
     }
 }

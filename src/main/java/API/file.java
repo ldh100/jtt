@@ -13,9 +13,8 @@ class file extends API_GUI{
         ParentTest = a.ParentTest;
     }
     protected void run() {  
-    try {                                                          
+                                               
         //  
 
-    } catch (Exception ex){}   // =============================================  
     }
 }

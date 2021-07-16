@@ -15,8 +15,6 @@ class user_mobile extends API_GUI{
         ParentTest = a.ParentTest;
     }
     protected void run() {  
-    try {
-        //<editor-fold defaultstate="collapsed" desc="Mobile User Authentication">  
         Realm = A.Func.Realm_ID(app, env);
         Auth = "Basic " + Base64.getEncoder().encodeToString(("WrongID" + ":" + MOBILE_PW).getBytes());
         JOB_Api_Call("Mobile User Authentication - Wrong ID", "GET", 
@@ -37,25 +35,6 @@ class user_mobile extends API_GUI{
                 //
             }
         }
-        //</editor-fold>  
-        
-        //<editor-fold defaultstate="collapsed" desc="Mobile User Payment">          
-        Auth = "Bearer " + Mobile_User_TKN;
-        JOB_Api_Call("Mobile User Payment", "GET", 
-            BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "", 200, ParentTest, "no_jira");
-        if(json != null){
-            try{
-                //
-                
-            } catch (Exception ex){
-                //
-            }
-        } 
-        long m1 = System.currentTimeMillis();                     
-        long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // - 7 days
-        JOB_Api_Call("Mobile User Orders", "GET", 
-            BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1, Auth, "", 200, ParentTest, "no_jira");
-        //</editor-fold>     
-    } catch (Exception ex){}   // =============================================  
+         
     }
 }

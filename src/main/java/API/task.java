@@ -12,10 +12,12 @@ class task extends API_GUI{
         // UnitNum ???????
         ParentTest = a.ParentTest;
     }
-    protected void run() {  
-    try {                                                          
-        //  
-
-    } catch (Exception ex){}   // =============================================  
+    protected void run() {                                                       
+        Auth = "Bearer " + AP3_User_TKN;   // ==========================================
+        JOB_Api_Call("Tasks > 'BrandID'", "GET", 
+            BaseAPI + "/task/location/brand/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
+        if(json != null){
+            String Tasks = "Check json"; 
+        }    
     }
 }
