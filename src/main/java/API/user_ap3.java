@@ -18,7 +18,7 @@ class user_ap3 extends API_GUI{
         Realm = A.Func.Realm_ID("AP3", env);
         
         Auth = "Basic " + Base64.getEncoder().encodeToString((RUNNER_ID + ":" + RUNNER_PW).getBytes());
-        JOB_Api_Call("Bolter/Runner Login in AP3", "GET", 
+        JOB_Api_Call("Bolter/Bolter Login in AP3", "GET", 
             BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", 401, ParentTest, "no_jira");        
         
         Auth = "Basic " + Base64.getEncoder().encodeToString(("WrongID" + ":" + ADMIN_PW).getBytes());
