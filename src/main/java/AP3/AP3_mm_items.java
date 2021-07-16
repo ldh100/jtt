@@ -193,7 +193,7 @@ class AP3_mm_items extends AP3_GUI{
             if (FAIL) { return;}
         Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, ParentTest, "no_jira");
             if (FAIL) { return;} 
-         Thread.sleep(500);
+        Thread.sleep(500);
 
         Element_Click("Click Menu " + GL_MENU, L2.get(T_Index), ParentTest, "no_jira");
             if (FAIL) { return;}  

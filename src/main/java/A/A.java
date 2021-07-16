@@ -1481,10 +1481,12 @@ public class A extends javax.swing.JFrame {
             rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'C1_Exp'");
             rs.next();
             C1_Exp = new String(Base64.getDecoder().decode(rs.getString(1)));
+            C1_Exp = C1_Exp.replace("/", "");
             
             rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'C1_Zip'");
             rs.next();
             C1_Zip = new String(Base64.getDecoder().decode(rs.getString(1)));
+            C1_Zip = C1_Zip.replace(" ", "");
             
             rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'C1_Name'");
             rs.next();
