@@ -17,11 +17,15 @@ class task extends API_GUI{
 //            BaseAPI + "/task/location/brand/" + BolterBrandIDS.get(0) +"?query_type=kds", Auth, "", 200, ParentTest, "no_jira");
 //        if(json != null){
 //            String Tasks = "Check json"; 
-//        }    
-        JOB_Api_Call("Tasks > 'MarketPlace BrandID' (hardcoded)", "GET",  // ================   Hard Coded for now ======================================================
-            BaseAPI + "/task/location/brand/" + "zjYX7Pd7p0U6K64QgeEPfk2J9zQd23UY4peLvzqdF5GqA2GJDKSYdWlj0dNlHkgPKBADE2ijzN" +"?query_type=kds", Auth, "", 200, ParentTest, "no_jira");
-        if(json != null){
-            String Tasks = "Check json"; 
-        }         
+//        }  
+        if(env.equals("DE")){
+            JOB_Api_Call("Tasks > 'MarketPlace Brand ID' (hardcoded)", "GET",  // ================   Hard Coded for now ======================================================
+                BaseAPI + "/task/location/brand/" + "zjYX7Pd7p0U6K64QgeEPfk2J9zQd23UY4peLvzqdF5GqA2GJDKSYdWlj0dNlHkgPKBADE2ijzN" +"?query_type=kds", Auth, "", 200, ParentTest, "no_jira");
+            if(json != null){
+                String Tasks = "Check json"; 
+            }         
+        }else{
+            Log_Html_Result("INFO", "Need Market Plase Brand ID", ParentTest.createNode("Environment: " + env + ": Tasks > 'MarketPlace Brand ID'"));
+        }
     }
 }
