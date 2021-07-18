@@ -32,7 +32,7 @@ class user_bolter extends API_GUI{
             BaseAPI + "/user/auth" + "?realm=" + "bolter", Auth, "Bolter", 200, ParentTest, "no_jira");
 
         if(json != null && json.has("profile")){
-            Bolter_Site_ID = json.getJSONObject("profile").getString("location_group") + "\r\n";  
+            Bolter_Site_ID = json.getJSONObject("profile").getString("location_group"); 
         }else{
             if(json.has("error")){
                 Bolter_Site_ID = "Not Found";
