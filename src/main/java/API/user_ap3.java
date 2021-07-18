@@ -51,14 +51,46 @@ class user_ap3 extends API_GUI{
             BaseAPI + "/user/" + AP3_User_ID, Auth, "", 200, ParentTest, "no_jira");  
         
         BODY = "{\"id\":\"" + AP3_User_ID + "\"," + //  Update AP3 user Phone
-                "\"phone\":" + "1" + NewID + "\"}";
+                "\"phone\":" + "1" + NewID + "}";
         JOB_Api_Call("AP3 User - Update Phone", "PUT", 
             BaseAPI + "/user/" + AP3_User_ID, Auth, BODY, 200, ParentTest, "no_jira");
         
-//        BODY = "{\"id\":\"" + AP3_User_ID + "\"," + //  New AP3 User ===============================
-//                "\"phone\":" + "1" + NewID + "\"}";
-//        JOB_Api_Call("AP3 User - Create New", "PUT", 
-//            BaseAPI + "/user/" + AP3_User_ID, Auth, BODY, 200, ParentTest, "no_jira"); 
-
+        BODY = "{\"name\":" +                                       //  New AP3 Admin User > Email Exists  =================
+                "{\"first\":\"Oleg\",\"last\":\"Spozito\"}," + 
+            "\"permissions\":" +
+                "{\"scopes\":[\"*:*\",\"*:user\",\"admin_role:*:*\",\"write:order:*\",\"kick:menu:*\",\"read:analytics:*\"]}," +
+            "\"email\":\"" + "a_" + AP3_User_ID + "@gmail.com" + "\"," +
+            "\"phone\":" + "1" + NewID + "," +
+            "\"realm\":\"" + Realm + "\"," +
+            "\"password\":\"" + "Zxtsaq9ppnppvbyi11f0nk" + "\"}";
+        JOB_Api_Call("AP3 User - Create New Email Exists", "POST", 
+            BaseAPI + "/user", Auth, BODY, 409, ParentTest, "no_jira"); 
+        
+        
+        BODY = "{\"name\":" +                                       //  New AP3 Admin User ===============================
+                "{\"first\":\"Oleg\",\"last\":\"Spozito\"}," + 
+            "\"permissions\":" +
+                "{\"scopes\":[\"*:*\",\"*:user\",\"site_operator_role:group:\",\"write:order:*\",\"kick:menu:*\",\"read:analytics:*\"]}," +
+            "\"email\":\"" + "a_" + NewID + "@gmail.com" + "\"," +
+            "\"phone\":" + "1" + NewID + "," +
+            "\"realm\":\"" + Realm + "\"," +
+            "\"password\":\"" + "Zxtsaq9ppnppvbyi11f0nk" + "\"}";
+        JOB_Api_Call("AP3 User - Create New Admin", "POST", 
+            BaseAPI + "/user", Auth, BODY, 200, ParentTest, "no_jira"); 
+        String New_User_ID = "";
+        if(json != null){ 
+            try {
+                if(json.has("id")) New_User_ID = json.getString("id"); 
+            } catch (Exception ex){
+                //
+            }
+        }        
+        BODY = "{\"email\":\"" + "a_" + NewID + "@gmail.com" + "\"," + //  New AP3 User Forgot Password===============================
+                "\"type\":\"" + "new_user" + "\"}";
+        JOB_Api_Call("AP3 New User - Forgot password", "POST", 
+            BaseAPI + "/user/forgotpassword?realm=" + Realm, Auth, BODY, 200, ParentTest, "no_jira");                
+        
+        JOB_Api_Call("AP3 User - Delete", "DELETE", // AP3 User Delete ===============================
+            BaseAPI + "/user/" + New_User_ID, Auth, BODY, 200, ParentTest, "no_jira");  
     }
 }
