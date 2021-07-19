@@ -18,9 +18,5 @@ class payment extends API_GUI{
         if(json != null){
 //
         } 
-        long m1 = System.currentTimeMillis();                     
-        long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // - 7 days
-        JOB_Api_Call("Mobile User Orders", "GET", 
-            BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1, Auth, "", 200, ParentTest, "no_jira");
-    }
+   }
 }

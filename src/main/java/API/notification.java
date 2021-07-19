@@ -23,9 +23,19 @@ class notification extends API_GUI{
         String _E = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(_e); 
         JOB_Api_Call("AP3 Recent Updates - end 10 days ago", "GET", 
             BaseAPI + "/notification?realm=cdl&target=admin_panel&end=" + _E, Auth, "", 200, ParentTest, "no_jira");  
-        // get list
+        // get list of ID(s)
+        
         // https://api.compassdigital.org/dev/notification/lBG93P10PGCLOD7yzwkkfMq8NQyM8RFQEWRy884OIXagyg2QzNFZL8rljeDzco7gpoGzkvtZY41kEDPJsWM0yOGPwKUv8AkYl4yPseJN/status
         // POST > {"status":{"read":true}}
+        
+        /* update NOTIFICATIONS_IDS>Index(???) > PATCH; 
+        
+        {"text":"04-22werqrewrewerq",
+        "title":"test - edited",
+        "realm":"cdl",
+        "target":"admin_panel",
+        "date_modified":"2021-04-22T07:00:00.000Z"}
+        */
  
     }
 }

@@ -665,6 +665,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected List<String> MENU_IDS;
     protected List<String> ORDER_IDS; 
     protected List<String> SCART_IDS; 
+    protected List<String> NOTIFICATION_IDS; 
     
     protected int _t = 0; // Total
     protected int _p = 0; // Passed
@@ -2907,11 +2908,14 @@ public class API_GUI extends javax.swing.JInternalFrame {
                         request.header("From", "Bolter/1.0");
                     }
                     response = request.get(EndPoint);
-
                     break;
                 case "POST":
                     request.body(BODY);
                     response = request.post(EndPoint);
+                    break;
+                case "PATCH":
+                    request.body(BODY);
+                    response = request.patch(EndPoint);
                     break;
                 case "DELETE":
                     request.body(BODY);
