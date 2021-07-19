@@ -22,7 +22,10 @@ class notification extends API_GUI{
         Date _e = new DateTime(new Date()).minusDays(10).toDate();
         String _E = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(_e); 
         JOB_Api_Call("AP3 Recent Updates - end 10 days ago", "GET", 
-            BaseAPI + "/notification?realm=cdl&target=admin_panel&end=" + _E, Auth, "", 200, ParentTest, "no_jira");        
+            BaseAPI + "/notification?realm=cdl&target=admin_panel&end=" + _E, Auth, "", 200, ParentTest, "no_jira");  
+        // get list
+        // https://api.compassdigital.org/dev/notification/lBG93P10PGCLOD7yzwkkfMq8NQyM8RFQEWRy884OIXagyg2QzNFZL8rljeDzco7gpoGzkvtZY41kEDPJsWM0yOGPwKUv8AkYl4yPseJN/status
+        // POST > {"status":{"read":true}}
  
     }
 }

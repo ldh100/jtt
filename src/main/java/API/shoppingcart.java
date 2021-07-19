@@ -8,11 +8,11 @@ class shoppingcart extends API_GUI{
         AP3_User_TKN = a.AP3_User_TKN;
         SiteID = a.SiteID;
         BrandID = a.BrandID;
-        UnitID = a.UnitID;
-        // UnitNum ???????
         ParentTest = a.ParentTest;
     }
-    protected void run() {                                                      
-        //  
+    protected void run() {  
+//        Auth = "Bearer " + Mobile_User_TKN;
+//        JOB_Api_Call("Create New Shoppingcart", "POST", 
+//            BaseAPI + "/shoppingcart/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
     }
 }

@@ -21,6 +21,7 @@ class menus extends API_GUI{
         for(int i = 0; i < MENU_IDS.size(); i++){
             JOB_Api_Call("Brand Local Menu " + (i+1) + " > /menu/'MenuID'", "GET", 
                 BaseAPI + "/menu/" + MENU_IDS.get(i), Auth, "", 200, ParentTest, "no_jira");
+            
             JOB_Api_Call("Brand > Timeslots > Menu " + (i+1) + " > /timeslots/menu/'MenuID'", "GET", 
                 BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MENU_IDS.get(i) + "?nocache=1&extended=true", Auth, "", 200, ParentTest, "no_jira" );
         }

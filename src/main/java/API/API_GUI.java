@@ -2763,8 +2763,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
-                EX = "API " + env + ", " +
-                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ", Info: " + _i + "\r\n" +
+                EX = "API " + env + ". " +
+                    " Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ", Info: " + _i + 
+                        " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")" + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                     + EX;
                 
@@ -3037,7 +3038,22 @@ public class API_GUI extends javax.swing.JInternalFrame {
             menus BR = new API.menus(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
-        }    
+        }   
+//        if(true){
+//            SCOPE += "Shoppingcart ";
+//            ParentTest = HtmlReport.createTest("Shoppingcart"); 
+//            shoppingcart BR = new API.shoppingcart(API_GUI.this);
+//            BR.run(); // ======================================
+//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+//        }          
+        if(true){
+            SCOPE += "Order ";
+            ParentTest = HtmlReport.createTest("Order"); 
+            order BR = new API.order(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        }         
+        
         if(true){
             SCOPE += "Reports ";
             ParentTest = HtmlReport.createTest("Reports"); 

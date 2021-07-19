@@ -20,15 +20,15 @@ class user_bolter extends API_GUI{
     }
     protected void run() {  
         Auth = "Basic " + Base64.getEncoder().encodeToString(("WrongID" + ":" + RUNNER_PW).getBytes());
-        JOB_Api_Call("Bolter Bolter Authentication - Wrong ID> /user/auth?realm=bolter", "GET", 
+        JOB_Api_Call("Bolter Authentication - Wrong ID> /user/auth?realm=bolter", "GET", 
             BaseAPI + "/user/auth" + "?realm=" + "bolter", Auth, "Bolter", 401, ParentTest, "no_jira");
         
         Auth = "Basic " + Base64.getEncoder().encodeToString((RUNNER_ID + ":" + "WrongPW").getBytes());
-        JOB_Api_Call("Bolter Bolter Authentication - Wrong PW> /user/auth?realm=bolter", "GET", 
+        JOB_Api_Call("Bolter Authentication - Wrong PW> /user/auth?realm=bolter", "GET", 
             BaseAPI + "/user/auth" + "?realm=" + "bolter", Auth, "Bolter", 401, ParentTest, "no_jira");
         
         Auth = "Basic " + Base64.getEncoder().encodeToString((RUNNER_ID + ":" + RUNNER_PW).getBytes());
-        JOB_Api_Call("Bolter Bolter Authentication > /user/auth?realm=bolter", "GET", 
+        JOB_Api_Call("Bolter Authentication > /user/auth?realm=bolter", "GET", 
             BaseAPI + "/user/auth" + "?realm=" + "bolter", Auth, "Bolter", 200, ParentTest, "no_jira");
 
         if(json != null && json.has("profile")){
