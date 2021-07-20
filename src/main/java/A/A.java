@@ -1481,10 +1481,12 @@ public class A extends javax.swing.JFrame {
             rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'C1_Exp'");
             rs.next();
             C1_Exp = new String(Base64.getDecoder().decode(rs.getString(1)));
+            C1_Exp = C1_Exp.replace("/", "");
             
             rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'C1_Zip'");
             rs.next();
             C1_Zip = new String(Base64.getDecoder().decode(rs.getString(1)));
+            C1_Zip = C1_Zip.replace(" ", "");
             
             rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'C1_Name'");
             rs.next();
@@ -1495,7 +1497,7 @@ public class A extends javax.swing.JFrame {
 //            int d = st.executeUpdate("DELETE FROM [dbo].[aw_result] WHERE [Date] < '" + simpleDateFormat.format(dtpDel.getDate()) + "'");
             
             conn.close();
-            Logger.getLogger(A.class.getName()).log(Level.INFO, "Keys Loaded");
+            //Logger.getLogger(A.class.getName()).log(Level.INFO, "Keys Loaded");
         } catch (SQLException ex) {
             Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Load Keys > SQL ERROR: " + ex.getMessage(), ex);
         }

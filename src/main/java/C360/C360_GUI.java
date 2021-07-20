@@ -2421,7 +2421,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     }
     private void Execute() throws Exception {
         if(_Login){
-            SCOPE += "Login";
+            SCOPE += "Login, ";
             ParentTest = HtmlReport.createTest("Cafe 360 Login"); 
             C360_login BR = new C360.C360_login(C360_GUI.this);
             BR.run(); // ======================================

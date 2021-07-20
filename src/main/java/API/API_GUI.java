@@ -7,7 +7,7 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-import com.google.common.base.Stopwatch;///
+import com.google.common.base.Stopwatch;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -588,13 +588,26 @@ public class API_GUI extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // <editor-fold defaultstate="collapsed" desc="Instance Variables Declarations">
-    private String MOBILE_ID = "";
-    private String MOBILE_PW = "";
-    private String ADMIN_ID = "";
-    private String ADMIN_PW = "";
-    private String RUNNER_ID = "";
-    private String RUNNER_PW = "";
-    private String New_ID = "";
+    protected String ADMIN_ID = "";
+    protected String ADMIN_PW = "";
+    protected String AP3_User_ID = "";
+    protected String AP3_User_TKN = "";  
+    
+    protected String MOBILE_ID = "";
+    protected String MOBILE_PW = "";
+    protected String Mobile_User_ID = "";
+    protected String Mobile_User_TKN = "";
+    
+    protected String RUNNER_ID = "";
+    protected String RUNNER_PW = "";
+    protected String Bolter_User_ID = "";
+    protected String Bolter_User_TKN = "";   
+    protected String Bolter_Site_ID = "";  
+    protected String Market_Brand_ID = ""; 
+    
+    protected String Realm = "";
+    protected String Auth = "";    
+    protected String NewID = "";
     
     private String HTML_Report_Path = "";
     private String Report_Date = "";
@@ -602,6 +615,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected ExtentReports HtmlReport;
     protected ExtentTest ParentTest;
     protected JSONObject json;
+    protected String SCOPE = "";   
     
     private SwingWorker BW1; 
     private Instant run_start;
@@ -617,13 +631,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
     private boolean CONFIG = false;
 
-    private String AP3_User_ID = "";
-    private String AP3_User_TKN = "";
-    private String Mobile_User_ID = "";
-    private String Mobile_User_TKN = "";
-    private String Runner_User_ID = "";
-    private String Runner_User_TKN = "";    
-    
     private final Stopwatch sw1 = Stopwatch.createUnstarted();
     private final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
     private final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -632,29 +639,33 @@ public class API_GUI extends javax.swing.JInternalFrame {
     
 
     private String url = "";
-    private String app = "";
-    private String AppID = "";
-    private String env = "";
-    private String platform = "CDL";
-    private String BaseAPI = "";
+    protected String app = "";
+    protected String AppID = "";
+    protected String env = "";
+    protected String platform = "CDL";
+    protected String BaseAPI = "";
+    protected String BODY = "";
     
-    private String SITE = "";
-    private String SiteID = "";
+    protected String SITE = "";
+    protected String SiteID = "";
     
-    private String SECTOR = "";
-    private String SectorID = ""; 
-    private String BRAND = "";
-    private String BrandID = "";
-    private String UnitID = "";
-    private String CompanyID = "";
-    private String MenuID = "";
-    private String GL_MENU = "TIM HORTONS";
+    protected String SECTOR = "";
+    protected String SectorID = ""; 
+    protected String BRAND = "";
+    protected String BrandID = "";
+    protected String UnitID = "";
+    protected String CompanyID = "";
+    protected String MenuID = "";
+    protected String GL_MENU = "";
     
-    private List<String> SECTOR_IDS;
-    private List<String> COMP_IDS; 
-    private List<String> MENU_IDS;
-    private List<String> ORDER_IDS; 
-    private List<String> SCART_IDS; 
+    protected String BrandIDS = "";  
+    protected List<String> BolterBrandIDS;  
+    protected List<String> SECTOR_IDS;
+    protected List<String> COMP_IDS; 
+    protected List<String> MENU_IDS;
+    protected List<String> ORDER_IDS; 
+    protected List<String> SCART_IDS; 
+    protected List<String> NOTIFICATION_IDS; 
     
     protected int _t = 0; // Total
     protected int _p = 0; // Passed
@@ -1246,7 +1257,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        
 
         try {
-            J += GUI_API_Get(BaseAPI + URL, "Bearer " + AP3_User_TKN) + "\r\n";                        
+            J += GUI_API_Get(URL, "Bearer " + AP3_User_TKN) + "\r\n";                        
         } catch (IOException | JSONException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
@@ -1722,7 +1733,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
         dtpDate.setDateFormatString("EEE, dd-MMM-yyyy");
         dtpDate.setMaxSelectableDate(now);
         dtpDate.setDate(now);
-        MENU_IDS = new ArrayList<>();
+//        MENU_IDS = new ArrayList<>();
+//        BolterBrandIDS = new ArrayList<>();
         
         Load = false;
         GUI_Load_Env();
@@ -2472,9 +2484,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
         HtmlReport.setReportUsesManualConfiguration(true); // DEBUG - steps duration time incorrect
         
         HtmlReporter.config().setDocumentTitle("JTT API Automation Report");
-        HtmlReporter.config().setTheme(Theme.DARK);               
-    }    
-    protected void Log_Html_Result(String RES, String Test_Description, boolean Capture_Screenshot, ExtentTest Test)  {
+        //HtmlReporter.config().setTheme(Theme.DARK);               
+        HtmlReporter.config().setTheme(Theme.STANDARD);               
+   }    
+    protected void Log_Html_Result(String RES, String Test_Description, ExtentTest Test)  {
         switch (RES) {
             case "PASS":
                 Test.log(Status.PASS, MarkupHelper.createLabel(Test_Description, ExtentColor.GREEN));
@@ -2510,7 +2523,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         
         try{
             Current_Log_Update(false, "= Auto Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
-            New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
+            NewID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
             EX = "";
             t_calls = 0;
             t_min =  0;
@@ -2561,6 +2574,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("ADMIN_PW: ")) ADMIN_PW = value;  
                 if(l.contains("RUNNER_ID: ")) RUNNER_ID = value; 
                 if(l.contains("RUNNER_PW: ")) RUNNER_PW = value; 
+                if(l.contains("Market_Brand_ID: ")) Market_Brand_ID = value; 
             }
             CONFIG = true;
             switch (env) {
@@ -2743,14 +2757,16 @@ public class API_GUI extends javax.swing.JInternalFrame {
             protected String doInBackground() throws Exception { 
                 
                 Extent_Report_Config();
+                NewID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
                 Execute();// ======================================================================= 
                 
                 DD = Duration.between(run_start, Instant.now());
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
-                EX = "API " + env + ", " +
-                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ", Info: " + _i + "\r\n" +
+                EX = "API " + env + ". " +
+                    " Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ", Info: " + _i + 
+                        " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")" + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                     + EX;
                 
@@ -2869,7 +2885,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
     }
     
-    private void JOB_Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY, ExtentTest ParentTest, String JIRA) {
+    protected void JOB_Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY, int ExpStatus, ExtentTest ParentTest, String JIRA) {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2885,10 +2901,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
             if(!AUTH.isEmpty()){
                 request.header("Authorization", AUTH);
             }
-            Response response =null;
+            Response response = null;
             switch (Method) {
                 case "GET":
-                    if(BODY.equals("Runner")){
+                    if(BODY.equals("Bolter")){
                         request.header("From", "Bolter/1.0");
                     }
                     response = request.get(EndPoint);
@@ -2896,6 +2912,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 case "POST":
                     request.body(BODY);
                     response = request.post(EndPoint);
+                    break;
+                case "PATCH":
+                    request.body(BODY);
+                    response = request.patch(EndPoint);
                     break;
                 case "DELETE":
                     request.body(BODY);
@@ -2905,29 +2925,29 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     request.body(BODY);
                     response = request.put(EndPoint);
                     break; 
+                case "OPTIONS":
+                    request.header("Accept", "*/*");
+                    response = request.options(EndPoint);
+                    break;  
                 default:
                     break;
             }
             Result = response.getStatusLine();
             status = response.getStatusCode();
-            json = new JSONObject(response.asString());
-
+            if(response.asString().startsWith("{") && response.asString().endsWith("}")) {
+                json = new JSONObject(response.asString());
+            }
             R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
-            if (status == 200) {                                                 
+            if (status == ExpStatus) {                                                 
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "PASS" + "\t" + " - " +
                 "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("PASS", NAME + " > EndPoint: " + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
-            } else if (status > 200 && status < 500) { 
-                _w++; 
-                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "WARN" + "\t" + " - " +
-                "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("WARN", NAME + " > EndPoint: " + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+                Log_Html_Result("PASS", "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
             } else {
                 _f++; FAIL = true; 
                 EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + "Status Code: " + status + "\t" + "FAIL" + "\t" + Result +
                 "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("FAIL", NAME + " > EndPoint: " + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+                Log_Html_Result("FAIL", "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
             }
         } catch(Exception ex){
             R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
@@ -2935,7 +2955,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("FAIL", NAME + " > Error: " + err + "<br />EndPoint: " + EndPoint + "<br />Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+            Log_Html_Result("FAIL", "Error: " + err + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
         } 
         r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
         sw1.reset();
@@ -2943,241 +2963,130 @@ public class API_GUI extends javax.swing.JInternalFrame {
     //</editor-fold>  
     
     private void Execute() throws Exception {
-        String Realm = "";
-        String Auth = "";
-        String BrandIDS = "";
-        AP3_User_ID = "";
-        AP3_User_TKN = ""; 
-        Mobile_User_ID = "";
-        Mobile_User_TKN = "";
-        Runner_User_ID = "";
-        Runner_User_TKN = "";
-
-        //<editor-fold defaultstate="collapsed" desc="User">
-        ParentTest = HtmlReport.createTest("User");            
-
-        Auth = "Basic " + Base64.getEncoder().encodeToString((MOBILE_ID + ":" + MOBILE_PW).getBytes());
-        Realm = A.Func.Realm_ID(app, env);
-        JOB_Api_Call("Mobile User Authentication", "GET", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", ParentTest, "no_jira");
-        if(json != null){
-            try {
-                if(json.has("user")) Mobile_User_ID = json.getString("user"); 
-                if(json.has("token")) Mobile_User_TKN = json.getString("token");  
-            } catch (Exception ex){
-                //
-            }
+        if(true){
+            SCOPE += "Mobile User ";
+            ParentTest = HtmlReport.createTest("Mobile User"); 
+            user_mobile BR = new API.user_mobile(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+            Mobile_User_ID = BR.Mobile_User_ID; 
+            Mobile_User_TKN = BR.Mobile_User_TKN;
         }
-
-        Auth = "Bearer " + Mobile_User_TKN;
-        JOB_Api_Call("Mobile User Payment", "GET", BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "", ParentTest, "no_jira");
-
-        long m1 = System.currentTimeMillis();                     
-        long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // - 7 days
-        JOB_Api_Call("Mobile User Orders", "GET", BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1, Auth, "", ParentTest, "no_jira");
-
-        Auth = "Basic " + Base64.getEncoder().encodeToString((ADMIN_ID + ":" + ADMIN_PW).getBytes());
-        Realm = A.Func.Realm_ID("AP3", env);
-        JOB_Api_Call("AP3 User Authentication", "GET", BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", ParentTest, "no_jira");
-        if(json != null){ 
-            try {
-                if(json.has("user")) AP3_User_ID = json.getString("user"); 
-                if(json.has("token")) AP3_User_TKN = json.getString("token");  
-            } catch (Exception ex){
-                //
-            }
-        }
-
-        Auth = "Bearer " + AP3_User_TKN;
-        JOB_Api_Call("AP3 User > /realm", "GET", BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000", Auth, "", ParentTest, "no_jira");
-
-        Auth = "Bearer " + AP3_User_TKN;
-        JOB_Api_Call("AP3 User > /permissions", "GET", BaseAPI + "/user/" + AP3_User_ID + "/permissions" + "?nocache=1", Auth, "", ParentTest, "no_jira");
-
-        Auth = "Basic " + Base64.getEncoder().encodeToString((RUNNER_ID + ":" + RUNNER_PW).getBytes());
-        JOB_Api_Call("Bolter Runner Site > /user/auth?realm=bolter", "GET", BaseAPI + "/user/auth" + "?realm=" + "bolter", Auth, "Runner", ParentTest, "no_jira");
-
-  
-
-        //</editor-fold>  
-        
-        //<editor-fold defaultstate="collapsed" desc="location">
-        ParentTest = HtmlReport.createTest("Location"); 
-
-        Auth = "Bearer " + AP3_User_TKN;  // =============== AP3 Sectors > Company ID===========================
-        JOB_Api_Call("Location > /sector", "GET", BaseAPI + "/location/sector?_provider=cdl", Auth, "", ParentTest, "no_jira");
-        
-        Auth = "";                        // =============== AP3 ALL Sites ===========================
-        AppID = A.Func.App_ID(app, env);
-        JOB_Api_Call("Location > /multigroup/", "GET", BaseAPI + "/location/multigroup/", Auth, "", ParentTest, "no_jira");
-
-        Auth = "";                       // =============== AP3 App Sites ===========================
-        AppID = A.Func.App_ID(app, env);
-        JOB_Api_Call("Location > /multigroup/'AppID'", "GET", BaseAPI + "/location/multigroup/" + AppID + "?nocache=true&extended=true", Auth, "", ParentTest, "no_jira");
-        if(json != null){
-            try{
-                JSONArray Groups = json.getJSONArray("groups");
-                for (int i = 0; i < Groups.length(); i++) {
-                    JSONObject group = Groups.getJSONObject(i);
-                    if(group.has("name") && group.getString("name").equals(SITE)){
-                        SiteID = group.getString("id");
-                        break;
-                    } 
-                } 
-            } catch (Exception ex){
-                //
-            }
+        if(true){
+            SCOPE += "Payment ";
+            ParentTest = HtmlReport.createTest("Payment"); 
+            payment BR = new API.payment(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+            Mobile_User_ID = BR.Mobile_User_ID; 
+            Mobile_User_TKN = BR.Mobile_User_TKN;
         } 
-
-        Auth = "";                      // =============== AP3 Site Brands ===========================
-        JOB_Api_Call("Location > /group/'SiteID'", "GET", BaseAPI + "/location/group/" + SiteID, Auth, "", ParentTest, "no_jira");
-        if(json != null){
-            try {
-                JSONArray Location = json.getJSONArray("locations");
-                if (Location != null) {
-                    for (Object l : Location) {
-                        JSONObject loc = (JSONObject) l;
-                        JSONArray brands = loc.getJSONArray("brands");
-                        for (Object b : brands) {
-                            JSONObject br = (JSONObject) b; 
-                            BrandIDS += br.getString("id") + ",";
-                            if (br.getString("name").equals(BRAND)) { 
-                                BrandID = br.getString("id");
-                                UnitID = loc.getString("id");
-                            }
-                        }
-                    }
-                }
-                BrandIDS = BrandIDS.substring(0, BrandIDS.length() - 1);
-            } catch (Exception ex){
-                //
-            }
+        if(true){
+            SCOPE += "Bolter ";
+            ParentTest = HtmlReport.createTest("Bolter"); 
+            user_bolter BR = new API.user_bolter(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+            Bolter_User_ID = BR.Bolter_User_ID; 
+            Bolter_User_TKN = BR.Bolter_User_TKN;
+            Bolter_Site_ID = BR.Bolter_Site_ID;
+            BolterBrandIDS =  BR.BolterBrandIDS;
+        }
+        if(true){
+            SCOPE += "AP3 User ";
+            ParentTest = HtmlReport.createTest("AP3 User"); 
+            user_ap3 BR = new API.user_ap3(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+            AP3_User_ID = BR.AP3_User_ID; 
+            AP3_User_TKN = BR.AP3_User_TKN;
+        }      
+        if(true){
+            SCOPE += "Locations ";
+            ParentTest = HtmlReport.createTest("Locations"); 
+            locations BR = new API.locations(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+            SiteID = BR.SiteID; 
+            UnitID = BR.UnitID;
+            BrandID = BR.BrandID;
+            SectorID = BR.SectorID;
+            CompanyID = BR.CompanyID;
+            MENU_IDS = BR.MENU_IDS;
+            BrandIDS = BR.BrandIDS;
+        }        
+        if(true){
+            SCOPE += "Config ";
+            ParentTest = HtmlReport.createTest("Config"); 
+            config BR = new API.config(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        } 
+        if(true){
+            SCOPE += "Task ";
+            ParentTest = HtmlReport.createTest("Task"); 
+            task BR = new API.task(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        }
+        if(true){
+            SCOPE += "Calendar ";
+            ParentTest = HtmlReport.createTest("Calendar"); 
+            calendar BR = new API.calendar(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        }       
+        if(true){
+            SCOPE += "Menus ";
+            ParentTest = HtmlReport.createTest("Global/Local Menus"); 
+            menus BR = new API.menus(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
         }   
-
-        Auth = "";                      // ===============    AP3 Unit ===========================
-        JOB_Api_Call("Location > /'UnitID'", "GET", BaseAPI + "/location/" + UnitID + "?extended=true&nocache=1", Auth, "", ParentTest, "no_jira");
-        
-        Auth = "";                      // ===============    AP3 Brand ===========================
-        JOB_Api_Call("Location > /'BrandID'", "GET", BaseAPI + "/location/brand/" + BrandID + "?extended=true&nocache=1", Auth, "", ParentTest, "no_jira");
-        SectorID = "";
-        CompanyID = "";
-        if(json != null){
-            MENU_IDS = new ArrayList<>();
-            try {
-                JSONArray MENUS = json.getJSONArray("menus");
-                for (int i = 0; i < MENUS.length(); i++) {
-                    JSONObject menu = MENUS.getJSONObject(i);
-                    MENU_IDS.add(menu.getString("id"));
-                } 
-                if(json.has("sector")){           
-                    SectorID = json.getString("sector");
-                }
-                if(json.has("company")){
-                    CompanyID = json.getString("company");
-                }
-            } catch (Exception ex){
-                //
-            }
-        }
-       
-        //</editor-fold>
-        
-        //<editor-fold defaultstate="collapsed" desc="config">
-        ParentTest = HtmlReport.createTest("Config");              
-        Auth = "Bearer " + AP3_User_TKN;   // =============== Config(s) ========================================
-//        JOB_Api_Call("Config > /'AppID'", "GET", BaseAPI + "/config/" + AppID, Auth, "", ParentTest, "no_jira");
-//        JOB_Api_Call("Public Config > /'AppID'", "GET", BaseAPI + "/config/public/" + AppID, "", "", ParentTest, "no_jira");
-        
-        JOB_Api_Call("Config > /'SiteID'", "GET", BaseAPI + "/config/" + SiteID, Auth, "", ParentTest, "no_jira");
-        JOB_Api_Call("Public Config > /'SiteID'", "GET", BaseAPI + "/config/public/" + SiteID, "", "", ParentTest, "no_jira");
-                
-//        JOB_Api_Call("Config > /'UnitID'", "GET", BaseAPI + "/config/" + UnitID, Auth, "", ParentTest, "no_jira");
-//        JOB_Api_Call("Public Config > /'UnitID'", "GET", BaseAPI + "/config/public/" + UnitID, "", "", ParentTest, "no_jira");
-         
-        JOB_Api_Call("Config > /'BrandID'", "GET", BaseAPI + "/config/" + BrandID, Auth, "", ParentTest, "no_jira");
-        JOB_Api_Call("Public Config > /'BrandID'", "GET", BaseAPI + "/config/public/" + BrandID, "", "", ParentTest, "no_jira");
-
-        //</editor-fold>          
-
-        //<editor-fold defaultstate="collapsed" desc="promos">  
-        ParentTest = HtmlReport.createTest("Promo"); 
-        Auth = "Bearer " + AP3_User_TKN;  // ===============  AP3 Promo ===========================
-        JOB_Api_Call("Promo > /'CompanyID'", "GET", BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID, Auth, "", ParentTest, "no_jira");
-        //</editor-fold>
-      
-        //<editor-fold defaultstate="collapsed" desc="calendar">           
-        ParentTest = HtmlReport.createTest("Calendar");
-        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Company/Global Menus ===========================
-        JOB_Api_Call("Calendar > /'BrandID'", "GET", BaseAPI + "/calendar/" + BrandID, Auth, "", ParentTest, "no_jira");
-        //</editor-fold>
-        
-        //<editor-fold defaultstate="collapsed" desc="menus">        
-        ParentTest = HtmlReport.createTest("Global / Local Menu");     
-        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Company/Global Menus ===========================
-        JOB_Api_Call("Company / Global Menus > /'CompID'", "GET", BaseAPI + "/menu/company/" + CompanyID, Auth, "", ParentTest, "no_jira");
-
-        Auth = "";                        // =============== AP3 Local Menu(s) ===========================
-        for(int i = 0; i < MENU_IDS.size(); i++){
-            JOB_Api_Call("Brand Local Menu " + i + " > /menu/'MenuID'", "GET", BaseAPI + "/menu/" + MENU_IDS.get(i), Auth, "", ParentTest, "no_jira");
-            JOB_Api_Call("Brand > Timeslots > Menu " + i + " > /timeslots/menu/'MenuID'", "GET", BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MENU_IDS.get(i) + "?nocache=1&extended=true", Auth, "", ParentTest, "no_jira" );
-        }
-        
-//        Auth = "";                        // =============== AP3 Brand > Timeslots / Menu  ===========================
-//        MenuID = MENU_IDS.get(0);
-//        JOB_Api_Call("Brand > Timeslots > Menu", "GET", BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MenuID + "?nocache=1&extended=true", Auth, "", ParentTest, "no_jira" );
-//                
-        //</editor-fold>
-        
-        //<editor-fold defaultstate="collapsed" desc="Reporting">        
-        ParentTest = HtmlReport.createTest("Reports");   
-        
-        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Sales Reporting EOD ===========================
-        JOB_Api_Call("Sales EOD Report - Default > /'SiteID'", "GET", BaseAPI + "/report/eod/group/" + SiteID, Auth, "", ParentTest, "no_jira");
-        String From = ""; 
-        Date Yesterday = new DateTime(new Date()).minusDays(1).toDate();
-        From = new SimpleDateFormat("yyyy-MM-dd").format(Yesterday); 
-        String To = From;
-        JOB_Api_Call("Sales EOD Report - Yesterday > /'SiteID'", "GET", BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To, Auth, "", ParentTest, "no_jira");
-        if(json != null){
-            boolean XXX = true;
-            //
-        }
-        String Start = ""; 
-        String End = ""; 
-        Date _Start = new DateTime(new Date()).minusDays(31).toDate();
-        Date _End = new DateTime(new Date()).minusDays(1).toDate();
-        Start = new SimpleDateFormat("yyyy-MM-dd").format(_Start); 
-        End = new SimpleDateFormat("yyyy-MM-dd").format(_End); 
-        JOB_Api_Call("Report Analytics > /'SiteID/all_brands/week/30 days'", "GET", BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + BrandIDS + "&time_frame=week&start_date=" + Start + "&end_date=" + End, Auth, "", ParentTest, "no_jira");
-        if(json != null){
-            boolean XXX = true;
-            //
-        }  
-        Date _Start1 = new DateTime(new Date()).minusDays(8).toDate();
-        Date _End1 = new DateTime(new Date()).minusDays(1).toDate();
-        Start = new SimpleDateFormat("yyyy-MM-dd").format(_Start1); 
-        End = new SimpleDateFormat("yyyy-MM-dd").format(_End1); 
-        JOB_Api_Call("Report Analytics > /'SiteID/brand/day/7 days'", "GET", BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_id=" + BrandID + "&time_frame=day&start_date=" + Start + "&end_date=" + End, Auth, "", ParentTest, "no_jira");
-        if(json != null){
-            boolean XXX = true;
-            //
+//        if(true){
+//            SCOPE += "Shoppingcart ";
+//            ParentTest = HtmlReport.createTest("Shoppingcart"); 
+//            shoppingcart BR = new API.shoppingcart(API_GUI.this);
+//            BR.run(); // ======================================
+//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+//        }          
+        if(true){
+            SCOPE += "Order ";
+            ParentTest = HtmlReport.createTest("Order"); 
+            order BR = new API.order(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
         }         
-        //</editor-fold>        
-               
-        //<editor-fold defaultstate="collapsed" desc="Announcement">            
-        ParentTest = HtmlReport.createTest("Announcement");              
-        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Announcement ===========================
-        JOB_Api_Call("AP3 Announcement", "GET", BaseAPI + "/announcement/resource/", Auth, "", ParentTest, "no_jira");
-
-        //</editor-fold>       
-    
-        //<editor-fold defaultstate="collapsed" desc="KDS">            
-        ParentTest = HtmlReport.createTest("KDS");              
-        Auth = "Bearer " + AP3_User_TKN;   // =============== "KDS devices for Unit numbers > string separated with commas", ===========================
-        JOB_Api_Call("KDS Devices > ?'unitNumber(s)'", "GET", BaseAPI + "/kds/devices?unitNumber=" + "12345,34567,32446673542657", Auth, "", ParentTest, "no_jira");
-        if(json != null){
-            String DEVICES = "Check json"; 
+        
+        if(true){
+            SCOPE += "Reports ";
+            ParentTest = HtmlReport.createTest("Reports"); 
+            reports BR = new API.reports(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        }            
+        if(true){
+            SCOPE += "Announcement ";
+            ParentTest = HtmlReport.createTest("Announcement"); 
+            announcement BR = new API.announcement(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
         }
-        //</editor-fold>   
+        if(true){
+            SCOPE += "Notification ";
+            ParentTest = HtmlReport.createTest("Recent Updates/Notifications");      
+            notification BR = new API.notification(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        }
+        if(true){
+            SCOPE += "KDS ";
+            ParentTest = HtmlReport.createTest("KDS");      
+            kds BR = new API.kds(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        }        
+  
     }
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">

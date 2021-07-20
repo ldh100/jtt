@@ -38,15 +38,22 @@ class DL_Accountmanager extends DL_GUI {
                 if (FAIL) {
                     return;
                 }
+                L2.remove(0);
             }
-
+           
+             else{
+               
+                Element_E1_Find("Find Search bar", "xpath", "//input[contains(@class, 'MuiInputBase-input MuiOutlinedInput-input')]", ParentTest, "no_jira");
+                if (FAIL) {
+                    return;
+                }
+            }
+           
             List<String> Memberlist = new ArrayList<>();
-            Element_E1_Find("Find Search bar", "xpath", "//input[contains(@class, 'MuiInputBase-input MuiOutlinedInput-input')]", ParentTest, "no_jira");
-            if (FAIL) {
-                return;
-            }
+
             for (int j = 0; j < L2.size(); j++) {
                 Element_Text("Members", L2.get(j), ParentTest, "no_jira");
+                         
                 System.out.println(L2.get(j).getText());
                 Memberlist.add(L2.get(j).getText());
             }
