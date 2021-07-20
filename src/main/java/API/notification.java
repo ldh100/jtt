@@ -1,10 +1,15 @@
 package API;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import org.joda.time.DateTime;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-class notification extends API_GUI{
+class notification extends API_GUI {
+
     protected notification(API_GUI a) {
         app = a.app;
         env = a.env;
@@ -14,28 +19,94 @@ class notification extends API_GUI{
         BrandID = a.BrandID;
         ParentTest = a.ParentTest;
     }
-    protected void run() {                                    
+
+    protected void run() {
         Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Resent Updates===========================
-        JOB_Api_Call("AP3 Recent Updates - no end date", "GET", 
-            BaseAPI + "/notification?realm=cdl&target=admin_panel", Auth, "", 200, ParentTest, "no_jira");
-        
+        Date release_date = new DateTime(new Date()).plusHours(4).plusMinutes(1).toDate();
+        String RELEASE_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(release_date);
         Date _e = new DateTime(new Date()).minusDays(10).toDate();
-        String _E = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(_e); 
-        JOB_Api_Call("AP3 Recent Updates - end 10 days ago", "GET", 
-            BaseAPI + "/notification?realm=cdl&target=admin_panel&end=" + _E, Auth, "", 200, ParentTest, "no_jira");  
-        // get list of ID(s)
-        
-        // https://api.compassdigital.org/dev/notification/lBG93P10PGCLOD7yzwkkfMq8NQyM8RFQEWRy884OIXagyg2QzNFZL8rljeDzco7gpoGzkvtZY41kEDPJsWM0yOGPwKUv8AkYl4yPseJN/status
-        // POST > {"status":{"read":true}}
-        
-        /* update NOTIFICATIONS_IDS>Index(???) > PATCH; 
-        
-        {"text":"04-22werqrewrewerq",
-        "title":"test - edited",
-        "realm":"cdl",
-        "target":"admin_panel",
-        "date_modified":"2021-04-22T07:00:00.000Z"}
-        */
- 
-    }
+        String _E = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(_e);
+        String Notification_ID = "";
+
+        // <editor-fold defaultstate="collapsed" desc=" POST Notification">
+        // Test Scenario 1: Positive flow for post new notification 
+        BODY = "{\"text\":\"This is text for post new notification description\",\"title\":\"Test title - Post " + RELEASE_DATE + "\",\"realm\":\"cdl\",\"target\":\"admin_panel\",\"release_date\":\"" + RELEASE_DATE + "\"}";
+        JOB_Api_Call("AP3 add new notification", "POST", BaseAPI + "/notification/", Auth, BODY, 200, ParentTest, "no_jira");
+        System.err.println(BODY);
+        if (json != null) {
+            try {
+                Notification_ID = json.getString("id");
+            }
+            catch (Exception ex) {
+            }
+        }
+
+        // Test Scenario 2: Negative flow with null text values
+        BODY = "{\"text\":\"\",\"title\":\"Test title - Post " + RELEASE_DATE + "\",\"realm\":\"cdl\",\"target\":\"admin_panel\",\"release_date\":\"" + RELEASE_DATE + "\"}";
+        JOB_Api_Call("AP3 add new notification - Negative flow with null text values", "POST", BaseAPI + "/notification/", Auth, BODY, 400, ParentTest, "no_jira");
+
+        // Test Scenario 3: Negative flow with null realm id
+        BODY = "{\"text\":\"This is text for post new notification description\",\"title\":\"Test title - Post " + RELEASE_DATE + "\",\"realm\":\"\",\"target\":\"admin_panel\",\"release_date\":\"" + RELEASE_DATE + "\"}";
+        JOB_Api_Call("AP3 add new notification - Negative flow with null realm id", "POST", BaseAPI + "/notification/", Auth, BODY, 400, ParentTest, "no_jira");
+
+        // Test Scenario 4: Negative flow with null target value
+        BODY = "{\"text\":\"This is text for post new notification description\",\"title\":\"Test title - Post " + RELEASE_DATE + "\",\"realm\":\"cdl\",\"target\":\"\",\"release_date\":\"" + RELEASE_DATE + "\"}";
+        JOB_Api_Call("AP3 add new notification - Negative flow with null target value", "POST", BaseAPI + "/notification/", Auth, BODY, 400, ParentTest, "no_jira");
+
+        // Test Scenario 5: Negative flow with past release date
+        BODY = "{\"text\":\"This is text for post new notification description\",\"title\":\"Test title - Post " + _E + "\",\"realm\":\"cdl\",\"target\":\"admin_panel\",\"release_date\":\"" + _E + "\"}";
+        JOB_Api_Call("AP3 add new notification - Negative flow with past release date", "POST", BaseAPI + "/notification/", Auth, BODY, 400, ParentTest, "no_jira");
+        //</editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc=" GET all Notification">
+        // Test Scenario 1: Positive get all notification 
+        JOB_Api_Call("AP3 Recent Updates - end 10 days ago", "GET",
+                BaseAPI + "/notification?realm=cdl&target=admin_panel&end=" + _E, Auth, "", 200, ParentTest, "no_jira");
+
+        // Test Scenario 2: Positive get all notification 
+        JOB_Api_Call("AP3 Recent Updates - no end date", "GET",
+                BaseAPI + "/notification?realm=cdl&target=admin_panel", Auth, "", 200, ParentTest, "no_jira");
+        if (json != null) {
+            NOTIFICATION_IDS = new ArrayList<>();
+            try {
+                JSONArray notificationArray = json.getJSONArray("notifications");
+                for (int i = 0; i < notificationArray.length(); i++) {
+                    JSONObject notificationObject = notificationArray.getJSONObject(i);
+                    NOTIFICATION_IDS.add(notificationObject.getString("id"));
+                }
+            }
+            catch (Exception ex) {
+                //
+            }
+        }
+        //</editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc=" PATCH Notification">This method will send PUT request to update notification title and text
+        // Test Scenario 1: Positive flow for patch notification by ID
+        BODY = "{\"text\":\"This is text for update notification\",\"title\":\"Test title- edited " + _E + "\",\"realm\":\"cdl\",\"target\":\"admin_panel\"}";
+        if (json != null) {
+            try {
+                JSONArray notificationsArray = json.getJSONArray("notifications");
+                if (notificationsArray != null && NOTIFICATION_IDS.contains(Notification_ID)) {
+                    JOB_Api_Call("AP3 Update Notification Title and Text", "PATCH",
+                            BaseAPI + "/notification/" + Notification_ID, Auth, BODY, 200, ParentTest, "no_jira");
+                } else {
+                    //No data found for notification
+                }
+            }
+            catch (Exception ex) {
+                //
+            }
+        }
+        // Test Scenario 2: Negative flow to update notification with null text values
+        BODY = "{\"text\":\"\",\"title\":\"Test title - Post " + RELEASE_DATE + "\",\"realm\":\"cdl\",\"target\":\"admin_panel\",\"release_date\":\"" + RELEASE_DATE + "\"}";
+        JOB_Api_Call("AP3 update notification - Negative flow with null text values", "PATCH", BaseAPI + "/notification/" + Notification_ID, Auth, BODY, 400, ParentTest, "no_jira");
+        //</editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc=" DELETE Notification">
+        // Test Scenario 1: Positive flow for delete notification by ID
+        JOB_Api_Call("AP3 Delete Notification by ID", "DELETE", BaseAPI + "/notification/" + Notification_ID, Auth, BODY, 200, ParentTest, "no_jira");
+    //</editor-fold>
+
+}
 }
