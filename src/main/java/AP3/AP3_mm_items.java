@@ -33,6 +33,8 @@ class AP3_mm_items extends AP3_GUI{
         SECTOR = a.SECTOR;
         CompanyID = a.CompanyID;
         GL_MENU =a.GL_MENU;
+        SectorID=a.SectorID;
+        BrandID=a.BrandID;
         
         AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
@@ -46,6 +48,8 @@ class AP3_mm_items extends AP3_GUI{
         String MENU_ID = "";      
         int PAGES;
         boolean NO_DATA = false;
+        
+        
 
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
             if (FAIL) { return;}
@@ -402,7 +406,9 @@ class AP3_mm_items extends AP3_GUI{
         // ======= Add Modifier End ^^^         
         Element_By_Path_Click("Click 'APPLY Changes'", "xpath", "//*[contains(text(), 'Apply Changes')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}   
-
+            
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
         //Cloning item 
         Element_By_Path_Click("Click Item clone", "xpath", "//div[@class='menutable']//tbody//tr[1]//td[9]//i[contains(@class,'copy')]", ParentTest, "no_jira"); 
             if (FAIL) {return;}
@@ -576,7 +582,7 @@ class AP3_mm_items extends AP3_GUI{
             Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
              Refresh("Refresh the page", ParentTest, "no_jira");
-             Thread.sleep(1000);
+             Thread.sleep(2000);
         }
         List_L2("Published Menus ID Count", "css", "[menu-id]", ParentTest, "no_jira");        
         List_L0("Re-Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");             
@@ -654,6 +660,9 @@ class AP3_mm_items extends AP3_GUI{
         String Category = t;
         Element_By_Path_Click("Click > '"+Category+"' Category", "xpath", "//*[contains(text(),'"+Category+"')][1]/parent::span", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+            
         Wait_For_Element_By_Path_Presence("Wait for Items table", "xpath", "//*[text()='Menu Version: 2']", ParentTest,"no_jira");
         if (FAIL) { return;}
         Element_By_Path_Click("Click > 'EDIT MENU'", "xpath", "//*[contains(text(),'EDIT MENU')]", ParentTest, "no_jira"); 
@@ -757,10 +766,16 @@ class AP3_mm_items extends AP3_GUI{
         Wait_For_Element_By_Path_Presence("Wait for Local Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
         if (FAIL) { return;}
         Element_By_Path_Click("Click > '"+Category+"' Category", "xpath", "//*[contains(text(),'"+Category+"')][1]/parent::span", ParentTest, "no_jira"); 
-            if (FAIL) { return;} 
-        Wait_For_Element_By_Path_Presence("Wait for Items table", "xpath", "//*[text()='Menu Version: 2']", ParentTest,"no_jira");
-        if (FAIL) { return;}
+            if (FAIL) { return;}
+            
+        
+         Thread.sleep(1000);
+            
+        //Wait_For_Element_By_Path_Presence("Wait for Items table", "xpath", "//*[text()='Menu Version: 2']", ParentTest,"no_jira");
+        //if (FAIL) { return;}
         // get name and check if it changed
+        //Thread.sleep(1000);
+        
         Element_By_Path_Text("Get Item Name in Local Menu", "xpath", "//tr[1]/td[3]", ParentTest, "no_jira");
             if (FAIL) { return;}
         if (!NBC.equals(t)) {
@@ -812,6 +827,7 @@ class AP3_mm_items extends AP3_GUI{
         }
         EX += " - " + "\t" + " === Changes in Global Menu Item Reflect on Local Menu Item" + "\t" + " ===== " + "\t" + " == Changes in Global Menu Item Reflect on Local Menu Item End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n"; 
         // </editor-fold> 
+      
         
         // <editor-fold defaultstate="collapsed" desc="Manipulate Global Modifiers">  
         EX += " - " + "\t" + " === Manipulate Global Modifiers" + "\t" + " ===== " + "\t" + " == Manipulate Global Modifiers Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n"; 

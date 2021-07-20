@@ -600,9 +600,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
     
     protected String RUNNER_ID = "";
     protected String RUNNER_PW = "";
-    protected String Runner_User_ID = "";
-    protected String Runner_User_TKN = "";   
-    protected String Runner_Site_ID = "";  
+    protected String Bolter_User_ID = "";
+    protected String Bolter_User_TKN = "";   
+    protected String Bolter_Site_ID = "";  
+    protected String Market_Brand_ID = ""; 
     
     protected String Realm = "";
     protected String Auth = "";    
@@ -658,11 +659,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String GL_MENU = "";
     
     protected String BrandIDS = "";  
+    protected List<String> BolterBrandIDS;  
     protected List<String> SECTOR_IDS;
     protected List<String> COMP_IDS; 
     protected List<String> MENU_IDS;
     protected List<String> ORDER_IDS; 
     protected List<String> SCART_IDS; 
+    protected List<String> NOTIFICATION_IDS; 
     
     protected int _t = 0; // Total
     protected int _p = 0; // Passed
@@ -1730,7 +1733,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
         dtpDate.setDateFormatString("EEE, dd-MMM-yyyy");
         dtpDate.setMaxSelectableDate(now);
         dtpDate.setDate(now);
-        MENU_IDS = new ArrayList<>();
+//        MENU_IDS = new ArrayList<>();
+//        BolterBrandIDS = new ArrayList<>();
         
         Load = false;
         GUI_Load_Env();
@@ -2570,6 +2574,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("ADMIN_PW: ")) ADMIN_PW = value;  
                 if(l.contains("RUNNER_ID: ")) RUNNER_ID = value; 
                 if(l.contains("RUNNER_PW: ")) RUNNER_PW = value; 
+                if(l.contains("Market_Brand_ID: ")) Market_Brand_ID = value; 
             }
             CONFIG = true;
             switch (env) {
@@ -2759,8 +2764,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
-                EX = "API " + env + ", " +
-                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ", Info: " + _i + "\r\n" +
+                EX = "API " + env + ". " +
+                    " Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ", Info: " + _i + 
+                        " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")" + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                     + EX;
                 
@@ -2898,15 +2904,18 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Response response = null;
             switch (Method) {
                 case "GET":
-                    if(BODY.equals("Runner")){
+                    if(BODY.equals("Bolter")){
                         request.header("From", "Bolter/1.0");
                     }
                     response = request.get(EndPoint);
-
                     break;
                 case "POST":
                     request.body(BODY);
                     response = request.post(EndPoint);
+                    break;
+                case "PATCH":
+                    request.body(BODY);
+                    response = request.patch(EndPoint);
                     break;
                 case "DELETE":
                     request.body(BODY);
@@ -2978,9 +2987,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
             user_bolter BR = new API.user_bolter(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
-            Runner_User_ID = BR.Runner_User_ID; 
-            Runner_User_TKN = BR.Runner_User_TKN;
-            Runner_Site_ID = BR.Runner_Site_ID;
+            Bolter_User_ID = BR.Bolter_User_ID; 
+            Bolter_User_TKN = BR.Bolter_User_TKN;
+            Bolter_Site_ID = BR.Bolter_Site_ID;
+            BolterBrandIDS =  BR.BolterBrandIDS;
         }
         if(true){
             SCOPE += "AP3 User ";
@@ -3032,7 +3042,22 @@ public class API_GUI extends javax.swing.JInternalFrame {
             menus BR = new API.menus(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
-        }    
+        }   
+//        if(true){
+//            SCOPE += "Shoppingcart ";
+//            ParentTest = HtmlReport.createTest("Shoppingcart"); 
+//            shoppingcart BR = new API.shoppingcart(API_GUI.this);
+//            BR.run(); // ======================================
+//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+//        }          
+        if(true){
+            SCOPE += "Order ";
+            ParentTest = HtmlReport.createTest("Order"); 
+            order BR = new API.order(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        }         
+        
         if(true){
             SCOPE += "Reports ";
             ParentTest = HtmlReport.createTest("Reports"); 
