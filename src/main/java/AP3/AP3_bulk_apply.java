@@ -8,6 +8,13 @@ import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+// Test data for this scope
+
+//Env: Staging
+//App:Boost
+//Location: Sites Bulk Apply / Boost site
+//Brand: Bulk Apply Station
+
 class AP3_bulk_apply extends AP3_GUI{
     protected AP3_bulk_apply (AP3_GUI a) {
         d1 = a.d1;
@@ -868,6 +875,7 @@ class AP3_bulk_apply extends AP3_GUI{
         Thread.sleep(500);
         List_L3("Modifier Options", "xpath", "//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')]", ParentTest, "no_jira");
             if (FAIL) { return;}
+            Thread.sleep(500);
         Element_By_Path_Click("Remove Third Mod Option", "xpath", "(//div[contains(@class,'v-text-field--placeholder')]/ancestor::div[contains(@class,'align-center modifier')])[3]//i[contains(@class,'mdi-delete')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
