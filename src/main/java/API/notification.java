@@ -113,6 +113,20 @@ class notification extends API_GUI {
         JOB_Api_Call("AP3 update notification - Negative flow with null text values", "PATCH", BaseAPI + "/notification/" + Notification_ID, Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
 
+        // <editor-fold defaultstate="collapsed" desc=" POST set a notification status ">
+        // Test Scenario 1: Positive flow to set read status - True
+         BODY = "{\"status\":"+
+                    "{\"read\": true}"+
+                 "}";
+        JOB_Api_Call("AP3 set notification status true", "POST", BaseAPI + "/notification/"+ Notification_ID+ "/status", Auth, BODY, 200, ParentTest, "no_jira");
+        
+         // Test Scenario 2: Positive flow to set read status - False
+         BODY = "{\"status\":"+
+                    "{\"read\":false}"+
+                 "}";
+        JOB_Api_Call("AP3 set notification status false", "POST", BaseAPI + "/notification/"+ Notification_ID+ "/status", Auth, BODY, 200, ParentTest, "no_jira");
+        //</editor-fold>
+        
         // <editor-fold defaultstate="collapsed" desc=" DELETE Notification">
         // Test Scenario 1: Positive flow for delete notification by ID
         JOB_Api_Call("AP3 Delete Notification by ID", "DELETE", BaseAPI + "/notification/" + Notification_ID, Auth, BODY, 200, ParentTest, "no_jira");
