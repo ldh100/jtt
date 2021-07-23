@@ -6,6 +6,7 @@ class announcement extends API_GUI {
 
     protected announcement(API_GUI a) {
         app = a.app;
+        AppID=a.AppID;
         env = a.env;
         BaseAPI = a.BaseAPI;
         AP3_User_TKN = a.AP3_User_TKN;
@@ -33,7 +34,7 @@ class announcement extends API_GUI {
         // Test Scenario 1: Positive flow for post active announcement 
         BODY = "{\"name\":\"This is API test for Announcement with Status = Active\","
                 + "\"type\":\"Promotions\","
-                + "\"key\":\"D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe\","
+                + "\"key\":\""+AppID+"\","
                 + "\"app\":\"" + app +"\","
                 + "\"is_global\":false,"
                 + "\"allowed_resources\":[\"" + SiteID + "\"],"
