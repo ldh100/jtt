@@ -2589,6 +2589,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     BaseAPI = "https://api.compassdigital.org/v1";
                     break;
             }
+            AppID = A.Func.App_ID(app, env);
             Current_Log_Update(true, "= JOB_Load_CONFIG > OK" + "\r\n");
             return "OK";
         } catch (Exception ex) {
