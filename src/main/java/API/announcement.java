@@ -66,7 +66,7 @@ class announcement extends API_GUI {
         // Test Scenario 2: Positive flow for post In-active announcement 
         BODY = "{\"name\":\"This is API test for Announcement with Status = In Active\","
                 + "\"type\":\"Promotions\","
-                + "\"key\":\"D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe\","
+                + "\"key\":\"" + AppID + "\","
                 + "\"app\":\"" + app + "\","
                 + "\"is_global\":false,"
                 + "\"allowed_resources\":[\"" + SiteID + "\"],"
@@ -98,7 +98,7 @@ class announcement extends API_GUI {
         // Test Scenario 3: Positive flow for post announcement without French Version
         BODY = "{\"name\":\"This is API test for Announcement without French Version\","
                 + "\"type\":\"Promotions\","
-                + "\"key\":\"D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe\","
+                + "\"key\":\"" + AppID + "\","
                 + "\"app\":\"" + app + "\","
                 + "\"is_global\":false,"
                 + "\"allowed_resources\":[\"" + SiteID + "\"],"
@@ -124,7 +124,7 @@ class announcement extends API_GUI {
         // Test Scenario 3: Positive flow for post announcement without English Version
         BODY = "{\"name\":\"This is API test for Announcement without English Version\","
                 + "\"type\":\"Promotions\","
-                + "\"key\":\"D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe\","
+                + "\"key\":\"" + AppID + "\","
                 + "\"app\":\"" + app + "\","
                 + "\"is_global\":false,"
                 + "\"allowed_resources\":[\"" + SiteID + "\"],"
@@ -150,7 +150,7 @@ class announcement extends API_GUI {
         // Test Scenario 4: Negative flow for post announcement without Announcement Type
         BODY = "{\"name\":\"This is API test for Announcement with Status = Active\","
                 + "\"type\":\"\","
-                + "\"key\":\"D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe\","
+                + "\"key\":\"" + AppID + "\","
                 + "\"app\":\"" + app + "\","
                 + "\"is_global\":false,"
                 + "\"allowed_resources\":[\"" + SiteID + "\"],"
@@ -218,7 +218,7 @@ class announcement extends API_GUI {
         // Test Scenario 1: Positive flow -  PUT to update Announcement Name
         BODY = "{\"name\":\"This is API test for Update Announcement Name by ID\","
                 + "\"type\":\"Promotions\","
-                + "\"key\":\"D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe\","
+                + "\"key\":\"" + AppID + "\","
                 + "\"app\":\"" + app + "\","
                 + "\"is_global\":false,"
                 + "\"allowed_resources\":[\"" + SiteID + "\"],"
@@ -245,7 +245,7 @@ class announcement extends API_GUI {
         // Test Scenario 2: Positive flow -  PUT to update Announcement Type
         BODY = "{\"name\":\"This is API test for Update Announcement Type\","
                 + "\"type\":\"App Feature\","
-                + "\"key\":\"D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe\","
+                + "\"key\":\"" + AppID + "\","
                 + "\"app\":\"" + app + "\","
                 + "\"is_global\":false,"
                 + "\"allowed_resources\":[\"" + SiteID + "\"],"
@@ -272,7 +272,7 @@ class announcement extends API_GUI {
         // Test Scenario 3: Positive flow -  PUT to update Announcement App
         BODY = "{\"name\":\"This is API test for Update Announcement App\","
                 + "\"type\":\"App Feature\","
-                + "\"key\":\"D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe\","
+                + "\"key\":\"" + AppID + "\","
                 + "\"app\":\"Nourish\","
                 + "\"is_global\":false,"
                 + "\"allowed_resources\":[\"" + SiteID + "\"],"
@@ -298,7 +298,7 @@ class announcement extends API_GUI {
         // Test Scenario 4: Positive flow -  PUT to update Announcement position
         BODY = "{\"name\":\"This is API test for Update Announcement position\","
                 + "\"type\":\"App Feature\","
-                + "\"key\":\"D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe\","
+                + "\"key\":\"" + AppID + "\","
                 + "\"app\":\"Nourish\","
                 + "\"is_global\":false,"
                 + "\"allowed_resources\":[\"" + SiteID + "\"],"
@@ -324,7 +324,7 @@ class announcement extends API_GUI {
         // Test Scenario 5: Positive flow -  PUT to update Announcement to In-Active
         BODY = "{\"name\":\"This is API test for Update Announcement to In-Active\","
                 + "\"type\":\"App Feature\","
-                + "\"key\":\"D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe\","
+                + "\"key\":\"" + AppID + "\","
                 + "\"app\":\"Nourish\","
                 + "\"is_global\":false,"
                 + "\"allowed_resources\":[\"" + SiteID + "\"],"
@@ -350,7 +350,7 @@ class announcement extends API_GUI {
         // Test Scenario 6: Positive flow -  PUT to update Announcement English Version
         BODY = "{\"name\":\"This is API test for Update Announcement for English Version\","
                 + "\"type\":\"App Feature\","
-                + "\"key\":\"D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe\","
+                + "\"key\":\"" + AppID + "\","
                 + "\"app\":\"Nourish\","
                 + "\"is_global\":false,"
                 + "\"allowed_resources\":[\"" + SiteID + "\"],"
@@ -376,7 +376,7 @@ class announcement extends API_GUI {
         // Test Scenario 7: Positive flow -  PUT to update Announcement French Version
         BODY = "{\"name\":\"This is API test for Update for Announcement French Version\","
                 + "\"type\":\"App Feature\","
-                + "\"key\":\"D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe\","
+                + "\"key\":\"" + AppID + "\","
                 + "\"app\":\"Nourish\","
                 + "\"is_global\":false,"
                 + "\"allowed_resources\":[\"" + SiteID + "\"],"
