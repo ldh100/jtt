@@ -21,13 +21,13 @@ class announcement extends API_GUI {
         ANNOUNCEMENT_IDS = new ArrayList<>();
         //<editor-fold defaultstate="collapsed" desc=" GET all Announcement ">
         // Test Scenario 1: Positive get all announcement
-        JOB_Api_Call("AP3 GET all announcement", "GET", BaseAPI + "/announcement/resource", Auth, "", 200, ParentTest, "no_jira");
+        JOB_Api_Call("Announcement - GET all announcement", "GET", BaseAPI + "/announcement/resource", Auth, "", 200, ParentTest, "no_jira");
 
         // Test Scenario 2: Positive get all announcement when disabled=true
-        JOB_Api_Call("AP3 GET announcement - when disabled=true", "GET", BaseAPI + "/announcement/resource/?disabled=true", Auth, "", 200, ParentTest, "no_jira");
+        JOB_Api_Call("Announcement - GET announcement - when disabled=true", "GET", BaseAPI + "/announcement/resource/?disabled=true", Auth, "", 200, ParentTest, "no_jira");
 
         // Test Scenario 3: Positive get all announcement when disabled=false
-        JOB_Api_Call("AP3 GET announcement - when disabled=false", "GET", BaseAPI + "/announcement/resource/?disabled=false", Auth, "", 200, ParentTest, "no_jira");
+        JOB_Api_Call("Announcement - GET announcement - when disabled=false", "GET", BaseAPI + "/announcement/resource/?disabled=false", Auth, "", 200, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc=" POST Announcement ">
@@ -209,7 +209,7 @@ class announcement extends API_GUI {
         //<editor-fold defaultstate="collapsed" desc=" GET Announcement by ID ">
         // Test Scenario 1: Positive get announcement details by ID
         if (ANNOUNCEMENT_IDS != null) {
-            JOB_Api_Call("AP3 get Announcement details by ID", "GET", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
+            JOB_Api_Call("Announcement - Get Announcement details by ID", "GET", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
         }
 
         //</editor-fold>
@@ -293,7 +293,7 @@ class announcement extends API_GUI {
                 + "\"button_text\":\"Bottom Text English\"}"
                 + "}}";
         if (ANNOUNCEMENT_IDS != null) {
-            JOB_Api_Call("AP3 Update Announcement App", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
+            JOB_Api_Call("Announcement - PUT/Update Announcement App", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
         }
         // Test Scenario 4: Positive flow -  PUT to update Announcement position
         BODY = "{\"name\":\"This is API test for Update Announcement position\","
