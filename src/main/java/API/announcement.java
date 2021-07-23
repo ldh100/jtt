@@ -54,7 +54,7 @@ class announcement extends API_GUI {
                 + "\"sub_text\":\"This is Sub Text for Announcement English version \","
                 + "\"button_text\":\"Bottom Text English\"}"
                 + "}}";
-        JOB_Api_Call("AP3 POST announcement - Active status", "POST", BaseAPI + "/announcement", Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Announcement - POST new announcement with Active status", "POST", BaseAPI + "/announcement", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
             try {
                 ANNOUNCEMENT_IDS.add(json.getString("id"));
@@ -86,7 +86,7 @@ class announcement extends API_GUI {
                 + "\"sub_text\":\"This is Sub Text for Announcement English version \","
                 + "\"button_text\":\"Bottom Text English\"}"
                 + "}}";
-        JOB_Api_Call("AP3 POST announcement - In Active status", "POST", BaseAPI + "/announcement", Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Announcement - POST new announcement with In Active status", "POST", BaseAPI + "/announcement", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
             try {
                 ANNOUNCEMENT_IDS.add(json.getString("id"));
@@ -112,7 +112,7 @@ class announcement extends API_GUI {
                 + "\"sub_text\":\"This is Sub Text for Announcement English version \","
                 + "\"button_text\":\"Bottom Text English\"}"
                 + "}}";
-        JOB_Api_Call("AP3 POST announcement without French Version", "POST", BaseAPI + "/announcement", Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Announcement - POST new announcement without French Version", "POST", BaseAPI + "/announcement", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
             try {
                 ANNOUNCEMENT_IDS.add(json.getString("id"));
@@ -138,7 +138,7 @@ class announcement extends API_GUI {
                 + "\"sub_text\":\"\\nCeci est le sous-texte de l'annonce Version anglaise\","
                 + "\"button_text\":\"Texte du bas en français\"}"
                 + "}}";
-        JOB_Api_Call("AP3 POST announcement without English Version", "POST", BaseAPI + "/announcement", Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Announcement - POST new announcement without English Version", "POST", BaseAPI + "/announcement", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
             try {
                 ANNOUNCEMENT_IDS.add(json.getString("id"));
@@ -164,7 +164,7 @@ class announcement extends API_GUI {
                 + "\"sub_text\":\"\\nCeci est le sous-texte de l'annonce Version anglaise\","
                 + "\"button_text\":\"Texte du bas en français\"}"
                 + "}}";
-        JOB_Api_Call("AP3 POST announcement without Announcement Type", "POST", BaseAPI + "/announcement", Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Announcement - Negative flow to POST new announcement without Announcement Type", "POST", BaseAPI + "/announcement", Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 5: Negative flow for post announcement without Announcement Site/Key
         BODY = "{\"name\":\"This is API test for Announcement with Status = Active\","
@@ -183,7 +183,7 @@ class announcement extends API_GUI {
                 + "\"sub_text\":\"\\nCeci est le sous-texte de l'annonce Version anglaise\","
                 + "\"button_text\":\"Texte du bas en français\"}"
                 + "}}";
-        JOB_Api_Call("AP3 POST announcement without Announcement Site/Key", "POST", BaseAPI + "/announcement", Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Announcement - Negative flow to POST new announcement without Announcement Site/Key", "POST", BaseAPI + "/announcement", Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 6: Negative flow for post without value for Position
         BODY = "{\"name\":\"This is API test for Announcement with Status = Active\","
@@ -239,7 +239,7 @@ class announcement extends API_GUI {
                 + "\"button_text\":\"Bottom Text English\"}"
                 + "}}";
         if (ANNOUNCEMENT_IDS != null) {
-            JOB_Api_Call("AP3 Update Announcement Name by ID", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
+            JOB_Api_Call("Announcement -  PUT/Update Announcement Name by ID", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
         }
 
         // Test Scenario 2: Positive flow -  PUT to update Announcement Type
@@ -266,7 +266,7 @@ class announcement extends API_GUI {
                 + "\"button_text\":\"Bottom Text English\"}"
                 + "}}";
         if (ANNOUNCEMENT_IDS != null) {
-            JOB_Api_Call("AP3 Update Announcement Type", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
+            JOB_Api_Call("Announcement - PUT/Update Announcement Type", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
         }
 
         // Test Scenario 3: Positive flow -  PUT to update Announcement App
@@ -319,7 +319,7 @@ class announcement extends API_GUI {
                 + "\"button_text\":\"Bottom Text English\"}"
                 + "}}";
         if (ANNOUNCEMENT_IDS != null) {
-            JOB_Api_Call("AP3 Update Announcement position", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
+            JOB_Api_Call("Announcement - PUT/Update Announcement position", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
         }
         // Test Scenario 5: Positive flow -  PUT to update Announcement to In-Active
         BODY = "{\"name\":\"This is API test for Update Announcement to In-Active\","
@@ -345,7 +345,7 @@ class announcement extends API_GUI {
                 + "\"button_text\":\"Bottom Text English\"}"
                 + "}}";
         if (ANNOUNCEMENT_IDS != null) {
-            JOB_Api_Call("AP3 Update Announcement to In-Active", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
+            JOB_Api_Call("Announcement - PUT/Update Announcement to In-Active", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
         }
         // Test Scenario 6: Positive flow -  PUT to update Announcement English Version
         BODY = "{\"name\":\"This is API test for Update Announcement for English Version\","
@@ -371,7 +371,7 @@ class announcement extends API_GUI {
                 + "\"button_text\":\"Bottom Text English\"}"
                 + "}}";
         if (ANNOUNCEMENT_IDS != null) {
-            JOB_Api_Call("AP3 Update Announcement for English Version", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
+            JOB_Api_Call("Announcement - PUT/Update Announcement for English Version", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
         }
         // Test Scenario 7: Positive flow -  PUT to update Announcement French Version
         BODY = "{\"name\":\"This is API test for Update for Announcement French Version\","
@@ -397,15 +397,73 @@ class announcement extends API_GUI {
                 + "\"button_text\":\"Bottom Text English\"}"
                 + "}}";
         if (ANNOUNCEMENT_IDS != null) {
-            JOB_Api_Call("AP3 Update Announcement for French Version", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
+            JOB_Api_Call("Announcement - PUT/Update Announcement for French Version", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
         }
+        
+         // Test Scenario 8: Negative flow for PUT announcement without Announcement Type
+        BODY = "{\"name\":\"This is API test for PUT Announcement  without Announcement Type\","
+                + "\"type\":\"\","
+                + "\"key\":\"" + AppID + "\","
+                + "\"app\":\"" + app + "\","
+                + "\"is_global\":false,"
+                + "\"allowed_resources\":[\"" + SiteID + "\"],"
+                + "\"position\":1,"
+                + "\"active\":false,"
+                + "\"info\":{"
+                + "\"fr\":{"
+                + "\"image_url\":null,"
+                + "\"title\":\"Ceci est la version anglaise pour l'annonce\","
+                + "\"description\":\"Ceci est la description de la version anglaise de l'annonce\","
+                + "\"sub_text\":\"\\nCeci est le sous-texte de l'annonce Version anglaise\","
+                + "\"button_text\":\"Texte du bas en français\"}"
+                + "}}";
+        JOB_Api_Call("Announcement - Negative flow to PUT/Update an existing announcement without passing valid Announcement Type", "POST", BaseAPI + "/announcement", Auth, BODY, 400, ParentTest, "no_jira");
+
+        // Test Scenario 9: Negative flow for PUT announcement without Announcement Site/Key
+        BODY = "{\"name\":\"This is API test for PUT Announcement without Announcement Site/Key\","
+                + "\"type\":\"Promotions\","
+                + "\"key\":\"\","
+                + "\"app\":\"" + app + "\","
+                + "\"is_global\":false,"
+                + "\"allowed_resources\":[\"" + SiteID + "\"],"
+                + "\"position\":1,"
+                + "\"active\":false,"
+                + "\"info\":{"
+                + "\"fr\":{"
+                + "\"image_url\":null,"
+                + "\"title\":\"Ceci est la version anglaise pour l'annonce\","
+                + "\"description\":\"Ceci est la description de la version anglaise de l'annonce\","
+                + "\"sub_text\":\"\\nCeci est le sous-texte de l'annonce Version anglaise\","
+                + "\"button_text\":\"Texte du bas en français\"}"
+                + "}}";
+        JOB_Api_Call("Announcement - Negative flow to PUT/Update an existing  announcement without Announcement Site/Key", "POST", BaseAPI + "/announcement", Auth, BODY, 400, ParentTest, "no_jira");
+
+        // Test Scenario 10: Negative flow for PUT without value for Position
+        BODY = "{\"name\":\"This is API test for PUT Announcement  without value for Position\","
+                + "\"type\":\"Promotions\","
+                + "\"key\":\"\","
+                + "\"app\":\"" + app + "\","
+                + "\"is_global\":false,"
+                + "\"allowed_resources\":[\"" + SiteID + "\"],"
+                + "\"position\":null,"
+                + "\"active\":false,"
+                + "\"info\":{"
+                + "\"fr\":{"
+                + "\"image_url\":null,"
+                + "\"title\":\"Ceci est la version anglaise pour l'annonce\","
+                + "\"description\":\"Ceci est la description de la version anglaise de l'annonce\","
+                + "\"sub_text\":\"\\nCeci est le sous-texte de l'annonce Version anglaise\","
+                + "\"button_text\":\"Texte du bas en français\"}"
+                + "}}";
+
+        JOB_Api_Call("Announcement - Negative flow to PUT/Update an existing  announcement without value for Position", "POST", BaseAPI + "/announcement", Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc=" DELETE Announcement ">
         // Test Scenario 1: Positive flow for delete Announcement by ID
         if (ANNOUNCEMENT_IDS != null) {
             for (int i = 0; i < ANNOUNCEMENT_IDS.size(); i++) {
-                JOB_Api_Call("AP3 Delete Announcement by ID", "DELETE", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(i), Auth, BODY, 200, ParentTest, "no_jira");
+                JOB_Api_Call("Announcement - Delete Announcement by ID - "+ANNOUNCEMENT_IDS.get(i)+"", "DELETE", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(i), Auth, BODY, 200, ParentTest, "no_jira");
             }
         }
 
