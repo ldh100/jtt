@@ -666,6 +666,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected List<String> ORDER_IDS; 
     protected List<String> SCART_IDS; 
     protected List<String> NOTIFICATION_IDS; 
+    protected List<String> ANNOUNCEMENT_IDS;
     
     protected int _t = 0; // Total
     protected int _p = 0; // Passed
