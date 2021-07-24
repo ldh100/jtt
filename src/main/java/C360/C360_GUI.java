@@ -143,7 +143,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         btnRun = new javax.swing.JButton();
         btnLog = new javax.swing.JButton();
         btnFails = new javax.swing.JButton();
-        btnExel = new javax.swing.JButton();
+        btnExcel = new javax.swing.JButton();
         btnSave_Opt = new javax.swing.JButton();
         lblSITES11 = new javax.swing.JLabel();
         lblSITES13 = new javax.swing.JLabel();
@@ -185,20 +185,20 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameClosed(evt);
             }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -357,12 +357,10 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         lblSITES15.setAlignmentX(0.5F);
 
         txtComp.setEditable(false);
-        txtComp.setBackground(new java.awt.Color(255, 255, 255));
         txtComp.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtComp.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         txtSector.setEditable(false);
-        txtSector.setBackground(new java.awt.Color(255, 255, 255));
         txtSector.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtSector.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
@@ -419,7 +417,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(_orders, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(_brand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(12, 12, 12)
+                        .addGap(0, 0, 0)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(_group_management, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(_announcements, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -655,16 +653,16 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         });
         jPanel3.add(btnFails, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 40, 84, 22));
 
-        btnExel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnExel.setText("Excel Rep");
-        btnExel.setEnabled(false);
-        btnExel.setMargin(new java.awt.Insets(2, 4, 2, 4));
-        btnExel.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnExcel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnExcel.setText("Excel Rep");
+        btnExcel.setEnabled(false);
+        btnExcel.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        btnExcel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnExelMouseClicked(evt);
+                btnExcelMouseClicked(evt);
             }
         });
-        jPanel3.add(btnExel, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 84, 22));
+        jPanel3.add(btnExcel, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 84, 22));
 
         btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSave_Opt.setText("Save Setup");
@@ -732,7 +730,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
 
         lblSITES16.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES16.setText("Slack Shannel:");
+        lblSITES16.setText("Slack Channel:");
         lblSITES16.setAlignmentX(0.5F);
         lblSITES16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel3.add(lblSITES16, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 4, 72, 16));
@@ -1026,12 +1024,12 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     private void btnSave_OptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSave_OptMouseClicked
         GUI_Save_CONFIG();
     }//GEN-LAST:event_btnSave_OptMouseClicked
-    private void btnExelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExelMouseClicked
-        if(!btnExel.isEnabled()) {return;}
-        btnExel.setEnabled(false);
+    private void btnExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcelMouseClicked
+        if(!btnExcel.isEnabled()) {return;}
+        btnExcel.setEnabled(false);
         Report(true);
-        btnExel.setEnabled(true);
-    }//GEN-LAST:event_btnExelMouseClicked
+        btnExcel.setEnabled(true);
+    }//GEN-LAST:event_btnExcelMouseClicked
     private void btnFailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFailsMouseClicked
         if(!btnFails.isEnabled()) {return;}
         String R = A.Func.SHOW_FILE(F, "txt");
@@ -1915,7 +1913,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     private void GUI_Run_Manual(){
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
-        btnExel.setEnabled(false);
+        btnExcel.setEnabled(false);
         Slack_Channel = txtSlackCh.getText();
         _Slack = _slack.isSelected();
         _Mobile_view = _mobile_view.isSelected();
@@ -2423,7 +2421,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     }
     private void Execute() throws Exception {
         if(_Login){
-            SCOPE += "Login";
+            SCOPE += "Login, ";
             ParentTest = HtmlReport.createTest("Cafe 360 Login"); 
             C360_login BR = new C360.C360_login(C360_GUI.this);
             BR.run(); // ======================================
@@ -2527,7 +2525,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         } else{
             btnFails.setEnabled(false);
         }
-        btnExel.setEnabled(true);
+        btnExcel.setEnabled(true);
         
         LOG_UPDATE(Log); // ========================================================
     }
@@ -5942,7 +5940,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _slack;
     private javax.swing.JCheckBox _smart_analytics;
     private javax.swing.JCheckBox _users;
-    private javax.swing.JButton btnExel;
+    private javax.swing.JButton btnExcel;
     private javax.swing.JButton btnFails;
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;

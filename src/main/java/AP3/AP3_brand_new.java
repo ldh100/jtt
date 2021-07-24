@@ -31,6 +31,7 @@ class AP3_brand_new extends AP3_GUI {
         SECTOR = a.SECTOR;
         SectorID = a.SectorID;
         GL_MENU = a.GL_MENU;
+        CompanyID = a.CompanyID;
 
         AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
@@ -40,6 +41,7 @@ class AP3_brand_new extends AP3_GUI {
     private String API_Response_Body = "";
     private String JDE_id = "";
     private String JDE_category = ""; 
+    private String MenuName="";
     private boolean flag = false;
     protected void run(boolean NEW_SITE) {
     try{    
@@ -668,6 +670,7 @@ class AP3_brand_new extends AP3_GUI {
                     if (FAIL) {
                         return;
                     }
+                                      
                     Element_Click("Open 'Menu Name' drop-down", L1.get(0), ParentTest, "no_jira");
                     if (FAIL) {
                         return;
@@ -681,23 +684,28 @@ class AP3_brand_new extends AP3_GUI {
                     if (FAIL) {
                         return;
                     }
+                    
+                    
                     if (L1.size() > 0) {
                         Element_Attribute("1st Menu Name", L1.get(0), "textContent", ParentTest, "no_jira");
                         if (FAIL) {
                             return;
                         }
-                        Element_Click("Select 1st Menu", L1.get(0), ParentTest, "no_jira");
+                    Element_Click("Select 1st Menu", L1.get(0), ParentTest, "no_jira");
                         if (FAIL) {
                             return;
-                        }
-                        Thread.sleep(500);
-                    } else {
+                        }                    
+                        Thread.sleep(500);                                
+                    }else {
 
                         _f++;
                         F += "Step: " + _t + " > " + "Add Station > Assing Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
                         EX += " - " + "\t" + "Add Station > Assign Menus" + "\t" + "Add" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
                     }
                     break;
+                    
+                     
+                    
                 case "Integration Type":
                     List_Child_E1_By_Path("Find Setup KDS > Yes", L2.get(i), "xpath", ".//div[contains(@class, 'Option-Left-Not-Selected-Blue-White')]", ParentTest, "no_jira");
                     if (!FAIL) {
@@ -836,6 +844,7 @@ class AP3_brand_new extends AP3_GUI {
         if (FAIL) {
             return;
         }
+        
         removeGlobalMenu();
         // </editor-fold>     
 
@@ -1737,6 +1746,10 @@ class AP3_brand_new extends AP3_GUI {
         }
         Thread.sleep(1000);
 
+         Wait_For_Element_By_Path_Presence("Wait for brand name to load..","xpath", "//div[@class='layout row nowrap']//div[@class='flex shrink xs2']//button[@class='v-btn v-btn--icon theme--light']", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
         List_L0("Count total assigned menus", "xpath", "//div[@class='layout row nowrap']//div[@class='flex shrink xs2']//button[@class='v-btn v-btn--icon theme--light']", ParentTest, "no_jira");
         if (FAIL) {
             return;
@@ -1906,7 +1919,6 @@ class AP3_brand_new extends AP3_GUI {
        
         } catch (Exception ex){}   // =============================================
          
-    }//End of JDE_API
-    
+    }//End of JDE_API                  
 } 
 // End of AP3_Brand_New

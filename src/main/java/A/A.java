@@ -853,14 +853,13 @@ public class A extends javax.swing.JFrame {
             javax.swing.MenuSelectionManager.defaultManager().clearSelectedPath(); //   DEBUG   --- to close menu after click !!!
 //        } 
     }//GEN-LAST:event_Menu_SwaggerMouseClicked
-
     private void Menu_AP3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_AP3MouseClicked
         if(Menu_AP3.isVisible()){
             Menu_AP3.setVisible(false);
             MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             try {
-                Open_AP3_New();
+                Open_AP3();
             } catch (PropertyVetoException ex) {
                 // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -869,7 +868,6 @@ public class A extends javax.swing.JFrame {
             Menu_AP3.setVisible(true);
         }
     }//GEN-LAST:event_Menu_AP3MouseClicked
-
     private void Menu_Web_ToolsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_Web_ToolsMouseClicked
          try {
             java.awt.Desktop.getDesktop().browse(URI.create("https://www.base64decode.org/"));
@@ -878,7 +876,6 @@ public class A extends javax.swing.JFrame {
             // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Menu_Web_ToolsMouseClicked
-
     private void Menu_EnvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_EnvMouseClicked
         if(Menu_Env.isVisible()){
             Menu_Env.setVisible(false);
@@ -937,7 +934,6 @@ public class A extends javax.swing.JFrame {
             AF.setVisible(true);
         });
     }
-
     // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">      
  
     private void Open_Env() throws PropertyVetoException {       
@@ -956,8 +952,7 @@ public class A extends javax.swing.JFrame {
         es.show();
         es.setSelected(true);
         F_COUNT++;
-    }    
-    
+    }     
     private void Open_Devices() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
         for (JInternalFrame frame : frames) {
@@ -1108,39 +1103,6 @@ public class A extends javax.swing.JFrame {
         ap3.show();
         ap3.setSelected(true);
         F_COUNT++;
-    }
-    private void Open_AP3_New() throws PropertyVetoException{
-        final JInternalFrame[] frames = DesktopPane.getAllFrames();
-        for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("AP3")) {
-                try {
-                    frame.setSelected(true);
-                    if (frame.isIcon()) {
-                        frame.setIcon(false);
-                    }
-                    frame.setSelected(true);
-                }catch (PropertyVetoException ex) {
-                    // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                frame.requestFocus();
-                frame.toFront();
-                return;
-            }
-        }
-        AP3.AP3_GUI ap3 = new AP3.AP3_GUI();
-        DesktopPane.add(ap3);
-        int Y;
-        int X;
-        if(F_COUNT > 4) {
-            Y = F_COUNT;
-            X = F_COUNT - 5;
-        }else{
-            Y = X = F_COUNT;
-        }
-        ap3.setLocation(X*20, Y*20);
-        ap3.show();
-        ap3.setSelected(true);
-        F_COUNT++;
     }    
     
     private void Open_API() throws PropertyVetoException{
@@ -1194,7 +1156,7 @@ public class A extends javax.swing.JFrame {
                 return;
             }
         }
-        WO.WO wo = new WO.WO();
+        WO.WO_GUI wo = new WO.WO_GUI();
         this.DesktopPane.add(wo);
         int Y;
         int X;
@@ -1519,10 +1481,12 @@ public class A extends javax.swing.JFrame {
             rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'C1_Exp'");
             rs.next();
             C1_Exp = new String(Base64.getDecoder().decode(rs.getString(1)));
+            C1_Exp = C1_Exp.replace("/", "");
             
             rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'C1_Zip'");
             rs.next();
             C1_Zip = new String(Base64.getDecoder().decode(rs.getString(1)));
+            C1_Zip = C1_Zip.replace(" ", "");
             
             rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'C1_Name'");
             rs.next();
@@ -1533,7 +1497,7 @@ public class A extends javax.swing.JFrame {
 //            int d = st.executeUpdate("DELETE FROM [dbo].[aw_result] WHERE [Date] < '" + simpleDateFormat.format(dtpDel.getDate()) + "'");
             
             conn.close();
-            Logger.getLogger(A.class.getName()).log(Level.INFO, "Keys Loaded");
+            //Logger.getLogger(A.class.getName()).log(Level.INFO, "Keys Loaded");
         } catch (SQLException ex) {
             Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Load Keys > SQL ERROR: " + ex.getMessage(), ex);
         }

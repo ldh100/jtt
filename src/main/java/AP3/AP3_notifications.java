@@ -46,7 +46,8 @@ class AP3_notifications extends AP3_GUI{
         
         if (!env.equals("PR")) {
             // <editor-fold defaultstate="collapsed" desc="Verify Notifications API">  
-            Call_API("Notification API", "Bearer " + AP3_TKN, BaseAPI +"/notification?realm=cdl&target=admin_panel&end=2021-03-28T16:06:36.678Z", true, ParentTest, "no_jira");
+            //Call_API("Notification API", "Bearer " + AP3_TKN, BaseAPI +"/notification?realm=cdl&target=admin_panel&end=2021-03-28T16:06:36.678Z", true, ParentTest, "no_jira");
+            Call_API("Notification API", "Bearer " + AP3_TKN, BaseAPI +"/notification?realm=cdl&target=admin_panel", true, ParentTest, "no_jira");
                 if (FAIL) { return;}
             API_Body_Contains("Notification API - Title", t, "title", true, ParentTest, "no_jira");    
             API_Body_Contains("Notification API - ID",  t,"id", true, ParentTest, "no_jira");    

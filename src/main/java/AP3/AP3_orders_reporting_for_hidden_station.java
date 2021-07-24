@@ -323,10 +323,12 @@ Thread.sleep(5000);
             _t++;
             _p++;
             EX += _t + "\t" + "URL Order date is equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "URL Order date is equal to button date attribute" , false, ParentTest.createNode("URL Order date do no match to expected result"));
         } else {
             _t++;
             _f++;
             EX += _t + "\t" + "URL Order date is not equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+              Log_Html_Result("FAIL", "URL Order date is not equal to button date attribute" , false, ParentTest.createNode("URL Order date do no match to expected result"));
         }
 
         //Select a 7 day range from the calendar to view the orders for that period
@@ -385,11 +387,13 @@ Thread.sleep(1000);
             _t++;
             _p++;
             EX += _t + "\t" + "URL Order date for 7 days range is equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+           Log_Html_Result("PASS", "URL Order date for 7 days range is equal to button date attribute" , false, ParentTest.createNode("Not able to find 7 days range"));
         } else {
             System.err.println("Going Fail");
             _t++;
             _f++;
             EX += _t + "\t" + "URL Order date for 7 days range is not equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("FAIL", "URL Order date for 7 days range is not equal to button date attribute" , false, ParentTest.createNode("Not able to find 7 days range"));
         }
 
         //Select a 2 days range -  June 1st to June 2nd (2021-06-01 to 2021-06-02)
@@ -426,10 +430,12 @@ Thread.sleep(1000);
             _t++;
             _p++;
             EX += _t + "\t" + "URL Order date for 2 days range is equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+             Log_Html_Result("PASS", "URL Order date for 2 days range is equal to button date attribute" , false, ParentTest.createNode("Not able to find 2 days range"));
         } else {
             _t++;
             _f++;
             EX += _t + "\t" + "URL Order date for 2 days range is not equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+             Log_Html_Result("FAIL", "URL Order date for 2 days range is not equal to button date attribute" , false, ParentTest.createNode("Not able to find 2 days range"));
         }
     } catch (Exception ex){}   // =============================================  
     } 

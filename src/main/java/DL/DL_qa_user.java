@@ -15,8 +15,16 @@ class DL_qa_user extends DL_GUI {
 
     // Error: User Initialization Fail. Please Try Again    <<<< How to deal with That??   DEBUG
     protected void run(String User_ID, String Metric, String Restricted, String Period, String Val, String Location_Filters, String Item_Filters, String Kpi, String Source, Boolean IsMember) {
-    try {     
-
+    try { 
+        Thread.sleep(5000);
+//       for (int i = 540; i < 543; i++)
+//      {
+//        
+//        System.out.println(Val);
+//        System.out.println(Location_Filters);
+//        System.out.println(Item_Filters);
+//        System.out.println(Kpi);
+       
         Wait_For_Element_By_Path_Presence("Wait for Side bar arrow", "xpath", "//span[contains(text(),'arrow_right')]", ParentTest, "no_jira");
         if (FAIL) {
             return;
@@ -31,13 +39,14 @@ class DL_qa_user extends DL_GUI {
                 return;
             }
         }
-        Thread.sleep(500);
+       
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
         if (FAIL) {
             return;
         }
-        Thread.sleep(500);
-
+       
+  //      }
+       Thread.sleep(2000);
         List_L0("Get User Metrics Count", "xpath", "//div[@class='MuiListItemIcon-root']", ParentTest, "no_jira");
         if (FAIL) {
             return;
@@ -52,6 +61,7 @@ class DL_qa_user extends DL_GUI {
         if (FAIL) {
             return;
         }
+        Thread.sleep(2000);
         for (int j = 0; j < L2.size(); j++) {
             Element_Click("Un-Check Selected Metrics " + (j + 1), L2.get(j), ParentTest, "no_jira");
         }
@@ -84,9 +94,17 @@ class DL_qa_user extends DL_GUI {
                 return;
             }
         }
+        Wait_For_Element_By_Path_Presence("Wait for Metric", "xpath", "//span[text()='" + Metric + "']", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
         Find_Text("Find Metric '" + Metric + "'", Metric, true, ParentTest, "no_jira");
         if (t.equals("Not Found")) {
             return;  // Metric Not Found FATAL for this Test# ===================================================
+        }
+        Wait_For_Element_By_Path_Presence("Wait for Metric", "xpath", "//span[text()='" + Metric + "']", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
         }
         Element_By_Path_Click("Select Metric '" + Metric + "'", "xpath", "//span[text()='" + Metric + "']", ParentTest, "no_jira");
         if (FAIL) {
@@ -118,11 +136,40 @@ class DL_qa_user extends DL_GUI {
         if (FAIL) {
             return;
         }
-
-        Find_Text("Find 'Filters' label", "Filters", true, ParentTest, "no_jira");
-        Find_Text("Find 'Configure Filters' button label", " Configure Filters", true, ParentTest, "no_jira");
-        Element_By_Path_Click("Open 'Configure Filters'", "xpath", "//button[contains(.,' Configure Filters')]", ParentTest, "no_jira");
-
+        if(!Location_Filters.isEmpty() || !Item_Filters.isEmpty() )
+        {
+            
+        
+       // Find_Text("Find 'Filters' label", "Filters", true, ParentTest, "no_jira");
+       // Find_Text("Find 'Create a Filter' button label", "Create a Filter", true, ParentTest, "no_jira");
+            Find_Text("Find 'Saved Filters' button", "Saved Filters", true, ParentTest, "no_jira");
+            if (t.equalsIgnoreCase("Saved Filters")) {
+                Element_By_Path_Click("Open 'Filters Modal Popup'", "xpath", "//div[@class=' css-1uxlrog-indicatorContainer']", ParentTest, "no_jira");
+            } else {
+                Element_By_Path_Click("Open 'Filters Modal Popup'", "xpath", "(//div[@class=' css-1uxlrog-indicatorContainer'])[2]", ParentTest, "no_jira");
+            }
+//            Thread.sleep(500);
+            Element_By_Path_Click("Select the dropdown value", "xpath", "//div[contains(text(), 'Automation')]", ParentTest, "no_jira");
+            Thread.sleep(1000);
+            Find_Text("Find 'Create a Filter' button", "Create a Filter", true, ParentTest, "no_jira");
+            System.out.println(t);
+            Boolean IsFilterNew = false;
+        if(!t.equalsIgnoreCase("Not Found"))
+        {
+         IsFilterNew= true;   
+         Element_By_Path_Click("Click on 'Create a Filter' button", "xpath", "//button[contains(.,'Create a Filter')]", ParentTest, "no_jira"); 
+         if (FAIL) {
+            return;
+        }
+        }
+        else
+        {
+        IsFilterNew= false;
+        Element_By_Path_Click("Click on 'Edit Filter' button", "xpath", "//button[contains(.,'Edit Filter')]", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }  
+        }
         // ==================================== Customer/Location Filters - Clear > Apply new ones if Required ====================================================
         Element_By_Path_Click("Click on Customers/Location tab", "xpath", "//span[contains(text(), 'Customers/Locations')]", ParentTest, "no_jira");
         if (FAIL) {
@@ -136,27 +183,32 @@ class DL_qa_user extends DL_GUI {
                 return;
             }
         }
-
+        Thread.sleep(5000);
         if (!Location_Filters.isEmpty()) {// ========  Apply Location Filter Key / Value ===============
             for (String L : Location_Filters.split("\r\n")) {
                 if (L.contains(":")) {
                     String L_FilterKey = L.substring(0, L.indexOf(":")).trim();
                     String L_FilterValue = L.substring(L.indexOf(":") + 1).trim().replaceAll(",", "");
                     if (L_FilterKey.contains("Dropdown")) {
-                        Element_By_Path_Click("Open Location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=2]", ParentTest, "no_jira");
-                        if (FAIL) {
-                            return;
-                        }
-                        Scroll_to_WebElement("Scroll to '" + L_FilterValue + "'", "xpath", "//*[contains(text(), '" + L_FilterValue + "')]", ParentTest, "no_jira");
-                        if (FAIL) {
-                            return;
-                        }
-                        Element_By_Path_Click("Choose dropdown Location Value'" + L_FilterValue + "'", "xpath", "//*[contains(text(), '" + L_FilterValue + "')]", ParentTest, "no_jira");
-                        if (FAIL) {
-                            return;
-                        }
+//                        Element_By_Path_Click("Open Location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=2]", ParentTest, "no_jira");
+//                        if (FAIL) {
+//                            return;
+//                        }
+//                        Scroll_to_WebElement("Scroll to '" + L_FilterValue + "'", "xpath", "//*[contains(text(), '" + L_FilterValue + "')]", ParentTest, "no_jira");
+//                        if (FAIL) {
+//                            return;
+//                        }
+//                        Element_By_Path_Click("Choose dropdown Location Value'" + L_FilterValue + "'", "xpath", "//*[contains(text(), '" + L_FilterValue + "')]", ParentTest, "no_jira");
+//                        if (FAIL) {
+//                            return;
+//                        }
                     } else {
-                        Element_By_Path_Click("Open location filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')])[position()=3]", ParentTest, "no_jira");
+                        if(IsFilterNew)
+                        Element_By_Path_Click("Select the dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=2]", ParentTest, "no_jira");
+                        else
+                        {
+                        Element_By_Path_Click("Select the dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=3]", ParentTest, "no_jira");  
+                        }
                         if (FAIL) {
                             return;
                         }
@@ -174,7 +226,7 @@ class DL_qa_user extends DL_GUI {
                 }
             }
         }
-
+        
         // ==================================== Products/Item Categories Filters - Clear > Apply new ones if Required ====================================================
         Element_By_Path_Click("Click on Products/Item Categories tab", "xpath", "//span[contains(text(),'Products/Item Categories')]", ParentTest, "no_jira");
         if (FAIL) {
@@ -191,38 +243,78 @@ class DL_qa_user extends DL_GUI {
                 return;
             }
         }
+        Thread.sleep(1000);
         if (!Item_Filters.isEmpty()) {// ========  Apply Item Filter Key / FilterValue ===============
             for (String I : Item_Filters.split("\r\n")) {
                 if (I.contains(":")) {
                     String I_FilterKey = I.substring(0, I.indexOf(":")).trim();
                     String I_FilterValue = I.substring(I.indexOf(":") + 1).trim().replaceAll(",", "");
-
+                   
                     if (I_FilterKey.contains("Dropdown")) {
+                        if(IsFilterNew)
+                            
                         Element_By_Path_Click("Click on Item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=2]", ParentTest, "no_jira");
+                        else
+                        Element_By_Path_Click("Click on Item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=3]", ParentTest, "no_jira");
+                       
                         if (FAIL) {
                             return;
                         }
+                        
                         Scroll_to_WebElement("Scroll to '" + I_FilterValue + "'", "xpath", "//*[contains(text(), '" + I_FilterValue + "')]", ParentTest, "no_jira");
                         if (FAIL) {
                             return;
                         }
+                       
                         Element_By_Path_Click("Select Item Value '" + I_FilterValue + "'", "xpath", "//*[contains(text(), '" + I_FilterValue + "')]", ParentTest, "no_jira");
                         if (FAIL) {
                             return;
                         }
                     } else {
+                        if(IsFilterNew){
+                        Wait_For_Element_By_Path_Presence("Wait for dropdown to display", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=3]", ParentTest, "no_jira");
+                        if (FAIL) {
+                            return;
+                        }
+                        
                         Element_By_Path_Click("Open Item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=3]", ParentTest, "no_jira");
                         if (FAIL) {
                             return;
-                        }
-                        Element_By_Path_Click("Choose Item Key '" + I_FilterKey + "'", "xpath", "//*[contains(text(), '" + I_FilterKey + "')]", ParentTest, "no_jira");
+                        } 
+                        }else{
+                        Wait_For_Element_By_Path_Presence("Wait for dropdown to display", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=4]", ParentTest, "no_jira");
                         if (FAIL) {
                             return;
                         }
+                        
+                        Element_By_Path_Click("Open Item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=4]", ParentTest, "no_jira");
+                        if (FAIL) {
+                            return;
+                        }
+                        }
+                        
+//     
+//                        Wait_For_Element_By_Path_Presence("Wait for Item to be Selected", "xpath", "//*[contains(text(), '" + I_FilterKey + "')]", ParentTest, "no_jira");
+//                        if (FAIL) {
+//                            return;
+//                        }
+                        Thread.sleep(5000);
+                        
+                        Element_By_Path_Click("Choose Item Key '" + I_FilterKey + "'", "xpath", "//*[contains(text(), '" + (I_FilterKey.equalsIgnoreCase("Category")?I_FilterKey+" Name":I_FilterKey) + "')]", ParentTest, "no_jira");
+                        if (FAIL) {
+                            return;
+                        }
+                        
+                        //Thread.sleep(5000);
                         Element_By_Path_Text_Enter("Enter/Search Item '" + I_FilterValue + "'", "id", "filter-group-search", I_FilterValue, false, ParentTest, "no_jira");
                         if (FAIL) {
                             return;
                         }
+                        Wait_For_Element_By_Path_Presence("Wait for Item to be Selected", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]//*[contains(text(),'" + I_FilterValue + "')]/..", ParentTest, "no_jira");
+                        if (FAIL) {
+                            return;
+                        }
+                        
                         Element_By_Path_Click("Select Item Value '" + I_FilterValue + "'", "xpath", "//div[@role='dialog']//div[starts-with(@class,'jss')]//*[contains(text(),'" + I_FilterValue + "')]/..", ParentTest, "no_jira");
                     }
                 }
@@ -231,9 +323,25 @@ class DL_qa_user extends DL_GUI {
 
         // ====  Apply cleared / new Selected filters
         Thread.sleep(1000);
-        Element_By_Path_Click("Click on 'Apply' button", "xpath", "(//button/span[contains(.,'Apply')])[2]", ParentTest, "no_jira");
+        if(IsFilterNew)
+        Element_By_Path_Text_Enter("Enter Save Selection", "id", "name", "Automation", false, ParentTest, "no_jira");
+        
+        Find_Text("Find 'Save as New Filter' button", "Save as New Filter", true, ParentTest, "no_jira");
+        if(!t.equalsIgnoreCase("Not Found"))
+        {
+         Element_By_Path_Click("Click on 'Save as New Filter' button", "xpath", "//button/span[contains(.,'Save as New Filter')]", ParentTest, "no_jira"); 
+         if (FAIL) {
+            return;
+        }
+        }
+        else
+        {
+        Element_By_Path_Click("Click on 'Update Filter' button", "xpath", "//button/span[contains(.,'Update Filter')]", ParentTest, "no_jira");
         if (FAIL) {
             return;
+        }  
+        }
+        
         }
         Thread.sleep(500);
         Wait_For_All_Elements_InVisibility("Wait for Metric data load...", "xpath", "//div[@role='progressbar']", ParentTest, "no_jira");
@@ -248,7 +356,7 @@ class DL_qa_user extends DL_GUI {
         if (L1.isEmpty()) {
             return;  // Loaded Metric Not Found FATAL for this Test# ===================================================
         }
-
+        
         //  Validate Metric QA vs, FE $ Value  
         float QA_Value = Float.parseFloat(Val);
         float FE_Value = (float) 0.00001;
@@ -292,30 +400,5 @@ class DL_qa_user extends DL_GUI {
             }
         }
     } catch (Exception ex){}   // =============================================  
+    }  
     }
-     public void SelectMember() {
-         try{
-
-        List_L2("Members Selection List", "xpath", "//button[contains(@class, 'MuiGrid-root jss')]/div", ParentTest, "no_jira");
-        if (FAIL) {
-            return;
-        }
-        if (L2 == null || L2.size() == 0) {
-
-            List_L2("Members Selection List", "xpath", "//p[contains(@class, 'MuiTypography-root jss')]", ParentTest, "no_jira");
-            if (FAIL) {
-                return;
-            }
-        }
-        List<String> Memberlist = new ArrayList<>();
-
-        Element_Click("Members Selection List" + (0 + 1), L2.get(0), ParentTest, "no_jira");
-        Element_By_Path_Click("Click on Continue as a Member", "xpath", "//span[text()='Continue as Member']", ParentTest, "no_jira");
-        if (FAIL) {
-            return;
-        }
-        Thread.sleep(5000);
-    }catch (Exception ex){}
-}
-
-}

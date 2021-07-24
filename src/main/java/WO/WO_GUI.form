@@ -117,7 +117,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="4" y="316" width="428" height="100"/>
+          <AbsoluteConstraints x="4" y="316" width="428" height="88"/>
         </Constraint>
       </Constraints>
 
@@ -158,7 +158,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="4" y="420" width="428" height="84"/>
+          <AbsoluteConstraints x="4" y="408" width="428" height="96"/>
         </Constraint>
       </Constraints>
 
@@ -383,28 +383,31 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="_all_data" min="-2" pref="139" max="-2" attributes="0"/>
-                      <Component id="_expore_brand_menu" min="-2" max="-2" attributes="0"/>
+                      <Component id="_explore_brand_menu" min="-2" max="-2" attributes="0"/>
                       <Component id="_order_status" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
                       <Component id="_edit_item" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
                       <Component id="_place_delivery_order" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
                       <Component id="_place_pickup_order" min="-2" pref="132" max="-2" attributes="0"/>
                       <Component id="_login" min="-2" max="-2" attributes="0"/>
                       <Component id="_order_email" min="-2" pref="159" max="-2" attributes="0"/>
+                      <Component id="_promo" min="-2" pref="159" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                          <Component id="lblSITES8" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbPromo" min="-2" pref="157" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="lblSITES8" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="_password" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
+                          <Component id="_order_history" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                          <Component id="_account_settings" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                          <Component id="_new_user" alignment="1" min="-2" pref="124" max="-2" attributes="0"/>
+                          <Component id="_logout" alignment="1" min="-2" pref="114" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="_password" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
-                      <Component id="_order_history" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_account_settings" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_new_user" alignment="1" min="-2" pref="124" max="-2" attributes="0"/>
-                      <Component id="_logout" alignment="1" min="-2" pref="114" max="-2" attributes="0"/>
+                      <Component id="txtPromo" min="-2" pref="164" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -431,15 +434,18 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="lblSITES8" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          <Component id="cmbPromo" min="-2" pref="20" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="_promo" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                              <Component id="txtPromo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="_login" min="-2" pref="14" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="_order_status" min="-2" pref="14" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                          <Component id="_expore_brand_menu" min="-2" pref="14" max="-2" attributes="0"/>
+                          <Component id="_explore_brand_menu" min="-2" pref="14" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                           <Component id="_edit_item" min="-2" pref="14" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -449,7 +455,6 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="_order_email" min="-2" pref="14" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="_all_data" min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -464,18 +469,6 @@
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Existing User (EU) Login "/>
-            <Property name="enabled" type="boolean" value="false"/>
-            <Property name="horizontalAlignment" type="int" value="11"/>
-            <Property name="horizontalTextPosition" type="int" value="10"/>
-            <Property name="requestFocusEnabled" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="_all_data">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="11" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Show all data rows"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
@@ -560,24 +553,6 @@
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cmbPromo">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="11" style="0"/>
-            </Property>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="1">
-                <StringItem index="0" value="None"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbPromoItemStateChanged"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JLabel" name="lblSITES8">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -621,7 +596,7 @@
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="_expore_brand_menu">
+        <Component class="javax.swing.JCheckBox" name="_explore_brand_menu">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="0"/>
@@ -634,12 +609,31 @@
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JCheckBox" name="_promo">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Promo"/>
+            <Property name="horizontalAlignment" type="int" value="11"/>
+            <Property name="horizontalTextPosition" type="int" value="10"/>
+            <Property name="requestFocusEnabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtPromo">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="None"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel3">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="436" y="416" width="416" height="88"/>
+          <AbsoluteConstraints x="436" y="404" width="416" height="100"/>
         </Constraint>
       </Constraints>
 
@@ -661,7 +655,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="336" y="28" width="78" height="20"/>
+              <AbsoluteConstraints x="336" y="40" width="78" height="20"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -681,7 +675,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="336" y="54" width="78" height="28"/>
+              <AbsoluteConstraints x="336" y="68" width="78" height="28"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -700,7 +694,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="4" y="60" width="84" height="22"/>
+              <AbsoluteConstraints x="4" y="72" width="84" height="22"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -720,7 +714,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="4" y="28" width="84" height="22"/>
+              <AbsoluteConstraints x="4" y="40" width="84" height="22"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -740,7 +734,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="4" y="4" width="84" height="22"/>
+              <AbsoluteConstraints x="4" y="16" width="84" height="22"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -755,7 +749,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="220" y="68" width="104" height="14"/>
+              <AbsoluteConstraints x="220" y="80" width="104" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -775,7 +769,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="100" y="60" width="116" height="22"/>
+              <AbsoluteConstraints x="100" y="72" width="116" height="22"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -790,7 +784,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="336" y="12" width="72" height="16"/>
+              <AbsoluteConstraints x="336" y="24" width="72" height="16"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -805,7 +799,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="104" y="12" width="92" height="16"/>
+              <AbsoluteConstraints x="104" y="24" width="92" height="16"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -820,7 +814,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="228" y="12" width="92" height="16"/>
+              <AbsoluteConstraints x="228" y="24" width="92" height="16"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -841,7 +835,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="100" y="28" width="116" height="20"/>
+              <AbsoluteConstraints x="100" y="40" width="116" height="20"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -862,7 +856,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="224" y="28" width="108" height="20"/>
+              <AbsoluteConstraints x="224" y="40" width="108" height="20"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -877,7 +871,36 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="220" y="52" width="108" height="14"/>
+              <AbsoluteConstraints x="220" y="64" width="108" height="14"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblSITES16">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="11" style="0"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="2"/>
+            <Property name="text" type="java.lang.String" value="Slack Shannel:"/>
+            <Property name="alignmentX" type="float" value="0.5"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="148" y="4" width="72" height="16"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtSlackCh">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="xtt_test"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="224" y="4" width="96" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
