@@ -2973,6 +2973,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
         } 
         if(true){
+            SCOPE += "Promo ";
+            ParentTest = HtmlReport.createTest("Promo"); 
+            promo BR = new API.promo(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        }
+        if(true){
             SCOPE += "Task ";
             ParentTest = HtmlReport.createTest("Task"); 
             task BR = new API.task(API_GUI.this);
@@ -3054,7 +3061,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             request.header("Authorization", AUTH);
         } 
         try {
-            for (int i = 1; i < 4; i++){   // ========== Loop +2 times if 1st FAIL
+            int i = 1;   
+//for (i = 1; i < 4; i++){   // ========== Loop +2 times if 1st FAIL
                 if(sw1.isRunning()){
                     sw1.reset();
                 }
@@ -3099,12 +3107,12 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
                 if (status == ExpStatus) {                                                 
                     _p++; 
-                    EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "PASS" + "\t" + "Attempt #" + i +
+                    EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "PASS" + "\t" + "Attempt #" + i + 
                     "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                     Log_Html_Result("PASS", "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")" + 
                             "  Attempt #" + i, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
                     
-                    break; // =================  Do not attempt againg if passed
+//break; // =================  Do not attempt againg if passed
                     
                 } else {
                     _f++; FAIL = true; 
@@ -3113,7 +3121,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     Log_Html_Result("FAIL", "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")" + 
                             "  Attempt #" + i, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
                 }
-            } // =======   3 times Loop if not good
+//} // =======   3 times Loop if not good
             
         } catch(Exception ex){
             R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
