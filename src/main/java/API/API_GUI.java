@@ -2921,7 +2921,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             payment BR = new API.payment(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
-            PProvider_Type = PProvider_Type;
+            PProvider_Type = BR.PProvider_Type;
             Card_Type = BR.Card_Type; 
             Card_Last4 = BR.Card_Last4;
             Card_Name = BR.Card_Name; 
@@ -2953,6 +2953,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             locations BR = new API.locations(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+            AppID = BR.AppID; 
             SiteID = BR.SiteID; 
             UnitID = BR.UnitID;
             BrandID = BR.BrandID;
