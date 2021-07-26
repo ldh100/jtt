@@ -47,6 +47,7 @@ class user_ap3 extends API_GUI{
 
         JOB_Api_Call("AP3 User > /permissions", "GET", 
             BaseAPI + "/user/" + AP3_User_ID + "/permissions" + "?nocache=1", Auth, "", 200, ParentTest, "no_jira");
+        
         JOB_Api_Call("AP3 User ", "OPTIONS", 
             BaseAPI + "/user/" + AP3_User_ID, Auth, "", 200, ParentTest, "no_jira");  
         
@@ -55,11 +56,11 @@ class user_ap3 extends API_GUI{
         JOB_Api_Call("AP3 User - Update Phone", "PUT", 
             BaseAPI + "/user/" + AP3_User_ID, Auth, BODY, 200, ParentTest, "no_jira");
         
-        BODY = "{\"name\":" +                                       //  New AP3 Admin User > Email Exists  =================
+        BODY = "{\"name\":" +                       //  New AP3 Admin User > Email Exists  =================
                 "{\"first\":\"Oleg\",\"last\":\"Spozito\"}," + 
             "\"permissions\":" +
                 "{\"scopes\":[\"*:*\",\"*:user\",\"admin_role:*:*\",\"write:order:*\",\"kick:menu:*\",\"read:analytics:*\"]}," +
-            "\"email\":\"" + "a_" + AP3_User_ID + "@gmail.com" + "\"," +
+            "\"email\":\"" + ADMIN_ID + "\"," +
             "\"phone\":" + "1" + NewID + "," +
             "\"realm\":\"" + Realm + "\"," +
             "\"password\":\"" + "Zxtsaq9ppnppvbyi11f0nk" + "\"}";
@@ -85,6 +86,7 @@ class user_ap3 extends API_GUI{
                 //
             }
         }        
+        
         BODY = "{\"email\":\"" + "a_" + NewID + "@gmail.com" + "\"," + //  New AP3 User Forgot Password===============================
                 "\"type\":\"" + "new_user" + "\"}";
         JOB_Api_Call("AP3 New User - Forgot password", "POST", 

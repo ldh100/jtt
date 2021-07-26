@@ -2090,7 +2090,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             String QA_USER = "";    // Next QA User from S3 DV_QA table
             Boolean IsMember=false;
             Boolean IsMemberSwitch=false;
-            for (int i = 600; i < 700; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
+            for (int i = 1700; i < 1830; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
            // for (int i = 0; i < DV_QA.getRowCount(); i++) {    // All Tests from S3 DV_QA table
                 if(QA_USER.equals(DV_QA.getValueAt(i, 1).toString()) && !Login_OK){
                     continue;      // Do Not proceed with User having Invalid Credentials or Locked Account
@@ -2098,7 +2098,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 IsMemberSwitch=false;
                 ParentTest = HtmlReport.createTest("User: " + DV_QA.getValueAt(i, 1) + " Test# " + (i + 1));  // (i+1) = # in the table
                 QA_USER = DV_QA.getValueAt(i, 1).toString();
-                if (i == 600) {
+                if (i == 1700) {
                     Text_Found("Check member is Displayed ", "My Members", ParentTest, "no_jira");
                     if (t.equalsIgnoreCase("Not Found")) {
                         IsMember = false;
@@ -2125,6 +2125,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                         F += BR.F;
                         r_time += BR.r_time;
                         Login_OK = BR.Login_OK;
+                        Wait_For_Element_By_Path_Presence("Wait for Member to display", "xpath", "//h1[contains(text(),'My Members')]", ParentTest, "no_jira");
                         Text_Found("Check member is Displayed ", "My Members", ParentTest, "no_jira");
                         if (t.equalsIgnoreCase("Not Found")) {
                             IsMember = false;
@@ -2405,20 +2406,16 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                         return;
                     }
                 } else {
-//                    Scroll_to_WebElement("Scroll to Member", "xpath", "//div[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
-                   
-//                    if (FAIL) {
-//                        return;
-//                    }
-                    //Element_E1_Find("Find Search bar", "xpath", "//input[contains(@class, 'MuiInputBase-input MuiOutlinedInput-input')]", ParentTest, "no_jira");
-                    
+
+                        Thread.sleep(3000);
                        Element_By_Path_Text_Enter("Enter/Search Item ", "xpath", "//input[contains(@class, 'MuiInputBase-input MuiOutlinedInput-input')]",Member.replaceAll("'", "\\\'") , false, ParentTest, "no_jira");
                         if (FAIL) {
                             return;
                         }
                     
-                    Thread.sleep(2000);
-                    Element_By_Path_Click("Click on Continue as a Member", "xpath", "//div[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
+                    
+                    
+                    Element_By_Path_Click("Select the Member", "xpath", "//div[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
                     if (FAIL) {
                         return;
                     }
