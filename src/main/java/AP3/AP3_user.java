@@ -922,6 +922,7 @@ class AP3_user extends AP3_GUI{
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira" ); 
             if (FAIL) { return;}
         // </editor-fold>              
+
         // <editor-fold defaultstate="collapsed" desc="CDL Delivery Manager Search > Delete">
         Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Search Users')]", ParentTest, "no_jira" ); 
             if (FAIL) { return;}         

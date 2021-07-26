@@ -730,7 +730,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
 
         lblSITES16.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES16.setText("Slack Shannel:");
+        lblSITES16.setText("Slack Channel:");
         lblSITES16.setAlignmentX(0.5F);
         lblSITES16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel3.add(lblSITES16, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 4, 72, 16));
@@ -2421,7 +2421,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     }
     private void Execute() throws Exception {
         if(_Login){
-            SCOPE += "Login";
+            SCOPE += "Login, ";
             ParentTest = HtmlReport.createTest("Cafe 360 Login"); 
             C360_login BR = new C360.C360_login(C360_GUI.this);
             BR.run(); // ======================================

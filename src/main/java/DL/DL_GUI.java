@@ -542,7 +542,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
 
         lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES14.setText("Slack Shannel:");
+        lblSITES14.setText("Slack Channel:");
         lblSITES14.setAlignmentX(0.5F);
         lblSITES14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 4, 72, 16));
@@ -2090,7 +2090,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             String QA_USER = "";    // Next QA User from S3 DV_QA table
             Boolean IsMember=false;
             Boolean IsMemberSwitch=false;
-            for (int i = 550; i < 555; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
+            for (int i = 1700; i < 1830; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
            // for (int i = 0; i < DV_QA.getRowCount(); i++) {    // All Tests from S3 DV_QA table
                 if(QA_USER.equals(DV_QA.getValueAt(i, 1).toString()) && !Login_OK){
                     continue;      // Do Not proceed with User having Invalid Credentials or Locked Account
@@ -2098,7 +2098,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 IsMemberSwitch=false;
                 ParentTest = HtmlReport.createTest("User: " + DV_QA.getValueAt(i, 1) + " Test# " + (i + 1));  // (i+1) = # in the table
                 QA_USER = DV_QA.getValueAt(i, 1).toString();
-                if (i == 550) {
+                if (i == 1700) {
                     Text_Found("Check member is Displayed ", "My Members", ParentTest, "no_jira");
                     if (t.equalsIgnoreCase("Not Found")) {
                         IsMember = false;
@@ -2108,7 +2108,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                         IsMemberSwitch=true;
                     }
                 }
-System.out.println(DV_QA.getValueAt(i, 5).toString());
+                System.out.println(DV_QA.getValueAt(i, 5).toString());
                 if (!QA_USER.equals(DL_UserID)) {  // ======  Clear Cookies and Login with New QA User ===========
                     DL_UserID = QA_USER;                // ======  Use last QA User from S3 for the next in the loop ====
                     EX += " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\r\n";
@@ -2125,6 +2125,7 @@ System.out.println(DV_QA.getValueAt(i, 5).toString());
                         F += BR.F;
                         r_time += BR.r_time;
                         Login_OK = BR.Login_OK;
+                        Wait_For_Element_By_Path_Presence("Wait for Member to display", "xpath", "//h1[contains(text(),'My Members')]", ParentTest, "no_jira");
                         Text_Found("Check member is Displayed ", "My Members", ParentTest, "no_jira");
                         if (t.equalsIgnoreCase("Not Found")) {
                             IsMember = false;
@@ -2380,6 +2381,7 @@ System.out.println(DV_QA.getValueAt(i, 5).toString());
      public void SelectMember(String Member) {
          try{
     Boolean p = false;
+    
         List_L2("Members Selection List", "xpath", "//button[contains(@class, 'MuiGrid-root jss')]/div", ParentTest, "no_jira");
         if (FAIL) {
             return;
@@ -2404,12 +2406,16 @@ System.out.println(DV_QA.getValueAt(i, 5).toString());
                         return;
                     }
                 } else {
-                    Scroll_to_WebElement("Scroll to Member", "xpath", "//div[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
-                    Thread.sleep(2000);
-                    Element_By_Path_Click("Click on Continue as a Member", "xpath", "//div[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
+
+                        Thread.sleep(3000);
+                       Element_By_Path_Text_Enter("Enter/Search Item ", "xpath", "//input[contains(@class, 'MuiInputBase-input MuiOutlinedInput-input')]",Member.replaceAll("'", "\\\'") , false, ParentTest, "no_jira");
+                        if (FAIL) {
+                            return;
+                        }
+                    
+                    
+                    
+                    Element_By_Path_Click("Select the Member", "xpath", "//div[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
                     if (FAIL) {
                         return;
                     }
@@ -2425,20 +2431,10 @@ System.out.println(DV_QA.getValueAt(i, 5).toString());
      public void SwitchMember(String Member) {
          try{
               Boolean p = false;
-
-            List_L2("Members Selection List", "xpath", "//div[@role='dialog']//button[contains(@class, 'MuiGrid-root jss')]/div", ParentTest, "no_jira");
-            if (FAIL) {
-                return;
-            }
-            if (L2 == null || L2.size() == 0) {
-                p = true;
-                List_L2("Members Selection List", "xpath", "//div[@role='dialog']//p[contains(@class, 'MuiTypography-root jss')]", ParentTest, "no_jira");
-                if (FAIL) {
-                    return;
-                }
-            }
+        
+            
          
-Thread.sleep(5000);
+
 
                 Wait_For_Element_By_Path_Presence("Wait for Chevron", "xpath", "//span[contains(text(),'keyboard_arrow_down')]", ParentTest, "no_jira");
                 if (FAIL) {
@@ -2448,25 +2444,38 @@ Thread.sleep(5000);
                 if (FAIL) {
                     return;
                 }
-
-                Thread.sleep(5000);
+                List_L2("Members Selection List", "xpath", "//div[@role='dialog']//button[contains(@class, 'MuiGrid-root jss')]/div", ParentTest, "no_jira");
+                if (FAIL) {
+                return;
+                 }
+                 if (L2 == null || L2.size() == 0) {
+                
+                List_L2("Members Selection List", "xpath", "//div[@role='dialog']//p[contains(@class, 'MuiTypography-root jss')]", ParentTest, "no_jira");
+                if (FAIL) {
+                    return;
+                }else
+                {
+                   p = true; 
+                }
+            }
+               
                 if (p) {
                     Move_to_Element_By_Path("Scroll to Member", "xpath", "//p[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
                     if (FAIL) {
                         return;
                     }
                     Thread.sleep(2000);
-                    Element_By_Path_Click("Click on Continue as a Member", "xpath", "//p[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
+                    Element_By_Path_Click("Click on a Member", "xpath", "//p[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
                     if (FAIL) {
                         return;
                     }
                 } else {
-                    Scroll_to_WebElement("Scroll to Member", "xpath", "//div[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
+                    Element_By_Path_Text_Enter("Enter/Search Item ", "xpath", "//input[contains(@class, 'MuiInputBase-input MuiOutlinedInput-input')]",Member.replaceAll("'", "\\\'") , false, ParentTest, "no_jira");
+                        if (FAIL) {
+                            return;
+                        }
                     Thread.sleep(2000);
-                    Element_By_Path_Click("Click on Continue as a Member", "xpath", "//div[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
+                    Element_By_Path_Click("Select the Member", "xpath", "//div[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
                     if (FAIL) {
                         return;
                     }

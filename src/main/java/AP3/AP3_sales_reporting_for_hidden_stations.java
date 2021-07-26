@@ -1,5 +1,6 @@
 package AP3;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -258,8 +259,19 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI{
                 if (FAIL) { return; }
             Wait_For_Element_By_Path_Presence("Ending Reading should visible under Filters", "xpath", "//div[contains(text(),'Ending Reading')]", ParentTest, "no_jira");
                 if (FAIL) { return; }
+                
+            _t++;
+            _p++;
+            EX += _t + "\t" + "Genrerate Sales Report for hidden stations" + "\t" + "\t" +"\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "Generate Sales Report for hidden stations" , false, ParentTest.createNode("Not able find report for hidden stations"));
         }
-        EX += " - " + "\t" + " === ^ Sales Report for hidden stations" + "\t" + " ===== " + "\t" + " == ^ Sales Reporting for hidden stations End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        else{
+              _t++;
+            _f++;
+            EX += _t + "\t" + "No Sales Report found for hidden stations" + "\t" + "\t" +"\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "No Sales Report found for hidden stations" , false, ParentTest.createNode("Not able find report for hidden stations"));
+        }
+        EX += " END " + "\t" + " === ^ Sales Report for hidden stations" + "\t" + " ===== " + "\t" + " == ^ Sales Reporting for hidden stations End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
     } catch (Exception ex){}   // =============================================  
     } 
 
