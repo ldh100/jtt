@@ -30,11 +30,11 @@ class notification extends API_GUI {
 
         // <editor-fold defaultstate="collapsed" desc=" POST Notification">
         // Test Scenario 1: Positive flow for post new notification 
-        BODY = "{\"text\":\"This is text for post new notification description\"," +
-            "\"title\":\"Test title - Post " + RELEASE_DATE + "\"," +
-            "\"realm\":\"cdl\"," +
-            "\"target\":\"admin_panel\"," +
-            "\"release_date\":\"" + RELEASE_DATE + "\"}";
+        BODY = "{\"text\":\"This is text for post new notification description\","
+                + "\"title\":\"Test title - Post " + RELEASE_DATE + "\","
+                + "\"realm\":\"cdl\","
+                + "\"target\":\"admin_panel\","
+                + "\"release_date\":\"" + RELEASE_DATE + "\"}";
         JOB_Api_Call("AP3 add new notification", "POST", BaseAPI + "/notification/", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
             try {
@@ -45,26 +45,26 @@ class notification extends API_GUI {
         }
 
         // Test Scenario 2: Negative flow with null text values
-        BODY = "{\"text\":\"\"," +
-            "\"title\":\"Test title - Post " + RELEASE_DATE + "\"," +
-            "\"realm\":\"cdl\",\"target\":\"admin_panel\"," +
-            "\"release_date\":\"" + RELEASE_DATE + "\"}";
+        BODY = "{\"text\":\"\","
+                + "\"title\":\"Test title - Post " + RELEASE_DATE + "\","
+                + "\"realm\":\"cdl\",\"target\":\"admin_panel\","
+                + "\"release_date\":\"" + RELEASE_DATE + "\"}";
         JOB_Api_Call("AP3 add new notification - Negative flow with null text values", "POST", BaseAPI + "/notification/", Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 3: Negative flow with null realm id
-        BODY = "{\"text\":\"This is text for post new notification description\"," +
-            "\"title\":\"Test title - Post " + RELEASE_DATE + "\"," +
-            "\"realm\":\"\"," +
-            "\"target\":\"admin_panel\"," +
-            "\"release_date\":\"" + RELEASE_DATE + "\"}";
+        BODY = "{\"text\":\"This is text for post new notification description\","
+                + "\"title\":\"Test title - Post " + RELEASE_DATE + "\","
+                + "\"realm\":\"\","
+                + "\"target\":\"admin_panel\","
+                + "\"release_date\":\"" + RELEASE_DATE + "\"}";
         JOB_Api_Call("AP3 add new notification - Negative flow with null realm id", "POST", BaseAPI + "/notification/", Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 4: Negative flow with null target value
-        BODY = "{\"text\":\"This is text for post new notification description\"," +
-            "\"title\":\"Test title - Post " + RELEASE_DATE + "\"," +
-            "\"realm\":\"cdl\"," +
-            "\"target\":\"\"," +
-            "\"release_date\":\"" + RELEASE_DATE + "\"}";
+        BODY = "{\"text\":\"This is text for post new notification description\","
+                + "\"title\":\"Test title - Post " + RELEASE_DATE + "\","
+                + "\"realm\":\"cdl\","
+                + "\"target\":\"\","
+                + "\"release_date\":\"" + RELEASE_DATE + "\"}";
         JOB_Api_Call("AP3 add new notification - Negative flow with null target value", "POST", BaseAPI + "/notification/", Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 5: Negative flow with past release date
@@ -97,20 +97,34 @@ class notification extends API_GUI {
 
         // <editor-fold defaultstate="collapsed" desc=" PATCH Notification">This method will send PUT request to update notification title and text
         // Test Scenario 1: Positive flow for patch notification by ID
-        BODY = "{\"text\":\"This is text for update notification\"," +
-            "\"title\":\"Test title- edited " + _E + "\"," +
-            "\"realm\":\"cdl\"," +
-            "\"target\":\"admin_panel\"}";
+        BODY = "{\"text\":\"This is text for update notification\","
+                + "\"title\":\"Test title- edited " + _E + "\","
+                + "\"realm\":\"cdl\","
+                + "\"target\":\"admin_panel\"}";
         JOB_Api_Call("AP3 Update Notification Title and Text", "PATCH",
                 BaseAPI + "/notification/" + Notification_ID, Auth, BODY, 200, ParentTest, "no_jira");
 
         // Test Scenario 2: Negative flow to update notification with null text values
-        BODY = "{\"text\":\"\"," +
-            "\"title\":\"Test title - Post " + RELEASE_DATE + "\"," +
-            "\"realm\":\"cdl\"," +
-            "\"target\":\"admin_panel\"," +
-            "\"release_date\":\"" + RELEASE_DATE + "\"}";
+        BODY = "{\"text\":\"\","
+                + "\"title\":\"Test title - Post " + RELEASE_DATE + "\","
+                + "\"realm\":\"cdl\","
+                + "\"target\":\"admin_panel\","
+                + "\"release_date\":\"" + RELEASE_DATE + "\"}";
         JOB_Api_Call("AP3 update notification - Negative flow with null text values", "PATCH", BaseAPI + "/notification/" + Notification_ID, Auth, BODY, 400, ParentTest, "no_jira");
+        //</editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc=" POST set a notification status ">
+        // Test Scenario 1: Positive flow to set read status - True
+        BODY = "{\"status\":"
+                + "{\"read\": true}"
+                + "}";
+        JOB_Api_Call("AP3 set notification status true", "POST", BaseAPI + "/notification/" + Notification_ID + "/status", Auth, BODY, 200, ParentTest, "no_jira");
+
+        // Test Scenario 2: Positive flow to set read status - False
+        BODY = "{\"status\":"
+                + "{\"read\":false}"
+                + "}";
+        JOB_Api_Call("AP3 set notification status false", "POST", BaseAPI + "/notification/" + Notification_ID + "/status", Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc=" DELETE Notification">

@@ -677,11 +677,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected List<String> COMP_IDS; 
     protected List<String> MENU_IDS;
     protected List<String> ORDER_IDS; 
-    protected List<String> NOTIFICATION_IDS; 
     protected List<String> SCART_IDS; 
     protected List<String> CATEGORIES_IDS;   
     protected List<String> ITEMS_IDS;  
     protected List<String> TIMESLOTS_IDS; 
+    
+    protected List<String> NOTIFICATION_IDS; 
+    protected List<String> ANNOUNCEMENT_IDS;
 
     
     protected int _t = 0; // Total

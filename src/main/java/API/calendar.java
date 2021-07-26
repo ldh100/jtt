@@ -67,14 +67,14 @@ class calendar extends API_GUI{
 //        }
 
         BODY = json.toString();
-        JOB_Api_Call("Calendar > /'BrandID'/ Override > Delete New Closure", "PUT", 
-            BaseAPI + "/calendar/" + BrandID, Auth, BODY, 200, ParentTest, "no_jira");
-        if(json != null){
-            try{
-                Closure_ID = json.getString("id");
-            } catch (Exception ex){
-                String AAAA = ex.getMessage();
-            }
-        }
+//        JOB_Api_Call("Calendar > /'BrandID'/ Override > Delete New Closure", "PUT", 
+//            BaseAPI + "/calendar/" + BrandID, Auth, BODY, 200, ParentTest, "no_jira");
+//        if(json != null){
+//            try{
+//                Closure_ID = json.getString("id");
+//            } catch (Exception ex){
+//                String AAAA = ex.getMessage();
+//            }
+//        }
     }
 }
