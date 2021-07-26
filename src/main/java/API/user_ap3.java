@@ -64,7 +64,7 @@ class user_ap3 extends API_GUI{
             "\"phone\":" + "1" + NewID + "," +
             "\"realm\":\"" + Realm + "\"," +
             "\"password\":\"" + "Zxtsaq9ppnppvbyi11f0nk" + "\"}";
-        JOB_Api_Call("AP3 User - Create New Email Exists", "POST", 
+        JOB_Api_Call("AP3 User - Create New > Email Exists", "POST", 
             BaseAPI + "/user", Auth, BODY, 409, ParentTest, "no_jira"); 
         
         
@@ -93,6 +93,6 @@ class user_ap3 extends API_GUI{
             BaseAPI + "/user/forgotpassword?realm=" + Realm, Auth, BODY, 200, ParentTest, "no_jira");                
         
         JOB_Api_Call("AP3 User - Delete", "DELETE", // AP3 User Delete ===============================
-            BaseAPI + "/user/" + New_User_ID, Auth, BODY, 200, ParentTest, "no_jira");  
+            BaseAPI + "/user/" + New_User_ID, Auth, "", 200, ParentTest, "no_jira");  
     }
 }

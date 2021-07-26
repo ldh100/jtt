@@ -48,7 +48,7 @@ class AP3_bulk_apply extends AP3_GUI{
         String API_Response_Body = "";
         JSONObject json;
         JSONArray menus;
-        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID, ParentTest, "no_jira");
+        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
         Wait_For_Element_By_Path_InVisibility("Wait for Spinner", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");
@@ -72,7 +72,7 @@ class AP3_bulk_apply extends AP3_GUI{
             List_of_Item_Prices_Before_Change[i] = getAttributeOfElementByXpath("(//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[5]", "innerHTML");
         }
         //open Local Menu on new tab
-        Open_Switch_to_2nd_Tab("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
+        Open_Switch_to_2nd_Tab("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(5000);
         Element_By_Path_Click("Click > Category: Sides", "xpath", "//div[contains(text(),'Sides')]", ParentTest, "no_jira");
@@ -756,7 +756,7 @@ class AP3_bulk_apply extends AP3_GUI{
             if (FAIL) { return;}
         Thread.sleep(2000);
 
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
+        Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
             if (FAIL) { return;}
 
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
@@ -1002,7 +1002,7 @@ class AP3_bulk_apply extends AP3_GUI{
                       
         // <editor-fold defaultstate="collapsed" desc="Check Local Menu After Global Changes">  
         EX += " - " + "\t" + " === " + "\t" + " ===== Check Local Menu After Global Changes" + "\t" + " == Check Local Menu After Global Changes >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-        Open_Switch_to_2nd_Tab("Navigate to Local Menu", url + "#/menu/sector/"+SectorID+"/company/"+CompanyID+"/brands/"+BrandID, ParentTest, "no_jira");
+        Open_Switch_to_2nd_Tab("Navigate to Local Menu", url + "#/menu/sector/"+SectorID+"/brand/company/"+CompanyID+"/brands/"+BrandID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(5000);
         Wait_For_Element_By_Path_InVisibility("Wait for Spinner", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");
@@ -1044,7 +1044,7 @@ class AP3_bulk_apply extends AP3_GUI{
         Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(1000);
-        Open_Switch_to_2nd_Tab("Navigate to Local Menu", url + "#/menu/sector/"+SectorID+"/company/"+CompanyID+"/brands/"+BrandID, ParentTest, "no_jira");
+        Open_Switch_to_2nd_Tab("Navigate to Local Menu", url + "#/menu/sector/"+SectorID+"/brand/company/"+CompanyID+"/brands/"+BrandID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(5000);
         Wait_For_Element_By_Path_InVisibility("Wait for Spinner", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");
