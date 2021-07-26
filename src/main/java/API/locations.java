@@ -87,8 +87,6 @@ class locations extends API_GUI{
                     JSONObject menu = MENUS.getJSONObject(i);
                     MENU_IDS.add(menu.getString("id"));
                 } 
-                Menu_ID = MENU_IDS.get(0);
-                
                 if(json.has("sector")){           
                     SectorID = json.getString("sector");
                 }

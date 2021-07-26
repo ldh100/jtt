@@ -588,10 +588,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // <editor-fold defaultstate="collapsed" desc="Instance Variables Declarations">
-    protected String Realm = "";
-    protected String Auth = "";    
-    protected String NewID = "";
-     
     protected String ADMIN_ID = "";
     protected String ADMIN_PW = "";
     protected String AP3_User_ID = "";
@@ -601,17 +597,18 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String MOBILE_PW = "";
     protected String Mobile_User_ID = "";
     protected String Mobile_User_TKN = "";
-    protected String Payment_TKN = "";
-    protected String Card_Type = "";
-    protected String Card_Last4 = "";
-    protected String PProvider_Type = "";
-    protected String Card_Name = "";
     
     protected String RUNNER_ID = "";
     protected String RUNNER_PW = "";
     protected String Bolter_User_ID = "";
     protected String Bolter_User_TKN = "";   
-
+    protected String Bolter_Site_ID = "";  
+    protected String Market_Brand_ID = ""; 
+    
+    protected String Realm = "";
+    protected String Auth = "";    
+    protected String NewID = "";
+    
     private String HTML_Report_Path = "";
     private String Report_Date = "";
     private ExtentSparkReporter HtmlReporter;
@@ -658,31 +655,18 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String BrandID = "";
     protected String UnitID = "";
     protected String CompanyID = "";
+    protected String MenuID = "";
     protected String GL_MENU = "";
     
-    protected String Bolter_Site_ID = "";  
-    protected String Market_Brand_ID = ""; 
-
-    protected String Menu_ID = "";
-    protected String Category_ID;  
-    protected String Item_ID; 
-    protected String TimeSlotID = "";      
     protected String BrandIDS = "";  
-    protected String ShoppingCart_ID = "";  
-    protected String OrderID = "";  
-    
-    protected List<String> BolterBrandIDS; 
-
+    protected List<String> BolterBrandIDS;  
     protected List<String> SECTOR_IDS;
     protected List<String> COMP_IDS; 
     protected List<String> MENU_IDS;
     protected List<String> ORDER_IDS; 
-    protected List<String> NOTIFICATION_IDS; 
     protected List<String> SCART_IDS; 
-    protected List<String> CATEGORIES_IDS;   
-    protected List<String> ITEMS_IDS;  
-    protected List<String> TIMESLOTS_IDS; 
-
+    protected List<String> NOTIFICATION_IDS; 
+    protected List<String> ANNOUNCEMENT_IDS;
     
     protected int _t = 0; // Total
     protected int _p = 0; // Passed
@@ -694,7 +678,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String err = "";
     protected String Summary = "";    
     protected boolean FAIL = false;
-    protected boolean FATAL_FAIL = false;
     protected String r_type = "";  
     
     protected int t_calls = 0;
@@ -2903,7 +2886,83 @@ public class API_GUI extends javax.swing.JInternalFrame {
             }
         }
     }
-    //</editor-fold>    
+    
+    protected void JOB_Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY, int ExpStatus, ExtentTest ParentTest, String JIRA) {
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        _t++; sw1.start();
+        FAIL = false;
+        String Result = "?";
+        int status = 0;
+        String R_Time = "";
+        json = null;
+        try {
+            RequestSpecification request;
+            request = RestAssured.given();
+            if(!AUTH.isEmpty()){
+                request.header("Authorization", AUTH);
+            }
+            Response response = null;
+            switch (Method) {
+                case "GET":
+                    if(BODY.equals("Bolter")){
+                        request.header("From", "Bolter/1.0");
+                    }
+                    response = request.get(EndPoint);
+                    break;
+                case "POST":
+                    request.body(BODY);
+                    response = request.post(EndPoint);
+                    break;
+                case "PATCH":
+                    request.body(BODY);
+                    response = request.patch(EndPoint);
+                    break;
+                case "DELETE":
+                    request.body(BODY);
+                    response = request.delete(EndPoint);
+                    break;
+                case "PUT":
+                    request.body(BODY);
+                    response = request.put(EndPoint);
+                    break; 
+                case "OPTIONS":
+                    request.header("Accept", "*/*");
+                    response = request.options(EndPoint);
+                    break;  
+                default:
+                    break;
+            }
+            Result = response.getStatusLine();
+            status = response.getStatusCode();
+            if(response.asString().startsWith("{") && response.asString().endsWith("}")) {
+                json = new JSONObject(response.asString());
+            }
+            R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
+            if (status == ExpStatus) {                                                 
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "PASS" + "\t" + " - " +
+                "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                Log_Html_Result("PASS", "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+            } else {
+                _f++; FAIL = true; 
+                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + "Status Code: " + status + "\t" + "FAIL" + "\t" + Result +
+                "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                Log_Html_Result("FAIL", "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+            }
+        } catch(Exception ex){
+            R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+        } 
+        r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
+        sw1.reset();
+    }
+    //</editor-fold>  
     
     private void Execute() throws Exception {
         if(true){
@@ -2921,11 +2980,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             payment BR = new API.payment(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
-            PProvider_Type = PProvider_Type;
-            Card_Type = BR.Card_Type; 
-            Card_Last4 = BR.Card_Last4;
-            Card_Name = BR.Card_Name; 
-            Payment_TKN = BR.Payment_TKN;
+            Mobile_User_ID = BR.Mobile_User_ID; 
+            Mobile_User_TKN = BR.Mobile_User_TKN;
         } 
         if(true){
             SCOPE += "Bolter ";
@@ -2956,11 +3012,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SiteID = BR.SiteID; 
             UnitID = BR.UnitID;
             BrandID = BR.BrandID;
-            BrandIDS = BR.BrandIDS;
             SectorID = BR.SectorID;
             CompanyID = BR.CompanyID;
             MENU_IDS = BR.MENU_IDS;
-            Menu_ID = BR.Menu_ID;
+            BrandIDS = BR.BrandIDS;
         }        
         if(true){
             SCOPE += "Config ";
@@ -2988,18 +3043,14 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Global/Local Menus"); 
             menus BR = new API.menus(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;         
-            Category_ID = BR.Category_ID;
-            Item_ID = BR.Item_ID;
-            TimeSlotID = BR.TimeSlotID; 
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
         }   
         if(true){
-            SCOPE += "ShoppingCart ";
-            ParentTest = HtmlReport.createTest("ShoppingCart"); 
+            SCOPE += "Shoppingcart ";
+            ParentTest = HtmlReport.createTest("Shoppingcart"); 
             shoppingcart BR = new API.shoppingcart(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time; 
-            ShoppingCart_ID = BR.ShoppingCart_ID;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
         }          
         if(true){
             SCOPE += "Order ";
@@ -3038,90 +3089,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
         }        
   
-    }
-    protected void JOB_Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY, int ExpStatus, ExtentTest ParentTest, String JIRA) {
-        FAIL = false;
-        String Result = "?";
-        int status = 0;
-        String R_Time = "";
-        json = null;
-        RequestSpecification request;
-        request = RestAssured.given();
-        if(!AUTH.isEmpty()){
-            request.header("Authorization", AUTH);
-        } 
-        try {
-            for (int i = 1; i < 4; i++){   // ========== Loop +2 times if 1st FAIL
-                if(sw1.isRunning()){
-                    sw1.reset();
-                }
-                _t++; sw1.start(); 
-                Response response = null;
-                switch (Method) {
-                    case "GET":
-                        if(BODY.equals("Bolter")){
-                            request.header("From", "Bolter/1.0");
-                        }
-                        response = request.get(EndPoint);
-                        break;
-                    case "POST":
-                        request.body(BODY);
-                        response = request.post(EndPoint);
-                        break;
-                    case "PATCH":
-                        request.body(BODY);
-                        response = request.patch(EndPoint);
-                        break;
-                    case "DELETE":
-                        request.body(BODY);
-                        response = request.delete(EndPoint);
-                        break;
-                    case "PUT":
-                        request.body(BODY);
-                        response = request.put(EndPoint);
-                        break; 
-                    case "OPTIONS":
-                        request.header("Accept", "*/*");
-                        response = request.options(EndPoint);
-                        break;  
-                    default:
-                        break;
-                }
-                Result = response.getStatusLine();
-                status = response.getStatusCode();
-
-                if(response.asString().startsWith("{") && response.asString().endsWith("}")) {
-                    json = new JSONObject(response.asString());
-                }
-                R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
-                if (status == ExpStatus) {                                                 
-                    _p++; 
-                    EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "PASS" + "\t" + "Attempt #" + i +
-                    "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                    Log_Html_Result("PASS", "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")" + 
-                            "  Attempt #" + i, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
-                    
-                    break; // =================  Do not attempt againg if passed
-                    
-                } else {
-                    _f++; FAIL = true; 
-                    EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + "Status Code: " + status + " > " + Result + "\t" + "FAIL" + "\t" + "Attempt #" + i +
-                    "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                    Log_Html_Result("FAIL", "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")" + 
-                            "  Attempt #" + i, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
-                }
-            } // =======   3 times Loop if not good
-            
-        } catch(Exception ex){
-            R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
-            _f++; FAIL = true; err = ex.getMessage().trim();
-            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err +
-            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
-        } 
-        r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
-        sw1.reset();
     }
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">

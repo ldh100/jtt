@@ -35,10 +35,6 @@ class user_mobile extends API_GUI{
                 //
             }
         }
-        JOB_Api_Call("Mobile User Zendesk JWT token", "GET", 
-            BaseAPI + "/user/zendesk", Auth, "", 200, ParentTest, "no_jira");         
-        if(json != null){
-            //
-        }
+         
     }
 }
