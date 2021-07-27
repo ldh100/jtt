@@ -23,6 +23,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -44,7 +45,7 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.zip.ZipEntry;
@@ -6122,14 +6123,18 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         FAIL = false;
         t = "";
         try {
-            File folder = new File(DIR); 
-            File[] listOfFiles = folder.listFiles();
+            List<File> listOfFiles = Files.list(Paths.get(DIR))
+                .filter(Files::isRegularFile)
+                .map(Path::toFile)
+                .collect(Collectors.toList());
+            //listOfFiles.forEach(System.out::println);  
             for (File file : listOfFiles) {
                 if (file.getName().contains(F_NAME)) {
                     t = file.getName();
                     break;
                 }
-            }
+            } 
+
             if("".equals(t)){
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + DIR + "\t" + F_NAME + "\t" + "WARN" + "\t" + "File not found" +

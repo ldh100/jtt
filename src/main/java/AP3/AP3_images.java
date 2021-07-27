@@ -234,7 +234,7 @@ class AP3_images extends AP3_GUI{
         
         // <editor-fold defaultstate="collapsed" desc="Add an Image to Global Menu Item"> 
         EX += " - " + "\t" + " === " + "\t" + " ===== Add an Image to Global Menu Item" + "\t" + " == Add an Image to Global Menu Item >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID, ParentTest, "no_jira");
+        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(2000);
         Element_By_Path_Click("Click > First Category", "xpath", "(//div[contains(@class,'flex xs12 list-item list-item-large')])[1]", ParentTest, "no_jira"); 
@@ -279,7 +279,7 @@ class AP3_images extends AP3_GUI{
             if (FAIL) { return;} 
         Thread.sleep(2000);
         EX += " - " + "\t" + " === " + "\t" + " ===== Check for Image in Local Menu" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-        Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
+        Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(2000);
         Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'Lunch')][1]/parent::span", ParentTest, "no_jira"); 
@@ -308,7 +308,7 @@ class AP3_images extends AP3_GUI{
         
         // <editor-fold defaultstate="collapsed" desc="Remove Image from Global Menu Item"> 
         EX += " - " + "\t" + " === " + "\t" + " ===== Remove Image from Global Menu Item" + "\t" + " == Remove Image from Global Menu Item >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n"; 
-        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID, ParentTest, "no_jira");
+        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(2000);
         Refresh("Refresh Global Menu Page", ParentTest, "no_jira");
@@ -328,7 +328,7 @@ class AP3_images extends AP3_GUI{
             if (FAIL) { return;} 
         Thread.sleep(2000);
         EX += " - " + "\t" + " === " + "\t" + " ===== Check Image was Removed in Local Menu" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-        Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
+        Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(2000);
         Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'Lunch')][1]/parent::span", ParentTest, "no_jira"); 
@@ -348,7 +348,7 @@ class AP3_images extends AP3_GUI{
         // <editor-fold defaultstate="collapsed" desc="'Allow Images in Local Menu' set to 'No'"> 
         EX += " - " + "\t" + " === " + "\t" + " ===== 'Allow Images in Local Menu' set to 'No'" + "\t" + " == 'Allow Images in Local Menu' set to 'No' >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         EX += " - " + "\t" + " === " + "\t" + " ===== Re-upload Image to Item in Global Menu" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID, ParentTest, "no_jira");
+        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(2000);
         Element_By_Path_Click("Click > First Category", "xpath", "(//div[contains(@class,'flex xs12 list-item list-item-large')])[1]", ParentTest, "no_jira"); 
@@ -388,7 +388,7 @@ class AP3_images extends AP3_GUI{
             if (FAIL) { return;}
         Thread.sleep(2000);
         EX += " - " + "\t" + " === " + "\t" + " ===== Check Image Area does not exist in Local Menu" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-        Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
+        Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(2000);
         Refresh("Refresh Brand List Page", ParentTest, "no_jira");
@@ -435,7 +435,7 @@ class AP3_images extends AP3_GUI{
         Wait_For_Element_By_Path_Presence("Check > 'Allow Local Menu Images' toggle is Disabled", "xpath", "//div[contains(@class,'Toggle-Disabled')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         //navigate to global menu and check that images cannot be added
-        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/"+SectorID+"/company/"+CompanyID, ParentTest, "no_jira");
+        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/"+SectorID+"/brand/company/"+CompanyID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(2000);
         Element_By_Path_Click("Click > First Category", "xpath", "(//div[contains(@class,'flex xs12 list-item list-item-large')])[1]", ParentTest, "no_jira"); 

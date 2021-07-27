@@ -207,10 +207,11 @@ class AP3_mm_items extends AP3_GUI{
 //                   Element_Attribute("Local Menu (Index " + j + ") Name", L1.get(j), "textContent", ParentTest, "no_jira"); 
 //                }  
         Thread.sleep(500);
-        List_Child_E1_By_Path("Find " + GL_MENU + " 'View Global Menus' button", L2.get(T_Index), "xpath", ".//button[@type='button'][1]", ParentTest, "no_jira"); 
-            if (FAIL) { return;} 
-        Element_Click("Click 'View Global Menus'", e1, ParentTest, "no_jira"); 
-            if (FAIL) { return;}   
+//        List_Child_E1_By_Path("Find " + GL_MENU + " 'View Global Menus' button", L2.get(T_Index), "xpath", ".//button[@type='button'][1]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;} 
+//        Element_Click("Click 'View Global Menus'", e1, ParentTest, "no_jira"); 
+//            if (FAIL) { return;}   
+         Element_By_Path_Click("Click Global Menu", "xpath", "//span[@id='global-menu-label']", ParentTest, "no_jira");
         Thread.sleep(500);                  
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}  
@@ -651,7 +652,7 @@ class AP3_mm_items extends AP3_GUI{
         // <editor-fold defaultstate="collapsed" desc="Changes in Global Menu Item Reflect on Local Menu Item">  
         EX += " - " + "\t" + " === Changes in Global Menu Item Reflect on Local Menu Item" + "\t" + " ===== " + "\t" + " == Changes in Global Menu Item Reflect on Local Menu Item Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n"; 
         EX += " - " + "\t" + " === Navigate to Global Menu and Make Changes" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID, ParentTest, "no_jira");
+        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for Global Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
         if (FAIL) { return;}
@@ -761,7 +762,7 @@ class AP3_mm_items extends AP3_GUI{
         if (FAIL) { return;}
         Thread.sleep(500);
         EX += " - " + "\t" + " === Navigate to Local Menu and Check for Changes" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-        Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
+        Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for Local Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
         if (FAIL) { return;}
@@ -831,7 +832,7 @@ class AP3_mm_items extends AP3_GUI{
         
         // <editor-fold defaultstate="collapsed" desc="Manipulate Global Modifiers">  
         EX += " - " + "\t" + " === Manipulate Global Modifiers" + "\t" + " ===== " + "\t" + " == Manipulate Global Modifiers Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n"; 
-        Navigate_to_URL("Navigate to Global Modifiers", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/globalmods/", ParentTest, "no_jira");
+        Navigate_to_URL("Navigate to Global Modifiers", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/globalmods/", ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for Modifier Group", "xpath", "//*[contains(text(),'MMTG')]", ParentTest,"no_jira");
         if (FAIL) { return;}
@@ -920,7 +921,7 @@ class AP3_mm_items extends AP3_GUI{
         if (FAIL) { return;}
         Thread.sleep(500);
         EX += " - " + "\t" + " === Check modifier changes in Global Menu item" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID, ParentTest, "no_jira");
+        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for Global Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
         if (FAIL) { return;}
@@ -1062,7 +1063,7 @@ class AP3_mm_items extends AP3_GUI{
 
         
         EX += " - " + "\t" + " === Check new modifier no longer exists in Local Menu item" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-        Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
+        Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for Local Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
         if (FAIL) { return;}
