@@ -3054,6 +3054,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         String Result = "?";
         int status = 0;
         String R_Time = "";
+        String ErrorMsg = "";
         json = null;
         RequestSpecification request;
         request = RestAssured.given();
@@ -3103,22 +3104,23 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
                 if(response.asString().startsWith("{") && response.asString().endsWith("}")) {
                     json = new JSONObject(response.asString());
+                    if(json.has("error")){
+                        ErrorMsg = "Error: " + json.getString("error") + ". ";
+                    }
                 }
                 R_Time = String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
                 if (status == ExpStatus) {                                                 
                     _p++; 
-                    EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "PASS" + "\t" + "Attempt #" + i + 
+                    EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "PASS" + "\t" + "Attempt #" + i + 
                     "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                    Log_Html_Result("PASS", "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")" + 
-                            "  Attempt #" + i, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
-                    
-//break; // =================  Do not attempt againg if passed
-                    
+                    Log_Html_Result("PASS", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")" + 
+                            "  Attempt #" + i, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));       
+//break; // =================  Do not attempt againg if passed                    
                 } else {
                     _f++; FAIL = true; 
-                    EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + "Status Code: " + status + " > " + Result + "\t" + "FAIL" + "\t" + "Attempt #" + i +
+                    EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "FAIL" + "\t" + "Attempt #" + i +
                     "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                    Log_Html_Result("FAIL", "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")" + 
+                    Log_Html_Result("FAIL", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")" + 
                             "  Attempt #" + i, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
                 }
 //} // =======   3 times Loop if not good
