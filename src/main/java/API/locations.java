@@ -174,8 +174,27 @@ class locations extends API_GUI {
                 + "}";
         JOB_Api_Call("Location - POST add drop-off location to newly created group/site " + New_SiteID + " ", "POST",
                 BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 200, ParentTest, "no_jira");
+         // Test Scenario 4: Negative flow to Add duplicate Drop-off location to newly created group/site.
+        BODY = "{"
+                + "\"name\":\"Dropp-off location name\","
+                + "\"foodlocker\":false,"
+                + "\"information\":\"This is foodlocker values\","
+                + "\"address\":{"
+                + "\"address\":\"6 Pamela Ct\","
+                + "\"city\":\"Toronto\","
+                + "\"state\":\"ON\","
+                + "\"zip\":\"M9V 2C3\","
+                + "\"country\":\"CA\","
+                + "\"coordinates\":{"
+                + "\"latitude\":43.7435015,"
+                + "\"longitude\":-79.5924087"
+                + "}"
+                + "}"
+                + "}";
+        JOB_Api_Call("Location - POST Negative flow to add duplicate drop-off location to newly created group/site " + New_SiteID + " ", "POST",
+                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 400, ParentTest, "no_jira");
 
-        // Test Scenario 4: Positive flow to Add Drop-off location with foodlocker = true.
+        // Test Scenario 5: Positive flow to Add Drop-off location with foodlocker = true.
         BODY = "{"
                 + "\"name\":\"Drop-off location with foodlocker=true\","
                 + "\"foodlocker\":true,"
@@ -200,25 +219,7 @@ class locations extends API_GUI {
             } catch (Exception ex) {
             }
         }
-        // Test Scenario 5: Negative flow to Add duplicate Drop-off location to newly created group/site.
-        BODY = "{"
-                + "\"name\":\"Dropp-off location name\","
-                + "\"foodlocker\":false,"
-                + "\"information\":\"This is foodlocker values\","
-                + "\"address\":{"
-                + "\"address\":\"6 Pamela Ct\","
-                + "\"city\":\"Toronto\","
-                + "\"state\":\"ON\","
-                + "\"zip\":\"M9V 2C3\","
-                + "\"country\":\"CA\","
-                + "\"coordinates\":{"
-                + "\"latitude\":43.7435015,"
-                + "\"longitude\":-79.5924087"
-                + "}"
-                + "}"
-                + "}";
-        JOB_Api_Call("Location - POST Negative flow to add duplicate drop-off location to newly created group/site " + New_SiteID + " ", "POST",
-                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 400, ParentTest, "no_jira");
+       
 
         // Test Scenario 6: Negative flow to post site without Name
         BODY = "{\"address\":{"
