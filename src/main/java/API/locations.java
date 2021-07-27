@@ -13,6 +13,7 @@ class locations extends API_GUI {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;
+        AP3_User_ID = a.AP3_User_ID;
         AP3_User_TKN = a.AP3_User_TKN;
         SITE = a.SITE;
         BRAND = a.BRAND;
@@ -238,7 +239,7 @@ class locations extends API_GUI {
         JOB_Api_Call("Location - PATCH add multigroup without passing valid group/site id", "PATCH",
                 BaseAPI + "/location/multigroup/" + AppID, Auth, BODY, 400, ParentTest, "no_jira");
 
-        // Test Scenario 7: Negative flow to Add Drop-off location to without Name.
+        // Test Scenario 7: Negative flow to Add Drop-off location to without Name
         BODY = "{"
                 + "\"name\":\"\","
                 + "\"foodlocker\":false,"
@@ -257,7 +258,7 @@ class locations extends API_GUI {
                 + "}";
         JOB_Api_Call("Location - POST Negative drop-off location without valid Name" + New_SiteID + " ", "POST",
                 BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 400, ParentTest, "no_jira");
-        // Test Scenario 8: Negative flow to Add Drop-off location to without foodlocker.
+        // Test Scenario 8: Negative flow to Add Drop-off location to without foodlocker
         BODY = "{"
                 + "\"name\":\"This is null value for foodlocker\","
                 + "\"foodlocker\":null,"
@@ -412,7 +413,31 @@ class locations extends API_GUI {
                 + "}"
                 + "}";
         JOB_Api_Call("Location - PATCH Negative flow to update drop-off location with null folldlocker value" + New_SiteID + " ", "PATCH",
-                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/"+ New_DropOff_Location, Auth, BODY, 400, ParentTest, "no_jira");
+                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_Location, Auth, BODY, 400, ParentTest, "no_jira");
+        //</editor-fold>
+
+        //<editor-fold defaultstate="collapsed" desc="GET by ID's">
+        // Test Scenario 1: Get newly created group/site by Id.
+        JOB_Api_Call("Location - Get newly created group/site by Id " + New_SiteID + " ", "GET",
+                BaseAPI + "/location/group/" + New_SiteID, Auth, "", 200, ParentTest, "no_jira");
+
+        // Test Scenario 2: Get multigroup for newly created site by Id.
+        JOB_Api_Call("Location - Get multigroup for newly created site by Id" + New_SiteID + " ", "GET",
+                BaseAPI + "/location/multigroup/" + AppID + "/user/" + AP3_User_ID, Auth, "", 200, ParentTest, "no_jira");
+
+        // Test Scenario 3: Get multigroups by Id.
+        JOB_Api_Call("Location - Get multigroups by Id" + New_SiteID + " ", "GET",
+                BaseAPI + "/location/multigroup/" + AppID, Auth, "", 200, ParentTest, "no_jira");
+
+        // Test Scenario 4: Get newly created drop-off location by id.
+        JOB_Api_Call("Location - Get newly created drop-off location by id" + New_SiteID + " ", "GET",
+                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination" + New_DropOff_Location, Auth, "", 200, ParentTest, "no_jira");
+        //</editor-fold>
+
+        //<editor-fold defaultstate="collapsed" desc="Delete drop-off location">
+        // Test Scenario 1: Positive flow to delete Drop-off location under newly created group/site.
+        JOB_Api_Call("Location - DELETE drop-off location under newly created group/site " + New_SiteID + " ", "DELETE",
+                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_Location, Auth, "", 200, ParentTest, "no_jira");
         //</editor-fold>
 
     }
