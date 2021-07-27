@@ -391,25 +391,7 @@ class locations extends API_GUI {
                 BaseAPI + "/location/group/" + New_SiteID, Auth, BODY, 400, ParentTest, "no_jira");
 
      
-        // Test Scenario 6: Negative flow to update Drop-off location to without foodlocker.
-        BODY = "{"
-                + "\"name\":\"This is null value for foodlocker\","
-                + "\"foodlocker\":null,"
-                + "\"information\":\"\","
-                + "\"address\":{"
-                + "\"address\":\"6 Pamela Ct\","
-                + "\"city\":\"Toronto\","
-                + "\"state\":\"ON\","
-                + "\"zip\":\"M9V 2C3\","
-                + "\"country\":\"CA\","
-                + "\"coordinates\":{"
-                + "\"latitude\":43.7435015,"
-                + "\"longitude\":-79.5924087"
-                + "}"
-                + "}"
-                + "}";
-        JOB_Api_Call("Location - PATCH Negative flow to update drop-off location with null folldlocker value" + New_SiteID + " ", "PATCH",
-                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_Location, Auth, BODY, 400, ParentTest, "no_jira");
+      
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="GET by ID's">
