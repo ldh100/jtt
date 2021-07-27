@@ -175,8 +175,8 @@ class locations extends API_GUI {
         JOB_Api_Call("Location - POST add drop-off location to newly created group/site " + New_SiteID + " ", "POST",
                 BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 200, ParentTest, "no_jira");
          // Test Scenario 4: Negative flow to Add duplicate Drop-off location to newly created group/site.
-        BODY = "{"
-                + "\"name\":\"Dropp-off location name\","
+         BODY = "{"
+                + "\"name\":\"Drop-off location name\","
                 + "\"foodlocker\":false,"
                 + "\"information\":\"This is foodlocker values\","
                 + "\"address\":{"
