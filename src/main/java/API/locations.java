@@ -51,7 +51,8 @@ class locations extends API_GUI {
                         break;
                     }
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 //
             }
         }
@@ -77,7 +78,8 @@ class locations extends API_GUI {
                     }
                 }
                 BrandIDS = BrandIDS.substring(0, BrandIDS.length() - 1);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 //
             }
         }
@@ -106,7 +108,8 @@ class locations extends API_GUI {
                 if (json.has("company")) {
                     CompanyID = json.getString("company");
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 //
             }
         }
@@ -114,8 +117,10 @@ class locations extends API_GUI {
         JOB_Api_Call("Location/Sector > /'SectorID'", "GET",
                 BaseAPI + "/location/sector/" + SectorID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
 
-        groupAPIs();
-        locationAPIs();
+        if (env != "PR") {
+            groupAPIs();
+            locationAPIs();
+        }
 
     }
 
@@ -145,7 +150,8 @@ class locations extends API_GUI {
         if (json != null) {
             try {
                 New_SiteID = json.getString("id");
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
             }
         }
 
@@ -222,7 +228,8 @@ class locations extends API_GUI {
         if (json != null) {
             try {
                 New_DropOff_LocationID = json.getString("id");
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
             }
         }
 
@@ -397,7 +404,6 @@ class locations extends API_GUI {
                 BaseAPI + "/location/group/" + New_SiteID, Auth, BODY, 400, ParentTest, "no_jira");
 
         //</editor-fold>
-        
         //<editor-fold defaultstate="collapsed" desc="GET by ID's">
         // Test Scenario 1: Get newly created group/site by Id.
         JOB_Api_Call("Location - Get newly created group/site by Id " + New_SiteID + " ", "GET",
@@ -416,7 +422,6 @@ class locations extends API_GUI {
                 BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, "", 200, ParentTest, "no_jira");
 
         //</editor-fold>
-
         //<editor-fold defaultstate="collapsed" desc="Delete drop-off location">
         // Test Scenario 1: Positive flow to delete Drop-off location under newly created group/site.
         JOB_Api_Call("Location - DELETE drop-off location under newly created group/site " + New_SiteID + " ", "DELETE",
@@ -459,7 +464,8 @@ class locations extends API_GUI {
         if (json != null) {
             try {
                 New_DropOff_LocationID = json.getString("id");
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
             }
         }
 
@@ -505,11 +511,32 @@ class locations extends API_GUI {
         JOB_Api_Call("Location - POST negative flow to add new Busines Unit without name", "POST",
                 BaseAPI + "/location", Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
-        
+
         //<editor-fold defaultstate="collapsed" desc="PUT/Update newly created Business Unit">
+        // Test Scenario 1: Positive flow to update newly added Business Unit 
+        BODY = "{"
+                + "\"id\":\"" + New_Business_UnitID + "\","
+                + "\"label\":{"
+                + "\"en\":\"This is API test to update Business Unit name\""
+                + "},"
+                + "\"name\":\"This is API test to update Business Unit name\""
+                + "}";
+        JOB_Api_Call("Location - POST new Busines Unit", "PATCH", BaseAPI + "/location", Auth, BODY, 200, ParentTest, "no_jira");
+
+        // Test Scenario 2: Negative flow to update new Business Unit without name
+        BODY = "{"
+                + "\"id\":\"" + New_Business_UnitID + "\","
+                + "\"label\":{"
+                + "\"en\":\"\""
+                + "},"
+                + "\"name\":\"\""
+                + "}";
+        JOB_Api_Call("Location - PATCH negative flow to update new Busines Unit without name", "PATCH", BaseAPI + "/location", Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
-        
+
         //<editor-fold defaultstate="collapsed" desc="Get Business unit by ID">
+        // Test Scenario 1: Positive flow to update newly added Business Unit 
+        JOB_Api_Call("Location - GET new Busines Unit details by ID", "GET", BaseAPI + "/location/" + New_Business_UnitID, Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
     }
 }
