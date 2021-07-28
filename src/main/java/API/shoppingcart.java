@@ -8,8 +8,8 @@ class shoppingcart extends API_GUI{
         Mobile_User_TKN = a.Mobile_User_TKN;
 
         BrandID = a.BrandID;
-        Menu_ID = a.Menu_ID;
-        Item_ID = a.Item_ID;
+        MENU_IDS = a.MENU_IDS;
+        ITEMS_IDS = a.ITEMS_IDS;
         ParentTest = a.ParentTest;
     }
     protected void run() {  
@@ -17,7 +17,7 @@ class shoppingcart extends API_GUI{
         BODY = "{\"brand\":\"" + BrandID + "\"," +
             "\"is\":{\"type\":\"delivery\"}," +
             "\"mealSwipeTotal\":0.0," +
-            "\"menu\":\"" + Menu_ID + "\"," +
+            "\"menu\":\"" + MENU_IDS.get(MENU_IDS.size() - 1) + "\"," +
             "\"payment_method\":{\"credit_card\":{}," +
             "\"mealplan\":{}}," +
             "\"showSingleTimeSlot\":false," +
@@ -33,7 +33,7 @@ class shoppingcart extends API_GUI{
             }
         }  
         
-        BODY = "{\"items\":[{\"id\":\"" + Item_ID + "\"," +
+        BODY = "{\"items\":[{\"id\":\"" + ITEMS_IDS.get(ITEMS_IDS.size() - 1) + "\"," +
             "\"quantity\":1," +
             "\"price\":{\"amount\":0.05}}]}"; 
         JOB_Api_Call("Add menu item to ShoppingCart", "PUT", 
