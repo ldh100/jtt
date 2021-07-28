@@ -98,7 +98,6 @@ class locations extends API_GUI {
                     JSONObject menu = MENUS.getJSONObject(i);
                     MENU_IDS.add(menu.getString("id"));
                 }
-                Menu_ID = MENU_IDS.get(MENUS.length() - 1); // Get Last Menu ID
 
                 if (json.has("sector")) {
                     SectorID = json.getString("sector");
@@ -413,6 +412,7 @@ class locations extends API_GUI {
                 BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, "", 200, ParentTest, "no_jira");
 
         //</editor-fold>
+
         //<editor-fold defaultstate="collapsed" desc="Delete drop-off location">
         // Test Scenario 1: Positive flow to delete Drop-off location under newly created group/site.
         JOB_Api_Call("Location - DELETE drop-off location under newly created group/site " + New_SiteID + " ", "DELETE",
