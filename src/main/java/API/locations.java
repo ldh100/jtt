@@ -20,13 +20,14 @@ class locations extends API_GUI {
         NewID = a.NewID;
         ParentTest = a.ParentTest;
     }
+    private String New_SiteID = "";
+    private String New_DropOff_LocationID = "";
+    private String New_Business_UnitID = "";
+    private Date release_date = new DateTime(new Date()).plusHours(4).plusMinutes(1).toDate();
+    private String RELEASE_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(release_date);
 
     protected void run() {
 
-        String New_SiteID = "";
-        String New_DropOff_Location = "";
-        Date release_date = new DateTime(new Date()).plusHours(4).plusMinutes(1).toDate();
-        String RELEASE_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(release_date);
         Auth = "Bearer " + AP3_User_TKN;  // =============== AP3 Sectors > Company ID ================
         JOB_Api_Call("Location > /sector", "GET",
                 BaseAPI + "/location/sector?_provider=cdl", Auth, "", 200, ParentTest, "no_jira");
@@ -113,6 +114,12 @@ class locations extends API_GUI {
         JOB_Api_Call("Location/Sector > /'SectorID'", "GET",
                 BaseAPI + "/location/sector/" + SectorID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
 
+        groupAPIs();
+        locationAPIs();
+
+    }
+
+    protected void groupAPIs() {
         //<editor-fold defaultstate="collapsed" desc="POST New Group/Site">
         // Test Scenario 1: Positive flow to post site
         BODY = "{\"address\":{"
@@ -173,8 +180,8 @@ class locations extends API_GUI {
                 + "}";
         JOB_Api_Call("Location - POST add drop-off location to newly created group/site " + New_SiteID + " ", "POST",
                 BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 200, ParentTest, "no_jira");
-         // Test Scenario 4: Negative flow to Add duplicate Drop-off location to newly created group/site.
-         BODY = "{"
+        // Test Scenario 4: Negative flow to Add duplicate Drop-off location to newly created group/site.
+        BODY = "{"
                 + "\"name\":\"Drop-off location name\","
                 + "\"foodlocker\":false,"
                 + "\"information\":\"This is foodlocker values\","
@@ -214,11 +221,10 @@ class locations extends API_GUI {
                 BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
             try {
-                New_DropOff_Location = json.getString("id");
+                New_DropOff_LocationID = json.getString("id");
             } catch (Exception ex) {
             }
         }
-       
 
         // Test Scenario 6: Negative flow to post site without Name
         BODY = "{\"address\":{"
@@ -346,10 +352,10 @@ class locations extends API_GUI {
                 + "}"
                 + "}";
         JOB_Api_Call("Location - PATCH update drop-off location to newly created group/site " + New_SiteID + " ", "PATCH",
-                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_Location, Auth, BODY, 200, ParentTest, "no_jira");
+                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_LocationID, Auth, BODY, 200, ParentTest, "no_jira");
 
         // Test Scenario 4: Positive flow to Update Drop-off location with foodlocker = false.
-           BODY = "{"
+        BODY = "{"
                 + "\"name\":\"Drop-off location with foodlocker=false\","
                 + "\"foodlocker\":false,"
                 + "\"information\":\"\","
@@ -366,7 +372,7 @@ class locations extends API_GUI {
                 + "}"
                 + "}";
         JOB_Api_Call("Location - PATCH  update drop-off location to newly created group/site with Foodlocker = false" + New_SiteID + " ", "PATCH",
-                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_Location, Auth, BODY, 200, ParentTest, "no_jira");
+                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_LocationID, Auth, BODY, 200, ParentTest, "no_jira");
 
         // Test Scenario 5: Negative flow to update site without Name
         BODY = "{\"address\":{"
@@ -390,10 +396,8 @@ class locations extends API_GUI {
         JOB_Api_Call("Location - PATCH Negative flow to update group/site without Name", "PATCH",
                 BaseAPI + "/location/group/" + New_SiteID, Auth, BODY, 400, ParentTest, "no_jira");
 
-     
-      
         //</editor-fold>
-
+        
         //<editor-fold defaultstate="collapsed" desc="GET by ID's">
         // Test Scenario 1: Get newly created group/site by Id.
         JOB_Api_Call("Location - Get newly created group/site by Id " + New_SiteID + " ", "GET",
@@ -416,8 +420,96 @@ class locations extends API_GUI {
         //<editor-fold defaultstate="collapsed" desc="Delete drop-off location">
         // Test Scenario 1: Positive flow to delete Drop-off location under newly created group/site.
         JOB_Api_Call("Location - DELETE drop-off location under newly created group/site " + New_SiteID + " ", "DELETE",
-                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_Location, Auth, "", 200, ParentTest, "no_jira");
+                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_LocationID, Auth, "", 200, ParentTest, "no_jira");
         //</editor-fold>
+    }
 
+    protected void locationAPIs() {
+
+        //<editor-fold defaultstate="collapsed" desc="POST Business Unit/Location">
+        // Test Scenario 1: Positive flow to Add new Business Unit 
+        BODY = "{"
+                + "\"name\":\"This is API test to add Business Unit under  newly created group/site\","
+                + "\"label\":{"
+                + "\"en\":\"This is API test to add Business Unit under  newly created group/site\""
+                + "},"
+                + "\"brands\":["
+                + "],"
+                + "\"address\":{"
+                + "\"state\":\"ON\","
+                + "\"zip\":\"M9V 2C3\","
+                + "\"country\":\"CA\","
+                + "\"address\":\"6 Pamela Ct\","
+                + "\"city\":\"Toronto\","
+                + "\"coordinates\":{"
+                + "\"latitude\":43.7435015,"
+                + "\"longitude\":-79.5924087"
+                + "}"
+                + "},"
+                + "\"latitude\":43.7435015,"
+                + "\"longitude\":-79.5924087,"
+                + "\"meta\":{"
+                + "\"unit\":11 " + release_date + "\","
+                + "\"unit_id\":11 " + release_date + "\","
+                + "\"app_name\":\"" + app + "\""
+                + "}"
+                + "}";
+        JOB_Api_Call("Location - POST new Busines Unit", "POST",
+                BaseAPI + "/location", Auth, BODY, 200, ParentTest, "no_jira");
+        if (json != null) {
+            try {
+                New_DropOff_LocationID = json.getString("id");
+            } catch (Exception ex) {
+            }
+        }
+
+        // Test Scenario 2: Positive flow to update Business Unit under newly created group/site
+        BODY = "{"
+                + "\"id\":\"" + New_SiteID + "\","
+                + "\"locations\":["
+                + "{"
+                + "\"id\":\"" + New_Business_UnitID + "\""
+                + "}"
+                + "]"
+                + "}";
+        JOB_Api_Call("Location - PATCH/Update Busines Unit under newly create group/site : " + New_SiteID + " ", "PATCH",
+                BaseAPI + "/location/group/" + New_SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+
+        // Test Scenario 3: Negative flow to Add new Business Unit without name
+        BODY = "{"
+                + "\"name\":\"\","
+                + "\"label\":{"
+                + "\"en\":\"This is API test to add Business Unit under  newly created group/site\""
+                + "},"
+                + "\"brands\":["
+                + "],"
+                + "\"address\":{"
+                + "\"state\":\"ON\","
+                + "\"zip\":\"M9V 2C3\","
+                + "\"country\":\"CA\","
+                + "\"address\":\"6 Pamela Ct\","
+                + "\"city\":\"Toronto\","
+                + "\"coordinates\":{"
+                + "\"latitude\":43.7435015,"
+                + "\"longitude\":-79.5924087"
+                + "}"
+                + "},"
+                + "\"latitude\":43.7435015,"
+                + "\"longitude\":-79.5924087,"
+                + "\"meta\":{"
+                + "\"unit\":11 " + release_date + "\","
+                + "\"unit_id\":11 " + release_date + "\","
+                + "\"app_name\":\"" + app + "\""
+                + "}"
+                + "}";
+        JOB_Api_Call("Location - POST negative flow to add new Busines Unit without name", "POST",
+                BaseAPI + "/location", Auth, BODY, 400, ParentTest, "no_jira");
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc="PUT/Update newly created Business Unit">
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc="Get Business unit by ID">
+        //</editor-fold>
     }
 }
