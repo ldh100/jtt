@@ -123,9 +123,9 @@ class locations extends API_GUI {
                 BaseAPI + "/location/sector/" + SectorID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
 
         if (env != "PR") {
-            groupAPIs();
-            locationAPIs();
-            brandAPIs();
+            //groupAPIs();
+            //locationAPIs();
+           // brandAPIs();
         }
 
     }
