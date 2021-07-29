@@ -76,7 +76,7 @@ class AP3_brand_config extends AP3_GUI {
     try{ 
         
 
-       
+       /*
         Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID +"/brand/company/" + CompanyID , ParentTest, "no_jira");
         
         Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent",ParentTest ,"no_jira"); 
@@ -722,7 +722,7 @@ class AP3_brand_config extends AP3_GUI {
                     }
 */                  
                     
-                  
+                  /*
        
                     break;
                     
@@ -760,9 +760,10 @@ class AP3_brand_config extends AP3_GUI {
         Thread.sleep(1000);
         //</editor-fold>  
 
-       
-       //Navigate_to_URL("Navigate to Site", url + "#/sites/"+appId+"/site/"+SiteID, ParentTest, "no_jira");
-            //if (FAIL) { return;}
+       */
+                  
+        Navigate_to_URL("Navigate to Site", url + "#/sites/"+appId+"/site/"+SiteID, ParentTest, "no_jira");
+        if (FAIL) { return;}
        
         selectStationClickAssignMenus();
         // AUT-294: Removing a category and re-adding it in brand configuration                                    
@@ -1263,7 +1264,7 @@ class AP3_brand_config extends AP3_GUI {
             selectStationClickAssignMenus();
             checkCategoryDisabled();
             
-            Open_Switch_to_2nd_Tab("Navigate to Local Menu", url + "#/menu/sector/"+SectorID+"/brand/company/"+CompanyID+"/brands/"+Brand_ID, ParentTest, "no_jira");
+            Navigate_to_URL("Navigate to Local Menu", url + "#/menu/sector/"+SectorID+"/brand/company/"+CompanyID+"/brands/"+Brand_ID, ParentTest, "no_jira");
             if (FAIL) { return;}
             Thread.sleep(5000);   
             checkCategoryDisabledInLocalMenu();
@@ -1717,7 +1718,7 @@ class AP3_brand_config extends AP3_GUI {
     public void selectStationClickAssignMenus(){
     try {
            
-        stationName="Add Station 907251547";
+        stationName="Add Station 907290928";
         Wait_For_Element_By_Path_Presence("Wait for brand name to load..", "xpath", "//td[contains(text(), '" + stationName + "')]", ParentTest, "no_jira");
         if (FAIL) {
             return;
@@ -1804,7 +1805,7 @@ class AP3_brand_config extends AP3_GUI {
             }
         
         Thread.sleep(1000);
-        Element_By_Path_Attribute("Get MenuName", "xpath","(.//div[@id='toc-assignMenus']//div[@class='v-select__selection v-select__selection--comma'])[4]" , "textContent", ParentTest, "no_jira");
+        Element_By_Path_Attribute("Get MenuName", "xpath","(.//div[@id='toc-assignMenus']//div[@class='v-select__selection v-select__selection--comma'])[3]" , "textContent", ParentTest, "no_jira");
         System.out.println("New Menu Set Enabled and added to Brand Config: " +t);
         System.out.println("Index 0 :"+ Menuset_EnabledList.get(0));        
         if((Menuset_EnabledList.get(0)).equals(t)){
@@ -1966,8 +1967,8 @@ class AP3_brand_config extends AP3_GUI {
     
     public void addingBrandMenuCategory(){
     try {
-        // <editor-fold defaultstate="collapsed" desc="AUT-294: Re-adding it in brand configuration AUT-294">
-        EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Re-adding it in brand configuration ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";                 
+        // <editor-fold defaultstate="collapsed" desc="AUT-294: Re-adding menu Category in brand configuration AUT-294">
+        EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Re-adding Re-adding menu Category in brand configuration after enabling==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";                 
         
         List_L0("Count of total Assigned Categories","xpath", "(.//div[@class='layout row wrap justify-end']//button[@class='v-btn v-btn--icon theme--light'])", ParentTest, "no_jira");
         //List_L0("Count of total Assigned Categories","xpath", "(.//div[@class='layout row wrap justify-end']//div[@class='v-select__selection v-select__selection--comma'])", ParentTest, "no_jira");
@@ -2061,7 +2062,7 @@ class AP3_brand_config extends AP3_GUI {
     public void addNewEnabledMenuCategory(){
     try {
         // <editor-fold defaultstate="collapsed" desc="AUT-300: Adding new enabled category in brand configuration AUT-300">
-        EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Re-adding it in brand configuration ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";                 
+        EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Adding new Enabled category in it in brand configuration ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";                 
         
         List_L0("Count of total Assigned Categories","xpath", "(.//div[@class='layout row wrap justify-end']//div[@class='v-select__selection v-select__selection--comma'])", ParentTest, "no_jira");
         //List_L0("Count of total Assigned Categories","xpath", "(.//div[@class='layout row wrap justify-end']//div[@class='v-select__selection v-select__selection--comma'])", ParentTest, "no_jira");
@@ -2070,7 +2071,7 @@ class AP3_brand_config extends AP3_GUI {
         }
         int countAssignedMenuCategories = L0.size();
               
-            Element_By_Path_Click("Click on Add Category", "xpath", "(//button[@class='ml-0 pl-0 v-btn v-btn--flat theme--light'])[2]", ParentTest, "no_jira");
+            Element_By_Path_Click("Click on Add Category", "xpath", "(//button[@class='ml-0 pl-0 v-btn v-btn--flat theme--light'])[1]", ParentTest, "no_jira");
             if (FAIL) {
                 return;
             }
@@ -2082,7 +2083,7 @@ class AP3_brand_config extends AP3_GUI {
             Element_By_Path_Attribute("Get newly enabled Catagory Name", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']//div[@class='v-list__tile__title']", "textContent",ParentTest, "no_jira"); 
             if (FAIL) { return;}
             
-            Element_By_Path_Click("Re Adding Category to the brand", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']//div[@class='v-list__tile__title']", ParentTest, "no_jira");
+            Element_By_Path_Click("Adding new enabled Category to the brand", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']//div[@class='v-list__tile__title']", ParentTest, "no_jira");
             if (FAIL) {
                 return;
 
