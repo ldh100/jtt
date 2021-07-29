@@ -15,7 +15,7 @@ class payment extends API_GUI{
     }
     protected void run() {                                                           
         Auth = "Bearer " + Mobile_User_TKN;
-        JOB_Api_Call("Mobile User Payment", "GET", 
+        JOB_Api_Call("Mobile User Payment Method", "GET", 
             BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             try {

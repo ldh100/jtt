@@ -16,6 +16,11 @@ import org.openqa.selenium.interactions.Actions;
  *
  * @author dhruv.seth
  */
+
+        //Pre-requisite for this scope
+        //1- In Starbucks global menu for Menuset Lunch: Enabled but Keep Menu Category Hot Food Lunch disabled
+        //2- For Breakfast Menu Set: keep both Beverages Breakfast and Hot Food Breakfast Categories Enabled but Keep BreakFast Menuset Disabled when starting the test
+            
         //AUT-296: Validating only those menus that exist in the global menu are available to be assigned in the brand configuration
         //AUT-293: Removing and re-adding the global menus in the brand configuration
         //AUT-294: Removing a category and re-adding it in brand configuration
@@ -46,6 +51,7 @@ class AP3_brand_config extends AP3_GUI {
         SectorID = a.SectorID;
         GL_MENU = a.GL_MENU;
         CompanyID=a.CompanyID;
+        appId = a.appId;
 
         AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
@@ -61,13 +67,17 @@ class AP3_brand_config extends AP3_GUI {
     private String Categories="";
     private List<String> Categories_DisabledList= new ArrayList<>(); 
     private List<String> Categories_EnabledList= new ArrayList<>();
-
+    private List<String> Menuset_DisabledList= new ArrayList<>(); 
+    private List<String> Menuset_EnabledList= new ArrayList<>();
+    private List<String> MenuNamesGlobal=new ArrayList<>();
+    private String Brand_ID = "";
     private boolean flag = false;
     protected void run() {
     try{ 
         
-        
-        selectingGlobalMenu();
+
+       
+        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID +"/brand/company/" + CompanyID , ParentTest, "no_jira");
         
         Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent",ParentTest ,"no_jira"); 
             if (FAIL) { return;} 
@@ -85,35 +95,38 @@ class AP3_brand_config extends AP3_GUI {
             if (FAIL || L0.isEmpty()) { 
                 return;
             }            
-            List<String> MenuNamesGlobal=new ArrayList<>();
+            //List<String> MenuNamesGlobal=new ArrayList<>();
             if(L0.size() == L2.size())
             for (int i = 0; i < L0.size(); i++) {                
                 Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent", ParentTest, "no_jira");            
                     if (FAIL) { return;}
                 Element_Attribute("Menu (Index " + i + ") ID", L2.get(i), "menu-id", ParentTest, "no_jira");
                 if (FAIL) { return;}
-                 //String myList= L0.get(i).getAttribute("textContent").trim(); 
-                 //System.out.println(myList);
-                  MenuNamesGlobal.add(L0.get(i).getAttribute("textContent").trim());                  
-                  System.out.println("ds: "+MenuNamesGlobal.get(i));                                                      
+                //String myList= L0.get(i).getAttribute("textContent").trim(); 
+                //System.out.println(myList);
+                MenuNamesGlobal.add(L0.get(i).getAttribute("textContent").trim());                  
+                System.out.println("MNG: "+MenuNamesGlobal.get(i));                                                      
                                         
             Thread.sleep(500);
-            }
             
             
-            Element_Attribute("Menu setName", L0.get(0), "textContent",ParentTest, "no_jira");                       
-             MenuSetName= t.trim();
-            System.out.println("ds: "+MenuSetName);
-            Element_Attribute("Menu ID", L2.get(0), "menu-id", ParentTest, "no_jira");
+            
+            Element_Attribute("Menu setName", L0.get(i), "textContent",ParentTest, "no_jira");                       
+             MenuSetName= t.trim();             
+            System.out.println("MSN: "+MenuSetName);
+            Element_Attribute("Menu ID", L2.get(i), "menu-id", ParentTest, "no_jira");
              Menu_ID=t.trim();
              
-             System.out.println("ds: "+Menu_ID);
+            System.out.println("MSN_ID: "+Menu_ID);
         //Brand_config starts here
-           
-        
-           Call_GlobalMenuSet_API( Menu_ID, MenuSetName);
-       
             
+            //Call_GlobalMenuSet_API_Enabled_Disabled(Menu_ID, MenuSetName);
+        
+            Call_GlobalMenuSet_API( Menu_ID, MenuSetName);
+            Thread.sleep(1000);
+            }
+            
+        
         
         
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");
@@ -196,7 +209,7 @@ class AP3_brand_config extends AP3_GUI {
 
         
         // <editor-fold defaultstate="collapsed" desc="Add Station">    
-//Thread.sleep(500); 
+        //Thread.sleep(500); 
         Element_By_Path_Click("Button 'Add Station' click", "xpath", "//*[contains(text(), 'ADD STATION')]", ParentTest, "no_jira");
         if (FAIL) {
             return;
@@ -586,76 +599,7 @@ class AP3_brand_config extends AP3_GUI {
                     List_L3("Menu 'Button' Count", "xpath", "//button[@class='ml-0 pl-0 v-btn v-btn--flat theme--light']", ParentTest, "no_jira");
                     if (FAIL) {
                         return;
-                    }
-                    
-                    /*
-                    Element_Click("Click 'IMPORT MENU'", L3.get(1), ParentTest, "no_jira");    // index 1 > 2nd button - Import
-                    if (FAIL) {
-                        return;
-                    }
-                    Wait_For_Element_By_Path_Presence("Wait for Import options...", "css", "[aria-label='Location Stations']", ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
-//                    Element_By_Path_Click("Open Location Station drop-down", "css", "[aria-label='Location Stations']", ParentTest, "no_jira");    
-                    Element_Child_List_L1("Inport Menu > drop-down(s) count", L2.get(i), "xpath", ".//div[@class='v-input__icon v-input__icon--append']", ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
-                    Element_Click("Open 'Location Station' drop-down", L1.get(0), ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
-                    Element_E1_Find("Find 'Location Station' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
-                    Element_Child_List_L1("Location Station Count", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
-                    if (L1.size() > 0) {
-                        Element_Attribute("Last Location Station", L1.get(L1.size() - 1), "textContent", ParentTest, "no_jira");
-                        if (FAIL) {
-                            return;
-                        }
-                        Element_Click("Select Location Station", L1.get(L1.size() - 1), ParentTest, "no_jira");
-                        if (FAIL) {
-                            return;
-                        }
-                        Thread.sleep(500);
-//                            Element_By_Path_Click("Open Menus drop-down", "css", "[aria-label='Menus']", ParentTest, "no_jira");    
-                        Element_Child_List_L1("Inport Menu > drop-down(s) count", L2.get(i), "xpath", ".//div[@class='v-input__icon v-input__icon--append']", ParentTest, "no_jira");
-                        if (FAIL) {
-                            return;
-                        }
-                        Element_Click("Open 'Menus' drop-down", L1.get(1), ParentTest, "no_jira");
-                        if (FAIL) {
-                            return;
-                        }
-                        Element_E1_Find("Find 'Menus' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
-                        if (FAIL) {
-                            return;
-                        }
-                        Element_Child_List_L1("Menus Count", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
-                        if (FAIL) {
-                            return;
-                        }
-                        Element_Attribute("Last Menu", L1.get(L1.size() - 1), "textContent", ParentTest, "no_jira");
-                        if (FAIL) {
-                            return;
-                        }
-                        Element_Click("Select Last Menu", L1.get(L1.size() - 1), ParentTest, "no_jira");
-                        if (FAIL) {
-                            return;
-                        }
-                        Thread.sleep(500);
-                    } else {
-
-                        _f++;
-                        F += "Step: " + _t + " > " + "Add Station > Assign Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
-                        EX += " - " + "\t" + "Add Station > Assign Menus" + "\t" + "Import" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-                    }
-                    */
-                    
-        
+                    }                                       
         
 //                  Element_By_Path_Click("Open Menus drop-down", "css", "[aria-label='Menus']", ParentTest, "no_jira");                            
                     Element_Click("ADD MENU Click", L3.get(0), ParentTest, "no_jira");    // index 0 > 1st button - Add
@@ -681,33 +625,26 @@ class AP3_brand_config extends AP3_GUI {
                     if (FAIL) {
                         return;
                     }
-                    if (L1.size() > 0) {
-                        Element_Attribute("Select Last Menu Name", L1.get(1), "textContent", ParentTest, "no_jira");
+                    if (L1.size() > 0) {                         
+                        Element_Attribute("Select Last Menu Name", L1.get(L1.size() - 1), "textContent", ParentTest, "no_jira");
                         if (FAIL) {
                             return;
                         }
-                        Element_Click("Select Last Menu Name", L1.get(1), ParentTest, "no_jira");
+                        Element_Click("Select Last Menu Name", L1.get(L1.size() - 1), ParentTest, "no_jira");
                         if (FAIL) {
                             return;
                         }
-                    }
-                        
+                    }                                                
+                    
                     if (L1.size() > 0) {                        
                     for( int k=0; k<L1.size();k++){                                                   
                        Element_Attribute("Get Menu Name", L1.get(k), "textContent", ParentTest, "no_jira");
                        MenuName=t.trim();
-                        //System.out.println(MenuName);
-                        //System.out.println("ds: "+all_elements_text.get(m));
-                        //List_TR_TDs("Check Station list to matches with selected station from 'AP3' ", L1.get(i), ParentTest, "no_jira"); 
-                        //if (FAIL) {
-                           // return;
-                       // }
-                        //System.out.println("ds: "+all_elements_text.get(m));
-                       
-                        
+                   
                         if(MenuNamesGlobal.contains(MenuName)){
+                        //if(L1.get(k).getAttribute("textContent").contains(MenuNamesGlobal.get(k))){    
                         _t++;
-                         _p++; EX += _t + "\t" + "Test Passed" + "\t" + "MenuName" + "\t" + "Menus match with Global Menu" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                         _p++; EX += _t + "\t" + "Test Passed: Menus match with Global Menu" + "\t" + MenuName + "\t" + MenuNamesGlobal.get(k) + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
                         //print pass as only Menus that exist in global menu are available to be assigned in brand configuration                  
                         } else {
                         _t++;
@@ -748,6 +685,7 @@ class AP3_brand_config extends AP3_GUI {
                         EX += " - " + "\t" + "Add Station > Assign Menus" + "\t" + "Add" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
                     }
                     
+                    
                     /*
                     List_L2("List of Category that are enabled","xpath", "(.//div[@id='toc-assignMenus']//div[@class='v-select__selection v-select__selection--comma'])", ParentTest, "no_jira");
                     if (FAIL) {
@@ -782,7 +720,10 @@ class AP3_brand_config extends AP3_GUI {
                         F += "Step: " + _t + " > " + "Add Station > Assing Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
                         EX += " - " + "\t" + "Add Station > Assign Menus" + "\t" + "Add" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
                     }
-*/
+*/                  
+                    
+                  
+       
                     break;
                     
                 case "Integration Type":
@@ -815,17 +756,523 @@ class AP3_brand_config extends AP3_GUI {
         Wait_For_All_Elements_InVisibility("Wait for 'Create Brand'", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
         if (FAIL) {
             return;
-        }    
-                                   
- // AUT-294: Removing a category and re-adding it in brand configuration                                    
-      removeGlobalMenuCategory();
-    
+        }
+        Thread.sleep(1000);
+        //</editor-fold>  
+
+       
+       //Navigate_to_URL("Navigate to Site", url + "#/sites/"+appId+"/site/"+SiteID, ParentTest, "no_jira");
+            //if (FAIL) { return;}
+       
+        selectStationClickAssignMenus();
+        // AUT-294: Removing a category and re-adding it in brand configuration                                    
+        removeBrandMenuCategory();
+        selectStationClickAssignMenus();
+        addingBrandMenuCategory();
+        
+        
+        //AUT-297: Scenario 1: Upon making the menu disabled in the global menu, the menu will be disabled in the brand config
+        //Disabling a Menuset:
+                
+        //
+        Open_Switch_to_2nd_Tab("Navigate to Global Menu", url + "#/menu/sector/" + SectorID +"/brand/company/" + CompanyID , ParentTest, "no_jira");
+                
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Wait for Menu List", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
+            if (FAIL) { return;} 
+        //
+        
+        Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+        Thread.sleep(500);  
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}   
+        Thread.sleep(500);
+        Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent", ParentTest,"no_jira"); 
+            if (FAIL) { return;}
+          
+          
+          Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+            
+        List_L2("Published Menus ID Count", "css", "[menu-id]", ParentTest, "no_jira");   
+        List_L0("Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");             
+            if (FAIL) { return;} 
+                if(L0.size() == L2.size())
+                for (int i = 0; i < L0.size(); i++) {
+                    Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent", ParentTest, "no_jira");
+                    Element_Attribute("Menu (Index " + i + ") ID", L2.get(i), "menu-id", ParentTest, "no_jira");   
+                } 
+                
+             Element_Attribute("Menu setName", L0.get(0), "textContent", ParentTest, "no_jira");      
+                MenuSetName= t.trim();
+                
+            System.out.println("Global MenuSet: "+MenuSetName);
+            
+            Element_Attribute("Global MenuSet ID: ", L2.get(0), "menu-id", ParentTest, "no_jira");
+             Menu_ID=t;
+             System.out.println("Global MenuSet ID:"+Menu_ID);
+            
+            Element_Child_List_L2("Find Added Menu Set - dots", L0.get(0), "tagName", "button", ParentTest, "no_jira"); 
+                if (FAIL) { return;}
+            Thread.sleep(500);
+            Element_Click("Added Menu Set 'dots' Click", L2.get(1), ParentTest, "no_jira");
+                if (FAIL) { return;}   
+            Thread.sleep(1000);
+            Wait_For_Element_By_Path_Presence("Wait for Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira"); 
+                    if (FAIL) { return;}                
+            Element_E1_Find("Find Menu Edit Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+            Element_Child_List_L1("Menu Edit Options list Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                                     
+                if (FAIL) { return;}
+                T_Index = -1;
+                for (int i = 0; i < L1.size(); i++) {
+                    Element_Text("Menu Edit Option (index " + i + ")", L1.get(i), ParentTest,"no_jira");                      
+                    if(t.contains("Disable")){ T_Index = i; }                    
+                } 
+            Element_By_Path_Attribute("Check if Export is disabled", "xpath", ".//div[@class='v-list--disabled']", "disabled", ParentTest, "no_jira");
+                if (FAIL) { return;}   
+             
+            Element_Click("Click Category 'Disable'", L1.get(T_Index), ParentTest, "no_jira");
+                if (FAIL) { return;}    
+              
+            Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]",ParentTest, "no_jira");        
+                if (FAIL) { return;} 
+                            Thread.sleep(500);
+            Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]",ParentTest, "no_jira"); 
+                if (FAIL) { return;}                       
+                        Thread.sleep(500);
+            Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]",ParentTest, "no_jira"); 
+                if (FAIL) { return;}   
+            Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]", ParentTest, "no_jira"); 
+                if (FAIL) { return;}
+            Element_By_Path_Attribute("Menu-d", "css", "[menu-id]", "textContent", ParentTest,"no_jira"); 
+            if (FAIL) { return;}    
+                
+            Thread.sleep(3000); 
+            Refresh("Refresh", ParentTest, "no_jira");
+            
+            Call_GlobalMenuSet_API( Menu_ID, MenuSetName);
+            Thread.sleep(1000);
+            
+            Close_Current_Tab_switch_To_1st("Switch Tab to Station LIst", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            Refresh("Refresh page", ParentTest, "no_jira");
+            
+            Thread.sleep(1000);
+            selectStationClickAssignMenus();
+            checkGlobalMenuDisabled();
+            
+        //AUT-298: Scenario 1: If a menu that is already assigned in the brand config is re-enabled- Upon re-enabling the menu will be active again in the brand configuration. 
+        //Enabling a Global Menu Set
+                    
+            //
+            Open_Switch_to_2nd_Tab("Navigate to Global Menu", url + "#/menu/sector/" + SectorID +"/brand/company/" + CompanyID , ParentTest, "no_jira");
+
+            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+            Thread.sleep(500);
+            Wait_For_Element_By_Path_Presence("Wait for Menu List", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
+                if (FAIL) { return;} 
+            //
+        
+            Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+            Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+            Thread.sleep(500);  
+            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]",ParentTest, "no_jira"); 
+            if (FAIL) { return;}   
+             Thread.sleep(500);
+            Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent", ParentTest,"no_jira"); 
+            if (FAIL) { return;}
+            
+            Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent",ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+          
+            List_L2("Published Menus ID Count", "css", "[menu-id]",ParentTest, "no_jira");  
+            List_L0("Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']",ParentTest, "no_jira");             
+            if (FAIL) { return;} 
+            if(L0.size() == L2.size())
+                for (int i = 0; i < L0.size(); i++) {
+                    Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent",ParentTest, "no_jira");
+                    Element_Attribute("Menu (Index " + i + ") ID", L2.get(i), "menu-id",ParentTest, "no_jira");   
+                } 
+                                                 
+             Element_Attribute("Menu setName", L0.get(0), "textContent",ParentTest, "no_jira");      
+                 
+             MenuSetName= t.trim();
+             System.out.println("MenuSet before Enabled: " +MenuSetName);
+             
+             int j= MenuSetName.indexOf(" ");
+                MenuSetName=MenuSetName.substring(0, j);
+                        //MenuSetName.substring(0, MenuSetNamedisabled.indexOf(' '));
+                
+            System.out.println("Menuset Name after Trim and removing (disabled): "+ MenuSetName);
+            
+             Element_Attribute("Menu ID", L2.get(0), "menu-id",ParentTest, "no_jira");
+             Menu_ID=t;
+             System.out.println("ds:"+Menu_ID);            
+            
+            
+            Element_Child_List_L2("Find Added Menu Set - dots", L0.get(0), "tagName", "button",ParentTest, "no_jira"); 
+                if (FAIL) { return;}
+            Thread.sleep(500);
+            Element_Click("Added Menu Set 'dots' Click", L2.get(1),ParentTest, "no_jira");
+                if (FAIL) { return;}   
+            Thread.sleep(1000);
+            Wait_For_Element_By_Path_Presence("Wait for Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",ParentTest, "no_jira"); 
+                    if (FAIL) { return;}                
+            Element_E1_Find("Find Menu Edit Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",ParentTest, "no_jira");
+                if (FAIL) { return;}
+            Element_Child_List_L1("Menu Edit Options list Count", e1,"xpath", ".//div[@class='v-list__tile__title']",ParentTest, "no_jira");                                     
+                if (FAIL) { return;}
+                T_Index = -1;
+                for (int i = 0; i < L1.size(); i++) {
+                    Element_Text("Menu Edit Option (index " + i + ")", L1.get(i),ParentTest,"no_jira");                      
+                    if(t.contains("Enable")){ T_Index = i; }                    
+                } 
+            Element_By_Path_Attribute("Check if Export is disabled", "xpath", ".//div[@class='v-list--disabled']", "disabled", ParentTest, "no_jira");
+                if (FAIL) { return;}   
+             
+            Element_Click("Click Category 'Enable'", L1.get(T_Index),ParentTest, "no_jira");
+                if (FAIL) { return;}    
+              
+            Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]",ParentTest, "no_jira");        
+                if (FAIL) { return;}                            
+            Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]",ParentTest, "no_jira"); 
+                if (FAIL) { return;}                       
+                       
+            Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", ParentTest,"no_jira"); 
+                if (FAIL) { return;}
+                 Thread.sleep(500);
+            Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]",ParentTest, "no_jira"); 
+                if (FAIL) { return;}  
+            Element_By_Path_Attribute("Menu-d", "css", "[menu-id]", "textContent",ParentTest, "no_jira"); 
+            if (FAIL) { return;}  
+            Thread.sleep(3000); 
+            Refresh("Refresh",ParentTest, "no_jira");
+            
+            Call_GlobalMenuSet_API( Menu_ID, MenuSetName);
+            Thread.sleep(1000);
+            
+            Close_Current_Tab_switch_To_1st("Switch Tab to Station LIst", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            Refresh("Refresh page", ParentTest, "no_jira");
+            Thread.sleep(1000);
+            
+            selectStationClickAssignMenus();
+            checkGlobalMenuEnabled();
+            
+        
+                    
+         //AUT-298 Scenario 2: Scenario 2; if a menu is not assigned in the brand config yet- Upon re-enabling the menuset the users will be able to add the menu in the brand config                 
+        
+         //Enabling a new / (Breakfast) Global Menu Set
+                  
+            //
+            Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID +"/brand/company/" + CompanyID , ParentTest, "no_jira");
+            //Open_Switch_to_2nd_Tab("Navigate to Global Menu", url + "#/menu/sector/" + SectorID +"/brand/company/" + CompanyID , ParentTest, "no_jira");
+
+            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+            Thread.sleep(500);
+            Wait_For_Element_By_Path_Presence("Wait for Menu List", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
+                if (FAIL) { return;} 
+            //
+            
+            Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+            Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+            Thread.sleep(500);  
+            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]",ParentTest, "no_jira"); 
+            if (FAIL) { return;}   
+             Thread.sleep(500);
+            Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent", ParentTest,"no_jira"); 
+            if (FAIL) { return;}
+            
+            Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent",ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+          
+            List_L2("Published Menus ID Count", "css", "[menu-id]",ParentTest, "no_jira");  
+            List_L0("Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']",ParentTest, "no_jira");             
+            if (FAIL) { return;} 
+            if(L0.size() == L2.size())
+                for (int i = 0; i < L0.size(); i++) {
+                    Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent",ParentTest, "no_jira");
+                    Element_Attribute("Menu (Index " + i + ") ID", L2.get(i), "menu-id",ParentTest, "no_jira");   
+                } 
+                                                 
+             Element_Attribute("Menu setName", L0.get(1), "textContent",ParentTest, "no_jira");      
+                 
+             MenuSetName= t.trim();
+             System.out.println("MenuSet before Enabled: " +MenuSetName);
+             
+//to delete int only
+               j= MenuSetName.indexOf(" ");
+                MenuSetName=MenuSetName.substring(0, j);
+                        //MenuSetName.substring(0, MenuSetNamedisabled.indexOf(' '));
+                
+            System.out.println("Menuset Name after Trim and removing (disabled): "+ MenuSetName);
+            
+             Element_Attribute("Menu ID", L2.get(1), "menu-id",ParentTest, "no_jira");
+             Menu_ID=t;
+             System.out.println("ds:"+Menu_ID);            
+            
+            
+            Element_Child_List_L2("Find Added Menu Set - dots", L0.get(1), "tagName", "button",ParentTest, "no_jira"); 
+                if (FAIL) { return;}
+            Thread.sleep(500);
+            Element_Click("Added Menu Set 'dots' Click", L2.get(1),ParentTest, "no_jira");
+                if (FAIL) { return;}   
+            Thread.sleep(1000);
+            Wait_For_Element_By_Path_Presence("Wait for Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",ParentTest, "no_jira"); 
+                    if (FAIL) { return;}                
+            Element_E1_Find("Find Menu Edit Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",ParentTest, "no_jira");
+                if (FAIL) { return;}
+            Element_Child_List_L1("Menu Edit Options list Count", e1,"xpath", ".//div[@class='v-list__tile__title']",ParentTest, "no_jira");                                     
+                if (FAIL) { return;}
+                T_Index = -1;
+                for (int i = 0; i < L1.size(); i++) {
+                    Element_Text("Menu Edit Option (index " + i + ")", L1.get(i),ParentTest,"no_jira");                      
+                    if(t.contains("Enable")){ T_Index = i; }                    
+                } 
+            Element_By_Path_Attribute("Check if Export is disabled", "xpath", ".//div[@class='v-list--disabled']", "disabled", ParentTest, "no_jira");
+                if (FAIL) { return;}   
+             
+            Element_Click("Click Category 'Enable'", L1.get(T_Index),ParentTest, "no_jira");
+                if (FAIL) { return;}    
+              
+            Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]",ParentTest, "no_jira");        
+                if (FAIL) { return;}                            
+            Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]",ParentTest, "no_jira"); 
+                if (FAIL) { return;}                       
+                       
+            Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", ParentTest,"no_jira"); 
+                if (FAIL) { return;}
+                 Thread.sleep(500);
+            Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]",ParentTest, "no_jira"); 
+                if (FAIL) { return;}  
+            Element_By_Path_Attribute("Menu-d", "css", "[menu-id]", "textContent",ParentTest, "no_jira"); 
+            if (FAIL) { return;}  
+            Thread.sleep(3000); 
+            Refresh("Refresh",ParentTest, "no_jira");
+            
+            Call_GlobalMenuSet_API( Menu_ID, MenuSetName);
+            Thread.sleep(1000);
+            
+            //Close_Current_Tab_switch_To_1st("Switch Tab to Station LIst", ParentTest, "no_jira");
+            //if (FAIL) { return;}
+            //Refresh("Refresh page", ParentTest, "no_jira");
+            //Thread.sleep(1000);
+         
+                 
+            Navigate_to_URL("Navigate to Site", url + "#/sites/"+appId+"/site/"+SiteID, ParentTest, "no_jira");
+            if (FAIL) { return;} 
+            selectStationClickAssignMenus();
+            verifyUserCanAddMenuAfterEnabled();
+//        
+
+//AUT- 300: Upon re-enabling the category, it will be available in the brand config
+            //
+            Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID +"/brand/company/" + CompanyID , ParentTest, "no_jira");
+
+            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+            Thread.sleep(500);
+            Wait_For_Element_By_Path_Presence("Wait for Menu List", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
+                if (FAIL) { return;} 
+            //
+            
+            Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+            Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+            Thread.sleep(500);  
+            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]",ParentTest, "no_jira"); 
+            if (FAIL) { return;}   
+             Thread.sleep(500);
+            Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent", ParentTest,"no_jira"); 
+            if (FAIL) { return;}
+            
+            Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent",ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+          
+            List_L2("Published Menus ID Count", "css", "[menu-id]",ParentTest, "no_jira");  
+            List_L0("Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']",ParentTest, "no_jira");             
+            if (FAIL) { return;} 
+            if(L0.size() == L2.size())
+                for (int i = 0; i < L0.size(); i++) {
+                    Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent",ParentTest, "no_jira");
+                    Element_Attribute("Menu (Index " + i + ") ID", L2.get(i), "menu-id",ParentTest, "no_jira");   
+                } 
+                                                 
+             Element_Attribute("Menu setName", L0.get(1), "textContent",ParentTest, "no_jira");      
+                 
+             MenuSetName= t.trim();
+             System.out.println("MenuSet before Enabled: " +MenuSetName);                          
+           
+             Element_Attribute("Menu ID", L2.get(1), "menu-id",ParentTest, "no_jira");
+             Menu_ID=t;
+             System.out.println("ds:"+Menu_ID);  
+             
+            Element_Click("Click Breakfast Menuset ", L0.get(1), ParentTest, "no_jira");
+            if (FAIL) {
+            return;
+            }
+            
+            Element_By_Path_Click("Click the 3 dots for the first Category", "xpath", "(//div[@class='flex xs12 list-item no-icon']//button[@type='button'])[1]", ParentTest, "no_jira");
+            
+            
+            Thread.sleep(1000);
+            Wait_For_Element_By_Path_Presence("Wait for Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",ParentTest, "no_jira"); 
+                    if (FAIL) { return;}                
+            Element_E1_Find("Find Category Edit Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",ParentTest, "no_jira");
+                if (FAIL) { return;}
+            Element_Child_List_L1("Category Edit Options list Count", e1,"xpath", ".//div[@class='v-list__tile__title']",ParentTest, "no_jira");                                     
+                if (FAIL) { return;}
+                T_Index = -1;
+                for (int i = 0; i < L1.size(); i++) {
+                    Element_Text("Menu Edit Option (index " + i + ")", L1.get(i),ParentTest,"no_jira");                      
+                    if(t.contains("Enable")){ T_Index = i; }                    
+                }               
+             
+            Element_Click("Click Category 'Enable'", L1.get(T_Index),ParentTest, "no_jira");
+                if (FAIL) { return;}
+            
+            //div[@class='v-menu__content theme--light menuable__content__active']//div[@role='list']
+            Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]",ParentTest, "no_jira");        
+                if (FAIL) { return;}                            
+            Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]",ParentTest, "no_jira"); 
+                if (FAIL) { return;}                       
+                       
+            Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", ParentTest,"no_jira"); 
+                if (FAIL) { return;}
+                 Thread.sleep(500);
+            Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]",ParentTest, "no_jira"); 
+                if (FAIL) { return;}  
+            Element_By_Path_Attribute("Menu-d", "css", "[menu-id]", "textContent",ParentTest, "no_jira"); 
+            if (FAIL) { return;}  
+            Thread.sleep(3000); 
+            Refresh("Refresh",ParentTest, "no_jira");
+            
+            Navigate_to_URL("Navigate to Site", url + "#/sites/"+appId+"/site/"+SiteID, ParentTest, "no_jira");
+            if (FAIL) { return;} 
+            selectStationClickAssignMenus();
+            addNewEnabledMenuCategory();
+
+
+//AUT- 299: If a category is disabled in the global menu, it will removed from the brand config
+            //
+            Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID +"/brand/company/" + CompanyID , ParentTest, "no_jira");
+
+            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+            Thread.sleep(500);
+            Wait_For_Element_By_Path_Presence("Wait for Menu List", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
+                if (FAIL) { return;} 
+            //
+            
+            Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+            Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+            Thread.sleep(500);  
+            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]",ParentTest, "no_jira"); 
+            if (FAIL) { return;}   
+             Thread.sleep(500);
+            Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent", ParentTest,"no_jira"); 
+            if (FAIL) { return;}
+            
+            Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent",ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+          
+            List_L2("Published Menus ID Count", "css", "[menu-id]",ParentTest, "no_jira");  
+            List_L0("Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']",ParentTest, "no_jira");             
+            if (FAIL) { return;} 
+            if(L0.size() == L2.size())
+                for (int i = 0; i < L0.size(); i++) {
+                    Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent",ParentTest, "no_jira");
+                    Element_Attribute("Menu (Index " + i + ") ID", L2.get(i), "menu-id",ParentTest, "no_jira");   
+                } 
+                                                 
+             Element_Attribute("Menu setName", L0.get(1), "textContent",ParentTest, "no_jira");      
+                 
+             MenuSetName= t.trim();
+             System.out.println("MenuSet before Enabled: " +MenuSetName);                          
+           
+             Element_Attribute("Menu ID", L2.get(1), "menu-id",ParentTest, "no_jira");
+             Menu_ID=t;
+             System.out.println("ds:"+Menu_ID);  
+             
+            Element_Click("Click Breakfast Menuset ", L0.get(1), ParentTest, "no_jira");
+            if (FAIL) {
+            return;
+            }
+            
+            Element_By_Path_Click("Click the 3 dots for the first Category", "xpath", "//div[@class='flex xs12 list-item no-icon active']//button[@type='button']", ParentTest, "no_jira");
+            
+            
+            Thread.sleep(1000);
+            Wait_For_Element_By_Path_Presence("Wait for Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",ParentTest, "no_jira"); 
+                    if (FAIL) { return;}                
+            Element_E1_Find("Find Category Edit Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",ParentTest, "no_jira");
+                if (FAIL) { return;}
+            Element_Child_List_L1("Category Edit Options list Count", e1,"xpath", ".//div[@class='v-list__tile__title']",ParentTest, "no_jira");                                     
+                if (FAIL) { return;}
+                T_Index = -1;
+                for (int i = 0; i < L1.size(); i++) {
+                    Element_Text("Menu Edit Option (index " + i + ")", L1.get(i),ParentTest,"no_jira");                      
+                    if(t.contains("Disable")){ T_Index = i; }                    
+                }               
+             
+            Element_Click("Click Category 'Disable'", L1.get(T_Index),ParentTest, "no_jira");
+                if (FAIL) { return;}
+            
+            //div[@class='v-menu__content theme--light menuable__content__active']//div[@role='list']
+            Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]",ParentTest, "no_jira");        
+                if (FAIL) { return;}                            
+            Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]",ParentTest, "no_jira"); 
+                if (FAIL) { return;}                       
+                       
+            Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", ParentTest,"no_jira"); 
+                if (FAIL) { return;}
+                 Thread.sleep(500);
+            Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]",ParentTest, "no_jira"); 
+                if (FAIL) { return;}  
+            Element_By_Path_Attribute("Menu-d", "css", "[menu-id]", "textContent",ParentTest, "no_jira"); 
+            if (FAIL) { return;}  
+            Thread.sleep(3000); 
+            Refresh("Refresh",ParentTest, "no_jira");
+            
+            Call_GlobalMenuSet_API( Menu_ID, MenuSetName);
+            Thread.sleep(1000);
+            
+            //Close_Current_Tab_switch_To_1st("Switch Tab to Station LIst", ParentTest, "no_jira");
+            //if (FAIL) { return;}
+            //Refresh("Refresh page", ParentTest, "no_jira");
+            
+            Thread.sleep(1000);                
+            Navigate_to_URL("Navigate to Site", url + "#/sites/"+appId+"/site/"+SiteID, ParentTest, "no_jira");
+            if (FAIL) { return;} 
+            selectStationClickAssignMenus();
+            checkCategoryDisabled();
+            
+            Open_Switch_to_2nd_Tab("Navigate to Local Menu", url + "#/menu/sector/"+SectorID+"/brand/company/"+CompanyID+"/brands/"+Brand_ID, ParentTest, "no_jira");
+            if (FAIL) { return;}
+            Thread.sleep(5000);   
+            checkCategoryDisabledInLocalMenu();
         
     } catch (Exception ex){}   // =============================================             
     }//run time  
 
        
-    private void Call_Company_API(String MenuName) {
+    public void Call_Company_API(String MenuName) {
     try {    
 
         Call_API("Call Global menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID, true, ParentTest, "no_jira" );        
@@ -861,7 +1308,9 @@ class AP3_brand_config extends AP3_GUI {
             }
         } catch (Exception ex){}   // =============================================  
     } 
-    //</editor-fold>      
+    
+
+    
        
     public void selectingGlobalMenu() {
     try {    
@@ -912,20 +1361,23 @@ class AP3_brand_config extends AP3_GUI {
             if (FAIL) { return;}
         Element_By_Path_Attribute("Page SubTitle", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "textContent", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Find_Text("Find 'Search...' text", "Search Menus", true,ParentTest, "no_jira");
+        Find_Text("Find 'Search...' text", "Search Global Menus", true,ParentTest, "no_jira");
             if (FAIL) { return;}
 
-        Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira");
+        Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Global Menus')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, ParentTest, "no_jira");
+        Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Global Menus']", GL_MENU, false, ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
-        
+               
+
+        Element_Click("Click Menu " + GL_MENU, L2.get(T_Index), ParentTest, "no_jira");
+            if (FAIL) { return;}  
  
         
-        Element_By_Path_Click("Search Menus Click", "xpath", "//div[normalize-space()='View GLobal Menus']", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Thread.sleep(500);
+        //Element_By_Path_Click("View Global Menus Click", "xpath", "//div[normalize-space()='View GLobal Menus']", ParentTest, "no_jira");
+            //if (FAIL) { return;}
+        //Thread.sleep(500);
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
@@ -953,7 +1405,34 @@ class AP3_brand_config extends AP3_GUI {
          //List<String> Categories_EnabledList= new ArrayList<>();
         JSONObject json = new JSONObject(API_Response_Body);
         if(json.getString("id").equals(Menu_ID)){          
-                System.out.println(json.getString("id"));  
+                System.out.println(json.getString("id"));
+        
+        //if(json.getString("id").equals(Menu_ID.trim())){                           
+            //if(json.has("id")){                                     
+                System.out.println(json.getJSONObject("label").getString("en"));
+                if(json.getJSONObject("label").getString("en").equalsIgnoreCase(MenuSetName)){
+                    if(json.getJSONObject("is").getBoolean("disabled")) {
+                        Menuset_DisabledList.add( json.getJSONObject("label").getString("en"));
+                        System.out.println(  "Menuset Disabled: "+ json.getJSONObject("label").getString("en"));
+                         _t++;
+                         _p++; EX += _t + "\t" + "Test Passed" + "\t" + ( json.getJSONObject("label").getString("en")) + "\t" + "MenuSet is disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                        //print pass menu set is disabled
+                    } else if(!json.getJSONObject("is").getBoolean("disabled")) {
+                        Menuset_EnabledList.add(( json.getJSONObject("label").getString("en")));
+                        System.out.println(  "Menuset Enabled: "+ json.getJSONObject("label").getString("en"));
+                         _t++;
+                         _p++; EX += _t + "\t" + "Test Passed" + "\t" + ( json.getJSONObject("label").getString("en")) + "\t" + "MenuSet is enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                        //print pass menu set is enabled
+                    } else {
+                        _t++;
+                        _f++; EX += _t + "\t" + "Test Failed" + "\t" + ( json.getJSONObject("label").getString("en")) + "\t" + "Found opposite values" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        //print fail if found contradicting values
+                    }                                              
+                }                                      
+           // }
+        //}        
+                
+                
         JSONArray groups = new JSONArray();
         groups = json.getJSONArray("groups");        
         JSONObject Category= new JSONObject();
@@ -968,101 +1447,95 @@ class AP3_brand_config extends AP3_GUI {
                     if(Category.getJSONObject("is").getBoolean("disabled")) {
                                              
                         Categories_DisabledList.add( Category.getJSONObject("label").getString("en")); //+ " " +Category.getString("id")) ;
-                        
+                        System.out.println(  "Categories Disabled: "+ Category.getJSONObject("label").getString("en"));
                        
                          _t++;
                          _p++; EX += _t + "\t" + "Test Passed" + "\t" + Categories_DisabledList.get(i) + "\t" + "Category is Disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
                         //print pass menu set is disabled
                         
-                    } 
-                    /*else if (!(Category.getJSONObject("is").getBoolean("disabled"))) { 
+                    }else if (!(Category.getJSONObject("is").getBoolean("disabled"))) { 
                         
                         Categories_EnabledList.add( Category.getJSONObject("label").getString("en")); // + " " +Category.getString("id"));
-                         
+                          System.out.println(  "Categories enabled: "+ Category.getJSONObject("label").getString("en"));
                         //Categories_Enabled=( Category.getJSONObject("label").getString("en") + " " +Category.getString("id")) ;
                          _t++;
                          _p++; EX += _t + "\t" + "Test Passed" + "\t" + Categories_EnabledList.get(i) + "\t" + "Category is Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
                         //print pass menu set is enabled                                            
-                     }
-                    */
-                    else if (!(Category.getJSONObject("is").getBoolean("disabled"))) { 
-                        
-                        Categories_EnabledList.add( Category.getJSONObject("label").getString("en")); // + " " +Category.getString("id"));
-                         
-                        //Categories_Enabled=( Category.getJSONObject("label").getString("en") + " " +Category.getString("id")) ;
-                         _t++;
-                         _p++; EX += _t + "\t" + "Test Passed" + "\t" + Categories_EnabledList.get(i) + "\t" + "Category is Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                        //print pass menu set is enabled                                            
-                     }
-                    
-                    else {
+                     }else {
                         _t++;
                         _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found opposite values" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                         //print fail if found contradicting values
                     }                   
                 }                                      
             }
+        /*
         for(int i=0; i<Categories_EnabledList.size(); i++){
             
-        System.out.println(Categories_EnabledList.get(i));        
+        System.out.println("Enabled: " + Categories_EnabledList.get(i));        
         }
         for(int i=0; i<Categories_DisabledList.size(); i++){
             
-        System.out.println(Categories_DisabledList.get(i));        
+        System.out.println("Disabled: " + Categories_DisabledList.get(i));        
         }
-        
+        */
         } 
         Thread.sleep(1000);
 
     } catch (Exception ex){}   // =============================================  
     } 
-   
-     // <editor-fold defaultstate="collapsed" desc="AUT-294: Removing a category and re-adding it in brand configuration AUT-294">
-    public void removeGlobalMenuCategory(){
-    try {
-        EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Removing a category and re-adding it in brand configuration ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+    
+    
+    public  void Call_GlobalMenuSet_API_Enabled_Disabled(String Menu_ID, String MenuSetName) {
+    try {    
 
-        
-        Wait_For_Element_By_Path_Presence("Wait for brand name to load..", "xpath", "//td[contains(text(), '" + stationName + "')]", ParentTest, "no_jira");
-        if (FAIL) {
+        Call_API("Call GlobalMenuSet API", "Bearer " + AP3_TKN, BaseAPI + "/menu/" + Menu_ID, true, ParentTest, "no_jira" );
+        if(t.startsWith("{")){
+            API_Response_Body = t;               
+        }else{
+            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/"+CompanyID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/"+CompanyID , false, ParentTest.createNode("API Responce Error"));
             return;
-        }
- 
-        Element_By_Path_Click("Brand Name Click", "xpath", "//td[contains(text(), '" + stationName + "')]", ParentTest, "no_jira");
-        if (FAIL) {
-            return;
-        }
-        Thread.sleep(500);
-
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
-        if (FAIL) {
-            return;
-        }
-
-        Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", ParentTest, "no_jira");
-        if (FAIL) {
-            return;
-        }
-
-        Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", ParentTest, "no_jira");
-        if (FAIL) {
-            return;
-        }
-        Thread.sleep(500);
-
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
-        if (FAIL) {
-            return;
-        }
-
-        // Assign and remove GLobal menu category
-        Element_By_Path_Click("Click of Assign menus from left corner", "xpath", "//div[6]//div[contains(@class, 'SelectedLeft')]", ParentTest, "no_jira");
-        if (FAIL) {
-            return;
-        }
+        }               
+        JSONObject json = new JSONObject(API_Response_Body);
+        JSONArray groups = json.getJSONArray("groups");
+        if(json.getString("id").equals(Menu_ID.trim())){                           
+            if(json.has("id")){                                     
+                System.out.println(json.getJSONObject("label").getString("en"));
+                if(json.getJSONObject("label").getString("en").equalsIgnoreCase(MenuSetName)){
+                    if(json.getJSONObject("is").getBoolean("disabled")) {
+                        Menuset_DisabledList.add( json.getJSONObject("label").getString("en"));
+                        System.out.println(  "Menuset Disabled: "+ json.getJSONObject("label").getString("en"));
+                         _t++;
+                         _p++; EX += _t + "\t" + "Test Passed" + "\t" + ( json.getJSONObject("label").getString("en")) + "\t" + "MenuSet is disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                        //print pass menu set is disabled
+                    } else if(!json.getJSONObject("is").getBoolean("disabled")) {
+                        Menuset_EnabledList.add(( json.getJSONObject("label").getString("en")));
+                        System.out.println(  "Menuset Enabled: "+ json.getJSONObject("label").getString("en"));
+                         _t++;
+                         _p++; EX += _t + "\t" + "Test Passed" + "\t" + ( json.getJSONObject("label").getString("en")) + "\t" + "MenuSet is enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                        //print pass menu set is enabled
+                    } else {
+                        _t++;
+                        _f++; EX += _t + "\t" + "Test Failed" + "\t" + ( json.getJSONObject("label").getString("en")) + "\t" + "Found opposite values" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        //print fail if found contradicting values
+                    }                                              
+                }                                      
+            }
+        }   
         Thread.sleep(1000);
-       
-        List_L0("Count of total Assigned Categories","xpath", "(.//div[@class='layout row wrap justify-end']//div[@class='v-select__selection v-select__selection--comma'])", ParentTest, "no_jira");
+
+    } catch (Exception ex){}   // =============================================  
+    }
+   
+     
+    public void removeBrandMenuCategory(){
+    try {
+        // <editor-fold defaultstate="collapsed" desc="AUT-294: Removing a category and re-adding it in brand configuration AUT-294">
+        EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Removing a category in brand configuration ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";                 
+        
+        List_L0("Count of total Assigned Categories","xpath", "(.//div[@class='layout row wrap justify-end']//button[@class='v-btn v-btn--icon theme--light'])", ParentTest, "no_jira");
+        //List_L0("Count of total Assigned Categories","xpath", "(.//div[@class='layout row wrap justify-end']//div[@class='v-select__selection v-select__selection--comma'])", ParentTest, "no_jira");
         if (FAIL) {
             return;
         }
@@ -1151,6 +1624,534 @@ class AP3_brand_config extends AP3_GUI {
     } 
     // </editor-fold> 
 
+    public void checkGlobalMenuDisabled(){
+    try {
+        EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Upon making the menu disabled in the global menu, check if the menu is disabled in the brand config ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+      
+        List_L0("Count total assigned menus", "xpath", "//div[@class='layout row nowrap']//div[@class='flex xs10']//div[@class='v-select__selection v-select__selection--comma v-select__selection--disabled']", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }        
+        
+        // //div[@class='layout row nowrap']//div[@class='flex xs10']//div[@class='v-select__selection v-select__selection--comma v-select__selection--disabled']        
+        System.out.println(L0.size());
+        if(L0.size()>0){
+        for ( int k = 0; k < L0.size(); k++){                 
+            Element_Attribute("Disabled Menu (Index " + k + ") Name", L0.get(k), "textContent", ParentTest, "no_jira");                                                    
+            if(L0.get(k).getAttribute("textContent").equals(Menuset_DisabledList.get(k))){
+                _t++;
+                _p++; EX += _t + "\t" + "Test Passed: Menuset is disabled" + "\t" + L0.get(k).getAttribute("textContent") + "\t" + Menuset_DisabledList.get(k) + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                    //print pass as only Menus Categories that exist in global menu are available to be assigned in brand configuration                  
+                } else {
+                _t++;
+                _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Menus is not disabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    //print fail if found incorrect menus categories that are'nt from global menu
+                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L0.get(k).getAttribute("textContent"), true, ParentTest.createNode("Menus don't match Global Menu"));                        
+                }
+                    
+                System.out.println(L0.get(k).getAttribute("textContent") +" : " + (Menuset_DisabledList.get(k)));                                                                               
+                    //Thread.sleep(500);
+                }
+
+            Wait_For_Element_By_Path_Presence("Wait for breadscrumbs to be visible ", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+
+            Element_By_Path_Click("Click navigate back to Station Index page", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+            
+            }
+        } catch (Exception ex){}   // =============================================  
+    } 
+    // </editor-fold>
     
+    //This block checks that once the Menu is enabled in the Global Menu then the same menu should also be enabled in the Brand Config
+    public void checkGlobalMenuEnabled(){
+    try {
+        EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Upon making the menu Enabled in the global menu, check if the menu is enabled in the brand config ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                       
+        List_L0("Count total assigned menus", "xpath", "//div[@class='layout row nowrap']//div[@class='flex xs10']//div[@class='v-select__selection v-select__selection--comma']", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }        
+        
+        // //div[@class='layout row nowrap']//div[@class='flex xs10']//div[@class='v-select__selection v-select__selection--comma v-select__selection--disabled']        
+        System.out.println(L0.size());
+        if(L0.size()>0){
+        for ( int k = 0; k < L0.size(); k++){                 
+            Element_Attribute("Enabled Menu (Index " + k + ") Name", L0.get(k), "textContent", ParentTest, "no_jira");                                                    
+            if(L0.get(k).getAttribute("textContent").equals(Menuset_EnabledList.get(k))){
+                _t++;
+                _p++; EX += _t + "\t" + "Test Passed: Menuset is Enabled" + "\t" + L0.get(k).getAttribute("textContent") + "\t" + Menuset_EnabledList.get(k) + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                    //print pass as only Menus Categories that exist in global menu are available to be assigned in brand configuration                  
+                } else {
+                _t++;
+                _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Menus is not disabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    //print fail if found incorrect menus categories that are'nt from global menu
+                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L0.get(k).getAttribute("textContent"), true, ParentTest.createNode("Menus don't match Global Menu"));                        
+                }
+                    
+                System.out.println(L0.get(k).getAttribute("textContent") +" : " + (Menuset_EnabledList.get(k)));                                                                               
+                    //Thread.sleep(500);
+                }
+
+            Wait_For_Element_By_Path_Presence("Wait for breadscrumbs to be visible ", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+
+            Element_By_Path_Click("Click navigate back to Station Index page", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+            
+            }
+        } catch (Exception ex){}   // =============================================  
+    } 
+    // </editor-fold>
+    
+    //This method Selects the Station created and clicks on Assign Menus from the right side panel
+    public void selectStationClickAssignMenus(){
+    try {
+           
+        stationName="Add Station 907251547";
+        Wait_For_Element_By_Path_Presence("Wait for brand name to load..", "xpath", "//td[contains(text(), '" + stationName + "')]", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+ 
+        Element_By_Path_Click("Brand Name Click", "xpath", "//td[contains(text(), '" + stationName + "')]", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(500);
+
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+
+        Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        
+        Page_URL("New Station page URL", ParentTest, "no_jira"); 
+            if(t.contains("/")){
+            Brand_ID = t.substring(t.indexOf("brand/")+ 6,t.lastIndexOf("/"));  
+            
+            
+            System.out.println("The new Station Brand Id is: " +Brand_ID);
+            //String[] brand= Brand_ID.split("\\/");                        
+            }
+
+        Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(500);
+
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+
+        Thread.sleep(500);
+        
+        Element_By_Path_Click("Click of Assign menus from left corner", "xpath", "//div[6]//div[contains(@class, 'SelectedLeft')]", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(1000);
+        
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        
+        } catch (Exception ex){}   // =============================================  
+    } 
+    
+    //AUT-298: Upon re-enabling the menus in the global menu, it will be available in the brand configuration
+    //Scenario 2; if a menu is not assigned in the brand config yet- Upon re-enabling the users will be able to add the menu in the brand config
+    public void verifyUserCanAddMenuAfterEnabled(){
+    try {
+        EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Upon making the menu Enabled in the global menu, check if the menu can be addede in the brand config ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+                       
+        List_L0("Count total assigned menus", "xpath", "//div[@class='layout row nowrap']//div[@class='flex xs10']//div[@class='v-select__selection v-select__selection--comma']", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }        
+        
+        // //div[@class='layout row nowrap']//div[@class='flex xs10']//div[@class='v-select__selection v-select__selection--comma v-select__selection--disabled'] 
+        
+        ////div[@Class='flex xs10']//div[@class='v-input v-text-field v-select v-input--is-label-active v-input--is-dirty v-input--is-focused theme--light primary--text']//div[@class='v-select__selection v-select__selection--comma']
+        Element_By_Path_Click("Click Add Menu", "xpath", "(//button[@class='ml-0 pl-0 v-btn v-btn--flat theme--light'])[2]", ParentTest, "no_jira");
+        if (FAIL) {
+                return;
+            }
+        Element_By_Path_Click("Click Menu Name Field", "xpath", "//div[@class='v-input v-text-field v-select theme--light']//i[@class='v-icon mdi mdi-menu-down theme--light']", ParentTest, "no_jira");
+        if (FAIL) {
+                return;
+            }
+        
+        Element_By_Path_Click("Select Breakfast", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']//div[@class='v-list__tile__title']", ParentTest, "no_jira");
+        if (FAIL) {
+                return;
+            }
+        
+        Thread.sleep(1000);
+        Element_By_Path_Attribute("Get MenuName", "xpath","(.//div[@id='toc-assignMenus']//div[@class='v-select__selection v-select__selection--comma'])[4]" , "textContent", ParentTest, "no_jira");
+        System.out.println("New Menu Set Enabled and added to Brand Config: " +t);
+        System.out.println("Index 0 :"+ Menuset_EnabledList.get(0));        
+        if((Menuset_EnabledList.get(0)).equals(t)){
+                _t++;
+                _p++; EX += _t + "\t" + "Test Passed: Menuset is Enabled and added to Brand" + "\t" + t + "\t" + Menuset_EnabledList.get(0) + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                    //print pass as only Menus Categories that exist in global menu are available to be assigned in brand configuration                  
+                } else {
+                _t++;
+                _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Menus is not available" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    //print fail if found incorrect menus categories that are'nt from global menu
+                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuName  > " + t, true, ParentTest.createNode("Menus not enabled and available to add"));                        
+                }
+                    
+                System.out.println((t) +" : " + (Menuset_EnabledList.get(0)));                                                                               
+                    Thread.sleep(1000);
+            
+            Element_By_Path_Click("Click 'Save Changes Brand'", "xpath", "//*[contains(text(), 'Save Changes')]", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+
+            }
+            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+
+//            Wait_For_Element_By_Path_Presence("Wait for breadscrumbs to be visible ", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
+//            if (FAIL) {
+//                return;
+//            }
+
+            Element_By_Path_Click("Click navigate back to Station Index page", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+    
+         }catch (Exception ex){}   // =============================================  
+    } 
+    // </editor-fold>
+    
+    //AUT-299: If a category is disabled in the global menu, it will removed from the brand config
+    //Des: Upon making the category disabled in the Global Menu, the category will be removed from the brand config
+
+    public void checkCategoryDisabled(){
+    try {
+        EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Upon making the Category disabled in the global menu, check if the Category is disabled in the brand config ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+      
+        List_L0("Count of total Assigned Categories","xpath", "(.//div[@class='layout row wrap justify-end']//div[@class='v-select__selection v-select__selection--comma'])", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }      
+        
+        // //div[@class='layout row nowrap']//div[@class='flex xs10']//div[@class='v-select__selection v-select__selection--comma v-select__selection--disabled']        
+        System.out.println(L0.size());
+        
+        if (L0.isEmpty()) {
+            Element_By_Path_Click("Click 'Save Changes Brand'", "xpath", "//*[contains(text(), 'Save Changes')]", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+
+            }
+             _w++;
+              EX += " - " + "\t" + " === ^ No assigned menu cateogries found...-> case : Assign Menus" + "\t" + " ===== " + "\t" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        }else{
+        //for ( int k = 0; k < L0.size(); k++){                 
+            Element_Attribute("Enabled Menu Category for Breakfast(Index " + 2 + ") Name", L0.get(2), "textContent", ParentTest, "no_jira");
+            System.out.println(L0.get(2).getAttribute("textContent"));
+            System.out.println("Test " +Categories_EnabledList.get(1));
+            if(L0.get(2).getAttribute("textContent").equals(Categories_EnabledList.get(1))){
+                _t++;
+                _p++; EX += _t + "\t" + "Test Passed: MenuCategory in Brand Config matches with Global Menu Category that is enabled " + "\t" + L0.get(2).getAttribute("textContent") + "\t" + Categories_EnabledList.get(1) + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                    //print pass as only Menus Categories that exist in global menu are available to be assigned in brand configuration                  
+                } else {
+                _t++;
+                _f++; EX += _t + "\t" + "Test Failed" + "\t" + L0.get(1).getAttribute("textContent") + "\t" + "Menu Category is not disabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    //print fail if found incorrect menus categories that are'nt from global menu
+                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L0.get(2).getAttribute("textContent"), true, ParentTest.createNode("Menu Cateogry was not removed from Brand Config"));                        
+                }
+                    
+                System.out.println(L0.get(2).getAttribute("textContent") +" : " + (Categories_DisabledList.get(1)));                                                                               
+                    //Thread.sleep(500);
+                
+
+            Wait_For_Element_By_Path_Presence("Wait for breadscrumbs to be visible ", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+
+            Element_By_Path_Click("Click navigate back to Station Index page", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+            
+            }
+        EX += "\n - " + "\t" + " ===End====" + "\t" + " ===== " + "\t" + " == Upon making the Category disabled in the global menu, check if the Category is disabled in the brand config ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        } catch (Exception ex){}   // =============================================  
+    } 
+    // </editor-fold>   
+    
+    //This block/method checks if a category is disabled in the global Menu then the category will not be available in the local menu
+    public void checkCategoryDisabledInLocalMenu(){
+    try {
+        // <editor-fold defaultstate="collapsed" desc="Check Local Menu After Global Changes">  
+        EX += " - " + "\t" + " === " + "\t" + " ===== Check Local Menu After Global disabling Category in Global" + "\t" + " == Check Local Menu After Global disabling Category in Global >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+             
+        
+        Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+        Thread.sleep(500);  
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]",ParentTest, "no_jira"); 
+        if (FAIL) { return;}   
+        Thread.sleep(500);
+            
+        List_L0("Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']",ParentTest, "no_jira");             
+            if (FAIL) { return;} 
+            if(L0.size() > 0){
+                for (int i = 0; i < L0.size(); i++) {
+                    Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent",ParentTest, "no_jira");
+                    
+                if(L0.get(i).getAttribute("textContent").contains(Menuset_EnabledList.get(i))){
+                _t++;
+                _p++; EX += _t + "\t" + "Test Passed: Only the Global Menu set that is enabled is present in Local Brand Menu" + "\t" + L2.get(i).getAttribute("textContent") + "\t" + Categories_EnabledList.get(i) + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                    //print pass as only Menus Categories that exist in global menu are available to be assigned in brand configuration                  
+                } else {
+                _t++;
+                _f++; EX += _t + "\t" + "Test Failed" + "\t" + L0.get(i).getAttribute("textContent") + "\t" + "Menu Category is not correct" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    //print fail if found incorrect menus categories that are'nt from global menu
+                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuSet  > " + L0.get(i).getAttribute("textContent"), true, ParentTest.createNode("Menu Cateogry was not removed from Brand Config"));                        
+                }                    
+                } 
+            EX += " - " + "\t" + " === " + "\t" + " ===== Category disabled in Global and Verify in Local" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";    
+                }
+            
+        Element_Click("Click Lunch Menuset ", L0.get(0), ParentTest, "no_jira");
+            if (FAIL) {
+            return;
+            }
+        List_L2("MenusCategories Count", "xpath", "//div/form[@class='v-form']/div[@class='flex']/div[2]//span[@class='listspan']",ParentTest, "no_jira");
+                ////div[@class='flex xs12 list-item no-icon active']//div[@class='layout align-center']//div[@class='Body-2-Selected-On-Surface-Medium-Emphasis-Left']    
+         if (FAIL) { return;} 
+        if(L2.size()>0)
+                for (int i = 0; i < L2.size(); i++) {
+                    Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent",ParentTest, "no_jira");
+
+        if(L2.get(i).getAttribute("textContent").contains(Categories_EnabledList.get(i))){
+                _t++;
+                _p++; EX += _t + "\t" + "Test Passed: Only the Global Menu Category that is enabled is present in Local Brand Menu" + "\t" + L2.get(i).getAttribute("textContent") + "\t" + Categories_EnabledList.get(i) + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                    //print pass as only Menus Categories that exist in global menu are available to be assigned in brand configuration                  
+                } else {
+                _t++;
+                _f++; EX += _t + "\t" + "Test Failed" + "\t" + L2.get(i).getAttribute("textContent") + "\t" + "Menu Category is not correct" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    //print fail if found incorrect menus categories that are'nt from global menu
+                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L2.get(i).getAttribute("textContent"), true, ParentTest.createNode("Menu Cateogry was not removed from Brand Config"));                        
+                }                    
+                } 
+        EX += " - " + "\t" + " === " + "\t" + " ===== Category disabled in Global and Verify in Local" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        
+        } catch (Exception ex){}   // =============================================  
+    }
+    // </editor-fold>
+    
+    public void addingBrandMenuCategory(){
+    try {
+        // <editor-fold defaultstate="collapsed" desc="AUT-294: Re-adding it in brand configuration AUT-294">
+        EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Re-adding it in brand configuration ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";                 
+        
+        List_L0("Count of total Assigned Categories","xpath", "(.//div[@class='layout row wrap justify-end']//button[@class='v-btn v-btn--icon theme--light'])", ParentTest, "no_jira");
+        //List_L0("Count of total Assigned Categories","xpath", "(.//div[@class='layout row wrap justify-end']//div[@class='v-select__selection v-select__selection--comma'])", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        int countAssignedMenuCategories = L0.size();
+              
+            Element_By_Path_Click("Click on Add Category", "xpath", "(//button[@class='ml-0 pl-0 v-btn v-btn--flat theme--light'])[1]", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+            Element_By_Path_Click("Click 'Category Name Field to add Category'", "xpath", "//div[@class='v-input v-text-field v-select theme--light']//div[@class='v-select__selections']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+
+            }
+            Element_By_Path_Click("Re Adding Category to the brand", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']//div[@class='v-list__tile__title']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+
+            }
+            Element_By_Path_Click("Click 'Save Chnages Brand'", "xpath", "//*[contains(text(), 'Save Changes')]", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+
+            }
+                            
+        Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+
+        Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(500);
+
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+
+        Element_By_Path_Click("Click of Assign menus from left corner", "xpath", "//div[6]//div[contains(@class, 'SelectedLeft')]", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(1000);
+
+        List_L1("Count of total Assigned Categories","xpath", "(.//div[@class='layout row wrap justify-end']//div[@class='v-select__selection v-select__selection--comma'])", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        int countAssignedMenuCategoriesAfterAdding = L1.size();
+        if (countAssignedMenuCategoriesAfterAdding == (countAssignedMenuCategories + 1)) {
+
+            Wait_For_Element_By_Path_Presence("Wait for breadscrumbs to be visible ", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+
+            Element_By_Path_Click("Click navigate back to Station Index page", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+
+            _p++;
+            EX += _t + "\t" + "Re-adding it in brand configuration" + "\t" + "Original Count of Assigned menu categories= " + countAssignedMenuCategories + "\t" + "Count After Adding 1 menu category= " + countAssignedMenuCategoriesAfterAdding + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\"\t" + "no_jira" + "\r\n";
+
+        } else {
+
+            Wait_For_Element_By_Path_Presence("Wait for breadscrumbs to be visible ", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+
+            Element_By_Path_Click("Click navigate back to Station Index page", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+
+            _f++;
+            EX += _t + "\t" + "Re-adding it in brand configuration" + "\t" + "Original Assigned menus Category" + countAssignedMenuCategories + "\t" + "Count After Adding Category : " + countAssignedMenuCategoriesAfterAdding + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\"\t" + "no_jira" + "\r\n";
+        }                
+    } catch (Exception ex){}   // =============================================  
+    } 
+    // </editor-fold> 
+    
+    //AAUT-300: If the category is not assigned in the brand config, upon re-enabling users will be able to add the category
+    public void addNewEnabledMenuCategory(){
+    try {
+        // <editor-fold defaultstate="collapsed" desc="AUT-300: Adding new enabled category in brand configuration AUT-300">
+        EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Re-adding it in brand configuration ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";                 
+        
+        List_L0("Count of total Assigned Categories","xpath", "(.//div[@class='layout row wrap justify-end']//div[@class='v-select__selection v-select__selection--comma'])", ParentTest, "no_jira");
+        //List_L0("Count of total Assigned Categories","xpath", "(.//div[@class='layout row wrap justify-end']//div[@class='v-select__selection v-select__selection--comma'])", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        int countAssignedMenuCategories = L0.size();
+              
+            Element_By_Path_Click("Click on Add Category", "xpath", "(//button[@class='ml-0 pl-0 v-btn v-btn--flat theme--light'])[2]", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+            Element_By_Path_Click("Click 'Category Name Field to add Category'", "xpath", "//div[@class='v-input v-text-field v-select theme--light']//div[@class='v-select__selections']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+
+            }
+            Element_By_Path_Attribute("Get newly enabled Catagory Name", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']//div[@class='v-list__tile__title']", "textContent",ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+            
+            Element_By_Path_Click("Re Adding Category to the brand", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']//div[@class='v-list__tile__title']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+
+            }
+            Element_By_Path_Click("Click 'Save Chnages Brand'", "xpath", "//*[contains(text(), 'Save Changes')]", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+
+            }
+                            
+        Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+
+        Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(500);
+
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+
+        Element_By_Path_Click("Click of Assign menus from left corner", "xpath", "//div[6]//div[contains(@class, 'SelectedLeft')]", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        Thread.sleep(1000);
+
+        List_L1("Count of total Assigned Categories","xpath", "(.//div[@class='layout row wrap justify-end']//div[@class='v-select__selection v-select__selection--comma'])", ParentTest, "no_jira");
+        if (FAIL) {
+            return;
+        }
+        int countAssignedMenuCategoriesAfterAdding = L1.size();
+        if (countAssignedMenuCategoriesAfterAdding == (countAssignedMenuCategories + 1)) {
+
+            Wait_For_Element_By_Path_Presence("Wait for breadscrumbs to be visible ", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+
+            Element_By_Path_Click("Click navigate back to Station Index page", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+
+            _p++;
+            EX += _t + "\t" + "Re-adding it in brand configuration" + "\t" + "Original Count of Assigned menu categories= " + countAssignedMenuCategories + "\t" + "Count After Adding 1 menu category= " + countAssignedMenuCategoriesAfterAdding + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\"\t" + "no_jira" + "\r\n";
+
+        } else {
+
+            Wait_For_Element_By_Path_Presence("Wait for breadscrumbs to be visible ", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+
+            Element_By_Path_Click("Click navigate back to Station Index page", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
+            if (FAIL) {
+                return;
+            }
+
+            _f++;
+            EX += _t + "\t" + "Re-adding it in brand configuration" + "\t" + "Original Assigned menus Category" + countAssignedMenuCategories + "\t" + "Count After Adding Category : " + countAssignedMenuCategoriesAfterAdding + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\"\t" + "no_jira" + "\r\n";
+        }                
+    } catch (Exception ex){}   // =============================================  
+    } 
+    // </editor-fold>
 } 
 // End of AP3_Brand_New
