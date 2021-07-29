@@ -135,7 +135,7 @@ class AP3_mm_items extends AP3_GUI{
             if (FAIL) { return;} 
         Element_By_Path_Attribute("Page SubTitle", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "textContent", ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Find_Text("Fund 'Search...' text", "Search Menus", true, ParentTest, "no_jira");   
+        Find_Text("Fund 'Search...' text", "Search Global Menus", true, ParentTest, "no_jira");   
             if (FAIL) { return;}  
         EX += " - " + "\t" + " === MM Sector Selection " + "\t" + " ===== " + "\t" + " == Sector Selection End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold>           
@@ -191,11 +191,11 @@ class AP3_mm_items extends AP3_GUI{
             return;
         }  
         
-        Find_Text("Fund 'Search...' text", "Search Menus", true, ParentTest, "no_jira");   
+        Find_Text("Fund 'Search...' text", "Search Global Menus", true, ParentTest, "no_jira");   
             if (FAIL) { return;}             
-        Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira"); 
+        Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Global Menus')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, ParentTest, "no_jira");
+        Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Global Menus']", GL_MENU, false, ParentTest, "no_jira");
             if (FAIL) { return;} 
         Thread.sleep(500);
 
@@ -656,6 +656,8 @@ class AP3_mm_items extends AP3_GUI{
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for Global Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
         if (FAIL) { return;}
+        Element_By_Path_Click("Click on Menu set", "xpath","(//div[@class='layout align-center'])[1]", ParentTest, "no_jira");
+        if (FAIL) {return;}
         Element_By_Path_Text("Get First Category", "xpath", "(//*[@class='listspan'])[1]/div", ParentTest, "no_jira");
         if (FAIL) { return;}
         String Category = t;
