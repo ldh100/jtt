@@ -16,12 +16,13 @@ class AP3_user_permission extends AP3_GUI{
         app = a.app;
         appId = a.appId;
         SITE = a.SITE;
-        BRAND = a.BRAND;
+        BRAND = a.BRAND;	
         SiteID = a.SiteID;
         Location = a.Location;
         DH_MENU_ID = a.DH_MENU_ID;
         SECTOR = a.SECTOR;
         CompanyID = a.CompanyID;
+        GL_MENU = a.GL_MENU;
         
         AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
@@ -36,6 +37,8 @@ class AP3_user_permission extends AP3_GUI{
     // cdl.test.xtt+dy@gmail.com - DM All Optins
     // cdl.test.xtt+dn@gmail.com - DM No Optins
     
+    
+    //Pre-requisite for this scope: The Brand should not have any existing Station Closure added
     protected void run() { 
     try {    
         Navigate_to_URL("Navigate to", url, ParentTest, "no_jira");             
@@ -227,12 +230,12 @@ Thread.sleep(1000);
                         if (FAIL) { return; }    
                     Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]",  ParentTest, "no_jira"); 
                         if (FAIL) { return; }   
-                    Thread.sleep(500);    
+                    Thread.sleep(1000);    
                 }
             }   
             Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]",  ParentTest, "no_jira"); 
                 if (FAIL) { return;}  
-            Thread.sleep(500);   
+            Thread.sleep(1000);   
             Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]",  ParentTest, "no_jira");
                 if (FAIL) { return;} 
             Element_By_Path_Click("Click 'Station Name'", "css", "[aria-label='Station Name']",  ParentTest, "no_jira"); 
@@ -329,9 +332,9 @@ Thread.sleep(1000);
                     if (FAIL) { return;}
             Find_Text("Button 'Add Global Menu' text", "ADD GLOBAL MENU", true, ParentTest, "no_jira");   
                 if (FAIL) { return;} 
-            Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]",  ParentTest, "no_jira"); 
+            Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Global Menus')]",  ParentTest, "no_jira"); 
                 if (FAIL) { return;}
-            Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false,  ParentTest, "no_jira");
+            Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Global Menus']", GL_MENU, false,  ParentTest, "no_jira");
                 if (FAIL) { return;} 
 
 
