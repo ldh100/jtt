@@ -136,7 +136,7 @@ class AP3_menu_manager extends AP3_GUI{
             if (FAIL) { return;} 
         Element_By_Path_Attribute("Page SubTitle", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "textContent", ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Find_Text("Fund 'Search...' text", "Search Menus", true, ParentTest, "no_jira");   
+        Find_Text("Fund 'Search...' text", "Search Global Menus", true, ParentTest, "no_jira");   
             if (FAIL) { return;}  
         EX += " - " + "\t" + " === MM Sector Selection " + "\t" + " ===== " + "\t" + " == Sector Selection End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold>           
@@ -208,11 +208,11 @@ class AP3_menu_manager extends AP3_GUI{
                 }            
             }
         if(T_Index > -1){
-            Find_Text("Fund 'Search...' text", "Search Menus", true, ParentTest, "no_jira");   
+            Find_Text("Fund 'Search...' text", "Search Global Menus", true, ParentTest, "no_jira");   
                 if (FAIL) { return;}             
-            Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira"); 
+            Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Global Menus')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
-            Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, ParentTest, "no_jira");
+            Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Global Menus']", GL_MENU, false, ParentTest, "no_jira");
                 if (FAIL) { return;} 
             Thread.sleep(500);                
             Element_Click("Click Menu " + GL_MENU, L2.get(T_Index), ParentTest, "no_jira");
@@ -274,7 +274,7 @@ class AP3_menu_manager extends AP3_GUI{
             Thread.sleep(500); 
 
             Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
+//                if (FAIL) { return;}
             Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 if(t.equals("–")){
@@ -901,7 +901,7 @@ class AP3_menu_manager extends AP3_GUI{
                     if (FAIL) { return;}                
                 List_L2("Menus Count on the Page 2", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
                 if (FAIL) { return;}
-                T_Index = -1;
+                T_Index = 1;
                 for (int i = 0; i < L2.size(); i++) { 
                     Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", ParentTest, "no_jira"); 
 //                    if(t.trim().startsWith(GL_MENU)){
@@ -915,7 +915,7 @@ class AP3_menu_manager extends AP3_GUI{
                         if (FAIL) { return;}                
                     List_L2("Menus Count on the Page 3", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
                     if (FAIL) { return;}
-                    T_Index = -1;
+                    T_Index = 1;
                     for (int i = 0; i < L2.size(); i++) { 
                         Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", ParentTest, "no_jira"); 
 //                        if(t.trim().startsWith(GL_MENU)){

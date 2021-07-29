@@ -10,6 +10,7 @@ class AP3_user extends AP3_GUI{
     protected AP3_user(AP3_GUI a){
         ADMIN_ID = a.ADMIN_ID;
         ADMIN_PW = a.ADMIN_PW;
+        SITE = a.SITE;
         url = a.url;
         d1 = a.d1;
         loadTimeout = a.loadTimeout;

@@ -126,21 +126,24 @@ class AP3_export_menuset extends AP3_GUI{
             if (FAIL) { return;}
         Page_URL("Menu > " + SECTOR + " page URL", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Find_Text("Button 'Add Global Menu' text", "ADD GLOBAL MENU", true,ParentTest, "no_jira");
+        Find_Text("'Global Menu' text", "Global Menu", true,ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Attribute("Page SubTitle", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "textContent", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Find_Text("Find 'Search...' text", "Search Menus", true,ParentTest, "no_jira");
+        Find_Text("Find 'Search...' text", "Search Local Menus", true,ParentTest, "no_jira");
             if (FAIL) { return;}
 
-        Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira");
+//        Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Thread.sleep(500);
+//
+//        Element_By_Path_Click("Search Menus Click", "xpath", "//div[normalize-space()='View GLobal Menus']", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+        Element_By_Path_Click("Click  Global Menu", "xpath", "//span[@id='global-menu-label']", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Thread.sleep(500);
 
-        Element_By_Path_Click("Search Menus Click", "xpath", "//div[normalize-space()='View GLobal Menus']", ParentTest, "no_jira");
-            if (FAIL) { return;}
         Thread.sleep(500);
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -233,22 +236,24 @@ File_Find("Find Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_j
             if (FAIL) { return;}
         Page_URL("Menu > " + SECTOR + " page URL", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Find_Text("Button 'Add Global Menu' text", "ADD GLOBAL MENU", true,ParentTest, "no_jira");
-            if (FAIL) { return;}
+//        Find_Text("Button 'Add Global Menu' text", "ADD GLOBAL MENU", true,ParentTest, "no_jira");
+//            if (FAIL) { return;}
         Element_By_Path_Attribute("Page SubTitle", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "textContent", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Find_Text("Find 'Search...' text", "Search Menus", true,ParentTest, "no_jira");
+        Find_Text("Find 'Search...' text", "Search Local Menus", true,ParentTest, "no_jira");
             if (FAIL) { return;}
 
-        Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira");
+//        Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Thread.sleep(500);
+//
+//        Element_By_Path_Click("Search Menus Click", "xpath", "//div[normalize-space()='View GLobal Menus']", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Thread.sleep(500);
+         Element_By_Path_Click("Click  Global Menu", "xpath", "//span[@id='global-menu-label']", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Thread.sleep(500);
-
-        Element_By_Path_Click("Search Menus Click", "xpath", "//div[normalize-space()='View GLobal Menus']", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Thread.sleep(500);
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
@@ -689,23 +694,22 @@ File_Find("Find Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_j
             if (FAIL) { return;}
         Element_By_Path_Attribute("Page SubTitle", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "textContent", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Find_Text("Find 'Search...' text", "Search Menus", true,ParentTest, "no_jira");
+        Find_Text("Find 'Search...' text", "Search Global Menus", true,ParentTest, "no_jira");
             if (FAIL) { return;}
 
-        Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira");
+        Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Global Menus')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, ParentTest, "no_jira");
+        Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Global Menus']", GL_MENU, false, ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
-        
- 
-        
-        Element_By_Path_Click("Search Menus Click", "xpath", "//div[normalize-space()='View GLobal Menus']", ParentTest, "no_jira");
+        Element_By_Path_Click("Click searched Global menu", "xpath", "//span[@id='item-label-0']", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
+        Element_By_Path_Click("Click  Global Menu", "xpath", "//span[@id='global-menu-label']", ParentTest, "no_jira");
+            if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for Menu List", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
             if (FAIL) { return;}   
         
