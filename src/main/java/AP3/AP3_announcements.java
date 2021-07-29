@@ -33,8 +33,8 @@ class AP3_announcements extends AP3_GUI{
         Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,ParentTest, "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}        
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}        
         Page_URL("Announcements page URL", ParentTest, "no_jira"); 
             if (FAIL) { return;}  
             
@@ -155,8 +155,8 @@ class AP3_announcements extends AP3_GUI{
         Element_Click("Click 'All'", L1.get(T_Index), ParentTest, "no_jira");
             if (FAIL) { return;}               
         Thread.sleep(500);             
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
-            if (FAIL) { return;}   
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}   
         Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}   
             
@@ -188,8 +188,8 @@ class AP3_announcements extends AP3_GUI{
         Element_By_Path_Click("Button 'New Announcement' click", "css", "[type='submit']", ParentTest, "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);             
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}
         Thread.sleep(500);       
         Page_URL("New Announcement page URL", ParentTest, "no_jira");
             if (FAIL) { return;}    
@@ -273,7 +273,8 @@ class AP3_announcements extends AP3_GUI{
                         
                         Text_Found("Enable this announcement...", "Enable this announcement to see", ParentTest, "no_jira");
                         if(t.equals("Not Found")){  
-                            Element_By_Path_Click("Announcement Position Dropdown Open", "css", "[aria-label='Position']", ParentTest, "no_jira");
+                          Element_By_Path_Click("Announcement Position Dropdown Open", "xpath", "//input[@aria-label='Position']/parent::div/following-sibling::div//i", ParentTest, "no_jira");
+                            // Element_By_Path_Click("Announcement Position Dropdown Open", "css", "[aria-label='Position']", ParentTest, "no_jira");
                                 if (FAIL) { return; }
                                 Element_E1_Find("Find 'Position' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
                                     if (FAIL) { return;}                          
@@ -345,8 +346,8 @@ class AP3_announcements extends AP3_GUI{
         Element_By_Path_Click("Click 'Create Announcement'", "xpath", "//*[contains(text(), 'Create Announcement')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}  
         Thread.sleep(500);           
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}   
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}   
             
         // ============ All Announcements   
         To_Bottom("Move to page Bottom", ParentTest, "no_jira");
