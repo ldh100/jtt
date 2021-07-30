@@ -31,7 +31,7 @@ class menus extends API_GUI{
 //        }
 //        
         JOB_Api_Call("Brand > Timeslots > 1st Menu > /timeslots/menu/'MenuID'", "GET",
-            BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MENU_IDS.get(0) + "?nocache=1&extended=true", Auth, "", 200, ParentTest, "no_jira" );
+            BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MENU_IDS.get(MENU_IDS.size() - 1) + "?nocache=1&extended=true", Auth, "", 200, ParentTest, "no_jira" );
         if(json != null){
             TIMESLOTS_IDS = new ArrayList<>();
             try {
@@ -42,12 +42,11 @@ class menus extends API_GUI{
                         TIMESLOTS_IDS.add(timeslot.getNumber("id").toString());
                     }
                 } 
-                TimeSlotID = TIMESLOTS_IDS.get(TIMESLOTS_IDS.size() - 1); // Get LAST available timeslot ID 
             } catch (Exception ex) {}
         }
         
-        JOB_Api_Call("Brand 1st Local Menu " + " > /menu/'MenuID'", "GET", 
-            BaseAPI + "/menu/" + MENU_IDS.get(0), Auth, "", 200, ParentTest, "no_jira");  
+        JOB_Api_Call("Brand Last Local Menu " + " > /menu/'MenuID'", "GET", 
+            BaseAPI + "/menu/" + MENU_IDS.get(MENU_IDS.size() -1), Auth, "", 200, ParentTest, "no_jira");  
         if(json != null){
             CATEGORIES_IDS = new ArrayList<>();
             ITEMS_IDS = new ArrayList<>();
@@ -60,8 +59,7 @@ class menus extends API_GUI{
                         CATEGORIES_IDS.add(g.getString("id"));
                     }
                 }
-                Category_ID = CATEGORIES_IDS.get(0);  
-                JSONObject g = groups.getJSONObject(0);
+                JSONObject g = groups.getJSONObject(groups.length() - 1);
                 if (g.has("items")) {
                     JSONArray items = g.getJSONArray("items");
                     for (int i = 0; i < items.length(); i++) {
@@ -69,7 +67,6 @@ class menus extends API_GUI{
                         ITEMS_IDS.add(item.getString("id"));
                     }                    
                 }
-                Item_ID = ITEMS_IDS.get(0);
             } catch (Exception ex) {
                 String AAAAA = ex.getMessage();
             }
