@@ -479,11 +479,7 @@ class AP3_site extends AP3_GUI{
         *   test delivery drop-off locations in dev only
         *   AUT-1066  
         */    
-        if (env.equals("DE")) {
-            
-            JavascriptExecutor jsEx = (JavascriptExecutor)d1;
-            Object accessTokenFromLocalStorage = jsEx.executeScript("return localStorage.getItem(\"access_token\")");
-            
+        if (env.equals("DE")) {            
             EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";        
             //get delivery destinations from API 
             Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
