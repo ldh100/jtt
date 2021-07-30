@@ -127,9 +127,9 @@ class locations extends API_GUI {
         if (env != "PR") {
             //groupAPIs();
             //locationAPIs();
-            // brandAPIs();
-            sectorAPIs();
-            companyAPIs();
+            //brandAPIs();
+            //sectorAPIs();
+            //companyAPIs();
         }
 
     }
@@ -943,7 +943,7 @@ class locations extends API_GUI {
         //<editor-fold defaultstate="collapsed" desc="POST  New Sector/Group">
         // Test Scenario 1: Positive flow to post new Sector/group
         BODY = "{"
-                + "\"name\":\"This is API Test for Group/CA\""
+                + "\"name\":\"This is API Test for Group" + RELEASE_DATE_SECONDS + "/CA\""
                 + "}";
         JOB_Api_Call("Location - POST New Sector/Group", "POST", BaseAPI + "/location/sector", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
@@ -964,7 +964,7 @@ class locations extends API_GUI {
         // Test Scenario 1: Positive flow to Update/Patch Newly created Sector/Group
         BODY = "{"
                 + "\"id\":\"" + New_SecotorID + "\","
-                + "\"name\":\"This is API Test for update Group/CA\","
+                + "\"name\":\"This is API Test for Group" + RELEASE_DATE_SECONDS + "/CA\","
                 + "\"country\":\"CA\""
                 + "}";
         JOB_Api_Call("Location - PATCH update Sector/Group", "PATCH", BaseAPI + "/location/sector/" + New_SecotorID, Auth, BODY, 200, ParentTest, "no_jira");
@@ -991,7 +991,7 @@ class locations extends API_GUI {
         // Test Scenario 1: Positive flow to post new Company/Global Menu
         BODY = "{"
                 + "\"sector\":\"" + New_SecotorID + "\","
-                + "\"name\":\"This is API test for Add New Global Menu Brand\","
+                + "\"name\":\"This is API test for Add New Global Menu Brand" + RELEASE_DATE_SECONDS + "\","
                 + "\"is\":{"
                 + "\"global_images_enabled\":false"
                 + "},"
@@ -1031,18 +1031,7 @@ class locations extends API_GUI {
                 + "}"
                 + "}";
         JOB_Api_Call("Location - POST negative flow to add Company/Global Menu with empty name", "POST", BaseAPI + "/location/company", Auth, BODY, 400, ParentTest, "no_jira");
-        // Test Scenario 4: Negative flow to post new Company/Global Menu without valid JDE_category
-        BODY = "{"
-                + "\"sector\":\"" + New_SecotorID + "\","
-                + "\"name\":\"This is API test for Add New Global Menu Brand without valid JDE_category\","
-                + "\"is\":{"
-                + "\"global_images_enabled\":false"
-                + "},"
-                + "\"meta\":{"
-                + "\"jde_category\":\"\""
-                + "}"
-                + "}";
-        JOB_Api_Call("Location - POST negative flow to add Company/Global Menu without valid JDE_category", "POST", BaseAPI + "/location/company", Auth, BODY, 400, ParentTest, "no_jira");
+
         //</editor-fold>
         //<editor-fold defaultstate="collapsed" desc="PUT/Update  Newly created Company/Global Menu">
         // Test Scenario 1: Positive flow to Update/Patch Newly created Company/Global Menu
