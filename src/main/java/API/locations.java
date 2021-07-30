@@ -27,6 +27,7 @@ class locations extends API_GUI {
     private String New_BrandID = "";
     private String New_Business_UnitID = "";
     private String brandBodyResponse = "";
+    private String New_SecotorID = "";
     private Date release_date = new DateTime(new Date()).plusHours(4).plusMinutes(1).toDate();
     private String RELEASE_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(release_date);
     private String RELEASE_DATE_SECONDS = new SimpleDateFormat("SSS").format(release_date);
@@ -125,7 +126,7 @@ class locations extends API_GUI {
         if (env != "PR") {
             //groupAPIs();
             //locationAPIs();
-           // brandAPIs();
+            // brandAPIs();
         }
 
     }
@@ -952,6 +953,76 @@ class locations extends API_GUI {
         // Test Scenario 1: Positive flow to get newly added Brand/Station bt ID
         JOB_Api_Call("Location - GET Brand/Station details by ID", "GET", BaseAPI + "/location/brand/" + New_BrandID, Auth, "", 200, ParentTest, "no_jira");
 
+        //</editor-fold>
+    }
+
+    protected void sectorAPIs() {
+
+        //<editor-fold defaultstate="collapsed" desc="POST  New Sector/Group">
+        // Test Scenario 1: Positive flow to post new Sector/group
+        BODY = "{"
+                + "\"name\":\"This is API Test for Group/CA\""
+                + "}";
+        JOB_Api_Call("Location - POST New Sector/Group", "POST", BaseAPI + "/location/sector", Auth, BODY, 200, ParentTest, "no_jira");
+        if (json != null) {
+            try {
+                New_SecotorID = json.getString("id");
+            }
+            catch (Exception ex) {
+            }
+        }
+        // Test Scenario 2: Negative flow to post new Sector/group without Name
+        BODY = "{"
+                + "\"name\":\"\""
+                + "}";
+        JOB_Api_Call("Location - POST negative flow to create Sector/Group without Name", "POST", BaseAPI + "/location/sector", Auth, BODY, 400, ParentTest, "no_jira");
+
+        //</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="PUT/Update  Newly created Sector/Group">
+        // Test Scenario 1: Positive flow to Update/Patch Newly created Sector/Group
+        BODY = "{"
+                + "\"id\":\"" + New_SecotorID + "\","
+                + "\"name\":\"This is API Test for update Group/CA\","
+                + "\"country\":\"CA\""
+                + "}";
+        JOB_Api_Call("Location - POST New Sector/Group", "POST", BaseAPI + "/location/sector", Auth, BODY, 200, ParentTest, "no_jira");
+        if (json != null) {
+            try {
+                New_SecotorID = json.getString("id");
+            }
+            catch (Exception ex) {
+            }
+        }
+        // Test Scenario 2: Negative flow to Update/Patch Newly created Sector/Group without name
+        BODY = "{"
+                + "\"id\":\"" + New_SecotorID + "\","
+                + "\"name\":\"\","
+                + "\"country\":\"CA\""
+                + "}";
+        JOB_Api_Call("Location - POST negative flow to update Sector/Group without name", "POST", BaseAPI + "/location/sector", Auth, BODY, 200, ParentTest, "no_jira");
+        if (json != null) {
+            try {
+                New_SecotorID = json.getString("id");
+            }
+            catch (Exception ex) {
+            }
+        }
+        //</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="GET  Newly created Sector/Group by ID">
+        // Test Scenario 1: Positive flow to Get Newly created Sector/Group by ID
+        //</editor-fold>
+    }
+
+    protected void companyAPIs() {
+
+        //<editor-fold defaultstate="collapsed" desc="POST  New Company/Global Menu">
+        // Test Scenario 1: Positive flow to post new Company/Global Menu
+        //</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="PUT/Update  Newly created Company/Global Menu">
+        // Test Scenario 1: Positive flow to Update/Patch Newly created Company/Global Menu
+        //</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="GET  Newly created Company/Global Menu">
+        // Test Scenario 1: Positive flow to Get Newly created Company/Global Menu by ID
         //</editor-fold>
     }
 }
