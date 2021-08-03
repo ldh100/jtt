@@ -10,7 +10,7 @@ class task extends API_GUI{
     }
     protected void run() {                                                       
         Auth = "";   // ========================================== 
-            JOB_Api_Call("Tasks > 'MarketPlace Brand ID' (hardcoded in config)", "GET",  // ================   Hard Coded for now ======================================================
+            JOB_Api_Call("Tasks > 'MarketPlace Brand ID' (hardcoded in JOB config)", "GET",  // ================   Hard Coded for now ======================================================
                 BaseAPI + "/task/location/brand/" + Market_Brand_ID + "?query_type=kds", Auth, "", 200, ParentTest, "no_jira");
             if(json != null){
                 String Tasks = "Check json"; 
