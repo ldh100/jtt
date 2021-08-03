@@ -23,7 +23,7 @@ class shoppingcart extends API_GUI{
             "\"showSingleTimeSlot\":false," +
             "\"type\":0," +
             "\"typeOfCell\":0}";
-        JOB_Api_Call("Create New ShoppingCart", "POST", 
+        JOB_Api_Call("Create New ShoppingCart", "POST", // ===========================
             BaseAPI + "/shoppingcart", Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
             try{
@@ -34,12 +34,32 @@ class shoppingcart extends API_GUI{
         }  
         
         BODY = "{\"items\":[{\"id\":\"" + ITEMS_IDS.get(ITEMS_IDS.size() - 1) + "\"," +
-            "\"quantity\":1," +
+            "\"quantity\":2," +
             "\"price\":{\"amount\":0.05}}]}"; 
-        JOB_Api_Call("Add menu item to ShoppingCart", "PUT", 
+        JOB_Api_Call("Add Last Menu Item to ShoppingCart", "PUT",           // ===========================
             BaseAPI + "/shoppingcart/" + ShoppingCart_ID, Auth, BODY, 200, ParentTest, "no_jira");
         
-        JOB_Api_Call("Get ShoppingCart", "GET", 
+        BODY = "{\"items\":[{\"id\":\"" + ITEMS_IDS.get(ITEMS_IDS.size() - 1) + "\"," +
+            "\"quantity\":1}]}"; 
+        JOB_Api_Call("Patch Last Menu Item: Quantity 2 > 1", "PATCH",           // ===========================
+            BaseAPI + "/shoppingcart/" + ShoppingCart_ID, Auth, BODY, 200, ParentTest, "no_jira");        
+
+        JOB_Api_Call("Get ShoppingCart after Patch", "GET",                             // ===========================
+            BaseAPI + "/shoppingcart/" + ShoppingCart_ID, Auth, "", 200, ParentTest, "no_jira");        
+        
+        if(ITEMS_IDS.size() > 1) {
+            BODY = "{\"items\":[{\"id\":\"" + ITEMS_IDS.get(0) + "\"," +
+                "\"options\":[]," +
+                "\"quantity\":1," +
+                "\"price\":{\"amount\":0.08}}]}"; 
+            JOB_Api_Call("Add 1st Menu Item to ShoppingCart", "PUT",        // ===========================
+               BaseAPI + "/shoppingcart/" + ShoppingCart_ID, Auth, BODY, 200, ParentTest, "no_jira"); 
+            
+            BODY = "{\"items\":[{\"id\":\"" + ITEMS_IDS.get(ITEMS_IDS.size() - 1) + "\"}]}"; 
+            JOB_Api_Call("Delete ShoppingCart Last Menu Item", "DELETE", // ===========================
+               BaseAPI + "/shoppingcart/" + ShoppingCart_ID, Auth, BODY, 200, ParentTest, "no_jira");
+        }
+        JOB_Api_Call("Get ShoppingCart", "GET",                             // ===========================
             BaseAPI + "/shoppingcart/" + ShoppingCart_ID, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             try{

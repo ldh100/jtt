@@ -35,13 +35,13 @@ class user_ap3 extends API_GUI{
         if(json != null){ 
             try {
                 if(json.has("user")) AP3_User_ID = json.getString("user"); 
-                if(json.has("token")) AP3_User_TKN = json.getString("token");  
+                if(json.has("token")) AP3_TKN = json.getString("token");  
             } catch (Exception ex){
                 //
             }
         }
 
-        Auth = "Bearer " + AP3_User_TKN;
+        Auth = "Bearer " + AP3_TKN;
         JOB_Api_Call("AP3 User > /realm", "GET", 
             BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000", Auth, "", 200, ParentTest, "no_jira");
 
@@ -68,7 +68,7 @@ class user_ap3 extends API_GUI{
             BaseAPI + "/user", Auth, BODY, 409, ParentTest, "no_jira"); 
         
         
-        BODY = "{\"name\":" +                                       //  New AP3 Admin User ===============================
+        BODY = "{\"name\":" +       //  ==================   New AP3 Admin User ===============================
                 "{\"first\":\"Oleg\",\"last\":\"Spozito\"}," + 
             "\"permissions\":" +
                 "{\"scopes\":[\"*:*\",\"*:user\",\"site_operator_role:group:\",\"write:order:*\",\"kick:menu:*\",\"read:analytics:*\"]}," +
@@ -83,11 +83,30 @@ class user_ap3 extends API_GUI{
             try {
                 if(json.has("id")) New_User_ID = json.getString("id"); 
             } catch (Exception ex){
-                //
+                String AAAA = ex.getMessage();
+            }
+        }  
+        
+        Auth = "Basic " + Base64.getEncoder().encodeToString(("a_" + NewID + "@gmail.com" + ":" + "Zxtsaq9ppnppvbyi11f0nk").getBytes());
+        JOB_Api_Call("AP3 New User Authentication", "GET", 
+            BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", 200, ParentTest, "no_jira");
+        String New_AP3_User_ID = "";
+        String New_AP3_User_TKN = "";
+        if(json != null){ 
+            try {
+                if(json.has("token")) New_AP3_User_TKN = json.getString("token");  
+            } catch (Exception ex){
+                String AAAA = ex.getMessage();
             }
         }        
+        // Sleep ???
+        Auth = "Bearer " + New_AP3_User_TKN;
+        BODY = "{\"password\":\"" + "Zxtsaq9ppnppvbyi11f0nk" + "\"," + //  New AP3 User Change Password  =========================
+                "\"new_password\":\"" + "Password11" + "\"}";
+        JOB_Api_Call("AP3 New User - Change password", "POST", 
+            BaseAPI + "/user/" + New_User_ID + "/changepassword", Auth, BODY, 200, ParentTest, "no_jira");   
         
-        BODY = "{\"email\":\"" + "a_" + NewID + "@gmail.com" + "\"," + //  New AP3 User Forgot Password===============================
+        BODY = "{\"email\":\"" + "a_" + NewID + "@gmail.com" + "\"," + //  New AP3 User Forgot Password  ==========================
                 "\"type\":\"" + "new_user" + "\"}";
         JOB_Api_Call("AP3 New User - Forgot password", "POST", 
             BaseAPI + "/user/forgotpassword?realm=" + Realm, Auth, BODY, 200, ParentTest, "no_jira");                
