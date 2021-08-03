@@ -1,9 +1,10 @@
 package AP3;
 
 import java.time.LocalDateTime;
-import net.bytebuddy.utility.RandomString;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import org.openqa.selenium.JavascriptExecutor;
 
 class AP3_site extends AP3_GUI{
     protected AP3_site (AP3_GUI a) {
@@ -478,7 +479,7 @@ class AP3_site extends AP3_GUI{
         *   test delivery drop-off locations in dev only
         *   AUT-1066  
         */    
-        if (env.equals("DE")) {
+        if (env.equals("DE")) {            
             EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";        
             //get delivery destinations from API 
             Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
@@ -515,11 +516,11 @@ class AP3_site extends AP3_GUI{
                 if (FAIL) { return;}
                 Element_By_Path_Click("Click > 'Location Name' field", "xpath", "(//*[contains(text(),'Location Name')])[1]", ParentTest, "no_jira");
                 if (FAIL) { return;}
-                Wait_For_Element_By_Path_Presence("Wait for '80 characters max' validation message", "xpath", "//*[contains(text(),'80 characters max, this name will appear on Bolter and Core apps')]", ParentTest, "no_jira");
+                Wait_For_Element_By_Path_Presence("Wait for '80 characters max' validation message", "xpath", "//*[contains(text(),'80 characters max')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 Element_By_Path_Click("Click > out of 'Location Name'", "xpath", "//*[@class='v-dialog v-dialog--active']//*[contains(text(),'Create Drop-off Location')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
-                Wait_For_Element_By_Path_Presence("Wait for 'Location name is required' message", "xpath", "//*[contains(text(),'Drop-off Location name is required')]", ParentTest, "no_jira");
+                Wait_For_Element_By_Path_Presence("Wait for 'Location name is required' message", "xpath", "//*[contains(text(),'Location name is required')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 Element_By_Path_Click("Click > 'Location Name' field", "xpath", "(//input[@aria-label='Location Name'])[1]", ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -541,6 +542,16 @@ class AP3_site extends AP3_GUI{
                     Log_Html_Result("FAIL", "value length = " + t.length(), true, ParentTest.createNode("Check value is not longer than 80 characters"));
                 }
                 // test Location Name Field - End
+                // test Foodlocker toggle - Begin
+                Move_to_Element_By_Path("Move > 'APEX Foodlocker' toggle", "xpath", "//*[contains(text(),'Is this an APEX Foodlocker')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Wait_For_Element_By_Path_Presence("Check > 'Foodlocker' toggle is set to 'No' by default", "xpath", "(//*[@class='Option-Right-Selected-Blue-White'])[1]/div[contains(text(),'No')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Element_By_Path_Click("Set > 'Foodlocker' toggle to 'Yes'", "xpath", "(//*[@class='Option-Left-Not-Selected-Blue-White'])[1]/div[contains(text(),'Yes')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Wait_For_Element_By_Path_Presence("Check > 'Foodlocker' toggle is set to 'Yes'", "xpath", "(//*[@class='Option-Left-Selected-Blue-White'])[1]/div[contains(text(),'Yes')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                // test Foodlocker toggle - End
                 // </editor-fold>
             } else {
                 int locations = delivery_destinations.length();
