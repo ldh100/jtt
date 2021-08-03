@@ -9,7 +9,7 @@ class menus extends API_GUI{
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;
-        AP3_User_TKN = a.AP3_User_TKN;
+        AP3_TKN = a.AP3_TKN;
         SiteID = a.SiteID;
         BrandID = a.BrandID;
         CompanyID = a.CompanyID;
@@ -17,33 +17,37 @@ class menus extends API_GUI{
         ParentTest = a.ParentTest;
     }
     protected void run() {             
-        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Company/Global menus ===================
+        Auth = "Bearer " + AP3_TKN;   // =============== AP3 Company/Global menus ===================
         JOB_Api_Call("Company / Global Menus > /'CompID'", "GET", 
             BaseAPI + "/menu/company/" + CompanyID, Auth, "", 200, ParentTest, "no_jira");
+//        if(json != null){
+//            try {
+                    // GL_MENU_ID <<<<  parent_id ???
+//                } 
+//            } catch (Exception ex) {
+//                String AAAA = ex.getMessage();
+//            }
+//        }
+//Request URL: https://api.compassdigital.org/dev/menu/rrgl37yB8LtgOE9rO2RvUojopzLEP5uqJ1DwNMgdsY2Qg6yl8LUKWOzLMA4eT5Wj7ZG?_query=%7Bid,date,meta%7D
+//Request Method: PATCH using GL_MENU_ID <<<<  parent_id ???
 
         Auth = "";                        // =============== AP3 Local Menu(s) ===========================
-//        for(int i = 0; i < MENU_IDS.size(); i++){           
-//            JOB_Api_Call("Brand > Timeslots > Menu " + (i+1) + " > /timeslots/menu/'Menu_ID'", "GET", 
-//                BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MENU_IDS.get(i) + "?nocache=1&extended=true", Auth, "", 200, ParentTest, "no_jira" );
-//
-//            JOB_Api_Call("Brand Local Menu " + (i+1) + " > /menu/'Menu_ID'", "GET", 
-//                BaseAPI + "/menu/" + MENU_IDS.get(i), Auth, "", 200, ParentTest, "no_jira");
+//        JOB_Api_Call("Brand > Timeslots > 1st Menu > /timeslots/menu/'MenuID'", "GET",
+//            BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MENU_IDS.get(MENU_IDS.size() - 1) + "?nocache=1&extended=true", Auth, "", 200, ParentTest, "no_jira" );
+//        MENU_TIMESLOTS = new ArrayList<>();
+//        if(json != null){
+//            try {
+//                if (json.has("timeslots")) {
+//                    JSONArray timeslots = json.getJSONArray("timeslots");
+//                    for (int i = 0; i < timeslots.length(); i++) {
+//                        JSONObject timeslot = timeslots.getJSONObject(i);
+//                        MENU_TIMESLOTS.add(timeslot.getNumber("id").toString());
+//                    }
+//                } 
+//            } catch (Exception ex) {
+//                String AAAA = ex.getMessage();
+//            }
 //        }
-//        
-        JOB_Api_Call("Brand > Timeslots > 1st Menu > /timeslots/menu/'MenuID'", "GET",
-            BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MENU_IDS.get(MENU_IDS.size() - 1) + "?nocache=1&extended=true", Auth, "", 200, ParentTest, "no_jira" );
-        if(json != null){
-            TIMESLOTS_IDS = new ArrayList<>();
-            try {
-                if (json.has("timeslots")) {
-                    JSONArray timeslots = json.getJSONArray("timeslots");
-                    for (int i = 0; i < timeslots.length(); i++) {
-                        JSONObject timeslot = timeslots.getJSONObject(i);
-                        TIMESLOTS_IDS.add(timeslot.getNumber("id").toString());
-                    }
-                } 
-            } catch (Exception ex) {}
-        }
         
         JOB_Api_Call("Brand Last Local Menu " + " > /menu/'MenuID'", "GET", 
             BaseAPI + "/menu/" + MENU_IDS.get(MENU_IDS.size() -1), Auth, "", 200, ParentTest, "no_jira");  
@@ -53,7 +57,7 @@ class menus extends API_GUI{
             JSONArray groups = null;
             try {
                 if (json.has("groups")) {
-                groups = json.getJSONArray("groups");
+                    groups = json.getJSONArray("groups");
                     for (int i = 0; i < groups.length(); i++) {
                         JSONObject g = groups.getJSONObject(i);
                         CATEGORIES_IDS.add(g.getString("id"));
@@ -70,6 +74,14 @@ class menus extends API_GUI{
             } catch (Exception ex) {
                 String AAAAA = ex.getMessage();
             }
+            
+
+            
         }
+        
+        // ================ New development by Dhruv ======================================
+//        BODY = "{id:OwrEMjgG5zUeoXRyZRAPHZyMLJWQP3";       
+//        JOB_Api_Call("Brand Last Local Menu " + " > /menu/'MenuID'", "PATCH", 
+//            BaseAPI + "/menu/" + MENU_IDS.get(MENU_IDS.size() -1), Auth, "", 200, ParentTest, "no_jira"); 
     }
 }
