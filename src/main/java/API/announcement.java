@@ -214,7 +214,7 @@ class announcement extends API_GUI {
 
         //</editor-fold>
         
-        //<editor-fold defaultstate="collapsed" desc=" PUST Announcement ">
+        //<editor-fold defaultstate="collapsed" desc=" PUT Announcement ">
         // Test Scenario 1: Positive flow -  PUT to update Announcement Name
         BODY = "{\"name\":\"This is API test for Update Announcement Name by ID\","
                 + "\"type\":\"Promotions\","
