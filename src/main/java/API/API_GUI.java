@@ -1826,7 +1826,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         CONFIG = false;
         this.setTitle("Configurations / APIs");
     }
-
     private void GUI_Load_Env() {
         if (cmbEnv.getSelectedItem().toString().contains("Staging")) {
             BaseAPI = "https://api.compassdigital.org/staging";
@@ -1860,7 +1859,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         GUI_Get_Groups(); // load 1st to be ready for selection by BrandSector
         GUI_Get_Sites();
     }
-
     private void Get_AP3_TKN() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
@@ -1875,7 +1873,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
-
     private void GUI_Get_Sites() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1999,7 +1996,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         lblSITES.setText(app + " Sites (" + DV1.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
-
     private void GUI_Get_Brands() {
         d2LastRow = -1;
         d1LastRow = DV1.getSelectedRow();
@@ -2118,7 +2114,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         GUI_Get_Brand_Sector();
     }
-
     private void GUI_Get_Groups() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         txtLog.append("- Load Groups/Sector ..." + "\r\n");
@@ -2177,7 +2172,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         Load = false;
     }
-
     private void GUI_Get_Brand_Sector() {
         txtLog.append("- Get Brand's Group/Sector" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -2264,7 +2258,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         GUI_Get_Companies();    // Load Brans Companies List after Brand's Gropu/Sector selected
         GUI_Get_Brand_Company(); // after Brand's Gropu/Sector selected
     }
-
     private void GUI_Get_Companies() {
         int I = cmbGroup.getSelectedIndex();
         if (I < 0) { // =========== DEBUG
@@ -2328,7 +2321,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
-
     private void GUI_Get_Brand_Company() { // after Brand's Group/Sector slected
         txtLog.append("- Get Brand's Company/Clobal Menu" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -2354,7 +2346,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }
-
     private void GUI_Load_CONFIG() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         String C = "";
@@ -2378,39 +2369,17 @@ public class API_GUI extends javax.swing.JInternalFrame {
         try {
             for (String l : lines) {
                 value = l.substring(l.indexOf(" ")).trim();
-                if (l.contains("env: ")) {
-                    env = value;
-                }
-                if (l.contains("app: ")) {
-                    app = value;
-                }
-                if (l.contains("url: ")) {
-                    url = value;
-                }
-                if (l.contains("SECTOR: ")) {
-                    SECTOR = value;
-                }
-                if (l.contains("GL_MENU: ")) {
-                    GL_MENU = value;
-                }
-                if (l.contains("SITE: ")) {
-                    SITE = value;
-                }
-                if (l.contains("BRAND: ")) {
-                    BRAND = value;
-                }
-                if (l.contains("MOBILE_ID: ")) {
-                    txtMobile_ID.setText(value);
-                }
-                if (l.contains("MOBILE_PW: ")) {
-                    txtMobile_PW.setText(value);
-                }
-                if (l.contains("ADMIN_ID: ")) {
-                    txtAP3_ID.setText(value);
-                }
-                if (l.contains("ADMIN_PW: ")) {
-                    txtAP3_PW.setText(value);
-                }
+                if (l.contains("env: ")) { env = value; }
+                if (l.contains("app: ")) { app = value; }
+                if (l.contains("url: ")) { url = value; }
+                if (l.contains("SECTOR: ")) { SECTOR = value; }
+                if (l.contains("GL_MENU: ")) { GL_MENU = value; }
+                if (l.contains("SITE: ")) { SITE = value; }
+                if (l.contains("BRAND: ")) { BRAND = value; }
+                if (l.contains("MOBILE_ID: ")) { txtMobile_ID.setText(value); }
+                if (l.contains("MOBILE_PW: ")) { txtMobile_PW.setText(value); }
+                if (l.contains("ADMIN_ID: ")) { txtAP3_ID.setText(value); }
+                if (l.contains("ADMIN_PW: ")) { txtAP3_PW.setText(value); }
             }
             CONFIG = true;
             txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
@@ -2423,7 +2392,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
-
     private void GUI_Save_CONFIG() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         String C = "";
@@ -2496,7 +2464,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
-
     private void GetShoppingCartAndOrder() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         txtLog.append("- Shopping Cart..." + "\r\n");
@@ -2588,7 +2555,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }
-
     private String GUI_API_Get(String EndPoint, String AUTH) throws IOException {
         String AJ = "";
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
@@ -2631,7 +2597,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         //HtmlReporter.config().setTheme(Theme.DARK);               
         HtmlReporter.config().setTheme(Theme.STANDARD);
     }
-
     protected void Log_Html_Result(String RES, String Test_Description, ExtentTest Test) {
         switch (RES) {
             case "PASS":
@@ -2696,66 +2661,31 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         return "OK > Job Started >> Please Monitor Reports...";
     }
-
     private String JOB_Load_CONFIG(String config) {
         String[] lines = config.split("\n");
         String value;
         try {
             for (String l : lines) {
                 value = l.substring(l.indexOf(" ")).trim();
-                if (l.contains("env: ")) {
-                    env = value;
-                }
-                if (l.contains("app: ")) {
-                    app = value;
-                }
-                if (l.contains("url: ")) {
-                    url = value;
-                }
+                if (l.contains("env: ")) { env = value; }
+                if (l.contains("app: ")) { app = value; }
+                if (l.contains("url: ")) { url = value; }
 
-                if (l.contains("SlackCh: ")) {
-                    Slack_Channel = value;
-                }
-                if (l.contains("_slack: ")) {
-                    _Slack = Boolean.parseBoolean(value);
-                }
-                if (l.contains("_zip_report: ")) {
-                    Zip_Report = Boolean.parseBoolean(value);
-                }
+                if (l.contains("SlackCh: ")) {  Slack_Channel = value; }
+                if (l.contains("_slack: ")) { _Slack = Boolean.parseBoolean(value); }
+                if (l.contains("_zip_report: ")) { Zip_Report = Boolean.parseBoolean(value); }
 
-                if (l.contains("SECTOR: ")) {
-                    SECTOR = value;
-                }
-                if (l.contains("GL_MENU: ")) {
-                    GL_MENU = value;
-                }
-                if (l.contains("SITE: ")) {
-                    SITE = value;
-                }
-                if (l.contains("BRAND: ")) {
-                    BRAND = value;
-                }
-                if (l.contains("MOBILE_ID: ")) {
-                    MOBILE_ID = value;
-                }
-                if (l.contains("MOBILE_PW: ")) {
-                    MOBILE_PW = value;
-                }
-                if (l.contains("ADMIN_ID: ")) {
-                    ADMIN_ID = value;
-                }
-                if (l.contains("ADMIN_PW: ")) {
-                    ADMIN_PW = value;
-                }
-                if (l.contains("RUNNER_ID: ")) {
-                    RUNNER_ID = value;
-                }
-                if (l.contains("RUNNER_PW: ")) {
-                    RUNNER_PW = value;
-                }
-                if (l.contains("Market_Brand_ID: ")) {
-                    Market_Brand_ID = value;
-                }
+                if (l.contains("SECTOR: ")) {  SECTOR = value; }
+                if (l.contains("GL_MENU: ")) { GL_MENU = value; }
+                if (l.contains("SITE: ")) { SITE = value; }
+                if (l.contains("BRAND: ")) { BRAND = value; }
+                if (l.contains("MOBILE_ID: ")) { MOBILE_ID = value;  }
+                if (l.contains("MOBILE_PW: ")) { MOBILE_PW = value; }
+                if (l.contains("ADMIN_ID: ")) { ADMIN_ID = value; }
+                if (l.contains("ADMIN_PW: ")) {  ADMIN_PW = value; }
+                if (l.contains("RUNNER_ID: ")) { RUNNER_ID = value; }
+                if (l.contains("RUNNER_PW: ")) { RUNNER_PW = value; }
+                if (l.contains("Market_Brand_ID: ")) { Market_Brand_ID = value; }
             }
             CONFIG = true;
             switch (env) {
@@ -2779,7 +2709,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
             return "ERROR > " + ex.getMessage();
         }
     }
-
     protected void Current_Log_Update(boolean GUI, String Text) {
         if (GUI) {
             txtLog.append(Text);
@@ -2788,7 +2717,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Log += Text;
         }
     }
-
     private void Report(boolean Open_File) {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         Report_File = "";
@@ -2819,47 +2747,28 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
-
     private void LOG_UPDATE(String LOG) {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET "
-                    + " [Date] = ?"
-                    + // 1
-                    ", [Time] = ?"
-                    + // 2
-                    ", [app] = ?"
-                    + // 3
-                    ", [url] = ?"
-                    + // 4
-                    ", [summary] = ?"
-                    + // 5
-                    ", [t_calls] = ?"
-                    + // 6
-                    ", [t_min] = ?"
-                    + // 7
-                    ", [t_avg] = ?"
-                    + // 8
-                    ", [t_max] = ?"
-                    + // 9
-                    ", [p_50] = ?"
-                    + // 10
-                    ", [p_90] = ?"
-                    + // 11
-                    ", [test_type] = ?"
-                    + // 12
-                    ", [user_id] = ?"
-                    + // 13
-                    ", [user_ws] = ?"
-                    + // 14
-                    ", [env] = ?"
-                    + // 15
-                    ", [Result] = ?"
-                    + // 16
-                    ", [Status] = ?"
-                    + // 17
-                    ", [Excel] = ?"
-                    + // 18
+                    + " [Date] = ?"  + // 1
+                    ", [Time] = ?" + // 2
+                    ", [app] = ?" + // 3
+                    ", [url] = ?"  + // 4
+                    ", [summary] = ?" + // 5
+                    ", [t_calls] = ?" + // 6
+                    ", [t_min] = ?" + // 7
+                    ", [t_avg] = ?" + // 8
+                    ", [t_max] = ?"  + // 9
+                    ", [p_50] = ?" + // 10
+                    ", [p_90] = ?" + // 11
+                    ", [test_type] = ?" + // 12
+                    ", [user_id] = ?" + // 13
+                    ", [user_ws] = ?" + // 14
+                    ", [env] = ?" + // 15
+                    ", [Result] = ?" + // 16
+                    ", [Status] = ?" + // 17
+                    ", [Excel] = ?" + // 18
                     " WHERE [app] = 'API_" + env + "' AND [Status] = 'Running'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
@@ -2888,84 +2797,47 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
-
     private void LOG_START() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] ("
-                    + "[Date]"
-                    + // 1
-                    ", [Time]"
-                    + // 2
-                    ", [app]"
-                    + // 3
-                    ", [url]"
-                    + // 4
-                    ", [summary]"
-                    + // 5
-                    ", [t_calls]"
-                    + // 6
-                    ", [t_min]"
-                    + // 7
-                    ", [t_avg]"
-                    + // 8
-                    ", [t_max]"
-                    + // 9
-                    ", [p_50]"
-                    + // 10
-                    ", [p_90]"
-                    + // 11
-                    ", [test_type]"
-                    + // 12
-                    ", [user_id]"
-                    + // 13
-                    ", [user_ws]"
-                    + // 14
-                    ", [env]"
-                    + // 15
-                    ", [Result]"
-                    + // 16
-                    ", [Status]"
-                    + // 17
-                    ", [Excel]"
-                    + // 18
+                    + "[Date]" + // 1
+                    ", [Time]" + // 2
+                    ", [app]" + // 3
+                    ", [url]" + // 4
+                    ", [summary]" + // 5
+                    ", [t_calls]" + // 6
+                    ", [t_min]" + // 7
+                    ", [t_avg]" + // 8
+                    ", [t_max]" + // 9
+                    ", [p_50]" + // 10
+                    ", [p_90]" + // 11
+                    ", [test_type]" + // 12
+                    ", [user_id]" + // 13
+                    ", [user_ws]" + // 14
+                    ", [env]" + // 15
+                    ", [Result]" + // 16
+                    ", [Status]" + // 17
+                    ", [Excel]" + // 18
                     ") VALUES ("
-                    + "?"
-                    + // 1
-                    ",?"
-                    + // 2
-                    ",?"
-                    + // 3
-                    ",?"
-                    + // 4
-                    ",?"
-                    + // 5
-                    ",?"
-                    + // 6
-                    ",?"
-                    + // 7
-                    ",?"
-                    + // 8
-                    ",?"
-                    + // 9
-                    ",?"
-                    + // 10
-                    ",?"
-                    + // 11
-                    ",?"
-                    + // 12
-                    ",?"
-                    + // 13
-                    ",?"
-                    + // 14
-                    ",?"
-                    + // 15
-                    ",?"
-                    + // 16
-                    ",?"
-                    + // 17
-                    ",?"
-                    + // 18
+                    + "?" + // 1
+                    ",?" + // 2
+                    ",?" + // 3
+                    ",?" + // 4
+                    ",?" + // 5
+                    ",?" + // 6
+                    ",?" + // 7
+                    ",?" + // 8
+                    ",?" + // 9
+                    ",?" + // 10
+                    ",?" + // 11
+                    ",?" + // 12
+                    ",?" + // 13
+                    ",?" + // 14
+                    ",?" + // 15
+                    ",?" + // 16
+                    ",?" + // 17
+                    ",?" + // 18
                     ")");
             _insert.setString(1, LocalDateTime.now().format(Date_formatter));
             _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
@@ -2994,7 +2866,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
-
     private void BW1_DoWork(Boolean GUI) {
         BW1 = new SwingWorker() {
             @Override
@@ -3043,13 +2914,11 @@ public class API_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         BW1.execute();
     }
-
     private void BW1_FAIL_LOG_UPDATE(String Error) {
         Summary = "BW1 - Failed: " + Error;
         DD = Duration.between(run_start, Instant.now());
         LOG_UPDATE("- BW1 ERROR: " + Error);
     }
-
     private void BW1_Done(boolean GUI) throws Exception {
         DD = Duration.between(run_start, Instant.now());
         Last_EX = EX;
@@ -3142,13 +3011,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("AP3 User");
             user_ap3 BR = new API.user_ap3(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
             AP3_User_ID = BR.AP3_User_ID;
             AP3_TKN = BR.AP3_TKN;
         }
@@ -3158,13 +3021,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Locations");
             locations BR = new API.locations(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
             AppID = BR.AppID;
             SiteID = BR.SiteID;
             UnitID = BR.UnitID;
@@ -3189,13 +3046,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Config");
             config BR = new API.config(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
             Site_PProvider = BR.Site_PProvider;
             freedompay_id = BR.freedompay_id;
             freedompay_terminal_id = BR.freedompay_terminal_id;
@@ -3211,13 +3062,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Promo");
             promo BR = new API.promo(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
         }
 
         if (!FAIL) {
@@ -3261,13 +3106,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Calendar");
             calendar BR = new API.calendar(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
         }
         if (true) {
             SCOPE += "Reports ";
@@ -3275,13 +3114,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Reports");
             reports BR = new API.reports(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+
         }
         if (true) {
             SCOPE += "Announcement ";
@@ -3289,13 +3123,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Announcement");
             announcement BR = new API.announcement(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
         }
         if (true) {
             SCOPE += "Notification ";
@@ -3303,13 +3131,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Recent Updates/Notifications");
             notification BR = new API.notification(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
         }
         
         // =================  Mobile User, Paymant, ShoppingCart, Order ===================
@@ -3319,13 +3141,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Mobile User");
             user_mobile BR = new API.user_mobile(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
             Mobile_User_ID = BR.Mobile_User_ID;
             Mobile_User_TKN = BR.Mobile_User_TKN;
         }
@@ -3335,13 +3151,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Payment");
             payment BR = new API.payment(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
             Mobile_User_PProvider = BR.Mobile_User_PProvider;
             Card_Type = BR.Card_Type;
             Card_Last4 = BR.Card_Last4;
@@ -3379,13 +3189,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Bolter");
             user_bolter BR = new API.user_bolter(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+
             Bolter_User_ID = BR.Bolter_User_ID;
             Bolter_User_TKN = BR.Bolter_User_TKN;
             Bolter_Site_ID = BR.Bolter_Site_ID;
@@ -3397,13 +3202,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Task");
             task BR = new API.task(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+
         }
         if (true) {
             SCOPE += "KDS ";
