@@ -32,6 +32,7 @@ class AP3_brand_new extends AP3_GUI {
         SectorID = a.SectorID;
         GL_MENU = a.GL_MENU;
         CompanyID = a.CompanyID;
+        appId=a.appId;
 
         AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;

@@ -9,14 +9,14 @@ class reports extends API_GUI{
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;
-        AP3_User_TKN = a.AP3_User_TKN;
+        AP3_TKN = a.AP3_TKN;
         SiteID = a.SiteID;
         BrandID = a.BrandID;
         BrandIDS = a.BrandIDS;
         ParentTest = a.ParentTest;
     }
     protected void run() {      
-        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Sales Reporting EOD ========================
+        Auth = "Bearer " + AP3_TKN;   // =============== AP3 Sales Reporting EOD ========================
         JOB_Api_Call("Sales EOD Report - Default > /'SiteID'", "GET", 
             BaseAPI + "/report/eod/group/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
         String From = ""; 

@@ -11,7 +11,7 @@ class calendar extends API_GUI{
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;
-        AP3_User_TKN = a.AP3_User_TKN;
+        AP3_TKN = a.AP3_TKN;
         SiteID = a.SiteID;
         BrandID = a.BrandID;
         NewID = a.NewID;
@@ -19,7 +19,7 @@ class calendar extends API_GUI{
     }
     protected void run() {  
         String Closure_ID = "";
-        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 calendar ===========================
+        Auth = "Bearer " + AP3_TKN;   // =============== AP3 calendar ===========================
  
         JOB_Api_Call("Calendar > /'BrandID'/ CDL compatible format for next 7 days", "GET", 
             BaseAPI + "/calendar/" + BrandID + "/cdl", Auth, "", 200, ParentTest, "no_jira");  

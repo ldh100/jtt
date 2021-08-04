@@ -14,14 +14,14 @@ class notification extends API_GUI {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;
-        AP3_User_TKN = a.AP3_User_TKN;
+        AP3_TKN = a.AP3_TKN;
         SiteID = a.SiteID;
         BrandID = a.BrandID;
         ParentTest = a.ParentTest;
     }
 
     protected void run() {
-        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 Resent Updates===========================
+        Auth = "Bearer " + AP3_TKN;   // =============== AP3 Resent Updates===========================
         Date release_date = new DateTime(new Date()).plusHours(4).plusMinutes(1).toDate();
         String RELEASE_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(release_date);
         Date _e = new DateTime(new Date()).minusDays(10).toDate();
