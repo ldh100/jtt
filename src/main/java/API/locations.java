@@ -96,7 +96,7 @@ class locations extends API_GUI {
                 BaseAPI + "/location/" + UnitID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
         if (json != null) {
             try {
-                if (json.has("meta" )) {
+                if (json.has("meta")) {
                     UnitNum = json.getJSONObject("meta").getNumber("unit").toString();
                 }
             }
@@ -104,7 +104,7 @@ class locations extends API_GUI {
                 String AAA = ex.getMessage();
             }
         }
-        
+
         Auth = "";                      // ===============    AP3 Brand ===========================
         JOB_Api_Call("Location > /'BrandID'", "GET",
                 BaseAPI + "/location/brand/" + BrandID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
@@ -136,9 +136,9 @@ class locations extends API_GUI {
 
         Auth = "Bearer " + AP3_TKN;  // ===============    AP3 Brand Timeslots ===========================
         JOB_Api_Call("Location/brand > /'BrandID' > /timeslots", "GET",
-                BaseAPI + "/location/brand/" + BrandID + "/timeslots", Auth, "", 200, ParentTest, "no_jira");        
-        BRAND_TIMESLOTS = new ArrayList<>(); 
-        if(json != null){
+                BaseAPI + "/location/brand/" + BrandID + "/timeslots", Auth, "", 200, ParentTest, "no_jira");
+        BRAND_TIMESLOTS = new ArrayList<>();
+        if (json != null) {
             try {
                 if (json.has("timeslots")) {
                     JSONArray timeslots = json.getJSONArray("timeslots");
@@ -146,15 +146,16 @@ class locations extends API_GUI {
                         JSONObject timeslot = timeslots.getJSONObject(i);
                         BRAND_TIMESLOTS.add(timeslot.getNumber("id").toString());
                     }
-                } 
-            } catch (Exception ex) {
+                }
+            }
+            catch (Exception ex) {
                 String AAAA = ex.getMessage();
             }
-        }  
+        }
         JOB_Api_Call("Brand > Timeslots > 1st Menu > /timeslots/menu/'MenuID'", "GET",
-            BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MENU_IDS.get(MENU_IDS.size() - 1) + "?nocache=1&extended=true", Auth, "", 200, ParentTest, "no_jira" );
+                BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MENU_IDS.get(MENU_IDS.size() - 1) + "?nocache=1&extended=true", Auth, "", 200, ParentTest, "no_jira");
         MENU_TIMESLOTS = new ArrayList<>();
-        if(json != null){
+        if (json != null) {
             try {
                 if (json.has("timeslots")) {
                     JSONArray timeslots = json.getJSONArray("timeslots");
@@ -162,11 +163,12 @@ class locations extends API_GUI {
                         JSONObject timeslot = timeslots.getJSONObject(i);
                         MENU_TIMESLOTS.add(timeslot.getNumber("id").toString());
                     }
-                } 
-            } catch (Exception ex) {
+                }
+            }
+            catch (Exception ex) {
                 String AAAA = ex.getMessage();
             }
-        }        
+        }
         if (env != "PR") {
             //groupAPIs();
             //locationAPIs();
@@ -445,7 +447,6 @@ class locations extends API_GUI {
         JOB_Api_Call("Location - PATCH Negative flow to update group/site without Name", "PATCH", BaseAPI + "/location/group/" + New_SiteID, Auth, BODY, 400, ParentTest, "no_jira");
 
         //</editor-fold>
-
         //<editor-fold defaultstate="collapsed" desc="GET by ID's">
         // Test Scenario 1: Get newly created group/site by Id.
         JOB_Api_Call("Location - Get newly created group/site by Id " + New_SiteID + " ", "GET", BaseAPI + "/location/group/" + New_SiteID, Auth, "", 200, ParentTest, "no_jira");
@@ -460,7 +461,6 @@ class locations extends API_GUI {
         JOB_Api_Call("Location - Get newly created drop-off location by Id :-" + New_SiteID + " ", "GET", BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, "", 200, ParentTest, "no_jira");
 
         //</editor-fold>
-
         //<editor-fold defaultstate="collapsed" desc="Delete drop-off location">
         // Test Scenario 1: Positive flow to delete Drop-off location under newly created group/site.
         JOB_Api_Call("Location - DELETE drop-off location under newly created group/site " + New_SiteID + " ", "DELETE", BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_LocationID, Auth, "", 200, ParentTest, "no_jira");
@@ -1005,7 +1005,6 @@ class locations extends API_GUI {
         JOB_Api_Call("Location - POST negative flow to create Sector/Group without Name", "POST", BaseAPI + "/location/sector", Auth, BODY, 400, ParentTest, "no_jira");
 
         //</editor-fold>
-
         //<editor-fold defaultstate="collapsed" desc="PUT/Update  Newly created Sector/Group">
         // Test Scenario 1: Positive flow to Update/Patch Newly created Sector/Group
         BODY = "{"
@@ -1024,7 +1023,6 @@ class locations extends API_GUI {
         JOB_Api_Call("Location - PATCH negative flow to update Sector/Group without name", "PATCH", BaseAPI + "/location/sector/" + New_SecotorID, Auth, BODY, 400, ParentTest, "no_jira");
 
         //</editor-fold>
-
         //<editor-fold defaultstate="collapsed" desc="GET  Newly created Sector/Group by ID">
         // Test Scenario 1: Positive flow to Get Newly created Sector/Group by ID
         JOB_Api_Call("Location - Get newly created Sector/Group by Id", "GET", BaseAPI + "/location/sector/" + New_SecotorID, Auth, "", 200, ParentTest, "no_jira");
@@ -1080,7 +1078,6 @@ class locations extends API_GUI {
         JOB_Api_Call("Location - POST negative flow to add Company/Global Menu with empty name", "POST", BaseAPI + "/location/company", Auth, BODY, 400, ParentTest, "no_jira");
 
         //</editor-fold>
-
         //<editor-fold defaultstate="collapsed" desc="PUT/Update  Newly created Company/Global Menu">
         // Test Scenario 1: Positive flow to Update/Patch Newly created Company/Global Menu
         BODY = "{"
