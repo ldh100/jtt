@@ -693,6 +693,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
     
     protected List<String> NOTIFICATION_IDS; 
     protected List<String> ANNOUNCEMENT_IDS;
+
     
     protected boolean refund = true;
     protected String Site_PProvider = "";
