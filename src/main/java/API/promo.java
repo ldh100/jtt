@@ -111,7 +111,7 @@ class promo extends API_GUI {
                 + "}";
         JOB_Api_Call("Promotion - PUT/Update nelwly added promo voucher", "PUT", BaseAPI + "/promo/voucher/" + Promo_Voucher_Id, Auth, BODY, 200, ParentTest, "no_jira");
 
-        // Test Scenario 2: Negtive flow to update newly created promo voucher without valid code
+        // Test Scenario 2: Negative flow to update newly created promo voucher without valid code
         BODY = "{"
                 + "\"code\":\"\","
                 + "\"discount\":{"
@@ -128,7 +128,7 @@ class promo extends API_GUI {
                 + "}";
         JOB_Api_Call("Promotion - PUT/Update nelwly added promo voucher without code", "PUT", BaseAPI + "/promo/voucher/" + Promo_Voucher_Id, Auth, BODY, 400, ParentTest, "no_jira");
 
-        // Test Scenario 3: Negtive flow to update newly created promo voucher without valid type
+        // Test Scenario 3: Negative flow to update newly created promo voucher without valid type
         BODY = "{"
                 + "\"code\":\"" + Promo_Voucher_Code + "\","
                 + "\"discount\":{"
@@ -147,7 +147,7 @@ class promo extends API_GUI {
         //</editor-fold>
         //<editor-fold defaultstate="collapsed" desc="DELETE promo voucher">
         //</editor-fold>
-        // Test Scenario 1: Positive flow to DELETE promo voucher
+        // Test Scenario 1: Positive flow to DELETE newly created promo voucher
         JOB_Api_Call("Promotion - POST new promo voucher", "DELETE", BaseAPI + "/promo/voucher/" + Promo_Voucher_Id, Auth, BODY, 200, ParentTest, "no_jira");
 
     }
