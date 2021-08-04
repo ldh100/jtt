@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -60,6 +61,7 @@ import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import javax.imageio.ImageIO;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
@@ -5623,8 +5625,11 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         FAIL = false;
         t = "";
         try {
-            File folder = new File(DIR); 
-            File[] listOfFiles = folder.listFiles();
+            List<File> listOfFiles = Files.list(Paths.get(DIR))
+                .filter(Files::isRegularFile)
+                .map(Path::toFile)
+                .collect(Collectors.toList());
+            //listOfFiles.forEach(System.out::println); 
             for (File file : listOfFiles) {
                 if (file.getName().contains(F_NAME)) {
                     t = file.getName();

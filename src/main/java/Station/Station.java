@@ -889,8 +889,8 @@ public class Station extends javax.swing.JInternalFrame {
             
             JSONObject menu = (JSONObject) JArray_MENUS.get(DV_Menus.getSelectedRow());             
             if (menu.has("groups")) {
-                    JSONArray goups = menu.getJSONArray("groups");
-                    for (Object g : goups) {
+                    JSONArray groups = menu.getJSONArray("groups");
+                    for (Object g : groups) {
                         JSONObject gr = (JSONObject) g;
                         JArray_CATS.put(new JSONObject(gr.toString())); 
                         name = gr.getString("name");

@@ -136,7 +136,7 @@ class AP3_menu_manager extends AP3_GUI{
             if (FAIL) { return;} 
         Element_By_Path_Attribute("Page SubTitle", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "textContent", ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Find_Text("Fund 'Search...' text", "Search Menus", true, ParentTest, "no_jira");   
+        Find_Text("Fund 'Search...' text", "Search Global Menus", true, ParentTest, "no_jira");   
             if (FAIL) { return;}  
         EX += " - " + "\t" + " === MM Sector Selection " + "\t" + " ===== " + "\t" + " == Sector Selection End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold>           
@@ -208,11 +208,11 @@ class AP3_menu_manager extends AP3_GUI{
                 }            
             }
         if(T_Index > -1){
-            Find_Text("Fund 'Search...' text", "Search Menus", true, ParentTest, "no_jira");   
+            Find_Text("Fund 'Search...' text", "Search Global Menus", true, ParentTest, "no_jira");   
                 if (FAIL) { return;}             
-            Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira"); 
+            Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Global Menus')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
-            Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, ParentTest, "no_jira");
+            Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Global Menus']", GL_MENU, false, ParentTest, "no_jira");
                 if (FAIL) { return;} 
             Thread.sleep(500);                
             Element_Click("Click Menu " + GL_MENU, L2.get(T_Index), ParentTest, "no_jira");
@@ -222,10 +222,24 @@ class AP3_menu_manager extends AP3_GUI{
 //                for (int j = 0; j < L1.size(); j++) {    
 //                   Element_Attribute("Local Menu (Index " + j + ") Name", L1.get(j), "textContent", ParentTest, "no_jira"); 
 //                }                  
-            List_Child_E1_By_Path("Find " + GL_MENU + " 'View Global Modifiers Groups' button", L2.get(T_Index), "xpath", ".//button[@type='button'][2]", ParentTest, "no_jira"); 
-                if (FAIL) { return;} 
-            Element_Click("Click 'View Global Modifiers Groups'", e1, ParentTest, "no_jira"); 
-                if (FAIL) { return;} 
+            
+            Find_Text("Find Global Menu", "Global Menu", true, ParentTest, "no_jira");   
+                if (FAIL) { return;}  
+            Find_Text("Find Local Menus", "Local Menus", true, ParentTest, "no_jira");   
+                if (FAIL) { return;}  
+            Find_Text("Find Global Modifier groups", "Global Modifier Groups", true, ParentTest, "no_jira");   
+                if (FAIL) { return;}  
+            Find_Text("Find Local Menus", "Local Menus", true, ParentTest, "no_jira");   
+                if (FAIL) { return;}  
+            Text_Found("Find : No local menus matching your search criteria found", "No local menus matching your search criteria found", ParentTest, "no_jira");
+                if (FAIL) { return;}
+            
+            Element_By_Path_Click("Click on Global Modifiers", "xpath", "//span[@id='global-mod-label']", ParentTest, "no_jira");
+                if (FAIL) { return;}
+//            List_Child_E1_By_Path("Find " + GL_MENU + " 'View Global Modifiers Groups' button", L2.get(T_Index), "xpath", ".//button[@type='button'][2]", ParentTest, "no_jira"); 
+//                if (FAIL) { return;} 
+//            Element_Click("Click 'View Global Modifiers Groups'", e1, ParentTest, "no_jira"); 
+//                if (FAIL) { return;} 
             Thread.sleep(500);   
             Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
@@ -260,7 +274,7 @@ class AP3_menu_manager extends AP3_GUI{
             Thread.sleep(500); 
 
             Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
+//                if (FAIL) { return;}
             Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 if(t.equals("–")){
@@ -873,80 +887,77 @@ class AP3_menu_manager extends AP3_GUI{
         
         List_L2("Menus Count on the Page 1", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
             if (FAIL) { return;}
-            T_Index = -1;
-            for (int i = 0; i < L2.size(); i++) { 
+//            T_Index = -1;
+            for (int i = 2; i < L2.size(); i++) { 
                 Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", ParentTest, "no_jira"); 
-                if(t.trim().startsWith(GL_MENU)){
-                    T_Index = i;
-                } 
+//                if(t.trim().startsWith(GL_MENU)){
+                    T_Index = 1;
+//                } 
             }
-            if(T_Index == -1 && PAGES > 1){
+            if(PAGES > 1){
                 Scroll_to_Element("Scroll to Pagination", L3.get(1), ParentTest, "no_jira");
                     if (FAIL) { return;}    
                 Element_Click("Click Navigation Page 2", L3.get(1), ParentTest, "no_jira");
                     if (FAIL) { return;}                
                 List_L2("Menus Count on the Page 2", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
                 if (FAIL) { return;}
-                T_Index = -1;
+                T_Index = 1;
                 for (int i = 0; i < L2.size(); i++) { 
                     Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", ParentTest, "no_jira"); 
-                    if(t.trim().startsWith(GL_MENU)){
-                        T_Index = i;
-                    } 
+//                    if(t.trim().startsWith(GL_MENU)){
+//                        T_Index = i;
+//                    } 
                 } 
-                if(T_Index == -1 && PAGES > 2){
+                if( PAGES > 2){
                     Scroll_to_Element("Scroll to Pagination", L3.get(2), ParentTest, "no_jira");
                         if (FAIL) { return;}    
                     Element_Click("Click Navigation Page 3", L3.get(2), ParentTest, "no_jira");
                         if (FAIL) { return;}                
                     List_L2("Menus Count on the Page 3", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
                     if (FAIL) { return;}
-                    T_Index = -1;
+                    T_Index = 1;
                     for (int i = 0; i < L2.size(); i++) { 
                         Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", ParentTest, "no_jira"); 
-                        if(t.trim().startsWith(GL_MENU)){
-                            T_Index = i;
-                        } 
+//                        if(t.trim().startsWith(GL_MENU)){
+//                            T_Index = i;
+//                        } 
                     } 
                 }            
             }
         if(T_Index > -1){ 
-            Find_Text("Fund 'Search...' text", "Search Menus", true, ParentTest, "no_jira");   
-                if (FAIL) { return;}             
-            Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira"); 
-                if (FAIL) { return;}
-            Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, ParentTest, "no_jira");
+//            Find_Text("Fund 'Search...' text", "Search Menus", true, ParentTest, "no_jira");   
+//                if (FAIL) { return;}             
+//            Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}
+//            Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, ParentTest, "no_jira");
+//                if (FAIL) { return;} 
+//             Thread.sleep(500);
+//             
+//            List_Child_E1_By_Path("Find 'View Local Brands' button", L2.get(T_Index), "xpath", ".//button[@type='button'][3]", ParentTest, "no_jira"); 
+//                if (FAIL) { return;} 
+//            Element_Click("Click 'View Local Brands'", e1, ParentTest, "no_jira"); 
+//                if (FAIL) { return;}  
+//            Thread.sleep(500);  
+//            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}  
+//            Thread.sleep(500);  
+//            Page_URL("Current page URL", ParentTest, "no_jira");             
+//            Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}                  
+//            Find_Text("Fund 'Search...' text", "Search Menus", true, ParentTest, "no_jira");   
+//                if (FAIL) { return;}             
+//            Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}
+//            if(Location.isEmpty()){
+//                _t++; 
+//                _f++;
+//                EX += " - " + "\t" + "Find Local Menu by Brand Location" + "\t" + BRAND + "\t" + "Location is Blank - Cannot locate Local Menu" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+//                return;
+//            }
+            Element_By_Path_Text_Enter("Enter Local Menu Search", "css", "input[aria-label='Search Local Menus']", Location, false, ParentTest, "no_jira");
                 if (FAIL) { return;} 
-             Thread.sleep(500);
-             
-            List_Child_E1_By_Path("Find 'View Local Brands' button", L2.get(T_Index), "xpath", ".//button[@type='button'][3]", ParentTest, "no_jira"); 
-                if (FAIL) { return;} 
-            Element_Click("Click 'View Local Brands'", e1, ParentTest, "no_jira"); 
-                if (FAIL) { return;}  
-            Thread.sleep(500);  
-            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-                if (FAIL) { return;}  
-            Thread.sleep(500);  
-            Page_URL("Current page URL", ParentTest, "no_jira");             
-            Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
-                if (FAIL) { return;}                  
-            Find_Text("Fund 'Search...' text", "Search Menus", true, ParentTest, "no_jira");   
-                if (FAIL) { return;}             
-            Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira"); 
-                if (FAIL) { return;}
-            if(Location.isEmpty()){
-                _t++; 
-                _f++;
-                EX += " - " + "\t" + "Find Local Menu by Brand Location" + "\t" + BRAND + "\t" + "Location is Blank - Cannot locate Local Menu" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-                return;
-            }
-            Element_By_Path_Text_Enter("Enter Local Menu Search", "css", "[aria-label='Search Menus']", Location, false, ParentTest, "no_jira");
-                if (FAIL) { return;} 
-            Thread.sleep(500);  
-            Wait_For_Element_By_Path_Presence("Wait for 'VIEW LOCAL MENUS' button", "xpath", "//div[contains(text(), '" + "View Local Menus" + "')]", ParentTest, "no_jira"); 
-                if (FAIL) { return;} 
-            Element_By_Path_Click("Click 'VIEW LOCAL MENUS'", "xpath", "//div[contains(text(), '" + "View Local Menus" + "')]", ParentTest, "no_jira"); 
-                if (FAIL) { return;} 
+            Thread.sleep(1000);  
+            Element_By_Path_Click("Click 'VIEW LOCAL MENUS'", "xpath", "//span[@id='local-menu-label-0']", ParentTest, "no_jira");
             Thread.sleep(500); 
             Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 

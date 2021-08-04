@@ -5,7 +5,7 @@ class vote extends API_GUI{
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;
-        AP3_User_TKN = a.AP3_User_TKN;
+        AP3_TKN = a.AP3_TKN;
         SiteID = a.SiteID;
         BrandID = a.BrandID;
         UnitID = a.UnitID;
@@ -13,9 +13,6 @@ class vote extends API_GUI{
         ParentTest = a.ParentTest;
     }
     protected void run() {  
-    try {                                                          
-        //  
 
-    } catch (Exception ex){}   // =============================================  
     }
 }

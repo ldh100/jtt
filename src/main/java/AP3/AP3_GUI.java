@@ -23,6 +23,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -44,7 +45,7 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.zip.ZipEntry;
@@ -2703,27 +2704,27 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             }
         }
         if(_AWS_Alert && _f > 0) { // && failed
-            JSONObject requestParams = new JSONObject();
-            JSONObject payload = new JSONObject();
-            JSONObject custom_details = new JSONObject();            
-                payload.put("summary", "AP3 - Login/Welcome Page Sanity Check Failed");
-                payload.put("source", "https://adminpanel.compassdigital.org/#/");                
-                payload.put("severity", "critical");
-                    custom_details.put("environment", env);
-                    custom_details.put("user", A.A.UserID);
-                    custom_details.put("host", A.A.WsID); 
-                    custom_details.put("test_type", "jtt_cron"); 
-                    custom_details.put("steps_total", _t);
-                    custom_details.put("steps_failed", _f);
-            payload.put("custom_details", custom_details);    
-            requestParams.put("payload", payload);
-            requestParams.put("routing_key", "AWS_Routing_Key");
-            requestParams.put("event_action", "trigger");
-            requestParams.put("client", "JTT - AWS Special Projects");
-            requestParams.put("client_url", "ec2-3-13-3-59.us-east-2.compute.amazonaws.com");
-            String BODY = requestParams.toString(4);
-
-            Current_Log_Update(GUI, A.Func.AWS_ALERT(BODY));                       
+            Send_AWS_Allert(GUI);
+//            JSONObject requestParams = new JSONObject();
+//            JSONObject payload = new JSONObject();
+//            JSONObject custom_details = new JSONObject();            
+//                payload.put("summary", "AP3 - Login/Welcome Page Sanity Check Failed");
+//                payload.put("source", "https://adminpanel.compassdigital.org/#/");                
+//                payload.put("severity", "critical");
+//                    custom_details.put("environment", env);
+//                    custom_details.put("user", A.A.UserID);
+//                    custom_details.put("host", A.A.WsID); 
+//                    custom_details.put("test_type", "jtt_cron"); 
+//                    custom_details.put("steps_total", _t);
+//                    custom_details.put("steps_failed", _f);
+//            payload.put("custom_details", custom_details);    
+//            requestParams.put("payload", payload);
+//            requestParams.put("routing_key", "AWS_Routing_Key");
+//            requestParams.put("event_action", "trigger");
+//            requestParams.put("client", "JTT - AWS Special Projects");
+//            requestParams.put("client_url", "ec2-3-13-3-59.us-east-2.compute.amazonaws.com");
+//            String BODY = requestParams.toString(4);
+//            Current_Log_Update(GUI, A.Func.AWS_ALERT(BODY));                       
         }
         btnRun.setEnabled(true);
         if(!"".equals(F.trim())){
@@ -2945,7 +2946,30 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }         
     }
+    private void Send_AWS_Allert(boolean GUI){
+            JSONObject requestParams = new JSONObject();
+            JSONObject payload = new JSONObject();
+            JSONObject custom_details = new JSONObject();            
+                payload.put("summary", "AP3 - Login/Welcome Page Sanity Check Failed");
+                payload.put("source", "https://adminpanel.compassdigital.org/#/");                
+                payload.put("severity", "critical");
+                    custom_details.put("environment", env);
+                    custom_details.put("user", A.A.UserID);
+                    custom_details.put("host", A.A.WsID); 
+                    custom_details.put("test_type", "jtt_cron"); 
+                    custom_details.put("steps_total", _t);
+                    custom_details.put("steps_failed", _f);
+            payload.put("custom_details", custom_details);    
+            requestParams.put("payload", payload);
+            requestParams.put("routing_key", "AWS_Routing_Key");
+            requestParams.put("event_action", "trigger");
+            requestParams.put("client", "JTT - AWS Special Projects");
+            requestParams.put("client_url", "ec2-3-13-3-59.us-east-2.compute.amazonaws.com");
+            String BODY = requestParams.toString(4);
 
+            Current_Log_Update(GUI, A.Func.AWS_ALERT(BODY));          
+    }
+ 
     // <editor-fold defaultstate="collapsed" desc="Driver Actions > Log Step Result">  
     protected void Clear_Cookies_Restart_Driver(String BROWSER, ExtentTest ParentTest, String JIRA )throws Exception {
         if(sw1.isRunning()){
@@ -6099,14 +6123,18 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         FAIL = false;
         t = "";
         try {
-            File folder = new File(DIR); 
-            File[] listOfFiles = folder.listFiles();
+            List<File> listOfFiles = Files.list(Paths.get(DIR))
+                .filter(Files::isRegularFile)
+                .map(Path::toFile)
+                .collect(Collectors.toList());
+            //listOfFiles.forEach(System.out::println);  
             for (File file : listOfFiles) {
                 if (file.getName().contains(F_NAME)) {
                     t = file.getName();
                     break;
                 }
-            }
+            } 
+
             if("".equals(t)){
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + DIR + "\t" + F_NAME + "\t" + "WARN" + "\t" + "File not found" +

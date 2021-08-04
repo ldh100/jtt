@@ -22,6 +22,7 @@ import org.json.JSONObject;
  */
 
 class AP3_promo extends AP3_GUI{
+    String API_Response_Body = "";
     protected AP3_promo (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
@@ -42,13 +43,13 @@ class AP3_promo extends AP3_GUI{
         DH_MENU_ID = a.DH_MENU_ID;
         SECTOR = a.SECTOR;
         CompanyID = a.CompanyID;
+        GL_MENU = a.GL_MENU;
         
         AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
         New_ID = a.New_ID;
         TZone = a.TZone;
-    }    
-    String API_Response_Body = "";
+    }
     protected void run() { 
     try {    
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
@@ -62,8 +63,8 @@ class AP3_promo extends AP3_GUI{
         Page_URL("Promo Management page URL", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Thread.sleep(500);     
-        Wait_For_All_Elements_InVisibility("Wait for data...", "className", "v-datatable__progress", ParentTest, "no_jira"); 
-            if (FAIL) { return;}            
+//        Wait_For_All_Elements_InVisibility("Wait for data...", "className", "v-datatable__progress", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}            
         Wait_For_Element_By_Path_Presence("Wait for New Promotion", "xpath", "//div[contains(text(), 'New Promotion')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}    
 //Thread.sleep(20000); 
@@ -149,9 +150,9 @@ class AP3_promo extends AP3_GUI{
             }
         Element_Click("Click 'All'", L1.get(T_Index), ParentTest, "no_jira");
             if (FAIL) { return;}               
-        Thread.sleep(500);             
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
-            if (FAIL) { return;}   
+        Thread.sleep(1000);             
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}   
         Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}   
             
@@ -175,8 +176,8 @@ class AP3_promo extends AP3_GUI{
         Element_By_Path_Click("Click 'New Promotion'", "xpath", "//div[contains(text(),'New Promotion')]", ParentTest, "no_jira");
             if (FAIL) { return;} 
         Thread.sleep(500);    
-        Wait_For_All_Elements_InVisibility("Wait for data...", "className", "v-datatable__progress", ParentTest, "no_jira"); 
-            if (FAIL) { return;}            
+//        Wait_For_All_Elements_InVisibility("Wait for data...", "className", "v-datatable__progress", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}            
         Wait_For_Element_By_Path_Presence("Wait 'Promotion Name'", "xpath", "//div[contains(text(), 'Promotion Name')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}              
         // <editor-fold defaultstate="collapsed" desc="Verify-text">       
@@ -206,7 +207,7 @@ class AP3_promo extends AP3_GUI{
             if (FAIL) { return;}
         Element_By_Path_Text_Enter("Enter Promotion name", "xpath", "//input[@aria-label='Promotion Name']", "Automation Test Promo", false, ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Click("Click Create Notification Button", "xpath","//div[@class='v-btn__content'][normalize-space()='Create New Promotion']", ParentTest, "no_jira");
+        Element_By_Path_Click("Click Create Promotion Button", "xpath","//div[@class='v-btn__content'][normalize-space()='Create Promotion']", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Text("Warn: Promotion Description is required", "xpath","//div[@class='v-messages__message' and contains(text(),'Promotion Description is Required')]" , ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -396,7 +397,7 @@ Thread.sleep(5000);
             if (FAIL) { return;}
         Element_By_Path_Text_Enter("Enter discount percent", "xpath", "//div[contains(@class,'error--text')]//input[@type='number']", "50", false, ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Click("Click 'Create New Promotion' button", "xpath", "//button[@type='button']//div[contains(text(),'Create New Promotion')]", ParentTest, "no_jira");
+        Element_By_Path_Click("Click 'Create Promotion' button", "xpath", "//button[@type='button']//div[contains(text(),'Create Promotion')]", ParentTest, "no_jira");
             if (FAIL) { return;}   
         
         Promo_Actions("LTO");
@@ -572,7 +573,7 @@ Thread.sleep(3000);
             Element_By_Path_Text_Enter("Enter discount percent ", "xpath", "//div[contains(@class,'error--text')]//input[@type='number']", "50", false, ParentTest, "no_jira");
                 if (FAIL) { return;}
 
-            Element_By_Path_Click("Click 'Create New Promotion' button", "xpath", "//button[@type='button']//div[contains(text(),'Create New Promotion')]", ParentTest, "no_jira");
+            Element_By_Path_Click("Click 'Create Promotion' button", "xpath", "//button[@type='button']//div[contains(text(),'Create Promotion')]", ParentTest, "no_jira");
                 if (FAIL) { return;}   
             Promo_Actions("BOGO"); 
             EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Creating BOGO PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";  
@@ -747,7 +748,7 @@ Thread.sleep(3000);
             Find_Text("Find 'Bundle Price After Discounts' ","Bundle Price After Discounts" , true, ParentTest, "no_jira");
             Find_Text("Find 'Total Discount Given'","Total Discount Given" , true, ParentTest, "no_jira");
 
-            Element_By_Path_Click("Click 'Create New Promotion' button", "xpath", "//button[@type='button']//div[contains(text(),'Create New Promotion')]", ParentTest, "no_jira");
+            Element_By_Path_Click("Click 'Create Promotion' button", "xpath", "//button[@type='button']//div[contains(text(),'Create Promotion')]", ParentTest, "no_jira");
                 if (FAIL) { return;}      
             Promo_Actions("bundle");
             EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Creating BUNDLE PROMO" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
@@ -850,7 +851,7 @@ Thread.sleep(10000);
                 if (FAIL) { return;}
             Element_By_Path_Text_Enter("Enter discount amount", "xpath", "//div[contains(@class,'active')]//input[@type='number']", "0.50", false, ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Element_By_Path_Click("Click 'Create New Promotion' button", "xpath", "//button[@type='button']//div[contains(text(),'Create New Promotion')]", ParentTest, "no_jira");
+            Element_By_Path_Click("Click 'Create Promotion' button", "xpath", "//button[@type='button']//div[contains(text(),'Create Promotion')]", ParentTest, "no_jira");
                 if (FAIL) { return;}   
 
             Promo_Actions("LTO");
@@ -868,8 +869,8 @@ Thread.sleep(10000);
         Element_By_Path_Text_Enter("Enter Promotion Desription", "xpath", "//textarea[@aria-label='Promotion Description']", "Automation Test Promo " + Promo_type, false, ParentTest, "no_jira");
             if (FAIL) { return;}     
         // Select App 
-        Element_By_Path_Click("Open App Dropdown", "xpath","//label[normalize-space()='App']", ParentTest, "no_jira"); 
-            if (FAIL) { return;}      
+        Element_By_Path_Click("Open App Dropdown", "xpath","//input[@aria-label='App']", ParentTest, "no_jira"); 
+            if (FAIL) { return;}   
         Wait_For_Element_By_Path_Presence("Wait for 'App' list", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']", ParentTest, "no_jira");
             if (FAIL) { return;} 
         Element_E1_Find("Find 'App' list", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']", ParentTest, "no_jira");
@@ -886,9 +887,8 @@ Thread.sleep(10000);
             if (FAIL) { return;}
 Thread.sleep(5000);
         Scroll_XY("Scroll to brand", 0, 500, ParentTest, "no_jira"); // ========== ?????
-        Element_By_Path_Click("Open Brand Dropdown", "xpath","//div[@class='flex xs5']//div[@class='v-input border-label-input v-text-field v-text-field--enclosed v-text-field--outline v-select v-autocomplete theme--light']", ParentTest, "no_jira");
+      Element_By_Path_Click("Open Brand Dropdown", "xpath","//div[@class='flex xs5']//div[@class='v-input dropdown-always-active-label v-text-field v-text-field--enclosed v-text-field--outline v-select v-autocomplete theme--light']", ParentTest, "no_jira");
             if (FAIL) { return;}      
-       
         String menu_group = GL_MENU.concat(" (").concat(SECTOR).concat(")");
         Element_By_Path_Text_Enter("Enter Brand", "xpath", "//input[@aria-label='Brands']", menu_group, false, ParentTest, "no_jira");
             if (FAIL) { return;} 
@@ -1016,7 +1016,7 @@ Thread.sleep(5000);
         Wait_For_All_Elements_InVisibility("Wait for data...", "className", "v-datatable__progress", ParentTest, "no_jira"); 
             if (FAIL) { return;}       
 Thread.sleep(5000);   
-        Element_By_Path_Text_Enter("Enter Search 'Automation Test Promo'", "css","input[aria-label='Search Promotions']" , "Automation Test Promo", false, ParentTest, "no_jira");
+        Element_By_Path_Text_Enter("Enter Search 'Automation Test Promo'", "xpath","//input[@aria-label='Search Promotions']" , "Automation Test Promo", false, ParentTest, "no_jira");
             if (FAIL) { return;}  
         Find_Text("Find 'Automation Test promo'", "Automation Test Promo", true, ParentTest, "no_jira"); 
             if (FAIL) { return;} 
@@ -1078,7 +1078,7 @@ Thread.sleep(5000);
             Wait_For_All_Elements_InVisibility("Wait for data...", "className", "v-datatable__progress", ParentTest, "no_jira"); 
                 if (FAIL) { return;}       
 Thread.sleep(5000);
-            Element_By_Path_Text_Enter("Search for Cloned promo", "css","input[aria-label='Search Promotions']" , "Copy - Automation Test Promo", false, ParentTest, "no_jira");
+            Element_By_Path_Text_Enter("Search for Cloned promo", "xpath","//input[@aria-label='Search Promotions']" , "Copy - Automation Test Promo", false, ParentTest, "no_jira");
                 if (FAIL) { return;}  
              
             Find_Text("Find 'Cloned Automation Test promo'", "Automation Test Promo", true, ParentTest, "no_jira"); 
