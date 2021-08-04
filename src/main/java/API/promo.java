@@ -48,7 +48,7 @@ class promo extends API_GUI {
                 + "\"active\":false,"
                 + "\"app\":\"" + app + "\""
                 + "}";
-        JOB_Api_Call("Promotion - POST new promo voucher", "POST", BaseAPI + "/promo/voucher", Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Promotion - POST add new promo voucher", "POST", BaseAPI + "/promo/voucher", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
             try {
                 Promo_Voucher_Id = json.getString("id");
@@ -148,7 +148,7 @@ class promo extends API_GUI {
         //<editor-fold defaultstate="collapsed" desc="DELETE promo voucher">
         //</editor-fold>
         // Test Scenario 1: Positive flow to DELETE newly created promo voucher
-        JOB_Api_Call("Promotion - POST new promo voucher", "DELETE", BaseAPI + "/promo/voucher/" + Promo_Voucher_Id, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Promotion - DELETE newly added promo voucher", "DELETE", BaseAPI + "/promo/voucher/" + Promo_Voucher_Id, Auth, BODY, 200, ParentTest, "no_jira");
 
     }
 
