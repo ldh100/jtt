@@ -16,8 +16,7 @@ class announcement extends API_GUI {
     }
 
     protected void run() {
-        Auth = "Bearer " + AP3_TKN;   // =============== AP3 announcement ===========================
-        // String Announcement_ID = "";
+        Auth = "Bearer " + AP3_TKN;   
         ANNOUNCEMENT_IDS = new ArrayList<>();
         //<editor-fold defaultstate="collapsed" desc=" GET all Announcement ">
         // Test Scenario 1: Positive get all announcement

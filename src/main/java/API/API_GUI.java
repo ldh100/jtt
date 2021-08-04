@@ -602,6 +602,11 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String AP3_User_ID = "";
     protected String AP3_TKN = "";  
     
+    protected String RUNNER_ID = "";
+    protected String RUNNER_PW = "";
+    protected String Bolter_User_ID = "";
+    protected String Bolter_User_TKN = "";   
+    
     protected String MOBILE_ID = "";
     protected String MOBILE_PW = "";
     protected String Mobile_User_ID = "";
@@ -612,14 +617,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String Card_Name = "";
     protected String Card_Expire = "";
     protected String Mobile_User_PProvider = "";
-    protected String Payment_Method_TKN = ""; 
-    protected String Payment_TKN = "";
+    protected String Card_Method_TKN = ""; 
+    protected String EXACT_Payment_TKN = "";
+    protected String FP_Payment_TKN = "";
     
-    protected String RUNNER_ID = "";
-    protected String RUNNER_PW = "";
-    protected String Bolter_User_ID = "";
-    protected String Bolter_User_TKN = "";   
-
     private String HTML_Report_Path = "";
     private String Report_Date = "";
     private ExtentSparkReporter HtmlReporter;
@@ -675,8 +676,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String Bolter_Site_ID = "";  
     protected String Market_Brand_ID = ""; 
     
-    protected String ShoppingCart_ID = "";  
-    protected String OrderID = "";  
+    protected String ShoppingCart_Delivery_ID = "";  
+    protected String Order_Delivery_ID = "";  
+    protected String ShoppingCart_Pickup_ID = "";  
+    protected String Order_Pickup_ID = ""; 
     
     protected List<String> BolterBrandIDS; 
 
@@ -695,16 +698,17 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected List<String> ANNOUNCEMENT_IDS;
     
     protected boolean refund = true;
-    protected String Site_PProvider = "";
+    protected String Site_PProvider = "exact";
 //  "exact": {
-    protected String exact_gateway_password = ""; //": "~RSQzgwC",
-    protected String exact_gateway_id = ""; //": "AE7628-02",
-    protected String exact_id = ""; //": "APE3Ev9vQkfo2mmOpKP7fGJ48NKAPOugo0gdlWJqS3O",
-    protected String exate_gateway_password = ""; //": ""
+    protected String exact_gateway_password = "~RSQzgwC";
+    protected String exact_gateway_id = "AE7628-02";
+    protected String exact_id = "APE3Ev9vQkfo2mmOpKP7fGJ48NKAPOugo0gdlWJqS3O";
+    protected String exate_gateway_password = "";
 //  "freedompay": {
-    protected String freedompay_id = ""; //": "9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO",
-    protected String freedompay_terminal_id = ""; //": "26241559005",
-    protected String freedompay_store_id = ""; //": "16167424007"
+    protected String freedompay_id = "9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO";
+    protected String FP_URL = ""; //https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
+    protected String freedompay_terminal_id = "26241559005";
+    protected String freedompay_store_id = "16167424007";
 
 
     protected int _t = 0; // Total
@@ -2619,12 +2623,15 @@ public class API_GUI extends javax.swing.JInternalFrame {
             switch (env) {
                 case "ST":
                     BaseAPI = "https://api.compassdigital.org/staging";
+                    FP_URL = "https://cwallet.uat.freedompay.com";
                     break;
                 case "DE":
                     BaseAPI = "https://api.compassdigital.org/dev";
+                    FP_URL = "https://cwallet.uat.freedompay.com";
                     break; 
                 default:
                     BaseAPI = "https://api.compassdigital.org/v1";
+                    FP_URL = "https://cwallet.freedompay.com";
                     break;
             }
             AppID = A.Func.App_ID(app, env);
@@ -3050,7 +3057,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
         }
         
-        // =================  Mobile User, Paymant, ShoppimgCart, Order ===================
+        // =================  Mobile User, Paymant, ShoppingCart, Order ===================
         if(true){
             SCOPE += "Mobile User ";
             EX += " - " + "\t" + "Mobile User" + "\t" +  " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -3072,7 +3079,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Card_Type = BR.Card_Type; 
             Card_Last4 = BR.Card_Last4;
             Card_Name = BR.Card_Name; 
-            Payment_Method_TKN = BR.Payment_Method_TKN;
+            Card_Method_TKN = BR.Card_Method_TKN;
+            EXACT_Payment_TKN = BR.EXACT_Payment_TKN;
+            FP_Payment_TKN = BR.FP_Payment_TKN;
         }         
 
         if(!FAIL){
@@ -3082,7 +3091,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             shoppingcart BR = new API.shoppingcart(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time; 
-            ShoppingCart_ID = BR.ShoppingCart_ID;
+            ShoppingCart_Delivery_ID = BR.ShoppingCart_Delivery_ID;
+            ShoppingCart_Pickup_ID = BR.ShoppingCart_Pickup_ID;
         }          
         if(!FAIL){
             SCOPE += "Order ";
@@ -3090,7 +3100,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Order"); 
             order BR = new API.order(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            Order_Delivery_ID = BR.Order_Delivery_ID;
+            Order_Pickup_ID = BR.Order_Pickup_ID;
         }        
 
         // =================  Independed Bolter / KDS ===================
@@ -3121,8 +3133,16 @@ public class API_GUI extends javax.swing.JInternalFrame {
             kds BR = new API.kds(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
-        }        
-  
+        }      
+        
+        if(true){
+            SCOPE += "Logouts ";
+            EX += " - " + "\t" + "KDS " + "\t" +  " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Logouts");      
+            logouts BR = new API.logouts(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        }   
     }
     protected void JOB_Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY, int ExpStatus, ExtentTest ParentTest, String JIRA) {
         FAIL = false;

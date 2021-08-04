@@ -15,6 +15,26 @@ class shoppingcart extends API_GUI{
     protected void run() {  
         Auth = "Bearer " + Mobile_User_TKN;
         BODY = "{\"brand\":\"" + BrandID + "\"," +
+            "\"is\":{\"type\":\"pickup\"}," +
+            "\"mealSwipeTotal\":0.0," +
+            "\"menu\":\"" + MENU_IDS.get(MENU_IDS.size() - 1) + "\"," +
+            "\"payment_method\":{\"credit_card\":{}," +
+            "\"mealplan\":{}}," +
+            "\"showSingleTimeSlot\":false," +
+            "\"type\":0," +
+            "\"typeOfCell\":0}";
+        JOB_Api_Call("Create New ShoppingCart Pickup", "POST", // ===========================
+            BaseAPI + "/shoppingcart", Auth, BODY, 200, ParentTest, "no_jira");
+        if(json != null){
+            try{
+                ShoppingCart_Pickup_ID = json.getString("id");
+            } catch (Exception ex){
+                String AAAA = ex.getMessage();
+            }
+        }         
+        
+        
+        BODY = "{\"brand\":\"" + BrandID + "\"," +
             "\"is\":{\"type\":\"delivery\"}," +
             "\"mealSwipeTotal\":0.0," +
             "\"menu\":\"" + MENU_IDS.get(MENU_IDS.size() - 1) + "\"," +
@@ -23,11 +43,11 @@ class shoppingcart extends API_GUI{
             "\"showSingleTimeSlot\":false," +
             "\"type\":0," +
             "\"typeOfCell\":0}";
-        JOB_Api_Call("Create New ShoppingCart", "POST", // ===========================
+        JOB_Api_Call("Create New ShoppingCart Delivery", "POST", // ===========================
             BaseAPI + "/shoppingcart", Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
             try{
-                ShoppingCart_ID = json.getString("id");
+                ShoppingCart_Delivery_ID = json.getString("id");
             } catch (Exception ex){
                 String AAAA = ex.getMessage();
             }
@@ -37,15 +57,15 @@ class shoppingcart extends API_GUI{
             "\"quantity\":2," +
             "\"price\":{\"amount\":0.05}}]}"; 
         JOB_Api_Call("Add Last Menu Item to ShoppingCart", "PUT",           // ===========================
-            BaseAPI + "/shoppingcart/" + ShoppingCart_ID, Auth, BODY, 200, ParentTest, "no_jira");
+            BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");
         
         BODY = "{\"items\":[{\"id\":\"" + ITEMS_IDS.get(ITEMS_IDS.size() - 1) + "\"," +
             "\"quantity\":1}]}"; 
         JOB_Api_Call("Patch Last Menu Item: Quantity 2 > 1", "PATCH",           // ===========================
-            BaseAPI + "/shoppingcart/" + ShoppingCart_ID, Auth, BODY, 200, ParentTest, "no_jira");        
+            BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");        
 
         JOB_Api_Call("Get ShoppingCart after Patch", "GET",                             // ===========================
-            BaseAPI + "/shoppingcart/" + ShoppingCart_ID, Auth, "", 200, ParentTest, "no_jira");        
+            BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, "", 200, ParentTest, "no_jira");        
         
         if(ITEMS_IDS.size() > 1) {
             BODY = "{\"items\":[{\"id\":\"" + ITEMS_IDS.get(0) + "\"," +
@@ -53,17 +73,17 @@ class shoppingcart extends API_GUI{
                 "\"quantity\":1," +
                 "\"price\":{\"amount\":0.08}}]}"; 
             JOB_Api_Call("Add 1st Menu Item to ShoppingCart", "PUT",        // ===========================
-               BaseAPI + "/shoppingcart/" + ShoppingCart_ID, Auth, BODY, 200, ParentTest, "no_jira"); 
+               BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira"); 
             
             BODY = "{\"items\":[{\"id\":\"" + ITEMS_IDS.get(ITEMS_IDS.size() - 1) + "\"}]}"; 
             JOB_Api_Call("Delete ShoppingCart Last Menu Item", "DELETE", // ===========================
-               BaseAPI + "/shoppingcart/" + ShoppingCart_ID, Auth, BODY, 200, ParentTest, "no_jira");
+               BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");
         }
         JOB_Api_Call("Get ShoppingCart", "GET",                             // ===========================
-            BaseAPI + "/shoppingcart/" + ShoppingCart_ID, Auth, "", 200, ParentTest, "no_jira");
+            BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             try{
-                ShoppingCart_ID = json.getString("id");
+                ShoppingCart_Delivery_ID = json.getString("id");
             } catch (Exception ex){
                 String AAAA = ex.getMessage();
             }
