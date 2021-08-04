@@ -599,8 +599,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String ADMIN_ID = "";
     protected String ADMIN_PW = "";
     protected String AP3_User_ID = "";
-    protected String AP3_TKN = "";
-
+    protected String AP3_TKN = "";  
+    
+    protected String RUNNER_ID = "";
+    protected String RUNNER_PW = "";
+    protected String Bolter_User_ID = "";
+    protected String Bolter_User_TKN = "";   
+    
     protected String MOBILE_ID = "";
     protected String MOBILE_PW = "";
     protected String Mobile_User_ID = "";
@@ -611,14 +616,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String Card_Name = "";
     protected String Card_Expire = "";
     protected String Mobile_User_PProvider = "";
-    protected String Payment_Method_TKN = "";
-    protected String Payment_TKN = "";
-
-    protected String RUNNER_ID = "";
-    protected String RUNNER_PW = "";
-    protected String Bolter_User_ID = "";
-    protected String Bolter_User_TKN = "";
-
+    protected String Card_Method_TKN = ""; 
+    protected String EXACT_Payment_TKN = "";
+    protected String FP_Payment_TKN = "";
+    
     private String HTML_Report_Path = "";
     private String Report_Date = "";
     private ExtentSparkReporter HtmlReporter;
@@ -669,14 +670,16 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String CompanyID = "";
     protected String GL_MENU = "";
     protected String GL_MENU_ID = "";
-
-    protected String Bolter_Site_ID = "";
-    protected String Market_Brand_ID = "";
-
-    protected String ShoppingCart_ID = "";
-    protected String OrderID = "";
-
-    protected List<String> BolterBrandIDS;
+    
+    protected String Bolter_Site_ID = "";  
+    protected String Market_Brand_ID = ""; 
+    
+    protected String ShoppingCart_Delivery_ID = "";  
+    protected String Order_Delivery_ID = "";  
+    protected String ShoppingCart_Pickup_ID = "";  
+    protected String Order_Pickup_ID = ""; 
+    
+    protected List<String> BolterBrandIDS; 
 
     protected List<String> SECTOR_IDS;
     protected List<String> COMP_IDS;
@@ -692,18 +695,19 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected List<String> NOTIFICATION_IDS;
     protected List<String> ANNOUNCEMENT_IDS;
     protected List<String> PROMO_VOUCHER_IDS;
-
+    
     protected boolean refund = true;
-    protected String Site_PProvider = "";
+    protected String Site_PProvider = "exact";
 //  "exact": {
-    protected String exact_gateway_password = ""; //": "~RSQzgwC",
-    protected String exact_gateway_id = ""; //": "AE7628-02",
-    protected String exact_id = ""; //": "APE3Ev9vQkfo2mmOpKP7fGJ48NKAPOugo0gdlWJqS3O",
-    protected String exate_gateway_password = ""; //": ""
+    protected String exact_gateway_password = "~RSQzgwC";
+    protected String exact_gateway_id = "AE7628-02";
+    protected String exact_id = "APE3Ev9vQkfo2mmOpKP7fGJ48NKAPOugo0gdlWJqS3O";
+    protected String exate_gateway_password = "";
 //  "freedompay": {
-    protected String freedompay_id = ""; //": "9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO",
-    protected String freedompay_terminal_id = ""; //": "26241559005",
-    protected String freedompay_store_id = ""; //": "16167424007"
+    protected String freedompay_id = "9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO";
+    protected String FP_URL = ""; //https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
+    protected String freedompay_terminal_id = "26241559005";
+    protected String freedompay_store_id = "16167424007";
 
     protected int _t = 0; // Total
     protected int _p = 0; // Passed
@@ -727,8 +731,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
     private Duration DD;
     private String Last_EX = "";
     private String Report_File = "";
-    // </editor-fold>    
-
+    // </editor-fold>   
+    
     // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">        
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
         if (d1LastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
@@ -3307,9 +3311,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
             _i += BR._i;
             r_time += BR.r_time;
         }
-
-        // =================  Mobile User, Paymant, ShoppimgCart, Order ===================
-        if (true) {
+        
+        // =================  Mobile User, Paymant, ShoppingCart, Order ===================
+        if(true){
             SCOPE += "Mobile User ";
             EX += " - " + "\t" + "Mobile User" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Mobile User");
@@ -3341,9 +3345,11 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Mobile_User_PProvider = BR.Mobile_User_PProvider;
             Card_Type = BR.Card_Type;
             Card_Last4 = BR.Card_Last4;
-            Card_Name = BR.Card_Name;
-            Payment_Method_TKN = BR.Payment_Method_TKN;
-        }
+            Card_Name = BR.Card_Name; 
+            Card_Method_TKN = BR.Card_Method_TKN;
+            EXACT_Payment_TKN = BR.EXACT_Payment_TKN;
+            FP_Payment_TKN = BR.FP_Payment_TKN;
+        }         
 
         if (!FAIL) {
             SCOPE += "ShoppingCart ";
@@ -3351,29 +3357,20 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("ShoppingCart");
             shoppingcart BR = new API.shoppingcart(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
-            ShoppingCart_ID = BR.ShoppingCart_ID;
-        }
-        if (!FAIL) {
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time; 
+            ShoppingCart_Delivery_ID = BR.ShoppingCart_Delivery_ID;
+            ShoppingCart_Pickup_ID = BR.ShoppingCart_Pickup_ID;
+        }          
+        if(!FAIL){
             SCOPE += "Order ";
             EX += " - " + "\t" + "Order" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Order");
             order BR = new API.order(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
-        }
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            Order_Delivery_ID = BR.Order_Delivery_ID;
+            Order_Pickup_ID = BR.Order_Pickup_ID;
+        }        
 
         // =================  Independed Bolter / KDS ===================
         if (true) {
@@ -3414,15 +3411,17 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("KDS");
             kds BR = new API.kds(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
-        }
-
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        }      
+        
+        if(true){
+            SCOPE += "Logouts ";
+            EX += " - " + "\t" + "KDS " + "\t" +  " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Logouts");      
+            logouts BR = new API.logouts(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+        }   
     }
 
     protected void JOB_Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY, int ExpStatus, ExtentTest ParentTest, String JIRA) {
