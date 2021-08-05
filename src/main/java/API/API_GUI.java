@@ -3007,7 +3007,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
     //</editor-fold>    
 
     private void Execute() throws Exception {
-
         if (true) {
             SCOPE += "AP3 User ";
             EX += " - " + "\t" + "AP3 User" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -3020,9 +3019,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
             AP3_User_ID = BR.AP3_User_ID;
             AP3_TKN = BR.AP3_TKN;
         }
-        if(true){
-            return;
-        }
+//        if(true){
+//            return;
+//        }
         if (!FAIL) {
             SCOPE += "Locations ";
             EX += " - " + "\t" + "Locations" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -3265,7 +3264,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         String R_Time = "";
         String ErrorMsg = "";
         json = null;
-        Date API_SRART = new Date();
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time buds
         RequestSpecification request;
         request = RestAssured.given();
         if (!AUTH.isEmpty()) {
@@ -3358,6 +3357,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         String Result = "?";
         int status = 0;
         String R_Time = "";
+        Date API_SRART = new Date();
         json = null;
         try {
             if (sw1.isRunning()) {
@@ -3378,7 +3378,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "PASS" + "\t" + " - "
                     + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "WS" + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + EndPoint), new Date());
+            Log_Html_Result("PASS", "WS" + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + EndPoint), API_SRART);
 
         }
         catch (Exception ex) {
@@ -3391,7 +3391,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             }
             EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err
                     + "\t" + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + EndPoint), new Date());
+            Log_Html_Result("FAIL", "Error: " + err + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + EndPoint), API_SRART);
         }
         r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
         sw1.reset();

@@ -30,7 +30,7 @@ class payment extends API_GUI{
         List<String> Payment_Methods_IDS = new ArrayList<>();
         Auth = "Bearer " + Mobile_User_TKN;
         
-        JOB_Api_Call("Mobile User Payment Method(s) (Deprecated?)", "GET", 
+        JOB_Api_Call("Mobile User Payment Method(s)", "GET", 
             BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             try {
@@ -58,11 +58,11 @@ class payment extends API_GUI{
         }
 
  
-        if(Site_PProvider.equals("exact")){
+//        if(Site_PProvider.equals("exact")){
             EXACT();
-        }else{
+//        }else{
             FP();
-        }
+//        }
    }
     
    private void EXACT(){
@@ -80,7 +80,7 @@ class payment extends API_GUI{
 
         JOB_Api_Call("New Card - Generate Mobile User Payment Token (exact)", "POST", 
             BaseAPI + "/payment/" + exact_id + "/paymenttoken", Auth, BODY, 200, ParentTest, "no_jira");
-        if(json != null){
+        if(json != null && json.has("token")){
             try {
                 EXACT_Payment_TKN = json.getString("token");
             } catch (Exception ex){
@@ -90,6 +90,17 @@ class payment extends API_GUI{
    }
     
    private void FP(){
+        String FP_Access_TKN = "";
+        JOB_Api_Call("Get Mobile User Freedompay Client Token", "GET", 
+            BaseAPI + "/payment/" + freedompay_id + "/clienttoken", Auth, BODY, 200, ParentTest, "no_jira");
+        if(json != null && json.has("token")){
+            try {
+                FP_Access_TKN = json.getString("token");
+            } catch (Exception ex){
+                String AAAA = ex.getMessage();
+            }
+        }      
+        
         JSONObject requestParams = new JSONObject();
         requestParams.put("cardholder_name", Card_Name);
         requestParams.put("cc_expiry", "1224");
@@ -104,7 +115,7 @@ class payment extends API_GUI{
 
         JOB_Api_Call("New Card - Generate Mobile User Payment Token (freedompay)", "POST", 
             BaseAPI + "/payment/" + freedompay_id + "/paymenttoken", Auth, BODY, 200, ParentTest, "no_jira");
-        if(json != null){
+        if(json != null && json.has("token")){
             try {
                 FP_Payment_TKN = json.getString("token");
             } catch (Exception ex){

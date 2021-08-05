@@ -7,7 +7,7 @@ import org.json.JSONObject;
 class order extends API_GUI{
     protected order(API_GUI a) {
         app = a.app;
-        AppID = AppID;
+        AppID = a.AppID;
         env = a.env;
         AP3_TKN = a.AP3_TKN;
         BaseAPI = a.BaseAPI;
@@ -23,10 +23,12 @@ class order extends API_GUI{
         UnitNum = a.UnitNum;
         ParentTest = a.ParentTest;
         
-        ShoppingCart_Delivery_ID = a.ShoppingCart_Delivery_ID;
+        MENU_IDS = a.MENU_IDS;
+        ITEMS_IDS = a.ITEMS_IDS;
         MENU_TIMESLOTS = a.MENU_TIMESLOTS;
         BRAND_TIMESLOTS = a.BRAND_TIMESLOTS;
         DELIEVERY_DESTINATIONS = a.DELIEVERY_DESTINATIONS;
+        
         ShoppingCart_Delivery_ID = a.ShoppingCart_Delivery_ID;
         ShoppingCart_Pickup_ID = a.ShoppingCart_Pickup_ID;
         EXACT_Payment_TKN = a.EXACT_Payment_TKN;
@@ -83,7 +85,7 @@ class order extends API_GUI{
         JSONObject is = new JSONObject();
         payment.put("accepted", true);
         payment.put("ready", true);
-        payment.put("out_for_delivery", true);
+        payment.put("out_for_delivery", false);
         payment.put("delivered", false);
         requestParams.put("is", is); 
         BODY = requestParams.toString();
