@@ -178,6 +178,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         _export_menuset = new javax.swing.JCheckBox();
         _mm_items = new javax.swing.JCheckBox();
         _brand_config = new javax.swing.JCheckBox();
+        _mm_import = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -189,29 +190,29 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         setVerifyInputWhenFocusTarget(false);
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 AP3_AncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameClosed(evt);
             }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -768,6 +769,14 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         _brand_config.setMargin(new java.awt.Insets(0, 0, 0, 0));
         _brand_config.setRequestFocusEnabled(false);
 
+        _mm_import.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _mm_import.setText("MM Import");
+        _mm_import.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _mm_import.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _mm_import.setIconTextGap(1);
+        _mm_import.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        _mm_import.setRequestFocusEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -792,17 +801,22 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                                 .addComponent(txtComp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtSector, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(_smart_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(_sales_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(_sales_reporting, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(_reschedule_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(_brand_config, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(_brand_closure, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(_brand, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(0, 0, 0)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(_smart_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(_sales_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(_sales_reporting, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(_reschedule_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(_brand_config, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(_brand_closure, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(_brand, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(4, 4, 4))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(_mm_import, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(_sales_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(_orders_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -876,7 +890,9 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                     .addComponent(_smart_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_orders_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
-                .addComponent(_sales_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(_sales_report_hidden, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_mm_import, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(_menu_manager, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -890,7 +906,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                         .addGap(2, 2, 2)
                         .addComponent(_mm_items, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
                         .addComponent(txtSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
                         .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -987,6 +1002,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     private boolean _Notifications = false;
     private boolean _Bulk_apply = false;
     private boolean _Export_menuset = false;
+    private boolean _MM_import = false;
     private boolean _MM_items = false;
     private boolean _Images = false;
     private boolean _Timeslots = false;
@@ -1917,6 +1933,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_bulk_apply: "))  _bulk_apply.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_export_menuset: "))  _export_menuset.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_mm_items: "))  _mm_items.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_mm_import: "))  _mm_import.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_images: "))  _images.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_orders: "))  _orders.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_sales_reporting: "))  _sales_reporting.setSelected(Boolean.parseBoolean(value));
@@ -1995,6 +2012,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             C += "_notifications: " + _notifications.isSelected() + "\r\n";
             C += "_bulk_apply: " + _bulk_apply.isSelected() + "\r\n";
             C += "_export_menuset: " + _export_menuset.isSelected() + "\r\n";
+            C += "_mm_import: " + _mm_import.isSelected() + "\r\n";
             C += "_mm_items: " + _mm_items.isSelected() + "\r\n";
             C += "_images: " + _images.isSelected() + "\r\n";
             C += "_timeslots: " + _timeslots.isSelected() + "\r\n";
@@ -2106,6 +2124,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             _Bulk_apply = _bulk_apply.isSelected();
             _Export_menuset = _export_menuset.isSelected();
             _MM_items = _mm_items.isSelected();
+            _MM_import = _mm_import.isSelected();
             _Images = _images.isSelected();
             _Timeslots = _timeslots.isSelected();
             _Orders = _orders.isSelected();
@@ -2254,7 +2273,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_bulk_apply: ")) _Bulk_apply = Boolean.parseBoolean(value);
                 if(l.contains("_export_menuset: ")) _Export_menuset = Boolean.parseBoolean(value);
                 if(l.contains("_mm_items: ")) _MM_items = Boolean.parseBoolean(value);
-
+                if(l.contains("_mm_import: ")) _MM_import = Boolean.parseBoolean(value);
                 if(l.contains("_images: ")) _Images = Boolean.parseBoolean(value);
                 if(l.contains("_timeslots: ")) _Timeslots = Boolean.parseBoolean(value); 
                 if(l.contains("_orders: ")) _Orders = Boolean.parseBoolean(value);
@@ -2793,6 +2812,13 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             SCOPE += ", Export menuset";
             ParentTest = HtmlReport.createTest("Export menuset"); 
             AP3_export_menuset BR = new AP3.AP3_export_menuset(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+        } 
+        if(_MM_import){
+            SCOPE += ", Import Global menu / Modifier";
+            ParentTest = HtmlReport.createTest("Import menuset"); 
+            AP3_mm_import BR = new AP3.AP3_mm_import(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         } 
@@ -6459,6 +6485,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _login;
     private javax.swing.JCheckBox _logout;
     private javax.swing.JCheckBox _menu_manager;
+    private javax.swing.JCheckBox _mm_import;
     private javax.swing.JCheckBox _mm_items;
     private javax.swing.JCheckBox _notifications;
     private javax.swing.JCheckBox _orders;

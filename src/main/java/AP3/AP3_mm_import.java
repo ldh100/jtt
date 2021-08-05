@@ -21,10 +21,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author roya.jacob
  */
-class AP3_import_mm extends AP3_GUI{
+class AP3_mm_import extends AP3_GUI{
     String API_Response_Body = ""; 
     
-    protected AP3_import_mm (AP3_GUI a) {
+    protected AP3_mm_import (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;
@@ -59,8 +59,6 @@ class AP3_import_mm extends AP3_GUI{
     
     protected void run() { 
      try{
-                GL_MENU = "Starbucks";
-
                 Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/globalmods", ParentTest, "no_jira");
                     if (FAIL) { return;}
                 Thread.sleep(500);
@@ -78,28 +76,25 @@ class AP3_import_mm extends AP3_GUI{
                  Thread.sleep(3000);
                 File_UnZip("Unzip global mod export file ", dest_dir, t, ParentTest, "no_jira");
                  if (FAIL) { return;}          
-                File_Delete("Delete Report Zip File", dest_dir,MenuSetFile , ParentTest, "no_jira");
+                File_Delete("Delete Report Zip File", dest_dir,MenuSetFile, ParentTest, "no_jira");
                  if (FAIL) { return;}  
                 MenuSetFile = GL_MENU.trim()+"-global-modifier-groups.xlsx";
-               // readExcel( dest_dir, MenuSetFile,"Modifier Groups");
                 convertPLUExcel(dest_dir,MenuSetFile,"Modifier Groups");
                 String[] valueToWrite = {"Modifier Group","","Auto Mod group "+New_ID,"Automation Label "+New_ID,"0","1","2","TRUE","","","","","","","",""};
                 writeExcel(dest_dir,MenuSetFile,"Modifier Groups",valueToWrite);
                 valueToWrite = new String[] {"Modifier","","","","","","","","","Automation Mod "+New_ID,"5","20","1","600200","TRUE","[\"Prepared\"]"};
                 writeExcel(dest_dir,MenuSetFile,"Modifier Groups",valueToWrite);
                
-                
                 File xlsfile = new File(dest_dir+File.separator+MenuSetFile);
                 if(xlsfile.exists()){
                    Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", dest_dir+File.separator+MenuSetFile, false, ParentTest, "no_jira"); 
                      if (FAIL) { return;}
-                }else
-                { _t++; 
-                  _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :"+MenuSetFile + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                }  
+                    }else
+                    { _t++; 
+                      _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :"+MenuSetFile + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    }  
                 Find_Text("Check if any Import Errors", "Import Errors", false, ParentTest, "no_jira");
                   if (FAIL) { return;}
-             
                 Element_By_Path_Click("Click Publish", "xpath", "//div[@class='flex shrink']//div[normalize-space()='publish']", ParentTest, "no_jira");
                   if (FAIL) { return;}
                
