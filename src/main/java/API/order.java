@@ -7,12 +7,20 @@ import org.json.JSONObject;
 class order extends API_GUI{
     protected order(API_GUI a) {
         app = a.app;
+        AppID = AppID;
         env = a.env;
+        AP3_TKN = a.AP3_TKN;
         BaseAPI = a.BaseAPI;
         Mobile_User_ID = a.Mobile_User_ID;
         Mobile_User_TKN = a.Mobile_User_TKN;
+        
+        SITE = a.SITE;
         SiteID = a.SiteID;
+        BRAND = a.BRAND;
         BrandID = a.BrandID;
+
+        UnitID = a.UnitID;
+        UnitNum = a.UnitNum;
         ParentTest = a.ParentTest;
         
         ShoppingCart_Delivery_ID = a.ShoppingCart_Delivery_ID;
@@ -67,11 +75,26 @@ class order extends API_GUI{
             BaseAPI + "/order?lang=en", Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
             String AAA = "JSON";
-        }        
+        }  
+        
+        
         long m1 = System.currentTimeMillis();                     
         long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // - 7 days
         JOB_Api_Call("Mobile User Orders - last 7 days", "GET", 
             BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1, Auth, "", 200, ParentTest, "no_jira");
+        
+        JOB_Api_Call("Mobile User All Orders - Brand '" + BRAND + "'", "GET", 
+            BaseAPI + "/order/customer/" + Mobile_User_ID + "/location/brand/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
+        
+        Auth = "Bearer " + AP3_TKN;
+        JOB_Api_Call("All Orders - Brand '" + BRAND + "'", "GET", 
+            BaseAPI + "/order/location/brand/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
 
+        JOB_Api_Call("All Orders - Location '" + UnitNum + "'", "GET", 
+            BaseAPI + "/order/location/" + UnitID, Auth, "", 200, ParentTest, "no_jira");
+        
+        JOB_Api_Call("All Orders - Group '" + SITE + "'", "GET", 
+            BaseAPI + "/order/location/group/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
+           
     }
 }

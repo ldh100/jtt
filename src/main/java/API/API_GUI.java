@@ -3071,12 +3071,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Global/Local Menus");
             menus BR = new API.menus(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
             r_time += BR.r_time;
             //MENU_TIMESLOTS = BR.MENU_TIMESLOTS; 
             CATEGORIES_IDS = BR.CATEGORIES_IDS;
@@ -3182,7 +3177,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Order_Pickup_ID = BR.Order_Pickup_ID;
         }        
 
-        // =================  Independed Bolter / KDS ===================
+        // =================  Bolter / KDS ===================
         if (true) {
             SCOPE += "Bolter ";
             EX += " - " + "\t" + "Bolter" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -3216,14 +3211,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
         
         if(true){
             SCOPE += "Logouts ";
-            EX += " - " + "\t" + "KDS " + "\t" +  " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + "Logouts" + "\t" +  " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Logouts");      
             logouts BR = new API.logouts(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
         }   
     }
-
     protected void JOB_Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY, int ExpStatus, ExtentTest ParentTest, String JIRA) {
         FAIL = false;
         String Result = "?";
@@ -3318,7 +3312,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
         sw1.reset();
     }
-
     protected void JOB_WS_Call(String NAME, String EndPoint, ExtentTest ParentTest, String JIRA) {
         FAIL = false;
         String Result = "?";
