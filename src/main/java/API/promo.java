@@ -16,7 +16,6 @@ class promo extends API_GUI {
         SiteID = a.SiteID;
         BrandID = a.BrandID;
         ParentTest = a.ParentTest;
-
     }
     private Date release_date = new DateTime(new Date()).plusHours(4).plusMinutes(1).toDate();
     private String RELEASE_DATE_SECONDS = new SimpleDateFormat(111 + "mm:ss.SSS").format(release_date);
