@@ -73,6 +73,7 @@ class user_mobile extends API_GUI{
             "\"password\":\"" + "Zxtsaq9ppnppvbyi11f0nk" + "\"}";
         JOB_Api_Call("Mobile Create New User > Email Already Exists", "POST", 
             BaseAPI + "/user", Auth, BODY, 409, ParentTest, "no_jira"); 
+              
                 
 //        BODY = "{\"name\":" +                                       //  New Mobile User ===============================
 //                "{\"first\":\"Jtt\",\"last\":\"Automation\"}," + 
@@ -91,8 +92,5 @@ class user_mobile extends API_GUI{
 //            }
 //        } 
 
-//        Auth = "Bearer " + AP3_TKN;
-//        JOB_Api_Call("New Mobile User - Delete", "DELETE", // Mobile User Delete ===============================
-//            BaseAPI + "/user/" + New_User_ID, Auth, "", 200, ParentTest, "no_jira");          
     }
 }
