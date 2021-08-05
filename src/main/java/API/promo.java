@@ -76,8 +76,7 @@ class promo extends API_GUI {
                 + "}";
         JOB_Api_Call("Promotion - POST add new promo voucher  with PERCENTAGE type", "POST", BaseAPI + "/promo/voucher", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
-            try {
-             
+            try {          
                 PROMO_VOUCHER_IDS.add(json.getString("id"));
             }
             catch (Exception ex) {
@@ -170,6 +169,7 @@ class promo extends API_GUI {
                 + "}";
         JOB_Api_Call("Promotion - PUT/Update nelwly added promo voucher without type", "PUT", BaseAPI + "/promo/voucher" + PROMO_VOUCHER_IDS.get(0), Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
+
         //<editor-fold defaultstate="collapsed" desc="DELETE promo voucher">
         //</editor-fold>
         // Test Scenario 1: Positive flow to DELETE newly created promo voucher

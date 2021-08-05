@@ -26,6 +26,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
@@ -2597,7 +2598,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         //HtmlReporter.config().setTheme(Theme.DARK);               
         HtmlReporter.config().setTheme(Theme.STANDARD);
     }
-    protected void Log_Html_Result(String RES, String Test_Description, ExtentTest Test) {
+    protected void Log_Html_Result(String RES, String Test_Description, ExtentTest Test, Date API_Start) {
         switch (RES) {
             case "PASS":
                 Test.log(Status.PASS, MarkupHelper.createLabel(Test_Description, ExtentColor.GREEN));
@@ -2612,6 +2613,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 Test.log(Status.WARNING, MarkupHelper.createLabel(Test_Description, ExtentColor.YELLOW));
                 break;
         }
+        Test.getModel().setStartTime(API_Start);
+        Test.getModel().setEndTime(new Date());
     }
     //</editor-fold>
 
@@ -3012,8 +3015,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
             user_ap3 BR = new API.user_ap3(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            ParentTest.getModel().setName("AP3 User - " + BR._t + " steps");
+            ParentTest.getModel().setEndTime(new Date());
             AP3_User_ID = BR.AP3_User_ID;
             AP3_TKN = BR.AP3_TKN;
+        }
+        if(true){
+            return;
         }
         if (!FAIL) {
             SCOPE += "Locations ";
@@ -3022,6 +3030,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             locations BR = new API.locations(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            ParentTest.getModel().setName("Locations - " + BR._t + " steps");
+            ParentTest.getModel().setEndTime(new Date());
             AppID = BR.AppID;
             SiteID = BR.SiteID;
             UnitID = BR.UnitID;
@@ -3036,7 +3046,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             if (MENU_IDS.size() < 1) {
                 EX += " - " + "\t" + "Brand: " + BRAND + "\t" + "No Menu(s)" + "\t" + " - " + "\t" + "WARN" + "\t" + " - "
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "", ParentTest.createNode("Brand: " + BRAND + " No Menus"));
+                Log_Html_Result("WARN", "", ParentTest.createNode("Brand: " + BRAND + " No Menus"), new Date());
                 FAIL = true;
             }
         }
@@ -3047,6 +3057,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
             config BR = new API.config(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            ParentTest.getModel().setName("Config - " + BR._t + " steps");
+            ParentTest.getModel().setEndTime(new Date());
+            
             Site_PProvider = BR.Site_PProvider;
             freedompay_id = BR.freedompay_id;
             freedompay_terminal_id = BR.freedompay_terminal_id;
@@ -3063,6 +3076,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             promo BR = new API.promo(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            ParentTest.getModel().setName("Promo - " + BR._t + " steps");
+            ParentTest.getModel().setEndTime(new Date());
         }
 
         if (!FAIL) {
@@ -3072,25 +3087,26 @@ public class API_GUI extends javax.swing.JInternalFrame {
             menus BR = new API.menus(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
-            r_time += BR.r_time;
-            //MENU_TIMESLOTS = BR.MENU_TIMESLOTS; 
+            ParentTest.getModel().setName("Menus - " + BR._t + " steps");
+            ParentTest.getModel().setEndTime(new Date());
+
             CATEGORIES_IDS = BR.CATEGORIES_IDS;
             ITEMS_IDS = BR.ITEMS_IDS;
 
             if (MENU_TIMESLOTS.size() < 1) {
                 EX += " - " + "\t" + "Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "No Timeslots" + "\t" + " - " + "\t" + "WARN" + "\t" + " - "
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "No Timeslots", ParentTest.createNode("Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "  >>> No Timeslots"));
+                Log_Html_Result("WARN", "No Timeslots", ParentTest.createNode("Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "  >>> No Timeslots"), new Date());
                 FAIL = true;
             } else if (CATEGORIES_IDS.size() < 1) {
                 EX += " - " + "\t" + "Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "No Categories" + "\t" + " - " + "\t" + "WARN" + "\t" + " - "
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "No Categories", ParentTest.createNode("Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "  >>> No Categories"));
+                Log_Html_Result("WARN", "No Categories", ParentTest.createNode("Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "  >>> No Categories"), new Date());
                 FAIL = true;
             } else if (ITEMS_IDS.size() < 1) {
                 EX += " - " + "\t" + "Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "No Items" + "\t" + " - " + "\t" + "WARN" + "\t" + " - "
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "No Items", ParentTest.createNode("Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "  >>> No Items"));
+                Log_Html_Result("WARN", "No Items", ParentTest.createNode("Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "  >>> No Items"), new Date());
                 FAIL = true;
             }
         }
@@ -3102,6 +3118,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             calendar BR = new API.calendar(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            ParentTest.getModel().setName("Calendar - " + BR._t + " steps");
+            ParentTest.getModel().setEndTime(new Date());
         }
         if (true) {
             SCOPE += "Reports ";
@@ -3110,7 +3128,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             reports BR = new API.reports(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
-
+            ParentTest.getModel().setName("Reports - " + BR._t + " steps");
+            ParentTest.getModel().setEndTime(new Date());
         }
         if (true) {
             SCOPE += "Announcement ";
@@ -3119,6 +3138,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             announcement BR = new API.announcement(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            ParentTest.getModel().setName("Announcement - " + BR._t + " steps");
+            ParentTest.getModel().setEndTime(new Date());
         }
         if (true) {
             SCOPE += "Notification ";
@@ -3127,6 +3148,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             notification BR = new API.notification(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            ParentTest.getModel().setName("Notification- " + BR._t + " steps");
+            ParentTest.getModel().setEndTime(new Date());
         }
         
         // =================  Mobile User, Paymant, ShoppingCart, Order ===================
@@ -3137,6 +3160,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
             user_mobile BR = new API.user_mobile(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            ParentTest.getModel().setName("Mobile User - " + BR._t + " steps");
+            ParentTest.getModel().setEndTime(new Date());
+            
             Mobile_User_ID = BR.Mobile_User_ID;
             Mobile_User_TKN = BR.Mobile_User_TKN;
         }
@@ -3147,6 +3173,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
             payment BR = new API.payment(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            ParentTest.getModel().setName("Payment - " + BR._t + " steps");
+            ParentTest.getModel().setEndTime(new Date());
+
             Mobile_User_PProvider = BR.Mobile_User_PProvider;
             Card_Type = BR.Card_Type;
             Card_Last4 = BR.Card_Last4;
@@ -3163,6 +3192,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
             shoppingcart BR = new API.shoppingcart(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time; 
+            ParentTest.getModel().setName("ShoppingCart - " + BR._t + " steps");
+            ParentTest.getModel().setEndTime(new Date());
+
             ShoppingCart_Delivery_ID = BR.ShoppingCart_Delivery_ID;
             ShoppingCart_Pickup_ID = BR.ShoppingCart_Pickup_ID;
         }          
@@ -3173,6 +3205,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             order BR = new API.order(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            ParentTest.getModel().setName("Order - " + BR._t + " steps");
             Order_Delivery_ID = BR.Order_Delivery_ID;
             Order_Pickup_ID = BR.Order_Pickup_ID;
         }        
@@ -3185,6 +3218,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             user_bolter BR = new API.user_bolter(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            ParentTest.getModel().setName("Bolter - " + BR._t + " steps");
+            ParentTest.getModel().setEndTime(new Date());
 
             Bolter_User_ID = BR.Bolter_User_ID;
             Bolter_User_TKN = BR.Bolter_User_TKN;
@@ -3198,7 +3233,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             task BR = new API.task(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
-
+            ParentTest.getModel().setName("Task - " + BR._t + " steps");
+            ParentTest.getModel().setEndTime(new Date());
         }
         if (true) {
             SCOPE += "KDS ";
@@ -3207,6 +3243,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             kds BR = new API.kds(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+            ParentTest.getModel().setName("KDS - " + BR._t + " steps");
+            ParentTest.getModel().setEndTime(new Date());
         }      
         
         if(true){
@@ -3216,6 +3254,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             logouts BR = new API.logouts(API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+            ParentTest.getModel().setName("Logouts - " + BR._t + " steps");
+            ParentTest.getModel().setEndTime(new Date());
         }   
     }
     protected void JOB_Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY, int ExpStatus, ExtentTest ParentTest, String JIRA) {
@@ -3225,6 +3265,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         String R_Time = "";
         String ErrorMsg = "";
         json = null;
+        Date API_SRART = new Date();
         RequestSpecification request;
         request = RestAssured.given();
         if (!AUTH.isEmpty()) {
@@ -3284,7 +3325,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "PASS" + "\t" + "Attempt #" + i
                         + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 Log_Html_Result("PASS", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")"
-                        + "  Attempt #" + i, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+                        + "  Attempt #" + i, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint), API_SRART);
 //break; // =================  Do not attempt againg if passed                    
             } else {
                 _f++;
@@ -3292,7 +3333,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "FAIL" + "\t" + "Attempt #" + i
                         + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 Log_Html_Result("FAIL", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")"
-                        + "  Attempt #" + i, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+                        + "  Attempt #" + i, ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint), API_SRART);
             }
 //} // =======   3 times Loop if not good
 
@@ -3307,7 +3348,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             }
             EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err
                     + "\t" + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint));
+            Log_Html_Result("FAIL", "Error: " + err + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + Method + ": " + EndPoint), API_SRART);
         }
         r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
         sw1.reset();
@@ -3337,7 +3378,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "PASS" + "\t" + " - "
                     + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "WS" + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + EndPoint));
+            Log_Html_Result("PASS", "WS" + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + EndPoint), new Date());
 
         }
         catch (Exception ex) {
@@ -3350,7 +3391,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             }
             EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err
                     + "\t" + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + EndPoint));
+            Log_Html_Result("FAIL", "Error: " + err + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + EndPoint), new Date());
         }
         r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
         sw1.reset();

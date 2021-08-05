@@ -49,13 +49,13 @@ class payment extends API_GUI{
             } catch (Exception ex){
                 String AAAA = ex.getMessage();
             }
-        }   
-//        BODY = "{\"user\":\"" + Mobile_User_ID + "\"}";
-//        for(int i = 0; i < Payment_Methods_IDS.size(); i++){
-//            JOB_Api_Call("Mobile User Delete Payment Method", "DELETE", 
-//                BaseAPI + "/payment/" + P_ID + "/method/" + Payment_Methods_IDS.get(i), Auth, BODY, 200, ParentTest, "no_jira");
-//        }
+        } 
         
+        BODY = "{\"user\":\"" + Mobile_User_ID + "\"}";
+        for(int i = 0; i < Payment_Methods_IDS.size(); i++){
+            JOB_Api_Call("Mobile User Delete Payment Method " + (i+1), "DELETE", 
+                BaseAPI + "/payment/" + exact_id + "/method/" + Payment_Methods_IDS.get(i), Auth, BODY, 200, ParentTest, "no_jira");
+        }
 
  
         if(Site_PProvider.equals("exact")){
@@ -63,7 +63,6 @@ class payment extends API_GUI{
         }else{
             FP();
         }
- 
    }
     
    private void EXACT(){
@@ -79,7 +78,7 @@ class payment extends API_GUI{
         requestParams.put("options", options);
         BODY = requestParams.toString();
 
-        JOB_Api_Call("Generate Mobile User Payment Token (exact)", "POST", 
+        JOB_Api_Call("New Card - Generate Mobile User Payment Token (exact)", "POST", 
             BaseAPI + "/payment/" + exact_id + "/paymenttoken", Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
             try {
@@ -103,7 +102,7 @@ class payment extends API_GUI{
 //        requestParams.put("options", options);
         BODY = requestParams.toString();
 
-        JOB_Api_Call("Generate Mobile User Payment Token (freedompay)", "POST", 
+        JOB_Api_Call("New Card - Generate Mobile User Payment Token (freedompay)", "POST", 
             BaseAPI + "/payment/" + freedompay_id + "/paymenttoken", Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
             try {
