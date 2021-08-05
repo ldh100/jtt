@@ -14,12 +14,13 @@ class menus extends API_GUI{
         BrandID = a.BrandID;
         CompanyID = a.CompanyID;
         MENU_IDS = a.MENU_IDS;
-        ParentTest = a.ParentTest;
+        ParentTest = a.ParentTest;        
     }
     protected void run() {             
         Auth = "Bearer " + AP3_TKN;   // =============== AP3 Company/Global menus ===================
         JOB_Api_Call("Company / Global Menus > /'CompID'", "GET", 
             BaseAPI + "/menu/company/" + CompanyID, Auth, "", 200, ParentTest, "no_jira");
+        
 //        if(json != null){
 //            try {
                     // GL_MENU_ID <<<<  parent_id ???
@@ -32,23 +33,24 @@ class menus extends API_GUI{
 //Request Method: PATCH using GL_MENU_ID <<<<  parent_id ???
 
         Auth = "";                        // =============== AP3 Local Menu(s) ===========================
-//        JOB_Api_Call("Brand > Timeslots > 1st Menu > /timeslots/menu/'MenuID'", "GET",
-//            BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MENU_IDS.get(MENU_IDS.size() - 1) + "?nocache=1&extended=true", Auth, "", 200, ParentTest, "no_jira" );
-//        MENU_TIMESLOTS = new ArrayList<>();
-//        if(json != null){
-//            try {
-//                if (json.has("timeslots")) {
-//                    JSONArray timeslots = json.getJSONArray("timeslots");
-//                    for (int i = 0; i < timeslots.length(); i++) {
-//                        JSONObject timeslot = timeslots.getJSONObject(i);
-//                        MENU_TIMESLOTS.add(timeslot.getNumber("id").toString());
-//                    }
-//                } 
-//            } catch (Exception ex) {
-//                String AAAA = ex.getMessage();
-//            }
-//        }
+        JOB_Api_Call("Brand > Timeslots > 1st Menu > /timeslots/menu/'MenuID'", "GET",
+            BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MENU_IDS.get(MENU_IDS.size() - 1) + "?nocache=1&extended=true", Auth, "", 200, ParentTest, "no_jira" );
+        MENU_TIMESLOTS = new ArrayList<>();
+        if(json != null){
+            try {
+                if (json.has("timeslots")) {
+                    JSONArray timeslots = json.getJSONArray("timeslots");
+                    for (int i = 0; i < timeslots.length(); i++) {
+                        JSONObject timeslot = timeslots.getJSONObject(i);
+                        MENU_TIMESLOTS.add(timeslot.getNumber("id").toString());
+                    }
+                } 
+            } catch (Exception ex) {
+                String AAAA = ex.getMessage();
+            }
+        }
         
+
         JOB_Api_Call("Brand Last Local Menu " + " > /menu/'MenuID'", "GET", 
             BaseAPI + "/menu/" + MENU_IDS.get(MENU_IDS.size() -1), Auth, "", 200, ParentTest, "no_jira");  
         if(json != null){
@@ -73,15 +75,52 @@ class menus extends API_GUI{
                 }
             } catch (Exception ex) {
                 String AAAAA = ex.getMessage();
-            }
-            
-
-            
+            }         
         }
         
+
         // ================ New development by Dhruv ======================================
 //        BODY = "{id:OwrEMjgG5zUeoXRyZRAPHZyMLJWQP3";       
 //        JOB_Api_Call("Brand Last Local Menu " + " > /menu/'MenuID'", "PATCH", 
 //            BaseAPI + "/menu/" + MENU_IDS.get(MENU_IDS.size() -1), Auth, "", 200, ParentTest, "no_jira"); 
-    }
+        String parent_id="";
+
+        Auth = "Bearer " + AP3_TKN;   // =============== AP3 Company/Global menus ===================
+        JOB_Api_Call("Company / Global Menus > /'CompID'", "GET", 
+            BaseAPI + "/menu/company/" + CompanyID, Auth, "", 200, ParentTest, "no_jira");
+        if (json != null) {
+            
+            try {
+              if (json.has("menus")) {
+                   JSONArray menus = json.getJSONArray("menus");
+                    for (int i = 0; i < menus.length(); i++) {
+                        JSONObject g = menus.getJSONObject(i);
+                        parent_id= (g.getString("parent_id"));                       
+                    }
+                } 
+            }
+            catch (Exception ex) {
+            }
+        }
+       
+        
+         //<editor-fold defaultstate="collapsed" desc=" PATCH Menu ">
+        // Test Scenario 1: Positive flow for Edit Menu
+        BODY= "{"
+                + "\"id\":\"" + parent_id + "\","
+                + "\"meta\":{\"locked_by_user\":null}"
+                + "}";
+        JOB_Api_Call("Menu - PATCH update a menu ", "PATCH", BaseAPI + "/menu/" + parent_id, Auth, BODY, 200, ParentTest, "no_jira");
+        
+        AP3_User_ID= "GM8Wz28q65SvlX1Row4LTr1NrQYMRJcoAG0Zvvd7szoJeZl1JACKN6N4WvY2tB8lAByB48U9r0WZ516zUL1a7";                              
+        BODY= "{"
+                + "\"id\":\"" + parent_id + "\","            
+                + "\"meta\":{\"locked_by_user\":\"" + AP3_User_ID + "\""
+                + "}"
+                + "}";
+        JOB_Api_Call("Menu - PATCH update a menu ", "PATCH", BaseAPI + "/menu/" + parent_id , Auth, BODY, 200, ParentTest, "no_jira");    
+        
+        
+         //</editor-fold>              
+    }//run time
 }
