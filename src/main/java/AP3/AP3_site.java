@@ -494,7 +494,7 @@ class AP3_site extends AP3_GUI{
             }        
             JSONObject json = new JSONObject(API_Response_Body);
             JSONArray delivery_destinations = json.getJSONArray("delivery_destinations");
-            
+                  
             Wait_For_Element_By_Path_Presence("Check 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
             if (FAIL) { return;}
             Element_By_Path_Click("Click 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
@@ -643,7 +643,7 @@ class AP3_site extends AP3_GUI{
                     if (FAIL) { return;}
                     Element_By_Path_Click("Click > out of 'Zip Code'", "xpath", "//*[@class='v-dialog v-dialog--active']//*[contains(text(),'Create Drop-off Location')]", ParentTest, "no_jira");
                     if (FAIL) { return;}
-                    Wait_For_Element_By_Path_Presence("Wait for 'Postal Code is required' message", "xpath", "//*[contains(text(),'Postal Code is required')]", ParentTest, "no_jira");
+                    Wait_For_Element_By_Path_Presence("Wait for 'Postal Code is required' message", "xpath", "//*[contains(text(),'Zip Code is required')]", ParentTest, "no_jira");
                     if (FAIL) { return;}
                     Element_By_Path_Click("Click > 'State' field", "xpath", "(//input[@aria-label='State'])[1]", ParentTest, "no_jira");
                     if (FAIL) { return;}
@@ -686,7 +686,7 @@ class AP3_site extends AP3_GUI{
                     Thread.sleep(500);
                 }
                 
-                if (L1.size() >= 13) { //The list size for Canada should be 13, and for the US it should be greater// US staes = 57
+                if (L1.size() >= 13) { //The list size for Canada should be 13, and for the US it should be greater// US states = 57
                     for (int i = 0; i < L1.size(); i++) {
                         Actions action = new Actions(d1);
                         action.sendKeys(Keys.ARROW_DOWN).perform();                    
@@ -712,6 +712,35 @@ class AP3_site extends AP3_GUI{
                     Log_Html_Result("FAIL", "List size = " + L1.size(), true, ParentTest.createNode("List of states or provinces failed to load properly"));
                 }
                 // test Address/Country/State/Zip code Fields - End
+                
+                // test Location Information Textarea field - Begin
+                Wait_For_Element_By_Path_Presence("Check > 'Location Information (optional)' textarea field", "xpath", "//*[@name='dropOffLocationInformation']", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Wait_For_Element_By_Path_Presence("Check > 'Location Information' max length counter", "xpath", "//*[contains(text(),'0/100')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Wait_For_Element_By_Path_Presence("Check > 'This message will appear...' message for 'Location Information'", "xpath", "//p[contains(text(),'This message will appear at checkout and in the order confirmation notification')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                String longerThanMaxString = "ombzzvvtnyjeybojfuxynmfweocmrvypxkkfgyjcvsoetnaraflncloycqcgbppgoeydqwdeosvfqbnprazwrksnaflnbqknnkcnzxohdgmbvygfgremzclp";
+                Element_By_Path_Click("Click > 'Location Information (optional)' textarea field", "xpath", "//*[@name='dropOffLocationInformation']", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Element_By_Path_Text_Enter("Enter longer than 100 chracters in 'Location Information' field", "xpath", "//*[@name='dropOffLocationInformation']", longerThanMaxString, false, ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Wait_For_Element_By_Path_Presence("Check > 'Location Information' max length counter", "xpath", "//*[contains(text(),'100/100')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Element_By_Path_Attribute("Get value in 'Location Information' textarea", "xpath", "//*[@name='dropOffLocationInformation']", "value", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                if (t.length() == 100) {
+                    _t++;
+                    _p++; EX += _t + "\t" + "Check value in 'Location Information' is 100" + "\t" + "-" + "\t" + String.valueOf(t.length()) + "\t" + "PASS" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("PASS", String.valueOf(t.length()), false, ParentTest.createNode("Check value in 'Location Information' is 100"));
+                } else {
+                    _t++;
+                    _f++; EX += _t + "\t" + "Check value in 'Location Information' is 100" + "\t" + "-" + "\t" + String.valueOf(t.length()) + "\t" + "FAIL" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", String.valueOf(t.length()), false, ParentTest.createNode("Check value in 'Location Information' is 100"));
+                }
+                // test Location Information Text-area field - End
                 // </editor-fold>
             } else {
                 int locations = delivery_destinations.length();
@@ -725,7 +754,6 @@ class AP3_site extends AP3_GUI{
                     Element_By_Path_Click("Click > 'Remove' in dialog", "xpath", "//div[contains(text(),'REMOVE')]", ParentTest, "no_jira");
                     if (FAIL) { return;}
                     Thread.sleep(500);
-                    
                 } 
             }
 
@@ -1081,8 +1109,7 @@ class AP3_site extends AP3_GUI{
                 //if (FAIL) { return;}           
             // </editor-fold> 
         }
-        
-        
-    } catch (Exception ex){}   // =============================================  
+       
+        } catch (Exception ex){}   // =============================================  
     } 
 }
