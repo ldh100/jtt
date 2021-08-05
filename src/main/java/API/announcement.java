@@ -9,15 +9,14 @@ class announcement extends API_GUI {
         AppID = a.AppID;
         env = a.env;
         BaseAPI = a.BaseAPI;
-        AP3_User_TKN = a.AP3_User_TKN;
+        AP3_TKN = a.AP3_TKN;
         SiteID = a.SiteID;
         BrandID = a.BrandID;
         ParentTest = a.ParentTest;
     }
 
     protected void run() {
-        Auth = "Bearer " + AP3_User_TKN;   // =============== AP3 announcement ===========================
-        // String Announcement_ID = "";
+        Auth = "Bearer " + AP3_TKN;   
         ANNOUNCEMENT_IDS = new ArrayList<>();
         //<editor-fold defaultstate="collapsed" desc=" GET all Announcement ">
         // Test Scenario 1: Positive get all announcement
@@ -209,12 +208,12 @@ class announcement extends API_GUI {
         //<editor-fold defaultstate="collapsed" desc=" GET Announcement by ID ">
         // Test Scenario 1: Positive get announcement details by ID
         if (ANNOUNCEMENT_IDS != null) {
-            JOB_Api_Call("Announcement - Get Announcement details by ID", "GET", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
+            JOB_Api_Call("Announcement - Get Announcement details by ID", "GET", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, "", 200, ParentTest, "no_jira");
         }
 
         //</editor-fold>
         
-        //<editor-fold defaultstate="collapsed" desc=" PUST Announcement ">
+        //<editor-fold defaultstate="collapsed" desc=" PUT Announcement ">
         // Test Scenario 1: Positive flow -  PUT to update Announcement Name
         BODY = "{\"name\":\"This is API test for Update Announcement Name by ID\","
                 + "\"type\":\"Promotions\","
@@ -463,7 +462,7 @@ class announcement extends API_GUI {
         // Test Scenario 1: Positive flow for delete Announcement by ID
         if (ANNOUNCEMENT_IDS != null) {
             for (int i = 0; i < ANNOUNCEMENT_IDS.size(); i++) {
-                JOB_Api_Call("Announcement - Delete Announcement by ID - "+ANNOUNCEMENT_IDS.get(i)+"", "DELETE", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(i), Auth, BODY, 200, ParentTest, "no_jira");
+                JOB_Api_Call("Announcement - Delete Announcement by ID - " + ANNOUNCEMENT_IDS.get(i), "DELETE", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(i), Auth, "", 200, ParentTest, "no_jira");
             }
         }
 

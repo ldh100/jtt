@@ -1606,7 +1606,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         sw1.reset(); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));       
         
-        if(!SectorID.equals("")){
+        if(SectorIndex >= 0 && !SectorID.equals("")){
             txtSector.setText(SECTORS.get(SectorIndex));
         }else{
             txtSector.setText("Not Found");
@@ -1683,7 +1683,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 }
             }
         }  
-        if(!CompanyID.equals("")){
+        if(CompanyIndex >=0 && !CompanyID.equals("")){
             txtComp.setText(COMPANIES.get(CompanyIndex));
         }else{
             txtComp.setText("Not Found");
