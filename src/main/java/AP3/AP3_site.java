@@ -577,6 +577,7 @@ class AP3_site extends AP3_GUI{
                 json = new JSONObject(API_Response_Body);
                 JSONObject address = json.getJSONObject("address");
                 String country = address.getString("country");
+                String site_name = json.getString("name");
                 
                 Element_By_Path_Attribute("Get default value of 'Country' field", "xpath", "(//input[@aria-label='Country'])[1]", "value", ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -741,6 +742,156 @@ class AP3_site extends AP3_GUI{
                     Log_Html_Result("FAIL", String.valueOf(t.length()), false, ParentTest.createNode("Check value in 'Location Information' is 100"));
                 }
                 // test Location Information Text-area field - End
+                
+                // test Address auto-fill - Begin
+                Element_By_Path_Click("Click > 'Address' field", "xpath", "(//*[@aria-label='Address'])[1]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Element_By_Path_Text_Enter("Type > Partial address", "xpath", "(//*[@aria-label='Address'])[1]", "123 xyz ", false, ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Thread.sleep(2000);
+                Wait_For_Element_By_Path_Presence("Wait for 'Auto-fill' suggestions dd", "xpath", "//div[contains(@class,'menuable__content__active')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                List_L2("Get list of suggestions", "xpath", "//div[contains(@class,'menuable__content__active')]//div[@class='v-list__tile__title']", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                for (int i = 0; i < L2.size(); i++) {
+                    Element_Text("Get value of suggestion " + (i+1), L2.get(i), ParentTest, "no_jira");
+                    if (FAIL) { return;}
+                    if (t.toLowerCase().contains("123")) {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Check value of suggestion contains partial address" + "\t" + "-" + "\t" + String.valueOf(t.toLowerCase().contains("123")) + "\t" + "PASS" + "\t" 
+                                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        Log_Html_Result("PASS", String.valueOf(t.toLowerCase().contains("123")), false, ParentTest.createNode("Check value of suggestion contains partial address"));
+                    } else {
+                        _t++;
+                        _f++; EX += _t + "\t" + "Check value of suggestion contains partial address" + "\t" + "-" + "\t" + String.valueOf(t.toLowerCase().contains("123")) + "\t" + "FAIL" + "\t" 
+                                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        Log_Html_Result("FAIL", String.valueOf(t.toLowerCase().contains("123")), true, ParentTest.createNode("Check value of suggestion contains partial address"));
+                    }
+                }
+                Element_Click("Click > First suggestion for 'Address auto-fill'", L2.get(0), ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Thread.sleep(1000);
+                Element_By_Path_Attribute("Get auto-filled value of 'City'", "xpath", "(//input[@aria-label='City'])[1]", "value", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                if (!t.equals("")) {
+                    _t++;
+                    _p++; EX += _t + "\t" + "Check 'City' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.contains("")) + "\t" + "PASS" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("PASS", String.valueOf(!t.contains("")), false, ParentTest.createNode("Check 'City' was auto-filled"));
+                } else {
+                    _t++;
+                    _p++; EX += _t + "\t" + "Check 'City' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.contains("")) + "\t" + "FAIL" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", String.valueOf(!t.contains("")), true, ParentTest.createNode("Check 'City' was auto-filled"));
+                }
+                if (country.equals("US")) {
+                    Element_By_Path_Attribute("Get auto-filled value of 'Zip Code'", "xpath", "(//input[@aria-label='Zip Code'])[1]", "value", ParentTest, "no_jira");
+                    if (FAIL) { return;}
+                    if (!t.equals("")) {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Check 'Zip Code' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.equals("")) + "\t" + "PASS" + "\t" 
+                                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        Log_Html_Result("PASS", String.valueOf(!t.equals("")), false, ParentTest.createNode("Check 'Zip Code' was auto-filled"));
+                    } else {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Check 'Zip Code' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.equals("")) + "\t" + "FAIL" + "\t" 
+                                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        Log_Html_Result("FAIL", String.valueOf(!t.equals("")), true, ParentTest.createNode("Check 'Zip Code' was auto-filled"));
+                    }
+                    Element_By_Path_Attribute("Get auto-filled value of 'State'", "xpath", "(//input[@aria-label='State'])[1]", "value", ParentTest, "no_jira");
+                    if (FAIL) { return;}
+                    if (!t.equals("")) {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Check 'State' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.equals("")) + "\t" + "PASS" + "\t" 
+                                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        Log_Html_Result("PASS", String.valueOf(!t.equals("")), false, ParentTest.createNode("Check 'State' was auto-filled"));
+                    } else {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Check 'State' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.equals("")) + "\t" + "FAIL" + "\t" 
+                                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        Log_Html_Result("FAIL", String.valueOf(!t.equals("")), true, ParentTest.createNode("Check 'State' was auto-filled"));
+                    }
+                } else {
+                    Element_By_Path_Attribute("Get auto-filled value of 'Postal Code'", "xpath", "(//input[@aria-label='Postal Code'])[1]", "value", ParentTest, "no_jira");
+                    if (FAIL) { return;}
+                    if (!t.equals("")) {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Check 'Postal Code' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.equals("")) + "\t" + "PASS" + "\t" 
+                                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        Log_Html_Result("PASS", String.valueOf(!t.equals("")), false, ParentTest.createNode("Check 'Postal Code' was auto-filled"));
+                    } else {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Check 'Postal Code' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.equals("")) + "\t" + "FAIL" + "\t" 
+                                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        Log_Html_Result("FAIL", String.valueOf(!t.equals("")), true, ParentTest.createNode("Check 'Postal Code' was auto-filled"));
+                    }
+                    Element_By_Path_Attribute("Get auto-filled value of 'State'", "xpath", "(//input[@aria-label='State'])[1]", "value", ParentTest, "no_jira");
+                    if (FAIL) { return;}
+                    if (!t.equals("")) {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Check 'Province' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.equals("")) + "\t" + "PASS" + "\t" 
+                                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        Log_Html_Result("PASS", String.valueOf(!t.equals("")), false, ParentTest.createNode("Check 'Province' was auto-filled"));
+                    } else {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Check 'Province' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.equals("")) + "\t" + "FAIL" + "\t" 
+                                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                        Log_Html_Result("FAIL", String.valueOf(!t.equals("")), true, ParentTest.createNode("Check 'Province' was auto-filled"));
+                    }
+                }
+                // create a Location drop-off with 'Auto-filled' Address
+                Move_to_Element_By_Path("Move > 'Location Name' field", "xpath", "(//*[contains(text(),'Location Name')])[1]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Element_By_Path_Click("Click > 'Location Name' field", "xpath", "(//*[@aria-label='Location Name'])[1]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Element_By_Path_Input_Select_Clear("Clear > 'Location Name' field", "xpath", "(//*[@aria-label='Location Name'])[1]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Element_By_Path_Text_Enter("Enter > value in 'Location Name' field", "xpath", "(//*[@aria-label='Location Name'])[1]", "loc w/auto-filled addr", false, ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Move_to_Element_By_Path("Move > 'Create Location' button", "xpath", "//*[contains(text(),'Create Location')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Element_By_Path_Click("Click > 'Create Location' button", "xpath", "//*[contains(text(),'Create Location')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Element_By_Path_Click("Click > 'Save Changes' button", "xpath", "//*[contains(text(),'Save Changes')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Wait_For_Element_By_Path_Presence("Wait for page load", "xpath", "//*[@class='H3-Primary-Left' and contains(text(),'"+site_name+"')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Element_By_Path_Click("Click > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Wait_For_Element_By_Path_Presence("Check 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Element_By_Path_Click("Click 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                Wait_For_Element_By_Path_Presence("Wait for presence of 'Delivery Drop-off Locations' sections", "xpath", "//*[@class='H5-Primary-Left' and text()='Delivery Drop-off Locations']", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                List_L3("Get List of Locations", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
+                if (FAIL) { return;}
+                
+                //get delivery destinations(drop-off locations) from API 
+                Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
+                if(t.startsWith("{")){
+                    API_Response_Body = t;               
+                }else{
+                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                    "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"));
+                    return;
+                }        
+                json = new JSONObject(API_Response_Body);
+                delivery_destinations = json.getJSONArray("delivery_destinations");
+                
+                if (delivery_destinations.length() == L3.size()) {
+                    _t++;
+                    _p++; EX += _t + "\t" + "Check > Number of Locations" + "\t" + "-" + "\t" + "expected: " + delivery_destinations.length() + " / output: " + L3.size() + "\t" + "PASS" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("PASS", "expected: " + delivery_destinations.length() + " / output: " + L3.size(), false, ParentTest.createNode("Check > Number of Locations"));
+                } else {
+                    _t++;
+                    _f++; EX += _t + "\t" + "Check > Number of Locations" + "\t" + "-" + "\t" + "expected: " + delivery_destinations.length() + " / output: " + L3.size() + "\t" + "FAIL" + "\t" 
+                                + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "expected: " + delivery_destinations.length() + " / output: " + L3.size(), true, ParentTest.createNode("Check > Number of Locations"));
+                }
+                // test Address auto-fill - End
                 // </editor-fold>
             } else {
                 int locations = delivery_destinations.length();
