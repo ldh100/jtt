@@ -21,6 +21,7 @@ class payment extends API_GUI{
         freedompay_terminal_id = a.freedompay_terminal_id;
         freedompay_store_id = a.freedompay_store_id;                  
         freedompay_id = a.freedompay_id; 
+        FP_URL = a.FP_URL;
         exact_gateway_password = a.exact_gateway_password;
         exact_gateway_id = a.exact_gateway_id;
         exact_id = a.exact_id;   
@@ -30,7 +31,7 @@ class payment extends API_GUI{
         List<String> Payment_Methods_IDS = new ArrayList<>();
         Auth = "Bearer " + Mobile_User_TKN;
         
-        JOB_Api_Call("Mobile User Payment Method(s) (Deprecated?)", "GET", 
+        JOB_Api_Call("Mobile User Payment Method(s)", "GET", 
             BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             try {
@@ -58,29 +59,30 @@ class payment extends API_GUI{
         }
 
  
-        if(Site_PProvider.equals("exact")){
+//        if(Site_PProvider.equals("exact")){
             EXACT();
-        }else{
+//        }else{
             FP();
-        }
+//        }
    }
     
    private void EXACT(){
+        Auth = "Bearer " + Mobile_User_TKN;
         JSONObject requestParams = new JSONObject();
-        requestParams.put("cardholder_name", Card_Name);
-        requestParams.put("cc_expiry", "1224");
-        requestParams.put("cc_number", "4111111111111111");
-        requestParams.put("cc_verification_str2", "123");
-        requestParams.put("postal_code", "L3L3C4");        
+            requestParams.put("cardholder_name", "JTT API Automation");
+            requestParams.put("cc_expiry", "1224");
+            requestParams.put("cc_number", "4111111111111111");
+            requestParams.put("cc_verification_str2", "123");
+            requestParams.put("postal_code", "L3L3C4");        
         JSONObject options = new JSONObject();
-        options.put("exact_gateway_id", exact_gateway_id);
-        options.put("exact_gateway_password", exact_gateway_password);
-        requestParams.put("options", options);
+            options.put("exact_gateway_id", exact_gateway_id);
+            options.put("exact_gateway_password", exact_gateway_password);
+            requestParams.put("options", options);
         BODY = requestParams.toString();
 
         JOB_Api_Call("New Card - Generate Mobile User Payment Token (exact)", "POST", 
             BaseAPI + "/payment/" + exact_id + "/paymenttoken", Auth, BODY, 200, ParentTest, "no_jira");
-        if(json != null){
+        if(json != null && json.has("token")){
             try {
                 EXACT_Payment_TKN = json.getString("token");
             } catch (Exception ex){
@@ -90,20 +92,33 @@ class payment extends API_GUI{
    }
     
    private void FP(){
+        String FP_Access_TKN = "";
+        JOB_Api_Call("Get Mobile User Freedompay Client Token", "GET", 
+            BaseAPI + "/payment/" + freedompay_id + "/clienttoken", Auth, BODY, 200, ParentTest, "no_jira");
+        if(json != null && json.has("access_token")){
+            try {
+                FP_Access_TKN = json.getString("access_token");
+            } catch (Exception ex){
+                String AAAA = ex.getMessage();
+            }
+        }      
+        Auth = "Bearer " + FP_Access_TKN;
         JSONObject requestParams = new JSONObject();
-        requestParams.put("cardholder_name", Card_Name);
-        requestParams.put("cc_expiry", "1224");
-        requestParams.put("cc_number", "4111111111111111");
-        requestParams.put("cc_verification_str2", "123");
-        requestParams.put("postal_code", "L3L3C4");        
-//        JSONObject options = new JSONObject();
-//        options.put("exact_gateway_id", exact_gateway_id);
-//        options.put("exact_gateway_password", exact_gateway_password);
-//        requestParams.put("options", options);
+            requestParams.put("nameOnCard", "JTT API Automation");
+            requestParams.put("avsVerificationRequired", true);  
+            requestParams.put("isPreferred", true);         
+            requestParams.put("cardNumber", "4111111111111111");
+            requestParams.put("expiryYear", 2024);
+            requestParams.put("expiryMonth", 12); 
+            requestParams.put("CVV", "123");
+            requestParams.put("cvvVerificationRequired", true);        
+        JSONObject billingAddress = new JSONObject();
+            billingAddress.put("postalCode", "L3L3C4");
+            requestParams.put("billingAddress", billingAddress);
         BODY = requestParams.toString();
 
         JOB_Api_Call("New Card - Generate Mobile User Payment Token (freedompay)", "POST", 
-            BaseAPI + "/payment/" + freedompay_id + "/paymenttoken", Auth, BODY, 200, ParentTest, "no_jira");
+            FP_URL + "/TokenService/api/consumers/tokens", Auth, BODY, 201, ParentTest, "no_jira");
         if(json != null){
             try {
                 FP_Payment_TKN = json.getString("token");
