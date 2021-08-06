@@ -696,8 +696,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected List<String> NOTIFICATION_IDS;
     protected List<String> ANNOUNCEMENT_IDS;
     protected List<String> PROMO_VOUCHER_IDS;
-     protected List<String> PROMOTION_IDS;
-     
+    
     protected boolean refund = true;
     protected String Site_PProvider = "exact";
 //  "exact": {
