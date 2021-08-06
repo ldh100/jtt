@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -48,12 +49,9 @@ class AP3_mm_import extends AP3_GUI{
         GL_MENU = a.GL_MENU;
         CompanyID = a.CompanyID;
         
-        AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
         New_ID = a.New_ID;
         TZone = a.TZone;
-        SectorID = a.SectorID;
-        GL_MENU= a.GL_MENU;
         
      } 
     
@@ -69,39 +67,49 @@ class AP3_mm_import extends AP3_GUI{
                  if (FAIL) { return;}
                 Thread.sleep(5000);
                 String dest_dir = System.getProperty("user.home") + File.separator + "Downloads"; 
-                String MenuSetFile = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();    // Lunch - 2021-06-15.zip
-               // MenuSetFile = "Starbucks-global-modifier-groups-2021-08-05";
-                File_Find("Find Global mod export Zip File", dest_dir, MenuSetFile, ParentTest, "no_jira"); 
+                String ModGrpPath = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();    // Lunch - 2021-06-15.zip
+                //ModGrpPath = "Starbucks-global-modifier-groups-2021-08-06";
+                File_Find("Find Global mod export Zip File", dest_dir, ModGrpPath, ParentTest, "no_jira"); 
                  if (FAIL) { return;}
                  Thread.sleep(3000);
                 File_UnZip("Unzip global mod export file ", dest_dir, t, ParentTest, "no_jira");
                  if (FAIL) { return;}          
-                File_Delete("Delete Report Zip File", dest_dir,MenuSetFile, ParentTest, "no_jira");
+                File_Delete("Delete Report Zip File", dest_dir,t, ParentTest, "no_jira");
                  if (FAIL) { return;}  
-                MenuSetFile = GL_MENU.trim()+"-global-modifier-groups.xlsx";
-                convertPLUExcel(dest_dir,MenuSetFile,"Modifier Groups");
+                ModGrpPath = GL_MENU.trim()+"-global-modifier-groups.xlsx";
+                convertPLUExcel(dest_dir,ModGrpPath,"Modifier Groups");
+                editModExcel(dest_dir,ModGrpPath,"Modifier Groups");
                 String[] valueToWrite = {"Modifier Group","","Auto Mod group "+New_ID,"Automation Label "+New_ID,"0","1","2","TRUE","","","","","","","",""};
-                writeExcel(dest_dir,MenuSetFile,"Modifier Groups",valueToWrite);
+                writeExcel(dest_dir,ModGrpPath,"Modifier Groups",valueToWrite);
                 valueToWrite = new String[] {"Modifier","","","","","","","","","Automation Mod "+New_ID,"5","20","1","600200","TRUE","[\"Prepared\"]"};
-                writeExcel(dest_dir,MenuSetFile,"Modifier Groups",valueToWrite);
+                writeExcel(dest_dir,ModGrpPath,"Modifier Groups",valueToWrite);
                
-                File xlsfile = new File(dest_dir+File.separator+MenuSetFile);
+                File xlsfile = new File(dest_dir+File.separator+ModGrpPath);
                 if(xlsfile.exists()){
-                   Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", dest_dir+File.separator+MenuSetFile, false, ParentTest, "no_jira"); 
+                   Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", dest_dir+File.separator+ModGrpPath, false, ParentTest, "no_jira"); 
                      if (FAIL) { return;}
                     }else
                     { _t++; 
-                      _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :"+MenuSetFile + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                      _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :"+ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     }  
-                Find_Text("Check if any Import Errors", "Import Errors", false, ParentTest, "no_jira");
-                  if (FAIL) { return;}
                 Element_By_Path_Click("Click Publish", "xpath", "//div[@class='flex shrink']//div[normalize-space()='publish']", ParentTest, "no_jira");
                   if (FAIL) { return;}
-               
-                      
+                Thread.sleep(3000);
+                
+                // Again importing the same file to validate errors
+                if(xlsfile.exists()){
+                   Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", dest_dir+File.separator+ModGrpPath, false, ParentTest, "no_jira"); 
+                     if (FAIL) { return;}
+                    }else
+                    { _t++; 
+                      _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :"+ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    }  
+                Find_Text("Find Import Errors", "There were errors while trying to import global modifiers from your excel sheet", true, ParentTest, "no_jira");
+                Element_By_Path_Text("Close Import error dialog box", "xpath", "//div[contains(text(),'Close')]", ParentTest, "no_jira");
+                //File_Delete("Delete xls file", dest_dir, ModGrpPath, ParentTest, "no_jira");
+                  
          }catch(Exception ex){} // ============================================= 
     }//End of run()
-    
     
     public void convertPLUExcel(String filePath,String fileName,String sheetName)
     {
@@ -124,7 +132,11 @@ class AP3_mm_import extends AP3_GUI{
                      Cell cell = row.getCell(13);
                         if(cell != null)
                         {  
-                            cell.setCellValue(Integer.parseInt(cell.getStringCellValue()));
+                           // if( cell.getCellType() == CellType.NUMERIC )
+                         try{cell.getStringCellValue();
+                              }catch(Exception ex)
+                            {continue;} 
+                         cell.setCellValue(Integer.parseInt(cell.getStringCellValue()));
                         } 
                    }
                 inputStream.close(); 
@@ -135,6 +147,64 @@ class AP3_mm_import extends AP3_GUI{
              
           }catch(Exception ex){ex.printStackTrace();} // ============================================= 
     }//End of writeExcel()
+    
+    
+    public void editModExcel(String filePath,String fileName,String sheetName)
+    {
+      try{
+          EX += "\n - " + "\t" + " ====Start====" + "\t" + " ===== " + "\t" + " == Update data on Excel file==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                File file =    new File(filePath+"/"+fileName);//Create an object of File class to open xlsx file
+                FileInputStream inputStream = new FileInputStream(file);//Create an object of FileInputStream class to read excel file
+                Workbook modifier_Workbook = null;
+                String fileExtensionName = fileName.substring(fileName.indexOf("."));
+                int flag_modifier = -1;
+                int flag_modifiergroup = -1;
+                if(fileExtensionName.equals(".xlsx")){
+                modifier_Workbook = new XSSFWorkbook(inputStream);//If it is xlsx file then create object of XSSFWorkbook class
+                }
+                else if(fileExtensionName.equals(".xls")){
+                   modifier_Workbook = new HSSFWorkbook(inputStream);//If it is xls file then create object of XSSFWorkbook class
+                }    
+                Sheet sheet = modifier_Workbook.getSheet(sheetName);//Read excel sheet by sheet name    
+                int rowCount = sheet.getLastRowNum()-sheet.getFirstRowNum();//Get the current count of rows in excel file
+                if(rowCount != 1)        //If modifier group/modifier exist
+                    {
+                       for(int i=sheet.getLastRowNum();i>1;i--)
+                       {
+                          Row row = sheet.getRow(i);//Get the  row from the sheet 
+                          Cell cell = row.getCell(0);
+                          if(cell.getStringCellValue().equals("Modifier") && flag_modifier != 1)
+                          {
+                            row.getCell(9).setCellValue("Update Auto Mod "+New_ID);
+                            row.getCell(10).setCellValue(10);
+                            row.getCell(11).setCellValue(30);
+                            row.getCell(12).setCellValue(6);
+                            row.getCell(13).setCellValue(650000);
+                            //row.getCell(14).setCellValue(Boolean.TRUE);
+                            row.getCell(15).setCellValue("[\"Carbonated Beverage\"]");
+                            flag_modifier = 1;
+                          }
+                          else if(cell.getStringCellValue().equals("Modifier Group") && flag_modifiergroup != 1)
+                          {
+                            row.getCell(2).setCellValue("Update Auto group "+New_ID);
+                            row.getCell(3).setCellValue("Update Auto label"+New_ID);
+                            row.getCell(4).setCellValue(0);
+                            row.getCell(5).setCellValue(1);
+                            row.getCell(6).setCellValue(6);
+                           // row.getCell(7).setCellValue(Boolean.TRUE);
+                            flag_modifiergroup = 1;
+                          }                            
+                       }//End of for 
+                    }//End of if
+                inputStream.close(); 
+                FileOutputStream outputStream = new FileOutputStream(file); //Create an object of FileOutputStream class to create write data in excel file
+                modifier_Workbook.write(outputStream);//write data in the excel file
+                outputStream.close();//close output stream
+            EX += "\n - " + "\t" + " ====End====" + "\t" + " ===== " + "\t" + " == Update data on Excel file==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+             
+          }catch(Exception ex){ex.printStackTrace();} // ============================================= 
+    }//End of writeExcel()
+    
     
     public void writeExcel(String filePath,String fileName,String sheetName,String[] dataToWrite)
     {
