@@ -116,7 +116,7 @@ class menus extends API_GUI{
                 + "}"
                 + "}";
         JOB_Api_Call("Global Menu - Lock Editing", "PATCH", 
-                BaseAPI + "/menu/" + menu_id + "_query=%7Bid,date,meta%7D", Auth, BODY, 200, ParentTest, "no_jira");    
+                BaseAPI + "/menu/" + menu_id, Auth, BODY, 200, ParentTest, "no_jira");    // + "?_query=%7Bid,date,meta%7D"
         if (json != null) {  
             AAAA = json.toString(4);
         }    
@@ -128,7 +128,7 @@ class menus extends API_GUI{
                 + "\"meta\":{\"locked_by_user\":null}"
                 + "}";
         JOB_Api_Call("Menu - Global Menu - UnLock Editing", "PATCH", 
-                BaseAPI + "/menu/" + menu_id + "_query=%7Bid,date,meta%7D", Auth, BODY, 200, ParentTest, "no_jira");
+                BaseAPI + "/menu/" + menu_id, Auth, BODY, 200, ParentTest, "no_jira"); // + "?_query=%7Bid,date,meta%7D"
         if (json != null) {  
             AAAA = json.toString(4);
         }         
