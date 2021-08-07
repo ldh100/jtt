@@ -9,6 +9,7 @@ class menus extends API_GUI{
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;
+        AP3_User_ID = a.AP3_User_ID;
         AP3_TKN = a.AP3_TKN;
         SiteID = a.SiteID;
         BrandID = a.BrandID;
@@ -16,6 +17,7 @@ class menus extends API_GUI{
         MENU_IDS = a.MENU_IDS;
         ParentTest = a.ParentTest;        
     }
+    String AAAA = "";
     protected void run() {             
         Auth = "Bearer " + AP3_TKN;   // =============== AP3 Company/Global menus ===================
         JOB_Api_Call("Company / Global Menus > /'CompID'", "GET", 
@@ -26,7 +28,7 @@ class menus extends API_GUI{
                     // GL_MENU_ID <<<<  parent_id ???
 //                } 
 //            } catch (Exception ex) {
-//                String AAAA = ex.getMessage();
+//                AAAA = ex.getMessage();
 //            }
 //        }
 //Request URL: https://api.compassdigital.org/dev/menu/rrgl37yB8LtgOE9rO2RvUojopzLEP5uqJ1DwNMgdsY2Qg6yl8LUKWOzLMA4eT5Wj7ZG?_query=%7Bid,date,meta%7D
@@ -46,7 +48,7 @@ class menus extends API_GUI{
                     }
                 } 
             } catch (Exception ex) {
-                String AAAA = ex.getMessage();
+                AAAA = ex.getMessage();
             }
         }
         
@@ -74,7 +76,7 @@ class menus extends API_GUI{
                     }                    
                 }
             } catch (Exception ex) {
-                String AAAAA = ex.getMessage();
+                AAAA = ex.getMessage();
             }         
         }
         
@@ -83,44 +85,53 @@ class menus extends API_GUI{
 //        BODY = "{id:OwrEMjgG5zUeoXRyZRAPHZyMLJWQP3";       
 //        JOB_Api_Call("Brand Last Local Menu " + " > /menu/'MenuID'", "PATCH", 
 //            BaseAPI + "/menu/" + MENU_IDS.get(MENU_IDS.size() -1), Auth, "", 200, ParentTest, "no_jira"); 
-        String parent_id="";
+        
+        String menu_id = "";
 
         Auth = "Bearer " + AP3_TKN;   // =============== AP3 Company/Global menus ===================
         JOB_Api_Call("Company / Global Menus > /'CompID'", "GET", 
             BaseAPI + "/menu/company/" + CompanyID, Auth, "", 200, ParentTest, "no_jira");
-        if (json != null) {
-            
+        if (json != null) {  
+            AAAA = json.toString(4);
             try {
-              if (json.has("menus")) {
-                   JSONArray menus = json.getJSONArray("menus");
+                if (json.has("menus")) {
+                    JSONArray menus = json.getJSONArray("menus");
                     for (int i = 0; i < menus.length(); i++) {
-                        JSONObject g = menus.getJSONObject(i);
-                        parent_id= (g.getString("parent_id"));                       
+                        JSONObject menu = menus.getJSONObject(i);
+                        menu_id = menu.getString("id");    // "parent_id"                  
                     }
                 } 
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
+                AAAA = ex.getMessage();
             }
         }
        
         
          //<editor-fold defaultstate="collapsed" desc=" PATCH Menu ">
         // Test Scenario 1: Positive flow for Edit Menu
-        BODY= "{"
-                + "\"id\":\"" + parent_id + "\","
-                + "\"meta\":{\"locked_by_user\":null}"
-                + "}";
-        JOB_Api_Call("Menu - PATCH update a menu ", "PATCH", BaseAPI + "/menu/" + parent_id, Auth, BODY, 200, ParentTest, "no_jira");
         
-        AP3_User_ID= "GM8Wz28q65SvlX1Row4LTr1NrQYMRJcoAG0Zvvd7szoJeZl1JACKN6N4WvY2tB8lAByB48U9r0WZ516zUL1a7";                              
-        BODY= "{"
-                + "\"id\":\"" + parent_id + "\","            
+       BODY = "{"
+                + "\"id\":\"" + menu_id + "\","            
                 + "\"meta\":{\"locked_by_user\":\"" + AP3_User_ID + "\""
                 + "}"
                 + "}";
-        JOB_Api_Call("Menu - PATCH update a menu ", "PATCH", BaseAPI + "/menu/" + parent_id , Auth, BODY, 200, ParentTest, "no_jira");    
+        JOB_Api_Call("Global Menu - Lock Editing", "PATCH", 
+                BaseAPI + "/menu/" + menu_id + "_query=%7Bid,date,meta%7D", Auth, BODY, 200, ParentTest, "no_jira");    
+        if (json != null) {  
+            AAAA = json.toString(4);
+        }    
         
+        // To Do - some editing 'menu_id'
         
+        BODY = "{"
+                + "\"id\":\"" + menu_id + "\","
+                + "\"meta\":{\"locked_by_user\":null}"
+                + "}";
+        JOB_Api_Call("Menu - Global Menu - UnLock Editing", "PATCH", 
+                BaseAPI + "/menu/" + menu_id + "_query=%7Bid,date,meta%7D", Auth, BODY, 200, ParentTest, "no_jira");
+        if (json != null) {  
+            AAAA = json.toString(4);
+        }         
          //</editor-fold>              
     }//run time
 }
