@@ -3287,6 +3287,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
         if (!AUTH.isEmpty()) {
             request.header("Authorization", AUTH);
         }
+        request.header("Content-Type", "application/json");
+        request.header("Accept", "application/json");
         try {
             int i = 1;
 //for (i = 1; i < 4; i++){   // ========== Loop +2 times if 1st FAIL
@@ -3298,34 +3300,28 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Response response = null;
             switch (Method) {
                 case "GET":
-                    request.header("Accept", "*/*");
                     if (BODY.equals("Bolter")) {
                         request.header("From", "Bolter/1.0");
                     }
                     response = request.get(EndPoint);
                     break;
                 case "POST":
-                    request.header("Accept", "*/*");
                     request.body(BODY);
                     response = request.post(EndPoint);
                     break;
                 case "PATCH":
-                    request.header("Accept", "*/*");
                     request.body(BODY);
                     response = request.patch(EndPoint);
                     break;
                 case "DELETE":
-                    request.header("Accept", "*/*");
                     request.body(BODY);
                     response = request.delete(EndPoint);
                     break;
                 case "PUT":
-                    request.header("Accept", "*/*");
                     request.body(BODY);
                     response = request.put(EndPoint);
                     break;
                 case "OPTIONS":
-                    request.header("Accept", "*/*");
                     response = request.options(EndPoint);
                     break;
                 default:
