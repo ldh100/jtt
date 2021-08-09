@@ -1124,6 +1124,7 @@ class promo extends API_GUI {
         // Test Scenario 7: Negative flow to update newly added promotion without valid Company/Group Id
         // Test Scenario 8: Negative flow to update newly added promotion without valid Sector/Site Id
         //</editor-fold>
+
         //<editor-fold defaultstate="collapsed" desc="GET promotions">
         // Test Scenario 1: Positive flow to GET promotions by ID
         JOB_Api_Call("Promotion - GET Positive flow to GET promotions by ID", "GET", BaseAPI + "/promo/" + PROMOTION_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
