@@ -94,8 +94,8 @@ class menus extends API_GUI{
 
 //GET/menu/company{companyid} : Get menus that belong to a company
 
-        //String menu_id = "";
-        String parent_id="";  
+        String menu_id = "";
+        //String parent_id="";  
         MENU_IDS = new ArrayList<>();       
         Auth = "Bearer " + AP3_TKN;   // =============== AP3 Company/Global menus ===================
         JOB_Api_Call("Company / Global Menus > /'CompID'", "GET", 
@@ -108,8 +108,8 @@ class menus extends API_GUI{
                     for (int i = 0; i < menus.length(); i++) {
                         JSONObject menu = menus.getJSONObject(i);
                         MENU_IDS.add(menu.getString("id"));
-                    //    menu_id = menu.getString("id");    // "parent_id"  
-                        parent_id= (menu.getString("parent_id"));  // "parent_id"  
+                        menu_id = menu.getString("id");    // "parent_id"  
+                        //parent_id= (menu.getString("parent_id"));  // "parent_id"  
                     }
                 } 
             } catch (Exception ex) {
@@ -122,12 +122,12 @@ class menus extends API_GUI{
 // Test Scenario 1: Positive flow for Edit Menu
         
        BODY = "{"
-                + "\"id\":\"" + parent_id + "\","            
+                + "\"id\":\"" + menu_id + "\","            
                 + "\"meta\":{\"locked_by_user\":\"" + AP3_User_ID + "\""
                 + "}"
                 + "}";
         JOB_Api_Call("Global Menu - Lock Editing", "PATCH", 
-                BaseAPI + "/menu/" + parent_id, Auth, BODY, 200, ParentTest, "no_jira");    // + "?_query=%7Bid,date,meta%7D"
+                BaseAPI + "/menu/" + menu_id, Auth, BODY, 200, ParentTest, "no_jira");    // + "?_query=%7Bid,date,meta%7D"
         if (json != null) {  
             AAAA = json.toString(4);
         }    
@@ -357,11 +357,11 @@ class menus extends API_GUI{
 
         
         BODY = "{"
-                + "\"id\":\"" + parent_id + "\","
+                + "\"id\":\"" + menu_id + "\","
                 + "\"meta\":{\"locked_by_user\":null}"
                 + "}";
         JOB_Api_Call("Menu - Global Menu - UnLock Editing", "PATCH", 
-                BaseAPI + "/menu/" + parent_id, Auth, BODY, 200, ParentTest, "no_jira"); // + "?_query=%7Bid,date,meta%7D"
+                BaseAPI + "/menu/" + menu_id, Auth, BODY, 200, ParentTest, "no_jira"); // + "?_query=%7Bid,date,meta%7D"
         if (json != null) {  
             AAAA = json.toString(4);
         }         
