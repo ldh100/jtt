@@ -21,6 +21,7 @@ class payment extends API_GUI{
         freedompay_terminal_id = a.freedompay_terminal_id;
         freedompay_store_id = a.freedompay_store_id;                  
         freedompay_id = a.freedompay_id; 
+        FP_URL = a.FP_URL;
         exact_gateway_password = a.exact_gateway_password;
         exact_gateway_id = a.exact_gateway_id;
         exact_id = a.exact_id;   
@@ -66,16 +67,17 @@ class payment extends API_GUI{
    }
     
    private void EXACT(){
+        Auth = "Bearer " + Mobile_User_TKN;
         JSONObject requestParams = new JSONObject();
-        requestParams.put("cardholder_name", Card_Name);
-        requestParams.put("cc_expiry", "1224");
-        requestParams.put("cc_number", "4111111111111111");
-        requestParams.put("cc_verification_str2", "123");
-        requestParams.put("postal_code", "L3L3C4");        
+            requestParams.put("cardholder_name", "JTT API Automation");
+            requestParams.put("cc_expiry", "1224");
+            requestParams.put("cc_number", "5555555555554444"); // Mastercard
+            requestParams.put("cc_verification_str2", "123");
+            requestParams.put("postal_code", "L3L3C4");        
         JSONObject options = new JSONObject();
-        options.put("exact_gateway_id", exact_gateway_id);
-        options.put("exact_gateway_password", exact_gateway_password);
-        requestParams.put("options", options);
+            options.put("exact_gateway_id", exact_gateway_id);
+            options.put("exact_gateway_password", exact_gateway_password);
+            requestParams.put("options", options);
         BODY = requestParams.toString();
 
         JOB_Api_Call("New Card - Generate Mobile User Payment Token (exact)", "POST", 
@@ -93,29 +95,31 @@ class payment extends API_GUI{
         String FP_Access_TKN = "";
         JOB_Api_Call("Get Mobile User Freedompay Client Token", "GET", 
             BaseAPI + "/payment/" + freedompay_id + "/clienttoken", Auth, BODY, 200, ParentTest, "no_jira");
-        if(json != null && json.has("token")){
+        if(json != null && json.has("access_token")){
             try {
-                FP_Access_TKN = json.getString("token");
+                FP_Access_TKN = json.getString("access_token");
             } catch (Exception ex){
                 String AAAA = ex.getMessage();
             }
         }      
-        
+        Auth = "Bearer " + FP_Access_TKN;
         JSONObject requestParams = new JSONObject();
-        requestParams.put("cardholder_name", Card_Name);
-        requestParams.put("cc_expiry", "1224");
-        requestParams.put("cc_number", "4111111111111111");
-        requestParams.put("cc_verification_str2", "123");
-        requestParams.put("postal_code", "L3L3C4");        
-//        JSONObject options = new JSONObject();
-//        options.put("exact_gateway_id", exact_gateway_id);
-//        options.put("exact_gateway_password", exact_gateway_password);
-//        requestParams.put("options", options);
+            requestParams.put("nameOnCard", "JTT API Automation");
+            requestParams.put("avsVerificationRequired", true);  
+            requestParams.put("isPreferred", true);         
+            requestParams.put("cardNumber", "4111111111111111"); // Visa
+            requestParams.put("expiryYear", 2024);
+            requestParams.put("expiryMonth", 12); 
+            requestParams.put("CVV", "123");
+            requestParams.put("cvvVerificationRequired", true);        
+        JSONObject billingAddress = new JSONObject();
+            billingAddress.put("postalCode", "L3L3C4");
+            requestParams.put("billingAddress", billingAddress);
         BODY = requestParams.toString();
 
         JOB_Api_Call("New Card - Generate Mobile User Payment Token (freedompay)", "POST", 
-            BaseAPI + "/payment/" + freedompay_id + "/paymenttoken", Auth, BODY, 200, ParentTest, "no_jira");
-        if(json != null && json.has("token")){
+            FP_URL + "/TokenService/api/consumers/tokens", Auth, BODY, 201, ParentTest, "no_jira");
+        if(json != null){
             try {
                 FP_Payment_TKN = json.getString("token");
             } catch (Exception ex){
