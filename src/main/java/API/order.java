@@ -38,9 +38,9 @@ class order extends API_GUI{
     String AAA = "";
     protected void run() {  
         Auth = "Bearer " + Mobile_User_TKN;
-        
-        //Date requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(BRAND_TIMESLOTS.size() - 1))*1000L);
-        Date requested_date = new Date(Long.parseLong(MENU_TIMESLOTS.get(MENU_TIMESLOTS.size() - 1))*1000L);
+
+        Date requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(BRAND_TIMESLOTS.size() - 1))*1000L);
+        //Date requested_date = new Date(Long.parseLong(MENU_TIMESLOTS.get(0))*1000L);
         String Requested_Date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(requested_date);
 
         requestParams = new JSONObject();   //  Mobile User Place Pickup Order  =================

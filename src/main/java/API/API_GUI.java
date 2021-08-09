@@ -3075,16 +3075,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
             exact_id = BR.exact_id;
             DELIEVERY_DESTINATIONS = BR.DELIEVERY_DESTINATIONS;
         }
-        if (true) {
-            SCOPE += "Promo ";
-            EX += " - " + "\t" + "Promo" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            ParentTest = HtmlReport.createTest("Promo");
-            promo BR = new API.promo(API_GUI.this);
-            BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
-            ParentTest.getModel().setName("Promo - Tot: " + BR._t + ", Failed: " + BR._f);
-            ParentTest.getModel().setEndTime(new Date());
-        }
 
         if (!FAIL) {
             SCOPE += "Menus ";
@@ -3116,6 +3106,17 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 FAIL = true;
             }
         }
+        
+        if (true) {
+            SCOPE += "Promo ";
+            EX += " - " + "\t" + "Promo" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Promo");
+            promo BR = new API.promo(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            ParentTest.getModel().setName("Promo - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
+        }        
 
         if (true) {
             SCOPE += "Calendar ";

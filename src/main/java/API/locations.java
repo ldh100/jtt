@@ -164,11 +164,11 @@ class locations extends API_GUI {
             }
         }
         if (env != "PR") {
-            //groupAPIs();
-            //locationAPIs();
-            //brandAPIs();
-            //sectorAPIs();
-            //companyAPIs();
+            groupAPIs();
+            locationAPIs();
+            brandAPIs();
+            sectorAPIs();
+            companyAPIs();
         }
 
     }
