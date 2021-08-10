@@ -34,12 +34,12 @@ class promo extends API_GUI {
     private String Promo_Voucher_Code = "";
     private List<String> PROMOTION_IDS = new ArrayList<>();
     private List<String> PROMO_VOUCHER_IDS = new ArrayList<>();
-    private List<String> PROMO_VOUCHER_IDS1 = new ArrayList<>();
 
     protected void run() {
         Auth = "Bearer " + AP3_TKN;  // ===============  AP3 promo ==============================
-        JOB_Api_Call("Promo > /promo/company/'CompanyID'/location/group/'SiteID'", "GET",
-                BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
+        JOB_Api_Call("Promo > /promo/company/'CompanyID'/location/group/'SiteID'", "GET", BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
+        PROMOTION_IDS.clear();
+        PROMO_VOUCHER_IDS.clear();
         promoVoucherAPIs();
         promoAPIs();
     }
@@ -195,7 +195,7 @@ class promo extends API_GUI {
     protected void promoAPIs() {
         //<editor-fold defaultstate="collapsed" desc="POST promotions">
 
-        if (ITEMS_IDS != null) {
+        if (ITEMS_IDS.size() > 0) {
             // Test Scenario 1: Positive flow to POST/ADD new promotion - Limited Time Offer (amount_off)
             BODY = "{"
                     + "\"label\":{"
@@ -288,7 +288,7 @@ class promo extends API_GUI {
             }
 
             // Test Scenario 2: Positive flow to POST/ADD new promotion - BOGO
-            if (ITEMS_IDS.size() >= 1) {
+            if (ITEMS_IDS.size() > 1) {
                 BODY = "{"
                         + "\"label\":{"
                         + "\"en\":\"This is API test Positive flow to POST/ADD new promotion - BOGO\""
@@ -487,7 +487,10 @@ class promo extends API_GUI {
                     }
                 }
             } else {
-                //Add Fail block & Message
+                EX += " - " + "\t" + "Promotions - Error while creating BOGO & Bundle as promotions required at least two Item Id's.\t" + "Data issues" + "\t" + " Required at least two Items " + "\t" + "Found only -->" + ITEMS_IDS.size() + "\t" + " - "
+                        + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("Required at least two Items", "Data issues", ParentTest.createNode("Promotions - Error while creating BOGO & Bundle as promotions required at least two Item Id's.\t" + "  >>> No Timeslots"), new Date());
+                FAIL = true;
             }
             // Test Scenario 4: Negative flow to POST/ADD new promotion without valid promo label
             BODY = "{"
@@ -828,14 +831,15 @@ class promo extends API_GUI {
                     + "}";
             JOB_Api_Call("Promotion - POST Negative flow to POST/ADD new promotion without valid Secror/Site Id", "POST", BaseAPI + "/promo", Auth, BODY, 400, ParentTest, "no_jira");
         } else {
-            _f++;
+             EX += " - " + "\t" + "Promotions - Error while creating promotions as no Item ID's found to add.\t" + "Data issues" + "\t" + "At least 1 Item required " + "\t" + "No Item ID found" + "\t" + " - "
+                    + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("At least 1 Item required", "Data issues", ParentTest.createNode("Promotions - Error while creating promotions as no Item ID's found to add\t" + "  >>> No Timeslots"), new Date());
             FAIL = true;
-            err = "No Item Id found to add promotions";
         }
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="PUT promotions">
-        if (ITEMS_IDS != null) {
+        if (ITEMS_IDS.size() > 0) {
             //Test Scenario 1: Positive flow to update & PAUSE newly added promotion 
             BODY = "{"
                     + "\"id\":\"" + PROMOTION_IDS.get(0) + "\","
@@ -1022,7 +1026,7 @@ class promo extends API_GUI {
             JOB_Api_Call("Promotion - PUT Positive flow to update newly added promotion - Limited Time Offer (Percent_off)", "PUT", BaseAPI + "/promo/" + PROMOTION_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
 
             // Test Scenario 3: Positive flow to update newly added promotion - BOGO
-            if (ITEMS_IDS.size() >= 1) {
+            if (ITEMS_IDS.size() > 1) {
                 BODY = "{"
                         + "\"id\":\"" + PROMOTION_IDS.get(1) + "\","
                         + "\"badge\":{"
@@ -1234,7 +1238,10 @@ class promo extends API_GUI {
                         + "}";
                 JOB_Api_Call("Promotion - PUT Positive flow to update newly added - Bundle", "PUT", BaseAPI + "/promo/" + PROMOTION_IDS.get(2), Auth, BODY, 200, ParentTest, "no_jira");
             } else {
-                //Add fail bllock, when Item ID is null
+                EX += " - " + "\t" + "Promotions - Error while creating BOGO & Bundle as promotions required at least two Item Id's.\t" + "Data issues" + "\t" + " Required at least two Items " + "\t" + "Found only -->" + ITEMS_IDS.size() + "\t" + " - "
+                        + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("Required at least two Items", "Data issues", ParentTest.createNode("Promotions - Error while creating BOGO & Bundle as promotions required at least two Item Id's.\t" + "  >>> No Timeslots"), new Date());
+                FAIL = true;
             }
             // Test Scenario 5: Negative flow to update newly added promotion without valid promo label
             BODY = "{"
@@ -1596,7 +1603,10 @@ class promo extends API_GUI {
                     + "}";
             JOB_Api_Call("Promotion - PUT Negative flow to update newly added promotion without valid Sector/Site Id", "PUT", BaseAPI + "/promo/" + PROMOTION_IDS.get(0), Auth, BODY, 400, ParentTest, "no_jira");
         } else {
-            //Add fail block, when Item ID equa nullF
+            EX += " - " + "\t" + "Promotions - Error while creating promotions as no Item ID's found to add.\t" + "Data issues" + "\t" + "At least 1 Item required " + "\t" + "No Item ID found" + "\t" + " - "
+                    + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("At least 1 Item required", "Data issues", ParentTest.createNode("Promotions - Error while creating promotions as no Item ID's found to add\t" + "  >>> No Timeslots"), new Date());
+            FAIL = true;
         }
         //</editor-fold>
 
@@ -1606,7 +1616,6 @@ class promo extends API_GUI {
 
         //Test Scenario 2:Positive flow Get all promotions within company for a location group
         //JOB_Api_Call("Promotion - GET Positive flow Get all promotions within company for a location group", "GET", BaseAPI + "/promo/company" + CompanyID + "/location/group/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
-
         //</editor-fold>
         //<editor-fold defaultstate="collapsed" desc="DELETE promotions">
         // Test Scenario 1: Positive flow to DELETE newly created promotions
