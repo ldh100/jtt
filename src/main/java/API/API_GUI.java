@@ -3107,7 +3107,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             }
         }
         
-        if (true) {
+        if (!FAIL) {
             SCOPE += "Promo ";
             EX += " - " + "\t" + "Promo" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Promo");

@@ -39,24 +39,6 @@ class config extends API_GUI{
                 String AAAA = ex.getMessage();
             }
         } 
-//    "payment": {
-//        "exact": {
-//            "exact_gateway_password": "~RSQzgwC",
-//            "exact_gateway_id": "AE7628-02",
-//            "id": "APE3Ev9vQkfo2mmOpKP7fGJ48NKAPOugo0gdlWJqS3O",
-//            "exate_gateway_password": ""
-//        },
-//        "refund": true
-//    },  
-
-//    "payment": {
-//        "freedompay": {
-//            "id": "9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO",
-//            "freedompay_terminal_id": "26241559005",
-//            "freedompay_store_id": "16167424007"
-//        },
-//        "refund": false
-//    },
         
         JOB_Api_Call("Public Config > /'SiteID'", "GET", 
             BaseAPI + "/config/public/" + SiteID, "", "", 200, ParentTest, "no_jira");
@@ -96,25 +78,21 @@ class config extends API_GUI{
             catch (Exception ex) {
                 String AAA = ex.getMessage();
             }  
-        }
-//    "brand_location_description": "Main entrance",
-//    "display_calories": false,
-//    "get_phone_number": false,
-//    "delivery_destinations": [
-//        "asdfasfasdf",
-//        "JTT Delivery Destination 2"
-//    ],
-//    "canadian_calorie_disclaimer": "2,000 calories a day is used for general nutrition advice, but calorie needs vary",
-//    "pickup_asap": {
-//        "max": null,
-//        "enabled": false
-//    },
-//    "show_instructions": false,
-//    "show_single_timeslot": false,
-//    "runner_app_enabled": false,
-//    "has_kds": false        
+        }    
         
         JOB_Api_Call("Config > JDE Configuration", "GET", 
-            BaseAPI + "/config/jde-configuration", Auth, "", 200, ParentTest, "no_jira");        
+            BaseAPI + "/config/jde-configuration", Auth, "", 200, ParentTest, "no_jira");   
+        
+        
+// Site
+// https://api.compassdigital.org/staging/config/81NDOePO6pCwEaym2Ey8UNaWl9MqB5sjlBZYj3yQfAoRDAPOLZTJvr9E6266hXO4RAkKXgCMB7
+// POST
+// {"payment":{"exact":{"id":"APE3Ev9vQkfo2mmOpKP7fGJ48NKAPOugo0gdlWJqS3O","exact_gateway_id":"AE7628-02","exact_gateway_password":"~RSQzgwC"},"refund":true},"loyalty":{"enabled":false},"supports":{"reorder":false},"apex":{"apex_integrated":false,"apex_client_numb":""},"mealplan":[]}        
+
+// Brand
+// https://api.compassdigital.org/staging/config/81NDOePO6pCwEaym2Ey8UNaWl9MqB5sjlBZYj3yQfAoRDAPOLZTJvr9E6266hXO4RAkKXgCMB7
+// POST
+// {"payment":{"exact":{"id":"APE3Ev9vQkfo2mmOpKP7fGJ48NKAPOugo0gdlWJqS3O","exact_gateway_id":"AE7628-02","exact_gateway_password":"~RSQzgwC"},"refund":false},"delivery_fee":{"type":"dollar","value":0.2},"service_fee":{"type":"dollar","value":0.1},"loyalty":{"enabled":false},"excluded_payment_methods":{"mealplan":[],"credit_card":false,"digital_wallet_pay":["googlewallet"],"meal_swipes":[]},"supports":{"reorder":false}}
+
     }
 }
