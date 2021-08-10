@@ -35,33 +35,13 @@ class order extends API_GUI{
         FP_Payment_TKN = a.FP_Payment_TKN;
     }
     JSONObject requestParams = null;
+    String AAA = "";
     protected void run() {  
         Auth = "Bearer " + Mobile_User_TKN;
-        
-        Date requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(BRAND_TIMESLOTS.size() - 1))*1000L);
-        //Date requested_date = new Date(Long.parseLong(MENU_TIMESLOTS.get(MENU_TIMESLOTS.size() - 1))*1000L);
-        String Requested_Date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(requested_date);
 
-        BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
-                "\"location_brand\":\"" + BrandID + "\"," + 
-                "\"customer\":\"" + Mobile_User_ID + "\"," +  
-                "\"details\":" +                                   
-                    "{\"contact_number\":\"4165551234\"," +
-                    "\"destination\":\"" + DELIEVERY_DESTINATIONS.get(0) + "\"," +
-                    "\"duration\":\"" + "00:30:00" + "\"," +
-                    "\"instructions\":\"" + "Discard this Order" + "\"," +
-                    "\"name\":\"" + "JTT API Test Delivery" + "\"," +
-                    "\"order_type\":\"delivery\"}," + 
-                "\"payment\":" + 
-                    "{\"token\":\"" + EXACT_Payment_TKN + "\"}," +
-                "\"requested_date\":\"" + Requested_Date + "\"," +
-                "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
-                "\"}";        
-        JOB_Api_Call("Place Delivery Order", "POST", 
-            BaseAPI + "/order", Auth, BODY, 200, ParentTest, "no_jira");
-        if(json != null && json.has("id")){
-            Order_Delivery_ID = json.getString("id");
-        }
+        Date requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(BRAND_TIMESLOTS.size() - 1))*1000L);
+        //Date requested_date = new Date(Long.parseLong(MENU_TIMESLOTS.get(0))*1000L);
+        String Requested_Date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(requested_date);
 
         requestParams = new JSONObject();   //  Mobile User Place Pickup Order  =================
         requestParams.put("location_brand", BrandID);
@@ -78,22 +58,40 @@ class order extends API_GUI{
             BaseAPI + "/order?lang=en", Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null && json.has("id")){
             Order_Pickup_ID = json.getString("id");
-        }  
+        }          
+        
+        BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
+                "\"location_brand\":\"" + BrandID + "\"," + 
+                "\"customer\":\"" + Mobile_User_ID + "\"," +  
+                "\"details\":" +                                   
+                    "{\"contact_number\":\"4165551234\"," +
+                    "\"destination\":\"" + DELIEVERY_DESTINATIONS.get(0) + "\"," +
+                    "\"duration\":\"" + "00:05:00" + "\"," +
+                    "\"instructions\":\"" + "Discard this Order" + "\"," +
+                    "\"name\":\"" + "JTT API Test Delivery" + "\"," +
+                    "\"order_type\":\"delivery\"}," + 
+                "\"payment\":" + 
+                    "{\"token\":\"" + EXACT_Payment_TKN + "\"}," +
+                "\"requested_date\":\"" + Requested_Date + "\"," +
+                "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
+                "\"}";        
+        JOB_Api_Call("Place Delivery Order", "POST", 
+            BaseAPI + "/order", Auth, BODY, 200, ParentTest, "no_jira");
+        if(json != null && json.has("id")){
+            Order_Delivery_ID = json.getString("id");
+        }
         
         Auth = "Bearer " + AP3_TKN;
         requestParams = new JSONObject();   //  Mobile User Update Delivery Order  =================
         JSONObject is = new JSONObject();
-        payment.put("accepted", true);
-        payment.put("ready", true);
-        payment.put("out_for_delivery", false);
-        payment.put("delivered", false);
+        is.put("in_progress", true);
+        is.put("ready", true);
         requestParams.put("is", is); 
         BODY = requestParams.toString();
-        JOB_Api_Call("Update Delivery Order - out_for_delivery", "PATCH", 
+        JOB_Api_Call("Update Delivery Order Status - ready", "PATCH", 
             BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");        
-        if(json != null){
-            // Check actual update
-            String AAA = json.toString(4);
+        if(json != null){           
+            AAA = json.toString(4);// Check actual update
         } 
         
         long m1 = System.currentTimeMillis();                     
@@ -102,12 +100,14 @@ class order extends API_GUI{
             BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             // Info Found Orders Count
+            AAA = json.toString(4);
         } 
         
         JOB_Api_Call("Mobile User All Orders - Brand '" + BRAND + "'", "GET", 
             BaseAPI + "/order/customer/" + Mobile_User_ID + "/location/brand/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             // Info Found Orders Count
+            AAA = json.toString(4);
         } 
 
         JOB_Api_Call("All Orders - Brand '" + BRAND + "'", "GET", 
@@ -120,12 +120,14 @@ class order extends API_GUI{
             BaseAPI + "/order/location/" + UnitID, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             // Info Found Orders Count
+            AAA = json.toString(4);
         } 
                 
         JOB_Api_Call("All Orders - Group '" + SITE + "'", "GET", 
             BaseAPI + "/order/location/group/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             // Info Found Orders Count
+            AAA = json.toString(4);
         } 
                    
     }

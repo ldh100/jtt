@@ -109,11 +109,11 @@ class user_ap3 extends API_GUI{
         JOB_Api_Call("AP3 New User - Forgot password", "POST", 
             BaseAPI + "/user/forgotpassword?realm=" + Realm, Auth, BODY, 200, ParentTest, "no_jira");   
         
-        JOB_Api_Call("AP3 User Logout", "DELETE",               // New AP3 User Logout ===============================
+        JOB_Api_Call("New AP3 User Logout", "DELETE",               // New AP3 User Logout ===============================
             BaseAPI + "/user/logout?realm=" + Realm, Auth, "", 200, ParentTest, "no_jira");  
         
         Auth = "Bearer " + AP3_TKN;
-        JOB_Api_Call("AP3 User - Delete", "DELETE",             // New AP3 User Delete ===============================
+        JOB_Api_Call("New AP3 User - Delete", "DELETE",             // New AP3 User Delete ===============================
             BaseAPI + "/user/" + New_AP3_User_ID, Auth, "", 200, ParentTest, "no_jira");  
     }
 }

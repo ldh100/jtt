@@ -71,7 +71,7 @@ class payment extends API_GUI{
         JSONObject requestParams = new JSONObject();
             requestParams.put("cardholder_name", "JTT API Automation");
             requestParams.put("cc_expiry", "1224");
-            requestParams.put("cc_number", "4111111111111111");
+            requestParams.put("cc_number", "5555555555554444"); // Mastercard
             requestParams.put("cc_verification_str2", "123");
             requestParams.put("postal_code", "L3L3C4");        
         JSONObject options = new JSONObject();
@@ -107,7 +107,7 @@ class payment extends API_GUI{
             requestParams.put("nameOnCard", "JTT API Automation");
             requestParams.put("avsVerificationRequired", true);  
             requestParams.put("isPreferred", true);         
-            requestParams.put("cardNumber", "4111111111111111");
+            requestParams.put("cardNumber", "4111111111111111"); // Visa
             requestParams.put("expiryYear", 2024);
             requestParams.put("expiryMonth", 12); 
             requestParams.put("CVV", "123");

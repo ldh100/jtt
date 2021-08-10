@@ -58,8 +58,7 @@ class locations extends API_GUI {
                         break;
                     }
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 //
             }
         }
@@ -85,8 +84,7 @@ class locations extends API_GUI {
                     }
                 }
                 BrandIDS = BrandIDS.substring(0, BrandIDS.length() - 1);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 String AAA = ex.getMessage();
             }
         }
@@ -99,8 +97,7 @@ class locations extends API_GUI {
                 if (json.has("meta")) {
                     UnitNum = json.getJSONObject("meta").getNumber("unit").toString();
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 String AAA = ex.getMessage();
             }
         }
@@ -125,8 +122,7 @@ class locations extends API_GUI {
                 if (json.has("company")) {
                     CompanyID = json.getString("company");
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 //
             }
         }
@@ -147,8 +143,7 @@ class locations extends API_GUI {
                         BRAND_TIMESLOTS.add(timeslot.getNumber("id").toString());
                     }
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 String AAAA = ex.getMessage();
             }
         }
@@ -164,17 +159,16 @@ class locations extends API_GUI {
                         MENU_TIMESLOTS.add(timeslot.getNumber("id").toString());
                     }
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 String AAAA = ex.getMessage();
             }
         }
         if (env != "PR") {
-            //groupAPIs();
-            //locationAPIs();
-            //brandAPIs();
-            //sectorAPIs();
-            //companyAPIs();
+            groupAPIs();
+            locationAPIs();
+            brandAPIs();
+            sectorAPIs();
+            companyAPIs();
         }
 
     }
@@ -204,8 +198,7 @@ class locations extends API_GUI {
         if (json != null) {
             try {
                 New_SiteID = json.getString("id");
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
             }
         }
 
@@ -279,8 +272,7 @@ class locations extends API_GUI {
         if (json != null) {
             try {
                 New_DropOff_LocationID = json.getString("id");
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
             }
         }
 
@@ -445,8 +437,8 @@ class locations extends API_GUI {
                 + "},"
                 + "\"name\":\"\"}";
         JOB_Api_Call("Location - PATCH Negative flow to update group/site without Name", "PATCH", BaseAPI + "/location/group/" + New_SiteID, Auth, BODY, 400, ParentTest, "no_jira");
-
         //</editor-fold>
+
         //<editor-fold defaultstate="collapsed" desc="GET by ID's">
         // Test Scenario 1: Get newly created group/site by Id.
         JOB_Api_Call("Location - Get newly created group/site by Id " + New_SiteID + " ", "GET", BaseAPI + "/location/group/" + New_SiteID, Auth, "", 200, ParentTest, "no_jira");
@@ -459,8 +451,8 @@ class locations extends API_GUI {
 
         // Test Scenario 4: Getdrop-off location by group id.
         JOB_Api_Call("Location - Get newly created drop-off location by Id :-" + New_SiteID + " ", "GET", BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, "", 200, ParentTest, "no_jira");
-
         //</editor-fold>
+
         //<editor-fold defaultstate="collapsed" desc="Delete drop-off location">
         // Test Scenario 1: Positive flow to delete Drop-off location under newly created group/site.
         JOB_Api_Call("Location - DELETE drop-off location under newly created group/site " + New_SiteID + " ", "DELETE", BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_LocationID, Auth, "", 200, ParentTest, "no_jira");
@@ -501,8 +493,7 @@ class locations extends API_GUI {
         if (json != null) {
             try {
                 New_Business_UnitID = json.getString("id");
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
             }
         }
 
@@ -647,8 +638,7 @@ class locations extends API_GUI {
         if (json != null) {
             try {
                 New_BrandID = json.getString("id");
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
             }
         }
         // Test Scenario 2: Positive flow to Add public config to new Brand/Station
@@ -994,8 +984,7 @@ class locations extends API_GUI {
         if (json != null) {
             try {
                 New_SecotorID = json.getString("id");
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
             }
         }
         // Test Scenario 2: Negative flow to post new Sector/group without Name
@@ -1003,8 +992,8 @@ class locations extends API_GUI {
                 + "\"name\":\"\""
                 + "}";
         JOB_Api_Call("Location - POST negative flow to create Sector/Group without Name", "POST", BaseAPI + "/location/sector", Auth, BODY, 400, ParentTest, "no_jira");
-
         //</editor-fold>
+
         //<editor-fold defaultstate="collapsed" desc="PUT/Update  Newly created Sector/Group">
         // Test Scenario 1: Positive flow to Update/Patch Newly created Sector/Group
         BODY = "{"
@@ -1021,8 +1010,8 @@ class locations extends API_GUI {
                 + "\"country\":\"CA\""
                 + "}";
         JOB_Api_Call("Location - PATCH negative flow to update Sector/Group without name", "PATCH", BaseAPI + "/location/sector/" + New_SecotorID, Auth, BODY, 400, ParentTest, "no_jira");
-
         //</editor-fold>
+
         //<editor-fold defaultstate="collapsed" desc="GET  Newly created Sector/Group by ID">
         // Test Scenario 1: Positive flow to Get Newly created Sector/Group by ID
         JOB_Api_Call("Location - Get newly created Sector/Group by Id", "GET", BaseAPI + "/location/sector/" + New_SecotorID, Auth, "", 200, ParentTest, "no_jira");
@@ -1048,8 +1037,7 @@ class locations extends API_GUI {
         if (json != null) {
             try {
                 New_CompanyID = json.getString("id");
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
             }
         }
         // Test Scenario 2: Negative flow to post new Company/Global Menu without valid sector ID
@@ -1076,8 +1064,8 @@ class locations extends API_GUI {
                 + "}"
                 + "}";
         JOB_Api_Call("Location - POST negative flow to add Company/Global Menu with empty name", "POST", BaseAPI + "/location/company", Auth, BODY, 400, ParentTest, "no_jira");
-
         //</editor-fold>
+
         //<editor-fold defaultstate="collapsed" desc="PUT/Update  Newly created Company/Global Menu">
         // Test Scenario 1: Positive flow to Update/Patch Newly created Company/Global Menu
         BODY = "{"
