@@ -507,7 +507,7 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
 //                Wait_For_Element_By_Path_Presence("Check > List of Locations is empty", "xpath", "//*[text()='No locations found']", ParentTest, "no_jira");
 //                if (FAIL) { return;}
-                // <editor-fold defaultstate="collapsed" desc="Create Drop-off Modal">
+            // <editor-fold defaultstate="collapsed" desc="Create Drop-off Modal">
             Move_to_Element_By_Path("Move > 'Create Drop-off Location' button", "xpath", "//*[contains(text(),'CREATE DROP-OFF LOCATION')]", ParentTest, "no_jira");
             if (FAIL) { return;}
             Element_By_Path_Click("Click > 'Create Drop-off Location' button", "xpath", "//*[contains(text(),'CREATE DROP-OFF LOCATION')]", ParentTest, "no_jira");
@@ -1342,9 +1342,16 @@ class AP3_site extends AP3_GUI{
                 if (FAIL) { return;}
             Thread.sleep(500);    
             Page_URL("New Site page URL", ParentTest, "no_jira");
-                if (FAIL) { return;}               
-            Element_By_Path_Text_Enter("Enter new Site Name", "css", "[aria-label='Location Name']", "New Auto Site " + New_ID, false, ParentTest, "no_jira");
+                if (FAIL) { return;}  
+                
+            Element_E1_Find("Find 'Site detail' card", "id", "site-detail", ParentTest, "no_jira");
+                if (FAIL) { return;}    
+            Element_Child_E2("Find 'Site detail' > 'Location Name' field", e1, "css", "[aria-label='Location Name']", ParentTest, "no_jira");    
+                if (FAIL) { return;}              
+            Element_Text_Enter("Enter new Site Name", e2, "New Auto Site " + New_ID, ParentTest, "no_jira");
+            //Element_By_Path_Text_Enter("Enter new Site Name", "css", "[aria-label='Location Name']", "New Auto Site " + New_ID, false, ParentTest, "no_jira");
                 if (FAIL) { return;} // ^^^ enter name to show buttons
+            
             Find_Text("Find 'Cancel' text", "Cancel", true, ParentTest, "no_jira"); 
             Find_Text("Find 'Create Site' text", "Create Site", true, ParentTest, "no_jira"); 
             List_L0("Site Info Navigationd Count", "xpath", "//div[contains(@class, 'SelectedLeft')]", ParentTest, "no_jira");             
@@ -1374,12 +1381,15 @@ class AP3_site extends AP3_GUI{
                             }  
                         //String ADDR = "87 Bordeaux Drive, Logan Township, NJ, USA";
                         //String ADDR_Short = "87 Bordeaux Dr"; 
-                         Element_By_Path_Text_Enter("Enter new Site Address", "css", "[aria-label='Address']", "87 Bordeaux Drive, Logan Township", false, ParentTest, "no_jira");
-                            if (FAIL) { return;}  
-                            Thread.sleep(1000); 
-                         Element_By_Path_Click("Select new Site Address", "xpath", "//*[contains(text(), '" + "Bordeaux Drive" + "')]", ParentTest, "no_jira");
+                        Element_Child_E2("Find 'Site detail' > 'Address' field", e1, "css", "[aria-label='Address']", ParentTest, "no_jira");    
+                            if (FAIL) { return;}              
+                        Element_Text_Enter("Enter new Site Name", e2, "87 Bordeaux Drive, Logan Township", ParentTest, "no_jira");
+//                        Element_By_Path_Text_Enter("Enter new Site Address", "css", "[aria-label='Address']", "87 Bordeaux Drive, Logan Township", false, ParentTest, "no_jira");
+//                            if (FAIL) { return;}  
+                        Thread.sleep(1000); 
+                        Element_By_Path_Click("Select new Site Address", "xpath", "//*[contains(text(), '" + "Bordeaux Drive" + "')]", ParentTest, "no_jira");
                             if (FAIL) { return;} 
-                            Thread.sleep(1000); 
+                        Thread.sleep(1000); 
                         Element_By_Path_Text_Select_Copy("New Site Address", "xpath", "//input[@aria-label='Address']", ParentTest, "no_jira"); 
                             if (FAIL) { return;}
                         Element_By_Path_Text("New Site Country", "xpath", "//input[@aria-label='Country']/parent::div", ParentTest, "no_jira"); 
