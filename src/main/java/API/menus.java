@@ -58,7 +58,7 @@ class menus extends API_GUI{
         
 
         JOB_Api_Call("Brand Last Local Menu " + " > /menu/'MenuID'", "GET", 
-            BaseAPI + "/menu/" + MENU_IDS.get(MENU_IDS.size() -1), Auth, "", 200, ParentTest, "no_jira");  
+            BaseAPI + "/menu/" + MENU_IDS.get(MENU_IDS.size() - 1), Auth, "", 200, ParentTest, "no_jira");  
         if(json != null){
             CATEGORIES_IDS = new ArrayList<>();
             ITEMS_IDS = new ArrayList<>();
