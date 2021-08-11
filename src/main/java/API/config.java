@@ -282,8 +282,8 @@ class config extends API_GUI {
         //<editor-fold defaultstate="collapsed" desc="DELETE Config">
         // Test Scenario 1: Positive flow to DELETE newly added Config - payment
         JOB_Api_Call("Config - DELETE  Positive flow to DELETE newly added Config - payment", "DELETE", BaseAPI + "/config/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
-        
-         // Adding Config - Add Payment ID back after deleting
+
+        // Adding Config - Add Payment ID back after deleting
         BODY = "{"
                 + "\"payment\":{"
                 + "\"exact\":{"
@@ -444,6 +444,38 @@ class config extends API_GUI {
         //<editor-fold defaultstate="collapsed" desc="DELETE Config-public">
         // Test Scenario 1: Positive flow to DELETE newly added Config-public by ID
         JOB_Api_Call("Config - DELETE  Positive flow to DELETE newly added Config-public by ID", "DELETE", BaseAPI + "/config/public/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+
+        // Adding Config Public - Mealplan back after deleting
+        BODY = "{"
+                + "\"mealplan\":["
+                + "{"
+                + "\"id\":\"XDrR37dPedU5RqJYjN8MFQ0PN4XvQ7IDzmk1YR17UdoD57BjGjU8XgWzplLeSpWXR6X5yLF7Gy3Q22AdSje9D6lBlrfRaaywv8mYtZpB2A7QmzuqOGr2mGOvcdDWq69LmKuaGaZYmKEGtqB2Bk9075IJvXBkJ7jKTKWDg7\","
+                + "\"name\":\"ATRIUM\","
+                + "\"tenders\":["
+                + "{"
+                + "\"id\":null,"
+                + "\"tax_exempt\":true,"
+                + "\"name\":\"This is API test for Config\","
+                + "\"type\":\"meal_equivalent\","
+                + "\"tender_number\":null,"
+                + "\"max_swipes_per_transaction\":null,"
+                + "\"rates\":["
+                + "{"
+                + "\"hours\":null,"
+                + "\"amount\":null"
+                + "}"
+                + "]"
+                + "}"
+                + "],"
+                + "\"type\":\"ATRIUM\","
+                + "\"note\":{"
+                + "},"
+                + "\"valid_email_domains\":["
+                + "]"
+                + "}"
+                + "]"
+                + "}";
+        JOB_Api_Call("Config - Adding  Config-public back after deleting - Add Mealplan", "POST", BaseAPI + "/config/public/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
     }
 }
