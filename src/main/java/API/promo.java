@@ -19,6 +19,7 @@ class promo extends API_GUI {
         AP3_TKN = a.AP3_TKN;
         CompanyID = a.CompanyID;
         SiteID = a.SiteID;
+        Promo_Voucher_Id = a.Promo_Voucher_Id;
         BrandID = a.BrandID;
         ParentTest = a.ParentTest;
         ITEMS_IDS = a.ITEMS_IDS;
@@ -30,7 +31,6 @@ class promo extends API_GUI {
     private String PROMO_START_MONTH = new SimpleDateFormat("M").format(release_date);
     private String PROMO_START_YEAR = new SimpleDateFormat("yyyy").format(release_date);
     private String PROMO_START_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(release_date);
-    private String Promo_Voucher_Id = "";
     private String Promo_Voucher_Code = "";
     private List<String> PROMOTION_IDS = new ArrayList<>();
     private List<String> PROMO_VOUCHER_IDS = new ArrayList<>();
