@@ -679,6 +679,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String ShoppingCart_Pickup_ID = "";
     protected String Order_Pickup_ID = "";
     protected String Promo_Voucher_Id = "";
+    protected String Promo_Voucher_Code = "";
     protected List<String> BolterBrandIDS;
 
     protected List<String> SECTOR_IDS;

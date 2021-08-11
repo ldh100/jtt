@@ -14,6 +14,7 @@ class config extends API_GUI {
         SiteID = a.SiteID;
         BrandID = a.BrandID;
         Promo_Voucher_Id = a.Promo_Voucher_Id;
+        Promo_Voucher_Code = a.Promo_Voucher_Code;
         ParentTest = a.ParentTest;
     }
 
@@ -158,7 +159,7 @@ class config extends API_GUI {
                 + "\"tenders\":["
                 + "{"
                 + "\"tender_number\":\"EOGw3rpeApcvreYqo0BLfZdLXMqG1ysey6BpMlBmCeKe\","
-                + "\"name\":\"debit 1\","
+                + "\"name\":\"This is API test for Config\","
                 + "\"type\":\"meal_equivalent\","
                 + "\"max_swipes_per_transaction\":3,"
                 + "\"rates\":["
@@ -270,7 +271,7 @@ class config extends API_GUI {
                 + "}"
                 + "]"
                 + "}";
-        JOB_Api_Call("Config - POST Positive flow to add Config - Add Payment ID & Mealplan", "POST", BaseAPI + "/config/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Config - PUT Positive flow to add Config - Add Payment ID & Mealplan", "PUT", BaseAPI + "/config/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="GET Config">
@@ -281,6 +282,30 @@ class config extends API_GUI {
         //<editor-fold defaultstate="collapsed" desc="DELETE Config">
         // Test Scenario 1: Positive flow to DELETE newly added Config - payment
         JOB_Api_Call("Config - DELETE  Positive flow to DELETE newly added Config - payment", "DELETE", BaseAPI + "/config/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+        
+         // Adding Config - Add Payment ID back after deleting
+        BODY = "{"
+                + "\"payment\":{"
+                + "\"exact\":{"
+                + "\"id\":\"" + exact_id + "\","
+                + "\"exact_gateway_id\":\"" + exact_gateway_id + "\","
+                + "\"exate_gateway_password\":\"\","
+                + "\"exact_gateway_password\":\"" + exact_gateway_password + "\""
+                + "},"
+                + "\"refund\":false"
+                + "},"
+                + "\"loyalty\":{"
+                + "\"enabled\":false"
+                + "},"
+                + "\"supports\":{"
+                + "\"reorder\":false"
+                + "},"
+                + "\"apex\":{"
+                + "\"apex_integrated\":true,"
+                + "\"apex_client_numb\":\"188\""
+                + "}"
+                + "}";
+        JOB_Api_Call("Config - Adding Config back after deleting Payment ID", "POST", BaseAPI + "/config/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
     }
 
@@ -296,7 +321,7 @@ class config extends API_GUI {
                 + "{"
                 + "\"id\":null,"
                 + "\"tax_exempt\":true,"
-                + "\"name\":\"22\","
+                + "\"name\":\"This is API test for Config\","
                 + "\"type\":\"meal_equivalent\","
                 + "\"tender_number\":null,"
                 + "\"max_swipes_per_transaction\":null,"
@@ -316,6 +341,7 @@ class config extends API_GUI {
                 + "}"
                 + "]"
                 + "}";
+        JOB_Api_Call("Config - POST Positive flow to POST Config-public - Add Mealplan", "POST", BaseAPI + "/config/public/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
         // Test Scenario 2: Positive flow to POST Config-public - Add Mealplan & Promotions
         BODY = "{"
                 + "\"mealplan\":["
@@ -326,7 +352,7 @@ class config extends API_GUI {
                 + "{"
                 + "\"id\":null,"
                 + "\"tax_exempt\":true,"
-                + "\"name\":\"22\","
+                + "\"name\":\"This is API test for Config-public\","
                 + "\"type\":\"meal_equivalent\","
                 + "\"tender_number\":null,"
                 + "\"max_swipes_per_transaction\":null,"
@@ -347,8 +373,8 @@ class config extends API_GUI {
                 + "],"
                 + "\"promotions\":["
                 + "{"
-                + "\"name\":\"Demo\","
-                + "\"code\":\"LOCATION-35090140420518345\","
+                + "\"name\":\"This is promotion test for config-public\","
+                + "\"code\":\"" + Promo_Voucher_Code + "\","
                 + "\"discountType\":\"AMOUNT\","
                 + "\"amount\":100,"
                 + "\"active\":true,"
@@ -358,16 +384,66 @@ class config extends API_GUI {
                 + "}"
                 + "]"
                 + "}";
+        JOB_Api_Call("Config - POST Positive flow to POST Config-public - Add Mealplan & Promotions", "POST", BaseAPI + "/config/public/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
+
         //<editor-fold defaultstate="collapsed" desc="PUT Config-public">
         // Test Scenario 1: Positive flow to PUT/Update Config-public Add only promotions
+        BODY = "{"
+                + "\"mealplan\":["
+                + "],"
+                + "\"promotions\":["
+                + "{"
+                + "\"name\":\"This is promotion-1 test for config-public \","
+                + "\"code\":\"" + Promo_Voucher_Code + "\","
+                + "\"discountType\":\"AMOUNT\","
+                + "\"amount\":100,"
+                + "\"active\":false,"
+                + "\"id\":\"EOkklRoL4Psr0YgD2dm2IZ5615ZzPKhe6NgZy35qhj1glR1AKlh06Rd06y93cE57prl06eHWOv84MP5OiZ5LzeqrAvCNM9OWp5Z\","
+                + "\"app\":\"thrive\","
+                + "\"is_mealplan_promo\":true"
+                + "}"
+                + "]"
+                + "}";
+        JOB_Api_Call("Config - PUT Positive flow to PUT/Update Config-public Add only promotions", "PUT", BaseAPI + "/config/public/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
         // Test Scenario 2: Positive flow to PUT/Update Config-public Add multiple promotions
+        BODY = "{"
+                + "\"mealplan\":["
+                + "],"
+                + "\"promotions\":["
+                + "{"
+                + "\"name\":\"This is promotion-1 test for config-public \","
+                + "\"code\":\"" + Promo_Voucher_Code + "\","
+                + "\"discountType\":\"AMOUNT\","
+                + "\"amount\":100,"
+                + "\"active\":false,"
+                + "\"id\":\"EOkklRoL4Psr0YgD2dm2IZ5615ZzPKhe6NgZy35qhj1glR1AKlh06Rd06y93cE57prl06eHWOv84MP5OiZ5LzeqrAvCNM9OWp5Z\","
+                + "\"app\":\"thrive\","
+                + "\"is_mealplan_promo\":true"
+                + "},"
+                + "{"
+                + "\"name\":\"This is promotion-2 test for config-public\","
+                + "\"code\":\"LOCATION-6881748461302526\","
+                + "\"discountType\":\"PERCENT\","
+                + "\"amount\":1,"
+                + "\"active\":true,"
+                + "\"id\":\"JG66NKdawPSEWgpmeZ7eC19oB91JN8fqA48Gwe7Pf0lk3JGAWKsyLXv5a3RyuNZE65pwBktzoZkMovLYHokqpyy78qH5gv1GwWK\","
+                + "\"app\":\"thrive\","
+                + "\"is_mealplan_promo\":false"
+                + "}"
+                + "]"
+                + "}";
+        JOB_Api_Call("Config - PUT Positive flow to PUT/Update Config-public Add multiple promotions", "PUT", BaseAPI + "/config/public/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
+
         //<editor-fold defaultstate="collapsed" desc="GET Config-public">
         // Test Scenario 1: Positive flow to GET newly added Config-public by ID
+        JOB_Api_Call("Config - GET  Positive flow to GET newly added Config-public by ID", "GET", BaseAPI + "/config/public/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
+
         //<editor-fold defaultstate="collapsed" desc="DELETE Config-public">
         // Test Scenario 1: Positive flow to DELETE newly added Config-public by ID
+        JOB_Api_Call("Config - DELETE  Positive flow to DELETE newly added Config-public by ID", "DELETE", BaseAPI + "/config/public/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
     }
 }
