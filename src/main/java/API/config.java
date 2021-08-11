@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-class config extends API_GUI{
+class config extends API_GUI {
+
     protected config(API_GUI a) {
         app = a.app;
         env = a.env;
@@ -14,34 +15,35 @@ class config extends API_GUI{
         BrandID = a.BrandID;
         ParentTest = a.ParentTest;
     }
-    protected void run() {      
+
+    protected void run() {
         Auth = "Bearer " + AP3_TKN;   // =============== config(s) ===================================
 //        JOB_Api_Call("config > /'AppID'", "GET", BaseAPI + "/config/" + AppID, Auth, "", 200, ParentTest, "no_jira");
 //        JOB_Api_Call("Public config > /'AppID'", "GET", BaseAPI + "/config/public/" + AppID, "", "", 200, ParentTest, "no_jira");
-        
-        JOB_Api_Call("Config > /'SiteID'", "GET", 
-            BaseAPI + "/config/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
-        if(json != null){
-            try{
+
+        JOB_Api_Call("Config > /'SiteID'", "GET",
+                BaseAPI + "/config/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
+        if (json != null) {
+            try {
                 JSONObject p = json.getJSONObject("payment");
-                if(p.has("freedompay")) {
+                if (p.has("freedompay")) {
                     Site_PProvider = "freedompay";
                     freedompay_id = p.getJSONObject("freedompay").getString("id");
                     freedompay_terminal_id = p.getJSONObject("freedompay").getString("freedompay_terminal_id");
-                    freedompay_store_id = p.getJSONObject("freedompay").getString("freedompay_store_id");                  
-                }else if(p.has("exact")) {
+                    freedompay_store_id = p.getJSONObject("freedompay").getString("freedompay_store_id");
+                } else if (p.has("exact")) {
                     Site_PProvider = "exact";
                     exact_gateway_password = p.getJSONObject("exact").getString("exact_gateway_password");
                     exact_gateway_id = p.getJSONObject("exact").getString("exact_gateway_id");
-                    exact_id = p.getJSONObject("exact").getString("id");                
+                    exact_id = p.getJSONObject("exact").getString("id");
                 }
-            } catch (Exception ex){
+            } catch (Exception ex) {
                 String AAAA = ex.getMessage();
             }
-        } 
-        
-        JOB_Api_Call("Public Config > /'SiteID'", "GET", 
-            BaseAPI + "/config/public/" + SiteID, "", "", 200, ParentTest, "no_jira");
+        }
+
+        JOB_Api_Call("Public Config > /'SiteID'", "GET",
+                BaseAPI + "/config/public/" + SiteID, "", "", 200, ParentTest, "no_jira");
 //{
 //    "promotions": [],
 //    "mealplan": [{
@@ -57,15 +59,14 @@ class config extends API_GUI{
 //        "type": "CBORD DIRECT"
 //    }]
 //}        
-                
+
 //        JOB_Api_Call("config > /'UnitID'", "GET", BaseAPI + "/config/" + UnitID, Auth, "", 200, ParentTest, "no_jira");
 //        JOB_Api_Call("Public config > /'UnitID'", "GET", BaseAPI + "/config/public/" + UnitID, "", "", 200, ParentTest, "no_jira");
-         
-        JOB_Api_Call("Config > /'BrandID'", "GET", 
-            BaseAPI + "/config/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
-        
-        JOB_Api_Call("Public Config > /'BrandID'", "GET", 
-            BaseAPI + "/config/public/" + BrandID, "", "", 200, ParentTest, "no_jira");
+        JOB_Api_Call("Config > /'BrandID'", "GET",
+                BaseAPI + "/config/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
+
+        JOB_Api_Call("Public Config > /'BrandID'", "GET",
+                BaseAPI + "/config/public/" + BrandID, "", "", 200, ParentTest, "no_jira");
         if (json != null) {
             DELIEVERY_DESTINATIONS = new ArrayList<>();
             try {
@@ -74,25 +75,57 @@ class config extends API_GUI{
                     DELIEVERY_DESTINATIONS.add(DESTINATIONS.getString(i));
                 }
 
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 String AAA = ex.getMessage();
-            }  
-        }    
-        
-        JOB_Api_Call("Config > JDE Configuration", "GET", 
-            BaseAPI + "/config/jde-configuration", Auth, "", 200, ParentTest, "no_jira");   
-        
-        
+            }
+        }
+
+        JOB_Api_Call("Config > JDE Configuration", "GET",
+                BaseAPI + "/config/jde-configuration", Auth, "", 200, ParentTest, "no_jira");
+
 // Site
 // https://api.compassdigital.org/staging/config/81NDOePO6pCwEaym2Ey8UNaWl9MqB5sjlBZYj3yQfAoRDAPOLZTJvr9E6266hXO4RAkKXgCMB7
 // POST
 // {"payment":{"exact":{"id":"APE3Ev9vQkfo2mmOpKP7fGJ48NKAPOugo0gdlWJqS3O","exact_gateway_id":"AE7628-02","exact_gateway_password":"~RSQzgwC"},"refund":true},"loyalty":{"enabled":false},"supports":{"reorder":false},"apex":{"apex_integrated":false,"apex_client_numb":""},"mealplan":[]}        
-
 // Brand
 // https://api.compassdigital.org/staging/config/81NDOePO6pCwEaym2Ey8UNaWl9MqB5sjlBZYj3yQfAoRDAPOLZTJvr9E6266hXO4RAkKXgCMB7
 // POST
 // {"payment":{"exact":{"id":"APE3Ev9vQkfo2mmOpKP7fGJ48NKAPOugo0gdlWJqS3O","exact_gateway_id":"AE7628-02","exact_gateway_password":"~RSQzgwC"},"refund":false},"delivery_fee":{"type":"dollar","value":0.2},"service_fee":{"type":"dollar","value":0.1},"loyalty":{"enabled":false},"excluded_payment_methods":{"mealplan":[],"credit_card":false,"digital_wallet_pay":["googlewallet"],"meal_swipes":[]},"supports":{"reorder":false}}
+        configAPIs();
+        configPublicAPIs();
+    }
 
+    protected void configAPIs() {
+        //<editor-fold defaultstate=“collapsed” desc=“POST Config”>
+        // Test Scenario 1: Positive flow to POST Config - Add payment
+
+        //</editor-fold>
+        //<editor-fold defaultstate=“collapsed” desc=“PUT Config”>
+        // Test Scenario 1: Positive flow to PUT/Update Config - Add payment
+        //</editor-fold>
+        //<editor-fold defaultstate=“collapsed” desc=“GET Config”>
+        // Test Scenario 1: Positive flow to GET newly added Config - payment
+        //</editor-fold>
+        //<editor-fold defaultstate=“collapsed” desc=“DELETE Config”>
+        // Test Scenario 1: Positive flow to DELETE newly added Config - payment
+        //</editor-fold>
+    }
+
+    protected void configPublicAPIs() {
+        //<editor-fold defaultstate=“collapsed” desc=“POST Config-public”>
+        // Test Scenario 1: Positive flow to POST Config-public - Add Mealplan
+        // Test Scenario 2: Positive flow to POST Config-public - Add Mealplan & Promotions
+
+        //</editor-fold>
+        //<editor-fold defaultstate=“collapsed” desc=“PUT Config-public”>
+        // Test Scenario 1: Positive flow to PUT/Update Config-public Add only promotions
+        // Test Scenario 2: Positive flow to PUT/Update Config-public Add multiple promotions
+        //</editor-fold>
+        //<editor-fold defaultstate=“collapsed” desc=“GET Config-public”>
+        // Test Scenario 1: Positive flow to GET newly added Config-public by ID
+        //</editor-fold>
+        //<editor-fold defaultstate=“collapsed” desc=“DELETE Config-public”>
+        // Test Scenario 1: Positive flow to DELETE newly added Config-public by ID
+        //</editor-fold>
     }
 }
