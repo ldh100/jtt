@@ -17,15 +17,20 @@ class config extends API_GUI {
         Promo_Voucher_Code = a.Promo_Voucher_Code;
         ParentTest = a.ParentTest;
     }
+    private String fake_Site_Id = "thisisfakesiteidtopreventdatachnage123";
 
     protected void run() {
+        //This fake site ID has used to prevent original modification to site.
+
         Auth = "Bearer " + AP3_TKN;   // =============== config(s) ===================================
 //        JOB_Api_Call("config > /'AppID'", "GET", BaseAPI + "/config/" + AppID, Auth, "", 200, ParentTest, "no_jira");
 //        JOB_Api_Call("Public config > /'AppID'", "GET", BaseAPI + "/config/public/" + AppID, "", "", 200, ParentTest, "no_jira");
 
-        JOB_Api_Call("Config > /'SiteID'", "GET",
+        JOB_Api_Call(
+                "Config > /'SiteID'", "GET",
                 BaseAPI + "/config/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
-        if (json != null) {
+        if (json
+                != null) {
             try {
                 JSONObject p = json.getJSONObject("payment");
                 if (p.has("freedompay")) {
@@ -44,7 +49,8 @@ class config extends API_GUI {
             }
         }
 
-        JOB_Api_Call("Public Config > /'SiteID'", "GET",
+        JOB_Api_Call(
+                "Public Config > /'SiteID'", "GET",
                 BaseAPI + "/config/public/" + SiteID, "", "", 200, ParentTest, "no_jira");
 //{
 //    "promotions": [],
@@ -64,12 +70,15 @@ class config extends API_GUI {
 
 //        JOB_Api_Call("config > /'UnitID'", "GET", BaseAPI + "/config/" + UnitID, Auth, "", 200, ParentTest, "no_jira");
 //        JOB_Api_Call("Public config > /'UnitID'", "GET", BaseAPI + "/config/public/" + UnitID, "", "", 200, ParentTest, "no_jira");
-        JOB_Api_Call("Config > /'BrandID'", "GET",
+        JOB_Api_Call(
+                "Config > /'BrandID'", "GET",
                 BaseAPI + "/config/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
 
-        JOB_Api_Call("Public Config > /'BrandID'", "GET",
+        JOB_Api_Call(
+                "Public Config > /'BrandID'", "GET",
                 BaseAPI + "/config/public/" + BrandID, "", "", 200, ParentTest, "no_jira");
-        if (json != null) {
+        if (json
+                != null) {
             DELIEVERY_DESTINATIONS = new ArrayList<>();
             try {
                 JSONArray DESTINATIONS = json.getJSONArray("delivery_destinations");
@@ -82,17 +91,10 @@ class config extends API_GUI {
             }
         }
 
-        JOB_Api_Call("Config > JDE Configuration", "GET",
+        JOB_Api_Call(
+                "Config > JDE Configuration", "GET",
                 BaseAPI + "/config/jde-configuration", Auth, "", 200, ParentTest, "no_jira");
 
-// Site
-// https://api.compassdigital.org/staging/config/81NDOePO6pCwEaym2Ey8UNaWl9MqB5sjlBZYj3yQfAoRDAPOLZTJvr9E6266hXO4RAkKXgCMB7
-// POST
-// {"payment":{"exact":{"id":"APE3Ev9vQkfo2mmOpKP7fGJ48NKAPOugo0gdlWJqS3O","exact_gateway_id":"AE7628-02","exact_gateway_password":"~RSQzgwC"},"refund":true},"loyalty":{"enabled":false},"supports":{"reorder":false},"apex":{"apex_integrated":false,"apex_client_numb":""},"mealplan":[]}        
-// Brand
-// https://api.compassdigital.org/staging/config/81NDOePO6pCwEaym2Ey8UNaWl9MqB5sjlBZYj3yQfAoRDAPOLZTJvr9E6266hXO4RAkKXgCMB7
-// POST
-// {"payment":{"exact":{"id":"APE3Ev9vQkfo2mmOpKP7fGJ48NKAPOugo0gdlWJqS3O","exact_gateway_id":"AE7628-02","exact_gateway_password":"~RSQzgwC"},"refund":false},"delivery_fee":{"type":"dollar","value":0.2},"service_fee":{"type":"dollar","value":0.1},"loyalty":{"enabled":false},"excluded_payment_methods":{"mealplan":[],"credit_card":false,"digital_wallet_pay":["googlewallet"],"meal_swipes":[]},"supports":{"reorder":false}}
         configAPIs();
         configPublicAPIs();
     }
@@ -122,7 +124,7 @@ class config extends API_GUI {
                 + "\"apex_client_numb\":\"188\""
                 + "}"
                 + "}";
-        JOB_Api_Call("Config - POST Positive flow to add Config - Add Payment ID", "POST", BaseAPI + "/config/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Config - POST Positive flow to add Config - Add Payment ID", "POST", BaseAPI + "/config/" + fake_Site_Id, Auth, BODY, 200, ParentTest, "no_jira");
         // Test Scenario 2: Positive flow to add Config - Add Payment ID & Mealplan
         //Meanplan ID's are harcoded as work is still pending in "mealplan.java"
         BODY = "{"
@@ -186,7 +188,7 @@ class config extends API_GUI {
                 + "}"
                 + "]"
                 + "}";
-        JOB_Api_Call("Config - POST Positive flow to add Config - Add Payment ID & Mealplan", "POST", BaseAPI + "/config/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Config - POST Positive flow to add Config - Add Payment ID & Mealplan", "POST", BaseAPI + "/config/" + fake_Site_Id, Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="PUT Config">
@@ -212,7 +214,7 @@ class config extends API_GUI {
                 + "\"apex_client_numb\":\"18889\""
                 + "}"
                 + "}";
-        JOB_Api_Call("Config - PUT Positive flow to PUT/Update Config - Add Payment ID", "PUT", BaseAPI + "/config/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Config - PUT Positive flow to PUT/Update Config - Add Payment ID", "PUT", BaseAPI + "/config/" + fake_Site_Id, Auth, BODY, 200, ParentTest, "no_jira");
         // Test Scenario 2: Positive flow to update Config - Add Payment ID & Mealplan
         //Meanplan ID's are harcoded as work is still pending in "mealplan.java"
         BODY = "{"
@@ -271,17 +273,17 @@ class config extends API_GUI {
                 + "}"
                 + "]"
                 + "}";
-        JOB_Api_Call("Config - PUT Positive flow to add Config - Add Payment ID & Mealplan", "PUT", BaseAPI + "/config/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Config - PUT Positive flow to add Config - Add Payment ID & Mealplan", "PUT", BaseAPI + "/config/" + fake_Site_Id, Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="GET Config">
         // Test Scenario 1: Positive flow to GET newly added Config - payment
-        JOB_Api_Call("Config - GET Positive flow to GET newly added Config - payment", "GET", BaseAPI + "/config/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Config - GET Positive flow to GET newly added Config - payment", "GET", BaseAPI + "/config/" + fake_Site_Id, Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="DELETE Config">
         // Test Scenario 1: Positive flow to DELETE newly added Config - payment
-        JOB_Api_Call("Config - DELETE  Positive flow to DELETE newly added Config - payment", "DELETE", BaseAPI + "/config/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Config - DELETE  Positive flow to DELETE newly added Config - payment", "DELETE", BaseAPI + "/config/" + fake_Site_Id, Auth, BODY, 200, ParentTest, "no_jira");
 
         // Adding Config - Add Payment ID back after deleting
         BODY = "{"
@@ -305,7 +307,7 @@ class config extends API_GUI {
                 + "\"apex_client_numb\":\"188\""
                 + "}"
                 + "}";
-        JOB_Api_Call("Config - Adding Config back after deleting Payment ID", "POST", BaseAPI + "/config/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Config - Adding Config back after deleting Payment ID", "POST", BaseAPI + "/config/" + fake_Site_Id, Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
     }
 
@@ -341,7 +343,7 @@ class config extends API_GUI {
                 + "}"
                 + "]"
                 + "}";
-        JOB_Api_Call("Config - POST Positive flow to POST Config-public - Add Mealplan", "POST", BaseAPI + "/config/public/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Config - POST Positive flow to POST Config-public - Add Mealplan", "POST", BaseAPI + "/config/public/" + fake_Site_Id, Auth, BODY, 200, ParentTest, "no_jira");
         // Test Scenario 2: Positive flow to POST Config-public - Add Mealplan & Promotions
         BODY = "{"
                 + "\"mealplan\":["
@@ -384,7 +386,7 @@ class config extends API_GUI {
                 + "}"
                 + "]"
                 + "}";
-        JOB_Api_Call("Config - POST Positive flow to POST Config-public - Add Mealplan & Promotions", "POST", BaseAPI + "/config/public/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Config - POST Positive flow to POST Config-public - Add Mealplan & Promotions", "POST", BaseAPI + "/config/public/" + fake_Site_Id, Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="PUT Config-public">
@@ -405,7 +407,7 @@ class config extends API_GUI {
                 + "}"
                 + "]"
                 + "}";
-        JOB_Api_Call("Config - PUT Positive flow to PUT/Update Config-public Add only promotions", "PUT", BaseAPI + "/config/public/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Config - PUT Positive flow to PUT/Update Config-public Add only promotions", "PUT", BaseAPI + "/config/public/" + fake_Site_Id, Auth, BODY, 200, ParentTest, "no_jira");
         // Test Scenario 2: Positive flow to PUT/Update Config-public Add multiple promotions
         BODY = "{"
                 + "\"mealplan\":["
@@ -433,17 +435,17 @@ class config extends API_GUI {
                 + "}"
                 + "]"
                 + "}";
-        JOB_Api_Call("Config - PUT Positive flow to PUT/Update Config-public Add multiple promotions", "PUT", BaseAPI + "/config/public/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Config - PUT Positive flow to PUT/Update Config-public Add multiple promotions", "PUT", BaseAPI + "/config/public/" + fake_Site_Id, Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="GET Config-public">
         // Test Scenario 1: Positive flow to GET newly added Config-public by ID
-        JOB_Api_Call("Config - GET  Positive flow to GET newly added Config-public by ID", "GET", BaseAPI + "/config/public/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Config - GET  Positive flow to GET newly added Config-public by ID", "GET", BaseAPI + "/config/public/" + fake_Site_Id, Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="DELETE Config-public">
         // Test Scenario 1: Positive flow to DELETE newly added Config-public by ID
-        JOB_Api_Call("Config - DELETE  Positive flow to DELETE newly added Config-public by ID", "DELETE", BaseAPI + "/config/public/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Config - DELETE  Positive flow to DELETE newly added Config-public by ID", "DELETE", BaseAPI + "/config/public/" + fake_Site_Id, Auth, BODY, 200, ParentTest, "no_jira");
 
         // Adding Config Public - Mealplan back after deleting
         BODY = "{"
@@ -475,7 +477,7 @@ class config extends API_GUI {
                 + "}"
                 + "]"
                 + "}";
-        JOB_Api_Call("Config - Adding  Config-public back after deleting - Add Mealplan", "POST", BaseAPI + "/config/public/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Config - Adding  Config-public back after deleting - Add Mealplan", "POST", BaseAPI + "/config/public/" + fake_Site_Id, Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
     }
 }
