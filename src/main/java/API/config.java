@@ -29,8 +29,7 @@ class config extends API_GUI {
         JOB_Api_Call(
                 "Config > /'SiteID'", "GET",
                 BaseAPI + "/config/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
-        if (json
-                != null) {
+        if (json != null) {
             try {
                 JSONObject p = json.getJSONObject("payment");
                 if (p.has("freedompay")) {
@@ -77,8 +76,7 @@ class config extends API_GUI {
         JOB_Api_Call(
                 "Public Config > /'BrandID'", "GET",
                 BaseAPI + "/config/public/" + BrandID, "", "", 200, ParentTest, "no_jira");
-        if (json
-                != null) {
+        if (json != null) {
             DELIEVERY_DESTINATIONS = new ArrayList<>();
             try {
                 JSONArray DESTINATIONS = json.getJSONArray("delivery_destinations");
@@ -91,8 +89,7 @@ class config extends API_GUI {
             }
         }
 
-        JOB_Api_Call(
-                "Config > JDE Configuration", "GET",
+        JOB_Api_Call("Config > JDE Configuration", "GET",
                 BaseAPI + "/config/jde-configuration", Auth, "", 200, ParentTest, "no_jira");
 
         configAPIs();
