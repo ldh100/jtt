@@ -599,13 +599,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String ADMIN_ID = "";
     protected String ADMIN_PW = "";
     protected String AP3_User_ID = "";
-    protected String AP3_TKN = "";  
-    
+    protected String AP3_TKN = "";
+
     protected String RUNNER_ID = "";
     protected String RUNNER_PW = "";
     protected String Bolter_User_ID = "";
-    protected String Bolter_User_TKN = "";   
-    
+    protected String Bolter_User_TKN = "";
+
     protected String MOBILE_ID = "";
     protected String MOBILE_PW = "";
     protected String Mobile_User_ID = "";
@@ -616,10 +616,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String Card_Name = "";
     protected String Card_Expire = "";
     protected String Mobile_User_PProvider = "";
-    protected String Card_Method_TKN = ""; 
+    protected String Card_Method_TKN = "";
     protected String EXACT_Payment_TKN = "";
     protected String FP_Payment_TKN = "";
-    
+
     private String HTML_Report_Path = "";
     private String Report_Date = "";
     private ExtentSparkReporter HtmlReporter;
@@ -670,16 +670,17 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String CompanyID = "";
     protected String GL_MENU = "";
     protected String GL_MENU_ID = "";
-    
-    protected String Bolter_Site_ID = "";  
-    protected String Market_Brand_ID = ""; 
-    
-    protected String ShoppingCart_Delivery_ID = "";  
-    protected String Order_Delivery_ID = "";  
-    protected String ShoppingCart_Pickup_ID = "";  
-    protected String Order_Pickup_ID = ""; 
-    
-    protected List<String> BolterBrandIDS; 
+
+    protected String Bolter_Site_ID = "";
+    protected String Market_Brand_ID = "";
+
+    protected String ShoppingCart_Delivery_ID = "";
+    protected String Order_Delivery_ID = "";
+    protected String ShoppingCart_Pickup_ID = "";
+    protected String Order_Pickup_ID = "";
+    protected String Promo_Voucher_Id = "";
+    protected String Promo_Voucher_Code = "";
+    protected List<String> BolterBrandIDS;
 
     protected List<String> SECTOR_IDS;
     protected List<String> COMP_IDS;
@@ -694,8 +695,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
     protected List<String> NOTIFICATION_IDS;
     protected List<String> ANNOUNCEMENT_IDS;
-  
-    
+
     protected boolean refund = true;
     protected String Site_PProvider = "exact";
 //  "exact": {
@@ -708,9 +708,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String freedompay_terminal_id = "26241559005";
     protected String freedompay_store_id = "16167424007";
     protected String FP_URL = ""; //https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
-    protected String VF_URL = "https://api.voucherify.io/v1/"; 
-    protected String VF_TKN = "";  
-    
+    protected String VF_URL = "https://api.voucherify.io/v1/";
+    protected String VF_TKN = "";
+
     protected int _t = 0; // Total
     protected int _p = 0; // Passed
     protected int _f = 0; // Failed
@@ -734,7 +734,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
     private String Last_EX = "";
     private String Report_File = "";
     // </editor-fold>   
-    
+
     // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">        
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
         if (d1LastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
@@ -803,8 +803,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             };
             json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/config/public/" + AppID + "\r\n" + json.toString(4) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/public/" + AppID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -834,8 +833,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             };
             json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/config/" + AppID + "\r\n" + json.toString(4) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/" + AppID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -864,8 +862,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             };
             json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/location/multigroup/" + AppID + "?nocache=true&extended=true" + "\r\n" + json.toString(4) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/multigroup/" + AppID + "?nocache=true&extended=true" + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -876,8 +873,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             httpclient.close();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
@@ -902,8 +898,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             J += GUI_API_Get(BaseAPI + "/config/public/" + SiteID, "") + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/public/" + SiteID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -920,8 +915,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             J += GUI_API_Get(BaseAPI + "/config/" + SiteID, "Bearer " + AP3_TKN) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/" + SiteID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -938,8 +932,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             J += GUI_API_Get(BaseAPI + "/location/group/" + SiteID, "Bearer " + "") + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/group/" + SiteID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -970,8 +963,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             J += GUI_API_Get(BaseAPI + "/config/public/" + UnitID, "") + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/public/" + UnitID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -988,8 +980,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             J += GUI_API_Get(BaseAPI + "/config/" + UnitID, "Bearer " + AP3_TKN) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/" + UnitID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1006,8 +997,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             J += GUI_API_Get(BaseAPI + "/location/" + UnitID + "?extended=true&nocache=1", "") + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/" + UnitID + "?extended=true&nocache=1" + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1043,8 +1033,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             J += GUI_API_Get(BaseAPI + "/location/sector/" + SECTOR_IDS.get(I) + "?expanded=false", "Bearer " + AP3_TKN) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/sector/" + SECTOR_IDS.get(I) + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1077,8 +1066,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             J += GUI_API_Get(BaseAPI + "/config/public/" + BrandID, "") + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/public/" + BrandID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1095,8 +1083,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             J += GUI_API_Get(BaseAPI + "/config/" + BrandID, "Bearer " + AP3_TKN) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/config/" + BrandID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1131,8 +1118,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 MENU_IDS.add(menu.getString("id"));
             }
             J += BaseAPI + "/location/brand/" + BrandID + "?nocache=true&extended=true" + "\r\n" + json.toString(4) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/brand/" + BrandID + "?nocache=true&extended=true" + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1140,8 +1126,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             httpclient.close();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
@@ -1175,8 +1160,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             J += GUI_API_Get(BaseAPI + "", "Bearer " + AP3_TKN) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/sector?_provider=cdl" + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1213,8 +1197,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             J += GUI_API_Get(BaseAPI + "/calendar/" + BrandID, "Bearer " + AP3_TKN) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/calendar/" + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1244,8 +1227,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         try {
             from = ((Date) StartFormat.parse(From)).getTime();
             to = from + (60 * 60 * 24 * 1000) - 2;
-        }
-        catch (ParseException ex) {
+        } catch (ParseException ex) {
             // Logger.getLogger(API_GUI.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
 
@@ -1256,8 +1238,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             J += GUI_API_Get(BaseAPI + "/order/location/brand/" + BrandID + "?pickup_start=" + from + "&pickup_end=" + to, "Bearer " + AP3_TKN) + "\r\n";
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             J += BaseAPI + "/order/location/brand/" + BrandID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1286,8 +1267,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             J += GUI_API_Get(BaseAPI + "/announcement/resource/", "Bearer " + AP3_TKN) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/announcement/resource" + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1322,8 +1302,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             J += GUI_API_Get(URL, "Bearer " + AP3_TKN) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
@@ -1371,8 +1350,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Mobile_User_ID = json.getString("user");
             Mobile_User_TKN = json.getString("token");
 
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             txtLog.append(" > " + J);
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1392,8 +1370,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();        // ============ Mobile User Payment
         try {
             J += GUI_API_Get(BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, "Bearer " + Mobile_User_TKN) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/payment/method" + "?user_id=" + AP3_User_ID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1461,8 +1438,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             jList_Orders.setModel(model);
             J += "\r\n";
             J += BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1 + "\r\n" + json.toString(4) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1 + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1472,8 +1448,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
         try {
             httpclient.close();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
@@ -1503,8 +1478,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             J += GUI_API_Get(BaseAPI + "/menu/company/" + COMP_IDS.get(I), "Bearer " + AP3_TKN) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/menu/company/" + COMP_IDS.get(I) + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1512,8 +1486,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             httpclient.close();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
@@ -1540,8 +1513,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             J += GUI_API_Get(BaseAPI + "/notification?realm=cdl&target=admin_panel", "Bearer " + AP3_TKN) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/notification?realm=cdl&target=admin_panel" + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1574,8 +1546,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             J += GUI_API_Get(BaseAPI + "/promo/company/" + COMP_IDS.get(cmbComp.getSelectedIndex()) + "/location/group/" + SiteID, "Bearer " + AP3_TKN) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/promo/company/" + COMP_IDS.get(cmbComp.getSelectedIndex()) + "/location/group/" + SiteID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1611,8 +1582,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
             try {
                 J += GUI_API_Get(BaseAPI + "/menu/" + MENU_IDS.get(i) + "?extended=true&nocache=1", "") + "\r\n";
-            }
-            catch (IOException | JSONException ex) {
+            } catch (IOException | JSONException ex) {
                 DH = true;
                 J += BaseAPI + "/menu/" + MENU_IDS.get(i) + "?extended=true&nocache=1" + " > " + ex.getMessage() + "\r\n";
                 txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
@@ -1630,8 +1600,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
                 try {
                     J += GUI_API_Get(BaseAPI + "/menu/" + MENU_IDS.get(i), "") + "\r\n";
-                }
-                catch (IOException | JSONException ex) {
+                } catch (IOException | JSONException ex) {
                     J += BaseAPI + "/menu/" + MENU_IDS.get(i) + " > " + ex.getMessage() + "\r\n";
                     txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1687,8 +1656,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4) + "\r\n";
             User_ID = json.getString("user");
             Mobile_User_TKN = json.getString("token");
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/user/auth?realm=" + Realm + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1703,8 +1671,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();         // ============ AP3 User Permissions
         try {
             J += GUI_API_Get(BaseAPI + "/user/" + User_ID + "/permissions" + "?nocache=1", "Bearer " + AP3_TKN) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/user/" + User_ID + "/permissions" + "?nocache=1" + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1719,8 +1686,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.start();       // ============ AP3 User
         try {
             J += GUI_API_Get(BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000", "Bearer " + AP3_TKN) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000" + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1751,8 +1717,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             J += GUI_API_Get(BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To, "Bearer " + AP3_TKN) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/report/eod/group/" + SiteID + "?start=" + From + "&end=" + To + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1828,6 +1793,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         CONFIG = false;
         this.setTitle("Configurations / APIs");
     }
+
     private void GUI_Load_Env() {
         if (cmbEnv.getSelectedItem().toString().contains("Staging")) {
             BaseAPI = "https://api.compassdigital.org/staging";
@@ -1864,6 +1830,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         GUI_Get_Groups(); // load 1st to be ready for selection by BrandSector
         GUI_Get_Sites();
     }
+
     private void Get_AP3_TKN() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
@@ -1871,13 +1838,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
             rs.next();
             AP3_TKN = rs.getString(1);
             conn.close();
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             txtLog.append("=== AP3_TKN > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
+
     private void GUI_Get_Sites() {
         d1LastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1966,16 +1933,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
             sorter.setSortable(0, true);
             sorter.sort();
 
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        }
-        finally {
+        } finally {
             try {
                 httpclient.close();
-            }
-            catch (IOException ex) {
+            } catch (IOException ex) {
                 txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
@@ -2001,6 +1965,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         lblSITES.setText(app + " Sites (" + DV1.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
+
     private void GUI_Get_Brands() {
         d2LastRow = -1;
         d1LastRow = DV1.getSelectedRow();
@@ -2078,16 +2043,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
             sorter.setSortable(0, true);
             sorter.sort();
 
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        }
-        finally {
+        } finally {
             try {
                 httpclient.close();
-            }
-            catch (IOException ex) {
+            } catch (IOException ex) {
                 txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
@@ -2119,6 +2081,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         GUI_Get_Brand_Sector();
     }
+
     private void GUI_Get_Groups() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         txtLog.append("- Load Groups/Sector ..." + "\r\n");
@@ -2155,17 +2118,14 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 cmbGroup.addItem(S_NAME);
                 SECTOR_IDS.add(Sectors.getJSONObject(i).getString("id"));
             }
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-        }
-        finally {
+        } finally {
             try {
                 httpclient.close();
-            }
-            catch (IOException ex) {
+            } catch (IOException ex) {
                 txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
@@ -2177,6 +2137,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         Load = false;
     }
+
     private void GUI_Get_Brand_Sector() {
         txtLog.append("- Get Brand's Group/Sector" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -2229,17 +2190,14 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 txtLog.append("- Company ID not Found in this Brand API" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-        }
-        finally {
+        } finally {
             try {
                 httpclient.close();
-            }
-            catch (IOException ex) {
+            } catch (IOException ex) {
                 txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
@@ -2263,6 +2221,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         GUI_Get_Companies();    // Load Brans Companies List after Brand's Gropu/Sector selected
         GUI_Get_Brand_Company(); // after Brand's Gropu/Sector selected
     }
+
     private void GUI_Get_Companies() {
         int I = cmbGroup.getSelectedIndex();
         if (I < 0) { // =========== DEBUG
@@ -2305,17 +2264,14 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     COMP_IDS.add(Sectors.getJSONObject(i).getString("id"));
                 }
             }
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-        }
-        finally {
+        } finally {
             try {
                 httpclient.close();
-            }
-            catch (IOException ex) {
+            } catch (IOException ex) {
                 txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
@@ -2326,6 +2282,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
+
     private void GUI_Get_Brand_Company() { // after Brand's Group/Sector slected
         txtLog.append("- Get Brand's Company/Clobal Menu" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -2345,12 +2302,12 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     cmbComp.setSelectedIndex(0);
                 }
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }
+
     private void GUI_Load_CONFIG() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         String C = "";
@@ -2361,8 +2318,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             rs.next();
             C = rs.getString(1);
             conn.close();
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             CONFIG = false;
             txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -2374,29 +2330,51 @@ public class API_GUI extends javax.swing.JInternalFrame {
         try {
             for (String l : lines) {
                 value = l.substring(l.indexOf(" ")).trim();
-                if (l.contains("env: ")) { env = value; }
-                if (l.contains("app: ")) { app = value; }
-                if (l.contains("url: ")) { url = value; }
-                if (l.contains("SECTOR: ")) { SECTOR = value; }
-                if (l.contains("GL_MENU: ")) { GL_MENU = value; }
-                if (l.contains("SITE: ")) { SITE = value; }
-                if (l.contains("BRAND: ")) { BRAND = value; }
-                if (l.contains("MOBILE_ID: ")) { txtMobile_ID.setText(value); }
-                if (l.contains("MOBILE_PW: ")) { txtMobile_PW.setText(value); }
-                if (l.contains("ADMIN_ID: ")) { txtAP3_ID.setText(value); }
-                if (l.contains("ADMIN_PW: ")) { txtAP3_PW.setText(value); }
+                if (l.contains("env: ")) {
+                    env = value;
+                }
+                if (l.contains("app: ")) {
+                    app = value;
+                }
+                if (l.contains("url: ")) {
+                    url = value;
+                }
+                if (l.contains("SECTOR: ")) {
+                    SECTOR = value;
+                }
+                if (l.contains("GL_MENU: ")) {
+                    GL_MENU = value;
+                }
+                if (l.contains("SITE: ")) {
+                    SITE = value;
+                }
+                if (l.contains("BRAND: ")) {
+                    BRAND = value;
+                }
+                if (l.contains("MOBILE_ID: ")) {
+                    txtMobile_ID.setText(value);
+                }
+                if (l.contains("MOBILE_PW: ")) {
+                    txtMobile_PW.setText(value);
+                }
+                if (l.contains("ADMIN_ID: ")) {
+                    txtAP3_ID.setText(value);
+                }
+                if (l.contains("ADMIN_PW: ")) {
+                    txtAP3_PW.setText(value);
+                }
             }
             CONFIG = true;
             txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             CONFIG = false;
             txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
+
     private void GUI_Save_CONFIG() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         String C = "";
@@ -2423,8 +2401,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             C += "ADMIN_ID: " + txtAP3_ID.getText() + "\r\n";
             C += "ADMIN_PW: " + txtAP3_PW.getText() + "\r\n";
 
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -2462,13 +2439,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
             txtLog.append("=== SAVE_CONFIG > OK (" + row + " row)" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             conn.close();
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             txtLog.append("=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
+
     private void GetShoppingCartAndOrder() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         txtLog.append("- Shopping Cart..." + "\r\n");
@@ -2499,8 +2476,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             };
             json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/shoppingcart/" + CartID + "\r\n" + json.toString(4) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/shoppingcart/" + CartID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -2535,8 +2511,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             };
             json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/order/" + OrderID + "\r\n" + json.toString(4) + "\r\n";
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             J += BaseAPI + "/order/" + OrderID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -2547,8 +2522,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         try {
             httpclient.close();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
@@ -2560,6 +2534,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }
+
     private String GUI_API_Get(String EndPoint, String AUTH) throws IOException {
         String AJ = "";
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
@@ -2602,6 +2577,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         //HtmlReporter.config().setTheme(Theme.DARK);               
         HtmlReporter.config().setTheme(Theme.STANDARD);
     }
+
     protected void Log_Html_Result(String RES, String Test_Description, ExtentTest Test, Date API_Start) {
         switch (RES) {
             case "PASS":
@@ -2662,37 +2638,71 @@ public class API_GUI extends javax.swing.JInternalFrame {
             sw1.start();
             LOG_START();   // ========================================================
             BW1_DoWork(false);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             return "ERROR > " + ex.getMessage();
         }
         return "OK > Job Started >> Please Monitor Reports...";
     }
+
     private String JOB_Load_CONFIG(String config) {
         String[] lines = config.split("\n");
         String value;
         try {
             for (String l : lines) {
                 value = l.substring(l.indexOf(" ")).trim();
-                if (l.contains("env: ")) { env = value; }
-                if (l.contains("app: ")) { app = value; }
-                if (l.contains("url: ")) { url = value; }
+                if (l.contains("env: ")) {
+                    env = value;
+                }
+                if (l.contains("app: ")) {
+                    app = value;
+                }
+                if (l.contains("url: ")) {
+                    url = value;
+                }
 
-                if (l.contains("SlackCh: ")) {  Slack_Channel = value; }
-                if (l.contains("_slack: ")) { _Slack = Boolean.parseBoolean(value); }
-                if (l.contains("_zip_report: ")) { Zip_Report = Boolean.parseBoolean(value); }
+                if (l.contains("SlackCh: ")) {
+                    Slack_Channel = value;
+                }
+                if (l.contains("_slack: ")) {
+                    _Slack = Boolean.parseBoolean(value);
+                }
+                if (l.contains("_zip_report: ")) {
+                    Zip_Report = Boolean.parseBoolean(value);
+                }
 
-                if (l.contains("SECTOR: ")) {  SECTOR = value; }
-                if (l.contains("GL_MENU: ")) { GL_MENU = value; }
-                if (l.contains("SITE: ")) { SITE = value; }
-                if (l.contains("BRAND: ")) { BRAND = value; }
-                if (l.contains("MOBILE_ID: ")) { MOBILE_ID = value;  }
-                if (l.contains("MOBILE_PW: ")) { MOBILE_PW = value; }
-                if (l.contains("ADMIN_ID: ")) { ADMIN_ID = value; }
-                if (l.contains("ADMIN_PW: ")) {  ADMIN_PW = value; }
-                if (l.contains("RUNNER_ID: ")) { RUNNER_ID = value; }
-                if (l.contains("RUNNER_PW: ")) { RUNNER_PW = value; }
-                if (l.contains("Market_Brand_ID: ")) { Market_Brand_ID = value; }
+                if (l.contains("SECTOR: ")) {
+                    SECTOR = value;
+                }
+                if (l.contains("GL_MENU: ")) {
+                    GL_MENU = value;
+                }
+                if (l.contains("SITE: ")) {
+                    SITE = value;
+                }
+                if (l.contains("BRAND: ")) {
+                    BRAND = value;
+                }
+                if (l.contains("MOBILE_ID: ")) {
+                    MOBILE_ID = value;
+                }
+                if (l.contains("MOBILE_PW: ")) {
+                    MOBILE_PW = value;
+                }
+                if (l.contains("ADMIN_ID: ")) {
+                    ADMIN_ID = value;
+                }
+                if (l.contains("ADMIN_PW: ")) {
+                    ADMIN_PW = value;
+                }
+                if (l.contains("RUNNER_ID: ")) {
+                    RUNNER_ID = value;
+                }
+                if (l.contains("RUNNER_PW: ")) {
+                    RUNNER_PW = value;
+                }
+                if (l.contains("Market_Brand_ID: ")) {
+                    Market_Brand_ID = value;
+                }
             }
             CONFIG = true;
             switch (env) {
@@ -2712,13 +2722,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
             AppID = A.Func.App_ID(app, env);
             Current_Log_Update(true, "= JOB_Load_CONFIG > OK" + "\r\n");
             return "OK";
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             CONFIG = false;
             Current_Log_Update(true, "= JOB_Load_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             return "ERROR > " + ex.getMessage();
         }
     }
+
     protected void Current_Log_Update(boolean GUI, String Text) {
         if (GUI) {
             txtLog.append(Text);
@@ -2727,6 +2737,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Log += Text;
         }
     }
+
     private void Report(boolean Open_File) {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         Report_File = "";
@@ -2750,35 +2761,53 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Report_File = A.Func.fExcel(l, col, Values, "API_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
             txtLog.append("=== Report Excel file:\r\n" + Report_File + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             txtLog.append("=== Report > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
+
     private void LOG_UPDATE(String LOG) {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET "
-                    + " [Date] = ?"  + // 1
-                    ", [Time] = ?" + // 2
-                    ", [app] = ?" + // 3
-                    ", [url] = ?"  + // 4
-                    ", [summary] = ?" + // 5
-                    ", [t_calls] = ?" + // 6
-                    ", [t_min] = ?" + // 7
-                    ", [t_avg] = ?" + // 8
-                    ", [t_max] = ?"  + // 9
-                    ", [p_50] = ?" + // 10
-                    ", [p_90] = ?" + // 11
-                    ", [test_type] = ?" + // 12
-                    ", [user_id] = ?" + // 13
-                    ", [user_ws] = ?" + // 14
-                    ", [env] = ?" + // 15
-                    ", [Result] = ?" + // 16
-                    ", [Status] = ?" + // 17
-                    ", [Excel] = ?" + // 18
+                    + " [Date] = ?"
+                    + // 1
+                    ", [Time] = ?"
+                    + // 2
+                    ", [app] = ?"
+                    + // 3
+                    ", [url] = ?"
+                    + // 4
+                    ", [summary] = ?"
+                    + // 5
+                    ", [t_calls] = ?"
+                    + // 6
+                    ", [t_min] = ?"
+                    + // 7
+                    ", [t_avg] = ?"
+                    + // 8
+                    ", [t_max] = ?"
+                    + // 9
+                    ", [p_50] = ?"
+                    + // 10
+                    ", [p_90] = ?"
+                    + // 11
+                    ", [test_type] = ?"
+                    + // 12
+                    ", [user_id] = ?"
+                    + // 13
+                    ", [user_ws] = ?"
+                    + // 14
+                    ", [env] = ?"
+                    + // 15
+                    ", [Result] = ?"
+                    + // 16
+                    ", [Status] = ?"
+                    + // 17
+                    ", [Excel] = ?"
+                    + // 18
                     " WHERE [app] = 'API_" + env + "' AND [Status] = 'Running'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
@@ -2800,54 +2829,90 @@ public class API_GUI extends javax.swing.JInternalFrame {
             _update.setString(18, EX);
             int row = _update.executeUpdate();
             conn.close();
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             txtLog.append("=== LOG_UPDATE > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
+
     private void LOG_START() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] ("
-                    + "[Date]" + // 1
-                    ", [Time]" + // 2
-                    ", [app]" + // 3
-                    ", [url]" + // 4
-                    ", [summary]" + // 5
-                    ", [t_calls]" + // 6
-                    ", [t_min]" + // 7
-                    ", [t_avg]" + // 8
-                    ", [t_max]" + // 9
-                    ", [p_50]" + // 10
-                    ", [p_90]" + // 11
-                    ", [test_type]" + // 12
-                    ", [user_id]" + // 13
-                    ", [user_ws]" + // 14
-                    ", [env]" + // 15
-                    ", [Result]" + // 16
-                    ", [Status]" + // 17
-                    ", [Excel]" + // 18
+                    + "[Date]"
+                    + // 1
+                    ", [Time]"
+                    + // 2
+                    ", [app]"
+                    + // 3
+                    ", [url]"
+                    + // 4
+                    ", [summary]"
+                    + // 5
+                    ", [t_calls]"
+                    + // 6
+                    ", [t_min]"
+                    + // 7
+                    ", [t_avg]"
+                    + // 8
+                    ", [t_max]"
+                    + // 9
+                    ", [p_50]"
+                    + // 10
+                    ", [p_90]"
+                    + // 11
+                    ", [test_type]"
+                    + // 12
+                    ", [user_id]"
+                    + // 13
+                    ", [user_ws]"
+                    + // 14
+                    ", [env]"
+                    + // 15
+                    ", [Result]"
+                    + // 16
+                    ", [Status]"
+                    + // 17
+                    ", [Excel]"
+                    + // 18
                     ") VALUES ("
-                    + "?" + // 1
-                    ",?" + // 2
-                    ",?" + // 3
-                    ",?" + // 4
-                    ",?" + // 5
-                    ",?" + // 6
-                    ",?" + // 7
-                    ",?" + // 8
-                    ",?" + // 9
-                    ",?" + // 10
-                    ",?" + // 11
-                    ",?" + // 12
-                    ",?" + // 13
-                    ",?" + // 14
-                    ",?" + // 15
-                    ",?" + // 16
-                    ",?" + // 17
-                    ",?" + // 18
+                    + "?"
+                    + // 1
+                    ",?"
+                    + // 2
+                    ",?"
+                    + // 3
+                    ",?"
+                    + // 4
+                    ",?"
+                    + // 5
+                    ",?"
+                    + // 6
+                    ",?"
+                    + // 7
+                    ",?"
+                    + // 8
+                    ",?"
+                    + // 9
+                    ",?"
+                    + // 10
+                    ",?"
+                    + // 11
+                    ",?"
+                    + // 12
+                    ",?"
+                    + // 13
+                    ",?"
+                    + // 14
+                    ",?"
+                    + // 15
+                    ",?"
+                    + // 16
+                    ",?"
+                    + // 17
+                    ",?"
+                    + // 18
                     ")");
             _insert.setString(1, LocalDateTime.now().format(Date_formatter));
             _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
@@ -2869,13 +2934,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
             _insert.setString(18, "None");
             int row = _insert.executeUpdate();
             conn.close();
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             txtLog.append("=== LOG_START > SQL ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
+
     private void BW1_DoWork(Boolean GUI) {
         BW1 = new SwingWorker() {
             @Override
@@ -2914,8 +2979,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
                     BW1 = null;
-                }
-                catch (InterruptedException | ExecutionException ex) {
+                } catch (InterruptedException | ExecutionException ex) {
                     Current_Log_Update(GUI, "- BW1 ERROR: " + ex.getMessage() + "\r\n");
                     BW1_FAIL_LOG_UPDATE(ex.getMessage());
                 }
@@ -2924,11 +2988,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         BW1.execute();
     }
+
     private void BW1_FAIL_LOG_UPDATE(String Error) {
         Summary = "BW1 - Failed: " + Error;
         DD = Duration.between(run_start, Instant.now());
         LOG_UPDATE("- BW1 ERROR: " + Error);
     }
+
     private void BW1_Done(boolean GUI) throws Exception {
         DD = Duration.between(run_start, Instant.now());
         Last_EX = EX;
@@ -2959,8 +3025,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 }
                 Current_Log_Update(GUI, t_rep + "\r\n");
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             Current_Log_Update(GUI, "= LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
         }
 
@@ -3020,7 +3085,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("AP3 User");
             user_ap3 BR = new API.user_ap3(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
             ParentTest.getModel().setName("AP3 User - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
             AP3_User_ID = BR.AP3_User_ID;
@@ -3035,7 +3106,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Locations");
             locations BR = new API.locations(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
             ParentTest.getModel().setName("Locations - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
             AppID = BR.AppID;
@@ -3062,10 +3139,16 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Config");
             config BR = new API.config(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
             ParentTest.getModel().setName("Config - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
-            
+
             Site_PProvider = BR.Site_PProvider;
             freedompay_id = BR.freedompay_id;
             freedompay_terminal_id = BR.freedompay_terminal_id;
@@ -3075,16 +3158,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
             exact_id = BR.exact_id;
             DELIEVERY_DESTINATIONS = BR.DELIEVERY_DESTINATIONS;
         }
-        if (true) {
-            SCOPE += "Promo ";
-            EX += " - " + "\t" + "Promo" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            ParentTest = HtmlReport.createTest("Promo");
-            promo BR = new API.promo(API_GUI.this);
-            BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
-            ParentTest.getModel().setName("Promo - Tot: " + BR._t + ", Failed: " + BR._f);
-            ParentTest.getModel().setEndTime(new Date());
-        }
 
         if (!FAIL) {
             SCOPE += "Menus ";
@@ -3092,7 +3165,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Global/Local Menus");
             menus BR = new API.menus(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
             ParentTest.getModel().setName("Menus - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
 
@@ -3117,13 +3196,36 @@ public class API_GUI extends javax.swing.JInternalFrame {
             }
         }
 
+        if (!FAIL) {
+            SCOPE += "Promo ";
+            EX += " - " + "\t" + "Promo" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Promo");
+            promo BR = new API.promo(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
+            ParentTest.getModel().setName("Promo - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
+        }
+
         if (true) {
             SCOPE += "Calendar ";
             EX += " - " + "\t" + "Calendar" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Calendar");
             calendar BR = new API.calendar(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
             ParentTest.getModel().setName("Calendar - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }
@@ -3133,7 +3235,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Reports");
             reports BR = new API.reports(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
             ParentTest.getModel().setName("Reports - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }
@@ -3143,7 +3251,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Announcement");
             announcement BR = new API.announcement(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
             ParentTest.getModel().setName("Announcement - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }
@@ -3153,22 +3267,34 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Recent Updates/Notifications");
             notification BR = new API.notification(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
             ParentTest.getModel().setName("Notification - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }
-        
+
         // =================  Mobile User, Paymant, ShoppingCart, Order ===================
-        if(true){
+        if (true) {
             SCOPE += "Mobile User ";
             EX += " - " + "\t" + "Mobile User" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Mobile User");
             user_mobile BR = new API.user_mobile(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
             ParentTest.getModel().setName("Mobile User - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
-            
+
             Mobile_User_ID = BR.Mobile_User_ID;
             Mobile_User_TKN = BR.Mobile_User_TKN;
         }
@@ -3178,18 +3304,24 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Payment");
             payment BR = new API.payment(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
             ParentTest.getModel().setName("Payment - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
 
             Mobile_User_PProvider = BR.Mobile_User_PProvider;
             Card_Type = BR.Card_Type;
             Card_Last4 = BR.Card_Last4;
-            Card_Name = BR.Card_Name; 
+            Card_Name = BR.Card_Name;
             Card_Method_TKN = BR.Card_Method_TKN;
             EXACT_Payment_TKN = BR.EXACT_Payment_TKN;
             FP_Payment_TKN = BR.FP_Payment_TKN;
-        }         
+        }
 
         if (!FAIL) {
             SCOPE += "ShoppingCart ";
@@ -3197,24 +3329,36 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("ShoppingCart");
             shoppingcart BR = new API.shoppingcart(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time; 
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
             ParentTest.getModel().setName("ShoppingCart - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
 
             ShoppingCart_Delivery_ID = BR.ShoppingCart_Delivery_ID;
             ShoppingCart_Pickup_ID = BR.ShoppingCart_Pickup_ID;
-        }          
-        if(!FAIL){
+        }
+        if (!FAIL) {
             SCOPE += "Order ";
             EX += " - " + "\t" + "Order" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Order");
             order BR = new API.order(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
             ParentTest.getModel().setName("Order - Tot: " + BR._t + ", Failed: " + BR._f);
             Order_Delivery_ID = BR.Order_Delivery_ID;
             Order_Pickup_ID = BR.Order_Pickup_ID;
-        }        
+        }
 
         // =================  Bolter / KDS ===================
         if (true) {
@@ -3223,7 +3367,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Bolter");
             user_bolter BR = new API.user_bolter(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
             ParentTest.getModel().setName("Bolter - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
 
@@ -3238,7 +3388,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Task");
             task BR = new API.task(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
             ParentTest.getModel().setName("Task - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }
@@ -3248,32 +3404,51 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("KDS");
             kds BR = new API.kds(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
             ParentTest.getModel().setName("KDS - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
-        }      
-        
-        if(true){
+        }
+
+        if (true) {
             SCOPE += "Logouts ";
-            EX += " - " + "\t" + "Logouts" + "\t" +  " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            ParentTest = HtmlReport.createTest("Logouts");      
+            EX += " - " + "\t" + "Logouts" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Logouts");
             logouts BR = new API.logouts(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
             ParentTest.getModel().setName("Logouts - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
-        }   
-        if(true){
+        }
+        if (true) {
             SCOPE += "Voucherify ";
-            EX += " - " + "\t" + "Logouts" + "\t" +  " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            ParentTest = HtmlReport.createTest("Voucherify");      
+            EX += " - " + "\t" + "Logouts" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Voucherify");
             voucherify BR = new API.voucherify(API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;  
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
             ParentTest.getModel().setName("Voucherify - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
-        } 
+        }
     }
+
     protected void JOB_Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY, int ExpStatus, ExtentTest ParentTest, String JIRA) {
         FAIL = false;
         String Result = "?";
@@ -3354,8 +3529,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             }
 //} // =======   3 times Loop if not good
 
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
             _f++;
             FAIL = true;
@@ -3370,6 +3544,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
         sw1.reset();
     }
+
     protected void JOB_WS_Call(String NAME, String EndPoint, ExtentTest ParentTest, String JIRA) {
         FAIL = false;
         String Result = "?";
@@ -3398,8 +3573,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             Log_Html_Result("PASS", "WS" + " (" + R_Time + ")", ParentTest.createNode(NAME + " > " + EndPoint), API_SRART);
 
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
             _f++;
             FAIL = true;
@@ -3414,6 +3588,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
         sw1.reset();
     }
+
     protected void JOB_VF_Call(String NAME, String EndPoint, String appID, String appTKN, int ExpStatus, ExtentTest ParentTest, String JIRA) {
         FAIL = false;
         String Result = "?";
@@ -3463,8 +3638,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             }
 //} // =======   3 times Loop if not good
 
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
             _f++;
             FAIL = true;

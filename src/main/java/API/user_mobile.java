@@ -46,19 +46,27 @@ class user_mobile extends API_GUI{
             BaseAPI + "/user/" + Mobile_User_ID, Auth, "", 200, ParentTest, "no_jira");          
         
         BODY = "{\"phone\":" + "1" + NewID + "}";                       //  Update Mobile user Phone
-        JOB_Api_Call("Mobile User - Update Phone", "PUT", 
+        JOB_Api_Call("Mobile User - Update Phone", "PATCH", 
             BaseAPI + "/user/" + Mobile_User_ID, Auth, BODY, 200, ParentTest, "no_jira");
         
         BODY = "{\"gender\":" + "male" + "}";                           //  Update Mobile user Gender
-        JOB_Api_Call("Mobile User - Update Gender", "PUT", 
-            BaseAPI + "/user/" + Mobile_User_ID, Auth, BODY, 200, ParentTest, "no_jira");        
+        JOB_Api_Call("Mobile User - Update Gender", "PATCH", 
+            BaseAPI + "/user/" + Mobile_User_ID, Auth, BODY, 200, ParentTest, "no_jira");   
+        
+        BODY = "{\"name\":" +                                         //  Change First/Last Name  =================
+               "{\"first\":\"API\",\"last\":\"Testing\"}," + 
+            "\"realm\":\"" + Realm + "\"}";                        
+        JOB_Api_Call("Mobile User - Change First/Last Name", "PUT", 
+            BaseAPI + "/user/" + Mobile_User_ID, Auth, BODY, 200, ParentTest, "no_jira");           
         
         JOB_Api_Call("Mobile User Zendesk JWT token", "GET", 
             BaseAPI + "/user/zendesk", Auth, "", 200, ParentTest, "no_jira");         
 
-        JOB_Api_Call("Mobile User Send Email Verification", "POST",   //  Mobile User Email Verification ================
-            BaseAPI + "/user/" + Mobile_User_ID + "/verification?realm=" + Realm, Auth, "", 200, ParentTest, "no_jira");   
-        String verification_token = "";
+        if(env.equals("DE")){ // not in Staging, Production yet
+            JOB_Api_Call("Mobile User Send Email Verification", "POST",   //  Mobile User Email Verification ================
+                BaseAPI + "/user/" + Mobile_User_ID + "/verification?realm=" + Realm, Auth, "", 200, ParentTest, "no_jira");   
+            String verification_token = "";
+        }
         
         BODY = "{\"email\":\"" + MOBILE_ID + "\"," +            //  Mobile User Forgot Password ================
                 "\"type\":\"" + "forgot_password" + "\"}";
