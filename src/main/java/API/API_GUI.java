@@ -3278,7 +3278,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setEndTime(new Date());
         }
 
-        // =================  Mobile User, Paymant, ShoppingCart, Order ===================
+        // =================  Mobile User, Payment, ShoppingCart, Order ===================
         if (true) {
             SCOPE += "Mobile User ";
             EX += " - " + "\t" + "Mobile User" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";

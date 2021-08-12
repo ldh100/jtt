@@ -38,6 +38,50 @@ class order extends API_GUI{
     JSONObject requestParams = null;
     String AAA = "";
     protected void run() {  
+        if (env != "PR") {
+            PLACE_ORDERS();
+        }
+        
+        Auth = "Bearer " + Mobile_User_TKN;
+        long m1 = System.currentTimeMillis();                     
+        long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // - 7 days
+        JOB_Api_Call("Mobile User Orders - last 7 days", "GET", 
+            BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1, Auth, "", 200, ParentTest, "no_jira");
+        if(json != null){
+            // Info Found Orders Count
+            AAA = json.toString(4);
+        } 
+        
+        Auth = "Bearer " + AP3_TKN;
+        JOB_Api_Call("Mobile User All Orders - Brand '" + BRAND + "'", "GET", 
+            BaseAPI + "/order/customer/" + Mobile_User_ID + "/location/brand/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
+        if(json != null){
+            // Info Found Orders Count
+            AAA = json.toString(4);
+        } 
+
+        JOB_Api_Call("All Orders - Brand '" + BRAND + "'", "GET", 
+            BaseAPI + "/order/location/brand/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
+        if(json != null){
+            // Info Found Orders Count
+        } 
+        
+        JOB_Api_Call("All Orders - Location '" + UnitNum + "'", "GET", 
+            BaseAPI + "/order/location/" + UnitID, Auth, "", 200, ParentTest, "no_jira");
+        if(json != null){
+            // Info Found Orders Count
+            AAA = json.toString(4);
+        } 
+                
+        JOB_Api_Call("All Orders - Group '" + SITE + "'", "GET", 
+            BaseAPI + "/order/location/group/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
+        if(json != null){
+            // Info Found Orders Count
+            AAA = json.toString(4);
+        } 
+                   
+    }
+    private void PLACE_ORDERS(){
         Auth = "Bearer " + Mobile_User_TKN;
 
         Date requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(BRAND_TIMESLOTS.size() - 1))*1000L);
@@ -62,35 +106,49 @@ class order extends API_GUI{
         }   
 
         Auth = "Bearer " + AP3_TKN;
-        requestParams = new JSONObject();       //  Mobile User Pickup Order Issue =================
-        JSONObject item = new JSONObject();
-            item.put("additionalProp1", new JSONObject());   
-
+        requestParams = new JSONObject();       //  Mobile User Pickup Order Issue =================  
         JSONArray items = new JSONArray();   
         JSONObject item_1 = new JSONObject();
             item_1.put("id", ITEMS_IDS.get(ITEMS_IDS.size() - 1));
-            item_1.put("reason", "Test Item reason"); 
+            item_1.put("_index", "abcd");
+            item_1.put("quantity", 1);
+            item_1.put("unit", 1);    
+            item_1.put("price", new JSONObject().put("amount", 0.05));
+            item_1.put("_subtotal", new JSONObject().put("amount", 2.0));
+            item_1.put("_promo", new JSONObject().put("amount", 0));
+            item_1.put("_loyalty", new JSONObject().put("amount", 0));
+            item_1.put("meta", new JSONObject());
+            item_1.put("options", new JSONArray());
+            item_1.put("reason", "Test Item reason");  
         items.put(item_1);
-        requestParams.put("type", "DISPUTE"); 
-        requestParams.put("item", item);   
+        requestParams.put("type", "DISPUTE");  
         requestParams.put("items", items); 
         requestParams.put("reason", "Test Order Issue DISPUTE"); 
-
-        
         BODY = requestParams.toString();
-        String SSS = requestParams.toString(4);
         JOB_Api_Call("Pickup Order - Issue/Dispute", "POST", 
             BaseAPI + "/order/" + Order_Pickup_ID + "/issue", Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
             AAA = json.toString(4);
         } 
         
-//        Auth = "Bearer " + AP3_TKN;
-//        JOB_Api_Call("Pickup Order - Refund", "PATCH", //  Mobile User Pickup Order Refund =================
-//            BaseAPI + "/order/" + Order_Pickup_ID + "/refund", Auth, BODY, 200, ParentTest, "no_jira");
-//        if(json != null){
-//            AAA = json.toString(4);
-//        }         
+        Auth = "Bearer " + AP3_TKN;
+        requestParams = new JSONObject();       //  Mobile User Pickup Order Refund =================
+        JSONArray refunds = new JSONArray();   
+        JSONObject refund_1 = new JSONObject();
+            item_1.put("id", ITEMS_IDS.get(ITEMS_IDS.size() - 1));
+            item_1.put("_index", "abcd");
+            item_1.put("quantity", 1);  
+            item_1.put("price", new JSONObject().put("amount", 1.0));
+            item_1.put("reason", "Test Refund reason");  
+        items.put(refund_1);
+        requestParams.put("refunds", items); 
+        requestParams.put("reason", "Test Order Refund"); 
+        BODY = requestParams.toString();
+        JOB_Api_Call("Pickup Order - Refund", "PATCH", 
+            BaseAPI + "/order/" + Order_Pickup_ID + "/refund", Auth, BODY, 200, ParentTest, "no_jira");
+        if(json != null){
+            AAA = json.toString(4);
+        }         
         
         Auth = "Bearer " + Mobile_User_TKN;
         BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
@@ -124,46 +182,7 @@ class order extends API_GUI{
         JOB_Api_Call("Update Delivery Order Status - ready", "PATCH", 
             BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");        
         if(json != null){           
-            AAA = json.toString(4);// Check actual update
-        } 
-        
-        
-        
-        long m1 = System.currentTimeMillis();                     
-        long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // - 7 days
-        JOB_Api_Call("Mobile User Orders - last 7 days", "GET", 
-            BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1, Auth, "", 200, ParentTest, "no_jira");
-        if(json != null){
-            // Info Found Orders Count
-            AAA = json.toString(4);
-        } 
-        
-        JOB_Api_Call("Mobile User All Orders - Brand '" + BRAND + "'", "GET", 
-            BaseAPI + "/order/customer/" + Mobile_User_ID + "/location/brand/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
-        if(json != null){
-            // Info Found Orders Count
-            AAA = json.toString(4);
-        } 
-
-        JOB_Api_Call("All Orders - Brand '" + BRAND + "'", "GET", 
-            BaseAPI + "/order/location/brand/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
-        if(json != null){
-            // Info Found Orders Count
-        } 
-        
-        JOB_Api_Call("All Orders - Location '" + UnitNum + "'", "GET", 
-            BaseAPI + "/order/location/" + UnitID, Auth, "", 200, ParentTest, "no_jira");
-        if(json != null){
-            // Info Found Orders Count
-            AAA = json.toString(4);
-        } 
-                
-        JOB_Api_Call("All Orders - Group '" + SITE + "'", "GET", 
-            BaseAPI + "/order/location/group/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
-        if(json != null){
-            // Info Found Orders Count
-            AAA = json.toString(4);
-        } 
-                   
+            AAA = json.toString(4);  // Check actual update
+        }         
     }
 }
