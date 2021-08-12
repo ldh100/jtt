@@ -1049,6 +1049,16 @@ class AP3_brand_new extends AP3_GUI {
         if (T_Index > -1) {
 //            Scroll_to_Element("Scroll to Menu " + GL_MENU, L2.get(T_Index), ParentTest, "no_jira");   
 //                if (FAIL) { return;} 
+
+            Find_Text("Fund 'Search...' text", "Search Global Menus", true, ParentTest, "no_jira");   
+            if (FAIL) { return;}             
+            Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Global Menus')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+            Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Global Menus']", GL_MENU, false, ParentTest, "no_jira");
+            if (FAIL) { return;} 
+            Thread.sleep(500);
+        
+            /*
             Find_Text("Fund 'Search...' text", "Search Menus", true, ParentTest, "no_jira");
             if (FAIL) {
                 return;
@@ -1062,7 +1072,9 @@ class AP3_brand_new extends AP3_GUI {
                 return;
             }
             Thread.sleep(500);
-
+            */
+            
+            
             List_Child_E1_By_Path("Find 'View Local Brands' button", L2.get(T_Index), "xpath", ".//button[@type='button'][3]", ParentTest, "no_jira");
             if (FAIL) {
                 return;
