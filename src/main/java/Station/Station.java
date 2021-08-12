@@ -986,12 +986,14 @@ public class Station extends javax.swing.JInternalFrame {
                     }else{
                         id = "not found";
                     }
-                    if(Item.has("price")){
+                    if(Item.has("price") && Item.getJSONObject("price").has("amount")){
                         price = "$" + Item.getJSONObject("price").getNumber("amount").toString();
                     }else{
                         price = "Not Found";
                     }
-                    if(Item.has("nutrition") && Item.getJSONObject("nutrition").has("calories")){
+                    if(Item.has("nutrition") && 
+                            Item.getJSONObject("nutrition").has("calories") && 
+                            Item.getJSONObject("nutrition").getJSONObject("calories").has("amount")){
                         cal = Item.getJSONObject("nutrition").getJSONObject("calories").getNumber("amount").toString();
                     }else{
                         cal = "Not Found";
@@ -1096,7 +1098,7 @@ public class Station extends javax.swing.JInternalFrame {
                             }else{
                                 id = "not found";
                             }
-                            if(OItem.has("price")){
+                            if(OItem.has("price") && OItem.getJSONObject("price").has("amount")){
                                 price = "$" + OItem.getJSONObject("price").getNumber("amount").toString();
                             }else{
                                 price = "Not Found";
@@ -1129,7 +1131,7 @@ public class Station extends javax.swing.JInternalFrame {
     private void LOAD_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'OR' AND [env] = '" + env + "'";
+            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'Station' AND [env] = '" + env + "'";
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(SQL);
             rs.next();
@@ -1195,7 +1197,7 @@ public class Station extends javax.swing.JInternalFrame {
         }
         
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'OR' AND [env] = '" + env + "'";
+            SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'Station' AND [env] = '" + env + "'";
             Statement _del = conn.createStatement();
             _del.execute(SQL);
             PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
@@ -1271,7 +1273,7 @@ public class Station extends javax.swing.JInternalFrame {
     public static String TZone; 
     public static String PROMO; 
     public static String New_ID = "";
-    
+    // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">  
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1299,5 +1301,5 @@ public class Station extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblSITES14;
     private javax.swing.JTextArea txtLog;
     // End of variables declaration//GEN-END:variables
-// </editor-fold>
+    // </editor-fold>
 }
