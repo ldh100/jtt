@@ -94,8 +94,6 @@ class payment extends API_GUI {
 
     private void FP() {
         String FP_Access_TKN = "";
-        Auth = "Bearer " + Mobile_User_TKN;
-        System.err.println(Auth);
         JOB_Api_Call("Get Mobile User Freedompay Client Token", "GET",
                 BaseAPI + "/payment/" + freedompay_id + "/clienttoken", Auth, "", 200, ParentTest, "no_jira");
         if (json != null && json.has("access_token")) {
