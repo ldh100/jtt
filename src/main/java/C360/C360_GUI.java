@@ -174,8 +174,9 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("C360 Automation Manager >>> loading, please wait ... ... ... ...");
-        setMinimumSize(new java.awt.Dimension(858, 527));
+        setMinimumSize(new java.awt.Dimension(862, 525));
         setName("C360"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(862, 525));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -187,20 +188,20 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameClosed(evt);
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -732,7 +733,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
 
         lblSITES16.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES16.setText("Slack Channel:");
+        lblSITES16.setText("Slack Shannel:");
         lblSITES16.setAlignmentX(0.5F);
         lblSITES16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel3.add(lblSITES16, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 4, 72, 16));

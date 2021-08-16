@@ -9,7 +9,8 @@ class mealplan extends API_GUI{
         SiteID = a.SiteID;
         BrandID = a.BrandID;
         UnitID = a.UnitID;
-        // UnitNum ???????
+        Mobile_User_ID = a.Mobile_User_ID;
+        Mobile_User_TKN = a.Mobile_User_TKN;
         ParentTest = a.ParentTest;
     }
     protected void run() {                                                        

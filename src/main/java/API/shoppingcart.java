@@ -17,6 +17,7 @@ class shoppingcart extends API_GUI{
     String AAA = "";
     protected void run() {  
         Auth = "Bearer " + Mobile_User_TKN;
+        
         BODY = "{\"brand\":\"" + BrandID + "\"," +
             "\"is\":{\"type\":\"pickup\"}," +
             "\"mealSwipeTotal\":0.0," +
@@ -26,16 +27,30 @@ class shoppingcart extends API_GUI{
             "\"showSingleTimeSlot\":false," +
             "\"type\":0," +
             "\"typeOfCell\":0}";
-        JOB_Api_Call("Create New ShoppingCart Pickup", "POST", // ===========================
+        JOB_Api_Call("Create New ShoppingCart Pickup", "POST",             // ===========================
             BaseAPI + "/shoppingcart", Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
-            try{
+            try {
                 ShoppingCart_Pickup_ID = json.getString("id");
                 AAA = json.toString(4);
             } catch (Exception ex){
                 AAA = ex.getMessage();
             }
-        }            
+        } 
+        
+        BODY = "{\"items\":[{\"id\":\"" + ITEMS_IDS.get(ITEMS_IDS.size() - 1) + "\"," +
+            "\"quantity\":1," +
+            "\"price\":{\"amount\":0.05}}]}"; 
+        JOB_Api_Call("Add Last Menu Item to Pickup ShoppingCart", "PUT",   // ===========================
+            BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID, Auth, BODY, 200, ParentTest, "no_jira");
+        if(json != null){
+            try{
+                ShoppingCart_Delivery_ID = json.getString("id");
+                AAA = json.toString(4);
+            } catch (Exception ex){
+                AAA = ex.getMessage();
+            }
+        } 
         
         BODY = "{\"brand\":\"" + BrandID + "\"," +
             "\"is\":{\"type\":\"delivery\"}," +
@@ -60,7 +75,7 @@ class shoppingcart extends API_GUI{
         BODY = "{\"items\":[{\"id\":\"" + ITEMS_IDS.get(ITEMS_IDS.size() - 1) + "\"," +
             "\"quantity\":2," +
             "\"price\":{\"amount\":0.05}}]}"; 
-        JOB_Api_Call("Add Last Menu Item to ShoppingCart", "PUT",           // ===========================
+        JOB_Api_Call("Add Last Menu Item to Delivery ShoppingCart", "PUT",           // ===========================
             BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
             try{
@@ -88,7 +103,7 @@ class shoppingcart extends API_GUI{
         requestParams.put("code", "compassunlimited");
         requestParams.put("email", Mobile_User_ID);
         BODY = requestParams.toString();
-        JOB_Api_Call("Add Promo Code to ShoppingCart1", "PUT",           // ===========================
+        JOB_Api_Call("Add Promo Code to Delivery ShoppingCart1", "PUT",           // ===========================
             BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "/promo", Auth, BODY, 200, ParentTest, "no_jira");        
         if(json != null){
             try{
@@ -99,7 +114,7 @@ class shoppingcart extends API_GUI{
             }
         }
         
-        JOB_Api_Call("Get ShoppingCart after Patch", "GET",                 // ===========================
+        JOB_Api_Call("Get Delivery ShoppingCart after Patch", "GET",                 // ===========================
             BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, "", 200, ParentTest, "no_jira");        
         if(json != null){
             try{
@@ -115,7 +130,7 @@ class shoppingcart extends API_GUI{
                 "\"options\":[]," +
                 "\"quantity\":1," +
                 "\"price\":{\"amount\":0.08}}]}"; 
-            JOB_Api_Call("Add 1st Menu Item to ShoppingCart", "PUT",        // ===========================
+            JOB_Api_Call("Add 1st Menu Item to Delivery ShoppingCart", "PUT",        // ===========================
                BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira"); 
             if(json != null){
                 try{

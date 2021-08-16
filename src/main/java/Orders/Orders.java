@@ -607,9 +607,10 @@ public class Orders extends javax.swing.JInternalFrame {
                     JSONObject or = OR.getJSONObject(i);
                     JSONObject is = or.getJSONObject("is");
                     Order_Status = "";
-                    if (is.getBoolean("accepted")) Order_Status = "  Accepted ";
-                    if (is.getBoolean("in_progress")) Order_Status = "  In_Progress ";
-                    if (is.getBoolean("ready")) Order_Status = "  Ready ";
+                    if (is.getBoolean("accepted")) Order_Status = " Accepted ";
+                    if (is.getBoolean("in_progress")) Order_Status = " In_Progress ";
+                    if (is.getBoolean("ready")) Order_Status = " Ready ";
+                    if (is.getBoolean("out_for_delivery")) Order_Status = " Out_for_Delivery ";
                     SCART_IDS.add(or.getString("shoppingcart"));
                     ORDER_IDS.add(or.getString("id"));
                     LocDate = LocalDateTime.parse(or.getString("requested_date"), UTC_formatter).plusSeconds(offset.getTotalSeconds());
@@ -1308,6 +1309,10 @@ if(!R.equals("OK")){
     private static String app = "";
     private static String env;
     private static String BaseAPI;
+    
+    private static List<String> BRAND_TIMESLOTS;
+    private static List<String> MENU_TIMESLOTS;
+    private static List<String> DELIEVERY_DESTINATIONS;
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">    
     // Variables declaration - do not modify//GEN-BEGIN:variables

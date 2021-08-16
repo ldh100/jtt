@@ -1,6 +1,7 @@
 package API;
 
 import java.util.ArrayList;
+import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -20,7 +21,9 @@ class menus extends API_GUI{
     }
     
     private String New_Menu_ID = "";
-    
+    private String New_GlobalMod_ID = "";
+    private List<String> GlobalModGroup_Items_IDS= new ArrayList<>(); 
+
     String AAAA = "";
     protected void run() {             
         Auth = "Bearer " + AP3_TKN;   // =============== AP3 Company/Global menus ===================
@@ -58,7 +61,7 @@ class menus extends API_GUI{
         
 
         JOB_Api_Call("Brand Last Local Menu " + " > /menu/'MenuID'", "GET", 
-            BaseAPI + "/menu/" + MENU_IDS.get(MENU_IDS.size() -1), Auth, "", 200, ParentTest, "no_jira");  
+            BaseAPI + "/menu/" + MENU_IDS.get(MENU_IDS.size() - 1), Auth, "", 200, ParentTest, "no_jira");  
         if(json != null){
             CATEGORIES_IDS = new ArrayList<>();
             ITEMS_IDS = new ArrayList<>();
@@ -164,6 +167,8 @@ class menus extends API_GUI{
 //            }
 //        }        
        
+//</editor-fold>       
+
 //</editor-fold>       
 
 // "Individual Menu "   
@@ -277,6 +282,13 @@ class menus extends API_GUI{
         // Test Scenario 2: Positive flow to Update/Patch a menu with new Name
         // Covered in Scenario 1
         
+//GET/menu/{id}/export: Export a menu set to a zip file
+
+        // Test Scenario 1: Positive flow to export a menu file 
+        
+        JOB_Api_Call(" Menu - Modify the new individual Menu", "GET", 
+            BaseAPI + "/menu/" + New_Menu_ID + "/export", Auth, "" , 200, ParentTest, "no_jira");
+        
 //PATCH/menu/{id} : Update a menu
         // Test Scenario 1: Positive flow to check when clicked on Edit in AP3 if the user is locked to edit : Done
         // Test Scenario 2: Positive flow to check when not clicked on Edit in AP3 if the user value is null : Done       
@@ -284,31 +296,31 @@ class menus extends API_GUI{
 
 //DELETE/menu/{id} : Delete a menu
 
-        // Test Scenario 1: Negative flow to delete a Menu without Name
-        JOB_Api_Call(" Menu - Create a new individual Menu", "DELETE", 
+        // Test Scenario 1: Negative flow to delete a Menu without MenuID
+        JOB_Api_Call(" Menu - Negative flow to delete a Menu without MenuID", "DELETE", 
             BaseAPI + "/menu/" , Auth, "" , 400, ParentTest, "no_jira");
         
         // Test Scenario 2: Positive flow to delete a Menu
-        //JOB_Api_Call(" Menu - Create a new individual Menu", "DELETE", 
-            //BaseAPI + "/menu/" + New_Menu_ID, Auth, "" , 200, ParentTest, "no_jira");
+        JOB_Api_Call(" Menu - Create a new individual Menu", "DELETE", 
+            BaseAPI + "/menu/" + New_Menu_ID, Auth, "" , 200, ParentTest, "no_jira");
 
 //</editor-fold>        
        
        
 // " Menu Item"   
-//<editor-fold defaultstate="collapsed" desc=" Menu item "> 
+//<editor-fold defaultstate="collapsed" desc=" Menu item  (*Does not work*) "> 
 
-//POST//menu/item : Post/Create a new menu item
+//POST//menu/item : Post/Create a new menu item : 
 
-        // Test Scenario 1: Positive flow to create a new Menu item with Name
+        // Test Scenario 1: Positive flow to create a new Menu item with Name 
         
-        // Test Scenario 2: Negative flow to create a new Menu item without Name 
+        // Test Scenario 2: Negative flow to create a new Menu item without Name  
         
-//GET/menu/item/{id} : Get an menu item
+//GET/menu/item/{id} : Get an menu item  (*Does not work*)
         // Test Scenario 1: Positive flow to get a new individual Menu item by ID
         // Test Scenario 2: Negative flow to get a new individual Menu item without ID
 
-//GET/menu/items : Search for menu items
+//GET/menu/items : Search for menu items  (*Does not work*)
         // Test Scenario 1: Positive flow to get all the Menu items
        
         
@@ -328,34 +340,355 @@ class menus extends API_GUI{
 //<editor-fold defaultstate="collapsed" desc=" Modifier Group "> 
 
 //POST/menu/modifier/group : Create a new Menu Modifier Group
-        // Test Scenario 1: Positive flow to Create a Modifier Group with Name
-        // Test Scenario 2: Negative flow to update a Modifier Group without Name
-
+        
+        // Test Scenario 1: Negative flow to update a Modifier Group without Unique Name
+        BODY ="{"
+                + "\"label\":{"
+                + "\"en\":\"\""
+                + "},"
+                + "\"unique_name\":\"\",\""
+                + "is\":{"
+                + "\"disabled\":false"
+                + "},"
+                + "\"meta\":{"
+                + "\"taxes\":[],"
+                + "\"sort_number\":null"
+                + "},"
+                + "\"items\":["
+                + "{"
+                + "\"label\":{"
+                + "\"en\":\"API 1\""
+                + "},"
+                + "\"is\":{"
+                + "\"disabled\":false"
+                + "},"
+                + "\"meta\":{"
+                + "\"sort_number\":null,"
+                + "\"taxes\":["
+                + "\"Prepared\""
+                + "]"
+                + "},"
+                + "\"price\":{"
+                + "\"amount\":1.89"
+                + "},"
+                + "\"nutrition\":{"
+                + "\"calories\":{"
+                + "\"amount\":189"
+                + "}"
+                + "}"
+                + "},"
+                + "{"
+                + "\"is\":{"
+                + "\"disabled\":false"
+                + "},"
+                + "\"meta\":{"
+                + "\"taxes\":["
+                + "\"Prepared\""
+                + "]"
+                + "},"
+                + "\"label\":{"
+                + "\"en\":\"API 2\""
+                + "},"
+                + "\"price\":{"
+                + "\"amount\":2.89"
+                + "},"
+                + "\"nutrition\":{"
+                + "\"calories\":{"
+                + "\"amount\":289"
+                + "}"
+                + "}"
+                + "}"
+                + "],"
+                + "\"company\":\"" + CompanyID + "\""
+                + "}";
+        JOB_Api_Call(" Modifier Group - Positive flow to create a Global Modifier Group by Unique Name", "POST", 
+            BaseAPI + "/menu/modifier/group" , Auth, BODY , 400, ParentTest, "no_jira");
+        
+        BODY ="{"
+                + "\"label\":{"
+                + "\"en\":\"Mod API DS \""
+                + "},"
+                + "\"unique_name\":\"Mod API DS \",\""
+                + "is\":{"
+                + "\"disabled\":false"
+                + "},"
+                + "\"meta\":{"
+                + "\"taxes\":[],"
+                + "\"sort_number\":null"
+                + "},"
+                + "\"items\":["
+                + "{"
+                + "\"label\":{"
+                + "\"en\":\"API 1\""
+                + "},"
+                + "\"is\":{"
+                + "\"disabled\":false"
+                + "},"
+                + "\"meta\":{"
+                + "\"sort_number\":null,"
+                + "\"taxes\":["
+                + "\"Prepared\""
+                + "]"
+                + "},"
+                + "\"price\":{"
+                + "\"amount\":1.89"
+                + "},"
+                + "\"nutrition\":{"
+                + "\"calories\":{"
+                + "\"amount\":189"
+                + "}"
+                + "}"
+                + "},"
+                + "{"
+                + "\"is\":{"
+                + "\"disabled\":false"
+                + "},"
+                + "\"meta\":{"
+                + "\"taxes\":["
+                + "\"Prepared\""
+                + "]"
+                + "},"
+                + "\"label\":{"
+                + "\"en\":\"API 2\""
+                + "},"
+                + "\"price\":{"
+                + "\"amount\":2.89"
+                + "},"
+                + "\"nutrition\":{"
+                + "\"calories\":{"
+                + "\"amount\":289"
+                + "}"
+                + "}"
+                + "}"
+                + "],"
+                + "\"company\":\"" + CompanyID + "\""
+                + "}";
+        // Test Scenario 2: Positive flow to Create a Modifier Group with Name
+        JOB_Api_Call(" Modifier Group - Negative flow to create a Global Modifier Group without Unique Name", "POST", 
+            BaseAPI + "/menu/modifier/group" , Auth, BODY , 200, ParentTest, "no_jira");
+        if (json != null) {
+            try {
+                New_GlobalMod_ID = json.getString("id");
+                System.out.println("Global Mod ID: " + json.getString("id"));
+            }
+            catch (Exception ex) {
+            }
+        }
 //GET/menu/modifier/group{id} : Get a Modifier Group
-        // Test Scenario 1: Positive flow to Get a Modifier Group by ID
-        // Test Scenario 2: Negative flow to get a Modifier Group without ID
+        
+        
+        // Test Scenario 1: Negative flow to get a Modifier Group without ID
+        JOB_Api_Call(" Global Modifier Group - GET a Modifier Group by /'ModifierGroupID'", "GET", 
+            BaseAPI + "/menu/modifier/group/" , Auth, "", 503, ParentTest, "no_jira");
+        
+        // Test Scenario 2: Positive flow to Get a Modifier Group by ID
+        JOB_Api_Call(" Global Modifier Group - GET a Modifier Group by /'ModifierGroupID'", "GET", 
+            BaseAPI + "/menu/modifier/group/" + New_GlobalMod_ID , Auth, "", 200, ParentTest, "no_jira");
+        if (json != null) {           
+            try {
+              if (json.has("items")) {
+                   JSONArray items = json.getJSONArray("items");
+                    for (int i = 0; i < items.length(); i++) {
+                        JSONObject item = items.getJSONObject(i);
+                        if(item.has("id")){                        
+                        GlobalModGroup_Items_IDS.add(item.getString("id"));
+                        System.out.println(item.getString("id"));
+                        }
+                    }
+                } 
+            }
+            catch (Exception ex) {
+            }
+        }
+
 
 //PUT/menu/modifier/group{id} : Update a Modifier Group        
         // Test Scenario 1: Positive flow to update a Modifier Group by ID
+        
+//        BODY ="{"
+//                + "\"unique_name\":\"Mod API DS PUT\","
+//                + "\"label\":{"
+//                + "\"en\":\"Mod API DS PUT\""
+//                + "},"
+//                + "\"meta\":{"
+//                + "\"taxes\":[],"
+//                + "\"sort_number\":null,"
+//                + "\"original_label\":{"
+//                + "\"en\":\"Mod API DS\""
+//                + "}"
+//                + "},"
+//                + "\"is\":{"
+//                + "\"disabled\":false"
+//                + "},"
+//                + "\"id\":\"LJB430omqLUv38MNr6eNFPpp5NDqBEC5dqW6O7XrCzezKBjMayTwvRrBQr9OtWd6GeQN9vhKw7e0k1gWC83Mg32ON\","
+//                + "\"items\":["
+//                + "{\"label\":{"
+//                + "\"en\":\"API 1 PUT\""
+//                + "},"
+//                + "\"is\":{"
+//                + "\"disabled\":false"
+//                + "},"
+//                + "\"meta\":{"
+//                + "\"sort_number\":null,"
+//                + "\"taxes\":["
+//                + "\"Prepared\""
+//                + "],"
+//                + "\"original_label\":{"
+//                + "\"en\":\"API 1\""
+//                + "}"
+//                + "},"
+//                + "\"price\":{"
+//                + "\"amount\":3.89"
+//                + "},"
+//                + "\"nutrition\":{"
+//                + "\"calories\":{"
+//                + "\"amount\":389"
+//                + "}"
+//                + "},"
+//                + "\"id\":\"A3lvmDKMQkfrKlyq5m0qs1MrrDW0MRhR1QzJRG94i9kWNeGzlWu7R6YGj721U3N4WGNGMJcY35WeXpy\""
+//                + "},"
+//                + "{"
+//                + "\"is\":{"
+//                + "\"disabled\":false"
+//                + "},"
+//                + "\"meta\":{"
+//                + "\"taxes\":["
+//                + "\"Prepared\""
+//                + "],"
+//                + "\"original_label\":{"
+//                + "\"en\":\"API 2\""
+//                + "}"
+//                + "},"
+//                + "\"label\":{"
+//                + "\"en\":\"API 2\""
+//                + "},"
+//                + "\"price\":{"
+//                + "\"amount\":2.89"
+//                + "},"
+//                + "\"nutrition\":{"
+//                + "\"calories\":{"
+//                + "\"amount\":289"
+//                + "}"
+//                + "},"
+//                + "\"id\":\"p61vE5y3MNFqpLjgRNPgSLy330QRE5uPoGR4AKldF2w3Ad5zAaFAXqPG59mKHEN6jANvDWip9wLRDjL\""
+//                + "}]"
+//                + "}";
+        
+        BODY="{"
+                + "\"unique_name\":\"Mod API DS PUT\","
+                + "\"label\":{"
+                + "\"en\":\"Mod API DS PUT\""
+                + "},"
+                + "\"meta\":{"
+                + "\"taxes\":[],"
+                + "\"sort_number\":null,"
+                + "\"original_label\":{"
+                + "\"en\":\"Mod API DS\""
+                + "}"
+                + "},"
+                + "\"is\":{"
+                + "\"disabled\":false"
+                + "},"
+                + "\"id\":\"\","
+                + "\"items\":["
+                + "{"
+                + "\"label\":{"
+                + "\"en\":\"API 2 PUT\""
+                + "},"
+                + "\"is\":{"
+                + "\"disabled\":false"
+                + "},"
+                + "\"meta\":{"
+                + "\"sort_number\":null,"
+                + "\"taxes\":["
+                + "\"Prepared\""
+                + "],"
+                + "\"original_label\":{"
+                + "\"en\":\"API 1\""
+                + "}"
+                + "},"
+                + "\"price\":{"
+                + "\"amount\":3.89"
+                + "},"
+                + "\"nutrition\":{"
+                + "\"calories\":{"
+                + "\"amount\":389"
+                + "}"
+                + "},"
+                + "\"id\":\"\""
+                + "},"
+                + "{\"is\":{"
+                + "\"disabled\":false"
+                + "},"
+                + "\"meta\":{"
+                + "\"taxes\":["
+                + "\"Prepared\""
+                + "],"
+                + "\"original_label\":{"
+                + "\"en\":\"API 2\""
+                + "}"
+                + "},"
+                + "\"label\":{"
+                + "\"en\":\"API 2\""
+                + "},"
+                + "\"price\":{"
+                + "\"amount\":2.89"
+                + "},"
+                + "\"nutrition\":{"
+                + "\"calories\":{"
+                + "\"amount\":289"
+                + "}"
+                + "},"
+                + "\"id\":\"\""
+                + "}"
+                + "]"
+                + "}";
+        // Test Scenario 1: Positive flow to Create a Modifier Group with Name
+        JOB_Api_Call(" Modifier Group - Positive flow to update a Global Modifier Group without Unique Name", "PUT", 
+            BaseAPI + "/menu/modifier/group/" + New_GlobalMod_ID , Auth, BODY , 200, ParentTest, "no_jira");
+        
         // Test Scenario 2: Negative flow to update a Modifier Group without ID
-
-//DELETE/menu/modifier/group{id} : Delete a Modifier Group        
-        // Test Scenario 1: Positive flow to delete a Modifier Group by ID
-        // Test Scenario 2: Negative flow to delete a Modifier Group without ID    
+        JOB_Api_Call(" Modifier Group - Negative flow to update a Global Modifier Group without Unique Name", "PUT", 
+            BaseAPI + "/menu/modifier/group/" , Auth, BODY , 400, ParentTest, "no_jira");
+        
+   
         
 //GET/menu/modifier/group/company{company_id} : Get a Modifier Group that belongs to company    
-        // Test Scenario 1: Positive flow to get a Modifier Group of a company by ID
-        // Test Scenario 2: Negative flow to get a Modifier Group of a company without ID
         
+        
+        // Test Scenario 1: Negative flow to get a Modifier Group of a company without ID
+        JOB_Api_Call(" Modifier Group - Negative flow to get a Modifier Group of a company without /'CompanyID'", "GET", 
+            BaseAPI + "/menu/modifier/group/company/" , Auth, "", 400, ParentTest, "no_jira");
+        
+        // Test Scenario 2: Positive flow to get a Modifier Group of a company by ID
+        JOB_Api_Call(" Modifier Group - Positive flow to get a Modifier Group of a company by/'CompanyID'", "GET", 
+            BaseAPI + "/menu/modifier/group/company/" + CompanyID, Auth, "", 200, ParentTest, "no_jira");
         
 //GET/menu/modifier/group/company{company_id}/export : Export company modifier groups to a zipped excel file.   
-        // Test Scenario 1: Positive flow to get a Modifier Group of a company by ID/export
-        // Test Scenario 2: Negative flow to get a Modifier Group of a company without export
+        
+        // Test Scenario 1: Negative flow to get a Modifier Group of a company without CompanyID
+        JOB_Api_Call(" Modifier Group - Negative flow to Export a Modifier Group file of a company without /'CompanyID'", "GET", 
+            BaseAPI + "/menu/modifier/group/company/export" , Auth, "", 400, ParentTest, "no_jira");
+        
+        // Test Scenario 2: Positive flow to get a Modifier Group of a company by ID/export
+        JOB_Api_Call(" Modifier Group - Negative flow to Export a Modifier Group file of a company without /'CompanyID'", "GET", 
+            BaseAPI + "/menu/modifier/group/company/"+ CompanyID + "/export" , Auth, "", 200, ParentTest, "no_jira");
+        
+//DELETE/menu/modifier/group{id} : Delete a Modifier Group        
+        
+        // Test Scenario 1: Negative flow to delete a Modifier Group without ID 
+        JOB_Api_Call(" Modifier Group - Negative flow to delete a Modifier Group without/ 'GroupID'", "DELETE", 
+            BaseAPI + "/menu/modifier/group/" , Auth, "" , 400, ParentTest, "no_jira");
+        
+        // Test Scenario 2: Positive flow to delete a Modifier Group by ID
+        JOB_Api_Call(" Modifier Group - Positive flow to delete a Modifier Group by/ 'GroupID'", "DELETE", 
+            BaseAPI + "/menu/modifier/group/" + New_GlobalMod_ID , Auth, "" , 200, ParentTest, "no_jira");
         
  //</editor-fold>
 
-
+//PATCH/menu/{id} : Update a menu
         
+        // Test Scenario 2: Positive flow to check when not clicked on Edit in AP3 if the user value is null : Done
         BODY = "{"
                 + "\"id\":\"" + menu_id + "\","
                 + "\"meta\":{\"locked_by_user\":null}"
@@ -363,8 +696,9 @@ class menus extends API_GUI{
         JOB_Api_Call("Menu - Global Menu - UnLock Editing", "PATCH", 
                 BaseAPI + "/menu/" + menu_id, Auth, BODY, 200, ParentTest, "no_jira"); // + "?_query=%7Bid,date,meta%7D"
         if (json != null) {  
-            AAAA = json.toString(4);
-        }         
+            AAAA = json.toString(4);       
+ }         
+
                 
     }//run time
 }

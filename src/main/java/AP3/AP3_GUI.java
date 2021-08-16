@@ -2968,27 +2968,28 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         }         
     }
     private void Send_AWS_Allert(boolean GUI){
-            JSONObject requestParams = new JSONObject();
-            JSONObject payload = new JSONObject();
-            JSONObject custom_details = new JSONObject();            
-                payload.put("summary", "AP3 - Login/Welcome Page Sanity Check Failed");
-                payload.put("source", "https://adminpanel.compassdigital.org/#/");                
-                payload.put("severity", "critical");
-                    custom_details.put("environment", env);
-                    custom_details.put("user", A.A.UserID);
-                    custom_details.put("host", A.A.WsID); 
-                    custom_details.put("test_type", "jtt_cron"); 
-                    custom_details.put("steps_total", _t);
-                    custom_details.put("steps_failed", _f);
-            payload.put("custom_details", custom_details);    
-            requestParams.put("payload", payload);
-            requestParams.put("routing_key", "AWS_Routing_Key");
-            requestParams.put("event_action", "trigger");
-            requestParams.put("client", "JTT - AWS Special Projects");
-            requestParams.put("client_url", "ec2-3-13-3-59.us-east-2.compute.amazonaws.com");
-            String BODY = requestParams.toString(4);
+        JSONObject requestParams = new JSONObject();
+        JSONObject payload = new JSONObject();
+        JSONObject custom_details = new JSONObject();            
+            payload.put("summary", "AP3 - Login/Welcome Page Sanity Check Failed");
+            payload.put("source", "https://adminpanel.compassdigital.org/#/");                
+            payload.put("severity", "critical");
+                custom_details.put("environment", env);
+                custom_details.put("user", A.A.UserID);
+                custom_details.put("host", A.A.WsID); 
+                custom_details.put("test_type", "jtt_cron"); 
+                custom_details.put("steps_total", _t);
+                custom_details.put("steps_failed", _f);
+                custom_details.put("failed_detail", F);
+        payload.put("custom_details", custom_details);    
+        requestParams.put("payload", payload);
+        requestParams.put("routing_key", "AWS_Routing_Key");
+        requestParams.put("event_action", "trigger");
+        requestParams.put("client", "JTT - AWS Special Projects");
+        requestParams.put("client_url", "ec2-3-13-3-59.us-east-2.compute.amazonaws.com");
+        String BODY = requestParams.toString(4);
 
-            Current_Log_Update(GUI, A.Func.AWS_ALERT(BODY));          
+        Current_Log_Update(GUI, A.Func.AWS_ALERT(BODY));          
     }
  
     // <editor-fold defaultstate="collapsed" desc="Driver Actions > Log Step Result">  

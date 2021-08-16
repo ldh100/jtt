@@ -1,5 +1,8 @@
 package API;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 class partner extends API_GUI{
     protected partner(API_GUI a) {
         app = a.app;
@@ -12,8 +15,30 @@ class partner extends API_GUI{
         // UnitNum ???????
         ParentTest = a.ParentTest;
     }
-    protected void run() {                                                           
-        //  
-
+    String AAA = "";
+    protected void run() { 
+        String CoolrID = "";
+        JOB_Api_Call("Partner Standardcognition Locations", "GET", 
+            BaseAPI + "/partner/standardcognition/locations", "", "", 200, ParentTest, "no_jira"); 
+        if(json != null){
+            AAA = json.toString(4);
+        } 
+        
+        JOB_Api_Call("Partner Coolr Locations", "GET", 
+            BaseAPI + "/partner/coolr/locations", "", "", 200, ParentTest, "no_jira"); 
+        if(json != null){
+            AAA = json.toString(4);
+            try {
+                JSONArray locations = json.getJSONArray("locations");
+                CoolrID = locations.getJSONObject(0).getString("id");
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }
+        JOB_Api_Call("Partner 1st Coolr Images", "GET", 
+            BaseAPI + "/partner/coolr/" + CoolrID + "/images", "", "", 200, ParentTest, "no_jira"); 
+        if(json != null){
+            AAA = json.toString(4);
+        }         
     }
 }
