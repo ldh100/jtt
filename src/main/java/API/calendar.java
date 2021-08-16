@@ -80,6 +80,5 @@ class calendar extends API_GUI {
         }
         JOB_Api_Call("Calendar > /'BrandID'/ Synchronization", "POST",
                 BaseAPI + "/calendar/" + BrandID + "/sync", Auth, "", 200, ParentTest, "no_jira");
-
     }
 }
