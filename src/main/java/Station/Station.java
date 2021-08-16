@@ -21,12 +21,17 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
+import javax.swing.DefaultListModel;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
@@ -99,10 +104,11 @@ public class Station extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Site > Station > Menu >>> loading, please wait ... ... ... ...");
-        setMaximumSize(new java.awt.Dimension(860, 532));
-        setMinimumSize(new java.awt.Dimension(860, 532));
+        setMaximumSize(new java.awt.Dimension(864, 527));
+        setMinimumSize(new java.awt.Dimension(864, 527));
         setName("Station"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
+        setPreferredSize(new java.awt.Dimension(864, 527));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -114,28 +120,26 @@ public class Station extends javax.swing.JInternalFrame {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameClosed(evt);
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblSITES.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblSITES.setText("Sites");
         lblSITES.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 4, 360, -1));
 
         DV_Sites.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV_Sites.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -161,8 +165,6 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV_Sites);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 376, 268));
-
         DV_Brands.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Brands.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -187,8 +189,6 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV_Brands);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 288, 376, 112));
-
         txtLog.setEditable(false);
         txtLog.setColumns(20);
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
@@ -198,8 +198,6 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLog);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 400, 376, 104));
 
         DV_MTS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_MTS.setModel(new javax.swing.table.DefaultTableModel(
@@ -214,7 +212,6 @@ public class Station extends javax.swing.JInternalFrame {
         DV_MTS.setCellSelectionEnabled(true);
         DV_MTS.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV_MTS.setName("DV_MTS"); // NOI18N
-        DV_MTS.setOpaque(false);
         DV_MTS.setRowHeight(18);
         DV_MTS.getTableHeader().setReorderingAllowed(false);
         DV_MTS.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -224,12 +221,9 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane4.setViewportView(DV_MTS);
 
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 216, 84, 184));
-
         lblMenus.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblMenus.setText("Click Brand to get Menu(s) ...");
         lblMenus.setAlignmentX(0.5F);
-        getContentPane().add(lblMenus, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 4, 280, -1));
 
         DV_Categories.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Categories.setModel(new javax.swing.table.DefaultTableModel(
@@ -255,8 +249,6 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane5.setViewportView(DV_Categories);
 
-        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 116, 384, 80));
-
         DV_Items.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Items.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -281,8 +273,6 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane6.setViewportView(DV_Items);
 
-        getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 196, 384, 92));
-
         DV_Mods.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Mods.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -302,8 +292,6 @@ public class Station extends javax.swing.JInternalFrame {
         DV_Mods.getTableHeader().setReorderingAllowed(false);
         jScrollPane7.setViewportView(DV_Mods);
 
-        getContentPane().add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 288, 384, 112));
-
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
         btnLog.setMargin(new java.awt.Insets(2, 4, 2, 4));
@@ -312,7 +300,6 @@ public class Station extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
-        getContentPane().add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 480, 44, 22));
 
         DV_Menus.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Menus.setModel(new javax.swing.table.DefaultTableModel(
@@ -337,8 +324,6 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane8.setViewportView(DV_Menus);
 
-        getContentPane().add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 384, 96));
-
         DV_BTS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_BTS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -352,8 +337,8 @@ public class Station extends javax.swing.JInternalFrame {
         DV_BTS.setCellSelectionEnabled(true);
         DV_BTS.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV_BTS.setName("DV_BTS"); // NOI18N
-        DV_BTS.setOpaque(false);
         DV_BTS.setRowHeight(18);
+        DV_BTS.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         DV_BTS.getTableHeader().setReorderingAllowed(false);
         DV_BTS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -362,15 +347,11 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane9.setViewportView(DV_BTS);
 
-        getContentPane().add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 20, 84, 176));
-
         lblMTS.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblMTS.setText("Menu Timeslots");
-        getContentPane().add(lblMTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 200, 84, 16));
 
         lblBTS.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblBTS.setText("Brand Timeslots");
-        getContentPane().add(lblBTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 4, 80, -1));
 
         btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSave_Opt.setText("Save Setup");
@@ -381,13 +362,11 @@ public class Station extends javax.swing.JInternalFrame {
                 btnSave_OptMouseClicked(evt);
             }
         });
-        getContentPane().add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 480, 76, 22));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES13.setText("Env:");
         lblSITES13.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 484, 28, 16));
 
         cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbEnv.addItemListener(new java.awt.event.ItemListener() {
@@ -395,13 +374,11 @@ public class Station extends javax.swing.JInternalFrame {
                 cmbEnvItemStateChanged(evt);
             }
         });
-        getContentPane().add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 480, 120, 20));
 
         lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES14.setText("App:");
         lblSITES14.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 480, 28, 16));
 
         cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbApp.addItemListener(new java.awt.event.ItemListener() {
@@ -409,44 +386,36 @@ public class Station extends javax.swing.JInternalFrame {
                 cmbAppItemStateChanged(evt);
             }
         });
-        getContentPane().add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(732, 480, 112, 20));
 
         lblSITES4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES4.setText("Mobile User E-mail:");
         lblSITES4.setToolTipText("");
         lblSITES4.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 400, 108, -1));
 
         txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_ID.setText("App_User@?.?");
-        getContentPane().add(txtMobile_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 416, 176, -1));
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES6.setText("Mobile User Password");
         lblSITES6.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 436, -1, -1));
 
         txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_PW.setText("password");
-        getContentPane().add(txtMobile_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 452, 176, -1));
 
         lblSITES7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES7.setText("Promo Code");
         lblSITES7.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 436, -1, -1));
 
         txtPROMO.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtPROMO.setText("None");
-        getContentPane().add(txtPROMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 452, 120, -1));
 
         lblBDOFF.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblBDOFF.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblBDOFF.setText("Drop Off Locations");
         lblBDOFF.setAlignmentX(0.5F);
-        getContentPane().add(lblBDOFF, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 400, 112, -1));
 
         cmbDropOffLocations.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbDropOffLocations.addItemListener(new java.awt.event.ItemListener() {
@@ -454,17 +423,164 @@ public class Station extends javax.swing.JInternalFrame {
                 cmbDropOffLocationsItemStateChanged(evt);
             }
         });
-        getContentPane().add(cmbDropOffLocations, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 416, 114, 20));
 
         btnDOrder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnDOrder.setText("Place Delivery Order");
         btnDOrder.setEnabled(false);
-        getContentPane().add(btnDOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 444, 144, 24));
+        btnDOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDOrderMouseClicked(evt);
+            }
+        });
 
         btnPOrder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnPOrder.setText("Place Pickup Order");
         btnPOrder.setEnabled(false);
-        getContentPane().add(btnPOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 412, 144, 24));
+        btnPOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPOrderMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnLog)
+                        .addGap(8, 8, 8)
+                        .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSITES4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSITES6))))
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblBDOFF, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbDropOffLocations, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSITES7)
+                    .addComponent(txtPROMO, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnDOrder, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(2, 2, 2))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(lblSITES, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(lblMenus, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                .addGap(0, 0, 0)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(lblBTS, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblMTS, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSITES)
+                    .addComponent(lblMenus)
+                    .addComponent(lblBTS))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(lblMTS, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblBDOFF)
+                        .addGap(2, 2, 2)
+                        .addComponent(cmbDropOffLocations, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(lblSITES7)
+                        .addGap(2, 2, 2)
+                        .addComponent(txtPROMO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(btnPOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(480, 480, 480)
+                .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(400, 400, 400)
+                .addComponent(lblSITES4)
+                .addGap(2, 2, 2)
+                .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(lblSITES6)
+                .addGap(2, 2, 2)
+                .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(400, 400, 400)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -485,6 +601,9 @@ public class Station extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void DV_BrandsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_BrandsMouseClicked
+        if(DV_Brands.getRowCount() < 1){
+            return;
+        }
         BRAND = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 0));
         BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3));
 
@@ -492,7 +611,7 @@ public class Station extends javax.swing.JInternalFrame {
         GetBrandTimeslots();        // ===================================
         GetMenus();                 // ===================================
         BrandsLastRow = DV_Brands.getSelectedRow();   
-
+        Validate_Pleace_Order();
     }//GEN-LAST:event_DV_BrandsMouseClicked
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
@@ -526,7 +645,9 @@ public class Station extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbAppItemStateChanged
 
     private void DV_MTSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_MTSMouseClicked
-        // Clear BTS selection, select valid MTS slot
+        if(DV_MTS.getRowCount() > 0 && DV_BTS.getRowCount() > 0){
+            DV_BTS.clearSelection();
+        }
     }//GEN-LAST:event_DV_MTSMouseClicked
 
     private void DV_CategoriesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_CategoriesMouseClicked
@@ -540,13 +661,18 @@ public class Station extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_DV_ItemsMouseClicked
 
     private void DV_MenusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_MenusMouseClicked
+        if(DV_Menus.getRowCount() < 1){
+            return;
+        }
         GetMenuTimeslots();
         GetCategories();
         CategoriesLastRow = DV_Categories.getSelectedRow();
     }//GEN-LAST:event_DV_MenusMouseClicked
 
     private void DV_BTSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_BTSMouseClicked
-        // Clear MTS selection, select valid BTS slot
+        if(DV_MTS.getRowCount() > 0 && DV_BTS.getRowCount() > 0){
+            DV_MTS.clearSelection();
+        }
     }//GEN-LAST:event_DV_BTSMouseClicked
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
@@ -556,6 +682,14 @@ public class Station extends javax.swing.JInternalFrame {
     private void cmbDropOffLocationsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDropOffLocationsItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbDropOffLocationsItemStateChanged
+
+    private void btnPOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPOrderMouseClicked
+        PLACE_ORDERS("P");
+    }//GEN-LAST:event_btnPOrderMouseClicked
+
+    private void btnDOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDOrderMouseClicked
+        PLACE_ORDERS("D");
+    }//GEN-LAST:event_btnDOrderMouseClicked
 
     private void Load_Form(){
         Load = true;
@@ -579,6 +713,114 @@ public class Station extends javax.swing.JInternalFrame {
         app = cmbApp.getSelectedItem().toString();
         CONFIG = false;   
         this.setTitle("Site > Station(Brand) > Menu(s)");
+    }
+
+    private void LOAD_CONFIG(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'Station' AND [env] = '" + env + "'";
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(SQL);
+            rs.next();
+            C = rs.getString(1);
+            conn.close();
+        } catch (Exception ex) {
+            CONFIG = false;
+            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            return;
+        }
+            
+        try{            
+            if (C.contains(": ")) {
+                String c;
+                c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
+
+                c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("COUNTRY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); COUNTRY = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("txtMobile_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtMobile_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
+
+                CONFIG = true;
+                txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            } else {
+                CONFIG = false;
+                txtLog.append("=== Station, User: " + UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            }
+        } catch (Exception ex) {
+            CONFIG = false;
+            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+    private void SAVE_CONFIG() {
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        String _S = "n/a";
+        String _B = "n/a";
+        try {
+            if(DV_Sites.getRowCount() > 0){
+                _S = DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 0).toString();
+            }
+            if(DV_Brands.getRowCount() > 0){
+                _B = DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 0).toString();
+            }
+            C = "";
+            C += "env: " + env + "\r\n";
+            C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
+            C += "url: " + url + "\r\n";
+            
+            C += "SITE: " + _S + "\r\n";
+            C += "BRAND: " + _B + "\r\n";
+            C += "COUNTRY: " + COUNTRY + "\r\n"; 
+            C += "txtMobile_ID: " + txtMobile_ID.getText().trim() + "\r\n";
+            C += "txtMobile_PW: " + txtMobile_PW.getText()  + "\r\n";
+
+        } catch (Exception ex)  {
+            txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            return;
+        }
+        
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'Station' AND [env] = '" + env + "'";
+            Statement _del = conn.createStatement();
+            _del.execute(SQL);
+            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
+                    "([user_id]" +   // 1
+                    ",[env]" +       // 2
+                    ",[platform]" +  // 3
+                    ",[app]" +       // 4
+                    ",[_conf]" +     // 5
+                    ") VALUES (" +
+                    "?" +
+                    ",?" +
+                    ",?" +
+                    ",?" +
+                    ",?" +
+                    ")");
+            _insert.setString(1, UserID);
+            _insert.setString(2, env);
+            _insert.setString(3, "WEB");
+            _insert.setString(4, "Station");
+            _insert.setString(5, C);
+            int row = _insert.executeUpdate();
+            conn.close(); 
+            
+            txtLog.append("=== SAVE_CONFIG > OK (" + row + " row)" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+
+        } catch (SQLException ex) {
+            txtLog.append("=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
 
     private void LOAD_ENV(){
@@ -747,7 +989,8 @@ public class Station extends javax.swing.JInternalFrame {
         if (SitesLastRow == DV_Sites.getSelectedRow()) {
            return;
         }
-
+        btnPOrder.setEnabled(false);
+        btnDOrder.setEnabled(false);
         BrandsLastRow = -1;
         SitesLastRow = DV_Sites.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -939,10 +1182,9 @@ public class Station extends javax.swing.JInternalFrame {
             sw1.reset();
         }
         sw1.start();        
-     
-        String[] BrandsColumnsName = {"Time"}; 
+        String[] ColumnsName = {"Time", "epoch"}; 
         DefaultTableModel BTS_Model = new DefaultTableModel();
-        BTS_Model.setColumnIdentifiers(BrandsColumnsName);
+        BTS_Model.setColumnIdentifiers(ColumnsName);
         DV_BTS.setModel(BTS_Model);        
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
@@ -965,11 +1207,14 @@ public class Station extends javax.swing.JInternalFrame {
                 JSONArray timeslots = json.getJSONArray("timeslots");
                 for (int i = 0; i < timeslots.length(); i++) {
                     JSONObject timeslot = timeslots.getJSONObject(i);
-                    Date date = new Date(timeslot.getLong("id")*1000);
-                    BTS_Model.addRow(new Object[]{sdf.format(date)});
+                    BTS_Model.addRow(new Object[]{sdf.format(new Date(timeslot.getLong("id")*1000)), timeslot.getLong("id")});
                 }
             } 
-            DV_BTS.getColumnModel().getColumn(0).sizeWidthToFit();
+            DV_BTS.setModel(BTS_Model); 
+            DV_BTS.setDefaultEditor(Object.class, null);
+            DV_BTS.getColumnModel().getColumn(0).setPreferredWidth(50);
+            DV_BTS.getColumnModel().getColumn(1).sizeWidthToFit();
+
         } catch (Exception ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
@@ -982,6 +1227,9 @@ public class Station extends javax.swing.JInternalFrame {
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } 
+        if(DV_BTS.getRowCount() > 0){
+            DV_BTS.changeSelection(0, 0, false, false);
+        }        
         lblBTS.setText("Brand Slots " + DV_BTS.getRowCount());
         txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1081,17 +1329,19 @@ public class Station extends javax.swing.JInternalFrame {
      
         GetMenuTimeslots();
         GetCategories();
-        MenusLastRow = DV_Menus.getSelectedRow();     
+        MenusLastRow = DV_Menus.getSelectedRow();  
+        Validate_Pleace_Order();
     }
     private void GetMenuTimeslots(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Menu Timeslots ..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());         if(sw1.isRunning()){
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        sw1.start();  
         String MenuID = String.valueOf(DV_Menus.getValueAt(DV_Menus.getSelectedRow(), 2));
-        String[] BrandsColumnsName = {"Time"}; 
+        String[] BrandsColumnsName = {"Time", "epoch"}; 
         DefaultTableModel MTS_Model = new DefaultTableModel();
         MTS_Model.setColumnIdentifiers(BrandsColumnsName);
         DV_MTS.setModel(MTS_Model);        
@@ -1116,12 +1366,14 @@ public class Station extends javax.swing.JInternalFrame {
                 JSONArray timeslots = json.getJSONArray("timeslots");
                 for (int i = 0; i < timeslots.length(); i++) {
                     JSONObject timeslot = timeslots.getJSONObject(i);
-                    Date date = new Date(timeslot.getLong("id")*1000);
-                    
-                    MTS_Model.addRow(new Object[]{sdf.format(date)});
+                    MTS_Model.addRow(new Object[]{sdf.format(new Date(timeslot.getLong("id")*1000)), timeslot.getLong("id")});
                 }
             }   
-            DV_MTS.getColumnModel().getColumn(0).sizeWidthToFit();
+            DV_MTS.setModel(MTS_Model);  
+            DV_MTS.setDefaultEditor(Object.class, null);
+            DV_MTS.getColumnModel().getColumn(0).setPreferredWidth(50);
+            DV_MTS.getColumnModel().getColumn(1).sizeWidthToFit();
+
         } catch (Exception ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
@@ -1379,7 +1631,8 @@ public class Station extends javax.swing.JInternalFrame {
                             }else{
                                 price = "Not Found";
                             }
-                            if(OItem.has("nutrition") && OItem.getJSONObject("nutrition").has("calories")){
+                            if(OItem.has("nutrition") && OItem.getJSONObject("nutrition").has("calories") &&
+                                    OItem.getJSONObject("nutrition").getJSONObject("calories").has("amount")){                                
                                 cal = OItem.getJSONObject("nutrition").getJSONObject("calories").getNumber("amount").toString();
                             }else{
                                 cal = "Not Found";
@@ -1404,122 +1657,153 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-
-    private void LOAD_CONFIG(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'Station' AND [env] = '" + env + "'";
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery(SQL);
-            rs.next();
-            C = rs.getString(1);
-            conn.close();
-        } catch (Exception ex) {
-            CONFIG = false;
-            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            return;
-        }
-            
-        try{            
-            if (C.contains(": ")) {
-                String c;
-                c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
-
-                c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("COUNTRY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); COUNTRY = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("txtMobile_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtMobile_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
-
-                CONFIG = true;
-                txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            } else {
-                CONFIG = false;
-                txtLog.append("=== Station, User: " + UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+    
+    private void Validate_Pleace_Order() {
+        btnPOrder.setEnabled(false);
+        btnDOrder.setEnabled(false);
+        if(DV_Items.getSelectedRowCount() > 0 && (DV_BTS.getSelectedRowCount() > 0 || DV_MTS.getSelectedRowCount() > 0)){
+            btnPOrder.setEnabled(true);
+            if(cmbDropOffLocations.getSelectedItem().toString().trim() != ""){
+                btnDOrder.setEnabled(true);
             }
-        } catch (Exception ex) {
-            CONFIG = false;
-            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    private void SAVE_CONFIG() {
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        String _S = "n/a";
-        String _B = "n/a";
-        try {
-            if(DV_Sites.getRowCount() > 0){
-                _S = DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 0).toString();
-            }
-            if(DV_Brands.getRowCount() > 0){
-                _B = DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 0).toString();
-            }
-            C = "";
-            C += "env: " + env + "\r\n";
-            C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
-            C += "url: " + url + "\r\n";
-            
-            C += "SITE: " + _S + "\r\n";
-            C += "BRAND: " + _B + "\r\n";
-            C += "COUNTRY: " + COUNTRY + "\r\n"; 
-            C += "txtMobile_ID: " + txtMobile_ID.getText().trim() + "\r\n";
-            C += "txtMobile_PW: " + txtMobile_PW.getText()  + "\r\n";
-
-        } catch (Exception ex)  {
-            txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            return;
+    private void PLACE_ORDERS(String TYPE){
+        Get_Mobile_User_TKN();
+        if(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 2).toString().toLowerCase().startsWith("c")){
+             EXACT();
         }
+        if(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 2).toString().toLowerCase().startsWith("u")){
+            FP();
+        }
+    } 
+    
+    
+    private void Get_Mobile_User_TKN(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("- Load User..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        String J = "==== User API(s):" + "\r\n";
+        userID = "";
+        userTKN = "";
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
+        String Realm = Func.Realm_ID(cmbApp.getSelectedItem().toString(), env);
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
         
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'Station' AND [env] = '" + env + "'";
-            Statement _del = conn.createStatement();
-            _del.execute(SQL);
-            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
-                    "([user_id]" +   // 1
-                    ",[env]" +       // 2
-                    ",[platform]" +  // 3
-                    ",[app]" +       // 4
-                    ",[_conf]" +     // 5
-                    ") VALUES (" +
-                    "?" +
-                    ",?" +
-                    ",?" +
-                    ",?" +
-                    ",?" +
-                    ")");
-            _insert.setString(1, UserID);
-            _insert.setString(2, env);
-            _insert.setString(3, "WEB");
-            _insert.setString(4, "Station");
-            _insert.setString(5, C);
-            int row = _insert.executeUpdate();
-            conn.close(); 
-            
-            txtLog.append("=== SAVE_CONFIG > OK (" + row + " row)" + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        try {     // ============ User
+            HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm);
+            httpget.setHeader("Authorization", "Basic " + UserAuth);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 500) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
 
-        } catch (SQLException ex) {
-            txtLog.append("=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            userID = json.getString("user");
+            userTKN = json.getString("token");
+
+        } catch (IOException | JSONException ex) {
+            txtLog.append(" > " + J); 
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
+        txtLog.append("== " + BaseAPI + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.append("== " + "UserID:"  + userID + "\r\n");
+        txtLog.append("== " + "UserTKN:"  + userTKN + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }                                    
+    private void EXACT(){
+        txtLog.append("- EXACT..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }
-  
+    private void FP(){
+         txtLog.append("- FP..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());       
+    }
+
+
+//        Auth = "Bearer " + Mobile_User_TKN;
+//        Date requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(BRAND_TIMESLOTS.size() - 1))*1000L);
+//        //Date requested_date = new Date(Long.parseLong(MENU_TIMESLOTS.get(MENU_TIMESLOTS.size() - 1))*1000L);
+//        
+
+//
+//        String Requested_Date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(requested_date);
+//
+//        requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
+//        requestParams.put("location_brand", BrandID);
+//        requestParams.put("customer", Mobile_User_ID);
+//        requestParams.put("pickup_name", "JTT API Test Pickup");
+//        requestParams.put("pickup", Requested_Date);
+//        requestParams.put("requested_date", Requested_Date);
+//        requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
+//        JSONObject payment = new JSONObject();
+//        payment.put("token", EXACT_Payment_TKN);
+//        requestParams.put("payment", payment); 
+//        BODY = requestParams.toString();        
+//        JOB_Api_Call("Place Pickup Order", "POST", 
+//            BaseAPI + "/order?lang=en", Auth, BODY, 200, ParentTest, "no_jira");
+//        if(json != null && json.has("id")){
+//            Order_Pickup_ID = json.getString("id");
+//        }   
+//
+
+//        Auth = "Bearer " + Mobile_User_TKN;
+//        BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
+//                "\"location_brand\":\"" + BrandID + "\"," + 
+//                "\"customer\":\"" + Mobile_User_ID + "\"," +  
+//                "\"details\":" +                                   
+//                    "{\"contact_number\":\"4165551234\"," +
+//                    "\"destination\":\"" + DELIEVERY_DESTINATIONS.get(0) + "\"," +
+//                    "\"duration\":\"" + "00:05:00" + "\"," +
+//                    "\"instructions\":\"" + "Discard this Order" + "\"," +
+//                    "\"name\":\"" + "JTT API Test Delivery" + "\"," +
+//                    "\"order_type\":\"delivery\"}," + 
+//                "\"payment\":" + 
+//                    "{\"token\":\"" + EXACT_Payment_TKN + "\"}," +
+//                "\"requested_date\":\"" + Requested_Date + "\"," +
+//                "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
+//                "\"}";        
+//        JOB_Api_Call("Place Delivery Order", "POST", 
+//            BaseAPI + "/order", Auth, BODY, 200, ParentTest, "no_jira");
+//        if(json != null && json.has("id")){
+//            Order_Delivery_ID = json.getString("id");
+//        }               
+//        
+//        Auth = "Bearer " + AP3_TKN;
+//        requestParams = new JSONObject();   //  Mobile User Update Delivery Order  =================
+//        JSONObject is = new JSONObject();
+//        is.put("in_progress", true);
+//        is.put("ready", true);
+//        //is.put("out_for_delivery", true);        
+//        requestParams.put("is", is); 
+//        BODY = requestParams.toString();
+//        JOB_Api_Call("Update Delivery Order Status - ready", "PATCH", 
+//            BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");        
+//        if(json != null){           
+//            AAA = json.toString(4);  // Check actual update
+//        }         
+//    }
+
+
+
     // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
     JSONArray JArray_MENUS;
     JSONArray JArray_CATS;
-    JSONArray JArray_ITEMS;
-    private List<String> BRAND_TIMESLOTS;
-    private List<String> MENU_TIMESLOTS;
-    private List<String> DELIEVERY_DESTINATIONS;    
+    JSONArray JArray_ITEMS; 
     
     private boolean Load;
     private static Duration DD;
