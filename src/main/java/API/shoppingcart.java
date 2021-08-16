@@ -30,13 +30,14 @@ class shoppingcart extends API_GUI{
         JOB_Api_Call("Create New ShoppingCart Pickup", "POST",             // ===========================
             BaseAPI + "/shoppingcart", Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
-            try{
+            try {
                 ShoppingCart_Pickup_ID = json.getString("id");
                 AAA = json.toString(4);
             } catch (Exception ex){
                 AAA = ex.getMessage();
             }
-        }            
+        } 
+        
         BODY = "{\"items\":[{\"id\":\"" + ITEMS_IDS.get(ITEMS_IDS.size() - 1) + "\"," +
             "\"quantity\":1," +
             "\"price\":{\"amount\":0.05}}]}"; 
