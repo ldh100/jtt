@@ -67,7 +67,7 @@ class user_mobile extends API_GUI{
                     "\"order_status_notification\":{\"send_emails\":true}," +
                     "\"marketing_opt_in\":false}" +
                 "\"}";                         
-        JOB_Api_Call("Mobile User - Update Email Notification Options ", "PUT", 
+        JOB_Api_Call("Mobile User - Update Email Notification Options", "PUT", 
             BaseAPI + "/user/" + Mobile_User_ID, Auth, BODY, 200, ParentTest, "no_jira"); 
 
         JOB_Api_Call("Mobile User Zendesk JWT token", "GET", 

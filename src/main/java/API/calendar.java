@@ -32,7 +32,6 @@ class calendar extends API_GUI {
         JOB_Api_Call("Calendar > /'BrandID'", "GET",
                 BaseAPI + "/calendar/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
 
-//        BODY = json.remove("schedule").toString();
         LocalTime midnight = LocalTime.MIDNIGHT; // New Closure", "PUT", 
         LocalDate today = LocalDate.now();
         LocalDateTime todayMidnight = LocalDateTime.of(today, midnight);
@@ -52,11 +51,9 @@ class calendar extends API_GUI {
         JSONObject schedule = new JSONObject();
         schedule.put("schedule", schedule_details);
         schedule.put("data", data);
-
         JSONObject new_json = json;
         new_json.getJSONArray("events").put(schedule);
 
-        BODY = json.toString();
         BODY = new_json.toString();
         JOB_Api_Call("Calendar > /'BrandID'/ Override > New Closure", "PUT",
                 BaseAPI + "/calendar/" + BrandID, Auth, BODY, 200, ParentTest, "no_jira");

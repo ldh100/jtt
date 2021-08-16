@@ -26,8 +26,7 @@ class config extends API_GUI {
 //        JOB_Api_Call("config > /'AppID'", "GET", BaseAPI + "/config/" + AppID, Auth, "", 200, ParentTest, "no_jira");
 //        JOB_Api_Call("Public config > /'AppID'", "GET", BaseAPI + "/config/public/" + AppID, "", "", 200, ParentTest, "no_jira");
 
-        JOB_Api_Call(
-                "Config > /'SiteID'", "GET",
+        JOB_Api_Call("Config > /'SiteID'", "GET",
                 BaseAPI + "/config/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
         if (json != null) {
             try {
@@ -48,8 +47,7 @@ class config extends API_GUI {
             }
         }
 
-        JOB_Api_Call(
-                "Public Config > /'SiteID'", "GET",
+        JOB_Api_Call("Public Config > /'SiteID'", "GET",
                 BaseAPI + "/config/public/" + SiteID, "", "", 200, ParentTest, "no_jira");
 //{
 //    "promotions": [],
@@ -69,12 +67,10 @@ class config extends API_GUI {
 
 //        JOB_Api_Call("config > /'UnitID'", "GET", BaseAPI + "/config/" + UnitID, Auth, "", 200, ParentTest, "no_jira");
 //        JOB_Api_Call("Public config > /'UnitID'", "GET", BaseAPI + "/config/public/" + UnitID, "", "", 200, ParentTest, "no_jira");
-        JOB_Api_Call(
-                "Config > /'BrandID'", "GET",
+        JOB_Api_Call("Config > /'BrandID'", "GET",
                 BaseAPI + "/config/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
 
-        JOB_Api_Call(
-                "Public Config > /'BrandID'", "GET",
+        JOB_Api_Call("Public Config > /'BrandID'", "GET",
                 BaseAPI + "/config/public/" + BrandID, "", "", 200, ParentTest, "no_jira");
         if (json != null) {
             DELIEVERY_DESTINATIONS = new ArrayList<>();
@@ -309,6 +305,7 @@ class config extends API_GUI {
     }
 
     protected void configPublicAPIs() {
+
         //<editor-fold defaultstate="collapsed" desc="POST Config-public">
         // Test Scenario 1: Positive flow to POST Config-public - Add Mealplan
         BODY = "{"
