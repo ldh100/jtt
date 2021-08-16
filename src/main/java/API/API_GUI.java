@@ -670,7 +670,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String CompanyID = "";
     protected String GL_MENU = "";
     protected String GL_MENU_ID = "";
-
+    
+    protected String MEALPLAN_ID = "";
+    protected String MEALPLAN_TENDER = "";
+    
     protected String Bolter_Site_ID = "";
     protected String Market_Brand_ID = "";
 
@@ -3277,6 +3280,23 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setName("Notification - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }
+        
+        if (true) {
+            SCOPE += "Partner ";
+            EX += " - " + "\t" + "Partner" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Partner");
+            partner BR = new API.partner(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
+            ParentTest.getModel().setName("Partner - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
+        }        
 
         // =================  Mobile User, Payment, ShoppingCart, Order ===================
         if (true) {
