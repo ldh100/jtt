@@ -91,12 +91,12 @@ class order extends API_GUI{
         Date requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(BRAND_TIMESLOTS.size() - 1))*1000L);
         //Date requested_date = new Date(Long.parseLong(MENU_TIMESLOTS.get(MENU_TIMESLOTS.size() - 1))*1000L);
         
-        for(int j = 0;  j < BRAND_TIMESLOTS.size(); j++){ // Select earliest available toleslot - ASAP   >>> URC <> Local ????
-            if(Long.parseLong(BRAND_TIMESLOTS.get(j))*1000 > System.currentTimeMillis()){
-                requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(j))*1000L);
-                break;
-            }
-        }
+//        for(int j = 0;  j < BRAND_TIMESLOTS.size(); j++){ // Select earliest available timeslot - ASAP   >>> UTC <> Local ????
+//            if(Long.parseLong(BRAND_TIMESLOTS.get(j))*1000 > System.currentTimeMillis()){
+//                requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(j))*1000L);
+//                break;
+//            }
+//        }
 
         String Requested_Date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(requested_date);
 

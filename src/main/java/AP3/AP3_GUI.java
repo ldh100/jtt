@@ -187,6 +187,11 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         setMaximumSize(new java.awt.Dimension(858, 527));
         setMinimumSize(new java.awt.Dimension(858, 527));
         setName("AP3"); // NOI18N
+        try {
+            setSelected(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
         setVerifyInputWhenFocusTarget(false);
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -911,7 +916,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 420, 260));
 
-        getAccessibleContext().setAccessibleName("AP3_New");
+        getAccessibleContext().setAccessibleName("AP3");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -2968,27 +2973,28 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         }         
     }
     private void Send_AWS_Allert(boolean GUI){
-            JSONObject requestParams = new JSONObject();
-            JSONObject payload = new JSONObject();
-            JSONObject custom_details = new JSONObject();            
-                payload.put("summary", "AP3 - Login/Welcome Page Sanity Check Failed");
-                payload.put("source", "https://adminpanel.compassdigital.org/#/");                
-                payload.put("severity", "critical");
-                    custom_details.put("environment", env);
-                    custom_details.put("user", A.A.UserID);
-                    custom_details.put("host", A.A.WsID); 
-                    custom_details.put("test_type", "jtt_cron"); 
-                    custom_details.put("steps_total", _t);
-                    custom_details.put("steps_failed", _f);
-            payload.put("custom_details", custom_details);    
-            requestParams.put("payload", payload);
-            requestParams.put("routing_key", "AWS_Routing_Key");
-            requestParams.put("event_action", "trigger");
-            requestParams.put("client", "JTT - AWS Special Projects");
-            requestParams.put("client_url", "ec2-3-13-3-59.us-east-2.compute.amazonaws.com");
-            String BODY = requestParams.toString(4);
+        JSONObject requestParams = new JSONObject();
+        JSONObject payload = new JSONObject();
+        JSONObject custom_details = new JSONObject();            
+            payload.put("summary", "AP3 - Login/Welcome Page Sanity Check Failed");
+            payload.put("source", "https://adminpanel.compassdigital.org/#/");                
+            payload.put("severity", "critical");
+                custom_details.put("environment", env);
+                custom_details.put("user", A.A.UserID);
+                custom_details.put("host", A.A.WsID); 
+                custom_details.put("test_type", "jtt_cron"); 
+                custom_details.put("steps_total", _t);
+                custom_details.put("steps_failed", _f);
+                custom_details.put("failed_detail", F);
+        payload.put("custom_details", custom_details);    
+        requestParams.put("payload", payload);
+        requestParams.put("routing_key", "AWS_Routing_Key");
+        requestParams.put("event_action", "trigger");
+        requestParams.put("client", "JTT - AWS Special Projects");
+        requestParams.put("client_url", "ec2-3-13-3-59.us-east-2.compute.amazonaws.com");
+        String BODY = requestParams.toString(4);
 
-            Current_Log_Update(GUI, A.Func.AWS_ALERT(BODY));          
+        Current_Log_Update(GUI, A.Func.AWS_ALERT(BODY));          
     }
  
     // <editor-fold defaultstate="collapsed" desc="Driver Actions > Log Step Result">  
