@@ -70,16 +70,16 @@
                   </Group>
               </Group>
               <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblBDOFF" min="-2" pref="112" max="-2" attributes="0"/>
-                  <Component id="cmbDropOffLocations" min="-2" pref="114" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="lblSITES7" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtPROMO" min="-2" pref="120" max="-2" attributes="0"/>
-                  <Component id="cmbEnv" min="-2" pref="120" max="-2" attributes="0"/>
+                  <Component id="cmbEnv" max="32767" attributes="0"/>
+                  <Component id="cmbDropOffLocations" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtPROMO" alignment="0" max="32767" attributes="0"/>
+                  <Component id="lblBDOFF" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="lblSITES14" min="-2" pref="28" max="-2" attributes="0"/>
@@ -179,9 +179,9 @@
                       <Component id="txtPROMO" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       <Component id="btnPOrder" min="-2" pref="24" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnDOrder" min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
               </Group>

@@ -7,7 +7,11 @@ package Station;
 
 import static A.A.*;
 import A.Func;
+import com.aventstack.extentreports.ExtentTest;
 import com.google.common.base.Stopwatch;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -465,15 +469,15 @@ public class Station extends javax.swing.JInternalFrame {
                             .addComponent(lblSITES4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblSITES6))))
                 .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblBDOFF, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbDropOffLocations, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblSITES7)
-                    .addComponent(txtPROMO, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbEnv, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbDropOffLocations, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPROMO)
+                    .addComponent(lblBDOFF, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -550,9 +554,9 @@ public class Station extends javax.swing.JInternalFrame {
                         .addGap(2, 2, 2)
                         .addComponent(txtPROMO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
+                        .addGap(6, 6, 6)
                         .addComponent(btnPOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -824,18 +828,21 @@ public class Station extends javax.swing.JInternalFrame {
     }
 
     private void LOAD_ENV(){
-        if(cmbEnv.getSelectedItem().toString().contains("Staging")){
+        if (cmbEnv.getSelectedItem().toString().contains("Staging")) {
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
-            url = "https://dev.thriveapp.io/"; 
-        } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
+            url = "https://staging.adminpanel.compassdigital.org/";
+            FP_URL = "https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
+        } else if (cmbEnv.getSelectedItem().toString().contains("Dev")) {
             BaseAPI = "https://api.compassdigital.org/dev";
             env = "DE";
-            url = "https://dev.thriveapp.io/";
-        } else{
+            url = "https://dev.adminpanel.compassdigital.org/";
+            FP_URL = "https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
+        } else {
             BaseAPI = "https://api.compassdigital.org/v1";
             env = "PR";
-            url = "https://dev.thriveapp.io/";
+            url = "https://adminpanel.compassdigital.org/";
+            FP_URL = "https://cwallet.freedompay.com";
         }
         Get_AP3_TKN();
         LOAD_CONFIG();
@@ -1212,7 +1219,7 @@ public class Station extends javax.swing.JInternalFrame {
             } 
             DV_BTS.setModel(BTS_Model); 
             DV_BTS.setDefaultEditor(Object.class, null);
-            DV_BTS.getColumnModel().getColumn(0).setPreferredWidth(50);
+            DV_BTS.getColumnModel().getColumn(0).setPreferredWidth(55);
             DV_BTS.getColumnModel().getColumn(1).sizeWidthToFit();
 
         } catch (Exception ex) {
@@ -1371,7 +1378,7 @@ public class Station extends javax.swing.JInternalFrame {
             }   
             DV_MTS.setModel(MTS_Model);  
             DV_MTS.setDefaultEditor(Object.class, null);
-            DV_MTS.getColumnModel().getColumn(0).setPreferredWidth(50);
+            DV_MTS.getColumnModel().getColumn(0).setPreferredWidth(55);
             DV_MTS.getColumnModel().getColumn(1).sizeWidthToFit();
 
         } catch (Exception ex) {
@@ -1658,6 +1665,79 @@ public class Station extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     
+    protected void Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY) {
+        FAIL = false;
+        String Result = "?";
+        int status = 0;
+        String R_Time = "";
+        String ErrorMsg = "";
+        json = null;
+        RequestSpecification request;
+        request = RestAssured.given();
+        if (!AUTH.isEmpty()) {
+            request.header("Authorization", AUTH);
+        }
+        request.header("Content-Type", "application/json");
+        request.header("Accept", "application/json");
+        try {
+            if (sw1.isRunning()) {
+                sw1.reset();
+            }
+            _t++;
+            sw1.start();
+            Response response = null;
+            switch (Method) {
+                case "GET":
+                    if (BODY.equals("Bolter")) {
+                        request.header("From", "Bolter/1.0");
+                    }
+                    response = request.get(EndPoint);
+                    break;
+                case "POST":
+                    request.body(BODY);
+                    response = request.post(EndPoint);
+                    break;
+                case "PATCH":
+                    request.body(BODY);
+                    response = request.patch(EndPoint);
+                    break;
+                case "DELETE":
+                    request.body(BODY);
+                    response = request.delete(EndPoint);
+                    break;
+                case "PUT":
+                    request.body(BODY);
+                    response = request.put(EndPoint);
+                    break;
+                case "OPTIONS":
+                    response = request.options(EndPoint);
+                    break;
+                default:
+                    break;
+            }
+            Result = response.getStatusLine();
+            status = response.getStatusCode();
+
+            if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
+                json = new JSONObject(response.asString());
+                if (json.has("error")) {
+                    ErrorMsg = "Error: " + json.getString("error") + ". ";
+                }
+            }
+            R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
+            //
+        } catch (Exception ex) {
+            R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
+            _f++;
+            FAIL = true;
+            err = ex.getMessage().trim();
+            if (err.contains("\n")) {
+                (err = err.substring(0, err.indexOf("\n"))).trim();
+            }
+        }
+        sw1.reset();
+    }
+    
     private void Validate_Pleace_Order() {
         btnPOrder.setEnabled(false);
         btnDOrder.setEnabled(false);
@@ -1678,14 +1758,13 @@ public class Station extends javax.swing.JInternalFrame {
         }
     } 
     
-    
     private void Get_Mobile_User_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load User..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         String J = "==== User API(s):" + "\r\n";
-        userID = "";
-        userTKN = "";
+        Mobile_User_ID = "";
+        Mobile_User_TKN = "";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
         String Realm = Func.Realm_ID(cmbApp.getSelectedItem().toString(), env);
@@ -1710,8 +1789,8 @@ public class Station extends javax.swing.JInternalFrame {
             JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
             J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
 
-            userID = json.getString("user");
-            userTKN = json.getString("token");
+            Mobile_User_ID = json.getString("user");
+            Mobile_User_TKN = json.getString("token");
 
         } catch (IOException | JSONException ex) {
             txtLog.append(" > " + J); 
@@ -1719,18 +1798,50 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
         txtLog.append("== " + BaseAPI + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.append("== " + "UserID:"  + userID + "\r\n");
-        txtLog.append("== " + "UserTKN:"  + userTKN + "\r\n");
+        txtLog.append("== " + "UserID:"  + Mobile_User_ID + "\r\n");
+        txtLog.append("== " + "UserTKN:"  + Mobile_User_TKN + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }                                    
+    private void Delete_Payments(){
+        txtLog.append("- Delete_Payments..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                List<String> Payment_Methods_IDS = new ArrayList<>();
+        Auth = "Bearer " + Mobile_User_TKN;
+
+//        JOB_Api_Call("Mobile User Payment Method(s)", "GET",
+//                BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "", 200, ParentTest, "no_jira");
+        if (json != null) {
+            try {
+                if (json.has("payment_methods")) {
+                    JSONArray payment_methods = json.getJSONArray("payment_methods");
+                    for (int i = 0; i < payment_methods.length(); i++) {
+                        JSONObject p = payment_methods.getJSONObject(i);
+                        Payment_Methods_IDS.add(p.getString("token"));
+                    }
+                }
+            } catch (Exception ex) {
+                String AAAA = ex.getMessage();
+            }
+        }
+
+        BODY = "{\"user\":\"" + Mobile_User_ID + "\"}";
+        for (int i = 0; i < Payment_Methods_IDS.size(); i++) {
+            
+//            JOB_Api_Call("Mobile User Delete Payment Method " + (i + 1), "DELETE",
+//                    BaseAPI + "/payment/" + exact_id + "/method/" + Payment_Methods_IDS.get(i), Auth, BODY, 200, ParentTest, "no_jira");
+        }
+    }
+
+
+
     private void EXACT(){
         txtLog.append("- EXACT..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }
     private void FP(){
-         txtLog.append("- FP..." + "\r\n");
+        txtLog.append("- FP..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());       
     }
 
@@ -1800,13 +1911,17 @@ public class Station extends javax.swing.JInternalFrame {
 
 
 
-    // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
+    // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration">
     JSONArray JArray_MENUS;
     JSONArray JArray_CATS;
     JSONArray JArray_ITEMS; 
     
     private boolean Load;
     private static Duration DD;
+    
+    public static String COUNTRY = "COUNTRY";
+    public static String platform = "CDL";
+    public static String BaseAPI;
   
     private int SitesLastRow = -1; 
     private int BrandsLastRow = -1; 
@@ -1816,16 +1931,17 @@ public class Station extends javax.swing.JInternalFrame {
     
     private boolean CONFIG = false;
     private String C = "";
-    private String userID;
-    private String userTKN;
-    public static int T_Index;
-    private String Last_EX;    
+    protected String MOBILE_ID = "";
+    protected String MOBILE_PW = "";
+    protected String Mobile_User_ID = "";
+    protected String Mobile_User_TKN = "";
+
+    public static int T_Index;   
     public static Stopwatch sw1 = Stopwatch.createUnstarted();
     public static DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
     public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     public static String SQL = ""; 
-    private String SCOPE;
     public static String WO_TKN = "";    
     public static String url = "";
     public static String app = "";
@@ -1836,14 +1952,29 @@ public class Station extends javax.swing.JInternalFrame {
     public static String GROUP = "";
     public static String BRAND = "";
     public static String BrandID = "";
+    
+    protected JSONObject json;
+    protected String BODY = "";   
+    //  "exact": {
+    protected String exact_gateway_password = "~RSQzgwC";
+    protected String exact_gateway_id = "AE7628-02";
+    protected String exact_id = "APE3Ev9vQkfo2mmOpKP7fGJ48NKAPOugo0gdlWJqS3O";
+    protected String exate_gateway_password = "";
+    //  "freedompay": {
+    protected String freedompay_id = "9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO";
+    protected String freedompay_terminal_id = "26241559005";
+    protected String freedompay_store_id = "16167424007";
+    protected String FP_URL = ""; //https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
+    
+    protected String ShoppingCart_Delivery_ID = "";
+    protected String Order_Delivery_ID = "";
+    protected String ShoppingCart_Pickup_ID = "";
+    protected String Order_Pickup_ID = "";
+    
+    protected String Auth = "";
+    protected String EXACT_Payment_TKN = "";
+    protected String FP_Payment_TKN = "";
 
-    public static String COUNTRY = "COUNTRY";
-
-    public static String platform = "CDL";
-    public static String BaseAPI;
-    public static String TZone; 
-    public static String PROMO; 
-    public static String New_ID = "";
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">  

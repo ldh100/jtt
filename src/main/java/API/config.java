@@ -16,13 +16,15 @@ class config extends API_GUI {
         Promo_Voucher_Id = a.Promo_Voucher_Id;
         Promo_Voucher_Code = a.Promo_Voucher_Code;
         ParentTest = a.ParentTest;
-        MEALPLAN_ID = a.MEALPLAN_ID;
-        MEALPLAN_TENDER = a.MEALPLAN_TENDER;
     }
-    private String fake_Site_Id = "thisisfakesiteidtopreventdatachnage123";
-
+    
+    //This fake site ID has used to prevent original modification to site.
+    private final String fake_Site_Id = "thisisfakesiteidtopreventdatachnage123";
+    private String AAA = "";
+    
     protected void run() {
-        //This fake site ID has used to prevent original modification to site.
+        MEALPLAN_ID = "";
+        MEALPLAN_TENDER = "";
 
         Auth = "Bearer " + AP3_TKN;   // =============== config(s) ===================================
 //        JOB_Api_Call("config > /'AppID'", "GET", BaseAPI + "/config/" + AppID, Auth, "", 200, ParentTest, "no_jira");
@@ -45,56 +47,54 @@ class config extends API_GUI {
                     exact_id = p.getJSONObject("exact").getString("id");
                 }
             } catch (Exception ex) {
-                String AAAA = ex.getMessage();
+                AAA = ex.getMessage();
             }
         }
 
         JOB_Api_Call("Public Config > /'SiteID'", "GET",
                 BaseAPI + "/config/public/" + SiteID, "", "", 200, ParentTest, "no_jira");
-//{
-//    "promotions": [],
-//    "mealplan": [{
-//        "note": {},
-//        "tenders": [{
-//            "tax_exempt": false,
-//            "id": "1001",
-//            "type": "declining_balance"
-//        }],
-//        "name": "CBORD",
-//        "id": "PBeOojlNRlFRPk5d6DgjSNjgOm8oyBSARdMGp1WZUe7WEkzgw2UlX4GPEzYjhQ9zAXk8R6Fz3OGql3RouB7QYN4E1ZtMJ2",
-//        "valid_email_domains": [],
-//        "type": "CBORD DIRECT"
-//    }]
-//}        
+        //{
+        //    "promotions": [],
+        //    "mealplan": [{
+        //        "note": {},
+        //        "tenders": [{
+        //            "tax_exempt": false,
+        //            "id": "1001",
+        //            "type": "declining_balance"
+        //        }],
+        //        "name": "CBORD",
+        //        "id": "PBeOojlNRlFRPk5d6DgjSNjgOm8oyBSARdMGp1WZUe7WEkzgw2UlX4GPEzYjhQ9zAXk8R6Fz3OGql3RouB7QYN4E1ZtMJ2",
+        //        "valid_email_domains": [],
+        //        "type": "CBORD DIRECT"
+        //    }]
+        //}   
+
+        //Getting the meal plan ID and Tender_ID
+        
+        if (json != null) {  
+            AAA = json.toString(4);
+            try {
+                if (json.has("mealplan")) {
+                    JSONArray mealplan = json.getJSONArray("mealplan");                    
+                    MEALPLAN_ID = mealplan.getJSONObject(0).getString("id");                          
+
+                    JSONObject td = mealplan.getJSONObject(0);
+                    if (td.has("tenders")) {
+                        JSONArray tenders = td.getJSONArray("tenders");  
+                        if(!tenders.getJSONObject(0).isNull("id")){
+                            MEALPLAN_TENDER = tenders.getJSONObject(0).getString("id");  
+                        }
+                    }
+                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }
+
 
 //        JOB_Api_Call("config > /'UnitID'", "GET", BaseAPI + "/config/" + UnitID, Auth, "", 200, ParentTest, "no_jira");
 //        JOB_Api_Call("Public config > /'UnitID'", "GET", BaseAPI + "/config/public/" + UnitID, "", "", 200, ParentTest, "no_jira");
 
-//Getting the meal plan ID and Tender_ID
-        
-//        if (json != null) {           
-//            try {
-//              if (json.has("mealplan")) {
-//                   JSONArray mealplan = json.getJSONArray("mealplan");
-//                    for (int i = 0; i < mealplan.length(); i++) {
-//                        JSONObject mp = mealplan.getJSONObject(i);                        
-//                        MEALPLAN_ID = mp.getString("id");                          
-//                    }
-//                        JSONObject td = mealplan.getJSONObject(mealplan.length()-1);
-//                        if (td.has("tenders")) {
-//                          JSONArray tenders = td.getJSONArray("tenders"); 
-//                          for (int i = 0; i < tenders.length(); i++) {
-//                           JSONObject tender = tenders.getJSONObject(i);                        
-//                            MEALPLAN_TENDER = tender.getString("tender_number");                         
-//                    }
-//                        }
-//                    }
-//            }
-//            catch (Exception ex) {
-//            }
-//        }
-
-        
         JOB_Api_Call("Config > /'BrandID'", "GET",
                 BaseAPI + "/config/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
 
@@ -107,9 +107,8 @@ class config extends API_GUI {
                 for (int i = 0; i < DESTINATIONS.length(); i++) {
                     DELIEVERY_DESTINATIONS.add(DESTINATIONS.getString(i));
                 }
-
             } catch (Exception ex) {
-                String AAA = ex.getMessage();
+                AAA = ex.getMessage();
             }
         }
 
