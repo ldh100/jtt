@@ -33,17 +33,18 @@ public class DL_insights extends DL_GUI {
                 Element_Text("Tabs name", L0.get(j), ParentTest, "no_jira");
             }
             Element_By_Path_Click("Click on 'Settings' icon", "xpath", "//button[@class='MuiButtonBase-root MuiIconButton-root']", ParentTest, "no_jira");
-            Thread.sleep(4000);
+            Thread.sleep(20000);
             Element_By_Path_Click("Click on 'Cancel' button", "xpath", "//span[contains(text(),'Cancel')]/..", ParentTest, "no_jira");
             Wait_For_Element_By_Path_Presence("Wait for Show More Chevron", "xpath", "//*[contains(text(),'Show ')]", ParentTest, "no_jira");
             if (FAIL) {
                 return;
             }
             Element_By_Path_Click("Click on 'Show More' Chevron", "xpath", "//*[contains(text(),'Show ')]", ParentTest, "no_jira");
-            Element_E1_Find("Verify whether the Graph is displayed or not", "xpath", "(//*[@class='MuiCollapse-container MuiCollapse-entered'])[2]", ParentTest, "no_jira");
+//            Element_E1_Find("Verify whether the Graph is displayed or not", "xpath", "(//*[@class='MuiCollapse-container MuiCollapse-entered'])[2]", ParentTest, "no_jira");
             Element_By_Path_Click("Click on 'Show Less' Chevron", "xpath", "//*[contains(text(),'Show ')]", ParentTest, "no_jira");
-            Element_E1_Find("Verify whether the Graph is displayed or not", "xpath", "//*[@class='MuiCollapse-container MuiCollapse-hidden']", ParentTest, "no_jira");
-            e1.isEnabled();
+//             Wait_For_Element_By_Path_Presence("Wait for Graph", "xpath", "//*[@class='MuiCollapse-container MuiCollapse-hidden']", ParentTest, "no_jira");
+//            Element_E1_Find("Verify whether the Graph is displayed or not", "xpath", "//*[@class='MuiCollapse-container MuiCollapse-hidden']", ParentTest, "no_jira");
+//            e1.isEnabled();
             Element_E1_Find("Verify whether the Back button is disabled or not", "xpath", "//span[contains(text(),'Back')]/..", ParentTest, "no_jira");
             System.out.println(e1.isEnabled());
             //System.out.println();
