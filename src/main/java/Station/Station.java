@@ -100,19 +100,19 @@ public class Station extends javax.swing.JInternalFrame {
         lblSITES7 = new javax.swing.JLabel();
         txtPROMO = new javax.swing.JTextField();
         lblBDOFF = new javax.swing.JLabel();
-        cmbDropOffLocations = new javax.swing.JComboBox<>();
         btnDOrder = new javax.swing.JButton();
         btnPOrder = new javax.swing.JButton();
+        cmbLoc = new javax.swing.JComboBox<>();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
         setTitle("Site > Station > Menu >>> loading, please wait ... ... ... ...");
-        setMaximumSize(new java.awt.Dimension(864, 527));
-        setMinimumSize(new java.awt.Dimension(864, 527));
+        setMaximumSize(new java.awt.Dimension(850, 527));
+        setMinimumSize(new java.awt.Dimension(850, 527));
         setName("Station"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
-        setPreferredSize(new java.awt.Dimension(864, 527));
+        setPreferredSize(new java.awt.Dimension(850, 527));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -140,10 +140,12 @@ public class Station extends javax.swing.JInternalFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblSITES.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblSITES.setText("Sites");
         lblSITES.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 4, 360, -1));
 
         DV_Sites.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV_Sites.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -169,6 +171,8 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV_Sites);
 
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 376, 268));
+
         DV_Brands.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Brands.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -193,6 +197,8 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV_Brands);
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 288, 376, 112));
+
         txtLog.setEditable(false);
         txtLog.setColumns(20);
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
@@ -202,6 +208,8 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLog);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 400, 376, 104));
 
         DV_MTS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_MTS.setModel(new javax.swing.table.DefaultTableModel(
@@ -225,9 +233,12 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane4.setViewportView(DV_MTS);
 
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 216, 84, 184));
+
         lblMenus.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblMenus.setText("Click Brand to get Menu(s) ...");
         lblMenus.setAlignmentX(0.5F);
+        getContentPane().add(lblMenus, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 4, 280, -1));
 
         DV_Categories.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Categories.setModel(new javax.swing.table.DefaultTableModel(
@@ -253,6 +264,8 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane5.setViewportView(DV_Categories);
 
+        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 116, 384, 80));
+
         DV_Items.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Items.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -277,6 +290,8 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane6.setViewportView(DV_Items);
 
+        getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 196, 384, 92));
+
         DV_Mods.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Mods.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -296,6 +311,8 @@ public class Station extends javax.swing.JInternalFrame {
         DV_Mods.getTableHeader().setReorderingAllowed(false);
         jScrollPane7.setViewportView(DV_Mods);
 
+        getContentPane().add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 288, 384, 112));
+
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
         btnLog.setMargin(new java.awt.Insets(2, 4, 2, 4));
@@ -304,6 +321,7 @@ public class Station extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
+        getContentPane().add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 480, 44, 22));
 
         DV_Menus.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Menus.setModel(new javax.swing.table.DefaultTableModel(
@@ -328,6 +346,8 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane8.setViewportView(DV_Menus);
 
+        getContentPane().add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 384, 96));
+
         DV_BTS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_BTS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -351,11 +371,15 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane9.setViewportView(DV_BTS);
 
+        getContentPane().add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 20, 84, 176));
+
         lblMTS.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblMTS.setText("Menu Timeslots");
+        getContentPane().add(lblMTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 200, 84, 16));
 
         lblBTS.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblBTS.setText("Brand Timeslots");
+        getContentPane().add(lblBTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 4, 80, -1));
 
         btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSave_Opt.setText("Save Setup");
@@ -366,11 +390,13 @@ public class Station extends javax.swing.JInternalFrame {
                 btnSave_OptMouseClicked(evt);
             }
         });
+        getContentPane().add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 480, 76, 22));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES13.setText("Env:");
         lblSITES13.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 484, 28, 16));
 
         cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbEnv.addItemListener(new java.awt.event.ItemListener() {
@@ -378,11 +404,13 @@ public class Station extends javax.swing.JInternalFrame {
                 cmbEnvItemStateChanged(evt);
             }
         });
+        getContentPane().add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 480, 120, 20));
 
         lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES14.setText("App:");
         lblSITES14.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 480, 28, 16));
 
         cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbApp.addItemListener(new java.awt.event.ItemListener() {
@@ -390,43 +418,44 @@ public class Station extends javax.swing.JInternalFrame {
                 cmbAppItemStateChanged(evt);
             }
         });
+        getContentPane().add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(732, 480, 112, 20));
 
         lblSITES4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES4.setText("Mobile User E-mail:");
         lblSITES4.setToolTipText("");
         lblSITES4.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 400, 108, -1));
 
         txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_ID.setText("App_User@?.?");
+        getContentPane().add(txtMobile_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 416, 176, -1));
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES6.setText("Mobile User Password");
         lblSITES6.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 436, -1, -1));
 
         txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_PW.setText("password");
+        getContentPane().add(txtMobile_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 452, 176, -1));
 
         lblSITES7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES7.setText("Promo Code");
         lblSITES7.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 436, -1, -1));
 
         txtPROMO.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtPROMO.setText("None");
+        getContentPane().add(txtPROMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 452, 120, -1));
 
         lblBDOFF.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblBDOFF.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblBDOFF.setText("Drop Off Locations");
         lblBDOFF.setAlignmentX(0.5F);
-
-        cmbDropOffLocations.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbDropOffLocations.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbDropOffLocationsItemStateChanged(evt);
-            }
-        });
+        getContentPane().add(lblBDOFF, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 400, 112, -1));
 
         btnDOrder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnDOrder.setText("Place Delivery Order");
@@ -436,6 +465,7 @@ public class Station extends javax.swing.JInternalFrame {
                 btnDOrderMouseClicked(evt);
             }
         });
+        getContentPane().add(btnDOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 444, 144, 24));
 
         btnPOrder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnPOrder.setText("Place Pickup Order");
@@ -445,146 +475,15 @@ public class Station extends javax.swing.JInternalFrame {
                 btnPOrderMouseClicked(evt);
             }
         });
+        getContentPane().add(btnPOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 412, 144, 24));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnLog)
-                        .addGap(8, 8, 8)
-                        .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSITES4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSITES6))))
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblSITES7)
-                    .addComponent(cmbEnv, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbDropOffLocations, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPROMO)
-                    .addComponent(lblBDOFF, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)
-                                .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnDOrder, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(2, 2, 2))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(lblSITES, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(lblMenus, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(lblBTS, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblMTS, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSITES)
-                    .addComponent(lblMenus)
-                    .addComponent(lblBTS))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(lblMTS, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblBDOFF)
-                        .addGap(2, 2, 2)
-                        .addComponent(cmbDropOffLocations, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(lblSITES7)
-                        .addGap(2, 2, 2)
-                        .addComponent(txtPROMO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(btnPOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(480, 480, 480)
-                .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(400, 400, 400)
-                .addComponent(lblSITES4)
-                .addGap(2, 2, 2)
-                .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(lblSITES6)
-                .addGap(2, 2, 2)
-                .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(400, 400, 400)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        cmbLoc.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmbLoc.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbLocItemStateChanged(evt);
+            }
+        });
+        getContentPane().add(cmbLoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 416, 120, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -683,10 +582,6 @@ public class Station extends javax.swing.JInternalFrame {
         Load_Form();
     }//GEN-LAST:event_formAncestorAdded
 
-    private void cmbDropOffLocationsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDropOffLocationsItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbDropOffLocationsItemStateChanged
-
     private void btnPOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPOrderMouseClicked
         PLACE_ORDERS("P");
     }//GEN-LAST:event_btnPOrderMouseClicked
@@ -694,6 +589,10 @@ public class Station extends javax.swing.JInternalFrame {
     private void btnDOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDOrderMouseClicked
         PLACE_ORDERS("D");
     }//GEN-LAST:event_btnDOrderMouseClicked
+
+    private void cmbLocItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbLocItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbLocItemStateChanged
 
     private void Load_Form(){
         Load = true;
@@ -1139,7 +1038,7 @@ public class Station extends javax.swing.JInternalFrame {
             sw1.reset();
         }
         sw1.start();        
-        cmbDropOffLocations.removeAllItems();
+        cmbLoc.removeAllItems();
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/config/public/" + BrandID); 
@@ -1159,7 +1058,7 @@ public class Station extends javax.swing.JInternalFrame {
             if(json.has("delivery_destinations")) {
                 JSONArray DESTINATIONS = json.getJSONArray("delivery_destinations");
                 for (int i = 0; i < DESTINATIONS.length(); i++) {
-                    cmbDropOffLocations.addItem(DESTINATIONS.getString(i));
+                    cmbLoc.addItem(DESTINATIONS.getString(i));
                 }
             }
         } catch (Exception ex) {
@@ -1174,7 +1073,6 @@ public class Station extends javax.swing.JInternalFrame {
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } 
-        lblBDOFF.setText("Brand Drop Off Locations " + cmbDropOffLocations.getItemCount());
         txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();            
@@ -1252,6 +1150,7 @@ public class Station extends javax.swing.JInternalFrame {
         DV_Categories.setModel(M);
         DV_Items.setModel(M);
         DV_Mods.setModel(M);
+        DV_MTS.setModel(M);
         MenusLastRow = -1;
         String[] ColumnsName = {"Menu Label (en)", "Response", "Id"}; 
         DefaultTableModel Model = new DefaultTableModel();
@@ -1743,7 +1642,7 @@ public class Station extends javax.swing.JInternalFrame {
         btnDOrder.setEnabled(false);
         if(DV_Items.getSelectedRowCount() > 0 && (DV_BTS.getSelectedRowCount() > 0 || DV_MTS.getSelectedRowCount() > 0)){
             btnPOrder.setEnabled(true);
-            if(cmbDropOffLocations.getSelectedItem().toString().trim() != ""){
+            if(cmbLoc.getSelectedItem().toString().trim() != ""){
                 btnDOrder.setEnabled(true);
             }
         }
@@ -1992,8 +1891,8 @@ public class Station extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPOrder;
     private javax.swing.JButton btnSave_Opt;
     private javax.swing.JComboBox<String> cmbApp;
-    private javax.swing.JComboBox<String> cmbDropOffLocations;
     private javax.swing.JComboBox<String> cmbEnv;
+    private javax.swing.JComboBox<String> cmbLoc;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
