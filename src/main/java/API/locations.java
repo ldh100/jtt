@@ -58,8 +58,7 @@ class locations extends API_GUI {
                         break;
                     }
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 //
             }
         }
@@ -85,8 +84,7 @@ class locations extends API_GUI {
                     }
                 }
                 BrandIDS = BrandIDS.substring(0, BrandIDS.length() - 1);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 String AAA = ex.getMessage();
             }
         }
@@ -96,15 +94,14 @@ class locations extends API_GUI {
                 BaseAPI + "/location/" + UnitID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
         if (json != null) {
             try {
-                if (json.has("meta" )) {
+                if (json.has("meta")) {
                     UnitNum = json.getJSONObject("meta").getNumber("unit").toString();
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 String AAA = ex.getMessage();
             }
         }
-        
+
         Auth = "";                      // ===============    AP3 Brand ===========================
         JOB_Api_Call("Location > /'BrandID'", "GET",
                 BaseAPI + "/location/brand/" + BrandID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
@@ -125,8 +122,7 @@ class locations extends API_GUI {
                 if (json.has("company")) {
                     CompanyID = json.getString("company");
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 //
             }
         }
@@ -136,9 +132,9 @@ class locations extends API_GUI {
 
         Auth = "Bearer " + AP3_TKN;  // ===============    AP3 Brand Timeslots ===========================
         JOB_Api_Call("Location/brand > /'BrandID' > /timeslots", "GET",
-                BaseAPI + "/location/brand/" + BrandID + "/timeslots", Auth, "", 200, ParentTest, "no_jira");        
-        BRAND_TIMESLOTS = new ArrayList<>(); 
-        if(json != null){
+                BaseAPI + "/location/brand/" + BrandID + "/timeslots", Auth, "", 200, ParentTest, "no_jira");
+        BRAND_TIMESLOTS = new ArrayList<>();
+        if (json != null) {
             try {
                 if (json.has("timeslots")) {
                     JSONArray timeslots = json.getJSONArray("timeslots");
@@ -146,15 +142,15 @@ class locations extends API_GUI {
                         JSONObject timeslot = timeslots.getJSONObject(i);
                         BRAND_TIMESLOTS.add(timeslot.getNumber("id").toString());
                     }
-                } 
+                }
             } catch (Exception ex) {
                 String AAAA = ex.getMessage();
             }
-        }  
+        }
         JOB_Api_Call("Brand > Timeslots > 1st Menu > /timeslots/menu/'MenuID'", "GET",
-            BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MENU_IDS.get(MENU_IDS.size() - 1) + "?nocache=1&extended=true", Auth, "", 200, ParentTest, "no_jira" );
+                BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MENU_IDS.get(MENU_IDS.size() - 1) + "?nocache=1&extended=true", Auth, "", 200, ParentTest, "no_jira");
         MENU_TIMESLOTS = new ArrayList<>();
-        if(json != null){
+        if (json != null) {
             try {
                 if (json.has("timeslots")) {
                     JSONArray timeslots = json.getJSONArray("timeslots");
@@ -162,17 +158,17 @@ class locations extends API_GUI {
                         JSONObject timeslot = timeslots.getJSONObject(i);
                         MENU_TIMESLOTS.add(timeslot.getNumber("id").toString());
                     }
-                } 
+                }
             } catch (Exception ex) {
                 String AAAA = ex.getMessage();
             }
-        }        
+        }
         if (env != "PR") {
-            //groupAPIs();
-            //locationAPIs();
-            //brandAPIs();
-            //sectorAPIs();
-            //companyAPIs();
+//            groupAPIs();
+//            locationAPIs();
+//            brandAPIs();
+//            sectorAPIs();
+//            companyAPIs();
         }
 
     }
@@ -202,8 +198,7 @@ class locations extends API_GUI {
         if (json != null) {
             try {
                 New_SiteID = json.getString("id");
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
             }
         }
 
@@ -277,8 +272,7 @@ class locations extends API_GUI {
         if (json != null) {
             try {
                 New_DropOff_LocationID = json.getString("id");
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
             }
         }
 
@@ -443,7 +437,6 @@ class locations extends API_GUI {
                 + "},"
                 + "\"name\":\"\"}";
         JOB_Api_Call("Location - PATCH Negative flow to update group/site without Name", "PATCH", BaseAPI + "/location/group/" + New_SiteID, Auth, BODY, 400, ParentTest, "no_jira");
-
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="GET by ID's">
@@ -458,7 +451,6 @@ class locations extends API_GUI {
 
         // Test Scenario 4: Getdrop-off location by group id.
         JOB_Api_Call("Location - Get newly created drop-off location by Id :-" + New_SiteID + " ", "GET", BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, "", 200, ParentTest, "no_jira");
-
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Delete drop-off location">
@@ -501,8 +493,7 @@ class locations extends API_GUI {
         if (json != null) {
             try {
                 New_Business_UnitID = json.getString("id");
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
             }
         }
 
@@ -647,8 +638,7 @@ class locations extends API_GUI {
         if (json != null) {
             try {
                 New_BrandID = json.getString("id");
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
             }
         }
         // Test Scenario 2: Positive flow to Add public config to new Brand/Station
@@ -994,8 +984,7 @@ class locations extends API_GUI {
         if (json != null) {
             try {
                 New_SecotorID = json.getString("id");
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
             }
         }
         // Test Scenario 2: Negative flow to post new Sector/group without Name
@@ -1003,7 +992,6 @@ class locations extends API_GUI {
                 + "\"name\":\"\""
                 + "}";
         JOB_Api_Call("Location - POST negative flow to create Sector/Group without Name", "POST", BaseAPI + "/location/sector", Auth, BODY, 400, ParentTest, "no_jira");
-
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="PUT/Update  Newly created Sector/Group">
@@ -1022,7 +1010,6 @@ class locations extends API_GUI {
                 + "\"country\":\"CA\""
                 + "}";
         JOB_Api_Call("Location - PATCH negative flow to update Sector/Group without name", "PATCH", BaseAPI + "/location/sector/" + New_SecotorID, Auth, BODY, 400, ParentTest, "no_jira");
-
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="GET  Newly created Sector/Group by ID">
@@ -1050,8 +1037,7 @@ class locations extends API_GUI {
         if (json != null) {
             try {
                 New_CompanyID = json.getString("id");
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
             }
         }
         // Test Scenario 2: Negative flow to post new Company/Global Menu without valid sector ID
@@ -1078,7 +1064,6 @@ class locations extends API_GUI {
                 + "}"
                 + "}";
         JOB_Api_Call("Location - POST negative flow to add Company/Global Menu with empty name", "POST", BaseAPI + "/location/company", Auth, BODY, 400, ParentTest, "no_jira");
-
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="PUT/Update  Newly created Company/Global Menu">

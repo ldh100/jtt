@@ -46,23 +46,42 @@ class user_mobile extends API_GUI{
             BaseAPI + "/user/" + Mobile_User_ID, Auth, "", 200, ParentTest, "no_jira");          
         
         BODY = "{\"phone\":" + "1" + NewID + "}";                       //  Update Mobile user Phone
-        JOB_Api_Call("Mobile User - Update Phone", "PUT", 
+        JOB_Api_Call("Mobile User - Update Phone", "PATCH", 
             BaseAPI + "/user/" + Mobile_User_ID, Auth, BODY, 200, ParentTest, "no_jira");
         
         BODY = "{\"gender\":" + "male" + "}";                           //  Update Mobile user Gender
-        JOB_Api_Call("Mobile User - Update Gender", "PUT", 
-            BaseAPI + "/user/" + Mobile_User_ID, Auth, BODY, 200, ParentTest, "no_jira");        
+        JOB_Api_Call("Mobile User - Update Gender", "PATCH", 
+            BaseAPI + "/user/" + Mobile_User_ID, Auth, BODY, 200, ParentTest, "no_jira");   
         
+        BODY = "{\"name\":" +                                         //  Change First/Last Name  =================
+               "{\"first\":\"API\",\"last\":\"Testing\"}," + 
+            "\"realm\":\"" + Realm + "\"}";                        
+        JOB_Api_Call("Mobile User - Change First/Last Name", "PUT", 
+            BaseAPI + "/user/" + Mobile_User_ID, Auth, BODY, 200, ParentTest, "no_jira");           
+        
+        BODY = "{\"name\":" +                                         //  Update Email Notification Options  =================
+               "{\"first\":\"API\",\"last\":\"Testing\"}," + 
+                "\"realm\":\"" + Realm + "\"" +
+                "\"meta\": " +
+                    "{\"marketing_opt_in_source\":\"App\"," +
+                    "\"order_status_notification\":{\"send_emails\":true}," +
+                    "\"marketing_opt_in\":false}" +
+                "\"}";                         
+        JOB_Api_Call("Mobile User - Update Email Notification Options", "PUT", 
+            BaseAPI + "/user/" + Mobile_User_ID, Auth, BODY, 200, ParentTest, "no_jira"); 
+
         JOB_Api_Call("Mobile User Zendesk JWT token", "GET", 
             BaseAPI + "/user/zendesk", Auth, "", 200, ParentTest, "no_jira");         
 
-        JOB_Api_Call("Mobile User Send Email Verification", "POST",   //  Mobile User Email Verification ================
-            BaseAPI + "/user/" + Mobile_User_ID + "/verification?realm=" + Realm, Auth, "", 200, ParentTest, "no_jira");   
-        String verification_token = "";
+        if(env.equals("DE")){ // not in Staging, Production yet
+            JOB_Api_Call("Mobile User Send Email Verification", "POST",   //  Mobile User Email Verification ================
+                BaseAPI + "/user/" + Mobile_User_ID + "/verification?realm=" + Realm, Auth, "", 200, ParentTest, "no_jira");   
+            String verification_token = "";
+        }
         
         BODY = "{\"email\":\"" + MOBILE_ID + "\"," +            //  Mobile User Forgot Password ================
                 "\"type\":\"" + "forgot_password" + "\"}";
-        JOB_Api_Call("Mobile New User - Forgot password", "POST", 
+        JOB_Api_Call("Mobile User - Forgot password", "POST", 
             BaseAPI + "/user/forgotpassword?realm=" + Realm, Auth, BODY, 200, ParentTest, "no_jira");          
 
         BODY = "{\"name\":" +                                    //  New Mobile User > Email Exists  =================
@@ -73,26 +92,24 @@ class user_mobile extends API_GUI{
             "\"password\":\"" + "Zxtsaq9ppnppvbyi11f0nk" + "\"}";
         JOB_Api_Call("Mobile Create New User > Email Already Exists", "POST", 
             BaseAPI + "/user", Auth, BODY, 409, ParentTest, "no_jira"); 
-                
-//        BODY = "{\"name\":" +                                       //  New Mobile User ===============================
-//                "{\"first\":\"Jtt\",\"last\":\"Automation\"}," + 
-//            "\"email\":\"" + "a_" + NewID + "@gmail.com" + "\"," +
-//            "\"phone\":" + "1" + NewID + "," +
-//            "\"realm\":\"" + Realm + "\"," +
-//            "\"password\":\"" + "Zxtsaq9ppnppvbyi11f0nk" + "\"}";
-//        JOB_Api_Call("Mobile User - Create New", "POST", 
-//            BaseAPI + "/user", Auth, BODY, 200, ParentTest, "no_jira"); 
-//        String New_User_ID = "";
-//        if(json != null){ 
-//            try {
-//                if(json.has("id")) New_User_ID = json.getString("id"); 
-//            } catch (Exception ex){
-//                String AAAA = ex.getMessage();
-//            }
-//        } 
-
-//        Auth = "Bearer " + AP3_TKN;
-//        JOB_Api_Call("New Mobile User - Delete", "DELETE", // Mobile User Delete ===============================
-//            BaseAPI + "/user/" + New_User_ID, Auth, "", 200, ParentTest, "no_jira");          
+              
+        if (env != "PR") {        
+            BODY = "{\"name\":" +                                       //  New Mobile User ===============================
+                    "{\"first\":\"Jtt\",\"last\":\"Automation\"}," + 
+                "\"email\":\"" + "a_" + NewID + "@gmail.com" + "\"," +
+                "\"phone\":" + "1" + NewID + "," +
+                "\"realm\":\"" + Realm + "\"," +
+                "\"password\":\"" + "Zxtsaq9ppnppvbyi11f0nk" + "\"}";
+            JOB_Api_Call("Mobile User - Create New", "POST", 
+                BaseAPI + "/user", Auth, BODY, 200, ParentTest, "no_jira"); 
+            String New_User_ID = "";
+            if(json != null){ 
+                try {
+                    if(json.has("id")) New_User_ID = json.getString("id"); 
+                } catch (Exception ex){
+                    String AAAA = ex.getMessage();
+                }
+            } 
+        }    
     }
 }

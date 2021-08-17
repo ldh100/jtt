@@ -16,6 +16,8 @@
 package AP3;
 
 import java.time.LocalDateTime;
+import java.util.Iterator;
+import java.util.Set;
 import org.json.JSONObject;
 
 class AP3_password extends AP3_GUI {
@@ -41,10 +43,10 @@ class AP3_password extends AP3_GUI {
         
         AP3_TKN = a.AP3_TKN;
         _All_data = a._All_data;
-        New_ID = a.New_ID;
-        TZone = a.TZone;
+        New_ID = a.New_ID;        
+        TZone = a.TZone;               
     }        
-    private final String eMail = "ds_" + New_ID + "@mailinator.com";
+    private final String eMail = New_ID+"_ds@mailinator.com";
     private final String passWord1="Dhruv891111111"; //At least 15 characters
     private final String passWord2="dhruvseth251215"; //An uppercase character
     private final String passWord3="DHRUVSETH251215"; //A lowercase character
@@ -62,7 +64,8 @@ class AP3_password extends AP3_GUI {
 
 //**AUT-845 After creating an Admin user, sign up to Ap3 with the new user and login to ap3 with the new user **
 
-/*
+try{ 
+    
 clickNewUser();
 //Selecting role as admin and creating a new admin user
 createNewAdminUser();
@@ -93,7 +96,8 @@ passwordsDontMatch();
 setValidPassword();
 //Clicking on the Set Password button
 clickSetPassword();
-_t++; Thread.sleep((long)sleep);Close_Current_Tab_switch_To_1st("Close child window, ParentTest, "no_jira");
+Thread.sleep(1000);
+Close_Current_Tab_switch_To_1st("Close child window", ParentTest, "no_jira");
 d1.switchTo().window(childId).close();
 d1.switchTo().window(parentId);
 ap3LoginPage();
@@ -128,7 +132,7 @@ setNewValidPassword();
 //Clicking on the Set Password button
 clickSetPassword();
 Thread.sleep(5000);
-_t++; Thread.sleep((long)sleep);Close_Current_Tab_switch_To_1st("Close child window, ParentTest, "no_jira");
+Close_Current_Tab_switch_To_1st("Close child window", ParentTest, "no_jira");
 d1.switchTo().window(childId).close();
 d1.switchTo().window(parentId);
 //Admin User logging in with the registered email and new password (After reset Password)
@@ -148,13 +152,13 @@ click_User_Active();
 getUser_API(U_ID);
 SearchUser();
 deleteUser();
-Refresh("Refresh, ParentTest, "no_jira");
+Refresh("Refresh page", ParentTest, "no_jira");
 verify_User_Deleted_API(U_ID);
 
 //logout();
 //ap3LoginPage();
 
-*/
+
 
 // AUT-847 After creating CDL delivery manager user, sign up to Ap3 with the new user and login to ap3 with the new user **
 
@@ -415,7 +419,11 @@ getUsers_API(U_ID);
 
 */
 //</editor-fold>
-    } //Run time closing bracket so add all the methods before this..      
+
+} catch (Exception ex){}   // =============================================  
+    } //Run time closing bracket so add all the methods before this..    
+    
+    
     
     //AUT-840 : As an Admin, I can reset my password and login to Ap3 with the new password    
     protected void ap3LoginPage() {

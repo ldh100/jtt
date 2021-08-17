@@ -16,8 +16,7 @@ class announcement extends API_GUI {
     }
 
     protected void run() {
-        Auth = "Bearer " + AP3_TKN;   // =============== AP3 announcement ===========================
-        // String Announcement_ID = "";
+        Auth = "Bearer " + AP3_TKN;   
         ANNOUNCEMENT_IDS = new ArrayList<>();
         //<editor-fold defaultstate="collapsed" desc=" GET all Announcement ">
         // Test Scenario 1: Positive get all announcement
@@ -121,7 +120,7 @@ class announcement extends API_GUI {
             }
         }
 
-        // Test Scenario 3: Positive flow for post announcement without English Version
+        // Test Scenario 4: Positive flow for post announcement without English Version
         BODY = "{\"name\":\"This is API test for Announcement without English Version\","
                 + "\"type\":\"Promotions\","
                 + "\"key\":\"" + AppID + "\","
@@ -147,7 +146,7 @@ class announcement extends API_GUI {
             }
         }
 
-        // Test Scenario 4: Negative flow for post announcement without Announcement Type
+        // Test Scenario 5: Negative flow for post announcement without Announcement Type
         BODY = "{\"name\":\"This is API test for Announcement with Status = Active\","
                 + "\"type\":\"\","
                 + "\"key\":\"" + AppID + "\","
@@ -166,7 +165,7 @@ class announcement extends API_GUI {
                 + "}}";
         JOB_Api_Call("Announcement - Negative flow to POST new announcement without Announcement Type", "POST", BaseAPI + "/announcement", Auth, BODY, 400, ParentTest, "no_jira");
 
-        // Test Scenario 5: Negative flow for post announcement without Announcement Site/Key
+        // Test Scenario 6: Negative flow for post announcement without Announcement Site/Key
         BODY = "{\"name\":\"This is API test for Announcement with Status = Active\","
                 + "\"type\":\"Promotions\","
                 + "\"key\":\"\","
@@ -185,7 +184,7 @@ class announcement extends API_GUI {
                 + "}}";
         JOB_Api_Call("Announcement - Negative flow to POST new announcement without Announcement Site/Key", "POST", BaseAPI + "/announcement", Auth, BODY, 400, ParentTest, "no_jira");
 
-        // Test Scenario 6: Negative flow for post without value for Position
+        // Test Scenario 7: Negative flow for post without value for Position
         BODY = "{\"name\":\"This is API test for Announcement with Status = Active\","
                 + "\"type\":\"Promotions\","
                 + "\"key\":\"\","

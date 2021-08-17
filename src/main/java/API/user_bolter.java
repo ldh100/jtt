@@ -17,7 +17,10 @@ class user_bolter extends API_GUI{
         Bolter_Site_ID = a.Bolter_Site_ID;
         NewID = a.NewID;
         ParentTest = a.ParentTest;
+        Order_Delivery_ID = a.Order_Delivery_ID;
+        Order_Pickup_ID = a.Order_Pickup_ID;
     }
+    String AAA = "";
     protected void run() {  
         Auth = "Basic " + Base64.getEncoder().encodeToString(("WrongID" + ":" + RUNNER_PW).getBytes());
         JOB_Api_Call("Bolter Authentication - Wrong ID> /user/auth?realm=bolter", "GET", 
@@ -30,13 +33,16 @@ class user_bolter extends API_GUI{
         Auth = "Basic " + Base64.getEncoder().encodeToString((RUNNER_ID + ":" + RUNNER_PW).getBytes());
         JOB_Api_Call("Bolter Authentication > /user/auth?realm=bolter", "GET", 
             BaseAPI + "/user/auth" + "?realm=" + "bolter", Auth, "Bolter", 200, ParentTest, "no_jira");
-
-        if(json != null && json.has("profile")){
-            Bolter_Site_ID = json.getJSONObject("profile").getString("location_group"); 
-        }else{
-            if(json.has("error")){
-                Bolter_Site_ID = "Not Found";
-            }
+        if(json != null){
+            if(json.has("user")) Bolter_User_ID = json.getString("user"); 
+            if(json.has("token")) Bolter_User_TKN = json.getString("token");  
+            if(json.has("profile")){    
+                Bolter_Site_ID = json.getJSONObject("profile").getString("location_group"); 
+            }else{
+                if(json.has("error")){
+                    Bolter_Site_ID = "Not Found";
+                }
+            } 
         } 
         if(Bolter_Site_ID != "Not Found") { 
             BolterBrandIDS = new ArrayList<>();
@@ -55,8 +61,9 @@ class user_bolter extends API_GUI{
                     }
                 }
             } catch (Exception ex){
-                //
+                AAA = ex.getMessage();
             }
         }
+        
     }
 }
