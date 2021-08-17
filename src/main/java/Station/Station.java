@@ -7,7 +7,11 @@ package Station;
 
 import static A.A.*;
 import A.Func;
+import com.aventstack.extentreports.ExtentTest;
 import com.google.common.base.Stopwatch;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -21,12 +25,17 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
+import javax.swing.DefaultListModel;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
@@ -91,18 +100,19 @@ public class Station extends javax.swing.JInternalFrame {
         lblSITES7 = new javax.swing.JLabel();
         txtPROMO = new javax.swing.JTextField();
         lblBDOFF = new javax.swing.JLabel();
-        cmbDropOffLocations = new javax.swing.JComboBox<>();
         btnDOrder = new javax.swing.JButton();
         btnPOrder = new javax.swing.JButton();
+        cmbLoc = new javax.swing.JComboBox<>();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
         setTitle("Site > Station > Menu >>> loading, please wait ... ... ... ...");
-        setMaximumSize(new java.awt.Dimension(860, 532));
-        setMinimumSize(new java.awt.Dimension(860, 532));
+        setMaximumSize(new java.awt.Dimension(850, 527));
+        setMinimumSize(new java.awt.Dimension(850, 527));
         setName("Station"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
+        setPreferredSize(new java.awt.Dimension(850, 527));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -114,20 +124,20 @@ public class Station extends javax.swing.JInternalFrame {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameClosed(evt);
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -214,7 +224,6 @@ public class Station extends javax.swing.JInternalFrame {
         DV_MTS.setCellSelectionEnabled(true);
         DV_MTS.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV_MTS.setName("DV_MTS"); // NOI18N
-        DV_MTS.setOpaque(false);
         DV_MTS.setRowHeight(18);
         DV_MTS.getTableHeader().setReorderingAllowed(false);
         DV_MTS.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -352,8 +361,8 @@ public class Station extends javax.swing.JInternalFrame {
         DV_BTS.setCellSelectionEnabled(true);
         DV_BTS.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV_BTS.setName("DV_BTS"); // NOI18N
-        DV_BTS.setOpaque(false);
         DV_BTS.setRowHeight(18);
+        DV_BTS.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         DV_BTS.getTableHeader().setReorderingAllowed(false);
         DV_BTS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -448,23 +457,33 @@ public class Station extends javax.swing.JInternalFrame {
         lblBDOFF.setAlignmentX(0.5F);
         getContentPane().add(lblBDOFF, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 400, 112, -1));
 
-        cmbDropOffLocations.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbDropOffLocations.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbDropOffLocationsItemStateChanged(evt);
-            }
-        });
-        getContentPane().add(cmbDropOffLocations, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 416, 114, 20));
-
         btnDOrder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnDOrder.setText("Place Delivery Order");
         btnDOrder.setEnabled(false);
+        btnDOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDOrderMouseClicked(evt);
+            }
+        });
         getContentPane().add(btnDOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 444, 144, 24));
 
         btnPOrder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnPOrder.setText("Place Pickup Order");
         btnPOrder.setEnabled(false);
+        btnPOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPOrderMouseClicked(evt);
+            }
+        });
         getContentPane().add(btnPOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 412, 144, 24));
+
+        cmbLoc.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmbLoc.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbLocItemStateChanged(evt);
+            }
+        });
+        getContentPane().add(cmbLoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 416, 120, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -485,6 +504,9 @@ public class Station extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void DV_BrandsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_BrandsMouseClicked
+        if(DV_Brands.getRowCount() < 1){
+            return;
+        }
         BRAND = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 0));
         BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3));
 
@@ -492,7 +514,7 @@ public class Station extends javax.swing.JInternalFrame {
         GetBrandTimeslots();        // ===================================
         GetMenus();                 // ===================================
         BrandsLastRow = DV_Brands.getSelectedRow();   
-
+        Validate_Pleace_Order();
     }//GEN-LAST:event_DV_BrandsMouseClicked
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
@@ -526,7 +548,9 @@ public class Station extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbAppItemStateChanged
 
     private void DV_MTSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_MTSMouseClicked
-        // Clear BTS selection, select valid MTS slot
+        if(DV_MTS.getRowCount() > 0 && DV_BTS.getRowCount() > 0){
+            DV_BTS.clearSelection();
+        }
     }//GEN-LAST:event_DV_MTSMouseClicked
 
     private void DV_CategoriesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_CategoriesMouseClicked
@@ -540,22 +564,35 @@ public class Station extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_DV_ItemsMouseClicked
 
     private void DV_MenusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_MenusMouseClicked
+        if(DV_Menus.getRowCount() < 1){
+            return;
+        }
         GetMenuTimeslots();
         GetCategories();
         CategoriesLastRow = DV_Categories.getSelectedRow();
     }//GEN-LAST:event_DV_MenusMouseClicked
 
     private void DV_BTSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_BTSMouseClicked
-        // Clear MTS selection, select valid BTS slot
+        if(DV_MTS.getRowCount() > 0 && DV_BTS.getRowCount() > 0){
+            DV_MTS.clearSelection();
+        }
     }//GEN-LAST:event_DV_BTSMouseClicked
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
         Load_Form();
     }//GEN-LAST:event_formAncestorAdded
 
-    private void cmbDropOffLocationsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDropOffLocationsItemStateChanged
+    private void btnPOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPOrderMouseClicked
+        PLACE_ORDERS("P");
+    }//GEN-LAST:event_btnPOrderMouseClicked
+
+    private void btnDOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDOrderMouseClicked
+        PLACE_ORDERS("D");
+    }//GEN-LAST:event_btnDOrderMouseClicked
+
+    private void cmbLocItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbLocItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmbDropOffLocationsItemStateChanged
+    }//GEN-LAST:event_cmbLocItemStateChanged
 
     private void Load_Form(){
         Load = true;
@@ -581,19 +618,130 @@ public class Station extends javax.swing.JInternalFrame {
         this.setTitle("Site > Station(Brand) > Menu(s)");
     }
 
+    private void LOAD_CONFIG(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'Station' AND [env] = '" + env + "'";
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(SQL);
+            rs.next();
+            C = rs.getString(1);
+            conn.close();
+        } catch (Exception ex) {
+            CONFIG = false;
+            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            return;
+        }
+            
+        try{            
+            if (C.contains(": ")) {
+                String c;
+                c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
+
+                c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("COUNTRY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); COUNTRY = c.substring(c.indexOf(" ")).trim();
+                c = C.substring(C.indexOf("txtMobile_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_ID.setText(c.substring(c.indexOf(" ")).trim());
+                c = C.substring(C.indexOf("txtMobile_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
+
+                CONFIG = true;
+                txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            } else {
+                CONFIG = false;
+                txtLog.append("=== Station, User: " + UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            }
+        } catch (Exception ex) {
+            CONFIG = false;
+            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+    private void SAVE_CONFIG() {
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        String _S = "n/a";
+        String _B = "n/a";
+        try {
+            if(DV_Sites.getRowCount() > 0){
+                _S = DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 0).toString();
+            }
+            if(DV_Brands.getRowCount() > 0){
+                _B = DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 0).toString();
+            }
+            C = "";
+            C += "env: " + env + "\r\n";
+            C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
+            C += "url: " + url + "\r\n";
+            
+            C += "SITE: " + _S + "\r\n";
+            C += "BRAND: " + _B + "\r\n";
+            C += "COUNTRY: " + COUNTRY + "\r\n"; 
+            C += "txtMobile_ID: " + txtMobile_ID.getText().trim() + "\r\n";
+            C += "txtMobile_PW: " + txtMobile_PW.getText()  + "\r\n";
+
+        } catch (Exception ex)  {
+            txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            return;
+        }
+        
+        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+            SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'Station' AND [env] = '" + env + "'";
+            Statement _del = conn.createStatement();
+            _del.execute(SQL);
+            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
+                    "([user_id]" +   // 1
+                    ",[env]" +       // 2
+                    ",[platform]" +  // 3
+                    ",[app]" +       // 4
+                    ",[_conf]" +     // 5
+                    ") VALUES (" +
+                    "?" +
+                    ",?" +
+                    ",?" +
+                    ",?" +
+                    ",?" +
+                    ")");
+            _insert.setString(1, UserID);
+            _insert.setString(2, env);
+            _insert.setString(3, "WEB");
+            _insert.setString(4, "Station");
+            _insert.setString(5, C);
+            int row = _insert.executeUpdate();
+            conn.close(); 
+            
+            txtLog.append("=== SAVE_CONFIG > OK (" + row + " row)" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+
+        } catch (SQLException ex) {
+            txtLog.append("=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+
     private void LOAD_ENV(){
-        if(cmbEnv.getSelectedItem().toString().contains("Staging")){
+        if (cmbEnv.getSelectedItem().toString().contains("Staging")) {
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
-            url = "https://dev.thriveapp.io/"; 
-        } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
+            url = "https://staging.adminpanel.compassdigital.org/";
+            FP_URL = "https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
+        } else if (cmbEnv.getSelectedItem().toString().contains("Dev")) {
             BaseAPI = "https://api.compassdigital.org/dev";
             env = "DE";
-            url = "https://dev.thriveapp.io/";
-        } else{
+            url = "https://dev.adminpanel.compassdigital.org/";
+            FP_URL = "https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
+        } else {
             BaseAPI = "https://api.compassdigital.org/v1";
             env = "PR";
-            url = "https://dev.thriveapp.io/";
+            url = "https://adminpanel.compassdigital.org/";
+            FP_URL = "https://cwallet.freedompay.com";
         }
         Get_AP3_TKN();
         LOAD_CONFIG();
@@ -747,7 +895,8 @@ public class Station extends javax.swing.JInternalFrame {
         if (SitesLastRow == DV_Sites.getSelectedRow()) {
            return;
         }
-
+        btnPOrder.setEnabled(false);
+        btnDOrder.setEnabled(false);
         BrandsLastRow = -1;
         SitesLastRow = DV_Sites.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -889,7 +1038,7 @@ public class Station extends javax.swing.JInternalFrame {
             sw1.reset();
         }
         sw1.start();        
-        cmbDropOffLocations.removeAllItems();
+        cmbLoc.removeAllItems();
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/config/public/" + BrandID); 
@@ -909,7 +1058,7 @@ public class Station extends javax.swing.JInternalFrame {
             if(json.has("delivery_destinations")) {
                 JSONArray DESTINATIONS = json.getJSONArray("delivery_destinations");
                 for (int i = 0; i < DESTINATIONS.length(); i++) {
-                    cmbDropOffLocations.addItem(DESTINATIONS.getString(i));
+                    cmbLoc.addItem(DESTINATIONS.getString(i));
                 }
             }
         } catch (Exception ex) {
@@ -924,7 +1073,6 @@ public class Station extends javax.swing.JInternalFrame {
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } 
-        lblBDOFF.setText("Brand Drop Off Locations " + cmbDropOffLocations.getItemCount());
         txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();            
@@ -939,10 +1087,9 @@ public class Station extends javax.swing.JInternalFrame {
             sw1.reset();
         }
         sw1.start();        
-     
-        String[] BrandsColumnsName = {"Time"}; 
+        String[] ColumnsName = {"Time", "epoch"}; 
         DefaultTableModel BTS_Model = new DefaultTableModel();
-        BTS_Model.setColumnIdentifiers(BrandsColumnsName);
+        BTS_Model.setColumnIdentifiers(ColumnsName);
         DV_BTS.setModel(BTS_Model);        
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
@@ -965,11 +1112,14 @@ public class Station extends javax.swing.JInternalFrame {
                 JSONArray timeslots = json.getJSONArray("timeslots");
                 for (int i = 0; i < timeslots.length(); i++) {
                     JSONObject timeslot = timeslots.getJSONObject(i);
-                    Date date = new Date(timeslot.getLong("id")*1000);
-                    BTS_Model.addRow(new Object[]{sdf.format(date)});
+                    BTS_Model.addRow(new Object[]{sdf.format(new Date(timeslot.getLong("id")*1000)), timeslot.getLong("id")});
                 }
             } 
-            DV_BTS.getColumnModel().getColumn(0).sizeWidthToFit();
+            DV_BTS.setModel(BTS_Model); 
+            DV_BTS.setDefaultEditor(Object.class, null);
+            DV_BTS.getColumnModel().getColumn(0).setPreferredWidth(55);
+            DV_BTS.getColumnModel().getColumn(1).sizeWidthToFit();
+
         } catch (Exception ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
@@ -982,6 +1132,9 @@ public class Station extends javax.swing.JInternalFrame {
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } 
+        if(DV_BTS.getRowCount() > 0){
+            DV_BTS.changeSelection(0, 0, false, false);
+        }        
         lblBTS.setText("Brand Slots " + DV_BTS.getRowCount());
         txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -997,6 +1150,7 @@ public class Station extends javax.swing.JInternalFrame {
         DV_Categories.setModel(M);
         DV_Items.setModel(M);
         DV_Mods.setModel(M);
+        DV_MTS.setModel(M);
         MenusLastRow = -1;
         String[] ColumnsName = {"Menu Label (en)", "Response", "Id"}; 
         DefaultTableModel Model = new DefaultTableModel();
@@ -1081,17 +1235,19 @@ public class Station extends javax.swing.JInternalFrame {
      
         GetMenuTimeslots();
         GetCategories();
-        MenusLastRow = DV_Menus.getSelectedRow();     
+        MenusLastRow = DV_Menus.getSelectedRow();  
+        Validate_Pleace_Order();
     }
     private void GetMenuTimeslots(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Menu Timeslots ..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());         if(sw1.isRunning()){
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();        
+        sw1.start();  
         String MenuID = String.valueOf(DV_Menus.getValueAt(DV_Menus.getSelectedRow(), 2));
-        String[] BrandsColumnsName = {"Time"}; 
+        String[] BrandsColumnsName = {"Time", "epoch"}; 
         DefaultTableModel MTS_Model = new DefaultTableModel();
         MTS_Model.setColumnIdentifiers(BrandsColumnsName);
         DV_MTS.setModel(MTS_Model);        
@@ -1116,12 +1272,14 @@ public class Station extends javax.swing.JInternalFrame {
                 JSONArray timeslots = json.getJSONArray("timeslots");
                 for (int i = 0; i < timeslots.length(); i++) {
                     JSONObject timeslot = timeslots.getJSONObject(i);
-                    Date date = new Date(timeslot.getLong("id")*1000);
-                    
-                    MTS_Model.addRow(new Object[]{sdf.format(date)});
+                    MTS_Model.addRow(new Object[]{sdf.format(new Date(timeslot.getLong("id")*1000)), timeslot.getLong("id")});
                 }
             }   
-            DV_MTS.getColumnModel().getColumn(0).sizeWidthToFit();
+            DV_MTS.setModel(MTS_Model);  
+            DV_MTS.setDefaultEditor(Object.class, null);
+            DV_MTS.getColumnModel().getColumn(0).setPreferredWidth(55);
+            DV_MTS.getColumnModel().getColumn(1).sizeWidthToFit();
+
         } catch (Exception ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
@@ -1379,7 +1537,8 @@ public class Station extends javax.swing.JInternalFrame {
                             }else{
                                 price = "Not Found";
                             }
-                            if(OItem.has("nutrition") && OItem.getJSONObject("nutrition").has("calories")){
+                            if(OItem.has("nutrition") && OItem.getJSONObject("nutrition").has("calories") &&
+                                    OItem.getJSONObject("nutrition").getJSONObject("calories").has("amount")){                                
                                 cal = OItem.getJSONObject("nutrition").getJSONObject("calories").getNumber("amount").toString();
                             }else{
                                 cal = "Not Found";
@@ -1404,125 +1563,264 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-
-    private void LOAD_CONFIG(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'Station' AND [env] = '" + env + "'";
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery(SQL);
-            rs.next();
-            C = rs.getString(1);
-            conn.close();
-        } catch (Exception ex) {
-            CONFIG = false;
-            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            return;
+    
+    protected void Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY) {
+        FAIL = false;
+        String Result = "?";
+        int status = 0;
+        String R_Time = "";
+        String ErrorMsg = "";
+        json = null;
+        RequestSpecification request;
+        request = RestAssured.given();
+        if (!AUTH.isEmpty()) {
+            request.header("Authorization", AUTH);
         }
-            
-        try{            
-            if (C.contains(": ")) {
-                String c;
-                c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
-
-                c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("COUNTRY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); COUNTRY = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("txtMobile_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtMobile_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
-
-                CONFIG = true;
-                txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            } else {
-                CONFIG = false;
-                txtLog.append("=== Station, User: " + UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-        } catch (Exception ex) {
-            CONFIG = false;
-            txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }
-    private void SAVE_CONFIG() {
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        String _S = "n/a";
-        String _B = "n/a";
+        request.header("Content-Type", "application/json");
+        request.header("Accept", "application/json");
         try {
-            if(DV_Sites.getRowCount() > 0){
-                _S = DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 0).toString();
+            if (sw1.isRunning()) {
+                sw1.reset();
             }
-            if(DV_Brands.getRowCount() > 0){
-                _B = DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 0).toString();
+            _t++;
+            sw1.start();
+            Response response = null;
+            switch (Method) {
+                case "GET":
+                    if (BODY.equals("Bolter")) {
+                        request.header("From", "Bolter/1.0");
+                    }
+                    response = request.get(EndPoint);
+                    break;
+                case "POST":
+                    request.body(BODY);
+                    response = request.post(EndPoint);
+                    break;
+                case "PATCH":
+                    request.body(BODY);
+                    response = request.patch(EndPoint);
+                    break;
+                case "DELETE":
+                    request.body(BODY);
+                    response = request.delete(EndPoint);
+                    break;
+                case "PUT":
+                    request.body(BODY);
+                    response = request.put(EndPoint);
+                    break;
+                case "OPTIONS":
+                    response = request.options(EndPoint);
+                    break;
+                default:
+                    break;
             }
-            C = "";
-            C += "env: " + env + "\r\n";
-            C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
-            C += "url: " + url + "\r\n";
-            
-            C += "SITE: " + _S + "\r\n";
-            C += "BRAND: " + _B + "\r\n";
-            C += "COUNTRY: " + COUNTRY + "\r\n"; 
-            C += "txtMobile_ID: " + txtMobile_ID.getText().trim() + "\r\n";
-            C += "txtMobile_PW: " + txtMobile_PW.getText()  + "\r\n";
+            Result = response.getStatusLine();
+            status = response.getStatusCode();
 
-        } catch (Exception ex)  {
-            txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            return;
+            if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
+                json = new JSONObject(response.asString());
+                if (json.has("error")) {
+                    ErrorMsg = "Error: " + json.getString("error") + ". ";
+                }
+            }
+            R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
+            //
+        } catch (Exception ex) {
+            R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
+            _f++;
+            FAIL = true;
+            err = ex.getMessage().trim();
+            if (err.contains("\n")) {
+                (err = err.substring(0, err.indexOf("\n"))).trim();
+            }
         }
-        
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'Station' AND [env] = '" + env + "'";
-            Statement _del = conn.createStatement();
-            _del.execute(SQL);
-            PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
-                    "([user_id]" +   // 1
-                    ",[env]" +       // 2
-                    ",[platform]" +  // 3
-                    ",[app]" +       // 4
-                    ",[_conf]" +     // 5
-                    ") VALUES (" +
-                    "?" +
-                    ",?" +
-                    ",?" +
-                    ",?" +
-                    ",?" +
-                    ")");
-            _insert.setString(1, UserID);
-            _insert.setString(2, env);
-            _insert.setString(3, "WEB");
-            _insert.setString(4, "Station");
-            _insert.setString(5, C);
-            int row = _insert.executeUpdate();
-            conn.close(); 
-            
-            txtLog.append("=== SAVE_CONFIG > OK (" + row + " row)" + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-
-        } catch (SQLException ex) {
-            txtLog.append("=== SAVE_CONFIG > SQL ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        sw1.reset();
     }
-  
-    // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
+    
+    private void Validate_Pleace_Order() {
+        btnPOrder.setEnabled(false);
+        btnDOrder.setEnabled(false);
+        if(DV_Items.getSelectedRowCount() > 0 && (DV_BTS.getSelectedRowCount() > 0 || DV_MTS.getSelectedRowCount() > 0)){
+            btnPOrder.setEnabled(true);
+            if(cmbLoc.getSelectedItem().toString().trim() != ""){
+                btnDOrder.setEnabled(true);
+            }
+        }
+    }
+    private void PLACE_ORDERS(String TYPE){
+        Get_Mobile_User_TKN();
+        if(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 2).toString().toLowerCase().startsWith("c")){
+             EXACT();
+        }
+        if(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 2).toString().toLowerCase().startsWith("u")){
+            FP();
+        }
+    } 
+    
+    private void Get_Mobile_User_TKN(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("- Load User..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        String J = "==== User API(s):" + "\r\n";
+        Mobile_User_ID = "";
+        Mobile_User_TKN = "";
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
+        String Realm = Func.Realm_ID(cmbApp.getSelectedItem().toString(), env);
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();        
+        
+        try {     // ============ User
+            HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm);
+            httpget.setHeader("Authorization", "Basic " + UserAuth);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 500) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
+
+            Mobile_User_ID = json.getString("user");
+            Mobile_User_TKN = json.getString("token");
+
+        } catch (IOException | JSONException ex) {
+            txtLog.append(" > " + J); 
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        }
+        txtLog.append("== " + BaseAPI + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.append("== " + "UserID:"  + Mobile_User_ID + "\r\n");
+        txtLog.append("== " + "UserTKN:"  + Mobile_User_TKN + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        sw1.reset();
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }                                    
+    private void Delete_Payments(){
+        txtLog.append("- Delete_Payments..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                List<String> Payment_Methods_IDS = new ArrayList<>();
+        Auth = "Bearer " + Mobile_User_TKN;
+
+//        JOB_Api_Call("Mobile User Payment Method(s)", "GET",
+//                BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "", 200, ParentTest, "no_jira");
+        if (json != null) {
+            try {
+                if (json.has("payment_methods")) {
+                    JSONArray payment_methods = json.getJSONArray("payment_methods");
+                    for (int i = 0; i < payment_methods.length(); i++) {
+                        JSONObject p = payment_methods.getJSONObject(i);
+                        Payment_Methods_IDS.add(p.getString("token"));
+                    }
+                }
+            } catch (Exception ex) {
+                String AAAA = ex.getMessage();
+            }
+        }
+
+        BODY = "{\"user\":\"" + Mobile_User_ID + "\"}";
+        for (int i = 0; i < Payment_Methods_IDS.size(); i++) {
+            
+//            JOB_Api_Call("Mobile User Delete Payment Method " + (i + 1), "DELETE",
+//                    BaseAPI + "/payment/" + exact_id + "/method/" + Payment_Methods_IDS.get(i), Auth, BODY, 200, ParentTest, "no_jira");
+        }
+    }
+
+
+
+    private void EXACT(){
+        txtLog.append("- EXACT..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+    }
+    private void FP(){
+        txtLog.append("- FP..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());       
+    }
+
+
+//        Auth = "Bearer " + Mobile_User_TKN;
+//        Date requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(BRAND_TIMESLOTS.size() - 1))*1000L);
+//        //Date requested_date = new Date(Long.parseLong(MENU_TIMESLOTS.get(MENU_TIMESLOTS.size() - 1))*1000L);
+//        
+
+//
+//        String Requested_Date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(requested_date);
+//
+//        requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
+//        requestParams.put("location_brand", BrandID);
+//        requestParams.put("customer", Mobile_User_ID);
+//        requestParams.put("pickup_name", "JTT API Test Pickup");
+//        requestParams.put("pickup", Requested_Date);
+//        requestParams.put("requested_date", Requested_Date);
+//        requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
+//        JSONObject payment = new JSONObject();
+//        payment.put("token", EXACT_Payment_TKN);
+//        requestParams.put("payment", payment); 
+//        BODY = requestParams.toString();        
+//        JOB_Api_Call("Place Pickup Order", "POST", 
+//            BaseAPI + "/order?lang=en", Auth, BODY, 200, ParentTest, "no_jira");
+//        if(json != null && json.has("id")){
+//            Order_Pickup_ID = json.getString("id");
+//        }   
+//
+
+//        Auth = "Bearer " + Mobile_User_TKN;
+//        BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
+//                "\"location_brand\":\"" + BrandID + "\"," + 
+//                "\"customer\":\"" + Mobile_User_ID + "\"," +  
+//                "\"details\":" +                                   
+//                    "{\"contact_number\":\"4165551234\"," +
+//                    "\"destination\":\"" + DELIEVERY_DESTINATIONS.get(0) + "\"," +
+//                    "\"duration\":\"" + "00:05:00" + "\"," +
+//                    "\"instructions\":\"" + "Discard this Order" + "\"," +
+//                    "\"name\":\"" + "JTT API Test Delivery" + "\"," +
+//                    "\"order_type\":\"delivery\"}," + 
+//                "\"payment\":" + 
+//                    "{\"token\":\"" + EXACT_Payment_TKN + "\"}," +
+//                "\"requested_date\":\"" + Requested_Date + "\"," +
+//                "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
+//                "\"}";        
+//        JOB_Api_Call("Place Delivery Order", "POST", 
+//            BaseAPI + "/order", Auth, BODY, 200, ParentTest, "no_jira");
+//        if(json != null && json.has("id")){
+//            Order_Delivery_ID = json.getString("id");
+//        }               
+//        
+//        Auth = "Bearer " + AP3_TKN;
+//        requestParams = new JSONObject();   //  Mobile User Update Delivery Order  =================
+//        JSONObject is = new JSONObject();
+//        is.put("in_progress", true);
+//        is.put("ready", true);
+//        //is.put("out_for_delivery", true);        
+//        requestParams.put("is", is); 
+//        BODY = requestParams.toString();
+//        JOB_Api_Call("Update Delivery Order Status - ready", "PATCH", 
+//            BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");        
+//        if(json != null){           
+//            AAA = json.toString(4);  // Check actual update
+//        }         
+//    }
+
+
+
+    // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration">
     JSONArray JArray_MENUS;
     JSONArray JArray_CATS;
-    JSONArray JArray_ITEMS;
-    private List<String> BRAND_TIMESLOTS;
-    private List<String> MENU_TIMESLOTS;
-    private List<String> DELIEVERY_DESTINATIONS;    
+    JSONArray JArray_ITEMS; 
     
     private boolean Load;
     private static Duration DD;
+    
+    public static String COUNTRY = "COUNTRY";
+    public static String platform = "CDL";
+    public static String BaseAPI;
   
     private int SitesLastRow = -1; 
     private int BrandsLastRow = -1; 
@@ -1532,16 +1830,17 @@ public class Station extends javax.swing.JInternalFrame {
     
     private boolean CONFIG = false;
     private String C = "";
-    private String userID;
-    private String userTKN;
-    public static int T_Index;
-    private String Last_EX;    
+    protected String MOBILE_ID = "";
+    protected String MOBILE_PW = "";
+    protected String Mobile_User_ID = "";
+    protected String Mobile_User_TKN = "";
+
+    public static int T_Index;   
     public static Stopwatch sw1 = Stopwatch.createUnstarted();
     public static DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
     public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     public static String SQL = ""; 
-    private String SCOPE;
     public static String WO_TKN = "";    
     public static String url = "";
     public static String app = "";
@@ -1552,14 +1851,29 @@ public class Station extends javax.swing.JInternalFrame {
     public static String GROUP = "";
     public static String BRAND = "";
     public static String BrandID = "";
+    
+    protected JSONObject json;
+    protected String BODY = "";   
+    //  "exact": {
+    protected String exact_gateway_password = "~RSQzgwC";
+    protected String exact_gateway_id = "AE7628-02";
+    protected String exact_id = "APE3Ev9vQkfo2mmOpKP7fGJ48NKAPOugo0gdlWJqS3O";
+    protected String exate_gateway_password = "";
+    //  "freedompay": {
+    protected String freedompay_id = "9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO";
+    protected String freedompay_terminal_id = "26241559005";
+    protected String freedompay_store_id = "16167424007";
+    protected String FP_URL = ""; //https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
+    
+    protected String ShoppingCart_Delivery_ID = "";
+    protected String Order_Delivery_ID = "";
+    protected String ShoppingCart_Pickup_ID = "";
+    protected String Order_Pickup_ID = "";
+    
+    protected String Auth = "";
+    protected String EXACT_Payment_TKN = "";
+    protected String FP_Payment_TKN = "";
 
-    public static String COUNTRY = "COUNTRY";
-
-    public static String platform = "CDL";
-    public static String BaseAPI;
-    public static String TZone; 
-    public static String PROMO; 
-    public static String New_ID = "";
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">  
@@ -1577,8 +1891,8 @@ public class Station extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPOrder;
     private javax.swing.JButton btnSave_Opt;
     private javax.swing.JComboBox<String> cmbApp;
-    private javax.swing.JComboBox<String> cmbDropOffLocations;
     private javax.swing.JComboBox<String> cmbEnv;
+    private javax.swing.JComboBox<String> cmbLoc;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

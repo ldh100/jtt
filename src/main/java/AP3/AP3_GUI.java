@@ -187,6 +187,11 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         setMaximumSize(new java.awt.Dimension(858, 527));
         setMinimumSize(new java.awt.Dimension(858, 527));
         setName("AP3"); // NOI18N
+        try {
+            setSelected(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
         setVerifyInputWhenFocusTarget(false);
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -911,7 +916,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 420, 260));
 
-        getAccessibleContext().setAccessibleName("AP3_New");
+        getAccessibleContext().setAccessibleName("AP3");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

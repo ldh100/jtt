@@ -17,11 +17,12 @@
       <Dimension value="[858, 527]"/>
     </Property>
     <Property name="name" type="java.lang.String" value="AP3" noResource="true"/>
+    <Property name="selected" type="boolean" value="true"/>
     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
     <Property name="visible" type="boolean" value="true"/>
   </Properties>
   <AccessibilityProperties>
-    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="AP3_New"/>
+    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="AP3"/>
   </AccessibilityProperties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
