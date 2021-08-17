@@ -16,6 +16,8 @@ class config extends API_GUI {
         Promo_Voucher_Id = a.Promo_Voucher_Id;
         Promo_Voucher_Code = a.Promo_Voucher_Code;
         ParentTest = a.ParentTest;
+        MEALPLAN_ID = a.MEALPLAN_ID;
+        MEALPLAN_TENDER = a.MEALPLAN_TENDER;
     }
     private String fake_Site_Id = "thisisfakesiteidtopreventdatachnage123";
 
@@ -67,6 +69,32 @@ class config extends API_GUI {
 
 //        JOB_Api_Call("config > /'UnitID'", "GET", BaseAPI + "/config/" + UnitID, Auth, "", 200, ParentTest, "no_jira");
 //        JOB_Api_Call("Public config > /'UnitID'", "GET", BaseAPI + "/config/public/" + UnitID, "", "", 200, ParentTest, "no_jira");
+
+//Getting the meal plan ID and Tender_ID
+        
+//        if (json != null) {           
+//            try {
+//              if (json.has("mealplan")) {
+//                   JSONArray mealplan = json.getJSONArray("mealplan");
+//                    for (int i = 0; i < mealplan.length(); i++) {
+//                        JSONObject mp = mealplan.getJSONObject(i);                        
+//                        MEALPLAN_ID = mp.getString("id");                          
+//                    }
+//                        JSONObject td = mealplan.getJSONObject(mealplan.length()-1);
+//                        if (td.has("tenders")) {
+//                          JSONArray tenders = td.getJSONArray("tenders"); 
+//                          for (int i = 0; i < tenders.length(); i++) {
+//                           JSONObject tender = tenders.getJSONObject(i);                        
+//                            MEALPLAN_TENDER = tender.getString("tender_number");                         
+//                    }
+//                        }
+//                    }
+//            }
+//            catch (Exception ex) {
+//            }
+//        }
+
+        
         JOB_Api_Call("Config > /'BrandID'", "GET",
                 BaseAPI + "/config/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
 
