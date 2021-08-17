@@ -63,8 +63,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
             if (FAIL) {
                 return;
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
         }   // =============================================  
     }
 
@@ -84,8 +83,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
             if (FAIL) {
                 return;
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
         }   // =============================================  
     }
 
@@ -106,12 +104,11 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
                     return;
                 }
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
         }   // =============================================  
     }
-    //This method validates if "Site Production" has All selected in dropdown.
 
+    //This method validates if "Site Production" has All selected in dropdown.
     protected void validateOnSiteProductApplicationOrders() {
         try {
             Element_By_Path_Text("Get default selected Production app", "xpath", "//*[@aria-label='Select App']", ParentTest, "no_jira");
@@ -130,8 +127,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
                 }
                 searchBySelectedSiteOrdersIndex();
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
         }   // =============================================  
     }
 
@@ -169,6 +165,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
 
                 // Check of both Site and Country matches to data selected from AP3
                 if (storeSearchedSite.equalsIgnoreCase(SITE) && storeSearchedCountry.equalsIgnoreCase(COUNTRY)) {
+                    Thread.sleep(2000);
                     Element_By_Path_Click("Click on Site", "xpath", "//table[@class='v-datatable v-table theme--light']/tbody/tr[1][@class='clickable']", ParentTest, "No Jira");
                     if (FAIL) {
                         return;
@@ -188,8 +185,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
                     return;
                 } //  ?????
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
         }   // =============================================  
     }
 
@@ -228,8 +224,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
                 //    ?????
                 System.err.println("Selected site from Ap3 not found in site list");
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
         }   // =============================================  
     }
 
@@ -262,8 +257,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
                     System.err.println("Selected site from JTT not found in site list");
                 }
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
         }   // =============================================  
     }
 
@@ -280,27 +274,29 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
             for (int row = 1; row <= L0.size(); row++) {
                 List_TR_TDs("Check Station list to matches with selected station from 'AP3' ", L0.get((row - 1)), ParentTest, "no_jira");
 
-                if (t.substring(0, t.indexOf("  >")).trim().equalsIgnoreCase(BRAND)) {
+                if (t.equalsIgnoreCase("No data available")) {
 
-                    Element_By_Path_Attribute("Found match & Initial visibility Status for : " + storeStationName + " is..", "xpath", "//div[@class='v-table__overflow']//table[@class='v-datatable v-table theme--light']/tbody/tr[" + row + "]/td[6]//div[@class='v-input__control']//div[@class='v-input--selection-controls__input']/i", "className", ParentTest, "no_jira");
-                    storeInitialVisibilityOfStation = t;
-                    if (FAIL) {
-                        return;
-                    }
-                    if (storeInitialVisibilityOfStation.trim().equalsIgnoreCase("v-icon mdi mdi-eye theme--light")) {
-                        Element_By_Path_Click("Click hide in App for " + BRAND + "", "xpath", "//div[@class='v-table__overflow']//table[@class='v-datatable v-table theme--light']/tbody/tr[" + row + "]/td[6]//div[@class='v-input__control']", ParentTest, "no_jira");
+                } else {
+                    if (t.substring(0, t.indexOf("  >")).trim().equalsIgnoreCase(BRAND)) {
+                        Element_By_Path_Attribute("Found match & Initial visibility Status for : " + storeStationName + " is..", "xpath", "//div[@class='v-table__overflow']//table[@class='v-datatable v-table theme--light']/tbody/tr[" + row + "]/td[6]//div[@class='v-input__control']//div[@class='v-input--selection-controls__input']/i", "className", ParentTest, "no_jira");
+                        storeInitialVisibilityOfStation = t;
                         if (FAIL) {
                             return;
                         }
+                        if (storeInitialVisibilityOfStation.trim().equalsIgnoreCase("v-icon mdi mdi-eye theme--light")) {
+                            Element_By_Path_Click("Click hide in App for " + BRAND + "", "xpath", "//div[@class='v-table__overflow']//table[@class='v-datatable v-table theme--light']/tbody/tr[" + row + "]/td[6]//div[@class='v-input__control']", ParentTest, "no_jira");
+                            if (FAIL) {
+                                return;
+                            }
+                        }
+                        flagStationVisibility = true;
                     }
-                    flagStationVisibility = true;
                 }
             }
             if (flagStationVisibility.equals(true)) {
                 navigateToOrdersIndexPage();
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
         }   // =============================================  
     }
 
@@ -315,8 +311,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
             if (t.equalsIgnoreCase(SITE)) {
                 hideVisibilityOfStation();
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
         }   // =============================================  
     }
 
@@ -355,8 +350,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
                 return;
             }
             validateOnSiteProductApplicationOrders();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
         }   // =============================================  
     }
 
@@ -367,7 +361,6 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
             if (FAIL) {
                 return;
             }
-            System.err.println("Header" + t);
             if (t.equalsIgnoreCase("Orders")) {
                 //Find stations 
                 Find_Text("Find 'All Stations'", "All Stations", true, ParentTest, "no_jira");
@@ -402,8 +395,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
                 }
             }
             EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Verify if Orders available for hidden Station ====END==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
         }   // =============================================  
     }
 
@@ -480,7 +472,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
             if (FAIL) {
                 return;
             }
-            Element_By_Path_Click("Click day 10", "xpath", "//tr/td[contains(number(),10)]", ParentTest, "no_jira");
+            Element_By_Path_Text_DblClick("Click day 10", "xpath", "//tr/td[contains(number(),10)]", ParentTest, "no_jira");
             if (FAIL) {
                 return;
             }
@@ -488,7 +480,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
             if (FAIL) {
                 return;
             }
-            Element_By_Path_Click("Click day 17", "xpath", "//tr/td[contains(number(),17)]", ParentTest, "no_jira");
+            Element_By_Path_Click("Click day 17", "xpath", "//tr/td[contains(number(),16)]", ParentTest, "no_jira");
             if (FAIL) {
                 return;
             }
@@ -531,7 +523,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
             if (FAIL) {
                 return;
             }
-            Element_By_Path_Click("Click day 16", "xpath", "//tr/td//div[contains(number(),16)]", ParentTest, "no_jira");
+            Element_By_Path_Click("Click day 16", "xpath", "//tr/td//div[contains(number(),15)]", ParentTest, "no_jira");
             if (FAIL) {
                 return;
             }
@@ -549,7 +541,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
 
             //URL to verify the date picker has selected 7 day range
             Page_URL("Current URL", ParentTest, "no_jira");
-            date_URL = t.substring(t.length() - 10); // was 21
+            date_URL = t.substring(t.length() - 21); // was 21
 
             if (date_URL.equals(button_date_attribute)) { // Pass order date is equal to displayed order date
                 _t++;
@@ -603,7 +595,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
             button_date_attribute = t.replace(" to ", "_");  //2021-06-01 to 2021-06-02
 
             Page_URL("Current URL", ParentTest, "no_jira");
-            date_URL = t.substring(t.length() - 10); // was 21
+            date_URL = t.substring(t.length() - 21); // was 21
             if (date_URL.equals(button_date_attribute)) { // Pass order date is equal to displayed order date
                 _t++;
                 _p++;
@@ -615,8 +607,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
                 EX += _t + "\t" + "URL Order date for 2 days range is not equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("FAIL", "URL Order date for 2 days range is not equal to button date attribute", false, ParentTest.createNode("Not able to find 2 days range"));
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
         }   // =============================================  
     }
 
@@ -636,7 +627,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
                 _t++;
                 List_TR_TDs("Checking from Station list for previously hidden", L0.get((row - 1)), ParentTest, "no_jira");
 
-                if (t.contains(BRAND)) {
+                if (t != "No data available" && t.contains(BRAND)) {
                     Element_By_Path_Attribute("Present visibility Status for : " + storeStationName + "", "xpath", "//div[@class='v-table__overflow']//table[@class='v-datatable v-table theme--light']/tbody/tr[" + row + "]/td[6]//div[@class='v-input__control']//div[@class='v-input--selection-controls__input']/i", "className", ParentTest, "no_jira");
                     if (FAIL) {
                         return;
@@ -651,10 +642,11 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
                             return;
                         }
                     }
+                } else {
+
                 }
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
         }   // =============================================  
     }
 }
