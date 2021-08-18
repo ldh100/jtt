@@ -3159,7 +3159,11 @@ public class API_GUI extends javax.swing.JInternalFrame {
             exact_gateway_password = BR.exact_gateway_password;
             exact_gateway_id = BR.exact_gateway_id;
             exact_id = BR.exact_id;
+            
             DELIEVERY_DESTINATIONS = BR.DELIEVERY_DESTINATIONS;
+            
+            MEALPLAN_ID = BR.MEALPLAN_ID;
+            MEALPLAN_TENDER = BR.MEALPLAN_TENDER;
         }
 
         if (!FAIL) {
@@ -3334,9 +3338,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
             r_time += BR.r_time;
             ParentTest.getModel().setName("Meal Plan - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
-
-            MEALPLAN_ID = BR.MEALPLAN_ID;
-            MEALPLAN_TENDER = BR.MEALPLAN_TENDER;
         }        
         if (!FAIL) {
             SCOPE += "Payment ";

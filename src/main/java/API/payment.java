@@ -93,17 +93,17 @@ class payment extends API_GUI {
     }
 
     private void FP() {
-        String FP_Access_TKN = "";
+        String Access_TKN = "";
         JOB_Api_Call("Get Mobile User Freedompay Client Token", "GET",
                 BaseAPI + "/payment/" + freedompay_id + "/clienttoken", Auth, "", 200, ParentTest, "no_jira");
         if (json != null && json.has("access_token")) {
             try {
-                FP_Access_TKN = json.getString("access_token");
+                Access_TKN = json.getString("access_token");
             } catch (Exception ex) {
                 String AAAA = ex.getMessage();
             }
         }
-        Auth = "Bearer " + FP_Access_TKN;
+        Auth = "Bearer " + Access_TKN;
         JSONObject requestParams = new JSONObject();
         requestParams.put("nameOnCard", "JTT API Automation");
         requestParams.put("avsVerificationRequired", true);
