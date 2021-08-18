@@ -8,9 +8,10 @@ package Station;
 import static A.A.*;
 import A.Func;
 import com.google.common.base.Stopwatch;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import java.awt.Cursor;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,31 +21,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
-import javax.swing.DefaultListModel;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
+//import org.apache.http.HttpEntity;
+//import org.apache.http.HttpResponse;
+//import org.apache.http.client.ClientProtocolException;
+//import org.apache.http.client.ResponseHandler;
+//import org.apache.http.client.methods.HttpGet;
+//import org.apache.http.impl.client.CloseableHttpClient;
+//import org.apache.http.impl.client.HttpClients;
+//import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -96,19 +91,19 @@ public class Station extends javax.swing.JInternalFrame {
         lblSITES7 = new javax.swing.JLabel();
         txtPROMO = new javax.swing.JTextField();
         lblBDOFF = new javax.swing.JLabel();
-        cmbDropOffLocations = new javax.swing.JComboBox<>();
         btnDOrder = new javax.swing.JButton();
         btnPOrder = new javax.swing.JButton();
+        cmbLoc = new javax.swing.JComboBox<>();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
         setTitle("Site > Station > Menu >>> loading, please wait ... ... ... ...");
-        setMaximumSize(new java.awt.Dimension(864, 527));
-        setMinimumSize(new java.awt.Dimension(864, 527));
+        setMaximumSize(new java.awt.Dimension(850, 527));
+        setMinimumSize(new java.awt.Dimension(850, 527));
         setName("Station"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
-        setPreferredSize(new java.awt.Dimension(864, 527));
+        setPreferredSize(new java.awt.Dimension(850, 527));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -136,10 +131,12 @@ public class Station extends javax.swing.JInternalFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblSITES.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblSITES.setText("Sites");
         lblSITES.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 4, 360, -1));
 
         DV_Sites.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV_Sites.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -165,6 +162,8 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV_Sites);
 
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 376, 268));
+
         DV_Brands.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Brands.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -189,15 +188,18 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV_Brands);
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 288, 376, 112));
+
         txtLog.setEditable(false);
         txtLog.setColumns(20);
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         txtLog.setRows(5);
-        txtLog.setText("Start >");
         txtLog.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtLog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLog);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 400, 376, 100));
 
         DV_MTS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_MTS.setModel(new javax.swing.table.DefaultTableModel(
@@ -221,9 +223,12 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane4.setViewportView(DV_MTS);
 
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 216, 84, 184));
+
         lblMenus.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblMenus.setText("Click Brand to get Menu(s) ...");
         lblMenus.setAlignmentX(0.5F);
+        getContentPane().add(lblMenus, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 4, 280, -1));
 
         DV_Categories.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Categories.setModel(new javax.swing.table.DefaultTableModel(
@@ -249,6 +254,8 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane5.setViewportView(DV_Categories);
 
+        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 116, 384, 80));
+
         DV_Items.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Items.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -273,6 +280,8 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane6.setViewportView(DV_Items);
 
+        getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 196, 384, 92));
+
         DV_Mods.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Mods.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -292,6 +301,8 @@ public class Station extends javax.swing.JInternalFrame {
         DV_Mods.getTableHeader().setReorderingAllowed(false);
         jScrollPane7.setViewportView(DV_Mods);
 
+        getContentPane().add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 288, 384, 112));
+
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
         btnLog.setMargin(new java.awt.Insets(2, 4, 2, 4));
@@ -300,6 +311,7 @@ public class Station extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
+        getContentPane().add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 476, 44, 22));
 
         DV_Menus.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Menus.setModel(new javax.swing.table.DefaultTableModel(
@@ -324,6 +336,8 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane8.setViewportView(DV_Menus);
 
+        getContentPane().add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 384, 96));
+
         DV_BTS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_BTS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -347,11 +361,15 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane9.setViewportView(DV_BTS);
 
+        getContentPane().add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 20, 84, 176));
+
         lblMTS.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblMTS.setText("Menu Timeslots");
+        getContentPane().add(lblMTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 200, 84, 16));
 
         lblBTS.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblBTS.setText("Brand Timeslots");
+        getContentPane().add(lblBTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 4, 80, -1));
 
         btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSave_Opt.setText("Save Setup");
@@ -362,11 +380,13 @@ public class Station extends javax.swing.JInternalFrame {
                 btnSave_OptMouseClicked(evt);
             }
         });
+        getContentPane().add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 476, 76, 22));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES13.setText("Env:");
         lblSITES13.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 484, 28, 16));
 
         cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbEnv.addItemListener(new java.awt.event.ItemListener() {
@@ -374,11 +394,13 @@ public class Station extends javax.swing.JInternalFrame {
                 cmbEnvItemStateChanged(evt);
             }
         });
+        getContentPane().add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 480, 120, 20));
 
         lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES14.setText("App:");
         lblSITES14.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 480, 28, 16));
 
         cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbApp.addItemListener(new java.awt.event.ItemListener() {
@@ -386,43 +408,44 @@ public class Station extends javax.swing.JInternalFrame {
                 cmbAppItemStateChanged(evt);
             }
         });
+        getContentPane().add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(732, 480, 112, 20));
 
         lblSITES4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES4.setText("Mobile User E-mail:");
         lblSITES4.setToolTipText("");
         lblSITES4.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 400, 108, -1));
 
         txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_ID.setText("App_User@?.?");
+        getContentPane().add(txtMobile_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 416, 176, -1));
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES6.setText("Mobile User Password");
         lblSITES6.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 436, -1, -1));
 
         txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_PW.setText("password");
+        getContentPane().add(txtMobile_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 452, 176, -1));
 
         lblSITES7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES7.setText("Promo Code");
         lblSITES7.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 436, -1, -1));
 
         txtPROMO.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtPROMO.setText("None");
+        getContentPane().add(txtPROMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 452, 120, -1));
 
         lblBDOFF.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblBDOFF.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblBDOFF.setText("Drop Off Locations");
         lblBDOFF.setAlignmentX(0.5F);
-
-        cmbDropOffLocations.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbDropOffLocations.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbDropOffLocationsItemStateChanged(evt);
-            }
-        });
+        getContentPane().add(lblBDOFF, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 400, 112, -1));
 
         btnDOrder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnDOrder.setText("Place Delivery Order");
@@ -432,6 +455,7 @@ public class Station extends javax.swing.JInternalFrame {
                 btnDOrderMouseClicked(evt);
             }
         });
+        getContentPane().add(btnDOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 444, 144, 24));
 
         btnPOrder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnPOrder.setText("Place Pickup Order");
@@ -441,150 +465,83 @@ public class Station extends javax.swing.JInternalFrame {
                 btnPOrderMouseClicked(evt);
             }
         });
+        getContentPane().add(btnPOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 412, 144, 24));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnLog)
-                        .addGap(8, 8, 8)
-                        .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSITES4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSITES6))))
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblBDOFF, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbDropOffLocations, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSITES7)
-                    .addComponent(txtPROMO, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)
-                                .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnDOrder, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(2, 2, 2))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(lblSITES, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(lblMenus, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(lblBTS, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblMTS, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSITES)
-                    .addComponent(lblMenus)
-                    .addComponent(lblBTS))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(lblMTS, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblBDOFF)
-                        .addGap(2, 2, 2)
-                        .addComponent(cmbDropOffLocations, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(lblSITES7)
-                        .addGap(2, 2, 2)
-                        .addComponent(txtPROMO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(btnPOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnDOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(480, 480, 480)
-                .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(400, 400, 400)
-                .addComponent(lblSITES4)
-                .addGap(2, 2, 2)
-                .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(lblSITES6)
-                .addGap(2, 2, 2)
-                .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(400, 400, 400)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        cmbLoc.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cmbLoc.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbLocItemStateChanged(evt);
+            }
+        });
+        getContentPane().add(cmbLoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 416, 120, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration">
+    JSONArray JArray_MENUS;
+    JSONArray JArray_CATS;
+    JSONArray JArray_ITEMS; 
+    
+    private boolean Load;
+    private static Duration DD;
+    
+    public static String COUNTRY = "COUNTRY";
+    public static String platform = "CDL";
+    public static String BaseAPI;
+  
+    private int SitesLastRow = -1; 
+    private int BrandsLastRow = -1; 
+    private int MenusLastRow = -1;  
+    private int CategoriesLastRow = -1; 
+    private int ItemsLastRow = -1; 
+    
+    private boolean CONFIG = false;
+    private String C = "";
+
+    protected String Mobile_User_ID = "";
+    protected String Mobile_User_TKN = "";
+
+    public static int T_Index;   
+    public static Stopwatch sw1 = Stopwatch.createUnstarted();
+    public static DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
+    public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    public static String SQL = ""; 
+    public static String url = "";
+    public static String app = "";
+    public static String appId = "";
+    public static String env = "";
+    public static String SITE = "";
+    public static String SiteID = "";
+    public static String GROUP = "";
+    public static String BRAND = "";
+    public static String BrandID = "";
+    
+    protected JSONObject json;
+    protected String BODY = "";   
+    //  "exact": {
+    protected String exact_gateway_password = "~RSQzgwC";
+    protected String exact_gateway_id = "AE7628-02";
+    protected String exact_id = "APE3Ev9vQkfo2mmOpKP7fGJ48NKAPOugo0gdlWJqS3O";
+    protected String exate_gateway_password = "";
+    //  "freedompay": {
+    protected String freedompay_id = "9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO";
+    protected String freedompay_terminal_id = "26241559005";
+    protected String freedompay_store_id = "16167424007";
+    protected String FP_URL = ""; //https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
+    
+    protected String ShoppingCart_Delivery_ID = "";
+    protected String Order_Delivery_ID = "";
+    protected String ShoppingCart_Pickup_ID = "";
+    protected String Order_Pickup_ID = "";
+    
+    protected String Auth = "";
+    protected String EXACT_Payment_TKN = "";
+    protected String FP_Payment_TKN = "";
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">        
     private void DV_SitesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_SitesMouseClicked
         if (SitesLastRow == DV_Sites.getSelectedRow()) {
            return;
@@ -679,10 +636,6 @@ public class Station extends javax.swing.JInternalFrame {
         Load_Form();
     }//GEN-LAST:event_formAncestorAdded
 
-    private void cmbDropOffLocationsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDropOffLocationsItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbDropOffLocationsItemStateChanged
-
     private void btnPOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPOrderMouseClicked
         PLACE_ORDERS("P");
     }//GEN-LAST:event_btnPOrderMouseClicked
@@ -690,6 +643,11 @@ public class Station extends javax.swing.JInternalFrame {
     private void btnDOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDOrderMouseClicked
         PLACE_ORDERS("D");
     }//GEN-LAST:event_btnDOrderMouseClicked
+
+    private void cmbLocItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbLocItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbLocItemStateChanged
+    // </editor-fold>
 
     private void Load_Form(){
         Load = true;
@@ -714,7 +672,6 @@ public class Station extends javax.swing.JInternalFrame {
         CONFIG = false;   
         this.setTitle("Site > Station(Brand) > Menu(s)");
     }
-
     private void LOAD_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
@@ -824,20 +781,22 @@ public class Station extends javax.swing.JInternalFrame {
     }
 
     private void LOAD_ENV(){
-        if(cmbEnv.getSelectedItem().toString().contains("Staging")){
+        if (cmbEnv.getSelectedItem().toString().contains("Staging")) {
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
-            url = "https://dev.thriveapp.io/"; 
-        } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
+            url = "https://staging.adminpanel.compassdigital.org/";
+            FP_URL = "https://cwallet.uat.freedompay.com"; 
+        } else if (cmbEnv.getSelectedItem().toString().contains("Dev")) {
             BaseAPI = "https://api.compassdigital.org/dev";
             env = "DE";
-            url = "https://dev.thriveapp.io/";
-        } else{
+            url = "https://dev.adminpanel.compassdigital.org/";
+            FP_URL = "https://cwallet.uat.freedompay.com"; 
+        } else {
             BaseAPI = "https://api.compassdigital.org/v1";
             env = "PR";
-            url = "https://dev.thriveapp.io/";
+            url = "https://adminpanel.compassdigital.org/";
+            FP_URL = "https://cwallet.freedompay.com";
         }
-        Get_AP3_TKN();
         LOAD_CONFIG();
         if (CONFIG) {
             Load = true;
@@ -846,19 +805,6 @@ public class Station extends javax.swing.JInternalFrame {
         }
         app = cmbApp.getSelectedItem().toString();
         GetSites();       
-    }
-    private void Get_AP3_TKN(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
-            rs.next();
-            WO_TKN = rs.getString(1);
-            conn.close();
-        } catch (SQLException ex) {
-            txtLog.append("=== WO_TKN > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetSites() {   
         SitesLastRow = -1;
@@ -885,20 +831,8 @@ public class Station extends javax.swing.JInternalFrame {
         sorter.setSortKeys(sortKeys);  
         sorter.setSortable(0, false);         
                  
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         try { 
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + appId);   //  + "?web=true&expanded=true"    
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    throw new ClientProtocolException("Response: " + response.getStatusLine().getStatusCode() + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            String responseBody = httpclient.execute(httpget, responseHandler);  
-                JSONObject json = new JSONObject(responseBody);
+            Api_Call("GET", BaseAPI + "/location/multigroup/" + appId, "", "");
             String site;
             String country;
             String id;
@@ -948,18 +882,10 @@ public class Station extends javax.swing.JInternalFrame {
             sorter.setSortable(0, true); 
             sorter.sort();            
       
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-        }
         txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
@@ -982,7 +908,7 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.append("" + app + " > " + DV_Sites.getRowCount() + " Site(s) found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        
+        cmbLoc.removeAllItems();
         GetBrands();
     }
     private void GetBrands() {
@@ -1024,22 +950,9 @@ public class Station extends javax.swing.JInternalFrame {
         sorter.setSortKeys(sortKeys);  
         sorter.setSortable(0, false);                  
         
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 3) + "?extended=true&nocache=1"); 
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                }
-            };
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
+            Api_Call("GET", BaseAPI + "/location/group/" + DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 3) + "?extended=true&nocache=1", "", "");
+            
             JSONArray Location = json.getJSONArray("locations");
             JSONArray brands = null;
             
@@ -1088,18 +1001,11 @@ public class Station extends javax.swing.JInternalFrame {
             sorter.setSortable(0, true); 
             sorter.sort();            
                
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-        } 
+
         txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
@@ -1114,8 +1020,10 @@ public class Station extends javax.swing.JInternalFrame {
                     } 
                 }
             }
-            BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3));           
-            //GetMenus(); // ======================== force only after Brand selection
+            BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3)); 
+            GetBrandDropOffLocations(); // ============== comment to force only after Brand click / selection
+            GetBrandTimeslots();        // ============== comment to force only after Brand click / selection
+            GetMenus();                 // ============== comment to force only after Brand click / selection
         } else {
             BrandID = "null";
         }
@@ -1132,42 +1040,20 @@ public class Station extends javax.swing.JInternalFrame {
             sw1.reset();
         }
         sw1.start();        
-        cmbDropOffLocations.removeAllItems();
-        CloseableHttpClient httpclient = HttpClients.createDefault();
+        cmbLoc.removeAllItems();
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/config/public/" + BrandID); 
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                }
-            };
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
+            Api_Call("GET", BaseAPI + "/config/public/" + BrandID, "", "");
+
             if(json.has("delivery_destinations")) {
                 JSONArray DESTINATIONS = json.getJSONArray("delivery_destinations");
                 for (int i = 0; i < DESTINATIONS.length(); i++) {
-                    cmbDropOffLocations.addItem(DESTINATIONS.getString(i));
+                    cmbLoc.addItem(DESTINATIONS.getString(i));
                 }
             }
         } catch (Exception ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
-        }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-        } 
-        lblBDOFF.setText("Brand Drop Off Locations " + cmbDropOffLocations.getItemCount());
+        }          
         txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();            
@@ -1186,25 +1072,11 @@ public class Station extends javax.swing.JInternalFrame {
         DefaultTableModel BTS_Model = new DefaultTableModel();
         BTS_Model.setColumnIdentifiers(ColumnsName);
         DV_BTS.setModel(BTS_Model);        
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/brand/" + BrandID + "/timeslots"); 
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                }
-            };
-            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
+            Api_Call("GET", BaseAPI + "/location/brand/" + BrandID + "/timeslots", "", "");
             if (json.has("timeslots")) {
                 JSONArray timeslots = json.getJSONArray("timeslots");
+                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
                 for (int i = 0; i < timeslots.length(); i++) {
                     JSONObject timeslot = timeslots.getJSONObject(i);
                     BTS_Model.addRow(new Object[]{sdf.format(new Date(timeslot.getLong("id")*1000)), timeslot.getLong("id")});
@@ -1212,21 +1084,14 @@ public class Station extends javax.swing.JInternalFrame {
             } 
             DV_BTS.setModel(BTS_Model); 
             DV_BTS.setDefaultEditor(Object.class, null);
-            DV_BTS.getColumnModel().getColumn(0).setPreferredWidth(50);
+            DV_BTS.getColumnModel().getColumn(0).setPreferredWidth(55);
             DV_BTS.getColumnModel().getColumn(1).sizeWidthToFit();
 
         } catch (Exception ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-        } 
+ 
         if(DV_BTS.getRowCount() > 0){
             DV_BTS.changeSelection(0, 0, false, false);
         }        
@@ -1245,6 +1110,7 @@ public class Station extends javax.swing.JInternalFrame {
         DV_Categories.setModel(M);
         DV_Items.setModel(M);
         DV_Mods.setModel(M);
+        DV_MTS.setModel(M);
         MenusLastRow = -1;
         String[] ColumnsName = {"Menu Label (en)", "Response", "Id"}; 
         DefaultTableModel Model = new DefaultTableModel();
@@ -1263,28 +1129,16 @@ public class Station extends javax.swing.JInternalFrame {
         sw1.start();        
          
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         String label = "<empty> 'en'";
         String resp;
         JArray_MENUS = new JSONArray();
         try {
             String[] Menu_IDs = IDS.split(",");
             for (String id : Menu_IDs) {
-                HttpGet httpget = new HttpGet(BaseAPI + "/menu/" + id); // + "?extended=true&nocache=1"
-                ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                    int status = response.getStatusLine().getStatusCode();
-                    String Msg = response.getStatusLine().getReasonPhrase();
-                    if (status >= 200 && status < 500) {
-                        HttpEntity entity = response.getEntity();
-                        return entity != null ? EntityUtils.toString(entity) : null;
-                    } else {
-                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                        throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                    }
-                };
-                String responseBody = httpclient.execute(httpget, responseHandler);
-                JArray_MENUS.put(new JSONObject(responseBody));
-                JSONObject menu = new JSONObject(responseBody);
+                Api_Call("GET", BaseAPI + "/menu/" + id, "", "");
+
+                JArray_MENUS.put(json);
+                JSONObject menu = new JSONObject(json);
                 resp = "OK " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
                 if(menu.has("label")){                    
                     if(menu.getJSONObject("label").has("en")) {
@@ -1298,19 +1152,12 @@ public class Station extends javax.swing.JInternalFrame {
                 }
                 Model.addRow(new Object[]{label, resp, id});
             }
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             resp = "Error " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());  
-            }
-        } 
+ 
         DV_Menus.setModel(Model);    
         DV_Menus.setDefaultEditor(Object.class, null);
         DV_Menus.getColumnModel().getColumn(0).setPreferredWidth(140);
@@ -1345,23 +1192,9 @@ public class Station extends javax.swing.JInternalFrame {
         DefaultTableModel MTS_Model = new DefaultTableModel();
         MTS_Model.setColumnIdentifiers(BrandsColumnsName);
         DV_MTS.setModel(MTS_Model);        
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MenuID); 
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                }
-            };
+            Api_Call("GET", BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MenuID, "", "");
             SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
             if (json.has("timeslots")) {
                 JSONArray timeslots = json.getJSONArray("timeslots");
                 for (int i = 0; i < timeslots.length(); i++) {
@@ -1371,21 +1204,13 @@ public class Station extends javax.swing.JInternalFrame {
             }   
             DV_MTS.setModel(MTS_Model);  
             DV_MTS.setDefaultEditor(Object.class, null);
-            DV_MTS.getColumnModel().getColumn(0).setPreferredWidth(50);
+            DV_MTS.getColumnModel().getColumn(0).setPreferredWidth(55);
             DV_MTS.getColumnModel().getColumn(1).sizeWidthToFit();
 
         } catch (Exception ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
-        }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-        } 
+        }          
         lblMTS.setText("Menu Slots " + DV_MTS.getRowCount());
         txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1658,17 +1483,91 @@ public class Station extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     
+    protected void Api_Call(String Method, String EndPoint, String AUTH, String BODY) {
+        FAIL = false;
+        json = null;
+        RequestSpecification request;
+        request = RestAssured.given();
+        int status = 0;
+        String Result = "?";
+        if (!AUTH.isEmpty()) {
+            request.header("Authorization", AUTH);
+        }
+        request.header("Content-Type", "application/json");
+        request.header("Accept", "application/json");
+        try {
+            if (sw1.isRunning()) {
+                sw1.reset();
+            }
+            sw1.start();
+            Response response = null;
+            switch (Method) {
+                case "GET":
+                    if (BODY.equals("Bolter")) {
+                        request.header("From", "Bolter/1.0");
+                    }
+                    response = request.get(EndPoint);
+                    break;
+                case "POST":
+                    request.body(BODY);
+                    response = request.post(EndPoint);
+                    break;
+                case "PATCH":
+                    request.body(BODY);
+                    response = request.patch(EndPoint);
+                    break;
+                case "DELETE":
+                    request.body(BODY);
+                    response = request.delete(EndPoint);
+                    break;
+                case "PUT":
+                    request.body(BODY);
+                    response = request.put(EndPoint);
+                    break;
+                case "OPTIONS":
+                    response = request.options(EndPoint);
+                    break;
+                default:
+                    break;
+            }
+            Result = response.getStatusLine();
+            status = response.getStatusCode();
+            if (status != 200) {
+                txtLog.append("Target Endpoint: " + EndPoint + "\r\n");
+                txtLog.append("Result: " + status + " - " + Result + "\r\n");
+               txtLog.setCaretPosition(txtLog.getDocument().getLength());                
+            }
+            if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
+                json = new JSONObject(response.asString());
+                if (json.has("error")) {
+                    txtLog.append("Error: " + json.getString("error") + "\r\n");
+                    txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                }
+            }
+        } catch (Exception ex) {
+            FAIL = true;
+            txtLog.append("API Call Error: " + ex.getMessage().trim() + "\r\n");
+            txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+        }
+        sw1.reset();
+    }
+    
     private void Validate_Pleace_Order() {
         btnPOrder.setEnabled(false);
         btnDOrder.setEnabled(false);
         if(DV_Items.getSelectedRowCount() > 0 && (DV_BTS.getSelectedRowCount() > 0 || DV_MTS.getSelectedRowCount() > 0)){
             btnPOrder.setEnabled(true);
-            if(cmbDropOffLocations.getSelectedItem().toString().trim() != ""){
+            if(cmbLoc.getItemCount() > 0 && cmbLoc.getSelectedItem().toString().trim() != ""){
                 btnDOrder.setEnabled(true);
             }
         }
     }
     private void PLACE_ORDERS(String TYPE){
+        btnDOrder.setEnabled(false);
+        btnPOrder.setEnabled(false);
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         Get_Mobile_User_TKN();
         if(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 2).toString().toLowerCase().startsWith("c")){
              EXACT();
@@ -1676,17 +1575,18 @@ public class Station extends javax.swing.JInternalFrame {
         if(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 2).toString().toLowerCase().startsWith("u")){
             FP();
         }
+        btnDOrder.setEnabled(true);
+        btnPOrder.setEnabled(true);
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
     } 
-    
     
     private void Get_Mobile_User_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load User..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         String J = "==== User API(s):" + "\r\n";
-        userID = "";
-        userTKN = "";
-        CloseableHttpClient httpclient = HttpClients.createDefault();
+        Mobile_User_ID = "";
+        Mobile_User_TKN = "";
         String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
         String Realm = Func.Realm_ID(cmbApp.getSelectedItem().toString(), env);
         if(sw1.isRunning()){
@@ -1695,43 +1595,125 @@ public class Station extends javax.swing.JInternalFrame {
         sw1.start();        
         
         try {     // ============ User
-            HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm);
-            httpget.setHeader("Authorization", "Basic " + UserAuth);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            Api_Call("GET", BaseAPI + "/user/auth" + "?realm=" + Realm, "Basic " + UserAuth, "");
             J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
+            Mobile_User_ID = json.getString("user");
+            Mobile_User_TKN = json.getString("token");
 
-            userID = json.getString("user");
-            userTKN = json.getString("token");
-
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLog.append(" > " + J); 
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
         txtLog.append("== " + BaseAPI + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.append("== " + "UserID:"  + userID + "\r\n");
-        txtLog.append("== " + "UserTKN:"  + userTKN + "\r\n");
+        txtLog.append("== " + "UserID: "  + Mobile_User_ID + "\r\n");
+        txtLog.append("== " + "UserTKN: "  + Mobile_User_TKN + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }                                    
+    private void Get_Delete_User_Payments(){
+        txtLog.append("- Delete_Payments..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                List<String> Payment_Methods_IDS = new ArrayList<>();
+        Auth = "Bearer " + Mobile_User_TKN;
+        Api_Call("GET", BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "");
+        if (json != null) {
+            try {
+                if (json.has("payment_methods")) {
+                    JSONArray payment_methods = json.getJSONArray("payment_methods");
+                    for (int i = 0; i < payment_methods.length(); i++) {
+                        JSONObject p = payment_methods.getJSONObject(i);
+                        Payment_Methods_IDS.add(p.getString("token"));
+                    }
+                }
+
+            } catch (Exception ex) {
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            }
+        }
+        txtLog.append("Mobile User Payments: " + Payment_Methods_IDS.size() + " found" + "\r\n"); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                
+        BODY = "{\"user\":\"" + Mobile_User_ID + "\"}";
+        for (int i = 0; i < Payment_Methods_IDS.size(); i++) {
+            
+//            JOB_Api_Call("Mobile User Delete Payment Method " + (i + 1), "DELETE",
+//                    BaseAPI + "/payment/" + exact_id + "/method/" + Payment_Methods_IDS.get(i), Auth, BODY, 200, ParentTest, "no_jira");
+        }
+    }
+
     private void EXACT(){
         txtLog.append("- EXACT..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        
+        EXACT_Payment_TKN = "";
+        Auth = "Bearer " + Mobile_User_TKN;
+        JSONObject requestParams = new JSONObject();
+        requestParams.put("cardholder_name", "JTT API Automation");
+        requestParams.put("cc_expiry", "1224");
+        requestParams.put("cc_number", "5555555555554444"); // Mastercard
+        requestParams.put("cc_verification_str2", "123");
+        requestParams.put("postal_code", "L3L3C4");
+        JSONObject options = new JSONObject();
+        options.put("exact_gateway_id", exact_gateway_id);
+        options.put("exact_gateway_password", exact_gateway_password);
+        requestParams.put("options", options);
+        BODY = requestParams.toString();
+
+        Api_Call("POST", BaseAPI + "/payment/" + exact_id + "/paymenttoken", Auth, BODY);
+        if (json != null && json.has("token")) {
+            try {
+                EXACT_Payment_TKN = json.getString("token");
+            } catch (Exception ex) {
+                String AAAA = ex.getMessage();
+            }
+        }
+        txtLog.append("EXACT_Payment_TKN: " + EXACT_Payment_TKN + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }
     private void FP(){
-         txtLog.append("- FP..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());       
+        txtLog.append("- FP..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());   
+        FP_Payment_TKN = "";
+        String Access_TKN = "";
+        
+        Auth = "Bearer " + Mobile_User_TKN;
+        Api_Call("GET", BaseAPI + "/payment/" + freedompay_id + "/clienttoken", Auth, "");
+        if (json != null && json.has("access_token")) {
+            try {
+                Access_TKN = json.getString("access_token");
+            } catch (Exception ex) {
+                txtLog.append("FP_Client_TKN Error: " + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+        }
+        Auth = "Bearer " + Access_TKN;
+        JSONObject requestParams = new JSONObject();
+        requestParams.put("nameOnCard", "JTT API Automation");
+        requestParams.put("avsVerificationRequired", true);
+        requestParams.put("isPreferred", true);
+        requestParams.put("cardNumber", "4111111111111111"); // Visa
+        requestParams.put("expiryYear", 2024);
+        requestParams.put("expiryMonth", 12);
+        requestParams.put("CVV", "123");
+        requestParams.put("cvvVerificationRequired", true);
+        JSONObject billingAddress = new JSONObject();
+        billingAddress.put("postalCode", "L3L3C4");
+        requestParams.put("billingAddress", billingAddress);
+        BODY = requestParams.toString();
+        Api_Call("POST", FP_URL + "/TokenService/api/consumers/tokens", Auth, BODY);
+        if (json != null) {
+            try {
+                FP_Payment_TKN = json.getString("token");
+            } catch (Exception ex) {
+                txtLog.append("FP_Payment_TKN Error: " + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+        }
+        txtLog.append("FP_Payment_TKN: " + FP_Payment_TKN + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }
 
 
@@ -1800,52 +1782,6 @@ public class Station extends javax.swing.JInternalFrame {
 
 
 
-    // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration - do not modify">
-    JSONArray JArray_MENUS;
-    JSONArray JArray_CATS;
-    JSONArray JArray_ITEMS; 
-    
-    private boolean Load;
-    private static Duration DD;
-  
-    private int SitesLastRow = -1; 
-    private int BrandsLastRow = -1; 
-    private int MenusLastRow = -1;  
-    private int CategoriesLastRow = -1; 
-    private int ItemsLastRow = -1; 
-    
-    private boolean CONFIG = false;
-    private String C = "";
-    private String userID;
-    private String userTKN;
-    public static int T_Index;
-    private String Last_EX;    
-    public static Stopwatch sw1 = Stopwatch.createUnstarted();
-    public static DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
-    public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-    public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    public static String SQL = ""; 
-    private String SCOPE;
-    public static String WO_TKN = "";    
-    public static String url = "";
-    public static String app = "";
-    public static String appId = "";
-    public static String env = "";
-    public static String SITE = "";
-    public static String SiteID = "";
-    public static String GROUP = "";
-    public static String BRAND = "";
-    public static String BrandID = "";
-
-    public static String COUNTRY = "COUNTRY";
-
-    public static String platform = "CDL";
-    public static String BaseAPI;
-    public static String TZone; 
-    public static String PROMO; 
-    public static String New_ID = "";
-    // </editor-fold>
-
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV_BTS;
@@ -1861,8 +1797,8 @@ public class Station extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPOrder;
     private javax.swing.JButton btnSave_Opt;
     private javax.swing.JComboBox<String> cmbApp;
-    private javax.swing.JComboBox<String> cmbDropOffLocations;
     private javax.swing.JComboBox<String> cmbEnv;
+    private javax.swing.JComboBox<String> cmbLoc;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
