@@ -534,25 +534,25 @@ public class W_Report extends javax.swing.JInternalFrame {
         }
 
         SQL = "SELECT " + 
-              "[qID] " +
-              ",[Date] " +
-              ",[Time] " +
-              ",[app] " +
-              ",[url] " +
-              ",[summary] " +
-              ",[t_calls] " +
-              ",[t_min] " +
-              ",[t_avg] " +
-              ",[t_max] " +
-              ",[p_50] " +
-              ",[p_90] " +
-              ",[test_type] " +
-              ",[user_id] " +
-              ",[user_ws] " +
-              ",[env] " +
-              ",[Status] " +
-              ",[cDate] " +
-          "FROM[dbo].[aw_result] " + Filter + " ORDER BY[qID] DESC";  
+                "[qID] " +
+                ",[Date] " +
+                ",[Time] " +
+                ",[app] " +
+                ",[url] " +
+                ",[summary] " +
+                ",[Status] " + 
+                ",[user_id] " +
+                ",[user_ws] " +
+                ",[test_type] " + 
+                ",[env] " +
+                ",[t_calls] " +
+                ",[t_min] " +
+                ",[t_avg] " +
+                ",[t_max] " +
+                ",[p_50] " +
+                ",[p_90] " +
+                ",[cDate] " +
+            "FROM[dbo].[aw_result] " + Filter + " ORDER BY[qID] DESC";  
             
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery(SQL);
