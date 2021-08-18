@@ -165,8 +165,8 @@ class AP3_menu_manager extends AP3_GUI{
 
         // <editor-fold defaultstate="collapsed" desc="Global Modifiers">  
         EX += " - " + "\t" + " === MM Global Modifiers " + "\t" + " ===== " + "\t" + " == Global Modifiers Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-        List_L3("Menus Pages Count", "xpath", "//button[contains(@class, 'v-pagination__item')]", ParentTest, "no_jira"); 
-        PAGES = L3.size();
+        List_L1("Menus Pages Count", "xpath", "//button[contains(@class, 'v-pagination__item')]", ParentTest, "no_jira"); 
+        PAGES = L1.size();
         
         List_L2("Menus Count on the Page 1", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
             if (FAIL) { return;}
@@ -178,9 +178,9 @@ class AP3_menu_manager extends AP3_GUI{
                 } 
             }
             if(T_Index == -1 && PAGES > 1){
-                Scroll_to_Element("Scroll to Pagination", L3.get(1), ParentTest, "no_jira");
+                Scroll_to_Element("Scroll to Pagination", L1.get(1), ParentTest, "no_jira");
                     if (FAIL) { return;}    
-                Element_Click("Click Navigation Page 2", L3.get(1), ParentTest, "no_jira");
+                Element_Click("Click Navigation Page 2", L1.get(1), ParentTest, "no_jira");
                     if (FAIL) { return;}                
                 List_L2("Menus Count on the Page 2", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
                 if (FAIL) { return;}
@@ -192,9 +192,9 @@ class AP3_menu_manager extends AP3_GUI{
                     } 
                 } 
                 if(T_Index == -1 && PAGES > 2){
-                    Scroll_to_Element("Scroll to Pagination", L3.get(2), ParentTest, "no_jira");
+                    Scroll_to_Element("Scroll to Pagination", L1.get(2), ParentTest, "no_jira");
                         if (FAIL) { return;}    
-                    Element_Click("Click Navigation Page 3", L3.get(2), ParentTest, "no_jira");
+                    Element_Click("Click Navigation Page 3", L1.get(2), ParentTest, "no_jira");
                         if (FAIL) { return;}                
                     List_L2("Menus Count on the Page 3", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
                     if (FAIL) { return;}
@@ -368,9 +368,9 @@ class AP3_menu_manager extends AP3_GUI{
                 if (FAIL) { return;}
                 for (int i = 0; i < L0.size(); i++) {
                     Element_Click("Chit # (" + i + ") Click", L0.get(i), ParentTest, "no_jira");             
-                    if (FAIL) { return;}
+                        if (FAIL) { return;}
                     Element_Text_Enter("Chit # (" + i + ") Enter", L0.get(i), Integer.toString(i+1), ParentTest, "no_jira");             
-                    if (FAIL) { return;}
+                        if (FAIL) { return;}
                 }   
             Element_By_Path_Click("Tax Tags dropdown Click Open", "css", "[aria-label='Tax Tags']", ParentTest, "no_jira");
                 if (FAIL) { return;}                
@@ -425,7 +425,7 @@ class AP3_menu_manager extends AP3_GUI{
             
             //To find Modifier group ID    
             String Mod_grp_id ="";    
-            Call_API("Call /Menu/Company / API )", "Bearer " + AP3_TKN, BaseAPI + "/menu/modifier/group/company/" + CompanyID, true, ParentTest, "no_jira"); 
+            Call_API("Call /Menu/Company / API", "Bearer " + AP3_TKN, BaseAPI + "/menu/modifier/group/company/" + CompanyID, true, ParentTest, "no_jira"); 
             if (FAIL) { return;} 
             JSONObject json = new JSONObject(t);
             JSONArray mod_items = new JSONArray();
@@ -448,7 +448,7 @@ class AP3_menu_manager extends AP3_GUI{
             String Copy_Mod_ID = "";
             String Copy_Mod_ID_Name = "";
          
-            Call_API("Call /Menu/Modifier / API )", "Bearer " + AP3_TKN, BaseAPI + "/menu/modifier/group/"+Mod_grp_id, true, ParentTest, "no_jira"); 
+            Call_API("Call /Menu/Modifier / API", "Bearer " + AP3_TKN, BaseAPI + "/menu/modifier/group/"+Mod_grp_id, true, ParentTest, "no_jira"); 
             if (FAIL) { return;} 
             JSONObject json1 = new JSONObject(t);
             JSONArray modifier_items = new JSONArray();
@@ -515,13 +515,18 @@ class AP3_menu_manager extends AP3_GUI{
                 if(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("Mod 0 " + New_ID)) {
                     _t++;
                     _p++; EX += _t + "\t" + "Modifier Name same" + "\t" + "Mod 0 "+ New_ID + "\t" + "Mod 0 "+ New_ID + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-
-                    if(modifier_item.getJSONObject("meta").getInt("sort_number")==2) {//Print pass
+                    
+                    if(!modifier_item.getJSONObject("meta").isNull("sort_number")){
+                        if(modifier_item.getJSONObject("meta").getInt("sort_number")==2) {//Print pass
+                            _t++;
+                            _p++; EX += _t + "\t" + "Modifier Sort number (Chit#) same" + "\t" + "Chit#: 2" + "\t" + "Chit#: 2" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        } else {//Print fail
+                            _t++;
+                            _f++; EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: "+modifier_item.getJSONObject("meta").getInt("sort_number") + "\t" + "Chit#: 2" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        }
+                    } else{
                         _t++;
-                        _p++; EX += _t + "\t" + "Modifier Sort number (Chit#) same" + "\t" + "Chit#: 2" + "\t" + "Chit#: 2" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    } else {//Print fail
-                        _t++;
-                        _f++; EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: "+modifier_item.getJSONObject("meta").getInt("sort_number") + "\t" + "Chit#: 2" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        _f++; EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: 2" + "\t" + "Chit#: null" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     }
 
                     if(modifier_item.getJSONObject("meta").getJSONArray("taxes").getString(0).equals("Prepared")) {
@@ -565,15 +570,18 @@ class AP3_menu_manager extends AP3_GUI{
                         _t++;
                         _p++; EX += _t + "\t" + "Modifier Name same" + "\t" + "Mod 1 "+New_ID + "\t" + "Mod 1 "+New_ID + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     }
-
-                    if(modifier_item.getJSONObject("meta").getInt("sort_number")==3) {//Print pass
+                    if(!modifier_item.getJSONObject("meta").isNull("sort_number")){
+                        if(modifier_item.getJSONObject("meta").getInt("sort_number")==3) {//Print pass
+                            _t++;
+                            _p++; EX += _t + "\t" + "Modifier Sort number (Chit#) same" + "\t" + "Chit#: 3" + "\t" + "Chit#: 3" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        } else {//Print fail
+                            _t++;
+                            _f++; EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: "+modifier_item.getJSONObject("meta").getInt("sort_number") + "\t" + "Chit#: 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        }
+                    } else{
                         _t++;
-                        _p++; EX += _t + "\t" + "Modifier Sort number (Chit#) same" + "\t" + "Chit#: 3" + "\t" + "Chit#: 3" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    } else {//Print fail
-                        _t++;
-                        _f++; EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: "+modifier_item.getJSONObject("meta").getInt("sort_number") + "\t" + "Chit#: 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        _f++; EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: 2" + "\t" + "Chit#: null" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     }
-
                     if(modifier_item.getJSONObject("price").getDouble("amount")== 3.25) {//Print pass
                         _t++;
                         _p++; EX += _t + "\t" + "Modifier price are same" + "\t" + "Price : 3.25" + "\t" + "Price : 3.25" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -882,8 +890,8 @@ class AP3_menu_manager extends AP3_GUI{
 
         // <editor-fold defaultstate="collapsed" desc="Local Brands">  
         EX += " - " + "\t" + " === MM Local Brands" + "\t" + " ===== " + "\t" + " == Local Brands Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-        List_L3("Menus Pages Count", "xpath", "//button[contains(@class, 'v-pagination__item')]", ParentTest, "no_jira"); 
-        PAGES = L3.size();
+        List_L1("Menus Pages Count", "xpath", "//button[contains(@class, 'v-pagination__item')]", ParentTest, "no_jira"); 
+        PAGES = L1.size();
         
         List_L2("Menus Count on the Page 1", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
             if (FAIL) { return;}
@@ -895,9 +903,9 @@ class AP3_menu_manager extends AP3_GUI{
 //                } 
             }
             if(PAGES > 1){
-                Scroll_to_Element("Scroll to Pagination", L3.get(1), ParentTest, "no_jira");
+                Scroll_to_Element("Scroll to Pagination", L1.get(1), ParentTest, "no_jira");
                     if (FAIL) { return;}    
-                Element_Click("Click Navigation Page 2", L3.get(1), ParentTest, "no_jira");
+                Element_Click("Click Navigation Page 2", L1.get(1), ParentTest, "no_jira");
                     if (FAIL) { return;}                
                 List_L2("Menus Count on the Page 2", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
                 if (FAIL) { return;}
@@ -909,9 +917,9 @@ class AP3_menu_manager extends AP3_GUI{
 //                    } 
                 } 
                 if( PAGES > 2){
-                    Scroll_to_Element("Scroll to Pagination", L3.get(2), ParentTest, "no_jira");
+                    Scroll_to_Element("Scroll to Pagination", L1.get(2), ParentTest, "no_jira");
                         if (FAIL) { return;}    
-                    Element_Click("Click Navigation Page 3", L3.get(2), ParentTest, "no_jira");
+                    Element_Click("Click Navigation Page 3", L1.get(2), ParentTest, "no_jira");
                         if (FAIL) { return;}                
                     List_L2("Menus Count on the Page 3", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
                     if (FAIL) { return;}
