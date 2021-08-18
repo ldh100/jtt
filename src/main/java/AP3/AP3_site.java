@@ -678,7 +678,7 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
             Element_By_Path_Click("Click > out of 'Province'", "xpath", "//*[@class='v-dialog v-dialog--active']//*[contains(text(),'Create Drop-off Location')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-            Wait_For_Element_By_Path_Presence("Wait for 'State is required' message", "xpath", "//*[contains(text(),'State is required')]", ParentTest, "no_jira");
+            Wait_For_Element_By_Path_Presence("Wait for 'Province is required' message", "xpath", "//*[contains(text(),'Province is required')]", ParentTest, "no_jira");
             if (FAIL) { return;}
             Element_By_Path_Click("Click > 'Province' field", "xpath", "(//input[@aria-label='Province'])[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
