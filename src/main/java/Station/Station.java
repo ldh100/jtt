@@ -7,14 +7,11 @@ package Station;
 
 import static A.A.*;
 import A.Func;
-import com.aventstack.extentreports.ExtentTest;
 import com.google.common.base.Stopwatch;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import java.awt.Cursor;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,31 +21,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
-import javax.swing.DefaultListModel;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
+//import org.apache.http.HttpEntity;
+//import org.apache.http.HttpResponse;
+//import org.apache.http.client.ClientProtocolException;
+//import org.apache.http.client.ResponseHandler;
+//import org.apache.http.client.methods.HttpGet;
+//import org.apache.http.impl.client.CloseableHttpClient;
+//import org.apache.http.impl.client.HttpClients;
+//import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -203,13 +194,12 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.setColumns(20);
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         txtLog.setRows(5);
-        txtLog.setText("Start >");
         txtLog.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtLog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLog);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 400, 376, 104));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 400, 376, 100));
 
         DV_MTS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_MTS.setModel(new javax.swing.table.DefaultTableModel(
@@ -321,7 +311,7 @@ public class Station extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
-        getContentPane().add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 480, 44, 22));
+        getContentPane().add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 476, 44, 22));
 
         DV_Menus.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Menus.setModel(new javax.swing.table.DefaultTableModel(
@@ -390,7 +380,7 @@ public class Station extends javax.swing.JInternalFrame {
                 btnSave_OptMouseClicked(evt);
             }
         });
-        getContentPane().add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 480, 76, 22));
+        getContentPane().add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 476, 76, 22));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -488,6 +478,70 @@ public class Station extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration">
+    JSONArray JArray_MENUS;
+    JSONArray JArray_CATS;
+    JSONArray JArray_ITEMS; 
+    
+    private boolean Load;
+    private static Duration DD;
+    
+    public static String COUNTRY = "COUNTRY";
+    public static String platform = "CDL";
+    public static String BaseAPI;
+  
+    private int SitesLastRow = -1; 
+    private int BrandsLastRow = -1; 
+    private int MenusLastRow = -1;  
+    private int CategoriesLastRow = -1; 
+    private int ItemsLastRow = -1; 
+    
+    private boolean CONFIG = false;
+    private String C = "";
+
+    protected String Mobile_User_ID = "";
+    protected String Mobile_User_TKN = "";
+
+    public static int T_Index;   
+    public static Stopwatch sw1 = Stopwatch.createUnstarted();
+    public static DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
+    public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    public static String SQL = ""; 
+    public static String url = "";
+    public static String app = "";
+    public static String appId = "";
+    public static String env = "";
+    public static String SITE = "";
+    public static String SiteID = "";
+    public static String GROUP = "";
+    public static String BRAND = "";
+    public static String BrandID = "";
+    
+    protected JSONObject json;
+    protected String BODY = "";   
+    //  "exact": {
+    protected String exact_gateway_password = "~RSQzgwC";
+    protected String exact_gateway_id = "AE7628-02";
+    protected String exact_id = "APE3Ev9vQkfo2mmOpKP7fGJ48NKAPOugo0gdlWJqS3O";
+    protected String exate_gateway_password = "";
+    //  "freedompay": {
+    protected String freedompay_id = "9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO";
+    protected String freedompay_terminal_id = "26241559005";
+    protected String freedompay_store_id = "16167424007";
+    protected String FP_URL = ""; //https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
+    
+    protected String ShoppingCart_Delivery_ID = "";
+    protected String Order_Delivery_ID = "";
+    protected String ShoppingCart_Pickup_ID = "";
+    protected String Order_Pickup_ID = "";
+    
+    protected String Auth = "";
+    protected String EXACT_Payment_TKN = "";
+    protected String FP_Payment_TKN = "";
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">        
     private void DV_SitesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_SitesMouseClicked
         if (SitesLastRow == DV_Sites.getSelectedRow()) {
            return;
@@ -593,6 +647,7 @@ public class Station extends javax.swing.JInternalFrame {
     private void cmbLocItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbLocItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbLocItemStateChanged
+    // </editor-fold>
 
     private void Load_Form(){
         Load = true;
@@ -617,7 +672,6 @@ public class Station extends javax.swing.JInternalFrame {
         CONFIG = false;   
         this.setTitle("Site > Station(Brand) > Menu(s)");
     }
-
     private void LOAD_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
@@ -731,19 +785,18 @@ public class Station extends javax.swing.JInternalFrame {
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
             url = "https://staging.adminpanel.compassdigital.org/";
-            FP_URL = "https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
+            FP_URL = "https://cwallet.uat.freedompay.com"; 
         } else if (cmbEnv.getSelectedItem().toString().contains("Dev")) {
             BaseAPI = "https://api.compassdigital.org/dev";
             env = "DE";
             url = "https://dev.adminpanel.compassdigital.org/";
-            FP_URL = "https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
+            FP_URL = "https://cwallet.uat.freedompay.com"; 
         } else {
             BaseAPI = "https://api.compassdigital.org/v1";
             env = "PR";
             url = "https://adminpanel.compassdigital.org/";
             FP_URL = "https://cwallet.freedompay.com";
         }
-        Get_AP3_TKN();
         LOAD_CONFIG();
         if (CONFIG) {
             Load = true;
@@ -752,19 +805,6 @@ public class Station extends javax.swing.JInternalFrame {
         }
         app = cmbApp.getSelectedItem().toString();
         GetSites();       
-    }
-    private void Get_AP3_TKN(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
-            rs.next();
-            WO_TKN = rs.getString(1);
-            conn.close();
-        } catch (SQLException ex) {
-            txtLog.append("=== WO_TKN > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetSites() {   
         SitesLastRow = -1;
@@ -791,20 +831,8 @@ public class Station extends javax.swing.JInternalFrame {
         sorter.setSortKeys(sortKeys);  
         sorter.setSortable(0, false);         
                  
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         try { 
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + appId);   //  + "?web=true&expanded=true"    
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    throw new ClientProtocolException("Response: " + response.getStatusLine().getStatusCode() + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            String responseBody = httpclient.execute(httpget, responseHandler);  
-                JSONObject json = new JSONObject(responseBody);
+            Api_Call("GET", BaseAPI + "/location/multigroup/" + appId, "", "");
             String site;
             String country;
             String id;
@@ -854,18 +882,10 @@ public class Station extends javax.swing.JInternalFrame {
             sorter.setSortable(0, true); 
             sorter.sort();            
       
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-        }
         txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
@@ -888,7 +908,7 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.append("" + app + " > " + DV_Sites.getRowCount() + " Site(s) found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        
+        cmbLoc.removeAllItems();
         GetBrands();
     }
     private void GetBrands() {
@@ -930,22 +950,9 @@ public class Station extends javax.swing.JInternalFrame {
         sorter.setSortKeys(sortKeys);  
         sorter.setSortable(0, false);                  
         
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 3) + "?extended=true&nocache=1"); 
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                }
-            };
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
+            Api_Call("GET", BaseAPI + "/location/group/" + DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 3) + "?extended=true&nocache=1", "", "");
+            
             JSONArray Location = json.getJSONArray("locations");
             JSONArray brands = null;
             
@@ -994,18 +1001,11 @@ public class Station extends javax.swing.JInternalFrame {
             sorter.setSortable(0, true); 
             sorter.sort();            
                
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-        } 
+
         txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
@@ -1020,8 +1020,10 @@ public class Station extends javax.swing.JInternalFrame {
                     } 
                 }
             }
-            BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3));           
-            //GetMenus(); // ======================== force only after Brand selection
+            BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3)); 
+            GetBrandDropOffLocations(); // ============== comment to force only after Brand click / selection
+            GetBrandTimeslots();        // ============== comment to force only after Brand click / selection
+            GetMenus();                 // ============== comment to force only after Brand click / selection
         } else {
             BrandID = "null";
         }
@@ -1039,22 +1041,9 @@ public class Station extends javax.swing.JInternalFrame {
         }
         sw1.start();        
         cmbLoc.removeAllItems();
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/config/public/" + BrandID); 
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                }
-            };
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
+            Api_Call("GET", BaseAPI + "/config/public/" + BrandID, "", "");
+
             if(json.has("delivery_destinations")) {
                 JSONArray DESTINATIONS = json.getJSONArray("delivery_destinations");
                 for (int i = 0; i < DESTINATIONS.length(); i++) {
@@ -1064,15 +1053,7 @@ public class Station extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
-        }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-        } 
+        }          
         txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();            
@@ -1091,25 +1072,11 @@ public class Station extends javax.swing.JInternalFrame {
         DefaultTableModel BTS_Model = new DefaultTableModel();
         BTS_Model.setColumnIdentifiers(ColumnsName);
         DV_BTS.setModel(BTS_Model);        
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/brand/" + BrandID + "/timeslots"); 
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                }
-            };
-            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
+            Api_Call("GET", BaseAPI + "/location/brand/" + BrandID + "/timeslots", "", "");
             if (json.has("timeslots")) {
                 JSONArray timeslots = json.getJSONArray("timeslots");
+                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
                 for (int i = 0; i < timeslots.length(); i++) {
                     JSONObject timeslot = timeslots.getJSONObject(i);
                     BTS_Model.addRow(new Object[]{sdf.format(new Date(timeslot.getLong("id")*1000)), timeslot.getLong("id")});
@@ -1124,14 +1091,7 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-        } 
+ 
         if(DV_BTS.getRowCount() > 0){
             DV_BTS.changeSelection(0, 0, false, false);
         }        
@@ -1169,28 +1129,16 @@ public class Station extends javax.swing.JInternalFrame {
         sw1.start();        
          
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         String label = "<empty> 'en'";
         String resp;
         JArray_MENUS = new JSONArray();
         try {
             String[] Menu_IDs = IDS.split(",");
             for (String id : Menu_IDs) {
-                HttpGet httpget = new HttpGet(BaseAPI + "/menu/" + id); // + "?extended=true&nocache=1"
-                ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                    int status = response.getStatusLine().getStatusCode();
-                    String Msg = response.getStatusLine().getReasonPhrase();
-                    if (status >= 200 && status < 500) {
-                        HttpEntity entity = response.getEntity();
-                        return entity != null ? EntityUtils.toString(entity) : null;
-                    } else {
-                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                        throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                    }
-                };
-                String responseBody = httpclient.execute(httpget, responseHandler);
-                JArray_MENUS.put(new JSONObject(responseBody));
-                JSONObject menu = new JSONObject(responseBody);
+                Api_Call("GET", BaseAPI + "/menu/" + id, "", "");
+
+                JArray_MENUS.put(json);
+                JSONObject menu = new JSONObject(json);
                 resp = "OK " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
                 if(menu.has("label")){                    
                     if(menu.getJSONObject("label").has("en")) {
@@ -1204,19 +1152,12 @@ public class Station extends javax.swing.JInternalFrame {
                 }
                 Model.addRow(new Object[]{label, resp, id});
             }
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             resp = "Error " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());  
-            }
-        } 
+ 
         DV_Menus.setModel(Model);    
         DV_Menus.setDefaultEditor(Object.class, null);
         DV_Menus.getColumnModel().getColumn(0).setPreferredWidth(140);
@@ -1251,23 +1192,9 @@ public class Station extends javax.swing.JInternalFrame {
         DefaultTableModel MTS_Model = new DefaultTableModel();
         MTS_Model.setColumnIdentifiers(BrandsColumnsName);
         DV_MTS.setModel(MTS_Model);        
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MenuID); 
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                }
-            };
+            Api_Call("GET", BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MenuID, "", "");
             SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
             if (json.has("timeslots")) {
                 JSONArray timeslots = json.getJSONArray("timeslots");
                 for (int i = 0; i < timeslots.length(); i++) {
@@ -1283,15 +1210,7 @@ public class Station extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
-        }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-        } 
+        }          
         lblMTS.setText("Menu Slots " + DV_MTS.getRowCount());
         txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1564,15 +1483,13 @@ public class Station extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     
-    protected void Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY) {
+    protected void Api_Call(String Method, String EndPoint, String AUTH, String BODY) {
         FAIL = false;
-        String Result = "?";
-        int status = 0;
-        String R_Time = "";
-        String ErrorMsg = "";
         json = null;
         RequestSpecification request;
         request = RestAssured.given();
+        int status = 0;
+        String Result = "?";
         if (!AUTH.isEmpty()) {
             request.header("Authorization", AUTH);
         }
@@ -1582,7 +1499,6 @@ public class Station extends javax.swing.JInternalFrame {
             if (sw1.isRunning()) {
                 sw1.reset();
             }
-            _t++;
             sw1.start();
             Response response = null;
             switch (Method) {
@@ -1616,23 +1532,24 @@ public class Station extends javax.swing.JInternalFrame {
             }
             Result = response.getStatusLine();
             status = response.getStatusCode();
-
+            if (status != 200) {
+                txtLog.append("Target Endpoint: " + EndPoint + "\r\n");
+                txtLog.append("Result: " + status + " - " + Result + "\r\n");
+               txtLog.setCaretPosition(txtLog.getDocument().getLength());                
+            }
             if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
                 json = new JSONObject(response.asString());
                 if (json.has("error")) {
-                    ErrorMsg = "Error: " + json.getString("error") + ". ";
+                    txtLog.append("Error: " + json.getString("error") + "\r\n");
+                    txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                 }
             }
-            R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
-            //
         } catch (Exception ex) {
-            R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
-            _f++;
             FAIL = true;
-            err = ex.getMessage().trim();
-            if (err.contains("\n")) {
-                (err = err.substring(0, err.indexOf("\n"))).trim();
-            }
+            txtLog.append("API Call Error: " + ex.getMessage().trim() + "\r\n");
+            txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         }
         sw1.reset();
     }
@@ -1642,12 +1559,15 @@ public class Station extends javax.swing.JInternalFrame {
         btnDOrder.setEnabled(false);
         if(DV_Items.getSelectedRowCount() > 0 && (DV_BTS.getSelectedRowCount() > 0 || DV_MTS.getSelectedRowCount() > 0)){
             btnPOrder.setEnabled(true);
-            if(cmbLoc.getSelectedItem().toString().trim() != ""){
+            if(cmbLoc.getItemCount() > 0 && cmbLoc.getSelectedItem().toString().trim() != ""){
                 btnDOrder.setEnabled(true);
             }
         }
     }
     private void PLACE_ORDERS(String TYPE){
+        btnDOrder.setEnabled(false);
+        btnPOrder.setEnabled(false);
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         Get_Mobile_User_TKN();
         if(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 2).toString().toLowerCase().startsWith("c")){
              EXACT();
@@ -1655,6 +1575,9 @@ public class Station extends javax.swing.JInternalFrame {
         if(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 2).toString().toLowerCase().startsWith("u")){
             FP();
         }
+        btnDOrder.setEnabled(true);
+        btnPOrder.setEnabled(true);
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
     } 
     
     private void Get_Mobile_User_TKN(){
@@ -1664,7 +1587,6 @@ public class Station extends javax.swing.JInternalFrame {
         String J = "==== User API(s):" + "\r\n";
         Mobile_User_ID = "";
         Mobile_User_TKN = "";
-        CloseableHttpClient httpclient = HttpClients.createDefault();
         String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
         String Realm = Func.Realm_ID(cmbApp.getSelectedItem().toString(), env);
         if(sw1.isRunning()){
@@ -1673,44 +1595,29 @@ public class Station extends javax.swing.JInternalFrame {
         sw1.start();        
         
         try {     // ============ User
-            HttpGet httpget = new HttpGet(BaseAPI + "/user/auth" + "?realm=" + Realm);
-            httpget.setHeader("Authorization", "Basic " + UserAuth);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 500) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-                    throw new ClientProtocolException("Response: " + status + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));
+            Api_Call("GET", BaseAPI + "/user/auth" + "?realm=" + Realm, "Basic " + UserAuth, "");
             J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
-
             Mobile_User_ID = json.getString("user");
             Mobile_User_TKN = json.getString("token");
 
-        } catch (IOException | JSONException ex) {
+        } catch (Exception ex) {
             txtLog.append(" > " + J); 
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
         txtLog.append("== " + BaseAPI + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.append("== " + "UserID:"  + Mobile_User_ID + "\r\n");
-        txtLog.append("== " + "UserTKN:"  + Mobile_User_TKN + "\r\n");
+        txtLog.append("== " + "UserID: "  + Mobile_User_ID + "\r\n");
+        txtLog.append("== " + "UserTKN: "  + Mobile_User_TKN + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         sw1.reset();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }                                    
-    private void Delete_Payments(){
+    private void Get_Delete_User_Payments(){
         txtLog.append("- Delete_Payments..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 List<String> Payment_Methods_IDS = new ArrayList<>();
         Auth = "Bearer " + Mobile_User_TKN;
-
-//        JOB_Api_Call("Mobile User Payment Method(s)", "GET",
-//                BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "", 200, ParentTest, "no_jira");
+        Api_Call("GET", BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "");
         if (json != null) {
             try {
                 if (json.has("payment_methods")) {
@@ -1720,11 +1627,15 @@ public class Station extends javax.swing.JInternalFrame {
                         Payment_Methods_IDS.add(p.getString("token"));
                     }
                 }
+
             } catch (Exception ex) {
-                String AAAA = ex.getMessage();
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         }
-
+        txtLog.append("Mobile User Payments: " + Payment_Methods_IDS.size() + " found" + "\r\n"); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                
         BODY = "{\"user\":\"" + Mobile_User_ID + "\"}";
         for (int i = 0; i < Payment_Methods_IDS.size(); i++) {
             
@@ -1733,15 +1644,76 @@ public class Station extends javax.swing.JInternalFrame {
         }
     }
 
-
-
     private void EXACT(){
         txtLog.append("- EXACT..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        
+        EXACT_Payment_TKN = "";
+        Auth = "Bearer " + Mobile_User_TKN;
+        JSONObject requestParams = new JSONObject();
+        requestParams.put("cardholder_name", "JTT API Automation");
+        requestParams.put("cc_expiry", "1224");
+        requestParams.put("cc_number", "5555555555554444"); // Mastercard
+        requestParams.put("cc_verification_str2", "123");
+        requestParams.put("postal_code", "L3L3C4");
+        JSONObject options = new JSONObject();
+        options.put("exact_gateway_id", exact_gateway_id);
+        options.put("exact_gateway_password", exact_gateway_password);
+        requestParams.put("options", options);
+        BODY = requestParams.toString();
+
+        Api_Call("POST", BaseAPI + "/payment/" + exact_id + "/paymenttoken", Auth, BODY);
+        if (json != null && json.has("token")) {
+            try {
+                EXACT_Payment_TKN = json.getString("token");
+            } catch (Exception ex) {
+                String AAAA = ex.getMessage();
+            }
+        }
+        txtLog.append("EXACT_Payment_TKN: " + EXACT_Payment_TKN + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }
     private void FP(){
         txtLog.append("- FP..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());       
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());   
+        FP_Payment_TKN = "";
+        String Access_TKN = "";
+        
+        Auth = "Bearer " + Mobile_User_TKN;
+        Api_Call("GET", BaseAPI + "/payment/" + freedompay_id + "/clienttoken", Auth, "");
+        if (json != null && json.has("access_token")) {
+            try {
+                Access_TKN = json.getString("access_token");
+            } catch (Exception ex) {
+                txtLog.append("FP_Client_TKN Error: " + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+        }
+        Auth = "Bearer " + Access_TKN;
+        JSONObject requestParams = new JSONObject();
+        requestParams.put("nameOnCard", "JTT API Automation");
+        requestParams.put("avsVerificationRequired", true);
+        requestParams.put("isPreferred", true);
+        requestParams.put("cardNumber", "4111111111111111"); // Visa
+        requestParams.put("expiryYear", 2024);
+        requestParams.put("expiryMonth", 12);
+        requestParams.put("CVV", "123");
+        requestParams.put("cvvVerificationRequired", true);
+        JSONObject billingAddress = new JSONObject();
+        billingAddress.put("postalCode", "L3L3C4");
+        requestParams.put("billingAddress", billingAddress);
+        BODY = requestParams.toString();
+        Api_Call("POST", FP_URL + "/TokenService/api/consumers/tokens", Auth, BODY);
+        if (json != null) {
+            try {
+                FP_Payment_TKN = json.getString("token");
+            } catch (Exception ex) {
+                txtLog.append("FP_Payment_TKN Error: " + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+        }
+        txtLog.append("FP_Payment_TKN: " + FP_Payment_TKN + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }
 
 
@@ -1809,72 +1781,6 @@ public class Station extends javax.swing.JInternalFrame {
 //    }
 
 
-
-    // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration">
-    JSONArray JArray_MENUS;
-    JSONArray JArray_CATS;
-    JSONArray JArray_ITEMS; 
-    
-    private boolean Load;
-    private static Duration DD;
-    
-    public static String COUNTRY = "COUNTRY";
-    public static String platform = "CDL";
-    public static String BaseAPI;
-  
-    private int SitesLastRow = -1; 
-    private int BrandsLastRow = -1; 
-    private int MenusLastRow = -1;  
-    private int CategoriesLastRow = -1; 
-    private int ItemsLastRow = -1; 
-    
-    private boolean CONFIG = false;
-    private String C = "";
-    protected String MOBILE_ID = "";
-    protected String MOBILE_PW = "";
-    protected String Mobile_User_ID = "";
-    protected String Mobile_User_TKN = "";
-
-    public static int T_Index;   
-    public static Stopwatch sw1 = Stopwatch.createUnstarted();
-    public static DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
-    public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-    public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    public static String SQL = ""; 
-    public static String WO_TKN = "";    
-    public static String url = "";
-    public static String app = "";
-    public static String appId = "";
-    public static String env = "";
-    public static String SITE = "";
-    public static String SiteID = "";
-    public static String GROUP = "";
-    public static String BRAND = "";
-    public static String BrandID = "";
-    
-    protected JSONObject json;
-    protected String BODY = "";   
-    //  "exact": {
-    protected String exact_gateway_password = "~RSQzgwC";
-    protected String exact_gateway_id = "AE7628-02";
-    protected String exact_id = "APE3Ev9vQkfo2mmOpKP7fGJ48NKAPOugo0gdlWJqS3O";
-    protected String exate_gateway_password = "";
-    //  "freedompay": {
-    protected String freedompay_id = "9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO";
-    protected String freedompay_terminal_id = "26241559005";
-    protected String freedompay_store_id = "16167424007";
-    protected String FP_URL = ""; //https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
-    
-    protected String ShoppingCart_Delivery_ID = "";
-    protected String Order_Delivery_ID = "";
-    protected String ShoppingCart_Pickup_ID = "";
-    protected String Order_Pickup_ID = "";
-    
-    protected String Auth = "";
-    protected String EXACT_Payment_TKN = "";
-    protected String FP_Payment_TKN = "";
-
-    // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">  
     // Variables declaration - do not modify//GEN-BEGIN:variables

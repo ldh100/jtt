@@ -21,7 +21,7 @@ class mealplan extends API_GUI{
     private String AAA = "";
     protected void run() {
         Auth = "Bearer " + Mobile_User_TKN;
-        JOB_Api_Call("Get MealPlan by /'MEALPLAN_ID'", "GET", 
+        JOB_Api_Call("Get MealPlan by ID", "GET", 
             BaseAPI + "/mealplan/" + MEALPLAN_ID, Auth, "", 200, ParentTest, "no_jira");
         if (json != null) {
             AAA = json.toString(4);
