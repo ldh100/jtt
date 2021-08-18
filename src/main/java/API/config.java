@@ -17,17 +17,20 @@ class config extends API_GUI {
         Promo_Voucher_Code = a.Promo_Voucher_Code;
         ParentTest = a.ParentTest;
     }
-    private String fake_Site_Id = "thisisfakesiteidtopreventdatachnage123";
-
+    
+    //This fake site ID has used to prevent original modification to site.
+    private final String fake_Site_Id = "thisisfakesiteidtopreventdatachnage123";
+    private String AAA = "";
+    
     protected void run() {
-        //This fake site ID has used to prevent original modification to site.
+        MEALPLAN_ID = "";
+        MEALPLAN_TENDER = "";
 
         Auth = "Bearer " + AP3_TKN;   // =============== config(s) ===================================
 //        JOB_Api_Call("config > /'AppID'", "GET", BaseAPI + "/config/" + AppID, Auth, "", 200, ParentTest, "no_jira");
 //        JOB_Api_Call("Public config > /'AppID'", "GET", BaseAPI + "/config/public/" + AppID, "", "", 200, ParentTest, "no_jira");
 
-        JOB_Api_Call(
-                "Config > /'SiteID'", "GET",
+        JOB_Api_Call("Config > /'SiteID'", "GET",
                 BaseAPI + "/config/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
         if (json != null) {
             try {
@@ -44,37 +47,58 @@ class config extends API_GUI {
                     exact_id = p.getJSONObject("exact").getString("id");
                 }
             } catch (Exception ex) {
-                String AAAA = ex.getMessage();
+                AAA = ex.getMessage();
             }
         }
 
-        JOB_Api_Call(
-                "Public Config > /'SiteID'", "GET",
+        JOB_Api_Call("Public Config > /'SiteID'", "GET",
                 BaseAPI + "/config/public/" + SiteID, "", "", 200, ParentTest, "no_jira");
-//{
-//    "promotions": [],
-//    "mealplan": [{
-//        "note": {},
-//        "tenders": [{
-//            "tax_exempt": false,
-//            "id": "1001",
-//            "type": "declining_balance"
-//        }],
-//        "name": "CBORD",
-//        "id": "PBeOojlNRlFRPk5d6DgjSNjgOm8oyBSARdMGp1WZUe7WEkzgw2UlX4GPEzYjhQ9zAXk8R6Fz3OGql3RouB7QYN4E1ZtMJ2",
-//        "valid_email_domains": [],
-//        "type": "CBORD DIRECT"
-//    }]
-//}        
+        //{
+        //    "promotions": [],
+        //    "mealplan": [{
+        //        "note": {},
+        //        "tenders": [{
+        //            "tax_exempt": false,
+        //            "id": "1001",
+        //            "type": "declining_balance"
+        //        }],
+        //        "name": "CBORD",
+        //        "id": "PBeOojlNRlFRPk5d6DgjSNjgOm8oyBSARdMGp1WZUe7WEkzgw2UlX4GPEzYjhQ9zAXk8R6Fz3OGql3RouB7QYN4E1ZtMJ2",
+        //        "valid_email_domains": [],
+        //        "type": "CBORD DIRECT"
+        //    }]
+        //}   
+
+        //Getting the meal plan ID and Tender_ID
+        
+        if (json != null) {  
+            AAA = json.toString(4);
+            try {
+                if (json.has("mealplan")) {
+                    JSONArray mealplan = json.getJSONArray("mealplan");                    
+                    MEALPLAN_ID = mealplan.getJSONObject(0).getString("id");                          
+
+                    JSONObject td = mealplan.getJSONObject(0);
+                    if (td.has("tenders")) {
+                        JSONArray tenders = td.getJSONArray("tenders");  
+                        if(!tenders.getJSONObject(0).isNull("id")){
+                            MEALPLAN_TENDER = tenders.getJSONObject(0).getString("id");  
+                        }
+                    }
+                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }
+
 
 //        JOB_Api_Call("config > /'UnitID'", "GET", BaseAPI + "/config/" + UnitID, Auth, "", 200, ParentTest, "no_jira");
 //        JOB_Api_Call("Public config > /'UnitID'", "GET", BaseAPI + "/config/public/" + UnitID, "", "", 200, ParentTest, "no_jira");
-        JOB_Api_Call(
-                "Config > /'BrandID'", "GET",
+
+        JOB_Api_Call("Config > /'BrandID'", "GET",
                 BaseAPI + "/config/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
 
-        JOB_Api_Call(
-                "Public Config > /'BrandID'", "GET",
+        JOB_Api_Call("Public Config > /'BrandID'", "GET",
                 BaseAPI + "/config/public/" + BrandID, "", "", 200, ParentTest, "no_jira");
         if (json != null) {
             DELIEVERY_DESTINATIONS = new ArrayList<>();
@@ -83,9 +107,8 @@ class config extends API_GUI {
                 for (int i = 0; i < DESTINATIONS.length(); i++) {
                     DELIEVERY_DESTINATIONS.add(DESTINATIONS.getString(i));
                 }
-
             } catch (Exception ex) {
-                String AAA = ex.getMessage();
+                AAA = ex.getMessage();
             }
         }
 
@@ -309,6 +332,7 @@ class config extends API_GUI {
     }
 
     protected void configPublicAPIs() {
+
         //<editor-fold defaultstate="collapsed" desc="POST Config-public">
         // Test Scenario 1: Positive flow to POST Config-public - Add Mealplan
         BODY = "{"

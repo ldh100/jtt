@@ -1,6 +1,7 @@
 package API;
 
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -10,6 +11,10 @@ class order extends API_GUI{
         app = a.app;
         AppID = a.AppID;
         env = a.env;
+        
+        ADMIN_ID = a.ADMIN_ID;
+        ADMIN_PW = a.ADMIN_PW;
+        
         AP3_TKN = a.AP3_TKN;
         BaseAPI = a.BaseAPI;
         Mobile_User_ID = a.Mobile_User_ID;
@@ -83,9 +88,16 @@ class order extends API_GUI{
     }
     private void PLACE_ORDERS(){
         Auth = "Bearer " + Mobile_User_TKN;
-
         Date requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(BRAND_TIMESLOTS.size() - 1))*1000L);
-        //Date requested_date = new Date(Long.parseLong(MENU_TIMESLOTS.get(0))*1000L);
+        //Date requested_date = new Date(Long.parseLong(MENU_TIMESLOTS.get(MENU_TIMESLOTS.size() - 1))*1000L);
+        
+//        for(int j = 0;  j < BRAND_TIMESLOTS.size(); j++){ // Select earliest available timeslot - ASAP   >>> UTC <> Local ????
+//            if(Long.parseLong(BRAND_TIMESLOTS.get(j))*1000 > System.currentTimeMillis()){
+//                requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(j))*1000L);
+//                break;
+//            }
+//        }
+
         String Requested_Date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(requested_date);
 
         requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
@@ -109,7 +121,7 @@ class order extends API_GUI{
         requestParams = new JSONObject();       //  Mobile User Pickup Order Issue =================  
         JSONArray items = new JSONArray();   
         JSONObject item_1 = new JSONObject();
-            item_1.put("id", ITEMS_IDS.get(ITEMS_IDS.size() - 1));
+            item_1.put("id", ITEMS_IDS.get(ITEMS_IDS.size() - 1)); // ITEMS_IDS.get(ITEMS_IDS.size() - 1)
             item_1.put("_index", "abcd");
             item_1.put("quantity", 1);
             item_1.put("unit", 1);    
@@ -131,11 +143,23 @@ class order extends API_GUI{
             AAA = json.toString(4);
         } 
         
-        Auth = "Bearer " + AP3_TKN;
+        Realm = A.Func.Realm_ID("AP3", env);
+        String Fresh_TKN = "";
+        Auth = "Basic " + Base64.getEncoder().encodeToString((ADMIN_ID + ":" + ADMIN_PW).getBytes());
+        JOB_Api_Call("AP3 Admin Authentication", "GET", 
+            BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", 200, ParentTest, "no_jira");
+        if(json != null){ 
+            try {
+                if(json.has("token")) Fresh_TKN = json.getString("token");  
+            } catch (Exception ex){
+                String AAAA = ex.getMessage();
+            }
+        }    
+        Auth = "Bearer " + Fresh_TKN;
         requestParams = new JSONObject();       //  Mobile User Pickup Order Refund =================
         JSONArray refunds = new JSONArray();   
         JSONObject refund_1 = new JSONObject();
-            item_1.put("id", ITEMS_IDS.get(ITEMS_IDS.size() - 1));
+            item_1.put("id", ITEMS_IDS.get(ITEMS_IDS.size() - 1)); 
             item_1.put("_index", "abcd");
             item_1.put("quantity", 1);  
             item_1.put("price", new JSONObject().put("amount", 1.0));
@@ -177,6 +201,7 @@ class order extends API_GUI{
         JSONObject is = new JSONObject();
         is.put("in_progress", true);
         is.put("ready", true);
+        //is.put("out_for_delivery", true);        
         requestParams.put("is", is); 
         BODY = requestParams.toString();
         JOB_Api_Call("Update Delivery Order Status - ready", "PATCH", 

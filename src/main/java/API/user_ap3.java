@@ -37,7 +37,7 @@ class user_ap3 extends API_GUI{
                 if(json.has("user")) AP3_User_ID = json.getString("user"); 
                 if(json.has("token")) AP3_TKN = json.getString("token");  
             } catch (Exception ex){
-                //
+                String AAAA = ex.getMessage();
             }
         }
 

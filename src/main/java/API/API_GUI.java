@@ -670,7 +670,10 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String CompanyID = "";
     protected String GL_MENU = "";
     protected String GL_MENU_ID = "";
-
+    
+    protected String MEALPLAN_ID = "";
+    protected String MEALPLAN_TENDER = "";
+    
     protected String Bolter_Site_ID = "";
     protected String Market_Brand_ID = "";
 
@@ -3156,7 +3159,11 @@ public class API_GUI extends javax.swing.JInternalFrame {
             exact_gateway_password = BR.exact_gateway_password;
             exact_gateway_id = BR.exact_gateway_id;
             exact_id = BR.exact_id;
+            
             DELIEVERY_DESTINATIONS = BR.DELIEVERY_DESTINATIONS;
+            
+            MEALPLAN_ID = BR.MEALPLAN_ID;
+            MEALPLAN_TENDER = BR.MEALPLAN_TENDER;
         }
 
         if (!FAIL) {
@@ -3277,8 +3284,25 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setName("Notification - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }
+        
+        if (true) {
+            SCOPE += "Partner ";
+            EX += " - " + "\t" + "Partner" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Partner");
+            partner BR = new API.partner(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
+            ParentTest.getModel().setName("Partner - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
+        }        
 
-        // =================  Mobile User, Payment, ShoppingCart, Order ===================
+        // =================  Mobile User, Meal Plan, Payment, ShoppingCart, Order ===================
         if (true) {
             SCOPE += "Mobile User ";
             EX += " - " + "\t" + "Mobile User" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -3298,6 +3322,23 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Mobile_User_ID = BR.Mobile_User_ID;
             Mobile_User_TKN = BR.Mobile_User_TKN;
         }
+
+        if (true) {
+            SCOPE += "Meal Plan ";
+            EX += " - " + "\t" + "Meal Plan" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Meal Plan");
+            mealplan BR = new API.mealplan(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
+            ParentTest.getModel().setName("Meal Plan - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
+        }        
         if (!FAIL) {
             SCOPE += "Payment ";
             EX += " - " + "\t" + "Payment" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";

@@ -20,6 +20,7 @@ class user_bolter extends API_GUI{
         Order_Delivery_ID = a.Order_Delivery_ID;
         Order_Pickup_ID = a.Order_Pickup_ID;
     }
+    String AAA = "";
     protected void run() {  
         Auth = "Basic " + Base64.getEncoder().encodeToString(("WrongID" + ":" + RUNNER_PW).getBytes());
         JOB_Api_Call("Bolter Authentication - Wrong ID> /user/auth?realm=bolter", "GET", 
@@ -60,7 +61,7 @@ class user_bolter extends API_GUI{
                     }
                 }
             } catch (Exception ex){
-                String AAA = ex.getMessage();
+                AAA = ex.getMessage();
             }
         }
         
