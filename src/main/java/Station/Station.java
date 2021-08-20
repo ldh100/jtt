@@ -5,14 +5,13 @@
  */
 package Station;
 
-import static A.A.*;
+import static A.A.FAIL;
 import A.Func;
 import com.google.common.base.Stopwatch;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import java.awt.Cursor;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -26,20 +25,13 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-//import org.apache.http.HttpEntity;
-//import org.apache.http.HttpResponse;
-//import org.apache.http.client.ClientProtocolException;
-//import org.apache.http.client.ResponseHandler;
-//import org.apache.http.client.methods.HttpGet;
-//import org.apache.http.impl.client.CloseableHttpClient;
-//import org.apache.http.impl.client.HttpClients;
-//import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -439,7 +431,7 @@ public class Station extends javax.swing.JInternalFrame {
 
         txtPROMO.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtPROMO.setText("None");
-        getContentPane().add(txtPROMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 452, 120, -1));
+        getContentPane().add(txtPROMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 452, 136, -1));
 
         lblBDOFF.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblBDOFF.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -450,22 +442,24 @@ public class Station extends javax.swing.JInternalFrame {
         btnDOrder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnDOrder.setText("Place Delivery Order");
         btnDOrder.setEnabled(false);
+        btnDOrder.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnDOrder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnDOrderMouseClicked(evt);
             }
         });
-        getContentPane().add(btnDOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 444, 144, 24));
+        getContentPane().add(btnDOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(712, 448, 132, 24));
 
         btnPOrder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnPOrder.setText("Place Pickup Order");
         btnPOrder.setEnabled(false);
+        btnPOrder.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnPOrder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPOrderMouseClicked(evt);
             }
         });
-        getContentPane().add(btnPOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 412, 144, 24));
+        getContentPane().add(btnPOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(712, 412, 132, 24));
 
         cmbLoc.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbLoc.addItemListener(new java.awt.event.ItemListener() {
@@ -473,7 +467,7 @@ public class Station extends javax.swing.JInternalFrame {
                 cmbLocItemStateChanged(evt);
             }
         });
-        getContentPane().add(cmbLoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 416, 120, 20));
+        getContentPane().add(cmbLoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 416, 136, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -484,11 +478,12 @@ public class Station extends javax.swing.JInternalFrame {
     JSONArray JArray_ITEMS; 
     
     private boolean Load;
+    private boolean FAIL;
     private static Duration DD;
     
-    public static String COUNTRY = "COUNTRY";
-    public static String platform = "CDL";
-    public static String BaseAPI;
+    protected String COUNTRY = "COUNTRY";
+    protected String platform = "CDL";
+    protected String BaseAPI;
   
     private int SitesLastRow = -1; 
     private int BrandsLastRow = -1; 
@@ -498,27 +493,29 @@ public class Station extends javax.swing.JInternalFrame {
     
     private boolean CONFIG = false;
     private String C = "";
-
+    
+    protected String AP3_TKN = "";
     protected String Mobile_User_ID = "";
     protected String Mobile_User_TKN = "";
 
-    public static int T_Index;   
-    public static Stopwatch sw1 = Stopwatch.createUnstarted();
-    public static DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
-    public static final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-    public static final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    public static String SQL = ""; 
-    public static String url = "";
-    public static String app = "";
-    public static String appId = "";
-    public static String env = "";
-    public static String SITE = "";
-    public static String SiteID = "";
-    public static String GROUP = "";
-    public static String BRAND = "";
-    public static String BrandID = "";
+    protected int T_Index;   
+    protected Stopwatch sw1 = Stopwatch.createUnstarted();
+    protected DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a"); 
+    protected final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    protected final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    protected String SQL = ""; 
+    protected String url = "";
+    protected String app = "";
+    protected String appId = "";
+    protected String env = "";
+    protected String SITE = "";
+    protected String SiteID = "";
+    protected String GROUP = "";
+    protected String BRAND = "";
+    protected String BrandID = "";
     
     protected JSONObject json;
+    protected JSONObject requestParams = null;
     protected String BODY = "";   
     //  "exact": {
     protected String exact_gateway_password = "~RSQzgwC";
@@ -535,6 +532,7 @@ public class Station extends javax.swing.JInternalFrame {
     protected String Order_Delivery_ID = "";
     protected String ShoppingCart_Pickup_ID = "";
     protected String Order_Pickup_ID = "";
+    protected String Requested_Date = "";
     
     protected String Auth = "";
     protected String EXACT_Payment_TKN = "";
@@ -554,7 +552,7 @@ public class Station extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_DV_SitesMouseClicked
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        F_COUNT--;
+        A.A.F_COUNT--;
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void DV_BrandsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_BrandsMouseClicked
@@ -637,11 +635,15 @@ public class Station extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formAncestorAdded
 
     private void btnPOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPOrderMouseClicked
-        PLACE_ORDERS("P");
+        if(btnPOrder.isEnabled()) {
+            PLACE_ORDERS("P");
+        }
     }//GEN-LAST:event_btnPOrderMouseClicked
 
     private void btnDOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDOrderMouseClicked
-        PLACE_ORDERS("D");
+        if(btnDOrder.isEnabled()) {
+            PLACE_ORDERS("D");
+        }
     }//GEN-LAST:event_btnDOrderMouseClicked
 
     private void cmbLocItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbLocItemStateChanged
@@ -674,8 +676,8 @@ public class Station extends javax.swing.JInternalFrame {
     }
     private void LOAD_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'Station' AND [env] = '" + env + "'";
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+            SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + A.A.UserID + "' AND [platform] = 'WEB' AND [app] = 'Station' AND [env] = '" + env + "'";
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(SQL);
             rs.next();
@@ -707,7 +709,7 @@ public class Station extends javax.swing.JInternalFrame {
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             } else {
                 CONFIG = false;
-                txtLog.append("=== Station, User: " + UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
+                txtLog.append("=== Station, User: " + A.A.UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         } catch (Exception ex) {
@@ -745,8 +747,8 @@ public class Station extends javax.swing.JInternalFrame {
             return;
         }
         
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
-            SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + UserID + "' AND [platform] = 'WEB' AND [app] = 'Station' AND [env] = '" + env + "'";
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+            SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + A.A.UserID + "' AND [platform] = 'WEB' AND [app] = 'Station' AND [env] = '" + env + "'";
             Statement _del = conn.createStatement();
             _del.execute(SQL);
             PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
@@ -762,7 +764,7 @@ public class Station extends javax.swing.JInternalFrame {
                     ",?" +
                     ",?" +
                     ")");
-            _insert.setString(1, UserID);
+            _insert.setString(1, A.A.UserID);
             _insert.setString(2, env);
             _insert.setString(3, "WEB");
             _insert.setString(4, "Station");
@@ -804,20 +806,29 @@ public class Station extends javax.swing.JInternalFrame {
             Load = false;
         }
         app = cmbApp.getSelectedItem().toString();
+        Get_AP3_TKN();
         GetSites();       
+    }
+    private void Get_AP3_TKN() {
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
+            rs.next();
+            AP3_TKN = rs.getString(1);
+            conn.close();
+        } catch (SQLException ex) {
+            txtLog.append("=== AP3_TKN > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        }
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
     private void GetSites() {   
         SitesLastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("- Load Sites ..." + "\r\n");
+        txtLog.append("\r\n- Load Sites ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        sw1.start();        
-
-        appId = Func.App_ID(cmbApp.getSelectedItem().toString(), env);
+              
+        appId = A.Func.App_ID(cmbApp.getSelectedItem().toString(), env);
 
         String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
         DefaultTableModel SitesModel = new DefaultTableModel();
@@ -883,12 +894,9 @@ public class Station extends javax.swing.JInternalFrame {
             sorter.sort();            
       
         } catch (Exception ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
+            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n");   
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }         
-        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset();
         
         if (DV_Sites.getRowCount() > 0) {
             DV_Sites.changeSelection(0, 0, false, false);
@@ -905,7 +913,7 @@ public class Station extends javax.swing.JInternalFrame {
 
         }
         lblSITES.setText(app + " Sites (" + DV_Sites.getRowCount() + " found)");
-        txtLog.append("" + app + " > " + DV_Sites.getRowCount() + " Site(s) found" + "\r\n");
+        txtLog.append(app + " > " + DV_Sites.getRowCount() + " Site(s) found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         cmbLoc.removeAllItems();
@@ -920,7 +928,7 @@ public class Station extends javax.swing.JInternalFrame {
         BrandsLastRow = -1;
         SitesLastRow = DV_Sites.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("- Load Brands ..." + "\r\n");
+        txtLog.append("\r\n- Load Brands ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String[] ColumnsName = {}; 
         DefaultTableModel Model = new DefaultTableModel();
@@ -931,12 +939,7 @@ public class Station extends javax.swing.JInternalFrame {
         DV_Mods.setModel(Model);
         DV_BTS.setModel(Model);
         DV_MTS.setModel(Model);
-        lblMenus.setText("Click Brand to get Menu(s) ...");
-        
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        sw1.start();        
+        lblMenus.setText("Click Brand to get Menu(s) ...");              
      
         String[] BrandsColumnsName = {"Brand / Station","Location","menu_ids", "Brand Id", "Unit ID"}; 
         DefaultTableModel BrandsModel = new DefaultTableModel();
@@ -1002,14 +1005,10 @@ public class Station extends javax.swing.JInternalFrame {
             sorter.sort();            
                
         } catch (Exception ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
 
-        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset();
-   
         if (DV_Brands.getRowCount() > 0) {
             DV_Brands.changeSelection(0, 0, false, false);
             if (CONFIG && !"".equals(BRAND.trim())) {
@@ -1020,26 +1019,25 @@ public class Station extends javax.swing.JInternalFrame {
                     } 
                 }
             }
+            txtLog.append("" + SITE + " > " + DV_Brands.getRowCount() + " Station(s) found" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3)); 
-            GetBrandDropOffLocations(); // ============== comment to force only after Brand click / selection
-            GetBrandTimeslots();        // ============== comment to force only after Brand click / selection
-            GetMenus();                 // ============== comment to force only after Brand click / selection
+//            GetBrandDropOffLocations(); // ============== comment to force only after Brand click / selection
+//            GetBrandTimeslots();        // ============== comment to force only after Brand click / selection
+//            GetMenus();                 // ============== comment to force only after Brand click / selection
         } else {
             BrandID = "null";
+            txtLog.append("" + SITE + " > " + "0 Station(s) found" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
-        txtLog.append("" + SITE + " > " + DV_Brands.getRowCount() + " Station(s) found" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+ 
         BrandsLastRow = -1;         
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetBrandDropOffLocations(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("- Load Brand Drop Off Locations ..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        sw1.start();        
+        txtLog.append("\r\n- Load Brand Drop Off Locations ..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());      
         cmbLoc.removeAllItems();
         try {
             Api_Call("GET", BaseAPI + "/config/public/" + BrandID, "", "");
@@ -1051,23 +1049,17 @@ public class Station extends javax.swing.JInternalFrame {
                 }
             }
         } catch (Exception ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
-        }          
-        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset();            
+        }                     
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
     }
     
     private void GetBrandTimeslots(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("- Load Brand Timeslots ..." + "\r\n");
+        txtLog.append("\r\n- Load Brand Timeslots ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        sw1.start();        
+       
         String[] ColumnsName = {"Time", "epoch"}; 
         DefaultTableModel BTS_Model = new DefaultTableModel();
         BTS_Model.setColumnIdentifiers(ColumnsName);
@@ -1088,21 +1080,20 @@ public class Station extends javax.swing.JInternalFrame {
             DV_BTS.getColumnModel().getColumn(1).sizeWidthToFit();
 
         } catch (Exception ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
  
         if(DV_BTS.getRowCount() > 0){
             DV_BTS.changeSelection(0, 0, false, false);
         }        
-        lblBTS.setText("Brand Slots " + DV_BTS.getRowCount());
-        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset();            
+        lblBTS.setText("Brand Slots " + DV_BTS.getRowCount());     
+        txtLog.append("=== Selected Brand > " + DV_BTS.getRowCount() + " Brand Slots" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());         
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
     }
     private void GetMenus(){
-        txtLog.append("- Load Menus ..." + "\r\n");
+        txtLog.append("\r\n- Load Menus ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String[] cName = {}; 
         DefaultTableModel M = new DefaultTableModel();
@@ -1122,11 +1113,8 @@ public class Station extends javax.swing.JInternalFrame {
             lblMenus.setText("Brand/Station " + BRAND + " > No Menus found");
             return;
         }
+        Stopwatch sw2 = Stopwatch.createUnstarted();
         
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        sw1.start();        
          
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         String label = "<empty> 'en'";
@@ -1135,11 +1123,15 @@ public class Station extends javax.swing.JInternalFrame {
         try {
             String[] Menu_IDs = IDS.split(",");
             for (String id : Menu_IDs) {
+                if(sw2.isRunning()){
+                    sw2.reset();
+                }
+                sw2.start();                
                 Api_Call("GET", BaseAPI + "/menu/" + id, "", "");
 
                 JArray_MENUS.put(json);
                 JSONObject menu = new JSONObject(json);
-                resp = "OK " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
+                resp = "OK " + String.format("%.2f", (double)(sw2.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
                 if(menu.has("label")){                    
                     if(menu.getJSONObject("label").has("en")) {
                         label = menu.getJSONObject("label").getString("en");
@@ -1151,13 +1143,13 @@ public class Station extends javax.swing.JInternalFrame {
                     label = "label 'en' Not Found";
                 }
                 Model.addRow(new Object[]{label, resp, id});
+                sw2.reset();
             }
         } catch (Exception ex) {
-            resp = "Error " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.append("Error " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
- 
+
         DV_Menus.setModel(Model);    
         DV_Menus.setDefaultEditor(Object.class, null);
         DV_Menus.getColumnModel().getColumn(0).setPreferredWidth(140);
@@ -1165,12 +1157,8 @@ public class Station extends javax.swing.JInternalFrame {
         DV_Menus.getColumnModel().getColumn(2).setPreferredWidth(80);
         DV_Menus.changeSelection(0, 0, false, false);
         
-        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset();
- 
         lblMenus.setText("Brand/Station '" + BRAND + "' > " + DV_Menus.getRowCount() + " Menu(s) found");
-        txtLog.append("Brand/Station '" + BRAND + "' > " + DV_Menus.getRowCount() + " Menu(s) found" + "\r\n");
+        txtLog.append("=== Brand/Station '" + BRAND + "' > " + DV_Menus.getRowCount() + " Menu(s) found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
      
@@ -1181,12 +1169,8 @@ public class Station extends javax.swing.JInternalFrame {
     }
     private void GetMenuTimeslots(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("- Load Menu Timeslots ..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        sw1.start();  
+        txtLog.append("\r\n- Load Menu Timeslots ..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String MenuID = String.valueOf(DV_Menus.getValueAt(DV_Menus.getSelectedRow(), 2));
         String[] BrandsColumnsName = {"Time", "epoch"}; 
         DefaultTableModel MTS_Model = new DefaultTableModel();
@@ -1208,13 +1192,13 @@ public class Station extends javax.swing.JInternalFrame {
             DV_MTS.getColumnModel().getColumn(1).sizeWidthToFit();
 
         } catch (Exception ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }          
-        lblMTS.setText("Menu Slots " + DV_MTS.getRowCount());
-        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        lblMTS.setText("Menu Slots " + DV_MTS.getRowCount());    
+        txtLog.append("=== Selected Menu > " + DV_MTS.getRowCount() + " Menu Slots" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset();               
+
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
 
@@ -1271,10 +1255,10 @@ public class Station extends javax.swing.JInternalFrame {
             }
         }
         catch(Exception ex){
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
+            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
-        txtLog.append("Selected Menu > " + DV_Categories.getRowCount() + " Categories found" + "\r\n");
+        txtLog.append("=== Selected Menu > " + DV_Categories.getRowCount() + " Categories found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         GetItems();
@@ -1284,7 +1268,7 @@ public class Station extends javax.swing.JInternalFrame {
         if (CategoriesLastRow == DV_Categories.getSelectedRow()) {
            return;
         }else{
-            txtLog.append("- GetItems: " + "\r\n"); 
+            txtLog.append("\r\n- GetItems: " + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -1359,10 +1343,10 @@ public class Station extends javax.swing.JInternalFrame {
             }
         }
         catch(JSONException ex){
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
+            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
-        txtLog.append("Selected Category > " + DV_Items.getRowCount() + " Items found" + "\r\n");
+        txtLog.append("== Selected Category > " + DV_Items.getRowCount() + " Items found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));        
         
@@ -1373,7 +1357,7 @@ public class Station extends javax.swing.JInternalFrame {
         if (ItemsLastRow == DV_Items.getSelectedRow()) {
             return;
         }else{
-            txtLog.append("- GetMods: " + "\r\n"); 
+            txtLog.append("\r\n- GetMods: " + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
@@ -1475,10 +1459,10 @@ public class Station extends javax.swing.JInternalFrame {
             DV_Mods.changeSelection(0, 0, false, false);    
         }
         catch(Exception ex){
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         }
-        txtLog.append("Selected Item > " + mGR + " Mofifier Group(s), " + mIT + " total Mods" + "\r\n");
+        txtLog.append("== Selected Item > " + mGR + " Mofifier Group(s), " + mIT + " total Mods" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1490,15 +1474,15 @@ public class Station extends javax.swing.JInternalFrame {
         request = RestAssured.given();
         int status = 0;
         String Result = "?";
+        if (sw1.isRunning()) {
+            sw1.reset();
+        }        
         if (!AUTH.isEmpty()) {
             request.header("Authorization", AUTH);
         }
         request.header("Content-Type", "application/json");
         request.header("Accept", "application/json");
         try {
-            if (sw1.isRunning()) {
-                sw1.reset();
-            }
             sw1.start();
             Response response = null;
             switch (Method) {
@@ -1535,22 +1519,22 @@ public class Station extends javax.swing.JInternalFrame {
             if (status != 200) {
                 txtLog.append("Target Endpoint: " + EndPoint + "\r\n");
                 txtLog.append("Result: " + status + " - " + Result + "\r\n");
-               txtLog.setCaretPosition(txtLog.getDocument().getLength());                
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());                
             }
             if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
                 json = new JSONObject(response.asString());
                 if (json.has("error")) {
                     txtLog.append("Error: " + json.getString("error") + "\r\n");
-                    txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+
                 }
             }
         } catch (Exception ex) {
             FAIL = true;
             txtLog.append("API Call Error: " + ex.getMessage().trim() + "\r\n");
-            txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         }
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         sw1.reset();
     }
     
@@ -1569,53 +1553,249 @@ public class Station extends javax.swing.JInternalFrame {
         btnPOrder.setEnabled(false);
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         Get_Mobile_User_TKN();
+        if(FAIL) {
+            Validate_Pleace_Order();
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+            return;
+        }
+        Set_Requested_Date();
+        if(FAIL) {
+            Validate_Pleace_Order();
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+            return;
+        }
         if(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 2).toString().toLowerCase().startsWith("c")){
-             EXACT();
+            EXACT();
+            if(FAIL) {
+                Validate_Pleace_Order();
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                return;
+            }
+            if(TYPE.equals("P")){
+                New_Pickup_ShoppingCart(); 
+                if(FAIL) {
+                    Validate_Pleace_Order();
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                    return;
+                }
+                Place_Update_Pickup_Order(EXACT_Payment_TKN);
+                if(FAIL) {
+                    Validate_Pleace_Order();
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                    return;
+                }
+            }
+            if(TYPE.equals("D")){
+                New_Delivery_ShoppingCart(); 
+                if(FAIL) {
+                    Validate_Pleace_Order();
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                    return;
+            }
+                Place_Update_Delivery_Order(EXACT_Payment_TKN);
+                if(FAIL) {
+                    Validate_Pleace_Order();
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                    return;
+                }
+            }            
         }
         if(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 2).toString().toLowerCase().startsWith("u")){
             FP();
+            if(FAIL) {
+                Validate_Pleace_Order();
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                return;
+            }
+            if(TYPE.equals("P")){
+                New_Pickup_ShoppingCart();  
+                if(FAIL) {
+                    Validate_Pleace_Order();
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                    return;
+                }
+                Place_Update_Pickup_Order(FP_Payment_TKN);
+                if(FAIL) {
+                    Validate_Pleace_Order();
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                    return;
+                }
+            }
+            if(TYPE.equals("D")){
+                New_Delivery_ShoppingCart();   
+                if(FAIL) {
+                    Validate_Pleace_Order();
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                    return;
+                }
+                Place_Update_Delivery_Order(FP_Payment_TKN);
+                if(FAIL) {
+                    Validate_Pleace_Order();
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                    return;
+                }
+            } 
         }
-        btnDOrder.setEnabled(true);
-        btnPOrder.setEnabled(true);
+        Validate_Pleace_Order();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
     } 
     
     private void Get_Mobile_User_TKN(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("- Load User..." + "\r\n");
+        FAIL = false;
+        txtLog.append("\r\n- Moblibe User Authentication.." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         String J = "==== User API(s):" + "\r\n";
         Mobile_User_ID = "";
         Mobile_User_TKN = "";
         String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
-        String Realm = Func.Realm_ID(cmbApp.getSelectedItem().toString(), env);
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        sw1.start();        
+        String Realm = Func.Realm_ID(cmbApp.getSelectedItem().toString(), env);      
         
-        try {     // ============ User
+        try {     // ============ Mobile User Authentication =====================================
             Api_Call("GET", BaseAPI + "/user/auth" + "?realm=" + Realm, "Basic " + UserAuth, "");
             J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
             Mobile_User_ID = json.getString("user");
             Mobile_User_TKN = json.getString("token");
-
+            txtLog.append("== " + BaseAPI + "/user/auth?realm="  + Realm + " > " + "\r\n");
+            txtLog.append("== " + "UserID: "  + Mobile_User_ID + "\r\n");
+            txtLog.append("== " + "UserTKN: "  + Mobile_User_TKN + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch (Exception ex) {
-            txtLog.append(" > " + J); 
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
+            FAIL = true;
+            txtLog.append(" > " + J + "\r\n"); 
+            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
-        txtLog.append("== " + BaseAPI + "/user/auth?realm="  + Realm + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.append("== " + "UserID: "  + Mobile_User_ID + "\r\n");
-        txtLog.append("== " + "UserTKN: "  + Mobile_User_TKN + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        sw1.reset();
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }                                    
-    private void Get_Delete_User_Payments(){
-        txtLog.append("- Delete_Payments..." + "\r\n");
+    private void New_Pickup_ShoppingCart(){
+        FAIL = false;
+        txtLog.append("\r\n- " + "New Pickup Shopping Cart ...."+ "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-                List<String> Payment_Methods_IDS = new ArrayList<>();
+
+        Auth = "Bearer " + Mobile_User_TKN;
+        
+        BODY = "{\"brand\":\"" + BrandID + "\"," +
+            "\"is\":{\"type\":\"pickup\"}," +
+            "\"mealSwipeTotal\":0.0," +
+            "\"menu\":\"" + DV_Menus.getValueAt(DV_Menus.getSelectedRow(), 2).toString() + "\"," +               
+            "\"payment_method\":{\"credit_card\":{}," +
+            "\"mealplan\":{}}," +
+            "\"showSingleTimeSlot\":false," +
+            "\"type\":0," +
+            "\"typeOfCell\":0}";
+        Api_Call("POST", BaseAPI + "/shoppingcart", Auth, BODY);
+        if(json != null){
+            try {
+                ShoppingCart_Pickup_ID = json.getString("id");
+                txtLog.append("== " + "New SCart ID: "  + ShoppingCart_Pickup_ID + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            } catch (Exception ex){
+                FAIL = true;
+                txtLog.append("== " + "New SCart ERROR: "  + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                return;
+            }
+        } 
+        
+        txtLog.append("\r\n- " + "Add Menu Item to Pickup Shopping Cart ...."+ "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());        
+        BODY = "{\"items\":[{\"id\":\"" + DV_Items.getValueAt(DV_Menus.getSelectedRow(), 5).toString() + "\"," +
+            "\"quantity\":1," +
+            "\"price\":{\"amount\":0.05}}]}"; 
+        Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID, Auth, BODY);
+        if(json != null){
+            try{
+                ShoppingCart_Pickup_ID = json.getString("id");
+                txtLog.append("== " + "Updated SCart ID: "  + ShoppingCart_Pickup_ID + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            } catch (Exception ex){
+                FAIL = true;
+                txtLog.append("== " + "Update SCart ERROR: "  + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+        }         
+    }
+    private void New_Delivery_ShoppingCart(){
+        FAIL = false;
+        txtLog.append("\r\n- " + "New Delivery Shopping Cart ...."+ "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+
+        Auth = "Bearer " + Mobile_User_TKN;
+        
+        BODY = "{\"brand\":\"" + BrandID + "\"," +
+            "\"is\":{\"type\":\"delivery\"}," +
+            "\"mealSwipeTotal\":0.0," +
+            "\"menu\":\"" + DV_Menus.getValueAt(DV_Menus.getSelectedRow(), 2).toString() + "\"," +   
+            "\"payment_method\":{\"credit_card\":{}," +
+            "\"mealplan\":{}}," +
+            "\"showSingleTimeSlot\":false," +
+            "\"type\":0," +
+            "\"typeOfCell\":0}";
+        Api_Call("POST", BaseAPI + "/shoppingcart", Auth, BODY);
+        if(json != null){
+            try {
+                ShoppingCart_Delivery_ID = json.getString("id");
+                txtLog.append("== " + "New SCart ID: "  + ShoppingCart_Delivery_ID + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            } catch (Exception ex){
+                FAIL = true;
+                txtLog.append("== " + "New SCart ERROR: "  + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                return;
+            }
+        } 
+        
+        txtLog.append("\r\n- " + "Add Menu Item to Delivery Shopping Cart ...."+ "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());        
+        BODY = "{\"items\":[{\"id\":\"" + DV_Items.getValueAt(DV_Menus.getSelectedRow(), 5).toString() + "\"," +
+            "\"quantity\":1," +
+            "\"price\":{\"amount\":0.05}}]}"; 
+        Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, BODY);
+        if(json != null){
+            try{
+                ShoppingCart_Delivery_ID = json.getString("id");
+                txtLog.append("== " + "Updated SCart ID: "  + ShoppingCart_Delivery_ID + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            } catch (Exception ex){
+                FAIL = true;
+                txtLog.append("== " + "Update SCart ERROR: "  + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+        }         
+           
+    }
+
+    private void Set_Requested_Date(){
+        FAIL = false;
+        Long TimeSlot = 0L;
+        try{
+            if(DV_BTS.getSelectedRowCount() > 0){
+                TimeSlot = Long.parseLong(DV_BTS.getValueAt(DV_BTS.getSelectedRow(), 1).toString());            
+                txtLog.append("\r\n- " + "Set Order Requested date from Brand Timeslot...."+ "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+            if(DV_MTS.getSelectedRowCount() > 0){
+                TimeSlot = Long.parseLong(DV_BTS.getValueAt(DV_MTS.getSelectedRow(), 1).toString());            
+                txtLog.append("\r\n- " + "Set Order Requested date from Menu Timeslot...."+ "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            }
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+            Date requested_date = new Date(TimeSlot *1000L);
+            Requested_Date = sdf.format(requested_date);
+            
+            txtLog.append("== " + "Requested UTC Date: " + Requested_Date + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        } catch (Exception ex){
+            FAIL = true;
+            txtLog.append("== " + "Requested Date ERROR: "  + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        }
+    }
+
+    private void Delete_User_Payments(){
+        txtLog.append("\r\n- Delete_Payments..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        List<String> Payment_Methods_IDS = new ArrayList<>();
         Auth = "Bearer " + Mobile_User_TKN;
         Api_Call("GET", BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "");
         if (json != null) {
@@ -1629,7 +1809,7 @@ public class Station extends javax.swing.JInternalFrame {
                 }
 
             } catch (Exception ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
+                txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
         }
@@ -1643,9 +1823,9 @@ public class Station extends javax.swing.JInternalFrame {
 //                    BaseAPI + "/payment/" + exact_id + "/method/" + Payment_Methods_IDS.get(i), Auth, BODY, 200, ParentTest, "no_jira");
         }
     }
-
     private void EXACT(){
-        txtLog.append("- EXACT..." + "\r\n");
+        FAIL = false;
+        txtLog.append("\r\n- Exact API(s)..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         
         EXACT_Payment_TKN = "";
@@ -1667,14 +1847,16 @@ public class Station extends javax.swing.JInternalFrame {
             try {
                 EXACT_Payment_TKN = json.getString("token");
             } catch (Exception ex) {
+                FAIL = true;
                 String AAAA = ex.getMessage();
             }
         }
-        txtLog.append("EXACT_Payment_TKN: " + EXACT_Payment_TKN + "\r\n");
+        txtLog.append("=== EXACT_Payment_TKN: " + EXACT_Payment_TKN + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }
     private void FP(){
-        txtLog.append("- FP..." + "\r\n");
+        FAIL = false;
+        txtLog.append("\r\n- Freedompay API(s)..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         FP_Payment_TKN = "";
         String Access_TKN = "";
@@ -1685,10 +1867,13 @@ public class Station extends javax.swing.JInternalFrame {
             try {
                 Access_TKN = json.getString("access_token");
             } catch (Exception ex) {
+                FAIL = true;
                 txtLog.append("FP_Client_TKN Error: " + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                return;
             }
         }
+        
         Auth = "Bearer " + Access_TKN;
         JSONObject requestParams = new JSONObject();
         requestParams.put("nameOnCard", "JTT API Automation");
@@ -1707,79 +1892,118 @@ public class Station extends javax.swing.JInternalFrame {
         if (json != null) {
             try {
                 FP_Payment_TKN = json.getString("token");
+                txtLog.append("=== FP_Payment_TKN: " + FP_Payment_TKN + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex) {
+                FAIL = true;
                 txtLog.append("FP_Payment_TKN Error: " + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
         }
-        txtLog.append("FP_Payment_TKN: " + FP_Payment_TKN + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }
 
+    private void Place_Update_Delivery_Order(String Payment_TKN){
+        FAIL = false;
+        txtLog.append("\r\n- " + "Place Delivery Order ...."+ "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        Auth = "Bearer " + Mobile_User_TKN;
 
-//        Auth = "Bearer " + Mobile_User_TKN;
-//        Date requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(BRAND_TIMESLOTS.size() - 1))*1000L);
-//        //Date requested_date = new Date(Long.parseLong(MENU_TIMESLOTS.get(MENU_TIMESLOTS.size() - 1))*1000L);
-//        
-
-//
-//        String Requested_Date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(requested_date);
-//
-//        requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
-//        requestParams.put("location_brand", BrandID);
-//        requestParams.put("customer", Mobile_User_ID);
-//        requestParams.put("pickup_name", "JTT API Test Pickup");
-//        requestParams.put("pickup", Requested_Date);
-//        requestParams.put("requested_date", Requested_Date);
-//        requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
-//        JSONObject payment = new JSONObject();
-//        payment.put("token", EXACT_Payment_TKN);
-//        requestParams.put("payment", payment); 
-//        BODY = requestParams.toString();        
-//        JOB_Api_Call("Place Pickup Order", "POST", 
-//            BaseAPI + "/order?lang=en", Auth, BODY, 200, ParentTest, "no_jira");
-//        if(json != null && json.has("id")){
-//            Order_Pickup_ID = json.getString("id");
-//        }   
-//
-
-//        Auth = "Bearer " + Mobile_User_TKN;
-//        BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
-//                "\"location_brand\":\"" + BrandID + "\"," + 
-//                "\"customer\":\"" + Mobile_User_ID + "\"," +  
-//                "\"details\":" +                                   
-//                    "{\"contact_number\":\"4165551234\"," +
-//                    "\"destination\":\"" + DELIEVERY_DESTINATIONS.get(0) + "\"," +
-//                    "\"duration\":\"" + "00:05:00" + "\"," +
-//                    "\"instructions\":\"" + "Discard this Order" + "\"," +
-//                    "\"name\":\"" + "JTT API Test Delivery" + "\"," +
-//                    "\"order_type\":\"delivery\"}," + 
-//                "\"payment\":" + 
-//                    "{\"token\":\"" + EXACT_Payment_TKN + "\"}," +
-//                "\"requested_date\":\"" + Requested_Date + "\"," +
-//                "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
-//                "\"}";        
-//        JOB_Api_Call("Place Delivery Order", "POST", 
-//            BaseAPI + "/order", Auth, BODY, 200, ParentTest, "no_jira");
-//        if(json != null && json.has("id")){
-//            Order_Delivery_ID = json.getString("id");
-//        }               
-//        
-//        Auth = "Bearer " + AP3_TKN;
-//        requestParams = new JSONObject();   //  Mobile User Update Delivery Order  =================
-//        JSONObject is = new JSONObject();
-//        is.put("in_progress", true);
-//        is.put("ready", true);
-//        //is.put("out_for_delivery", true);        
-//        requestParams.put("is", is); 
-//        BODY = requestParams.toString();
-//        JOB_Api_Call("Update Delivery Order Status - ready", "PATCH", 
-//            BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");        
-//        if(json != null){           
-//            AAA = json.toString(4);  // Check actual update
-//        }         
-//    }
-
+        BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
+                "\"location_brand\":\"" + BrandID + "\"," + 
+                "\"customer\":\"" + Mobile_User_ID + "\"," +  
+                "\"details\":" +                                   
+                    "{\"contact_number\":\"4165551234\"," +
+                    "\"destination\":\"" + cmbLoc.getSelectedItem().toString() + "\"," +
+                    "\"duration\":\"" + "00:05:00" + "\"," +
+                    "\"instructions\":\"" + "Discard this Order" + "\"," +
+                    "\"name\":\"" + "JTT API Test Delivery" + "\"," +
+                    "\"order_type\":\"delivery\"}," + 
+                "\"payment\":" + 
+                    "{\"token\":\"" + Payment_TKN + "\"}," +
+                "\"requested_date\":\"" + Requested_Date + "\"," +
+                "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
+                "\"}";        
+        Api_Call("POST",  BaseAPI + "/order", Auth, BODY);
+        if(json != null && json.has("id")){
+            Order_Delivery_ID = json.getString("id");
+            txtLog.append("== " + "New Delivery Order ID: "  + Order_Delivery_ID + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        } else{
+            FAIL = true;
+            return;
+        }              
+        
+        txtLog.append("\r\n- " + "Update Delivery Order > 'Ready' ...."+ "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        Auth = "Bearer " + AP3_TKN;
+        requestParams = new JSONObject();   //  Update Delivery Order  =================
+        JSONObject is = new JSONObject();      
+        is.put("in_progress", true);
+        is.put("ready", true);     
+        requestParams.put("is", is); 
+        BODY = requestParams.toString();
+        Api_Call("PATCH",  BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY);        
+        if(json != null){
+            try {
+                Order_Delivery_ID = json.getString("id");
+                txtLog.append("== " + "Updated Delivery Order ID: "  + Order_Delivery_ID + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            } catch (Exception ex){
+                FAIL = true;
+                txtLog.append("== " + "Update Delivery Order ERROR: "  + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+        }   
+    }
+    private void Place_Update_Pickup_Order(String Payment_TKN){
+        FAIL = false;
+        txtLog.append("\r\n- " + "Place Pickup Order ...."+ "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        
+        Auth = "Bearer " + Mobile_User_TKN;                               
+        requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
+        requestParams.put("location_brand", BrandID);
+        requestParams.put("customer", Mobile_User_ID);
+        requestParams.put("pickup_name", "JTT API Test Pickup");
+        requestParams.put("pickup", Requested_Date);
+        requestParams.put("requested_date", Requested_Date);
+        requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
+        JSONObject payment = new JSONObject();
+        payment.put("token", Payment_TKN);
+        requestParams.put("payment", payment); 
+        BODY = requestParams.toString();       
+        Api_Call("POST",  BaseAPI + "/order", Auth, BODY);
+        if(json != null && json.has("id")){
+            Order_Pickup_ID = json.getString("id");
+            txtLog.append("== " + "New Pickup Order ID: "  + Order_Pickup_ID + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        }else{
+            FAIL = true; 
+            return;
+        }        
+        
+        txtLog.append("\r\n- " + "Update Pickup Order > 'Ready' ...."+ "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        Auth = "Bearer " + AP3_TKN;
+        requestParams = new JSONObject();   //  Update Pickup Order  =================
+        JSONObject is = new JSONObject();      
+        is.put("in_progress", true);
+        is.put("ready", true);     
+        requestParams.put("is", is); 
+        BODY = requestParams.toString();
+        Api_Call("PATCH",  BaseAPI + "/order/" + Order_Pickup_ID, Auth, BODY);        
+        if(json != null){
+            try {
+                Order_Pickup_ID = json.getString("id");
+                txtLog.append("== " + "Updated Pickup Order ID: "  + Order_Pickup_ID + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            } catch (Exception ex){
+                FAIL = true;
+                txtLog.append("== " + "Update Pickup Order ERROR: "  + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+        }   
+    }
 
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">  
