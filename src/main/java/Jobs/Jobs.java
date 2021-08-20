@@ -26,7 +26,7 @@ import javax.swing.table.TableRowSorter;
 
 public class Jobs extends javax.swing.JInternalFrame {
 
-//<editor-fold defaultstate="collapsed" desc="Cron PAttern Samples">
+//<editor-fold defaultstate="collapsed" desc="Cron Pattern Samples">
 //    5 * * * *
 //    This pattern causes a task to be launched once every hour, at the begin of the fifth minute (00:05, 01:05, 02:05 etc.).
 //    
@@ -619,6 +619,9 @@ public class Jobs extends javax.swing.JInternalFrame {
         }
     }    
     private void STOP_CRON(){
+        if(SCH == null){
+            return;
+        }
         btnStopCron.setEnabled(false);
         if(SCH.isStarted()){
             SCH.stop();
