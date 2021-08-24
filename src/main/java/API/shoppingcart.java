@@ -32,7 +32,6 @@ class shoppingcart extends API_GUI{
         if(json != null){
             try {
                 ShoppingCart_Pickup_ID = json.getString("id");
-                AAA = json.toString(4);
             } catch (Exception ex){
                 AAA = ex.getMessage();
             }

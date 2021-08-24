@@ -25,7 +25,7 @@ class user_mobile extends API_GUI{
         JOB_Api_Call("Mobile User Authentication - Wrong PW", "GET", 
             BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", 401, ParentTest, "no_jira");  
         
-        Auth = "Basic " + Base64.getEncoder().encodeToString((MOBILE_ID + ":" + MOBILE_PW).getBytes());
+        Auth = "Basic " + Base64.getEncoder().encodeToString((MOBILE_ID + ":" + MOBILE_PW).getBytes());       
         JOB_Api_Call("Mobile User Authentication", "GET", 
             BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
@@ -37,8 +37,18 @@ class user_mobile extends API_GUI{
             }
         }
         
+//        Auth = "Bearer " + Mobile_User_TKN;
+//        JOB_Api_Call("Mobile User > /secret/fcm_token", "POST", 
+//            BaseAPI + "/user/" + Mobile_User_ID + "/secret/fcm_token", Auth, "", 200, ParentTest, "no_jira");
+//        if(json != null){
+//            try {
+//                if(json.has("fcm_token")) Mobile_User_SECRET = json.getString("fcm_token");  
+//            } catch (Exception ex){
+//                //
+//            }
+//        } 
+       
         Auth = "Bearer " + Mobile_User_TKN;
-        
         JOB_Api_Call("Mobile User > /permissions", "GET", 
             BaseAPI + "/user/" + Mobile_User_ID + "/permissions", Auth, "", 200, ParentTest, "no_jira");
         
@@ -93,7 +103,7 @@ class user_mobile extends API_GUI{
         JOB_Api_Call("Mobile Create New User > Email Already Exists", "POST", 
             BaseAPI + "/user", Auth, BODY, 409, ParentTest, "no_jira"); 
               
-        if (env != "PR") {        
+        if (!"PR".equals(env)) {        
             BODY = "{\"name\":" +                                       //  New Mobile User ===============================
                     "{\"first\":\"Jtt\",\"last\":\"Automation\"}," + 
                 "\"email\":\"" + "a_" + NewID + "@gmail.com" + "\"," +

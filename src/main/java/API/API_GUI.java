@@ -610,7 +610,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String MOBILE_PW = "";
     protected String Mobile_User_ID = "";
     protected String Mobile_User_TKN = "";
-
+    protected String Mobile_User_SECRET = "";
+    
     protected String Card_Type = "";
     protected String Card_Last4 = "";
     protected String Card_Name = "";
@@ -1390,7 +1391,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         long m7 = System.currentTimeMillis() - (60 * 60 * 24 * 7 * 1000); // 1604681735799
 
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1);
+            HttpGet httpget = new HttpGet(BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + "&end=" + m1);
             httpget.setHeader("Authorization", "Bearer " + Mobile_User_TKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
@@ -1440,13 +1441,13 @@ public class API_GUI extends javax.swing.JInternalFrame {
             }
             jList_Orders.setModel(model);
             J += "\r\n";
-            J += BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1 + "\r\n" + json.toString(4) + "\r\n";
+            J += BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + "&end=" + m1 + "\r\n" + json.toString(4) + "\r\n";
         } catch (IOException | JSONException ex) {
-            J += BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1 + " > " + ex.getMessage() + "\r\n";
+            J += BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + "&end=" + m1 + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
-        txtLog.append("== " + BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1 + " > " + "\r\n== " + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec ==" + "\r\n");
+        txtLog.append("== " + BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + "&end=" + m1 + " > " + "\r\n== " + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         sw1.reset();
         try {
@@ -3321,6 +3322,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
             Mobile_User_ID = BR.Mobile_User_ID;
             Mobile_User_TKN = BR.Mobile_User_TKN;
+            Mobile_User_SECRET = BR.Mobile_User_SECRET;
         }
 
         if (true) {

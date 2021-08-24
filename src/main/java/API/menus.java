@@ -158,7 +158,6 @@ class menus extends API_GUI{
 //                    for (int i = 0; i < menus.length(); i++) {
 //                        JSONObject g = menus.getJSONObject(i);                        
 //                        MENU_IDS.add(g.getString("id"));
-//                        System.out.println(MENU_IDS.get(i));
 //                        parent_id= (g.getString("parent_id"));
 //                    }
 //                } 
@@ -187,8 +186,7 @@ class menus extends API_GUI{
                     for (int i = 0; i < groups.length(); i++) {
                         JSONObject Categories = groups.getJSONObject(i);
                         if(Categories.getJSONObject("label").has("en")){                        
-                        CATEGORIES_IDS.add(Categories.getString("id"));
-                        System.out.println(Categories.getString("id"));
+                            CATEGORIES_IDS.add(Categories.getString("id"));
                         }
                     }
                 } 
@@ -469,9 +467,8 @@ class menus extends API_GUI{
         if (json != null) {
             try {
                 New_GlobalMod_ID = json.getString("id");
-                System.out.println("Global Mod ID: " + json.getString("id"));
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
+                String AAA = ex.getMessage();
             }
         }
 //GET/menu/modifier/group{id} : Get a Modifier Group
@@ -491,8 +488,7 @@ class menus extends API_GUI{
                     for (int i = 0; i < items.length(); i++) {
                         JSONObject item = items.getJSONObject(i);
                         if(item.has("id")){                        
-                        GlobalModGroup_Items_IDS.add(item.getString("id"));
-                        System.out.println(item.getString("id"));
+                            GlobalModGroup_Items_IDS.add(item.getString("id"));
                         }
                     }
                 } 

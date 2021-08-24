@@ -578,7 +578,7 @@ public class Orders extends javax.swing.JInternalFrame {
         long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // 1604681735799
 
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1);
+            HttpGet httpget = new HttpGet(BaseAPI + "/order/customer/" + userID + "?start=" + m7 + "&end=" + m1 + "&order_type=all");
             httpget.setHeader("Authorization",  "Bearer " + userTKN);
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
@@ -623,13 +623,13 @@ public class Orders extends javax.swing.JInternalFrame {
             }
             jList_Orders.setModel(model);
 //            J += "\r\n";
-//            J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + "\r\n" + json.toString(4);
+//            J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + "&end=" + m1 + "\r\n" + json.toString(4);
         } catch (IOException | JSONException ex) {
-//            J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + " > " + ex.getMessage() + "\r\n";
+//            J += BaseAPI + "/order/customer/" + userID + "?start=" + m7 + "&end=" + m1 + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
-        txtLog.append("== " + BaseAPI + "/order/customer/" + userID + "?start=" + m7 + ";end=" + m1 + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.append("== " + BaseAPI + "/order/customer/" + userID + "?start=" + m7 + "&end=" + m1 + " > " + "\r\n== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         sw1.reset();
         try {
@@ -1313,7 +1313,8 @@ if(!R.equals("OK")){
     private static List<String> BRAND_TIMESLOTS;
     private static List<String> MENU_TIMESLOTS;
     private static List<String> DELIEVERY_DESTINATIONS;
-
+    // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
@@ -1348,5 +1349,5 @@ if(!R.equals("OK")){
     private javax.swing.JTextField txtMobile_ID;
     private javax.swing.JTextField txtMobile_PW;
     // End of variables declaration//GEN-END:variables
-// </editor-fold>
+    // </editor-fold>
 }
