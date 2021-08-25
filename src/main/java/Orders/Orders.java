@@ -446,8 +446,8 @@ public class Orders extends javax.swing.JInternalFrame {
         cmbEnv.addItem("Staging");
         cmbEnv.addItem("Production");  
         
-        cmbEnv.setSelectedIndex(0); // delevopment
-        cmbApp.setSelectedIndex(0);        
+        cmbEnv.setSelectedIndex(1); // Staging
+        cmbApp.setSelectedIndex(0); // Boost      
         Load = false;
         LOAD_ENV();
         this.setTitle("Orders");

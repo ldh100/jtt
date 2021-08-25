@@ -467,6 +467,9 @@ public class Station extends javax.swing.JInternalFrame {
     protected String BaseAPI;
   
     private int SitesLastRow = -1; 
+    private int BrandLastRow = -1; 
+    private int MenuLastRow = -1; 
+    private int ItemLastRow = -1; 
     
     private boolean CONFIG = false;
     private String C = "";
@@ -536,9 +539,13 @@ public class Station extends javax.swing.JInternalFrame {
         if(DV_Brands.getRowCount() < 1){
             return;
         }
+        if (BrandLastRow == DV_Brands.getSelectedRow()) {
+           return;
+        }
         BRAND = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 0));
         BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3));
-
+        BrandLastRow = DV_Brands.getSelectedRow();  
+        
         GetBrandDropOffLocations(); // ===================================
         GetBrandTimeslots();        // ===================================
         GetMenus();                 // ===================================  
@@ -582,6 +589,10 @@ public class Station extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_DV_MTSMouseClicked
 
     private void DV_ItemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_ItemsMouseClicked
+        if (ItemLastRow == DV_Items.getSelectedRow()) {
+           return;
+        } 
+        ItemLastRow = DV_Items.getSelectedRow();              
         GetMods(); // ===================================
     }//GEN-LAST:event_DV_ItemsMouseClicked
 
@@ -589,6 +600,10 @@ public class Station extends javax.swing.JInternalFrame {
         if(DV_Menus.getRowCount() < 1){
             return;
         }
+        if (MenuLastRow == DV_Menus.getSelectedRow()) {
+           return;
+        }   
+        MenuLastRow = DV_Menus.getSelectedRow();          
         GetMenuTimeslots();
         GetItems();
     }//GEN-LAST:event_DV_MenusMouseClicked
@@ -630,12 +645,12 @@ public class Station extends javax.swing.JInternalFrame {
         cmbApp.addItem("Tacit");
         cmbApp.addItem("Thrive");
         
+        cmbEnv.addItem("Development"); 
         cmbEnv.addItem("Staging");
-        cmbEnv.addItem("Development");
-        cmbEnv.addItem("Production");         
-        cmbEnv.setSelectedIndex(1); // 1 Dev, 2 -Staging
+        cmbEnv.addItem("Production");  
         
-        cmbApp.setSelectedIndex(6);
+        cmbEnv.setSelectedIndex(1); // Staging
+        cmbApp.setSelectedIndex(0); // Boost  
 
         Load = false;
         LOAD_ENV();
@@ -1161,7 +1176,8 @@ public class Station extends javax.swing.JInternalFrame {
     private void GetItems(){
         txtLog.append("\r\n- GetItems: " + "\r\n"); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-
+        String hidden = "?";  
+        String disabled = "?"; 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         int _Cat_Count = 0; 
         try {
@@ -1172,7 +1188,7 @@ public class Station extends javax.swing.JInternalFrame {
             String id = "?";
 
             JArray_ITEMS = new JSONArray();
-            String[] ColumnsNames = {"Category", "Item", "Price", "Qt", "item_id", "cat_id"}; 
+            String[] ColumnsNames = {"Category", "Item", "Price", "Qt", "hidden","disabled","item_id", "cat_id"}; 
             boolean[] isEditable = {false,false,false,true,false,false};
             DefaultTableModel Model = new DefaultTableModel(){
                 @Override
@@ -1210,6 +1226,19 @@ public class Station extends javax.swing.JInternalFrame {
                             }else{
                                 label = "label 'en' Not Found";
                             }                   
+                            if(Item.has("is")){
+                               JSONObject is =  Item.getJSONObject("is");
+                               if(is.has("hidden") && is.getBoolean("hidden")){
+                                   hidden = "true";
+                               }else{
+                                   hidden = "false";
+                               }
+                               if(is.has("disabled") && is.getBoolean("disabled")){
+                                   disabled = "true";
+                               }else{
+                                   disabled = "false";
+                               } 
+                            }
 
                             if(Item.has("price") && Item.getJSONObject("price").has("amount")){
                                 price = "$" + Item.getJSONObject("price").getNumber("amount").toString();
@@ -1221,7 +1250,7 @@ public class Station extends javax.swing.JInternalFrame {
                             }else{
                                 id = "not found";
                             }
-                            Model.addRow(new Object[]{c_name, label, price, "1", id, c_id}); 
+                            Model.addRow(new Object[]{c_name, label, price, "1", hidden, disabled, id, c_id}); 
                         }   
                     }
             
