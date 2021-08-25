@@ -5,8 +5,6 @@
  */
 package Station;
 
-import static A.A.FAIL;
-import A.Func;
 import com.google.common.base.Stopwatch;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -41,6 +39,17 @@ import org.json.JSONObject;
  */
 public class Station extends javax.swing.JInternalFrame {
 
+//PROMO CODES (that work on Staging)
+//boostper8 - 20%
+//
+//promo100-  100%
+//
+//promo100up2- 100%
+//
+//comsonetime- flat 5 dollars
+//
+//compassunlimited- 5 dollars    
+    
     public Station() {
         initComponents();
     }
@@ -58,8 +67,6 @@ public class Station extends javax.swing.JInternalFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         DV_MTS = new javax.swing.JTable();
         lblMenus = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        DV_Categories = new javax.swing.JTable();
         jScrollPane6 = new javax.swing.JScrollPane();
         DV_Items = new javax.swing.JTable();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -222,32 +229,6 @@ public class Station extends javax.swing.JInternalFrame {
         lblMenus.setAlignmentX(0.5F);
         getContentPane().add(lblMenus, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 4, 280, -1));
 
-        DV_Categories.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        DV_Categories.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        DV_Categories.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV_Categories.setCellSelectionEnabled(true);
-        DV_Categories.setGridColor(java.awt.SystemColor.activeCaptionBorder);
-        DV_Categories.setName("DV_Categories"); // NOI18N
-        DV_Categories.setOpaque(false);
-        DV_Categories.setRowHeight(18);
-        DV_Categories.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        DV_Categories.getTableHeader().setReorderingAllowed(false);
-        DV_Categories.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DV_CategoriesMouseClicked(evt);
-            }
-        });
-        jScrollPane5.setViewportView(DV_Categories);
-
-        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 116, 384, 80));
-
         DV_Items.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Items.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -263,7 +244,7 @@ public class Station extends javax.swing.JInternalFrame {
         DV_Items.setName("DV_Items"); // NOI18N
         DV_Items.setOpaque(false);
         DV_Items.setRowHeight(18);
-        DV_Items.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        DV_Items.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         DV_Items.getTableHeader().setReorderingAllowed(false);
         DV_Items.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -272,7 +253,7 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane6.setViewportView(DV_Items);
 
-        getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 196, 384, 92));
+        getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 116, 384, 172));
 
         DV_Mods.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Mods.setModel(new javax.swing.table.DefaultTableModel(
@@ -486,10 +467,6 @@ public class Station extends javax.swing.JInternalFrame {
     protected String BaseAPI;
   
     private int SitesLastRow = -1; 
-    private int BrandsLastRow = -1; 
-    private int MenusLastRow = -1;  
-    private int CategoriesLastRow = -1; 
-    private int ItemsLastRow = -1; 
     
     private boolean CONFIG = false;
     private String C = "";
@@ -564,9 +541,8 @@ public class Station extends javax.swing.JInternalFrame {
 
         GetBrandDropOffLocations(); // ===================================
         GetBrandTimeslots();        // ===================================
-        GetMenus();                 // ===================================
-        BrandsLastRow = DV_Brands.getSelectedRow();   
-        Validate_Pleace_Order();
+        GetMenus();                 // ===================================  
+        Validate_Place_Order();
     }//GEN-LAST:event_DV_BrandsMouseClicked
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
@@ -605,14 +581,8 @@ public class Station extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_DV_MTSMouseClicked
 
-    private void DV_CategoriesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_CategoriesMouseClicked
-        GetItems(); // ===================================
-        CategoriesLastRow = DV_Categories.getSelectedRow(); 
-    }//GEN-LAST:event_DV_CategoriesMouseClicked
-
     private void DV_ItemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_ItemsMouseClicked
         GetMods(); // ===================================
-        ItemsLastRow = DV_Items.getSelectedRow(); 
     }//GEN-LAST:event_DV_ItemsMouseClicked
 
     private void DV_MenusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_MenusMouseClicked
@@ -620,8 +590,7 @@ public class Station extends javax.swing.JInternalFrame {
             return;
         }
         GetMenuTimeslots();
-        GetCategories();
-        CategoriesLastRow = DV_Categories.getSelectedRow();
+        GetItems();
     }//GEN-LAST:event_DV_MenusMouseClicked
 
     private void DV_BTSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_BTSMouseClicked
@@ -664,7 +633,7 @@ public class Station extends javax.swing.JInternalFrame {
         cmbEnv.addItem("Staging");
         cmbEnv.addItem("Development");
         cmbEnv.addItem("Production");         
-        cmbEnv.setSelectedIndex(0); // Staging
+        cmbEnv.setSelectedIndex(1); // 1 Dev, 2 -Staging
         
         cmbApp.setSelectedIndex(6);
 
@@ -672,7 +641,7 @@ public class Station extends javax.swing.JInternalFrame {
         LOAD_ENV();
         app = cmbApp.getSelectedItem().toString();
         CONFIG = false;   
-        this.setTitle("Site > Station(Brand) > Menu(s)");
+        this.setTitle("Site > Station/Brand > Menu(s)");
     }
     private void LOAD_CONFIG(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -690,28 +659,22 @@ public class Station extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
-            
-        try{            
-            if (C.contains(": ")) {
-                String c;
-                c = C.substring(C.indexOf("env:")); c = c.substring(0, c.indexOf("\r\n")).trim(); env = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("app:")); c = c.substring(0, c.indexOf("\r\n")).trim(); app = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("url:")); c = c.substring(0, c.indexOf("\r\n")).trim(); url = c.substring(c.indexOf(" ")).trim();
-
-                c = C.substring(C.indexOf("SITE:")); c = c.substring(0, c.indexOf("\r\n")).trim(); SITE = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("BRAND:")); c = c.substring(0, c.indexOf("\r\n")).trim(); BRAND = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("COUNTRY:")); c = c.substring(0, c.indexOf("\r\n")).trim(); COUNTRY = c.substring(c.indexOf(" ")).trim();
-                c = C.substring(C.indexOf("txtMobile_ID:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_ID.setText(c.substring(c.indexOf(" ")).trim());
-                c = C.substring(C.indexOf("txtMobile_PW:")); c = c.substring(0, c.indexOf("\r\n")).trim(); txtMobile_PW.setText(c.substring(c.indexOf(" ")).trim());
-
-                CONFIG = true;
-                txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            } else {
-                CONFIG = false;
-                txtLog.append("=== Station, User: " + A.A.UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
+        String[] lines = C.split(System.getProperty("line.separator"));
+        String value;
+        try {
+            for (String l : lines) {
+                value = l.substring(l.indexOf(" ")).trim();
+                if (l.contains("env: ")) { env = value; }
+                if (l.contains("app: ")) {  app = value; }
+                if (l.contains("url: ")) {  url = value; }
+                if (l.contains("SITE: ")) { SITE = value; }
+                if (l.contains("BRAND: ")) { BRAND = value;  }
+                if (l.contains("MOBILE_ID: ")) { txtMobile_ID.setText(value); }
+                if (l.contains("MOBILE_PW: ")) { txtMobile_PW.setText(value); }
+            }            
+            CONFIG = true;
+            txtLog.append("=== LOAD_CONFIG > OK" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         } catch (Exception ex) {
             CONFIG = false;
             txtLog.append("=== LOAD_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
@@ -738,8 +701,8 @@ public class Station extends javax.swing.JInternalFrame {
             C += "SITE: " + _S + "\r\n";
             C += "BRAND: " + _B + "\r\n";
             C += "COUNTRY: " + COUNTRY + "\r\n"; 
-            C += "txtMobile_ID: " + txtMobile_ID.getText().trim() + "\r\n";
-            C += "txtMobile_PW: " + txtMobile_PW.getText()  + "\r\n";
+            C += "MOBILE_ID: " + txtMobile_ID.getText().trim() + "\r\n";
+            C += "MOBILE_PW: " + txtMobile_PW.getText()  + "\r\n";
 
         } catch (Exception ex)  {
             txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
@@ -925,7 +888,6 @@ public class Station extends javax.swing.JInternalFrame {
         }
         btnPOrder.setEnabled(false);
         btnDOrder.setEnabled(false);
-        BrandsLastRow = -1;
         SitesLastRow = DV_Sites.getSelectedRow();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n- Load Brands ..." + "\r\n");
@@ -934,7 +896,6 @@ public class Station extends javax.swing.JInternalFrame {
         DefaultTableModel Model = new DefaultTableModel();
         Model.setColumnIdentifiers(ColumnsName);
         DV_Menus.setModel(Model);
-        DV_Categories.setModel(Model);
         DV_Items.setModel(Model);
         DV_Mods.setModel(Model);
         DV_BTS.setModel(Model);
@@ -1029,9 +990,7 @@ public class Station extends javax.swing.JInternalFrame {
             BrandID = "null";
             txtLog.append("" + SITE + " > " + "0 Station(s) found" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
- 
-        BrandsLastRow = -1;         
+        }        
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GetBrandDropOffLocations(){
@@ -1098,11 +1057,9 @@ public class Station extends javax.swing.JInternalFrame {
         String[] cName = {}; 
         DefaultTableModel M = new DefaultTableModel();
         M.setColumnIdentifiers(cName);
-        DV_Categories.setModel(M);
         DV_Items.setModel(M);
         DV_Mods.setModel(M);
         DV_MTS.setModel(M);
-        MenusLastRow = -1;
         String[] ColumnsName = {"Menu Label (en)", "Response", "Id"}; 
         DefaultTableModel Model = new DefaultTableModel();
         Model.setColumnIdentifiers(ColumnsName);
@@ -1163,9 +1120,8 @@ public class Station extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
      
         GetMenuTimeslots();
-        GetCategories();
-        MenusLastRow = DV_Menus.getSelectedRow();  
-        Validate_Pleace_Order();
+        GetItems();
+        Validate_Place_Order();
     }
     private void GetMenuTimeslots(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
@@ -1202,142 +1158,79 @@ public class Station extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
 
-    private void GetCategories(){
-        if (MenusLastRow == DV_Menus.getSelectedRow()) {
-           return;
-        }
+    private void GetItems(){
+        txtLog.append("\r\n- GetItems: " + "\r\n"); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        int _Cat_Count = 0; 
         try {
-            String name = "";
-            String hidden = "?";  
-            String linked = "?"; 
-            String id = "?"; 
-            JArray_CATS = new JSONArray();
-            String[] ColumnsName = {"Category (group) Name", "Hidden", "Linked", "id"}; 
-            DefaultTableModel Model = new DefaultTableModel();
-            Model.setColumnIdentifiers(ColumnsName);
-            DV_Categories.setModel(Model);
-            CategoriesLastRow = -1; 
+            String c_name = "";
+            String c_id = "?"; 
+            String label = "";
+            String price = "?";
+            String id = "?";
+
+            JArray_ITEMS = new JSONArray();
+            String[] ColumnsNames = {"Category", "Item", "Price", "Qt", "item_id", "cat_id"}; 
+            boolean[] isEditable = {false,false,false,true,false,false};
+            DefaultTableModel Model = new DefaultTableModel(){
+                @Override
+                public boolean isCellEditable(int row, int column){             
+                    return isEditable[column]; // || column == 13 || column == 14; // make read only fields except column 0,13,14
+                }
+            };
+            Model.setColumnIdentifiers(ColumnsNames);
+            DV_Items.setModel(Model);
             
             JSONObject menu = (JSONObject) JArray_MENUS.get(DV_Menus.getSelectedRow());             
             if (menu.has("groups")) {
-                    JSONArray groups = menu.getJSONArray("groups");
-                    for (Object g : groups) {
-                        JSONObject gr = (JSONObject) g;
-                        JArray_CATS.put(new JSONObject(gr.toString())); 
-                        name = gr.getString("name");
-                        if(gr.has("id")){
-                            id = gr.getString("id");
-                        }else{
-                            id = "not found";
-                        }
-                        if(gr.has("is")){
-                           JSONObject is =  gr.getJSONObject("is");
-                           if(is.has("hidden") && is.getBoolean("hidden")){
-                               hidden = "true";
-                           }else{
-                               hidden = "false";
-                           }
-                           if(is.has("linked") && is.getBoolean("linked")){
-                               linked = "true";
-                           }else{
-                               hidden = "false";
-                           } 
-                        }
-                        Model.addRow(new Object[]{name, hidden, linked, id});            
-                    DV_Categories.setModel(Model);    
-                    DV_Categories.setDefaultEditor(Object.class, null);
-                    DV_Categories.getColumnModel().getColumn(0).setPreferredWidth(180);
-                    DV_Categories.getColumnModel().getColumn(1).setPreferredWidth(60);
-                    DV_Categories.getColumnModel().getColumn(2).setPreferredWidth(60);
-                    DV_Categories.changeSelection(0, 0, false, false);
-                }
-            }
-        }
-        catch(Exception ex){
-            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());   
-        }
-        txtLog.append("=== Selected Menu > " + DV_Categories.getRowCount() + " Categories found" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        GetItems();
-        CategoriesLastRow = DV_Categories.getSelectedRow(); 
-    }
-    private void GetItems(){
-        if (CategoriesLastRow == DV_Categories.getSelectedRow()) {
-           return;
-        }else{
-            txtLog.append("\r\n- GetItems: " + "\r\n"); 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        try {
-            String label = "";
-            String hidden = "?";  
-            String disabled = "?"; 
-            String price = "?";
-            String cal = "?";
-            String id = "?";
-            JArray_ITEMS = new JSONArray();
-            String[] ColumnsName = {"Item Label (en)", "Price", "Cal", "Hidden", "Disabled", "id"}; 
-            DefaultTableModel Model = new DefaultTableModel();
-            Model.setColumnIdentifiers(ColumnsName);
-            DV_Items.setModel(Model);
-            ItemsLastRow = -1;
+                JSONArray groups = menu.getJSONArray("groups");
+                _Cat_Count = groups.length();
+                for (Object g : groups) {
+                    JSONObject gr = (JSONObject) g;
+                    c_name = gr.getString("name");
+                    if(gr.has("id")){
+                        c_id = gr.getString("id");
+                    }else{
+                        c_id = "not found";
+                    }           
+                    if (gr.has("items")) {
+                        JSONArray items = gr.getJSONArray("items");
+                        for (Object item : items) {
+                            JSONObject Item = (JSONObject) item;
+                            JArray_ITEMS.put(new JSONObject(Item.toString())); 
+                            if(Item.has("label")){                    
+                               if(Item.getJSONObject("label").has("en")) {
+                                   label = Item.getJSONObject("label").getString("en");
+                                   if(label.trim().equals("")) {
+                                       label = "label 'en' Empty";
+                                   }
+                               }
+                            }else{
+                                label = "label 'en' Not Found";
+                            }                   
+
+                            if(Item.has("price") && Item.getJSONObject("price").has("amount")){
+                                price = "$" + Item.getJSONObject("price").getNumber("amount").toString();
+                            }else{
+                                price = "Not Found";
+                            } 
+                            if(Item.has("id")){
+                                id = Item.getString("id");
+                            }else{
+                                id = "not found";
+                            }
+                            Model.addRow(new Object[]{c_name, label, price, "1", id, c_id}); 
+                        }   
+                    }
             
-            JSONObject cat = (JSONObject) JArray_CATS.get(DV_Categories.getSelectedRow());             
-            if (cat.has("items")) {
-                JSONArray items = cat.getJSONArray("items");
-                for (Object item : items) {
-                    JSONObject Item = (JSONObject) item;
-                    JArray_ITEMS.put(new JSONObject(Item.toString())); 
-                    if(Item.has("label")){                    
-                       if(Item.getJSONObject("label").has("en")) {
-                           label = Item.getJSONObject("label").getString("en");
-                           if(label.trim().equals("")) {
-                               label = "label 'en' Empty";
-                           }
-                       }
-                    }else{
-                        label = "label 'en' Not Found";
-                    }                   
-                    if(Item.has("is")){
-                       JSONObject is =  Item.getJSONObject("is");
-                       if(is.has("hidden") && is.getBoolean("hidden")){
-                           hidden = "true";
-                       }else{
-                           hidden = "false";
-                       }
-                       if(is.has("disabled") && is.getBoolean("disabled")){
-                           disabled = "true";
-                       }else{
-                           disabled = "false";
-                       } 
-                    }
-                    if(Item.has("id")){
-                        id = Item.getString("id");
-                    }else{
-                        id = "not found";
-                    }
-                    if(Item.has("price") && Item.getJSONObject("price").has("amount")){
-                        price = "$" + Item.getJSONObject("price").getNumber("amount").toString();
-                    }else{
-                        price = "Not Found";
-                    }
-                    if(Item.has("nutrition") && 
-                            Item.getJSONObject("nutrition").has("calories") && 
-                            Item.getJSONObject("nutrition").getJSONObject("calories").has("amount")){
-                        cal = Item.getJSONObject("nutrition").getJSONObject("calories").getNumber("amount").toString();
-                    }else{
-                        cal = "Not Found";
-                    }                    
-                    Model.addRow(new Object[]{label, price, cal, hidden, disabled, id});            
                     DV_Items.setModel(Model);    
                     DV_Items.setDefaultEditor(Object.class, null);
-                    DV_Items.getColumnModel().getColumn(0).setPreferredWidth(180);
-                    DV_Items.getColumnModel().getColumn(1).setPreferredWidth(60);
+                    DV_Items.getColumnModel().getColumn(0).setPreferredWidth(120);
+                    DV_Items.getColumnModel().getColumn(1).setPreferredWidth(120);
                     DV_Items.getColumnModel().getColumn(2).setPreferredWidth(60);
+                    DV_Items.getColumnModel().getColumn(3).setPreferredWidth(30);
                     DV_Items.changeSelection(0, 0, false, false);
                 }
             }
@@ -1346,37 +1239,29 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }
-        txtLog.append("== Selected Category > " + DV_Items.getRowCount() + " Items found" + "\r\n");
+        txtLog.append("== Selected Menu > " + DV_Items.getRowCount() + " Items in " + _Cat_Count +  " Categories" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));        
         
         GetMods();
-        ItemsLastRow = DV_Items.getSelectedRow(); 
     }
     private void GetMods(){
-        if (ItemsLastRow == DV_Items.getSelectedRow()) {
-            return;
-        }else{
-            txtLog.append("\r\n- GetMods: " + "\r\n"); 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
+        txtLog.append("\r\n- GetMods: " + "\r\n"); 
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         int mGR = 0;
         int mIT = 0;
         try {
             String label = "";
-            String hidden = "?";  
-            String disabled = "?"; 
             String price = "?";
-            String cal = "?";
             String id = "?";
 
-            String[] ColumnsName = {"Modifires - Label (en)" , "Price", "Cal", "Hidden", "Disabled", "id"}; 
+            String[] ColumnsName = {"Item", "Modifires", "Price", "id"}; 
             DefaultTableModel Model = new DefaultTableModel();
             Model.setColumnIdentifiers(ColumnsName);
-            DV_Mods.setModel(Model);
-            
-            JSONObject item = (JSONObject) JArray_ITEMS.get(DV_Items.getSelectedRow());             
+            DV_Mods.setModel(Model); 
+            JSONObject item = (JSONObject) JArray_ITEMS.get(DV_Items.getSelectedRow());           
             if (item.has("options")) {
                 JSONArray options = item.getJSONArray("options");
                 for (Object ops : options) {
@@ -1400,8 +1285,8 @@ public class Station extends javax.swing.JInternalFrame {
                     }else{
                         id = "not found";
                     }
-                    Model.addRow(new Object[]{"= " + label + " >>> ", " ", " ", " ", " ", id});  //==================== 
-                    
+                    Model.addRow(new Object[]{" === ", label + " >>> ", " ", id});  //==================== 
+
                     if (oGroup.has("items")) {
                         JSONArray Oitems = oGroup.getJSONArray("items");
                         for (Object Oitem : Oitems) {
@@ -1417,19 +1302,7 @@ public class Station extends javax.swing.JInternalFrame {
                             }else{
                                 label = "label 'en' Not Found";
                             }                   
-                            if(OItem.has("is")){
-                               JSONObject is =  OItem.getJSONObject("is");
-                               if(is.has("hidden") && is.getBoolean("hidden")){
-                                   hidden = "true";
-                               }else{
-                                   hidden = "false";
-                               }
-                               if(is.has("disabled") && is.getBoolean("disabled")){
-                                   disabled = "true";
-                               }else{
-                                   disabled = "false";
-                               } 
-                            }
+
                             if(OItem.has("id")){
                                 id = OItem.getString("id");
                             }else{
@@ -1440,22 +1313,16 @@ public class Station extends javax.swing.JInternalFrame {
                             }else{
                                 price = "Not Found";
                             }
-                            if(OItem.has("nutrition") && OItem.getJSONObject("nutrition").has("calories") &&
-                                    OItem.getJSONObject("nutrition").getJSONObject("calories").has("amount")){                                
-                                cal = OItem.getJSONObject("nutrition").getJSONObject("calories").getNumber("amount").toString();
-                            }else{
-                                cal = "Not Found";
-                            }
-                            Model.addRow(new Object[]{label, price, cal, hidden, disabled, id});  
+                            Model.addRow(new Object[]{item.getJSONObject("label").getString("en"), label, price, id});  
                         }
                     }
                 }
             }
             DV_Mods.setModel(Model);    
             DV_Mods.setDefaultEditor(Object.class, null);
-            DV_Mods.getColumnModel().getColumn(0).setPreferredWidth(180);
-            DV_Mods.getColumnModel().getColumn(1).setPreferredWidth(80);
-            DV_Mods.getColumnModel().getColumn(2).setPreferredWidth(80);
+            DV_Mods.getColumnModel().getColumn(0).setPreferredWidth(130);
+            DV_Mods.getColumnModel().getColumn(1).setPreferredWidth(170);
+            DV_Mods.getColumnModel().getColumn(2).setPreferredWidth(50);
             DV_Mods.changeSelection(0, 0, false, false);    
         }
         catch(Exception ex){
@@ -1538,7 +1405,7 @@ public class Station extends javax.swing.JInternalFrame {
         sw1.reset();
     }
     
-    private void Validate_Pleace_Order() {
+    private void Validate_Place_Order() {
         btnPOrder.setEnabled(false);
         btnDOrder.setEnabled(false);
         if(DV_Items.getSelectedRowCount() > 0 && (DV_BTS.getSelectedRowCount() > 0 || DV_MTS.getSelectedRowCount() > 0)){
@@ -1554,33 +1421,33 @@ public class Station extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         Get_Mobile_User_TKN();
         if(FAIL) {
-            Validate_Pleace_Order();
+            Validate_Place_Order();
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
             return;
         }
         Set_Requested_Date();
         if(FAIL) {
-            Validate_Pleace_Order();
+            Validate_Place_Order();
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
             return;
         }
         if(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 2).toString().toLowerCase().startsWith("c")){
             EXACT();
             if(FAIL) {
-                Validate_Pleace_Order();
+                Validate_Place_Order();
                 this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                 return;
             }
             if(TYPE.equals("P")){
                 New_Pickup_ShoppingCart(); 
                 if(FAIL) {
-                    Validate_Pleace_Order();
+                    Validate_Place_Order();
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
                 }
                 Place_Update_Pickup_Order(EXACT_Payment_TKN);
                 if(FAIL) {
-                    Validate_Pleace_Order();
+                    Validate_Place_Order();
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
                 }
@@ -1588,13 +1455,13 @@ public class Station extends javax.swing.JInternalFrame {
             if(TYPE.equals("D")){
                 New_Delivery_ShoppingCart(); 
                 if(FAIL) {
-                    Validate_Pleace_Order();
+                    Validate_Place_Order();
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
             }
                 Place_Update_Delivery_Order(EXACT_Payment_TKN);
                 if(FAIL) {
-                    Validate_Pleace_Order();
+                    Validate_Place_Order();
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
                 }
@@ -1603,20 +1470,20 @@ public class Station extends javax.swing.JInternalFrame {
         if(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 2).toString().toLowerCase().startsWith("u")){
             FP();
             if(FAIL) {
-                Validate_Pleace_Order();
+                Validate_Place_Order();
                 this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                 return;
             }
             if(TYPE.equals("P")){
                 New_Pickup_ShoppingCart();  
                 if(FAIL) {
-                    Validate_Pleace_Order();
+                    Validate_Place_Order();
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
                 }
                 Place_Update_Pickup_Order(FP_Payment_TKN);
                 if(FAIL) {
-                    Validate_Pleace_Order();
+                    Validate_Place_Order();
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
                 }
@@ -1624,19 +1491,19 @@ public class Station extends javax.swing.JInternalFrame {
             if(TYPE.equals("D")){
                 New_Delivery_ShoppingCart();   
                 if(FAIL) {
-                    Validate_Pleace_Order();
+                    Validate_Place_Order();
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
                 }
                 Place_Update_Delivery_Order(FP_Payment_TKN);
                 if(FAIL) {
-                    Validate_Pleace_Order();
+                    Validate_Place_Order();
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
                 }
             } 
         }
-        Validate_Pleace_Order();
+        Validate_Place_Order();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
     } 
     
@@ -1648,7 +1515,7 @@ public class Station extends javax.swing.JInternalFrame {
         Mobile_User_ID = "";
         Mobile_User_TKN = "";
         String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
-        String Realm = Func.Realm_ID(cmbApp.getSelectedItem().toString(), env);      
+        String Realm = A.Func.Realm_ID(cmbApp.getSelectedItem().toString(), env);      
         
         try {     // ============ Mobile User Authentication =====================================
             Api_Call("GET", BaseAPI + "/user/auth" + "?realm=" + Realm, "Basic " + UserAuth, "");
@@ -1671,14 +1538,12 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.append("\r\n- " + "New Pickup Shopping Cart ...."+ "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
-        Auth = "Bearer " + Mobile_User_TKN;
-        
+        Auth = "Bearer " + Mobile_User_TKN; 
         BODY = "{\"brand\":\"" + BrandID + "\"," +
             "\"is\":{\"type\":\"pickup\"}," +
             "\"mealSwipeTotal\":0.0," +
-            "\"menu\":\"" + DV_Menus.getValueAt(DV_Menus.getSelectedRow(), 2).toString() + "\"," +               
-            "\"payment_method\":{\"credit_card\":{}," +
-            "\"mealplan\":{}}," +
+            "\"menu\":\"" + DV_Menus.getValueAt(DV_Menus.getSelectedRow(), 2).toString() + "\"," +  
+//            "{\"items\":[" + ItemsJson + "]}," +   
             "\"showSingleTimeSlot\":false," +
             "\"type\":0," +
             "\"typeOfCell\":0}";
@@ -1696,11 +1561,21 @@ public class Station extends javax.swing.JInternalFrame {
             }
         } 
         
-        txtLog.append("\r\n- " + "Add Menu Item to Pickup Shopping Cart ...."+ "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());        
-        BODY = "{\"items\":[{\"id\":\"" + DV_Items.getValueAt(DV_Menus.getSelectedRow(), 5).toString() + "\"," +
-            "\"quantity\":1," +
-            "\"price\":{\"amount\":0.05}}]}"; 
+        txtLog.append("\r\n- " + "Add Menu Item(s) to Pickup Shopping Cart ...." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+        
+        String OptionsJson= "";
+        String ItemsJson= "";
+        int[] SelectedMods = DV_Mods.getSelectedRows();
+        int[] SelectedItems = DV_Items.getSelectedRows();
+        for(int i = 0; i < SelectedItems.length; i++){
+            ItemsJson += "{\"id\":\"" + DV_Items.getValueAt(SelectedItems[i],4) + "\"," + 
+                          "\"quantity\":" + DV_Items.getValueAt(SelectedItems[i],3) + "," + 
+                          "\"options\":[" + OptionsJson + "]},";
+        }
+        ItemsJson = ItemsJson.substring(0, ItemsJson.length() -1);
+
+        BODY = "{\"items\":[" + ItemsJson + "]}"; 
         Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID, Auth, BODY);
         if(json != null){
             try{
@@ -1711,8 +1586,29 @@ public class Station extends javax.swing.JInternalFrame {
                 FAIL = true;
                 txtLog.append("== " + "Update SCart ERROR: "  + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                return;
             }
-        }         
+        }  
+        if(!txtPROMO.getText().isEmpty() && !txtPROMO.getText().toLowerCase().equals("none")){
+            txtLog.append("\r\n- " + "Add Promo " + txtPROMO.getText() + " to Pickup Shopping Cart ...."+ "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            JSONObject requestParams = new JSONObject(); // "Add Promo Code to Pickup ShoppingCart1", 
+            requestParams.put("code", txtPROMO.getText());
+            requestParams.put("email", Mobile_User_ID);
+            BODY = requestParams.toString();
+            Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "/promo", Auth, BODY);        
+            if(json != null){
+                try{
+                    ShoppingCart_Delivery_ID = json.getString("id");
+                    txtLog.append("== " + "Apply Promo > Updated SCart ID: "  + ShoppingCart_Pickup_ID + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                } catch (Exception ex){
+                    FAIL = true;
+                    txtLog.append("== " + "Update SCart ERROR: "  + ex.getMessage() + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                }
+            }        
+        }   
     }
     private void New_Delivery_ShoppingCart(){
         FAIL = false;
@@ -1725,8 +1621,6 @@ public class Station extends javax.swing.JInternalFrame {
             "\"is\":{\"type\":\"delivery\"}," +
             "\"mealSwipeTotal\":0.0," +
             "\"menu\":\"" + DV_Menus.getValueAt(DV_Menus.getSelectedRow(), 2).toString() + "\"," +   
-            "\"payment_method\":{\"credit_card\":{}," +
-            "\"mealplan\":{}}," +
             "\"showSingleTimeSlot\":false," +
             "\"type\":0," +
             "\"typeOfCell\":0}";
@@ -1744,24 +1638,52 @@ public class Station extends javax.swing.JInternalFrame {
             }
         } 
         
-        txtLog.append("\r\n- " + "Add Menu Item to Delivery Shopping Cart ...."+ "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());        
-        BODY = "{\"items\":[{\"id\":\"" + DV_Items.getValueAt(DV_Menus.getSelectedRow(), 5).toString() + "\"," +
-            "\"quantity\":1," +
-            "\"price\":{\"amount\":0.05}}]}"; 
+        txtLog.append("\r\n- " + "Add Menu Item(s) to Delivery Shopping Cart ...."+ "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+        
+        String ItemsJson= "";
+        int[] selection = DV_Items.getSelectedRows();
+        for(int i = 0; i < selection.length; i++){
+            ItemsJson += "{\"id\":\"" + DV_Items.getValueAt(selection[i],4) + "\"," + 
+                          "\"quantity\":" + DV_Items.getValueAt(selection[i],3) + "},";
+        }
+        ItemsJson = ItemsJson.substring(0, ItemsJson.length() -1);
+        
+        BODY = "{\"items\":[" + ItemsJson + "]}";  
         Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, BODY);
         if(json != null){
             try{
                 ShoppingCart_Delivery_ID = json.getString("id");
-                txtLog.append("== " + "Updated SCart ID: "  + ShoppingCart_Delivery_ID + "\r\n");
+                txtLog.append("== " + "Add Item > Updated SCart ID: "  + ShoppingCart_Delivery_ID + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex){
                 FAIL = true;
                 txtLog.append("== " + "Update SCart ERROR: "  + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                return;
             }
-        }         
-           
+        } 
+        if(!txtPROMO.getText().isEmpty() && !txtPROMO.getText().toLowerCase().equals("none")){   
+            txtLog.append("\r\n- " + "Add Promo " + txtPROMO.getText() + " to Delivery Shopping Cart ...."+ "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            JSONObject requestParams = new JSONObject(); // "Add Promo Code to Delivery ShoppingCart1", 
+            requestParams.put("code", txtPROMO.getText());
+            requestParams.put("email", Mobile_User_ID);
+            BODY = requestParams.toString();
+            Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "/promo", Auth, BODY);        
+            if(json != null){
+                try{
+                    ShoppingCart_Delivery_ID = json.getString("id");
+                    txtLog.append("== " + "Apply Promo > Updated SCart ID: "  + ShoppingCart_Delivery_ID + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                } catch (Exception ex){
+                    FAIL = true;
+                    txtLog.append("== " + "Update SCart ERROR: "  + ex.getMessage() + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                    return;
+                }
+            }        
+        }   
     }
 
     private void Set_Requested_Date(){
@@ -2010,7 +1932,6 @@ public class Station extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV_BTS;
     private javax.swing.JTable DV_Brands;
-    private javax.swing.JTable DV_Categories;
     private javax.swing.JTable DV_Items;
     private javax.swing.JTable DV_MTS;
     private javax.swing.JTable DV_Menus;
@@ -2027,7 +1948,6 @@ public class Station extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
