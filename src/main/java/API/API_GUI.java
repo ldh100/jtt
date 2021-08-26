@@ -1387,8 +1387,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             sw1.reset();
         }
         sw1.start();        // ============ Mobile User Orders
-        long m1 = System.currentTimeMillis();                     // 1605286535799
-        long m7 = System.currentTimeMillis() - (60 * 60 * 24 * 7 * 1000); // 1604681735799
+        long m1 = System.currentTimeMillis() + 30*60*1000;        // Now + 30 min to include future 'requested date
+        long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // Now + 7 days
 
         try {
             HttpGet httpget = new HttpGet(BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + "&end=" + m1);

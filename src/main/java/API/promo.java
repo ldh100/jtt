@@ -1617,6 +1617,7 @@ class promo extends API_GUI {
         //Test Scenario 2:Positive flow Get all promotions within company for a location group
         //JOB_Api_Call("Promotion - GET Positive flow Get all promotions within company for a location group", "GET", BaseAPI + "/promo/company" + CompanyID + "/location/group/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
+
         //<editor-fold defaultstate="collapsed" desc="DELETE promotions">
         // Test Scenario 1: Positive flow to DELETE newly created promotions
         if (PROMOTION_IDS != null) {

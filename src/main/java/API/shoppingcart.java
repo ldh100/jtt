@@ -113,7 +113,7 @@ class shoppingcart extends API_GUI{
             }
         }
         
-        JOB_Api_Call("Get Delivery ShoppingCart after Patch", "GET",                 // ===========================
+        JOB_Api_Call("Get Delivery ShoppingCart after Patch Item", "GET",                 // ===========================
             BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, "", 200, ParentTest, "no_jira");        
         if(json != null){
             try{
