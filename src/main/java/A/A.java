@@ -1273,7 +1273,7 @@ public class A extends javax.swing.JFrame {
     private void Open_OR() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
         for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("OR")) {
+            if (frame.getName().equals("ORDER")) {
                 try {
                     frame.setSelected(true);
                     if (frame.isIcon()) {

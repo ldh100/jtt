@@ -3,6 +3,7 @@ package API;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
+import java.util.TimeZone;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -51,7 +52,7 @@ class order extends API_GUI{
         long m1 = System.currentTimeMillis();                     
         long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // - 7 days
         JOB_Api_Call("Mobile User Orders - last 7 days", "GET", 
-            BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + ";end=" + m1, Auth, "", 200, ParentTest, "no_jira");
+            BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + "&end=" + m1 + "&order_type=all", Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             // Info Found Orders Count
             AAA = json.toString(4);
@@ -88,17 +89,12 @@ class order extends API_GUI{
     }
     private void PLACE_ORDERS(){
         Auth = "Bearer " + Mobile_User_TKN;
-        Date requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(BRAND_TIMESLOTS.size() - 1))*1000L);
-        //Date requested_date = new Date(Long.parseLong(MENU_TIMESLOTS.get(MENU_TIMESLOTS.size() - 1))*1000L);
-        
-//        for(int j = 0;  j < BRAND_TIMESLOTS.size(); j++){ // Select earliest available timeslot - ASAP   >>> UTC <> Local ????
-//            if(Long.parseLong(BRAND_TIMESLOTS.get(j))*1000 > System.currentTimeMillis()){
-//                requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(j))*1000L);
-//                break;
-//            }
-//        }
 
-        String Requested_Date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(requested_date);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        //Date requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(BRAND_TIMESLOTS.size() - 1)) *1000L);
+        Date requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(0)) * 1000L);
+        String Requested_Date = sdf.format(requested_date);        
 
         requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
         requestParams.put("location_brand", BrandID);
@@ -118,10 +114,21 @@ class order extends API_GUI{
         }   
 
         Auth = "Bearer " + AP3_TKN;
+        requestParams = new JSONObject();   //  Update Pickup Order  =================
+        JSONObject isP = new JSONObject();      
+        isP.put("in_progress", true);
+        isP.put("ready", true);  
+        requestParams.put("is", isP); 
+        BODY = requestParams.toString();
+        JOB_Api_Call("Update Pickup Order Status - ready", "PATCH", 
+            BaseAPI + "/order/" + Order_Pickup_ID, Auth, BODY, 200, ParentTest, "no_jira");        
+        if(json != null){           
+            AAA = json.toString(4);  // Check actual update
+        }        
         requestParams = new JSONObject();       //  Mobile User Pickup Order Issue =================  
         JSONArray items = new JSONArray();   
         JSONObject item_1 = new JSONObject();
-            item_1.put("id", ITEMS_IDS.get(ITEMS_IDS.size() - 1)); // ITEMS_IDS.get(ITEMS_IDS.size() - 1)
+            item_1.put("id", ITEMS_IDS.get(ITEMS_IDS.size() - 1)); 
             item_1.put("_index", "abcd");
             item_1.put("quantity", 1);
             item_1.put("unit", 1);    
@@ -156,16 +163,16 @@ class order extends API_GUI{
             }
         }    
         Auth = "Bearer " + Fresh_TKN;
-        requestParams = new JSONObject();       //  Mobile User Pickup Order Refund =================
-        JSONArray refunds = new JSONArray();   
+        requestParams = new JSONObject();       //  Pickup Order Refund =================
+        JSONArray refunds = new JSONArray();  
         JSONObject refund_1 = new JSONObject();
-            item_1.put("id", ITEMS_IDS.get(ITEMS_IDS.size() - 1)); 
-            item_1.put("_index", "abcd");
-            item_1.put("quantity", 1);  
-            item_1.put("price", new JSONObject().put("amount", 1.0));
-            item_1.put("reason", "Test Refund reason");  
-        items.put(refund_1);
-        requestParams.put("refunds", items); 
+            refund_1.put("id", ITEMS_IDS.get(ITEMS_IDS.size() - 1)); 
+            refund_1.put("_index", "abcd");
+            refund_1.put("quantity", 1);  
+            refund_1.put("price", new JSONObject().put("amount", 1.0));
+            refund_1.put("reason", "Test Refund reason");  
+        refunds.put(refund_1);
+        requestParams.put("refunds", refunds); 
         requestParams.put("reason", "Test Order Refund"); 
         BODY = requestParams.toString();
         JOB_Api_Call("Pickup Order - Refund", "PATCH", 
@@ -198,11 +205,11 @@ class order extends API_GUI{
         
         Auth = "Bearer " + AP3_TKN;
         requestParams = new JSONObject();   //  Mobile User Update Delivery Order  =================
-        JSONObject is = new JSONObject();
-        is.put("in_progress", true);
-        is.put("ready", true);
+        JSONObject isD = new JSONObject();      
+        isD.put("in_progress", true);
+        isD.put("ready", true);
         //is.put("out_for_delivery", true);        
-        requestParams.put("is", is); 
+        requestParams.put("is", isD); 
         BODY = requestParams.toString();
         JOB_Api_Call("Update Delivery Order Status - ready", "PATCH", 
             BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");        
