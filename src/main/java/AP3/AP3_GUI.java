@@ -277,7 +277,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 420, 76));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 24, 420, 76));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -304,7 +304,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         lblSITES10.setAlignmentX(0.5F);
         jPanel4.add(lblSITES10, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 16, 85, 16));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 420, 40));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 104, 420, 40));
 
         txtLog.setEditable(false);
         txtLog.setColumns(20);
@@ -321,7 +321,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmbBrow.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(338, 40, 90, 20));
+        jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(332, 40, 90, 20));
 
         btnRun.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         btnRun.setForeground(new java.awt.Color(204, 0, 0));
@@ -332,7 +332,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 64, 90, 32));
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(332, 68, 90, -1));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -375,7 +375,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 btnSave_OptMouseClicked(evt);
             }
         });
-        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 72, 116, 22));
+        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 72, 116, 22));
 
         lblSITES11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -387,13 +387,13 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES13.setText("Environment:");
         lblSITES13.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 24, 92, 16));
+        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 24, 92, 16));
 
         lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES14.setText("Application:");
         lblSITES14.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 24, 92, 16));
+        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 24, 92, 16));
 
         cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbEnv.addItemListener(new java.awt.event.ItemListener() {
@@ -401,7 +401,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 cmbEnvItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 40, 116, 20));
+        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 40, 116, 20));
 
         cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbApp.addItemListener(new java.awt.event.ItemListener() {
@@ -409,32 +409,32 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 cmbAppItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 40, 108, 20));
+        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 108, 20));
 
         _slack.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         _slack.setText("Report to Slack");
         _slack.setToolTipText("");
         _slack.setRequestFocusEnabled(false);
-        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 64, 110, 14));
+        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 64, 110, 14));
 
         _headless.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         _headless.setText("Headless <<<<");
         _headless.setToolTipText("");
         _headless.setRequestFocusEnabled(false);
-        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 80, 110, 14));
+        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 80, 110, 14));
 
         lblSITES16.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES16.setText("Slack Channel:");
         lblSITES16.setAlignmentX(0.5F);
         lblSITES16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel3.add(lblSITES16, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 4, 72, 16));
+        jPanel3.add(lblSITES16, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 4, 72, 16));
 
         txtSlackCh.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtSlackCh.setText("#xtt_test");
-        jPanel3.add(txtSlackCh, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 192, -1));
+        jPanel3.add(txtSlackCh, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 0, 192, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 404, 430, 96));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 404, 424, 96));
 
         txtADMIN_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtADMIN_ID.setText("oleg.spozito@compassdigital.io");
@@ -914,7 +914,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 420, 260));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 144, 420, 260));
 
         getAccessibleContext().setAccessibleName("AP3");
 
@@ -2844,8 +2844,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
         }   
         if(_Menu_manager){
-            SCOPE += ", Menu Manager";
-            ParentTest = HtmlReport.createTest("Menu Manager"); 
+            SCOPE += ", MM Basic";
+            ParentTest = HtmlReport.createTest("MM Basic"); 
             AP3_menu_manager BR = new AP3.AP3_menu_manager(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
@@ -6154,7 +6154,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 .filter(Files::isRegularFile)
                 .map(Path::toFile)
                 .collect(Collectors.toList());
-            //listOfFiles.forEach(System.out::println);  
             for (File file : listOfFiles) {
                 if (file.getName().contains(F_NAME)) {
                     t = file.getName();

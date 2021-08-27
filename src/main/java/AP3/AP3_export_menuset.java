@@ -203,7 +203,7 @@ class AP3_export_menuset extends AP3_GUI{
         String destinationDir = System.getProperty("user.home") + File.separator + "Downloads"; 
         MenuSetFile = MenuSetName.trim() + " - " + LocalDate.now() +".zip";    // Lunch - 2021-06-15.zip
 
-File_Find("Find Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_jira");
+        File_Find("Find Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_jira");
             //if (FAIL) { return;}   
          
              File temp=new File(destinationDir+ File.separator + MenuSetFile);
@@ -216,11 +216,11 @@ File_Find("Find Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_j
            if (FAIL) { return;}  
            
          
-         readExcel( destinationDir, MenuSetName.trim() + ".xlsx",MenuSetName.trim());                   
+        readExcel( destinationDir, MenuSetName.trim() + ".xlsx",MenuSetName.trim());                   
 
-         Thread.sleep(3000);
+        Thread.sleep(3000);
            
-        File_Delete("Delete Report Unzipped File", destinationDir, MenuSetName.trim() + ".xlsx" , ParentTest, "no_jira");
+        File_Delete("Delete File after reading", destinationDir, MenuSetName.trim() + ".xlsx" , ParentTest, "no_jira");
             if (FAIL) { return;}                                                                
     }  
                
@@ -286,7 +286,7 @@ File_Find("Find Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_j
                     Element_Attribute("Menu (Index " + i + ") ID", L2.get(i), "menu-id", ParentTest, "no_jira");   
                 } 
                 
-             Element_Attribute("Menu setName", L0.get(0), "textContent", ParentTest, "no_jira");      
+            Element_Attribute("Menu setName", L0.get(0), "textContent", ParentTest, "no_jira");      
                 MenuSetName= t.trim();
                 
             System.out.println("ds:"+MenuSetName);
@@ -430,87 +430,122 @@ File_Find("Find Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_j
         
         
         //AUT-997: As an Admin, I can export the Global Modifiers
-        /*
-        selectingGlobalMenu();
         
-        Element_By_Path_Click("View Global Modifiers Groups Click", "xpath", "//div[normalize-space()='View GLobal Modifier Groups']", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Thread.sleep(500);
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
-            if (FAIL) { return;} 
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-                if (FAIL) { return;} 
-        To_Top("Scroll to page Top", ParentTest, "no_jira"); // Temp fix for BUG
-                if (FAIL) { return;}            
-        Wait_For_Element_By_Path_Presence("Wait for page load", "tagName", "table", ParentTest, "no_jira"); 
-                if (FAIL) { return;}    
-        Thread.sleep(500);       
-        Page_URL("Current page URL", ParentTest, "no_jira");
-        Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
+        //selectingGlobalMenu();
+        
+//        Navigate_Back("Navigate Back"," 'global menu' page"," 'View Global Menus of a group' page", ParentTest, "no_jira");
+//        
+//        Element_By_Path_Click("View Global Modifiers Groups Click", "xpath", "//div[normalize-space()='View GLobal Modifier Groups']", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Thread.sleep(500);
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+//            if (FAIL) { return;} 
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+//                if (FAIL) { return;} 
+//        To_Top("Scroll to page Top", ParentTest, "no_jira"); // Temp fix for BUG
+//                if (FAIL) { return;}            
+//        Wait_For_Element_By_Path_Presence("Wait for page load", "tagName", "table", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}    
+//        Thread.sleep(500);       
+//        Page_URL("Current page URL", ParentTest, "no_jira");
+//        Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}
+//        
+//                //<editor-fold defaultstate="collapsed" desc="Pagination">   
+//            Move_to_Element_By_Path("Paging - Rows per page", "css", "[aria-label='Rows per page:']", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Click("Rows per page Click", "xpath", "//input[@aria-label='Rows per page:']", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//
+//            Element_E1_Find("Find 'Rows per page' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light v-menu__content--auto menuable__content__active')]", ParentTest, "no_jira");
+//                if (FAIL) { return;}  
+//            Element_Child_List_L1("List 'Rows per page' values Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            for (int i = 0; i < L1.size(); i++) {
+//                Element_Text("Rows per page Value (index " + i + ")", L1.get(i), ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//                if(t.trim().startsWith("All")){ T_Index = i; }
+//            }
+//            Element_Click("Click 'All'", L1.get(T_Index), ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Thread.sleep(500); 
+//
+//            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//                if(t.equals("–")){
+//                    NO_DATA = true;
+//                }
+//            To_Top("Scroll to page Top", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            //</editor-fold>
+//            
+//            List_L0("Groups Count", "tagName", "tr", ParentTest, "no_jira");             
+//                if (FAIL) { return;}
+//                Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira"); 
+//                    if (FAIL) { return;} 
+//                for (int i = 2; i < L0.size(); i++) {
+//                    List_TR_TDs("Modifier Group Row Data", L0.get(i), ParentTest, "no_jira");   
+//                        if (FAIL) { return;}  
+//                }
+//                
+//              Element_By_Path_Click("Click on Export", "xpath", "//i[@class='v-icon mdi mdi-download theme--light']", ParentTest, "no_jira");
+//                if (FAIL) { return;}  
+//             
+//                
+//             
+//                
+//                
+//                File[] listFiles = new File(destinationDir).listFiles();
+//                System.out.println(destinationDir);
+//               //System.out.println(GL_MENU+"-global-modifier-groups-"+LocalDate.now());
+//                System.out.println(listFiles.length);
+//                for (File listFile : listFiles) {
+//                  if (listFile.isFile()) {
+//                String GlobalModifierFileName = listFile.getName();
+//                if(GlobalModifierFileName.contains(GL_MENU+"-global-modifier-groups-")){
+//                System.out.println("File name: " +GlobalModifierFileName);
+//                }
+//            }
+//        }
+                
+                
+                Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/globalmods", ParentTest, "no_jira");
+                    if (FAIL) { return;}
+                Thread.sleep(500);
+                Wait_For_Element_By_Path_InVisibility("Wait for Spinner", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");
+                    if (FAIL) { return;}
+                Thread.sleep(500);
+                Element_By_Path_Click("Click Global mod Export ", "xpath", "//div[contains(text(),'Export')]//i", ParentTest, "no_jira");
+                 if (FAIL) { return;}
+                Thread.sleep(5000);
+                 
+                String ModGrpPath = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();    // Lunch - 2021-06-15.zip
+                //ModGrpPath = "Starbucks-global-modifier-groups-2021-08-06";
+                File_Find("Find Global mod export Zip File", destinationDir, ModGrpPath, ParentTest, "no_jira"); 
+                 if (FAIL) { return;}
+                 Thread.sleep(3000);
+                File_UnZip("Unzip global mod export file ", destinationDir, t, ParentTest, "no_jira");
+                 if (FAIL) { return;}          
+                File_Delete("Delete Report Zip File", destinationDir,t, ParentTest, "no_jira");
+                 if (FAIL) { return;}  
+                ModGrpPath = GL_MENU.trim()+"-global-modifier-groups.xlsx";
+                
+                readGlobalModExcel( destinationDir, ModGrpPath ,"Modifier Groups");              
+
+                Thread.sleep(3000);
+           
+                File_Delete("Delete Global Modifier File after reading", destinationDir, ModGrpPath , ParentTest, "no_jira");
                 if (FAIL) { return;}
         
-                //<editor-fold defaultstate="collapsed" desc="Pagination">   
-            Move_to_Element_By_Path("Paging - Rows per page", "css", "[aria-label='Rows per page:']", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Click("Rows per page Click", "xpath", "//input[@aria-label='Rows per page:']", ParentTest, "no_jira");
-                if (FAIL) { return;}
-
-            Element_E1_Find("Find 'Rows per page' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light v-menu__content--auto menuable__content__active')]", ParentTest, "no_jira");
-                if (FAIL) { return;}  
-            Element_Child_List_L1("List 'Rows per page' values Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            for (int i = 0; i < L1.size(); i++) {
-                Element_Text("Rows per page Value (index " + i + ")", L1.get(i), ParentTest, "no_jira");
-                if (FAIL) { return;}
-                if(t.trim().startsWith("All")){ T_Index = i; }
-            }
-            Element_Click("Click 'All'", L1.get(T_Index), ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Thread.sleep(500); 
-
-            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-                if(t.equals("–")){
-                    NO_DATA = true;
-                }
-            To_Top("Scroll to page Top", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            //</editor-fold>
-            
-            List_L0("Groups Count", "tagName", "tr", ParentTest, "no_jira");             
-                if (FAIL) { return;}
-                Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira"); 
-                    if (FAIL) { return;} 
-                for (int i = 2; i < L0.size(); i++) {
-                    List_TR_TDs("Modifier Group Row Data", L0.get(i), ParentTest, "no_jira");   
-                        if (FAIL) { return;}  
-                }
-                
-              Element_By_Path_Click("Click on Export", "xpath", "//i[@class='v-icon mdi mdi-download theme--light']", ParentTest, "no_jira");
-                if (FAIL) { return;}  
-             
-                
-             
-                
-                
-                File[] listFiles = new File(destinationDir).listFiles();
-                System.out.println(destinationDir);
-               //System.out.println(GL_MENU+"-global-modifier-groups-"+LocalDate.now());
-                System.out.println(listFiles.length);
-                for (File listFile : listFiles) {
-                  if (listFile.isFile()) {
-                String GlobalModifierFileName = listFile.getName();
-                if(GlobalModifierFileName.contains(GL_MENU+"-global-modifier-groups-")){
-                System.out.println("File name: " +GlobalModifierFileName);
-                }
-            }
-        }
-         */        
-         //Prerequisite for this test is that there cannot be any Global modifier group in the global menu to be selected     
+        
+       
+       
+        //Prerequisite for this test is that there cannot be any Global modifier group in the global menu to be selected 
+        //Use Sector: DS Meadowvale Village and Global Menu : DS Tim Hortans in Staging for this test
         //AUT-280: Mods can be added only if they exist in the global mods 
         //Description:2 scenarios here. 1st scenario: No mod groups exist in the global mods
         //Go to the Global Menu
@@ -518,11 +553,12 @@ File_Find("Find Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_j
         //Select an item
         //Click on Add Modifier Group
         
-        /*
-        selectingGlobalMenu();
+        //Commenting the below ticket (Refer Prerequisite)
         
-        Element_By_Path_Click("Search Menus Click", "xpath", "//div[normalize-space()='View GLobal Modifier Groups']", ParentTest, "no_jira");
+        /*
+        Navigate_to_URL("Navigate to Global Modifiers", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/globalmods/", ParentTest, "no_jira");
             if (FAIL) { return;}
+        Refresh("Refresh the page", ParentTest, "no_jira");        
         Thread.sleep(500);
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -547,23 +583,10 @@ File_Find("Find Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_j
             return;            
             }
         
-        
-        
-        Navigate_Back("Navigate Back"," 'globalmods' page"," 'menu' page", ParentTest, "no_jira"); 
-            Thread.sleep(500); 
-            Wait_For_All_Elements_InVisibility("Wait for page load...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-                if (FAIL) { return;}               
-            Wait_For_Element_By_Path_Presence("Wait for Menu page load", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira"); 
-                    if (FAIL) { return;}                
-        
-        Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira");
+        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID, ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Thread.sleep(500);         
-        
-        Element_By_Path_Click("Search Menus Click", "xpath", "//div[normalize-space()='View GLobal Menus']", ParentTest, "no_jira");
-            if (FAIL) { return;}
+        Wait_For_Element_By_Path_Presence("Wait for Global Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
+        if (FAIL) { return;}        
         Thread.sleep(500);
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -636,19 +659,301 @@ File_Find("Find Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_j
             }
         
             }
+            
+        // AUT-284:  Adding mods to an existing mod group
         
-            */
+        Navigate_to_URL("Navigate to Global Modifiers", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/globalmods/", ParentTest, "no_jira");
+            if (FAIL) { return;}                       
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500); 
+        
+       
+        Element_By_Path_Click("Click 'NEW GROUP'", "xpath", "//*[contains(text(), 'new group')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}   
+        Thread.sleep(500);     
+        Element_By_Path_Text_Enter("Enter Group Name", "css", "[aria-label='Modifier Group Name']", "New Group " + New_ID, false, ParentTest, "no_jira");
+            if (FAIL) { return;}  
+        Element_By_Path_Text_Enter("Enter Label In App", "css", "[aria-label='Label In App']", "Label " + New_ID , false, ParentTest, "no_jira");
+            if (FAIL) { return;}
+            
+        EX += " - " + "\t" + " === Add new modifier to a group" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        
+        Element_By_Path_Click("Click > Item Name Field on New Modifier", "xpath", "(//input[@aria-label='Item Name'])[1]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Text_Enter("Enter a Name for New Modifier", "xpath", "(//input[@aria-label='Item Name'])[1]", "Mod 1", false, ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Click("Click > Price Field on New Modifier", "xpath", "(//input[@aria-label='Price'])[1]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Text_Enter("Enter a Price for New Modifier", "xpath", "(//input[@aria-label='Price'])[1]", "5.98", false, ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Input_Select_Clear("Clear > Calories Field on Existing Modifier", "xpath", "(//*[@aria-label='Calories'])[1]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Text_Enter("Enter a Calories for Existing Modifier", "xpath", "(//*[@aria-label='Calories'])[1]","200", false, ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Click("Click > 'Apply Changes'", "xpath", "//*[contains(text(), 'Apply Changes')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(1000);
+        Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'publish')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Wait_For_Element_By_Path_Presence("Wait for publication", "xpath", "//*[contains(text(),'publish')]/parent::button[contains(@class,'disabled')]", ParentTest,"no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(500);    
+         
+        //Adding Modifier group to the first menu item in the global Menu
+        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID, ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Wait_For_Element_By_Path_Presence("Wait for Global Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
+        if (FAIL) { return;}        
+        Thread.sleep(500);
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Wait for Menu List", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
+            if (FAIL) { return;}            
+                    
+                    
+        Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent",ParentTest ,"no_jira"); 
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]",ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+        Thread.sleep(500);  
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]",ParentTest, "no_jira"); 
+            if (FAIL) { return;}   
+        Thread.sleep(500);        
+        
+        //Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent",ParentTest, "no_jira"); 
+        // ^^^ fails
+        List_L0("Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");             
+            if (FAIL || L0.isEmpty()) { 
+                return;
+            } 
+            for (int i = 0; i < L0.size(); i++) {
+                Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent", ParentTest, "no_jira");            
+                    if (FAIL) { return;}                   
+            } 
+        Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira");      
+        MenuSetName = t; // ==========================
+        Element_Click("Click First Menuset", L0.get(0), ParentTest, "no_jira");        
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]",ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+            
+        Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}    
+        Element_By_Path_Attribute("Get Current Item Name Value", "css", "[aria-label='Item Name']", "value", ParentTest, "no_jira");
+        if (FAIL) { return;} 
+        Element_By_Path_Click("Click > Add Modifier Group ", "xpath", "//div[contains(text(),'Add modifier group')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+            Thread.sleep(3000);
+        Element_By_Path_Click("Click >  ", "xpath", "//div[@class='v-select__selections']", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+            Thread.sleep(3000);  
+        
+        Element_By_Path_Click("Modifier Name Input Click", "xpath", "//div[@class='v-input v-text-field v-select theme--light']", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
             
             
+        //Element_By_Path_Click("Modifier Name Input Click", "xpath", "//div[@class='v-input v-text-field v-select v-input--is-focused theme--light primary--text']", ParentTest, "no_jira"); 
+            //if (FAIL) { return;}    
+        Element_E1_Find("Find 'Modifier Groups' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
+            if (FAIL) { return;}             
+        Element_Child_List_L1("Available Modifier Groups Count", e1,"xpath", "//div[@class='v-input v-text-field v-select v-select--is-menu-active v-input--is-focused theme--light primary--text']", ParentTest, "no_jira");                                     
+            if (FAIL) { return;}
+        Element_Child_List_L1("Available Modifier Groups Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                                     
+            if (FAIL) { return;}
+            for (int i = 0; i < L1.size(); i++) {
+                Element_Text("Modifier Group (index " + i + ")", L1.get(i), ParentTest, "no_jira");             
+                if (FAIL) { return;}
+            }
+        Element_Click("Select 1st Group", L1.get(0), ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Click("Click > Modifier Group", "xpath", "//div[@class='modifier-group']//span[@class='Body-1-Selected-On-Surface-High-Emphasis-Left']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            
+        List_L2("Modifiers Count", "xpath", ".//div[@class='modifiers-list']//div[@class='flex xs8']", ParentTest, "no_jira");             
+            if (FAIL || L2.isEmpty()) { 
+                return;
+            } 
+            for (int i = 0; i < L2.size(); i++) {
+                Element_Attribute("Modifier (Index " + i + ") Name", L2.get(i), "textContent", ParentTest, "no_jira");            
+                    if (FAIL) { return;}                   
+            }
+        int InitialModifierCount = L2.size();
+        
+        Element_By_Path_Click("Click 'APPLY Changes'", "xpath", "//*[contains(text(), 'Apply Changes')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}   
+            
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+            
+        Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]", ParentTest, "no_jira");        
+            if (FAIL) { return;} 
+            Thread.sleep(500);
+        Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+        Thread.sleep(500);
+        Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}  
+        Thread.sleep(500);
+        
+        //Adding one more Modifier to the group
+        Navigate_to_URL("Navigate to Global Modifiers", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/globalmods/", ParentTest, "no_jira");
+            if (FAIL) { return;}                       
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500); 
+        
+       List_L0("Groups Count after Add Group", "tagName", "tr", ParentTest, "no_jira");             
+                if (FAIL) { return;}
+                T_Index = -1;  
+                Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira"); 
+                    if (FAIL) { return;} 
+                    for (int i = 2; i < L0.size(); i++) {
+                        List_TR_TDs("Modifier Group Row Data", L0.get(i), ParentTest, "no_jira");   
+                            if(t.trim().contains("New Group " + New_ID)){
+                                T_Index = i;
+                        }
+                    } 
+            Element_Click("Select New Group", L0.get(T_Index), ParentTest, "no_jira");
+                if (FAIL) { return;} 
+            Thread.sleep(500);
+        
+            
+            
+        EX += " - " + "\t" + " === Add new modifier to a group" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        
+        Element_By_Path_Click("Click > ADD MODIFIER", "xpath", "//*[contains(text(),'Add MODIFIER')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Click("Click > Item Name Field on New Modifier", "xpath", "(//input[@aria-label='Item Name'])[2]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Text_Enter("Enter a Name for New Modifier", "xpath", "(//input[@aria-label='Item Name'])[2]", "Mod Test 2", false, ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Click("Click > Price Field on New Modifier", "xpath", "(//input[@aria-label='Price'])[2]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Text_Enter("Enter a Price for New Modifier", "xpath", "(//input[@aria-label='Price'])[2]", "3.89", false, ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Click("Click > 'Apply Changes'", "xpath", "//*[contains(text(), 'Apply Changes')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(1000);
+        Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'publish')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Wait_For_Element_By_Path_Presence("Wait for publication", "xpath", "//*[contains(text(),'publish')]/parent::button[contains(@class,'disabled')]", ParentTest,"no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(500);  
+        
+        EX += " - " + "\t" + " === Validate if the new modifier added us auto assigned to the Global Menu item" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID, ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(1000); 
+        Refresh("Refresh", ParentTest, "no_jira");    
+        Wait_For_Element_By_Path_Presence("Wait for Global Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
+        if (FAIL) { return;}        
+        Thread.sleep(500);
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Wait for Menu List", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
+            if (FAIL) { return;}            
+                    
+                    
+        Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent",ParentTest ,"no_jira"); 
+            if (FAIL) { return;} 
+//        Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]",ParentTest, "no_jira"); 
+//            if (FAIL) { return;} 
+//        Thread.sleep(500);  
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]",ParentTest, "no_jira"); 
+//            if (FAIL) { return;}   
+//        Thread.sleep(500);        
+        
+        //Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent",ParentTest, "no_jira"); 
+        // ^^^ fails
+        List_L0("Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");             
+            if (FAIL || L0.isEmpty()) { 
+                return;
+            } 
+            for (int i = 0; i < L0.size(); i++) {
+                Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent", ParentTest, "no_jira");            
+                    if (FAIL) { return;}                   
+            } 
+        Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira");      
+        MenuSetName = t; // ==========================
+        Element_Click("Click First Menuset", L0.get(0), ParentTest, "no_jira");        
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]",ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+            
+        Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+        
+        Element_By_Path_Click("Click > Modifier Group", "xpath", "//div[@class='modifier-group']//span[@class='Body-1-Selected-On-Surface-High-Emphasis-Left']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+            
+        List_L2("Modifiers Count", "xpath", ".//div[@class='modifiers-list']//div[@class='flex xs8']", ParentTest, "no_jira");             
+            if (FAIL || L2.isEmpty()) { 
+                return;
+            } 
+            for (int i = 0; i < L2.size(); i++) {
+                Element_Attribute("Modifier (Index " + i + ") Name", L2.get(i), "textContent", ParentTest, "no_jira");            
+                    if (FAIL) { return;}                   
+            }
+        int NewModifierCount = L2.size();
+        
+        if (NewModifierCount == (InitialModifierCount + 1)) {
+                _t++;
+                _p++; EX += _t + "\t" + "The new Modifier was auto assigned to the menu item in the global Menu" + "\t" + t + "\t"  + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            } else {//Print Pass the ids are unique
+                _t++;
+                _f++; EX += _t + "\t" + "The new Modifiere was not auto assigned" + "\t" + t + "\t" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("FAIL", "The new Modifiere was not auto assigned", true, ParentTest.createNode("The new Modifiere was not auto assigned"));
+            }
+        
+        
+        EX += " - " + "\t" + " === Deleting the Modifier Group" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        Navigate_to_URL("Navigate to Global Modifiers", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/globalmods/", ParentTest, "no_jira");
+            if (FAIL) { return;}                       
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Thread.sleep(500);
+       
+        List_L0("Groups Count after Add Group", "tagName", "tr", ParentTest, "no_jira");             
+                if (FAIL) { return;}
+                T_Index = -1;  
+                Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira"); 
+                    if (FAIL) { return;} 
+                    for (int i = 2; i < L0.size(); i++) {
+                        List_TR_TDs("Modifier Group Row Data", L0.get(i), ParentTest, "no_jira");   
+                            if(t.trim().contains("New Group " + New_ID)){
+                                T_Index = i;
+                        }
+                    }
+        
+                List_Child_E1_By_Path("Find 'Delete' New Group " + New_ID, L0.get(T_Index), "xpath", ".//i[@class='v-icon mdi mdi-delete theme--light']", ParentTest, "no_jira"); 
+                    if (FAIL) { return;} 
+                Element_Click("New Group " + New_ID + " 'Delete' Click", e1, ParentTest, "no_jira"); 
+                    if (FAIL) { return;} 
+                Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]", ParentTest, "no_jira");        
+                    if (FAIL) { return;} 
+                Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]", ParentTest, "no_jira"); 
+                    if (FAIL) { return;}                                                                            
+                Thread.sleep(500);
+                Wait_For_All_Elements_InVisibility("Wait 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+                    if (FAIL) { return;} 
+                    Thread.sleep(500);
+                List_L0("Groups Count after Delete - Publish", "tagName", "tr", ParentTest, "no_jira");             
+                    if (FAIL) { return;}
+                Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira"); 
+                    if (FAIL) { return;}   
+        
+      */           
+        
     } catch (Exception ex){}   // =============================================  
         
     } //run time closing bracket
     
     //This block clicks Menu Manager, selects group that was selected in GUI, searches and clicks on the global menu that was selected in jtt
     public void selectingGlobalMenu() {
-    try {    
-        //<editor-fold defaultstate="collapsed" desc="Select Global Menu">
-        //This block clicks Menu Manager, selects group that was selected in GUI, searches and clicks on the global menu that was selected in jtt
+    //<editor-fold defaultstate="collapsed" desc="Select Global Menu">
+    //This block clicks Menu Manager, selects group that was selected in GUI, searches and clicks on the global menu that was selected in jtt    
+    try {                   
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
@@ -714,84 +1019,55 @@ File_Find("Find Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_j
             if (FAIL) { return;}   
         
         
-        //</editor-fold>
+        
     } catch (Exception ex){}   // =============================================  
     }
-    
+    //</editor-fold>
       
     public void readExcel(String filePath, String fileName, String sheetName) {
-    try {    
-        //<editor-fold defaultstate="collapsed" desc="Read Excel">
+     //<editor-fold defaultstate="collapsed" desc="Read Excel">
         //This block reads and gets the cell value of from the exported menuset excel file
+    try {           
     //Create an object of File class to open xlsx file    
-
     File file =    new File(filePath+"/"+fileName);
-
     //Create an object of FileInputStream class to read excel file
-
     FileInputStream inputStream = new FileInputStream(file);
-
     Workbook menusetworkbook = null;
-
     //Find the file extension by splitting file name in substring  and getting only extension name
-
     String fileExtensionName = fileName.substring(fileName.indexOf("."));
-
     //Check condition if the file is xlsx file
-
     if(fileExtensionName.equals(".xlsx")){
-
     //If it is xlsx file then create object of XSSFWorkbook class
-
     menusetworkbook = new XSSFWorkbook(inputStream);
-
     }
-
     //Check condition if the file is xls file
-
     else if(fileExtensionName.equals(".xls")){
-
         //If it is xls file then create object of HSSFWorkbook class
-
         menusetworkbook = new HSSFWorkbook(inputStream);
-
     }
-
     //Read sheet inside the workbook by its name
-
     Sheet menusetsheet = menusetworkbook.getSheet(sheetName);
-
     //Find number of rows in excel file
-
     int rowCount = menusetsheet.getLastRowNum()-menusetsheet.getFirstRowNum();
-
     //Create a loop over all the rows of excel file to read it
-
    // for (int i = 0; i < rowCount+1; i++) {
-
         Row row = menusetsheet.getRow(0);       
-
         if(row.getCell(0).getStringCellValue().equals("Record Type")){                                      
              _t++;
-              _p++; EX += _t + "\t" + "Cell 0,0: "+row.getCell(0).getStringCellValue() + "\t" + row.getCell(0).getStringCellValue() + "\t" + "Record Type" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
-                        
+              _p++; EX += _t + "\t" + "Cell 0,0: "+row.getCell(0).getStringCellValue() + "\t" + row.getCell(0).getStringCellValue() + "\t" + "Record Type" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                              
        }else
        {           
           _t++;
           _f++; EX += _t + "\t" + "Cell 0,0: Test Failed" + "\t" + row.getCell(0).getStringCellValue() + "\t" + "Record Type" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-        }   
-         
-         
+        }                    
         if(row.getCell(1).getStringCellValue().equals("Category ID")){             
               _t++;
-              _p++; EX += _t + "\t" +  "Cell 0,1: "+row.getCell(1).getStringCellValue() + "\t" + row.getCell(1).getStringCellValue()+ "\t" + "Category ID" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
-                        
+              _p++; EX += _t + "\t" +  "Cell 0,1: "+row.getCell(1).getStringCellValue() + "\t" + row.getCell(1).getStringCellValue()+ "\t" + "Category ID" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                             
         }else
        { 
           _t++;
           _f++; EX += _t + "\t" + "Cell 0,1: "+row.getCell(1).getStringCellValue() + "\t" + row.getCell(1).getStringCellValue() + "\t" + "Category ID" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-        } 
-        
+        }         
         if(row.getCell(2).getStringCellValue().equals("Category Name")){             
               _t++;
               _p++; EX += _t + "\t" +"Cell 0,2: " +row.getCell(2).getStringCellValue() + "\t" + row.getCell(2).getStringCellValue() + "\t" + "Category Name" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
@@ -800,38 +1076,31 @@ File_Find("Find Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_j
        { 
           _t++;
           _f++; EX += _t + "\t" + "Cell 0,2: "+row.getCell(2).getStringCellValue() + "\t" + row.getCell(1).getStringCellValue() + "\t" + "Category Name" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-        }
-        
+        }        
         if(row.getCell(3).getStringCellValue().equals("Category Chit #")){            
               _t++;
-              _p++; EX += _t + "\t" + "Cell 0,3: "+row.getCell(3).getStringCellValue() + "\t" + row.getCell(3).getStringCellValue() + "\t" + "Category Chit #" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
-                        
+              _p++; EX += _t + "\t" + "Cell 0,3: "+row.getCell(3).getStringCellValue() + "\t" + row.getCell(3).getStringCellValue() + "\t" + "Category Chit #" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                              
         }else
        { 
           _t++;
           _f++; EX += _t + "\t" +  "Cell 0,3: "+row.getCell(3).getStringCellValue() + "\t" + row.getCell(3).getStringCellValue() + "\t" + "Category Chit #" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-        }
-        
+        }        
           if(row.getCell(4).getStringCellValue().equals("Category Enabled")){             
               _t++;
-              _p++; EX += _t + "\t" +"Cell 0,4: "+ row.getCell(4).getStringCellValue() + "\t" + row.getCell(4).getStringCellValue() + "\t" + "Category Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
-                        
+              _p++; EX += _t + "\t" +"Cell 0,4: "+ row.getCell(4).getStringCellValue() + "\t" + row.getCell(4).getStringCellValue() + "\t" + "Category Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                              
         }else
        { 
           _t++;
           _f++; EX += _t + "\t" + "Cell 0,4: "+row.getCell(4).getStringCellValue() + "\t" + row.getCell(3).getStringCellValue() + "\t" + "Category Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-        } 
-          
+        }           
          if(row.getCell(5).getStringCellValue().equals("Item ID")){            
               _t++;
-              _p++; EX += _t + "\t" +"Cell 0,5: "+row.getCell(5).getStringCellValue() + "\t" +row.getCell(5).getStringCellValue() + "\t" + "Item ID" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
-                        
+              _p++; EX += _t + "\t" +"Cell 0,5: "+row.getCell(5).getStringCellValue() + "\t" +row.getCell(5).getStringCellValue() + "\t" + "Item ID" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                              
         }else
        { 
           _t++;
           _f++; EX += _t + "\t" + "Cell 0,5: "+row.getCell(5).getStringCellValue() + "\t" +row.getCell(5).getStringCellValue() + "\t" + "Item ID" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-        } 
-         
+        }          
          if(row.getCell(6).getStringCellValue().equals("Item Name")){             
               _t++;
               _p++; EX += _t + "\t" + "Cell 0,6: "+row.getCell(6).getStringCellValue() + "\t" + row.getCell(6).getStringCellValue() + "\t" + "Item Name" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
@@ -840,19 +1109,16 @@ File_Find("Find Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_j
        { 
           _t++;
           _f++; EX += _t + "\t" + "Cell 0,6: " +row.getCell(6).getStringCellValue()+ "\t" + row.getCell(6).getStringCellValue() + "\t" + "Item Name" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-        } 
-         
+        }          
          if(row.getCell(7).getStringCellValue().equals("Price")){
              
               _t++;
-              _p++; EX += _t + "\t" +"Cell 0,7: " + row.getCell(7).getStringCellValue() + "\t" + row.getCell(7).getStringCellValue()  + "\t" + "Price" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
-                        
+              _p++; EX += _t + "\t" +"Cell 0,7: " + row.getCell(7).getStringCellValue() + "\t" + row.getCell(7).getStringCellValue()  + "\t" + "Price" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                              
         }else
        { 
           _t++;
           _f++; EX += _t + "\t" + "Cell 0,7: " + row.getCell(7).getStringCellValue() + "\t" + row.getCell(7).getStringCellValue()  + "\t" + "Price" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-        } 
-         
+        }          
          if(row.getCell(8).getStringCellValue().equals("Calories")){            
               _t++;
               _p++; EX += _t + "\t" +"Cell 0,8: " +row.getCell(8).getStringCellValue() + "\t" + row.getCell(8).getStringCellValue()+ "\t" + "Calories" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
@@ -922,14 +1188,181 @@ File_Find("Find Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_j
           _t++;
           _f++; EX += _t + "\t" + "Cell 0,14: "+ row.getCell(14).getStringCellValue() + "\t" + row.getCell(14).getStringCellValue()+ "\t" + "Modifier Group Name" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }  
-          //</editor-fold>
+          
     } catch (Exception ex){}   // =============================================  
     }
+    //</editor-fold>
+    
+    public void readGlobalModExcel(String filePath, String fileName, String sheetName) {
+    //<editor-fold defaultstate="collapsed" desc="Read Global Mod Group Excel">
+        //This block reads and gets the cell value of from the exported Global Mod Group excel file
+        try {            
+    //Create an object of File class to open xlsx file    
+    File file =    new File(filePath+"/"+fileName);
+    //Create an object of FileInputStream class to read excel file
+    FileInputStream inputStream = new FileInputStream(file);
+    Workbook menusetworkbook = null;
+    //Find the file extension by splitting file name in substring  and getting only extension name
+    String fileExtensionName = fileName.substring(fileName.indexOf("."));
+    //Check condition if the file is xlsx file
+    if(fileExtensionName.equals(".xlsx")){
+    //If it is xlsx file then create object of XSSFWorkbook class
+    menusetworkbook = new XSSFWorkbook(inputStream);
+    }
+
+    //Check condition if the file is xls file
+    else if(fileExtensionName.equals(".xls")){
+        //If it is xls file then create object of HSSFWorkbook class
+        menusetworkbook = new HSSFWorkbook(inputStream);
+    }
+    //Read sheet inside the workbook by its name
+    Sheet menusetsheet = menusetworkbook.getSheet(sheetName);
+    //Find number of rows in excel file
+    int rowCount = menusetsheet.getLastRowNum()-menusetsheet.getFirstRowNum();
+    //Create a loop over all the rows of excel file to read it
+   // for (int i = 0; i < rowCount+1; i++) {
+        Row row = menusetsheet.getRow(0);       
+        if(row.getCell(0).getStringCellValue().equals("Record Type")){                                      
+             _t++;
+              _p++; EX += _t + "\t" + "Cell 0,0: "+row.getCell(0).getStringCellValue() + "\t" + row.getCell(0).getStringCellValue() + "\t" + "Record Type" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                             
+       }else
+       {           
+          _t++;
+          _f++; EX += _t + "\t" + "Cell 0,0: Test Failed" + "\t" + row.getCell(0).getStringCellValue() + "\t" + "Record Type" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }                    
+        if(row.getCell(1).getStringCellValue().equals("Modifier Group ID")){             
+              _t++;
+              _p++; EX += _t + "\t" +  "Cell 0,1: "+row.getCell(1).getStringCellValue() + "\t" + row.getCell(1).getStringCellValue()+ "\t" + "Modifier Group ID" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                              
+        }else
+       { 
+          _t++;
+          _f++; EX += _t + "\t" + "Cell 0,1: "+row.getCell(1).getStringCellValue() + "\t" + row.getCell(1).getStringCellValue() + "\t" + "Modifier Group ID" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }         
+        if(row.getCell(2).getStringCellValue().equals("Modifier Group Name")){             
+              _t++;
+              _p++; EX += _t + "\t" +"Cell 0,2: " +row.getCell(2).getStringCellValue() + "\t" + row.getCell(2).getStringCellValue() + "\t" + "Modifier Group Name" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                              
+        }else
+       { 
+          _t++;
+          _f++; EX += _t + "\t" + "Cell 0,2: "+row.getCell(2).getStringCellValue() + "\t" + row.getCell(1).getStringCellValue() + "\t" + "Modifier Group Name" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }        
+        if(row.getCell(3).getStringCellValue().equals("Label")){            
+              _t++;
+              _p++; EX += _t + "\t" + "Cell 0,3: "+row.getCell(3).getStringCellValue() + "\t" + row.getCell(3).getStringCellValue() + "\t" + "Label" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                             
+        }else
+       { 
+          _t++;
+          _f++; EX += _t + "\t" +  "Cell 0,3: "+row.getCell(3).getStringCellValue() + "\t" + row.getCell(3).getStringCellValue() + "\t" + "Label" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }        
+          if(row.getCell(4).getStringCellValue().equals("Minimum Items")){             
+              _t++;
+              _p++; EX += _t + "\t" +"Cell 0,4: "+ row.getCell(4).getStringCellValue() + "\t" + row.getCell(4).getStringCellValue() + "\t" + "Minimum Items" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                              
+        }else
+       { 
+          _t++;
+          _f++; EX += _t + "\t" + "Cell 0,4: "+row.getCell(4).getStringCellValue() + "\t" + row.getCell(3).getStringCellValue() + "\t" + "Minimum Items" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        } 
+          
+         if(row.getCell(5).getStringCellValue().equals("Maximum Items")){            
+              _t++;
+              _p++; EX += _t + "\t" +"Cell 0,5: "+row.getCell(5).getStringCellValue() + "\t" +row.getCell(5).getStringCellValue() + "\t" + "Maximum Items" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                      
+                        
+        }else
+       { 
+          _t++;
+          _f++; EX += _t + "\t" + "Cell 0,5: "+row.getCell(5).getStringCellValue() + "\t" +row.getCell(5).getStringCellValue() + "\t" + "Maximum Items" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }          
+         if(row.getCell(6).getStringCellValue().equals("Chit #")){             
+              _t++;
+              _p++; EX += _t + "\t" + "Cell 0,6: "+row.getCell(6).getStringCellValue() + "\t" + row.getCell(6).getStringCellValue() + "\t" + "Chit #" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                              
+        }else
+       { 
+          _t++;
+          _f++; EX += _t + "\t" + "Cell 0,6: " +row.getCell(6).getStringCellValue()+ "\t" + row.getCell(6).getStringCellValue() + "\t" + "Chit #" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }          
+         if(row.getCell(7).getStringCellValue().equals("Modifier Group Enabled")){
+             
+              _t++;
+              _p++; EX += _t + "\t" +"Cell 0,7: " + row.getCell(7).getStringCellValue() + "\t" + row.getCell(7).getStringCellValue()  + "\t" + "Modifier Group Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                             
+        }else
+       { 
+          _t++;
+          _f++; EX += _t + "\t" + "Cell 0,7: " + row.getCell(7).getStringCellValue() + "\t" + row.getCell(7).getStringCellValue()  + "\t" + "Modifier Group Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }          
+         if(row.getCell(8).getStringCellValue().equals("Modifier ID")){            
+              _t++;
+              _p++; EX += _t + "\t" +"Cell 0,8: " +row.getCell(8).getStringCellValue() + "\t" + row.getCell(8).getStringCellValue()+ "\t" + "Modifier ID" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                              
+        }else
+       { 
+          _t++;
+          _f++; EX += _t + "\t" + "Cell 0,8: "+row.getCell(8).getStringCellValue() + "\t" + row.getCell(8).getStringCellValue() + "\t" + "Modifier ID" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }         
+         if(row.getCell(9).getStringCellValue().equals("Modifier Name")){
+              _t++;
+              _p++; EX += _t + "\t" + "Cell 0,9: "+row.getCell(9).getStringCellValue() + "\t" + row.getCell(9).getStringCellValue()  + "\t" + "Modifier Name" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                              
+        }else
+       { 
+          _t++;
+          _f++; EX += _t + "\t" + "Cell 0,9: " +row.getCell(9).getStringCellValue()  + "\t" + row.getCell(9).getStringCellValue()  + "\t" + "Modifier Name" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }         
+         if(row.getCell(10).getStringCellValue().equals("Price")){           
+              _t++;
+              _p++; EX += _t + "\t" + "Cell 0,10: "+row.getCell(10).getStringCellValue() + "\t" + row.getCell(10).getStringCellValue() + "\t" + "Price" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                              
+        }else
+       { 
+          _t++;
+          _f++; EX += _t + "\t" + "Cell 0,10: "+row.getCell(10).getStringCellValue() + "\t" + row.getCell(10).getStringCellValue() + "\t" + "Price" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }         
+         if(row.getCell(11).getStringCellValue().equals("Calories")){
+              _t++;
+              _p++; EX += _t + "\t" +"Cell 0,11: " +row.getCell(11).getStringCellValue() + "\t" + row.getCell(11).getStringCellValue() + "\t" + "Calories" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                              
+        }else
+       { 
+          _t++;
+          _f++; EX += _t + "\t" + "Cell 0,11: " +row.getCell(11).getStringCellValue() + "\t" + row.getCell(11).getStringCellValue()+ "\t" + "Calories" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }         
+         if(row.getCell(12).getStringCellValue().equals("Mod Chit #")){             
+              _t++;
+              _p++; EX += _t + "\t" + "Cell 0,12: "+row.getCell(12).getStringCellValue() + "\t" + row.getCell(12).getStringCellValue() + "\t" + "Mod Chit #" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                              
+        }else
+       { 
+          _t++;
+          _f++; EX += _t + "\t" + "Cell 0,12: "+row.getCell(12).getStringCellValue() + "\t" + row.getCell(12).getStringCellValue()+ "\t" + "Mod Chit #" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }         
+         if(row.getCell(13).getStringCellValue().equals("PLU")){             
+              _t++;
+              _p++; EX += _t + "\t" + "Cell 0,13: "+row.getCell(13).getStringCellValue() + "\t" + row.getCell(13).getStringCellValue() + "\t" + "PLU" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                              
+        }else
+       { 
+          _t++;
+          _f++; EX += _t + "\t" + "Cell 0,13: "+row.getCell(13).getStringCellValue() + "\t" + row.getCell(13).getStringCellValue() + "\t" + "PLU" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }
+         
+         if(row.getCell(14).getStringCellValue().equals("Modifier Enabled")){             
+              _t++;
+              _p++; EX += _t + "\t" + "Cell 0,14: "+row.getCell(14).getStringCellValue() + "\t" + row.getCell(14).getStringCellValue() + "\t" + "Modifier Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                          
+        }else
+       { 
+          _t++;
+          _f++; EX += _t + "\t" + "Cell 0,14: "+ row.getCell(14).getStringCellValue() + "\t" + row.getCell(14).getStringCellValue()+ "\t" + "Modifier Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        } 
+         if(row.getCell(15).getStringCellValue().equals("Tax Tags")){             
+              _t++;
+              _p++; EX += _t + "\t" + "Cell 0,15: "+row.getCell(14).getStringCellValue() + "\t" + row.getCell(15).getStringCellValue() + "\t" + "Tax Tags" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                          
+        }else
+       { 
+          _t++;
+          _f++; EX += _t + "\t" + "Cell 0,15: "+ row.getCell(14).getStringCellValue() + "\t" + row.getCell(15).getStringCellValue()+ "\t" + "Tax Tags" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+        }   
+    } catch (Exception ex){}   // =============================================  
+    }
+     //</editor-fold> 
+    
     
     //<editor-fold defaultstate="collapsed" desc="Call Company API">    //This block call the company API: BaseAPI + "/menu/company/"+CompanyID
     public  void Call_Company_API(String MenuSetName,int flag) {
-    try {    
-
+    //<editor-fold defaultstate="collapsed" desc="Call Company API">    //This block call the company API: BaseAPI + "/menu/company/"+CompanyID
+        try {            
         Call_API("Call Global menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID, true, ParentTest, "no_jira" );        
         if(t.startsWith("{")){
             API_Response_Body = t;               
@@ -968,17 +1401,18 @@ File_Find("Find Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_j
     } 
     //</editor-fold>  
     
-    //<editor-fold defaultstate="collapsed" desc="Call Global Menuset API">    //This block call the GlobalMenuSet API: BaseAPI + "/menu/" + Menu_ID
+    
     public  void Call_GlobalMenuSet_API(String Menu_ID, String MenuSetName, int flag) {
-    try {    
+    //<editor-fold defaultstate="collapsed" desc="Call Global Menuset API">    //This block call the GlobalMenuSet API: BaseAPI + "/menu/" + Menu_ID
+        try {    
 
         Call_API("Call GlobalMenuSet API", "Bearer " + AP3_TKN, BaseAPI + "/menu/" + Menu_ID, true, ParentTest, "no_jira" );
         if(t.startsWith("{")){
             API_Response_Body = t;               
         }else{
-            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/"+CompanyID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/"+Menu_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/"+CompanyID , false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/"+Menu_ID , false, ParentTest.createNode("API Responce Error"));
             return;
         }               
         JSONObject json = new JSONObject(API_Response_Body);

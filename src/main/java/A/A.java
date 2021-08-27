@@ -426,7 +426,7 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(MenuStation);
 
-        Menu_OR.setBorder(null);
+        Menu_OR.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_OR.setText("Orders");
         Menu_OR.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_OR.setName("Station"); // NOI18N
@@ -1273,7 +1273,7 @@ public class A extends javax.swing.JFrame {
     private void Open_OR() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
         for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("OR")) {
+            if (frame.getName().equals("ORDER")) {
                 try {
                     frame.setSelected(true);
                     if (frame.isIcon()) {

@@ -364,12 +364,12 @@ class AP3_menu_manager extends AP3_GUI{
                     Element_Text_Enter("PLU: (" + i + ") Enter", L0.get(i), "60010" + Integer.toString(i*2), ParentTest, "no_jira");             
                     if (FAIL) { return;}
                 }  
-            List_L0("Chit # Count", "css", "[min='0']", ParentTest, "no_jira");             
+            List_L0("Chit # Count", "css", "[aria-label='']", ParentTest, "no_jira");             
                 if (FAIL) { return;}
                 for (int i = 0; i < L0.size(); i++) {
                     Element_Click("Chit # (" + i + ") Click", L0.get(i), ParentTest, "no_jira");             
                         if (FAIL) { return;}
-                    Element_Text_Enter("Chit # (" + i + ") Enter", L0.get(i), Integer.toString(i+1), ParentTest, "no_jira");             
+                    Element_Text_Enter("Chit # (" + i + ") Enter", L0.get(i), Integer.toString(i+2), ParentTest, "no_jira");             
                         if (FAIL) { return;}
                 }   
             Element_By_Path_Click("Tax Tags dropdown Click Open", "css", "[aria-label='Tax Tags']", ParentTest, "no_jira");
@@ -433,6 +433,7 @@ class AP3_menu_manager extends AP3_GUI{
             if(mod_items.isEmpty()) {
                _t++;
                _p++; EX += _t + "\t" + "No Modifier items exists" + "\t" + "-" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+               Log_Html_Result("WARN", "No Modifier items exists", false, ParentTest.createNode("No Modifier items exists" + "WARN"));
             } else {
                 for (int i = 0; i < mod_items.length(); i++) {
                     JSONObject mod_item = mod_items.getJSONObject(i);
@@ -839,6 +840,8 @@ class AP3_menu_manager extends AP3_GUI{
             }else{
                 _t++; _f++;
                 EX += " - " + "\t" + "Copy Modifier Group" + "\t" + "Copied after Publish"+ "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+                Log_Html_Result("FAIL", "Copy Modifier Group", false, ParentTest.createNode("Not Found"));
+            return;
             }
             // ======================== New Group Copy ^^^^ End
 
@@ -848,7 +851,7 @@ class AP3_menu_manager extends AP3_GUI{
             Thread.sleep(500); 
             Element_By_Path_Text_Select_Copy("Label In App", "css", "[aria-label='Label In App']", ParentTest, "no_jira"); 
                 if (FAIL) { return;}          
-            Element_By_Path_Text_Select_Copy("Group Chit #", "css", "[min='0']", ParentTest, "no_jira"); 
+            Element_By_Path_Text_Select_Copy("Group Chit #", "css", "[aria-label='']", ParentTest, "no_jira"); 
                 if (FAIL) { return;}  
             List_L2("Modifiers Count", "xpath", "//*[@class='layout modifier row wrap align-center']", ParentTest, "no_jira");             
                 if (FAIL) { return;}   
@@ -882,6 +885,7 @@ class AP3_menu_manager extends AP3_GUI{
            _t++; 
            _f++;
            EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+           Log_Html_Result("FAIL", "Find Menu", false, ParentTest.createNode("Not Found: FAIL"));
            return;
         }
         EX += " - " + "\t" + " === MM Global Modifiers " + "\t" + " ===== " + "\t" + " == Global Modifiers End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -1055,6 +1059,7 @@ class AP3_menu_manager extends AP3_GUI{
             _t++; 
             _f++;
             EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+            Log_Html_Result("FAIL", "Find Menu", false, ParentTest.createNode("Not Found" + "FAIL"));
             return;
         } 
         Navigate_Back("Navigate Back","MM 'Local Brands' page","MM 'Sector' page", ParentTest, "no_jira"); 
