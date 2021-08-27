@@ -426,7 +426,7 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(MenuStation);
 
-        Menu_OR.setBorder(null);
+        Menu_OR.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Menu_OR.setText("Orders");
         Menu_OR.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_OR.setName("Station"); // NOI18N
