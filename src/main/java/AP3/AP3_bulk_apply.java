@@ -74,7 +74,8 @@ class AP3_bulk_apply extends AP3_GUI{
         //open Local Menu on new tab
         Open_Switch_to_2nd_Tab("Navigate to Local Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/brands/" + BrandID, ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(5000);
+        Wait_For_Element_By_Path_Presence("Wait for Publication", "xpath", "//*[contains(text(),'Last Published:')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
         Element_By_Path_Click("Click > Category: Sides", "xpath", "//div[contains(text(),'Sides')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Click > Item Set: Soup", "xpath", "//div[contains(text(),'Soup')]", ParentTest, "no_jira");
@@ -154,25 +155,27 @@ class AP3_bulk_apply extends AP3_GUI{
             Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", false, ParentTest.createNode("API Responce Error"));
             return;
         }        
-   
-        
+
         //reset list visibility and in/out of stock checkbox indicator
-        String inStock = getAttributeOfElementByXpath("((//table[contains(@class,'v-table')]//tbody/tr)[1]//td[8])//i", "class");
+        String inStock = getAttributeOfElementByXpath("((//table[contains(@class,'v-table')]//tbody/tr)[1]//td[9])//i", "class");
         String visible = getAttributeOfElementByXpath("((//table[contains(@class,'v-table')]//tbody/tr)[1]//td[4])//i", "class");
         if (inStock.contains("mdi-checkbox-blank-outline") && visible.contains("mdi-eye-off")) {
             Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Thread.sleep(2000);
+            Wait_For_Element_By_Path_Presence("Wait to be in Edit mode", "xpath", "//*[contains(text(),'You are editing this menu')]", ParentTest, Ver);
+                if (FAIL) { return;}
            
                 Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
                 if (FAIL) { return;}
            
-            Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
+            Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' button", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
                 if (FAIL) { return;}
             Thread.sleep(500);    
             Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
             //Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(), 'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
-                if (FAIL) { return;} 
+                if (FAIL) { return;}
+            Wait_For_Element_By_Path_Presence("Wait for Bulk Update Side Panel", "xpath", "//aside[@id='bulkupdatepaneldrawer']", ParentTest, Ver);
+                if (FAIL) { return;}    
             Element_By_Path_Click("Click > In Stock", "xpath", "//label[contains(text(),'In Stock')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Element_By_Path_Click("Click > Visible In App", "xpath", "//label[contains(text(),'Visible In App')]", ParentTest, "no_jira");
@@ -185,7 +188,8 @@ class AP3_bulk_apply extends AP3_GUI{
             Thread.sleep(500);
             Wait_For_Element_By_Path_InVisibility("Wait for Spinner", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Thread.sleep(500);     
+            Wait_For_Element_By_Path_Presence("Wait for Publication", "xpath", "//*[contains(text(),'Last Published: Today')]", ParentTest, "no_jira");
+                if (FAIL) { return;}    
         }
         
         Call_API("Find 'Sides' MenuID", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
@@ -268,9 +272,9 @@ class AP3_bulk_apply extends AP3_GUI{
         String OP = getAttributeOfElementByXpath("(//table[contains(@class,'v-table')]//tbody/tr)[1]//td[5]", "innerHTML");
         Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(2000);
-
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
+        Wait_For_Element_By_Path_Presence("Wait to be in Edit mode", "xpath", "//*[contains(text(),'You are editing this menu')]", ParentTest, Ver);
+            if (FAIL) { return;}
+        Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
             if (FAIL) { return;}
        
         //Open Bulk Apply Side Panel for all items and verify side panel
@@ -280,7 +284,7 @@ class AP3_bulk_apply extends AP3_GUI{
         Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
         //Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(), 'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Wait_For_Element_By_Path_Presence("Side Panel", "xpath", "//aside[@id='bulkupdatepaneldrawer']", ParentTest, "no_jira");
+        Wait_For_Element_By_Path_Presence("Bulk Update Side Panel", "xpath", "//aside[@id='bulkupdatepaneldrawer']", ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Update " + L1.size() + " Items header", "xpath", "//div[contains(text(),'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -329,7 +333,7 @@ class AP3_bulk_apply extends AP3_GUI{
         // <editor-fold defaultstate="collapsed" desc="Bulk Change IN/OUT of stock in Local Menu">  
         EX += " - " + "\t" + " === " + "\t" + " ===== Bulk Change IN/OUT of stock in Local Menu" + "\t" + " == Bulk Change IN/OUT of stock in Local Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         for (int i = 0; i < L1.size(); i++){
-            Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is In Stock", "xpath", "((//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[8])//input[@aria-checked='true']", ParentTest, "no_jira");
+            Wait_For_Element_By_Path_Presence("Check item "+ String.valueOf(i+1)+" is In Stock", "xpath", "((//table[contains(@class,'v-table')]//tbody/tr)["+String.valueOf(i+1)+"]//td[9])//input[@aria-checked='true']", ParentTest, "no_jira");
             if (FAIL) { return;}
         }
 
@@ -342,7 +346,8 @@ class AP3_bulk_apply extends AP3_GUI{
         Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
         //Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(), 'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Bulk Update Side Panel", "xpath", "//aside[@id='bulkupdatepaneldrawer']", ParentTest, "no_jira");
+            if (FAIL) { return;}
         Element_By_Path_Click("Click > Out of Stock", "xpath", "//label[contains(text(),'Out of Stock')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", ParentTest, "no_jira");
@@ -371,7 +376,8 @@ class AP3_bulk_apply extends AP3_GUI{
         Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
         //Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(), 'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-// Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Bulk Update Side Panel", "xpath", "//aside[@id='bulkupdatepaneldrawer']", ParentTest, "no_jira");
+            if (FAIL) { return;}
         Element_By_Path_Click("Click > Hide In App", "xpath", "//label[contains(text(),'Hide In App')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", ParentTest, "no_jira");
@@ -387,6 +393,10 @@ class AP3_bulk_apply extends AP3_GUI{
         Element_By_Path_Click("Click Publish in Local Menu", "xpath", "//div[contains(text(),'publish')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(1000);
+        Wait_For_Element_By_Path_InVisibility("Wait for Spinner", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Wait_For_Element_By_Path_Presence("Wait for Publication", "xpath", "//*[contains(text(),'Last Published: Today')]", ParentTest, Ver);
+            if (FAIL) { return;}
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         
         // <editor-fold defaultstate="collapsed" desc="Bulk Change Visibility of Modifiers in Local Menu">  
@@ -396,9 +406,9 @@ class AP3_bulk_apply extends AP3_GUI{
         Thread.sleep(1000);
         Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(2000);
-
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
+        Wait_For_Element_By_Path_Presence("Wait to be in Edit mode", "xpath", "//*[contains(text(),'You are editing this menu')]", ParentTest, Ver);
+            if (FAIL) { return;}
+        Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
             if (FAIL) { return;}
 
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
@@ -407,16 +417,11 @@ class AP3_bulk_apply extends AP3_GUI{
         Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
         //Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(), 'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
         if (FAIL) { return;}
+        Wait_For_Element_By_Path_Presence("Bulk Update Side Panel", "xpath", "//aside[@id='bulkupdatepaneldrawer']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Click("Click > Edit Modifier Group", "xpath", "(//i[contains(@class,'mdi-pencil')])[7]", ParentTest, "no_jira");
+            if (FAIL) { return;}
         Thread.sleep(500);
-        if (!env.equals("PR")) {
-            Element_By_Path_Click("Click > Edit Modifier Group", "xpath", "(//i[contains(@class,'mdi-pencil')])[7]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Thread.sleep(500);
-        } else {
-            Element_By_Path_Click("Click > Edit Modifier Group", "xpath", "(//i[contains(@class,'mdi-pencil')])[6]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Thread.sleep(500);
-        }
         
         Element_By_Path_Click("Click > Show Selection", "xpath", "//div[contains(text(),'Show Selection')]", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -429,21 +434,21 @@ class AP3_bulk_apply extends AP3_GUI{
                 API_Response_Body = t;               
                 json = new JSONObject(API_Response_Body);
                 menus = new JSONArray();
-            menus = json.getJSONArray("menus");
-            for (int i = 0; i < menus.length(); i++) {
-                JSONObject menu = menus.getJSONObject(i);
-                String loc_brand = "";
-                if (menu.has("location_brand") && menu.has("label")) {
-                    loc_brand = menu.getString("location_brand");
-                    if (loc_brand.equals(BrandID)) {
-                        JSONObject label = menu.getJSONObject("label");
-                        menuName = label.getString("en");
-                        if (menuName.equals("Flame Grilled Pitas")) {
-                            MenuID = menu.getString("id"); 
-                        }
-                    }  
+                menus = json.getJSONArray("menus");
+                for (int i = 0; i < menus.length(); i++) {
+                    JSONObject menu = menus.getJSONObject(i);
+                    String loc_brand = "";
+                    if (menu.has("location_brand") && menu.has("label")) {
+                        loc_brand = menu.getString("location_brand");
+                        if (loc_brand.equals(BrandID)) {
+                            JSONObject label = menu.getJSONObject("label");
+                            menuName = label.getString("en");
+                            if (menuName.equals("Flame Grilled Pitas")) {
+                                MenuID = menu.getString("id"); 
+                            }
+                        }  
+                    }
                 }
-            }
             }catch (Exception ex) {
                 _f++; err = ex.getMessage().trim();
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
@@ -512,13 +517,8 @@ class AP3_bulk_apply extends AP3_GUI{
                     if (FAIL) { return;}
                 Wait_For_Element_By_Path_Presence("Check Modifier is visible", "xpath", "(//div[contains(@class,'layout modifier')])[2]//i[contains(@class,'mdi-eye ')]", ParentTest, "no_jira");
                     if (FAIL) { return;} 
-                if (!env.equals("PR")) { //======================== Why Different ??????
-                    Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
-                } else {
-                    Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[4]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
-                }  
+                Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", ParentTest, "no_jira");
+                    if (FAIL) { return;}  
             }
             Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -609,13 +609,8 @@ class AP3_bulk_apply extends AP3_GUI{
                 if (FAIL) { return;}
                 Wait_For_Element_By_Path_Presence("Check Modifier 'Extra Beef' is NOT visible", "xpath", "(//div[contains(@class,'layout modifier')])[2]//i[contains(@class,'mdi-eye-off')]", ParentTest, "no_jira");
                 if (FAIL) { return;} 
-                if (!env.equals("PR")) {
-                    Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", ParentTest, "no_jira");
+                Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", ParentTest, "no_jira");
                     if (FAIL) { return;}
-                } else {
-                    Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[4]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
-                }  
             }
             Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -630,6 +625,8 @@ class AP3_bulk_apply extends AP3_GUI{
         if (FAIL) { return;}
         Refresh("Refresh page", ParentTest, "no_jira");
         Thread.sleep(2000);
+        Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//div[contains(text(),'Flame Grilled Pitas')]", ParentTest, Ver);
+            if (FAIL) { return;}
         List_L0("List of Categories", "xpath", "//div[contains(@class,'flex xs12 list-item list-item-large')]", ParentTest, "no_jira");
         if (FAIL) { return;}
         Element_By_Path_Click("Click > Category: Sides", "xpath", "//div[contains(text(),'Sides')]", ParentTest, "no_jira");
@@ -717,12 +714,12 @@ class AP3_bulk_apply extends AP3_GUI{
                 }
                 if (!item.isNull("plu")) {
                     _t++;
-                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has a PLU" + "\t" + "-" + "\t" + "has PLU = " + item.isNull("plu") + "\t" + "PASS" + "\t" 
+                    _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has a PLU" + "\t" + "-" + "\t" + "has PLU = " + item.getString("plu") + "\t" + "PASS" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
                     Log_Html_Result("PASS", "has PLU = " + item.isNull("plu"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has a PLU"));
                 } else {
                     _t++;
-                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has a PLU" + "\t" + "-" + "\t" + "has PLU = " + item.isNull("plu") + "\t" + "FAIL" + "\t" 
+                    _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has a PLU" + "\t" + "-" + "\t" + "has PLU = " + item.getString("plu") + "\t" + "FAIL" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
                     Log_Html_Result("FAIL", "has PLU = " + item.isNull("plu"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has a PLU"));
                 }
@@ -754,7 +751,8 @@ class AP3_bulk_apply extends AP3_GUI{
 
         Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(2000);
+        Wait_For_Element_By_Path_Presence("Wait to be in Edit mode", "xpath", "//*[contains(text(),'You are editing this menu')]", ParentTest, Ver);
+            if (FAIL) { return;}
 
         Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -766,7 +764,8 @@ class AP3_bulk_apply extends AP3_GUI{
         //Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
         //Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(), 'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Bulk Update Side Panel", "xpath", "//aside[@id='bulkupdatepaneldrawer']", ParentTest, "no_jira");
+            if (FAIL) { return;}
         Element_By_Path_Click("Click on Price Input Field", "xpath", "//input[contains(@placeholder,'Price')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         if (FIP.contains("5")) {
@@ -810,7 +809,8 @@ class AP3_bulk_apply extends AP3_GUI{
         //Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
         //Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(), 'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(1000);
+        Wait_For_Element_By_Path_Presence("Bulk Update Side Panel", "xpath", "//aside[@id='bulkupdatepaneldrawer']", ParentTest, "no_jira");
+            if (FAIL) { return;}
         Element_By_Path_Click("Click on Disable in Local Menu", "xpath", "(//i[contains(@class,'mdi-radiobox')])[2]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", ParentTest, "no_jira");
@@ -840,7 +840,8 @@ class AP3_bulk_apply extends AP3_GUI{
         //Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
         Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(), 'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Bulk Update Side Panel", "xpath", "//aside[@id='bulkupdatepaneldrawer']", ParentTest, "no_jira");
+            if (FAIL) { return;}
         Element_By_Path_Click("Click on Remove PLU Numbers", "xpath", "//input[@aria-label='Remove PLU Numbers from selected Items']", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", ParentTest, "no_jira");
@@ -865,7 +866,8 @@ class AP3_bulk_apply extends AP3_GUI{
         //Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
         Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(), 'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Bulk Update Side Panel", "xpath", "//aside[@id='bulkupdatepaneldrawer']", ParentTest, "no_jira");
+            if (FAIL) { return;}
         Move_to_Element_By_Path("Move to Edit Mod Groups Section", "xpath", "//div[text()='Edit Mod Groups in Your Item Selection']", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_E1_Find("Find Modifier Group Input", "xpath", "//input[@placeholder='Pita Options Modifier']", ParentTest, "no_jira");
@@ -895,13 +897,8 @@ class AP3_bulk_apply extends AP3_GUI{
                 if (FAIL) { return;}
             compareListSizes("updated Mod List size is smaller than original size", L3, L0, L3.size()>L0.size(), ParentTest, "no_jira");
                 if (FAIL) { return;}
-            if (!env.equals("PR")) {
-                Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
-            } else {
-                Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[4]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
-            }  
+            Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", ParentTest, "no_jira");
+                if (FAIL) { return;}
         }
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
@@ -1018,16 +1015,17 @@ class AP3_bulk_apply extends AP3_GUI{
             if (FAIL) { return;}
         Refresh("Refresh page", ParentTest, "no_jira");
         Thread.sleep(2000);
+        Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//div[contains(text(),'Flame Grilled Pitas')]", ParentTest, Ver);
+            if (FAIL) { return;}
         Element_By_Path_Click("Click > Category", "xpath", "//div[contains(text(),'Flame Grilled Pitas')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(1000);
         Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(500);
-
-            Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
+        Wait_For_Element_By_Path_Presence("Wait to be in Edit mode", "xpath", "//*[contains(text(),'You are editing this menu')]", ParentTest, Ver);
             if (FAIL) { return;}
-   
+
+        Element_By_Path_Click("Select Bulk Apply Checkbox", "xpath", "(//i[contains(@class,'v-icon mdi mdi-checkbox-blank-outline theme--light')])[5]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for 'UPDATE x ITEMS' buttom", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, Ver);
             if (FAIL) { return;}    
@@ -1035,7 +1033,8 @@ class AP3_bulk_apply extends AP3_GUI{
         //Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");       
         Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(), 'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
         if (FAIL) { return;}
-        Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Bulk Update Side Panel", "xpath", "//aside[@id='bulkupdatepaneldrawer']", ParentTest, "no_jira");
+            if (FAIL) { return;}
         Element_By_Path_Click("Click on Enable in Local Menu", "xpath", "(//i[contains(@class,'mdi-radiobox')])[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Click > Apply Changes", "xpath", "//div[contains(text(),'Apply Changes')]", ParentTest, "no_jira");
@@ -1055,7 +1054,8 @@ class AP3_bulk_apply extends AP3_GUI{
             if (FAIL) { return;}
         Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Wait to be in Edit mode", "xpath", "//*[contains(text(),'You are editing this menu')]", ParentTest, Ver);
+            if (FAIL) { return;}
         List_L1("List of Items", "xpath", "//table[contains(@class,'v-table')]//tbody/tr", ParentTest, "no_jira");
         if (FAIL) { return;}
         for (int i = 0; i < L1.size(); i++) {
@@ -1080,13 +1080,8 @@ class AP3_bulk_apply extends AP3_GUI{
                 if (FAIL) { return;}
             compareListSizes("updated Mod List size is smaller than original size", L3, L0, L3.size()>L0.size(), ParentTest, "no_jira");
                 if (FAIL) { return;}
-            if (!env.equals("PR")) {
-                Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
-            } else {
-                Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[4]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
-            }  
+            Element_By_Path_Click("Click Cancel", "xpath", "(//div[text()='Cancel'])[5]", ParentTest, "no_jira");
+                if (FAIL) { return;}
         }   
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold> 
@@ -1096,12 +1091,15 @@ class AP3_bulk_apply extends AP3_GUI{
         Close_Current_Tab_switch_To_1st("Switch Tab to Global Menu", ParentTest, "no_jira");
             if (FAIL) { return;}
         Refresh("Refresh page", ParentTest, "no_jira");
-        Thread.sleep(5000);
+        Thread.sleep(2000);
+        Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//div[contains(text(),'Flame Grilled Pitas')]", ParentTest, Ver);
+            if (FAIL) { return;}
         Element_By_Path_Click("Click > Category", "xpath", "//div[contains(text(),'Flame Grilled Pitas')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Wait to be in Edit mode", "xpath", "//*[contains(text(),'You are editing this menu')]", ParentTest, Ver);
+            if (FAIL) { return;}
         List_L1("List of Items", "xpath", "//table[contains(@class,'v-table')]//tbody/tr", ParentTest, "no_jira");
             if (FAIL) { return;}
         for (int i = 0; i < L1.size(); i++){
@@ -1124,7 +1122,8 @@ class AP3_bulk_apply extends AP3_GUI{
         //Element_By_Path_Click("Click > Update X Items", "xpath", "//span[@class='Button-Primary-Center']", ParentTest, "no_jira");
         Element_By_Path_Click("Click > Update " + L1.size() + " Items", "xpath", "//span[contains(text(),'Update " + String.valueOf(L1.size()) + " Items')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(500);
+        Wait_For_Element_By_Path_Presence("Bulk Update Side Panel", "xpath", "//aside[@id='bulkupdatepaneldrawer']", ParentTest, "no_jira");
+            if (FAIL) { return;}
         Element_By_Path_Click("Click > Edit Modifier Group", "xpath", "(//i[contains(@class,'v-icon mdi mdi-pencil theme--light')])[3]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Click > Add Modifier", "xpath", "//div[contains(text(),'Add MODIFIER')]", ParentTest, "no_jira");
@@ -1141,6 +1140,7 @@ class AP3_bulk_apply extends AP3_GUI{
         Element_By_Path_Click("Click Publish in Global Menu", "xpath", "//div[contains(text(),'publish')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);   
+        EX += " - " + "\t" + " === " + "\t" + " === Bulk Apply End >>" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
     } catch (Exception ex){}   // =============================================  
     } 
     
@@ -1181,15 +1181,4 @@ class AP3_bulk_apply extends AP3_GUI{
         return el.getAttribute(attribute);
     }
     
-//    private String getRandNumberString() {
-//        String SALTCHARS = "1234567890";
-//        StringBuilder salt = new StringBuilder();
-//        Random rnd = new Random();
-//        while (salt.length() < 6) { // length of the random string.
-//            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
-//            salt.append(SALTCHARS.charAt(index));
-//        }
-//        String saltStr = salt.toString();
-//        return saltStr;
-//    }
 }
