@@ -1802,25 +1802,26 @@ public class Station extends javax.swing.JInternalFrame {
                 if(json.getJSONObject("promo").has("amount")){
                     promo_amount = json.getJSONObject("promo").getDouble("amount");  
                 }
-                if(json.getJSONObject("promo").has("discount")){
-                    promo_amount_off = json.getJSONObject("promo").getJSONObject("discount").getDouble("amount_off");
-                }  
+//                if(json.getJSONObject("promo").has("discount")){
+//                    promo_amount_off = json.getJSONObject("promo").getJSONObject("discount").getDouble("amount_off");
+//                }  
             }
             sub_total = json.getJSONObject("sub_total").getDouble("amount");  
             taxes = json.getJSONObject("taxes").getDouble("amount");
             
-            max_taxes = Math.round(((sub_total - promo_amount_off + service_fee + delivery_fee) * combined_tax_rate)*100.0)/100.0;
             String TAX_OK = "OK, applied on SubTotal";
-            String TAX_RATES = "Rates > Combined " + combined_tax_rate + ", PST " + pst_tax_rate + ", GST " + gst_tax_rate + ", QST " + qst_tax_rate;
-
+            max_taxes = Math.round(((sub_total - promo_amount + service_fee + delivery_fee) * combined_tax_rate)*100.0)/100.0;
             if(taxes > max_taxes){
                 TAX_OK = "NOT OK, looks applied om Total";
             }
+            
+            String TAX_RATES = "Rates > Combined " + combined_tax_rate + ", PST " + pst_tax_rate + ", GST " + gst_tax_rate + ", QST " + qst_tax_rate;
             if(COUNTRY.toLowerCase().startsWith("u")){
                 TAX_RATES = "US Combined Tax Rate: " + combined_tax_rate;
             }
+            
             TAXES += TAX_RATES + "\r\n" +
-                    "Discount " + promo_amount_off + ", Serv Fee " + service_fee + ", Del Fee " + delivery_fee + "\r\n" +
+                    "Discount " + promo_amount + ", Serv Fee " + service_fee + ", Del Fee " + delivery_fee + "\r\n" +
                     "Tax: " + taxes + " (" + TAX_OK  + ")" + "\r\n" +
                     "Subtotal " + sub_total + ", Total " + total;
         } catch (Exception ex) {
