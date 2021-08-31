@@ -10,6 +10,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import java.awt.Cursor;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -25,10 +26,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import org.apache.poi.ss.formula.functions.Subtotal;
@@ -43,13 +47,9 @@ public class Station extends javax.swing.JInternalFrame {
 
 //PROMO CODES (that work on Staging)
 //boostper8 - 20%
-//
 //promo100-  100%
-//
 //promo100up2- 100%
-//
 //comsonetime- flat 5 dollars
-//
 //compassunlimited- 5 dollars    
     
     public Station() {
@@ -97,6 +97,7 @@ public class Station extends javax.swing.JInternalFrame {
         cmbLoc = new javax.swing.JComboBox<>();
         txtMSG = new javax.swing.JTextField();
         lblSITES8 = new javax.swing.JLabel();
+        btnSCart = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -267,13 +268,16 @@ public class Station extends javax.swing.JInternalFrame {
             }
         ));
         DV_Mods.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV_Mods.setCellSelectionEnabled(true);
         DV_Mods.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV_Mods.setName("DV_Mods"); // NOI18N
         DV_Mods.setOpaque(false);
         DV_Mods.setRowHeight(18);
-        DV_Mods.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         DV_Mods.getTableHeader().setReorderingAllowed(false);
+        DV_Mods.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DV_ModsMouseClicked(evt);
+            }
+        });
         jScrollPane7.setViewportView(DV_Mods);
 
         getContentPane().add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 248, 384, 112));
@@ -355,7 +359,7 @@ public class Station extends javax.swing.JInternalFrame {
                 btnSave_OptMouseClicked(evt);
             }
         });
-        getContentPane().add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 476, 76, 22));
+        getContentPane().add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 476, 76, 22));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -457,6 +461,18 @@ public class Station extends javax.swing.JInternalFrame {
         lblSITES8.setAlignmentX(0.5F);
         getContentPane().add(lblSITES8, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 364, -1, -1));
 
+        btnSCart.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnSCart.setText("Last Updated SCart");
+        btnSCart.setEnabled(false);
+        btnSCart.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        btnSCart.setName("btnSAVE"); // NOI18N
+        btnSCart.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSCartMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnSCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 448, 136, 22));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -537,6 +553,7 @@ public class Station extends javax.swing.JInternalFrame {
     protected String Auth = "";
     protected String EXACT_Payment_TKN = "";
     protected String FP_Payment_TKN = "";
+    protected String Last_SCart = "";
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">        
@@ -613,16 +630,10 @@ public class Station extends javax.swing.JInternalFrame {
 
     private void DV_ItemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_ItemsMouseClicked
         if (ItemLastRow == DV_Items.getSelectedRow()) {
-            boolean ED = DV_Items.isCellEditable(DV_Items.getSelectedRow(), 3);
-            if (DV_Items.editCellAt(DV_Items.getSelectedRow(), 3)){
-                boolean toggle = false;
-//                boolean extend = false;
-//                DV_Items.changeSelection(DV_Items.getSelectedRow(), 3, toggle, extend);                
-            }
             return;
         } 
+        GetMods(); // =================================== 
         ItemLastRow = DV_Items.getSelectedRow();              
-        GetMods(); // ===================================
     }//GEN-LAST:event_DV_ItemsMouseClicked
 
     private void DV_MenusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_MenusMouseClicked
@@ -634,7 +645,8 @@ public class Station extends javax.swing.JInternalFrame {
         }   
         GetMenuTimeslots();
         GetItems();
-        MenuLastRow = DV_Menus.getSelectedRow();          
+        MenuLastRow = DV_Menus.getSelectedRow();  
+        Validate_Place_Order();        
     }//GEN-LAST:event_DV_MenusMouseClicked
 
     private void DV_BTSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_BTSMouseClicked
@@ -662,6 +674,17 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }//GEN-LAST:event_btnDOrderMouseClicked
+
+    private void DV_ModsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_ModsMouseClicked
+        int index = DV_Mods.getSelectedRow();
+        if(String.valueOf(DV_Mods.getValueAt(index, 0)).equals(" === ")){
+            DV_Mods.getSelectionModel().removeSelectionInterval(index, index);
+        }
+    }//GEN-LAST:event_DV_ModsMouseClicked
+
+    private void btnSCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSCartMouseClicked
+        Print_SCart();
+    }//GEN-LAST:event_btnSCartMouseClicked
     // </editor-fold>
 
     private void Load_Form(){
@@ -814,7 +837,8 @@ public class Station extends javax.swing.JInternalFrame {
         }
         app = cmbApp.getSelectedItem().toString();
         Get_AP3_TKN();
-        GetSites();       
+        GetSites(); 
+        txtMSG.setText(txtMobile_ID.getText() + " (JTT)");
     }
     private void Get_AP3_TKN() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1125,9 +1149,9 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }         
  
-        if(DV_BTS.getRowCount() > 0){
-            DV_BTS.changeSelection(0, 0, false, false);
-        }        
+//        if(DV_BTS.getRowCount() > 0){
+//            DV_BTS.changeSelection(0, 0, false, false);
+//        }        
         lblBTS.setText("Brand Slots " + DV_BTS.getRowCount());     
         txtLog.append("=== Selected Brand > " + DV_BTS.getRowCount() + " Brand Slots" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());         
@@ -1169,11 +1193,11 @@ public class Station extends javax.swing.JInternalFrame {
                 Api_Call("GET", BaseAPI + "/menu/" + id, "", "");
 
                 JArray_MENUS.put(json);
-                JSONObject menu = new JSONObject(json);
+                //JSONObject menu = new JSONObject(json);
                 resp = "OK " + String.format("%.2f", (double)(sw2.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
-                if(menu.has("label")){                    
-                    if(menu.getJSONObject("label").has("en")) {
-                        label = menu.getJSONObject("label").getString("en");
+                if(json.has("label")){                    
+                    if(json.getJSONObject("label").has("en")) {
+                        label = json.getJSONObject("label").getString("en");
                         if(label.trim().equals("")) {
                             label = "label 'en' Empty";
                         }
@@ -1230,7 +1254,11 @@ public class Station extends javax.swing.JInternalFrame {
             DV_MTS.setDefaultEditor(Object.class, null);
             DV_MTS.getColumnModel().getColumn(0).setPreferredWidth(55);
             DV_MTS.getColumnModel().getColumn(1).sizeWidthToFit();
-
+            
+            
+        if(DV_MTS.getRowCount() > 0){
+            DV_MTS.changeSelection(0, 0, false, false);
+        }     
         } catch (Exception ex) {
             txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
@@ -1257,7 +1285,7 @@ public class Station extends javax.swing.JInternalFrame {
             String id = "?";
 
             JArray_ITEMS = new JSONArray();
-            String[] ColumnsNames = {"Category", "Item", "Price", "Qt", "hidden","disabled","item_id", "cat_id"}; 
+            String[] ColumnsNames = {"Category", "Item", "Price", "Qty", "hidden","disabled","item_id", "cat_id"}; 
             boolean[] isEditable = {false,false,false,true,false,false};
             DefaultTableModel Model = new DefaultTableModel(){
                 @Override
@@ -1267,6 +1295,23 @@ public class Station extends javax.swing.JInternalFrame {
             };
             Model.setColumnIdentifiers(ColumnsNames);
             DV_Items.setModel(Model);
+            
+            TableColumn Qt = DV_Items.getColumnModel().getColumn(3);
+            JComboBox<Integer> comboBox = new JComboBox<>();
+            comboBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            comboBox.setMaximumRowCount(10);
+            comboBox.addItem(1);
+            comboBox.addItem(2);
+            comboBox.addItem(3);
+            comboBox.addItem(4);
+            comboBox.addItem(5);
+            comboBox.addItem(6);
+            comboBox.addItem(7);
+            comboBox.addItem(8);
+            comboBox.addItem(9);
+            comboBox.addItem(10);
+            Qt.setCellEditor(new DefaultCellEditor(comboBox));            
+            
             JSONObject menu = (JSONObject) JArray_MENUS.get(DV_Menus.getSelectedRow());             
             if (menu.has("groups")) {
                 JSONArray groups = menu.getJSONArray("groups");
@@ -1353,8 +1398,10 @@ public class Station extends javax.swing.JInternalFrame {
             String label = "";
             String price = "?";
             String id = "?";
-
-            String[] ColumnsName = {"Item", "Modifires", "Price", "id"}; 
+            String GroupID = "?";
+            String GroupName = "?";
+            
+            String[] ColumnsName = {"Item", "Modifires", "Price", "id", "GroupID", "GroupName"}; 
             DefaultTableModel Model = new DefaultTableModel();
             Model.setColumnIdentifiers(ColumnsName);
             DV_Mods.setModel(Model); 
@@ -1366,24 +1413,28 @@ public class Station extends javax.swing.JInternalFrame {
                     JSONObject oGroup = (JSONObject) ops;
                     if(oGroup.has("label")){                    
                        if(oGroup.getJSONObject("label").has("en")) {
-                           label = oGroup.getJSONObject("label").getString("en");
-                           if(label.trim().equals("")) {
-                               label = "label 'en' Empty";
+                           GroupName = oGroup.getJSONObject("label").getString("en");
+                           if(GroupName.trim().equals("")) {
+                               GroupName = "label 'en' Empty";
                            }
                        }
                     }else{
-                        label = "label 'en' Not Found";
+                        GroupName = "label 'en' Not Found";
+
                     } 
-                    if(oGroup.has("min") && oGroup.has("max")){
+                    label = GroupName;
+                    if(!GroupName.contains("min") && oGroup.has("min") && oGroup.has("max")){
                         label = label + " (min:" + oGroup.getNumber("min").toString() + ", max:" + oGroup.getNumber("max").toString() + ")";
                     }
+                    
                     if(oGroup.has("id")){
-                        id = oGroup.getString("id");
+                        GroupID = oGroup.getString("id");
                     }else{
-                        id = "not found";
+                        GroupID = "not found";
                     }
-                    Model.addRow(new Object[]{" === ", label + " >>> ", " ", id});  //==================== 
+                    Model.addRow(new Object[]{" === ", label, " ", GroupID, " "});  //==================== 
 
+                    label = "?";
                     if (oGroup.has("items")) {
                         JSONArray Oitems = oGroup.getJSONArray("items");
                         for (Object Oitem : Oitems) {
@@ -1410,7 +1461,7 @@ public class Station extends javax.swing.JInternalFrame {
                             }else{
                                 price = "Not Found";
                             }
-                            Model.addRow(new Object[]{item.getJSONObject("label").getString("en"), label, price, id});  
+                            Model.addRow(new Object[]{item.getJSONObject("label").getString("en"), label, price, id, GroupID, GroupName});  
                         }
                     }
                 }
@@ -1420,7 +1471,10 @@ public class Station extends javax.swing.JInternalFrame {
             DV_Mods.getColumnModel().getColumn(0).setPreferredWidth(130);
             DV_Mods.getColumnModel().getColumn(1).setPreferredWidth(170);
             DV_Mods.getColumnModel().getColumn(2).setPreferredWidth(50);
-            DV_Mods.changeSelection(0, 0, false, false);    
+            DV_Mods.getColumnModel().getColumn(3).setPreferredWidth(130);
+            DV_Mods.getColumnModel().getColumn(4).setPreferredWidth(170);
+            DV_Mods.getColumnModel().getColumn(5).setPreferredWidth(170);
+            //DV_Mods.changeSelection(0, 0, false, false);    
         }
         catch(Exception ex){
             txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
@@ -1602,6 +1656,8 @@ public class Station extends javax.swing.JInternalFrame {
             } 
         }
         Validate_Place_Order();
+        btnSCart.setEnabled(true);
+        
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
     } 
     
@@ -1631,8 +1687,10 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }                                    
+
     private void New_Pickup_ShoppingCart(){
         FAIL = false;
+        String CCC = "";
         txtLog.append("\r\n- " + "New Pickup Shopping Cart ...."+ "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
@@ -1648,7 +1706,7 @@ public class Station extends javax.swing.JInternalFrame {
         if(json != null){
             try {
                 ShoppingCart_Pickup_ID = json.getString("id");
-                txtLog.append("== " + "New SCart ID: "  + ShoppingCart_Pickup_ID + "\r\n");
+                txtLog.append("== " + "New SCart ID:  \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex){
                 FAIL = true;
@@ -1657,22 +1715,46 @@ public class Station extends javax.swing.JInternalFrame {
                 return;
             }
         } 
-        
+        Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID;
         txtLog.append("\r\n- " + "Add Menu Item(s) to Pickup Shopping Cart ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         
+
         String OptionsJson = "";
         String ItemsJson = "";
+        String ModGroup = "";
         int[] SelectedMods = DV_Mods.getSelectedRows();
         int[] SelectedItems = DV_Items.getSelectedRows();
         for(int i = 0; i < SelectedItems.length; i++){
-            ItemsJson += "{\"id\":\"" + DV_Items.getValueAt(SelectedItems[i],6) + "\"," + 
-                          "\"quantity\":" + DV_Items.getValueAt(SelectedItems[i],3) + "," + 
-                          "\"options\":[" + OptionsJson + "]},";
+            OptionsJson = "";
+            for(int j = 0; j < SelectedMods.length; j++){
+                if(DV_Items.getValueAt(SelectedItems[i],1).equals(DV_Mods.getValueAt(SelectedMods[j],0))){
+                    OptionsJson += "{\"id\":\"" + DV_Mods.getValueAt(SelectedMods[j],3).toString() + "\"},";
+                    ModGroup = DV_Mods.getValueAt(SelectedMods[j],5).toString();
+                }
+            }
+            if(!OptionsJson.isEmpty()){
+                OptionsJson = OptionsJson.substring(0, OptionsJson.length() - 1);
+                OptionsJson = "," + "\"options\":[{" +
+                                "\"label\":{\"en\":\"" + ModGroup + "\"}," + 
+                                "\"items\":[" + OptionsJson + "]}]";
+            }
+            
+            ItemsJson += "{\"id\":\"" + DV_Items.getValueAt(SelectedItems[i],6).toString() + "\"," + 
+                          "\"quantity\":" + DV_Items.getValueAt(SelectedItems[i],3).toString() + 
+                          OptionsJson + "},";
         }
-        ItemsJson = ItemsJson.substring(0, ItemsJson.length() -1);
-
+        ItemsJson = ItemsJson.substring(0, ItemsJson.length() - 1);
+        
         BODY = "{\"items\":[" + ItemsJson + "]}"; 
+        try{  
+            CCC = new JSONObject(BODY).toString(4);
+        } catch (Exception ex){
+            FAIL = true;
+            txtLog.append("== " + "Json ERROR: "  + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            return;
+        }
         Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID, Auth, BODY);
         if(json != null){
             try{
@@ -1697,7 +1779,7 @@ public class Station extends javax.swing.JInternalFrame {
             if(json != null){
                 try{
                     ShoppingCart_Delivery_ID = json.getString("id");
-                    txtLog.append("== " + "Apply Promo > Updated SCart: \r\n"  + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
+                    txtLog.append("== " + "Apply Promo > Updated SCart: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 } catch (Exception ex){
                     FAIL = true;
@@ -1706,6 +1788,7 @@ public class Station extends javax.swing.JInternalFrame {
                 }
             }        
         } 
+        Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID;
         Report_Tax();
     }
     private void New_Delivery_ShoppingCart(){
@@ -1726,7 +1809,7 @@ public class Station extends javax.swing.JInternalFrame {
         if(json != null){
             try {
                 ShoppingCart_Delivery_ID = json.getString("id");
-                txtLog.append("== " + "New SCart ID: "  + ShoppingCart_Delivery_ID + "\r\n");
+                txtLog.append("== " + "New SCart ID: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex){
                 FAIL = true;
@@ -1735,24 +1818,43 @@ public class Station extends javax.swing.JInternalFrame {
                 return;
             }
         } 
-        
+        Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID;
         txtLog.append("\r\n- " + "Add Menu Item(s) to Delivery Shopping Cart ...."+ "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         
-        String ItemsJson= "";
+        String OptionsJson = "";
+        String ItemsJson = "";
+        String ModGroup = "";
+        int[] SelectedMods = DV_Mods.getSelectedRows();
         int[] SelectedItems = DV_Items.getSelectedRows();
         for(int i = 0; i < SelectedItems.length; i++){
-            ItemsJson += "{\"id\":\"" + DV_Items.getValueAt(SelectedItems[i],6) + "\"," + 
-                          "\"quantity\":" + DV_Items.getValueAt(SelectedItems[i],3) + "},";
+            OptionsJson = "";
+            for(int j = 0; j < SelectedMods.length; j++){
+                if(DV_Items.getValueAt(SelectedItems[i],1).equals(DV_Mods.getValueAt(SelectedMods[j],0))){
+                    OptionsJson += "{\"id\":\"" + DV_Mods.getValueAt(SelectedMods[j],3).toString() + "\"},";
+                    ModGroup = DV_Mods.getValueAt(SelectedMods[j],5).toString();
+                }
+            }
+            if(!OptionsJson.isEmpty()){
+                OptionsJson = OptionsJson.substring(0, OptionsJson.length() - 1);
+                OptionsJson = "," + "\"options\":[{" +
+                                "\"label\":{\"en\":\"" + ModGroup + "\"}," + 
+                                "\"items\":[" + OptionsJson + "]}]";
+            }
+            
+            ItemsJson += "{\"id\":\"" + DV_Items.getValueAt(SelectedItems[i],6).toString() + "\"," + 
+                          "\"quantity\":" + DV_Items.getValueAt(SelectedItems[i],3).toString() + 
+                          OptionsJson + "},";
         }
-        ItemsJson = ItemsJson.substring(0, ItemsJson.length() -1);
+        ItemsJson = ItemsJson.substring(0, ItemsJson.length() - 1);
         
-        BODY = "{\"items\":[" + ItemsJson + "]}";  
+        BODY = "{\"items\":[" + ItemsJson + "]}"; 
+        
         Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, BODY);
         if(json != null){
             try{
                 ShoppingCart_Delivery_ID = json.getString("id");
-                txtLog.append("== " + "Add Item > Updated SCart ID: "  + ShoppingCart_Delivery_ID + "\r\n");
+                txtLog.append("== " + "Add Item > Updated SCart \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex){
                 FAIL = true;
@@ -1782,6 +1884,7 @@ public class Station extends javax.swing.JInternalFrame {
                 }
             }        
         }   
+        Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID;
         Report_Tax();
     }
 
@@ -1801,36 +1904,33 @@ public class Station extends javax.swing.JInternalFrame {
             if(json.has("promo")){
                 if(json.getJSONObject("promo").has("amount")){
                     promo_amount = json.getJSONObject("promo").getDouble("amount");  
-                }
-//                if(json.getJSONObject("promo").has("discount")){
-//                    promo_amount_off = json.getJSONObject("promo").getJSONObject("discount").getDouble("amount_off");
-//                }  
+                } 
             }
             sub_total = json.getJSONObject("sub_total").getDouble("amount");  
             taxes = json.getJSONObject("taxes").getDouble("amount");
-            
-            String TAX_OK = "OK, applied on SubTotal";
-            max_taxes = Math.round(((sub_total - promo_amount + service_fee + delivery_fee) * combined_tax_rate)*100.0)/100.0;
-            if(taxes > max_taxes){
-                TAX_OK = "NOT OK, looks applied om Total";
-            }
-            
+           
             String TAX_RATES = "Rates > Combined " + combined_tax_rate + ", PST " + pst_tax_rate + ", GST " + gst_tax_rate + ", QST " + qst_tax_rate;
             if(COUNTRY.toLowerCase().startsWith("u")){
                 TAX_RATES = "US Combined Tax Rate: " + combined_tax_rate;
             }
             
             TAXES += TAX_RATES + "\r\n" +
-                    "Discount " + promo_amount + ", Serv Fee " + service_fee + ", Del Fee " + delivery_fee + "\r\n" +
-                    "Tax: " + taxes + " (" + TAX_OK  + ")" + "\r\n" +
-                    "Subtotal " + sub_total + ", Total " + total;
+                "Discount: " + promo_amount + ", Serv Fee: " + service_fee + ", Del Fee: " + delivery_fee + "\r\n" +
+                "Subtotal: " + sub_total + ", Tax: " + taxes +  ", Total: " + total;
         } catch (Exception ex) {
             TAXES = "Report_Tax Error: " + ex.getMessage();
             txtLog.append("\r\n- Report_Tax Error: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
     }
-    
+    private void Print_SCart() {
+        if(btnSCart.isEnabled()){
+            txtLog.append("\r\n- " + "Print Last Update Shopping Cart ...."+ "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());            
+            Api_Call("GET", Last_SCart, "", "");
+            String R = A.Func.SHOW_FILE(json.toString(4), "json");
+        }
+    }  
     private void Set_Requested_Date(){
         FAIL = false;
         Long TimeSlot = 0L;
@@ -2072,7 +2172,6 @@ public class Station extends javax.swing.JInternalFrame {
         }   
     }
 
-
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV_BTS;
@@ -2085,6 +2184,7 @@ public class Station extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnDOrder;
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnPOrder;
+    private javax.swing.JButton btnSCart;
     private javax.swing.JButton btnSave_Opt;
     private javax.swing.JComboBox<String> cmbApp;
     private javax.swing.JComboBox<String> cmbEnv;
