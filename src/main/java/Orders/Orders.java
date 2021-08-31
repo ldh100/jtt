@@ -509,8 +509,10 @@ public class Orders extends javax.swing.JInternalFrame {
         Auth = "Bearer " + AP3_TKN;
         SITE = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 0));
         SiteID = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 3));
-        long m1 = System.currentTimeMillis() + 30*60*1000;        // Now + 30 min to include future 'requested date
-        long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // Now + 7 days
+        
+        long m1 = System.currentTimeMillis() + (60*60*24*1*1000);  // Now + 1 day to include future 'requested date'
+        long m7 = System.currentTimeMillis() - (60*60*24*7*1000);  // Now - 7 days
+        
         Api_Call("GET",  BaseAPI + "/order/location/group/" + SiteID + "?start=" + m7 + "&end=" + m1, Auth, "");
         Load_Orders("SITE");
         lblOrders.setText(env + ": Site '" + SITE + "'   >>>  Last 7 days Orders: " + DV1.getRowCount() + " found");
@@ -523,8 +525,10 @@ public class Orders extends javax.swing.JInternalFrame {
         Auth = "Bearer " + AP3_TKN;
         BRAND = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 0));
         BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3));
-        long m1 = System.currentTimeMillis() + 30*60*1000;        // Now + 30 min to include future 'requested date
-        long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // Now + 7 days
+        
+        long m1 = System.currentTimeMillis() + (60*60*24*1*1000);  // Now + 1 day to include future 'requested date'
+        long m7 = System.currentTimeMillis() - (60*60*24*7*1000);  // Now - 7 days
+        
         Api_Call("GET",  BaseAPI + "/order/location/brand/" + BrandID + "?start=" + m7 + "&end=" + m1, Auth, "");
         Load_Orders("BRAND");
         lblOrders.setText(env + ": Site '" + SITE + "', Brand '" + BRAND + "'   >>>  Last 7 days Orders: " + DV1.getRowCount() + " found");
@@ -881,10 +885,9 @@ public class Orders extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
-        
-        // ============ Mobile User Orders last 7 days         
-        long m1 = System.currentTimeMillis() + 30*60*1000;        // Now + 30 min to include future 'requested date
-        long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // Now + 7 days
+               
+        long m1 = System.currentTimeMillis() + (60*60*24*1*1000);  // Now + 1 day to include future 'requested date'
+        long m7 = System.currentTimeMillis() - (60*60*24*7*1000);  // Now - 7 days
         
         txtLog.append("\r\n- Get Mobile User Orders ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
