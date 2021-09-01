@@ -681,6 +681,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String ShoppingCart_Delivery_ID = "";
     protected String Order_Delivery_ID = "";
     protected String ShoppingCart_Pickup_ID = "";
+    protected String Item_Index = "";
     protected String Order_Pickup_ID = "";
     protected String Promo_Voucher_Id = "";
     protected String Promo_Voucher_Code = "";
@@ -3384,6 +3385,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
             ShoppingCart_Delivery_ID = BR.ShoppingCart_Delivery_ID;
             ShoppingCart_Pickup_ID = BR.ShoppingCart_Pickup_ID;
+            Item_Index = BR.Item_Index;
         }
         if (!FAIL) {
             SCOPE += "Order ";

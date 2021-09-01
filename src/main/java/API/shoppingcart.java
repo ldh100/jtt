@@ -1,5 +1,6 @@
 package API;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 class shoppingcart extends API_GUI{
@@ -45,6 +46,8 @@ class shoppingcart extends API_GUI{
         if(json != null){
             try{
                 ShoppingCart_Delivery_ID = json.getString("id");
+                JSONArray items = json.getJSONArray("items");
+                Item_Index = items.getJSONObject(0).getString("_index");
                 AAA = json.toString(4);
             } catch (Exception ex){
                 AAA = ex.getMessage();
