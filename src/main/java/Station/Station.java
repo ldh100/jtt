@@ -1818,7 +1818,7 @@ public class Station extends javax.swing.JInternalFrame {
                 return;
             }
         } 
-        Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID;
+        Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID;
         txtLog.append("\r\n- " + "Add Menu Item(s) to Delivery Shopping Cart ...."+ "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         
@@ -1884,7 +1884,7 @@ public class Station extends javax.swing.JInternalFrame {
                 }
             }        
         }   
-        Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID;
+        Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID;
         Report_Tax();
     }
 
