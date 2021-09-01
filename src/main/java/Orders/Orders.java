@@ -1091,7 +1091,7 @@ public class Orders extends javax.swing.JInternalFrame {
             Result = response.getStatusLine();
             status = response.getStatusCode();
             if (status != 200) {
-                txtLog.append("Target Endpoint: " + EndPoint + "\r\n");
+                txtLog.append("Endpoint: " + EndPoint + "\r\n");
                 txtLog.append("Result: " + status + " - " + Result + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());                
             }
