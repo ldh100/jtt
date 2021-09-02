@@ -68,20 +68,21 @@ class order extends API_GUI{
             AAA = json.toString(4);
         } 
 
-        JOB_Api_Call("All Orders - Brand '" + BRAND + "'", "GET", 
+        JOB_Api_Call("All Orders - Location/Brand '" + BRAND + "'", "GET", 
             BaseAPI + "/order/location/brand/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             // Info Found Orders Count
+            AAA = json.toString(4);
         } 
         
-        JOB_Api_Call("All Orders - Location '" + UnitNum + "'", "GET", 
+        JOB_Api_Call("All Orders - Location/Unit '" + UnitNum + "'", "GET", 
             BaseAPI + "/order/location/" + UnitID, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             // Info Found Orders Count
             AAA = json.toString(4);
         } 
                 
-        JOB_Api_Call("All Orders - Group '" + SITE + "'", "GET", 
+        JOB_Api_Call("All Orders - Location/Group(Site) '" + SITE + "'", "GET", 
             BaseAPI + "/order/location/group/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             // Info Found Orders Count

@@ -696,6 +696,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected List<String> ITEMS_IDS;
     protected List<String> BRAND_TIMESLOTS;
     protected List<String> MENU_TIMESLOTS;
+    protected List<String> DELIEVEY_TIMESLOTS;
     protected List<String> DELIEVERY_DESTINATIONS;
 
     protected List<String> NOTIFICATION_IDS;

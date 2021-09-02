@@ -147,7 +147,7 @@ class locations extends API_GUI {
                 String AAAA = ex.getMessage();
             }
         }
-        JOB_Api_Call("Brand > Timeslots > 1st Menu > /timeslots/menu/'MenuID'", "GET",
+        JOB_Api_Call("Menu (PickUp) > Timeslots > Last Menu > /timeslots/menu/'MenuID'", "GET",
                 BaseAPI + "/location/brand/" + BrandID + "/timeslots/menu/" + MENU_IDS.get(MENU_IDS.size() - 1) + "?nocache=1&extended=true", Auth, "", 200, ParentTest, "no_jira");
         MENU_TIMESLOTS = new ArrayList<>();
         if (json != null) {
@@ -163,6 +163,22 @@ class locations extends API_GUI {
                 String AAAA = ex.getMessage();
             }
         }
+        JOB_Api_Call("Menu (Delivery) > Timeslots > Last Menu > /timeslots/delivery/menu/'MenuID'", "GET",
+                BaseAPI + "/location/brand/" + BrandID + "/timeslots/delivery/menu/" + MENU_IDS.get(MENU_IDS.size() - 1) + "?nocache=1&extended=true", Auth, "", 200, ParentTest, "no_jira");
+        DELIEVEY_TIMESLOTS = new ArrayList<>();
+        if (json != null) {
+            try {
+                if (json.has("timeslots")) {
+                    JSONArray timeslots = json.getJSONArray("timeslots");
+                    for (int i = 0; i < timeslots.length(); i++) {
+                        JSONObject timeslot = timeslots.getJSONObject(i);
+                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
+                    }
+                }
+            } catch (Exception ex) {
+                String AAAA = ex.getMessage();
+            }
+        }        
         if (env != "PR") {
 //            groupAPIs();
 //            locationAPIs();
