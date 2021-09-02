@@ -56,7 +56,7 @@ class payment extends API_GUI {
 
         BODY = "{\"user\":\"" + Mobile_User_ID + "\"}";
         for (int i = 0; i < Payment_Methods_IDS.size(); i++) {
-            JOB_Api_Call("Mobile User Delete Payment Method " + (i + 1), "DELETE",
+            JOB_Api_Call("Mobile User Delete EXACT Payment Method " + (i + 1), "DELETE",
                     BaseAPI + "/payment/" + exact_id + "/method/" + Payment_Methods_IDS.get(i), Auth, BODY, 200, ParentTest, "no_jira");
         }
 

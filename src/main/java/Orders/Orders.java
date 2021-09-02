@@ -286,7 +286,7 @@ public class Orders extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(9, 41, Short.MAX_VALUE)
+                        .addGap(9, 49, Short.MAX_VALUE)
                         .addComponent(lblSITES4)
                         .addGap(2, 2, 2)
                         .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -296,9 +296,9 @@ public class Orders extends javax.swing.JInternalFrame {
                         .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 12, Short.MAX_VALUE)
                         .addComponent(btnCart, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnOR_Site, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnOR_Brand, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -509,8 +509,10 @@ public class Orders extends javax.swing.JInternalFrame {
         Auth = "Bearer " + AP3_TKN;
         SITE = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 0));
         SiteID = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 3));
-        long m1 = System.currentTimeMillis() + 30*60*1000;        // Now + 30 min to include future 'requested date
-        long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // Now + 7 days
+        
+        long m1 = System.currentTimeMillis() + (60*60*24*1*1000);  // Now + 1 day to include future 'requested date'
+        long m7 = System.currentTimeMillis() - (60*60*24*7*1000);  // Now - 7 days
+        
         Api_Call("GET",  BaseAPI + "/order/location/group/" + SiteID + "?start=" + m7 + "&end=" + m1, Auth, "");
         Load_Orders("SITE");
         lblOrders.setText(env + ": Site '" + SITE + "'   >>>  Last 7 days Orders: " + DV1.getRowCount() + " found");
@@ -523,8 +525,10 @@ public class Orders extends javax.swing.JInternalFrame {
         Auth = "Bearer " + AP3_TKN;
         BRAND = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 0));
         BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3));
-        long m1 = System.currentTimeMillis() + 30*60*1000;        // Now + 30 min to include future 'requested date
-        long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // Now + 7 days
+        
+        long m1 = System.currentTimeMillis() + (60*60*24*1*1000);  // Now + 1 day to include future 'requested date'
+        long m7 = System.currentTimeMillis() - (60*60*24*7*1000);  // Now - 7 days
+        
         Api_Call("GET",  BaseAPI + "/order/location/brand/" + BrandID + "?start=" + m7 + "&end=" + m1, Auth, "");
         Load_Orders("BRAND");
         lblOrders.setText(env + ": Site '" + SITE + "', Brand '" + BRAND + "'   >>>  Last 7 days Orders: " + DV1.getRowCount() + " found");
@@ -881,10 +885,9 @@ public class Orders extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
-        
-        // ============ Mobile User Orders last 7 days         
-        long m1 = System.currentTimeMillis() + 30*60*1000;        // Now + 30 min to include future 'requested date
-        long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // Now + 7 days
+               
+        long m1 = System.currentTimeMillis() + (60*60*24*1*1000);  // Now + 1 day to include future 'requested date'
+        long m7 = System.currentTimeMillis() - (60*60*24*7*1000);  // Now - 7 days
         
         txtLog.append("\r\n- Get Mobile User Orders ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -898,6 +901,7 @@ public class Orders extends javax.swing.JInternalFrame {
         txtLog.append(env + " > " + cmbApp.getSelectedItem().toString() + " > " + txtMobile_ID.getText() + " - " + DV1.getRowCount() + " found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }   
+
     private void Load_Orders(String TYPE) {
         String _Site = SITE;
         if(TYPE.equals("USER")){
@@ -905,15 +909,16 @@ public class Orders extends javax.swing.JInternalFrame {
         }
         btnCart.setEnabled(false);
         String _Promo = "None";
+        String _Name = "?";
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        String[] SitesColumnsName = {"Env","App", "Site","Destination","Req_Date","Service","Promo","JCartID","OrderID","Modified_Date"}; 
+        String[] SitesColumnsName = {"Env","App", "Site","Destination","Req_Date","PickupName","Promo","Service","JCartID","OrderID","Modified_Date"}; 
         DefaultTableModel dm = new DefaultTableModel();
         dm.setColumnIdentifiers(SitesColumnsName);
         DV1.setModel(dm);
         
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV1.getModel());
         ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
-        sortKeys.add(new RowSorter.SortKey(9, SortOrder.DESCENDING));
+        sortKeys.add(new RowSorter.SortKey(10, SortOrder.DESCENDING));
         sorter.setSortKeys(sortKeys);      
         DV1.setRowSorter(sorter);
         
@@ -944,14 +949,18 @@ public class Orders extends javax.swing.JInternalFrame {
                         if(or.has("meta") && or.getJSONObject("meta").has("promo")){
                             _Promo = or.getJSONObject("meta").getJSONObject("promo").getString("code");
                         }
+                        if (or.has("pickup_name")) {
+                            _Name = or.getString("pickup_name");
+                        }
                         Date_Modified = LocalDateTime.parse(or.getJSONObject("date").getString("modified"), UTC_formatter).plusSeconds(offset.getTotalSeconds());
                         Date_Requested = LocalDateTime.parse(or.getString("requested_date"), UTC_formatter).plusSeconds(offset.getTotalSeconds());
 
                         dm.addRow(new Object[]{env, app, _Site,
                             or.getJSONObject("details").getString("destination"),
                             Date_Requested.format(LOC_formatter),
-                            or.getJSONObject("details").getString("order_type"),
+                            _Name,
                             _Promo,
+                            or.getJSONObject("details").getString("order_type"),
                             or.getString("shoppingcart"),
                             or.getString("id"),
                             Date_Modified
@@ -964,16 +973,16 @@ public class Orders extends javax.swing.JInternalFrame {
                 DV1.getColumnModel().getColumn(0).setPreferredWidth(40);
                 DV1.getColumnModel().getColumn(1).setPreferredWidth(60);
                 DV1.getColumnModel().getColumn(2).setPreferredWidth(160);
-                DV1.getColumnModel().getColumn(3).setPreferredWidth(160);        
-                DV1.getColumnModel().getColumn(4).setPreferredWidth(95);
-                DV1.getColumnModel().getColumn(5).setPreferredWidth(60);            
-                DV1.getColumnModel().getColumn(6).setPreferredWidth(160);
+                DV1.getColumnModel().getColumn(3).setPreferredWidth(140);        
+                DV1.getColumnModel().getColumn(4).setPreferredWidth(95);  // req date
+                DV1.getColumnModel().getColumn(5).setPreferredWidth(160); // name           
+                DV1.getColumnModel().getColumn(6).setPreferredWidth(110); // service
                 DV1.getColumnModel().getColumn(7).setPreferredWidth(50); 
                 DV1.getColumnModel().getColumn(8).setPreferredWidth(50); 
                 DV1.getColumnModel().getColumn(9).setPreferredWidth(180); 
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
 
-                sorter.setSortable(9, true); 
+                sorter.setSortable(10, true); 
                 sorter.sort(); 
                 
             } catch (Exception ex) {
@@ -984,6 +993,7 @@ public class Orders extends javax.swing.JInternalFrame {
         }    
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
+
     private void GetShoppingCartAndOrder() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         txtLog.append("- Shopping Cart..." + "\r\n");
@@ -993,7 +1003,7 @@ public class Orders extends javax.swing.JInternalFrame {
         String CartID = "";
         Auth = "Bearer " + AP3_TKN;
         try {
-            CartID = DV1.getValueAt(DV1.getSelectedRow(), 7).toString();
+            CartID = DV1.getValueAt(DV1.getSelectedRow(), 8).toString();
             Api_Call("GET", BaseAPI + "/shoppingcart/" + CartID, "", "");
             J += BaseAPI + "/shoppingcart/" + CartID + "\r\n" + json.toString(4) + "\r\n";
         } catch (Exception ex) {
@@ -1012,7 +1022,7 @@ public class Orders extends javax.swing.JInternalFrame {
         String OrderID = "";
 
         try {
-            OrderID = DV1.getValueAt(DV1.getSelectedRow(), 8).toString();
+            OrderID = DV1.getValueAt(DV1.getSelectedRow(), 9).toString();
             Api_Call("GET", BaseAPI + "/order/" + OrderID, Auth, "");
             J += BaseAPI + "/order/" + OrderID + "\r\n" + json.toString(4) + "\r\n";
         } catch (Exception ex) {
@@ -1081,7 +1091,7 @@ public class Orders extends javax.swing.JInternalFrame {
             Result = response.getStatusLine();
             status = response.getStatusCode();
             if (status != 200) {
-                txtLog.append("Target Endpoint: " + EndPoint + "\r\n");
+                txtLog.append("Endpoint: " + EndPoint + "\r\n");
                 txtLog.append("Result: " + status + " - " + Result + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());                
             }

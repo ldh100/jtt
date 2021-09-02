@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package Reports;
-import static A.A.*;
-import A.Func;
+
 import java.awt.Component;
 import java.awt.Cursor;
 import java.sql.Connection;
@@ -14,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
+import java.text.DateFormat; 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -27,10 +26,7 @@ import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-/**
- *
- * @author Oleg.Spozito
- */
+
 
 public class W_Report extends javax.swing.JInternalFrame {
     /**
@@ -270,7 +266,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             return;
         }
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             conn.createStatement().execute("DELETE FROM [dbo].[aw_result] WHERE qID = '" + DV1.getValueAt(DV1.getSelectedRow(), 0) + "'");
             conn.close();
         } catch (SQLException ex) {
@@ -303,7 +299,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             return;
         }
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             Statement st = conn.createStatement();
             int d = st.executeUpdate("DELETE FROM [dbo].[aw_result] WHERE [Date] < '" + simpleDateFormat.format(dtpDel.getDate()) + "'");
             conn.close(); 
@@ -324,7 +320,7 @@ public class W_Report extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnExcelMouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
         String EXX;
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [Result] FROM [dbo].[aw_result] WHERE [qID] = '" +
                     DV1.getValueAt(DV1.getSelectedRow(), 0) + "'");
             rs.next();
@@ -370,13 +366,13 @@ public class W_Report extends javax.swing.JInternalFrame {
         if (DV1.getRowCount() < 1) return;
         btnLog.setEnabled(true);
         btnDelOld.setEnabled(true); 
-        if (UserID.toLowerCase().contains("oleg")){
+        if (A.A.UserID.toLowerCase().contains("oleg")){
             btnDelOld.setEnabled(true);
         }  else{
             btnDelOld.setEnabled(false);
         }   
         String AUTOR = DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("user_id").getModelIndex()).toString();
-        if (AUTOR.equals(UserID)|| UserID.toLowerCase().contains("oleg")){ 
+        if (AUTOR.equals(A.A.UserID)|| A.A.UserID.toLowerCase().contains("oleg")){ 
             btnDel.setEnabled(true);
         }  else{
             btnDel.setEnabled(false);
@@ -424,7 +420,7 @@ public class W_Report extends javax.swing.JInternalFrame {
     private void Report(boolean Open_File){
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String EXX = "";
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery("SELECT TOP 1 [Excel] FROM [dbo].[aw_result] WHERE [qID] = '" +
                     DV1.getValueAt(DV1.getSelectedRow(), 0) + "'");
             rs.next();
@@ -465,7 +461,7 @@ public class W_Report extends javax.swing.JInternalFrame {
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
             // ===============================================================
-            txtLog.append("=== Report Excel file:\r\n" + Func.fExcel(l, col, Values, DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()) + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File) + "\r\n");
+            txtLog.append("=== Report Excel file:\r\n" + A.Func.fExcel(l, col, Values, DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()) + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File) + "\r\n");
             // ===============================================================
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch (Exception ex) {
@@ -479,7 +475,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         cmbF_App.removeAllItems();
         cmbF_App.addItem("ALL");
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery("SELECT Distinct [app] FROM[dbo].[aw_result] ORDER BY [app]");
             while (rs.next()) {
                 cmbF_App.addItem(rs.getString(1));
@@ -494,12 +490,12 @@ public class W_Report extends javax.swing.JInternalFrame {
         cmbF_User.removeAllItems();
         cmbF_User.addItem("ALL");
         int User_Index = -1;
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery("SELECT Distinct [user_id] FROM[dbo].[aw_result] ORDER BY [user_id]");
             int count = 1;
             while (rs.next()) {
                 String USER = rs.getString(1);
-                if(USER.equals(A.A.UserID)){
+                if(USER.toLowerCase().equals(A.A.UserID.toLowerCase())){
                    User_Index = count;
                 }
                 cmbF_User.addItem(USER);
@@ -554,7 +550,7 @@ public class W_Report extends javax.swing.JInternalFrame {
                 ",[cDate] " +
             "FROM[dbo].[aw_result] " + Filter + " ORDER BY[qID] DESC";  
             
-        try (Connection conn = DriverManager.getConnection(QA_BD_CON_STRING)) {
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery(SQL);
             ResultSetMetaData rsmd = rs.getMetaData();
             DefaultTableModel dm = new DefaultTableModel();
@@ -590,7 +586,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             
             for (int i = DV1.getRowCount() - 1; i >= 0; i--){
                 Object value = DV1.getValueAt(i, 5); 
-                TableCellRenderer cr = new Func.ColorRenderer();
+                TableCellRenderer cr = new A.Func.ColorRenderer();
                 Component cell = cr.getTableCellRendererComponent(DV1, value, false, false, i, 5);
                 DV1.getColumnModel().getColumn(5).setCellRenderer(cr);
             }
