@@ -113,7 +113,6 @@ class payment extends API_GUI {
                         JSONObject p = tokens.getJSONObject(i);
                         Payment_Tokens_FP.add(p.getString("token"));
                     }
-
                 }
             } catch (Exception ex) {
                 AAAA = ex.getMessage();

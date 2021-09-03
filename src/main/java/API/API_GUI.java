@@ -3004,9 +3004,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
     private void BW1_Done(boolean GUI) throws Exception {
         DD = Duration.between(run_start, Instant.now());
         Last_EX = EX;
+        String t_rep = "";
         Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
         try {
-            String t_rep = "";
             if (!"".equals(r_time.trim())) {
                 double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
                 if (am0.length > 0) {
@@ -3022,13 +3022,14 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     p_50 = A.Func.p50(am0) / (double) 1000;
                     p_90 = A.Func.p90(am0) / (double) 1000;
 
-                    t_rep += "= Total Calls: " + t_calls
+                    t_rep += " Total Calls: " + t_calls
                             + ", Response Times (sec) - Min: " + A.A.df.format(t_min)
                             + ", Avg: " + A.A.df.format(t_avg)
                             + ", Max: " + A.A.df.format(t_max)
                             + ", p50: " + A.A.df.format(p_50)
                             + ", p90: " + A.A.df.format(p_90);
                 }
+                //Summary = Summary + ". " + t_rep;
                 Current_Log_Update(GUI, t_rep + "\r\n");
             }
         } catch (Exception ex) {
@@ -3326,23 +3327,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Mobile_User_TKN = BR.Mobile_User_TKN;
             Mobile_User_SECRET = BR.Mobile_User_SECRET;
         }
-
-        if (true) {
-            SCOPE += "Meal Plan ";
-            EX += " - " + "\t" + "Meal Plan" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            ParentTest = HtmlReport.createTest("Meal Plan");
-            mealplan BR = new API.mealplan(API_GUI.this);
-            BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
-            ParentTest.getModel().setName("Meal Plan - Tot: " + BR._t + ", Failed: " + BR._f);
-            ParentTest.getModel().setEndTime(new Date());
-        }        
+        
         if (!FAIL) {
             SCOPE += "Payment ";
             EX += " - " + "\t" + "Payment" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -3405,6 +3390,23 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Order_Delivery_ID = BR.Order_Delivery_ID;
             Order_Pickup_ID = BR.Order_Pickup_ID;
         }
+        
+         if (true) { // =================  MPlan ===================
+            SCOPE += "Meal Plan "; 
+            EX += " - " + "\t" + "Meal Plan" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Meal Plan");
+            mealplan BR = new API.mealplan(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
+            ParentTest.getModel().setName("Meal Plan - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
+        }       
 
         // =================  Bolter / KDS ===================
         if (true) {

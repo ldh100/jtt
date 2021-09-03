@@ -13,7 +13,9 @@ class user_mobile extends API_GUI{
         MOBILE_PW = a.MOBILE_PW;
         NewID = a.NewID;
         ParentTest = a.ParentTest;
+        SiteID = a.SiteID;
     }
+    String AAA = "";
     protected void run() {  
         Realm = A.Func.Realm_ID(app, env);
         
@@ -36,18 +38,7 @@ class user_mobile extends API_GUI{
                 //
             }
         }
-        
-//        Auth = "Bearer " + Mobile_User_TKN;
-//        JOB_Api_Call("Mobile User > /secret/fcm_token", "POST", 
-//            BaseAPI + "/user/" + Mobile_User_ID + "/secret/fcm_token", Auth, "", 200, ParentTest, "no_jira");
-//        if(json != null){
-//            try {
-//                if(json.has("fcm_token")) Mobile_User_SECRET = json.getString("fcm_token");  
-//            } catch (Exception ex){
-//                //
-//            }
-//        } 
-       
+
         Auth = "Bearer " + Mobile_User_TKN;
         JOB_Api_Call("Mobile User > /permissions", "GET", 
             BaseAPI + "/user/" + Mobile_User_ID + "/permissions", Auth, "", 200, ParentTest, "no_jira");
@@ -102,6 +93,18 @@ class user_mobile extends API_GUI{
             "\"password\":\"" + "Zxtsaq9ppnppvbyi11f0nk" + "\"}";
         JOB_Api_Call("Mobile Create New User > Email Already Exists", "POST", 
             BaseAPI + "/user", Auth, BODY, 409, ParentTest, "no_jira"); 
+        
+        JOB_Api_Call("Mobile User - Location > /group/'SiteID'?include_brands_config=true", "GET",
+                BaseAPI + "/location/group/" + SiteID + "?include_brands_config=true", Auth, "", 200, ParentTest, "no_jira");
+        if (json != null) {
+            try {
+                if (json.has("id")) {
+                    AAA = json.getJSONObject("meta").getNumber("unit").toString();
+                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }         
               
         if (!"PR".equals(env)) {        
             BODY = "{\"name\":" +                                       //  New Mobile User ===============================
