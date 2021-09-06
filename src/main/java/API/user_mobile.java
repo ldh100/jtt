@@ -98,9 +98,7 @@ class user_mobile extends API_GUI{
                 BaseAPI + "/location/group/" + SiteID + "?include_brands_config=true", Auth, "", 200, ParentTest, "no_jira");
         if (json != null) {
             try {
-                if (json.has("id")) {
-                    AAA = json.getJSONObject("meta").getNumber("unit").toString();
-                }
+                AAA = json.toString(4);
             } catch (Exception ex) {
                 AAA = ex.getMessage();
             }

@@ -18,19 +18,33 @@ class announcement extends API_GUI {
     protected void run() {
         Auth = "Bearer " + AP3_TKN;   
         ANNOUNCEMENT_IDS = new ArrayList<>();
-        //<editor-fold defaultstate="collapsed" desc=" GET all Announcement ">
+        //<editor-fold defaultstate="collapsed" desc=" GET Announcement">
         // Test Scenario 1: Positive get all announcement
-        JOB_Api_Call("Announcement - GET all announcement", "GET", BaseAPI + "/announcement/resource", Auth, "", 200, ParentTest, "no_jira");
+        JOB_Api_Call("Announcement - GET All ", "GET", 
+                BaseAPI + "/announcement/resource", Auth, "", 200, ParentTest, "no_jira");
 
         // Test Scenario 2: Positive get all announcement when disabled=true
-        JOB_Api_Call("Announcement - GET announcement - when disabled=true", "GET", BaseAPI + "/announcement/resource/?disabled=true", Auth, "", 200, ParentTest, "no_jira");
+        JOB_Api_Call("Announcement - GET All disabled=true", "GET", 
+                BaseAPI + "/announcement/resource/?disabled=true", Auth, "", 200, ParentTest, "no_jira");
 
         // Test Scenario 3: Positive get all announcement when disabled=false
-        JOB_Api_Call("Announcement - GET announcement - when disabled=false", "GET", BaseAPI + "/announcement/resource/?disabled=false", Auth, "", 200, ParentTest, "no_jira");
+        JOB_Api_Call("Announcement - GET All disabled=false", "GET", 
+                BaseAPI + "/announcement/resource/?disabled=false", Auth, "", 200, ParentTest, "no_jira");
+
+        Auth = "";        
+        JOB_Api_Call("Announcement - GET All > Application", "GET", 
+                BaseAPI + "/announcement/resource/" + AppID, Auth, "", 200, ParentTest, "no_jira");        
+
+        JOB_Api_Call("Announcement - GET All > Application > Site", "GET", 
+                BaseAPI + "/announcement/resource/" + AppID + "?allowed_resource_id=" + SiteID, Auth, "", 200, ParentTest, "no_jira");  
+        //https://api.compassdigital.org/staging/announcement/resource/D72zJOpAw4fMKN65g3RjhqOpJLR2O3HLgYAe?allowed_resource_id=B5XY40KAweTdB83OZZBDu5Lp4GmroGc4XB&disabled=false
+        //https://api.compassdigital.org/staging/announcement/resource/<....>?allowed_resource_id=<SITE_UD>&disabled=false
+
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc=" POST Announcement ">
         // Test Scenario 1: Positive flow for post active announcement 
+        Auth = "Bearer " + AP3_TKN; 
         BODY = "{\"name\":\"This is API test for Announcement with Status = Active\","
                 + "\"type\":\"Promotions\","
                 + "\"key\":\"" + AppID + "\","
@@ -63,6 +77,7 @@ class announcement extends API_GUI {
         }
 
         // Test Scenario 2: Positive flow for post In-active announcement 
+        Auth = "Bearer " + AP3_TKN; 
         BODY = "{\"name\":\"This is API test for Announcement with Status = In Active\","
                 + "\"type\":\"Promotions\","
                 + "\"key\":\"" + AppID + "\","
@@ -95,6 +110,7 @@ class announcement extends API_GUI {
         }
 
         // Test Scenario 3: Positive flow for post announcement without French Version
+        Auth = "Bearer " + AP3_TKN; 
         BODY = "{\"name\":\"This is API test for Announcement without French Version\","
                 + "\"type\":\"Promotions\","
                 + "\"key\":\"" + AppID + "\","
@@ -121,6 +137,7 @@ class announcement extends API_GUI {
         }
 
         // Test Scenario 4: Positive flow for post announcement without English Version
+        Auth = "Bearer " + AP3_TKN; 
         BODY = "{\"name\":\"This is API test for Announcement without English Version\","
                 + "\"type\":\"Promotions\","
                 + "\"key\":\"" + AppID + "\","
@@ -147,6 +164,7 @@ class announcement extends API_GUI {
         }
 
         // Test Scenario 5: Negative flow for post announcement without Announcement Type
+        Auth = "Bearer " + AP3_TKN; 
         BODY = "{\"name\":\"This is API test for Announcement with Status = Active\","
                 + "\"type\":\"\","
                 + "\"key\":\"" + AppID + "\","
@@ -166,6 +184,7 @@ class announcement extends API_GUI {
         JOB_Api_Call("Announcement - Negative flow to POST new announcement without Announcement Type", "POST", BaseAPI + "/announcement", Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 6: Negative flow for post announcement without Announcement Site/Key
+        Auth = "Bearer " + AP3_TKN; 
         BODY = "{\"name\":\"This is API test for Announcement with Status = Active\","
                 + "\"type\":\"Promotions\","
                 + "\"key\":\"\","
@@ -185,6 +204,7 @@ class announcement extends API_GUI {
         JOB_Api_Call("Announcement - Negative flow to POST new announcement without Announcement Site/Key", "POST", BaseAPI + "/announcement", Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 7: Negative flow for post without value for Position
+        Auth = "Bearer " + AP3_TKN; 
         BODY = "{\"name\":\"This is API test for Announcement with Status = Active\","
                 + "\"type\":\"Promotions\","
                 + "\"key\":\"\","
@@ -207,14 +227,15 @@ class announcement extends API_GUI {
 
         //<editor-fold defaultstate="collapsed" desc=" GET Announcement by ID ">
         // Test Scenario 1: Positive get announcement details by ID
-        if (ANNOUNCEMENT_IDS != null) {
-            JOB_Api_Call("Announcement - Get Announcement details by ID", "GET", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, "", 200, ParentTest, "no_jira");
+        if (ANNOUNCEMENT_IDS.size() > 0) {
+            JOB_Api_Call("Announcement - Get by ID", "GET", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, "", 200, ParentTest, "no_jira");
         }
 
         //</editor-fold>
         
         //<editor-fold defaultstate="collapsed" desc=" PUT Announcement ">
         // Test Scenario 1: Positive flow -  PUT to update Announcement Name
+        Auth = "Bearer " + AP3_TKN; 
         BODY = "{\"name\":\"This is API test for Update Announcement Name by ID\","
                 + "\"type\":\"Promotions\","
                 + "\"key\":\"" + AppID + "\","
@@ -237,11 +258,12 @@ class announcement extends API_GUI {
                 + "\"sub_text\":\"This is Sub Text for Announcement English version \","
                 + "\"button_text\":\"Bottom Text English\"}"
                 + "}}";
-        if (ANNOUNCEMENT_IDS != null) {
+        if (ANNOUNCEMENT_IDS.size() > 0) {
             JOB_Api_Call("Announcement -  PUT/Update Announcement Name by ID", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
         }
 
         // Test Scenario 2: Positive flow -  PUT to update Announcement Type
+        Auth = "Bearer " + AP3_TKN; 
         BODY = "{\"name\":\"This is API test for Update Announcement Type\","
                 + "\"type\":\"App Feature\","
                 + "\"key\":\"" + AppID + "\","
@@ -264,11 +286,12 @@ class announcement extends API_GUI {
                 + "\"sub_text\":\"This is Sub Text for Announcement English version \","
                 + "\"button_text\":\"Bottom Text English\"}"
                 + "}}";
-        if (ANNOUNCEMENT_IDS != null) {
+        if (ANNOUNCEMENT_IDS.size() > 0) {
             JOB_Api_Call("Announcement - PUT/Update Announcement Type", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
         }
 
         // Test Scenario 3: Positive flow -  PUT to update Announcement App
+        Auth = "Bearer " + AP3_TKN; 
         BODY = "{\"name\":\"This is API test for Update Announcement App\","
                 + "\"type\":\"App Feature\","
                 + "\"key\":\"" + AppID + "\","
@@ -291,10 +314,11 @@ class announcement extends API_GUI {
                 + "\"sub_text\":\"This is Sub Text for Announcement English version \","
                 + "\"button_text\":\"Bottom Text English\"}"
                 + "}}";
-        if (ANNOUNCEMENT_IDS != null) {
+        if (ANNOUNCEMENT_IDS.size() > 0) {
             JOB_Api_Call("Announcement - PUT/Update Announcement App", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
         }
         // Test Scenario 4: Positive flow -  PUT to update Announcement position
+        Auth = "Bearer " + AP3_TKN; 
         BODY = "{\"name\":\"This is API test for Update Announcement position\","
                 + "\"type\":\"App Feature\","
                 + "\"key\":\"" + AppID + "\","
@@ -317,10 +341,11 @@ class announcement extends API_GUI {
                 + "\"sub_text\":\"This is Sub Text for Announcement English version \","
                 + "\"button_text\":\"Bottom Text English\"}"
                 + "}}";
-        if (ANNOUNCEMENT_IDS != null) {
+        if (ANNOUNCEMENT_IDS.size() > 0) {
             JOB_Api_Call("Announcement - PUT/Update Announcement position", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
         }
         // Test Scenario 5: Positive flow -  PUT to update Announcement to In-Active
+        Auth = "Bearer " + AP3_TKN; 
         BODY = "{\"name\":\"This is API test for Update Announcement to In-Active\","
                 + "\"type\":\"App Feature\","
                 + "\"key\":\"" + AppID + "\","
@@ -343,10 +368,11 @@ class announcement extends API_GUI {
                 + "\"sub_text\":\"This is Sub Text for Announcement English version \","
                 + "\"button_text\":\"Bottom Text English\"}"
                 + "}}";
-        if (ANNOUNCEMENT_IDS != null) {
+        if (ANNOUNCEMENT_IDS.size() > 0) {
             JOB_Api_Call("Announcement - PUT/Update Announcement to In-Active", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
         }
         // Test Scenario 6: Positive flow -  PUT to update Announcement English Version
+        Auth = "Bearer " + AP3_TKN; 
         BODY = "{\"name\":\"This is API test for Update Announcement for English Version\","
                 + "\"type\":\"App Feature\","
                 + "\"key\":\"" + AppID + "\","
@@ -369,10 +395,11 @@ class announcement extends API_GUI {
                 + "\"sub_text\":\"This is updated Sub Text for Announcement English version \","
                 + "\"button_text\":\"Bottom Text English\"}"
                 + "}}";
-        if (ANNOUNCEMENT_IDS != null) {
+        if (ANNOUNCEMENT_IDS.size() > 0) {
             JOB_Api_Call("Announcement - PUT/Update Announcement for English Version", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
         }
         // Test Scenario 7: Positive flow -  PUT to update Announcement French Version
+        Auth = "Bearer " + AP3_TKN; 
         BODY = "{\"name\":\"This is API test for Update for Announcement French Version\","
                 + "\"type\":\"App Feature\","
                 + "\"key\":\"" + AppID + "\","
@@ -395,11 +422,12 @@ class announcement extends API_GUI {
                 + "\"sub_text\":\"This is updated Sub Text for Announcement English version \","
                 + "\"button_text\":\"Bottom Text English\"}"
                 + "}}";
-        if (ANNOUNCEMENT_IDS != null) {
+        if (ANNOUNCEMENT_IDS.size() > 0) {
             JOB_Api_Call("Announcement - PUT/Update Announcement for French Version", "PUT", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
         }
         
          // Test Scenario 8: Negative flow for PUT announcement without Announcement Type
+        Auth = "Bearer " + AP3_TKN; 
         BODY = "{\"name\":\"This is API test for PUT Announcement  without Announcement Type\","
                 + "\"type\":\"\","
                 + "\"key\":\"" + AppID + "\","
@@ -419,6 +447,7 @@ class announcement extends API_GUI {
         JOB_Api_Call("Announcement - Negative flow to PUT/Update an existing announcement without passing valid Announcement Type", "POST", BaseAPI + "/announcement", Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 9: Negative flow for PUT announcement without Announcement Site/Key
+        Auth = "Bearer " + AP3_TKN; 
         BODY = "{\"name\":\"This is API test for PUT Announcement without Announcement Site/Key\","
                 + "\"type\":\"Promotions\","
                 + "\"key\":\"\","
@@ -438,6 +467,7 @@ class announcement extends API_GUI {
         JOB_Api_Call("Announcement - Negative flow to PUT/Update an existing  announcement without Announcement Site/Key", "POST", BaseAPI + "/announcement", Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 10: Negative flow for PUT without value for Position
+        Auth = "Bearer " + AP3_TKN; 
         BODY = "{\"name\":\"This is API test for PUT Announcement  without value for Position\","
                 + "\"type\":\"Promotions\","
                 + "\"key\":\"\","
@@ -460,7 +490,7 @@ class announcement extends API_GUI {
 
         //<editor-fold defaultstate="collapsed" desc=" DELETE Announcement ">
         // Test Scenario 1: Positive flow for delete Announcement by ID
-        if (ANNOUNCEMENT_IDS != null) {
+        if (ANNOUNCEMENT_IDS.size() > 0) {
             for (int i = 0; i < ANNOUNCEMENT_IDS.size(); i++) {
                 JOB_Api_Call("Announcement - Delete Announcement by ID - " + ANNOUNCEMENT_IDS.get(i), "DELETE", BaseAPI + "/announcement/" + ANNOUNCEMENT_IDS.get(i), Auth, "", 200, ParentTest, "no_jira");
             }
