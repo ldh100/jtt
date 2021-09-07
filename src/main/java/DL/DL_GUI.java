@@ -2092,7 +2092,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             String QA_USER = "";    // Next QA User from S3 DV_QA table
             Boolean IsMember=false;
             Boolean IsMemberSwitch=false;
-            for (int i = 1640; i < 1820; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
+            for (int i = 1000; i < 1100; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
                 System.out.println(i);
            // for (int i = 0; i < DV_QA.getRowCount(); i++) {    // All Tests from S3 DV_QA table
                 if(QA_USER.equals(DV_QA.getValueAt(i, 1).toString()) && !Login_OK){
@@ -2101,7 +2101,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 IsMemberSwitch=false;
                 ParentTest = HtmlReport.createTest("User: " + DV_QA.getValueAt(i, 1) + " Test# " + (i + 1));  // (i+1) = # in the table
                 QA_USER = DV_QA.getValueAt(i, 1).toString();
-                if (i == 1640) {
+                if (i == 1000) {
                     Text_Found("Check member is Displayed ", "My Members", ParentTest, "no_jira");
                     if (t.equalsIgnoreCase("Not Found")) {
                         IsMember = false;
