@@ -32,11 +32,12 @@ class locations extends API_GUI {
     private Date release_date = new DateTime(new Date()).plusHours(4).plusMinutes(1).toDate();
     private String RELEASE_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(release_date);
     private String RELEASE_DATE_SECONDS = new SimpleDateFormat("SSS").format(release_date);
-
+    private String AAA = "";
+    
     protected void run() {
 
         Auth = "Bearer " + AP3_TKN;  // =============== AP3 Sectors > Company ID ================
-        JOB_Api_Call("Location > /sector", "GET",
+        JOB_Api_Call("Location > /sector?_provider=cdl", "GET",
                 BaseAPI + "/location/sector?_provider=cdl", Auth, "", 200, ParentTest, "no_jira");
 
         Auth = "";                        // =============== AP3 ALL Sites ===========================
@@ -46,7 +47,7 @@ class locations extends API_GUI {
 
         Auth = "";                       // =============== AP3 App Sites ===========================
         AppID = A.Func.App_ID(app, env);
-        JOB_Api_Call("Location > /multigroup/'AppID'", "GET",
+        JOB_Api_Call("Location > /multigroup/'AppID'?nocache=true&extended=true", "GET",
                 BaseAPI + "/location/multigroup/" + AppID + "?nocache=true&extended=true", Auth, "", 200, ParentTest, "no_jira");
         if (json != null) {
             try {
@@ -64,7 +65,7 @@ class locations extends API_GUI {
         }
 
         Auth = "";                      // =============== AP3 Site Brands ===========================
-        JOB_Api_Call("Location > /group/'SiteID'", "GET",
+        JOB_Api_Call("Location > /group/'SiteID'?nocache=true&extended=true", "GET",
                 BaseAPI + "/location/group/" + SiteID + "?nocache=true&extended=true", Auth, "", 200, ParentTest, "no_jira");
         if (json != null) {
             try {
@@ -85,12 +86,14 @@ class locations extends API_GUI {
                 }
                 BrandIDS = BrandIDS.substring(0, BrandIDS.length() - 1);
             } catch (Exception ex) {
-                String AAA = ex.getMessage();
+                AAA = ex.getMessage();
             }
-        }
+        } 
+        
+       
 
         Auth = "";                      // ===============    AP3 Unit ===========================
-        JOB_Api_Call("Location > /'UnitID'", "GET",
+        JOB_Api_Call("Location > /'UnitID'?extended=true&nocache=1", "GET",
                 BaseAPI + "/location/" + UnitID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
         if (json != null) {
             try {
@@ -98,12 +101,12 @@ class locations extends API_GUI {
                     UnitNum = json.getJSONObject("meta").getNumber("unit").toString();
                 }
             } catch (Exception ex) {
-                String AAA = ex.getMessage();
+                AAA = ex.getMessage();
             }
         }
 
         Auth = "";                      // ===============    AP3 Brand ===========================
-        JOB_Api_Call("Location > /'BrandID'", "GET",
+        JOB_Api_Call("Location > /'BrandID'?extended=true&nocache=1", "GET",
                 BaseAPI + "/location/brand/" + BrandID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
         SectorID = "";
         CompanyID = "";
@@ -127,7 +130,7 @@ class locations extends API_GUI {
             }
         }
         Auth = "Bearer " + AP3_TKN;  // ===============    AP3 Sector ===========================
-        JOB_Api_Call("Location/Sector > /'SectorID'", "GET",
+        JOB_Api_Call("Location/Sector > /'SectorID'?extended=true&nocache=1", "GET",
                 BaseAPI + "/location/sector/" + SectorID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
 
         Auth = "Bearer " + AP3_TKN;  // ===============    AP3 Brand Timeslots ===========================
@@ -144,7 +147,7 @@ class locations extends API_GUI {
                     }
                 }
             } catch (Exception ex) {
-                String AAAA = ex.getMessage();
+                AAA = ex.getMessage();
             }
         }
         JOB_Api_Call("Menu (PickUp) > Timeslots > Last Menu > /timeslots/menu/'MenuID'", "GET",
@@ -160,7 +163,7 @@ class locations extends API_GUI {
                     }
                 }
             } catch (Exception ex) {
-                String AAAA = ex.getMessage();
+                AAA = ex.getMessage();
             }
         }
         JOB_Api_Call("Menu (Delivery) > Timeslots > Last Menu > /timeslots/delivery/menu/'MenuID'", "GET",
@@ -176,7 +179,7 @@ class locations extends API_GUI {
                     }
                 }
             } catch (Exception ex) {
-                String AAAA = ex.getMessage();
+                AAA = ex.getMessage();
             }
         }        
         if (env != "PR") {

@@ -729,6 +729,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected boolean FAIL = false;
     protected boolean FATAL_FAIL = false;
     protected String r_type = "";
+    protected String t_rep = "";
 
     protected int t_calls = 0;
     protected double t_min = 0;
@@ -2959,10 +2960,35 @@ public class API_GUI extends javax.swing.JInternalFrame {
                 DD = Duration.between(run_start, Instant.now());
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
+                
+                if (!"".equals(r_time.trim())) {
+                    double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
+                    if (am0.length > 0) {
+                        Arrays.sort(am0);
+                        double total = 0;
+                        for (int i = 0; i < am0.length; i++) {
+                            total = total + am0[i];
+                        }
+                        t_calls = am0.length;
+                        t_min = am0[0] / (double) 1000;
+                        t_avg = (total / am0.length) / (double) 1000;
+                        t_max = am0[am0.length - 1] / (double) 1000;
+                        p_50 = A.Func.p50(am0) / (double) 1000;
+                        p_90 = A.Func.p90(am0) / (double) 1000;
+
+                        t_rep += " Response (sec) > Min: " + A.A.df.format(t_min)
+                                + ", Avg: " + A.A.df.format(t_avg)
+                                + ", Max: " + A.A.df.format(t_max)
+                                + ", p50: " + A.A.df.format(p_50)
+                                + ", p90: " + A.A.df.format(p_90);
+                    }
+                    Current_Log_Update(GUI, t_rep + "\r\n");
+                }               
 
                 EX = "API " + env + ". "
                         + " Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ", Info: " + _i
-                        + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")" + "\r\n"
+                        + ". " + t_rep
+                        + ". Dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + "\r\n"
                         + "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                         + EX;
 
@@ -3003,38 +3029,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
     private void BW1_Done(boolean GUI) throws Exception {
         DD = Duration.between(run_start, Instant.now());
-        Last_EX = EX;
+        Last_EX = EX;       
         Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
-        try {
-            String t_rep = "";
-            if (!"".equals(r_time.trim())) {
-                double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
-                if (am0.length > 0) {
-                    Arrays.sort(am0);
-                    double total = 0;
-                    for (int i = 0; i < am0.length; i++) {
-                        total = total + am0[i];
-                    }
-                    t_calls = am0.length;
-                    t_min = am0[0] / (double) 1000;
-                    t_avg = (total / am0.length) / (double) 1000;
-                    t_max = am0[am0.length - 1] / (double) 1000;
-                    p_50 = A.Func.p50(am0) / (double) 1000;
-                    p_90 = A.Func.p90(am0) / (double) 1000;
-
-                    t_rep += "= Total Calls: " + t_calls
-                            + ", Response Times (sec) - Min: " + A.A.df.format(t_min)
-                            + ", Avg: " + A.A.df.format(t_avg)
-                            + ", Max: " + A.A.df.format(t_max)
-                            + ", p50: " + A.A.df.format(p_50)
-                            + ", p90: " + A.A.df.format(p_90);
-                }
-                Current_Log_Update(GUI, t_rep + "\r\n");
-            }
-        } catch (Exception ex) {
-            Current_Log_Update(GUI, "= LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
-        }
-
         Current_Log_Update(GUI, "= " + Summary + "\r\n"); // Summary shown in EX top
         Current_Log_Update(GUI, "= API(s) " + ", Environment: " + env + "\r\n");
 
@@ -3326,23 +3322,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Mobile_User_TKN = BR.Mobile_User_TKN;
             Mobile_User_SECRET = BR.Mobile_User_SECRET;
         }
-
-        if (true) {
-            SCOPE += "Meal Plan ";
-            EX += " - " + "\t" + "Meal Plan" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            ParentTest = HtmlReport.createTest("Meal Plan");
-            mealplan BR = new API.mealplan(API_GUI.this);
-            BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
-            ParentTest.getModel().setName("Meal Plan - Tot: " + BR._t + ", Failed: " + BR._f);
-            ParentTest.getModel().setEndTime(new Date());
-        }        
+        
         if (!FAIL) {
             SCOPE += "Payment ";
             EX += " - " + "\t" + "Payment" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -3405,6 +3385,23 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Order_Delivery_ID = BR.Order_Delivery_ID;
             Order_Pickup_ID = BR.Order_Pickup_ID;
         }
+        
+         if (true) { // =================  MPlan ===================
+            SCOPE += "Meal Plan "; 
+            EX += " - " + "\t" + "Meal Plan" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Meal Plan");
+            mealplan BR = new API.mealplan(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
+            ParentTest.getModel().setName("Meal Plan - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
+        }       
 
         // =================  Bolter / KDS ===================
         if (true) {
