@@ -26,7 +26,16 @@ class mealplan extends API_GUI{
         if (json != null) {
             AAA = json.toString(4);
         }
-
+//        Auth = "Bearer " + Mobile_User_TKN;
+//        JOB_Api_Call("Mobile User > /secret/fcm_token", "POST", 
+//            BaseAPI + "/user/" + Mobile_User_ID + "/secret/fcm_token", Auth, "", 200, ParentTest, "no_jira");
+//        if(json != null){
+//            try {
+//                if(json.has("fcm_token")) Mobile_User_SECRET = json.getString("fcm_token");  
+//            } catch (Exception ex){
+//                //
+//            }
+//        } 
 
         //POST/mealplan/{id} : Authenticate against the meal plan provider
 
