@@ -79,7 +79,6 @@ class AP3_mm_import extends AP3_GUI{
             writeExcel(dest_dir,ModGrpPath,"Modifier Groups",valueToWrite);
 
 
-
             File xlsfile = new File(dest_dir + File.separator + ModGrpPath);
             if(xlsfile.exists()){
                 Element_By_Path_Click("Click Global mod Import ", "xpath", "//div[contains(text(),'Import')]//i", ParentTest, "no_jira");  
@@ -483,7 +482,7 @@ class AP3_mm_import extends AP3_GUI{
             String fileExtensionName = fileName.substring(fileName.indexOf("."));
             int flag_modifier = -1;
             int flag_modifiergroup = -1;
-            if(fileExtensionName.equals(".xlsx")){
+            if(fileExtensionName.equals(".xlsx")) {
                 modifier_Workbook = new XSSFWorkbook(inputStream);        //If it is xlsx file then create object of XSSFWorkbook class
             } else if(fileExtensionName.equals(".xls")){
                modifier_Workbook = new HSSFWorkbook(inputStream);          //If it is xls file then create object of XSSFWorkbook class
