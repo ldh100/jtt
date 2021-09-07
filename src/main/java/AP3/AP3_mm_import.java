@@ -80,7 +80,7 @@ class AP3_mm_import extends AP3_GUI{
             editModExcel(dest_dir,ModGrpPath,"Modifier Groups");
             String[] valueToWrite = {"Modifier Group","","Auto Mod group " + New_ID, "Automation Label " + New_ID, "0", "1", "2", "TRUE", "", "", "", "", "", "", "", ""};
             writeExcel(dest_dir,ModGrpPath,"Modifier Groups",valueToWrite);
-            valueToWrite = new String[] {"Modifier","","","","","","","","","Automation Mod " + New_ID, "5", "20", "1", "600200", "TRUE", "[\"Prepared\"]"};
+            valueToWrite = new String[] {"Modifier", "", "", "", "", "", "", "", "", "Automation Mod " + New_ID, "5", "20", "1", "600200", "TRUE", "[\"Prepared\"]"};
             writeExcel(dest_dir,ModGrpPath,"Modifier Groups",valueToWrite);
 
 
@@ -89,9 +89,11 @@ class AP3_mm_import extends AP3_GUI{
 
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                 StringSelection str = new StringSelection(dest_dir + File.separator + ModGrpPath);
-                clipboard.setContents(str, null);            
-                            Element_By_Path_Click("Click Global mod Import ", "xpath", "//div[contains(text(),'Import')]//i", ParentTest, "no_jira");  
-                                if (FAIL) { return;}
+                clipboard.setContents(str, null);  
+                
+                Element_By_Path_Click("Click Global mod Import ", "xpath", "//div[contains(text(),'Import')]//i", ParentTest, "no_jira");  
+                    if (FAIL) { return;}
+                                
                 Robot robot = new Robot();
                 robot.keyPress(KeyEvent.VK_CONTROL);
                 robot.keyPress(KeyEvent.VK_V);
