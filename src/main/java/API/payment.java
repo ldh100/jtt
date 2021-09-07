@@ -27,21 +27,24 @@ class payment extends API_GUI {
         exact_gateway_id = a.exact_gateway_id;
         exact_id = a.exact_id;
     }
-
+    JSONObject requestParams = null;
+    List<String> Payment_Tokens_EXACT = new ArrayList<>();
+    List<String> Payment_Tokens_FP = new ArrayList<>();
+    String AAAA = "";
     protected void run() {
 
-        List<String> Payment_Methods_IDS = new ArrayList<>();
+        //<editor-fold defaultstate="collapsed" desc="EXACT">
         Auth = "Bearer " + Mobile_User_TKN;
-
-        JOB_Api_Call("Mobile User Payment Method(s)", "GET",
+        JOB_Api_Call("Mobile User EXACT Payment Method(s)", "GET",
                 BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "", 200, ParentTest, "no_jira");
         if (json != null) {
+            AAAA = json.toString(4);
             try {
                 if (json.has("payment_methods")) {
                     JSONArray payment_methods = json.getJSONArray("payment_methods");
                     for (int i = 0; i < payment_methods.length(); i++) {
                         JSONObject p = payment_methods.getJSONObject(i);
-                        Payment_Methods_IDS.add(p.getString("token"));
+                        Payment_Tokens_EXACT.add(p.getString("token"));
                     }
                     Mobile_User_PProvider = payment_methods.getJSONObject(0).getString("type");
                     Card_Type = payment_methods.getJSONObject(0).getString("card_type");
@@ -50,26 +53,18 @@ class payment extends API_GUI {
                     Card_Method_TKN = payment_methods.getJSONObject(0).getString("token");
                 }
             } catch (Exception ex) {
-                String AAAA = ex.getMessage();
+                AAAA = ex.getMessage();
             }
         }
 
         BODY = "{\"user\":\"" + Mobile_User_ID + "\"}";
-        for (int i = 0; i < Payment_Methods_IDS.size(); i++) {
+        for (int i = 0; i < Payment_Tokens_EXACT.size(); i++) {
             JOB_Api_Call("Mobile User Delete EXACT Payment Method " + (i + 1), "DELETE",
-                    BaseAPI + "/payment/" + exact_id + "/method/" + Payment_Methods_IDS.get(i), Auth, BODY, 200, ParentTest, "no_jira");
+                    BaseAPI + "/payment/" + exact_id + "/method/" + Payment_Tokens_EXACT.get(i), Auth, BODY, 200, ParentTest, "no_jira");
         }
 
-//        if(Site_PProvider.equals("exact")){
-        EXACT();
-//        }else{
-        FP();
-//        }
-    }
-
-    private void EXACT() {
         Auth = "Bearer " + Mobile_User_TKN;
-        JSONObject requestParams = new JSONObject();
+        requestParams = new JSONObject();
         requestParams.put("cardholder_name", "JTT API Automation");
         requestParams.put("cc_expiry", "1224");
         requestParams.put("cc_number", "5555555555554444"); // Mastercard
@@ -84,27 +79,53 @@ class payment extends API_GUI {
         JOB_Api_Call("New Card - Generate Mobile User Payment Token (exact)", "POST",
                 BaseAPI + "/payment/" + exact_id + "/paymenttoken", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null && json.has("token")) {
+            AAAA = json.toString(4);
             try {
                 EXACT_Payment_TKN = json.getString("token");
             } catch (Exception ex) {
-                String AAAA = ex.getMessage();
+                AAAA = ex.getMessage();
             }
         }
-    }
-
-    private void FP() {
+        //</editor-fold>
+ 
+        //<editor-fold defaultstate="collapsed" desc="FP">        
         String Access_TKN = "";
         JOB_Api_Call("Get Mobile User Freedompay Client Token", "GET",
                 BaseAPI + "/payment/" + freedompay_id + "/clienttoken", Auth, "", 200, ParentTest, "no_jira");
         if (json != null && json.has("access_token")) {
+            AAAA = json.toString(4);
             try {
                 Access_TKN = json.getString("access_token");
             } catch (Exception ex) {
-                String AAAA = ex.getMessage();
+                AAAA = ex.getMessage();
             }
         }
+        
         Auth = "Bearer " + Access_TKN;
-        JSONObject requestParams = new JSONObject();
+        JOB_Api_Call("Mobile User Freedompay Payment Method(s)", "GET",
+                FP_URL + "/TokenService/api/consumers/tokens", Auth, "", 200, ParentTest, "no_jira");
+        if (json != null) {
+            AAAA = json.toString(4);
+            try {
+                if (json.has("data")) {
+                    JSONArray tokens = json.getJSONArray("data");
+                    for (int i = 0; i < tokens.length(); i++) {
+                        JSONObject p = tokens.getJSONObject(i);
+                        Payment_Tokens_FP.add(p.getString("token"));
+                    }
+                }
+            } catch (Exception ex) {
+                AAAA = ex.getMessage();
+            }
+        }       
+
+        for (int i = 0; i < Payment_Tokens_FP.size(); i++) {
+            JOB_Api_Call("Mobile User Delete Freedompay Payment Method " + (i + 1), "DELETE",
+                FP_URL + "/TokenService/api/consumers/tokens/" + Payment_Tokens_FP.get(i), Auth, "", 204, ParentTest, "no_jira");
+        }        
+        
+        Auth = "Bearer " + Access_TKN;
+        requestParams = new JSONObject();
         requestParams.put("nameOnCard", "JTT API Automation");
         requestParams.put("avsVerificationRequired", true);
         requestParams.put("isPreferred", true);
@@ -121,11 +142,14 @@ class payment extends API_GUI {
         JOB_Api_Call("New Card - Generate Mobile User Payment Token (freedompay)", "POST",
                 FP_URL + "/TokenService/api/consumers/tokens", Auth, BODY, 201, ParentTest, "no_jira");
         if (json != null) {
+            AAAA = json.toString(4);
             try {
-                FP_Payment_TKN = json.getString("token");
+                AAAA = json.toString(4);
+                FP_Payment_TKN = json.getString("token");           
             } catch (Exception ex) {
-                String AAAA = ex.getMessage();
+                AAAA = ex.getMessage();
             }
         }
+        //</editor-fold>
     }
 }
