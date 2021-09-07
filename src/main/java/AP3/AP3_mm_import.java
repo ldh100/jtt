@@ -98,19 +98,19 @@ class AP3_mm_import extends AP3_GUI{
                 if(A.A.WsOS.toLowerCase().contains("windows")){
                     robot.keyPress(KeyEvent.VK_CONTROL);
                     robot.keyPress(KeyEvent.VK_V);
-                    Thread.sleep(500);
+                    robot.delay(500);
                     robot.keyRelease(KeyEvent.VK_CONTROL);
                     robot.keyRelease(KeyEvent.VK_V);
-                    Thread.sleep(500);
+                    robot.delay(500);
                     robot.keyPress(KeyEvent.VK_ENTER);
                     robot.keyRelease(KeyEvent.VK_ENTER);  
                 } else{
                     robot.keyPress(KeyEvent.VK_META);
                     robot.keyPress(KeyEvent.VK_V);
-                    Thread.sleep(500);
+                    robot.delay(500);
                     robot.keyRelease(KeyEvent.VK_META);
                     robot.keyRelease(KeyEvent.VK_V);
-                    Thread.sleep(500);
+                    robot.delay(500);
                     robot.keyPress(KeyEvent.VK_ENTER);
                     robot.keyRelease(KeyEvent.VK_ENTER);                         
                 }
