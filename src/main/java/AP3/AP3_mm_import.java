@@ -76,6 +76,7 @@ class AP3_mm_import extends AP3_GUI{
             File_Delete("Delete Report Zip File", dest_dir,t, ParentTest, "no_jira");
                 if (FAIL) { return;}  
             ModGrpPath = GL_MENU.trim() + "-global-modifier-groups.xlsx";
+            
             convertPLUExcel(dest_dir,ModGrpPath,"Modifier Groups");
             editModExcel(dest_dir,ModGrpPath,"Modifier Groups");
             String[] valueToWrite = {"Modifier Group","","Auto Mod group " + New_ID, "Automation Label " + New_ID, "0", "1", "2", "TRUE", "", "", "", "", "", "", "", ""};
@@ -83,10 +84,9 @@ class AP3_mm_import extends AP3_GUI{
             valueToWrite = new String[] {"Modifier", "", "", "", "", "", "", "", "", "Automation Mod " + New_ID, "5", "20", "1", "600200", "TRUE", "[\"Prepared\"]"};
             writeExcel(dest_dir,ModGrpPath,"Modifier Groups",valueToWrite);
 
-
             File xlsfile = new File(dest_dir + File.separator + ModGrpPath);
+            
             if(xlsfile.exists()){
-
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                 StringSelection str = new StringSelection(dest_dir + File.separator + ModGrpPath);
                 clipboard.setContents(str, null);  
@@ -95,21 +95,34 @@ class AP3_mm_import extends AP3_GUI{
                     if (FAIL) { return;}
                                 
                 Robot robot = new Robot();
-                robot.keyPress(KeyEvent.VK_CONTROL);
-                robot.keyPress(KeyEvent.VK_V);
-                //driverwait(1);
-                robot.keyRelease(KeyEvent.VK_CONTROL);
-                robot.keyRelease(KeyEvent.VK_V);
-                //driverwait(1);
-                robot.keyPress(KeyEvent.VK_ENTER);
-                robot.keyRelease(KeyEvent.VK_ENTER);
-                
+                if(A.A.WsOS.toLowerCase().contains("windows")){
+                    robot.keyPress(KeyEvent.VK_CONTROL);
+                    robot.keyPress(KeyEvent.VK_V);
+                    Thread.sleep(500);
+                    robot.keyRelease(KeyEvent.VK_CONTROL);
+                    robot.keyRelease(KeyEvent.VK_V);
+                    Thread.sleep(500);
+                    robot.keyPress(KeyEvent.VK_ENTER);
+                    robot.keyRelease(KeyEvent.VK_ENTER);  
+                } else{
+                    robot.keyPress(KeyEvent.VK_META);
+                    robot.keyPress(KeyEvent.VK_V);
+                    Thread.sleep(500);
+                    robot.keyRelease(KeyEvent.VK_META);
+                    robot.keyRelease(KeyEvent.VK_V);
+                    Thread.sleep(500);
+                    robot.keyPress(KeyEvent.VK_ENTER);
+                    robot.keyRelease(KeyEvent.VK_ENTER);                         
+                }
             } else { 
                 _t++; 
                 _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"));
             }
-            Thread.sleep(1000);
+            Wait_For_Element_By_Path_InVisibility("Wait for Spinner", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");
+                if (FAIL) { return;}
+            Thread.sleep(500);           
+
             Find_Text("Find Import Successfully Message", "Global modifiers successfully imported locally. Please verify before publishing.", true, ParentTest, "no_jira");
             Thread.sleep(1000);
             Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'publish')]", ParentTest, "no_jira");
