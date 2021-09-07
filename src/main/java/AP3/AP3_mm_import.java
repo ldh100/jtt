@@ -1,5 +1,10 @@
 package AP3;
 
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -81,12 +86,22 @@ class AP3_mm_import extends AP3_GUI{
 
             File xlsfile = new File(dest_dir + File.separator + ModGrpPath);
             if(xlsfile.exists()){
-                Element_By_Path_Click("Click Global mod Import ", "xpath", "//div[contains(text(),'Import')]//i", ParentTest, "no_jira");  
-                    if (FAIL) { return;}
-                // Crl+V  >>> Paste file name
-                // Enter  >>> Open
-                Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", dest_dir+File.separator+ModGrpPath, false, ParentTest, "no_jira"); 
-                    if (FAIL) { return;}
+
+                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                StringSelection str = new StringSelection(dest_dir + File.separator + ModGrpPath);
+                clipboard.setContents(str, null);            
+                            Element_By_Path_Click("Click Global mod Import ", "xpath", "//div[contains(text(),'Import')]//i", ParentTest, "no_jira");  
+                                if (FAIL) { return;}
+                Robot robot = new Robot();
+                robot.keyPress(KeyEvent.VK_CONTROL);
+                robot.keyPress(KeyEvent.VK_V);
+                //driverwait(1);
+                robot.keyRelease(KeyEvent.VK_CONTROL);
+                robot.keyRelease(KeyEvent.VK_V);
+                //driverwait(1);
+                robot.keyPress(KeyEvent.VK_ENTER);
+                robot.keyRelease(KeyEvent.VK_ENTER);
+                
             } else { 
                 _t++; 
                 _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -397,8 +412,8 @@ class AP3_mm_import extends AP3_GUI{
             writeExcel(dest_dir,ModGrpPath,"Modifier Groups",valueToWrite);
             Thread.sleep(1000);
             if(xlsfile.exists()){
-               Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", dest_dir + File.separator + ModGrpPath, false, ParentTest, "no_jira"); 
-                 if (FAIL) { return;}
+                Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", dest_dir + File.separator + ModGrpPath, false, ParentTest, "no_jira"); 
+                    if (FAIL) { return;}
             } else { 
                 _t++; 
                 _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -497,7 +512,12 @@ class AP3_mm_import extends AP3_GUI{
                         row.getCell(9).setCellValue("Update Auto Mod " + New_ID);
                         row.getCell(10).setCellValue(10);
                         row.getCell(11).setCellValue(30);
-                        row.getCell(12).setCellValue(6);
+                        if(row.getCell(12) == null) {
+                            row.createCell(12).setCellValue(6);
+                        } else {
+                            row.getCell(12).setCellValue(6);                               
+                        }
+ 
                         row.getCell(13).setCellValue(650000);
                         //row.getCell(14).setCellValue(Boolean.TRUE);
                         row.getCell(15).setCellValue("[\"Carbonated Beverage\"]");
@@ -507,7 +527,11 @@ class AP3_mm_import extends AP3_GUI{
                         row.getCell(3).setCellValue("Update Auto label" + New_ID);
                         row.getCell(4).setCellValue(0);
                         row.getCell(5).setCellValue(1);
-                        row.getCell(6).setCellValue(6);
+                        if(row.getCell(6) == null) {
+                            row.createCell(6).setCellValue(6);
+                        } else {
+                            row.getCell(6).setCellValue(6);                               
+                        }
                        // row.getCell(7).setCellValue(Boolean.TRUE);
                         flag_modifiergroup = 1;
                     }                            
