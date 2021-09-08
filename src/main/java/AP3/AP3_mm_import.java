@@ -91,7 +91,7 @@ class AP3_mm_import extends AP3_GUI{
                 StringSelection str = new StringSelection(dest_dir + File.separator + ModGrpPath);
                 clipboard.setContents(str, null);  
                 
-                Element_By_Path_Click("Click Global mod Import ", "xpath", "//div[contains(text(),'Import')]//i", ParentTest, "no_jira");  
+                Element_By_Path_Click("Click Global mod Import", "xpath", "//div[contains(text(),'Import')]//i", ParentTest, "no_jira");  
                     if (FAIL) { return;}
                                 
                 Robot robot = new Robot();
@@ -114,9 +114,12 @@ class AP3_mm_import extends AP3_GUI{
                     robot.keyPress(KeyEvent.VK_ENTER);
                     robot.keyRelease(KeyEvent.VK_ENTER);                         
                 }
+                
+//                Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", dest_dir + File.separator + ModGrpPath, false, ParentTest, "no_jira"); 
+//                    if (FAIL) { return;}                
             } else { 
                 _t++; 
-                _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _w++; EX += _t + "\t" + "File does not exist" + "\t" + "File: " + ModGrpPath + "\t" + " - " + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"));
             }
             Wait_For_Element_By_Path_InVisibility("Wait for Spinner", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");

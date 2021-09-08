@@ -14,9 +14,12 @@ class mealplan extends API_GUI{
         UnitID = a.UnitID;
         Mobile_User_ID = a.Mobile_User_ID;
         Mobile_User_TKN = a.Mobile_User_TKN;
-        ParentTest = a.ParentTest;
+        FCM_TKN = a.FCM_TKN;
+        
         MEALPLAN_ID = a.MEALPLAN_ID;
-        MEALPLAN_TENDER = a.MEALPLAN_TENDER;
+        MEALPLAN_TENDER = a.MEALPLAN_TENDER;   
+        
+        ParentTest = a.ParentTest;
     }
     private String AAA = "";
     protected void run() {
@@ -26,16 +29,16 @@ class mealplan extends API_GUI{
         if (json != null) {
             AAA = json.toString(4);
         }
-//        Auth = "Bearer " + Mobile_User_TKN;
-//        JOB_Api_Call("Mobile User > /secret/fcm_token", "POST", 
-//            BaseAPI + "/user/" + Mobile_User_ID + "/secret/fcm_token", Auth, "", 200, ParentTest, "no_jira");
-//        if(json != null){
-//            try {
-//                if(json.has("fcm_token")) Mobile_User_SECRET = json.getString("fcm_token");  
-//            } catch (Exception ex){
-//                //
-//            }
-//        } 
+        
+        
+//        // For TRANSACT
+//        BODY = "{\"password\":\"123\",\"username\":\"cdl.test.xtt@gmail.com\"}";  
+//        JOB_Api_Call("MealPlan > Verify Account", "POST", 
+//            BaseAPI + "/mealplan/" + MEALPLAN_ID, Auth, BODY, 404, ParentTest, "no_jira");
+//        if (json != null) {
+//            AAA = json.toString(4);
+//        }        
+
 
         //POST/mealplan/{id} : Authenticate against the meal plan provider
 

@@ -418,7 +418,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 64, 110, 14));
 
         _headless.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
-        _headless.setText("Headless <<<<");
+        _headless.setText("Headless <<<");
         _headless.setToolTipText("");
         _headless.setRequestFocusEnabled(false);
         jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 80, 110, 14));
