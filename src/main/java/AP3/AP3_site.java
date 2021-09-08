@@ -480,7 +480,7 @@ class AP3_site extends AP3_GUI{
         *   test delivery drop-off locations in dev only
         *   AUT-1066  
         */      
-        //d1.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+        d1.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";        
         //get delivery destinations(drop-off locations) from API 
         Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
@@ -948,6 +948,7 @@ class AP3_site extends AP3_GUI{
         if (FAIL) { return;}
         Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
         if (FAIL) { return;}
+        Thread.sleep(WaitForElement);
         Move_to_Element_By_Path("Move > Location in table", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]", ParentTest, "no_jira");
         if (FAIL) { return;}
         Element_By_Path_Click("Edit > Location ", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]//i[contains(@class,'mdi-pencil')]", ParentTest, "no_jira");
@@ -1067,9 +1068,10 @@ class AP3_site extends AP3_GUI{
         //test Edit location
         Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
         if (FAIL) { return;}
-        Move_to_Element_By_Path("Move > Location in table", "xpath", "(//td[contains(text(),'-copy')])[1]", ParentTest, "no_jira");
+        Thread.sleep(WaitForElement);
+        Move_to_Element_By_Path("Move > Location in table", "xpath", "(//td[contains(text(),'"+New_ID+"') and contains(text(),'-copy')])[1]", ParentTest, "no_jira");
         if (FAIL) { return;}
-        Element_By_Path_Click("Edit > Location ", "xpath", "(//td[contains(text(),'-copy')])[1]/parent::tr//i[contains(@class,'mdi-pencil')]", ParentTest, "no_jira");
+        Element_By_Path_Click("Edit > Location ", "xpath", "(//td[contains(text(),'"+New_ID+"') and contains(text(),'-copy')])[1]/parent::tr//i[contains(@class,'mdi-pencil')]", ParentTest, "no_jira");
         if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for 'Edit Drop-off Location' dialog", "xpath", "//*[@class='v-dialog v-dialog--active']//*[contains(text(),'Edit Drop-off Location')]", ParentTest, "no_jira");
         if (FAIL) { return;}
@@ -1405,6 +1407,7 @@ class AP3_site extends AP3_GUI{
         // 4. Filter (currently only works by Location name)
         Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
         if (FAIL) { return;}
+        Thread.sleep(WaitForElement);
         Move_to_Element_By_Path("Move > Location in table", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]", ParentTest, "no_jira");
         if (FAIL) { return;}
         Element_By_Path_Click("Clone > Location ", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]//i[contains(@class,'mdi-content-copy')]", ParentTest, "no_jira");
@@ -1448,6 +1451,7 @@ class AP3_site extends AP3_GUI{
         if (FAIL) { return;}
         Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
         if (FAIL) { return;}
+        Thread.sleep(WaitForElement);
         Move_to_Element_By_Path("Move > Location in table", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[3]", ParentTest, "no_jira");
         if (FAIL) { return;}
         Element_By_Path_Click("Clone > Location ", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[3]//i[contains(@class,'mdi-content-copy')]", ParentTest, "no_jira");
@@ -1487,6 +1491,9 @@ class AP3_site extends AP3_GUI{
 //        if (FAIL) { return;}
 //        Element_By_Path_Click("Click 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
 //        if (FAIL) { return;}
+        Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(WaitForElement);
         Wait_For_Element_By_Path_Presence("Wait for presence of 'Delivery Drop-off Locations' sections", "xpath", "//*[@class='H5-Primary-Left' and text()='Delivery Drop-off Locations']", ParentTest, "no_jira");
         if (FAIL) { return;}
         List_L3("Get List of Locations", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
@@ -1494,11 +1501,13 @@ class AP3_site extends AP3_GUI{
         //Click on Location Name column label to sort in decending order
         Element_By_Path_Click("Click > 'Location Name' column header", "xpath", "(//*[@id='drop-off-locations']//*[contains(@class,'column sortable')])[1]", ParentTest, "no_jira");
         if (FAIL) { return;}
+        Thread.sleep(WaitForElement);
         Wait_For_Element_By_Path_Presence("Check Sort > 'Descending'", "xpath", "((//tbody)[3]//tr)[1]//td[contains(text(),'Sort-filter')]", ParentTest, "no_jira");
         if (FAIL) { return;}
         //Click on Location Name column label to sort in ascending order
         Element_By_Path_Click("Click > 'Location Name' column header", "xpath", "(//*[@id='drop-off-locations']//*[contains(@class,'column sortable')])[1]", ParentTest, "no_jira");
         if (FAIL) { return;}
+        Thread.sleep(WaitForElement);
         String first_loc_in_record = "";
         if (loc_name_before_clone.contains("-X")) {
             int indx = loc_name_before_clone.indexOf("-X");
@@ -1612,10 +1621,9 @@ class AP3_site extends AP3_GUI{
         // </editor-fold>
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations End >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold>
-        
+        d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
 //        Navigate_Back("Navigate Back", SITE + "Site Configuration","Station List", ParentTest, "no_jira");
         //if (FAIL) { return;}
-        Thread.sleep(500); 
 //        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
 //            if (FAIL) { return;}               
 //        Navigate_Back("Navigate Back", SITE + "Station List","App Sites page", ParentTest, "no_jira");
