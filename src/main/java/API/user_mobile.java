@@ -40,9 +40,16 @@ class user_mobile extends API_GUI{
         }
 
         Auth = "Bearer " + Mobile_User_TKN;
+        
+//        JOB_Api_Call("Mobile User > /secret/fcm_token", "POST", 
+//            BaseAPI + "/user/" + Mobile_User_ID + "/secret/fcm_token", Auth, "", 200, ParentTest, "no_jira");
+//        if(json != null){
+//            AAA = json.toString(4);
+//        }        
+        
         JOB_Api_Call("Mobile User > /permissions", "GET", 
             BaseAPI + "/user/" + Mobile_User_ID + "/permissions", Auth, "", 200, ParentTest, "no_jira");
-        
+
         JOB_Api_Call("Mobile User ", "OPTIONS", 
             BaseAPI + "/user/" + Mobile_User_ID, Auth, "", 200, ParentTest, "no_jira");          
         

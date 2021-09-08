@@ -256,8 +256,9 @@ class AP3_images extends AP3_GUI{
         File tmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"Ap3_test_pdf_in_image.pdf");
         if(tmp.exists()) {
             d1.findElement(By.xpath("//input[@type='file']")).sendKeys(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"Ap3_test_pdf_in_image.pdf");
-            _t++; Find_Text("Toast message", "Invalid file type, choose a jpg or png file.", true, ParentTest, "no_jira");
-            if (FAIL) { return;}
+            _t++; 
+            Find_Text("Toast message", "Invalid file type, choose a jpg or png file.", true, ParentTest, "no_jira");
+                if (FAIL) { return;}
         }
         EX += " - " + "\t" + " === " + "\t" + " ===== Try upload non jpg/png file type" + "\t" + " == End >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         tmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"Ap3_image1.png");

@@ -5781,7 +5781,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
     } 
 
-    protected void PressEnter(String NAME, WebElement E, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Element_SendKey_Enter(String NAME, WebElement E, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }

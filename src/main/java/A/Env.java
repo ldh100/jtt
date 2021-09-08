@@ -315,7 +315,12 @@ public class Env extends javax.swing.JInternalFrame {
         try (Connection conn = DriverManager.getConnection(A.QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery(SQL);
             ResultSetMetaData rsmd = rs.getMetaData();
-            DefaultTableModel dm = new DefaultTableModel();
+            DefaultTableModel dm = new DefaultTableModel(){
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
             int cols = rsmd.getColumnCount();
             String c[] = new String[cols];
             for(int i = 0; i < cols; i++){

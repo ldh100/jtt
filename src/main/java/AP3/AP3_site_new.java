@@ -631,7 +631,7 @@ class AP3_site_new extends AP3_GUI{
                     T_Index = -1;
                     for (int j = 0; j < L1.size(); j++) {
                         Element_Text("Global Menu Name", L1.get(j), ParentTest, "no_jira");  
-                        if (FAIL) { return;} 
+                            if (FAIL) { return;} 
                         if(L1.get(j).getText().trim().equals(GL_MENU)){
                             T_Index = j;
                         }
@@ -658,18 +658,14 @@ class AP3_site_new extends AP3_GUI{
                     Element_By_Path_Text_Enter("Enter Station Name", "css", "[aria-label='Station Name']", "New Station " + New_ID, false, ParentTest, "no_jira"); 
                         if (FAIL) { return;}    
                         
-                     File tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_brand_image.png");
-                      if(tmp.exists())
-                      {
-                       Element_By_Path_Text_Enter("Upload Brand Image", "xpath", "//div[@id='toc-information']//input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_brand_image.png", false, ParentTest, "no_jira"); 
-                        if (FAIL) { return;}
-                      }
-                      else
-                      {
-                       _t++; 
-                       _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File : Ap3_brand_image  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-       
-                      }  
+                    File tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_brand_image.png");
+                    if(tmp.exists()) {
+                      Element_By_Path_Text_Enter("Upload Brand Image", "xpath", "//div[@id='toc-information']//input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_brand_image.png", false, ParentTest, "no_jira"); 
+                          if (FAIL) { return;}
+                    } else {
+                      _t++; 
+                      _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File : Ap3_brand_image  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    }  
                     Element_By_Path_Click("Station Location Description Click", "xpath", "//label[contains(text(), 'Location Description')]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}
                     Element_By_Path_Text_Enter("Enter Station Location Description", "css", "[aria-label='Station Location Description']", "Attic " + New_ID, false, ParentTest, "no_jira"); 
@@ -682,9 +678,8 @@ class AP3_site_new extends AP3_GUI{
                         
                     Element_Child_List_L1("Cost Centre Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");             
                         if (FAIL) { return;} 
-                        Scroll_to_Element("Scroll to last Cost Centre", L1.get(L1.size() - 1), ParentTest, "no_jira");
-                            if (FAIL) { return;}
-
+                    Scroll_to_Element("Scroll to last Cost Centre", L1.get(L1.size() - 1), ParentTest, "no_jira");
+                        if (FAIL) { return;}
                     Element_Click("Select last Cost Centre in the List", L1.get(L1.size() - 1), ParentTest, "no_jira"); 
                         if (FAIL) { return;} 
                              
