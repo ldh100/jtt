@@ -3408,7 +3408,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setEndTime(new Date());
         }         
         
-         if (true) { // =================  MPlan ===================
+         if (!MEALPLAN_ID.trim().isEmpty()) { // =================  MPlan ===================
             SCOPE += "Meal Plan "; 
             EX += " - " + "\t" + "Meal Plan" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Meal Plan");
@@ -3521,7 +3521,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         String R_Time = "";
         String ErrorMsg = "";
         json = null;
-        Date API_SRART = new Date(); //  ========== new to fix Extend Report time buds
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs
         RequestSpecification request;
         request = RestAssured.given();
         if (!AUTH.isEmpty()) {

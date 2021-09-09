@@ -1,4 +1,7 @@
 package AP3;
+
+import java.util.Date;
+
 class AP3_brand extends AP3_GUI{
     protected AP3_brand (AP3_GUI a) {
         d1 = a.d1;
@@ -138,7 +141,7 @@ class AP3_brand extends AP3_GUI{
                     }else{
                         EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                         "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode("API Responce Error"), new Date());
                         return;
                     }
                     API_Body_Contains("Location Group API - find Hidden Brand", API_Response_Body, BrandID, false, ParentTest, "no_jira");        
@@ -155,7 +158,7 @@ class AP3_brand extends AP3_GUI{
                     }else{
                         EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                         "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode("API Responce Error"), new Date());
                         return;
                     }
                     API_Body_Contains("Location Group API - find Displayed Brand", API_Response_Body, BrandID, true, ParentTest, "no_jira");        
@@ -173,7 +176,7 @@ class AP3_brand extends AP3_GUI{
                     }else{
                         EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                         "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode("API Responce Error"), new Date());
                         return;
                     }
                     API_Body_Contains("Location Group API - find Hidden Brand", API_Response_Body, BrandID, false, ParentTest, "no_jira");        
@@ -188,7 +191,7 @@ class AP3_brand extends AP3_GUI{
                     }else{
                         EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1"+ "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                         "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode("API Responce Error"), new Date());
                         return;
                     }
                     API_Body_Contains("Location Group API - find Displayed Brand", API_Response_Body, BrandID,true, ParentTest, "no_jira");        
@@ -282,7 +285,7 @@ class AP3_brand extends AP3_GUI{
                         }else{
                             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + BrandID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + BrandID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+                            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + BrandID + "?nocache=1", false, ParentTest.createNode("API Responce Error"), new Date());
                             return;
                         }
                         Brand_API_Is("Brand API Pickup Supported",  API_Response_Body, "pickup_supported", false, ParentTest, "no_jira" );
@@ -299,7 +302,7 @@ class AP3_brand extends AP3_GUI{
                         }else{
                             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + BrandID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + BrandID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+                            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + BrandID + "?nocache=1", false, ParentTest.createNode("API Responce Error"), new Date());
                             return;
                         }
                         Brand_API_Is("Brand API Delivery Supported", API_Response_Body, "delivery_supported", true, ParentTest, "no_jira" );
@@ -345,7 +348,7 @@ class AP3_brand extends AP3_GUI{
                         }else{
                             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + BrandID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + BrandID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+                            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + BrandID + "?nocache=1", false, ParentTest.createNode("API Responce Error"), new Date());
                             return;
                         }
                         Brand_API_Is("Brand API Delivery Supported", API_Response_Body, "delivery_supported", false, ParentTest, "no_jira" );
@@ -425,7 +428,7 @@ class AP3_brand extends AP3_GUI{
                         _t++;
                         _w++;
                         EX += _t + "\t" + " === " + platform + " Site: " + SITE + "\t" + "Brand: " + BRAND + "\t" + "Unable to schedule menus for " + platform + " locations" + "\t" + "WARN" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";                            
-                        Log_Html_Result("WARN", "Unable to schedule menus for " + platform + " locations", false, ParentTest.createNode("Find 'Schedule your...'"));
+                        Log_Html_Result("WARN", "Unable to schedule menus for " + platform + " locations", false, ParentTest.createNode("Find 'Schedule your...'"), new Date());
                     } else{
                         Element_By_Path_Text("Find 'Schedule menu' button", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", ParentTest, "no_jira"); 
                             if (FAIL) return;   
@@ -515,7 +518,7 @@ class AP3_brand extends AP3_GUI{
                     }else{
                         EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + BrandID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                         "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + BrandID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + BrandID + "?nocache=1", false, ParentTest.createNode("API Responce Error"), new Date());
                         return;
                     }          
                     Brand_API_Hours("Brand API - new Service Hours", API_Response_Body, "Pickup - day 0", New_From, New_To, true, ParentTest, "no_jira"); 
@@ -615,7 +618,7 @@ class AP3_brand extends AP3_GUI{
                     }else{
                         EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + BrandID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                         "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + BrandID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + BrandID + "?nocache=1", false, ParentTest.createNode("API Responce Error"), new Date());
                         return;
                     }                
                     Brand_API_Hours("Brand API - new Delivery Hours", API_Response_Body, "Delivery - day 0", New_From, New_To,true, ParentTest, "no_jira"); 

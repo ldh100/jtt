@@ -3,7 +3,14 @@ package API;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-
+/*
+Corey Cosman        
+POST https://api.compassdigital.org/<stage>/datalake/sql
+and then whatever entity is being searched for can be specified in the query of the body, for example, orders:
+{
+    "query": "SELECT * FROM datalake.orders WHERE date_created >= '2021-09-07T12:00:02.000Z' LIMIT 1000"
+}
+*/
 class datalake extends API_GUI{
     protected datalake(API_GUI a) {
         app = a.app;
@@ -15,14 +22,7 @@ class datalake extends API_GUI{
     private String AAA = "";
     private String sql = "";
     protected void run() {  
-/*
-Corey Cosman        
-POST https://api.compassdigital.org/<stage>/datalake/sql
-and then whatever entity is being searched for can be specified in the query of the body, for example, orders:
-{
-    "query": "SELECT * FROM datalake.orders WHERE date_created >= '2021-09-07T12:00:02.000Z' LIMIT 1000"
-}
-*/
+
         String DATE = ZonedDateTime.now( ZoneOffset.UTC ).format( DateTimeFormatter.ISO_INSTANT );
         sql = "SELECT * FROM datalake.orders WHERE date_created <= '" + DATE + "' LIMIT 10";
         

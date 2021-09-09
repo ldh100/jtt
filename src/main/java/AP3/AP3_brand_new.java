@@ -2,6 +2,7 @@ package AP3;
 
 import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -1862,7 +1863,7 @@ class AP3_brand_new extends AP3_GUI {
         }else{
             EX += _t + "\t == " + "API Response Error" + "\t" + BaseAPI + "/location/sector/" +SectorID  + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/sector/"+SectorID, false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/sector/"+SectorID, false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
         
@@ -1881,7 +1882,7 @@ class AP3_brand_new extends AP3_GUI {
                     JDE_id = company.getJSONObject("meta").getString("jde_category");
                     _t++; _p++;
                     EX += _t + "\t" + "JDE Category auto assigned to global menu" + "\t" + "-" + "\t" + "JDE API ID: " +company.getJSONObject("meta").getString("jde_category")  + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "JDE Category auto assigned to global menu : " + JDE_id, false, ParentTest.createNode("JDE Category assigned correctly"));
+                    Log_Html_Result("PASS", "JDE Category auto assigned to global menu : " + JDE_id, false, ParentTest.createNode("JDE Category assigned correctly"), new Date());
                     flag = true;
                     break;
               }
@@ -1889,7 +1890,7 @@ class AP3_brand_new extends AP3_GUI {
               {     //Print fail
                   _t++; _f++;
                   EX += _t + "\t" + "JDE Category  assigned to Global menu incorrectly" + "\t" + "JDE ID: " + JDE_id + "\t" + "JDE API ID: " +company.getJSONObject("meta").getString("jde_category")  + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                  Log_Html_Result("FAIL", "JDE Category assigned to global menu incorrectly: "+company.getJSONObject("meta").getString("jde_category") , false, ParentTest.createNode("JDE Category assigned incorrectly"));
+                  Log_Html_Result("FAIL", "JDE Category assigned to global menu incorrectly: "+company.getJSONObject("meta").getString("jde_category") , false, ParentTest.createNode("JDE Category assigned incorrectly"), new Date());
                   flag = false;
               }
           }
@@ -1909,7 +1910,7 @@ class AP3_brand_new extends AP3_GUI {
         }else{
             EX += _t + "\t == " + "API Response Error" + "\t" + BaseAPI + "/config/jde-configuration" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/jde-configuration", false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/jde-configuration", false, ParentTest.createNode("API Responce Error"), new Date());
            // return;
         }
         
@@ -1924,7 +1925,7 @@ class AP3_brand_new extends AP3_GUI {
                  {
                   _t++; _p++;
                   EX += _t + "\t" + "JDE Category UI : "+JDE_category + "\t" + "JDE UI ID: "+JDE_id  + "\t" + "JDE Category API: " +JDE_category+ "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                  Log_Html_Result("PASS", "JDE Category and ID : " +JDE_id, false, ParentTest.createNode("JDE Category & ID"));
+                  Log_Html_Result("PASS", "JDE Category and ID : " +JDE_id, false, ParentTest.createNode("JDE Category & ID"), new Date());
                  }
              }
         }
