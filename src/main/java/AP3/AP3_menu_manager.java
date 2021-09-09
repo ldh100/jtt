@@ -1,6 +1,7 @@
 package AP3;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONObject;
  /*
@@ -433,7 +434,7 @@ class AP3_menu_manager extends AP3_GUI{
             if(mod_items.isEmpty()) {
                _t++;
                _p++; EX += _t + "\t" + "No Modifier items exists" + "\t" + "-" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-               Log_Html_Result("WARN", "No Modifier items exists", false, ParentTest.createNode("No Modifier items exists" + "WARN"));
+               Log_Html_Result("WARN", "No Modifier items exists", false, ParentTest.createNode("No Modifier items exists" + "WARN"), new Date());
             } else {
                 for (int i = 0; i < mod_items.length(); i++) {
                     JSONObject mod_item = mod_items.getJSONObject(i);
@@ -840,7 +841,7 @@ class AP3_menu_manager extends AP3_GUI{
             }else{
                 _t++; _f++;
                 EX += " - " + "\t" + "Copy Modifier Group" + "\t" + "Copied after Publish"+ "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("FAIL", "Copy Modifier Group", false, ParentTest.createNode("Not Found"));
+                Log_Html_Result("FAIL", "Copy Modifier Group", false, ParentTest.createNode("Not Found"), new Date());
             return;
             }
             // ======================== New Group Copy ^^^^ End
@@ -885,7 +886,7 @@ class AP3_menu_manager extends AP3_GUI{
            _t++; 
            _f++;
            EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-           Log_Html_Result("FAIL", "Find Menu", false, ParentTest.createNode("Not Found: FAIL"));
+           Log_Html_Result("FAIL", "Find Menu", false, ParentTest.createNode("Not Found: FAIL"), new Date());
            return;
         }
         EX += " - " + "\t" + " === MM Global Modifiers " + "\t" + " ===== " + "\t" + " == Global Modifiers End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -1059,7 +1060,7 @@ class AP3_menu_manager extends AP3_GUI{
             _t++; 
             _f++;
             EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-            Log_Html_Result("FAIL", "Find Menu", false, ParentTest.createNode("Not Found" + "FAIL"));
+            Log_Html_Result("FAIL", "Find Menu", false, ParentTest.createNode("Not Found" + "FAIL"), new Date());
             return;
         } 
         Navigate_Back("Navigate Back","MM 'Local Brands' page","MM 'Sector' page", ParentTest, "no_jira"); 
