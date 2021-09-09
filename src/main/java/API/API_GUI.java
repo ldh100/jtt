@@ -612,6 +612,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String Mobile_User_TKN = "";
     protected String Mobile_User_SECRET = "";
     
+    protected String FCM_TKN = "";
+    protected String Verification_TKN = "";
+    
     protected String Card_Type = "";
     protected String Card_Last4 = "";
     protected String Card_Name = "";
@@ -3321,6 +3324,8 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Mobile_User_ID = BR.Mobile_User_ID;
             Mobile_User_TKN = BR.Mobile_User_TKN;
             Mobile_User_SECRET = BR.Mobile_User_SECRET;
+            FCM_TKN = BR.FCM_TKN;
+            Verification_TKN = BR.Verification_TKN;
         }
         
         if (!FAIL) {
@@ -3386,7 +3391,24 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Order_Pickup_ID = BR.Order_Pickup_ID;
         }
         
-         if (true) { // =================  MPlan ===================
+         if (true) { // =================  Datalake ===================
+            SCOPE += "Datalake "; 
+            EX += " - " + "\t" + "Datalake" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Datalake");
+            datalake BR = new API.datalake(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
+            ParentTest.getModel().setName("Datalake - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
+        }         
+        
+         if (!MEALPLAN_ID.trim().isEmpty()) { // =================  MPlan ===================
             SCOPE += "Meal Plan "; 
             EX += " - " + "\t" + "Meal Plan" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Meal Plan");
@@ -3499,7 +3521,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
         String R_Time = "";
         String ErrorMsg = "";
         json = null;
-        Date API_SRART = new Date(); //  ========== new to fix Extend Report time buds
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs
         RequestSpecification request;
         request = RestAssured.given();
         if (!AUTH.isEmpty()) {
