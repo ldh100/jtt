@@ -1,5 +1,6 @@
 package API;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 class shoppingcart extends API_GUI{
@@ -44,8 +45,15 @@ class shoppingcart extends API_GUI{
             BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID, Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
             try{
+                AAA = json.toString(4); 
                 ShoppingCart_Delivery_ID = json.getString("id");
-                AAA = json.toString(4);
+                JSONArray items = json.getJSONArray("items");
+                for (int i = 0; i < items.length(); i++) {
+                    if(items.getJSONObject(i).getString("id").equals(ITEMS_IDS.get(ITEMS_IDS.size() - 1))){
+                        Item_Index = items.getJSONObject(i).getString("_index");                         
+                    }
+                }
+
             } catch (Exception ex){
                 AAA = ex.getMessage();
             }

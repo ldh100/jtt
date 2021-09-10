@@ -13,7 +13,10 @@ class user_mobile extends API_GUI{
         MOBILE_PW = a.MOBILE_PW;
         NewID = a.NewID;
         ParentTest = a.ParentTest;
+        SiteID = a.SiteID;
     }
+    String AAA = "";
+
     protected void run() {  
         Realm = A.Func.Realm_ID(app, env);
         
@@ -33,25 +36,29 @@ class user_mobile extends API_GUI{
                 if(json.has("user")) Mobile_User_ID = json.getString("user"); 
                 if(json.has("token")) Mobile_User_TKN = json.getString("token");  
             } catch (Exception ex){
-                //
+                AAA = ex.getMessage();
             }
         }
-        
-//        Auth = "Bearer " + Mobile_User_TKN;
-//        JOB_Api_Call("Mobile User > /secret/fcm_token", "POST", 
-//            BaseAPI + "/user/" + Mobile_User_ID + "/secret/fcm_token", Auth, "", 200, ParentTest, "no_jira");
-//        if(json != null){
-//            try {
-//                if(json.has("fcm_token")) Mobile_User_SECRET = json.getString("fcm_token");  
-//            } catch (Exception ex){
-//                //
-//            }
-//        } 
-       
+
         Auth = "Bearer " + Mobile_User_TKN;
+        String SECRET = "APA91bH5sCRipn3EPZNZFyyY552jisUoO1ZJDcDYpiHxLYvlTVqWRrXGsqqRsBBRjIpenEOo0EfSOECXotgSeN8yLS1_zG86EbLJl7DFxOYL1I2JfeD43xE4m20esSva7SDrb4rtmfYH";
+        BODY = "{\"fcm_token\":\'" + SECRET + "\"}";  
+        JOB_Api_Call("Mobile User > /secret/fcm_token", "POST", 
+            BaseAPI + "/user/" + Mobile_User_ID + "/secret/fcm_token", Auth, BODY, 200, ParentTest, "no_jira");
+        if(json != null){
+            AAA = json.toString(4);
+        }           
+
+        JOB_Api_Call("Mobile User > /secret/fcm_token", "GET", 
+            BaseAPI + "/user/" + Mobile_User_ID + "/secret/fcm_token", Auth, "", 200, ParentTest, "no_jira");
+        if(json != null){
+            AAA = json.toString(4);
+            if(json.has("fcm_token")) FCM_TKN = json.getString("fcm_token");
+        } 
+        
         JOB_Api_Call("Mobile User > /permissions", "GET", 
             BaseAPI + "/user/" + Mobile_User_ID + "/permissions", Auth, "", 200, ParentTest, "no_jira");
-        
+
         JOB_Api_Call("Mobile User ", "OPTIONS", 
             BaseAPI + "/user/" + Mobile_User_ID, Auth, "", 200, ParentTest, "no_jira");          
         
@@ -59,13 +66,17 @@ class user_mobile extends API_GUI{
         JOB_Api_Call("Mobile User - Update Phone", "PATCH", 
             BaseAPI + "/user/" + Mobile_User_ID, Auth, BODY, 200, ParentTest, "no_jira");
         
-        BODY = "{\"gender\":" + "male" + "}";                           //  Update Mobile user Gender
+        BODY = "{\"gender\":" + "\"male\"" + "}";                           //  Update Mobile user Gender
         JOB_Api_Call("Mobile User - Update Gender", "PATCH", 
-            BaseAPI + "/user/" + Mobile_User_ID, Auth, BODY, 200, ParentTest, "no_jira");   
+            BaseAPI + "/user/" + Mobile_User_ID, Auth, BODY, 200, ParentTest, "no_jira");  
+        if(json != null){
+            AAA = json.toString(4);
+        }         
+        
         
         BODY = "{\"name\":" +                                         //  Change First/Last Name  =================
                "{\"first\":\"API\",\"last\":\"Testing\"}," + 
-            "\"realm\":\"" + Realm + "\"}";                        
+                "\"realm\":\"" + Realm + "\"}";                        
         JOB_Api_Call("Mobile User - Change First/Last Name", "PUT", 
             BaseAPI + "/user/" + Mobile_User_ID, Auth, BODY, 200, ParentTest, "no_jira");           
         
@@ -83,10 +94,23 @@ class user_mobile extends API_GUI{
         JOB_Api_Call("Mobile User Zendesk JWT token", "GET", 
             BaseAPI + "/user/zendesk", Auth, "", 200, ParentTest, "no_jira");         
 
-        if(env.equals("DE")){ // not in Staging, Production yet
+        if(env.equals("DE")){                                  // not in Staging, Production yet
             JOB_Api_Call("Mobile User Send Email Verification", "POST",   //  Mobile User Email Verification ================
-                BaseAPI + "/user/" + Mobile_User_ID + "/verification?realm=" + Realm, Auth, "", 200, ParentTest, "no_jira");   
-            String verification_token = "";
+                BaseAPI + "/user/" + Mobile_User_ID + "/verification?realm=" + Realm, Auth, "", 200, ParentTest, "no_jira");  
+            if(json != null){
+                AAA = json.toString(4);
+            }  
+         
+            
+//            // ==========    Where to Get Verification_TKN from ???? ================
+//            BODY = "{\"verification_token\":" + Verification_TKN + "}";  
+//            JOB_Api_Call("Mobile User Email Verification Confirm", "PUT",   //  Mobile User Email Verification ================
+//                BaseAPI + "/user/" + Mobile_User_ID + "/verification/confirm", Auth, BODY, 200, ParentTest, "no_jira");  
+//            if(json != null){
+//                AAA = json.toString(4);
+//                if(json.has("verification_token")) Verification_TKN = json.getString("verification_token");
+//            }             
+ 
         }
         
         BODY = "{\"email\":\"" + MOBILE_ID + "\"," +            //  Mobile User Forgot Password ================
@@ -102,6 +126,16 @@ class user_mobile extends API_GUI{
             "\"password\":\"" + "Zxtsaq9ppnppvbyi11f0nk" + "\"}";
         JOB_Api_Call("Mobile Create New User > Email Already Exists", "POST", 
             BaseAPI + "/user", Auth, BODY, 409, ParentTest, "no_jira"); 
+        
+        JOB_Api_Call("Mobile User - Location > /group/'SiteID'?include_brands_config=true", "GET",
+                BaseAPI + "/location/group/" + SiteID + "?include_brands_config=true", Auth, "", 200, ParentTest, "no_jira");
+        if (json != null) {
+            try {
+                AAA = json.toString(4);
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }         
               
         if (!"PR".equals(env)) {        
             BODY = "{\"name\":" +                                       //  New Mobile User ===============================

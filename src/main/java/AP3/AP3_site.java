@@ -1,6 +1,7 @@
 package AP3;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -480,7 +481,7 @@ class AP3_site extends AP3_GUI{
         *   test delivery drop-off locations in dev only
         *   AUT-1066  
         */      
-        //d1.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+        d1.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";        
         //get delivery destinations(drop-off locations) from API 
         Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
@@ -489,7 +490,7 @@ class AP3_site extends AP3_GUI{
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }        
         JSONObject json = new JSONObject(API_Response_Body);
@@ -538,12 +539,12 @@ class AP3_site extends AP3_GUI{
             _t++;
             _p++; EX += _t + "\t" + "Check value is not longer than 80 characters" + "\t" + "-" + "\t" + "value length = " + t.length() + "\t" + "PASS" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("PASS", "value length = " + t.length(), false, ParentTest.createNode("Check value is not longer than 80 characters"));
+            Log_Html_Result("PASS", "value length = " + t.length(), false, ParentTest.createNode("Check value is not longer than 80 characters"), new Date());
         } else {
             _t++;
             _f++; EX += _t + "\t" + "Check value is not longer than 80 characters" + "\t" + "-" + "\t" + "value length = " + t.length() + "\t" + "FAIL" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "value length = " + t.length(), true, ParentTest.createNode("Check value is not longer than 80 characters"));
+            Log_Html_Result("FAIL", "value length = " + t.length(), true, ParentTest.createNode("Check value is not longer than 80 characters"), new Date());
         }
         // test Location Name Field - End
         // test Foodlocker toggle - Begin
@@ -575,7 +576,7 @@ class AP3_site extends AP3_GUI{
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
         json = new JSONObject(API_Response_Body);
@@ -590,24 +591,24 @@ class AP3_site extends AP3_GUI{
                 _t++;
                 _p++; EX += _t + "\t" + "Check preselected country is set to " + country + "\t" + "-" + "\t" + "country = " + t + "\t" + "PASS" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "country = " + t, false, ParentTest.createNode("Check preselected country is set to " + country));
+                Log_Html_Result("PASS", "country = " + t, false, ParentTest.createNode("Check preselected country is set to " + country), new Date());
             } else {
                 _t++;
                 _f++; EX += _t + "\t" + "Check preselected country is set to " + country + "\t" + "-" + "\t" + "country = " + t + "\t" + "FAIL" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "country = " + t, true, ParentTest.createNode("Check preselected country is set to " + country));
+                Log_Html_Result("FAIL", "country = " + t, true, ParentTest.createNode("Check preselected country is set to " + country), new Date());
             }     
         } else if (country.equals("CA")) {
             if (t.equals("Canada")) {
                 _t++;
                 _p++; EX += _t + "\t" + "Check preselected country is set to " + country + "\t" + "-" + "\t" + "country = " + t + "\t" + "PASS" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "country = " + t, false, ParentTest.createNode("Check preselected country is set to " + country));
+                Log_Html_Result("PASS", "country = " + t, false, ParentTest.createNode("Check preselected country is set to " + country), new Date());
             } else {
                 _t++;
                 _f++; EX += _t + "\t" + "Check preselected country is set to " + country + "\t" + "-" + "\t" + "country = " + t + "\t" + "FAIL" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "country = " + t, true, ParentTest.createNode("Check preselected country is set to " + country));
+                Log_Html_Result("FAIL", "country = " + t, true, ParentTest.createNode("Check preselected country is set to " + country), new Date());
             }
         }
 
@@ -628,7 +629,7 @@ class AP3_site extends AP3_GUI{
                 _t++;
                 _f++; EX += _t + "\t" + "Country list field to load as expected" + "\t" + "-" + "\t" + "Country list size = " + L0.size() + "\t" + "FAIL" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Country list size = " + L0.size(), true, ParentTest.createNode("Country list field to load as expected"));
+                Log_Html_Result("FAIL", "Country list size = " + L0.size(), true, ParentTest.createNode("Country list field to load as expected"), new Date());
             }
         }
 
@@ -701,12 +702,12 @@ class AP3_site extends AP3_GUI{
                     _t++;
                     _p++; EX += _t + "\t" + "Check state or province " + (i+1) + " is higlighted" + "\t" + "-" + "\t" + t.contains("highlighted") + "\t" + "PASS" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", String.valueOf(t.contains("highlighted")), false, ParentTest.createNode("Check state or province " + (i+1) + " is higlighted"));
+                    Log_Html_Result("PASS", String.valueOf(t.contains("highlighted")), false, ParentTest.createNode("Check state or province " + (i+1) + " is higlighted"), new Date());
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "Check state or province " + (i+1) + " is higlighted" + "\t" + "-" + "\t" + t.contains("highlighted") + "\t" + "FAIL" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", String.valueOf(t.contains("highlighted")), true, ParentTest.createNode("Check state or province " + (i+1) + " is higlighted"));
+                    Log_Html_Result("FAIL", String.valueOf(t.contains("highlighted")), true, ParentTest.createNode("Check state or province " + (i+1) + " is higlighted"), new Date());
                 } 
             }
             Thread.sleep(500);
@@ -714,7 +715,7 @@ class AP3_site extends AP3_GUI{
             _t++;
             _f++; EX += _t + "\t" + "List of states or provinces failed to load properly" + "\t" + "-" + "\t" + "List size = " + L1.size() + "\t" + "FAIL" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "List size = " + L1.size(), true, ParentTest.createNode("List of states or provinces failed to load properly"));
+            Log_Html_Result("FAIL", "List size = " + L1.size(), true, ParentTest.createNode("List of states or provinces failed to load properly"), new Date());
         }
         // test Address/Country/State/Zip code Fields - End
 
@@ -738,12 +739,12 @@ class AP3_site extends AP3_GUI{
             _t++;
             _p++; EX += _t + "\t" + "Check value in 'Location Information' is 100" + "\t" + "-" + "\t" + String.valueOf(t.length()) + "\t" + "PASS" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("PASS", String.valueOf(t.length()), false, ParentTest.createNode("Check value in 'Location Information' is 100"));
+            Log_Html_Result("PASS", String.valueOf(t.length()), false, ParentTest.createNode("Check value in 'Location Information' is 100"), new Date());
         } else {
             _t++;
             _f++; EX += _t + "\t" + "Check value in 'Location Information' is 100" + "\t" + "-" + "\t" + String.valueOf(t.length()) + "\t" + "FAIL" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", String.valueOf(t.length()), false, ParentTest.createNode("Check value in 'Location Information' is 100"));
+            Log_Html_Result("FAIL", String.valueOf(t.length()), false, ParentTest.createNode("Check value in 'Location Information' is 100"), new Date());
         }
         // test Location Information Text-area field - End
 
@@ -770,12 +771,12 @@ class AP3_site extends AP3_GUI{
                 _t++;
                 _p++; EX += _t + "\t" + "Check value of suggestion contains partial address" + "\t" + "-" + "\t" + String.valueOf(t.toLowerCase().contains("123")) + "\t" + "PASS" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("PASS", String.valueOf(t.toLowerCase().contains("123")), false, ParentTest.createNode("Check value of suggestion contains partial address"));
+                Log_Html_Result("PASS", String.valueOf(t.toLowerCase().contains("123")), false, ParentTest.createNode("Check value of suggestion contains partial address"), new Date());
             } else {
                 _t++;
                 _f++; EX += _t + "\t" + "Check value of suggestion contains partial address" + "\t" + "-" + "\t" + String.valueOf(t.toLowerCase().contains("123")) + "\t" + "FAIL" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", String.valueOf(t.toLowerCase().contains("123")), true, ParentTest.createNode("Check value of suggestion contains partial address"));
+                Log_Html_Result("FAIL", String.valueOf(t.toLowerCase().contains("123")), true, ParentTest.createNode("Check value of suggestion contains partial address"), new Date());
             }
         }
         if (country.equals("CA")) {
@@ -804,12 +805,12 @@ class AP3_site extends AP3_GUI{
             _t++;
             _p++; EX += _t + "\t" + "Check 'City' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.contains("")) + "\t" + "PASS" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("PASS", String.valueOf(!t.contains("")), false, ParentTest.createNode("Check 'City' was auto-filled"));
+            Log_Html_Result("PASS", String.valueOf(!t.contains("")), false, ParentTest.createNode("Check 'City' was auto-filled"), new Date());
         } else {
             _t++;
             _f++; EX += _t + "\t" + "Check 'City' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.contains("")) + "\t" + "FAIL" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", String.valueOf(!t.contains("")), true, ParentTest.createNode("Check 'City' was auto-filled"));
+            Log_Html_Result("FAIL", String.valueOf(!t.contains("")), true, ParentTest.createNode("Check 'City' was auto-filled"), new Date());
         }
         if (country.equals("US")) {
             Element_By_Path_Attribute("Get auto-filled value of 'Zip Code'", "xpath", "(//input[@aria-label='Zip Code'])[1]", "value", ParentTest, "no_jira");
@@ -818,12 +819,12 @@ class AP3_site extends AP3_GUI{
                 _t++;
                 _p++; EX += _t + "\t" + "Check 'Zip Code' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.equals("")) + "\t" + "PASS" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("PASS", String.valueOf(!t.equals("")), false, ParentTest.createNode("Check 'Zip Code' was auto-filled"));
+                Log_Html_Result("PASS", String.valueOf(!t.equals("")), false, ParentTest.createNode("Check 'Zip Code' was auto-filled"), new Date());
             } else {
                 _t++;
                 _p++; EX += _t + "\t" + "Check 'Zip Code' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.equals("")) + "\t" + "FAIL" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", String.valueOf(!t.equals("")), true, ParentTest.createNode("Check 'Zip Code' was auto-filled"));
+                Log_Html_Result("FAIL", String.valueOf(!t.equals("")), true, ParentTest.createNode("Check 'Zip Code' was auto-filled"), new Date());
             }
 //            Element_By_Path_Click("Click > 'State'","xpath", "(//input[@aria-label='State'])[1]", ParentTest, "no_jira");
 //            if (FAIL) { return;}
@@ -833,12 +834,12 @@ class AP3_site extends AP3_GUI{
                 _t++;
                 _p++; EX += _t + "\t" + "Check 'State' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.equals("")) + "\t" + "PASS" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("PASS", String.valueOf(!t.equals("")), false, ParentTest.createNode("Check 'State' was auto-filled"));
+                Log_Html_Result("PASS", String.valueOf(!t.equals("")), false, ParentTest.createNode("Check 'State' was auto-filled"), new Date());
             } else {
                 _t++;
                 _p++; EX += _t + "\t" + "Check 'State' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.equals("")) + "\t" + "FAIL" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", String.valueOf(!t.equals("")), true, ParentTest.createNode("Check 'State' was auto-filled"));
+                Log_Html_Result("FAIL", String.valueOf(!t.equals("")), true, ParentTest.createNode("Check 'State' was auto-filled"), new Date());
             }
         } else {
             Element_By_Path_Attribute("Get auto-filled value of 'Postal Code'", "xpath", "(//input[@aria-label='Postal Code'])[1]", "value", ParentTest, "no_jira");
@@ -847,12 +848,12 @@ class AP3_site extends AP3_GUI{
                 _t++;
                 _p++; EX += _t + "\t" + "Check 'Postal Code' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.equals("")) + "\t" + "PASS" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("PASS", String.valueOf(!t.equals("")), false, ParentTest.createNode("Check 'Postal Code' was auto-filled"));
+                Log_Html_Result("PASS", String.valueOf(!t.equals("")), false, ParentTest.createNode("Check 'Postal Code' was auto-filled"), new Date());
             } else {
                 _t++;
                 _p++; EX += _t + "\t" + "Check 'Postal Code' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.equals("")) + "\t" + "FAIL" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", String.valueOf(!t.equals("")), true, ParentTest.createNode("Check 'Postal Code' was auto-filled"));
+                Log_Html_Result("FAIL", String.valueOf(!t.equals("")), true, ParentTest.createNode("Check 'Postal Code' was auto-filled"), new Date());
             }
 //            Element_By_Path_Click("Click > 'Province'","xpath", "(//input[@aria-label='Province'])[1]", ParentTest, "no_jira");
 //            if (FAIL) { return;}
@@ -862,12 +863,12 @@ class AP3_site extends AP3_GUI{
                 _t++;
                 _p++; EX += _t + "\t" + "Check 'Province' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.equals("")) + "\t" + "PASS" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("PASS", String.valueOf(!t.equals("")), false, ParentTest.createNode("Check 'Province' was auto-filled"));
+                Log_Html_Result("PASS", String.valueOf(!t.equals("")), false, ParentTest.createNode("Check 'Province' was auto-filled"), new Date());
             } else {
                 _t++;
                 _p++; EX += _t + "\t" + "Check 'Province' was auto-filled" + "\t" + "-" + "\t" + String.valueOf(!t.equals("")) + "\t" + "FAIL" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", String.valueOf(!t.equals("")), true, ParentTest.createNode("Check 'Province' was auto-filled"));
+                Log_Html_Result("FAIL", String.valueOf(!t.equals("")), true, ParentTest.createNode("Check 'Province' was auto-filled"), new Date());
             }
         }
         // create a Location drop-off with 'Auto-filled' Address
@@ -916,7 +917,7 @@ class AP3_site extends AP3_GUI{
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }        
         json = new JSONObject(API_Response_Body);
@@ -926,12 +927,12 @@ class AP3_site extends AP3_GUI{
             _t++;
             _p++; EX += _t + "\t" + "Check > Number of Locations" + "\t" + "-" + "\t" + "expected: " + delivery_destinations.length() + " / output: " + L3.size() + "(5MAX shown on table, if expected is > 5)" + "\t" + "PASS" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("PASS", "expected: " + delivery_destinations.length() + " / output: " + L3.size(), false, ParentTest.createNode("Check > Number of Locations"));
+            Log_Html_Result("PASS", "expected: " + delivery_destinations.length() + " / output: " + L3.size(), false, ParentTest.createNode("Check > Number of Locations"), new Date());
         } else {
             _t++;
             _f++; EX += _t + "\t" + "Check > Number of Locations" + "\t" + "-" + "\t" + "expected: " + delivery_destinations.length() + " / output: " + L3.size() + "\t" + "FAIL" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "expected: " + delivery_destinations.length() + " / output: " + L3.size(), true, ParentTest.createNode("Check > Number of Locations"));
+            Log_Html_Result("FAIL", "expected: " + delivery_destinations.length() + " / output: " + L3.size(), true, ParentTest.createNode("Check > Number of Locations"), new Date());
         }
         // test Address auto-fill - End
         // </editor-fold>
@@ -948,6 +949,7 @@ class AP3_site extends AP3_GUI{
         if (FAIL) { return;}
         Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
         if (FAIL) { return;}
+        Thread.sleep(WaitForElement);
         Move_to_Element_By_Path("Move > Location in table", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]", ParentTest, "no_jira");
         if (FAIL) { return;}
         Element_By_Path_Click("Edit > Location ", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]//i[contains(@class,'mdi-pencil')]", ParentTest, "no_jira");
@@ -1047,7 +1049,7 @@ class AP3_site extends AP3_GUI{
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }        
         json = new JSONObject(API_Response_Body);
@@ -1057,19 +1059,20 @@ class AP3_site extends AP3_GUI{
             _t++;
             _p++; EX += _t + "\t" + "Check > Number of Locations" + "\t" + "-" + "\t" + "expected: " + delivery_destinations.length() + " / output: " + L3.size() + "\t" + "PASS" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("PASS", "expected: " + delivery_destinations.length() + " / output: " + L3.size(), false, ParentTest.createNode("Check > Number of Locations"));
+            Log_Html_Result("PASS", "expected: " + delivery_destinations.length() + " / output: " + L3.size(), false, ParentTest.createNode("Check > Number of Locations"), new Date());
         } else {
             _t++;
             _f++; EX += _t + "\t" + "Check > Number of Locations" + "\t" + "-" + "\t" + "expected: " + delivery_destinations.length() + " / output: " + L3.size() + "\t" + "FAIL" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "expected: " + delivery_destinations.length() + " / output: " + L3.size(), true, ParentTest.createNode("Check > Number of Locations"));
+            Log_Html_Result("FAIL", "expected: " + delivery_destinations.length() + " / output: " + L3.size(), true, ParentTest.createNode("Check > Number of Locations"), new Date());
         }
         //test Edit location
         Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
         if (FAIL) { return;}
-        Move_to_Element_By_Path("Move > Location in table", "xpath", "(//td[contains(text(),'-copy')])[1]", ParentTest, "no_jira");
+        Thread.sleep(WaitForElement);
+        Move_to_Element_By_Path("Move > Location in table", "xpath", "(//td[contains(text(),'"+New_ID+"') and contains(text(),'-copy')])[1]", ParentTest, "no_jira");
         if (FAIL) { return;}
-        Element_By_Path_Click("Edit > Location ", "xpath", "(//td[contains(text(),'-copy')])[1]/parent::tr//i[contains(@class,'mdi-pencil')]", ParentTest, "no_jira");
+        Element_By_Path_Click("Edit > Location ", "xpath", "(//td[contains(text(),'"+New_ID+"') and contains(text(),'-copy')])[1]/parent::tr//i[contains(@class,'mdi-pencil')]", ParentTest, "no_jira");
         if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for 'Edit Drop-off Location' dialog", "xpath", "//*[@class='v-dialog v-dialog--active']//*[contains(text(),'Edit Drop-off Location')]", ParentTest, "no_jira");
         if (FAIL) { return;}
@@ -1081,12 +1084,12 @@ class AP3_site extends AP3_GUI{
             _t++;
             _p++; EX += _t + "\t" + "Check > 'Location Name' of cloned location" + "\t" + "-" + "\t" + String.valueOf(loc_name_before_edit.equals(loc_name_before_clone + "-copy")) + "\t" + "PASS" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("PASS", String.valueOf(loc_name_before_edit.equals(loc_name_before_clone + "-copy")), false, ParentTest.createNode("Check > 'Location Name' of cloned location"));
+            Log_Html_Result("PASS", String.valueOf(loc_name_before_edit.equals(loc_name_before_clone + "-copy")), false, ParentTest.createNode("Check > 'Location Name' of cloned location"), new Date());
         } else {
             _t++;
             _f++; EX += _t + "\t" + "Check > 'Location Name' of cloned location" + "\t" + "-" + "\t" + String.valueOf(loc_name_before_edit.equals(loc_name_before_clone + "-copy")) + "\t" + "FAIL" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", String.valueOf(loc_name_before_edit.equals(loc_name_before_clone + "-copy")), true, ParentTest.createNode("Check > 'Location Name' of cloned location"));
+            Log_Html_Result("FAIL", String.valueOf(loc_name_before_edit.equals(loc_name_before_clone + "-copy")), true, ParentTest.createNode("Check > 'Location Name' of cloned location"), new Date());
         }
 
         Element_By_Path_Attribute("Get value of 'Address'", "xpath", "(//input[@aria-label='Address'])[1]", "value", ParentTest, "no_jira");
@@ -1096,12 +1099,12 @@ class AP3_site extends AP3_GUI{
             _t++;
             _p++; EX += _t + "\t" + "Check > 'Address' of cloned location" + "\t" + "-" + "\t" + String.valueOf(addr_before_edit.equals(addr_before_clone)) + "\t" + "PASS" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("PASS", String.valueOf(addr_before_edit.equals(addr_before_clone)), false, ParentTest.createNode("Check > 'Address' of cloned location"));
+            Log_Html_Result("PASS", String.valueOf(addr_before_edit.equals(addr_before_clone)), false, ParentTest.createNode("Check > 'Address' of cloned location"), new Date());
         } else {
             _t++;
             _f++; EX += _t + "\t" + "Check > 'Address' of cloned location" + "\t" + "-" + "\t" + String.valueOf(addr_before_edit.equals(addr_before_clone)) + "\t" + "FAIL" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", String.valueOf(addr_before_edit.equals(addr_before_clone)), true, ParentTest.createNode("Check > 'Address' of cloned location"));
+            Log_Html_Result("FAIL", String.valueOf(addr_before_edit.equals(addr_before_clone)), true, ParentTest.createNode("Check > 'Address' of cloned location"), new Date());
         }
 
         Element_By_Path_Attribute("Get value of 'City'", "xpath", "(//input[@aria-label='City'])[1]", "value", ParentTest, "no_jira");
@@ -1111,12 +1114,12 @@ class AP3_site extends AP3_GUI{
             _t++;
             _p++; EX += _t + "\t" + "Check > 'City' of cloned location" + "\t" + "-" + "\t" + String.valueOf(city_before_edit.equals(city_before_clone)) + "\t" + "PASS" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("PASS", String.valueOf(city_before_edit.equals(city_before_clone)), false, ParentTest.createNode("Check > 'City' of cloned location"));
+            Log_Html_Result("PASS", String.valueOf(city_before_edit.equals(city_before_clone)), false, ParentTest.createNode("Check > 'City' of cloned location"), new Date());
         } else {
             _t++;
             _f++; EX += _t + "\t" + "Check > 'City' of cloned location" + "\t" + "-" + "\t" + String.valueOf(city_before_edit.equals(city_before_clone)) + "\t" + "FAIL" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", String.valueOf(city_before_edit.equals(city_before_clone)), true, ParentTest.createNode("Check > 'City' of cloned location"));
+            Log_Html_Result("FAIL", String.valueOf(city_before_edit.equals(city_before_clone)), true, ParentTest.createNode("Check > 'City' of cloned location"), new Date());
         }
         String city_after_edit = "";
         String stateprovince_before_edit = "";
@@ -1131,12 +1134,12 @@ class AP3_site extends AP3_GUI{
                 _t++;
                 _p++; EX += _t + "\t" + "Check > 'State' of cloned location" + "\t" + "-" + "\t" + String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)) + "\t" + "PASS" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("PASS", String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)), false, ParentTest.createNode("Check > 'State' of cloned location"));
+                Log_Html_Result("PASS", String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)), false, ParentTest.createNode("Check > 'State' of cloned location"), new Date());
             } else {
                 _t++;
                 _f++; EX += _t + "\t" + "Check > 'State' of cloned location" + "\t" + "-" + "\t" + String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)) + "\t" + "FAIL" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)), true, ParentTest.createNode("Check > 'State' of cloned location"));
+                Log_Html_Result("FAIL", String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)), true, ParentTest.createNode("Check > 'State' of cloned location"), new Date());
             }
 
             Element_By_Path_Attribute("Get value of 'Zip Code'", "xpath", "(//input[@aria-label='Zip Code'])[1]", "value", ParentTest, "no_jira");
@@ -1146,12 +1149,12 @@ class AP3_site extends AP3_GUI{
                 _t++;
                 _p++; EX += _t + "\t" + "Check > 'Zip' of cloned location" + "\t" + "-" + "\t" + String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)) + "\t" + "PASS" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("PASS", String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)), false, ParentTest.createNode("Check > 'Zip' of cloned location"));
+                Log_Html_Result("PASS", String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)), false, ParentTest.createNode("Check > 'Zip' of cloned location"), new Date());
             } else {
                 _t++;
                 _f++; EX += _t + "\t" + "Check > 'Zip' of cloned location" + "\t" + "-" + "\t" + String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)) + "\t" + "FAIL" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)), true, ParentTest.createNode("Check > 'Zip' of cloned location"));
+                Log_Html_Result("FAIL", String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)), true, ParentTest.createNode("Check > 'Zip' of cloned location"), new Date());
             }
             Move_to_Element_By_Path("Move > 'City' field", "xpath", "(//*[contains(text(),'City')])[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -1201,12 +1204,12 @@ class AP3_site extends AP3_GUI{
                 _t++;
                 _p++; EX += _t + "\t" + "Check > 'Province' of cloned location" + "\t" + "-" + "\t" + String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)) + "\t" + "PASS" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("PASS", String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)), false, ParentTest.createNode("Check > 'Province' of cloned location"));
+                Log_Html_Result("PASS", String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)), false, ParentTest.createNode("Check > 'Province' of cloned location"), new Date());
             } else {
                 _t++;
                 _f++; EX += _t + "\t" + "Check > 'Province' of cloned location" + "\t" + "-" + "\t" + String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)) + "\t" + "FAIL" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)), true, ParentTest.createNode("Check > 'Province' of cloned location"));
+                Log_Html_Result("FAIL", String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)), true, ParentTest.createNode("Check > 'Province' of cloned location"), new Date());
             }
             Element_By_Path_Attribute("Get value of 'Postal Code'", "xpath", "(//input[@aria-label='Postal Code'])[1]", "value", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -1215,12 +1218,12 @@ class AP3_site extends AP3_GUI{
                 _t++;
                 _p++; EX += _t + "\t" + "Check > 'Postal' of cloned location" + "\t" + "-" + "\t" + String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)) + "\t" + "PASS" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("PASS", String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)), false, ParentTest.createNode("Check > 'Postal' of cloned location"));
+                Log_Html_Result("PASS", String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)), false, ParentTest.createNode("Check > 'Postal' of cloned location"), new Date());
             } else {
                 _t++;
                 _f++; EX += _t + "\t" + "Check > 'Postal' of cloned location" + "\t" + "-" + "\t" + String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)) + "\t" + "FAIL" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)), true, ParentTest.createNode("Check > 'Postal' of cloned location"));
+                Log_Html_Result("FAIL", String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)), true, ParentTest.createNode("Check > 'Postal' of cloned location"), new Date());
             }
             Move_to_Element_By_Path("Move > 'City' field", "xpath", "(//*[contains(text(),'City')])[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -1274,12 +1277,12 @@ class AP3_site extends AP3_GUI{
             _t++;
             _p++; EX += _t + "\t" + "Check > 'Location Information' of cloned location" + "\t" + "-" + "\t" + String.valueOf(loc_info_before_edit.equals(loc_info_before_clone)) + "\t" + "PASS" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("PASS", String.valueOf(loc_info_before_edit.equals(loc_info_before_clone)), false, ParentTest.createNode("Check > 'Location Information' of cloned location"));
+            Log_Html_Result("PASS", String.valueOf(loc_info_before_edit.equals(loc_info_before_clone)), false, ParentTest.createNode("Check > 'Location Information' of cloned location"), new Date());
         } else {
             _t++;
             _f++; EX += _t + "\t" + "Check > 'Location Information' of cloned location" + "\t" + "-" + "\t" + String.valueOf(loc_info_before_edit.equals(loc_info_before_clone)) + "\t" + "FAIL" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", String.valueOf(loc_info_before_edit.equals(loc_info_before_clone)), true, ParentTest.createNode("Check > 'Location Information' of cloned location"));
+            Log_Html_Result("FAIL", String.valueOf(loc_info_before_edit.equals(loc_info_before_clone)), true, ParentTest.createNode("Check > 'Location Information' of cloned location"), new Date());
         }
         Move_to_Element_By_Path("Move > 'Location Name' field", "xpath", "(//*[contains(text(),'Location Name')])[1]", ParentTest, "no_jira");
         if (FAIL) { return;}
@@ -1362,7 +1365,7 @@ class AP3_site extends AP3_GUI{
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }        
         json = new JSONObject(API_Response_Body);
@@ -1385,12 +1388,12 @@ class AP3_site extends AP3_GUI{
                         _t++;
                         _p++; EX += _t + "\t" + "Check > Edited location" + "\t" + "-" + "\t" + "location was edited correctly" + "\t" + "PASS" + "\t" 
                                     + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "location was edited correctly", false, ParentTest.createNode("Check > Edited location"));
+                        Log_Html_Result("PASS", "location was edited correctly", false, ParentTest.createNode("Check > Edited location"), new Date());
                     } else {
                         _t++;
                         _f++; EX += _t + "\t" + "Check > Edited location" + "\t" + "-" + "\t" + "location was not edited correctly" + "\t" + "FAIL" + "\t" 
                                     + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "location was not edited correctly", false, ParentTest.createNode("Check > Edited location"));
+                        Log_Html_Result("FAIL", "location was not edited correctly", false, ParentTest.createNode("Check > Edited location"), new Date());
                     }
                 } 
             }
@@ -1405,6 +1408,7 @@ class AP3_site extends AP3_GUI{
         // 4. Filter (currently only works by Location name)
         Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
         if (FAIL) { return;}
+        Thread.sleep(WaitForElement);
         Move_to_Element_By_Path("Move > Location in table", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]", ParentTest, "no_jira");
         if (FAIL) { return;}
         Element_By_Path_Click("Clone > Location ", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]//i[contains(@class,'mdi-content-copy')]", ParentTest, "no_jira");
@@ -1448,6 +1452,7 @@ class AP3_site extends AP3_GUI{
         if (FAIL) { return;}
         Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
         if (FAIL) { return;}
+        Thread.sleep(WaitForElement);
         Move_to_Element_By_Path("Move > Location in table", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[3]", ParentTest, "no_jira");
         if (FAIL) { return;}
         Element_By_Path_Click("Clone > Location ", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[3]//i[contains(@class,'mdi-content-copy')]", ParentTest, "no_jira");
@@ -1487,6 +1492,9 @@ class AP3_site extends AP3_GUI{
 //        if (FAIL) { return;}
 //        Element_By_Path_Click("Click 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
 //        if (FAIL) { return;}
+        Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
+        if (FAIL) { return;}
+        Thread.sleep(WaitForElement);
         Wait_For_Element_By_Path_Presence("Wait for presence of 'Delivery Drop-off Locations' sections", "xpath", "//*[@class='H5-Primary-Left' and text()='Delivery Drop-off Locations']", ParentTest, "no_jira");
         if (FAIL) { return;}
         List_L3("Get List of Locations", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
@@ -1494,11 +1502,13 @@ class AP3_site extends AP3_GUI{
         //Click on Location Name column label to sort in decending order
         Element_By_Path_Click("Click > 'Location Name' column header", "xpath", "(//*[@id='drop-off-locations']//*[contains(@class,'column sortable')])[1]", ParentTest, "no_jira");
         if (FAIL) { return;}
+        Thread.sleep(WaitForElement);
         Wait_For_Element_By_Path_Presence("Check Sort > 'Descending'", "xpath", "((//tbody)[3]//tr)[1]//td[contains(text(),'Sort-filter')]", ParentTest, "no_jira");
         if (FAIL) { return;}
         //Click on Location Name column label to sort in ascending order
         Element_By_Path_Click("Click > 'Location Name' column header", "xpath", "(//*[@id='drop-off-locations']//*[contains(@class,'column sortable')])[1]", ParentTest, "no_jira");
         if (FAIL) { return;}
+        Thread.sleep(WaitForElement);
         String first_loc_in_record = "";
         if (loc_name_before_clone.contains("-X")) {
             int indx = loc_name_before_clone.indexOf("-X");
@@ -1527,19 +1537,19 @@ class AP3_site extends AP3_GUI{
                     _t++;
                     _p++; EX += _t + "\t" + "Check > Filtered crrectly" + "\t" + "-" + "\t" + "location "+(i+1)+" was filtered correctly" + "\t" + "PASS" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "location "+(i+1)+" was filtered correctly", false, ParentTest.createNode("Check > Edited location"));
+                    Log_Html_Result("PASS", "location "+(i+1)+" was filtered correctly", false, ParentTest.createNode("Check > Edited location"), new Date());
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "Check > Filtered crrectly" + "\t" + "-" + "\t" + "location "+(i+1)+" was not filtered correctly" + "\t" + "FAIL" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "location "+(i+1)+" was not filtered correctly", true, ParentTest.createNode("Check > Filtered crrectly"));
+                    Log_Html_Result("FAIL", "location "+(i+1)+" was not filtered correctly", true, ParentTest.createNode("Check > Filtered crrectly"), new Date());
                 }
             }
         } else {
             _t++;
             _f++; EX += _t + "\t" + "Check List was Filtered" + "\t" + "-" + "\t" + "locations failed to filter" + "\t" + "FAIL" + "\t" 
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "locations failed to filter", true, ParentTest.createNode("Check List was Filtered"));
+            Log_Html_Result("FAIL", "locations failed to filter", true, ParentTest.createNode("Check List was Filtered"), new Date());
         }
         Element_By_Path_Input_Select_Clear("Clear > 'Search Locations' field", "xpath", "//*[@aria-label='Search Locations']", ParentTest, "no_jira");
         if (FAIL) { return;}
@@ -1589,7 +1599,7 @@ class AP3_site extends AP3_GUI{
                 }else{
                     EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"));
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"), new Date());
                     return;
                 }        
                 json = new JSONObject(API_Response_Body);
@@ -1600,22 +1610,21 @@ class AP3_site extends AP3_GUI{
                 _t++;
                 _p++; EX += _t + "\t" + "Check > number of locations after a delete" + "\t" + "-" + "\t" + "Before: " + L3.size() + " After: " + num_of_locs_after_delete + "\t" + "PASS" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Before: " + L3.size() + " After: " + num_of_locs_after_delete, false, ParentTest.createNode("Check > number of locations after a delete"));
+                Log_Html_Result("PASS", "Before: " + L3.size() + " After: " + num_of_locs_after_delete, false, ParentTest.createNode("Check > number of locations after a delete"), new Date());
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "Check > number of locations after a delete" + "\t" + "-" + "\t" + "Before: " + L3.size() + " After: " + num_of_locs_after_delete + "\t" + "FAIL" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "Before: " + L3.size() + " After: " + num_of_locs_after_delete, false, ParentTest.createNode("Check > number of locations after a delete"));
+                    Log_Html_Result("FAIL", "Before: " + L3.size() + " After: " + num_of_locs_after_delete, false, ParentTest.createNode("Check > number of locations after a delete"), new Date());
                 }
             }   
         }
         // </editor-fold>
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations End >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold>
-        
+        d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
 //        Navigate_Back("Navigate Back", SITE + "Site Configuration","Station List", ParentTest, "no_jira");
         //if (FAIL) { return;}
-        Thread.sleep(500); 
 //        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
 //            if (FAIL) { return;}               
 //        Navigate_Back("Navigate Back", SITE + "Station List","App Sites page", ParentTest, "no_jira");
