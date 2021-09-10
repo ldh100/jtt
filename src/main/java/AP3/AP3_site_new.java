@@ -1755,36 +1755,44 @@ class AP3_site_new extends AP3_GUI{
             if(meta.getBoolean("has_kds") && flag == 1)  {//Print pass type of kds is cdl
                 _t++;
                 _p++; EX += _t + "\t" + "Type of KDS Found-as expected" + "\t" + "CDL" + "\t" + "CDL" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("PASS", "Type of KDS (CDL )Found-as expected", false, ParentTest.createNode("Type of KDS (CDL) Found-as expected"));                   
             } else {//Fail expected false. but Cdl true & has kds is false
                 _t++;
                 _f++; EX += _t + "\t" + "Type of KDS Not Found as expected" + "\t" + "CDL" + "\t" + "Not CDL" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("FAIL", "Type of KDS (CDL) - Not Found but expected", true, ParentTest.createNode("Type of KDS (CDL) - Not Found but expected"));
             }
         }
         if(meta.getJSONObject("type_of_kds").getBoolean("nextep")) {
             if(!meta.getBoolean("has_kds") && flag == 2) {//Print type of KDS is nextep
                 _t++;
                 _p++; EX += _t + "\t" + "Type of KDS Found-as expected" + "\t" + "Nextep" + "\t" + "Nextep" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("PASS", "Type of KDS (Nextep) - Found -as expected", false, ParentTest.createNode("Type of KDS (Nextep) - Found as expected"));
             } else {//FAIL   Has kds and nextep is true.
                 _t++;
                 _f++; EX += _t + "\t" + "Type of KDS Not Found as expected " + "\t" + "Nextep" + "\t" + "Not Nextep" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("FAIL", "Type of KDS (Nextep) - Not Found but expected", true, ParentTest.createNode("Type of KDS (Nextep) - Not Found but expected")); 
             }
         }
         if(meta.getJSONObject("type_of_kds").getBoolean("volante") ) {
             if(!meta.getBoolean("has_kds") && flag == 3) {//Print type of KDS is volante
                 _t++;
                 _p++; EX += _t + "\t" + "Type of KDS Found-as expected" + "\t" + "Volante" + "\t" + "Volante" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("PASS", "Type of KDS (Volante) - Found -as expected", false, ParentTest.createNode("Type of KDS (Volante) - Found as expected"));
             } else {//FAIL   Has kds and volante is true.
                 _t++;
                 _f++; EX += _t + "\t" + "Type of KDS Not Found as expected " + "\t" + "Volante" + "\t" + "Not Volante" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("FAIL", "Type of KDS (Volante) - Not Found but expected", true, ParentTest.createNode("Type of KDS (Volante) - Not Found but expected")); 
             }
         }
         if(meta.getJSONObject("type_of_kds").getBoolean("agilysys")) {
             if(!meta.getBoolean("has_kds") && flag == 4)  {//Print type of KDS is agilysys
                 _t++;
                 _p++; EX += _t + "\t" + "Type of KDS Found-as expected" + "\t" + "Agilysys" + "\t" + "Agilysys" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+               Log_Html_Result("PASS", "Type of KDS (Agilysys) - Found -as expected", false, ParentTest.createNode("Type of KDS (Agilysys) - Found as expected"));
             }  else {//FAIL   Has kds and agilysys is true.
                 _t++;
                 _f++; EX += _t + "\t" + "Type of KDS Not Found as expected " + "\t" + "Agilysys" + "\t" + "Not Agilysys" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+               Log_Html_Result("FAIL", "Type of KDS (Agilysys) - Not Found -but expected", true, ParentTest.createNode("Type of KDS (Agilysys) - Not Found but expected"));                 
             }
         }
          
@@ -1797,12 +1805,14 @@ class AP3_site_new extends AP3_GUI{
             if(meta.getBoolean("hidden"))  { 
                 _t++;
                 _p++; EX += _t + "\t" + "Brand is hidden" + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("PASS", "Brand is hidden", false, ParentTest.createNode("Brand is hidden"));   
             } else  { 
                 check = true; 
             }   
         }else if(!meta.has("hidden") || check) { // Print Brand is visible.
             _t++;
             _p++; EX += _t + "\t" + "Brand is visible" + "\t" + "-" + "\t" + "Brand is Visible" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+             Log_Html_Result("PASS", "Brand is visible", false, ParentTest.createNode("Brand is visible"));           
         }
        
         /*                      Verify if scan and go is supported 
