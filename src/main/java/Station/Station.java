@@ -77,7 +77,7 @@ public class Station extends javax.swing.JInternalFrame {
         jScrollPane8 = new javax.swing.JScrollPane();
         DV_Menus = new javax.swing.JTable();
         jScrollPane9 = new javax.swing.JScrollPane();
-        DV_BTS = new javax.swing.JTable();
+        DV_DTS = new javax.swing.JTable();
         lblMTS = new javax.swing.JLabel();
         lblBTS = new javax.swing.JLabel();
         btnSave_Opt = new javax.swing.JButton();
@@ -220,11 +220,6 @@ public class Station extends javax.swing.JInternalFrame {
         DV_MTS.setName("DV_MTS"); // NOI18N
         DV_MTS.setRowHeight(18);
         DV_MTS.getTableHeader().setReorderingAllowed(false);
-        DV_MTS.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DV_MTSMouseClicked(evt);
-            }
-        });
         jScrollPane4.setViewportView(DV_MTS);
 
         getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 188, 84, 172));
@@ -317,8 +312,8 @@ public class Station extends javax.swing.JInternalFrame {
 
         getContentPane().add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 384, 68));
 
-        DV_BTS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        DV_BTS.setModel(new javax.swing.table.DefaultTableModel(
+        DV_DTS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        DV_DTS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -326,28 +321,23 @@ public class Station extends javax.swing.JInternalFrame {
 
             }
         ));
-        DV_BTS.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV_BTS.setCellSelectionEnabled(true);
-        DV_BTS.setGridColor(java.awt.SystemColor.activeCaptionBorder);
-        DV_BTS.setName("DV_BTS"); // NOI18N
-        DV_BTS.setRowHeight(18);
-        DV_BTS.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        DV_BTS.getTableHeader().setReorderingAllowed(false);
-        DV_BTS.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DV_BTSMouseClicked(evt);
-            }
-        });
-        jScrollPane9.setViewportView(DV_BTS);
+        DV_DTS.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        DV_DTS.setCellSelectionEnabled(true);
+        DV_DTS.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_DTS.setName("DV_DTS"); // NOI18N
+        DV_DTS.setRowHeight(18);
+        DV_DTS.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        DV_DTS.getTableHeader().setReorderingAllowed(false);
+        jScrollPane9.setViewportView(DV_DTS);
 
         getContentPane().add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 20, 84, 148));
 
         lblMTS.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
-        lblMTS.setText("Menu Timeslots");
+        lblMTS.setText("Pickup TSlots");
         getContentPane().add(lblMTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 172, 84, 16));
 
         lblBTS.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
-        lblBTS.setText("Brand Timeslots");
+        lblBTS.setText("Delivery TSlots");
         getContentPane().add(lblBTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 4, 80, -1));
 
         btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
@@ -587,7 +577,6 @@ public class Station extends javax.swing.JInternalFrame {
         BrandLastRow = DV_Brands.getSelectedRow();  
         
         GetBrandDropOffLocations(); // ===================================
-        GetBrandTimeslots();        // ===================================
         GetMenus();                 // ===================================  
         Validate_Place_Order();
     }//GEN-LAST:event_DV_BrandsMouseClicked
@@ -622,12 +611,6 @@ public class Station extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cmbAppItemStateChanged
 
-    private void DV_MTSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_MTSMouseClicked
-        if(DV_MTS.getRowCount() > 0 && DV_BTS.getRowCount() > 0){
-            DV_BTS.clearSelection();
-        }
-    }//GEN-LAST:event_DV_MTSMouseClicked
-
     private void DV_ItemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_ItemsMouseClicked
         if (ItemLastRow == DV_Items.getSelectedRow()) {
             return;
@@ -648,12 +631,6 @@ public class Station extends javax.swing.JInternalFrame {
         MenuLastRow = DV_Menus.getSelectedRow();  
         Validate_Place_Order();        
     }//GEN-LAST:event_DV_MenusMouseClicked
-
-    private void DV_BTSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_BTSMouseClicked
-        if(DV_MTS.getRowCount() > 0 && DV_BTS.getRowCount() > 0){
-            DV_MTS.clearSelection();
-        }
-    }//GEN-LAST:event_DV_BTSMouseClicked
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
         Load_Form();
@@ -1003,7 +980,7 @@ public class Station extends javax.swing.JInternalFrame {
         DV_Menus.setModel(Model);
         DV_Items.setModel(Model);
         DV_Mods.setModel(Model);
-        DV_BTS.setModel(Model);
+        DV_DTS.setModel(Model);
         DV_MTS.setModel(Model);
         lblMenus.setText("Click Brand to get Menu(s) ...");              
      
@@ -1089,7 +1066,7 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3)); 
 //            GetBrandDropOffLocations(); // ============== comment to force only after Brand click / selection
-//            GetBrandTimeslots();        // ============== comment to force only after Brand click / selection
+//            GetDeliveryTimeslots();        // ============== comment to force only after Brand click / selection
 //            GetMenus();                 // ============== comment to force only after Brand click / selection
         } else {
             BrandID = "null";
@@ -1120,43 +1097,6 @@ public class Station extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
     }
     
-    private void GetBrandTimeslots(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n- Load Brand Timeslots ..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-       
-        String[] ColumnsName = {"Time", "epoch"}; 
-        DefaultTableModel BTS_Model = new DefaultTableModel();
-        BTS_Model.setColumnIdentifiers(ColumnsName);
-        DV_BTS.setModel(BTS_Model);        
-        try {
-            Api_Call("GET", BaseAPI + "/location/brand/" + BrandID + "/timeslots", "", "");
-            if (json.has("timeslots")) {
-                JSONArray timeslots = json.getJSONArray("timeslots");
-                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
-                for (int i = 0; i < timeslots.length(); i++) {
-                    JSONObject timeslot = timeslots.getJSONObject(i);
-                    BTS_Model.addRow(new Object[]{sdf.format(new Date(timeslot.getLong("id")*1000)), timeslot.getLong("id")});
-                }
-            } 
-            DV_BTS.setModel(BTS_Model); 
-            DV_BTS.setDefaultEditor(Object.class, null);
-            DV_BTS.getColumnModel().getColumn(0).setPreferredWidth(55);
-            DV_BTS.getColumnModel().getColumn(1).sizeWidthToFit();
-
-        } catch (Exception ex) {
-            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
-        }         
- 
-//        if(DV_BTS.getRowCount() > 0){
-//            DV_BTS.changeSelection(0, 0, false, false);
-//        }        
-        lblBTS.setText("Brand Slots " + DV_BTS.getRowCount());     
-        txtLog.append("=== Selected Brand > " + DV_BTS.getRowCount() + " Brand Slots" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());         
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-    }
     private void GetMenus(){
         txtLog.append("\r\n- Load Menus ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1226,14 +1166,54 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
      
+        GetDeliveryTimeslots();        // ===================================
         GetMenuTimeslots();
         GetItems();
         Validate_Place_Order();
         MenuLastRow = 0;
     }
+    private void GetDeliveryTimeslots(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("\r\n- Load Brand Timeslots ..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        
+        String MenuID = String.valueOf(DV_Menus.getValueAt(DV_Menus.getSelectedRow(), 2));
+        
+        String[] ColumnsName = {"Time", "epoch"}; 
+        DefaultTableModel DTS_Model = new DefaultTableModel();
+        DTS_Model.setColumnIdentifiers(ColumnsName);
+        DV_DTS.setModel(DTS_Model);        
+        try { 
+            Api_Call("GET", BaseAPI + "/location/brand/" + BrandID + "/timeslots/delivery/menu/" + MenuID, "", "");
+            if (json.has("timeslots")) {
+                JSONArray timeslots = json.getJSONArray("timeslots");
+                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
+                for (int i = 0; i < timeslots.length(); i++) {
+                    JSONObject timeslot = timeslots.getJSONObject(i);
+                    DTS_Model.addRow(new Object[]{sdf.format(new Date(timeslot.getLong("id")*1000)), timeslot.getLong("id")});
+                }
+            } 
+            DV_DTS.setModel(DTS_Model); 
+            DV_DTS.setDefaultEditor(Object.class, null);
+            DV_DTS.getColumnModel().getColumn(0).setPreferredWidth(55);
+            DV_DTS.getColumnModel().getColumn(1).sizeWidthToFit();
+
+        } catch (Exception ex) {
+            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
+        }         
+ 
+        if(DV_DTS.getRowCount() > 0){
+            DV_DTS.changeSelection(DV_DTS.getRowCount() - 1, 0, false, false);
+        }        
+        lblBTS.setText("Del Slots " + DV_DTS.getRowCount());     
+        txtLog.append("=== Selected Brand > " + DV_DTS.getRowCount() + " Delivert Time Slots" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());         
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+    }
     private void GetMenuTimeslots(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("\r\n- Load Menu Timeslots ..." + "\r\n");
+        txtLog.append("\r\n- Load Menu (Pickup) Timeslots ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String MenuID = String.valueOf(DV_Menus.getValueAt(DV_Menus.getSelectedRow(), 2));
         String[] BrandsColumnsName = {"Time", "epoch"}; 
@@ -1257,14 +1237,13 @@ public class Station extends javax.swing.JInternalFrame {
             
             
         if(DV_MTS.getRowCount() > 0){
-            DV_MTS.changeSelection(0, 0, false, false);
-        }     
+            DV_MTS.changeSelection(DV_MTS.getRowCount() - 1, 0, false, false);        }     
         } catch (Exception ex) {
             txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
         }          
         lblMTS.setText("Menu Slots " + DV_MTS.getRowCount());    
-        txtLog.append("=== Selected Menu > " + DV_MTS.getRowCount() + " Menu Slots" + "\r\n");
+        txtLog.append("=== Selected Menu > " + DV_MTS.getRowCount() + " Menu (Pickup) Time Slots" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -1534,8 +1513,8 @@ public class Station extends javax.swing.JInternalFrame {
             }
             Result = response.getStatusLine();
             status = response.getStatusCode();
-            if (status != 200) {
-                txtLog.append("Target Endpoint: " + EndPoint + "\r\n");
+            if (status != 200 && status != 201) {
+                txtLog.append("Endpoint: " + EndPoint + "\r\n");
                 txtLog.append("Result: " + status + " - " + Result + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());                
             }
@@ -1559,7 +1538,10 @@ public class Station extends javax.swing.JInternalFrame {
     private void Validate_Place_Order() {
         btnPOrder.setEnabled(false);
         btnDOrder.setEnabled(false);
-        if(DV_Items.getSelectedRowCount() > 0 && (DV_BTS.getSelectedRowCount() > 0 || DV_MTS.getSelectedRowCount() > 0)){
+        if(DV_Items.getSelectedRowCount() > 0 && DV_MTS.getSelectedRowCount() > 0){
+            btnPOrder.setEnabled(true);
+        }
+        if(DV_Items.getSelectedRowCount() > 0 && DV_DTS.getSelectedRowCount() > 0){
             btnPOrder.setEnabled(true);
             if(cmbLoc.getItemCount() > 0 && cmbLoc.getSelectedItem().toString().trim() != ""){
                 btnDOrder.setEnabled(true);
@@ -1577,7 +1559,7 @@ public class Station extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
             return;
         }
-        Set_Requested_Date();
+        Set_Requested_Date(TYPE);
         if(FAIL) {
             Validate_Place_Order();
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
@@ -1890,13 +1872,22 @@ public class Station extends javax.swing.JInternalFrame {
 
     private void Report_Tax(){
         try { 
-            double max_taxes = 0.0;
+            String TAX_RATES = "";
             TAXES = "";
-            combined_tax_rate = json.getJSONObject("taxes").getJSONObject("breakdown").getDouble("combined_tax_rate");
-            if(COUNTRY.toLowerCase().startsWith("c")){
-                gst_tax_rate = json.getJSONObject("taxes").getJSONObject("breakdown").getDouble("gst_tax_rate");
-                qst_tax_rate = json.getJSONObject("taxes").getJSONObject("breakdown").getDouble("qst_tax_rate");
-                pst_tax_rate = json.getJSONObject("taxes").getJSONObject("breakdown").getDouble("pst_tax_rate");
+            if(json.getJSONObject("taxes").has("breakdown")){
+                combined_tax_rate = json.getJSONObject("taxes").getJSONObject("breakdown").getDouble("combined_tax_rate");
+                if(COUNTRY.toLowerCase().startsWith("c")){
+                    gst_tax_rate = json.getJSONObject("taxes").getJSONObject("breakdown").getDouble("gst_tax_rate");
+                    qst_tax_rate = json.getJSONObject("taxes").getJSONObject("breakdown").getDouble("qst_tax_rate");
+                    pst_tax_rate = json.getJSONObject("taxes").getJSONObject("breakdown").getDouble("pst_tax_rate");
+                    TAX_RATES = "Rates > Combined " + combined_tax_rate + ", PST " + pst_tax_rate + ", GST " + gst_tax_rate + ", QST " + qst_tax_rate;
+                }else{
+                    TAX_RATES = "US Combined Tax Rate: " + combined_tax_rate;
+                }
+            }else if(json.getJSONObject("taxes").has("rate")){
+                TAX_RATES = "Tax Rate > " + json.getJSONObject("taxes").getDouble("rate") + " (no 'breakdown')";
+            }else{
+                TAX_RATES = "Tax Rates > no 'rate', no 'breakdown'";
             }
             service_fee = json.getJSONObject("service_fee").getDouble("amount");
             delivery_fee = json.getJSONObject("delivery_fee").getDouble("amount");
@@ -1908,12 +1899,7 @@ public class Station extends javax.swing.JInternalFrame {
             }
             sub_total = json.getJSONObject("sub_total").getDouble("amount");  
             taxes = json.getJSONObject("taxes").getDouble("amount");
-           
-            String TAX_RATES = "Rates > Combined " + combined_tax_rate + ", PST " + pst_tax_rate + ", GST " + gst_tax_rate + ", QST " + qst_tax_rate;
-            if(COUNTRY.toLowerCase().startsWith("u")){
-                TAX_RATES = "US Combined Tax Rate: " + combined_tax_rate;
-            }
-            
+                      
             TAXES += TAX_RATES + "\r\n" +
                 "Discount: " + promo_amount + ", Serv Fee: " + service_fee + ", Del Fee: " + delivery_fee + "\r\n" +
                 "Subtotal: " + sub_total + ", Tax: " + taxes +  ", Total: " + total;
@@ -1931,20 +1917,21 @@ public class Station extends javax.swing.JInternalFrame {
             String R = A.Func.SHOW_FILE(json.toString(4), "json");
         }
     }  
-    private void Set_Requested_Date(){
+    private void Set_Requested_Date(String TYPE){
         FAIL = false;
         Long TimeSlot = 0L;
         try{
-            if(DV_BTS.getSelectedRowCount() > 0){
-                TimeSlot = Long.parseLong(DV_BTS.getValueAt(DV_BTS.getSelectedRow(), 1).toString());            
-                txtLog.append("\r\n- " + "Set Order Requested date from Brand Timeslot...."+ "\r\n");
+            if(TYPE.equals("D")){
+                TimeSlot = Long.parseLong(DV_DTS.getValueAt(DV_DTS.getSelectedRow(), 1).toString());            
+                txtLog.append("\r\n- " + "Set Order Requested date from Delivery Timeslot...."+ "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
-            if(DV_MTS.getSelectedRowCount() > 0){
-                TimeSlot = Long.parseLong(DV_BTS.getValueAt(DV_MTS.getSelectedRow(), 1).toString());            
-                txtLog.append("\r\n- " + "Set Order Requested date from Menu Timeslot...."+ "\r\n");
+            if(TYPE.equals("P")){
+                TimeSlot = Long.parseLong(DV_MTS.getValueAt(DV_MTS.getSelectedRow(), 1).toString());            
+                txtLog.append("\r\n- " + "Set Order Requested date from Menu (Pickup) Timeslot...."+ "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
+            
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
             sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
             Date requested_date = new Date(TimeSlot *1000L);
@@ -2044,16 +2031,17 @@ public class Station extends javax.swing.JInternalFrame {
         Auth = "Bearer " + Access_TKN;
         JSONObject requestParams = new JSONObject();
         requestParams.put("nameOnCard", "JTT API Automation");
-        requestParams.put("avsVerificationRequired", true);
-        requestParams.put("isPreferred", true);
         requestParams.put("cardNumber", "4111111111111111"); // Visa
-        requestParams.put("expiryYear", 2024);
-        requestParams.put("expiryMonth", 12);
         requestParams.put("CVV", "123");
+        requestParams.put("avsVerificationRequired", true);
         requestParams.put("cvvVerificationRequired", true);
         JSONObject billingAddress = new JSONObject();
-        billingAddress.put("postalCode", "L3L3C4");
-        requestParams.put("billingAddress", billingAddress);
+            billingAddress.put("postalCode", "L3L3C4");
+        requestParams.put("billingAddress", billingAddress); 
+        requestParams.put("isPreferred", true);
+        requestParams.put("expiryMonth", 12);
+        requestParams.put("expiryYear", 2024);
+
         BODY = requestParams.toString();
         Api_Call("POST", FP_URL + "/TokenService/api/consumers/tokens", Auth, BODY);
         if (json != null) {
@@ -2174,8 +2162,8 @@ public class Station extends javax.swing.JInternalFrame {
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">  
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable DV_BTS;
     private javax.swing.JTable DV_Brands;
+    private javax.swing.JTable DV_DTS;
     private javax.swing.JTable DV_Items;
     private javax.swing.JTable DV_MTS;
     private javax.swing.JTable DV_Menus;

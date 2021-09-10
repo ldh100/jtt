@@ -2,6 +2,7 @@ package AP3;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -96,11 +97,11 @@ class AP3_images extends AP3_GUI{
         if (is.getBoolean("global_images_enabled")) {
              _t++;
              _f++; EX += _t + "\t" + "API - Global Menu Images are Disabled" + "\t" + "images are disabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled") + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-             Log_Html_Result("FAIL", "images are disabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), true, ParentTest.createNode("API - Global Menu Images are Disabled"));
+             Log_Html_Result("FAIL", "images are disabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), true, ParentTest.createNode("API - Global Menu Images are Disabled"), new Date());
         } else {
              _t++;
              _p++; EX += _t + "\t" + "API - Global Menu Images are Disabled" + "\t" + "images are disabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-             Log_Html_Result("PASS", "images are disabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Disabled"));
+             Log_Html_Result("PASS", "images are disabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Disabled"), new Date());
         }                              
         Element_By_Path_Click("Click > Edit Global menu on 'Starbucks' Brand", "xpath", "//*[text()='Starbucks']/ancestor::tr//button", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -123,11 +124,11 @@ class AP3_images extends AP3_GUI{
         if (is.getBoolean("global_images_enabled")) {
              _t++;
              _p++; EX += _t + "\t" + "API - Global Menu Images are Enabled" + "\t" + "images are enabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-             Log_Html_Result("PASS", "images are enabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Enabled"));
+             Log_Html_Result("PASS", "images are enabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Enabled"), new Date());
         } else {
              _t++;
              _f++; EX += _t + "\t" + "API - Global Menu Images are Enabled" + "\t" + "images are enabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled") + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-             Log_Html_Result("FAIL", "images are enabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), true, ParentTest.createNode("API - Global Menu Images are Enabled"));
+             Log_Html_Result("FAIL", "images are enabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), true, ParentTest.createNode("API - Global Menu Images are Enabled"), new Date());
         }
         EX += " - " + "\t" + " === " + "\t" + " ===== Add New Brand as 'Allow Images in Global Menu' set to 'Yes'" + "\t" + " == Start >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         //navigate to the sites -> brand -> settings
@@ -178,11 +179,11 @@ class AP3_images extends AP3_GUI{
                         if (brand.getJSONObject("is").getBoolean("local_images_enabled")) {
                             _t++;
                             _f++; EX += _t + "\t" + "API - Local Menu Images are Disabled" + "\t" + "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled") + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                            Log_Html_Result("FAIL", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), true, ParentTest.createNode("API - Global Menu Images are Enabled"));
+                            Log_Html_Result("FAIL", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), true, ParentTest.createNode("API - Global Menu Images are Enabled"), new Date());
                         } else {
                             _t++;
                             _p++; EX += _t + "\t" + "API - Local Menu Images are Disabled" + "\t" + "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                            Log_Html_Result("PASS", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Enabled"));
+                            Log_Html_Result("PASS", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Enabled"), new Date());
                         }
                     }
                 }
@@ -219,11 +220,11 @@ class AP3_images extends AP3_GUI{
                         if (brand.getJSONObject("is").getBoolean("local_images_enabled")) {
                             _t++;
                             _p++; EX += _t + "\t" + "API - Local Menu Images are Enabled" + "\t" + "images are enabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                            Log_Html_Result("PASS", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Enabled"));
+                            Log_Html_Result("PASS", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Enabled"), new Date());
                         } else {
                             _t++;
                             _f++; EX += _t + "\t" + "API - Local Menu Images are Enabled" + "\t" + "images are enabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled") + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                            Log_Html_Result("FAIL", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), true, ParentTest.createNode("API - Global Menu Images are Enabled"));
+                            Log_Html_Result("FAIL", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), true, ParentTest.createNode("API - Global Menu Images are Enabled"), new Date());
                         }
                     }
                 }
@@ -256,8 +257,9 @@ class AP3_images extends AP3_GUI{
         File tmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"Ap3_test_pdf_in_image.pdf");
         if(tmp.exists()) {
             d1.findElement(By.xpath("//input[@type='file']")).sendKeys(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"Ap3_test_pdf_in_image.pdf");
-            _t++; Find_Text("Toast message", "Invalid file type, choose a jpg or png file.", true, ParentTest, "no_jira");
-            if (FAIL) { return;}
+            _t++; 
+            Find_Text("Toast message", "Invalid file type, choose a jpg or png file.", true, ParentTest, "no_jira");
+                if (FAIL) { return;}
         }
         EX += " - " + "\t" + " === " + "\t" + " ===== Try upload non jpg/png file type" + "\t" + " == End >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         tmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"Ap3_image1.png");

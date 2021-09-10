@@ -3,6 +3,7 @@ package AP3;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -631,7 +632,7 @@ class AP3_site_new extends AP3_GUI{
                     T_Index = -1;
                     for (int j = 0; j < L1.size(); j++) {
                         Element_Text("Global Menu Name", L1.get(j), ParentTest, "no_jira");  
-                        if (FAIL) { return;} 
+                            if (FAIL) { return;} 
                         if(L1.get(j).getText().trim().equals(GL_MENU)){
                             T_Index = j;
                         }
@@ -658,18 +659,14 @@ class AP3_site_new extends AP3_GUI{
                     Element_By_Path_Text_Enter("Enter Station Name", "css", "[aria-label='Station Name']", "New Station " + New_ID, false, ParentTest, "no_jira"); 
                         if (FAIL) { return;}    
                         
-                     File tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_brand_image.png");
-                      if(tmp.exists())
-                      {
-                       Element_By_Path_Text_Enter("Upload Brand Image", "xpath", "//div[@id='toc-information']//input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_brand_image.png", false, ParentTest, "no_jira"); 
-                        if (FAIL) { return;}
-                      }
-                      else
-                      {
-                       _t++; 
-                       _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File : Ap3_brand_image  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-       
-                      }  
+                    File tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_brand_image.png");
+                    if(tmp.exists()) {
+                      Element_By_Path_Text_Enter("Upload Brand Image", "xpath", "//div[@id='toc-information']//input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_brand_image.png", false, ParentTest, "no_jira"); 
+                          if (FAIL) { return;}
+                    } else {
+                      _t++; 
+                      _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File : Ap3_brand_image  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    }  
                     Element_By_Path_Click("Station Location Description Click", "xpath", "//label[contains(text(), 'Location Description')]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}
                     Element_By_Path_Text_Enter("Enter Station Location Description", "css", "[aria-label='Station Location Description']", "Attic " + New_ID, false, ParentTest, "no_jira"); 
@@ -682,9 +679,8 @@ class AP3_site_new extends AP3_GUI{
                         
                     Element_Child_List_L1("Cost Centre Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");             
                         if (FAIL) { return;} 
-                        Scroll_to_Element("Scroll to last Cost Centre", L1.get(L1.size() - 1), ParentTest, "no_jira");
-                            if (FAIL) { return;}
-
+                    Scroll_to_Element("Scroll to last Cost Centre", L1.get(L1.size() - 1), ParentTest, "no_jira");
+                        if (FAIL) { return;}
                     Element_Click("Select last Cost Centre in the List", L1.get(L1.size() - 1), ParentTest, "no_jira"); 
                         if (FAIL) { return;} 
                              
@@ -1746,7 +1742,7 @@ class AP3_site_new extends AP3_GUI{
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + B_ID, false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + B_ID, false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }        
         JSONObject json = new JSONObject(API_Response_Body);
@@ -1866,7 +1862,7 @@ class AP3_site_new extends AP3_GUI{
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/config/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/" + B_ID, false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/" + B_ID, false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
         JSONObject json = new JSONObject(API_Response_Body);
@@ -1921,7 +1917,7 @@ class AP3_site_new extends AP3_GUI{
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/config/public/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/public/" + B_ID, false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/public/" + B_ID, false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
         JSONObject json = new JSONObject(API_Response_Body);
@@ -2015,7 +2011,7 @@ class AP3_site_new extends AP3_GUI{
         } else {
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/" + CompanyID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID, false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID, false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
         JSONObject json = new JSONObject(API_Response_Body);
@@ -2039,7 +2035,7 @@ class AP3_site_new extends AP3_GUI{
                 }else{
                     EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/" + Menu_ID[k] + "?nocache=true&extended=true&_query=%7Bid,label,is,groups%7Bid,label,is%7D%7D&show_unlinked=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/" + Menu_ID[k] + "?nocache=true&extended=true&_query=%7Bid,label,is,groups%7Bid,label,is%7D%7D&show_unlinked=true", false, ParentTest.createNode("API Responce Error"));
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/" + Menu_ID[k] + "?nocache=true&extended=true&_query=%7Bid,label,is,groups%7Bid,label,is%7D%7D&show_unlinked=true", false, ParentTest.createNode("API Responce Error"), new Date());
                     return;
                 }
                 JSONObject json1 = new JSONObject(API_Response_Body);
@@ -2088,7 +2084,7 @@ class AP3_site_new extends AP3_GUI{
         } else {
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/multigroup/" + Mgroup_ID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/multigroup/" + Mgroup_ID + "?nocache=1", false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/multigroup/" + Mgroup_ID + "?nocache=1", false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
         JSONObject json = new JSONObject(API_Response_Body);
@@ -2128,7 +2124,7 @@ class AP3_site_new extends AP3_GUI{
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + S_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + S_ID, false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + S_ID, false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
         JSONObject json = new JSONObject(API_Response_Body);
@@ -2171,7 +2167,7 @@ class AP3_site_new extends AP3_GUI{
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/config/public/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/public/" + B_ID, false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/public/" + B_ID, false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
         String Public_response_Before = API_Response_Body;
@@ -2182,7 +2178,7 @@ class AP3_site_new extends AP3_GUI{
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/config/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/" + B_ID, false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/" + B_ID, false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
         String Private_response_Before = API_Response_Body;
@@ -2193,7 +2189,7 @@ class AP3_site_new extends AP3_GUI{
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + B_ID, false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + B_ID, false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
         String Brand_response_Before = API_Response_Body;
@@ -2210,7 +2206,7 @@ class AP3_site_new extends AP3_GUI{
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/config/public/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/public/" + B_ID, false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/public/" + B_ID, false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
         String Public_response_After = API_Response_Body;
@@ -2221,7 +2217,7 @@ class AP3_site_new extends AP3_GUI{
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/config/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/" + B_ID, false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/" + B_ID, false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
         String Private_response_After = API_Response_Body;
@@ -2232,7 +2228,7 @@ class AP3_site_new extends AP3_GUI{
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + B_ID, false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + B_ID, false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
         String Brand_response_After = API_Response_Body;
