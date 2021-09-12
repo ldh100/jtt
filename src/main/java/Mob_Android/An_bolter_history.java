@@ -33,11 +33,12 @@ class An_bolter_history extends An_GUI{
             if (FAIL) { return;}
         Element_By_Path_Text("Get Hitory 'Title'", "id", "txtTitle", ParentTest, "no_jira");    
         Element_By_Path_Text("Get Hitory 'Sub-Title'", "id", "txtSubTitle", ParentTest, "no_jira");            
-        Element_By_Path_Text("Get 'Reload' button Text", "id", "emptyViewReloadBtn", ParentTest, "no_jira");            
-        List_L0("Check 'Empty View' Image", "id", "emptyViewImg", ParentTest, "no_jira");
-        if(!aL0.isEmpty()){
+        
+        List_L3("Check 'Empty View' Image", "id", "emptyViewImg", ParentTest, "no_jira");
+        if(!aL3.isEmpty()){
             Element_By_Path_Text("Get 'Empty Title'", "id", "emptyViewTitle", ParentTest, "no_jira");            
             Element_By_Path_Text("Get 'Empty Message'", "id", "emptyViewMsg", ParentTest, "no_jira");              
+            Element_By_Path_Text("Get 'Reload' button Text", "id", "emptyViewReloadBtn", ParentTest, "no_jira"); 
         }else{
             //
         }  

@@ -128,7 +128,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         txtComp = new javax.swing.JTextField();
         txtSector = new javax.swing.JTextField();
         _bulk_apply = new javax.swing.JCheckBox();
-        _images = new javax.swing.JCheckBox();
+        _invalid_entries = new javax.swing.JCheckBox();
         jScrollPane3 = new javax.swing.JScrollPane();
         DV1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -157,18 +157,10 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         _mobile_view = new javax.swing.JCheckBox();
         lblSITES16 = new javax.swing.JLabel();
         txtSlackCh = new javax.swing.JTextField();
-        txtADMIN_ID = new javax.swing.JTextField();
-        txtMOBILE_ID = new javax.swing.JTextField();
-        txtRUNNER_ID = new javax.swing.JTextField();
-        txtADMIN_PW = new javax.swing.JTextField();
-        txtRUNNER_PW = new javax.swing.JTextField();
-        txtMOBILE_PW = new javax.swing.JTextField();
-        lblSITES1 = new javax.swing.JLabel();
-        lblSITES2 = new javax.swing.JLabel();
-        lblSITES3 = new javax.swing.JLabel();
+        txtUSER_NAME = new javax.swing.JTextField();
         lblSITES4 = new javax.swing.JLabel();
         lblSITES5 = new javax.swing.JLabel();
-        lblSITES6 = new javax.swing.JLabel();
+        txtUSER_PW = new javax.swing.JPasswordField();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -373,11 +365,11 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         _bulk_apply.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _bulk_apply.setRequestFocusEnabled(false);
 
-        _images.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _images.setText("Images");
-        _images.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _images.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _images.setRequestFocusEnabled(false);
+        _invalid_entries.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _invalid_entries.setText("Invalid Entries");
+        _invalid_entries.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _invalid_entries.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _invalid_entries.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -396,7 +388,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                                 .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(_menu_manager, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(_menu_manager, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                                 .addGap(297, 297, 297))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(134, 134, 134)
@@ -420,14 +412,16 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(_orders, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(_brand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, 0)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(_group_management, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(_announcements, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(_notifications, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_resent_updates, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_images, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(_promo, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(_group_management, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(_announcements, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(_notifications, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_resent_updates, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(_promo, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(_invalid_entries)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(5, 5, 5)
@@ -472,11 +466,11 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                             .addComponent(_notifications, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(_smart_analytics, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(_site_new, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_images, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(_all_data, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_invalid_entries, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addComponent(_site_new, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
                         .addComponent(_brand_new, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -617,7 +611,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         txtLog.setPreferredSize(null);
         jScrollPane1.setViewportView(txtLog);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 354, 428, 148));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 326, 428, 176));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -633,7 +627,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 64, 78, 32));
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 68, 78, -1));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -744,68 +738,24 @@ public class C360_GUI extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 404, 424, 96));
 
-        txtADMIN_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtADMIN_ID.setText("oleg.spozito@compassdigital.io");
-        getContentPane().add(txtADMIN_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 284, 184, -1));
-
-        txtMOBILE_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtMOBILE_ID.setText("cdl.test.xtt@gmail.com");
-        getContentPane().add(txtMOBILE_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 308, 184, -1));
-
-        txtRUNNER_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtRUNNER_ID.setText("cdl.test.xtt+rn@gmail.com");
-        txtRUNNER_ID.setToolTipText("");
-        getContentPane().add(txtRUNNER_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 332, 184, -1));
-
-        txtADMIN_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtADMIN_PW.setText("Password1");
-        getContentPane().add(txtADMIN_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 284, 84, -1));
-
-        txtRUNNER_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtRUNNER_PW.setText("Password1");
-        getContentPane().add(txtRUNNER_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 332, 84, -1));
-
-        txtMOBILE_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtMOBILE_PW.setText("Password1");
-        getContentPane().add(txtMOBILE_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 308, 84, -1));
-
-        lblSITES1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        lblSITES1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblSITES1.setText("Runner:");
-        lblSITES1.setToolTipText("");
-        lblSITES1.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 332, 72, 16));
-
-        lblSITES2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        lblSITES2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblSITES2.setText("PW:");
-        lblSITES2.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES2, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 336, -1, -1));
-
-        lblSITES3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        lblSITES3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblSITES3.setText("Mobile User:");
-        lblSITES3.setToolTipText("");
-        lblSITES3.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES3, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 312, 76, -1));
+        txtUSER_NAME.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtUSER_NAME.setText("C360.UserName");
+        getContentPane().add(txtUSER_NAME, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 292, 148, -1));
 
         lblSITES4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblSITES4.setText("C360 User");
+        lblSITES4.setText("C360 User >   Username:");
         lblSITES4.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 288, 60, -1));
+        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 296, 124, -1));
 
         lblSITES5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSITES5.setText("PW:");
         lblSITES5.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES5, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 288, -1, -1));
+        getContentPane().add(lblSITES5, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 296, -1, -1));
 
-        lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblSITES6.setText("PW:");
-        lblSITES6.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 312, -1, -1));
+        txtUSER_PW.setText("PAssword1");
+        getContentPane().add(txtUSER_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 292, 104, -1));
 
         getAccessibleContext().setAccessibleName("C360");
 
@@ -881,28 +831,31 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     protected List<String> COMP_IDS;
 
     private String SCOPE;
-
-    private boolean _Login = true;
+    
     private boolean _Headless = false;
-    private boolean _Mobile_view = false;
-    private boolean _Site = false;
-    private boolean _Site_new = false;
-    private boolean _Brand_new = false;
-    private boolean _Brand = false;
-    private boolean _Group_management = false;
-    private boolean _Menu_manager = false;
-    private boolean _Bulk_apply = false;
-    private boolean _Images = false;
-    private boolean _Orders = false;
-    private boolean _Sales_reporting = false;
-    private boolean _Users = false;
-    private boolean _Resent_updates = false;
-    private boolean _Announcements = false;
-    private boolean _Promo = false;
-    private boolean _Password = false;
-    private boolean _Roles = false;       
-    private boolean _All_data = false;
-    private boolean _Logout = false;  
+    
+    protected boolean _Login = true;
+    protected boolean _Invalid_entries = false;
+
+    protected boolean _Mobile_view = false;
+    protected boolean _Site = false;
+    protected boolean _Site_new = false;
+    protected boolean _Brand_new = false;
+    protected boolean _Brand = false;
+    protected boolean _Group_management = false;
+    protected boolean _Menu_manager = false;
+    protected boolean _Bulk_apply = false;
+
+    protected boolean _Orders = false;
+    protected boolean _Sales_reporting = false;
+    protected boolean _Users = false;
+    protected boolean _Resent_updates = false;
+    protected boolean _Announcements = false;
+    protected boolean _Promo = false;
+    protected boolean _Password = false;
+    protected boolean _Roles = false;       
+    protected boolean _All_data = false;
+    protected boolean _Logout = false;  
         
     protected String New_ID = "";
     protected String Tab_Name;
@@ -914,12 +867,9 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     protected String New_To;
     protected String _24;    
     
-    protected String ADMIN_ID;
-    protected String ADMIN_PW;
-    protected String MOBILE_ID; 
-    protected String MOBILE_PW;
-    protected String RUNNER_ID; 
-    protected String RUNNER_PW;
+    protected String USER_NAME;
+    protected String USER_PW;
+    protected boolean Login_OK = false;
       
     private String S_Client_ID = "";
     private String S_Client_Secret  = "";
@@ -1766,12 +1716,9 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("env: ")) env = value;
                 if(l.contains("app: ")) app = value;
                 
-                if(l.contains("ADMIN_ID: ")) txtADMIN_ID.setText(value);
-                if(l.contains("ADMIN_PW: ")) txtADMIN_PW.setText(value);
-                if(l.contains("MOBILE_ID: ")) txtMOBILE_ID.setText(value);
-                if(l.contains("MOBILE_PW: ")) txtMOBILE_PW.setText(value);
-                if(l.contains("RUNNER_ID: ")) txtRUNNER_ID.setText(value);
-                if(l.contains("RUNNER_PW: ")) txtRUNNER_PW.setText(value);
+                if(l.contains("USER_NAME: ")) txtUSER_NAME.setText(value);
+                if(l.contains("USER_PW: ")) txtUSER_PW.setText(value);
+
                 
                 if(l.contains("GROUP: ")) SECTOR = value;
                 if(l.contains("GL_MENU: ")) GL_MENU = value;
@@ -1795,7 +1742,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_group_management: "))  _group_management.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_menu_manager: "))  _menu_manager.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_bulk_apply: "))  _bulk_apply.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_images: "))  _images.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_ivalid_entries: "))  _invalid_entries.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_orders: "))  _orders.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_sales_reporting: "))  _sales_reporting.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_users: "))  _users.setSelected(Boolean.parseBoolean(value));
@@ -1834,13 +1781,9 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             C += "app: " + cmbApp.getSelectedItem().toString() + "\r\n";
             C += "url: " + url + "\r\n"; 
             
-            C += "ADMIN_ID: " + txtADMIN_ID.getText() + "\r\n";
-            C += "ADMIN_PW: " + txtADMIN_PW.getText()  + "\r\n";
-            C += "MOBILE_ID: " + txtMOBILE_ID.getText()  + "\r\n";
-            C += "MOBILE_PW: " + txtMOBILE_PW.getText() + "\r\n";
-            C += "RUNNER_ID: " + txtRUNNER_ID.getText()+ "\r\n";
-            C += "RUNNER_PW: " + txtRUNNER_PW.getText() + "\r\n";        
-
+            C += "USER_NAME: " + txtUSER_NAME.getText() + "\r\n";
+            C += "USER_PW: " + new String(txtUSER_PW.getPassword()) + "\r\n";
+      
 
             C += "GROUP: " + txtSector.getText() + "\r\n";
             C += "GL_MENU: " + txtComp.getText() + "\r\n";
@@ -1865,7 +1808,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             C += "_group_management: " + _group_management.isSelected() + "\r\n";
             C += "_menu_manager: " + _menu_manager.isSelected() + "\r\n";
             C += "_bulk_apply: " + _bulk_apply.isSelected() + "\r\n";
-            C += "_images: " + _images.isSelected() + "\r\n";
+            C += "_ivalid_entries: " + _invalid_entries.isSelected() + "\r\n";
             C += "_orders: " + _orders.isSelected() + "\r\n";
             C += "_sales_reporting: " + _sales_reporting.isSelected() + "\r\n";
             C += "_users: " + _users.isSelected() + "\r\n";
@@ -1945,16 +1888,12 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             _w = 0; // Warn
             r_time = "";
 
-            ADMIN_ID = txtADMIN_ID.getText();
-            ADMIN_PW = txtADMIN_PW.getText();
-            MOBILE_ID = txtADMIN_ID.getText();
-            MOBILE_PW = txtADMIN_ID.getText();
-            RUNNER_ID = txtADMIN_ID.getText();
-            RUNNER_PW = txtADMIN_ID.getText();
+            USER_NAME = txtUSER_NAME.getText();
+            USER_PW = new String(txtUSER_PW.getPassword()); 
+
             ALL_DATA = _all_data.isSelected();
             DH_MENU_ID = txtDH_Id.getText(); // like NWEJgN87Q3Sw46JaQ1Q, length > 18
             
-
             if(DV1.getRowCount() > 0) {
                 SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
                 platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform
@@ -1966,8 +1905,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
 
             SECTOR = txtSector.getText();
             GL_MENU = txtComp.getText();
-            //GroupID = "";
-            //CompanyID = "";
+            _Invalid_entries = _invalid_entries.isSelected();
 
             SCOPE = "";
             r_type = "manual"; 
@@ -1990,7 +1928,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             BW1_FAIL_LOG_UPDATE("= GUI_Run_Manual ERROR > " + ex.getMessage());
         }
     }
-    public String JOB_Run_Auto(String run_type, String config){
+    public String JOB_Run_Auto(String job_name, String run_type, String config){
         run_start = Instant.now();
         Log  = "";
         String RES = "";
@@ -2060,16 +1998,14 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("BRAND: ")) BRAND = value;
                 if(l.contains("DH_MENU_ID: ")) DH_MENU_ID = value;
                 
-                if(l.contains("ADMIN_ID: ")) ADMIN_ID = value;
-                if(l.contains("ADMIN_PW: ")) ADMIN_PW = value;
-                if(l.contains("MOBILE_ID: ")) MOBILE_ID = value;
-                if(l.contains("MOBILE_PW: ")) MOBILE_PW = value;
-                if(l.contains("RUNNER_ID: ")) RUNNER_ID = value;
-                if(l.contains("RUNNER_PW: ")) RUNNER_PW = value;
+                if(l.contains("USER_NAME: ")) USER_NAME = value;
+                if(l.contains("USER_PW: ")) USER_PW = value;
+
 
                 if(l.contains("nWaitElement: ")) WaitForElement = Math.round(Double.parseDouble(value) * 1000);
                 if(l.contains("nWaitLoad: ")) LoadTimeOut = Double.parseDouble(value) * 1000;
 
+                if(l.contains("_ivalid_entries: ")) _Invalid_entries = Boolean.parseBoolean(value);
                 if(l.contains("_site: ")) _Site = Boolean.parseBoolean(value);
                 if(l.contains("_site_new: ")) _Site_new = Boolean.parseBoolean(value);
                 if(l.contains("_brand_new: ")) _Brand_new = Boolean.parseBoolean(value);
@@ -2077,7 +2013,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_group_management: ")) _Group_management = Boolean.parseBoolean(value);
                 if(l.contains("_menu_manager: ")) _Menu_manager = Boolean.parseBoolean(value);
                 if(l.contains("_bulk_apply: ")) _Bulk_apply = Boolean.parseBoolean(value);
-                if(l.contains("_images: ")) _Images = Boolean.parseBoolean(value);
+ 
                 if(l.contains("_orders: ")) _Orders = Boolean.parseBoolean(value);
                 if(l.contains("_sales_reporting: ")) _Sales_reporting = Boolean.parseBoolean(value);
                 if(l.contains("_users: ")) _Users = Boolean.parseBoolean(value);
@@ -2427,26 +2363,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         LOG_UPDATE("- BW1 ERROR: " + Error);
         btnRun.setEnabled(true);
     }
-    private void Execute() throws Exception {
-        if(_Login){
-            SCOPE += "Login, ";
-            ParentTest = HtmlReport.createTest("Cafe 360 Login"); 
-            C360_login BR = new C360.C360_login(C360_GUI.this);
-            BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time; 
-            ParentTest.getModel().setName("Cafe 360 Login: " + BR._t + ", Failed: " + BR._f);
-            ParentTest.getModel().setEndTime(new Date());            
-        }
-//        if(_Logout){
-//            SCOPE += "Login";
-//            ParentTest = HtmlReport.createTest("Cafe 360 Login"); 
-//            C360_logout BR = new C360.C360_loout(C360_GUI.this);
-//            BR.run(); // ======================================
-//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;       
-//            ParentTest.getModel().setName("Cafe 360 Login: " + BR._t + ", Failed: " + BR._f);
-//            ParentTest.getModel().setEndTime(new Date()); 
-//        }
-    }
     private void BW1_Done(boolean GUI) throws Exception{
         DD = Duration.between(run_start, Instant.now());      
         Last_EX = EX;
@@ -2542,6 +2458,39 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         LOG_UPDATE(Log); // ========================================================
     }
     // </editor-fold> 
+    private void Execute() throws Exception {
+        if(_Login){
+            SCOPE += "Login, ";
+            ParentTest = HtmlReport.createTest("Login"); 
+            C360_login BR = new C360.C360_login(C360_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time; 
+            Login_OK = BR.Login_OK;
+            ParentTest.getModel().setName("Login: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());            
+        }
+        if(!Login_OK){
+            return;
+        }
+        if(true){
+            SCOPE += "User Management, ";
+            ParentTest = HtmlReport.createTest("User Management"); 
+            user_management BR = new C360.user_management(C360_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;       
+            ParentTest.getModel().setName("Users: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date()); 
+        }
+        if(true){
+            SCOPE += "Item Catalog";
+            ParentTest = HtmlReport.createTest("Item Catalog"); 
+            item_catalog BR = new C360.item_catalog(C360_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;       
+            ParentTest.getModel().setName("Item Catalog: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date()); 
+        }        
+    }
 
     // <editor-fold defaultstate="collapsed" desc="Driver Actions > Log Step Result">  
     protected void Clear_Cookies_Restart_Driver(String BROWSER, ExtentTest ParentTest, String JIRA )throws Exception {
@@ -3477,7 +3426,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         _p++;
         sw1.reset();
     }
-    protected void Find_Text(String NAME, String VAL, Boolean EXPECTED,ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Find_Text(String NAME, String VAL, Boolean EXPECTED, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -5970,7 +5919,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _bulk_apply;
     private javax.swing.JCheckBox _group_management;
     private javax.swing.JCheckBox _headless;
-    private javax.swing.JCheckBox _images;
+    private javax.swing.JCheckBox _invalid_entries;
     private javax.swing.JCheckBox _login;
     private javax.swing.JCheckBox _logout;
     private javax.swing.JCheckBox _menu_manager;
@@ -6004,7 +5953,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblBRANDS;
     private javax.swing.JLabel lblSITES;
-    private javax.swing.JLabel lblSITES1;
     private javax.swing.JLabel lblSITES10;
     private javax.swing.JLabel lblSITES11;
     private javax.swing.JLabel lblSITES12;
@@ -6012,26 +5960,19 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblSITES14;
     private javax.swing.JLabel lblSITES15;
     private javax.swing.JLabel lblSITES16;
-    private javax.swing.JLabel lblSITES2;
-    private javax.swing.JLabel lblSITES3;
     private javax.swing.JLabel lblSITES4;
     private javax.swing.JLabel lblSITES5;
-    private javax.swing.JLabel lblSITES6;
     private javax.swing.JLabel lblSITES8;
     private javax.swing.JLabel lblSITES9;
     private javax.swing.JSpinner nWaitElement;
     private javax.swing.JSpinner nWaitLoad;
-    private javax.swing.JTextField txtADMIN_ID;
-    private javax.swing.JTextField txtADMIN_PW;
     private javax.swing.JTextField txtComp;
     private javax.swing.JTextField txtDH_Id;
     private javax.swing.JTextArea txtLog;
-    private javax.swing.JTextField txtMOBILE_ID;
-    private javax.swing.JTextField txtMOBILE_PW;
-    private javax.swing.JTextField txtRUNNER_ID;
-    private javax.swing.JTextField txtRUNNER_PW;
     private javax.swing.JTextField txtSector;
     private javax.swing.JTextField txtSlackCh;
+    private javax.swing.JTextField txtUSER_NAME;
+    private javax.swing.JPasswordField txtUSER_PW;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>
 }
