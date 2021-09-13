@@ -1961,7 +1961,8 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.append("\r\n- " + "Print Last Update Shopping Cart ...."+ "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());            
             Api_Call("GET", Last_SCart, "", "");
-            String R = A.Func.SHOW_FILE(json.toString(4), "json");
+            String LS = Last_SCart + "\r\n\r\n" + json.toString(4);
+            String R = A.Func.SHOW_FILE(LS, "json");
         }
     }  
     private void Set_Requested_Date(String TYPE){
