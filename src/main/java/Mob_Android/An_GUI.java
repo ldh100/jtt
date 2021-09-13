@@ -2885,6 +2885,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 //asb.usingDriverExecutable(new File(("/path/to/node")));
                 HashMap<String, String> environment = new HashMap();
                 environment.put("ANDROID_HOME", "/Users/" + A.A.UserID + "/Library/Android/sdk"); 
+//                environment.put("JAVA_HOME", "/Users/" + A.A.UserID + "/Library/Android/sdk/platform-tools"); 
+
                 ASB.withEnvironment(environment);
                 ASB.withAppiumJS(new File(("/usr/local/lib/node_modules/appium/build/lib/main.js")));
             }
