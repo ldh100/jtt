@@ -2215,7 +2215,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     
-    public String JOB_Run_Auto(String run_type, String config){
+    public String JOB_Run_Auto(String job_name, String run_type, String config){
         run_start = Instant.now();
         Log  = "";
         String RES = "";

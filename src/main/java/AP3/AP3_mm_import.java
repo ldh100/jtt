@@ -77,28 +77,41 @@ class AP3_mm_import extends AP3_GUI{
             File_Delete("Delete Report Zip File", dest_dir,t, ParentTest, "no_jira");
                 if (FAIL) { return;}  
             ModGrpPath = GL_MENU.trim() + "-global-modifier-groups.xlsx";
-            
             convertPLUExcel(dest_dir,ModGrpPath,"Modifier Groups");
             editModExcel(dest_dir,ModGrpPath,"Modifier Groups");
             String[] valueToWrite = {"Modifier Group","","Auto Mod group " + New_ID, "Automation Label " + New_ID, "0", "1", "2", "TRUE", "", "", "", "", "", "", "", ""};
             writeExcel(dest_dir,ModGrpPath,"Modifier Groups",valueToWrite);
-            valueToWrite = new String[] {"Modifier", "", "", "", "", "", "", "", "", "Automation Mod " + New_ID, "5", "20", "1", "600200", "TRUE", "[\"Prepared\"]"};
+            valueToWrite = new String[] {"Modifier","","","","","","","","","Automation Mod " + New_ID, "5", "20", "1", "600200", "TRUE", "[\"Prepared\"]"};
             writeExcel(dest_dir,ModGrpPath,"Modifier Groups",valueToWrite);
+            Thread.sleep(1000);
+
 
             File xlsfile = new File(dest_dir + File.separator + ModGrpPath);
-            
             if(xlsfile.exists()){
-                Element_By_Path_Text_Enter("Upload xlsx file", "id", "globalModsImportInput", dest_dir + File.separator + ModGrpPath, false, ParentTest, "no_jira"); 
-                    if (FAIL) { return;}                
+
+//                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+//                StringSelection str = new StringSelection(dest_dir + File.separator + ModGrpPath);
+//                clipboard.setContents(str, null);            
+//                            Element_By_Path_Click("Click Global mod Import ", "xpath", "//div[contains(text(),'Import')]//i", ParentTest, "no_jira");  
+//                                if (FAIL) { return;}
+//                Robot robot = new Robot();
+//                robot.keyPress(KeyEvent.VK_CONTROL);
+//                robot.keyPress(KeyEvent.VK_V);
+//                //driverwait(1);
+//                robot.keyRelease(KeyEvent.VK_CONTROL);
+//                robot.keyRelease(KeyEvent.VK_V);
+//                //driverwait(1);
+//                robot.keyPress(KeyEvent.VK_ENTER);
+//                robot.keyRelease(KeyEvent.VK_ENTER);
+
+            Element_By_Path_Text_Enter("Upload xlsx file", "id", "globalModsImportInput", dest_dir + File.separator + ModGrpPath, false, ParentTest, "no_jira"); 
+                    if (FAIL) { return;}
+                
             } else { 
                 _t++; 
-                _w++; EX += _t + "\t" + "File does not exist" + "\t" + "File: " + ModGrpPath + "\t" + " - " + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"), new Date());
-            }
-            Wait_For_Element_By_Path_InVisibility("Wait for Spinner", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Thread.sleep(500);           
-
+                _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"),new Date());
+            }            
             Find_Text("Find Import Successfully Message", "Global modifiers successfully imported locally. Please verify before publishing.", true, ParentTest, "no_jira");
             Thread.sleep(1000);
             Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'publish')]", ParentTest, "no_jira");
@@ -109,14 +122,15 @@ class AP3_mm_import extends AP3_GUI{
 
             // Again importing the same file to validate errors
             if(xlsfile.exists()){
-                Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", dest_dir + File.separator + ModGrpPath, false, ParentTest, "no_jira"); 
-                    if (FAIL) { return;}
+                Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@id='globalModsImportInput'][@type='file'][@accept='.xlsx']", dest_dir + File.separator + ModGrpPath, false, ParentTest, "no_jira"); 
+                if (FAIL) { return;}
             } else { 
                 _t++; 
                 _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"), new Date());
-            }  
-            Find_Text("Find Import Errors", "There were errors while trying to import global modifiers from your excel sheet", true, ParentTest, "no_jira");
+                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"),new Date());
+            }
+            Thread.sleep(1000);
+            Find_Text("Find Import Errors", "        There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
            // Element_By_Path_Text("Close Import error dialog box", "xpath", "//div[contains(text(),'Close')]", ParentTest, "no_jira");
             Thread.sleep(500);
             Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
@@ -148,12 +162,12 @@ class AP3_mm_import extends AP3_GUI{
             writeExcel(dest_dir,ModGrpPath,"Modifier Groups",valueToWrite);
             Thread.sleep(1000);
             if(xlsfile.exists()){
-                Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", dest_dir + File.separator + ModGrpPath, false, ParentTest, "no_jira"); 
+                Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//input[@type='file']", dest_dir + File.separator + ModGrpPath, false, ParentTest, "no_jira"); 
                     if (FAIL) { return;}
             } else { 
                 _t++; 
                 _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"), new Date());
+                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"),new Date());
             }
             Find_Text("Find Import Successfully Message", "Global modifiers successfully imported locally. Please verify before publishing.", true, ParentTest, "no_jira");
             Thread.sleep(1000);
@@ -196,9 +210,9 @@ class AP3_mm_import extends AP3_GUI{
             } else { 
                 _t++; 
                 _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"), new Date());
+                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"),new Date());
             }
-            Find_Text("Find Import Errors", "There were errors while trying to import global modifiers from your excel sheet", true, ParentTest, "no_jira");
+            Find_Text("Find Import Errors", "        There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
             List_L0("Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
                 if (FAIL || L0.isEmpty()) { 
                     return;
@@ -242,9 +256,9 @@ class AP3_mm_import extends AP3_GUI{
             } else { 
                 _t++; 
                 _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"), new Date());
+                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"),new Date());
             }
-            Find_Text("Find Import Errors", "There were errors while trying to import global modifiers from your excel sheet", true, ParentTest, "no_jira");
+            Find_Text("Find Import Errors", "        There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
             List_L0("Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
                 if (FAIL || L0.isEmpty()) { 
                     return;
@@ -255,7 +269,7 @@ class AP3_mm_import extends AP3_GUI{
                 if(L0.get(i).getAttribute("textContent").contains("Invalid \"Record Type\". Should be \"Modifier Group\" or \"Modifier\".")){
                     _t++;
                     _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("PASS", L0.get(i).getAttribute("textContent"), true, ParentTest.createNode("Invalid Record Type. Should be Modifier Group or Modifier."), new Date());                       
+                    Log_Html_Result("PASS", L0.get(i).getAttribute("textContent"), true, ParentTest.createNode("Invalid Record Type. Should be Modifier Group or Modifier."),new Date());                       
                 } else {
                    _t++;
                    _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -297,9 +311,9 @@ class AP3_mm_import extends AP3_GUI{
             }else { 
                 _t++; 
                 _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"), new Date());
+                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"),new Date());
             }
-            Find_Text("Find Import Errors", "There were errors while trying to import global modifiers from your excel sheet", true, ParentTest, "no_jira");
+            Find_Text("Find Import Errors", "        There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
             List_L0("Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
                 if (FAIL || L0.isEmpty()) { 
                     return;
@@ -307,18 +321,18 @@ class AP3_mm_import extends AP3_GUI{
             for (int i = 0; i < L0.size(); i++) {
                 Element_Attribute("Errors List : (Index " + i + ") Name", L0.get(i), "textContent", ParentTest, "no_jira");            
                     if (FAIL) { return;}
-                if(L0.get(0).getAttribute("textContent").contains(" \"Modifier Group Enabled\" must be a boolean. (TRUE/FALSE)")){
+                if(L0.get(0).getAttribute("textContent").contains("\"Modifier Group Enabled\" is a required field. Please enter a boolean value. (TRUE/FALSE)")){
                     _t++;
                     _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("PASS", L0.get(0).getAttribute("textContent"), true, ParentTest.createNode(" \"Modifier Group Enabled\" must be a boolean. (TRUE/FALSE)"), new Date());                       
+                    Log_Html_Result("PASS", L0.get(0).getAttribute("textContent"), true, ParentTest.createNode(" \"Modifier Group Enabled\" must be a boolean. (TRUE/FALSE)"),new Date());                       
                 } else {
                    _t++;
                    _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 }
-                if(L0.get(1).getAttribute("textContent").contains(" \"Modifier Enabled\" must be a boolean. (TRUE/FALSE)")){
+                if(L0.get(1).getAttribute("textContent").contains("\"Modifier Enabled\" is a required field. Please enter a boolean value. (TRUE/FALSE)")){
                     _t++;
                     _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("PASS", L0.get(1).getAttribute("textContent"), true, ParentTest.createNode(" \"Modifier Enabled\" must be a boolean. (TRUE/FALSE)"), new Date());                       
+                    Log_Html_Result("PASS", L0.get(1).getAttribute("textContent"), true, ParentTest.createNode(" \"Modifier Enabled\" must be a boolean. (TRUE/FALSE)"),new Date());                       
                 } else {
                    _t++;
                    _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -352,7 +366,7 @@ class AP3_mm_import extends AP3_GUI{
             convertPLUExcel(dest_dir,ModGrpPath,"Modifier Groups");            
             valueToWrite = new String[] {"Modifier Group","","Test Decimals","Test Decimals","0","1","9.1","TRUE","","","","","","","",""};
             writeExcel(dest_dir,ModGrpPath,"Modifier Groups",valueToWrite);
-            valueToWrite = new String[] {"Modifier","","","","","","","","","DS Mod Missing True","5.1","1.20","8.9","8.10","TRUE","[\"Prepared\"]"};
+            valueToWrite = new String[] {"Modifier","","","","","","","","","DS Mod Decimals","5.1","1.20","8.9","8.10","TRUE","[\"Prepared\"]"};
             writeExcel(dest_dir,ModGrpPath,"Modifier Groups",valueToWrite);
             Thread.sleep(1000);
             if(xlsfile.exists()){
@@ -361,20 +375,12 @@ class AP3_mm_import extends AP3_GUI{
                 }else
                 { _t++; 
                   _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                  Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"));
+                  Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"),new Date());
                 }
-            Find_Text("Find Import Errors", "There were errors while trying to import global modifiers from your excel sheet", true, ParentTest, "no_jira");
-            List_L0("Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
-            if (FAIL || L0.isEmpty()) { 
-            return;
-            } 
-            for (int i = 0; i < L0.size(); i++) {
-            Element_Attribute("Errors List : (Index " + i + ") Name", L0.get(i), "textContent", ParentTest, "no_jira");            
-                if (FAIL) { return;}                   
-            }
+            Find_Text("Find Import Errors", "        There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
+           // Element_By_Path_Text("Close Import error dialog box", "xpath", "//div[contains(text(),'Close')]", ParentTest, "no_jira");
             Thread.sleep(500);
             Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
-            Thread.sleep(1000);
             File_Delete("Delete xls file", dest_dir, ModGrpPath, ParentTest, "no_jira");                
             Thread.sleep(5000);
             */
@@ -408,9 +414,9 @@ class AP3_mm_import extends AP3_GUI{
             } else { 
                 _t++; 
                 _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"), new Date());
+                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"),new Date());
             }
-            Find_Text("Find Import Errors", "There were errors while trying to import global modifiers from your excel sheet", true, ParentTest, "no_jira");
+            Find_Text("Find Import Errors", "        There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
             Thread.sleep(1000);
             List_L0("Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
                 if (FAIL || L0.isEmpty()) { 
@@ -422,7 +428,7 @@ class AP3_mm_import extends AP3_GUI{
                 if(L0.get(i).getAttribute("textContent").contains("Modifier \"Price\" must be a number from 0 to 200.")){
                     _t++;
                     _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("PASS", L0.get(i).getAttribute("textContent"), true, ParentTest.createNode("Modifier \"Price\" must be a number from 0 to 200."), new Date());                       
+                    Log_Html_Result("PASS", L0.get(i).getAttribute("textContent"), true, ParentTest.createNode("Modifier \"Price\" must be a number from 0 to 200."),new Date());                       
                 } else {
                    _t++;
                    _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
