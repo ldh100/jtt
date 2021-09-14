@@ -2915,7 +2915,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             Log_Html_Result("FAIL", "Error: " + err + "<br />window.scrollBy(" + X + "," + Y + ")", true, ParentTest.createNode(NAME));
         }
         sw1.reset();
-    }    
+    }   
+  
 
     protected void Wait_For_Element_By_Path_Presence(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
