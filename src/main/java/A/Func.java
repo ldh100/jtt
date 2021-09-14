@@ -172,7 +172,7 @@ public class Func {
             if(A.WsOS.toLowerCase().contains("mac")){
 //                String[] ios_cmd = cmd.split(" ");
 //                b.command(ios_cmd); 
-                b.command("sh", "-c", cmd);
+                b.command("zsh", "-c", cmd); //    ======= "sh" or new "zsh"  ===========     !!!!!!appiumunable
             }
 
             p = b.start();
