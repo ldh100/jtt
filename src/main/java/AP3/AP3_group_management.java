@@ -1,6 +1,7 @@
 package AP3;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -471,7 +472,7 @@ Thread.sleep(5000);
                 _f++;
                 EX += " - " + "\t" + "\t" + " JDE Category " + "\t" + "Bento Nouveau Sales" + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + "Bento Nouveau Sales Not found";
                 EX += "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("FAIL", "Bento Nouveau Sales Not found"  , true, ParentTest.createNode("JDE Category - Bento Nouveau Sales"));
+                Log_Html_Result("FAIL", "Bento Nouveau Sales Not found"  , true, ParentTest.createNode("JDE Category - Bento Nouveau Sales"), new Date());
                 return;
             } 
 
@@ -588,7 +589,7 @@ Thread.sleep(5000);
                 _f++;
                 EX += " - " + "\t" + "\t" + " JDE Category " + "\t" + JDE_Category + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + "Not found -"+JDE_Category;
                 EX += "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("FAIL", "Not found : "+JDE_Category  , true, ParentTest.createNode("JDE Category - "+JDE_Category));
+                Log_Html_Result("FAIL", "Not found : "+JDE_Category  , true, ParentTest.createNode("JDE Category - "+JDE_Category), new Date());
                 return;
             } 
 
@@ -640,7 +641,7 @@ Thread.sleep(5000);
                 _f++;
                 EX += " - " + "\t" + "\t" + " JDE Category " + "\t" + JDE_Category + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + "Not found -"+JDE_Category;
                 EX += "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("FAIL", "Not found : "+JDE_Category  , true, ParentTest.createNode("JDE Category - "+JDE_Category));
+                Log_Html_Result("FAIL", "Not found : "+JDE_Category  , true, ParentTest.createNode("JDE Category - "+JDE_Category), new Date());
                 return;
             } 
                 Element_By_Path_Click("Save Brand changes", "xpath", "//button//div[contains(text(),'Save Changes')]", ParentTest, "no_jira");
@@ -663,7 +664,7 @@ Thread.sleep(5000);
         }else{
             EX += _t + "\t == " + "API Response Error" + "\t" + BaseAPI + "/location/brand/" +BrandID+ "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "location/brand/" +BrandID, false, ParentTest.createNode("API Response Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "location/brand/" +BrandID, false, ParentTest.createNode("API Response Error"), new Date());
             return;
         }
         JSONObject json = new JSONObject(API_Response_Body);
@@ -675,7 +676,7 @@ Thread.sleep(5000);
         }else{
             EX += _t + "\t == " + "API Response Error" + "\t" + BaseAPI + "/config/jde-configuration" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/jde-configuration", false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/jde-configuration", false, ParentTest.createNode("API Responce Error"), new Date());
            // return;
         }
         
@@ -691,13 +692,13 @@ Thread.sleep(5000);
                  {
                   _t++; _p++;
                   EX += _t + "\t" + "Same JDE Category assigned to Brand and GM" + "\t" + "JDE Category in GM: "+JDE_Category+ "\t" + "JDE Category assigned to Brand : "+Brand_JDE_name+"\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                  Log_Html_Result("PASS", "JDE Category in GM : "+JDE_Category+" - JDE Category assigned to Brand : "+Brand_JDE_name, false, ParentTest.createNode("Same JDE Category assigned to Brand and GM"));
+                  Log_Html_Result("PASS", "JDE Category in GM : "+JDE_Category+" - JDE Category assigned to Brand : "+Brand_JDE_name, false, ParentTest.createNode("Same JDE Category assigned to Brand and GM"), new Date());
                  }
                  else
                  {
                   _t++; _f++;
                   EX += _t + "\t" + "Different JDE Category assigned to Brand and GM" + "\t" + "JDE Category in GM: "+JDE_Category+ "\t" + "JDE Category assigned to Brand : "+Brand_JDE_name+"\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                  Log_Html_Result("FAIL", "JDE Category in GM : "+JDE_Category+" - JDE Category assigned to Brand : "+Brand_JDE_name, false, ParentTest.createNode("Different JDE Category assigned to Brand and GM"));
+                  Log_Html_Result("FAIL", "JDE Category in GM : "+JDE_Category+" - JDE Category assigned to Brand : "+Brand_JDE_name, false, ParentTest.createNode("Different JDE Category assigned to Brand and GM"), new Date());
                  }
                  break;
              }
@@ -718,7 +719,7 @@ Thread.sleep(5000);
         }else{
             EX += _t + "\t == " + "API Response Error" + "\t" + BaseAPI + "/config/jde-configuration" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/jde-configuration", false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/jde-configuration", false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
         JSONObject json = new JSONObject(API_Response_Body);
@@ -728,13 +729,13 @@ Thread.sleep(5000);
         {
           _t++;
          _p++; EX += _t + "\t" + "JDE Category count equal in UI dropdown and API" + "\t" + "JDE count API: "+JDE_categories.length() + "\t" + "JDE count UI: "+JDE_count+ "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-         Log_Html_Result("PASS", "JDE Category count equal in UI dropdown and API : "+JDE_categories.length() , false, ParentTest.createNode("JDE Category count verfication"));
+         Log_Html_Result("PASS", "JDE Category count equal in UI dropdown and API : "+JDE_categories.length() , false, ParentTest.createNode("JDE Category count verfication"), new Date());
         }
         else
         {
          _t++;
          _f++; EX += _t + "\t" + "JDE Category count not equal in UI dropdown and API" + "\t" + "JDE count API: "+JDE_categories.length() + "\t" + "JDE count UI: "+JDE_count+ "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-         Log_Html_Result("FAIL", "JDE Category count not equal in UI dropdown and API : "+JDE_categories.length() , false, ParentTest.createNode("JDE Category count verfication"));
+         Log_Html_Result("FAIL", "JDE Category count not equal in UI dropdown and API : "+JDE_categories.length() , false, ParentTest.createNode("JDE Category count verfication"), new Date());
        
         }
         EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == JDE Count Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
@@ -753,7 +754,7 @@ Thread.sleep(5000);
         }else{
             EX += _t + "\t == " + "API Response Error" + "\t" + BaseAPI + "/config/jde-configuration" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/jde-configuration", false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/jde-configuration", false, ParentTest.createNode("API Responce Error"), new Date());
            // return;
         }
         
@@ -767,7 +768,7 @@ Thread.sleep(5000);
                  JDE_id = JDE_categories.getJSONObject(i).getString("id");
                   _t++; _p++;
                   EX += _t + "\t" + "JDE Category UI : "+JDE_category + "\t" + "JDE ID: "+JDE_id  + "\t" + "JDE Category API: " +JDE_category+ "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                  Log_Html_Result("PASS", "JDE Category and ID : " +JDE_id, false, ParentTest.createNode("JDE Category & ID"));
+                  Log_Html_Result("PASS", "JDE Category and ID : " +JDE_id, false, ParentTest.createNode("JDE Category & ID"), new Date());
             
              }
         }
@@ -788,7 +789,7 @@ Thread.sleep(5000);
         }else{
             EX += _t + "\t == " + "API Response Error" + "\t" + BaseAPI + "/location/sector/" +G_ID  + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/sector/"+G_ID, false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/sector/"+G_ID, false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
         JSONObject json = new JSONObject(API_Response_Body);
@@ -805,7 +806,7 @@ Thread.sleep(5000);
                  //Print Pass new created group has JDE category assigned
                     _t++; _p++;
                     EX += _t + "\t" + "JDE Category assigned to global menu" + "\t" + "JDE ID: " + JDE_id + "\t" + "JDE API ID: " +company.getJSONObject("meta").getString("jde_category")  + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "JDE Category assigned to global menu : " + JDE_id, false, ParentTest.createNode("JDE Category assigned correctly"));
+                    Log_Html_Result("PASS", "JDE Category assigned to global menu : " + JDE_id, false, ParentTest.createNode("JDE Category assigned correctly"), new Date());
             
               }
               else
@@ -813,7 +814,7 @@ Thread.sleep(5000);
                    //Print fail
                   _t++; _f++;
                   EX += _t + "\t" + "JDE Category not assigned to Global menu" + "\t" + "JDE ID: " + JDE_id + "\t" + "JDE API ID: " +company.getJSONObject("meta").getString("jde_category")  + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                  Log_Html_Result("FAIL", "JDE Category assigned to global menu incorrectly: "+company.getJSONObject("meta").getString("jde_category") , false, ParentTest.createNode("JDE Category assigned incorrectly"));
+                  Log_Html_Result("FAIL", "JDE Category assigned to global menu incorrectly: "+company.getJSONObject("meta").getString("jde_category") , false, ParentTest.createNode("JDE Category assigned incorrectly"), new Date());
               }
           }
           
@@ -824,7 +825,7 @@ Thread.sleep(5000);
                  //Print Pass new created group has JDE category assigned
                     _t++; _p++;
                     EX += _t + "\t" + "Global Menu created without JDE Category" + "\t" + "GM name: Automation GM 2 "+New_ID + "\t" + "-"  + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "Global Menu created without JDE Category ", false, ParentTest.createNode("JDE Category optional when Global menu created"));
+                    Log_Html_Result("PASS", "Global Menu created without JDE Category ", false, ParentTest.createNode("JDE Category optional when Global menu created"), new Date());
               }
           }
         } 

@@ -1665,7 +1665,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             BW1_FAIL_LOG_UPDATE("= GUI_Run_Manual ERROR > " + ex.getMessage());
         }           
     }
-    public String JOB_Run_Auto(String run_type, String config){
+    public String JOB_Run_Auto(String job_name, String run_type, String config){
         run_start = Instant.now();
         Log  = "";
         String RES = "";
@@ -5745,7 +5745,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
     } 
 
-    protected void PressEnter(String NAME, WebElement E, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Element_SendKey_Enter(String NAME, WebElement E, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }

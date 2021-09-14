@@ -1,6 +1,7 @@
 package AP3;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Random;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -115,7 +116,7 @@ class AP3_reschedule_menu extends AP3_GUI{
                 }else{
                     EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/calendar/" + BrandID + "?nocache=false"+ "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID + "?nocache=false", false, ParentTest.createNode("API Responce Error"));
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID + "?nocache=false", false, ParentTest.createNode("API Responce Error"), new Date());
                     return;
                 }      
                 JSONObject json = new JSONObject(API_Response_Body);
@@ -175,7 +176,7 @@ class AP3_reschedule_menu extends AP3_GUI{
             }else{
                 EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/calendar/" + BrandID + "?nocache=false" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                 "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID + "?nocache=false", false, ParentTest.createNode("API Responce Error"));
+                Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID + "?nocache=false", false, ParentTest.createNode("API Responce Error"), new Date());
                 return;
                 }     
             JSONObject json = new JSONObject(API_Response_Body);

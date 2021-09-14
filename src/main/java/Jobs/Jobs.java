@@ -701,7 +701,7 @@ public class Jobs extends javax.swing.JInternalFrame {
     //<editor-fold defaultstate="collapsed" desc="Jobs > Job Name, Config">
     private void Job_AP3(String job, String config){
         AP3.AP3_GUI _Job = new AP3.AP3_GUI();
-        String RES = _Job.JOB_Run_Auto(r_type, config);
+        String RES = _Job.JOB_Run_Auto(job, r_type, config);
         txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         if(!RES.contains("OK")){
@@ -710,7 +710,7 @@ public class Jobs extends javax.swing.JInternalFrame {
     }
     private void Job_API(String job, String config){
         API.API_GUI _Job = new API.API_GUI();
-        String RES = _Job.JOB_Run_Auto(r_type, config);
+        String RES = _Job.JOB_Run_Auto(job, r_type, config);
         txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         if(!RES.contains("OK")){
@@ -719,7 +719,7 @@ public class Jobs extends javax.swing.JInternalFrame {
     }
     private void Job_Android(String job, String config){
         Mob_Android.An_GUI _Job = new Mob_Android.An_GUI();
-        String RES = _Job.JOB_Run_Auto(r_type, config);
+        String RES = _Job.JOB_Run_Auto(job, r_type, config);
         txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         if(!RES.contains("OK")){
@@ -728,7 +728,7 @@ public class Jobs extends javax.swing.JInternalFrame {
     }
     private void Job_C360(String job, String config){
         C360.C360_GUI _Job = new C360.C360_GUI();
-        String RES = _Job.JOB_Run_Auto(r_type, config);
+        String RES = _Job.JOB_Run_Auto(job, r_type, config);
         txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         if(!RES.contains("OK")){
@@ -737,7 +737,7 @@ public class Jobs extends javax.swing.JInternalFrame {
     }
     private void Job_DL(String job, String config){
         DL.DL_GUI _Job = new DL.DL_GUI();
-        String RES = _Job.JOB_Run_Auto(r_type, config);
+        String RES = _Job.JOB_Run_Auto(job, r_type, config);
         txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         if(!RES.contains("OK")){

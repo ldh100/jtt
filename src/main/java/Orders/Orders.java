@@ -453,7 +453,9 @@ public class Orders extends javax.swing.JInternalFrame {
         this.setTitle("Orders");
     }
     private void btnOR_UserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOR_UserMouseClicked
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         Get_Mobile_User();
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }  
     private void Load_User_V_Orders(){
 
@@ -504,6 +506,7 @@ public class Orders extends javax.swing.JInternalFrame {
         BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3));
     }//GEN-LAST:event_DV_BrandsMouseClicked
     private void btnOR_SiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOR_SiteMouseClicked
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n- Get Site Orders ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         Auth = "Bearer " + AP3_TKN;
@@ -518,8 +521,10 @@ public class Orders extends javax.swing.JInternalFrame {
         lblOrders.setText(env + ": Site '" + SITE + "'   >>>  Last 7 days Orders: " + DV1.getRowCount() + " found");
         txtLog.append(env + " > " + cmbApp.getSelectedItem().toString() + " > " + SITE + " - " + DV1.getRowCount() + " found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());         
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnOR_SiteMouseClicked
     private void btnOR_BrandMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOR_BrandMouseClicked
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n- Get Brand Orders ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         Auth = "Bearer " + AP3_TKN;
@@ -534,6 +539,7 @@ public class Orders extends javax.swing.JInternalFrame {
         lblOrders.setText(env + ": Site '" + SITE + "', Brand '" + BRAND + "'   >>>  Last 7 days Orders: " + DV1.getRowCount() + " found");
         txtLog.append(env + " > " + cmbApp.getSelectedItem().toString() + " > " + SITE + " > " + BRAND + " - " + DV1.getRowCount() + " found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnOR_BrandMouseClicked
     // </editor-fold>
 
@@ -910,8 +916,8 @@ public class Orders extends javax.swing.JInternalFrame {
         btnCart.setEnabled(false);
         String _Promo = "None";
         String _Name = "?";
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        String[] SitesColumnsName = {"Env","App", "Site","Destination","Req_Date","PickupName","Promo","Service","JCartID","OrderID","Modified_Date"}; 
+
+        String[] SitesColumnsName = {"Env","App", "Site", "Destination", "Req_Date", "PickupName", "Promo", "Service", "JCartID", "OrderID", "Modified_Date"}; 
         DefaultTableModel dm = new DefaultTableModel();
         dm.setColumnIdentifiers(SitesColumnsName);
         DV1.setModel(dm);
@@ -991,7 +997,6 @@ public class Orders extends javax.swing.JInternalFrame {
             } 
             
         }    
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
 
     private void GetShoppingCartAndOrder() {
@@ -999,13 +1004,18 @@ public class Orders extends javax.swing.JInternalFrame {
         txtLog.append("- Shopping Cart..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         String J = "==== Shopping Cart" + "\r\n";
-
+        String SC_Brand_ID = "";
+        String SC_Site_ID = "";
+        
         String CartID = "";
         Auth = "Bearer " + AP3_TKN;
         try {
             CartID = DV1.getValueAt(DV1.getSelectedRow(), 8).toString();
             Api_Call("GET", BaseAPI + "/shoppingcart/" + CartID, "", "");
             J += BaseAPI + "/shoppingcart/" + CartID + "\r\n" + json.toString(4) + "\r\n";
+            if(json.has("brand")){
+                SC_Brand_ID = json.getString("brand");
+            }
         } catch (Exception ex) {
             J += BaseAPI + "/shoppingcart/" + CartID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
@@ -1034,12 +1044,25 @@ public class Orders extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
 
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+
         String R = A.Func.SHOW_FILE(J, "json");
         if (!R.equals("OK")) {
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
+        
+        if(DV1.getValueAt(DV1.getSelectedRow(), 2).toString().trim().equals("?")){
+            Api_Call("GET", BaseAPI + "/location/brand/" + SC_Brand_ID, Auth, "");    
+                if(json.has("group")){
+                    SC_Site_ID = json.getString("group");
+                    Api_Call("GET", BaseAPI + "/location/group/" + SC_Site_ID, Auth, "");                 
+                    if(json.has("name")){
+                        String SC_Site = json.getString("name");
+                        DV1.setValueAt(SC_Site, DV1.getSelectedRow(), 2);
+                    } 
+                }      
+        }
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
 
     protected void Api_Call(String Method, String EndPoint, String AUTH, String BODY) {
