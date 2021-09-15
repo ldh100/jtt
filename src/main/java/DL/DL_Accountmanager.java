@@ -153,8 +153,8 @@ class DL_Accountmanager extends DL_GUI {
                 if (FAIL) {
                     return;
                 }
-
                 Thread.sleep(5000);
+                
                 if (p) {
                     Scroll_to_WebElement("Scroll to Member", "xpath", "//p[text()=\"" + Memberlist.get(j).replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
                     
@@ -164,15 +164,31 @@ class DL_Accountmanager extends DL_GUI {
                         return;
                     }
                 } else {
-                    Scroll_to_WebElement("Scroll to Member", "xpath", "//div[contains(text()=\"" + Memberlist.get(j).replaceAll("'", "\\\'") + "\")]", ParentTest, "no_jira");
                     
-                    Thread.sleep(2000);
-                    Element_By_Path_Click("Click on Continue as a Member", "xpath", "//div[text()=\"" + Memberlist.get(j).replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
+                   Thread.sleep(2000);
+                   T_Index = 0;
+               
+                do {
+
+                    Move_to_Element_By_Path("Scroll to Member", "xpath", "//div[text()=\"" + Memberlist.get(j).replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
+                    T_Index += 1;
+                    Element_By_Path_Click("Select the  Member", "xpath", "//div[text()=\"" + Memberlist.get(j).replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
+                    if (!FAIL) {
+                        break;
+                    }
+                    List_L2("List all Members", "xpath", "//button[contains(@class, 'MuiGrid-root jss')]/div", ParentTest, "no_jira");
                     if (FAIL) {
                         return;
                     }
+                    Scroll_to_Element("Scroll to last element", L2.get(L2.size() - 1), ParentTest, "no_jira");
+                    if (FAIL) {
+                        return;
+                    }
+
+                } while (T_Index < 10);
+
                 }
-                System.out.println(Memberlist.get(j));
+//                System.out.println(Memberlist.get(j));
 
                 Element_By_Path_Click("Click on Continue as a Member", "xpath", "//span[text()='Continue as Member']", ParentTest, "no_jira");
                 if (FAIL) {
@@ -223,7 +239,7 @@ class DL_Accountmanager extends DL_GUI {
                     } else {
                         Element_By_Path_Click("Open 'Filters Modal Popup'", "xpath", "(//div[@class=' css-1uxlrog-indicatorContainer'])[2]", ParentTest, "no_jira");
                     }
-
+                    Element_E1_Find("Verifying the old filter", "xpath", "//div[contains(text(), '" + OldFilterName + "')]", ParentTest, "no_jira");
                     Element_By_Path_Click("Select the dropdown value", "xpath", "//div[contains(text(), '" + NewFilterName + "')]", ParentTest, "no_jira");
                     Thread.sleep(1000);
                 }
