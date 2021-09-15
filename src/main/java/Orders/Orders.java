@@ -985,7 +985,8 @@ public class Orders extends javax.swing.JInternalFrame {
                 DV1.getColumnModel().getColumn(6).setPreferredWidth(110); // service
                 DV1.getColumnModel().getColumn(7).setPreferredWidth(50); 
                 DV1.getColumnModel().getColumn(8).setPreferredWidth(50); 
-                DV1.getColumnModel().getColumn(9).setPreferredWidth(180); 
+                DV1.getColumnModel().getColumn(9).setPreferredWidth(60); 
+                DV1.getColumnModel().getColumn(10).setPreferredWidth(150); 
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
 
                 sorter.setSortable(10, true); 
