@@ -11,10 +11,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- *
- * @author prathyusha.deshpande
- */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 class DL_Accountmanager extends DL_GUI {
 
     protected DL_Accountmanager(DL_GUI a) {
@@ -113,7 +110,7 @@ class DL_Accountmanager extends DL_GUI {
                         return;
                     }
 
-                } while (T_Index < 44);
+                } while (T_Index < 110);
 
                 L2 = new ArrayList<>();
                 L2.addAll(new HashSet(L3));
@@ -185,7 +182,7 @@ class DL_Accountmanager extends DL_GUI {
                         return;
                     }
 
-                } while (T_Index < 10);
+                } while (T_Index < 110);
 
                 }
 //                System.out.println(Memberlist.get(j));
@@ -210,7 +207,7 @@ class DL_Accountmanager extends DL_GUI {
                     Element_Text("Metric Values", L1.get(k), ParentTest, "no_jira");
                 }
                 Oldfilter = Newfilter;
-                Newfilter = Memberlist.get(j).replaceAll("['/]+", "");
+                Newfilter = Memberlist.get(j).replaceAll("[',./()&]+", "");
                 
             }
 
@@ -254,6 +251,7 @@ class DL_Accountmanager extends DL_GUI {
                     if (FAIL) {
                         return;
                     }
+                    
                 } else {
                     IsFilterNew = false;
                     Element_By_Path_Click("Click on 'Edit Filter' button", "xpath", "//button[contains(.,'Edit Filter')]", ParentTest, "no_jira");
@@ -303,6 +301,7 @@ class DL_Accountmanager extends DL_GUI {
                     if (FAIL) {
                         return;
                     }
+       
                 } else {
                     Element_By_Path_Click("Click on 'Update Filter' button", "xpath", "//button/span[contains(.,'Update Filter')]", ParentTest, "no_jira");
                     if (FAIL) {

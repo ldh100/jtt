@@ -47,7 +47,7 @@ class DL_drilldown extends DL_GUI {
             }
             Thread.sleep(2000);
             Element_By_Path_Click("Click on the Category", "xpath", "(//button[contains(@class,'MuiTypography-root MuiLink-root MuiLink-underlineNone')])[1]", ParentTest, "no_jira");
-            Thread.sleep(20000);
+            Thread.sleep(25000);
             Element_By_Path_Click("Select the Categories/Items", "xpath", "(//button[contains(@class,'MuiTypography-root MuiLink-root MuiLink-underlineNone')])[4]", ParentTest, "no_jira");
             Element_By_Path_Click("Click on 'Export to CSV' button", "xpath", "(//span[contains(text(),'Export CSV')])/..", ParentTest, "no_jira");
             Element_By_Path_Click("Click on 'Manufacturer' tab'", "xpath", "//span[contains(text(),'Manufacturer')]", ParentTest, "no_jira");
@@ -56,7 +56,7 @@ class DL_drilldown extends DL_GUI {
                 Element_Text("Section name", L2.get(i), ParentTest, "no_jira");
                 Element_Click("Select the Section", L2.get(i), ParentTest, "no_jira");
             }
-            Thread.sleep(1000);
+            Thread.sleep(5000);
 
             Element_By_Path_Click("Select the Manufacturer", "xpath", "(//button[contains(@class,'MuiTypography-root MuiLink-root MuiLink-underlineNone')])[2]", ParentTest, "no_jira");
             Thread.sleep(20000);
