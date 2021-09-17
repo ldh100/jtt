@@ -29,8 +29,12 @@ import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.PointOption.point;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import java.awt.Cursor;
 import java.awt.Desktop;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
@@ -52,6 +56,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -69,12 +74,15 @@ import java.util.function.Function;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import javax.imageio.ImageIO;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import org.apache.commons.io.FileUtils;
@@ -996,6 +1004,35 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected boolean _Promo = false;
     protected boolean _Mplan = false;
     protected boolean _Feedback = false;
+    
+    protected JSONObject json;
+    protected JSONObject requestParams = null;
+    protected String BODY = "";   
+    //  "exact": {
+    protected String exact_gateway_password = "~RSQzgwC";
+    protected String exact_gateway_id = "AE7628-02";
+    protected String exact_id = "APE3Ev9vQkfo2mmOpKP7fGJ48NKAPOugo0gdlWJqS3O";
+    protected String exate_gateway_password = "";
+    //  "freedompay": {
+    protected String freedompay_id = "9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO";
+    protected String freedompay_terminal_id = "26241559005";
+    protected String freedompay_store_id = "16167424007";
+    protected String FP_URL = ""; //https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
+    
+    protected String ShoppingCart_Delivery_ID = "";
+    protected String Order_Delivery_ID = "";
+    protected String Requested_Date = "";
+    
+    protected String Auth = "";
+    protected String EXACT_Payment_TKN = "";
+    protected String FP_Payment_TKN = "";
+    protected String Last_SCart = ""; 
+    protected String DropOffLocation = ""; 
+    protected JSONArray JArray_MENUS;
+    protected JSONArray JArray_CATS;
+    protected JSONArray JArray_ITEMS; 
+    protected JSONArray JArray_TSLOTS; 
+    protected String Menu_ID = "";
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">   
@@ -2704,7 +2741,173 @@ public class An_GUI extends javax.swing.JInternalFrame {
         return "= InstallBuild_S3: Check Result...." + "\r\n";  
     }    
     // </editor-fold>
-    
+
+    //<editor-fold defaultstate="collapsed" desc="Place Order for Bolter">
+    protected void Api_Call(String Method, String EndPoint, String AUTH, String BODY) {
+        FAIL = false;
+        json = null;
+        RequestSpecification request;
+        request = RestAssured.given();
+        int status = 0;
+        String Result = "?";
+        if (sw1.isRunning()) {
+            sw1.reset();
+        }        
+        if (!AUTH.isEmpty()) {
+            request.header("Authorization", AUTH);
+        }
+        request.header("Content-Type", "application/json");
+        request.header("Accept", "application/json");
+        try {
+            sw1.start();
+            Response response = null;
+            switch (Method) {
+                case "GET":
+                    if (BODY.equals("Bolter")) {
+                        request.header("From", "Bolter/1.0");
+                    }
+                    response = request.get(EndPoint);
+                    break;
+                case "POST":
+                    request.body(BODY);
+                    response = request.post(EndPoint);
+                    break;
+                case "PATCH":
+                    request.body(BODY);
+                    response = request.patch(EndPoint);
+                    break;
+                case "DELETE":
+                    request.body(BODY);
+                    response = request.delete(EndPoint);
+                    break;
+                case "PUT":
+                    request.body(BODY);
+                    response = request.put(EndPoint);
+                    break;
+                case "OPTIONS":
+                    response = request.options(EndPoint);
+                    break;
+                default:
+                    break;
+            }
+            Result = response.getStatusLine();
+            status = response.getStatusCode();
+            if (status != 200 && status != 201) {
+                txtLog.append("Endpoint: " + EndPoint + "\r\n");
+                txtLog.append("Result: " + status + " - " + Result + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());                
+            }
+            if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
+                json = new JSONObject(response.asString());
+                if (json.has("error")) {
+                    txtLog.append("Error: " + json.getString("error") + "\r\n");
+
+                }
+            }
+        } catch (Exception ex) {
+            FAIL = true;
+            txtLog.append("API Call Error: " + ex.getMessage().trim() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+        }
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();
+    }
+    protected void Place_Order(){
+        //<editor-fold defaultstate="collapsed" desc="Get Brand DropOff Locations">
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("\r\n- Load Brand Drop Off Locations ..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());      
+        try {
+            Api_Call("GET", BaseAPI + "/config/public/" + BrandID, "", "");
+            if(json.has("delivery_destinations")) {
+                JSONArray DESTINATIONS = json.getJSONArray("delivery_destinations");
+                DropOffLocation = DESTINATIONS.getString(0);
+            }else{
+                txtLog.append("=== Brand/Station '" + BRAND + "' > " + " No Dropp-Off Location(s)" + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                return;
+            }
+        } catch (Exception ex) {
+            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
+        }                     
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));  
+        // </editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc="Get Brand Menu">
+        txtLog.append("\r\n- Load Menus ..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+         
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
+        JArray_MENUS = new JSONArray();
+        try {              
+            Api_Call("GET", BaseAPI + "/menu/" + BrandID, "", "");
+            JArray_MENUS.put(json);
+            JSONObject menu = (JSONObject) JArray_MENUS.get(0);             
+            if (menu.has("groups")) {
+                JSONArray groups = menu.getJSONArray("groups");
+                JSONObject gr = groups.getJSONObject(0);         
+                if (gr.has("items")) {
+                    JSONArray items = gr.getJSONArray("items");
+                    JSONObject Item = (JSONObject) items.getJSONObject(0);
+                    if(Item.has("id")){
+                        Menu_ID = Item.getString("id");
+                    }else{
+                        Menu_ID = "not found";
+                    }
+                }
+            }else{
+                txtLog.append("=== Brand/Station '" + BRAND + "' > " + " No Menu(s) found" + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                return;
+            }
+        } catch (Exception ex) {
+            txtLog.append("Error " + ex.getMessage() + "\r\n"); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
+        }         
+        
+        txtLog.append("=== Brand/Station '" + BRAND + "' > " + JArray_MENUS.length() + " Menu(s) found" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+        // </editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc="Get Delievery Time Slot">
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        txtLog.append("\r\n- Load Brand Timeslots ..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+        JArray_TSLOTS = new JSONArray(); 
+        try { 
+            Api_Call("GET", BaseAPI + "/location/brand/" + BrandID + "/timeslots/delivery/menu/" + Menu_ID, "", "");
+            if (json.has("timeslots")) {
+                JArray_TSLOTS = json.getJSONArray("timeslots");
+                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
+                for (int i = 0; i < JArray_TSLOTS.length(); i++) {
+                    JSONObject timeslot = JArray_TSLOTS.getJSONObject(i);
+
+                }
+            }else{
+                txtLog.append("=== Brand/Station '" + BRAND + "' > " + " No Delivery Timeslots found" + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                return;
+            } 
+
+
+        } catch (Exception ex) {
+            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
+        }         
+        txtLog.append("=== Selected Brand > " + JArray_TSLOTS.length() + " Delivery Time Slots" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());         
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        // </editor-fold>        
+    }
+   
+    // </editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc="Extend HTML Report Methods">
     protected void Extent_Report_Config() throws IOException{
         HTML_Report_Path = System.getProperty("user.home") + File.separator + "Desktop";
@@ -2885,6 +3088,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 //asb.usingDriverExecutable(new File(("/path/to/node")));
                 HashMap<String, String> environment = new HashMap();
                 environment.put("ANDROID_HOME", "/Users/" + A.A.UserID + "/Library/Android/sdk"); 
+//                environment.put("JAVA_HOME", "/Users/" + A.A.UserID + "/Library/Android/sdk/platform-tools"); 
+                environment.put("JAVA_HOME", "/Library/Java/JavaVirtualMachines/jdk1.8.0_281.jdk/Contents/Home"); 
+                
                 ASB.withEnvironment(environment);
                 ASB.withAppiumJS(new File(("/usr/local/lib/node_modules/appium/build/lib/main.js")));
             }
@@ -2911,6 +3117,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
     }
     private void Execute_Bolter() throws Exception {
+        
+        Place_Order(); // ===================================
+        
         if(true){
             SCOPE += "Splash";
             ParentTest = HtmlReport.createTest("Bolter Splash"); 

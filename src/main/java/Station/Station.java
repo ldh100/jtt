@@ -484,8 +484,6 @@ public class Station extends javax.swing.JInternalFrame {
     JSONArray JArray_CATS;
     JSONArray JArray_ITEMS; 
     
-    List<String> ModGroups = new ArrayList<>(); 
-    
     private boolean Load;
     private boolean FAIL;
     
@@ -1120,7 +1118,6 @@ public class Station extends javax.swing.JInternalFrame {
         }
         Stopwatch sw2 = Stopwatch.createUnstarted();
         
-         
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         String label = "<empty> 'en'";
         String resp;
@@ -1135,7 +1132,6 @@ public class Station extends javax.swing.JInternalFrame {
                 Api_Call("GET", BaseAPI + "/menu/" + id, "", "");
 
                 JArray_MENUS.put(json);
-                //JSONObject menu = new JSONObject(json);
                 resp = "OK " + String.format("%.2f", (double)(sw2.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
                 if(json.has("label")){                    
                     if(json.getJSONObject("label").has("en")) {
@@ -1209,7 +1205,7 @@ public class Station extends javax.swing.JInternalFrame {
             DV_DTS.changeSelection(DV_DTS.getRowCount() - 1, 0, false, false);
         }        
         lblBTS.setText("Del Slots " + DV_DTS.getRowCount());     
-        txtLog.append("=== Selected Brand > " + DV_DTS.getRowCount() + " Delivert Time Slots" + "\r\n");
+        txtLog.append("=== Selected Brand > " + DV_DTS.getRowCount() + " Delivery Time Slots" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());         
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
     }
@@ -1237,9 +1233,9 @@ public class Station extends javax.swing.JInternalFrame {
             DV_MTS.getColumnModel().getColumn(0).setPreferredWidth(55);
             DV_MTS.getColumnModel().getColumn(1).sizeWidthToFit();
             
-            
-        if(DV_MTS.getRowCount() > 0){
-            DV_MTS.changeSelection(DV_MTS.getRowCount() - 1, 0, false, false);        }     
+            if(DV_MTS.getRowCount() > 0){
+                DV_MTS.changeSelection(DV_MTS.getRowCount() - 1, 0, false, false);
+            }     
         } catch (Exception ex) {
             txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
@@ -1374,7 +1370,6 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.append("\r\n- GetMods for " + SelectedItems.length + " selected Item(s): " + "\r\n"); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
 
-        ModGroups.clear();
         int mGR = 0;
         int mIT = 0;
         try {
@@ -1407,7 +1402,6 @@ public class Station extends javax.swing.JInternalFrame {
                         }else{
                             GroupName = "label 'en' Not Found";
                         } 
-                        ModGroups.add(GroupName);
 
                         label = GroupName;
                         if(!GroupName.contains("min") && oGroup.has("min") && oGroup.has("max")){
@@ -1716,32 +1710,28 @@ public class Station extends javax.swing.JInternalFrame {
         JSONObject jItem = null;
 
         try{
-            for(int i = 0; i < SelectedItems.length; i++){
+            for(int Item_Index = 0; Item_Index < SelectedItems.length; Item_Index++){
                 JSONArray jOptions = new JSONArray();
                 jItem = new JSONObject();  
-                jItem.put("id", DV_Items.getValueAt(SelectedItems[i],6).toString());
-                int q = Integer.parseInt(DV_Items.getValueAt(SelectedItems[i],3).toString());
+                jItem.put("id", DV_Items.getValueAt(SelectedItems[Item_Index],6).toString());
+                int q = Integer.parseInt(DV_Items.getValueAt(SelectedItems[Item_Index],3).toString());
                 jItem.put("quantity", q);
 
                 if(SelectedMods.length >0){
-                    for(int k = 0; k < ModGroups.size(); k++){ 
-                        JSONObject jOption = new JSONObject();
-                        JSONArray jOptItems = new JSONArray();
-                        ModGroup = ModGroups.get(k); 
-                        for(int j = 0; j < SelectedMods.length; j++){
-                            if(DV_Items.getValueAt(SelectedItems[i],1).equals(DV_Mods.getValueAt(SelectedMods[j],0))
-                                    && ModGroup.equals(DV_Mods.getValueAt(SelectedMods[j],3).toString())){
-                                JSONObject jOptionItem = new JSONObject();                                
-                                jOptionItem.put("id", DV_Mods.getValueAt(SelectedMods[j],4).toString());
+                    for(int Mod_Index = 0; Mod_Index < SelectedMods.length; Mod_Index++){
+                        if(DV_Items.getValueAt(SelectedItems[Item_Index],1).equals(DV_Mods.getValueAt(SelectedMods[Mod_Index],0))){
+                            JSONObject jOption = new JSONObject(); 
+                            JSONArray jOptItems = new JSONArray();
+                            JSONObject jOptionItem = new JSONObject();                                
+                                jOptionItem.put("id", DV_Mods.getValueAt(SelectedMods[Mod_Index],4).toString());
                                 jOptItems.put(jOptionItem);
-                            }                               
-                        }                                   
-                        JSONObject label = new JSONObject();
-                        label.putOpt("en", ModGroup);
-                        jOption.put("label", label);
-                        jOption.put("items", jOptItems);
-                        jOptions.put(jOption); 
-                    }
+                            JSONObject label = new JSONObject();
+                                label.putOpt("en", DV_Mods.getValueAt(SelectedMods[Mod_Index],3).toString());
+                                jOption.put("label", label);
+                                jOption.put("items", jOptItems);
+                            jOptions.put(jOption);
+                        }                               
+                    }                                   
                     jItem.put("options", jOptions);                    
                 }
                 jItems.put(jItem);            
@@ -1830,35 +1820,30 @@ public class Station extends javax.swing.JInternalFrame {
         int[] SelectedItems = DV_Items.getSelectedRows();
         JSONArray jItems = new JSONArray();
         JSONObject jItem = null;
-
         
         try{
-            for(int i = 0; i < SelectedItems.length; i++){
+            for(int Item_Index = 0; Item_Index < SelectedItems.length; Item_Index++){
                 JSONArray jOptions = new JSONArray();
                 jItem = new JSONObject();  
-                jItem.put("id", DV_Items.getValueAt(SelectedItems[i],6).toString());
-                int q = Integer.parseInt(DV_Items.getValueAt(SelectedItems[i],3).toString());
+                jItem.put("id", DV_Items.getValueAt(SelectedItems[Item_Index],6).toString());
+                int q = Integer.parseInt(DV_Items.getValueAt(SelectedItems[Item_Index],3).toString());
                 jItem.put("quantity", q);
 
                 if(SelectedMods.length >0){
-                    for(int k = 0; k < ModGroups.size(); k++){ 
-                        JSONObject jOption = new JSONObject();
-                        JSONArray jOptItems = new JSONArray();
-                        ModGroup = ModGroups.get(k); 
-                        for(int j = 0; j < SelectedMods.length; j++){
-                            if(DV_Items.getValueAt(SelectedItems[i],1).equals(DV_Mods.getValueAt(SelectedMods[j],0))
-                                                     && ModGroup.equals(DV_Mods.getValueAt(SelectedMods[j],3).toString())){
-                                JSONObject jOptionItem = new JSONObject();                                
-                                jOptionItem.put("id", DV_Mods.getValueAt(SelectedMods[j],4).toString());
+                    for(int Mod_Index = 0; Mod_Index < SelectedMods.length; Mod_Index++){
+                        if(DV_Items.getValueAt(SelectedItems[Item_Index],1).equals(DV_Mods.getValueAt(SelectedMods[Mod_Index],0))){
+                            JSONObject jOption = new JSONObject(); 
+                            JSONArray jOptItems = new JSONArray();
+                            JSONObject jOptionItem = new JSONObject();                                
+                                jOptionItem.put("id", DV_Mods.getValueAt(SelectedMods[Mod_Index],4).toString());
                                 jOptItems.put(jOptionItem);
-                            }                               
-                        }                                   
-                        JSONObject label = new JSONObject();
-                        label.putOpt("en", ModGroup);
-                        jOption.put("label", label);
-                        jOption.put("items", jOptItems);
-                        jOptions.put(jOption); 
-                    }
+                            JSONObject label = new JSONObject();
+                                label.putOpt("en", DV_Mods.getValueAt(SelectedMods[Mod_Index],3).toString());
+                                jOption.put("label", label);
+                                jOption.put("items", jOptItems);
+                            jOptions.put(jOption);
+                        }                               
+                    }                                   
                     jItem.put("options", jOptions);                    
                 }
                 jItems.put(jItem);            
@@ -1961,8 +1946,7 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.append("\r\n- " + "Print Last Update Shopping Cart ...."+ "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());            
             Api_Call("GET", Last_SCart, "", "");
-            String LS = Last_SCart + "\r\n\r\n" + json.toString(4);
-            String R = A.Func.SHOW_FILE(LS, "json");
+            String R = A.Func.SHOW_FILE(Last_SCart + "\r\n\r\n" + json.toString(4), "json");
         }
     }  
     private void Set_Requested_Date(String TYPE){
@@ -2021,8 +2005,8 @@ public class Station extends javax.swing.JInternalFrame {
         BODY = "{\"user\":\"" + Mobile_User_ID + "\"}";
         for (int i = 0; i < Payment_Methods_IDS.size(); i++) {
             
-//            JOB_Api_Call("Mobile User Delete Payment Method " + (i + 1), "DELETE",
-//                    BaseAPI + "/payment/" + exact_id + "/method/" + Payment_Methods_IDS.get(i), Auth, BODY, 200, ParentTest, "no_jira");
+//            JOB_Api_Call("Mobile User Delete Payment Method " + (Item_Index + 1), "DELETE",
+//                    BaseAPI + "/payment/" + exact_id + "/method/" + Payment_Methods_IDS.get(Item_Index), Auth, BODY, 200, ParentTest, "no_jira");
         }
     }
     private void EXACT(){
