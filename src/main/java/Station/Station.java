@@ -17,8 +17,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -31,18 +34,13 @@ import javax.swing.JComboBox;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import org.apache.poi.ss.formula.functions.Subtotal;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-/**
- *
- * @author Oleg.Spozito
- */
+
 public class Station extends javax.swing.JInternalFrame {
 
 //PROMO CODES (that work on Staging)
@@ -51,6 +49,11 @@ public class Station extends javax.swing.JInternalFrame {
 //promo100up2- 100%
 //comsonetime- flat 5 dollars
 //compassunlimited- 5 dollars    
+/* 
+    Production Site for BC 
+    https://adminpanel.compassdigital.org/#/sites/Ym7By6oy1dTOBE5P880jTamr9022GqCD7BB2y1vOIlgk1B16Y7hzOGjMXNMoh1oQRojae9T8JqBXJ8llt9d/site/PpzmrEBrveH1kX3Zrk3ytzrrB0O1XpSk3m973O9Xcw46vkWyKPtl8JGR17m2TEoDLA2YAETGOo/
+    
+*/   
     
     public Station() {
         initComponents();
@@ -654,8 +657,13 @@ public class Station extends javax.swing.JInternalFrame {
 
     private void DV_ModsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_ModsMouseClicked
         int index = DV_Mods.getSelectedRow();
-        if(String.valueOf(DV_Mods.getValueAt(index, 0)).equals(" === ")){
-            DV_Mods.getSelectionModel().removeSelectionInterval(index, index);
+        try{
+            if(String.valueOf(DV_Mods.getValueAt(index, 0)).equals(" === ")){
+                DV_Mods.getSelectionModel().removeSelectionInterval(index, index);
+            }
+        } catch (Exception ex){
+            txtLog.append("DV_ModsMouseClicked ERROR: " + ex.getMessage() + "\r\n"); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());            
         }
     }//GEN-LAST:event_DV_ModsMouseClicked
 
@@ -747,7 +755,6 @@ public class Station extends javax.swing.JInternalFrame {
             C += "COUNTRY: " + COUNTRY + "\r\n"; 
             C += "MOBILE_ID: " + txtMobile_ID.getText().trim() + "\r\n";
             C += "MOBILE_PW: " + txtMobile_PW.getText()  + "\r\n";
-
         } catch (Exception ex)  {
             txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1568,12 +1575,6 @@ public class Station extends javax.swing.JInternalFrame {
             return;
         }
         if(COUNTRY.toLowerCase().startsWith("c")){
-            EXACT();
-            if(FAIL) {
-                Validate_Place_Order();
-                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                return;
-            }
             if(TYPE.equals("P")){
                 New_Pickup_ShoppingCart(); 
                 if(FAIL) {
@@ -1581,11 +1582,24 @@ public class Station extends javax.swing.JInternalFrame {
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
                 }
-                Place_Update_Pickup_Order(EXACT_Payment_TKN);
-                if(FAIL) {
-                    Validate_Place_Order();
+                if(env.equals("PR")){
+                    txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());                     
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
+                }else{                 
+                    EXACT();
+                    if(FAIL) {
+                        Validate_Place_Order();
+                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                        return;
+                    }                
+                    Place_Update_Pickup_Order(EXACT_Payment_TKN);
+                    if(FAIL) {
+                        Validate_Place_Order();
+                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                        return;
+                    }
                 }
             }
             if(TYPE.equals("D")){
@@ -1595,21 +1609,28 @@ public class Station extends javax.swing.JInternalFrame {
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
                 }
-                Place_Update_Delivery_Order(EXACT_Payment_TKN);
-                if(FAIL) {
-                    Validate_Place_Order();
+                if(env.equals("PR")){
+                    txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());                     
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
+                }else{                
+                    EXACT();
+                    if(FAIL) {
+                        Validate_Place_Order();
+                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                        return;
+                    }                
+                    Place_Update_Delivery_Order(EXACT_Payment_TKN);
+                    if(FAIL) {
+                        Validate_Place_Order();
+                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                        return;
+                    }
                 }
             }            
         }
         if(COUNTRY.toLowerCase().startsWith("u")){
-            FP();
-            if(FAIL) {
-                Validate_Place_Order();
-                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                return;
-            }
             if(TYPE.equals("P")){
                 New_Pickup_ShoppingCart();  
                 if(FAIL) {
@@ -1617,11 +1638,24 @@ public class Station extends javax.swing.JInternalFrame {
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
                 }
-                Place_Update_Pickup_Order(FP_Payment_TKN);
-                if(FAIL) {
-                    Validate_Place_Order();
+                if(env.equals("PR")){
+                    txtLog.append("\r\n=== Place Order In Production is Not Supported. \r\n=== Shopping Cart created." + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
+                }else{                
+                    FP();
+                    if(FAIL) {
+                        Validate_Place_Order();
+                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                        return;
+                    }                
+                    Place_Update_Pickup_Order(FP_Payment_TKN);
+                    if(FAIL) {
+                        Validate_Place_Order();
+                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                        return;
+                    }
                 }
             }
             if(TYPE.equals("D")){
@@ -1631,11 +1665,24 @@ public class Station extends javax.swing.JInternalFrame {
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
                 }
-                Place_Update_Delivery_Order(FP_Payment_TKN);
-                if(FAIL) {
-                    Validate_Place_Order();
+                if(env.equals("PR")){
+                    txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());                    
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
+                }else{
+                    FP();
+                    if(FAIL) {
+                        Validate_Place_Order();
+                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                        return;
+                    }                   
+                    Place_Update_Delivery_Order(FP_Payment_TKN);
+                    if(FAIL) {
+                        Validate_Place_Order();
+                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                        return;
+                    }
                 }
             } 
         }
@@ -1749,7 +1796,7 @@ public class Station extends javax.swing.JInternalFrame {
         if(json != null){
             try{
                 ShoppingCart_Pickup_ID = json.getString("id");
-                txtLog.append("== " + "Updated Updated SCart: \r\n"  + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
+                txtLog.append("== " + "Updated Shopping Cart: \r\n"  + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex){
                 FAIL = true;
@@ -2123,11 +2170,21 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.append("\r\n- " + "Update Delivery Order > 'Ready' ...."+ "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         Auth = "Bearer " + AP3_TKN;
-        requestParams = new JSONObject();   //  Update Delivery Order  =================
-        JSONObject is = new JSONObject();      
+        requestParams = new JSONObject();   //  Update Delivery Order > Status and requested_date =================
+        
+        ZoneOffset offset = OffsetDateTime.now(ZoneId.of(TimeZone.getDefault().getID())).getOffset();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date date = new Date();
+        date.setTime(date.getTime() + 20000); // now + 20 sec
+        String requested_date = dateFormat.format(date);
+
+        JSONObject is = new JSONObject(); 
         is.put("in_progress", true);
         is.put("ready", true);     
         requestParams.put("is", is); 
+        requestParams.put("requested_date", requested_date); 
+        
         BODY = requestParams.toString();
         Api_Call("PATCH",  BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY);        
         if(json != null){

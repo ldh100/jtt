@@ -1692,18 +1692,18 @@ class AP3_site extends AP3_GUI{
                     Element_By_Path_Click("Select new Site Address", "xpath", "//*[contains(text(), '" + "Bordeaux Drive" + "')]", ParentTest, "no_jira");
                         if (FAIL) { return;} 
                     Thread.sleep(1000); 
-                    Element_By_Path_Text_Select_Copy("New Site Address", "xpath", "//*[@id='site-detail']//input[@aria-label='Address']", ParentTest, "no_jira"); 
+                    Element_By_Path_Text("New Site Address", "xpath", "//*[@id='site-detail']//input[@aria-label='Address']", ParentTest, "no_jira"); 
                         if (FAIL) { return;}
                     Element_By_Path_Text("New Site Country", "xpath", "//input[@aria-label='Country']/parent::div", ParentTest, "no_jira"); 
-                        if (FAIL) { return;} // OK
+                        //if (FAIL) { return;} // OK
                     Element_By_Path_Text("New Site State", "xpath", "//input[@aria-label='State']/parent::div", ParentTest, "no_jira"); 
-                        if (FAIL) { return;} // OK
-                    Element_By_Path_Text_Select_Copy("New Site City", "xpath", "//*[@id='site-detail']//input[@aria-label='City']", ParentTest, "no_jira"); 
-                        if (FAIL) { return;}
-                    Element_By_Path_Text_Select_Copy("New Site Zip Code", "xpath", "//*[@id='site-detail']//input[@aria-label='Zip Code' or @aria-label='Postal Code']", ParentTest, "no_jira"); 
-                        if (FAIL) { return;}
-                    Element_By_Path_Text_Select_Copy("New Site Latitude, Longitude", "xpath", "//input[@aria-label='Latitude, Longitude']", ParentTest, "no_jira"); 
-                        if (FAIL) { return;}
+                        //if (FAIL) { return;} // OK
+                    Element_By_Path_Text("New Site City", "xpath", "//*[@id='site-detail']//input[@aria-label='City']", ParentTest, "no_jira"); 
+                        //if (FAIL) { return;}
+                    Element_By_Path_Text("New Site Zip Code", "xpath", "//*[@id='site-detail']//input[@aria-label='Zip Code' or @aria-label='Postal Code']", ParentTest, "no_jira"); 
+                        //if (FAIL) { return;}
+                    Element_By_Path_Text("New Site Latitude, Longitude", "xpath", "//input[@aria-label='Latitude, Longitude']", ParentTest, "no_jira"); 
+                        //if (FAIL) { return;}
 
                     List_L1("Available Products Count", "className", "App-Container", ParentTest, "no_jira");             
                         if (FAIL) { return;} 
@@ -1739,9 +1739,8 @@ class AP3_site extends AP3_GUI{
                     Thread.sleep(500);
                     List_L1("Find 'Payment Types' list", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']/descendant::div[@class='v-list__tile__title']", ParentTest, "no_jira");             
                         if (FAIL) { return;} 
-
                         for (int j = 0; j < L1.size(); j++) {
-                            Element_Text("Available Payment Type:", L1.get(j), ParentTest, "no_jira");             
+                            Element_Text("Available Payment Type " + j, L1.get(j), ParentTest, "no_jira");             
                             if (FAIL) { return;}
                         }  
                     Element_By_Path_Click("Select Payment Type", "xpath", "//*[contains(text(), '" + "FreedomPay" + "')]", ParentTest, "no_jira");
@@ -1767,7 +1766,7 @@ class AP3_site extends AP3_GUI{
                     Thread.sleep(500);// 
                     Element_Child_List_L1("Plan Types Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");     
                         for (int j = 0; j < L1.size(); j++) {
-                            Element_Text("Available Meal Plan:", L1.get(j), ParentTest, "no_jira");             
+                            Element_Text("Available Meal Plan " + j, L1.get(j), ParentTest, "no_jira");             
                             if (FAIL) { return;}
                         }   
                     Element_By_Path_Click("Select Meal Plan", "xpath", "//*[contains(text(), '" + "Blackboard" + "')]", ParentTest, "no_jira");

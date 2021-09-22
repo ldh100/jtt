@@ -32,6 +32,10 @@ class An_bolter_dashboard extends An_GUI{
             Element_By_Path_Text("Get 'Empty Title'", "id", "emptyViewTitle", ParentTest, "no_jira");            
             Element_By_Path_Text("Get 'Empty Message'", "id", "emptyViewMsg", ParentTest, "no_jira");              
             Element_By_Path_Text("Get 'Reload' button Text", "id", "emptyViewReloadBtn", ParentTest, "no_jira");  
+            Element_By_Path_Click("Click 'Reload'", "id", "emptyViewReloadBtn", ParentTest, "no_jira");
+                if (FAIL) { return;}             
+            Wait_For_Element_By_Path_InVisibility("Wait for load", "id", "progress_bar", ParentTest, "no_jira");
+                if (FAIL) { return;}             
         }else{
             //
         }

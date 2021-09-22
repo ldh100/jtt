@@ -41,6 +41,14 @@ class C360_login extends C360_GUI{
                 if (FAIL) { return;}  
             Find_Text("Find 'Invalid credentials'", "Invalid credentials.", true, ParentTest, "no_jira");  
                 if (FAIL) { return;} 
+            Element_By_Path_Text_Enter("Enter Valid Username", "id", "username", USER_NAME, false, ParentTest,"no_jira");
+                if (FAIL) { return;}            
+            Element_By_Path_Text_Enter("Enter Invalid Password", "id", "password", "InvalidPW", true, ParentTest,"no_jira");
+                if (FAIL) { return;}
+            Element_By_Path_Click("Click 'LOGIN'", "name", "login", ParentTest,"no_jira");
+                if (FAIL) { return;}                
+            Find_Text("Find 'Invalid credentials'", "Invalid credentials.", true, ParentTest, "no_jira");  
+                if (FAIL) { return;}             
         } 
                 
         Element_By_Path_Text_Enter("Enter Valid Username", "id", "username", USER_NAME, false, ParentTest,"no_jira");
