@@ -2458,6 +2458,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         LOG_UPDATE(Log); // ========================================================
     }
     // </editor-fold> 
+
     private void Execute() throws Exception {
         if(_Login){
             SCOPE += "Login, ";

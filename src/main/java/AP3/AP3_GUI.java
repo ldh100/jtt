@@ -2779,6 +2779,26 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setName("Announcements: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date()); 
         }
+        if(_Site){
+            SCOPE += ", Site";
+            ParentTest = HtmlReport.createTest("Site"); 
+            AP3_site BR = new AP3.AP3_site(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+            ParentTest.getModel().setName("Site: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date()); 
+        }        
+        if(_Site_new){
+            SCOPE += ", New Site";
+            ParentTest = HtmlReport.createTest("New Site"); 
+            AP3_site_new BR = new AP3.AP3_site_new(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time; 
+            SECTOR = BR.SECTOR;
+            ParentTest.getModel().setName("New Site " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date()); 
+        }         
+        
         if(_Brand){
             SCOPE += ", Brand";
             ParentTest = HtmlReport.createTest("Brand"); 
@@ -2968,24 +2988,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setName("Sales Report Hidden: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date()); 
         }        
-        if(_Site){
-            SCOPE += ", Site";
-            ParentTest = HtmlReport.createTest("Site"); 
-            AP3_site BR = new AP3.AP3_site(AP3_GUI.this);
-            BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
-            ParentTest.getModel().setName("Site: " + BR._t + ", Failed: " + BR._f);
-            ParentTest.getModel().setEndTime(new Date()); 
-        }        
-        if(_Site_new){
-            SCOPE += ", New Site";
-            ParentTest = HtmlReport.createTest("New Site"); 
-            AP3_site_new BR = new AP3.AP3_site_new(AP3_GUI.this);
-            BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
-            ParentTest.getModel().setName("New Site " + BR._t + ", Failed: " + BR._f);
-            ParentTest.getModel().setEndTime(new Date()); 
-        } 
+
         if(_Smart_analytics){
             SCOPE += ", Smart Analytics";
             ParentTest = HtmlReport.createTest("Smart Analytics"); 
