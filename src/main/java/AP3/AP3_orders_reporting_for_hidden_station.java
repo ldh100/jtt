@@ -7,6 +7,7 @@ package AP3;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
@@ -449,12 +450,12 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
                 _t++;
                 _p++;
                 EX += _t + "\t" + "URL Order date is equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "URL Order date is equal to button date attribute", false, ParentTest.createNode("URL Order date do no match to expected result"));
+                Log_Html_Result("PASS", "URL Order date is equal to button date attribute", false, ParentTest.createNode("URL Order date do no match to expected result"), new Date());
             } else {
                 _t++;
                 _f++;
                 EX += _t + "\t" + "URL Order date is not equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "URL Order date is not equal to button date attribute", false, ParentTest.createNode("URL Order date do no match to expected result"));
+                Log_Html_Result("FAIL", "URL Order date is not equal to button date attribute", false, ParentTest.createNode("URL Order date do no match to expected result"), new Date());
             }
 
             //Select a 7 day range from the calendar to view the orders for that period
@@ -547,13 +548,13 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
                 _t++;
                 _p++;
                 EX += _t + "\t" + "URL Order date for 7 days range is equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "URL Order date for 7 days range is equal to button date attribute", false, ParentTest.createNode("Not able to find 7 days range"));
+                Log_Html_Result("PASS", "URL Order date for 7 days range is equal to button date attribute", false, ParentTest.createNode("Not able to find 7 days range"), new Date());
             } else {
                 System.err.println("Going Fail");
                 _t++;
                 _f++;
                 EX += _t + "\t" + "URL Order date for 7 days range is not equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "URL Order date for 7 days range is not equal to button date attribute", false, ParentTest.createNode("Not able to find 7 days range"));
+                Log_Html_Result("FAIL", "URL Order date for 7 days range is not equal to button date attribute", false, ParentTest.createNode("Not able to find 7 days range"), new Date());
             }
 
             //Select a 2 days range -  June 1st to June 2nd (2021-06-01 to 2021-06-02)
@@ -600,12 +601,12 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
                 _t++;
                 _p++;
                 EX += _t + "\t" + "URL Order date for 2 days range is equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "URL Order date for 2 days range is equal to button date attribute", false, ParentTest.createNode("Not able to find 2 days range"));
+                Log_Html_Result("PASS", "URL Order date for 2 days range is equal to button date attribute", false, ParentTest.createNode("Not able to find 2 days range"), new Date());
             } else {
                 _t++;
                 _f++;
                 EX += _t + "\t" + "URL Order date for 2 days range is not equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "URL Order date for 2 days range is not equal to button date attribute", false, ParentTest.createNode("Not able to find 2 days range"));
+                Log_Html_Result("FAIL", "URL Order date for 2 days range is not equal to button date attribute", false, ParentTest.createNode("Not able to find 2 days range"), new Date());
             }
         } catch (Exception ex) {
         }   // =============================================  

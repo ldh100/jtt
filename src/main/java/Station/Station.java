@@ -17,8 +17,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -31,18 +34,13 @@ import javax.swing.JComboBox;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import org.apache.poi.ss.formula.functions.Subtotal;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-/**
- *
- * @author Oleg.Spozito
- */
+
 public class Station extends javax.swing.JInternalFrame {
 
 //PROMO CODES (that work on Staging)
@@ -51,6 +49,11 @@ public class Station extends javax.swing.JInternalFrame {
 //promo100up2- 100%
 //comsonetime- flat 5 dollars
 //compassunlimited- 5 dollars    
+/* 
+    Production Site for BC 
+    https://adminpanel.compassdigital.org/#/sites/Ym7By6oy1dTOBE5P880jTamr9022GqCD7BB2y1vOIlgk1B16Y7hzOGjMXNMoh1oQRojae9T8JqBXJ8llt9d/site/PpzmrEBrveH1kX3Zrk3ytzrrB0O1XpSk3m973O9Xcw46vkWyKPtl8JGR17m2TEoDLA2YAETGOo/
+    
+*/   
     
     public Station() {
         initComponents();
@@ -654,8 +657,13 @@ public class Station extends javax.swing.JInternalFrame {
 
     private void DV_ModsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV_ModsMouseClicked
         int index = DV_Mods.getSelectedRow();
-        if(String.valueOf(DV_Mods.getValueAt(index, 0)).equals(" === ")){
-            DV_Mods.getSelectionModel().removeSelectionInterval(index, index);
+        try{
+            if(String.valueOf(DV_Mods.getValueAt(index, 0)).equals(" === ")){
+                DV_Mods.getSelectionModel().removeSelectionInterval(index, index);
+            }
+        } catch (Exception ex){
+            txtLog.append("DV_ModsMouseClicked ERROR: " + ex.getMessage() + "\r\n"); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());            
         }
     }//GEN-LAST:event_DV_ModsMouseClicked
 
@@ -747,7 +755,6 @@ public class Station extends javax.swing.JInternalFrame {
             C += "COUNTRY: " + COUNTRY + "\r\n"; 
             C += "MOBILE_ID: " + txtMobile_ID.getText().trim() + "\r\n";
             C += "MOBILE_PW: " + txtMobile_PW.getText()  + "\r\n";
-
         } catch (Exception ex)  {
             txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1118,7 +1125,6 @@ public class Station extends javax.swing.JInternalFrame {
         }
         Stopwatch sw2 = Stopwatch.createUnstarted();
         
-         
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         String label = "<empty> 'en'";
         String resp;
@@ -1133,7 +1139,6 @@ public class Station extends javax.swing.JInternalFrame {
                 Api_Call("GET", BaseAPI + "/menu/" + id, "", "");
 
                 JArray_MENUS.put(json);
-                //JSONObject menu = new JSONObject(json);
                 resp = "OK " + String.format("%.2f", (double)(sw2.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec";
                 if(json.has("label")){                    
                     if(json.getJSONObject("label").has("en")) {
@@ -1207,7 +1212,7 @@ public class Station extends javax.swing.JInternalFrame {
             DV_DTS.changeSelection(DV_DTS.getRowCount() - 1, 0, false, false);
         }        
         lblBTS.setText("Del Slots " + DV_DTS.getRowCount());     
-        txtLog.append("=== Selected Brand > " + DV_DTS.getRowCount() + " Delivert Time Slots" + "\r\n");
+        txtLog.append("=== Selected Brand > " + DV_DTS.getRowCount() + " Delivery Time Slots" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());         
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
     }
@@ -1235,9 +1240,9 @@ public class Station extends javax.swing.JInternalFrame {
             DV_MTS.getColumnModel().getColumn(0).setPreferredWidth(55);
             DV_MTS.getColumnModel().getColumn(1).sizeWidthToFit();
             
-            
-        if(DV_MTS.getRowCount() > 0){
-            DV_MTS.changeSelection(DV_MTS.getRowCount() - 1, 0, false, false);        }     
+            if(DV_MTS.getRowCount() > 0){
+                DV_MTS.changeSelection(DV_MTS.getRowCount() - 1, 0, false, false);
+            }     
         } catch (Exception ex) {
             txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());     
@@ -1347,9 +1352,9 @@ public class Station extends javax.swing.JInternalFrame {
                     }
                     DV_Items.setModel(Model);    
                     DV_Items.setDefaultEditor(Object.class, null);
-                    DV_Items.getColumnModel().getColumn(0).setPreferredWidth(120);
-                    DV_Items.getColumnModel().getColumn(1).setPreferredWidth(120);
-                    DV_Items.getColumnModel().getColumn(2).setPreferredWidth(60);
+                    DV_Items.getColumnModel().getColumn(0).setPreferredWidth(130);
+                    DV_Items.getColumnModel().getColumn(1).setPreferredWidth(150);
+                    DV_Items.getColumnModel().getColumn(2).setPreferredWidth(40);
                     DV_Items.getColumnModel().getColumn(3).setPreferredWidth(30);
                     DV_Items.changeSelection(0, 0, false, false);
                     MenuLastRow = 0;
@@ -1367,10 +1372,11 @@ public class Station extends javax.swing.JInternalFrame {
         GetMods();
     }
     private void GetMods(){
-        txtLog.append("\r\n- GetMods: " + "\r\n"); 
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
+        int[] SelectedItems = DV_Items.getSelectedRows(); 
+        txtLog.append("\r\n- GetMods for " + SelectedItems.length + " selected Item(s): " + "\r\n"); 
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
 
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         int mGR = 0;
         int mIT = 0;
         try {
@@ -1380,86 +1386,89 @@ public class Station extends javax.swing.JInternalFrame {
             String GroupID = "?";
             String GroupName = "?";
             
-            String[] ColumnsName = {"Item", "Modifires", "Price", "id", "GroupID", "GroupName"}; 
+            String[] ColumnsName = {"Item", "Modifier", "Price", "GroupName", "id", "GroupID"}; 
             DefaultTableModel Model = new DefaultTableModel();
             Model.setColumnIdentifiers(ColumnsName);
             DV_Mods.setModel(Model); 
-            JSONObject item = (JSONObject) JArray_ITEMS.get(DV_Items.getSelectedRow());           
-            if (item.has("options")) {
-                JSONArray options = item.getJSONArray("options");
-                for (Object ops : options) {
-                    mGR++;
-                    JSONObject oGroup = (JSONObject) ops;
-                    if(oGroup.has("label")){                    
-                       if(oGroup.getJSONObject("label").has("en")) {
-                           GroupName = oGroup.getJSONObject("label").getString("en");
-                           if(GroupName.trim().equals("")) {
-                               GroupName = "label 'en' Empty";
+            
+
+            for(int i = 0; i < SelectedItems.length; i++ ){
+                JSONObject item = (JSONObject) JArray_ITEMS.get(SelectedItems[i]);           
+                if (item.has("options")) {
+                    JSONArray options = item.getJSONArray("options");
+                    for (Object ops : options) {
+                        mGR++;
+                        JSONObject oGroup = (JSONObject) ops;
+                        if(oGroup.has("label")){                    
+                           if(oGroup.getJSONObject("label").has("en")) {
+                               GroupName = oGroup.getJSONObject("label").getString("en");
+                               if(GroupName.trim().equals("")) {
+                                   GroupName = "label 'en' Empty";
+                               }
                            }
-                       }
-                    }else{
-                        GroupName = "label 'en' Not Found";
+                        }else{
+                            GroupName = "label 'en' Not Found";
+                        } 
 
-                    } 
-                    label = GroupName;
-                    if(!GroupName.contains("min") && oGroup.has("min") && oGroup.has("max")){
-                        label = label + " (min:" + oGroup.getNumber("min").toString() + ", max:" + oGroup.getNumber("max").toString() + ")";
-                    }
-                    
-                    if(oGroup.has("id")){
-                        GroupID = oGroup.getString("id");
-                    }else{
-                        GroupID = "not found";
-                    }
-                    Model.addRow(new Object[]{" === ", label, " ", GroupID, " "});  //==================== 
+                        label = GroupName;
+                        if(!GroupName.contains("min") && oGroup.has("min") && oGroup.has("max")){
+                            label = label + " (min:" + oGroup.getNumber("min").toString() + ", max:" + oGroup.getNumber("max").toString() + ")";
+                        }
 
-                    label = "?";
-                    if (oGroup.has("items")) {
-                        JSONArray Oitems = oGroup.getJSONArray("items");
-                        for (Object Oitem : Oitems) {
-                            mIT++;
-                            JSONObject OItem = (JSONObject) Oitem;
-                            if(OItem.has("label")){                    
-                                if(OItem.getJSONObject("label").has("en")) {
-                                    label = OItem.getJSONObject("label").getString("en");
-                                    if(label.trim().equals("")) {
-                                        label = "label 'en' Empty";
+                        if(oGroup.has("id")){
+                            GroupID = oGroup.getString("id");
+                        }else{
+                            GroupID = "not found";
+                        }
+                        Model.addRow(new Object[]{" === ", label, " ", " ", " ", GroupID});  //==================== 
+
+                        label = "?";
+                        if (oGroup.has("items")) {
+                            JSONArray Oitems = oGroup.getJSONArray("items");
+                            for (Object Oitem : Oitems) {
+                                mIT++;
+                                JSONObject OItem = (JSONObject) Oitem;
+                                if(OItem.has("label")){                    
+                                    if(OItem.getJSONObject("label").has("en")) {
+                                        label = OItem.getJSONObject("label").getString("en");
+                                        if(label.trim().equals("")) {
+                                            label = "label 'en' Empty";
+                                        }
                                     }
-                                }
-                            }else{
-                                label = "label 'en' Not Found";
-                            }                   
+                                }else{
+                                    label = "label 'en' Not Found";
+                                }                   
 
-                            if(OItem.has("id")){
-                                id = OItem.getString("id");
-                            }else{
-                                id = "not found";
+                                if(OItem.has("id")){
+                                    id = OItem.getString("id");
+                                }else{
+                                    id = "not found";
+                                }
+                                if(OItem.has("price") && OItem.getJSONObject("price").has("amount")){
+                                    price = "$" + OItem.getJSONObject("price").getNumber("amount").toString();
+                                }else{
+                                    price = "Not Found";
+                                }
+                                Model.addRow(new Object[]{item.getJSONObject("label").getString("en"), label, price, GroupName, id, GroupID});  
                             }
-                            if(OItem.has("price") && OItem.getJSONObject("price").has("amount")){
-                                price = "$" + OItem.getJSONObject("price").getNumber("amount").toString();
-                            }else{
-                                price = "Not Found";
-                            }
-                            Model.addRow(new Object[]{item.getJSONObject("label").getString("en"), label, price, id, GroupID, GroupName});  
                         }
                     }
                 }
             }
             DV_Mods.setModel(Model);    
             DV_Mods.setDefaultEditor(Object.class, null);
-            DV_Mods.getColumnModel().getColumn(0).setPreferredWidth(130);
-            DV_Mods.getColumnModel().getColumn(1).setPreferredWidth(170);
-            DV_Mods.getColumnModel().getColumn(2).setPreferredWidth(50);
+            DV_Mods.getColumnModel().getColumn(0).setPreferredWidth(140);
+            DV_Mods.getColumnModel().getColumn(1).setPreferredWidth(160);
+            DV_Mods.getColumnModel().getColumn(2).setPreferredWidth(40);
             DV_Mods.getColumnModel().getColumn(3).setPreferredWidth(130);
-            DV_Mods.getColumnModel().getColumn(4).setPreferredWidth(170);
-            DV_Mods.getColumnModel().getColumn(5).setPreferredWidth(170);
-            //DV_Mods.changeSelection(0, 0, false, false);    
+            DV_Mods.getColumnModel().getColumn(4).setPreferredWidth(100);
+            DV_Mods.getColumnModel().getColumn(5).setPreferredWidth(100);  
         }
         catch(Exception ex){
             txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         }
-        txtLog.append("== Selected Item > " + mGR + " Mofifier Group(s), " + mIT + " total Mods" + "\r\n");
+        txtLog.append("== Selected Item(s) > " + mGR + " Mofifier Group(s), " + mIT + " total Mods" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -1566,12 +1575,6 @@ public class Station extends javax.swing.JInternalFrame {
             return;
         }
         if(COUNTRY.toLowerCase().startsWith("c")){
-            EXACT();
-            if(FAIL) {
-                Validate_Place_Order();
-                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                return;
-            }
             if(TYPE.equals("P")){
                 New_Pickup_ShoppingCart(); 
                 if(FAIL) {
@@ -1579,11 +1582,24 @@ public class Station extends javax.swing.JInternalFrame {
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
                 }
-                Place_Update_Pickup_Order(EXACT_Payment_TKN);
-                if(FAIL) {
-                    Validate_Place_Order();
+                if(env.equals("PR")){
+                    txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());                     
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
+                }else{                 
+                    EXACT();
+                    if(FAIL) {
+                        Validate_Place_Order();
+                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                        return;
+                    }                
+                    Place_Update_Pickup_Order(EXACT_Payment_TKN);
+                    if(FAIL) {
+                        Validate_Place_Order();
+                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                        return;
+                    }
                 }
             }
             if(TYPE.equals("D")){
@@ -1593,21 +1609,28 @@ public class Station extends javax.swing.JInternalFrame {
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
                 }
-                Place_Update_Delivery_Order(EXACT_Payment_TKN);
-                if(FAIL) {
-                    Validate_Place_Order();
+                if(env.equals("PR")){
+                    txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());                     
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
+                }else{                
+                    EXACT();
+                    if(FAIL) {
+                        Validate_Place_Order();
+                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                        return;
+                    }                
+                    Place_Update_Delivery_Order(EXACT_Payment_TKN);
+                    if(FAIL) {
+                        Validate_Place_Order();
+                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                        return;
+                    }
                 }
             }            
         }
         if(COUNTRY.toLowerCase().startsWith("u")){
-            FP();
-            if(FAIL) {
-                Validate_Place_Order();
-                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                return;
-            }
             if(TYPE.equals("P")){
                 New_Pickup_ShoppingCart();  
                 if(FAIL) {
@@ -1615,11 +1638,24 @@ public class Station extends javax.swing.JInternalFrame {
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
                 }
-                Place_Update_Pickup_Order(FP_Payment_TKN);
-                if(FAIL) {
-                    Validate_Place_Order();
+                if(env.equals("PR")){
+                    txtLog.append("\r\n=== Place Order In Production is Not Supported. \r\n=== Shopping Cart created." + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
+                }else{                
+                    FP();
+                    if(FAIL) {
+                        Validate_Place_Order();
+                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                        return;
+                    }                
+                    Place_Update_Pickup_Order(FP_Payment_TKN);
+                    if(FAIL) {
+                        Validate_Place_Order();
+                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                        return;
+                    }
                 }
             }
             if(TYPE.equals("D")){
@@ -1629,17 +1665,28 @@ public class Station extends javax.swing.JInternalFrame {
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
                 }
-                Place_Update_Delivery_Order(FP_Payment_TKN);
-                if(FAIL) {
-                    Validate_Place_Order();
+                if(env.equals("PR")){
+                    txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());                    
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
+                }else{
+                    FP();
+                    if(FAIL) {
+                        Validate_Place_Order();
+                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                        return;
+                    }                   
+                    Place_Update_Delivery_Order(FP_Payment_TKN);
+                    if(FAIL) {
+                        Validate_Place_Order();
+                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                        return;
+                    }
                 }
             } 
         }
         Validate_Place_Order();
-        btnSCart.setEnabled(true);
-        
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
     } 
     
@@ -1673,6 +1720,7 @@ public class Station extends javax.swing.JInternalFrame {
     private void New_Pickup_ShoppingCart(){
         FAIL = false;
         String CCC = "";
+        btnSCart.setEnabled(false);
         txtLog.append("\r\n- " + "New Pickup Shopping Cart ...."+ "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
@@ -1702,35 +1750,42 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         
 
-        String OptionsJson = "";
-        String ItemsJson = "";
         String ModGroup = "";
         int[] SelectedMods = DV_Mods.getSelectedRows();
         int[] SelectedItems = DV_Items.getSelectedRows();
-        for(int i = 0; i < SelectedItems.length; i++){
-            OptionsJson = "";
-            for(int j = 0; j < SelectedMods.length; j++){
-                if(DV_Items.getValueAt(SelectedItems[i],1).equals(DV_Mods.getValueAt(SelectedMods[j],0))){
-                    OptionsJson += "{\"id\":\"" + DV_Mods.getValueAt(SelectedMods[j],3).toString() + "\"},";
-                    ModGroup = DV_Mods.getValueAt(SelectedMods[j],5).toString();
+        JSONArray jItems = new JSONArray();
+        JSONObject jItem = null;
+
+        try{
+            for(int Item_Index = 0; Item_Index < SelectedItems.length; Item_Index++){
+                JSONArray jOptions = new JSONArray();
+                jItem = new JSONObject();  
+                jItem.put("id", DV_Items.getValueAt(SelectedItems[Item_Index],6).toString());
+                int q = Integer.parseInt(DV_Items.getValueAt(SelectedItems[Item_Index],3).toString());
+                jItem.put("quantity", q);
+
+                if(SelectedMods.length >0){
+                    for(int Mod_Index = 0; Mod_Index < SelectedMods.length; Mod_Index++){
+                        if(DV_Items.getValueAt(SelectedItems[Item_Index],1).equals(DV_Mods.getValueAt(SelectedMods[Mod_Index],0))){
+                            JSONObject jOption = new JSONObject(); 
+                            JSONArray jOptItems = new JSONArray();
+                            JSONObject jOptionItem = new JSONObject();                                
+                                jOptionItem.put("id", DV_Mods.getValueAt(SelectedMods[Mod_Index],4).toString());
+                                jOptItems.put(jOptionItem);
+                            JSONObject label = new JSONObject();
+                                label.putOpt("en", DV_Mods.getValueAt(SelectedMods[Mod_Index],3).toString());
+                                jOption.put("label", label);
+                                jOption.put("items", jOptItems);
+                            jOptions.put(jOption);
+                        }                               
+                    }                                   
+                    jItem.put("options", jOptions);                    
                 }
+                jItems.put(jItem);            
             }
-            if(!OptionsJson.isEmpty()){
-                OptionsJson = OptionsJson.substring(0, OptionsJson.length() - 1);
-                OptionsJson = "," + "\"options\":[{" +
-                                "\"label\":{\"en\":\"" + ModGroup + "\"}," + 
-                                "\"items\":[" + OptionsJson + "]}]";
-            }
-            
-            ItemsJson += "{\"id\":\"" + DV_Items.getValueAt(SelectedItems[i],6).toString() + "\"," + 
-                          "\"quantity\":" + DV_Items.getValueAt(SelectedItems[i],3).toString() + 
-                          OptionsJson + "},";
-        }
-        ItemsJson = ItemsJson.substring(0, ItemsJson.length() - 1);
-        
-        BODY = "{\"items\":[" + ItemsJson + "]}"; 
-        try{  
-            CCC = new JSONObject(BODY).toString(4);
+            JSONObject ITEMS = new JSONObject();
+            ITEMS.put("items", jItems);
+            BODY = ITEMS.toString(); 
         } catch (Exception ex){
             FAIL = true;
             txtLog.append("== " + "Json ERROR: "  + ex.getMessage() + "\r\n");
@@ -1741,7 +1796,7 @@ public class Station extends javax.swing.JInternalFrame {
         if(json != null){
             try{
                 ShoppingCart_Pickup_ID = json.getString("id");
-                txtLog.append("== " + "Updated Updated SCart: \r\n"  + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
+                txtLog.append("== " + "Updated Shopping Cart: \r\n"  + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex){
                 FAIL = true;
@@ -1750,6 +1805,7 @@ public class Station extends javax.swing.JInternalFrame {
                 return;
             }
         }  
+        
         if(!txtPROMO.getText().isEmpty() && !txtPROMO.getText().toLowerCase().equals("none")){
             txtLog.append("\r\n- " + "Add Promo " + txtPROMO.getText() + " to Pickup Shopping Cart ...."+ "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1771,10 +1827,12 @@ public class Station extends javax.swing.JInternalFrame {
             }        
         } 
         Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID;
+        btnSCart.setEnabled(true);
         Report_Tax();
     }
     private void New_Delivery_ShoppingCart(){
         FAIL = false;
+        btnSCart.setEnabled(false);
         txtLog.append("\r\n- " + "New Delivery Shopping Cart ...."+ "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
@@ -1804,34 +1862,48 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.append("\r\n- " + "Add Menu Item(s) to Delivery Shopping Cart ...."+ "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         
-        String OptionsJson = "";
-        String ItemsJson = "";
         String ModGroup = "";
         int[] SelectedMods = DV_Mods.getSelectedRows();
         int[] SelectedItems = DV_Items.getSelectedRows();
-        for(int i = 0; i < SelectedItems.length; i++){
-            OptionsJson = "";
-            for(int j = 0; j < SelectedMods.length; j++){
-                if(DV_Items.getValueAt(SelectedItems[i],1).equals(DV_Mods.getValueAt(SelectedMods[j],0))){
-                    OptionsJson += "{\"id\":\"" + DV_Mods.getValueAt(SelectedMods[j],3).toString() + "\"},";
-                    ModGroup = DV_Mods.getValueAt(SelectedMods[j],5).toString();
+        JSONArray jItems = new JSONArray();
+        JSONObject jItem = null;
+        
+        try{
+            for(int Item_Index = 0; Item_Index < SelectedItems.length; Item_Index++){
+                JSONArray jOptions = new JSONArray();
+                jItem = new JSONObject();  
+                jItem.put("id", DV_Items.getValueAt(SelectedItems[Item_Index],6).toString());
+                int q = Integer.parseInt(DV_Items.getValueAt(SelectedItems[Item_Index],3).toString());
+                jItem.put("quantity", q);
+
+                if(SelectedMods.length >0){
+                    for(int Mod_Index = 0; Mod_Index < SelectedMods.length; Mod_Index++){
+                        if(DV_Items.getValueAt(SelectedItems[Item_Index],1).equals(DV_Mods.getValueAt(SelectedMods[Mod_Index],0))){
+                            JSONObject jOption = new JSONObject(); 
+                            JSONArray jOptItems = new JSONArray();
+                            JSONObject jOptionItem = new JSONObject();                                
+                                jOptionItem.put("id", DV_Mods.getValueAt(SelectedMods[Mod_Index],4).toString());
+                                jOptItems.put(jOptionItem);
+                            JSONObject label = new JSONObject();
+                                label.putOpt("en", DV_Mods.getValueAt(SelectedMods[Mod_Index],3).toString());
+                                jOption.put("label", label);
+                                jOption.put("items", jOptItems);
+                            jOptions.put(jOption);
+                        }                               
+                    }                                   
+                    jItem.put("options", jOptions);                    
                 }
+                jItems.put(jItem);            
             }
-            if(!OptionsJson.isEmpty()){
-                OptionsJson = OptionsJson.substring(0, OptionsJson.length() - 1);
-                OptionsJson = "," + "\"options\":[{" +
-                                "\"label\":{\"en\":\"" + ModGroup + "\"}," + 
-                                "\"items\":[" + OptionsJson + "]}]";
-            }
-            
-            ItemsJson += "{\"id\":\"" + DV_Items.getValueAt(SelectedItems[i],6).toString() + "\"," + 
-                          "\"quantity\":" + DV_Items.getValueAt(SelectedItems[i],3).toString() + 
-                          OptionsJson + "},";
-        }
-        ItemsJson = ItemsJson.substring(0, ItemsJson.length() - 1);
-        
-        BODY = "{\"items\":[" + ItemsJson + "]}"; 
-        
+            JSONObject ITEMS = new JSONObject();
+            ITEMS.put("items", jItems);
+            BODY = ITEMS.toString();  
+        } catch (Exception ex){
+            FAIL = true;
+            txtLog.append("== " + "Json ERROR: "  + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            return;
+        }        
         Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, BODY);
         if(json != null){
             try{
@@ -1845,6 +1917,7 @@ public class Station extends javax.swing.JInternalFrame {
                 return;
             }
         } 
+        
         if(!txtPROMO.getText().isEmpty() && !txtPROMO.getText().toLowerCase().equals("none")){   
             txtLog.append("\r\n- " + "Add Promo " + txtPROMO.getText() + " to Delivery Shopping Cart ...."+ "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1866,7 +1939,9 @@ public class Station extends javax.swing.JInternalFrame {
                 }
             }        
         }   
+        
         Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID;
+        btnSCart.setEnabled(true);
         Report_Tax();
     }
 
@@ -1910,11 +1985,15 @@ public class Station extends javax.swing.JInternalFrame {
         }
     }
     private void Print_SCart() {
+    
+    // To see some other SCart    
+    //Last_SCart = "https://api.compassdigital.org/dev/shoppingcart/AXNLQg1DQ9tq3PjmKG3eT0J8z1mZ9otAovNdm2ERF9e1Mp1XDXcEW3jM7qwacNOQGDq";    
+
         if(btnSCart.isEnabled()){
             txtLog.append("\r\n- " + "Print Last Update Shopping Cart ...."+ "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());            
             Api_Call("GET", Last_SCart, "", "");
-            String R = A.Func.SHOW_FILE(json.toString(4), "json");
+            String R = A.Func.SHOW_FILE(Last_SCart + "\r\n\r\n" + json.toString(4), "json");
         }
     }  
     private void Set_Requested_Date(String TYPE){
@@ -1973,8 +2052,8 @@ public class Station extends javax.swing.JInternalFrame {
         BODY = "{\"user\":\"" + Mobile_User_ID + "\"}";
         for (int i = 0; i < Payment_Methods_IDS.size(); i++) {
             
-//            JOB_Api_Call("Mobile User Delete Payment Method " + (i + 1), "DELETE",
-//                    BaseAPI + "/payment/" + exact_id + "/method/" + Payment_Methods_IDS.get(i), Auth, BODY, 200, ParentTest, "no_jira");
+//            JOB_Api_Call("Mobile User Delete Payment Method " + (Item_Index + 1), "DELETE",
+//                    BaseAPI + "/payment/" + exact_id + "/method/" + Payment_Methods_IDS.get(Item_Index), Auth, BODY, 200, ParentTest, "no_jira");
         }
     }
     private void EXACT(){
@@ -2091,11 +2170,21 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.append("\r\n- " + "Update Delivery Order > 'Ready' ...."+ "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         Auth = "Bearer " + AP3_TKN;
-        requestParams = new JSONObject();   //  Update Delivery Order  =================
-        JSONObject is = new JSONObject();      
+        requestParams = new JSONObject();   //  Update Delivery Order > Status and requested_date =================
+        
+        ZoneOffset offset = OffsetDateTime.now(ZoneId.of(TimeZone.getDefault().getID())).getOffset();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date date = new Date();
+        date.setTime(date.getTime() + 20000); // now + 20 sec
+        String requested_date = dateFormat.format(date);
+
+        JSONObject is = new JSONObject(); 
         is.put("in_progress", true);
         is.put("ready", true);     
         requestParams.put("is", is); 
+        requestParams.put("requested_date", requested_date); 
+        
         BODY = requestParams.toString();
         Api_Call("PATCH",  BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY);        
         if(json != null){

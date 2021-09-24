@@ -304,7 +304,7 @@ public class Env extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnStatisticsMouseClicked
     
     private void LoadDB(){
-        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String _where = "";
         if (!cmbApp.getSelectedItem().toString().startsWith("All")) {
             _where = " WHERE [app] = '" + cmbApp.getSelectedItem().toString() + "'";
@@ -315,7 +315,12 @@ public class Env extends javax.swing.JInternalFrame {
         try (Connection conn = DriverManager.getConnection(A.QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery(SQL);
             ResultSetMetaData rsmd = rs.getMetaData();
-            DefaultTableModel dm = new DefaultTableModel();
+            DefaultTableModel dm = new DefaultTableModel(){
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
             int cols = rsmd.getColumnCount();
             String c[] = new String[cols];
             for(int i = 0; i < cols; i++){
@@ -353,7 +358,7 @@ public class Env extends javax.swing.JInternalFrame {
             txtLog.append("=== Load Data > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
-        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));        
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));        
     }  
     private void PrintRow(){
         if(DV1.getSelectedRow() == -1){
@@ -375,7 +380,7 @@ public class Env extends javax.swing.JInternalFrame {
         }
     }
     private void Excel(){
-        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         int cols = DV1.getColumnCount(); 
         int rows = DV1.getRowCount(); 
         String[][] Values = new String[rows + 1][cols]; // +1 for summary row
@@ -397,10 +402,10 @@ public class Env extends javax.swing.JInternalFrame {
             txtLog.append("= Excel > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
-        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void CSV_Full(){
-        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         int cols = DV1.getColumnCount(); 
         int rows = DV1.getRowCount(); 
         String CSV = "";
@@ -420,11 +425,11 @@ public class Env extends javax.swing.JInternalFrame {
             txtLog.append("= CSV > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
-        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
   
     private void LocationSTAT(String WHAT) {
-        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String Statistics = "";
         int Tot = 0;
         int cdl = 0;
@@ -517,11 +522,11 @@ public class Env extends javax.swing.JInternalFrame {
         }
 
         Func.SHOW_FILE(Statistics, ".txt");
-        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     
     private void MenuSTAT() {
-        setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String Statistics = "";
         int Tot = 0;
         int v1t = 0;
@@ -612,7 +617,7 @@ public class Env extends javax.swing.JInternalFrame {
         }
 
         Func.SHOW_FILE(Statistics, ".txt");
-        setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     
     

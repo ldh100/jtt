@@ -29,6 +29,9 @@ import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.PointOption.point;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Toolkit;
@@ -51,10 +54,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DecimalFormat;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,6 +70,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
@@ -100,10 +108,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
-/**
- *
- * @author Oleg.Spozito
- */
 public class An_GUI extends javax.swing.JInternalFrame {
     public An_GUI() {  
         initComponents();
@@ -166,8 +170,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         cmbEnv = new javax.swing.JComboBox<>();
         cmbApp = new javax.swing.JComboBox<>();
         _slack = new javax.swing.JCheckBox();
-        txtMobile_Id = new javax.swing.JTextField();
-        txtMobile_Pw = new javax.swing.JTextField();
+        txtMobile_ID = new javax.swing.JTextField();
+        txtMobile_PW = new javax.swing.JTextField();
         lblSITES3 = new javax.swing.JLabel();
         lblSITES6 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -718,13 +722,13 @@ public class An_GUI extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 428, 416, -1));
 
-        txtMobile_Id.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtMobile_Id.setText("cdl.test.xtt@gmail.com");
-        getContentPane().add(txtMobile_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 376, 188, -1));
+        txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMobile_ID.setText("cdl.test.xtt@gmail.com");
+        getContentPane().add(txtMobile_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 376, 188, -1));
 
-        txtMobile_Pw.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtMobile_Pw.setText("Password1");
-        getContentPane().add(txtMobile_Pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 376, 92, -1));
+        txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMobile_PW.setText("Password1");
+        getContentPane().add(txtMobile_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 376, 92, -1));
 
         lblSITES3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -905,11 +909,15 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected String Excel_Report_Path = "";    
     protected String New_ID = "";
 
+    protected String AP3_TKN = "";
     protected String Mobile_ID = "";   
-    protected String Mobile_PW = "";   
+    protected String Mobile_PW = ""; 
+    protected String Mobile_User_ID = "";
+    protected String Mobile_User_TKN = "";
     protected String Bolter_ID = "";   
     protected String Bolter_PW = "";   
-         
+    protected String Bolter_APP = "";
+    
     protected String ap3_url = "";
     protected String app_url = "";
     protected String app = "";
@@ -996,6 +1004,36 @@ public class An_GUI extends javax.swing.JInternalFrame {
     protected boolean _Promo = false;
     protected boolean _Mplan = false;
     protected boolean _Feedback = false;
+    
+    protected JSONObject json;
+    protected JSONObject requestParams = null;
+    protected String BODY = "";   
+    //  "exact": {
+    protected String exact_gateway_password = "~RSQzgwC";
+    protected String exact_gateway_id = "AE7628-02";
+    protected String exact_id = "APE3Ev9vQkfo2mmOpKP7fGJ48NKAPOugo0gdlWJqS3O";
+    protected String exate_gateway_password = "";
+    //  "freedompay": {
+    protected String freedompay_id = "9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO";
+    protected String freedompay_terminal_id = "26241559005";
+    protected String freedompay_store_id = "16167424007";
+    protected String FP_URL = ""; //https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
+    
+    protected String ShoppingCart_Delivery_ID = "";
+    protected String Order_Delivery_ID = "";
+    protected String Requested_Date = "";
+    
+    protected String Auth = "";
+    protected String EXACT_Payment_TKN = "";
+    protected String FP_Payment_TKN = "";
+    protected String Last_SCart = ""; 
+    protected String DropOffLocation = ""; 
+    protected JSONArray JArray_MENUS;
+    protected JSONArray JArray_CATS;
+    protected JSONArray JArray_ITEMS; 
+    protected JSONArray JArray_TSLOTS; 
+    protected String Menu_ID = "";
+    protected String Item_ID = "";
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">   
@@ -1271,10 +1309,10 @@ public class An_GUI extends javax.swing.JInternalFrame {
         cmbApp.addItem("Chrome C360");
         cmbApp.addItem("Chrome WO");
         
+        cmbEnv.addItem("Development");
         cmbEnv.addItem("Staging");
         cmbEnv.addItem("Production");
-        cmbEnv.addItem("Development");
-     
+ 
         cmbEnv.setSelectedIndex(0); // 2 Select Development
         cmbApp.setSelectedIndex(1); // 1 Boost
         
@@ -1537,7 +1575,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
         sw1.start();        
      
-        String[] BrandsColumnsName = {"Station", "Location", "Brand Id", "Unit ID"}; 
+        String[] BrandsColumnsName = {"Station", "Location", "Brand Id", "Unit ID", "Service", "MenuIDs"}; 
         DefaultTableModel BrandsModel = new DefaultTableModel();
         BrandsModel.setColumnIdentifiers(BrandsColumnsName);
         DV2.setModel(BrandsModel);
@@ -1573,6 +1611,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             String location;
             String id;
             String unit_id;
+            String menu_ids = "";
             if (Location != null) {
                 for (Object l : Locations) {
                     brand = "";
@@ -1580,6 +1619,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     id = "";
                     unit_id = "";
                     JSONObject loc = (JSONObject) l;
+                    Bolter_APP = loc.getJSONObject("meta").getString("app_name");
                     if (loc.has("brands")) {
                         brands = loc.getJSONArray("brands");
                         for (Object b : brands) {
@@ -1590,12 +1630,34 @@ public class An_GUI extends javax.swing.JInternalFrame {
                             }
                             id = br.getString("id");
                             unit_id = loc.getString("id");
+                            
+                            String SERVICE = "Pickup Delivery";
                             boolean delivery = false;
                             if(br.getJSONObject("is").has("delivery_supported")){
                                 delivery = br.getJSONObject("is").getBoolean("delivery_supported");
                             }
+                            boolean pickup = false;
+                            if(br.getJSONObject("is").has("pickup_supported")){
+                                pickup = br.getJSONObject("is").getBoolean("pickup_supported");
+                            }
+                            if(!pickup) {
+                                SERVICE = SERVICE.replace("Pickup", "");
+                            }
+                            if(!delivery) {
+                                SERVICE = SERVICE.replace("Delivery", "");
+                            }  
+                            
+                            if(br.has("menus")){
+                                menu_ids = "";
+                                JSONArray Menus = br.getJSONArray("menus");
+                                for (Object m : Menus) {
+                                    JSONObject menu = (JSONObject) m;
+                                    menu_ids += menu.getString("id") + ","; 
+                                }  
+                            }                            
+                            
                             if(!"Bolter".equals(app) || delivery){
-                                BrandsModel.addRow(new Object[]{brand, location, id, unit_id});                                
+                                BrandsModel.addRow(new Object[]{brand, location, id, unit_id, SERVICE.trim(), menu_ids});                                
                             }
                         }
                     }
@@ -1625,8 +1687,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
    
         if (DV2.getRowCount() > 0) {
             DV2.changeSelection(0, 0, false, false);
-            if (CONFIG && !"".equals(BRAND.trim()))
-            {
+            if (CONFIG && !"".equals(BRAND.trim())) {
                 for(int row = 0; row < DV2.getRowCount(); row++) {
                     if(DV2.getValueAt(row, 0).equals(BRAND)){
                         DV2.changeSelection(row, 0, false, false);
@@ -2066,8 +2127,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
             C += "Category: " + "N/A" + "\r\n";
             C += "Options: " + "N/A" + "\r\n";  
             
-            C += "txtMobile_Id: " + txtMobile_Id.getText() + "\r\n";
-            C += "txtMobile_Pw: " + txtMobile_Pw.getText() + "\r\n";
+            C += "txtMobile_Id: " + txtMobile_ID.getText() + "\r\n";
+            C += "txtMobile_Pw: " + txtMobile_PW.getText() + "\r\n";
             C += "txtBolter_Id: " + txtBolter_Id.getText() + "\r\n";
             C += "txtBolter_Pw: " + txtBolter_Pw.getText() + "\r\n";
             
@@ -2164,8 +2225,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("Category: ")) Category = value;
                 if(l.contains("Options: ")) Options = value;  
 
-                if(l.contains("txtMobile_Id: ")) txtMobile_Id.setText(value);
-                if(l.contains("txtMobile_Pw: ")) txtMobile_Pw.setText(value);
+                if(l.contains("txtMobile_Id: ")) txtMobile_ID.setText(value);
+                if(l.contains("txtMobile_Pw: ")) txtMobile_PW.setText(value);
                 if(l.contains("txtBolter_Id: ")) txtBolter_Id.setText(value);
                 if(l.contains("txtBolter_Pw: ")) txtBolter_Pw.setText(value);
 
@@ -2205,7 +2266,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     
-    public String JOB_Run_Auto(String run_type, String config){
+    public String JOB_Run_Auto(String job_name, String run_type, String config){
         run_start = Instant.now();
         Log  = "";
         String RES = "";
@@ -2405,8 +2466,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
             t_max =  0;
             p_50 = 0;
             p_90 = 0;
-            Mobile_ID = txtMobile_Id.getText();
-            Mobile_PW = txtMobile_Pw.getText();
+            Mobile_ID = txtMobile_ID.getText();
+            Mobile_PW = txtMobile_PW.getText();
             Bolter_ID = txtBolter_Id.getText();
             Bolter_PW = txtBolter_Pw.getText();
 
@@ -2704,7 +2765,469 @@ public class An_GUI extends javax.swing.JInternalFrame {
         return "= InstallBuild_S3: Check Result...." + "\r\n";  
     }    
     // </editor-fold>
-    
+
+    //<editor-fold defaultstate="collapsed" desc="Place Order for Bolter">
+    protected void Api_Call(String Method, String EndPoint, String AUTH, String BODY) {
+        FAIL = false;
+        json = null;
+        RequestSpecification request;
+        request = RestAssured.given();
+        int status = 0;
+        String Result = "?";
+        if (sw1.isRunning()) {
+            sw1.reset();
+        }        
+        if (!AUTH.isEmpty()) {
+            request.header("Authorization", AUTH);
+        }
+        request.header("Content-Type", "application/json");
+        request.header("Accept", "application/json");
+        try {
+            sw1.start();
+            Response response = null;
+            switch (Method) {
+                case "GET":
+                    if (BODY.equals("Bolter")) {
+                        request.header("From", "Bolter/1.0");
+                    }
+                    response = request.get(EndPoint);
+                    break;
+                case "POST":
+                    request.body(BODY);
+                    response = request.post(EndPoint);
+                    break;
+                case "PATCH":
+                    request.body(BODY);
+                    response = request.patch(EndPoint);
+                    break;
+                case "DELETE":
+                    request.body(BODY);
+                    response = request.delete(EndPoint);
+                    break;
+                case "PUT":
+                    request.body(BODY);
+                    response = request.put(EndPoint);
+                    break;
+                case "OPTIONS":
+                    response = request.options(EndPoint);
+                    break;
+                default:
+                    break;
+            }
+            Result = response.getStatusLine();
+            status = response.getStatusCode();
+            if (status != 200 && status != 201) {
+                txtLog.append("Endpoint: " + EndPoint + "\r\n");
+                txtLog.append("Result: " + status + " - " + Result + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());                
+            }
+            if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
+                json = new JSONObject(response.asString());
+                if (json.has("error")) {
+                    txtLog.append("Error: " + json.getString("error") + "\r\n");
+
+                }
+            }
+        } catch (Exception ex) {
+            FAIL = true;
+            txtLog.append("API Call Error: " + ex.getMessage().trim() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+        }
+        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        sw1.reset();
+    }
+    protected void Place_Order(){
+        GetBrandDropOffLocations();
+            if(FAIL){return;}            
+        GetMenuItem();
+            if(FAIL){return;}       
+        GetDeliveryTimeSlot_Set_RequiredDate();     
+            if(FAIL){return;}
+        Get_Mobile_TKN();        
+            if(FAIL){return;}
+        Get_AP3_TKN();
+            if(FAIL){return;}       
+        if(COUNTRY.toLowerCase().startsWith("c")){
+            EXACT();
+                if(FAIL){return;}
+            New_Delivery_ShoppingCart(); 
+                if(FAIL){return;}
+            Place_Update_Delivery_Order(EXACT_Payment_TKN);
+        } else {
+            FP(); 
+                if(FAIL){return;}
+            New_Delivery_ShoppingCart(); 
+                if(FAIL){return;}
+            Place_Update_Delivery_Order(FP_Payment_TKN);
+        } 
+    }    
+    private void GetMenuItem() { 
+        txtLog.append("\r\n- Load Menus ..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        FAIL = false; 
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
+        String IDS = DV2.getValueAt(DV2.getSelectedRow(), 5).toString(); // ================== col 5
+        if(IDS.trim().isEmpty()){
+            txtLog.append("=== Brand/Station '" + BRAND + "' > " + " No Menu(s) found" + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+            return;            
+        }
+        String[] Menu_IDs = IDS.split(",");
+        Menu_ID = Menu_IDs[0].trim();
+        JArray_MENUS = new JSONArray();
+        try {              
+            Api_Call("GET", BaseAPI + "/menu/" + Menu_ID, "", "");
+            JArray_MENUS.put(json);
+            JSONObject menu = (JSONObject) JArray_MENUS.get(0);             
+            if (menu.has("groups")) {
+                JSONArray groups = menu.getJSONArray("groups");
+                JSONObject gr = groups.getJSONObject(0);         
+                if (gr.has("items")) {
+                    JSONArray items = gr.getJSONArray("items");
+                    JSONObject Item = (JSONObject) items.getJSONObject(0);
+                    if(Item.has("id")){
+                        Item_ID = Item.getString("id");
+                    }else{
+                        Item_ID = "not found";
+                        FAIL = true;
+                    }
+                }
+            }else{
+                FAIL = true;
+                txtLog.append("=== Brand/Station '" + BRAND + "' > " + " No Menu(s) found" + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                return;
+            }
+        } catch (Exception ex) {
+            FAIL = true;
+            txtLog.append("Error " + ex.getMessage() + "\r\n"); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+            return;
+        }         
+        
+        txtLog.append("=== Brand/Station '" + BRAND + "' > " + JArray_MENUS.length() + " Menu(s) found" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));     
+    }    
+    private void GetDeliveryTimeSlot_Set_RequiredDate() { 
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        FAIL = false;
+        txtLog.append("\r\n- Load Brand > Menu > Delivery Timeslots ..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+        JArray_TSLOTS = new JSONArray(); 
+        try { 
+            Api_Call("GET", BaseAPI + "/location/brand/" + BrandID + "/timeslots/delivery/menu/" + Menu_ID, "", "");
+            if (json.has("timeslots")) {
+                JArray_TSLOTS = json.getJSONArray("timeslots");
+                Long TimeSlot = 0L;
+                JSONObject timeslot = JArray_TSLOTS.getJSONObject(0);
+                TimeSlot = timeslot.getLong("id");            
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+                Date requested_date = new Date(TimeSlot *1000L);
+                Requested_Date = sdf.format(requested_date);                
+            }else{
+                FAIL = true;
+                txtLog.append("=== Brand/Station '" + BRAND + "' > " + " No Delivery Timeslots found" + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                return;
+            } 
+        } catch (Exception ex) {
+            FAIL = true;
+            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+            return;
+        }         
+        txtLog.append("=== Brand > " + JArray_TSLOTS.length() + " Delivery Time Slots" + "\r\n" + " Set Requested UTC Date: " + Requested_Date + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());         
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));    
+    }    
+    private void Get_Mobile_TKN() {
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
+        FAIL = false;
+        txtLog.append("\r\n- Moblibe User Authentication.." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+
+        Mobile_User_ID = "";
+        Mobile_User_TKN = "";
+        String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
+        String Realm = A.Func.Realm_ID(Bolter_APP, env);             
+        try {  
+            Api_Call("GET", BaseAPI + "/user/auth" + "?realm=" + Realm, "Basic " + UserAuth, "");
+            Mobile_User_ID = json.getString("user");
+            Mobile_User_TKN = json.getString("token");
+            txtLog.append("== " + BaseAPI + "/user/auth?realm="  + Realm + " > " + "\r\n");
+            txtLog.append("== " + "UserID: "  + Mobile_User_ID + "\r\n");
+            txtLog.append("== " + "UserTKN: "  + Mobile_User_TKN + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+        } catch (Exception ex) {
+            FAIL = true;
+            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+            return;
+        }    
+    }
+    private void GetBrandDropOffLocations() {        
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        FAIL = false;
+        txtLog.append("\r\n- Load Brand Drop Off Locations ..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());      
+        try {
+            Api_Call("GET", BaseAPI + "/config/public/" + BrandID, "", "");
+            if(json.has("delivery_destinations")) {
+                JSONArray DESTINATIONS = json.getJSONArray("delivery_destinations");
+                DropOffLocation = DESTINATIONS.getString(0);
+            }else{
+                FAIL = true;
+                txtLog.append("=== Brand/Station '" + BRAND + "' > " + " No Dropp-Off Location(s)" + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+                return;
+            }
+        } catch (Exception ex) {
+            FAIL = true;
+            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+            return;
+        }                     
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+    }
+    private void Get_AP3_TKN() {
+        FAIL = false;
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
+            rs.next();
+            AP3_TKN = rs.getString(1);
+            conn.close();
+        } catch (SQLException ex) {
+            FAIL = true;
+            txtLog.append("=== AP3_TKN > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        }
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+    }    
+    private void EXACT(){
+        FAIL = false;
+        txtLog.append("\r\n- Exact API(s)..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        
+        EXACT_Payment_TKN = "";
+        Auth = "Bearer " + Mobile_User_TKN;
+        requestParams = new JSONObject();
+        requestParams.put("cardholder_name", "JTT API Automation");
+        requestParams.put("cc_expiry", "1224");
+        requestParams.put("cc_number", "5555555555554444"); // Mastercard
+        requestParams.put("cc_verification_str2", "123");
+        requestParams.put("postal_code", "L3L3C4");
+        JSONObject options = new JSONObject();
+        options.put("exact_gateway_id", exact_gateway_id);
+        options.put("exact_gateway_password", exact_gateway_password);
+        requestParams.put("options", options);
+        BODY = requestParams.toString();
+
+        Api_Call("POST", BaseAPI + "/payment/" + exact_id + "/paymenttoken", Auth, BODY);
+        if (json != null && json.has("token")) {
+            try {
+                EXACT_Payment_TKN = json.getString("token");
+            } catch (Exception ex) {
+                FAIL = true;
+                String AAAA = ex.getMessage();
+            }
+        }
+        txtLog.append("=== EXACT_Payment_TKN: " + EXACT_Payment_TKN + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+    }
+    private void FP(){
+        FAIL = false;
+        txtLog.append("\r\n- Freedompay API(s)..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());   
+        FP_Payment_TKN = "";
+        String Access_TKN = "";
+        
+        Auth = "Bearer " + Mobile_User_TKN;
+        Api_Call("GET", BaseAPI + "/payment/" + freedompay_id + "/clienttoken", Auth, "");
+        if (json != null && json.has("access_token")) {
+            try {
+                Access_TKN = json.getString("access_token");
+            } catch (Exception ex) {
+                FAIL = true;
+                txtLog.append("FP_Client_TKN Error: " + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                return;
+            }
+        }
+        
+        Auth = "Bearer " + Access_TKN;
+        requestParams = new JSONObject();
+        requestParams.put("nameOnCard", "JTT API Automation");
+        requestParams.put("cardNumber", "4111111111111111"); // Visa
+        requestParams.put("CVV", "123");
+        requestParams.put("avsVerificationRequired", true);
+        requestParams.put("cvvVerificationRequired", true);
+        JSONObject billingAddress = new JSONObject();
+            billingAddress.put("postalCode", "L3L3C4");
+        requestParams.put("billingAddress", billingAddress); 
+        requestParams.put("isPreferred", true);
+        requestParams.put("expiryMonth", 12);
+        requestParams.put("expiryYear", 2024);
+
+        BODY = requestParams.toString();
+        Api_Call("POST", FP_URL + "/TokenService/api/consumers/tokens", Auth, BODY);
+        if (json != null) {
+            try {
+                FP_Payment_TKN = json.getString("token");
+                txtLog.append("=== FP_Payment_TKN: " + FP_Payment_TKN + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            } catch (Exception ex) {
+                FAIL = true;
+                txtLog.append("FP_Payment_TKN Error: " + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+        }
+    }
+    private void New_Delivery_ShoppingCart(){
+        FAIL = false;
+        txtLog.append("\r\n- " + "New Delivery Shopping Cart ...."+ "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+
+        Auth = "Bearer " + Mobile_User_TKN;
+        
+        BODY = "{\"brand\":\"" + BrandID + "\"," +
+            "\"is\":{\"type\":\"delivery\"}," +
+            "\"mealSwipeTotal\":0.0," +
+            "\"menu\":\"" + Menu_ID + "\"," +   
+            "\"showSingleTimeSlot\":false," +
+            "\"type\":0," +
+            "\"typeOfCell\":0}";
+        Api_Call("POST", BaseAPI + "/shoppingcart", Auth, BODY);
+        if(json != null){
+            try {
+                ShoppingCart_Delivery_ID = json.getString("id");
+                txtLog.append("== " + "New SCart ID: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            } catch (Exception ex){
+                FAIL = true;
+                txtLog.append("== " + "New SCart ERROR: "  + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                return;
+            }
+        } 
+        Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID;
+        txtLog.append("\r\n- " + "Add Menu Item(s) to Delivery Shopping Cart ...."+ "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+        
+        JSONArray jItems = new JSONArray();
+        JSONObject jItem = null;
+        
+        try{
+            jItem = new JSONObject();  
+            jItem.put("id", Item_ID);
+            jItem.put("quantity", 1);
+            jItems.put(jItem);            
+
+            JSONObject ITEMS = new JSONObject();
+            ITEMS.put("items", jItems);
+            BODY = ITEMS.toString();  
+        } catch (Exception ex){
+            FAIL = true;
+            txtLog.append("== " + "Json ERROR: "  + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            return;
+        }   
+        
+        Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, BODY);
+        if(json != null){
+            try{
+                ShoppingCart_Delivery_ID = json.getString("id");
+                txtLog.append("== " + "Add Item > Updated SCart \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            } catch (Exception ex){
+                FAIL = true;
+                txtLog.append("== " + "Update SCart ERROR: "  + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                return;
+            }
+        }       
+        Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID;
+
+    }
+    private void Place_Update_Delivery_Order(String Payment_TKN){
+        FAIL = false;
+        txtLog.append("\r\n- " + "Place Delivery Order ...."+ "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        Auth = "Bearer " + Mobile_User_TKN;
+
+        BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
+                "\"location_brand\":\"" + BrandID + "\"," + 
+                "\"customer\":\"" + Mobile_User_ID + "\"," +  
+                "\"details\":" +                                   
+                    "{\"contact_number\":\"4165551234\"," +
+                    "\"destination\":\"" + DropOffLocation + "\"," +
+                    "\"duration\":\"" + "00:05:00" + "\"," +
+                    "\"instructions\":\"" + "Discard this Order" + "\"," +
+                    "\"name\":\"" + "JTT Auto Order for Bolter" + "\"," +
+                    "\"order_type\":\"delivery\"}," + 
+                "\"payment\":" + 
+                    "{\"token\":\"" + Payment_TKN + "\"}," +
+                "\"requested_date\":\"" + Requested_Date + "\"," +
+                "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
+                "\"}";        
+        Api_Call("POST",  BaseAPI + "/order", Auth, BODY);
+        if(json != null && json.has("id")){
+            Order_Delivery_ID = json.getString("id");
+            txtLog.append("== " + "New Delivery Order ID: "  + Order_Delivery_ID + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        } else{
+            FAIL = true;
+            return;
+        }              
+        
+        txtLog.append("\r\n- " + "Update Delivery Order > 'Ready' ...."+ "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        Auth = "Bearer " + AP3_TKN;
+        requestParams = new JSONObject();   //  Update Delivery Order > Status and requested_date =================
+        
+        ZoneOffset offset = OffsetDateTime.now(ZoneId.of(TimeZone.getDefault().getID())).getOffset();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date date = new Date();
+        date.setTime(date.getTime() + 20000); // now + 20 sec
+        String requested_date = dateFormat.format(date);
+
+        JSONObject is = new JSONObject(); 
+        is.put("in_progress", true);
+        is.put("ready", true);     
+        requestParams.put("is", is); 
+        requestParams.put("requested_date", requested_date); 
+        
+        BODY = requestParams.toString();
+        Api_Call("PATCH",  BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY);        
+        if(json != null){
+            try {
+                Order_Delivery_ID = json.getString("id");
+                txtLog.append("== " + "Updated Delivery Order ID: "  + Order_Delivery_ID + "\r\n" +
+                        "Env: " + env + ", Bolter App: " +  Bolter_APP + ", Site: " + SITE + ", Brand: " + BRAND + "\r\n" + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            } catch (Exception ex){
+                FAIL = true;
+                txtLog.append("== " + "Update Delivery Order ERROR: "  + ex.getMessage() + "\r\n"+
+                        "Env: " + env + ", Bolter App: " +  Bolter_APP + ", Site: " + SITE + ", Brand: " + BRAND + "\r\n" + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+        }   
+    }
+    // </editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc="Extend HTML Report Methods">
     protected void Extent_Report_Config() throws IOException{
         HTML_Report_Path = System.getProperty("user.home") + File.separator + "Desktop";
@@ -2725,7 +3248,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         HtmlReporter.config().setDocumentTitle("JTT Mobile Automation Report");
         HtmlReporter.config().setTheme(Theme.STANDARD);               
     }    
-    protected void Log_Html_Result(String RES, String Test_Description, boolean Capture_Screenshot, ExtentTest Test) throws IOException  {
+    protected void Log_Html_Result(String RES, String Test_Description, boolean Capture_Screenshot, ExtentTest Test, Date API_Start) throws IOException  {
         switch (RES) {
             case "PASS":
                 Test.log(Status.PASS, MarkupHelper.createLabel(Test_Description, ExtentColor.GREEN));
@@ -2758,6 +3281,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 }
                 break;
         }
+        Test.getModel().setStartTime(API_Start);
+        Test.getModel().setEndTime(new Date());
     }
     protected String getScreenshot() {
         try{
@@ -2779,6 +3304,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
             Instant dw_start = Instant.now();
             @Override
             protected String doInBackground() throws Exception {
+                if(app.equals("Bolter")){
+                    Place_Order(); // ===================================
+                    //return "Test Place Order only";
+                }
+                
                 String DriverStart = StartAndroidDriver();
                 if(DriverStart.contains("OK")){
                     Current_Log_Update(GUI, "= Appium Service and Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
@@ -2883,6 +3413,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 //asb.usingDriverExecutable(new File(("/path/to/node")));
                 HashMap<String, String> environment = new HashMap();
                 environment.put("ANDROID_HOME", "/Users/" + A.A.UserID + "/Library/Android/sdk"); 
+//                environment.put("JAVA_HOME", "/Users/" + A.A.UserID + "/Library/Android/sdk/platform-tools"); 
+                environment.put("JAVA_HOME", "/Library/Java/JavaVirtualMachines/jdk1.8.0_281.jdk/Contents/Home"); 
+                
                 ASB.withEnvironment(environment);
                 ASB.withAppiumJS(new File(("/usr/local/lib/node_modules/appium/build/lib/main.js")));
             }
@@ -2909,19 +3442,25 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
     }
     private void Execute_Bolter() throws Exception {
+
         if(true){
             SCOPE += "Splash";
             ParentTest = HtmlReport.createTest("Bolter Splash"); 
             An_bolter_main BR = new Mob_Android.An_bolter_main(An_GUI.this);
             BR.Run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            ParentTest.getModel().setName("Bolter Splash - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
+
         }
         if(_Forgot_pw){  
             SCOPE += ", Forgot PW";
-            ParentTest = HtmlReport.createTest("Forgot Password");         
+            ParentTest = HtmlReport.createTest("Bolter Splash");         
             An_bolter_forgot_pw BR = new Mob_Android.An_bolter_forgot_pw(An_GUI.this);
             BR.Run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            ParentTest.getModel().setName("Bolter Splash - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
         }
         if(_Invalids){              
             SCOPE += ", Invalid Logins";
@@ -2929,6 +3468,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
             An_bolter_invalid_login BR = new Mob_Android.An_bolter_invalid_login(An_GUI.this);
             BR.Run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            ParentTest.getModel().setName("Logins > Invalid Email/PW - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
         }
         if(_Login){
             SCOPE += ", Login";
@@ -2936,9 +3477,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
             An_bolter_login BR = new Mob_Android.An_bolter_login(An_GUI.this);
             BR.Run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            ParentTest.getModel().setName("Valid Login - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
             if(BR.FAIL){
                 // FATAL - cannot procced
-                Log_Html_Result("FAIL", "Runner: " + Bolter_ID + "/" + Bolter_PW, true, ParentTest.createNode("Login Failed, cannot proceed"));
+                Log_Html_Result("FAIL", "Runner: " + Bolter_ID + "/" + Bolter_PW, true, ParentTest.createNode("Login Failed, cannot proceed"), new Date());
                 return;
             }
         }        
@@ -2948,6 +3491,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
             An_bolter_profile BR = new Mob_Android.An_bolter_profile(An_GUI.this);
             BR.Run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            ParentTest.getModel().setName("User Profile - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
         }
         if(_Order_history){                    
             SCOPE += ", History";
@@ -2955,6 +3500,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
             An_bolter_history BR = new Mob_Android.An_bolter_history(An_GUI.this);
             BR.Run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            ParentTest.getModel().setName("History - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
         }
         if(_Support){       
             SCOPE += ", Support";
@@ -2962,6 +3509,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
             An_bolter_support BR = new Mob_Android.An_bolter_support(An_GUI.this);
             BR.Run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            ParentTest.getModel().setName("Support - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
         }
         if(true){    
             SCOPE += ", Dashboard";
@@ -2969,6 +3518,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
             An_bolter_dashboard BR = new Mob_Android.An_bolter_dashboard(An_GUI.this);
             BR.Run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            ParentTest.getModel().setName("Delievery Dashboard - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
         }
         
         if(_Logout){    
@@ -2977,6 +3528,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
             An_bolter_logout BR = new Mob_Android.An_bolter_logout(An_GUI.this);
             BR.Run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            ParentTest.getModel().setName("Logout - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
         }
     }
     private void Execute_C360() throws Exception {
@@ -2986,8 +3539,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
             Chrome_C360 BR = new Mob_Android.Chrome_C360(An_GUI.this);
             BR.Run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            ParentTest.getModel().setName("C360 Chrome - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
         }
-
     }
     private void Execute_WO() throws Exception {
         if(true){
@@ -2996,6 +3550,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
             Chrome_WO BR = new Mob_Android.Chrome_WO(An_GUI.this);
             BR.Run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            ParentTest.getModel().setName("WO Chrome - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
         }
 
     }
@@ -3006,6 +3562,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
             An_core_main BR = new An_core_main(An_GUI.this);//
             BR.Run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            ParentTest.getModel().setName("Main - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
         }
 //        if(true){ 
 //            SCOPE += ", Splash";
@@ -3013,6 +3571,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
 //            An_core_main BR = new An_core_main(An_GUI.this);//
 //            CR.Run(); // ======================================
 //            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+//            ParentTest.getModel().setName("Locations - Tot: " + BR._t + ", Failed: " + BR._f);
+//            ParentTest.getModel().setEndTime(new Date());
 //        }
     }
     private void BW1_Done(boolean GUI) throws Exception{
@@ -3119,21 +3679,22 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs  
         
         try {
             _p++; 
             err = "No Error";
             EX += _t + "\t" + NAME + "\t" + "Test_EX_Update OK"  + "\t" + t + "\t" + "PASS" + "\t" + err + 
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Page URL" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }     
@@ -3141,7 +3702,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         t = "resetApp()";
@@ -3150,14 +3712,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "test"  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Page URL" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }     
@@ -3165,7 +3727,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -3173,14 +3736,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "AndroidKey.BACK" + "\t" + "driver.pressKey" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "AndroidKey.BACK" + "\t" + "driver.pressKey" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }     
@@ -3188,14 +3751,15 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
             ad.get(URL);
             EX += _t + "\t" + NAME + "\t" + "Keyboard is Shown"  + "\t" + "hideKeyboard" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + URL, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + URL, false, ParentTest.createNode(NAME), API_SRART);
             _p++; 
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -3203,7 +3767,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + URL + "\t" + URL + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Target URL: " + URL, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Target URL: " + URL, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     } 
@@ -3211,14 +3775,15 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
             t = ad.getCurrentUrl();
             EX += _t + "\t" + NAME + "\t" + "Keyboard is Shown"  + "\t" + "hideKeyboard" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t, false, ParentTest.createNode(NAME), API_SRART);
             _p++; 
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -3226,7 +3791,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     } 
@@ -3235,7 +3800,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -3243,11 +3809,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 ad.hideKeyboard();                
                 EX += _t + "\t" + NAME + "\t" + "Keyboard is Shown"  + "\t" + "hideKeyboard" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME), API_SRART);
             }else{
                 EX += _t + "\t" + NAME + "\t" + "Keyboard is Not Shown"  + "\t" + " - " + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME), API_SRART);
             }
             _p++; 
         } catch(Exception ex){
@@ -3256,7 +3822,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     } 
@@ -3264,7 +3830,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -3302,14 +3869,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Swipe " + DIRECTION + "\t" + "Swipe OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + DIRECTION, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + DIRECTION, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Swipe " + DIRECTION + "\t" + "Swipe Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }    
@@ -3317,7 +3884,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
 
@@ -3356,14 +3924,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + DIRECTION + "\t" + "Swipe OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + DIRECTION, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + DIRECTION, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + DIRECTION + "\t" + "Swipe Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }    
@@ -3371,7 +3939,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -3404,14 +3973,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "Wait:  " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "loadTimeout " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -3419,7 +3988,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -3452,14 +4022,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME  + "\t" + PATH + "\t" + "Wait:  " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "loadTimeout " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -3468,7 +4038,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -3476,14 +4047,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -3491,7 +4062,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -3500,14 +4072,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     } 
@@ -3515,7 +4087,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -3538,14 +4111,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Click " + DIRECTION + " of element successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + DIRECTION + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     } 
@@ -3553,7 +4126,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -3590,14 +4164,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -3605,7 +4179,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -3657,14 +4232,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Move '" + DIRECTION + "' of element successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "moveToElement" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -3672,7 +4247,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -3725,14 +4301,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Click out " + DIRECTION + " of element successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "moveToElement" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -3741,7 +4317,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         t ="?";
@@ -3751,7 +4328,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + VAL  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             t = "Not Found";
             _p++;
@@ -3765,7 +4342,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         t = "Not Found";
@@ -3784,7 +4362,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Text Found" + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             if(EXPECTED){
                 _f++; FAIL = true; err = ex.getMessage().trim();
@@ -3792,7 +4370,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "FAIL" + "\t" + err +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));                
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME), API_SRART);                
             } else {
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text Not Found" + "\t" + "PASS" + "\t" + " - " +
@@ -3807,7 +4385,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
 
         try {
             switch (BY) {
@@ -3841,14 +4420,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element Found" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -3857,7 +4436,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
 
         try {
             switch (BY) {
@@ -3890,14 +4470,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + "Element Found" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -3905,7 +4485,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -3942,14 +4523,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -3957,7 +4538,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -3993,14 +4575,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4009,7 +4591,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
 
         try {
             switch (BY) {
@@ -4043,14 +4626,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t.replace("\r\n", " ").replace("\n", " ") + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4059,7 +4642,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
 
         try {
             switch (BY) {
@@ -4099,14 +4683,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++;  
             EX += _t + "\t" + NAME + "\t" + VAL  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4114,7 +4698,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         t = "not found!";
@@ -4151,14 +4736,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4166,7 +4751,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         t = "not found!";
@@ -4203,14 +4789,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4218,7 +4804,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         t = "not found!";
@@ -4258,14 +4845,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + t + " > " + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4273,7 +4860,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -4316,14 +4904,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Cleared" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4331,7 +4919,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -4370,14 +4959,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + VAL + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + VAL + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "sendKeys" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         } 
         sw1.reset();
     }
@@ -4386,7 +4975,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         t = "?";
@@ -4405,14 +4995,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element fron the previous step", false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element fron the previous step", false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4420,7 +5010,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {      
@@ -4434,14 +5025,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Text cleared"+ "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element fron the previous step", false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element fron the previous step", false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4449,7 +5040,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -4457,14 +5049,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + VAL + "<br />Element fron the previous step", false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + VAL + "<br />Element fron the previous step", false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4473,7 +5065,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -4488,12 +5081,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "WARN" + "\t" + "No Image" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _w++;
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element fron the previous step", true, ParentTest.createNode(NAME));
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element fron the previous step", true, ParentTest.createNode(NAME), API_SRART);
             } else {
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _p++;
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element fron the previous step", false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element fron the previous step", false, ParentTest.createNode(NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
@@ -4501,7 +5094,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4509,7 +5102,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -4518,14 +5112,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element fron the previous step", false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element fron the previous step", false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element fron the previous step", true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4534,7 +5128,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         if(aL1 != null) {aL1.clear();}
@@ -4571,12 +5166,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "WARN" + "\t" + "L1.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL1.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL1.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + aL1.size() + " item(s) (L1)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";               
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL1.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL1.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -4584,7 +5179,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         } 
         sw1.reset();
     }    
@@ -4592,7 +5187,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         if(aL1 != null) {aL1.clear();}
@@ -4629,12 +5225,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "WARN" + "\t" + "L2.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL2.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL2.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + aL2.size() + " item(s) (L1)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";               
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL2.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL2.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -4642,7 +5238,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         } 
         sw1.reset();
     }    
@@ -4650,7 +5246,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -4685,14 +5282,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element (e2) found" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "e2" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         } 
         sw1.reset();
     }    
@@ -4700,7 +5297,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         t = "?";
@@ -4745,14 +5343,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         } 
         sw1.reset();
     }    
@@ -4760,7 +5358,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         AndroidElement _e = null;
@@ -4800,14 +5399,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             }            
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + VAL + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + VAL + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "sendKeys"+ "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         } 
         sw1.reset();
     }
@@ -4815,7 +5414,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -4850,14 +5450,14 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         } 
         sw1.reset();
     }    
@@ -4866,7 +5466,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         try {
@@ -4908,12 +5509,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "WARN" + "\t" + "No Image" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _w++;
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
             } else {
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _p++;
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " > " + t + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
             } 
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -4921,7 +5522,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4930,7 +5531,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         if(aL0 != null) {aL0.clear();}
@@ -4967,12 +5569,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "WARN" + "\t" + "L0.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL0.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL0.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + aL0.size() + " item(s) (L0)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";               
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL0.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL0.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -4980,7 +5582,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L0" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4988,7 +5590,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         if(aL1 != null) {aL1.clear();}
@@ -5025,12 +5628,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "WARN" + "\t" + "L1.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL1.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL1.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + aL1.size() + " item(s) (L1)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL1.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL1.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -5038,7 +5641,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         } 
         sw1.reset();
     }
@@ -5046,7 +5649,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         if(aL2 != null) {aL2.clear();}
@@ -5083,12 +5687,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "WARN" + "\t" + "L2.isEmpty()" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL2.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL2.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + aL2.size() + " item(s) (L2)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";               
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL2.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL2.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -5096,7 +5700,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L2" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         } 
         sw1.reset();
     }
@@ -5104,7 +5708,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();        
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
         if(aL3 != null) {aL3.clear();}
@@ -5138,15 +5743,15 @@ public class An_GUI extends javax.swing.JInternalFrame {
                     break;
             }
             if(aL3.isEmpty()){
-                _w++; 
-                EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "WARN" + "\t" + "L3.isEmpty" +
+                _p++; 
+                EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L3.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                    
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName()  + " " + "List Size: " + aL3.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName()  + " " + "List Size: " + aL3.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + aL3.size() + " item(s) (L3)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";                
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL3.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + " " + "List Size: " + aL3.size() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -5154,7 +5759,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L3" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME), API_SRART);
         } 
         sw1.reset();
     } 
@@ -5233,8 +5838,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtBolter_Id;
     private javax.swing.JTextField txtBolter_Pw;
     private javax.swing.JTextArea txtLog;
-    private javax.swing.JTextField txtMobile_Id;
-    private javax.swing.JTextField txtMobile_Pw;
+    private javax.swing.JTextField txtMobile_ID;
+    private javax.swing.JTextField txtMobile_PW;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>
 }

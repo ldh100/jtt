@@ -77,21 +77,21 @@ public class FW_units {
     	if (FAIL) { return;}
 
     _t++; TWeb.Element_By_Path_Text_Enter("Enter State name", "xpath", "//div[@class='v-select__slot']/input[@id='state']", "NY (New York)", false, "no_jira"); 
-   		if (FAIL) { return;}    
+   	if (FAIL) { return;}    
 
-	_t++; Thread.sleep((long) sleep); TWeb.PressEnter("Press 'Enter' Key", A.e, "no_jira");
-		if (FAIL) { return;}  
-    
-	_t++; TWeb.Element_By_Path_Text_Enter("Enter zip code", "xpath", "//div[@class='v-text-field__slot']/input[@id='zip']", "23433", false, "no_jira"); 
-    	if (FAIL) { return;}
-    
-	_t++; TWeb.Element_By_Path_Text_Enter("Enter work number contact", "xpath", "//div[@class='v-text-field__slot']/input[@id='work_number_contact']", "123 456 7890", false, "no_jira"); 
-	    if (FAIL) { return;}
-	    	
-	_t++; TWeb.Element_By_Path_Text_Enter("Enter extension", "xpath", "//div[@class='v-text-field__slot']/input[@id='extension']", "3", false, "no_jira"); 
-	    if (FAIL) { return;}
-	    
-	    Thread.sleep(8000);
+    _t++; Thread.sleep((long) sleep); TWeb.Element_SendKey_Enter("Press 'Enter' Key", A.e, "no_jira");
+        if (FAIL) { return;}  
+
+    _t++; TWeb.Element_By_Path_Text_Enter("Enter zip code", "xpath", "//div[@class='v-text-field__slot']/input[@id='zip']", "23433", false, "no_jira"); 
+        if (FAIL) { return;}
+
+    _t++; TWeb.Element_By_Path_Text_Enter("Enter work number contact", "xpath", "//div[@class='v-text-field__slot']/input[@id='work_number_contact']", "123 456 7890", false, "no_jira"); 
+        if (FAIL) { return;}
+
+    _t++; TWeb.Element_By_Path_Text_Enter("Enter extension", "xpath", "//div[@class='v-text-field__slot']/input[@id='extension']", "3", false, "no_jira"); 
+        if (FAIL) { return;}
+
+        Thread.sleep(8000);
 
 
    _t++; Thread.sleep((long) sleep);TWeb.Scroll_XY("Scroll to sector dropdown", 0, 500, "no_jira");
@@ -140,7 +140,7 @@ public class FW_units {
       _t++; TWeb.Element_By_Path_Text_Enter("Enter Unit Manager", "xpath", "//div[@class='v-select__slot']/input[@id='unit_manager']", "Fw Gmail Unit Manager", false, "no_jira"); 
    		if (FAIL) { return;}
    		
-      _t++; Thread.sleep((long) sleep); TWeb.PressEnter("Press 'Enter' Key", A.e, "no_jira");
+      _t++; Thread.sleep((long) sleep); TWeb.Element_SendKey_Enter("Press 'Enter' Key", A.e, "no_jira");
    		if (FAIL) { return;} 
    	Thread.sleep(6000);		
    	_t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Add Unit button", "xpath", "//button/span[contains(.,'Add Unit')]", "no_jira"); 

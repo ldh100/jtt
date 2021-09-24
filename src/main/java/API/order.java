@@ -38,6 +38,8 @@ class order extends API_GUI{
         
         ShoppingCart_Delivery_ID = a.ShoppingCart_Delivery_ID;
         ShoppingCart_Pickup_ID = a.ShoppingCart_Pickup_ID;
+        
+        Item_Index = a.Item_Index;
         EXACT_Payment_TKN = a.EXACT_Payment_TKN;
         FP_Payment_TKN = a.FP_Payment_TKN;
     }
@@ -66,20 +68,21 @@ class order extends API_GUI{
             AAA = json.toString(4);
         } 
 
-        JOB_Api_Call("All Orders - Brand '" + BRAND + "'", "GET", 
+        JOB_Api_Call("All Orders - Location/Brand '" + BRAND + "'", "GET", 
             BaseAPI + "/order/location/brand/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             // Info Found Orders Count
+            AAA = json.toString(4);
         } 
         
-        JOB_Api_Call("All Orders - Location '" + UnitNum + "'", "GET", 
+        JOB_Api_Call("All Orders - Location/Unit '" + UnitNum + "'", "GET", 
             BaseAPI + "/order/location/" + UnitID, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             // Info Found Orders Count
             AAA = json.toString(4);
         } 
                 
-        JOB_Api_Call("All Orders - Group '" + SITE + "'", "GET", 
+        JOB_Api_Call("All Orders - Location/Group(Site) '" + SITE + "'", "GET", 
             BaseAPI + "/order/location/group/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             // Info Found Orders Count
@@ -129,7 +132,7 @@ class order extends API_GUI{
         JSONArray items = new JSONArray();   
         JSONObject item_1 = new JSONObject();
             item_1.put("id", ITEMS_IDS.get(ITEMS_IDS.size() - 1)); 
-            item_1.put("_index", "abcd");
+            item_1.put("_index", Item_Index);
             item_1.put("quantity", 1);
             item_1.put("unit", 1);    
             item_1.put("price", new JSONObject().put("amount", 0.05));
@@ -167,9 +170,9 @@ class order extends API_GUI{
         JSONArray refunds = new JSONArray();  
         JSONObject refund_1 = new JSONObject();
             refund_1.put("id", ITEMS_IDS.get(ITEMS_IDS.size() - 1)); 
-            refund_1.put("_index", "abcd");
+            refund_1.put("_index", Item_Index);
             refund_1.put("quantity", 1);  
-            refund_1.put("price", new JSONObject().put("amount", 1.0));
+            refund_1.put("price", new JSONObject().put("amount", 0.01));
             refund_1.put("reason", "Test Refund reason");  
         refunds.put(refund_1);
         requestParams.put("refunds", refunds); 

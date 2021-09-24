@@ -2,6 +2,7 @@ package AP3;
 
 import com.aventstack.extentreports.ExtentTest;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -109,7 +110,7 @@ class AP3_bulk_apply extends AP3_GUI{
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
                 EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                 "\t" + err + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"));
+                Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"), new Date());
                 return;
             }
 
@@ -128,23 +129,23 @@ class AP3_bulk_apply extends AP3_GUI{
                     _t++;
                     _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is not visible" + "\t" + "-" + "\t" + "\"hidden\" : " + item.getJSONObject("is").getBoolean("hidden") + "\t" + "PASS" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "\"hidden\" : " + item.getJSONObject("is").getBoolean("hidden"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is not visible"));
+                    Log_Html_Result("PASS", "\"hidden\" : " + item.getJSONObject("is").getBoolean("hidden"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is not visible"), new Date());
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is not visible" + "\t" + "-" + "\t" + "\"hidden\" : " + item.getJSONObject("is").getBoolean("hidden") + "\t" + "FAIL" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "\"hidden\" : " + item.getJSONObject("is").getBoolean("hidden"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is not visible"));
+                    Log_Html_Result("FAIL", "\"hidden\" : " + item.getJSONObject("is").getBoolean("hidden"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is not visible"), new Date());
                 }
                 if (item.getJSONObject("is").getBoolean("out_of_stock")) {
                     _t++;
                     _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is out of stock" + "\t" + "-" + "\t" + "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("out_of_stock") + "\t" + "PASS" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("out_of_stock"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is out of stock"));
+                    Log_Html_Result("PASS", "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("out_of_stock"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is out of stock"), new Date());
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is out of stock" + "\t" + "-" + "\t" + "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("out_of_stock") + "\t" + "FAIL" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("out_of_stock"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is out of stock"));
+                    Log_Html_Result("FAIL", "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("out_of_stock"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is out of stock"), new Date());
                 }
             } 
         }catch (Exception ex) {
@@ -152,7 +153,7 @@ class AP3_bulk_apply extends AP3_GUI{
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + err+ "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }        
 
@@ -217,7 +218,7 @@ class AP3_bulk_apply extends AP3_GUI{
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();            
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + err + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
 
@@ -237,23 +238,23 @@ class AP3_bulk_apply extends AP3_GUI{
                     _t++;
                     _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is visible" + "\t" + "-" + "\t" + " \"hidden\" : " + item.getJSONObject("is").getBoolean("hidden") + "\t" + "PASS" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "\"hidden\" : " + item.getJSONObject("is").getBoolean("hidden"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is visible"));
+                    Log_Html_Result("PASS", "\"hidden\" : " + item.getJSONObject("is").getBoolean("hidden"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is visible"), new Date());
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is visible" + "\t" + "-" + "\t" + " \"hidden\" : " + item.getJSONObject("is").getBoolean("hidden") + "\t" + "FAIL" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "\"hidden\" : " + item.getJSONObject("is").getBoolean("hidden"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is visible"));
+                    Log_Html_Result("FAIL", "\"hidden\" : " + item.getJSONObject("is").getBoolean("hidden"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is visible"), new Date());
                 }
                 if (!item.getJSONObject("is").getBoolean("out_of_stock")) {
                     _t++;
                     _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is in stock" + "\t" + "-" + "\t" + "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("out_of_stock") + "\t" + "PASS" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("hidden"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is in stock"));
+                    Log_Html_Result("PASS", "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("hidden"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is in stock"), new Date());
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is in stock" + "\t" + "-" + "\t" + "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("out_of_stock") + "\t" + "FAIL" + "\t" 
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("hidden"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is in stock"));
+                    Log_Html_Result("FAIL", "\"out_of_stock\" : " + item.getJSONObject("is").getBoolean("hidden"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is in stock"), new Date());
                 }
             } 
         }catch (Exception ex) {
@@ -261,7 +262,7 @@ class AP3_bulk_apply extends AP3_GUI{
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();  
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + err + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
 
@@ -454,7 +455,7 @@ class AP3_bulk_apply extends AP3_GUI{
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
                 EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                 "\t" + err + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                Log_Html_Result("FAIL", "Error: " + err+ "<br />" + "URL: " + BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"));
+                Log_Html_Result("FAIL", "Error: " + err+ "<br />" + "URL: " + BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"), new Date());
                 return;
             }
 
@@ -479,12 +480,12 @@ class AP3_bulk_apply extends AP3_GUI{
                         _t++;
                         _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has 3 modifier otions" + "\t" + "-" + "\t" + "modifier options = " + option_items.length() + "\t" + "PASS" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "modifier options = " + option_items.length(), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 3 modifier otions"));
+                        Log_Html_Result("PASS", "modifier options = " + option_items.length(), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 3 modifier otions"), new Date());
                     } else {
                         _t++;
                         _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has 3 modifier otions" + "\t" + "-" + "\t" + "modifier options = " + option_items.length() + "\t" + "FAIL" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "modifier options = " + option_items.length(), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 3 modifier otions"));
+                        Log_Html_Result("FAIL", "modifier options = " + option_items.length(), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 3 modifier otions"), new Date());
                     }
                 } 
             }catch (Exception ex) {
@@ -492,7 +493,7 @@ class AP3_bulk_apply extends AP3_GUI{
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();                 
                 EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false"+ "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                 "\t" + err + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", false, ParentTest.createNode("API Responce Error"));
+                Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", false, ParentTest.createNode("API Responce Error"), new Date());
                 return;
             }
 
@@ -550,7 +551,7 @@ class AP3_bulk_apply extends AP3_GUI{
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
                 EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                 "\t" + err + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"));
+                Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"), new Date());
                 return;
             }
 
@@ -575,12 +576,12 @@ class AP3_bulk_apply extends AP3_GUI{
                         _t++;
                         _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has 4 modifier otions" + "\t" + "-" + "\t" + "modifier options = " + option_items.length() + "\t" + "PASS" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "modifier options = " + option_items.length(), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 4 modifier otions"));
+                        Log_Html_Result("PASS", "modifier options = " + option_items.length(), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 4 modifier otions"), new Date());
                     } else {
                         _t++;
                         _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has 4 modifier otions" + "\t" + "-" + "\t" + "modifier options = " + option_items.length() + "\t" + "FAIL" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "modifier options = " + option_items.length(), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 4 modifier otions"));
+                        Log_Html_Result("FAIL", "modifier options = " + option_items.length(), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 4 modifier otions"), new Date());
                     }
                 }
             }catch (Exception ex) {
@@ -588,7 +589,7 @@ class AP3_bulk_apply extends AP3_GUI{
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
                 EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                 "\t" + err + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", false, ParentTest.createNode("API Responce Error"));
+                Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", false, ParentTest.createNode("API Responce Error"), new Date());
                 return;
             }
 
@@ -675,7 +676,7 @@ class AP3_bulk_apply extends AP3_GUI{
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + err + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
 
@@ -694,34 +695,34 @@ class AP3_bulk_apply extends AP3_GUI{
                     _t++;
                     _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is not diabled" + "\t" + "-" + "\t" + "\"disabled\" = " + item.getJSONObject("is").getBoolean("disabled") + "\t" + "PASS" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "\"disabled\" = " + item.getJSONObject("is").getBoolean("disabled"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is not diabled"));
+                    Log_Html_Result("PASS", "\"disabled\" = " + item.getJSONObject("is").getBoolean("disabled"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is not diabled"), new Date());
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is not diabled" + "\t" + "-" + "\t" + "\"disabled\" = " + item.getJSONObject("is").getBoolean("disabled") + "\t" + "FAIL" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "\"disabled\" = " + item.getJSONObject("is").getBoolean("disabled"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is not diabled"));
+                    Log_Html_Result("FAIL", "\"disabled\" = " + item.getJSONObject("is").getBoolean("disabled"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is not diabled"), new Date());
                 }
                 if (item.getJSONObject("price").getInt("amount") == Integer.parseInt(FIP)) {
                     _t++;
                     _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " price is " + FIP + "\t" + "-" + "\t" + "\"price\" = " + item.getJSONObject("price").getInt("amount") + "\t" + "PASS" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "\"price\" = " + item.getJSONObject("price").getInt("amount"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " price is " + FIP));
+                    Log_Html_Result("PASS", "\"price\" = " + item.getJSONObject("price").getInt("amount"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " price is " + FIP), new Date());
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " price is " + FIP + "\t" + "-" + "\t" + "\"price\" = " + item.getJSONObject("price").getInt("amount") + "\t" + "FAIL" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "\"price\" = " + item.getJSONObject("price").getInt("amount"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " price is " + FIP));
+                    Log_Html_Result("FAIL", "\"price\" = " + item.getJSONObject("price").getInt("amount"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " price is " + FIP), new Date());
                 }
                 if (!item.isNull("plu")) {
                     _t++;
                     _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has a PLU" + "\t" + "-" + "\t" + "has PLU = " + item.getString("plu") + "\t" + "PASS" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "has PLU = " + item.isNull("plu"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has a PLU"));
+                    Log_Html_Result("PASS", "has PLU = " + item.isNull("plu"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has a PLU"), new Date());
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has a PLU" + "\t" + "-" + "\t" + "has PLU = " + item.getString("plu") + "\t" + "FAIL" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "has PLU = " + item.isNull("plu"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has a PLU"));
+                    Log_Html_Result("FAIL", "has PLU = " + item.isNull("plu"), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has a PLU"), new Date());
                 }
                 JSONArray options = new JSONArray();
                 options = item.getJSONArray("options");
@@ -732,12 +733,12 @@ class AP3_bulk_apply extends AP3_GUI{
                     _t++;
                     _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has 4 modifier otions" + "\t" + "-" + "\t" + "modifier options = " + option_items.length() + "\t" + "PASS" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "modifier options = " + option_items.length(), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 4 modifier otions"));
+                        Log_Html_Result("PASS", "modifier options = " + option_items.length(), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 4 modifier otions"), new Date());
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has 4 modifier otions" + "\t" + "-" + "\t" + "modifier options = " + option_items.length() + "\t" + "FAIL" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "modifier options = " + option_items.length(), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 4 modifier otions"));
+                        Log_Html_Result("FAIL", "modifier options = " + option_items.length(), true, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 4 modifier otions"), new Date());
                 }
             }    
         }catch (Exception ex) {
@@ -745,7 +746,7 @@ class AP3_bulk_apply extends AP3_GUI{
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + err+ "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
 
@@ -933,7 +934,7 @@ class AP3_bulk_apply extends AP3_GUI{
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + err + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/company/" + CompanyID + "?nocache=1&extended=true", false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
 
@@ -953,23 +954,23 @@ class AP3_bulk_apply extends AP3_GUI{
                     _t++;
                     _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is disabled" + "\t" + "-" + "\t" + "\"disabled\"  = " + item.getJSONObject("is").getBoolean("disabled") + "\t" + "PASS" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "\"disabled\"  = " + item.getJSONObject("is").getBoolean("disabled"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is disabled"));
+                    Log_Html_Result("PASS", "\"disabled\"  = " + item.getJSONObject("is").getBoolean("disabled"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is disabled"), new Date());
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " is disabled" + "\t" + "-" + "\t" + "\"disabled\"  = " + item.getJSONObject("is").getBoolean("disabled") + "\t" + "FAIL" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "\"disabled\"  = " + item.getJSONObject("is").getBoolean("disabled"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is disabled"));
+                    Log_Html_Result("FAIL", "\"disabled\"  = " + item.getJSONObject("is").getBoolean("disabled"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " is disabled"), new Date());
                 }
                 if (item.isNull("plu")) {
                     _t++;
                     _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " does not have a PLU" + "\t" + "-" + "\t" + "has PLU  = " + item.isNull("plu") + "\t" + "PASS" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "has PLU  = " + item.isNull("plu"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " does not have a PLU"));
+                    Log_Html_Result("PASS", "has PLU  = " + item.isNull("plu"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " does not have a PLU"), new Date());
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " does not have a PLU" + "\t" + "-" + "\t" + "has PLU  = " + item.isNull("plu") + "\t" + "FAIL" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "has PLU  = " + item.isNull("plu"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " does not have a PLU"));
+                    Log_Html_Result("FAIL", "has PLU  = " + item.isNull("plu"), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " does not have a PLU"), new Date());
                 }
                 JSONArray options = new JSONArray();
                 options = item.getJSONArray("options");
@@ -980,12 +981,12 @@ class AP3_bulk_apply extends AP3_GUI{
                     _t++;
                     _p++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has 3 modifier otions" + "\t" + "-" + "\t" + "modifier options = " + option_items.length() + "\t" + "PASS" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "modifier options = " + option_items.length(), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 3 modifier otions"));
+                    Log_Html_Result("PASS", "modifier options = " + option_items.length(), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 3 modifier otions"), new Date());
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "API - Item " + String.valueOf(i+1) + " has 3 modifier otions" + "\t" + "-" + "\t" + "modifier options = " + option_items.length() + "\t" + "FAIL" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "modifier options = " + option_items.length(), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 3 modifier otions"));
+                    Log_Html_Result("FAIL", "modifier options = " + option_items.length(), false, ParentTest.createNode("API - Item " + String.valueOf(i+1) + " has 3 modifier otions"), new Date());
                 }
             }            
         }catch (Exception ex) {
@@ -993,7 +994,7 @@ class AP3_bulk_apply extends AP3_GUI{
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + err+ "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", false, ParentTest.createNode("API Responce Error"));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + "URL: " + BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", false, ParentTest.createNode("API Responce Error"), new Date());
             return;
         }
                       

@@ -14,6 +14,7 @@ class user_ap3 extends API_GUI{
         NewID = a.NewID;
         ParentTest = a.ParentTest;
     }
+    String AAA = "";
     protected void run() {  
         Realm = A.Func.Realm_ID("AP3", env);
         
@@ -37,11 +38,17 @@ class user_ap3 extends API_GUI{
                 if(json.has("user")) AP3_User_ID = json.getString("user"); 
                 if(json.has("token")) AP3_TKN = json.getString("token");  
             } catch (Exception ex){
-                String AAAA = ex.getMessage();
+                AAA = ex.getMessage();
             }
         }
 
         Auth = "Bearer " + AP3_TKN;
+//        JOB_Api_Call("User > /checkin/search", "GET", 
+//            BaseAPI + "/user/checkin/search", Auth, "", 200, ParentTest, "no_jira");
+//        if(json != null){
+//            AAA = json.toString(4);
+//        }  
+      
         JOB_Api_Call("AP3 User > /realm", "GET", 
             BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000", Auth, "", 200, ParentTest, "no_jira");
 
@@ -83,7 +90,7 @@ class user_ap3 extends API_GUI{
             try {
                 if(json.has("id")) New_AP3_User_ID = json.getString("id"); 
             } catch (Exception ex){
-                String AAAA = ex.getMessage();
+                AAA = ex.getMessage();
             }
         }  
         
@@ -95,7 +102,7 @@ class user_ap3 extends API_GUI{
             try {
                 if(json.has("token")) New_AP3_User_TKN = json.getString("token");  
             } catch (Exception ex){
-                String AAAA = ex.getMessage();
+                AAA = ex.getMessage();
             }
         }        
         Auth = "Bearer " + New_AP3_User_TKN;
