@@ -690,8 +690,8 @@ class AP3_user extends AP3_GUI{
             Find_Text("SM 'Site Permissions'", "Site Permissions", true, ParentTest, "no_jira");  
             Find_Text("SM Assigned Site", SITE, true, ParentTest, "no_jira"); 
             Find_Text("SM 'Menu Scheduler'", "Menu Scheduler", true, ParentTest, "no_jira");  
-            Find_Text("SM 'Brand Config'", "Brand Config", false, ParentTest, "no_jira");  
-            Find_Text("SM 'Smart Analytics'", "Smart Analytics", false, ParentTest, "no_jira"); 
+            Find_Text("SM 'Brand Config'", "Brand Config", true, ParentTest, "no_jira");  
+            Find_Text("SM 'Smart Analytics'", "Smart Analytics", true, ParentTest, "no_jira"); 
         
         Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", ParentTest, "no_jira" ); 
                 if (FAIL) { return; }  
@@ -956,7 +956,7 @@ class AP3_user extends AP3_GUI{
         Find_Text("DM Assigned Site", SITE, true, ParentTest, "no_jira");         
         Find_Text("DM 'Menu Scheduler'", "Menu Scheduler", true, ParentTest, "no_jira");  
         Find_Text("DM 'Brand Config'", "Brand Config", true, ParentTest, "no_jira");  
-        Find_Text("DM 'Smart Analytics'", "Smart Analytics", false, ParentTest, "no_jira"); 
+        Find_Text("DM 'Smart Analytics'", "Smart Analytics", true, ParentTest, "no_jira"); 
         
         Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", ParentTest, "no_jira" ); 
                 if (FAIL) { return; }    
@@ -1173,7 +1173,7 @@ class AP3_user extends AP3_GUI{
         Find_Text("Runner Assigned Site", SITE, true, ParentTest, "no_jira"); 
         Find_Text("Runner 'Menu Scheduler'", "Menu Scheduler", false, ParentTest, "no_jira");  
         Find_Text("Runner 'Brand Config'", "Brand Config", false, ParentTest, "no_jira");  
-        Find_Text("Runner 'Smart Analytics'", "Smart Analytics", false, ParentTest, "no_jira");
+        Find_Text("Runner 'Smart Analytics'", "Smart Analytics", true, ParentTest, "no_jira");
         
         Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", ParentTest, "no_jira" ); 
             if (FAIL) { return; }  

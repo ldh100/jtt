@@ -3514,11 +3514,11 @@ public class An_GUI extends javax.swing.JInternalFrame {
         }
         if(true){    
             SCOPE += ", Dashboard";
-            ParentTest = HtmlReport.createTest("Delievery Dashboard");         
+            ParentTest = HtmlReport.createTest("Delivery Dashboard");         
             An_bolter_dashboard BR = new Mob_Android.An_bolter_dashboard(An_GUI.this);
             BR.Run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-            ParentTest.getModel().setName("Delievery Dashboard - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setName("Delivery Dashboard - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }
         
