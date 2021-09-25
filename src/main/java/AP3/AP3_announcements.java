@@ -26,18 +26,18 @@ class AP3_announcements extends AP3_GUI{
         TZone = a.TZone;
     }  
     String API_Response_Body = "";
+    String A_ID = "";
     protected void run()  { 
     try{    
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
-            if (FAIL) { return;}
-        Thread.sleep(500);          
+            if (FAIL) { return;}         
         Element_By_Path_Click("Drawer > 'Announcements' Click", "xpath", "//*[contains(text(), 'Announcements')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,ParentTest, "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(500);          
-//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-//            if (FAIL) { return;}        
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress-circular')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}        
         Page_URL("Announcements page URL", ParentTest, "no_jira"); 
             if (FAIL) { return;}  
             
@@ -51,7 +51,6 @@ class AP3_announcements extends AP3_GUI{
             if (_All_data)  {
                 for (int i = 0; i < L0.size(); i++) {
                     Element_Text("Announcement Data Row Text", L0.get(i), ParentTest, "no_jira");             
-                    if (FAIL) { return;}
                 } 
             } else {
                 Element_Text("Announcement Data Row Text", L0.get(L0.size()- 1), ParentTest, "no_jira");             
@@ -134,8 +133,7 @@ class AP3_announcements extends AP3_GUI{
                     if (FAIL) { return;}
                 } 
             } else {
-                Element_Text("Announcement Data Row Text", L0.get(L0.size()- 1), ParentTest, "no_jira");             
-                if (FAIL) { return;}        
+                Element_Text("Announcement Data Row Text", L0.get(L0.size()- 1), ParentTest, "no_jira");                   
             }       
  
         // ============ All Announcements               
@@ -150,16 +148,14 @@ class AP3_announcements extends AP3_GUI{
             if (FAIL) { return;}
             for (int i = 0; i < L1.size(); i++) {
                 Element_Text("Rows per page Value (index " + i + ")", L1.get(i),  ParentTest, "no_jira");              
-                if (FAIL) { return;}
                 if(t.trim().startsWith("All")){ 
                     T_Index = i; 
                 }
             }
         Element_Click("Click 'All'", L1.get(T_Index), ParentTest, "no_jira");
-            if (FAIL) { return;}               
-        Thread.sleep(500);             
-//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
-//            if (FAIL) { return;}   
+            if (FAIL) { return;}                        
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress-circular')]", ParentTest, "no_jira");
+            if (FAIL) { return;}   
         Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}   
             
@@ -168,11 +164,9 @@ class AP3_announcements extends AP3_GUI{
             if (_All_data)  {
                 for (int i = 0; i < L0.size(); i++) {
                     Element_Text("Announcement Row Text", L0.get(i), ParentTest, "no_jira");             
-                    if (FAIL) { return;}
                 } 
             } else {
-                Element_Text("Announcement Data Row Text", L0.get(L0.size() - 1), ParentTest, "no_jira");             
-                if (FAIL) { return;}        
+                Element_Text("Announcement Data Row Text", L0.get(L0.size() - 1), ParentTest, "no_jira");                
             } 
         To_Top("Move to page Top", ParentTest, "no_jira");
             if (FAIL) { return;}   
@@ -189,10 +183,9 @@ class AP3_announcements extends AP3_GUI{
         Find_Text("Find 'New..' Text", "NEW ANNOUNCEMENT",true,ParentTest, "no_jira");             
             if (FAIL) { return;}
         Element_By_Path_Click("Button 'New Announcement' click", "css", "[type='submit']", ParentTest, "no_jira");             
+            if (FAIL) { return;}            
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress-circular')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Thread.sleep(500);             
-//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-//            if (FAIL) { return;}
         Thread.sleep(500);       
         Page_URL("New Announcement page URL", ParentTest, "no_jira");
             if (FAIL) { return;}    
@@ -211,18 +204,15 @@ class AP3_announcements extends AP3_GUI{
                             if (FAIL) { return;} 
                             
                         Find_Text("Find 'Cancel' text", "Cancel", true,ParentTest, "no_jira"); 
-                            if (FAIL) { return;}
-                        Find_Text("Find 'Create Announcement' text", "Create Announcement", true,ParentTest, "no_jira"); 
-                            if (FAIL) { return;}                            
+                        Find_Text("Find 'Create Announcement' text", "Create Announcement", true,ParentTest, "no_jira");                           
                             
                         Element_By_Path_Click("Announcement Type Dropdown Open", "css", "[aria-label='Announcement Type']", ParentTest, "no_jira");
-                             if (FAIL) { return;} 
+                            if (FAIL) { return;} 
                         Element_E1_Find("Find 'Announcement Types' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
                             if (FAIL) { return;}                          
                         Element_Child_List_L1("Announcement Types' Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                                     
                             for (int j = 0; j < L1.size(); j++) {
-                                Element_Text("Available Announcement Type:", L1.get(j), ParentTest, "no_jira");             
-                                if (FAIL) { return;}                            
+                                Element_Text("Available Announcement Type:", L1.get(j), ParentTest, "no_jira");                                      
                             }
                         Element_By_Path_Click("Select 'Other' Type", "xpath", "//*[contains(text(), '" + "Other" + "')]", ParentTest, "no_jira");
                             if (FAIL) { return;} 
@@ -247,11 +237,10 @@ class AP3_announcements extends AP3_GUI{
                         Element_By_Path_Click("Select '" + app + "' App", "xpath", "//*[contains(text(), '" + app + "')]", ParentTest, "no_jira");
                             if (FAIL) { return;}  
                         Element_By_Path_Click("Click 'Create Announcement'", "xpath", "//*[contains(text(), 'Create Announcement')]", ParentTest, "no_jira"); 
-                            //if (FAIL) { return;}     >>>>>>>>>> Toast >>>>>
+                            if (FAIL) { return;}   //  >>>>>>>>>> Toast >>>>>
                         
                         String s = "Search Sites (" + app + ")";
-                        Find_Text("Find 'Search..' text", s, true,ParentTest, "no_jira"); 
-                            if (FAIL) { return;}                            
+                        Find_Text("Find 'Search..' text", s, true, ParentTest, "no_jira");                           
                         Element_By_Path_Click("Click 'Search Sites...'", "css", "[aria-label='" + s + "']", ParentTest, "no_jira");
                              if (FAIL) { return;} 
                         Element_By_Path_Text_Enter("Enter 'Search Sites...'", "css", "[aria-label='" + s + "']", SITE, false, ParentTest, "no_jira");
@@ -261,8 +250,7 @@ class AP3_announcements extends AP3_GUI{
                         Element_Child_List_L1("Sites' Count", e1, "xpath", ".//label[@class='v-label theme--light']", ParentTest, "no_jira");              
                            T_Index = -1;
                             for (int j = 0; j < L1.size(); j++) {
-                                Element_Text("Selection " + (j+1) + " Name", L1.get(j), ParentTest, "no_jira");             
-                                    if (FAIL) { return;}   
+                                Element_Text("Selection " + (j+1) + " Name", L1.get(j), ParentTest, "no_jira");               
                                 if(t.trim().equals(SITE)){
                                     T_Index = j;
                                 }
@@ -276,7 +264,7 @@ class AP3_announcements extends AP3_GUI{
                         
                         Text_Found("Enable this announcement...", "Enable this announcement to see", ParentTest, "no_jira");
                         if(t.equals("Not Found")){  
-                          Element_By_Path_Click("Announcement Position Dropdown Open", "xpath", "//input[@aria-label='Position']/parent::div/following-sibling::div//i", ParentTest, "no_jira");
+                            Element_By_Path_Click("Announcement Position Dropdown Open", "xpath", "//input[@aria-label='Position']/parent::div/following-sibling::div//i", ParentTest, "no_jira");
                             // Element_By_Path_Click("Announcement Position Dropdown Open", "css", "[aria-label='Position']", ParentTest, "no_jira");
                                 if (FAIL) { return; }
                                 Element_E1_Find("Find 'Position' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
@@ -288,18 +276,16 @@ class AP3_announcements extends AP3_GUI{
                                     }
                                 Element_Click("Select 1st Available Position", L1.get(0),ParentTest, "no_jira");
                                     if (FAIL) { return;} 
-                         }else{
+                        }else{
                             Find_Text("Find Notification text", "Enable this announcement to see", true,ParentTest, "no_jira");
-                                if (FAIL) { return; }
-//                            Find_Text("Find 'Status' text", "Status", true,ParentTest, "no_jira");
+//                            Find_Text("Find 'Status' text", "Status", true, ParentTest, "no_jira");
 //                                if (FAIL) { return; }
 //                            Element_By_Path_Text("Find 'Status'", "xpath", "//input[@aria-label='Status']/parent::div", ParentTest, "no_jira"); 
-//                                if (FAIL) { return; }
-                         }
+                        }
                         break;
                     case 1:  
                         Element_By_Path_Click("Click 'Create Announcement'", "xpath", "//*[contains(text(), 'Create Announcement')]", ParentTest, "no_jira"); 
-                            //if (FAIL) { return;}     >>>>>>>>>> Toast >>>>>                       
+                            if (FAIL) { return;}   //  >>>>>>>>>> Toast >>>>>                       
                         Element_Child_Attribute("Sub-title " + i, L2.get(i), "xpath", ".//div[@class='H5-Primary-Left']", "textContent", ParentTest, "no_jira");         
                             if (FAIL) { return;}  
                         Scroll_to_Element("Scroll to Card " + i, L2.get(1), ParentTest, "no_jira");
@@ -347,10 +333,9 @@ class AP3_announcements extends AP3_GUI{
                 }
             }     
         Element_By_Path_Click("Click 'Create Announcement'", "xpath", "//*[contains(text(), 'Create Announcement')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}  
-        Thread.sleep(500);           
-//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-//            if (FAIL) { return;}   
+            if (FAIL) { return;}         
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress-circular')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}   
             
         // ============ All Announcements   
         To_Bottom("Move to page Bottom", ParentTest, "no_jira");
@@ -367,15 +352,13 @@ class AP3_announcements extends AP3_GUI{
 
             for (int i = 0; i < L1.size(); i++) {
                 Element_Text("Rows per page Value (index " + i + ")", L1.get(i),  ParentTest, "no_jira");              
-                if (FAIL) { return;}
                 if(t.trim().startsWith("All")){ 
                     T_Index = i; 
                 }
             }
         Element_Click("Click 'All'", L1.get(T_Index), ParentTest, "no_jira");
-            if (FAIL) { return;}  
-        Thread.sleep(500);              
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+            if (FAIL) { return;}              
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress-circular')]", ParentTest, "no_jira");
             if (FAIL) { return;}  
         To_Bottom("Move to page Bottom", ParentTest, "no_jira");
             if (FAIL) { return;}  
@@ -387,7 +370,6 @@ class AP3_announcements extends AP3_GUI{
             T_Index = -1; 
             for (int i = 0; i < L0.size(); i++) {
                 Element_Text("Announcement Row Text", L0.get(i), ParentTest, "no_jira");             
-                    if (FAIL) { return;}
                 if(t.startsWith("Auto Announcement " + New_ID)){
                     T_Index = i;
                 }
@@ -407,9 +389,7 @@ class AP3_announcements extends AP3_GUI{
                 Element_Child_E2("Find 'Sites' dialog Title", e1, "xpath", ".//div[@class='v-card__title H4-Secondary-Center']", ParentTest, "no_jira");
                     if (FAIL) { return;}
                 Element_Text("Find 'Sites' dialog Title text", e2, ParentTest, "no_jira");
-                    if (FAIL) { return;}
                 Find_Text("Find target Site", SITE, true, ParentTest, "no_jira"); 
-                    if (FAIL) { return;}  
                 Element_Child_E2("Find dialog 'Edit' button", e1, "xpath", ".//*[text()='Edit']", ParentTest, "no_jira");
                     //if (FAIL) { return;} 
                 Element_Child_E2("Find dialog 'Cancel' button", e1, "xpath", ".//*[text()='Cancel']", ParentTest, "no_jira");
@@ -424,20 +404,15 @@ class AP3_announcements extends AP3_GUI{
             if (!FAIL) {    // Find fragment 
         Element_Child_E2("Find 'Image(s)' dialog Title", e1, "xpath", ".//div[@class='v-card__title H4-Secondary-Center']", ParentTest, "no_jira");
             if (FAIL) { return;}   
-        Element_Text("Find 'Image(s)' dialog Title text", e2, ParentTest, "no_jira");
-            if (FAIL) { return;}      
+        Element_Text("Find 'Image(s)' dialog Title text", e2, ParentTest, "no_jira");    
         Find_Text("Find 'En...' version text", "English Version", true, ParentTest, "no_jira"); 
-            if (FAIL) { return;}
         Find_Text("Find 'Fr...' version text", "French Version", true, ParentTest, "no_jira"); 
-            if (FAIL) { return;}
 
         Element_Child_List_L1("Images Count", e1, "tagName", "img", ParentTest, "no_jira");              
             for (int j = 0; j < L1.size(); j++) {        
                 Element_Attribute("Image " + j + " src", L1.get(j), "src", ParentTest, "no_jira");             
-                if (FAIL) { return;}  
-            }          
-        Element_Child_E2("Find dialog 'Edit' button", e1, "xpath", ".//*[text()='EDIT']", ParentTest, "no_jira");
-            if (FAIL) { return;} 
+                    if (FAIL) { return;}  
+            }                   
         Element_Text("Botton 'Edit' text", e2, ParentTest, "no_jira");      
         Element_Child_E2("Find dialog 'Cancel' button", e1, "xpath", ".//*[text()='Cancel']", ParentTest, "no_jira");
             if (FAIL) { return;}  
@@ -445,19 +420,18 @@ class AP3_announcements extends AP3_GUI{
         Scroll_to_Element("Scroll to 'Cancel' button", e2, ParentTest, "no_jira");
             if (FAIL) { return;}                    
         Element_Click("Click dialog 'Cancel' ", e2, ParentTest, "no_jira");
-            if (FAIL) { return;}                    
+            if (FAIL) { return;}              
     }        
     Element_Click("Select Created Announcement", L2.get(1), ParentTest, "no_jira");
-        if (FAIL) { return;}
-    Thread.sleep(500);              
-    Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+        if (FAIL) { return;}             
+    Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress-circular')]", ParentTest, "no_jira");
         if (FAIL) { return;} 
+    Thread.sleep(500);  
     Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'DELETE ANNOUNCEMENT')]", ParentTest, "no_jira"); 
         if (FAIL) { return;} 
-     Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
+    Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
        if (FAIL) { return;} 
-    Page_URL("Created Announcements page URL", ParentTest, "no_jira"); 
-        String A_ID = "";           
+    Page_URL("Created Announcements page URL", ParentTest, "no_jira");                    
         if(t.contains("/")){
             A_ID = t.substring(t.lastIndexOf("/") + 1);
             Call_API("Call /announcement/ API", "",BaseAPI + "/announcement/" + A_ID, true, ParentTest, "no_jira" );
@@ -467,7 +441,6 @@ class AP3_announcements extends AP3_GUI{
                 EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/announcement/" + A_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                 "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
                 Log_Html_Result("FAIL", "URL: " + BaseAPI + "/announcement/" + A_ID, false, ParentTest.createNode("API Responce Error"), new Date());
-                return;
             }
             API_Body_Contains("Announcement API - find Site ID", API_Response_Body, SiteID, true, ParentTest, "no_jira");    
             API_Body_Contains("Announcement API - find App", API_Response_Body, app, true, ParentTest, "no_jira"); 
@@ -492,8 +465,7 @@ class AP3_announcements extends AP3_GUI{
                 if (FAIL) { return;}                          
             Element_Child_List_L1("Positions' Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                                     
                 for (int j = 0; j < L1.size(); j++) {
-                    Element_Text("Available Position:", L1.get(j), ParentTest, "no_jira");             
-                    if (FAIL) { return;}                            
+                    Element_Text("Available Position:", L1.get(j), ParentTest, "no_jira");                                      
                 }
             Element_Click("Select 1st Available Position", L1.get(0),ParentTest, "no_jira");
                 if (FAIL) { return;}         
@@ -539,46 +511,38 @@ class AP3_announcements extends AP3_GUI{
             }
         }           
         To_Top("Move to page Top", ParentTest, "no_jira"); 
-        Thread.sleep(1000);            
+        Thread.sleep(500);            
         Element_By_Path_Click("Delete Announcement Click", "xpath", "//*[contains(text(), 'DELETE ANNOUNCEMENT')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-        Thread.sleep(500); 
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress-circular')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_E1_Find("Find 'Delete' dialog", "xpath", "//div[@class='v-dialog v-dialog--active']", ParentTest, "no_jira");
             if (FAIL) {    
                 Thread.sleep(2000); // DEBUG - fluentWait for page reload bug
                 Element_By_Path_Click("Delete Announcement Click again", "xpath", "//*[contains(text(), 'DELETE ANNOUNCEMENT')]", ParentTest, "no_jira"); 
                     if (FAIL) { return;}  
-                Thread.sleep(500); 
-                Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+                Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress-circular')]", ParentTest, "no_jira");
                     if (FAIL) { return;}
+                Thread.sleep(500); 
                 Element_E1_Find("Find 'Delete' dialog again", "xpath", "//div[@class='v-dialog v-dialog--active']", ParentTest, "no_jira");
                     if (FAIL) { return;} 
             }            
         Find_Text("Find 'Delete..' Title", "Delete Announcement", true, ParentTest, "no_jira"); 
-            if (FAIL) { return;}
         Find_Text("Find 'Delete..' warning", "Are you sure", true, ParentTest, "no_jira"); 
-            if (FAIL) { return;}
-        Element_Child_E2("Find dialog 'Edit' button", e1, "xpath", ".//*[text()='CANCEL']", ParentTest, "no_jira");
+        Element_Child_E2("Find dialog 'Cancel' button", e1, "xpath", ".//*[text()='CANCEL']", ParentTest, "no_jira");
             if (FAIL) { return;} 
-        Element_Child_E2("Find dialog 'Cancel' button", e1, "xpath", ".//*[text()='DELETE']", ParentTest, "no_jira");
+        Element_Child_E2("Find dialog 'Delete' button", e1, "xpath", ".//*[text()='DELETE']", ParentTest, "no_jira");
             if (FAIL) { return;}    
         Element_Click("Click dialog 'Delete' ", e2, ParentTest, "no_jira");
+            if (FAIL) { return;}                 
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress-circular')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(500);                  
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
+        Thread.sleep(500); 
         Find_Text("Confirm Deleted", "Auto Announcement " + New_ID, false, ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Call_API("Call /announcemen/ API", "",  BaseAPI + "/announcement/" + A_ID, false, ParentTest, "no_jira");    // A_ID or Site ID
-//      Line 70:         "/announcement/{id}": {
-//	Line 72:                 "summary": "Get Announcement",
-//	Line 76:                         "schema": {"$ref": "#/definitions/Announcement"},
-//	Line 93:                         "description": "announcement Not Found"
-//	Line 104:                     "description": "Id of the entity to which announcement is specifically related.",
-//	Line 110:                 "summary": "Delete announcement item",
-//	Line 150:                     "description": "Id of the announcement",            
+        Call_API("Call /announcement/ API", "",  BaseAPI + "/announcement/" + A_ID, false, ParentTest, "no_jira"); 
+        // Expected {"code":404,"error":"Not found!"}
+            
     } catch (Exception ex){}   // =============================================  
     }
 }
