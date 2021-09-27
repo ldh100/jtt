@@ -254,9 +254,9 @@ class AP3_images extends AP3_GUI{
         }
         //try non png,jpg file
         EX += " - " + "\t" + " === " + "\t" + " ===== Try upload non jpg/png file type" + "\t" + " == Start >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-        File tmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"Ap3_test_pdf_in_image.pdf");
+        File tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator +" Ap3_test_pdf_in_image.pdf");
         if(tmp.exists()) {
-            d1.findElement(By.xpath("//input[@type='file']")).sendKeys(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"Ap3_test_pdf_in_image.pdf");
+            d1.findElement(By.xpath("//input[@type='file']")).sendKeys(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_test_pdf_in_image.pdf");
             _t++; 
             Find_Text("Toast message", "Invalid file type, choose a jpg or png file.", true, ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -264,7 +264,7 @@ class AP3_images extends AP3_GUI{
         EX += " - " + "\t" + " === " + "\t" + " ===== Try upload non jpg/png file type" + "\t" + " == End >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         tmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"Ap3_image1.png");
         if(tmp.exists()) {
-            Element_By_Path_Text_Enter("Upload Item Image with png extension", "xpath", "//input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"Ap3_image1.png", false, ParentTest, "no_jira"); 
+            Element_By_Path_Text_Enter("Upload Item Image with png extension", "xpath", "//input[@type='file']", System.getProperty("user.dir") + File.separator + "FilesToUpload"+File.separator+"Ap3_image1.png", false, ParentTest, "no_jira"); 
             if (FAIL) { return;}
         }
         else {

@@ -1068,7 +1068,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             Load = false;
         }
         app = cmbApp.getSelectedItem().toString();
-        GUI_Get_Sectors(); // load 1st to be ready for selection by BrandSector
+        //GUI_Get_Sectors(); // load 1st to be ready for selection by BrandSector
         GUI_Get_Sites();
     }
 
@@ -1086,6 +1086,10 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private void GUI_Get_Sites() {
+        
+if(true){
+    return;
+}       
         wdLastRow = -1;
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("- Load Sites ..." + "\r\n");
@@ -1383,7 +1387,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     private void GUI_Get_Brand_Sector() {  
         txtLog.append("- Get Brand's Group/Sector" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        if(DV2.getRowCount()< 1){
+        if(DV2.getRowCount() < 1){
             txtLog.append("==== No Brands" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             return;
@@ -1905,8 +1909,10 @@ public class C360_GUI extends javax.swing.JInternalFrame {
 
             SECTOR = txtSector.getText();
             GL_MENU = txtComp.getText();
+            
             _Invalid_entries = _invalid_entries.isSelected();
-
+            _Password= _password.isSelected();
+            
             SCOPE = "";
             r_type = "manual"; 
             if(_Headless) {
@@ -2458,6 +2464,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         LOG_UPDATE(Log); // ========================================================
     }
     // </editor-fold> 
+
     private void Execute() throws Exception {
         if(_Login){
             SCOPE += "Login, ";
@@ -2581,7 +2588,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
 //                                IgnoreZoomLevel = true,
 //                                IntroduceInstabilityByIgnoringProtectedModeSettings = true,
 //                                RequireWindowFocus = false,
-//                                ElementScrollBehavior = InternetExplorerElementScrollBehavior.Top, // with botton click doesn't work
+//                                ElementScrollBehavior = InternetExplorerElementScrollBehavior.Top, // with button click doesn't work
 //                                EnsureCleanSession = true,
 //                                //AcceptInsecureCertificates = true,
 //                                EnablePersistentHover = true,
@@ -2630,7 +2637,9 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         FAIL = false;
         t ="?";
         try {
-            ((JavascriptExecutor) d1).executeScript("window.open(arguments[0])", LINK);
+            if(!LINK.isEmpty()){
+                ((JavascriptExecutor) d1).executeScript("window.open(arguments[0])", LINK);
+            }
             ArrayList<String> tabs = new ArrayList<>(d1.getWindowHandles());
             d1.switchTo().window(tabs.get(1));
             _p++; 
@@ -2660,6 +2669,10 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             t = d1.getCurrentUrl();
             d1.close();
             ArrayList<String> tabs = new ArrayList<>(d1.getWindowHandles());
+//            for(int i = tabs.size(); i > 0; i--){
+//              d1.switchTo().window(tabs.get(i)); 
+//              d1.close();
+//            }
             d1.switchTo().window(tabs.get(0));
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Page URL"  + "\t" + t + "\t" + "PASS" + "\t" + " - " +

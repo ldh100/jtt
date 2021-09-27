@@ -1378,6 +1378,25 @@ class AP3_timeslots extends AP3_GUI{
                 EX += _t + "\t" + "Navigate Back after Publish OK" + "\t" + "MM 'Sector' page" + "\t" + "Dialog 'Leave without publishing?'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
                 F += "Step: " + _t + " > " + "Dialog 'Leave without publishing?' after Published OK" + "\r\n";
                 Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true, ParentTest, "no_jira" ); 
+                    if (FAIL) { return; }   
+                Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", ParentTest, "no_jira" ); 
+                    if (FAIL) { return; }         
+                Element_By_Path_Text("Find 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", ParentTest, "no_jira" ); 
+                    if (FAIL) { return; }     
+                Element_By_Path_Click("Click 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", ParentTest, "no_jira" ); 
+                    if (FAIL) { return;}  
+            }
+            // =================== "Leave without publishing?" Dialog even PUBLISH OK ============ DEBUG
+        } else {
+            Navigate_to_URL( "Navigate to Schedule Page", url + "#/sites/" + appId + "/site/" + SiteID + "/brand/" + BrandID + "/schedules", ParentTest, "no_jira" );
+            if (FAIL) {return;}
+            // =================== "Leave without publishing?" Dialog even PUBLISH OK ============ DEBUG    
+            Text_Found("Find 'Leave...' question", "Leave without publishing?", ParentTest, "no_jira" ); 
+            if ("Found".equals(t)) {     
+                _t++; _f++;
+                EX += _t + "\t" + "Navigate Back after Publish OK" + "\t" + "MM 'Sector' page" + "\t" + "Dialog 'Leave without publishing?'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+                F += "Step: " + _t + " > " + "Dialog 'Leave without publishing?' after Published OK" + "\r\n";
+                Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true, ParentTest, "no_jira" ); 
                 if (FAIL) { return; }   
                  Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", ParentTest, "no_jira" ); 
                 if (FAIL) { return; }         
@@ -1387,27 +1406,8 @@ class AP3_timeslots extends AP3_GUI{
                 if (FAIL) { return;}  
             }
             // =================== "Leave without publishing?" Dialog even PUBLISH OK ============ DEBUG
-        } else {
-            Navigate_to_URL( "Navigate to Schedule Page", url + "#/sites/" + appId + "/site/" + SiteID + "/brand/" + BrandID + "/schedules", ParentTest, "no_jira" );
-            if (FAIL) {return;}
-        // =================== "Leave without publishing?" Dialog even PUBLISH OK ============ DEBUG    
-        Text_Found("Find 'Leave...' question", "Leave without publishing?", ParentTest, "no_jira" ); 
-        if ("Found".equals(t)) {     
-            _t++; _f++;
-            EX += _t + "\t" + "Navigate Back after Publish OK" + "\t" + "MM 'Sector' page" + "\t" + "Dialog 'Leave without publishing?'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-            F += "Step: " + _t + " > " + "Dialog 'Leave without publishing?' after Published OK" + "\r\n";
-            Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true, ParentTest, "no_jira" ); 
-            if (FAIL) { return; }   
-             Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", ParentTest, "no_jira" ); 
-            if (FAIL) { return; }         
-            Element_By_Path_Text("Find 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", ParentTest, "no_jira" ); 
-            if (FAIL) { return; }     
-            Element_By_Path_Click("Click 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", ParentTest, "no_jira" ); 
-            if (FAIL) { return;}  
-        }
-        // =================== "Leave without publishing?" Dialog even PUBLISH OK ============ DEBUG
-        Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(text(),'Schedule menu')]", ParentTest, "no_jira" );
-            if (FAIL) {return;}
+            Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(text(),'Schedule menu')]", ParentTest, "no_jira" );
+                if (FAIL) {return;}
         }   
         Element_By_Path_Click("Click > Delivery Hours", "xpath", "//a[contains(text(), 'Delivery Hours')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
