@@ -3028,12 +3028,12 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         
         // ======== Last Scope
         if(_Logout){ 
-            SCOPE += ", Logout";
+            SCOPE += ", Feedback > Logout";
             ParentTest = HtmlReport.createTest("Logout"); 
-            AP3_logout BR = new AP3.AP3_logout(AP3_GUI.this);
+            AP3_feedback_logout BR = new AP3.AP3_feedback_logout(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
-            ParentTest.getModel().setName("Logout: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setName("Feedback > Logout: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date()); 
         }         
     }
@@ -3151,7 +3151,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
 //                                IgnoreZoomLevel = true,
 //                                IntroduceInstabilityByIgnoringProtectedModeSettings = true,
 //                                RequireWindowFocus = false,
-//                                ElementScrollBehavior = InternetExplorerElementScrollBehavior.Top, // with botton click doesn't work
+//                                ElementScrollBehavior = InternetExplorerElementScrollBehavior.Top, // with button click doesn't work
 //                                EnsureCleanSession = true,
 //                                //AcceptInsecureCertificates = true,
 //                                EnablePersistentHover = true,

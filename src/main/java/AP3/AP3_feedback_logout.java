@@ -1,7 +1,7 @@
 package AP3;
 
-class AP3_logout extends AP3_GUI{
-    protected AP3_logout (AP3_GUI a) {
+class AP3_feedback_logout extends AP3_GUI{
+    protected AP3_feedback_logout (AP3_GUI a) {
         d1 = a.d1; 
         loadTimeout = a.loadTimeout;
         LoadTimeOut = a.LoadTimeOut;
@@ -16,7 +16,7 @@ class AP3_logout extends AP3_GUI{
         if (!env.equals("PR")) {
             for (int i = 0; i < 3; i++) {
                 Element_By_Path_Click("Click 'Feedback'", "xpath", "//div[contains(@id,'appzi-launch-button')]", ParentTest, "no_jira");
-                    if (FAIL) {return;}                                            
+                if (FAIL) {return;}                                            
                 Swith_to_Frame("Switching to Feedback frame", "xpath", "//iframe[contains(@src,'https://w.appzi.io/w-')]", ParentTest, "no_jira");
                     if (FAIL) {return;}
                 List_L0("Feedback Frame elements", "css", "main[class='no-select']", ParentTest, "no_jira");

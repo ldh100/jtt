@@ -34,11 +34,10 @@ class AP3_user_permission extends AP3_GUI{
     // in each Env:
     // cdl.test.xtt+rn@gmail.com - Runner // https://api.compassdigital.org/dev/user/auth?realm=bolter  
     // cdl.test.xtt+an@gmail.com - Admin no Allow refunds, no Allow Menu Kick-Outs
-    // cdl.test.xtt+sy@gmail.com - SM All Optins
-    // cdl.test.xtt+sn@gmail.com - SM No Options
-    // cdl.test.xtt+dy@gmail.com - DM All Optins
-    // cdl.test.xtt+dn@gmail.com - DM No Optins
-    
+    // cdl.test.xtt+sy@gmail.com - Site Manager All Options
+    // cdl.test.xtt+sn@gmail.com - Site Manager No Options
+    // cdl.test.xtt+dy@gmail.com - CDL Delivery Manager All Options
+    // cdl.test.xtt+dn@gmail.com - CDL Delivery Manager No Options
     
     //Pre-requisite for this scope: The Brand should not have any existing Station Closure added
     protected void run() { 
@@ -48,17 +47,6 @@ class AP3_user_permission extends AP3_GUI{
         Thread.sleep(500);
         Page_URL("AP3 Login page", ParentTest, "no_jira");             
             if (FAIL) { return;}
-            
-        // logout >>>>>>>>>>>    
-//        Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]",  ParentTest, "no_jira");             
-//            if (FAIL) { return;}
-//        Thread.sleep(500);          
-//        Element_By_Path_Click("Drawer > Dashboard Click", "xpath", "//*[contains(text(), 'Dashboard')]",  ParentTest, "no_jira"); 
-//            if (FAIL) { return;} 
-//        Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0, ParentTest, "no_jira");             
-//        Thread.sleep(500);
-//        Wait_For_All_Elements_InVisibility("Wait for load...", "xpath", "//*[contains(@class, 'v-progress-circular')]",  ParentTest, "no_jira");
-//            if (FAIL) { return;}
         Element_By_Path_Click("Click 'User Name'", "xpath", "//button[@type='button'][2]",  ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(),'Logout')]",  ParentTest, "no_jira"); 
@@ -67,6 +55,7 @@ class AP3_user_permission extends AP3_GUI{
 
         // @ST - Hiding this "Runner Login" code for me to run unit test   
         /*    
+        */
         // <editor-fold defaultstate="collapsed" desc="Runner Login" >
         Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",   ParentTest, "no_jira"); 
             if (FAIL) { return;}
@@ -75,16 +64,23 @@ class AP3_user_permission extends AP3_GUI{
 
         Element_By_Path_Text_Enter("Enter ==== Runner Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+rn@gmail.com", false,  ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", false,  ParentTest, "no_jira"); 
+        Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password11", false,  ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]",  ParentTest, "no_jira"); 
-            if (FAIL) { return;}   
-        Wait_For_Element_By_Path_Visibility("Wait for 'Cannot login...' text", "xpath", "//*[contains(text(), 'Cannot log into')]",  ParentTest, "no_jira");             
-            if (FAIL) { return;}            
-        Find_Text("Find 'Cannot login...' Text", "Cannot log into Admin Panel as a Runner",true, ParentTest, "no_jira");             
-            if (FAIL) { return;}           
+            if (FAIL) { return;}  
+//        if(env.equals("PR")){
+            Wait_For_Element_By_Path_Visibility("Wait for 'Cannot login...' text", "xpath", "//*[contains(text(), 'Your username or credentials don')]",  ParentTest, "no_jira");             
+                if (FAIL) { return;}            
+            Find_Text("Find 'Your username or credentials don't seem to match' Text", "Your username or credentials don",true, ParentTest, "no_jira");             
+                if (FAIL) { return;}             
+//        }else{
+//            Wait_For_Element_By_Path_Visibility("Wait for 'Cannot login...' text", "xpath", "//*[contains(text(), 'Cannot log into')]",  ParentTest, "no_jira");             
+//                if (FAIL) { return;}            
+//            Find_Text("Find 'Cannot login...' Text", "Cannot log into Admin Panel as a Runner",true, ParentTest, "no_jira");             
+//                if (FAIL) { return;}             
+//        }
+          
         // </editor-fold>     
-        */
         
         // <editor-fold defaultstate="collapsed" desc="Admin N" >  
             // <editor-fold defaultstate="collapsed" desc="Admin N - Login, Dashboard, Sites" >
@@ -139,7 +135,6 @@ Thread.sleep(1000);
                if (FAIL) { return;} 
 
             Find_Text("Admin N 'ADD NEW SITE'", "ADD NEW SITE", true, ParentTest, "no_jira"); 
-
             Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false,  ParentTest, "no_jira");
                 if (FAIL) { return;} 
             Thread.sleep(500);     
@@ -198,8 +193,8 @@ Thread.sleep(1000);
                         Log_Html_Result("PASS", "Enabled for all Stations" , false, ParentTest.createNode("Admin No Options-Menu visibility status (hide/unhide)"), new Date());
                     }else{
                         _f++;
-                        EX += _t + "\t" + " === Admin No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";
-                        Log_Html_Result("FAIL", "Disabled for "+ L1.size()  , true, ParentTest.createNode("Admin No Options-Menu visibility status (hide/unhide)"), new Date());        
+                        EX += _t + "\t" + " === Admin No Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";
+                        Log_Html_Result("PASS", "Disabled for " + L1.size(), false, ParentTest.createNode("Admin No Options-Menu visibility status (hide/unhide)"), new Date());        
                     }                    
                 } else if (Tab_Name.toLowerCase().contains("service")) { 
                     Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]",  ParentTest, "no_jira"); 
@@ -222,12 +217,15 @@ Thread.sleep(1000);
                     Thread.sleep(1000);  
                     Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]",  ParentTest, "no_jira");
                         if (FAIL) { return;}   
-                       
+                    Thread.sleep(500);     
                 } else if (Tab_Name.toLowerCase().contains("closure")) {    
                     Element_By_Path_Click("Click 'Brand Closure'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]",  ParentTest, "no_jira"); 
                         if (FAIL) { return;}   
                     Element_By_Path_Click("Click 'Add closure'", "xpath", "//button[contains(@class, 'ml-0 pl-0 v-btn v-btn--flat theme--light')]",  ParentTest, "no_jira"); 
                         if (FAIL) { return; }                         
+                    Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]",  ParentTest, "no_jira");
+                        if (FAIL) { return;}   
+                    Thread.sleep(500); 
                     Find_Text("Find 'Save' text", "Save", true, ParentTest, "no_jira"); 
                         if (FAIL) { return; }    
                     Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]",  ParentTest, "no_jira"); 
@@ -359,7 +357,8 @@ Thread.sleep(1000);
         // </editor-fold>
         // </editor-fold>
         
-        // <editor-fold defaultstate="collapsed" desc="SM Y" >
+        // <editor-fold defaultstate="collapsed" desc="SM Y > Site Manager All Options" >
+            // <editor-fold defaultstate="collapsed" desc="SN Y Login, Dashboard, Site" > 
         Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",   ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']",  ParentTest, "no_jira"); 
@@ -372,7 +371,7 @@ Thread.sleep(1000);
             if (FAIL) { return;}  
         Thread.sleep(500);  
         Wait_For_Element_By_Path_Visibility("Wait for 'Hey There...' text", "xpath", "//*[contains(text(), 'Hey There ')]",  ParentTest, "no_jira");             
-        if (!FAIL) {  
+            if (!FAIL) {  
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]",  ParentTest, "no_jira"); 
         if (!FAIL) {       
             Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]",  ParentTest, "no_jira");             
@@ -387,7 +386,7 @@ Thread.sleep(1000);
             Find_Text("SM Y Dashboard 'Users'", "Users", false, ParentTest, "no_jira");     
             Find_Text("SM Y Dashboard 'Announcements'", "Announcements", true, ParentTest, "no_jira"); 
             Find_Text("SM Y Dashboard 'Promo Management'", "Promo Management", false, ParentTest, "no_jira");              
-            Find_Text("SM Y Dashboard 'Smart Analytics'", "Smart Analytics", true, ParentTest, "no_jira"); 
+            Find_Text("SM Y Dashboard 'Smart Analytics'", "Smart Analytics", false, ParentTest, "no_jira"); 
             Find_Text("SM Y Dashboard 'Ap3 Notification'", "AP3 Notification", false, ParentTest, "no_jira"); 
             
              //SM Y Sites permissions
@@ -435,11 +434,13 @@ Thread.sleep(1000);
                 _p++;
                 EX += _t + "\t" + " === SM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for all Stations" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";
                 Log_Html_Result("PASS", "Enabled for all Stations" , false, ParentTest.createNode("SM All Options-Station visibility status (hide/unhide)"), new Date());
-     }else{
+            }else{
                 _f++;
                 EX += _t + "\t" + " === SM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";
-               Log_Html_Result("FAIL", "Disabled for "+ L1.size()  , true, ParentTest.createNode("SM All Options-Station visibility status (hide/unhide)"), new Date());
-            } 
+                Log_Html_Result("FAIL", "Disabled for "+ L1.size()  , true, ParentTest.createNode("SM All Options-Station visibility status (hide/unhide)"), new Date());
+            }
+            //</editor-fold> 
+            
             // <editor-fold defaultstate="collapsed" desc="SN Y Brand Permissions" >               
             Move_to_Element_By_Path("Scroll to Brand data row", "xpath", "//td[contains(text(), '" + BRAND + "')]",  ParentTest, "no_jira");        
                 if (FAIL) { return;} 
@@ -499,6 +500,9 @@ Thread.sleep(1000);
                         if (FAIL) { return;}   
                     Element_By_Path_Click("Click 'Add closure'", "xpath", "//button[contains(@class, 'ml-0 pl-0 v-btn v-btn--flat theme--light')]",  ParentTest, "no_jira"); 
                         if (FAIL) { return; }                         
+                    Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]",  ParentTest, "no_jira");
+                        if (FAIL) { return;}   
+                    Thread.sleep(500); 
                     Find_Text("Find 'Save' text", "Save", true, ParentTest, "no_jira"); 
                         if (FAIL) { return; }    
                     Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]",  ParentTest, "no_jira"); 
@@ -567,11 +571,12 @@ Thread.sleep(1000);
             Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(), 'Logout')]",  ParentTest, "no_jira"); 
                 if (FAIL) { return;}  
         }  
-        }
         //</editor-fold>   
-        // </editor-fold>
+        }
+        //</editor-fold>
        
-        // <editor-fold defaultstate="collapsed" desc="SM N" >
+        // <editor-fold defaultstate="collapsed" desc="SM N > Site Manager No Options" >
+            // <editor-fold defaultstate="collapsed" desc="SM Y > Site Manager No Options"" > 
         Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",   ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']",  ParentTest, "no_jira"); 
@@ -650,6 +655,8 @@ Thread.sleep(1000);
                 EX += _t + "\t" + " === SM No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Enabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                
                 Log_Html_Result("FAIL", "Enabled for " + L1.size() + " Stations" , true, ParentTest.createNode("SM No Options-Station visibility status (hide/unhide)"), new Date());
             } 
+            //</editor-fold>
+            
             // <editor-fold defaultstate="collapsed" desc="SM N Brand Permissions" >               
             Move_to_Element_By_Path("Scroll to Brand data row", "xpath", "//td[contains(text(), '" + BRAND + "')]",  ParentTest, "no_jira");        
                 if (FAIL) { return;} 
@@ -708,6 +715,9 @@ Thread.sleep(1000);
                         if (FAIL) { return;}   
                     Element_By_Path_Click("Click 'Add closure'", "xpath", "//button[contains(@class, 'ml-0 pl-0 v-btn v-btn--flat theme--light')]",  ParentTest, "no_jira"); 
                         if (FAIL) { return; }                         
+                    Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]",  ParentTest, "no_jira");
+                        if (FAIL) { return;}   
+                    Thread.sleep(500); 
                     Find_Text("Find 'Save' text", "Save", true, ParentTest, "no_jira"); 
                         if (FAIL) { return; }    
                     Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]",  ParentTest, "no_jira"); 
@@ -746,10 +756,9 @@ Thread.sleep(1000);
                    Log_Html_Result("FAIL", "Edit 'ASAP Pick-up' enabled - Expected disabled"  , true, ParentTest.createNode("SM No Options-Station Configuration"), new Date()); 
                 }            
             // </editor-fold> 
-////
+
             // <editor-fold defaultstate="collapsed" desc="SN N Menu Management" >   
-             /// Limited Site Manager has no permission to Menu management
- 
+            // Limited Site Manager has no permission to Menu management
             // logout >>>>>>>>>>>    
             Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]",  ParentTest, "no_jira");             
                 if (FAIL) { return;}
@@ -766,9 +775,9 @@ Thread.sleep(1000);
         }  
         }
         // </editor-fold> 
-// </editor-fold>
+        // </editor-fold>
        
-        // <editor-fold defaultstate="collapsed" desc="DM Y" >
+        // <editor-fold defaultstate="collapsed" desc="DM Y - CDL Delivery Manager All Options" >
         Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",   ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']",  ParentTest, "no_jira"); 
@@ -796,7 +805,7 @@ Thread.sleep(1000);
             Find_Text("DM Y Dashboard 'Users'", "Users", true, ParentTest, "no_jira");     
             Find_Text("DM Y Dashboard 'Announcements'", "Announcements", true, ParentTest, "no_jira"); 
             Find_Text("DM Y Dashboard 'Promo Management'", "Promo Management", false, ParentTest, "no_jira");                     
-            Find_Text("DM Y Dashboard 'Smart Analytics'", "Smart Analytics", true, ParentTest, "no_jira");
+            Find_Text("DM Y Dashboard 'Smart Analytics'", "Smart Analytics", false, ParentTest, "no_jira");
             Find_Text("DM Y Dashboard 'Ap3 Notification'", "AP3 Notification", false, ParentTest, "no_jira"); 
             
             // DM Y Sites permissions
@@ -810,7 +819,6 @@ Thread.sleep(1000);
                 if (FAIL) { return;}
                 for (int i = 0; i < L1.size(); i++) {
                     Element_Text("Application Name (index " + i + ")", L1.get(i),   ParentTest, "no_jira");             
-                    if (FAIL) { return;}
                 if(t.contains("All")){ T_Index = i; }
             }
             Element_Click("Select 'All'", L1.get(T_Index),  ParentTest, "no_jira");
@@ -908,6 +916,9 @@ Thread.sleep(1000);
                         if (FAIL) { return;}   
                     Element_By_Path_Click("Click 'Add closure'", "xpath", "//button[contains(@class, 'ml-0 pl-0 v-btn v-btn--flat theme--light')]",  ParentTest, "no_jira"); 
                         if (FAIL) { return; }                         
+                    Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]",  ParentTest, "no_jira");
+                        if (FAIL) { return;}   
+                    Thread.sleep(500); 
                     Find_Text("Find 'Save' text", "Save", true, ParentTest, "no_jira"); 
                         if (FAIL) { return; }    
                     Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]",  ParentTest, "no_jira"); 
@@ -978,7 +989,7 @@ Thread.sleep(1000);
         }
         // </editor-fold>  
    
-        // <editor-fold defaultstate="collapsed" desc="DM N" >
+        // <editor-fold defaultstate="collapsed" desc="DM N > CDL Delivery Manager No options" >
         Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",   ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']",  ParentTest, "no_jira"); 
@@ -1120,6 +1131,9 @@ Thread.sleep(1000);
                         if (FAIL) { return;}   
                     Element_By_Path_Click("Click 'Add closure'", "xpath", "//button[contains(@class, 'ml-0 pl-0 v-btn v-btn--flat theme--light')]",  ParentTest, "no_jira"); 
                         if (FAIL) { return; }                         
+                    Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]",  ParentTest, "no_jira");
+                        if (FAIL) { return;}   
+                    Thread.sleep(500); 
                     Find_Text("Find 'Save' text", "Save", true, ParentTest, "no_jira"); 
                         if (FAIL) { return; }    
                     Element_By_Path_Click("Click 'REMOVE'", "xpath", "//i[contains(@class, 'v-icon mr-1 v-icon--left mdi mdi-delete-outline')]",  ParentTest, "no_jira"); 

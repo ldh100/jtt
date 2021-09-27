@@ -413,10 +413,10 @@ class AP3_announcements extends AP3_GUI{
                 Element_Attribute("Image " + j + " src", L1.get(j), "src", ParentTest, "no_jira");             
                     if (FAIL) { return;}  
             }                   
-        Element_Text("Botton 'Edit' text", e2, ParentTest, "no_jira");      
+        Element_Text("Button 'Edit' text", e2, ParentTest, "no_jira");      
         Element_Child_E2("Find dialog 'Cancel' button", e1, "xpath", ".//*[text()='Cancel']", ParentTest, "no_jira");
             if (FAIL) { return;}  
-        Element_Text("Botton 'Cancel' text", e2, ParentTest, "no_jira");
+        Element_Text("Button 'Cancel' text", e2, ParentTest, "no_jira");
         Scroll_to_Element("Scroll to 'Cancel' button", e2, ParentTest, "no_jira");
             if (FAIL) { return;}                    
         Element_Click("Click dialog 'Cancel' ", e2, ParentTest, "no_jira");
