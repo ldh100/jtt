@@ -10,6 +10,7 @@ class C360_login extends C360_GUI{
         ParentTest = a.ParentTest;
         
         _Invalid_entries = a._Invalid_entries;
+        _Password = a._Password;
     }
     protected void run() {   
     try { 
@@ -25,22 +26,64 @@ class C360_login extends C360_GUI{
         Element_By_Path_Text("Get 'Your Compass Account' text", "xpath", "//span[contains(text(), 'Your Compass Account')]", ParentTest,"no_jira");
         Element_By_Path_Click("Click 'Your Compass Account'", "id", "cafe360-login-button", ParentTest,"no_jira");
             if (FAIL) { return;}  
-            
         Element_E1_Find("Find 'Language' dropdown", "xpath", "//select[contains(@class, 'locale-select')]", ParentTest, "no_jira");
         Element_By_Path_Text("Get 'English' text", "id", "en", ParentTest,"no_jira");        
         Element_By_Path_Text("Get 'French' text", "id", "fr", ParentTest,"no_jira");        
         Element_By_Path_Text("Get 'Spanish' text", "id", "sp", ParentTest,"no_jira");
-        Element_By_Path_Text("Get 'Forgot password?' text", "xpath", "//a[contains(@class, 'forgot-password pull-right')]", ParentTest,"no_jira");
+        Element_By_Path_Text("Get 'Forgot password?' text", "xpath", "//a[@class='forgot-password pull-right']", ParentTest,"no_jira");
+        if(_Password){  
+            Element_By_Path_Click("Click 'Forgot password?'", "xpath", "//a[@class='forgot-password pull-right']", ParentTest,"no_jira");
+                if (FAIL) { return;}  
+            Open_Switch_to_2nd_Tab("Switch to 'Forgot password?' tab", "", ParentTest, "no_jira");
+            
+            Close_Current_Tab_switch_To_1st("Back to 'Login' tab", ParentTest, "no_jira");
+        }  
         
+        Element_By_Path_Text("Get 'Security Disclaimer' text", "xpath", "//button[@class='btn btn-link security-disclaimer']", ParentTest,"no_jira");
+        Element_By_Path_Text("Get 'Copyright' text", "xpath", "//div[@class='copyright']", ParentTest,"no_jira");
+        Element_By_Path_Click("Click 'Security Disclaimer' button", "xpath", "//button[@class='btn btn-link security-disclaimer']", ParentTest,"no_jira");
+            if (FAIL) { return;} 
+        Thread.sleep(1000);
+        Element_E1_Find("Find 'Security Disclaimer' modal", "id", "securityDisclaimerModal", ParentTest, "no_jira"); 
+            if (FAIL) { return;}  
+        Element_Child_Text("Find 'Security Disclaimer' Title", e1, "xpath", ".//h4[@class='modal-title']", ParentTest, "no_jira");
+        Element_Child_Text("Find 'Security Disclaimer' Body", e1, "xpath", ".//*[@class='modal-body']", ParentTest, "no_jira");
+        Element_Child_Click("Click 'Security Disclaimer' > OK' button", e1, "xpath", ".//button[@class='btn blue']", ParentTest,"no_jira");
+            if (FAIL) { return;}  
+        Thread.sleep(1000);
+            
         if(_Invalid_entries){
+            Element_By_Path_Click("Click 'LOGIN'", "name", "login", ParentTest, "no_jira");  
+                if (FAIL) { return;}  
+            Thread.sleep(2000);
+            Find_Text("Find '... is a required field.' text", "is a required field", true, ParentTest, "no_jira");  
+                if (FAIL) { return;}   
+            Element_By_Path_Text_Enter("Enter Valid Username", "id", "username", USER_NAME, false, ParentTest, "no_jira");  
+                if (FAIL) { return;}                  
+            Element_By_Path_Click("Click 'LOGIN'", "name", "login", ParentTest, "no_jira");  
+                if (FAIL) { return;}  
+            Thread.sleep(2000);
+            Find_Text("Find '... is a required field.' text", "is a required field", true, ParentTest, "no_jira");  
+                if (FAIL) { return;} 
+                
             Element_By_Path_Text_Enter("Enter Invalid Username", "id", "username", "test.invalid@place.com", false, ParentTest, "no_jira");  
                 if (FAIL) { return;}            
             Element_By_Path_Text_Enter("Enter Valid Password", "id", "password", USER_PW, true, ParentTest, "no_jira");  
                 if (FAIL) { return;}
-            Element_By_Path_Click("Click 'Sign In'", "name", "login", ParentTest, "no_jira");  
+            Element_By_Path_Click("Click 'LOGIN'", "name", "login", ParentTest, "no_jira");  
                 if (FAIL) { return;}  
+            Thread.sleep(2000);
             Find_Text("Find 'Invalid credentials'", "Invalid credentials.", true, ParentTest, "no_jira");  
                 if (FAIL) { return;} 
+            Element_By_Path_Text_Enter("Enter Valid Username", "id", "username", USER_NAME, false, ParentTest,"no_jira");
+                if (FAIL) { return;}            
+            Element_By_Path_Text_Enter("Enter Invalid Password", "id", "password", "InvalidPW", true, ParentTest,"no_jira");
+                if (FAIL) { return;}
+            Element_By_Path_Click("Click 'LOGIN'", "name", "login", ParentTest,"no_jira");
+                if (FAIL) { return;}                
+            Thread.sleep(2000);
+            Find_Text("Find 'Invalid credentials'", "Invalid credentials.", true, ParentTest, "no_jira");  
+                if (FAIL) { return;}             
         } 
                 
         Element_By_Path_Text_Enter("Enter Valid Username", "id", "username", USER_NAME, false, ParentTest,"no_jira");
