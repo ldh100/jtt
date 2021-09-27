@@ -100,10 +100,12 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI {
                 return;
             }
             if (t != "All") {
+ Thread.sleep(1000);
                 Element_By_Path_Click("Open Production app drop-down", "xpath", "//div[@class='v-input v-text-field v-text-field--single-line v-text-field--solo v-text-field--enclosed v-select v-input--is-label-active v-input--is-dirty theme--light']//div[@class='v-select__selections']//div[@class='v-select__selection v-select__selection--comma']", ParentTest, "no_jira");
                 if (FAIL) {
                     return;
                 }
+           Thread.sleep(1000);
                 Element_By_Path_Click("Select All from On Site Product from drop-down", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']//div[contains(text(),'All')][contains(@class,'v-list__tile__title')]", ParentTest, "no_jira");
                 if (FAIL) {
                     return;
@@ -229,10 +231,11 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI {
     protected void storeVisibilityOfStation() {
         try {
             List_L0("Station row Count", "xpath", "//div[@class='v-table__overflow']//table[@class='v-datatable v-table theme--light']/tbody/tr", ParentTest, "no_jira");
-            for (int row = 1; row <= L0.size(); row++) {
+            for (int row = 1; row < L0.size(); row++) {
                 _t++;
                 List_TR_TDs("Get Station name", L0.get((row - 1)), ParentTest, "no_jira");
                 storeStationName = t.substring(0, t.indexOf("  >"));
+ Thread.sleep(1000);
                 Element_By_Path_Attribute("Original visibility Status for : " + storeStationName + "", "xpath", "//div[@class='v-table__overflow']//table[@class='v-datatable v-table theme--light']/tbody/tr[" + row + "]/td[6]//div[@class='v-input__control']//div[@class='v-input--selection-controls__input']/i", "className", ParentTest, "no_jira");
                 storeVisibilityOfStation.add(t);
                 if (FAIL) {
@@ -246,6 +249,7 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI {
     // Check if header maches to Selected Site
     protected void checkHeaderForSiteIndex() {
         try {
+Thread.sleep(1000);
             Element_By_Path_Text("Validate header for selected site ", "xpath", "//div[@class='title-brand clickable']//div[@class='H3-Primary-Left']", ParentTest, "no_jira");
             if (FAIL) {
                 return;
@@ -262,6 +266,7 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI {
         try {
             List_L0("Station row Count", "xpath", "//div[@class='v-table__overflow']//table[@class='v-datatable v-table theme--light']/tbody/tr", ParentTest, "no_jira");
             for (int row = 1; row <= L0.size(); row++) {
+    Thread.sleep(1000);
                 Element_By_Path_Attribute("Get visibility Status,To make it hide if it's visible", "xpath", "//div[@class='v-table__overflow']//table[@class='v-datatable v-table theme--light']/tbody/tr[" + row + "]/td[6]//div[@class='v-input__control']//div[@class='v-input--selection-controls__input']/i", "className", ParentTest, "no_jira");
                 if (FAIL) {
                     return;
@@ -393,6 +398,7 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI {
             int row;
             // This loop will compare storePresentVisibility of station
             for (row = 1; row <= L0.size(); row++) {
+Thread.sleep(1000);
                 Element_By_Path_Attribute("Get attribute value  for aria-Checked class ", "xpath", "//div[@class='v-table__overflow']//table[@class='v-datatable v-table theme--light']/tbody/tr[" + row + "]/td[6]//div[@class='v-input__control']//div[@class='v-input--selection-controls__input']/i", "className", ParentTest, "no_jira");
                 storePresentVisibilityOfStation.add(t);
                 if (FAIL) {
