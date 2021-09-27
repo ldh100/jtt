@@ -21,6 +21,9 @@ import com.google.common.base.Stopwatch;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import java.awt.Cursor;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -43,6 +46,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
@@ -144,6 +149,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         _invalid_login = new javax.swing.JCheckBox();
         _insights = new javax.swing.JCheckBox();
         _account_manager = new javax.swing.JCheckBox();
+        _Timegraph = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         cmbBrow = new javax.swing.JComboBox<>();
         btnRun = new javax.swing.JButton();
@@ -175,12 +181,12 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -389,6 +395,22 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         _account_manager.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _account_manager.setRequestFocusEnabled(false);
 
+        _Timegraph.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _Timegraph.setText("Timegraph");
+        _Timegraph.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _Timegraph.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _Timegraph.setRequestFocusEnabled(false);
+        _Timegraph.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                _TimegraphMouseClicked(evt);
+            }
+        });
+        _Timegraph.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _TimegraphActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -410,7 +432,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                         .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(_users, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_sanity, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_sanity, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_Timegraph, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -431,14 +454,18 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                         .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(19, 19, 19)
-                .addComponent(_account_manager, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(_account_manager, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(_Timegraph, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(_users, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(_drilldown, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                    .addComponent(_drilldown, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(_insights, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_sanity, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -544,7 +571,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
 
         lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES14.setText("Slack Channel:");
+        lblSITES14.setText("Slack Shannel:");
         lblSITES14.setAlignmentX(0.5F);
         lblSITES14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 4, 72, 16));
@@ -793,6 +820,14 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     private void _AccountmanagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event__AccountmanagerMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event__AccountmanagerMouseClicked
+
+    private void _TimegraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__TimegraphActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event__TimegraphActionPerformed
+
+    private void _TimegraphMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event__TimegraphMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event__TimegraphMouseClicked
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Instance Variables Declarations">  
@@ -841,7 +876,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     protected double p_90 = 0; 
     
     private String Last_EX;
-    private  final Stopwatch sw1 = Stopwatch.createUnstarted();
+    protected  final Stopwatch sw1 = Stopwatch.createUnstarted();
     private boolean Load;
     private String Report_Date;
     private String Excel_Report_Path;
@@ -886,6 +921,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
 
     private boolean _Drilldown = false;
     private boolean _Insights = false;
+    private boolean _timegraph = false;
     private boolean _Password = false;
     private boolean _All_data = false;
     private boolean _Logout = false;
@@ -900,6 +936,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     protected String DATE_RANGE = "";
     protected String Variants = "";
     protected String CompareTo="";
+    protected String BaseAPI = "";
+    protected JSONObject json;
     
     // </editor-fold>
 
@@ -934,9 +972,11 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             env = "ST";
             url = "https://staging.member.distilr.io";
+            
         } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
             env = "DE";
             url = "https://dev.member.distilr.io";
+            BaseAPI = "https://devapi.member.distilr.io";
         } else{
             env = "PR";
             url = "https://mpower.distilr.io/";
@@ -1337,7 +1377,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_sanity: ")) _sanity.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_drilldown: ")) _drilldown.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_insights: ")) _insights.setSelected(Boolean.parseBoolean(value)); 
-              
+               if(l.contains("_Timegraph: ")) _Timegraph.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_password: ")) _password.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_all_data: ")) _all_data.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_logout: ")) _logout.setSelected(Boolean.parseBoolean(value));
@@ -1390,7 +1430,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             C += "_sanity: " + _sanity.isSelected() + "\r\n";
             C += "_drilldown: " + _drilldown.isSelected() + "\r\n";
             C += "_insights: " + _insights.isSelected() + "\r\n";
-         
+            C += "_Timegraph: " + _Timegraph.isSelected() + "\r\n";
             C += "_password: " + _password.isSelected() + "\r\n";         
             C += "_all_data: " + _all_data.isSelected() + "\r\n";
  
@@ -1641,6 +1681,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             _Account_manager = _account_manager.isSelected();
             _Drilldown = _drilldown.isSelected();
             _Insights = _insights.isSelected();
+            _timegraph = _Timegraph.isSelected();
             _Password = _password.isSelected();
             _All_data = _all_data.isSelected();
             _Logout = _logout.isSelected();
@@ -1743,6 +1784,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 
                 if(l.contains("_drilldown: ")) _Drilldown = Boolean.parseBoolean(value);
                 if(l.contains("_insights: ")) _Insights = Boolean.parseBoolean(value);
+                if(l.contains("_Timegraph: ")) _timegraph = Boolean.parseBoolean(value);
                 if(l.contains("_Accountmanager: "))_Account_manager = Boolean.parseBoolean(value);
                 if(l.contains("_password: ")) _Password = Boolean.parseBoolean(value);
                 if(l.contains("_all_data: ")) _All_data = Boolean.parseBoolean(value);
@@ -2216,7 +2258,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 if(j == 0)  Variants = "Total";
                 if(j == 1)  Variants = "Distributor only";
                 if(j == 2)  Variants = "Manufacturer only";
-                ParentTest = HtmlReport.createTest("Secondary Metrics - " + CompareTo); 
+                ParentTest = HtmlReport.createTest("Metrics - " + CompareTo); 
                 EX += " - " + "\t" + " === Secondary Metrics  - " + CompareTo + "\t" + " ===== " + "\t" + " == Secondary Metrics Data Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 DL_metric_data BR = new DL_metric_data(DL_GUI.this);
                 BR.run(CompareTo, Variants); // ============================================================================            
@@ -2280,6 +2322,36 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             // ============================================================================
             EX += " - " + "\t" + " === ^ Account Manager" + "\t" + " ===== " + "\t" + " == ^ Account ManagerEnd" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Thread.sleep(1500);
+        } 
+       if (_timegraph) { 
+           
+            ParentTest = HtmlReport.createTest("Timegraph");                                     
+            SCOPE += ", Timegraph";  
+            EX += " - " + "\t" + " === Timegraph" + "\t" + " ===== " + "\t" + " == Timegraph Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            String CompareTo = "";
+            String reference_point = "";
+            SCOPE += ", timegraph"; 
+            for (int i = 0; i < 3; i++) {
+                if(i == 0) { CompareTo = "Compared to last year";
+                reference_point= "last_year";
+                }
+                if(i == 1) 
+                {CompareTo = "Compared to last month";
+                 reference_point= "last_month";
+                }
+                if(i == 2) 
+                {CompareTo = "Compared to last week";
+                 reference_point= "last_week";
+                }
+                            DL_Timegraph BR = new DL_Timegraph(DL_GUI.this);
+            BR.run(reference_point,CompareTo);
+                        EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            // ============================================================================
+         
+            }
+   EX += " - " + "\t" + " === ^ Timegraph" + "\t" + " ===== " + "\t" + " == ^ Timegraph End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            Thread.sleep(1500);
+
         } 
     }
     private void BW1_Done(boolean GUI) throws Exception{
@@ -5797,6 +5869,168 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             Log_Html_Result("FAIL", "Error: " + err + "<br />" + t, true, ParentTest.createNode(NAME));
 	}  
     }
+    protected void JOB_Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY, int ExpStatus, ExtentTest ParentTest, String JIRA) throws IOException {
+        FAIL = false;
+        String Result = "?";
+        int status = 0;
+        String R_Time = "";
+        String ErrorMsg = "";
+        json = null;
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs
+        RequestSpecification request;
+        request = RestAssured.given();
+        if (!AUTH.isEmpty()) {
+            request.header("auth-header", AUTH);
+        }
+        request.header("Content-Type", "application/json");
+        request.header("Accept", "application/json");
+        try {
+            int i = 1;
+//for (i = 1; i < 4; i++){   // ========== Loop +2 times if 1st FAIL
+            if (sw1.isRunning()) {
+                sw1.reset();
+            }
+            _t++;
+            sw1.start();
+            Response response = null;
+            switch (Method) {
+                case "GET":
+                    if (BODY.equals("Bolter")) {
+                        request.header("From", "Bolter/1.0");
+                    }
+                    response = request.get(EndPoint);
+                    break;
+                case "POST":
+                    request.body(BODY);
+                    response = request.post(EndPoint);
+                    break;
+                case "PATCH":
+                    request.body(BODY);
+                    response = request.patch(EndPoint);
+                    break;
+                case "DELETE":
+                    request.body(BODY);
+                    response = request.delete(EndPoint);
+                    break;
+                case "PUT":
+                    request.body(BODY);
+                    response = request.put(EndPoint);
+                    break;
+                case "OPTIONS":
+                    response = request.options(EndPoint);
+                    break;
+                default:
+                    break;
+            }
+            Result = response.getStatusLine();
+            status = response.getStatusCode();
+            System.out.println(response.asString());
+            System.out.println(Result);
+            System.out.println(status);
+            if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
+                
+                json = new JSONObject(response.asString());
+                System.out.println(json);
+                if (json.has("error")) {
+                    ErrorMsg = "Error: " + json.getString("error") + ". ";
+                }
+            }
+            R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
+            if (status == ExpStatus) {
+                _p++;
+
+                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "PASS" + "\t" + "Attempt #" + i
+                        + "\t" + R_Time + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+              
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+                   
+            } else {
+                _f++;
+                FAIL = true;
+                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "FAIL" + "\t" + "Attempt #" + i
+                        + "\t" + R_Time + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+             
+                Log_Html_Result("FAIL", "Error: " + ErrorMsg + "<br />" + t, true, ParentTest.createNode(NAME));
+            }
+
+
+        } catch (Exception ex) {
+            R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
+            _f++;
+            FAIL = true;
+            err = ex.getMessage().trim();
+            if (err.contains("\n")) {
+                (err = err.substring(0, err.indexOf("\n"))).trim();
+            }
+            EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err
+                    + "\t" + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + t, true, ParentTest.createNode(NAME));
+        }
+        r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
+        sw1.reset();
+    }
+    protected void AbsoluteChange_Calculation(String NAME, double var1, double var2, double var3, ExtentTest ParentTest, String JIRA) throws IOException {
+	String status; 
+        t = "";
+         _t++; 
+	try {
+            double Val = (var1 - var2) / var2 * 100;
+            NumberFormat formatter = new DecimalFormat("#0.00");
+            double actVal = new Double(formatter.format(Val));
+
+            if (actVal == var3) {
+                t = "Actual value :  " + actVal + " is matching with expected value  " + (double) var3;
+                status = "PASS";
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />" + t, false, ParentTest.createNode(NAME));
+                _p++;
+            } else {
+                t = "Actual value :  " + actVal + " is not matching with expected value  " + (double) var3;
+                status = "FAIL";
+                Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />" + t, true, ParentTest.createNode(NAME));  
+                _f++;
+            }
+            EX += _t + "\t" + NAME + "\t" + " - " + "\t" + t + "\t" + status + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + JIRA + "\r\n";			
+        } catch (Exception ex) {
+            _f++; err = ex.getMessage().trim(); err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err + "\t" + " - " + "\t" + " - " + "\t" + JIRA + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + t, true, ParentTest.createNode(NAME));
+	}  
+    }
+       protected void DollarAmount_Calculation(String NAME, double var1,long var4, ExtentTest ParentTest, String JIRA) throws IOException {
+	String status; 
+        t = "";
+         _t++; 
+	try {
+            double Val = var1;
+           
+            long actVal = (new Double(Val)).longValue();
+            float QA_Value = Float.parseFloat(var1+ "");
+            
+            float FE_Value = (float) 0.00001;
+            FE_Value = Float.parseFloat(var4+ "");
+    if (Math.abs(QA_Value - FE_Value) <= (QA_Value * 0.01)) { // ========= 1% precision =============
+                            Log_Html_Result("PASS", "QA Value: " + QA_Value + " > FE $Value: " + FE_Value, false, ParentTest.createNode("Compare QA_Value and FE_Value"));
+                            EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + FE_Value + "\t" + "PASS" + "\t" + " - "
+                                    + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+                            _p++;
+                        } else {
+                            Log_Html_Result("FAIL", "QA Value: " + QA_Value + " > FE $Value: " + FE_Value, true, ParentTest.createNode("Compare QA_Value and FE_Value"));
+                            EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + FE_Value + "\t" + "FAIL" + "\t" + " - "
+                                    + "\t" + " -" + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+                            _f++;
+                        }
+            			
+        } catch (Exception ex) {
+            _f++; err = ex.getMessage().trim(); err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err + "\t" + " - " + "\t" + " - " + "\t" + JIRA + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + t, true, ParentTest.createNode(NAME));
+	}  
+    }
 
     // </editor-fold>
     
@@ -5806,6 +6040,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JTable DV_D_Variants;
     private javax.swing.JTable DV_METRICS;
     private javax.swing.JTable DV_QA;
+    private javax.swing.JCheckBox _Timegraph;
     private javax.swing.JCheckBox _account_manager;
     private javax.swing.JCheckBox _all_data;
     private javax.swing.JCheckBox _drilldown;
