@@ -972,6 +972,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             env = "ST";
             url = "https://staging.member.distilr.io";
+            BaseAPI = "https://stagingapi.member.distilr.io";
             
         } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
             env = "DE";
@@ -980,6 +981,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         } else{
             env = "PR";
             url = "https://mpower.distilr.io/";
+            BaseAPI = "https://api.member.distilr.io";
         }
         
         GUI_Load_CONFIG();
