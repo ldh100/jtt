@@ -773,9 +773,9 @@ if(true) return;
                        if (FAIL) { return;}                    
                     break;
                 case "Delivery Details":     
-                   List_Child_E1_By_Path("Find Setup Delievery > Yes", L2.get(i), "xpath", ".//div[contains(@class, 'Option-Left-Not-Selected-Blue-White')]", ParentTest, "no_jira"); 
+                   List_Child_E1_By_Path("Find Setup Delivery > Yes", L2.get(i), "xpath", ".//div[contains(@class, 'Option-Left-Not-Selected-Blue-White')]", ParentTest, "no_jira"); 
                        if (FAIL) { return;}
-                   Element_Click("Setup Delievery > Yes Click", e1, ParentTest, "no_jira"); 
+                   Element_Click("Setup Delivery > Yes Click", e1, ParentTest, "no_jira"); 
                        if (FAIL) { return;}  
                    List_L1("Input 'Timeslot Length' Count", "css", "[aria-label='Timeslot Length']", ParentTest, "no_jira"); 
                         if (FAIL) { return;}                        

@@ -40,9 +40,6 @@ import javax.swing.table.TableRowSorter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-public class Station extends javax.swing.JInternalFrame {
-
 //PROMO CODES (that work on Staging)
 //boostper8 - 20%
 //promo100-  100%
@@ -54,7 +51,7 @@ public class Station extends javax.swing.JInternalFrame {
     https://adminpanel.compassdigital.org/#/sites/Ym7By6oy1dTOBE5P880jTamr9022GqCD7BB2y1vOIlgk1B16Y7hzOGjMXNMoh1oQRojae9T8JqBXJ8llt9d/site/PpzmrEBrveH1kX3Zrk3ytzrrB0O1XpSk3m973O9Xcw46vkWyKPtl8JGR17m2TEoDLA2YAETGOo/
     
 */   
-    
+public class Station extends javax.swing.JInternalFrame {
     public Station() {
         initComponents();
     }

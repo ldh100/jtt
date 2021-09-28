@@ -40,7 +40,7 @@ class An_bolter_login extends An_GUI{
             if (FAIL) { return;}
             
         // Successful Login > Dashboard > Version     
-        Wait_For_Element_By_Path_Presence("Wait for 'Dashboard' screen", "id", "delivery_dashboard_title", ParentTest, "no_jira");
+        Wait_For_Element_By_Path_Presence("Wait for 'Delivery Dashboard' > refresh button", "id", "action_refresh", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Click 'Open Navigation drawer' image", "xpath", "//android.widget.ImageButton[@content-desc='Open navigation drawer']", ParentTest, "no_jira");
             if (FAIL) { return;}
