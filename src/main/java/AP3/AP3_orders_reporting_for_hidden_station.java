@@ -79,7 +79,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
             if (FAIL) {
                 return;
             }
-            Thread.sleep(500);
+            Thread.sleep(1000);
             Element_By_Path_Input_Select_Clear("Site Search Clear", "xpath", "//input[contains(@aria-label, 'Search ')]", ParentTest, "no_jira");
             if (FAIL) {
                 return;
@@ -91,6 +91,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
     //This method validates if "Site Production" has All selected in dropdown.
     protected void validateOnSiteProductApplication() {
         try {
+              Thread.sleep(1000);
             Element_By_Path_Text("Get default selected Production app on Site page", "xpath", "//*[@class='flex']//*[@class='v-select__selection v-select__selection--comma']", ParentTest, "no_jira");
             if (FAIL) {
                 return;
@@ -358,6 +359,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
     //This method will check order for selected station
     protected void checkOrdersForStation() {
         try {
+             Thread.sleep(1000);
             Element_By_Path_Text("Validate header for selected site", "xpath", "//div[@class='flex xs8']//div[@class='H3-Primary-Left']", ParentTest, "no_jira");
             if (FAIL) {
                 return;
@@ -459,6 +461,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
             }
 
             //Select a 7 day range from the calendar to view the orders for that period
+             Thread.sleep(2000);
             Element_By_Path_Click("Open Date picker", "css", "[aria-label='Date(s)']", ParentTest, "no_jira");
             if (FAIL) {
                 return;
