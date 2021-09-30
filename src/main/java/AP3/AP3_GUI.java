@@ -1942,7 +1942,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_announcements: "))  _announcements.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_promo: "))  _promo.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_reschedule_menu: "))  _reschedule_menu.setSelected(Boolean.parseBoolean(value)); 
-                if(l.contains("_sales_analytics : "))  _sales_analytics .setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_sales_analytics: "))  _sales_analytics .setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_password: "))  _password.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_roles: "))  _roles.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_all_data: "))  _all_data.setSelected(Boolean.parseBoolean(value));
@@ -2327,7 +2327,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         } else{
             return true;
         }
-    }
+    }  
     // </editor-fold> 
 
     //<editor-fold defaultstate="collapsed" desc="Extend HTML Report Methods">
