@@ -27,6 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -1499,15 +1500,21 @@ public class A extends javax.swing.JFrame {
             conn.close();
             //Logger.getLogger(A.class.getName()).log(Level.INFO, "Keys Loaded");
         } catch (SQLException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Load Keys > SQL ERROR: " + ex.getMessage(), ex);
+            //Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Load Keys > SQL ERROR: " + ex.getMessage(), ex);
+            JOptionPane.showMessageDialog(this, 
+            ex.getMessage(),
+            "QA DB Connection Error",
+            JOptionPane.OK_OPTION
+            ); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     
-//</editor-fold>
+    //</editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Project Variables Declarations">
     public static final String QA_BD_CON_STRING = "jdbc:sqlserver://dev-digitalhospitality-sql.database.windows.net:1433;database=cdlqadb;user=xttadmin;password=Sp515s10#a;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+    //public static final String QA_BD_CON_STRING = "jdbc:sqlserver://dev-digitalhospitality-sql-cdlqadb.cmrngnuvohvf.us-east-1.rds.amazonaws.com:1433;database=cdlqadb;user=admin;password=KcKqdYF5cEDYhJxc;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
     public static String SQL = "";
     
     public static int F_COUNT = 0;

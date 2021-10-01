@@ -78,53 +78,15 @@ class AP3_menu_manager extends AP3_GUI{
         Element_By_Path_Click("Open 'Group' dropdown", "css", "[role='combobox']", ParentTest, "no_jira");
             if (FAIL) return;   
         Element_By_Path_Text_Enter("Enter Sector Name", "css", "[role='combobox']", SECTOR, false, ParentTest, "no_jira");
-                if (FAIL) { return;}    
-            Element_By_Path_Click("Sector Name Click", "xpath", "//*[contains(text(), '" + SECTOR + "')]", ParentTest, "no_jira"); 
-                if (FAIL) { return;}             
-//        Element_E1_Find("Find 'Group' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active v-autocomplete__content')]", ParentTest, "no_jira");
-//            if (FAIL) { return;} 
-//        Element_Child_List_L1("Groups Count #1", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");             
-//            if (FAIL) { return;} 
-//            T_Index = L1.size();
-//            //((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", L1.get(L1.size() - 1));
-//            Scroll_to_Element("Scroll to Last Group", L1.get(L1.size() - 1), ParentTest, "no_jira");
-//                if (FAIL) { return;}
-//        Element_Child_List_L1("Groups Count #2", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");             
-//            if (FAIL) { return;} 
-//
-//        int SC = 2;    
-//        while(T_Index < L1.size()) {
-//            T_Index = L1.size();
-//            SC++;
-//            //((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", L1.get(L1.size() - 1));
-//            Scroll_to_Element("Scroll to last Group, L1.get(L1.size() - 1), ParentTest, "no_jira");
-//                if (FAIL) { return;}
-//            Element_Child_List_L1("Groups Count #" + SC, e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");             
-//                if (FAIL) { return;} 
-//        }   
-//        T_Index = -1;
-//        for (int j = 0; j < L1.size(); j++) {
-//            if(ALL_DATA){
-//                Element_Text("Group Name", L1, "L1", j, ParentTest, "no_jira");  
-//            }
-//            if(L1.get(j).getText().trim().equals(SECTOR)){
-//                T_Index = j;
-//            }
-//        }
-//        if(T_Index > -1){
-//            //((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", L1.get(T_Index));  
-//            Scroll_to_Element("Scroll to Group " + SECTOR, L1.get(T_Index), ParentTest, "no_jira");
-//                if (FAIL) { return;}
-////            Element_Click("Select Group " + SECTOR, L1, "L1", T_Index, ParentTest, "no_jira");
-//                if (FAIL) { return;} 
-//        } else{
-//            return;
-//        } 
+            if (FAIL) { return;}    
+        Element_By_Path_Click("Sector Name Click", "xpath", "//*[contains(text(), '" + SECTOR + "')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}             
         Element_By_Path_Click("Button 'Go to Menu' Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500); 
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
+        Thread.sleep(500); 
         Wait_For_Element_By_Path_Presence("Wait for MM > Group page load", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
         // ========================================= Group Selection ^^^^
@@ -137,6 +99,8 @@ class AP3_menu_manager extends AP3_GUI{
             if (FAIL) { return;} 
         Element_By_Path_Attribute("Page SubTitle", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "textContent", ParentTest, "no_jira"); 
             if (FAIL) { return;}
+        Wait_For_Element_By_Path_Presence("Wait for MM > 'Search Global Menus'", "xpath", "//label[contains(text(), 'Search Global Menus')]", ParentTest, "no_jira"); 
+                if (FAIL) { return;}
         Find_Text("Fund 'Search...' text", "Search Global Menus", true, ParentTest, "no_jira");   
             if (FAIL) { return;}  
         EX += " - " + "\t" + " === MM Sector Selection " + "\t" + " ===== " + "\t" + " == Sector Selection End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -209,13 +173,17 @@ class AP3_menu_manager extends AP3_GUI{
                 }            
             }
         if(T_Index > -1){
+            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+                if (FAIL) { return;}
             Find_Text("Fund 'Search...' text", "Search Global Menus", true, ParentTest, "no_jira");   
                 if (FAIL) { return;}             
             Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Global Menus')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
+            Thread.sleep(500); 
             Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Global Menus']", GL_MENU, false, ParentTest, "no_jira");
-                if (FAIL) { return;} 
-            Thread.sleep(500);                
+                if (FAIL) { return;}  
+            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+                if (FAIL) { return;}                  
             Element_Click("Click Menu " + GL_MENU, L2.get(T_Index), ParentTest, "no_jira");
                 if (FAIL) { return;}  
 //            List_L1("Local Menus count", "xpath", "//div[@class='layout hover indent align-center row wrap']", ParentTest, "no_jira");         
@@ -290,7 +258,7 @@ class AP3_menu_manager extends AP3_GUI{
                 Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira"); 
                     if (FAIL) { return;} 
                 for (int i = 2; i < L0.size(); i++) {
-                    List_TR_TDs("Modifier Group Row Data", L0.get(i), ParentTest, "no_jira");   
+                    List_TR_TDs("Modifier Group Row Data " + i, L0.get(i), ParentTest, "no_jira");   
                         if (FAIL) { return;}  
                 }                          
 
@@ -396,7 +364,7 @@ class AP3_menu_manager extends AP3_GUI{
             Element_By_Path_Click("Click on Modifier label", "xpath", "//div[normalize-space()='Modifiers']", ParentTest, "no_jira");
              if (FAIL) { return;}
             
-             //Clone the last modifier and verify API calls for unique ids
+            //Clone the last modifier and verify API calls for unique ids
             //<editor-fold defaultstate="collapsed" desc="Clone modifier">   
             List_L2("Modifiers Count", "xpath", "//div[@class='layout modifier row wrap align-center']", ParentTest, "no_jira");             
                 if (FAIL) { return;}                
@@ -450,7 +418,7 @@ class AP3_menu_manager extends AP3_GUI{
             String Copy_Mod_ID = "";
             String Copy_Mod_ID_Name = "";
          
-            Call_API("Call /Menu/Modifier / API", "Bearer " + AP3_TKN, BaseAPI + "/menu/modifier/group/"+Mod_grp_id, true, ParentTest, "no_jira"); 
+            Call_API("Call /Menu/Modifier / API", "Bearer " + AP3_TKN, BaseAPI + "/menu/modifier/group/" + Mod_grp_id, true, ParentTest, "no_jira"); 
             if (FAIL) { return;} 
             JSONObject json1 = new JSONObject(t);
             JSONArray modifier_items = new JSONArray();
@@ -465,7 +433,7 @@ class AP3_menu_manager extends AP3_GUI{
                }
             }//End of for
             boolean flag = true;
-            for (int i=0;i<modifier_items.length();i++) {
+            for (int i = 0; i < modifier_items.length(); i++) {
                 JSONObject modifier_item = modifier_items.getJSONObject(i) ;
                 if(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en").equals(Original_Mod_ID_Name))   {
                     if(!(modifier_item.getString("id").equals(Copy_Mod_ID))) { //print pass unique id message 
@@ -486,202 +454,201 @@ class AP3_menu_manager extends AP3_GUI{
                 _t++;
                 _f++; 
                 EX += _t + "\t" + "Original Modifier does not exist" + "\t" + "-" + "\t" + "" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Original Modifier does not exist", false, ParentTest.createNode("FAILUREE"), new Date());
+                Log_Html_Result("FAIL", "Original Modifier does not exist", false, ParentTest.createNode("Original Modifier does not exist"), new Date());
              }
             //</editor-fold> 
                 
             //<editor-fold defaultstate="collapsed" desc="Verify modifier API call">  
-            EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Validating modifiers in global menu==" + "\t" + "-" +"\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            //API Response is from the previous test of cloned id's
-
-            if(json1.has("unique_name")) {
-                if(json1.getString("unique_name").equals("New Group " + New_ID)) {
-                    _t++;
-                    _p++; EX += _t + "\t" + "Mod Group Name's are same" + "\t" + json1.getString("unique_name") + "\t" + "New Group " + New_ID + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "Mod Group Name's are same", false, ParentTest.createNode(json1.getString("unique_name") + " > " + "New Group " + New_ID ), new Date());
-                } else {
-                    _t++;
-                    _f++; EX += _t + "\t" + "Mod Group Name's are different" + "\t" + json1.getString("unique_name") + "\t" + "New Group " + New_ID + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "Mod Group Name's are different", false, ParentTest.createNode(json1.getString("unique_name") + " > " + "New Group " + New_ID ), new Date());
-                }   
-            }
-            String label = json1.getJSONObject("meta").getJSONObject("original_label").getString("en");
-            if(label.equals("Label "+New_ID)) {    
-                _t++;
-                _p++; 
-                EX += _t + "\t" + "In-App Label Name's are same" + "\t" + label + "\t" + "Label " + New_ID + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "In-App Label Name's are same", false, ParentTest.createNode("Label " + New_ID), new Date());
-            } else {  
-                _t++;
-                _f++; EX += _t + "\t" + "In-App Label Name's are different" + "\t" + label + "\t" + "Label  "+ New_ID + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "In-App Label Name's are different", false, ParentTest.createNode("Label " + New_ID), new Date());
-        }
-
-            if(json1.has("max") && !json1.has("min")) {
-                if(json1.getInt("max") == 1) { 
-                    _t++;
-                    _p++; 
-                    EX += _t + "\t" + "Modifier rules are same" + "\t" + "Maximum: " + json1.getInt("max") + "\t" + "Maximum: 1" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "Modifier rules are same", false, ParentTest.createNode(json1.getInt("max") + " > " + "Maximum: 1"), new Date());
-                } else {
-                    _t++;
-                    _f++; 
-                    EX += _t + "\t" + "Modifier rules are different" + "\t" + "Maximum: " + json1.getInt("max") + "\t" + "Maximum: 1" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "In-App Label Name's are different", false, ParentTest.createNode(json1.getInt("max") + " > " + "Maximum: 1"), new Date());
-                }    
-            }
-            flag = true;
-            for (int i=0; i<modifier_items.length(); i++) {
-                JSONObject modifier_item = modifier_items.getJSONObject(i) ;
-                if(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("Mod 0 " + New_ID)) {
-                    _t++;
-                    _p++; 
-                    EX += _t + "\t" + "Modifier Name same" + "\t" + "Mod 0 "+ New_ID + "\t" + "Mod 0 " + New_ID + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "Modifier Name same", false, ParentTest.createNode("Mod 0 "+ New_ID + "\t" + "Mod 0 " + New_ID), new Date());
-                     
-                    if(!modifier_item.getJSONObject("meta").isNull("sort_number")){
-                        if(modifier_item.getJSONObject("meta").getInt("sort_number")==2) {//Print pass
-                            _t++;
-                            _p++;  
-                            EX += _t + "\t" + "Modifier Sort number (Chit#) same" + "\t" + "Chit#: 2" + "\t" + "Chit#: 2" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                            Log_Html_Result("PASS", "Modifier Sort number (Chit#) same", false, ParentTest.createNode("Chit#: 2" + " > " + "Chit#: 2"), new Date());
-                        } else {//Print fail
-                            _t++;
-                            _f++;  
-                            EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: " + modifier_item.getJSONObject("meta").getInt("sort_number") + "\t" + "Chit#: 2" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                            Log_Html_Result("FAIL", "Modifier Sort number (Chit#) different", false, ParentTest.createNode(modifier_item.getJSONObject("meta").getInt("sort_number") + " > " + "Chit#: 2"), new Date());
-                        }
-                    } else{
-                        _t++;
-                        _f++;  
-                        EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: 2" + "\t" + "Chit#: null" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "Modifier Sort number (Chit#) different", false, ParentTest.createNode("Chit#: 2" + " > " + "Chit#: null"), new Date());
-                    }
-
-                    if(modifier_item.getJSONObject("meta").getJSONArray("taxes").getString(0).equals("Prepared")) {
-                        _t++;
-                        _p++; 
-                        EX += _t + "\t" + "Tax Tags are same" + "\t" + "Tax Tag : Prepared" + "\t" + "Tax Tag : Prepared" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "Tax Tags are same", false, ParentTest.createNode("Tax Tag : Prepared" + " > " + "Tax Tag : Prepared"), new Date());
-                    } else {
-                        _t++;
-                        _f++; 
-                        EX += _t + "\t" + "Tax Tags are different" + "\t" + "Tax Tag : " + modifier_item.getJSONObject("meta").getJSONArray("taxes").getString(0) + "\t" + "Tax Tag : Prepared" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "Tax Tags are different", false, ParentTest.createNode("Tax Tag : " + modifier_item.getJSONObject("meta").getJSONArray("taxes").getString(0) + " > " + "Tax Tag : Prepared"), new Date());
-                    }
-
-                    if(modifier_item.getJSONObject("price").getDouble("amount")== 2.25)  {
-                        _t++;//Print pass
-                        _p++; 
-                        EX += _t + "\t" + "Modifier price are same" + "\t" + "Price : 2.25" + "\t" + "Price : 2.25" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "Modifier price are same", false, ParentTest.createNode("Price : 2.25" + " > " + "Price : 2.25"), new Date());
-                    } else {//Print Fail
-                        _t++;
-                        _f++; 
-                        EX += _t + "\t" + "Modifier price are different" + "\t" + "Price : " + modifier_item.getJSONObject("price").getDouble("amount") + "\t" + "Price : 2.25" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "Modifier price are different", false, ParentTest.createNode("Price : " + modifier_item.getJSONObject("price").getDouble("amount") + " > " + "Price : 2.25"), new Date());
-                    }
-
-                    if(modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") == 100) {
-                        _t++;
-                        _p++; 
-                        EX += _t + "\t" + "Modifier Calories are same" + "\t" + "Calories : 100" + "\t" + "Calories : 100" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "Modifier Calories are same", false, ParentTest.createNode("Calories : 100" + "\t" + "Calories : 100"), new Date());
-                    } else {//Print Fail
-                        _t++;
-                        _f++; 
-                        EX += _t + "\t" + "Modifier Calories are different" + "\t" + "Calories : " + modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") + "\t" + "Calories : 100" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "Modifier Calories are different", false, ParentTest.createNode("Calories : " + modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") + " > " + "Calories : 100"), new Date());
-                    }
-
-                    if(modifier_item.getJSONObject("meta").getString("plu").equals("600100")) {//Print pass
-                        _t++;
-                        _p++; EX += _t + "\t" + "PLU's are same" + "\t" + "PLU : 600100" + "\t" + "PLU : 600100" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "PLU's are same", false, ParentTest.createNode("PLU : 600100" + "\t" + "PLU : 600100" ), new Date());
-                    } else  {
-                        _t++;
-                        _f++; 
-                        EX += _t + "\t" + "PLU's are different" + "\t" + "PLU : "+modifier_item.getJSONObject("meta").getString("plu") + "\t" + "PLU : 600100" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "Modifier Sort number (Chit#) same", false, ParentTest.createNode("PLU : "+modifier_item.getJSONObject("meta").getString("plu") + " > " + "PLU : 600100"), new Date());
-                    }
-                    flag = false;
-                } else if(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("Mod 1 " + New_ID)) {//For both Mod 1 and Mod 1 copy
-                    if(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("Mod 1 " + New_ID + " copy")){
-                        _t++;
-                        _p++; 
-                        EX += _t + "\t" + "Modifier Name same" + "\t" + "Mod 1 " + New_ID + "\t" + "Mod 1 " + New_ID + " copy" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "Modifier Name same", false, ParentTest.createNode("Mod 1 " + New_ID + " > " + "Mod 1 " + New_ID + " copy"), new Date());
-                    } else {
-                        _t++;
-                        _f++; 
-                        EX += _t + "\t" + "Modifier Name is different" + "\t" + "Mod 1 " + New_ID + "\t" + "Mod 1 " + New_ID + " copy" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "Modifier Name is different", false, ParentTest.createNode("Mod 1 " + New_ID + " >" + "Mod 1 " + New_ID + " copy"), new Date());
-                    }
-                    if(!modifier_item.getJSONObject("meta").isNull("sort_number")){
-                        if(modifier_item.getJSONObject("meta").getInt("sort_number") == 3) {//Print pass
-                            _t++;
-                            _p++; 
-                            EX += _t + "\t" + "Modifier Sort number (Chit#) same" + "\t" + "Chit#: 3" + "\t" + "Chit#: 3" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                            Log_Html_Result("PASS", "Modifier Sort number (Chit#) same", false, ParentTest.createNode("Chit#: 2" + " > " + "Chit#: 2"), new Date());
-                        } else {//Print fail
-                            _t++;
-                            _f++; 
-                            EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: " + modifier_item.getJSONObject("meta").getInt("sort_number") + "\t" + "Chit#: 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                            Log_Html_Result("FAIL", "Modifier Sort number (Chit#) same", false, ParentTest.createNode("Chit#: " + modifier_item.getJSONObject("meta").getInt("sort_number") + "\t" + "Chit#: 3"), new Date());
-                        }
-                    } else{
-                        _t++;
-                        _f++; 
-                        EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: 2" + "\t" + "Chit#: null" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "Modifier Sort number (Chit#) same", false, ParentTest.createNode("Modifier Sort number (Chit#) different" + " > " + "Chit#: null"), new Date());
-                    }
-                    if(modifier_item.getJSONObject("price").getDouble("amount")== 3.25) {//Print pass
-                        _t++;
-                        _p++; 
-                        EX += _t + "\t" + "Modifier price are same" + "\t" + "Price: 3.25" + "\t" + "Price: 3.25" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "Modifier price are same", false, ParentTest.createNode("Price: 3.25" + " > " + "Price: 3.25"), new Date());
-                    } else {//Print Fail
-                        _t++;
-                        _f++; 
-                        EX += _t + "\t" + "Modifier price are different" + "\t" + "Price: " + modifier_item.getJSONObject("price").getDouble("amount") + "\t" + "Price: 3.25" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "Modifier price are different", false, ParentTest.createNode("Price: " + modifier_item.getJSONObject("price").getDouble("amount") + " > " + "Price: 3.25"), new Date());
-                    }
-
-                    if(modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") == 102) {//Print pass
-                        _t++;
-                        _p++; 
-                        EX += _t + "\t" + "Modifier Calories are same" + "\t" + "Calories: 102" + "\t" + "Calories: 102" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "Modifier Calories are same", false, ParentTest.createNode("Calories: 102" + " > " + "Calories: 102"), new Date());
-                    } else {//Print Fail
-                        _t++;
-                        _f++; 
-                        EX += _t + "\t" + "Modifier Calories are different" + "\t" + "Calories: " + modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") + "\t" + "Calories: 102" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "Modifier Calories are different", false, ParentTest.createNode("Calories: " + modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") + " > " + "Calories: 102"), new Date());
-                    }
-
-                    if(modifier_item.getJSONObject("meta").getString("plu").equals("600102")) {//Print pass
-                        _t++;
-                        _p++; 
-                        EX += _t + "\t" + "PLU's are same" + "\t" + "PLU: 600102" + "\t" + "PLU: 600102" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "PLU's are same", false, ParentTest.createNode("PLU: 600102" + " > " + "PLU: 600102"), new Date());
-                    } else {//Print Fail
-                        _t++;
-                        _f++; 
-                        EX += _t + "\t" + "PLU's are different" + "\t" + "PLU: " + modifier_item.getJSONObject("meta").getString("plu") + "\t" + "PLU: 600102" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "PLU's are different", false, ParentTest.createNode("PLU: " + modifier_item.getJSONObject("meta").getString("plu") + " > " + "PLU: 600102"), new Date());
-                    }
-                    flag = false;
-                } else if(flag) { // Print fail unidentifed modifier
-                    _t++;
-                    _f++; 
-                    EX += _t + "\t" + "Unidentified Modifier" + "\t" + modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en") + "\t" + "No new modifiers" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "Unidentified Modifier", false, ParentTest.createNode(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en") + " > " + "No new modifiers"), new Date());
-                }
-                EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Validating modifiers in global menu==" + "\t" + "-" +"\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            }//End of for
+//            EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Validating modifiers in global menu==" + "\t" + "-" +"\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+//            //API Response is from the previous test of cloned id's
+//
+//            if(json1.has("unique_name")) {
+//                if(json1.getString("unique_name").equals("New Group " + New_ID)) {
+//                    _t++;
+//                    _p++; EX += _t + "\t" + "Mod Group Name's are same" + "\t" + json1.getString("unique_name") + "\t" + "New Group " + New_ID + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                    Log_Html_Result("PASS", "Mod Group Name's are same", false, ParentTest.createNode(json1.getString("unique_name") + " > " + "New Group " + New_ID ), new Date());
+//                } else {
+//                    _t++;
+//                    _f++; EX += _t + "\t" + "Mod Group Name's are different" + "\t" + json1.getString("unique_name") + "\t" + "New Group " + New_ID + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                    Log_Html_Result("FAIL", "Mod Group Name's are different", false, ParentTest.createNode(json1.getString("unique_name") + " > " + "New Group " + New_ID ), new Date());
+//                }   
+//            }
+//            String label = json1.getJSONObject("meta").getJSONObject("original_label").getString("en");
+//            if(label.equals("Label " + New_ID)) {    
+//                _t++;
+//                _p++; 
+//                EX += _t + "\t" + "In-App Label Name's are same" + "\t" + label + "\t" + "Label " + New_ID + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                Log_Html_Result("PASS", "In-App Label Name's are same", false, ParentTest.createNode("Label " + New_ID), new Date());
+//            } else {  
+//                _t++;
+//                _f++; EX += _t + "\t" + "In-App Label Name's are different" + "\t" + label + "\t" + "Label  "+ New_ID + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                Log_Html_Result("FAIL", "In-App Label Name's are different", false, ParentTest.createNode("Label " + New_ID), new Date());
+//            }
+//
+//            if(json1.has("max") && !json1.has("min")) {
+//                if(json1.getInt("max") == 1) { 
+//                    _t++;
+//                    _p++; 
+//                    EX += _t + "\t" + "Modifier rules are same" + "\t" + "Maximum: " + json1.getInt("max") + "\t" + "Maximum: 1" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                    Log_Html_Result("PASS", "Modifier rules are same", false, ParentTest.createNode(json1.getInt("max") + " > " + "Maximum: 1"), new Date());
+//                } else {
+//                    _t++;
+//                    _f++; 
+//                    EX += _t + "\t" + "Modifier rules are different" + "\t" + "Maximum: " + json1.getInt("max") + "\t" + "Maximum: 1" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                    Log_Html_Result("FAIL", "In-App Label Name's are different", false, ParentTest.createNode(json1.getInt("max") + " > " + "Maximum: 1"), new Date());
+//                }    
+//            }
+//            flag = true;
+//            for (int i=0; i < modifier_items.length(); i++) {
+//                JSONObject modifier_item = modifier_items.getJSONObject(i) ;
+//                if(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("Mod 0 " + New_ID)) {
+//                    _t++;
+//                    _p++; 
+//                    EX += _t + "\t" + "Modifier Name same" + "\t" + "Mod 0 "+ New_ID + "\t" + "Mod 0 " + New_ID + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                    Log_Html_Result("PASS", "Modifier Name same", false, ParentTest.createNode("Mod 0 " + New_ID + "\t" + "Mod 0 " + New_ID), new Date());
+//                     
+//                    if(!modifier_item.getJSONObject("meta").isNull("sort_number")){
+//                        if(modifier_item.getJSONObject("meta").getInt("sort_number")==2) {//Print pass
+//                            _t++;
+//                            _p++;  
+//                            EX += _t + "\t" + "Modifier Sort number (Chit#) same" + "\t" + "Chit#: 2" + "\t" + "Chit#: 2" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                            Log_Html_Result("PASS", "Modifier Sort number (Chit#) same", false, ParentTest.createNode("Chit#: 2" + " > " + "Chit#: 2"), new Date());
+//                        } else {//Print fail
+//                            _t++;
+//                            _f++;  
+//                            EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: " + modifier_item.getJSONObject("meta").getInt("sort_number") + "\t" + "Chit#: 2" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                            Log_Html_Result("FAIL", "Modifier Sort number (Chit#) different", false, ParentTest.createNode(modifier_item.getJSONObject("meta").getInt("sort_number") + " > " + "Chit#: 2"), new Date());
+//                        }
+//                    } else{
+//                        _t++;
+//                        _f++;  
+//                        EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: 2" + "\t" + "Chit#: null" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("FAIL", "Modifier Sort number (Chit#) different", false, ParentTest.createNode("Chit#: 2" + " > " + "Chit#: null"), new Date());
+//                    }
+//
+//                    if(modifier_item.getJSONObject("meta").getJSONArray("taxes").getString(0).equals("Prepared")) {
+//                        _t++;
+//                        _p++; 
+//                        EX += _t + "\t" + "Tax Tags are same" + "\t" + "Tax Tag : Prepared" + "\t" + "Tax Tag : Prepared" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("PASS", "Tax Tags are same", false, ParentTest.createNode("Tax Tag : Prepared" + " > " + "Tax Tag : Prepared"), new Date());
+//                    } else {
+//                        _t++;
+//                        _f++; 
+//                        EX += _t + "\t" + "Tax Tags are different" + "\t" + "Tax Tag : " + modifier_item.getJSONObject("meta").getJSONArray("taxes").getString(0) + "\t" + "Tax Tag : Prepared" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("PASS", "Tax Tags are different", false, ParentTest.createNode("Tax Tag : " + modifier_item.getJSONObject("meta").getJSONArray("taxes").getString(0) + " > " + "Tax Tag : Prepared"), new Date());
+//                    }
+//
+//                    if(modifier_item.getJSONObject("price").getDouble("amount")== 2.25)  {
+//                        _t++;//Print pass
+//                        _p++; 
+//                        EX += _t + "\t" + "Modifier price are same" + "\t" + "Price : 2.25" + "\t" + "Price : 2.25" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("PASS", "Modifier price are same", false, ParentTest.createNode("Price : 2.25" + " > " + "Price : 2.25"), new Date());
+//                    } else {//Print Fail
+//                        _t++;
+//                        _f++; 
+//                        EX += _t + "\t" + "Modifier price are different" + "\t" + "Price : " + modifier_item.getJSONObject("price").getDouble("amount") + "\t" + "Price : 2.25" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("FAIL", "Modifier price are different", false, ParentTest.createNode("Price : " + modifier_item.getJSONObject("price").getDouble("amount") + " > " + "Price : 2.25"), new Date());
+//                    }
+//
+//                    if(modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") == 100) {
+//                        _t++;
+//                        _p++; 
+//                        EX += _t + "\t" + "Modifier Calories are same" + "\t" + "Calories : 100" + "\t" + "Calories : 100" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("PASS", "Modifier Calories are same", false, ParentTest.createNode("Calories : 100" + "\t" + "Calories : 100"), new Date());
+//                    } else {//Print Fail
+//                        _t++;
+//                        _f++; 
+//                        EX += _t + "\t" + "Modifier Calories are different" + "\t" + "Calories : " + modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") + "\t" + "Calories : 100" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("FAIL", "Modifier Calories are different", false, ParentTest.createNode("Calories : " + modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") + " > " + "Calories : 100"), new Date());
+//                    }
+//
+//                    if(modifier_item.getJSONObject("meta").getString("plu").equals("600100")) {//Print pass
+//                        _t++;
+//                        _p++; EX += _t + "\t" + "PLU's are same" + "\t" + "PLU : 600100" + "\t" + "PLU : 600100" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("PASS", "PLU's are same", false, ParentTest.createNode("PLU : 600100" + "\t" + "PLU : 600100" ), new Date());
+//                    } else  {
+//                        _t++;
+//                        _f++; 
+//                        EX += _t + "\t" + "PLU's are different" + "\t" + "PLU : " + modifier_item.getJSONObject("meta").getString("plu") + "\t" + "PLU : 600100" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("FAIL", "Modifier Sort number (Chit#) same", false, ParentTest.createNode("PLU : " + modifier_item.getJSONObject("meta").getString("plu") + " > " + "PLU : 600100"), new Date());
+//                    }
+//                    flag = false;
+//                } else if(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("Mod 1 " + New_ID)) {//For both Mod 1 and Mod 1 copy
+//                    if(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("Mod 1 " + New_ID + " copy")){
+//                        _t++;
+//                        _p++; 
+//                        EX += _t + "\t" + "Modifier Name same" + "\t" + "Mod 1 " + New_ID + "\t" + "Mod 1 " + New_ID + " copy" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("PASS", "Modifier Name same", false, ParentTest.createNode("Mod 1 " + New_ID + " > " + "Mod 1 " + New_ID + " copy"), new Date());
+//                    } else {
+//                        _t++;
+//                        _f++; 
+//                        EX += _t + "\t" + "Modifier Name is different" + "\t" + "Mod 1 " + New_ID + "\t" + "Mod 1 " + New_ID + " copy" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("FAIL", "Modifier Name is different", false, ParentTest.createNode("Mod 1 " + New_ID + " >" + "Mod 1 " + New_ID + " copy"), new Date());
+//                    }
+//                    if(!modifier_item.getJSONObject("meta").isNull("sort_number")){
+//                        if(modifier_item.getJSONObject("meta").getInt("sort_number") == 3) {//Print pass
+//                            _t++;
+//                            _p++; 
+//                            EX += _t + "\t" + "Modifier Sort number (Chit#) same" + "\t" + "Chit#: 3" + "\t" + "Chit#: 3" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                            Log_Html_Result("PASS", "Modifier Sort number (Chit#) same", false, ParentTest.createNode("Chit#: 2" + " > " + "Chit#: 2"), new Date());
+//                        } else {//Print fail
+//                            _t++;
+//                            _f++; 
+//                            EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: " + modifier_item.getJSONObject("meta").getInt("sort_number") + "\t" + "Chit#: 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                            Log_Html_Result("FAIL", "Modifier Sort number (Chit#) same", false, ParentTest.createNode("Chit#: " + modifier_item.getJSONObject("meta").getInt("sort_number") + "\t" + "Chit#: 3"), new Date());
+//                        }
+//                    } else{
+//                        _t++;
+//                        _f++; 
+//                        EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: 2" + "\t" + "Chit#: null" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("FAIL", "Modifier Sort number (Chit#) same", false, ParentTest.createNode("Modifier Sort number (Chit#) different" + " > " + "Chit#: null"), new Date());
+//                    }
+//                    if(modifier_item.getJSONObject("price").getDouble("amount")== 3.25) {//Print pass
+//                        _t++;
+//                        _p++; 
+//                        EX += _t + "\t" + "Modifier price are same" + "\t" + "Price: 3.25" + "\t" + "Price: 3.25" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("PASS", "Modifier price are same", false, ParentTest.createNode("Price: 3.25" + " > " + "Price: 3.25"), new Date());
+//                    } else {//Print Fail
+//                        _t++;
+//                        _f++; 
+//                        EX += _t + "\t" + "Modifier price are different" + "\t" + "Price: " + modifier_item.getJSONObject("price").getDouble("amount") + "\t" + "Price: 3.25" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("FAIL", "Modifier price are different", false, ParentTest.createNode("Price: " + modifier_item.getJSONObject("price").getDouble("amount") + " > " + "Price: 3.25"), new Date());
+//                    }
+//
+//                    if(modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") == 102) {//Print pass
+//                        _t++;
+//                        _p++; 
+//                        EX += _t + "\t" + "Modifier Calories are same" + "\t" + "Calories: 102" + "\t" + "Calories: 102" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("PASS", "Modifier Calories are same", false, ParentTest.createNode("Calories: 102" + " > " + "Calories: 102"), new Date());
+//                    } else {//Print Fail
+//                        _t++;
+//                        _f++; 
+//                        EX += _t + "\t" + "Modifier Calories are different" + "\t" + "Calories: " + modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") + "\t" + "Calories: 102" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("FAIL", "Modifier Calories are different", false, ParentTest.createNode("Calories: " + modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") + " > " + "Calories: 102"), new Date());
+//                    }
+//
+//                    if(modifier_item.getJSONObject("meta").getString("plu").equals("600102")) {//Print pass
+//                        _t++;
+//                        _p++; 
+//                        EX += _t + "\t" + "PLU's are same" + "\t" + "PLU: 600102" + "\t" + "PLU: 600102" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("PASS", "PLU's are same", false, ParentTest.createNode("PLU: 600102" + " > " + "PLU: 600102"), new Date());
+//                    } else {//Print Fail
+//                        _t++;
+//                        _f++; 
+//                        EX += _t + "\t" + "PLU's are different" + "\t" + "PLU: " + modifier_item.getJSONObject("meta").getString("plu") + "\t" + "PLU: 600102" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("FAIL", "PLU's are different", false, ParentTest.createNode("PLU: " + modifier_item.getJSONObject("meta").getString("plu") + " > " + "PLU: 600102"), new Date());
+//                    }
+//                    flag = false;
+//                } else if(flag) { // Print fail unidentifed modifier
+//                    _t++;
+//                    _f++; 
+//                    EX += _t + "\t" + "Unidentified Modifier" + "\t" + modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en") + "\t" + "No new modifiers" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                    Log_Html_Result("FAIL", "Unidentified Modifier", false, ParentTest.createNode(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en") + " > " + "No new modifiers"), new Date());
+//                }
+//                EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Validating modifiers in global menu==" + "\t" + "-" +"\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+//            }
             //</editor-fold> 
            
-
             //<editor-fold defaultstate="collapsed" desc="Pagination">   
             Move_to_Element_By_Path("Paging - Rows per page", "css", "[aria-label='Rows per page:']", ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -715,7 +682,7 @@ class AP3_menu_manager extends AP3_GUI{
                 T_Index = -1;  
                 Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira"); 
                 for (int i = 2; i < L0.size(); i++) {
-                    List_TR_TDs("Modifier Group Row Data", L0.get(i), ParentTest, "no_jira");   
+                    List_TR_TDs("Modifier Group Row Data " + i, L0.get(i), ParentTest, "no_jira");   
                         if(t.trim().contains("New Group " + New_ID)){
                             T_Index = i;
                     }
@@ -749,6 +716,7 @@ class AP3_menu_manager extends AP3_GUI{
             Wait_For_All_Elements_InVisibility("Wait 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
             Thread.sleep(500);
+            
             Call_API("Call /Menu/Modifier / API", "Bearer " + AP3_TKN, BaseAPI + "/menu/modifier/group/" + Mod_grp_id, true, ParentTest, "no_jira" );
                 if (FAIL) { return;} 
             json1 = new JSONObject(t);
@@ -764,7 +732,7 @@ class AP3_menu_manager extends AP3_GUI{
                     Log_Html_Result("FAIL", "Modifier has not been deleted", false, ParentTest.createNode(Copy_Mod_ID_Name), new Date());
                     flag = false;
                 }
-            }//End of for  
+            } 
             if(flag) {
                 _t++;
                 _p++; 
@@ -792,7 +760,7 @@ class AP3_menu_manager extends AP3_GUI{
                 Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira"); 
                     if (FAIL) { return;} 
                 for (int i = 2; i < L0.size(); i++) {
-                    List_TR_TDs("Modifier Group Row Data", L0.get(i), ParentTest, "no_jira");   
+                    List_TR_TDs("Modifier Group Row Data " + i, L0.get(i), ParentTest, "no_jira");   
                         if (FAIL) { return;}
                 }                     
             } else{   
@@ -840,7 +808,7 @@ class AP3_menu_manager extends AP3_GUI{
             Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
             for (int i = 2; i < L0.size(); i++) {
-                List_TR_TDs("Modifier Group Row Data", L0.get(i), ParentTest, "no_jira");   
+                List_TR_TDs("Modifier Group Row Data " + i, L0.get(i), ParentTest, "no_jira");   
                     if (FAIL) { return;}
             }             
             List_Child_E1_By_Path("Find 'Copy' Last Group", L0.get((L0.size() - 1)), "xpath", ".//i[@class='v-icon mdi mdi-content-copy theme--light']", ParentTest, "no_jira"); 
@@ -852,7 +820,7 @@ class AP3_menu_manager extends AP3_GUI{
                 if (FAIL) { return;}   
             Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira"); 
             for (int i = 2; i < L0.size(); i++) {
-                List_TR_TDs("Modifier Group Row Data", L0.get(i), ParentTest, "no_jira");   
+                List_TR_TDs("Modifier Group Row Data " + i, L0.get(i), ParentTest, "no_jira");   
                     if (FAIL) { return;}
             }    
             int S = L0.size(); 
@@ -876,7 +844,7 @@ class AP3_menu_manager extends AP3_GUI{
                 if (FAIL) { return;}
             Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira"); 
             for (int i = 2; i < L0.size(); i++) {
-                List_TR_TDs("Modifier Group Row Data", L0.get(i), ParentTest, "no_jira");   
+                List_TR_TDs("Modifier Group Row Data " + i, L0.get(i), ParentTest, "no_jira");   
                     if (FAIL) { return;}
             }  
             if(S == L0.size()){
@@ -898,7 +866,7 @@ class AP3_menu_manager extends AP3_GUI{
                 Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira"); 
                     if (FAIL) { return;} 
                 for (int i = 2; i < L0.size(); i++) {
-                    List_TR_TDs("Modifier Group Row Data", L0.get(i), ParentTest, "no_jira");   
+                    List_TR_TDs("Modifier Group Row Data " + i, L0.get(i), ParentTest, "no_jira");   
                         if (FAIL) { return;}
                 }                   
             }else{
@@ -977,12 +945,8 @@ class AP3_menu_manager extends AP3_GUI{
                     if (FAIL) { return;}                
                 List_L2("Menus Count on the Page 2", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
                 if (FAIL) { return;}
-                T_Index = 1;
                 for (int i = 0; i < L2.size(); i++) { 
                     Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", ParentTest, "no_jira"); 
-//                    if(t.trim().startsWith(GL_MENU)){
-//                        T_Index = i;
-//                    } 
                 } 
                 if( PAGES > 2){
                     Scroll_to_Element("Scroll to Pagination", L1.get(2), ParentTest, "no_jira");
@@ -994,144 +958,104 @@ class AP3_menu_manager extends AP3_GUI{
                     T_Index = 1;
                     for (int i = 0; i < L2.size(); i++) { 
                         Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", ParentTest, "no_jira"); 
-//                        if(t.trim().startsWith(GL_MENU)){
-//                            T_Index = i;
-//                        } 
                     } 
                 }            
             }
-        if(T_Index > -1){ 
-//            Find_Text("Fund 'Search...' text", "Search Menus", true, ParentTest, "no_jira");   
-//                if (FAIL) { return;}             
-//            Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira"); 
-//                if (FAIL) { return;}
-//            Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, ParentTest, "no_jira");
-//                if (FAIL) { return;} 
-//             Thread.sleep(500);
-//             
-//            List_Child_E1_By_Path("Find 'View Local Brands' button", L2.get(T_Index), "xpath", ".//button[@type='button'][3]", ParentTest, "no_jira"); 
-//                if (FAIL) { return;} 
-//            Element_Click("Click 'View Local Brands'", e1, ParentTest, "no_jira"); 
-//                if (FAIL) { return;}  
-//            Thread.sleep(500);  
-//            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-//                if (FAIL) { return;}  
-//            Thread.sleep(500);  
-//            Page_URL("Current page URL", ParentTest, "no_jira");             
-//            Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
-//                if (FAIL) { return;}                  
-//            Find_Text("Fund 'Search...' text", "Search Menus", true, ParentTest, "no_jira");   
-//                if (FAIL) { return;}             
-//            Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira"); 
-//                if (FAIL) { return;}
-//            if(Location.isEmpty()){
-//                _t++; 
-//                _f++;
-//                EX += " - " + "\t" + "Find Local Menu by Brand Location" + "\t" + BRAND + "\t" + "Location is Blank - Cannot locate Local Menu" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-//                Log_Html_Result("FAIL", "Find Local Menu by Brand Location", false, ParentTest.createNode("Location is Blank - Cannot locate Local Menu""), new Date());
-//                return;
-//            }
-            Element_By_Path_Text_Enter("Enter Local Menu Search", "css", "input[aria-label='Search Local Menus']", Location, false, ParentTest, "no_jira");
-                if (FAIL) { return;} 
-            Thread.sleep(1000);  
-            Element_By_Path_Click("Click 'VIEW LOCAL MENUS'", "xpath", "//span[@id='local-menu-label-0']", ParentTest, "no_jira");
-            Thread.sleep(500); 
-            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-                if (FAIL) { return;} 
-            Thread.sleep(500);        
-            To_Top("Scroll to page Top", ParentTest, "no_jira");        
-            Thread.sleep(500);
-            Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
-                if (FAIL) { return;} 
-            Thread.sleep(500); 
-            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-                if (FAIL) { return;}    
-            Thread.sleep(500); 
-            List_L1("Menu Sets Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");             
-                if (FAIL) { return;}
-                for (int i = 0; i < L1.size(); i++) {
-                    Element_Attribute("Menu Set (Index " + i + ")", L1.get(i), "textContent", ParentTest, "no_jira");  
-                }               
 
-            Element_Click("Click 1st Menu Set", L1.get(0), ParentTest, "no_jira"); 
-                if (FAIL) { return;}    
-            Thread.sleep(500);                 
-            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-                if (FAIL) { return;}                         
-          
-            // Bulk update  DEBUG, Hide inactive test steps 
-            Element_E1_Find("Find 'Bulk' container", "xpath", "//div[@class='layout justify-left align-center']", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_Child_Text("Find 'Bulk' default prompt", e1,"xpath", ".//span[@class='Button-Primary-Center']", ParentTest, "no_jira");
-            Element_Child_E2("Find 'Bulk' select All checkbox", e1,"xpath", ".//input[@role='checkbox']", ParentTest, "no_jira");
-                if (FAIL) { return;}           
-            Element_Click("Check 'Bulk' select All", e2, ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_Child_E2("Find 'Bulk' updated prompt", e1,"xpath", ".//span[@class='Button-Primary-Center']", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_Text("Find 'Bulk' updated prompt text", e2, ParentTest, "no_jira");
-            Element_Click("Click 'Update X Items' prompt", e2, ParentTest, "no_jira");
-                if (FAIL) { return;}
-            
-            Element_By_Path_Click("Click 'Hide In App'", "css", "[aria-label='Hide In App']", ParentTest, "no_jira");
-                if (FAIL) { return;} 
-            Element_By_Path_Click("Click 'APPLY Changes'", "xpath", "//div[contains(text(), 'Apply Changes')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            
-            Element_E1_Find("Find 'Hide Inactive' container", "xpath", "//div[@class='flex offset-xs10']", ParentTest, "no_jira");
-                if (FAIL) { return;}             
-            Element_Child_E2("Find 'Hide Inactive' checkbox", e1, "xpath", ".//input[@role='checkbox']", ParentTest, "no_jira");
-                if (FAIL) { return;}   
-            Element_Click("Check 'Hide Inactive'", e2, ParentTest, "no_jira");
-                if (FAIL) { return;}  // =============================               
-            List_L1("Hidden Items Rows Count", "tagName", "tr", ParentTest, "no_jira");             
-            Element_Text("Items Row Header", L1.get(0), ParentTest, "no_jira"); 
-                if (FAIL) { return;} 
-                for (int i = 2; i < L1.size(); i++) {
-                    List_TR_TDs("Items Row Data", L1.get(i), ParentTest, "no_jira");   
-                        if (FAIL) { return;}  
-                }  
-            Element_Click("UnCheck 'Hide Inactive'", e2, ParentTest, "no_jira");
-                if (FAIL) { return;}  // =============================        
-            List_L1("Visible Items Rows Count", "tagName", "tr", ParentTest, "no_jira"); 
-            Element_Text("Items Row Header", L1.get(0), ParentTest, "no_jira"); 
-                if (FAIL) { return;} 
-                for (int i = 2; i < L1.size(); i++) {
-                    List_TR_TDs("Items Row Data", L1.get(i), ParentTest, "no_jira");   
-                        if (FAIL) { return;}  
-                }             
-            Element_E1_Find("Find 'Bulk' container", "xpath", "//div[@class='layout justify-left align-center']", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_Child_Text("Find 'Bulk' default prompt", e1,"xpath", ".//span[@class='Button-Primary-Center']", ParentTest, "no_jira");
-            Element_Child_E2("Find 'Bulk' select All checkbox", e1,"xpath", ".//input[@role='checkbox']", ParentTest, "no_jira");
-                if (FAIL) { return;} 
-            Element_Click("Check 'Bulk' select All", e2, ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_Child_E2("Find 'Bulk' updated prompt", e1,"xpath", ".//span[@class='Button-Primary-Center']", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_Text("Find 'Bulk' updated prompt text", e2, ParentTest, "no_jira");
-            Element_Click("Click 'Update X Items' prompt", e2, ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Click("Click 'In Stock'", "css", "[aria-label='In Stock']", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Click("Click 'Visible In App'", "css", "[aria-label='Visible In App']", ParentTest, "no_jira");
-                if (FAIL) { return;} 
-            Element_By_Path_Click("Click 'APPLY Changes'", "xpath", "//div[contains(text(), 'Apply Changes')]", ParentTest, "no_jira");
-                if (FAIL) { return;}  
-            List_L1("Visible Item Rows Count", "tagName", "tr", ParentTest, "no_jira");                     
-            
-        } else {
-            _t++; 
-            _f++;
-            EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-            Log_Html_Result("FAIL", "Find Menu", false, ParentTest.createNode("Not Found " + "FAIL"), new Date());
-            return;
-        } 
+        Element_By_Path_Text_Enter("Enter Local Menu Search", "css", "input[aria-label='Search Local Menus']", Location, false, ParentTest, "no_jira");
+            if (FAIL) { return;} 
+        Thread.sleep(1000);  
+        Element_By_Path_Click("Click 'VIEW LOCAL MENUS'", "xpath", "//span[@id='local-menu-label-0']", ParentTest, "no_jira");
+        Thread.sleep(500); 
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+        Thread.sleep(500);        
+        To_Top("Scroll to page Top", ParentTest, "no_jira");        
+        Thread.sleep(500);
+        Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+        Thread.sleep(500); 
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}    
+        Thread.sleep(500); 
+        List_L1("Menu Sets Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");             
+            if (FAIL) { return;}
+            for (int i = 0; i < L1.size(); i++) {
+                Element_Attribute("Menu Set (Index " + i + ")", L1.get(i), "textContent", ParentTest, "no_jira");  
+            }               
+
+        Element_Click("Click 1st Menu Set", L1.get(0), ParentTest, "no_jira"); 
+            if (FAIL) { return;}    
+        Thread.sleep(500);                 
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}                         
+
+        // Bulk update  DEBUG, Hide inactive test steps 
+        Element_E1_Find("Find 'Bulk' container", "xpath", "//div[@class='layout justify-left align-center']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_Child_Text("Find 'Bulk' default prompt", e1,"xpath", ".//span[@class='Button-Primary-Center']", ParentTest, "no_jira");
+        Element_Child_E2("Find 'Bulk' select All checkbox", e1,"xpath", ".//input[@role='checkbox']", ParentTest, "no_jira");
+            if (FAIL) { return;}           
+        Element_Click("Check 'Bulk' select All", e2, ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_Child_E2("Find 'Bulk' updated prompt", e1,"xpath", ".//span[@class='Button-Primary-Center']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_Text("Find 'Bulk' updated prompt text", e2, ParentTest, "no_jira");
+        Element_Click("Click 'Update X Items' prompt", e2, ParentTest, "no_jira");
+            if (FAIL) { return;}
+
+        Element_By_Path_Click("Click 'Hide In App'", "css", "[aria-label='Hide In App']", ParentTest, "no_jira");
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Click 'APPLY Changes'", "xpath", "//div[contains(text(), 'Apply Changes')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+
+        Element_E1_Find("Find 'Hide Inactive' container", "xpath", "//div[@class='flex offset-xs10']", ParentTest, "no_jira");
+            if (FAIL) { return;}             
+        Element_Child_E2("Find 'Hide Inactive' checkbox", e1, "xpath", ".//input[@role='checkbox']", ParentTest, "no_jira");
+            if (FAIL) { return;}   
+        Element_Click("Check 'Hide Inactive'", e2, ParentTest, "no_jira");
+            if (FAIL) { return;}  // =============================               
+        List_L1("Hidden Items Rows Count", "tagName", "tr", ParentTest, "no_jira");             
+        Element_Text("Items Row Header", L1.get(0), ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+            for (int i = 2; i < L1.size(); i++) {
+                List_TR_TDs("Items Row Data", L1.get(i), ParentTest, "no_jira");   
+                    if (FAIL) { return;}  
+            }  
+        Element_Click("UnCheck 'Hide Inactive'", e2, ParentTest, "no_jira");
+            if (FAIL) { return;}  // =============================        
+        List_L1("Visible Items Rows Count", "tagName", "tr", ParentTest, "no_jira"); 
+        Element_Text("Items Row Header", L1.get(0), ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+            for (int i = 2; i < L1.size(); i++) {
+                List_TR_TDs("Items Row Data", L1.get(i), ParentTest, "no_jira");   
+                    if (FAIL) { return;}  
+            }             
+        Element_E1_Find("Find 'Bulk' container", "xpath", "//div[@class='layout justify-left align-center']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_Child_Text("Find 'Bulk' default prompt", e1,"xpath", ".//span[@class='Button-Primary-Center']", ParentTest, "no_jira");
+        Element_Child_E2("Find 'Bulk' select All checkbox", e1,"xpath", ".//input[@role='checkbox']", ParentTest, "no_jira");
+            if (FAIL) { return;} 
+        Element_Click("Check 'Bulk' select All", e2, ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_Child_E2("Find 'Bulk' updated prompt", e1,"xpath", ".//span[@class='Button-Primary-Center']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_Text("Find 'Bulk' updated prompt text", e2, ParentTest, "no_jira");
+        Element_Click("Click 'Update X Items' prompt", e2, ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Click("Click 'In Stock'", "css", "[aria-label='In Stock']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Click("Click 'Visible In App'", "css", "[aria-label='Visible In App']", ParentTest, "no_jira");
+            if (FAIL) { return;} 
+        Element_By_Path_Click("Click 'APPLY Changes'", "xpath", "//div[contains(text(), 'Apply Changes')]", ParentTest, "no_jira");
+            if (FAIL) { return;}  
+        List_L1("Visible Item Rows Count", "tagName", "tr", ParentTest, "no_jira");   
+        
         Navigate_Back("Navigate Back","MM 'Local Brands' page","MM 'Sector' page", ParentTest, "no_jira"); 
         
-        Text_Found("Find 'Leave...' question", "Leave without saving?", ParentTest, "no_jira" ); 
+        Text_Found("Find 'Leave...' warning", "Leave without", ParentTest, "no_jira" ); 
         if ("Found".equals(t)) {       
-            Find_Text("Find 'Leave...' note", "Changes will be lost if you do not save.", true, ParentTest, "no_jira"); 
+            Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish", true, ParentTest, "no_jira"); 
                 if (FAIL) { return; }   
             Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", ParentTest, "no_jira" ); 
                 if (FAIL) { return; }         
@@ -1139,7 +1063,7 @@ class AP3_menu_manager extends AP3_GUI{
                 if (FAIL) { return; }     
             Element_By_Path_Click("Click 'LEAVE'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
-        }          
+        }
         Wait_For_All_Elements_InVisibility("Wait for page load...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}               
         Thread.sleep(1000);
