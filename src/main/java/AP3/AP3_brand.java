@@ -676,7 +676,7 @@ class AP3_brand extends AP3_GUI{
         Thread.sleep(500); 
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}   
-        Text_Found("Find 'Leave...' question", "Leave without saving?", ParentTest, "no_jira"); 
+        Text_Found("Find 'Leave...' warning", "Leave without", ParentTest, "no_jira"); 
         if ("Found".equals(t)) {    // Leave asked om CDL Site and not on DH Site (!?)      
             Find_Text("Find 'Leave...' note", "Changes will be lost if you do not save.", true,ParentTest, "no_jira"); 
                 if (FAIL) { return; }   

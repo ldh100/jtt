@@ -161,7 +161,7 @@ class AP3_mm_items extends AP3_GUI{
                 Element_Click("Click Navigation Page 2", L3.get(1), ParentTest, "no_jira");
                     if (FAIL) { return;}                
                 List_L2("Menus Count on the Page 2", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
-                if (FAIL) { return;}
+                    if (FAIL) { return;}
                 T_Index = -1;
                 for (int i = 0; i < L2.size(); i++) { 
                     Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", ParentTest, "no_jira"); 
@@ -175,7 +175,7 @@ class AP3_mm_items extends AP3_GUI{
                     Element_Click("Click Navigation Page 3", L3.get(2), ParentTest, "no_jira");
                         if (FAIL) { return;}                
                     List_L2("Menus Count on the Page 3", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
-                    if (FAIL) { return;}
+                        if (FAIL) { return;}
                     T_Index = -1;
                     for (int i = 0; i < L2.size(); i++) { 
                         Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", ParentTest, "no_jira"); 

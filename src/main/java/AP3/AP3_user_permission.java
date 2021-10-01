@@ -386,7 +386,7 @@ Thread.sleep(1000);
             Find_Text("SM Y Dashboard 'Users'", "Users", false, ParentTest, "no_jira");     
             Find_Text("SM Y Dashboard 'Announcements'", "Announcements", true, ParentTest, "no_jira"); 
             Find_Text("SM Y Dashboard 'Promo Management'", "Promo Management", false, ParentTest, "no_jira");              
-            Find_Text("SM Y Dashboard 'Smart Analytics'", "Smart Analytics", false, ParentTest, "no_jira"); 
+            Find_Text("SM Y Dashboard 'Smart Analytics'", "Smart Analytics", true, ParentTest, "no_jira"); 
             Find_Text("SM Y Dashboard 'Ap3 Notification'", "AP3 Notification", false, ParentTest, "no_jira"); 
             
              //SM Y Sites permissions

@@ -516,8 +516,11 @@ public class Orders extends javax.swing.JInternalFrame {
         long m1 = System.currentTimeMillis() + (60*60*24*1*1000);  // Now + 1 day to include future 'requested date'
         long m7 = System.currentTimeMillis() - (60*60*24*7*1000);  // Now - 7 days
         
-        Api_Call("GET",  BaseAPI + "/order/location/group/" + SiteID + "?start=" + m7 + "&end=" + m1, Auth, "");
-        Load_Orders("SITE");
+        Api_Call("GET",  BaseAPI + "/order/location/group/" + SiteID + "?start=" + m7 + "&end=" + m1 + "&order_type=all&extended=true", Auth, "");
+        //Api_Call("GET",  BaseAPI + "/order/location/group/" + SiteID + "?pickup_start=" + m7 + "&pickup_end=" + m1 + "&order_type=all&extended=true", Auth, "");
+        
+        Load_Orders("SITE");      
+        // &_query=%7Borders%7BALL%7D%7D"
         lblOrders.setText(env + ": Site '" + SITE + "'   >>>  Last 7 days Orders: " + DV1.getRowCount() + " found");
         txtLog.append(env + " > " + cmbApp.getSelectedItem().toString() + " > " + SITE + " - " + DV1.getRowCount() + " found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());         
@@ -534,8 +537,10 @@ public class Orders extends javax.swing.JInternalFrame {
         long m1 = System.currentTimeMillis() + (60*60*24*1*1000);  // Now + 1 day to include future 'requested date'
         long m7 = System.currentTimeMillis() - (60*60*24*7*1000);  // Now - 7 days
         
-        Api_Call("GET",  BaseAPI + "/order/location/brand/" + BrandID + "?start=" + m7 + "&end=" + m1, Auth, "");
+        Api_Call("GET",  BaseAPI + "/order/location/brand/" + BrandID + "?start=" + m7 + "&end=" + m1 + "&order_type=all&extended=true", Auth, "");
+        
         Load_Orders("BRAND");
+        
         lblOrders.setText(env + ": Site '" + SITE + "', Brand '" + BRAND + "'   >>>  Last 7 days Orders: " + DV1.getRowCount() + " found");
         txtLog.append(env + " > " + cmbApp.getSelectedItem().toString() + " > " + SITE + " > " + BRAND + " - " + DV1.getRowCount() + " found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -735,7 +740,7 @@ public class Orders extends javax.swing.JInternalFrame {
             DV_Sites.getColumnModel().getColumn(0).setPreferredWidth(250);
             DV_Sites.getColumnModel().getColumn(1).setPreferredWidth(70);
             DV_Sites.getColumnModel().getColumn(2).setPreferredWidth(50);
-            DV_Sites.getColumnModel().getColumn(3).setPreferredWidth(400);
+            DV_Sites.getColumnModel().getColumn(3).setPreferredWidth(500);
             
             sorter.setSortable(0, true); 
             sorter.sort();            
@@ -837,7 +842,9 @@ public class Orders extends javax.swing.JInternalFrame {
             DV_Brands.getColumnModel().getColumn(0).setPreferredWidth(140);
             DV_Brands.getColumnModel().getColumn(1).setPreferredWidth(140);
             DV_Brands.getColumnModel().getColumn(2).setPreferredWidth(80);
-            
+            DV_Brands.getColumnModel().getColumn(3).setPreferredWidth(400);            
+            DV_Brands.getColumnModel().getColumn(4).setPreferredWidth(400);
+
             sorter.setSortable(0, true); 
             sorter.sort();            
                
@@ -901,7 +908,10 @@ public class Orders extends javax.swing.JInternalFrame {
         Auth = "Bearer " + Mobile_User_TKN;
         SITE = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 0));
         SiteID = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 3));
-        Api_Call("GET",  BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + "&end=" + m1 + "&order_type=all", Auth, "");
+        
+        Api_Call("GET",  BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + "&end=" + m1 + "&order_type=all&extended=true", Auth, "");
+        //Api_Call("GET",  BaseAPI + "/order/customer/" + Mobile_User_ID + "?pickup_start=" + m7 + "&pickup_end=" + m1 + "&order_type=all&extended=true", Auth, "");
+        
         Load_Orders("USER");
         lblOrders.setText(env + ": Mobile User " + txtMobile_ID.getText() + "  >>>  Last 7 days Orders: " + DV1.getRowCount() + " found");
         txtLog.append(env + " > " + cmbApp.getSelectedItem().toString() + " > " + txtMobile_ID.getText() + " - " + DV1.getRowCount() + " found" + "\r\n");
@@ -917,7 +927,7 @@ public class Orders extends javax.swing.JInternalFrame {
         String _Promo = "None";
         String _Name = "?";
 
-        String[] SitesColumnsName = {"Env","App", "Site", "Destination", "Req_Date", "PickupName", "Promo", "Service", "JCartID", "OrderID", "Modified_Date"}; 
+        String[] SitesColumnsName = {"Env", "App", "Site", "Destination", "Req_Date", "PickupName", "Promo", "Service", "JCartID", "OrderID", "Modified_Date"}; 
         DefaultTableModel dm = new DefaultTableModel();
         dm.setColumnIdentifiers(SitesColumnsName);
         DV1.setModel(dm);
