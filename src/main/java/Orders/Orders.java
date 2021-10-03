@@ -927,7 +927,7 @@ public class Orders extends javax.swing.JInternalFrame {
         String _Promo = "None";
         String _Name = "?";
 
-        String[] SitesColumnsName = {"Env", "App", "Site", "Destination", "Req_Date", "PickupName", "Promo", "Service", "JCartID", "OrderID", "Modified_Date"}; 
+        String[] SitesColumnsName = {"Env", "App", "Site", "Destination", "Req_Date", "PickupName", "Promo", "Service", "SCartID", "OrderID", "Modified_Date"}; 
         DefaultTableModel dm = new DefaultTableModel();
         dm.setColumnIdentifiers(SitesColumnsName);
         DV1.setModel(dm);
