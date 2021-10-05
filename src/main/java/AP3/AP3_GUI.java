@@ -1892,7 +1892,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             return;
         }
             
-        String[] lines = C.split(System.getProperty("line.separator"));  
+        //String[] lines = C.split(System.getProperty("line.separator"));  
+        String[] lines = C.split("\n");  
         String value;
         try{             
             for (String l : lines) {

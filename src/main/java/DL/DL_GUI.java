@@ -1351,7 +1351,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
-        String[] lines = C.split(System.getProperty("line.separator"));  
+        //String[] lines = C.split(System.getProperty("line.separator"));  
+        String[] lines = C.split("\n");  
         String value;            
         try{       
             for (String l : lines) {

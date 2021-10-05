@@ -1,5 +1,6 @@
 package A;
 
+import com.amazonaws.monitoring.ApiCallMonitoringEvent;
 import java.awt.Cursor;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -73,11 +74,10 @@ public class Env extends javax.swing.JInternalFrame {
             }
         ));
         DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV1.setCellSelectionEnabled(true);
         DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV1.setName("DV1"); // NOI18N
         DV1.setRowHeight(18);
-        DV1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        DV1.setRowSelectionAllowed(true);
         DV1.getTableHeader().setReorderingAllowed(false);
         DV1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -228,7 +228,7 @@ public class Env extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jScrollPane2)
@@ -619,7 +619,103 @@ public class Env extends javax.swing.JInternalFrame {
         Func.SHOW_FILE(Statistics, ".txt");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    
+//
+//    protected void Api_Call(String EndPoint, ) {
+//
+//        String Result = "?";
+//        int status = 0;
+//        String R_Time = "";
+//        String ErrorMsg = "";
+//        json = null;
+//        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs
+//        RequestSpecification request;
+//        request = RestAssured.given();
+//        if (!AUTH.isEmpty()) {
+//            request.header("Authorization", AUTH);
+//        }
+//        request.header("Content-Type", "application/json");
+//        request.header("Accept", "application/json");
+//        try {
+//            int i = 1;
+////for (i = 1; i < 4; i++){   // ========== Loop +2 times if 1st FAIL
+//            if (sw1.isRunning()) {
+//                sw1.reset();
+//            }
+//            _t++;
+//            sw1.start();
+//            Response response = null;
+//            switch (Method) {
+//                case "GET":
+//                    if (BODY.equals("Bolter")) {
+//                        request.header("From", "Bolter/1.0");
+//                    }
+//                    response = request.get(EndPoint);
+//                    break;
+//                case "POST":
+//                    request.body(BODY);
+//                    response = request.post(EndPoint);
+//                    break;
+//                case "PATCH":
+//                    request.body(BODY);
+//                    response = request.patch(EndPoint);
+//                    break;
+//                case "DELETE":
+//                    request.body(BODY);
+//                    response = request.delete(EndPoint);
+//                    break;
+//                case "PUT":
+//                    request.body(BODY);
+//                    response = request.put(EndPoint);
+//                    break;
+//                case "OPTIONS":
+//                    response = request.options(EndPoint);
+//                    break;
+//                default:
+//                    break;
+//            }
+//            Result = response.getStatusLine();
+//            status = response.getStatusCode();
+//
+//            if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
+//                json = new JSONObject(response.asString());
+//                if (json.has("error")) {
+//                    ErrorMsg = "Error: " + json.getString("error") + ". ";
+//                }
+//            }
+//            R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
+//            if (status == ExpStatus) {
+//                _p++;
+//                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "PASS" + "\t" + "Attempt #" + i
+//                        + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+//                Log_Html_Result("PASS", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")"
+//                        + "  Attempt #" + i, ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
+////break; // =================  Do not attempt againg if passed                    
+//            } else {
+//                _f++;
+//                FAIL = true;
+//                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "FAIL" + "\t" + "Attempt #" + i
+//                        + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+//                Log_Html_Result("FAIL", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")"
+//                        + "  Attempt #" + i, ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
+//            }
+////} // =======   3 times Loop if not good
+//
+//        } catch (Exception ex) {
+//            R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
+//            _f++;
+//            FAIL = true;
+//            err = ex.getMessage().trim();
+//            if (err.contains("\n")) {
+//                (err = err.substring(0, err.indexOf("\n"))).trim();
+//            }
+//            EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err
+//                    + "\t" + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+//            Log_Html_Result("FAIL", "Error: " + err + " (" + R_Time + ")", ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
+//        }
+//        r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
+//        sw1.reset();
+//    }
+//    
     
     // <editor-fold defaultstate="collapsed" desc="Private Variables">    
     private String SQL = "";
