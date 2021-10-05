@@ -1711,7 +1711,8 @@ if(true){
             return;
         }
             
-        String[] lines = C.split(System.getProperty("line.separator"));  
+        //String[] lines = C.split(System.getProperty("line.separator"));  
+        String[] lines = C.split("\n");  
         String value;
         try{             
             for (String l : lines) {

@@ -9,7 +9,6 @@ class file extends API_GUI{
         SiteID = a.SiteID;
         BrandID = a.BrandID;
         UnitID = a.UnitID;
-        // UnitNum ???????
         ParentTest = a.ParentTest;
     }
     protected void run() {  
