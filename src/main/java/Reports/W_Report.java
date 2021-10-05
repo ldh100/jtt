@@ -29,9 +29,7 @@ import javax.swing.table.TableColumn;
 
 
 public class W_Report extends javax.swing.JInternalFrame {
-    /**
-     * Creates new form W_Report
-     */
+
     public W_Report() {
         initComponents();
     }

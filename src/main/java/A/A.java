@@ -27,6 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,6 +40,47 @@ import org.openqa.selenium.support.ui.FluentWait;
 public class A extends javax.swing.JFrame {
     public A() {
         initComponents();
+    }
+    public static void main(String args[]) {
+        try {
+            for (UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+                if ("Metal".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            //Logger.getLogger(A.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
+        }
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> {
+            final A AF = new A();
+            AF.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    //
+                }
+            });
+//            try{
+//                //Image i = (new ImageIcon(ClassLoader.getResource("/images/jTTi32.png"))).getImage(); // .png
+//                //ImageIcon ii = new ImageIcon("jTTi32.png", "JTT");               
+//
+//                ImageIcon ii = new ImageIcon(new URL("images/jTTi32.png"));
+//                Image i = ii.getImage();// .png
+//                F.setIconImage(i);
+//            }catch(MalformedURLException ex){
+//                java.util.logging.// Logger.getLogger(AP3_GUI.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
+//            }
+            Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());                
+            AF.setSize(screenSize.width - 150, screenSize.height - 150);    
+            AF.setLocationRelativeTo(null);
+            AF.setVisible(true);
+        });
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -499,6 +541,7 @@ public class A extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">      
     private void Menu_FWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_FWMouseClicked
         if(Menu_FW.isVisible()){
             Menu_FW.setVisible(false);
@@ -893,47 +936,6 @@ public class A extends javax.swing.JFrame {
     }//GEN-LAST:event_Menu_EnvMouseClicked
     //</editor-fold>
 
-    public static void main(String args[]) {
-        try {
-            for (UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-                if ("Metal".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            //Logger.getLogger(A.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
-        }
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            final A AF = new A();
-            AF.addWindowListener(new java.awt.event.WindowAdapter() {
-                @Override
-                public void windowClosing(java.awt.event.WindowEvent e) {
-                    //
-                }
-            });
-//            try{
-//                //Image i = (new ImageIcon(ClassLoader.getResource("/images/jTTi32.png"))).getImage(); // .png
-//                //ImageIcon ii = new ImageIcon("jTTi32.png", "JTT");               
-//
-//                ImageIcon ii = new ImageIcon(new URL("images/jTTi32.png"));
-//                Image i = ii.getImage();// .png
-//                F.setIconImage(i);
-//            }catch(MalformedURLException ex){
-//                java.util.logging.// Logger.getLogger(AP3_GUI.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
-//            }
-            Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());                
-            AF.setSize(screenSize.width - 150, screenSize.height - 150);    
-            AF.setLocationRelativeTo(null);
-            AF.setVisible(true);
-        });
-    }
     // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">      
  
     private void Open_Env() throws PropertyVetoException {       
@@ -1499,15 +1501,21 @@ public class A extends javax.swing.JFrame {
             conn.close();
             //Logger.getLogger(A.class.getName()).log(Level.INFO, "Keys Loaded");
         } catch (SQLException ex) {
-            Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Load Keys > SQL ERROR: " + ex.getMessage(), ex);
+            //Logger.getLogger(A.class.getName()).log(Level.SEVERE, "=== Load Keys > SQL ERROR: " + ex.getMessage(), ex);
+            JOptionPane.showMessageDialog(this, 
+            ex.getMessage(),
+            "QA DB Connection Error",
+            JOptionPane.OK_OPTION
+            ); 
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     
-//</editor-fold>
+    //</editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Project Variables Declarations">
-    public static final String QA_BD_CON_STRING = "jdbc:sqlserver://dev-digitalhospitality-sql.database.windows.net:1433;database=cdlqadb;user=xttadmin;password=Sp515s10#a;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+    //public static final String QA_BD_CON_STRING = "jdbc:sqlserver://dev-digitalhospitality-sql.database.windows.net:1433;database=cdlqadb;user=xttadmin;password=Sp515s10#a;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+    public static final String QA_BD_CON_STRING = "jdbc:sqlserver://dev-digitalhospitality-sql-cdlqadb.cmrngnuvohvf.us-east-1.rds.amazonaws.com:1433;database=cdlqadb;user=admin;password=KcKqdYF5cEDYhJxc;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
     public static String SQL = "";
     
     public static int F_COUNT = 0;
