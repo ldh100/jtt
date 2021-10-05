@@ -53,8 +53,8 @@ class AP3_reschedule_menu extends AP3_GUI{
             if (FAIL) {return;}
         List_L0("List of Scheduled Menus", "xpath", "//tbody/tr", ParentTest, "no_jira");
             if (FAIL) {return;}
-
         int expectedScheduledMenus = L0.size(); 
+        int expected_num_of_events = expectedScheduledMenus*8;
         for (int i = 0; i < 50; i++) {  //this will run the rescheduling of a menu 50 times
             String startTime = startTimes[new Random().nextInt(startTimes.length)];
             String endTime = endTimes[new Random().nextInt(endTimes.length)];
@@ -122,12 +122,12 @@ class AP3_reschedule_menu extends AP3_GUI{
                 JSONObject json = new JSONObject(API_Response_Body);
                 JSONArray events = new JSONArray();
                 events = json.getJSONArray("events");
-                if (events.length() == 16) {
+                if (events.length() == expected_num_of_events) {
                     _t++;
-                    _p++; EX += _t + "\t" + "Expected Number of events" + "\t" + "-" + "\t" + "16" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    _p++; EX += _t + "\t" + "Expected Number of events" + "\t" + "-" + "\t" + expected_num_of_events + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 } else {
                     _t++;
-                    _f++; EX += _t + "\t" + "Expected Number of events" + "\t" + "-" + "\t" + "16" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    _f++; EX += _t + "\t" + "Expected Number of events" + "\t" + "-" + "\t" + expected_num_of_events + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 }
             } else {
                 List_L0("List of Scheduled Menus", "xpath", "//tbody/tr", ParentTest, "no_jira");
@@ -182,12 +182,12 @@ class AP3_reschedule_menu extends AP3_GUI{
             JSONObject json = new JSONObject(API_Response_Body);
             JSONArray events = new JSONArray();
             events = json.getJSONArray("events");
-            if (events.length() == 16) {
+            if (events.length() == expected_num_of_events) {
                 _t++;
-                _p++; EX += _t + "\t" + "Expected Number of events" + "\t" + "-" + "\t" + "16" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _p++; EX += _t + "\t" + "Expected Number of events" + "\t" + "-" + "\t" + expected_num_of_events + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             } else {
                 _t++;
-                _f++; EX += _t + "\t" + "Expected Number of events" + "\t" + "-" + "\t" + "16" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _f++; EX += _t + "\t" + "Expected Number of events" + "\t" + "-" + "\t" + expected_num_of_events + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }                
         }           //------- AUT-850
     } catch (Exception ex){}   // =============================================  

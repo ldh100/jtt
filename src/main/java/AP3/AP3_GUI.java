@@ -1892,7 +1892,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             return;
         }
             
-        String[] lines = C.split(System.getProperty("line.separator"));  
+        //String[] lines = C.split(System.getProperty("line.separator"));  
+        String[] lines = C.split("\n");  
         String value;
         try{             
             for (String l : lines) {
@@ -1942,7 +1943,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_announcements: "))  _announcements.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_promo: "))  _promo.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_reschedule_menu: "))  _reschedule_menu.setSelected(Boolean.parseBoolean(value)); 
-                if(l.contains("_sales_analytics : "))  _sales_analytics .setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_sales_analytics: "))  _sales_analytics .setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_password: "))  _password.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_roles: "))  _roles.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_all_data: "))  _all_data.setSelected(Boolean.parseBoolean(value));
@@ -2327,7 +2328,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         } else{
             return true;
         }
-    }
+    }  
     // </editor-fold> 
 
     //<editor-fold defaultstate="collapsed" desc="Extend HTML Report Methods">
@@ -2779,6 +2780,26 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setName("Announcements: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date()); 
         }
+        if(_Site){
+            SCOPE += ", Site";
+            ParentTest = HtmlReport.createTest("Site"); 
+            AP3_site BR = new AP3.AP3_site(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+            ParentTest.getModel().setName("Site: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date()); 
+        }        
+        if(_Site_new){
+            SCOPE += ", New Site";
+            ParentTest = HtmlReport.createTest("New Site"); 
+            AP3_site_new BR = new AP3.AP3_site_new(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time; 
+            SECTOR = BR.SECTOR;
+            ParentTest.getModel().setName("New Site " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date()); 
+        }         
+        
         if(_Brand){
             SCOPE += ", Brand";
             ParentTest = HtmlReport.createTest("Brand"); 
@@ -2968,24 +2989,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setName("Sales Report Hidden: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date()); 
         }        
-        if(_Site){
-            SCOPE += ", Site";
-            ParentTest = HtmlReport.createTest("Site"); 
-            AP3_site BR = new AP3.AP3_site(AP3_GUI.this);
-            BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
-            ParentTest.getModel().setName("Site: " + BR._t + ", Failed: " + BR._f);
-            ParentTest.getModel().setEndTime(new Date()); 
-        }        
-        if(_Site_new){
-            SCOPE += ", New Site";
-            ParentTest = HtmlReport.createTest("New Site"); 
-            AP3_site_new BR = new AP3.AP3_site_new(AP3_GUI.this);
-            BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
-            ParentTest.getModel().setName("New Site " + BR._t + ", Failed: " + BR._f);
-            ParentTest.getModel().setEndTime(new Date()); 
-        } 
+
         if(_Smart_analytics){
             SCOPE += ", Smart Analytics";
             ParentTest = HtmlReport.createTest("Smart Analytics"); 
@@ -3025,12 +3029,12 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         
         // ======== Last Scope
         if(_Logout){ 
-            SCOPE += ", Logout";
+            SCOPE += ", Feedback > Logout";
             ParentTest = HtmlReport.createTest("Logout"); 
-            AP3_logout BR = new AP3.AP3_logout(AP3_GUI.this);
+            AP3_feedback_logout BR = new AP3.AP3_feedback_logout(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
-            ParentTest.getModel().setName("Logout: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setName("Feedback > Logout: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date()); 
         }         
     }
@@ -3148,7 +3152,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
 //                                IgnoreZoomLevel = true,
 //                                IntroduceInstabilityByIgnoringProtectedModeSettings = true,
 //                                RequireWindowFocus = false,
-//                                ElementScrollBehavior = InternetExplorerElementScrollBehavior.Top, // with botton click doesn't work
+//                                ElementScrollBehavior = InternetExplorerElementScrollBehavior.Top, // with button click doesn't work
 //                                EnsureCleanSession = true,
 //                                //AcceptInsecureCertificates = true,
 //                                EnablePersistentHover = true,
@@ -5864,13 +5868,13 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 EX += _t + "\t == " + NAME + "\t" + URL + "\t" + " --- " + "\t" + "FAIL" + "\t" + err +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
                 F += "Step: " + _t + " > " + err + "\r\n";
-                Log_Html_Result("FAIL", "Error: " + err + "<br />URL: " +  URL, true, ParentTest.createNode(NAME), API_SRART);                
+                Log_Html_Result("FAIL", "API Response: " + err + "<br />URL: " +  URL, true, ParentTest.createNode(NAME), API_SRART);                
             } else {
                 _p++; err = ex.getMessage().trim();
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
                 EX += _t + "\t == " + NAME + "\t" + URL + "\t" + err + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n"; 
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />URL: " + URL, false, ParentTest.createNode(NAME), API_SRART);
+                Log_Html_Result("PASS", "API Response: " + err + "<br />URL: " +  URL, false, ParentTest.createNode(NAME), API_SRART);
             }
         } 
         sw1.reset();

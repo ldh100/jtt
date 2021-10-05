@@ -109,6 +109,9 @@ class AP3_brand_closure extends AP3_GUI{
                 // ======= Default Date / Time - today    
                 Element_By_Path_Click("Click 'Add closure'", "xpath", "//button[contains(@class, 'ml-0 pl-0 v-btn v-btn--flat theme--light')]", ParentTest, "no_jira"); 
                     if (FAIL) { return; } 
+                Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]",  ParentTest, "no_jira");
+                    if (FAIL) { return;}   
+                Thread.sleep(500); 
                 List_L1("Closure rows Count", "xpath", "//div[contains(@class, 'layout flex xs12 nowrap align-center')]", ParentTest, "no_jira");             
                     if (FAIL) { return;} 
                     for (int j = 0; j < L1.size(); j++) {
@@ -181,7 +184,10 @@ class AP3_brand_closure extends AP3_GUI{
                
                 // ======= Future Date / Time - Next Month 1st day   
                 Element_By_Path_Click("Click 'Add closure'", "xpath", "//button[contains(@class, 'ml-0 pl-0 v-btn v-btn--flat theme--light')]", ParentTest, "no_jira"); 
-                    if (FAIL) { return; } 
+                if (FAIL) { return; } 
+                Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]",  ParentTest, "no_jira");
+                    if (FAIL) { return;}   
+                    Thread.sleep(500); 
                 Element_By_Path_Click("Open 'Close' Calendar", "xpath", "//i[contains(@class, 'mdi-calendar-blank')]", ParentTest, "no_jira"); 
                     if (FAIL) { return; }     
                 Element_By_Path_Click("Click '>' to Next Month", "xpath", "//i[contains(@class, 'v-icon mdi mdi-chevron-right theme--light')]", ParentTest, "no_jira"); 

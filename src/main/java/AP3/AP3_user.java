@@ -376,7 +376,7 @@ class AP3_user extends AP3_GUI{
                         break;
                 }
             }                 
-        Navigate_Back("Navigate Back","Add New User page","App User page", ParentTest, "no_jira" ); 
+        Navigate_Back("Navigate Back","Add New User page", "App User page", ParentTest, "no_jira" ); 
         Text_Found("Find 'Leave...' question", "Leave without saving?", ParentTest, "no_jira" ); 
         if ("Found".equals(t)) {       
             Find_Text("Find 'Leave...' note", "Changes will be lost if you do not save.", true, ParentTest, "no_jira"); 
@@ -396,7 +396,8 @@ class AP3_user extends AP3_GUI{
         Thread.sleep(500);  
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira" ); 
             if (FAIL) { return;}             
-        // </editor-fold>              
+        // </editor-fold> 
+        
         // <editor-fold defaultstate="collapsed" desc="Admin User Search > Delete">
         Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Search Users')]", ParentTest, "no_jira" ); 
             if (FAIL) { return;} 
@@ -444,19 +445,13 @@ class AP3_user extends AP3_GUI{
         Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", ParentTest, "no_jira" ); 
             if (FAIL) { return; }  
         Element_E1_Find("Find 'Delete' dialog", "xpath", "//div[@class='confirm-dialog v-card v-sheet v-sheet--tile theme--light']", ParentTest, "no_jira" );
-            if (FAIL) { return;}    // Find fragment              
+            if (FAIL) { return;}          
         Element_Child_Text("Find 'Delete..' Title", e1, "xpath", "//*[@class='H4-Secondary-Center']", ParentTest, "no_jira" ); 
-            if (FAIL) { return;}
         Element_Child_Text("Find 'Delete..' message", e1, "xpath", "//*[@class='Body-1-Black-High-Emphasis-Left']", ParentTest, "no_jira" ); 
-            if (FAIL) { return;} 
-
         Element_Child_Text("Find dialog 'Edit' button", e1, "xpath", ".//*[text()='CANCEL']", ParentTest, "no_jira" );
-            if (FAIL) { return;} 
-        Element_Child_Text("Find dialog 'Cancel' button", e1, "xpath", ".//*[text()='DELETE']", ParentTest, "no_jira" );
-            if (FAIL) { return;}    
+        Element_Child_Text("Find dialog 'Cancel' button", e1, "xpath", ".//*[text()='DELETE']", ParentTest, "no_jira" ); 
         Element_Child_Click("Click dialog 'Delete'", e1, "xpath", ".//*[text()='DELETE']", ParentTest, "no_jira" );
             if (FAIL) { return;}    
-        Thread.sleep(500);
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira" );
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for page load...", "css", "[aria-label='Search Users']", ParentTest, "no_jira" ); 
@@ -472,9 +467,9 @@ class AP3_user extends AP3_GUI{
             if (FAIL) { return;}            
         Element_By_Path_Click("Add New Click 'User Name'", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", ParentTest, "no_jira" );
             if (FAIL) { return;}
-        Thread.sleep(500); 
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira" ); 
             if (FAIL) { return;}
+        Thread.sleep(500); 
         Element_By_Path_Attribute("Role selection Prompt", "css", "[aria-label='Role']", "placeholder", ParentTest, "no_jira" );
              if (FAIL) { return;}        
         Page_URL("New User page URL", ParentTest, "no_jira");
@@ -487,23 +482,21 @@ class AP3_user extends AP3_GUI{
             T_Index = -1;
             for (int i = 0; i < L1.size(); i++) {
                 Element_Text("Role Name (index " + i + ")", L1.get(i),  ParentTest, "no_jira" );             
-                if (FAIL) { return;}
-                if(t.contains("Site Manager")){ T_Index = i; }
+                if(t.contains("Site Manager")){ 
+                    T_Index = i; 
+                }
             }
         Element_Click("Select 'Site Manager'", L1.get(T_Index), ParentTest, "no_jira" );
             if (FAIL) { return;}  // ^^^ select Role to show buttons and Definitioms sectoions update 
         Thread.sleep(500);    
         Find_Text("Find 'Cancel' text", "Cancel", true, ParentTest, "no_jira"); 
-            if (FAIL) { return;}
         Find_Text("Find 'Create User' text", "Create User", true, ParentTest, "no_jira"); 
-            if (FAIL) { return;}  
         Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]", ParentTest, "no_jira");             
             if (FAIL) { return;}     
         List_L1("Error Message Count", "xpath", ".//div[@class='v-messages__message']", ParentTest, "no_jira" );                                     
             if (FAIL) { return;}
             for (int i = 0; i < L1.size(); i++) {
                 Element_Text("Error Message (index " + i + ")", L1.get(i),  ParentTest, "no_jira" );             
-                    if (FAIL) { return;}
             }     
         List_L3("v-cards Count", "xpath", "//div[@class='v-card__title v-card__title--primary']/parent::div", ParentTest, "no_jira" );             
             if (FAIL) { return;}
@@ -533,69 +526,46 @@ class AP3_user extends AP3_GUI{
                         Element_By_Path_Click("Check 'Allow refunds'", "css", "[aria-label='Allow Refunds']", ParentTest, "no_jira" ); 
                             if (FAIL) { return;}             
                         Find_Text("Find 'Allow Menu...' text", "Menu Access", true, ParentTest, "no_jira"); 
-                            if (FAIL) { return;} 
                         Element_By_Path_Click("Check 'Menu Access'", "css", "[aria-label='Menu Access']", ParentTest, "no_jira" ); 
                             if (FAIL) { return;}                                
                         Find_Text("Find 'Allow Renaming...' text", "Allow Renaming in Local Menus", true, ParentTest, "no_jira"); 
-                            if (FAIL) { return;} 
                         Element_By_Path_Click("Check 'Allow Renaming...'", "css", "[aria-label='Allow Renaming in Local Menus']", ParentTest, "no_jira" ); 
                             if (FAIL) { return;}  
                         Find_Text("Find 'Allow Local Descriptions...' text", "Allow Local Description Edits", true, ParentTest, "no_jira"); 
-                            if (FAIL) { return;} 
                         Element_By_Path_Click("Check 'Allow Local Descriptions...'", "css", "[aria-label='Allow Local Description Edits']", ParentTest, "no_jira" ); 
                             if (FAIL) { return;} 
                         Find_Text("Find 'Allow Local Menu Calories...' text", "Allow Local Menu Calories Edits", true, ParentTest, "no_jira"); 
-                            if (FAIL) { return;} 
                         Element_By_Path_Click("Check 'Allow Local Menu Calories...'", "css", "[aria-label='Allow Local Menu Calories Edits']", ParentTest, "no_jira" ); 
-                            if (FAIL) { return;} 
-                            
+                            if (FAIL) { return;}                      
                         Find_Text("Find 'Station visibility status' text", "Station visibility status", true, ParentTest, "no_jira"); 
-                            if (FAIL) { return;} 
                         Find_Text("Find Status 'Read' text", "Read", true, ParentTest, "no_jira"); 
-                            if (FAIL) { return;} 
                         Find_Text("Find Status 'Write' text", "Write", true, ParentTest, "no_jira"); 
-                            if (FAIL) { return;} 
                         Element_By_Path_Click("Check Access 'Write'", "css", "[aria-label='Write']", ParentTest, "no_jira" ); 
-                            if (FAIL) { return;} 
-                            
+                            if (FAIL) { return;}              
                         break;
                     case "Smart Analytics":  
-                        Find_Text("Find 'Has access to...' text", "Has access to Feature", true, ParentTest, "no_jira"); 
-                            if (FAIL) { return;}             
+                        Find_Text("Find 'Has access to...' text", "Has access to Feature", true, ParentTest, "no_jira");          
                         Element_By_Path_Click("Check 'Has access to...'", "css", "[aria-label='Has access to Feature']", ParentTest, "no_jira" ); 
                             if (FAIL) { return;}  
                         break;
                     case "Site Permissions Please select at least 1 brand":  
                         Find_Text("Find 'Choose Sites' text", "Choose Sites", true, ParentTest, "no_jira"); 
-                            if (FAIL) { return;}  
                         Element_By_Path_Click("Click 'Choose Sites'", "xpath", "//div[@class='Body-1-Primary-Left Permissions-Link']", ParentTest, "no_jira" ); 
                             if (FAIL) { return;}  
                         Element_E1_Find("Find 'Choose Sites' dialog", "xpath", "//div[@class='v-dialog v-dialog--active']", ParentTest, "no_jira" );
                             if (!FAIL) { 
                                 Element_Child_Text("Find 'Dialog..' Title", e1, "xpath", "//div[@class='H4-Secondary-Center']", ParentTest, "no_jira" ); 
-                                if (FAIL) { return;}
                                 Element_Child_Text("Find 'Dialog..' prompt", e1, "xpath", "//div[@class='Body-2-Selected-On-Surface-Medium-Emphasis-Left']", ParentTest, "no_jira" ); 
-                                    if (FAIL) { return;} 
                                 Element_By_Path_Text("Search Prompt", "xpath", "//*[contains(text(), 'Search Sites')]", ParentTest, "no_jira" ); 
-                                    if (FAIL) { return;}                                    
-
-                                Find_Text("Find 'All Sites' text", "All Sites", true, ParentTest, "no_jira"); 
-                                    if (FAIL) { return;}                              
+                                Find_Text("Find 'All Sites' text", "All Sites", true, ParentTest, "no_jira");                            
                                 Find_Text("Find 'Sites Selected (num)' text", "Sites Selected", true, ParentTest, "no_jira"); 
-                                    if (FAIL) { return;} 
-                                Find_Text("Find 'Select All' text", "Select All", true, ParentTest, "no_jira"); 
-                                    if (FAIL) { return;}                              
+                                Find_Text("Find 'Select All' text", "Select All", true, ParentTest, "no_jira");                              
                                 Find_Text("Find 'Remove All' text", "Remove All", true, ParentTest, "no_jira"); 
-                                    if (FAIL) { return;}
-                                Element_Child_Text("Find 'Continue' text", e1, "xpath", ".//*[text()='Continue']", ParentTest, "no_jira" ); 
-                                    if (FAIL) { return;}                              
+                                Element_Child_Text("Find 'Continue' text", e1, "xpath", ".//*[text()='Continue']", ParentTest, "no_jira" );                           
                                 Element_Child_Text("Find 'Cancel' text", e1, "xpath", ".//*[text()='Cancel']", ParentTest, "no_jira" ); 
-                                    if (FAIL) { return;}   
-
                                 Element_By_Path_Click("Click 'Select All'", "xpath", ".//*[text()='Select All']", ParentTest, "no_jira" ); 
                                     if (FAIL) { return;}  
                                 Find_Text("Find 'Sites Selected (num)' text", "Sites Selected", true, ParentTest, "no_jira"); 
-                                    if (FAIL) { return;} 
                                 if(!_All_data){
                                     Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, ParentTest, "no_jira" );
                                         if (FAIL) { return;}
@@ -623,7 +593,7 @@ class AP3_user extends AP3_GUI{
                                         Element_Text("Site " + j + " brands", L1.get(j), ParentTest, "no_jira");             
                                         if (t.contains("0/0")){
                                             Element_Child_Click("Click 'Remove' Site with 0 Brands", L1.get(j),"xpath", ".//button[@class='v-btn v-btn--flat theme--light']", ParentTest, "no_jira" ); 
-                                                //if (FAIL) { return;} 
+                                                if (FAIL) { return;} 
                                             Element_By_Path_Click("Click confirm 'Remove'", "xpath", ".//div[text()='REMOVE']", ParentTest, "no_jira" ); 
                                                 if (FAIL) { return;} 
                                             Count_Down--;
@@ -633,10 +603,8 @@ class AP3_user extends AP3_GUI{
                             }
                         break;
                     case "Menu Scheduler":  
-                        Find_Text("Find 'Turn Menus On/Off' text", "Turn Menus On/Off", true, ParentTest, "no_jira"); 
-                            if (FAIL) { return;}             
+                        Find_Text("Find 'Turn Menus On/Off' text", "Turn Menus On/Off", true, ParentTest, "no_jira");           
                         Find_Text("Find 'Menu Scheduling' text", "Menu Scheduling", true, ParentTest, "no_jira"); 
-                            if (FAIL) { return;} 
                         Element_Child_List_L1("Checks 'Read' count", L3.get(i), "xpath", ".//input[@aria-label='Read']", ParentTest, "no_jira" );             
                             if (FAIL) { return;} 
                             for (int j = 0; j < L1.size(); j++) {
@@ -656,10 +624,11 @@ class AP3_user extends AP3_GUI{
             }                
         Element_By_Path_Click("Click 'Create User'", "xpath", "//*[contains(text(), 'Create User')]", ParentTest, "no_jira");             
             if (FAIL) { return;} 
-        Thread.sleep(500);    
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira" ); 
             if (FAIL) { return;}
-        // </editor-fold>              
+        Thread.sleep(500);   
+        // </editor-fold>    
+        
         // <editor-fold defaultstate="collapsed" desc="Site User Search > Delete">
         Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Search Users')]", ParentTest, "no_jira" ); 
             if (FAIL) { return;}         
@@ -676,44 +645,40 @@ class AP3_user extends AP3_GUI{
         Element_By_Path_Click("User Email Click", "xpath", "//div[text()='" + "s_" + New_ID + "@gmail.com" + "']", ParentTest, "no_jira" ); 
             if (FAIL) { return;} 
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", ParentTest, "no_jira" );
-            if (FAIL) { return;} 
-               
-            Find_Text("SM 'Allow refunds'", "Allow Refunds", true, ParentTest, "no_jira");  
-            Find_Text("SM 'Menu Access'", "Menu Access", true, ParentTest, "no_jira");   
-            Find_Text("SM 'Allow Menu Kick-Outs'", "Allow Menu Kick-Outs", false, ParentTest, "no_jira");                               
-            Find_Text("SM 'Allow Renaming...'", "Allow Renaming in Local Menus", true, ParentTest, "no_jira"); 
-            Find_Text("SM 'Allow Local Descriptions...'", "Allow Local Description Edits", true, ParentTest, "no_jira"); 
-            Find_Text("SM 'Overwrite ... PLU'", "Overwrite Local Menu PLU", false, ParentTest, "no_jira"); 
-            Find_Text("SM 'Allow Local Menu Calories Edits'", "Allow Local Menu Calories Edits", true, ParentTest, "no_jira"); 
-            Find_Text("SM 'Station visibility status'", "Station visibility status", true, ParentTest, "no_jira");     
+            if (FAIL) { return;}                
+        Find_Text("SM 'Allow refunds'", "Allow Refunds", true, ParentTest, "no_jira");  
+        Find_Text("SM 'Menu Access'", "Menu Access", true, ParentTest, "no_jira");   
+        Find_Text("SM 'Allow Menu Kick-Outs'", "Allow Menu Kick-Outs", false, ParentTest, "no_jira");                               
+        Find_Text("SM 'Allow Renaming...'", "Allow Renaming in Local Menus", true, ParentTest, "no_jira"); 
+        Find_Text("SM 'Allow Local Descriptions...'", "Allow Local Description Edits", true, ParentTest, "no_jira"); 
+        Find_Text("SM 'Overwrite ... PLU'", "Overwrite Local Menu PLU", false, ParentTest, "no_jira"); 
+        Find_Text("SM 'Allow Local Menu Calories Edits'", "Allow Local Menu Calories Edits", true, ParentTest, "no_jira"); 
+        Find_Text("SM 'Station visibility status'", "Station visibility status", true, ParentTest, "no_jira");     
 
-            Find_Text("SM 'Site Permissions'", "Site Permissions", true, ParentTest, "no_jira");  
-            Find_Text("SM Assigned Site", SITE, true, ParentTest, "no_jira"); 
-            Find_Text("SM 'Menu Scheduler'", "Menu Scheduler", true, ParentTest, "no_jira");  
-            Find_Text("SM 'Brand Config'", "Brand Config", false, ParentTest, "no_jira");  
-            Find_Text("SM 'Smart Analytics'", "Smart Analytics", false, ParentTest, "no_jira"); 
+        Find_Text("SM 'Site Permissions'", "Site Permissions", true, ParentTest, "no_jira");  
+        Find_Text("SM Assigned Site", SITE, true, ParentTest, "no_jira"); 
+        Find_Text("SM 'Menu Scheduler'", "Menu Scheduler", true, ParentTest, "no_jira");  
+        Find_Text("SM 'Brand Config'", "Brand Config", true, ParentTest, "no_jira");  
+        Find_Text("SM 'Smart Analytics'", "Smart Analytics", true, ParentTest, "no_jira"); 
         
         Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", ParentTest, "no_jira" ); 
-                if (FAIL) { return; }  
+            if (FAIL) { return; }  
         Element_E1_Find("Find 'Delete' dialog", "xpath", "//div[@class='confirm-dialog v-card v-sheet v-sheet--tile theme--light']", ParentTest, "no_jira" );
-            if (FAIL) { return;}    // Find fragment              
-            Element_Child_Text("Find 'Delete..' Title", e1, "xpath", "//*[@class='H4-Secondary-Center']", ParentTest, "no_jira" ); 
-                if (FAIL) { return;}
-            Element_Child_Text("Find 'Delete..' message", e1, "xpath", "//*[@class='Body-1-Black-High-Emphasis-Left']", ParentTest, "no_jira" ); 
-                if (FAIL) { return;} 
+            if (FAIL) { return;}             
+        Element_Child_Text("Find 'Delete..' Title", e1, "xpath", "//*[@class='H4-Secondary-Center']", ParentTest, "no_jira" ); 
+        Element_Child_Text("Find 'Delete..' message", e1, "xpath", "//*[@class='Body-1-Black-High-Emphasis-Left']", ParentTest, "no_jira" ); 
 
-            Element_Child_Text("Find dialog 'Edit' button", e1, "xpath", ".//*[text()='CANCEL']", ParentTest, "no_jira" );
-                if (FAIL) { return;} 
-            Element_Child_Text("Find dialog 'Cancel' button", e1, "xpath", ".//*[text()='DELETE']", ParentTest, "no_jira" );
-                if (FAIL) { return;}    
-            Element_Child_Click("Click dialog 'Delete'", e1, "xpath", ".//*[text()='DELETE']", ParentTest, "no_jira" );
-                if (FAIL) { return;}                 
-            Thread.sleep(500);
-            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira" );
-                if (FAIL) { return;}
+        Element_Child_Text("Find dialog 'Edit' button", e1, "xpath", ".//*[text()='CANCEL']", ParentTest, "no_jira" );
+        Element_Child_Text("Find dialog 'Cancel' button", e1, "xpath", ".//*[text()='DELETE']", ParentTest, "no_jira" );  
+        Element_Child_Click("Click dialog 'Delete'", e1, "xpath", ".//*[text()='DELETE']", ParentTest, "no_jira" );
+            if (FAIL) { return;}                 
+
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira" );
+            if (FAIL) { return;}
+        Thread.sleep(500);
         Wait_For_Element_By_Path_Presence("Wait for page load...", "css", "[aria-label='Search Users']", ParentTest, "no_jira" ); 
-            if (FAIL) { return;}            
- 
+        if (FAIL) { return;}            
+
         Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "s_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
             if (FAIL) { return;}
         Find_Text("Deleted Site Manager 'Not Found' notification", "No matching records found", true, ParentTest, "no_jira"); 
@@ -956,7 +921,7 @@ class AP3_user extends AP3_GUI{
         Find_Text("DM Assigned Site", SITE, true, ParentTest, "no_jira");         
         Find_Text("DM 'Menu Scheduler'", "Menu Scheduler", true, ParentTest, "no_jira");  
         Find_Text("DM 'Brand Config'", "Brand Config", true, ParentTest, "no_jira");  
-        Find_Text("DM 'Smart Analytics'", "Smart Analytics", false, ParentTest, "no_jira"); 
+        Find_Text("DM 'Smart Analytics'", "Smart Analytics", true, ParentTest, "no_jira"); 
         
         Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", ParentTest, "no_jira" ); 
                 if (FAIL) { return; }    
@@ -1022,7 +987,6 @@ class AP3_user extends AP3_GUI{
             if (FAIL) { return;}
             for (int i = 0; i < L1.size(); i++) {
                 Element_Text("Error Message (index " + i + ")", L1.get(i),  ParentTest, "no_jira" );             
-                if (FAIL) { return;}
             }     
         List_L3("v-cards Count", "xpath", "//div[@class='v-card__title v-card__title--primary']/parent::div", ParentTest, "no_jira" );             
             if (FAIL) { return;}
@@ -1066,12 +1030,12 @@ class AP3_user extends AP3_GUI{
                                 Element_Child_Text("Find 'Cancel' text", e1, "xpath", ".//*[text()='Cancel']", ParentTest, "no_jira" ); 
                                     if (FAIL) { return;}   
 
-                                    Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, ParentTest, "no_jira" );
-                                        if (FAIL) { return;}
-                                    Element_Child_List_L1("Found Sites count", e1, "xpath", ".//i[@class='v-icon mdi mdi-radiobox-blank theme--light']", ParentTest, "no_jira" );             
-                                        if (FAIL) { return;}
-                                    Element_Click("Check 1st Site", L1.get(0), ParentTest, "no_jira"); 
-                                        if (FAIL) { return;}                                          
+                                Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, ParentTest, "no_jira" );
+                                    if (FAIL) { return;}
+                                Element_Child_List_L1("Found Sites count", e1, "xpath", ".//i[@class='v-icon mdi mdi-radiobox-blank theme--light']", ParentTest, "no_jira" );             
+                                    if (FAIL) { return;}
+                                Element_Click("Check 1st Site", L1.get(0), ParentTest, "no_jira"); 
+                                    if (FAIL) { return;}                                          
                                         
                                 Element_By_Path_Click("Click 'Continue'", "xpath", ".//*[text()='Continue']", ParentTest, "no_jira" ); 
                                     if (FAIL) { return;} 
@@ -1084,7 +1048,7 @@ class AP3_user extends AP3_GUI{
                                         Element_Text("Site " + j + " brands", L1.get(j), ParentTest, "no_jira");             
                                         if (t.contains("0/0")){
                                             Element_Child_Click("Click 'Remove' Site with 0 Brands", L1.get(j),"xpath", ".//button[@class='v-btn v-btn--flat theme--light']", ParentTest, "no_jira" ); 
-                                                //if (FAIL) { return;} 
+                                                if (FAIL) { return;} 
                                             Element_By_Path_Click("Click confirm 'Remove'", "xpath", ".//div[text()='REMOVE']", ParentTest, "no_jira" ); 
                                                 if (FAIL) { return;} 
                                             Count_Down--;
@@ -1104,42 +1068,6 @@ class AP3_user extends AP3_GUI{
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira" ); 
             if (FAIL) { return;}
         // </editor-fold>   
-        
-// <editor-fold defaultstate="collapsed" desc="New Runner Set PW > Login">
-//        Open_Switch_to_2nd_Tab("Open Google in New Tab", "https://mail.google.com/mail/u/0/#inbox","no_jira");             
-//        EX += " - " + "\t" + " === User Permissions " + "\t" + " ===== " + "\t" + " == New Runner Set PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";           
-//        Thread.sleep(500);
-//        Wait_For_All_Elements_InVisibility("WaitForElement for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira" ); 
-//            if (FAIL) { return;}    
-//        Page_URL("Open Google URL", ParentTest, "no_jira" ); 
-//            if (FAIL) { return;}  
-
-////driver.find_element_by_id('identifierId').send_keys(email)
-////driver.find_element_by_xpath('//*[@id="identifierNext"]').click()
-////
-////driver.find_element_by_css_selector("input[type=password]").send_keys(password)
-////driver.find_element_by_id('passwordNext').click()
-
-//        Element_By_Path_Text_Enter("Enter 'Email or phone'", "id", "identifierId", "cdl.test.xtt@gmail.com", ParentTest, "no_jira" ); 
-//            if (FAIL) { return;}  
-//        Element_By_Path_Click("Click 'ID Next'", "id", "identifierNext", ParentTest, "no_jira" ); 
-//            if (FAIL) { return; } 
-//        Thread.sleep(500);
-//        Wait_For_All_Elements_InVisibility("WaitForElement for 'progress'...", "css", "[role='progressbar']", ParentTest, "no_jira" ); 
-//            if (FAIL) { return;}            
-//        Element_By_Path_Text_Enter("Enter 'Password'", "css", "[type='password']", "AnnaL0g0", ParentTest, "no_jira" ); 
-//            if (FAIL) { return;}   
-//        Element_By_Path_Click("Click 'PW Next'", "id", "passwordNext", ParentTest, "no_jira" ); 
-//            if (FAIL) { return; } 
-//        Thread.sleep(500);
-//        Wait_For_All_Elements_InVisibility("WaitForElement for 'progress'...", "css", "[role='progressbar']", ParentTest, "no_jira" ); 
-//            if (FAIL) { return;}   
-//        //"cdl.test.xtt+" + "R_" + New_ID + "@gmail.com" >>> AnnaL0g0 //identifierId
-//        //Runner Login rejected  
-
-//        EX += " - " + "\t" + " === User Permissions " + "\t" + " ===== " + "\t" + " == New Runner Set PW End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-//        Close_Current_Tab_switch_To_1st("Close 2nd tab","no_jira"); 
-// </editor-fold> 
              
         // <editor-fold defaultstate="collapsed" desc="Runner Search > Delete">
         Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Search Users')]", ParentTest, "no_jira" ); 
@@ -1147,12 +1075,10 @@ class AP3_user extends AP3_GUI{
         Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "cdl.test.xtt+" + "R_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
             if (FAIL) { return;}   
         Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", ParentTest, "no_jira" ); 
-            if (FAIL) { return;} 
         List_L0("Users Data Rows Count", "tagName", "tr", ParentTest, "no_jira" );             
             if (FAIL) { return;}
             for (int j = 0; j < L0.size(); j++) {
                 Element_Text("Users Data Row Text", L0.get(j), ParentTest, "no_jira" );             
-                if (FAIL) { return;}
             } 
         Element_By_Path_Click("User Email Click", "xpath", "//div[text()='" + "cdl.test.xtt+" + "r_" + New_ID + "@gmail.com" + "']", ParentTest, "no_jira" ); 
             if (FAIL) { return;} 
@@ -1173,7 +1099,7 @@ class AP3_user extends AP3_GUI{
         Find_Text("Runner Assigned Site", SITE, true, ParentTest, "no_jira"); 
         Find_Text("Runner 'Menu Scheduler'", "Menu Scheduler", false, ParentTest, "no_jira");  
         Find_Text("Runner 'Brand Config'", "Brand Config", false, ParentTest, "no_jira");  
-        Find_Text("Runner 'Smart Analytics'", "Smart Analytics", false, ParentTest, "no_jira");
+        Find_Text("Runner 'Smart Analytics'", "Smart Analytics", true, ParentTest, "no_jira");
         
         Element_By_Path_Click("Click 'Delete User'", "xpath", "//div[contains(@class, 'Remove-User-Btn mt-4')]", ParentTest, "no_jira" ); 
             if (FAIL) { return; }  

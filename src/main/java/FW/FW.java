@@ -1102,7 +1102,7 @@ public class FW extends javax.swing.JInternalFrame {
 //                                IgnoreZoomLevel = true,
 //                                IntroduceInstabilityByIgnoringProtectedModeSettings = true,
 //                                RequireWindowFocus = false,
-//                                ElementScrollBehavior = InternetExplorerElementScrollBehavior.Top, // with botton click doesn't work
+//                                ElementScrollBehavior = InternetExplorerElementScrollBehavior.Top, // with button click doesn't work
 //                                EnsureCleanSession = true,
 //                                //AcceptInsecureCertificates = true,
 //                                EnablePersistentHover = true,

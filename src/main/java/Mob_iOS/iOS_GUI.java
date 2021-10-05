@@ -2114,7 +2114,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
         }
         
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
-            A.A.SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + A.A.UserID + "' AND [platform] = 'MOB' AND [app] = 'Android' AND [env] = '" + env + "'";
+            A.A.SQL = "DELETE FROM [dbo].[a_config] WHERE [user_id] = '" + A.A.UserID + "' AND [platform] = 'MOB' AND [app] = 'iOS' AND [env] = '" + env + "'";
             Statement _del = conn.createStatement();
             _del.execute(A.A.SQL);
             PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[a_config]" +
@@ -2147,7 +2147,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String C = "";
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
-            A.A.SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + A.A.UserID + "' AND [platform] = 'MOB' AND [app] = 'Android' AND [env] = '" + env + "'" + "\r\n";
+            A.A.SQL = "SELECT [_conf] FROM [dbo].[a_config] WHERE [user_id] = '" + A.A.UserID + "' AND [platform] = 'MOB' AND [app] = 'iOS' AND [env] = '" + env + "'" + "\r\n";
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(A.A.SQL);
             rs.next();
@@ -2156,11 +2156,12 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             CONFIG = false;
             Current_Log_Update(true, "= LOAD_CONFIG > ERROR: " + ex.getMessage());
-            Current_Log_Update(true, "= MOB / Android, User: " + A.A.UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
+            Current_Log_Update(true, "= MOB / iSO, User: " + A.A.UserID + ", Env: " + env + " > No saved Configuration Found" + "\r\n");
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
-        String[] lines = C.split(System.getProperty("line.separator"));  
+        //String[] lines = C.split(System.getProperty("line.separator"));  
+        String[] lines = C.split("\n");  
         String value;
         try{             
             for (String l : lines) {
