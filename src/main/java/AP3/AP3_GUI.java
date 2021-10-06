@@ -6285,6 +6285,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 .filter(Files::isRegularFile)
                 .map(Path::toFile)
                 .collect(Collectors.toList());
+            Thread.sleep(500);
             for (File file : listOfFiles) {
                 if (file.getName().contains(F_NAME)) {
                     t = file.getName();
