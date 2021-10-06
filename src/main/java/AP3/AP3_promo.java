@@ -1050,8 +1050,8 @@ Thread.sleep(5000);
 //            if (FAIL) { return;}
 //            Element_By_Path_Text_Enter("Search for Cloned promo", "css","input[aria-label='Search Promotions']" , "Copy - Automation Test Promo", false, ParentTest, "no_jira");
 //            if (FAIL) { return;}
-            Find_Text("Find 'Automation Test promo'", "Copy - Automation Test Promo", true, ParentTest, "no_jira"); 
-                if (FAIL) { return;} 
+//            Find_Text("Find 'Automation Test promo'", "Copy - Automation Test Promo", true, ParentTest, "no_jira"); 
+//                if (FAIL) { return;} 
             Element_By_Path_Text("Promo Name", "xpath", "//tbody/tr[2]/td[1]/span[1]", ParentTest, "no_jira");
                 if (FAIL) { return;}  
             Element_By_Path_Text("Type of promo", "xpath", "//tbody/tr[2]/td[2]/span[1]", ParentTest, "no_jira");
@@ -1079,7 +1079,7 @@ Thread.sleep(5000);
             Wait_For_All_Elements_InVisibility("Wait for data...", "className", "v-datatable__progress", ParentTest, "no_jira"); 
                 if (FAIL) { return;}       
 Thread.sleep(5000);
-            Element_By_Path_Text_Enter("Search for Cloned promo", "xpath","//input[@aria-label='Search Promotions']" , "Copy - Automation Test Promo", false, ParentTest, "no_jira");
+            Element_By_Path_Text_Enter("Search for Cloned promo", "xpath","//input[@aria-label='Search Promotions']" , "Automation Test Promo", false, ParentTest, "no_jira");
                 if (FAIL) { return;}  
              
             Find_Text("Find 'Cloned Automation Test promo'", "Automation Test Promo", true, ParentTest, "no_jira"); 
