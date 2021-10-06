@@ -325,11 +325,12 @@ class AP3_mm_items extends AP3_GUI{
         Element_By_Path_Text_Enter("Enter Category Name", "css", "[aria-label='Enter Category Name']", "Category " + New_ID, false, ParentTest, "no_jira");
             if (FAIL) { return;}          
         Thread.sleep(500); 
+        
         // ======== New Item
         To_Top("Scroll to page Top", ParentTest, "no_jira");
             if (FAIL) { return;}   
-        Move_to_Element_By_Path("Scroll to 'NEW ITEM' button", "xpath", "//*[contains(text(), 'new item')]", ParentTest, "no_jira");        
-            if (FAIL) { return;}   
+//        Move_to_Element_By_Path("Scroll to 'NEW ITEM' button", "xpath", "//*[contains(text(), 'new item')]", ParentTest, "no_jira");        
+//            if (FAIL) { return;}   //    WRONG >>> moves a button under "User" > then clicks User
         Thread.sleep(500);            
         Element_By_Path_Click("Click 'NEW ITEM'", "xpath", "//*[contains(text(), 'new item')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
@@ -656,11 +657,11 @@ class AP3_mm_items extends AP3_GUI{
         Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID, ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for Global Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
-        if (FAIL) { return;}
+            if (FAIL) { return;}
         Element_By_Path_Click("Click on Menu set", "xpath","(//div[@class='layout align-center'])[1]", ParentTest, "no_jira");
-        if (FAIL) {return;}
+            if (FAIL) {return;}
         Element_By_Path_Text("Get First Category", "xpath", "(//*[@class='listspan'])[1]/div", ParentTest, "no_jira");
-        if (FAIL) { return;}
+            if (FAIL) { return;}
         String Category = t;
         System.out.println(Category);
         Element_By_Path_Click("Click > '"+Category+"' Category", "xpath", "//*[contains(text(),'"+Category+"')][1]/parent::span", ParentTest, "no_jira"); 
@@ -673,17 +674,17 @@ class AP3_mm_items extends AP3_GUI{
         Element_By_Path_Click("Click > 'EDIT MENU'", "xpath", "//*[contains(text(),'EDIT MENU')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Wait_For_Element_By_Path_Presence("Wait for Edit mode", "xpath", "//*[text()='You are editing this menu']", ParentTest,"no_jira");
-        if (FAIL) { return;}
+            if (FAIL) { return;}
         Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
             
             Thread.sleep(1000); 
             
         Wait_For_Element_By_Path_Presence("Wait for Edit Item side panel", "xpath", "(//aside[contains(@class,'v-navigation-drawer')])[3]", ParentTest,"no_jira");
-        if (FAIL) { return;}
+            if (FAIL) { return;}
         // get item name
         Element_By_Path_Attribute("Get Current Item Name Value", "css", "[aria-label='Item Name']", "value", ParentTest, "no_jira");
-        if (FAIL) { return;}
+            if (FAIL) { return;}
         // NBC = Name Before Change
         String NBC = t;
         if (!NBC.contains("1")) {
@@ -724,7 +725,7 @@ class AP3_mm_items extends AP3_GUI{
         }
         // get calories
         Element_By_Path_Attribute("Get Current Calories Value", "css", "[aria-label='Calories']", "value", ParentTest, "no_jira");
-        if (FAIL) { return;}
+            if (FAIL) { return;}
         // PBC = Calories Before Change
         String CBC = t;
         if (!CBC.contains("0")) {
@@ -744,7 +745,7 @@ class AP3_mm_items extends AP3_GUI{
         }
         // get units
         Element_By_Path_Attribute("Get Current Units Value", "css", "[aria-label='Units']", "value", ParentTest, "no_jira");
-        if (FAIL) { return;}
+            if (FAIL) { return;}
         String UBC = t;
         if (UBC.contains("1")) {
             Element_By_Path_Click("Click Input", "css", "[aria-label='Units']", ParentTest, "no_jira"); 
@@ -777,7 +778,7 @@ class AP3_mm_items extends AP3_GUI{
         Refresh("Refresh", ParentTest, "no_jira"); 
 
         Wait_For_Element_By_Path_Presence("Wait for Local Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
-        if (FAIL) { return;}
+            if (FAIL) { return;}
         Element_By_Path_Click("Click > '"+Category+"' Category", "xpath", "//*[contains(text(),'"+Category+"')][1]/parent::span", ParentTest, "no_jira"); 
             if (FAIL) { return;}
             
@@ -979,7 +980,7 @@ class AP3_mm_items extends AP3_GUI{
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for Global Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
         if (FAIL) { return;}
-        Element_By_Path_Click("Click > '"+Category+"' Category", "xpath", "//*[contains(text(),'"+Category+"')][1]/parent::span", ParentTest, "no_jira"); 
+        Element_By_Path_Click("Click > '" + Category + "' Category", "xpath", "//*[contains(text(),'" + Category + "')][1]/parent::span", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Wait_For_Element_By_Path_Presence("Wait for Items table", "xpath", "//*[text()='Menu Version: 2']", ParentTest,"no_jira");
         if (FAIL) { return;}
