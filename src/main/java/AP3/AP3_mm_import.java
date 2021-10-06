@@ -68,6 +68,7 @@ class AP3_mm_import extends AP3_GUI{
             Thread.sleep(5000);
             String dest_dir = System.getProperty("user.home") + File.separator + "Downloads"; 
             String ModGrpPath = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();    // Lunch - 2021-06-15.zip
+            //String ModGrpPath = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now() + "*.zip";    // Lunch - 2021-06-15.zip
             //ModGrpPath = "Starbucks-global-modifier-groups-2021-08-06";
             File_Find("Find Global mod export Zip File", dest_dir, ModGrpPath, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
