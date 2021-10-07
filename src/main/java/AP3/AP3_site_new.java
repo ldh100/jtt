@@ -248,7 +248,6 @@ class AP3_site_new extends AP3_GUI{
 //                        if (FAIL) { return;} 
                     Element_By_Path_Text_Enter("Enter Tender ID", "xpath", "//*[@id='mealplan-detail']//input[@aria-label='Tender ID']", "401", false, ParentTest, "no_jira");
                         if (FAIL) { return;}                         
-                        
                     Element_By_Path_Click("Open Tax Exempt Dropdown", "xpath", "//*[@id='mealplan-detail']//input[@aria-label='Tax Exempt']/parent::div[@class='v-select__selections']/following-sibling::div//i", ParentTest, "no_jira");
                         if (FAIL) { return;} 
                     Element_E1_Find("Find 'Tax exempt' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
@@ -469,8 +468,7 @@ class AP3_site_new extends AP3_GUI{
                     Wait_For_Element_By_Path_InVisibility("Wait for 'Create Drop-off Location' dialog to disappear", "xpath", "//*[@class='v-dialog__content']//*[contains(text(),'Create Drop-off Location')]", ParentTest, Ver);
                         if (FAIL) { return;}                   
 
-                    break;
-                      
+                    break;         
                 case 7:
                     Element_Text(" === APEX Configuration  section >>>", L0.get(i), ParentTest, "no_jira");             
                         if (FAIL) { return;} 

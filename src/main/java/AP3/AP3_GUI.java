@@ -5618,7 +5618,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-    protected void Day_Snedule(String NAME, WebElement E, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Day_Schedule(String NAME, WebElement E, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -5709,16 +5709,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
  
         FAIL = false;
         try {
-//            switch (BY) {
-//                case "xpath":
-//                    t = L.get(I).findElement(By.xpath(PATH)).getAttribute(VAL); 
-//                    break;
-//                case "css":
-//                    t = L.get(I).findElement(By.cssSelector(PATH)).getAttribute(VAL); 
-//                    break;
-//                default:
-//                    break;
-//            }
             e = E.findElement(By.cssSelector(PATH));
             e.sendKeys(VAL);
             _p++; 
