@@ -2376,7 +2376,7 @@ public class TWeb {
         }
         sw1.reset();
     }
-    public static void Day_Snedule(String NAME, List<WebElement> L, int I, String JIRA ){
+    public static void Day_Schedule(String NAME, List<WebElement> L, int I, String JIRA ){
         if(sw1.isRunning()){
             sw1.reset();
         }

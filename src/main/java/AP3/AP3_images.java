@@ -86,7 +86,7 @@ class AP3_images extends AP3_GUI{
                 if (!L0.isEmpty()) {
                     _t++;
                     _w++; EX += _t + "\t" + "WARNING - 'Allow Images' toggle did not update" + "\t" + "- Attempting toggle a second time" + "\t" + "---" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("WARN", "---" + "\t" + "- Attempting toggle a second time", false, ParentTest.createNode("WARNING - 'Allow Images' toggle did not update"), new Date());
+                    Log_Html_Result("WARN", "---" + "\t" + "- Attempting toggle a second time", false, ParentTest.createNode(_t + ". " + "WARNING - 'Allow Images' toggle did not update"), new Date());
                     Element_By_Path_Click("Toggle 'Allow Images' > 'No'", "xpath", "//div[contains(text(),'No')]/parent::div[contains(@class,'Not-Selected')]", ParentTest, "no_jira");
                         if (FAIL) { return;}
                     Wait_For_Element_By_Path_Presence("Check > 'No' is Selected", "xpath", "//div[contains(text(),'Yes')]/parent::div[contains(@class,'Not-Selected')]", ParentTest, "no_jira");
@@ -161,11 +161,11 @@ class AP3_images extends AP3_GUI{
             if (is.getBoolean("global_images_enabled")) {
                  _t++;
                  _f++; EX += _t + "\t" + "API - Global Menu Images are Disabled" + "\t" + "images are disabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled") + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                 Log_Html_Result("FAIL", "images are disabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Disabled"), new Date());
+                 Log_Html_Result("FAIL", "images are disabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), false, ParentTest.createNode(_t + ". " + "API - Global Menu Images are Disabled"), new Date());
             } else {
                  _t++;
                  _p++; EX += _t + "\t" + "API - Global Menu Images are Disabled" + "\t" + "images are disabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                 Log_Html_Result("PASS", "images are disabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Disabled"), new Date());
+                 Log_Html_Result("PASS", "images are disabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), false, ParentTest.createNode(_t + ". " + "API - Global Menu Images are Disabled"), new Date());
             } 
 
             Element_By_Path_Click("Click > Edit Global menu on '"+GL_MENU+"' Brand", "xpath", "//*[text()='"+GL_MENU+"']/ancestor::tr//button", ParentTest, "no_jira");
@@ -189,11 +189,11 @@ class AP3_images extends AP3_GUI{
             if (is.getBoolean("global_images_enabled")) {
                  _t++;
                  _p++; EX += _t + "\t" + "API - Global Menu Images are Enabled" + "\t" + "images are enabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                 Log_Html_Result("PASS", "images are enabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Enabled"), new Date());
+                 Log_Html_Result("PASS", "images are enabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), false, ParentTest.createNode(_t + ". " + "API - Global Menu Images are Enabled"), new Date());
             } else {
                  _t++;
                  _f++; EX += _t + "\t" + "API - Global Menu Images are Enabled" + "\t" + "images are enabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled") + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                 Log_Html_Result("FAIL", "images are enabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Enabled"), new Date());
+                 Log_Html_Result("FAIL", "images are enabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), false, ParentTest.createNode(_t + ". " + "API - Global Menu Images are Enabled"), new Date());
             }
             EX += " - " + "\t" + " === " + "\t" + " ===== Add New Brand as 'Allow Images in Global Menu' set to 'Yes'" + "\t" + " == Start >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
             //navigate to the sites -> brand -> settings
@@ -249,11 +249,11 @@ class AP3_images extends AP3_GUI{
                             if (brand.getJSONObject("is").getBoolean("local_images_enabled")) {
                                 _t++;
                                 _f++; EX += _t + "\t" + "API - Local Menu Images are Disabled" + "\t" + "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled") + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                                Log_Html_Result("FAIL", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Enabled"), new Date());
+                                Log_Html_Result("FAIL", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), false, ParentTest.createNode(_t + ". " + "API - Global Menu Images are Enabled"), new Date());
                             } else {
                                 _t++;
                                 _p++; EX += _t + "\t" + "API - Local Menu Images are Disabled" + "\t" + "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                                Log_Html_Result("PASS", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Enabled"), new Date());
+                                Log_Html_Result("PASS", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), false, ParentTest.createNode(_t + ". " + "API - Global Menu Images are Enabled"), new Date());
                             }
                         }
                     }
@@ -290,11 +290,11 @@ class AP3_images extends AP3_GUI{
                             if (brand.getJSONObject("is").getBoolean("local_images_enabled")) {
                                 _t++;
                                 _p++; EX += _t + "\t" + "API - Local Menu Images are Enabled" + "\t" + "images are enabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                                Log_Html_Result("PASS", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Enabled"), new Date());
+                                Log_Html_Result("PASS", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), false, ParentTest.createNode(_t + ". " + "API - Global Menu Images are Enabled"), new Date());
                             } else {
                                 _t++;
                                 _f++; EX += _t + "\t" + "API - Local Menu Images are Enabled" + "\t" + "images are enabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled") + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                                Log_Html_Result("FAIL", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), false, ParentTest.createNode("API - Global Menu Images are Enabled"), new Date());
+                                Log_Html_Result("FAIL", "images are disabled" + "\t" + "\"local_images_enabled\" : " + brand.getJSONObject("is").getBoolean("local_images_enabled"), false, ParentTest.createNode(_t + ". " + "API - Global Menu Images are Enabled"), new Date());
                             }
                         }
                     }
@@ -592,13 +592,13 @@ class AP3_images extends AP3_GUI{
                 /// WARNING: NO LOCAL MENU
                     _t++;
                     _w++; EX += _t + "\t" + "WARNING - NO LOCAL MENU EXISTS" + "\t" + "- IMAGES CANNOT BE TESTED IN LOCAL MENU" + "\t" + "---" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("WARN", "---" + "\t" + "- IMAGES CANNOT BE TESTED IN LOCAL MENU", false, ParentTest.createNode("WARNING - NO LOCAL MENU EXISTS"), new Date());
+                    Log_Html_Result("WARN", "---" + "\t" + "- IMAGES CANNOT BE TESTED IN LOCAL MENU", false, ParentTest.createNode(_t + ". " + "WARNING - NO LOCAL MENU EXISTS"), new Date());
                 }                               
             } else {
                 /// WARNING: NO SITE OR GLOBAL MENU
                 _t++;
                 _w++; EX += _t + "\t" + "WARNING - NO SITE OR GLOBAL MENU EXISTS" + "\t" + "- IMAGES CANNOT BE TESTED" + "\t" + "---" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "---" + "\t" + "- IMAGES CANNOT BE TESTED", false, ParentTest.createNode("WARNING - NO SITE EXISTS OR GLOBAL MENU EXISTS"), new Date());    
+                Log_Html_Result("WARN", "---" + "\t" + "- IMAGES CANNOT BE TESTED", false, ParentTest.createNode(_t + ". " + "WARNING - NO SITE EXISTS OR GLOBAL MENU EXISTS"), new Date());    
             }
         } catch (Exception ex){}   // =============================================  
     } 

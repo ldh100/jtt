@@ -261,7 +261,7 @@ class AP3_export_menuset extends AP3_GUI{
         Wait_For_Element_By_Path_Presence("Wait for Menu List", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
             if (FAIL) { return;}
             
-        int flag=1;                          
+        int flag = 1;                          
 
         Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
@@ -329,9 +329,8 @@ class AP3_export_menuset extends AP3_GUI{
                 if (FAIL) { return;}   
             Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
-            Element_By_Path_Attribute("Menu-d", "css", "[menu-id]", "textContent", ParentTest,"no_jira"); 
-            if (FAIL) { return;}    
-                
+            Element_By_Path_Attribute("Menu ID", "css", "[menu-id]", "textContent", ParentTest,"no_jira"); 
+                if (FAIL) { return;}            
             Thread.sleep(3000); 
             Refresh("Refresh", ParentTest, "no_jira");
             
@@ -342,21 +341,18 @@ class AP3_export_menuset extends AP3_GUI{
             Call_GlobalMenuSet_API(Menu_ID,MenuSetName,flag);
             
             
-           
-            
             Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
-            if (FAIL) { return;} 
+                if (FAIL) { return;} 
             Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;} 
+                if (FAIL) { return;} 
             Thread.sleep(500);  
             Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]",ParentTest, "no_jira"); 
-            if (FAIL) { return;}   
-             Thread.sleep(500);
+                if (FAIL) { return;}   
+            Thread.sleep(500);
             Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent", ParentTest,"no_jira"); 
-            if (FAIL) { return;}
-            
+                if (FAIL) { return;}
             Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent",ParentTest, "no_jira"); 
-            if (FAIL) { return;}
+                if (FAIL) { return;}
           
             List_L2("Published Menus ID Count", "css", "[menu-id]",ParentTest, "no_jira");  
             List_L0("Published Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']",ParentTest, "no_jira");             
@@ -366,21 +362,18 @@ class AP3_export_menuset extends AP3_GUI{
                     Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent",ParentTest, "no_jira");
                     Element_Attribute("Menu (Index " + i + ") ID", L2.get(i), "menu-id",ParentTest, "no_jira");   
                 } 
-                
+            Element_Attribute("Menu setName", L0.get(0), "textContent",ParentTest, "no_jira");      
                  
+            MenuSetName = t.trim();
+            int j = MenuSetName.indexOf(" ");
+            MenuSetName = MenuSetName.substring(0, j);
+            //MenuSetName.substring(0, MenuSetNamedisabled.indexOf(' '));
                 
-             Element_Attribute("Menu setName", L0.get(0), "textContent",ParentTest, "no_jira");      
-                 
-             MenuSetName= t.trim();
-             int j= MenuSetName.indexOf(" ");
-                MenuSetName=MenuSetName.substring(0, j);
-                        //MenuSetName.substring(0, MenuSetNamedisabled.indexOf(' '));
-                
-            System.out.println("ds:"+MenuSetName);
+            System.out.println("ds:" + MenuSetName);
             
-             Element_Attribute("Menu ID", L2.get(0), "menu-id",ParentTest, "no_jira");
-             Menu_ID=t;
-             System.out.println("ds:"+Menu_ID);            
+            Element_Attribute("Menu ID", L2.get(0), "menu-id",ParentTest, "no_jira");
+            Menu_ID = t;
+            System.out.println("ds:"+Menu_ID);            
             
             Element_Child_List_L2("Find Added Menu Set - dots", L0.get(0), "tagName", "button",ParentTest, "no_jira"); 
                 if (FAIL) { return;}
@@ -389,47 +382,39 @@ class AP3_export_menuset extends AP3_GUI{
                 if (FAIL) { return;}   
             Thread.sleep(1000);
             Wait_For_Element_By_Path_Presence("Wait for Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",ParentTest, "no_jira"); 
-                    if (FAIL) { return;}                
+                if (FAIL) { return;}                
             Element_E1_Find("Find Menu Edit Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",ParentTest, "no_jira");
                 if (FAIL) { return;}
             Element_Child_List_L1("Menu Edit Options list Count", e1,"xpath", ".//div[@class='v-list__tile__title']",ParentTest, "no_jira");                                     
                 if (FAIL) { return;}
-                T_Index = -1;
-                for (int i = 0; i < L1.size(); i++) {
-                    Element_Text("Menu Edit Option (index " + i + ")", L1.get(i),ParentTest,"no_jira");                      
-                    if(t.contains("Enable")){ T_Index = i; }                    
-                } 
+            T_Index = -1;
+            for (int i = 0; i < L1.size(); i++) {
+                Element_Text("Menu Edit Option (index " + i + ")", L1.get(i),ParentTest,"no_jira");                      
+                if(t.contains("Enable")){ T_Index = i; }                    
+            } 
             Element_By_Path_Attribute("Check if Export is disabled", "xpath", ".//div[@class='v-list--disabled']", "disabled", ParentTest, "no_jira");
                 if (FAIL) { return;}   
-             
             Element_Click("Click Category 'Enable'", L1.get(T_Index),ParentTest, "no_jira");
                 if (FAIL) { return;}    
-              
             Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]",ParentTest, "no_jira");        
                 if (FAIL) { return;}                            
             Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]",ParentTest, "no_jira"); 
-                if (FAIL) { return;}                       
-                       
+                if (FAIL) { return;}                              
             Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", ParentTest,"no_jira"); 
                 if (FAIL) { return;}
                  Thread.sleep(500);
             Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]",ParentTest, "no_jira"); 
                 if (FAIL) { return;}  
-            Element_By_Path_Attribute("Menu-d", "css", "[menu-id]", "textContent",ParentTest, "no_jira"); 
+            Element_By_Path_Attribute("Menu ID", "css", "[menu-id]", "textContent",ParentTest, "no_jira"); 
             if (FAIL) { return;}  
             Thread.sleep(3000); 
             Refresh("Refresh",ParentTest, "no_jira");
              
-            flag=2;
-            
-          Call_Company_API(MenuSetName,flag);
-           
-           Thread.sleep(3000);   
-           
-          Call_GlobalMenuSet_API(Menu_ID,MenuSetName,flag);
+            flag = 2;       
+            Call_Company_API(MenuSetName,flag);
+            Thread.sleep(3000);   
+            Call_GlobalMenuSet_API(Menu_ID,MenuSetName,flag);
 
-        
-        
         //AUT-997: As an Admin, I can export the Global Modifiers
         
         //selectingGlobalMenu();
@@ -574,13 +559,13 @@ class AP3_export_menuset extends AP3_GUI{
         if(t.equals("No data available")){
             _t++;
             _p++; EX += _t + "\t" + "No Global Modifiers Group Found" + "\t" + t + "\t"  + "\t" + "Pass" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";  
-            Log_Html_Result("Pass", "No data available", true, ParentTest.createNode("Global Modifiers are present")); 
+            Log_Html_Result("Pass", "No data available", true, ParentTest.createNode(_t + ". " + "Global Modifiers are present")); 
         }
         else{
             Element_By_Path_Text("Get Modifier Name", "xpath", "//table/tbody/tr[1]/td[2]", ParentTest, "no_jira");
             _t++;
             _f++; EX += _t + "\t" + "Global Modifiers Group Present" + "\t" + t + "\t" + "\t" + "Fail" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Global Modifier Group Present", true, ParentTest.createNode("Global Modifiers are present"));
+            Log_Html_Result("FAIL", "Global Modifier Group Present", true, ParentTest.createNode(_t + ". " + "Global Modifiers are present"));
             return;            
             }
         
@@ -656,7 +641,7 @@ class AP3_export_menuset extends AP3_GUI{
             } else {//Print Pass the ids are unique
                 _t++;
                 _f++; EX += _t + "\t" + "Global Modifiers Group Present" + "\t" + t + "\t" + "\t" + "Fail" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Global Modifier Group Present", true, ParentTest.createNode("Global Modifiers are present"));
+                Log_Html_Result("FAIL", "Global Modifier Group Present", true, ParentTest.createNode(_t + ". " + "Global Modifiers are present"));
             }
         
             }
@@ -904,7 +889,7 @@ class AP3_export_menuset extends AP3_GUI{
             } else {//Print Pass the ids are unique
                 _t++;
                 _f++; EX += _t + "\t" + "The new Modifiere was not auto assigned" + "\t" + t + "\t" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "The new Modifiere was not auto assigned", true, ParentTest.createNode("The new Modifiere was not auto assigned"));
+                Log_Html_Result("FAIL", "The new Modifiere was not auto assigned", true, ParentTest.createNode(_t + ". " + "The new Modifiere was not auto assigned"));
             }
         
         
@@ -1361,41 +1346,41 @@ class AP3_export_menuset extends AP3_GUI{
     
     
     //<editor-fold defaultstate="collapsed" desc="Call Company API">    //This block call the company API: BaseAPI + "/menu/company/"+CompanyID
-    public  void Call_Company_API(String MenuSetName,int flag) {
+    public  void Call_Company_API(String MenuSetName, int flag) {
     //<editor-fold defaultstate="collapsed" desc="Call Company API">    //This block call the company API: BaseAPI + "/menu/company/"+CompanyID
-        try {            
-        Call_API("Call Global menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID, true, ParentTest, "no_jira" );        
+    try {            
+        Call_API("Call Global Menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID, true, ParentTest, "no_jira" );        
         if(t.startsWith("{")){
             API_Response_Body = t;               
         }else{
+            _t++;
+            _f++;
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/" + CompanyID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }
         JSONObject json = new JSONObject(API_Response_Body);
         JSONArray menus = json.getJSONArray("menus");
          
         for(int k = 0; k < menus.length(); k++) {
-           JSONObject menu = menus.getJSONObject(k);
-           if(menu.has("location_brand")){                                  
-               if(menu.getString("location_brand").equals(BrandID)) {
-                   if(menu.getJSONObject("label").getString("en").equalsIgnoreCase(MenuSetName)) {
-                       if(menu.getJSONObject("is").getBoolean("disabled") && flag==1) {
-                            _t++;
-                            _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "MenuSet is disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                           //print pass menu set is disabled
-                        }  else if(!menu.getJSONObject("is").getBoolean("disabled") && flag==2) {
-                            _t++;
-                            _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "MenuSet is enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                           //print pass menu set is d
-                        } else {
-                           _t++;
-                           _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found opposite values" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                           //print fail menuset is eneabled
-                        }  
-                    }    
-                }     
+            JSONObject menu = menus.getJSONObject(k);
+            if(menu.has("location_brand") && menu.getString("location_brand").equals(BrandID)) {
+                if(menu.getJSONObject("label").getString("en").equalsIgnoreCase(MenuSetName)) {
+                    if(menu.getJSONObject("is").getBoolean("disabled") && flag == 1) {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "MenuSet is disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                        Log_Html_Result("PASS", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode(_t + ". " + "MenuSet is disabled"), new Date());
+                     }  else if(!menu.getJSONObject("is").getBoolean("disabled") && flag == 2) {
+                        _t++;
+                        _p++; EX += _t + "\t" + "Test Passed" + "\t" + " - " + "\t" + "MenuSet is enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                        Log_Html_Result("PASS", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode(_t + ". " + "MenuSet is enabled"), new Date());
+                     } else {
+                        _t++;
+                        _f++; EX += _t + "\t" + "Test Failed" + "\t" + " - " + "\t" + "Found opposite values" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode(_t + ". " + "Unexpected MenuSet Enabled/Disabled status"), new Date());
+                     }  
+                 }        
             } 
         }
     } catch (Exception ex){}   // =============================================  
@@ -1405,38 +1390,35 @@ class AP3_export_menuset extends AP3_GUI{
     
     public  void Call_GlobalMenuSet_API(String Menu_ID, String MenuSetName, int flag) {
     //<editor-fold defaultstate="collapsed" desc="Call Global Menuset API">    //This block call the GlobalMenuSet API: BaseAPI + "/menu/" + Menu_ID
-        try {    
-
-        Call_API("Call GlobalMenuSet API", "Bearer " + AP3_TKN, BaseAPI + "/menu/" + Menu_ID, true, ParentTest, "no_jira" );
+    try {    
+        Call_API("Call Global MenuSet API", "Bearer " + AP3_TKN, BaseAPI + "/menu/" + Menu_ID, true, ParentTest, "no_jira" );
         if(t.startsWith("{")){
             API_Response_Body = t;               
         }else{
-            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/"+Menu_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/" + Menu_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/"+Menu_ID , false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + Menu_ID , false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }               
         JSONObject json = new JSONObject(API_Response_Body);
         JSONArray groups = json.getJSONArray("groups");
-        if(json.getString("id").equals(Menu_ID.trim())){                           
-            if(json.has("id")){                                     
-                System.out.println(json.getJSONObject("label").getString("en"));
-                if(json.getJSONObject("label").getString("en").equalsIgnoreCase(MenuSetName)){
-                    if(json.getJSONObject("is").getBoolean("disabled") && flag==1) {
-                         _t++;
-                         _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "MenuSet is disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                        //print pass menu set is disabled
-                    } else if(!json.getJSONObject("is").getBoolean("disabled") && flag==2) {
-                         _t++;
-                         _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "MenuSet is enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                        //print pass menu set is enabled
-                    } else {
-                        _t++;
-                        _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found opposite values" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        //print fail if found contradicting values
-                    }                                              
-                }                                      
-            }
+        if(json.has("id") && json.getString("id").equals(Menu_ID.trim())){                                                              
+            System.out.println(json.getJSONObject("label").getString("en"));
+            if(json.getJSONObject("label").getString("en").equalsIgnoreCase(MenuSetName)){
+                if(json.getJSONObject("is").getBoolean("disabled") && flag == 1) {
+                    _t++;
+                    _p++; EX += _t + "\t" + "Test Passed" + "\t" + " -"  + "\t" + "MenuSet is disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                    Log_Html_Result("PASS", "URL: " + BaseAPI + "/menu/company/" + Menu_ID , false, ParentTest.createNode(_t + ". " + "MenuSet is disabled"), new Date());
+                } else if(!json.getJSONObject("is").getBoolean("disabled") && flag == 2) {
+                    _t++;
+                    _p++; EX += _t + "\t" + "Test Passed" + "\t" + " - " + "\t" + "MenuSet is enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                    Log_Html_Result("PASS", "URL: " + BaseAPI + "/menu/company/" + Menu_ID , false, ParentTest.createNode(_t + ". " + "MenuSet is enabled"), new Date());
+                } else {
+                    _t++;
+                    _f++; EX += _t + "\t" + "Test Failed" + "\t" + " -"  + "\t" + "Found opposite values" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + Menu_ID , false, ParentTest.createNode(_t + ". " + "Unexpected MenuSet Enabled/Disabled status"), new Date());
+                }                                              
+            }                                      
         }   
 
     } catch (Exception ex){}   // =============================================  

@@ -156,7 +156,7 @@ class AP3_brand_closure extends AP3_GUI{
                 }else{
                     EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/calendar/" + BrandID+ "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID, false, ParentTest.createNode("API Responce Error"), new Date());
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
                     return;
                 }
                 Calendar_API_Closure("Validate New Default Closure in 'calendar' API", API_Response_Body, "Auto Default Date Closure " + New_ID, true, ParentTest, "no_jira" );
@@ -177,7 +177,7 @@ class AP3_brand_closure extends AP3_GUI{
                 }else{
                     EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/calendar/" + BrandID+ "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID, false, ParentTest.createNode("API Responce Error"), new Date());
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
                     return;
                 }                
                 Calendar_API_Closure("Validate Default Closure Removed in 'calendar' API", API_Response_Body, "Auto Default Date Closure " + New_ID, false, ParentTest, "no_jira" );          
@@ -232,7 +232,7 @@ class AP3_brand_closure extends AP3_GUI{
                 }else{
                     EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/calendar/" + BrandID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID, false, ParentTest.createNode("API Responce Error"), new Date());
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
                     return;
                 }                
                 Calendar_API_Closure("Validate New Future Closure in 'calendar' API", API_Response_Body, "Auto Future Closure " + New_ID, true, ParentTest, "no_jira" );
@@ -253,7 +253,7 @@ class AP3_brand_closure extends AP3_GUI{
                 }else{
                     EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/calendar/" + BrandID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID, false, ParentTest.createNode("API Responce Error"), new Date());
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
                     return;
                 }                
                 Calendar_API_Closure("Validate Future Closure Removed in 'calendar' API", API_Response_Body, "Auto Future Closure " + New_ID, false, ParentTest, "no_jira" );              

@@ -4563,7 +4563,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-    protected void Day_Snedule(String NAME, List<WebElement> L, int I, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Day_Schedule(String NAME, List<WebElement> L, int I, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
